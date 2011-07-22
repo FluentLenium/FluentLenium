@@ -92,8 +92,8 @@ public class PageTest extends LocalFluentTest {
         PageAccueil pageAccueil = new PageAccueil(getDriver());
         Page2 page2 = new Page2(getDriver());
         go(pageAccueil);
-        FluentPage.assertOn(pageAccueil);
+        FluentPage.assertAt(pageAccueil);
         pageAccueil.goToNexPage();
-        assertOn(page2);
+        assertAt(page2);
     }
 }

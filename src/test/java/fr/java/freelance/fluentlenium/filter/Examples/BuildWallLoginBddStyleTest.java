@@ -15,7 +15,7 @@ public class BuildWallLoginBddStyleTest extends FluentTest {
     @Test
     public void errorShouldBeThrownWhenMissingMandatoryFields() {
         go(loginPage);
-        assertOn(loginPage);
+        assertAt(loginPage);
         fill("#user").with("toto");
         click("#create-button");
         assertThat(text("label")).contains("This field is required.");

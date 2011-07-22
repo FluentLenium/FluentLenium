@@ -41,7 +41,7 @@ public abstract class FluentPage extends Fluent {
         getDriver().get(getUrl());
     }
 
-    public static void assertOn(FluentPage fluent) {
+    public static void assertAt(FluentPage fluent) {
         fluent.isAt();
     }
 
