@@ -6,7 +6,7 @@ import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-import static fr.java.freelance.fluentlenium.core.FluentPage.assertOn;
+import static fr.java.freelance.fluentlenium.core.FluentPage.assertAt;
 import static fr.java.freelance.fluentlenium.core.FluentPage.go;
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -79,11 +79,8 @@ public class PageTest extends LocalFluentTest {
     public void checkFollowLink() {
         PageAccueil pageAccueil = new PageAccueil(getDriver());
         Page2 page2 = new Page2(getDriver());
-
         pageAccueil.go();
-
         pageAccueil.goToNexPage();
-
         page2.isAt();
     }
 
