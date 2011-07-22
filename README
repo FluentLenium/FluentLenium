@@ -1,0 +1,138 @@
+FluentLenium is a framework which provide help when writting Selenium Web Driver test with jUnit and fest-assert.
+
+
+0. Cross Browser
+FluentLenium can support all the browser available in Selenium WebDriver.
+Wich means :
+    FireFox
+    Internet Explorer
+    Google Chrome
+    Opera
+
+But there is also some project working on android etc ...
+
+1. Basic
+
+Launching the first test.
+Your Test Class may extend fr.java.freelance.fluentlenium.core.test.FluentTest By default, it use FirefoxWebDriver to launch all tests.
+After that, all your test methods will be able to be tested into a browser.
+The syntaxes offers directly by Selenium are quite a bit too verbose. FluentLenium proposes two differents syntaxes to easily launch tests.
+For examples, if you want to go to an adresse, fill a form and click to a button to submit and tests that the title of the page have changed
+
+goTo("http://mywebpage/");
+fill("#firstName").with("toto");
+click("#create-button");
+assertThat(title()).isEqualTo("Hello toto");
+
+If you are more convenient to the JQuery Syntax, maybe something like that will be more natural for you:
+goTo("http://mywebpage/");
+$("#firstName").text("toto");
+$("#create-button").click();
+assertThat(title()).isEqualTo("Hello toto");
+
+Both syntax are equivalent. $ or find methods are aliases.
+
+1. JQuery Selector
+    1.1 Default Selector
+     You can use CSS1, CSS2 and CSS3 selector with the same restrictions as in Selenium.
+
+     If you want to find the list of elements which have
+     the id "title" : find("#title") or $("#title")
+     the class name "small" : find(".small") or $(".small")
+     the tag name "input" : find("input") or $("input")
+
+     You are free to use most of the CSS3 syntax, wich means that
+     find("input[class=rightForm]") or $("input[class=rightForm]")
+     will return the list of all input elements which have the class rightForm
+
+    2.2 Custom filter
+    But what if you want all the input that have a text equals to "Sam" ?
+    You can use filters to allow that kind of search. For example :
+     $(".small",withName("foo"))
+     $(".small",withId("idOne"))
+     $(".small",withText("This field is mandatory."))
+
+     You can also chained filters :
+     $(".small",withName("foo"),withId("id1")) will return all the elements matching the 3 criterias : - class .small ,id id1 and name foo.
+
+     More will come soon to filter to create a complete search tool.
+
+     2.3 N-th
+     If you want the first elements that matchs your criteria, just use :
+     findFirst(myCssSelector) or $(myCssSelector).first()
+
+     If you want the element at the given position :
+     find(myCssSelector,2) or $(myCssSelector,2)
+
+     Of course, you can use both position filter and custom filter :
+     find(myCssSelector,2,withName("foo"))
+
+2. Form Action
+
+    If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.
+    2.1 Fill
+
+    fill("input").text("bar") OR $("input").text("bar") will fill all the element with tag input with bar.
+
+     Don't forget, only the visible field will be modified. It simulates your action in a browser !
+
+     2.2 Click
+       $("#create-button").click();
+       click("#create-button")
+
+     2.3 Clear
+        $("#create-button").clear();
+        clear("#create-button")
+     2.4 Clear
+        $("#create-button").submit();
+        submit("#create-button")
+
+  //TODO Add more infos there
+4. Page Object pattern
+Because Selenium test can easily become a mess, Page Object Pattern are a recommanded Pattern when writing automatised integration test.
+Page Pattern will inclosing all the pumbling, which make tests a lot easier to read and to maintain.
+
+Try to construct your Page thinking that it is better if you offert services from your page rather that just the internals of the page.
+A Page Object can modelized the whole page or just a part of it.
+
+To construct a Page, it have to extends fr.java.freelance.fluentlenium.core.FluentPage.
+In most of the cases, you have to defined the url of the page with overriding the getUrl methods.
+In that way, you can go in your test to that page with goTo(myPage)
+
+To control that you are in the good page, not only the url [accessible in your test via the void url() method] can be needed.
+Redefined the isAt methods to list all the assertions you have to make in order to be sure that you are in the good pages.
+For exemple, if I choose that the title will be sufficient to know if I'm in the page :
+
+        @Override
+        public void isAt() {
+            assertThat($("title").first().getText()).contains("Selenium");
+        }
+
+Create you owm methods to easily fill form, go to a next page or whatesle can be needed in your test.
+
+For exemple :
+public class LoginPage extends FluentPage {
+     public LoginPage(WebDriver driver) {
+        super(driver);
+    }
+    public String getUrl() {
+        return "myCustomUrl";
+    }
+    public void isAt() {
+        assertThat($("title").first().getText()).isEqualTo("MyTitle");
+    }
+    public void fillAndSubmitForm(String... paramsOrdered) {
+        fill("input").with(paramsOrdered);
+        $("#create-button").click();
+    }
+}
+
+And the corresponding test :
+public void checkLoginFailed() {
+ goTo(loginPage);
+ loginPage.fillAndSubmitLoginForm("login","wrongPass");
+  assertThat($(".error")).hasSize(1);
+}
+
+5. Custom Driver
+If you need to change your driver, just override the getDefaultDriver in your test. You can use every driver

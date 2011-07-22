@@ -28,7 +28,7 @@ public class PageTest extends LocalFluentTest {
             assertThat($("title").first().getText()).contains("Selenium");
         }
 
-        public void clickOnPage2Link() {
+        public void goToNexPage() {
 
             $("#linkToPage2").click();
         }
@@ -82,7 +82,7 @@ public class PageTest extends LocalFluentTest {
 
         pageAccueil.go();
 
-        pageAccueil.clickOnPage2Link();
+        pageAccueil.goToNexPage();
 
         page2.isAt();
     }
@@ -93,7 +93,7 @@ public class PageTest extends LocalFluentTest {
         Page2 page2 = new Page2(getDriver());
         go(pageAccueil);
         FluentPage.assertOn(pageAccueil);
-        pageAccueil.clickOnPage2Link();
+        pageAccueil.goToNexPage();
         assertOn(page2);
     }
 }
