@@ -33,8 +33,8 @@ assertThat(title()).isEqualTo("Hello toto");
 
 Both syntax are equivalent. $ or find methods are aliases.
 
-1. JQuery Selector
-    1.1 Default Selector
+2. JQuery Selector
+    2.1 Default Selector
      You can use CSS1, CSS2 and CSS3 selector with the same restrictions as in Selenium.
 
      If you want to find the list of elements which have
@@ -49,12 +49,12 @@ Both syntax are equivalent. $ or find methods are aliases.
     2.2 Custom filter
     But what if you want all the input that have a text equals to "Sam" ?
     You can use filters to allow that kind of search. For example :
-     $(".small",withName("foo"))
-     $(".small",withId("idOne"))
-     $(".small",withText("This field is mandatory."))
+     find(".small",withName("foo"))
+     find(".small",withId("idOne"))
+     find(".small",withText("This field is mandatory."))
 
      You can also chained filters :
-     $(".small",withName("foo"),withId("id1")) will return all the elements matching the 3 criterias : - class .small ,id id1 and name foo.
+     find(".small",withName("foo"),withId("id1")) will return all the elements matching the 3 criterias : - class .small ,id id1 and name foo.
 
      If you want others precisions that just the css selector, just use our filters features.
      For now, you have two differents filters :
@@ -64,6 +64,7 @@ Both syntax are equivalent. $ or find methods are aliases.
      For each of them, you can choose to use a css selector :
      find(".small", withName(notContains("name"))
      find(".small", withId(notContains("id"))
+     find(".small", withText(notContains("Female")))
 
      Or to be more precise, you can choose to use a regexp :
      find(".small", withName(contains(regex("na?me[0-9]*")))
@@ -90,24 +91,27 @@ Both syntax are equivalent. $ or find methods are aliases.
      find(myCssSelector,2,withName("foo")).find("input",withName("bar"))
      or find(myCssSelector,2,withName("foo")).findFirst("input",withName("bar"))
 
-2. Form Action
+3. Form Action
 
     If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.
-    2.1 Fill
+    3.1 Fill
 
     fill("input").with("bar") OR $("input").text("bar") will fill all the element with tag input with bar.
 
      Don't forget, only the visible field will be modified. It simulates your action in a browser !
 
-     2.2 Click
+     3.2 Click
 
-       click("#create-button") is equivalent to $("#create-button").click()
+       click("#create-button") is equivalent to $("#create-button").click().
+       It will click on all the visible fields returned by the search.
 
-     2.3 Clear
+     3.3 Clear
        clear("#create-button") is equivalent to $("#create-button").clear();
+       It will clear  all the visible fields returned by the search.
 
-     2.4 Clear
+     3.4 Submit
        submit("#create-button") is equivalent to $("#create-button").submit();
+       It will submit all the visible fields returned by the search.
 
 
   //TODO Add more infos there
