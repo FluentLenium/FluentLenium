@@ -3,6 +3,8 @@ package fr.java.freelance.fluentlenium.domain;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.sun.istack.internal.Nullable;
+import fr.java.freelance.fluentlenium.core.SearchActions;
+import fr.java.freelance.fluentlenium.filter.Filter;
 import org.openqa.selenium.NoSuchElementException;
 
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import java.util.List;
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
  */
-public class FluentList<E extends FluentWebElement> extends ArrayList<E> implements FluentDefaultActions {
+public class FluentList<E extends FluentWebElement> extends ArrayList<E> implements FluentDefaultActions, SearchActions {
 
     public FluentList(Collection<E> listFiltered) {
         super(listFiltered);
@@ -25,7 +27,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      * @return
      * @throws NoSuchElementException
      */
-    public FluentWebElement first() {
+    public E first() {
         if (this.size() == 0) {
             throw new NoSuchElementException("Element not found");
         }
@@ -37,7 +39,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      * Only the visible elements are filled
      */
     public void click() {
-        for (FluentWebElement fluentWebElement : this) {
+        for (E fluentWebElement : this) {
             if (fluentWebElement.isDisplayed()) {
                 fluentWebElement.click();
             }
@@ -53,7 +55,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
         if (with.length > 0) {
             int id = 0;
             String value;
-            for (FluentWebElement fluentWebElement : this) {
+            for (E fluentWebElement : this) {
                 if (fluentWebElement.isDisplayed()) {
                     if (with.length > id) {
                         value = with[id++];
@@ -72,7 +74,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      * Only the visible elements are filled
      */
     public void clear() {
-        for (FluentWebElement fluentWebElement : this) {
+        for (E fluentWebElement : this) {
             if (fluentWebElement.isDisplayed()) {
                 fluentWebElement.clear();
             }
@@ -84,7 +86,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      * Only the visible elements are submitted
      */
     public void submit() {
-        for (FluentWebElement fluentWebElement : this) {
+        for (E fluentWebElement : this) {
             if (fluentWebElement.isDisplayed()) {
                 fluentWebElement.submit();
             }
@@ -97,8 +99,8 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      * @return
      */
     public List<String> getValues() {
-        return Lists.transform(this, new Function<FluentWebElement, String>() {
-            public String apply(@Nullable FluentWebElement webElement) {
+        return Lists.transform(this, new Function<E, String>() {
+            public String apply(@Nullable E webElement) {
                 return webElement.getValue();
             }
         });
@@ -110,8 +112,8 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      * @return
      */
     public List<String> getIds() {
-        return Lists.transform(this, new Function<FluentWebElement, String>() {
-            public String apply(@Nullable FluentWebElement webElement) {
+        return Lists.transform(this, new Function<E, String>() {
+            public String apply(@Nullable E webElement) {
                 return webElement.getId();
             }
         });
@@ -123,8 +125,8 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      * @return
      */
     public List<String> getNames() {
-        return Lists.transform(this, new Function<FluentWebElement, String>() {
-            public String apply(@Nullable FluentWebElement webElement) {
+        return Lists.transform(this, new Function<E, String>() {
+            public String apply(@Nullable E webElement) {
                 return webElement.getName();
             }
         });
@@ -136,12 +138,27 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      * @return
      */
     public List<String> getTexts() {
-        return Lists.transform(this, new Function<FluentWebElement, String>() {
-            public String apply(@Nullable FluentWebElement webElement) {
+        return Lists.transform(this, new Function<E, String>() {
+            public String apply(@Nullable E webElement) {
                 return webElement.getText();
             }
         });
     }
 
+    public FluentList find(String name, Filter... filters) {
+        final FluentList aggregateAllResults = new FluentList(new ArrayList<E>());
+        for (E e : this) {
+            aggregateAllResults.addAll(e.find(name, filters));
+        }
+        return aggregateAllResults;
+    }
 
+    public E find(String name, Integer number, Filter... filters) {
+        FluentList<E> fluentList = find(name, filters);
+        return fluentList.get(number);
+    }
+
+    public E findFirst(String name, Filter... filters) {
+        return find(name, 0, filters);
+    }
 }

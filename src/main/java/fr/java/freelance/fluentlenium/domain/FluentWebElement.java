@@ -1,15 +1,21 @@
 package fr.java.freelance.fluentlenium.domain;
 
+import fr.java.freelance.fluentlenium.core.Search;
+import fr.java.freelance.fluentlenium.core.SearchActions;
+import fr.java.freelance.fluentlenium.filter.Filter;
 import org.openqa.selenium.WebElement;
 
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
-public class FluentWebElement implements FluentDefaultActions {
+public class FluentWebElement implements FluentDefaultActions, SearchActions {
     private final WebElement webElement;
+
+    private final Search searchContext;
 
     public FluentWebElement(WebElement webElement) {
         this.webElement = webElement;
+        this.searchContext = new Search(webElement);
     }
 
     /**
@@ -74,5 +80,17 @@ public class FluentWebElement implements FluentDefaultActions {
 
     public String getTagName() {
         return webElement.getTagName();
+    }
+
+    public FluentList find(String name, Filter... filters) {
+        return searchContext.find(name, filters);
+    }
+
+    public FluentWebElement find(String name, Integer number, Filter... filters) {
+        return searchContext.find(name, number, filters);
+    }
+
+    public FluentWebElement findFirst(String name, Filter... filters) {
+        return searchContext.findFirst(name, filters);
     }
 }

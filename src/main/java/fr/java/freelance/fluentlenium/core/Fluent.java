@@ -9,16 +9,16 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-import static fr.java.freelance.fluentlenium.core.Search.search;
-
 /**
  * Util Class which offers some shortcut to webdriver methods
  */
 public class Fluent {
     private WebDriver driver;
+    private Search search;
 
     public Fluent(WebDriver driver) {
         this.driver = driver;
+        this.search = new Search(driver);
     }
 
     public Fluent() {
@@ -26,6 +26,7 @@ public class Fluent {
 
     protected void setDriver(WebDriver driver) {
         this.driver = driver;
+        this.search = new Search(driver);
     }
 
     protected WebDriver getDriver() {
@@ -59,7 +60,7 @@ public class Fluent {
      * @return
      */
     public FluentList $(String name, final Filter... filters) {
-        return search(name, getDriver(), filters);
+        return search.find(name, filters);
     }
 
 
@@ -71,8 +72,7 @@ public class Fluent {
      * @return
      */
     public FluentWebElement $(String name, Integer number, final Filter... filters) {
-        List<FluentWebElement> listFiltered = $(name, filters);
-        return listFiltered.get(number);
+        return search.find(name, number, filters);
     }
 
 
@@ -84,7 +84,7 @@ public class Fluent {
      * @return
      */
     public FluentList find(String name, final Filter... filters) {
-        return $(name, filters);
+        return search.find(name, filters);
     }
 
     /**
@@ -96,7 +96,7 @@ public class Fluent {
      * @return
      */
     public FluentWebElement find(String name, Integer number, final Filter... filters) {
-        return $(name, number, filters);
+        return search.find(name, number, filters);
     }
 
     /**
@@ -107,8 +107,7 @@ public class Fluent {
      * @return
      */
     public FluentWebElement findFirst(String name, final Filter... filters) {
-        FluentList fluentList = $(name, filters);
-        return fluentList.first();
+        return search.findFirst(name, filters);
     }
 
     /**
@@ -164,6 +163,7 @@ public class Fluent {
     /**
      * Submit all elements that are in cssSelector with its filters
      * Be careful - only the visible elements are submitted
+     * //TODO UTILITY ? Deprecated ?
      *
      * @param cssSelector
      */

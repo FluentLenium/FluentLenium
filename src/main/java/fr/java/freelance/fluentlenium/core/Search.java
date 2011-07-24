@@ -16,15 +16,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: rigabertm
- * Date: 7/24/11
- * Time: 11:11 PM
- * To change this template use File | Settings | File Templates.
- */
-public class Search {
-    private Search() {
+
+public class Search implements SearchActions {
+    private final SearchContext searchContext;
+
+    public Search(SearchContext context) {
+        this.searchContext = context;
     }
 
     /**
@@ -34,7 +31,7 @@ public class Search {
      * @param filters
      * @return
      */
-    public static FluentList search(String name, SearchContext searchContext, final Filter... filters) {
+    public FluentList find(String name, final Filter... filters) {
         StringBuilder sb = new StringBuilder(name);
         List<Filter> postFilterSelector = new ArrayList<Filter>();
         if (filters != null) {
@@ -46,7 +43,7 @@ public class Search {
                 }
             }
         }
-        List<FluentWebElement> preFiltered = select(sb.toString(), searchContext);
+        List<FluentWebElement> preFiltered = select(sb.toString());
         Collection<FluentWebElement> postFiltered = preFiltered;
         for (Filter selector : postFilterSelector) {
             postFiltered = Collections2.filter(postFiltered, new FilterPredicate(selector));
@@ -55,12 +52,38 @@ public class Search {
         return new FluentList(postFiltered);
     }
 
-    private static List<FluentWebElement> select(String cssSelector, SearchContext searchContext) {
+    private List<FluentWebElement> select(String cssSelector) {
         return Lists.transform(searchContext.findElements(By.cssSelector(cssSelector)), new Function<WebElement, FluentWebElement>() {
             public FluentWebElement apply(@Nullable WebElement webElement) {
                 return new FluentWebElement((webElement));
             }
         });
+    }
+
+
+    /**
+     * Return the elements at the numner position into the the lists corresponding to the cssSelector with it filters
+     *
+     * @param name
+     * @param number
+     * @param filters
+     * @return
+     */
+    public FluentWebElement find(String name, Integer number, final Filter... filters) {
+        List<FluentWebElement> listFiltered = find(name, filters);
+        return listFiltered.get(number);
+    }
+
+    /**
+     * Return the first elements corresponding to the name and the filters
+     *
+     * @param name
+     * @param filters
+     * @return
+     */
+    public FluentWebElement findFirst(String name, final Filter... filters) {
+        FluentList fluentList = find(name, filters);
+        return fluentList.first();
     }
 
 }
