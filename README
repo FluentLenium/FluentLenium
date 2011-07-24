@@ -56,7 +56,22 @@ Both syntax are equivalent. $ or find methods are aliases.
      You can also chained filters :
      $(".small",withName("foo"),withId("id1")) will return all the elements matching the 3 criterias : - class .small ,id id1 and name foo.
 
-     More will come soon to filter to create a complete search tool.
+     If you want others precisions that just the css selector, just use our filters features.
+     For now, you have two differents filters :
+     - contains
+     - notContains
+
+     For each of them, you can choose to use a css selector :
+     find(".small", withName(notContains("name"))
+     find(".small", withId(notContains("id"))
+
+     Or to be more precise, you can choose to use a regexp :
+     find(".small", withName(contains(regex("na?me[0-9]*")))
+     find(".small", withName(notContains(regex("na?me[0-9]*")))
+
+     Of course, if you are a regexp jedi, that's not needed !
+
+     More will come soon to filter to create a complete search tool (startsWith,endsWith...).
 
      2.3 N-th
      If you want the first elements that matchs your criteria, just use :
@@ -68,25 +83,32 @@ Both syntax are equivalent. $ or find methods are aliases.
      Of course, you can use both position filter and custom filter :
      find(myCssSelector,2,withName("foo"))
 
+     2.4 Find on children
+     You can also chained the find call :
+     find(myCssSelector).find("input") will return all the web element input into the css selector tree.
+     You can add more indication :
+     find(myCssSelector,2,withName("foo")).find("input",withName("bar"))
+     or find(myCssSelector,2,withName("foo")).findFirst("input",withName("bar"))
+
 2. Form Action
 
     If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.
     2.1 Fill
 
-    fill("input").text("bar") OR $("input").text("bar") will fill all the element with tag input with bar.
+    fill("input").with("bar") OR $("input").text("bar") will fill all the element with tag input with bar.
 
      Don't forget, only the visible field will be modified. It simulates your action in a browser !
 
      2.2 Click
-       $("#create-button").click();
-       click("#create-button")
+
+       click("#create-button") is equivalent to $("#create-button").click()
 
      2.3 Clear
-        $("#create-button").clear();
-        clear("#create-button")
+       clear("#create-button") is equivalent to $("#create-button").clear();
+
      2.4 Clear
-        $("#create-button").submit();
-        submit("#create-button")
+       submit("#create-button") is equivalent to $("#create-button").submit();
+
 
   //TODO Add more infos there
 4. Page Object pattern

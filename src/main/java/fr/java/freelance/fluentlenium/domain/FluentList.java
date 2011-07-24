@@ -145,6 +145,13 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
         });
     }
 
+    /**
+     * find elements into the childs with the corresponding filters
+     *
+     * @param name
+     * @param filters
+     * @return
+     */
     public FluentList find(String name, Filter... filters) {
         final FluentList aggregateAllResults = new FluentList(new ArrayList<E>());
         for (E e : this) {
@@ -153,11 +160,26 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
         return aggregateAllResults;
     }
 
+    /**
+     * find elements into the childs with the corresponding filters at the position indicated by the number
+     *
+     * @param name
+     * @param number
+     * @param filters
+     * @return
+     */
     public E find(String name, Integer number, Filter... filters) {
         FluentList<E> fluentList = find(name, filters);
         return fluentList.get(number);
     }
 
+    /**
+     * find elements into the childs with the corresponding filters at the first position
+     *
+     * @param name
+     * @param filters
+     * @return
+     */
     public E findFirst(String name, Filter... filters) {
         return find(name, 0, filters);
     }
