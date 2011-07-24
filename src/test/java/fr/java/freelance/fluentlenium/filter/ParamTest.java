@@ -8,7 +8,6 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class ParamTest extends LocalFluentTest {
 
-    private static final String DEFAULT_URL = "http://localhost:8585";
 
     @Test
     public void checkTitleParam() {
