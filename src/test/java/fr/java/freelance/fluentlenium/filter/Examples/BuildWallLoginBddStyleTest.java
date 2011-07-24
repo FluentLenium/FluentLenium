@@ -4,7 +4,7 @@ import fr.java.freelance.fluentlenium.core.test.FluentTest;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static fr.java.freelance.fluentlenium.core.FluentPage.assertOn;
+import static fr.java.freelance.fluentlenium.core.FluentPage.assertAt;
 import static fr.java.freelance.fluentlenium.core.FluentPage.go;
 import static org.fest.assertions.Assertions.assertThat;
 

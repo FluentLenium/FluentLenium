@@ -3,6 +3,7 @@ package fr.java.freelance.fluentlenium.filter;
 import fr.java.freelance.fluentlenium.filter.localTest.LocalFluentTest;
 import org.junit.Test;
 
+import static fr.java.freelance.fluentlenium.filter.FilterConstructor.*;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class SelectorTest extends LocalFluentTest {
@@ -30,6 +31,36 @@ public class SelectorTest extends LocalFluentTest {
     public void checkWithNameCssSelector() {
         goTo(DEFAULT_URL);
         assertThat($(".small", withName("name"))).hasSize(1);
+    }
+
+    @Test
+    public void checkWithNameMatcherCssSelector() {
+        goTo(DEFAULT_URL);
+        assertThat($(".small", withName(contains("name")))).hasSize(2);
+    }
+
+    @Test
+    public void checkWithNameMatcherCssPatternSelector() {
+        goTo(DEFAULT_URL);
+        assertThat($(".small", withName(contains(regex("na?me[0-9]*")))).getNames()).contains("name", "name2");
+    }
+
+    @Test
+    public void checkWithNameMatcherCssNotContainPatternSelector() {
+        goTo(DEFAULT_URL);
+        assertThat($(".small", withName(notContains(regex("na?me[0-9]*")))).getNames()).hasSize(1);
+    }
+
+    @Test
+    public void checkWithNameEqualMatcherCssSelector() {
+        goTo(DEFAULT_URL);
+        assertThat($(".small", withName(equal("name")))).hasSize(1);
+    }
+
+    @Test
+    public void checkWithNameMatcherNotContainsCssSelector() {
+        goTo(DEFAULT_URL);
+        assertThat($(".small", withName(notContains("toto")))).hasSize(3);
     }
 
     @Test

@@ -44,33 +44,6 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
         }
     }
 
-
-    /**
-     * Click on all elements on the list
-     * Only the visible elements are filled
-     *//*
-    public void selectAll() {
-        for (FluentWebElement fluentWebElement : this) {
-            if (fluentWebElement.isDisplayed() && "checkbox".equals(fluentWebElement.getAttrbibute("type")) && !fluentWebElement.isSelected()) {
-                fluentWebElement.click();
-            }
-        }
-    }
-
-    *//**
-     * Click on all elements on the list
-     * Only the visible elements are filled
-     *//*
-    public void deselectAll() {
-        for (FluentWebElement fluentWebElement : this) {
-            System.out.println("SELECT");
-            if (fluentWebElement.isDisplayed() && "checkbox".equals(fluentWebElement.getAttrbibute("type")) && !fluentWebElement.isSelected()) {
-                fluentWebElement.click();
-            }
-        }
-    }
-*/
-
     /**
      * Fill  all elements on the list with the corresponding cell in the with table.
      * Only the visible elements are filled

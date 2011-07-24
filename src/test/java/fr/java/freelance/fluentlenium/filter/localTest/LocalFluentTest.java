@@ -1,6 +1,6 @@
 package fr.java.freelance.fluentlenium.filter.localTest;
 
-import fr.java.freelance.fluentlenium.JettyServer;
+import fr.java.freelance.fluentlenium.filter.JettyServer;
 import fr.java.freelance.fluentlenium.core.test.FluentTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

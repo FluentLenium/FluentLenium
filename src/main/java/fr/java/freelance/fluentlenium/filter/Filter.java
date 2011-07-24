@@ -1,29 +1,26 @@
 package fr.java.freelance.fluentlenium.filter;
 
+import fr.java.freelance.fluentlenium.filter.matcher.Matcher;
+
 public class Filter {
     private String attribut;
     private String name;
-    private String matcher = "";
+    private Matcher matcher;
 
     public Filter(FilterType filterType, String name) {
         this.attribut = filterType.name();
         this.name = name;
     }
 
-    public Filter(FilterType filterType, String name, String matcher) {
-        this.attribut = filterType.name();
-        this.name = name;
-        this.matcher = matcher;
-    }
 
-    public Filter(String attribut, String name, String matcher) {
-        this.attribut = attribut;
-        this.name = name;
+    public Filter(FilterType filterType, Matcher matcher) {
+        this.attribut = filterType.name();
+        this.name = matcher.getValue();
         this.matcher = matcher;
     }
 
     public String getAttribut() {
-        return attribut;
+        return attribut.toLowerCase();
     }
 
 
@@ -32,6 +29,18 @@ public class Filter {
     }
 
     public String toString() {
-        return "[" + attribut.toLowerCase() + matcher + "=" + name + "]";
+        String matcherAttribute = matcher != null ? matcher.getMatcherSymbol() : "";
+        return "[" + attribut.toLowerCase() + matcherAttribute + "=\"" + name + "\"]";
+    }
+
+    public Matcher getMatcher() {
+        return matcher;
+    }
+
+    public boolean isPreFilter() {
+        if ((matcher == null || matcher.isPreFilter()) && FilterType.TEXT.name() != attribut) {
+            return true;
+        }
+        return false;
     }
 }

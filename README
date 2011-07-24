@@ -1,4 +1,5 @@
-FluentLenium is a framework which provide help when writting Selenium Web Driver test with jUnit and fest-assert.
+FluentLenium is a framework which provide help when writting Selenium Web Driver test with jUnit.
+You can use the framework of assertion you want, classical jUnit assertions, hamcrest or as in the following examples fest-assert.
 
 
 0. Cross Browser

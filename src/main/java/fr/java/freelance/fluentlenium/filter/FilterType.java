@@ -8,8 +8,5 @@ package fr.java.freelance.fluentlenium.filter;
 public enum FilterType {
     CUSTOM, NAME, ID, TEXT;
 
-/*
-    public final static List<FilterType> getPreFilter = Lists.newArrayList(FilterType.NAME, FilterType.ID, FilterType.CUSTOM);
-    public Finalizer static List<FilterType> getPostFilter = Lists.newArrayList(FilterType.TEXT);
-*/
+
 }
