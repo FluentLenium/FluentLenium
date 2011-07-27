@@ -8,7 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 /**
  * All Junit Test should extends this class. It provides default parameters.
  */
-public class FluentTest extends Fluent {
+public abstract class FluentTest extends Fluent {
 
     public FluentTest() {
         super();
