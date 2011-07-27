@@ -15,7 +15,6 @@ public class FluentTest extends Fluent {
         this.setDriver(getDefaultDriver());
     }
 
-
     /**
      * Override this method to change the driver
      *

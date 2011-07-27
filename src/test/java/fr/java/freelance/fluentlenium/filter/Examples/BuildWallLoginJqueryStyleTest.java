@@ -3,6 +3,7 @@ package fr.java.freelance.fluentlenium.filter.Examples;
 import fr.java.freelance.fluentlenium.core.test.FluentTest;
 import org.junit.Ignore;
 import org.junit.Test;
+
 import static fr.java.freelance.fluentlenium.core.FluentPage.go;
 import static org.fest.assertions.Assertions.assertThat;
 

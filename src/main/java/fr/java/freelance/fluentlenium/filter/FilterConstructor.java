@@ -1,6 +1,5 @@
 package fr.java.freelance.fluentlenium.filter;
 
-import fr.java.freelance.fluentlenium.filter.*;
 import fr.java.freelance.fluentlenium.filter.matcher.ContainsMatcher;
 import fr.java.freelance.fluentlenium.filter.matcher.EqualMatcher;
 import fr.java.freelance.fluentlenium.filter.matcher.Matcher;

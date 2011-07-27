@@ -163,3 +163,25 @@ public void checkLoginFailed() {
 
 5. Custom Driver
 If you need to change your driver, just override the getDefaultDriver in your test. You can use every driver
+
+6. FluentLenium and others framework
+6.1 jUnit
+FluentLenium used jUnit by default. You can use test using jUnit assertions, but can of course use others frameworks, more fluent, as Fluent-assert or Hamcrest.
+
+ goTo("http://mywebpage/");
+ fill("#firstName").with("toto");
+ click("#create-button");
+ assertEqual("Hello toto",title());
+
+6.2 Fest-Assert
+goTo("http://mywebpage/");
+fill("#firstName").with("toto");
+click("#create-button");
+assertThat(title()).isEqualTo("Hello toto");
+
+ 6.3 Hamcrest
+ goTo("http://mywebpage/");
+ fill("#firstName").with("toto");
+ click("#create-button");
+ assertThat(title(),equalTo("Hello toto"));
+

@@ -36,5 +36,4 @@ public class ActionOnListWithBddTest extends LocalFluentTest {
     }
 
 
-
 }
