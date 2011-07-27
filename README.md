@@ -37,7 +37,7 @@ assertThat(title()).isEqualTo("Hello toto");
 Both syntax are equivalent. $ or find methods are aliases.
 
 ### JQuery Selector
-    #### Default Selector
+#### Default Selector
      You can use CSS1, CSS2 and CSS3 selector with the same restrictions as in Selenium.
 
      If you want to find the list of elements which have
@@ -49,7 +49,7 @@ Both syntax are equivalent. $ or find methods are aliases.
      find("input[class=rightForm]") or $("input[class=rightForm]")
      will return the list of all input elements which have the class rightForm
 
-    #### Custom filter
+#### Custom filter
     But what if you want all the input that have a text equals to "Sam" ?
     You can use filters to allow that kind of search. For example :
 <pre><code>
@@ -85,7 +85,7 @@ Both syntax are equivalent. $ or find methods are aliases.
 
      More will come soon to filter to create a complete search tool (startsWith,endsWith...).
 
-     ### N-th
+### N-th
      If you want the first elements that matchs your criteria, just use :
 <pre><code>
      findFirst(myCssSelector) or $(myCssSelector).first()
@@ -101,7 +101,7 @@ Both syntax are equivalent. $ or find methods are aliases.
      find(myCssSelector,2,withName("foo"))
  </code></pre>
 
-     #### Find on children
+#### Find on children
      You can also chained the find call :
  <pre><code>
      find(myCssSelector).find("input") will return all the web element input into the css selector tree.
@@ -115,7 +115,7 @@ Both syntax are equivalent. $ or find methods are aliases.
 ## Form Action
 
     If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.
-    ### Fill
+### Fill
 
  <pre><code>
     fill("input").with("bar") OR $("input").text("bar") will fill all the element with tag input with bar.
@@ -123,20 +123,20 @@ Both syntax are equivalent. $ or find methods are aliases.
 
      Don't forget, only the visible field will be modified. It simulates your action in a browser !
 
-     #### Click
+#### Click
 
  <pre><code>
        click("#create-button") is equivalent to $("#create-button").click().
   </code></pre>
        It will click on all the visible fields returned by the search.
 
-     #### Clear
+#### Clear
 <pre><code>
        clear("#create-button") is equivalent to $("#create-button").clear();
  </code></pre>
        It will clear  all the visible fields returned by the search.
 
-     #### Submit
+#### Submit
 <pre><code>
        submit("#create-button") is equivalent to $("#create-button").submit();
  </code></pre>
