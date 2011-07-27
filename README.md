@@ -36,63 +36,63 @@ Both syntax are equivalent. $ or find methods are aliases.
 
 ### JQuery Selector
 #### Default Selector
-     You can use CSS1, CSS2 and CSS3 selector with the same restrictions as in Selenium.
+You can use CSS1, CSS2 and CSS3 selector with the same restrictions as in Selenium.
 
      If you want to find the list of elements which have
-     the id "title" : find("#title") or $("#title")
-     the class name "small" : find(".small") or $(".small")
-     the tag name "input" : find("input") or $("input")
+- the id "title" : find("#title") or $("#title")
+- the class name "small" : find(".small") or $(".small")
+- the tag name "input" : find("input") or $("input")
 
-     You are free to use most of the CSS3 syntax, wich means that
-     find("input[class=rightForm]") or $("input[class=rightForm]")
-     will return the list of all input elements which have the class rightForm
+You are free to use most of the CSS3 syntax, wich means that
+find("input[class=rightForm]") or $("input[class=rightForm]")
+will return the list of all input elements which have the class rightForm
 
 #### Custom filter
-    But what if you want all the input that have a text equals to "Sam" ?
-    You can use filters to allow that kind of search. For example :
+But what if you want all the input that have a text equals to "Sam" ?
+You can use filters to allow that kind of search. For example :
 <pre><code>
      find(".small",withName("foo"))
      find(".small",withId("idOne"))
      find(".small",withText("This field is mandatory."))
 </code></pre>
 
-     You can also chained filters :
-     find(".small",withName("foo"),withId("id1")) will return all the elements matching the 3 criterias : - class .small ,id id1 and name foo.
+You can also chained filters :
+find(".small",withName("foo"),withId("id1")) will return all the elements matching the 3 criterias : - class .small ,id id1 and name foo.
 
-     If you want others precisions that just the css selector, just use our filters features.
-     For now, you have two differents filters :
-     - contains
-     - notContains
+If you want others precisions that just the css selector, just use our filters features.
+For now, you have two differents filters :
+- contains
+- notContains
 
-     For each of them, you can choose to use a css selector :
+For each of them, you can choose to use a css selector :
 <pre><code>
      find(".small", withName(notContains("name"))
      find(".small", withId(notContains("id"))
      find(".small", withText(notContains("Female")))
 </code></pre>
 
-     Or to be more precise, you can choose to use a regexp :
+Or to be more precise, you can choose to use a regexp :
 <pre><code>
      find(".small", withName(contains(regex("na?me[0-9]*")))
      find(".small", withName(notContains(regex("na?me[0-9]*")))
 </code></pre>
 
-     Of course, if you are a regexp jedi, that's not needed !
+Of course, if you are a regexp jedi, that's not needed !
 
-     More will come soon to filter to create a complete search tool (startsWith,endsWith...).
+More will come soon to filter to create a complete search tool (startsWith,endsWith...).
 
 ### N-th
-     If you want the first elements that matchs your criteria, just use :
+If you want the first elements that matchs your criteria, just use :
 <pre><code>
      findFirst(myCssSelector) or $(myCssSelector).first()
 </code></pre>
 
-     If you want the element at the given position :
+If you want the element at the given position :
 <pre><code>
      find(myCssSelector,2) or $(myCssSelector,2)
 </code></pre>
 
-     Of course, you can use both position filter and custom filter :
+Of course, you can use both position filter and custom filter :
 <pre><code>
      find(myCssSelector,2,withName("foo"))
 </code></pre>
@@ -105,6 +105,30 @@ Both syntax are equivalent. $ or find methods are aliases.
      find(myCssSelector,2,withName("foo")).find("input",withName("bar"))
      or find(myCssSelector,2,withName("foo")).findFirst("input",withName("bar"))
 </code></pre>
+## Form Action
+If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.
+
+### Fill
+fill("input").with("bar") OR $("input").text("bar") will fill all the element with tag input with bar.
+
+Don't forget, only the visible field will be modified. It simulates your action in a browser !
+
+#### Click
+click("#create-button") is equivalent to $("#create-button").click().
+
+It will click on all the visible fields returned by the search.
+
+#### Clear
+clear("#create-button") is equivalent to $("#create-button").clear();
+
+It will clear  all the visible fields returned by the search.
+
+#### Submit
+submit("#create-button") is equivalent to $("#create-button").submit();
+
+It will submit all the visible fields returned by the search.
+
+//TODO Add more infos there
 
 
 ## Page Object pattern
@@ -189,22 +213,3 @@ assertThat(title()).isEqualTo("Hello toto");
  assertThat(title(),equalTo("Hello toto"));
 </code></pre>
 
-## Form Action
-If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.
-### Fill
-fill("input").with("bar") OR $("input").text("bar") will fill all the element with tag input with bar.
-Don't forget, only the visible field will be modified. It simulates your action in a browser !
-
-#### Click
-click("#create-button") is equivalent to $("#create-button").click().
-It will click on all the visible fields returned by the search.
-
-#### Clear
-clear("#create-button") is equivalent to $("#create-button").clear();
-It will clear  all the visible fields returned by the search.
-
-#### Submit
-submit("#create-button") is equivalent to $("#create-button").submit();
-It will submit all the visible fields returned by the search.
-
-  //TODO Add more infos there
