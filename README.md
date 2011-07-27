@@ -116,30 +116,20 @@ Both syntax are equivalent. $ or find methods are aliases.
 
     If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.
 ### Fill
-
- <pre><code>
     fill("input").with("bar") OR $("input").text("bar") will fill all the element with tag input with bar.
-</code></pre>
-
      Don't forget, only the visible field will be modified. It simulates your action in a browser !
 
 #### Click
 
- <pre><code>
        click("#create-button") is equivalent to $("#create-button").click().
-  </code></pre>
        It will click on all the visible fields returned by the search.
 
 #### Clear
-<pre><code>
        clear("#create-button") is equivalent to $("#create-button").clear();
- </code></pre>
        It will clear  all the visible fields returned by the search.
 
 #### Submit
-<pre><code>
        submit("#create-button") is equivalent to $("#create-button").submit();
- </code></pre>
        It will submit all the visible fields returned by the search.
 
 
