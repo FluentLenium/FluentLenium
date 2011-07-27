@@ -27,12 +27,10 @@ assertThat(title()).isEqualTo("Hello toto");
 </code></pre>
 
 If you are more convenient to the JQuery Syntax, maybe something like that will be more natural for you:
-<pre><code>
-goTo("http://mywebpage/");
+<pre><code>goTo("http://mywebpage/");
 $("#firstName").text("toto");
 $("#create-button").click();
-assertThat(title()).isEqualTo("Hello toto");
-</code></pre>
+assertThat(title()).isEqualTo("Hello toto");</code></pre>
 
 Both syntax are equivalent. $ or find methods are aliases.
 
@@ -59,9 +57,7 @@ Both syntax are equivalent. $ or find methods are aliases.
 </code></pre>
 
      You can also chained filters :
-<pre><code>
      find(".small",withName("foo"),withId("id1")) will return all the elements matching the 3 criterias : - class .small ,id id1 and name foo.
-</code></pre>
 
      If you want others precisions that just the css selector, just use our filters features.
      For now, you have two differents filters :
@@ -94,18 +90,16 @@ Both syntax are equivalent. $ or find methods are aliases.
      If you want the element at the given position :
 <pre><code>
      find(myCssSelector,2) or $(myCssSelector,2)
- </code></pre>
+</code></pre>
 
      Of course, you can use both position filter and custom filter :
- <pre><code>
+<pre><code>
      find(myCssSelector,2,withName("foo"))
- </code></pre>
+</code></pre>
 
 #### Find on children
      You can also chained the find call :
- <pre><code>
      find(myCssSelector).find("input") will return all the web element input into the css selector tree.
-</code></pre>
      You can add more indication :
 <pre><code>
      find(myCssSelector,2,withName("foo")).find("input",withName("bar"))
@@ -149,12 +143,12 @@ To control that you are in the good page, not only the url [accessible in your t
 Redefined the isAt methods to list all the assertions you have to make in order to be sure that you are in the good pages.
 For exemple, if I choose that the title will be sufficient to know if I'm in the page :
 
- <pre><code>
+<pre><code>
         @Override
         public void isAt() {
             assertThat($("title").first().getText()).contains("Selenium");
         }
- </code></pre>
+</code></pre>
 
 Create you owm methods to easily fill form, go to a next page or whatesle can be needed in your test.
 
