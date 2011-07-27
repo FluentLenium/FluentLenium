@@ -3,8 +3,8 @@ package fr.java.freelance.fluentlenium.domain;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import fr.java.freelance.fluentlenium.action.FluentDefaultActions;
-import fr.java.freelance.fluentlenium.search.SearchActions;
 import fr.java.freelance.fluentlenium.filter.Filter;
+import fr.java.freelance.fluentlenium.search.SearchActions;
 import org.openqa.selenium.NoSuchElementException;
 
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      */
     public void click() {
         for (E fluentWebElement : this) {
-            if (fluentWebElement.isDisplayed()) {
+            if (fluentWebElement.isEnabled()) {
                 fluentWebElement.click();
             }
         }
@@ -62,8 +62,10 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
                     } else {
                         value = with[with.length - 1];
                     }
-                    fluentWebElement.clear();
-                    fluentWebElement.text(value);
+                    if (fluentWebElement.isEnabled()) {
+                        fluentWebElement.clear();
+                        fluentWebElement.text(value);
+                    }
                 }
             }
         }
@@ -75,7 +77,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      */
     public void clear() {
         for (E fluentWebElement : this) {
-            if (fluentWebElement.isDisplayed()) {
+            if (fluentWebElement.isEnabled()) {
                 fluentWebElement.clear();
             }
         }
@@ -87,7 +89,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      */
     public void submit() {
         for (E fluentWebElement : this) {
-            if (fluentWebElement.isDisplayed()) {
+            if (fluentWebElement.isEnabled()) {
                 fluentWebElement.submit();
             }
         }
