@@ -11,7 +11,6 @@ import org.openqa.selenium.WebElement;
  */
 public class FluentWebElement implements FluentDefaultActions, SearchActions {
     private final WebElement webElement;
-
     private final Search searchContext;
 
     public FluentWebElement(WebElement webElement) {

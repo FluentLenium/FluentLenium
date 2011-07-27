@@ -2,10 +2,11 @@ package fr.java.freelance.fluentlenium.core;
 
 import fr.java.freelance.fluentlenium.action.FillConstructor;
 import fr.java.freelance.fluentlenium.action.FluentDefaultActions;
-import fr.java.freelance.fluentlenium.search.Search;
 import fr.java.freelance.fluentlenium.domain.FluentList;
 import fr.java.freelance.fluentlenium.domain.FluentWebElement;
 import fr.java.freelance.fluentlenium.filter.Filter;
+import fr.java.freelance.fluentlenium.search.Search;
+import fr.java.freelance.fluentlenium.search.SearchActions;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * Util Class which offers some shortcut to webdriver methods
  */
-public class Fluent {
+public class Fluent implements SearchActions {
     private WebDriver driver;
     private Search search;
 
@@ -175,6 +176,7 @@ public class Fluent {
     /**
      * Value all elements that are in cssSelector with its filters
      * Be careful - only the visible elements are returned
+     * //TODO UTILITY ? Deprecated ?
      *
      * @param cssSelector
      */
@@ -187,30 +189,30 @@ public class Fluent {
      * click all elements that are in the list
      * Be careful - only the visible elements are clicked
      *
-     * @param fluentList
+     * @param fluentObject
      */
-    public void click(FluentDefaultActions fluentList) {
-        fluentList.click();
+    public void click(FluentDefaultActions fluentObject) {
+        fluentObject.click();
     }
 
     /**
      * Submit all elements that are in the list
      * Be careful - only the visible elements are cleared
      *
-     * @param fluentList
+     * @param fluentObject
      */
-    public void clear(FluentDefaultActions fluentList) {
-        fluentList.clear();
+    public void clear(FluentDefaultActions fluentObject) {
+        fluentObject.clear();
     }
 
     /**
      * Submit all elements that are in the list
      * Be careful - only the visible elements are submitted
      *
-     * @param fluentList
+     * @param fluentObject
      */
-    public void submit(FluentDefaultActions fluentList) {
-        fluentList.submit();
+    public void submit(FluentDefaultActions fluentObject) {
+        fluentObject.submit();
     }
 
 
