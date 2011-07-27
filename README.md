@@ -2,39 +2,42 @@ FluentLenium is a framework which provide help when writting Selenium Web Driver
 You can use the framework of assertion you want, classical jUnit assertions, hamcrest or as in the following examples fest-assert.
 
 
-0. Cross Browser
+## Cross Browser
 FluentLenium can support all the browser available in Selenium WebDriver.
 Wich means :
-    FireFox
-    Internet Explorer
-    Google Chrome
-    Opera
+    * FireFox
+    * Internet Explorer
+    * Google Chrome
+    * Opera
 
 But there is also some project working on android etc ...
 
-1. Basic
+## Basic
 
 Launching the first test.
 Your Test Class may extend fr.java.freelance.fluentlenium.core.test.FluentTest By default, it use FirefoxWebDriver to launch all tests.
 After that, all your test methods will be able to be tested into a browser.
 The syntaxes offers directly by Selenium are quite a bit too verbose. FluentLenium proposes two differents syntaxes to easily launch tests.
 For examples, if you want to go to an adresse, fill a form and click to a button to submit and tests that the title of the page have changed
-
+<pre><code>
 goTo("http://mywebpage/");
 fill("#firstName").with("toto");
 click("#create-button");
 assertThat(title()).isEqualTo("Hello toto");
+</code></pre>
 
 If you are more convenient to the JQuery Syntax, maybe something like that will be more natural for you:
+<pre><code>
 goTo("http://mywebpage/");
 $("#firstName").text("toto");
 $("#create-button").click();
 assertThat(title()).isEqualTo("Hello toto");
+</code></pre>
 
 Both syntax are equivalent. $ or find methods are aliases.
 
-2. JQuery Selector
-    2.1 Default Selector
+### JQuery Selector
+    #### Default Selector
      You can use CSS1, CSS2 and CSS3 selector with the same restrictions as in Selenium.
 
      If you want to find the list of elements which have
@@ -46,15 +49,19 @@ Both syntax are equivalent. $ or find methods are aliases.
      find("input[class=rightForm]") or $("input[class=rightForm]")
      will return the list of all input elements which have the class rightForm
 
-    2.2 Custom filter
+    #### Custom filter
     But what if you want all the input that have a text equals to "Sam" ?
     You can use filters to allow that kind of search. For example :
+<pre><code>
      find(".small",withName("foo"))
      find(".small",withId("idOne"))
      find(".small",withText("This field is mandatory."))
+</code></pre>
 
      You can also chained filters :
+<pre><code>
      find(".small",withName("foo"),withId("id1")) will return all the elements matching the 3 criterias : - class .small ,id id1 and name foo.
+</code></pre>
 
      If you want others precisions that just the css selector, just use our filters features.
      For now, you have two differents filters :
@@ -62,60 +69,82 @@ Both syntax are equivalent. $ or find methods are aliases.
      - notContains
 
      For each of them, you can choose to use a css selector :
+<pre><code>
      find(".small", withName(notContains("name"))
      find(".small", withId(notContains("id"))
      find(".small", withText(notContains("Female")))
+</code></pre>
 
      Or to be more precise, you can choose to use a regexp :
+<pre><code>
      find(".small", withName(contains(regex("na?me[0-9]*")))
      find(".small", withName(notContains(regex("na?me[0-9]*")))
+</code></pre>
 
      Of course, if you are a regexp jedi, that's not needed !
 
      More will come soon to filter to create a complete search tool (startsWith,endsWith...).
 
-     2.3 N-th
+     ### N-th
      If you want the first elements that matchs your criteria, just use :
+<pre><code>
      findFirst(myCssSelector) or $(myCssSelector).first()
+</code></pre>
 
      If you want the element at the given position :
+<pre><code>
      find(myCssSelector,2) or $(myCssSelector,2)
+ </code></pre>
 
      Of course, you can use both position filter and custom filter :
+ <pre><code>
      find(myCssSelector,2,withName("foo"))
+ </code></pre>
 
-     2.4 Find on children
+     #### Find on children
      You can also chained the find call :
+ <pre><code>
      find(myCssSelector).find("input") will return all the web element input into the css selector tree.
+</code></pre>
      You can add more indication :
+<pre><code>
      find(myCssSelector,2,withName("foo")).find("input",withName("bar"))
      or find(myCssSelector,2,withName("foo")).findFirst("input",withName("bar"))
+</code></pre>
 
-3. Form Action
+## Form Action
 
     If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.
-    3.1 Fill
+    ### Fill
 
+ <pre><code>
     fill("input").with("bar") OR $("input").text("bar") will fill all the element with tag input with bar.
+</code></pre>
 
      Don't forget, only the visible field will be modified. It simulates your action in a browser !
 
-     3.2 Click
+     #### Click
 
+ <pre><code>
        click("#create-button") is equivalent to $("#create-button").click().
+  </code></pre>
        It will click on all the visible fields returned by the search.
 
-     3.3 Clear
+     #### Clear
+<pre><code>
        clear("#create-button") is equivalent to $("#create-button").clear();
+ </code></pre>
        It will clear  all the visible fields returned by the search.
 
-     3.4 Submit
+     #### Submit
+<pre><code>
        submit("#create-button") is equivalent to $("#create-button").submit();
+ </code></pre>
        It will submit all the visible fields returned by the search.
 
 
   //TODO Add more infos there
-4. Page Object pattern
+## Page Object pattern
 Because Selenium test can easily become a mess, Page Object Pattern are a recommanded Pattern when writing automatised integration test.
 Page Pattern will inclosing all the pumbling, which make tests a lot easier to read and to maintain.
 
@@ -130,14 +159,17 @@ To control that you are in the good page, not only the url [accessible in your t
 Redefined the isAt methods to list all the assertions you have to make in order to be sure that you are in the good pages.
 For exemple, if I choose that the title will be sufficient to know if I'm in the page :
 
+ <pre><code>
         @Override
         public void isAt() {
             assertThat($("title").first().getText()).contains("Selenium");
         }
+ </code></pre>
 
 Create you owm methods to easily fill form, go to a next page or whatesle can be needed in your test.
 
 For exemple :
+<pre><code>
 public class LoginPage extends FluentPage {
      public LoginPage(WebDriver driver) {
         super(driver);
@@ -153,35 +185,44 @@ public class LoginPage extends FluentPage {
         $("#create-button").click();
     }
 }
+</code></pre>
 
 And the corresponding test :
+<pre><code>
 public void checkLoginFailed() {
  goTo(loginPage);
  loginPage.fillAndSubmitLoginForm("login","wrongPass");
   assertThat($(".error")).hasSize(1);
 }
+</code></pre>
 
-5. Custom Driver
+## Custom Driver
 If you need to change your driver, just override the getDefaultDriver in your test. You can use every driver
 
-6. FluentLenium and others framework
-6.1 jUnit
+## FluentLenium and others framework
+### jUnit
 FluentLenium used jUnit by default. You can use test using jUnit assertions, but can of course use others frameworks, more fluent, as Fluent-assert or Hamcrest.
 
+<pre><code>
  goTo("http://mywebpage/");
  fill("#firstName").with("toto");
  click("#create-button");
  assertEqual("Hello toto",title());
+</code></pre>
 
-6.2 Fest-Assert
+### Fest-Assert
+<pre><code>
 goTo("http://mywebpage/");
 fill("#firstName").with("toto");
 click("#create-button");
 assertThat(title()).isEqualTo("Hello toto");
+</code></pre>
 
- 6.3 Hamcrest
+### Hamcrest
+<pre><code>
  goTo("http://mywebpage/");
  fill("#firstName").with("toto");
  click("#create-button");
  assertThat(title(),equalTo("Hello toto"));
+</code></pre>
 
