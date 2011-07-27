@@ -35,7 +35,7 @@ public class Search implements SearchActions {
         List<Filter> postFilterSelector = new ArrayList<Filter>();
         if (filters != null) {
             for (Filter selector : filters) {
-                if (selector.isPreFilter() && !"text".equalsIgnoreCase(selector.getAttribut())) {
+                if (selector.isPreFilter() ) {
                     sb.append(selector.toString());
                 } else {
                     postFilterSelector.add(selector);

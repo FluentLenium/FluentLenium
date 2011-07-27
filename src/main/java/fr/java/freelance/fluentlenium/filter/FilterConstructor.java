@@ -24,6 +24,17 @@ public class FilterConstructor {
     }
 
     /**
+     * Create a filter by a customattribute
+     *
+     * @param customAttribute
+     * @param value
+     * @return
+     */
+    public static Filter with(String customAttribute,String value) {
+        return new Filter(FilterType.CUSTOM,customAttribute, value);
+    }
+
+    /**
      * Create a filter by id
      *
      * @param id

@@ -82,4 +82,20 @@ public class SelectorTest extends LocalFluentTest {
     }
 
 
+    @Test
+    public void checkCustomSelectAttribute() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", with("generated", "true")).getTexts()).contains("Test custom attribute");
+    }
+
+    @Test
+    public void checkCustomSelectAttributeIfText() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", with("TEXT", "Pharmacy")).first().getTagName()).isEqualTo("span");
+    }
+     @Test
+    public void checkCustomSelectAttributeIfTextIsInLowerCase() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", with("text", "Pharmacy")).first().getTagName()).isEqualTo("span");
+    }
 }
