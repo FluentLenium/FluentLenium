@@ -1,7 +1,7 @@
-package fr.java.freelance.fluentlenium.filter;
+package fr.java.freelance.fluentlenium.integration;
 
 import fr.java.freelance.fluentlenium.core.FluentPage;
-import fr.java.freelance.fluentlenium.filter.localTest.LocalFluentTest;
+import fr.java.freelance.fluentlenium.integration.localTest.LocalFluentTest;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;

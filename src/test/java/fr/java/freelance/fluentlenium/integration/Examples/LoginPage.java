@@ -1,4 +1,4 @@
-package fr.java.freelance.fluentlenium.filter.Examples;
+package fr.java.freelance.fluentlenium.integration.Examples;
 
 import fr.java.freelance.fluentlenium.core.FluentPage;
 import org.openqa.selenium.WebDriver;

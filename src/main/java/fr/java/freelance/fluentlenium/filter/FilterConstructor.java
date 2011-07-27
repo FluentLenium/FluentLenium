@@ -14,7 +14,7 @@ public class FilterConstructor {
     }
 
     /**
-     * Create a filter by name
+     * Create a integration by name
      *
      * @param name
      * @return
@@ -24,7 +24,7 @@ public class FilterConstructor {
     }
 
     /**
-     * Create a filter by a customattribute
+     * Create a integration by a customattribute
      *
      * @param customAttribute
      * @param value
@@ -35,7 +35,7 @@ public class FilterConstructor {
     }
 
     /**
-     * Create a filter by id
+     * Create a integration by id
      *
      * @param id
      * @return
@@ -45,7 +45,7 @@ public class FilterConstructor {
     }
 
     /**
-     * Create a filter by text
+     * Create a integration by text
      *
      * @param text
      * @return
@@ -55,7 +55,7 @@ public class FilterConstructor {
     }
 
     /**
-     * Create a filter by name with matcher
+     * Create a integration by name with matcher
      *
      * @param matcher
      * @return
@@ -111,7 +111,7 @@ public class FilterConstructor {
 
 
     /**
-     * Create a filter by id
+     * Create a integration by id
      *
      * @param matcher
      * @return
@@ -121,7 +121,7 @@ public class FilterConstructor {
     }
 
     /**
-     * Create a filter by text
+     * Create a integration by text
      *
      * @param matcher
      * @return

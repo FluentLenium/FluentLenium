@@ -1,4 +1,4 @@
-package fr.java.freelance.fluentlenium.filter;
+package fr.java.freelance.fluentlenium.integration;
 
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;

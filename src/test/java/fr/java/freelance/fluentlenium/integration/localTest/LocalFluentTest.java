@@ -1,7 +1,7 @@
-package fr.java.freelance.fluentlenium.filter.localTest;
+package fr.java.freelance.fluentlenium.integration.localTest;
 
 import fr.java.freelance.fluentlenium.core.test.FluentTest;
-import fr.java.freelance.fluentlenium.filter.JettyServer;
+import fr.java.freelance.fluentlenium.integration.JettyServer;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
@@ -9,6 +9,8 @@ import org.junit.BeforeClass;
 public class LocalFluentTest extends FluentTest {
     protected static final String DEFAULT_URL = "http://localhost:8585";
     public static JettyServer server = new JettyServer();
+
+
 
     @BeforeClass
     public static void beforeClass() throws Exception {

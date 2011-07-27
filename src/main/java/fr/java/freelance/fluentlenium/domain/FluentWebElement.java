@@ -1,9 +1,9 @@
 package fr.java.freelance.fluentlenium.domain;
 
 import fr.java.freelance.fluentlenium.action.FluentDefaultActions;
+import fr.java.freelance.fluentlenium.filter.Filter;
 import fr.java.freelance.fluentlenium.search.Search;
 import fr.java.freelance.fluentlenium.search.SearchActions;
-import fr.java.freelance.fluentlenium.filter.Filter;
 import org.openqa.selenium.WebElement;
 
 /**
