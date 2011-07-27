@@ -190,23 +190,21 @@ assertThat(title()).isEqualTo("Hello toto");
 </code></pre>
 
 ## Form Action
-
-    If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.
+If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.
 ### Fill
-    fill("input").with("bar") OR $("input").text("bar") will fill all the element with tag input with bar.
-     Don't forget, only the visible field will be modified. It simulates your action in a browser !
+fill("input").with("bar") OR $("input").text("bar") will fill all the element with tag input with bar.
+Don't forget, only the visible field will be modified. It simulates your action in a browser !
 
 #### Click
-
-       click("#create-button") is equivalent to $("#create-button").click().
-       It will click on all the visible fields returned by the search.
+click("#create-button") is equivalent to $("#create-button").click().
+It will click on all the visible fields returned by the search.
 
 #### Clear
-       clear("#create-button") is equivalent to $("#create-button").clear();
-       It will clear  all the visible fields returned by the search.
+clear("#create-button") is equivalent to $("#create-button").clear();
+It will clear  all the visible fields returned by the search.
 
 #### Submit
-       submit("#create-button") is equivalent to $("#create-button").submit();
-       It will submit all the visible fields returned by the search.
+submit("#create-button") is equivalent to $("#create-button").submit();
+It will submit all the visible fields returned by the search.
 
   //TODO Add more infos there
