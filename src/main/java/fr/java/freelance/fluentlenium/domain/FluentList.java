@@ -3,7 +3,8 @@ package fr.java.freelance.fluentlenium.domain;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.sun.istack.internal.Nullable;
-import fr.java.freelance.fluentlenium.core.SearchActions;
+import fr.java.freelance.fluentlenium.action.FluentDefaultActions;
+import fr.java.freelance.fluentlenium.search.SearchActions;
 import fr.java.freelance.fluentlenium.filter.Filter;
 import org.openqa.selenium.NoSuchElementException;
 

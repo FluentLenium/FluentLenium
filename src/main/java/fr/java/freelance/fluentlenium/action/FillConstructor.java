@@ -1,8 +1,8 @@
-package fr.java.freelance.fluentlenium.domain.bdd;
+package fr.java.freelance.fluentlenium.action;
 
 
+import fr.java.freelance.fluentlenium.action.FluentDefaultActions;
 import fr.java.freelance.fluentlenium.core.Fluent;
-import fr.java.freelance.fluentlenium.domain.FluentDefaultActions;
 import fr.java.freelance.fluentlenium.filter.Filter;
 import org.openqa.selenium.WebDriver;
 

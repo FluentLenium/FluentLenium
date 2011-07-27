@@ -1,9 +1,10 @@
 package fr.java.freelance.fluentlenium.core;
 
-import fr.java.freelance.fluentlenium.domain.FluentDefaultActions;
+import fr.java.freelance.fluentlenium.action.FillConstructor;
+import fr.java.freelance.fluentlenium.action.FluentDefaultActions;
+import fr.java.freelance.fluentlenium.search.Search;
 import fr.java.freelance.fluentlenium.domain.FluentList;
 import fr.java.freelance.fluentlenium.domain.FluentWebElement;
-import fr.java.freelance.fluentlenium.domain.bdd.FillConstructor;
 import fr.java.freelance.fluentlenium.filter.Filter;
 import org.openqa.selenium.WebDriver;
 

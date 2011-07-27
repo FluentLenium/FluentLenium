@@ -1,4 +1,4 @@
-package fr.java.freelance.fluentlenium.core;
+package fr.java.freelance.fluentlenium.search;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;

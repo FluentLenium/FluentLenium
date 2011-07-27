@@ -1,4 +1,4 @@
-package fr.java.freelance.fluentlenium.domain;
+package fr.java.freelance.fluentlenium.action;
 
 /**
  * All actions that can be used on the list or on a web element

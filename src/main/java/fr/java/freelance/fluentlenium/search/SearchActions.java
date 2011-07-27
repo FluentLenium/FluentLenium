@@ -1,4 +1,4 @@
-package fr.java.freelance.fluentlenium.core;
+package fr.java.freelance.fluentlenium.search;
 
 import fr.java.freelance.fluentlenium.domain.FluentList;
 import fr.java.freelance.fluentlenium.domain.FluentWebElement;
