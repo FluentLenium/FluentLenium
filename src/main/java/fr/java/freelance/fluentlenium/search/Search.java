@@ -3,7 +3,6 @@ package fr.java.freelance.fluentlenium.search;
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
-import com.sun.istack.internal.Nullable;
 import fr.java.freelance.fluentlenium.domain.FluentList;
 import fr.java.freelance.fluentlenium.domain.FluentWebElement;
 import fr.java.freelance.fluentlenium.filter.Filter;
@@ -54,7 +53,7 @@ public class Search implements SearchActions {
 
     private List<FluentWebElement> select(String cssSelector) {
         return Lists.transform(searchContext.findElements(By.cssSelector(cssSelector)), new Function<WebElement, FluentWebElement>() {
-            public FluentWebElement apply(@Nullable WebElement webElement) {
+            public FluentWebElement apply(WebElement webElement) {
                 return new FluentWebElement((webElement));
             }
         });

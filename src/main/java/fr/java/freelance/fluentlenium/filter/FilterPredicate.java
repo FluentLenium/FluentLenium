@@ -1,7 +1,6 @@
 package fr.java.freelance.fluentlenium.filter;
 
 import com.google.common.base.Predicate;
-import com.sun.istack.internal.Nullable;
 import fr.java.freelance.fluentlenium.domain.FluentWebElement;
 
 /**
@@ -14,7 +13,7 @@ public class FilterPredicate implements Predicate<FluentWebElement> {
         this.filter = text;
     }
 
-    public boolean apply(@Nullable FluentWebElement webElementCustom) {
+    public boolean apply(FluentWebElement webElementCustom) {
 
         String attribute = returnTextIfTextAttributeElseAttributeValue(webElementCustom);
         if (filter.getMatcher().isSatisfiedBy(attribute)) {

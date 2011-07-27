@@ -2,7 +2,6 @@ package fr.java.freelance.fluentlenium.domain;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import com.sun.istack.internal.Nullable;
 import fr.java.freelance.fluentlenium.action.FluentDefaultActions;
 import fr.java.freelance.fluentlenium.search.SearchActions;
 import fr.java.freelance.fluentlenium.filter.Filter;
@@ -101,7 +100,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      */
     public List<String> getValues() {
         return Lists.transform(this, new Function<E, String>() {
-            public String apply(@Nullable E webElement) {
+            public String apply(E webElement) {
                 return webElement.getValue();
             }
         });
@@ -114,7 +113,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      */
     public List<String> getIds() {
         return Lists.transform(this, new Function<E, String>() {
-            public String apply(@Nullable E webElement) {
+            public String apply(E webElement) {
                 return webElement.getId();
             }
         });
@@ -127,7 +126,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      */
     public List<String> getNames() {
         return Lists.transform(this, new Function<E, String>() {
-            public String apply(@Nullable E webElement) {
+            public String apply(E webElement) {
                 return webElement.getName();
             }
         });
@@ -140,7 +139,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      */
     public List<String> getTexts() {
         return Lists.transform(this, new Function<E, String>() {
-            public String apply(@Nullable E webElement) {
+            public String apply(E webElement) {
                 return webElement.getText();
             }
         });
