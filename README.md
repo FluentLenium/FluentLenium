@@ -106,28 +106,7 @@ Both syntax are equivalent. $ or find methods are aliases.
      or find(myCssSelector,2,withName("foo")).findFirst("input",withName("bar"))
 </code></pre>
 
-## Form Action
 
-    If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.
-### Fill
-    fill("input").with("bar") OR $("input").text("bar") will fill all the element with tag input with bar.
-     Don't forget, only the visible field will be modified. It simulates your action in a browser !
-
-#### Click
-
-       click("#create-button") is equivalent to $("#create-button").click().
-       It will click on all the visible fields returned by the search.
-
-#### Clear
-       clear("#create-button") is equivalent to $("#create-button").clear();
-       It will clear  all the visible fields returned by the search.
-
-#### Submit
-       submit("#create-button") is equivalent to $("#create-button").submit();
-       It will submit all the visible fields returned by the search.
-
-
-  //TODO Add more infos there
 ## Page Object pattern
 Because Selenium test can easily become a mess, Page Object Pattern are a recommanded Pattern when writing automatised integration test.
 Page Pattern will inclosing all the pumbling, which make tests a lot easier to read and to maintain.
@@ -210,3 +189,24 @@ assertThat(title()).isEqualTo("Hello toto");
  assertThat(title(),equalTo("Hello toto"));
 </code></pre>
 
+## Form Action
+
+    If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.
+### Fill
+    fill("input").with("bar") OR $("input").text("bar") will fill all the element with tag input with bar.
+     Don't forget, only the visible field will be modified. It simulates your action in a browser !
+
+#### Click
+
+       click("#create-button") is equivalent to $("#create-button").click().
+       It will click on all the visible fields returned by the search.
+
+#### Clear
+       clear("#create-button") is equivalent to $("#create-button").clear();
+       It will clear  all the visible fields returned by the search.
+
+#### Submit
+       submit("#create-button") is equivalent to $("#create-button").submit();
+       It will submit all the visible fields returned by the search.
+
+  //TODO Add more infos there
