@@ -85,7 +85,8 @@ Contains, startsWith and endsWith with a regexp pattern are looking for a subsec
 
 Of course, if you are a regexp jedi, that's not needed !
 
-More will come soon to filter to create a complete search tool (startsWith,endsWith...).
+More will come soon to filter to create a complete search tool (containsWord, able to choose if you want to ignore case ...)
+
 
 ### N-th
 If you want the first elements that matchs your criteria, just use :
