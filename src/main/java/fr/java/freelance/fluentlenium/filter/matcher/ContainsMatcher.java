@@ -3,6 +3,7 @@ package fr.java.freelance.fluentlenium.filter.matcher;
 
 import java.util.regex.Pattern;
 
+//TODO Remove matching pattern from there
 public class ContainsMatcher extends Matcher {
 
     public ContainsMatcher(String value) {
@@ -18,13 +19,8 @@ public class ContainsMatcher extends Matcher {
     }
 
     public boolean isSatisfiedBy(String o) {
-        if (o == null) {
-            return false;
-        }
-        if (getPattern() == null) {
-            return getValue().contains(o);
-        }
-        return getPattern().matcher(o).matches();
+        return CalculateService.contains(getPattern(), getValue(), o);
     }
+
 
 }

@@ -21,9 +21,13 @@ public class Filter {
     public Filter(FilterType custom, String customAttribute, String value) {
         this.attribut = customAttribute;
         this.matcher = new EqualMatcher(value);
-
     }
 
+
+    public Filter(FilterType custom, String customAttribute, Matcher matcher) {
+        this.attribut = customAttribute;
+        this.matcher = matcher;
+    }
 
     public String getAttribut() {
         return attribut.toLowerCase();

@@ -18,13 +18,7 @@ public class NotContainsMatcher extends Matcher {
     }
 
     public boolean isSatisfiedBy(String o) {
-        if (o == null) {
-            return true;
-        }
-        if (getPattern() == null) {
-            return !getValue().contains(o);
-        }
-        return !getPattern().matcher(o).matches();
+       return !CalculateService.contains(getPattern(), getValue(), o);
     }
 
 }

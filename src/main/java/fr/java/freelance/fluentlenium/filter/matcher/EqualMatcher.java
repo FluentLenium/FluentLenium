@@ -18,10 +18,7 @@ public class EqualMatcher extends Matcher {
     }
 
     public boolean isSatisfiedBy(String o) {
-        if (o == null) {
-            return false;
-        }
-        return getValue().equals(o);
+        return CalculateService.equal(getPattern(), getValue(), o);
     }
 
 }

@@ -89,13 +89,59 @@ public class SelectorTest extends LocalFluentTest {
     }
 
     @Test
+    public void checkCustomSelectAttributeWithRegex() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", with("generated", contains(regex("t?ru?")))).getTexts()).contains("Test custom attribute");
+    }
+
+    @Test
     public void checkCustomSelectAttributeIfText() {
         goTo(DEFAULT_URL);
         assertThat($("span", with("TEXT", "Pharmacy")).first().getTagName()).isEqualTo("span");
     }
-     @Test
+
+    @Test
     public void checkCustomSelectAttributeIfTextIsInLowerCase() {
         goTo(DEFAULT_URL);
         assertThat($("span", with("text", "Pharmacy")).first().getTagName()).isEqualTo("span");
     }
+
+    @Test
+    public void checkStartAttribute() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", withName(startsWith("na"))).first().getTagName()).isEqualTo("span");
+    }
+
+    @Test
+    public void checkStartAttributeMatcher() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", withName(startsWith(regex("na?")))).first().getTagName()).isEqualTo("span");
+    }
+
+    @Test
+    public void checkStartAttributeMatcherNotFind() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", withName(startsWith(regex("am"))))).hasSize(0);
+    }
+
+    @Test
+    public void checkEndAttribute() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", withName(endsWith("me")))).hasSize(1);
+        assertThat($("span", withName(endsWith("name"))).first().getTagName()).isEqualTo("span");
+    }
+
+    @Test
+    public void checkEndAttributeMatcher() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", withName(endsWith(regex("na[me]*")))).first().getTagName()).isEqualTo("span");
+    }
+
+    @Test
+    public void checkEndAttributeMatcherNotFind() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", withName(endsWith(regex("am?"))))).hasSize(0);
+    }
+
+
 }

@@ -6,7 +6,7 @@ package fr.java.freelance.fluentlenium.filter.matcher;
  * PostFilter are used after the webdriver selection to integration the collection
  */
 public enum MatcherType {
-    CONTAINS("*"), START_WITH("^"), END_WITH("$"), EQUAL(""), NOT_CONTAINS(null);
+    CONTAINS("*"), START_WITH("^"), END_WITH("$"), EQUAL(""), NOT_CONTAINS(null), NOT_START_WITH(null), NOT_END_WITH(null);
 
     private String cssRepresentations;
 

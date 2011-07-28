@@ -1,9 +1,6 @@
 package fr.java.freelance.fluentlenium.filter;
 
-import fr.java.freelance.fluentlenium.filter.matcher.ContainsMatcher;
-import fr.java.freelance.fluentlenium.filter.matcher.EqualMatcher;
-import fr.java.freelance.fluentlenium.filter.matcher.Matcher;
-import fr.java.freelance.fluentlenium.filter.matcher.NotContainsMatcher;
+import fr.java.freelance.fluentlenium.filter.matcher.*;
 
 import java.util.regex.Pattern;
 
@@ -24,17 +21,6 @@ public class FilterConstructor {
     }
 
     /**
-     * Create a integration by a customattribute
-     *
-     * @param customAttribute
-     * @param value
-     * @return
-     */
-    public static Filter with(String customAttribute,String value) {
-        return new Filter(FilterType.CUSTOM,customAttribute, value);
-    }
-
-    /**
      * Create a integration by id
      *
      * @param id
@@ -42,6 +28,17 @@ public class FilterConstructor {
      */
     public static Filter withId(String id) {
         return new Filter(FilterType.ID, id);
+    }
+
+    /**
+     * Create a integration by a customattribute
+     *
+     * @param customAttribute
+     * @param value
+     * @return
+     */
+    public static Filter with(String customAttribute, String value) {
+        return new Filter(FilterType.CUSTOM, customAttribute, value);
     }
 
     /**
@@ -61,9 +58,41 @@ public class FilterConstructor {
      * @return
      */
     public static Filter withName(Matcher matcher) {
-
         return new Filter(FilterType.NAME, matcher);
     }
+
+    /**
+     * Create a integration by id
+     *
+     * @param matcher
+     * @return
+     */
+    public static Filter withId(Matcher matcher) {
+        return new Filter(FilterType.ID, matcher);
+    }
+
+    /**
+     * Create a integration by text
+     *
+     * @param matcher
+     * @return
+     */
+    public static Filter withText(Matcher matcher) {
+        return new Filter(FilterType.TEXT, matcher);
+    }
+
+
+    /**
+     * Create a integration by a customattribute
+     *
+     * @param customAttribute
+     * @param matcher
+     * @return
+     */
+    public static Filter with(String customAttribute, Matcher matcher) {
+        return new Filter(FilterType.CUSTOM, customAttribute, matcher);
+    }
+
 
     public static Matcher contains(String matcher) {
         return new ContainsMatcher(matcher);
@@ -90,13 +119,42 @@ public class FilterConstructor {
 
     }
 
+    public static Matcher startsWith(String matcher) {
+        return new StartsWithMatcher(matcher);
+    }
+
+    public static Matcher startsWith(Pattern pattern) {
+        return new StartsWithMatcher(pattern);
+    }
+
+    public static Matcher endsWith(String matcher) {
+        return new EndsWithMatcher(matcher);
+    }
+
+    public static Matcher endsWith(Pattern pattern) {
+        return new EndsWithMatcher(pattern);
+    }
+
+    public static Matcher notStartsWith(String matcher) {
+        return new StartsWithMatcher(matcher);
+    }
+
+    public static Matcher notStartsWith(Pattern pattern) {
+        return new StartsWithMatcher(pattern);
+    }
+
+    public static Matcher notEndsWith(String matcher) {
+        return new EndsWithMatcher(matcher);
+    }
+
+    public static Matcher notEndsWith(Pattern pattern) {
+        return new EndsWithMatcher(pattern);
+    }
     /* public static Matcher notEqual(String matcher) {
         return new NotEquaMatcherl(matcher);
     }
 
-    public static Matcher startsWith(String matcher) {
-        return new BeginWithMatcher(matcher);
-    }
+
 
     public static Matcher notStartsWith(String matcher) {
         return new NotBeginWithMatcher(matcher);
@@ -110,23 +168,4 @@ public class FilterConstructor {
 */
 
 
-    /**
-     * Create a integration by id
-     *
-     * @param matcher
-     * @return
-     */
-    public static Filter withId(Matcher matcher) {
-        return new Filter(FilterType.ID, matcher);
-    }
-
-    /**
-     * Create a integration by text
-     *
-     * @param matcher
-     * @return
-     */
-    public static Filter withText(Matcher matcher) {
-        return new Filter(FilterType.TEXT, matcher);
-    }
 }

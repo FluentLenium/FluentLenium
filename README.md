@@ -60,22 +60,28 @@ You can also chained filters :
 find(".small",withName("foo"),withId("id1")) will return all the elements matching the 3 criterias : - class .small ,id id1 and name foo.
 
 If you want others precisions that just the css selector, just use our filters features.
-For now, you have two differents filters :
+For now, you have 6 differents filters :
 - contains
 - notContains
+- startsWith
+- notStartsWith
+- endsWith
+- notEndsWith
 
 For each of them, you can choose to use a css selector :
 <pre><code>
      find(".small", withName(notContains("name"))
-     find(".small", withId(notContains("id"))
-     find(".small", withText(notContains("Female")))
+     find(".small", withId(notStartsWith("id"))
+     find(".small", withText(endsWith("Female")))
 </code></pre>
 
 Or to be more precise, you can choose to use a regexp :
 <pre><code>
      find(".small", withName(contains(regex("na?me[0-9]*")))
-     find(".small", withName(notContains(regex("na?me[0-9]*")))
+     find(".small", withName(notStartsWith(regex("na?me[0-9]*")))
 </code></pre>
+
+Contains, startsWith and endsWith with a regexp pattern are looking for a subsect of the pattern.
 
 Of course, if you are a regexp jedi, that's not needed !
 
@@ -96,6 +102,7 @@ Of course, you can use both position filter and custom filter :
 <pre><code>
      find(myCssSelector,2,withName("foo"))
 </code></pre>
+
 
 #### Find on children
      You can also chained the find call :
