@@ -8,6 +8,7 @@ import fr.java.freelance.fluentlenium.domain.FluentWebElement;
 import fr.java.freelance.fluentlenium.filter.Filter;
 import fr.java.freelance.fluentlenium.filter.FilterPredicate;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 
@@ -35,7 +36,7 @@ public class Search implements SearchActions {
         List<Filter> postFilterSelector = new ArrayList<Filter>();
         if (filters != null) {
             for (Filter selector : filters) {
-                if (selector.isPreFilter() ) {
+                if (selector.isPreFilter()) {
                     sb.append(selector.toString());
                 } else {
                     postFilterSelector.add(selector);
@@ -70,6 +71,9 @@ public class Search implements SearchActions {
      */
     public FluentWebElement find(String name, Integer number, final Filter... filters) {
         List<FluentWebElement> listFiltered = find(name, filters);
+        if (number >= listFiltered.size()) {
+            throw new NoSuchElementException("No such element with position :" + number + ". Number of elements available :" + listFiltered.size());
+        }
         return listFiltered.get(number);
     }
 

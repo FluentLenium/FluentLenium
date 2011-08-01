@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import fr.java.freelance.fluentlenium.action.FluentDefaultActions;
 import fr.java.freelance.fluentlenium.filter.Filter;
+import fr.java.freelance.fluentlenium.search.Search;
 import fr.java.freelance.fluentlenium.search.SearchActions;
 import org.openqa.selenium.NoSuchElementException;
 
