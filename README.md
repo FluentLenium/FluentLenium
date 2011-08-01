@@ -119,6 +119,8 @@ If you need to click, fill, submit or clean an element or a list of element, jus
 ### Fill
 fill("input").with("bar") OR $("input").text("bar") will fill all the element with tag input with bar.
 
+fill("input").with("myLogin","myPassword") will fill the first elements of the input selection with myLogin, the second with myPassword. If there are a third input, the last value (myPassword) will be repeat again and again.
+
 Don't forget, only the visible field will be modified. It simulates your action in a browser !
 
 #### Click
