@@ -4,7 +4,6 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import fr.java.freelance.fluentlenium.action.FluentDefaultActions;
 import fr.java.freelance.fluentlenium.filter.Filter;
-import fr.java.freelance.fluentlenium.search.Search;
 import fr.java.freelance.fluentlenium.search.SearchActions;
 import org.openqa.selenium.NoSuchElementException;
 
@@ -156,7 +155,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      * @return
      */
     public FluentList find(String name, Filter... filters) {
-        final FluentList aggregateAllResults = new FluentList(new ArrayList<E>());
+        final FluentList<E> aggregateAllResults = new FluentList(new ArrayList<E>());
         for (E e : this) {
             aggregateAllResults.addAll(e.find(name, filters));
         }
@@ -173,6 +172,9 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      */
     public E find(String name, Integer number, Filter... filters) {
         FluentList<E> fluentList = find(name, filters);
+        if (number >= fluentList.size()) {
+            throw new NoSuchElementException("No such element with position :" + number + ". Number of elements available :" + fluentList.size());
+        }
         return fluentList.get(number);
     }
 

@@ -11,11 +11,11 @@ import org.openqa.selenium.WebElement;
  */
 public class FluentWebElement implements FluentDefaultActions, SearchActions {
     private final WebElement webElement;
-    private final Search searchContext;
+    private final Search search;
 
     public FluentWebElement(WebElement webElement) {
         this.webElement = webElement;
-        this.searchContext = new Search(webElement);
+        this.search = new Search(webElement);
     }
 
     /**
@@ -90,7 +90,7 @@ public class FluentWebElement implements FluentDefaultActions, SearchActions {
      * @return
      */
     public FluentList find(String name, Filter... filters) {
-        return searchContext.find(name, filters);
+        return search.find(name, filters);
     }
 
     /**
@@ -101,7 +101,7 @@ public class FluentWebElement implements FluentDefaultActions, SearchActions {
      * @return
      */
     public FluentWebElement find(String name, Integer number, Filter... filters) {
-        return searchContext.find(name, number, filters);
+        return search.find(name, number, filters);
     }
 
     /**
@@ -112,6 +112,6 @@ public class FluentWebElement implements FluentDefaultActions, SearchActions {
      * @return
      */
     public FluentWebElement findFirst(String name, Filter... filters) {
-        return searchContext.findFirst(name, filters);
+        return search.findFirst(name, filters);
     }
 }
