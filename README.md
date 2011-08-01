@@ -193,8 +193,11 @@ public void checkLoginFailed() {
 }
 </code></pre>
 
-## Custom Driver
+## Customize FluentLenium
+###Driver
 If you need to change your driver, just override the getDefaultDriver in your test. You can use every driver
+###TimeOut
+Just override getDefaultWait in your test.
 
 ## FluentLenium and others framework
 ### jUnit

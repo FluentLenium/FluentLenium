@@ -8,6 +8,7 @@ import fr.java.freelance.fluentlenium.filter.Filter;
 import fr.java.freelance.fluentlenium.search.Search;
 import fr.java.freelance.fluentlenium.search.SearchActions;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class Fluent implements SearchActions {
     private WebDriver driver;
     private Search search;
+    private WebDriverWait wait;
 
     public Fluent(WebDriver driver) {
         this.driver = driver;
@@ -33,6 +35,14 @@ public class Fluent implements SearchActions {
 
     protected WebDriver getDriver() {
         return driver;
+    }
+
+    public WebDriverWait getWait() {
+        return wait;
+    }
+
+    public void setWait(WebDriverWait wait) {
+        this.wait = wait;
     }
 
     /**
