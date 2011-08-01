@@ -4,9 +4,56 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>FluentLenium</groupId>
+    <groupId>fr.javafreelance.FluentLenium</groupId>
     <artifactId>FluentLenium</artifactId>
     <version>0.1-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <configuration>
+                    <stopKey>STOP</stopKey>
+                    <stopPort>8686</stopPort>
+                    <connectors>
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>8585</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
+                    <contextHandlers>
+                        <contextHandler implementation="org.eclipse.jetty.server.handler.ContextHandler">
+                            <contextPath>/static</contextPath>
+                            <resourceBase>src/test/html</resourceBase>
+                            <welcomeFiles>
+                                <param>index.html</param>
+                            </welcomeFiles>
+                            <handler implementation="org.eclipse.jetty.server.handler.ResourceHandler"/>
+                        </contextHandler>
+                    </contextHandlers>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>start-jetty</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <daemon>true</daemon>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop-jetty</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -23,7 +70,6 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
             <version>7.2.2.v20101205</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.easytesting</groupId>
@@ -37,15 +83,6 @@
             <version>1.8.5</version>
         </dependency>
     </dependencies>
-    <!--  <build>
-        <plugins>
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty-plugin</artifactId>
-                <configuration>
-                    <jettyConfig>etc/jetty.xml</jettyConfig>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>-->
+
+
 </project>

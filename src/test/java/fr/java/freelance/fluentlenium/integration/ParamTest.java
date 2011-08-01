@@ -11,13 +11,13 @@ public class ParamTest extends LocalFluentTest {
 
     @Test
     public void checkTitleParam() {
-        goTo("http://localhost:8585");
+        goTo(DEFAULT_URL);
         assertThat(title()).contains("Selenium");
     }
 
     @Test
     public void checkUrlParam() {
         goTo(DEFAULT_URL);
-        assertThat(url()).isEqualTo("http://localhost:8585/");
+        assertThat(url()).isEqualTo(DEFAULT_URL);
     }
 }
