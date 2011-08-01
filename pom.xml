@@ -10,6 +10,39 @@
     <build>
         <plugins>
             <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/unit/**</exclude>
+                        <exclude>**/integration/**$**</exclude>
+                    </excludes>
+                    <includes>
+                        <include>**/integration/**</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/integration/**</exclude>
+                    </excludes>
+                    <includes>
+                        <include>**/unit/**</include>
+                    </includes>
+                </configuration>
+
+            </plugin>
+            <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
@@ -35,7 +68,7 @@
                 <executions>
                     <execution>
                         <id>start-jetty</id>
-                        <phase>test-compile</phase>
+                        <phase>pre-integration-test</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
@@ -45,7 +78,7 @@
                     </execution>
                     <execution>
                         <id>stop-jetty</id>
-                        <phase>test</phase>
+                        <phase>post-integration-test</phase>
                         <goals>
                             <goal>stop</goal>
                         </goals>

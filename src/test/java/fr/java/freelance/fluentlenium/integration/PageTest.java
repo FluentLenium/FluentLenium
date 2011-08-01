@@ -1,7 +1,7 @@
 package fr.java.freelance.fluentlenium.integration;
 
 import fr.java.freelance.fluentlenium.core.FluentPage;
-import fr.java.freelance.fluentlenium.integration.localTest.LocalFluentTest;
+import fr.java.freelance.fluentlenium.integration.localTest.LocalFluentCase;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +10,7 @@ import static fr.java.freelance.fluentlenium.core.FluentPage.assertAt;
 import static fr.java.freelance.fluentlenium.core.FluentPage.go;
 import static org.fest.assertions.Assertions.assertThat;
 
-public class PageTest extends LocalFluentTest {
+public class PageTest extends LocalFluentCase {
 
     public class PageAccueil extends FluentPage {
 

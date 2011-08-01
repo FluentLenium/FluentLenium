@@ -3,12 +3,12 @@ package fr.java.freelance.fluentlenium.integration;
 
 import fr.java.freelance.fluentlenium.domain.FluentList;
 import fr.java.freelance.fluentlenium.domain.FluentWebElement;
-import fr.java.freelance.fluentlenium.integration.localTest.LocalFluentTest;
+import fr.java.freelance.fluentlenium.integration.localTest.LocalFluentCase;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class SearchTest extends LocalFluentTest {
+public class SearchTest extends LocalFluentCase {
 
     @Test
     public void checkSearchWorks() {

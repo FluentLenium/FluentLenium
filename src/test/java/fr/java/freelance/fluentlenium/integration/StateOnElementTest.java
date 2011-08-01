@@ -1,11 +1,11 @@
 package fr.java.freelance.fluentlenium.integration;
 
-import fr.java.freelance.fluentlenium.integration.localTest.LocalFluentTest;
+import fr.java.freelance.fluentlenium.integration.localTest.LocalFluentCase;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class StateOnElementTest extends LocalFluentTest {
+public class StateOnElementTest extends LocalFluentCase {
 
     @Test
     public void checkIsEnabled() {
