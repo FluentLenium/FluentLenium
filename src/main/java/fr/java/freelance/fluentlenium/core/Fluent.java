@@ -7,6 +7,7 @@ import fr.java.freelance.fluentlenium.domain.FluentWebElement;
 import fr.java.freelance.fluentlenium.filter.Filter;
 import fr.java.freelance.fluentlenium.search.Search;
 import fr.java.freelance.fluentlenium.search.SearchActions;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -63,6 +64,18 @@ public class Fluent implements SearchActions {
         return driver.getCurrentUrl();
     }
 
+    /**
+     * Return the source of the page
+     *
+     * @return
+     */
+    protected String pageSource() {
+        return driver.getPageSource();
+    }
+
+    public void executeScript(String script) {
+        ((JavascriptExecutor) driver).executeScript(script);
+    }
 
     /**
      * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions

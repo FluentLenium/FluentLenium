@@ -34,6 +34,9 @@ assertThat(title()).isEqualTo("Hello toto");</code></pre>
 
 Both syntax are equivalent. $ or find methods are aliases.
 
+### Basic Methods
+You can use url() , title() or pageSource() to get the url, the title or the page source of the current page.
+
 ### JQuery Selector
 #### Default Selector
 You can use CSS1, CSS2 and CSS3 selector with the same restrictions as in Selenium.
@@ -192,6 +195,12 @@ public void checkLoginFailed() {
   assertThat($(".error")).hasSize(1);
 }
 </code></pre>
+## Execute javascript
+If you need to execute some javascript, just call executeScript with your script as parameter.
+For example, if you have a javascript method called change and you want to call them just add this in your test :
+  <pre><code>
+         executeScript("change();");
+ </code></pre>
 
 ## Customize FluentLenium
 ###Driver

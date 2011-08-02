@@ -14,7 +14,6 @@ public abstract class FluentTest extends Fluent {
     public FluentTest() {
         super();
         this.setDriver(getDefaultDriver());
-        this.setWait(getDefaultWait());
     }
 
     /**
@@ -27,7 +26,7 @@ public abstract class FluentTest extends Fluent {
     }
 
     public WebDriverWait getDefaultWait() {
-        return new WebDriverWait(getDefaultDriver(), 30);
+        return new WebDriverWait(getDefaultDriver(), 5);
     }
 
     /**
@@ -42,7 +41,8 @@ public abstract class FluentTest extends Fluent {
 
     @After
     public void after() {
-        getDriver().close();
+
+        getDriver().quit();
     }
 
 

@@ -20,4 +20,10 @@ public class ParamTest extends LocalFluentCase {
         goTo(DEFAULT_URL);
         assertThat(url()).isEqualTo(DEFAULT_URL);
     }
+
+    @Test
+    public void checkPageSource() {
+        goTo(DEFAULT_URL);
+        assertThat(pageSource()).contains("<body name=\"body\" style=\"\">");
+    }
 }
