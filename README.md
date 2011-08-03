@@ -15,7 +15,7 @@ But there is also some project working on android etc ...
 ## Basic
 
 Launching the first test.
-Your Test Class may extend fr.java.freelance.fluentlenium.core.test.FluentTest By default, it use FirefoxWebDriver to launch all tests.
+Your Test Class may extend fr.javafreelance.fluentlenium.core.test.FluentTest By default, it use FirefoxWebDriver to launch all tests.
 After that, all your test methods will be able to be tested into a browser.
 The syntaxes offers directly by Selenium are quite a bit too verbose. FluentLenium proposes two differents syntaxes to easily launch tests.
 For examples, if you want to go to an adresse, fill a form and click to a button to submit and tests that the title of the page have changed
@@ -151,7 +151,7 @@ Page Pattern will inclosing all the pumbling, which make tests a lot easier to r
 Try to construct your Page thinking that it is better if you offert services from your page rather that just the internals of the page.
 A Page Object can modelized the whole page or just a part of it.
 
-To construct a Page, it have to extends fr.java.freelance.fluentlenium.core.FluentPage.
+To construct a Page, it have to extends fr.javafreelance.fluentlenium.core.FluentPage.
 In most of the cases, you have to defined the url of the page with overriding the getUrl methods.
 In that way, you can go in your test to that page with goTo(myPage)
 
@@ -234,4 +234,27 @@ assertThat(title()).isEqualTo("Hello toto");
  click("#create-button");
  assertThat(title(),equalTo("Hello toto"));
 </code></pre>
+
+### Full example using Fest-Assert assertion framework
+<pre><code>
+package fr.javafreelance.integration;
+
+import fr.javafreelance.integration.localTest.LocalFluentCase;
+import org.junit.Test;
+
+import static org.fest.assertions.Assertions.assertThat;
+
+public class BingTest extends LocalFluentCase {
+
+    @Test
+    public void title_of_bing_should_contain_search_query_name() {
+        goTo("http://www.bing.com");
+        fill("#sb_form_q").with("FluentLenium");
+        submit("#sb_form_go");
+        assertThat(title()).contains("FluentLenium");
+    }
+
+}
+</code></pre>
+
 
