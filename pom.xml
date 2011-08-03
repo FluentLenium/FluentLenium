@@ -17,7 +17,7 @@
 
     <scm>
         <url>https://github.com/MathildeLemee/FluentLenium</url>
-        <connection>scm:git:git://github.com/MathildeLemee/FluentLenium</connection>
+        <connection>scm:git:git@github.com:MathildeLemee/FluentLenium.git</connection>
     </scm>
 
     <licenses>
