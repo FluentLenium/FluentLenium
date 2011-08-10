@@ -3,9 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.javafreelance.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
-
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
     <modules>
         <module>fluentlenium-core</module>
         <module>fluentlenium-festassert</module>
@@ -24,6 +28,7 @@
     <scm>
         <url>https://github.com/MathildeLemee/FluentLenium</url>
         <connection>scm:git:git@github.com:MathildeLemee/FluentLenium.git</connection>
+        <developerConnection>scm:git:git@github.com:MathildeLemee/FluentLenium.git</developerConnection>
     </scm>
 
     <licenses>
