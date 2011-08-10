@@ -4,6 +4,7 @@ import fr.javafreelance.fluentlenium.core.action.FluentDefaultActions;
 import fr.javafreelance.fluentlenium.core.filter.Filter;
 import fr.javafreelance.fluentlenium.core.search.Search;
 import fr.javafreelance.fluentlenium.core.search.SearchActions;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -39,6 +40,11 @@ public class FluentWebElement implements FluentDefaultActions, SearchActions {
         webElement.submit();
     }
 
+    /**
+     * Set the text elelent
+     *
+     * @param text
+     */
     public void text(String... text) {
         webElement.clear();
         if (text.length != 0) {
@@ -46,40 +52,95 @@ public class FluentWebElement implements FluentDefaultActions, SearchActions {
         }
     }
 
+    /**
+     * return the name of the element
+     *
+     * @return
+     */
     public String getName() {
         return webElement.getAttribute("name");
     }
 
+    /**
+     * return any value of custom attribute (generated=true will return "true" if getAttribute("generated") is called.
+     *
+     * @param attribute
+     * @return
+     */
     public String getAttrbibute(String attribute) {
         return webElement.getAttribute(attribute);
     }
 
+    /**
+     * return the id of the elements
+     *
+     * @return
+     */
     public String getId() {
         return webElement.getAttribute("id");
     }
 
+    /**
+     * return the text of the element
+     *
+     * @return
+     */
     public String getText() {
         return webElement.getText();
     }
 
+    /**
+     * return the value of the elements
+     *
+     * @return
+     */
     public String getValue() {
         return webElement.getAttribute("value");
     }
 
+    /**
+     * return true if the element is displayed, otherway return false
+     *
+     * @return
+     */
     public boolean isDisplayed() {
         return webElement.isDisplayed();
     }
 
+    /**
+     * return true if the element is enabled, otherway return false
+     *
+     * @return
+     */
     public boolean isEnabled() {
         return webElement.isEnabled();
     }
 
+    /**
+     * return true if the element is selected, otherway false
+     *
+     * @return
+     */
     public boolean isSelected() {
         return webElement.isSelected();
     }
 
+    /**
+     * return the tag name
+     *
+     * @return
+     */
     public String getTagName() {
         return webElement.getTagName();
+    }
+
+    /**
+     * return the size of the elements
+     *
+     * @return
+     */
+    public Dimension getSize() {
+        return webElement.getSize();
     }
 
     /**

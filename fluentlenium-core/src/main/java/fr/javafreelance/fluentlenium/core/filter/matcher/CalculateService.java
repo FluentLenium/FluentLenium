@@ -3,6 +3,9 @@ package fr.javafreelance.fluentlenium.core.filter.matcher;
 
 import java.util.regex.Pattern;
 
+/**
+ * Static class that are in charge of analyzed the filter and matcher.
+ */
 public final class CalculateService {
     private CalculateService() {
     }

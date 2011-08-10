@@ -237,14 +237,11 @@ assertThat(title()).isEqualTo("Hello toto");
 
 ### Full example using Fest-Assert assertion framework
 <pre><code>
-package fr.javafreelance.integration;
-
-import fr.javafreelance.integration.localTest.LocalFluentCase;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class BingTest extends LocalFluentCase {
+public class BingTest extends FluentTest {
 
     @Test
     public void title_of_bing_should_contain_search_query_name() {

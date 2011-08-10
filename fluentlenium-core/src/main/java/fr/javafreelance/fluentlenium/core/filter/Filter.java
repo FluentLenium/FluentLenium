@@ -3,6 +3,7 @@ package fr.javafreelance.fluentlenium.core.filter;
 import fr.javafreelance.fluentlenium.core.filter.matcher.EqualMatcher;
 import fr.javafreelance.fluentlenium.core.filter.matcher.Matcher;
 
+
 public class Filter {
     private final String attribut;
     private final Matcher matcher;

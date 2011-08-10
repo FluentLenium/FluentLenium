@@ -36,7 +36,13 @@ public abstract class Matcher {
 
     protected abstract MatcherType getMatcherType();
 
-    public abstract boolean isSatisfiedBy(String o);
+    /**
+     * Check if the matcher is matched given the value
+     *
+     * @param value
+     * @return
+     */
+    public abstract boolean isSatisfiedBy(String value);
 
 
 }
