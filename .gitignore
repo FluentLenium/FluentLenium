@@ -1,3 +1,6 @@
 **.iml
 **.ipr
 **.iws
+**.DS_Store
+**.class
+**/target/**

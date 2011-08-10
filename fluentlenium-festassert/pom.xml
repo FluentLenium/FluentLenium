@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>fr.javafreelance.fluentlenium</groupId>
+        <artifactId>fluentlenium-parent</artifactId>
+        <version>0.2-SNAPSHOT</version>
+    </parent>
+    <groupId>fr.javafreelance.fluentlenium</groupId>
+    <artifactId>fluentlenium-festassert</artifactId>
+    <packaging>jar</packaging>
+
+    <name>FluentLenium Fest Assert</name>
+    <description>Fest Assert Extension for FluentLenium
+    </description>
+    <url>https://github.com/MathildeLemee/FluentLenium</url>
+
+    <scm>
+        <url>https://github.com/MathildeLemee/FluentLenium</url>
+        <connection>scm:git:git@github.com:MathildeLemee/FluentLenium.git</connection>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>AConsulting</name>
+        <url>http://www.java-freelance.fr</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>Mlemee</id>
+            <name>Mathilde Lemee</name>
+            <email>mathilde.lemee@gmail.com</email>
+            <url>http://www.java-freelance.fr</url>
+            <organization>AConsulting</organization>
+            <organizationUrl>http://www.java-freelance.fr</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <dependencies>
+        <dependency>
+            <groupId>fr.javafreelance.fluentlenium</groupId>
+            <artifactId>fluentlenium-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-assert</artifactId>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+</project>
