@@ -2,16 +2,10 @@ package integration;
 
 import fr.javafreelance.integration.localTest.LocalFluentCase;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static org.fest.assertions.fluentlenium.FluentWebElementAssert.assertThat;
 
 public class FluentWebElementFestAssertTest extends LocalFluentCase {
-    @Override
-    public WebDriver getDefaultDriver() {
-        return new FirefoxDriver();
-    }
 
     @Test
     public void testIsEnabledOk() throws Exception {
