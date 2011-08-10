@@ -1,4 +1,4 @@
-package fr.javafreelance.fluentlenium.festassert;
+package integration;
 
 import fr.javafreelance.integration.localTest.LocalFluentCase;
 import org.junit.Test;

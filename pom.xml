@@ -97,7 +97,9 @@
                         <exclude>**/integration/**$**</exclude>
                         <exclude>**/integration/**SourceLabs**</exclude>
                     </excludes>
-
+                    <includes>
+                        <include>**/integration/**</include>
+                    </includes>
                 </configuration>
                 <executions>
                     <execution>

@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: test.java.fr.javafreelance.unit.PreFilterAnalyse
--------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec
