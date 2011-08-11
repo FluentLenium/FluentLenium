@@ -34,6 +34,34 @@ assertThat(title()).isEqualTo("Hello toto");</code></pre>
 
 Both syntax are equivalent. $ or find methods are aliases.
 
+## Maven
+
+To add FluentLenium to your project, just add the following dependency into your pom.xml :
+<pre><code>
+&lt;dependencies&gt;
+    ...
+    &lt;dependency&gt;
+        &lt;groupId&gt;fr.javafreelance.fluentlenium&lt;/groupId&gt;
+        &lt;artifactId&gt;fluentlenium&lt;/artifactId&gt;
+        &lt;version&gt;0.3&lt;/version&gt;
+    &lt;/dependency&gt;
+    ...
+&lt;/dependencies&gt;
+ </code></pre>
+
+This dependency include the core of the framework and a fest-assert tool. If you don't need the fest-assert tool, you can grab only the core :
+ <pre><code>
+ &lt;dependencies&gt;
+     ...
+     &lt;dependency&gt;
+         &lt;groupId&gt;fr.javafreelance.fluentlenium&lt;/groupId&gt;
+         &lt;artifactId&gt;fluentlenium-core&lt;/artifactId&gt;
+         &lt;version&gt;0.3&lt;/version&gt;
+     &lt;/dependency&gt;
+     ...
+ &lt;/dependencies&gt;
+
+</code></pre>
 ### Basic Methods
 You can use url() , title() or pageSource() to get the url, the title or the page source of the current page.
 
