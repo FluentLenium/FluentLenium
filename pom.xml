@@ -178,27 +178,7 @@
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.mycila.maven-license-plugin</groupId>
-                <artifactId>maven-license-plugin</artifactId>
-                <version>1.8.0</version>
-                <configuration>
-                    <strictCheck>true</strictCheck>
-                    <header>src/main/assembly/header.txt</header>
-                    <failIfMissing>true</failIfMissing>
-                    <aggregate>true</aggregate>
 
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>check-headers</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <artifactId>maven-remote-resources-plugin</artifactId>
                 <version>1.1</version>
