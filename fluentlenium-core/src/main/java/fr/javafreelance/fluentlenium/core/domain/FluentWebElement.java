@@ -81,7 +81,7 @@ public class FluentWebElement implements FluentDefaultActions, SearchActions {
      * @param attribute
      * @return
      */
-    public String getAttrbibute(String attribute) {
+    public String getAttribute(String attribute) {
         return webElement.getAttribute(attribute);
     }
 
