@@ -24,6 +24,7 @@ public class ActionOnListTest extends LocalFluentCase {
     @Test
     public void checkFillAction() {
         goTo(DEFAULT_URL);
+        System.out.println(this.pageSource());
         $("input").text("zzz");
         assertThat($("input").getValues()).contains("zzz");
     }

@@ -15,22 +15,88 @@
 package fr.javafreelance.fluentlenium.core.test;
 
 import fr.javafreelance.fluentlenium.core.Fluent;
+import fr.javafreelance.fluentlenium.core.FluentPage;
+import fr.javafreelance.fluentlenium.core.annotation.Page;
+import fr.javafreelance.fluentlenium.core.exception.ConstructionException;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+
 /**
  * All Junit Test should extends this class. It provides default parameters.
  */
 public abstract class FluentTest extends Fluent {
-     @Before
-     public final void before(){
-         this.setDriver(getDefaultDriver());
-     }
+    @Before
+    public final void beforeConstructTest() {
+        this.setDriver(getDefaultDriver());
+        Class cls = null;
+        try {
+            cls = Class.forName(this.getClass().getName());
+            for (Field field : cls.getDeclaredFields()) {
+                if (field.isAnnotationPresent(Page.class)) {
+                    field.setAccessible(true);
+                    Class clsField = field.getType();
+                    System.out.println(Arrays.toString(clsField.getDeclaredConstructors()));
+                    cls = Class.forName(clsField.getName());
+                    Object retobj = initClasse(cls);
+                    field.set(this, retobj);
+                }
+            }
+
+
+        } catch (ClassNotFoundException e) {
+            throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
+        } catch (IllegalAccessException e) {
+            throw new ConstructionException("IllegalAccessException on class " + (cls != null ? cls.getName() : " null"), e);
+        }
+    }
+
     public FluentTest() {
         super();
+    }
+
+    public <T extends FluentPage> T createPage(Class<? extends FluentPage> classOfPage) {
+        T retobj = null;
+        Class cls = null;
+        try {
+            cls = Class.forName(classOfPage.getName());
+        } catch (ClassNotFoundException e) {
+            throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
+        }
+        retobj = initClasse(cls);
+        return retobj;
+    }
+
+    private <T extends FluentPage> T initClasse(Class cls) {
+        T retobj = null;
+        try {
+            Constructor construct = cls.getDeclaredConstructor();
+            construct.setAccessible(true);
+            retobj = (T) construct.newInstance();
+            Class parent = Class.forName(Fluent.class.getName());
+            Method m = parent.getDeclaredMethod("setDriver", WebDriver.class);
+            m.setAccessible(true);
+            m.invoke(retobj, getDriver());
+        } catch (ClassNotFoundException e) {
+            throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
+        } catch (IllegalAccessException e) {
+            throw new ConstructionException("IllegalAccessException on class " + (cls != null ? cls.getName() : " null"), e);
+        } catch (NoSuchMethodException e) {
+            throw new ConstructionException("No constructor found on class " + (cls != null ? cls.getName() : " null"), e);
+        } catch (InstantiationException e) {
+            throw new ConstructionException("Unable to instantiate " + (cls != null ? cls.getName() : " null"), e);
+        } catch (InvocationTargetException e) {
+            throw new ConstructionException("Cannot invoke method setDriver on " + (cls != null ? cls.getName() : " null"), e);
+        }
+        return retobj;
     }
 
     /**

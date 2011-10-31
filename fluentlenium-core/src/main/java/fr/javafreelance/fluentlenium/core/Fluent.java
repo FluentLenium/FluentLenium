@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Util Class which offers some shortcut to webdriver methods
  */
-public class Fluent implements SearchActions {
+public abstract class Fluent implements SearchActions {
     private WebDriver driver;
     private Search search;
     private WebDriverWait wait;
