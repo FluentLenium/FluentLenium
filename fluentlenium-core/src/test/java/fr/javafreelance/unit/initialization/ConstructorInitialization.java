@@ -12,7 +12,7 @@
  * limitations under the License
  */
 
-package fr.javafreelance.unit;
+package fr.javafreelance.unit.initialization;
 
 import fr.javafreelance.fluentlenium.core.test.FluentTest;
 import org.junit.Test;
@@ -23,6 +23,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ConstructorInitialization extends FluentTest {
     public WebDriver webDriver = new HtmlUnitDriver();
+
 
 
     @Test

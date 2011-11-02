@@ -28,7 +28,7 @@ public class BeforeInitialization extends FluentTest {
 
      @Before
      public void beforeTest() {
-          page2  = createPage(TestExternalPage.class);
+         page2  = createPage(TestExternalPage.class);
          page  = createPage(TestPrivatePage2.class);
      }
     @Test
