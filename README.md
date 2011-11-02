@@ -199,9 +199,6 @@ Create you owm methods to easily fill form, go to a next page or whatesle can be
 For exemple :
 <pre><code>
 public class LoginPage extends FluentPage {
-     public LoginPage(WebDriver driver) {
-        super(driver);
-    }
     public String getUrl() {
         return "myCustomUrl";
     }
@@ -223,6 +220,57 @@ public void checkLoginFailed() {
   assertThat($(".error")).hasSize(1);
 }
 </code></pre>
+
+##Page usage
+You can use the annotation @Page to define your page easily.
+
+For example :
+<pre><code>public class AnnotationInitialization extends FluentTest {
+    public WebDriver webDriver = new HtmlUnitDriver();
+
+    @Page
+    public TestPage2 page2;
+
+
+    @Test
+    public void test_no_exception() {
+        goTo(page2);
+        //put your assertions here
+    }
+
+
+    @Override
+    public WebDriver getDefaultDriver() {
+        return webDriver;
+    }
+
+}
+</code></pre>
+
+You can also used the factory createPage
+<pre><code>
+    public class BeforeInitialization extends FluentTest {
+        public WebDriver webDriver = new HtmlUnitDriver();
+        public TestPage2 page;
+
+         @Before
+         public void beforeTest() {
+              page  = createPage(TestPage2.class);
+         }
+        @Test
+        public void test_no_exception() {
+            page.go();
+        }
+
+
+        @Override
+        public WebDriver getDefaultDriver() {
+            return webDriver;
+        }
+
+    }
+</pre></code>
+
 ## Execute javascript
 If you need to execute some javascript, just call executeScript with your script as parameter.
 For example, if you have a javascript method called change and you want to call them just add this in your test :
