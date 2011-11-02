@@ -283,3 +283,5 @@ public class BingTest extends FluentTest {
 </code></pre>
 
 
+### Built by CloudBees
+<img src='http://web-static-cloudfront.s3.amazonaws.com/images/badges/BuiltOnDEV.png'/>
