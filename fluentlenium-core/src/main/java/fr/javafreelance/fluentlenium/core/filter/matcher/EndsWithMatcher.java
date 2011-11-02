@@ -33,6 +33,6 @@ public class EndsWithMatcher extends Matcher {
 
     public boolean isSatisfiedBy(String o) {
         return CalculateService.endsWith(getPattern(), getValue(), o);
-}
+    }
 
 }

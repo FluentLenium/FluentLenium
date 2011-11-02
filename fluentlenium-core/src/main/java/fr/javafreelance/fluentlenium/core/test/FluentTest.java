@@ -118,7 +118,25 @@ public abstract class FluentTest extends Fluent {
      * @param url
      */
     public void goTo(String url) {
+        if (url == null) {
+            throw new IllegalArgumentException("Url is mandatory");
+        }
         getDriver().get(url);
+    }
+
+    /**
+     * Go To the  page
+     *
+     * @param page
+     */
+    public void goTo(FluentPage page) {
+        if (page == null) {
+            throw new IllegalArgumentException("Page is mandatory");
+        }
+        if (page.getUrl() == null) {
+            throw new IllegalArgumentException("Url is not defined for page " + page.getClass().getName());
+        }
+        getDriver().get(page.getUrl());
     }
 
 

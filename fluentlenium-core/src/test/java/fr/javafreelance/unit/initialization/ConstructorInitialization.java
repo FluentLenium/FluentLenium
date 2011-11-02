@@ -25,10 +25,9 @@ public class ConstructorInitialization extends FluentTest {
     public WebDriver webDriver = new HtmlUnitDriver();
 
 
-
     @Test
     public void do_not_use_overridable_methods_in_a_constructor() {
-        assertEquals( webDriver,this.getDriver());
+        assertEquals(webDriver, this.getDriver());
     }
 
 

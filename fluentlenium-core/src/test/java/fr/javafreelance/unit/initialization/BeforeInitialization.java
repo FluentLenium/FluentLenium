@@ -26,11 +26,12 @@ public class BeforeInitialization extends FluentTest {
     public TestExternalPage page2;
     public TestPrivatePage2 page;
 
-     @Before
-     public void beforeTest() {
-         page2  = createPage(TestExternalPage.class);
-         page  = createPage(TestPrivatePage2.class);
-     }
+    @Before
+    public void beforeTest() {
+        page2 = createPage(TestExternalPage.class);
+        page = createPage(TestPrivatePage2.class);
+    }
+
     @Test
     public void test_no_exception() {
         page.go();
@@ -43,10 +44,13 @@ public class BeforeInitialization extends FluentTest {
     }
 
 
-}       class TestPrivatePage2 extends FluentPage {
+}
+
+class TestPrivatePage2 extends FluentPage {
 
 
     @Override
     public String getUrl() {
         return "http://www.google.fr";
-    } }
+    }
+}

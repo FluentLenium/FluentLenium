@@ -32,7 +32,7 @@ public class StartsWithMatcher extends Matcher {
     }
 
     public boolean isSatisfiedBy(String o) {
-       return CalculateService.startsWith(getPattern(), getValue(), o);
+        return CalculateService.startsWith(getPattern(), getValue(), o);
     }
 
 }

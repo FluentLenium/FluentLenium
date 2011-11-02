@@ -28,14 +28,15 @@ public class AnnotationInitialization extends FluentTest {
     public TestExternalPage page2;
 
     @Page
-        public TestPrivatePage page;
+    public TestPrivatePage page;
 
 
     @Test
     public void test_no_exception() {
         page2.go();
     }
-     @Test
+
+    @Test
     public void test_no_exception_when_inner_class() {
         page2.go();
     }
@@ -48,8 +49,7 @@ public class AnnotationInitialization extends FluentTest {
 }
 
 
-
- class TestPrivatePage extends FluentPage {
+class TestPrivatePage extends FluentPage {
 
 
     @Override

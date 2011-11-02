@@ -24,6 +24,7 @@ public abstract class FluentPage extends Fluent {
     public FluentPage() {
         super();
     }
+
     public FluentPage(WebDriver driver) {
         super(driver);
     }

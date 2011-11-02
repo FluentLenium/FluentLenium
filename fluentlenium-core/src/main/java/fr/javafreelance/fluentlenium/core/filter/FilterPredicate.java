@@ -30,7 +30,7 @@ public class FilterPredicate implements Predicate<FluentWebElement> {
     public boolean apply(FluentWebElement webElementCustom) {
 
         String attribute = returnTextIfTextAttributeElseAttributeValue(webElementCustom);
-        if (filter!=null&&filter.getMatcher().isSatisfiedBy(attribute)) {
+        if (filter != null && filter.getMatcher().isSatisfiedBy(attribute)) {
             return true;
         }
         return false;

@@ -32,7 +32,7 @@ public class NotContainsMatcher extends Matcher {
     }
 
     public boolean isSatisfiedBy(String o) {
-       return !CalculateService.contains(getPattern(), getValue(), o);
+        return !CalculateService.contains(getPattern(), getValue(), o);
     }
 
 }

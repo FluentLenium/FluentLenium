@@ -58,7 +58,7 @@ public class PreFilterAnalyse {
         assertThat(filter.isPreFilter()).isFalse();
     }
 
-     @Test
+    @Test
     public void checkFilterIsNotPreFilterElligibleCauseText() {
         Filter filter = new Filter(FilterType.TEXT, "1");
         assertThat(filter.isPreFilter()).isFalse();
