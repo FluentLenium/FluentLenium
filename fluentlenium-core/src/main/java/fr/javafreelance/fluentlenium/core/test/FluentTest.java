@@ -44,7 +44,7 @@ public abstract class FluentTest extends Fluent {
                     field.setAccessible(true);
                     Class clsField = field.getType();
                     cls = Class.forName(clsField.getName());
-                    Object retobj = initClasse(cls);
+                    Object retobj = initClass(cls);
                     field.set(this, retobj);
                 }
             }
@@ -61,11 +61,11 @@ public abstract class FluentTest extends Fluent {
         super();
     }
 
-    public <T extends FluentPage> T createPage(Class<? extends FluentPage> classOfPage) {
-        return initClasse(classOfPage);
+    public <T extends FluentPage> T createPage(Class<T> classOfPage) {
+        return initClass(classOfPage);
     }
 
-    private <T extends FluentPage> T initClasse(Class<? extends FluentPage> cls) {
+    private <T extends FluentPage> T initClass(Class<T> cls) {
         T retobj = null;
         try {
             Constructor construct = cls.getDeclaredConstructor();
