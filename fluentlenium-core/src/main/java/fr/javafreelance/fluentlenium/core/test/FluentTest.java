@@ -28,7 +28,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
 /**
  * All Junit Test should extends this class. It provides default parameters.
@@ -44,7 +43,6 @@ public abstract class FluentTest extends Fluent {
                 if (field.isAnnotationPresent(Page.class)) {
                     field.setAccessible(true);
                     Class clsField = field.getType();
-                    System.out.println(Arrays.toString(clsField.getDeclaredConstructors()));
                     cls = Class.forName(clsField.getName());
                     Object retobj = initClasse(cls);
                     field.set(this, retobj);
@@ -64,18 +62,10 @@ public abstract class FluentTest extends Fluent {
     }
 
     public <T extends FluentPage> T createPage(Class<? extends FluentPage> classOfPage) {
-        T retobj = null;
-        Class cls = null;
-        try {
-            cls = Class.forName(classOfPage.getName());
-        } catch (ClassNotFoundException e) {
-            throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
-        }
-        retobj = initClasse(cls);
-        return retobj;
+        return initClasse(classOfPage);
     }
 
-    private <T extends FluentPage> T initClasse(Class cls) {
+    private <T extends FluentPage> T initClasse(Class<? extends FluentPage> cls) {
         T retobj = null;
         try {
             Constructor construct = cls.getDeclaredConstructor();
