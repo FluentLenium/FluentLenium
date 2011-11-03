@@ -30,7 +30,7 @@ public class FillConstructor extends fr.javafreelance.fluentlenium.core.Fluent {
 
     public FillConstructor(FluentDefaultActions list, WebDriver driver, Filter[] filters) {
         super(driver);
-        this.filters = filters;
+        this.filters = filters.clone();
         this.fluentList = list;
     }
 
