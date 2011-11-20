@@ -65,7 +65,7 @@ This dependency include the core of the framework and a fest-assert tool. If you
 ### Basic Methods
 You can use url() , title() or pageSource() to get the url, the title or the page source of the current page.
 
-### JQuery Selector
+###  Selector
 #### Default Selector
 You can use CSS1, CSS2 and CSS3 selector with the same restrictions as in Selenium.
 
@@ -194,7 +194,7 @@ For exemple, if I choose that the title will be sufficient to know if I'm in the
         }
 </code></pre>
 
-Create you owm methods to easily fill form, go to a next page or whatesle can be needed in your test.
+Create you owm methods to easily fill form, go to a next page or what else can be needed in your test.
 
 For exemple :
 <pre><code>
@@ -217,9 +217,19 @@ And the corresponding test :
 public void checkLoginFailed() {
  goTo(loginPage);
  loginPage.fillAndSubmitLoginForm("login","wrongPass");
-  assertThat($(".error")).hasSize(1);
+ loginPage.isAt();
 }
 </code></pre>
+   Or if you have the fest assert module (just made a static import org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat)
+
+    <pre><code>
+    public void checkLoginFailed() {
+     goTo(loginPage);
+     loginPage.fillAndSubmitLoginForm("login","wrongPass");
+      assertThat($(".error")).hasSize(1);
+      assertThat(loginPage).isAt();
+    }
+    </code></pre>
 
 ###Page usage
 You can use the annotation @Page to define your page easily.
@@ -270,6 +280,25 @@ You can also used the factory createPage
 
     }
 </pre></code>
+
+Into a page, all FluentWebElement are automatically searched by name or id. For exemple, if you declare un FluentWebElement named createButton, it will look into the page to a element where id is createButton or name is createButton. All elements are proxified which means that the search is really done when you try to access the element.
+
+                       <pre><code>
+                       public class LoginPage extends FluentPage {
+                           FluentWebElement createButton;
+                           public String getUrl() {
+                               return "myCustomUrl";
+                           }
+                           public void isAt() {
+                               assertThat($("title").first().getText()).isEqualTo("MyTitle");
+                           }
+                           public void fillAndSubmitForm(String... paramsOrdered) {
+                               fill("input").with(paramsOrdered);
+                               createButton.click();
+                           }
+                       }
+                       </code></pre>
+
 
 ## Execute javascript
 If you need to execute some javascript, just call executeScript with your script as parameter.

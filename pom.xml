@@ -102,7 +102,7 @@
                         <exclude>**/integration/**OnLabs**</exclude>
                     </excludes>
                     <includes>
-                        <include>**/integration/**</include>
+                        <include>**/integration/**Test.java</include>
                     </includes>
                 </configuration>
                 <executions>

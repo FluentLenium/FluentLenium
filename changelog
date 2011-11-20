@@ -3,3 +3,5 @@ FluentLenium FestAssert :
 - add page fest assert assertions
 FluentLenium Core :
 - no NPE if driver is null
+- update to selenium java 2.12
+- add automatic proxied instance on FluentWebElement inside a page
