@@ -43,7 +43,7 @@ public abstract class Fluent implements SearchActions {
     public Fluent() {
     }
 
-    protected void setDriver(WebDriver driver) {
+    protected final void setDriver(WebDriver driver) {
         this.driver = driver;
         this.search = new Search(driver);
     }

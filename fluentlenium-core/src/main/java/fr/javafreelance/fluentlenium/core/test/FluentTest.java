@@ -132,8 +132,7 @@ public abstract class FluentTest extends Fluent {
 
     @After
     public void after() {
-
-        getDriver().quit();
+       if ( getDriver()!=null) {getDriver().quit();}
     }
 
 
