@@ -1,0 +1,5 @@
+v 0.5.2 :
+FluentLenium FestAssert :
+- add page fest assert assertions
+FluentLenium Core :
+- no NPE if driver is null
