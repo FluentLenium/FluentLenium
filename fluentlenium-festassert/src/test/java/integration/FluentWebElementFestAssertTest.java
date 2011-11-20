@@ -17,7 +17,7 @@ package integration;
 import fr.javafreelance.integration.localTest.LocalFluentCase;
 import org.junit.Test;
 
-import static org.fest.assertions.fluentlenium.FluentWebElementAssert.assertThat;
+import static org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat;
 
 public class FluentWebElementFestAssertTest extends LocalFluentCase {
 

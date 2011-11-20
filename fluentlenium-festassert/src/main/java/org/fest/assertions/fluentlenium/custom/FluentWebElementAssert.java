@@ -12,7 +12,7 @@
  * limitations under the License
  */
 
-package org.fest.assertions.fluentlenium;
+package org.fest.assertions.fluentlenium.custom;
 
 import fr.javafreelance.fluentlenium.core.domain.FluentWebElement;
 import org.fest.assertions.GenericAssert;
@@ -20,18 +20,10 @@ import org.fest.assertions.GenericAssert;
 public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert, FluentWebElement> {
 
 
-    /**
-     * Creates a new <code>{@link org.fest.assertions.GenericAssert}</code>.
-     *
-     * @param actual the actual value to verify.
-     */
-    protected FluentWebElementAssert(FluentWebElement actual) {
+    public FluentWebElementAssert(FluentWebElement actual) {
         super(FluentWebElementAssert.class, actual);
     }
 
-    public static FluentWebElementAssert assertThat(FluentWebElement actual) {
-        return new FluentWebElementAssert(actual);
-    }
 
 
     private void failIsEnabled() {

@@ -16,7 +16,8 @@ package org.fest.assertions.fluentlenium.unit;
 
 
 import fr.javafreelance.fluentlenium.core.domain.FluentWebElement;
-import org.fest.assertions.fluentlenium.FluentWebElementAssert;
+import org.fest.assertions.fluentlenium.FluentLeniumAssertions;
+import org.fest.assertions.fluentlenium.custom.FluentWebElementAssert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -30,7 +31,7 @@ public class FluentWebElementFestAssertTest {
     @Mock
     FluentWebElement fluentWebElement;
     @InjectMocks
-    FluentWebElementAssert fluentWebElementAssert = FluentWebElementAssert.assertThat(fluentWebElement);
+    FluentWebElementAssert fluentWebElementAssert = FluentLeniumAssertions.assertThat(fluentWebElement);
 
     @Before
     public void before() {
