@@ -25,7 +25,6 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
     }
 
 
-
     private void failIsEnabled() {
         super.fail("Object not enabled");
     }
@@ -36,23 +35,31 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
 
 
     public FluentWebElementAssert isEnabled() {
-        if (!actual.isEnabled()) failIsEnabled();
+        if (!actual.isEnabled()) {
+            failIsEnabled();
+        }
         return this;
     }
 
     public FluentWebElementAssert isNotEnabled() {
-        if (actual.isEnabled()) failIsNotEnabled();
+        if (actual.isEnabled()) {
+            failIsNotEnabled();
+        }
         return this;
     }
 
     public FluentWebElementAssert isDisplayed() {
-        if (!actual.isDisplayed()) failIsNotDisplayed();
+        if (!actual.isDisplayed()) {
+            failIsNotDisplayed();
+        }
 
         return this;
     }
 
     public FluentWebElementAssert isNotDisplayed() {
-        if (actual.isDisplayed()) failIsDisplayed();
+        if (actual.isDisplayed()) {
+            failIsDisplayed();
+        }
         return this;
     }
 
@@ -65,12 +72,16 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
     }
 
     public FluentWebElementAssert isSelected() {
-        if (!actual.isSelected()) failIsSelected();
+        if (!actual.isSelected()) {
+            failIsSelected();
+        }
         return this;
     }
 
     public FluentWebElementAssert isNotSelected() {
-        if (actual.isSelected()) failIsNotSelected();
+        if (actual.isSelected()) {
+            failIsNotSelected();
+        }
         return this;
     }
 
