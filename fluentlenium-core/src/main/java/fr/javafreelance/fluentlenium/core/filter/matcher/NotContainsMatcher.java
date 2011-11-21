@@ -27,10 +27,12 @@ public class NotContainsMatcher extends Matcher {
         super(pattern);
     }
 
+    @Override
     public MatcherType getMatcherType() {
         return MatcherType.NOT_CONTAINS;
     }
 
+    @Override
     public boolean isSatisfiedBy(String o) {
         return !CalculateService.contains(getPattern(), getValue(), o);
     }

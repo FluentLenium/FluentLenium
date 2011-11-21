@@ -155,8 +155,7 @@ public abstract class FluentTest extends Fluent {
         }
 
         InvocationHandler handler = new LocatingElementHandler(locator);
-        WebElement proxy;
-        proxy = (WebElement) Proxy.newProxyInstance(
+        WebElement proxy = (WebElement) Proxy.newProxyInstance(
                 page.getClass().getClassLoader(), new Class[]{WebElement.class}, handler);
         try {
             field.setAccessible(true);

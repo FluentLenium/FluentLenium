@@ -27,10 +27,12 @@ public class NotStartsWithMatcher extends Matcher {
         super(value);
     }
 
+    @Override
     public MatcherType getMatcherType() {
         return MatcherType.NOT_START_WITH;
     }
 
+    @Override
     public boolean isSatisfiedBy(String o) {
         return CalculateService.startsWith(getPattern(), getValue(), o);
     }

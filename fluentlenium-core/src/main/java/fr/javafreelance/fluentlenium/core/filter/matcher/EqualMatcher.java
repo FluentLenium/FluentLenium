@@ -27,10 +27,12 @@ public class EqualMatcher extends Matcher {
         super(pattern);
     }
 
+    @Override
     public MatcherType getMatcherType() {
         return MatcherType.EQUAL;
     }
 
+    @Override
     public boolean isSatisfiedBy(String o) {
         return CalculateService.equal(getPattern(), getValue(), o);
     }

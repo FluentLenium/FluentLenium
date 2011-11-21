@@ -12,12 +12,12 @@ public final class FluentLeniumAssertions {
     }
 
     public static PageAssert assertThat(FluentPage actual) {
-           return new PageAssert(actual);
-       }
+        return new PageAssert(actual);
+    }
 
     public static FluentWebElementAssert assertThat(FluentWebElement actual) {
-           return new FluentWebElementAssert(actual);
-       }
+        return new FluentWebElementAssert(actual);
+    }
 
 
 }

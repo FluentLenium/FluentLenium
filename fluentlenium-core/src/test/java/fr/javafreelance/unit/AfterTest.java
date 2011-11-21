@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
 
-public class AfterTest extends FluentTest{
+public class AfterTest extends FluentTest {
 
     @Override
     public WebDriver getDefaultDriver() {

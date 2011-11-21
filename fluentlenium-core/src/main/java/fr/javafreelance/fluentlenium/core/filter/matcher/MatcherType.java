@@ -28,6 +28,11 @@ public enum MatcherType {
         this.cssRepresentations = cssRepresentations;
     }
 
+    /**
+     * Return the css representations of the matcher
+     *
+     * @return
+     */
     public String getCssRepresentations() {
         return cssRepresentations;
     }

@@ -29,25 +29,45 @@ public abstract class Matcher {
         this.pattern = value;
     }
 
+    /**
+     * return the given value
+     *
+     * @return
+     */
     public String getValue() {
         return value;
     }
 
+    /**
+     * Return the matcher symbol
+     *
+     * @return
+     */
     public String getMatcherSymbol() {
         return getMatcherType() != null ? getMatcherType().getCssRepresentations() : null;
     }
 
-    public boolean isPreFilter() {
+    public final boolean isPreFilter() {
         if (pattern != null || null == getMatcherSymbol()) {
             return false;
         }
         return true;
     }
 
+    /**
+     * return the pattern
+     *
+     * @return
+     */
     protected Pattern getPattern() {
         return pattern;
     }
 
+    /**
+     * Return the matcher type
+     *
+     * @return
+     */
     protected abstract MatcherType getMatcherType();
 
     /**

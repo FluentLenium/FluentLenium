@@ -25,6 +25,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static fr.javafreelance.fluentlenium.core.filter.FilterConstructor.*;
+import static fr.javafreelance.fluentlenium.core.filter.MatcherConstructor.*;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class SelectorOnLabsTest extends LocalFluentCase {
@@ -178,6 +179,31 @@ public class SelectorOnLabsTest extends LocalFluentCase {
     public void checkEndAttributeMatcherNotFind() {
         goTo(DEFAULT_URL);
         assertThat($("span", withName(endsWith(regex("am?"))))).hasSize(0);
+    }
+
+
+    @Test
+    public void checkNotStartAttribute() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", withName(notStartsWith("na"))).first().getId()).isEqualTo("oneline");
+    }
+
+    @Test
+    public void checkNotStartAttributeMatcher() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", withName(notStartsWith(regex("na?")))).first().getId()).isEqualTo("oneline");
+    }
+
+    @Test
+    public void checkNotEndStartAttribute() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", withName(notEndsWith("na"))).first().getId()).isEqualTo("oneline");
+    }
+
+    @Test
+    public void checkNotEndAttributeMatcher() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", withName(notEndsWith(regex("na?")))).first().getId()).isEqualTo("oneline");
     }
 
 

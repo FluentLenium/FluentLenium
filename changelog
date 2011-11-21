@@ -5,3 +5,4 @@ FluentLenium Core :
 - no NPE if driver is null
 - update to selenium java 2.12
 - add automatic proxied instance on FluentWebElement inside a page
+- moving matcher construction from FilterConstructor to MatcherConstructor

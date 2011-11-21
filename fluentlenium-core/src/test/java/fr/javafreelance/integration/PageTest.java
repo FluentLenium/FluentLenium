@@ -26,8 +26,8 @@ import static fr.javafreelance.fluentlenium.core.FluentPage.go;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class PageTest extends LocalFluentCase {
-       @Page
-       PageAccueil page;
+    @Page
+    PageAccueil page;
 
     @Page
     Page2 page2;
@@ -59,41 +59,42 @@ public class PageTest extends LocalFluentCase {
 
     @Test
     public void checkFollowLinkWithBddStyle() {
-         go(page);
+        go(page);
         FluentPage.assertAt(page);
         page.goToNexPage();
         assertAt(page2);
     }
 }
-     class PageAccueil extends FluentPage {
 
-        FluentWebElement linkToPage2;
+class PageAccueil extends FluentPage {
 
-        @Override
-        public String getUrl() {
-            return LocalFluentCase.DEFAULT_URL;
-        }
+    FluentWebElement linkToPage2;
 
-        @Override
-        public void isAt() {
-            assertThat($("title").first().getText()).contains("Selenium");
-        }
-
-        public void goToNexPage() {
-            linkToPage2.click();
-        }
+    @Override
+    public String getUrl() {
+        return LocalFluentCase.DEFAULT_URL;
     }
 
-      class Page2 extends FluentPage {
-
-        @Override
-        public String getUrl() {
-            return LocalFluentCase.DEFAULT_URL + "/page2.html";
-        }
-
-        @Override
-        public void isAt() {
-            assertThat($("title").first().getText()).isEqualTo("Page 2");
-        }
-
+    @Override
+    public void isAt() {
+        assertThat($("title").first().getText()).contains("Selenium");
     }
+
+    public void goToNexPage() {
+        linkToPage2.click();
+    }
+}
+
+class Page2 extends FluentPage {
+
+    @Override
+    public String getUrl() {
+        return LocalFluentCase.DEFAULT_URL + "/page2.html";
+    }
+
+    @Override
+    public void isAt() {
+        assertThat($("title").first().getText()).isEqualTo("Page 2");
+    }
+
+}

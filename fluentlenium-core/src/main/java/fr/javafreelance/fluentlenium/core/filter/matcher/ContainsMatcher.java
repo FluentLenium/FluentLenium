@@ -28,10 +28,12 @@ public class ContainsMatcher extends Matcher {
         super(value);
     }
 
+    @Override
     public MatcherType getMatcherType() {
         return MatcherType.CONTAINS;
     }
 
+    @Override
     public boolean isSatisfiedBy(String o) {
         return CalculateService.contains(getPattern(), getValue(), o);
     }

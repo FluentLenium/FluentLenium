@@ -27,10 +27,12 @@ public class EndsWithMatcher extends Matcher {
         super(value);
     }
 
+    @Override
     public MatcherType getMatcherType() {
         return MatcherType.END_WITH;
     }
 
+    @Override
     public boolean isSatisfiedBy(String o) {
         return CalculateService.endsWith(getPattern(), getValue(), o);
     }

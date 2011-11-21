@@ -15,11 +15,14 @@
 package fr.javafreelance.unit.initialization;
 
 import fr.javafreelance.fluentlenium.core.FluentPage;
+import fr.javafreelance.fluentlenium.core.domain.FluentWebElement;
 import fr.javafreelance.fluentlenium.core.test.FluentTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import static org.fest.assertions.Assertions.assertThat;
 
 public class BeforeInitialization extends FluentTest {
     public WebDriver webDriver = new HtmlUnitDriver();
@@ -35,6 +38,12 @@ public class BeforeInitialization extends FluentTest {
     @Test
     public void test_no_exception() {
         page.go();
+    }
+
+    @Test
+    public void test_internal_fluentwebelement_instantiate() {
+        TestPrivatePageWithElement page = createPage(TestPrivatePageWithElement.class);
+        assertThat(page.myElement).isNotNull();
     }
 
 
@@ -54,3 +63,14 @@ class TestPrivatePage2 extends FluentPage {
         return "http://www.google.fr";
     }
 }
+
+class TestPrivatePageWithElement extends FluentPage {
+
+    FluentWebElement myElement;
+
+    @Override
+    public String getUrl() {
+        return "http://www.google.fr";
+    }
+}
+

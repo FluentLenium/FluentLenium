@@ -33,7 +33,11 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
         super.fail("Object is enabled");
     }
 
-
+    /**
+     * check if the element is enabled
+     *
+     * @return
+     */
     public FluentWebElementAssert isEnabled() {
         if (!actual.isEnabled()) {
             failIsEnabled();
@@ -41,6 +45,11 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
         return this;
     }
 
+    /**
+     * check if the element is not enabled
+     *
+     * @return
+     */
     public FluentWebElementAssert isNotEnabled() {
         if (actual.isEnabled()) {
             failIsNotEnabled();
@@ -48,6 +57,11 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
         return this;
     }
 
+    /**
+     * check if the element is displayed
+     *
+     * @return
+     */
     public FluentWebElementAssert isDisplayed() {
         if (!actual.isDisplayed()) {
             failIsNotDisplayed();
@@ -56,6 +70,11 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
         return this;
     }
 
+    /**
+     * check if the element is not displayed
+     *
+     * @return
+     */
     public FluentWebElementAssert isNotDisplayed() {
         if (actual.isDisplayed()) {
             failIsDisplayed();
@@ -71,6 +90,11 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
         super.fail("Object is displayed");
     }
 
+    /**
+     * check if the element is selected
+     *
+     * @return
+     */
     public FluentWebElementAssert isSelected() {
         if (!actual.isSelected()) {
             failIsSelected();
@@ -78,6 +102,11 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
         return this;
     }
 
+    /**
+     * check if the element is not selected
+     *
+     * @return
+     */
     public FluentWebElementAssert isNotSelected() {
         if (actual.isSelected()) {
             failIsNotSelected();

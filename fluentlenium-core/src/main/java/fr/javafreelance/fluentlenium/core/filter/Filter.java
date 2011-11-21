@@ -22,24 +22,47 @@ public class Filter {
     private final String attribut;
     private final Matcher matcher;
 
-    public Filter(FilterType filterType, String name) {
+    /**
+     * Construct a filter with a type and an associated value
+     *
+     * @param filterType
+     * @param value
+     */
+    public Filter(FilterType filterType, String value) {
         this.attribut = filterType.name();
-        this.matcher = new EqualMatcher(name);
+        this.matcher = new EqualMatcher(value);
     }
 
-
+    /**
+     * Construct a filter with a type and an associated matcher
+     *
+     * @param filterType
+     * @param matcher
+     */
     public Filter(FilterType filterType, Matcher matcher) {
         this.attribut = filterType.name();
         this.matcher = matcher;
     }
 
-    public Filter(FilterType custom, String customAttribute, String value) {
+    /**
+     * Construct a filter with on a custom attribute and an associated value
+     *
+     * @param customAttribute
+     * @param value
+     */
+    public Filter(String customAttribute, String value) {
         this.attribut = customAttribute;
         this.matcher = new EqualMatcher(value);
     }
 
 
-    public Filter(FilterType custom, String customAttribute, Matcher matcher) {
+    /**
+     * Construct a filter with on a custom attribute and an associated matcher
+     *
+     * @param customAttribute
+     * @param matcher
+     */
+    public Filter(String customAttribute, Matcher matcher) {
         this.attribut = customAttribute;
         this.matcher = matcher;
     }

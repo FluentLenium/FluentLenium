@@ -14,9 +14,7 @@
 
 package fr.javafreelance.fluentlenium.core.filter;
 
-import fr.javafreelance.fluentlenium.core.filter.matcher.*;
-
-import java.util.regex.Pattern;
+import fr.javafreelance.fluentlenium.core.filter.matcher.Matcher;
 
 
 public final class FilterConstructor {
@@ -25,7 +23,7 @@ public final class FilterConstructor {
     }
 
     /**
-     * Create a integration by name
+     * Create a filter by name
      *
      * @param name
      * @return
@@ -35,7 +33,7 @@ public final class FilterConstructor {
     }
 
     /**
-     * Create a integration by id
+     * Create a filter by id
      *
      * @param id
      * @return
@@ -45,28 +43,28 @@ public final class FilterConstructor {
     }
 
     /**
-     * Create a integration by a customattribute
+     * Create a filter by a customattribute
      *
      * @param customAttribute
      * @param value
      * @return
      */
     public static Filter with(String customAttribute, String value) {
-        return new Filter(FilterType.CUSTOM, customAttribute, value);
+        return new Filter(customAttribute, value);
     }
 
     /**
-     * Create a integration by text
+     * Create a filter by text
      *
      * @param text
      * @return
      */
     public static Filter withText(String text) {
-        return new Filter(FilterType.TEXT, equal(text));
+        return new Filter(FilterType.TEXT, MatcherConstructor.equal(text));
     }
 
     /**
-     * Create a integration by name with matcher
+     * Create a filter by name with matcher
      *
      * @param matcher
      * @return
@@ -76,7 +74,7 @@ public final class FilterConstructor {
     }
 
     /**
-     * Create a integration by id
+     * Create a filter by id
      *
      * @param matcher
      * @return
@@ -86,7 +84,7 @@ public final class FilterConstructor {
     }
 
     /**
-     * Create a integration by text
+     * Create a filter by text
      *
      * @param matcher
      * @return
@@ -97,89 +95,15 @@ public final class FilterConstructor {
 
 
     /**
-     * Create a integration by a customattribute
+     * Create a filter by a customattribute
      *
      * @param customAttribute
      * @param matcher
      * @return
      */
     public static Filter with(String customAttribute, Matcher matcher) {
-        return new Filter(FilterType.CUSTOM, customAttribute, matcher);
+        return new Filter(customAttribute, matcher);
     }
-
-
-    public static Matcher contains(String matcher) {
-        return new ContainsMatcher(matcher);
-    }
-
-    public static Matcher contains(Pattern pattern) {
-        return new ContainsMatcher(pattern);
-    }
-
-    public static Matcher notContains(String matcher) {
-        return new NotContainsMatcher(matcher);
-    }
-
-    public static Matcher notContains(Pattern pattern) {
-        return new NotContainsMatcher(pattern);
-    }
-
-    public static Matcher equal(String matcher) {
-        return new EqualMatcher(matcher);
-    }
-
-    public static Pattern regex(String pattern) {
-        return Pattern.compile(pattern);
-
-    }
-
-    public static Matcher startsWith(String matcher) {
-        return new StartsWithMatcher(matcher);
-    }
-
-    public static Matcher startsWith(Pattern pattern) {
-        return new StartsWithMatcher(pattern);
-    }
-
-    public static Matcher endsWith(String matcher) {
-        return new EndsWithMatcher(matcher);
-    }
-
-    public static Matcher endsWith(Pattern pattern) {
-        return new EndsWithMatcher(pattern);
-    }
-
-    public static Matcher notStartsWith(String matcher) {
-        return new StartsWithMatcher(matcher);
-    }
-
-    public static Matcher notStartsWith(Pattern pattern) {
-        return new StartsWithMatcher(pattern);
-    }
-
-    public static Matcher notEndsWith(String matcher) {
-        return new EndsWithMatcher(matcher);
-    }
-
-    public static Matcher notEndsWith(Pattern pattern) {
-        return new EndsWithMatcher(pattern);
-    }
-    /* public static Matcher notEqual(String matcher) {
-        return new NotEquaMatcherl(matcher);
-    }
-
-
-
-    public static Matcher notStartsWith(String matcher) {
-        return new NotBeginWithMatcher(matcher);
-    }
-
-    public static Matcher endsWith(String matcher) {
-        return new EndsWithMatcher(matcher);
-    } public static Matcher notEndsWith(String matcher) {
-        return new NotEndsWith(matcher);
-    }
-*/
 
 
 }

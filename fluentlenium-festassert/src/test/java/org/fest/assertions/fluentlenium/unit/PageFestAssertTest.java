@@ -30,7 +30,7 @@ public class PageFestAssertTest {
     @Mock
     FluentPage fluentPage;
     @InjectMocks
-    PageAssert pageAssert= FluentLeniumAssertions.assertThat(fluentPage);
+    PageAssert pageAssert = FluentLeniumAssertions.assertThat(fluentPage);
 
     @Before
     public void before() {

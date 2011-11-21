@@ -54,7 +54,7 @@ public class PreFilterAnalyse {
 
     @Test
     public void checkFilterIsNotPreFilterElligibleCauseMatcher() {
-        Filter filter = new Filter(FilterType.ID, null, new NotContainsMatcher("toto"));
+        Filter filter = new Filter(FilterType.ID, new NotContainsMatcher("toto"));
         assertThat(filter.isPreFilter()).isFalse();
     }
 
@@ -62,5 +62,23 @@ public class PreFilterAnalyse {
     public void checkFilterIsNotPreFilterElligibleCauseText() {
         Filter filter = new Filter(FilterType.TEXT, "1");
         assertThat(filter.isPreFilter()).isFalse();
+    }
+
+    @Test
+    public void checkFilterIsNotPreFilterElligibleCauseCustomAttributendMatcher() {
+        Filter filter = new Filter("ida", new NotContainsMatcher("toto"));
+        assertThat(filter.isPreFilter()).isFalse();
+    }
+
+    @Test
+    public void checkFilterIsPreFilterElligibleCauseCustomAttributeMatcher() {
+        Filter filter = new Filter("ida", "1");
+        assertThat(filter.isPreFilter()).isTrue();
+    }
+
+    @Test
+    public void checkFilterIsPreFilterElligibleCauseCustomAttribute() {
+        Filter filter = new Filter("id", "1");
+        assertThat(filter.isPreFilter()).isTrue();
     }
 }

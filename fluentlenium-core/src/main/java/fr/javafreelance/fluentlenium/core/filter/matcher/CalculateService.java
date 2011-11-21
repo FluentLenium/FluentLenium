@@ -24,6 +24,14 @@ public final class CalculateService {
     private CalculateService() {
     }
 
+    /**
+     * check if the current value contains the patternValue or the referenceValue
+     *
+     * @param patternValue
+     * @param referenceValue
+     * @param currentValue
+     * @return
+     */
     public static boolean contains(Pattern patternValue, String referenceValue, String currentValue) {
         if (currentValue == null) {
             return false;
@@ -34,6 +42,14 @@ public final class CalculateService {
         return patternValue.matcher(currentValue).find();
     }
 
+    /**
+     * check if the current value is equal the patternValue or the referenceValue
+     *
+     * @param patternValue
+     * @param referenceValue
+     * @param currentValue
+     * @return
+     */
     public static boolean equal(Pattern patternValue, String referenceValue, String currentValue) {
         if (currentValue == null) {
             return false;
@@ -43,6 +59,15 @@ public final class CalculateService {
         }
         return patternValue.matcher(currentValue).matches();
     }
+
+    /**
+     * check if the current value starts with the patternValue or the referenceValue
+     *
+     * @param patternValue
+     * @param referenceValue
+     * @param currentValue
+     * @return
+     */
 
     public static boolean startsWith(Pattern patternValue, String referenceValue, String currentValue) {
         if (currentValue == null) {
@@ -54,6 +79,15 @@ public final class CalculateService {
         java.util.regex.Matcher m2 = patternValue.matcher(currentValue);
         return m2.find() && 0 == m2.start();
     }
+
+    /**
+     * check if the current value ends with the patternValue or the referenceValue
+     *
+     * @param patternValue
+     * @param referenceValue
+     * @param currentValue
+     * @return
+     */
 
     public static boolean endsWith(Pattern patternValue, String referenceValue, String currentValue) {
         if (currentValue == null) {
