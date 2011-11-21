@@ -26,14 +26,6 @@ click("#create-button");
 assertThat(title()).isEqualTo("Hello toto");
 </code></pre>
 
-If you are more convenient to the JQuery Syntax, maybe something like that will be more natural for you:
-<pre><code>goTo("http://mywebpage/");
-$("#firstName").text("toto");
-$("#create-button").click();
-assertThat(title()).isEqualTo("Hello toto");</code></pre>
-
-Both syntax are equivalent. $ or find methods are aliases.
-
 ## Maven
 
 To add FluentLenium to your project, just add the following dependency into your pom.xml :
@@ -70,12 +62,12 @@ You can use url() , title() or pageSource() to get the url, the title or the pag
 You can use CSS1, CSS2 and CSS3 selector with the same restrictions as in Selenium.
 
      If you want to find the list of elements which have
-- the id "title" : find("#title") or $("#title")
-- the class name "small" : find(".small") or $(".small")
-- the tag name "input" : find("input") or $("input")
+- the id "title" : find("#title")
+- the class name "small" : find(".small")
+- the tag name "input" : find("input")
 
 You are free to use most of the CSS3 syntax, wich means that
-find("input[class=rightForm]") or $("input[class=rightForm]")
+find("input[class=rightForm]")
 will return the list of all input elements which have the class rightForm
 
 #### Custom filter
@@ -122,12 +114,12 @@ More will come soon to filter to create a complete search tool (containsWord, ab
 ### N-th
 If you want the first elements that matchs your criteria, just use :
 <pre><code>
-     findFirst(myCssSelector) or $(myCssSelector).first()
+     findFirst(myCssSelector) or find(myCssSelector).first()
 </code></pre>
 
 If you want the element at the given position :
 <pre><code>
-     find(myCssSelector,2) or $(myCssSelector,2)
+     find(myCssSelector,2)
 </code></pre>
 
 Of course, you can use both position filter and custom filter :
@@ -148,7 +140,8 @@ Of course, you can use both position filter and custom filter :
 If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.
 
 ### Fill
-fill("input").with("bar") OR $("input").text("bar") will fill all the element with tag input with bar.
+fill("input").with("bar") OR find("input").text("bar") will fill all the element with tag input with bar. If you want for example exclude the checkbox, you can use the css filtering like         fill("input:not([type='checkbox'])").with("tototo"), you can also use the filtering provided by FluentLenium fill("input", with("type", notContains("checkbox"))).with("tototo")
+
 
 fill("input").with("myLogin","myPassword") will fill the first elements of the input selection with myLogin, the second with myPassword. If there are a third input, the last value (myPassword) will be repeat again and again.
 
@@ -298,6 +291,16 @@ Into a page, all FluentWebElement are automatically searched by name or id. For 
                            }
                        }
                        </code></pre>
+
+## Alternative Syntax
+
+If you are more convenient to the JQuery Syntax, maybe something like that will be more natural for you:
+<pre><code>goTo("http://mywebpage/");
+$("#firstName").text("toto");
+$("#create-button").click();
+assertThat(title()).isEqualTo("Hello toto");</code></pre>
+
+Both syntax are equivalent. $ or find methods are aliases.
 
 
 ## Execute javascript
