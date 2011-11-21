@@ -4,7 +4,7 @@
     <parent>
         <groupId>fr.javafreelance.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>0.5.2</version>
+        <version>0.5.3-SNAPSHOT</version>
     </parent>
     <groupId>fr.javafreelance.fluentlenium</groupId>
     <artifactId>fluentlenium</artifactId>
