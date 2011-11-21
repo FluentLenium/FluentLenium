@@ -19,7 +19,7 @@ import fr.javafreelance.fluentlenium.core.filter.matcher.*;
 import java.util.regex.Pattern;
 
 
-public class FilterConstructor {
+public final class FilterConstructor {
 
     private FilterConstructor() {
     }
