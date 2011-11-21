@@ -80,8 +80,9 @@ public abstract class FluentTest extends Fluent {
             //init fields with default proxies
             Field[] fields = cls.getDeclaredFields();
             for (Field fieldFromPage : fields) {
-                if (!FluentWebElement.class.isAssignableFrom(fieldFromPage.getType()))
+                if (!FluentWebElement.class.isAssignableFrom(fieldFromPage.getType())) {
                     continue;
+                }
                 fieldFromPage.setAccessible(true);
                 proxyElement(new DefaultElementLocatorFactory(getDriver()), page, fieldFromPage);
             }
