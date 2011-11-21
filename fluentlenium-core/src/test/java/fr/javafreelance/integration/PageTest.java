@@ -21,8 +21,7 @@ import fr.javafreelance.integration.localTest.LocalFluentCase;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
 
-import static fr.javafreelance.fluentlenium.core.FluentPage.assertAt;
-import static fr.javafreelance.fluentlenium.core.FluentPage.go;
+import static fr.javafreelance.fluentlenium.core.FluentPage.*;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class PageTest extends LocalFluentCase {
@@ -59,8 +58,8 @@ public class PageTest extends LocalFluentCase {
 
     @Test
     public void checkFollowLinkWithBddStyle() {
-        go(page);
-        FluentPage.assertAt(page);
+        goTo(page);
+        assertAt(page);
         page.goToNexPage();
         assertAt(page2);
     }

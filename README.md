@@ -54,6 +54,23 @@ This dependency include the core of the framework and a fest-assert tool. If you
  &lt;/dependencies&gt;
 
 </code></pre>
+
+
+
+##Static imports
+
+If you need to do some filtering :
+ <pre><code>
+import static fr.javafreelance.fluentlenium.core.filter.FilterConstructor.*;
+import static fr.javafreelance.fluentlenium.core.filter.MatcherConstructor.*;
+</code></pre>
+### Static import using fest assert
+The static assertions to use fest assert
+ <pre><code>
+import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat;
+ </code></pre>
+
 ### Basic Methods
 You can use url() , title() or pageSource() to get the url, the title or the page source of the current page.
 

@@ -39,7 +39,7 @@ public abstract class FluentPage extends Fluent {
     }
 
     /**
-     * Should shake if the navigator is on correct page.
+     * Should check if the navigator is on correct page.
      * <p/>
      * For example :
      * assertThat(title()).isEqualTo("Page 1");
@@ -58,11 +58,7 @@ public abstract class FluentPage extends Fluent {
         getDriver().get(getUrl());
     }
 
-    public static void assertAt(FluentPage fluent) {
-        fluent.isAt();
-    }
 
-    public static void go(FluentPage page) {
-        page.go();
-    }
+
+
 }
