@@ -148,17 +148,17 @@ fill("input").with("myLogin","myPassword") will fill the first elements of the i
 Don't forget, only the visible field will be modified. It simulates your action in a browser !
 
 #### Click
-click("#create-button") is equivalent to $("#create-button").click().
+click("#create-button")
 
 It will click on all the visible fields returned by the search.
 
 #### Clear
-clear("#create-button") is equivalent to $("#create-button").clear();
+clear("#create-button")
 
 It will clear  all the visible fields returned by the search.
 
 #### Submit
-submit("#create-button") is equivalent to $("#create-button").submit();
+submit("#create-button")
 
 It will submit all the visible fields returned by the search.
 
@@ -183,7 +183,7 @@ For exemple, if I choose that the title will be sufficient to know if I'm in the
 <pre><code>
         @Override
         public void isAt() {
-            assertThat($("title").first().getText()).contains("Selenium");
+            assertThat(title()).contains("Selenium");
         }
 </code></pre>
 
@@ -196,11 +196,11 @@ public class LoginPage extends FluentPage {
         return "myCustomUrl";
     }
     public void isAt() {
-        assertThat($("title").first().getText()).isEqualTo("MyTitle");
+        assertThat(title()).isEqualTo("MyTitle");
     }
     public void fillAndSubmitForm(String... paramsOrdered) {
         fill("input").with(paramsOrdered);
-        $("#create-button").click();
+        click("#create-button");
     }
 }
 </code></pre>
@@ -219,7 +219,7 @@ public void checkLoginFailed() {
     public void checkLoginFailed() {
      goTo(loginPage);
      loginPage.fillAndSubmitLoginForm("login","wrongPass");
-      assertThat($(".error")).hasSize(1);
+      assertThat(find(".error")).hasSize(1);
       assertThat(loginPage).isAt();
     }
     </code></pre>
@@ -283,7 +283,7 @@ Into a page, all FluentWebElement are automatically searched by name or id. For 
                                return "myCustomUrl";
                            }
                            public void isAt() {
-                               assertThat($("title").first().getText()).isEqualTo("MyTitle");
+                               assertThat(title()).isEqualTo("MyTitle");
                            }
                            public void fillAndSubmitForm(String... paramsOrdered) {
                                fill("input").with(paramsOrdered);
