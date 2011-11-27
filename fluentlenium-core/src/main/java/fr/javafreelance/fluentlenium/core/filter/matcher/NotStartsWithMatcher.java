@@ -34,7 +34,7 @@ public class NotStartsWithMatcher extends Matcher {
 
     @Override
     public boolean isSatisfiedBy(String o) {
-        return CalculateService.startsWith(getPattern(), getValue(), o);
+        return !CalculateService.startsWith(getPattern(), getValue(), o);
     }
 
 }
