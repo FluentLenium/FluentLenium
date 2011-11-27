@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
 public class FilterBuilder {
 
     String attribute;
-    FilterType filterType;
 
     public FilterBuilder(String customAttribute) {
         this.attribute = customAttribute;
