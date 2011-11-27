@@ -42,16 +42,6 @@ public final class FilterConstructor {
         return new Filter(FilterType.ID, id);
     }
 
-    /**
-     * Create a filter by a customattribute
-     *
-     * @param customAttribute
-     * @param value
-     * @return
-     */
-    public static Filter with(String customAttribute, String value) {
-        return new Filter(customAttribute, value);
-    }
 
     /**
      * Create a filter by text
@@ -63,45 +53,107 @@ public final class FilterConstructor {
         return new Filter(FilterType.TEXT, MatcherConstructor.equal(text));
     }
 
+
+    /**
+     * Create a filter builder for the attribute
+     *
+     * @param attribute
+     * @return
+     */
+    public static FilterBuilder with(String attribute) {
+        return new FilterBuilder(attribute);
+    }
+
+    /**
+     * Create a filter builder for the attribute by name
+     *
+     * @param
+     * @return
+     */
+    public static FilterBuilder withName() {
+        return new FilterBuilder(FilterType.NAME);
+    }
+       /**
+     * Create a filter builder for the attribute by id
+     *
+     * @param
+     * @return
+     */
+    public static FilterBuilder withId() {
+        return new FilterBuilder(FilterType.ID);
+    }
+
+      /**
+     * Create a filter builder for the attribute by text
+     *
+     * @param
+     * @return
+     */
+    public static FilterBuilder withText() {
+        return new FilterBuilder(FilterType.TEXT);
+    }
+
     /**
      * Create a filter by name with matcher
+     * DEPRECATED : use withName().+convenient method
      *
      * @param matcher
      * @return
      */
+    @Deprecated
     public static Filter withName(Matcher matcher) {
         return new Filter(FilterType.NAME, matcher);
     }
 
     /**
      * Create a filter by id
+     * DEPRECATED : use withId().+convenient method
      *
      * @param matcher
      * @return
      */
+    @Deprecated
     public static Filter withId(Matcher matcher) {
         return new Filter(FilterType.ID, matcher);
     }
 
     /**
      * Create a filter by text
+     * DEPRECATED : use withText().+convenient method
      *
      * @param matcher
      * @return
      */
+    @Deprecated
     public static Filter withText(Matcher matcher) {
         return new Filter(FilterType.TEXT, matcher);
     }
 
-
     /**
      * Create a filter by a customattribute
+     * <p/>
+     * DEPRECATED : use with(customAttribute).+convenient method
      *
      * @param customAttribute
      * @param matcher
      * @return
      */
+    @Deprecated
     public static Filter with(String customAttribute, Matcher matcher) {
+        return new Filter(customAttribute, matcher);
+    }
+
+    /**
+     * Create a filter by a customattribute
+     * <p/>
+     * DEPRECATED : use with(customAttribute).+convenient method
+     *
+     * @param customAttribute
+     * @param matcher
+     * @return
+     */
+    @Deprecated
+    public static Filter with(String customAttribute, String matcher) {
         return new Filter(customAttribute, matcher);
     }
 

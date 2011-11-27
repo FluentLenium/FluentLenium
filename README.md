@@ -62,7 +62,6 @@ This dependency include the core of the framework and a fest-assert tool. If you
 If you need to do some filtering :
  <pre><code>
 import static fr.javafreelance.fluentlenium.core.filter.FilterConstructor.*;
-import static fr.javafreelance.fluentlenium.core.filter.MatcherConstructor.*;
 </code></pre>
 ### Static import using fest assert
 The static assertions to use fest assert
@@ -110,15 +109,15 @@ For now, you have 6 differents filters :
 
 For each of them, you can choose to use a css selector :
 <pre><code>
-     find(".small", withName(notContains("name"))
-     find(".small", withId(notStartsWith("id"))
-     find(".small", withText(endsWith("Female")))
+     find(".small", withName().notContains("name")
+     find(".small", withId().notStartsWith("id")
+     find(".small", withText().endsWith("Female"))
 </code></pre>
 
 Or to be more precise, you can choose to use a regexp :
 <pre><code>
-     find(".small", withName(contains(regex("na?me[0-9]*")))
-     find(".small", withName(notStartsWith(regex("na?me[0-9]*")))
+     find(".small", withName().contains(regex("na?me[0-9]*"))
+     find(".small", withName().notStartsWith(regex("na?me[0-9]*"))
 </code></pre>
 
 Contains, startsWith and endsWith with a regexp pattern are looking for a subsect of the pattern.

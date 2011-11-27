@@ -72,7 +72,7 @@ public class SelectorOnLabsTest extends LocalFluentCase {
     }
 
     @Test
-    public void checkWithNameMatcherCssSelector() {
+    public void checkWithNameMatcherCssSelectorDeprectaedStyle() {
         goTo(DEFAULT_URL);
         assertThat($(".small", withName(contains("name")))).hasSize(2);
     }
@@ -145,7 +145,7 @@ public class SelectorOnLabsTest extends LocalFluentCase {
     }
 
     @Test
-    public void checkStartAttribute() {
+    public void checkStartAttributeDeprectaedStyle() {
         goTo(DEFAULT_URL);
         assertThat($("span", withName(startsWith("na"))).first().getTagName()).isEqualTo("span");
     }
@@ -163,7 +163,7 @@ public class SelectorOnLabsTest extends LocalFluentCase {
     }
 
     @Test
-    public void checkEndAttribute() {
+    public void checkEndAttributeDeprecatedStyle() {
         goTo(DEFAULT_URL);
         assertThat($("span", withName(endsWith("me")))).hasSize(1);
         assertThat($("span", withName(endsWith("name"))).first().getTagName()).isEqualTo("span");
@@ -206,5 +206,22 @@ public class SelectorOnLabsTest extends LocalFluentCase {
         assertThat($("span", withName(notEndsWith(regex("na?")))).first().getId()).isEqualTo("oneline");
     }
 
+    @Test
+        public void checkWithNameMatcherCssSelector() {
+            goTo(DEFAULT_URL);
+            assertThat($(".small", withName().contains("name"))).hasSize(2);
+        }
+
+    @Test
+      public void checkStartAttribute() {
+          goTo(DEFAULT_URL);
+          assertThat($("span", withName().startsWith("na")).first().getTagName()).isEqualTo("span");
+      }
+    @Test
+    public void checkEndAttribute() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", withName().endsWith("me"))).hasSize(1);
+        assertThat($("span", withName().endsWith("name")).first().getTagName()).isEqualTo("span");
+    }
 
 }

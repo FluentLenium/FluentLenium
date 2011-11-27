@@ -42,7 +42,6 @@ public class FluentWebElementFestAssertTest {
     public void testIsEnabledOk() {
         when(fluentWebElement.isEnabled()).thenReturn(true);
         fluentWebElementAssert.isEnabled();
-        assertTrue(true);
     }
 
     @Test(expected = AssertionError.class)

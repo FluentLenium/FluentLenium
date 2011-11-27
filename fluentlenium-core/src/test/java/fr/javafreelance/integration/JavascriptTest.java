@@ -18,6 +18,7 @@ package fr.javafreelance.integration;
 import fr.javafreelance.integration.localTest.LocalFluentCase;
 import org.junit.Test;
 
+import static fr.javafreelance.fluentlenium.core.filter.FilterConstructor.with;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class JavascriptTest extends LocalFluentCase {
@@ -25,6 +26,8 @@ public class JavascriptTest extends LocalFluentCase {
     @Test
     public void checkTextParam() {
         goTo(DEFAULT_URL + "javascript.html");
+        assertThat(find("span",with("id").equalTo("default")).first().getText()).isEqualTo("unchanged");
+
         assertThat(find("#default").first().getText()).isEqualTo("unchanged");
         executeScript("change();");
         assertThat(find("#default").first().getText()).isEqualTo("changed");
