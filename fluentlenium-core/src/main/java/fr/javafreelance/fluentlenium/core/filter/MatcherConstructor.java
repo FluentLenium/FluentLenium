@@ -135,7 +135,7 @@ public final class MatcherConstructor {
      * @return
      */
     public static Matcher notStartsWith(String matcher) {
-        return new StartsWithMatcher(matcher);
+        return new NotStartsWithMatcher(matcher);
     }
 
     /**
@@ -146,7 +146,7 @@ public final class MatcherConstructor {
      */
 
     public static Matcher notStartsWith(Pattern pattern) {
-        return new StartsWithMatcher(pattern);
+        return new NotStartsWithMatcher(pattern);
     }
 
     /**
@@ -156,7 +156,7 @@ public final class MatcherConstructor {
      * @return
      */
     public static Matcher notEndsWith(String matcher) {
-        return new EndsWithMatcher(matcher);
+        return new NotEndsWithMatcher(matcher);
     }
 
     /**
@@ -166,7 +166,7 @@ public final class MatcherConstructor {
      * @return
      */
     public static Matcher notEndsWith(Pattern pattern) {
-        return new EndsWithMatcher(pattern);
+        return new NotEndsWithMatcher(pattern);
     }
 
 }
