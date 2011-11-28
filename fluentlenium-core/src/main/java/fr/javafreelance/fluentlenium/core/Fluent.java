@@ -21,10 +21,9 @@ import fr.javafreelance.fluentlenium.core.domain.FluentWebElement;
 import fr.javafreelance.fluentlenium.core.filter.Filter;
 import fr.javafreelance.fluentlenium.core.search.Search;
 import fr.javafreelance.fluentlenium.core.search.SearchActions;
+import fr.javafreelance.fluentlenium.core.wait.FluentLeniumWait;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -34,12 +33,12 @@ import java.util.List;
 public abstract class Fluent implements SearchActions {
     private WebDriver driver;
     private Search search;
-    private FluentWait wait;
+    private FluentLeniumWait wait;
 
     public Fluent(WebDriver driver) {
         this.driver = driver;
         this.search = new Search(driver);
-        this.wait = new FluentWait(driver);
+        this.wait = new FluentLeniumWait(driver,search);
     }
 
     public Fluent() {
@@ -49,7 +48,7 @@ public abstract class Fluent implements SearchActions {
         this.driver = driver;
         this.search = new Search(driver);
         if (driver != null) {
-            this.wait = new FluentWait(driver);
+            this.wait = new FluentLeniumWait(driver,search);
         }
     }
 
@@ -57,19 +56,10 @@ public abstract class Fluent implements SearchActions {
         return driver;
     }
 
-    public FluentWait await() {
+    public FluentLeniumWait await() {
         return wait;
     }
 
-    /**
-     * Use await instead
-     *
-     * @param wait
-     */
-    @Deprecated
-    public void setWait(WebDriverWait wait) {
-        this.wait = wait;
-    }
 
     /**
      * Return the title of the page
@@ -211,7 +201,7 @@ public abstract class Fluent implements SearchActions {
     }
 
     /**
-     * Submit all elements that are in cssSelector with its filters
+     * get a list all elements that are in cssSelector with its filters
      * Be careful - only the visible elements are submitted
      * //TODO UTILITY ? Deprecated ?
      *

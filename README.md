@@ -307,6 +307,31 @@ Into a page, all FluentWebElement are automatically searched by name or id. For 
                            }
                        }
                        </code></pre>
+## Wait for an Ajax Call
+    You can have multiple way to make your driver wait for the result of an asynchronous call.
+    FluentLenium provides a rich and fluent API in order to help you to handle AJAX call.
+    If you want to wait for at most 5 seconds until the number of element corresponding to the until criteria (here the class small) has the requested size.
+     <pre><code>
+     await().atMost(5, TimeUnit.SECONDS).until(".small").hasSize(3);
+     </pre></code>
+   Instead of hasSize, you can also use hasText("myTextValue") , hasId("myId"), hasName("myName") . isPresent() are going to check if there is at most one element on the page corresponding to the filter.
+
+    If you need to be more precise, you can also use filter on the search :
+    <pre><code>
+     await().atMost(5, TimeUnit.SECONDS).until(".small").withText("myText").hasSize(3);
+     </pre></code>
+     You can use withText("myText") but also with the same signature withName , withId
+
+     You can also use matcher :
+      <pre><code>
+     await().atMost(5, TimeUnit.SECONDS).until(".small").withText().startsWith("start").isPresent();
+     </pre></code>
+     Just use startsWith, notStartsWith , endsWith, notEndsWith , contains , notContains, equalTo.
+
+     If you need to filter on a custom attribute name, this syntax will help :
+      <pre><code>
+         await().atMost(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWith("myValue").isPresent();
+         </pre></code>
 
 ## Alternative Syntax
 

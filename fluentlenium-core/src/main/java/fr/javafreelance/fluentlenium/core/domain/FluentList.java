@@ -136,6 +136,18 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
     }
 
     /**
+     * Return a custom attribute of elements on the list
+     *
+     * @return
+     */
+    public List<String> getAttributes(final String attribute) {
+        return Lists.transform(this, new Function<E, String>() {
+            public String apply(E webElement) {
+                return webElement.getAttribute(attribute);
+            }
+        });
+    }
+    /**
      * Return the name of elements on the list
      *
      * @return

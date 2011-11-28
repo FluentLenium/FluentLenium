@@ -14,6 +14,7 @@
 
 package fr.javafreelance.fluentlenium.core.filter;
 
+import fr.javafreelance.fluentlenium.core.filter.matcher.ContainsMatcher;
 import fr.javafreelance.fluentlenium.core.filter.matcher.Matcher;
 
 
@@ -21,6 +22,19 @@ public final class FilterConstructor {
 
     private FilterConstructor() {
     }
+
+    /**
+         * Create a filter by name
+         *
+         * @param name
+         * @return
+         */
+        public static Filter buildFilter(String name,FilterType type,Class matcherType) {
+            if (matcherType.equals(ContainsMatcher.class)){
+                return new Filter(FilterType.NAME, name);
+            }
+            return null;
+        }
 
     /**
      * Create a filter by name
