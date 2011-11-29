@@ -89,12 +89,10 @@ will return the list of all input elements which have the class rightForm
 #### Custom filter
 But what if you want all the input that have a text equals to "Sam" ?
 You can use filters to allow that kind of search. For example :
-<pre><code>
-     find(".small",withName("foo"))
+```java     find(".small",withName("foo"))
      find(".small",withId("idOne"))
      find(".small",withText("This field is mandatory."))
-</code></pre>
-
+```
 You can also chained filters :
 find(".small",withName("foo"),withId("id1")) will return all the elements matching the 3 criterias : - class .small ,id id1 and name foo.
 
@@ -313,9 +311,9 @@ Into a page, all FluentWebElement are automatically searched by name or id. For 
     If you want to wait for at most 5 seconds until the number of element corresponding to the until criteria (here the class small) has the requested size.
 
 
-     <pre><code>
+```java
      await().atMost(5, TimeUnit.SECONDS).until(".small").hasSize(3);
-     </code> </pre>
+     ```
 
    Instead of hasSize, you can also use hasText("myTextValue") , hasId("myId"), hasName("myName") . isPresent() are going to check if there is at most one element on the page corresponding to the filter.
 
