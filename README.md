@@ -288,7 +288,7 @@ You can also used the factory createPage
         }
 
     }
-</pre></code>
+                       </code></pre>
 
 Into a page, all FluentWebElement are automatically searched by name or id. For exemple, if you declare un FluentWebElement named createButton, it will look into the page to a element where id is createButton or name is createButton. All elements are proxified which means that the search is really done when you try to access the element.
 
