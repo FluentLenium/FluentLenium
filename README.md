@@ -19,17 +19,17 @@ Your Test Class may extend fr.javafreelance.fluentlenium.core.test.FluentTest By
 After that, all your test methods will be able to be tested into a browser.
 The syntaxes offers directly by Selenium are quite a bit too verbose. FluentLenium proposes two differents syntaxes to easily launch tests.
 For examples, if you want to go to an adresse, fill a form and click to a button to submit and tests that the title of the page have changed
-<pre><code>
+```java
 goTo("http://mywebpage/");
 fill("#firstName").with("toto");
 click("#create-button");
 assertThat(title()).isEqualTo("Hello toto");
-</code></pre>
+```
 
 ## Maven
 
 To add FluentLenium to your project, just add the following dependency into your pom.xml :
-<pre><code>
+```java
 &lt;dependencies&gt;
     ...
     &lt;dependency&gt;
@@ -39,10 +39,10 @@ To add FluentLenium to your project, just add the following dependency into your
     &lt;/dependency&gt;
     ...
 &lt;/dependencies&gt;
- </code></pre>
+ ```
 
 This dependency include the core of the framework and a fest-assert tool. If you don't need the fest-assert tool, you can grab only the core :
- <pre><code>
+ ```java
  &lt;dependencies&gt;
      ...
      &lt;dependency&gt;
@@ -53,22 +53,22 @@ This dependency include the core of the framework and a fest-assert tool. If you
      ...
  &lt;/dependencies&gt;
 
-</code></pre>
+```
 
 
 
 ##Static imports
 
 If you need to do some filtering :
- <pre><code>
+ ```java
 import static fr.javafreelance.fluentlenium.core.filter.FilterConstructor.*;
-</code></pre>
+```
 ### Static import using fest assert
 The static assertions to use fest assert
- <pre><code>
+ ```java
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat;
- </code></pre>
+ ```
 
 ### Basic Methods
 You can use url() , title() or pageSource() to get the url, the title or the page source of the current page.
@@ -89,7 +89,8 @@ will return the list of all input elements which have the class rightForm
 #### Custom filter
 But what if you want all the input that have a text equals to "Sam" ?
 You can use filters to allow that kind of search. For example :
-```java     find(".small",withName("foo"))
+```java
+     find(".small",withName("foo"))
      find(".small",withId("idOne"))
      find(".small",withText("This field is mandatory."))
 ```
@@ -106,17 +107,17 @@ For now, you have 6 differents filters :
 - notEndsWith
 
 For each of them, you can choose to use a css selector :
-<pre><code>
+```java
      find(".small", withName().notContains("name")
      find(".small", withId().notStartsWith("id")
      find(".small", withText().endsWith("Female"))
-</code></pre>
+```
 
 Or to be more precise, you can choose to use a regexp :
-<pre><code>
+```java
      find(".small", withName().contains(regex("na?me[0-9]*"))
      find(".small", withName().notStartsWith(regex("na?me[0-9]*"))
-</code></pre>
+```
 
 Contains, startsWith and endsWith with a regexp pattern are looking for a subsect of the pattern.
 
@@ -127,29 +128,29 @@ More will come soon to filter to create a complete search tool (containsWord, ab
 
 ### N-th
 If you want the first elements that matchs your criteria, just use :
-<pre><code>
+```java
      findFirst(myCssSelector) or find(myCssSelector).first()
-</code></pre>
+```
 
 If you want the element at the given position :
-<pre><code>
+```java
      find(myCssSelector,2)
-</code></pre>
+```
 
 Of course, you can use both position filter and custom filter :
-<pre><code>
+```java
      find(myCssSelector,2,withName("foo"))
-</code></pre>
+```
 
 
 #### Find on children
      You can also chained the find call :
      find(myCssSelector).find("input") will return all the web element input into the css selector tree.
      You can add more indication :
-<pre><code>
+```java
      find(myCssSelector,2,withName("foo")).find("input",withName("bar"))
      or find(myCssSelector,2,withName("foo")).findFirst("input",withName("bar"))
-</code></pre>
+```
 ## Form Action
 If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.
 
@@ -194,17 +195,17 @@ To control that you are in the good page, not only the url [accessible in your t
 Redefined the isAt methods to list all the assertions you have to make in order to be sure that you are in the good pages.
 For exemple, if I choose that the title will be sufficient to know if I'm in the page :
 
-<pre><code>
+```java
         @Override
         public void isAt() {
             assertThat(title()).contains("Selenium");
         }
-</code></pre>
+```
 
 Create you owm methods to easily fill form, go to a next page or what else can be needed in your test.
 
 For exemple :
-<pre><code>
+```java
 public class LoginPage extends FluentPage {
     public String getUrl() {
         return "myCustomUrl";
@@ -217,32 +218,33 @@ public class LoginPage extends FluentPage {
         click("#create-button");
     }
 }
-</code></pre>
+```
 
 And the corresponding test :
-<pre><code>
+```java
 public void checkLoginFailed() {
  goTo(loginPage);
  loginPage.fillAndSubmitLoginForm("login","wrongPass");
  loginPage.isAt();
 }
-</code></pre>
+```
    Or if you have the fest assert module (just made a static import org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat)
 
-    <pre><code>
+    ```java
     public void checkLoginFailed() {
      goTo(loginPage);
      loginPage.fillAndSubmitLoginForm("login","wrongPass");
       assertThat(find(".error")).hasSize(1);
       assertThat(loginPage).isAt();
     }
-    </code></pre>
+    ```
 
 ###Page usage
 You can use the annotation @Page to define your page easily.
 
 For example :
-<pre><code>public class AnnotationInitialization extends FluentTest {
+```java
+ public class AnnotationInitialization extends FluentTest {
     public WebDriver webDriver = new HtmlUnitDriver();
 
     @Page
@@ -262,10 +264,10 @@ For example :
     }
 
 }
-</code></pre>
+```
 
 You can also used the factory createPage
-<pre><code>
+```java
     public class BeforeInitialization extends FluentTest {
         public WebDriver webDriver = new HtmlUnitDriver();
         public TestPage2 page;
@@ -286,11 +288,11 @@ You can also used the factory createPage
         }
 
     }
-                       </code></pre>
+                       ```
 
 Into a page, all FluentWebElement are automatically searched by name or id. For exemple, if you declare un FluentWebElement named createButton, it will look into the page to a element where id is createButton or name is createButton. All elements are proxified which means that the search is really done when you try to access the element.
 
-                       <pre><code>
+```java
                        public class LoginPage extends FluentPage {
                            FluentWebElement createButton;
                            public String getUrl() {
@@ -304,7 +306,7 @@ Into a page, all FluentWebElement are automatically searched by name or id. For 
                                createButton.click();
                            }
                        }
-                       </code></pre>
+                       ```
 ## Wait for an Ajax Call
     You can have multiple way to make your driver wait for the result of an asynchronous call.
     FluentLenium provides a rich and fluent API in order to help you to handle AJAX call.
@@ -313,48 +315,46 @@ Into a page, all FluentWebElement are automatically searched by name or id. For 
 
 ```java
      await().atMost(5, TimeUnit.SECONDS).until(".small").hasSize(3);
-     ```
+```
 
    Instead of hasSize, you can also use hasText("myTextValue") , hasId("myId"), hasName("myName") . isPresent() are going to check if there is at most one element on the page corresponding to the filter.
 
     If you need to be more precise, you can also use filter on the search :
 
-    <pre><code>
+```java
      await().atMost(5, TimeUnit.SECONDS).until(".small").withText("myText").hasSize(3);
-     </code> </pre>
-     You can use withText("myText") but also with the same signature withName , withId
+```     You can use withText("myText") but also with the same signature withName , withId
 
      You can also use matcher :
 
-      <pre><code>
+```java
      await().atMost(5, TimeUnit.SECONDS).until(".small").withText().startsWith("start").isPresent();
-     </code> </pre>
-
+```
      Just use startsWith, notStartsWith , endsWith, notEndsWith , contains , notContains, equalTo.
 
      If you need to filter on a custom attribute name, this syntax will help :
 
-      <pre><code>
+```java
          await().atMost(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWith("myValue").isPresent();
-     </code> </pre>
-
+```
 ## Alternative Syntax
 
 If you are more convenient to the JQuery Syntax, maybe something like that will be more natural for you:
-<pre><code>goTo("http://mywebpage/");
+```java
+goTo("http://mywebpage/");
 $("#firstName").text("toto");
 $("#create-button").click();
-assertThat(title()).isEqualTo("Hello toto");</code></pre>
-
+assertThat(title()).isEqualTo("Hello toto");```
+```
 Both syntax are equivalent. $ or find methods are aliases.
 
 
 ## Execute javascript
 If you need to execute some javascript, just call executeScript with your script as parameter.
 For example, if you have a javascript method called change and you want to call them just add this in your test :
-  <pre><code>
+```java
          executeScript("change();");
- </code></pre>
+```
 
 ## Customize FluentLenium
 ###Driver
@@ -366,31 +366,31 @@ Just override getDefaultWait in your test.
 ### jUnit
 FluentLenium used jUnit by default. You can use test using jUnit assertions, but can of course use others frameworks, more fluent, as Fluent-assert or Hamcrest.
 
-<pre><code>
+```java
  goTo("http://mywebpage/");
  fill("#firstName").with("toto");
  click("#create-button");
  assertEqual("Hello toto",title());
-</code></pre>
+```
 
 ### Fest-Assert
-<pre><code>
+```java
 goTo("http://mywebpage/");
 fill("#firstName").with("toto");
 click("#create-button");
 assertThat(title()).isEqualTo("Hello toto");
-</code></pre>
+```
 
 ### Hamcrest
-<pre><code>
+```java
  goTo("http://mywebpage/");
  fill("#firstName").with("toto");
  click("#create-button");
  assertThat(title(),equalTo("Hello toto"));
-</code></pre>
+```
 
 ### Full example using Fest-Assert assertion framework
-<pre><code>
+```java
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -406,7 +406,7 @@ public class BingTest extends FluentTest {
     }
 
 }
-</code></pre>
+```
 
 
 ### Built by CloudBees
