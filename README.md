@@ -19,7 +19,7 @@ Your Test Class may extend fr.javafreelance.fluentlenium.core.test.FluentTest By
 After that, all your test methods will be able to be tested into a browser.
 The syntaxes offers directly by Selenium are quite a bit too verbose. FluentLenium proposes two differents syntaxes to easily launch tests.
 For examples, if you want to go to an adresse, fill a form and click to a button to submit and tests that the title of the page have changed
-```java
+``` java
 goTo("http://mywebpage/");
 fill("#firstName").with("toto");
 click("#create-button");
@@ -29,7 +29,7 @@ assertThat(title()).isEqualTo("Hello toto");
 ## Maven
 
 To add FluentLenium to your project, just add the following dependency into your pom.xml :
-```java
+``` java
 &lt;dependencies&gt;
     ...
     &lt;dependency&gt;
@@ -42,7 +42,7 @@ To add FluentLenium to your project, just add the following dependency into your
  ```
 
 This dependency include the core of the framework and a fest-assert tool. If you don't need the fest-assert tool, you can grab only the core :
-```java
+``` java
  &lt;dependencies&gt;
      ...
      &lt;dependency&gt;
@@ -352,7 +352,6 @@ Both syntax are equivalent. $ or find methods are aliases.
 ## Execute javascript
 If you need to execute some javascript, just call executeScript with your script as parameter.
 For example, if you have a javascript method called change and you want to call them just add this in your test :
-
 ```java
          executeScript("change();");
 ```
