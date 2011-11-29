@@ -42,7 +42,7 @@ To add FluentLenium to your project, just add the following dependency into your
  ```
 
 This dependency include the core of the framework and a fest-assert tool. If you don't need the fest-assert tool, you can grab only the core :
- ```java
+```java
  &lt;dependencies&gt;
      ...
      &lt;dependency&gt;
@@ -52,7 +52,6 @@ This dependency include the core of the framework and a fest-assert tool. If you
      &lt;/dependency&gt;
      ...
  &lt;/dependencies&gt;
-
 ```
 
 
@@ -60,15 +59,15 @@ This dependency include the core of the framework and a fest-assert tool. If you
 ##Static imports
 
 If you need to do some filtering :
- ```java
+```java
 import static fr.javafreelance.fluentlenium.core.filter.FilterConstructor.*;
 ```
 ### Static import using fest assert
 The static assertions to use fest assert
- ```java
+```java
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat;
- ```
+```
 
 ### Basic Methods
 You can use url() , title() or pageSource() to get the url, the title or the page source of the current page.
