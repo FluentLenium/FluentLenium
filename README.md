@@ -344,7 +344,8 @@ If you are more convenient to the JQuery Syntax, maybe something like that will 
 goTo("http://mywebpage/");
 $("#firstName").text("toto");
 $("#create-button").click();
-assertThat(title()).isEqualTo("Hello toto");```
+assertThat(title()).isEqualTo("Hello toto");
+
 ```
 Both syntax are equivalent. $ or find methods are aliases.
 
@@ -352,6 +353,7 @@ Both syntax are equivalent. $ or find methods are aliases.
 ## Execute javascript
 If you need to execute some javascript, just call executeScript with your script as parameter.
 For example, if you have a javascript method called change and you want to call them just add this in your test :
+
 ```java
          executeScript("change();");
 ```
