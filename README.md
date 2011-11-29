@@ -281,60 +281,60 @@ For example :
 You can also used the factory createPage
 
 ```java
-    public class BeforeInitialization extends FluentTest {
-        public WebDriver webDriver = new HtmlUnitDriver();
-        public TestPage2 page;
+public class BeforeInitialization extends FluentTest {
+    public WebDriver webDriver = new HtmlUnitDriver();
+    public TestPage2 page;
 
-         @Before
-         public void beforeTest() {
-              page  = createPage(TestPage2.class);
-         }
-        @Test
-        public void test_no_exception() {
-            page.go();
-        }
-
-
-        @Override
-        public WebDriver getDefaultDriver() {
-            return webDriver;
-        }
-
+     @Before
+     public void beforeTest() {
+          page  = createPage(TestPage2.class);
+     }
+    @Test
+    public void test_no_exception() {
+        page.go();
     }
+
+
+    @Override
+    public WebDriver getDefaultDriver() {
+        return webDriver;
+    }
+
+}
 ```
 
 Into a page, all FluentWebElement are automatically searched by name or id. For exemple, if you declare un FluentWebElement named createButton, it will look into the page to a element where id is createButton or name is createButton. All elements are proxified which means that the search is really done when you try to access the element.
 
 ```java
-                       public class LoginPage extends FluentPage {
-                           FluentWebElement createButton;
-                           public String getUrl() {
-                               return "myCustomUrl";
-                           }
-                           public void isAt() {
-                               assertThat(title()).isEqualTo("MyTitle");
-                           }
-                           public void fillAndSubmitForm(String... paramsOrdered) {
-                               fill("input").with(paramsOrdered);
-                               createButton.click();
-                           }
-                       }
+public class LoginPage extends FluentPage {
+   FluentWebElement createButton;
+   public String getUrl() {
+       return "myCustomUrl";
+   }
+   public void isAt() {
+       assertThat(title()).isEqualTo("MyTitle");
+   }
+   public void fillAndSubmitForm(String... paramsOrdered) {
+       fill("input").with(paramsOrdered);
+       createButton.click();
+   }
+}
 ```
                        
 ## Wait for an Ajax Call
 
-    You can have multiple way to make your driver wait for the result of an asynchronous call.
-    FluentLenium provides a rich and fluent API in order to help you to handle AJAX call.
-    If you want to wait for at most 5 seconds until the number of element corresponding to the until criteria (here the class small) has the requested size.
+You can have multiple way to make your driver wait for the result of an asynchronous call.
+FluentLenium provides a rich and fluent API in order to help you to handle AJAX call.
+If you want to wait for at most 5 seconds until the number of element corresponding to the until criteria (here the class small) has the requested size.
 
 
 ```java
      await().atMost(5, TimeUnit.SECONDS).until(".small").hasSize(3);
 ```
 
-   Instead of hasSize, you can also use hasText("myTextValue") , hasId("myId"), hasName("myName") . isPresent() are going to check if there is at most one element on the page corresponding to the filter.
+Instead of hasSize, you can also use hasText("myTextValue") , hasId("myId"), hasName("myName") . isPresent() are going to check if there is at most one element on the page corresponding to the filter.
 
-    If you need to be more precise, you can also use filter on the search :
+If you need to be more precise, you can also use filter on the search :
 
 ```java
      await().atMost(5, TimeUnit.SECONDS).until(".small").withText("myText").hasSize(3);
