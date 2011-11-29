@@ -1,7 +1,7 @@
 v 0.5.3
 - fix bugs notStartsWith and notEndsWith
 - deprecated the withXXX(Matcher) syntax. Use now withXXX().+convenientMethods
-
+- add asynchronous call await
 v 0.5.2 :
 FluentLenium FestAssert :
 - add page fest assert assertions
