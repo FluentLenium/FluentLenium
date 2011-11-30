@@ -30,25 +30,27 @@ assertThat(title()).isEqualTo("Hello toto");
 ## Maven
 
 To add FluentLenium to your project, just add the following dependency into your pom.xml :
-``` 
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;fr.javafreelance.fluentlenium&lt;/groupId&gt;
-        &lt;artifactId&gt;fluentlenium&lt;/artifactId&gt;
-        &lt;version&gt;0.3&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
+
+```xml 
+        <dependency>
+            <groupId>fr.javafreelance.fluentlenium</groupId>
+            <artifactId>fluentlenium</artifactId>
+            <version>0.5.3</version>
+            <scope>test</scope>
+        </dependency>
+
 ```
 
 This dependency include the core of the framework and a fest-assert tool. If you don't need the fest-assert tool, you can grab only the core :
-``` 
- &lt;dependencies&gt;
-     &lt;dependency&gt;
-         &lt;groupId&gt;fr.javafreelance.fluentlenium&lt;/groupId&gt;
-         &lt;artifactId&gt;fluentlenium-core&lt;/artifactId&gt;
-         &lt;version&gt;0.3&lt;/version&gt;
-     &lt;/dependency&gt;
- &lt;/dependencies&gt;
+
+```xml 
+        <dependency>
+            <groupId>fr.javafreelance.fluentlenium</groupId>
+            <artifactId>fluentlenium-core</artifactId>
+            <version>0.5.3</version>
+            <scope>test</scope>
+        </dependency>
+
 ```
 
 
