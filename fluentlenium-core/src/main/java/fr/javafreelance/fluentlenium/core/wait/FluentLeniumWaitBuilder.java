@@ -39,69 +39,69 @@ public class FluentLeniumWaitBuilder {
 
 
     public FluentWaitBuilder equalTo(String equal) {
-        fluentLeniumWait.setFilter(new Filter(attribute, new EqualMatcher(equal)));
+        fluentLeniumWait.addFilter(new Filter(attribute, new EqualMatcher(equal)));
         return fluentLeniumWait;
     }
 
     public FluentWaitBuilder contains(String equal) {
-        fluentLeniumWait.setFilter(new Filter(attribute, new ContainsMatcher(equal)));
+        fluentLeniumWait.addFilter(new Filter(attribute, new ContainsMatcher(equal)));
         return fluentLeniumWait;
     }
 
 
     public FluentWaitBuilder contains(Pattern equal) {
-        fluentLeniumWait.setFilter(new Filter(attribute, new ContainsMatcher(equal)));
+        fluentLeniumWait.addFilter(new Filter(attribute, new ContainsMatcher(equal)));
         return fluentLeniumWait;
     }
 
 
     public FluentWaitBuilder startsWith(String equal) {
-        fluentLeniumWait.setFilter(new Filter(attribute, new StartsWithMatcher(equal)));
+        fluentLeniumWait.addFilter(new Filter(attribute, new StartsWithMatcher(equal)));
         return fluentLeniumWait;
     }
 
     public FluentWaitBuilder startsWith(Pattern equal) {
-        fluentLeniumWait.setFilter(new Filter(attribute, new StartsWithMatcher(equal)));
+        fluentLeniumWait.addFilter(new Filter(attribute, new StartsWithMatcher(equal)));
         return fluentLeniumWait;
     }
 
     public FluentWaitBuilder endsWith(String equal) {
-        fluentLeniumWait.setFilter(new Filter(attribute, new EndsWithMatcher(equal)));
+        fluentLeniumWait.addFilter(new Filter(attribute, new EndsWithMatcher(equal)));
         return fluentLeniumWait;
     }
 
     public FluentWaitBuilder endsWith(Pattern equal) {
-        fluentLeniumWait.setFilter(new Filter(attribute, new EndsWithMatcher(equal)));
+        fluentLeniumWait.addFilter(new Filter(attribute, new EndsWithMatcher(equal)));
         return fluentLeniumWait;
     }
 
     public FluentWaitBuilder notContains(String equal) {
-        fluentLeniumWait.setFilter(new Filter(attribute, new NotContainsMatcher(equal)));
+        fluentLeniumWait.addFilter(new Filter(attribute, new NotContainsMatcher(equal)));
         return fluentLeniumWait;
     }
 
     public FluentWaitBuilder notContains(Pattern equal) {
-        fluentLeniumWait.setFilter(new Filter(attribute, new NotContainsMatcher(equal)));
+        fluentLeniumWait.addFilter(new Filter(attribute, new NotContainsMatcher(equal)));
         return fluentLeniumWait;
     }
 
     public FluentWaitBuilder notStartsWith(String equal) {
-        fluentLeniumWait.setFilter(new Filter(attribute, new NotStartsWithMatcher(equal)));
+        fluentLeniumWait.addFilter(new Filter(attribute, new NotStartsWithMatcher(equal)));
         return fluentLeniumWait;
     }
 
     public FluentWaitBuilder notStartsWith(Pattern equal) {
-        fluentLeniumWait.setFilter(new Filter(attribute, new NotStartsWithMatcher(equal)));
+        fluentLeniumWait.addFilter(new Filter(attribute, new NotStartsWithMatcher(equal)));
         return fluentLeniumWait;
     }
 
     public FluentWaitBuilder notEndsWith(String equal) {
-        fluentLeniumWait.setFilter(new Filter(attribute, new NotEndsWithMatcher(equal)));
+        fluentLeniumWait.addFilter(new Filter(attribute, new NotEndsWithMatcher(equal)));
         return fluentLeniumWait;
     }
 
     public FluentWaitBuilder notEndsWith(Pattern equal) {
-        fluentLeniumWait.setFilter(new Filter(attribute, new NotEndsWithMatcher(equal)));
+        fluentLeniumWait.addFilter(new Filter(attribute, new NotEndsWithMatcher(equal)));
         return fluentLeniumWait;
     }
 

@@ -354,7 +354,11 @@ If you need to filter on a custom attribute name, this syntax will help :
 ```java
          await().atMost(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWith("myValue").isPresent();
 ```
+You can also chain filter in the asynchronous api :
 
+```java
+         await().atMost(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWith("myValue").with("a second attribute").equalTo("my@ndValue").isPresent();
+```
 ## Alternative Syntax
 
 If you are more convenient to the JQuery Syntax, maybe something like that will be more natural for you:
