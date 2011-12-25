@@ -14,7 +14,7 @@
     <name>Fluent Lenium Core</name>
     <description>Core of FluentLenium
     </description>
-    <url>https://github.com/MathildeLemee/FluentLenium</url>
+    <url>https://github.com/FluentLenium/FluentLenium</url>
 
 
     <licenses>
@@ -36,7 +36,7 @@
             <id>Mlemee</id>
             <name>Mathilde Lemee</name>
             <email>mathilde.lemee@gmail.com</email>
-            <url>http://www.java-freelance.fr</url>
+            <url>http://www.fluentlenium.org</url>
             <organization>AConsulting</organization>
             <organizationUrl>http://www.java-freelance.fr</organizationUrl>
             <roles>

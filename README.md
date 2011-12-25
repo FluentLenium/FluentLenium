@@ -35,7 +35,7 @@ To add FluentLenium to your project, just add the following dependency into your
         <dependency>
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium</artifactId>
-            <version>0.5.3</version>
+            <version>0.5.4</version>
             <scope>test</scope>
         </dependency>
 
@@ -47,7 +47,7 @@ This dependency include the core of the framework and a fest-assert tool. If you
         <dependency>
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-core</artifactId>
-            <version>0.5.3</version>
+            <version>0.5.4</version>
             <scope>test</scope>
         </dependency>
 
