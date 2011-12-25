@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>fr.javafreelance.fluentlenium</groupId>
+        <groupId>org.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
         <version>0.5.4-SNAPSHOT</version>
     </parent>
-    <groupId>fr.javafreelance.fluentlenium</groupId>
+    <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-festassert</artifactId>
     <packaging>jar</packaging>
 
@@ -45,7 +45,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>fr.javafreelance.fluentlenium</groupId>
+            <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-core</artifactId>
             <version>${project.version}</version>
         </dependency>

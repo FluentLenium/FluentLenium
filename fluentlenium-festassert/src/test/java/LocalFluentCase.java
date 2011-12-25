@@ -12,9 +12,9 @@
  * limitations under the License
  */
 
-package fr.javafreelance.integration.localTest;
+package org.integration.localTest;
 
-import fr.javafreelance.fluentlenium.core.test.FluentTest;
+import org.fluentlenium.core.test.FluentTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 

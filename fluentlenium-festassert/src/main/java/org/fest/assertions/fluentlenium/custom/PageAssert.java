@@ -14,7 +14,7 @@
 
 package org.fest.assertions.fluentlenium.custom;
 
-import fr.javafreelance.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.FluentPage;
 import org.fest.assertions.GenericAssert;
 
 public class PageAssert extends GenericAssert<PageAssert, FluentPage> {

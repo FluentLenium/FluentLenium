@@ -1,7 +1,7 @@
 package org.fest.assertions.fluentlenium;
 
-import fr.javafreelance.fluentlenium.core.FluentPage;
-import fr.javafreelance.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.fest.assertions.fluentlenium.custom.FluentWebElementAssert;
 import org.fest.assertions.fluentlenium.custom.PageAssert;
 

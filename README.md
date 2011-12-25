@@ -15,7 +15,7 @@ But there is also some project working on android etc ...
 ## Basic
 
 Launching the first test.
-Your Test Class may extend fr.javafreelance.fluentlenium.core.test.FluentTest By default, it use FirefoxWebDriver to launch all tests.
+Your Test Class may extend org.fluentlenium.core.test.FluentTest By default, it use FirefoxWebDriver to launch all tests.
 After that, all your test methods will be able to be tested into a browser.
 The syntaxes offers directly by Selenium are quite a bit too verbose. FluentLenium proposes two differents syntaxes to easily launch tests.
 For examples, if you want to go to an adresse, fill a form and click to a button to submit and tests that the title of the page have changed
@@ -33,7 +33,7 @@ To add FluentLenium to your project, just add the following dependency into your
 
 ```xml 
         <dependency>
-            <groupId>fr.javafreelance.fluentlenium</groupId>
+            <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium</artifactId>
             <version>0.5.3</version>
             <scope>test</scope>
@@ -45,7 +45,7 @@ This dependency include the core of the framework and a fest-assert tool. If you
 
 ```xml 
         <dependency>
-            <groupId>fr.javafreelance.fluentlenium</groupId>
+            <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-core</artifactId>
             <version>0.5.3</version>
             <scope>test</scope>
@@ -60,7 +60,7 @@ This dependency include the core of the framework and a fest-assert tool. If you
 If you need to do some filtering :
 
 ```java
-import static fr.javafreelance.fluentlenium.core.filter.FilterConstructor.*;
+import static org.fluentlenium.core.filter.FilterConstructor.*;
 ```
 
 ### Static import using fest assert
@@ -197,7 +197,7 @@ Page Pattern will inclosing all the pumbling, which make tests a lot easier to r
 Try to construct your Page thinking that it is better if you offert services from your page rather that just the internals of the page.
 A Page Object can modelized the whole page or just a part of it.
 
-To construct a Page, it have to extends fr.javafreelance.fluentlenium.core.FluentPage.
+To construct a Page, it have to extends org.fluentlenium.core.FluentPage.
 In most of the cases, you have to defined the url of the page with overriding the getUrl methods.
 In that way, you can go in your test to that page with goTo(myPage)
 

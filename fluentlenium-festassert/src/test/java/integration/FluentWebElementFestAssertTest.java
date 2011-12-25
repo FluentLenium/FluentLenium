@@ -14,7 +14,7 @@
 
 package integration;
 
-import fr.javafreelance.integration.localTest.LocalFluentCase;
+import org.integration.localTest.LocalFluentCase;
 import org.junit.Test;
 
 import static org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat;

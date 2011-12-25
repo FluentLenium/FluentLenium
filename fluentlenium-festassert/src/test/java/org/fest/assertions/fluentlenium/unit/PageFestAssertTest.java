@@ -15,7 +15,7 @@
 package org.fest.assertions.fluentlenium.unit;
 
 
-import fr.javafreelance.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.FluentPage;
 import org.fest.assertions.fluentlenium.FluentLeniumAssertions;
 import org.fest.assertions.fluentlenium.custom.PageAssert;
 import org.junit.Before;

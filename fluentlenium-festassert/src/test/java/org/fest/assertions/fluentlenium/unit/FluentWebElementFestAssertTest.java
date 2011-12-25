@@ -15,7 +15,7 @@
 package org.fest.assertions.fluentlenium.unit;
 
 
-import fr.javafreelance.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.fest.assertions.fluentlenium.FluentLeniumAssertions;
 import org.fest.assertions.fluentlenium.custom.FluentWebElementAssert;
 import org.junit.Before;
