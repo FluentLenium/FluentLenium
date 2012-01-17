@@ -1,3 +1,6 @@
+v 0.5.4
+Migration to org.fluentlenium
+- update to selenium 2.16.1
 v 0.5.3
 - fix bugs notStartsWith and notEndsWith
 - deprecated the withXXX(Matcher) syntax. Use now withXXX().+convenientMethods
