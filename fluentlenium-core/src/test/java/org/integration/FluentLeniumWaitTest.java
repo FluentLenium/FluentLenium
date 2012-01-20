@@ -19,6 +19,7 @@ import org.integration.localTest.LocalFluentCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
@@ -26,7 +27,6 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Before
     public void before() {
         goTo(DEFAULT_URL);
-
     }
 
     @Test
@@ -71,14 +71,11 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void checkAwaitContainsTextWithTextMatcher() {
-
         await().atMost(1, NANOSECONDS).until(".small").withText().contains("Small 1").isPresent();
     }
 
-
     @Test
     public void checkAwaitStartWithRegex() {
-
         await().atMost(1, NANOSECONDS).until(".small").with("id").startsWith(regex("id")).hasSize(2);
     }
 
@@ -116,6 +113,36 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test
     public void checkAwaitNotContainsRegex() {
         await().atMost(1, NANOSECONDS).until(".small").with("id").notContains(regex("d")).hasSize(1);
+    }
+
+    @Test
+    public void checkAwaitEquals(){
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().eq(1);
+    }
+
+    @Test
+    public void checkAwaitNotEquals() {
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().ne(10);
+    }
+
+    @Test
+    public void checkAwaitLessThan() {
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().lt(4);
+    }
+
+    @Test
+    public void checkAwaitLessThanOrEquals() {
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().le(1);
+    }
+
+    @Test
+    public void checkAwaitGreaterThan() {
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().gt(-1);
+    }
+
+    @Test
+    public void checkAwaitGreaterThanOrEquals(){
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().ge(1);
     }
 
     @Test

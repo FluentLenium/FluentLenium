@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterType;
 import org.fluentlenium.core.search.Search;
+import org.fluentlenium.core.size.FluentSizeBuilder;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 
@@ -23,7 +24,6 @@ public class FluentWaitBuilder {
         this.search = search;
 
     }
-
 
     public void isPresent() {
         Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
@@ -56,8 +56,12 @@ public class FluentWaitBuilder {
         wait.until(isPresent);
     }
 
+    public FluentSizeBuilder hasSize() {
+        return new FluentSizeBuilder(search, wait, selector, filter);
+    }
+
     /**
-     * WARNING - SHould be change in a next version to hasAttribute("myAttribute").value("myValue")
+     * WARNING - Should be change in a next version to hasAttribute("myAttribute").value("myValue")
      * @param attribute
      * @param value
      */
@@ -91,7 +95,8 @@ public class FluentWaitBuilder {
         };
         wait.until(isPresent);
     }
-         /**
+
+    /**
      * check if the FluentWait has the corresponding id
      * @param value
      */
@@ -108,7 +113,8 @@ public class FluentWaitBuilder {
         };
         wait.until(isPresent);
     }
-                    /**
+
+    /**
      * check if the FluentWait has the corresponding name
      * @param value
      */
@@ -186,4 +192,7 @@ public class FluentWaitBuilder {
     public void addFilter(Filter filter) {
        this.filter.add( filter);
     }
+
+
+
 }
