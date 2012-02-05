@@ -12,13 +12,22 @@
  * limitations under the License
  */
 
-package org.fluentlenium.core.filter;
+package org.fluentlenium.unit;
 
-/**
- * Different fluentlenium.integration. actually supported by the framework.
- * PreFilter are fluentlenium.integration. than are supported by WebDriver as CSS Selector
- * PostFilter are used after the webdriver selection to fluentlenium.integration. the collection
- */
-public enum FilterType {
-    CUSTOM, NAME, ID, TEXT;
+import org.fluentlenium.adapter.FluentTest;
+import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+
+
+public class AfterTest extends FluentTest {
+
+    @Override
+    public WebDriver getDefaultDriver() {
+        return null;    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Test
+    public void when_driver_is_null_then_it_is_handle() {
+        after();
+    }
 }

@@ -12,13 +12,19 @@
  * limitations under the License
  */
 
-package org.fluentlenium.core.filter;
+package org.fluentlenium.integration.localtest;
 
-/**
- * Different fluentlenium.integration. actually supported by the framework.
- * PreFilter are fluentlenium.integration. than are supported by WebDriver as CSS Selector
- * PostFilter are used after the webdriver selection to fluentlenium.integration. the collection
- */
-public enum FilterType {
-    CUSTOM, NAME, ID, TEXT;
+import org.fluentlenium.adapter.FluentTestNgTest;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+//TODO : Problem here - 1 instance by test when 1 instance for test suite is sufficient ...
+public abstract class LocalFluentCase extends FluentTestNgTest {
+    public static final String DEFAULT_URL = "http://localhost:8787/static/";
+
+    @Override
+    public WebDriver getDefaultDriver() {
+        return new HtmlUnitDriver(true);
+    }
 }
+

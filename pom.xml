@@ -13,7 +13,7 @@
     <modules>
         <module>fluentlenium-core</module>
         <module>fluentlenium-festassert</module>
-        <module>fluentlenium</module>
+        <module>fluentlenium-testng</module>
     </modules>
 
     <name>FluentLenium</name>

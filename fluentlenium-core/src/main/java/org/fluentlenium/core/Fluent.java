@@ -38,7 +38,7 @@ public abstract class Fluent implements SearchActions {
     public Fluent(WebDriver driver) {
         this.driver = driver;
         this.search = new Search(driver);
-        this.wait = new FluentLeniumWait(driver,search);
+        this.wait = new FluentLeniumWait(driver, search);
     }
 
     public Fluent() {
@@ -48,7 +48,7 @@ public abstract class Fluent implements SearchActions {
         this.driver = driver;
         this.search = new Search(driver);
         if (driver != null) {
-            this.wait = new FluentLeniumWait(driver,search);
+            this.wait = new FluentLeniumWait(driver, search);
         }
     }
 
@@ -87,6 +87,33 @@ public abstract class Fluent implements SearchActions {
     protected String pageSource() {
         return driver.getPageSource();
     }
+
+
+    /**
+     * Go To the  page
+     *
+     * @param page
+     */
+    public static void goTo(FluentPage page) {
+        if (page == null) {
+            throw new IllegalArgumentException("Page is mandatory");
+        }
+        page.go();
+    }
+
+    /**
+     * Open the url page
+     *
+     * @param url
+     */
+    public void goTo(String url) {
+        if (url == null) {
+            throw new IllegalArgumentException("Url is mandatory");
+        }
+        getDriver().get(url);
+    }
+
+
 
     public void executeScript(String script) {
         ((JavascriptExecutor) driver).executeScript(script);
@@ -252,6 +279,5 @@ public abstract class Fluent implements SearchActions {
     public void submit(FluentDefaultActions fluentObject) {
         fluentObject.submit();
     }
-
 
 }

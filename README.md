@@ -15,7 +15,7 @@ But there is also some project working on android etc ...
 ## Basic
 
 Launching the first test.
-Your Test Class may extend org.fluentlenium.core.test.FluentTest By default, it use FirefoxWebDriver to launch all tests.
+Your Test Class may extend FluentTest By default, it use FirefoxWebDriver to launch all tests.
 After that, all your test methods will be able to be tested into a browser.
 The syntaxes offers directly by Selenium are quite a bit too verbose. FluentLenium proposes two differents syntaxes to easily launch tests.
 For examples, if you want to go to an adresse, fill a form and click to a button to submit and tests that the title of the page have changed
