@@ -19,8 +19,8 @@ import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
+import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 
 public class FluentLeniumWaitTest extends LocalFluentCase {
     @Before
@@ -116,6 +116,36 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test
     public void checkAwaitNotContainsRegex() {
         await().atMost(1, NANOSECONDS).until(".small").with("id").notContains(regex("d")).hasSize(1);
+    }
+
+    @Test
+    public void checkAwaitEquals() {
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().equalTo(1);
+    }
+
+    @Test
+    public void checkAwaitNotEquals() {
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().notEqualTo(10);
+    }
+
+    @Test
+    public void checkAwaitLessThan() {
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().lessThan(4);
+    }
+
+    @Test
+    public void checkAwaitLessThanOrEquals() {
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().lessThanOrEqualTo(1);
+    }
+
+    @Test
+    public void checkAwaitGreaterThan() {
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().greaterThan(-1);
+    }
+
+    @Test
+    public void checkAwaitGreaterThanOrEquals() {
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().greaterThanOrEqualTo(1);
     }
 
     @Test

@@ -14,8 +14,8 @@
 
 package org.fest.assertions.fluentlenium.custom;
 
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.fest.assertions.GenericAssert;
+import org.fluentlenium.core.domain.FluentWebElement;
 
 public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert, FluentWebElement> {
 

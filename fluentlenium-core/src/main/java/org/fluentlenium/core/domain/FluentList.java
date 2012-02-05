@@ -147,6 +147,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
             }
         });
     }
+
     /**
      * Return the name of elements on the list
      *

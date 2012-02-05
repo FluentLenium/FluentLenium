@@ -24,17 +24,17 @@ public final class FilterConstructor {
     }
 
     /**
-         * Create a filter by name
-         *
-         * @param name
-         * @return
-         */
-        public static Filter buildFilter(String name,FilterType type,Class matcherType) {
-            if (matcherType.equals(ContainsMatcher.class)){
-                return new Filter(FilterType.NAME, name);
-            }
-            return null;
+     * Create a filter by name
+     *
+     * @param name
+     * @return
+     */
+    public static Filter buildFilter(String name, FilterType type, Class matcherType) {
+        if (matcherType.equals(ContainsMatcher.class)) {
+            return new Filter(FilterType.NAME, name);
         }
+        return null;
+    }
 
     /**
      * Create a filter by name
@@ -87,7 +87,8 @@ public final class FilterConstructor {
     public static FilterBuilder withName() {
         return new FilterBuilder(FilterType.NAME);
     }
-       /**
+
+    /**
      * Create a filter builder for the attribute by id
      *
      * @param
@@ -97,7 +98,7 @@ public final class FilterConstructor {
         return new FilterBuilder(FilterType.ID);
     }
 
-      /**
+    /**
      * Create a filter builder for the attribute by text
      *
      * @param

@@ -14,9 +14,9 @@
 
 package org.fluentlenium.unit.initialization;
 
+import org.fluentlenium.adapter.FluentTest;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.adapter.FluentTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;

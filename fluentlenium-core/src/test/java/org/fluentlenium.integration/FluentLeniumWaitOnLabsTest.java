@@ -46,6 +46,7 @@ public class FluentLeniumWaitOnLabsTest extends LocalFluentCase {
         }
         return driver;
     }
+
     @Before
     public void before() {
         goTo(DEFAULT_URL);

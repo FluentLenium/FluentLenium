@@ -18,15 +18,15 @@ package org.fluentlenium.integration;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 
-import static org.fluentlenium.core.filter.FilterConstructor.with;
 import static org.fest.assertions.Assertions.assertThat;
+import static org.fluentlenium.core.filter.FilterConstructor.with;
 
 public class JavascriptTest extends LocalFluentCase {
 
     @Test
     public void checkTextParam() {
         goTo(DEFAULT_URL + "javascript.html");
-        assertThat(find("span",with("id").equalTo("default")).first().getText()).isEqualTo("unchanged");
+        assertThat(find("span", with("id").equalTo("default")).first().getText()).isEqualTo("unchanged");
 
         assertThat(find("#default").first().getText()).isEqualTo("unchanged");
         executeScript("change();");

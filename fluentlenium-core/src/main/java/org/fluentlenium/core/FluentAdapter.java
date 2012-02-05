@@ -17,7 +17,7 @@ import java.lang.reflect.*;
 
 public class FluentAdapter extends Fluent {
 
-     protected void initTest() {
+    protected void initTest() {
         Class cls = null;
         try {
             cls = Class.forName(this.getClass().getName());
@@ -94,21 +94,21 @@ public class FluentAdapter extends Fluent {
     }
 
     /**
-        * Override this method to change the driver
-        *
-        * @return
-        */
-       public WebDriver getDefaultDriver() {
-           return new FirefoxDriver();
-       }
+     * Override this method to change the driver
+     *
+     * @return
+     */
+    public WebDriver getDefaultDriver() {
+        return new FirefoxDriver();
+    }
 
-       public WebDriverWait getDefaultWait() {
-           return new WebDriverWait(getDefaultDriver(), 30);
-       }
+    public WebDriverWait getDefaultWait() {
+        return new WebDriverWait(getDefaultDriver(), 30);
+    }
 
 
-       public static void assertAt(FluentPage fluent) {
-             fluent.isAt();
-         }
+    public static void assertAt(FluentPage fluent) {
+        fluent.isAt();
+    }
 
 }

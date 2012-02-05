@@ -62,10 +62,11 @@ public class GoToTest extends LocalFluentCase {
         return webDriver;
     }
 }
-class MyPage extends FluentPage {
-            @Override
-            public String getUrl() {
-                return LocalFluentCase.DEFAULT_URL;
-            }
 
-        };
+class MyPage extends FluentPage {
+    @Override
+    public String getUrl() {
+        return LocalFluentCase.DEFAULT_URL;
+    }
+
+};

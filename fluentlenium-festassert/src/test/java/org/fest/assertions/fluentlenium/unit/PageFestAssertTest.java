@@ -15,9 +15,9 @@
 package org.fest.assertions.fluentlenium.unit;
 
 
-import org.fluentlenium.core.FluentPage;
 import org.fest.assertions.fluentlenium.FluentLeniumAssertions;
 import org.fest.assertions.fluentlenium.custom.PageAssert;
+import org.fluentlenium.core.FluentPage;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

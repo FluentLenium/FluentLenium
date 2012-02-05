@@ -114,7 +114,6 @@ public abstract class Fluent implements SearchActions {
     }
 
 
-
     public void executeScript(String script) {
         ((JavascriptExecutor) driver).executeScript(script);
     }

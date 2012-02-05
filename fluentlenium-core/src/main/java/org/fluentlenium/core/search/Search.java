@@ -48,7 +48,7 @@ public class Search implements SearchActions {
     public FluentList find(String name, final Filter... filters) {
         StringBuilder sb = new StringBuilder(name);
         List<Filter> postFilterSelector = new ArrayList<Filter>();
-        if (filters != null&&filters.length>0) {
+        if (filters != null && filters.length > 0) {
             for (Filter selector : filters) {
                 if (selector.isPreFilter()) {
                     sb.append(selector.toString());

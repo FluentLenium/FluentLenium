@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterType;
 import org.fluentlenium.core.search.Search;
+import org.fluentlenium.core.wait.size.FluentSizeBuilder;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 
@@ -30,7 +31,7 @@ public class FluentWaitBuilder {
             public boolean apply(@Nullable WebDriver webDriver) {
                 int size;
                 if (filter.size() > 0) {
-                    size = search.find(selector, (Filter[])filter.toArray(new Filter[filter.size()])).size();
+                    size = search.find(selector, (Filter[]) filter.toArray(new Filter[filter.size()])).size();
                 } else {
                     size = search.find(selector).size();
                 }
@@ -45,7 +46,7 @@ public class FluentWaitBuilder {
             public boolean apply(@Nullable WebDriver webDriver) {
                 int size1;
                 if (filter.size() > 0) {
-                    size1 = search.find(selector, (Filter[])filter.toArray(new Filter[filter.size()])).size();
+                    size1 = search.find(selector, (Filter[]) filter.toArray(new Filter[filter.size()])).size();
                 } else {
                     size1 = search.find(selector).size();
                 }
@@ -56,8 +57,13 @@ public class FluentWaitBuilder {
         wait.until(isPresent);
     }
 
+    public FluentSizeBuilder hasSize() {
+        return new FluentSizeBuilder(search, wait, selector, filter);
+    }
+
     /**
-     * WARNING - SHould be change in a next version to hasAttribute("myAttribute").value("myValue")
+     * WARNING - Should be change in a next version to hasAttribute("myAttribute").value("myValue")
+     *
      * @param attribute
      * @param value
      */
@@ -65,7 +71,7 @@ public class FluentWaitBuilder {
         Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(@Nullable WebDriver webDriver) {
                 if (filter.size() > 0) {
-                    return search.find(selector,(Filter[])filter.toArray(new Filter[filter.size()])).getAttributes("attribute").contains(value);
+                    return search.find(selector, (Filter[]) filter.toArray(new Filter[filter.size()])).getAttributes("attribute").contains(value);
                 } else {
                     return search.find(selector).getAttributes("attribute").contains(value);
                 }
@@ -76,6 +82,7 @@ public class FluentWaitBuilder {
 
     /**
      * check if the FluentWait has the corresponding text
+     *
      * @param value
      */
     public void hasText(final String value) {
@@ -83,7 +90,7 @@ public class FluentWaitBuilder {
             public boolean apply(@Nullable WebDriver webDriver) {
                 int size1;
                 if (filter.size() > 0) {
-                    return search.find(selector,(Filter[])filter.toArray(new Filter[filter.size()])).getTexts().contains(value);
+                    return search.find(selector, (Filter[]) filter.toArray(new Filter[filter.size()])).getTexts().contains(value);
                 } else {
                     return search.find(selector).getTexts().contains(value);
                 }
@@ -91,8 +98,10 @@ public class FluentWaitBuilder {
         };
         wait.until(isPresent);
     }
-         /**
+
+    /**
      * check if the FluentWait has the corresponding id
+     *
      * @param value
      */
     public void hasId(final String value) {
@@ -100,7 +109,7 @@ public class FluentWaitBuilder {
             public boolean apply(@Nullable WebDriver webDriver) {
                 int size1;
                 if (filter.size() > 0) {
-                    return search.find(selector,(Filter[])filter.toArray(new Filter[filter.size()])).getIds().contains(value);
+                    return search.find(selector, (Filter[]) filter.toArray(new Filter[filter.size()])).getIds().contains(value);
                 } else {
                     return search.find(selector).getIds().contains(value);
                 }
@@ -108,8 +117,10 @@ public class FluentWaitBuilder {
         };
         wait.until(isPresent);
     }
-                    /**
+
+    /**
      * check if the FluentWait has the corresponding name
+     *
      * @param value
      */
     public void hasName(final String value) {
@@ -117,7 +128,7 @@ public class FluentWaitBuilder {
             public boolean apply(@Nullable WebDriver webDriver) {
                 int size1;
                 if (filter.size() > 0) {
-                    return search.find(selector,(Filter[])filter.toArray(new Filter[filter.size()])).getNames().contains(value);
+                    return search.find(selector, (Filter[]) filter.toArray(new Filter[filter.size()])).getNames().contains(value);
                 } else {
                     return search.find(selector).getNames().contains(value);
                 }
@@ -184,6 +195,6 @@ public class FluentWaitBuilder {
 
 
     public void addFilter(Filter filter) {
-       this.filter.add( filter);
+        this.filter.add(filter);
     }
 }

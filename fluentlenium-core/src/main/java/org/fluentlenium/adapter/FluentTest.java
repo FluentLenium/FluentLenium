@@ -52,8 +52,8 @@ public abstract class FluentTest extends FluentAdapter {
 
 
     public static void assertAt(FluentPage fluent) {
-          fluent.isAt();
-      }
+        fluent.isAt();
+    }
 
     @After
     public void after() {
@@ -61,8 +61,6 @@ public abstract class FluentTest extends FluentAdapter {
             getDriver().quit();
         }
     }
-
-
 
 
 }

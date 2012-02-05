@@ -1,9 +1,9 @@
 package org.fest.assertions.fluentlenium;
 
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.fest.assertions.fluentlenium.custom.FluentWebElementAssert;
 import org.fest.assertions.fluentlenium.custom.PageAssert;
+import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.domain.FluentWebElement;
 
 public final class FluentLeniumAssertions {
 

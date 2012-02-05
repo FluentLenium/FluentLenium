@@ -24,9 +24,9 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.*;
 import static org.fluentlenium.core.filter.MatcherConstructor.*;
-import static org.fest.assertions.Assertions.assertThat;
 
 public class SelectorOnLabsTest extends LocalFluentCase {
     protected static final String DEFAULT_URL = "http://java-freelance.fr:8585/static/";
@@ -207,16 +207,17 @@ public class SelectorOnLabsTest extends LocalFluentCase {
     }
 
     @Test
-        public void checkWithNameMatcherCssSelector() {
-            goTo(DEFAULT_URL);
-            assertThat($(".small", withName().contains("name"))).hasSize(2);
-        }
+    public void checkWithNameMatcherCssSelector() {
+        goTo(DEFAULT_URL);
+        assertThat($(".small", withName().contains("name"))).hasSize(2);
+    }
 
     @Test
-      public void checkStartAttribute() {
-          goTo(DEFAULT_URL);
-          assertThat($("span", withName().startsWith("na")).first().getTagName()).isEqualTo("span");
-      }
+    public void checkStartAttribute() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", withName().startsWith("na")).first().getTagName()).isEqualTo("span");
+    }
+
     @Test
     public void checkEndAttribute() {
         goTo(DEFAULT_URL);

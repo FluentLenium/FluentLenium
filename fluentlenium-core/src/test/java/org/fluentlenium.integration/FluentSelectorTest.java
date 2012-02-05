@@ -17,10 +17,10 @@ package org.fluentlenium.integration;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.with;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
-import static org.fest.assertions.Assertions.assertThat;
 
 public class FluentSelectorTest extends LocalFluentCase {
 
@@ -55,7 +55,6 @@ public class FluentSelectorTest extends LocalFluentCase {
         goTo(DEFAULT_URL);
         assertThat($(".small", withName().notContains("toto"))).hasSize(3);
     }
-
 
 
     @Test
@@ -93,7 +92,6 @@ public class FluentSelectorTest extends LocalFluentCase {
         goTo(DEFAULT_URL);
         assertThat($("span", withName().startsWith(regex("am")))).hasSize(0);
     }
-
 
 
     @Test

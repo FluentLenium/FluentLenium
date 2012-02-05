@@ -23,7 +23,7 @@ import org.testng.annotations.BeforeMethod;
  */
 public abstract class FluentTestNgTest extends FluentAdapter {
 
-     @BeforeMethod
+    @BeforeMethod
     public void beforeClass() {
         this.setDriver(getDefaultDriver());
         initTest();
@@ -41,8 +41,6 @@ public abstract class FluentTestNgTest extends FluentAdapter {
             getDriver().quit();
         }
     }
-
-
 
 
 }
