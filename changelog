@@ -1,3 +1,8 @@
+v 0.5.5
+- Adding eq ne le lt ge gt to the asynchronous api m thanks to Cecile Hui Bon Hoa and Khanh Tuong Maudoux
+- Change on maven structure
+- Adding first draft of the testNG extension
+- Provide an adapter to simplify extension of the framework
 v 0.5.4
 - Migration to org.fluentlenium
 - update to selenium 2.16.1
