@@ -22,10 +22,12 @@ import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
 import org.fluentlenium.core.wait.FluentLeniumWait;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Util Class which offers some shortcut to webdriver methods
@@ -68,6 +70,13 @@ public abstract class Fluent implements SearchActions {
      */
     protected String title() {
         return driver.getTitle();
+    }
+
+    protected Set<Cookie> getCookies() {
+       return  driver.manage().getCookies();
+    }
+    protected Cookie getCookie(String name) {
+       return  driver.manage().getCookieNamed(name);
     }
 
     /**
