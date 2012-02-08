@@ -111,4 +111,8 @@ public class FluentAdapter extends Fluent {
         fluent.isAt();
     }
 
+    public void quit() {
+        getDriver().quit();
+    }
+
 }
