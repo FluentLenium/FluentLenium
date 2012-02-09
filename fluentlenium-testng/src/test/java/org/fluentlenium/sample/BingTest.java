@@ -14,13 +14,13 @@
 
 package org.fluentlenium.sample;
 
-import org.fluentlenium.adapter.FluentTestNgTest;
+import org.fluentlenium.adapter.FluentTestNg;
 import org.testng.annotations.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class BingTest extends FluentTestNgTest {
+public class BingTest extends FluentTestNg {
 
     @Test
     public void title_of_bing_should_contain_search_query_name_using_festassert() {
