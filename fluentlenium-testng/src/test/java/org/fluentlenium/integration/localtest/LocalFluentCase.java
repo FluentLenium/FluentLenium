@@ -14,12 +14,12 @@
 
 package org.fluentlenium.integration.localtest;
 
-import org.fluentlenium.adapter.FluentTestNgTest;
+import org.fluentlenium.adapter.FluentTestNg;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 //TODO : Problem here - 1 instance by test when 1 instance for test suite is sufficient ...
-public abstract class LocalFluentCase extends FluentTestNgTest {
+public abstract class LocalFluentCase extends FluentTestNg {
     public static final String DEFAULT_URL = "http://localhost:8787/static/";
 
     @Override

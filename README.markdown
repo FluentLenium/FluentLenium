@@ -30,24 +30,34 @@ To add FluentLenium to your project, just add the following dependency into your
 ```xml 
 <dependency>
     <groupId>org.fluentlenium</groupId>
-    <artifactId>fluentlenium</artifactId>
-    <version>0.5.4</version>
+    <artifactId>fluentlenium-core</artifactId>
+    <version>0.5.6</version>
     <scope>test</scope>
 </dependency>
 ```
+By default, FluentLenium provide a jUnit adapter.
 
-This dependency includes the core of the framework and a fest-assert tool. If you don't need the fest-assert tool, you can grab only the core :
-
+If you need the fest-assert dependency to improve the lisibility of your test code :
 ```xml 
 <dependency>
     <groupId>org.fluentlenium</groupId>
-    <artifactId>fluentlenium-core</artifactId>
-    <version>0.5.4</version>
+    <artifactId>fluentlenium-festassert</artifactId>
+    <version>0.5.6</version>
     <scope>test</scope>
 </dependency>
 ```
 
-
+An adapter have been built to use FluentLenium with TestNG :
+If you need the fest-assert dependency to improve the lisibility of your test code :
+```xml
+<dependency>
+    <groupId>org.fluentlenium</groupId>
+    <artifactId>fluentlenium-testng</artifactId>
+    <version>0.5.6</version>
+    <scope>test</scope>
+</dependency>
+```
+Just extends org.fluentlenium.adapter.FluentTestNg instead of org.fluentlenium.adapter.FluentTest
 
 ##Static imports
 
@@ -353,6 +363,7 @@ If you need to be more precise, you can also use filter on the search :
 ```java
 await().atMost(5, TimeUnit.SECONDS).until(".small").withText("myText").hasSize(3);
 ```
+You can also use after hasSize() : 'greaterThan(int)', 'lessThan(int)', 'lessThanOrEqualTo(int)', 'greaterThanOrEqualTo(int)' , 'equalTo(int)', 'notEqualTo(int)'
 
 You can use `withText("myText")` but also with the same signature withName , `withId("myId")`
 You can also use matcher :

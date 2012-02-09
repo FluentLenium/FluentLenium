@@ -20,7 +20,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * All Junit Test should extends this class. It provides default parameters.
@@ -46,9 +45,6 @@ public abstract class FluentTest extends FluentAdapter {
         return new FirefoxDriver();
     }
 
-    public WebDriverWait getDefaultWait() {
-        return new WebDriverWait(getDefaultDriver(), 30);
-    }
 
 
     public static void assertAt(FluentPage fluent) {

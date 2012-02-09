@@ -21,7 +21,7 @@ import org.testng.annotations.BeforeMethod;
 /**
  * All TestNG Test should extends this class. It provides default parameters.
  */
-public abstract class FluentTestNgTest extends FluentAdapter {
+public abstract class FluentTestNg extends FluentAdapter {
 
     @BeforeMethod
     public void beforeClass() {
@@ -30,7 +30,7 @@ public abstract class FluentTestNgTest extends FluentAdapter {
     }
 
 
-    public FluentTestNgTest() {
+    public FluentTestNg() {
         super();
     }
 

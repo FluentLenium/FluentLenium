@@ -17,6 +17,13 @@ import java.lang.reflect.*;
 
 public class FluentAdapter extends Fluent {
 
+    public FluentAdapter(WebDriver webDriver) {
+        super(webDriver);
+    }
+
+    public FluentAdapter() {
+        super();
+    }
     protected void initTest() {
         Class cls = null;
         try {

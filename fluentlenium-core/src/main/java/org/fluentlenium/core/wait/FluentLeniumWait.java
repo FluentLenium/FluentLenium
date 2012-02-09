@@ -24,6 +24,11 @@ public class FluentLeniumWait<T> implements org.openqa.selenium.support.ui.Wait<
 
     }
 
+    public FluentLeniumWait(FluentWait fluentWait, Search search) {
+        wait = fluentWait;
+        this.search = search;
+    }
+
     public FluentLeniumWait<T> atMost(long duration, java.util.concurrent.TimeUnit unit) {
         wait.withTimeout(duration, unit);
         return this;
