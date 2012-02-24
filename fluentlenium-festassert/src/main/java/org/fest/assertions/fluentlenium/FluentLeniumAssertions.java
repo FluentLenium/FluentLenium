@@ -28,6 +28,4 @@ public final class FluentLeniumAssertions {
         return new FluentListAssert(actual);
    }
 
-
-
 }

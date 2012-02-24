@@ -39,4 +39,19 @@ public class FluentListAssert extends GenericAssert<FluentListAssert, FluentList
         super.fail("No selected elements contains text: " + textToFind);
         return this;
     }
+
+   /**
+     * check if at no element of the FluentList contains the text
+     *
+     * @return
+     */
+    public FluentListAssert hasNotText(String textToFind) {
+        List<String> actualTexts = actual.getTexts();
+        for(String text : actualTexts) {
+            if(text.contains(textToFind)){
+                super.fail("At least one selected elements contains text: " + textToFind);
+            }
+        }
+        return this;
+    }
 }

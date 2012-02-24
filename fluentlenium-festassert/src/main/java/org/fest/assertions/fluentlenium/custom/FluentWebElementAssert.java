@@ -123,7 +123,20 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
      */
     public FluentWebElementAssert hasText(String textToFind) {
         if(!actual.getText().contains(textToFind)){
-            super.fail("No selected elements contains text: " + textToFind);
+            super.fail("The element does not contain text: " + textToFind);
+        }
+
+       return this;
+    }
+
+   /**
+     * check if the element does not contain the text
+     *
+     * @return
+     */
+    public FluentWebElementAssert hasNotText(String textToFind) {
+        if(actual.getText().contains(textToFind)){
+            super.fail("The element does not contain text: " + textToFind);
         }
 
        return this;
