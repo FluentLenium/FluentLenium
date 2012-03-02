@@ -134,7 +134,7 @@ public abstract class Fluent implements SearchActions {
      * @param filters
      * @return
      */
-    public FluentList $(String name, final Filter... filters) {
+    public FluentList<FluentWebElement> $(String name, final Filter... filters) {
         return search.find(name, filters);
     }
 
@@ -158,7 +158,7 @@ public abstract class Fluent implements SearchActions {
      * @param filters
      * @return
      */
-    public FluentList find(String name, final Filter... filters) {
+    public FluentList<FluentWebElement> find(String name, final Filter... filters) {
         return search.find(name, filters);
     }
 

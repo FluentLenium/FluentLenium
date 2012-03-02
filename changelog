@@ -1,3 +1,6 @@
+v0.5.7
+- ISSUE-8 : find return a FluentList<FluentWebElement>
+
 v 0.5.5
 - Adding eq ne le lt ge gt to the asynchronous api m thanks to Cecile Hui Bon Hoa and Khanh Tuong Maudoux
 - Change on maven structure
