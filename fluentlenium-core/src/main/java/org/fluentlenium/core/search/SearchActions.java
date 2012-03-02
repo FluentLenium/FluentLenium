@@ -20,7 +20,7 @@ import org.fluentlenium.core.filter.Filter;
 
 
 public interface SearchActions {
-    FluentList find(String name, Filter... filters);
+    FluentList<FluentWebElement> find(String name, Filter... filters);
 
     FluentWebElement find(String name, Integer number, Filter... filters);
 

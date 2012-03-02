@@ -45,7 +45,7 @@ public class Search implements SearchActions {
      * @param filters
      * @return
      */
-    public FluentList find(String name, final Filter... filters) {
+    public FluentList<FluentWebElement> find(String name, final Filter... filters) {
         StringBuilder sb = new StringBuilder(name);
         List<Filter> postFilterSelector = new ArrayList<Filter>();
         if (filters != null && filters.length > 0) {

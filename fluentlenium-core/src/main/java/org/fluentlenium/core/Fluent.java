@@ -84,7 +84,7 @@ public abstract class Fluent implements SearchActions {
      *
      * @return
      */
-    protected String url() {
+    public String url() {
         return driver.getCurrentUrl();
     }
 
@@ -93,7 +93,7 @@ public abstract class Fluent implements SearchActions {
      *
      * @return
      */
-    protected String pageSource() {
+    public String pageSource() {
         return driver.getPageSource();
     }
 

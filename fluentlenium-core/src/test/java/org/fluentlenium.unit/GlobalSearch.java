@@ -15,6 +15,7 @@
 package org.fluentlenium.unit;
 
 
+import com.google.common.collect.Lists;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
@@ -72,6 +73,18 @@ public class GlobalSearch {
         verify(searchContext).findElements(By.cssSelector("cssStyle[generated=true][checked=ok]"));
     }
 
+    @Test
+    public void can_loop_into_fluentWebElement_after_a_search() {
+        WebElement webElement = mock(WebElement.class);
+        WebElement webElement2 = mock(WebElement.class);
+        List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
+
+        when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(webElements);
+        for (FluentWebElement fluentWebElement : search.find("cssStyle")) {
+            //just to check the cast
+        }
+
+    }
 
     @Test
     public void findCheckCssIsWellFormedWithPostSelector() {
@@ -155,7 +168,7 @@ public class GlobalSearch {
     public void shouldThrowErrorWhenPositionNotFound() {
         String name = "cssStyle";
         WebElement webElement = mock(WebElement.class);
-        search.find(name, 0, null);
+        search.find(name, 0);
     }
 
     @Test
@@ -170,14 +183,14 @@ public class GlobalSearch {
         webElements.add(webElement2);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(webElements);
 
-        FluentWebElement fluentWebElement = search.findFirst(name, null);
+        FluentWebElement fluentWebElement = search.findFirst(name);
         assertThat(fluentWebElement.getTagName()).isEqualTo("span");
     }
 
     @Test(expected = NoSuchElementException.class)
     public void shouldThrowErrorWhenFirstNotFound() {
         String name = "cssStyle";
-        FluentWebElement fluentWebElement = search.findFirst(name, null);
+        FluentWebElement fluentWebElement = search.findFirst(name);
         assertThat(fluentWebElement.getTagName()).isEqualTo("span");
     }
 
