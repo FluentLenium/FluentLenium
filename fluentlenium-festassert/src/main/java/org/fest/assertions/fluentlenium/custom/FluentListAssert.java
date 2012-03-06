@@ -36,7 +36,7 @@ public class FluentListAssert extends GenericAssert<FluentListAssert, FluentList
                 return this;
             }
         }
-        super.fail("No selected elements contains text: " + textToFind);
+        super.fail("No selected elements contains text: " + textToFind + " . Actual texts found : " + actualTexts);
         return this;
     }
 
@@ -49,7 +49,7 @@ public class FluentListAssert extends GenericAssert<FluentListAssert, FluentList
         List<String> actualTexts = actual.getTexts();
         for(String text : actualTexts) {
             if(text.contains(textToFind)){
-                super.fail("At least one selected elements contains text: " + textToFind);
+                super.fail("At least one selected elements contains text: " + textToFind + " . Actual texts found : " + actualTexts);
             }
         }
         return this;
