@@ -54,4 +54,23 @@ public class FluentListAssert extends GenericAssert<FluentListAssert, FluentList
         }
         return this;
     }
+
+	public FluentListAssert hasSize(int expectedSize) {
+		if(actual.size() != expectedSize) {
+			super.fail("Expected size: " + expectedSize + ". Actual size: " + actual.size() + ".");
+		}
+		return this;
+	}
+	
+	public FluentListSizeBuilder hasSize() {
+		return new FluentListSizeBuilder(actual.size(), this);
+	}
+	
+	/*
+	 * Used in FluentListSizeBuilder to raise AssertionError
+	 */
+	void internalFail(String reason) {
+		super.fail(reason);
+	}
+	
 }
