@@ -438,6 +438,13 @@ goTo("http://mywebpage/");
 fill("#firstName").with("toto");
 click("#create-button");
 assertThat(title()).isEqualTo("Hello toto");
+assertThat(find(myCssSelector)).hasText("present text");
+assertThat(find(myCssSelector)).hasNotText("not present text");
+assertThat(find(myCssSelecto1)).hasSize(7);
+assertThat(find(myCssSelecto2)).hasSize().lessThan(5);
+assertThat(find(myCssSelecto2)).hasSize().lessThanOrEqualTo(5);
+assertThat(find(myCssSelecto3)).hasSize().greaterThan(2);
+assertThat(find(myCssSelecto3)).hasSize().greaterThanOrEqualTo(2);
 ```
 
 ### Hamcrest
