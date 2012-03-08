@@ -31,39 +31,35 @@ public class PageTest extends LocalFluentCase {
     @Page
     Page2 page2;
 
+
     @BeforeMethod
     public void beforeTest() {
-        page.go();
+        goTo(page);
     }
 
     @Test
     public void checkGoTo() {
-        page.go();
         assertThat(title()).contains("Selenium");
     }
 
     @Test
     public void checkIsAt() {
-        page.go();
         page.isAt();
     }
 
     @Test(expectedExceptions = ComparisonFailure.class)
     public void checkIsAtFailed() {
-        page.go();
         page2.isAt();
     }
 
     @Test
     public void checkFollowLink() {
-        page.go();
         page.goToNexPage();
         page2.isAt();
     }
 
     @Test
     public void checkFollowLinkWithBddStyle() {
-        goTo(page);
         assertAt(page);
         page.goToNexPage();
         assertAt(page2);
