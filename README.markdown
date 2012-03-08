@@ -35,9 +35,11 @@ To add FluentLenium to your project, just add the following dependency into your
     <scope>test</scope>
 </dependency>
 ```
+
 By default, FluentLenium provide a jUnit adapter.
 
 If you need the fest-assert dependency to improve the lisibility of your test code :
+
 ```xml 
 <dependency>
     <groupId>org.fluentlenium</groupId>
@@ -49,6 +51,7 @@ If you need the fest-assert dependency to improve the lisibility of your test co
 
 An adapter have been built to use FluentLenium with TestNG :
 If you need the fest-assert dependency to improve the lisibility of your test code :
+
 ```xml
 <dependency>
     <groupId>org.fluentlenium</groupId>
@@ -57,7 +60,8 @@ If you need the fest-assert dependency to improve the lisibility of your test co
     <scope>test</scope>
 </dependency>
 ```
-Just extends org.fluentlenium.adapter.FluentTestNg instead of org.fluentlenium.adapter.FluentTest
+
+Just extends `org.fluentlenium.adapter.FluentTestNg` instead of `org.fluentlenium.adapter.FluentTest`.
 
 ##Static imports
 
@@ -83,9 +87,10 @@ You can use `url()` , `title()` or `pageSource()` to get the url, the title or t
 You can use CSS1, CSS2 and CSS3 selector with the same restrictions as in Selenium.
 
 If you want to find the list of elements which have
-- the id "title" : `find("#title")`
-- the class name "small" : `find(".small")`
-- the tag name "input" : `find("input")`
+
+  - the `id` "title" : `find("#title")`
+  - the `class` name "small" : `find(".small")`
+  - the `tag` name "input" : `find("input")`
 
 You are free to use most of the CSS3 syntax, wich means that
 `find("input[class=rightForm]")`
@@ -276,7 +281,7 @@ public void checkLoginFailed() {
 ```
 
 ###Page usage
-You can use the annotation @Page to define your page easily.
+You can use the annotation `@Page` to define your page easily.
 
 For example :
 
