@@ -68,14 +68,14 @@ public abstract class Fluent implements SearchActions {
      *
      * @return
      */
-    protected String title() {
+    public String title() {
         return driver.getTitle();
     }
 
-    protected Set<Cookie> getCookies() {
+    public Set<Cookie> getCookies() {
        return  driver.manage().getCookies();
     }
-    protected Cookie getCookie(String name) {
+    public Cookie getCookie(String name) {
        return  driver.manage().getCookieNamed(name);
     }
 
