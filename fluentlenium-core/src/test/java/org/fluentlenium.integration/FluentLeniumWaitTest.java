@@ -19,6 +19,8 @@ import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 
@@ -160,12 +162,24 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void checkHasAttribute() {
-        await().atMost(1, NANOSECONDS).until("input").hasAttribute("value","John");
+        await().atMost(1, NANOSECONDS).until("input").hasAttribute("value", "John");
     }
 
-      @Test
+    @Test
     public void checkHasAttributeWithOthersFilters() {
-        await().atMost(1, NANOSECONDS).until("input").with("value").equalTo("John").hasAttribute("value","John");
+        await().atMost(1, NANOSECONDS).until("input").with("value").equalTo("John").hasAttribute("value", "John");
+    }
+
+    @Test
+    public void checkPolling() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(500, TimeUnit.MILLISECONDS).pollingEvery(500, TimeUnit.MILLISECONDS).until("#default").hasText("wait");
+    }
+
+    @Test
+    public void checkPollingOk() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(500, TimeUnit.MILLISECONDS).pollingEvery(1, TimeUnit.SECONDS).until("#default").hasText("wait2");
     }
 
 }

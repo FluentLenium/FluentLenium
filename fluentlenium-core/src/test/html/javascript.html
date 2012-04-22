@@ -23,6 +23,14 @@
     document.getElementById("default").innerHTML="changed";
     }
 
+    setTimeout(function() {
+    document.getElementById("default").innerHTML="wait";
+    ;},1250);
+
+    setTimeout(function() {
+    document.getElementById("default").innerHTML="wait2";
+    ;},750);
+
 </script>
 <body style="" name="body">
 <span id="default">unchanged</span>

@@ -37,7 +37,6 @@ public class FluentLeniumWait<T> implements org.openqa.selenium.support.ui.Wait<
     public FluentLeniumWait<T> pollingEvery(long duration, java.util.concurrent.TimeUnit unit) {
         wait.pollingEvery(duration, unit);
         return this;
-
     }
 
     public FluentLeniumWait<T> ignoreAll(java.util.Collection<java.lang.Class<? extends java.lang.RuntimeException>> types) {
