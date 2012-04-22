@@ -16,21 +16,63 @@ package org.fluentlenium.adapter;
 
 import org.fluentlenium.core.FluentAdapter;
 import org.fluentlenium.core.FluentPage;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.Rule;
+import org.junit.rules.MethodRule;
+import org.junit.rules.TestName;
+import org.junit.rules.TestWatchman;
+import org.junit.runners.model.FrameworkMethod;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.util.Date;
 
 /**
  * All Junit Test should extends this class. It provides default parameters.
  */
 public abstract class FluentTest extends FluentAdapter {
-    @Before
-    public final void beforeConstructTest() {
-        this.initFluent(getDefaultDriver());
-        initTest();
+
+    protected enum Mode {TAKE_SNAPSHOT_ON_FAIL, NEVER_TAKE_SNAPSHOT}
+
+    private Mode snapshotMode = Mode.NEVER_TAKE_SNAPSHOT;
+    private String snapshotPath;
+    public Class classe = this.getClass();
+
+    public void setSnapshotPath(String path) {
+        this.snapshotPath = path;
     }
 
+    public void setSnapshotMode(Mode mode) {
+        this.snapshotMode = mode;
+    }
+
+    @Rule
+    public TestName name = new TestName();
+    @Rule
+    public MethodRule watchman = new TestWatchman() {
+
+        @Override
+        public void starting(FrameworkMethod method) {
+            super.starting(method);
+            initFluent(getDefaultDriver());
+            initTest();
+        }
+
+        @Override
+        public void finished(FrameworkMethod method) {
+            super.finished(method);
+            if (getDriver() != null) {
+                quit();
+            }
+        }
+
+        @Override
+        public void failed(Throwable e, FrameworkMethod method) {
+            if (snapshotMode == Mode.TAKE_SNAPSHOT_ON_FAIL) {
+                takeScreenShot(snapshotPath+"/"+classe.getSimpleName() + "_" + method.getName() + new Date().getTime() + ".png");
+            }
+        }
+
+    };
 
     public FluentTest() {
         super();
@@ -46,16 +88,8 @@ public abstract class FluentTest extends FluentAdapter {
     }
 
 
-
     public static void assertAt(FluentPage fluent) {
         fluent.isAt();
-    }
-
-    @After
-    public void after() {
-        if (getDriver() != null) {
-            quit();
-        }
     }
 
 

@@ -14,6 +14,7 @@
 
 package org.fluentlenium.core;
 
+import org.apache.commons.io.FileUtils;
 import org.fluentlenium.core.action.FillConstructor;
 import org.fluentlenium.core.action.FluentDefaultActions;
 import org.fluentlenium.core.domain.FluentList;
@@ -22,10 +23,11 @@ import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
 import org.fluentlenium.core.wait.FluentLeniumWait;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -44,6 +46,23 @@ public abstract class Fluent implements SearchActions {
     }
 
     public Fluent() {
+    }
+
+    public void takeScreenShot() {
+        takeScreenShot(new Date().getTime() + ".png");
+    }
+
+    public void takeScreenShot(String fileName) {
+        File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+        try {
+
+            File destFile = new File(fileName);
+            FileUtils.copyFile(scrFile, destFile);
+            System.out.println(destFile.getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("error when taking the snapshot", e);
+        }
     }
 
     protected final void initFluent(WebDriver driver) {
@@ -73,10 +92,11 @@ public abstract class Fluent implements SearchActions {
     }
 
     public Set<Cookie> getCookies() {
-       return  driver.manage().getCookies();
+        return driver.manage().getCookies();
     }
+
     public Cookie getCookie(String name) {
-       return  driver.manage().getCookieNamed(name);
+        return driver.manage().getCookieNamed(name);
     }
 
     /**

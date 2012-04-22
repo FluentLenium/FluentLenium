@@ -6,6 +6,7 @@ v0.5.7
 - Add methods on fest assert : hasText, hasNotText, hasSize
 - ISSUE-28 : Add custom message when await fail
 - add @AjaxElement : wait for element to be found on a page context
+- add snapshot for junit
 v 0.5.5
 - Adding eq ne le lt ge gt to the asynchronous api m thanks to Cecile Hui Bon Hoa and Khanh Tuong Maudoux
 - Change on maven structure
