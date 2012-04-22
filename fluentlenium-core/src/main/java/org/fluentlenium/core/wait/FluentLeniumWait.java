@@ -14,18 +14,8 @@ public class FluentLeniumWait<T> implements org.openqa.selenium.support.ui.Wait<
         return wait;
     }
 
-    public FluentLeniumWait(FluentWait input, org.openqa.selenium.support.ui.Clock clock, org.openqa.selenium.support.ui.Sleeper sleeper) {
-        wait = new FluentWait(input, clock, sleeper);
-    }
-
     public FluentLeniumWait(WebDriver driver, Search search) {
         wait = new FluentWait(driver);
-        this.search = search;
-
-    }
-
-    public FluentLeniumWait(FluentWait fluentWait, Search search) {
-        wait = fluentWait;
         this.search = search;
     }
 
