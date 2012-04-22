@@ -1,11 +1,13 @@
 package org.fluentlenium.core;
 
+import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.exception.ConstructionException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
@@ -23,6 +25,7 @@ public class FluentAdapter extends Fluent {
     public FluentAdapter() {
         super();
     }
+
     protected void initTest() {
         Class cls = null;
         try {
@@ -55,7 +58,7 @@ public class FluentAdapter extends Fluent {
             construct.setAccessible(true);
             page = (T) construct.newInstance();
             Class parent = Class.forName(Fluent.class.getName());
-            Method m = parent.getDeclaredMethod("setDriver", WebDriver.class);
+            Method m = parent.getDeclaredMethod("initFluent", WebDriver.class);
             m.setAccessible(true);
             m.invoke(page, getDriver());
 
@@ -66,7 +69,12 @@ public class FluentAdapter extends Fluent {
                     continue;
                 }
                 fieldFromPage.setAccessible(true);
-                proxyElement(new DefaultElementLocatorFactory(getDriver()), page, fieldFromPage);
+                AjaxElement elem = fieldFromPage.getAnnotation(AjaxElement.class);
+                if (elem == null) {
+                    proxyElement(new DefaultElementLocatorFactory(getDriver()), page, fieldFromPage);
+                } else {
+                    proxyElement(new AjaxElementLocatorFactory(getDriver(), elem.timeout()), page, fieldFromPage);
+                }
             }
         } catch (ClassNotFoundException e) {
             throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
