@@ -10,7 +10,6 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.lang.reflect.*;
 
@@ -107,10 +106,6 @@ public class FluentAdapter extends Fluent {
      */
     public WebDriver getDefaultDriver() {
         return new FirefoxDriver();
-    }
-
-    public WebDriverWait getDefaultWait() {
-        return new WebDriverWait(getDefaultDriver(), 30);
     }
 
 

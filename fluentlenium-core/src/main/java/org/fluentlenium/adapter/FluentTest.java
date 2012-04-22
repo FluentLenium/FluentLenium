@@ -27,7 +27,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public abstract class FluentTest extends FluentAdapter {
     @Before
     public final void beforeConstructTest() {
-        this.setDriver(getDefaultDriver());
+        this.initFluent(getDefaultDriver());
         initTest();
     }
 

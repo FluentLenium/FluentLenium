@@ -25,7 +25,7 @@ public abstract class FluentTestNg extends FluentAdapter {
 
     @BeforeClass
     public void beforeClass() {
-        this.setDriver(getDefaultDriver());
+        this.initFluent(getDefaultDriver());
         initTest();
     }
 
