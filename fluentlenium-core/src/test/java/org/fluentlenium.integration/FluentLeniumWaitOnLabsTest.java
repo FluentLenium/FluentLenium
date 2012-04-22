@@ -29,7 +29,6 @@ import java.net.URL;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 public class FluentLeniumWaitOnLabsTest extends LocalFluentCase {
-    protected static final String DEFAULT_URL = "http://java-freelance.fr:8585/static/";
 
 
     @Override
