@@ -3,7 +3,8 @@ v0.5.7
 - ISSUE-26 : Polish pollingEvery features
 - ISSUE-22 : Fix bug on hasAttribute
 - ISSUE-21 : use @BeforeMethod instead of @BeforeTest
-- Add methods on fest assert : hasText, hasSize
+- Add methods on fest assert : hasText, hasNotText, hasSize
+- ISSUE-28 : Add custom message when await fail
 
 v 0.5.5
 - Adding eq ne le lt ge gt to the asynchronous api m thanks to Cecile Hui Bon Hoa and Khanh Tuong Maudoux

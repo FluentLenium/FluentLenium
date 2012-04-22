@@ -12,7 +12,7 @@
  * limitations under the License
  */
 
-package org.fluentlenium.core.wait.size;
+package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.filter.Filter;
@@ -24,18 +24,20 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.fluentlenium.core.wait.WaitMessage.*;
+
 public class FluentSizeBuilder {
 
     String selector;
     private FluentWait wait;
     private Search search;
-    private List<Filter> filter = new ArrayList<Filter>();
+    private List<Filter> filters = new ArrayList<Filter>();
 
-    public FluentSizeBuilder(Search search, FluentWait fluentWait, String selector, List<Filter> filter) {
+    public FluentSizeBuilder(Search search, FluentWait fluentWait, String selector, List<Filter> filters) {
         this.selector = selector;
         this.wait = fluentWait;
         this.search = search;
-        this.filter = filter;
+        this.filters = filters;
     }
 
     /**
@@ -49,7 +51,7 @@ public class FluentSizeBuilder {
                 return getSize() == size;
             }
         };
-        wait.until(isPresent);
+        FluentWaitBuilder.until(wait, isPresent, filters, equalToMessage(selector, size));
     }
 
     /**
@@ -63,7 +65,7 @@ public class FluentSizeBuilder {
                 return getSize() != size;
             }
         };
-        wait.until(isPresent);
+        FluentWaitBuilder.until(wait, isPresent, filters, notEqualToMessage(selector, size));
     }
 
     /**
@@ -77,7 +79,7 @@ public class FluentSizeBuilder {
                 return getSize() < size;
             }
         };
-        wait.until(isPresent);
+        FluentWaitBuilder.until(wait, isPresent, filters, lessThanMessage(selector, size));
     }
 
     /**
@@ -91,7 +93,7 @@ public class FluentSizeBuilder {
                 return getSize() <= size;
             }
         };
-        wait.until(isPresent);
+        FluentWaitBuilder.until(wait, isPresent, filters, lessThanOrEqualToMessage(selector, size));
     }
 
     /**
@@ -105,7 +107,7 @@ public class FluentSizeBuilder {
                 return getSize() > size;
             }
         };
-        wait.until(isPresent);
+        FluentWaitBuilder.until(wait, isPresent, filters, greatherThanMessage(selector, size));
     }
 
     /**
@@ -119,17 +121,15 @@ public class FluentSizeBuilder {
                 return getSize() >= size;
             }
         };
-        wait.until(isPresent);
+        FluentWaitBuilder.until(wait, isPresent, filters, greatherThanOrEqualToMessage(selector, size));
     }
 
     private int getSize() {
-        int size1;
-        if (filter.size() > 0) {
-            size1 = search.find(selector, (Filter[]) filter.toArray(new Filter[filter.size()])).size();
+        if (filters.size() > 0) {
+            return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).size();
         } else {
-            size1 = search.find(selector).size();
+            return search.find(selector).size();
         }
-        return size1;
     }
 
 
