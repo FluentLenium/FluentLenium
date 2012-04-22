@@ -359,6 +359,7 @@ If you want to wait for at most 5 seconds until the number of element correspond
 ```java
 await().atMost(5, TimeUnit.SECONDS).until(".small").hasSize(3);
 ```
+The default wait is 500 ms.
 
 Instead of hasSize, you can also use `hasText("myTextValue")`, `hasId("myId")`, `hasName("myName")`.
 The `isPresent()` assertion is going to check if there is at most one element on the page corresponding to the filter.
@@ -384,6 +385,13 @@ If you need to filter on a custom attribute name, this syntax will help :
 ```java
 await().atMost(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWith("myValue").isPresent();
 ```
+
+### Polling Every
+You can also defined the polling frequency, for example, if you want to pull every 5 seconds :
+ ```java
+await().pollingEvery(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWith("myValue").isPresent();
+```
+The default value is 500ms.
 
 You can also chain filter in the asynchronous API :
 
