@@ -21,6 +21,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 //TODO : Problem here - 1 instance by test when 1 instance for test suite is sufficient ...
 public abstract class LocalFluentCase extends FluentTest {
     public static final String DEFAULT_URL = "http://localhost:8787/static/";
+    public static final String JAVASCRIPT_URL = "http://localhost:8787/static/javascript.html";
 
     @Override
     public WebDriver getDefaultDriver() {

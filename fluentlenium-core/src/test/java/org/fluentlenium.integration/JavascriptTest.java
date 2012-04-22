@@ -25,7 +25,7 @@ public class JavascriptTest extends LocalFluentCase {
 
     @Test
     public void checkTextParam() {
-        goTo(DEFAULT_URL + "javascript.html");
+        goTo(JAVASCRIPT_URL);
         assertThat(find("span", with("id").equalTo("default")).first().getText()).isEqualTo("unchanged");
 
         assertThat(find("#default").first().getText()).isEqualTo("unchanged");
