@@ -81,7 +81,6 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void checkAwaitStartWithRegex() {
-
         await().atMost(1, NANOSECONDS).until(".small").with("id").startsWith(regex("id")).hasSize(2);
     }
 
