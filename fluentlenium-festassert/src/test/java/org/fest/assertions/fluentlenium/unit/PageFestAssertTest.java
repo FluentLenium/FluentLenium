@@ -35,6 +35,7 @@ public class PageFestAssertTest {
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
+
     }
 
     @Test
