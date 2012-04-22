@@ -14,8 +14,6 @@
 
 package org.fest.assertions.fluentlenium.custom;
 
-import java.util.List;
-
 import org.fest.assertions.GenericAssert;
 import org.fluentlenium.core.domain.FluentWebElement;
 
@@ -123,7 +121,8 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
      */
     public FluentWebElementAssert hasText(String textToFind) {
         if(!actual.getText().contains(textToFind)){
-            super.fail("The element does not contain text: " + textToFind);
+            super.fail("The element does not contain the text: " + textToFind+" . Actual text found : " + actual.getText());
+
         }
 
        return this;
@@ -136,7 +135,7 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
      */
     public FluentWebElementAssert hasNotText(String textToFind) {
         if(actual.getText().contains(textToFind)){
-            super.fail("The element does not contain text: " + textToFind);
+            super.fail("The element contain the text: " + textToFind);
         }
 
        return this;
