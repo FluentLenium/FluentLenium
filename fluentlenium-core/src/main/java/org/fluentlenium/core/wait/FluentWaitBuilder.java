@@ -42,7 +42,7 @@ public class FluentWaitBuilder {
     }
 
     public void hasSize(final int size) {
-        Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
+        Predicate hasSize = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(@Nullable WebDriver webDriver) {
                 int size1;
                 if (filter.size() > 0) {
@@ -54,7 +54,7 @@ public class FluentWaitBuilder {
 
             }
         };
-        wait.until(isPresent);
+        wait.until(hasSize);
     }
 
     public FluentSizeBuilder hasSize() {
@@ -68,17 +68,18 @@ public class FluentWaitBuilder {
      * @param value
      */
     public void hasAttribute(final String attribute, final String value) {
-        Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
+        Predicate hasAttribute = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(@Nullable WebDriver webDriver) {
                 if (filter.size() > 0) {
-                    return search.find(selector, (Filter[]) filter.toArray(new Filter[filter.size()])).getAttributes("attribute").contains(value);
+                    return search.find(selector, (Filter[]) filter.toArray(new Filter[filter.size()])).getAttributes(attribute).contains(value);
                 } else {
-                    return search.find(selector).getAttributes("attribute").contains(value);
+                    return search.find(selector).getAttributes(attribute).contains(value);
                 }
             }
         };
-        wait.until(isPresent);
+        wait.until(hasAttribute);
     }
+
 
     /**
      * check if the FluentWait has the corresponding text
@@ -86,9 +87,8 @@ public class FluentWaitBuilder {
      * @param value
      */
     public void hasText(final String value) {
-        Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
+        Predicate hasText = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(@Nullable WebDriver webDriver) {
-                int size1;
                 if (filter.size() > 0) {
                     return search.find(selector, (Filter[]) filter.toArray(new Filter[filter.size()])).getTexts().contains(value);
                 } else {
@@ -96,7 +96,7 @@ public class FluentWaitBuilder {
                 }
             }
         };
-        wait.until(isPresent);
+        wait.until(hasText);
     }
 
     /**
@@ -105,9 +105,8 @@ public class FluentWaitBuilder {
      * @param value
      */
     public void hasId(final String value) {
-        Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
+        Predicate hasId = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(@Nullable WebDriver webDriver) {
-                int size1;
                 if (filter.size() > 0) {
                     return search.find(selector, (Filter[]) filter.toArray(new Filter[filter.size()])).getIds().contains(value);
                 } else {
@@ -115,7 +114,7 @@ public class FluentWaitBuilder {
                 }
             }
         };
-        wait.until(isPresent);
+        wait.until(hasId);
     }
 
     /**
@@ -124,7 +123,7 @@ public class FluentWaitBuilder {
      * @param value
      */
     public void hasName(final String value) {
-        Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
+        Predicate hasName = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(@Nullable WebDriver webDriver) {
                 int size1;
                 if (filter.size() > 0) {
@@ -134,7 +133,7 @@ public class FluentWaitBuilder {
                 }
             }
         };
-        wait.until(isPresent);
+        wait.until(hasName);
     }
 
     public FluentWaitBuilder withText(final String value) {

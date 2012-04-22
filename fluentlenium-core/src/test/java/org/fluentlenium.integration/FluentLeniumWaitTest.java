@@ -149,7 +149,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     }
 
     @Test
-    public void checkHasAttribute() {
+    public void checkWithValue() {
         await().atMost(1, NANOSECONDS).until("input").with("value").equalTo("John").hasSize(4);
     }
 
@@ -157,4 +157,15 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     public void checkMultipleFilter() {
         await().atMost(1, NANOSECONDS).until(".small").with("id").startsWith(regex("id")).with("text").endsWith("2").hasSize(1);
     }
+
+    @Test
+    public void checkHasAttribute() {
+        await().atMost(1, NANOSECONDS).until("input").hasAttribute("value","John");
+    }
+
+      @Test
+    public void checkHasAttributeWithOthersFilters() {
+        await().atMost(1, NANOSECONDS).until("input").with("value").equalTo("John").hasAttribute("value","John");
+    }
+
 }
