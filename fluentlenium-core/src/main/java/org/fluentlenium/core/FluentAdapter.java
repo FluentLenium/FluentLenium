@@ -73,7 +73,7 @@ public class FluentAdapter extends Fluent {
                 if (elem == null) {
                     proxyElement(new DefaultElementLocatorFactory(getDriver()), page, fieldFromPage);
                 } else {
-                    proxyElement(new AjaxElementLocatorFactory(getDriver(), elem.timeout()), page, fieldFromPage);
+                    proxyElement(new AjaxElementLocatorFactory(getDriver(), elem.timeOutInSeconds()), page, fieldFromPage);
                 }
             }
         } catch (ClassNotFoundException e) {

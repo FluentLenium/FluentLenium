@@ -348,7 +348,18 @@ public class LoginPage extends FluentPage {
    }
 }
 ```
-                       
+If you need to wait for an element to be present, especially when on an ajax call, you can use the @AjaxElement annotation on the fields :
+
+```java
+public class LoginPage extends FluentPage {
+   @AjaxElement
+   FluentWebElement myAjaxElement;
+}
+```
+You can set the timeout in seconds for the page to throw an error if not found with @AjaxElemet(timeountOnSeconds=3) if you want to wait 3 seconds.
+By default, the timeout is set to one seconds.
+
+
 ## Wait for an Ajax Call
 
 You can have multiple way to make your driver wait for the result of an asynchronous call.

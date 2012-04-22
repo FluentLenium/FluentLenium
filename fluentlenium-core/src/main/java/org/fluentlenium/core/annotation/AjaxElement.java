@@ -22,5 +22,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AjaxElement {
-    int timeout() default 500;
+    int timeOutInSeconds() default 1;
 }
