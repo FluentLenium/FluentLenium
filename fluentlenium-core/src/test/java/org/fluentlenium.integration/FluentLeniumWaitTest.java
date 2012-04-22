@@ -18,6 +18,7 @@ package org.fluentlenium.integration;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.TimeoutException;
 
 import java.util.concurrent.TimeUnit;
 
@@ -170,16 +171,9 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         await().atMost(1, NANOSECONDS).until("input").with("value").equalTo("John").hasAttribute("value", "John");
     }
 
-    @Test
+    @Test(expected = TimeoutException.class)
     public void checkPolling() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(500, TimeUnit.MILLISECONDS).pollingEvery(500, TimeUnit.MILLISECONDS).until("#default").hasText("wait");
+        await().pollingEvery(800, TimeUnit.MILLISECONDS).until("#default").hasText("wait");
     }
-
-    @Test
-    public void checkPollingOk() {
-        goTo(JAVASCRIPT_URL);
-        await().atMost(500, TimeUnit.MILLISECONDS).pollingEvery(1, TimeUnit.SECONDS).until("#default").hasText("wait2");
-    }
-
 }
