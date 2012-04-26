@@ -14,12 +14,12 @@
 
 package org.fluentlenium.unit.initialization;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import org.fluentlenium.adapter.FluentTest;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-
-import static org.junit.Assert.assertEquals;
 
 public class ConstructorInitialization extends FluentTest {
     public WebDriver webDriver = new HtmlUnitDriver();
@@ -27,7 +27,7 @@ public class ConstructorInitialization extends FluentTest {
 
     @Test
     public void do_not_use_overridable_methods_in_a_constructor() {
-        assertEquals(webDriver, this.getDriver());
+        assertThat(webDriver).isEqualTo(this.getDriver());
     }
 
 
