@@ -35,6 +35,15 @@ To add FluentLenium to your project, just add the following dependency into your
     <scope>test</scope>
 </dependency>
 ```
+You can also use the 0.6 release candidate :
+```xml
+<dependency>
+    <groupId>org.fluentlenium</groupId>
+    <artifactId>fluentlenium-core</artifactId>
+    <version>0.6-RC1</version>
+    <scope>test</scope>
+</dependency>
+```
 
 By default, FluentLenium provide a jUnit adapter.
 
@@ -429,6 +438,17 @@ For example, if you have a javascript method called change and you want to call 
 
 ```java
 executeScript("change();");
+```
+
+## Taking Snapshots
+You can take a snaphost of the browser
+```java
+driver.takeScreenShot();
+```
+The file will be name by the current timestamp.
+You can of course specify a path and a name using :
+```java
+driver.takeScreenShot(pathAndfileName);
 ```
 
 ## Customize FluentLenium
