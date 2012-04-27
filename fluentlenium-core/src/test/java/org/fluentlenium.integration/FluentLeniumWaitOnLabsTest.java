@@ -15,36 +15,13 @@
 package org.fluentlenium.integration;
 
 
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.SauceLabsFluentCase;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
-public class FluentLeniumWaitOnLabsTest extends LocalFluentCase {
-
-
-    @Override
-    public WebDriver getDefaultDriver() {
-        DesiredCapabilities capabillities = new DesiredCapabilities(
-                "firefox", "3.6.", Platform.WINDOWS);
-        capabillities.setCapability("name", "Test of FluentLenium");
-        WebDriver driver = null;
-        try {
-            driver = new RemoteWebDriver(
-                    new URL("http://fluentlenium:8906940f-5638-4c29-beb6-c331df039f48@ondemand.saucelabs.com:80/wd/hub"),
-                    capabillities);
-        } catch (MalformedURLException e) {
-        }
-        return driver;
-    }
+public class FluentLeniumWaitOnLabsTest extends SauceLabsFluentCase {
 
     @Before
     public void before() {
