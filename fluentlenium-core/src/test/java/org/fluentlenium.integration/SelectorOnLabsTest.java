@@ -14,38 +14,15 @@
 
 package org.fluentlenium.integration;
 
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.SauceLabsFluentCase;
 import org.junit.Test;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.*;
 import static org.fluentlenium.core.filter.MatcherConstructor.*;
 
-public class SelectorOnLabsTest extends LocalFluentCase {
-    protected static final String DEFAULT_URL = "http://java-freelance.fr:8585/static/";
+public class SelectorOnLabsTest extends SauceLabsFluentCase {
 
-
-    @Override
-    public WebDriver getDefaultDriver() {
-        DesiredCapabilities capabillities = new DesiredCapabilities(
-                "firefox", "3.6.", Platform.WINDOWS);
-        capabillities.setCapability("name", "Test of FluentLenium");
-        WebDriver driver = null;
-        try {
-            driver = new RemoteWebDriver(
-                    new URL("http://fluentlenium:8906940f-5638-4c29-beb6-c331df039f48@ondemand.saucelabs.com:80/wd/hub"),
-                    capabillities);
-        } catch (MalformedURLException e) {
-        }
-        return driver;
-    }
 
     @Test
     public void checkTagSelector() {

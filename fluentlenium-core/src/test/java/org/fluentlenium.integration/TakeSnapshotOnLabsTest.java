@@ -14,9 +14,7 @@
 
 package org.fluentlenium.integration;
 
-import junit.framework.AssertionFailedError;
-import org.fluentlenium.adapter.FluentTest;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.SauceLabsFluentCase;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -24,30 +22,20 @@ import org.junit.rules.TemporaryFolder;
 import java.io.File;
 import java.io.IOException;
 
-import static junit.framework.Assert.fail;
 import static org.fest.assertions.Assertions.assertThat;
 
 
-public class TakeSnapshotTest extends FluentTest {
+public class TakeSnapshotOnLabsTest extends SauceLabsFluentCase {
+
 
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
-
     @Test
     public void can_take_a_snapshot() throws IOException {
-        goTo(LocalFluentCase.DEFAULT_URL);
+        goTo(DEFAULT_URL);
         String absolutePath = folder.newFile("fluentlenium.png").getAbsolutePath();
         takeScreenShot(absolutePath);
         assertThat(new File(absolutePath)).exists();
-    }
-
-    @Test(expected = AssertionFailedError.class)
-    public void can_take_a_snapshot_when_test_fail() throws IOException {
-        goTo(LocalFluentCase.DEFAULT_URL);
-        this.setSnapshotMode(Mode.TAKE_SNAPSHOT_ON_FAIL);
-        String canonicalPath = folder.newFolder("folder").getCanonicalPath();
-        this.setSnapshotPath(canonicalPath);
-        fail();
     }
 
 
