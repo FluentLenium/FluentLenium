@@ -48,10 +48,17 @@ public abstract class Fluent implements SearchActions {
     public Fluent() {
     }
 
+    /**
+     * Take a snapshot of the browser. By default the file will be a png named by the current timestamp.
+     */
     public void takeScreenShot() {
         takeScreenShot(new Date().getTime() + ".png");
     }
 
+    /**
+     * Take a snapshot of the browser into a file given by the fileName param.
+     * @param fileName
+     */
     public void takeScreenShot(String fileName) {
         File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         try {
@@ -75,6 +82,10 @@ public abstract class Fluent implements SearchActions {
         return driver;
     }
 
+    /**
+     * wait for an asynchronous call
+     * @return
+     */
     public FluentLeniumWait await() {
         return wait;
     }
@@ -89,10 +100,19 @@ public abstract class Fluent implements SearchActions {
         return driver.getTitle();
     }
 
+    /**
+     * return the cookies as a set
+     * @return
+     */
     public Set<Cookie> getCookies() {
         return driver.manage().getCookies();
     }
 
+    /**
+     * return the corresponding cookie given a name
+     * @param name
+     * @return
+     */
     public Cookie getCookie(String name) {
         return driver.manage().getCookieNamed(name);
     }
