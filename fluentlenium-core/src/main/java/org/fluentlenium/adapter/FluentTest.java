@@ -24,8 +24,6 @@ import org.junit.runners.model.FrameworkMethod;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.util.Date;
-
 /**
  * All Junit Test should extends this class. It provides default parameters.
  */
@@ -68,7 +66,7 @@ public abstract class FluentTest extends FluentAdapter {
         @Override
         public void failed(Throwable e, FrameworkMethod method) {
             if (snapshotMode == Mode.TAKE_SNAPSHOT_ON_FAIL) {
-                takeScreenShot(snapshotPath+"/"+classe.getSimpleName() + "_" + method.getName() + new Date().getTime() + ".png");
+                takeScreenShot(snapshotPath+"/"+classe.getSimpleName() + "_" + method.getName() +".png");
             }
         }
 
