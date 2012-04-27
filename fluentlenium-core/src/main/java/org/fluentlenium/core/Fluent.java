@@ -55,10 +55,8 @@ public abstract class Fluent implements SearchActions {
     public void takeScreenShot(String fileName) {
         File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         try {
-
             File destFile = new File(fileName);
             FileUtils.copyFile(scrFile, destFile);
-            System.out.println(destFile.getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("error when taking the snapshot", e);
