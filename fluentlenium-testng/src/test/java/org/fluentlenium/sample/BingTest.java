@@ -14,11 +14,10 @@
 
 package org.fluentlenium.sample;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import org.fluentlenium.adapter.FluentTestNg;
 import org.testng.annotations.Test;
-
-import static org.fest.assertions.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public class BingTest extends FluentTestNg {
 
@@ -35,7 +34,7 @@ public class BingTest extends FluentTestNg {
         goTo("http://www.bing.com");
         fill("#sb_form_q").with("FluentLenium");
         submit("#sb_form_go");
-        assertTrue(title().contains("FluentLenium"));
+        assertThat(title()).contains("FluentLenium");
     }
 
     @Test
@@ -43,7 +42,7 @@ public class BingTest extends FluentTestNg {
         goTo("http://www.bing.com");
         $("#sb_form_q").text("FluentLenium");
         $("#sb_form_go").submit();
-        assertTrue(title().contains("FluentLenium"));
+        assertThat(title()).contains("FluentLenium");
     }
 
 }
