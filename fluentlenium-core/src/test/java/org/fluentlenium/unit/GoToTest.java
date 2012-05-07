@@ -12,15 +12,15 @@
  * limitations under the License
  */
 
-package org.unit;
+package org.fluentlenium.unit;
+
+import static org.mockito.Mockito.verify;
 
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
-
-import static org.mockito.Mockito.verify;
 
 public class GoToTest extends LocalFluentCase {
     WebDriver webDriver = Mockito.mock(WebDriver.class);
