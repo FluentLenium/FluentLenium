@@ -121,22 +121,49 @@ public class FluentWaitBuilder {
     }
 
     /**
-     * check if the FluentWait has the corresponding text
+     * check if the FluentWait contains the corresponding text
      *
      * @param value
      */
-    public void hasText(final String value) {
+    public void containsText(final String value) {
         Predicate hasText = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(@Nullable WebDriver webDriver) {
+                List<String> texts ;
                 if (filters.size() > 0) {
-                    return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getTexts().contains(value);
+                   texts = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getTexts();
                 } else {
-                    return search.find(selector).getTexts().contains(value);
+                   texts = search.find(selector).getTexts();
                 }
+                if (texts!=null){
+                    for(String text:texts){
+                        if (text.contains(value)){
+                            return true;
+                        }
+                    }
+                }
+                return false;
             }
         };
         until(wait, hasText, filters, hasTextMessage(selector, value));
     }
+
+    /**
+       * check if the FluentWait has the exact corresponding text
+       *
+       * @param value
+       */
+      public void hasText(final String value) {
+          Predicate hasText = new com.google.common.base.Predicate<WebDriver>() {
+              public boolean apply(@Nullable WebDriver webDriver) {
+                  if (filters.size() > 0) {
+                      return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getTexts().contains(value);
+                  } else {
+                      return search.find(selector).getTexts().contains(value);
+                  }
+              }
+          };
+          until(wait, hasText, filters, hasTextMessage(selector, value));
+      }
 
     /**
      * Check that the element is present

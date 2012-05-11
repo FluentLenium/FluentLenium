@@ -43,7 +43,8 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     }
 
     @Test
-    public void checkAwaitContainsTextWithText() {
+
+    public void checkAwaitHasTextWithText() {
         await().atMost(1, NANOSECONDS).until(".small").withText("Small 1").hasText("Small 1");
     }
 
@@ -52,13 +53,24 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         await().atMost(1, NANOSECONDS).until(".small").withName("name").hasName("name");
     }
 
+
+    @Test
+    public void checkAwaitContainsTextWithText() {
+        await().atMost(1, NANOSECONDS).until(".small").withText("Small 1").containsText("Small 1");
+    }
+
+    @Test
+       public void checkAwaitContainsText() {
+           await().atMost(1, NANOSECONDS).until(".small").containsText("Small 1");
+       }
+
     @Test
     public void checkAwaitContainsIdWithId() {
         await().atMost(1, NANOSECONDS).until(".small").withId("id2").hasId("id2");
     }
 
     @Test
-    public void checkAwaitContainsText() {
+    public void checkAwaitHasText() {
         await().atMost(1, NANOSECONDS).until(".small").hasText("Small 1");
     }
 
