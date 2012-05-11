@@ -1,3 +1,5 @@
+v0.7
+- add the containsText feature when waiting
 v0.6
 - ISSUE-8 : find return a FluentList<FluentWebElement>
 - ISSUE-26 : Polish pollingEvery features

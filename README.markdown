@@ -372,7 +372,7 @@ await().atMost(5, TimeUnit.SECONDS).until(".small").hasSize(3);
 ```
 The default wait is 500 ms.
 
-Instead of hasSize, you can also use `hasText("myTextValue")`, `hasId("myId")`, `hasName("myName")`.
+Instead of hasSize, you can also use `hasText("myTextValue")`, `hasId("myId")`, `hasName("myName")`, `containsText("myName")`.
 The `isPresent()` assertion is going to check if there is at most one element on the page corresponding to the filter.
 
 If you need to be more precise, you can also use filter on the search :
