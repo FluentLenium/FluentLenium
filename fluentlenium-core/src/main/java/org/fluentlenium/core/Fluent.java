@@ -22,7 +22,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
-import org.fluentlenium.core.wait.FluentLeniumWait;
+import org.fluentlenium.core.wait.FluentWait;
 import org.openqa.selenium.*;
 
 import java.io.File;
@@ -37,12 +37,10 @@ import java.util.Set;
 public abstract class Fluent implements SearchActions {
     private WebDriver driver;
     private Search search;
-    private FluentLeniumWait wait;
 
     public Fluent(WebDriver driver) {
         this.driver = driver;
         this.search = new Search(driver);
-        this.wait = new FluentLeniumWait(driver, search);
     }
 
     public Fluent() {
@@ -73,10 +71,7 @@ public abstract class Fluent implements SearchActions {
     protected final void initFluent(WebDriver driver) {
         this.driver = driver;
         this.search = new Search(driver);
-        if (driver != null) {
-            this.wait = new FluentLeniumWait(driver, search);
-        }
-    }
+     }
 
     protected WebDriver getDriver() {
         return driver;
@@ -86,8 +81,8 @@ public abstract class Fluent implements SearchActions {
      * wait for an asynchronous call
      * @return
      */
-    public FluentLeniumWait await() {
-        return wait;
+    public FluentWait await() {
+        return new FluentWait(driver, search);
     }
 
 

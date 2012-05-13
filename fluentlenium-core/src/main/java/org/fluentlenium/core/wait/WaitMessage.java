@@ -9,6 +9,7 @@ package org.fluentlenium.core.wait;
  */
 public class WaitMessage {
     static final String SELECTOR = "Selector ";
+    static final String PAGE = "Page ";
     static final String IS_NOT_PRESENT = " is not present.";
     static final String HAS_NOT_THE_NAME = " has not the name ";
     static final String HAS_NOT_THE_SIZE = " has not the size";
@@ -23,6 +24,7 @@ public class WaitMessage {
     static final String IS_NOT_LESS_THAN_OR_EQUAL_TO = " is not less than or equal to ";
     static final String IS_NOT_GREATHER_THAN = " is not greather than ";
     static final String IS_NOT_GREATHER_THAN_OR_EQUAL_TO = " is not greather than or equal to ";
+    static final String IS_NOT_LOADED = " is not loaded";
 
     static final String hasSizeMessage(String selector, int size) {
         return SELECTOR + selector + HAS_NOT_THE_SIZE + size + POINT;
@@ -30,6 +32,10 @@ public class WaitMessage {
 
     static final String hasAttributeMessage(String selector, String attribute, String value) {
         return SELECTOR + selector + WITH_ATTRIBUTE + attribute + WITH_VALUE + value + IS_NOT_PRESENT + POINT;
+    }
+
+    static final String isPageLoaded(String url) {
+        return PAGE + url +IS_NOT_LOADED + POINT;
     }
 
     static final String isPresentMessage(String selector) {

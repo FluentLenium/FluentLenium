@@ -51,7 +51,7 @@ public class FluentSizeBuilder {
                 return getSize() == size;
             }
         };
-        FluentWaitBuilder.until(wait, isPresent, filters, equalToMessage(selector, size));
+        FluentWaitMatcher.until(wait, isPresent, filters, equalToMessage(selector, size));
     }
 
     /**
@@ -65,7 +65,7 @@ public class FluentSizeBuilder {
                 return getSize() != size;
             }
         };
-        FluentWaitBuilder.until(wait, isPresent, filters, notEqualToMessage(selector, size));
+        FluentWaitMatcher.until(wait, isPresent, filters, notEqualToMessage(selector, size));
     }
 
     /**
@@ -79,7 +79,7 @@ public class FluentSizeBuilder {
                 return getSize() < size;
             }
         };
-        FluentWaitBuilder.until(wait, isPresent, filters, lessThanMessage(selector, size));
+        FluentWaitMatcher.until(wait, isPresent, filters, lessThanMessage(selector, size));
     }
 
     /**
@@ -93,7 +93,7 @@ public class FluentSizeBuilder {
                 return getSize() <= size;
             }
         };
-        FluentWaitBuilder.until(wait, isPresent, filters, lessThanOrEqualToMessage(selector, size));
+        FluentWaitMatcher.until(wait, isPresent, filters, lessThanOrEqualToMessage(selector, size));
     }
 
     /**
@@ -107,7 +107,7 @@ public class FluentSizeBuilder {
                 return getSize() > size;
             }
         };
-        FluentWaitBuilder.until(wait, isPresent, filters, greatherThanMessage(selector, size));
+        FluentWaitMatcher.until(wait, isPresent, filters, greatherThanMessage(selector, size));
     }
 
     /**
@@ -121,7 +121,7 @@ public class FluentSizeBuilder {
                 return getSize() >= size;
             }
         };
-        FluentWaitBuilder.until(wait, isPresent, filters, greatherThanOrEqualToMessage(selector, size));
+        FluentWaitMatcher.until(wait, isPresent, filters, greatherThanOrEqualToMessage(selector, size));
     }
 
     private int getSize() {

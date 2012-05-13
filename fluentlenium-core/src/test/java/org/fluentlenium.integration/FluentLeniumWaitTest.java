@@ -15,10 +15,12 @@
 package org.fluentlenium.integration;
 
 
+import org.fluentlenium.core.FluentAdapter;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -60,9 +62,57 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     }
 
     @Test
-       public void checkAwaitContainsText() {
-           await().atMost(1, NANOSECONDS).until(".small").containsText("Small 1");
-       }
+    public void checkAwaitPageToLoad() {
+        await().atMost(1, NANOSECONDS).untilPage().isLoaded();
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void checkAwaitPageToLoadWithNoJSEnabled() {
+        FluentAdapter fluentTest = new FluentAdapter(new HtmlUnitDriver(false));
+        fluentTest.await().atMost(1, NANOSECONDS).untilPage().isLoaded();
+    }
+
+    /**
+     * public static void WaitForPageToLoad(this IWebDriver driver)
+     * {
+     * TimeSpan timeout = new TimeSpan(0, 0, 30);
+     * WebDriverWait wait = new WebDriverWait(driver, timeout);
+     * <p/>
+     * IJavaScriptExecutor javascript = driver as IJavaScriptExecutor;
+     * if (javascript == null)
+     * throw new ArgumentException("driver", "Driver must support javascript execution");
+     * <p/>
+     * wait.Until((d) =>
+     * {
+     * try
+     * {
+     * string readyState = javascript.ExecuteScript(
+     * "if (document.readyState) return document.readyState;").ToString();
+     * return readyState.ToLower() == "complete";
+     * }
+     * catch (InvalidOperationException e)
+     * {
+     * //Window is no longer available
+     * return e.Message.ToLower().Contains("unable to get browser");
+     * }
+     * catch (WebDriverException e)
+     * {
+     * //Browser is no longer available
+     * return e.Message.ToLower().Contains("unable to connect");
+     * }
+     * catch (Exception)
+     * {
+     * return false;
+     * }
+     * });
+     * }
+     */
+
+
+    @Test
+    public void checkAwaitContainsText() {
+        await().atMost(1, NANOSECONDS).until(".small").containsText("Small 1");
+    }
 
     @Test
     public void checkAwaitContainsIdWithId() {
