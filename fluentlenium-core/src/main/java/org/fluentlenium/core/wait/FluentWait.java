@@ -1,8 +1,11 @@
 package org.fluentlenium.core.wait;
 
 
+import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.search.Search;
 import org.openqa.selenium.WebDriver;
+
+import java.util.concurrent.TimeUnit;
 
 public class FluentWait<T> implements org.openqa.selenium.support.ui.Wait<T> {
 
@@ -22,6 +25,11 @@ public class FluentWait<T> implements org.openqa.selenium.support.ui.Wait<T> {
 
     public FluentWait<T> atMost(long duration, java.util.concurrent.TimeUnit unit) {
         wait.withTimeout(duration, unit);
+        return this;
+    }
+
+    public FluentWait<T> atMost(long timeInMillis) {
+        wait.withTimeout(timeInMillis, TimeUnit.MILLISECONDS);
         return this;
     }
 
@@ -58,8 +66,12 @@ public class FluentWait<T> implements org.openqa.selenium.support.ui.Wait<T> {
     }
 
     public FluentWaitPageMatcher untilPage() {
-           return new FluentWaitPageMatcher(search, wait,driver);
-       }
+        return new FluentWaitPageMatcher(wait, driver);
+    }
+
+    public FluentWaitPageMatcher untilPage(FluentPage page) {
+        return new FluentWaitPageMatcher(wait, driver, page);
+    }
 
     public <V> V until(com.google.common.base.Function<? super T, V> isTrue) {
         return (V) wait.until(isTrue);
