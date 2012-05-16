@@ -1,8 +1,8 @@
 package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
+import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.filter.Filter;
-import org.fluentlenium.core.search.Search;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -15,17 +15,21 @@ import static org.fluentlenium.core.wait.WaitMessage.isPageLoaded;
 
 public class FluentWaitPageMatcher {
     private List<Filter> filters = new ArrayList<Filter>();
-    private Search search;
     private FluentWait wait;
     private WebDriver webDriver;
+    private FluentPage page;
 
-
-    public FluentWaitPageMatcher(Search search, FluentWait wait, WebDriver driver) {
+    public FluentWaitPageMatcher(FluentWait wait, WebDriver driver) {
         this.wait = wait;
-        this.search = search;
         this.webDriver = driver;
     }
 
+
+    public FluentWaitPageMatcher(FluentWait wait, WebDriver driver, FluentPage page) {
+        this.wait = wait;
+        this.webDriver = driver;
+        this.page = page;
+    }
 
     /**
      * check if the page is loaded or not.
@@ -53,5 +57,24 @@ public class FluentWaitPageMatcher {
 
     }
 
+    /**
+     * check if ou are on the good page calling isAt.
+     */
+    public void isAt() {
+        if (page == null){
+            throw new IllegalArgumentException("You should use a page argument when you call the untilPage method to specify the page you want to be. Example : await().untilPage(myPage).isAt();");
+        }
+        Predicate isLoaded = new com.google.common.base.Predicate<WebDriver>() {
+            public boolean apply(@Nullable WebDriver webDriver) {
+                try {
+                    page.isAt();
+                } catch (Error e) {
+                    return false;
+                }
+                return true;
+            }
+        };
+        FluentWaitMatcher.until(wait, isLoaded, filters, "");
 
+    }
 }
