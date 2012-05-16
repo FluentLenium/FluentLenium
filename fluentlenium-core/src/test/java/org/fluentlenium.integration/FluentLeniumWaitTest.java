@@ -16,6 +16,7 @@ package org.fluentlenium.integration;
 
 
 import org.fluentlenium.core.FluentAdapter;
+import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +26,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import java.util.concurrent.TimeUnit;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
+import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 
 public class FluentLeniumWaitTest extends LocalFluentCase {
@@ -66,48 +68,18 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         await().atMost(1, NANOSECONDS).untilPage().isLoaded();
     }
 
+    @Test
+    public void checkAwaitPageIsAt() {
+        FluentPage isAtJavascriptPage = createPage(MyFluentPage.class);
+        isAtJavascriptPage.go();
+        await().atMost(5, TimeUnit.SECONDS).untilPage(isAtJavascriptPage).isAt();
+    }
+
     @Test(expected = UnsupportedOperationException.class)
     public void checkAwaitPageToLoadWithNoJSEnabled() {
         FluentAdapter fluentTest = new FluentAdapter(new HtmlUnitDriver(false));
         fluentTest.await().atMost(1, NANOSECONDS).untilPage().isLoaded();
     }
-
-    /**
-     * public static void WaitForPageToLoad(this IWebDriver driver)
-     * {
-     * TimeSpan timeout = new TimeSpan(0, 0, 30);
-     * WebDriverWait wait = new WebDriverWait(driver, timeout);
-     * <p/>
-     * IJavaScriptExecutor javascript = driver as IJavaScriptExecutor;
-     * if (javascript == null)
-     * throw new ArgumentException("driver", "Driver must support javascript execution");
-     * <p/>
-     * wait.Until((d) =>
-     * {
-     * try
-     * {
-     * string readyState = javascript.ExecuteScript(
-     * "if (document.readyState) return document.readyState;").ToString();
-     * return readyState.ToLower() == "complete";
-     * }
-     * catch (InvalidOperationException e)
-     * {
-     * //Window is no longer available
-     * return e.Message.ToLower().Contains("unable to get browser");
-     * }
-     * catch (WebDriverException e)
-     * {
-     * //Browser is no longer available
-     * return e.Message.ToLower().Contains("unable to connect");
-     * }
-     * catch (Exception)
-     * {
-     * return false;
-     * }
-     * });
-     * }
-     */
-
 
     @Test
     public void checkAwaitContainsText() {
@@ -237,4 +209,18 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         goTo(JAVASCRIPT_URL);
         await().pollingEvery(800, TimeUnit.MILLISECONDS).until("#default").hasText("wait");
     }
+
+
 }
+
+ class MyFluentPage extends FluentPage {
+        @Override
+        public void isAt() {
+            assertThat(find("#newField").getTexts()).contains("new");
+        }
+
+        @Override
+        public String getUrl() {
+            return LocalFluentCase.JAVASCRIPT_URL;
+        }
+    }

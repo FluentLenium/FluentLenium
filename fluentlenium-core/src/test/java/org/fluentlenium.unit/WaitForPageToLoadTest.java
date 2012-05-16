@@ -2,7 +2,6 @@ package org.fluentlenium.unit;
 
 
 import com.google.common.base.Predicate;
-import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.wait.FluentWaitPageMatcher;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,9 +27,6 @@ public class WaitForPageToLoadTest {
     WebDriver webDriver;
 
     @Mock
-    Search search;
-
-    @Mock
     FluentWait wait;
 
     @Mock
@@ -44,13 +40,13 @@ public class WaitForPageToLoadTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void when_browser_do_not_implemets_Javascript_executor_throws_exception() {
-        FluentWaitPageMatcher fluentWaitPageBuilder = new FluentWaitPageMatcher(search, wait, webDriver);
+        FluentWaitPageMatcher fluentWaitPageBuilder = new FluentWaitPageMatcher( wait, webDriver);
         fluentWaitPageBuilder.isLoaded();
     }
 
     @Test
     public void when_browser_implemets_Javascript_executor_then_go_to_predicate() {
-        FluentWaitPageMatcher fluentWaitPageBuilder = new FluentWaitPageMatcher(search, wait, webDriverWithJavascriptExecutor);
+        FluentWaitPageMatcher fluentWaitPageBuilder = new FluentWaitPageMatcher( wait, new WebDriverWithJavascriptExecutor());
         fluentWaitPageBuilder.isLoaded();
         verify(wait).until(any(Predicate.class));
     }
