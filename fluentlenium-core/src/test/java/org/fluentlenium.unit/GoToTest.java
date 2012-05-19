@@ -12,7 +12,7 @@
  * limitations under the License
  */
 
-package org.unit;
+package org.fluentlenium.unit;
 
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.integration.localtest.LocalFluentCase;

@@ -17,13 +17,11 @@ package org.fluentlenium.core.action;
 /**
  * All actions that can be used on the list or on a web element
  */
-public interface FluentDefaultActions {
-    void click();
+public interface FluentDefaultActions<E> {
+    E click();
 
-    void clear();
+    E submit();
 
-    void submit();
-
-    void text(String... text);
+    E text(String... text);
 
 }

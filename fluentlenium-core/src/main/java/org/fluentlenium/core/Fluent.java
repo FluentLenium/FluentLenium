@@ -55,6 +55,7 @@ public abstract class Fluent implements SearchActions {
 
     /**
      * Take a snapshot of the browser into a file given by the fileName param.
+     *
      * @param fileName
      */
     public void takeScreenShot(String fileName) {
@@ -71,7 +72,7 @@ public abstract class Fluent implements SearchActions {
     protected final void initFluent(WebDriver driver) {
         this.driver = driver;
         this.search = new Search(driver);
-     }
+    }
 
     protected WebDriver getDriver() {
         return driver;
@@ -79,6 +80,7 @@ public abstract class Fluent implements SearchActions {
 
     /**
      * wait for an asynchronous call
+     *
      * @return
      */
     public FluentWait await() {
@@ -97,6 +99,7 @@ public abstract class Fluent implements SearchActions {
 
     /**
      * return the cookies as a set
+     *
      * @return
      */
     public Set<Cookie> getCookies() {
@@ -105,6 +108,7 @@ public abstract class Fluent implements SearchActions {
 
     /**
      * return the corresponding cookie given a name
+     *
      * @param name
      * @return
      */
@@ -136,11 +140,12 @@ public abstract class Fluent implements SearchActions {
      *
      * @param page
      */
-    public static void goTo(FluentPage page) {
+    public static FluentPage goTo(FluentPage page) {
         if (page == null) {
             throw new IllegalArgumentException("Page is mandatory");
         }
         page.go();
+        return page;
     }
 
     /**
@@ -148,16 +153,18 @@ public abstract class Fluent implements SearchActions {
      *
      * @param url
      */
-    public void goTo(String url) {
+    public Fluent goTo(String url) {
         if (url == null) {
             throw new IllegalArgumentException("Url is mandatory");
         }
         getDriver().get(url);
+        return this;
     }
 
 
-    public void executeScript(String script) {
+    public Fluent executeScript(String script) {
         ((JavascriptExecutor) driver).executeScript(script);
+        return this;
     }
 
     /**
@@ -244,8 +251,9 @@ public abstract class Fluent implements SearchActions {
      *
      * @param cssSelector
      */
-    public void click(String cssSelector, Filter... filters) {
+    public Fluent click(String cssSelector, Filter... filters) {
         $(cssSelector, filters).click();
+        return this;
     }
 
     /**
@@ -254,8 +262,9 @@ public abstract class Fluent implements SearchActions {
      *
      * @param cssSelector
      */
-    public void clear(String cssSelector, Filter... filters) {
+    public Fluent clear(String cssSelector, Filter... filters) {
         $(cssSelector, filters).clear();
+        return this;
     }
 
     /**
@@ -264,8 +273,9 @@ public abstract class Fluent implements SearchActions {
      *
      * @param cssSelector
      */
-    public void submit(String cssSelector, Filter... filters) {
+    public Fluent submit(String cssSelector, Filter... filters) {
         $(cssSelector, filters).submit();
+        return this;
     }
 
     /**
@@ -297,18 +307,31 @@ public abstract class Fluent implements SearchActions {
      *
      * @param fluentObject
      */
-    public void click(FluentDefaultActions fluentObject) {
+    public Fluent click(FluentDefaultActions fluentObject) {
         fluentObject.click();
+        return this;
     }
 
     /**
-     * Submit all elements that are in the list
+     * Clear all elements that are in the list
      * Be careful - only the visible elements are cleared
      *
      * @param fluentObject
      */
-    public void clear(FluentDefaultActions fluentObject) {
+    public Fluent clear(FluentList<FluentWebElement> fluentObject) {
         fluentObject.clear();
+        return this;
+    }
+
+    /**
+     * Clear the given parameters elements that are in the list
+     * Be careful - only the visible elements are cleared
+     *
+     * @param fluentObject
+     */
+    public Fluent clear(FluentWebElement fluentObject) {
+        fluentObject.clear();
+        return this;
     }
 
     /**
@@ -317,8 +340,9 @@ public abstract class Fluent implements SearchActions {
      *
      * @param fluentObject
      */
-    public void submit(FluentDefaultActions fluentObject) {
+    public Fluent submit(FluentDefaultActions fluentObject) {
         fluentObject.submit();
+        return this;
     }
 
 }

@@ -24,7 +24,7 @@ import org.openqa.selenium.WebElement;
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
-public class FluentWebElement implements FluentDefaultActions, SearchActions {
+public class FluentWebElement implements FluentDefaultActions<FluentWebElement>, SearchActions {
     private final WebElement webElement;
     private final Search search;
 
@@ -36,22 +36,25 @@ public class FluentWebElement implements FluentDefaultActions, SearchActions {
     /**
      * Click on the element
      */
-    public void click() {
+    public FluentWebElement click() {
         webElement.click();
+        return this;
     }
 
     /**
      * Clear the element
      */
-    public void clear() {
+    public FluentWebElement clear() {
         webElement.clear();
+        return this;
     }
 
     /**
      * Submit the element
      */
-    public void submit() {
+    public FluentWebElement submit() {
         webElement.submit();
+        return this;
     }
 
     /**
@@ -59,11 +62,12 @@ public class FluentWebElement implements FluentDefaultActions, SearchActions {
      *
      * @param text
      */
-    public void text(String... text) {
+    public FluentWebElement text(String... text) {
         webElement.clear();
         if (text.length != 0) {
             webElement.sendKeys(text[0]);
         }
+        return this;
     }
 
     /**

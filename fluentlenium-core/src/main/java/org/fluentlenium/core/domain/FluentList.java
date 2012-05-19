@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
  */
-public class FluentList<E extends FluentWebElement> extends ArrayList<E> implements FluentDefaultActions, SearchActions {
+public class FluentList<E extends FluentWebElement> extends ArrayList<E> implements FluentDefaultActions<FluentList>, SearchActions {
 
     public FluentList(Collection<E> listFiltered) {
         super(listFiltered);
@@ -52,12 +52,13 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      * Click on all elements on the list
      * Only the visible elements are filled
      */
-    public void click() {
+    public FluentList click() {
         for (E fluentWebElement : this) {
             if (fluentWebElement.isEnabled()) {
                 fluentWebElement.click();
             }
         }
+        return this;
     }
 
     /**
@@ -65,7 +66,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      * Only the visible elements are filled
      * If there is more elements on the list than in the with table, the last element of the table is repeated
      */
-    public void text(String... with) {
+    public FluentList text(String... with) {
         if (with.length > 0) {
             int id = 0;
             String value;
@@ -83,7 +84,22 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
                 }
             }
         }
+        return this;
     }
+
+    /**
+     * Clear all elements on the list
+     * Only the visible elements are filled
+     */
+    public FluentList clearAll() {
+        for (E fluentWebElement : this) {
+            if (fluentWebElement.isEnabled()) {
+                fluentWebElement.clear();
+            }
+        }
+        return this;
+    }
+
 
     /**
      * Clear all elements on the list
@@ -97,16 +113,18 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
         }
     }
 
+
     /**
      * submit on all elements on the list
      * Only the visible elements are submitted
      */
-    public void submit() {
+    public FluentList submit() {
         for (E fluentWebElement : this) {
             if (fluentWebElement.isEnabled()) {
                 fluentWebElement.submit();
             }
         }
+        return this;
     }
 
     /**
