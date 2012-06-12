@@ -41,16 +41,19 @@ public abstract class Fluent implements SearchActions {
     public Fluent(WebDriver driver) {
         this.driver = driver;
         this.search = new Search(driver);
+        FluentThread.set(this);
     }
 
     public Fluent() {
+        FluentThread.set(this);
     }
 
     /**
      * Take a snapshot of the browser. By default the file will be a png named by the current timestamp.
      */
-    public void takeScreenShot() {
+    public Fluent takeScreenShot() {
         takeScreenShot(new Date().getTime() + ".png");
+        return this;
     }
 
     /**
@@ -58,7 +61,7 @@ public abstract class Fluent implements SearchActions {
      *
      * @param fileName
      */
-    public void takeScreenShot(String fileName) {
+    public Fluent takeScreenShot(String fileName) {
         File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         try {
             File destFile = new File(fileName);
@@ -67,6 +70,7 @@ public abstract class Fluent implements SearchActions {
             e.printStackTrace();
             throw new RuntimeException("error when taking the snapshot", e);
         }
+        return this;
     }
 
     protected final void initFluent(WebDriver driver) {
@@ -140,7 +144,7 @@ public abstract class Fluent implements SearchActions {
      *
      * @param page
      */
-    public static FluentPage goTo(FluentPage page) {
+    public FluentPage goTo(FluentPage page) {
         if (page == null) {
             throw new IllegalArgumentException("Page is mandatory");
         }

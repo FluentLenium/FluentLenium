@@ -1,7 +1,9 @@
 package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
+import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.filter.Filter;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -35,7 +37,7 @@ public class FluentWaitPageMatcher {
      * check if the page is loaded or not.
      * Be careful, it needs javascript enabled. Throw an UnsupportedOperationException if not.
      */
-    public void isLoaded() {
+    public Fluent isLoaded() {
 
         if (!(webDriver instanceof JavascriptExecutor)) {
             throw new UnsupportedOperationException("Driver must support javascript execution to use this feature");
@@ -54,6 +56,7 @@ public class FluentWaitPageMatcher {
             FluentWaitMatcher.until(wait, isLoaded, filters, isPageLoaded(webDriver.getCurrentUrl()));
         }
 
+        return FluentThread.get();
 
     }
 
