@@ -23,24 +23,21 @@ import org.testng.annotations.BeforeClass;
  */
 public abstract class FluentTestNg extends FluentAdapter {
 
+    public FluentTestNg() {
+        super();
+    }
+
     @BeforeClass
     public void beforeClass() {
         this.initFluent(getDefaultDriver());
         initTest();
     }
 
-
-    public FluentTestNg() {
-        super();
-    }
-
-
     @AfterClass
-    public void afterSuite() {
+    public void afterClass() {
         if (getDriver() != null) {
             getDriver().quit();
         }
     }
-
 
 }
