@@ -18,15 +18,24 @@ package org.fluentlenium.integration;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 public class SearchTest extends LocalFluentCase {
+
+
     @BeforeMethod
     public void beforeTest() {
         goTo(DEFAULT_URL);
+    }
+
+    @Override
+    public WebDriver getDefaultDriver() {
+        return new FirefoxDriver();
     }
 
     @Test
