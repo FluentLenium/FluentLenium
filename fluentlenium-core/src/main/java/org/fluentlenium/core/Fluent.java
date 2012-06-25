@@ -42,10 +42,15 @@ public abstract class Fluent implements SearchActions {
         this.driver = driver;
         this.search = new Search(driver);
         FluentThread.set(this);
+        System.out.println("Fluent :"+FluentThread.get());
     }
 
     public Fluent() {
-        FluentThread.set(this);
+        System.out.println("Constr");
+                FluentThread.set(this);
+        System.out.println("Fluent :"+FluentThread.get());
+
+
     }
 
     /**
@@ -161,6 +166,7 @@ public abstract class Fluent implements SearchActions {
         if (url == null) {
             throw new IllegalArgumentException("Url is mandatory");
         }
+        System.out.println(url);
         getDriver().get(url);
         return this;
     }
