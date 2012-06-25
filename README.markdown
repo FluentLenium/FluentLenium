@@ -49,7 +49,7 @@ If you need the fest-assert dependency to improve the lisibility of your test co
 </dependency>
 ```
 
-An adapter have been built to use FluentLenium with TestNG :
+An adapter has been built to use FluentLenium with TestNG :
 If you need the fest-assert dependency to improve the lisibility of your test code :
 
 ```xml
@@ -84,9 +84,9 @@ You can use `url()` , `title()` or `pageSource()` to get the url, the title or t
 
 ###  Selector
 #### Default Selector
-You can use CSS1, CSS2 and CSS3 selector with the same restrictions as in Selenium.
+You can use CSS1, CSS2 and CSS3 selectors with the same restrictions as in Selenium.
 
-If you want to find the list of elements which have
+If you want to find the list of elements which have :
 
   - the `id` "title" : `find("#title")`
   - the `class` name "small" : `find(".small")`
@@ -97,7 +97,7 @@ You are free to use most of the CSS3 syntax, wich means that
 will return the list of all input elements which have the class rightForm
 
 #### Custom filter
-But what if you want all the input that have a text equals to "Sam" ?
+But what if you want all the input that have a text equal to "Sam" ?
 You can use filters to allow that kind of search. For example :
 
 ```java
