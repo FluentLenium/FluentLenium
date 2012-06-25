@@ -397,6 +397,17 @@ If you need to filter on a custom attribute name, this syntax will help :
 await().atMost(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWith("myValue").isPresent();
 ```
 
+You can also check if the page is loaded using
+```java
+await().atMost(1, NANOSECONDS).untilPage().isLoaded();
+```
+
+If you want to wait that the page you want is the page you are, you can use :
+```java
+await().atMost(5, TimeUnit.SECONDS).untilPage(myPage).isAt();
+```
+This methods calls in fact the mePage.isAt(). If the isAt() method of the myPage object do not throw any exception during the time specified, then the framework will consider that the page is the one wanted.
+
 ### Polling Every
 You can also defined the polling frequency, for example, if you want to pull every 5 seconds :
  ```java
@@ -441,6 +452,16 @@ You can of course specify a path and a name using :
 ```java
 driver.takeScreenShot(pathAndfileName);
 ```
+
+## Isolate Tests
+If you want to test concurrency or if you need for any reasons to not use the mechanism of extension of FluentLenium, you can also, instead extends FluentTest, create directly your fluent test object directly.
+```java
+= new IsolatedTest().goTo(DEFAULT_URL).
+    await().atMost(1, SECONDS).until(".small").with("name").equalTo("name").isPresent().
+    find("input").first().isEnabled();```
+```
+
+
 
 ## Customize FluentLenium
 

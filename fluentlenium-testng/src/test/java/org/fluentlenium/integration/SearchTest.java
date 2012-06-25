@@ -15,6 +15,8 @@
 package org.fluentlenium.integration;
 
 
+import org.fluentlenium.adapter.IsolatedTest;
+import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
@@ -23,6 +25,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static java.util.concurrent.TimeUnit.NANOSECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class SearchTest extends LocalFluentCase {
@@ -43,6 +47,50 @@ public class SearchTest extends LocalFluentCase {
         FluentList list = find(".small");
         assertThat(list.getIds()).contains("id", "id2");
     }
+
+    @Test(invocationCount = 40, threadPoolSize = 10)
+    public void checkConcurrency2() {
+        System.out.println(FluentThread.get());
+        assertThat(goTo(DEFAULT_URL).await().
+                atMost(1, NANOSECONDS).
+                until(".small").
+                with("name").
+                equalTo("name").
+                isPresent().
+                find("input").first().isEnabled()).isTrue();
+    }
+
+
+    @Test(invocationCount = 40, threadPoolSize = 10)
+    public void checkConcurrency() {
+        SearchTest toto = new SearchTest();
+        toto.beforeClass();
+        assertThat(
+                toto.goTo(DEFAULT_URL).await().
+                        atMost(1, NANOSECONDS).
+                        until(".small").
+                        with("name").
+                        equalTo("name").
+                        isPresent().
+                        find("input").first().isEnabled()).isTrue();
+        toto.afterClass();
+    }
+
+
+    @Test(invocationCount = 40, threadPoolSize = 5)
+    public void checkConcurrency3() {
+        IsolatedTest toto = new IsolatedTest();
+        assertThat(
+                toto.goTo(DEFAULT_URL).await().
+                        atMost(1, SECONDS).
+                        until(".small").
+                        with("name").
+                        equalTo("name").
+                        isPresent().
+                        find("input").first().isEnabled()).isTrue();
+        toto.quit();
+    }
+
 
     @Test
     public void checkSearchOnListWorks() {

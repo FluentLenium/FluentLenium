@@ -1,5 +1,13 @@
-v0.7
+v0.
 - add the containsText feature when waiting
+- add IsolatedTest
+- add wait until page is loaded feature
+- add wait until page is at feature
+- make the api fluent, you can now chain methods
+If you want to wait that the page you want is the page you are, you can use :
+```java
+await().atMost(5, TimeUnit.SECONDS).untilPage(myPage).isAt();
+```
 v0.6
 - ISSUE-8 : find return a FluentList<FluentWebElement>
 - ISSUE-26 : Polish pollingEvery features
