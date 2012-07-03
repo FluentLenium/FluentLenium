@@ -14,12 +14,15 @@
 
 package org.fluentlenium.core.domain;
 
+import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.action.FluentDefaultActions;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
@@ -38,6 +41,15 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public FluentWebElement click() {
         webElement.click();
+        return this;
+    }
+
+    /**
+     * Double Click on the element
+     */
+    public FluentWebElement doubleClick() {
+        Action action = new Actions(FluentThread.get().getDriver()).doubleClick(webElement).build();
+        action.perform();
         return this;
     }
 
@@ -150,6 +162,15 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public String getTagName() {
         return webElement.getTagName();
+    }
+
+    /**
+     * return the webElement
+     *
+     * @return
+     */
+    public WebElement getElement() {
+        return webElement;
     }
 
     /**

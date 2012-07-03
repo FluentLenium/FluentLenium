@@ -46,6 +46,13 @@ public class ActionOnSelectorTest extends LocalFluentCase {
         assertThat(title()).isEqualTo("Page 2");
     }
 
+      @Test
+    public void checkDoubleClickAction() {
+        goTo(DEFAULT_URL);
+        assertThat(title()).contains("Selenium");
+        $("#linkToPage2").first().doubleClick();
+        assertThat(title()).isEqualTo("Page 2");
+    }
 
     @Test
     public void checkTextAction() {
