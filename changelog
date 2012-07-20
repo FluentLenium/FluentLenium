@@ -1,4 +1,6 @@
-v0.
+v0.7.1
+- add a doubleClick feature
+v0.7
 - add the containsText feature when waiting
 - add IsolatedTest
 - add wait until page is loaded feature
