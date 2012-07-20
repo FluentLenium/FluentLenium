@@ -1,3 +1,6 @@
+v0.7.2
+- moving to selenium 2.25.0
+- add an html function to get underlying html content
 v0.7.1
 - add a doubleClick feature
 v0.7
