@@ -214,4 +214,13 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     public FluentWebElement findFirst(String name, Filter... filters) {
         return search.findFirst(name, filters);
     }
+
+    /**
+     *  return the innerHTML content of the web element
+     *  does not work with HTMLUnit
+     *  @return the underlying html content
+     */
+    public String html() {
+        return webElement.getAttribute("innerHTML");
+    }
 }
