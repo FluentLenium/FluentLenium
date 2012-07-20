@@ -31,7 +31,7 @@ To add FluentLenium to your project, just add the following dependency into your
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
-    <version>0.7.1</version>
+    <version>0.7.2</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -44,7 +44,7 @@ If you need the fest-assert dependency to improve the lisibility of your test co
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-festassert</artifactId>
-    <version>0.7.1</version>
+    <version>0.7.2</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -56,7 +56,7 @@ If you need the fest-assert dependency to improve the lisibility of your test co
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>0.7.1</version>
+    <version>0.7.2</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -182,6 +182,48 @@ or
 find(myCssSelector, 2, withName("foo")).findFirst("input", withName("bar"))
 ```
 
+## Element
+If you need to access to the name, the id, the value, the tagname or the text of an element :
+
+```java
+findFirst(myCssSelector).getName()
+findFirst(myCssSelector).getId()
+findFirst(myCssSelector).getValue()
+findFirst(myCssSelector).getTagName()
+findFirst(myCssSelector).getText()
+```
+
+If you need to access a specific value of an attribute  :
+
+```java
+findFirst(myCssSelector).getAttribute("myCustomAttribute")
+```
+
+You can also access a list of all the name,text,id of a list of element
+```java
+find(myCssSelector).getNames()
+find(myCssSelector).getIds()
+find(myCssSelector).getValues()
+find(myCssSelector).getAttributes("myCustomAttribute")
+find(myCssSelector).getTexts()
+```
+
+If you need to get the underlying html content of an element.
+```java
+find(myCssSelector).html()
+```
+To know the dimension of an element (with and height)  :
+
+```java
+Dimension dimension = findFirst(myCssSelector).getSize()
+```
+
+You can also check if the element is displayed, enabled or selected :
+```java
+findFirst(myCssSelector).isDisplayed()
+findFirst(myCssSelector).isEnabled()
+findFirst(myCssSelector).isSelected()
+```
 
 ## Form Action
 If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.

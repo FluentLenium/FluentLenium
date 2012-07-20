@@ -202,4 +202,10 @@ public class SelectorOnLabsTest extends SauceLabsFluentCase {
         assertThat($("span", withName().endsWith("name")).first().getTagName()).isEqualTo("span");
     }
 
+    @Test
+    public void checkHtmlAction() {
+        goTo(DEFAULT_URL);
+        assertThat($("#pharnacy").first().html().equals("Pharmacy"));
+    }
+
 }
