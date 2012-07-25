@@ -210,7 +210,7 @@ find(myCssSelector).getTexts()
 
 If you need to get the underlying html content of an element.
 ```java
-find(myCssSelector).html()
+findFirst(myCssSelector).html()
 ```
 To know the dimension of an element (with and height)  :
 
