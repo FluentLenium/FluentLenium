@@ -58,9 +58,9 @@ public class FluentAdapter extends Fluent {
             construct.setAccessible(true);
             page = (T) construct.newInstance();
             Class parent = Class.forName(Fluent.class.getName());
-            Method m = parent.getDeclaredMethod("initFluent", WebDriver.class);
+            Method m = parent.getDeclaredMethod("initFluent", WebDriver.class, String.class);
             m.setAccessible(true);
-            m.invoke(page, getDriver());
+            m.invoke(page, getDriver(), getBaseUrl());
 
             //init fields with default proxies
             Field[] fields = cls.getDeclaredFields();
@@ -116,6 +116,14 @@ public class FluentAdapter extends Fluent {
         return new FirefoxDriver();
     }
 
+    /**
+     * Override this method to set the base URL to use when using relative URLs
+     *
+     * @return The base URL, or null if relative URLs should be passed to the driver untouched
+     */
+    public String getDefaultBaseUrl() {
+        return null;
+    }
 
     public static void assertAt(FluentPage fluent) {
         fluent.isAt();

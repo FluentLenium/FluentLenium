@@ -23,12 +23,22 @@ public class IsolatedTest extends FluentAdapter {
 
 
     public IsolatedTest(){
-        initFluent(getDefaultDriver());
+        initFluent(getDefaultDriver(), getDefaultBaseUrl());
         initTest();
     }
 
      public IsolatedTest(WebDriver webDriver){
-        initFluent(webDriver);
+        initFluent(webDriver, getDefaultBaseUrl());
+        initTest();
+    }
+
+    public IsolatedTest(String baseUrl) {
+        initFluent(getDefaultDriver(), baseUrl);
+        initTest();
+    }
+
+    public IsolatedTest(WebDriver webDriver, String baseUrl) {
+        initFluent(webDriver, baseUrl);
         initTest();
     }
 
