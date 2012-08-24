@@ -22,6 +22,10 @@ public class FluentAdapter extends Fluent {
         super(webDriver);
     }
 
+    public FluentAdapter(WebDriver webDriver, String baseUrl) {
+        super(webDriver, baseUrl);
+    }
+
     public FluentAdapter() {
         super();
     }
