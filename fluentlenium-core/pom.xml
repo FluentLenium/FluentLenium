@@ -52,8 +52,7 @@
         </dependency>
         <dependency>
             <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>provided</scope>
+            <artifactId>junit-dep</artifactId>
         </dependency>
 
         <dependency>
