@@ -24,30 +24,75 @@ import static org.fest.assertions.Assertions.assertThat;
 public class FluentListParamTest extends LocalFluentCase {
 
     @Test
-    public void checkTextParam() {
+    public void checkTextsParam() {
         goTo(DEFAULT_URL);
         FluentList list = find("span");
         assertThat(list.getTexts()).contains("Small 1", "Small 2", "Small 3");
     }
 
     @Test
-    public void checkValueAction() {
+    public void checkNamesAction() {
         goTo(DEFAULT_URL);
         FluentList list = find(".small");
         assertThat(list.getNames()).contains("name", "name2");
     }
 
     @Test
-    public void checkIdAction() {
+    public void checkIdsAction() {
         goTo(DEFAULT_URL);
         FluentList list = find(".small");
         assertThat(list.getIds()).contains("id", "id2");
     }
 
+
+     @Test
+    public void checkAttributesAction() {
+        goTo(DEFAULT_URL);
+        FluentList list = find("input");
+        assertThat(list.getAttributes("value")).contains("John", "Doe");
+    }
+    //<span
     @Test
-    public void checkNameAction() {
+    public void checkValuesAction() {
         goTo(DEFAULT_URL);
         FluentList list = find("input");
         assertThat(list.getValues()).contains("John", "Doe");
+    }
+    //<span class="small" id="id" name="name">Small 1</span>
+
+
+    @Test
+    public void checkTextParam() {
+        goTo(DEFAULT_URL);
+        FluentList list = find(".small");
+        assertThat(list.getText()).isEqualTo("Small 1");
+    }
+
+    @Test
+    public void checkValueAction() {
+        goTo(DEFAULT_URL);
+        FluentList list = find("input");
+        assertThat(list.getValue()).isEqualTo("John");
+    }
+
+    @Test
+    public void checkAttributeAction() {
+        goTo(DEFAULT_URL);
+        FluentList list = find("input");
+        assertThat(list.getAttribute("value")).isEqualTo("John");
+    }
+
+    @Test
+    public void checkIdAction() {
+        goTo(DEFAULT_URL);
+        FluentList list = find(".small");
+        assertThat(list.getId()).isEqualTo("id");
+    }
+
+    @Test
+    public void checkNameAction() {
+        goTo(DEFAULT_URL);
+        FluentList list = find(".small");
+        assertThat(list.getName()).isEqualTo("name");
     }
 }

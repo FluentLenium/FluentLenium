@@ -192,6 +192,67 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
         });
     }
 
+
+    /**
+     * Return the value of the first element in the list
+     *
+     * @return
+     */
+    public String getValue() {
+        if (this.size() > 0) {
+            return this.get(0).getValue();
+        }
+        return null;
+    }
+
+    /**
+     * Return the id of the first element on the list
+     *
+     * @return
+     */
+    public String getId() {
+        if (this.size() > 0) {
+            return this.get(0).getId();
+        }
+        return null;
+    }
+
+    /**
+     * Return a custom attribute of the first element on the list
+     *
+     * @return
+     */
+    public String getAttribute(final String attribute) {
+        if (this.size() > 0) {
+            return this.get(0).getAttribute(attribute);
+        }
+        return null;
+    }
+
+    /**
+     * Return the name of the first element on the list
+     *
+     * @return
+     */
+    public String getName() {
+        if (this.size() > 0) {
+            return this.get(0).getName();
+        }
+        return null;
+    }
+
+    /**
+     * Return the text of the first element on the list
+     *
+     * @return
+     */
+    public String getText() {
+        if (this.size() > 0) {
+            return this.get(0).getText();
+        }
+        return null;
+    }
+
     /**
      * find elements into the childs with the corresponding filters
      *
