@@ -46,20 +46,18 @@ public abstract class Fluent implements SearchActions {
         FluentThread.set(this);
     }
 
-    public Fluent(WebDriver driver, String baseUrl) {
-        this.driver = driver;
+    public Fluent withDefaultUrl(String baseUrl) {
         if (baseUrl != null) {
             if (baseUrl.endsWith("/")) {
                 baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
             }
             this.baseUrl = baseUrl;
         }
-        this.search = new Search(driver);
-        FluentThread.set(this);
+        return this;
     }
 
     public Fluent() {
-                FluentThread.set(this);
+        FluentThread.set(this);
     }
 
     /**
@@ -87,16 +85,10 @@ public abstract class Fluent implements SearchActions {
         return this;
     }
 
-    protected final void initFluent(WebDriver driver, String baseUrl) {
+    protected final Fluent initFluent(WebDriver driver) {
         this.driver = driver;
-        if (baseUrl != null) {
-            if (baseUrl.endsWith("/")) {
-                baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
-            }
-            this.baseUrl = baseUrl;
-        }
-        this.baseUrl = baseUrl;
         this.search = new Search(driver);
+        return this;
     }
 
     public WebDriver getDriver() {

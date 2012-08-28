@@ -22,10 +22,6 @@ public class FluentAdapter extends Fluent {
         super(webDriver);
     }
 
-    public FluentAdapter(WebDriver webDriver, String baseUrl) {
-        super(webDriver, baseUrl);
-    }
-
     public FluentAdapter() {
         super();
     }
@@ -62,9 +58,8 @@ public class FluentAdapter extends Fluent {
             construct.setAccessible(true);
             page = (T) construct.newInstance();
             Class parent = Class.forName(Fluent.class.getName());
-            Method m = parent.getDeclaredMethod("initFluent", WebDriver.class, String.class);
-            m.setAccessible(true);
-            m.invoke(page, getDriver(), getBaseUrl());
+            initDriver(page, parent);
+            initBaseUrl(page, parent);
 
             //init fields with default proxies
             Field[] fields = cls.getDeclaredFields();
@@ -92,6 +87,21 @@ public class FluentAdapter extends Fluent {
             throw new ConstructionException("Cannot invoke method setDriver on " + (cls != null ? cls.getName() : " null"), e);
         }
         return page;
+    }
+
+    private <T extends FluentPage> void initBaseUrl(T page, Class parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        Method m;
+        if (getBaseUrl() != null) {
+            m = parent.getDeclaredMethod("withDefaultUrl", String.class);
+            m.setAccessible(true);
+            m.invoke(page, getBaseUrl());
+        }
+    }
+
+    private <T extends FluentPage> void initDriver(T page, Class parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        Method m = parent.getDeclaredMethod("initFluent", WebDriver.class);
+        m.setAccessible(true);
+        m.invoke(page, getDriver());
     }
 
     private static void proxyElement(ElementLocatorFactory factory, Object page, Field field) {

@@ -51,7 +51,7 @@ public abstract class FluentTest extends FluentAdapter {
         @Override
         public void starting(FrameworkMethod method) {
             super.starting(method);
-            initFluent(getDefaultDriver(), getDefaultBaseUrl());
+            initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
             initTest();
         }
 

@@ -22,31 +22,21 @@ import org.openqa.selenium.WebDriver;
 public class IsolatedTest extends FluentAdapter {
 
 
-    public IsolatedTest(){
-        initFluent(getDefaultDriver(), getDefaultBaseUrl());
+    public IsolatedTest() {
+        initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
         initTest();
     }
 
-     public IsolatedTest(WebDriver webDriver){
-        initFluent(webDriver, getDefaultBaseUrl());
-        initTest();
-    }
-
-    public IsolatedTest(String baseUrl) {
-        initFluent(getDefaultDriver(), baseUrl);
-        initTest();
-    }
-
-    public IsolatedTest(WebDriver webDriver, String baseUrl) {
-        initFluent(webDriver, baseUrl);
+    public IsolatedTest(WebDriver webDriver) {
+        initFluent(webDriver).withDefaultUrl(getDefaultBaseUrl());
         initTest();
     }
 
     public void quit() {
-            if (getDriver() != null) {
-                super.quit();
-            }
+        if (getDriver() != null) {
+            super.quit();
         }
+    }
 
 
 }
