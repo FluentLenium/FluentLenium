@@ -27,6 +27,7 @@ import org.openqa.selenium.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -36,10 +37,23 @@ import java.util.Set;
  */
 public abstract class Fluent implements SearchActions {
     private WebDriver driver;
+    private String baseUrl;
     private Search search;
 
     public Fluent(WebDriver driver) {
         this.driver = driver;
+        this.search = new Search(driver);
+        FluentThread.set(this);
+    }
+
+    public Fluent(WebDriver driver, String baseUrl) {
+        this.driver = driver;
+        if (baseUrl != null) {
+            if (baseUrl.endsWith("/")) {
+                baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
+            }
+            this.baseUrl = baseUrl;
+        }
         this.search = new Search(driver);
         FluentThread.set(this);
     }
@@ -73,13 +87,29 @@ public abstract class Fluent implements SearchActions {
         return this;
     }
 
-    protected final void initFluent(WebDriver driver) {
+    protected final void initFluent(WebDriver driver, String baseUrl) {
         this.driver = driver;
+        if (baseUrl != null) {
+            if (baseUrl.endsWith("/")) {
+                baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
+            }
+            this.baseUrl = baseUrl;
+        }
+        this.baseUrl = baseUrl;
         this.search = new Search(driver);
     }
 
     public WebDriver getDriver() {
         return driver;
+    }
+
+    /**
+     * Get the base URL to use when visiting relative URLs, if one is configured
+     *
+     * @return The base URL, or null if none configured
+     */
+    public String getBaseUrl() {
+        return baseUrl;
     }
 
     /**
@@ -160,6 +190,12 @@ public abstract class Fluent implements SearchActions {
     public Fluent goTo(String url) {
         if (url == null) {
             throw new IllegalArgumentException("Url is mandatory");
+        }
+        if (baseUrl != null) {
+            URI uri = URI.create(url);
+            if (!uri.isAbsolute()) {
+                url = baseUrl + url;
+            }
         }
         getDriver().get(url);
         return this;
