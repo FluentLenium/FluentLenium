@@ -442,7 +442,7 @@ You can also use matchers:
 await().atMost(5, TimeUnit.SECONDS).until(".small").withText().startsWith("start").isPresent();
 ```
      
-Just use `startsWith`, `notStartsWith`, `endsWith`, `notEndsWith`, `contains`, `notContains`, `equalTo`.
+Just use `startsWith`, `notStartsWith`, `endsWith`, `notEndsWith`, `contains`, `notContains`, `equalTo`,`areDisplayed`.
 
 If you need to filter on a custom attribute name, this syntax will help :
 
@@ -520,6 +520,9 @@ If you want to test concurrency or if you need for any reason to not use the mec
 
 ### Driver
 If you need to change your driver, just override the `getDefaultDriver` method in your test. You can use every driver.
+
+### Base Url
+If you want to defined a default base url, just override the `getDefaultBaseUrl` method in your test. Every pages create with @Page will also use this variable.
 
 ### TimeOut
 Just override `getDefaultWait` method in your test.
