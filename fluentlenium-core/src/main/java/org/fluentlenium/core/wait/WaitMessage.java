@@ -8,23 +8,24 @@ package org.fluentlenium.core.wait;
  * To change this template use File | Settings | File Templates.
  */
 public class WaitMessage {
-    static final String SELECTOR = "Selector ";
-    static final String PAGE = "Page ";
-    static final String IS_NOT_PRESENT = " is not present.";
-    static final String HAS_NOT_THE_NAME = " has not the name ";
-    static final String HAS_NOT_THE_SIZE = " has not the size";
-    static final String POINT = ".";
-    static final String HAS_NOT_THE_TEXT = " has not the text ";
-    static final String HAS_NOT_THE_ID = " has not the id ";
-    static final String WITH_ATTRIBUTE = " with attribute ";
-    static final String WITH_VALUE = " with value ";
-    static final String HAS_NOT_SIZE_EQUAL_TO = " has not size equal to ";
-    static final String IS_EQUAL_TO = " is equal to ";
-    static final String IS_NOT_LESS_THAN = " is not less than ";
-    static final String IS_NOT_LESS_THAN_OR_EQUAL_TO = " is not less than or equal to ";
-    static final String IS_NOT_GREATHER_THAN = " is not greather than ";
-    static final String IS_NOT_GREATHER_THAN_OR_EQUAL_TO = " is not greather than or equal to ";
-    static final String IS_NOT_LOADED = " is not loaded";
+    private static final String SELECTOR = "Selector ";
+    private static final String PAGE = "Page ";
+    private static final String IS_NOT_PRESENT = " is not present.";
+    private static final String HAS_NOT_THE_NAME = " has not the name ";
+    private static final String HAS_NOT_THE_SIZE = " has not the size";
+    private static final String POINT = ".";
+    private static final String HAS_NOT_THE_TEXT = " has not the text ";
+    private static final String HAS_NOT_THE_ID = " has not the id ";
+    private static final String WITH_ATTRIBUTE = " with attribute ";
+    private static final String WITH_VALUE = " with value ";
+    private static final String HAS_NOT_SIZE_EQUAL_TO = " has not size equal to ";
+    private static final String IS_EQUAL_TO = " is equal to ";
+    private static final String IS_NOT_LESS_THAN = " is not less than ";
+    private static final String IS_NOT_LESS_THAN_OR_EQUAL_TO = " is not less than or equal to ";
+    private static final String IS_NOT_GREATHER_THAN = " is not greather than ";
+    private static final String IS_NOT_GREATHER_THAN_OR_EQUAL_TO = " is not greather than or equal to ";
+    private static final String IS_NOT_LOADED = " is not loaded";
+    private static final String IS_NOT_DISPLAY = " is not displayed";
 
     static final String hasSizeMessage(String selector, int size) {
         return SELECTOR + selector + HAS_NOT_THE_SIZE + size + POINT;
@@ -35,11 +36,15 @@ public class WaitMessage {
     }
 
     static final String isPageLoaded(String url) {
-        return PAGE + url +IS_NOT_LOADED + POINT;
+        return PAGE + url + IS_NOT_LOADED + POINT;
     }
 
     static final String isPresentMessage(String selector) {
         return SELECTOR + selector + IS_NOT_PRESENT;
+    }
+
+    static final String isDisplayedMessage(String selector) {
+        return SELECTOR + selector + IS_NOT_DISPLAY;
     }
 
     static final String hasTextMessage(String selector, String value) {

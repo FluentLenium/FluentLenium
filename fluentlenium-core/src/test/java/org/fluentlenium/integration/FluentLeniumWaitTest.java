@@ -204,23 +204,40 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         await().atMost(1, NANOSECONDS).until("input").with("value").equalTo("John").hasAttribute("value", "John");
     }
 
+    @Test
+    public void when_element_is_present_then_isDisplayed_return_true() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).until("#default").areDisplayed();
+    }
+
+    @Test(expected = TimeoutException.class)
+    public void when_element_is_not_displayed_then_isDisplayed_throws_exception() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).until("#unvisible").areDisplayed();
+    }
+
+    @Test
+    public void when_element_is_not_displayed_then_isPresent_return_true() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).until("#unvisible").isPresent();
+    }
+
     @Test(expected = TimeoutException.class)
     public void checkPolling() {
         goTo(JAVASCRIPT_URL);
         await().pollingEvery(800, TimeUnit.MILLISECONDS).until("#default").hasText("wait");
     }
 
-
 }
 
- class MyFluentPage extends FluentPage {
-        @Override
-        public void isAt() {
-            assertThat(find("#newField").getTexts()).contains("new");
-        }
-
-        @Override
-        public String getUrl() {
-            return LocalFluentCase.JAVASCRIPT_URL;
-        }
+class MyFluentPage extends FluentPage {
+    @Override
+    public void isAt() {
+        assertThat(find("#newField").getTexts()).contains("new");
     }
+
+    @Override
+    public String getUrl() {
+        return LocalFluentCase.JAVASCRIPT_URL;
+    }
+}

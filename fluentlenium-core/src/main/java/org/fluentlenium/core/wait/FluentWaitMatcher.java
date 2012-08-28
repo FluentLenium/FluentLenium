@@ -3,6 +3,8 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentThread;
+import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterType;
 import org.fluentlenium.core.search.Search;
@@ -138,15 +140,15 @@ public class FluentWaitMatcher {
     public Fluent containsText(final String value) {
         Predicate hasText = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(@Nullable WebDriver webDriver) {
-                List<String> texts ;
+                List<String> texts;
                 if (filters.size() > 0) {
-                   texts = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getTexts();
+                    texts = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getTexts();
                 } else {
-                   texts = search.find(selector).getTexts();
+                    texts = search.find(selector).getTexts();
                 }
-                if (texts!=null){
-                    for(String text:texts){
-                        if (text.contains(value)){
+                if (texts != null) {
+                    for (String text : texts) {
+                        if (text.contains(value)) {
                             return true;
                         }
                     }
@@ -159,24 +161,24 @@ public class FluentWaitMatcher {
     }
 
     /**
-       * check if the FluentWait has the exact corresponding text
-       *
-       * @param value
-       */
-      public Fluent hasText(final String value) {
-          Predicate hasText = new com.google.common.base.Predicate<WebDriver>() {
-              public boolean apply(@Nullable WebDriver webDriver) {
-                  if (filters.size() > 0) {
-                      return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getTexts().contains(value);
-                  } else {
-                      return search.find(selector).getTexts().contains(value);
-                  }
-              }
-          };
-          until(wait, hasText, filters, hasTextMessage(selector, value));
-          return FluentThread.get();
+     * check if the FluentWait has the exact corresponding text
+     *
+     * @param value
+     */
+    public Fluent hasText(final String value) {
+        Predicate hasText = new com.google.common.base.Predicate<WebDriver>() {
+            public boolean apply(@Nullable WebDriver webDriver) {
+                if (filters.size() > 0) {
+                    return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getTexts().contains(value);
+                } else {
+                    return search.find(selector).getTexts().contains(value);
+                }
+            }
+        };
+        until(wait, hasText, filters, hasTextMessage(selector, value));
+        return FluentThread.get();
 
-      }
+    }
 
     /**
      * Check that the element is present
@@ -197,6 +199,43 @@ public class FluentWaitMatcher {
         until(wait, isPresent, filters, isPresentMessage(selector));
         return FluentThread.get();
 
+    }
+
+
+    /**
+     * Check that the elements are all displayed
+     *
+     * @return
+     */
+    public Fluent areDisplayed() {
+        Predicate isVisible = new com.google.common.base.Predicate<WebDriver>() {
+            public boolean apply(@Nullable WebDriver webDriver) {
+                if (filters.size() > 0) {
+                    FluentList<FluentWebElement> fluentWebElements = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()]));
+                    if (fluentWebElements.size() > 0) {
+                        for (FluentWebElement fluentWebElement : fluentWebElements) {
+                            if (!fluentWebElement.isDisplayed()) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                } else {
+                    FluentList<FluentWebElement> fluentWebElements = search.find(selector);
+                    if (fluentWebElements.size() > 0) {
+                        for (FluentWebElement fluentWebElement : fluentWebElements) {
+                            if (!fluentWebElement.isDisplayed()) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                }
+                return false;
+            }
+        };
+        until(wait, isVisible, filters, isDisplayedMessage(selector));
+        return FluentThread.get();
     }
 
     /**
