@@ -29,7 +29,7 @@ public abstract class FluentTestNg extends FluentAdapter {
 
     @BeforeClass
     public void beforeClass() {
-        this.initFluent(getDefaultDriver());
+        this.initFluent(getDefaultDriver(), getDefaultBaseUrl());
         initTest();
     }
 

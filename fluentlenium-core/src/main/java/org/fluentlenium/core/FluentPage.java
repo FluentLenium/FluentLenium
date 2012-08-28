@@ -52,10 +52,7 @@ public abstract class FluentPage extends Fluent {
      * Go to the url defined in the page
      */
     public final void go() {
-        if (getUrl() == null) {
-            throw new IllegalArgumentException("No URL have been defined for this page");
-        }
-        getDriver().get(getUrl());
+        goTo(getUrl());
     }
 
 
