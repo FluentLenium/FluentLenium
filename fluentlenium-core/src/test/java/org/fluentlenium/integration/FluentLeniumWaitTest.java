@@ -15,14 +15,18 @@
 package org.fluentlenium.integration;
 
 
+import com.google.common.base.Predicate;
 import org.fluentlenium.core.FluentAdapter;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import javax.annotation.Nullable;
 import java.util.concurrent.TimeUnit;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
@@ -121,6 +125,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     public void when_a_element_is_present_then_isNotEnabled_throw_an_exception() {
         await().atMost(1, NANOSECONDS).until(".small").withText().contains("Small 1").isNotPresent();
     }
+
     @Test
     public void checkAwaitStartWithRegex() {
         await().atMost(1, NANOSECONDS).until(".small").with("id").startsWith(regex("id")).hasSize(2);
@@ -160,6 +165,15 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test
     public void checkAwaitNotContainsRegex() {
         await().atMost(1, NANOSECONDS).until(".small").with("id").notContains(regex("d")).hasSize(1);
+    }
+
+    @Test
+    public void check_predicate() {
+        await().until(new Predicate<WebDriver>() {
+            public boolean apply(@Nullable WebDriver input) {
+                return input.findElement(By.id("id")) != null;  //To change body of implemented methods use File | Settings | File Templates.
+            }
+        });
     }
 
     @Test
