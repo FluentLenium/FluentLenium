@@ -30,15 +30,14 @@
       <section>
         <h1>What is FluentLenium ?</h1>
 
-<p>FluentLenium is a framework that helps you writing <a href="http://seleniumhq.org/">Selenium</a> tests.
+<p>FluentLenium is a framework that helps you to write <a href="http://seleniumhq.org/">Selenium</a> tests.
 FluentLenium provides you a <a href="http://en.wikipedia.org/wiki/Fluent_interface">fluent interface</a> to the <a href="http://seleniumhq.org/docs/03_webdriver.html">Selenium Web Driver</a>.
-FluentLenium let you use the assertion framework you like, either <a href="http://www.junit.org/apidocs/org/junit/Assert.html">jUnit assertions</a>, <a href="http://code.google.com/p/hamcrest/wiki/Tutorial">Hamcrest</a> 
+FluentLenium lets you use the assertion framework you like, either <a href="http://www.junit.org/apidocs/org/junit/Assert.html">jUnit assertions</a>, <a href="http://code.google.com/p/hamcrest/wiki/Tutorial">Hamcrest</a> 
 or <a href="http://docs.codehaus.org/display/FEST/Fluent+Assertions+Module">Fest-assert</a>.</p>
 
-<h1>5 seconds example</h1>
+<h1>5 second example</h1>
 
-<div class="highlight">
-<pre><span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">fest</span><span class="o">.</span><span class="na">assertions</span><span class="o">.</span><span class="na">Assertions</span><span class="o">.</span><span class="na">assertThat</span><span class="o">;</span>
 
@@ -51,76 +50,58 @@ or <a href="http://docs.codehaus.org/display/FEST/Fluent+Assertions+Module">Fest
         <span class="n">assertThat</span><span class="o">(</span><span class="n">title</span><span class="o">()).</span><span class="na">contains</span><span class="o">(</span><span class="s">"FluentLenium"</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre>
-</div>
-
+</pre></div>
 
 <h2>Maven</h2>
 
-<p>To add FluentLenium to your project, just add the following dependency into your <code>pom.xml</code>:</p>
+<p>To add FluentLenium to your project, just add the following dependency to your <code>pom.xml</code>:</p>
 
-<div class="highlight">
-<pre><span class="nt">&lt;dependency&gt;</span>
+<div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-core<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>0.7.2<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.7.3<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</pre>
-</div>
+</pre></div>
 
+<p>By default, FluentLenium provides a jUnit adapter.</p>
 
-<p>By default, FluentLenium provide a jUnit adapter.</p>
+<p>If you need the fest-assert dependency to improve the legibility of your test code :</p>
 
-<p>If you need the fest-assert dependency to improve the lisibility of your test code :</p>
-
-<div class="highlight">
-<pre><span class="nt">&lt;dependency&gt;</span>
+<div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-festassert<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>0.7.2<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.7.3<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</pre>
-</div>
+</pre></div>
 
+<p>An adapter has also been built for using FluentLenium with TestNG :</p>
 
-<p>An adapter has been built to use FluentLenium with TestNG :
-If you need the fest-assert dependency to improve the lisibility of your test code :</p>
-
-<div class="highlight">
-<pre><span class="nt">&lt;dependency&gt;</span>
+<div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-testng<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>0.7.2<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.7.3<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</pre>
-</div>
+</pre></div>
 
-
-<p>Just extends <code>org.fluentlenium.adapter.FluentTestNg</code> instead of <code>org.fluentlenium.adapter.FluentTest</code>.</p>
+<p>Just extend <code>org.fluentlenium.adapter.FluentTestNg</code> instead of <code>org.fluentlenium.adapter.FluentTest</code>.</p>
 
 <h2>Static imports</h2>
 
 <p>If you need to do some filtering :</p>
 
-<div class="highlight">
-<pre><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">fluentlenium</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">filter</span><span class="o">.</span><span class="na">FilterConstructor</span><span class="o">.*;</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">fluentlenium</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">filter</span><span class="o">.</span><span class="na">FilterConstructor</span><span class="o">.*;</span>
+</pre></div>
 
 <h3>Static import using fest assert</h3>
 
-<p>The static assertions to use fest assert</p>
+<p>The static assertions to use fest assert are :</p>
 
-<div class="highlight">
-<pre><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">fest</span><span class="o">.</span><span class="na">assertions</span><span class="o">.</span><span class="na">Assertions</span><span class="o">.</span><span class="na">assertThat</span><span class="o">;</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">fest</span><span class="o">.</span><span class="na">assertions</span><span class="o">.</span><span class="na">Assertions</span><span class="o">.</span><span class="na">assertThat</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">fest</span><span class="o">.</span><span class="na">assertions</span><span class="o">.</span><span class="na">fluentlenium</span><span class="o">.</span><span class="na">FluentLeniumAssertions</span><span class="o">.</span><span class="na">assertThat</span><span class="o">;</span>
-</pre>
-</div>
-
+</pre></div>
 
 <h3>Basic Methods</h3>
 
@@ -141,28 +122,24 @@ If you need the fest-assert dependency to improve the lisibility of your test co
 </li>
 <li>the <code>tag</code> name "input" : <code>find("input")</code>
 </li>
-</ul><p>You are free to use most of the CSS3 syntax, wich means that
+</ul><p>You are free to use most of the CSS3 syntax, which means that
 <code>find("input[class=rightForm]")</code>
 will return the list of all input elements which have the class rightForm</p>
 
 <h4>Custom filter</h4>
 
-<p>But what if you want all the input that have a text equal to "Sam" ?
+<p>But what if you want all the input that have text equal to "Sam" ?
 You can use filters to allow that kind of search. For example :</p>
 
-<div class="highlight">
-<pre><span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span class="o">))</span>
+<div class="highlight"><pre><span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span class="o">))</span>
 <span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withId</span><span class="o">(</span><span class="s">"idOne"</span><span class="o">))</span>
 <span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withText</span><span class="o">(</span><span class="s">"This field is mandatory."</span><span class="o">))</span>
-</pre>
-</div>
+</pre></div>
 
+<p>You can also write chained filters :
+<code>find(".small", withName("foo"), withId("id1"))</code> will return all the elements matching the 3 criteria.</p>
 
-<p>You can also chained filters :
-<code>find(".small", withName("foo"), withId("id1"))</code> will return all the elements matching the 3 criterias.</p>
-
-<p>If you want others precisions that just the css selector, just use our filters features.
-For now, you have 6 differents filters :</p>
+<p>You can do more complex string matching on the above filters using the following methods :</p>
 
 <ul>
 <li><code>contains</code></li>
@@ -173,227 +150,178 @@ For now, you have 6 differents filters :</p>
 <li><code>notEndsWith</code></li>
 </ul><p>For each of them, you can choose to use a css selector :</p>
 
-<div class="highlight">
-<pre><span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withName</span><span class="o">().</span><span class="na">notContains</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span>
+<div class="highlight"><pre><span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withName</span><span class="o">().</span><span class="na">notContains</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span>
 <span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withId</span><span class="o">().</span><span class="na">notStartsWith</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span>
 <span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withText</span><span class="o">().</span><span class="na">endsWith</span><span class="o">(</span><span class="s">"Female"</span><span class="o">))</span>
-</pre>
-</div>
+</pre></div>
 
+<p>Or to be more precise, you can use regular expressions :</p>
 
-<p>Or to be more precise, you can choose to use a regexp :</p>
-
-<div class="highlight">
-<pre><span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withName</span><span class="o">().</span><span class="na">contains</span><span class="o">(</span><span class="n">regex</span><span class="o">(</span><span class="s">"na?me[0-9]*"</span><span class="o">))</span>
+<div class="highlight"><pre><span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withName</span><span class="o">().</span><span class="na">contains</span><span class="o">(</span><span class="n">regex</span><span class="o">(</span><span class="s">"na?me[0-9]*"</span><span class="o">))</span>
 <span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withName</span><span class="o">().</span><span class="na">notStartsWith</span><span class="o">(</span><span class="n">regex</span><span class="o">(</span><span class="s">"na?me[0-9]*"</span><span class="o">))</span>
-</pre>
-</div>
+</pre></div>
 
+<p>Contains, startsWith and endsWith with a regexp pattern look for a subsection of the pattern.</p>
 
-<p>Contains, startsWith and endsWith with a regexp pattern are looking for a subsect of the pattern.</p>
-
-<p>Of course, if you are a regexp jedi, that's not needed !</p>
+<p>Of course, if you are a regexp jedi, you don't need these!</p>
 
 <p>More will come soon to filter to create a complete search tool (containsWord, able to choose if you want to ignore case ...)</p>
 
 <h3>N-th</h3>
 
-<p>If you want the first elements that matchs your criteria, just use :</p>
+<p>If you want the first element that matches your criteria, just use :</p>
 
-<div class="highlight">
-<pre><span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">)</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">)</span>
+</pre></div>
 
 <p>or alternatively</p>
 
-<div class="highlight">
-<pre><span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">first</span><span class="o">()</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">first</span><span class="o">()</span>
+</pre></div>
 
 <p>If you want the element at the given position :</p>
 
-<div class="highlight">
-<pre><span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
+</pre></div>
 
 <p>Of course, you can use both position filter and custom filter :</p>
 
-<div class="highlight">
-<pre><span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span class="o">))</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span class="o">))</span>
+</pre></div>
 
 <h4>Find on children</h4>
 
-<p>You can also chained the find call :
-<code>find(myCssSelector).find("input")</code> will return all the web element input into the css selector tree.
-You can add more indication :</p>
+<p>You can also chain the find call :
+<code>find(myCssSelector).find("input")</code> will return all the input elements in the css selector tree.
+You can be more specific :</p>
 
-<div class="highlight">
-<pre><span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span class="o">)).</span><span class="na">find</span><span class="o">(</span><span class="s">"input"</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"bar"</span><span class="o">))</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span class="o">)).</span><span class="na">find</span><span class="o">(</span><span class="s">"input"</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"bar"</span><span class="o">))</span>
+</pre></div>
 
 <p>or</p>
 
-<div class="highlight">
-<pre><span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span class="o">)).</span><span class="na">findFirst</span><span class="o">(</span><span class="s">"input"</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"bar"</span><span class="o">))</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span class="o">)).</span><span class="na">findFirst</span><span class="o">(</span><span class="s">"input"</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"bar"</span><span class="o">))</span>
+</pre></div>
 
 <h2>Element</h2>
 
 <p>If you need to access to the name, the id, the value, the tagname or the text of an element :</p>
 
-<div class="highlight">
-<pre><span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getName</span><span class="o">()</span>
+<div class="highlight"><pre><span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getName</span><span class="o">()</span>
 <span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getId</span><span class="o">()</span>
 <span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getValue</span><span class="o">()</span>
 <span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getTagName</span><span class="o">()</span>
 <span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getText</span><span class="o">()</span>
-</pre>
-</div>
+</pre></div>
 
+<p>If you need to access a specific value of an attribute:</p>
 
-<p>If you need to access a specific value of an attribute  :</p>
+<div class="highlight"><pre><span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"myCustomAttribute"</span><span class="o">)</span>
+</pre></div>
 
-<div class="highlight">
-<pre><span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"myCustomAttribute"</span><span class="o">)</span>
-</pre>
-</div>
+<p>You can also access a list of all the names, text, and ids of a list of elements:</p>
 
-
-<p>You can also access a list of all the name,text,id of a list of element</p>
-
-<div class="highlight">
-<pre><span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getNames</span><span class="o">()</span>
+<div class="highlight"><pre><span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getNames</span><span class="o">()</span>
 <span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getIds</span><span class="o">()</span>
 <span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getValues</span><span class="o">()</span>
 <span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getAttributes</span><span class="o">(</span><span class="s">"myCustomAttribute"</span><span class="o">)</span>
 <span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getTexts</span><span class="o">()</span>
-</pre>
-</div>
+</pre></div>
 
+<p>If you want to know the name, the id, the value, the text or the value of an attribute of the first element on the list
+find(myCssSelector).getName()
+find(myCssSelector).getId()
+find(myCssSelector).getValue()
+find(myCssSelector).getAttribute("myCustomAttribute")
+find(myCssSelector).getText()</p>
 
-<p>If you need to get the underlying html content of an element.</p>
+<pre><code>
+If you need to get the underlying html content of an element:
+```java
+findFirst(myCssSelector).html()
+</code></pre>
 
-<div class="highlight">
-<pre><span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">html</span><span class="o">()</span>
-</pre>
-</div>
+<p>To know the dimension of an element (with and height):</p>
 
+<div class="highlight"><pre><span class="n">Dimension</span> <span class="n">dimension</span> <span class="o">=</span> <span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getSize</span><span class="o">()</span>
+</pre></div>
 
-<p>To know the dimension of an element (with and height)  :</p>
+<p>You can also check if the element is displayed, enabled or selected:</p>
 
-<div class="highlight">
-<pre><span class="n">Dimension</span> <span class="n">dimension</span> <span class="o">=</span> <span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getSize</span><span class="o">()</span>
-</pre>
-</div>
-
-
-<p>You can also check if the element is displayed, enabled or selected :</p>
-
-<div class="highlight">
-<pre><span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">isDisplayed</span><span class="o">()</span>
+<div class="highlight"><pre><span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">isDisplayed</span><span class="o">()</span>
 <span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">isEnabled</span><span class="o">()</span>
 <span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">isSelected</span><span class="o">()</span>
-</pre>
-</div>
+</pre></div>
 
+<h2>Form Actions</h2>
 
-<h2>Form Action</h2>
-
-<p>If you need to click, fill, submit or clean an element or a list of element, just go naturally for it.</p>
+<p>Clicking, filling, submitting and cleaning an element or list of elements is simple and intuitive.</p>
 
 <h3>Fill</h3>
 
-<p><code>fill("input").with("bar")</code> or <code>find("input").text("bar")</code> will fill all the element with tag input with bar. 
-If you want for example exclude the checkbox, you can use the css filtering like <code>fill("input:not([type='checkbox'])").with("tomato")</code>, 
+<p><code>fill("input").with("bar")</code> or <code>find("input").text("bar")</code> will fill all the input elements with bar. 
+If you want for example to exclude checkboxes, you can use the css filtering like <code>fill("input:not([type='checkbox'])").with("tomato")</code>, 
 you can also use the filtering provided by FluentLenium <code>fill("input", with("type", notContains("checkbox"))).with("tomato")</code></p>
 
-<p><code>fill("input").with("myLogin","myPassword")</code> will fill the first elements of the input selection with myLogin, the second with myPassword. 
-If there are a third input, the last value (myPassword) will be repeat again and again.</p>
+<p><code>fill("input").with("myLogin","myPassword")</code> will fill the first element of the input selection with myLogin, the second with myPassword. 
+If there are more input elements found, the last value (myPassword) will be repeated for each subsequent element.</p>
 
-<p>Don't forget, only the visible field will be modified. It simulates your action in a browser !</p>
+<p>Don't forget, only visible fields will be modified. It simulates a real person using a browser!</p>
 
 <h3>Click</h3>
 
-<div class="highlight">
-<pre><span class="n">click</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">)</span>
-</pre>
-</div>
+<div class="highlight"><pre><span class="n">click</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">)</span>
+</pre></div>
 
-
-<p>It will click on all the visible fields returned by the search.</p>
+<p>This will click on all the visible fields returned by the search.</p>
 
 <h3>Clear</h3>
 
-<div class="highlight">
-<pre><span class="n">clear</span><span class="o">(</span><span class="s">"#firstname"</span><span class="o">)</span>
-</pre>
-</div>
+<div class="highlight"><pre><span class="n">clear</span><span class="o">(</span><span class="s">"#firstname"</span><span class="o">)</span>
+</pre></div>
 
-
-<p>It will clear  all the visible fields returned by the search.</p>
+<p>This will clear all the visible fields returned by the search.</p>
 
 <h3>Submit</h3>
 
-<div class="highlight">
-<pre><span class="n">submit</span><span class="o">(</span><span class="s">"#account"</span><span class="o">)</span>
-</pre>
-</div>
+<div class="highlight"><pre><span class="n">submit</span><span class="o">(</span><span class="s">"#account"</span><span class="o">)</span>
+</pre></div>
 
-
-<p>It will submit all the visible fields returned by the search.</p>
+<p>This will submit all the visible fields returned by the search.</p>
 
 <h3>Double click</h3>
 
-<div class="highlight">
-<pre><span class="n">find</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span class="na">doubleClick</span><span class="o">()</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="n">find</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span class="na">doubleClick</span><span class="o">()</span>
+</pre></div>
 
 <h2>Page Object pattern</h2>
 
-<p>Because Selenium test can easily become a mess, <a href="http://code.google.com/p/selenium/wiki/PageObjects">Page Object Pattern</a> when writing automated integration test.
-Page Pattern will inclosing all the plumbing, which make tests a lot easier to read and to maintain.</p>
+<p>Selenium tests can easily become a mess.  To avoid this, you can use the <a href="http://code.google.com/p/selenium/wiki/PageObjects">Page Object Pattern</a>.
+Page Object Pattern will enclose all the plumbing relating to how pages interact with each other and how the user
+interacts with the page, which makes tests a lot easier to read and to maintain.</p>
 
-<p>Try to construct your Page thinking that it is better if you offer services from your page rather that just the internals of the page.
-A Page Object can modelize the whole page or just a part of it.</p>
+<p>Try to construct your Page thinking that it is better if you offer services from your page rather than just the internals of the page.
+A Page Object can model the whole page or just a part of it.</p>
 
-<p>To construct a Page, it have to extends <a href="https://github.com/FluentLenium/FluentLenium/blob/master/fluentlenium-core/src/main/java/org/fluentlenium/core/FluentPage.java">org.fluentlenium.core.FluentPage</a>.
-In most of the cases, you have to defined the url of the page with overriding the <code>getUrl</code> methods.
-In that way, you can go in your test to that page with <code>goTo(myPage)</code></p>
+<p>To construct a Page, extend <a href="https://github.com/FluentLenium/FluentLenium/blob/master/fluentlenium-core/src/main/java/org/fluentlenium/core/FluentPage.java">org.fluentlenium.core.FluentPage</a>.
+In most cases, you have to define the url of the page by overriding the <code>getUrl</code> method.
+By doing this, you can then use the <code>goTo(myPage)</code> method in your test code.</p>
 
-<p>To control that you are in the good page, not only the url [accessible in your test via the void url() method] can be needed.
-Redefined the <code>isAt</code> methods to list all the assertions you have to make in order to be sure that you are in the good pages.
-For example, if I choose that the title will be sufficient to know if I'm in the page :</p>
+<p>It may be necessary to ensure that you are on the right page, not just at the url returned by <code>getUrl</code> [accessible in your test via the void url() method].
+To do this, override the <code>isAt</code> method to run all the assertions necessary in order to ensure that you are on the right page.
+For example, if I choose that the title will be sufficient to know if I'm on the right page:</p>
 
-<div class="highlight">
-<pre><span class="nd">@Override</span>
+<div class="highlight"><pre><span class="nd">@Override</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">isAt</span><span class="o">()</span> <span class="o">{</span>
     <span class="n">assertThat</span><span class="o">(</span><span class="n">title</span><span class="o">()).</span><span class="na">contains</span><span class="o">(</span><span class="s">"Selenium"</span><span class="o">);</span>
 <span class="o">}</span>
-</pre>
-</div>
+</pre></div>
 
+<p>Create your own methods to easily fill out forms, go to another or whatever else may be needed in your test.</p>
 
-<p>Create you own methods to easily fill form, go to a next page or what else can be needed in your test.</p>
+<p>For example:</p>
 
-<p>For example :</p>
-
-<div class="highlight">
-<pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginPage</span> <span class="kd">extends</span> <span class="n">FluentPage</span> <span class="o">{</span>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginPage</span> <span class="kd">extends</span> <span class="n">FluentPage</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="n">String</span> <span class="nf">getUrl</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="s">"myCustomUrl"</span><span class="o">;</span>
     <span class="o">}</span>
@@ -405,43 +333,34 @@ For example, if I choose that the title will be sufficient to know if I'm in the
         <span class="n">click</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre>
-</div>
+</pre></div>
 
+<p>And the corresponding test:</p>
 
-<p>And the corresponding test :</p>
-
-<div class="highlight">
-<pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkLoginFailed</span><span class="o">()</span> <span class="o">{</span>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkLoginFailed</span><span class="o">()</span> <span class="o">{</span>
     <span class="n">goTo</span><span class="o">(</span><span class="n">loginPage</span><span class="o">);</span>
     <span class="n">loginPage</span><span class="o">.</span><span class="na">fillAndSubmitLoginForm</span><span class="o">(</span><span class="s">"login"</span><span class="o">,</span> <span class="s">"wrongPass"</span><span class="o">);</span>
     <span class="n">loginPage</span><span class="o">.</span><span class="na">isAt</span><span class="o">();</span>
 <span class="o">}</span>
-</pre>
-</div>
+</pre></div>
 
+<p>Or if you have the <a href="http://docs.codehaus.org/display/FEST/Fluent+Assertions+Module">Fest-assert</a> module (just static import org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat)</p>
 
-<p>Or if you have the <a href="http://docs.codehaus.org/display/FEST/Fluent+Assertions+Module">Fest-assert</a> module (just make a static import org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat)</p>
-
-<div class="highlight">
-<pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkLoginFailed</span><span class="o">()</span> <span class="o">{</span>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkLoginFailed</span><span class="o">()</span> <span class="o">{</span>
     <span class="n">goTo</span><span class="o">(</span><span class="n">loginPage</span><span class="o">);</span>
     <span class="n">loginPage</span><span class="o">.</span><span class="na">fillAndSubmitLoginForm</span><span class="o">(</span><span class="s">"login"</span><span class="o">,</span><span class="s">"wrongPass"</span><span class="o">);</span>
     <span class="n">assertThat</span><span class="o">(</span><span class="n">find</span><span class="o">(</span><span class="s">".error"</span><span class="o">)).</span><span class="na">hasSize</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
     <span class="n">assertThat</span><span class="o">(</span><span class="n">loginPage</span><span class="o">).</span><span class="na">isAt</span><span class="o">();</span>
 <span class="o">}</span>
-</pre>
-</div>
-
+</pre></div>
 
 <h3>Page usage</h3>
 
-<p>You can use the annotation <code>@Page</code> to define your page easily.</p>
+<p>You can use the annotation <code>@Page</code> to construct your page easily.</p>
 
-<p>For example :</p>
+<p>For example:</p>
 
-<div class="highlight">
-<pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AnnotationInitialization</span> <span class="kd">extends</span> <span class="n">FluentTest</span> <span class="o">{</span>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AnnotationInitialization</span> <span class="kd">extends</span> <span class="n">FluentTest</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="n">WebDriver</span> <span class="n">webDriver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HtmlUnitDriver</span><span class="o">();</span>
 
     <span class="nd">@Page</span>
@@ -461,14 +380,11 @@ For example, if I choose that the title will be sufficient to know if I'm in the
     <span class="o">}</span>
 
 <span class="o">}</span>
-</pre>
-</div>
+</pre></div>
 
+<p>You can also use the factory method <code>createPage</code>:</p>
 
-<p>You can also used the factory createPage</p>
-
-<div class="highlight">
-<pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BeforeInitialization</span> <span class="kd">extends</span> <span class="n">FluentTest</span> <span class="o">{</span>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BeforeInitialization</span> <span class="kd">extends</span> <span class="n">FluentTest</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="n">WebDriver</span> <span class="n">webDriver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HtmlUnitDriver</span><span class="o">();</span>
     <span class="kd">public</span> <span class="n">TestPage</span> <span class="n">page</span><span class="o">;</span>
     <span class="nd">@Before</span>
@@ -484,16 +400,13 @@ For example, if I choose that the title will be sufficient to know if I'm in the
         <span class="k">return</span> <span class="n">webDriver</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre>
-</div>
+</pre></div>
 
+<p>Within a page, all FluentWebElement fields are automatically searched for by name or id. For example, if you declare a FluentWebElement named <code>createButton</code>, 
+it will search the page for an element where <code>id</code> is <code>createButton</code> or name is <code>createButton</code>. 
+All elements are proxified which means that the search is not done until you try to access the element.</p>
 
-<p>Into a page, all FluentWebElement are automatically searched by name or id. For example, if you declare a FluentWebElement named <code>createButton</code>, 
-it will look into the page to a element where <code>id</code> is <code>createButton</code> or name is <code>createButton</code>. 
-All elements are proxified which means that the search is really done when you try to access the element.</p>
-
-<div class="highlight">
-<pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginPage</span> <span class="kd">extends</span> <span class="n">FluentPage</span> <span class="o">{</span>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginPage</span> <span class="kd">extends</span> <span class="n">FluentPage</span> <span class="o">{</span>
    <span class="n">FluentWebElement</span> <span class="n">createButton</span><span class="o">;</span>
    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getUrl</span><span class="o">()</span> <span class="o">{</span>
        <span class="k">return</span> <span class="s">"myCustomUrl"</span><span class="o">;</span>
@@ -506,195 +419,165 @@ All elements are proxified which means that the search is really done when you t
        <span class="n">createButton</span><span class="o">.</span><span class="na">click</span><span class="o">();</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</pre>
-</div>
+</pre></div>
 
+<p>If you need to wait for an element to be present, especially when waiting for an ajax call to complete, you can use the @AjaxElement annotation on the fields :</p>
 
-<p>If you need to wait for an element to be present, especially when on an ajax call, you can use the @AjaxElement annotation on the fields :</p>
-
-<div class="highlight">
-<pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginPage</span> <span class="kd">extends</span> <span class="n">FluentPage</span> <span class="o">{</span>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginPage</span> <span class="kd">extends</span> <span class="n">FluentPage</span> <span class="o">{</span>
    <span class="nd">@AjaxElement</span>
    <span class="n">FluentWebElement</span> <span class="n">myAjaxElement</span><span class="o">;</span>
 <span class="o">}</span>
-</pre>
-</div>
-
+</pre></div>
 
 <p>You can set the timeout in seconds for the page to throw an error if not found with @AjaxElemet(timeountOnSeconds=3) if you want to wait 3 seconds.
-By default, the timeout is set to one seconds.</p>
+By default, the timeout is set to one second.</p>
 
 <h2>Wait for an Ajax Call</h2>
 
-<p>You can have multiple way to make your driver wait for the result of an asynchronous call.
-FluentLenium provides a rich and fluent API in order to help you to handle AJAX call.
-If you want to wait for at most 5 seconds until the number of element corresponding to the until criteria (here the class small) has the requested size.</p>
+<p>There are multiple ways to make your driver wait for the result of an asynchronous call.
+FluentLenium provides a rich and fluent API in order to help you to handle AJAX calls.
+If you want to wait for at most 5 seconds until the number of elements corresponding to the until criteria (here the class small) has the requested size:</p>
 
-<div class="highlight">
-<pre><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="s">".small"</span><span class="o">).</span><span class="na">hasSize</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="s">".small"</span><span class="o">).</span><span class="na">hasSize</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+</pre></div>
 
 <p>The default wait is 500 ms.</p>
 
-<p>Instead of hasSize, you can also use <code>hasText("myTextValue")</code>, <code>hasId("myId")</code>, <code>hasName("myName")</code>, <code>containsText("myName")</code>.
+<p>Instead of hasSize, you can also use <code>hasText("myTextValue")</code>, <code>isPresent()</code>, <code>isNotPresent()</code>, <code>hasId("myId")</code>, <code>hasName("myName")</code>, <code>containsText("myName")</code>,<code>areDisplayed()</code>, <code>areEnabled()</code>.
 The <code>isPresent()</code> assertion is going to check if there is at most one element on the page corresponding to the filter.</p>
 
-<p>If you need to be more precise, you can also use filter on the search :</p>
+<p>If you need to be more precise, you can also use filters in the search:</p>
 
-<div class="highlight">
-<pre><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="s">".small"</span><span class="o">).</span><span class="na">withText</span><span class="o">(</span><span class="s">"myText"</span><span class="o">).</span><span class="na">hasSize</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="s">".small"</span><span class="o">).</span><span class="na">withText</span><span class="o">(</span><span class="s">"myText"</span><span class="o">).</span><span class="na">hasSize</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+</pre></div>
 
 <p>You can also use after hasSize() : 'greaterThan(int)', 'lessThan(int)', 'lessThanOrEqualTo(int)', 'greaterThanOrEqualTo(int)' , 'equalTo(int)', 'notEqualTo(int)'</p>
 
-<p>You can use <code>withText("myText")</code> but also with the same signature withName , <code>withId("myId")</code>
-You can also use matcher :</p>
+<p>You can also use matchers:</p>
 
-<div class="highlight">
-<pre><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="s">".small"</span><span class="o">).</span><span class="na">withText</span><span class="o">().</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"start"</span><span class="o">).</span><span class="na">isPresent</span><span class="o">();</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="s">".small"</span><span class="o">).</span><span class="na">withText</span><span class="o">().</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"start"</span><span class="o">).</span><span class="na">isPresent</span><span class="o">();</span>
+</pre></div>
 
 <p>Just use <code>startsWith</code>, <code>notStartsWith</code>, <code>endsWith</code>, <code>notEndsWith</code>, <code>contains</code>, <code>notContains</code>, <code>equalTo</code>.</p>
 
 <p>If you need to filter on a custom attribute name, this syntax will help :</p>
 
-<div class="highlight">
-<pre><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="s">".small"</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="s">"myAttribute"</span><span class="o">).</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"myValue"</span><span class="o">).</span><span class="na">isPresent</span><span class="o">();</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="s">".small"</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="s">"myAttribute"</span><span class="o">).</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"myValue"</span><span class="o">).</span><span class="na">isPresent</span><span class="o">();</span>
+</pre></div>
 
 <p>You can also check if the page is loaded using</p>
 
-<div class="highlight">
-<pre><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">NANOSECONDS</span><span class="o">).</span><span class="na">untilPage</span><span class="o">().</span><span class="na">isLoaded</span><span class="o">();</span>
-</pre>
-</div>
+<div class="highlight"><pre><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">NANOSECONDS</span><span class="o">).</span><span class="na">untilPage</span><span class="o">().</span><span class="na">isLoaded</span><span class="o">();</span>
+</pre></div>
 
+<p>If you want to wait until the page you want is the page that you are at, you can use :</p>
 
-<p>If you want to wait that the page you want is the page you are, you can use :</p>
+<div class="highlight"><pre><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">untilPage</span><span class="o">(</span><span class="n">myPage</span><span class="o">).</span><span class="na">isAt</span><span class="o">();</span>
+</pre></div>
 
-<div class="highlight">
-<pre><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">untilPage</span><span class="o">(</span><span class="n">myPage</span><span class="o">).</span><span class="na">isAt</span><span class="o">();</span>
-</pre>
-</div>
-
-
-<p>This methods calls in fact the mePage.isAt(). If the isAt() method of the myPage object do not throw any exception during the time specified, then the framework will consider that the page is the one wanted.</p>
+<p>This methods actually calls myPage.isAt(). If the isAt() method of the myPage object does not throw any exception during the time specified, then the framework will consider that the page is the one wanted.</p>
 
 <h3>Polling Every</h3>
 
-<p>You can also defined the polling frequency, for example, if you want to pull every 5 seconds :</p>
+<p>You can also define the polling frequency, for example, if you want to poll every 5 seconds :</p>
 
-<div class="highlight">
-<pre><span class="n">await</span><span class="o">().</span><span class="na">pollingEvery</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="s">".small"</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="s">"myAttribute"</span><span class="o">).</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"myValue"</span><span class="o">).</span><span class="na">isPresent</span><span class="o">();</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="n">await</span><span class="o">().</span><span class="na">pollingEvery</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="s">".small"</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="s">"myAttribute"</span><span class="o">).</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"myValue"</span><span class="o">).</span><span class="na">isPresent</span><span class="o">();</span>
+</pre></div>
 
 <p>The default value is 500ms.</p>
 
-<p>You can also chain filter in the asynchronous API :</p>
+<p>You can also chain filter in the asynchronous API:</p>
 
-<div class="highlight">
-<pre><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="s">".small"</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="s">"myAttribute"</span><span class="o">).</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"myValue"</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="s">"a second attribute"</span><span class="o">).</span><span class="na">equalTo</span><span class="o">(</span><span class="s">"my@ndValue"</span><span class="o">).</span><span class="na">isPresent</span><span class="o">();</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="s">".small"</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="s">"myAttribute"</span><span class="o">).</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"myValue"</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="s">"a second attribute"</span><span class="o">).</span><span class="na">equalTo</span><span class="o">(</span><span class="s">"my@ndValue"</span><span class="o">).</span><span class="na">isPresent</span><span class="o">();</span>
+</pre></div>
 
 <h2>Alternative Syntax</h2>
 
-<p>If you are more convenient to the <a href="http://jquery.com/">JQuery</a> syntax, maybe something like that will be more natural for you:</p>
+<p>If you are more familiar with the <a href="http://jquery.com/">JQuery</a> syntax, you can use the familiar <code>$</code> method:</p>
 
-<div class="highlight">
-<pre><span class="n">goTo</span><span class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
+<div class="highlight"><pre><span class="n">goTo</span><span class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
 <span class="n">$</span><span class="o">(</span><span class="s">"#firstName"</span><span class="o">).</span><span class="na">text</span><span class="o">(</span><span class="s">"toto"</span><span class="o">);</span>
 <span class="n">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span class="na">click</span><span class="o">();</span>
 <span class="n">assertThat</span><span class="o">(</span><span class="n">title</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"Hello toto"</span><span class="o">);</span>
-</pre>
-</div>
+</pre></div>
 
-
-<p>Both syntax are equivalent. Both <code>$</code> and <code>find</code> methods are aliases.</p>
+<p>Both syntaxes are equivalent. <code>$</code> is simply an alias for the <code>find</code> method.</p>
 
 <h2>Execute javascript</h2>
 
 <p>If you need to execute some javascript, just call <code>executeScript</code> with your script as parameter.
-For example, if you have a javascript method called change and you want to call them just add this in your test :</p>
+For example, if you have a javascript method called change and you want to call it just add this in your test:</p>
 
-<div class="highlight">
-<pre><span class="n">executeScript</span><span class="o">(</span><span class="s">"change();"</span><span class="o">);</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="n">executeScript</span><span class="o">(</span><span class="s">"change();"</span><span class="o">);</span>
+</pre></div>
 
 <h2>Taking Snapshots</h2>
 
 <p>You can take a snaphost of the browser</p>
 
-<div class="highlight">
-<pre><span class="n">driver</span><span class="o">.</span><span class="na">takeScreenShot</span><span class="o">();</span>
-</pre>
-</div>
+<div class="highlight"><pre><span class="n">driver</span><span class="o">.</span><span class="na">takeScreenShot</span><span class="o">();</span>
+</pre></div>
 
-
-<p>The file will be name by the current timestamp.
+<p>The file will be named using the current timestamp.
 You can of course specify a path and a name using :</p>
 
-<div class="highlight">
-<pre><span class="n">driver</span><span class="o">.</span><span class="na">takeScreenShot</span><span class="o">(</span><span class="n">pathAndfileName</span><span class="o">);</span>
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="n">driver</span><span class="o">.</span><span class="na">takeScreenShot</span><span class="o">(</span><span class="n">pathAndfileName</span><span class="o">);</span>
+</pre></div>
 
 <h2>Isolate Tests</h2>
 
-<p>If you want to test concurrency or if you need for any reasons to not use the mechanism of extension of FluentLenium, you can also, instead extends FluentTest, create directly your fluent test object directly.</p>
+<p>If you want to test concurrency or if you need for any reason to not use the mechanism of extension of FluentLenium, you can also, instead of extending FluentTest, instantiate your fluent test object directly.</p>
 
-<div class="highlight">
-<pre><span class="o">=</span> <span class="k">new</span> <span class="n">IsolatedTest</span><span class="o">().</span><span class="na">goTo</span><span class="o">(</span><span class="n">DEFAULT_URL</span><span class="o">).</span>
+<div class="highlight"><pre><span class="o">=</span> <span class="k">new</span> <span class="n">IsolatedTest</span><span class="o">().</span><span class="na">goTo</span><span class="o">(</span><span class="n">DEFAULT_URL</span><span class="o">).</span>
     <span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="s">".small"</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="s">"name"</span><span class="o">).</span><span class="na">equalTo</span><span class="o">(</span><span class="s">"name"</span><span class="o">).</span><span class="na">isPresent</span><span class="o">().</span>
     <span class="n">find</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span class="na">first</span><span class="o">().</span><span class="na">isEnabled</span><span class="o">();</span><span class="err">```</span>
-</pre>
-</div>
-
+</pre></div>
 
 <h2>Customize FluentLenium</h2>
 
 <h3>Driver</h3>
 
-<p>If you need to change your driver, just override the <code>getDefaultDriver</code> in your test. You can use every driver</p>
+<p>If you need to change your driver, just override the <code>getDefaultDriver</code> method in your test. You can use every driver.</p>
+
+<h3>Base Url</h3>
+
+<p>If you want to defined a default base url, just override the <code>getDefaultBaseUrl</code> method in your test. Every pages create with <a href="https://github.com/page" class="user-mention">@page</a> will also use this variable.</p>
 
 <h3>TimeOut</h3>
 
-<p>Just override <code>getDefaultWait</code> in your test.</p>
+<p>To set the time to wait when searching an element, you can use in your test :</p>
 
-<h2>FluentLenium and others framework</h2>
+<div class="highlight"><pre> <span class="n">withDefaultSearchWait</span><span class="o">(</span><span class="kt">long</span> <span class="n">l</span><span class="o">,</span> <span class="n">TimeUnit</span> <span class="n">timeUnit</span><span class="o">);</span><span class="err">```</span>
+</pre></div>
+
+<p>To set the time to wait when loading a page, you can use :</p>
+
+<div class="highlight"><pre>  <span class="n">withDefaultPageWait</span><span class="o">(</span><span class="kt">long</span> <span class="n">l</span><span class="o">,</span> <span class="n">TimeUnit</span> <span class="n">timeUnit</span><span class="o">);</span><span class="err">```</span>
+</pre></div>
+
+<p>Be aware that when you modified this elements, the webDriver instance will be modified so your page will also be affected.</p>
+
+<h3>Configuration</h3>
+
+<p>You can defined a default driver configuration using to ways.
+First, just override the getDriver method and use the selenium way to configure your driver.
+You can also override the setDefaultConfig method and use both selenium and FluentLenium way (withDefaultSearchWait,withDefaultPageWait) to configure your driver.</p>
+
+<h2>FluentLenium and other frameworks</h2>
 
 <h3>jUnit</h3>
 
-<p>FluentLenium used jUnit by default. You can use test using <a href="http://www.junit.org">jUnit</a> assertions, but can of course use others frameworks, 
-more fluent, as <a href="http://code.google.com/p/fluent-assert/">Fluent-assert</a> or <a href="http://code.google.com/p/hamcrest/">Hamcrest</a>.</p>
+<p>FluentLenium uses jUnit by default. You can use test using <a href="http://www.junit.org">jUnit</a> assertions, but can of course use others frameworks such as <a href="http://code.google.com/p/fluent-assert/">Fluent-assert</a> or <a href="http://code.google.com/p/hamcrest/">Hamcrest</a>.</p>
 
-<div class="highlight">
-<pre><span class="n">goTo</span><span class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
+<div class="highlight"><pre><span class="n">goTo</span><span class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
 <span class="n">fill</span><span class="o">(</span><span class="s">"#firstName"</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="s">"toto"</span><span class="o">);</span>
 <span class="n">click</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">);</span>
 <span class="n">assertEqual</span><span class="o">(</span><span class="s">"Hello toto"</span><span class="o">,</span><span class="n">title</span><span class="o">());</span>
-</pre>
-</div>
-
+</pre></div>
 
 <h3>Fest-Assert</h3>
 
-<div class="highlight">
-<pre><span class="n">goTo</span><span class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
+<div class="highlight"><pre><span class="n">goTo</span><span class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
 <span class="n">fill</span><span class="o">(</span><span class="s">"#firstName"</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="s">"toto"</span><span class="o">);</span>
 <span class="n">click</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">);</span>
 <span class="n">assertThat</span><span class="o">(</span><span class="n">title</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"Hello toto"</span><span class="o">);</span>
@@ -705,20 +588,15 @@ more fluent, as <a href="http://code.google.com/p/fluent-assert/">Fluent-assert<
 <span class="n">assertThat</span><span class="o">(</span><span class="n">find</span><span class="o">(</span><span class="n">myCssSelecto2</span><span class="o">)).</span><span class="na">hasSize</span><span class="o">().</span><span class="na">lessThanOrEqualTo</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
 <span class="n">assertThat</span><span class="o">(</span><span class="n">find</span><span class="o">(</span><span class="n">myCssSelecto3</span><span class="o">)).</span><span class="na">hasSize</span><span class="o">().</span><span class="na">greaterThan</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
 <span class="n">assertThat</span><span class="o">(</span><span class="n">find</span><span class="o">(</span><span class="n">myCssSelecto3</span><span class="o">)).</span><span class="na">hasSize</span><span class="o">().</span><span class="na">greaterThanOrEqualTo</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
-</pre>
-</div>
-
+</pre></div>
 
 <h3>Hamcrest</h3>
 
-<div class="highlight">
-<pre><span class="n">goTo</span><span class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
+<div class="highlight"><pre><span class="n">goTo</span><span class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
 <span class="n">fill</span><span class="o">(</span><span class="s">"#firstName"</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="s">"toto"</span><span class="o">);</span>
 <span class="n">click</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">);</span>
 <span class="n">assertThat</span><span class="o">(</span><span class="n">title</span><span class="o">(),</span><span class="n">equalTo</span><span class="o">(</span><span class="s">"Hello toto"</span><span class="o">));</span>
-</pre>
-</div>
-
+</pre></div>
 
 <h3>Built by CloudBees</h3>
 
