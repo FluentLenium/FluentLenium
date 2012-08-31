@@ -200,7 +200,26 @@ public class FluentWaitMatcher {
         return FluentThread.get();
 
     }
+     /**
+     * Check that the element is not present
+     */
+    public Fluent isNotPresent() {
+        Predicate isNotPresent = new com.google.common.base.Predicate<WebDriver>() {
+            public boolean apply(@Nullable WebDriver webDriver) {
+                int size;
+                if (filters.size() > 0) {
+                    size = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).size();
+                } else {
+                    size = search.find(selector).size();
+                }
+                return size == 0;
+            }
+        };
 
+        until(wait, isNotPresent, filters, isNotPresentMessage(selector));
+        return FluentThread.get();
+
+    }
 
     /**
      * Check that the elements are all displayed
@@ -225,6 +244,42 @@ public class FluentWaitMatcher {
                     if (fluentWebElements.size() > 0) {
                         for (FluentWebElement fluentWebElement : fluentWebElements) {
                             if (!fluentWebElement.isDisplayed()) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                }
+                return false;
+            }
+        };
+        until(wait, isVisible, filters, isDisplayedMessage(selector));
+        return FluentThread.get();
+    }
+
+     /**
+     * Check that the elements are all enabled
+     *
+     * @return
+     */
+    public Fluent areEnabled() {
+        Predicate isVisible = new com.google.common.base.Predicate<WebDriver>() {
+            public boolean apply(@Nullable WebDriver webDriver) {
+                if (filters.size() > 0) {
+                    FluentList<FluentWebElement> fluentWebElements = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()]));
+                    if (fluentWebElements.size() > 0) {
+                        for (FluentWebElement fluentWebElement : fluentWebElements) {
+                            if (!fluentWebElement.isEnabled()) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                } else {
+                    FluentList<FluentWebElement> fluentWebElements = search.find(selector);
+                    if (fluentWebElements.size() > 0) {
+                        for (FluentWebElement fluentWebElement : fluentWebElements) {
+                            if (!fluentWebElement.isEnabled()) {
                                 return false;
                             }
                         }

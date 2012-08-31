@@ -426,7 +426,7 @@ await().atMost(5, TimeUnit.SECONDS).until(".small").hasSize(3);
 ```
 The default wait is 500 ms.
 
-Instead of hasSize, you can also use `hasText("myTextValue")`, `hasId("myId")`, `hasName("myName")`, `containsText("myName")`.
+Instead of hasSize, you can also use `hasText("myTextValue")`, `isPresent()`, `isNotPresent()`, `hasId("myId")`, `hasName("myName")`, `containsText("myName")`,`areDisplayed()`, `areEnabled()`.
 The `isPresent()` assertion is going to check if there is at most one element on the page corresponding to the filter.
 
 If you need to be more precise, you can also use filters in the search:
@@ -442,7 +442,7 @@ You can also use matchers:
 await().atMost(5, TimeUnit.SECONDS).until(".small").withText().startsWith("start").isPresent();
 ```
      
-Just use `startsWith`, `notStartsWith`, `endsWith`, `notEndsWith`, `contains`, `notContains`, `equalTo`,`areDisplayed`.
+Just use `startsWith`, `notStartsWith`, `endsWith`, `notEndsWith`, `contains`, `notContains`, `equalTo`.
 
 If you need to filter on a custom attribute name, this syntax will help :
 

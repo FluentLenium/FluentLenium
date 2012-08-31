@@ -108,11 +108,19 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void checkAwaitContainsTextWithTextMatcher() {
-
         await().atMost(1, NANOSECONDS).until(".small").withText().contains("Small 1").isPresent();
     }
 
 
+    @Test
+    public void when_a_element_is_not_present_then_isNotEnabled_return_true() {
+        await().atMost(1, NANOSECONDS).until(".small").withText().contains("notPresent").isNotPresent();
+    }
+
+    @Test(expected = TimeoutException.class)
+    public void when_a_element_is_present_then_isNotEnabled_throw_an_exception() {
+        await().atMost(1, NANOSECONDS).until(".small").withText().contains("Small 1").isNotPresent();
+    }
     @Test
     public void checkAwaitStartWithRegex() {
         await().atMost(1, NANOSECONDS).until(".small").with("id").startsWith(regex("id")).hasSize(2);
@@ -215,6 +223,19 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until("#unvisible").areDisplayed();
     }
+
+    @Test
+    public void when_element_is_present_then_areEnabled_return_true() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).until("#default").areEnabled();
+    }
+
+    @Test(expected = TimeoutException.class)
+    public void when_element_is_not_displayed_then_areEnabled_throws_exception() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).until("#disabled").areEnabled();
+    }
+
 
     @Test
     public void when_element_is_not_displayed_then_isPresent_return_true() {

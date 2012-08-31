@@ -11,6 +11,7 @@ public class WaitMessage {
     private static final String SELECTOR = "Selector ";
     private static final String PAGE = "Page ";
     private static final String IS_NOT_PRESENT = " is not present.";
+    private static final String IS_PRESENT = " is present.";
     private static final String HAS_NOT_THE_NAME = " has not the name ";
     private static final String HAS_NOT_THE_SIZE = " has not the size";
     private static final String POINT = ".";
@@ -41,6 +42,10 @@ public class WaitMessage {
 
     static final String isPresentMessage(String selector) {
         return SELECTOR + selector + IS_NOT_PRESENT;
+    }
+
+      static final String isNotPresentMessage(String selector) {
+        return SELECTOR + selector + IS_PRESENT;
     }
 
     static final String isDisplayedMessage(String selector) {

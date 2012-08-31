@@ -38,7 +38,8 @@ public class FluentWait<T> implements org.openqa.selenium.support.ui.Wait<T> {
         return this;
     }
 
-    public FluentWait<T> ignoreAll(java.util.Collection<java.lang.Class<? extends java.lang.RuntimeException>> types) {
+
+    public FluentWait<T> ignoreAll(java.util.Collection<java.lang.Class<? extends Throwable>> types) {
         wait.ignoreAll(types);
         return this;
 
