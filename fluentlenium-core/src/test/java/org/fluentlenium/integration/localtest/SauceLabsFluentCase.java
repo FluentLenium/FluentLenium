@@ -25,6 +25,7 @@ import java.net.URL;
 
 public abstract class SauceLabsFluentCase extends FluentTest {
    protected static final String DEFAULT_URL = "http://java-freelance.fr:8585/static/";
+    public static final String JAVASCRIPT_URL = "http://localhost:8787/static/javascript.html";
 
 
     @Override

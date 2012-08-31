@@ -15,7 +15,7 @@
 package org.fluentlenium.integration;
 
 
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.SauceLabsFluentCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class DefaultWaitTest extends LocalFluentCase {
+public class DefaultWaitOnLabsTest extends SauceLabsFluentCase {
     @Before
     public void before() {
         goTo(DEFAULT_URL);
