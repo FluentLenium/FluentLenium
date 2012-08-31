@@ -21,6 +21,7 @@ import org.junit.rules.MethodRule;
 import org.junit.rules.TestName;
 import org.junit.rules.TestWatchman;
 import org.junit.runners.model.FrameworkMethod;
+import org.openqa.selenium.Beta;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -53,6 +54,7 @@ public abstract class FluentTest extends FluentAdapter {
             super.starting(method);
             initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
             initTest();
+            setDefaultConfig();
         }
 
         @Override
@@ -66,7 +68,7 @@ public abstract class FluentTest extends FluentAdapter {
         @Override
         public void failed(Throwable e, FrameworkMethod method) {
             if (snapshotMode == Mode.TAKE_SNAPSHOT_ON_FAIL) {
-                takeScreenShot(snapshotPath+"/"+classe.getSimpleName() + "_" + method.getName() +".png");
+                takeScreenShot(snapshotPath + "/" + classe.getSimpleName() + "_" + method.getName() + ".png");
             }
         }
 
@@ -85,6 +87,12 @@ public abstract class FluentTest extends FluentAdapter {
         return new FirefoxDriver();
     }
 
+    /**
+     * Override this method to change the default time to wait for a page to be loaded
+     */
+    @Beta
+    public void setDefaultConfig() {
+    }
 
     public static void assertAt(FluentPage fluent) {
         fluent.isAt();

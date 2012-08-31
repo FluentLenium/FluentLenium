@@ -102,6 +102,7 @@ public class FluentAdapter extends Fluent {
         Method m = parent.getDeclaredMethod("initFluent", WebDriver.class);
         m.setAccessible(true);
         m.invoke(page, getDriver());
+
     }
 
     private static void proxyElement(ElementLocatorFactory factory, Object page, Field field) {
@@ -137,6 +138,15 @@ public class FluentAdapter extends Fluent {
      */
     public String getDefaultBaseUrl() {
         return null;
+    }
+
+
+    /**
+     * Override this method to set some config options on the driver. For example withDefaultSearchWait and withDefaultPageWait
+     * Remember that you can access to the WebDriver object using this.getDriver().
+     *
+     */
+    public void getDefaultConfig() {
     }
 
     public static void assertAt(FluentPage fluent) {

@@ -525,9 +525,25 @@ If you need to change your driver, just override the `getDefaultDriver` method i
 If you want to defined a default base url, just override the `getDefaultBaseUrl` method in your test. Every pages create with @Page will also use this variable.
 
 ### TimeOut
-Just override `getDefaultWait` method in your test.
+To set the time to wait when searching an element, you can use in your test :
+ ```java
+ withDefaultSearchWait(long l, TimeUnit timeUnit);```
+ ```
+
+ To set the time to wait when loading a page, you can use :
+  ```java
+  withDefaultPageWait(long l, TimeUnit timeUnit);```
+  ```
+
+Be aware that when you modified this elements, the webDriver instance will be modified so your page will also be affected.
+
+### Configuration
+You can defined a default driver configuration using to ways.
+First, just override the getDriver method and use the selenium way to configure your driver.
+You can also override the setDefaultConfig method and use both selenium and FluentLenium way (withDefaultSearchWait,withDefaultPageWait) to configure your driver.
 
 ## FluentLenium and other frameworks
+
 ### jUnit
 FluentLenium uses jUnit by default. You can use test using [jUnit](http://www.junit.org) assertions, but can of course use others frameworks such as [Fluent-assert](http://code.google.com/p/fluent-assert/) or [Hamcrest](http://code.google.com/p/hamcrest/).
 

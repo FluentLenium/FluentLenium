@@ -31,6 +31,7 @@ import java.net.URI;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Util Class which offers some shortcut to webdriver methods
@@ -46,6 +47,12 @@ public abstract class Fluent implements SearchActions {
         FluentThread.set(this);
     }
 
+    /**
+     * Defined the default url that will be used in the test and in the relative pages
+     *
+     * @param baseUrl
+     * @return
+     */
     public Fluent withDefaultUrl(String baseUrl) {
         if (baseUrl != null) {
             if (baseUrl.endsWith("/")) {
@@ -53,6 +60,30 @@ public abstract class Fluent implements SearchActions {
             }
             this.baseUrl = baseUrl;
         }
+        return this;
+    }
+
+    /**
+     * Define an implicit time to wait for a page to be loaded
+     *
+     * @param l
+     * @param timeUnit
+     * @return
+     */
+    public Fluent withDefaultPageWait(long l, TimeUnit timeUnit) {
+        this.getDriver().manage().timeouts().pageLoadTimeout(l, timeUnit);
+        return this;
+    }
+
+    /**
+     * Define an implicit time to wait when searching an element
+     *
+     * @param l
+     * @param timeUnit
+     * @return
+     */
+    public Fluent withDefaultSearchWait(long l, TimeUnit timeUnit) {
+        this.getDriver().manage().timeouts().implicitlyWait(l, timeUnit);
         return this;
     }
 
@@ -376,5 +407,6 @@ public abstract class Fluent implements SearchActions {
         fluentObject.submit();
         return this;
     }
+
 
 }
