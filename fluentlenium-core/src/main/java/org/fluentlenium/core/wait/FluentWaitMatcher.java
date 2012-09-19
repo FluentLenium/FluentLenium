@@ -257,13 +257,13 @@ public class FluentWaitMatcher {
         return FluentThread.get();
     }
 
-     /**
+    /**
      * Check that the elements are all enabled
      *
      * @return
      */
     public Fluent areEnabled() {
-        Predicate isVisible = new com.google.common.base.Predicate<WebDriver>() {
+        Predicate isEnabled = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(@Nullable WebDriver webDriver) {
                 if (filters.size() > 0) {
                     FluentList<FluentWebElement> fluentWebElements = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()]));
@@ -289,7 +289,7 @@ public class FluentWaitMatcher {
                 return false;
             }
         };
-        until(wait, isVisible, filters, isDisplayedMessage(selector));
+        until(wait, isEnabled, filters, isEnabledMessage(selector));
         return FluentThread.get();
     }
 

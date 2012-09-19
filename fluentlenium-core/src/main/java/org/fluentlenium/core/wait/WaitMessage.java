@@ -27,6 +27,7 @@ public class WaitMessage {
     private static final String IS_NOT_GREATHER_THAN_OR_EQUAL_TO = " is not greather than or equal to ";
     private static final String IS_NOT_LOADED = " is not loaded";
     private static final String IS_NOT_DISPLAY = " is not displayed";
+    private static final String IS_NOT_ENABLED = " is not enabled";
 
     static final String hasSizeMessage(String selector, int size) {
         return SELECTOR + selector + HAS_NOT_THE_SIZE + size + POINT;
@@ -50,6 +51,10 @@ public class WaitMessage {
 
     static final String isDisplayedMessage(String selector) {
         return SELECTOR + selector + IS_NOT_DISPLAY;
+    }
+
+	static final String isEnabledMessage(String selector) {
+        return SELECTOR + selector + IS_NOT_ENABLED;
     }
 
     static final String hasTextMessage(String selector, String value) {
