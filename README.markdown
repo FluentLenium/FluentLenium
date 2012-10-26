@@ -545,7 +545,7 @@ You can also override the setDefaultConfig method and use both selenium and Flue
 ## FluentLenium and other frameworks
 
 ### jUnit
-FluentLenium uses jUnit by default. You can use test using [jUnit](http://www.junit.org) assertions, but can of course use others frameworks such as [Fluent-assert](http://code.google.com/p/fluent-assert/) or [Hamcrest](http://code.google.com/p/hamcrest/).
+FluentLenium uses jUnit by default. You can use test using [jUnit](http://www.junit.org) assertions, but can of course use others frameworks such as [Fluent-assert](https://github.com/alexruiz/fest-assert-2.x/wiki) or [Hamcrest](http://code.google.com/p/hamcrest/).
 
 ```java
 goTo("http://mywebpage/");
