@@ -39,11 +39,12 @@ public class FillConstructor extends org.fluentlenium.core.Fluent {
      *
      * @param values
      */
-    public void with(String... values) {
+    public FillConstructor with(String... values) {
         if (fluentList != null) {
             fluentList.text(values);
         } else {
             $(cssSelector, filters).text(values);
         }
+        return this;
     }
 }
