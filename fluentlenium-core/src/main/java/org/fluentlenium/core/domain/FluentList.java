@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
  */
-public class FluentList<E extends FluentWebElement> extends ArrayList<E> implements FluentDefaultActions<FluentList>, SearchActions {
+public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implements FluentDefaultActions<FluentList>, SearchActions {
 
     public FluentList(Collection<E> listFiltered) {
         super(listFiltered);
@@ -67,9 +67,11 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
      * If there is more elements on the list than in the with table, the last element of the table is repeated
      */
     public FluentList text(String... with) {
+        boolean atMostOne=false;
         if (with.length > 0) {
             int id = 0;
             String value;
+
             for (E fluentWebElement : this) {
                 if (fluentWebElement.isDisplayed()) {
                     if (with.length > id) {
@@ -78,10 +80,14 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
                         value = with[with.length - 1];
                     }
                     if (fluentWebElement.isEnabled()) {
+                        atMostOne=true;
                         fluentWebElement.clear();
                         fluentWebElement.text(value);
                     }
                 }
+            }
+            if (atMostOne==false){
+                throw new NoSuchElementException("No element is displayed or enabled. Can't set a new value.");
             }
         }
         return this;
