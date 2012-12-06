@@ -59,8 +59,9 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
 
     }
 
-    public void until(com.google.common.base.Predicate isTrue) {
+    public FluentWait until(com.google.common.base.Predicate isTrue) {
         wait.until(isTrue);
+        return this;
     }
 
     public FluentWaitMatcher until(String string) {
