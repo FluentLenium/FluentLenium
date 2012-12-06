@@ -1,6 +1,7 @@
 package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
+import com.sun.istack.internal.Nullable;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.domain.FluentList;
@@ -11,7 +12,6 @@ import org.fluentlenium.core.search.Search;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
