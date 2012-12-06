@@ -88,6 +88,13 @@ public class FluentListSearch {
         assertThat(fluentWebElement).isEqualTo(this.fluentWebElement);
     }
 
+
+    @Test(expected = NoSuchElementException.class )
+    public void when_no_element_matching_fill_then_throws_exceptions() {
+        fluentList.text("toto");
+        assertThat(fluentWebElement).isEqualTo(this.fluentWebElement);
+    }
+
     @Test(expected = NoSuchElementException.class)
     public void ShouldThrowAnErrorWhenWrongPosition() {
         String name = "cssStyle";

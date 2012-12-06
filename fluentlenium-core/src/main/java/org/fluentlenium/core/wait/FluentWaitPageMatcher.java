@@ -1,7 +1,6 @@
 package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
-import com.sun.istack.internal.Nullable;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.FluentThread;
@@ -43,7 +42,7 @@ public class FluentWaitPageMatcher {
             throw new UnsupportedOperationException("Driver must support javascript execution to use this feature");
         } else {
             Predicate isLoaded = new com.google.common.base.Predicate<WebDriver>() {
-                public boolean apply(@Nullable WebDriver webDriver) {
+                public boolean apply( WebDriver webDriver) {
                     JavascriptExecutor javascriptExecutor = (JavascriptExecutor) webDriver;
                     Object result = javascriptExecutor.executeScript("if (document.readyState) return document.readyState;");
                     if (result != null) {
@@ -68,7 +67,7 @@ public class FluentWaitPageMatcher {
             throw new IllegalArgumentException("You should use a page argument when you call the untilPage method to specify the page you want to be. Example : await().untilPage(myPage).isAt();");
         }
         Predicate isLoaded = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(@Nullable WebDriver webDriver) {
+            public boolean apply( WebDriver webDriver) {
                 try {
                     page.isAt();
                 } catch (Error e) {

@@ -26,7 +26,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import javax.annotation.Nullable;
 import java.util.concurrent.TimeUnit;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
@@ -170,7 +169,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test
     public void check_predicate() {
         await().until(new Predicate<WebDriver>() {
-            public boolean apply(@Nullable WebDriver input) {
+            public boolean apply( WebDriver input) {
                 return input.findElement(By.id("id")) != null;  //To change body of implemented methods use File | Settings | File Templates.
             }
         });

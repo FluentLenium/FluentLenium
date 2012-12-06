@@ -15,7 +15,6 @@
 package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
-import com.sun.istack.internal.Nullable;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.openqa.selenium.WebDriver;
@@ -47,7 +46,7 @@ public class FluentSizeBuilder {
      */
     public void equalTo(final int size) {
         Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(@Nullable WebDriver webDriver) {
+            public boolean apply( WebDriver webDriver) {
                 return getSize() == size;
             }
         };
@@ -61,7 +60,7 @@ public class FluentSizeBuilder {
      */
     public void notEqualTo(final int size) {
         Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(@Nullable WebDriver webDriver) {
+            public boolean apply( WebDriver webDriver) {
                 return getSize() != size;
             }
         };
@@ -75,7 +74,7 @@ public class FluentSizeBuilder {
      */
     public void lessThan(final int size) {
         Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(@Nullable WebDriver webDriver) {
+            public boolean apply( WebDriver webDriver) {
                 return getSize() < size;
             }
         };
@@ -89,7 +88,7 @@ public class FluentSizeBuilder {
      */
     public void lessThanOrEqualTo(final int size) {
         Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(@Nullable WebDriver webDriver) {
+            public boolean apply( WebDriver webDriver) {
                 return getSize() <= size;
             }
         };
@@ -103,7 +102,7 @@ public class FluentSizeBuilder {
      */
     public void greaterThan(final int size) {
         Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(@Nullable WebDriver webDriver) {
+            public boolean apply( WebDriver webDriver) {
                 return getSize() > size;
             }
         };
@@ -117,7 +116,7 @@ public class FluentSizeBuilder {
      */
     public void greaterThanOrEqualTo(final int size) {
         Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(@Nullable WebDriver webDriver) {
+            public boolean apply( WebDriver webDriver) {
                 return getSize() >= size;
             }
         };
