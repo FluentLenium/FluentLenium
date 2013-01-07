@@ -120,16 +120,16 @@ You can do more complex string matching on the above filters using the following
 For each of them, you can choose to use a css selector :
 
 ```java
-find(".small", withName().notContains("name")
-find(".small", withId().notStartsWith("id")
+find(".small", withName().notContains("name"))
+find(".small", withId().notStartsWith("id"))
 find(".small", withText().endsWith("Female"))
 ```
 
 Or to be more precise, you can use regular expressions :
 
 ```java
-find(".small", withName().contains(regex("na?me[0-9]*"))
-find(".small", withName().notStartsWith(regex("na?me[0-9]*"))
+find(".small", withName().contains(regex("na?me[0-9]*")))
+find(".small", withName().notStartsWith(regex("na?me[0-9]*")))
 ```
 
 Contains, startsWith and endsWith with a regexp pattern look for a subsection of the pattern.
