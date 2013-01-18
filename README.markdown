@@ -411,7 +411,7 @@ public class LoginPage extends FluentPage {
    FluentWebElement myAjaxElement;
 }
 ```
-You can set the timeout in seconds for the page to throw an error if not found with @AjaxElemet(timeountOnSeconds=3) if you want to wait 3 seconds.
+You can set the timeout in seconds for the page to throw an error if not found with `@AjaxElement(timeountOnSeconds=3)` if you want to wait 3 seconds.
 By default, the timeout is set to one second.
 
 
