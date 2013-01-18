@@ -59,7 +59,7 @@ or <a href="http://docs.codehaus.org/display/FEST/Fluent+Assertions+Module">Fest
 <div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-core<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>0.7.3<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.7.5<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </pre></div>
@@ -71,7 +71,7 @@ or <a href="http://docs.codehaus.org/display/FEST/Fluent+Assertions+Module">Fest
 <div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-festassert<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>0.7.3<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.7.5<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </pre></div>
@@ -81,7 +81,7 @@ or <a href="http://docs.codehaus.org/display/FEST/Fluent+Assertions+Module">Fest
 <div class="highlight"><pre><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-testng<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>0.7.3<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.7.5<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </pre></div>
@@ -150,15 +150,15 @@ You can use filters to allow that kind of search. For example :</p>
 <li><code>notEndsWith</code></li>
 </ul><p>For each of them, you can choose to use a css selector :</p>
 
-<div class="highlight"><pre><span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withName</span><span class="o">().</span><span class="na">notContains</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span>
-<span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withId</span><span class="o">().</span><span class="na">notStartsWith</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span>
+<div class="highlight"><pre><span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withName</span><span class="o">().</span><span class="na">notContains</span><span class="o">(</span><span class="s">"name"</span><span class="o">))</span>
+<span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withId</span><span class="o">().</span><span class="na">notStartsWith</span><span class="o">(</span><span class="s">"id"</span><span class="o">))</span>
 <span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withText</span><span class="o">().</span><span class="na">endsWith</span><span class="o">(</span><span class="s">"Female"</span><span class="o">))</span>
 </pre></div>
 
 <p>Or to be more precise, you can use regular expressions :</p>
 
-<div class="highlight"><pre><span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withName</span><span class="o">().</span><span class="na">contains</span><span class="o">(</span><span class="n">regex</span><span class="o">(</span><span class="s">"na?me[0-9]*"</span><span class="o">))</span>
-<span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withName</span><span class="o">().</span><span class="na">notStartsWith</span><span class="o">(</span><span class="n">regex</span><span class="o">(</span><span class="s">"na?me[0-9]*"</span><span class="o">))</span>
+<div class="highlight"><pre><span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withName</span><span class="o">().</span><span class="na">contains</span><span class="o">(</span><span class="n">regex</span><span class="o">(</span><span class="s">"na?me[0-9]*"</span><span class="o">)))</span>
+<span class="n">find</span><span class="o">(</span><span class="s">".small"</span><span class="o">,</span> <span class="n">withName</span><span class="o">().</span><span class="na">notStartsWith</span><span class="o">(</span><span class="n">regex</span><span class="o">(</span><span class="s">"na?me[0-9]*"</span><span class="o">)))</span>
 </pre></div>
 
 <p>Contains, startsWith and endsWith with a regexp pattern look for a subsection of the pattern.</p>
@@ -228,18 +228,19 @@ You can be more specific :</p>
 <span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getTexts</span><span class="o">()</span>
 </pre></div>
 
-<p>If you want to know the name, the id, the value, the text or the value of an attribute of the first element on the list
-find(myCssSelector).getName()
-find(myCssSelector).getId()
-find(myCssSelector).getValue()
-find(myCssSelector).getAttribute("myCustomAttribute")
-find(myCssSelector).getText()</p>
+<p>If you want to know the name, the id, the value, the text or the value of an attribute of the first element on the list:</p>
 
-<pre><code>
-If you need to get the underlying html content of an element:
-```java
-findFirst(myCssSelector).html()
-</code></pre>
+<div class="highlight"><pre><span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getName</span><span class="o">()</span>
+<span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getId</span><span class="o">()</span>
+<span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getValue</span><span class="o">()</span>
+<span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"myCustomAttribute"</span><span class="o">)</span>
+<span class="n">find</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">getText</span><span class="o">()</span>
+</pre></div>
+
+<p>If you need to get the underlying html content of an element:</p>
+
+<div class="highlight"><pre><span class="n">findFirst</span><span class="o">(</span><span class="n">myCssSelector</span><span class="o">).</span><span class="na">html</span><span class="o">()</span>
+</pre></div>
 
 <p>To know the dimension of an element (with and height):</p>
 
@@ -541,7 +542,7 @@ You can of course specify a path and a name using :</p>
 
 <h3>Base Url</h3>
 
-<p>If you want to defined a default base url, just override the <code>getDefaultBaseUrl</code> method in your test. Every pages create with <a href="https://github.com/page" class="user-mention">@page</a> will also use this variable.</p>
+<p>If you want to defined a default base url, just override the <code>getDefaultBaseUrl</code> method in your test. Every pages create with <a href="https://github.com/Page" class="user-mention">@Page</a> will also use this variable.</p>
 
 <h3>TimeOut</h3>
 
@@ -567,7 +568,7 @@ You can also override the setDefaultConfig method and use both selenium and Flue
 
 <h3>jUnit</h3>
 
-<p>FluentLenium uses jUnit by default. You can use test using <a href="http://www.junit.org">jUnit</a> assertions, but can of course use others frameworks such as <a href="http://code.google.com/p/fluent-assert/">Fluent-assert</a> or <a href="http://code.google.com/p/hamcrest/">Hamcrest</a>.</p>
+<p>FluentLenium uses jUnit by default. You can use test using <a href="http://www.junit.org">jUnit</a> assertions, but can of course use others frameworks such as <a href="https://github.com/alexruiz/fest-assert-2.x/wiki">Fluent-assert</a> or <a href="http://code.google.com/p/hamcrest/">Hamcrest</a>.</p>
 
 <div class="highlight"><pre><span class="n">goTo</span><span class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
 <span class="n">fill</span><span class="o">(</span><span class="s">"#firstName"</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="s">"toto"</span><span class="o">);</span>
