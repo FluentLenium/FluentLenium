@@ -206,7 +206,8 @@ find(myCssSelector).getAttributes("myCustomAttribute")
 find(myCssSelector).getTexts()
 ```
 
-If you want to know the name, the id, the value, the text or the value of an attribute of the first element on the list
+If you want to know the name, the id, the value, the text or the value of an attribute of the first element on the list:
+```java
 find(myCssSelector).getName()
 find(myCssSelector).getId()
 find(myCssSelector).getValue()
