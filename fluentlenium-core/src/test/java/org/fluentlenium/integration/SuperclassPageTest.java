@@ -21,17 +21,27 @@ import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
 
+import java.lang.reflect.Field;
+
 import static org.fest.assertions.Assertions.assertThat;
 
 public class SuperclassPageTest extends PageTest {
 
     @Page AnotherPage anotherPage;
+    @Page AnotherPage page2;
 
     @Test
     public void checkGoToPagesDeclaredInThisClassAndSuperclass() {
         page.go();
         assertThat(title()).contains("Selenium");
         anotherPage.go();
+        assertThat(title()).contains("Another Page");
+    }
+
+    @Test
+    public void checkGoToPagesOverridingPageDeclaredInSuperclass() {
+        System.out.println(page2.getClass());
+        page2.go();
         assertThat(title()).contains("Another Page");
     }
 }
@@ -47,5 +57,4 @@ class AnotherPage extends FluentPage {
     public void isAt() {
         assertThat($("title").first().getText()).isEqualTo("Another Page");
     }
-
 }
