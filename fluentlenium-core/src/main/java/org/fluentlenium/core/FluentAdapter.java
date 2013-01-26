@@ -29,16 +29,17 @@ public class FluentAdapter extends Fluent {
     protected void initTest() {
         Class cls = null;
         try {
-            cls = Class.forName(this.getClass().getName());
-            for (Field field : cls.getDeclaredFields()) {
+	    for (cls = Class.forName(this.getClass().getName()); FluentAdapter.class.isAssignableFrom(cls); cls = cls.getSuperclass()) {
+	        for (Field field : cls.getDeclaredFields()) {
                 if (field.isAnnotationPresent(Page.class)) {
                     field.setAccessible(true);
                     Class clsField = field.getType();
-                    cls = Class.forName(clsField.getName());
-                    Object page = initClass(cls);
+                    Class clsPage = Class.forName(clsField.getName());
+                    Object page = initClass(clsPage);
                     field.set(this, page);
                 }
             }
+	    }
         } catch (ClassNotFoundException e) {
             throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
         } catch (IllegalAccessException e) {
