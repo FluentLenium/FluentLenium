@@ -1,3 +1,7 @@
+v0.7.6
+-moving to selenium 2.30.0
+-don't package test dependencies
+-Add support for @Page in test superclass
 v0.7.5
 -moving to selenium 2.29.0
 v0.7.4
