@@ -1,3 +1,5 @@
+v0.7.7
+-moving to selenium 2.31.0
 v0.7.6
 -moving to selenium 2.30.0
 -don't package test dependencies
