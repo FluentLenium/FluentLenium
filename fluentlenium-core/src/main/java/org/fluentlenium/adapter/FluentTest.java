@@ -60,9 +60,7 @@ public abstract class FluentTest extends FluentAdapter {
         @Override
         public void finished(FrameworkMethod method) {
             super.finished(method);
-            if (getDriver() != null) {
-                quit();
-            }
+            quit();
         }
 
         @Override
