@@ -155,7 +155,9 @@ public class FluentAdapter extends Fluent {
     }
 
     public void quit() {
-        getDriver().quit();
+        if (getDriver() != null) {
+            getDriver().quit();
+        }
     }
 
 }

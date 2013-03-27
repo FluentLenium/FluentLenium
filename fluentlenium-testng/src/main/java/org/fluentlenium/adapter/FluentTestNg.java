@@ -35,9 +35,7 @@ public abstract class FluentTestNg extends FluentAdapter {
 
     @AfterClass
     public void afterClass() {
-        if (getDriver() != null) {
-            getDriver().quit();
-        }
+        quit();
     }
 
 }
