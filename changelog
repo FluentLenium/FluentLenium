@@ -1,3 +1,6 @@
+v0.7.8
+- quit now do a check to avoid NPE
+- package testng to fluentlenium-festassert
 v0.7.7
 -moving to selenium 2.31.0
 v0.7.6
