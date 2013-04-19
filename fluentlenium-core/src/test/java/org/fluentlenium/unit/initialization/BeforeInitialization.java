@@ -46,6 +46,11 @@ public class BeforeInitialization extends FluentTest {
         assertThat(page.myElement).isNotNull();
     }
 
+    @Test
+    public void test_superclass_fluentwebelement_instantiate() {
+        TestPrivatePageWithElementSubclass page = createPage(TestPrivatePageWithElementSubclass.class);
+        assertThat(page.myElement).isNotNull();
+    }
 
     @Override
     public WebDriver getDefaultDriver() {
@@ -72,5 +77,9 @@ class TestPrivatePageWithElement extends FluentPage {
     public String getUrl() {
         return "http://www.google.fr";
     }
+}
+
+class TestPrivatePageWithElementSubclass extends TestPrivatePageWithElement {
+
 }
 
