@@ -174,12 +174,18 @@ public abstract class Fluent implements SearchActions {
     }
 
     /**
-     * Return the url of the page
+     * Return the url of the page. If a base url is provided, the current url will be relative to that base url.
      *
      * @return
      */
     public String url() {
-        return driver.getCurrentUrl();
+        String currentUrl = driver.getCurrentUrl();
+
+        if (currentUrl != null && baseUrl != null && currentUrl.startsWith(baseUrl)) {
+            currentUrl = currentUrl.substring(baseUrl.length());
+        }
+
+        return currentUrl;
     }
 
     /**
