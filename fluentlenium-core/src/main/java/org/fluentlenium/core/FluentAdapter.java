@@ -28,20 +28,10 @@ public class FluentAdapter extends Fluent {
         super();
     }
 
-    protected void initTest() {
+	protected void initTest() {
         Class cls = null;
         try {
-	    for (cls = Class.forName(this.getClass().getName()); FluentAdapter.class.isAssignableFrom(cls); cls = cls.getSuperclass()) {
-	        for (Field field : cls.getDeclaredFields()) {
-                if (field.isAnnotationPresent(Page.class)) {
-                    field.setAccessible(true);
-                    Class clsField = field.getType();
-                    Class clsPage = Class.forName(clsField.getName());
-                    Object page = initClass(clsPage);
-                    field.set(this, page);
-                }
-            }
-	    }
+				injectPageIntoContainer(this);
         } catch (ClassNotFoundException e) {
             throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
         } catch (IllegalAccessException e) {
@@ -49,7 +39,27 @@ public class FluentAdapter extends Fluent {
         }
     }
 
-    public <T extends FluentPage> T createPage(Class<T> classOfPage) {
+	private void injectPageIntoContainer(Fluent container)
+			throws ClassNotFoundException, IllegalAccessException
+	{
+		for (Class cls = container.getClass();
+			 FluentAdapter.class.isAssignableFrom(cls) || FluentPage.class.isAssignableFrom(cls);
+			 cls = cls.getSuperclass())
+		{
+			for (Field field : cls.getDeclaredFields()) {
+				if (field.isAnnotationPresent(Page.class)) {
+					field.setAccessible(true);
+					Class clsField = field.getType();
+					Class clsPage = Class.forName(clsField.getName());
+					FluentPage page = initClass(clsPage);
+					field.set(container, page);
+					injectPageIntoContainer(page);
+				}
+			}
+		}
+	}
+
+	public <T extends FluentPage> T createPage(Class<T> classOfPage) {
         return initClass(classOfPage);
     }
 
