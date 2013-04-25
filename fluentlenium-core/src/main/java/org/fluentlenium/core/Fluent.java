@@ -32,6 +32,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 
 /**
  * Util Class which offers some shortcut to webdriver methods
@@ -232,6 +233,19 @@ public abstract class Fluent implements SearchActions {
         return this;
     }
 
+    public FluentList<FluentWebElement> $(String name, Predicate<FluentWebElement>... predicates) {
+        return search.find(name, predicates);
+    }
+
+    public FluentList<FluentWebElement> $(String name) {
+        return find(name);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> find(String name) {
+        return $(name, new Filter[0]);
+    }
+
     /**
      * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
      *
@@ -242,7 +256,6 @@ public abstract class Fluent implements SearchActions {
     public FluentList<FluentWebElement> $(String name, final Filter... filters) {
         return search.find(name, filters);
     }
-
 
     /**
      * Central methods a find element on the page, the number indicat the index of the desired element on the list. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
@@ -255,6 +268,10 @@ public abstract class Fluent implements SearchActions {
         return search.find(name, number, filters);
     }
 
+    @Override
+    public FluentList<FluentWebElement> find(String name, Predicate<FluentWebElement>... predicates) {
+         return search.find(name, predicates);
+    }
 
     /**
      * return the lists corresponding to the cssSelector with it filters

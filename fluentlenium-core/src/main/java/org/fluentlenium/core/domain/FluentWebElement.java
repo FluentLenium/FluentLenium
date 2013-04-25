@@ -24,6 +24,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
+import java.util.function.Predicate;
+
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
@@ -180,6 +182,16 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public Dimension getSize() {
         return webElement.getSize();
+    }
+
+    @Override
+    public FluentList<FluentWebElement> find(String name) {
+        return find(name, new Filter[0]);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> find(String name, Predicate<FluentWebElement>... predicates) {
+        return search.find(name, predicates);
     }
 
     /**

@@ -14,8 +14,12 @@
 
 package org.fluentlenium.integration;
 
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.with;
@@ -31,11 +35,32 @@ public class FluentSelectorTest extends LocalFluentCase {
         assertThat($(".small", withName("name"))).hasSize(1);
     }
 
+    @Test
+    public void checkWithNameCssSelectorLambda() {
+        goTo(DEFAULT_URL);
+        List<FluentWebElement> elements =
+                $(".small").stream().filter(e -> "name".equals(e.getName())).collect(Collectors.toList());
+        assertThat(elements).hasSize(1);
+    }
+
+    @Test
+    public void checkWithNameCssSelectorLambdaTakeTwo() {
+        goTo(DEFAULT_URL);
+        assertThat($(".small", e -> "name".equals(e.getName()))).hasSize(1);
+    }
 
     @Test
     public void checkWithNameMatcherCssPatternSelector() {
         goTo(DEFAULT_URL);
         assertThat($(".small", withName().contains(regex("na?me[0-9]*"))).getNames()).contains("name", "name2");
+    }
+
+    @Test
+    public void checkWithNameMatcherCssPatternSelectorLambda() {
+        goTo(DEFAULT_URL);
+        assertThat($(".small", e -> e.getName() != null
+                                    && regex("na?me[0-9]*").matcher(e.getName()).matches())
+                .getNames()).contains("name", "name2");
     }
 
     @Test

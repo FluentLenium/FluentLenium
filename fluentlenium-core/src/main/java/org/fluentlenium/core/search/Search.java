@@ -29,6 +29,9 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class Search implements SearchActions {
@@ -36,6 +39,20 @@ public class Search implements SearchActions {
 
     public Search(SearchContext context) {
         this.searchContext = context;
+    }
+
+    @Override
+    public FluentList<FluentWebElement> find(String name, Predicate<FluentWebElement>... predicates) {
+        Stream<FluentWebElement> stream = select(name).stream();
+        for (Predicate<FluentWebElement> predicate: predicates) {
+            stream = stream.filter(predicate);
+        }
+        return new FluentList<FluentWebElement>(stream.collect(Collectors.<FluentWebElement>toList()));
+    }
+
+    @Override
+    public FluentList<FluentWebElement> find(String name) {
+        return find(name, new Filter[0]);
     }
 
     /**
