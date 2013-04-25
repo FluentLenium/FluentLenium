@@ -16,12 +16,8 @@ package org.fluentlenium.integration;
 
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
-import org.junit.ComparisonFailure;
 import org.junit.Test;
-
-import java.lang.reflect.Field;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -40,7 +36,6 @@ public class SuperclassPageTest extends PageTest {
 
     @Test
     public void checkGoToPagesOverridingPageDeclaredInSuperclass() {
-        System.out.println(page2.getClass());
         page2.go();
         assertThat(title()).contains("Another Page");
     }
