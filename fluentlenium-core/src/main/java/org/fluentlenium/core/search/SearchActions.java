@@ -18,9 +18,16 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 
+import java.util.function.Predicate;
+
 
 public interface SearchActions {
+
+    FluentList<FluentWebElement> find(String name);
+
     FluentList<FluentWebElement> find(String name, Filter... filters);
+
+    FluentList<FluentWebElement> find(String name, Predicate<FluentWebElement>... predicate);
 
     FluentWebElement find(String name, Integer number, Filter... filters);
 

@@ -44,9 +44,23 @@ public class FluentSelectorTest extends LocalFluentCase {
     }
 
     @Test
+    public void checkWithNameCssSelectorLambdaTakeTwo() {
+        goTo(DEFAULT_URL);
+        assertThat($(".small", e -> "name".equals(e.getName()))).hasSize(1);
+    }
+
+    @Test
     public void checkWithNameMatcherCssPatternSelector() {
         goTo(DEFAULT_URL);
         assertThat($(".small", withName().contains(regex("na?me[0-9]*"))).getNames()).contains("name", "name2");
+    }
+
+    @Test
+    public void checkWithNameMatcherCssPatternSelectorLambda() {
+        goTo(DEFAULT_URL);
+        assertThat($(".small", e -> e.getName() != null
+                                    && regex("na?me[0-9]*").matcher(e.getName()).matches())
+                .getNames()).contains("name", "name2");
     }
 
     @Test

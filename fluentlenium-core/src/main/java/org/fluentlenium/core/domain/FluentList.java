@@ -24,6 +24,7 @@ import org.openqa.selenium.NoSuchElementException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
@@ -256,6 +257,16 @@ public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implem
         if (this.size() > 0) {
             return this.get(0).getText();
         }
+        return null;
+    }
+
+    @Override
+    public FluentList<FluentWebElement> find(String name) {
+        return find(name, new Filter[0]);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> find(String name, Predicate<FluentWebElement>... predicates) {
         return null;
     }
 
