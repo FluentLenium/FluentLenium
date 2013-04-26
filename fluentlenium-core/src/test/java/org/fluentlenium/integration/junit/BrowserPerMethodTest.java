@@ -12,32 +12,30 @@
  * limitations under the License
  */
 
-package org.fluentlenium.integration;
+package org.fluentlenium.integration.junit;
 
-
+import org.fluentlenium.adapter.FluentTest;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
-import org.openqa.selenium.browserlaunchers.locators.Firefox2Locator;
-
-import java.lang.ref.PhantomReference;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.fluentlenium.core.filter.FilterConstructor.with;
+import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
-public class JavascriptTest extends LocalFluentCase {
+public class BrowserPerMethodTest extends FluentTest {
+
 
   @Test
-  public void checkTextParam() {
-    goTo(JAVASCRIPT_URL);
-
-    setSnapshotMode(Mode.NEVER_TAKE_SNAPSHOT);
-
-    assertThat(find("span", with("id").equalTo("default")).first().getText()).isEqualTo("unchanged");
-
-    assertThat(find("#default").first().getText()).isEqualTo("unchanged");
-    executeScript("change();");
-    assertThat(find("#default").first().getText()).isEqualTo("changed");
-
+  public void firstMethod() {
+    goTo(LocalFluentCase.DEFAULT_URL);
+    assertThat($(".small", withName("name"))).hasSize(1);
   }
+
+
+  @Test
+  public void secondMethod() {
+    assertThat($(".small", withName("name"))).hasSize(0);
+  }
+
+
 
 }
