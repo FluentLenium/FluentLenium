@@ -19,6 +19,7 @@ import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.with;
+import static org.fluentlenium.core.filter.FilterConstructor.withClass;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 
@@ -131,5 +132,15 @@ public class FluentSelectorTest extends LocalFluentCase {
         assertThat($("span", withName().notEndsWith(regex("na?"))).first().getId()).isEqualTo("oneline");
     }
 
+	@Test
+	public void checkWithClassCssSelector() {
+		goTo(DEFAULT_URL);
+		assertThat($("#id", withClass("small"))).hasSize(1);
+	}
 
+	@Test
+	public void checkWithClassEqualMatcherCssSelector() {
+		goTo(DEFAULT_URL);
+		assertThat($("#id", withClass().equalTo("small"))).hasSize(1);
+	}
 }
