@@ -14,6 +14,8 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
 
 import java.lang.reflect.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class FluentAdapter extends Fluent {
@@ -63,11 +65,9 @@ public class FluentAdapter extends Fluent {
             initBaseUrl(page, parent);
 
             //init fields with default proxies
-            Field[] fields = cls.getDeclaredFields();
+            List<Field> fields = fluentWebElementFieldsForClass(cls);
+
             for (Field fieldFromPage : fields) {
-                if (!FluentWebElement.class.isAssignableFrom(fieldFromPage.getType())) {
-                    continue;
-                }
                 fieldFromPage.setAccessible(true);
                 AjaxElement elem = fieldFromPage.getAnnotation(AjaxElement.class);
                 if (elem == null) {
@@ -88,6 +88,23 @@ public class FluentAdapter extends Fluent {
             throw new ConstructionException("Cannot invoke method setDriver on " + (cls != null ? cls.getName() : " null"), e);
         }
         return page;
+    }
+
+    private List<Field> fluentWebElementFieldsForClass(Class cls) {
+        List<Field> fields = new ArrayList<Field>();
+        for (Field field : cls.getDeclaredFields()) {
+            if (isFluentWebElementField(field)) {
+                fields.add(field);
+            }
+        }
+        if (cls.getSuperclass() != null) {
+            fields.addAll(fluentWebElementFieldsForClass(cls.getSuperclass()));
+        }
+        return fields;
+    }
+
+    private boolean isFluentWebElementField(Field field) {
+        return FluentWebElement.class.isAssignableFrom(field.getType());
     }
 
     private <T extends FluentPage> void initBaseUrl(T page, Class parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
