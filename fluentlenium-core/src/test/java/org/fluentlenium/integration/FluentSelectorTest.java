@@ -18,9 +18,7 @@ import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.fluentlenium.core.filter.FilterConstructor.with;
-import static org.fluentlenium.core.filter.FilterConstructor.withClass;
-import static org.fluentlenium.core.filter.FilterConstructor.withName;
+import static org.fluentlenium.core.filter.FilterConstructor.*;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 
 public class FluentSelectorTest extends LocalFluentCase {
@@ -32,6 +30,11 @@ public class FluentSelectorTest extends LocalFluentCase {
         assertThat($(".small", withName("name"))).hasSize(1);
     }
 
+    @Test
+    public void checkWithIdCssSelector() {
+        goTo(DEFAULT_URL);
+        assertThat($(".small", withId("id"))).hasSize(1);
+    }
 
     @Test
     public void checkWithNameMatcherCssPatternSelector() {
@@ -142,5 +145,11 @@ public class FluentSelectorTest extends LocalFluentCase {
 	public void checkWithClassEqualMatcherCssSelector() {
 		goTo(DEFAULT_URL);
 		assertThat($("#id", withClass().equalTo("small"))).hasSize(1);
+	}
+
+	@Test
+	public void checkWithClassRegexMatcherCssSelector() {
+		goTo(DEFAULT_URL);
+        assertThat($("#id", withClass().contains(regex("smal?")))).hasSize(1);
 	}
 }

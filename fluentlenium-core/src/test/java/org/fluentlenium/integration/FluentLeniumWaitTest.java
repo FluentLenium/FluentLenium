@@ -62,6 +62,17 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
 
     @Test
+    public void checkAwaitContainsNameWithClass() {
+        await().atMost(1, NANOSECONDS).until("span").withClass("small").hasName("name");
+    }
+
+    @Test
+    public void checkAwaitContainsNameWithClassRegex() {
+        await().atMost(1, NANOSECONDS).until("span").withClass().contains(regex("smal?")).hasName("name");
+    }
+
+
+    @Test
     public void checkAwaitContainsTextWithText() {
         await().atMost(1, NANOSECONDS).until(".small").withText("Small 1").containsText("Small 1");
     }
@@ -92,6 +103,12 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test
     public void checkAwaitContainsIdWithId() {
         await().atMost(1, NANOSECONDS).until(".small").withId("id2").hasId("id2");
+    }
+
+
+    @Test
+    public void checkAwaitContainsIdWithIdContains() {
+        await().atMost(1, NANOSECONDS).until(".small").withId().contains("id").hasSize(2);
     }
 
     @Test
@@ -169,7 +186,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test
     public void check_predicate() {
         await().until(new Predicate<WebDriver>() {
-            public boolean apply( WebDriver input) {
+            public boolean apply(WebDriver input) {
                 return input.findElement(By.id("id")) != null;  //To change body of implemented methods use File | Settings | File Templates.
             }
         });

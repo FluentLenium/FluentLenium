@@ -36,7 +36,7 @@ public class FluentWaitMatcher {
      */
     public Fluent hasAttribute(final String attribute, final String value) {
         Predicate hasAttribute = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply( WebDriver webDriver) {
+            public boolean apply(WebDriver webDriver) {
                 if (filters.size() > 0) {
                     return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getAttributes(attribute).contains(value);
                 } else {
@@ -68,7 +68,7 @@ public class FluentWaitMatcher {
      */
     public Fluent hasId(final String value) {
         Predicate hasId = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply( WebDriver webDriver) {
+            public boolean apply(WebDriver webDriver) {
                 if (filters.size() > 0) {
                     return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getIds().contains(value);
                 } else {
@@ -87,7 +87,7 @@ public class FluentWaitMatcher {
      */
     public Fluent hasName(final String value) {
         Predicate hasName = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply( WebDriver webDriver) {
+            public boolean apply(WebDriver webDriver) {
                 int size1;
                 if (filters.size() > 0) {
                     return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getNames().contains(value);
@@ -116,7 +116,7 @@ public class FluentWaitMatcher {
      */
     public Fluent hasSize(final int size) {
         Predicate hasSize = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply( WebDriver webDriver) {
+            public boolean apply(WebDriver webDriver) {
                 int size1;
                 if (filters.size() > 0) {
                     size1 = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).size();
@@ -138,7 +138,7 @@ public class FluentWaitMatcher {
      */
     public Fluent containsText(final String value) {
         Predicate hasText = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply( WebDriver webDriver) {
+            public boolean apply(WebDriver webDriver) {
                 List<String> texts;
                 if (filters.size() > 0) {
                     texts = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getTexts();
@@ -166,7 +166,7 @@ public class FluentWaitMatcher {
      */
     public Fluent hasText(final String value) {
         Predicate hasText = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply( WebDriver webDriver) {
+            public boolean apply(WebDriver webDriver) {
                 if (filters.size() > 0) {
                     return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getTexts().contains(value);
                 } else {
@@ -184,7 +184,7 @@ public class FluentWaitMatcher {
      */
     public Fluent isPresent() {
         Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply( WebDriver webDriver) {
+            public boolean apply(WebDriver webDriver) {
                 int size;
                 if (filters.size() > 0) {
                     size = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).size();
@@ -199,12 +199,13 @@ public class FluentWaitMatcher {
         return FluentThread.get();
 
     }
-     /**
+
+    /**
      * Check that the element is not present
      */
     public Fluent isNotPresent() {
         Predicate isNotPresent = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply( WebDriver webDriver) {
+            public boolean apply(WebDriver webDriver) {
                 int size;
                 if (filters.size() > 0) {
                     size = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).size();
@@ -227,7 +228,7 @@ public class FluentWaitMatcher {
      */
     public Fluent areDisplayed() {
         Predicate isVisible = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply( WebDriver webDriver) {
+            public boolean apply(WebDriver webDriver) {
                 if (filters.size() > 0) {
                     FluentList<FluentWebElement> fluentWebElements = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()]));
                     if (fluentWebElements.size() > 0) {
@@ -263,7 +264,7 @@ public class FluentWaitMatcher {
      */
     public Fluent areEnabled() {
         Predicate isEnabled = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply( WebDriver webDriver) {
+            public boolean apply(WebDriver webDriver) {
                 if (filters.size() > 0) {
                     FluentList<FluentWebElement> fluentWebElements = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()]));
                     if (fluentWebElements.size() > 0) {
@@ -341,6 +342,28 @@ public class FluentWaitMatcher {
      */
     public FluentWaitMatcher withName(final String value) {
         filters.add(org.fluentlenium.core.filter.FilterConstructor.withName(value));
+        return this;
+    }
+
+
+    /**
+     * Create a filter builder for the attribute by class
+     *
+     * @param
+     * @return
+     */
+    public FluentWaitBuilder withClass() {
+        return new FluentWaitBuilder(this, FilterType.CLASS);
+    }
+
+    /**
+     * Check that the element has the corrsponding class
+     *
+     * @param value
+     * @return
+     */
+    public FluentWaitMatcher withClass(final String value) {
+        filters.add(org.fluentlenium.core.filter.FilterConstructor.withClass(value));
         return this;
     }
 

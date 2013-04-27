@@ -1,3 +1,8 @@
+v0.7.9
+- @Page annotation available on another @Page
+- Adding @SharedBrowser.ONCE,@SharedBrowser.PER_METHOD,@SharedBrowser.PER_CLASS for junit and testng
+- adding withClass filter
+- moving to selenium 2.32.0
 v0.7.8
 - quit now do a check to avoid NPE
 - package testng to fluentlenium-festassert
