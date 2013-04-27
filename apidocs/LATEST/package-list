@@ -1,0 +1,12 @@
+org.fest.assertions.fluentlenium
+org.fest.assertions.fluentlenium.custom
+org.fluentlenium.adapter
+org.fluentlenium.core
+org.fluentlenium.core.action
+org.fluentlenium.core.annotation
+org.fluentlenium.core.domain
+org.fluentlenium.core.exception
+org.fluentlenium.core.filter
+org.fluentlenium.core.filter.matcher
+org.fluentlenium.core.search
+org.fluentlenium.core.wait
