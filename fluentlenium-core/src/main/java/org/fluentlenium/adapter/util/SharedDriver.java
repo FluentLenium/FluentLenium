@@ -13,21 +13,27 @@
  */
 package org.fluentlenium.adapter.util;
 
-import org.fluentlenium.core.FluentAdapter;
+import org.openqa.selenium.Beta;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * @author : Mathilde Lemee
  */
-public class ShutdownHook extends Thread {
-    private final FluentAdapter test;
+@Retention(RetentionPolicy.RUNTIME)
+@Beta
+public @interface SharedDriver {
+    public enum SharedType {ONCE, PER_CLASS, PER_METHOD}
 
-    public ShutdownHook(final String s, final FluentAdapter test) {
-        super(s);
-        this.test = test;
-    }
+    /**
+     * deleteCookies default : true.
+     * If deleteCookies is enabled, after each test method the cookies will be deleted
+     *
+     * @return
+     */
+    boolean deleteCookies() default true;
 
-    @Override
-    public synchronized void start() {
-        test.quit();
-    }
+    SharedType type() default SharedType.ONCE;
+
 }

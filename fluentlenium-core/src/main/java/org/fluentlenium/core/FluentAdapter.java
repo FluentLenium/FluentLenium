@@ -1,5 +1,19 @@
+/**
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
+ */
 package org.fluentlenium.core;
 
+import org.fluentlenium.adapter.util.SharedDriver;
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -31,17 +45,17 @@ public class FluentAdapter extends Fluent {
     protected void initTest() {
         Class cls = null;
         try {
-	    for (cls = Class.forName(this.getClass().getName()); FluentAdapter.class.isAssignableFrom(cls); cls = cls.getSuperclass()) {
-	        for (Field field : cls.getDeclaredFields()) {
-                if (field.isAnnotationPresent(Page.class)) {
-                    field.setAccessible(true);
-                    Class clsField = field.getType();
-                    Class clsPage = Class.forName(clsField.getName());
-                    Object page = initClass(clsPage);
-                    field.set(this, page);
+            for (cls = Class.forName(this.getClass().getName()); FluentAdapter.class.isAssignableFrom(cls); cls = cls.getSuperclass()) {
+                for (Field field : cls.getDeclaredFields()) {
+                    if (field.isAnnotationPresent(Page.class)) {
+                        field.setAccessible(true);
+                        Class clsField = field.getType();
+                        Class clsPage = Class.forName(clsField.getName());
+                        Object page = initClass(clsPage);
+                        field.set(this, page);
+                    }
                 }
             }
-	    }
         } catch (ClassNotFoundException e) {
             throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
         } catch (IllegalAccessException e) {
@@ -162,7 +176,6 @@ public class FluentAdapter extends Fluent {
     /**
      * Override this method to set some config options on the driver. For example withDefaultSearchWait and withDefaultPageWait
      * Remember that you can access to the WebDriver object using this.getDriver().
-     *
      */
     public void getDefaultConfig() {
     }
@@ -175,6 +188,47 @@ public class FluentAdapter extends Fluent {
         if (getDriver() != null) {
             getDriver().quit();
         }
+    }
+
+
+    protected static SharedDriver getSharedBrowser(final Class classe) {
+        Class<?> cls;
+        for (cls = classe; FluentAdapter.class.isAssignableFrom(cls); cls = cls.getSuperclass()) {
+            if (cls.isAnnotationPresent(SharedDriver.class)) {
+                return cls.getAnnotation(SharedDriver.class);
+            }
+        }
+        return null;
+    }
+
+    protected boolean isSharedDriver(final Class classe) {
+        return (getSharedBrowser(classe) != null);
+    }
+
+
+    protected static boolean isDeleteCookies(final Class classe) {
+        SharedDriver sharedBrowser = getSharedBrowser(classe);
+        return (sharedBrowser != null && sharedBrowser.deleteCookies());
+    }
+
+    protected static boolean isSharedDriverOnce(final Class classe) {
+        SharedDriver sharedBrowser = getSharedBrowser(classe);
+        return (sharedBrowser != null && sharedBrowser.type() == SharedDriver.SharedType.ONCE);
+    }
+
+    protected static boolean isSharedDriverPerClass(final Class classe) {
+        SharedDriver sharedBrowser = getSharedBrowser(classe);
+        return (sharedBrowser != null && sharedBrowser.type() == SharedDriver.SharedType.PER_CLASS);
+    }
+
+    protected static boolean isSharedDriverPerMethod(final Class classe) {
+        SharedDriver sharedBrowser = getSharedBrowser(classe);
+        return (sharedBrowser != null && sharedBrowser.type() == SharedDriver.SharedType.PER_METHOD);
+    }
+
+    protected static boolean isDefaultSharedDriver(final Class classe) {
+        SharedDriver sharedBrowser = getSharedBrowser(classe);
+        return (sharedBrowser == null);
     }
 
 }

@@ -12,43 +12,23 @@
  * limitations under the License
  */
 
-package org.fluentlenium.integration.junit;
+package org.fluentlenium.integration.shareddriver;
 
-import org.fluentlenium.adapter.util.SharedBrowser;
+import org.fluentlenium.adapter.util.SharedDriver;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
-import org.openqa.selenium.Cookie;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
-@SharedBrowser
-public class SharedBrowserTest extends LocalFluentCase {
+@SharedDriver(type = SharedDriver.SharedType.PER_CLASS)
+public class SharedDriverPerClass2Test extends LocalFluentCase {
 
-  @Test
-  public void firstMethod() {
-    goTo(LocalFluentCase.DEFAULT_URL);
-    assertThat($(".small", withName("name"))).hasSize(1);
-  }
 
 
   @Test
   public void secondMethod() {
-    assertThat($(".small", withName("name"))).hasSize(1);
-  }
-
-  @Test
-  public void cookieFirstMethod() {
-    goTo(LocalFluentCase.DEFAULT_URL);
-    assertThat($(".small", withName("name"))).hasSize(1);
-    this.getDriver().manage().addCookie(new Cookie("cookie", "fluent"));
-  }
-
-
-  @Test
-  public void cookieSecondMethod() {
-    assertThat($(".small", withName("name"))).hasSize(1);
-    assertThat(this.getCookie("cookie")).isNull();
+    assertThat($(".small", withName("name"))).hasSize(0);
   }
 
 

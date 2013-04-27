@@ -12,45 +12,31 @@
  * limitations under the License
  */
 
-package org.fluentlenium.integration.junit;
+package org.fluentlenium.integration.shareddriver;
 
-import org.fluentlenium.adapter.util.SharedBrowser;
+import org.fluentlenium.adapter.util.SharedDriver;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
-import org.openqa.selenium.Cookie;
-
-import java.lang.reflect.Field;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
-@SharedBrowser(deleteCookies = false)
-public class SharedBrowserKeepCookiesTest extends LocalFluentCase {
+@SharedDriver(type = SharedDriver.SharedType.PER_METHOD)
+public class SharedDriverPerMethodByAnnotationTest extends LocalFluentCase {
+
 
   @Test
   public void firstMethod() {
     goTo(LocalFluentCase.DEFAULT_URL);
     assertThat($(".small", withName("name"))).hasSize(1);
-    this.getDriver().manage().addCookie(new Cookie("cookie", "fluent"));
   }
 
 
   @Test
   public void secondMethod() {
-    assertThat($(".small", withName("name"))).hasSize(1);
-    assertThat(this.getCookie("cookie").getValue()).isEqualTo("fluent");
+    assertThat($(".small", withName("name"))).hasSize(0);
   }
 
-
-  @Test
-  public void when_once_mode_then_shutdown_hook() throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
-    Class clazz = Class.forName("java.lang.ApplicationShutdownHooks");
-    Field field = clazz.getDeclaredField("hooks");
-    field.setAccessible(true);
-    Object hooks = field.get(null);
-    System.out.println(hooks); //hooks is a Map<Thread, Thread>
-
-  }
 
 
 }

@@ -12,16 +12,17 @@
  * limitations under the License
  */
 
-package org.fluentlenium.integration.junit;
+package org.fluentlenium.integration.shareddriver;
 
+import org.fluentlenium.adapter.util.SharedDriver;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
-public class BrowserPerMethodTest extends LocalFluentCase {
-
+@SharedDriver
+public class SharedDriverOnce1Test extends LocalFluentCase {
 
   @Test
   public void firstMethod() {
@@ -32,8 +33,9 @@ public class BrowserPerMethodTest extends LocalFluentCase {
 
   @Test
   public void secondMethod() {
-    assertThat($(".small", withName("name"))).hasSize(0);
+    assertThat($(".small", withName("name"))).hasSize(1);
   }
+
 
 
 

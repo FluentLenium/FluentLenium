@@ -11,23 +11,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
-package org.fluentlenium.adapter.util;
 
-import org.fluentlenium.core.FluentAdapter;
+package org.fluentlenium.integration.shareddriver;
 
-/**
- * @author : Mathilde Lemee
- */
-public class ShutdownHook extends Thread {
-    private final FluentAdapter test;
+import org.fluentlenium.adapter.util.SharedDriver;
+import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.junit.Test;
 
-    public ShutdownHook(final String s, final FluentAdapter test) {
-        super(s);
-        this.test = test;
-    }
+import static org.fest.assertions.Assertions.assertThat;
+import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
-    @Override
-    public synchronized void start() {
-        test.quit();
-    }
+@SharedDriver
+public class SharedDriverOnce2Test extends LocalFluentCase {
+
+
+
+
+  @Test
+  public void secondMethod() {
+    assertThat($(".small", withName("name"))).hasSize(1);
+  }
+
+
+
+
 }
