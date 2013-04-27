@@ -14,14 +14,13 @@
 
 package org.fluentlenium.integration.junit;
 
-import org.fluentlenium.adapter.FluentTest;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
-public class BrowserPerMethodTest extends FluentTest {
+public class BrowserPerMethodTest extends LocalFluentCase {
 
 
   @Test

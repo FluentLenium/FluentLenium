@@ -14,7 +14,6 @@
 
 package org.fluentlenium.integration.junit;
 
-import org.fluentlenium.adapter.FluentTest;
 import org.fluentlenium.adapter.util.SharedBrowser;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
@@ -24,7 +23,7 @@ import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
 @SharedBrowser
-class SharedBrowserSuperClass extends FluentTest {
+class SharedBrowserSuperClass extends LocalFluentCase {
 }
 
 public class SharedBrowserSuperClassTest extends SharedBrowserSuperClass {

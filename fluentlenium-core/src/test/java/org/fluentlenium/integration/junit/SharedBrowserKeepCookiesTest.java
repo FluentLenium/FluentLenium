@@ -14,7 +14,6 @@
 
 package org.fluentlenium.integration.junit;
 
-import org.fluentlenium.adapter.FluentTest;
 import org.fluentlenium.adapter.util.SharedBrowser;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
@@ -26,7 +25,7 @@ import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
 @SharedBrowser(deleteCookies = false)
-public class SharedBrowserKeepCookiesTest extends FluentTest {
+public class SharedBrowserKeepCookiesTest extends LocalFluentCase {
 
   @Test
   public void firstMethod() {
