@@ -14,6 +14,7 @@
 
 package org.fluentlenium.adapter;
 
+import org.fluentlenium.adapter.util.SharedDriverHelper;
 import org.fluentlenium.adapter.util.ShutdownHook;
 import org.fluentlenium.core.FluentAdapter;
 import org.openqa.selenium.WebDriver;
@@ -36,7 +37,7 @@ public abstract class FluentTestNg extends FluentAdapter {
     @BeforeClass
     public void beforeClass() {
         Class<? extends FluentTestNg> aClass = this.getClass();
-        if (isSharedDriverOnce(aClass)) {
+        if (SharedDriverHelper.isSharedDriverOnce(aClass)) {
             synchronized (this) {
                 if (sharedDriverOnce == null) {
                     this.initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
@@ -47,7 +48,7 @@ public abstract class FluentTestNg extends FluentAdapter {
                 }
                 initTest();
             }
-        } else if (isSharedDriverPerClass(this.getClass())) {
+        } else if (SharedDriverHelper.isSharedDriverPerClass(this.getClass())) {
             this.initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
             initTest();
         }
@@ -56,7 +57,7 @@ public abstract class FluentTestNg extends FluentAdapter {
 
     @BeforeMethod
     public void beforeMethod() {
-        if (isSharedDriverPerMethod(this.getClass()) || isDefaultSharedDriver(this.getClass())) {
+        if (SharedDriverHelper.isSharedDriverPerMethod(this.getClass()) || SharedDriverHelper.isDefaultSharedDriver(this.getClass())) {
             this.initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
             initTest();
         }
@@ -65,9 +66,9 @@ public abstract class FluentTestNg extends FluentAdapter {
 
     @AfterMethod
     public void afterMethod() {
-        if (isSharedDriverPerMethod(this.getClass())) {
+        if (SharedDriverHelper.isSharedDriverPerMethod(this.getClass())) {
             quit();
-        } else if (isDeleteCookies(this.getClass())) {
+        } else if (SharedDriverHelper.isDeleteCookies(this.getClass())) {
             this.getDriver().manage().deleteAllCookies();
         }
 
@@ -75,7 +76,7 @@ public abstract class FluentTestNg extends FluentAdapter {
 
     @AfterClass
     public void afterClass() {
-        if (isSharedDriverPerClass(this.getClass())) {
+        if (SharedDriverHelper.isSharedDriverPerClass(this.getClass())) {
             quit();
         }
     }

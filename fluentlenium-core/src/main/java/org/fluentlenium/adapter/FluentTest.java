@@ -14,6 +14,7 @@
 
 package org.fluentlenium.adapter;
 
+import org.fluentlenium.adapter.util.SharedDriverHelper;
 import org.fluentlenium.adapter.util.ShutdownHook;
 import org.fluentlenium.core.FluentAdapter;
 import org.fluentlenium.core.FluentPage;
@@ -56,7 +57,7 @@ public abstract class FluentTest extends FluentAdapter {
         @Override
         public void starting(FrameworkMethod method) {
             super.starting(method);
-            if (isSharedDriverOnce(method.getMethod()
+            if (SharedDriverHelper.isSharedDriverOnce(method.getMethod()
                     .getDeclaringClass())) {
                 synchronized (this) {
                     if (sharedDriver == null) {
@@ -67,7 +68,7 @@ public abstract class FluentTest extends FluentAdapter {
                         initFluentWithExistingDriver();
                     }
                 }
-            } else if (isSharedDriverPerClass(method.getMethod()
+            } else if (SharedDriverHelper.isSharedDriverPerClass(method.getMethod()
                     .getDeclaringClass())) {
                 synchronized (this) {
                     if (!isSharedDriverPerClass) {
@@ -90,11 +91,11 @@ public abstract class FluentTest extends FluentAdapter {
         @Override
         public void finished(FrameworkMethod method) {
             super.finished(method);
-            if (isSharedDriverPerMethod(method.getMethod()
-                    .getDeclaringClass()) || isDefaultSharedDriver(method.getMethod()
+            if (SharedDriverHelper.isSharedDriverPerMethod(method.getMethod()
+                    .getDeclaringClass()) || SharedDriverHelper.isDefaultSharedDriver(method.getMethod()
                     .getDeclaringClass())) {
                 quit();
-            } else if (isDeleteCookies(method.getMethod().getDeclaringClass())) {
+            } else if (SharedDriverHelper.isDeleteCookies(method.getMethod().getDeclaringClass())) {
                 if (sharedDriver != null) {
                     sharedDriver.manage().deleteAllCookies();
                 }
