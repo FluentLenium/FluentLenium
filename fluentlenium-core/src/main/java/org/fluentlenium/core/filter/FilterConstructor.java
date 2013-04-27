@@ -56,6 +56,15 @@ public final class FilterConstructor {
         return new Filter(FilterType.ID, id);
     }
 
+	/**
+	 * Create a filter by class
+	 *
+	 * @param klass
+	 * @return
+	 */
+	public static Filter withClass(String klass) {
+		return new Filter(FilterType.CLASS, klass);
+	}
 
     /**
      * Create a filter by text
@@ -97,6 +106,15 @@ public final class FilterConstructor {
     public static FilterBuilder withId() {
         return new FilterBuilder(FilterType.ID);
     }
+
+	/**
+	 * Create a filter builder for the attribute by class
+	 *
+	 * @return
+	 */
+	public static FilterBuilder withClass() {
+		return new FilterBuilder(FilterType.CLASS);
+	}
 
     /**
      * Create a filter builder for the attribute by text
