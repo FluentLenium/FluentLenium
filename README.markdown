@@ -529,12 +529,10 @@ If a base url is provided, the current url will be relative to that base url.
 To set the time to wait when searching an element, you can use in your test :
  ```java
  withDefaultSearchWait(long l, TimeUnit timeUnit);```
- ```
 
  To set the time to wait when loading a page, you can use :
   ```java
   withDefaultPageWait(long l, TimeUnit timeUnit);```
-  ```
 
 Be aware that when you modified this elements, the webDriver instance will be modified so your page will also be affected.
 
@@ -546,13 +544,13 @@ You can also override the setDefaultConfig method and use both selenium and Flue
 ## Browser Lifecycle
 For jUnit and testNG, you can defined the browser lifecycle.
 Use the class annotation @SharedDriver and you will be able to defined how the driver will be created :
-@SharedDriver(type = SharedDriver.SharedType.ONCE) will allow you to use the same driver for every test annotate with that annotation (it can also be on a parent class) for all classes and methods.
-@SharedDriver(type = SharedDriver.SharedType.PER_CLASS) will allow you to use the same driver for every test annotate with that annotation (it can also be on a parent class) for all methods on a same class.
-@SharedDriver(type = SharedDriver.SharedType.PER_METHOD) will allow you to create a new driver for each method.
+```@SharedDriver(type = SharedDriver.SharedType.ONCE) ``` will allow you to use the same driver for every test annotate with that annotation (it can also be on a parent class) for all classes and methods.
+```@SharedDriver(type = SharedDriver.SharedType.PER_CLASS)``` will allow you to use the same driver for every test annotate with that annotation (it can also be on a parent class) for all methods on a same class.
+```@SharedDriver(type = SharedDriver.SharedType.PER_METHOD)``` will allow you to create a new driver for each method.
 
 The default is PER_METHOD.
 
-You will also be able to decide if you want to clean the cookies between two methods using @SharedDriver(deleteCookies=true) or @SharedDriver(deleteCookies=false)
+You will also be able to decide if you want to clean the cookies between two methods using ```@SharedDriver(deleteCookies=true)``` or ```@SharedDriver(deleteCookies=false)```
 
 ## FluentLenium and other frameworks
 
