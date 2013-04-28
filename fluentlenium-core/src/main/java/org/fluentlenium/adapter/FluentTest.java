@@ -58,6 +58,7 @@ public abstract class FluentTest extends FluentAdapter {
         @Override
         public void starting(FrameworkMethod method) {
             super.starting(method);
+            //TODO Refactor
             if (isSharedDriverOnce(method.getMethod()
                     .getDeclaringClass())) {
                 synchronized (this) {
@@ -144,7 +145,7 @@ public abstract class FluentTest extends FluentAdapter {
     public static void afterClass() {
         if (isSharedDriverPerClass) {
             sharedDriver.quit();
-            sharedDriver=null;
+            sharedDriver = null;
             isSharedDriverPerClass = false;
         }
     }
