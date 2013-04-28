@@ -31,7 +31,7 @@ To add FluentLenium to your project, just add the following dependency to your `
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
-    <version>0.7.8</version>
+    <version>0.7.9</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -44,7 +44,7 @@ If you need the fest-assert dependency to improve the legibility of your test co
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-festassert</artifactId>
-    <version>0.7.8</version>
+    <version>0.7.9</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -55,7 +55,7 @@ An adapter has also been built for using FluentLenium with TestNG :
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>0.7.8</version>
+    <version>0.7.9</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -101,6 +101,7 @@ You can use filters to allow that kind of search. For example :
 
 ```java
 find(".small", withName("foo"))
+find(".small", withClass("foo"))
 find(".small", withId("idOne"))
 find(".small", withText("This field is mandatory."))
 ```
@@ -111,6 +112,7 @@ You can also write chained filters :
 You can do more complex string matching on the above filters using the following methods :
 
   - `contains`
+  - `containsWord`
   - `notContains`
   - `startsWith`
   - `notStartsWith`
@@ -133,10 +135,6 @@ find(".small", withName().notStartsWith(regex("na?me[0-9]*")))
 ```
 
 Contains, startsWith and endsWith with a regexp pattern look for a subsection of the pattern.
-
-Of course, if you are a regexp jedi, you don't need these!
-
-More will come soon to filter to create a complete search tool (containsWord, able to choose if you want to ignore case ...)
 
 
 ### N-th
@@ -362,6 +360,7 @@ public class AnnotationInitialization extends FluentTest {
 
 }
 ```
+It's now possible to use the @Page annotation in a FluentPage.
 
 You can also use the factory method `createPage`:
 
@@ -443,7 +442,7 @@ You can also use matchers:
 await().atMost(5, TimeUnit.SECONDS).until(".small").withText().startsWith("start").isPresent();
 ```
      
-Just use `startsWith`, `notStartsWith`, `endsWith`, `notEndsWith`, `contains`, `notContains`, `equalTo`.
+Just use `startsWith`, `notStartsWith`, `endsWith`, `notEndsWith`, `contains`, `notContains`, `equalTo`, `containsWord`.
 
 If you need to filter on a custom attribute name, this syntax will help :
 
@@ -524,6 +523,7 @@ If you need to change your driver, just override the `getDefaultDriver` method i
 
 ### Base Url
 If you want to defined a default base url, just override the `getDefaultBaseUrl` method in your test. Every pages create with @Page will also use this variable.
+If a base url is provided, the current url will be relative to that base url.
 
 ### TimeOut
 To set the time to wait when searching an element, you can use in your test :
@@ -542,6 +542,17 @@ Be aware that when you modified this elements, the webDriver instance will be mo
 You can defined a default driver configuration using to ways.
 First, just override the getDriver method and use the selenium way to configure your driver.
 You can also override the setDefaultConfig method and use both selenium and FluentLenium way (withDefaultSearchWait,withDefaultPageWait) to configure your driver.
+
+## Browser Lifecycle
+For jUnit and testNG, you can defined the browser lifecycle.
+Use the class annotation @SharedDriver and you will be able to defined how the driver will be created :
+@SharedDriver(type = SharedDriver.SharedType.ONCE) will allow you to use the same driver for every test annotate with that annotation (it can also be on a parent class) for all classes and methods.
+@SharedDriver(type = SharedDriver.SharedType.PER_CLASS) will allow you to use the same driver for every test annotate with that annotation (it can also be on a parent class) for all methods on a same class.
+@SharedDriver(type = SharedDriver.SharedType.PER_METHOD) will allow you to create a new driver for each method.
+
+The default is PER_METHOD.
+
+You will also be able to decide if you want to clean the cookies between two methods using @SharedDriver(deleteCookies=true) or @SharedDriver(deleteCookies=false)
 
 ## FluentLenium and other frameworks
 
