@@ -135,21 +135,46 @@ public class FluentSelectorTest extends LocalFluentCase {
         assertThat($("span", withName().notEndsWith(regex("na?"))).first().getId()).isEqualTo("oneline");
     }
 
-	@Test
-	public void checkWithClassCssSelector() {
-		goTo(DEFAULT_URL);
-		assertThat($("#id", withClass("small"))).hasSize(1);
-	}
+    @Test
+    public void checkWithClassCssSelector() {
+        goTo(DEFAULT_URL);
+        assertThat($("#id", withClass("small"))).hasSize(1);
+    }
 
-	@Test
-	public void checkWithClassEqualMatcherCssSelector() {
-		goTo(DEFAULT_URL);
-		assertThat($("#id", withClass().equalTo("small"))).hasSize(1);
-	}
+    @Test
+    public void checkWithClassEqualMatcherCssSelector() {
+        goTo(DEFAULT_URL);
+        assertThat($("#id", withClass().equalTo("small"))).hasSize(1);
+    }
 
-	@Test
-	public void checkWithClassRegexMatcherCssSelector() {
-		goTo(DEFAULT_URL);
+    @Test
+    public void checkWithClassRegexMatcherCssSelector() {
+        goTo(DEFAULT_URL);
         assertThat($("#id", withClass().contains(regex("smal?")))).hasSize(1);
-	}
+    }
+
+    @Test
+    public void checkMultipleClass2Selector() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", withClass().equalTo("class1 class2 class3"))).hasSize(1);
+    }
+
+    @Test
+    public void checkMultipleClassContainsWordsSelector() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", withClass().containsWord("class1"), withClass().containsWord("class2"))).hasSize(1);
+    }
+
+    @Test
+    public void checkClassContainsSelector() {
+    goTo(DEFAULT_URL);
+        assertThat($("span", withClass().contains("class"), withClass().containsWord("class2"))).hasSize(1);
+    }
+
+    @Test
+    public void checkClassContainsWordSelector() {
+    goTo(DEFAULT_URL);
+        assertThat($("span", withClass().containsWord("class"), withClass().containsWord("class2"))).hasSize(0);
+    }
 }
+

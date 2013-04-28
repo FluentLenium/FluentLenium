@@ -14,7 +14,7 @@
 
 package org.fluentlenium.core.filter;
 
-import org.fluentlenium.core.filter.matcher.ContainsMatcher;
+import org.fluentlenium.core.filter.matcher.ContainsWordMatcher;
 import org.fluentlenium.core.filter.matcher.Matcher;
 
 
@@ -30,7 +30,7 @@ public final class FilterConstructor {
      * @return
      */
     public static Filter buildFilter(String name, FilterType type, Class matcherType) {
-        if (matcherType.equals(ContainsMatcher.class)) {
+        if (matcherType.equals(ContainsWordMatcher.class)) {
             return new Filter(FilterType.NAME, name);
         }
         return null;

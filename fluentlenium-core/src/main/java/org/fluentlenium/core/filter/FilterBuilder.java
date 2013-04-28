@@ -39,6 +39,10 @@ public class FilterBuilder {
         return new Filter(attribute, new ContainsMatcher(equal));
     }
 
+    public Filter containsWord(String equal) {
+        return new Filter(attribute, new ContainsWordMatcher(equal));
+    }
+
     public Filter contains(Pattern equal) {
         return new Filter(attribute, new ContainsMatcher(equal));
     }
