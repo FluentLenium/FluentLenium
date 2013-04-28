@@ -174,7 +174,7 @@ public class FluentSelectorTest extends LocalFluentCase {
     @Test
     public void checkClassContainsWordSelector() {
     goTo(DEFAULT_URL);
-        assertThat($("span", withClass().containsWord("class"), withClass().containsWord("class2"))).hasSize(0);
+        assertThat($("span", withClass().containsWord("class"))).hasSize(0);
     }
 }
 
