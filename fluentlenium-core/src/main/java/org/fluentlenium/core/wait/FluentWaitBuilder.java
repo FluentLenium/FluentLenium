@@ -48,6 +48,11 @@ public class FluentWaitBuilder {
         return fluentLeniumWait;
     }
 
+    public FluentWaitMatcher containsWord(String word) {
+        fluentLeniumWait.addFilter(new Filter(attribute, new ContainsWordMatcher(word)));
+        return fluentLeniumWait;
+    }
+
 
     public FluentWaitMatcher contains(Pattern equal) {
         fluentLeniumWait.addFilter(new Filter(attribute, new ContainsMatcher(equal)));

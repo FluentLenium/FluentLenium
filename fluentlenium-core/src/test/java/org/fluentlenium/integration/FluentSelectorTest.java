@@ -156,25 +156,25 @@ public class FluentSelectorTest extends LocalFluentCase {
     @Test
     public void checkMultipleClass2Selector() {
         goTo(DEFAULT_URL);
-        assertThat($("span", withClass().equalTo("class1 class2 class3"))).hasSize(1);
+        assertThat($("button", withClass().equalTo("class1 class2 class3"))).hasSize(1);
     }
 
     @Test
     public void checkMultipleClassContainsWordsSelector() {
         goTo(DEFAULT_URL);
-        assertThat($("span", withClass().containsWord("class1"), withClass().containsWord("class2"))).hasSize(1);
+        assertThat($("button", withClass().containsWord("class1"), withClass().containsWord("class2"))).hasSize(1);
     }
 
     @Test
     public void checkClassContainsSelector() {
     goTo(DEFAULT_URL);
-        assertThat($("span", withClass().contains("class"), withClass().containsWord("class2"))).hasSize(1);
+        assertThat($("button", withClass().contains("class"), withClass().containsWord("class2"))).hasSize(1);
     }
 
     @Test
     public void checkClassContainsWordSelector() {
     goTo(DEFAULT_URL);
-        assertThat($("span", withClass().containsWord("class"))).hasSize(0);
+        assertThat($("button", withClass().containsWord("class"))).hasSize(0);
     }
 }
 

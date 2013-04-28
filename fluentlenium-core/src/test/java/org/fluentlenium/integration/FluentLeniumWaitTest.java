@@ -66,11 +66,16 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         await().atMost(1, NANOSECONDS).until("span").withClass("small").hasName("name");
     }
 
+
     @Test
     public void checkAwaitContainsNameWithClassRegex() {
         await().atMost(1, NANOSECONDS).until("span").withClass().contains(regex("smal?")).hasName("name");
     }
 
+    @Test
+    public void checkAwaitContainsNameWithClassAndContainsWord() {
+        await().atMost(1, NANOSECONDS).until("span").withClass().containsWord("small").hasName("name");
+    }
 
     @Test
     public void checkAwaitContainsTextWithText() {
