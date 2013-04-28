@@ -463,7 +463,7 @@ This methods actually calls myPage.isAt(). If the isAt() method of the myPage ob
 
 ### Polling Every
 You can also define the polling frequency, for example, if you want to poll every 5 seconds :
- ```java
+```java
 await().pollingEvery(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWith("myValue").isPresent();
 ```
 The default value is 500ms.
@@ -548,13 +548,16 @@ For jUnit and testNG, you can defined the browser lifecycle.
 Use the class annotation @SharedDriver and you will be able to defined how the driver will be created :
 ```java
 @SharedDriver(type = SharedDriver.SharedType.ONCE)
-``` will allow you to use the same driver for every test annotate with that annotation (it can also be on a parent class) for all classes and methods.
+``` 
+will allow you to use the same driver for every test annotate with that annotation (it can also be on a parent class) for all classes and methods.
 ```java
 @SharedDriver(type = SharedDriver.SharedType.PER_CLASS)
-``` will allow you to use the same driver for every test annotate with that annotation (it can also be on a parent class) for all methods on a same class.
+``` 
+will allow you to use the same driver for every test annotate with that annotation (it can also be on a parent class) for all methods on a same class.
 ```java
 @SharedDriver(type = SharedDriver.SharedType.PER_METHOD)
-``` will allow you to create a new driver for each method.
+``` 
+will allow you to create a new driver for each method.
 
 The default is PER_METHOD.
 
