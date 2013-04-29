@@ -1,6 +1,7 @@
 org.fest.assertions.fluentlenium
 org.fest.assertions.fluentlenium.custom
 org.fluentlenium.adapter
+org.fluentlenium.adapter.util
 org.fluentlenium.core
 org.fluentlenium.core.action
 org.fluentlenium.core.annotation
