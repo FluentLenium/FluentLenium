@@ -27,8 +27,6 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
 
 import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class FluentAdapter extends Fluent {
@@ -45,7 +43,7 @@ public class FluentAdapter extends Fluent {
         Class cls = null;
         try {
             injectPageIntoContainer(this);
-
+             initFluentWebElements(this);
         } catch (ClassNotFoundException e) {
             throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
         } catch (IllegalAccessException e) {
@@ -75,7 +73,7 @@ public class FluentAdapter extends Fluent {
         T container = initClass(cls);
         try {
             injectPageIntoContainer(container);
-         } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
         } catch (IllegalAccessException e) {
             throw new ConstructionException("IllegalAccessException on class " + (cls != null ? cls.getName() : " null"), e);
@@ -95,17 +93,7 @@ public class FluentAdapter extends Fluent {
             initBaseUrl(page, parent);
 
             //init fields with default proxies
-            List<Field> fields = fluentWebElementFieldsForClass(cls);
-
-            for (Field fieldFromPage : fields) {
-                fieldFromPage.setAccessible(true);
-                AjaxElement elem = fieldFromPage.getAnnotation(AjaxElement.class);
-                if (elem == null) {
-                    proxyElement(new DefaultElementLocatorFactory(getDriver()), page, fieldFromPage);
-                } else {
-                    proxyElement(new AjaxElementLocatorFactory(getDriver(), elem.timeOutInSeconds()), page, fieldFromPage);
-                }
-            }
+            initFluentWebElements(page);
         } catch (ClassNotFoundException e) {
             throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
         } catch (IllegalAccessException e) {
@@ -120,18 +108,24 @@ public class FluentAdapter extends Fluent {
         return page;
     }
 
-    private List<Field> fluentWebElementFieldsForClass(Class cls) {
-        List<Field> fields = new ArrayList<Field>();
-        for (Field field : cls.getDeclaredFields()) {
-            if (isFluentWebElementField(field)) {
-                fields.add(field);
+    private <T extends Fluent> void initFluentWebElements( T page) {
+        for (Class classz = page.getClass();
+             FluentAdapter.class.isAssignableFrom(classz) || FluentPage.class.isAssignableFrom(classz);
+             classz = classz.getSuperclass()) {
+            for (Field fieldFromPage : classz.getDeclaredFields()) {
+                if (isFluentWebElementField(fieldFromPage)) {
+                    fieldFromPage.setAccessible(true);
+                    AjaxElement elem = fieldFromPage.getAnnotation(AjaxElement.class);
+                    if (elem == null) {
+                        proxyElement(new DefaultElementLocatorFactory(getDriver()), page, fieldFromPage);
+                    } else {
+                        proxyElement(new AjaxElementLocatorFactory(getDriver(), elem.timeOutInSeconds()), page, fieldFromPage);
+                    }
+                }
             }
         }
-        if (cls.getSuperclass() != null) {
-            fields.addAll(fluentWebElementFieldsForClass(cls.getSuperclass()));
-        }
-        return fields;
     }
+
 
     private boolean isFluentWebElementField(Field field) {
         return FluentWebElement.class.isAssignableFrom(field.getType());

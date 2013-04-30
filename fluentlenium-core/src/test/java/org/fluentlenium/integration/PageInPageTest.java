@@ -17,7 +17,7 @@ public class PageInPageTest extends LocalFluentCase
 	@Page
 	private TestPage testPage;
 	@Page
-	private SubTestPage subTestPage;
+	private SubSubTestPage subTestPage;
 
 	@Test
 	public void pages_should_be_injected() {
@@ -36,6 +36,9 @@ public class PageInPageTest extends LocalFluentCase
 class TestPage extends FluentPage {
 	@Page
 	IncludedPage includedPage;
+}
+
+class SubSubTestPage extends SubTestPage {
 }
 
 class SubTestPage extends TestPage {
