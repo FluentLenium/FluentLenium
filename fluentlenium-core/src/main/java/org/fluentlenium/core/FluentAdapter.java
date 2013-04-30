@@ -71,14 +71,14 @@ public class FluentAdapter extends Fluent {
         }
     }
 
-    public <T extends FluentPage> T createPage(Class<T> classOfPage) {
-        T container = initClass(classOfPage);
+    public <T extends FluentPage> T createPage(Class<T> cls) {
+        T container = initClass(cls);
         try {
             injectPageIntoContainer(container);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+         } catch (ClassNotFoundException e) {
+            throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            throw new ConstructionException("IllegalAccessException on class " + (cls != null ? cls.getName() : " null"), e);
         }
         return container;
     }
