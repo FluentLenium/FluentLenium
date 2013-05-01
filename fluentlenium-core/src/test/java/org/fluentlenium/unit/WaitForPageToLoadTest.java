@@ -40,90 +40,75 @@ public class WaitForPageToLoadTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void when_browser_do_not_implemets_Javascript_executor_throws_exception() {
-        FluentWaitPageMatcher fluentWaitPageBuilder = new FluentWaitPageMatcher( wait, webDriver);
+        FluentWaitPageMatcher fluentWaitPageBuilder = new FluentWaitPageMatcher(wait, webDriver);
         fluentWaitPageBuilder.isLoaded();
     }
 
     @Test
     public void when_browser_implemets_Javascript_executor_then_go_to_predicate() {
-        FluentWaitPageMatcher fluentWaitPageBuilder = new FluentWaitPageMatcher( wait, new WebDriverWithJavascriptExecutor());
+        FluentWaitPageMatcher fluentWaitPageBuilder = new FluentWaitPageMatcher(wait, new WebDriverWithJavascriptExecutor());
         fluentWaitPageBuilder.isLoaded();
         verify(wait).until(any(Predicate.class));
     }
 
     private class WebDriverWithJavascriptExecutor implements WebDriver, JavascriptExecutor {
 
-        @Override
         public Object executeScript(String s, Object... objects) {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        @Override
         public Object executeAsyncScript(String s, Object... objects) {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        @Override
         public void get(String s) {
             //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        @Override
         public String getCurrentUrl() {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        @Override
         public String getTitle() {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        @Override
         public List<WebElement> findElements(By by) {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        @Override
         public WebElement findElement(By by) {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        @Override
         public String getPageSource() {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        @Override
         public void close() {
             //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        @Override
         public void quit() {
             //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        @Override
         public Set<String> getWindowHandles() {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        @Override
         public String getWindowHandle() {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        @Override
         public TargetLocator switchTo() {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        @Override
         public Navigation navigate() {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        @Override
         public Options manage() {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
