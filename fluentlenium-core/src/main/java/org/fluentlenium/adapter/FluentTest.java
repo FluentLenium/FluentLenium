@@ -36,20 +36,11 @@ public abstract class FluentTest extends FluentAdapter {
     protected enum Mode {TAKE_SNAPSHOT_ON_FAIL, NEVER_TAKE_SNAPSHOT;}
 
     private static WebDriver sharedDriver;
-    public static boolean isSharedDriverPerClass;
+    private static boolean isSharedDriverPerClass;
 
     private Mode snapshotMode = Mode.NEVER_TAKE_SNAPSHOT;
     private String snapshotPath;
 
-
-    public void setSnapshotPath(String path) {
-        this.snapshotPath = path;
-    }
-
-
-    public void setSnapshotMode(Mode mode) {
-        this.snapshotMode = mode;
-    }
 
     @Rule
     public TestName name = new TestName();
@@ -113,6 +104,15 @@ public abstract class FluentTest extends FluentAdapter {
         }
 
     };
+
+    public void setSnapshotPath(String path) {
+        this.snapshotPath = path;
+    }
+
+
+    public void setSnapshotMode(Mode mode) {
+        this.snapshotMode = mode;
+    }
 
     private void killTheBrowserOnShutdown() {
         Runtime.getRuntime().addShutdownHook(new ShutdownHook("fluentlenium", this));

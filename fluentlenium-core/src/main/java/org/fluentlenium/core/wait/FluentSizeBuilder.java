@@ -27,7 +27,7 @@ import static org.fluentlenium.core.wait.WaitMessage.*;
 
 public class FluentSizeBuilder {
 
-    String selector;
+    private String selector;
     private FluentWait wait;
     private Search search;
     private List<Filter> filters = new ArrayList<Filter>();

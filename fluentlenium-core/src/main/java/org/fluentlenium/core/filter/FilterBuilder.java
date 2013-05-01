@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 public class FilterBuilder {
 
-    String attribute;
+    private String attribute;
 
     public FilterBuilder(String customAttribute) {
         this.attribute = customAttribute;

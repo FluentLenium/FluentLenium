@@ -22,8 +22,8 @@ import java.util.regex.Pattern;
 
 public class FluentWaitBuilder {
 
-    FluentWaitMatcher fluentLeniumWait;
-    String attribute;
+    private FluentWaitMatcher fluentLeniumWait;
+    private String attribute;
 
     public FluentWaitBuilder(FluentWaitMatcher fluentWaitBuilder, FilterType filterType) {
         this.fluentLeniumWait = fluentWaitBuilder;
