@@ -105,6 +105,9 @@ public abstract class Fluent implements SearchActions {
      * @param fileName
      */
     public Fluent takeScreenShot(String fileName) {
+        if (!(getDriver() instanceof TakesScreenshot)) {
+            throw new WebDriverException("Current browser doesn't allow taking screenshot.");
+        }
         File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         try {
             File destFile = new File(fileName);
