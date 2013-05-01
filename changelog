@@ -1,3 +1,6 @@
+v0.8.0
+- fix @Page annotation available on another @Page
+- adding new error message when trying to take a screenshot and driver doesn t support it
 v0.7.9
 - @Page annotation available on another @Page
 - Adding @SharedBrowser.ONCE,@SharedBrowser.PER_METHOD,@SharedBrowser.PER_CLASS for junit and testng
