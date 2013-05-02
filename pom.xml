@@ -14,6 +14,7 @@
     <module>fluentlenium-core</module>
     <module>fluentlenium-festassert</module>
     <module>fluentlenium-testng</module>
+      <module>fluentlenium-cucumber</module>
   </modules>
 
   <name>FluentLenium</name>
