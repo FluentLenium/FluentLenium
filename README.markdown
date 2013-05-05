@@ -601,6 +601,17 @@ fill("#firstName").with("toto");
 click("#create-button");
 assertThat(title(),equalTo("Hello toto"));
 ```
+##Resources
+
+In English :
+[Play2 and FluentLenium screencast](http://www.youtube.com/watch?v=diVhWRtJuxU) and the associated (code)[http://ics-software-engineering.github.io/play-example-fluentlenium/
+]
+
+In French :
+[SlideShare](http://www.slideshare.net/MathildeLemee/fluentlenium)
+[Cucumber and FluentLenium - more to come](http://blog.jetoile.fr/2013/04/fluentlenium-et-cucumber-jvm-complement.html)
+
+Please contact us on the mailing list if you want your post to be added to that list !
 
 ### Built by CloudBees
 <img src='http://web-static-cloudfront.s3.amazonaws.com/images/badges/BuiltOnDEV.png'/>
