@@ -13,6 +13,7 @@
  */
 package org.fluentlenium.cucumber.adapter.driver;
 
+import org.fluentlenium.cucumber.adapter.FluentCucumberAdapter;
 import org.fluentlenium.cucumber.adapter.exception.UnsupportedDriverException;
 import org.fluentlenium.cucumber.adapter.util.SharedDriverHelper;
 import org.openqa.selenium.Platform;
@@ -32,8 +33,8 @@ import java.util.Map;
 public class WebDriverFactory {
     private static Map<SupportedWebDriver, WebDriver> webDriverInstances = new HashMap<SupportedWebDriver, WebDriver>();
 
-    public static synchronized WebDriver newWebdriverInstance(Class clazz, SupportedWebDriver driverType, DesiredCapabilities capabilities) throws UnsupportedDriverException {
-        if (SharedDriverHelper.isSharedDriverPerFeature(clazz)) {
+    public static synchronized WebDriver newWebdriverInstance(FluentCucumberAdapter adapter, SupportedWebDriver driverType, DesiredCapabilities capabilities) throws UnsupportedDriverException {
+        if (SharedDriverHelper.isSharedDriverPerFeature(adapter.getClass())) {
             if (webDriverInstances.get(driverType) == null) {
                 webDriverInstances.put(driverType, getWebDriver(driverType, capabilities));
             }

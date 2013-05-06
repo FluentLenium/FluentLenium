@@ -10,7 +10,7 @@ Feature: multi browser test with only one driver instance per feature
     | firefox   |                                                                       |
 #    | phantomjs | phantomjs.binary.path@/opt/phantomjs-1.9.0-linux-x86_64/bin/phantomjs |
     #    | chrome    | webdriver.chrome.driver@/opt/chromedriver/chromedriver                |
-#    | remote    | webdriver.remote.url@http://10.147.2.83:4444/wd/hub;os.name@WIN7   |
+#    | remote    | browser.name@firefox;webdriver.remote.url@http://10.147.2.83:4444/wd/hub;os.name@WIN7   |
 
   Scenario Outline: scenario 2
     Given I use browser <browser> with <parameters>

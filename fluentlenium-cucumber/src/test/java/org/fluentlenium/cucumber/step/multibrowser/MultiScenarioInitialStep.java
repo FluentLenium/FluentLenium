@@ -42,7 +42,7 @@ public class MultiScenarioInitialStep extends FluentCucumberAdapter {
         capabilities.setBrowserName(driverType.getName());
 
         //TODO : generifying this action or using an annotation? (actually SharedDriver.PER_SCENARIO)
-        WebDriver webDriver = WebDriverFactory.newWebdriverInstance(getClass(), driverType, capabilities);
+        WebDriver webDriver = WebDriverFactory.newWebdriverInstance(this, driverType, capabilities);
         initFluentWithWebDriver(this, webDriver);
     }
 

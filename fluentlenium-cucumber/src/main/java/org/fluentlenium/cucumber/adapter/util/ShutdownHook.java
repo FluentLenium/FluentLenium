@@ -15,20 +15,22 @@ package org.fluentlenium.cucumber.adapter.util;
 
 
 import org.fluentlenium.cucumber.adapter.FluentCucumberAdapter;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
  * @author : Mathilde Lemee
  */
 public class ShutdownHook extends Thread {
-    private final FluentCucumberAdapter test;
+    private final FluentCucumberAdapter adapter;
 
-    public ShutdownHook(final String s, final FluentCucumberAdapter test) {
+    public ShutdownHook(final String s, final FluentCucumberAdapter adapter) {
         super(s);
-        this.test = test;
+        this.adapter = adapter;
     }
 
     @Override
     public synchronized void start() {
-        test.forceQuit();
+        adapter.forceQuit();
     }
 }
