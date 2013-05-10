@@ -8,7 +8,6 @@
         <version>0.8.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
 
 
