@@ -11,7 +11,7 @@
     <packaging>jar</packaging>
 
 
-    <name>Fluent Lenium Core</name>
+    <name>FluentLenium Core</name>
     <description>Core of FluentLenium
     </description>
     <url>https://github.com/FluentLenium/FluentLenium</url>
