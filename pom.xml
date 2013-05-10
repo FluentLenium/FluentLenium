@@ -16,6 +16,11 @@
     <module>fluentlenium-testng</module>
   </modules>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+  </properties>
+
   <name>FluentLenium</name>
   <description>FluentLenium makes the writing of acceptance testing more easy and in a fluent way using the power of
     css selectors. Build upon Selenium WebDriver.
