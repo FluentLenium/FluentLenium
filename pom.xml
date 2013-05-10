@@ -209,6 +209,34 @@
           <descriptor>src/main/assembly/dep.xml</descriptor>
         </configuration>
       </plugin>
+      <plugin>
+        <inherited>false</inherited>
+        <groupId>com.mycila.maven-license-plugin</groupId>
+        <artifactId>maven-license-plugin</artifactId>
+        <version>1.9.0</version>
+        <configuration>
+          <header>${project.basedir}/LICENSE</header>
+          <failIfMissing>true</failIfMissing>
+          <strictCheck>true</strictCheck>
+          <aggregate>true</aggregate>
+          <includes>
+            <include>**/fluentlenium-*/src/main/java/**</include>
+            <include>**/fluentlenium-*/src/test/java/**</include>
+          </includes>
+          <mapping>
+            <java>JAVADOC_STYLE</java>
+          </mapping>
+        </configuration>
+        <executions>
+          <execution>
+            <id>enforce-license-headers</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
