@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.openqa.selenium.*;
 
+import java.io.*;
 import java.util.List;
 import java.util.Set;
 
@@ -34,8 +35,8 @@ public class ScreenshotTest {
         new FluentAdapter(new CustomWebDriverNoScreenshot()).takeScreenShot();
     }
     @Test
-    public void when_browser_does_accept_screenshot_then_no_exception() {
-        new FluentAdapter(new CustomWebDriverScreenshot()).takeScreenShot(folder+"/test.jpg");
+    public void when_browser_does_accept_screenshot_then_no_exception() throws IOException {
+        new FluentAdapter(new CustomWebDriverScreenshot()).takeScreenShot(folder.newFile("test.jpg").getAbsolutePath());
     }
 }
 

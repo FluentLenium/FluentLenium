@@ -6,12 +6,11 @@
         <artifactId>fluentlenium-parent</artifactId>
         <version>0.8.1-SNAPSHOT</version>
     </parent>
-    <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
     <packaging>jar</packaging>
 
 
-    <name>Fluent Lenium Core</name>
+    <name>FluentLenium Core</name>
     <description>Core of FluentLenium
     </description>
     <url>https://github.com/FluentLenium/FluentLenium</url>
