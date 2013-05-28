@@ -88,7 +88,7 @@ public class WebDriverFactory {
 
     private static WebDriver chromeDriver(DesiredCapabilities capabilities) {
         System.setProperty("webdriver.chrome.driver", (String) capabilities.getCapability("webdriver.chrome.driver"));
-        return new ChromeDriver();
+        return new ChromeDriver(capabilities);
     }
 
     private static WebDriver firefoxDriver(DesiredCapabilities capabilities) {

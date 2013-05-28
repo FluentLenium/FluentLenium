@@ -22,12 +22,6 @@ import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.cucumber.adapter.FluentCucumberAdapter;
 import org.fluentlenium.cucumber.adapter.util.SharedDriver;
 import org.fluentlenium.cucumber.page.LocalPage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-
-import static org.fest.assertions.Assertions.assertThat;
-import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
 @SharedDriver(type = SharedDriver.SharedType.PER_FEATURE)
 public class SimpleFeatureStep extends FluentCucumberAdapter {
@@ -38,20 +32,16 @@ public class SimpleFeatureStep extends FluentCucumberAdapter {
     @Page
     LocalPage page2;
 
-
     @Given(value = "feature I am on the first page")
     public void step1() {
-//        this.initFluent(SimpleFeatureStep.class);
         this.initFluent();
         this.initTest();
 
         goTo(page);
-        assertThat($(".small", withName("name"))).hasSize(1);
     }
 
     @When(value = "feature I click on next page")
     public void step2() {
-//        this.initFluent(SimpleFeatureStep.class);
         this.initFluent();
         this.initTest();
 
@@ -60,7 +50,6 @@ public class SimpleFeatureStep extends FluentCucumberAdapter {
 
     @Then(value = "feature I am on the second page")
     public void step3() {
-//        this.initFluent(SimpleFeatureStep.class);
         this.initFluent();
         this.initTest();
 

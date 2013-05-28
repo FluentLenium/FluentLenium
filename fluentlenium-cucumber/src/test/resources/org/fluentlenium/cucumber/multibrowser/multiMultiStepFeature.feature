@@ -1,4 +1,4 @@
-Feature: multi browser with steps into multi classes with only one driver instance per feature
+Feature: multi browser with steps into multi classes
 
   Scenario Outline: scenario 1
     Given I use browser <browser> with <parameters>

@@ -51,7 +51,7 @@ public class FluentCucumberAdapter extends FluentAdapter {
                     initFluentWithExistingDriver();
                 }
             }
-        } else if (SharedDriverHelper.isSharedDriverPerScenario(clazz)) {
+        } else if (SharedDriverHelper.isSharedDriverPerScenario(clazz) || SharedDriverHelper.isDefaultSharedDriver(clazz)) {
             synchronized (this) {
                 if (!isSharedDriverPerScenario) {
                     initSharedDriver(driver);
@@ -76,7 +76,6 @@ public class FluentCucumberAdapter extends FluentAdapter {
         sharedDriver = getDriver();
     }
 
-//    protected Fluent initFluent(final Class clazz) {
     protected Fluent initFluent() {
         return initFluentWithWebDriver(this);
     }

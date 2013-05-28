@@ -41,7 +41,6 @@ public class MultiFeatureMultiStep1 extends FluentCucumberAdapter {
         this.initTest();
 
         goTo(page);
-        assertThat($(".small", withName("name"))).hasSize(1);
     }
 
     @After

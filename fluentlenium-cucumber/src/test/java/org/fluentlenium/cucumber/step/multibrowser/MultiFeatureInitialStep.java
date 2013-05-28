@@ -23,7 +23,6 @@ import org.fluentlenium.cucumber.adapter.util.SharedDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-@SharedDriver(type = SharedDriver.SharedType.PER_FEATURE)
 public class MultiFeatureInitialStep extends FluentCucumberAdapter {
 
     @Given(value = "I use browser ([^ ]*) with ([^ ]*)")

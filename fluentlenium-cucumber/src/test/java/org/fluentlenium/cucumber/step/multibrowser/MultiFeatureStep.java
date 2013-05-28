@@ -46,7 +46,6 @@ public class MultiFeatureStep extends FluentCucumberAdapter {
         this.initTest();
 
         goTo(page);
-        assertThat($(".small", withName("name"))).hasSize(1);
     }
 
     @When(value = "multifeature I click on next page")
