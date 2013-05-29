@@ -32,7 +32,6 @@ public class SimpleFeatureMultiStep1 extends FluentCucumberAdapter {
 
     @Given(value = "feature multi1 I am on the first page")
     public void step1() {
-//        this.initFluent(SimpleFeatureMultiStep1.class);
         this.initFluent();
         this.initTest();
 

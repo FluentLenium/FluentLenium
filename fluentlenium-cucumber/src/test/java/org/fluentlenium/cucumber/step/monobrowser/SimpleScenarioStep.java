@@ -36,7 +36,6 @@ public class SimpleScenarioStep extends FluentCucumberAdapter {
 
     @Given(value = "scenario I am on the first page")
     public void step1() {
-//		this.initFluent(SimpleScenarioStep.class);
 		this.initFluent();
 		this.initTest();
 
@@ -46,7 +45,6 @@ public class SimpleScenarioStep extends FluentCucumberAdapter {
 
     @When(value = "scenario I click on next page")
     public void step2() {
-//        this.initFluent(SimpleScenarioStep.class);
         this.initFluent();
         this.initTest();
 
@@ -55,7 +53,6 @@ public class SimpleScenarioStep extends FluentCucumberAdapter {
 
     @Then(value = "scenario I am on the second page")
     public void step3() {
-//        this.initFluent(SimpleScenarioStep.class);
         this.initFluent();
         this.initTest();
 
