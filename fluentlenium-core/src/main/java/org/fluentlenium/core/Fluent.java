@@ -119,7 +119,7 @@ public abstract class Fluent implements SearchActions {
         return this;
     }
 
-    protected final Fluent initFluent(WebDriver driver) {
+    protected Fluent initFluent(WebDriver driver) {
         this.driver = driver;
         this.search = new Search(driver);
         return this;
