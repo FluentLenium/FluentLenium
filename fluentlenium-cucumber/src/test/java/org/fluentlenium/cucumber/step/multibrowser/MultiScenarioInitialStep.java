@@ -23,10 +23,10 @@ import org.fluentlenium.cucumber.adapter.util.SharedDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-@SharedDriver(type = SharedDriver.SharedType.PER_FEATURE)
-public class MultiFeatureInitialStep extends FluentCucumberAdapter {
+@SharedDriver(type = SharedDriver.SharedType.PER_SCENARIO)
+public class MultiScenarioInitialStep extends FluentCucumberAdapter {
 
-    @Given(value = "I use browser ([^ ]*) with ([^ ]*)")
+    @Given(value = "multiscenario I use browser ([^ ]*) with ([^ ]*)")
     public void init(String browser, String parametersCmd) throws UnsupportedDriverException {
         SupportedWebDriver driverType = SupportedWebDriver.getBrowser(browser);
 
@@ -41,7 +41,7 @@ public class MultiFeatureInitialStep extends FluentCucumberAdapter {
         }
         capabilities.setBrowserName(driverType.getName());
 
-        //TODO : generifying this action or using an annotation? (actually SharedDriver.PER_FEATURE)
+        //TODO : generifying this action or using an annotation? (actually SharedDriver.PER_SCENARIO)
         WebDriver webDriver = WebDriverFactory.newWebdriverInstance(this, driverType, capabilities);
         initFluentWithWebDriver(this, webDriver);
     }

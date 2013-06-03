@@ -21,7 +21,7 @@ import org.openqa.selenium.WebDriver;
 
 public class FluentCucumberAdapter extends FluentAdapter {
     public static boolean isSharedDriverPerScenario;
-    private static WebDriver sharedDriver = null;
+    public static WebDriver sharedDriver = null;
     private Mode snapshotMode = Mode.NEVER_TAKE_SNAPSHOT;
     private String snapshotPath;
 

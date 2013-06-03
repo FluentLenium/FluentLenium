@@ -15,6 +15,7 @@ package org.fluentlenium.cucumber.adapter.util;
 
 
 import org.fluentlenium.cucumber.adapter.FluentCucumberAdapter;
+import org.fluentlenium.cucumber.adapter.driver.WebDriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -32,5 +33,13 @@ public class ShutdownHook extends Thread {
     @Override
     public synchronized void start() {
         adapter.forceQuit();
+		if (!WebDriverFactory.webDriverInstances.isEmpty()) {
+
+			for (WebDriver webDriver : WebDriverFactory.webDriverInstances.values()) {
+				if (webDriver != null) {
+					webDriver.close();
+				}
+			}
+		}
     }
 }

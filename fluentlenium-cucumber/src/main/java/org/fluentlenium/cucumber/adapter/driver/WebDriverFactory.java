@@ -31,15 +31,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WebDriverFactory {
-    private static Map<SupportedWebDriver, WebDriver> webDriverInstances = new HashMap<SupportedWebDriver, WebDriver>();
+    public static Map<SupportedWebDriver, WebDriver> webDriverInstances = new HashMap<SupportedWebDriver, WebDriver>();
 
     public static synchronized WebDriver newWebdriverInstance(FluentCucumberAdapter adapter, SupportedWebDriver driverType, DesiredCapabilities capabilities) throws UnsupportedDriverException {
         if (SharedDriverHelper.isSharedDriverPerFeature(adapter.getClass())) {
             if (webDriverInstances.get(driverType) == null) {
                 webDriverInstances.put(driverType, getWebDriver(driverType, capabilities));
             }
+			if (FluentCucumberAdapter.sharedDriver != null) {
+				FluentCucumberAdapter.sharedDriver = webDriverInstances.get(driverType);
+			}
             return webDriverInstances.get(driverType);
         } else {
+			if (FluentCucumberAdapter.sharedDriver != null) {
+				FluentCucumberAdapter.sharedDriver = webDriverInstances.get(driverType);
+			}
             return getWebDriver(driverType, capabilities);
         }
     }
