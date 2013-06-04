@@ -14,15 +14,15 @@
 package org.fluentlenium.cucumber.adapter.util;
 
 
-import org.fluentlenium.cucumber.adapter.FluentCucumberAdapter;
+import org.fluentlenium.cucumber.adapter.FluentCucumberTest;
 
 /**
  * @author : Mathilde Lemee
  */
 public class ShutdownHook extends Thread {
-    private final FluentCucumberAdapter adapter;
+    private final FluentCucumberTest adapter;
 
-    public ShutdownHook(final String s, final FluentCucumberAdapter adapter) {
+    public ShutdownHook(final String s, final FluentCucumberTest adapter) {
         super(s);
         this.adapter = adapter;
     }

@@ -13,14 +13,14 @@
  */
 package org.fluentlenium.cucumber.adapter.util;
 
-import org.fluentlenium.cucumber.adapter.FluentCucumberAdapter;
+import org.fluentlenium.cucumber.adapter.FluentCucumberTest;
 
 public final class SharedDriverHelper {
 
 
     public static SharedDriver getSharedBrowser(final Class classe) {
         Class<?> cls;
-        for (cls = classe; FluentCucumberAdapter.class.isAssignableFrom(cls); cls = cls.getSuperclass()) {
+        for (cls = classe; FluentCucumberTest.class.isAssignableFrom(cls); cls = cls.getSuperclass()) {
             if (cls.isAnnotationPresent(SharedDriver.class)) {
                 return cls.getAnnotation(SharedDriver.class);
             }

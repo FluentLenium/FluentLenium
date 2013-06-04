@@ -14,20 +14,19 @@
 package org.fluentlenium.cucumber.step;
 
 import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.cucumber.adapter.FluentCucumberAdapter;
+import org.fluentlenium.cucumber.adapter.FluentCucumberTest;
 import org.fluentlenium.cucumber.adapter.util.SharedDriver;
 import org.fluentlenium.cucumber.page.LocalPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 @SharedDriver(type = SharedDriver.SharedType.PER_FEATURE)
-public class SimpleFeatureStep extends FluentCucumberAdapter {
+public class SimpleFeatureStep extends FluentCucumberTest {
 
     @Page
     LocalPage page;

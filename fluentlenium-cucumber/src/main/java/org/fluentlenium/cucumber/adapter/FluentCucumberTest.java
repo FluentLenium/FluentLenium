@@ -19,15 +19,15 @@ import org.fluentlenium.cucumber.adapter.util.SharedDriverHelper;
 import org.fluentlenium.cucumber.adapter.util.ShutdownHook;
 import org.openqa.selenium.WebDriver;
 
-public class FluentCucumberAdapter extends FluentAdapter {
+public class FluentCucumberTest extends FluentAdapter {
     public static boolean isSharedDriverPerScenario;
     public static WebDriver sharedDriver = null;
 
-    protected Fluent initFluentWithWebDriver(final FluentCucumberAdapter initializer) {
+    protected Fluent initFluentWithWebDriver(final FluentCucumberTest initializer) {
         return initFluentWithWebDriver(initializer, initializer.getDriver());
     }
 
-    protected Fluent initFluentWithWebDriver(final FluentCucumberAdapter initializer, WebDriver driver) {
+    protected Fluent initFluentWithWebDriver(final FluentCucumberTest initializer, WebDriver driver) {
         Class clazz = initializer.getClass();
 
         if (SharedDriverHelper.isSharedDriverPerFeature(clazz)) {
@@ -87,12 +87,6 @@ public class FluentCucumberAdapter extends FluentAdapter {
     private void initFluentFromDefaultDriver() {
         super.initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
     }
-
-//    @Override
-//    public WebDriver getDefaultDriver() {
-//        sharedDriver =
-//        return super.getDefaultDriver();    //To change body of overridden methods use File | Settings | File Templates.
-//    }
 
     @Override
     public void quit() {
