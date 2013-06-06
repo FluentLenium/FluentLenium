@@ -13,9 +13,7 @@
  */
 package org.fluentlenium.integration;
 
-import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 
@@ -24,15 +22,16 @@ import static org.fest.assertions.Assertions.assertThat;
 /**
  *
  */
-public class PageInPageTest extends LocalFluentCase {
+public class PageInPageWithAnnotationPageTest extends LocalFluentCase {
 
-    @Page
-    private TestPage testPage;
     @Page
     private SubSubTestPage subTestPage;
 
+
+
     @Test
     public void pages_should_be_injected() {
+        TestPage testPage = createPage(SubSubTestPage.class);
         assertThat(testPage).isNotNull();
         assertThat(testPage).isInstanceOf(TestPage.class);
         assertThat(testPage.includedPage).isNotNull();
@@ -43,31 +42,4 @@ public class PageInPageTest extends LocalFluentCase {
         assertThat(subTestPage.includedPage).isNotNull();
         assertThat(subTestPage.anotherIncludedPage).isNotNull();
     }
-}
-
-class TestPage extends FluentPage {
-    @Page
-    IncludedPage includedPage;
-}
-
-class SubSubTestPage extends SubTestPage {
-}
-
-class SubTestPage extends TestPage {
-    @Page
-    IncludedPage anotherIncludedPage;
-}
-
-
-class SubTestPageWithCreate extends FluentPage {
-   public IncludedPage pageWithCreatePage;
-
-    SubTestPageWithCreate() {
-        pageWithCreatePage = createPage(IncludedPage.class);
-    }
-
-}
-
-class IncludedPage extends FluentPage {
-    FluentWebElement element;
 }

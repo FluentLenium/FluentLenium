@@ -25,19 +25,11 @@ import static org.fest.assertions.Assertions.assertThat;
 public class PageInPageWithCreatePageTest extends LocalFluentCase {
 
     @Page
-    private SubSubTestPage subTestPage;
+    private SubTestPageWithCreate subTestPage;
 
     @Test
     public void pages_should_be_injected() {
-        TestPage testPage = createPage(SubSubTestPage.class);
-        assertThat(testPage).isNotNull();
-        assertThat(testPage).isInstanceOf(TestPage.class);
-        assertThat(testPage.includedPage).isNotNull();
-        assertThat(testPage.includedPage).isInstanceOf(IncludedPage.class);
-        assertThat(testPage.includedPage.element).isNotNull();
-        assertThat(subTestPage).isNotNull();
-        assertThat(subTestPage).isInstanceOf(SubTestPage.class);
-        assertThat(subTestPage.includedPage).isNotNull();
-        assertThat(subTestPage.anotherIncludedPage).isNotNull();
+        assertThat(subTestPage.pageWithCreatePage).isNotNull();
+        assertThat(subTestPage.pageWithCreatePage).isInstanceOf(IncludedPage.class);
     }
 }
