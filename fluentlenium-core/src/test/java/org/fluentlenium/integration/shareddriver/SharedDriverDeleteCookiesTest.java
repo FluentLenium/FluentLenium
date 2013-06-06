@@ -16,13 +16,16 @@ package org.fluentlenium.integration.shareddriver;
 
 import org.fluentlenium.adapter.util.SharedDriver;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.Cookie;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
 @SharedDriver(deleteCookies = true)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SharedDriverDeleteCookiesTest extends LocalFluentCase {
 
 
@@ -39,6 +42,8 @@ public class SharedDriverDeleteCookiesTest extends LocalFluentCase {
     assertThat($(".small", withName("name"))).hasSize(1);
     assertThat(this.getCookie("cookie")).isNull();
   }
+
+
 
 
 }
