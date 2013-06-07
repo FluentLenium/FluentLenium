@@ -402,6 +402,29 @@ public class LoginPage extends FluentPage {
    }
 }
 ```
+
+If the naming conventions of your HTML ids and names don't match with the naming conventions of your Java fields,
+or if you want to select an element with something other than the id or name, you can annotate the field with the
+Selenium `@FindBy` (or `@FindBys`) annotation. The following example shows how to find the create button if its CSS class is
+`create-button`.
+
+```java
+public class LoginPage extends FluentPage {
+   @FindBy(css = "button.create-button")
+   FluentWebElement createButton;
+   public String getUrl() {
+       return "myCustomUrl";
+   }
+   public void isAt() {
+       assertThat(title()).isEqualTo("MyTitle");
+   }
+   public void fillAndSubmitForm(String... paramsOrdered) {
+       fill("input").with(paramsOrdered);
+       createButton.click();
+   }
+}
+```
+
 If you need to wait for an element to be present, especially when waiting for an ajax call to complete, you can use the @AjaxElement annotation on the fields :
 
 ```java

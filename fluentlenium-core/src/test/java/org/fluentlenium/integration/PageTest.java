@@ -20,6 +20,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
+import org.openqa.selenium.support.FindBy;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -51,7 +52,7 @@ public class PageTest extends LocalFluentCase {
     @Test
     public void checkFollowLink() {
         page.go();
-        page.goToNexPage();
+        page.goToNextPage();
         page2.isAt();
     }
 
@@ -59,14 +60,24 @@ public class PageTest extends LocalFluentCase {
     public void checkFollowLinkWithBddStyle() {
         goTo(page);
         assertAt(page);
-        page.goToNexPage();
+        page.goToNextPage();
         assertAt(page2);
+    }
+
+    @Test
+    public void checkFollowLinkFoundWithFindBy() {
+        page.go();
+        page.goToNextPageWithFindByClassLink();
+        page2.isAt();
     }
 }
 
 class PageAccueil extends FluentPage {
 
     FluentWebElement linkToPage2;
+
+    @FindBy(css = "a.go-next")
+    FluentWebElement linkToPage2FoundWithFindBy;
 
     @Override
     public String getUrl() {
@@ -78,8 +89,12 @@ class PageAccueil extends FluentPage {
         assertThat($("title").first().getText()).contains("Selenium");
     }
 
-    public void goToNexPage() {
+    public void goToNextPage() {
         linkToPage2.click();
+    }
+
+    public void goToNextPageWithFindByClassLink() {
+        linkToPage2FoundWithFindBy.click();
     }
 }
 
