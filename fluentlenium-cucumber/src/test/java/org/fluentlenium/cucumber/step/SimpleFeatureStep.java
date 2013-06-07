@@ -52,7 +52,7 @@ public class SimpleFeatureStep extends FluentCucumberTest {
         this.initFluent();
         this.initTest();
 
-        click("a");
+        click("a#linkToPage2");
     }
 
     @Then(value = "feature I am on the second page")
