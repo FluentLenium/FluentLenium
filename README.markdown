@@ -242,6 +242,8 @@ you can also use the filtering provided by FluentLenium `fill("input", with("typ
 `fill("input").with("myLogin","myPassword")` will fill the first element of the input selection with myLogin, the second with myPassword. 
 If there are more input elements found, the last value (myPassword) will be repeated for each subsequent element.
 
+If you're trying to fill a select element, you can use `fillSelect("daySelector").withValue("MONDAY")` to fill it with a value, `fillSelect("daySelector").withIndex(1)` to fill it with a value by its index or `fillSelect("daySelector").withText("Monday")` to fill it with a value by its text.
+
 Don't forget, only visible fields will be modified. It simulates a real person using a browser!
 
 ### Click
