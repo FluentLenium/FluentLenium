@@ -50,7 +50,7 @@ public class SimpleScenarioStep extends FluentCucumberTest {
 		this.initFluent();
 		this.initTest();
 
-        click("a");
+        click("a#linkToPage2");
     }
 
     @Then(value = "scenario I am on the second page")
