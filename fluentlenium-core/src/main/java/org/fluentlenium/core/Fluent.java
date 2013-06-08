@@ -16,6 +16,7 @@ package org.fluentlenium.core;
 
 import org.apache.commons.io.FileUtils;
 import org.fluentlenium.core.action.FillConstructor;
+import org.fluentlenium.core.action.FillSelectConstructor;
 import org.fluentlenium.core.action.FluentDefaultActions;
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
@@ -235,6 +236,7 @@ public abstract class Fluent implements SearchActions {
             throw new RuntimeException(e);
         }
     }
+
     /**
      * Get the base URL to use when visiting relative URLs, if one is configured
      *
@@ -417,6 +419,16 @@ public abstract class Fluent implements SearchActions {
      */
     public FillConstructor fill(FluentDefaultActions list, Filter... filters) {
         return new FillConstructor(list, getDriver(), filters);
+    }
+
+    /**
+     * Construct a FillSelectConstructor in order to allow easy fill
+     * Be careful - only the visible elements are filled
+     *
+     * @param cssSelector
+     */
+    public FillSelectConstructor fillSelect(String cssSelector, Filter... filters) {
+        return new FillSelectConstructor(cssSelector, getDriver(), filters);
     }
 
     /**
