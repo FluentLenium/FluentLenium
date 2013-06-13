@@ -30,14 +30,14 @@ public abstract class SauceLabsFluentCase extends FluentTest {
 
     @Override
     public WebDriver getDefaultDriver() {
-        DesiredCapabilities capabillities = new DesiredCapabilities(
+        DesiredCapabilities capabilities = new DesiredCapabilities(
                 "firefox", "3.6.", Platform.WINDOWS);
-        capabillities.setCapability("name", "Test of FluentLenium");
+      capabilities.setCapability("name", "Test of FluentLenium");
         WebDriver driver = null;
         try {
             driver = new RemoteWebDriver(
                     new URL("http://fluentlenium:8906940f-5638-4c29-beb6-c331df039f48@ondemand.saucelabs.com:80/wd/hub"),
-                    capabillities);
+                    capabilities);
         } catch (MalformedURLException e) {
         }
         return driver;
