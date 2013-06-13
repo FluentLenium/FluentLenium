@@ -33,14 +33,13 @@ public abstract class SauceLabsFluentCase extends FluentTest {
         DesiredCapabilities capabilities = new DesiredCapabilities(
                 "firefox", "3.6.", Platform.WINDOWS);
       capabilities.setCapability("name", "Test of FluentLenium");
-        WebDriver driver = null;
         try {
-            driver = new RemoteWebDriver(
-                    new URL("http://fluentlenium:8906940f-5638-4c29-beb6-c331df039f48@ondemand.saucelabs.com:80/wd/hub"),
-                    capabilities);
+            return new RemoteWebDriver(
+                   new URL("http://fluentlenium:8906940f-5638-4c29-beb6-c331df039f48@ondemand.saucelabs.com:80/wd/hub"),
+                   capabilities);
         } catch (MalformedURLException e) {
+            return null;
         }
-        return driver;
     }
 }
 
