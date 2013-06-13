@@ -28,7 +28,7 @@ public class FillConstructor extends org.fluentlenium.core.Fluent {
         this.filters = filters;
     }
 
-    public FillConstructor(FluentDefaultActions list, WebDriver driver, Filter[] filters) {
+    public FillConstructor(FluentDefaultActions list, WebDriver driver, Filter... filters) {
         super(driver);
         this.filters = filters.clone();
         this.fluentList = list;
