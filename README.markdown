@@ -405,6 +405,30 @@ public class LoginPage extends FluentPage {
 }
 ```
 
+Not only FluentWebElement fields are populated. Every type with a constructor taking a WebElement is a candidate.
+This makes it possible for the page to expose fields with functional methods and not (only) the 'technical' methods
+that FluentWebElement exposes.
+
+```java
+public class LoginPage extends FluentPage {
+   MyButton createButton;
+   public void fillAndSubmitForm(String... paramsOrdered) {
+       fill("input").with(paramsOrdered);
+       createButton.clickTwice();
+   }
+   public static class MyButton {
+       WebElement webElement;
+       public MyButton(WebElement webElement) {
+           this.webElement = webElement;
+       }
+       public void clickTwice() {
+           webElement.click();
+           webElement.click();
+       }
+   }
+}
+```
+
 If the naming conventions of your HTML ids and names don't match with the naming conventions of your Java fields,
 or if you want to select an element with something other than the id or name, you can annotate the field with the
 Selenium `@FindBy` (or `@FindBys`) annotation. The following example shows how to find the create button if its CSS class is
