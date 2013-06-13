@@ -271,6 +271,27 @@ public class FluentWaitMatcher {
     }
 
     /**
+     * Check that the elements are all not displayed
+     *
+     * @return
+     */
+    public Fluent areNotDisplayed() {
+        Predicate isNotVisible = new com.google.common.base.Predicate<WebDriver>() {
+            public boolean apply(WebDriver webDriver) {
+                FluentList<FluentWebElement> fluentWebElements = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()]));
+                for (FluentWebElement fluentWebElement : fluentWebElements) {
+                    if (fluentWebElement.isDisplayed()) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        };
+        until(wait, isNotVisible, filters, isDisplayedMessage(selector));
+        return FluentThread.get();
+    }
+
+    /**
      * Check that the elements are all enabled
      *
      * @return

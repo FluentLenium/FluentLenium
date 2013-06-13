@@ -260,6 +260,24 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     }
 
     @Test
+    public void when_element_is_not_present_then_areNotDisplayed_return_true() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).until("#nonexistent").areNotDisplayed();
+    }
+
+    @Test
+    public void when_element_is_not_displayed_then_areNotDisplayed_return_true() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).until("#unvisible").areNotDisplayed();
+    }
+
+    @Test(expected = TimeoutException.class)
+    public void when_element_is_displayed_then_areNotDisplayed_throws_exception() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).until("#default").areNotDisplayed();
+    }
+
+    @Test
     public void when_element_is_enabled_then_areEnabled_return_true() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until("#default").areEnabled();
