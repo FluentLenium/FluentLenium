@@ -24,7 +24,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 public class FluentWebElementTest {
@@ -50,14 +49,11 @@ public class FluentWebElementTest {
         fluentWebElementAssert.isEnabled();
     }
 
-
     @Test
     public void testIsNotEnabledOk() {
         when(fluentWebElement.isEnabled()).thenReturn(false);
         fluentWebElementAssert.isNotEnabled();
-        assertTrue(true);
     }
-
 
     @Test(expected = AssertionError.class)
     public void testIsNotEnabledKo() {
@@ -69,7 +65,6 @@ public class FluentWebElementTest {
     public void testIsDisplayedOk() {
         when(fluentWebElement.isDisplayed()).thenReturn(true);
         fluentWebElementAssert.isDisplayed();
-        assertTrue(true);
     }
 
     @Test(expected = AssertionError.class)
@@ -82,7 +77,6 @@ public class FluentWebElementTest {
     public void testIsNotDisplayed() {
         when(fluentWebElement.isDisplayed()).thenReturn(false);
         fluentWebElementAssert.isNotDisplayed();
-        assertTrue(true);
     }
 
     @Test(expected = AssertionError.class)
@@ -95,7 +89,6 @@ public class FluentWebElementTest {
     public void testIsNotSelectedOk() {
         when(fluentWebElement.isSelected()).thenReturn(false);
         fluentWebElementAssert.isNotSelected();
-        assertTrue(true);
     }
 
     @Test(expected = AssertionError.class)
@@ -108,7 +101,6 @@ public class FluentWebElementTest {
     public void testIsSelectedOk() {
         when(fluentWebElement.isSelected()).thenReturn(true);
         fluentWebElementAssert.isSelected();
-        assertTrue(true);
     }
 
     @Test(expected = AssertionError.class)
@@ -121,7 +113,6 @@ public class FluentWebElementTest {
     public void testHasIdOk() throws Exception {
         when(fluentWebElement.getId()).thenReturn("some id");
         fluentWebElementAssert.hasId("some id");
-        assertTrue(true);
     }
 
     @Test(expected = AssertionError.class)
