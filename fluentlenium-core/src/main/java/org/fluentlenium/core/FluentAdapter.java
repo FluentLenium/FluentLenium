@@ -40,14 +40,13 @@ public class FluentAdapter extends Fluent {
     }
 
     protected void initTest() {
-        Class cls = null;
         try {
             injectPageIntoContainer(this);
              initFluentWebElements(this);
         } catch (ClassNotFoundException e) {
-            throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
+            throw new ConstructionException("Class not found", e);
         } catch (IllegalAccessException e) {
-            throw new ConstructionException("IllegalAccessException on class " + (cls != null ? cls.getName() : " null"), e);
+            throw new ConstructionException("IllegalAccessException", e);
         }
     }
 
@@ -83,7 +82,7 @@ public class FluentAdapter extends Fluent {
 
 
     protected <T extends FluentPage> T initClass(Class<T> cls) {
-        T page = null;
+        T page;
         try {
             Constructor construct = cls.getDeclaredConstructor();
             construct.setAccessible(true);
@@ -95,15 +94,15 @@ public class FluentAdapter extends Fluent {
             //init fields with default proxies
             initFluentWebElements(page);
         } catch (ClassNotFoundException e) {
-            throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
+            throw new ConstructionException("Class " + cls.getName() + "not found", e);
         } catch (IllegalAccessException e) {
-            throw new ConstructionException("IllegalAccessException on class " + (cls != null ? cls.getName() : " null"), e);
+            throw new ConstructionException("IllegalAccessException on class " + cls.getName(), e);
         } catch (NoSuchMethodException e) {
-            throw new ConstructionException("No constructor found on class " + (cls != null ? cls.getName() : " null"), e);
+            throw new ConstructionException("No constructor found on class " + cls.getName(), e);
         } catch (InstantiationException e) {
-            throw new ConstructionException("Unable to instantiate " + (cls != null ? cls.getName() : " null"), e);
+            throw new ConstructionException("Unable to instantiate " + cls.getName(), e);
         } catch (InvocationTargetException e) {
-            throw new ConstructionException("Cannot invoke method setDriver on " + (cls != null ? cls.getName() : " null"), e);
+            throw new ConstructionException("Cannot invoke method setDriver on " + cls.getName(), e);
         }
         return page;
     }
