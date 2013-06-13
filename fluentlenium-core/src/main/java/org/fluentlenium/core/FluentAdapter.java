@@ -15,7 +15,6 @@ package org.fluentlenium.core;
 
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.exception.ConstructionException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,7 +26,6 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
 
 import java.lang.reflect.*;
-
 
 public class FluentAdapter extends Fluent {
 
@@ -126,10 +124,6 @@ public class FluentAdapter extends Fluent {
     }
 
 
-    private boolean isFluentWebElementField(Field field) {
-        return FluentWebElement.class.isAssignableFrom(field.getType());
-    }
-
     private <T extends FluentPage> void initBaseUrl(T page, Class<?> parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         Method m;
         if (getBaseUrl() != null) {
@@ -145,6 +139,15 @@ public class FluentAdapter extends Fluent {
         m.invoke(page, getDriver());
     }
 
+    private boolean isFluentWebElementField(Field field) {
+        try {
+            return !Modifier.isFinal(field.getModifiers()) &&
+                    field.getType().getConstructor(WebElement.class) != null;
+        } catch (Exception e) {
+            return false; // Constructor not found
+        }
+    }
+
     private static void proxyElement(ElementLocatorFactory factory, Object page, Field field) {
         ElementLocator locator = factory.createLocator(field);
         if (locator == null) {
@@ -156,9 +159,9 @@ public class FluentAdapter extends Fluent {
                 page.getClass().getClassLoader(), new Class[]{WebElement.class}, handler);
         try {
             field.setAccessible(true);
-            field.set(page, new FluentWebElement(proxy));
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+            field.set(page, field.getType().getConstructor(WebElement.class).newInstance(proxy));
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to find an accessible constructor with an argument of type WebElement in " + field.getType(), e);
         }
     }
 
