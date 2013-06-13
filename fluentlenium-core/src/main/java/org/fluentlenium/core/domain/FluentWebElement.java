@@ -15,7 +15,7 @@
 package org.fluentlenium.core.domain;
 
 import org.fluentlenium.core.FluentThread;
-import org.fluentlenium.core.action.FluentDefaultActions;
+import org.fluentlenium.core.action.*;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
@@ -222,5 +222,13 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public String html() {
         return webElement.getAttribute("innerHTML");
+    }
+
+    /**
+     * Construct a FillConstructor in order to allow easy fill
+     * Be careful - only the visible elements are filled
+     */
+    public FillConstructor fill() {
+      return new FillConstructor(this, FluentThread.get().getDriver());
     }
 }
