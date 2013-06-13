@@ -18,25 +18,21 @@ package org.fest.assertions.fluentlenium.unit;
 import org.fest.assertions.fluentlenium.FluentLeniumAssertions;
 import org.fest.assertions.fluentlenium.custom.FluentWebElementAssert;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.Dimension;
 
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class FluentWebElementTest {
     @Mock
     FluentWebElement fluentWebElement;
     @InjectMocks
     FluentWebElementAssert fluentWebElementAssert = FluentLeniumAssertions.assertThat(fluentWebElement);
-
-    @Before
-    public void before() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     public void testIsEnabledOk() {
@@ -121,18 +117,18 @@ public class FluentWebElementTest {
         when(fluentWebElement.getId()).thenReturn("other id");
         fluentWebElementAssert.hasId("some id");
     }
-	
-	@Test
-	public void testHasClassOk() throws Exception {
-		when(fluentWebElement.getAttribute("class")).thenReturn("some class");
-        fluentWebElementAssert.hasClass("some class");
-	}
 
-	@Test(expected = AssertionError.class)
-	public void testHasClassKo() throws Exception {
-		when(fluentWebElement.getAttribute("class")).thenReturn("other class");
+    @Test
+    public void testHasClassOk() throws Exception {
+        when(fluentWebElement.getAttribute("class")).thenReturn("some class");
         fluentWebElementAssert.hasClass("some class");
-	}
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasClassKo() throws Exception {
+        when(fluentWebElement.getAttribute("class")).thenReturn("other class");
+        fluentWebElementAssert.hasClass("some class");
+    }
 
     @Test(expected = AssertionError.class)
     public void testHasAttributeKo() throws Exception {
