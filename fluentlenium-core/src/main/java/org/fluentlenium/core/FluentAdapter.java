@@ -84,9 +84,9 @@ public class FluentAdapter extends Fluent {
     protected <T extends FluentPage> T initClass(Class<T> cls) {
         T page;
         try {
-            Constructor construct = cls.getDeclaredConstructor();
+            Constructor<T> construct = cls.getDeclaredConstructor();
             construct.setAccessible(true);
-            page = (T) construct.newInstance();
+            page = construct.newInstance();
             Class parent = Class.forName(Fluent.class.getName());
             initDriver(page, parent);
             initBaseUrl(page, parent);
@@ -107,7 +107,7 @@ public class FluentAdapter extends Fluent {
         return page;
     }
 
-    private <T extends Fluent> void initFluentWebElements( T page) {
+    private <T extends Fluent> void initFluentWebElements(T page) {
         for (Class classz = page.getClass();
              FluentAdapter.class.isAssignableFrom(classz) || FluentPage.class.isAssignableFrom(classz);
              classz = classz.getSuperclass()) {
@@ -130,7 +130,7 @@ public class FluentAdapter extends Fluent {
         return FluentWebElement.class.isAssignableFrom(field.getType());
     }
 
-    private <T extends FluentPage> void initBaseUrl(T page, Class parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    private <T extends FluentPage> void initBaseUrl(T page, Class<?> parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         Method m;
         if (getBaseUrl() != null) {
             m = parent.getDeclaredMethod("withDefaultUrl", String.class);
@@ -139,11 +139,10 @@ public class FluentAdapter extends Fluent {
         }
     }
 
-    private <T extends FluentPage> void initDriver(T page, Class parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    private <T extends FluentPage> void initDriver(T page, Class<?> parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         Method m = parent.getDeclaredMethod("initFluent", WebDriver.class);
         m.setAccessible(true);
         m.invoke(page, getDriver());
-
     }
 
     private static void proxyElement(ElementLocatorFactory factory, Object page, Field field) {
