@@ -40,7 +40,7 @@ public class FluentAdapter extends Fluent {
     protected void initTest() {
         try {
             injectPageIntoContainer(this);
-             initFluentWebElements(this);
+            initFluentWebElements(this);
         } catch (ClassNotFoundException e) {
             throw new ConstructionException("Class not found", e);
         } catch (IllegalAccessException e) {
@@ -80,17 +80,18 @@ public class FluentAdapter extends Fluent {
 
 
     protected <T extends FluentPage> T initClass(Class<T> cls) {
-        T page;
         try {
             Constructor<T> construct = cls.getDeclaredConstructor();
             construct.setAccessible(true);
-            page = construct.newInstance();
+            T page = construct.newInstance();
             Class parent = Class.forName(Fluent.class.getName());
             initDriver(page, parent);
             initBaseUrl(page, parent);
 
             //init fields with default proxies
             initFluentWebElements(page);
+
+            return page;
         } catch (ClassNotFoundException e) {
             throw new ConstructionException("Class " + cls.getName() + "not found", e);
         } catch (IllegalAccessException e) {
@@ -102,7 +103,6 @@ public class FluentAdapter extends Fluent {
         } catch (InvocationTargetException e) {
             throw new ConstructionException("Cannot invoke method setDriver on " + cls.getName(), e);
         }
-        return page;
     }
 
     private <T extends Fluent> void initFluentWebElements(T page) {
@@ -125,12 +125,13 @@ public class FluentAdapter extends Fluent {
 
 
     private <T extends FluentPage> void initBaseUrl(T page, Class<?> parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        Method m;
-        if (getBaseUrl() != null) {
-            m = parent.getDeclaredMethod("withDefaultUrl", String.class);
-            m.setAccessible(true);
-            m.invoke(page, getBaseUrl());
+        if (getBaseUrl() == null) {
+            return;
         }
+
+        Method m = parent.getDeclaredMethod("withDefaultUrl", String.class);
+        m.setAccessible(true);
+        m.invoke(page, getBaseUrl());
     }
 
     private <T extends FluentPage> void initDriver(T page, Class<?> parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
