@@ -26,7 +26,7 @@ public class WaitMessage {
     private static final String IS_NOT_PRESENT = " is not present.";
     private static final String IS_PRESENT = " is present.";
     private static final String HAS_NOT_THE_NAME = " has not the name ";
-    private static final String HAS_NOT_THE_SIZE = " has not the size";
+    private static final String HAS_NOT_THE_SIZE = " has not the size ";
     private static final String POINT = ".";
     private static final String HAS_NOT_THE_TEXT = " has not the text ";
     private static final String HAS_NOT_THE_ID = " has not the id ";
