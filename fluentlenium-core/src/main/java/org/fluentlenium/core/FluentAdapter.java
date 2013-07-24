@@ -100,7 +100,6 @@ public class FluentAdapter extends Fluent {
 
             //init fields with default proxies
             initFluentWebElements(page);
-
             return page;
         } catch (ClassNotFoundException e) {
             throw new ConstructionException("Class " + cls.getName() + "not found", e);
