@@ -26,8 +26,12 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
 
 import java.lang.reflect.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FluentAdapter extends Fluent {
+
+    private final Map<Class, FluentPage> pageInstances = new HashMap<Class, FluentPage>();
 
     public FluentAdapter(WebDriver webDriver) {
         super(webDriver);
@@ -58,9 +62,15 @@ public class FluentAdapter extends Fluent {
                     field.setAccessible(true);
                     Class clsField = field.getType();
                     Class clsPage = Class.forName(clsField.getName());
-                    FluentPage page = initClass(clsPage);
-                    field.set(container, page);
-                    injectPageIntoContainer(page);
+                    Fluent existingPage = pageInstances.get(clsPage);
+                    if (existingPage != null) {
+                        field.set(container, existingPage);
+                    } else {
+                        FluentPage page = initClass(clsPage);
+                        field.set(container, page);
+                        pageInstances.put(clsPage, page);
+                        injectPageIntoContainer(page);
+                    }
                 }
             }
         }
