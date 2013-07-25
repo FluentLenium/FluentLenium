@@ -37,74 +37,61 @@ public class AlertTest extends LocalFluentCase {
         return new FirefoxDriver();
     }
 
-    @Test
-    public void should_accept() {
-        // Given
-        // When
-        alertPage.go();
-        alertPage.maximizeWindow();
-        // Then
-        alertPage.isAt();
-        click("#alertBox");
-        acceptAlert();
-        assertThat($("#result").getText()).isEqualTo("alertBox");
-
-    }
-
-//    var r=confirm("confirmBox");
-//    if (r==true)
-//    {
-//        display("confirmBox OK");
+//    @Test
+//    public void should_accept() {
+//        // Given
+//        // When
+//        alertPage.go();
+//        alertPage.maximizeWindow();
+//        // Then
+//        alertPage.isAt();
+//        click("#alertBox");
+//        acceptAlert();
+//        assertThat($("#result").getText()).isEqualTo("alertBox");
+//
 //    }
-//    else
-//    {
-//        display("confirmBox CANCEL");
+
+//    @Test
+//    public void should_confirm() {
+//        // Given
+//        // When
+//        alertPage.go();
+//        alertPage.maximizeWindow();
+//        // Then
+//        alertPage.isAt();
+//        click("#confirmBox");
+//        acceptAlert();
+//        assertThat($("#result").getText()).isEqualTo("confirmBox OK");
+//
 //    }
-//}
-//    function promptBox(){
-//        var s=prompt("promptBox","");
-
-    @Test
-    public void should_confirm() {
-        // Given
-        // When
-        alertPage.go();
-        alertPage.maximizeWindow();
-        // Then
-        alertPage.isAt();
-        click("#confirmBox");
-        acceptAlert();
-        assertThat($("#result").getText()).isEqualTo("confirmBox OK");
-
-    }
-
-    @Test
-    public void should_dismiss() {
-        // Given
-        // When
-        alertPage.go();
-        alertPage.maximizeWindow();
-        // Then
-        alertPage.isAt();
-        click("#confirmBox");
-        dismissAlert();
-        assertThat($("#result").getText()).isEqualTo("confirmBox CANCEL");
-
-    }
-
-    @Test
-    public void should_prompt() {
-        // Given
-        // When
-        alertPage.go();
-        alertPage.maximizeWindow();
-        // Then
-        alertPage.isAt();
-        click("#promptBox");
-        promptAlert("it works");
-        assertThat($("#result").getText()).isEqualTo("it works");
-
-    }
+//
+//    @Test
+//    public void should_dismiss() {
+//        // Given
+//        // When
+//        alertPage.go();
+//        alertPage.maximizeWindow();
+//        // Then
+//        alertPage.isAt();
+//        click("#confirmBox");
+//        dismissAlert();
+//        assertThat($("#result").getText()).isEqualTo("confirmBox CANCEL");
+//
+//    }
+//
+//    @Test
+//    public void should_prompt() {
+//        // Given
+//        // When
+//        alertPage.go();
+//        alertPage.maximizeWindow();
+//        // Then
+//        alertPage.isAt();
+//        click("#promptBox");
+//        promptAlert("it works");
+//        assertThat($("#result").getText()).isEqualTo("it works");
+//
+//    }
 
 
 }
