@@ -531,5 +531,39 @@ public abstract class Fluent implements SearchActions {
         return this;
     }
 
+  /**
+   * Swith to the selected Element (if element is null or not an iframe, or haven't an id then
+   * switch to the default)
+   *
+   * @param element
+   */
+  public Fluent switchTo(FluentWebElement element) {
+    if (null == element ||
+        null == element.getTagName() ||
+        null == element.getId() ||
+        !"iframe".equals(element.getTagName())) {
+      driver.switchTo().defaultContent();
+    } else {
+      driver.switchTo().frame(element.getId());
+    }
+    return this;
+  }
+
+  /**
+   * Swith to the default element
+   */
+  public Fluent switchTo() {
+    this.switchTo(null);
+    return this;
+  }
+
+
+  /**
+   * Swith to the default element
+   */
+  public Fluent switchToDefault() {
+    this.switchTo(null);
+    return this;
+  }
 
 }
