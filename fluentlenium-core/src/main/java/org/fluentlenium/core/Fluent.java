@@ -566,4 +566,38 @@ public abstract class Fluent implements SearchActions {
     return this;
   }
 
+  /**
+   * When an alert box pops up, click on "OK"
+   */
+  public Fluent acceptAlert(){
+    getDriver().switchTo().alert().accept();
+    return this;
+  }
+
+  /**
+   * When an alert box pops up, click on "Cancel"
+   */
+  public Fluent dismissAlert(){
+    getDriver().switchTo().alert().dismiss();
+    return this;
+  }
+
+  /**
+   * Entering an input value
+   * @param s field to enter
+   */
+  public Fluent promptAlert(String s){
+    getDriver().switchTo().alert().sendKeys(s);
+    acceptAlert();
+    return this;
+  }
+
+  /**
+   * Maximize browser window using webdriver
+   */
+  public Fluent maximizeWindow(){
+      getDriver().manage().window().maximize();
+      return this;
+  }
+
 }
