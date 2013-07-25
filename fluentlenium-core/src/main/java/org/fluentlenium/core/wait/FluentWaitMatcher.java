@@ -50,11 +50,7 @@ public class FluentWaitMatcher {
     public Fluent hasAttribute(final String attribute, final String value) {
         Predicate hasAttribute = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(WebDriver webDriver) {
-                if (filters.size() > 0) {
-                    return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getAttributes(attribute).contains(value);
-                } else {
-                    return search.find(selector).getAttributes(attribute).contains(value);
-                }
+                return find().getAttributes(attribute).contains(value);
             }
         };
         until(wait, hasAttribute, filters, hasAttributeMessage(selector, attribute, value));
@@ -82,11 +78,7 @@ public class FluentWaitMatcher {
     public Fluent hasId(final String value) {
         Predicate hasId = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(WebDriver webDriver) {
-                if (filters.size() > 0) {
-                    return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getIds().contains(value);
-                } else {
-                    return search.find(selector).getIds().contains(value);
-                }
+                return find().getIds().contains(value);
             }
         };
         until(wait, hasId, filters, hasIdMessage(selector, value));
@@ -101,12 +93,7 @@ public class FluentWaitMatcher {
     public Fluent hasName(final String value) {
         Predicate hasName = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(WebDriver webDriver) {
-                int size1;
-                if (filters.size() > 0) {
-                    return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getNames().contains(value);
-                } else {
-                    return search.find(selector).getNames().contains(value);
-                }
+                return find().getNames().contains(value);
             }
         };
         until(wait, hasName, filters, hasNameMessage(selector, value));
@@ -130,13 +117,7 @@ public class FluentWaitMatcher {
     public Fluent hasSize(final int size) {
         Predicate hasSize = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(WebDriver webDriver) {
-                int size1;
-                if (filters.size() > 0) {
-                    size1 = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).size();
-                } else {
-                    size1 = search.find(selector).size();
-                }
-                return size1 == size;
+                return find().size() == size;
             }
         };
         until(wait, hasSize, filters, hasSizeMessage(selector, size));
@@ -152,12 +133,7 @@ public class FluentWaitMatcher {
     public Fluent containsText(final String value) {
         Predicate hasText = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(WebDriver webDriver) {
-                List<String> texts;
-                if (filters.size() > 0) {
-                    texts = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getTexts();
-                } else {
-                    texts = search.find(selector).getTexts();
-                }
+                List<String> texts = find().getTexts();
                 if (texts != null) {
                     for (String text : texts) {
                         if (text.contains(value)) {
@@ -180,11 +156,7 @@ public class FluentWaitMatcher {
     public Fluent hasText(final String value) {
         Predicate hasText = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(WebDriver webDriver) {
-                if (filters.size() > 0) {
-                    return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).getTexts().contains(value);
-                } else {
-                    return search.find(selector).getTexts().contains(value);
-                }
+                return find().getTexts().contains(value);
             }
         };
         until(wait, hasText, filters, hasTextMessage(selector, value));
@@ -198,12 +170,7 @@ public class FluentWaitMatcher {
     public Fluent isPresent() {
         Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(WebDriver webDriver) {
-                int size;
-                if (filters.size() > 0) {
-                    size = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).size();
-                } else {
-                    size = search.find(selector).size();
-                }
+                int size = find().size();
                 return size > 0;
             }
         };
@@ -219,13 +186,7 @@ public class FluentWaitMatcher {
     public Fluent isNotPresent() {
         Predicate isNotPresent = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(WebDriver webDriver) {
-                int size;
-                if (filters.size() > 0) {
-                    size = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()])).size();
-                } else {
-                    size = search.find(selector).size();
-                }
-                return size == 0;
+                return find().isEmpty();
             }
         };
 
@@ -242,26 +203,14 @@ public class FluentWaitMatcher {
     public Fluent areDisplayed() {
         Predicate isVisible = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(WebDriver webDriver) {
-                if (filters.size() > 0) {
-                    FluentList<FluentWebElement> fluentWebElements = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()]));
-                    if (fluentWebElements.size() > 0) {
-                        for (FluentWebElement fluentWebElement : fluentWebElements) {
-                            if (!fluentWebElement.isDisplayed()) {
-                                return false;
-                            }
+                FluentList<FluentWebElement> fluentWebElements = find();
+                if (fluentWebElements.size() > 0) {
+                    for (FluentWebElement fluentWebElement : fluentWebElements) {
+                        if (!fluentWebElement.isDisplayed()) {
+                            return false;
                         }
-                        return true;
                     }
-                } else {
-                    FluentList<FluentWebElement> fluentWebElements = search.find(selector);
-                    if (fluentWebElements.size() > 0) {
-                        for (FluentWebElement fluentWebElement : fluentWebElements) {
-                            if (!fluentWebElement.isDisplayed()) {
-                                return false;
-                            }
-                        }
-                        return true;
-                    }
+                    return true;
                 }
                 return false;
             }
@@ -278,7 +227,7 @@ public class FluentWaitMatcher {
     public Fluent areNotDisplayed() {
         Predicate isNotVisible = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(WebDriver webDriver) {
-                FluentList<FluentWebElement> fluentWebElements = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()]));
+                FluentList<FluentWebElement> fluentWebElements = findWithFilter();
                 for (FluentWebElement fluentWebElement : fluentWebElements) {
                     if (fluentWebElement.isDisplayed()) {
                         return false;
@@ -299,32 +248,32 @@ public class FluentWaitMatcher {
     public Fluent areEnabled() {
         Predicate isEnabled = new com.google.common.base.Predicate<WebDriver>() {
             public boolean apply(WebDriver webDriver) {
-                if (filters.size() > 0) {
-                    FluentList<FluentWebElement> fluentWebElements = search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()]));
-                    if (fluentWebElements.size() > 0) {
-                        for (FluentWebElement fluentWebElement : fluentWebElements) {
-                            if (!fluentWebElement.isEnabled()) {
-                                return false;
-                            }
+                FluentList<FluentWebElement> fluentWebElements = find();
+                if (fluentWebElements.size() > 0) {
+                    for (FluentWebElement fluentWebElement : fluentWebElements) {
+                        if (!fluentWebElement.isEnabled()) {
+                            return false;
                         }
-                        return true;
                     }
-                } else {
-                    FluentList<FluentWebElement> fluentWebElements = search.find(selector);
-                    if (fluentWebElements.size() > 0) {
-                        for (FluentWebElement fluentWebElement : fluentWebElements) {
-                            if (!fluentWebElement.isEnabled()) {
-                                return false;
-                            }
-                        }
-                        return true;
-                    }
+                    return true;
                 }
                 return false;
             }
         };
         until(wait, isEnabled, filters, isEnabledMessage(selector));
         return FluentThread.get();
+    }
+
+    private FluentList<FluentWebElement> find() {
+        if (filters.size() > 0) {
+            return findWithFilter();
+        } else {
+            return search.find(selector);
+        }
+    }
+
+    private FluentList<FluentWebElement> findWithFilter() {
+        return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()]));
     }
 
     /**
@@ -391,7 +340,7 @@ public class FluentWaitMatcher {
     }
 
     /**
-     * Check that the element has the corrsponding class
+     * Check that the element has the corresponding class
      *
      * @param value
      * @return
