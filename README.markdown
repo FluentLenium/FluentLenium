@@ -588,6 +588,25 @@ The default is PER_METHOD.
 
 You will also be able to decide if you want to clean the cookies between two methods using ```@SharedDriver(deleteCookies=true)``` or ```@SharedDriver(deleteCookies=false)```
 
+##Iframe
+If you want to switch the Selenium webDriver to an iframe (see this [Selenium FAQ](https://code.google.com/p/selenium/wiki/FrequentlyAskedQuestions#Q:_How_do_I_type_into_a_contentEditable_iframe?)),
+you can just call the method switchTo() :
+
+To switch to the default context :
+```java
+switchTo();
+```
+or
+```java
+switchToDefault();
+```
+
+To switch to the iframe selected :
+```java
+switchTo(find("iframe#frameid"));
+```
+
+
 ##Users/dev
 If you have any comments/remarks/bugs, please raise a issue on github : 
 [FluentLenium](https://github.com/FluentLenium/FluentLenium/issues) or contact us through the [mailing-list](https://groups.google.com/group/fluentlenium)
