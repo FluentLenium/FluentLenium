@@ -21,14 +21,18 @@ import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.fluentlenium.integration.localtest.SauceLabsFluentCase;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class AlertTest extends SauceLabsFluentCase {
 
-  @Page
-  private AlertPage alertPage;
+  @Before
+  public void before() {
+    goTo(DEFAULT_URL);
+
+  }
 
   @Override
   public WebDriver getDefaultDriver() {
@@ -41,60 +45,79 @@ public class AlertTest extends SauceLabsFluentCase {
   }
 
   @Test
-  public void should_accept() {
-    // Given
-    // When
-    alertPage.go();
-    alertPage.maximizeWindow();
-    // Then
-    alertPage.isAt();
-    click("#alertBox");
-    acceptAlert();
-    assertThat($("#result").getText()).isEqualTo("alertBox");
-
+  public void when_default_search_wait_then_implicit_wait() {
+    goTo(JAVASCRIPT_URL);
+    assertThat(find("#newField")).hasSize(1);
   }
 
-  @Test
-  public void should_confirm() {
-    // Given
-    // When
-    alertPage.go();
-    alertPage.maximizeWindow();
-    // Then
-    alertPage.isAt();
-    click("#confirmBox");
-    acceptAlert();
-    assertThat($("#result").getText()).isEqualTo("confirmBox OK");
-
-  }
-
-  @Test
-  public void should_dismiss() {
-    // Given
-    // When
-    alertPage.go();
-    alertPage.maximizeWindow();
-    // Then
-    alertPage.isAt();
-    click("#confirmBox");
-    dismissAlert();
-    assertThat($("#result").getText()).isEqualTo("confirmBox CANCEL");
-
-  }
-
-  @Test
-  public void should_prompt() {
-    // Given
-    // When
-    alertPage.go();
-    alertPage.maximizeWindow();
-    // Then
-    alertPage.isAt();
-    click("#promptBox");
-    promptAlert("it works");
-    assertThat($("#result").getText()).isEqualTo("it works");
-
-  }
+//  @Page
+//  private AlertPage alertPage;
+//
+//  @Override
+//  public WebDriver getDefaultDriver() {
+//    return new FirefoxDriver();
+//  }
+//
+//  @Override
+//  public void setDefaultConfig() {
+//    withDefaultSearchWait(5, TimeUnit.HOURS);
+//  }
+//
+//  @Test
+//  public void should_accept() {
+//    // Given
+//    // When
+//    alertPage.go();
+//    alertPage.maximizeWindow();
+//    // Then
+//    alertPage.isAt();
+//    click("#alertBox");
+//    acceptAlert();
+//    assertThat($("#result").getText()).isEqualTo("alertBox");
+//
+//  }
+//
+//  @Test
+//  public void should_confirm() {
+//    // Given
+//    // When
+//    alertPage.go();
+//    alertPage.maximizeWindow();
+//    // Then
+//    alertPage.isAt();
+//    click("#confirmBox");
+//    acceptAlert();
+//    assertThat($("#result").getText()).isEqualTo("confirmBox OK");
+//
+//  }
+//
+//  @Test
+//  public void should_dismiss() {
+//    // Given
+//    // When
+//    alertPage.go();
+//    alertPage.maximizeWindow();
+//    // Then
+//    alertPage.isAt();
+//    click("#confirmBox");
+//    dismissAlert();
+//    assertThat($("#result").getText()).isEqualTo("confirmBox CANCEL");
+//
+//  }
+//
+//  @Test
+//  public void should_prompt() {
+//    // Given
+//    // When
+//    alertPage.go();
+//    alertPage.maximizeWindow();
+//    // Then
+//    alertPage.isAt();
+//    click("#promptBox");
+//    promptAlert("it works");
+//    assertThat($("#result").getText()).isEqualTo("it works");
+//
+//  }
 
 }
 
