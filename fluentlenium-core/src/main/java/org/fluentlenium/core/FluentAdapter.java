@@ -52,6 +52,10 @@ public class FluentAdapter extends Fluent {
         }
     }
 
+    protected void cleanUpTest() {
+        pageInstances.clear();
+    }
+
     private void injectPageIntoContainer(Fluent container)
             throws ClassNotFoundException, IllegalAccessException {
         for (Class cls = container.getClass();
