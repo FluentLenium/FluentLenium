@@ -48,7 +48,7 @@ public class AlertOnLabsTest extends SauceLabsFluentCase {
     // Then
     alertPage.isAt();
     click("#alertBox");
-    acceptAlert();
+    alert().accept();
     assertThat($("#result").getText()).isEqualTo("alertBox");
 
   }
@@ -62,7 +62,7 @@ public class AlertOnLabsTest extends SauceLabsFluentCase {
     // Then
     alertPage.isAt();
     click("#confirmBox");
-    acceptAlert();
+    alert().accept();
     assertThat($("#result").getText()).isEqualTo("confirmBox OK");
 
   }
@@ -76,7 +76,7 @@ public class AlertOnLabsTest extends SauceLabsFluentCase {
     // Then
     alertPage.isAt();
     click("#confirmBox");
-    dismissAlert();
+    alert().dismiss();
     assertThat($("#result").getText()).isEqualTo("confirmBox CANCEL");
 
   }
@@ -90,7 +90,7 @@ public class AlertOnLabsTest extends SauceLabsFluentCase {
     // Then
     alertPage.isAt();
     click("#promptBox");
-    promptAlert("it works");
+    alert().prompt("it works");
     assertThat($("#result").getText()).isEqualTo("it works");
 
   }

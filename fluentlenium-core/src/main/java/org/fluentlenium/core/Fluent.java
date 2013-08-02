@@ -48,12 +48,14 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class Fluent implements SearchActions {
     private WebDriver driver;
+    private Alert alert;
     private String baseUrl;
     private Search search;
 
     public Fluent(WebDriver driver) {
         this.driver = driver;
         this.search = new Search(driver);
+        this.alert = new Alert(driver);
         FluentThread.set(this);
     }
 
@@ -132,6 +134,7 @@ public abstract class Fluent implements SearchActions {
     protected Fluent initFluent(WebDriver driver) {
         this.driver = driver;
         this.search = new Search(driver);
+        this.alert = new Alert(driver);
         return this;
     }
 
@@ -566,38 +569,16 @@ public abstract class Fluent implements SearchActions {
     return this;
   }
 
-  /**
-   * When an alert box pops up, click on "OK"
-   */
-  public Fluent acceptAlert(){
-    getDriver().switchTo().alert().accept();
-    return this;
-  }
-
-  /**
-   * When an alert box pops up, click on "Cancel"
-   */
-  public Fluent dismissAlert(){
-    getDriver().switchTo().alert().dismiss();
-    return this;
-  }
-
-  /**
-   * Entering an input value
-   * @param s field to enter
-   */
-  public Fluent promptAlert(String s){
-    getDriver().switchTo().alert().sendKeys(s);
-    acceptAlert();
-    return this;
+  public Alert alert(){
+    return alert;
   }
 
   /**
    * Maximize browser window using webdriver
    */
   public Fluent maximizeWindow(){
-      getDriver().manage().window().maximize();
-      return this;
+    getDriver().manage().window().maximize();
+    return this;
   }
 
 }
