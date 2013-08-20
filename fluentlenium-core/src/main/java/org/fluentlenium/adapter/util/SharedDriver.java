@@ -15,6 +15,7 @@ package org.fluentlenium.adapter.util;
 
 import org.openqa.selenium.Beta;
 
+import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -22,6 +23,7 @@ import java.lang.annotation.RetentionPolicy;
  * @author : Mathilde Lemee
  */
 @Retention(RetentionPolicy.RUNTIME)
+@Inherited
 @Beta
 public @interface SharedDriver {
     public enum SharedType {ONCE, PER_CLASS, PER_METHOD}
