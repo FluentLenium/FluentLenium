@@ -19,10 +19,10 @@ import org.fluentlenium.core.FluentAdapter;
 import org.fluentlenium.core.FluentPage;
 import org.junit.AfterClass;
 import org.junit.Rule;
-import org.junit.rules.MethodRule;
 import org.junit.rules.TestName;
-import org.junit.rules.TestWatchman;
-import org.junit.runners.model.FrameworkMethod;
+import org.junit.rules.TestRule;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
 import org.openqa.selenium.Beta;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -45,13 +45,12 @@ public abstract class FluentTest extends FluentAdapter {
     @Rule
     public TestName name = new TestName();
     @Rule
-    public MethodRule watchman = new TestWatchman() {
+    public TestRule watchman = new TestWatcher() {
         @Override
-        public void starting(FrameworkMethod method) {
-            super.starting(method);
+        public void starting(Description description) {
+            super.starting(description);
             //TODO Refactor
-            if (isSharedDriverOnce(method.getMethod()
-                    .getDeclaringClass())) {
+            if (isSharedDriverOnce(description.getTestClass())) {
                 synchronized (this) {
                     if (sharedDriver == null) {
                         initFluentFromDefaultDriver();
@@ -61,8 +60,7 @@ public abstract class FluentTest extends FluentAdapter {
                         initFluentWithExistingDriver();
                     }
                 }
-            } else if (isSharedDriverPerClass(method.getMethod()
-                    .getDeclaringClass())) {
+            } else if (isSharedDriverPerClass(description.getTestClass())) {
                 synchronized (this) {
                     if (!isSharedDriverPerClass) {
                         initFluentFromDefaultDriver();
@@ -82,13 +80,12 @@ public abstract class FluentTest extends FluentAdapter {
 
 
         @Override
-        public void finished(FrameworkMethod method) {
-            super.finished(method);
-            if (isSharedDriverPerMethod(method.getMethod()
-                    .getDeclaringClass()) || isDefaultSharedDriver(method.getMethod()
-                    .getDeclaringClass())) {
+        public void finished(Description description) {
+            super.finished(description);
+            if (isSharedDriverPerMethod(description.getTestClass()) ||
+                    isDefaultSharedDriver(description.getTestClass())) {
                 quit();
-            } else if (isDeleteCookies(method.getMethod().getDeclaringClass())) {
+            } else if (isDeleteCookies(description.getTestClass())) {
                 if (sharedDriver != null) {
                     sharedDriver.manage().deleteAllCookies();
                 }
@@ -96,10 +93,10 @@ public abstract class FluentTest extends FluentAdapter {
         }
 
         @Override
-        public void failed(Throwable e, FrameworkMethod method) {
+        public void failed(Throwable e, Description description) {
             if (snapshotMode == Mode.TAKE_SNAPSHOT_ON_FAIL) {
-                takeScreenShot(snapshotPath + "/" + method.getMethod()
-                        .getDeclaringClass().getSimpleName() + "_" + method.getName() + ".png");
+                takeScreenShot(snapshotPath + "/" + description.getTestClass().getSimpleName() + "_" +
+                        description.getMethodName() + ".png");
             }
         }
 
