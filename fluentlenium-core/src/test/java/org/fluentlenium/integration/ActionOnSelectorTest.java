@@ -16,8 +16,8 @@ package org.fluentlenium.integration;
 
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
-
 import static org.fest.assertions.Assertions.assertThat;
+import org.openqa.selenium.NoSuchElementException;
 
 public class ActionOnSelectorTest extends LocalFluentCase {
 
@@ -46,6 +46,18 @@ public class ActionOnSelectorTest extends LocalFluentCase {
         assertThat(title()).isEqualTo("Page 2");
     }
 
+    @Test
+    public void checkClickActionWrongSelector() {
+        goTo(DEFAULT_URL);
+        assertThat(title()).contains("Selenium");
+        try {
+            click("#BLUB");
+            org.junit.Assert.fail("NoSuchElementException should have been thrown!");
+        } catch(NoSuchElementException nsee) {
+            assertThat(nsee.getMessage()).startsWith("No Element found");
+        }
+    }    
+    
       @Test
     public void checkDoubleClickAction() {
         goTo(DEFAULT_URL);
