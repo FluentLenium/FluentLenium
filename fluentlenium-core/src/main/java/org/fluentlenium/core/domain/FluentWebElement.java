@@ -15,7 +15,7 @@
 package org.fluentlenium.core.domain;
 
 import org.fluentlenium.core.FluentThread;
-import org.fluentlenium.core.action.FluentDefaultActions;
+import org.fluentlenium.core.action.*;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
@@ -70,7 +70,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * Set the text elelent
+     * Set the text element
      *
      * @param text
      */
@@ -102,7 +102,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return the id of the elements
+     * return the id of the element
      *
      * @return
      */
@@ -120,7 +120,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return the value of the elements
+     * return the value of the element
      *
      * @return
      */
@@ -129,7 +129,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return true if the element is displayed, otherway return false
+     * return true if the element is displayed, otherwise return false
      *
      * @return
      */
@@ -138,7 +138,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return true if the element is enabled, otherway return false
+     * return true if the element is enabled, otherwise return false
      *
      * @return
      */
@@ -147,7 +147,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return true if the element is selected, otherway false
+     * return true if the element is selected, otherwise false
      *
      * @return
      */
@@ -174,7 +174,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return the size of the elements
+     * return the size of the element
      *
      * @return
      */
@@ -183,7 +183,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * find elements into the childs with the corresponding filters
+     * find elements into the children with the corresponding filters
      *
      * @param name
      * @param filters
@@ -194,7 +194,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * find elements into the childs with the corresponding filters at the given positiokn
+     * find elements into the children with the corresponding filters at the given position
      *
      * @param name
      * @param filters
@@ -205,7 +205,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * find elements into the childs with the corresponding filters at the first position
+     * find elements into the children with the corresponding filters at the first position
      *
      * @param name
      * @param filters
@@ -222,5 +222,13 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public String html() {
         return webElement.getAttribute("innerHTML");
+    }
+
+    /**
+     * Construct a FillConstructor in order to allow easy fill
+     * Be careful - only the visible elements are filled
+     */
+    public FillConstructor fill() {
+      return new FillConstructor(this, FluentThread.get().getDriver());
     }
 }
