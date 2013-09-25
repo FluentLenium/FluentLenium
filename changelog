@@ -1,3 +1,5 @@
+v0.9.1
+- update to selenium 2.35.0
 v0.9.0
 - update to selenium 2.33.0
 - add cucumber jvm
