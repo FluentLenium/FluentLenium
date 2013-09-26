@@ -11,3 +11,6 @@ org.fluentlenium.core.filter
 org.fluentlenium.core.filter.matcher
 org.fluentlenium.core.search
 org.fluentlenium.core.wait
+org.fluentlenium.cucumber.adapter
+org.fluentlenium.cucumber.adapter.exception
+org.fluentlenium.cucumber.adapter.util
