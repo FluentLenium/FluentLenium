@@ -74,7 +74,7 @@ import static org.fluentlenium.core.filter.FilterConstructor.*;
 The static assertions to use fest assert are :
 
 ```java
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 import static org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat;
 ```
 
