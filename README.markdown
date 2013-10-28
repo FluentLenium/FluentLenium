@@ -31,7 +31,7 @@ To add FluentLenium to your project, just add the following dependency to your `
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
-    <version>0.9.0</version>
+    <version>0.9.1</version>
     <scope>test</scope>
 </dependency>
 ```
