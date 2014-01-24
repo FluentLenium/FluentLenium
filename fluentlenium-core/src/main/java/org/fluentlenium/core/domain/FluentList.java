@@ -53,6 +53,10 @@ public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implem
      * Only the visible elements are filled
      */
     public FluentList click() {
+        if (this.size() == 0) {
+            throw new NoSuchElementException("No Element found");
+        }
+        
         for (E fluentWebElement : this) {
             if (fluentWebElement.isEnabled()) {
                 fluentWebElement.click();
