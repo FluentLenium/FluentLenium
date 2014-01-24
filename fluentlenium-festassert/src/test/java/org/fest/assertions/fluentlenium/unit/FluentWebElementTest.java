@@ -24,7 +24,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 public class FluentWebElementTest {
@@ -116,5 +116,30 @@ public class FluentWebElementTest {
         when(fluentWebElement.isSelected()).thenReturn(false);
         fluentWebElementAssert.isSelected();
     }
+
+    @Test
+    public void testHasIdOk() throws Exception {
+        when(fluentWebElement.getId()).thenReturn("some id");
+        fluentWebElementAssert.hasId("some id");
+        assertTrue(true);
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasIdKo() throws Exception {
+        when(fluentWebElement.getId()).thenReturn("other id");
+        fluentWebElementAssert.hasId("some id");
+    }
+	
+	@Test
+	public void testHasClassOk() throws Exception {
+		when(fluentWebElement.getAttribute("class")).thenReturn("some class");
+        fluentWebElementAssert.hasClass("some class");
+	}
+
+	@Test(expected = AssertionError.class)
+	public void testHasClassKo() throws Exception {
+		when(fluentWebElement.getAttribute("class")).thenReturn("other class");
+        fluentWebElementAssert.hasClass("some class");
+	}
 
 }

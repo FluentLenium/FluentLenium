@@ -149,4 +149,30 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
         super.fail("Object is selected");
     }
 
+    /**
+     * check if the element has the given id
+     *
+	 * @param id to check
+     * @return
+     */
+	public FluentWebElementAssert hasId(String id) {
+		if(!actual.getId().equals(id)) {
+			super.fail("The element does not have the id: " + id + " . Actual id found : " + actual.getId());
+		}
+		return this;
+	}
+
+    /**
+     * check if the element has the class
+     *
+	 * @param classToFind
+     * @return
+     */
+    public FluentWebElementAssert hasClass(String classToFind) {
+        if(!actual.getAttribute("class").contains(classToFind)){
+            super.fail("The element does not have the class: " + classToFind + " . Actual class found : " + actual.getAttribute("class"));
+        }
+
+       return this;
+    }
 }
