@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>0.9.2-SNAPSHOT</version>
+        <version>0.9.2</version>
     </parent>
     <artifactId>fluentlenium-festassert</artifactId>
     <packaging>jar</packaging>
