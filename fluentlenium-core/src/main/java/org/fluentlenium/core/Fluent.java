@@ -48,12 +48,14 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class Fluent implements SearchActions {
     private WebDriver driver;
+    private Alert alert;
     private String baseUrl;
     private Search search;
 
     public Fluent(WebDriver driver) {
         this.driver = driver;
         this.search = new Search(driver);
+        this.alert = new Alert(driver);
         FluentThread.set(this);
     }
 
@@ -132,6 +134,7 @@ public abstract class Fluent implements SearchActions {
     protected Fluent initFluent(WebDriver driver) {
         this.driver = driver;
         this.search = new Search(driver);
+        this.alert = new Alert(driver);
         return this;
     }
 
@@ -563,6 +566,18 @@ public abstract class Fluent implements SearchActions {
    */
   public Fluent switchToDefault() {
     this.switchTo(null);
+    return this;
+  }
+
+  public Alert alert(){
+    return alert;
+  }
+
+  /**
+   * Maximize browser window using webdriver
+   */
+  public Fluent maximizeWindow(){
+    getDriver().manage().window().maximize();
     return this;
   }
 

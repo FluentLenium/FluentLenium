@@ -606,6 +606,29 @@ To switch to the iframe selected :
 switchTo(find("iframe#frameid"));
 ```
 
+##Alert
+If you want manage alert (see this [Selenium FAQ](http://code.google.com/p/selenium/wiki/FrequentlyAskedQuestions#Q:_Does_WebDriver_support_Javascript_alerts_and_prompts?)),
+
+When an alert box pops up, click on "OK" :
+```java
+acceptAlert();
+```
+
+When an alert box pops up, click on "Cancel"
+```java
+dismissAlert();
+```
+
+Entering an input value in prompt
+```java
+promptAlert("FluentLenium")
+```
+
+##Window
+Maximize browser window
+```java
+maximizeWindow();
+```
 
 ##Users/dev
 If you have any comments/remarks/bugs, please raise a issue on github : 
