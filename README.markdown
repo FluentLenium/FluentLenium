@@ -611,17 +611,17 @@ If you want manage alert (see this [Selenium FAQ](http://code.google.com/p/selen
 
 When an alert box pops up, click on "OK" :
 ```java
-acceptAlert();
+alert().accept();
 ```
 
 When an alert box pops up, click on "Cancel"
 ```java
-dismissAlert();
+alert().dismiss();
 ```
 
 Entering an input value in prompt
 ```java
-promptAlert("FluentLenium")
+alert().prompt("FluentLenium")
 ```
 
 ##Window
