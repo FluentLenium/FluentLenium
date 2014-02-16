@@ -16,6 +16,7 @@ package org.fest.assertions.fluentlenium.custom;
 
 import org.fest.assertions.GenericAssert;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.openqa.selenium.Dimension;
 
 public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert, FluentWebElement> {
 
@@ -114,6 +115,14 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
         return this;
     }
 
+    private void failIsSelected() {
+        super.fail("Object not selected");
+    }
+
+    private void failIsNotSelected() {
+        super.fail("Object is selected");
+    }
+
     /**
      * check if the element contains the text
      *
@@ -139,14 +148,6 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
         }
 
        return this;
-    }
-
-    private void failIsSelected() {
-        super.fail("Object not selected");
-    }
-
-    private void failIsNotSelected() {
-        super.fail("Object is selected");
     }
 
     /**
@@ -175,4 +176,41 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
 
        return this;
     }
+
+    public FluentWebElementAssert hasAttribute(String attributeToFind) {
+        if (actual.getAttribute(attributeToFind) == null) {
+            super.fail("The element does not have the attribute: " + attributeToFind + ".");
+        }
+        return this;
+    }
+
+    public AttributeAssert containsAttribute(String attributeToFind) {
+        if (actual.getAttribute(attributeToFind) == null) {
+            super.fail("The element does not have the attribute: " + attributeToFind + ".");
+        }
+        return new AttributeAssert(actual.getAttribute(attributeToFind));
+    }
+
+    public FluentWebElementAssert hasName(String expectedName) {
+        if (!actual.getName().equals(expectedName)) {
+            super.fail("The element does not have the name: " + expectedName + ". Actual name is : " + actual.getName());
+        }
+        return this;
+    }
+
+    public FluentWebElementAssert hasValue(String expectedValue) {
+        if (!actual.getValue().equals(expectedValue)) {
+            super.fail("The element does not have the value: " + expectedValue + ". Actual value is : " + actual.getValue());
+        }
+        return this;
+    }
+
+    public FluentWebElementAssert hasSize(int width, int height) {
+        if (!actual.getSize().equals(new Dimension(width, height))) {
+            super.fail("The element does not have the dimension: " + new Dimension(width, height) + ". " +
+                    "Actual dimension is : " + actual.getSize());
+        }
+        return this;
+    }
+
 }
