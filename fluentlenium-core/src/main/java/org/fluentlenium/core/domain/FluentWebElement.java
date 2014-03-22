@@ -20,6 +20,7 @@ import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -171,6 +172,15 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public WebElement getElement() {
         return webElement;
+    }
+
+    /**
+     * return the location of the elements
+     *
+     * @return
+     */
+    public Point getLocation() {
+        return webElement.getLocation();
     }
 
     /**
