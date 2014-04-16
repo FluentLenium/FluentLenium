@@ -85,7 +85,6 @@ public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implem
                     }
                     if (fluentWebElement.isEnabled()) {
                         atMostOne=true;
-                        fluentWebElement.clear();
                         fluentWebElement.text(value);
                     }
                 }
