@@ -57,7 +57,9 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * Clear the element
      */
     public FluentWebElement clear() {
-        webElement.clear();
+        if (!isInputOfTypeFile()) {
+            webElement.clear();
+        }
         return this;
     }
 
@@ -70,12 +72,12 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * Set the text element
+     * Set the text elelent
      *
      * @param text
      */
     public FluentWebElement text(String... text) {
-        webElement.clear();
+        clear();
         if (text.length != 0) {
             webElement.sendKeys(text[0]);
         }
@@ -102,7 +104,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return the id of the element
+     * return the id of the elements
      *
      * @return
      */
@@ -120,7 +122,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return the value of the element
+     * return the value of the elements
      *
      * @return
      */
@@ -129,7 +131,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return true if the element is displayed, otherwise return false
+     * return true if the element is displayed, otherway return false
      *
      * @return
      */
@@ -138,7 +140,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return true if the element is enabled, otherwise return false
+     * return true if the element is enabled, otherway return false
      *
      * @return
      */
@@ -147,7 +149,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return true if the element is selected, otherwise false
+     * return true if the element is selected, otherway false
      *
      * @return
      */
@@ -174,7 +176,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return the size of the element
+     * return the size of the elements
      *
      * @return
      */
@@ -183,7 +185,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * find elements into the children with the corresponding filters
+     * find elements into the childs with the corresponding filters
      *
      * @param name
      * @param filters
@@ -194,7 +196,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * find elements into the children with the corresponding filters at the given position
+     * find elements into the childs with the corresponding filters at the given positiokn
      *
      * @param name
      * @param filters
@@ -230,5 +232,13 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public FillConstructor fill() {
       return new FillConstructor(this, FluentThread.get().getDriver());
+    }
+
+    /**
+     * This method return true if the current FluentWebElement is an input of type file
+     */
+    private boolean isInputOfTypeFile(){
+        return ("input".equalsIgnoreCase(this.getTagName()) &&
+            "file".equalsIgnoreCase(this.getAttribute("type")));
     }
 }
