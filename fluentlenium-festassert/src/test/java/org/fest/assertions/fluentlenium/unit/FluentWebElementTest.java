@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.openqa.selenium.Dimension;
 
 import static org.mockito.Mockito.when;
 
@@ -132,5 +133,95 @@ public class FluentWebElementTest {
 		when(fluentWebElement.getAttribute("class")).thenReturn("other class");
         fluentWebElementAssert.hasClass("some class");
 	}
+
+    @Test(expected = AssertionError.class)
+    public void testHasAttributeKo() throws Exception {
+        when(fluentWebElement.getAttribute("attrName")).thenReturn(null);
+        fluentWebElementAssert.hasAttribute("attrName");
+    }
+
+    @Test
+    public void testHasAttributeOk() throws Exception {
+        when(fluentWebElement.getAttribute("attrName")).thenReturn("attrValue");
+        fluentWebElementAssert.hasAttribute("attrName");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasTextKo() throws Exception {
+        when(fluentWebElement.getText()).thenReturn("other text");
+        fluentWebElementAssert.hasText("text to find");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasNotTextKo() throws Exception {
+        when(fluentWebElement.getText()).thenReturn("some text to find");
+        fluentWebElementAssert.hasNotText("text to find");
+    }
+
+    @Test
+    public void testHasNotTextOk() throws Exception {
+        when(fluentWebElement.getText()).thenReturn("other text");
+        fluentWebElementAssert.hasNotText("text to find");
+    }
+
+    @Test
+    public void testHasTextOk() throws Exception {
+        when(fluentWebElement.getText()).thenReturn("text to find");
+        fluentWebElementAssert.hasText("text to find");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasNameKo() throws Exception {
+        when(fluentWebElement.getName()).thenReturn("other name");
+        fluentWebElementAssert.hasName("name");
+    }
+
+    @Test
+    public void testHasNameOk() throws Exception {
+        when(fluentWebElement.getName()).thenReturn("name");
+        fluentWebElementAssert.hasName("name");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasValueKo() throws Exception {
+        when(fluentWebElement.getValue()).thenReturn("other value");
+        fluentWebElementAssert.hasValue("value");
+    }
+
+    @Test
+    public void testHasValueOk() throws Exception {
+        when(fluentWebElement.getValue()).thenReturn("value");
+        fluentWebElementAssert.hasValue("value");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasSizeKo() throws Exception {
+        when(fluentWebElement.getSize()).thenReturn(new Dimension(1, 2));
+        fluentWebElementAssert.hasSize(5, 7);
+    }
+
+    @Test
+    public void testHasSizeOk() throws Exception {
+        when(fluentWebElement.getSize()).thenReturn(new Dimension(1, 2));
+        fluentWebElementAssert.hasSize(1, 2);
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testContainsAttributeWithValueNoAttributeError() throws Exception {
+        when(fluentWebElement.getAttribute("attrName")).thenReturn(null);
+        fluentWebElementAssert.containsAttribute("attrName").withValue("value");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testContainsAttributeWithValueWrongAttributeValueError() throws Exception {
+        when(fluentWebElement.getAttribute("attrName")).thenReturn("actual value");
+        fluentWebElementAssert.containsAttribute("attrName").withValue("expected value");
+    }
+
+    @Test
+    public void testContainsAttributeWithValueOk() throws Exception {
+        when(fluentWebElement.getAttribute("attrName")).thenReturn("value");
+        fluentWebElementAssert.containsAttribute("attrName").withValue("value");
+    }
 
 }
