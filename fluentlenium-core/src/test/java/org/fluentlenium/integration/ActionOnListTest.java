@@ -57,13 +57,13 @@ public class ActionOnListTest extends LocalFluentCase {
     public void checkFillFileInput() {
         goTo(DEFAULT_URL);
         fill("#fileUpload").with("/data/fileName");
-        assertThat($("#fileUpload").getValue()).isEqualTo("fileName");
+        assertThat($("#fileUpload").getValue()).endsWith("fileName");
     }
 
     @Test
     public void checkFillFileInputUpperCase() {
         goTo(DEFAULT_URL);
         fill("#fileUpload2").with("/data/fileName");
-        assertThat($("#fileUpload2").getValue()).isEqualTo("fileName");
+        assertThat($("#fileUpload2").getValue()).endsWith("fileName");
     }
 }
