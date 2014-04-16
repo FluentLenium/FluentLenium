@@ -57,7 +57,9 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * Clear the element
      */
     public FluentWebElement clear() {
-        webElement.clear();
+        if (!this.isInputOfTypeFile()) {
+            webElement.clear();
+        }
         return this;
     }
 
@@ -75,7 +77,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * @param text
      */
     public FluentWebElement text(String... text) {
-        webElement.clear();
+        clear();
         if (text.length != 0) {
             webElement.sendKeys(text[0]);
         }
@@ -216,11 +218,19 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     *  return the innerHTML content of the web element
-     *  does not work with HTMLUnit
-     *  @return the underlying html content
+     * return the innerHTML content of the web element
+     * does not work with HTMLUnit
+     * @return the underlying html content
      */
     public String html() {
         return webElement.getAttribute("innerHTML");
+    }
+
+    /**
+     * This method return true if the current FluentWebElement is an input of type file
+     */
+    private boolean isInputOfTypeFile(){
+        return ("input".equalsIgnoreCase(this.getTagName()) &&
+            "file".equalsIgnoreCase(this.getAttribute("type")));
     }
 }
