@@ -39,7 +39,7 @@ public abstract class FluentTest extends FluentAdapter {
     private static boolean isSharedDriverPerClass;
 
     private Mode snapshotMode = Mode.NEVER_TAKE_SNAPSHOT;
-    private String snapshotPath;
+    private String snapshotPath = "default";
 
 
     @Rule
