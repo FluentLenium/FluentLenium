@@ -74,6 +74,9 @@ class JavascriptPageWithoutAjax extends FluentPage {
     }
 
     public String getText() {
+
+        click(newField);
+
         return newField.getText();
     }
 }

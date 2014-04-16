@@ -15,7 +15,7 @@
 package org.fluentlenium.core.domain;
 
 import org.fluentlenium.core.FluentThread;
-import org.fluentlenium.core.action.FluentDefaultActions;
+import org.fluentlenium.core.action.*;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
@@ -57,7 +57,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * Clear the element
      */
     public FluentWebElement clear() {
-        if (!this.isInputOfTypeFile()) {
+        if (!isInputOfTypeFile()) {
             webElement.clear();
         }
         return this;
@@ -207,7 +207,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * find elements into the childs with the corresponding filters at the first position
+     * find elements into the children with the corresponding filters at the first position
      *
      * @param name
      * @param filters
@@ -218,12 +218,20 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return the innerHTML content of the web element
-     * does not work with HTMLUnit
-     * @return the underlying html content
+     *  return the innerHTML content of the web element
+     *  does not work with HTMLUnit
+     *  @return the underlying html content
      */
     public String html() {
         return webElement.getAttribute("innerHTML");
+    }
+
+    /**
+     * Construct a FillConstructor in order to allow easy fill
+     * Be careful - only the visible elements are filled
+     */
+    public FillConstructor fill() {
+      return new FillConstructor(this, FluentThread.get().getDriver());
     }
 
     /**

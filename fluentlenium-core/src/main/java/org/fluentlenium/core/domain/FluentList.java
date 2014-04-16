@@ -263,7 +263,7 @@ public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implem
     }
 
     /**
-     * find elements into the childs with the corresponding filters
+     * find elements into the children with the corresponding filters
      *
      * @param name
      * @param filters
@@ -279,7 +279,7 @@ public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implem
 
 
     /**
-     * find elements into the childs with the corresponding filters at the position indicated by the number
+     * find elements into the children with the corresponding filters at the position indicated by the number
      *
      * @param name
      * @param number
@@ -295,7 +295,7 @@ public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implem
     }
 
     /**
-     * find elements into the childs with the corresponding filters at the first position
+     * find elements into the children with the corresponding filters at the first position
      *
      * @param name
      * @param filters

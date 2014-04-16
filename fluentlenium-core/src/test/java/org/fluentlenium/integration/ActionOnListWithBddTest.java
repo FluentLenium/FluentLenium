@@ -14,7 +14,7 @@
 
 package org.fluentlenium.integration;
 
-import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.*;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 
@@ -29,6 +29,14 @@ public class ActionOnListWithBddTest extends LocalFluentCase {
         FluentList input = find("input[type=text]");
         fill(input).with("zzz");
         assertThat(input.getValues()).contains("zzz");
+    }
+
+    @Test
+    public void checkFillActionOnElement() {
+      goTo(DEFAULT_URL);
+      FluentWebElement input = find("input").first();
+      input.fill().with("zzz");
+      assertThat(input.getValue()).contains("zzz");
     }
 
     @Test
