@@ -26,7 +26,7 @@ public class ActionOnListWithBddTest extends LocalFluentCase {
     @Test
     public void checkFillAction() {
         goTo(DEFAULT_URL);
-        FluentList input = find("input");
+        FluentList input = find("input[type=text]");
         fill(input).with("zzz");
         assertThat(input.getValues()).contains("zzz");
     }
