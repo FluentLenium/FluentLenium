@@ -19,12 +19,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public abstract class LocalFluentCase extends FluentTest {
-    public static final String DEFAULT_URL = "http://localhost:8787/static/";
-    public static final String JAVASCRIPT_URL = "http://localhost:8787/static/javascript.html";
+    public static final String BASE_URL = getPath();
+    public static final String DEFAULT_URL = BASE_URL+"index.html";
+    public static final String JAVASCRIPT_URL = BASE_URL+"javascript.html";
 
     @Override
     public WebDriver getDefaultDriver() {
         return new HtmlUnitDriver(true);
+    }
+
+    public final static String getPath() {
+        String currentDir = System.getProperty("user.dir");
+        if (!currentDir.endsWith("/fluentlenium-core")){
+            currentDir+="/fluentlenium-core";
+        }
+        return "file:/" + currentDir + "/src/test/html/";
     }
 }
 

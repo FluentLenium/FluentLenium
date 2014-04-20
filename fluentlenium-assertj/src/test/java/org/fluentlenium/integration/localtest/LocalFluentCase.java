@@ -20,11 +20,20 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 //TODO : Problem here - 1 instance by test when 1 instance for test suite is sufficient ...
 public abstract class LocalFluentCase extends FluentTest {
-    protected static final String DEFAULT_URL = "http://localhost:8787/static/";
+    private static final String BASE_URL = getPath();
+    protected static final String DEFAULT_URL = BASE_URL+"index.html";
 
     @Override
     public WebDriver getDefaultDriver() {
         return new HtmlUnitDriver(true);
+    }
+
+    public final static String getPath() {
+        String currentDir = System.getProperty("user.dir");
+        if (!currentDir.endsWith("/fluentlenium-assertj")){
+            currentDir+="/fluentlenium-assertj";
+        }
+        return "file:/" + currentDir + "/src/test/html/";
     }
 }
 
