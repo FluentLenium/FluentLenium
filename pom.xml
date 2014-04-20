@@ -13,6 +13,7 @@
   <modules>
     <module>fluentlenium-core</module>
     <module>fluentlenium-festassert</module>
+    <module>fluentlenium-assertj</module>
     <module>fluentlenium-testng</module>
     <module>fluentlenium-cucumber</module>
   </modules>
