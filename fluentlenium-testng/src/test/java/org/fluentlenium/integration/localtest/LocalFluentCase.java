@@ -29,8 +29,8 @@ public abstract class LocalFluentCase extends FluentTestNg {
 
     public final static String getPath() {
         String currentDir = System.getProperty("user.dir");
-        if (!currentDir.endsWith("/fluentlenium-core")){
-            currentDir+="/fluentlenium-core";
+        if (!currentDir.endsWith("/fluentlenium-testng")){
+            currentDir+="/fluentlenium-testng";
         }
         return "file:/" + currentDir + "/src/test/html/";
     }
