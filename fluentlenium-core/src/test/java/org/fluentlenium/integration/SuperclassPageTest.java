@@ -45,7 +45,7 @@ class AnotherPage extends FluentPage {
 
     @Override
     public String getUrl() {
-        return LocalFluentCase.DEFAULT_URL + "anotherpage.html";
+        return LocalFluentCase.BASE_URL + "anotherpage.html";
     }
 
     @Override

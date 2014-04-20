@@ -90,7 +90,7 @@ public class IframeTest extends LocalFluentCase {
 class IFramePage extends FluentPage {
   @Override
   public String getUrl() {
-    return LocalFluentCase.DEFAULT_URL + "iframe.html";
+    return LocalFluentCase.BASE_URL + "iframe.html";
   }
 
   @Override
