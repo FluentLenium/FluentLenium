@@ -56,7 +56,7 @@ public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implem
         if (this.size() == 0) {
             throw new NoSuchElementException("No Element found");
         }
-        
+
         for (E fluentWebElement : this) {
             if (fluentWebElement.isEnabled()) {
                 fluentWebElement.click();
@@ -89,7 +89,7 @@ public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implem
                     }
                 }
             }
-            if (atMostOne==false){
+            if (!atMostOne){
                 throw new NoSuchElementException("No element is displayed or enabled. Can't set a new value.");
             }
         }
@@ -265,16 +265,17 @@ public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implem
     /**
      * find elements into the children with the corresponding filters
      *
+     *
      * @param name
      * @param filters
      * @return
      */
-    public FluentList find(String name, Filter... filters) {
+    public FluentList<E> find(String name, Filter... filters) {
         List<E> finds = new ArrayList<E>();
         for (E e : this) {
             finds.addAll(e.find(name, filters));
         }
-        return new FluentList(finds);
+        return new FluentList<E>(finds);
     }
 
 
