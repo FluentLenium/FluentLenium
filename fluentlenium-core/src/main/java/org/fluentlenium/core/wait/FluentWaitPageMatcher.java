@@ -60,7 +60,7 @@ public class FluentWaitPageMatcher {
                     JavascriptExecutor javascriptExecutor = (JavascriptExecutor) fluent.getDriver();
                     Object result = javascriptExecutor.executeScript("if (document.readyState) return document.readyState;");
                     if (result != null) {
-                        return "complete".equals((String) result);
+                        return "complete".equals( result);
 
                     }
                     return false;
