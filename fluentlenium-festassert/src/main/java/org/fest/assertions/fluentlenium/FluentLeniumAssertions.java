@@ -13,9 +13,6 @@
  */
 package org.fest.assertions.fluentlenium;
 
-import java.util.List;
-
-import org.fest.assertions.GenericAssert;
 import org.fest.assertions.fluentlenium.custom.FluentListAssert;
 import org.fest.assertions.fluentlenium.custom.FluentWebElementAssert;
 import org.fest.assertions.fluentlenium.custom.PageAssert;
@@ -29,16 +26,30 @@ public final class FluentLeniumAssertions {
         //only static
     }
 
+    @Deprecated
+    /**
+     * Use AssertJ instead - FestAssert is not active anymore
+     */
     public static PageAssert assertThat(FluentPage actual) {
         return new PageAssert(actual);
     }
 
+
+    @Deprecated
+    /**
+     * Use AssertJ instead - FestAssert is not active anymore
+     */
     public static FluentWebElementAssert assertThat(FluentWebElement actual) {
         return new FluentWebElementAssert(actual);
     }
 
-   public static FluentListAssert assertThat(FluentList<?> actual) {
+
+    @Deprecated
+    /**
+     * Use AssertJ instead - FestAssert is not active anymore
+     */
+    public static FluentListAssert assertThat(FluentList<?> actual) {
         return new FluentListAssert(actual);
-   }
+    }
 
 }
