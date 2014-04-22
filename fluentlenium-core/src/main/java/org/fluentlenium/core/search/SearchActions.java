@@ -19,10 +19,10 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 
 
-public interface SearchActions {
-    FluentList<FluentWebElement> find(String name, Filter... filters);
+public interface SearchActions<E extends FluentWebElement> {
+    FluentList<E> find(String name, Filter... filters);
 
-    FluentWebElement find(String name, Integer number, Filter... filters);
+    E find(String name, Integer number, Filter... filters);
 
-    FluentWebElement findFirst(String name, Filter... filters);
+    E findFirst(String name, Filter... filters);
 }
