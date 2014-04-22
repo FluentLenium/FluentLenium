@@ -16,16 +16,14 @@ package org.fluentlenium.integration;
 
 
 import com.google.common.base.Predicate;
+import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentAdapter;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -189,14 +187,6 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         await().atMost(1, NANOSECONDS).until(".small").with("id").notContains(regex("d")).hasSize(1);
     }
 
-    @Test
-    public void check_predicate() {
-        await().until(new Predicate<WebDriver>() {
-            public boolean apply(WebDriver input) {
-                return input.findElement(By.id("id")) != null;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-        });
-    }
 
     @Test
     public void checkAwaitEquals() {
@@ -303,11 +293,46 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         await().pollingEvery(800, TimeUnit.MILLISECONDS).until("#default").hasText("wait");
     }
 
+
     @Test
-      public void checkFunction() {
-          goTo(JAVASCRIPT_URL);
-        await().pollingEvery(800, TimeUnit.MILLISECONDS).until(ExpectedConditions.visibilityOf(find("#default").first().getElement()));
-      }
+    public void checkIsAt() {
+        goTo(JAVASCRIPT_URL);
+        await().pollingEvery(800, TimeUnit.MILLISECONDS).untilPage(new FluentPage() {
+            @Override
+            public void isAt() {
+            }
+        }).isAt();
+    }
+
+    @Test
+    public void checkLoaded() {
+        goTo(JAVASCRIPT_URL);
+        await().pollingEvery(800, TimeUnit.MILLISECONDS).untilPage().isLoaded();
+    }
+
+    @Test
+    public void checkPredicate() {
+        goTo(JAVASCRIPT_URL);
+        await().pollingEvery(800, TimeUnit.MILLISECONDS).until(new Predicate<Fluent>() {
+            @Override
+            public boolean apply(Fluent o) {
+                return true;
+            }
+        })
+        ;
+    }
+
+    @Test
+    public void checkFunction() {
+        goTo(JAVASCRIPT_URL);
+        await().pollingEvery(800, TimeUnit.MILLISECONDS).until(new Predicate<Fluent>() {
+            @Override
+            public boolean apply(Fluent fluent) {
+                return true;
+            }
+        });
+    }
+
 
 }
 

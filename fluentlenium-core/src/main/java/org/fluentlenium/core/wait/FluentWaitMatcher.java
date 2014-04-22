@@ -21,8 +21,6 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterType;
 import org.fluentlenium.core.search.Search;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +46,8 @@ public class FluentWaitMatcher {
      * @param value
      */
     public Fluent hasAttribute(final String attribute, final String value) {
-        Predicate hasAttribute = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(WebDriver webDriver) {
+        Predicate hasAttribute = new com.google.common.base.Predicate<Fluent>() {
+            public boolean apply(Fluent fluent) {
                 return find().getAttributes(attribute).contains(value);
             }
         };
@@ -76,8 +74,8 @@ public class FluentWaitMatcher {
      * @param value
      */
     public Fluent hasId(final String value) {
-        Predicate hasId = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(WebDriver webDriver) {
+        Predicate hasId = new com.google.common.base.Predicate<Fluent>() {
+            public boolean apply(Fluent fluent) {
                 return find().getIds().contains(value);
             }
         };
@@ -91,8 +89,8 @@ public class FluentWaitMatcher {
      * @param value
      */
     public Fluent hasName(final String value) {
-        Predicate hasName = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(WebDriver webDriver) {
+        Predicate hasName = new com.google.common.base.Predicate<Fluent>() {
+            public boolean apply(Fluent fluent) {
                 return find().getNames().contains(value);
             }
         };
@@ -115,8 +113,8 @@ public class FluentWaitMatcher {
      * @param size
      */
     public Fluent hasSize(final int size) {
-        Predicate hasSize = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(WebDriver webDriver) {
+        Predicate hasSize = new com.google.common.base.Predicate<Fluent>() {
+            public boolean apply(Fluent fluent) {
                 return find().size() == size;
             }
         };
@@ -131,8 +129,8 @@ public class FluentWaitMatcher {
      * @param value
      */
     public Fluent containsText(final String value) {
-        Predicate hasText = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(WebDriver webDriver) {
+        Predicate hasText = new com.google.common.base.Predicate<Fluent>() {
+            public boolean apply(Fluent fluent) {
                 List<String> texts = find().getTexts();
                 if (texts != null) {
                     for (String text : texts) {
@@ -154,8 +152,8 @@ public class FluentWaitMatcher {
      * @param value
      */
     public Fluent hasText(final String value) {
-        Predicate hasText = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(WebDriver webDriver) {
+        Predicate hasText = new com.google.common.base.Predicate<Fluent>() {
+            public boolean apply(Fluent fluent) {
                 return find().getTexts().contains(value);
             }
         };
@@ -168,8 +166,8 @@ public class FluentWaitMatcher {
      * Check that the element is present
      */
     public Fluent isPresent() {
-        Predicate isPresent = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(WebDriver webDriver) {
+        Predicate isPresent = new com.google.common.base.Predicate<Fluent>() {
+            public boolean apply(Fluent fluent) {
                 int size = find().size();
                 return size > 0;
             }
@@ -184,8 +182,8 @@ public class FluentWaitMatcher {
      * Check that the element is not present
      */
     public Fluent isNotPresent() {
-        Predicate isNotPresent = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(WebDriver webDriver) {
+        Predicate isNotPresent = new com.google.common.base.Predicate<Fluent>() {
+            public boolean apply(Fluent fluent) {
                 return find().isEmpty();
             }
         };
@@ -201,8 +199,8 @@ public class FluentWaitMatcher {
      * @return
      */
     public Fluent areDisplayed() {
-        Predicate isVisible = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(WebDriver webDriver) {
+        Predicate isVisible = new com.google.common.base.Predicate<Fluent>() {
+            public boolean apply(Fluent fluent) {
                 FluentList<FluentWebElement> fluentWebElements = find();
                 if (fluentWebElements.size() > 0) {
                     for (FluentWebElement fluentWebElement : fluentWebElements) {
@@ -225,8 +223,8 @@ public class FluentWaitMatcher {
      * @return
      */
     public Fluent areNotDisplayed() {
-        Predicate isNotVisible = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(WebDriver webDriver) {
+        Predicate isNotVisible = new com.google.common.base.Predicate<Fluent>() {
+            public boolean apply(Fluent fluent) {
                 FluentList<FluentWebElement> fluentWebElements = findWithFilter();
                 for (FluentWebElement fluentWebElement : fluentWebElements) {
                     if (fluentWebElement.isDisplayed()) {
@@ -246,8 +244,8 @@ public class FluentWaitMatcher {
      * @return
      */
     public Fluent areEnabled() {
-        Predicate isEnabled = new com.google.common.base.Predicate<WebDriver>() {
-            public boolean apply(WebDriver webDriver) {
+        Predicate isEnabled = new com.google.common.base.Predicate<Fluent>() {
+            public boolean apply(Fluent fluent) {
                 FluentList<FluentWebElement> fluentWebElements = find();
                 if (fluentWebElements.size() > 0) {
                     for (FluentWebElement fluentWebElement : fluentWebElements) {

@@ -14,27 +14,30 @@
 package org.fluentlenium.core.wait;
 
 
+import com.google.common.base.Function;
+import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.search.Search;
 import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class FluentWait implements org.openqa.selenium.support.ui.Wait<WebDriver> {
+public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
 
-    private org.openqa.selenium.support.ui.FluentWait wait;
-    private Search search;
-    private WebDriver driver;
+    private final org.openqa.selenium.support.ui.FluentWait<Fluent> wait;
+    private final Search search;
+    private final WebDriver driver;
 
     public org.openqa.selenium.support.ui.FluentWait getWait() {
         return wait;
     }
 
-    public FluentWait(WebDriver driver, Search search) {
-        wait = new org.openqa.selenium.support.ui.FluentWait(driver);
+    public FluentWait(Fluent fluent, Search search) {
+        wait = new org.openqa.selenium.support.ui.FluentWait<Fluent>(fluent);
         this.search = search;
-        this.driver = driver;
+        this.driver = fluent.getDriver();
     }
+
 
     public FluentWait atMost(long duration, java.util.concurrent.TimeUnit unit) {
         wait.withTimeout(duration, unit);
@@ -59,7 +62,6 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<WebDriver
     }
 
     public FluentWait ignoring(java.lang.Class<? extends java.lang.RuntimeException> exceptionType) {
-
         wait.ignoring(exceptionType);
         return this;
 
@@ -71,31 +73,36 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<WebDriver
 
     }
 
-    public FluentWait until(com.google.common.base.Predicate isTrue) {
+    public FluentWait until(com.google.common.base.Predicate<Fluent> isTrue) {
         wait.until(isTrue);
         return this;
     }
 
-    public FluentWaitMatcher until(String string) {
-        return new FluentWaitMatcher(search, wait, string);
+    public FluentWait withMessage(String message) {
+        wait.withMessage(message);
+        return this;
     }
 
+    public FluentWaitMatcher until(String string) {
+        return new FluentWaitMatcher(search, this, string);
+    }
+
+
     public FluentWaitPageMatcher untilPage() {
-        return new FluentWaitPageMatcher(wait, driver);
+        return new FluentWaitPageMatcher(this, driver);
     }
 
     public FluentWaitPageMatcher untilPage(FluentPage page) {
-        return new FluentWaitPageMatcher(wait, driver, page);
+        return new FluentWaitPageMatcher(this, driver, page);
     }
 
-    public <V> V until(com.google.common.base.Function<? super WebDriver, V> isTrue) {
-        return (V) wait.until(isTrue);
+
+    public WebDriver getDriver() {
+        return driver;
     }
 
-//    WebElement foo = wait.until(new Function<WebDriver, WebElement>() {
-//      public WebElement apply(WebDriver driver) {
-//        return driver.findElement(By.id("foo"));
-//      }
-//    });
-
+    @Override
+    public <T> T until(Function<? super Fluent, T> isTrue) {
+        return wait.until(isTrue);
+    }
 }

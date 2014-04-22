@@ -252,7 +252,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public FluentWait await() {
-        return new FluentWait(driver, search);
+        return new FluentWait(this, search);
     }
 
 

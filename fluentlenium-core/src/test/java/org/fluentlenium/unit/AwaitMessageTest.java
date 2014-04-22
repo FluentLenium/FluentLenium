@@ -15,13 +15,13 @@ package org.fluentlenium.unit;
 
 
 import org.fluentlenium.core.search.Search;
+import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.core.wait.FluentWaitMatcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.openqa.selenium.support.ui.FluentWait;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Matchers.anyString;
