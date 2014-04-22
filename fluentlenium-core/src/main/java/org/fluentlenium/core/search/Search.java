@@ -31,7 +31,7 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class Search implements SearchActions {
+public class Search implements SearchActions<FluentWebElement> {
     private final SearchContext searchContext;
 
     public Search(SearchContext context) {
@@ -57,13 +57,12 @@ public class Search implements SearchActions {
                 }
             }
         }
-        List<FluentWebElement> preFiltered = select(sb.toString());
-        Collection<FluentWebElement> postFiltered = preFiltered;
+        Collection<FluentWebElement> postFiltered = select(sb.toString());
         for (Filter selector : postFilterSelector) {
             postFiltered = Collections2.filter(postFiltered, new FilterPredicate(selector));
         }
 
-        return new FluentList(postFiltered);
+        return new FluentList<FluentWebElement>(postFiltered);
     }
 
     private List<FluentWebElement> select(String cssSelector) {
