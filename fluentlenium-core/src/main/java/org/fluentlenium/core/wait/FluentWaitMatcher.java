@@ -46,7 +46,7 @@ public class FluentWaitMatcher {
      * @param value
      */
     public Fluent hasAttribute(final String attribute, final String value) {
-        Predicate hasAttribute = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> hasAttribute = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 return find().getAttributes(attribute).contains(value);
             }
@@ -56,7 +56,7 @@ public class FluentWaitMatcher {
 
     }
 
-    static void until(FluentWait wait, Predicate present, List<Filter> filters, String defaultMessage) {
+    static void until(FluentWait wait, Predicate<Fluent> present, List<Filter> filters, String defaultMessage) {
         StringBuilder message = new StringBuilder(defaultMessage);
         if (filters != null && !filters.isEmpty()) {
             for (Filter filter : filters) {
@@ -74,7 +74,7 @@ public class FluentWaitMatcher {
      * @param value
      */
     public Fluent hasId(final String value) {
-        Predicate hasId = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> hasId = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 return find().getIds().contains(value);
             }
@@ -89,7 +89,7 @@ public class FluentWaitMatcher {
      * @param value
      */
     public Fluent hasName(final String value) {
-        Predicate hasName = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> hasName = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 return find().getNames().contains(value);
             }
@@ -113,7 +113,7 @@ public class FluentWaitMatcher {
      * @param size
      */
     public Fluent hasSize(final int size) {
-        Predicate hasSize = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> hasSize = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 return find().size() == size;
             }
@@ -129,7 +129,7 @@ public class FluentWaitMatcher {
      * @param value
      */
     public Fluent containsText(final String value) {
-        Predicate hasText = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> hasText = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 List<String> texts = find().getTexts();
                 if (texts != null) {
@@ -152,7 +152,7 @@ public class FluentWaitMatcher {
      * @param value
      */
     public Fluent hasText(final String value) {
-        Predicate hasText = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> hasText = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 return find().getTexts().contains(value);
             }
@@ -166,7 +166,7 @@ public class FluentWaitMatcher {
      * Check that the element is present
      */
     public Fluent isPresent() {
-        Predicate isPresent = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> isPresent = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 int size = find().size();
                 return size > 0;
@@ -182,7 +182,7 @@ public class FluentWaitMatcher {
      * Check that the element is not present
      */
     public Fluent isNotPresent() {
-        Predicate isNotPresent = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> isNotPresent = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 return find().isEmpty();
             }
@@ -199,7 +199,7 @@ public class FluentWaitMatcher {
      * @return
      */
     public Fluent areDisplayed() {
-        Predicate isVisible = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> isVisible = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 FluentList<FluentWebElement> fluentWebElements = find();
                 if (fluentWebElements.size() > 0) {
@@ -223,7 +223,7 @@ public class FluentWaitMatcher {
      * @return
      */
     public Fluent areNotDisplayed() {
-        Predicate isNotVisible = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> isNotVisible = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 FluentList<FluentWebElement> fluentWebElements = findWithFilter();
                 for (FluentWebElement fluentWebElement : fluentWebElements) {
@@ -244,7 +244,7 @@ public class FluentWaitMatcher {
      * @return
      */
     public Fluent areEnabled() {
-        Predicate isEnabled = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> isEnabled = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 FluentList<FluentWebElement> fluentWebElements = find();
                 if (fluentWebElements.size() > 0) {

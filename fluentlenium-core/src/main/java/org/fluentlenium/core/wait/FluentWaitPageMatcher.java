@@ -55,7 +55,7 @@ public class FluentWaitPageMatcher {
         if (!(webDriver instanceof JavascriptExecutor)) {
             throw new UnsupportedOperationException("Driver must support javascript execution to use this feature");
         } else {
-            Predicate isLoaded = new com.google.common.base.Predicate<Fluent>() {
+            Predicate<Fluent> isLoaded = new com.google.common.base.Predicate<Fluent>() {
                 public boolean apply(Fluent fluent) {
                     JavascriptExecutor javascriptExecutor = (JavascriptExecutor) fluent.getDriver();
                     Object result = javascriptExecutor.executeScript("if (document.readyState) return document.readyState;");
@@ -80,7 +80,7 @@ public class FluentWaitPageMatcher {
         if (page == null) {
             throw new IllegalArgumentException("You should use a page argument when you call the untilPage method to specify the page you want to be. Example : await().untilPage(myPage).isAt();");
         }
-        Predicate isLoaded = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> isLoaded = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 try {
                     page.isAt();

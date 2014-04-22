@@ -44,7 +44,7 @@ public class FluentSizeBuilder {
      * @param size
      */
     public void equalTo(final int size) {
-        Predicate isPresent = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> isPresent = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 return getSize() == size;
             }
@@ -58,7 +58,7 @@ public class FluentSizeBuilder {
      * @param size
      */
     public void notEqualTo(final int size) {
-        Predicate isPresent = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> isPresent = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 return getSize() != size;
             }
@@ -72,7 +72,7 @@ public class FluentSizeBuilder {
      * @param size
      */
     public void lessThan(final int size) {
-        Predicate isPresent = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> isPresent = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 return getSize() < size;
             }
@@ -86,7 +86,7 @@ public class FluentSizeBuilder {
      * @param size
      */
     public void lessThanOrEqualTo(final int size) {
-        Predicate isPresent = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> isPresent = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 return getSize() <= size;
             }
@@ -100,7 +100,7 @@ public class FluentSizeBuilder {
      * @param size
      */
     public void greaterThan(final int size) {
-        Predicate isPresent = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> isPresent = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 return getSize() > size;
             }
@@ -114,7 +114,7 @@ public class FluentSizeBuilder {
      * @param size
      */
     public void greaterThanOrEqualTo(final int size) {
-        Predicate isPresent = new com.google.common.base.Predicate<Fluent>() {
+        Predicate<Fluent> isPresent = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 return getSize() >= size;
             }
