@@ -25,6 +25,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -301,6 +302,12 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         goTo(JAVASCRIPT_URL);
         await().pollingEvery(800, TimeUnit.MILLISECONDS).until("#default").hasText("wait");
     }
+
+    @Test
+      public void checkFunction() {
+          goTo(JAVASCRIPT_URL);
+        await().pollingEvery(800, TimeUnit.MILLISECONDS).until(ExpectedConditions.visibilityOf(find("#default").first().getElement()));
+      }
 
 }
 
