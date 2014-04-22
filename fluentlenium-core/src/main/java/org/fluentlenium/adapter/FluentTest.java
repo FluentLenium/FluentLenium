@@ -33,7 +33,7 @@ import static org.fluentlenium.adapter.util.SharedDriverHelper.*;
  * All Junit Test should extends this class. It provides default parameters.
  */
 public abstract class FluentTest extends FluentAdapter {
-    protected enum Mode {TAKE_SNAPSHOT_ON_FAIL, NEVER_TAKE_SNAPSHOT;}
+    protected enum Mode {TAKE_SNAPSHOT_ON_FAIL, NEVER_TAKE_SNAPSHOT}
 
     private static WebDriver sharedDriver;
     private static boolean isSharedDriverPerClass;

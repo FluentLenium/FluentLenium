@@ -69,4 +69,4 @@ class MyPage extends FluentPage {
         return LocalFluentCase.DEFAULT_URL;
     }
 
-};
+}

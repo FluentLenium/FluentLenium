@@ -20,5 +20,5 @@ package org.fluentlenium.core.filter;
  * PostFilter are used after the webdriver selection to fluentlenium.integration. the collection
  */
 public enum FilterType {
-    CUSTOM, NAME, ID, TEXT, CLASS;
+    CUSTOM, NAME, ID, TEXT, CLASS
 }
