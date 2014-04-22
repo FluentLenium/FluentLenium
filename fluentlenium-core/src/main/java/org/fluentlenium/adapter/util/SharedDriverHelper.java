@@ -13,7 +13,6 @@
  */
 package org.fluentlenium.adapter.util;
 
-import org.fluentlenium.core.FluentAdapter;
 
 public final class SharedDriverHelper {
 
