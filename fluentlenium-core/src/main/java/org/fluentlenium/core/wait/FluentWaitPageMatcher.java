@@ -59,11 +59,7 @@ public class FluentWaitPageMatcher {
                 public boolean apply(Fluent fluent) {
                     JavascriptExecutor javascriptExecutor = (JavascriptExecutor) fluent.getDriver();
                     Object result = javascriptExecutor.executeScript("if (document.readyState) return document.readyState;");
-                    if (result != null) {
-                        return "complete".equals( result);
-
-                    }
-                    return false;
+                    return result != null && "complete".equals(result);
                 }
             };
             FluentWaitMatcher.until(wait, isLoaded, filters, isPageLoaded(webDriver.getCurrentUrl()));
