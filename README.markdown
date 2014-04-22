@@ -31,20 +31,20 @@ To add FluentLenium to your project, just add the following dependency to your `
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
-    <version>0.9.2</version>
+    <version>0.10.0</version>
     <scope>test</scope>
 </dependency>
 ```
 
 By default, FluentLenium provides a jUnit adapter.
 
-If you need the fest-assert dependency to improve the legibility of your test code :
+If you need the assertj dependency to improve the legibility of your test code :
 
 ```xml 
 <dependency>
     <groupId>org.fluentlenium</groupId>
-    <artifactId>fluentlenium-festassert</artifactId>
-    <version>0.9.2</version>
+    <artifactId>fluentlenium-assertj</artifactId>
+    <version>0.10.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -55,7 +55,7 @@ An adapter has also been built for using FluentLenium with TestNG :
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>0.9.2</version>
+    <version>0.10.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -70,12 +70,12 @@ If you need to do some filtering :
 import static org.fluentlenium.core.filter.FilterConstructor.*;
 ```
 
-### Static import using fest assert
+### Static import using assertJ
 The static assertions to use fest assert are :
 
 ```java
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat;
+import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 ```
 
 ### Basic Methods
@@ -671,6 +671,9 @@ assertEqual("Hello toto",title());
 ```
 
 ### Fest-Assert
+Fest-Assert is now deprecated. This lib is no longer maintained. Consider switching to AssertJ
+
+### AssertJ
 ```java
 goTo("http://mywebpage/");
 fill("#firstName").with("toto");
@@ -684,6 +687,7 @@ assertThat(find(myCssSelecto2)).hasSize().lessThanOrEqualTo(5);
 assertThat(find(myCssSelecto3)).hasSize().greaterThan(2);
 assertThat(find(myCssSelecto3)).hasSize().greaterThanOrEqualTo(2);
 ```
+
 
 ### Hamcrest
 ```java
