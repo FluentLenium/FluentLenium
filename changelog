@@ -1,3 +1,11 @@
+v0.10.0
+- fix #100 - fix FluentWait to use Fluent instead FluentWait<WebDriver>  (so await.until(Function) and await.until(Predicate) have changed
+- fix #113 - input type="file" now working
+- fix #96 - TestNg default firefox browser not closing
+- Enable subclasses/delegates of FluentWebElement to be injected
+- Add fluentlenium-assertJ and deprecate fluentlenium-festassert (festassert is not active anymore)
+ - update to selenium 2.41
+
 v0.9.2.
 - update to selenium 2.36
 - add alert() to handle alert event
