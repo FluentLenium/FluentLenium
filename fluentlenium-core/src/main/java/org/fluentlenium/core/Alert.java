@@ -21,7 +21,7 @@ import org.openqa.selenium.WebDriver;
  */
 public class Alert {
 
-  WebDriver webDriver;
+  private WebDriver webDriver;
 
   public Alert(WebDriver webDriver) {
     this.webDriver = webDriver;
