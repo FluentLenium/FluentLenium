@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
  */
-public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implements FluentDefaultActions<FluentList>, SearchActions {
+public class FluentList<E extends FluentWebElement> extends ArrayList<E> implements FluentDefaultActions<FluentList>, SearchActions {
 
     public FluentList(Collection<E> listFiltered) {
         super(listFiltered);
@@ -71,7 +71,7 @@ public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implem
      * If there is more elements on the list than in the with table, the last element of the table is repeated
      */
     public FluentList text(String... with) {
-        boolean atMostOne=false;
+        boolean atMostOne = false;
         if (with.length > 0) {
             int id = 0;
             String value;
@@ -84,12 +84,12 @@ public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implem
                         value = with[with.length - 1];
                     }
                     if (fluentWebElement.isEnabled()) {
-                        atMostOne=true;
+                        atMostOne = true;
                         fluentWebElement.text(value);
                     }
                 }
             }
-            if (!atMostOne){
+            if (!atMostOne) {
                 throw new NoSuchElementException("No element is displayed or enabled. Can't set a new value.");
             }
         }
@@ -100,7 +100,7 @@ public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implem
      * Clear all elements on the list
      * Only the visible elements are filled
      */
-    public FluentList clearAll() {
+    public FluentList<E> clearAll() {
         for (E fluentWebElement : this) {
             if (fluentWebElement.isEnabled()) {
                 fluentWebElement.clear();
@@ -127,7 +127,7 @@ public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implem
      * submit on all elements on the list
      * Only the visible elements are submitted
      */
-    public FluentList submit() {
+    public FluentList<E> submit() {
         for (E fluentWebElement : this) {
             if (fluentWebElement.isEnabled()) {
                 fluentWebElement.submit();
@@ -265,15 +265,14 @@ public class  FluentList<E extends FluentWebElement> extends ArrayList<E> implem
     /**
      * find elements into the children with the corresponding filters
      *
-     *
      * @param name
      * @param filters
      * @return
      */
     public FluentList<E> find(String name, Filter... filters) {
         List<E> finds = new ArrayList<E>();
-        for (E e : this) {
-            finds.addAll(e.find(name, filters));
+        for (FluentWebElement e : this) {
+            finds.addAll((Collection<E>)e.find(name, filters));
         }
         return new FluentList<E>(finds);
     }

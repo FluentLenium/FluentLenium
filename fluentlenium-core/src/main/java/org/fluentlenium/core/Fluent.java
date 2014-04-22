@@ -169,9 +169,9 @@ public abstract class Fluent implements SearchActions {
     protected <T extends FluentPage> T initClass(Class<T> cls) {
         T page = null;
         try {
-            Constructor construct = cls.getDeclaredConstructor();
+            Constructor<T> construct = cls.getDeclaredConstructor();
             construct.setAccessible(true);
-            page = (T) construct.newInstance();
+            page = construct.newInstance();
             Class parent = Class.forName(Fluent.class.getName());
             initDriver(page, parent);
             initBaseUrl(page, parent);

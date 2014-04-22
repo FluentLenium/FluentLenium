@@ -27,7 +27,7 @@ import org.openqa.selenium.interactions.Actions;
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
-public class FluentWebElement implements FluentDefaultActions<FluentWebElement>, SearchActions {
+public class FluentWebElement implements FluentDefaultActions<FluentWebElement>, SearchActions<FluentWebElement> {
     private final WebElement webElement;
     private final Search search;
 
@@ -72,7 +72,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * Set the text elelent
+     * Set the text element
      *
      * @param text
      */
@@ -131,7 +131,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return true if the element is displayed, otherway return false
+     * return true if the element is displayed, other way return false
      *
      * @return
      */
@@ -140,7 +140,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return true if the element is enabled, otherway return false
+     * return true if the element is enabled, other way return false
      *
      * @return
      */
@@ -149,7 +149,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return true if the element is selected, otherway false
+     * return true if the element is selected, other way false
      *
      * @return
      */
@@ -191,12 +191,12 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * @param filters
      * @return
      */
-    public FluentList find(String name, Filter... filters) {
+    public  FluentList<FluentWebElement> find(String name, Filter... filters) {
         return search.find(name, filters);
     }
 
     /**
-     * find elements into the childs with the corresponding filters at the given positiokn
+     * find elements into the childs with the corresponding filters at the given position
      *
      * @param name
      * @param filters
