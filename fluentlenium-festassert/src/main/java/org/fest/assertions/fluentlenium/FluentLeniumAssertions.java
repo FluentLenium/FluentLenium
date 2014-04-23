@@ -28,7 +28,11 @@ public final class FluentLeniumAssertions {
 
     @Deprecated
     /**
-     * Use AssertJ instead - FestAssert is not active anymore
+     * Use AssertJ plugin instead - FestAssert is not active anymore
+     *   <dependency>
+            <groupId>org.fluentlenium</groupId>
+            <artifactId>fluentlenium-assertj</artifactId>
+         </dependency>
      */
     public static PageAssert assertThat(FluentPage actual) {
         return new PageAssert(actual);
@@ -37,16 +41,23 @@ public final class FluentLeniumAssertions {
 
     @Deprecated
     /**
-     * Use AssertJ instead - FestAssert is not active anymore
-     */
-    public static FluentWebElementAssert assertThat(FluentWebElement actual) {
+     * Use AssertJ plugin instead - FestAssert is not active anymore
+     *   <dependency>
+            <groupId>org.fluentlenium</groupId>
+            <artifactId>fluentlenium-assertj</artifactId>
+         </dependency>
+     */    public static FluentWebElementAssert assertThat(FluentWebElement actual) {
         return new FluentWebElementAssert(actual);
     }
 
 
     @Deprecated
     /**
-     * Use AssertJ instead - FestAssert is not active anymore
+     * Use AssertJ plugin instead - FestAssert is not active anymore
+     *   <dependency>
+            <groupId>org.fluentlenium</groupId>
+            <artifactId>fluentlenium-assertj</artifactId>
+         </dependency>
      */
     public static FluentListAssert assertThat(FluentList<?> actual) {
         return new FluentListAssert(actual);
