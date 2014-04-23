@@ -18,6 +18,8 @@ import com.google.common.base.Function;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.search.Search;
+import org.openqa.selenium.Beta;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -27,6 +29,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     private final org.openqa.selenium.support.ui.FluentWait<Fluent> wait;
     private final Search search;
     private final WebDriver driver;
+    private boolean useDefaultException;
 
     public org.openqa.selenium.support.ui.FluentWait getWait() {
         return wait;
@@ -36,6 +39,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
         wait = new org.openqa.selenium.support.ui.FluentWait<Fluent>(fluent);
         this.search = search;
         this.driver = fluent.getDriver();
+        useDefaultException = true;
     }
 
 
@@ -44,6 +48,11 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
         return this;
     }
 
+    /**
+     *
+     * @param timeInMillis  time In Millis
+     * @return
+     */
     public FluentWait atMost(long timeInMillis) {
         wait.withTimeout(timeInMillis, TimeUnit.MILLISECONDS);
         return this;
@@ -67,42 +76,96 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
 
     }
 
+    /**
+     * Ignoring the two exceptions passed as params
+     * @param firstType
+     * @param secondType
+     * @return
+     */
     public FluentWait ignoring(java.lang.Class<? extends java.lang.RuntimeException> firstType, java.lang.Class<? extends java.lang.RuntimeException> secondType) {
         wait.ignoring(firstType, secondType);
         return this;
 
     }
 
+    /**
+     *
+     * @param isTrue
+     * @return
+     */
     public FluentWait until(com.google.common.base.Predicate<Fluent> isTrue) {
+        updateWaitWithDefaultExceptions();
         wait.until(isTrue);
         return this;
     }
 
+    /**
+     *
+     * @param message - the failing message
+     * @return
+     */
     public FluentWait withMessage(String message) {
         wait.withMessage(message);
         return this;
     }
 
+    /**
+     * Use this methods only to avoid ignoring StateElementReferenceException
+     *
+     * @return
+     */
+    @Beta
+    public FluentWait withNoDefaultsException() {
+        useDefaultException = false;
+        return this;
+    }
+
+    /**
+     *
+     * @param string  - CSS selector
+     * @return
+     */
     public FluentWaitMatcher until(String string) {
+        updateWaitWithDefaultExceptions();
         return new FluentWaitMatcher(search, this, string);
     }
 
-
+    /**
+     *
+     * @return
+     */
     public FluentWaitPageMatcher untilPage() {
+        updateWaitWithDefaultExceptions();
         return new FluentWaitPageMatcher(this, driver);
     }
 
+    /**
+     *
+     * @param page - the page to work with
+     * @return
+     */
     public FluentWaitPageMatcher untilPage(FluentPage page) {
+        updateWaitWithDefaultExceptions();
         return new FluentWaitPageMatcher(this, driver, page);
     }
 
-
+    /**
+     * Return the current driver
+     * @return
+     */
     public WebDriver getDriver() {
         return driver;
     }
 
     @Override
     public <T> T until(Function<? super Fluent, T> isTrue) {
+        updateWaitWithDefaultExceptions();
         return wait.until(isTrue);
+    }
+
+    private void updateWaitWithDefaultExceptions() {
+        if (useDefaultException) {
+            wait.ignoring(StaleElementReferenceException.class);
+        }
     }
 }
