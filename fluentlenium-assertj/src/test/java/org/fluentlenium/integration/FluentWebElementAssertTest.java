@@ -19,7 +19,7 @@ import org.junit.Test;
 
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
-public class FluentWebElementFestAssertTest extends LocalFluentCase {
+public class FluentWebElementAssertTest extends LocalFluentCase {
 
     @Test
     public void testIsEnabledOk() throws Exception {
