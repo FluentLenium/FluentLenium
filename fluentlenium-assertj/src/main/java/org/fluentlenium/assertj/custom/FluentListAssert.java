@@ -14,10 +14,12 @@
 
 package org.fluentlenium.assertj.custom;
 
-import java.util.List;
-
+import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.AbstractAssert;
 import org.fluentlenium.core.domain.FluentList;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentList> {
     public FluentListAssert(FluentList<?> actual) {
@@ -86,10 +88,14 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @return
      */
     public FluentListAssert hasClass(String classToFind) {
-        List<String> actualClasses = actual.getAttributes("class");
-        if (!actualClasses.contains(classToFind)) {
-			super.failWithMessage("No selected elements has class: " + classToFind + " . Actual classes found : " + actualClasses);
+        List<String> classesFromElements = (List<String>) actual.getAttributes("class");
+
+        for (String classesStr : classesFromElements) {
+            List<String> classesLst = Arrays.asList(classesStr.split(" "));
+            if (classesLst.contains(classToFind)) return this;
         }
+
+        super.failWithMessage("No selected elements has class: " + classToFind + " . Actual classes found : " + StringUtils.join(classesFromElements, ", "));
         return this;
     }
 

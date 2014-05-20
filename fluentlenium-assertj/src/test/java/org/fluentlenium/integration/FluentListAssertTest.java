@@ -104,4 +104,15 @@ public class FluentListAssertTest extends LocalFluentCase {
         assertThat(find("span")).hasSize().greaterThanOrEqualTo(10);
     }
 
+    @Test
+    public void testAssertOnOneOfManyClasses() {
+        goTo(DEFAULT_URL);
+        assertThat(find("#multiple-css-class")).hasClass("class1");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testAssertOnSubstringOfAClass() {
+        goTo(DEFAULT_URL);
+        assertThat(find("#multiple-css-class")).hasClass("cla");
+    }
 }

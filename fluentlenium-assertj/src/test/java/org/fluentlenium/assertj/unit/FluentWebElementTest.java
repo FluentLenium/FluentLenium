@@ -132,14 +132,25 @@ public class FluentWebElementTest {
 	
 	@Test
 	public void testHasClassOk() throws Exception {
-		when(fluentWebElement.getAttribute("class")).thenReturn("some class");
-        fluentWebElementAssert.hasClass("some class");
+		when(fluentWebElement.getAttribute("class")).thenReturn("some-class");
+        fluentWebElementAssert.hasClass("some-class");
 	}
 
 	@Test(expected = AssertionError.class)
 	public void testHasClassKo() throws Exception {
-		when(fluentWebElement.getAttribute("class")).thenReturn("other class");
-        fluentWebElementAssert.hasClass("some class");
+		when(fluentWebElement.getAttribute("class")).thenReturn("other-class");
+        fluentWebElementAssert.hasClass("some-class");
 	}
 
+	@Test(expected = AssertionError.class)
+	public void testSubstringKo() throws Exception {
+		when(fluentWebElement.getAttribute("class")).thenReturn("yolokitten");
+        fluentWebElementAssert.hasClass("yolo");
+	}
+
+    @Test
+	public void testHasMultipleClassesOk() throws Exception {
+		when(fluentWebElement.getAttribute("class")).thenReturn("yolokitten mark");
+        fluentWebElementAssert.hasClass("mark");
+	}
 }
