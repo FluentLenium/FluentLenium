@@ -17,6 +17,9 @@ package org.fluentlenium.assertj.custom;
 import org.assertj.core.api.AbstractAssert;
 import org.fluentlenium.core.domain.FluentWebElement;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAssert, FluentWebElement> {
 
 
@@ -169,10 +172,14 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @return
      */
     public FluentWebElementAssert hasClass(String classToFind) {
-        if(!actual.getAttribute("class").contains(classToFind)){
+        if(!getClasses().contains(classToFind)) {
             super.failWithMessage("The element does not have the class: " + classToFind + " . Actual class found : " + actual.getAttribute("class"));
         }
+        return this;
+    }
 
-       return this;
+    private List<String> getClasses() {
+        final String[] primitiveList = actual.getAttribute("class").split(" ");
+        return Arrays.asList(primitiveList);
     }
 }

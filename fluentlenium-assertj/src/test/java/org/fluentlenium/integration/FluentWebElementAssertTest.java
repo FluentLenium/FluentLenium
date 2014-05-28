@@ -19,7 +19,7 @@ import org.junit.Test;
 
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
-public class FluentWebElementFestAssertTest extends LocalFluentCase {
+public class FluentWebElementAssertTest extends LocalFluentCase {
 
     @Test
     public void testIsEnabledOk() throws Exception {
@@ -99,7 +99,17 @@ public class FluentWebElementFestAssertTest extends LocalFluentCase {
     public void testIsSelectedKo() throws Exception {
         goTo(DEFAULT_URL);
         assertThat(findFirst("#disabled")).isSelected();
-
     }
 
+    @Test
+    public void testAssertOnOneOfManyClasses() {
+        goTo(DEFAULT_URL);
+        assertThat(findFirst("#multiple-css-class")).hasClass("class1");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testAssertOnSubstringOfAClass() {
+        goTo(DEFAULT_URL);
+        assertThat(findFirst("#multiple-css-class")).hasClass("cla");
+    }
 }

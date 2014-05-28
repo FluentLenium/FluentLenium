@@ -289,7 +289,7 @@ public class FluentList<E extends FluentWebElement> extends ArrayList<E> impleme
     public E find(String name, Integer number, Filter... filters) {
         FluentList<E> fluentList = find(name, filters);
         if (number >= fluentList.size()) {
-            throw new NoSuchElementException("No such element with position :" + number + ". Number of elements available :" + fluentList.size());
+            throw new NoSuchElementException("No such element with position: " + number + ". Number of elements available: " + fluentList.size() + ". Selector: " + name + ".");
         }
         return fluentList.get(number);
     }

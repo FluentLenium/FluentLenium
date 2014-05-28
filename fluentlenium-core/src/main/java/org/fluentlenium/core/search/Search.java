@@ -21,10 +21,7 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterPredicate;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -85,7 +82,7 @@ public class Search implements SearchActions<FluentWebElement> {
     public FluentWebElement find(String name, Integer number, final Filter... filters) {
         List<FluentWebElement> listFiltered = find(name, filters);
         if (number >= listFiltered.size()) {
-            throw new NoSuchElementException("No such element with position :" + number + ". Number of elements available :" + listFiltered.size());
+            throw new NoSuchElementException("No such element with position: " + number + ". Number of elements available: " + listFiltered.size() + ". Selector: " + name + ".");
         }
         return listFiltered.get(number);
     }
@@ -99,7 +96,11 @@ public class Search implements SearchActions<FluentWebElement> {
      */
     public FluentWebElement findFirst(String name, final Filter... filters) {
         FluentList fluentList = find(name, filters);
-        return fluentList.first();
+        try {
+            return fluentList.first();
+        } catch(NoSuchElementException e) {
+            throw new NoSuchElementException("Could not find element matching selector: " + name + ".", e);
+        }
     }
 
 }
