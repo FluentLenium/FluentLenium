@@ -51,14 +51,12 @@ public class FluentListParamTest extends LocalFluentCase {
         FluentList list = find("input");
         assertThat(list.getAttributes("value")).contains("John", "Doe");
     }
-    //<span
     @Test
     public void checkValuesAction() {
         goTo(DEFAULT_URL);
         FluentList list = find("input");
         assertThat(list.getValues()).contains("John", "Doe");
     }
-    //<span class="small" id="id" name="name">Small 1</span>
 
 
     @Test
