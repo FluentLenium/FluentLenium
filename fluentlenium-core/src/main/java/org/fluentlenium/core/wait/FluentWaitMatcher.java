@@ -64,7 +64,11 @@ public class FluentWaitMatcher {
             }
             message.append(" Filters : ");
         }
-        wait.withMessage(message.toString()).until(present);
+        if (wait.useCustomMessage()) {
+            wait.until(present);
+        } else {
+            wait.withMessage(message.toString()).until(present);
+        }
 
     }
 

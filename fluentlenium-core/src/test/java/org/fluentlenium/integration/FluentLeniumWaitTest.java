@@ -30,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
+import static org.junit.Assert.fail;
 
 public class FluentLeniumWaitTest extends LocalFluentCase {
     @Before
@@ -80,6 +81,17 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     public void checkAwaitContainsTextWithText() {
         await().atMost(1, NANOSECONDS).until(".small").withText("Small 1").containsText("Small 1");
     }
+
+    @Test
+    public void checkUseCustomMessage() {
+        try {
+            await().withMessage("toto").atMost(1, NANOSECONDS).until(".small").withText("Small 1").containsText("Small 21");
+            fail();
+        } catch (TimeoutException e) {
+            assertThat(e.getMessage()).contains("toto");
+        }
+    }
+
 
     @Test
     public void checkAwaitPageToLoad() {
