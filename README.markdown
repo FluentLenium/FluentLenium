@@ -700,8 +700,7 @@ assertThat(title(),equalTo("Hello toto"));
 
 In English :
 
-  - [Play2 and FluentLenium screencast](http://www.youtube.com/watch?v=diVhWRtJuxU) and the associated (code)[http://ics-software-engineering.github.io/play-example-fluentlenium/
-]
+  - [Play2 and FluentLenium screencast](http://www.youtube.com/watch?v=diVhWRtJuxU)  and the associated [code] (http://ics-software-engineering.github.io/play-example-fluentlenium/)
 
 In French :
 
