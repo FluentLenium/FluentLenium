@@ -56,15 +56,15 @@ public final class FilterConstructor {
         return new Filter(FilterType.ID, id);
     }
 
-	/**
-	 * Create a filter by class
-	 *
-	 * @param klass
-	 * @return
-	 */
-	public static Filter withClass(String klass) {
-		return new Filter(FilterType.CLASS, klass);
-	}
+    /**
+     * Create a filter by class
+     *
+     * @param klass
+     * @return
+     */
+    public static Filter withClass(String klass) {
+        return new Filter(FilterType.CLASS, klass);
+    }
 
     /**
      * Create a filter by text
@@ -76,6 +76,15 @@ public final class FilterConstructor {
         return new Filter(FilterType.TEXT, MatcherConstructor.equal(text));
     }
 
+    /**
+     * Create a filter by text
+     *
+     * @param text
+     * @return
+     */
+    public static Filter containingText(String text) {
+        return new Filter(FilterType.TEXT, MatcherConstructor.contains(text));
+    }
 
     /**
      * Create a filter builder for the attribute
