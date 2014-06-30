@@ -66,7 +66,7 @@ public abstract class FluentTestNg extends FluentAdapter {
 
     @AfterMethod
     public void afterMethod() {
-        cleanUpTest();
+        cleanUp();
         if (SharedDriverHelper.isSharedDriverPerMethod(this.getClass())|| SharedDriverHelper.isDefaultSharedDriver(this.getClass())) {
             quit();
         } else if (SharedDriverHelper.isDeleteCookies(this.getClass())) {

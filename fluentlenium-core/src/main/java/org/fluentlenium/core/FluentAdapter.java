@@ -25,13 +25,19 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
 
-import java.lang.reflect.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Proxy;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class FluentAdapter extends Fluent {
 
-    private final Map<Class, FluentPage> pageInstances = new HashMap<Class, FluentPage>();
+    private final ConcurrentMap<Class, FluentPage> pageInstances = new ConcurrentHashMap<Class, FluentPage>();
 
     public FluentAdapter(WebDriver webDriver) {
         super(webDriver);
@@ -52,7 +58,7 @@ public class FluentAdapter extends Fluent {
         }
     }
 
-    protected void cleanUpTest() {
+    protected void cleanUp() {
         pageInstances.clear();
     }
 
@@ -72,7 +78,7 @@ public class FluentAdapter extends Fluent {
                     } else {
                         FluentPage page = initClass(clsPage);
                         field.set(container, page);
-                        pageInstances.put(clsPage, page);
+                        pageInstances.putIfAbsent(clsPage, page);
                         injectPageIntoContainer(page);
                     }
                 }
