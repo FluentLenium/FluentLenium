@@ -3,7 +3,7 @@
 FluentLenium is a framework that helps you to write [Selenium](http://seleniumhq.org/) tests.
 FluentLenium provides you a [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to the [Selenium Web Driver](http://seleniumhq.org/docs/03_webdriver.html).
 FluentLenium lets you use the assertion framework you like, either [jUnit assertions](http://www.junit.org/apidocs/org/junit/Assert.html), [Hamcrest](http://code.google.com/p/hamcrest/wiki/Tutorial) 
-or [Fest-assert](http://docs.codehaus.org/display/FEST/Fluent+Assertions+Module).
+or [Fest-assert](https://github.com/alexruiz/fest-assert-2.x/wiki).
 
 
 # 5 second example
@@ -324,7 +324,7 @@ public void checkLoginFailed() {
 }
 ```
 
-Or if you have the [Fest-assert](http://docs.codehaus.org/display/FEST/Fluent+Assertions+Module) module (just static import org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat)
+Or if you have the [Fest-assert](https://github.com/alexruiz/fest-assert-2.x/wiki) module (just static import org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat)
 
 ```java
 public void checkLoginFailed() {
