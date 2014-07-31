@@ -22,19 +22,16 @@ import org.fluentlenium.cucumber.page.LocalPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import static org.fest.assertions.Assertions.assertThat;
-import static org.fluentlenium.core.filter.FilterConstructor.withName;
-
 @SharedDriver(type = SharedDriver.SharedType.PER_FEATURE)
 public class SimpleFeatureMultiStep1 extends FluentCucumberTest {
 
     @Page
     LocalPage page;
 
-	@Override
-	public WebDriver getDefaultDriver() {
-		return new HtmlUnitDriver();
-	}
+    @Override
+    public WebDriver getDefaultDriver() {
+        return new HtmlUnitDriver();
+    }
 
     @Given(value = "feature multi1 I am on the first page")
     public void step1() {
