@@ -82,6 +82,20 @@ public class AlertOnLabsTest extends SauceLabsFluentCase {
   }
 
   @Test
+  public void should_get_text() {
+    // Given
+    // When
+    alertPage.go();
+    alertPage.maximizeWindow();
+    // Then
+    alertPage.isAt();
+    click("#alertBox");
+    assertThat(alert().getText()).isEqualTo("alertBox");
+    alert().accept();
+
+  }
+
+  @Test
   public void should_prompt() {
     // Given
     // When

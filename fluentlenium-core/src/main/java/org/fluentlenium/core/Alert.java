@@ -14,6 +14,7 @@
 
 package org.fluentlenium.core;
 
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -42,6 +43,13 @@ public class Alert {
   }
 
   /**
+   * @return text of an alert box
+   */
+  public String getText() {
+      return webDriver.switchTo().alert().getText();
+  }
+
+  /**
    * Entering an input value
    * 
    * @param s
@@ -50,6 +58,14 @@ public class Alert {
   public void prompt(String s) {
     webDriver.switchTo().alert().sendKeys(s);
     accept();
+  }
+
+  /**
+   * Switch to an alert box
+   * @throws NoAlertPresentException if there is currently no alert box
+   */
+  public void switchTo() {
+    webDriver.switchTo().alert();
   }
 
 }
