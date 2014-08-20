@@ -14,7 +14,6 @@
 
 package org.fluentlenium.core;
 
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -51,7 +50,7 @@ public class Alert {
 
   /**
    * Entering an input value
-   * 
+   *
    * @param s
    *          field to enter
    */
