@@ -50,7 +50,7 @@ public abstract class Fluent implements SearchActions {
     private WebDriver driver;
     private String baseUrl;
     private Search search;
-	private Object jsExecResult;
+    private Object jsExecResult;
 
     public Fluent(WebDriver driver) {
         this.driver = driver;
@@ -247,24 +247,24 @@ public abstract class Fluent implements SearchActions {
         return baseUrl;
     }
 
-	/**
-	 * Get the result of JS script execution that occurred in
-	 * {@link #executeScript(String)} method.
-	 *
-	 * @return the JS script execution result, or null in the following
-	 * cases:
-	 * <ul>
-	 *     <li>
-	 *         the {@link #executeScript(String)} wasn't called, otherwise if
-	 *     </li>
-	 *     <li>the result value is null, or</li>
-	 *     <li>there is no result to return.</li>
-	 * </ul>
-	 */
-	public Object getJsExecResult()
-	{
-		return jsExecResult;
-	}
+    /**
+     * Get the result of JS script execution that occurred in
+     * {@link #executeScript(String)} method.
+     *
+     * @return the JS script execution result, or null in the following
+     * cases:
+     * <ul>
+     *     <li>
+     *         the {@link #executeScript(String)} wasn't called, otherwise if
+     *     </li>
+     *     <li>the result value is null, or</li>
+     *     <li>there is no result to return.</li>
+     * </ul>
+     */
+    public Object getJsExecResult()
+    {
+        return jsExecResult;
+    }
 
     /**
      * wait for an asynchronous call
