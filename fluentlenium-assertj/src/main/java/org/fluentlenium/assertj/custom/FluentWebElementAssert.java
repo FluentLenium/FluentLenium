@@ -131,7 +131,21 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
        return this;
     }
 
-   /**
+    /**
+     * check if the element matches the given regex
+     *
+     * @return
+     */
+    public FluentWebElementAssert hasTextMatching(String regexToBeMatched) {
+        if(!actual.getText().matches(regexToBeMatched)){
+            super.failWithMessage("The element does not match the regex: " + regexToBeMatched + " . Actual text found : " + actual.getText());
+
+        }
+
+       return this;
+    }
+
+    /**
      * check if the element does not contain the text
      *
      * @return

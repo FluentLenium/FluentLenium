@@ -102,6 +102,31 @@ public class FluentWebElementAssertTest extends LocalFluentCase {
     }
 
     @Test
+    public void testHasTestOk() throws Exception {
+        goTo(DEFAULT_URL);
+        assertThat(findFirst("#location")).hasText("Pharmacy");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasTestKo() throws Exception {
+        goTo(DEFAULT_URL);
+        assertThat(findFirst("#location")).hasText("Drugstore");
+    }
+
+    @Test
+    public void testHasTestMatchingOk() throws Exception {
+        goTo(DEFAULT_URL);
+        assertThat(findFirst("#location")).hasTextMatching("Pha\\w+cy");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasTestMatchingKo() throws Exception {
+        goTo(DEFAULT_URL);
+        executeScript("document.getElementById(\"location\").innerHTML=\"Pha rmacy\";");
+        assertThat(findFirst("#location")).hasTextMatching("Pha\\w+cy");
+    }
+
+    @Test
     public void testAssertOnOneOfManyClasses() {
         goTo(DEFAULT_URL);
         assertThat(findFirst("#multiple-css-class")).hasClass("class1");
