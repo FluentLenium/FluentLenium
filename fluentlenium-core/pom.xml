@@ -2,19 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>fr.javafreelance.fluentlenium</groupId>
+        <groupId>org.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>0.5.4-SNAPSHOT</version>
+        <version>0.10.4-SNAPSHOT</version>
     </parent>
-    <groupId>fr.javafreelance.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
     <packaging>jar</packaging>
 
 
-    <name>Fluent Lenium Core</name>
+    <name>FluentLenium Core</name>
     <description>Core of FluentLenium
     </description>
-    <url>https://github.com/MathildeLemee/FluentLenium</url>
+    <url>https://github.com/FluentLenium/FluentLenium</url>
 
 
     <licenses>
@@ -36,7 +35,7 @@
             <id>Mlemee</id>
             <name>Mathilde Lemee</name>
             <email>mathilde.lemee@gmail.com</email>
-            <url>http://www.java-freelance.fr</url>
+            <url>http://www.fluentlenium.org</url>
             <organization>AConsulting</organization>
             <organizationUrl>http://www.java-freelance.fr</organizationUrl>
             <roles>
@@ -53,18 +52,22 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.easytesting</groupId>
             <artifactId>fest-assert</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

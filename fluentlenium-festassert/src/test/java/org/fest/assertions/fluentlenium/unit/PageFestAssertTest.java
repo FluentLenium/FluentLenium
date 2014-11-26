@@ -15,9 +15,9 @@
 package org.fest.assertions.fluentlenium.unit;
 
 
-import fr.javafreelance.fluentlenium.core.FluentPage;
 import org.fest.assertions.fluentlenium.FluentLeniumAssertions;
 import org.fest.assertions.fluentlenium.custom.PageAssert;
+import org.fluentlenium.core.FluentPage;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -35,6 +35,7 @@ public class PageFestAssertTest {
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
+
     }
 
     @Test
