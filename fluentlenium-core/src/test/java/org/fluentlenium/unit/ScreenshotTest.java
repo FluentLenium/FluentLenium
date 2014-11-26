@@ -21,7 +21,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.openqa.selenium.*;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 

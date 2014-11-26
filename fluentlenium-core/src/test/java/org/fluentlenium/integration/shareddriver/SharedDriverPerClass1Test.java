@@ -14,7 +14,6 @@
 
 package org.fluentlenium.integration.shareddriver;
 
-import org.fluentlenium.adapter.FluentTest;
 import org.fluentlenium.adapter.util.SharedDriver;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.FixMethodOrder;

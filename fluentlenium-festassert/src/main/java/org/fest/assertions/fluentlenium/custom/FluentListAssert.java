@@ -14,10 +14,10 @@
 
 package org.fest.assertions.fluentlenium.custom;
 
-import java.util.List;
-
 import org.fest.assertions.GenericAssert;
 import org.fluentlenium.core.domain.FluentList;
+
+import java.util.List;
 
 public class FluentListAssert extends GenericAssert<FluentListAssert, FluentList> {
     public FluentListAssert(FluentList<?> actual) {

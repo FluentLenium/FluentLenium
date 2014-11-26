@@ -14,7 +14,8 @@
 
 package org.fluentlenium.integration;
 
-import org.fluentlenium.core.domain.*;
+import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 

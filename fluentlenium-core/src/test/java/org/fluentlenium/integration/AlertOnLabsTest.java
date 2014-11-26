@@ -12,9 +12,6 @@
  * limitations under the License
  */
 package org.fluentlenium.integration;
-import static org.fest.assertions.Assertions.assertThat;
-
-import java.util.concurrent.TimeUnit;
 
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
@@ -23,6 +20,10 @@ import org.fluentlenium.integration.localtest.SauceLabsFluentCase;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.util.concurrent.TimeUnit;
+
+import static org.fest.assertions.Assertions.assertThat;
 
 public class AlertOnLabsTest extends SauceLabsFluentCase {
 

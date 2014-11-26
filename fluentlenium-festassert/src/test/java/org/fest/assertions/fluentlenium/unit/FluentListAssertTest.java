@@ -13,12 +13,6 @@
  */
 package org.fest.assertions.fluentlenium.unit;
 
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.Collections;
-
 import org.fest.assertions.fluentlenium.FluentLeniumAssertions;
 import org.fest.assertions.fluentlenium.custom.FluentListAssert;
 import org.fluentlenium.core.domain.FluentList;
@@ -28,6 +22,12 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.when;
 
 public class FluentListAssertTest<E extends FluentWebElement> {
 	

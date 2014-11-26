@@ -14,10 +14,10 @@
 
 package org.fluentlenium.sample;
 
-import static org.fest.assertions.Assertions.assertThat;
-
 import org.fluentlenium.adapter.FluentTest;
 import org.junit.Test;
+
+import static org.fest.assertions.Assertions.assertThat;
 
 public class BingTest extends FluentTest {
 

@@ -13,12 +13,12 @@
  */
 package org.fluentlenium.integration;
 
-import static org.fest.assertions.Assertions.*;
+import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.junit.Test;
+import org.openqa.selenium.WebElement;
 
-import org.fluentlenium.core.domain.*;
-import org.fluentlenium.integration.localtest.*;
-import org.junit.*;
-import org.openqa.selenium.*;
+import static org.fest.assertions.Assertions.assertThat;
 
 public class FluentWebElementSubclassInTest extends LocalFluentCase {
     ALink linkToPage2;

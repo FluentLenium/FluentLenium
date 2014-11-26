@@ -14,12 +14,12 @@
 
 package org.fluentlenium.unit.initialization;
 
-import static org.fest.assertions.Assertions.assertThat;
-
 import org.fluentlenium.adapter.FluentTest;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import static org.fest.assertions.Assertions.assertThat;
 
 public class ConstructorInitialization extends FluentTest {
     public WebDriver webDriver = new HtmlUnitDriver();

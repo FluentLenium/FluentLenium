@@ -15,7 +15,8 @@
 package org.fluentlenium.core.domain;
 
 import org.fluentlenium.core.FluentThread;
-import org.fluentlenium.core.action.*;
+import org.fluentlenium.core.action.FillConstructor;
+import org.fluentlenium.core.action.FluentDefaultActions;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
