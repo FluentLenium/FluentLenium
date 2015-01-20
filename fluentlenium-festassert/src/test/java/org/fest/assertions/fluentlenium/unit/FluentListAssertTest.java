@@ -19,7 +19,6 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -31,15 +30,15 @@ import static org.mockito.Mockito.when;
 
 public class FluentListAssertTest<E extends FluentWebElement> {
 	
-	@Mock
+	  @Mock
     FluentList<E> fluentList;
     
-    @InjectMocks
-    FluentListAssert listAssert = FluentLeniumAssertions.assertThat(fluentList);
+    FluentListAssert listAssert;
 
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
+        listAssert = FluentLeniumAssertions.assertThat(fluentList);
     }
 	
     @Test

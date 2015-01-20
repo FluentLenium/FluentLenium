@@ -13,33 +13,30 @@
  */
 package org.fluentlenium.assertj.unit;
 
+import java.util.Arrays;
+import java.util.Collections;
 import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.assertj.custom.FluentListAssert;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
+import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.util.Arrays;
-import java.util.Collections;
-
-import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
+import org.mockito.MockitoAnnotations;
 
 public class FluentListAssertTest<E extends FluentWebElement> {
 	
-	@Mock
+	  @Mock
     FluentList<E> fluentList;
     
-    @InjectMocks
-    FluentListAssert listAssert = FluentLeniumAssertions.assertThat(fluentList);
+    FluentListAssert listAssert;
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
+      MockitoAnnotations.initMocks(this);
+      listAssert = FluentLeniumAssertions.assertThat(fluentList);
     }
 	
     @Test

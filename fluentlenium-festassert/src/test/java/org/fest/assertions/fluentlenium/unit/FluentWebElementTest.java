@@ -18,21 +18,25 @@ package org.fest.assertions.fluentlenium.unit;
 import org.fest.assertions.fluentlenium.FluentLeniumAssertions;
 import org.fest.assertions.fluentlenium.custom.FluentWebElementAssert;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.when;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.Dimension;
-
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FluentWebElementTest {
     @Mock
     FluentWebElement fluentWebElement;
-    @InjectMocks
-    FluentWebElementAssert fluentWebElementAssert = FluentLeniumAssertions.assertThat(fluentWebElement);
+
+    FluentWebElementAssert fluentWebElementAssert;
+
+    @Before
+    public void setup() {
+      fluentWebElementAssert = FluentLeniumAssertions.assertThat(fluentWebElement);
+    }
 
     @Test
     public void testIsEnabledOk() {
