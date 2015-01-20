@@ -17,7 +17,7 @@ package org.fluentlenium.sample;
 import org.fluentlenium.adapter.FluentTestNg;
 import org.testng.annotations.Test;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BingTest extends FluentTestNg {
 

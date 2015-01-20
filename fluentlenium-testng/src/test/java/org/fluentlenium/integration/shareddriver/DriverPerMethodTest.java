@@ -17,7 +17,7 @@ package org.fluentlenium.integration.shareddriver;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.testng.annotations.Test;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
 public class DriverPerMethodTest extends LocalFluentCase {

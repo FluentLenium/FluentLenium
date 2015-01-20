@@ -17,7 +17,7 @@ package org.fluentlenium.integration;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.*;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 
