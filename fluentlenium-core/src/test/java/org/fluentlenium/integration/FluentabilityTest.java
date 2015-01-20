@@ -18,7 +18,7 @@ import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluentabilityTest extends LocalFluentCase {
 

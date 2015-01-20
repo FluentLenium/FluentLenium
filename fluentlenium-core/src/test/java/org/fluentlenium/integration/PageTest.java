@@ -22,7 +22,7 @@ import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.openqa.selenium.support.FindBy;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PageTest extends LocalFluentCase {
     @Page

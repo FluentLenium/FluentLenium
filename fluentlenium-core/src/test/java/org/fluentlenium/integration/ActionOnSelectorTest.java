@@ -18,7 +18,7 @@ import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ActionOnSelectorTest extends LocalFluentCase {
 

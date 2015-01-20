@@ -19,7 +19,7 @@ import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.openqa.selenium.Cookie;
 import org.testng.annotations.Test;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
 @SharedDriver

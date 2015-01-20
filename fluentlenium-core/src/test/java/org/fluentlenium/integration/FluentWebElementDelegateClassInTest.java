@@ -17,7 +17,7 @@ import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluentWebElementDelegateClassInTest extends LocalFluentCase {
     ALink linkToPage2;

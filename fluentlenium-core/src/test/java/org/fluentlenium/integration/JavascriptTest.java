@@ -17,12 +17,13 @@ package org.fluentlenium.integration;
 
 import com.google.common.base.Stopwatch;
 import java.util.concurrent.TimeUnit;
-import static org.fest.assertions.Assertions.assertThat;
 import org.fluentlenium.core.domain.FluentJavascript;
-import static org.fluentlenium.core.filter.FilterConstructor.with;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.fluentlenium.core.filter.FilterConstructor.with;
 
 public class JavascriptTest extends LocalFluentCase {
 
