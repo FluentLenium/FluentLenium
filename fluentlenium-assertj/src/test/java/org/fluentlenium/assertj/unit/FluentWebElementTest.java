@@ -18,24 +18,22 @@ package org.fluentlenium.assertj.unit;
 import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.assertj.custom.FluentWebElementAssert;
 import org.fluentlenium.core.domain.FluentWebElement;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
+import org.mockito.MockitoAnnotations;
 
 public class FluentWebElementTest {
     @Mock
     FluentWebElement fluentWebElement;
-    @InjectMocks
-    FluentWebElementAssert fluentWebElementAssert = FluentLeniumAssertions.assertThat(fluentWebElement);
+    FluentWebElementAssert fluentWebElementAssert;
 
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
+        fluentWebElementAssert = FluentLeniumAssertions.assertThat(fluentWebElement);
     }
 
     @Test
