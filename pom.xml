@@ -135,7 +135,6 @@
               <include>**/integration/**Test.java</include>
               <include>**/integration/**/**Test.java</include>
           </includes>
-          <runOrder>alphabetical</runOrder>
         </configuration>
         <executions>
           <execution>

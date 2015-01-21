@@ -23,9 +23,10 @@ import org.junit.runners.MethodSorters;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
-@SharedDriver
+@SharedDriver(type = SharedDriver.SharedType.PER_METHOD)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class SharedDriverOnce1Test extends LocalFluentCase {
+public class SharedDriverPerMethodByAnnotation extends LocalFluentCase {
+
 
   @Test
   public void firstMethod() {
@@ -36,9 +37,8 @@ public class SharedDriverOnce1Test extends LocalFluentCase {
 
   @Test
   public void secondMethod() {
-    assertThat($(".small", withName("name"))).hasSize(1);
+    assertThat($(".small", withName("name"))).hasSize(0);
   }
-
 
 
 
