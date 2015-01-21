@@ -3,14 +3,14 @@
 FluentLenium is a framework that helps you to write [Selenium](http://seleniumhq.org/) tests.
 FluentLenium provides you a [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to the [Selenium Web Driver](http://seleniumhq.org/docs/03_webdriver.html).
 FluentLenium lets you use the assertion framework you like, either [jUnit assertions](http://www.junit.org/apidocs/org/junit/Assert.html), [Hamcrest](http://code.google.com/p/hamcrest/wiki/Tutorial) 
-or [Fest-assert](https://github.com/alexruiz/fest-assert-2.x/wiki).
+or [AssertJ](https://github.com/joel-costigliola/assertj-core)  (old one: ~~[Fest-assert](https://github.com/alexruiz/fest-assert-2.x/wiki)~~).
 
 
 # 5 second example
 ```java
 import org.junit.Test;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BingTest extends FluentTest {
     @Test
@@ -70,11 +70,11 @@ If you need to do some filtering:
 import static org.fluentlenium.core.filter.FilterConstructor.*;
 ```
 
-### Static import using assertJ
-The static assertions to use fest assert are:
+### Static import using AssertJ
+The static assertions to use AssertJ are:
 
 ```java
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 ```
 
@@ -324,7 +324,7 @@ public void checkLoginFailed() {
 }
 ```
 
-Or if you have the [Fest-assert](https://github.com/alexruiz/fest-assert-2.x/wiki) module (just static import org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat)
+Or if you have the [AssertJ](https://github.com/joel-costigliola/assertj-core) module (just static import org.fluentlenium.assertj.FluentLeniumAssertions.assertThat)
 
 ```java
 public void checkLoginFailed() {
@@ -533,7 +533,7 @@ $("#create-button").click();
 assertThat(title()).isEqualTo("Hello toto");
 ```
 
-Both syntaxes are equivalent. `$` is simply an alias for the `find` method.
+Both syntax are equivalent. `$` is simply an alias for the `find` method.
 
 
 ## Execute javascript
@@ -542,6 +542,12 @@ For example, if you have a javascript method called change and you want to call 
 
 ```java
 executeScript("change();");
+```
+
+You can either execute javascript with arguments, with async `executeAsyncScript`, and retrieve the result.
+
+```java
+executeScript("change();", 12L).getStringResult();
 ```
 
 ## Taking Snapshots
@@ -661,7 +667,7 @@ If you have any comments/remarks/bugs, please raise an issue on github:
 ## FluentLenium and other frameworks
 
 ### jUnit
-FluentLenium uses jUnit by default. You can use test using [jUnit](http://www.junit.org) assertions, but can of course use others frameworks such as [Fluent-assert](https://github.com/alexruiz/fest-assert-2.x/wiki) or [Hamcrest](http://code.google.com/p/hamcrest/).
+FluentLenium uses jUnit by default. You can use test using [jUnit](http://www.junit.org) assertions, but can of course use others frameworks such as [AssertJ](https://github.com/joel-costigliola/assertj-core) or [Hamcrest](http://code.google.com/p/hamcrest/).
 
 ```java
 goTo("http://mywebpage/");

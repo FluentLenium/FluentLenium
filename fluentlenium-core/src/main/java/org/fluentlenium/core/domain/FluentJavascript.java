@@ -90,7 +90,7 @@ public class FluentJavascript extends Fluent {
   }
 
   /**
-   * @return the result of javascript execution casted as Double.
+   * @return the result of javascript execution cast as Double.
    * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
    */
   public Double getDoubleResult() {
@@ -98,7 +98,7 @@ public class FluentJavascript extends Fluent {
   }
 
   /**
-   * @return the result of javascript execution casted as Long.
+   * @return the result of javascript execution cast as Long.
    * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
    */
   public Boolean getBooleanResult() {
@@ -106,7 +106,7 @@ public class FluentJavascript extends Fluent {
   }
 
   /**
-   * @return the result of javascript execution casted as Long.
+   * @return the result of javascript execution cast as Long.
    * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
    */
   public Long getLongResult() {
@@ -114,7 +114,7 @@ public class FluentJavascript extends Fluent {
   }
 
   /**
-   * @return the result of javascript execution casted as String.
+   * @return the result of javascript execution cast as String.
    * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
    */
   public String getStringResult() {
@@ -122,7 +122,7 @@ public class FluentJavascript extends Fluent {
   }
 
   /**
-   * @return the result of javascript execution casted as List.
+   * @return the result of javascript execution cast as List.
    * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
    */
   public List getListResult() {
