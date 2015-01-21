@@ -115,7 +115,7 @@ public class AlertOnLabsTest extends SauceLabsFluentCase {
 class AlertPage extends FluentPage {
   @Override
   public String getUrl() {
-    return LocalFluentCase.DEFAULT_URL + "alert.html";
+    return LocalFluentCase.BASE_URL + "alert.html";
   }
 
   @Override

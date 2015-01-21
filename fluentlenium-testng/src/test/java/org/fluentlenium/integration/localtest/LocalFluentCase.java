@@ -27,12 +27,16 @@ public abstract class LocalFluentCase extends FluentTestNg {
         return new HtmlUnitDriver(true);
     }
 
-    public final static String getPath() {
+    public static String getPath() {
         String currentDir = System.getProperty("user.dir");
         if (!currentDir.endsWith("/fluentlenium-testng")){
             currentDir+="/fluentlenium-testng";
         }
-        return "file:/" + currentDir + "/src/test/html/";
+        String scheme = "file:/";
+        if (currentDir.startsWith("/home")) {
+          scheme = "file:";
+        }
+        return scheme + currentDir + "/src/test/html/";
     }
 }
 

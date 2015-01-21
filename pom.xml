@@ -21,6 +21,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+    <surefire.version>2.18.1</surefire.version>
   </properties>
 
   <name>FluentLenium</name>
@@ -65,6 +66,7 @@
       </roles>
     </developer>
   </developers>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -76,6 +78,7 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>4.12</version>
+          <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.eclipse.jetty</groupId>
@@ -121,7 +124,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>2.6</version>
+        <version>${surefire.version}</version>
         <configuration>
           <excludes>
             <exclude>**/unit/**</exclude>
@@ -144,7 +147,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.18</version>
+        <version>${surefire.version}</version>
         <configuration>
           <excludes>
             <exclude>**/integration/**</exclude>
@@ -226,7 +229,7 @@
         <plugins>
           <plugin>
             <artifactId>maven-failsafe-plugin</artifactId>
-            <version>2.18</version>
+            <version>${surefire.version}</version>
             <configuration>
                 <excludes>
                   <exclude>**/unit/**</exclude>
