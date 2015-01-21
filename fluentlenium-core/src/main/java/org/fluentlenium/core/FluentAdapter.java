@@ -25,9 +25,19 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Proxy;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class FluentAdapter extends Fluent {
+
+    private final ConcurrentMap<Class, FluentPage> pageInstances = new ConcurrentHashMap<Class, FluentPage>();
 
     public FluentAdapter(WebDriver webDriver) {
         super(webDriver);
@@ -48,6 +58,10 @@ public class FluentAdapter extends Fluent {
         }
     }
 
+    protected void cleanUp() {
+        pageInstances.clear();
+    }
+
     private void injectPageIntoContainer(Fluent container)
             throws ClassNotFoundException, IllegalAccessException {
         for (Class cls = container.getClass();
@@ -58,9 +72,15 @@ public class FluentAdapter extends Fluent {
                     field.setAccessible(true);
                     Class clsField = field.getType();
                     Class clsPage = Class.forName(clsField.getName());
-                    FluentPage page = initClass(clsPage);
-                    field.set(container, page);
-                    injectPageIntoContainer(page);
+                    Fluent existingPage = pageInstances.get(clsPage);
+                    if (existingPage != null) {
+                        field.set(container, existingPage);
+                    } else {
+                        FluentPage page = initClass(clsPage);
+                        field.set(container, page);
+                        pageInstances.putIfAbsent(clsPage, page);
+                        injectPageIntoContainer(page);
+                    }
                 }
             }
         }
@@ -90,7 +110,6 @@ public class FluentAdapter extends Fluent {
 
             //init fields with default proxies
             initFluentWebElements(page);
-
             return page;
         } catch (ClassNotFoundException e) {
             throw new ConstructionException("Class " + cls.getName() + "not found", e);
