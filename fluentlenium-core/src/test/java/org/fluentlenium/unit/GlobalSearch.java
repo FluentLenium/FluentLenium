@@ -16,8 +16,8 @@ package org.fluentlenium.unit;
 
 
 import com.google.common.collect.Lists;
-import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.matcher.Matcher;
 import org.fluentlenium.core.search.Search;

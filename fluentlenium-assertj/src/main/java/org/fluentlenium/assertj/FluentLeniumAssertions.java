@@ -19,8 +19,8 @@ import org.fluentlenium.assertj.custom.FluentWebElementAssert;
 import org.fluentlenium.assertj.custom.PageAssert;
 import org.fluentlenium.core.Alert;
 import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.domain.FluentList;
 
 public final class FluentLeniumAssertions {
 

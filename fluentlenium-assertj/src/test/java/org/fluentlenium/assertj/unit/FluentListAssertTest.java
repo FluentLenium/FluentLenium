@@ -17,9 +17,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.assertj.custom.FluentListAssert;
-import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import static org.junit.Assert.assertNotNull;
+
+import org.fluentlenium.core.domain.FluentList;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -29,7 +30,7 @@ import org.mockito.MockitoAnnotations;
 public class FluentListAssertTest<E extends FluentWebElement> {
 	
 	  @Mock
-    FluentList<E> fluentList;
+      FluentList<E> fluentList;
     
     FluentListAssert listAssert;
 

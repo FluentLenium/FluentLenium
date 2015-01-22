@@ -17,8 +17,9 @@ package org.fluentlenium.core.search;
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
-import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterPredicate;
 import org.openqa.selenium.By;
@@ -62,7 +63,7 @@ public class Search implements SearchActions<FluentWebElement> {
             postFiltered = Collections2.filter(postFiltered, new FilterPredicate(selector));
         }
 
-        return new FluentList<FluentWebElement>(postFiltered);
+        return new FluentListImpl<FluentWebElement>(postFiltered);
     }
 
     private List<FluentWebElement> select(String cssSelector) {

@@ -13,8 +13,13 @@
  */
 package org.fluentlenium.core;
 
+import com.google.common.base.Function;
+import com.google.common.collect.FluentIterable;
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
+import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentListImpl;
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.exception.ConstructionException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,6 +37,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -161,11 +167,15 @@ public class FluentAdapter extends Fluent {
 
     private boolean isFluentWebElementField(Field field) {
         try {
-            return !Modifier.isFinal(field.getModifiers()) &&
-                    field.getType().getConstructor(WebElement.class) != null;
+            return !Modifier.isFinal(field.getModifiers()) && (isFluentList(field) ||
+                    field.getType().getConstructor(WebElement.class) != null);
         } catch (Exception e) {
             return false; // Constructor not found
         }
+    }
+
+    private static boolean isFluentList(Field field) {
+        return FluentList.class.isAssignableFrom(field.getType());
     }
 
     private static void proxyElement(ElementLocatorFactory factory, Object page, Field field) {
@@ -174,14 +184,48 @@ public class FluentAdapter extends Fluent {
             return;
         }
 
-        InvocationHandler handler = new LocatingElementHandler(locator);
-        WebElement proxy = (WebElement) Proxy.newProxyInstance(
-                page.getClass().getClassLoader(), new Class[]{WebElement.class}, handler);
         try {
             field.setAccessible(true);
-            field.set(page, field.getType().getConstructor(WebElement.class).newInstance(proxy));
+            if (isFluentList(field)) {
+                // LocatingElementListHandler is not a good choice, elements are FluentWebElement not WebElement.
+                final InvocationHandler handler = new FluentListInvocationHandler(locator);
+                FluentList<FluentWebElement> proxy = (FluentList<FluentWebElement>) Proxy.newProxyInstance(
+                        page.getClass().getClassLoader(), new Class[]{FluentList.class}, handler);
+                field.set(page, proxy);
+            } else {
+                final InvocationHandler handler = new LocatingElementHandler(locator);
+                WebElement proxy = (WebElement) Proxy.newProxyInstance(
+                        page.getClass().getClassLoader(), new Class[]{WebElement.class}, handler);
+                field.set(page, field.getType().getConstructor(WebElement.class).newInstance(proxy));
+            }
         } catch (Exception e) {
             throw new RuntimeException("Unable to find an accessible constructor with an argument of type WebElement in " + field.getType(), e);
+        }
+    }
+
+    private static class FluentListInvocationHandler implements InvocationHandler {
+
+        private final ElementLocator elementLocator;
+
+        public FluentListInvocationHandler(ElementLocator elementLocator) {
+            this.elementLocator = elementLocator;
+        }
+
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            List<WebElement> elements = elementLocator.findElements();
+            FluentListImpl list = new FluentListImpl(FluentIterable.from(elements).transform(new Function<WebElement, FluentWebElement>() {
+                @Override
+                public FluentWebElement apply(WebElement input) {
+                    return new FluentWebElement(input);
+                }
+            }).toList());
+            try {
+                return method.invoke(list, args);
+            } catch (InvocationTargetException e) {
+                // Unwrap the underlying exception
+                throw e.getCause();
+            }
         }
     }
 
@@ -220,6 +264,5 @@ public class FluentAdapter extends Fluent {
             getDriver().quit();
         }
     }
-
 
 }

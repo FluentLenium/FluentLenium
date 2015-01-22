@@ -192,7 +192,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * @param filters
      * @return
      */
-    public  FluentList<FluentWebElement> find(String name, Filter... filters) {
+    public FluentList<FluentWebElement> find(String name, Filter... filters) {
         return search.find(name, filters);
     }
 

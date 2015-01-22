@@ -14,8 +14,8 @@
 
 package org.fluentlenium.core.search;
 
-import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.filter.Filter;
 
 
