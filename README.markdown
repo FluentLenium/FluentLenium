@@ -594,7 +594,7 @@ withDefaultPageWait(long l, TimeUnit timeUnit);
 Be aware that when you modified this elements, the webDriver instance will be modified so your page will also be affected.
 
 ### Configuration
-You can define a default driver configuration using to ways.
+You can define a default driver configuration using two ways.
 First, just override the getDriver method and use the selenium way to configure your driver.
 You can also override the setDefaultConfig method and use both selenium and FluentLenium way (withDefaultSearchWait,withDefaultPageWait) to configure your driver.
 
