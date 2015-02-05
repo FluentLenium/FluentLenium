@@ -553,12 +553,12 @@ executeScript("change();", 12L).getStringResult();
 ## Taking Snapshots
 You can take a snaphost of the browser
 ```java
-driver.takeScreenShot();
+takeScreenShot();
 ```
 The file will be named using the current timestamp.
 You can of course specify a path and a name using:
 ```java
-driver.takeScreenShot(pathAndfileName);
+takeScreenShot(pathAndfileName);
 ```
 
 ## Isolate Tests
