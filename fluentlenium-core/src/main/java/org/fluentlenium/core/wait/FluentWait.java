@@ -15,8 +15,10 @@ package org.fluentlenium.core.wait;
 
 
 import com.google.common.base.Function;
+
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.openqa.selenium.Beta;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -127,6 +129,27 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     public FluentWaitMatcher until(String string) {
         updateWaitWithDefaultExceptions();
         return new FluentWaitMatcher(search, this, string);
+    }
+    
+    /**
+     * @param string - CSS selector
+     * @param filters
+     * @return
+     */
+    public FluentWaitMatcher until(String string, Filter... filters) {
+        updateWaitWithDefaultExceptions();
+        return new FluentWaitMatcher(search, this, string);
+    }
+
+    /**
+     * @param filters
+     * @return
+     */
+    public FluentWaitMatcher until(Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return until("*", filters);
     }
 
     /**

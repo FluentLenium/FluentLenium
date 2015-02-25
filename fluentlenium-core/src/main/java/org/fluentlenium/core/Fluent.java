@@ -358,7 +358,19 @@ public abstract class Fluent implements SearchActions {
     public FluentList<FluentWebElement> $(String name, final Filter... filters) {
         return search.find(name, filters);
     }
-
+    
+    /**
+     * Central methods to find elements on the page with filters.
+     *
+     * @param filters
+     * @return
+     */
+    public FluentList<FluentWebElement> $(final Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return $("*", filters);
+    }
 
     /**
      * Central methods a find element on the page, the number indicat the index of the desired element on the list. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
@@ -371,6 +383,20 @@ public abstract class Fluent implements SearchActions {
         return search.find(name, number, filters);
     }
 
+    /**
+     * Central method to find an element on the page with filters.
+     * The number indicates the index of the desired element on the list. 
+     *
+     * @param number
+     * @param filters
+     * @return
+     */
+    public FluentWebElement $(Integer number, final Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return $("*", number, filters);
+    }
 
     /**
      * return the lists corresponding to the cssSelector with it filters
@@ -382,6 +408,19 @@ public abstract class Fluent implements SearchActions {
      */
     public FluentList<FluentWebElement> find(String name, final Filter... filters) {
         return search.find(name, filters);
+    }
+    
+    /**
+     * Return the list filtered by the specified filters.
+     * 
+     * @param filters
+     * @return
+     */
+    public FluentList<FluentWebElement> find(final Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return find("*", filters);
     }
 
     /**
@@ -395,6 +434,20 @@ public abstract class Fluent implements SearchActions {
     public FluentWebElement find(String name, Integer number, final Filter... filters) {
         return search.find(name, number, filters);
     }
+    
+    /**
+     * Return the element at the number position in the list filtered by the specified filters.
+     * 
+     * @param number
+     * @param filters
+     * @return
+     */
+    public FluentWebElement find(Integer number, final Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return find("*", number, filters);
+    }
 
     /**
      * Return the first elements corresponding to the name and the filters
@@ -406,6 +459,19 @@ public abstract class Fluent implements SearchActions {
     public FluentWebElement findFirst(String name, final Filter... filters) {
         return search.findFirst(name, filters);
     }
+    
+    /**
+     * Return the first element corresponding to the filters.
+     *
+     * @param filters
+     * @return
+     */
+    public FluentWebElement findFirst(final Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return findFirst("*", filters);
+    }
 
     /**
      * Construct a FillConstructor in order to allow easy fill
@@ -415,6 +481,19 @@ public abstract class Fluent implements SearchActions {
      */
     public FillConstructor fill(String cssSelector, Filter... filters) {
         return new FillConstructor(cssSelector, getDriver(), filters);
+    }
+    
+    /**
+     * Construct a FillConstructor with filters in order to allow easy fill.
+     * Be careful - only the visible elements are filled
+     *
+     * @param filters
+     */
+    public FillConstructor fill(Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return fill("*", filters);
     }
 
     /**
@@ -436,6 +515,19 @@ public abstract class Fluent implements SearchActions {
     public FillSelectConstructor fillSelect(String cssSelector, Filter... filters) {
         return new FillSelectConstructor(cssSelector, getDriver(), filters);
     }
+    
+    /**
+     * Construct a FillSelectConstructor with filters in order to allow easy fill.
+     * Be careful - only the visible elements are filled
+     *
+     * @param filters
+     */
+    public FillSelectConstructor fillSelect(Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return fillSelect("*", filters);
+    }
 
     /**
      * click all elements that are in cssSelector with its filters
@@ -446,6 +538,19 @@ public abstract class Fluent implements SearchActions {
     public Fluent click(String cssSelector, Filter... filters) {
         $(cssSelector, filters).click();
         return this;
+    }
+    
+    /**
+     * Click all elements filtered by the specified filters.
+     * Be careful - only the visible elements are clicked
+     *
+     * @param filters
+     */
+    public Fluent click(Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return click("*", filters);
     }
 
     /**
@@ -458,6 +563,19 @@ public abstract class Fluent implements SearchActions {
         $(cssSelector, filters).clear();
         return this;
     }
+    
+    /**
+     * Clear texts of the all elements filtered by the specified filters.
+     * Be careful - only the visible elements are cleared
+     *
+     * @param filters
+     */
+    public Fluent clear(Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return clear("*", filters);
+    }
 
     /**
      * Submit all elements that are in cssSelector with its filters
@@ -469,6 +587,19 @@ public abstract class Fluent implements SearchActions {
         $(cssSelector, filters).submit();
         return this;
     }
+    
+    /**
+     * Submit all elements filtered by the specified filters.
+     * Be careful - only the visible elements are submitted
+     *
+     * @param filters
+     */
+    public Fluent submit(Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return submit("*", filters);
+    }
 
     /**
      * get a list all elements that are in cssSelector with its filters
@@ -479,6 +610,20 @@ public abstract class Fluent implements SearchActions {
      */
     public List<String> text(String cssSelector, Filter... filters) {
         return $(cssSelector, filters).getTexts();
+    }
+    
+    /**
+     * Get all texts of the elements filtered by the specified filters.
+     * Be careful - only the visible elements are submitted
+     * //TODO UTILITY ? Deprecated ?
+     *
+     * @param filters
+     */
+    public List<String> text(Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return text("*", filters);
     }
 
     /**
@@ -492,6 +637,19 @@ public abstract class Fluent implements SearchActions {
         return $(cssSelector, filters).getValues();
     }
 
+    /**
+     * Get all values of the elements filtered by the specified filters.
+     * Be careful - only the visible elements are submitted
+     * //TODO UTILITY ? Deprecated ?
+     *
+     * @param filters
+     */
+    public List<String> value(Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return value("*", filters);
+    }
 
     /**
      * click all elements that are in the list

@@ -33,10 +33,15 @@ public class FluentWaitMatcher {
     private String selector;
     private FluentWait wait;
 
-    public FluentWaitMatcher(Search search, FluentWait fluentWait, String selector) {
+    public FluentWaitMatcher(Search search, FluentWait fluentWait, String selector, Filter...filters) {
         this.selector = selector;
         wait = fluentWait;
         this.search = search;
+        if (filters != null) {
+            for (Filter filter : filters) {
+                this.filters.add(filter);
+            }
+        }
     }
 
     /**

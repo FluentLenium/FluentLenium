@@ -195,6 +195,19 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     public  FluentList<FluentWebElement> find(String name, Filter... filters) {
         return search.find(name, filters);
     }
+    
+    /**
+     * find elements in the children with the corresponding filters
+     *
+     * @param filters
+     * @return
+     */
+    public  FluentList<FluentWebElement> find(Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return find("*", filters);
+    }
 
     /**
      * find elements into the childs with the corresponding filters at the given position
@@ -206,6 +219,20 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     public FluentWebElement find(String name, Integer number, Filter... filters) {
         return search.find(name, number, filters);
     }
+    
+    /**
+     * find element in the children with the corresponding filters at the given position
+     * 
+     * @param number
+     * @param filters
+     * @return
+     */
+    public FluentWebElement find(Integer number, Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return find("*", number, filters);
+    }
 
     /**
      * find elements into the children with the corresponding filters at the first position
@@ -216,6 +243,20 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public FluentWebElement findFirst(String name, Filter... filters) {
         return search.findFirst(name, filters);
+    }
+    
+    /**
+     * find element in the children with the corresponding filters at the first position
+     *
+     * @param name
+     * @param filters
+     * @return
+     */
+    public FluentWebElement findFirst(Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return findFirst("*", filters);
     }
 
     /**
