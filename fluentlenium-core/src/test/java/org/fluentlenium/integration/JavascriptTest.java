@@ -120,7 +120,7 @@ public class JavascriptTest extends LocalFluentCase {
 
   @Test
   public void should_executeAsyncScript_return_String() {
-    getDriver().manage().timeouts().setScriptTimeout(100, TimeUnit.MILLISECONDS);
+    getDriver().manage().timeouts().setScriptTimeout(200, TimeUnit.MILLISECONDS);
 
     final Stopwatch stopwatch = Stopwatch.createStarted();
     final FluentJavascript fluentJavascript = executeAsyncScript(
