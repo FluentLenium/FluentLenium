@@ -66,7 +66,7 @@ public class FluentJavascript extends Fluent {
   }
 
   /**
-   * @return true if the result of javascript execution can be retrieved to Double.
+   * @return true if the result of javascript execution can be retrieved to Long.
    * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
    */
   public boolean isLongResult() {
@@ -74,7 +74,7 @@ public class FluentJavascript extends Fluent {
   }
 
   /**
-   * @return true if the result of javascript execution can be retrieved to Double.
+   * @return true if the result of javascript execution can be retrieved to List.
    * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
    */
   public boolean isListResult() {
@@ -98,7 +98,7 @@ public class FluentJavascript extends Fluent {
   }
 
   /**
-   * @return the result of javascript execution cast as Long.
+   * @return the result of javascript execution cast as Boolean.
    * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
    */
   public Boolean getBooleanResult() {
