@@ -27,6 +27,12 @@ public class FillConstructor extends org.fluentlenium.core.Fluent {
         this.cssSelector = cssSelector;
         this.filters = filters;
     }
+    
+    public FillConstructor(WebDriver webDriver, Filter... filters) {
+        super(webDriver);
+        this.cssSelector = "*";
+        this.filters = filters;
+    }
 
     public FillConstructor(FluentDefaultActions list, WebDriver driver, Filter... filters) {
         super(driver);

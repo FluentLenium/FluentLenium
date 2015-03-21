@@ -17,6 +17,7 @@ package org.fluentlenium.core.search;
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
+
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.domain.FluentList;
@@ -46,6 +47,7 @@ public class Search implements SearchActions<FluentWebElement> {
      * @param filters
      * @return
      */
+    @Override
     public FluentList<FluentWebElement> find(String name, final Filter... filters) {
         StringBuilder sb = new StringBuilder(name);
         List<Filter> postFilterSelector = new ArrayList<Filter>();
@@ -74,6 +76,19 @@ public class Search implements SearchActions<FluentWebElement> {
         });
     }
 
+    /**
+     * Central methods to find elements on the page with filters.
+     * 
+     * @param filters
+     * @return
+     */
+    @Override
+    public FluentList<FluentWebElement> find(Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return find("*", filters);
+    }
 
     /**
      * Return the elements at the numner position into the the lists corresponding to the cssSelector with it filters
@@ -83,6 +98,7 @@ public class Search implements SearchActions<FluentWebElement> {
      * @param filters
      * @return
      */
+    @Override
     public FluentWebElement find(String name, Integer number, final Filter... filters) {
         List<FluentWebElement> listFiltered = find(name, filters);
         if (number >= listFiltered.size()) {
@@ -92,12 +108,28 @@ public class Search implements SearchActions<FluentWebElement> {
     }
 
     /**
+     * Return the element at the number position in the lists corresponding to the filters
+     * 
+     * @param number
+     * @param filters
+     * @return
+     */
+    @Override
+    public FluentWebElement find(Integer number, Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return find("*", number, filters);
+    }
+
+    /**
      * Return the first elements corresponding to the name and the filters
      *
      * @param name
      * @param filters
      * @return
      */
+    @Override
     public FluentWebElement findFirst(String name, final Filter... filters) {
         FluentList fluentList = find(name, filters);
         try {
@@ -107,4 +139,17 @@ public class Search implements SearchActions<FluentWebElement> {
         }
     }
 
+    /**
+     * Return the first element corresponding to the filters.
+     *
+     * @param filters
+     * @return
+     */
+    @Override
+    public FluentWebElement findFirst(Filter... filters) {
+        if (filters == null || filters.length == 0) {
+            throw new IllegalArgumentException("cssSelector or filter is required");
+        }
+        return findFirst("*", filters);
+    }
 }

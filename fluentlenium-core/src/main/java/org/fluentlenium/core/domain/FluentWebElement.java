@@ -195,6 +195,16 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     public FluentList<FluentWebElement> find(String name, Filter... filters) {
         return search.find(name, filters);
     }
+    
+    /**
+     * find elements in the children with the corresponding filters
+     *
+     * @param filters
+     * @return
+     */
+    public FluentList<FluentWebElement> find(Filter... filters) {
+        return search.find(filters);
+    }
 
     /**
      * find elements into the childs with the corresponding filters at the given position
@@ -208,6 +218,17 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
+     * find element in the children with the corresponding filters at the given position
+     * 
+     * @param number
+     * @param filters
+     * @return
+     */
+    public FluentWebElement find(Integer number, Filter... filters) {
+        return search.find(number, filters);
+    }
+
+    /**
      * find elements into the children with the corresponding filters at the first position
      *
      * @param name
@@ -216,6 +237,16 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public FluentWebElement findFirst(String name, Filter... filters) {
         return search.findFirst(name, filters);
+    }
+    
+    /**
+     * find element in the children with the corresponding filters at the first position
+     * 
+     * @param filters
+     * @return
+     */
+    public FluentWebElement findFirst(Filter... filters) {
+        return search.findFirst(filters);
     }
 
     /**
