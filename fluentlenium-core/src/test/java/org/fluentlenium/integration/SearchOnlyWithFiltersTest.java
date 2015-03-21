@@ -173,6 +173,6 @@ public class SearchOnlyWithFiltersTest extends LocalFluentCase {
     @Test
     public void checkWaitWorks() {
         goTo(DEFAULT_URL);
-        await().atMost(10, TimeUnit.NANOSECONDS).until(withClass(".small")).isPresent(); 
+        await().atMost(10, TimeUnit.NANOSECONDS).until(withClass("small")).isPresent(); 
     }
 }
