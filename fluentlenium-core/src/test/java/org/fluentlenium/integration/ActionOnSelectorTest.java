@@ -40,6 +40,30 @@ public class ActionOnSelectorTest extends LocalFluentCase {
     }
 
     @Test
+    public void checkFillOnDateAction() {
+        goTo(DEFAULT_URL);
+        $("#date").first().fill().with("01/01/1988");
+    }
+
+    @Test
+    public void checkClearOnDateAction() {
+        goTo(DEFAULT_URL);
+        $("#date").clear();
+    }
+
+    @Test
+    public void checkFillOnTimeAction() {
+        goTo(DEFAULT_URL);
+        $("#time").first().fill().with("01/01/1988");
+    }
+
+    @Test
+    public void checkClearOnTimeAction() {
+        goTo(DEFAULT_URL);
+        $("#time").clear();
+    }
+
+    @Test
     public void checkClickAction() {
         goTo(DEFAULT_URL);
         assertThat(title()).contains("Selenium");
