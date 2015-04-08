@@ -30,13 +30,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.Proxy;
+import java.lang.reflect.*;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -92,8 +86,8 @@ public class FluentAdapter extends Fluent {
         }
     }
 
-    public <T extends FluentPage> T createPage(Class<T> cls) {
-        T container = initClass(cls);
+    public <T extends FluentPage> T createPage(Class<T> cls, Object... params) {
+        T container = initClass(cls, params);
         try {
             injectPageIntoContainer(container);
         } catch (ClassNotFoundException e) {
@@ -105,11 +99,10 @@ public class FluentAdapter extends Fluent {
     }
 
 
-    protected <T extends FluentPage> T initClass(Class<T> cls) {
+    protected <T extends FluentPage> T initClass(Class<T> cls, Object... params) {
         try {
-            Constructor<T> construct = cls.getDeclaredConstructor();
-            construct.setAccessible(true);
-            T page = construct.newInstance();
+            T page = constructPageWithParams(cls, params);
+
             Class parent = Class.forName(Fluent.class.getName());
             initDriver(page, parent);
             initBaseUrl(page, parent);
