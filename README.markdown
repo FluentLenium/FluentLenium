@@ -251,21 +251,21 @@ Don't forget, only visible fields will be modified. It simulates a real person u
 click("#create-button")
 ```
 
-This will click on all the visible fields returned by the search.
+This will click on all the enabled fields returned by the search.
 
 ### Clear
 ```java
 clear("#firstname")
 ```
 
-This will clear all the visible fields returned by the search.
+This will clear all the enabled fields returned by the search.
 
 ### Submit
 ```java
 submit("#account")
 ```
 
-This will submit all the visible fields returned by the search.
+This will submit all the enabled fields returned by the search.
 
 ### Double click
 ```java
