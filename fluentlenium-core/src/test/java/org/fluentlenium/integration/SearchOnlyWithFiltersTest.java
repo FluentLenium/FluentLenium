@@ -34,49 +34,49 @@ public class SearchOnlyWithFiltersTest extends LocalFluentCase {
         FluentList list = find(withName("name"));
         assertThat(list.getIds()).containsOnly("id");
     }
-        
+
     @Test
     public void checkWithTextWorks() {
         goTo(DEFAULT_URL);
         FluentList list = find(withText("Pharmacy"));
         assertThat(list.getIds()).containsOnly("location");
     }
-    
+
     @Test
     public void checkWithTextStartsWithWorks() {
         goTo(DEFAULT_URL);
         FluentList list = find(withText().startsWith("Pharmac"));
         assertThat(list.getIds()).containsOnly("location");
     }
-    
+
     @Test
     public void checkIndexWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement element = find(1, withClass("small"));
         assertThat(element.getId()).isEqualTo("id2");
     }
-    
+
     @Test
     public void checkFindFirstWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement element = findFirst(withClass("small"));
         assertThat(element.getId()).isEqualTo("id");
     }
-    
+
     @Test
     public void checkMultipleWithWorks() {
         goTo(DEFAULT_URL);
         FluentList list = find(withClass("small"), withName("name"));
         assertThat(list.getIds()).containsOnly("id");
     }
-    
+
     @Test
     public void check$Works() {
         goTo(DEFAULT_URL);
         FluentList list = $(withName("name"));
         assertThat(list.getIds()).containsOnly("id");
     }
-    
+
     @Test
     public void check$AndIndexWorks() {
         goTo(DEFAULT_URL);
@@ -93,11 +93,11 @@ public class SearchOnlyWithFiltersTest extends LocalFluentCase {
 
     @Test
     public void checkFillSelectWorks() {
-        goTo(DEFAULT_URL);        
+        goTo(DEFAULT_URL);
         Select select = new Select(findFirst("#select").getElement());
         assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 1");
         fillSelect(withId("select")).withValue("value-3");
-        assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 3");        
+        assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 3");
     }
 
     @Test
@@ -134,14 +134,14 @@ public class SearchOnlyWithFiltersTest extends LocalFluentCase {
         FluentList list = find(withClass("parent")).find(withClass("child"));
         assertThat(list.getTexts()).containsOnly("Alex");
     }
-    
+
     @Test
     public void checkFindChildFindWithIndexWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement element = find(withClass("parent")).find(0, withClass("child"));
         assertThat(element.getText()).isEqualTo("Alex");
     }
-    
+
     @Test
     public void checkFindChildFindFirstWorks() {
         goTo(DEFAULT_URL);
@@ -155,14 +155,14 @@ public class SearchOnlyWithFiltersTest extends LocalFluentCase {
         FluentList list = findFirst(withClass("parent")).find(withClass("child"));
         assertThat(list.getTexts()).containsOnly("Alex");
     }
-    
+
     @Test
     public void checkFindFirstChildFindWithIndexWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement element = findFirst(withClass("parent")).find(0, withClass("child"));
         assertThat(element.getText()).isEqualTo("Alex");
     }
-    
+
     @Test
     public void checkFindFirstChildFindFirstWorks() {
         goTo(DEFAULT_URL);
