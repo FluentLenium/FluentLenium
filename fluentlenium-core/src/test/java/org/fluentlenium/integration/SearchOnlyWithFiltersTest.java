@@ -169,10 +169,4 @@ public class SearchOnlyWithFiltersTest extends LocalFluentCase {
         FluentWebElement element = findFirst(withClass("parent")).findFirst(withClass("child"));
         assertThat(element.getText()).isEqualTo("Alex");
     }
-               
-    @Test
-    public void checkWaitWorks() {
-        goTo(DEFAULT_URL);
-        await().atMost(10, TimeUnit.NANOSECONDS).until(withClass("small")).isPresent(); 
-    }
 }

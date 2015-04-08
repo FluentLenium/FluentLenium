@@ -31,7 +31,6 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 import static org.junit.Assert.fail;
-import static org.fluentlenium.core.filter.FilterConstructor.*;
 
 public class FluentLeniumWaitTest extends LocalFluentCase {
     @Before
@@ -292,21 +291,12 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until("#disabled").areEnabled();
     }
-    
+
+
     @Test
     public void when_element_is_not_displayed_then_isPresent_return_true() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until("#unvisible").isPresent();
-    }
-
-    @Test
-    public void checkAwaitWithCssSelectorAndFilters() {
-        await().atMost(1, NANOSECONDS).until(".small", withName("name2")).hasText("Small 2");
-    }
-    
-    @Test
-    public void checkAwaitWithFilters() {
-        await().atMost(1, NANOSECONDS).until(withName("name2")).hasText("Small 2");
     }
 
     @Test(expected = TimeoutException.class)
