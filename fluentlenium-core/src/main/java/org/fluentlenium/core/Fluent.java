@@ -162,17 +162,15 @@ public abstract class Fluent implements SearchActions {
         }
     }
 
-    public <T extends FluentPage> T createPage(Class<T> classOfPage) {
-        return initClass(classOfPage);
+    public <T extends FluentPage> T createPage(Class<T> classOfPage, Object... params) {
+        return initClass(classOfPage, params);
     }
 
 
-    protected <T extends FluentPage> T initClass(Class<T> cls) {
+    protected <T extends FluentPage> T initClass(Class<T> cls, Object... params) {
         T page = null;
         try {
-            Constructor<T> construct = cls.getDeclaredConstructor();
-            construct.setAccessible(true);
-            page = construct.newInstance();
+            page = constructPageWithParams(cls, params);
             Class parent = Class.forName(Fluent.class.getName());
             initDriver(page, parent);
             initBaseUrl(page, parent);
@@ -203,6 +201,30 @@ public abstract class Fluent implements SearchActions {
             throw new ConstructionException("Cannot invoke method setDriver on " + (cls != null ? cls.getName() : " null"), e);
         }
         return page;
+    }
+
+    protected <T extends FluentPage> T constructPageWithParams(Class<T> cls, Object[] params) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        T page;
+        Class<?>[] classTypes = new Class[params.length];
+        for (int i = 0; i < params.length; i++) {
+            classTypes[i] = params[i].getClass();
+        }
+
+        try {
+            Constructor<T> construct = cls.getDeclaredConstructor(classTypes);
+
+        construct.setAccessible(true);
+        page = construct.newInstance(params);
+        return page;
+        } catch (NoSuchMethodException ex) {
+            if (params.length != 0) {
+                throw new ConstructionException(
+                        "You provided the wrong arguments to the createPage method, " +
+                                "if you just want to use a page with a default constructor, use @Page or createPage("+cls.getSimpleName()+".class)", ex);
+            } else {
+                throw ex;
+            }
+        }
     }
 
     private <T extends FluentPage> void initBaseUrl(T page, Class parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
