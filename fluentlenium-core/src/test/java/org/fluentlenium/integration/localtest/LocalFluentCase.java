@@ -16,6 +16,7 @@ package org.fluentlenium.integration.localtest;
 
 import org.fluentlenium.adapter.FluentTest;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public abstract class LocalFluentCase extends FluentTest {
@@ -27,7 +28,7 @@ public abstract class LocalFluentCase extends FluentTest {
     public WebDriver getDefaultDriver() {
         return new HtmlUnitDriver(true);
     }
-
+//file:///L/FluentLenium/fluentlenium-core/src/test/html/index.html
     public static String getPath() {
         String currentDir = System.getProperty("user.dir");
         if (!currentDir.endsWith("/fluentlenium-core")){
