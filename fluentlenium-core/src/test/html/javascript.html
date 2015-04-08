@@ -20,22 +20,20 @@
 </head>
 <script language="JavaScript">
     function change() {
-    document.getElementById("default").innerHTML="changed";
+        document.getElementById("default").innerHTML="changed";
     }
 
     setTimeout(function() {
-    document.getElementById("default").innerHTML="wait";
-    ;},250);
+        document.getElementById("default").innerHTML="wait";
+        ;},500);
 
     setTimeout(function() {
-    document.getElementById("default").innerHTML="wait2";
-    ;},750);
+        document.getElementById("default").innerHTML="wait2";
+        ;},1000);
 
     setTimeout(function() {
-     document.getElementById("ajaxField").innerHTML="<div id='newField'>new</div>";
-    ;},750);
-
-
+        document.getElementById("ajaxField").innerHTML="<div id='newField'>new</div>";
+        ;},1000);
 
 </script>
 <body style="" name="body">
@@ -47,5 +45,6 @@
 <div id="unvisible" style="display:none;"></div>
 
 <input type="checkbox" disabled="true" id="disabled" />
+
 </body>
 </html>
