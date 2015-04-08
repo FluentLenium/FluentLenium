@@ -28,7 +28,6 @@ public abstract class LocalFluentCase extends FluentTest {
     public WebDriver getDefaultDriver() {
         return new HtmlUnitDriver(true);
     }
-//file:///L/FluentLenium/fluentlenium-core/src/test/html/index.html
     public static String getPath() {
         String currentDir = System.getProperty("user.dir");
         if (!currentDir.endsWith("/fluentlenium-core")){
