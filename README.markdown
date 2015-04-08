@@ -106,6 +106,9 @@ find(".small", withId("idOne"))
 find(".small", withText("This field is mandatory."))
 ```
 
+You can skip CSS selector argument:
+`find(withId("idOne"))` will return the element whose id attribute is "idOne".
+
 You can also write chained filters:
 `find(".small", withName("foo"), withId("id1"))` will return all the elements matching the 3 criteria.
 

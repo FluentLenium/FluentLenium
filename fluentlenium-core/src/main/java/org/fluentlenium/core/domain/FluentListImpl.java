@@ -16,6 +16,7 @@ package org.fluentlenium.core.domain;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+
 import org.fluentlenium.core.filter.Filter;
 import org.openqa.selenium.NoSuchElementException;
 
@@ -256,6 +257,18 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         }
         return new FluentListImpl<E>(finds);
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public FluentList<E> find(Filter... filters) {
+        List<E> finds = new ArrayList<E>();
+        for (FluentWebElement e : this) {
+            finds.addAll((Collection<E>) e.find(filters));
+        }
+        return new FluentListImpl<E>(finds);
+    }
 
     /**
      * {@inheritDoc}
@@ -268,6 +281,18 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         }
         return fluentList.get(number);
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public E find(Integer number, Filter... filters) {
+        FluentList<E> fluentList = find(filters);
+        if (number >= fluentList.size()) {
+            throw new NoSuchElementException("No such element with position: " + number + ". Number of elements available: " + fluentList.size() + ".");
+        }
+        return fluentList.get(number);
+    }
 
     /**
      * {@inheritDoc}
@@ -275,6 +300,14 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     @Override
     public E findFirst(String name, Filter... filters) {
         return find(name, 0, filters);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public E findFirst(Filter... filters) {
+        return find(0, filters);
     }
 }
 

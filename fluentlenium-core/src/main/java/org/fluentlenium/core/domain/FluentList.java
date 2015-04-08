@@ -135,6 +135,15 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
      */
     @Override
     FluentList<E> find(String name, Filter... filters);
+    
+    /**
+     * find elements in the children with the corresponding filters
+     * 
+     * @param filters
+     * @return
+     */
+    @Override
+    FluentList<E> find(Filter... filters);
 
     /**
      * find elements into the children with the corresponding filters at the position indicated by the number
@@ -148,6 +157,16 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     E find(String name, Integer number, Filter... filters);
 
     /**
+     * find element in the children with the corresponding filters at the position indicated by the number
+     *
+     * @param number
+     * @param filters
+     * @return
+     */
+    @Override
+    E find(Integer number, Filter... filters);
+
+    /**
      * find elements into the children with the corresponding filters at the first position
      *
      * @param name
@@ -157,6 +176,14 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     @Override
     E findFirst(String name, Filter... filters);
 
+    /**
+     * find element in the children with the corresponding filters at the first position
+     *
+     * @param filters
+     * @return
+     */
+    @Override
+    E findFirst(Filter... filters);
 
     /**
      * Clear all elements on the list

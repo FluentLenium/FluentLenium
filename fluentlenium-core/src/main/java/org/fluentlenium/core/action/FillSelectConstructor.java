@@ -28,6 +28,12 @@ public class FillSelectConstructor extends org.fluentlenium.core.Fluent {
         this.cssSelector = cssSelector;
         this.filters = filters;
     }
+    
+    public FillSelectConstructor(WebDriver webDriver, Filter... filters) {
+        super(webDriver);
+        this.cssSelector = "*";
+        this.filters = filters;
+    }
 
     /**
      * Select all options that have a value matching the argument for the Select element.
