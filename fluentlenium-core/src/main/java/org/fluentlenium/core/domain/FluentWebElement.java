@@ -186,7 +186,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * find elements into the childs with the corresponding filters
+     * find elements into the children with the corresponding filters
      *
      * @param name
      * @param filters
@@ -207,7 +207,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * find elements into the childs with the corresponding filters at the given position
+     * find elements into the children with the corresponding filters at the given position
      *
      * @param name
      * @param filters

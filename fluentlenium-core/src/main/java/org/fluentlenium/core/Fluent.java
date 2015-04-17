@@ -59,7 +59,7 @@ public abstract class Fluent implements SearchActions {
     }
 
     /**
-     * Defined the default url that will be used in the test and in the relative pages
+     * Define the default url that will be used in the test and in the relative pages
      *
      * @param baseUrl
      * @return
@@ -437,7 +437,7 @@ public abstract class Fluent implements SearchActions {
     }
 
     /**
-     * Return the elements at the numner position into the the lists corresponding to the cssSelector with it filters
+     * Return the elements at the number position into the lists corresponding to the cssSelector with it filters
      *
      * @param name
      * @param number
@@ -460,7 +460,7 @@ public abstract class Fluent implements SearchActions {
     }
 
     /**
-     * Return the first elements corresponding to the name and the filters
+     * Return the first element corresponding to the name and the filters
      *
      * @param name
      * @param filters
@@ -685,7 +685,7 @@ public abstract class Fluent implements SearchActions {
     }
 
   /**
-   * Swith to the selected Element (if element is null or not an iframe, or haven't an id then
+   * Switch to the selected Element (if element is null or not an iframe, or haven't an id then
    * switch to the default)
    *
    * @param element
@@ -703,7 +703,7 @@ public abstract class Fluent implements SearchActions {
   }
 
   /**
-   * Swith to the default element
+   * Switch to the default element
    */
   public Fluent switchTo() {
     this.switchTo(null);
@@ -712,7 +712,7 @@ public abstract class Fluent implements SearchActions {
 
 
   /**
-   * Swith to the default element
+   * Switch to the default element
    */
   public Fluent switchToDefault() {
     this.switchTo(null);

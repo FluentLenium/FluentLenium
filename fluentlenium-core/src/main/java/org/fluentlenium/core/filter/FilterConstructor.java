@@ -172,7 +172,7 @@ public final class FilterConstructor {
     }
 
     /**
-     * Create a filter by a customattribute
+     * Create a filter by a customAttribute
      * <p/>
      * DEPRECATED : use with(customAttribute).+convenient method
      *
@@ -186,7 +186,7 @@ public final class FilterConstructor {
     }
 
     /**
-     * Create a filter by a customattribute
+     * Create a filter by a customAttribute
      * <p/>
      * DEPRECATED : use with(customAttribute).+convenient method
      *
