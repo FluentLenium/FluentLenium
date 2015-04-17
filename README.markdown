@@ -554,7 +554,7 @@ executeScript("change();", 12L).getStringResult();
 ```
 
 ## Taking Snapshots
-You can take a snaphost of the browser
+You can take a snapshot of the browser
 ```java
 takeScreenShot();
 ```
