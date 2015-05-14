@@ -29,7 +29,7 @@ public abstract class LocalFluentCase extends FluentTest {
     }
 
     public static String getPath() {
-        String currentDir = System.getProperty("user.dir");
+        String currentDir = System.getProperty("user.dir").replace('\\', '/');
         if (!currentDir.endsWith("/fluentlenium-assertj")){
             currentDir+="/fluentlenium-assertj";
         }
