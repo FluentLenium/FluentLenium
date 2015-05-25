@@ -168,27 +168,16 @@ public abstract class Fluent implements SearchActions {
 
 
     protected <T extends FluentPage> T initClass(Class<T> cls, Object... params) {
-        T page = null;
         try {
-            page = constructPageWithParams(cls, params);
+            T page = constructPageWithParams(cls, params);
+
             Class parent = Class.forName(Fluent.class.getName());
             initDriver(page, parent);
             initBaseUrl(page, parent);
 
             //init fields with default proxies
-            Field[] fields = cls.getDeclaredFields();
-            for (Field fieldFromPage : fields) {
-                if (!FluentWebElement.class.isAssignableFrom(fieldFromPage.getType())) {
-                    continue;
-                }
-                fieldFromPage.setAccessible(true);
-                AjaxElement elem = fieldFromPage.getAnnotation(AjaxElement.class);
-                if (elem == null) {
-                    proxyElement(new DefaultElementLocatorFactory(getDriver()), page, fieldFromPage);
-                } else {
-                    proxyElement(new AjaxElementLocatorFactory(getDriver(), elem.timeOutInSeconds()), page, fieldFromPage);
-                }
-            }
+            initFluentWebElements(cls, page);
+            return page;
         } catch (ClassNotFoundException e) {
             throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
         } catch (IllegalAccessException e) {
@@ -200,7 +189,22 @@ public abstract class Fluent implements SearchActions {
         } catch (InvocationTargetException e) {
             throw new ConstructionException("Cannot invoke method setDriver on " + (cls != null ? cls.getName() : " null"), e);
         }
-        return page;
+    }
+
+    protected  <T extends Fluent> void initFluentWebElements(Class<T> cls, T page) {
+        Field[] fields = cls.getDeclaredFields();
+        for (Field fieldFromPage : fields) {
+            if (!FluentWebElement.class.isAssignableFrom(fieldFromPage.getType())) {
+                continue;
+            }
+            fieldFromPage.setAccessible(true);
+            AjaxElement elem = fieldFromPage.getAnnotation(AjaxElement.class);
+            if (elem == null) {
+                proxyElement(new DefaultElementLocatorFactory(getDriver()), page, fieldFromPage);
+            } else {
+                proxyElement(new AjaxElementLocatorFactory(getDriver(), elem.timeOutInSeconds()), page, fieldFromPage);
+            }
+        }
     }
 
     protected <T extends FluentPage> T constructPageWithParams(Class<T> cls, Object[] params) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {

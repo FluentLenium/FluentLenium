@@ -50,7 +50,7 @@ public class FluentAdapter extends Fluent {
     protected void initTest() {
         try {
             injectPageIntoContainer(this);
-            initFluentWebElements(this);
+            initFluentWebElements(null, this);
         } catch (ClassNotFoundException e) {
             throw new ConstructionException("Class not found", e);
         } catch (IllegalAccessException e) {
@@ -98,32 +98,8 @@ public class FluentAdapter extends Fluent {
         return container;
     }
 
-
-    protected <T extends FluentPage> T initClass(Class<T> cls, Object... params) {
-        try {
-            T page = constructPageWithParams(cls, params);
-
-            Class parent = Class.forName(Fluent.class.getName());
-            initDriver(page, parent);
-            initBaseUrl(page, parent);
-
-            //init fields with default proxies
-            initFluentWebElements(page);
-            return page;
-        } catch (ClassNotFoundException e) {
-            throw new ConstructionException("Class " + cls.getName() + "not found", e);
-        } catch (IllegalAccessException e) {
-            throw new ConstructionException("IllegalAccessException on class " + cls.getName(), e);
-        } catch (NoSuchMethodException e) {
-            throw new ConstructionException("No constructor found on class " + cls.getName(), e);
-        } catch (InstantiationException e) {
-            throw new ConstructionException("Unable to instantiate " + cls.getName(), e);
-        } catch (InvocationTargetException e) {
-            throw new ConstructionException("Cannot invoke method setDriver on " + cls.getName(), e);
-        }
-    }
-
-    private <T extends Fluent> void initFluentWebElements(T page) {
+    @Override
+    protected <T extends Fluent> void initFluentWebElements(Class<T> cls, T page) {
         for (Class classz = page.getClass();
              FluentAdapter.class.isAssignableFrom(classz) || FluentPage.class.isAssignableFrom(classz);
              classz = classz.getSuperclass()) {
