@@ -39,6 +39,8 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.*;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -175,8 +177,8 @@ public abstract class Fluent implements SearchActions {
             initDriver(page, parent);
             initBaseUrl(page, parent);
 
-            //init fields with default proxies
-            Field[] fields = cls.getDeclaredFields();
+            //init fields (including superclass fields) with default proxies
+            Field[] fields = getAllFields(cls);
             for (Field fieldFromPage : fields) {
                 if (!FluentWebElement.class.isAssignableFrom(fieldFromPage.getType())) {
                     continue;
@@ -225,6 +227,14 @@ public abstract class Fluent implements SearchActions {
                 throw ex;
             }
         }
+    }
+
+    private static Field[] getAllFields(Class<?> type) {
+        List<Field> fields = new ArrayList<Field>();
+        for (Class<?> c = type; c != null; c = c.getSuperclass()) {
+            fields.addAll(Arrays.asList(c.getDeclaredFields()));
+        }
+        return fields.toArray(new Field[0]);
     }
 
     private <T extends FluentPage> void initBaseUrl(T page, Class parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -380,7 +390,7 @@ public abstract class Fluent implements SearchActions {
     public FluentList<FluentWebElement> $(String name, final Filter... filters) {
         return search.find(name, filters);
     }
-    
+
     /**
      * Central methods to find elements on the page with filters.
      *
@@ -425,7 +435,7 @@ public abstract class Fluent implements SearchActions {
     public FluentList<FluentWebElement> find(String name, final Filter... filters) {
         return search.find(name, filters);
     }
-    
+
     /**
      * Return the list filtered by the specified filters.
      *
@@ -447,7 +457,7 @@ public abstract class Fluent implements SearchActions {
     public FluentWebElement find(String name, Integer number, final Filter... filters) {
         return search.find(name, number, filters);
     }
-    
+
     /**
      * Return the element at the number position in the list filtered by the specified filters.
      *
@@ -469,7 +479,7 @@ public abstract class Fluent implements SearchActions {
     public FluentWebElement findFirst(String name, final Filter... filters) {
         return search.findFirst(name, filters);
     }
-    
+
     /**
      * Return the first element corresponding to the filters.
      *
@@ -519,7 +529,7 @@ public abstract class Fluent implements SearchActions {
     public FillSelectConstructor fillSelect(String cssSelector, Filter... filters) {
         return new FillSelectConstructor(cssSelector, getDriver(), filters);
     }
-    
+
     /**
      * Construct a FillSelectConstructor with filters in order to allow easy fill.
      * Be careful - only the visible elements are filled
@@ -540,7 +550,7 @@ public abstract class Fluent implements SearchActions {
         $(cssSelector, filters).click();
         return this;
     }
-    
+
     /**
      * Click all elements filtered by the specified filters.
      * Be careful - only the visible elements are clicked
@@ -562,7 +572,7 @@ public abstract class Fluent implements SearchActions {
         $(cssSelector, filters).clear();
         return this;
     }
-    
+
     /**
      * Clear texts of the all elements filtered by the specified filters.
      * Be careful - only the visible elements are cleared
@@ -584,7 +594,7 @@ public abstract class Fluent implements SearchActions {
         $(cssSelector, filters).submit();
         return this;
     }
-    
+
     /**
      * Submit all elements filtered by the specified filters.
      * Be careful - only the visible elements are submitted
@@ -606,7 +616,7 @@ public abstract class Fluent implements SearchActions {
     public List<String> text(String cssSelector, Filter... filters) {
         return $(cssSelector, filters).getTexts();
     }
-    
+
     /**
      * Get all texts of the elements filtered by the specified filters.
      * Be careful - only the visible elements are submitted
