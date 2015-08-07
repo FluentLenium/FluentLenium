@@ -30,6 +30,11 @@ public final class SharedDriverHelper {
         return (sharedBrowser != null && sharedBrowser.type() == SharedDriver.SharedType.ONCE);
     }
 
+    public static boolean isSharedDriverPerTest(final Class<?> classe) {
+        SharedDriver sharedBrowser = classe.getAnnotation(SharedDriver.class);
+        return (sharedBrowser != null && sharedBrowser.type() == SharedDriver.SharedType.PER_TEST);
+    }
+
     public static boolean isSharedDriverPerClass(final Class<?> classe) {
         SharedDriver sharedBrowser = classe.getAnnotation(SharedDriver.class);
         return (sharedBrowser != null && sharedBrowser.type() == SharedDriver.SharedType.PER_CLASS);

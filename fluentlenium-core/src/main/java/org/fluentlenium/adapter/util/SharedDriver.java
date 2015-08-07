@@ -26,7 +26,7 @@ import java.lang.annotation.RetentionPolicy;
 @Inherited
 @Beta
 public @interface SharedDriver {
-    public enum SharedType {ONCE, PER_CLASS, PER_METHOD}
+    public enum SharedType {ONCE, PER_CLASS, PER_METHOD, PER_TEST}
 
     /**
      * deleteCookies default : true.
