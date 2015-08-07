@@ -20,8 +20,10 @@ import org.fluentlenium.core.FluentAdapter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 
 /**
  * All TestNG Test should extends this class. It provides default parameters.
@@ -34,6 +36,14 @@ public abstract class FluentTestNg extends FluentAdapter {
         super();
     }
 
+    @BeforeTest
+    public void beforeTest() {
+        if (SharedDriverHelper.isSharedDriverPerTest(this.getClass())) {
+            this.initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
+            initTest();
+        }
+    }
+    
     @BeforeClass
     public void beforeClass() {
         Class<? extends FluentTestNg> aClass = this.getClass();
@@ -54,7 +64,7 @@ public abstract class FluentTestNg extends FluentAdapter {
         }
 
     }
-
+    
     @BeforeMethod
     public void beforeMethod() {
         if (SharedDriverHelper.isSharedDriverPerMethod(this.getClass()) || SharedDriverHelper.isDefaultSharedDriver(this.getClass())) {
@@ -82,4 +92,10 @@ public abstract class FluentTestNg extends FluentAdapter {
         }
     }
 
+    @AfterTest
+    public void afterTest() {
+        if (SharedDriverHelper.isSharedDriverPerTest(this.getClass())) {
+            quit();
+        }
+    }
 }
