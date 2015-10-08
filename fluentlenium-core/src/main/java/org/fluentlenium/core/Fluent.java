@@ -360,6 +360,32 @@ public abstract class Fluent implements SearchActions {
         return this;
     }
 
+    /**
+     * Open the url page in a new tab
+     *
+     * @param url
+     */
+    public Fluent goToInNewTab(String url) {
+        if (url == null) {
+            throw new IllegalArgumentException("Url is mandatory");
+        }
+
+        if (baseUrl != null) {
+            URI uri = URI.create(url);
+            if (!uri.isAbsolute()) {
+                url = baseUrl + url;
+            }
+        }
+
+        Set<String> initialTabs = getDriver().getWindowHandles();
+        executeScript("window.open('" + url + "', '_blank');");
+        Set<String> tabs = getDriver().getWindowHandles();
+        tabs.removeAll(initialTabs);
+        String newTab = tabs.iterator().next();
+        getDriver().switchTo().window(newTab);
+
+        return this;
+    }
 
     public FluentJavascript executeScript(String script, Object... args) {
         return new FluentJavascript(this.driver, false, script, args);
