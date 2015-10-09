@@ -30,6 +30,9 @@ public class PageTest extends LocalFluentCase {
     @Page
     Page2 page2;
 
+    @Page
+    Page3 page3;
+
     @Test
     public void checkGoTo() {
         page.go();
@@ -68,6 +71,14 @@ public class PageTest extends LocalFluentCase {
         page.go();
         page.goToNextPageWithFindByClassLink();
         page2.isAt();
+    }
+
+    // Recursive instantiation for @Page fields in FluentPage::createPage #168
+    @Test
+    public void checkFieldsInitialized() {
+        page3.go();
+        assertThat(page3.linkToPage2FoundWithFindBy).isNotNull();
+        assertThat(page3.linkToPage2FoundWithFindByOnPage3).isNotNull();
     }
 }
 
@@ -109,4 +120,9 @@ class Page2 extends FluentPage {
         assertThat($("title").first().getText()).isEqualTo("Page 2");
     }
 
+}
+
+class Page3 extends PageAccueil {
+    @FindBy(css = "a.go-next")
+    FluentWebElement linkToPage2FoundWithFindByOnPage3;
 }
