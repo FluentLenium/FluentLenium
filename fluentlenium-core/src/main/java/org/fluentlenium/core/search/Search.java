@@ -91,7 +91,7 @@ public class Search implements SearchActions<FluentWebElement> {
     }
 
     /**
-     * Return the elements at the numner position into the the lists corresponding to the cssSelector with it filters
+     * Return the elements at the number position into the the lists corresponding to the cssSelector with it filters
      *
      * @param name
      * @param number
