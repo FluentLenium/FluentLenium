@@ -454,6 +454,27 @@ public class LoginPage extends FluentPage {
 }
 ```
 
+You can also refer to the list of FluentWebElements
+
+```java
+public class LoginPage extends FluentPage {
+   @FindBy(css = "button.create-button")
+   FluentList<FluentWebElement> createButtons;
+   public String getUrl() {
+       return "myCustomUrl";
+   }
+   public void isAt() {
+       assertThat(title()).isEqualTo("MyTitle");
+       assertThat(buttons).hasSize(2);
+   }
+   public void fillAndSubmitForm(String... paramsOrdered) {
+       fill("input").with(paramsOrdered);
+       createButtons.get(1).click();
+   }
+}
+```
+
+
 If you need to wait for an element to be present, especially when waiting for an ajax call to complete, you can use the @AjaxElement annotation on the fields:
 
 ```java
