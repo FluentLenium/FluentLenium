@@ -45,7 +45,7 @@ public class Filter {
     }
 
     /**
-     * Construct a filter with on a custom attribute and an associated value
+     * Construct a filter with a custom attribute and an associated value
      *
      * @param customAttribute
      * @param value
@@ -57,7 +57,7 @@ public class Filter {
 
 
     /**
-     * Construct a filter with on a custom attribute and an associated matcher
+     * Construct a filter with a custom attribute and an associated matcher
      *
      * @param customAttribute
      * @param matcher
