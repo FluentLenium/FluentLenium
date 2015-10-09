@@ -294,7 +294,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test(expected = TimeoutException.class)
     public void checkPolling() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1500, TimeUnit.MILLISECONDS).until("#default").hasText("wait");
+        await().pollingEvery(1000, TimeUnit.MILLISECONDS).until("#default").hasText("sometextThatNeverAppear");
     }
 
     @Test
