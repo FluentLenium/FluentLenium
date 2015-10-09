@@ -142,6 +142,9 @@ public abstract class Fluent implements SearchActions {
         return driver;
     }
 
+    public Search getSearch() {
+        return search;
+    }
 
     protected void initTest() {
         Class cls = null;
@@ -285,7 +288,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public FluentWait await() {
-        return new FluentWait(this, search);
+        return new FluentWait(this, getSearch());
     }
 
 
@@ -295,7 +298,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public String title() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     /**
@@ -304,7 +307,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public Set<Cookie> getCookies() {
-        return driver.manage().getCookies();
+        return getDriver().manage().getCookies();
     }
 
     /**
@@ -314,7 +317,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public Cookie getCookie(String name) {
-        return driver.manage().getCookieNamed(name);
+        return getDriver().manage().getCookieNamed(name);
     }
 
     /**
@@ -323,7 +326,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public String url() {
-        String currentUrl = driver.getCurrentUrl();
+        String currentUrl = getDriver().getCurrentUrl();
 
         if (currentUrl != null && baseUrl != null && currentUrl.startsWith(baseUrl)) {
             currentUrl = currentUrl.substring(baseUrl.length());
@@ -338,7 +341,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public String pageSource() {
-        return driver.getPageSource();
+        return getDriver().getPageSource();
     }
 
 
@@ -372,11 +375,11 @@ public abstract class Fluent implements SearchActions {
 
 
     public FluentJavascript executeScript(String script, Object... args) {
-        return new FluentJavascript(this.driver, false, script, args);
+        return new FluentJavascript(this.getDriver(), false, script, args);
     }
 
     public FluentJavascript executeAsyncScript(String script, Object... args) {
-        return new FluentJavascript(this.driver, true, script, args);
+        return new FluentJavascript(this.getDriver(), true, script, args);
     }
 
 
@@ -388,7 +391,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public FluentList<FluentWebElement> $(String name, final Filter... filters) {
-        return search.find(name, filters);
+        return getSearch().find(name, filters);
     }
 
     /**
@@ -398,7 +401,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public FluentList<FluentWebElement> $(final Filter... filters) {
-        return search.find(filters);
+        return getSearch().find(filters);
     }
 
     /**
@@ -409,7 +412,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public FluentWebElement $(String name, Integer number, final Filter... filters) {
-        return search.find(name, number, filters);
+        return getSearch().find(name, number, filters);
     }
 
     /**
@@ -421,7 +424,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public FluentWebElement $(Integer number, final Filter... filters) {
-        return search.find(number, filters);
+        return getSearch().find(number, filters);
     }
 
     /**
@@ -433,7 +436,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public FluentList<FluentWebElement> find(String name, final Filter... filters) {
-        return search.find(name, filters);
+        return getSearch().find(name, filters);
     }
 
     /**
@@ -443,7 +446,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public FluentList<FluentWebElement> find(final Filter... filters) {
-        return search.find(filters);
+        return getSearch().find(filters);
     }
 
     /**
@@ -455,7 +458,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public FluentWebElement find(String name, Integer number, final Filter... filters) {
-        return search.find(name, number, filters);
+        return getSearch().find(name, number, filters);
     }
 
     /**
@@ -466,7 +469,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public FluentWebElement find(Integer number, final Filter... filters) {
-        return search.find(number, filters);
+        return getSearch().find(number, filters);
     }
 
     /**
@@ -477,7 +480,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public FluentWebElement findFirst(String name, final Filter... filters) {
-        return search.findFirst(name, filters);
+        return getSearch().findFirst(name, filters);
     }
 
     /**
@@ -487,7 +490,7 @@ public abstract class Fluent implements SearchActions {
      * @return
      */
     public FluentWebElement findFirst(final Filter... filters) {
-        return search.findFirst(filters);
+        return getSearch().findFirst(filters);
     }
 
     /**
@@ -705,9 +708,9 @@ public abstract class Fluent implements SearchActions {
         null == element.getTagName() ||
         null == element.getId() ||
         !"iframe".equals(element.getTagName())) {
-      driver.switchTo().defaultContent();
+      getDriver().switchTo().defaultContent();
     } else {
-      driver.switchTo().frame(element.getId());
+      getDriver().switchTo().frame(element.getId());
     }
     return this;
   }
@@ -730,7 +733,7 @@ public abstract class Fluent implements SearchActions {
   }
 
   public Alert alert(){
-    return new Alert(driver);
+    return new Alert(getDriver());
   }
 
   /**
