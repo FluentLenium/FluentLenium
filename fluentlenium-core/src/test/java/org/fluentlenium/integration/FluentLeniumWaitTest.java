@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,8 +14,13 @@
 
 package org.fluentlenium.integration;
 
+import static java.util.concurrent.TimeUnit.NANOSECONDS;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.fluentlenium.core.filter.MatcherConstructor.regex;
+import static org.junit.Assert.fail;
 
-import com.google.common.base.Predicate;
+import java.util.concurrent.TimeUnit;
+
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentAdapter;
 import org.fluentlenium.core.FluentPage;
@@ -25,12 +30,7 @@ import org.junit.Test;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import java.util.concurrent.TimeUnit;
-
-import static java.util.concurrent.TimeUnit.NANOSECONDS;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.fluentlenium.core.filter.MatcherConstructor.regex;
-import static org.junit.Assert.fail;
+import com.google.common.base.Predicate;
 
 public class FluentLeniumWaitTest extends LocalFluentCase {
     @Before
@@ -60,12 +60,10 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         await().atMost(1, NANOSECONDS).until(".small").withName("name").hasName("name");
     }
 
-
     @Test
     public void checkAwaitContainsNameWithClass() {
         await().atMost(1, NANOSECONDS).until("span").withClass("small").hasName("name");
     }
-
 
     @Test
     public void checkAwaitContainsNameWithClassRegex() {
@@ -91,7 +89,6 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
             assertThat(e.getMessage()).contains("toto");
         }
     }
-
 
     @Test
     public void checkAwaitPageToLoad() {
@@ -121,7 +118,6 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         await().atMost(1, NANOSECONDS).until(".small").withId("id2").hasId("id2");
     }
 
-
     @Test
     public void checkAwaitContainsIdWithIdContains() {
         await().atMost(1, NANOSECONDS).until(".small").withId().contains("id").hasSize(2);
@@ -146,7 +142,6 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     public void checkAwaitContainsTextWithTextMatcher() {
         await().atMost(1, NANOSECONDS).until(".small").withText().contains("Small 1").isPresent();
     }
-
 
     @Test
     public void when_a_element_is_not_present_then_isNotPresent_return_true() {
@@ -173,7 +168,6 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         await().atMost(1, NANOSECONDS).until(".small").with("id").notStartsWith(regex("id")).hasSize(1);
     }
 
-
     @Test
     public void checkAwaitEndsWithRegex() {
         await().atMost(1, NANOSECONDS).until(".small").with("id").endsWith(regex("2")).hasSize(1);
@@ -198,7 +192,6 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     public void checkAwaitNotContainsRegex() {
         await().atMost(1, NANOSECONDS).until(".small").with("id").notContains(regex("d")).hasSize(1);
     }
-
 
     @Test
     public void checkAwaitEquals() {
@@ -292,7 +285,6 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         await().atMost(1, NANOSECONDS).until("#disabled").areEnabled();
     }
 
-
     @Test
     public void when_element_is_not_displayed_then_isPresent_return_true() {
         goTo(JAVASCRIPT_URL);
@@ -302,9 +294,8 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test(expected = TimeoutException.class)
     public void checkPolling() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1000, TimeUnit.MILLISECONDS).until("#default").hasText("sometextThatNeverAppear");
+        await().pollingEvery(1500, TimeUnit.MILLISECONDS).until("#default").hasText("wait");
     }
-
 
     @Test
     public void checkIsAt() {
@@ -344,7 +335,6 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
             }
         });
     }
-
 
 }
 
