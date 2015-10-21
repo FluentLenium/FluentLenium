@@ -225,7 +225,7 @@ public class FluentAdapter extends Fluent {
     /**
      * Override this method to change the driver
      *
-     * @return
+     * @return default web driver which is set to FirefoxDriver
      */
     public WebDriver getDefaultDriver() {
         return new FirefoxDriver();

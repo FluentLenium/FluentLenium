@@ -32,7 +32,7 @@ public @interface SharedDriver {
      * deleteCookies default : true.
      * If deleteCookies is enabled, after each test method the cookies will be deleted
      *
-     * @return
+     * @return boolean value for deleteCookies policy
      */
     boolean deleteCookies() default true;
 

@@ -63,8 +63,8 @@ public abstract class Fluent implements SearchActions {
     /**
      * Define the default url that will be used in the test and in the relative pages
      *
-     * @param baseUrl
-     * @return
+     * @param baseUrl base URL
+     * @return Fluent element
      */
     public Fluent withDefaultUrl(String baseUrl) {
         if (baseUrl != null) {
@@ -79,9 +79,9 @@ public abstract class Fluent implements SearchActions {
     /**
      * Define an implicit time to wait for a page to be loaded
      *
-     * @param l
-     * @param timeUnit
-     * @return
+     * @param l timeout value
+     * @param timeUnit time unit for wait
+     * @return Fluent element
      */
     public Fluent withDefaultPageWait(long l, TimeUnit timeUnit) {
         this.getDriver().manage().timeouts().pageLoadTimeout(l, timeUnit);
@@ -91,9 +91,9 @@ public abstract class Fluent implements SearchActions {
     /**
      * Define an implicit time to wait when searching an element
      *
-     * @param l
-     * @param timeUnit
-     * @return
+     * @param l timeout value
+     * @param timeUnit time unit for wait
+     * @return Fluent element
      */
     public Fluent withDefaultSearchWait(long l, TimeUnit timeUnit) {
         this.getDriver().manage().timeouts().implicitlyWait(l, timeUnit);
@@ -106,6 +106,8 @@ public abstract class Fluent implements SearchActions {
 
     /**
      * Take a snapshot of the browser. By default the file will be a png named by the current timestamp.
+     *
+     * @return fluent object
      */
     public Fluent takeScreenShot() {
         takeScreenShot(new Date().getTime() + ".png");
@@ -115,7 +117,8 @@ public abstract class Fluent implements SearchActions {
     /**
      * Take a snapshot of the browser into a file given by the fileName param.
      *
-     * @param fileName
+     * @param fileName file name for screenshot
+     * @return fluent object
      */
     public Fluent takeScreenShot(String fileName) {
         if (!(getDriver() instanceof TakesScreenshot)) {
@@ -285,7 +288,7 @@ public abstract class Fluent implements SearchActions {
     /**
      * wait for an asynchronous call
      *
-     * @return
+     * @return FluentWait element
      */
     public FluentWait await() {
         return new FluentWait(this, getSearch());
@@ -295,7 +298,7 @@ public abstract class Fluent implements SearchActions {
     /**
      * Return the title of the page
      *
-     * @return
+     * @return browser window title
      */
     public String title() {
         return getDriver().getTitle();
@@ -304,7 +307,7 @@ public abstract class Fluent implements SearchActions {
     /**
      * return the cookies as a set
      *
-     * @return
+     * @return set of cookies
      */
     public Set<Cookie> getCookies() {
         return getDriver().manage().getCookies();
@@ -313,8 +316,8 @@ public abstract class Fluent implements SearchActions {
     /**
      * return the corresponding cookie given a name
      *
-     * @param name
-     * @return
+     * @param name cookie name
+     * @return cookie selected by name
      */
     public Cookie getCookie(String name) {
         return getDriver().manage().getCookieNamed(name);
@@ -323,7 +326,7 @@ public abstract class Fluent implements SearchActions {
     /**
      * Return the url of the page. If a base url is provided, the current url will be relative to that base url.
      *
-     * @return
+     * @return current URL
      */
     public String url() {
         String currentUrl = getDriver().getCurrentUrl();
@@ -338,7 +341,7 @@ public abstract class Fluent implements SearchActions {
     /**
      * Return the source of the page
      *
-     * @return
+     * @return source of the page under test
      */
     public String pageSource() {
         return getDriver().getPageSource();
@@ -357,7 +360,8 @@ public abstract class Fluent implements SearchActions {
     /**
      * Open the url page
      *
-     * @param url
+     * @param url page URL to visit
+     * @return fluent object
      */
     public Fluent goTo(String url) {
         if (url == null) {
@@ -386,9 +390,9 @@ public abstract class Fluent implements SearchActions {
     /**
      * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
      *
-     * @param name
-     * @param filters
-     * @return
+     * @param name item selector
+     * @param filters set of filters
+     * @return list of fluent elements
      */
     public FluentList<FluentWebElement> $(String name, final Filter... filters) {
         return getSearch().find(name, filters);
@@ -397,19 +401,21 @@ public abstract class Fluent implements SearchActions {
     /**
      * Central methods to find elements on the page with filters.
      *
-     * @param filters
-     * @return
+     * @param filters set of filters in the current context
+     * @return list of fluent elements
      */
     public FluentList<FluentWebElement> $(final Filter... filters) {
         return getSearch().find(filters);
     }
 
     /**
-     * Central methods a find element on the page, the number indicat the index of the desired element on the list. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
+     * Central methods a find element on the page, the number indicate the index of the desired element on the list.
+     * Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
      *
-     * @param name
-     * @param filters
-     * @return
+     * @param name item selector
+     * @param number index of the desired element
+     * @param filters set of filters in the current context
+     * @return fluent web element
      */
     public FluentWebElement $(String name, Integer number, final Filter... filters) {
         return getSearch().find(name, number, filters);
@@ -419,9 +425,9 @@ public abstract class Fluent implements SearchActions {
      * Central method to find an element on the page with filters.
      * The number indicates the index of the desired element on the list.
      *
-     * @param number
-     * @param filters
-     * @return
+     * @param number index of element from obtained list
+     * @param filters set of filters in the current context
+     * @return fluent web element
      */
     public FluentWebElement $(Integer number, final Filter... filters) {
         return getSearch().find(number, filters);
@@ -431,9 +437,9 @@ public abstract class Fluent implements SearchActions {
      * return the lists corresponding to the cssSelector with it filters
      *
      *
-     * @param name
-     * @param filters
-     * @return
+     * @param name cssSelector
+     * @param filters set of filters in current context
+     * @return list of fluent web elements
      */
     public FluentList<FluentWebElement> find(String name, final Filter... filters) {
         return getSearch().find(name, filters);
@@ -442,8 +448,8 @@ public abstract class Fluent implements SearchActions {
     /**
      * Return the list filtered by the specified filters.
      *
-     * @param filters
-     * @return
+     * @param filters set of filters in the current context
+     * @return list of fluent web elements
      */
     public FluentList<FluentWebElement> find(final Filter... filters) {
         return getSearch().find(filters);
@@ -452,10 +458,10 @@ public abstract class Fluent implements SearchActions {
     /**
      * Return the elements at the number position into the lists corresponding to the cssSelector with it filters
      *
-     * @param name
-     * @param number
-     * @param filters
-     * @return
+     * @param name cssSelector
+     * @param number index in the retrieved items list
+     * @param filters set of filters in the current context
+     * @return fluent web element
      */
     public FluentWebElement find(String name, Integer number, final Filter... filters) {
         return getSearch().find(name, number, filters);
@@ -464,9 +470,9 @@ public abstract class Fluent implements SearchActions {
     /**
      * Return the element at the number position in the list filtered by the specified filters.
      *
-     * @param number
-     * @param filters
-     * @return
+     * @param number index in the retrieved items list
+     * @param filters set of filters in the current context
+     * @return fluent web element
      */
     public FluentWebElement find(Integer number, final Filter... filters) {
         return getSearch().find(number, filters);
@@ -475,9 +481,9 @@ public abstract class Fluent implements SearchActions {
     /**
      * Return the first element corresponding to the name and the filters
      *
-     * @param name
-     * @param filters
-     * @return
+     * @param name cssSelector
+     * @param filters set of filters in the current context
+     * @return fluent web element
      */
     public FluentWebElement findFirst(String name, final Filter... filters) {
         return getSearch().findFirst(name, filters);
@@ -486,8 +492,8 @@ public abstract class Fluent implements SearchActions {
     /**
      * Return the first element corresponding to the filters.
      *
-     * @param filters
-     * @return
+     * @param filters set of filters in the current context
+     * @return fluent web element
      */
     public FluentWebElement findFirst(final Filter... filters) {
         return getSearch().findFirst(filters);
@@ -497,7 +503,9 @@ public abstract class Fluent implements SearchActions {
      * Construct a FillConstructor in order to allow easy fill
      * Be careful - only the visible elements are filled
      *
-     * @param cssSelector
+     * @param cssSelector cssSelector
+     * @param filters set of filters in the current context
+     * @return fill constructor
      */
     public FillConstructor fill(String cssSelector, Filter... filters) {
         return new FillConstructor(cssSelector, getDriver(), filters);
@@ -507,7 +515,8 @@ public abstract class Fluent implements SearchActions {
      * Construct a FillConstructor with filters in order to allow easy fill.
      * Be careful - only the visible elements are filled
      *
-     * @param cssSelector
+     * @param filters set of filters in the current context
+     * @return fill constructor
      */
     public FillConstructor fill(Filter... filters) {
         return new FillConstructor(getDriver(), filters);
@@ -517,7 +526,9 @@ public abstract class Fluent implements SearchActions {
      * Construct a FillConstructor in order to allow easy fill
      * Be careful - only the visible elements are filled
      *
-     * @param list
+     * @param list FluentDefaultActions list
+     * @param filters set of filters in the current context
+     * @return fill constructor
      */
     public FillConstructor fill(FluentDefaultActions list, Filter... filters) {
         return new FillConstructor(list, getDriver(), filters);
@@ -527,7 +538,9 @@ public abstract class Fluent implements SearchActions {
      * Construct a FillSelectConstructor in order to allow easy fill
      * Be careful - only the visible elements are filled
      *
-     * @param cssSelector
+     * @param cssSelector cssSelector
+     * @param filters set of filters in the current context
+     * @return fill constructor
      */
     public FillSelectConstructor fillSelect(String cssSelector, Filter... filters) {
         return new FillSelectConstructor(cssSelector, getDriver(), filters);
@@ -537,7 +550,8 @@ public abstract class Fluent implements SearchActions {
      * Construct a FillSelectConstructor with filters in order to allow easy fill.
      * Be careful - only the visible elements are filled
      *
-     * @param filters
+     * @param filters set of filters in the current context
+     * @return fill constructor
      */
     public FillSelectConstructor fillSelect(Filter... filters) {
         return new FillSelectConstructor(getDriver(), filters);
@@ -547,7 +561,9 @@ public abstract class Fluent implements SearchActions {
      * click all elements that are in cssSelector with its filters
      * Be careful - only the visible elements are clicked
      *
-     * @param cssSelector
+     * @param cssSelector cssSelector
+     * @param filters set of filters in the current context
+     * @return fluent object
      */
     public Fluent click(String cssSelector, Filter... filters) {
         $(cssSelector, filters).click();
@@ -558,7 +574,8 @@ public abstract class Fluent implements SearchActions {
      * Click all elements filtered by the specified filters.
      * Be careful - only the visible elements are clicked
      *
-     * @param filters
+     * @param filters set of filters in the current context
+     * @return fluent object
      */
     public Fluent click(Filter... filters) {
         $(filters).click();
@@ -569,7 +586,9 @@ public abstract class Fluent implements SearchActions {
      * Submit all elements that are in cssSelector with its filters
      * Be careful - only the visible elements are cleared
      *
-     * @param cssSelector
+     * @param cssSelector cssSelector
+     * @param filters set of filters in the current context
+     * @return fluent object
      */
     public Fluent clear(String cssSelector, Filter... filters) {
         $(cssSelector, filters).clear();
@@ -580,7 +599,8 @@ public abstract class Fluent implements SearchActions {
      * Clear texts of the all elements filtered by the specified filters.
      * Be careful - only the visible elements are cleared
      *
-     * @param filters
+     * @param filters set of filters in the current context
+     * @return fluent object
      */
     public Fluent clear(Filter... filters) {
         $(filters).clear();
@@ -591,7 +611,9 @@ public abstract class Fluent implements SearchActions {
      * Submit all elements that are in cssSelector with its filters
      * Be careful - only the visible elements are submitted
      *
-     * @param cssSelector
+     * @param cssSelector cssSelector
+     * @param filters set of filters in the current context
+     * @return fluent object
      */
     public Fluent submit(String cssSelector, Filter... filters) {
         $(cssSelector, filters).submit();
@@ -602,7 +624,8 @@ public abstract class Fluent implements SearchActions {
      * Submit all elements filtered by the specified filters.
      * Be careful - only the visible elements are submitted
      *
-     * @param filters
+     * @param filters set of filters in the current context
+     * @return fluent object
      */
     public Fluent submit(Filter... filters) {
         $(filters).submit();
@@ -614,7 +637,9 @@ public abstract class Fluent implements SearchActions {
      * Be careful - only the visible elements are submitted
      * //TODO UTILITY ? Deprecated ?
      *
-     * @param cssSelector
+     * @param cssSelector cssSelector
+     * @param filters set of filters in the current context
+     * @return list of strings
      */
     public List<String> text(String cssSelector, Filter... filters) {
         return $(cssSelector, filters).getTexts();
@@ -625,7 +650,8 @@ public abstract class Fluent implements SearchActions {
      * Be careful - only the visible elements are submitted
      * //TODO UTILITY ? Deprecated ?
      *
-     * @param filters
+     * @param filters set of filters in the current context
+     * @return list of strings
      */
     public List<String> text(Filter... filters) {
         return $(filters).getTexts();
@@ -636,7 +662,9 @@ public abstract class Fluent implements SearchActions {
      * Be careful - only the visible elements are returned
      * //TODO UTILITY ? Deprecated ?
      *
-     * @param cssSelector
+     * @param cssSelector cssSelector
+     * @param filters set of filters in the current context
+     * @return list of strings
      */
     public List<String> value(String cssSelector, Filter... filters) {
         return $(cssSelector, filters).getValues();
@@ -647,7 +675,8 @@ public abstract class Fluent implements SearchActions {
      * Be careful - only the visible elements are submitted
      * //TODO UTILITY ? Deprecated ?
      *
-     * @param filters
+     * @param filters set of filters in the current context
+     * @return list of strings
      */
     public List<String> value(Filter... filters) {
         return $(filters).getValues();
@@ -657,7 +686,8 @@ public abstract class Fluent implements SearchActions {
      * click all elements that are in the list
      * Be careful - only the visible elements are clicked
      *
-     * @param fluentObject
+     * @param fluentObject fluent object to click
+     * @return fluent object
      */
     public Fluent click(FluentDefaultActions fluentObject) {
         fluentObject.click();
@@ -668,7 +698,8 @@ public abstract class Fluent implements SearchActions {
      * Clear all elements that are in the list
      * Be careful - only the visible elements are cleared
      *
-     * @param fluentObject
+     * @param fluentObject list of fluent web elements to clear
+     * @return fluent object
      */
     public Fluent clear(FluentList<FluentWebElement> fluentObject) {
         fluentObject.clear();
@@ -679,7 +710,8 @@ public abstract class Fluent implements SearchActions {
      * Clear the given parameters elements that are in the list
      * Be careful - only the visible elements are cleared
      *
-     * @param fluentObject
+     * @param fluentObject fluent web element to clear
+     * @return fluent object
      */
     public Fluent clear(FluentWebElement fluentObject) {
         fluentObject.clear();
@@ -690,7 +722,8 @@ public abstract class Fluent implements SearchActions {
      * Submit all elements that are in the list
      * Be careful - only the visible elements are submitted
      *
-     * @param fluentObject
+     * @param fluentObject fluent default actions
+     * @return fluent object
      */
     public Fluent submit(FluentDefaultActions fluentObject) {
         fluentObject.submit();
@@ -701,7 +734,8 @@ public abstract class Fluent implements SearchActions {
    * Switch to the selected Element (if element is null or not an iframe, or haven't an id then
    * switch to the default)
    *
-   * @param element
+   * @param element fluent web element
+   * @return fluent object
    */
   public Fluent switchTo(FluentWebElement element) {
     if (null == element ||
@@ -717,6 +751,7 @@ public abstract class Fluent implements SearchActions {
 
   /**
    * Switch to the default element
+   * @return fluent object
    */
   public Fluent switchTo() {
     this.switchTo(null);
@@ -726,6 +761,7 @@ public abstract class Fluent implements SearchActions {
 
   /**
    * Switch to the default element
+   * @return fluent object
    */
   public Fluent switchToDefault() {
     this.switchTo(null);
@@ -738,6 +774,7 @@ public abstract class Fluent implements SearchActions {
 
   /**
    * Maximize browser window using webdriver
+   * @return fluent object
    */
   public Fluent maximizeWindow(){
     getDriver().manage().window().maximize();
