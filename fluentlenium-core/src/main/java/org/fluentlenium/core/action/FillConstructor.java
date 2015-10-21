@@ -43,7 +43,8 @@ public class FillConstructor extends org.fluentlenium.core.Fluent {
     /**
      * Set the values params as text for the fluentList or search a new list with the css selector and filters and add the values param on it
      *
-     * @param values
+     * @param values value to search
+     * @return fill constructor
      */
     public FillConstructor with(String... values) {
         if (fluentList != null) {

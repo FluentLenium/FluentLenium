@@ -61,7 +61,7 @@ public class Alert {
 
   /**
    * Switch to an alert box
-   * @throws NoAlertPresentException if there is currently no alert box
+   * @throws org.openqa.selenium.NoAlertPresentException if there is currently no alert box
    */
   public void switchTo() {
     webDriver.switchTo().alert();

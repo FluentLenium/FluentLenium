@@ -39,6 +39,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
 
     /**
      * Click on the element
+     * @return fluent web element
      */
     public FluentWebElement click() {
         webElement.click();
@@ -47,6 +48,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
 
     /**
      * Double Click on the element
+     * @return fluent web element
      */
     public FluentWebElement doubleClick() {
         Action action = new Actions(FluentThread.get().getDriver()).doubleClick(webElement).build();
@@ -56,6 +58,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
 
     /**
      * Clear the element
+     * @return fluent web element
      */
     public FluentWebElement clear() {
         if (!isInputOfTypeFile()) {
@@ -66,6 +69,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
 
     /**
      * Submit the element
+     * @return fluent web element
      */
     public FluentWebElement submit() {
         webElement.submit();
@@ -75,7 +79,8 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * Set the text element
      *
-     * @param text
+     * @param text value to set
+     * @return fluent web element
      */
     public FluentWebElement text(String... text) {
         clear();
@@ -88,7 +93,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * return the name of the element
      *
-     * @return
+     * @return name of the element
      */
     public String getName() {
         return webElement.getAttribute("name");
@@ -97,8 +102,8 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * return any value of custom attribute (generated=true will return "true" if getAttribute("generated") is called.
      *
-     * @param attribute
-     * @return
+     * @param attribute custom attribute name
+     * @return name value
      */
     public String getAttribute(String attribute) {
         return webElement.getAttribute(attribute);
@@ -107,7 +112,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * return the id of the elements
      *
-     * @return
+     * @return id of element
      */
     public String getId() {
         return webElement.getAttribute("id");
@@ -116,7 +121,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * return the text of the element
      *
-     * @return
+     * @return text of element
      */
     public String getText() {
         return webElement.getText();
@@ -125,7 +130,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * return the value of the elements
      *
-     * @return
+     * @return value of attribute
      */
     public String getValue() {
         return webElement.getAttribute("value");
@@ -134,7 +139,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * return true if the element is displayed, other way return false
      *
-     * @return
+     * @return boolean value of isDisplayed check
      */
     public boolean isDisplayed() {
         return webElement.isDisplayed();
@@ -143,7 +148,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * return true if the element is enabled, other way return false
      *
-     * @return
+     * @return boolean value of isEnabled check
      */
     public boolean isEnabled() {
         return webElement.isEnabled();
@@ -152,7 +157,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * return true if the element is selected, other way false
      *
-     * @return
+     * @return boolean value of isSelected check
      */
     public boolean isSelected() {
         return webElement.isSelected();
@@ -161,7 +166,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * return the tag name
      *
-     * @return
+     * @return string value of tag name
      */
     public String getTagName() {
         return webElement.getTagName();
@@ -170,7 +175,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * return the webElement
      *
-     * @return
+     * @return web element
      */
     public WebElement getElement() {
         return webElement;
@@ -179,7 +184,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * return the size of the elements
      *
-     * @return
+     * @return dimension/size of element
      */
     public Dimension getSize() {
         return webElement.getSize();
@@ -188,9 +193,9 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find elements into the children with the corresponding filters
      *
-     * @param name
-     * @param filters
-     * @return
+     * @param name name of element
+     * @param filters filters set
+     * @return list of Fluent web elements
      */
     public FluentList<FluentWebElement> find(String name, Filter... filters) {
         return search.find(name, filters);
@@ -199,8 +204,8 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find elements in the children with the corresponding filters
      *
-     * @param filters
-     * @return
+     * @param filters filters set
+     * @return list of Fluent web elements
      */
     public FluentList<FluentWebElement> find(Filter... filters) {
         return search.find(filters);
@@ -209,9 +214,9 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find elements into the children with the corresponding filters at the given position
      *
-     * @param name
-     * @param filters
-     * @return
+     * @param name name of element
+     * @param filters filters set
+     * @return fluent web element
      */
     public FluentWebElement find(String name, Integer number, Filter... filters) {
         return search.find(name, number, filters);
@@ -220,9 +225,9 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find element in the children with the corresponding filters at the given position
      * 
-     * @param number
-     * @param filters
-     * @return
+     * @param number index of element
+     * @param filters filters set
+     * @return fluent web element
      */
     public FluentWebElement find(Integer number, Filter... filters) {
         return search.find(number, filters);
@@ -231,9 +236,9 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find elements into the children with the corresponding filters at the first position
      *
-     * @param name
-     * @param filters
-     * @return
+     * @param name name of element
+     * @param filters filters set
+     * @return fluent web element
      */
     public FluentWebElement findFirst(String name, Filter... filters) {
         return search.findFirst(name, filters);
@@ -242,8 +247,8 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find element in the children with the corresponding filters at the first position
      * 
-     * @param filters
-     * @return
+     * @param filters filters set
+     * @return fluent web element
      */
     public FluentWebElement findFirst(Filter... filters) {
         return search.findFirst(filters);
@@ -261,6 +266,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * Construct a FillConstructor in order to allow easy fill
      * Be careful - only the visible elements are filled
+     * @return fill constructor
      */
     public FillConstructor fill() {
       return new FillConstructor(this, FluentThread.get().getDriver());
@@ -268,6 +274,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
 
     /**
      * This method return true if the current FluentWebElement is an input of type file
+     * @return boolean value for is input file type
      */
     private boolean isInputOfTypeFile(){
         return ("input".equalsIgnoreCase(this.getTagName()) &&

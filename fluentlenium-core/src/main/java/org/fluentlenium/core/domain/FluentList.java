@@ -29,8 +29,8 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
      * Return the first element of the list
      * If none, return NoSuchElementException
      *
-     * @return
-     * @throws org.openqa.selenium.NoSuchElementException
+     * @return FluentWebElement based element
+     * @throws org.openqa.selenium.NoSuchElementException when element not found
      */
     E first();
 
@@ -59,79 +59,81 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * Return the value of elements on the list
      *
-     * @return
+     * @return list of string values
      */
     List<String> getValues();
 
     /**
      * Return the id of elements on the list
      *
-     * @return
+     * @return list of string values
      */
     List<String> getIds();
 
     /**
      * Return a custom attribute of elements on the list
      *
-     * @return
+     * @param attribute attribute name
+     * @return list of string values
      */
     List<String> getAttributes(String attribute);
 
     /**
      * Return the name of elements on the list
      *
-     * @return
+     * @return list of string values
      */
     List<String> getNames();
 
     /**
      * Return the texts of list elements
      *
-     * @return
+     * @return list of string values
      */
     List<String> getTexts();
 
     /**
      * Return the value of the first element in the list
      *
-     * @return
+     * @return string value
      */
     String getValue();
 
     /**
      * Return the id of the first element on the list
      *
-     * @return
+     * @return id of first element as string
      */
     String getId();
 
     /**
      * Return a custom attribute of the first element on the list
      *
-     * @return
+     * @param attribute attribute name
+     * @return custom attribute name for the first element
      */
     String getAttribute(String attribute);
 
     /**
      * Return the name of the first element on the list
      *
-     * @return
+     * @return name of the first element
      */
     String getName();
 
     /**
      * Return the text of the first element on the list
      *
-     * @return
+     * @return text of the first element on the list
      */
     String getText();
 
     /**
      * find elements into the children with the corresponding filters
      *
-     * @param name
-     * @param filters
-     * @return
+     * @param name element name
+     * @param filters set of filters
+     * @return extended by FluentWebElement objects list
      */
     @Override
     FluentList<E> find(String name, Filter... filters);
@@ -139,8 +141,8 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * find elements in the children with the corresponding filters
      * 
-     * @param filters
-     * @return
+     * @param filters  set of filters
+     * @return extended by FluentWebElement objects list
      */
     @Override
     FluentList<E> find(Filter... filters);
@@ -148,10 +150,10 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * find elements into the children with the corresponding filters at the position indicated by the number
      *
-     * @param name
-     * @param number
-     * @param filters
-     * @return
+     * @param name element name
+     * @param number set of filters
+     * @param filters  set of filters
+     * @return extended by FluentWebElement object
      */
     @Override
     E find(String name, Integer number, Filter... filters);
@@ -159,9 +161,9 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * find element in the children with the corresponding filters at the position indicated by the number
      *
-     * @param number
-     * @param filters
-     * @return
+     * @param number element name
+     * @param filters set of filters
+     * @return extended by FluentWebElement object
      */
     @Override
     E find(Integer number, Filter... filters);
@@ -169,9 +171,9 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * find elements into the children with the corresponding filters at the first position
      *
-     * @param name
-     * @param filters
-     * @return
+     * @param name element name
+     * @param filters set of filters
+     * @return extended by FluentWebElement object
      */
     @Override
     E findFirst(String name, Filter... filters);
@@ -179,8 +181,8 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * find element in the children with the corresponding filters at the first position
      *
-     * @param filters
-     * @return
+     * @param filters set of filters
+     * @return extended by FluentWebElement object
      */
     @Override
     E findFirst(Filter... filters);
@@ -188,6 +190,7 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * Clear all elements on the list
      * Only the visible elements are filled
+     * @return extended by FluentWebElement object
      */
     FluentList<E> clearAll();
 

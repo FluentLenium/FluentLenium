@@ -32,7 +32,7 @@ public abstract class FluentPage extends Fluent {
     /**
      * Url of the Page
      *
-     * @return
+     * @return page URL
      */
     public String getUrl() {
         return null;
@@ -40,7 +40,7 @@ public abstract class FluentPage extends Fluent {
 
     /**
      * Should check if the navigator is on correct page.
-     * <p/>
+     *
      * For example :
      * assertThat(title()).isEqualTo("Page 1");
      * assertThat("#reallyImportantField").hasSize(1);

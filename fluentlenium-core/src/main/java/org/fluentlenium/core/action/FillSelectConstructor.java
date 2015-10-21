@@ -38,7 +38,8 @@ public class FillSelectConstructor extends org.fluentlenium.core.Fluent {
     /**
      * Select all options that have a value matching the argument for the Select element.
      *
-     * @param value
+     * @param value the select matching string
+     * @return fill select constructor
      */
     public FillSelectConstructor withValue(String value) {
         WebElement selectElement = findFirst(cssSelector, filters).getElement();
@@ -50,7 +51,8 @@ public class FillSelectConstructor extends org.fluentlenium.core.Fluent {
     /**
      * Select the option by its index for the Select element.
      *
-     * @param index
+     * @param index the select index value
+     * @return fill select constructor
      */
     public FillSelectConstructor withIndex(int index) {
         WebElement selectElement = findFirst(cssSelector, filters).getElement();
@@ -62,7 +64,8 @@ public class FillSelectConstructor extends org.fluentlenium.core.Fluent {
     /**
      * Select all options that display text matching the argument for the Select element.
      *
-     * @param text
+     * @param text the select string part
+     * @return fill select constructor
      */
     public FillSelectConstructor withText(String text) {
         WebElement selectElement = findFirst(cssSelector, filters).getElement();
