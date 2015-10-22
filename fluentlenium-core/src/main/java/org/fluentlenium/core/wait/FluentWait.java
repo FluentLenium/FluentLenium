@@ -51,7 +51,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
 
     /**
      * @param timeInMillis time In Millis
-     * @return
+     * @return fluent wait
      */
     public FluentWait atMost(long timeInMillis) {
         wait.withTimeout(timeInMillis, TimeUnit.MILLISECONDS);
@@ -79,8 +79,8 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     /**
      * Ignoring the two exceptions passed as params
      *
-     * @param firstType
-     * @param secondType
+     * @param firstType first type of exception which extends java.lang.RuntimeException
+     * @param secondType second type of exception which extends java.lang.RuntimeException
      * @return
      */
     public FluentWait ignoring(java.lang.Class<? extends java.lang.RuntimeException> firstType, java.lang.Class<? extends java.lang.RuntimeException> secondType) {
@@ -90,8 +90,8 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     }
 
     /**
-     * @param isTrue
-     * @return
+     * @param isTrue predicate condition for wait
+     * @return fluent wait
      */
     public FluentWait until(com.google.common.base.Predicate<Fluent> isTrue) {
         updateWaitWithDefaultExceptions();
@@ -101,7 +101,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
 
     /**
      * @param message - the failing message
-     * @return
+     * @return fluent wait
      */
     public FluentWait withMessage(String message) {
         wait.withMessage(message);
@@ -112,7 +112,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     /**
      * Use this methods only to avoid ignoring StateElementReferenceException
      *
-     * @return
+     * @return fluent wait
      */
     @Beta
     public FluentWait withNoDefaultsException() {
@@ -122,7 +122,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
 
     /**
      * @param string - CSS selector
-     * @return
+     * @return fluent wait matcher
      */
     public FluentWaitMatcher until(String string) {
         updateWaitWithDefaultExceptions();
@@ -130,7 +130,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     }
 
     /**
-     * @return
+     * @return fluent wait page matcher
      */
     public FluentWaitPageMatcher untilPage() {
         updateWaitWithDefaultExceptions();
@@ -139,7 +139,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
 
     /**
      * @param page - the page to work with
-     * @return
+     * @return fluent wait page matcher
      */
     public FluentWaitPageMatcher untilPage(FluentPage page) {
         updateWaitWithDefaultExceptions();
@@ -149,7 +149,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     /**
      * Return the current driver
      *
-     * @return
+     * @return web driver
      */
     public WebDriver getDriver() {
         return driver;

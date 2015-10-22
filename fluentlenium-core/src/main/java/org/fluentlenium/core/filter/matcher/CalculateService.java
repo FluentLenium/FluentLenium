@@ -27,10 +27,10 @@ public final class CalculateService {
     /**
      * check if the current value contains the patternValue or the referenceValue
      *
-     * @param patternValue
-     * @param referenceValue
-     * @param currentValue
-     * @return
+     * @param patternValue pattern
+     * @param referenceValue reference value
+     * @param currentValue current value
+     * @return boolean value for contains check
      */
     public static boolean contains(Pattern patternValue, String referenceValue, String currentValue) {
         if (currentValue == null) {
@@ -45,10 +45,10 @@ public final class CalculateService {
     /**
      * check if the current value is equal the patternValue or the referenceValue
      *
-     * @param patternValue
-     * @param referenceValue
-     * @param currentValue
-     * @return
+     * @param patternValue pattern
+     * @param referenceValue reference value
+     * @param currentValue current value
+     * @return boolean value for equal check
      */
     public static boolean equal(Pattern patternValue, String referenceValue, String currentValue) {
         if (currentValue == null) {
@@ -63,10 +63,10 @@ public final class CalculateService {
     /**
      * check if the current value starts with the patternValue or the referenceValue
      *
-     * @param patternValue
-     * @param referenceValue
-     * @param currentValue
-     * @return
+     * @param patternValue pattern
+     * @param referenceValue reference value
+     * @param currentValue current value
+     * @return boolean value for startsWith check
      */
 
     public static boolean startsWith(Pattern patternValue, String referenceValue, String currentValue) {
@@ -83,10 +83,10 @@ public final class CalculateService {
     /**
      * check if the current value ends with the patternValue or the referenceValue
      *
-     * @param patternValue
-     * @param referenceValue
-     * @param currentValue
-     * @return
+     * @param patternValue pattern
+     * @param referenceValue reference value
+     * @param currentValue current value
+     * @return boolean value for endsWith check
      */
 
     public static boolean endsWith(Pattern patternValue, String referenceValue, String currentValue) {

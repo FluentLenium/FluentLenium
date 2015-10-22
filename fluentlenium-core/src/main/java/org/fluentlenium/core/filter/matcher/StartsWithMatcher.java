@@ -21,7 +21,7 @@ public class StartsWithMatcher extends Matcher {
     /**
      * Constructor using a string as a value
      *
-     * @param value
+     * @param value as string for class constructor
      */
     public StartsWithMatcher(String value) {
         super(value);
@@ -30,7 +30,7 @@ public class StartsWithMatcher extends Matcher {
     /**
      * Constructor using a pattern as a value
      *
-     * @param value
+     * @param value as pattern for class constructor
      */
     public StartsWithMatcher(Pattern value) {
         super(value);

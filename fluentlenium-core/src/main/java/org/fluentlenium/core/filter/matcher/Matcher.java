@@ -32,7 +32,7 @@ public abstract class Matcher {
     /**
      * return the given value
      *
-     * @return
+     * @return value of matcher
      */
     public String getValue() {
         return value;
@@ -41,7 +41,7 @@ public abstract class Matcher {
     /**
      * Return the matcher symbol
      *
-     * @return
+     * @return matcher symbol
      */
     public String getMatcherSymbol() {
         return getMatcherType() != null ? getMatcherType().getCssRepresentations() : null;
@@ -57,7 +57,7 @@ public abstract class Matcher {
     /**
      * return the pattern
      *
-     * @return
+     * @return pattern
      */
     protected Pattern getPattern() {
         return pattern;
@@ -66,15 +66,15 @@ public abstract class Matcher {
     /**
      * Return the matcher type
      *
-     * @return
+     * @return matcher type
      */
     protected abstract MatcherType getMatcherType();
 
     /**
      * Check if the matcher is matched given the value
      *
-     * @param value
-     * @return
+     * @param value define the object of check name
+     * @return boolean value for isSatisfiedBy
      */
     public abstract boolean isSatisfiedBy(String value);
 

@@ -26,8 +26,10 @@ public final class FilterConstructor {
     /**
      * Create a filter by name
      *
-     * @param name
-     * @return
+     * @param name element name
+     * @param type filter type
+     * @param matcherType class for matcherType
+     * @return filter object
      */
     public static Filter buildFilter(String name, FilterType type, Class matcherType) {
         if (matcherType.equals(ContainsWordMatcher.class)) {
@@ -39,8 +41,8 @@ public final class FilterConstructor {
     /**
      * Create a filter by name
      *
-     * @param name
-     * @return
+     * @param name element name
+     * @return filter object
      */
     public static Filter withName(String name) {
         return new Filter(FilterType.NAME, name);
@@ -49,8 +51,8 @@ public final class FilterConstructor {
     /**
      * Create a filter by id
      *
-     * @param id
-     * @return
+     * @param id element id
+     * @return filter object
      */
     public static Filter withId(String id) {
         return new Filter(FilterType.ID, id);
@@ -59,8 +61,8 @@ public final class FilterConstructor {
     /**
      * Create a filter by class
      *
-     * @param klass
-     * @return
+     * @param klass CSS class name
+     * @return filter object
      */
     public static Filter withClass(String klass) {
         return new Filter(FilterType.CLASS, klass);
@@ -69,8 +71,8 @@ public final class FilterConstructor {
     /**
      * Create a filter by text
      *
-     * @param text
-     * @return
+     * @param text to filter in content
+     * @return filter object
      */
     public static Filter withText(String text) {
         return new Filter(FilterType.TEXT, MatcherConstructor.equal(text));
@@ -79,8 +81,8 @@ public final class FilterConstructor {
     /**
      * Create a filter by text
      *
-     * @param text
-     * @return
+     * @param text to filter in content
+     * @return filter object
      */
     public static Filter containingText(String text) {
         return new Filter(FilterType.TEXT, MatcherConstructor.contains(text));
@@ -89,8 +91,8 @@ public final class FilterConstructor {
     /**
      * Create a filter builder for the attribute
      *
-     * @param attribute
-     * @return
+     * @param attribute attribute name
+     * @return filter builder object
      */
     public static FilterBuilder with(String attribute) {
         return new FilterBuilder(attribute);
@@ -99,8 +101,7 @@ public final class FilterConstructor {
     /**
      * Create a filter builder for the attribute by name
      *
-     * @param
-     * @return
+     * @return filter builder object
      */
     public static FilterBuilder withName() {
         return new FilterBuilder(FilterType.NAME);
@@ -109,8 +110,7 @@ public final class FilterConstructor {
     /**
      * Create a filter builder for the attribute by id
      *
-     * @param
-     * @return
+     * @return filter builder object
      */
     public static FilterBuilder withId() {
         return new FilterBuilder(FilterType.ID);
@@ -119,7 +119,7 @@ public final class FilterConstructor {
 	/**
 	 * Create a filter builder for the attribute by class
 	 *
-	 * @return
+	 * @return filter builder object
 	 */
 	public static FilterBuilder withClass() {
 		return new FilterBuilder(FilterType.CLASS);
@@ -128,8 +128,7 @@ public final class FilterConstructor {
     /**
      * Create a filter builder for the attribute by text
      *
-     * @param
-     * @return
+     * @return filter builder object
      */
     public static FilterBuilder withText() {
         return new FilterBuilder(FilterType.TEXT);
@@ -139,8 +138,8 @@ public final class FilterConstructor {
      * Create a filter by name with matcher
      * DEPRECATED : use withName().+convenient method
      *
-     * @param matcher
-     * @return
+     * @param matcher matcher object
+     * @return filter object
      */
     @Deprecated
     public static Filter withName(Matcher matcher) {
@@ -151,8 +150,8 @@ public final class FilterConstructor {
      * Create a filter by id
      * DEPRECATED : use withId().+convenient method
      *
-     * @param matcher
-     * @return
+     * @param matcher matcher object
+     * @return filter object
      */
     @Deprecated
     public static Filter withId(Matcher matcher) {
@@ -163,8 +162,8 @@ public final class FilterConstructor {
      * Create a filter by text
      * DEPRECATED : use withText().+convenient method
      *
-     * @param matcher
-     * @return
+     * @param matcher matcher object
+     * @return filter object
      */
     @Deprecated
     public static Filter withText(Matcher matcher) {
@@ -173,12 +172,11 @@ public final class FilterConstructor {
 
     /**
      * Create a filter by a customAttribute
-     * <p/>
      * DEPRECATED : use with(customAttribute).+convenient method
      *
-     * @param customAttribute
-     * @param matcher
-     * @return
+     * @param customAttribute custom attribute name
+     * @param matcher matcher object
+     * @return filter object
      */
     @Deprecated
     public static Filter with(String customAttribute, Matcher matcher) {
@@ -187,12 +185,11 @@ public final class FilterConstructor {
 
     /**
      * Create a filter by a customAttribute
-     * <p/>
      * DEPRECATED : use with(customAttribute).+convenient method
      *
-     * @param customAttribute
-     * @param matcher
-     * @return
+     * @param customAttribute custom attribute name
+     * @param matcher string matcher
+     * @return filter object
      */
     @Deprecated
     public static Filter with(String customAttribute, String matcher) {

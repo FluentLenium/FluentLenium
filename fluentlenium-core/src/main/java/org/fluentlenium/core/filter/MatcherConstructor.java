@@ -28,8 +28,8 @@ public final class MatcherConstructor {
     /**
      * Create a matcher for a containing string
      *
-     * @param matcher
-     * @return
+     * @param matcher string matcher
+     * @return matcher object
      */
     public static Matcher contains(String matcher) {
         return new ContainsMatcher(matcher);
@@ -38,8 +38,8 @@ public final class MatcherConstructor {
     /**
      * Create a matcher for a containing pattern
      *
-     * @param pattern
-     * @return
+     * @param pattern pattern object
+     * @return matcher object
      */
     public static Matcher contains(Pattern pattern) {
         return new ContainsMatcher(pattern);
@@ -48,8 +48,8 @@ public final class MatcherConstructor {
     /**
      * Create a matcher for not containing a string
      *
-     * @param matcher
-     * @return
+     * @param matcher string matcher
+     * @return matcher object
      */
 
     public static Matcher notContains(String matcher) {
@@ -59,8 +59,8 @@ public final class MatcherConstructor {
     /**
      * Create a matcher for not containing the pattern
      *
-     * @param pattern
-     * @return
+     * @param pattern string pattern
+     * @return matcher object
      */
     public static Matcher notContains(Pattern pattern) {
         return new NotContainsMatcher(pattern);
@@ -69,8 +69,8 @@ public final class MatcherConstructor {
     /**
      * Create a matcher to equal the string matcher
      *
-     * @param matcher
-     * @return
+     * @param matcher string matcher
+     * @return matcher object
      */
     public static Matcher equal(String matcher) {
         return new EqualMatcher(matcher);
@@ -79,8 +79,8 @@ public final class MatcherConstructor {
     /**
      * Create a Pattern given a regex. The regex is compile.
      *
-     * @param pattern
-     * @return
+     * @param pattern string pattern
+     * @return pattern
      */
     public static Pattern regex(String pattern) {
         return Pattern.compile(pattern);
@@ -90,8 +90,8 @@ public final class MatcherConstructor {
     /**
      * Create a matcher filtering by a string that start with the matcher
      *
-     * @param matcher
-     * @return
+     * @param matcher string matcher
+     * @return matcher object
      */
     public static Matcher startsWith(String matcher) {
         return new StartsWithMatcher(matcher);
@@ -100,8 +100,8 @@ public final class MatcherConstructor {
     /**
      * Create a matcher filtering by a string that start with the matcher
      *
-     * @param pattern
-     * @return
+     * @param pattern pattern
+     * @return matcher object
      */
     public static Matcher startsWith(Pattern pattern) {
         return new StartsWithMatcher(pattern);
@@ -110,8 +110,8 @@ public final class MatcherConstructor {
     /**
      * Create a matcher filtering by a string that ends with the matcher
      *
-     * @param matcher
-     * @return
+     * @param matcher string matcher
+     * @return matcher
      */
     public static Matcher endsWith(String matcher) {
         return new EndsWithMatcher(matcher);
@@ -120,8 +120,8 @@ public final class MatcherConstructor {
     /**
      * Create a matcher filtering by a string that ends with the pattern
      *
-     * @param pattern
-     * @return
+     * @param pattern pattern
+     * @return matcher
      */
 
     public static Matcher endsWith(Pattern pattern) {
@@ -131,8 +131,8 @@ public final class MatcherConstructor {
     /**
      * Create a matcher filtering by a string that not starts with the string params
      *
-     * @param matcher
-     * @return
+     * @param matcher string matcher
+     * @return matcher
      */
     public static Matcher notStartsWith(String matcher) {
         return new NotStartsWithMatcher(matcher);
@@ -141,8 +141,8 @@ public final class MatcherConstructor {
     /**
      * Create a matcher filtering by a string that not starts with the pattern params
      *
-     * @param pattern
-     * @return
+     * @param pattern pattern
+     * @return matcher
      */
 
     public static Matcher notStartsWith(Pattern pattern) {
@@ -152,8 +152,8 @@ public final class MatcherConstructor {
     /**
      * Create a matcher filtering by a string that not ends with the string params
      *
-     * @param matcher
-     * @return
+     * @param matcher string matcher
+     * @return matcher
      */
     public static Matcher notEndsWith(String matcher) {
         return new NotEndsWithMatcher(matcher);
@@ -162,8 +162,8 @@ public final class MatcherConstructor {
     /**
      * Create a matcher filtering by a string that not ends with the pattern params
      *
-     * @param pattern
-     * @return
+     * @param pattern pattern
+     * @return matcher
      */
     public static Matcher notEndsWith(Pattern pattern) {
         return new NotEndsWithMatcher(pattern);

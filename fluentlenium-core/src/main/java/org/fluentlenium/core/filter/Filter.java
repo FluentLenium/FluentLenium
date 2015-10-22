@@ -25,8 +25,8 @@ public class Filter {
     /**
      * Construct a filter with a type and an associated value
      *
-     * @param filterType
-     * @param value
+     * @param filterType filter type
+     * @param value value to filter
      */
     public Filter(FilterType filterType, String value) {
         this.attribut = filterType.name();
@@ -36,8 +36,8 @@ public class Filter {
     /**
      * Construct a filter with a type and an associated matcher
      *
-     * @param filterType
-     * @param matcher
+     * @param filterType filter type
+     * @param matcher matcher
      */
     public Filter(FilterType filterType, Matcher matcher) {
         this.attribut = filterType.name();
@@ -47,8 +47,8 @@ public class Filter {
     /**
      * Construct a filter with a custom attribute and an associated value
      *
-     * @param customAttribute
-     * @param value
+     * @param customAttribute custom attribute name
+     * @param value custom attribute value
      */
     public Filter(String customAttribute, String value) {
         this.attribut = customAttribute;
@@ -59,8 +59,8 @@ public class Filter {
     /**
      * Construct a filter with a custom attribute and an associated matcher
      *
-     * @param customAttribute
-     * @param matcher
+     * @param customAttribute custom attribute name
+     * @param matcher matcher
      */
     public Filter(String customAttribute, Matcher matcher) {
         this.attribut = customAttribute;

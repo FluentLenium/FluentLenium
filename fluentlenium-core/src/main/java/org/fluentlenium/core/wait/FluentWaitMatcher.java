@@ -42,8 +42,9 @@ public class FluentWaitMatcher {
     /**
      * WARNING - Should be change in a next version to hasAttribute("myAttribute").value("myValue")
      *
-     * @param attribute
-     * @param value
+     * @param attribute attribute name
+     * @param value attribute value
+     * @return fluent
      */
     public Fluent hasAttribute(final String attribute, final String value) {
         Predicate<Fluent> hasAttribute = new com.google.common.base.Predicate<Fluent>() {
@@ -75,7 +76,8 @@ public class FluentWaitMatcher {
     /**
      * check if the FluentWait has the corresponding id
      *
-     * @param value
+     * @param value id value
+     * @return fluent
      */
     public Fluent hasId(final String value) {
         Predicate<Fluent> hasId = new com.google.common.base.Predicate<Fluent>() {
@@ -90,7 +92,8 @@ public class FluentWaitMatcher {
     /**
      * check if the FluentWait has the corresponding name
      *
-     * @param value
+     * @param value name value
+     * @return fluent
      */
     public Fluent hasName(final String value) {
         Predicate<Fluent> hasName = new com.google.common.base.Predicate<Fluent>() {
@@ -105,7 +108,7 @@ public class FluentWaitMatcher {
     /**
      * Check that the element have a customized size
      *
-     * @return
+     * @return fluent size builder
      */
     public FluentSizeBuilder hasSize() {
         return new FluentSizeBuilder(search, wait, selector, filters);
@@ -114,7 +117,8 @@ public class FluentWaitMatcher {
     /**
      * Check that the element have the size indicated
      *
-     * @param size
+     * @param size integer value of size
+     * @return fluent
      */
     public Fluent hasSize(final int size) {
         Predicate<Fluent> hasSize = new com.google.common.base.Predicate<Fluent>() {
@@ -130,7 +134,8 @@ public class FluentWaitMatcher {
     /**
      * check if the FluentWait contains the corresponding text
      *
-     * @param value
+     * @param value text in contains check
+     * @return fluent
      */
     public Fluent containsText(final String value) {
         Predicate<Fluent> hasText = new com.google.common.base.Predicate<Fluent>() {
@@ -153,7 +158,8 @@ public class FluentWaitMatcher {
     /**
      * check if the FluentWait has the exact corresponding text
      *
-     * @param value
+     * @param value text in contains check
+     * @return fluent
      */
     public Fluent hasText(final String value) {
         Predicate<Fluent> hasText = new com.google.common.base.Predicate<Fluent>() {
@@ -168,6 +174,7 @@ public class FluentWaitMatcher {
 
     /**
      * Check that the element is present
+     * @return fluent
      */
     public Fluent isPresent() {
         Predicate<Fluent> isPresent = new com.google.common.base.Predicate<Fluent>() {
@@ -184,6 +191,7 @@ public class FluentWaitMatcher {
 
     /**
      * Check that the element is not present
+     * @return fluent
      */
     public Fluent isNotPresent() {
         Predicate<Fluent> isNotPresent = new com.google.common.base.Predicate<Fluent>() {
@@ -200,7 +208,7 @@ public class FluentWaitMatcher {
     /**
      * Check that the elements are all displayed
      *
-     * @return
+     * @return fluent
      */
     public Fluent areDisplayed() {
         Predicate<Fluent> isVisible = new com.google.common.base.Predicate<Fluent>() {
@@ -224,7 +232,7 @@ public class FluentWaitMatcher {
     /**
      * Check that the elements are all not displayed
      *
-     * @return
+     * @return fluent
      */
     public Fluent areNotDisplayed() {
         Predicate<Fluent> isNotVisible = new com.google.common.base.Predicate<Fluent>() {
@@ -245,7 +253,7 @@ public class FluentWaitMatcher {
     /**
      * Check that the elements are all enabled
      *
-     * @return
+     * @return fluent
      */
     public Fluent areEnabled() {
         Predicate<Fluent> isEnabled = new com.google.common.base.Predicate<Fluent>() {
@@ -281,8 +289,8 @@ public class FluentWaitMatcher {
     /**
      * Create a filter builder for the attribute
      *
-     * @param attribute
-     * @return
+     * @param attribute attribute name
+     * @return fluent wait builder
      */
     public FluentWaitBuilder with(String attribute) {
         return new FluentWaitBuilder(this, attribute);
@@ -291,8 +299,7 @@ public class FluentWaitMatcher {
     /**
      * Create a filter builder for the attribute by id
      *
-     * @param
-     * @return
+     * @return fluent wait builder
      */
     public FluentWaitBuilder withId() {
         return new FluentWaitBuilder(this, FilterType.ID);
@@ -301,8 +308,8 @@ public class FluentWaitMatcher {
     /**
      * Check that the element has the corrsponding id
      *
-     * @param value
-     * @return
+     * @param value id name
+     * @return fluent wait builder
      */
     public FluentWaitMatcher withId(final String value) {
         filters.add(org.fluentlenium.core.filter.FilterConstructor.withId(value));
@@ -312,18 +319,17 @@ public class FluentWaitMatcher {
     /**
      * Create a filter builder for the attribute by name
      *
-     * @param
-     * @return
+     * @return fluent wait builder
      */
     public FluentWaitBuilder withName() {
         return new FluentWaitBuilder(this, FilterType.NAME);
     }
 
     /**
-     * Check that the element has the corrsponding name
+     * Check that the element has the corresponding name
      *
-     * @param value
-     * @return
+     * @param value element name
+     * @return fluent wait builder
      */
     public FluentWaitMatcher withName(final String value) {
         filters.add(org.fluentlenium.core.filter.FilterConstructor.withName(value));
@@ -334,8 +340,7 @@ public class FluentWaitMatcher {
     /**
      * Create a filter builder for the attribute by class
      *
-     * @param
-     * @return
+     * @return fluent wait builder
      */
     public FluentWaitBuilder withClass() {
         return new FluentWaitBuilder(this, FilterType.CLASS);
@@ -344,8 +349,8 @@ public class FluentWaitMatcher {
     /**
      * Check that the element has the corresponding class
      *
-     * @param value
-     * @return
+     * @param value class name
+     * @return fluent wait matcher
      */
     public FluentWaitMatcher withClass(final String value) {
         filters.add(org.fluentlenium.core.filter.FilterConstructor.withClass(value));
@@ -355,8 +360,7 @@ public class FluentWaitMatcher {
     /**
      * Create a filter builder for the attribute by text
      *
-     * @param
-     * @return
+     * @return fluent wait builder
      */
     public FluentWaitBuilder withText() {
         return new FluentWaitBuilder(this, FilterType.TEXT);
@@ -365,8 +369,8 @@ public class FluentWaitMatcher {
     /**
      * Check that the element has the corresponding text
      *
-     * @param value
-     * @return
+     * @param value the text value which should be included
+     * @return fluent wait matcher
      */
     public FluentWaitMatcher withText(final String value) {
         filters.add(org.fluentlenium.core.filter.FilterConstructor.withText(value));

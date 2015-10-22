@@ -31,7 +31,7 @@ public enum MatcherType {
     /**
      * Return the css representations of the matcher
      *
-     * @return
+     * @return CSS representations
      */
     public String getCssRepresentations() {
         return cssRepresentations;

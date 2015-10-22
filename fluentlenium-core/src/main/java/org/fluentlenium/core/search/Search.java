@@ -43,9 +43,9 @@ public class Search implements SearchActions<FluentWebElement> {
     /**
      * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
      *
-     * @param name
-     * @param filters
-     * @return
+     * @param name elements name to find
+     * @param filters filters set
+     * @return fluent list of fluent web elements
      */
     @Override
     public FluentList<FluentWebElement> find(String name, final Filter... filters) {
@@ -79,8 +79,8 @@ public class Search implements SearchActions<FluentWebElement> {
     /**
      * Central methods to find elements on the page with filters.
      * 
-     * @param filters
-     * @return
+     * @param filters filters set
+     * @return fluent list of fluent web elements
      */
     @Override
     public FluentList<FluentWebElement> find(Filter... filters) {
@@ -93,10 +93,10 @@ public class Search implements SearchActions<FluentWebElement> {
     /**
      * Return the elements at the number position into the the lists corresponding to the cssSelector with it filters
      *
-     * @param name
-     * @param number
-     * @param filters
-     * @return
+     * @param name elements name to find
+     * @param number index of element in the list
+     * @param filters filters set
+     * @return fluent web element
      */
     @Override
     public FluentWebElement find(String name, Integer number, final Filter... filters) {
@@ -110,9 +110,9 @@ public class Search implements SearchActions<FluentWebElement> {
     /**
      * Return the element at the number position in the lists corresponding to the filters
      * 
-     * @param number
-     * @param filters
-     * @return
+     * @param number index of element in container
+     * @param filters filters set
+     * @return fluent web element
      */
     @Override
     public FluentWebElement find(Integer number, Filter... filters) {
@@ -125,9 +125,9 @@ public class Search implements SearchActions<FluentWebElement> {
     /**
      * Return the first elements corresponding to the name and the filters
      *
-     * @param name
-     * @param filters
-     * @return
+     * @param name element name to find
+     * @param filters filters set
+     * @return fluent web element
      */
     @Override
     public FluentWebElement findFirst(String name, final Filter... filters) {
@@ -142,8 +142,8 @@ public class Search implements SearchActions<FluentWebElement> {
     /**
      * Return the first element corresponding to the filters.
      *
-     * @param filters
-     * @return
+     * @param filters filters set
+     * @return fluent web element
      */
     @Override
     public FluentWebElement findFirst(Filter... filters) {
