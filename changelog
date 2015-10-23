@@ -1,3 +1,16 @@
+v0.10.5
+- JavaDoc extension - descriptions & typos
+- New maintainers came on board :)
+- fix - #173 getDriver and getSearch are used by any method in Fluent.java just to make override of this methods
+possible.
+- fix #137 - User can refer to the list of FluentWebElements on FindBy usage - Fluent class requires to have new
+methods implemented so please be aware that can potentially break compatibilities
+- fix #151 - find method can only use filter argument
+- fix #159 - Add capacity to create page with parameters
+- fix #138 - documentation error - visible instead of enabled
+- improve when using firefox and a path starting with /
+
+
 v0.10.0
 - fix #100 - fix FluentWait to use Fluent instead FluentWait<WebDriver>  (so await.until(Function) and await.until(Predicate) have changed
 - fix #113 - input type="file" now working
