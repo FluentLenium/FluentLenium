@@ -96,7 +96,7 @@ class PageAccueil extends FluentPage {
 
     @Override
     public void isAt() {
-        assertThat($("title").first().getText()).contains("Selenium");
+        assertThat(getDriver().getTitle()).contains("Selenium");
     }
 
     public void goToNextPage() {
@@ -117,7 +117,7 @@ class Page2 extends FluentPage {
 
     @Override
     public void isAt() {
-        assertThat($("title").first().getText()).isEqualTo("Page 2");
+        assertThat(getDriver().getTitle()).isEqualTo("Page 2");
     }
 
 }

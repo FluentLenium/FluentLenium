@@ -68,7 +68,7 @@ class Page2Relative extends FluentPage {
 
     @Override
     public void isAt() {
-        assertThat($("title").first().getText()).isEqualTo("Page 2");
+        assertThat(getDriver().getTitle()).isEqualTo("Page 2");
     }
 }
 

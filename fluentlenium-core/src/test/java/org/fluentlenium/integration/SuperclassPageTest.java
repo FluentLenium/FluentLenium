@@ -50,6 +50,6 @@ class AnotherPage extends FluentPage {
 
     @Override
     public void isAt() {
-        assertThat($("title").first().getText()).isEqualTo("Another Page");
+        assertThat(getDriver().getTitle()).isEqualTo("Another Page");
     }
 }

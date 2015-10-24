@@ -51,7 +51,7 @@ class PageIndex extends FluentPage {
 
     @Override
     public void isAt() {
-        assertThat($("title").first().getText()).contains("Selenium");
+        assertThat(getDriver().getTitle()).contains("Selenium");
     }
 }
 

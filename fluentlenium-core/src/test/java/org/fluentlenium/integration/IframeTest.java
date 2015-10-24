@@ -95,6 +95,6 @@ class IFramePage extends FluentPage {
 
   @Override
   public void isAt() {
-    assertThat($("title").first().getText()).endsWith("Container");
+    assertThat(getDriver().getTitle()).endsWith("Container");
   }
 }
