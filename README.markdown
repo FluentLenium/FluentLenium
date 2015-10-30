@@ -182,7 +182,7 @@ find(myCssSelector, 2, withName("foo")).findFirst("input", withName("bar"))
 ```
 
 ## Element
-If you need to access to the name, the id, the value, the tagname or the text of an element:
+If you need to access to the name, the id, the value, the tagname or the visible text of an element:
 
 ```java
 findFirst(myCssSelector).getName()
@@ -192,13 +192,19 @@ findFirst(myCssSelector).getTagName()
 findFirst(myCssSelector).getText()
 ```
 
+If you need to access the text content of an element, including hidden parts:
+
+```java
+findFirst(myCssSelector).getTextContent()
+```
+
 If you need to access a specific value of an attribute:
 
 ```java
 findFirst(myCssSelector).getAttribute("myCustomAttribute")
 ```
 
-You can also access a list of all the names, text, and ids of a list of elements:
+You can also access a list of all the names, visible text, and ids of a list of elements:
 ```java
 find(myCssSelector).getNames()
 find(myCssSelector).getIds()
@@ -207,7 +213,7 @@ find(myCssSelector).getAttributes("myCustomAttribute")
 find(myCssSelector).getTexts()
 ```
 
-If you want to know the name, the id, the value, the text or the value of an attribute of the first element on the list:
+If you want to know the name, the id, the value, the visible text or the value of an attribute of the first element on the list:
 ```java
 find(myCssSelector).getName()
 find(myCssSelector).getId()

@@ -93,6 +93,13 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     List<String> getTexts();
 
     /**
+     * Return the text contents of list elements
+     *
+     * @return list of string values
+     */
+    List<String> getTextContents();
+
+    /**
      * Return the value of the first element in the list
      *
      * @return string value

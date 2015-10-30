@@ -183,6 +183,18 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
      * {@inheritDoc}
      */
     @Override
+    public List<String> getTextContents() {
+        return Lists.transform(this, new Function<E, String>() {
+            public String apply(E webElement) {
+                return webElement.getTextContent();
+            }
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public List<String> getTexts() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {

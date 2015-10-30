@@ -119,12 +119,21 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * return the text of the element
+     * return the visible text of the element
      *
      * @return text of element
      */
     public String getText() {
         return webElement.getText();
+    }
+
+    /**
+     * return the text content of the element (even invisible through textContent attribute)
+     *
+     * @return text content of element
+     */
+    public String getTextContent() {
+        return webElement.getAttribute("textContent");
     }
 
     /**
