@@ -34,6 +34,6 @@ public class HiddenTextTest extends LocalFluentCase {
     public void checkGetTextContentWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement line = findFirst("#hidden");
-        assertThat(line.getTextContent()).isEmpty();
+        assertThat(line.getTextContent()).isNullOrEmpty();
     }
 }
