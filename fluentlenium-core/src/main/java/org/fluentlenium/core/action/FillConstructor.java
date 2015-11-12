@@ -54,4 +54,9 @@ public class FillConstructor extends org.fluentlenium.core.Fluent {
         }
         return this;
     }
+
+    public FillConstructor withValues(String... values) {
+        // with is a reserved word in Scala...
+        return with(values);
+    }
 }
