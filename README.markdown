@@ -649,7 +649,7 @@ The default is PER_METHOD.
 You will also be able to decide if you want to clean the cookies between two methods using ```@SharedDriver(deleteCookies=true)``` or ```@SharedDriver(deleteCookies=false)```
 
 Please keep in mind that this annotation tells how the drivers are created on runtime but it is not dealing with
-concurrency. If you need to make your tests parallel you should use dedicated libraries/extensions you can use
+concurrency. If you need to make your tests parallel you should use dedicated libraries/extensions. You can use
 Surefire maven plugin for example.
 
 **Surefire JUnit example**
@@ -733,10 +733,12 @@ TestNG gives you more flexibility in order to the concurrency level, test suites
 
 Both test frameworks are giving possibility to define the parallelism level of tests. It is possible when you have
 multiple execution/concurrency levels set in your tests to face driver sharing issues, so please use driver
-sharing set to **PER_METHOD**. The example failure might occur when you set the Surefire to per
-method and FluentLenium to PER_CLASS and you will end up with ghost webdriver instances which won't be stopped after
-tests execution. The good practice is to check the number of running process (chromedriver, firefox, etc.) before and
- after your tests run just to make sure the cleanup is working properly.
+sharing set to **PER_METHOD** when your execution methods are mixed up.
+
+*Example failure*: might occur when you set the Surefire to per method and FluentLenium to PER_CLASS and you will end
+up with ghost webdriver instances which won't be stopped after tests execution. The good practice is to check the
+number of running process (chromedriver, firefox, etc.) before and after your tests run just to make sure the cleanup
+ is working properly.
 
 ##Iframe
 If you want to switch the Selenium webDriver to an iframe (see this [Selenium FAQ](https://code.google.com/p/selenium/wiki/FrequentlyAskedQuestions#Q:_How_do_I_type_into_a_contentEditable_iframe?)),
