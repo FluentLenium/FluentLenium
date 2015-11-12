@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,15 +14,17 @@
 
 package org.fluentlenium.integration;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.fluentlenium.core.filter.FilterConstructor.with;
+import static org.fluentlenium.core.filter.FilterConstructor.withClass;
+import static org.fluentlenium.core.filter.FilterConstructor.withId;
+import static org.fluentlenium.core.filter.FilterConstructor.withName;
+import static org.fluentlenium.core.filter.MatcherConstructor.regex;
+
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.fluentlenium.core.filter.FilterConstructor.*;
-import static org.fluentlenium.core.filter.MatcherConstructor.regex;
-
 public class FluentSelectorTest extends LocalFluentCase {
-
 
     @Test
     public void checkWithNameCssSelector() {
@@ -60,7 +62,6 @@ public class FluentSelectorTest extends LocalFluentCase {
         assertThat($(".small", withName().notContains("toto"))).hasSize(3);
     }
 
-
     @Test
     public void checkCustomSelectAttribute() {
         goTo(DEFAULT_URL);
@@ -97,7 +98,6 @@ public class FluentSelectorTest extends LocalFluentCase {
         assertThat($("span", withName().startsWith(regex("am")))).hasSize(0);
     }
 
-
     @Test
     public void checkEndAttributeMatcher() {
         goTo(DEFAULT_URL);
@@ -109,7 +109,6 @@ public class FluentSelectorTest extends LocalFluentCase {
         goTo(DEFAULT_URL);
         assertThat($("span", withName().endsWith(regex("am?")))).hasSize(0);
     }
-
 
     @Test
     public void checkNotStartAttribute() {

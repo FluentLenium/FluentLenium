@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,10 +13,16 @@
  */
 package org.fluentlenium.core.filter;
 
-import org.fluentlenium.core.filter.matcher.*;
-
 import java.util.regex.Pattern;
 
+import org.fluentlenium.core.filter.matcher.ContainsMatcher;
+import org.fluentlenium.core.filter.matcher.ContainsWordMatcher;
+import org.fluentlenium.core.filter.matcher.EndsWithMatcher;
+import org.fluentlenium.core.filter.matcher.EqualMatcher;
+import org.fluentlenium.core.filter.matcher.NotContainsMatcher;
+import org.fluentlenium.core.filter.matcher.NotEndsWithMatcher;
+import org.fluentlenium.core.filter.matcher.NotStartsWithMatcher;
+import org.fluentlenium.core.filter.matcher.StartsWithMatcher;
 
 public class FilterBuilder {
 
@@ -86,6 +92,5 @@ public class FilterBuilder {
     public Filter notEndsWith(Pattern equal) {
         return new Filter(attribute, new NotEndsWithMatcher(equal));
     }
-
 
 }

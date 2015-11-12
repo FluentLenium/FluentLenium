@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,7 +27,6 @@ import org.testng.annotations.BeforeMethod;
  * All TestNG Test should extends this class. It provides default parameters.
  */
 public abstract class FluentTestNg extends FluentAdapter {
-
     private static WebDriver sharedDriverOnce;
 
     public FluentTestNg() {
@@ -67,7 +66,7 @@ public abstract class FluentTestNg extends FluentAdapter {
     @AfterMethod
     public void afterMethod() {
         cleanUp();
-        if (SharedDriverHelper.isSharedDriverPerMethod(this.getClass())|| SharedDriverHelper.isDefaultSharedDriver(this.getClass())) {
+        if (SharedDriverHelper.isSharedDriverPerMethod(this.getClass()) || SharedDriverHelper.isDefaultSharedDriver(this.getClass())) {
             quit();
         } else if (SharedDriverHelper.isDeleteCookies(this.getClass())) {
             this.getDriver().manage().deleteAllCookies();

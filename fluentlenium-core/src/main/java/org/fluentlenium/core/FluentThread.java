@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,19 +13,18 @@
  */
 package org.fluentlenium.core;
 
-
 public class FluentThread {
-        public static final InheritableThreadLocal<Fluent> userThreadLocal = new InheritableThreadLocal<Fluent>();
+    public static final InheritableThreadLocal<Fluent> userThreadLocal = new InheritableThreadLocal<Fluent>();
 
-        public static void set(Fluent fluent) {
-            userThreadLocal.set(fluent);
-        }
+    public static void set(Fluent fluent) {
+        userThreadLocal.set(fluent);
+    }
 
-        public static void unset() {
-            userThreadLocal.remove();
-        }
+    public static void unset() {
+        userThreadLocal.remove();
+    }
 
-        public static Fluent get() {
-            return userThreadLocal.get();
-        }
+    public static Fluent get() {
+        return userThreadLocal.get();
+    }
 }
