@@ -31,8 +31,8 @@ public class FluentCloseTest extends LocalFluentCase {
     public void afterClass() {
         try {
             getDriver().get("http://www.yahoo.fr");
-            fail("should have a SessionNotFoundException because driver is closed");
-        } catch (WebDriverException e) {
+            fail("should have a NullPointerException because driver is closed");
+        } catch (NullPointerException e) {
 
         }
     }
