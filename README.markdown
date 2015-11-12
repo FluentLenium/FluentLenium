@@ -629,7 +629,7 @@ First, just override the getDriver method and use the selenium way to configure 
 You can also override the setDefaultConfig method and use both selenium and FluentLenium way (withDefaultSearchWait,withDefaultPageWait) to configure your driver.
 
 ## Browser Lifecycle
-For jUnit and testNG, you can define the browser lifecycle.
+For JUnit and TestNG, you can define the browser lifecycle.
 Use the class annotation @SharedDriver and you will be able to define how the driver will be created:
 ```java
 @SharedDriver(type = SharedDriver.SharedType.ONCE)
@@ -647,6 +647,96 @@ will allow you to create a new driver for each method.
 The default is PER_METHOD.
 
 You will also be able to decide if you want to clean the cookies between two methods using ```@SharedDriver(deleteCookies=true)``` or ```@SharedDriver(deleteCookies=false)```
+
+Please keep in mind that this annotation tells how the drivers are created on runtime but it is not dealing with
+concurrency. If you need to make your tests parallel you should use dedicated libraries/extensions you can use
+Surefire maven plugin for example.
+
+**Surefire JUnit example**
+
+```xml
+<profile>
+    <id>junit-tests</id>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <parallel>methods</parallel>
+                    <threadCount>4</threadCount>
+                    <forkCount>8</forkCount>
+                    <reuseForks>true</reuseForks>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</profile>
+```
+
+**Surefire TestNG example**
+
+```xml
+<profile>
+    <id>testng-tests</id>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-testng</artifactId>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>test-suites/basic.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <goal>test</goal>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</profile>
+```
+
+**TestNG test suite file**
+```xml
+<suite name="Parallel tests" parallel="tests" thread-count="10">
+    <test name="Home Page Tests" parallel="methods" thread-count="10">
+        <parameter name="test-name" value="Home page"/>
+        <classes>
+            <class name="com.example.testng.OurLocationTest"/>
+            <class name="com.example.testng.OurStoryTest"/>
+        </classes>
+    </test>
+    <test name="Another Home Page Tests" parallel="classes" thread-count="2">
+        <parameter name="test-name" value="another home page"/>
+        <classes>
+            <class name="com.example.testng.HomeTest"/>
+            <class name="com.example.testng.JoinUsTest"/>
+        </classes>
+    </test>
+</suite>
+```
+
+TestNG gives you more flexibility in order to the concurrency level, test suites and having better control on executed
+ scenarios.
+
+Both test frameworks are giving possibility to define the parallelism level of tests. It is possible when you have
+multiple execution/concurrency levels set in your tests to face driver sharing issues, so please use driver
+sharing set to **PER_METHOD**. The example failure might occur when you set the Surefire to per
+method and FluentLenium to PER_CLASS and you will end up with ghost webdriver instances which won't be stopped after
+tests execution. The good practice is to check the number of running process (chromedriver, firefox, etc.) before and
+ after your tests run just to make sure the cleanup is working properly.
 
 ##Iframe
 If you want to switch the Selenium webDriver to an iframe (see this [Selenium FAQ](https://code.google.com/p/selenium/wiki/FrequentlyAskedQuestions#Q:_How_do_I_type_into_a_contentEditable_iframe?)),
