@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,19 +13,28 @@
  */
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Predicate;
-import org.fluentlenium.core.Fluent;
-import org.fluentlenium.core.FluentThread;
-import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.domain.FluentList;
-import org.fluentlenium.core.filter.Filter;
-import org.fluentlenium.core.filter.FilterType;
-import org.fluentlenium.core.search.Search;
+import static org.fluentlenium.core.wait.WaitMessage.hasAttributeMessage;
+import static org.fluentlenium.core.wait.WaitMessage.hasIdMessage;
+import static org.fluentlenium.core.wait.WaitMessage.hasNameMessage;
+import static org.fluentlenium.core.wait.WaitMessage.hasSizeMessage;
+import static org.fluentlenium.core.wait.WaitMessage.hasTextMessage;
+import static org.fluentlenium.core.wait.WaitMessage.isDisplayedMessage;
+import static org.fluentlenium.core.wait.WaitMessage.isEnabledMessage;
+import static org.fluentlenium.core.wait.WaitMessage.isNotPresentMessage;
+import static org.fluentlenium.core.wait.WaitMessage.isPresentMessage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.fluentlenium.core.wait.WaitMessage.*;
+import org.fluentlenium.core.Fluent;
+import org.fluentlenium.core.FluentThread;
+import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.filter.Filter;
+import org.fluentlenium.core.filter.FilterType;
+import org.fluentlenium.core.search.Search;
+
+import com.google.common.base.Predicate;
 
 public class FluentWaitMatcher {
     private List<Filter> filters = new ArrayList<Filter>();
@@ -336,7 +345,6 @@ public class FluentWaitMatcher {
         return this;
     }
 
-
     /**
      * Create a filter builder for the attribute by class
      *
@@ -380,6 +388,5 @@ public class FluentWaitMatcher {
     void addFilter(Filter filter) {
         this.filters.add(filter);
     }
-
 
 }

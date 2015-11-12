@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,8 +13,16 @@
  */
 package org.fluentlenium.core;
 
-import com.google.common.base.Function;
-import com.google.common.collect.FluentIterable;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Proxy;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentList;
@@ -30,10 +38,8 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
 
-import java.lang.reflect.*;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import com.google.common.base.Function;
+import com.google.common.collect.FluentIterable;
 
 public class FluentAdapter extends Fluent {
 
@@ -98,7 +104,6 @@ public class FluentAdapter extends Fluent {
         return container;
     }
 
-
     protected <T extends FluentPage> T initClass(Class<T> cls, Object... params) {
         try {
             T page = constructPageWithParams(cls, params);
@@ -140,7 +145,6 @@ public class FluentAdapter extends Fluent {
             }
         }
     }
-
 
     private <T extends FluentPage> void initBaseUrl(T page, Class<?> parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         if (getBaseUrl() == null) {
@@ -240,7 +244,6 @@ public class FluentAdapter extends Fluent {
         return null;
     }
 
-
     /**
      * Override this method to set some config options on the driver. For example withDefaultSearchWait and withDefaultPageWait
      * Remember that you can access to the WebDriver object using this.getDriver().
@@ -251,11 +254,4 @@ public class FluentAdapter extends Fluent {
     public static void assertAt(FluentPage fluent) {
         fluent.isAt();
     }
-
-    public void quit() {
-        if (getDriver() != null) {
-            getDriver().quit();
-        }
-    }
-
 }

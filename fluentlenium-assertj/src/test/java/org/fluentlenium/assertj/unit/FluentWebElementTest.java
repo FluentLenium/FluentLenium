@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,15 +14,15 @@
 
 package org.fluentlenium.assertj.unit;
 
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.assertj.custom.FluentWebElementAssert;
 import org.fluentlenium.core.domain.FluentWebElement;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 
 public class FluentWebElementTest {
@@ -48,14 +48,12 @@ public class FluentWebElementTest {
         fluentWebElementAssert.isEnabled();
     }
 
-
     @Test
     public void testIsNotEnabledOk() throws Exception {
         when(fluentWebElement.isEnabled()).thenReturn(false);
         fluentWebElementAssert.isNotEnabled();
         assertTrue(true);
     }
-
 
     @Test(expected = AssertionError.class)
     public void testIsNotEnabledKo() throws Exception {
@@ -127,28 +125,28 @@ public class FluentWebElementTest {
         when(fluentWebElement.getId()).thenReturn("other id");
         fluentWebElementAssert.hasId("some id");
     }
-	
-	@Test
-	public void testHasClassOk() throws Exception {
-		when(fluentWebElement.getAttribute("class")).thenReturn("some-class");
-        fluentWebElementAssert.hasClass("some-class");
-	}
-
-	@Test(expected = AssertionError.class)
-	public void testHasClassKo() throws Exception {
-		when(fluentWebElement.getAttribute("class")).thenReturn("other-class");
-        fluentWebElementAssert.hasClass("some-class");
-	}
-
-	@Test(expected = AssertionError.class)
-	public void testSubstringKo() throws Exception {
-		when(fluentWebElement.getAttribute("class")).thenReturn("yolokitten");
-        fluentWebElementAssert.hasClass("yolo");
-	}
 
     @Test
-	public void testHasMultipleClassesOk() throws Exception {
-		when(fluentWebElement.getAttribute("class")).thenReturn("yolokitten mark");
+    public void testHasClassOk() throws Exception {
+        when(fluentWebElement.getAttribute("class")).thenReturn("some-class");
+        fluentWebElementAssert.hasClass("some-class");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasClassKo() throws Exception {
+        when(fluentWebElement.getAttribute("class")).thenReturn("other-class");
+        fluentWebElementAssert.hasClass("some-class");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testSubstringKo() throws Exception {
+        when(fluentWebElement.getAttribute("class")).thenReturn("yolokitten");
+        fluentWebElementAssert.hasClass("yolo");
+    }
+
+    @Test
+    public void testHasMultipleClassesOk() throws Exception {
+        when(fluentWebElement.getAttribute("class")).thenReturn("yolokitten mark");
         fluentWebElementAssert.hasClass("mark");
-	}
+    }
 }

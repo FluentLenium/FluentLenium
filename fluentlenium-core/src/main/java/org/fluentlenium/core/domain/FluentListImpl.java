@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,15 +14,15 @@
 
 package org.fluentlenium.core.domain;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import org.fluentlenium.core.filter.Filter;
 import org.openqa.selenium.NoSuchElementException;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
@@ -104,7 +104,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         return this;
     }
 
-
     /**
      * {@inheritDoc}
      */
@@ -116,7 +115,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
             }
         }
     }
-
 
     /**
      * {@inheritDoc}
@@ -269,7 +267,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         }
         return new FluentListImpl<E>(finds);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -293,7 +291,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         }
         return fluentList.get(number);
     }
-    
+
     /**
      * {@inheritDoc}
      */

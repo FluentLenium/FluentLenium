@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,11 +20,9 @@ import org.openqa.selenium.Dimension;
 
 public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert, FluentWebElement> {
 
-
     public FluentWebElementAssert(FluentWebElement actual) {
         super(FluentWebElementAssert.class, actual);
     }
-
 
     private void failIsEnabled() {
         super.fail("Object not enabled");
@@ -129,52 +127,52 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
      * @return
      */
     public FluentWebElementAssert hasText(String textToFind) {
-        if(!actual.getText().contains(textToFind)){
-            super.fail("The element does not contain the text: " + textToFind+" . Actual text found : " + actual.getText());
+        if (!actual.getText().contains(textToFind)) {
+            super.fail("The element does not contain the text: " + textToFind + " . Actual text found : " + actual.getText());
 
         }
 
-       return this;
+        return this;
     }
 
-   /**
+    /**
      * check if the element does not contain the text
      *
      * @return
      */
     public FluentWebElementAssert hasNotText(String textToFind) {
-        if(actual.getText().contains(textToFind)){
+        if (actual.getText().contains(textToFind)) {
             super.fail("The element contain the text: " + textToFind);
         }
 
-       return this;
+        return this;
     }
 
     /**
      * check if the element has the given id
      *
-	 * @param id to check
+     * @param id to check
      * @return
      */
-	public FluentWebElementAssert hasId(String id) {
-		if(!actual.getId().equals(id)) {
-			super.fail("The element does not have the id: " + id + " . Actual id found : " + actual.getId());
-		}
-		return this;
-	}
+    public FluentWebElementAssert hasId(String id) {
+        if (!actual.getId().equals(id)) {
+            super.fail("The element does not have the id: " + id + " . Actual id found : " + actual.getId());
+        }
+        return this;
+    }
 
     /**
      * check if the element has the class
      *
-	 * @param classToFind
+     * @param classToFind
      * @return
      */
     public FluentWebElementAssert hasClass(String classToFind) {
-        if(!actual.getAttribute("class").contains(classToFind)){
+        if (!actual.getAttribute("class").contains(classToFind)) {
             super.fail("The element does not have the class: " + classToFind + " . Actual class found : " + actual.getAttribute("class"));
         }
 
-       return this;
+        return this;
     }
 
     public FluentWebElementAssert hasAttribute(String attributeToFind) {

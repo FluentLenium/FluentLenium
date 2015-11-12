@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,18 +14,18 @@
 
 package org.fluentlenium.integration;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.fluentlenium.core.filter.FilterConstructor.with;
 
-import com.google.common.base.Stopwatch;
-import com.google.common.collect.Lists;
+import java.util.concurrent.TimeUnit;
+
 import org.fluentlenium.core.domain.FluentJavascript;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.concurrent.TimeUnit;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.fluentlenium.core.filter.FilterConstructor.with;
+import com.google.common.base.Stopwatch;
+import com.google.common.collect.Lists;
 
 public class JavascriptTest extends LocalFluentCase {
 
@@ -118,7 +118,6 @@ public class JavascriptTest extends LocalFluentCase {
         assertThat((Object) fluentJavascript.getListResult()).isEqualTo(fluentJavascript.getResult());
         assertThat(fluentJavascript.getListResult()).containsExactly("string 1", "string 2", 5L, 12.12D, true, Lists.newArrayList("test 1", "test 2"));
     }
-
 
     @Test
     public void should_executeAsyncScript_return_String() {

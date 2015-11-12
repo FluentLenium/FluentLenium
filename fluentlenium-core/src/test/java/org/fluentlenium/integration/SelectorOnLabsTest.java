@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,15 +14,24 @@
 
 package org.fluentlenium.integration;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.fluentlenium.core.filter.FilterConstructor.with;
+import static org.fluentlenium.core.filter.FilterConstructor.withId;
+import static org.fluentlenium.core.filter.FilterConstructor.withName;
+import static org.fluentlenium.core.filter.FilterConstructor.withText;
+import static org.fluentlenium.core.filter.MatcherConstructor.contains;
+import static org.fluentlenium.core.filter.MatcherConstructor.endsWith;
+import static org.fluentlenium.core.filter.MatcherConstructor.equal;
+import static org.fluentlenium.core.filter.MatcherConstructor.notContains;
+import static org.fluentlenium.core.filter.MatcherConstructor.notEndsWith;
+import static org.fluentlenium.core.filter.MatcherConstructor.notStartsWith;
+import static org.fluentlenium.core.filter.MatcherConstructor.regex;
+import static org.fluentlenium.core.filter.MatcherConstructor.startsWith;
+
 import org.fluentlenium.integration.localtest.SauceLabsFluentCase;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.fluentlenium.core.filter.FilterConstructor.*;
-import static org.fluentlenium.core.filter.MatcherConstructor.*;
-
 public class SelectorOnLabsTest extends SauceLabsFluentCase {
-
 
     @Test
     public void checkTagSelector() {
@@ -96,7 +105,6 @@ public class SelectorOnLabsTest extends SauceLabsFluentCase {
         assertThat($(".small", 2).getText()).isEqualTo("Small 3");
     }
 
-
     @Test
     public void checkCustomSelectAttribute() {
         goTo(DEFAULT_URL);
@@ -157,7 +165,6 @@ public class SelectorOnLabsTest extends SauceLabsFluentCase {
         goTo(DEFAULT_URL);
         assertThat($("span", withName(endsWith(regex("am?"))))).hasSize(0);
     }
-
 
     @Test
     public void checkNotStartAttribute() {

@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,6 +13,12 @@
  */
 
 package org.fluentlenium.adapter;
+
+import static org.fluentlenium.adapter.util.SharedDriverHelper.isDefaultSharedDriver;
+import static org.fluentlenium.adapter.util.SharedDriverHelper.isDeleteCookies;
+import static org.fluentlenium.adapter.util.SharedDriverHelper.isSharedDriverOnce;
+import static org.fluentlenium.adapter.util.SharedDriverHelper.isSharedDriverPerClass;
+import static org.fluentlenium.adapter.util.SharedDriverHelper.isSharedDriverPerMethod;
 
 import org.fluentlenium.adapter.util.ShutdownHook;
 import org.fluentlenium.core.FluentAdapter;
@@ -27,8 +33,6 @@ import org.openqa.selenium.Beta;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import static org.fluentlenium.adapter.util.SharedDriverHelper.*;
-
 /**
  * All Junit Test should extends this class. It provides default parameters.
  */
@@ -40,7 +44,6 @@ public abstract class FluentTest extends FluentAdapter {
 
     private Mode snapshotMode = Mode.NEVER_TAKE_SNAPSHOT;
     private String snapshotPath = "default";
-
 
     @Rule
     public TestName name = new TestName();
@@ -78,7 +81,6 @@ public abstract class FluentTest extends FluentAdapter {
             setDefaultConfig();
         }
 
-
         @Override
         public void finished(Description description) {
             super.finished(description);
@@ -106,7 +108,6 @@ public abstract class FluentTest extends FluentAdapter {
         this.snapshotPath = path;
     }
 
-
     public void setSnapshotMode(Mode mode) {
         this.snapshotMode = mode;
     }
@@ -123,7 +124,6 @@ public abstract class FluentTest extends FluentAdapter {
         initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
     }
 
-
     public FluentTest() {
         super();
     }
@@ -136,7 +136,6 @@ public abstract class FluentTest extends FluentAdapter {
     public WebDriver getDefaultDriver() {
         return new FirefoxDriver();
     }
-
 
     @AfterClass
     public static void afterClass() {
@@ -157,6 +156,5 @@ public abstract class FluentTest extends FluentAdapter {
     public static void assertAt(FluentPage fluent) {
         fluent.isAt();
     }
-
 
 }

@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,13 +14,13 @@
 
 package org.fluentlenium.core.search;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterPredicate;
 import org.openqa.selenium.By;
@@ -28,10 +28,9 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 
 public class Search implements SearchActions<FluentWebElement> {
     private final SearchContext searchContext;
@@ -78,7 +77,7 @@ public class Search implements SearchActions<FluentWebElement> {
 
     /**
      * Central methods to find elements on the page with filters.
-     * 
+     *
      * @param filters filters set
      * @return fluent list of fluent web elements
      */
@@ -109,7 +108,7 @@ public class Search implements SearchActions<FluentWebElement> {
 
     /**
      * Return the element at the number position in the lists corresponding to the filters
-     * 
+     *
      * @param number index of element in container
      * @param filters filters set
      * @return fluent web element
@@ -134,7 +133,7 @@ public class Search implements SearchActions<FluentWebElement> {
         FluentList fluentList = find(name, filters);
         try {
             return fluentList.first();
-        } catch(NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             throw new NoSuchElementException("Could not find element matching selector: " + name + ".", e);
         }
     }
