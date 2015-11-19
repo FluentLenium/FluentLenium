@@ -238,11 +238,4 @@ public class FluentAdapter extends Fluent {
     public static void assertAt(FluentPage fluent) {
         fluent.isAt();
     }
-
-    public void quit() {
-        if (getDriver() != null) {
-            getDriver().quit();
-        }
-    }
-
 }

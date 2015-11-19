@@ -32,13 +32,14 @@ import java.util.concurrent.TimeUnit;
  * Util Class which offers some shortcut to webdriver methods
  */
 public abstract class Fluent implements SearchActions {
-    private WebDriver driver;
     private String baseUrl;
-    private Search search;
+
+    private ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<WebDriver>();
+    private ThreadLocal<Search> searchThreadLocal = new ThreadLocal<Search>();
 
     public Fluent(WebDriver driver) {
-        this.driver = driver;
-        this.search = new Search(driver);
+        this.webDriverThreadLocal.set(driver);
+        this.searchThreadLocal.set(new Search(driver));
         FluentThread.set(this);
     }
 
@@ -118,17 +119,17 @@ public abstract class Fluent implements SearchActions {
     }
 
     protected Fluent initFluent(WebDriver driver) {
-        this.driver = driver;
-        this.search = new Search(driver);
+        this.webDriverThreadLocal.set(driver);
+        this.searchThreadLocal.set(new Search(driver));
         return this;
     }
 
     public WebDriver getDriver() {
-        return driver;
+        return webDriverThreadLocal.get();
     }
 
     public Search getSearch() {
-        return search;
+        return searchThreadLocal.get();
     }
 
     protected void initTest() {
@@ -764,4 +765,15 @@ public abstract class Fluent implements SearchActions {
         return this;
     }
 
+    public void quit() {
+        if (getDriver() != null) {
+            getDriver().quit();
+        }
+        cleanupDriver();
+    }
+
+    public void cleanupDriver() {
+        webDriverThreadLocal.remove();
+        searchThreadLocal.remove();
+    }
 }
