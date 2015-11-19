@@ -3,8 +3,8 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentThread;
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterType;
 import org.fluentlenium.core.search.Search;
@@ -30,7 +30,7 @@ public class FluentWaitMatcher {
      * WARNING - Should be change in a next version to hasAttribute("myAttribute").value("myValue")
      *
      * @param attribute attribute name
-     * @param value attribute value
+     * @param value     attribute value
      * @return fluent
      */
     public Fluent hasAttribute(final String attribute, final String value) {
@@ -161,6 +161,7 @@ public class FluentWaitMatcher {
 
     /**
      * Check that the element is present
+     *
      * @return fluent
      */
     public Fluent isPresent() {
@@ -178,6 +179,7 @@ public class FluentWaitMatcher {
 
     /**
      * Check that the element is not present
+     *
      * @return fluent
      */
     public Fluent isNotPresent() {

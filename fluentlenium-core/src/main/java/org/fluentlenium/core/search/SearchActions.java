@@ -1,7 +1,7 @@
 package org.fluentlenium.core.search;
 
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 
 
@@ -16,5 +16,5 @@ public interface SearchActions<E extends FluentWebElement> {
 
     E findFirst(String name, Filter... filters);
 
-    E findFirst(Filter... filters);    
+    E findFirst(Filter... filters);
 }

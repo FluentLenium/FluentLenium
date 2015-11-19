@@ -8,9 +8,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import static org.mockito.Mockito.when;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.Dimension;
+
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FluentWebElementTest {
@@ -21,7 +22,7 @@ public class FluentWebElementTest {
 
     @Before
     public void setup() {
-      fluentWebElementAssert = FluentLeniumAssertions.assertThat(fluentWebElement);
+        fluentWebElementAssert = FluentLeniumAssertions.assertThat(fluentWebElement);
     }
 
     @Test

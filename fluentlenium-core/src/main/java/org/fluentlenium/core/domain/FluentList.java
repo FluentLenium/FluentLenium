@@ -124,17 +124,17 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * find elements into the children with the corresponding filters
      *
-     * @param name element name
+     * @param name    element name
      * @param filters set of filters
      * @return extended by FluentWebElement objects list
      */
     @Override
     FluentList<E> find(String name, Filter... filters);
-    
+
     /**
      * find elements in the children with the corresponding filters
-     * 
-     * @param filters  set of filters
+     *
+     * @param filters set of filters
      * @return extended by FluentWebElement objects list
      */
     @Override
@@ -143,9 +143,9 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * find elements into the children with the corresponding filters at the position indicated by the number
      *
-     * @param name element name
-     * @param number set of filters
-     * @param filters  set of filters
+     * @param name    element name
+     * @param number  set of filters
+     * @param filters set of filters
      * @return extended by FluentWebElement object
      */
     @Override
@@ -154,7 +154,7 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * find element in the children with the corresponding filters at the position indicated by the number
      *
-     * @param number element name
+     * @param number  element name
      * @param filters set of filters
      * @return extended by FluentWebElement object
      */
@@ -164,7 +164,7 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * find elements into the children with the corresponding filters at the first position
      *
-     * @param name element name
+     * @param name    element name
      * @param filters set of filters
      * @return extended by FluentWebElement object
      */
@@ -183,6 +183,7 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * Clear all elements on the list
      * Only the visible elements are filled
+     *
      * @return extended by FluentWebElement object
      */
     FluentList<E> clearAll();

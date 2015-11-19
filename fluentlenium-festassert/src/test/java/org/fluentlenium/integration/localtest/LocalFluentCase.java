@@ -7,7 +7,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 //TODO : Problem here - 1 instance by test when 1 instance for test suite is sufficient ...
 public abstract class LocalFluentCase extends FluentTest {
     private static final String BASE_URL = getPath();
-    protected static final String DEFAULT_URL = BASE_URL+"index.html";
+    protected static final String DEFAULT_URL = BASE_URL + "index.html";
 
     @Override
     public WebDriver getDefaultDriver() {
@@ -16,8 +16,8 @@ public abstract class LocalFluentCase extends FluentTest {
 
     public static String getPath() {
         String currentDir = System.getProperty("user.dir");
-        if (!currentDir.endsWith("/fluentlenium-festassert")){
-            currentDir+="/fluentlenium-festassert";
+        if (!currentDir.endsWith("/fluentlenium-festassert")) {
+            currentDir += "/fluentlenium-festassert";
         }
         String scheme = "file:/";
         if (currentDir.startsWith("/home")) {

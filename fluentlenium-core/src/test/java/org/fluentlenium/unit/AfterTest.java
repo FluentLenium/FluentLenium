@@ -14,6 +14,6 @@ public class AfterTest extends FluentTest {
 
     @Test
     public void when_driver_is_null_then_it_is_handle() {
-       // after();
+        // after();
     }
 }

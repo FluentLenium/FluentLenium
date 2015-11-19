@@ -23,12 +23,11 @@ public class PageWithAjaxElementTest extends LocalFluentCase {
         assertThat(page.getText()).isEqualTo("new");
     }
 
-    @Test(expected =NoSuchElementException.class )
+    @Test(expected = NoSuchElementException.class)
     public void when_ajax_fields_are_considered_as_normal_fields_then_an_noSuchElementException_is_thrown() {
         pageWithoutAjax.go();
         assertThat(pageWithoutAjax.getText()).isEqualTo("new");
     }
-
 
 
 }
@@ -47,8 +46,6 @@ class JavascriptPage extends FluentPage {
         return newField.getText();
     }
 }
-
-
 
 
 class JavascriptPageWithoutAjax extends FluentPage {

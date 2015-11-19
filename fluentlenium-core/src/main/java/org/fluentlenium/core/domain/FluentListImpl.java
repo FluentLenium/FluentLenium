@@ -2,7 +2,6 @@ package org.fluentlenium.core.domain;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-
 import org.fluentlenium.core.filter.Filter;
 import org.openqa.selenium.NoSuchElementException;
 
@@ -255,7 +254,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         }
         return new FluentListImpl<E>(finds);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -279,7 +278,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         }
         return fluentList.get(number);
     }
-    
+
     /**
      * {@inheritDoc}
      */

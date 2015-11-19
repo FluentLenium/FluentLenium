@@ -7,8 +7,8 @@ import org.fluentlenium.core.action.FluentDefaultActions;
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentJavascript;
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.exception.ConstructionException;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
@@ -25,11 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.*;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -65,7 +61,7 @@ public abstract class Fluent implements SearchActions {
     /**
      * Define an implicit time to wait for a page to be loaded
      *
-     * @param l timeout value
+     * @param l        timeout value
      * @param timeUnit time unit for wait
      * @return Fluent element
      */
@@ -77,7 +73,7 @@ public abstract class Fluent implements SearchActions {
     /**
      * Define an implicit time to wait when searching an element
      *
-     * @param l timeout value
+     * @param l        timeout value
      * @param timeUnit time unit for wait
      * @return Fluent element
      */
@@ -138,17 +134,17 @@ public abstract class Fluent implements SearchActions {
     protected void initTest() {
         Class cls = null;
         try {
-	    for (cls = Class.forName(this.getClass().getName()); FluentAdapter.class.isAssignableFrom(cls); cls = cls.getSuperclass()) {
-	        for (Field field : cls.getDeclaredFields()) {
-                if (field.isAnnotationPresent(Page.class)) {
-                    field.setAccessible(true);
-                    Class clsField = field.getType();
-                    Class clsPage = Class.forName(clsField.getName());
-                    Object page = initClass(clsPage);
-                    field.set(this, page);
+            for (cls = Class.forName(this.getClass().getName()); FluentAdapter.class.isAssignableFrom(cls); cls = cls.getSuperclass()) {
+                for (Field field : cls.getDeclaredFields()) {
+                    if (field.isAnnotationPresent(Page.class)) {
+                        field.setAccessible(true);
+                        Class clsField = field.getType();
+                        Class clsPage = Class.forName(clsField.getName());
+                        Object page = initClass(clsPage);
+                        field.set(this, page);
+                    }
                 }
             }
-	    }
         } catch (ClassNotFoundException e) {
             throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
         } catch (IllegalAccessException e) {
@@ -207,14 +203,14 @@ public abstract class Fluent implements SearchActions {
         try {
             Constructor<T> construct = cls.getDeclaredConstructor(classTypes);
 
-        construct.setAccessible(true);
-        page = construct.newInstance(params);
-        return page;
+            construct.setAccessible(true);
+            page = construct.newInstance(params);
+            return page;
         } catch (NoSuchMethodException ex) {
             if (params.length != 0) {
                 throw new ConstructionException(
                         "You provided the wrong arguments to the createPage method, " +
-                                "if you just want to use a page with a default constructor, use @Page or createPage("+cls.getSimpleName()+".class)", ex);
+                                "if you just want to use a page with a default constructor, use @Page or createPage(" + cls.getSimpleName() + ".class)", ex);
             } else {
                 throw ex;
             }
@@ -334,7 +330,6 @@ public abstract class Fluent implements SearchActions {
     }
 
 
-
     public <P extends FluentPage> P goTo(P page) {
         if (page == null) {
             throw new IllegalArgumentException("Page is mandatory");
@@ -376,7 +371,7 @@ public abstract class Fluent implements SearchActions {
     /**
      * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
      *
-     * @param name item selector
+     * @param name    item selector
      * @param filters set of filters
      * @return list of fluent elements
      */
@@ -398,8 +393,8 @@ public abstract class Fluent implements SearchActions {
      * Central methods a find element on the page, the number indicate the index of the desired element on the list.
      * Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
      *
-     * @param name item selector
-     * @param number index of the desired element
+     * @param name    item selector
+     * @param number  index of the desired element
      * @param filters set of filters in the current context
      * @return fluent web element
      */
@@ -411,7 +406,7 @@ public abstract class Fluent implements SearchActions {
      * Central method to find an element on the page with filters.
      * The number indicates the index of the desired element on the list.
      *
-     * @param number index of element from obtained list
+     * @param number  index of element from obtained list
      * @param filters set of filters in the current context
      * @return fluent web element
      */
@@ -422,8 +417,7 @@ public abstract class Fluent implements SearchActions {
     /**
      * return the lists corresponding to the cssSelector with it filters
      *
-     *
-     * @param name cssSelector
+     * @param name    cssSelector
      * @param filters set of filters in current context
      * @return list of fluent web elements
      */
@@ -444,8 +438,8 @@ public abstract class Fluent implements SearchActions {
     /**
      * Return the elements at the number position into the lists corresponding to the cssSelector with it filters
      *
-     * @param name cssSelector
-     * @param number index in the retrieved items list
+     * @param name    cssSelector
+     * @param number  index in the retrieved items list
      * @param filters set of filters in the current context
      * @return fluent web element
      */
@@ -456,7 +450,7 @@ public abstract class Fluent implements SearchActions {
     /**
      * Return the element at the number position in the list filtered by the specified filters.
      *
-     * @param number index in the retrieved items list
+     * @param number  index in the retrieved items list
      * @param filters set of filters in the current context
      * @return fluent web element
      */
@@ -467,7 +461,7 @@ public abstract class Fluent implements SearchActions {
     /**
      * Return the first element corresponding to the name and the filters
      *
-     * @param name cssSelector
+     * @param name    cssSelector
      * @param filters set of filters in the current context
      * @return fluent web element
      */
@@ -490,7 +484,7 @@ public abstract class Fluent implements SearchActions {
      * Be careful - only the visible elements are filled
      *
      * @param cssSelector cssSelector
-     * @param filters set of filters in the current context
+     * @param filters     set of filters in the current context
      * @return fill constructor
      */
     public FillConstructor fill(String cssSelector, Filter... filters) {
@@ -512,7 +506,7 @@ public abstract class Fluent implements SearchActions {
      * Construct a FillConstructor in order to allow easy fill
      * Be careful - only the visible elements are filled
      *
-     * @param list FluentDefaultActions list
+     * @param list    FluentDefaultActions list
      * @param filters set of filters in the current context
      * @return fill constructor
      */
@@ -525,7 +519,7 @@ public abstract class Fluent implements SearchActions {
      * Be careful - only the visible elements are filled
      *
      * @param cssSelector cssSelector
-     * @param filters set of filters in the current context
+     * @param filters     set of filters in the current context
      * @return fill constructor
      */
     public FillSelectConstructor fillSelect(String cssSelector, Filter... filters) {
@@ -548,7 +542,7 @@ public abstract class Fluent implements SearchActions {
      * Be careful - only the visible elements are clicked
      *
      * @param cssSelector cssSelector
-     * @param filters set of filters in the current context
+     * @param filters     set of filters in the current context
      * @return fluent object
      */
     public Fluent click(String cssSelector, Filter... filters) {
@@ -573,7 +567,7 @@ public abstract class Fluent implements SearchActions {
      * Be careful - only the visible elements are cleared
      *
      * @param cssSelector cssSelector
-     * @param filters set of filters in the current context
+     * @param filters     set of filters in the current context
      * @return fluent object
      */
     public Fluent clear(String cssSelector, Filter... filters) {
@@ -598,7 +592,7 @@ public abstract class Fluent implements SearchActions {
      * Be careful - only the visible elements are submitted
      *
      * @param cssSelector cssSelector
-     * @param filters set of filters in the current context
+     * @param filters     set of filters in the current context
      * @return fluent object
      */
     public Fluent submit(String cssSelector, Filter... filters) {
@@ -624,7 +618,7 @@ public abstract class Fluent implements SearchActions {
      * //TODO UTILITY ? Deprecated ?
      *
      * @param cssSelector cssSelector
-     * @param filters set of filters in the current context
+     * @param filters     set of filters in the current context
      * @return list of strings
      */
     public List<String> text(String cssSelector, Filter... filters) {
@@ -649,7 +643,7 @@ public abstract class Fluent implements SearchActions {
      * //TODO UTILITY ? Deprecated ?
      *
      * @param cssSelector cssSelector
-     * @param filters set of filters in the current context
+     * @param filters     set of filters in the current context
      * @return list of strings
      */
     public List<String> value(String cssSelector, Filter... filters) {
@@ -716,55 +710,58 @@ public abstract class Fluent implements SearchActions {
         return this;
     }
 
-  /**
-   * Switch to the selected Element (if element is null or not an iframe, or haven't an id then
-   * switch to the default)
-   *
-   * @param element fluent web element
-   * @return fluent object
-   */
-  public Fluent switchTo(FluentWebElement element) {
-    if (null == element ||
-        null == element.getTagName() ||
-        null == element.getId() ||
-        !"iframe".equals(element.getTagName())) {
-      getDriver().switchTo().defaultContent();
-    } else {
-      getDriver().switchTo().frame(element.getId());
+    /**
+     * Switch to the selected Element (if element is null or not an iframe, or haven't an id then
+     * switch to the default)
+     *
+     * @param element fluent web element
+     * @return fluent object
+     */
+    public Fluent switchTo(FluentWebElement element) {
+        if (null == element ||
+                null == element.getTagName() ||
+                null == element.getId() ||
+                !"iframe".equals(element.getTagName())) {
+            getDriver().switchTo().defaultContent();
+        } else {
+            getDriver().switchTo().frame(element.getId());
+        }
+        return this;
     }
-    return this;
-  }
 
-  /**
-   * Switch to the default element
-   * @return fluent object
-   */
-  public Fluent switchTo() {
-    this.switchTo(null);
-    return this;
-  }
+    /**
+     * Switch to the default element
+     *
+     * @return fluent object
+     */
+    public Fluent switchTo() {
+        this.switchTo(null);
+        return this;
+    }
 
 
-  /**
-   * Switch to the default element
-   * @return fluent object
-   */
-  public Fluent switchToDefault() {
-    this.switchTo(null);
-    return this;
-  }
+    /**
+     * Switch to the default element
+     *
+     * @return fluent object
+     */
+    public Fluent switchToDefault() {
+        this.switchTo(null);
+        return this;
+    }
 
-  public Alert alert(){
-    return new Alert(getDriver());
-  }
+    public Alert alert() {
+        return new Alert(getDriver());
+    }
 
-  /**
-   * Maximize browser window using webdriver
-   * @return fluent object
-   */
-  public Fluent maximizeWindow(){
-    getDriver().manage().window().maximize();
-    return this;
-  }
+    /**
+     * Maximize browser window using webdriver
+     *
+     * @return fluent object
+     */
+    public Fluent maximizeWindow() {
+        getDriver().manage().window().maximize();
+        return this;
+    }
 
 }

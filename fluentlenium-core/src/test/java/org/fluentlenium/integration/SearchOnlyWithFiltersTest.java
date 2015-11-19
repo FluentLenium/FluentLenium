@@ -1,16 +1,13 @@
 package org.fluentlenium.integration;
 
-import static java.util.concurrent.TimeUnit.NANOSECONDS;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.fluentlenium.core.filter.FilterConstructor.*;
-
-import java.util.concurrent.TimeUnit;
-
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 import org.openqa.selenium.support.ui.Select;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.fluentlenium.core.filter.FilterConstructor.*;
 
 public class SearchOnlyWithFiltersTest extends LocalFluentCase {
 

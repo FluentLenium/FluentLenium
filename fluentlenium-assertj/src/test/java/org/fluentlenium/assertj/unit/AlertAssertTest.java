@@ -19,8 +19,8 @@ public class AlertAssertTest {
 
     @Before
     public void before() {
-      MockitoAnnotations.initMocks(this);
-      alertAssert = FluentLeniumAssertions.assertThat(alert);
+        MockitoAnnotations.initMocks(this);
+        alertAssert = FluentLeniumAssertions.assertThat(alert);
     }
 
     @Test

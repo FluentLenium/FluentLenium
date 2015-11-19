@@ -10,15 +10,15 @@ public class FluentListAssert extends GenericAssert<FluentListAssert, FluentList
         super(FluentListAssert.class, actual);
     }
 
-   /**
+    /**
      * check if at least one element of the FluentList contains the text
      *
      * @return
      */
     public FluentListAssert hasText(String textToFind) {
         List<String> actualTexts = actual.getTexts();
-        for(String text : actualTexts) {
-            if(text.contains(textToFind)){
+        for (String text : actualTexts) {
+            if (text.contains(textToFind)) {
                 return this;
             }
         }
@@ -26,47 +26,47 @@ public class FluentListAssert extends GenericAssert<FluentListAssert, FluentList
         return this;
     }
 
-   /**
+    /**
      * check if at no element of the FluentList contains the text
      *
      * @return
      */
     public FluentListAssert hasNotText(String textToFind) {
         List<String> actualTexts = actual.getTexts();
-        for(String text : actualTexts) {
-            if(text.contains(textToFind)){
+        for (String text : actualTexts) {
+            if (text.contains(textToFind)) {
                 super.fail("At least one selected elements contains text: " + textToFind + " . Actual texts found : " + actualTexts);
             }
         }
         return this;
     }
 
-	public FluentListAssert hasSize(int expectedSize) {
-		if(actual.size() != expectedSize) {
-			super.fail("Expected size: " + expectedSize + ". Actual size: " + actual.size() + ".");
-		}
-		return this;
-	}
-	
-	public FluentListSizeBuilder hasSize() {
-		return new FluentListSizeBuilder(actual.size(), this);
-	}
-	
-   /**
+    public FluentListAssert hasSize(int expectedSize) {
+        if (actual.size() != expectedSize) {
+            super.fail("Expected size: " + expectedSize + ". Actual size: " + actual.size() + ".");
+        }
+        return this;
+    }
+
+    public FluentListSizeBuilder hasSize() {
+        return new FluentListSizeBuilder(actual.size(), this);
+    }
+
+    /**
      * check if an element of the FluentList has the id
      *
-	 * @param idToFind
+     * @param idToFind
      * @return
      */
-	public FluentListAssert hasId(String idToFind) {
-		List actualIds = actual.getIds();
-		if (!actualIds.contains(idToFind)) {
-			super.fail("No selected elements has id: " + idToFind + " . Actual texts found : " + actualIds);
-		}
-		return this;
-	}
+    public FluentListAssert hasId(String idToFind) {
+        List actualIds = actual.getIds();
+        if (!actualIds.contains(idToFind)) {
+            super.fail("No selected elements has id: " + idToFind + " . Actual texts found : " + actualIds);
+        }
+        return this;
+    }
 
-   /**
+    /**
      * check if at least one element of the FluentList contains the text
      *
      * @return
@@ -74,16 +74,16 @@ public class FluentListAssert extends GenericAssert<FluentListAssert, FluentList
     public FluentListAssert hasClass(String classToFind) {
         List<String> actualClasses = actual.getAttributes("class");
         if (!actualClasses.contains(classToFind)) {
-			super.fail("No selected elements has class: " + classToFind + " . Actual classes found : " + actualClasses);
+            super.fail("No selected elements has class: " + classToFind + " . Actual classes found : " + actualClasses);
         }
         return this;
     }
 
-	/*
-	 * Used in FluentListSizeBuilder to raise AssertionError
-	 */
-	void internalFail(String reason) {
-		super.fail(reason);
-	}
+    /*
+     * Used in FluentListSizeBuilder to raise AssertionError
+     */
+    void internalFail(String reason) {
+        super.fail(reason);
+    }
 
 }

@@ -26,7 +26,7 @@ public abstract class FluentPage extends Fluent {
 
     /**
      * Should check if the navigator is on correct page.
-     *
+     * <p>
      * For example :
      * assertThat(title()).isEqualTo("Page 1");
      * assertThat("#reallyImportantField").hasSize(1);

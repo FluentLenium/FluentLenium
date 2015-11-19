@@ -11,11 +11,10 @@ import static org.fluentlenium.core.filter.FilterConstructor.withName;
 public class SharedDriverPerClass2 extends LocalFluentCase {
 
 
-
-  @Test
-  public void secondMethod() {
-    assertThat($(".small", withName("name"))).hasSize(0);
-  }
+    @Test
+    public void secondMethod() {
+        assertThat($(".small", withName("name"))).hasSize(0);
+    }
 
 
 }

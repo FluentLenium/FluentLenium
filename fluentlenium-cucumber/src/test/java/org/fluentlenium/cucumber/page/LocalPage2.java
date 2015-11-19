@@ -9,8 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LocalPage2 extends FluentPage {
 
-	@Override
-	public String getUrl() {
+    @Override
+    public String getUrl() {
         try {
             File currentFile = new File(".");
             String path = currentFile.getCanonicalPath();

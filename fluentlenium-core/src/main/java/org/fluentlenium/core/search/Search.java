@@ -3,10 +3,9 @@ package org.fluentlenium.core.search;
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
-
+import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterPredicate;
 import org.openqa.selenium.By;
@@ -29,7 +28,7 @@ public class Search implements SearchActions<FluentWebElement> {
     /**
      * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
      *
-     * @param name elements name to find
+     * @param name    elements name to find
      * @param filters filters set
      * @return fluent list of fluent web elements
      */
@@ -64,7 +63,7 @@ public class Search implements SearchActions<FluentWebElement> {
 
     /**
      * Central methods to find elements on the page with filters.
-     * 
+     *
      * @param filters filters set
      * @return fluent list of fluent web elements
      */
@@ -79,8 +78,8 @@ public class Search implements SearchActions<FluentWebElement> {
     /**
      * Return the elements at the number position into the the lists corresponding to the cssSelector with it filters
      *
-     * @param name elements name to find
-     * @param number index of element in the list
+     * @param name    elements name to find
+     * @param number  index of element in the list
      * @param filters filters set
      * @return fluent web element
      */
@@ -95,8 +94,8 @@ public class Search implements SearchActions<FluentWebElement> {
 
     /**
      * Return the element at the number position in the lists corresponding to the filters
-     * 
-     * @param number index of element in container
+     *
+     * @param number  index of element in container
      * @param filters filters set
      * @return fluent web element
      */
@@ -111,7 +110,7 @@ public class Search implements SearchActions<FluentWebElement> {
     /**
      * Return the first elements corresponding to the name and the filters
      *
-     * @param name element name to find
+     * @param name    element name to find
      * @param filters filters set
      * @return fluent web element
      */
@@ -120,7 +119,7 @@ public class Search implements SearchActions<FluentWebElement> {
         FluentList fluentList = find(name, filters);
         try {
             return fluentList.first();
-        } catch(NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             throw new NoSuchElementException("Could not find element matching selector: " + name + ".", e);
         }
     }

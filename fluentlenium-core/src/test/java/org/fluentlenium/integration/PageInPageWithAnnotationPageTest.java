@@ -15,7 +15,6 @@ public class PageInPageWithAnnotationPageTest extends LocalFluentCase {
     private SubSubTestPage subTestPage;
 
 
-
     @Test
     public void pages_should_be_injected() {
         TestPage testPage = createPage(SubSubTestPage.class);

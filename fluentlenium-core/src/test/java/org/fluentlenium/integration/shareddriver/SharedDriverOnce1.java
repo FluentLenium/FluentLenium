@@ -13,19 +13,17 @@ import static org.fluentlenium.core.filter.FilterConstructor.withName;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SharedDriverOnce1 extends LocalFluentCase {
 
-  @Test
-  public void firstMethod() {
-    goTo(LocalFluentCase.DEFAULT_URL);
-    assertThat($(".small", withName("name"))).hasSize(1);
-  }
+    @Test
+    public void firstMethod() {
+        goTo(LocalFluentCase.DEFAULT_URL);
+        assertThat($(".small", withName("name"))).hasSize(1);
+    }
 
 
-  @Test
-  public void secondMethod() {
-    assertThat($(".small", withName("name"))).hasSize(1);
-  }
-
-
+    @Test
+    public void secondMethod() {
+        assertThat($(".small", withName("name"))).hasSize(1);
+    }
 
 
 }

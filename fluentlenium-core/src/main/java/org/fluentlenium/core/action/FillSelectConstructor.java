@@ -14,7 +14,7 @@ public class FillSelectConstructor extends org.fluentlenium.core.Fluent {
         this.cssSelector = cssSelector;
         this.filters = filters;
     }
-    
+
     public FillSelectConstructor(WebDriver webDriver, Filter... filters) {
         super(webDriver);
         this.cssSelector = "*";

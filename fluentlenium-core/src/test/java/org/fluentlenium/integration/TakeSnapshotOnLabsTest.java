@@ -16,6 +16,7 @@ public class TakeSnapshotOnLabsTest extends SauceLabsFluentCase {
 
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
+
     @Test
     public void can_take_a_snapshot() throws IOException {
         goTo(DEFAULT_URL);

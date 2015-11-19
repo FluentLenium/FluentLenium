@@ -38,7 +38,7 @@ public class WaitMessage {
         return SELECTOR + selector + IS_NOT_PRESENT;
     }
 
-      static final String isNotPresentMessage(String selector) {
+    static final String isNotPresentMessage(String selector) {
         return SELECTOR + selector + IS_PRESENT;
     }
 
@@ -46,7 +46,7 @@ public class WaitMessage {
         return SELECTOR + selector + IS_NOT_DISPLAY;
     }
 
-	static final String isEnabledMessage(String selector) {
+    static final String isEnabledMessage(String selector) {
         return SELECTOR + selector + IS_NOT_ENABLED;
     }
 

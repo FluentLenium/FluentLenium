@@ -21,7 +21,7 @@ public class BaseUrlTest extends LocalFluentCase {
 
     @Test
     public void baseUrlShouldBeUsedForRelativeUrlInGoTo() {
-        goTo(LocalFluentCase.BASE_URL+"/page2.html");
+        goTo(LocalFluentCase.BASE_URL + "/page2.html");
         assertThat(title()).isEqualTo("Page 2");
     }
 
@@ -49,7 +49,7 @@ class Page2Relative extends FluentPage {
 
     @Override
     public String getUrl() {
-        return LocalFluentCase.BASE_URL+"/page2.html";
+        return LocalFluentCase.BASE_URL + "/page2.html";
     }
 
     @Override

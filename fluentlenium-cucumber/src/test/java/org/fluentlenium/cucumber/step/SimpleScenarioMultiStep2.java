@@ -19,17 +19,17 @@ public class SimpleScenarioMultiStep2 extends FluentCucumberTest {
     @Page
     LocalPage page2;
 
-	@Override
-	public WebDriver getDefaultDriver() {
-		return new HtmlUnitDriver();
-	}
+    @Override
+    public WebDriver getDefaultDriver() {
+        return new HtmlUnitDriver();
+    }
 
     @When(value = "scenario multi2 I click on next page")
     public void step2() {
         this.initFluent();
         this.initTest();
 
-		click("a#linkToPage2");
+        click("a#linkToPage2");
     }
 
     @Then(value = "scenario multi2 I am on the second page")
@@ -37,12 +37,12 @@ public class SimpleScenarioMultiStep2 extends FluentCucumberTest {
         this.initFluent();
         this.initTest();
 
-		page2.isAt();
+        page2.isAt();
     }
 
     @After
     public void after() {
-		this.quit();
+        this.quit();
     }
 
 }

@@ -109,12 +109,12 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @return
      */
     public FluentWebElementAssert hasText(String textToFind) {
-        if(!actual.getText().contains(textToFind)){
+        if (!actual.getText().contains(textToFind)) {
             super.failWithMessage("The element does not contain the text: " + textToFind + " . Actual text found : " + actual.getText());
 
         }
 
-       return this;
+        return this;
     }
 
     /**
@@ -123,12 +123,12 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @return
      */
     public FluentWebElementAssert hasTextMatching(String regexToBeMatched) {
-        if(!actual.getText().matches(regexToBeMatched)){
+        if (!actual.getText().matches(regexToBeMatched)) {
             super.failWithMessage("The element does not match the regex: " + regexToBeMatched + " . Actual text found : " + actual.getText());
 
         }
 
-       return this;
+        return this;
     }
 
     /**
@@ -137,11 +137,11 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @return
      */
     public FluentWebElementAssert hasNotText(String textToFind) {
-        if(actual.getText().contains(textToFind)){
+        if (actual.getText().contains(textToFind)) {
             super.failWithMessage("The element contain the text: " + textToFind);
         }
 
-       return this;
+        return this;
     }
 
     private void failIsSelected() {
@@ -155,24 +155,24 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     /**
      * check if the element has the given id
      *
-	 * @param id to check
+     * @param id to check
      * @return
      */
-	public FluentWebElementAssert hasId(String id) {
-		if(!actual.getId().equals(id)) {
-			super.failWithMessage("The element does not have the id: " + id + " . Actual id found : " + actual.getId());
-		}
-		return this;
-	}
+    public FluentWebElementAssert hasId(String id) {
+        if (!actual.getId().equals(id)) {
+            super.failWithMessage("The element does not have the id: " + id + " . Actual id found : " + actual.getId());
+        }
+        return this;
+    }
 
     /**
      * check if the element has the class
      *
-	 * @param classToFind
+     * @param classToFind
      * @return
      */
     public FluentWebElementAssert hasClass(String classToFind) {
-        if(!getClasses().contains(classToFind)) {
+        if (!getClasses().contains(classToFind)) {
             super.failWithMessage("The element does not have the class: " + classToFind + " . Actual class found : " + actual.getAttribute("class"));
         }
         return this;

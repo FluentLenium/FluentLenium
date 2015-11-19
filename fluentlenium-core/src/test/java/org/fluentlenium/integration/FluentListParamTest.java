@@ -31,12 +31,13 @@ public class FluentListParamTest extends LocalFluentCase {
     }
 
 
-     @Test
+    @Test
     public void checkAttributesAction() {
         goTo(DEFAULT_URL);
         FluentList list = find("input");
         assertThat(list.getAttributes("value")).contains("John", "Doe");
     }
+
     @Test
     public void checkValuesAction() {
         goTo(DEFAULT_URL);

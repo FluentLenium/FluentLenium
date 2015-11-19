@@ -64,12 +64,12 @@ public class ActionOnSelectorTest extends LocalFluentCase {
         try {
             click("#BLUB");
             org.junit.Assert.fail("NoSuchElementException should have been thrown!");
-        } catch(NoSuchElementException nsee) {
+        } catch (NoSuchElementException nsee) {
             assertThat(nsee.getMessage()).startsWith("No Element found");
         }
-    }    
-    
-      @Test
+    }
+
+    @Test
     public void checkDoubleClickAction() {
         goTo(DEFAULT_URL);
         assertThat(title()).contains("Selenium");

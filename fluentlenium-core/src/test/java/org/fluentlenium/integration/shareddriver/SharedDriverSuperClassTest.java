@@ -16,18 +16,18 @@ class SharedDriverSuperClass extends LocalFluentCase {
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SharedDriverSuperClassTest extends SharedDriverSuperClass {
-  @Test
-  public void firstMethod() {
-    goTo(LocalFluentCase.DEFAULT_URL);
-    this.getDriver().manage().addCookie(new Cookie("cookie", "fluent"));
-    assertThat($(".small", withName("name"))).hasSize(1);
-  }
+    @Test
+    public void firstMethod() {
+        goTo(LocalFluentCase.DEFAULT_URL);
+        this.getDriver().manage().addCookie(new Cookie("cookie", "fluent"));
+        assertThat($(".small", withName("name"))).hasSize(1);
+    }
 
-  @Test
-  public void secondMethod() {
-    assertThat($(".small", withName("name"))).hasSize(1);
-    assertThat(this.getCookie("cookie")).isNull();
-  }
+    @Test
+    public void secondMethod() {
+        assertThat($(".small", withName("name"))).hasSize(1);
+        assertThat(this.getCookie("cookie")).isNull();
+    }
 
 
 }

@@ -7,8 +7,9 @@ import org.fluentlenium.core.FluentPage;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import static org.mockito.Mockito.verify;
 import org.mockito.MockitoAnnotations;
+
+import static org.mockito.Mockito.verify;
 
 public class PageFestAssertTest {
     @Mock

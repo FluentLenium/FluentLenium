@@ -5,13 +5,13 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses(value = {
-    SharedDriverDeleteCookies.class,
-    SharedDriverOnce1.class,
-    SharedDriverOnce2.class,
-    SharedDriverPerClass1.class,
-    SharedDriverPerClass2.class,
-    SharedDriverPerMethodByAnnotation.class,
-    SharedDriverPerMethodByDefault.class
+        SharedDriverDeleteCookies.class,
+        SharedDriverOnce1.class,
+        SharedDriverOnce2.class,
+        SharedDriverPerClass1.class,
+        SharedDriverPerClass2.class,
+        SharedDriverPerMethodByAnnotation.class,
+        SharedDriverPerMethodByDefault.class
 })
 public class SharedDriverSuiteTest {
 }

@@ -8,18 +8,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
 @SharedDriver(type = SharedDriver.SharedType.PER_CLASS)
-@Test(dependsOnGroups = "DriverPerClass1",suiteName = "PerClass")
+@Test(dependsOnGroups = "DriverPerClass1", suiteName = "PerClass")
 public class DriverPerClass2Test extends LocalFluentCase {
 
-  @Test
-  public void firstMethod() {
-    assertThat($(".small", withName("name"))).hasSize(0);
-  }
-
-
-
-
-
+    @Test
+    public void firstMethod() {
+        assertThat($(".small", withName("name"))).hasSize(0);
+    }
 
 
 }

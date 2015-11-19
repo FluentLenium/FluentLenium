@@ -2,9 +2,9 @@ package org.fluentlenium.unit;
 
 
 import com.google.common.collect.Lists;
+import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.matcher.Matcher;
 import org.fluentlenium.core.search.Search;
@@ -77,7 +77,7 @@ public class FluentListSearch {
     }
 
 
-    @Test(expected = NoSuchElementException.class )
+    @Test(expected = NoSuchElementException.class)
     public void when_no_element_matching_fill_then_throws_exceptions() {
         fluentList.text("toto");
         assertThat(fluentWebElement).isEqualTo(this.fluentWebElement);
@@ -101,7 +101,7 @@ public class FluentListSearch {
     @Test(expected = NoSuchElementException.class)
     public void shouldThrowAnErrorWhenNoFirstPosition() {
         String name = "cssStyle";
-        when(search.find(name, null)).thenReturn(new FluentListImpl<FluentWebElement>((Collection)Lists.newArrayList()));
+        when(search.find(name, null)).thenReturn(new FluentListImpl<FluentWebElement>((Collection) Lists.newArrayList()));
         FluentWebElement fluentWebElement = fluentList.findFirst(name, null);
     }
 

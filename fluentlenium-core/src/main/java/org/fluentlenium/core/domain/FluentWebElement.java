@@ -25,6 +25,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
 
     /**
      * Click on the element
+     *
      * @return fluent web element
      */
     public FluentWebElement click() {
@@ -34,6 +35,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
 
     /**
      * Double Click on the element
+     *
      * @return fluent web element
      */
     public FluentWebElement doubleClick() {
@@ -44,6 +46,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
 
     /**
      * Clear the element
+     *
      * @return fluent web element
      */
     public FluentWebElement clear() {
@@ -55,6 +58,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
 
     /**
      * Submit the element
+     *
      * @return fluent web element
      */
     public FluentWebElement submit() {
@@ -188,14 +192,14 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find elements into the children with the corresponding filters
      *
-     * @param name name of element
+     * @param name    name of element
      * @param filters filters set
      * @return list of Fluent web elements
      */
     public FluentList<FluentWebElement> find(String name, Filter... filters) {
         return search.find(name, filters);
     }
-    
+
     /**
      * find elements in the children with the corresponding filters
      *
@@ -209,7 +213,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find elements into the children with the corresponding filters at the given position
      *
-     * @param name name of element
+     * @param name    name of element
      * @param filters filters set
      * @return fluent web element
      */
@@ -219,8 +223,8 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
 
     /**
      * find element in the children with the corresponding filters at the given position
-     * 
-     * @param number index of element
+     *
+     * @param number  index of element
      * @param filters filters set
      * @return fluent web element
      */
@@ -231,17 +235,17 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find elements into the children with the corresponding filters at the first position
      *
-     * @param name name of element
+     * @param name    name of element
      * @param filters filters set
      * @return fluent web element
      */
     public FluentWebElement findFirst(String name, Filter... filters) {
         return search.findFirst(name, filters);
     }
-    
+
     /**
      * find element in the children with the corresponding filters at the first position
-     * 
+     *
      * @param filters filters set
      * @return fluent web element
      */
@@ -250,9 +254,10 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     *  return the innerHTML content of the web element
-     *  does not work with HTMLUnit
-     *  @return the underlying html content
+     * return the innerHTML content of the web element
+     * does not work with HTMLUnit
+     *
+     * @return the underlying html content
      */
     public String html() {
         return webElement.getAttribute("innerHTML");
@@ -261,18 +266,20 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * Construct a FillConstructor in order to allow easy fill
      * Be careful - only the visible elements are filled
+     *
      * @return fill constructor
      */
     public FillConstructor fill() {
-      return new FillConstructor(this, FluentThread.get().getDriver());
+        return new FillConstructor(this, FluentThread.get().getDriver());
     }
 
     /**
      * This method return true if the current FluentWebElement is an input of type file
+     *
      * @return boolean value for is input file type
      */
-    private boolean isInputOfTypeFile(){
+    private boolean isInputOfTypeFile() {
         return ("input".equalsIgnoreCase(this.getTagName()) &&
-            "file".equalsIgnoreCase(this.getAttribute("type")));
+                "file".equalsIgnoreCase(this.getAttribute("type")));
     }
 }

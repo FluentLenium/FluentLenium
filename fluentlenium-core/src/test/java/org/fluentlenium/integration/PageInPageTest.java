@@ -8,7 +8,6 @@ import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.openqa.selenium.support.FindBy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -75,7 +74,7 @@ class SubTestPageWithParameter extends TestPage {
 
 
 class SubTestPageWithCreate extends FluentPage {
-   public IncludedPage pageWithCreatePage;
+    public IncludedPage pageWithCreatePage;
 
     SubTestPageWithCreate() {
         pageWithCreatePage = createPage(IncludedPage.class);

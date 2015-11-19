@@ -2,34 +2,30 @@
 <head>
     <title>Fluent Selenium Documentation Container</title>
     <script>
-        x="";
-        function alertBox()
-        {
+        x = "";
+        function alertBox() {
             alert("alertBox");
-            x="alertBox";
+            x = "alertBox";
             display("alertBox")
         }
 
-        function confirmBox(){
-            var r=confirm("confirmBox");
-            if (r==true)
-            {
+        function confirmBox() {
+            var r = confirm("confirmBox");
+            if (r == true) {
                 display("confirmBox OK");
             }
-            else
-            {
+            else {
                 display("confirmBox CANCEL");
             }
         }
-        function promptBox(){
-            var s=prompt("promptBox","");
-            if (s!=null && s!="")
-            {
+        function promptBox() {
+            var s = prompt("promptBox", "");
+            if (s != null && s != "") {
                 display(s);
             }
         }
 
-        function display(s){
+        function display(s) {
             document.getElementById("result").innerHTML = s;
         }
 
@@ -43,7 +39,6 @@
 
 <hr>
 <div id="result"></div>
-
 
 
 </body>

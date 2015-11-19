@@ -66,7 +66,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     /**
      * Ignoring the two exceptions passed as params
      *
-     * @param firstType first type of exception which extends java.lang.RuntimeException
+     * @param firstType  first type of exception which extends java.lang.RuntimeException
      * @param secondType second type of exception which extends java.lang.RuntimeException
      * @return
      */

@@ -12,8 +12,8 @@ public final class FilterConstructor {
     /**
      * Create a filter by name
      *
-     * @param name element name
-     * @param type filter type
+     * @param name        element name
+     * @param type        filter type
      * @param matcherType class for matcherType
      * @return filter object
      */
@@ -102,14 +102,14 @@ public final class FilterConstructor {
         return new FilterBuilder(FilterType.ID);
     }
 
-	/**
-	 * Create a filter builder for the attribute by class
-	 *
-	 * @return filter builder object
-	 */
-	public static FilterBuilder withClass() {
-		return new FilterBuilder(FilterType.CLASS);
-	}
+    /**
+     * Create a filter builder for the attribute by class
+     *
+     * @return filter builder object
+     */
+    public static FilterBuilder withClass() {
+        return new FilterBuilder(FilterType.CLASS);
+    }
 
     /**
      * Create a filter builder for the attribute by text
@@ -161,7 +161,7 @@ public final class FilterConstructor {
      * DEPRECATED : use with(customAttribute).+convenient method
      *
      * @param customAttribute custom attribute name
-     * @param matcher matcher object
+     * @param matcher         matcher object
      * @return filter object
      */
     @Deprecated
@@ -174,7 +174,7 @@ public final class FilterConstructor {
      * DEPRECATED : use with(customAttribute).+convenient method
      *
      * @param customAttribute custom attribute name
-     * @param matcher string matcher
+     * @param matcher         string matcher
      * @return filter object
      */
     @Deprecated

@@ -1,12 +1,6 @@
 package org.fluentlenium.integration;
 
-import static java.util.concurrent.TimeUnit.NANOSECONDS;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.fluentlenium.core.filter.MatcherConstructor.regex;
-import static org.junit.Assert.fail;
-
-import java.util.concurrent.TimeUnit;
-
+import com.google.common.base.Predicate;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentAdapter;
 import org.fluentlenium.core.FluentPage;
@@ -16,7 +10,12 @@ import org.junit.Test;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import com.google.common.base.Predicate;
+import java.util.concurrent.TimeUnit;
+
+import static java.util.concurrent.TimeUnit.NANOSECONDS;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.fluentlenium.core.filter.MatcherConstructor.regex;
+import static org.junit.Assert.fail;
 
 public class FluentLeniumWaitTest extends LocalFluentCase {
     @Before

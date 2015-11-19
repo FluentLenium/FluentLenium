@@ -42,9 +42,9 @@ public class StateOnElementTest extends LocalFluentCase {
         assertThat($("#non_display").first().isDisplayed()).isFalse();
     }
 
-  @Test
-  public void checkDisabledIsNotEnabled() {
-    assertThat($("#disabled").first().isEnabled()).isFalse();
-  }
+    @Test
+    public void checkDisabledIsNotEnabled() {
+        assertThat($("#disabled").first().isEnabled()).isFalse();
+    }
 
 }

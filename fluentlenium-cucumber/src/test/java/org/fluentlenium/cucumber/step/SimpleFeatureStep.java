@@ -20,10 +20,10 @@ public class SimpleFeatureStep extends FluentCucumberTest {
     @Page
     LocalPage page2;
 
-	@Override
-	public WebDriver getDefaultDriver() {
-		return new HtmlUnitDriver();
-	}
+    @Override
+    public WebDriver getDefaultDriver() {
+        return new HtmlUnitDriver();
+    }
 
     @Given(value = "feature I am on the first page")
     public void step1() {
@@ -51,6 +51,6 @@ public class SimpleFeatureStep extends FluentCucumberTest {
 
     @After
     public void after() {
-		this.quit();
+        this.quit();
     }
 }

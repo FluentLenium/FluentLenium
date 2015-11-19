@@ -115,52 +115,52 @@ public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert
      * @return
      */
     public FluentWebElementAssert hasText(String textToFind) {
-        if(!actual.getText().contains(textToFind)){
-            super.fail("The element does not contain the text: " + textToFind+" . Actual text found : " + actual.getText());
+        if (!actual.getText().contains(textToFind)) {
+            super.fail("The element does not contain the text: " + textToFind + " . Actual text found : " + actual.getText());
 
         }
 
-       return this;
+        return this;
     }
 
-   /**
+    /**
      * check if the element does not contain the text
      *
      * @return
      */
     public FluentWebElementAssert hasNotText(String textToFind) {
-        if(actual.getText().contains(textToFind)){
+        if (actual.getText().contains(textToFind)) {
             super.fail("The element contain the text: " + textToFind);
         }
 
-       return this;
+        return this;
     }
 
     /**
      * check if the element has the given id
      *
-	 * @param id to check
+     * @param id to check
      * @return
      */
-	public FluentWebElementAssert hasId(String id) {
-		if(!actual.getId().equals(id)) {
-			super.fail("The element does not have the id: " + id + " . Actual id found : " + actual.getId());
-		}
-		return this;
-	}
+    public FluentWebElementAssert hasId(String id) {
+        if (!actual.getId().equals(id)) {
+            super.fail("The element does not have the id: " + id + " . Actual id found : " + actual.getId());
+        }
+        return this;
+    }
 
     /**
      * check if the element has the class
      *
-	 * @param classToFind
+     * @param classToFind
      * @return
      */
     public FluentWebElementAssert hasClass(String classToFind) {
-        if(!actual.getAttribute("class").contains(classToFind)){
+        if (!actual.getAttribute("class").contains(classToFind)) {
             super.fail("The element does not have the class: " + classToFind + " . Actual class found : " + actual.getAttribute("class"));
         }
 
-       return this;
+        return this;
     }
 
     public FluentWebElementAssert hasAttribute(String attributeToFind) {

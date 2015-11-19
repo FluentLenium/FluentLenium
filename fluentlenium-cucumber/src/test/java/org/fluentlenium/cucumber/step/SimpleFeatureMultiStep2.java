@@ -16,10 +16,10 @@ public class SimpleFeatureMultiStep2 extends FluentCucumberTest {
     @Page
     LocalPage2 page2;
 
-	@Override
-	public WebDriver getDefaultDriver() {
-		return new HtmlUnitDriver();
-	}
+    @Override
+    public WebDriver getDefaultDriver() {
+        return new HtmlUnitDriver();
+    }
 
     @When(value = "feature multi2 I click on next page")
     public void step2() {
@@ -39,7 +39,7 @@ public class SimpleFeatureMultiStep2 extends FluentCucumberTest {
 
     @After
     public void after() {
-		this.quit();
+        this.quit();
     }
 
 }

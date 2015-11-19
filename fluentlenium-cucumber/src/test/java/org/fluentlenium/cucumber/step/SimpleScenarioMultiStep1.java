@@ -15,21 +15,21 @@ public class SimpleScenarioMultiStep1 extends FluentCucumberTest {
     @Page
     LocalPage page;
 
-	@Override
-	public WebDriver getDefaultDriver() {
-		return new HtmlUnitDriver();
-	}
+    @Override
+    public WebDriver getDefaultDriver() {
+        return new HtmlUnitDriver();
+    }
 
     @Given(value = "scenario multi1 I am on the first page")
     public void step1() {
-		this.initFluent();
-		this.initTest();
-		goTo(page);
+        this.initFluent();
+        this.initTest();
+        goTo(page);
     }
 
     @After
     public void after() {
-		this.quit();
+        this.quit();
     }
 
 }
