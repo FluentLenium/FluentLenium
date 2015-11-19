@@ -34,10 +34,9 @@
   <url>https://github.com/FluentLenium/FluentLenium</url>
 
   <scm>
-    <url>https://github.com/MathildeLemee/FluentLenium</url>
+    <url>https://github.com/FluentLenium/FluentLenium</url>
     <connection>scm:git:git@github.com:FluentLenium/FluentLenium.git</connection>
     <developerConnection>scm:git:git@github.com:FluentLenium/FluentLenium.git</developerConnection>
-    <tag>fluentlenium-parent-0.10.5</tag>
   </scm>
 
   <licenses>
