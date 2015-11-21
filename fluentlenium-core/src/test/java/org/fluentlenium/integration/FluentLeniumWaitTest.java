@@ -301,7 +301,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test
     public void checkPredicate() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(800, TimeUnit.MILLISECONDS).until(new Predicate<Fluent>() {
+        await().pollingEvery(800, TimeUnit.MILLISECONDS).untilPredicate(new Predicate<Fluent>() {
             @Override
             public boolean apply(Fluent o) {
                 return true;
@@ -313,7 +313,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test
     public void checkFunction() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1000, TimeUnit.MILLISECONDS).until(new Predicate<Fluent>() {
+        await().pollingEvery(1000, TimeUnit.MILLISECONDS).untilPredicate(new Predicate<Fluent>() {
             @Override
             public boolean apply(Fluent fluent) {
                 return true;
