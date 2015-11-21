@@ -48,7 +48,7 @@ public class WaitForPageToLoadTest {
     public void when_browser_implemets_Javascript_executor_then_go_to_predicate() {
         FluentWaitPageMatcher fluentWaitPageBuilder = new FluentWaitPageMatcher(wait, new WebDriverWithJavascriptExecutor());
         fluentWaitPageBuilder.isLoaded();
-        verify(wait).until(any(Predicate.class));
+        verify(wait).untilPredicate(any(Predicate.class));
     }
 
     private class WebDriverWithJavascriptExecutor implements WebDriver, JavascriptExecutor {

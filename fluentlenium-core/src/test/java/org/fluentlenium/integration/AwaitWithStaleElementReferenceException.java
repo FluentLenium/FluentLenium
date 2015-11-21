@@ -19,7 +19,7 @@ public class AwaitWithStaleElementReferenceException extends LocalFluentCase {
 
     @Test(expected = TimeoutException.class)
     public void given_default_when_state_element_reference_exception_is_thrown_then_it_is_ignored() {
-        await().atMost(3, SECONDS).until(new Predicate<Fluent>() {
+        await().atMost(3, SECONDS).untilPredicate(new Predicate<Fluent>() {
             @Override
             public boolean apply(Fluent fluent) {
                 find(".small").clear();
@@ -31,7 +31,7 @@ public class AwaitWithStaleElementReferenceException extends LocalFluentCase {
 
     @Test(expected = StaleElementReferenceException.class)
     public void given_no_defaults_when_state_element_reference_exception_is_thrown_then_it_is_not_ignored() {
-        await().atMost(3, SECONDS).withNoDefaultsException().until(new Predicate<Fluent>() {
+        await().atMost(3, SECONDS).withNoDefaultsException().untilPredicate(new Predicate<Fluent>() {
             @Override
             public boolean apply(Fluent fluent) {
                 find(".small").clear();

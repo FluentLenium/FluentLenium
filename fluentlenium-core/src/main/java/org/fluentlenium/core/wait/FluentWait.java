@@ -2,6 +2,7 @@ package org.fluentlenium.core.wait;
 
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.search.Search;
@@ -79,8 +80,18 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     /**
      * @param isTrue predicate condition for wait
      * @return fluent wait
+     * @deprecated This method is java8 lambda ambigous with {@link #until(Function)} and will be removed.
      */
-    public FluentWait until(com.google.common.base.Predicate<Fluent> isTrue) {
+    @Deprecated
+    public FluentWait until(Predicate<Fluent> isTrue) {
+        return untilPredicate(isTrue);
+    }
+
+    /**
+     * @param isTrue predicate condition for wait
+     * @return fluent wait
+     */
+    public FluentWait untilPredicate(Predicate<Fluent> isTrue) {
         updateWaitWithDefaultExceptions();
         wait.until(isTrue);
         return this;
