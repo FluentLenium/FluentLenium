@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Util Class which offers some shortcut to webdriver methods
  */
-public abstract class Fluent implements SearchActions {
+public abstract class Fluent implements SearchActions<FluentWebElement> {
     private String baseUrl;
 
     private ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<WebDriver>();
