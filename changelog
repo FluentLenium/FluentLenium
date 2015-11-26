@@ -1,3 +1,8 @@
+v0.10.9
+- fix #60 withValues will be an alias for with method which is restricted word in Scala
+- parallel execution on method level will start working since this version, README file extended for examples
+- fix #195 add missing generic type parameter
+
 v0.10.6
 - Selenium upgrade to 2.48.2
 
