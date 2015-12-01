@@ -1,7 +1,6 @@
 package org.fluentlenium.integration;
 
 import org.fluentlenium.integration.localtest.LocalFluentCase;
-import org.openqa.selenium.WebDriverException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
@@ -11,13 +10,13 @@ public class FluentCloseTest extends LocalFluentCase {
 
     @Test
     public void when_default_shared_driver_then_driver_is_closed_after_method_call() {
-        goTo("http://www.google.com");
+        goTo("about:blank");
     }
 
     @AfterClass
     public void afterClass() {
         try {
-            getDriver().get("http://www.yahoo.fr");
+            getDriver().get("about:blank");
             fail("should have a NullPointerException because driver is closed");
         } catch (NullPointerException e) {
 
