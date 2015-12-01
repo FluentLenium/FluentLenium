@@ -51,7 +51,7 @@ class TestPrivatePage2 extends FluentPage {
 
     @Override
     public String getUrl() {
-        return "http://www.google.fr";
+        return "about:blank";
     }
 }
 
@@ -61,7 +61,7 @@ class TestPrivatePageWithElement extends FluentPage {
 
     @Override
     public String getUrl() {
-        return "http://www.google.fr";
+        return "about:blank";
     }
 }
 

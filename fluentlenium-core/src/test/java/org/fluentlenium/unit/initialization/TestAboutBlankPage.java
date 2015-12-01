@@ -2,11 +2,11 @@ package org.fluentlenium.unit.initialization;
 
 import org.fluentlenium.core.FluentPage;
 
-public class TestExternalPage extends FluentPage {
+public class TestAboutBlankPage extends FluentPage {
 
 
     @Override
     public String getUrl() {
-        return "http://www.google.fr";
+        return "about:blank";
     }
 }

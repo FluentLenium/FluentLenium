@@ -11,7 +11,7 @@ public class AnnotationInitialization extends FluentTest {
     public WebDriver webDriver = new HtmlUnitDriver();
 
     @Page
-    public TestExternalPage page2;
+    public TestAboutBlankPage page2;
 
     @Page
     public TestPrivatePage page;
@@ -40,6 +40,6 @@ class TestPrivatePage extends FluentPage {
 
     @Override
     public String getUrl() {
-        return "http://www.google.fr";
+        return "about:blank";
     }
 }
