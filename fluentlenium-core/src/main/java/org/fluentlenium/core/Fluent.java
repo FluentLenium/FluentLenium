@@ -719,13 +719,10 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      * @return fluent object
      */
     public Fluent switchTo(FluentWebElement element) {
-        if (null == element ||
-                null == element.getTagName() ||
-                null == element.getId() ||
-                !"iframe".equals(element.getTagName())) {
+        if (null == element || !"iframe".equals(element.getTagName())) {
             getDriver().switchTo().defaultContent();
         } else {
-            getDriver().switchTo().frame(element.getId());
+            getDriver().switchTo().frame(element.getElement());
         }
         return this;
     }
