@@ -755,7 +755,7 @@ switchToDefault();
 
 To switch to the iframe selected:
 ```java
-switchTo(find("iframe#frameid"));
+switchTo(findFirst("iframe#frameid"));
 ```
 
 ##Alert
