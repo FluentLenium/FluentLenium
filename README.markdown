@@ -281,6 +281,41 @@ This will submit all the enabled fields returned by the search.
 find("#create-button").doubleClick()
 ```
 
+## Events
+
+Selenium has a driver wrapper named `EventFiringWebDriver` that is able to generate events and register listeners.
+
+FluentLenium brings an Events API to register those listeners easily. Make sure you have configured FluentLenium to use
+an instance of `org.openqa.selenium.support.events.EventFiringWebDriver` by overriding `getDefaultDriver`.
+
+```java
+public WebDriver getDefaultDriver() {
+    return new EventFiringWebDriver(super.getDefaultDriver());
+}
+```
+
+And use `events` methods to register listeners.
+
+```java
+events().afterClickOn(new ElementListener() {
+    @Override
+    public void on(FluentWebElement element, WebDriver driver) {
+        System.out.println("Element Clicked: " + element);
+    }
+});
+
+findFirst("button").click(); // This will call the listener.
+```
+
+This integrates nicely with Java 8 lambdas
+
+```java
+events().afterClickOn((element, driver) -> System.out.println("Element Clicked: " + element));
+
+findFirst("button").click(); // This will call the listener.
+```
+
+
 ## Page Object pattern
 Selenium tests can easily become a mess.  To avoid this, you can use the [Page Object Pattern](http://code.google.com/p/selenium/wiki/PageObjects).
 Page Object Pattern will enclose all the plumbing relating to how pages interact with each other and how the user

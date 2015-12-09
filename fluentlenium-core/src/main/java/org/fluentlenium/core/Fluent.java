@@ -9,12 +9,14 @@ import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentJavascript;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.exception.ConstructionException;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
 import org.fluentlenium.core.wait.FluentWait;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
@@ -36,6 +38,8 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
 
     private ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<WebDriver>();
     private ThreadLocal<Search> searchThreadLocal = new ThreadLocal<Search>();
+
+    private EventsRegistry events = null;
 
     public Fluent(WebDriver driver) {
         this.webDriverThreadLocal.set(driver);
@@ -121,6 +125,9 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     protected Fluent initFluent(WebDriver driver) {
         this.webDriverThreadLocal.set(driver);
         this.searchThreadLocal.set(new Search(driver));
+        if (driver instanceof EventFiringWebDriver) {
+            this.events = new EventsRegistry((EventFiringWebDriver) driver);
+        }
         return this;
     }
 
@@ -130,6 +137,14 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
 
     public Search getSearch() {
         return searchThreadLocal.get();
+    }
+
+    public EventsRegistry events() {
+        if (events == null) {
+            throw new IllegalStateException("An EventFiringWebDriver instance is required to use events. " +
+                    "Please override getDefaultDriver() to provide it.");
+        }
+        return events;
     }
 
     protected void initTest() {

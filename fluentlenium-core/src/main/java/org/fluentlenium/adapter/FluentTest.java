@@ -114,15 +114,6 @@ public abstract class FluentTest extends FluentAdapter {
         super();
     }
 
-    /**
-     * Override this method to change the driver
-     *
-     * @return returns WebDriver which is set to FirefoxDriver by default - can be overwritten
-     */
-    public WebDriver getDefaultDriver() {
-        return new FirefoxDriver();
-    }
-
 
     @AfterClass
     public static void afterClass() {
