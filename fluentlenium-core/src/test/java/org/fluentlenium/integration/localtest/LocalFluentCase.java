@@ -16,14 +16,14 @@ public abstract class LocalFluentCase extends FluentTest {
 
     public static String getPath() {
         String currentDir = System.getProperty("user.dir");
-        if (!currentDir.endsWith("/fluentlenium-core")) {
-            currentDir += "/fluentlenium-core";
+        if (!currentDir.endsWith(File.separator + "fluentlenium-core")) {
+            currentDir += File.separator + "fluentlenium-core";
         }
-        String scheme = "file:/";
-        if (currentDir.startsWith("/home")) {
+        String scheme = "file://";
+        if (currentDir.startsWith(File.separator + "home")) {
             scheme = "file:";
         }
-        return scheme + currentDir + "/src/test/html/";
+        return scheme + currentDir + String.format("%1$ssrc%1$stest%1$shtml%1$s", File.separator);
     }
 }
 
