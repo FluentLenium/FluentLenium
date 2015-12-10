@@ -7,3 +7,10 @@ script:
   - mvn clean verify jacoco:report
 after_success:
   - mvn coveralls:report
+  - "[[ ${TRAVIS_JDK_VERSION} == 'oraclejdk8' ]] && [[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_BRANCH} == 'master' ]] && [[ ${TRAVIS_TAG} == '' ]] && mvn deploy -DskipTests --settings deploy-settings.xml"
+env:
+  global:
+  # env.CI_DEPLOY_USERNAME
+  - secure: XhWeOh6PhDFEH/DTPhAbH04rysTdKWUoQxfYI7YjlrRznX0YKBRLVHIXn68TdzC/ucX0t+XzO2vOVoR53lSBYr45P5ZnO5+rFjVLhfhUDQWv3BibtaH6oCYM0lwvtA6mWKA6thWfvqOAvYgTUhdgEwaoVK/oHidW0KHNxNC0Ty8=
+  # env.CI_DEPLOY_PASSWORD
+  - secure: Pw6Aik2ws5z/VVKZ7J7+BtTJ79IMYwYde/C9LocyQtEeGxET7il57WZ2T2TyIxu9/tFtzX8N6fpf5j1Q64dUrL8Ki6R7phNvcFRl537AXINBSVuGz6rA/h8Vqx31wsHoTnl8tY6J6fUIHBF2KxvY38NzXl2g5v1n0eCmhyYxor8=
