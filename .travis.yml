@@ -3,4 +3,7 @@ jdk:
   - oraclejdk8
   - oraclejdk7
   - openjdk7
-script: mvn verify
+script:
+  - mvn clean verify jacoco:report
+after_success:
+  - mvn coveralls:report
