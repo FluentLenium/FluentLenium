@@ -1,13 +1,14 @@
 package org.fluentlenium.integration;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class BaseUrlTest extends LocalFluentCase {
+
     @Page
     Page2Relative pageRelative;
 
@@ -21,7 +22,7 @@ public class BaseUrlTest extends LocalFluentCase {
 
     @Test
     public void baseUrlShouldBeUsedForRelativeUrlInGoTo() {
-        goTo(LocalFluentCase.BASE_URL + "/page2.html");
+        goTo(PAGE_2_URL);
         assertThat(title()).isEqualTo("Page 2");
     }
 
@@ -49,7 +50,7 @@ class Page2Relative extends FluentPage {
 
     @Override
     public String getUrl() {
-        return LocalFluentCase.BASE_URL + "/page2.html";
+        return LocalFluentCase.PAGE_2_URL;
     }
 
     @Override

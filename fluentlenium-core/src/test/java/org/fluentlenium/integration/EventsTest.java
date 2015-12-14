@@ -20,14 +20,13 @@ public class EventsTest extends LocalFluentCase {
 
     @Test
     public void clickOn() {
-        ElementListener beforeListener = Mockito.mock(ElementListener.class);
-        ElementListener afterListener = Mockito.mock(ElementListener.class);
+        final ElementListener beforeListener = Mockito.mock(ElementListener.class);
+        final ElementListener afterListener = Mockito.mock(ElementListener.class);
 
         events().beforeClickOn(beforeListener);
         events().afterClickOn(new ElementListener() {
             @Override
-            public void on(FluentWebElement element, WebDriver driver) {
-                System.out.println("Element Clicked: " + element);
+            public void on(final FluentWebElement element, final WebDriver driver) {
             }
         });
         goTo(DEFAULT_URL);
@@ -40,8 +39,8 @@ public class EventsTest extends LocalFluentCase {
 
     @Test
     public void findBy() {
-        FindByListener beforeListener = Mockito.mock(FindByListener.class);
-        FindByListener afterListener = Mockito.mock(FindByListener.class);
+        final FindByListener beforeListener = Mockito.mock(FindByListener.class);
+        final FindByListener afterListener = Mockito.mock(FindByListener.class);
 
         events().beforeFindBy(beforeListener);
         events().afterFindBy(afterListener);
@@ -55,8 +54,8 @@ public class EventsTest extends LocalFluentCase {
 
     @Test
     public void navigate() {
-        NavigateAllListener beforeListener = Mockito.mock(NavigateAllListener.class);
-        NavigateAllListener afterListener = Mockito.mock(NavigateAllListener.class);
+        final NavigateAllListener beforeListener = Mockito.mock(NavigateAllListener.class);
+        final NavigateAllListener afterListener = Mockito.mock(NavigateAllListener.class);
 
         events().beforeNavigate(beforeListener);
         events().afterNavigate(afterListener);
