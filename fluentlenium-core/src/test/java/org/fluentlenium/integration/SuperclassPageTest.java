@@ -1,11 +1,11 @@
 package org.fluentlenium.integration;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class SuperclassPageTest extends PageTest {
 
@@ -33,7 +33,7 @@ class AnotherPage extends FluentPage {
 
     @Override
     public String getUrl() {
-        return LocalFluentCase.BASE_URL + "anotherpage.html";
+        return LocalFluentCase.ANOTHERPAGE_URL;
     }
 
     @Override
