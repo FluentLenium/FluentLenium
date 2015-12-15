@@ -2,10 +2,10 @@ package org.fluentlenium.integration.util;
 
 import java.net.URL;
 
-public class UrlUtil {
+public final class UrlUtil {
 
     private UrlUtil() {
-        throw new UnsupportedOperationException("No instances allowed");
+        // No instances allowed
     }
 
     /**
