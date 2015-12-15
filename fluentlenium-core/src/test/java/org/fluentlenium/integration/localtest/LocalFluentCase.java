@@ -14,13 +14,13 @@ public abstract class LocalFluentCase extends FluentTest {
     public static final String IFRAME_URL;
     public static final String ANOTHERPAGE_URL;
 
-	static {
-		DEFAULT_URL = getAbsoluteUrlFromFile("index.html");
-		JAVASCRIPT_URL = getAbsoluteUrlFromFile("javascript.html");
-		PAGE_2_URL = getAbsoluteUrlFromFile("page2.html");
-		IFRAME_URL = getAbsoluteUrlFromFile("iframe.html");
-		ANOTHERPAGE_URL = getAbsoluteUrlFromFile("anotherpage.html");
-	}
+    static {
+        DEFAULT_URL = getAbsoluteUrlFromFile("index.html");
+        JAVASCRIPT_URL = getAbsoluteUrlFromFile("javascript.html");
+        PAGE_2_URL = getAbsoluteUrlFromFile("page2.html");
+        IFRAME_URL = getAbsoluteUrlFromFile("iframe.html");
+        ANOTHERPAGE_URL = getAbsoluteUrlFromFile("anotherpage.html");
+    }
 
     @Override
     public WebDriver getDefaultDriver() {

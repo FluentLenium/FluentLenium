@@ -10,9 +10,9 @@ public abstract class LocalFluentCase extends FluentTest {
 
     public static final String DEFAULT_URL;
 
-	static {
-		DEFAULT_URL = getAbsoluteUrlFromFile("index.html");
-	}
+    static {
+        DEFAULT_URL = getAbsoluteUrlFromFile("index.html");
+    }
 
     @Override
     public WebDriver getDefaultDriver() {
