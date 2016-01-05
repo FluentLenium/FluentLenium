@@ -60,11 +60,20 @@ public class FluentAdapter extends Fluent {
                     Class clsField = field.getType();
                     Class clsPage = Class.forName(clsField.getName());
                     Fluent existingPage = pageInstances.get(clsPage);
+                    FluentPage page = (FluentPage) field.get(container);
                     if (existingPage != null) {
-                        field.set(container, existingPage);
+                        // if page isn't injected
+                        if (page == null) {
+                            field.set(container, existingPage);
+                        }
                     } else {
-                        FluentPage page = initClass(clsPage);
-                        field.set(container, page);
+                        // if page isn't injected
+                        if (page == null) {
+                            page = initClass(clsPage);
+                            field.set(container, page);
+                        } else {
+                            page = initClass(page);
+                        }
                         pageInstances.putIfAbsent(clsPage, page);
                         injectPageIntoContainer(page);
                     }
@@ -85,28 +94,37 @@ public class FluentAdapter extends Fluent {
         return container;
     }
 
-
     protected <T extends FluentPage> T initClass(Class<T> cls, Object... params) {
         try {
             T page = constructPageWithParams(cls, params);
+            initClass(page, params);
+            return page;
+        } catch (IllegalAccessException e) {
+            throw new ConstructionException("IllegalAccessException on class " + (cls != null ? cls.getName() : " null"), e);
+        } catch (NoSuchMethodException e) {
+            throw new ConstructionException("No constructor found on class " + (cls != null ? cls.getName() : " null"), e);
+        } catch (InstantiationException e) {
+            throw new ConstructionException("Unable to instantiate " + (cls != null ? cls.getName() : " null"), e);
+        } catch (InvocationTargetException e) {
+            throw new ConstructionException("Cannot invoke method setDriver on " + (cls != null ? cls.getName() : " null"), e);
+        }
+    }
 
-            Class parent = Class.forName(Fluent.class.getName());
+    protected <T extends FluentPage> T initClass(T page, Object... params) {
+        try {
+            Class parent = Fluent.class;
             initDriver(page, parent);
             initBaseUrl(page, parent);
 
             //init fields with default proxies
             initFluentWebElements(page);
             return page;
-        } catch (ClassNotFoundException e) {
-            throw new ConstructionException("Class " + cls.getName() + "not found", e);
         } catch (IllegalAccessException e) {
-            throw new ConstructionException("IllegalAccessException on class " + cls.getName(), e);
+            throw new ConstructionException("IllegalAccessException on class " + page.getClass().getName(), e);
         } catch (NoSuchMethodException e) {
-            throw new ConstructionException("No constructor found on class " + cls.getName(), e);
-        } catch (InstantiationException e) {
-            throw new ConstructionException("Unable to instantiate " + cls.getName(), e);
+            throw new ConstructionException("No constructor found on class " + page.getClass().getName(), e);
         } catch (InvocationTargetException e) {
-            throw new ConstructionException("Cannot invoke method setDriver on " + cls.getName(), e);
+            throw new ConstructionException("Cannot invoke method setDriver on " + page.getClass().getName(), e);
         }
     }
 
