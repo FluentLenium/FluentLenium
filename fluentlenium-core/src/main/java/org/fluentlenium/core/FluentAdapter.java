@@ -54,6 +54,11 @@ public class FluentAdapter extends Fluent {
     public void getDefaultConfig() {
     }
 
+    /**
+     * @deprecated use FluentPage.isAt() instead.
+     *
+     */
+    @Deprecated
     public static void assertAt(FluentPage fluent) {
         fluent.isAt();
     }
