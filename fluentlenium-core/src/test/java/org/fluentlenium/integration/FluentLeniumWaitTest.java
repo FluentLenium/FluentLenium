@@ -312,6 +312,18 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         ;
     }
 
+    @Test(expected = TimeoutException.class)
+    public void checkPredicateFail() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1000).untilPredicate(new Predicate<Fluent>() {
+            @Override
+            public boolean apply(Fluent o) {
+                return false;
+            }
+        })
+        ;
+    }
+
     @Test
     public void checkFunction() {
         goTo(JAVASCRIPT_URL);
@@ -323,6 +335,17 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         });
     }
 
+    @Test(expected = TimeoutException.class)
+    public void checkFunctionFail() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1000).until(new Function<Fluent, Boolean>() {
+            @Override
+            public Boolean apply(Fluent fluent) {
+                return false;
+            }
+        });
+    }
+
     @Test
     public void checkSupplier() {
         goTo(JAVASCRIPT_URL);
@@ -330,6 +353,17 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
             @Override
             public Boolean get() {
                 return true;
+            }
+        });
+    }
+
+    @Test(expected = TimeoutException.class)
+    public void checkSupplierFail() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1000).until(new Supplier<Boolean>() {
+            @Override
+            public Boolean get() {
+                return false;
             }
         });
     }
