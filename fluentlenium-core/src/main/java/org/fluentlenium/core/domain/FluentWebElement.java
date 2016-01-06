@@ -2,6 +2,7 @@ package org.fluentlenium.core.domain;
 
 import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.action.FillConstructor;
+import org.fluentlenium.core.action.FillSelectConstructor;
 import org.fluentlenium.core.action.FluentDefaultActions;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
@@ -271,6 +272,14 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public FillConstructor fill() {
         return new FillConstructor(this, FluentThread.get().getDriver());
+    }
+
+    /**
+     * Construct a FillSelectConstructor in order to allow easy list selection
+     * Be careful - only the visible elements are filled
+     */
+    public FillSelectConstructor fillSelect() {
+      return new FillSelectConstructor(this, FluentThread.get().getDriver());
     }
 
     /**

@@ -1,5 +1,6 @@
 package org.fluentlenium.integration;
 
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 import org.openqa.selenium.support.ui.Select;
@@ -24,6 +25,19 @@ public class ActionOnSelectorWithBddTest extends LocalFluentCase {
         fillSelect("#select").withIndex(1); // by index
         assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 2");
         fillSelect("#select").withText("value 3"); // by text
+        assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 3");
+    }
+
+    @Test
+    public void checkFillSelectActionOnSelectElement() {
+        goTo(DEFAULT_URL);
+        FluentWebElement element = findFirst("#select");
+        Select select = new Select(element.getElement());
+        element.fillSelect().withValue("value-1"); // by value
+        assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 1");
+        element.fillSelect().withIndex(1); // by index
+        assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 2");
+        element.fillSelect().withText("value 3"); // by text
         assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 3");
     }
 

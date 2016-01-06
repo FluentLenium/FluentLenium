@@ -1,23 +1,28 @@
 package org.fluentlenium.core.action;
 
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public class FillSelectConstructor extends org.fluentlenium.core.Fluent {
-    private String cssSelector;
+    private FluentWebElement element;
     private Filter[] filters;
+
+    public FillSelectConstructor(WebDriver webDriver, Filter... filters) {
+        this("*", webDriver, filters);
+    }
 
     public FillSelectConstructor(String cssSelector, WebDriver webDriver, Filter... filters) {
         super(webDriver);
-        this.cssSelector = cssSelector;
+        this.element = findFirst(cssSelector, filters);
         this.filters = filters;
     }
 
-    public FillSelectConstructor(WebDriver webDriver, Filter... filters) {
+    public FillSelectConstructor(FluentWebElement element, WebDriver webDriver, Filter... filters) {
         super(webDriver);
-        this.cssSelector = "*";
+        this.element = element;
         this.filters = filters;
     }
 
@@ -28,8 +33,7 @@ public class FillSelectConstructor extends org.fluentlenium.core.Fluent {
      * @return fill select constructor
      */
     public FillSelectConstructor withValue(String value) {
-        WebElement selectElement = findFirst(cssSelector, filters).getElement();
-        Select select = new Select(selectElement);
+        Select select = new Select(element.getElement());
         select.selectByValue(value);
         return this;
     }
@@ -41,8 +45,7 @@ public class FillSelectConstructor extends org.fluentlenium.core.Fluent {
      * @return fill select constructor
      */
     public FillSelectConstructor withIndex(int index) {
-        WebElement selectElement = findFirst(cssSelector, filters).getElement();
-        Select select = new Select(selectElement);
+        Select select = new Select(element.getElement());
         select.selectByIndex(index);
         return this;
     }
@@ -54,8 +57,7 @@ public class FillSelectConstructor extends org.fluentlenium.core.Fluent {
      * @return fill select constructor
      */
     public FillSelectConstructor withText(String text) {
-        WebElement selectElement = findFirst(cssSelector, filters).getElement();
-        Select select = new Select(selectElement);
+        Select select = new Select(element.getElement());
         select.selectByVisibleText(text);
         return this;
     }

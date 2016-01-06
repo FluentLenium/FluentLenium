@@ -256,6 +256,8 @@ If there are more input elements found, the last value (myPassword) will be repe
 
 If you're trying to fill a select element, you can use `fillSelect("daySelector").withValue("MONDAY")` to fill it with a value, `fillSelect("daySelector").withIndex(1)` to fill it with a value by its index or `fillSelect("daySelector").withText("Monday")` to fill it with a value by its text.
 
+`fillSelect`can also be invoked directly on an element, for instance `findFirst("daySelector").fillSelect().withValue("MONDAY")`.
+
 Don't forget, only visible fields will be modified. It simulates a real person using a browser!
 
 ### Click
