@@ -3,6 +3,7 @@ package org.fluentlenium.core.wait;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Supplier;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.search.Search;
@@ -150,6 +151,19 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
      */
     public WebDriver getDriver() {
         return driver;
+    }
+
+    public void until(final Supplier<Boolean> isTrue) {
+        updateWaitWithDefaultExceptions();
+        until(new Function<Object, Boolean>() {
+            public Boolean apply(Object input) {
+                return isTrue.get();
+            }
+
+            public String toString() {
+                return isTrue.toString();
+            }
+        });
     }
 
     @Override

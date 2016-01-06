@@ -1,6 +1,8 @@
 package org.fluentlenium.integration;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Supplier;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentAdapter;
 import org.fluentlenium.core.FluentPage;
@@ -313,9 +315,20 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test
     public void checkFunction() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1000, TimeUnit.MILLISECONDS).untilPredicate(new Predicate<Fluent>() {
+        await().pollingEvery(1000, TimeUnit.MILLISECONDS).until(new Function<Fluent, Boolean>() {
             @Override
-            public boolean apply(Fluent fluent) {
+            public Boolean apply(Fluent fluent) {
+                return true;
+            }
+        });
+    }
+
+    @Test
+    public void checkSupplier() {
+        goTo(JAVASCRIPT_URL);
+        await().pollingEvery(1000, TimeUnit.MILLISECONDS).until(new Supplier<Boolean>() {
+            @Override
+            public Boolean get() {
                 return true;
             }
         });
