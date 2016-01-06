@@ -34,7 +34,7 @@ To add FluentLenium to your project, just add the following dependency to your `
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
-    <version>0.10.3</version>
+    <version>1.0.0-SNAPSHOT</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -47,7 +47,7 @@ If you need the assertj dependency to improve the legibility of your test code:
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>0.10.3</version>
+    <version>1.0.0-SNAPSHOT</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -58,7 +58,7 @@ An adapter has also been built for using FluentLenium with TestNG:
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>0.10.3</version>
+    <version>1.0.0-SNAPSHOT</version>
     <scope>test</scope>
 </dependency>
 ```
