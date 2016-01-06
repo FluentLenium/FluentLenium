@@ -112,7 +112,6 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
      *
      * @return fluent wait
      */
-    @Beta
     public FluentWait withNoDefaultsException() {
         useDefaultException = false;
         return this;

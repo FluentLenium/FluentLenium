@@ -8,7 +8,6 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-@Beta
 public @interface SharedDriver {
     public enum SharedType {ONCE, PER_CLASS, PER_METHOD}
 

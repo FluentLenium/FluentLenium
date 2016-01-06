@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Beta
 public @interface SharedDriver {
     public enum SharedType {PER_FEATURE, PER_SCENARIO}
 

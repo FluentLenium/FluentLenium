@@ -4,7 +4,6 @@ import org.fluentlenium.core.FluentAdapter;
 import org.openqa.selenium.Beta;
 import org.openqa.selenium.WebDriver;
 
-@Beta
 public class IsolatedTest extends FluentAdapter {
 
 

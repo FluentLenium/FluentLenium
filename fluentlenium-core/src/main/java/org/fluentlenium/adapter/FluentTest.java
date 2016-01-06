@@ -126,7 +126,6 @@ public abstract class FluentTest extends FluentAdapter {
     /**
      * Override this method to change the default time to wait for a page to be loaded
      */
-    @Beta
     public void setDefaultConfig() {
     }
 
