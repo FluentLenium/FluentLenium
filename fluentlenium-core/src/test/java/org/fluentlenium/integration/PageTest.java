@@ -4,6 +4,7 @@ import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.junit.Before;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.openqa.selenium.support.FindBy;
@@ -67,6 +68,14 @@ public class PageTest extends LocalFluentCase {
         assertThat(page3.linkToPage2FoundWithFindBy).isNotNull();
         assertThat(page3.linkToPage2FoundWithFindByOnPage3).isNotNull();
     }
+
+    @Test
+    public void checkManuallyCreatedSupportInjection() {
+        Page4 page4 = createPage(Page4.class);
+        assertThat(page4.getPageAccueil()).isNotNull();
+        assertThat(page4.getPage5()).isNotNull();
+        assertThat(page4.getPage5().getPageAccueil()).isNotNull();
+    }
 }
 
 class PageAccueil extends FluentPage {
@@ -112,4 +121,32 @@ class Page2 extends FluentPage {
 class Page3 extends PageAccueil {
     @FindBy(css = "a.go-next")
     FluentWebElement linkToPage2FoundWithFindByOnPage3;
+}
+
+class Page4 extends FluentPage {
+    @Page
+    private PageAccueil pageAccueil;
+
+    private Page5 page5;
+
+    public Page4() {
+        page5 = createPage(Page5.class);
+    }
+
+    public PageAccueil getPageAccueil() {
+        return pageAccueil;
+    }
+
+    public Page5 getPage5() {
+        return page5;
+    }
+}
+
+class Page5 extends FluentPage {
+    @Page
+    private PageAccueil pageAccueil;
+
+    public PageAccueil getPageAccueil() {
+        return pageAccueil;
+    }
 }
