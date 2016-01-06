@@ -1,9 +1,9 @@
 package org.fluentlenium.cucumber.page;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.integration.util.UrlUtil;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LocalPage2 extends FluentPage {
 

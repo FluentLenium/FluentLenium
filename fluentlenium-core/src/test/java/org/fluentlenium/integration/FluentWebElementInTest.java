@@ -1,10 +1,10 @@
 package org.fluentlenium.integration;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluentWebElementInTest extends LocalFluentCase {
     FluentWebElement linkToPage2;

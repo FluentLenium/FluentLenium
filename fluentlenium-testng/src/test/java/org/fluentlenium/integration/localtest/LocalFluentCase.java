@@ -1,10 +1,10 @@
 package org.fluentlenium.integration.localtest;
 
-import static org.fluentlenium.integration.util.UrlUtil.getAbsoluteUrlFromFile;
-
 import org.fluentlenium.adapter.FluentTestNg;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import static org.fluentlenium.integration.util.UrlUtil.getAbsoluteUrlFromFile;
 
 public abstract class LocalFluentCase extends FluentTestNg {
 

@@ -1,7 +1,5 @@
 package org.fluentlenium.integration;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -9,6 +7,8 @@ import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.openqa.selenium.support.FindBy;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PageTest extends LocalFluentCase {
     @Page

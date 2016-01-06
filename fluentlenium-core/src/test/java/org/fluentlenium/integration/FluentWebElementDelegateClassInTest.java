@@ -1,10 +1,10 @@
 package org.fluentlenium.integration;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluentWebElementDelegateClassInTest extends LocalFluentCase {
     ALink linkToPage2;

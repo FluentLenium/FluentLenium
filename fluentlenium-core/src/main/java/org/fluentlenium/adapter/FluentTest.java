@@ -11,7 +11,6 @@ import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.openqa.selenium.Beta;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static org.fluentlenium.adapter.util.SharedDriverHelper.*;
 

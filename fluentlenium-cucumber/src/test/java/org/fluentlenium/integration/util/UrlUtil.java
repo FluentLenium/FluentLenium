@@ -11,6 +11,7 @@ public final class UrlUtil {
     /**
      * Converts a file String to a valid URL String.<br>
      * Example: <code>index.html</code> converts to <code>file://C:/path/to/file/index.html</code>.
+     *
      * @param file the file String
      * @return the URL String
      */
