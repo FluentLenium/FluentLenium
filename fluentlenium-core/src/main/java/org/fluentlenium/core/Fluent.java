@@ -391,11 +391,15 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
             }
         }
 
-        Set<String> initialTabs = getDriver().getWindowHandles();
-        executeScript("window.open('" + url + "', '_blank');");
-        Set<String> tabs = getDriver().getWindowHandles();
-        tabs.removeAll(initialTabs);
-        String newTab = tabs.iterator().next();
+        String newTab;
+        synchronized (getClass()) {
+            Set<String> initialTabs = getDriver().getWindowHandles();
+            executeScript("window.open('" + url + "', '_blank');");
+            Set<String> tabs = getDriver().getWindowHandles();
+            tabs.removeAll(initialTabs);
+            newTab = tabs.iterator().next();
+        }
+
         getDriver().switchTo().window(newTab);
 
         return this;
