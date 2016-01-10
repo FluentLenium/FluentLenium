@@ -24,11 +24,7 @@ public class EventsTest extends LocalFluentCase {
         final ElementListener afterListener = Mockito.mock(ElementListener.class);
 
         events().beforeClickOn(beforeListener);
-        events().afterClickOn(new ElementListener() {
-            @Override
-            public void on(final FluentWebElement element, final WebDriver driver) {
-            }
-        });
+        events().afterClickOn(afterListener);
         goTo(DEFAULT_URL);
 
         click("button");
