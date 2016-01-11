@@ -7,7 +7,7 @@
 
     <parent>
         <groupId>org.fluentlenium.it</groupId>
-        <artifactId>junit-integration-tests</artifactId>
+        <artifactId>junit</artifactId>
         <version>testing</version>
     </parent>
 
