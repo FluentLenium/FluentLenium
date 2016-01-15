@@ -52,8 +52,8 @@
     </licenses>
 
     <organization>
-        <name>AConsulting</name>
-        <url>http://www.java-freelance.fr</url>
+        <name>FluentLenium</name>
+        <url>https://github.com/FluentLenium</url>
     </organization>
 
     <developers>
@@ -61,9 +61,20 @@
             <id>Mlemee</id>
             <name>Mathilde Lemee</name>
             <email>mathilde.lemee@gmail.com</email>
-            <url>http://www.fluentlenium.org</url>
+            <url>https://github.com/MathildeLemee</url>
             <organization>AConsulting</organization>
             <organizationUrl>http://www.java-freelance.fr</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>Toilal</id>
+            <name>Rémi Alvergnat</name>
+            <email>remi.alvergnat@pragmasphere.com</email>
+            <url>https://github.com/Toilal</url>
+            <organization>Pragmasphere</organization>
+            <organizationUrl>http://www.pragmasphere.com</organizationUrl>
             <roles>
                 <role>developer</role>
             </roles>
@@ -116,41 +127,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${surefire.version}</version>
-                <configuration>
-                    <excludes>
-                        <exclude>**/unit/**</exclude>
-                        <exclude>**/integration/**$**</exclude>
-                        <exclude>**/integration/**OnLabs**</exclude>
-                    </excludes>
-                    <includes>
-                        <include>**/integration/**Test.java</include>
-                        <include>**/integration/**/**Test.java</include>
-                    </includes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire.version}</version>
-                <configuration>
-                    <excludes>
-                        <exclude>**/integration/**</exclude>
-                    </excludes>
-                    <includes>
-                        <include>**/unit/**</include>
-                    </includes>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.3</version>
@@ -158,27 +134,9 @@
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <artifactId>maven-remote-resources-plugin</artifactId>
-                <version>1.1</version>
-                <executions>
-                    <execution>
-                        <id>process-remote-resources</id>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                        <configuration>
-                            <resourceBundles>
-                                <resourceBundle>org.apache:apache-jar-resource-bundle:1.2</resourceBundle>
-                            </resourceBundles>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.2-beta-2</version>
+                <version>2.6</version>
                 <configuration>
                     <descriptor>src/main/assembly/dep.xml</descriptor>
                 </configuration>
@@ -194,6 +152,7 @@
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.7</version>
                 <configuration>
+                    <check/>
                     <format>xml</format>
                     <maxmem>256m</maxmem>
                     <!-- aggregated reports for multi-module projects -->
@@ -222,49 +181,5 @@
 
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>integration-tests</id>
-            <activation>
-                <property>
-                    <name>!skipITs</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-invoker-plugin</artifactId>
-                        <version>2.0.0</version>
-                        <executions>
-                            <execution>
-                                <id>it-install</id>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>it-run</id>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <goals>
-                                        <goal>clean</goal>
-                                        <goal>install</goal>
-                                        <goal>test</goal>
-                                    </goals>
-                                    <properties>
-                                        <it.project.version>${project.version}</it.project.version>
-                                    </properties>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 
 </project>

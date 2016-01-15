@@ -12,39 +12,11 @@
     <packaging>jar</packaging>
 
     <name>FluentLenium Cucumber JVM extension</name>
-    <description>Cucumber JVM Extension for FluentLenium
-    </description>
+    <description>Cucumber JVM Extension for FluentLenium</description>
 
-    <licenses>
-        <license>
-            <name>Apache 2</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-            <comments>A business-friendly OSS license</comments>
-        </license>
-    </licenses>
-
-    <organization>
-        <name>AConsulting</name>
-        <url>http://www.java-freelance.fr</url>
-    </organization>
     <properties>
         <cucumber.version>1.2.2</cucumber.version>
     </properties>
-
-    <developers>
-        <developer>
-            <id>Mlemee</id>
-            <name>Mathilde Lemee</name>
-            <email>mathilde.lemee@gmail.com</email>
-            <url>http://www.fluentlenium.org</url>
-            <organization>AConsulting</organization>
-            <organizationUrl>http://www.java-freelance.fr</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-        </developer>
-    </developers>
 
     <dependencies>
         <dependency>
