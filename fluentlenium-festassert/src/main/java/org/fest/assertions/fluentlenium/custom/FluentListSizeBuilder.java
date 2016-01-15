@@ -1,5 +1,9 @@
 package org.fest.assertions.fluentlenium.custom;
 
+/**
+ * @deprecated fest-assert has not been maintained since 2013. This module will be removed from FluentLenium in a next future. Use fluentlenium-assertj instead.
+ */
+@Deprecated
 public class FluentListSizeBuilder {
 
     private int actualSize;

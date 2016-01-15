@@ -4,6 +4,10 @@ import org.fest.assertions.GenericAssert;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.Dimension;
 
+/**
+ * @deprecated fest-assert has not been maintained since 2013. This module will be removed from FluentLenium in a next future. Use fluentlenium-assertj instead.
+ */
+@Deprecated
 public class FluentWebElementAssert extends GenericAssert<FluentWebElementAssert, FluentWebElement> {
 
 

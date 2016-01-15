@@ -7,6 +7,10 @@ import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 
+/**
+ * @deprecated fest-assert has not been maintained since 2013. This module will be removed from FluentLenium in a next future. Use fluentlenium-assertj instead.
+ */
+@Deprecated
 public final class FluentLeniumAssertions {
 
     private FluentLeniumAssertions() {

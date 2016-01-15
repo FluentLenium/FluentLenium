@@ -5,6 +5,10 @@ import org.fluentlenium.core.domain.FluentList;
 
 import java.util.List;
 
+/**
+ * @deprecated fest-assert has not been maintained since 2013. This module will be removed from FluentLenium in a next future. Use fluentlenium-assertj instead.
+ */
+@Deprecated
 public class FluentListAssert extends GenericAssert<FluentListAssert, FluentList> {
     public FluentListAssert(FluentList<?> actual) {
         super(FluentListAssert.class, actual);
