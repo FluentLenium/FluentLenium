@@ -17,6 +17,7 @@
         <module>fluentlenium-assertj</module>
         <module>fluentlenium-testng</module>
         <module>fluentlenium-cucumber</module>
+        <module>fluentlenium-it</module>
     </modules>
 
     <properties>
@@ -232,6 +233,7 @@
 
         </plugins>
     </build>
+
     <profiles>
         <profile>
             <id>integration-tests</id>

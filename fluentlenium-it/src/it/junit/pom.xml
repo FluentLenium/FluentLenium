@@ -4,13 +4,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.fluentlenium.it</groupId>
-    <artifactId>testng</artifactId>
+    <artifactId>junit</artifactId>
     <version>testing</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>testng-common</module>
-        <module>testng-default</module>
+        <module>junit-default</module>
+        <module>junit-common</module>
+        <module>junit-parallel-classes</module>
+        <module>junit-parallel-methods</module>
+        <module>junit-parallel-all</module>
     </modules>
 
     <dependencyManagement>
@@ -27,18 +30,18 @@
             </dependency>
             <dependency>
                 <groupId>org.fluentlenium.it</groupId>
-                <artifactId>testng-common</artifactId>
+                <artifactId>junit-common</artifactId>
                 <version>testing</version>
             </dependency>
             <dependency>
-                <groupId>org.fluentlenium</groupId>
-                <artifactId>fluentlenium-testng</artifactId>
-                <version>${it.project.version}</version>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
             </dependency>
             <dependency>
-                <groupId>org.testng</groupId>
-                <artifactId>testng</artifactId>
-                <version>6.8.17</version>
+                <groupId>xml-apis</groupId>
+                <artifactId>xml-apis</artifactId>
+                <version>1.4.01</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

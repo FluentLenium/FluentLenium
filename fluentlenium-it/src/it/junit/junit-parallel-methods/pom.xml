@@ -9,7 +9,7 @@
         <version>testing</version>
     </parent>
 
-    <artifactId>junit-parallel-classes</artifactId>
+    <artifactId>junit-parallel-methods</artifactId>
 
     <dependencies>
         <dependency>
@@ -25,6 +25,11 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -48,7 +53,7 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <parallel>classes</parallel>
+                    <parallel>methods</parallel>
                     <threadCount>4</threadCount>
                     <forkCount>8</forkCount>
                     <reuseForks>true</reuseForks>
