@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
 
     <artifactId>fluentlenium-it</artifactId>
-    <description>FluentLenium Integration Tests</description>
+    <name>FluentLenium Integration Tests</name>
 
     <build>
         <plugins>
