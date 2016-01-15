@@ -11,6 +11,9 @@
     <modules>
         <module>testng-common</module>
         <module>testng-default</module>
+        <module>testng-parallel-classes</module>
+        <module>testng-parallel-methods</module>
+        <module>testng-parallel-all</module>
     </modules>
 
     <dependencyManagement>
