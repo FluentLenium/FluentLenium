@@ -6,11 +6,11 @@
 
     <parent>
         <groupId>org.fluentlenium.it</groupId>
-        <artifactId>junit</artifactId>
+        <artifactId>testng</artifactId>
         <version>testing</version>
     </parent>
 
-    <artifactId>junit-common</artifactId>
+    <artifactId>testng-common</artifactId>
 
     <dependencies>
         <dependency>
@@ -18,9 +18,12 @@
             <artifactId>fluentlenium-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.fluentlenium</groupId>
+            <artifactId>fluentlenium-testng</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
         </dependency>
     </dependencies>
-
 </project>

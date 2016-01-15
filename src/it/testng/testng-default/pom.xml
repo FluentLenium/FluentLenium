@@ -6,20 +6,32 @@
 
     <parent>
         <groupId>org.fluentlenium.it</groupId>
-        <artifactId>junit</artifactId>
+        <artifactId>testng</artifactId>
         <version>testing</version>
     </parent>
 
-    <artifactId>junit-common</artifactId>
+    <artifactId>testng-default</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-core</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.fluentlenium</groupId>
+            <artifactId>fluentlenium-assertj</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.fluentlenium</groupId>
+            <artifactId>fluentlenium-testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
