@@ -631,7 +631,7 @@ You can of course specify a path and a name using:
 takeScreenShot(pathAndfileName);
 ```
 
-## Isolate Tests
+## Isolated Tests
 If you want to test concurrency or if you need for any reason to not use the mechanism of extension of FluentLenium, you can also, instead of extending FluentTest, instantiate your fluent test object directly.
 ```java
 = new IsolatedTest().goTo(DEFAULT_URL).
