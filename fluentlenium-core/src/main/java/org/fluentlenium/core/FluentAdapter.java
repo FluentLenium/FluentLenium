@@ -1,6 +1,6 @@
 package org.fluentlenium.core;
 
-import org.fluentlenium.core.exception.ConstructionException;
+import org.fluentlenium.core.page.PageInitializerException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -18,9 +18,9 @@ public class FluentAdapter extends Fluent {
         try {
             pageInitializer.initContainer(this);
         } catch (ClassNotFoundException e) {
-            throw new ConstructionException("Class not found", e);
+            throw new PageInitializerException("Class not found", e);
         } catch (IllegalAccessException e) {
-            throw new ConstructionException("IllegalAccessException", e);
+            throw new PageInitializerException("IllegalAccessException", e);
         }
     }
 

@@ -3,7 +3,7 @@ package org.fluentlenium.integration;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.exception.ConstructionException;
+import org.fluentlenium.core.page.PageInitializerException;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Rule;
 import org.junit.Test;
@@ -44,7 +44,7 @@ public class PageInPageTest extends LocalFluentCase {
 
     @Test
     public void pages_should_throw_an_exception_when_constructor_with_params_not_found() {
-        expectedException.expect(ConstructionException.class);
+        expectedException.expect(PageInitializerException.class);
         expectedException.expectMessage("You provided the wrong arguments to the createPage method, if you just want to use a page with a default constructor, use @Page or createPage(SubTestPageWithParameter.class)");
         createPage(SubTestPageWithParameter.class, "buttonId", "unkownConstructorField");
     }

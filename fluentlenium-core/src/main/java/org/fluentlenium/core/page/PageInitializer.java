@@ -10,7 +10,6 @@ import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.exception.ConstructionException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
@@ -60,9 +59,9 @@ public class PageInitializer {
         try {
             initContainer(container);
         } catch (ClassNotFoundException e) {
-            throw new ConstructionException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
+            throw new PageInitializerException("Class " + (cls != null ? cls.getName() : " null") + "not found", e);
         } catch (IllegalAccessException e) {
-            throw new ConstructionException("IllegalAccessException on class " + (cls != null ? cls.getName() : " null"), e);
+            throw new PageInitializerException("IllegalAccessException on class " + (cls != null ? cls.getName() : " null"), e);
         }
         return container;
     }
@@ -119,13 +118,13 @@ public class PageInitializer {
             initClass(page, params);
             return page;
         } catch (IllegalAccessException e) {
-            throw new ConstructionException("IllegalAccessException on class " + (cls != null ? cls.getName() : " null"), e);
+            throw new PageInitializerException("IllegalAccessException on class " + (cls != null ? cls.getName() : " null"), e);
         } catch (NoSuchMethodException e) {
-            throw new ConstructionException("No constructor found on class " + (cls != null ? cls.getName() : " null"), e);
+            throw new PageInitializerException("No constructor found on class " + (cls != null ? cls.getName() : " null"), e);
         } catch (InstantiationException e) {
-            throw new ConstructionException("Unable to instantiate " + (cls != null ? cls.getName() : " null"), e);
+            throw new PageInitializerException("Unable to instantiate " + (cls != null ? cls.getName() : " null"), e);
         } catch (InvocationTargetException e) {
-            throw new ConstructionException("Cannot invoke method setDriver on " + (cls != null ? cls.getName() : " null"), e);
+            throw new PageInitializerException("Cannot invoke method setDriver on " + (cls != null ? cls.getName() : " null"), e);
         }
     }
 
@@ -137,11 +136,11 @@ public class PageInitializer {
 
             return page;
         } catch (IllegalAccessException e) {
-            throw new ConstructionException("IllegalAccessException on class " + page.getClass().getName(), e);
+            throw new PageInitializerException("IllegalAccessException on class " + page.getClass().getName(), e);
         } catch (NoSuchMethodException e) {
-            throw new ConstructionException("No constructor found on class " + page.getClass().getName(), e);
+            throw new PageInitializerException("No constructor found on class " + page.getClass().getName(), e);
         } catch (InvocationTargetException e) {
-            throw new ConstructionException("Cannot invoke method setDriver on " + page.getClass().getName(), e);
+            throw new PageInitializerException("Cannot invoke method setDriver on " + page.getClass().getName(), e);
         }
     }
 
@@ -191,7 +190,7 @@ public class PageInitializer {
             return page;
         } catch (NoSuchMethodException ex) {
             if (params.length != 0) {
-                throw new ConstructionException(
+                throw new PageInitializerException(
                         "You provided the wrong arguments to the createPage method, " +
                                 "if you just want to use a page with a default constructor, use @Page or createPage(" + cls.getSimpleName() + ".class)", ex);
             } else {
