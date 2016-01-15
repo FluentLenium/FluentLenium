@@ -139,7 +139,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -183,6 +184,8 @@ pom.xml.versionsBackup
 pom.xml.next
 release.properties
 dependency-reduced-pom.xml
+interpolated-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+build.log
 

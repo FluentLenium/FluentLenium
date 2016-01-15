@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.fluentlenium.it</groupId>
+    <artifactId>testng</artifactId>
+    <version>testing</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>testng-common</module>
+        <module>testng-default</module>
+        <module>testng-parallel-classes</module>
+        <module>testng-parallel-methods</module>
+        <module>testng-parallel-all</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.fluentlenium</groupId>
+                <artifactId>fluentlenium-core</artifactId>
+                <version>${it.project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fluentlenium</groupId>
+                <artifactId>fluentlenium-assertj</artifactId>
+                <version>${it.project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fluentlenium.it</groupId>
+                <artifactId>testng-common</artifactId>
+                <version>testing</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fluentlenium</groupId>
+                <artifactId>fluentlenium-testng</artifactId>
+                <version>${it.project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.8.17</version>
+            </dependency>
+            <dependency>
+                <groupId>xml-apis</groupId>
+                <artifactId>xml-apis</artifactId>
+                <version>1.4.01</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>integration-tests-dev</id>
+            <properties>
+                <it.project.version>1.0.0-SNAPSHOT</it.project.version>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
