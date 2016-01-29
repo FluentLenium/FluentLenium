@@ -621,15 +621,24 @@ You can either execute javascript with arguments, with async `executeAsyncScript
 executeScript("change();", 12L).getStringResult();
 ```
 
-## Taking Snapshots
-You can take a snapshot of the browser
+## Taking ScreenShots and HTML Dumps
+You can take a ScreenShot and a HTML Dump of the browser.
 ```java
 takeScreenShot();
+takeHtmlDump();
 ```
 The file will be named using the current timestamp.
 You can of course specify a path and a name using:
 ```java
 takeScreenShot(pathAndfileName);
+takeHtmlDump(pathAndfileName);
+```
+Screenshot and HTML Dump can be automatically performed on test fail.
+```java
+setScreenShotPath(path);
+setHtmlDumpPath(path);
+setScreenShotMode(TriggerMode.ON_FAIL);
+setHtmlDumpMode(TriggerMode.ON_FAIL);
 ```
 
 ## Isolated Tests

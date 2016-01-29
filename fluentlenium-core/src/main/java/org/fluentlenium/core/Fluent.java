@@ -1,6 +1,17 @@
 package org.fluentlenium.core;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URI;
+import java.nio.file.Paths;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.fluentlenium.core.action.FillConstructor;
 import org.fluentlenium.core.action.FillSelectConstructor;
 import org.fluentlenium.core.action.FluentDefaultActions;
@@ -13,25 +24,29 @@ import org.fluentlenium.core.page.PageInitializer;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
 import org.fluentlenium.core.wait.FluentWait;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Util Class which offers some shortcut to webdriver methods
  */
 public abstract class Fluent implements SearchActions<FluentWebElement> {
+    protected enum TriggerMode {ON_FAIL, NEVER}
+
     private String baseUrl;
 
     private ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<WebDriver>();
     private ThreadLocal<Search> searchThreadLocal = new ThreadLocal<Search>();
+
+    private String htmlDumpPath;
+    private String screenshotPath;
+
+    protected TriggerMode screenshotMode = TriggerMode.NEVER;
+    protected TriggerMode htmlDumpMode = TriggerMode.NEVER;
 
     private EventsRegistry events = null;
 
@@ -87,14 +102,75 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
         FluentThread.set(this);
     }
 
+
+    public void setScreenshotPath(String path) {
+        this.screenshotPath = path;
+    }
+
+    public void setHtmlDumpPath(String htmlDumpPath) {
+        this.htmlDumpPath = htmlDumpPath;
+    }
+
+    public void setScreenshotMode(TriggerMode mode) {
+        this.screenshotMode = mode;
+    }
+
+    public void setHtmlDumpMode(TriggerMode htmlDumpMode) {
+        this.htmlDumpMode = htmlDumpMode;
+    }
+
+    /**
+     * Take a html dump of the browser DOM. By default the file will be a html named by the current
+     * timestamp.
+     *
+     * @return fluent object
+     */
+    public Fluent takeHtmlDump() {
+        return takeHtmlDump(new Date().getTime() + ".html");
+    }
+
+    /**
+     * Take a html dump of the browser DOM into a file given by the fileName param.
+     *
+     * @param fileName
+     *            file name for html dump
+     * @return fluent object
+     */
+    public Fluent takeHtmlDump(String fileName) {
+        try {
+            String html;
+            synchronized (Fluent.class) {
+                html = this.findFirst("html").html();
+            }
+            File destFile;
+            if (htmlDumpPath != null) {
+                destFile = Paths.get(htmlDumpPath, fileName).toFile();
+            } else {
+                destFile = new File(fileName);
+            }
+            FileUtils.write(destFile, html, "UTF-8");
+        } catch (Exception e) {
+            File destFile = new File(fileName);
+            try {
+                PrintWriter printWriter = new PrintWriter(destFile, "UTF-8");
+                printWriter.write("Can't dump HTML");
+                printWriter.println();
+                e.printStackTrace(printWriter);
+                IOUtils.closeQuietly(printWriter);
+            } catch (IOException e1) {
+                throw new RuntimeException("error when dumping HTML", e);
+            }
+        }
+        return this;
+    }
+
     /**
      * Take a snapshot of the browser. By default the file will be a png named by the current timestamp.
      *
      * @return fluent object
      */
     public Fluent takeScreenShot() {
-        takeScreenShot(new Date().getTime() + ".png");
-        return this;
+        return takeScreenShot(new Date().getTime() + ".png");
     }
 
     /**
@@ -109,12 +185,18 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
         }
         File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         try {
-            File destFile = new File(fileName);
+            File destFile;
+            if (screenshotPath != null) {
+                destFile = Paths.get(screenshotPath, fileName).toFile();
+            } else {
+                destFile = new File(fileName);
+            }
             FileUtils.copyFile(scrFile, destFile);
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("error when taking the snapshot", e);
         }
+        FileUtils.deleteQuietly(scrFile);
         return this;
     }
 
