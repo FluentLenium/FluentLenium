@@ -189,3 +189,5 @@ buildNumber.properties
 .mvn/timing.properties
 build.log
 
+*.exec
+

@@ -4,6 +4,7 @@ import org.fluentlenium.adapter.util.SharedDriverHelper;
 import org.fluentlenium.adapter.util.ShutdownHook;
 import org.fluentlenium.core.FluentAdapter;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -51,7 +52,18 @@ public abstract class FluentTestNg extends FluentAdapter {
     }
 
     @AfterMethod
-    public void afterMethod() {
+    public void afterMethod(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            if (screenshotMode == TriggerMode.ON_FAIL) {
+                takeScreenShot(result.getTestClass().getName() + "_" +
+                        result.getTestName() + ".png");
+            }
+            if (htmlDumpMode == TriggerMode.ON_FAIL) {
+                takeHtmlDump(result.getTestClass().getName() + "_"
+                        + result.getTestName() + ".html");
+            }
+        }
+
         cleanUp();
         if (SharedDriverHelper.isSharedDriverPerMethod(this.getClass()) || SharedDriverHelper.isDefaultSharedDriver(this.getClass())) {
             quit();
