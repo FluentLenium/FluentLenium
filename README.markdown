@@ -655,6 +655,31 @@ If you want to test concurrency or if you need for any reason to not use the mec
 
 ### Driver
 If you need to change your driver, just override the `getDefaultDriver` method in your test. You can use every driver.
+For instance, to run your tests on [BrowserStack](https://browserstack.com)
+
+```java
+  @Override
+  public WebDriver getDefaultDriver() {
+    String HUB_URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@hub.browserstack.com/wd/hub";
+
+    DesiredCapabilities caps = new DesiredCapabilities();
+    caps.setCapability("os", "OS X");
+    caps.setCapability("os_version", "El Capitan");
+    caps.setCapability("browser", "firefox");
+    caps.setCapability("browser_version", "44");
+    caps.setCapability("build", "Sample FluentLenium Tests");
+    caps.setCapability("browserstack.debug", "true");
+
+    URL hubURL = null;
+    try {
+      hubURL = new URL(HUB_URL);
+    } catch(Exception e) {
+      System.out.println("Please provide proper crendentials. Error " + e);
+    }
+
+    return new RemoteWebDriver(hubURL, caps);
+  }
+```
 
 ### Base Url
 If you want to defined a default base url, just override the `getDefaultBaseUrl` method in your test. Every pages create with @Page will also use this variable.
