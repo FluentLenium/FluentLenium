@@ -17,7 +17,8 @@ import java.util.concurrent.TimeUnit;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class FluentLeniumWaitTest extends LocalFluentCase {
     @Before
@@ -29,6 +30,11 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test
     public void checkAwaitIsPresent() {
         await().atMost(1, NANOSECONDS).until(".small").isPresent();
+    }
+    
+    @Test
+    public void checkAwaitIsClickable() throws Exception {
+        await().atMost(1, NANOSECONDS).until(".small").isClickable();
     }
 
     @Test
