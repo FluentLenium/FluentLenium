@@ -8,6 +8,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterType;
 import org.fluentlenium.core.search.Search;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -260,6 +261,28 @@ public class FluentWaitMatcher {
             }
         };
         until(wait, isEnabled, filters, isEnabledMessage(selector));
+        return FluentThread.get();
+    }
+    
+    /**
+     * Check that the elements are all clickable
+     */
+    public Fluent isClickable() {
+        Predicate<Fluent> isClickable = new com.google.common.base.Predicate<Fluent>() {
+
+            @Override
+            public boolean apply(Fluent input) {
+                for (FluentWebElement element: find()) {
+                    if (ExpectedConditions.elementToBeClickable(element.getElement())
+                            .apply(input.getDriver()) == null) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        };
+        
+        until(wait, isClickable, filters, isClickableMessage(selector));
         return FluentThread.get();
     }
 

@@ -21,6 +21,7 @@ public class WaitMessage {
     private static final String IS_NOT_LOADED = " is not loaded";
     private static final String IS_NOT_DISPLAY = " is not displayed";
     private static final String IS_NOT_ENABLED = " is not enabled";
+    private static final String IS_NOT_CLICKABLE = " is not clickable";
 
     static final String hasSizeMessage(String selector, int size) {
         return SELECTOR + selector + HAS_NOT_THE_SIZE + size + POINT;
@@ -48,6 +49,10 @@ public class WaitMessage {
 
     static final String isEnabledMessage(String selector) {
         return SELECTOR + selector + IS_NOT_ENABLED;
+    }
+
+    static final String isClickableMessage(String selector) {
+        return SELECTOR + selector + IS_NOT_CLICKABLE;
     }
 
     static final String hasTextMessage(String selector, String value) {
