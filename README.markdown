@@ -193,7 +193,7 @@ If you need to access to the name, the id, the value, the tagname or the visible
 
 ```java
 findFirst(myCssSelector).getName()
-findFirst(myCssSelector).getId()
+findFirst(By.cssSelector(".foo")).getId()
 findFirst(myCssSelector).getValue()
 findFirst(myCssSelector).getTagName()
 findFirst(myCssSelector).getText()
@@ -214,7 +214,7 @@ findFirst(myCssSelector).getAttribute("myCustomAttribute")
 You can also access a list of all the names, visible text, and ids of a list of elements:
 ```java
 find(myCssSelector).getNames()
-find(myCssSelector).getIds()
+find(By.id("foo")).getIds()
 find(myCssSelector).getValues()
 find(myCssSelector).getAttributes("myCustomAttribute")
 find(myCssSelector).getTexts()
