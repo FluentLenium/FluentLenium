@@ -284,6 +284,20 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
+     * Find descendants elements (children, grandchildren, etc.).
+     *
+     * @return list of Fluent web elements
+     */
+    public FluentList<FluentWebElement> findDescendants() {
+        List<WebElement> descendants = this.webElement.findElements(By.xpath("descendant::*"));
+        List<FluentWebElement> elements = new ArrayList<FluentWebElement>();
+        for (WebElement ancestor : descendants) {
+            elements.add(new FluentWebElement(ancestor));
+        }
+        return new FluentListImpl<>(elements);
+    }
+
+    /**
      * return the innerHTML content of the web element
      * does not work with HTMLUnit
      *
