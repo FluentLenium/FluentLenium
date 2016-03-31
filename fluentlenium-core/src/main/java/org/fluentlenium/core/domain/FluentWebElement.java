@@ -298,6 +298,62 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
+     * Find following elements.
+     *
+     * @return list of Fluent web elements
+     */
+    public FluentList<FluentWebElement> findFollowings() {
+        List<WebElement> descendants = this.webElement.findElements(By.xpath("following::*"));
+        List<FluentWebElement> elements = new ArrayList<FluentWebElement>();
+        for (WebElement ancestor : descendants) {
+            elements.add(new FluentWebElement(ancestor));
+        }
+        return new FluentListImpl<>(elements);
+    }
+
+    /**
+     * Find following sibling elements.
+     *
+     * @return list of Fluent web elements
+     */
+    public FluentList<FluentWebElement> findFollowingSiblings() {
+        List<WebElement> descendants = this.webElement.findElements(By.xpath("following-sibling::*"));
+        List<FluentWebElement> elements = new ArrayList<FluentWebElement>();
+        for (WebElement ancestor : descendants) {
+            elements.add(new FluentWebElement(ancestor));
+        }
+        return new FluentListImpl<>(elements);
+    }
+
+    /**
+     * Find preceding elements. (Ancestors are NOT included)
+     *
+     * @return list of Fluent web elements
+     */
+    public FluentList<FluentWebElement> findPrecedings() {
+        List<WebElement> descendants = this.webElement.findElements(By.xpath("preceding::*"));
+        List<FluentWebElement> elements = new ArrayList<FluentWebElement>();
+        for (WebElement ancestor : descendants) {
+            elements.add(new FluentWebElement(ancestor));
+        }
+        return new FluentListImpl<>(elements);
+    }
+
+    /**
+     * Find preceding sibling elements.
+     *
+     * @return list of Fluent web elements
+     */
+    public FluentList<FluentWebElement> findPrecedingsSiblings() {
+        List<WebElement> descendants = this.webElement.findElements(By.xpath("preceding-sibling::*"));
+        List<FluentWebElement> elements = new ArrayList<FluentWebElement>();
+        for (WebElement ancestor : descendants) {
+            elements.add(new FluentWebElement(ancestor));
+        }
+        return new FluentListImpl<>(elements);
+    }
+
+    /**
      * return the innerHTML content of the web element
      * does not work with HTMLUnit
      *

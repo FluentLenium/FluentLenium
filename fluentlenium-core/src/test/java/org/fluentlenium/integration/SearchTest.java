@@ -6,6 +6,8 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 
+import java.util.Collections;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SearchTest extends LocalFluentCase {
@@ -73,5 +75,51 @@ public class SearchTest extends LocalFluentCase {
         FluentWebElement element = findFirst("html");
         FluentList<FluentWebElement> descendants = element.findDescendants();
         assertThat(descendants.size()).isGreaterThan(10);
+    }
+
+    @Test
+    public void checkSearchPrecedingWorks() {
+        goTo(DEFAULT_URL);
+        FluentWebElement element = findFirst("#select > option[value='value-2']");
+        FluentList<FluentWebElement> precedings = element.findPrecedings();
+        assertThat(precedings.size()).isGreaterThan(2);
+
+        Collections.reverse(precedings);
+
+        assertThat(precedings.get(0).getTagName()).isEqualTo("option");
+        assertThat(precedings.get(1).getTagName()).isEqualTo("span");
+    }
+
+    @Test
+    public void checkSearchPrecedingSiblingWorks() {
+        goTo(DEFAULT_URL);
+        FluentWebElement element = findFirst("#select > option[value='value-2']");
+        FluentList<FluentWebElement> precedings = element.findPrecedingsSiblings();
+        assertThat(precedings).hasSize(1);
+
+        assertThat(precedings.get(0).getTagName()).isEqualTo("option");
+        assertThat(precedings.get(0).getAttribute("value")).isEqualTo("value-1");
+    }
+
+    @Test
+    public void checkSearchFollowingWorks() {
+        goTo(DEFAULT_URL);
+        FluentWebElement element = findFirst("#select > option[value='value-2']");
+        FluentList<FluentWebElement> followings = element.findFollowings();
+        assertThat(followings.size()).isGreaterThan(2);
+
+        assertThat(followings.get(0).getTagName()).isEqualTo("option");
+        assertThat(followings.get(1).getTagName()).isEqualTo("input");
+    }
+
+    @Test
+    public void checkSearchFollowingSiblingWorks() {
+        goTo(DEFAULT_URL);
+        FluentWebElement element = findFirst("#select > option[value='value-2']");
+        FluentList<FluentWebElement> followings = element.findFollowingSiblings();
+        assertThat(followings).hasSize(1);
+
+        assertThat(followings.get(0).getTagName()).isEqualTo("option");
+        assertThat(followings.get(0).getAttribute("value")).isEqualTo("value-3");
     }
 }
