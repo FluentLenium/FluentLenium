@@ -13,6 +13,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
@@ -264,6 +267,20 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
         WebElement parentRaw = this.webElement.findElement(By.xpath("parent::*"));
         FluentWebElement parent = new FluentWebElement(parentRaw);
         return parent;
+    }
+
+    /**
+     * Find ancestor elements.
+     *
+     * @return list of Fluent web elements
+     */
+    public FluentList<FluentWebElement> findAncestors() {
+        List<WebElement> ancestorsRaw = this.webElement.findElements(By.xpath("ancestor::*"));
+        List<FluentWebElement> elements = new ArrayList<FluentWebElement>();
+        for (WebElement ancestor : ancestorsRaw) {
+            elements.add(new FluentWebElement(ancestor));
+        }
+        return new FluentListImpl<>(elements);
     }
 
     /**

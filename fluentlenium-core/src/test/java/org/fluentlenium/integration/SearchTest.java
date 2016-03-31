@@ -53,4 +53,17 @@ public class SearchTest extends LocalFluentCase {
         FluentWebElement element = findFirst(".parent > .child");
         assertThat(element.findParent().getAttribute("class")).isEqualTo("parent");
     }
+
+    @Test
+    public void checkSearchAncestorsWorks() {
+        goTo(DEFAULT_URL);
+        FluentWebElement element = findFirst("html > body > .parent > .child");
+        FluentList<FluentWebElement> ancestors = element.findAncestors();
+        assertThat(ancestors).hasSize(3);
+
+        assertThat(ancestors.get(0).getTagName()).isEqualTo("html");
+        assertThat(ancestors.get(1).getTagName()).isEqualTo("body");
+        assertThat(ancestors.get(2).getTagName()).isEqualTo("span");
+        assertThat(ancestors.get(2).getAttribute("class")).isEqualTo("parent");
+    }
 }
