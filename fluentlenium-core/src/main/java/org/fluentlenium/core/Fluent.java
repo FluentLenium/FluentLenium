@@ -1,15 +1,5 @@
 package org.fluentlenium.core;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URI;
-import java.nio.file.Paths;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.fluentlenium.core.action.FillConstructor;
@@ -24,12 +14,23 @@ import org.fluentlenium.core.page.PageInitializer;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
 import org.fluentlenium.core.wait.FluentWait;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URI;
+import java.nio.file.Paths;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Util Class which offers some shortcut to webdriver methods
@@ -102,7 +103,6 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
         FluentThread.set(this);
     }
 
-
     public void setScreenshotPath(String path) {
         this.screenshotPath = path;
     }
@@ -132,8 +132,7 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     /**
      * Take a html dump of the browser DOM into a file given by the fileName param.
      *
-     * @param fileName
-     *            file name for html dump
+     * @param fileName file name for html dump
      * @return fluent object
      */
     public Fluent takeHtmlDump(String fileName) {
@@ -219,8 +218,8 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
 
     public EventsRegistry events() {
         if (events == null) {
-            throw new IllegalStateException("An EventFiringWebDriver instance is required to use events. " +
-                    "Please override getDefaultDriver() to provide it.");
+            throw new IllegalStateException("An EventFiringWebDriver instance is required to use events. "
+                    + "Please override getDefaultDriver() to provide it.");
         }
         return events;
     }
@@ -246,7 +245,6 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     public FluentWait await() {
         return new FluentWait(this, getSearch());
     }
-
 
     /**
      * Return the title of the page
@@ -299,7 +297,6 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     public String pageSource() {
         return getDriver().getPageSource();
     }
-
 
     public <P extends FluentPage> P goTo(P page) {
         if (page == null) {
@@ -368,7 +365,6 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
         return new FluentJavascript(this.getDriver(), true, script, args);
     }
 
-
     /**
      * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
      *
@@ -391,6 +387,17 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     }
 
     /**
+     * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
+     *
+     * @param locator elements locator
+     * @param filters filters set
+     * @return fluent list of fluent web elements
+     */
+    public FluentList<FluentWebElement> $(By locator, final Filter... filters) {
+        return getSearch().find(locator, filters);
+    }
+
+    /**
      * Central methods a find element on the page, the number indicate the index of the desired element on the list.
      * Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
      *
@@ -401,6 +408,18 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      */
     public FluentWebElement $(String name, Integer number, final Filter... filters) {
         return getSearch().find(name, number, filters);
+    }
+
+    /**
+     * Return the elements at the number position into the the lists corresponding to the cssSelector with it filters
+     *
+     * @param locator elements locator
+     * @param number  index of element in the list
+     * @param filters filters set
+     * @return fluent web element
+     */
+    public FluentWebElement $(By locator, Integer number, final Filter... filters) {
+        return getSearch().find(locator, number, filters);
     }
 
     /**
@@ -427,6 +446,17 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     }
 
     /**
+     * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
+     *
+     * @param locator elements locator
+     * @param filters filters set
+     * @return fluent list of fluent web elements
+     */
+    public FluentList<FluentWebElement> find(By locator, final Filter... filters) {
+        return getSearch().find(locator, filters);
+    }
+
+    /**
      * Return the list filtered by the specified filters.
      *
      * @param filters set of filters in the current context
@@ -446,6 +476,18 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      */
     public FluentWebElement find(String name, Integer number, final Filter... filters) {
         return getSearch().find(name, number, filters);
+    }
+
+    /**
+     * Return the elements at the number position into the the lists corresponding to the cssSelector with it filters
+     *
+     * @param locator elements locator
+     * @param number  index of element in the list
+     * @param filters filters set
+     * @return fluent web element
+     */
+    public FluentWebElement find(By locator, Integer number, final Filter... filters) {
+        return getSearch().find(locator, number, filters);
     }
 
     /**
@@ -478,6 +520,18 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      */
     public FluentWebElement findFirst(final Filter... filters) {
         return getSearch().findFirst(filters);
+    }
+
+    /**
+     * Return the first elements corresponding to the name and the filters
+     *
+     * @param locator element locator
+     * @param filters filters set
+     * @return fluent web element
+     */
+    @Override
+    public FluentWebElement findFirst(By locator, final Filter... filters) {
+        return getSearch().findFirst(locator, filters);
     }
 
     /**
@@ -736,7 +790,6 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
         this.switchTo(null);
         return this;
     }
-
 
     /**
      * Switch to the default element

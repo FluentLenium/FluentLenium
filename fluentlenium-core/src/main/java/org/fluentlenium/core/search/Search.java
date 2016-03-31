@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-
 public class Search implements SearchActions<FluentWebElement> {
     private final SearchContext searchContext;
 
@@ -54,7 +53,16 @@ public class Search implements SearchActions<FluentWebElement> {
     }
 
     private List<FluentWebElement> select(String cssSelector) {
-        return Lists.transform(searchContext.findElements(By.cssSelector(cssSelector)), new Function<WebElement, FluentWebElement>() {
+        return Lists.transform(searchContext.findElements(By.cssSelector(cssSelector)),
+                new Function<WebElement, FluentWebElement>() {
+                    public FluentWebElement apply(WebElement webElement) {
+                        return new FluentWebElement((webElement));
+                    }
+                });
+    }
+
+    private List<FluentWebElement> select(By locator) {
+        return Lists.transform(searchContext.findElements(locator), new Function<WebElement, FluentWebElement>() {
             public FluentWebElement apply(WebElement webElement) {
                 return new FluentWebElement((webElement));
             }
@@ -87,7 +95,9 @@ public class Search implements SearchActions<FluentWebElement> {
     public FluentWebElement find(String name, Integer number, final Filter... filters) {
         List<FluentWebElement> listFiltered = find(name, filters);
         if (number >= listFiltered.size()) {
-            throw new NoSuchElementException("No such element with position: " + number + ". Number of elements available: " + listFiltered.size() + ". Selector: " + name + ".");
+            throw new NoSuchElementException(
+                    "No such element with position: " + number + ". Number of elements available: " + listFiltered
+                            .size() + ". Selector: " + name + ".");
         }
         return listFiltered.get(number);
     }
@@ -105,6 +115,43 @@ public class Search implements SearchActions<FluentWebElement> {
             throw new IllegalArgumentException("cssSelector or filter is required");
         }
         return find("*", number, filters);
+    }
+
+    /**
+     * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
+     *
+     * @param locator elements locator
+     * @param filters filters set
+     * @return fluent list of fluent web elements
+     */
+    @Override
+    public FluentList<FluentWebElement> find(By locator, final Filter... filters) {
+        List<FluentWebElement> preFiltered = select(locator);
+        Collection<FluentWebElement> postFiltered = preFiltered;
+        for (Filter selector : filters) {
+            postFiltered = Collections2.filter(postFiltered, new FilterPredicate(selector));
+        }
+
+        return new FluentListImpl<>(postFiltered);
+    }
+
+    /**
+     * Return the elements at the number position into the the lists corresponding to the cssSelector with it filters
+     *
+     * @param locator elements locator
+     * @param number  index of element in the list
+     * @param filters filters set
+     * @return fluent web element
+     */
+    @Override
+    public FluentWebElement find(By locator, Integer number, final Filter... filters) {
+        List<FluentWebElement> listFiltered = find(locator, filters);
+        if (number >= listFiltered.size()) {
+            throw new NoSuchElementException(
+                    "No such element with position :" + number + ". Number of elements available :" + listFiltered
+                            .size());
+        }
+        return listFiltered.get(number);
     }
 
     /**
@@ -136,5 +183,18 @@ public class Search implements SearchActions<FluentWebElement> {
             throw new IllegalArgumentException("cssSelector or filter is required");
         }
         return findFirst("*", filters);
+    }
+
+    /**
+     * Return the first elements corresponding to the name and the filters
+     *
+     * @param locator element locator
+     * @param filters filters set
+     * @return fluent web element
+     */
+    @Override
+    public FluentWebElement findFirst(By locator, final Filter... filters) {
+        FluentList<FluentWebElement> fluentList = find(locator, filters);
+        return fluentList.first();
     }
 }
