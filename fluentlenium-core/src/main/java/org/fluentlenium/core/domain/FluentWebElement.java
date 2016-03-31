@@ -4,6 +4,7 @@ import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.action.FillConstructor;
 import org.fluentlenium.core.action.FillSelectConstructor;
 import org.fluentlenium.core.action.FluentDefaultActions;
+import org.fluentlenium.core.axes.Axes;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
@@ -18,10 +19,12 @@ import org.openqa.selenium.interactions.Actions;
 public class FluentWebElement implements FluentDefaultActions<FluentWebElement>, SearchActions<FluentWebElement> {
     private final WebElement webElement;
     private final Search search;
+    private final Axes axes;
 
     public FluentWebElement(WebElement webElement) {
         this.webElement = webElement;
         this.search = new Search(webElement);
+        this.axes = new Axes(webElement);
     }
 
     /**
@@ -32,6 +35,15 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     public FluentWebElement click() {
         webElement.click();
         return this;
+    }
+
+    /**
+     * XPath Axes accessor (parent, ancestors, preceding, following, ...).
+     *
+     * @return object to perform XPath Axes transformations.
+     */
+    public Axes axes() {
+        return this.axes;
     }
 
     /**

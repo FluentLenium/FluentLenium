@@ -243,6 +243,17 @@ findFirst(myCssSelector).isEnabled()
 findFirst(myCssSelector).isSelected()
 ```
 
+If you need to retrieve other elements from a selected one, you 
+can use [XPath axes](http://www.w3schools.com/xsl/xpath_axes.asp).
+
+find(myCssSelector()).axes().parent()
+find(myCssSelector()).axes().descendants()
+find(myCssSelector()).axes().ancestors()
+find(myCssSelector()).axes().followings()
+find(myCssSelector()).axes().followingSiblings()
+find(myCssSelector()).axes().precedings()
+find(myCssSelector()).axes().precedingSiblings()
+
 ## Form Actions
 Clicking, filling, submitting and cleaning an element or list of elements is simple and intuitive.
 
