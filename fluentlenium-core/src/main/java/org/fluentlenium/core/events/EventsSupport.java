@@ -72,6 +72,27 @@ public class EventsSupport implements EventListener {
         }
     }
 
+
+    @Override
+    public void beforeNavigateRefresh(WebDriver driver) {
+        for (NavigateListener listener : this.eventsRegistry.beforeNavigateRefresh) {
+            listener.on(driver);
+        }
+        for (NavigateAllListener listener : this.eventsRegistry.beforeNavigate) {
+            listener.on(null, driver, NavigateAllListener.Direction.REFRESH);
+        }
+    }
+
+    @Override
+    public void afterNavigateRefresh(WebDriver driver) {
+        for (NavigateListener listener : this.eventsRegistry.afterNavigateRefresh) {
+            listener.on(driver);
+        }
+        for (NavigateAllListener listener : this.eventsRegistry.afterNavigate) {
+            listener.on(null, driver, NavigateAllListener.Direction.REFRESH);
+        }
+    }
+
     @Override
     public void beforeFindBy(final By by, final FluentWebElement element, final WebDriver driver) {
         for (FindByListener listener : this.eventsRegistry.beforeFindBy) {

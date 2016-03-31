@@ -29,6 +29,10 @@ public class EventsRegistry {
 
     List<NavigateAllListener> afterNavigate = new ArrayList<NavigateAllListener>();
 
+    List<NavigateListener> beforeNavigateRefresh = new ArrayList<>();
+
+    List<NavigateListener> afterNavigateRefresh = new ArrayList<>();
+
     List<FindByListener> beforeFindBy = new ArrayList<FindByListener>();
 
     List<FindByListener> afterFindBy = new ArrayList<FindByListener>();
@@ -104,6 +108,16 @@ public class EventsRegistry {
 
     public EventsRegistry afterNavigate(final NavigateAllListener listener) {
         this.afterNavigate.add(listener);
+        return this;
+    }
+
+    public EventsRegistry beforeNavigateRefresh(final NavigateListener listener) {
+        this.beforeNavigateRefresh.add(listener);
+        return this;
+    }
+
+    public EventsRegistry afterNavigateRefresh(final NavigateListener listener) {
+        this.afterNavigateRefresh.add(listener);
         return this;
     }
 
