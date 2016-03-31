@@ -535,7 +535,6 @@ public class LoginPage extends FluentPage {
 }
 ```
 
-
 If you need to wait for an element to be present, especially when waiting for an ajax call to complete, you can use the @AjaxElement annotation on the fields:
 
 ```java
@@ -546,6 +545,36 @@ public class LoginPage extends FluentPage {
 ```
 You can set the timeout in seconds for the page to throw an error if not found with `@AjaxElement(timeountOnSeconds=3)` if you want to wait 3 seconds.
 By default, the timeout is set to one second.
+
+## Extend FluentWebElement to model components
+
+You can implement reusable components by extending FluentWebElement. Doing so will improve readability of both Page Objects and Tests.
+
+```java
+public class SelectComponent extends FluentWebElement {
+   public FluentWebElement(WebElement element) { // This constructor MUST exist !
+      super(element);
+   }
+   
+   public void doSelect(String selection) {
+      // Implement selection provided by this component.
+   }
+   
+   public String getSelection() {
+      // Return the selected value as text.
+   }
+}
+```
+
+These kind of component can be created automatically by `FluentPage`, 
+or programmatically by calling `as` method of FluentWebElement or FluentList.
+
+```java
+SelectComponent comp = findFirst("#some-select").as(SelectComponent.class);
+
+comp.doSelect("Value to select");
+assertThat(comp.getSelection()).isEquals("Value to select");
+```
 
 
 ## Wait for an Ajax Call

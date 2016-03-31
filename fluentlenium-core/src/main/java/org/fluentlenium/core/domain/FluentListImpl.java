@@ -343,5 +343,16 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     public E findFirst(Filter... filters) {
         return find(0, filters);
     }
+
+    @Override
+    public <T extends FluentWebElement> FluentList<T> as(Class<T> componentClass) {
+        List<T> elements = new ArrayList<>();
+
+        for (E e : this) {
+            elements.add(e.as(componentClass));
+        }
+
+        return new FluentListImpl<>(elements);
+    }
 }
 
