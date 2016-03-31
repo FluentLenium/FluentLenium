@@ -79,6 +79,17 @@
                 <role>developer</role>
             </roles>
         </developer>
+        <developer>
+            <id>Filip</id>
+            <name>Filip Cynarski</name>
+            <email>filip@cynarski.eu</email>
+            <url>https://github.com/filipcynarski</url>
+            <organization>Ocado Technology</organization>
+            <organizationUrl>http://www.ocadotechnology.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <dependencyManagement>

@@ -113,8 +113,8 @@ find(".small", withText("This field is mandatory."))
 You can skip CSS selector argument:
 `find(withId("idOne"))` will return the element whose id attribute is "idOne".
 
-You can use By locator `Selenium object` instead of CSS selector argument:
-`find(By.cssSelector(".header"))` will return the element using `By` locator as a reference - so you can use everything what `By` offering to you.
+You can use `By` locator `Selenium object` instead of CSS selector argument:
+`find(By.cssSelector(".header"))` will return the element using `By` locator as a reference - so you can use everything what `By` object offering to you.
 
 You can also write chained filters:
 `find(".small", withName("foo"), withId("id1"))` will return all the elements matching the 3 criteria.
