@@ -3,6 +3,7 @@ package org.fluentlenium.core.domain;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.fluentlenium.core.filter.Filter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
 import java.util.ArrayList;
@@ -89,7 +90,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         return this;
     }
 
-
     /**
      * {@inheritDoc}
      */
@@ -101,7 +101,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
             }
         }
     }
-
 
     /**
      * {@inheritDoc}
@@ -259,6 +258,18 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
      * {@inheritDoc}
      */
     @Override
+    public FluentList<E> find(By locator, Filter... filters) {
+        List<E> finds = new ArrayList<E>();
+        for (FluentWebElement e : this) {
+            finds.addAll((Collection<E>) e.find(locator, filters));
+        }
+        return new FluentListImpl<E>(finds);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public FluentList<E> find(Filter... filters) {
         List<E> finds = new ArrayList<E>();
         for (FluentWebElement e : this) {
@@ -274,7 +285,23 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     public E find(String name, Integer number, Filter... filters) {
         FluentList<E> fluentList = find(name, filters);
         if (number >= fluentList.size()) {
-            throw new NoSuchElementException("No such element with position: " + number + ". Number of elements available: " + fluentList.size() + ". Selector: " + name + ".");
+            throw new NoSuchElementException(
+                    "No such element with position: " + number + ". Number of elements available: " + fluentList.size()
+                            + ". Selector: " + name + ".");
+        }
+        return fluentList.get(number);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public E find(By locator, Integer number, Filter... filters) {
+        FluentList<E> fluentList = find(locator, filters);
+        if (number >= fluentList.size()) {
+            throw new NoSuchElementException(
+                    "No such element with position: " + number + ". Number of elements available: " + fluentList
+                            .size());
         }
         return fluentList.get(number);
     }
@@ -286,9 +313,19 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     public E find(Integer number, Filter... filters) {
         FluentList<E> fluentList = find(filters);
         if (number >= fluentList.size()) {
-            throw new NoSuchElementException("No such element with position: " + number + ". Number of elements available: " + fluentList.size() + ".");
+            throw new NoSuchElementException(
+                    "No such element with position: " + number + ". Number of elements available: " + fluentList.size()
+                            + ".");
         }
         return fluentList.get(number);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public E findFirst(By locator, Filter... filters) {
+        return find(locator, 0, filters);
     }
 
     /**

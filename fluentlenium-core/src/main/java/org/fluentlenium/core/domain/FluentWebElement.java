@@ -8,6 +8,7 @@ import org.fluentlenium.core.axes.Axes;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
@@ -205,6 +206,17 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find elements into the children with the corresponding filters
      *
+     * @param locator elements locator
+     * @param filters filters set
+     * @return list of Fluent web elements
+     */
+    public FluentList<FluentWebElement> find(By locator, Filter... filters) {
+        return search.find(locator, filters);
+    }
+
+    /**
+     * find elements into the children with the corresponding filters
+     *
      * @param name    name of element
      * @param filters filters set
      * @return list of Fluent web elements
@@ -235,6 +247,17 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
+     * find elements into the children with the corresponding filters at the given position
+     *
+     * @param locator elements locator
+     * @param filters filters set
+     * @return fluent web element
+     */
+    public FluentWebElement find(By locator, Integer number, Filter... filters) {
+        return search.find(locator, number, filters);
+    }
+
+    /**
      * find element in the children with the corresponding filters at the given position
      *
      * @param number  index of element
@@ -254,6 +277,17 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public FluentWebElement findFirst(String name, Filter... filters) {
         return search.findFirst(name, filters);
+    }
+
+    /**
+     * find elements into the children with the corresponding filters at the first position
+     *
+     * @param locator elements locator
+     * @param filters filters set
+     * @return fluent web element
+     */
+    public FluentWebElement findFirst(By locator, Filter... filters) {
+        return search.findFirst(locator, filters);
     }
 
     /**
@@ -291,7 +325,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * Be careful - only the visible elements are filled
      */
     public FillSelectConstructor fillSelect() {
-      return new FillSelectConstructor(this, FluentThread.get().getDriver());
+        return new FillSelectConstructor(this, FluentThread.get().getDriver());
     }
 
     /**
@@ -300,8 +334,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * @return boolean value for is input file type
      */
     private boolean isInputOfTypeFile() {
-        return ("input".equalsIgnoreCase(this.getTagName()) &&
-                "file".equalsIgnoreCase(this.getAttribute("type")));
+        return ("input".equalsIgnoreCase(this.getTagName()) && "file".equalsIgnoreCase(this.getAttribute("type")));
     }
 
     @Override
