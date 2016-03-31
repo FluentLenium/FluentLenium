@@ -45,6 +45,16 @@ class EventAdapter implements WebDriverEventListener {
     }
 
     @Override
+    public void beforeNavigateRefresh(WebDriver driver) {
+        this.listener.beforeNavigateRefresh(driver);
+    }
+
+    @Override
+    public void afterNavigateRefresh(WebDriver driver) {
+        this.listener.afterNavigateRefresh(driver);
+    }
+
+    @Override
     public void beforeFindBy(final By by, final WebElement element, final WebDriver driver) {
         this.listener.beforeFindBy(by, element == null ? null : new FluentWebElement(element),
                 driver);

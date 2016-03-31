@@ -14,6 +14,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
@@ -45,6 +48,20 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public Axes axes() {
         return this.axes;
+    }
+
+    /**
+     * Wrap this element in a component extending FluentWebElement.
+     *
+     * @return element as a component.
+     */
+    public <T extends FluentWebElement> T as(Class<T> componentClass) {
+        try {
+            Constructor<T> constructor = componentClass.getConstructor(WebElement.class);
+            return constructor.newInstance(getElement());
+        } catch (Exception e) {
+            throw new IllegalArgumentException(componentClass.getName() + " is not a valid component class. It should have a single WebElement parameter constructor.", e);
+        }
     }
 
     /**
