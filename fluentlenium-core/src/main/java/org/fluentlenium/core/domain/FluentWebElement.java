@@ -4,17 +4,14 @@ import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.action.FillConstructor;
 import org.fluentlenium.core.action.FillSelectConstructor;
 import org.fluentlenium.core.action.FluentDefaultActions;
+import org.fluentlenium.core.axes.Axes;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
@@ -22,10 +19,12 @@ import java.util.List;
 public class FluentWebElement implements FluentDefaultActions<FluentWebElement>, SearchActions<FluentWebElement> {
     private final WebElement webElement;
     private final Search search;
+    private final Axes axes;
 
     public FluentWebElement(WebElement webElement) {
         this.webElement = webElement;
         this.search = new Search(webElement);
+        this.axes = new Axes(webElement);
     }
 
     /**
@@ -36,6 +35,15 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     public FluentWebElement click() {
         webElement.click();
         return this;
+    }
+
+    /**
+     * XPath Axes accessor (parent, ancestors, preceding, following, ...).
+     *
+     * @return object to perform XPath Axes transformations.
+     */
+    public Axes axes() {
+        return this.axes;
     }
 
     /**
@@ -256,101 +264,6 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public FluentWebElement findFirst(Filter... filters) {
         return search.findFirst(filters);
-    }
-
-    /**
-     * Find parent element.
-     *
-     * @return fluent web element
-     */
-    public FluentWebElement findParent() {
-        WebElement parentRaw = this.webElement.findElement(By.xpath("parent::*"));
-        FluentWebElement parent = new FluentWebElement(parentRaw);
-        return parent;
-    }
-
-    /**
-     * Find ancestor elements.
-     *
-     * @return list of Fluent web elements
-     */
-    public FluentList<FluentWebElement> findAncestors() {
-        List<WebElement> ancestorsRaw = this.webElement.findElements(By.xpath("ancestor::*"));
-        List<FluentWebElement> elements = new ArrayList<FluentWebElement>();
-        for (WebElement ancestor : ancestorsRaw) {
-            elements.add(new FluentWebElement(ancestor));
-        }
-        return new FluentListImpl<>(elements);
-    }
-
-    /**
-     * Find descendants elements (children, grandchildren, etc.).
-     *
-     * @return list of Fluent web elements
-     */
-    public FluentList<FluentWebElement> findDescendants() {
-        List<WebElement> descendants = this.webElement.findElements(By.xpath("descendant::*"));
-        List<FluentWebElement> elements = new ArrayList<FluentWebElement>();
-        for (WebElement ancestor : descendants) {
-            elements.add(new FluentWebElement(ancestor));
-        }
-        return new FluentListImpl<>(elements);
-    }
-
-    /**
-     * Find following elements.
-     *
-     * @return list of Fluent web elements
-     */
-    public FluentList<FluentWebElement> findFollowings() {
-        List<WebElement> descendants = this.webElement.findElements(By.xpath("following::*"));
-        List<FluentWebElement> elements = new ArrayList<FluentWebElement>();
-        for (WebElement ancestor : descendants) {
-            elements.add(new FluentWebElement(ancestor));
-        }
-        return new FluentListImpl<>(elements);
-    }
-
-    /**
-     * Find following sibling elements.
-     *
-     * @return list of Fluent web elements
-     */
-    public FluentList<FluentWebElement> findFollowingSiblings() {
-        List<WebElement> descendants = this.webElement.findElements(By.xpath("following-sibling::*"));
-        List<FluentWebElement> elements = new ArrayList<FluentWebElement>();
-        for (WebElement ancestor : descendants) {
-            elements.add(new FluentWebElement(ancestor));
-        }
-        return new FluentListImpl<>(elements);
-    }
-
-    /**
-     * Find preceding elements. (Ancestors are NOT included)
-     *
-     * @return list of Fluent web elements
-     */
-    public FluentList<FluentWebElement> findPrecedings() {
-        List<WebElement> descendants = this.webElement.findElements(By.xpath("preceding::*"));
-        List<FluentWebElement> elements = new ArrayList<FluentWebElement>();
-        for (WebElement ancestor : descendants) {
-            elements.add(new FluentWebElement(ancestor));
-        }
-        return new FluentListImpl<>(elements);
-    }
-
-    /**
-     * Find preceding sibling elements.
-     *
-     * @return list of Fluent web elements
-     */
-    public FluentList<FluentWebElement> findPrecedingsSiblings() {
-        List<WebElement> descendants = this.webElement.findElements(By.xpath("preceding-sibling::*"));
-        List<FluentWebElement> elements = new ArrayList<FluentWebElement>();
-        for (WebElement ancestor : descendants) {
-            elements.add(new FluentWebElement(ancestor));
-        }
-        return new FluentListImpl<>(elements);
     }
 
     /**
