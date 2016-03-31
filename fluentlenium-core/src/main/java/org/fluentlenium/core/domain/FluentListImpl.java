@@ -22,7 +22,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public E first() {
+    @Override
+    public E first() {
         if (this.size() == 0) {
             throw new NoSuchElementException("Element not found");
         }
@@ -32,7 +33,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public FluentList click() {
+    @Override
+    public FluentList click() {
         if (this.size() == 0) {
             throw new NoSuchElementException("No Element found");
         }
@@ -48,7 +50,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public FluentList text(String... with) {
+    @Override
+    public FluentList text(String... with) {
         boolean atMostOne = false;
         if (with.length > 0) {
             int id = 0;
@@ -77,7 +80,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public FluentList<E> clearAll() {
+    @Override
+    public FluentList<E> clearAll() {
         for (E fluentWebElement : this) {
             if (fluentWebElement.isEnabled()) {
                 fluentWebElement.clear();
@@ -89,7 +93,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public void clear() {
+    @Override
+    public void clear() {
         for (E fluentWebElement : this) {
             if (fluentWebElement.isEnabled()) {
                 fluentWebElement.clear();
@@ -100,7 +105,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public FluentList<E> submit() {
+    @Override
+    public FluentList<E> submit() {
         for (E fluentWebElement : this) {
             if (fluentWebElement.isEnabled()) {
                 fluentWebElement.submit();
@@ -112,7 +118,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public List<String> getValues() {
+    @Override
+    public List<String> getValues() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
                 return webElement.getValue();
@@ -123,7 +130,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public List<String> getIds() {
+    @Override
+    public List<String> getIds() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
                 return webElement.getId();
@@ -134,7 +142,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public List<String> getAttributes(final String attribute) {
+    @Override
+    public List<String> getAttributes(final String attribute) {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
                 return webElement.getAttribute(attribute);
@@ -145,7 +154,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public List<String> getNames() {
+    @Override
+    public List<String> getNames() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
                 return webElement.getName();
@@ -156,7 +166,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public List<String> getTextContents() {
+    @Override
+    public List<String> getTextContents() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
                 return webElement.getTextContent();
@@ -167,7 +178,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public List<String> getTexts() {
+    @Override
+    public List<String> getTexts() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
                 return webElement.getText();
@@ -178,7 +190,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public String getValue() {
+    @Override
+    public String getValue() {
         if (this.size() > 0) {
             return this.get(0).getValue();
         }
@@ -188,7 +201,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public String getId() {
+    @Override
+    public String getId() {
         if (this.size() > 0) {
             return this.get(0).getId();
         }
@@ -198,7 +212,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public String getAttribute(final String attribute) {
+    @Override
+    public String getAttribute(final String attribute) {
         if (this.size() > 0) {
             return this.get(0).getAttribute(attribute);
         }
@@ -208,7 +223,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public String getName() {
+    @Override
+    public String getName() {
         if (this.size() > 0) {
             return this.get(0).getName();
         }
@@ -218,7 +234,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public String getText() {
+    @Override
+    public String getText() {
         if (this.size() > 0) {
             return this.get(0).getText();
         }
@@ -228,7 +245,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public FluentList<E> find(String name, Filter... filters) {
+    @Override
+    public FluentList<E> find(String name, Filter... filters) {
         List<E> finds = new ArrayList<E>();
         for (FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(name, filters));
@@ -239,7 +257,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public FluentList<E> find(By locator, Filter... filters) {
+    @Override
+    public FluentList<E> find(By locator, Filter... filters) {
         List<E> finds = new ArrayList<E>();
         for (FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(locator, filters));
@@ -250,7 +269,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public FluentList<E> find(Filter... filters) {
+    @Override
+    public FluentList<E> find(Filter... filters) {
         List<E> finds = new ArrayList<E>();
         for (FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(filters));
@@ -261,7 +281,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public E find(String name, Integer number, Filter... filters) {
+    @Override
+    public E find(String name, Integer number, Filter... filters) {
         FluentList<E> fluentList = find(name, filters);
         if (number >= fluentList.size()) {
             throw new NoSuchElementException(
@@ -274,7 +295,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public E find(By locator, Integer number, Filter... filters) {
+    @Override
+    public E find(By locator, Integer number, Filter... filters) {
         FluentList<E> fluentList = find(locator, filters);
         if (number >= fluentList.size()) {
             throw new NoSuchElementException(
@@ -287,7 +309,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public E find(Integer number, Filter... filters) {
+    @Override
+    public E find(Integer number, Filter... filters) {
         FluentList<E> fluentList = find(filters);
         if (number >= fluentList.size()) {
             throw new NoSuchElementException(
@@ -300,21 +323,24 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     /**
      * {@inheritDoc}
      */
-    @Override public E findFirst(By locator, Filter... filters) {
+    @Override
+    public E findFirst(By locator, Filter... filters) {
         return find(locator, 0, filters);
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override public E findFirst(String name, Filter... filters) {
+    @Override
+    public E findFirst(String name, Filter... filters) {
         return find(name, 0, filters);
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override public E findFirst(Filter... filters) {
+    @Override
+    public E findFirst(Filter... filters) {
         return find(0, filters);
     }
 }

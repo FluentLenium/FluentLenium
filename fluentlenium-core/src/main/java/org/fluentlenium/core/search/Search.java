@@ -31,7 +31,8 @@ public class Search implements SearchActions<FluentWebElement> {
      * @param filters filters set
      * @return fluent list of fluent web elements
      */
-    @Override public FluentList<FluentWebElement> find(String name, final Filter... filters) {
+    @Override
+    public FluentList<FluentWebElement> find(String name, final Filter... filters) {
         StringBuilder sb = new StringBuilder(name);
         List<Filter> postFilterSelector = new ArrayList<Filter>();
         if (filters != null && filters.length > 0) {
@@ -74,7 +75,8 @@ public class Search implements SearchActions<FluentWebElement> {
      * @param filters filters set
      * @return fluent list of fluent web elements
      */
-    @Override public FluentList<FluentWebElement> find(Filter... filters) {
+    @Override
+    public FluentList<FluentWebElement> find(Filter... filters) {
         if (filters == null || filters.length == 0) {
             throw new IllegalArgumentException("cssSelector or filter is required");
         }
@@ -89,7 +91,8 @@ public class Search implements SearchActions<FluentWebElement> {
      * @param filters filters set
      * @return fluent web element
      */
-    @Override public FluentWebElement find(String name, Integer number, final Filter... filters) {
+    @Override
+    public FluentWebElement find(String name, Integer number, final Filter... filters) {
         List<FluentWebElement> listFiltered = find(name, filters);
         if (number >= listFiltered.size()) {
             throw new NoSuchElementException(
@@ -106,7 +109,8 @@ public class Search implements SearchActions<FluentWebElement> {
      * @param filters filters set
      * @return fluent web element
      */
-    @Override public FluentWebElement find(Integer number, Filter... filters) {
+    @Override
+    public FluentWebElement find(Integer number, Filter... filters) {
         if (filters == null || filters.length == 0) {
             throw new IllegalArgumentException("cssSelector or filter is required");
         }
@@ -120,7 +124,8 @@ public class Search implements SearchActions<FluentWebElement> {
      * @param filters filters set
      * @return fluent list of fluent web elements
      */
-    @Override public FluentList<FluentWebElement> find(By locator, final Filter... filters) {
+    @Override
+    public FluentList<FluentWebElement> find(By locator, final Filter... filters) {
         List<FluentWebElement> preFiltered = select(locator);
         Collection<FluentWebElement> postFiltered = preFiltered;
         for (Filter selector : filters) {
@@ -138,7 +143,8 @@ public class Search implements SearchActions<FluentWebElement> {
      * @param filters filters set
      * @return fluent web element
      */
-    @Override public FluentWebElement find(By locator, Integer number, final Filter... filters) {
+    @Override
+    public FluentWebElement find(By locator, Integer number, final Filter... filters) {
         List<FluentWebElement> listFiltered = find(locator, filters);
         if (number >= listFiltered.size()) {
             throw new NoSuchElementException(
@@ -155,7 +161,8 @@ public class Search implements SearchActions<FluentWebElement> {
      * @param filters filters set
      * @return fluent web element
      */
-    @Override public FluentWebElement findFirst(String name, final Filter... filters) {
+    @Override
+    public FluentWebElement findFirst(String name, final Filter... filters) {
         FluentList fluentList = find(name, filters);
         try {
             return fluentList.first();
@@ -170,7 +177,8 @@ public class Search implements SearchActions<FluentWebElement> {
      * @param filters filters set
      * @return fluent web element
      */
-    @Override public FluentWebElement findFirst(Filter... filters) {
+    @Override
+    public FluentWebElement findFirst(Filter... filters) {
         if (filters == null || filters.length == 0) {
             throw new IllegalArgumentException("cssSelector or filter is required");
         }
@@ -184,7 +192,8 @@ public class Search implements SearchActions<FluentWebElement> {
      * @param filters filters set
      * @return fluent web element
      */
-    @Override public FluentWebElement findFirst(By locator, final Filter... filters) {
+    @Override
+    public FluentWebElement findFirst(By locator, final Filter... filters) {
         FluentList<FluentWebElement> fluentList = find(locator, filters);
         return fluentList.first();
     }

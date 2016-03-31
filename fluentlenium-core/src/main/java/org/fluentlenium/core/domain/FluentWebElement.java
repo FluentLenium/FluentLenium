@@ -325,7 +325,8 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
         return ("input".equalsIgnoreCase(this.getTagName()) && "file".equalsIgnoreCase(this.getAttribute("type")));
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return this.getElement().toString();
     }
 }

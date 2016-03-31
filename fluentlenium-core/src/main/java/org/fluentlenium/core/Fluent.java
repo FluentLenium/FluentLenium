@@ -529,7 +529,8 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      * @param filters filters set
      * @return fluent web element
      */
-    @Override public FluentWebElement findFirst(By locator, final Filter... filters) {
+    @Override
+    public FluentWebElement findFirst(By locator, final Filter... filters) {
         return getSearch().findFirst(locator, filters);
     }
 
