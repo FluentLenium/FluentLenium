@@ -46,4 +46,11 @@ public class SearchTest extends LocalFluentCase {
         FluentWebElement element = findFirst(".parent");
         assertThat(element.findFirst(".child").getText()).isEqualTo("Alex");
     }
+
+    @Test
+    public void checkSearchParentWorks() {
+        goTo(DEFAULT_URL);
+        FluentWebElement element = findFirst(".parent > .child");
+        assertThat(element.findParent().getAttribute("class")).isEqualTo("parent");
+    }
 }

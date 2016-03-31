@@ -7,6 +7,7 @@ import org.fluentlenium.core.action.FluentDefaultActions;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
@@ -252,6 +253,17 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public FluentWebElement findFirst(Filter... filters) {
         return search.findFirst(filters);
+    }
+
+    /**
+     * Find parent element.
+     *
+     * @return fluent web element
+     */
+    public FluentWebElement findParent() {
+        WebElement parentRaw = this.webElement.findElement(By.xpath("parent::*"));
+        FluentWebElement parent = new FluentWebElement(parentRaw);
+        return parent;
     }
 
     /**
