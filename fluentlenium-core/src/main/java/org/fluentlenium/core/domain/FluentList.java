@@ -3,7 +3,9 @@ package org.fluentlenium.core.domain;
 import org.fluentlenium.core.action.FluentDefaultActions;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.SearchActions;
+import org.openqa.selenium.WebElement;
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 
 /**
@@ -187,6 +189,13 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
      * @return extended by FluentWebElement object
      */
     FluentList<E> clearAll();
+
+    /**
+     * Wrap all elements in a component extending FluentWebElement.
+     *
+     * @return elements as components.
+     */
+    public <T extends FluentWebElement> FluentList<T> as(Class<T> componentClass);
 
     /**
      * Clear all elements on the list
