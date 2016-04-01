@@ -1,10 +1,13 @@
 package org.fluentlenium.core;
 
 
-public class FluentThread {
-    public static final InheritableThreadLocal<Fluent> userThreadLocal = new InheritableThreadLocal<Fluent>();
+public final class FluentThread {
+    private FluentThread() {
+    }
 
-    public static void set(Fluent fluent) {
+    public static final InheritableThreadLocal<FluentAdapter> userThreadLocal = new InheritableThreadLocal<FluentAdapter>();
+
+    public static void set(FluentAdapter fluent) {
         userThreadLocal.set(fluent);
     }
 
@@ -12,7 +15,7 @@ public class FluentThread {
         userThreadLocal.remove();
     }
 
-    public static Fluent get() {
+    public static FluentAdapter get() {
         return userThreadLocal.get();
     }
 }

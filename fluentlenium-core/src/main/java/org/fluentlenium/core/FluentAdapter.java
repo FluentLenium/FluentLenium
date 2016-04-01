@@ -8,10 +8,12 @@ public class FluentAdapter extends Fluent {
 
     public FluentAdapter(WebDriver webDriver) {
         super(webDriver);
+        FluentThread.set(this);
     }
 
     public FluentAdapter() {
         super();
+        FluentThread.set(this);
     }
 
     protected void initTest() {
