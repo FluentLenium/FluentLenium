@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SharedDriver {
-    public enum SharedType {PER_FEATURE, PER_SCENARIO}
+    public enum SharedType {ONCE, PER_SCENARIO}
 
     SharedType type() default SharedType.PER_SCENARIO;
 

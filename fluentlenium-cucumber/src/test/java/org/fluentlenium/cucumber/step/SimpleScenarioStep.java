@@ -1,6 +1,8 @@
 package org.fluentlenium.cucumber.step;
 
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -16,6 +18,7 @@ public class SimpleScenarioStep extends FluentCucumberTest {
 
     @Page
     LocalPage page;
+
     @Page
     LocalPage page2;
 
@@ -26,31 +29,27 @@ public class SimpleScenarioStep extends FluentCucumberTest {
 
     @Given(value = "scenario I am on the first page")
     public void step1() {
-        this.initFluent();
-        this.init();
-
         goTo(page);
     }
 
     @When(value = "scenario I click on next page")
     public void step2() {
-        this.initFluent();
-        this.init();
-
         click("a#linkToPage2");
     }
 
     @Then(value = "scenario I am on the second page")
     public void step3() {
-        this.initFluent();
-        this.init();
-
         page2.isAt();
     }
 
+    @Before
+    public void before(Scenario scenario) {
+        super.before(scenario);
+    }
+
     @After
-    public void after() {
-        this.quit();
+    public void after(Scenario scenario) {
+        super.after(scenario);
     }
 
 }

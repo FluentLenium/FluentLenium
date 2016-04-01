@@ -1,6 +1,8 @@
 package org.fluentlenium.cucumber.step;
 
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -11,7 +13,7 @@ import org.fluentlenium.cucumber.page.LocalPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-@SharedDriver(type = SharedDriver.SharedType.PER_FEATURE)
+@SharedDriver(type = SharedDriver.SharedType.ONCE)
 public class SimpleFeatureStep extends FluentCucumberTest {
 
     @Page
@@ -27,30 +29,26 @@ public class SimpleFeatureStep extends FluentCucumberTest {
 
     @Given(value = "feature I am on the first page")
     public void step1() {
-        this.initFluent();
-        this.init();
-
         goTo(page);
     }
 
     @When(value = "feature I click on next page")
     public void step2() {
-        this.initFluent();
-        this.init();
-
         click("a#linkToPage2");
     }
 
     @Then(value = "feature I am on the second page")
     public void step3() {
-        this.initFluent();
-        this.init();
-
         page2.isAt();
     }
 
+    @Before
+    public void before(Scenario scenario) {
+        super.before(scenario);
+    }
+
     @After
-    public void after() {
-        this.quit();
+    public void after(Scenario scenario) {
+        super.after(scenario);
     }
 }

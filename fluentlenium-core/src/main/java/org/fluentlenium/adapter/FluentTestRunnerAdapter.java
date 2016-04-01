@@ -1,12 +1,7 @@
 package org.fluentlenium.adapter;
 
 
-import org.fluentlenium.adapter.util.CookieStrategyReader;
-import org.fluentlenium.adapter.util.DefaultCookieStrategyReader;
-import org.fluentlenium.adapter.util.DefaultSharedDriverStrategyReader;
-import org.fluentlenium.adapter.util.SharedDriverStrategyReader;
-import org.fluentlenium.adapter.util.SharedDriverStrategy;
-import org.fluentlenium.adapter.util.ShutdownHook;
+import org.fluentlenium.adapter.util.*;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -26,6 +21,31 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     public FluentTestRunnerAdapter(SharedDriverStrategyReader sharedDriverExtractor, CookieStrategyReader cookieExtractor) {
         this.sdsr = sharedDriverExtractor;
         this.csr = cookieExtractor;
+    }
+
+    /**
+     * Invoked when a test method is starting.
+     */
+    protected void starting() {
+        starting(getClass());
+    }
+
+    /**
+     * Invoked when a test method is starting.
+     *
+     * @param testName Test name
+     */
+    protected void starting(String testName) {
+        starting(getClass(), testName);
+    }
+
+    /**
+     * Invoked when a test method is starting.
+     *
+     * @param testClass Test class
+     */
+    protected void starting(Class<?> testClass) {
+        starting(testClass, testClass.getName());
     }
 
     /**
@@ -66,6 +86,31 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
 
     /**
      * Invoked when a test method has finished (whatever the success of failing status)
+     */
+    protected void finished() {
+        finished(getClass());
+    }
+
+    /**
+     * Invoked when a test method has finished (whatever the success of failing status)
+     *
+     * @param testName Test name
+     */
+    protected void finished(String testName) {
+        finished(getClass(), testName);
+    }
+
+    /**
+     * Invoked when a test method has finished (whatever the success of failing status)
+     *
+     * @param testClass Test class
+     */
+    protected void finished(Class<?> testClass) {
+        finished(testClass, testClass.getName());
+    }
+
+    /**
+     * Invoked when a test method has finished (whatever the success of failing status)
      *
      * @param testClass Test class
      * @param testName  Test name
@@ -78,6 +123,41 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         } else if (sharedDriver != null && csr.shouldDeleteCookies(testClass, testName)) {
             sharedDriver.manage().deleteAllCookies();
         }
+    }
+
+    /**
+     * Invoked when a test method has failed (before finished)
+     */
+    protected void failed() {
+        failed(getClass());
+    }
+
+    /**
+     * Invoked when a test method has failed (before finished)
+     *
+     * @param testName Test name
+     */
+    protected void failed(String testName) {
+        failed(null, getClass(), testName);
+    }
+
+    /**
+     * Invoked when a test method has failed (before finished)
+     *
+     * @param testClass Test class
+     */
+    protected void failed(Class<?> testClass) {
+        failed(null, testClass, testClass.getName());
+    }
+
+    /**
+     * Invoked when a test method has failed (before finished)
+     *
+     * @param testClass Test class
+     * @param testName  Test name
+     */
+    protected void failed(Class<?> testClass, String testName) {
+        failed(null, testClass, testName);
     }
 
     /**
