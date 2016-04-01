@@ -4,6 +4,7 @@ import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.action.FillConstructor;
 import org.fluentlenium.core.action.FillSelectConstructor;
 import org.fluentlenium.core.action.FluentDefaultActions;
+import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.axes.Axes;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
@@ -12,10 +13,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
@@ -60,7 +59,8 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
             Constructor<T> constructor = componentClass.getConstructor(WebElement.class);
             return constructor.newInstance(getElement());
         } catch (Exception e) {
-            throw new IllegalArgumentException(componentClass.getName() + " is not a valid component class. It should have a single WebElement parameter constructor.", e);
+            throw new IllegalArgumentException(componentClass.getName()
+                    + " is not a valid component class. It should have a single WebElement parameter constructor.", e);
         }
     }
 
@@ -70,7 +70,20 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * @return fluent web element
      */
     public FluentWebElement doubleClick() {
-        Action action = new Actions(FluentThread.get().getDriver()).doubleClick(webElement).build();
+        MouseActions mouseActions = new MouseActions(FluentThread.get().getDriver());
+        Action action = mouseActions.doubleClick(webElement);
+        action.perform();
+        return this;
+    }
+
+    /**
+     * Double Click on the element
+     *
+     * @return fluent web element
+     */
+    public FluentWebElement mouseOver() {
+        MouseActions mouseActions = new MouseActions(FluentThread.get().getDriver());
+        Action action = mouseActions.mouseOver(webElement);
         action.perform();
         return this;
     }
