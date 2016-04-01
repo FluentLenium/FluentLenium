@@ -28,7 +28,7 @@ public class SimpleFeatureStep extends FluentCucumberTest {
     @Given(value = "feature I am on the first page")
     public void step1() {
         this.initFluent();
-        this.initTest();
+        this.init();
 
         goTo(page);
     }
@@ -36,7 +36,7 @@ public class SimpleFeatureStep extends FluentCucumberTest {
     @When(value = "feature I click on next page")
     public void step2() {
         this.initFluent();
-        this.initTest();
+        this.init();
 
         click("a#linkToPage2");
     }
@@ -44,7 +44,7 @@ public class SimpleFeatureStep extends FluentCucumberTest {
     @Then(value = "feature I am on the second page")
     public void step3() {
         this.initFluent();
-        this.initTest();
+        this.init();
 
         page2.isAt();
     }

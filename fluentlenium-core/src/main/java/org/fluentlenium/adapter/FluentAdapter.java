@@ -1,5 +1,8 @@
-package org.fluentlenium.core;
+package org.fluentlenium.adapter;
 
+import org.fluentlenium.core.Fluent;
+import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.page.PageInitializerException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -16,7 +19,7 @@ public class FluentAdapter extends Fluent {
         FluentThread.set(this);
     }
 
-    protected void initTest() {
+    protected void init() {
         try {
             pageInitializer.initContainer(this);
         } catch (ClassNotFoundException e) {
@@ -24,9 +27,10 @@ public class FluentAdapter extends Fluent {
         } catch (IllegalAccessException e) {
             throw new PageInitializerException("IllegalAccessException", e);
         }
+        getDefaultConfig();
     }
 
-    protected void cleanUp() {
+    protected void close() {
         pageInitializer.release();
     }
 
@@ -54,14 +58,5 @@ public class FluentAdapter extends Fluent {
      * Remember that you can access to the WebDriver object using this.getDriver().
      */
     public void getDefaultConfig() {
-    }
-
-    /**
-     * @deprecated use FluentPage.isAt() instead.
-     *
-     */
-    @Deprecated
-    public static void assertAt(FluentPage fluent) {
-        fluent.isAt();
     }
 }

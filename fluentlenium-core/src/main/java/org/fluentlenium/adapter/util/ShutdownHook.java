@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.util;
 
-import org.fluentlenium.core.FluentAdapter;
+import org.fluentlenium.adapter.FluentAdapter;
 
 public class ShutdownHook extends Thread {
     private final FluentAdapter test;

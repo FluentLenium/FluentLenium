@@ -24,7 +24,7 @@ public class SimpleFeatureMultiStep2 extends FluentCucumberTest {
     @When(value = "feature multi2 I click on next page")
     public void step2() {
         this.initFluent();
-        this.initTest();
+        this.init();
 
         click("a#linkToPage2");
     }
@@ -32,7 +32,7 @@ public class SimpleFeatureMultiStep2 extends FluentCucumberTest {
     @Then(value = "feature multi2 I am on the second page")
     public void step3() {
         this.initFluent();
-        this.initTest();
+        this.init();
 
         page2.isAt();
     }

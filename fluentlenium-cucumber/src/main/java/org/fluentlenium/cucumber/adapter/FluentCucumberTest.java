@@ -1,7 +1,7 @@
 package org.fluentlenium.cucumber.adapter;
 
 import org.fluentlenium.core.Fluent;
-import org.fluentlenium.core.FluentAdapter;
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.cucumber.adapter.util.SharedDriverHelper;
 import org.fluentlenium.cucumber.adapter.util.ShutdownHook;
 import org.openqa.selenium.WebDriver;
@@ -82,10 +82,6 @@ public class FluentCucumberTest extends FluentAdapter {
             sharedDriver = null;
             isSharedDriverPerScenario = false;
         }
-    }
-
-    public void forceQuit() {
-        super.quit();
     }
 
     private void killTheBrowserOnShutdown() {

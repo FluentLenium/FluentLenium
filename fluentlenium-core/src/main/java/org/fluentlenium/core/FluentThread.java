@@ -1,6 +1,8 @@
 package org.fluentlenium.core;
 
 
+import org.fluentlenium.adapter.FluentAdapter;
+
 public final class FluentThread {
     private FluentThread() {
     }

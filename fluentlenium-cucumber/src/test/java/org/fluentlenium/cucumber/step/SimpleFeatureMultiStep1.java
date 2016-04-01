@@ -23,7 +23,7 @@ public class SimpleFeatureMultiStep1 extends FluentCucumberTest {
     @Given(value = "feature multi1 I am on the first page")
     public void step1() {
         this.initFluent();
-        this.initTest();
+        this.init();
 
         goTo(page);
     }

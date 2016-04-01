@@ -3,7 +3,7 @@ package org.fluentlenium.core.page;
 import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
 import org.fluentlenium.core.Fluent;
-import org.fluentlenium.core.FluentAdapter;
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;

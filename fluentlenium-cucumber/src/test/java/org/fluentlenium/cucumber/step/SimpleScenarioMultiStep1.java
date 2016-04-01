@@ -23,7 +23,7 @@ public class SimpleScenarioMultiStep1 extends FluentCucumberTest {
     @Given(value = "scenario multi1 I am on the first page")
     public void step1() {
         this.initFluent();
-        this.initTest();
+        this.init();
         goTo(page);
     }
 

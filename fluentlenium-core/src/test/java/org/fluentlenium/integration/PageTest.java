@@ -49,9 +49,9 @@ public class PageTest extends LocalFluentCase {
     @Test
     public void checkFollowLinkWithBddStyle() {
         goTo(page);
-        assertAt(page);
+        page.isAt();
         page.goToNextPage();
-        assertAt(page2);
+        page2.isAt();
     }
 
     @Test
