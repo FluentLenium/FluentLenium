@@ -57,6 +57,7 @@
                                         <goal>install</goal>
                                         <goal>test</goal>
                                     </goals>
+                                    <streamLogs>true</streamLogs>
                                     <properties>
                                         <it.project.version>${project.version}</it.project.version>
                                     </properties>

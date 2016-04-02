@@ -36,12 +36,12 @@ import java.util.concurrent.TimeUnit;
  * Util Class which offers some shortcut to webdriver methods
  */
 public abstract class Fluent implements SearchActions<FluentWebElement> {
+    private WebDriver driver;
+    private Search search;
+
     protected enum TriggerMode {ON_FAIL, NEVER}
 
     private String baseUrl;
-
-    private ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<WebDriver>();
-    private ThreadLocal<Search> searchThreadLocal = new ThreadLocal<Search>();
 
     private String htmlDumpPath;
     private String screenshotPath;
@@ -54,8 +54,8 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     protected PageInitializer pageInitializer = new PageInitializer(this);
 
     public Fluent(WebDriver driver) {
-        this.webDriverThreadLocal.set(driver);
-        this.searchThreadLocal.set(new Search(driver));
+        this.driver = driver;
+        this.search = new Search(driver);
     }
 
     /**
@@ -198,8 +198,8 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     }
 
     protected Fluent initFluent(WebDriver driver) {
-        this.webDriverThreadLocal.set(driver);
-        this.searchThreadLocal.set(new Search(driver));
+        this.driver = driver;
+        this.search = new Search(driver);
         if (driver instanceof EventFiringWebDriver) {
             this.events = new EventsRegistry((EventFiringWebDriver) driver);
         }
@@ -207,11 +207,11 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     }
 
     public WebDriver getDriver() {
-        return webDriverThreadLocal.get();
+        return driver;
     }
 
     public Search getSearch() {
-        return searchThreadLocal.get();
+        return search;
     }
 
     public EventsRegistry events() {
@@ -816,12 +816,8 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     public void quit() {
         if (getDriver() != null) {
             getDriver().quit();
+            this.driver = null;
+            this.search = null;
         }
-        cleanupDriver();
-    }
-
-    public void cleanupDriver() {
-        webDriverThreadLocal.remove();
-        searchThreadLocal.remove();
     }
 }

@@ -810,8 +810,10 @@ Surefire maven plugin for example.
                 <artifactId>maven-surefire-plugin</artifactId>
                 <dependencies>
                     <dependency>
+                        <!-- Force a recent version of surefire-testng to avoid issues -->
                         <groupId>org.apache.maven.surefire</groupId>
                         <artifactId>surefire-testng</artifactId>
+                        <version>2.19.1</version>
                     </dependency>
                 </dependencies>
                 <configuration>
