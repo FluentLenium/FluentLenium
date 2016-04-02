@@ -346,6 +346,7 @@ A Page Object can model the whole page or just a part of it.
 
 To construct a Page, extend [org.fluentlenium.core.FluentPage](https://github.com/FluentLenium/FluentLenium/blob/master/fluentlenium-core/src/main/java/org/fluentlenium/core/FluentPage.java).
 In most cases, you have to define the url of the page by overriding the `getUrl` method.
+It is also possible to use `@PageUrl` annotation, its value will be passed to the `getUrl` method, overriding is not required.
 By doing this, you can then use the `goTo(myPage)` method in your test code.
 
 It may be necessary to ensure that you are on the right page, not just at the url returned by `getUrl` [accessible in your test via the void url() method].
@@ -368,6 +369,21 @@ public class LoginPage extends FluentPage {
     public String getUrl() {
         return "myCustomUrl";
     }
+    public void isAt() {
+        assertThat(title()).isEqualTo("MyTitle");
+    }
+    public void fillAndSubmitForm(String... paramsOrdered) {
+        fill("input").with(paramsOrdered);
+        click("#create-button");
+    }
+}
+```
+
+or using `@PageUrl` annotation instead of overriding `getUrl` method
+
+```java
+@PageUrl("myCustomUrl")
+public class LoginPage extends FluentPage {
     public void isAt() {
         assertThat(title()).isEqualTo("MyTitle");
     }
