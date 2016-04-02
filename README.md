@@ -301,6 +301,11 @@ This will submit all the enabled fields returned by the search.
 find("#create-button").doubleClick()
 ```
 
+### Mouse over
+```java
+find("#create-button").mouseOver()
+```
+
 ## Events
 
 Selenium has a driver wrapper named `EventFiringWebDriver` that is able to generate events and register listeners.
