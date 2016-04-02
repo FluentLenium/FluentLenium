@@ -12,6 +12,7 @@ import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
@@ -77,6 +78,7 @@ public class PageInitializer {
     public void initContainer(Fluent container) throws IllegalAccessException, ClassNotFoundException {
         injectPageIntoContainer(container);
         initFluentWebElements(container);
+        PageFactory.initElements(container.getDriver(), container); // Support injection for default selenium WebElement
     }
 
     private void injectPageIntoContainer(Fluent container)
