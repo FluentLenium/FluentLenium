@@ -56,7 +56,6 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     public Fluent(WebDriver driver) {
         this.webDriverThreadLocal.set(driver);
         this.searchThreadLocal.set(new Search(driver));
-        FluentThread.set(this);
     }
 
     /**
@@ -100,7 +99,6 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     }
 
     public Fluent() {
-        FluentThread.set(this);
     }
 
     public void setScreenshotPath(String path) {

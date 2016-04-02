@@ -1,3 +1,18 @@
+v0.11.0
+
+- #182 - Add a helper method to open a url in a new tab
+- #189 - Add getTextContent method to display text content of an element
+- #190 - Add xml-apis dependency for tests
+- #195 - add missing generic type parameter
+- #212 - Add takeHtmlDump method and refactor screenshot triggers to make it available with TestNg
+- #214 - Add instructions to run tests on BrowserStack
+- #215 - Implemented isClickable() for waiting.
+- #225, #226 - Extend find to use By locator
+- #224 - Add methods to navigate through document hierarchy
+- #222 - FluentWebElement.parent(), .next(), .previous()
+- #219, #228 - Add as (Component.class) object into code base
+- #227 - Selenium upgrade to 2.53 version
+
 v0.10.9
 - fix #60 withValues will be an alias for with method which is restricted word in Scala
 - parallel execution on method level will start working since this version, README file extended for examples

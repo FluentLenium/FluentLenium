@@ -1,83 +1,57 @@
 package org.fluentlenium.adapter;
 
-import org.fluentlenium.adapter.util.SharedDriverHelper;
-import org.fluentlenium.adapter.util.ShutdownHook;
-import org.fluentlenium.core.FluentAdapter;
-import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
+import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * All TestNG Test should extends this class. It provides default parameters.
  */
-public abstract class FluentTestNg extends FluentAdapter {
-
-    private static WebDriver sharedDriverOnce;
-
+public abstract class FluentTestNg extends FluentTestRunnerAdapter {
     public FluentTestNg() {
         super();
     }
 
-    @BeforeClass
-    public void beforeClass() {
-        Class<? extends FluentTestNg> aClass = this.getClass();
-        if (SharedDriverHelper.isSharedDriverOnce(aClass)) {
-            synchronized (this) {
-                if (sharedDriverOnce == null) {
-                    this.initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
-                    sharedDriverOnce = this.getDriver();
-                    Runtime.getRuntime().addShutdownHook(new ShutdownHook("fluentlenium", this));
-                } else {
-                    this.initFluent(sharedDriverOnce).withDefaultUrl(getDefaultBaseUrl());
-                }
-                initTest();
-            }
-        } else if (SharedDriverHelper.isSharedDriverPerClass(this.getClass())) {
-            this.initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
-            initTest();
-        }
+    private static Map<Method, ITestNGMethod> methods = new HashMap<>();
 
+    @BeforeTest
+    public void beforeTest(ITestContext context) {
+        for (ITestNGMethod method : context.getAllTestMethods()) {
+            methods.put(method.getConstructorOrMethod().getMethod(), method);
+        }
+    }
+
+    @AfterTest
+    public void afterTest() {
+        methods.clear();
     }
 
     @BeforeMethod
-    public void beforeMethod() {
-        if (SharedDriverHelper.isSharedDriverPerMethod(this.getClass()) || SharedDriverHelper.isDefaultSharedDriver(this.getClass())) {
-            this.initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
-            initTest();
-        }
-
+    public void beforeMethod(Method m, ITestContext context) {
+        ITestNGMethod testNGMethod = methods.get(m);
+        starting(testNGMethod.getRealClass(), testNGMethod.getMethodName());
     }
 
     @AfterMethod
     public void afterMethod(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            if (screenshotMode == TriggerMode.ON_FAIL) {
-                takeScreenShot(result.getTestClass().getName() + "_" +
-                        result.getTestName() + ".png");
-            }
-            if (htmlDumpMode == TriggerMode.ON_FAIL) {
-                takeHtmlDump(result.getTestClass().getName() + "_"
-                        + result.getTestName() + ".html");
-            }
+        if (!result.isSuccess()) {
+            failed(result.getThrowable(), result.getTestClass().getRealClass(), result.getName());
         }
-
-        cleanUp();
-        if (SharedDriverHelper.isSharedDriverPerMethod(this.getClass()) || SharedDriverHelper.isDefaultSharedDriver(this.getClass())) {
-            quit();
-        } else if (SharedDriverHelper.isDeleteCookies(this.getClass())) {
-            this.getDriver().manage().deleteAllCookies();
-        }
-
+        finished(result.getTestClass().getRealClass(), result.getName());
     }
 
     @AfterClass
     public void afterClass() {
-        if (SharedDriverHelper.isSharedDriverPerClass(this.getClass())) {
-            quit();
-        }
+        releaseSharedDriver();
     }
 
 }
