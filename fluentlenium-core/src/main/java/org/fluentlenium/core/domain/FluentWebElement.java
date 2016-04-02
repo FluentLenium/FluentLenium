@@ -51,11 +51,14 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * Wrap this element in a component extending FluentWebElement.
+     * Wrap the underlying element in a component.
+     *
+     * Component class should extend FluentWebElement, but it's not mandatory.
+     * Component class must have a constructor with a single WebElement argument.
      *
      * @return element as a component.
      */
-    public <T extends FluentWebElement> T as(Class<T> componentClass) {
+    public <T> T as(Class<T> componentClass) {
         try {
             Constructor<T> constructor = componentClass.getConstructor(WebElement.class);
             return constructor.newInstance(getElement());
