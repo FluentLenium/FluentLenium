@@ -62,7 +62,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
                 if (sharedDriver == null) {
                     initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
                     sharedDriver = getDriver();
-                    Runtime.getRuntime().addShutdownHook(new ShutdownHook("fluentlenium", this));
+                    Runtime.getRuntime().addShutdownHook(new SharedDriverOnceShutdownHook("SharedDriver-ONCE-ShutdownHook"));
                 } else {
                     initFluent(sharedDriver).withDefaultUrl(getDefaultBaseUrl());
                 }
