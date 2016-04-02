@@ -1,7 +1,7 @@
 package org.fluentlenium.unit;
 
 
-import org.fluentlenium.core.FluentAdapter;
+import org.fluentlenium.adapter.FluentAdapter;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;

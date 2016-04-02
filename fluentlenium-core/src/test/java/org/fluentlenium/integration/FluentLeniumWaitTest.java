@@ -4,7 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import org.fluentlenium.core.Fluent;
-import org.fluentlenium.core.FluentAdapter;
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Before;
@@ -18,7 +18,6 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 public class FluentLeniumWaitTest extends LocalFluentCase {
     @Before

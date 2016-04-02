@@ -1,6 +1,5 @@
 package org.fluentlenium.adapter;
 
-import org.fluentlenium.core.FluentAdapter;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -12,12 +11,12 @@ public class IsolatedTest extends FluentAdapter {
 
     public IsolatedTest() {
         initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
-        initTest();
+        init();
     }
 
     public IsolatedTest(WebDriver webDriver) {
         initFluent(webDriver).withDefaultUrl(getDefaultBaseUrl());
-        initTest();
+        init();
     }
 
 }

@@ -13,6 +13,6 @@ public class ShutdownHook extends Thread {
 
     @Override
     public synchronized void start() {
-        adapter.forceQuit();
+        adapter.quit();
     }
 }

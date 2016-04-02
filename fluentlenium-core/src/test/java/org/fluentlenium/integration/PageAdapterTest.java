@@ -15,7 +15,7 @@
 package org.fluentlenium.integration;
 
 import org.assertj.core.api.Assertions;
-import org.fluentlenium.core.FluentAdapter;
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.annotation.Page;
 import org.junit.After;
 import org.junit.Before;
@@ -42,7 +42,7 @@ public class PageAdapterTest extends FluentAdapter {
         reference = page;
 
         initFluent(driver);
-        initTest();
+        init();
     }
 
     @After
