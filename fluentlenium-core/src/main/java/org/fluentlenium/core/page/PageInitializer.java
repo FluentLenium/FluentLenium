@@ -12,6 +12,7 @@ import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
@@ -242,7 +243,7 @@ public class PageInitializer {
             } else {
                 final InvocationHandler handler = new LocatingElementHandler(locator);
                 WebElement proxy = (WebElement) Proxy.newProxyInstance(
-                        page.getClass().getClassLoader(), new Class[]{WebElement.class}, handler);
+                        page.getClass().getClassLoader(), new Class[]{WebElement.class, Locatable.class}, handler);
                 field.set(page, field.getType().getConstructor(WebElement.class).newInstance(proxy));
             }
         } catch (Exception e) {

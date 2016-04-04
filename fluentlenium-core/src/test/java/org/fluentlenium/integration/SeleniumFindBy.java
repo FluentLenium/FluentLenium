@@ -1,10 +1,8 @@
 package org.fluentlenium.integration;
 
 import org.assertj.core.api.Assertions;
-import org.fluentlenium.adapter.FluentTest;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
@@ -59,6 +57,15 @@ public class SeleniumFindBy extends LocalFluentCase {
         Assertions.assertThat(texts).containsExactly("Pharmacy", "Small 1", "Small 2", "Small 3");
     }
 
+    @Test
+    public void should_findBy_retrieved_object_work_for_selenium_actions() {
+        page.go();
+        page.isAt();
+        assertThat(page.getText()).isEqualTo("This text should change on MouseOver");
+        page.hoverOverElement();
+        assertThat(page.getText()).isEqualTo("abc");
+    }
+
     private static class PageIndex extends FluentPage {
         @FindBy(id = "location")
         WebElement location;
@@ -66,8 +73,14 @@ public class SeleniumFindBy extends LocalFluentCase {
         @FindBy(className = "small")
         List<WebElement> smalls;
 
-        @FindAll({@FindBy(id = "location"), @FindBy(className = "small")})
+        @FindAll({ @FindBy(id = "location"), @FindBy(className = "small") })
         List<WebElement> findAllElements;
+
+        @FindBy(css = "#mouseover")
+        private FluentWebElement mouseOverElement;
+
+        @FindBy(css = "#id3")
+        private FluentWebElement id3;
 
         @Override
         public String getUrl() {
@@ -77,6 +90,14 @@ public class SeleniumFindBy extends LocalFluentCase {
         @Override
         public void isAt() {
             assertThat(getDriver().getTitle()).contains("Selenium");
+        }
+
+        public void hoverOverElement() {
+            mouseOverElement.mouseOver();
+        }
+
+        public String getText() {
+            return id3.getText();
         }
     }
 }
