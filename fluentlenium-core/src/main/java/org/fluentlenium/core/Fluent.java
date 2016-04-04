@@ -134,20 +134,22 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      * @return fluent object
      */
     public Fluent takeHtmlDump(String fileName) {
+        File destFile = null;
         try {
-            String html;
-            synchronized (Fluent.class) {
-                html = this.findFirst("html").html();
-            }
-            File destFile;
             if (htmlDumpPath != null) {
                 destFile = Paths.get(htmlDumpPath, fileName).toFile();
             } else {
                 destFile = new File(fileName);
             }
+            String html;
+            synchronized (Fluent.class) {
+                html = this.findFirst("html").html();
+            }
             FileUtils.write(destFile, html, "UTF-8");
         } catch (Exception e) {
-            File destFile = new File(fileName);
+            if (destFile == null) {
+                destFile = new File(fileName);
+            }
             try {
                 PrintWriter printWriter = new PrintWriter(destFile, "UTF-8");
                 printWriter.write("Can't dump HTML");
