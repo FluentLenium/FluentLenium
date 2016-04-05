@@ -3,8 +3,8 @@ package org.fluentlenium.integration;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
-import org.fluentlenium.core.Fluent;
 import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Before;
@@ -17,20 +17,19 @@ import java.util.concurrent.TimeUnit;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 public class FluentLeniumWaitTest extends LocalFluentCase {
     @Before
     public void before() {
         goTo(DEFAULT_URL);
-
     }
 
     @Test
     public void checkAwaitIsPresent() {
         await().atMost(1, NANOSECONDS).until(".small").isPresent();
     }
-    
+
     @Test
     public void checkAwaitIsClickable() throws Exception {
         await().atMost(1, NANOSECONDS).until(".small").isClickable();
@@ -42,7 +41,6 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     }
 
     @Test
-
     public void checkAwaitHasTextWithText() {
         await().atMost(1, NANOSECONDS).until(".small").withText("Small 1").hasText("Small 1");
     }
@@ -373,16 +371,18 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
         });
     }
 
-}
+    private static class MyFluentPage extends FluentPage {
+        @Override
+        public void isAt() {
+            assertThat(find("#newField").getTexts()).contains("new");
+        }
 
-class MyFluentPage extends FluentPage {
-    @Override
-    public void isAt() {
-        assertThat(find("#newField").getTexts()).contains("new");
+        @Override
+        public String getUrl() {
+            return LocalFluentCase.JAVASCRIPT_URL;
+        }
     }
 
-    @Override
-    public String getUrl() {
-        return LocalFluentCase.JAVASCRIPT_URL;
-    }
 }
+
+

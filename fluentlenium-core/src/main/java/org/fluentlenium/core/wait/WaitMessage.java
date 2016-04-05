@@ -1,7 +1,6 @@
 package org.fluentlenium.core.wait;
 
 public class WaitMessage {
-    private static final String SELECTOR = "Selector ";
     private static final String PAGE = "Page ";
     private static final String IS_NOT_PRESENT = " is not present.";
     private static final String IS_PRESENT = " is present.";
@@ -23,72 +22,72 @@ public class WaitMessage {
     private static final String IS_NOT_ENABLED = " is not enabled";
     private static final String IS_NOT_CLICKABLE = " is not clickable";
 
-    static final String hasSizeMessage(String selector, int size) {
-        return SELECTOR + selector + HAS_NOT_THE_SIZE + size + POINT;
+    static final String hasSizeMessage(String selectionName, int size) {
+        return selectionName + HAS_NOT_THE_SIZE + size + POINT;
     }
 
-    static final String hasAttributeMessage(String selector, String attribute, String value) {
-        return SELECTOR + selector + WITH_ATTRIBUTE + attribute + WITH_VALUE + value + IS_NOT_PRESENT + POINT;
+    static final String hasAttributeMessage(String selectionName, String attribute, String value) {
+        return selectionName + WITH_ATTRIBUTE + attribute + WITH_VALUE + value + IS_NOT_PRESENT + POINT;
     }
 
     static final String isPageLoaded(String url) {
         return PAGE + url + IS_NOT_LOADED + POINT;
     }
 
-    static final String isPresentMessage(String selector) {
-        return SELECTOR + selector + IS_NOT_PRESENT;
+    static final String isPresentMessage(String selectionName) {
+        return selectionName + IS_NOT_PRESENT;
     }
 
-    static final String isNotPresentMessage(String selector) {
-        return SELECTOR + selector + IS_PRESENT;
+    static final String isNotPresentMessage(String selectionName) {
+        return selectionName + IS_PRESENT;
     }
 
-    static final String isDisplayedMessage(String selector) {
-        return SELECTOR + selector + IS_NOT_DISPLAY;
+    static final String isDisplayedMessage(String selectionName) {
+        return selectionName + IS_NOT_DISPLAY;
     }
 
-    static final String isEnabledMessage(String selector) {
-        return SELECTOR + selector + IS_NOT_ENABLED;
+    static final String isEnabledMessage(String selectionName) {
+        return selectionName + IS_NOT_ENABLED;
     }
 
-    static final String isClickableMessage(String selector) {
-        return SELECTOR + selector + IS_NOT_CLICKABLE;
+    static final String isClickableMessage(String selectionName) {
+        return selectionName + IS_NOT_CLICKABLE;
     }
 
-    static final String hasTextMessage(String selector, String value) {
-        return SELECTOR + selector + HAS_NOT_THE_TEXT + value + POINT;
+    static final String hasTextMessage(String selectionName, String value) {
+        return selectionName + HAS_NOT_THE_TEXT + value + POINT;
     }
 
-    static final String hasNameMessage(String selector, String value) {
-        return SELECTOR + selector + HAS_NOT_THE_NAME + value + POINT;
+    static final String hasNameMessage(String selectionName, String value) {
+        return selectionName + HAS_NOT_THE_NAME + value + POINT;
     }
 
-    static final String hasIdMessage(String selector, String value) {
-        return SELECTOR + selector + HAS_NOT_THE_ID + value + POINT;
+    static final String hasIdMessage(String selectionName, String value) {
+        return selectionName + HAS_NOT_THE_ID + value + POINT;
     }
 
-    static final String equalToMessage(String selector, int size) {
-        return SELECTOR + selector + HAS_NOT_SIZE_EQUAL_TO + size + POINT;
+    static final String equalToMessage(String selectionName, int size) {
+        return selectionName + HAS_NOT_SIZE_EQUAL_TO + size + POINT;
     }
 
-    static final String lessThanOrEqualToMessage(String selector, int size) {
-        return SELECTOR + selector + IS_NOT_LESS_THAN_OR_EQUAL_TO + size + POINT;
+    static final String lessThanOrEqualToMessage(String selectionName, int size) {
+        return selectionName + IS_NOT_LESS_THAN_OR_EQUAL_TO + size + POINT;
     }
 
-    static final String notEqualToMessage(String selector, int size) {
-        return SELECTOR + selector + IS_EQUAL_TO + size + POINT;
+    static final String notEqualToMessage(String selectionName, int size) {
+        return selectionName + IS_EQUAL_TO + size + POINT;
     }
 
-    static final String lessThanMessage(String selector, int size) {
-        return SELECTOR + selector + IS_NOT_LESS_THAN + size + POINT;
+    static final String lessThanMessage(String selectionName, int size) {
+        return selectionName + IS_NOT_LESS_THAN + size + POINT;
     }
 
-    static final String greatherThanOrEqualToMessage(String selector, int size) {
-        return SELECTOR + selector + IS_NOT_GREATHER_THAN_OR_EQUAL_TO + size + POINT;
+    static final String greatherThanOrEqualToMessage(String selectionName, int size) {
+        return selectionName + IS_NOT_GREATHER_THAN_OR_EQUAL_TO + size + POINT;
     }
 
-    static final String greatherThanMessage(String selector, int size) {
-        return SELECTOR + selector + IS_NOT_GREATHER_THAN + size + POINT;
+    static final String greatherThanMessage(String selectionName, int size) {
+        return selectionName + IS_NOT_GREATHER_THAN + size + POINT;
     }
 
 }
