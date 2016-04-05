@@ -657,6 +657,10 @@ You can also chain filter in the asynchronous API:
 ```java
 await().atMost(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWith("myValue").with("a second attribute").equalTo("my@ndValue").isPresent();
 ```
+
+You can customize default configuration of `await()` by overriding `awaitConfiguration(FluentWait await)` and return
+a configured await object from default await object given as parameter.
+
 ## Alternative Syntax
 
 If you are more familiar with the [JQuery](http://jquery.com/) syntax, you can use the familiar `$` method:
