@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
-import static org.fluentlenium.core.wait.WaitMessage.*;
+import static org.fluentlenium.core.wait.FluentWaitMessages.*;
 
 /**
  * Base Matcher for waiting on a single element.

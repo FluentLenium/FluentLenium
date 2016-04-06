@@ -61,13 +61,11 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     public FluentWait ignoreAll(java.util.Collection<java.lang.Class<? extends Throwable>> types) {
         wait.ignoreAll(types);
         return this;
-
     }
 
     public FluentWait ignoring(java.lang.Class<? extends java.lang.RuntimeException> exceptionType) {
         wait.ignoring(exceptionType);
         return this;
-
     }
 
     /**
@@ -80,7 +78,6 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     public FluentWait ignoring(java.lang.Class<? extends java.lang.RuntimeException> firstType, java.lang.Class<? extends java.lang.RuntimeException> secondType) {
         wait.ignoring(firstType, secondType);
         return this;
-
     }
 
     /**
@@ -192,15 +189,6 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     public FluentWaitPageMatcher untilPage(FluentPage page) {
         updateWaitWithDefaultExceptions();
         return new FluentWaitPageMatcher(this, driver, page);
-    }
-
-    /**
-     * Return the current driver
-     *
-     * @return web driver
-     */
-    public WebDriver getDriver() {
-        return driver;
     }
 
     /**

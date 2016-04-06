@@ -7,9 +7,9 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
 
-import static org.fluentlenium.core.wait.WaitMessage.hasSizeMessage;
-import static org.fluentlenium.core.wait.WaitMessage.isDisplayedMessage;
-import static org.fluentlenium.core.wait.WaitMessage.isEnabledMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.hasSizeMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
 
 /**
  * Base Matcher for waiting on element list.

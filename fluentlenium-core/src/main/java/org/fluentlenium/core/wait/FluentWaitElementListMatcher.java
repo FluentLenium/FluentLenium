@@ -25,7 +25,7 @@ public class FluentWaitElementListMatcher extends AbstractWaitElementListMatcher
     @Override
     FluentList<FluentWebElement> find() {
         FluentListImpl<FluentWebElement> elements = new FluentListImpl<>();
-        if (elements != null) {
+        if (this.untilElements != null) {
             for (FluentWebElement untilElement : this.untilElements) {
                 try {
                     untilElement.getTagName();
@@ -34,7 +34,6 @@ public class FluentWaitElementListMatcher extends AbstractWaitElementListMatcher
                     // untilElement is a proxy element and is not found.
                 }
             }
-
         }
         return elements;
     }

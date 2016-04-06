@@ -3,12 +3,12 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.Fluent;
 
-import static org.fluentlenium.core.wait.WaitMessage.equalToMessage;
-import static org.fluentlenium.core.wait.WaitMessage.greatherThanMessage;
-import static org.fluentlenium.core.wait.WaitMessage.greatherThanOrEqualToMessage;
-import static org.fluentlenium.core.wait.WaitMessage.lessThanMessage;
-import static org.fluentlenium.core.wait.WaitMessage.lessThanOrEqualToMessage;
-import static org.fluentlenium.core.wait.WaitMessage.notEqualToMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.equalToMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.greatherThanMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.greatherThanOrEqualToMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.lessThanMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.lessThanOrEqualToMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.notEqualToMessage;
 
 public class FluentSizeBuilder {
 

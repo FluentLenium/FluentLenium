@@ -35,11 +35,21 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
     }
 
     @Test
-    public void checkAwaitIsClickable() throws Exception {
+    public void checkAwaitIsClickable() {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
                 return findFirst(".small");
+            }
+        }).isClickable();
+    }
+
+    @Test(expected = TimeoutException.class)
+    public void checkAwaitDisabledIsClickableThrowTimeoutException() {
+        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
+            @Override
+            public FluentWebElement get() {
+                return findFirst("input[disabled]");
             }
         }).isClickable();
     }
@@ -150,6 +160,16 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
     }
 
     @Test
+    public void checkAwaitStartsWithName() {
+        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+            @Override
+            public FluentList<FluentWebElement> get() {
+                return find(".small", withName().startsWith("name"));
+            }
+        }).hasSize(2);
+    }
+
+    @Test
     public void checkAwaitContainsIdWithIdContains() {
         await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
@@ -224,7 +244,17 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
         await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
-                return find(".small", with("id").startsWith(regex("id")));
+                return find(".small", with("id").startsWith(regex(".d")));
+            }
+        }).hasSize(2);
+    }
+
+    @Test
+    public void checkAwaitStartWithString() {
+        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+            @Override
+            public FluentList<FluentWebElement> get() {
+                return find(".small", with("id").startsWith("id"));
             }
         }).hasSize(2);
     }
@@ -400,12 +430,34 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
     }
 
     @Test
+    public void when_element_is_present_then_areDisplayed_return_true() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+            @Override
+            public FluentList<FluentWebElement> get() {
+                return find("#default");
+            }
+        }).areDisplayed();
+    }
+
+    @Test
     public void when_element_is_present_then_isDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find("#default");
+            }
+        }).isDisplayed();
+    }
+
+    @Test(expected = TimeoutException.class)
+    public void when_element_is_not_displayed_then_areDisplayed_throws_exception() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+            @Override
+            public FluentList<FluentWebElement> get() {
+                return find("#unvisible");
             }
         }).areDisplayed();
     }
@@ -418,7 +470,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find("#unvisible");
             }
-        }).areDisplayed();
+        }).isDisplayed();
     }
 
     @Test
@@ -433,6 +485,17 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
     }
 
     @Test
+    public void when_element_is_not_present_then_isNotDisplayed_return_true() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+            @Override
+            public FluentList<FluentWebElement> get() {
+                return find("#nonexistent");
+            }
+        }).isNotDisplayed();
+    }
+
+    @Test
     public void when_element_is_not_displayed_then_areNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
@@ -441,6 +504,17 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
                 return find("#unvisible");
             }
         }).areNotDisplayed();
+    }
+
+    @Test
+    public void when_element_is_not_displayed_then_isNotDisplayed_return_true() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+            @Override
+            public FluentList<FluentWebElement> get() {
+                return find("#unvisible");
+            }
+        }).isNotDisplayed();
     }
 
     @Test(expected = TimeoutException.class)
@@ -454,6 +528,17 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
         }).areNotDisplayed();
     }
 
+    @Test(expected = TimeoutException.class)
+    public void when_element_is_displayed_then_isNotDisplayed_throws_exception() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+            @Override
+            public FluentList<FluentWebElement> get() {
+                return find("#default");
+            }
+        }).isNotDisplayed();
+    }
+
     @Test
     public void when_element_is_enabled_then_areEnabled_return_true() {
         goTo(JAVASCRIPT_URL);
@@ -465,6 +550,17 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
         }).areEnabled();
     }
 
+    @Test
+    public void when_element_is_enabled_then_isEnabled_return_true() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+            @Override
+            public FluentList<FluentWebElement> get() {
+                return find("#default");
+            }
+        }).isEnabled();
+    }
+
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_enabled_then_areEnabled_throws_exception() {
         goTo(JAVASCRIPT_URL);
@@ -474,6 +570,17 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
                 return find("#disabled");
             }
         }).areEnabled();
+    }
+
+    @Test(expected = TimeoutException.class)
+    public void when_element_is_not_enabled_then_isEnabled_throws_exception() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+            @Override
+            public FluentList<FluentWebElement> get() {
+                return find("#disabled");
+            }
+        }).isEnabled();
     }
 
     @Test

@@ -1,6 +1,6 @@
 package org.fluentlenium.core.wait;
 
-public class WaitMessage {
+final class FluentWaitMessages {
     private static final String PAGE = "Page ";
     private static final String IS_NOT_PRESENT = " is not present.";
     private static final String IS_PRESENT = " is present.";
