@@ -15,6 +15,10 @@ import java.util.List;
  */
 public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> implements FluentList<E> {
 
+    public FluentListImpl() {
+        super();
+    }
+
     public FluentListImpl(Collection<E> listFiltered) {
         super(listFiltered);
     }

@@ -3,20 +3,13 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.FluentThread;
-import org.fluentlenium.core.filter.Filter;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isPageLoaded;
 
-import static org.fluentlenium.core.wait.WaitMessage.isPageLoaded;
-
-//import org.openqa.selenium.support.ui.FluentWait;
-
-public class FluentWaitPageMatcher {
-    private List<Filter> filters = new ArrayList<Filter>();
+public class FluentWaitPageMatcher extends AbstractWaitMatcher {
+    private AbstractWaitElementMatcher parent;
     private FluentWait wait;
     private WebDriver webDriver;
     private FluentPage page;
@@ -39,7 +32,7 @@ public class FluentWaitPageMatcher {
      *
      * @return fluent
      */
-    public Fluent isLoaded() {
+    public void isLoaded() {
 
         if (!(webDriver instanceof JavascriptExecutor)) {
             throw new UnsupportedOperationException("Driver must support javascript execution to use this feature");
@@ -51,11 +44,8 @@ public class FluentWaitPageMatcher {
                     return result != null && "complete".equals(result);
                 }
             };
-            FluentWaitMatcher.until(wait, isLoaded, filters, isPageLoaded(webDriver.getCurrentUrl()));
+            until(wait, isLoaded, isPageLoaded(webDriver.getCurrentUrl()));
         }
-
-        return FluentThread.get();
-
     }
 
     /**
@@ -75,7 +65,7 @@ public class FluentWaitPageMatcher {
                 return true;
             }
         };
-        FluentWaitMatcher.until(wait, isLoaded, filters, "");
+        until(wait, isLoaded, "");
 
     }
 }

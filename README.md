@@ -634,6 +634,24 @@ If you need to filter on a custom attribute name, this syntax will help:
 await().atMost(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWith("myValue").isPresent();
 ```
 
+You can also give instance of elements or list of elements if required.
+
+```java
+@FindBy(css = ".button")
+FluentWebElement button;
+
+await().atMost(5, TimeUnit.SECONDS).until(element).isEnabled();
+```
+
+When running Java >= 8, you can use lambdas with `until`, `untilPredicate`, `untilElement` or `untilElements`.
+```java
+await().atMost(5, TimeUnit.SECONDS).untilElement(() -> findFirst(".button")).isEnabled();
+await().atMost(5, TimeUnit.SECONDS).untilElements(() -> find(".button")).areEnabled();
+
+await().atMost(5, TimeUnit.SECONDS).untilPredicate((f) -> findFirst(".button").isEnabled());
+await().atMost(5, TimeUnit.SECONDS).until(() -> findFirst(".button").isEnabled());
+```
+
 You can also check if the page is loaded using
 ```java
 await().atMost(1, NANOSECONDS).untilPage().isLoaded();
