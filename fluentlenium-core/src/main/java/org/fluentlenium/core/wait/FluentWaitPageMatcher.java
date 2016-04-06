@@ -29,8 +29,6 @@ public class FluentWaitPageMatcher extends AbstractWaitMatcher {
     /**
      * check if the page is loaded or not.
      * Be careful, it needs javascript enabled. Throw an UnsupportedOperationException if not.
-     *
-     * @return fluent
      */
     public void isLoaded() {
 

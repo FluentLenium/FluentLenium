@@ -73,7 +73,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
      *
      * @param firstType  first type of exception which extends java.lang.RuntimeException
      * @param secondType second type of exception which extends java.lang.RuntimeException
-     * @return
+     * @return this fluent wait
      */
     public FluentWait ignoring(java.lang.Class<? extends java.lang.RuntimeException> firstType, java.lang.Class<? extends java.lang.RuntimeException> secondType) {
         wait.ignoring(firstType, secondType);
@@ -194,7 +194,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     /**
      * Wait until the given condition is true.
      *
-     * @param isTrue
+     * @param isTrue supplier of a condition returning a boolean.
      */
     public void until(final Supplier<Boolean> isTrue) {
         updateWaitWithDefaultExceptions();
@@ -212,7 +212,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     /**
      * Wait until the given condition is true.
      *
-     * @param isTrue
+     * @param isTrue function of a condition returning a boolean or any other object.
      */
     @Override
     public <T> T until(Function<? super Fluent, T> isTrue) {

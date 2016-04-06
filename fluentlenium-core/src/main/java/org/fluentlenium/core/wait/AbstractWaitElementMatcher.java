@@ -30,7 +30,6 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
      *
      * @param attribute attribute name
      * @param value     attribute value
-     * @return fluent
      */
     public void hasAttribute(final String attribute, final String value) {
         Predicate<Fluent> hasAttribute = new com.google.common.base.Predicate<Fluent>() {
@@ -45,7 +44,6 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
      * check if the FluentWait has the corresponding id
      *
      * @param value id value
-     * @return fluent
      */
     public void hasId(final String value) {
         Predicate<Fluent> hasId = new com.google.common.base.Predicate<Fluent>() {
@@ -60,7 +58,6 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
      * check if the FluentWait has the corresponding name
      *
      * @param value name value
-     * @return fluent
      */
     public void hasName(final String value) {
         Predicate<Fluent> hasName = new com.google.common.base.Predicate<Fluent>() {
@@ -77,7 +74,6 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
      * check if the FluentWait contains the corresponding text
      *
      * @param value text in contains check
-     * @return fluent
      */
     public void containsText(final String value) {
         Predicate<Fluent> hasText = new com.google.common.base.Predicate<Fluent>() {
@@ -100,7 +96,6 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
      * check if the FluentWait has the exact corresponding text
      *
      * @param value text in contains check
-     * @return fluent
      */
     public void hasText(final String value) {
         Predicate<Fluent> hasText = new com.google.common.base.Predicate<Fluent>() {
@@ -113,8 +108,6 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
 
     /**
      * Check that the element is present
-     *
-     * @return fluent
      */
     public void isPresent() {
         Predicate<Fluent> isPresent = new com.google.common.base.Predicate<Fluent>() {
@@ -129,8 +122,6 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
 
     /**
      * Check that the element is not present
-     *
-     * @return fluent
      */
     public void isNotPresent() {
         Predicate<Fluent> isNotPresent = new com.google.common.base.Predicate<Fluent>() {
@@ -162,8 +153,6 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
 
     /**
      * Check that one or more elements is not displayed
-     *
-     * @return fluent
      */
     public void isNotDisplayed() {
         Predicate<Fluent> isNotVisible = new com.google.common.base.Predicate<Fluent>() {
@@ -229,8 +218,8 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
     /**
      * Find the elements from configured matcher.
      *
-     * @return
+     * @return fuent list of matching elements.
      */
-    abstract FluentList<? extends FluentWebElement> find();
+    abstract protected FluentList<? extends FluentWebElement> find();
 
 }

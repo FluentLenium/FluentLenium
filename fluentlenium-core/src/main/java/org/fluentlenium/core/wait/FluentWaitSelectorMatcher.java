@@ -45,11 +45,6 @@ public class FluentWaitSelectorMatcher extends AbstractWaitElementListMatcher {
         return message.toString();
     }
 
-    /**
-     * Find the elements from configured matcher.
-     *
-     * @return
-     */
     protected FluentList<FluentWebElement> find() {
         if (filters.size() > 0) {
             return findWithFilter();

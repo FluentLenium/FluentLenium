@@ -21,7 +21,7 @@ public class FluentWaitElementMatcher extends AbstractWaitElementMatcher {
     }
 
     @Override
-    FluentList<FluentWebElement> find() {
+    protected FluentList<FluentWebElement> find() {
         FluentListImpl<FluentWebElement> elements = new FluentListImpl<>();
         if (untilElement != null) {
             try {

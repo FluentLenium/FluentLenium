@@ -11,8 +11,8 @@ public abstract class AbstractWaitMatcher {
     /**
      * Build the final message from default message.
      *
-     * @param defaultMessage
-     * @return
+     * @param defaultMessage the default message that will be used as base.
+     * @return final message
      */
     protected String buildMessage(String defaultMessage) {
         return defaultMessage;
@@ -21,9 +21,9 @@ public abstract class AbstractWaitMatcher {
     /**
      * Perform the wait.
      *
-     * @param wait
-     * @param present
-     * @param defaultMessage
+     * @param wait fluent wait object.
+     * @param present predicate to wait for.
+     * @param defaultMessage default message to use.
      */
     protected void until(FluentWait wait, Predicate<Fluent> present, String defaultMessage) {
         if (wait.useCustomMessage()) {

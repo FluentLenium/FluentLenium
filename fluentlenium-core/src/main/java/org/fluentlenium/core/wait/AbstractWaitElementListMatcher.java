@@ -22,8 +22,6 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
 
     /**
      * Check that the elements are all enabled
-     *
-     * @return fluent
      */
     public void areEnabled() {
         Predicate<Fluent> isEnabled = new com.google.common.base.Predicate<Fluent>() {
@@ -45,8 +43,6 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
 
     /**
      * Check that all the elements are all displayed
-     *
-     * @return fluent
      */
     public void areDisplayed() {
         Predicate<Fluent> isVisible = new com.google.common.base.Predicate<Fluent>() {
@@ -68,8 +64,6 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
 
     /**
      * Check that all the elements are not displayed
-     *
-     * @return fluent
      */
     public void areNotDisplayed() {
         Predicate<Fluent> isNotVisible = new com.google.common.base.Predicate<Fluent>() {
@@ -99,7 +93,6 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
      * Check that the element have the size indicated
      *
      * @param size integer value of size
-     * @return fluent
      */
     public void hasSize(final int size) {
         Predicate<Fluent> hasSize = new com.google.common.base.Predicate<Fluent>() {

@@ -329,7 +329,8 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     /**
      * Open the url page in a new tab
      *
-     * @param url
+     * @param url the url of the page to
+     * @return fluent object
      */
     public Fluent goToInNewTab(String url) {
         if (url == null) {

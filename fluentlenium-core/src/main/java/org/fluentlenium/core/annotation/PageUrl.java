@@ -13,7 +13,7 @@ public @interface PageUrl {
     /**
      * The page URL can be relative or absolute, if the URL is not recognized
      * as absolute will be treated as relative.
-     * <p/>
+     * <p>
      * For example :
      * <code>@PageUrl("/index.html")</code>        should redirect to baseUrl + "/index.html"
      * <code>@PageUrl("http://example.com")</code> should redirect to "http://example.com"

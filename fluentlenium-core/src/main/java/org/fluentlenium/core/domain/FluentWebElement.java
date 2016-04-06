@@ -50,12 +50,11 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
-     * Wrap the underlying element in a component.
+     * Wrap all underlying elements in a componen..
      *
-     * Component class should extend FluentWebElement, but it's not mandatory.
-     * Component class must have a constructor with a single WebElement argument.
-     *
-     * @return element as a component.
+     * @param componentClass component class
+     * @param <T>            type of component
+     * @return element as component.
      */
     public <T> T as(Class<T> componentClass) {
         try {
@@ -356,6 +355,8 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * Construct a FillSelectConstructor in order to allow easy list selection
      * Be careful - only the visible elements are filled
+     *
+     * @return fill constructor
      */
     public FillSelectConstructor fillSelect() {
         return new FillSelectConstructor(this, FluentThread.get().getDriver());

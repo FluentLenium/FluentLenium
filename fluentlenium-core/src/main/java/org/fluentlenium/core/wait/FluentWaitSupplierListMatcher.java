@@ -17,7 +17,7 @@ public class FluentWaitSupplierListMatcher extends AbstractWaitElementListMatche
     }
 
     @Override
-    FluentList<? extends FluentWebElement> find() {
+    protected FluentList<? extends FluentWebElement> find() {
         return selector.get();
     }
 }
