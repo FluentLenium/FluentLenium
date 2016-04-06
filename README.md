@@ -663,6 +663,14 @@ await().atMost(5, TimeUnit.SECONDS).untilPage(myPage).isAt();
 ```
 This methods actually calls myPage.isAt(). If the isAt() method of the myPage object does not throw any exception during the time specified, then the framework will consider that the page is the one wanted.
 
+You can override `await()` method in your own test class to define global settings on wait objects.
+```java
+@Override
+public FluentWait await() {
+    return super.await().atMost(5, TimeUnit.SECONDS).ignoring(NoSuchElementException.class, ElementNotVisibleException.class);
+}
+```
+
 ### Polling Every
 You can also define the polling frequency, for example, if you want to poll every 5 seconds:
 ```java
