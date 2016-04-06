@@ -238,12 +238,24 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     }
 
     /**
-     * wait for an asynchronous call
+     * Override this method to configure all FluentWait returned by await().
      *
-     * @return FluentWait element
+     * @param await
+     * @return Configured await object.
+     */
+    protected FluentWait awaitConfiguration(FluentWait await) {
+        return await;
+    }
+
+    /**
+     * Wait for an asynchronous call
+     *
+     * @return FluentWait object
      */
     public FluentWait await() {
-        return new FluentWait(this, getSearch());
+        FluentWait await = new FluentWait(this, getSearch());
+        FluentWait configuredAwait = awaitConfiguration(await);
+        return configuredAwait != null ? configuredAwait : await;
     }
 
     /**
