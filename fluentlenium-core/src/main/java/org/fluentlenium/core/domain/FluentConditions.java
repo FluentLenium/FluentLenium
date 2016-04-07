@@ -15,8 +15,23 @@ public class FluentConditions {
         this.element = element;
     }
 
+    /**
+     * Check that this element is visible and enabled such that you can click it.
+     *
+     * @return true if the element can be clicked, false otherwise.
+     */
     public boolean isClickable() {
         FluentAdapter fluent = FluentThread.get();
         return ExpectedConditions.elementToBeClickable(element).apply(fluent.getDriver()) != null;
+    }
+
+    /**
+     * Check that this element is no longer attached to the DOM.
+     *
+     * @return false is the element is still attached to the DOM, true otherwise.
+     */
+    public boolean isStale() {
+        FluentAdapter fluent = FluentThread.get();
+        return ExpectedConditions.stalenessOf(element).apply(fluent.getDriver());
     }
 }

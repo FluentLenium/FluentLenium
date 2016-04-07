@@ -12,6 +12,7 @@ import static org.fluentlenium.core.wait.FluentWaitMessages.isClickableMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateVerifiedMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isStaleMessage;
 
 /**
  * Base Matcher for waiting on element list.
@@ -102,6 +103,19 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
         }, false);
 
         until(wait, isClickable, isClickableMessage(selectionName));
+    }
+
+    /**
+     * Check that one or more element is stale
+     */
+    public void areStale() {
+        Predicate<Fluent> isClickable = buildAllPredicate(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return input.conditions().isStale();
+            }
+        }, false);
+        until(wait, isClickable, isStaleMessage(selectionName));
     }
 
     /**
