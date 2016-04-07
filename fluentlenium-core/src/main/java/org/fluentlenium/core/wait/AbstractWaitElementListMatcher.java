@@ -11,6 +11,8 @@ import static org.fluentlenium.core.wait.FluentWaitMessages.hasSizeMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isClickableMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isNotDisplayedMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isNotEnabledMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isNotSelectedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateVerifiedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isSelectedMessage;
@@ -68,6 +70,19 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
     }
 
     /**
+     * Check that all the elements are not enabled
+     */
+    public void areNotEnabled() {
+        Predicate<Fluent> isEnabled = buildAllPredicate(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return !input.isEnabled();
+            }
+        }, false);
+        until(wait, isEnabled, isNotEnabledMessage(selectionName));
+    }
+
+    /**
      * Check that all the elements are displayed
      */
     public void areDisplayed() {
@@ -90,7 +105,7 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
                 return !input.isDisplayed();
             }
         }, true);
-        until(wait, isNotVisible, isDisplayedMessage(selectionName));
+        until(wait, isNotVisible, isNotDisplayedMessage(selectionName));
     }
 
     /**

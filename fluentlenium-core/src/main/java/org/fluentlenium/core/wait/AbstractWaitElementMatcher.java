@@ -15,6 +15,8 @@ import static org.fluentlenium.core.wait.FluentWaitMessages.hasTextMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isClickableMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isNotDisplayedMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isNotEnabledMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isNotPresentMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isNotSelectedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateVerifiedMessage;
@@ -195,7 +197,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
                 return !input.isDisplayed();
             }
         }, true);
-        until(wait, isNotDisplayed, isDisplayedMessage(selectionName));
+        until(wait, isNotDisplayed, isNotDisplayedMessage(selectionName));
     }
 
     /**
@@ -209,6 +211,19 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
             }
         }, false);
         until(wait, isEnabled, isEnabledMessage(selectionName));
+    }
+
+    /**
+     * Check that one or more element is enabled
+     */
+    public void isNotEnabled() {
+        Predicate<Fluent> isEnabled = buildOneOrMorePredicate(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return !input.isEnabled();
+            }
+        }, false);
+        until(wait, isEnabled, isNotEnabledMessage(selectionName));
     }
 
     /**
