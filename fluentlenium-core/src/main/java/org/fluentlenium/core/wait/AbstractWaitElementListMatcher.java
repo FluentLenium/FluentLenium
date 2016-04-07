@@ -98,7 +98,7 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
         Predicate<Fluent> isClickable = buildAllPredicate(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.conditions().isClickable();
+                return input.isClickable();
             }
         }, false);
 
@@ -112,7 +112,7 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
         Predicate<Fluent> isClickable = buildAllPredicate(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.conditions().isStale();
+                return input.isStale();
             }
         }, false);
         until(wait, isClickable, isStaleMessage(selectionName));

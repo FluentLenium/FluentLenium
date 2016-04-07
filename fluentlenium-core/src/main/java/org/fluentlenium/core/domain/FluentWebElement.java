@@ -1,5 +1,6 @@
 package org.fluentlenium.core.domain;
 
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.action.FillConstructor;
 import org.fluentlenium.core.action.FillSelectConstructor;
@@ -13,6 +14,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.lang.reflect.Constructor;
 
@@ -51,16 +53,22 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
         return this.axes;
     }
 
+    /**
+     * Check that this element is visible and enabled such that you can click it.
+     *
+     * @return true if the element can be clicked, false otherwise.
+     */
+    public boolean isClickable() {
+        return conditions.isClickable();
+    }
 
     /**
-     * Access to advanced functions for checking conditions of the element.
+     * Check that this element is no longer attached to the DOM.
      *
-     * @return expected conditions object
-     *
-     * @see {@link org.openqa.selenium.support.ui.ExpectedConditions}
+     * @return false is the element is still attached to the DOM, true otherwise.
      */
-    public FluentConditions conditions() {
-        return this.conditions;
+    public boolean isStale() {
+        return conditions.isStale();
     }
 
     /**
