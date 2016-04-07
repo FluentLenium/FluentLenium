@@ -2,8 +2,8 @@ package org.fluentlenium.core.wait;
 
 final class FluentWaitMessages {
     private static final String PAGE = "Page ";
-    private static final String IS_NOT_PRESENT = " is not present.";
-    private static final String IS_PRESENT = " is present.";
+    private static final String IS_NOT_PRESENT = " is not present";
+    private static final String IS_PRESENT = " is present";
     private static final String HAS_NOT_THE_NAME = " has not the name ";
     private static final String HAS_NOT_THE_SIZE = " has not the size ";
     private static final String POINT = ".";
@@ -18,9 +18,15 @@ final class FluentWaitMessages {
     private static final String IS_NOT_GREATHER_THAN = " is not greather than ";
     private static final String IS_NOT_GREATHER_THAN_OR_EQUAL_TO = " is not greather than or equal to ";
     private static final String IS_NOT_LOADED = " is not loaded";
+    private static final String IS_DISPLAY = " is displayed";
     private static final String IS_NOT_DISPLAY = " is not displayed";
+    private static final String IS_ENABLED = " is enabled";
     private static final String IS_NOT_ENABLED = " is not enabled";
     private static final String IS_NOT_CLICKABLE = " is not clickable";
+    private static final String IS_NOT_SELECTED = " is not selected";
+    private static final String IS_SELECTED = " is selected";
+    private static final String IS_STALE = " is stale";
+    private static final String PREDICATED_IS_NOT_VERIFIED = " predicated is not verified";
 
     static final String hasSizeMessage(String selectionName, int size) {
         return selectionName + HAS_NOT_THE_SIZE + size + POINT;
@@ -35,23 +41,43 @@ final class FluentWaitMessages {
     }
 
     static final String isPresentMessage(String selectionName) {
-        return selectionName + IS_NOT_PRESENT;
+        return selectionName + IS_NOT_PRESENT + POINT;
     }
 
     static final String isNotPresentMessage(String selectionName) {
-        return selectionName + IS_PRESENT;
+        return selectionName + IS_PRESENT + POINT;
     }
 
     static final String isDisplayedMessage(String selectionName) {
         return selectionName + IS_NOT_DISPLAY;
     }
 
+    static final String isNotDisplayedMessage(String selectionName) {
+        return selectionName + IS_DISPLAY;
+    }
+
     static final String isEnabledMessage(String selectionName) {
         return selectionName + IS_NOT_ENABLED;
     }
 
+    static final String isNotEnabledMessage(String selectionName) {
+        return selectionName + IS_ENABLED;
+    }
+
+    static final String isSelectedMessage(String selectionName) {
+        return selectionName + IS_SELECTED;
+    }
+
+    static final String isNotSelectedMessage(String selectionName) {
+        return selectionName + IS_NOT_SELECTED;
+    }
+
     static final String isClickableMessage(String selectionName) {
         return selectionName + IS_NOT_CLICKABLE;
+    }
+
+    static final String isStaleMessage(String selectionName) {
+        return selectionName + IS_STALE;
     }
 
     static final String hasTextMessage(String selectionName, String value) {
@@ -88,6 +114,10 @@ final class FluentWaitMessages {
 
     static final String greatherThanMessage(String selectionName, int size) {
         return selectionName + IS_NOT_GREATHER_THAN + size + POINT;
+    }
+
+    static final String isPredicateVerifiedMessage(String selectionName) {
+        return selectionName + PREDICATED_IS_NOT_VERIFIED;
     }
 
 }

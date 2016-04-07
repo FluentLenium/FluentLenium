@@ -30,6 +30,9 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
     private FluentList<FluentWebElement> smallElements;
 
     @FindBy(tagName = "input")
+    private FluentWebElement inputElement;
+
+    @FindBy(tagName = "input")
     private FluentList<FluentWebElement> inputElements;
 
     @FindBy(css = "input[disabled]")
@@ -74,7 +77,7 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
 
     @Test
     public void checkAwaitIsClickableForSingleElement() {
-        await().atMost(1, NANOSECONDS).until(defaultElement).isClickable();
+        await().atMost(1, NANOSECONDS).until(inputElement).isClickable();
     }
 
     @Test(expected = TimeoutException.class)
