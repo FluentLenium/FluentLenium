@@ -11,7 +11,9 @@ import static org.fluentlenium.core.wait.FluentWaitMessages.hasSizeMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isClickableMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isNotSelectedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateVerifiedMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isSelectedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isStaleMessage;
 
 /**
@@ -103,6 +105,32 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
         }, false);
 
         until(wait, isClickable, isClickableMessage(selectionName));
+    }
+
+    /**
+     * Check that all the elements are selected
+     */
+    public void areSelected() {
+        Predicate<Fluent> isSelected = buildAllPredicate(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return input.isSelected();
+            }
+        }, false);
+        until(wait, isSelected, isSelectedMessage(selectionName));
+    }
+
+    /**
+     * Check that all the elements are not selected
+     */
+    public void areNotSelected() {
+        Predicate<Fluent> isNotSelected = buildAllPredicate(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return !input.isSelected();
+            }
+        }, false);
+        until(wait, isNotSelected, isNotSelectedMessage(selectionName));
     }
 
     /**

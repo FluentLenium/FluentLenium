@@ -21,6 +21,8 @@ final class FluentWaitMessages {
     private static final String IS_NOT_DISPLAY = " is not displayed";
     private static final String IS_NOT_ENABLED = " is not enabled";
     private static final String IS_NOT_CLICKABLE = " is not clickable";
+    private static final String IS_NOT_SELECTED = " is not selected";
+    private static final String IS_SELECTED = " is selected";
     private static final String IS_STALE = " is stale";
     private static final String PREDICATED_IS_NOT_VERIFIED = " predicated is not verified";
 
@@ -50,6 +52,14 @@ final class FluentWaitMessages {
 
     static final String isEnabledMessage(String selectionName) {
         return selectionName + IS_NOT_ENABLED;
+    }
+
+    static final String isSelectedMessage(String selectionName) {
+        return selectionName + IS_SELECTED;
+    }
+
+    static final String isNotSelectedMessage(String selectionName) {
+        return selectionName + IS_NOT_SELECTED;
     }
 
     static final String isClickableMessage(String selectionName) {

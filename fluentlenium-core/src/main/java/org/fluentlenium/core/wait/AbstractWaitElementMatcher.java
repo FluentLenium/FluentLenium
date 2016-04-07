@@ -16,8 +16,10 @@ import static org.fluentlenium.core.wait.FluentWaitMessages.isClickableMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isNotPresentMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isNotSelectedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateVerifiedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isPresentMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isSelectedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isStaleMessage;
 
 /**
@@ -207,6 +209,32 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
             }
         }, false);
         until(wait, isEnabled, isEnabledMessage(selectionName));
+    }
+
+    /**
+     * Check that one or more element is selected
+     */
+    public void isSelected() {
+        Predicate<Fluent> isSelected = buildOneOrMorePredicate(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return input.isSelected();
+            }
+        }, false);
+        until(wait, isSelected, isSelectedMessage(selectionName));
+    }
+
+    /**
+     * Check that one or more element is not selected
+     */
+    public void isNotSelected() {
+        Predicate<Fluent> isNotSelected = buildOneOrMorePredicate(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return !input.isSelected();
+            }
+        }, false);
+        until(wait, isNotSelected, isNotSelectedMessage(selectionName));
     }
 
     /**
