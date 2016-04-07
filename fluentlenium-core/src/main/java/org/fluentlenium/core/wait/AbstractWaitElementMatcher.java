@@ -5,11 +5,19 @@ import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
-import static org.fluentlenium.core.wait.FluentWaitMessages.*;
+import static org.fluentlenium.core.wait.FluentWaitMessages.hasAttributeMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.hasIdMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.hasNameMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.hasTextMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isClickableMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isNotPresentMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateVerifiedMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isPresentMessage;
 
 /**
  * Base Matcher for waiting on a single element.
@@ -23,6 +31,35 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
         this.selectionName = selectionName;
         this.wait = wait;
         this.search = search;
+    }
+
+    /**
+     * Check that given predicated is verified for one or more element.
+     *
+     * @param predicate    predicate function to verify for each element.
+     * @param defaultValue value to use when no element match.
+     */
+    public void isVerified(Predicate<FluentWebElement> predicate, boolean defaultValue) {
+        Predicate<Fluent> isVerified = buildOneOrMorePredicate(predicate, defaultValue);
+        until(wait, isVerified, isPredicateVerifiedMessage(selectionName));
+    }
+
+    protected Predicate<Fluent> buildOneOrMorePredicate(final Predicate<FluentWebElement> predicate, final boolean defaultValue) {
+        Predicate<Fluent> untilPredicate = new com.google.common.base.Predicate<Fluent>() {
+            public boolean apply(Fluent fluent) {
+                FluentList<? extends FluentWebElement> fluentWebElements = find();
+                if (fluentWebElements.size() > 0) {
+                    for (FluentWebElement fluentWebElement : fluentWebElements) {
+                        if (predicate.apply(fluentWebElement)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                return defaultValue;
+            }
+        };
+        return untilPredicate;
     }
 
     /**
@@ -67,7 +104,6 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
         };
         until(wait, hasName, hasNameMessage(selectionName, value));
     }
-
 
 
     /**
@@ -137,81 +173,51 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
      * Check that one or more element is displayed
      */
     public void isDisplayed() {
-        Predicate<Fluent> isVisible = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
-                FluentList<? extends FluentWebElement> fluentWebElements = find();
-                for (FluentWebElement fluentWebElement : fluentWebElements) {
-                    if (fluentWebElement.isDisplayed()) {
-                        return true;
-                    }
-                }
-                return false;
+        Predicate<Fluent> isDisplayed = buildOneOrMorePredicate(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return input.isDisplayed();
             }
-        };
-        until(wait, isVisible, isDisplayedMessage(selectionName));
+        }, false);
+        until(wait, isDisplayed, isDisplayedMessage(selectionName));
     }
 
     /**
      * Check that one or more elements is not displayed
      */
     public void isNotDisplayed() {
-        Predicate<Fluent> isNotVisible = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
-                FluentList<? extends FluentWebElement> fluentWebElements = find();
-                if (fluentWebElements.size() > 0) {
-                    for (FluentWebElement fluentWebElement : fluentWebElements) {
-                        if (!fluentWebElement.isDisplayed()) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-                return true;
+        Predicate<Fluent> isNotDisplayed = buildOneOrMorePredicate(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return !input.isDisplayed();
             }
-        };
-        until(wait, isNotVisible, isDisplayedMessage(selectionName));
+        }, true);
+        until(wait, isNotDisplayed, isDisplayedMessage(selectionName));
     }
 
     /**
      * Check that one or more element is enabled
      */
     public void isEnabled() {
-        Predicate<Fluent> isEnabled = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
-                FluentList<? extends FluentWebElement> fluentWebElements = find();
-                if (fluentWebElements.size() > 0) {
-                    for (FluentWebElement fluentWebElement : fluentWebElements) {
-                        if (fluentWebElement.isEnabled()) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-                return false;
+        Predicate<Fluent> isEnabled = buildOneOrMorePredicate(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return input.isEnabled();
             }
-        };
+        }, false);
         until(wait, isEnabled, isEnabledMessage(selectionName));
     }
-
 
     /**
      * Check that one or more element is clickable
      */
     public void isClickable() {
-        Predicate<Fluent> isClickable = new com.google.common.base.Predicate<Fluent>() {
-
+        Predicate<Fluent> isClickable = buildOneOrMorePredicate(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(Fluent input) {
-                FluentList<? extends FluentWebElement> fluentWebElements = find();
-                for (FluentWebElement element : find()) {
-                    if (element.conditions().isClickable()) {
-                        return true;
-                    }
-                }
-                return false;
+            public boolean apply(FluentWebElement input) {
+                return input.conditions().isClickable();
             }
-        };
-
+        }, false);
         until(wait, isClickable, isClickableMessage(selectionName));
     }
 

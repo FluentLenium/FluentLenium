@@ -21,6 +21,7 @@ final class FluentWaitMessages {
     private static final String IS_NOT_DISPLAY = " is not displayed";
     private static final String IS_NOT_ENABLED = " is not enabled";
     private static final String IS_NOT_CLICKABLE = " is not clickable";
+    private static final String PREDICATED_IS_NOT_VERIFIED = " predicated is not verified";
 
     static final String hasSizeMessage(String selectionName, int size) {
         return selectionName + HAS_NOT_THE_SIZE + size + POINT;
@@ -88,6 +89,10 @@ final class FluentWaitMessages {
 
     static final String greatherThanMessage(String selectionName, int size) {
         return selectionName + IS_NOT_GREATHER_THAN + size + POINT;
+    }
+
+    static final String isPredicateVerifiedMessage(String selectionName) {
+        return selectionName + PREDICATED_IS_NOT_VERIFIED;
     }
 
 }
