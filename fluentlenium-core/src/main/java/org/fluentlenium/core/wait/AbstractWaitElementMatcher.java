@@ -107,7 +107,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
     }
 
     /**
-     * Check that the element is present
+     * Check that one or more element is present
      */
     public void isPresent() {
         Predicate<Fluent> isPresent = new com.google.common.base.Predicate<Fluent>() {
@@ -121,7 +121,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
     }
 
     /**
-     * Check that the element is not present
+     * Check that no element is present
      */
     public void isNotPresent() {
         Predicate<Fluent> isNotPresent = new com.google.common.base.Predicate<Fluent>() {
@@ -195,20 +195,20 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
 
 
     /**
-     * Check that the elements are all clickable
+     * Check that one or more element is clickable
      */
     public void isClickable() {
         Predicate<Fluent> isClickable = new com.google.common.base.Predicate<Fluent>() {
 
             @Override
             public boolean apply(Fluent input) {
+                FluentList<? extends FluentWebElement> fluentWebElements = find();
                 for (FluentWebElement element : find()) {
-                    if (ExpectedConditions.elementToBeClickable(element.getElement())
-                            .apply(input.getDriver()) == null) {
-                        return false;
+                    if (element.conditions().isClickable()) {
+                        return true;
                     }
                 }
-                return true;
+                return false;
             }
         };
 

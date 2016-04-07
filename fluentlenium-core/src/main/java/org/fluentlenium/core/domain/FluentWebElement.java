@@ -23,11 +23,13 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     private final WebElement webElement;
     private final Search search;
     private final Axes axes;
+    private final FluentConditions conditions;
 
     public FluentWebElement(WebElement webElement) {
         this.webElement = webElement;
         this.search = new Search(webElement);
         this.axes = new Axes(webElement);
+        this.conditions = new FluentConditions(webElement);
     }
 
     /**
@@ -47,6 +49,18 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public Axes axes() {
         return this.axes;
+    }
+
+
+    /**
+     * Access to advanced functions for checking conditions of the element.
+     *
+     * @return expected conditions object
+     *
+     * @see {@link org.openqa.selenium.support.ui.ExpectedConditions}
+     */
+    public FluentConditions conditions() {
+        return this.conditions;
     }
 
     /**

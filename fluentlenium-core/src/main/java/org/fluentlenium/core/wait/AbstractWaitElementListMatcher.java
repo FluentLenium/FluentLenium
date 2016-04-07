@@ -8,6 +8,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
 
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasSizeMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isClickableMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
 
@@ -78,6 +79,30 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
             }
         };
         until(wait, isNotVisible, isDisplayedMessage(selectionName));
+    }
+
+    /**
+     * Check that all the elements are clickable
+     */
+    public void areClickable() {
+        Predicate<Fluent> isClickable = new com.google.common.base.Predicate<Fluent>() {
+
+            @Override
+            public boolean apply(Fluent input) {
+                FluentList<? extends FluentWebElement> fluentWebElements = find();
+                if (fluentWebElements.size() > 0) {
+                    for (FluentWebElement element : find()) {
+                        if (!element.conditions().isClickable()) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                return false;
+            }
+        };
+
+        until(wait, isClickable, isClickableMessage(selectionName));
     }
 
     /**
