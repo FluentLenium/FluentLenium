@@ -78,6 +78,15 @@ public class ActionOnSelectorTest extends LocalFluentCase {
     }
 
     @Test
+    public void checkMouseOverAction() {
+        goTo(DEFAULT_URL);
+        assertThat(title()).contains("Selenium");
+        assertThat($("#id3").getText()).isEqualTo("This text should change on MouseOver");
+        $("#mouseover").first().mouseOver();
+        assertThat($("#id3").getText()).isEqualTo("abc");
+    }
+
+    @Test
     public void checkTextAction() {
         goTo(DEFAULT_URL);
         assertThat($("#name").getValues()).contains("John");

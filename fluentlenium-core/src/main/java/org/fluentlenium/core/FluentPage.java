@@ -1,5 +1,6 @@
 package org.fluentlenium.core;
 
+import org.fluentlenium.core.annotation.PageUrl;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -21,6 +22,12 @@ public abstract class FluentPage extends Fluent {
      * @return page URL
      */
     public String getUrl() {
+        if (this.getClass().isAnnotationPresent(PageUrl.class)) {
+            String url = this.getClass().getAnnotation(PageUrl.class).value();
+            if (!url.isEmpty()) {
+                return url;
+            }
+        }
         return null;
     }
 
@@ -40,6 +47,4 @@ public abstract class FluentPage extends Fluent {
     public final void go() {
         goTo(getUrl());
     }
-
-
 }

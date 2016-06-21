@@ -15,6 +15,10 @@ import java.util.List;
  */
 public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> implements FluentList<E> {
 
+    public FluentListImpl() {
+        super();
+    }
+
     public FluentListImpl(Collection<E> listFiltered) {
         super(listFiltered);
     }
@@ -342,6 +346,17 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     @Override
     public E findFirst(Filter... filters) {
         return find(0, filters);
+    }
+
+    @Override
+    public <T extends FluentWebElement> FluentList<T> as(Class<T> componentClass) {
+        List<T> elements = new ArrayList<>();
+
+        for (E e : this) {
+            elements.add(e.as(componentClass));
+        }
+
+        return new FluentListImpl<>(elements);
     }
 }
 

@@ -1,6 +1,5 @@
 package org.fluentlenium.assertj.custom;
 
-import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.AbstractAssert;
 import org.fluentlenium.core.domain.FluentList;
 
@@ -81,7 +80,15 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
             if (classesLst.contains(classToFind)) return this;
         }
 
-        super.failWithMessage("No selected elements has class: " + classToFind + " . Actual classes found : " + StringUtils.join(classesFromElements, ", "));
+        StringBuilder sb = new StringBuilder();
+        for (String classFromElement : classesFromElements) {
+            if (sb.length() > 0) {
+                sb.append(", ");
+            }
+            sb.append(classFromElement);
+        }
+
+        super.failWithMessage("No selected elements has class: " + classToFind + " . Actual classes found : " + sb.toString());
         return this;
     }
 

@@ -2,6 +2,7 @@ package org.fluentlenium.integration;
 
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
+import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ public class BaseUrlTest extends LocalFluentCase {
 
     @Override
     public String getDefaultBaseUrl() {
-        return DEFAULT_URL;
+        return DEFAULT_URL_PATH;
     }
 
     @Test
@@ -46,13 +47,8 @@ public class BaseUrlTest extends LocalFluentCase {
 
 }
 
+@PageUrl("/page2.html")
 class Page2Relative extends FluentPage {
-
-    @Override
-    public String getUrl() {
-        return LocalFluentCase.PAGE_2_URL;
-    }
-
     @Override
     public void isAt() {
         assertThat(getDriver().getTitle()).isEqualTo("Page 2");

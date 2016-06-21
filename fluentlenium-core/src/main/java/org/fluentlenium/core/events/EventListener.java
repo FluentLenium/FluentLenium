@@ -150,4 +150,18 @@ public interface EventListener {
      */
     void onException(final Throwable throwable, final WebDriver driver);
 
+    /**
+     * Called before {@link org.openqa.selenium.WebDriver.Navigation#refresh navigate().refresh()}.
+     *
+     * @param driver WebDriver
+     */
+    void beforeNavigateRefresh(WebDriver driver);
+
+    /**
+     * Called after {@link org.openqa.selenium.WebDriver.Navigation#refresh navigate().refresh()}. Not called,
+     * if an exception is thrown.
+     *
+     * @param driver WebDriver
+     */
+    void afterNavigateRefresh(WebDriver driver);
 }

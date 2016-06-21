@@ -35,7 +35,7 @@ To add FluentLenium to your project, just add the following dependency to your `
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>0.13.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -48,7 +48,7 @@ If you need the assertj dependency to improve the legibility of your test code:
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>0.13.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -59,7 +59,7 @@ An adapter has also been built for using FluentLenium with TestNG:
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>0.13.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -193,7 +193,7 @@ If you need to access to the name, the id, the value, the tagname or the visible
 
 ```java
 findFirst(myCssSelector).getName()
-findFirst(myCssSelector).getId()
+findFirst(By.cssSelector(".foo")).getId()
 findFirst(myCssSelector).getValue()
 findFirst(myCssSelector).getTagName()
 findFirst(myCssSelector).getText()
@@ -214,7 +214,7 @@ findFirst(myCssSelector).getAttribute("myCustomAttribute")
 You can also access a list of all the names, visible text, and ids of a list of elements:
 ```java
 find(myCssSelector).getNames()
-find(myCssSelector).getIds()
+find(By.id("foo")).getIds()
 find(myCssSelector).getValues()
 find(myCssSelector).getAttributes("myCustomAttribute")
 find(myCssSelector).getTexts()
@@ -245,6 +245,17 @@ findFirst(myCssSelector).isDisplayed()
 findFirst(myCssSelector).isEnabled()
 findFirst(myCssSelector).isSelected()
 ```
+
+If you need to retrieve other elements from a selected one, you 
+can use [XPath axes](http://www.w3schools.com/xsl/xpath_axes.asp).
+
+find(myCssSelector()).axes().parent()
+find(myCssSelector()).axes().descendants()
+find(myCssSelector()).axes().ancestors()
+find(myCssSelector()).axes().followings()
+find(myCssSelector()).axes().followingSiblings()
+find(myCssSelector()).axes().precedings()
+find(myCssSelector()).axes().precedingSiblings()
 
 ## Form Actions
 Clicking, filling, submitting and cleaning an element or list of elements is simple and intuitive.
@@ -288,6 +299,11 @@ This will submit all the enabled fields returned by the search.
 ### Double click
 ```java
 find("#create-button").doubleClick()
+```
+
+### Mouse over
+```java
+find("#create-button").mouseOver()
 ```
 
 ## Events
@@ -335,6 +351,7 @@ A Page Object can model the whole page or just a part of it.
 
 To construct a Page, extend [org.fluentlenium.core.FluentPage](https://github.com/FluentLenium/FluentLenium/blob/master/fluentlenium-core/src/main/java/org/fluentlenium/core/FluentPage.java).
 In most cases, you have to define the url of the page by overriding the `getUrl` method.
+It is also possible to use `@PageUrl` annotation, its value will be passed to the `getUrl` method, overriding is not required.
 By doing this, you can then use the `goTo(myPage)` method in your test code.
 
 It may be necessary to ensure that you are on the right page, not just at the url returned by `getUrl` [accessible in your test via the void url() method].
@@ -357,6 +374,21 @@ public class LoginPage extends FluentPage {
     public String getUrl() {
         return "myCustomUrl";
     }
+    public void isAt() {
+        assertThat(title()).isEqualTo("MyTitle");
+    }
+    public void fillAndSubmitForm(String... paramsOrdered) {
+        fill("input").with(paramsOrdered);
+        click("#create-button");
+    }
+}
+```
+
+or using `@PageUrl` annotation instead of overriding `getUrl` method
+
+```java
+@PageUrl("myCustomUrl")
+public class LoginPage extends FluentPage {
     public void isAt() {
         assertThat(title()).isEqualTo("MyTitle");
     }
@@ -524,7 +556,6 @@ public class LoginPage extends FluentPage {
 }
 ```
 
-
 If you need to wait for an element to be present, especially when waiting for an ajax call to complete, you can use the @AjaxElement annotation on the fields:
 
 ```java
@@ -535,6 +566,36 @@ public class LoginPage extends FluentPage {
 ```
 You can set the timeout in seconds for the page to throw an error if not found with `@AjaxElement(timeountOnSeconds=3)` if you want to wait 3 seconds.
 By default, the timeout is set to one second.
+
+## Extend FluentWebElement to model components
+
+You can implement reusable components by extending FluentWebElement. Doing so will improve readability of both Page Objects and Tests.
+
+```java
+public class SelectComponent extends FluentWebElement {
+   public FluentWebElement(WebElement element) { // This constructor MUST exist !
+      super(element);
+   }
+   
+   public void doSelect(String selection) {
+      // Implement selection provided by this component.
+   }
+   
+   public String getSelection() {
+      // Return the selected value as text.
+   }
+}
+```
+
+These kind of component can be created automatically by `FluentPage`, 
+or programmatically by calling `as` method of FluentWebElement or FluentList.
+
+```java
+SelectComponent comp = findFirst("#some-select").as(SelectComponent.class);
+
+comp.doSelect("Value to select");
+assertThat(comp.getSelection()).isEquals("Value to select");
+```
 
 
 ## Wait for an Ajax Call
@@ -573,6 +634,24 @@ If you need to filter on a custom attribute name, this syntax will help:
 await().atMost(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWith("myValue").isPresent();
 ```
 
+You can also give instance of elements or list of elements if required.
+
+```java
+@FindBy(css = ".button")
+FluentWebElement button;
+
+await().atMost(5, TimeUnit.SECONDS).until(element).isEnabled();
+```
+
+When running Java >= 8, you can use lambdas with `until`, `untilPredicate`, `untilElement` or `untilElements`.
+```java
+await().atMost(5, TimeUnit.SECONDS).untilElement(() -> findFirst(".button")).isEnabled();
+await().atMost(5, TimeUnit.SECONDS).untilElements(() -> find(".button")).areEnabled();
+
+await().atMost(5, TimeUnit.SECONDS).untilPredicate((f) -> findFirst(".button").isEnabled());
+await().atMost(5, TimeUnit.SECONDS).until(() -> findFirst(".button").isEnabled());
+```
+
 You can also check if the page is loaded using
 ```java
 await().atMost(1, NANOSECONDS).untilPage().isLoaded();
@@ -583,6 +662,14 @@ If you want to wait until the page you want is the page that you are at, you can
 await().atMost(5, TimeUnit.SECONDS).untilPage(myPage).isAt();
 ```
 This methods actually calls myPage.isAt(). If the isAt() method of the myPage object does not throw any exception during the time specified, then the framework will consider that the page is the one wanted.
+
+You can override `await()` method in your own test class to define global settings on wait objects.
+```java
+@Override
+public FluentWait await() {
+    return super.await().atMost(5, TimeUnit.SECONDS).ignoring(NoSuchElementException.class, ElementNotVisibleException.class);
+}
+```
 
 ### Polling Every
 You can also define the polling frequency, for example, if you want to poll every 5 seconds:
@@ -704,7 +791,7 @@ Be aware that when you modified this elements, the webDriver instance will be mo
 ### Configuration
 You can define a default driver configuration using two ways.
 First, just override the getDriver method and use the selenium way to configure your driver.
-You can also override the setDefaultConfig method and use both selenium and FluentLenium way (withDefaultSearchWait,withDefaultPageWait) to configure your driver.
+You can also override the getDefaultConfig method and use both selenium and FluentLenium way (withDefaultSearchWait,withDefaultPageWait) to configure your driver.
 
 ## Browser Lifecycle
 For JUnit and TestNG, you can define the browser lifecycle.
