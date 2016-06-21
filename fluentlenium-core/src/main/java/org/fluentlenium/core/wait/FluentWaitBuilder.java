@@ -2,10 +2,16 @@ package org.fluentlenium.core.wait;
 
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterType;
-import org.fluentlenium.core.filter.matcher.*;
+import org.fluentlenium.core.filter.matcher.ContainsMatcher;
+import org.fluentlenium.core.filter.matcher.ContainsWordMatcher;
+import org.fluentlenium.core.filter.matcher.EndsWithMatcher;
+import org.fluentlenium.core.filter.matcher.EqualMatcher;
+import org.fluentlenium.core.filter.matcher.NotContainsMatcher;
+import org.fluentlenium.core.filter.matcher.NotEndsWithMatcher;
+import org.fluentlenium.core.filter.matcher.NotStartsWithMatcher;
+import org.fluentlenium.core.filter.matcher.StartsWithMatcher;
 
 import java.util.regex.Pattern;
-
 
 public class FluentWaitBuilder {
 
@@ -24,7 +30,6 @@ public class FluentWaitBuilder {
 
     }
 
-
     public FluentWaitMatcher equalTo(String equal) {
         fluentLeniumWait.addFilter(new Filter(attribute, new EqualMatcher(equal)));
         return fluentLeniumWait;
@@ -40,12 +45,10 @@ public class FluentWaitBuilder {
         return fluentLeniumWait;
     }
 
-
     public FluentWaitMatcher contains(Pattern equal) {
         fluentLeniumWait.addFilter(new Filter(attribute, new ContainsMatcher(equal)));
         return fluentLeniumWait;
     }
-
 
     public FluentWaitMatcher startsWith(String equal) {
         fluentLeniumWait.addFilter(new Filter(attribute, new StartsWithMatcher(equal)));
@@ -96,6 +99,4 @@ public class FluentWaitBuilder {
         fluentLeniumWait.addFilter(new Filter(attribute, new NotEndsWithMatcher(equal)));
         return fluentLeniumWait;
     }
-
-
 }

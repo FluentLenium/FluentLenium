@@ -1,6 +1,8 @@
 package org.fluentlenium.core.wait;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.domain.FluentList;
@@ -8,21 +10,39 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterType;
 import org.fluentlenium.core.search.Search;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.fluentlenium.core.wait.WaitMessage.*;
+import static org.fluentlenium.core.wait.WaitMessage.hasAttributeMessage;
+import static org.fluentlenium.core.wait.WaitMessage.hasIdMessage;
+import static org.fluentlenium.core.wait.WaitMessage.hasNameMessage;
+import static org.fluentlenium.core.wait.WaitMessage.hasSizeMessage;
+import static org.fluentlenium.core.wait.WaitMessage.hasTextMessage;
+import static org.fluentlenium.core.wait.WaitMessage.isAboveMessage;
+import static org.fluentlenium.core.wait.WaitMessage.isClickableMessage;
+import static org.fluentlenium.core.wait.WaitMessage.isDisplayedMessage;
+import static org.fluentlenium.core.wait.WaitMessage.isEnabledMessage;
+import static org.fluentlenium.core.wait.WaitMessage.isNotPresentMessage;
+import static org.fluentlenium.core.wait.WaitMessage.isPresentMessage;
 
 public class FluentWaitMatcher {
-    private List<Filter> filters = new ArrayList<Filter>();
+    private List<Filter> filters = new ArrayList<>();
     private Search search;
-    private String selector;
+    private By locator;
     private FluentWait wait;
 
     public FluentWaitMatcher(Search search, FluentWait fluentWait, String selector) {
-        this.selector = selector;
+        this.locator = By.cssSelector(selector);
+        wait = fluentWait;
+        this.search = search;
+    }
+
+    public FluentWaitMatcher(Search search, FluentWait fluentWait, By locator) {
+        this.locator = locator;
         wait = fluentWait;
         this.search = search;
     }
@@ -40,7 +60,7 @@ public class FluentWaitMatcher {
                 return find().getAttributes(attribute).contains(value);
             }
         };
-        until(wait, hasAttribute, filters, hasAttributeMessage(selector, attribute, value));
+        until(wait, hasAttribute, filters, hasAttributeMessage(locator, attribute, value));
         return FluentThread.get();
 
     }
@@ -73,7 +93,7 @@ public class FluentWaitMatcher {
                 return find().getIds().contains(value);
             }
         };
-        until(wait, hasId, filters, hasIdMessage(selector, value));
+        until(wait, hasId, filters, hasIdMessage(locator, value));
         return FluentThread.get();
     }
 
@@ -89,7 +109,7 @@ public class FluentWaitMatcher {
                 return find().getNames().contains(value);
             }
         };
-        until(wait, hasName, filters, hasNameMessage(selector, value));
+        until(wait, hasName, filters, hasNameMessage(locator, value));
         return FluentThread.get();
     }
 
@@ -99,7 +119,67 @@ public class FluentWaitMatcher {
      * @return fluent size builder
      */
     public FluentSizeBuilder hasSize() {
-        return new FluentSizeBuilder(search, wait, selector, filters);
+        return new FluentSizeBuilder(search, wait, locator, filters);
+    }
+
+    /**
+     * check if the FluentWait is above top screen border
+     *
+     * @return fluent
+     */
+    public Fluent isAboveScreenOrInvisible() {
+        Predicate<Fluent> isAbove = new com.google.common.base.Predicate<Fluent>() {
+            public boolean apply(Fluent fluent) {
+                FluentList<FluentWebElement> elements = search
+                        .find(locator, (Filter[]) filters.toArray(new Filter[filters.size()]));
+                return Iterables.all(elements, isAboveScreenTopOrInvisible());
+            }
+        };
+        until(wait, isAbove, filters, isAboveMessage(locator));
+        return FluentThread.get();
+    }
+
+    private Predicate<FluentWebElement> isAboveScreenTopOrInvisible() {
+        return new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement element) {
+                WebElement wrapped = element.getElement();
+                int bottomPosition = wrapped.getLocation().getY() + wrapped.getSize().getHeight();
+                return !element.isDisplayed() || bottomPosition <= 0;
+            }
+        };
+    }
+
+    public FluentWaitAttributeMatcher<Integer> hasPositionX() {
+        return new FluentWaitAttributeMatcher<>(wait, search, locator, filters, "position X",
+                new Function<FluentWebElement, Integer>() {
+                    @Override
+                    public Integer apply(FluentWebElement element) {
+                        return element.getElement().getLocation().getX();
+                    }
+                });
+    }
+
+    /**
+     * Check that at least one element is displayed
+     *
+     * @return fluent
+     */
+    public Fluent anyDisplayed() {
+        Predicate<Fluent> isVisible = new com.google.common.base.Predicate<Fluent>() {
+            public boolean apply(Fluent fluent) {
+                FluentList<FluentWebElement> fluentWebElements = search
+                        .find(locator, (Filter[]) filters.toArray(new Filter[filters.size()]));
+                for (FluentWebElement fluentWebElement : fluentWebElements) {
+                    if (fluentWebElement.isDisplayed()) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        };
+        until(wait, isVisible, filters, isDisplayedMessage(locator));
+        return FluentThread.get();
     }
 
     /**
@@ -114,7 +194,7 @@ public class FluentWaitMatcher {
                 return find().size() == size;
             }
         };
-        until(wait, hasSize, filters, hasSizeMessage(selector, size));
+        until(wait, hasSize, filters, hasSizeMessage(locator, size));
         return FluentThread.get();
 
     }
@@ -139,7 +219,7 @@ public class FluentWaitMatcher {
                 return false;
             }
         };
-        until(wait, hasText, filters, hasTextMessage(selector, value));
+        until(wait, hasText, filters, hasTextMessage(locator, value));
         return FluentThread.get();
     }
 
@@ -155,7 +235,7 @@ public class FluentWaitMatcher {
                 return find().getTexts().contains(value);
             }
         };
-        until(wait, hasText, filters, hasTextMessage(selector, value));
+        until(wait, hasText, filters, hasTextMessage(locator, value));
         return FluentThread.get();
 
     }
@@ -173,7 +253,7 @@ public class FluentWaitMatcher {
             }
         };
 
-        until(wait, isPresent, filters, isPresentMessage(selector));
+        until(wait, isPresent, filters, isPresentMessage(locator));
         return FluentThread.get();
 
     }
@@ -190,7 +270,7 @@ public class FluentWaitMatcher {
             }
         };
 
-        until(wait, isNotPresent, filters, isNotPresentMessage(selector));
+        until(wait, isNotPresent, filters, isNotPresentMessage(locator));
         return FluentThread.get();
 
     }
@@ -215,7 +295,7 @@ public class FluentWaitMatcher {
                 return false;
             }
         };
-        until(wait, isVisible, filters, isDisplayedMessage(selector));
+        until(wait, isVisible, filters, isDisplayedMessage(locator));
         return FluentThread.get();
     }
 
@@ -236,7 +316,7 @@ public class FluentWaitMatcher {
                 return true;
             }
         };
-        until(wait, isNotVisible, filters, isDisplayedMessage(selector));
+        until(wait, isNotVisible, filters, isDisplayedMessage(locator));
         return FluentThread.get();
     }
 
@@ -260,10 +340,10 @@ public class FluentWaitMatcher {
                 return false;
             }
         };
-        until(wait, isEnabled, filters, isEnabledMessage(selector));
+        until(wait, isEnabled, filters, isEnabledMessage(locator));
         return FluentThread.get();
     }
-    
+
     /**
      * Check that the elements are all clickable
      */
@@ -272,17 +352,17 @@ public class FluentWaitMatcher {
 
             @Override
             public boolean apply(Fluent input) {
-                for (FluentWebElement element: find()) {
-                    if (ExpectedConditions.elementToBeClickable(element.getElement())
-                            .apply(input.getDriver()) == null) {
+                for (FluentWebElement element : find()) {
+                    if (ExpectedConditions.elementToBeClickable(element.getElement()).apply(input.getDriver())
+                            == null) {
                         return false;
                     }
                 }
                 return true;
             }
         };
-        
-        until(wait, isClickable, filters, isClickableMessage(selector));
+
+        until(wait, isClickable, filters, isClickableMessage(locator));
         return FluentThread.get();
     }
 
@@ -290,12 +370,12 @@ public class FluentWaitMatcher {
         if (filters.size() > 0) {
             return findWithFilter();
         } else {
-            return search.find(selector);
+            return search.find(locator);
         }
     }
 
     private FluentList<FluentWebElement> findWithFilter() {
-        return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()]));
+        return search.find(locator, (Filter[]) filters.toArray(new Filter[filters.size()]));
     }
 
     /**
@@ -348,7 +428,6 @@ public class FluentWaitMatcher {
         return this;
     }
 
-
     /**
      * Create a filter builder for the attribute by class
      *
@@ -392,6 +471,5 @@ public class FluentWaitMatcher {
     void addFilter(Filter filter) {
         this.filters.add(filter);
     }
-
 
 }

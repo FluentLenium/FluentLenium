@@ -1,13 +1,12 @@
 package org.fluentlenium.core.wait;
 
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.search.Search;
-import org.openqa.selenium.Beta;
+import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
@@ -32,7 +31,6 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
         useDefaultException = true;
     }
 
-
     public FluentWait atMost(long duration, java.util.concurrent.TimeUnit unit) {
         wait.withTimeout(duration, unit);
         return this;
@@ -51,7 +49,6 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
         wait.pollingEvery(duration, unit);
         return this;
     }
-
 
     public FluentWait ignoreAll(java.util.Collection<java.lang.Class<? extends Throwable>> types) {
         wait.ignoreAll(types);
@@ -72,7 +69,8 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
      * @param secondType second type of exception which extends java.lang.RuntimeException
      * @return
      */
-    public FluentWait ignoring(java.lang.Class<? extends java.lang.RuntimeException> firstType, java.lang.Class<? extends java.lang.RuntimeException> secondType) {
+    public FluentWait ignoring(java.lang.Class<? extends java.lang.RuntimeException> firstType,
+            java.lang.Class<? extends java.lang.RuntimeException> secondType) {
         wait.ignoring(firstType, secondType);
         return this;
 
@@ -127,6 +125,16 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
         return new FluentWaitMatcher(search, this, string);
     }
 
+    @SuppressWarnings("unchecked")
+    public FluentWaitMatcher until(By locator) {
+        return new FluentWaitMatcher(search, this, locator);
+    }
+
+    @SuppressWarnings("unchecked")
+    public FluentWaitWindowMatcher untilWindow(String windowName) {
+        return new FluentWaitWindowMatcher(this, windowName);
+    }
+
     /**
      * @return fluent wait page matcher
      */
@@ -142,6 +150,24 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     public FluentWaitPageMatcher untilPage(FluentPage page) {
         updateWaitWithDefaultExceptions();
         return new FluentWaitPageMatcher(this, driver, page);
+    }
+
+    /**
+     * Waits unconditionally for explicit amount of time. The method should be used only as a last resort. In most
+     * cases you should wait for some condition, e.g. visibility of particular element on the page.
+     *
+     * @param amount   amount of time
+     * @param timeUnit unit of time
+     * @return {@code this} to allow chaining method invocations
+     */
+    public FluentWait explicitlyFor(long amount, TimeUnit timeUnit) {
+        try {
+            timeUnit.sleep(amount);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        return this;
     }
 
     /**
