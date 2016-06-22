@@ -9,6 +9,7 @@ import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
+import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
@@ -177,8 +178,8 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     }
 
     @SuppressWarnings("unchecked")
-    public FluentWaitMatcher until(By locator) {
-        return new FluentWaitMatcher(search, this, locator);
+    public FluentWaitSelectorMatcher until(By locator) {
+        return new FluentWaitSelectorMatcher(search, this, locator);
     }
 
     @SuppressWarnings("unchecked")

@@ -5,19 +5,26 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterType;
 import org.fluentlenium.core.search.Search;
+import org.openqa.selenium.By;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FluentWaitSelectorMatcher extends AbstractWaitElementListMatcher {
-    private String selector;
-    private List<Filter> filters = new ArrayList<Filter>();
+    private By locator;
+
+    private List<Filter> filters = new ArrayList<>();
 
     static final String SELECTOR = "Selector";
 
+    public FluentWaitSelectorMatcher(Search search, FluentWait fluentWait, By locator) {
+        super(search, fluentWait, SELECTOR + " " + locator);
+        this.locator = locator;
+    }
+
     public FluentWaitSelectorMatcher(Search search, FluentWait fluentWait, String selector) {
         super(search, fluentWait, SELECTOR + " " + selector);
-        this.selector = selector;
+        this.locator = By.cssSelector(selector);
     }
 
     /**
@@ -49,12 +56,12 @@ public class FluentWaitSelectorMatcher extends AbstractWaitElementListMatcher {
         if (filters.size() > 0) {
             return findWithFilter();
         } else {
-            return search.find(selector);
+            return search.find(locator);
         }
     }
 
     private FluentList<FluentWebElement> findWithFilter() {
-        return search.find(selector, (Filter[]) filters.toArray(new Filter[filters.size()]));
+        return search.find(locator, (Filter[]) filters.toArray(new Filter[filters.size()]));
     }
 
     /**

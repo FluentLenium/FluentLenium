@@ -3,11 +3,8 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentThread;
-import org.fluentlenium.core.filter.Filter;
 
-import java.util.Collections;
-
-public class FluentWaitWindowMatcher {
+public class FluentWaitWindowMatcher extends AbstractWaitMatcher {
 
     private FluentWait wait;
     private String windowName;
@@ -25,8 +22,7 @@ public class FluentWaitWindowMatcher {
             }
         };
 
-        FluentWaitMatcher.until(wait, isDisplayed, Collections.<Filter>emptyList(),
-                WaitMessage.isWindowDisplayedMessage(windowName));
+        until(wait, isDisplayed, FluentWaitMessages.isWindowDisplayedMessage(windowName));
         return FluentThread.get();
     }
 
@@ -38,8 +34,7 @@ public class FluentWaitWindowMatcher {
             }
         };
 
-        FluentWaitMatcher.until(wait, isNotDisplayed, Collections.<Filter>emptyList(),
-                WaitMessage.isWindowNotDisplayedMessage(windowName));
+        until(wait, isNotDisplayed, FluentWaitMessages.isWindowNotDisplayedMessage(windowName));
         return FluentThread.get();
     }
 
