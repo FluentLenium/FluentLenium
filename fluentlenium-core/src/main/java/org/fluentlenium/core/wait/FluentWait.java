@@ -1,6 +1,5 @@
 package org.fluentlenium.core.wait;
 
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
@@ -57,17 +56,14 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
         return this;
     }
 
-
     public FluentWait ignoreAll(java.util.Collection<java.lang.Class<? extends Throwable>> types) {
         wait.ignoreAll(types);
         return this;
-
     }
 
     public FluentWait ignoring(java.lang.Class<? extends java.lang.RuntimeException> exceptionType) {
         wait.ignoring(exceptionType);
         return this;
-
     }
 
     /**
@@ -77,10 +73,10 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
      * @param secondType second type of exception which extends java.lang.RuntimeException
      * @return this fluent wait
      */
-    public FluentWait ignoring(java.lang.Class<? extends java.lang.RuntimeException> firstType, java.lang.Class<? extends java.lang.RuntimeException> secondType) {
+    public FluentWait ignoring(java.lang.Class<? extends java.lang.RuntimeException> firstType,
+            java.lang.Class<? extends java.lang.RuntimeException> secondType) {
         wait.ignoring(firstType, secondType);
         return this;
-
     }
 
     /**
@@ -128,9 +124,9 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
      * @param selector - CSS selector
      * @return fluent wait matcher
      */
-    public FluentWaitSelectorMatcher until(String selector) {
+    public FluentWaitLocatorSelectorMatcher until(String selector) {
         updateWaitWithDefaultExceptions();
-        return new FluentWaitSelectorMatcher(search, this, selector);
+        return new FluentWaitLocatorSelectorMatcher(search, this, selector);
     }
 
     /**
@@ -172,14 +168,15 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
      * @param selector Supplier of the element to wait for.
      * @return fluent wait matcher
      */
-    public FluentWaitSupplierListMatcher untilElements(Supplier<? extends FluentList<? extends FluentWebElement>> selector) {
+    public FluentWaitSupplierListMatcher untilElements(
+            Supplier<? extends FluentList<? extends FluentWebElement>> selector) {
         updateWaitWithDefaultExceptions();
         return new FluentWaitSupplierListMatcher(search, this, selector);
     }
 
     @SuppressWarnings("unchecked")
-    public FluentWaitSelectorMatcher until(By locator) {
-        return new FluentWaitSelectorMatcher(search, this, locator);
+    public FluentWaitLocatorSelectorMatcher until(By locator) {
+        return new FluentWaitLocatorSelectorMatcher(search, this, locator);
     }
 
     @SuppressWarnings("unchecked")

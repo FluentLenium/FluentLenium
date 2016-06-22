@@ -10,19 +10,18 @@ import org.openqa.selenium.By;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FluentWaitSelectorMatcher extends AbstractWaitElementListMatcher {
+public class FluentWaitLocatorSelectorMatcher extends AbstractWaitElementListMatcher {
     private By locator;
-
     private List<Filter> filters = new ArrayList<>();
 
     static final String SELECTOR = "Selector";
 
-    public FluentWaitSelectorMatcher(Search search, FluentWait fluentWait, By locator) {
+    public FluentWaitLocatorSelectorMatcher(Search search, FluentWait fluentWait, By locator) {
         super(search, fluentWait, SELECTOR + " " + locator);
         this.locator = locator;
     }
 
-    public FluentWaitSelectorMatcher(Search search, FluentWait fluentWait, String selector) {
+    public FluentWaitLocatorSelectorMatcher(Search search, FluentWait fluentWait, String selector) {
         super(search, fluentWait, SELECTOR + " " + selector);
         this.locator = By.cssSelector(selector);
     }
