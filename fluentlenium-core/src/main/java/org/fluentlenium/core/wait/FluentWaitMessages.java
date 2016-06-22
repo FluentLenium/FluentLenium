@@ -1,7 +1,12 @@
 package org.fluentlenium.core.wait;
 
+import com.google.common.base.Joiner;
+
+import java.util.List;
+
 final class FluentWaitMessages {
     private static final String PAGE = "Page ";
+    private static final String WINDOW = "Window ";
     private static final String IS_NOT_PRESENT = " is not present.";
     private static final String IS_PRESENT = " is present.";
     private static final String HAS_NOT_THE_NAME = " has not the name ";
@@ -10,6 +15,7 @@ final class FluentWaitMessages {
     private static final String HAS_NOT_THE_TEXT = " has not the text ";
     private static final String HAS_NOT_THE_ID = " has not the id ";
     private static final String WITH_ATTRIBUTE = " with attribute ";
+    private static final String WITH_POS_X = " with X position ";
     private static final String WITH_VALUE = " with value ";
     private static final String HAS_NOT_SIZE_EQUAL_TO = " has not size equal to ";
     private static final String IS_EQUAL_TO = " is equal to ";
@@ -18,9 +24,11 @@ final class FluentWaitMessages {
     private static final String IS_NOT_GREATHER_THAN = " is not greather than ";
     private static final String IS_NOT_GREATHER_THAN_OR_EQUAL_TO = " is not greather than or equal to ";
     private static final String IS_NOT_LOADED = " is not loaded";
-    private static final String IS_NOT_DISPLAY = " is not displayed";
+    private static final String IS_NOT_DISPLAYED = " is not displayed";
+    private static final String IS_DISPLAYED = " is displayed";
     private static final String IS_NOT_ENABLED = " is not enabled";
     private static final String IS_NOT_CLICKABLE = " is not clickable";
+    private static final String IS_NOT_ABOVE = " is not above screen top or invisible";
 
     static final String hasSizeMessage(String selectionName, int size) {
         return selectionName + HAS_NOT_THE_SIZE + size + POINT;
@@ -28,6 +36,14 @@ final class FluentWaitMessages {
 
     static final String hasAttributeMessage(String selectionName, String attribute, String value) {
         return selectionName + WITH_ATTRIBUTE + attribute + WITH_VALUE + value + IS_NOT_PRESENT + POINT;
+    }
+
+    static final String isAboveMessage(List<String> ids) {
+        return Joiner.on(",").join(ids) + IS_NOT_ABOVE + POINT;
+    }
+
+    static final String hasPositionXMessage(String selectionName, Integer value) {
+        return selectionName + WITH_POS_X + value + IS_NOT_PRESENT + POINT;
     }
 
     static final String isPageLoaded(String url) {
@@ -43,7 +59,7 @@ final class FluentWaitMessages {
     }
 
     static final String isDisplayedMessage(String selectionName) {
-        return selectionName + IS_NOT_DISPLAY;
+        return selectionName + IS_NOT_DISPLAYED;
     }
 
     static final String isEnabledMessage(String selectionName) {
@@ -90,5 +106,12 @@ final class FluentWaitMessages {
         return selectionName + IS_NOT_GREATHER_THAN + size + POINT;
     }
 
+    static final String isWindowDisplayedMessage(String windowName) {
+        return WINDOW + windowName + IS_NOT_DISPLAYED + POINT;
+    }
+
+    static final String isWindowNotDisplayedMessage(String windowName) {
+        return WINDOW + windowName + IS_DISPLAYED + POINT;
+    }
 }
 

@@ -3,7 +3,7 @@ package org.fluentlenium.unit;
 
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.wait.FluentWait;
-import org.fluentlenium.core.wait.FluentWaitSelectorMatcher;
+import org.fluentlenium.core.wait.FluentWaitLocatorSelectorMatcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -19,12 +19,12 @@ public class AwaitMessageTest {
     @Mock
     FluentWait wait;
 
-    FluentWaitSelectorMatcher builder;
+    FluentWaitLocatorSelectorMatcher builder;
 
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
-        builder = new FluentWaitSelectorMatcher(mock(Search.class), wait, "select");
+        builder = new FluentWaitLocatorSelectorMatcher(mock(Search.class), wait, "select");
         when(wait.withMessage(anyString())).thenReturn(wait);
     }
 
