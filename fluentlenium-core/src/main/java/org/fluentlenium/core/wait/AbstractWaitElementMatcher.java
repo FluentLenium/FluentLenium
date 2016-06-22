@@ -60,7 +60,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
     /**
      *   * check if the FluentWait is above top screen border  *  * @return fluent
      */
-    public void isAboveScreenOrInvisble() {
+    public void isAboveScreenOrInvisible() {
         Predicate<Fluent> isAbove = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
                 return Iterables.all(find(), isAboveScreenTopOrInvisible());
