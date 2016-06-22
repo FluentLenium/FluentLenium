@@ -88,6 +88,16 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
     }
 
     @Test
+    public void awaitForElementXPosition() {
+        await().until(inputDisabledElements).hasPositionX(5);
+    }
+
+    @Test
+    public void awaitToBeAbove() {
+        await().until(unvisibleElements).isAboveScreenOrInvisble();
+    }
+
+    @Test
     public void checkAwaitHasSize() {
         await().atMost(1, NANOSECONDS).until(smallElements).hasSize(3);
     }
