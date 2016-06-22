@@ -35,7 +35,7 @@ To add FluentLenium to your project, just add the following dependency to your `
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
-    <version>0.12.0</version>
+    <version>0.13.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -48,7 +48,7 @@ If you need the assertj dependency to improve the legibility of your test code:
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>0.12.0</version>
+    <version>0.13.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -59,7 +59,7 @@ An adapter has also been built for using FluentLenium with TestNG:
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>0.12.0</version>
+    <version>0.13.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -634,6 +634,24 @@ If you need to filter on a custom attribute name, this syntax will help:
 await().atMost(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWith("myValue").isPresent();
 ```
 
+You can also give instance of elements or list of elements if required.
+
+```java
+@FindBy(css = ".button")
+FluentWebElement button;
+
+await().atMost(5, TimeUnit.SECONDS).until(element).isEnabled();
+```
+
+When running Java >= 8, you can use lambdas with `until`, `untilPredicate`, `untilElement` or `untilElements`.
+```java
+await().atMost(5, TimeUnit.SECONDS).untilElement(() -> findFirst(".button")).isEnabled();
+await().atMost(5, TimeUnit.SECONDS).untilElements(() -> find(".button")).areEnabled();
+
+await().atMost(5, TimeUnit.SECONDS).untilPredicate((f) -> findFirst(".button").isEnabled());
+await().atMost(5, TimeUnit.SECONDS).until(() -> findFirst(".button").isEnabled());
+```
+
 You can also check if the page is loaded using
 ```java
 await().atMost(1, NANOSECONDS).untilPage().isLoaded();
@@ -644,6 +662,14 @@ If you want to wait until the page you want is the page that you are at, you can
 await().atMost(5, TimeUnit.SECONDS).untilPage(myPage).isAt();
 ```
 This methods actually calls myPage.isAt(). If the isAt() method of the myPage object does not throw any exception during the time specified, then the framework will consider that the page is the one wanted.
+
+You can override `await()` method in your own test class to define global settings on wait objects.
+```java
+@Override
+public FluentWait await() {
+    return super.await().atMost(5, TimeUnit.SECONDS).ignoring(NoSuchElementException.class, ElementNotVisibleException.class);
+}
+```
 
 ### Polling Every
 You can also define the polling frequency, for example, if you want to poll every 5 seconds:

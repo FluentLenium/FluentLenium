@@ -1,17 +1,23 @@
 package org.fluentlenium.core.wait;
 
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
-import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * A Fluent wait object.
+ */
 public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
 
     private final org.openqa.selenium.support.ui.FluentWait<Fluent> wait;
@@ -27,7 +33,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     public FluentWait(Fluent fluent, Search search) {
         wait = new org.openqa.selenium.support.ui.FluentWait<Fluent>(fluent);
         this.search = search;
-        this.driver = fluent.getDriver();
+        driver = fluent.getDriver();
         useDefaultException = true;
     }
 
@@ -50,6 +56,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
         return this;
     }
 
+
     public FluentWait ignoreAll(java.util.Collection<java.lang.Class<? extends Throwable>> types) {
         wait.ignoreAll(types);
         return this;
@@ -67,10 +74,9 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
      *
      * @param firstType  first type of exception which extends java.lang.RuntimeException
      * @param secondType second type of exception which extends java.lang.RuntimeException
-     * @return
+     * @return this fluent wait
      */
-    public FluentWait ignoring(java.lang.Class<? extends java.lang.RuntimeException> firstType,
-            java.lang.Class<? extends java.lang.RuntimeException> secondType) {
+    public FluentWait ignoring(java.lang.Class<? extends java.lang.RuntimeException> firstType, java.lang.Class<? extends java.lang.RuntimeException> secondType) {
         wait.ignoring(firstType, secondType);
         return this;
 
@@ -78,22 +84,21 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
 
     /**
      * @param isTrue predicate condition for wait
-     * @return fluent wait
      * @deprecated This method is java8 lambda ambigous with {@link #until(Function)} and will be removed.
      */
     @Deprecated
-    public FluentWait until(Predicate<Fluent> isTrue) {
-        return untilPredicate(isTrue);
+    public void until(Predicate<Fluent> isTrue) {
+        untilPredicate(isTrue);
     }
 
     /**
-     * @param isTrue predicate condition for wait
-     * @return fluent wait
+     * Wait until the predicate returns true.
+     *
+     * @param predicate predicate condition for wait
      */
-    public FluentWait untilPredicate(Predicate<Fluent> isTrue) {
+    public void untilPredicate(Predicate<Fluent> predicate) {
         updateWaitWithDefaultExceptions();
-        wait.until(isTrue);
-        return this;
+        wait.until(predicate);
     }
 
     /**
@@ -117,12 +122,58 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     }
 
     /**
-     * @param string - CSS selector
+     * Return a matcher configured to wait for particular condition for elements matching then given selector.
+     *
+     * @param selector - CSS selector
      * @return fluent wait matcher
      */
-    public FluentWaitMatcher until(String string) {
+    public FluentWaitSelectorMatcher until(String selector) {
         updateWaitWithDefaultExceptions();
-        return new FluentWaitMatcher(search, this, string);
+        return new FluentWaitSelectorMatcher(search, this, selector);
+    }
+
+    /**
+     * Return a matcher configured to wait for particular condition for given element.
+     *
+     * @param element Element to wait for.
+     * @return fluent wait matcher
+     */
+    public FluentWaitElementMatcher until(FluentWebElement element) {
+        updateWaitWithDefaultExceptions();
+        return new FluentWaitElementMatcher(search, this, element);
+    }
+
+    /**
+     * Return a matcher configured to wait for particular condition for given elements.
+     *
+     * @param elements Elements to wait for.
+     * @return fluent wait matcher
+     */
+    public FluentWaitElementListMatcher until(List<? extends FluentWebElement> elements) {
+        updateWaitWithDefaultExceptions();
+        return new FluentWaitElementListMatcher(search, this, elements);
+    }
+
+    /**
+     * Return a matcher configured to wait for particular condition for elements matching then given functional supplier.
+     *
+     * @param selector Supplier of the element to wait for.
+     * @return fluent wait matcher
+     */
+    public FluentWaitSupplierMatcher untilElement(Supplier<? extends FluentWebElement> selector) {
+        updateWaitWithDefaultExceptions();
+        return new FluentWaitSupplierMatcher(search, this, selector);
+    }
+
+    /**
+     * Return a matcher configured to wait for particular condition for elements matching then given functional supplier.
+     *
+     * @param selector Supplier of the element to wait for.
+     * @return fluent wait matcher
+     */
+    public FluentWaitSupplierListMatcher untilElements(Supplier<? extends FluentList<? extends FluentWebElement>> selector) {
+        updateWaitWithDefaultExceptions();
+        return new FluentWaitSupplierListMatcher(search, this, selector);
     }
 
     @SuppressWarnings("unchecked")
@@ -171,17 +222,13 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
     }
 
     /**
-     * Return the current driver
+     * Wait until the given condition is true.
      *
-     * @return web driver
+     * @param isTrue supplier of a condition returning a boolean.
      */
-    public WebDriver getDriver() {
-        return driver;
-    }
-
     public void until(final Supplier<Boolean> isTrue) {
         updateWaitWithDefaultExceptions();
-        until(new Function<Object, Boolean>() {
+        wait.until(new Function<Object, Boolean>() {
             public Boolean apply(Object input) {
                 return isTrue.get();
             }
@@ -192,6 +239,11 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
         });
     }
 
+    /**
+     * Wait until the given condition is true.
+     *
+     * @param isTrue function of a condition returning a boolean or any other object.
+     */
     @Override
     public <T> T until(Function<? super Fluent, T> isTrue) {
         updateWaitWithDefaultExceptions();

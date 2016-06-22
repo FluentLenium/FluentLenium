@@ -191,9 +191,11 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     FluentList<E> clearAll();
 
     /**
-     * Wrap all elements in a component extending FluentWebElement.
+     * Wrap all underlying elements in a componen..
      *
-     * @return elements as components.
+     * @param componentClass component class
+     * @param <T>            type of component
+     * @return fluent list of elements as components.
      */
     public <T extends FluentWebElement> FluentList<T> as(Class<T> componentClass);
 

@@ -10,15 +10,15 @@ public class FluentabilityTest extends LocalFluentCase {
 
     @Test
     public void checkIsEnabled() {
-        assertThat(
-                goTo(DEFAULT_URL).
-                        await().
-                        atMost(1, NANOSECONDS).
-                        until(".small").
-                        with("name").
-                        equalTo("name").
-                        isPresent().
-                        find("input").first().isEnabled()).isTrue();
+        goTo(DEFAULT_URL).
+                await().
+                atMost(1, NANOSECONDS).
+                until(".small").
+                with("name").
+                equalTo("name").
+                isPresent();
+
+        assertThat(find("input").first().isEnabled()).isTrue();
     }
 
 }
