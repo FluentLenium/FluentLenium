@@ -134,6 +134,12 @@ public class FluentWebElementTest {
     }
 
     @Test
+    public void testHasTextOk() throws Exception {
+        when(fluentWebElement.getText()).thenReturn("There is a 5% increase");
+        fluentWebElementAssert.hasText("There is a 5% increase");
+    }
+
+    @Test
     public void testHasMultipleClassesOk() throws Exception {
         when(fluentWebElement.getAttribute("class")).thenReturn("yolokitten mark");
         fluentWebElementAssert.hasClass("mark");
