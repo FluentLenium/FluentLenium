@@ -28,6 +28,9 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
     @FindBy(className = "small")
     private FluentList<FluentWebElement> smallElements;
 
+    @FindBy(className = "not-found")
+    private FluentList<FluentWebElement> notFoundElements;
+
     @FindBy(tagName = "input")
     private FluentList<FluentWebElement> inputElements;
 
@@ -89,6 +92,11 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
     @Test
     public void awaitForElementXPosition() {
         await().until(inputDisabledElements).hasPositionX(5);
+    }
+
+    @Test(expected = TimeoutException.class)
+    public void awaitForElementXPositionElementNotFound() {
+        await().until(notFoundElements).hasPositionX(0);
     }
 
     @Test
@@ -274,8 +282,7 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
             public boolean apply(Fluent o) {
                 return true;
             }
-        })
-        ;
+        });
     }
 
     @Test(expected = TimeoutException.class)
@@ -286,8 +293,7 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
             public boolean apply(Fluent o) {
                 return false;
             }
-        })
-        ;
+        });
     }
 
     @Test

@@ -42,6 +42,11 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     }
 
     @Test
+    public void explicitWait() {
+        await().explicitlyFor(1, NANOSECONDS);
+    }
+
+    @Test
     public void checkAwaitHasSize() {
         await().atMost(1, NANOSECONDS).until(".small").hasSize(3);
     }
@@ -79,7 +84,8 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test
     public void checkUseCustomMessage() {
         try {
-            await().withMessage("toto").atMost(1, NANOSECONDS).until(".small").withText("Small 1").containsText("Small 21");
+            await().withMessage("toto").atMost(1, NANOSECONDS).until(".small").withText("Small 1")
+                    .containsText("Small 21");
             fail();
         } catch (TimeoutException e) {
             assertThat(e.getMessage()).contains("toto");
@@ -236,7 +242,8 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void checkMultipleFilter() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").startsWith(regex("id")).with("text").endsWith("2").hasSize(1);
+        await().atMost(1, NANOSECONDS).until(".small").with("id").startsWith(regex("id")).with("text").endsWith("2")
+                .hasSize(1);
     }
 
     @Test
@@ -381,8 +388,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
             public boolean apply(Fluent o) {
                 return true;
             }
-        })
-        ;
+        });
     }
 
     @Test(expected = TimeoutException.class)
@@ -393,8 +399,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
             public boolean apply(Fluent o) {
                 return false;
             }
-        })
-        ;
+        });
     }
 
     @Test
