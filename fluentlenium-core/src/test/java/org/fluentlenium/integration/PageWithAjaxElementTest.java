@@ -67,7 +67,7 @@ public class PageWithAjaxElementTest extends LocalFluentCase {
 
     private static class JavascriptPageSlow extends FluentPage {
 
-        @AjaxElement(timeOutInSeconds = 3)
+        @AjaxElement(timeOutInSeconds = 12)
         FluentWebElement newFieldSlow;
 
         @Override
