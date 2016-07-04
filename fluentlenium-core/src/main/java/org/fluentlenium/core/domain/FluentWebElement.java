@@ -1,11 +1,13 @@
 package org.fluentlenium.core.domain;
 
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.action.FillConstructor;
 import org.fluentlenium.core.action.FillSelectConstructor;
 import org.fluentlenium.core.action.FluentDefaultActions;
 import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.axes.Axes;
+import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
@@ -13,6 +15,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.lang.reflect.Constructor;
 
@@ -23,11 +26,13 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     private final WebElement webElement;
     private final Search search;
     private final Axes axes;
+    private final FluentConditions conditions;
 
     public FluentWebElement(WebElement webElement) {
         this.webElement = webElement;
         this.search = new Search(webElement);
         this.axes = new Axes(webElement);
+        this.conditions = new FluentConditions(webElement);
     }
 
     /**
@@ -206,6 +211,25 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public boolean isSelected() {
         return webElement.isSelected();
+    }
+
+    /**
+     * Check that this element is visible and enabled such that you can click it.
+     *
+     * @return true if the element can be clicked, false otherwise.
+     */
+
+    public boolean isClickable() {
+        return conditions.isClickable();
+    }
+
+    /**
+     * Check that this element is no longer attached to the DOM.
+     *
+     * @return false is the element is still attached to the DOM, true otherwise.
+     */
+    public boolean isStale() {
+        return conditions.isStale();
     }
 
     /**

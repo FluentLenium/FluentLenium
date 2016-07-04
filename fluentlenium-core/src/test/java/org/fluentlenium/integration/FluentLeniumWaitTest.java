@@ -32,8 +32,38 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     }
 
     @Test
+    public void checkAwaitIsNotPresent() {
+        await().atMost(1, NANOSECONDS).until(".not-present").isNotPresent();
+    }
+
+    @Test
+    public void checkAwaitIsDisplayed() {
+        await().atMost(1, NANOSECONDS).until(".small").isDisplayed();
+    }
+
+    @Test
+    public void checkAwaitIsNotDisplayed() {
+        await().atMost(1, NANOSECONDS).until("#hidden").isNotDisplayed();
+    }
+
+    @Test
     public void checkAwaitIsClickable() throws Exception {
         await().atMost(1, NANOSECONDS).until(".small").isClickable();
+    }
+
+    @Test
+    public void checkAwaitIsNotClickable() {
+        await().atMost(1, NANOSECONDS).until("input[disabled]").isNotClickable();
+    }
+
+    @Test
+    public void checkAwaitIsSelected() throws Exception {
+        await().atMost(1, NANOSECONDS).until("#selected").isSelected();
+    }
+
+    @Test
+    public void checkAwaitIsNotSelected() {
+        await().atMost(1, NANOSECONDS).until("#non_selected").isNotSelected();
     }
 
     @Test(expected = TimeoutException.class)
@@ -347,9 +377,23 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     }
 
     @Test
-    public void when_element_is_not_displayed_then_isPresent_return_true() {
-        goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until("#unvisible").isPresent();
+    public void when_element_is_selected_then_isSelected_return_true() {
+        await().atMost(1, NANOSECONDS).until("#selected").isSelected();
+    }
+
+    @Test
+    public void when_element_is_not_selected_then_isNotSelected_return_true() {
+        await().atMost(1, NANOSECONDS).until("#non_selected").isNotSelected();
+    }
+
+    @Test(expected = TimeoutException.class)
+    public void when_element_is_not_selected_then_areSelected_throws_exception() {
+        await().atMost(1, NANOSECONDS).until("#non_selected").areSelected();
+    }
+
+    @Test(expected = TimeoutException.class)
+    public void when_element_is_not_selected_then_isSelected_throws_exception() {
+        await().atMost(1, NANOSECONDS).until("#non_selected").isSelected();
     }
 
     @Test(expected = TimeoutException.class)
