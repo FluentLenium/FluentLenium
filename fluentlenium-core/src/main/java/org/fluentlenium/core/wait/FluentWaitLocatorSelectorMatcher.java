@@ -1,5 +1,6 @@
 package org.fluentlenium.core.wait;
 
+import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
@@ -15,6 +16,14 @@ public class FluentWaitLocatorSelectorMatcher extends AbstractWaitElementListMat
     private List<Filter> filters = new ArrayList<>();
 
     static final String SELECTOR = "Selector";
+
+    @Override
+    public FluentWaitLocatorSelectorMatcher not() {
+        FluentWaitLocatorSelectorMatcher negatedConditions = new FluentWaitLocatorSelectorMatcher(search, wait, locator);
+        negatedConditions.negation = !negation;
+        negatedConditions.filters = filters;
+        return negatedConditions;
+    }
 
     public FluentWaitLocatorSelectorMatcher(Search search, FluentWait fluentWait, By locator) {
         super(search, fluentWait, SELECTOR + " " + locator);

@@ -1,5 +1,6 @@
 package org.fluentlenium.core.wait;
 
+import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -18,6 +19,13 @@ public class FluentWaitElementMatcher extends AbstractWaitElementMatcher {
     public FluentWaitElementMatcher(Search search, FluentWait fluentWait, FluentWebElement untilElement) {
         super(search, fluentWait, ELEMENT + " " + String.valueOf(untilElement));
         this.untilElement = untilElement;
+    }
+
+    @Override
+    public FluentWaitElementMatcher not() {
+        FluentWaitElementMatcher negatedConditions = new FluentWaitElementMatcher(search, wait, untilElement);
+        negatedConditions.negation = !negation;
+        return negatedConditions;
     }
 
     @Override

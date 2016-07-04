@@ -1,6 +1,8 @@
 package org.fluentlenium.core.domain;
 
 import org.fluentlenium.core.action.FluentDefaultActions;
+import org.fluentlenium.core.conditions.FluentConditions;
+import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.SearchActions;
 import org.openqa.selenium.WebElement;
@@ -204,4 +206,18 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
      * Only the visible elements are filled
      */
     void clear();
+
+    /**
+     * Get a condition object on this element list that will match if each underlying element match.
+     *
+     * @return
+     */
+    FluentListConditions each();
+
+    /**
+     * Get a condition object on this element list that will match if one or more underlying element match.
+     *
+     * @return
+     */
+    FluentListConditions one();
 }

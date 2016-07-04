@@ -33,7 +33,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void checkAwaitIsNotPresent() {
-        await().atMost(1, NANOSECONDS).until(".not-present").isNotPresent();
+        await().atMost(1, NANOSECONDS).until(".not-present").not().isPresent();
     }
 
     @Test
@@ -43,7 +43,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void checkAwaitIsNotDisplayed() {
-        await().atMost(1, NANOSECONDS).until("#hidden").isNotDisplayed();
+        await().atMost(1, NANOSECONDS).until("#hidden").not().isDisplayed();
     }
 
     @Test
@@ -53,7 +53,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void checkAwaitIsNotClickable() {
-        await().atMost(1, NANOSECONDS).until("input[disabled]").isNotClickable();
+        await().atMost(1, NANOSECONDS).until("input[disabled]").not().isClickable();
     }
 
     @Test
@@ -63,7 +63,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void checkAwaitIsNotSelected() {
-        await().atMost(1, NANOSECONDS).until("#non_selected").isNotSelected();
+        await().atMost(1, NANOSECONDS).until("#non_selected").not().isSelected();
     }
 
     @Test(expected = TimeoutException.class)
@@ -78,7 +78,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void checkAwaitHasSize() {
-        await().atMost(1, NANOSECONDS).until(".small").hasSize(3);
+        await().atMost(1, NANOSECONDS).until(".small").each().hasSize(3);
     }
 
     @Test
@@ -152,12 +152,12 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void checkAwaitNameStartsWith() {
-        await().atMost(1, NANOSECONDS).until(".small").withName().startsWith("name").hasSize(2);
+        await().atMost(1, NANOSECONDS).until(".small").withName().startsWith("name").each().hasSize(2);
     }
 
     @Test
     public void checkAwaitContainsIdWithIdContains() {
-        await().atMost(1, NANOSECONDS).until(".small").withId().contains("id").hasSize(2);
+        await().atMost(1, NANOSECONDS).until(".small").withId().contains("id").each().hasSize(2);
     }
 
     @Test
@@ -182,37 +182,37 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void when_a_element_is_not_present_then_isNotPresent_return_true() {
-        await().atMost(1, NANOSECONDS).until(".small").withText().contains("notPresent").isNotPresent();
+        await().atMost(1, NANOSECONDS).until(".small").withText().contains("notPresent").not().isPresent();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_a_element_is_present_then_isNotPresent_throw_an_exception() {
-        await().atMost(1, NANOSECONDS).until(".small").withText().contains("Small 1").isNotPresent();
+        await().atMost(1, NANOSECONDS).until(".small").withText().contains("Small 1").not().isPresent();
     }
 
     @Test
     public void checkAwaitStartWithRegex() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").startsWith(regex(".d")).hasSize(2);
+        await().atMost(1, NANOSECONDS).until(".small").with("id").startsWith(regex(".d")).each().hasSize(2);
     }
 
     @Test
     public void checkAwaitStartWithString() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").startsWith("id").hasSize(2);
+        await().atMost(1, NANOSECONDS).until(".small").with("id").startsWith("id").each().hasSize(2);
     }
 
     @Test
     public void checkAwaitNotStartWith() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").notStartsWith("id").hasSize(1);
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notStartsWith("id").each().hasSize(1);
     }
 
     @Test
     public void checkAwaitNotStartWithRegex() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").notStartsWith(regex("id")).hasSize(1);
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notStartsWith(regex("id")).each().hasSize(1);
     }
 
     @Test
     public void checkAwaitEndsWithRegex() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").endsWith(regex("2")).hasSize(1);
+        await().atMost(1, NANOSECONDS).until(".small").with("id").endsWith(regex("2")).each().hasSize(1);
     }
 
     @Test
@@ -227,12 +227,12 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void checkAwaitNotContains() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize(1);
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").each().hasSize(1);
     }
 
     @Test
     public void checkAwaitNotContainsRegex() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains(regex("d")).hasSize(1);
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains(regex("d")).each().hasSize(1);
     }
 
     @Test
@@ -242,7 +242,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void checkAwaitNotEquals() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().notEqualTo(10);
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().not().equalTo(10);
     }
 
     @Test
@@ -267,12 +267,12 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void checkWithValue() {
-        await().atMost(1, NANOSECONDS).until("input").with("value").equalTo("John").hasSize(4);
+        await().atMost(1, NANOSECONDS).until("input").with("value").equalTo("John").each().hasSize(4);
     }
 
     @Test
     public void checkMultipleFilter() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").startsWith(regex("id")).with("text").endsWith("2")
+        await().atMost(1, NANOSECONDS).until(".small").with("id").startsWith(regex("id")).with("text").endsWith("2").each()
                 .hasSize(1);
     }
 
@@ -289,7 +289,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test
     public void when_element_is_present_then_areDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until("#default").areDisplayed();
+        await().atMost(1, NANOSECONDS).until("#default").each().isDisplayed();
     }
 
     @Test
@@ -301,7 +301,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_displayed_then_areDisplayed_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until("#unvisible").areDisplayed();
+        await().atMost(1, NANOSECONDS).until("#unvisible").each().isDisplayed();
     }
 
     @Test(expected = TimeoutException.class)
@@ -313,49 +313,49 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test
     public void when_element_is_not_present_then_areNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until("#nonexistent").areNotDisplayed();
+        await().atMost(1, NANOSECONDS).until("#nonexistent").each().not().isDisplayed();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_present_then_areDisplayed_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until("#nonexistent").areDisplayed();
+        await().atMost(1, NANOSECONDS).until("#nonexistent").each().isDisplayed();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_present_then_areEnabled_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until("#nonexistent").areEnabled();
+        await().atMost(1, NANOSECONDS).until("#nonexistent").each().isEnabled();
     }
 
     @Test
     public void when_element_is_not_displayed_then_areNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until("#unvisible").areNotDisplayed();
+        await().atMost(1, NANOSECONDS).until("#unvisible").each().not().isDisplayed();
     }
 
     @Test
     public void when_element_is_not_displayed_then_isNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until("#unvisible").isNotDisplayed();
+        await().atMost(1, NANOSECONDS).until("#unvisible").not().isDisplayed();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_displayed_then_areNotDisplayed_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until("#default").areNotDisplayed();
+        await().atMost(1, NANOSECONDS).until("#default").each().not().isDisplayed();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_displayed_then_isNotDisplayed_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until("#default").isNotDisplayed();
+        await().atMost(1, NANOSECONDS).until("#default").not().isDisplayed();
     }
 
     @Test
     public void when_element_is_enabled_then_areEnabled_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until("#default").areEnabled();
+        await().atMost(1, NANOSECONDS).until("#default").each().isEnabled();
     }
 
     @Test
@@ -367,7 +367,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_enabled_then_areEnabled_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until("#disabled").areEnabled();
+        await().atMost(1, NANOSECONDS).until("#disabled").each().isEnabled();
     }
 
     @Test(expected = TimeoutException.class)
@@ -383,12 +383,12 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void when_element_is_not_selected_then_isNotSelected_return_true() {
-        await().atMost(1, NANOSECONDS).until("#non_selected").isNotSelected();
+        await().atMost(1, NANOSECONDS).until("#non_selected").not().isSelected();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_selected_then_areSelected_throws_exception() {
-        await().atMost(1, NANOSECONDS).until("#non_selected").areSelected();
+        await().atMost(1, NANOSECONDS).until("#non_selected").each().isSelected();
     }
 
     @Test(expected = TimeoutException.class)

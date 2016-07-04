@@ -1,13 +1,12 @@
 package org.fluentlenium.core.domain;
 
-import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.action.FillConstructor;
 import org.fluentlenium.core.action.FillSelectConstructor;
 import org.fluentlenium.core.action.FluentDefaultActions;
 import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.axes.Axes;
-import org.fluentlenium.core.conditions.FluentConditions;
+import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchActions;
@@ -15,7 +14,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.lang.reflect.Constructor;
 
@@ -26,13 +24,13 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     private final WebElement webElement;
     private final Search search;
     private final Axes axes;
-    private final FluentConditions conditions;
+    private final WebElementConditions conditions;
 
     public FluentWebElement(WebElement webElement) {
         this.webElement = webElement;
         this.search = new Search(webElement);
         this.axes = new Axes(webElement);
-        this.conditions = new FluentConditions(webElement);
+        this.conditions = new WebElementConditions(this);
     }
 
     /**
@@ -51,7 +49,11 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * @return object to perform XPath Axes transformations.
      */
     public Axes axes() {
-        return this.axes;
+        return axes;
+    }
+
+    public WebElementConditions conditions() {
+        return conditions;
     }
 
     /**
@@ -189,7 +191,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * return true if the element is displayed, other way return false
      *
-     * @return boolean value of isDisplayed check
+     * @return boolean value of displayed check
      */
     public boolean isDisplayed() {
         return webElement.isDisplayed();
@@ -198,7 +200,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * return true if the element is enabled, other way return false
      *
-     * @return boolean value of isEnabled check
+     * @return boolean value of enabled check
      */
     public boolean isEnabled() {
         return webElement.isEnabled();
@@ -207,7 +209,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * return true if the element is selected, other way false
      *
-     * @return boolean value of isSelected check
+     * @return boolean value of selected check
      */
     public boolean isSelected() {
         return webElement.isSelected();

@@ -4,8 +4,8 @@ import com.google.common.base.Predicate;
 import org.fluentlenium.core.Fluent;
 
 import static org.fluentlenium.core.wait.FluentWaitMessages.equalToMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.greatherThanMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.greatherThanOrEqualToMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.greaterThanMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.greaterThanOrEqualToMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.lessThanMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.lessThanOrEqualToMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.notEqualToMessage;
@@ -90,7 +90,7 @@ public class FluentSizeBuilder {
                 return getSize() > size;
             }
         };
-        parent.until(wait, isPresent, greatherThanMessage(selection, size));
+        parent.until(wait, isPresent, greaterThanMessage(selection, size));
     }
 
     /**
@@ -104,7 +104,7 @@ public class FluentSizeBuilder {
                 return getSize() >= size;
             }
         };
-        parent.until(wait, isPresent, greatherThanOrEqualToMessage(selection, size));
+        parent.until(wait, isPresent, greaterThanOrEqualToMessage(selection, size));
     }
 
     private int getSize() {

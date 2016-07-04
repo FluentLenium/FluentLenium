@@ -109,7 +109,7 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
 
     @Test
     public void checkAwaitHasSize() {
-        await().atMost(1, NANOSECONDS).until(smallElements).hasSize(3);
+        await().atMost(1, NANOSECONDS).until(smallElements).each().hasSize(3);
     }
 
     @Test
@@ -150,7 +150,7 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
     @Test
     public void when_element_is_present_then_areDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(defaultElements).areDisplayed();
+        await().atMost(1, NANOSECONDS).until(defaultElements).each().isDisplayed();
     }
 
     @Test
@@ -162,7 +162,7 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_displayed_then_areDisplayed_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(unvisibleElements).areDisplayed();
+        await().atMost(1, NANOSECONDS).until(unvisibleElements).each().isDisplayed();
     }
 
     @Test(expected = TimeoutException.class)
@@ -174,43 +174,43 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
     @Test
     public void when_element_is_not_present_then_areNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(nonexistentElements).areNotDisplayed();
+        await().atMost(1, NANOSECONDS).until(nonexistentElements).each().not().isDisplayed();
     }
 
     @Test
     public void when_element_is_not_present_then_isNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(nonexistentElements).isNotDisplayed();
+        await().atMost(1, NANOSECONDS).until(nonexistentElements).not().isDisplayed();
     }
 
     @Test
     public void when_element_is_not_displayed_then_areNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(unvisibleElements).areNotDisplayed();
+        await().atMost(1, NANOSECONDS).until(unvisibleElements).each().not().isDisplayed();
     }
 
     @Test
     public void when_element_is_not_displayed_then_isNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(unvisibleElements).isNotDisplayed();
+        await().atMost(1, NANOSECONDS).until(unvisibleElements).not().isDisplayed();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_displayed_then_areNotDisplayed_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(defaultElements).areNotDisplayed();
+        await().atMost(1, NANOSECONDS).until(defaultElements).each().not().isDisplayed();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_displayed_then_isNotDisplayed_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(defaultElements).isNotDisplayed();
+        await().atMost(1, NANOSECONDS).until(defaultElements).not().isDisplayed();
     }
 
     @Test
     public void when_element_is_enabled_then_areEnabled_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(defaultElements).areEnabled();
+        await().atMost(1, NANOSECONDS).until(defaultElements).each().isEnabled();
     }
 
     @Test
@@ -234,7 +234,7 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_enabled_then_areEnabled_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(disabledElements).areEnabled();
+        await().atMost(1, NANOSECONDS).until(disabledElements).each().isEnabled();
     }
 
     @Test(expected = TimeoutException.class)
@@ -246,7 +246,7 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
     @Test
     public void when_element_is_not_enabled_then_isNotEnabled_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(disabledElements).isNotEnabled();
+        await().atMost(1, NANOSECONDS).until(disabledElements).not().isEnabled();
     }
 
     @Test(expected = TimeoutException.class)
@@ -258,7 +258,7 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
     @Test
     public void when_single_element_is_not_enabled_then_isNotEnabled_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(disabledElement).isNotEnabled();
+        await().atMost(1, NANOSECONDS).until(disabledElement).not().isEnabled();
     }
 
     @Test
