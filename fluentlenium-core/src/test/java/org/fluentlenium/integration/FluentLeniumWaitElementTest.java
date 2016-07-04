@@ -32,6 +32,9 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
     private FluentList<FluentWebElement> notFoundElements;
 
     @FindBy(tagName = "input")
+    private FluentList<FluentWebElement> inputElement;
+
+    @FindBy(tagName = "input")
     private FluentList<FluentWebElement> inputElements;
 
     @FindBy(css = "input[disabled]")
@@ -76,7 +79,7 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
 
     @Test
     public void checkAwaitIsClickableForSingleElement() {
-        await().atMost(1, NANOSECONDS).until(defaultElement).isClickable();
+        await().atMost(1, NANOSECONDS).until(inputElement).isClickable();
     }
 
     @Test(expected = TimeoutException.class)
@@ -240,10 +243,22 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
         await().atMost(1, NANOSECONDS).until(disabledElements).isEnabled();
     }
 
+    @Test
+    public void when_element_is_not_enabled_then_isNotEnabled_return_true() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).until(disabledElements).isNotEnabled();
+    }
+
     @Test(expected = TimeoutException.class)
     public void when_single_element_is_not_enabled_then_isEnabled_throws_exception() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until(disabledElement).isEnabled();
+    }
+
+    @Test
+    public void when_single_element_is_not_enabled_then_isNotEnabled_return_true() {
+        goTo(JAVASCRIPT_URL);
+        await().atMost(1, NANOSECONDS).until(disabledElement).isNotEnabled();
     }
 
     @Test
