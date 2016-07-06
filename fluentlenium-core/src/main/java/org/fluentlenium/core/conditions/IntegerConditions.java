@@ -1,5 +1,8 @@
 package org.fluentlenium.core.conditions;
 
+/**
+ * Conditions API for Integer.
+ */
 public interface IntegerConditions extends Conditions<Integer> {
     @Override
     IntegerConditions not();

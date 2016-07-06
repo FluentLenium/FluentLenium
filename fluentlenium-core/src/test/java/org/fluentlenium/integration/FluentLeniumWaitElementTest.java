@@ -94,12 +94,12 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
 
     @Test
     public void awaitForElementXPosition() {
-        await().until(inputDisabledElements).hasPositionX(5);
+        await().until(inputDisabledElements).hasRectangle().withX(5);
     }
 
     @Test(expected = TimeoutException.class)
     public void awaitForElementXPositionElementNotFound() {
-        await().until(notFoundElements).hasPositionX(0);
+        await().until(notFoundElements).hasRectangle().withX(0);
     }
 
     @Test

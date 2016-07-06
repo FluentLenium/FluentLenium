@@ -9,13 +9,16 @@ import org.fluentlenium.core.domain.FluentWebElement;
 
 import java.util.List;
 
+/**
+ * Conditions implementation for list of elements, matching when each element matches.
+ */
 public class EachElementConditions extends AbstractFluentListConditions {
     public EachElementConditions(List<? extends FluentWebElement> elements) {
         super(elements);
     }
 
     @Override
-    public FluentListConditions not() {
+    public EachElementConditions not() {
         EachElementConditions negatedConditions = new EachElementConditions(elements);
         negatedConditions.negation = !negation;
         return negatedConditions;

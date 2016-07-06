@@ -45,6 +45,11 @@ final class FluentWaitMessages {
     private static final String IS_NOT_ABOVE = " is not above screen top or invisible";
     private static final String PREDICATE_IS_NOT_VERIFIED = " predicated is not verified";
     private static final String PREDICATE_IS_VERIFIED = " predicated is verified";
+    private static final String IS_NOT_AT_POSITION = " is not at position";
+    private static final String IS_AT_POSITION = " is at position";
+    private static final String HAS_NOT_THE_DIMENSION = " has not the dimension";
+    private static final String HAS_THE_DIMENSION = " has the dimension";
+
 
     static final String hasSizeMessage(String selectionName, int size) {
         return selectionName + HAS_NOT_THE_SIZE + size + POINT;
@@ -200,6 +205,30 @@ final class FluentWaitMessages {
 
     static final String isPredicateNotVerifiedMessage(String selectionName) {
         return selectionName + PREDICATE_IS_VERIFIED;
+    }
+
+    static final String hasPositionMessage(String selectionName, int x, int y) {
+        return selectionName + IS_NOT_AT_POSITION + " (x=" + x + "; y=" + y + ")";
+    }
+
+    static final String hasNotPositionMessage(String selectionName, int x, int y) {
+        return selectionName + IS_AT_POSITION + " (x=" + x + "; y=" + y + ")";
+    }
+
+    static final String hasDimensionMessage(String selectionName, int x, int y) {
+        return selectionName + HAS_NOT_THE_SIZE + " (x=" + x + "; y=" + y + ")";
+    }
+
+    static final String hasNotDimensionMessage(String selectionName, int x, int y) {
+        return selectionName + HAS_THE_SIZE + " (x=" + x + "; y=" + y + ")";
+    }
+
+    static final String hasPositionAndDimensionMessage(String selectionName, int x, int y, int width, int height) {
+        return selectionName + IS_NOT_AT_POSITION + " and " + HAS_NOT_THE_DIMENSION + " (x=" + x + "; y=" + y + "; width=" + width + "; height=" + height + ")";
+    }
+
+    static final String hasNotPositionAndDimensionMessage(String selectionName, int x, int y, int width, int height) {
+        return selectionName + IS_AT_POSITION + " and " + HAS_THE_DIMENSION + " (x=" + x + "; y=" + y + "; width=" + width + "; height=" + height + ")";
     }
 }
 

@@ -1,7 +1,6 @@
 package org.fluentlenium.core.conditions;
 
 import com.google.common.base.Predicate;
-import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
  * Common interface for conditions.
@@ -10,7 +9,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
  */
 public interface Conditions<T> {
     /**
-     * Check that the given predicate is verified.
+     * Check that the given predicate is verified against this condition object.
      *
      * @param predicate predicate to check
      */

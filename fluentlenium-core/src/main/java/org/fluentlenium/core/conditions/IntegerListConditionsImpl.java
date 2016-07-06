@@ -1,0 +1,96 @@
+package org.fluentlenium.core.conditions;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import org.fluentlenium.core.domain.FluentWebElement;
+
+/**
+ * Conditions implementation for integer on list of elements.
+ */
+public class IntegerListConditionsImpl implements IntegerConditions {
+
+    private final Conditions<FluentWebElement> listConditions;
+    private final Function<FluentWebElement, Integer> integerGetter;
+    private final Function<FluentWebElement, IntegerConditions> conditionsGetter;
+
+    public IntegerListConditionsImpl(Conditions<FluentWebElement> listConditions, Function<FluentWebElement, Integer> integerGetter, Function<FluentWebElement, IntegerConditions> conditionsGetter) {
+        this.listConditions = listConditions;
+        this.integerGetter = integerGetter;
+        this.conditionsGetter = conditionsGetter;
+    }
+
+    public IntegerListConditionsImpl(Conditions<FluentWebElement> listConditions, final Function<FluentWebElement, Integer> integerGetter) {
+        this(listConditions, integerGetter, new Function<FluentWebElement, IntegerConditions>() {
+            @Override
+            public IntegerConditions apply(FluentWebElement input) {
+                return new IntegerConditionsImpl(integerGetter.apply(input));
+            }
+        });
+    }
+
+    @Override
+    public boolean isVerified(final Predicate<Integer> predicate) {
+        return listConditions.isVerified(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return predicate.apply(integerGetter.apply(input));
+            }
+        });
+    }
+
+    @Override
+    public IntegerConditions not() {
+        this.listConditions.not();
+        return this;
+    }
+
+    @Override
+    public boolean equalTo(final int value) {
+        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return conditionsGetter.apply(input).equalTo(value);
+            }
+        });
+    }
+
+    @Override
+    public boolean lessThan(final int value) {
+        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return conditionsGetter.apply(input).lessThan(value);
+            }
+        });
+    }
+
+    @Override
+    public boolean lessThanOrEqualTo(final int value) {
+        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return conditionsGetter.apply(input).lessThanOrEqualTo(value);
+            }
+        });
+    }
+
+    @Override
+    public boolean greaterThan(final int value) {
+        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return conditionsGetter.apply(input).greaterThan(value);
+            }
+        });
+    }
+
+    @Override
+    public boolean greaterThanOrEqualTo(final int value) {
+        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return conditionsGetter.apply(input).greaterThanOrEqualTo(value);
+            }
+        });
+    }
+}

@@ -1,7 +1,6 @@
 package org.fluentlenium.core.conditions;
 
 
-import com.google.common.base.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
@@ -91,4 +90,11 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @return true if the element has the given name, false otherwise.
      */
     boolean hasName(String name);
+
+    /**
+     * check conditions on rectangle of this element
+     *
+     * @return An object to configure advanced position conditions
+     */
+    RectangleConditions hasRectangle();
 }

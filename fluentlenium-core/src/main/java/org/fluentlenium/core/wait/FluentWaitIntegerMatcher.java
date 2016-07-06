@@ -1,6 +1,7 @@
 package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Supplier;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.IntegerConditions;
@@ -23,14 +24,16 @@ import static org.fluentlenium.core.wait.FluentWaitMessages.notLessThanOrEqualTo
  * Matcher used for integers like elements size
  */
 public class FluentWaitIntegerMatcher implements IntegerConditions {
-    private final AbstractWaitElementListMatcher matcher;
+    private final AbstractWaitElementMatcher matcher;
+    private final Supplier<IntegerConditions> conditionsSupplier;
 
-    public FluentWaitIntegerMatcher(AbstractWaitElementListMatcher matcher) {
+    public FluentWaitIntegerMatcher(AbstractWaitElementMatcher matcher, Supplier<IntegerConditions> conditionsSupplier) {
         this.matcher = matcher;
+        this.conditionsSupplier = conditionsSupplier;
     }
 
     protected IntegerConditions hasSize() {
-        IntegerConditions conditions = matcher.find().each().hasSize();
+        IntegerConditions conditions = this.conditionsSupplier.get();
         if (matcher.negation) {
             conditions = conditions.not();
         }
@@ -105,6 +108,6 @@ public class FluentWaitIntegerMatcher implements IntegerConditions {
 
     @Override
     public FluentWaitIntegerMatcher not() {
-        return new FluentWaitIntegerMatcher((AbstractWaitElementListMatcher)matcher.not());
+        return new FluentWaitIntegerMatcher((AbstractWaitElementListMatcher)matcher.not(), conditionsSupplier);
     }
 }

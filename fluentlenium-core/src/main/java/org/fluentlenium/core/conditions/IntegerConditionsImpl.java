@@ -1,27 +1,28 @@
 package org.fluentlenium.core.conditions;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Supplier;
 
-
+/**
+ * Conditions implementation for Integer.
+ */
 public class IntegerConditionsImpl implements IntegerConditions {
-    private final Supplier<Integer> intSupplier;
+    private final Integer integer;
     private boolean negation;
 
-    public IntegerConditionsImpl(Supplier<Integer> intSupplier) {
-        this.intSupplier = intSupplier;
+    public IntegerConditionsImpl(Integer integer) {
+        this.integer = integer;
     }
 
     @Override
     public IntegerConditionsImpl not() {
-        IntegerConditionsImpl negatedConditions = new IntegerConditionsImpl(intSupplier);
+        IntegerConditionsImpl negatedConditions = new IntegerConditionsImpl(integer);
         negatedConditions.negation = !negation;
         return negatedConditions;
     }
 
     @Override
     public boolean isVerified(Predicate<Integer> predicate) {
-        boolean predicateResult = predicate.apply(intSupplier.get());
+        boolean predicateResult = predicate.apply(integer);
         if (negation) {
             predicateResult = !predicateResult;
         }

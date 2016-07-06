@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
+import org.fluentlenium.core.conditions.RectangleConditions;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
@@ -17,7 +18,6 @@ import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotAttributeMessa
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotIdMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotNameMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotTextMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasPositionXMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasTextMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isAboveMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isClickableMessage;
@@ -77,30 +77,12 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
     }
 
     /**
-     * WARNING - Should be change in a next version to hasAttribute("myAttribute").value("myValue")
-     *
-     * @param value attribute value
-     */
-    public void hasPositionX(final Integer value) {
-        Predicate<Fluent> hasPositionX = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
-                FluentList<? extends FluentWebElement> fluentWebElements = find();
-                for (FluentWebElement fluentWebElement : fluentWebElements) {
-                    if (fluentWebElement.getElement().getLocation().getX() == value) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        };
-        until(wait, hasPositionX, hasPositionXMessage(selectionName, value));
-    }
-
-    /**
-     *  check if the FluentWait is above top screen border
+     *  Check if the FluentWait is above top screen border
      *
      * @return fluent
+     * @deprecated This function will be dropped in a later release. Use {@link #isVerified(Predicate)} instead.
      */
+    @Deprecated
     public void isAboveScreenOrInvisible() {
         Predicate<Fluent> isAbove = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
@@ -249,4 +231,8 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         return true;
     }
 
+    @Override
+    public RectangleConditions hasRectangle() {
+        return new FluentWaitRectangleMatcher(this);
+    }
 }

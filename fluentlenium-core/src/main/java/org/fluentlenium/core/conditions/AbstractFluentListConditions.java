@@ -1,11 +1,13 @@
 package org.fluentlenium.core.conditions;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Supplier;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 import java.util.List;
 
+/**
+ * Abstract class conditions on list of elements.
+ */
 public abstract class AbstractFluentListConditions implements FluentListConditions {
     protected boolean negation = false;
 
@@ -30,12 +32,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public IntegerConditions hasSize() {
-        return new IntegerConditionsImpl(new Supplier<Integer>() {
-            @Override
-            public Integer get() {
-                return elements.size();
-            }
-        });
+        return new IntegerConditionsImpl(elements.size());
     }
 
     @Override
@@ -144,4 +141,8 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
         }, false);
     }
 
+    @Override
+    public RectangleConditions hasRectangle() {
+        return new RectangleListConditionsImpl(this);
+    }
 }

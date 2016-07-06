@@ -9,6 +9,9 @@ import org.fluentlenium.core.domain.FluentWebElement;
 
 import java.util.List;
 
+/**
+ * Conditions implementation for list of elements, matching when at least one element of the list matches.
+ */
 public class AtLeastOneElementConditions extends AbstractFluentListConditions {
     public AtLeastOneElementConditions(List<? extends FluentWebElement> elements) {
         super(elements);

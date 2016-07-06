@@ -143,6 +143,10 @@ public class WebElementConditions implements FluentConditions {
                 return Objects.equal(elementName, name);
             }
         });
+    }
 
+    @Override
+    public RectangleConditions hasRectangle() {
+        return new RectangleConditionsImpl(element.getElement().getRect());
     }
 }

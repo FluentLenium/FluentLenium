@@ -1,9 +1,11 @@
 package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Supplier;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.IntegerConditions;
+import org.fluentlenium.core.conditions.RectangleConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasAttributeMessage;
@@ -48,8 +50,8 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public FluentWaitElementEachMatcher not() {
-        return new FluentWaitElementEachMatcher((AbstractWaitElementListMatcher)matcher.not());
-    };
+        return new FluentWaitElementEachMatcher((AbstractWaitElementListMatcher) matcher.not());
+    }
 
     @Override
     public boolean isVerified(final Predicate<FluentWebElement> predicate, final boolean defaultValue) {
@@ -207,6 +209,16 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public IntegerConditions hasSize() {
-        return new FluentWaitIntegerMatcher(matcher);
+        return new FluentWaitIntegerMatcher(matcher, new Supplier<IntegerConditions>() {
+            @Override
+            public IntegerConditions get() {
+                return eachCondition().hasSize();
+            }
+        });
+    }
+
+    @Override
+    public RectangleConditions hasRectangle() {
+        return new FluentWaitRectangleMatcher(matcher);
     }
 }
