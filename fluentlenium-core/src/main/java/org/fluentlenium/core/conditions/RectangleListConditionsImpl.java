@@ -9,7 +9,7 @@ import org.openqa.selenium.Rectangle;
  * Conditions implement for rectangles of list of elements.
  */
 public class RectangleListConditionsImpl implements RectangleConditions {
-    private final Conditions<FluentWebElement> listConditions;
+    private Conditions<FluentWebElement> listConditions;
     private final Function<FluentWebElement, Rectangle> rectangleGetter;
     private final Function<FluentWebElement, RectangleConditions> conditionsGetter;
 
@@ -47,9 +47,8 @@ public class RectangleListConditionsImpl implements RectangleConditions {
     }
 
     @Override
-    public RectangleConditions not() {
-        this.listConditions.not();
-        return this;
+    public RectangleListConditionsImpl not() {
+        return new RectangleListConditionsImpl(this.listConditions.not(), rectangleGetter, conditionsGetter);
     }
 
     @Override

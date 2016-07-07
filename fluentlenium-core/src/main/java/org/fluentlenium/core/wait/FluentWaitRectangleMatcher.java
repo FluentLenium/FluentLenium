@@ -19,13 +19,15 @@ import static org.fluentlenium.core.wait.FluentWaitMessages.notEqualToMessage;
 
 public class FluentWaitRectangleMatcher implements RectangleConditions {
     private final AbstractWaitElementMatcher matcher;
+    private final Supplier<RectangleConditions> rectangleConditionsSupplier;
 
-    public FluentWaitRectangleMatcher(AbstractWaitElementMatcher matcher) {
+    public FluentWaitRectangleMatcher(AbstractWaitElementMatcher matcher, Supplier<RectangleConditions> rectangleConditionsSupplier) {
         this.matcher = matcher;
+        this.rectangleConditionsSupplier = rectangleConditionsSupplier;
     }
 
     protected RectangleConditions hasRectangle() {
-        RectangleConditions conditions = matcher.find().each().hasRectangle();
+        RectangleConditions conditions = rectangleConditionsSupplier.get();
         if (matcher.negation) {
             conditions = conditions.not();
         }
@@ -45,7 +47,7 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
 
     @Override
     public FluentWaitRectangleMatcher not() {
-        return new FluentWaitRectangleMatcher((AbstractWaitElementMatcher) matcher.not());
+        return new FluentWaitRectangleMatcher((AbstractWaitElementMatcher) matcher.not(), rectangleConditionsSupplier);
     }
 
     @Override
@@ -64,7 +66,7 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
         return new FluentWaitIntegerMatcher(matcher, new Supplier<IntegerConditions>() {
             @Override
             public IntegerConditions get() {
-                return hasRectangle().withX();
+                return matcher.find().each().hasRectangle().withX();
             }
         });
     }
@@ -85,7 +87,7 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
         return new FluentWaitIntegerMatcher(matcher, new Supplier<IntegerConditions>() {
             @Override
             public IntegerConditions get() {
-                return hasRectangle().withY();
+                return matcher.find().each().hasRectangle().withY();
             }
         });
     }
@@ -117,7 +119,7 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
         return new FluentWaitIntegerMatcher(matcher, new Supplier<IntegerConditions>() {
             @Override
             public IntegerConditions get() {
-                return hasRectangle().withWidth();
+                return matcher.find().each().hasRectangle().withWidth();
             }
         });
     }
@@ -138,7 +140,7 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
         return new FluentWaitIntegerMatcher(matcher, new Supplier<IntegerConditions>() {
             @Override
             public IntegerConditions get() {
-                return hasRectangle().withHeight();
+                return matcher.find().each().hasRectangle().withHeight();
             }
         });
     }
@@ -148,7 +150,7 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
         matcher.until(matcher.wait, new Predicate<Fluent>() {
             @Override
             public boolean apply(Fluent input) {
-                return hasRectangle().withPosition(width, height);
+                return hasRectangle().withDimension(width, height);
             }
         }, matcher.negation ? FluentWaitMessages.hasNotDimensionMessage(matcher.selectionName, width, height) : FluentWaitMessages.hasDimensionMessage(matcher.selectionName, width, height));
         return true;

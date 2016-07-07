@@ -9,7 +9,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
  */
 public class IntegerListConditionsImpl implements IntegerConditions {
 
-    private final Conditions<FluentWebElement> listConditions;
+    private Conditions<FluentWebElement> listConditions;
     private final Function<FluentWebElement, Integer> integerGetter;
     private final Function<FluentWebElement, IntegerConditions> conditionsGetter;
 
@@ -39,9 +39,8 @@ public class IntegerListConditionsImpl implements IntegerConditions {
     }
 
     @Override
-    public IntegerConditions not() {
-        this.listConditions.not();
-        return this;
+    public IntegerListConditionsImpl not() {
+        return new IntegerListConditionsImpl(listConditions.not(), integerGetter, conditionsGetter);
     }
 
     @Override

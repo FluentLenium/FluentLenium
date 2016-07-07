@@ -1,5 +1,6 @@
 package org.fluentlenium.core.domain;
 
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.action.FillConstructor;
 import org.fluentlenium.core.action.FillSelectConstructor;
@@ -14,6 +15,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.lang.reflect.Constructor;
 
@@ -222,7 +224,8 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
 
     public boolean isClickable() {
-        return conditions.isClickable();
+        FluentAdapter fluent = FluentThread.get();
+        return ExpectedConditions.elementToBeClickable(getElement()).apply(fluent.getDriver()) != null;
     }
 
     /**
@@ -231,7 +234,8 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * @return false is the element is still attached to the DOM, true otherwise.
      */
     public boolean isStale() {
-        return conditions.isStale();
+        FluentAdapter fluent = FluentThread.get();
+        return ExpectedConditions.stalenessOf(getElement()).apply(fluent.getDriver());
     }
 
     /**

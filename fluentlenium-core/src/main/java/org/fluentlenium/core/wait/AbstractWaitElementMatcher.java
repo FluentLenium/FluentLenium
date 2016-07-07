@@ -1,6 +1,7 @@
 package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
 import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.conditions.FluentConditions;
@@ -233,6 +234,11 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
 
     @Override
     public RectangleConditions hasRectangle() {
-        return new FluentWaitRectangleMatcher(this);
+        return new FluentWaitRectangleMatcher(this, new Supplier<RectangleConditions>() {
+            @Override
+            public RectangleConditions get() {
+                return find().one().hasRectangle();
+            }
+        });
     }
 }

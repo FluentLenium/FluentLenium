@@ -212,13 +212,18 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         return new FluentWaitIntegerMatcher(matcher, new Supplier<IntegerConditions>() {
             @Override
             public IntegerConditions get() {
-                return eachCondition().hasSize();
+                return matcher.find().each().hasSize();
             }
         });
     }
 
     @Override
     public RectangleConditions hasRectangle() {
-        return new FluentWaitRectangleMatcher(matcher);
+        return new FluentWaitRectangleMatcher(matcher, new Supplier<RectangleConditions>() {
+            @Override
+            public RectangleConditions get() {
+                return matcher.find().each().hasRectangle();
+            }
+        });
     }
 }

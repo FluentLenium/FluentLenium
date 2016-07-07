@@ -2,10 +2,7 @@ package org.fluentlenium.core.conditions;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
-import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * Fluent object to handle {@link org.openqa.selenium.support.ui.ExpectedConditions} on FluentWebElement in fluentlenium API.
@@ -39,8 +36,7 @@ public class WebElementConditions implements FluentConditions {
         return isVerified(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                FluentAdapter fluent = FluentThread.get();
-                return ExpectedConditions.elementToBeClickable(element.getElement()).apply(fluent.getDriver()) != null;
+                return input.isClickable();
             }
         });
     }
@@ -50,8 +46,7 @@ public class WebElementConditions implements FluentConditions {
         return isVerified(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                FluentAdapter fluent = FluentThread.get();
-                return ExpectedConditions.stalenessOf(element.getElement()).apply(fluent.getDriver());
+                return input.isStale();
             }
         });
     }
@@ -147,6 +142,10 @@ public class WebElementConditions implements FluentConditions {
 
     @Override
     public RectangleConditions hasRectangle() {
-        return new RectangleConditionsImpl(element.getElement().getRect());
+        RectangleConditionsImpl conditions = new RectangleConditionsImpl(element.getElement().getRect());
+        if (negation) {
+            conditions = conditions.not();
+        }
+        return conditions;
     }
 }

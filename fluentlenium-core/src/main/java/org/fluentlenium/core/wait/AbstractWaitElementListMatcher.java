@@ -38,4 +38,8 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
         return each().hasSize();
     }
 
+    public boolean hasSize(final int size) {
+        return each().hasSize(size);
+    }
+
 }

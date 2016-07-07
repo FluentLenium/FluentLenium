@@ -3,7 +3,6 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import org.fluentlenium.core.Fluent;
-import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.IntegerConditions;
 
 import static org.fluentlenium.core.wait.FluentWaitMessages.equalToMessage;
@@ -108,6 +107,6 @@ public class FluentWaitIntegerMatcher implements IntegerConditions {
 
     @Override
     public FluentWaitIntegerMatcher not() {
-        return new FluentWaitIntegerMatcher((AbstractWaitElementListMatcher)matcher.not(), conditionsSupplier);
+        return new FluentWaitIntegerMatcher((AbstractWaitElementMatcher) matcher.not(), conditionsSupplier);
     }
 }

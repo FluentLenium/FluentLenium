@@ -14,7 +14,7 @@ public class FluentWaitWindowMatcher extends AbstractWaitMatcher {
         this.windowName = windowName;
     }
 
-    public Fluent isDisplayed() {
+    public boolean isDisplayed() {
         Predicate<Fluent> isDisplayed = new Predicate<Fluent>() {
             @Override
             public boolean apply(Fluent fluent) {
@@ -23,10 +23,10 @@ public class FluentWaitWindowMatcher extends AbstractWaitMatcher {
         };
 
         until(wait, isDisplayed, FluentWaitMessages.isWindowDisplayedMessage(windowName));
-        return FluentThread.get();
+        return true;
     }
 
-    public Fluent isNotDisplayed() {
+    public boolean isNotDisplayed() {
         Predicate<Fluent> isNotDisplayed = new Predicate<Fluent>() {
             @Override
             public boolean apply(Fluent fluent) {
@@ -35,7 +35,7 @@ public class FluentWaitWindowMatcher extends AbstractWaitMatcher {
         };
 
         until(wait, isNotDisplayed, FluentWaitMessages.isWindowNotDisplayedMessage(windowName));
-        return FluentThread.get();
+        return true;
     }
 
 }
