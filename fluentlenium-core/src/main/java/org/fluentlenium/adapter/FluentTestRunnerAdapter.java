@@ -216,10 +216,14 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      */
     public static void releaseSharedDriver() {
         if (isSharedDriverPerClass) {
-            sharedDriver.quit();
-            sharedDriver = null;
-            isSharedDriverPerClass = false;
+            doReleaseSharedDriver();
         }
+    }
+
+    public static void doReleaseSharedDriver() {
+        sharedDriver.quit();
+        sharedDriver = null;
+        isSharedDriverPerClass = false;
     }
 
 }

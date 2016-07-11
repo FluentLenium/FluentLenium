@@ -10,6 +10,6 @@ public class SharedDriverOnceShutdownHook extends Thread {
 
     @Override
     public synchronized void start() {
-        FluentTestRunnerAdapter.releaseSharedDriver(); // https://github.com/FluentLenium/FluentLenium/issues/196
+        FluentTestRunnerAdapter.doReleaseSharedDriver(); // https://github.com/FluentLenium/FluentLenium/issues/196
     }
 }
