@@ -23,25 +23,25 @@ public abstract class FluentTestNg extends FluentTestRunnerAdapter {
 
     private static Map<Method, ITestNGMethod> methods = new HashMap<>();
 
-    @BeforeTest
+    @BeforeTest(alwaysRun = true)
     public void beforeTest(ITestContext context) {
         for (ITestNGMethod method : context.getAllTestMethods()) {
             methods.put(method.getConstructorOrMethod().getMethod(), method);
         }
     }
 
-    @AfterTest
+    @AfterTest(alwaysRun = true)
     public void afterTest() {
         methods.clear();
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void beforeMethod(Method m, ITestContext context) {
         ITestNGMethod testNGMethod = methods.get(m);
         starting(testNGMethod.getRealClass(), testNGMethod.getMethodName());
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void afterMethod(ITestResult result) {
         if (!result.isSuccess()) {
             failed(result.getThrowable(), result.getTestClass().getRealClass(), result.getName());
@@ -49,7 +49,7 @@ public abstract class FluentTestNg extends FluentTestRunnerAdapter {
         finished(result.getTestClass().getRealClass(), result.getName());
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void afterClass() {
         releaseSharedDriver();
     }
