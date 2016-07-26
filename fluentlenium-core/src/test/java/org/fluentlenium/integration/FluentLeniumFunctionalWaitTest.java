@@ -61,7 +61,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find(".small");
             }
-        }).hasSize(3);
+        }).each().hasSize(3);
     }
 
     @Test
@@ -166,7 +166,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find(".small", withName().startsWith("name"));
             }
-        }).hasSize(2);
+        }).each().hasSize(2);
     }
 
     @Test
@@ -176,7 +176,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find(".small", withId().contains("id"));
             }
-        }).hasSize(2);
+        }).each().hasSize(2);
     }
 
     @Test
@@ -226,7 +226,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find(".small", withText().contains("notPresent"));
             }
-        }).isNotPresent();
+        }).not().isPresent();
     }
 
     @Test(expected = TimeoutException.class)
@@ -236,7 +236,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentWebElement get() {
                 return findFirst(".small", withText().contains("Small 1"));
             }
-        }).isNotPresent();
+        }).not().isPresent();
     }
 
     @Test
@@ -246,7 +246,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").startsWith(regex(".d")));
             }
-        }).hasSize(2);
+        }).each().hasSize(2);
     }
 
     @Test
@@ -256,7 +256,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").startsWith("id"));
             }
-        }).hasSize(2);
+        }).each().hasSize(2);
     }
 
     @Test
@@ -266,7 +266,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notStartsWith("id"));
             }
-        }).hasSize(1);
+        }).each().hasSize(1);
     }
 
     @Test
@@ -276,7 +276,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notStartsWith(regex("id")));
             }
-        }).hasSize(1);
+        }).each().hasSize(1);
     }
 
     @Test
@@ -286,7 +286,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").endsWith(regex("2")));
             }
-        }).hasSize(1);
+        }).each().hasSize(1);
     }
 
     @Test
@@ -316,7 +316,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains("d"));
             }
-        }).hasSize(1);
+        }).each().hasSize(1);
     }
 
     @Test
@@ -326,7 +326,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains(regex("d")));
             }
-        }).hasSize(1);
+        }).each().hasSize(1);
     }
 
     @Test
@@ -346,7 +346,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains("d"));
             }
-        }).hasSize().notEqualTo(10);
+        }).hasSize().not().equalTo(10);
     }
 
     @Test
@@ -396,7 +396,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find("input", with("value").equalTo("John"));
             }
-        }).hasSize(4);
+        }).each().hasSize(4);
     }
 
     @Test
@@ -406,7 +406,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").startsWith(regex("id")), with("text").endsWith("2"));
             }
-        }).hasSize(1);
+        }).each().hasSize(1);
     }
 
     @Test
@@ -437,7 +437,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find("#default");
             }
-        }).areDisplayed();
+        }).each().isDisplayed();
     }
 
     @Test
@@ -459,7 +459,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find("#unvisible");
             }
-        }).areDisplayed();
+        }).each().isDisplayed();
     }
 
     @Test(expected = TimeoutException.class)
@@ -481,7 +481,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find("#nonexistent");
             }
-        }).areNotDisplayed();
+        }).each().not().isDisplayed();
     }
 
     @Test
@@ -492,7 +492,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find("#nonexistent");
             }
-        }).isNotDisplayed();
+        }).each().not().isDisplayed();
     }
 
     @Test
@@ -503,7 +503,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find("#unvisible");
             }
-        }).areNotDisplayed();
+        }).each().not().isDisplayed();
     }
 
     @Test
@@ -514,7 +514,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find("#unvisible");
             }
-        }).isNotDisplayed();
+        }).not().isDisplayed();
     }
 
     @Test(expected = TimeoutException.class)
@@ -525,7 +525,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find("#default");
             }
-        }).areNotDisplayed();
+        }).each().not().isDisplayed();
     }
 
     @Test(expected = TimeoutException.class)
@@ -536,7 +536,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find("#default");
             }
-        }).isNotDisplayed();
+        }).not().isDisplayed();
     }
 
     @Test
@@ -547,7 +547,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find("#default");
             }
-        }).areEnabled();
+        }).each().isEnabled();
     }
 
     @Test
@@ -569,7 +569,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
             public FluentList<FluentWebElement> get() {
                 return find("#disabled");
             }
-        }).areEnabled();
+        }).each().isEnabled();
     }
 
     @Test(expected = TimeoutException.class)

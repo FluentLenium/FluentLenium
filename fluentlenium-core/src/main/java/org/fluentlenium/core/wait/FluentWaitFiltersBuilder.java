@@ -15,87 +15,87 @@ import java.util.regex.Pattern;
 
 public class FluentWaitFiltersBuilder {
 
-    private FluentWaitLocatorSelectorMatcher fluentLeniumWait;
+    private FluentWaitLocatorSelectorMatcher matcher;
     private String attribute;
 
     public FluentWaitFiltersBuilder(FluentWaitLocatorSelectorMatcher fluentWaitBuilder, FilterType filterType) {
-        this.fluentLeniumWait = fluentWaitBuilder;
+        this.matcher = fluentWaitBuilder;
         this.attribute = filterType.name();
     }
 
-    public FluentWaitFiltersBuilder(FluentWaitLocatorSelectorMatcher fluentWaitBuilder, String attribute) {
-        this.fluentLeniumWait = fluentWaitBuilder;
+    public FluentWaitFiltersBuilder(FluentWaitLocatorSelectorMatcher matcher, String attribute) {
+        this.matcher = matcher;
         this.attribute = attribute;
     }
 
     public FluentWaitLocatorSelectorMatcher equalTo(String equal) {
-        fluentLeniumWait.addFilter(new Filter(attribute, new EqualMatcher(equal)));
-        return fluentLeniumWait;
+        matcher.addFilter(new Filter(attribute, new EqualMatcher(equal)));
+        return matcher;
     }
 
     public FluentWaitLocatorSelectorMatcher contains(String equal) {
-        fluentLeniumWait.addFilter(new Filter(attribute, new ContainsMatcher(equal)));
-        return fluentLeniumWait;
+        matcher.addFilter(new Filter(attribute, new ContainsMatcher(equal)));
+        return matcher;
     }
 
     public FluentWaitLocatorSelectorMatcher containsWord(String word) {
-        fluentLeniumWait.addFilter(new Filter(attribute, new ContainsWordMatcher(word)));
-        return fluentLeniumWait;
+        matcher.addFilter(new Filter(attribute, new ContainsWordMatcher(word)));
+        return matcher;
     }
 
     public FluentWaitLocatorSelectorMatcher contains(Pattern equal) {
-        fluentLeniumWait.addFilter(new Filter(attribute, new ContainsMatcher(equal)));
-        return fluentLeniumWait;
+        matcher.addFilter(new Filter(attribute, new ContainsMatcher(equal)));
+        return matcher;
     }
 
     public FluentWaitLocatorSelectorMatcher startsWith(String equal) {
-        fluentLeniumWait.addFilter(new Filter(attribute, new StartsWithMatcher(equal)));
-        return fluentLeniumWait;
+        matcher.addFilter(new Filter(attribute, new StartsWithMatcher(equal)));
+        return matcher;
     }
 
     public FluentWaitLocatorSelectorMatcher startsWith(Pattern equal) {
-        fluentLeniumWait.addFilter(new Filter(attribute, new StartsWithMatcher(equal)));
-        return fluentLeniumWait;
+        matcher.addFilter(new Filter(attribute, new StartsWithMatcher(equal)));
+        return matcher;
     }
 
     public FluentWaitLocatorSelectorMatcher endsWith(String equal) {
-        fluentLeniumWait.addFilter(new Filter(attribute, new EndsWithMatcher(equal)));
-        return fluentLeniumWait;
+        matcher.addFilter(new Filter(attribute, new EndsWithMatcher(equal)));
+        return matcher;
     }
 
     public FluentWaitLocatorSelectorMatcher endsWith(Pattern equal) {
-        fluentLeniumWait.addFilter(new Filter(attribute, new EndsWithMatcher(equal)));
-        return fluentLeniumWait;
+        matcher.addFilter(new Filter(attribute, new EndsWithMatcher(equal)));
+        return matcher;
     }
 
     public FluentWaitLocatorSelectorMatcher notContains(String equal) {
-        fluentLeniumWait.addFilter(new Filter(attribute, new NotContainsMatcher(equal)));
-        return fluentLeniumWait;
+        matcher.addFilter(new Filter(attribute, new NotContainsMatcher(equal)));
+        return matcher;
     }
 
     public FluentWaitLocatorSelectorMatcher notContains(Pattern equal) {
-        fluentLeniumWait.addFilter(new Filter(attribute, new NotContainsMatcher(equal)));
-        return fluentLeniumWait;
+        matcher.addFilter(new Filter(attribute, new NotContainsMatcher(equal)));
+        return matcher;
     }
 
     public FluentWaitLocatorSelectorMatcher notStartsWith(String equal) {
-        fluentLeniumWait.addFilter(new Filter(attribute, new NotStartsWithMatcher(equal)));
-        return fluentLeniumWait;
+        matcher.addFilter(new Filter(attribute, new NotStartsWithMatcher(equal)));
+        return matcher;
     }
 
     public FluentWaitLocatorSelectorMatcher notStartsWith(Pattern equal) {
-        fluentLeniumWait.addFilter(new Filter(attribute, new NotStartsWithMatcher(equal)));
-        return fluentLeniumWait;
+        matcher.addFilter(new Filter(attribute, new NotStartsWithMatcher(equal)));
+        return matcher;
     }
 
     public FluentWaitLocatorSelectorMatcher notEndsWith(String equal) {
-        fluentLeniumWait.addFilter(new Filter(attribute, new NotEndsWithMatcher(equal)));
-        return fluentLeniumWait;
+        matcher.addFilter(new Filter(attribute, new NotEndsWithMatcher(equal)));
+        return matcher;
     }
 
     public FluentWaitLocatorSelectorMatcher notEndsWith(Pattern equal) {
-        fluentLeniumWait.addFilter(new Filter(attribute, new NotEndsWithMatcher(equal)));
-        return fluentLeniumWait;
+        matcher.addFilter(new Filter(attribute, new NotEndsWithMatcher(equal)));
+        return matcher;
     }
 
 

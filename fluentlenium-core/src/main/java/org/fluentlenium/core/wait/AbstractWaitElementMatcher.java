@@ -1,35 +1,49 @@
 package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
 import org.fluentlenium.core.Fluent;
+import org.fluentlenium.core.conditions.FluentConditions;
+import org.fluentlenium.core.conditions.FluentListConditions;
+import org.fluentlenium.core.conditions.RectangleConditions;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.List;
 
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasAttributeMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasIdMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNameMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasPositionXMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotAttributeMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotIdMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotNameMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotTextMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasTextMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isAboveMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isClickableMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isNotClickableMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isNotDisplayedMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isNotEnabledMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isNotPresentMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isNotSelectedMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isNotStaleMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateNotVerifiedMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateVerifiedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isPresentMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isSelectedMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isStaleMessage;
 
 /**
  * Base Matcher for waiting on a single element.
  */
-public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
+public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher implements FluentConditions {
     protected Search search;
     protected String selectionName;
     protected FluentWait wait;
+    protected boolean negation = false;
 
     public AbstractWaitElementMatcher(Search search, FluentWait wait, String selectionName) {
         this.selectionName = selectionName;
@@ -38,28 +52,38 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
     }
 
     /**
-     * WARNING - Should be change in a next version to hasAttribute("myAttribute").value("myValue")
+     * Find the elements from configured matcher.
      *
-     * @param value attribute value
+     * @return fuent list of matching elements.
      */
-    public void hasPositionX(final Integer value) {
-        Predicate<Fluent> hasPositionX = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
-                FluentList<? extends FluentWebElement> fluentWebElements = find();
-                for (FluentWebElement fluentWebElement : fluentWebElements) {
-                    if (fluentWebElement.getElement().getLocation().getX() == value) {
-                        return true;
-                    }
-                }
-                return false;
+    abstract protected FluentList<? extends FluentWebElement> find();
+
+    protected FluentListConditions condition() {
+        FluentListConditions conditions = find().one();
+        if (negation) {
+            conditions = conditions.not();
+        }
+        return conditions;
+    }
+
+    @Override
+    public boolean isVerified(final Predicate<FluentWebElement> predicate) {
+        until(wait, new Predicate<Fluent>() {
+            @Override
+            public boolean apply(Fluent input) {
+                return condition().isVerified(predicate);
             }
-        };
-        until(wait, hasPositionX, hasPositionXMessage(selectionName, value));
+        }, negation ? isPredicateNotVerifiedMessage(selectionName) : isPredicateVerifiedMessage(selectionName));
+        return true;
     }
 
     /**
-     *   * check if the FluentWait is above top screen border  *  * @return fluent
+     *  Check if the FluentWait is above top screen border
+     *
+     * @return fluent
+     * @deprecated This function will be dropped in a later release. Use {@link #isVerified(Predicate)} instead.
      */
+    @Deprecated
     public void isAboveScreenOrInvisible() {
         Predicate<Fluent> isAbove = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
@@ -80,198 +104,141 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher {
         };
     }
 
-    /**
-     * WARNING - Should be change in a next version to hasAttribute("myAttribute").value("myValue")
-     *
-     * @param attribute attribute name
-     * @param value     attribute value
-     */
-    public void hasAttribute(final String attribute, final String value) {
+    @Override
+    public boolean hasAttribute(final String attribute, final String value) {
         Predicate<Fluent> hasAttribute = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
-                return find().getAttributes(attribute).contains(value);
+                return condition().hasAttribute(attribute, value);
             }
         };
-        until(wait, hasAttribute, hasAttributeMessage(selectionName, attribute, value));
+        until(wait, hasAttribute, negation ? hasNotAttributeMessage(selectionName, attribute, value) : hasAttributeMessage(selectionName, attribute, value));
+        return true;
     }
 
-    /**
-     * check if the FluentWait has the corresponding id
-     *
-     * @param value id value
-     */
-    public void hasId(final String value) {
+    @Override
+    public boolean hasId(final String value) {
         Predicate<Fluent> hasId = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
-                return find().getIds().contains(value);
+                return condition().hasId(value);
             }
         };
-        until(wait, hasId, hasIdMessage(selectionName, value));
+        until(wait, hasId, negation ? hasNotIdMessage(selectionName, value) : hasIdMessage(selectionName, value));
+        return true;
     }
 
-    /**
-     * check if the FluentWait has the corresponding name
-     *
-     * @param value name value
-     */
-    public void hasName(final String value) {
+    @Override
+    public boolean hasName(final String value) {
         Predicate<Fluent> hasName = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
-                return find().getNames().contains(value);
+                return condition().hasName(value);
             }
         };
-        until(wait, hasName, hasNameMessage(selectionName, value));
+        until(wait, hasName, negation ? hasNotNameMessage(selectionName, value) : hasNameMessage(selectionName, value));
+        return true;
     }
 
-    /**
-     * check if the FluentWait contains the corresponding text
-     *
-     * @param value text in contains check
-     */
-    public void containsText(final String value) {
+    @Override
+    public boolean containsText(final String value) {
+        Predicate<Fluent> containsText = new com.google.common.base.Predicate<Fluent>() {
+            public boolean apply(Fluent fluent) {
+                return condition().containsText(value);
+            }
+        };
+        until(wait, containsText, negation ? hasNotTextMessage(selectionName, value) : hasTextMessage(selectionName, value));
+        return true;
+    }
+
+    @Override
+    public boolean hasText(final String value) {
         Predicate<Fluent> hasText = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
-                List<String> texts = find().getTexts();
-                if (texts != null) {
-                    for (String text : texts) {
-                        if (text.contains(value)) {
-                            return true;
-                        }
-                    }
-                }
-                return false;
+                return condition().hasText(value);
             }
         };
-        until(wait, hasText, hasTextMessage(selectionName, value));
+        until(wait, hasText, negation ? hasNotTextMessage(selectionName, value) : hasTextMessage(selectionName, value));
+        return true;
     }
 
     /**
-     * check if the FluentWait has the exact corresponding text
-     *
-     * @param value text in contains check
+     * Check that one or more element is present
      */
-    public void hasText(final String value) {
-        Predicate<Fluent> hasText = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
-                return find().getTexts().contains(value);
-            }
-        };
-        until(wait, hasText, hasTextMessage(selectionName, value));
-    }
-
-    /**
-     * Check that the element is present
-     */
-    public void isPresent() {
+    public boolean isPresent() {
         Predicate<Fluent> isPresent = new com.google.common.base.Predicate<Fluent>() {
             public boolean apply(Fluent fluent) {
-                int size = find().size();
-                return size > 0;
+                return condition().isPresent();
             }
         };
-
-        until(wait, isPresent, isPresentMessage(selectionName));
+        until(wait, isPresent, negation ? isNotPresentMessage(selectionName) : isPresentMessage(selectionName));
+        return true;
     }
 
-    /**
-     * Check that the element is not present
-     */
-    public void isNotPresent() {
-        Predicate<Fluent> isNotPresent = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
-                return find().isEmpty();
-            }
-        };
-
-        until(wait, isNotPresent, isNotPresentMessage(selectionName));
-    }
-
-    /**
-     * Check that one or more element is displayed
-     */
-    public void isDisplayed() {
-        Predicate<Fluent> isVisible = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
-                FluentList<? extends FluentWebElement> fluentWebElements = find();
-                for (FluentWebElement fluentWebElement : fluentWebElements) {
-                    if (fluentWebElement.isDisplayed()) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        };
-        until(wait, isVisible, isDisplayedMessage(selectionName));
-    }
-
-    /**
-     * Check that one or more elements is not displayed
-     */
-    public void isNotDisplayed() {
-        Predicate<Fluent> isNotVisible = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
-                FluentList<? extends FluentWebElement> fluentWebElements = find();
-                if (fluentWebElements.size() > 0) {
-                    for (FluentWebElement fluentWebElement : fluentWebElements) {
-                        if (!fluentWebElement.isDisplayed()) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-                return true;
-            }
-        };
-        until(wait, isNotVisible, isDisplayedMessage(selectionName));
-    }
-
-    /**
-     * Check that one or more element is enabled
-     */
-    public void isEnabled() {
-        Predicate<Fluent> isEnabled = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
-                FluentList<? extends FluentWebElement> fluentWebElements = find();
-                if (fluentWebElements.size() > 0) {
-                    for (FluentWebElement fluentWebElement : fluentWebElements) {
-                        if (fluentWebElement.isEnabled()) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-                return false;
-            }
-        };
-        until(wait, isEnabled, isEnabledMessage(selectionName));
-    }
-
-    /**
-     * Check that the elements are all clickable
-     */
-    public void isClickable() {
-        Predicate<Fluent> isClickable = new com.google.common.base.Predicate<Fluent>() {
-
+    @Override
+    public boolean isDisplayed() {
+        Predicate<Fluent> isDisplayed = new Predicate<Fluent>() {
             @Override
             public boolean apply(Fluent input) {
-                for (FluentWebElement element : find()) {
-                    if (ExpectedConditions.elementToBeClickable(element.getElement()).apply(input.getDriver())
-                            == null) {
-                        return false;
-                    }
-                }
-                return true;
+                return condition().isDisplayed();
             }
         };
-
-        until(wait, isClickable, isClickableMessage(selectionName));
+        until(wait, isDisplayed, negation ? isNotDisplayedMessage(selectionName) : isDisplayedMessage(selectionName));
+        return true;
     }
 
-    /**
-     * Find the elements from configured matcher.
-     *
-     * @return fuent list of matching elements.
-     */
-    abstract protected FluentList<? extends FluentWebElement> find();
+    @Override
+    public boolean isEnabled() {
+        Predicate<Fluent> isEnabled = new Predicate<Fluent>() {
+            @Override
+            public boolean apply(Fluent input) {
+                return condition().isEnabled();
+            }
+        };
+        until(wait, isEnabled, negation ? isNotEnabledMessage(selectionName) : isEnabledMessage(selectionName));
+        return true;
+    }
 
+    @Override
+    public boolean isSelected() {
+        Predicate<Fluent> isSelected = new Predicate<Fluent>() {
+            @Override
+            public boolean apply(Fluent input) {
+                return condition().isSelected();
+            }
+        };
+        until(wait, isSelected, negation ? isNotSelectedMessage(selectionName) : isSelectedMessage(selectionName));
+        return true;
+    }
+
+    @Override
+    public boolean isClickable() {
+        Predicate<Fluent> isClickable = new Predicate<Fluent>() {
+            @Override
+            public boolean apply(Fluent input) {
+                return condition().isClickable();
+            }
+        };
+        until(wait, isClickable, negation ? isNotClickableMessage(selectionName) : isClickableMessage(selectionName));
+        return true;
+    }
+
+    @Override
+    public boolean isStale() {
+        Predicate<Fluent> isStale = new Predicate<Fluent>() {
+            @Override
+            public boolean apply(Fluent input) {
+                return condition().isStale();
+            }
+        };
+        until(wait, isStale, negation ? isNotStaleMessage(selectionName) : isStaleMessage(selectionName));
+        return true;
+    }
+
+    @Override
+    public RectangleConditions hasRectangle() {
+        return new FluentWaitRectangleMatcher(this, new Supplier<RectangleConditions>() {
+            @Override
+            public RectangleConditions get() {
+                return find().one().hasRectangle();
+            }
+        });
+    }
 }

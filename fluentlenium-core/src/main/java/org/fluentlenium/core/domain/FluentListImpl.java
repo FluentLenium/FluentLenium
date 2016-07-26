@@ -2,6 +2,9 @@ package org.fluentlenium.core.domain;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import org.fluentlenium.core.conditions.AtLeastOneElementConditions;
+import org.fluentlenium.core.conditions.EachElementConditions;
+import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.filter.Filter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -104,6 +107,16 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
                 fluentWebElement.clear();
             }
         }
+    }
+
+    @Override
+    public FluentListConditions each() {
+        return new EachElementConditions(this);
+    }
+
+    @Override
+    public FluentListConditions one() {
+        return new AtLeastOneElementConditions(this);
     }
 
     /**

@@ -71,14 +71,12 @@ public class FluentWebElementAssertTest extends LocalFluentCase {
     public void testIsNotSelectedKo() throws Exception {
         goTo(DEFAULT_URL);
         assertThat(findFirst("#selected")).isNotSelected();
-
     }
 
     @Test
     public void testIsSelectedOk() throws Exception {
         goTo(DEFAULT_URL);
         assertThat(findFirst("#selected")).isSelected();
-
     }
 
     @Test(expected = AssertionError.class)

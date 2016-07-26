@@ -48,7 +48,7 @@ public class AwaitMessageTest {
 
     @Test
     public void when_has_size_filter_then_print_principal_message() {
-        builder.hasSize(5);
+        builder.each().hasSize(5);
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
         assertThat(message.getValue()).contains("select").contains("size").contains("5");
@@ -97,7 +97,7 @@ public class AwaitMessageTest {
 
     @Test
     public void when_has_size_not_equalTo_5_then_print_principal_message() {
-        builder.hasSize().notEqualTo(5);
+        builder.hasSize().not().equalTo(5);
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
         assertThat(message.getValue()).contains("select").contains("is equal").contains("5");
@@ -120,19 +120,19 @@ public class AwaitMessageTest {
     }
 
     @Test
-    public void when_has_size_greather_than_then_print_principal_message() {
+    public void when_has_size_greater_than_then_print_principal_message() {
         builder.hasSize().greaterThan(5);
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
-        assertThat(message.getValue()).contains("select").contains("greather than").contains("5");
+        assertThat(message.getValue()).contains("select").contains("greater than").contains("5");
     }
 
     @Test
-    public void when_has_size_greather_or_equal_to_than_then_print_principal_message() {
+    public void when_has_size_greater_or_equal_to_than_then_print_principal_message() {
         builder.hasSize().greaterThanOrEqualTo(5);
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
-        assertThat(message.getValue()).contains("select").contains("greather than").contains("equal").contains("5");
+        assertThat(message.getValue()).contains("select").contains("greater than").contains("equal").contains("5");
     }
 
 }

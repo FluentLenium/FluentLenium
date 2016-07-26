@@ -3,13 +3,14 @@ package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.Fluent;
-import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.conditions.FluentConditions;
+import org.fluentlenium.core.conditions.FluentListConditions;
+import org.fluentlenium.core.conditions.IntegerConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
 
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasSizeMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateNotVerifiedMessage;
+import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateVerifiedMessage;
 
 /**
  * Base Matcher for waiting on element list.
@@ -19,87 +20,26 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
         super(search, wait, selectionName);
     }
 
+    public FluentWaitElementEachMatcher each() {
+        return new FluentWaitElementEachMatcher(this);
+    }
 
-    /**
-     * Check that the elements are all enabled
-     */
-    public void areEnabled() {
-        Predicate<Fluent> isEnabled = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
-                FluentList<? extends FluentWebElement> fluentWebElements = find();
-                if (fluentWebElements.size() > 0) {
-                    for (FluentWebElement fluentWebElement : fluentWebElements) {
-                        if (!fluentWebElement.isEnabled()) {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-                return false;
+    public boolean isVerified(final Predicate<FluentWebElement> predicate, final boolean defaultValue) {
+        until(wait, new Predicate<Fluent>() {
+            @Override
+            public boolean apply(Fluent input) {
+                return condition().isVerified(predicate, defaultValue);
             }
-        };
-        until(wait, isEnabled, isEnabledMessage(selectionName));
+        }, negation ? isPredicateNotVerifiedMessage(selectionName) : isPredicateVerifiedMessage(selectionName));
+        return true;
     }
 
-    /**
-     * Check that all the elements are all displayed
-     */
-    public void areDisplayed() {
-        Predicate<Fluent> isVisible = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
-                FluentList<? extends FluentWebElement> fluentWebElements = find();
-                if (fluentWebElements.size() > 0) {
-                    for (FluentWebElement fluentWebElement : fluentWebElements) {
-                        if (!fluentWebElement.isDisplayed()) {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-                return false;
-            }
-        };
-        until(wait, isVisible, isDisplayedMessage(selectionName));
+    public IntegerConditions hasSize() {
+        return each().hasSize();
     }
 
-    /**
-     * Check that all the elements are not displayed
-     */
-    public void areNotDisplayed() {
-        Predicate<Fluent> isNotVisible = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
-                FluentList<? extends FluentWebElement> fluentWebElements = find();
-                for (FluentWebElement fluentWebElement : fluentWebElements) {
-                    if (fluentWebElement.isDisplayed()) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-        };
-        until(wait, isNotVisible, isDisplayedMessage(selectionName));
+    public boolean hasSize(final int size) {
+        return each().hasSize(size);
     }
 
-    /**
-     * Check that the element have a customized size
-     *
-     * @return fluent size builder
-     */
-    public FluentSizeBuilder hasSize() {
-        return new FluentSizeBuilder(this, wait, selectionName);
-    }
-
-    /**
-     * Check that the element have the size indicated
-     *
-     * @param size integer value of size
-     */
-    public void hasSize(final int size) {
-        Predicate<Fluent> hasSize = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
-                return find().size() == size;
-            }
-        };
-        until(wait, hasSize, hasSizeMessage(selectionName, size));
-    }
 }
