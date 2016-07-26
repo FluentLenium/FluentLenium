@@ -18,12 +18,12 @@ public class FluentWaitFiltersBuilder {
     private FluentWaitLocatorSelectorMatcher matcher;
     private String attribute;
 
-    public FluentWaitFiltersBuilder(FluentWaitLocatorSelectorMatcher fluentWaitBuilder, FilterType filterType) {
+    protected FluentWaitFiltersBuilder(FluentWaitLocatorSelectorMatcher fluentWaitBuilder, FilterType filterType) {
         this.matcher = fluentWaitBuilder;
         this.attribute = filterType.name();
     }
 
-    public FluentWaitFiltersBuilder(FluentWaitLocatorSelectorMatcher matcher, String attribute) {
+    protected FluentWaitFiltersBuilder(FluentWaitLocatorSelectorMatcher matcher, String attribute) {
         this.matcher = matcher;
         this.attribute = attribute;
     }

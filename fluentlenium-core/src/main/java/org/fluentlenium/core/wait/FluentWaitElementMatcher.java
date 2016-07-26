@@ -16,7 +16,7 @@ public class FluentWaitElementMatcher extends AbstractWaitElementMatcher {
 
     private final FluentWebElement untilElement;
 
-    public FluentWaitElementMatcher(Search search, FluentWait fluentWait, FluentWebElement untilElement) {
+    protected FluentWaitElementMatcher(Search search, FluentWait fluentWait, FluentWebElement untilElement) {
         super(search, fluentWait, ELEMENT + " " + String.valueOf(untilElement));
         this.untilElement = untilElement;
     }

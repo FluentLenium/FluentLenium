@@ -13,7 +13,7 @@ public class FluentWaitSupplierMatcher extends AbstractWaitElementMatcher {
 
     private final Supplier<? extends FluentWebElement> selector;
 
-    public FluentWaitSupplierMatcher(Search search, FluentWait fluentWait, Supplier<? extends FluentWebElement> selector) {
+    protected FluentWaitSupplierMatcher(Search search, FluentWait fluentWait, Supplier<? extends FluentWebElement> selector) {
         super(search, fluentWait, SUPPLIER + " " + String.valueOf(selector));
         this.selector = selector;
     }

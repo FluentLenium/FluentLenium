@@ -13,7 +13,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     protected final List<? extends FluentWebElement> elements;
 
-    public AbstractFluentListConditions(List<? extends FluentWebElement> elements) {
+    protected AbstractFluentListConditions(List<? extends FluentWebElement> elements) {
         this.elements = elements;
     }
 

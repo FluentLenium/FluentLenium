@@ -14,13 +14,13 @@ public class FluentWaitPageMatcher extends AbstractWaitMatcher {
     private WebDriver webDriver;
     private FluentPage page;
 
-    public FluentWaitPageMatcher(FluentWait wait, WebDriver driver) {
+    protected FluentWaitPageMatcher(FluentWait wait, WebDriver driver) {
         this.wait = wait;
         this.webDriver = driver;
     }
 
 
-    public FluentWaitPageMatcher(FluentWait wait, WebDriver driver, FluentPage page) {
+    protected FluentWaitPageMatcher(FluentWait wait, WebDriver driver, FluentPage page) {
         this.wait = wait;
         this.webDriver = driver;
         this.page = page;

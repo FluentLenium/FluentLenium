@@ -16,7 +16,7 @@ import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateVerifiedM
  * Base Matcher for waiting on element list.
  */
 public abstract class AbstractWaitElementListMatcher extends AbstractWaitElementMatcher {
-    public AbstractWaitElementListMatcher(Search search, FluentWait wait, String selectionName) {
+    protected AbstractWaitElementListMatcher(Search search, FluentWait wait, String selectionName) {
         super(search, wait, selectionName);
     }
 

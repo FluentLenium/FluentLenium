@@ -9,7 +9,7 @@ public class FluentWaitWindowMatcher extends AbstractWaitMatcher {
     private FluentWait wait;
     private String windowName;
 
-    public FluentWaitWindowMatcher(FluentWait wait, String windowName) {
+    protected FluentWaitWindowMatcher(FluentWait wait, String windowName) {
         this.wait = wait;
         this.windowName = windowName;
     }

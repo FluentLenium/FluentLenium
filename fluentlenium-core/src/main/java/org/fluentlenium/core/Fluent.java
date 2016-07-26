@@ -53,7 +53,7 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
 
     protected PageInitializer pageInitializer = new PageInitializer(this);
 
-    public Fluent(WebDriver driver) {
+    protected Fluent(WebDriver driver) {
         this.webDriverThreadLocal.set(driver);
         this.searchThreadLocal.set(new Search(driver));
     }

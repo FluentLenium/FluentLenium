@@ -45,7 +45,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
     protected FluentWait wait;
     protected boolean negation = false;
 
-    public AbstractWaitElementMatcher(Search search, FluentWait wait, String selectionName) {
+    protected AbstractWaitElementMatcher(Search search, FluentWait wait, String selectionName) {
         this.selectionName = selectionName;
         this.wait = wait;
         this.search = search;

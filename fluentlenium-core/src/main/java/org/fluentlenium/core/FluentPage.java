@@ -8,11 +8,11 @@ import org.openqa.selenium.WebDriver;
  */
 public abstract class FluentPage extends Fluent {
 
-    public FluentPage() {
+    protected FluentPage() {
         super();
     }
 
-    public FluentPage(WebDriver driver) {
+    protected FluentPage(WebDriver driver) {
         super(driver);
     }
 

@@ -36,7 +36,7 @@ import static org.fluentlenium.core.wait.FluentWaitMessages.isStaleMessage;
 public class FluentWaitElementEachMatcher implements FluentListConditions {
     private final AbstractWaitElementListMatcher matcher;
 
-    public FluentWaitElementEachMatcher(AbstractWaitElementListMatcher matcher) {
+    FluentWaitElementEachMatcher(AbstractWaitElementListMatcher matcher) {
         this.matcher = matcher;
     }
 

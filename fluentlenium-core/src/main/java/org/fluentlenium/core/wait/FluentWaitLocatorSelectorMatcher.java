@@ -17,22 +17,23 @@ public class FluentWaitLocatorSelectorMatcher extends AbstractWaitElementListMat
 
     static final String SELECTOR = "Selector";
 
+    protected FluentWaitLocatorSelectorMatcher(Search search, FluentWait fluentWait, By locator) {
+        super(search, fluentWait, SELECTOR + " " + locator);
+        this.locator = locator;
+    }
+
+    protected FluentWaitLocatorSelectorMatcher(Search search, FluentWait fluentWait, String selector) {
+        super(search, fluentWait, SELECTOR + " " + selector);
+        this.locator = By.cssSelector(selector);
+    }
+
+
     @Override
     public FluentWaitLocatorSelectorMatcher not() {
         FluentWaitLocatorSelectorMatcher negatedConditions = new FluentWaitLocatorSelectorMatcher(search, wait, locator);
         negatedConditions.negation = !negation;
         negatedConditions.filters = filters;
         return negatedConditions;
-    }
-
-    public FluentWaitLocatorSelectorMatcher(Search search, FluentWait fluentWait, By locator) {
-        super(search, fluentWait, SELECTOR + " " + locator);
-        this.locator = locator;
-    }
-
-    public FluentWaitLocatorSelectorMatcher(Search search, FluentWait fluentWait, String selector) {
-        super(search, fluentWait, SELECTOR + " " + selector);
-        this.locator = By.cssSelector(selector);
     }
 
     /**

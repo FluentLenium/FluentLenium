@@ -1,4 +1,4 @@
-package org.fluentlenium.unit;
+package org.fluentlenium.core.wait;
 
 
 import com.google.common.base.Predicate;

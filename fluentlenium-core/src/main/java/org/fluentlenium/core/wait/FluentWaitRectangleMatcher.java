@@ -21,7 +21,7 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
     private final AbstractWaitElementMatcher matcher;
     private final Supplier<RectangleConditions> rectangleConditionsSupplier;
 
-    public FluentWaitRectangleMatcher(AbstractWaitElementMatcher matcher, Supplier<RectangleConditions> rectangleConditionsSupplier) {
+    protected FluentWaitRectangleMatcher(AbstractWaitElementMatcher matcher, Supplier<RectangleConditions> rectangleConditionsSupplier) {
         this.matcher = matcher;
         this.rectangleConditionsSupplier = rectangleConditionsSupplier;
     }

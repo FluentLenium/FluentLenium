@@ -26,7 +26,7 @@ public class FluentWaitIntegerMatcher implements IntegerConditions {
     private final AbstractWaitElementMatcher matcher;
     private final Supplier<IntegerConditions> conditionsSupplier;
 
-    public FluentWaitIntegerMatcher(AbstractWaitElementMatcher matcher, Supplier<IntegerConditions> conditionsSupplier) {
+    protected FluentWaitIntegerMatcher(AbstractWaitElementMatcher matcher, Supplier<IntegerConditions> conditionsSupplier) {
         this.matcher = matcher;
         this.conditionsSupplier = conditionsSupplier;
     }

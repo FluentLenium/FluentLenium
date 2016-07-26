@@ -1,4 +1,4 @@
-package org.fluentlenium.unit;
+package org.fluentlenium.core.wait;
 
 
 import org.fluentlenium.core.search.Search;
