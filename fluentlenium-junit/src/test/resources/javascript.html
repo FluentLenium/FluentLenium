@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>Javascript</title>
+</head>
+<script language="JavaScript">
+    function change() {
+        document.getElementById("default").innerHTML = "changed";
+    }
+
+    setTimeout(function () {
+        document.getElementById("default").innerHTML = "wait";
+    }, 500);
+
+    setTimeout(function () {
+        document.getElementById("default").innerHTML = "wait2";
+    }, 1000);
+
+    setTimeout(function () {
+        document.getElementById("ajaxField").innerHTML = "<div id='newField'>new</div>";
+    }, 750);
+
+    setTimeout(function () {
+        document.getElementById("ajaxFieldSlow").innerHTML = "<div id='newFieldSlow'>new</div>";
+    }, 10750);
+
+</script>
+<body style="" name="body">
+<span id="default">unchanged</span>
+
+<div id="ajaxField"></div>
+<div id="ajaxFieldSlow"></div>
+<div id="emptyField"></div>
+
+<div id="unvisible" style="display:none;"></div>
+
+<input type="checkbox" disabled="true" id="disabled"/>
+
+</body>
+</html>

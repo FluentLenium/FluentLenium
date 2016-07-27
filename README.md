@@ -29,18 +29,16 @@ public class BingTest extends FluentTest {
 
 ## Maven
 
-To add FluentLenium to your project, just add the following dependency to your `pom.xml`:
+To add FluentLenium to your project using JUnit, just add the following dependency to your `pom.xml`:
 
 ```xml 
 <dependency>
     <groupId>org.fluentlenium</groupId>
-    <artifactId>fluentlenium-core</artifactId>
+    <artifactId>fluentlenium-junit</artifactId>
     <version>0.13.1</version>
     <scope>test</scope>
 </dependency>
 ```
-
-By default, FluentLenium provides a jUnit adapter.
 
 If you need the assertj dependency to improve the legibility of your test code:
 
@@ -53,7 +51,8 @@ If you need the assertj dependency to improve the legibility of your test code:
 </dependency>
 ```
 
-An adapter has also been built for using FluentLenium with TestNG:
+An adapter has also been built for using FluentLenium with TestNG. To use it, replace `fluentlenium-junit` dependency
+with this `fluentlenium-testng`:
 
 ```xml
 <dependency>

@@ -1,4 +1,4 @@
-package org.fluentlenium.unit;
+package org.fluentlenium.core.filter.matcher;
 
 
 import org.fluentlenium.core.filter.Filter;

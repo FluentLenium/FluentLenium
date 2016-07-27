@@ -1,4 +1,4 @@
-package org.fluentlenium.unit.initialization;
+package org.fluentlenium.integration.initialization;
 
 import org.fluentlenium.core.FluentPage;
 

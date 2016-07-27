@@ -8,9 +8,9 @@
         <version>0.13.2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>fluentlenium-testng</artifactId>
-    <name>FluentLenium TestNG</name>
-    <description>TestNG Adapter for FluentLenium</description>
+    <artifactId>fluentlenium-junit</artifactId>
+    <name>FluentLenium JUnit</name>
+    <description>JUnit Adapter for FluentLenium</description>
 
     <dependencies>
         <dependency>
@@ -19,8 +19,8 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -36,11 +36,6 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

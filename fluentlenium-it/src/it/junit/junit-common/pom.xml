@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>org.fluentlenium</groupId>
-            <artifactId>fluentlenium-core</artifactId>
+            <artifactId>fluentlenium-junit</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

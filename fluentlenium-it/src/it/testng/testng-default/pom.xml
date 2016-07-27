@@ -15,17 +15,12 @@
     <dependencies>
         <dependency>
             <groupId>org.fluentlenium</groupId>
-            <artifactId>fluentlenium-core</artifactId>
+            <artifactId>fluentlenium-testng</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-assertj</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.fluentlenium</groupId>
-            <artifactId>fluentlenium-testng</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

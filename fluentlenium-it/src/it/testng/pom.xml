@@ -20,7 +20,7 @@
         <dependencies>
             <dependency>
                 <groupId>org.fluentlenium</groupId>
-                <artifactId>fluentlenium-core</artifactId>
+                <artifactId>fluentlenium-testng</artifactId>
                 <version>${it.project.version}</version>
             </dependency>
             <dependency>
@@ -32,11 +32,6 @@
                 <groupId>org.fluentlenium.it</groupId>
                 <artifactId>testng-common</artifactId>
                 <version>testing</version>
-            </dependency>
-            <dependency>
-                <groupId>org.fluentlenium</groupId>
-                <artifactId>fluentlenium-testng</artifactId>
-                <version>${it.project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
@@ -81,7 +76,7 @@
         <profile>
             <id>integration-tests-dev</id>
             <properties>
-                <it.project.version>0.13.1-SNAPSHOT</it.project.version>
+                <it.project.version>0.13.2-SNAPSHOT</it.project.version>
             </properties>
         </profile>
     </profiles>

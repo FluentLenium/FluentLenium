@@ -1,4 +1,4 @@
-package org.fluentlenium.unit;
+package org.fluentlenium.core.domain;
 
 
 import com.google.common.collect.Lists;

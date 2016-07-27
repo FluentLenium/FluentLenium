@@ -15,10 +15,6 @@
     <dependencies>
         <dependency>
             <groupId>org.fluentlenium</groupId>
-            <artifactId>fluentlenium-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-testng</artifactId>
         </dependency>
         <dependency>

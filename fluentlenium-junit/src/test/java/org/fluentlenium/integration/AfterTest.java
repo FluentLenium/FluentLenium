@@ -1,4 +1,4 @@
-package org.fluentlenium.unit;
+package org.fluentlenium.integration;
 
 import org.fluentlenium.adapter.FluentTest;
 import org.junit.Test;

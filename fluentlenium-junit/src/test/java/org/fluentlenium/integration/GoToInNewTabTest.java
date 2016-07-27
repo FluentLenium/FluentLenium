@@ -1,4 +1,4 @@
-package org.fluentlenium.unit;
+package org.fluentlenium.integration;
 
 import org.fluentlenium.core.domain.FluentJavascript;
 import org.fluentlenium.integration.localtest.LocalFluentCase;

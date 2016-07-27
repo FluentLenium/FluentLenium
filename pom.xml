@@ -13,6 +13,7 @@
     <modules>
         <module>fluentlenium-core</module>
         <module>fluentlenium-assertj</module>
+        <module>fluentlenium-junit</module>
         <module>fluentlenium-testng</module>
         <module>fluentlenium-cucumber</module>
         <module>fluentlenium-it</module>
@@ -107,9 +108,9 @@
                 <version>4.12</version>
             </dependency>
             <dependency>
-                <groupId>org.easytesting</groupId>
-                <artifactId>fest-assert</artifactId>
-                <version>1.4</version>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.8.17</version>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>

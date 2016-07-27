@@ -1,4 +1,4 @@
-package org.fluentlenium.unit;
+package org.fluentlenium.core.filter.matcher;
 
 
 import org.fluentlenium.core.filter.matcher.CalculateService;
@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CheckFindSelector {
+public class CaculateServiceTest {
 
     @Test
     public void checkSimpleEqualOk() {
