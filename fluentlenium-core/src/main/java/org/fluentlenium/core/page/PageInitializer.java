@@ -2,8 +2,8 @@ package org.fluentlenium.core.page;
 
 import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
-import org.fluentlenium.core.Fluent;
 import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.Fluent;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
@@ -20,7 +20,13 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -50,8 +56,7 @@ public class PageInitializer {
     /**
      * Creates a new page from it's class name and constructor parameters.
      *
-     * @param cls Page class
-     *
+     * @param cls    Page class
      * @param params
      * @param <T>
      * @return
@@ -72,7 +77,6 @@ public class PageInitializer {
      * Initialize a page or an adapter.
      *
      * @param container FluentPage or FluentAdapter object.
-     *
      * @throws IllegalAccessException
      * @throws ClassNotFoundException
      */
@@ -89,27 +93,33 @@ public class PageInitializer {
              cls = cls.getSuperclass()) {
             for (Field field : cls.getDeclaredFields()) {
                 if (field.isAnnotationPresent(Page.class)) {
+                    boolean accessible = field.isAccessible();
                     field.setAccessible(true);
-                    Class clsField = field.getType();
-                    Class clsPage = Class.forName(clsField.getName());
-                    Fluent existingPage = pageInstances.get(clsPage);
-                    FluentPage page = (FluentPage) field.get(container);
-                    if (existingPage != null) {
-                        // if page isn't injected
-                        if (page == null) {
-                            field.set(container, existingPage);
-                        }
-                    } else {
-                        // if page isn't injected
-                        if (page == null) {
-                            page = initClass(clsPage);
-                            field.set(container, page);
+                    try {
+                        Class clsField = field.getType();
+                        Class clsPage = Class.forName(clsField.getName());
+                        Fluent existingPage = pageInstances.get(clsPage);
+                        FluentPage page = (FluentPage) field.get(container);
+                        if (existingPage != null) {
+                            // if page isn't injected
+                            if (page == null) {
+                                field.set(container, existingPage);
+                            }
                         } else {
-                            page = initClass(page);
+                            // if page isn't injected
+                            if (page == null) {
+                                page = initClass(clsPage);
+                                field.set(container, page);
+                            } else {
+                                page = initClass(page);
+                            }
+                            pageInstances.putIfAbsent(clsPage, page);
+                            initContainer(page);
                         }
-                        pageInstances.putIfAbsent(clsPage, page);
-                        initContainer(page);
+                    } finally {
+                        field.setAccessible(accessible);
                     }
+
                 }
             }
         }
@@ -153,12 +163,17 @@ public class PageInitializer {
              classz = classz.getSuperclass()) {
             for (Field fieldFromPage : classz.getDeclaredFields()) {
                 if (isFluentWebElementField(fieldFromPage)) {
+                    boolean accessible = fieldFromPage.isAccessible();
                     fieldFromPage.setAccessible(true);
-                    AjaxElement elem = fieldFromPage.getAnnotation(AjaxElement.class);
-                    if (elem == null) {
-                        proxyElement(new DefaultElementLocatorFactory(this.fluent.getDriver()), page, fieldFromPage);
-                    } else {
-                        proxyElement(new AjaxElementLocatorFactory(this.fluent.getDriver(), elem.timeOutInSeconds()), page, fieldFromPage);
+                    try {
+                        AjaxElement elem = fieldFromPage.getAnnotation(AjaxElement.class);
+                        if (elem == null) {
+                            proxyElement(new DefaultElementLocatorFactory(this.fluent.getDriver()), page, fieldFromPage);
+                        } else {
+                            proxyElement(new AjaxElementLocatorFactory(this.fluent.getDriver(), elem.timeOutInSeconds()), page, fieldFromPage);
+                        }
+                    } finally {
+                        fieldFromPage.setAccessible(accessible);
                     }
                 }
             }
@@ -216,14 +231,26 @@ public class PageInitializer {
         }
 
         Method m = parent.getDeclaredMethod("withDefaultUrl", String.class);
+        boolean accessible = m.isAccessible();
         m.setAccessible(true);
-        m.invoke(page, this.fluent.getBaseUrl());
+        try {
+            m.invoke(page, this.fluent.getBaseUrl());
+        } finally {
+            m.setAccessible(accessible);
+        }
+
     }
 
     private <T extends FluentPage> void initDriver(T page, Class<?> parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         Method m = parent.getDeclaredMethod("initFluent", WebDriver.class);
+        boolean accessible = m.isAccessible();
         m.setAccessible(true);
-        m.invoke(page, this.fluent.getDriver());
+        try {
+            m.invoke(page, this.fluent.getDriver());
+        } finally {
+            m.setAccessible(accessible);
+        }
+
     }
 
     private static void proxyElement(ElementLocatorFactory factory, Object page, Field field) {
@@ -232,6 +259,7 @@ public class PageInitializer {
             return;
         }
 
+        boolean accessible = field.isAccessible();
         try {
             field.setAccessible(true);
             if (isFluentList(field)) {
@@ -248,6 +276,8 @@ public class PageInitializer {
             }
         } catch (Exception e) {
             throw new RuntimeException("Unable to find an accessible constructor with an argument of type WebElement in " + field.getType(), e);
+        } finally {
+            field.setAccessible(accessible);
         }
     }
 
