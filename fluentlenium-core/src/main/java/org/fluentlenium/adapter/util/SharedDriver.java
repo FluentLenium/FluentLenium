@@ -1,24 +1,29 @@
 package org.fluentlenium.adapter.util;
 
-import org.openqa.selenium.Beta;
-
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
+/**
+ * Configure shared type of the Selenium WebDriver.
+ */
 @Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
 @Inherited
 public @interface SharedDriver {
-    public enum SharedType {ONCE, PER_CLASS, PER_METHOD}
+    /**
+     * SharedType possible values.
+     */
+    enum SharedType {
+        ONCE, PER_CLASS, PER_METHOD
+    }
 
     /**
-     * deleteCookies default : true.
-     * If deleteCookies is enabled, after each test method the cookies will be deleted
+     * Sets the shared type of the driver.
      *
-     * @return boolean value for deleteCookies policy
+     * @return SharedType of the driver to use for this test class.
      */
-    boolean deleteCookies() default true;
-
-    SharedType type() default SharedType.ONCE;
-
+    SharedType value() default SharedType.ONCE;
 }

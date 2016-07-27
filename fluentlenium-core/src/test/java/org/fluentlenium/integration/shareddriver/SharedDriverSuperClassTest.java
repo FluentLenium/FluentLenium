@@ -1,5 +1,6 @@
 package org.fluentlenium.integration.shareddriver;
 
+import org.fluentlenium.adapter.util.DeleteCookies;
 import org.fluentlenium.adapter.util.SharedDriver;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.FixMethodOrder;
@@ -11,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
 @SharedDriver
+@DeleteCookies
 class SharedDriverSuperClass extends LocalFluentCase {
 }
 
