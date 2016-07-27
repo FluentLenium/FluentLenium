@@ -128,12 +128,12 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * find elements into the children with the corresponding filters
      *
-     * @param name    element name
+     * @param selector    element name
      * @param filters set of filters
      * @return extended by FluentWebElement objects list
      */
     @Override
-    FluentList<E> find(String name, Filter... filters);
+    FluentList<E> find(String selector, Filter... filters);
 
     /**
      * find elements in the children with the corresponding filters
@@ -147,33 +147,33 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * find elements into the children with the corresponding filters at the position indicated by the number
      *
-     * @param name    element name
+     * @param selector    element name
      * @param number  set of filters
      * @param filters set of filters
      * @return extended by FluentWebElement object
      */
     @Override
-    E find(String name, Integer number, Filter... filters);
+    E find(String selector, Integer number, Filter... filters);
 
     /**
      * find element in the children with the corresponding filters at the position indicated by the number
      *
-     * @param number  element name
+     * @param index  element name
      * @param filters set of filters
      * @return extended by FluentWebElement object
      */
     @Override
-    E find(Integer number, Filter... filters);
+    E find(Integer index, Filter... filters);
 
     /**
      * find elements into the children with the corresponding filters at the first position
      *
-     * @param name    element name
+     * @param selector    element name
      * @param filters set of filters
      * @return extended by FluentWebElement object
      */
     @Override
-    E findFirst(String name, Filter... filters);
+    E findFirst(String selector, Filter... filters);
 
     /**
      * find element in the children with the corresponding filters at the first position

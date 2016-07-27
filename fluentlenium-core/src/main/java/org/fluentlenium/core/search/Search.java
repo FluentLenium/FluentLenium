@@ -86,18 +86,18 @@ public class Search implements SearchActions<FluentWebElement> {
     /**
      * Return the elements at the number position into the the lists corresponding to the cssSelector with it filters
      *
-     * @param name    elements name to find
-     * @param number  index of element in the list
-     * @param filters filters set
+     * @param selector elements name to find
+     * @param number   index of element in the list
+     * @param filters  filters set
      * @return fluent web element
      */
     @Override
-    public FluentWebElement find(String name, Integer number, final Filter... filters) {
-        List<FluentWebElement> listFiltered = find(name, filters);
+    public FluentWebElement find(String selector, Integer number, final Filter... filters) {
+        List<FluentWebElement> listFiltered = find(selector, filters);
         if (number >= listFiltered.size()) {
             throw new NoSuchElementException(
                     "No such element with position: " + number + ". Number of elements available: " + listFiltered
-                            .size() + ". Selector: " + name + ".");
+                            .size() + ". Selector: " + selector + ".");
         }
         return listFiltered.get(number);
     }
@@ -105,16 +105,16 @@ public class Search implements SearchActions<FluentWebElement> {
     /**
      * Return the element at the number position in the lists corresponding to the filters
      *
-     * @param number  index of element in container
+     * @param index   index of element in container
      * @param filters filters set
      * @return fluent web element
      */
     @Override
-    public FluentWebElement find(Integer number, Filter... filters) {
+    public FluentWebElement find(Integer index, Filter... filters) {
         if (filters == null || filters.length == 0) {
             throw new IllegalArgumentException("cssSelector or filter is required");
         }
-        return find("*", number, filters);
+        return find("*", index, filters);
     }
 
     /**
@@ -135,39 +135,69 @@ public class Search implements SearchActions<FluentWebElement> {
         return new FluentListImpl<>(postFiltered);
     }
 
+    @Override
+    public FluentList<FluentWebElement> $(String selector, Filter... filters) {
+        return find(selector, filters);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> $(Filter... filters) {
+        return find(filters);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> $(By locator, Filter... filters) {
+        return find(locator, filters);
+    }
+
+    @Override
+    public FluentWebElement $(Integer index, Filter... filters) {
+        return find(index, filters);
+    }
+
     /**
      * Return the elements at the number position into the the lists corresponding to the cssSelector with it filters
      *
      * @param locator elements locator
-     * @param number  index of element in the list
+     * @param index   index of element in the list
      * @param filters filters set
      * @return fluent web element
      */
     @Override
-    public FluentWebElement find(By locator, Integer number, final Filter... filters) {
+    public FluentWebElement find(By locator, Integer index, final Filter... filters) {
         List<FluentWebElement> listFiltered = find(locator, filters);
-        if (number >= listFiltered.size()) {
+        if (index >= listFiltered.size()) {
             throw new NoSuchElementException(
-                    "No such element with position :" + number + ". Number of elements available :" + listFiltered
+                    "No such element with position :" + index + ". Number of elements available :" + listFiltered
                             .size());
         }
-        return listFiltered.get(number);
+        return listFiltered.get(index);
+    }
+
+    @Override
+    public FluentWebElement $(String selector, Integer index, Filter... filters) {
+        return find(selector, index, filters);
+    }
+
+    @Override
+    public FluentWebElement $(By locator, Integer index, Filter... filters) {
+        return find(locator, index, filters);
     }
 
     /**
      * Return the first elements corresponding to the name and the filters
      *
-     * @param name    element name to find
-     * @param filters filters set
+     * @param selector element name to find
+     * @param filters  filters set
      * @return fluent web element
      */
     @Override
-    public FluentWebElement findFirst(String name, final Filter... filters) {
-        FluentList fluentList = find(name, filters);
+    public FluentWebElement findFirst(String selector, final Filter... filters) {
+        FluentList fluentList = find(selector, filters);
         try {
             return fluentList.first();
         } catch (NoSuchElementException e) {
-            throw new NoSuchElementException("Could not find element matching selector: " + name + ".", e);
+            throw new NoSuchElementException("Could not find element matching selector: " + selector + ".", e);
         }
     }
 

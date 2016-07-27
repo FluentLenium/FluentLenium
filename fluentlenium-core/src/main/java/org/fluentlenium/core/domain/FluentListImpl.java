@@ -259,14 +259,34 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         return null;
     }
 
+    @Override
+    public FluentList $(String selector, Filter... filters) {
+        return find(selector, filters);
+    }
+
+    @Override
+    public FluentList $(Filter... filters) {
+        return find(filters);
+    }
+
+    @Override
+    public FluentList $(By locator, Filter... filters) {
+        return find(locator, filters);
+    }
+
+    @Override
+    public FluentWebElement $(Integer index, Filter... filters) {
+        return find(index, filters);
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public FluentList<E> find(String name, Filter... filters) {
+    public FluentList<E> find(String selector, Filter... filters) {
         List<E> finds = new ArrayList<E>();
         for (FluentWebElement e : this) {
-            finds.addAll((Collection<E>) e.find(name, filters));
+            finds.addAll((Collection<E>) e.find(selector, filters));
         }
         return new FluentListImpl<E>(finds);
     }
@@ -299,12 +319,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
      * {@inheritDoc}
      */
     @Override
-    public E find(String name, Integer number, Filter... filters) {
-        FluentList<E> fluentList = find(name, filters);
+    public E find(String selector, Integer number, Filter... filters) {
+        FluentList<E> fluentList = find(selector, filters);
         if (number >= fluentList.size()) {
             throw new NoSuchElementException(
                     "No such element with position: " + number + ". Number of elements available: " + fluentList.size()
-                            + ". Selector: " + name + ".");
+                            + ". Selector: " + selector + ".");
         }
         return fluentList.get(number);
     }
@@ -313,28 +333,38 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
      * {@inheritDoc}
      */
     @Override
-    public E find(By locator, Integer number, Filter... filters) {
+    public E find(By locator, Integer index, Filter... filters) {
         FluentList<E> fluentList = find(locator, filters);
-        if (number >= fluentList.size()) {
+        if (index >= fluentList.size()) {
             throw new NoSuchElementException(
-                    "No such element with position: " + number + ". Number of elements available: " + fluentList
+                    "No such element with position: " + index + ". Number of elements available: " + fluentList
                             .size());
         }
-        return fluentList.get(number);
+        return fluentList.get(index);
+    }
+
+    @Override
+    public FluentWebElement $(String selector, Integer index, Filter... filters) {
+        return find(selector, index, filters);
+    }
+
+    @Override
+    public FluentWebElement $(By locator, Integer index, Filter... filters) {
+        return find(locator, index, filters);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public E find(Integer number, Filter... filters) {
+    public E find(Integer index, Filter... filters) {
         FluentList<E> fluentList = find(filters);
-        if (number >= fluentList.size()) {
+        if (index >= fluentList.size()) {
             throw new NoSuchElementException(
-                    "No such element with position: " + number + ". Number of elements available: " + fluentList.size()
+                    "No such element with position: " + index + ". Number of elements available: " + fluentList.size()
                             + ".");
         }
-        return fluentList.get(number);
+        return fluentList.get(index);
     }
 
     /**
@@ -349,8 +379,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
      * {@inheritDoc}
      */
     @Override
-    public E findFirst(String name, Filter... filters) {
-        return find(name, 0, filters);
+    public E findFirst(String selector, Filter... filters) {
+        return find(selector, 0, filters);
     }
 
     /**

@@ -366,84 +366,46 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
         return new FluentJavascript(this.getDriver(), true, script, args);
     }
 
-    /**
-     * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
-     *
-     * @param name    item selector
-     * @param filters set of filters
-     * @return list of fluent elements
-     */
-    public FluentList<FluentWebElement> $(String name, final Filter... filters) {
-        return getSearch().find(name, filters);
+    @Override
+    public FluentList<FluentWebElement> $(String selector, final Filter... filters) {
+        return find(selector, filters);
     }
 
-    /**
-     * Central methods to find elements on the page with filters.
-     *
-     * @param filters set of filters in the current context
-     * @return list of fluent elements
-     */
+    @Override
     public FluentList<FluentWebElement> $(final Filter... filters) {
-        return getSearch().find(filters);
+        return find(filters);
     }
 
-    /**
-     * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
-     *
-     * @param locator elements locator
-     * @param filters filters set
-     * @return fluent list of fluent web elements
-     */
+    @Override
     public FluentList<FluentWebElement> $(By locator, final Filter... filters) {
-        return getSearch().find(locator, filters);
+        return find(locator, filters);
     }
 
-    /**
-     * Central methods a find element on the page, the number indicate the index of the desired element on the list.
-     * Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
-     *
-     * @param name    item selector
-     * @param number  index of the desired element
-     * @param filters set of filters in the current context
-     * @return fluent web element
-     */
-    public FluentWebElement $(String name, Integer number, final Filter... filters) {
-        return getSearch().find(name, number, filters);
+    @Override
+    public FluentWebElement $(String selector, Integer index, final Filter... filters) {
+        return find(selector, index, filters);
     }
 
-    /**
-     * Return the elements at the number position into the the lists corresponding to the cssSelector with it filters
-     *
-     * @param locator elements locator
-     * @param number  index of element in the list
-     * @param filters filters set
-     * @return fluent web element
-     */
-    public FluentWebElement $(By locator, Integer number, final Filter... filters) {
-        return getSearch().find(locator, number, filters);
+    @Override
+    public FluentWebElement $(By locator, Integer index, final Filter... filters) {
+        return find(locator, index, filters);
     }
 
-    /**
-     * Central method to find an element on the page with filters.
-     * The number indicates the index of the desired element on the list.
-     *
-     * @param number  index of element from obtained list
-     * @param filters set of filters in the current context
-     * @return fluent web element
-     */
-    public FluentWebElement $(Integer number, final Filter... filters) {
-        return getSearch().find(number, filters);
+    @Override
+    public FluentWebElement $(Integer index, Filter... filters) {
+        return find(index, filters);
     }
 
     /**
      * return the lists corresponding to the cssSelector with it filters
      *
-     * @param name    cssSelector
+     * @param selector    cssSelector
      * @param filters set of filters in current context
      * @return list of fluent web elements
      */
-    public FluentList<FluentWebElement> find(String name, final Filter... filters) {
-        return getSearch().find(name, filters);
+    @Override
+    public FluentList<FluentWebElement> find(String selector, final Filter... filters) {
+        return getSearch().find(selector, filters);
     }
 
     /**
@@ -453,6 +415,7 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      * @param filters filters set
      * @return fluent list of fluent web elements
      */
+    @Override
     public FluentList<FluentWebElement> find(By locator, final Filter... filters) {
         return getSearch().find(locator, filters);
     }
@@ -463,6 +426,7 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      * @param filters set of filters in the current context
      * @return list of fluent web elements
      */
+    @Override
     public FluentList<FluentWebElement> find(final Filter... filters) {
         return getSearch().find(filters);
     }
@@ -470,47 +434,51 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     /**
      * Return the elements at the number position into the lists corresponding to the cssSelector with it filters
      *
-     * @param name    cssSelector
+     * @param selector    cssSelector
      * @param number  index in the retrieved items list
      * @param filters set of filters in the current context
      * @return fluent web element
      */
-    public FluentWebElement find(String name, Integer number, final Filter... filters) {
-        return getSearch().find(name, number, filters);
+    @Override
+    public FluentWebElement find(String selector, Integer number, final Filter... filters) {
+        return getSearch().find(selector, number, filters);
     }
 
     /**
      * Return the elements at the number position into the the lists corresponding to the cssSelector with it filters
      *
      * @param locator elements locator
-     * @param number  index of element in the list
+     * @param index  index of element in the list
      * @param filters filters set
      * @return fluent web element
      */
-    public FluentWebElement find(By locator, Integer number, final Filter... filters) {
-        return getSearch().find(locator, number, filters);
+    @Override
+    public FluentWebElement find(By locator, Integer index, final Filter... filters) {
+        return getSearch().find(locator, index, filters);
     }
 
     /**
      * Return the element at the number position in the list filtered by the specified filters.
      *
-     * @param number  index in the retrieved items list
+     * @param index  index in the retrieved items list
      * @param filters set of filters in the current context
      * @return fluent web element
      */
-    public FluentWebElement find(Integer number, final Filter... filters) {
-        return getSearch().find(number, filters);
+    @Override
+    public FluentWebElement find(Integer index, final Filter... filters) {
+        return getSearch().find(index, filters);
     }
 
     /**
      * Return the first element corresponding to the name and the filters
      *
-     * @param name    cssSelector
+     * @param selector    cssSelector
      * @param filters set of filters in the current context
      * @return fluent web element
      */
-    public FluentWebElement findFirst(String name, final Filter... filters) {
-        return getSearch().findFirst(name, filters);
+    @Override
+    public FluentWebElement findFirst(String selector, final Filter... filters) {
+        return getSearch().findFirst(selector, filters);
     }
 
     /**
@@ -519,6 +487,7 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      * @param filters set of filters in the current context
      * @return fluent web element
      */
+    @Override
     public FluentWebElement findFirst(final Filter... filters) {
         return getSearch().findFirst(filters);
     }

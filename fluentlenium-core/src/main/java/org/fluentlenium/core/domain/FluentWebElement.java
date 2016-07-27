@@ -265,6 +265,22 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
         return webElement.getSize();
     }
 
+
+    @Override
+    public FluentList<FluentWebElement> $(String selector, Filter... filters) {
+        return find(selector, filters);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> $(Filter... filters) {
+        return find(filters);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> $(By locator, Filter... filters) {
+        return find(locator, filters);
+    }
+
     /**
      * find elements into the children with the corresponding filters
      *
@@ -279,12 +295,12 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find elements into the children with the corresponding filters
      *
-     * @param name    name of element
+     * @param selector    name of element
      * @param filters filters set
      * @return list of Fluent web elements
      */
-    public FluentList<FluentWebElement> find(String name, Filter... filters) {
-        return search.find(name, filters);
+    public FluentList<FluentWebElement> find(String selector, Filter... filters) {
+        return search.find(selector, filters);
     }
 
     /**
@@ -300,12 +316,12 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find elements into the children with the corresponding filters at the given position
      *
-     * @param name    name of element
+     * @param selector    name of element
      * @param filters filters set
      * @return fluent web element
      */
-    public FluentWebElement find(String name, Integer number, Filter... filters) {
-        return search.find(name, number, filters);
+    public FluentWebElement find(String selector, Integer number, Filter... filters) {
+        return search.find(selector, number, filters);
     }
 
     /**
@@ -315,30 +331,47 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * @param filters filters set
      * @return fluent web element
      */
-    public FluentWebElement find(By locator, Integer number, Filter... filters) {
-        return search.find(locator, number, filters);
+    public FluentWebElement find(By locator, Integer index, Filter... filters) {
+        return search.find(locator, index, filters);
+    }
+
+    @Override
+    public FluentWebElement $(String selector, Integer index, Filter... filters) {
+        return find(selector, index, filters);
+    }
+
+    @Override
+    public FluentWebElement $(By locator, Integer index, Filter... filters) {
+        return find(locator, index, filters);
     }
 
     /**
      * find element in the children with the corresponding filters at the given position
      *
-     * @param number  index of element
+     * @param index  index of element
      * @param filters filters set
      * @return fluent web element
      */
-    public FluentWebElement find(Integer number, Filter... filters) {
-        return search.find(number, filters);
+    @Override
+    public FluentWebElement find(Integer index, Filter... filters) {
+        return search.find(index, filters);
+    }
+
+    @Override
+    public FluentWebElement $(Integer index, Filter... filters) {
+        return find(index, filters);
     }
 
     /**
      * find elements into the children with the corresponding filters at the first position
      *
-     * @param name    name of element
+     * @param selector    name of element
      * @param filters filters set
      * @return fluent web element
      */
-    public FluentWebElement findFirst(String name, Filter... filters) {
-        return search.findFirst(name, filters);
+    @Override
+    public FluentWebElement findFirst(String selector, Filter... filters) {
+        return search.findFirst(selector, filters);
     }
 
     /**
@@ -358,13 +391,13 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * @param filters filters set
      * @return fluent web element
      */
+    @Override
     public FluentWebElement findFirst(Filter... filters) {
         return search.findFirst(filters);
     }
 
     /**
-     * return the innerHTML content of the web element
-     * does not work with HTMLUnit
+     * Get the HTML of a the element
      *
      * @return the underlying html content
      */
