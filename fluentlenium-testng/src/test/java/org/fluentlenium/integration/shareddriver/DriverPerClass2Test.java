@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
-@SharedDriver(type = SharedDriver.SharedType.PER_CLASS)
+@SharedDriver(SharedDriver.SharedType.PER_CLASS)
 @Test(dependsOnGroups = "DriverPerClass1", suiteName = "PerClass")
 public class DriverPerClass2Test extends LocalFluentCase {
 

@@ -9,11 +9,11 @@ public class DefaultSharedDriverStrategyReader implements SharedDriverStrategyRe
             return SharedDriverStrategy.PER_METHOD;
         }
 
-        if (sharedDriver.type() == SharedDriver.SharedType.ONCE) {
+        if (sharedDriver.value() == SharedDriver.SharedType.ONCE) {
             return SharedDriverStrategy.ONCE;
         }
 
-        if (sharedDriver.type() == SharedDriver.SharedType.PER_CLASS) {
+        if (sharedDriver.value() == SharedDriver.SharedType.PER_CLASS) {
             return SharedDriverStrategy.PER_CLASS;
         }
 

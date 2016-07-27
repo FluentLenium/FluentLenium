@@ -9,7 +9,7 @@ import org.junit.runners.MethodSorters;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
-@SharedDriver(type = SharedDriver.SharedType.PER_METHOD)
+@SharedDriver(SharedDriver.SharedType.PER_METHOD)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SharedDriverPerMethodByAnnotation extends LocalFluentCase {
 
