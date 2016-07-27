@@ -20,7 +20,7 @@
         <dependencies>
             <dependency>
                 <groupId>org.fluentlenium</groupId>
-                <artifactId>fluentlenium-junit</artifactId>
+                <artifactId>fluentlenium-core</artifactId>
                 <version>${it.project.version}</version>
             </dependency>
             <dependency>

@@ -13,7 +13,6 @@
     <modules>
         <module>fluentlenium-core</module>
         <module>fluentlenium-assertj</module>
-        <module>fluentlenium-junit</module>
         <module>fluentlenium-testng</module>
         <module>fluentlenium-cucumber</module>
         <module>fluentlenium-it</module>
