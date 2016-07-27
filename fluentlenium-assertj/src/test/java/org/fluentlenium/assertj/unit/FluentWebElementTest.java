@@ -140,6 +140,20 @@ public class FluentWebElementTest {
     }
 
     @Test
+    public void testHasTextWithSpecialCharactersInElement() throws Exception {
+        String textWithStringFormatError = "%A";
+        when(fluentWebElement.getText()).thenReturn(textWithStringFormatError);
+        fluentWebElementAssert.hasText(textWithStringFormatError);
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasTextWithSpecialCharactersInAssertion() throws Exception {
+        String textWithStringFormatError = "%A";
+        when(fluentWebElement.getText()).thenReturn("someText");
+        fluentWebElementAssert.hasText(textWithStringFormatError);
+    }
+
+    @Test
     public void testHasMultipleClassesOk() throws Exception {
         when(fluentWebElement.getAttribute("class")).thenReturn("yolokitten mark");
         fluentWebElementAssert.hasClass("mark");

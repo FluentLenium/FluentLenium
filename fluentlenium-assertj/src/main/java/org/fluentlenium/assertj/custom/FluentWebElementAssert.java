@@ -15,11 +15,11 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
 
 
     private void failIsEnabled() {
-        super.failWithMessage("Object not enabled");
+        failWithMessage("Object not enabled");
     }
 
     private void failIsNotEnabled() {
-        super.failWithMessage("Object is enabled");
+        failWithMessage("Object is enabled");
     }
 
     /**
@@ -72,11 +72,11 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     }
 
     private void failIsDisplayed() {
-        super.failWithMessage("Object not displayed");
+        failWithMessage("Object not displayed");
     }
 
     private void failIsNotDisplayed() {
-        super.failWithMessage("Object is displayed");
+        failWithMessage("Object is displayed");
     }
 
     /**
@@ -104,14 +104,22 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     }
 
     /**
+     * Secure failWithMessage by escaping String.format tokens when called without arguments.
+     *
+     * @see #failWithMessage(String, Object...)
+     */
+    protected void failWithMessage(String errorMessage) {
+        super.failWithMessage(errorMessage.replaceAll("(?:[^%]|\\A)%(?:[^%]|\\z)", "%%"));
+    }
+
+    /**
      * check if the element contains the text
      *
      * @return
      */
     public FluentWebElementAssert hasText(String textToFind) {
         if (!actual.getText().contains(textToFind)) {
-            super.failWithMessage("The element does not contain the text: " + textToFind + " . Actual text found : " + actual.getText());
-
+            failWithMessage("The element does not contain the text: " + textToFind + " . Actual text found : " + actual.getText());
         }
 
         return this;
@@ -124,7 +132,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      */
     public FluentWebElementAssert hasTextMatching(String regexToBeMatched) {
         if (!actual.getText().matches(regexToBeMatched)) {
-            super.failWithMessage("The element does not match the regex: " + regexToBeMatched + " . Actual text found : " + actual.getText());
+            failWithMessage("The element does not match the regex: " + regexToBeMatched + " . Actual text found : " + actual.getText());
 
         }
 
@@ -138,18 +146,18 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      */
     public FluentWebElementAssert hasNotText(String textToFind) {
         if (actual.getText().contains(textToFind)) {
-            super.failWithMessage("The element contain the text: " + textToFind);
+            failWithMessage("The element contain the text: " + textToFind);
         }
 
         return this;
     }
 
     private void failIsSelected() {
-        super.failWithMessage("Object not selected");
+        failWithMessage("Object not selected");
     }
 
     private void failIsNotSelected() {
-        super.failWithMessage("Object is selected");
+        failWithMessage("Object is selected");
     }
 
     /**
@@ -160,7 +168,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      */
     public FluentWebElementAssert hasId(String id) {
         if (!actual.getId().equals(id)) {
-            super.failWithMessage("The element does not have the id: " + id + " . Actual id found : " + actual.getId());
+            failWithMessage("The element does not have the id: " + id + " . Actual id found : " + actual.getId());
         }
         return this;
     }
@@ -173,7 +181,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      */
     public FluentWebElementAssert hasClass(String classToFind) {
         if (!getClasses().contains(classToFind)) {
-            super.failWithMessage("The element does not have the class: " + classToFind + " . Actual class found : " + actual.getAttribute("class"));
+            failWithMessage("The element does not have the class: " + classToFind + " . Actual class found : " + actual.getAttribute("class"));
         }
         return this;
     }
