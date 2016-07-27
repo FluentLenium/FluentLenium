@@ -5,7 +5,8 @@ import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.action.FillConstructor;
 import org.fluentlenium.core.action.FillSelectConstructor;
 import org.fluentlenium.core.action.FluentDefaultActions;
-import org.fluentlenium.core.action.MouseActions;
+import org.fluentlenium.core.action.KeyboardElementActions;
+import org.fluentlenium.core.action.MouseElementActions;
 import org.fluentlenium.core.axes.Axes;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.filter.Filter;
@@ -14,7 +15,6 @@ import org.fluentlenium.core.search.SearchActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.lang.reflect.Constructor;
@@ -26,12 +26,17 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     private final WebElement webElement;
     private final Search search;
     private final Axes axes;
+    private final MouseElementActions mouseActions;
+    private final KeyboardElementActions keyboardActions;
     private final WebElementConditions conditions;
+
 
     public FluentWebElement(WebElement webElement) {
         this.webElement = webElement;
         this.search = new Search(webElement);
         this.axes = new Axes(webElement);
+        this.mouseActions = new MouseElementActions(FluentThread.get().getDriver(), webElement);
+        this.keyboardActions = new KeyboardElementActions(FluentThread.get().getDriver(), webElement);
         this.conditions = new WebElementConditions(this);
     }
 
@@ -59,6 +64,24 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     }
 
     /**
+     * Execute mouse actions on the element
+     *
+     * @return mouse actions object
+     */
+    public MouseElementActions mouse() {
+        return mouseActions;
+    }
+
+    /**
+     * Execute keyboard actions on the element
+     *
+     * @return keyboard actions object
+     */
+    public KeyboardElementActions keyboard() {
+        return keyboardActions;
+    }
+
+    /**
      * Wrap all underlying elements in a componen..
      *
      * @param componentClass component class
@@ -73,30 +96,6 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
             throw new IllegalArgumentException(componentClass.getName()
                     + " is not a valid component class. It should have a single WebElement parameter constructor.", e);
         }
-    }
-
-    /**
-     * Double Click on the element
-     *
-     * @return fluent web element
-     */
-    public FluentWebElement doubleClick() {
-        MouseActions mouseActions = new MouseActions(FluentThread.get().getDriver());
-        Action action = mouseActions.doubleClick(webElement);
-        action.perform();
-        return this;
-    }
-
-    /**
-     * Double Click on the element
-     *
-     * @return fluent web element
-     */
-    public FluentWebElement mouseOver() {
-        MouseActions mouseActions = new MouseActions(FluentThread.get().getDriver());
-        Action action = mouseActions.mouseOver(webElement);
-        action.perform();
-        return this;
     }
 
     /**
@@ -295,8 +294,8 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find elements into the children with the corresponding filters
      *
-     * @param selector    name of element
-     * @param filters filters set
+     * @param selector name of element
+     * @param filters  filters set
      * @return list of Fluent web elements
      */
     public FluentList<FluentWebElement> find(String selector, Filter... filters) {
@@ -316,8 +315,8 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find elements into the children with the corresponding filters at the given position
      *
-     * @param selector    name of element
-     * @param filters filters set
+     * @param selector name of element
+     * @param filters  filters set
      * @return fluent web element
      */
     public FluentWebElement find(String selector, Integer number, Filter... filters) {
@@ -348,7 +347,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find element in the children with the corresponding filters at the given position
      *
-     * @param index  index of element
+     * @param index   index of element
      * @param filters filters set
      * @return fluent web element
      */
@@ -365,8 +364,8 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
     /**
      * find elements into the children with the corresponding filters at the first position
      *
-     * @param selector    name of element
-     * @param filters filters set
+     * @param selector name of element
+     * @param filters  filters set
      * @return fluent web element
      */
     @Override

@@ -5,6 +5,8 @@ import org.apache.commons.io.IOUtils;
 import org.fluentlenium.core.action.FillConstructor;
 import org.fluentlenium.core.action.FillSelectConstructor;
 import org.fluentlenium.core.action.FluentDefaultActions;
+import org.fluentlenium.core.action.KeyboardActions;
+import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.domain.FluentJavascript;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -52,6 +54,9 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     private EventsRegistry events = null;
 
     protected PageInitializer pageInitializer = new PageInitializer(this);
+
+    private MouseActions mouseActions;
+    private KeyboardActions keyboardActions;
 
     protected Fluent(WebDriver driver) {
         this.webDriverThreadLocal.set(driver);
@@ -205,6 +210,8 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
         if (driver instanceof EventFiringWebDriver) {
             this.events = new EventsRegistry((EventFiringWebDriver) driver);
         }
+        this.mouseActions = new MouseActions(driver);
+        this.keyboardActions = new KeyboardActions(driver);
         return this;
     }
 
@@ -222,6 +229,24 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
                     + "Please override getDefaultDriver() to provide it.");
         }
         return events;
+    }
+
+    /**
+     * Execute mouse actions
+     *
+     * @return mouse actions object
+     */
+    public MouseActions mouse() {
+        return mouseActions;
+    }
+
+    /**
+     * Execute keyboard actions
+     *
+     * @return mouse keyboard object
+     */
+    public KeyboardActions keyboard() {
+        return keyboardActions;
     }
 
     public <T extends FluentPage> T createPage(Class<T> cls, Object... params) {
@@ -399,8 +424,8 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     /**
      * return the lists corresponding to the cssSelector with it filters
      *
-     * @param selector    cssSelector
-     * @param filters set of filters in current context
+     * @param selector cssSelector
+     * @param filters  set of filters in current context
      * @return list of fluent web elements
      */
     @Override
@@ -434,9 +459,9 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     /**
      * Return the elements at the number position into the lists corresponding to the cssSelector with it filters
      *
-     * @param selector    cssSelector
-     * @param number  index in the retrieved items list
-     * @param filters set of filters in the current context
+     * @param selector cssSelector
+     * @param number   index in the retrieved items list
+     * @param filters  set of filters in the current context
      * @return fluent web element
      */
     @Override
@@ -448,7 +473,7 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      * Return the elements at the number position into the the lists corresponding to the cssSelector with it filters
      *
      * @param locator elements locator
-     * @param index  index of element in the list
+     * @param index   index of element in the list
      * @param filters filters set
      * @return fluent web element
      */
@@ -460,7 +485,7 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     /**
      * Return the element at the number position in the list filtered by the specified filters.
      *
-     * @param index  index in the retrieved items list
+     * @param index   index in the retrieved items list
      * @param filters set of filters in the current context
      * @return fluent web element
      */
@@ -472,8 +497,8 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
     /**
      * Return the first element corresponding to the name and the filters
      *
-     * @param selector    cssSelector
-     * @param filters set of filters in the current context
+     * @param selector cssSelector
+     * @param filters  set of filters in the current context
      * @return fluent web element
      */
     @Override
