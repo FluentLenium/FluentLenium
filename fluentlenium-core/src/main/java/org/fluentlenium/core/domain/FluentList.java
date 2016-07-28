@@ -1,13 +1,11 @@
 package org.fluentlenium.core.domain;
 
 import org.fluentlenium.core.action.FluentDefaultActions;
-import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.SearchActions;
 import org.openqa.selenium.WebElement;
 
-import java.lang.reflect.Constructor;
 import java.util.List;
 
 /**
@@ -23,6 +21,22 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
      * @throws org.openqa.selenium.NoSuchElementException when element not found
      */
     E first();
+
+    /**
+     * Return the last element of the list.
+     * If none, return NoSuchElementException
+     *
+     * @return last element
+     * @throws org.openqa.selenium.NoSuchElementException when element not found
+     */
+    E last();
+
+    /**
+     * Creates a list of Selenium {@link WebElement} from this list
+     *
+     * @return list of selenium elements
+     */
+    List<WebElement> toElements();
 
     /**
      * Click on all elements on the list
@@ -76,6 +90,13 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     List<String> getNames();
 
     /**
+     * Return the tag name of elements on the list
+     *
+     * @return list of string values
+     */
+    List<String> getTagNames();
+
+    /**
      * Return the texts of list elements
      *
      * @return list of string values
@@ -119,17 +140,32 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     String getName();
 
     /**
+     * Return the tag name of the first element on the list
+     *
+     * @return tag name of the first element
+     */
+    String getTagName();
+
+    /**
      * Return the text of the first element on the list
      *
      * @return text of the first element on the list
      */
     String getText();
 
+
+    /**
+     * Return the text content of the first element on the list
+     *
+     * @return text content of the first element on the list
+     */
+    String getTextContent();
+
     /**
      * find elements into the children with the corresponding filters
      *
-     * @param selector    element name
-     * @param filters set of filters
+     * @param selector element name
+     * @param filters  set of filters
      * @return extended by FluentWebElement objects list
      */
     @Override
@@ -147,9 +183,9 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * find elements into the children with the corresponding filters at the position indicated by the number
      *
-     * @param selector    element name
-     * @param number  set of filters
-     * @param filters set of filters
+     * @param selector element name
+     * @param number   set of filters
+     * @param filters  set of filters
      * @return extended by FluentWebElement object
      */
     @Override
@@ -158,7 +194,7 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * find element in the children with the corresponding filters at the position indicated by the number
      *
-     * @param index  element name
+     * @param index   element name
      * @param filters set of filters
      * @return extended by FluentWebElement object
      */
@@ -168,8 +204,8 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
     /**
      * find elements into the children with the corresponding filters at the first position
      *
-     * @param selector    element name
-     * @param filters set of filters
+     * @param selector element name
+     * @param filters  set of filters
      * @return extended by FluentWebElement object
      */
     @Override
@@ -186,11 +222,29 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
 
     /**
      * Clear all elements on the list
-     * Only the visible elements are filled
+     * <p>
+     * Only the visible elements are cleared.
      *
      * @return extended by FluentWebElement object
      */
     FluentList<E> clearAll();
+
+    /**
+     * Clear all elements on the list
+     * <p>
+     * Only the visible elements are cleared.
+     *
+     * @return extended by FluentWebElement object
+     */
+    @Override
+    void clear();
+
+    /**
+     * Calls {@link List#clear()} from underlying List implementation.
+     *
+     * @see List#clear()
+     */
+    void clearList();
 
     /**
      * Wrap all underlying elements in a componen..
@@ -199,13 +253,7 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
      * @param <T>            type of component
      * @return fluent list of elements as components.
      */
-    public <T extends FluentWebElement> FluentList<T> as(Class<T> componentClass);
-
-    /**
-     * Clear all elements on the list
-     * Only the visible elements are filled
-     */
-    void clear();
+    <T extends FluentWebElement> FluentList<T> as(Class<T> componentClass);
 
     /**
      * Get a condition object on this element list that will match if each underlying element match.

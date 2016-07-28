@@ -4,7 +4,6 @@ import org.fluentlenium.core.Fluent;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,13 +13,9 @@ import java.util.List;
  */
 public class FluentJavascript extends Fluent {
     private final Object result;
-    private final Object[] args;
-    private final String script;
 
     public FluentJavascript(WebDriver driver, boolean async, String script, Object... args) {
         super(driver);
-        this.script = script;
-        this.args = Arrays.copyOf(args, args.length);
         if (async) {
             this.result = ((JavascriptExecutor) driver).executeAsyncScript(script, args);
         } else {
@@ -109,24 +104,19 @@ public class FluentJavascript extends Fluent {
     }
 
     /**
+     * @return result of javascript execution cast as String.
+     * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
+     */
+    public List<?> getListResult() {
+        return (List<?>) result;
+    }
+
+    /**
+     * @param <T> type of list elements
      * @return the result of javascript execution cast as List.
      * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
      */
-    public List getListResult() {
-        return (List) result;
-    }
-
-    /**
-     * @return script executed by the caller.
-     */
-    public String getScript() {
-        return script;
-    }
-
-    /**
-     * @return args used by the caller.
-     */
-    public Object[] getArgs() {
-        return args;
+    public <T> List<T> getListResult(Class<T> listType) {
+        return (List<T>) result;
     }
 }

@@ -633,7 +633,7 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      * @return fluent object
      */
     public Fluent clear(Filter... filters) {
-        $(filters).clear();
+        $(filters).clearAll();
         return this;
     }
 
@@ -732,7 +732,7 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      * @return fluent object
      */
     public Fluent clear(FluentList<FluentWebElement> fluentObject) {
-        fluentObject.clear();
+        fluentObject.clearAll();
         return this;
     }
 
