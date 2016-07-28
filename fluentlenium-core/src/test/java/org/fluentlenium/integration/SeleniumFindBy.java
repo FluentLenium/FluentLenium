@@ -93,7 +93,7 @@ public class SeleniumFindBy extends LocalFluentCase {
         }
 
         public void hoverOverElement() {
-            mouseOverElement.mouseOver();
+            mouseOverElement.mouse().moveToElement();
         }
 
         public String getText() {

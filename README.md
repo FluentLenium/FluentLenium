@@ -257,6 +257,10 @@ find(myCssSelector()).axes().followingSiblings()
 find(myCssSelector()).axes().precedings()
 find(myCssSelector()).axes().precedingSiblings()
 
+## Keyboard and Mouse actions
+
+Advanced keyboard and mouse actions are available using keyboard() and mouse() in FluentTest class or element.
+
 ## Form Actions
 Clicking, filling, submitting and cleaning an element or list of elements is simple and intuitive.
 
