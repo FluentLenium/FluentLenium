@@ -19,7 +19,6 @@ import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
-import org.openqa.selenium.support.ui.UnexpectedTagNameException;
 
 import java.util.Arrays;
 
@@ -301,7 +300,10 @@ public class FluentWebElementTest {
 
     @Test
     public void testFill() {
-        fluentElement.fill().withValues("test");
+        when(element.isEnabled()).thenReturn(true);
+        when(element.isDisplayed()).thenReturn(true);
+
+        fluentElement.fill().withText("test");
     }
 
     @Test
@@ -314,14 +316,16 @@ public class FluentWebElementTest {
         verify(valueElement).click();
     }
 
-    @Test(expected = UnexpectedTagNameException.class)
+    @Test(expected = NoSuchElementException.class)
     public void testFillSelectInvalidElement() {
         when(element.getTagName()).thenReturn("span");
         WebElement valueElement = mock(WebElement.class);
         when(element.findElements(any(By.class))).thenReturn(Arrays.asList(valueElement));
 
+        when(element.isDisplayed()).thenReturn(true);
+        when(element.isEnabled()).thenReturn(true);
+
         fluentElement.fillSelect().withValue("value");
-        verify(valueElement).click();
     }
 
     @Test

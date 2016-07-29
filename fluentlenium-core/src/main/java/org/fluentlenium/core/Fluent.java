@@ -2,8 +2,8 @@ package org.fluentlenium.core;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.fluentlenium.core.action.FillConstructor;
-import org.fluentlenium.core.action.FillSelectConstructor;
+import org.fluentlenium.core.action.Fill;
+import org.fluentlenium.core.action.FillSelect;
 import org.fluentlenium.core.action.FluentDefaultActions;
 import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
@@ -537,8 +537,8 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      * @param filters     set of filters in the current context
      * @return fill constructor
      */
-    public FillConstructor fill(String cssSelector, Filter... filters) {
-        return new FillConstructor(cssSelector, getDriver(), filters);
+    public Fill fill(String cssSelector, Filter... filters) {
+        return new Fill(cssSelector, getDriver(), filters);
     }
 
     /**
@@ -548,20 +548,32 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      * @param filters set of filters in the current context
      * @return fill constructor
      */
-    public FillConstructor fill(Filter... filters) {
-        return new FillConstructor(getDriver(), filters);
+    public Fill fill(Filter... filters) {
+        return new Fill(getDriver(), filters);
     }
 
     /**
      * Construct a FillConstructor in order to allow easy fill
      * Be careful - only the visible elements are filled
      *
-     * @param list    FluentDefaultActions list
+     * @param list    Fluent elements list
      * @param filters set of filters in the current context
      * @return fill constructor
      */
-    public FillConstructor fill(FluentDefaultActions list, Filter... filters) {
-        return new FillConstructor(list, getDriver(), filters);
+    public Fill fill(FluentList<FluentWebElement> list, Filter... filters) {
+        return new Fill(list, getDriver(), filters);
+    }
+
+    /**
+     * Construct a FillConstructor in order to allow easy fill
+     * Be careful - only the visible elements are filled
+     *
+     * @param element Fluent element
+     * @param filters set of filters in the current context
+     * @return fill constructor
+     */
+    public Fill fill(FluentWebElement element, Filter... filters) {
+        return new Fill(element, getDriver(), filters);
     }
 
     /**
@@ -572,8 +584,8 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      * @param filters     set of filters in the current context
      * @return fill constructor
      */
-    public FillSelectConstructor fillSelect(String cssSelector, Filter... filters) {
-        return new FillSelectConstructor(cssSelector, getDriver(), filters);
+    public FillSelect fillSelect(String cssSelector, Filter... filters) {
+        return new FillSelect(cssSelector, getDriver(), filters);
     }
 
     /**
@@ -583,8 +595,8 @@ public abstract class Fluent implements SearchActions<FluentWebElement> {
      * @param filters set of filters in the current context
      * @return fill constructor
      */
-    public FillSelectConstructor fillSelect(Filter... filters) {
-        return new FillSelectConstructor(getDriver(), filters);
+    public FillSelect fillSelect(Filter... filters) {
+        return new FillSelect(getDriver(), filters);
     }
 
     /**

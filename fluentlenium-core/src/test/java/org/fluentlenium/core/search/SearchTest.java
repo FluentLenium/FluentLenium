@@ -2,11 +2,12 @@ package org.fluentlenium.core.search;
 
 
 import com.google.common.collect.Lists;
+import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.matcher.Matcher;
-import org.fluentlenium.core.search.Search;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
@@ -15,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -22,32 +24,43 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-public class GlobalSearch {
+public class SearchTest {
     @Mock
-    SearchContext searchContext;
-
-    Search search;
-
-    @Mock
-    Filter filter1;
+    private FluentAdapter fluentAdapter;
 
     @Mock
-    Matcher matcher1;
+    private WebDriver driver;
 
     @Mock
-    Filter filter2;
+    private SearchContext searchContext;
+
+    @Mock
+    private Filter filter1;
+
+    @Mock
+    private Matcher matcher1;
+
+    @Mock
+    private Filter filter2;
+
+    private Search search;
 
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
+
+        FluentThread.set(fluentAdapter);
+        when(fluentAdapter.getDriver()).thenReturn(driver);
+
         search = new Search(searchContext);
     }
 
     @Test
     public void findCheckCssIsWellFormed() {
-
         String name = "cssStyle";
         Filter[] filters = new Filter[]{filter1, filter2};
         when(filter1.isPreFilter()).thenReturn(true);
@@ -89,7 +102,6 @@ public class GlobalSearch {
 
     @Test
     public void findPostSelectorFilterWithElementThatMatch() {
-
         String name = "cssStyle";
         Filter[] filters = new Filter[]{filter1};
         when(filter1.isPreFilter()).thenReturn(false);
@@ -104,7 +116,6 @@ public class GlobalSearch {
 
     @Test
     public void findPostSelectorFilterWithElementThatDontMatch() {
-
         String name = "cssStyle";
         Filter[] filters = new Filter[]{filter1};
         when(filter1.isPreFilter()).thenReturn(false);

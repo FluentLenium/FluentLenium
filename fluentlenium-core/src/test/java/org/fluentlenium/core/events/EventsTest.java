@@ -1,6 +1,5 @@
 package org.fluentlenium.core.events;
 
-import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentThread;
@@ -18,6 +17,9 @@ import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.io.IOUtils;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.argThat;
 import static org.mockito.Matchers.eq;
@@ -132,7 +134,7 @@ public class EventsTest {
     public void testNavigate() {
         EventsRegistry eventsRegistry = new EventsRegistry(eventDriver);
 
-        Assertions.assertThat(eventsRegistry.getWrappedDriver()).isSameAs(driver);
+        assertThat(eventsRegistry.getWrappedDriver()).isSameAs(driver);
 
         NavigateAllListener beforeAllListener = mock(NavigateAllListener.class);
         NavigateAllListener afterAllListener = mock(NavigateAllListener.class);
@@ -211,7 +213,7 @@ public class EventsTest {
         reset(beforeAllListener, afterAllListener, beforeToListener, afterToListener, beforeListener, afterListener);
 
         when(driver.findElement((By) any())).thenThrow(IllegalStateException.class);
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
                 eventDriver.findElement(By.cssSelector(".test"));
@@ -223,7 +225,7 @@ public class EventsTest {
         reset(exceptionListener);
         IOUtils.closeQuietly(eventsRegistry);
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
                 eventDriver.findElement(By.cssSelector(".test"));
@@ -238,14 +240,14 @@ public class EventsTest {
         EventListener listener = mock(EventListener.class);
         EventListener otherListener = mock(EventListener.class);
 
-        Assertions.assertThat(new EventAdapter(listener)).isEqualTo(new EventAdapter(listener));
-        Assertions.assertThat(new EventAdapter(listener).hashCode()).isEqualTo(new EventAdapter(listener).hashCode());
+        assertThat(new EventAdapter(listener)).isEqualTo(new EventAdapter(listener));
+        assertThat(new EventAdapter(listener).hashCode()).isEqualTo(new EventAdapter(listener).hashCode());
 
-        Assertions.assertThat(new EventAdapter(listener)).isNotEqualTo(new EventAdapter(otherListener));
-        Assertions.assertThat(new EventAdapter(listener)).isNotEqualTo("OtherType");
+        assertThat(new EventAdapter(listener)).isNotEqualTo(new EventAdapter(otherListener));
+        assertThat(new EventAdapter(listener)).isNotEqualTo("OtherType");
 
         EventAdapter instance = new EventAdapter(mock(EventListener.class));
-        Assertions.assertThat(instance).isEqualTo(instance);
+        assertThat(instance).isEqualTo(instance);
     }
 
     private static class ElementMatcher extends CustomMatcher<FluentWebElement> {
