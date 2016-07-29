@@ -3,6 +3,7 @@ package org.fluentlenium.core.action;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
+import org.fluentlenium.core.search.SearchControl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -11,24 +12,24 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.Iterator;
 
 public class FillSelect extends AbstractFill {
-    public FillSelect(String cssSelector, WebDriver webDriver, Filter... filters) {
-        super(cssSelector, webDriver, filters);
+    public FillSelect(SearchControl<? extends FluentWebElement> search, String cssSelector, Filter... filters) {
+        super(search, cssSelector, filters);
     }
 
-    public FillSelect(By bySelector, WebDriver webDriver, Filter... filters) {
-        super(bySelector, webDriver, filters);
+    public FillSelect(SearchControl<? extends FluentWebElement> search, By bySelector, Filter... filters) {
+        super(search, bySelector, filters);
     }
 
-    public FillSelect(WebDriver webDriver, Filter... filters) {
-        super(webDriver, filters);
+    public FillSelect(SearchControl<? extends FluentWebElement> search, Filter... filters) {
+        super(search, filters);
     }
 
-    public FillSelect(FluentList<FluentWebElement> list, WebDriver driver, Filter... filters) {
-        super(list, driver, filters);
+    public FillSelect(FluentList<FluentWebElement> list, Filter... filters) {
+        super(list, filters);
     }
 
-    public FillSelect(FluentWebElement element, WebDriver driver, Filter... filters) {
-        super(element, driver, filters);
+    public FillSelect(FluentWebElement element, Filter... filters) {
+        super(element, filters);
     }
 
     @Override

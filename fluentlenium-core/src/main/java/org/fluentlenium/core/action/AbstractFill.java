@@ -1,53 +1,52 @@
 package org.fluentlenium.core.action;
 
-import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
+import org.fluentlenium.core.search.SearchControl;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-public class AbstractFill extends FluentDriver {
+public class AbstractFill {
+    private SearchControl<? extends FluentWebElement> search;
     private String cssSelector;
     private Filter[] filters;
     private By bySelector;
     private FluentList<FluentWebElement> fluentList;
 
-    public AbstractFill(String cssSelector, WebDriver webDriver, Filter... filters) {
-        super(webDriver);
+    public AbstractFill(SearchControl<? extends FluentWebElement> search, String cssSelector, Filter... filters) {
+        this.search = search;
         this.cssSelector = cssSelector;
         this.filters = filters;
     }
 
-    public AbstractFill(By bySelector, WebDriver webDriver, Filter... filters) {
-        super(webDriver);
+    public AbstractFill(SearchControl<? extends FluentWebElement> search, By bySelector, Filter... filters) {
+        this.search = search;
         this.bySelector = bySelector;
         this.filters = filters;
     }
 
-    public AbstractFill(WebDriver webDriver, Filter... filters) {
-        super(webDriver);
+    public AbstractFill(SearchControl<? extends FluentWebElement> search, Filter... filters) {
+        this.search = search;
         this.cssSelector = "*";
         this.filters = filters;
     }
 
-    public AbstractFill(FluentList<FluentWebElement> list, WebDriver driver, Filter... filters) {
-        super(driver);
+    public AbstractFill(FluentList<FluentWebElement> list, Filter... filters) {
         this.filters = filters.clone();
         this.fluentList = list;
     }
 
-    public AbstractFill(FluentWebElement element, WebDriver driver, Filter... filters) {
-        this(element.asList(), driver, filters);
+    public AbstractFill(FluentWebElement element, Filter... filters) {
+        this(element.asList(), filters);
     }
 
     protected FluentList<FluentWebElement> findElements() {
         if (fluentList != null) {
             return fluentList;
         } else if (cssSelector != null) {
-            return find(cssSelector, filters);
+            return (FluentList<FluentWebElement>) search.find(cssSelector, filters);
         } else {
-            return find(bySelector, filters);
+            return (FluentList<FluentWebElement>) search.find(bySelector, filters);
         }
     }
 }

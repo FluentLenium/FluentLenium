@@ -11,7 +11,7 @@ import java.util.List;
 /**
  *
  */
-public interface FluentList<E extends FluentWebElement> extends List<E>, FluentDefaultActions<FluentList>, SearchControl {
+public interface FluentList<E extends FluentWebElement> extends List<E>, FluentDefaultActions<FluentList>, SearchControl<E> {
 
     /**
      * Return the first element of the list
@@ -43,7 +43,7 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
      * Only the visible elements are filled
      */
     @Override
-    FluentList click();
+    FluentList<E> click();
 
     /**
      * Fill  all elements on the list with the corresponding cell in the with table.
@@ -51,7 +51,7 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
      * If there is more elements on the list than in the with table, the last element of the table is repeated
      */
     @Override
-    FluentList text(String... with);
+    FluentList<E> text(String... with);
 
     /**
      * submit on all elements on the list

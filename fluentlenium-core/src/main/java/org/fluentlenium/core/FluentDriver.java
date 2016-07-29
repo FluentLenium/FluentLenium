@@ -405,32 +405,32 @@ public abstract class FluentDriver implements FluentControl {
 
     @Override
     public Fill fill(String cssSelector, Filter... filters) {
-        return new Fill(cssSelector, getDriver(), filters);
+        return new Fill(this, cssSelector, filters);
     }
 
     @Override
     public Fill fill(Filter... filters) {
-        return new Fill(getDriver(), filters);
+        return new Fill(this, filters);
     }
 
     @Override
     public Fill fill(FluentList<FluentWebElement> list, Filter... filters) {
-        return new Fill(list, getDriver(), filters);
+        return new Fill(list, filters);
     }
 
     @Override
     public Fill fill(FluentWebElement element, Filter... filters) {
-        return new Fill(element, getDriver(), filters);
+        return new Fill(element, filters);
     }
 
     @Override
     public FillSelect fillSelect(String cssSelector, Filter... filters) {
-        return new FillSelect(cssSelector, getDriver(), filters);
+        return new FillSelect(this, cssSelector, filters);
     }
 
     @Override
     public FillSelect fillSelect(Filter... filters) {
-        return new FillSelect(getDriver(), filters);
+        return new FillSelect(this, filters);
     }
 
     @Override

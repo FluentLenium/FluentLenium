@@ -13,7 +13,6 @@ public abstract class FluentPage implements FluentPageControl {
     private FluentControl support;
 
     protected FluentPage() {
-        super();
         support = FluentThread.get();
     }
 

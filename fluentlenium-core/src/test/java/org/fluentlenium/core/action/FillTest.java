@@ -4,6 +4,7 @@ import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.context.FluentThread;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.search.Search;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +26,9 @@ import static org.mockito.Mockito.when;
 public class FillTest {
     @Mock
     private WebDriver driver;
+
+    @Mock
+    private Search search;
 
     @Mock
     private FluentAdapter fluentAdapter;
@@ -56,7 +60,7 @@ public class FillTest {
 
     @Test
     public void testFill() {
-        Fill fill = new Fill(driver);
+        Fill fill = new Fill(search);
 
         when(element2.isDisplayed()).thenReturn(true);
         when(element2.isEnabled()).thenReturn(true);
@@ -66,7 +70,9 @@ public class FillTest {
         when(element4.isDisplayed()).thenReturn(true);
         when(element4.isEnabled()).thenReturn(true);
 
-        when(driver.findElements(By.cssSelector("*"))).thenReturn(Arrays.asList(element1, element2, element3, element4));
+        FluentListImpl<FluentWebElement> elements = new FluentListImpl<>(Arrays.asList(new FluentWebElement(element1), new FluentWebElement(element2), new FluentWebElement(element3), new FluentWebElement(element4)));
+        when(driver.findElements(By.cssSelector("*"))).thenReturn(elements.toElements());
+        when(search.find("*")).thenReturn(elements);
 
         fill.withText("1", "2", "3");
 
@@ -78,7 +84,7 @@ public class FillTest {
 
     @Test
     public void testFillCss() {
-        Fill fill = new Fill(".test", driver);
+        Fill fill = new Fill(search, ".test");
 
         when(element2.isDisplayed()).thenReturn(true);
         when(element2.isEnabled()).thenReturn(true);
@@ -88,7 +94,9 @@ public class FillTest {
         when(element4.isDisplayed()).thenReturn(true);
         when(element4.isEnabled()).thenReturn(true);
 
-        when(driver.findElements(By.cssSelector(".test"))).thenReturn(Arrays.asList(element1, element2, element3, element4));
+        FluentListImpl<FluentWebElement> elements = new FluentListImpl<>(Arrays.asList(new FluentWebElement(element1), new FluentWebElement(element2), new FluentWebElement(element3), new FluentWebElement(element4)));
+        when(driver.findElements(By.cssSelector(".test"))).thenReturn(elements.toElements());
+        when(search.find(".test")).thenReturn(elements);
 
         fill.withText("1", "2", "3");
 
@@ -100,7 +108,7 @@ public class FillTest {
 
     @Test
     public void testFillBy() {
-        Fill fill = new Fill(By.cssSelector(".test"), driver);
+        Fill fill = new Fill(search, By.cssSelector(".test"));
 
         when(element2.isDisplayed()).thenReturn(true);
         when(element2.isEnabled()).thenReturn(true);
@@ -110,7 +118,9 @@ public class FillTest {
         when(element4.isDisplayed()).thenReturn(true);
         when(element4.isEnabled()).thenReturn(true);
 
-        when(driver.findElements(By.cssSelector(".test"))).thenReturn(Arrays.asList(element1, element2, element3, element4));
+        FluentListImpl<FluentWebElement> elements = new FluentListImpl<>(Arrays.asList(new FluentWebElement(element1), new FluentWebElement(element2), new FluentWebElement(element3), new FluentWebElement(element4)));
+        when(driver.findElements(By.cssSelector(".test"))).thenReturn(elements.toElements());
+        when(search.find(By.cssSelector(".test"))).thenReturn(elements);
 
         fill.withText("1", "2", "3");
 
@@ -123,7 +133,7 @@ public class FillTest {
     @Test
     public void testFillList() {
         FluentListImpl<FluentWebElement> list = new FluentListImpl<>(Arrays.asList(new FluentWebElement(element1), new FluentWebElement(element2), new FluentWebElement(element3), new FluentWebElement(element4)));
-        Fill fill = new Fill(list, driver);
+        Fill fill = new Fill(list);
 
         when(element2.isDisplayed()).thenReturn(true);
         when(element2.isEnabled()).thenReturn(true);
@@ -148,7 +158,7 @@ public class FillTest {
         when(element1.isDisplayed()).thenReturn(true);
         when(element1.isEnabled()).thenReturn(true);
 
-        Fill fill = new Fill(new FluentWebElement(element1), driver);
+        Fill fill = new Fill(new FluentWebElement(element1));
 
         verify(driver, never()).findElement(any(By.class));
 

@@ -297,22 +297,22 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     }
 
     @Override
-    public FluentList $(String selector, Filter... filters) {
+    public FluentList<E> $(String selector, Filter... filters) {
         return find(selector, filters);
     }
 
     @Override
-    public FluentList $(Filter... filters) {
+    public FluentList<E> $(Filter... filters) {
         return find(filters);
     }
 
     @Override
-    public FluentList $(By locator, Filter... filters) {
+    public FluentList<E> $(By locator, Filter... filters) {
         return find(locator, filters);
     }
 
     @Override
-    public FluentWebElement $(Integer index, Filter... filters) {
+    public E $(Integer index, Filter... filters) {
         return find(index, filters);
     }
 
@@ -366,12 +366,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     }
 
     @Override
-    public FluentWebElement $(String selector, Integer index, Filter... filters) {
+    public E $(String selector, Integer index, Filter... filters) {
         return find(selector, index, filters);
     }
 
     @Override
-    public FluentWebElement $(By locator, Integer index, Filter... filters) {
+    public E $(By locator, Integer index, Filter... filters) {
         return find(locator, index, filters);
     }
 

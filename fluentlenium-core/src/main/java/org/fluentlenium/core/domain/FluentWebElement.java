@@ -415,7 +415,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * @return fill constructor
      */
     public Fill fill() {
-        return new Fill(asList(), FluentThread.get().getDriver());
+        return new Fill(this);
     }
 
     /**
@@ -425,7 +425,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * @return fill constructor
      */
     public FillSelect fillSelect() {
-        return new FillSelect(asList(), FluentThread.get().getDriver());
+        return new FillSelect(this);
     }
 
     /**
