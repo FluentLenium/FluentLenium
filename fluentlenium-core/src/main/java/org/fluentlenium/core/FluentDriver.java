@@ -15,10 +15,12 @@ import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.wait.FluentWait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.io.File;
@@ -33,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Util Class which offers some shortcut to webdriver methods
  */
-public abstract class FluentDriver implements FluentControl {
+public abstract class FluentDriver implements WrapsDriver, FluentControl {
     protected enum TriggerMode {ON_FAIL, NEVER}
 
     private String baseUrl;
@@ -195,6 +197,11 @@ public abstract class FluentDriver implements FluentControl {
         return webDriverThreadLocal.get();
     }
 
+    @Override
+    public WebDriver getWrappedDriver() {
+        return getDriver();
+    }
+
     private Search getSearch() {
         return searchThreadLocal.get();
     }
@@ -318,12 +325,12 @@ public abstract class FluentDriver implements FluentControl {
 
     @Override
     public FluentJavascript executeScript(String script, Object... args) {
-        return new FluentJavascript(this.getDriver(), false, script, args);
+        return new FluentJavascript((JavascriptExecutor) getDriver(), false, script, args);
     }
 
     @Override
     public FluentJavascript executeAsyncScript(String script, Object... args) {
-        return new FluentJavascript(this.getDriver(), true, script, args);
+        return new FluentJavascript((JavascriptExecutor) getDriver(), true, script, args);
     }
 
     @Override

@@ -15,6 +15,7 @@ import org.fluentlenium.core.search.SearchControl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.lang.reflect.Constructor;
@@ -23,7 +24,7 @@ import java.util.Arrays;
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
-public class FluentWebElement implements FluentActions<FluentWebElement, FluentWebElement>, SearchControl<FluentWebElement> {
+public class FluentWebElement implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>, SearchControl<FluentWebElement> {
     private final WebElement webElement;
     private final Search search;
     private final Axes axes;
@@ -254,6 +255,11 @@ public class FluentWebElement implements FluentActions<FluentWebElement, FluentW
      */
     public WebElement getElement() {
         return webElement;
+    }
+
+    @Override
+    public WebElement getWrappedElement() {
+        return getElement();
     }
 
     /**
