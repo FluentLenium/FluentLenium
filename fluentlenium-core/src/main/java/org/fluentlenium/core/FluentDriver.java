@@ -2,8 +2,6 @@ package org.fluentlenium.core;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.fluentlenium.core.action.Fill;
-import org.fluentlenium.core.action.FillSelect;
 import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.alert.Alert;
@@ -401,36 +399,6 @@ public abstract class FluentDriver implements FluentControl {
     @Override
     public FluentWebElement findFirst(By locator, final Filter... filters) {
         return getSearch().findFirst(locator, filters);
-    }
-
-    @Override
-    public Fill fill(String cssSelector, Filter... filters) {
-        return new Fill(this, cssSelector, filters);
-    }
-
-    @Override
-    public Fill fill(Filter... filters) {
-        return new Fill(this, filters);
-    }
-
-    @Override
-    public Fill fill(FluentList<FluentWebElement> list, Filter... filters) {
-        return new Fill(list, filters);
-    }
-
-    @Override
-    public Fill fill(FluentWebElement element, Filter... filters) {
-        return new Fill(element, filters);
-    }
-
-    @Override
-    public FillSelect fillSelect(String cssSelector, Filter... filters) {
-        return new FillSelect(this, cssSelector, filters);
-    }
-
-    @Override
-    public FillSelect fillSelect(Filter... filters) {
-        return new FillSelect(this, filters);
     }
 
     @Override

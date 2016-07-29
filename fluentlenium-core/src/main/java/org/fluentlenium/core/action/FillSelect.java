@@ -11,31 +11,19 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.Iterator;
 
-public class FillSelect extends AbstractFill {
-    public FillSelect(SearchControl<? extends FluentWebElement> search, String cssSelector, Filter... filters) {
-        super(search, cssSelector, filters);
+public class FillSelect<E extends FluentWebElement> extends AbstractFill<E> {
+    public FillSelect(FluentList<E> list) {
+        super(list);
     }
 
-    public FillSelect(SearchControl<? extends FluentWebElement> search, By bySelector, Filter... filters) {
-        super(search, bySelector, filters);
-    }
-
-    public FillSelect(SearchControl<? extends FluentWebElement> search, Filter... filters) {
-        super(search, filters);
-    }
-
-    public FillSelect(FluentList<FluentWebElement> list, Filter... filters) {
-        super(list, filters);
-    }
-
-    public FillSelect(FluentWebElement element, Filter... filters) {
-        super(element, filters);
+    public FillSelect(E element) {
+        super(element);
     }
 
     @Override
-    protected FluentList<FluentWebElement> findElements() {
-        FluentList<FluentWebElement> elements = super.findElements();
-        Iterator<FluentWebElement> iterator = elements.iterator();
+    protected FluentList<E> findElements() {
+        FluentList<E> elements = super.findElements();
+        Iterator<E> iterator = elements.iterator();
         while (iterator.hasNext()) {
             FluentWebElement next = iterator.next();
             if (next.getTagName() == null || !next.getTagName().equalsIgnoreCase("select")) {
@@ -52,7 +40,7 @@ public class FillSelect extends AbstractFill {
      * @return fill select constructor
      */
     public FillSelect withValue(String value) {
-        FluentList<FluentWebElement> elements = findElements();
+        FluentList<E> elements = findElements();
 
         if (elements.size() == 0) {
             throw new NoSuchElementException("No select element found");
@@ -73,7 +61,7 @@ public class FillSelect extends AbstractFill {
      */
     public FillSelect withIndex(int index) {
         boolean noSuchElement = true;
-        for (FluentWebElement element : findElements()) {
+        for (E element : findElements()) {
             Select select = new Select(element.getElement());
             try {
                 select.selectByIndex(index);
@@ -96,7 +84,7 @@ public class FillSelect extends AbstractFill {
      * @return fill select constructor
      */
     public FillSelect withText(String text) {
-        FluentList<FluentWebElement> elements = findElements();
+        FluentList<E> elements = findElements();
 
         if (elements.size() == 0) {
             throw new NoSuchElementException("No select element found");

@@ -69,84 +69,9 @@ public class FillSelectTest {
     }
 
     @Test
-    public void testFill() {
-        FillSelect fillConstructor = new FillSelect(search);
-
-        FluentListImpl<FluentWebElement> elements = new FluentListImpl<>(Arrays.asList(new FluentWebElement(element1), new FluentWebElement(element2), new FluentWebElement(element3), new FluentWebElement(element4)));
-        when(driver.findElements(By.cssSelector("*"))).thenReturn(elements.toElements());
-        when(search.find("*")).thenReturn(elements);
-
-        WebElement option1 = mock(WebElement.class);
-        WebElement option2 = mock(WebElement.class);
-        WebElement option3 = mock(WebElement.class);
-        WebElement option4 = mock(WebElement.class);
-
-        when(element1.findElements(any(By.class))).thenReturn(Arrays.asList(option1));
-        when(element2.findElements(any(By.class))).thenReturn(Arrays.asList(option2));
-        when(element3.findElements(any(By.class))).thenReturn(Arrays.asList(option3));
-        when(element4.findElements(any(By.class))).thenReturn(Arrays.asList(option4));
-
-        fillConstructor.withValue("1");
-
-        verify(option1).click();
-        verify(option2, never()).click();
-        verify(option3).click();
-        verify(option4).click();
-
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                new FillSelect(new FluentListImpl<FluentWebElement>()).withValue("1");
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class).withFailMessage("No select element found");
-    }
-
-    @Test
     public void testFillCss() {
-        final FillSelect fillConstructor = new FillSelect(search, ".test");
-
-        FluentListImpl<FluentWebElement> elements = new FluentListImpl<>(Arrays.asList(new FluentWebElement(element1), new FluentWebElement(element2), new FluentWebElement(element3), new FluentWebElement(element4)));
-        when(driver.findElements(By.cssSelector(".test"))).thenReturn(elements.toElements());
-        when(search.find(".test")).thenReturn(elements);
-
-
-        WebElement option1 = mock(WebElement.class);
-        WebElement option2 = mock(WebElement.class);
-        WebElement option3 = mock(WebElement.class);
-        WebElement option4 = mock(WebElement.class);
-
-        when(element1.findElements(any(By.class))).thenReturn(Arrays.asList(option1));
-        when(element2.findElements(any(By.class))).thenReturn(Arrays.asList(option2));
-        when(element3.findElements(any(By.class))).thenReturn(Arrays.asList(option3));
-        when(element4.findElements(any(By.class))).thenReturn(Arrays.asList(option4));
-
-        when(option1.getAttribute("index")).thenReturn("1");
-        when(option3.getAttribute("index")).thenReturn("1");
-        when(option4.getAttribute("index")).thenReturn("2");
-
-        fillConstructor.withIndex(1);
-
-        verify(option1).click();
-        verify(option2, never()).click();
-        verify(option3).click();
-        verify(option4, never()).click();
-
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fillConstructor.withIndex(5);
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class).withFailMessage("No select element found with option index=5");
-    }
-
-    @Test
-    public void testFillBy() {
-        final FillSelect fillConstructor = new FillSelect(search, By.cssSelector(".test"));
-
-
-        FluentListImpl<FluentWebElement> elements = new FluentListImpl<>(Arrays.asList(new FluentWebElement(element1), new FluentWebElement(element2), new FluentWebElement(element3), new FluentWebElement(element4)));
-        when(driver.findElements(By.cssSelector(".test"))).thenReturn(elements.toElements());
-        when(search.find(By.cssSelector(".test"))).thenReturn(elements);
+        FluentListImpl<FluentWebElement> list = new FluentListImpl<>(Arrays.asList(new FluentWebElement(element1), new FluentWebElement(element2), new FluentWebElement(element3), new FluentWebElement(element4)));
+        final FillSelect fillConstructor = new FillSelect(list);
 
         WebElement option1 = mock(WebElement.class);
         WebElement option2 = mock(WebElement.class);
@@ -218,5 +143,12 @@ public class FillSelectTest {
         fillConstructor.withValue("1");
 
         verify(option1).click();
+
+        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                new FillSelect(new FluentListImpl<FluentWebElement>()).withValue("1");
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class).withFailMessage("No select element found");
     }
 }

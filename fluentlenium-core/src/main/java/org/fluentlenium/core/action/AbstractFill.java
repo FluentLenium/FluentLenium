@@ -6,47 +6,18 @@ import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.SearchControl;
 import org.openqa.selenium.By;
 
-public class AbstractFill {
-    private SearchControl<? extends FluentWebElement> search;
-    private String cssSelector;
-    private Filter[] filters;
-    private By bySelector;
-    private FluentList<FluentWebElement> fluentList;
+public class AbstractFill<E extends FluentWebElement> {
+    private FluentList<E> fluentList;
 
-    public AbstractFill(SearchControl<? extends FluentWebElement> search, String cssSelector, Filter... filters) {
-        this.search = search;
-        this.cssSelector = cssSelector;
-        this.filters = filters;
-    }
-
-    public AbstractFill(SearchControl<? extends FluentWebElement> search, By bySelector, Filter... filters) {
-        this.search = search;
-        this.bySelector = bySelector;
-        this.filters = filters;
-    }
-
-    public AbstractFill(SearchControl<? extends FluentWebElement> search, Filter... filters) {
-        this.search = search;
-        this.cssSelector = "*";
-        this.filters = filters;
-    }
-
-    public AbstractFill(FluentList<FluentWebElement> list, Filter... filters) {
-        this.filters = filters.clone();
+    public AbstractFill(FluentList<E> list, Filter... filters) {
         this.fluentList = list;
     }
 
-    public AbstractFill(FluentWebElement element, Filter... filters) {
-        this(element.asList(), filters);
+    public AbstractFill(E element) {
+        this((FluentList<E>) element.asList());
     }
 
-    protected FluentList<FluentWebElement> findElements() {
-        if (fluentList != null) {
-            return fluentList;
-        } else if (cssSelector != null) {
-            return (FluentList<FluentWebElement>) search.find(cssSelector, filters);
-        } else {
-            return (FluentList<FluentWebElement>) search.find(bySelector, filters);
-        }
+    protected FluentList<E> findElements() {
+        return fluentList;
     }
 }

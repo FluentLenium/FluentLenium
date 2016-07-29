@@ -7,25 +7,13 @@ import org.fluentlenium.core.search.SearchControl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class Fill extends AbstractFill {
-    public Fill(SearchControl<? extends FluentWebElement> search, String cssSelector, Filter... filters) {
-        super(search, cssSelector, filters);
+public class Fill<E extends FluentWebElement> extends AbstractFill<E> {
+    public Fill(FluentList<E> list) {
+        super(list);
     }
 
-    public Fill(SearchControl<? extends FluentWebElement> search, By bySelector, Filter... filters) {
-        super(search, bySelector, filters);
-    }
-
-    public Fill(SearchControl<? extends FluentWebElement> search, Filter... filters) {
-        super(search, filters);
-    }
-
-    public Fill(FluentList<FluentWebElement> list, Filter... filters) {
-        super(list, filters);
-    }
-
-    public Fill(FluentWebElement element, Filter... filters) {
-        super(element, filters);
+    public Fill(E element) {
+        super(element);
     }
 
     /**

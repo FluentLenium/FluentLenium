@@ -70,7 +70,7 @@ public class SearchOnlyWithFiltersTest extends LocalFluentCase {
     @Test
     public void checkFillWorks() {
         goTo(DEFAULT_URL);
-        fill(withId("name")).with("FillTest");
+        $(withId("name")).fill().with("FillTest");
         assertThat($("#name").getValue()).isEqualTo("FillTest");
     }
 
@@ -79,7 +79,7 @@ public class SearchOnlyWithFiltersTest extends LocalFluentCase {
         goTo(DEFAULT_URL);
         Select select = new Select(findFirst("#select").getElement());
         assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 1");
-        fillSelect(withId("select")).withValue("value-3");
+        $(withId("select")).fillSelect().withValue("value-3");
         assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 3");
     }
 

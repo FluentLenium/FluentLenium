@@ -1,6 +1,6 @@
 package org.fluentlenium.core.domain;
 
-import org.fluentlenium.core.action.FluentDefaultActions;
+import org.fluentlenium.core.action.FluentActions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.SearchControl;
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  *
  */
-public interface FluentList<E extends FluentWebElement> extends List<E>, FluentDefaultActions<FluentList>, SearchControl<E> {
+public interface FluentList<E extends FluentWebElement> extends List<E>, FluentActions<FluentList<E>, E>, SearchControl<E> {
 
     /**
      * Return the first element of the list
@@ -51,7 +51,7 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
      * If there is more elements on the list than in the with table, the last element of the table is repeated
      */
     @Override
-    FluentList<E> text(String... with);
+    FluentList text(String... with);
 
     /**
      * submit on all elements on the list
