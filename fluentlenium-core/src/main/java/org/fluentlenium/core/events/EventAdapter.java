@@ -56,35 +56,35 @@ class EventAdapter implements WebDriverEventListener {
 
     @Override
     public void beforeFindBy(final By by, final WebElement element, final WebDriver driver) {
-        this.listener.beforeFindBy(by, element == null ? null : new FluentWebElement(element),
+        this.listener.beforeFindBy(by, element == null ? null : new FluentWebElement(element, driver),
                 driver);
     }
 
     @Override
     public void afterFindBy(final By by, final WebElement element, final WebDriver driver) {
-        this.listener.afterFindBy(by, element == null ? null : new FluentWebElement(element),
+        this.listener.afterFindBy(by, element == null ? null : new FluentWebElement(element, driver),
                 driver);
     }
 
     @Override
     public void beforeClickOn(final WebElement element, final WebDriver driver) {
-        this.listener.beforeClickOn(element == null ? null : new FluentWebElement(element), driver);
+        this.listener.beforeClickOn(element == null ? null : new FluentWebElement(element, driver), driver);
     }
 
     @Override
     public void afterClickOn(final WebElement element, final WebDriver driver) {
-        this.listener.afterClickOn(element == null ? null : new FluentWebElement(element), driver);
+        this.listener.afterClickOn(element == null ? null : new FluentWebElement(element, driver), driver);
     }
 
     @Override
     public void beforeChangeValueOf(final WebElement element, final WebDriver driver) {
-        this.listener.beforeChangeValueOf(element == null ? null : new FluentWebElement(element),
+        this.listener.beforeChangeValueOf(element == null ? null : new FluentWebElement(element, driver),
                 driver);
     }
 
     @Override
     public void afterChangeValueOf(final WebElement element, final WebDriver driver) {
-        this.listener.afterChangeValueOf(element == null ? null : new FluentWebElement(element),
+        this.listener.afterChangeValueOf(element == null ? null : new FluentWebElement(element, driver),
                 driver);
     }
 

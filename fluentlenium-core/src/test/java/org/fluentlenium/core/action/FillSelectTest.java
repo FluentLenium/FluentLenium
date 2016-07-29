@@ -3,7 +3,7 @@ package org.fluentlenium.core.action;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.context.FluentThread;
+import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.SearchControl;
@@ -35,9 +35,6 @@ public class FillSelectTest {
     private SearchControl search;
 
     @Mock
-    private FluentAdapter fluentAdapter;
-
-    @Mock
     private WebElement element1;
 
     @Mock
@@ -53,9 +50,6 @@ public class FillSelectTest {
     public void before() {
         MockitoAnnotations.initMocks(this);
 
-        FluentThread.set(fluentAdapter);
-        when(fluentAdapter.getDriver()).thenReturn(driver);
-
         when(element1.getTagName()).thenReturn("select");
         when(element2.getTagName()).thenReturn("span");
         when(element3.getTagName()).thenReturn("select");
@@ -65,7 +59,7 @@ public class FillSelectTest {
 
     @After
     public void after() {
-        reset(driver, search, fluentAdapter, element1, element2, element3, element4);
+        reset(driver, search, element1, element2, element3, element4);
     }
 
     @Test

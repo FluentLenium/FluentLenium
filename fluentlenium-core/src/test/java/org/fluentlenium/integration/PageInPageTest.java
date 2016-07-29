@@ -1,5 +1,6 @@
 package org.fluentlenium.integration;
 
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -76,7 +77,8 @@ class SubTestPageWithParameter extends TestPage {
 class SubTestPageWithCreate extends FluentPage {
     public IncludedPage pageWithCreatePage;
 
-    SubTestPageWithCreate() {
+    public void initPage(FluentControl control) {
+        super.initPage(control);
         pageWithCreatePage = createPage(IncludedPage.class);
     }
 

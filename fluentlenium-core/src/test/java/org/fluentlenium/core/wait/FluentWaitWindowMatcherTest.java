@@ -3,9 +3,7 @@ package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
 import org.assertj.core.api.ThrowableAssert;
-import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentDriver;
-import org.fluentlenium.core.context.FluentThread;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
 import org.junit.After;
@@ -36,15 +34,11 @@ public class FluentWaitWindowMatcherTest {
     private FluentWait wait;
 
     @Mock
-    private FluentAdapter fluentAdapter;
-
-    @Mock
     private WebDriver webDriver;
 
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
-        FluentThread.set(fluentAdapter);
 
         wait = new FluentWait(fluent, search);
         wait.atMost(1L, TimeUnit.MILLISECONDS);

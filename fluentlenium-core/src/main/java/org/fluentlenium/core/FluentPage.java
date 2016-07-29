@@ -2,18 +2,27 @@ package org.fluentlenium.core;
 
 import lombok.experimental.Delegate;
 import org.fluentlenium.core.annotation.PageUrl;
-import org.fluentlenium.core.context.FluentThread;
 
 /**
  * Use the Page Object Pattern to have more resilient tests.
  */
 public abstract class FluentPage implements FluentPageControl {
 
-    @Delegate
-    private FluentControl support;
+    protected FluentPage() {}
 
-    protected FluentPage() {
-        support = FluentThread.get();
+    protected FluentPage(FluentControl control) {
+        initPage(control);
+    }
+
+    private FluentControl control;
+
+    @Delegate
+    private FluentControl getFluentControl() {
+        return control;
+    }
+
+    public void initPage(FluentControl control) {
+        this.control = control;
     }
 
     @Override

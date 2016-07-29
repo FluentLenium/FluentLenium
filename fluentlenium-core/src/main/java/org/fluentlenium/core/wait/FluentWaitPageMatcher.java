@@ -9,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isPageLoaded;
 
 public class FluentWaitPageMatcher extends AbstractWaitMatcher {
-    private AbstractWaitElementMatcher parent;
     private FluentWait wait;
     private WebDriver webDriver;
     private FluentPage page;

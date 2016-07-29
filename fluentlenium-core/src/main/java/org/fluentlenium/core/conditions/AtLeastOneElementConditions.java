@@ -4,7 +4,6 @@ package org.fluentlenium.core.conditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import org.fluentlenium.core.FluentDriver;
-import org.fluentlenium.core.context.FluentThread;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class AtLeastOneElementConditions extends AbstractFluentListConditions {
             predicate = Predicates.not(predicate);
             defaultValue = !defaultValue;
         }
-        return buildAtLeastOnePredicate(predicate, defaultValue).apply(FluentThread.get());
+        return buildAtLeastOnePredicate(predicate, defaultValue).apply(null);
     }
 
     protected Predicate<FluentDriver> buildAtLeastOnePredicate(final Predicate<FluentWebElement> predicate, final boolean defaultValue) {

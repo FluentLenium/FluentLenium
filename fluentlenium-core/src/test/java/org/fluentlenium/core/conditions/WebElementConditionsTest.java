@@ -1,8 +1,7 @@
 package org.fluentlenium.core.conditions;
 
 import com.google.common.base.Predicates;
-import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.context.FluentThread;
+import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
@@ -21,16 +20,12 @@ public class WebElementConditionsTest {
     @Mock
     private WebElement webElement;
 
-    @Mock
-    private FluentAdapter adapter;
-
     private FluentWebElement fluentWebElement;
     private WebElementConditions conditions;
 
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
-        FluentThread.set(adapter);
 
         fluentWebElement = new FluentWebElement(webElement);
         conditions = new WebElementConditions(fluentWebElement);
@@ -39,7 +34,6 @@ public class WebElementConditionsTest {
     @After
     public void after() {
         reset(webElement);
-        reset(adapter);
     }
 
     @Test

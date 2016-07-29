@@ -4,6 +4,7 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -14,9 +15,12 @@ import java.util.List;
  */
 public class Axes {
 
+    private final WebDriver driver;
     private final WebElement webElement;
 
-    public Axes(WebElement element) {
+
+    public Axes(WebDriver driver, WebElement element) {
+        this.driver = driver;
         this.webElement = element;
     }
 
@@ -28,7 +32,7 @@ public class Axes {
      */
     public FluentWebElement parent() {
         WebElement parentRaw = this.webElement.findElement(By.xpath("parent::*"));
-        FluentWebElement parent = new FluentWebElement(parentRaw);
+        FluentWebElement parent = new FluentWebElement(parentRaw, driver);
         return parent;
     }
 
@@ -36,7 +40,7 @@ public class Axes {
         List<WebElement> ancestorsRaw = this.webElement.findElements(By.xpath(axe + "::*"));
         List<FluentWebElement> elements = new ArrayList<FluentWebElement>();
         for (WebElement ancestor : ancestorsRaw) {
-            elements.add(new FluentWebElement(ancestor));
+            elements.add(new FluentWebElement(ancestor, driver));
         }
         return new FluentListImpl<>(elements);
     }

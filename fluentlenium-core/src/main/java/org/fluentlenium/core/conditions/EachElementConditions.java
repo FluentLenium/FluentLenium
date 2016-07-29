@@ -4,7 +4,6 @@ package org.fluentlenium.core.conditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import org.fluentlenium.core.FluentDriver;
-import org.fluentlenium.core.context.FluentThread;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 import java.util.List;
@@ -29,7 +28,7 @@ public class EachElementConditions extends AbstractFluentListConditions {
             predicate = Predicates.not(predicate);
             defaultValue = !defaultValue;
         }
-        return buildEachElementPredicate(predicate, defaultValue).apply(FluentThread.get());
+        return buildEachElementPredicate(predicate, defaultValue).apply(null);
     }
 
     protected Predicate<FluentDriver> buildEachElementPredicate(final Predicate<FluentWebElement> predicate, final boolean defaultValue) {

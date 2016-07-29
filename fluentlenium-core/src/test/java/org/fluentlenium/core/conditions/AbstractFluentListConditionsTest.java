@@ -1,7 +1,6 @@
 package org.fluentlenium.core.conditions;
 
-import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.context.FluentThread;
+import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Before;
 import org.mockito.Mock;
@@ -19,7 +18,7 @@ public class AbstractFluentListConditionsTest {
     protected WebElement webElement3;
 
     @Mock
-    protected FluentAdapter adapter;
+    protected FluentDriver fluentDriver;
 
     protected FluentWebElement fluentWebElement1;
 
@@ -30,7 +29,6 @@ public class AbstractFluentListConditionsTest {
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
-        FluentThread.set(adapter);
 
         fluentWebElement1 = new FluentWebElement(webElement1);
         fluentWebElement2 = new FluentWebElement(webElement2);

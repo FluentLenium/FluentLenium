@@ -20,10 +20,19 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     private final CookieStrategyReader csr;
 
     public FluentTestRunnerAdapter() {
-        this(new DefaultSharedDriverStrategyReader(), new DefaultCookieStrategyReader());
+        this(new DefaultDriverContainer());
+    }
+
+    public FluentTestRunnerAdapter(DriverContainer driverContainer) {
+        this(driverContainer, new DefaultSharedDriverStrategyReader(), new DefaultCookieStrategyReader());
     }
 
     public FluentTestRunnerAdapter(SharedDriverStrategyReader sharedDriverExtractor, CookieStrategyReader cookieExtractor) {
+        this(new DefaultDriverContainer(), sharedDriverExtractor, cookieExtractor);
+    }
+
+    public FluentTestRunnerAdapter(DriverContainer driverContainer, SharedDriverStrategyReader sharedDriverExtractor, CookieStrategyReader cookieExtractor) {
+        super(driverContainer);
         this.sdsr = sharedDriverExtractor;
         this.csr = cookieExtractor;
     }

@@ -1,8 +1,6 @@
 package org.fluentlenium.core.events;
 
 import org.assertj.core.api.ThrowableAssert;
-import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.context.FluentThread;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.hamcrest.CustomMatcher;
 import org.junit.Before;
@@ -39,17 +37,12 @@ public class EventsTest {
     @Mock
     private WebDriver.Navigation navigation;
 
-    @Mock
-    private FluentAdapter adapter;
-
     private EventFiringWebDriver eventDriver;
 
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
 
-        FluentThread.set(adapter);
-        when(adapter.getDriver()).thenReturn(driver);
         when(driver.navigate()).thenReturn(navigation);
 
         eventDriver = new EventFiringWebDriver(driver);

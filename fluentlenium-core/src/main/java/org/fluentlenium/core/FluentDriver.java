@@ -5,7 +5,6 @@ import org.apache.commons.io.IOUtils;
 import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.alert.Alert;
-import org.fluentlenium.core.context.FluentThread;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.EventsRegistry;
@@ -22,7 +21,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.io.File;
@@ -40,42 +38,46 @@ import java.util.concurrent.TimeUnit;
 public class FluentDriver implements FluentDriverControl {
     private String baseUrl;
 
-    private ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<WebDriver>();
-    private ThreadLocal<Search> searchThreadLocal = new ThreadLocal<Search>();
+    private FluentDriverConfigurationReader configuration;
 
-    private String htmlDumpPath;
-    private String screenshotPath;
-
-    private TriggerMode screenshotMode = TriggerMode.NEVER;
-    private TriggerMode htmlDumpMode = TriggerMode.NEVER;
-
-    private EventsRegistry events = null;
+    private EventsRegistry events;
 
     private PageInitializer pageInitializer;
+
+    private Search search;
+    private WebDriver driver;
 
     private MouseActions mouseActions;
     private KeyboardActions keyboardActions;
 
-    public FluentDriver() {
-    }
-
-    public FluentDriver(WebDriver driver) {
-        this.webDriverThreadLocal.set(driver);
-        this.searchThreadLocal.set(new Search(driver));
+    public FluentDriver(WebDriver driver, FluentDriverConfigurationReader configuration) {
+        initFluent(driver);
+        this.configuration = configuration;
     }
 
     protected FluentDriver initFluent(WebDriver driver) {
-        FluentThread.set(this);
-        this.webDriverThreadLocal.set(driver);
-        this.searchThreadLocal.set(new Search(driver));
+        this.driver = driver;
+        this.search = new Search(driver);
         if (driver instanceof EventFiringWebDriver) {
             this.events = new EventsRegistry((EventFiringWebDriver) driver);
         }
         this.mouseActions = new MouseActions(driver);
         this.keyboardActions = new KeyboardActions(driver);
         this.pageInitializer = new PageInitializer(this);
+        initContainer(this);
+        return this;
+    }
+
+    public FluentDriver initContainers(FluentControl ... containers) {
+        for (FluentControl container : containers) {
+            initContainer(container);
+        }
+        return this;
+    }
+
+    public FluentDriver initContainer(FluentControl container) {
         try {
-            pageInitializer.initContainer(this);
+            pageInitializer.initContainer(container);
         } catch (ClassNotFoundException e) {
             throw new PageInitializerException("Class not found", e);
         } catch (IllegalAccessException e) {
@@ -128,36 +130,6 @@ public class FluentDriver implements FluentDriverControl {
     }
 
     @Override
-    public void setScreenshotPath(String path) {
-        this.screenshotPath = path;
-    }
-
-    @Override
-    public void setHtmlDumpPath(String htmlDumpPath) {
-        this.htmlDumpPath = htmlDumpPath;
-    }
-
-    @Override
-    public void setScreenshotMode(TriggerMode mode) {
-        this.screenshotMode = mode;
-    }
-
-    @Override
-    public TriggerMode getScreenshotMode() {
-        return screenshotMode;
-    }
-
-    @Override
-    public void setHtmlDumpMode(TriggerMode htmlDumpMode) {
-        this.htmlDumpMode = htmlDumpMode;
-    }
-
-    @Override
-    public TriggerMode getHtmlDumpMode() {
-        return htmlDumpMode;
-    }
-
-    @Override
     public void takeHtmlDump() {
         takeHtmlDump(new Date().getTime() + ".html");
     }
@@ -166,8 +138,8 @@ public class FluentDriver implements FluentDriverControl {
     public void takeHtmlDump(String fileName) {
         File destFile = null;
         try {
-            if (htmlDumpPath != null) {
-                destFile = Paths.get(htmlDumpPath, fileName).toFile();
+            if (configuration.getHtmlDumpPath() != null) {
+                destFile = Paths.get(configuration.getHtmlDumpPath(), fileName).toFile();
             } else {
                 destFile = new File(fileName);
             }
@@ -205,8 +177,8 @@ public class FluentDriver implements FluentDriverControl {
         File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         try {
             File destFile;
-            if (screenshotPath != null) {
-                destFile = Paths.get(screenshotPath, fileName).toFile();
+            if (configuration.getScreenshotPath() != null) {
+                destFile = Paths.get(configuration.getScreenshotPath(), fileName).toFile();
             } else {
                 destFile = new File(fileName);
             }
@@ -220,7 +192,7 @@ public class FluentDriver implements FluentDriverControl {
 
     @Override
     public WebDriver getDriver() {
-        return webDriverThreadLocal.get();
+        return this.driver;
     }
 
     @Override
@@ -229,7 +201,7 @@ public class FluentDriver implements FluentDriverControl {
     }
 
     private Search getSearch() {
-        return searchThreadLocal.get();
+        return this.search;
     }
 
     @Override
@@ -472,7 +444,5 @@ public class FluentDriver implements FluentDriverControl {
 
     public void cleanupDriver() {
         pageInitializer.release();
-        webDriverThreadLocal.remove();
-        searchThreadLocal.remove();
     }
 }

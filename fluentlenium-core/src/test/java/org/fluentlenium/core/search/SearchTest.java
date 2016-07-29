@@ -1,13 +1,11 @@
 package org.fluentlenium.core.search;
 
-
 import com.google.common.collect.Lists;
-import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.context.FluentThread;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.matcher.Matcher;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
@@ -30,9 +28,6 @@ import static org.mockito.Mockito.when;
 
 public class SearchTest {
     @Mock
-    private FluentAdapter fluentAdapter;
-
-    @Mock
     private WebDriver driver;
 
     @Mock
@@ -52,11 +47,7 @@ public class SearchTest {
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
-
-        FluentThread.set(fluentAdapter);
-        when(fluentAdapter.getDriver()).thenReturn(driver);
-
-        search = new Search(searchContext);
+        search = new Search(driver, searchContext);
     }
 
     @Test

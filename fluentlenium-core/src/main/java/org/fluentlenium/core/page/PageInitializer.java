@@ -11,8 +11,10 @@ import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.Locatable;
+import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
@@ -81,7 +83,7 @@ public class PageInitializer {
     public void initContainer(FluentControl container) throws IllegalAccessException, ClassNotFoundException {
         injectPageIntoContainer(container);
         initFluentWebElements(container);
-        PageFactory.initElements(container.getDriver(), container); // Support injection for default selenium WebElement
+        PageFactory.initElements(fluent.getDriver(), container); // Support injection for default selenium WebElement
     }
 
     private void injectPageIntoContainer(FluentControl container)
@@ -97,18 +99,11 @@ public class PageInitializer {
                         Class clsField = field.getType();
                         Class clsPage = Class.forName(clsField.getName());
                         FluentPage existingPage = pageInstances.get(clsPage);
-                        FluentPage page = (FluentPage) field.get(container);
                         if (existingPage != null) {
-                            // if page isn't injected
-                            if (page == null) {
-                                field.set(container, existingPage);
-                            }
+                            field.set(container, existingPage);
                         } else {
-                            // if page isn't injected
-                            if (page == null) {
-                                page = initClass(clsPage);
-                                field.set(container, page);
-                            }
+                            FluentPage page = initClass(clsPage);
+                            field.set(container, page);
                             pageInstances.putIfAbsent(clsPage, page);
                             initContainer(page);
                         }
@@ -124,6 +119,7 @@ public class PageInitializer {
     private <T extends FluentPage> T initClass(Class<T> cls, Object... params) {
         try {
             T page = constructPageWithParams(cls, params);
+            page.initPage(fluent);
             return page;
         } catch (IllegalAccessException e) {
             throw new PageInitializerException("IllegalAccessException on class " + (cls != null ? cls.getName() : " null"), e);
@@ -196,7 +192,7 @@ public class PageInitializer {
         }
     }
 
-    private static void proxyElement(ElementLocatorFactory factory, Object page, Field field) {
+    private void proxyElement(ElementLocatorFactory factory, Object page, Field field) {
         ElementLocator locator = factory.createLocator(field);
         if (locator == null) {
             return;
@@ -215,7 +211,13 @@ public class PageInitializer {
                 final InvocationHandler handler = new LocatingElementHandler(locator);
                 WebElement proxy = (WebElement) Proxy.newProxyInstance(
                         page.getClass().getClassLoader(), new Class[]{WebElement.class, Locatable.class}, handler);
-                field.set(page, field.getType().getConstructor(WebElement.class).newInstance(proxy));
+                Object proxyWrapper;
+                try {
+                    proxyWrapper = field.getType().getConstructor(WebElement.class, WebDriver.class).newInstance(proxy, fluent.getDriver());
+                } catch (NoSuchMethodException e) {
+                    proxyWrapper = field.getType().getConstructor(WebElement.class).newInstance(proxy);
+                }
+                field.set(page, proxyWrapper);
             }
         } catch (Exception e) {
             throw new RuntimeException("Unable to find an accessible constructor with an argument of type WebElement in " + field.getType(), e);
@@ -224,7 +226,7 @@ public class PageInitializer {
         }
     }
 
-    private static class FluentListInvocationHandler implements InvocationHandler {
+    private class FluentListInvocationHandler implements InvocationHandler {
 
         private final ElementLocator elementLocator;
 
@@ -238,7 +240,7 @@ public class PageInitializer {
             FluentListImpl list = new FluentListImpl(FluentIterable.from(elements).transform(new Function<WebElement, FluentWebElement>() {
                 @Override
                 public FluentWebElement apply(WebElement input) {
-                    return new FluentWebElement(input);
+                    return new FluentWebElement(input, fluent.getDriver());
                 }
             }).toList());
             try {
