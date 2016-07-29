@@ -793,9 +793,7 @@ withDefaultPageWait(long l, TimeUnit timeUnit);
 Be aware that when you modified this elements, the webDriver instance will be modified so your page will also be affected.
 
 ### Configuration
-You can define a default driver configuration using two ways.
-First, just override the getDriver method and use the selenium way to configure your driver.
-You can also override the getDefaultConfig method and use both selenium and FluentLenium way (withDefaultSearchWait,withDefaultPageWait) to configure your driver.
+Override the getDefaultDriver method and use the selenium way to configure your driver.
 
 ## Browser Lifecycle
 For JUnit and TestNG, you can define the browser lifecycle.

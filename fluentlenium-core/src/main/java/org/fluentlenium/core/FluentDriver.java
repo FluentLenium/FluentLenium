@@ -5,11 +5,13 @@ import org.apache.commons.io.IOUtils;
 import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.alert.Alert;
+import org.fluentlenium.core.context.FluentThread;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.page.PageInitializer;
+import org.fluentlenium.core.page.PageInitializerException;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.wait.FluentWait;
@@ -35,9 +37,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Util Class which offers some shortcut to webdriver methods
  */
-public abstract class FluentDriver implements WrapsDriver, FluentControl {
-    protected enum TriggerMode {ON_FAIL, NEVER}
-
+public class FluentDriver implements FluentDriverControl {
     private String baseUrl;
 
     private ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<WebDriver>();
@@ -46,22 +46,42 @@ public abstract class FluentDriver implements WrapsDriver, FluentControl {
     private String htmlDumpPath;
     private String screenshotPath;
 
-    protected TriggerMode screenshotMode = TriggerMode.NEVER;
-    protected TriggerMode htmlDumpMode = TriggerMode.NEVER;
+    private TriggerMode screenshotMode = TriggerMode.NEVER;
+    private TriggerMode htmlDumpMode = TriggerMode.NEVER;
 
     private EventsRegistry events = null;
 
-    protected PageInitializer pageInitializer = new PageInitializer(this);
+    private PageInitializer pageInitializer;
 
     private MouseActions mouseActions;
     private KeyboardActions keyboardActions;
 
-    protected FluentDriver() {
+    public FluentDriver() {
     }
 
-    protected FluentDriver(WebDriver driver) {
+    public FluentDriver(WebDriver driver) {
         this.webDriverThreadLocal.set(driver);
         this.searchThreadLocal.set(new Search(driver));
+    }
+
+    protected FluentDriver initFluent(WebDriver driver) {
+        FluentThread.set(this);
+        this.webDriverThreadLocal.set(driver);
+        this.searchThreadLocal.set(new Search(driver));
+        if (driver instanceof EventFiringWebDriver) {
+            this.events = new EventsRegistry((EventFiringWebDriver) driver);
+        }
+        this.mouseActions = new MouseActions(driver);
+        this.keyboardActions = new KeyboardActions(driver);
+        this.pageInitializer = new PageInitializer(this);
+        try {
+            pageInitializer.initContainer(this);
+        } catch (ClassNotFoundException e) {
+            throw new PageInitializerException("Class not found", e);
+        } catch (IllegalAccessException e) {
+            throw new PageInitializerException("IllegalAccessException", e);
+        }
+        return this;
     }
 
     /**
@@ -70,6 +90,7 @@ public abstract class FluentDriver implements WrapsDriver, FluentControl {
      * @param baseUrl base URL
      * @return Fluent element
      */
+    @Override
     public FluentDriver withDefaultUrl(String baseUrl) {
         if (baseUrl != null) {
             if (baseUrl.endsWith("/")) {
@@ -87,6 +108,7 @@ public abstract class FluentDriver implements WrapsDriver, FluentControl {
      * @param timeUnit time unit for wait
      * @return Fluent element
      */
+    @Override
     public FluentDriver withDefaultPageWait(long l, TimeUnit timeUnit) {
         this.getDriver().manage().timeouts().pageLoadTimeout(l, timeUnit);
         return this;
@@ -99,25 +121,40 @@ public abstract class FluentDriver implements WrapsDriver, FluentControl {
      * @param timeUnit time unit for wait
      * @return Fluent element
      */
+    @Override
     public FluentDriver withDefaultSearchWait(long l, TimeUnit timeUnit) {
         this.getDriver().manage().timeouts().implicitlyWait(l, timeUnit);
         return this;
     }
 
+    @Override
     public void setScreenshotPath(String path) {
         this.screenshotPath = path;
     }
 
+    @Override
     public void setHtmlDumpPath(String htmlDumpPath) {
         this.htmlDumpPath = htmlDumpPath;
     }
 
+    @Override
     public void setScreenshotMode(TriggerMode mode) {
         this.screenshotMode = mode;
     }
 
+    @Override
+    public TriggerMode getScreenshotMode() {
+        return screenshotMode;
+    }
+
+    @Override
     public void setHtmlDumpMode(TriggerMode htmlDumpMode) {
         this.htmlDumpMode = htmlDumpMode;
+    }
+
+    @Override
+    public TriggerMode getHtmlDumpMode() {
+        return htmlDumpMode;
     }
 
     @Override
@@ -179,17 +216,6 @@ public abstract class FluentDriver implements WrapsDriver, FluentControl {
             throw new RuntimeException("error when taking the snapshot", e);
         }
         FileUtils.deleteQuietly(scrFile);
-    }
-
-    protected FluentDriver initFluent(WebDriver driver) {
-        this.webDriverThreadLocal.set(driver);
-        this.searchThreadLocal.set(new Search(driver));
-        if (driver instanceof EventFiringWebDriver) {
-            this.events = new EventsRegistry((EventFiringWebDriver) driver);
-        }
-        this.mouseActions = new MouseActions(driver);
-        this.keyboardActions = new KeyboardActions(driver);
-        return this;
     }
 
     @Override
@@ -445,6 +471,7 @@ public abstract class FluentDriver implements WrapsDriver, FluentControl {
     }
 
     public void cleanupDriver() {
+        pageInitializer.release();
         webDriverThreadLocal.remove();
         searchThreadLocal.remove();
     }

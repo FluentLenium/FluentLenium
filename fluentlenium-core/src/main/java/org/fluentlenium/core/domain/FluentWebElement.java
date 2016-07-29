@@ -1,6 +1,7 @@
 package org.fluentlenium.core.domain;
 
 import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.action.FluentActions;
 import org.fluentlenium.core.context.FluentThread;
 import org.fluentlenium.core.action.Fill;
@@ -225,7 +226,7 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
      */
 
     public boolean isClickable() {
-        FluentAdapter fluent = FluentThread.get();
+        FluentDriver fluent = FluentThread.get();
         return ExpectedConditions.elementToBeClickable(getElement()).apply(fluent.getDriver()) != null;
     }
 
@@ -235,7 +236,7 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
      * @return false is the element is still attached to the DOM, true otherwise.
      */
     public boolean isStale() {
-        FluentAdapter fluent = FluentThread.get();
+        FluentDriver fluent = FluentThread.get();
         return ExpectedConditions.stalenessOf(getElement()).apply(fluent.getDriver());
     }
 

@@ -37,8 +37,7 @@ public class FluentWaitPageMatcher extends AbstractWaitMatcher {
         } else {
             Predicate<FluentDriver> isLoaded = new com.google.common.base.Predicate<FluentDriver>() {
                 public boolean apply(FluentDriver fluent) {
-                    JavascriptExecutor javascriptExecutor = (JavascriptExecutor) fluent.getDriver();
-                    Object result = javascriptExecutor.executeScript("if (document.readyState) return document.readyState;");
+                    Object result = fluent.executeScript("if (document.readyState) return document.readyState;").getStringResult();
                     return result != null && "complete".equals(result);
                 }
             };

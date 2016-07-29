@@ -1,15 +1,15 @@
 package org.fluentlenium.core.context;
 
 
-import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.FluentDriver;
 
 public final class FluentThread {
     private FluentThread() {
     }
 
-    public static final InheritableThreadLocal<FluentAdapter> userThreadLocal = new InheritableThreadLocal<FluentAdapter>();
+    public static final InheritableThreadLocal<FluentDriver> userThreadLocal = new InheritableThreadLocal<FluentDriver>();
 
-    public static void set(FluentAdapter fluent) {
+    public static void set(FluentDriver fluent) {
         userThreadLocal.set(fluent);
     }
 
@@ -17,7 +17,7 @@ public final class FluentThread {
         userThreadLocal.remove();
     }
 
-    public static FluentAdapter get() {
+    public static FluentDriver get() {
         return userThreadLocal.get();
     }
 }
