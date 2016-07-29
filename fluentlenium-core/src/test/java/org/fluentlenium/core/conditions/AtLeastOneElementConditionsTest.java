@@ -147,6 +147,11 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
         assertThat(conditions.hasSize(2)).isFalse();
         assertThat(conditions.hasSize().equalTo(2)).isFalse();
 
+        assertThat(conditions.not().hasSize(3)).isFalse();
+        assertThat(conditions.not().hasSize().equalTo(3)).isFalse();
+        assertThat(conditions.not().hasSize(2)).isTrue();
+        assertThat(conditions.not().hasSize().equalTo(2)).isTrue();
+
         AtLeastOneElementConditions conditions2 = new AtLeastOneElementConditions(Arrays.asList(fluentWebElement1, fluentWebElement3));
 
         assertThat(conditions2.hasSize(3)).isFalse();

@@ -183,6 +183,11 @@ public class EachElementConditionsTest extends AbstractFluentListConditionsTest 
         assertThat(conditions.hasSize(2)).isFalse();
         assertThat(conditions.hasSize().equalTo(2)).isFalse();
 
+        assertThat(conditions.not().hasSize(3)).isFalse();
+        assertThat(conditions.not().hasSize().equalTo(3)).isFalse();
+        assertThat(conditions.not().hasSize(2)).isTrue();
+        assertThat(conditions.not().hasSize().equalTo(2)).isTrue();
+
         EachElementConditions conditions2 = new EachElementConditions(Arrays.asList(fluentWebElement1, fluentWebElement3));
 
         assertThat(conditions2.hasSize(3)).isFalse();
