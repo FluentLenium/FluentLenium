@@ -31,7 +31,7 @@ public class ActionOnListWithBddTest extends LocalFluentCase {
         goTo(DEFAULT_URL);
         FluentList name = find("#name");
         assertThat(name.getValues()).contains("John");
-        clear(name);
+        name.clear();
         assertThat(name.getValues()).contains("");
     }
 
@@ -40,7 +40,7 @@ public class ActionOnListWithBddTest extends LocalFluentCase {
         goTo(DEFAULT_URL);
         FluentList name = find("#linkToPage2");
         assertThat(title()).contains("Selenium");
-        click(name);
+        name.click();
         assertThat(title()).isEqualTo("Page 2");
     }
 

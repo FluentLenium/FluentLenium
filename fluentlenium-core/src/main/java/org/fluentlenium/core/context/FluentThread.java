@@ -1,4 +1,4 @@
-package org.fluentlenium.core;
+package org.fluentlenium.core.context;
 
 
 import org.fluentlenium.adapter.FluentAdapter;

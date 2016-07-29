@@ -2,7 +2,7 @@ package org.fluentlenium.core.domain;
 
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.FluentThread;
+import org.fluentlenium.core.context.FluentThread;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

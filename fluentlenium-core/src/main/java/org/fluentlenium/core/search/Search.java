@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Search implements SearchActions<FluentWebElement> {
+public class Search implements SearchControl<FluentWebElement> {
     private final SearchContext searchContext;
 
     public Search(SearchContext context) {

@@ -1,13 +1,13 @@
 package org.fluentlenium.core.action;
 
-import org.fluentlenium.core.Fluent;
+import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class AbstractFill extends Fluent {
+public class AbstractFill extends FluentDriver {
     private String cssSelector;
     private Filter[] filters;
     private By bySelector;

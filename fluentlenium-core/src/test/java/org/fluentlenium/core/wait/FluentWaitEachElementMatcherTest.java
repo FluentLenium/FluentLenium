@@ -3,8 +3,8 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Predicate;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.Fluent;
-import org.fluentlenium.core.FluentThread;
+import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.context.FluentThread;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
@@ -35,7 +35,7 @@ public class FluentWaitEachElementMatcherTest {
     private Search search;
 
     @Mock
-    private Fluent fluent;
+    private FluentDriver fluent;
 
     private FluentWait wait;
 

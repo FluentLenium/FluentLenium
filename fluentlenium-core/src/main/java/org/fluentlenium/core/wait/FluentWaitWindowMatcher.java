@@ -1,8 +1,7 @@
 package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
-import org.fluentlenium.core.Fluent;
-import org.fluentlenium.core.FluentThread;
+import org.fluentlenium.core.FluentDriver;
 
 public class FluentWaitWindowMatcher extends AbstractWaitMatcher {
 
@@ -15,9 +14,9 @@ public class FluentWaitWindowMatcher extends AbstractWaitMatcher {
     }
 
     public boolean isDisplayed() {
-        Predicate<Fluent> isDisplayed = new Predicate<Fluent>() {
+        Predicate<FluentDriver> isDisplayed = new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent fluent) {
+            public boolean apply(FluentDriver fluent) {
                 return fluent.getDriver().getWindowHandles().contains(windowName);
             }
         };
@@ -27,9 +26,9 @@ public class FluentWaitWindowMatcher extends AbstractWaitMatcher {
     }
 
     public boolean isNotDisplayed() {
-        Predicate<Fluent> isNotDisplayed = new Predicate<Fluent>() {
+        Predicate<FluentDriver> isNotDisplayed = new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent fluent) {
+            public boolean apply(FluentDriver fluent) {
                 return !fluent.getDriver().getWindowHandles().contains(windowName);
             }
         };

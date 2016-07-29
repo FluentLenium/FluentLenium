@@ -107,7 +107,7 @@ public class PageWithAjaxElementTest extends LocalFluentCase {
 
         public String getText() {
 
-            click(newField);
+            newField.click();
 
             return newField.getText();
         }

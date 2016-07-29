@@ -2,7 +2,7 @@ package org.fluentlenium.core.events;
 
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.FluentThread;
+import org.fluentlenium.core.context.FluentThread;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.hamcrest.CustomMatcher;
 import org.junit.Before;

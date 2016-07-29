@@ -45,7 +45,7 @@ public class ActionOnSelectorWithBddTest extends LocalFluentCase {
     public void checkClearAction() {
         goTo(DEFAULT_URL);
         assertThat(findFirst("#name").getValue()).contains("John");
-        clear(findFirst("#name"));
+        findFirst("#name").clear();
         assertThat($("#name").first().getValue()).isEqualTo("");
     }
 
@@ -53,7 +53,7 @@ public class ActionOnSelectorWithBddTest extends LocalFluentCase {
     public void checkClickAction() {
         goTo(DEFAULT_URL);
         assertThat(title()).contains("Selenium");
-        click(findFirst("#linkToPage2"));
+        findFirst("#linkToPage2").click();
         assertThat(title()).isEqualTo("Page 2");
     }
 }

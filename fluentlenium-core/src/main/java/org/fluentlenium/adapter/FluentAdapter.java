@@ -1,13 +1,12 @@
 package org.fluentlenium.adapter;
 
-import org.fluentlenium.core.Fluent;
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.FluentThread;
+import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.context.FluentThread;
 import org.fluentlenium.core.page.PageInitializerException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class FluentAdapter extends Fluent {
+public class FluentAdapter extends FluentDriver {
 
     public FluentAdapter(WebDriver webDriver) {
         super(webDriver);

@@ -3,14 +3,14 @@ package org.fluentlenium.core.page;
 import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
 import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.Fluent;
+import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.PageFactory;
@@ -27,8 +27,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -40,9 +38,9 @@ public class PageInitializer {
 
     private final ConcurrentMap<Class, FluentPage> pageInstances = new ConcurrentHashMap<Class, FluentPage>();
 
-    private final Fluent fluent;
+    private final FluentDriver fluent;
 
-    public PageInitializer(Fluent fluent) {
+    public PageInitializer(FluentDriver fluent) {
         this.fluent = fluent;
     }
 
@@ -80,13 +78,13 @@ public class PageInitializer {
      * @throws IllegalAccessException
      * @throws ClassNotFoundException
      */
-    public void initContainer(Fluent container) throws IllegalAccessException, ClassNotFoundException {
+    public void initContainer(FluentControl container) throws IllegalAccessException, ClassNotFoundException {
         injectPageIntoContainer(container);
         initFluentWebElements(container);
         PageFactory.initElements(container.getDriver(), container); // Support injection for default selenium WebElement
     }
 
-    private void injectPageIntoContainer(Fluent container)
+    private void injectPageIntoContainer(FluentControl container)
             throws ClassNotFoundException, IllegalAccessException {
         for (Class cls = container.getClass();
              FluentAdapter.class.isAssignableFrom(cls) || FluentPage.class.isAssignableFrom(cls);
@@ -98,7 +96,7 @@ public class PageInitializer {
                     try {
                         Class clsField = field.getType();
                         Class clsPage = Class.forName(clsField.getName());
-                        Fluent existingPage = pageInstances.get(clsPage);
+                        FluentPage existingPage = pageInstances.get(clsPage);
                         FluentPage page = (FluentPage) field.get(container);
                         if (existingPage != null) {
                             // if page isn't injected
@@ -110,8 +108,6 @@ public class PageInitializer {
                             if (page == null) {
                                 page = initClass(clsPage);
                                 field.set(container, page);
-                            } else {
-                                page = initClass(page);
                             }
                             pageInstances.putIfAbsent(clsPage, page);
                             initContainer(page);
@@ -128,7 +124,6 @@ public class PageInitializer {
     private <T extends FluentPage> T initClass(Class<T> cls, Object... params) {
         try {
             T page = constructPageWithParams(cls, params);
-            initClass(page, params);
             return page;
         } catch (IllegalAccessException e) {
             throw new PageInitializerException("IllegalAccessException on class " + (cls != null ? cls.getName() : " null"), e);
@@ -141,23 +136,7 @@ public class PageInitializer {
         }
     }
 
-    private <T extends FluentPage> T initClass(T page, Object... params) {
-        try {
-            Class parent = Fluent.class;
-            initDriver(page, parent);
-            initBaseUrl(page, parent);
-
-            return page;
-        } catch (IllegalAccessException e) {
-            throw new PageInitializerException("IllegalAccessException on class " + page.getClass().getName(), e);
-        } catch (NoSuchMethodException e) {
-            throw new PageInitializerException("No constructor found on class " + page.getClass().getName(), e);
-        } catch (InvocationTargetException e) {
-            throw new PageInitializerException("Cannot invoke method setDriver on " + page.getClass().getName(), e);
-        }
-    }
-
-    private <T extends Fluent> void initFluentWebElements(T page) {
+    private <T extends FluentControl> void initFluentWebElements(T page) {
         for (Class classz = page.getClass();
              FluentAdapter.class.isAssignableFrom(classz) || FluentPage.class.isAssignableFrom(classz);
              classz = classz.getSuperclass()) {
@@ -215,42 +194,6 @@ public class PageInitializer {
                 throw ex;
             }
         }
-    }
-
-    private static Field[] getAllFields(Class<?> type) {
-        List<Field> fields = new ArrayList<Field>();
-        for (Class<?> c = type; c != null; c = c.getSuperclass()) {
-            fields.addAll(Arrays.asList(c.getDeclaredFields()));
-        }
-        return fields.toArray(new Field[0]);
-    }
-
-    private <T extends FluentPage> void initBaseUrl(T page, Class<?> parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        if (this.fluent.getBaseUrl() == null) {
-            return;
-        }
-
-        Method m = parent.getDeclaredMethod("withDefaultUrl", String.class);
-        boolean accessible = m.isAccessible();
-        m.setAccessible(true);
-        try {
-            m.invoke(page, this.fluent.getBaseUrl());
-        } finally {
-            m.setAccessible(accessible);
-        }
-
-    }
-
-    private <T extends FluentPage> void initDriver(T page, Class<?> parent) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        Method m = parent.getDeclaredMethod("initFluent", WebDriver.class);
-        boolean accessible = m.isAccessible();
-        m.setAccessible(true);
-        try {
-            m.invoke(page, this.fluent.getDriver());
-        } finally {
-            m.setAccessible(accessible);
-        }
-
     }
 
     private static void proxyElement(ElementLocatorFactory factory, Object page, Field field) {

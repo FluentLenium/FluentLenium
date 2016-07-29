@@ -2,7 +2,7 @@ package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
-import org.fluentlenium.core.Fluent;
+import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.conditions.IntegerConditions;
 
 import static org.fluentlenium.core.wait.FluentWaitMessages.equalToMessage;
@@ -41,9 +41,9 @@ public class FluentWaitIntegerMatcher implements IntegerConditions {
 
     @Override
     public boolean equalTo(final int value) {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return hasSize().equalTo(value);
             }
         }, matcher.negation ? notEqualToMessage(matcher.selectionName, value) : equalToMessage(matcher.selectionName, value));
@@ -52,9 +52,9 @@ public class FluentWaitIntegerMatcher implements IntegerConditions {
 
     @Override
     public boolean lessThan(final int value) {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return hasSize().lessThan(value);
             }
         }, matcher.negation ? notLessThanMessage(matcher.selectionName, value) : lessThanMessage(matcher.selectionName, value));
@@ -63,9 +63,9 @@ public class FluentWaitIntegerMatcher implements IntegerConditions {
 
     @Override
     public boolean lessThanOrEqualTo(final int value) {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return hasSize().lessThanOrEqualTo(value);
             }
         }, matcher.negation ? notLessThanOrEqualToMessage(matcher.selectionName, value) : lessThanOrEqualToMessage(matcher.selectionName, value));
@@ -74,9 +74,9 @@ public class FluentWaitIntegerMatcher implements IntegerConditions {
 
     @Override
     public boolean greaterThan(final int value) {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return hasSize().greaterThan(value);
             }
         }, matcher.negation ? notGreaterThanMessage(matcher.selectionName, value) : greaterThanMessage(matcher.selectionName, value));
@@ -85,9 +85,9 @@ public class FluentWaitIntegerMatcher implements IntegerConditions {
 
     @Override
     public boolean greaterThanOrEqualTo(final int value) {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return hasSize().greaterThanOrEqualTo(value);
             }
         }, matcher.negation ? notGreaterThanOrEqualToMessage(matcher.selectionName, value) : greaterThanOrEqualToMessage(matcher.selectionName, value));
@@ -96,9 +96,9 @@ public class FluentWaitIntegerMatcher implements IntegerConditions {
 
     @Override
     public boolean isVerified(final Predicate<Integer> predicate) {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return hasSize().isVerified(predicate);
             }
         }, matcher.negation ? isPredicateNotVerifiedMessage(matcher.selectionName) : isPredicateVerifiedMessage(matcher.selectionName));

@@ -20,8 +20,8 @@ public class BingTest extends FluentTest {
     @Test
     public void title_of_bing_should_contain_search_query_name() {
         goTo("http://www.bing.com");
-        fill("#sb_form_q").with("FluentLenium");
-        submit("#sb_form_go");
+        $("#sb_form_q").fill().with("FluentLenium");
+        $("#sb_form_go").submit();
         assertThat(title()).contains("FluentLenium");
     }
 }
@@ -91,12 +91,12 @@ You can use CSS1, CSS2 and CSS3 selectors with the same restrictions as in Selen
 
 If you want to find the list of elements which have:
 
-  - the `id` "title" : `find("#title")`
-  - the `class` name "small" : `find(".small")`
-  - the `tag` name "input" : `find("input")`
+  - the `id` "title" : `$("#title")`
+  - the `class` name "small" : `$(".small")`
+  - the `tag` name "input" : `$("input")`
 
 You are free to use most of the CSS3 syntax, which means that
-`find("input[class=rightForm]")`
+`$("input[class=rightForm]")`
 will return the list of all input elements which have the class rightForm
 
 #### Custom filter
@@ -104,20 +104,20 @@ But what if you want all the input that have text equal to "Sam" ?
 You can use filters to allow that kind of search. For example:
 
 ```java
-find(".small", withName("foo"))
-find(".small", withClass("foo"))
-find(".small", withId("idOne"))
-find(".small", withText("This field is mandatory."))
+$(".small", withName("foo"))
+$(".small", withClass("foo"))
+$(".small", withId("idOne"))
+$(".small", withText("This field is mandatory."))
 ```
 
 You can skip CSS selector argument:
-`find(withId("idOne"))` will return the element whose id attribute is "idOne".
+`$(withId("idOne"))` will return the element whose id attribute is "idOne".
 
 You can use `By` locator `Selenium object` instead of CSS selector argument:
-`find(By.cssSelector(".header"))` will return the element using `By` locator as a reference - so you can use everything what `By` object offering to you.
+`$(By.cssSelector(".header"))` will return the element using `By` locator as a reference - so you can use everything what `By` object offering to you.
 
 You can also write chained filters:
-`find(".small", withName("foo"), withId("id1"))` will return all the elements matching the 3 criteria.
+`$(".small", withName("foo"), withId("id1"))` will return all the elements matching the 3 criteria.
 
 You can do more complex string matching on the above filters using the following methods:
 
@@ -132,16 +132,16 @@ You can do more complex string matching on the above filters using the following
 For each of them, you can choose to use a css selector:
 
 ```java
-find(".small", withName().notContains("name"))
-find(".small", withId().notStartsWith("id"))
-find(".small", withText().endsWith("Female"))
+$(".small", withName().notContains("name"))
+$(".small", withId().notStartsWith("id"))
+$(".small", withText().endsWith("Female"))
 ```
 
 Or to be more precise, you can use regular expressions:
 
 ```java
-find(".small", withName().contains(regex("na?me[0-9]*")))
-find(".small", withName().notStartsWith(regex("na?me[0-9]*")))
+$(".small", withName().contains(regex("na?me[0-9]*")))
+$(".small", withName().notStartsWith(regex("na?me[0-9]*")))
 ```
 
 Contains, startsWith and endsWith with a regexp pattern look for a subsection of the pattern.
@@ -157,35 +157,35 @@ findFirst(myCssSelector)
 or alternatively
 
 ```java
-find(myCssSelector).first()
+$(myCssSelector).first()
 ```
 
 If you want the element at the given position:
 
 ```java
-find(myCssSelector, 2)
+$(myCssSelector, 2)
 ```
 
 Of course, you can use both position filter and custom filter:
 
 ```java
-find(myCssSelector, 2, withName("foo"))
+$(myCssSelector, 2, withName("foo"))
 ```
 
 
 #### Find on children
 You can also chain the find call:
-`find(myCssSelector).find("input")` will return all the input elements in the css selector tree.
+`$(myCssSelector).$("input")` will return all the input elements in the css selector tree.
 You can be more specific:
 
 ```java
-find(myCssSelector, 2, withName("foo")).find("input", withName("bar"))
+$(myCssSelector, 2, withName("foo")).$("input", withName("bar"))
 ```
 
 or
 
 ```java
-find(myCssSelector, 2, withName("foo")).findFirst("input", withName("bar"))
+$(myCssSelector, 2, withName("foo")).findFirst("input", withName("bar"))
 ```
 
 ## Element
@@ -213,20 +213,20 @@ findFirst(myCssSelector).getAttribute("myCustomAttribute")
 
 You can also access a list of all the names, visible text, and ids of a list of elements:
 ```java
-find(myCssSelector).getNames()
-find(By.id("foo")).getIds()
-find(myCssSelector).getValues()
-find(myCssSelector).getAttributes("myCustomAttribute")
-find(myCssSelector).getTexts()
+$(myCssSelector).getNames()
+$(By.id("foo")).getIds()
+$(myCssSelector).getValues()
+$(myCssSelector).getAttributes("myCustomAttribute")
+$(myCssSelector).getTexts()
 ```
 
 If you want to know the name, the id, the value, the visible text or the value of an attribute of the first element on the list:
 ```java
-find(myCssSelector).getName()
-find(myCssSelector).getId()
-find(myCssSelector).getValue()
-find(myCssSelector).getAttribute("myCustomAttribute")
-find(myCssSelector).getText()
+$(myCssSelector).getName()
+$(myCssSelector).getId()
+$(myCssSelector).getValue()
+$(myCssSelector).getAttribute("myCustomAttribute")
+$(myCssSelector).getText()
 ```
 
 If you need to get the underlying html content of an element:
@@ -249,13 +249,13 @@ findFirst(myCssSelector).isSelected()
 If you need to retrieve other elements from a selected one, you 
 can use [XPath axes](http://www.w3schools.com/xsl/xpath_axes.asp).
 
-find(myCssSelector()).axes().parent()
-find(myCssSelector()).axes().descendants()
-find(myCssSelector()).axes().ancestors()
-find(myCssSelector()).axes().followings()
-find(myCssSelector()).axes().followingSiblings()
-find(myCssSelector()).axes().precedings()
-find(myCssSelector()).axes().precedingSiblings()
+$(myCssSelector()).axes().parent()
+$(myCssSelector()).axes().descendants()
+$(myCssSelector()).axes().ancestors()
+$(myCssSelector()).axes().followings()
+$(myCssSelector()).axes().followingSiblings()
+$(myCssSelector()).axes().precedings()
+$(myCssSelector()).axes().precedingSiblings()
 
 ## Keyboard and Mouse actions
 
@@ -265,15 +265,15 @@ Advanced keyboard and mouse actions are available using keyboard() and mouse() i
 Clicking, filling, submitting and cleaning an element or list of elements is simple and intuitive.
 
 ### Fill
-`fill("input").with("bar")` or `find("input").text("bar")` will fill all the input elements with bar. 
-If you want for example to exclude checkboxes, you can use the css filtering like `fill("input:not([type='checkbox'])").with("tomato")`, 
-you can also use the filtering provided by FluentLenium `fill("input", with("type", notContains("checkbox"))).with("tomato")`
+`$("input").fill().with("bar")` will fill all the input elements with bar.
+If you want for example to exclude checkboxes, you can use the css filtering like `$("input:not([type='checkbox'])").fill().with("tomato")`,
+you can also use the filtering provided by FluentLenium `$("input", with("type", notContains("checkbox"))).fill().with("tomato")`
 
 
-`fill("input").with("myLogin","myPassword")` will fill the first element of the input selection with myLogin, the second with myPassword. 
+`$("input").fill().with("myLogin","myPassword")` will fill the first element of the input selection with myLogin, the second with myPassword.
 If there are more input elements found, the last value (myPassword) will be repeated for each subsequent element.
 
-If you're trying to fill a select element, you can use `fillSelect("daySelector").withValue("MONDAY")` to fill it with a value, `fillSelect("daySelector").withIndex(1)` to fill it with a value by its index or `fillSelect("daySelector").withText("Monday")` to fill it with a value by its text.
+If you're trying to fill a select element, you can use `$("daySelector").fillSelect().withValue("MONDAY")` to fill it with a value, `fillSelect("daySelector").withIndex(1)` to fill it with a value by its index or `fillSelect("daySelector").withText("Monday")` to fill it with a value by its text.
 
 `fillSelect`can also be invoked directly on an element, for instance `findFirst("daySelector").fillSelect().withValue("MONDAY")`.
 
@@ -281,33 +281,33 @@ Don't forget, only visible fields will be modified. It simulates a real person u
 
 ### Click
 ```java
-click("#create-button")
+$("#create-button").click()
 ```
 
 This will click on all the enabled fields returned by the search.
 
 ### Clear
 ```java
-clear("#firstname")
+$("#firstname").clear()
 ```
 
 This will clear all the enabled fields returned by the search.
 
 ### Submit
 ```java
-submit("#account")
+$("#account").submit()
 ```
 
 This will submit all the enabled fields returned by the search.
 
 ### Double click
 ```java
-find("#create-button").doubleClick()
+$("#create-button").doubleClick()
 ```
 
 ### Mouse over
 ```java
-find("#create-button").mouseOver()
+$("#create-button").mouseOver()
 ```
 
 ## Events
@@ -382,8 +382,8 @@ public class LoginPage extends FluentPage {
         assertThat(title()).isEqualTo("MyTitle");
     }
     public void fillAndSubmitForm(String... paramsOrdered) {
-        fill("input").with(paramsOrdered);
-        click("#create-button");
+        $("input").fill().with(paramsOrdered);
+        $("#create-button").click();
     }
 }
 ```
@@ -397,8 +397,8 @@ public class LoginPage extends FluentPage {
         assertThat(title()).isEqualTo("MyTitle");
     }
     public void fillAndSubmitForm(String... paramsOrdered) {
-        fill("input").with(paramsOrdered);
-        click("#create-button");
+        $("input").fill().with(paramsOrdered);
+        $("#create-button").click();
     }
 }
 ```
@@ -419,7 +419,7 @@ Or if you have the [AssertJ](https://github.com/joel-costigliola/assertj-core) m
 public void checkLoginFailed() {
 	goTo(loginPage);
 	loginPage.fillAndSubmitLoginForm("login","wrongPass");
-	assertThat(find(".error")).hasSize(1);
+	assertThat($(".error")).hasSize(1);
 	assertThat(loginPage).isAt();
 }
 ```
@@ -488,7 +488,7 @@ public class LoginPage extends FluentPage {
        assertThat(title()).isEqualTo("MyTitle");
    }
    public void fillAndSubmitForm(String... paramsOrdered) {
-       fill("input").with(paramsOrdered);
+       $("input").fill()with(paramsOrdered);
        createButton.click();
    }
 }
@@ -502,7 +502,7 @@ that FluentWebElement exposes.
 public class LoginPage extends FluentPage {
    MyButton createButton;
    public void fillAndSubmitForm(String... paramsOrdered) {
-       fill("input").with(paramsOrdered);
+       $("input").fill().with(paramsOrdered);
        createButton.clickTwice();
    }
    public static class MyButton {
@@ -534,7 +534,7 @@ public class LoginPage extends FluentPage {
        assertThat(title()).isEqualTo("MyTitle");
    }
    public void fillAndSubmitForm(String... paramsOrdered) {
-       fill("input").with(paramsOrdered);
+       $("input").fill().with(paramsOrdered);
        createButton.click();
    }
 }
@@ -554,7 +554,7 @@ public class LoginPage extends FluentPage {
        assertThat(buttons).hasSize(2);
    }
    public void fillAndSubmitForm(String... paramsOrdered) {
-       fill("input").with(paramsOrdered);
+       $("input").fill().with(paramsOrdered);
        createButtons.get(1).click();
    }
 }
@@ -650,7 +650,7 @@ await().atMost(5, TimeUnit.SECONDS).until(element).isEnabled();
 When running Java >= 8, you can use lambdas with `until`, `untilPredicate`, `untilElement` or `untilElements`.
 ```java
 await().atMost(5, TimeUnit.SECONDS).untilElement(() -> findFirst(".button")).isEnabled();
-await().atMost(5, TimeUnit.SECONDS).untilElements(() -> find(".button")).areEnabled();
+await().atMost(5, TimeUnit.SECONDS).untilElements(() -> $(".button")).areEnabled();
 
 await().atMost(5, TimeUnit.SECONDS).untilPredicate((f) -> findFirst(".button").isEnabled());
 await().atMost(5, TimeUnit.SECONDS).until(() -> findFirst(".button").isEnabled());
@@ -689,12 +689,12 @@ await().atMost(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWi
 ```
 ## Alternative Syntax
 
-If you are more familiar with the [JQuery](http://jquery.com/) syntax, you can use the familiar `$` method:
+If you don't like the [JQuery](http://jquery.com/) syntax, you can replace `$` with find method:
 
 ```java
 goTo("http://mywebpage/");
-$("#firstName").text("toto");
-$("#create-button").click();
+find("#firstName").text("toto");
+find("#create-button").click();
 assertThat(title()).isEqualTo("Hello toto");
 ```
 
@@ -740,7 +740,7 @@ If you want to test concurrency or if you need for any reason to not use the mec
 ```java
 = new IsolatedTest().goTo(DEFAULT_URL).
     await().atMost(1, SECONDS).until(".small").with("name").equalTo("name").isPresent().
-    find("input").first().isEnabled();
+    $("input").first().isEnabled();
 ```
 
 
@@ -950,8 +950,8 @@ FluentLenium uses jUnit by default. You can use test using [jUnit](http://www.ju
 
 ```java
 goTo("http://mywebpage/");
-fill("#firstName").with("toto");
-click("#create-button");
+$("#firstName").fill().with("toto");
+$("#create-button").click();
 assertEqual("Hello toto",title());
 ```
 
@@ -961,24 +961,23 @@ Fest-Assert is now deprecated. This lib is no longer maintained. Consider switch
 ### AssertJ
 ```java
 goTo("http://mywebpage/");
-fill("#firstName").with("toto");
-click("#create-button");
+$("#firstName").fill().with("toto");
+$("#create-button").click();
 assertThat(title()).isEqualTo("Hello toto");
-assertThat(find(myCssSelector)).hasText("present text");
-assertThat(find(myCssSelector)).hasNotText("not present text");
-assertThat(find(myCssSelecto1)).hasSize(7);
-assertThat(find(myCssSelecto2)).hasSize().lessThan(5);
-assertThat(find(myCssSelecto2)).hasSize().lessThanOrEqualTo(5);
-assertThat(find(myCssSelecto3)).hasSize().greaterThan(2);
-assertThat(find(myCssSelecto3)).hasSize().greaterThanOrEqualTo(2);
+assertThat($(myCssSelector)).hasText("present text");
+assertThat($(myCssSelector)).hasNotText("not present text");
+assertThat($(myCssSelecto1)).hasSize(7);
+assertThat($(myCssSelecto2)).hasSize().lessThan(5);
+assertThat($(myCssSelecto2)).hasSize().lessThanOrEqualTo(5);
+assertThat($(myCssSelecto3)).hasSize().greaterThan(2);
+assertThat($(myCssSelecto3)).hasSize().greaterThanOrEqualTo(2);
 ```
-
 
 ### Hamcrest
 ```java
 goTo("http://mywebpage/");
-fill("#firstName").with("toto");
-click("#create-button");
+$("#firstName").fill().with("toto");
+$("#create-button").click();
 assertThat(title(),equalTo("Hello toto"));
 ```
 ##Resources

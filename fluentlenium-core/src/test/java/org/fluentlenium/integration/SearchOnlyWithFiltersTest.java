@@ -87,7 +87,7 @@ public class SearchOnlyWithFiltersTest extends LocalFluentCase {
     public void checkClickWorks() {
         goTo(DEFAULT_URL);
         assertThat(title()).contains("Selenium");
-        click(withId("linkToPage2"));
+        $(withId("linkToPage2")).click();
         assertThat(title()).isEqualTo("Page 2");
     }
 
@@ -95,20 +95,20 @@ public class SearchOnlyWithFiltersTest extends LocalFluentCase {
     public void checkClearWorks() {
         goTo(DEFAULT_URL);
         assertThat($("#name").getValue()).isEqualTo("John");
-        clear(withId("name"));
+        $(withId("name")).clear();
         assertThat($("#name").getValue()).isEqualTo("");
     }
 
     @Test
     public void checkTextWorks() {
         goTo(DEFAULT_URL);
-        assertThat(text(withName("name"))).containsOnly("Small 1");
+        assertThat($(withName("name")).getTexts()).containsOnly("Small 1");
     }
 
     @Test
     public void checkValueWorks() {
         goTo(DEFAULT_URL);
-        assertThat(value(withId("name"))).containsOnly("John");
+        assertThat($(withId("name")).getValues()).containsOnly("John");
     }
 
     @Test

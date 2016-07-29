@@ -1,6 +1,6 @@
 package org.fluentlenium.integration;
 
-import org.fluentlenium.core.domain.FluentJavascript;
+import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 import org.mockito.Mockito;

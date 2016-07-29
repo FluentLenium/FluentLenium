@@ -4,7 +4,7 @@ import org.fluentlenium.assertj.custom.AlertAssert;
 import org.fluentlenium.assertj.custom.FluentListAssert;
 import org.fluentlenium.assertj.custom.FluentWebElementAssert;
 import org.fluentlenium.assertj.custom.PageAssert;
-import org.fluentlenium.core.Alert;
+import org.fluentlenium.core.alert.Alert;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;

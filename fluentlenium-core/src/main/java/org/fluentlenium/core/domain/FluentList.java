@@ -3,7 +3,7 @@ package org.fluentlenium.core.domain;
 import org.fluentlenium.core.action.FluentDefaultActions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.filter.Filter;
-import org.fluentlenium.core.search.SearchActions;
+import org.fluentlenium.core.search.SearchControl;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  *
  */
-public interface FluentList<E extends FluentWebElement> extends List<E>, FluentDefaultActions<FluentList>, SearchActions {
+public interface FluentList<E extends FluentWebElement> extends List<E>, FluentDefaultActions<FluentList>, SearchControl {
 
     /**
      * Return the first element of the list

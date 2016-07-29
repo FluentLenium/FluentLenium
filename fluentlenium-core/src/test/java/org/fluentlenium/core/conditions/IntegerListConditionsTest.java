@@ -5,7 +5,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.FluentThread;
+import org.fluentlenium.core.context.FluentThread;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;

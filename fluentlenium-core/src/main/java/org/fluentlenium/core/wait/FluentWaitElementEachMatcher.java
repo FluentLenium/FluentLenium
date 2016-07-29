@@ -2,7 +2,7 @@ package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
-import org.fluentlenium.core.Fluent;
+import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.IntegerConditions;
 import org.fluentlenium.core.conditions.RectangleConditions;
@@ -55,9 +55,9 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public boolean isVerified(final Predicate<FluentWebElement> predicate, final boolean defaultValue) {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return eachCondition().isVerified(predicate, defaultValue);
             }
         }, matcher.negation ? isPredicateNotVerifiedMessage(matcher.selectionName) : isPredicateVerifiedMessage(matcher.selectionName));
@@ -66,9 +66,9 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public boolean isVerified(final Predicate<FluentWebElement> predicate) {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return eachCondition().isVerified(predicate);
             }
         }, matcher.negation ? isPredicateNotVerifiedMessage(matcher.selectionName) : isPredicateVerifiedMessage(matcher.selectionName));
@@ -77,9 +77,9 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public boolean isClickable() {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return eachCondition().isClickable();
             }
         }, matcher.negation ? isNotClickableMessage(matcher.selectionName) : isClickableMessage(matcher.selectionName));
@@ -88,9 +88,9 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public boolean isStale() {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return eachCondition().isStale();
             }
         }, matcher.negation ? isNotStaleMessage(matcher.selectionName) : isStaleMessage(matcher.selectionName));
@@ -99,9 +99,9 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public boolean isDisplayed() {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return eachCondition().isDisplayed();
             }
         }, matcher.negation ? isNotDisplayedMessage(matcher.selectionName) : isDisplayedMessage(matcher.selectionName));
@@ -110,9 +110,9 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public boolean isEnabled() {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return eachCondition().isEnabled();
             }
         }, matcher.negation ? isNotEnabledMessage(matcher.selectionName) : isEnabledMessage(matcher.selectionName));
@@ -121,9 +121,9 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public boolean isSelected() {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return eachCondition().isSelected();
             }
         }, matcher.negation ? isNotSelectedMessage(matcher.selectionName) : isSelectedMessage(matcher.selectionName));
@@ -132,9 +132,9 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public boolean hasText(final String text) {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return eachCondition().hasText(text);
             }
         }, matcher.negation ? hasNotTextMessage(matcher.selectionName, text) : hasTextMessage(matcher.selectionName, text));
@@ -143,9 +143,9 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public boolean containsText(final String text) {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return eachCondition().containsText(text);
             }
         }, matcher.negation ? hasNotTextMessage(matcher.selectionName, text) : hasTextMessage(matcher.selectionName, text));
@@ -154,9 +154,9 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public boolean hasAttribute(final String attribute, final String value) {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return eachCondition().hasAttribute(attribute, value);
             }
         }, matcher.negation ? hasNotAttributeMessage(matcher.selectionName, attribute, value) : hasAttributeMessage(matcher.selectionName, attribute, value));
@@ -165,9 +165,9 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public boolean hasId(final String id) {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return eachCondition().hasId(id);
             }
         }, matcher.negation ? hasNotIdMessage(matcher.selectionName, id) : hasIdMessage(matcher.selectionName, id));
@@ -176,9 +176,9 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public boolean hasName(final String name) {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return eachCondition().hasName(name);
             }
         }, matcher.negation ? hasNotNameMessage(matcher.selectionName, name) : hasNameMessage(matcher.selectionName, name));
@@ -187,9 +187,9 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public boolean isPresent() {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return eachCondition().isPresent();
             }
         }, matcher.negation ? isNotPresentMessage(matcher.selectionName) : isPresentMessage(matcher.selectionName));
@@ -198,9 +198,9 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public boolean hasSize(final int size) {
-        matcher.until(matcher.wait, new Predicate<Fluent>() {
+        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return eachCondition().hasSize(size);
             }
         }, matcher.negation ? hasNotSizeMessage(matcher.selectionName, size) : hasSizeMessage(matcher.selectionName, size));

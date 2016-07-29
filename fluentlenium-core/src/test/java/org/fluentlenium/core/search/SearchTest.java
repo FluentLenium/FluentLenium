@@ -3,7 +3,7 @@ package org.fluentlenium.core.search;
 
 import com.google.common.collect.Lists;
 import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.FluentThread;
+import org.fluentlenium.core.context.FluentThread;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;

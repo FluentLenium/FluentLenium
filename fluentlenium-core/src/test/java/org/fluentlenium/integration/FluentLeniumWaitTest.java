@@ -4,7 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.Fluent;
+import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Before;
@@ -427,9 +427,9 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test
     public void checkPredicate() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(800, TimeUnit.MILLISECONDS).untilPredicate(new Predicate<Fluent>() {
+        await().pollingEvery(800, TimeUnit.MILLISECONDS).untilPredicate(new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent o) {
+            public boolean apply(FluentDriver o) {
                 return true;
             }
         });
@@ -438,9 +438,9 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test(expected = TimeoutException.class)
     public void checkPredicateFail() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1000).untilPredicate(new Predicate<Fluent>() {
+        await().atMost(1000).untilPredicate(new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent o) {
+            public boolean apply(FluentDriver o) {
                 return false;
             }
         });
@@ -449,9 +449,9 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test
     public void checkFunction() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1000, TimeUnit.MILLISECONDS).until(new Function<Fluent, Boolean>() {
+        await().pollingEvery(1000, TimeUnit.MILLISECONDS).until(new Function<FluentDriver, Boolean>() {
             @Override
-            public Boolean apply(Fluent fluent) {
+            public Boolean apply(FluentDriver fluent) {
                 return true;
             }
         });
@@ -460,9 +460,9 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
     @Test(expected = TimeoutException.class)
     public void checkFunctionFail() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1000).until(new Function<Fluent, Boolean>() {
+        await().atMost(1000).until(new Function<FluentDriver, Boolean>() {
             @Override
-            public Boolean apply(Fluent fluent) {
+            public Boolean apply(FluentDriver fluent) {
                 return false;
             }
         });

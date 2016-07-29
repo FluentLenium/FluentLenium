@@ -1,4 +1,4 @@
-package org.fluentlenium.core;
+package org.fluentlenium.core.alert;
 
 import org.openqa.selenium.WebDriver;
 

@@ -1,7 +1,7 @@
 package org.fluentlenium.core.domain;
 
 import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.FluentThread;
+import org.fluentlenium.core.context.FluentThread;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
 import org.fluentlenium.core.action.FluentDefaultActions;
@@ -11,7 +11,7 @@ import org.fluentlenium.core.axes.Axes;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
-import org.fluentlenium.core.search.SearchActions;
+import org.fluentlenium.core.search.SearchControl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -23,7 +23,7 @@ import java.util.Arrays;
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
-public class FluentWebElement implements FluentDefaultActions<FluentWebElement>, SearchActions<FluentWebElement> {
+public class FluentWebElement implements FluentDefaultActions<FluentWebElement>, SearchControl<FluentWebElement> {
     private final WebElement webElement;
     private final Search search;
     private final Axes axes;

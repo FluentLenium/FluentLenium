@@ -1,7 +1,7 @@
 package org.fluentlenium.assertj.custom;
 
 import org.assertj.core.api.AbstractAssert;
-import org.fluentlenium.core.Alert;
+import org.fluentlenium.core.alert.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 
 public class AlertAssert extends AbstractAssert<AlertAssert, Alert> {
