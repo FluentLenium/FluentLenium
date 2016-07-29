@@ -72,7 +72,6 @@ public class EventsSupport implements EventListener {
         }
     }
 
-
     @Override
     public void beforeNavigateRefresh(WebDriver driver) {
         for (NavigateListener listener : this.eventsRegistry.beforeNavigateRefresh) {

@@ -3,11 +3,13 @@ package org.fluentlenium.core.events;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class EventsRegistry {
+public class EventsRegistry implements Closeable {
 
     private final EventFiringWebDriver eventDriver;
 
@@ -57,14 +59,19 @@ public class EventsRegistry {
         this.register(this.support);
     }
 
-    public EventsRegistry register(final EventListener eventListener) {
+    protected EventsRegistry register(final EventListener eventListener) {
         this.eventDriver.register(new EventAdapter(eventListener));
         return this;
     }
 
-    public EventsRegistry unregister(final EventListener eventListener) {
+    protected EventsRegistry unregister(final EventListener eventListener) {
         this.eventDriver.unregister(new EventAdapter(eventListener));
         return this;
+    }
+
+    @Override
+    public void close() throws IOException {
+        this.unregister(this.support);
     }
 
     public WebDriver getWrappedDriver() {

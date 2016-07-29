@@ -2,8 +2,8 @@ package org.fluentlenium.core.domain;
 
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentThread;
-import org.fluentlenium.core.action.FillConstructor;
-import org.fluentlenium.core.action.FillSelectConstructor;
+import org.fluentlenium.core.action.Fill;
+import org.fluentlenium.core.action.FillSelect;
 import org.fluentlenium.core.action.FluentDefaultActions;
 import org.fluentlenium.core.action.KeyboardElementActions;
 import org.fluentlenium.core.action.MouseElementActions;
@@ -18,6 +18,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.lang.reflect.Constructor;
+import java.util.Arrays;
 
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
@@ -264,6 +265,9 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
         return webElement.getSize();
     }
 
+    public FluentList<FluentWebElement> asList() {
+        return new FluentListImpl<>(Arrays.asList(this));
+    }
 
     @Override
     public FluentList<FluentWebElement> $(String selector, Filter... filters) {
@@ -410,8 +414,8 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      *
      * @return fill constructor
      */
-    public FillConstructor fill() {
-        return new FillConstructor(this, FluentThread.get().getDriver());
+    public Fill fill() {
+        return new Fill(asList(), FluentThread.get().getDriver());
     }
 
     /**
@@ -420,8 +424,8 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      *
      * @return fill constructor
      */
-    public FillSelectConstructor fillSelect() {
-        return new FillSelectConstructor(this, FluentThread.get().getDriver());
+    public FillSelect fillSelect() {
+        return new FillSelect(asList(), FluentThread.get().getDriver());
     }
 
     /**

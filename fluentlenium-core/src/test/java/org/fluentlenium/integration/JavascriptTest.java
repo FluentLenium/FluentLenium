@@ -35,7 +35,6 @@ public class JavascriptTest extends LocalFluentCase {
     public void should_executeScript_return_String() {
         final String script = "return 'string';";
         final FluentJavascript fluentJavascript = executeScript(script);
-        assertThat(fluentJavascript.getScript()).isEqualTo(script);
         assertThat(fluentJavascript.isBooleanResult()).isFalse();
         assertThat(fluentJavascript.isDoubleResult()).isFalse();
         assertThat(fluentJavascript.isLongResult()).isFalse();
@@ -50,7 +49,6 @@ public class JavascriptTest extends LocalFluentCase {
     public void should_executeScript_return_Boolean() {
         final String script = "return true;";
         final FluentJavascript fluentJavascript = executeScript(script);
-        assertThat(fluentJavascript.getScript()).isEqualTo(script);
         assertThat(fluentJavascript.isBooleanResult()).isTrue();
         assertThat(fluentJavascript.isDoubleResult()).isFalse();
         assertThat(fluentJavascript.isLongResult()).isFalse();
@@ -65,7 +63,6 @@ public class JavascriptTest extends LocalFluentCase {
     public void should_executeScript_return_Double() {
         final String script = "return 12.12;";
         final FluentJavascript fluentJavascript = executeScript(script);
-        assertThat(fluentJavascript.getScript()).isEqualTo(script);
         assertThat(fluentJavascript.isBooleanResult()).isFalse();
         assertThat(fluentJavascript.isDoubleResult()).isTrue();
         assertThat(fluentJavascript.isLongResult()).isFalse();
@@ -80,7 +77,6 @@ public class JavascriptTest extends LocalFluentCase {
     public void should_executeScript_return_Long() {
         final String script = "return 5;";
         final FluentJavascript fluentJavascript = executeScript(script);
-        assertThat(fluentJavascript.getScript()).isEqualTo(script);
         assertThat(fluentJavascript.isBooleanResult()).isFalse();
         assertThat(fluentJavascript.isDoubleResult()).isFalse();
         assertThat(fluentJavascript.isLongResult()).isTrue();
@@ -95,7 +91,6 @@ public class JavascriptTest extends LocalFluentCase {
     public void should_executeScript_return_List() {
         final String script = "return Array('string 1', 'string 2', 5, 12.12, true, Array('test 1', 'test 2'));";
         final FluentJavascript fluentJavascript = executeScript(script);
-        assertThat(fluentJavascript.getScript()).isEqualTo(script);
         assertThat(fluentJavascript.isBooleanResult()).isFalse();
         assertThat(fluentJavascript.isDoubleResult()).isFalse();
         assertThat(fluentJavascript.isLongResult()).isFalse();
