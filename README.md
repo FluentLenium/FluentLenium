@@ -831,12 +831,6 @@ Surefire maven plugin for example.
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-junit47</artifactId>
-                    </dependency>
-                </dependencies>
                 <configuration>
                     <parallel>methods</parallel>
                     <threadCount>4</threadCount>
@@ -859,12 +853,6 @@ Surefire maven plugin for example.
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-testng</artifactId>
-                    </dependency>
-                </dependencies>
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>test-suites/basic.xml</suiteXmlFile>

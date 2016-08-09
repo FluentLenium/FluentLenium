@@ -46,8 +46,9 @@
                 <configuration>
                     <parallel>all</parallel>
                     <threadCount>4</threadCount>
-                    <forkCount>8</forkCount>
-                    <reuseForks>true</reuseForks>
+                    <systemPropertyVariables>
+                        <surefire.forkNumber>0${surefire.forkNumber}</surefire.forkNumber>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>
