@@ -1,8 +1,6 @@
-package org.fluentlenium.core.domain;
+package org.fluentlenium.core.script;
 
-import org.fluentlenium.core.Fluent;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
@@ -11,15 +9,14 @@ import java.util.List;
  *
  * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
  */
-public class FluentJavascript extends Fluent {
+public class FluentJavascript {
     private final Object result;
 
-    public FluentJavascript(WebDriver driver, boolean async, String script, Object... args) {
-        super(driver);
+    public FluentJavascript(JavascriptExecutor executor, boolean async, String script, Object... args) {
         if (async) {
-            this.result = ((JavascriptExecutor) driver).executeAsyncScript(script, args);
+            this.result = executor.executeAsyncScript(script, args);
         } else {
-            this.result = ((JavascriptExecutor) driver).executeScript(script, args);
+            this.result = executor.executeScript(script, args);
         }
     }
 

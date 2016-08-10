@@ -2,7 +2,7 @@ package org.fluentlenium.assertj.unit;
 
 import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.assertj.custom.AlertAssert;
-import org.fluentlenium.core.Alert;
+import org.fluentlenium.core.alert.Alert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

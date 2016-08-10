@@ -2,9 +2,7 @@ package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
 import org.assertj.core.api.ThrowableAssert;
-import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.Fluent;
-import org.fluentlenium.core.FluentThread;
+import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
@@ -35,12 +33,9 @@ public class FluentWaitEachElementMatcherTest {
     private Search search;
 
     @Mock
-    private Fluent fluent;
+    private FluentDriver fluent;
 
     private FluentWait wait;
-
-    @Mock
-    private FluentAdapter fluentAdapter;
 
     @Mock
     private FluentWebElement fluentWebElement1;
@@ -65,7 +60,6 @@ public class FluentWaitEachElementMatcherTest {
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
-        FluentThread.set(fluentAdapter);
 
         wait = new FluentWait(fluent, search);
         wait.atMost(1L, TimeUnit.MILLISECONDS);

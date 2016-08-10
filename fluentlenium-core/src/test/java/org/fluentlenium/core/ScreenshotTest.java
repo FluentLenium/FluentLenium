@@ -2,6 +2,7 @@ package org.fluentlenium.core;
 
 
 import org.fluentlenium.adapter.FluentAdapter;
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -16,14 +17,23 @@ public class ScreenshotTest {
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
 
+    private FluentAdapter adapter;
+
     @Test(expected = WebDriverException.class)
     public void when_browser_doesnt_accept_screenshot_then_custom_error() {
-        new FluentAdapter(new CustomWebDriverNoScreenshot()).takeScreenShot();
+        adapter = new FluentAdapter(new CustomWebDriverNoScreenshot());
+        adapter.takeScreenShot();
     }
 
     @Test
     public void when_browser_does_accept_screenshot_then_no_exception() throws IOException {
-        new FluentAdapter(new CustomWebDriverScreenshot()).takeScreenShot(folder.newFile("test.jpg").getAbsolutePath());
+        adapter = new FluentAdapter(new CustomWebDriverScreenshot());
+        adapter.takeScreenShot(folder.newFile("test.jpg").getAbsolutePath());
+    }
+
+    @After
+    public void release() {
+        adapter.quit();
     }
 }
 

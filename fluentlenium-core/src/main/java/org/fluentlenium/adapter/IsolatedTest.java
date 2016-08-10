@@ -11,12 +11,20 @@ public class IsolatedTest extends FluentAdapter {
 
     public IsolatedTest() {
         initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
-        init();
     }
 
     public IsolatedTest(WebDriver webDriver) {
         initFluent(webDriver).withDefaultUrl(getDefaultBaseUrl());
-        init();
+    }
+
+    public IsolatedTest(DriverContainer driverContainer) {
+        super(driverContainer);
+        initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
+    }
+
+    public IsolatedTest(DriverContainer driverContainer, WebDriver webDriver) {
+        super(driverContainer);
+        initFluent(webDriver).withDefaultUrl(getDefaultBaseUrl());
     }
 
 }

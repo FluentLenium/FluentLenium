@@ -37,12 +37,11 @@ public class PageAdapterTest extends FluentAdapter {
      */
     @Before
     public void before() {
-        page = new InjectedPageAccueil();
+        initFluent(driver);
+
+        page = createPage(InjectedPageAccueil.class);
         page.testVariable = "test";
         reference = page;
-
-        initFluent(driver);
-        init();
     }
 
     @After

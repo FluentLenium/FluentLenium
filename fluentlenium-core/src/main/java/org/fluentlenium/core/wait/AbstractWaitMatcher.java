@@ -2,7 +2,7 @@ package org.fluentlenium.core.wait;
 
 
 import com.google.common.base.Predicate;
-import org.fluentlenium.core.Fluent;
+import org.fluentlenium.core.FluentDriver;
 
 /**
  * Common class for all WaitMatcher instances.
@@ -25,7 +25,7 @@ public abstract class AbstractWaitMatcher {
      * @param present predicate to wait for.
      * @param defaultMessage default message to use.
      */
-    protected void until(FluentWait wait, Predicate<Fluent> present, String defaultMessage) {
+    protected void until(FluentWait wait, Predicate<FluentDriver> present, String defaultMessage) {
         if (wait.useCustomMessage()) {
             wait.untilPredicate(present);
         } else {

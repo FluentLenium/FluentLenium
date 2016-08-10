@@ -3,7 +3,7 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
-import org.fluentlenium.core.Fluent;
+import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.RectangleConditions;
@@ -68,9 +68,9 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
 
     @Override
     public boolean isVerified(final Predicate<FluentWebElement> predicate) {
-        until(wait, new Predicate<Fluent>() {
+        until(wait, new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return condition().isVerified(predicate);
             }
         }, negation ? isPredicateNotVerifiedMessage(selectionName) : isPredicateVerifiedMessage(selectionName));
@@ -85,8 +85,8 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
      */
     @Deprecated
     public void isAboveScreenOrInvisible() {
-        Predicate<Fluent> isAbove = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
+        Predicate<FluentDriver> isAbove = new com.google.common.base.Predicate<FluentDriver>() {
+            public boolean apply(FluentDriver fluent) {
                 return Iterables.all(find(), isAboveScreenTopOrInvisible());
             }
         };
@@ -106,8 +106,8 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
 
     @Override
     public boolean hasAttribute(final String attribute, final String value) {
-        Predicate<Fluent> hasAttribute = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
+        Predicate<FluentDriver> hasAttribute = new com.google.common.base.Predicate<FluentDriver>() {
+            public boolean apply(FluentDriver fluent) {
                 return condition().hasAttribute(attribute, value);
             }
         };
@@ -117,8 +117,8 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
 
     @Override
     public boolean hasId(final String value) {
-        Predicate<Fluent> hasId = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
+        Predicate<FluentDriver> hasId = new com.google.common.base.Predicate<FluentDriver>() {
+            public boolean apply(FluentDriver fluent) {
                 return condition().hasId(value);
             }
         };
@@ -128,8 +128,8 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
 
     @Override
     public boolean hasName(final String value) {
-        Predicate<Fluent> hasName = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
+        Predicate<FluentDriver> hasName = new com.google.common.base.Predicate<FluentDriver>() {
+            public boolean apply(FluentDriver fluent) {
                 return condition().hasName(value);
             }
         };
@@ -139,8 +139,8 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
 
     @Override
     public boolean containsText(final String value) {
-        Predicate<Fluent> containsText = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
+        Predicate<FluentDriver> containsText = new com.google.common.base.Predicate<FluentDriver>() {
+            public boolean apply(FluentDriver fluent) {
                 return condition().containsText(value);
             }
         };
@@ -150,8 +150,8 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
 
     @Override
     public boolean hasText(final String value) {
-        Predicate<Fluent> hasText = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
+        Predicate<FluentDriver> hasText = new com.google.common.base.Predicate<FluentDriver>() {
+            public boolean apply(FluentDriver fluent) {
                 return condition().hasText(value);
             }
         };
@@ -163,8 +163,8 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
      * Check that one or more element is present
      */
     public boolean isPresent() {
-        Predicate<Fluent> isPresent = new com.google.common.base.Predicate<Fluent>() {
-            public boolean apply(Fluent fluent) {
+        Predicate<FluentDriver> isPresent = new com.google.common.base.Predicate<FluentDriver>() {
+            public boolean apply(FluentDriver fluent) {
                 return condition().isPresent();
             }
         };
@@ -174,9 +174,9 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
 
     @Override
     public boolean isDisplayed() {
-        Predicate<Fluent> isDisplayed = new Predicate<Fluent>() {
+        Predicate<FluentDriver> isDisplayed = new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return condition().isDisplayed();
             }
         };
@@ -186,9 +186,9 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
 
     @Override
     public boolean isEnabled() {
-        Predicate<Fluent> isEnabled = new Predicate<Fluent>() {
+        Predicate<FluentDriver> isEnabled = new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return condition().isEnabled();
             }
         };
@@ -198,9 +198,9 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
 
     @Override
     public boolean isSelected() {
-        Predicate<Fluent> isSelected = new Predicate<Fluent>() {
+        Predicate<FluentDriver> isSelected = new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return condition().isSelected();
             }
         };
@@ -210,9 +210,9 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
 
     @Override
     public boolean isClickable() {
-        Predicate<Fluent> isClickable = new Predicate<Fluent>() {
+        Predicate<FluentDriver> isClickable = new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return condition().isClickable();
             }
         };
@@ -222,9 +222,9 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
 
     @Override
     public boolean isStale() {
-        Predicate<Fluent> isStale = new Predicate<Fluent>() {
+        Predicate<FluentDriver> isStale = new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(Fluent input) {
+            public boolean apply(FluentDriver input) {
                 return condition().isStale();
             }
         };

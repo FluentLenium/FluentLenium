@@ -1,9 +1,9 @@
 package org.fluentlenium.core.domain;
 
-import org.fluentlenium.core.action.FluentDefaultActions;
+import org.fluentlenium.core.action.FluentActions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.filter.Filter;
-import org.fluentlenium.core.search.SearchActions;
+import org.fluentlenium.core.search.SearchControl;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  *
  */
-public interface FluentList<E extends FluentWebElement> extends List<E>, FluentDefaultActions<FluentList>, SearchActions {
+public interface FluentList<E extends FluentWebElement> extends List<E>, FluentActions<FluentList<E>, E>, SearchControl<E> {
 
     /**
      * Return the first element of the list
@@ -43,7 +43,7 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentD
      * Only the visible elements are filled
      */
     @Override
-    FluentList click();
+    FluentList<E> click();
 
     /**
      * Fill  all elements on the list with the corresponding cell in the with table.

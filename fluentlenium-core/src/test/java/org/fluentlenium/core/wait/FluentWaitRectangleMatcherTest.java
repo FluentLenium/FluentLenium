@@ -1,9 +1,7 @@
 package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
-import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.Fluent;
-import org.fluentlenium.core.FluentThread;
+import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.conditions.RectangleConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -26,12 +24,9 @@ public class FluentWaitRectangleMatcherTest {
     private Search search;
 
     @Mock
-    private Fluent fluent;
+    private FluentDriver fluent;
 
     private FluentWait wait;
-
-    @Mock
-    private FluentAdapter fluentAdapter;
 
     @Mock
     private FluentWebElement fluentWebElement;
@@ -42,7 +37,6 @@ public class FluentWaitRectangleMatcherTest {
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
-        FluentThread.set(fluentAdapter);
 
         wait = new FluentWait(fluent, search);
         wait.atMost(1L, TimeUnit.MILLISECONDS);

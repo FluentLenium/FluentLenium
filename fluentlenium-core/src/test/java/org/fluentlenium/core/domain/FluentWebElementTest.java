@@ -1,8 +1,7 @@
 package org.fluentlenium.core.domain;
 
 import org.assertj.core.api.ThrowableAssert;
-import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.FluentThread;
+import org.fluentlenium.core.FluentDriver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,9 +35,6 @@ public class FluentWebElementTest {
     private LocatableElement element;
 
     @Mock
-    private FluentAdapter fluentAdapter;
-
-    @Mock
     private InputDevicesDriver driver;
 
     @Mock
@@ -53,20 +49,16 @@ public class FluentWebElementTest {
     public void before() {
         MockitoAnnotations.initMocks(this);
 
-        FluentThread.set(fluentAdapter);
-
-        when(fluentAdapter.getDriver()).thenReturn(driver);
-
         when(driver.getMouse()).thenReturn(mouse);
         when(driver.getKeyboard()).thenReturn(keyboard);
 
 
-        fluentElement = new FluentWebElement(element);
+        fluentElement = new FluentWebElement(element, driver);
     }
 
     @After
     public void adter() {
-        reset(element, fluentAdapter, driver, keyboard, mouse);
+        reset(element, driver, keyboard, mouse);
     }
 
     @Test

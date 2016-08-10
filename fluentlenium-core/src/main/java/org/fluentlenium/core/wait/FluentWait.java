@@ -3,7 +3,7 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
-import org.fluentlenium.core.Fluent;
+import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -18,9 +18,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * A Fluent wait object.
  */
-public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
+public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentDriver> {
 
-    private final org.openqa.selenium.support.ui.FluentWait<Fluent> wait;
+    private final org.openqa.selenium.support.ui.FluentWait<FluentDriver> wait;
     private final Search search;
     private final WebDriver driver;
     private boolean useDefaultException;
@@ -30,8 +30,8 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
         return wait;
     }
 
-    public FluentWait(Fluent fluent, Search search) {
-        wait = new org.openqa.selenium.support.ui.FluentWait<Fluent>(fluent);
+    public FluentWait(FluentDriver fluent, Search search) {
+        wait = new org.openqa.selenium.support.ui.FluentWait<FluentDriver>(fluent);
         this.search = search;
         driver = fluent.getDriver();
         useDefaultException = true;
@@ -84,7 +84,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
      * @deprecated This method is java8 lambda ambigous with {@link #until(Function)} and will be removed.
      */
     @Deprecated
-    public void until(Predicate<Fluent> isTrue) {
+    public void until(Predicate<FluentDriver> isTrue) {
         untilPredicate(isTrue);
     }
 
@@ -93,7 +93,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
      *
      * @param predicate predicate condition for wait
      */
-    public void untilPredicate(Predicate<Fluent> predicate) {
+    public void untilPredicate(Predicate<FluentDriver> predicate) {
         updateWaitWithDefaultExceptions();
         wait.until(predicate);
     }
@@ -243,7 +243,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<Fluent> {
      * @param isTrue function of a condition returning a boolean or any other object.
      */
     @Override
-    public <T> T until(Function<? super Fluent, T> isTrue) {
+    public <T> T until(Function<? super FluentDriver, T> isTrue) {
         updateWaitWithDefaultExceptions();
         return wait.until(isTrue);
     }

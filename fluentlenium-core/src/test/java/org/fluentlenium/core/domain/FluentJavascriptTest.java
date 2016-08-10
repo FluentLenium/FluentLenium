@@ -1,6 +1,7 @@
 package org.fluentlenium.core.domain;
 
 
+import org.fluentlenium.core.script.FluentJavascript;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

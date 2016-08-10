@@ -11,17 +11,25 @@ import org.fluentlenium.core.filter.FilterPredicate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Search implements SearchActions<FluentWebElement> {
+public class Search implements SearchControl<FluentWebElement> {
     private final SearchContext searchContext;
+    private final WebDriver driver;
 
-    public Search(SearchContext context) {
+    public Search(WebDriver driver) {
+        this.searchContext = driver;
+        this.driver = driver;
+    }
+
+    public Search(WebDriver driver, SearchContext context) {
         this.searchContext = context;
+        this.driver = driver;
     }
 
     /**
@@ -56,7 +64,7 @@ public class Search implements SearchActions<FluentWebElement> {
         return Lists.transform(searchContext.findElements(By.cssSelector(cssSelector)),
                 new Function<WebElement, FluentWebElement>() {
                     public FluentWebElement apply(WebElement webElement) {
-                        return new FluentWebElement((webElement));
+                        return new FluentWebElement(webElement, driver);
                     }
                 });
     }
@@ -64,7 +72,7 @@ public class Search implements SearchActions<FluentWebElement> {
     private List<FluentWebElement> select(By locator) {
         return Lists.transform(searchContext.findElements(locator), new Function<WebElement, FluentWebElement>() {
             public FluentWebElement apply(WebElement webElement) {
-                return new FluentWebElement((webElement));
+                return new FluentWebElement(webElement, driver);
             }
         });
     }

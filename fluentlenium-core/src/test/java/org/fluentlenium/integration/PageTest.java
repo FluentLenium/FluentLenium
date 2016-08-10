@@ -1,5 +1,6 @@
 package org.fluentlenium.integration;
 
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -129,7 +130,9 @@ class Page4 extends FluentPage {
 
     private Page5 page5;
 
-    public Page4() {
+    @Override
+    public void initPage(FluentControl control) {
+        super.initPage(control);
         page5 = createPage(Page5.class);
     }
 

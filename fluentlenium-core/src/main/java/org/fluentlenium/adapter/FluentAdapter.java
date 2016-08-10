@@ -1,37 +1,70 @@
 package org.fluentlenium.adapter;
 
-import org.fluentlenium.core.Fluent;
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.FluentThread;
-import org.fluentlenium.core.page.PageInitializerException;
+import lombok.experimental.Delegate;
+import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.FluentDriverControl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class FluentAdapter extends Fluent {
+public class FluentAdapter implements FluentDriverControl, FluentDriverConfiguration {
+    private final DriverContainer driverContainer;
 
-    public FluentAdapter(WebDriver webDriver) {
-        super(webDriver);
-        FluentThread.set(this);
-    }
+    private String screenshotPath;
+    private String htmlDumpPath;
+    private TriggerMode screenshotMode;
+    private TriggerMode htmlDumpMode;
 
     public FluentAdapter() {
-        super();
-        FluentThread.set(this);
+        this.driverContainer = new DefaultDriverContainer();
     }
 
-    protected void init() {
-        try {
-            pageInitializer.initContainer(this);
-        } catch (ClassNotFoundException e) {
-            throw new PageInitializerException("Class not found", e);
-        } catch (IllegalAccessException e) {
-            throw new PageInitializerException("IllegalAccessException", e);
+    public FluentAdapter(DriverContainer driverContainer) {
+        this.driverContainer = driverContainer;
+    }
+
+    public FluentAdapter(WebDriver webDriver) {
+        this(new DefaultDriverContainer(), webDriver);
+    }
+
+    public FluentAdapter(DriverContainer driverContainer, WebDriver webDriver) {
+        this.driverContainer = driverContainer;
+        initFluent(webDriver);
+    }
+
+    @Delegate(types = FluentDriverControl.class)
+    private FluentDriver getFluentDriver() {
+        return getDriverContainer().getFluentDriver();
+    }
+
+    private void setFluentDriver(FluentDriver driver) {
+        getDriverContainer().setFluentDriver(driver);
+    }
+
+    protected DriverContainer getDriverContainer() {
+        return driverContainer;
+    }
+
+    public FluentAdapter initFluent(WebDriver webDriver) {
+        if (getFluentDriver() != null) {
+            if (getFluentDriver().getDriver() == webDriver) {
+                return this;
+            }
+            if (getFluentDriver().getDriver() != null) {
+                throw new IllegalStateException("Trying to init a WebDriver, but another one is still running");
+            }
         }
-        getDefaultConfig();
+        FluentDriver fluentDriver = new FluentDriver(webDriver, this);
+        setFluentDriver(fluentDriver);
+        fluentDriver.initContainer(this);
+        return this;
     }
 
-    protected void close() {
-        pageInitializer.release();
+    public FluentAdapter quit() {
+        if (this.getFluentDriver() != null) {
+            this.getFluentDriver().quit();
+            this.setFluentDriver(null);
+        }
+        return this;
     }
 
     /**
@@ -53,10 +86,43 @@ public class FluentAdapter extends Fluent {
     }
 
 
-    /**
-     * Override this method to set some config options on the driver. For example withDefaultSearchWait and withDefaultPageWait
-     * Remember that you can access to the WebDriver object using this.getDriver().
-     */
-    public void getDefaultConfig() {
+    @Override
+    public void setScreenshotPath(String path) {
+        this.screenshotPath = path;
+    }
+
+    @Override
+    public void setHtmlDumpPath(String htmlDumpPath) {
+        this.htmlDumpPath = htmlDumpPath;
+    }
+
+    @Override
+    public void setScreenshotMode(TriggerMode mode) {
+        this.screenshotMode = mode;
+    }
+
+    @Override
+    public TriggerMode getScreenshotMode() {
+        return screenshotMode;
+    }
+
+    @Override
+    public String getScreenshotPath() {
+        return screenshotPath;
+    }
+
+    @Override
+    public String getHtmlDumpPath() {
+        return htmlDumpPath;
+    }
+
+    @Override
+    public void setHtmlDumpMode(TriggerMode htmlDumpMode) {
+        this.htmlDumpMode = htmlDumpMode;
+    }
+
+    @Override
+    public TriggerMode getHtmlDumpMode() {
+        return htmlDumpMode;
     }
 }

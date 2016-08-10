@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public abstract class FluentTestNg extends FluentTestRunnerAdapter {
     public FluentTestNg() {
-        super();
+        super(new ThreadLocalDriverContainer());
     }
 
     private static Map<Method, ITestNGMethod> methods = new HashMap<>();

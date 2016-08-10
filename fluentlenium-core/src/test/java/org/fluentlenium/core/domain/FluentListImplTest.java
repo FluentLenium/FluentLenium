@@ -1,8 +1,6 @@
 package org.fluentlenium.core.domain;
 
 import org.assertj.core.api.ThrowableAssert;
-import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.junit.After;
 import org.junit.Before;
@@ -33,9 +31,6 @@ public class FluentListImplTest {
     private FluentWebElement element3;
 
     @Mock
-    private FluentAdapter fluentAdapter;
-
-    @Mock
     private WebDriver driver;
 
     private FluentList<FluentWebElement> list;
@@ -44,10 +39,6 @@ public class FluentListImplTest {
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
-
-        FluentThread.set(fluentAdapter);
-
-        when(fluentAdapter.getDriver()).thenReturn(driver);
 
         when(element1.conditions()).thenReturn(new WebElementConditions(element1));
         when(element2.conditions()).thenReturn(new WebElementConditions(element2));

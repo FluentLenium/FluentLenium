@@ -29,7 +29,7 @@ public class EventsTest extends LocalFluentCase {
         events().afterClickOn(afterListener);
         goTo(DEFAULT_URL);
 
-        click("button");
+        $("button").click();
 
         Mockito.verify(beforeListener, Mockito.times(1)).on(Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
         Mockito.verify(afterListener, Mockito.times(1)).on(Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());

@@ -34,7 +34,7 @@ public class SimpleFeatureStep extends FluentCucumberTest {
 
     @When(value = "feature I click on next page")
     public void step2() {
-        click("a#linkToPage2");
+        $("a#linkToPage2").click();
     }
 
     @Then(value = "feature I am on the second page")

@@ -34,7 +34,7 @@ public class SimpleScenarioStep extends FluentCucumberTest {
 
     @When(value = "scenario I click on next page")
     public void step2() {
-        click("a#linkToPage2");
+        $("a#linkToPage2").click();
     }
 
     @Then(value = "scenario I am on the second page")

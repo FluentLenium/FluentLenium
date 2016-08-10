@@ -1,7 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.FluentThread;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
@@ -18,12 +16,8 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 public class RectangleConditionsTest {
-
     @Mock
     private WebElement webElement;
-
-    @Mock
-    private FluentAdapter adapter;
 
     @Mock
     private Rectangle rectangle;
@@ -36,8 +30,6 @@ public class RectangleConditionsTest {
         MockitoAnnotations.initMocks(this);
         when(webElement.getRect()).thenReturn(rectangle);
 
-        FluentThread.set(adapter);
-
         fluentWebElement = new FluentWebElement(webElement);
         conditions = new WebElementConditions(fluentWebElement);
     }
@@ -45,7 +37,6 @@ public class RectangleConditionsTest {
     @After
     public void after() {
         reset(webElement);
-        reset(adapter);
     }
 
     @Test

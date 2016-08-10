@@ -1,5 +1,6 @@
 package org.fluentlenium.integration;
 
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
@@ -31,7 +32,7 @@ public class GoToTest extends LocalFluentCase {
 
     @Test(expected = IllegalArgumentException.class)
     public void goToWithNullUrlOnPage() {
-        FluentPage page = new FluentPage() {
+        FluentPage page = new FluentPage(this) {
         };
         goTo(page);
     }

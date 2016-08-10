@@ -3,7 +3,7 @@ package org.fluentlenium.integration;
 
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
-import org.fluentlenium.core.domain.FluentJavascript;
+import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Before;
 import org.junit.Test;

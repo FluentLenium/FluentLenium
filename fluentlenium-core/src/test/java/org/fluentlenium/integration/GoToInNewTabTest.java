@@ -1,9 +1,10 @@
 package org.fluentlenium.integration;
 
-import org.fluentlenium.core.domain.FluentJavascript;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
-import org.mockito.Mockito;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Arrays;
@@ -13,8 +14,15 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class GoToInNewTabTest extends LocalFluentCase {
-    WebDriver webDriver = Mockito.mock(WebDriver.class);
-    WebDriver.TargetLocator locator = Mockito.mock(WebDriver.TargetLocator.class);
+    @Mock
+    private JavascriptWebDriver webDriver;
+
+    @Mock
+    private WebDriver.TargetLocator locator;
+
+    public GoToInNewTabTest() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void checkGoToInNewTab() {
@@ -26,13 +34,12 @@ public class GoToInNewTabTest extends LocalFluentCase {
     }
 
     @Override
-    public FluentJavascript executeScript(String script, Object... args) {
-        return null; // do nothing, it's a unit test
-    }
-
-    @Override
     public WebDriver getDefaultDriver() {
         return webDriver;
+    }
+
+    public interface JavascriptWebDriver extends WebDriver, JavascriptExecutor {
+
     }
 
 }

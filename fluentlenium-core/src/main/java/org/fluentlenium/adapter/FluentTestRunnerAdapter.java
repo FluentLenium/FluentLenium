@@ -1,7 +1,12 @@
 package org.fluentlenium.adapter;
 
 
-import org.fluentlenium.adapter.util.*;
+import org.fluentlenium.adapter.util.CookieStrategyReader;
+import org.fluentlenium.adapter.util.DefaultCookieStrategyReader;
+import org.fluentlenium.adapter.util.DefaultSharedDriverStrategyReader;
+import org.fluentlenium.adapter.util.SharedDriverOnceShutdownHook;
+import org.fluentlenium.adapter.util.SharedDriverStrategy;
+import org.fluentlenium.adapter.util.SharedDriverStrategyReader;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -15,10 +20,19 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     private final CookieStrategyReader csr;
 
     public FluentTestRunnerAdapter() {
-        this(new DefaultSharedDriverStrategyReader(), new DefaultCookieStrategyReader());
+        this(new DefaultDriverContainer());
+    }
+
+    public FluentTestRunnerAdapter(DriverContainer driverContainer) {
+        this(driverContainer, new DefaultSharedDriverStrategyReader(), new DefaultCookieStrategyReader());
     }
 
     public FluentTestRunnerAdapter(SharedDriverStrategyReader sharedDriverExtractor, CookieStrategyReader cookieExtractor) {
+        this(new DefaultDriverContainer(), sharedDriverExtractor, cookieExtractor);
+    }
+
+    public FluentTestRunnerAdapter(DriverContainer driverContainer, SharedDriverStrategyReader sharedDriverExtractor, CookieStrategyReader cookieExtractor) {
+        super(driverContainer);
         this.sdsr = sharedDriverExtractor;
         this.csr = cookieExtractor;
     }
@@ -58,7 +72,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         SharedDriverStrategy strategy = sdsr.getSharedDriverStrategy(testClass, testName);
 
         if (strategy == SharedDriverStrategy.ONCE) {
-            synchronized (this) {
+            synchronized (FluentTestRunnerAdapter.class) {
                 if (sharedDriver == null) {
                     initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
                     sharedDriver = getDriver();
@@ -68,7 +82,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
                 }
             }
         } else if (strategy == SharedDriverStrategy.PER_CLASS) {
-            synchronized (this) {
+            synchronized (FluentTestRunnerAdapter.class) {
                 if (!isSharedDriverPerClass) {
                     initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
                     sharedDriver = getDriver();
@@ -80,8 +94,6 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         } else {
             initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
         }
-
-        init();
     }
 
     /**
@@ -116,7 +128,6 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testName  Test name
      */
     protected void finished(Class<?> testClass, String testName) {
-        close();
         SharedDriverStrategy strategy = sdsr.getSharedDriverStrategy(testClass, testName);
         if (strategy == SharedDriverStrategy.PER_METHOD) {
             quit();
@@ -168,11 +179,11 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testName  Test name
      */
     protected void failed(Throwable e, Class<?> testClass, String testName) {
-        if (screenshotMode == TriggerMode.ON_FAIL) {
+        if (getScreenshotMode() == TriggerMode.ON_FAIL) {
             takeScreenShot(testClass.getSimpleName() + "_" +
                     testName + ".png");
         }
-        if (htmlDumpMode == TriggerMode.ON_FAIL) {
+        if (getHtmlDumpMode() == TriggerMode.ON_FAIL) {
             takeHtmlDump(testClass.getSimpleName() + "_"
                     + testName + ".html");
         }

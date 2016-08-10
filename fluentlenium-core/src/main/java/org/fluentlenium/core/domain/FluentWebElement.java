@@ -1,20 +1,21 @@
 package org.fluentlenium.core.domain;
 
-import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.FluentThread;
+import org.fluentlenium.core.action.FluentActions;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
-import org.fluentlenium.core.action.FluentDefaultActions;
 import org.fluentlenium.core.action.KeyboardElementActions;
 import org.fluentlenium.core.action.MouseElementActions;
 import org.fluentlenium.core.axes.Axes;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.search.Search;
-import org.fluentlenium.core.search.SearchActions;
+import org.fluentlenium.core.search.SearchControl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsDriver;
+import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.lang.reflect.Constructor;
@@ -23,21 +24,26 @@ import java.util.Arrays;
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
-public class FluentWebElement implements FluentDefaultActions<FluentWebElement>, SearchActions<FluentWebElement> {
+public class FluentWebElement implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>, SearchControl<FluentWebElement> {
     private final WebElement webElement;
+    private final WebDriver driver;
     private final Search search;
     private final Axes axes;
     private final MouseElementActions mouseActions;
     private final KeyboardElementActions keyboardActions;
     private final WebElementConditions conditions;
 
-
     public FluentWebElement(WebElement webElement) {
+        this(webElement, webElement instanceof WrapsDriver ? ((WrapsDriver)webElement).getWrappedDriver() : null);
+    }
+
+    public FluentWebElement(WebElement webElement, WebDriver driver) {
         this.webElement = webElement;
-        this.search = new Search(webElement);
-        this.axes = new Axes(webElement);
-        this.mouseActions = new MouseElementActions(FluentThread.get().getDriver(), webElement);
-        this.keyboardActions = new KeyboardElementActions(FluentThread.get().getDriver(), webElement);
+        this.driver = driver;
+        this.search = new Search(this.driver, webElement);
+        this.axes = new Axes(this.driver, webElement);
+        this.mouseActions = new MouseElementActions(this.driver, webElement);
+        this.keyboardActions = new KeyboardElementActions(this.driver, webElement);
         this.conditions = new WebElementConditions(this);
     }
 
@@ -224,8 +230,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
 
     public boolean isClickable() {
-        FluentAdapter fluent = FluentThread.get();
-        return ExpectedConditions.elementToBeClickable(getElement()).apply(fluent.getDriver()) != null;
+        return ExpectedConditions.elementToBeClickable(getElement()).apply(driver) != null;
     }
 
     /**
@@ -234,8 +239,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * @return false is the element is still attached to the DOM, true otherwise.
      */
     public boolean isStale() {
-        FluentAdapter fluent = FluentThread.get();
-        return ExpectedConditions.stalenessOf(getElement()).apply(fluent.getDriver());
+        return ExpectedConditions.stalenessOf(getElement()).apply(driver);
     }
 
     /**
@@ -254,6 +258,11 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      */
     public WebElement getElement() {
         return webElement;
+    }
+
+    @Override
+    public WebElement getWrappedElement() {
+        return getElement();
     }
 
     /**
@@ -415,7 +424,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * @return fill constructor
      */
     public Fill fill() {
-        return new Fill(asList(), FluentThread.get().getDriver());
+        return new Fill(this);
     }
 
     /**
@@ -425,7 +434,7 @@ public class FluentWebElement implements FluentDefaultActions<FluentWebElement>,
      * @return fill constructor
      */
     public FillSelect fillSelect() {
-        return new FillSelect(asList(), FluentThread.get().getDriver());
+        return new FillSelect(this);
     }
 
     /**

@@ -5,7 +5,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.openqa.selenium.By;
 
-public interface SearchActions<E extends FluentWebElement> {
+public interface SearchControl<E extends FluentWebElement> {
     /**
      * Find list of elements with CSS selector and filters.
      *

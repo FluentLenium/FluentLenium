@@ -2,6 +2,8 @@ package org.fluentlenium.core.domain;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import org.fluentlenium.core.action.Fill;
+import org.fluentlenium.core.action.FillSelect;
 import org.fluentlenium.core.conditions.AtLeastOneElementConditions;
 import org.fluentlenium.core.conditions.EachElementConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
@@ -297,22 +299,22 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     }
 
     @Override
-    public FluentList $(String selector, Filter... filters) {
+    public FluentList<E> $(String selector, Filter... filters) {
         return find(selector, filters);
     }
 
     @Override
-    public FluentList $(Filter... filters) {
+    public FluentList<E> $(Filter... filters) {
         return find(filters);
     }
 
     @Override
-    public FluentList $(By locator, Filter... filters) {
+    public FluentList<E> $(By locator, Filter... filters) {
         return find(locator, filters);
     }
 
     @Override
-    public FluentWebElement $(Integer index, Filter... filters) {
+    public E $(Integer index, Filter... filters) {
         return find(index, filters);
     }
 
@@ -366,12 +368,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     }
 
     @Override
-    public FluentWebElement $(String selector, Integer index, Filter... filters) {
+    public E $(String selector, Integer index, Filter... filters) {
         return find(selector, index, filters);
     }
 
     @Override
-    public FluentWebElement $(By locator, Integer index, Filter... filters) {
+    public E $(By locator, Integer index, Filter... filters) {
         return find(locator, index, filters);
     }
 
@@ -399,6 +401,26 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     @Override
     public E findFirst(Filter... filters) {
         return find(0, filters);
+    }
+
+    /**
+     * Construct a FillConstructor in order to allow easy fill
+     * Be careful - only the visible elements are filled
+     *
+     * @return fill constructor
+     */
+    public Fill fill() {
+        return new Fill((FluentList<E>)this);
+    }
+
+    /**
+     * Construct a FillSelectConstructor in order to allow easy list selection
+     * Be careful - only the visible elements are filled
+     *
+     * @return fill constructor
+     */
+    public FillSelect fillSelect() {
+        return new FillSelect(this);
     }
 
     @Override
