@@ -59,7 +59,7 @@ public abstract class FluentTestNg extends FluentTestRunnerAdapter {
 
     @AfterClass(alwaysRun = true)
     public void afterClass() {
-        releaseSharedDriver();
+        FluentTestRunnerAdapter.afterClass(getClass());
     }
 
 }

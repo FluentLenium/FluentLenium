@@ -46,7 +46,7 @@ public class PageAdapterTest extends FluentAdapter {
 
     @After
     public void after() {
-        quit();
+        releaseFluent();
     }
 
     @Test

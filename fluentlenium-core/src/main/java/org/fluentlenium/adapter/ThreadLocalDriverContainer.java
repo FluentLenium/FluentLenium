@@ -2,6 +2,9 @@ package org.fluentlenium.adapter;
 
 import org.fluentlenium.core.FluentDriver;
 
+/**
+ * Use ThreadLocal to get and set FluentDriver.
+ */
 public class ThreadLocalDriverContainer implements DriverContainer {
     private ThreadLocal<FluentDriver> drivers = new ThreadLocal<>();
 

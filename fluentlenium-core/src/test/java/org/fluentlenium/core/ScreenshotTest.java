@@ -33,7 +33,7 @@ public class ScreenshotTest {
 
     @After
     public void release() {
-        adapter.quit();
+        adapter.releaseFluent();
     }
 }
 

@@ -69,10 +69,10 @@ public class FluentAdapter implements FluentDriverControl, FluentDriverConfigura
         return this;
     }
 
-    public FluentAdapter quit() {
-        if (this.getFluentDriver() != null) {
-            this.getFluentDriver().quit();
-            this.setFluentDriver(null);
+    public FluentAdapter releaseFluent() {
+        if (getFluentDriver() != null) {
+            getFluentDriver().releaseFluent();
+            setFluentDriver(null);
         }
         return this;
     }

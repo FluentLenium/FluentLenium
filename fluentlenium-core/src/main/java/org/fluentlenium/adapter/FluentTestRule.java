@@ -25,6 +25,8 @@ class FluentTestRule implements TestRule {
                 } catch (Throwable e) {
                     failed(e, description);
                     throw e;
+                } finally {
+                    finished(description);
                 }
             }
         };
