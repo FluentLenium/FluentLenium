@@ -1,17 +1,22 @@
 package org.fluentlenium.adapter;
 
-import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.FluentDriverControl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import lombok.experimental.Delegate;
+
 public class FluentAdapter implements FluentDriverControl, FluentDriverConfiguration {
+
     private final DriverContainer driverContainer;
 
     private String screenshotPath;
+
     private String htmlDumpPath;
+
     private TriggerMode screenshotMode;
+
     private TriggerMode htmlDumpMode;
 
     public FluentAdapter() {
@@ -36,6 +41,10 @@ public class FluentAdapter implements FluentDriverControl, FluentDriverConfigura
         return getDriverContainer().getFluentDriver();
     }
 
+    boolean isFluentDriverAvailable() {
+        return getDriverContainer().getFluentDriver() != null;
+    }
+
     private void setFluentDriver(FluentDriver driver) {
         getDriverContainer().setFluentDriver(driver);
     }
@@ -50,7 +59,8 @@ public class FluentAdapter implements FluentDriverControl, FluentDriverConfigura
                 return this;
             }
             if (getFluentDriver().getDriver() != null) {
-                throw new IllegalStateException("Trying to init a WebDriver, but another one is still running");
+                throw new IllegalStateException(
+                        "Trying to init a WebDriver, but another one is still running");
             }
         }
         FluentDriver fluentDriver = new FluentDriver(webDriver, this);
@@ -84,7 +94,6 @@ public class FluentAdapter implements FluentDriverControl, FluentDriverConfigura
     public String getDefaultBaseUrl() {
         return null;
     }
-
 
     @Override
     public void setScreenshotPath(String path) {

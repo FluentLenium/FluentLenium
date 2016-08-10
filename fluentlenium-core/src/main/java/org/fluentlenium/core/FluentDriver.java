@@ -1,5 +1,14 @@
 package org.fluentlenium.core;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URI;
+import java.nio.file.Paths;
+import java.util.Date;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.fluentlenium.core.action.KeyboardActions;
@@ -23,19 +32,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URI;
-import java.nio.file.Paths;
-import java.util.Date;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
 /**
  * Util Class which offers some shortcut to webdriver methods
  */
 public class FluentDriver implements FluentDriverControl {
+
     private String baseUrl;
 
     private FluentDriverConfigurationReader configuration;
@@ -45,9 +46,11 @@ public class FluentDriver implements FluentDriverControl {
     private PageInitializer pageInitializer;
 
     private Search search;
+
     private WebDriver driver;
 
     private MouseActions mouseActions;
+
     private KeyboardActions keyboardActions;
 
     public FluentDriver(WebDriver driver, FluentDriverConfigurationReader configuration) {
@@ -68,7 +71,7 @@ public class FluentDriver implements FluentDriverControl {
         return this;
     }
 
-    public FluentDriver initContainers(FluentControl ... containers) {
+    public FluentDriver initContainers(FluentControl... containers) {
         for (FluentControl container : containers) {
             initContainer(container);
         }
@@ -89,7 +92,8 @@ public class FluentDriver implements FluentDriverControl {
     /**
      * Define the default url that will be used in the test and in the relative pages
      *
-     * @param baseUrl base URL
+     * @param baseUrl
+     *            base URL
      * @return Fluent element
      */
     @Override
@@ -106,8 +110,10 @@ public class FluentDriver implements FluentDriverControl {
     /**
      * Define an implicit time to wait for a page to be loaded
      *
-     * @param l        timeout value
-     * @param timeUnit time unit for wait
+     * @param l
+     *            timeout value
+     * @param timeUnit
+     *            time unit for wait
      * @return Fluent element
      */
     @Override
@@ -119,8 +125,10 @@ public class FluentDriver implements FluentDriverControl {
     /**
      * Define an implicit time to wait when searching an element
      *
-     * @param l        timeout value
-     * @param timeUnit time unit for wait
+     * @param l
+     *            timeout value
+     * @param timeUnit
+     *            time unit for wait
      * @return Fluent element
      */
     @Override
@@ -165,13 +173,18 @@ public class FluentDriver implements FluentDriverControl {
     }
 
     @Override
+    public boolean canTakeScreenShot() {
+        return getDriver() instanceof TakesScreenshot;
+    }
+
+    @Override
     public void takeScreenShot() {
         takeScreenShot(new Date().getTime() + ".png");
     }
 
     @Override
     public void takeScreenShot(String fileName) {
-        if (!(getDriver() instanceof TakesScreenshot)) {
+        if (!canTakeScreenShot()) {
             throw new WebDriverException("Current browser doesn't allow taking screenshot.");
         }
         File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
@@ -207,8 +220,9 @@ public class FluentDriver implements FluentDriverControl {
     @Override
     public EventsRegistry events() {
         if (events == null) {
-            throw new IllegalStateException("An EventFiringWebDriver instance is required to use events. "
-                    + "Please override getDefaultDriver() to provide it.");
+            throw new IllegalStateException(
+                    "An EventFiringWebDriver instance is required to use events. "
+                            + "Please override getDefaultDriver() to provide it.");
         }
         return events;
     }

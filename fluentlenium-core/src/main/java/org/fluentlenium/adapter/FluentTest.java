@@ -4,17 +4,19 @@ import org.junit.AfterClass;
 import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.junit.rules.TestRule;
-import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
 /**
  * All Junit Test should extends this class. It provides default parameters.
  */
 public abstract class FluentTest extends FluentTestRunnerAdapter {
+
     @Rule
     public TestName name = new TestName();
+
     @Rule
-    public TestRule watchman = new TestWatcher() {
+    public TestRule watchman = new FluentTestRule() {
+
         @Override
         public void starting(Description description) {
             super.starting(description);
