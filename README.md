@@ -35,7 +35,7 @@ To add FluentLenium to your project, just add the following dependency to your `
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
-    <version>0.13.1</version>
+    <version>1.0.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -48,7 +48,7 @@ If you need the assertj dependency to improve the legibility of your test code:
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>0.13.1</version>
+    <version>1.0.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -59,7 +59,7 @@ An adapter has also been built for using FluentLenium with TestNG:
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>0.13.1</version>
+    <version>1.0.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -941,6 +941,41 @@ maximizeWindow();
 If you have any comments/remarks/bugs, please raise an issue on github:
 [FluentLenium](https://github.com/FluentLenium/FluentLenium/issues) or contact us through the [mailing-list](https://groups.google.com/group/fluentlenium)
 
+##SNAPSHOT version (unstable!)
+
+A SNAPSHOT version is automatically packaged after each commit on master branch.
+
+This version can be very instable and should be used for testing purpose only.
+
+To use it, you need to declare an additional repository in the ```pom.xml``` of your project.
+
+```xml
+<repositories>
+    <repository>
+        <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy> <!-- Force checking of updates -->
+        </snapshots>
+        <releases>
+            <enabled>false</enabled>
+        </releases>
+        <id>sonatype-snapshots</id>
+        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </repository>
+</repositories>
+```
+
+Then use ```SNAPSHOT``` version when declaring the dependencies.
+
+```xml
+<dependency>
+    <groupId>org.fluentlenium</groupId>
+    <artifactId>fluentlenium-core</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <scope>test</scope>
+</dependency>
+```
+
 ## FluentLenium and other frameworks
 
 ### jUnit
@@ -990,6 +1025,3 @@ In French:
   - [Cucumber and FluentLenium - more to come](http://blog.jetoile.fr/2013/04/fluentlenium-et-cucumber-jvm-complement.html)
 
 Please contact us on the mailing list if you want your post to be added to that list !
-
-### Built by CloudBees
-<img src='http://web-static-cloudfront.s3.amazonaws.com/images/badges/BuiltOnDEV.png'/>
