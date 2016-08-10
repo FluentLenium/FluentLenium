@@ -95,6 +95,10 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         } else if (strategy == SharedDriverStrategy.PER_CLASS) {
             synchronized (FluentTestRunnerAdapter.class) {
                 if (!isSharedDriverPerClass) {
+                    if (sharedDriver != null) {
+                        doReleaseSharedDriver();
+                    }
+
                     initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
                     sharedDriver = getDriver();
                     isSharedDriverPerClass = true;
@@ -103,6 +107,10 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
                 }
             }
         } else {
+            if (sharedDriver != null) {
+                doReleaseSharedDriver();
+            }
+
             initFluent(getDefaultDriver()).withDefaultUrl(getDefaultBaseUrl());
         }
     }
@@ -216,10 +224,14 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      */
     public static void releaseSharedDriver() {
         if (isSharedDriverPerClass) {
-            sharedDriver.quit();
-            sharedDriver = null;
-            isSharedDriverPerClass = false;
+            doReleaseSharedDriver();
         }
+    }
+
+    public static void doReleaseSharedDriver() {
+        sharedDriver.quit();
+        sharedDriver = null;
+        isSharedDriverPerClass = false;
     }
 
 }
