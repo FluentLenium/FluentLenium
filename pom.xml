@@ -31,9 +31,11 @@
     <name>FluentLenium</name>
     <description>FluentLenium makes the writing of acceptance testing more easy and in a fluent way using the power of
         css selectors. Build upon Selenium WebDriver.
-        goTo("http://mywebpage/");
-        fill("#firstName").with("toto");
-        click("#create-button");
+
+        goTo("http://www.bing.com");
+        $("#sb_form_q").fill().with("FluentLenium");
+        $("#sb_form_go").submit();
+        assertThat(title()).contains("FluentLenium");
     </description>
     <url>https://github.com/FluentLenium/FluentLenium</url>
 
@@ -130,6 +132,11 @@
                 <groupId>xml-apis</groupId>
                 <artifactId>xml-apis</artifactId>
                 <version>1.4.01</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

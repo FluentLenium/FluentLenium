@@ -32,8 +32,9 @@ public class GoToTest extends LocalFluentCase {
 
     @Test(expected = IllegalArgumentException.class)
     public void goToWithNullUrlOnPage() {
-        FluentPage page = new FluentPage(this) {
+        FluentPage page = new FluentPage() {
         };
+        page.initFluent(this);
         goTo(page);
     }
 

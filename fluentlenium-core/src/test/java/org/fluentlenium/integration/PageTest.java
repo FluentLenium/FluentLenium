@@ -1,18 +1,18 @@
 package org.fluentlenium.integration;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
-import org.junit.Before;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.openqa.selenium.support.FindBy;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class PageTest extends LocalFluentCase {
+
     @Page
     PageAccueil page;
 
@@ -120,19 +120,21 @@ class Page2 extends FluentPage {
 }
 
 class Page3 extends PageAccueil {
+
     @FindBy(css = "a.go-next")
     FluentWebElement linkToPage2FoundWithFindByOnPage3;
 }
 
 class Page4 extends FluentPage {
+
     @Page
     private PageAccueil pageAccueil;
 
     private Page5 page5;
 
     @Override
-    public void initPage(FluentControl control) {
-        super.initPage(control);
+    public void initFluent(FluentControl control) {
+        super.initFluent(control);
         page5 = createPage(Page5.class);
     }
 
@@ -146,6 +148,7 @@ class Page4 extends FluentPage {
 }
 
 class Page5 extends FluentPage {
+
     @Page
     private PageAccueil pageAccueil;
 
