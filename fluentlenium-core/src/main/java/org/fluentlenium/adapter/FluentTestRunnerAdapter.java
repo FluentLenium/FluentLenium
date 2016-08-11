@@ -88,7 +88,9 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         }, sharedParameters.getTestClass(), sharedParameters.getTestName(), sharedParameters.getStrategy());
 
         initFluent(sharedWebDriver.getDriver());
-        withDefaultUrl(getDefaultBaseUrl());
+        if (isFluentDriverAvailable()) {
+            withDefaultUrl(getDefaultBaseUrl());
+        }
     }
 
     /**
