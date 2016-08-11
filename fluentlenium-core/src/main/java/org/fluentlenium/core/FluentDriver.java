@@ -453,10 +453,10 @@ public class FluentDriver implements FluentDriverControl {
         if (getDriver() != null) {
             getDriver().quit();
         }
-        cleanupDriver();
+        releaseFluent();
     }
 
-    public void cleanupDriver() {
+    public void releaseFluent() {
         pageInitializer.release();
     }
 }

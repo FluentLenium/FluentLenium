@@ -6,22 +6,20 @@ import org.fluentlenium.adapter.util.DefaultCookieStrategyReader;
 
 public class FluentCucumberTest extends FluentTestRunnerAdapter {
     public FluentCucumberTest() {
-        super(new CucumberSharedDriverStrategyReader(), new DefaultCookieStrategyReader());
+        super(new CucumberSharedDriverStrategyReader(), new DefaultCookieStrategyReader(), new FluentCucumberSharedMutator());
     }
 
     // It's not allowed by Cucumber JVM to add @Before in the base class.
     public void before(Scenario scenario) {
-        starting(scenario.getName());
+        starting(scenario.getId());
     }
 
     // It's not allowed by Cucumber JVM to add @After in the base class.
     public void after(Scenario scenario) {
         if (scenario.isFailed()) {
-            failed(scenario.getName());
+            failed(scenario.getId());
         }
 
-        finished(scenario.getName());
+        finished(scenario.getId());
     }
-
-    // FluentTestRunnerAdapter#releaseSharedDriver is not called. I don't know when to call it, sadly ...
 }

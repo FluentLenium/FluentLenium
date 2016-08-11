@@ -46,9 +46,9 @@ public class FluentIntegTest extends FluentTest {
     }
 
     @Override
-    public FluentAdapter quit() {
-        System.out.println("Quit WebDriver " + getDriver() + " for test " + getClass().getName() +
+    public FluentAdapter releaseFluent() {
+        System.out.println("Release WebDriver " + getDriver() + " for test " + getClass().getName() +
                 "." + name.getMethodName() + " [" + System.identityHashCode(this) + "]");
-        return super.quit();
+        return super.releaseFluent();
     }
 }

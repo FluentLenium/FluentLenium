@@ -3,6 +3,7 @@ package org.fluentlenium.integration;
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.adapter.FluentTest;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
