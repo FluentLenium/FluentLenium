@@ -20,7 +20,7 @@ public class FluentAdapter implements FluentDriverControl, FluentDriverConfigura
     private TriggerMode htmlDumpMode;
 
     public FluentAdapter() {
-        this.driverContainer = new DefaultDriverContainer();
+        this(new DefaultDriverContainer());
     }
 
     public FluentAdapter(DriverContainer driverContainer) {
@@ -53,28 +53,43 @@ public class FluentAdapter implements FluentDriverControl, FluentDriverConfigura
         return driverContainer;
     }
 
-    public FluentAdapter initFluent(WebDriver webDriver) {
+    /**
+     * Load a {@link WebDriver} into this adapter.
+     *
+     * @param webDriver webDriver to use.
+     * @throws IllegalStateException when trying to register a different webDriver that the current one.
+     *
+     * @return adapter
+     */
+    public void initFluent(WebDriver webDriver) {
+        if (webDriver == null) {
+            releaseFluent();
+            return;
+        }
+
         if (getFluentDriver() != null) {
             if (getFluentDriver().getDriver() == webDriver) {
-                return this;
+                return;
             }
             if (getFluentDriver().getDriver() != null) {
                 throw new IllegalStateException(
                         "Trying to init a WebDriver, but another one is still running");
             }
         }
+
         FluentDriver fluentDriver = new FluentDriver(webDriver, this);
         setFluentDriver(fluentDriver);
         fluentDriver.initContainer(this);
-        return this;
     }
 
-    public FluentAdapter releaseFluent() {
+    /**
+     * Release the current {@link WebDriver} from this adapter.
+     */
+    public void releaseFluent() {
         if (getFluentDriver() != null) {
             getFluentDriver().releaseFluent();
             setFluentDriver(null);
         }
-        return this;
     }
 
     /**

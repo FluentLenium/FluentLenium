@@ -35,16 +35,16 @@ public class FluentIntegTestNg extends FluentTestNg {
     }
 
     @Override
-    public FluentAdapter initFluent(WebDriver webDriver) {
+    public void initFluent(WebDriver webDriver) {
         System.out.println("Init WebDriver " + webDriver + " for test " + getClass().getName() +
                 " [" + System.identityHashCode(this) + "]");
-        return super.initFluent(webDriver);
+        super.initFluent(webDriver);
     }
 
     @Override
-    public FluentAdapter releaseFluent() {
+    public void releaseFluent() {
         System.out.println("Release WebDriver " + getDriver() + " for test " + getClass().getName() +
                 " [" + System.identityHashCode(this) + "]");
-        return super.releaseFluent();
+        super.releaseFluent();
     }
 }

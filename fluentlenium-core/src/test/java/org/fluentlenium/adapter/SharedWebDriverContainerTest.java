@@ -31,6 +31,10 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
     @Test
     public void getOrCreateDriver_with_same_test_names_creates_one_instance() {
         SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", SharedDriverStrategy.PER_METHOD);
+
+        assertThat(container.getAllDrivers()).containsOnly(driver);
+        assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
+
         SharedWebDriver driver2 = container.getOrCreateDriver(this, Object.class, "test", SharedDriverStrategy.PER_METHOD);
 
         assertThat(driver).isEqualTo(driver2);
@@ -46,6 +50,10 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
     @Test
     public void getOrCreateDriver_with_different_test_names_creates_distinct_instances() {
         SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", SharedDriverStrategy.PER_METHOD);
+
+        assertThat(container.getAllDrivers()).containsOnly(driver);
+        assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
+
         SharedWebDriver driver2 = container.getOrCreateDriver(this, Object.class, "otherTest", SharedDriverStrategy.PER_METHOD);
 
         assertThat(driver).isNotEqualTo(driver2);
@@ -65,6 +73,11 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
     @Test
     public void getOrCreateDriver_with_different_test_classes_creates_distinct_instances() {
         SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", SharedDriverStrategy.PER_METHOD);
+
+        assertThat(container.getAllDrivers()).containsOnly(driver);
+        assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
+        assertThat(container.getTestClassDrivers(String.class)).isEmpty();
+
         SharedWebDriver driver2 = container.getOrCreateDriver(this, String.class, "test", SharedDriverStrategy.PER_METHOD);
 
         assertThat(driver).isNotEqualTo(driver2);
@@ -86,6 +99,10 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
     @Test
     public void getOrCreateDriver_with_different_test_names_and_strategy_per_class_creates_one_instance() {
         SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", SharedDriverStrategy.PER_CLASS);
+
+        assertThat(container.getAllDrivers()).containsOnly(driver);
+        assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
+
         SharedWebDriver driver2 = container.getOrCreateDriver(this, Object.class, "otherTest", SharedDriverStrategy.PER_CLASS);
 
         assertThat(driver).isEqualTo(driver2);
@@ -101,6 +118,11 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
     @Test
     public void getOrCreateDriver_with_different_test_names_and_different_test_class_and_strategy_per_class_creates_distinct_instance() {
         SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", SharedDriverStrategy.PER_CLASS);
+
+        assertThat(container.getAllDrivers()).containsOnly(driver);
+        assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
+        assertThat(container.getTestClassDrivers(String.class)).isEmpty();
+
         SharedWebDriver driver2 = container.getOrCreateDriver(this, String.class, "otherTest", SharedDriverStrategy.PER_CLASS);
 
         assertThat(driver).isNotEqualTo(driver2);
@@ -122,6 +144,11 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
     @Test
     public void getOrCreateDriver_with_different_test_names_and_different_test_class_and_strategy_once_creates_one_instance() {
         SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", SharedDriverStrategy.ONCE);
+
+        assertThat(container.getAllDrivers()).containsOnly(driver);
+        assertThat(container.getTestClassDrivers(Object.class)).isEmpty();
+        assertThat(container.getTestClassDrivers(String.class)).isEmpty();
+
         SharedWebDriver driver2 = container.getOrCreateDriver(this, String.class, "otherTest", SharedDriverStrategy.ONCE);
 
         assertThat(driver).isEqualTo(driver2);
@@ -164,6 +191,24 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
         assertThat(container.getAllDrivers()).isEmpty();
         assertThat(container.getTestClassDrivers(Object.class)).isEmpty();
         assertThat(container.getTestClassDrivers(String.class)).isEmpty();
+    }
+
+    @Test
+    public void testSharedDriverBean() {
+        WebDriver webDriver = get();
+        Class<Object> testClass = Object.class;
+        String testName = "test";
+        SharedDriverStrategy strategy = SharedDriverStrategy.PER_METHOD;
+
+        SharedWebDriver sharedWebDriver = new SharedWebDriver(webDriver, testClass, testName, strategy);
+
+        assertThat(sharedWebDriver.getDriver()).isSameAs(webDriver);
+        assertThat(sharedWebDriver.getWrappedDriver()).isSameAs(webDriver);
+        assertThat(sharedWebDriver.getTestClass()).isSameAs(testClass);
+        assertThat(sharedWebDriver.getTestName()).isSameAs(testName);
+        assertThat(sharedWebDriver.getSharedDriverStrategy()).isSameAs(strategy);
+
+        assertThat(sharedWebDriver.toString()).contains(webDriver.toString());
     }
 
     @Override
