@@ -52,7 +52,10 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
         assertThat(container.getAllDrivers()).containsOnly(driver, driver2);
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver, driver2);
 
+        assertThat(container.getAllDrivers().size()).isEqualTo(2);
         container.quit(driver);
+        assertThat(container.getAllDrivers().size()).isEqualTo(1);
+        assertThat(container.getAllDrivers().get(0)).isEqualTo(driver2);
         container.quit(driver2);
 
         assertThat(container.getAllDrivers()).isEmpty();
@@ -69,7 +72,10 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
         assertThat(container.getTestClassDrivers(String.class)).containsOnly(driver2);
 
+        assertThat(container.getAllDrivers().size()).isEqualTo(2);
         container.quit(driver);
+        assertThat(container.getAllDrivers().size()).isEqualTo(1);
+        assertThat(container.getAllDrivers().get(0)).isEqualTo(driver2);
         container.quit(driver2);
 
         assertThat(container.getAllDrivers()).isEmpty();
@@ -102,8 +108,11 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
         assertThat(container.getTestClassDrivers(String.class)).containsOnly(driver2);
 
-        container.quit(driver);
+        assertThat(container.getAllDrivers().size()).isEqualTo(2);
         container.quit(driver2);
+        assertThat(container.getAllDrivers().size()).isEqualTo(1);
+        assertThat(container.getAllDrivers().get(0)).isEqualTo(driver);
+        container.quit(driver);
 
         assertThat(container.getAllDrivers()).isEmpty();
         assertThat(container.getTestClassDrivers(Object.class)).isEmpty();
