@@ -30,6 +30,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -74,11 +75,18 @@ public class FluentInjector implements FluentInjectControl {
 
     @Override
     public void inject(Object container) {
+        initContainer(container);
         initChildrenContainers(container);
         initFluentElements(container);
 
         // Default Selenium WebElement injection.
         PageFactory.initElements(fluentControl.getDriver(), container);
+    }
+
+    private void initContainer(Object container) {
+        if (container instanceof FluentContainer) {
+            ((FluentContainer) container).initFluent(fluentControl);
+        }
     }
 
     private static boolean isContainer(Field field) {
@@ -127,9 +135,7 @@ public class FluentInjector implements FluentInjectControl {
     private <T> T newPage(Class<T> cls, Object... params) {
         try {
             T page = constructContainerWithParams(cls, params);
-            if (page instanceof FluentContainer) {
-                ((FluentContainer) page).initFluent(fluentControl);
-            }
+            initContainer(page);
             return page;
         } catch (IllegalAccessException e) {
             throw new FluentInjectException("IllegalAccessException on class " + (cls != null ? cls.getName() : " null"), e);
@@ -175,10 +181,15 @@ public class FluentInjector implements FluentInjectControl {
 
     private static boolean isElement(Field field) {
         try {
-            return field.getType().getConstructor(WebElement.class) != null
-                    || field.getType().getConstructor(WebElement.class, WebDriver.class) != null;
+            field.getType().getConstructor(WebElement.class);
+            return true;
         } catch (NoSuchMethodException e) {
-            return false;
+            try {
+                field.getType().getConstructor(WebElement.class, WebDriver.class);
+            } catch (NoSuchMethodException e1) {
+                return false;
+            }
+            return true;
         }
     }
 
@@ -211,27 +222,37 @@ public class FluentInjector implements FluentInjectControl {
             throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException {
         T page;
-        Class<?>[] classTypes = new Class[params.length];
+        List<Object> paramsList = new ArrayList<>();
+        List<Class<?>> paramsTypeList = new ArrayList<>();
         for (int i = 0; i < params.length; i++) {
-            classTypes[i] = params[i].getClass();
+            paramsList.add(params[i]);
+            paramsTypeList.add(params[i].getClass());
         }
 
+        Constructor<T> construct;
         try {
-            Constructor<T> construct = cls.getDeclaredConstructor(classTypes);
-            construct.setAccessible(true);
-            page = construct.newInstance(params);
-            return page;
+            construct = cls.getDeclaredConstructor(paramsTypeList.toArray(new Class<?>[paramsTypeList.size()]));
         } catch (NoSuchMethodException ex) {
-            if (params.length != 0) {
-                throw new FluentInjectException(
-                        "You provided the wrong arguments to the newInstance method, "
-                                + "if you just want to use a page with a default constructor, use @Inject or newInstance("
-                                + cls.getSimpleName() + ".class)",
-                        ex);
-            } else {
-                throw ex;
+            paramsList.add(0, fluentControl);
+            paramsTypeList.add(0, FluentControl.class);
+            try {
+                construct = cls.getDeclaredConstructor(paramsTypeList.toArray(new Class<?>[paramsTypeList.size()]));
+            } catch (NoSuchMethodException ex2) {
+                if (params.length != 0) {
+                    throw new FluentInjectException(
+                            "You provided the wrong arguments to the newInstance method, "
+                                    + "if you just want to use a page with a default constructor, use @Inject or newInstance("
+                                    + cls.getSimpleName() + ".class)",
+                            ex);
+                } else {
+                    throw ex;
+                }
             }
         }
+
+        construct.setAccessible(true);
+        page = construct.newInstance(paramsList.toArray());
+        return page;
     }
 
     private void initFieldElements(ElementLocatorFactory factory, Object container, Field field) {

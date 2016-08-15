@@ -195,6 +195,7 @@ public class FluentTestTest {
         sharedClassDrivers.clear();
         sharedOnceDrivers.clear();
         screenshotWebDrivers.clear();
+        SharedWebDriverContainer.INSTANCE.quitAll();
     }
 
     @Test
@@ -229,46 +230,36 @@ public class FluentTestTest {
 
     @Test
     public void testInternalTestSharedOnce() {
-        try {
-            Result result = JUnitCore.runClasses(InternalTestSharedOnce.class);
-            assertThat(result.getFailures()).hasSize(1);
-            assertThat(result.getFailures().get(0).getMessage()).isEqualTo("Failing Test");
+        Result result = JUnitCore.runClasses(InternalTestSharedOnce.class);
+        assertThat(result.getFailures()).hasSize(1);
+        assertThat(result.getFailures().get(0).getMessage()).isEqualTo("Failing Test");
 
-            assertThat(sharedOnceDrivers).hasSize(1);
+        assertThat(sharedOnceDrivers).hasSize(1);
 
-            for (WebDriver driver : sharedOnceDrivers) {
-                Mockito.verify(driver, Mockito.never()).quit();
-            }
-
-            assertThat(SharedWebDriverContainer.INSTANCE.getAllDrivers()).hasSize(1);
-        } finally {
-            SharedWebDriverContainer.INSTANCE.quitAll();
+        for (WebDriver driver : sharedOnceDrivers) {
+            Mockito.verify(driver, Mockito.never()).quit();
         }
 
+        assertThat(SharedWebDriverContainer.INSTANCE.getAllDrivers()).hasSize(1);
     }
 
     @Test
     public void testShouldDeleteCookiesTest() {
-        try {
-            Result result = JUnitCore.runClasses(ShouldDeleteCookiesTest.class);
-            assertThat(result.getFailures()).hasSize(1);
-            assertThat(result.getFailures().get(0).getMessage()).isEqualTo("Failing Test");
+        Result result = JUnitCore.runClasses(ShouldDeleteCookiesTest.class);
+        assertThat(result.getFailures()).hasSize(1);
+        assertThat(result.getFailures().get(0).getMessage()).isEqualTo("Failing Test");
 
-            assertThat(sharedClassDrivers).hasSize(1);
+        assertThat(sharedClassDrivers).hasSize(1);
 
-            for (WebDriver driver : sharedClassDrivers) {
-                Mockito.verify(driver).quit();
-            }
-
-            for(WebDriver.Options options : sharedClassDriversOptions) {
-                Mockito.verify(options, Mockito.times(3)).deleteAllCookies();
-            }
-
-            assertThat(SharedWebDriverContainer.INSTANCE.getAllDrivers()).isEmpty();
-        } finally {
-            SharedWebDriverContainer.INSTANCE.quitAll();
+        for (WebDriver driver : sharedClassDrivers) {
+            Mockito.verify(driver).quit();
         }
 
+        for(WebDriver.Options options : sharedClassDriversOptions) {
+            Mockito.verify(options, Mockito.times(3)).deleteAllCookies();
+        }
+
+        assertThat(SharedWebDriverContainer.INSTANCE.getAllDrivers()).isEmpty();
     }
 
     @Test
@@ -297,12 +288,6 @@ public class FluentTestTest {
             FileUtils.deleteQuietly(screenshotGeneratedFile);
             FileUtils.deleteQuietly(htmlDumpFile);
         }
-
-
-
-
-
-
 
     }
 }
