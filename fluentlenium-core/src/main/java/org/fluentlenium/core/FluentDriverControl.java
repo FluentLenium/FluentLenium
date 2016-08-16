@@ -1,5 +1,6 @@
 package org.fluentlenium.core;
 
+import org.fluentlenium.configuration.Configuration;
 import org.openqa.selenium.internal.WrapsDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -13,7 +14,9 @@ public interface FluentDriverControl extends FluentControl, WrapsDriver {
      *
      * @param baseUrl base URL
      * @return Fluent element
+     * @deprecated Use {@link Configuration#getDefaultBaseUrl()}
      */
+    @Deprecated
     FluentDriverControl withDefaultUrl(String baseUrl);
 
     /**
@@ -22,7 +25,9 @@ public interface FluentDriverControl extends FluentControl, WrapsDriver {
      * @param l        timeout value
      * @param timeUnit time unit for wait
      * @return Fluent element
+     * @deprecated Use {@link Configuration#getPageLoadTimeout()}
      */
+    @Deprecated
     FluentDriverControl withDefaultPageWait(long l, TimeUnit timeUnit);
 
     /**
@@ -31,6 +36,8 @@ public interface FluentDriverControl extends FluentControl, WrapsDriver {
      * @param l        timeout value
      * @param timeUnit time unit for wait
      * @return Fluent element
+     * @deprecated Use {@link Configuration#getImplicitlyWait()}
      */
+    @Deprecated
     FluentDriverControl withDefaultSearchWait(long l, TimeUnit timeUnit);
 }

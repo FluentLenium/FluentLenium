@@ -1,14 +1,17 @@
 package org.fluentlenium.adapter;
 
 import lombok.experimental.Delegate;
+import org.fluentlenium.configuration.Configuration;
+import org.fluentlenium.configuration.WebDrivers;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.FluentDriverControl;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class FluentAdapter implements FluentDriverControl, FluentDriverConfiguration {
+public class FluentAdapter implements FluentDriverControl, Configuration {
 
     private final DriverContainer driverContainer;
+
+    private String defaultBaseUrl;
 
     private String screenshotPath;
 
@@ -17,6 +20,12 @@ public class FluentAdapter implements FluentDriverControl, FluentDriverConfigura
     private TriggerMode screenshotMode;
 
     private TriggerMode htmlDumpMode;
+
+    private Long pageLoadTimeout;
+
+    private Long implicitlyWait;
+
+    private Long scriptTimeout;
 
     public FluentAdapter() {
         this(new DefaultDriverContainer());
@@ -96,16 +105,47 @@ public class FluentAdapter implements FluentDriverControl, FluentDriverConfigura
      * @return returns WebDriver which is set to FirefoxDriver by default - can be overwritten
      */
     public WebDriver getDefaultDriver() {
-        return new FirefoxDriver();
+        return WebDrivers.newWebDriver("firefox");
     }
 
-    /**
-     * Override this method to set the base URL to use when using relative URLs
-     *
-     * @return The base URL, or null if relative URLs should be passed to the driver untouched
-     */
+    @Override
     public String getDefaultBaseUrl() {
-        return null;
+        return defaultBaseUrl;
+    }
+
+    @Override
+    public void setDefaultBaseUrl(String defaultBaseUrl) {
+        this.defaultBaseUrl = defaultBaseUrl;
+    }
+
+    @Override
+    public Long getPageLoadTimeout() {
+        return pageLoadTimeout;
+    }
+
+    @Override
+    public void setPageLoadTimeout(Long pageLoadTimeout) {
+        this.pageLoadTimeout = pageLoadTimeout;
+    }
+
+    @Override
+    public Long getImplicitlyWait() {
+        return implicitlyWait;
+    }
+
+    @Override
+    public void setImplicitlyWait(Long implicitlyWait) {
+        this.implicitlyWait = implicitlyWait;
+    }
+
+    @Override
+    public Long getScriptTimeout() {
+        return scriptTimeout;
+    }
+
+    @Override
+    public void setScriptTimeout(Long scriptTimeout) {
+        this.scriptTimeout = scriptTimeout;
     }
 
     @Override

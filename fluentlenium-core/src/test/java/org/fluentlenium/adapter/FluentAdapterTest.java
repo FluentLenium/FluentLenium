@@ -1,10 +1,9 @@
 package org.fluentlenium.adapter;
 
-import org.fluentlenium.core.FluentDriverConfigurationReader;
+import org.fluentlenium.configuration.ConfigurationReader;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.WebDriver;
 
@@ -63,20 +62,20 @@ public class FluentAdapterTest {
     public void should_configure_properly() {
         FluentAdapter adapter = new FluentAdapter();
 
-        adapter.setScreenshotMode(FluentDriverConfigurationReader.TriggerMode.ON_FAIL);
-        assertThat(adapter.getScreenshotMode()).isSameAs(FluentDriverConfigurationReader.TriggerMode.ON_FAIL);
+        adapter.setScreenshotMode(ConfigurationReader.TriggerMode.ON_FAIL);
+        assertThat(adapter.getScreenshotMode()).isSameAs(ConfigurationReader.TriggerMode.ON_FAIL);
         adapter.setScreenshotMode(null);
 
         adapter.setScreenshotPath("path");
         assertThat(adapter.getScreenshotPath()).isEqualTo("path");
         adapter.setScreenshotPath(null);
 
-        adapter.setHtmlDumpMode(FluentDriverConfigurationReader.TriggerMode.ON_FAIL);
-        assertThat(adapter.getHtmlDumpMode()).isSameAs(FluentDriverConfigurationReader.TriggerMode.ON_FAIL);
+        adapter.setHtmlDumpMode(ConfigurationReader.TriggerMode.ON_FAIL);
+        assertThat(adapter.getHtmlDumpMode()).isSameAs(ConfigurationReader.TriggerMode.ON_FAIL);
 
         adapter.setHtmlDumpPath("dumpPath");
         assertThat(adapter.getHtmlDumpPath()).isEqualTo("dumpPath");
-        
+
         assertThat(adapter.getDefaultBaseUrl()).isNull();
 
         /*
@@ -126,7 +125,6 @@ public class FluentAdapterTest {
     }
     */
     }
-
 
 
 }

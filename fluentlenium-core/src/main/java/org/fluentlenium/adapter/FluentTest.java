@@ -2,7 +2,6 @@ package org.fluentlenium.adapter;
 
 import org.junit.ClassRule;
 import org.junit.Rule;
-import org.junit.rules.TestName;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
@@ -11,14 +10,7 @@ import org.junit.runners.model.Statement;
  * All Junit Test should extends this class. It provides default parameters.
  */
 public abstract class FluentTest extends FluentTestRunnerAdapter {
-
-    @Rule
-    public TestName name = new TestName();
-
-    private static Class<?> testClass;
-
     public FluentTest() {
-        testClass = this.getClass();
     }
 
     @Rule
