@@ -369,6 +369,15 @@ public void isAt() {
 }
 ```
 
+Instead of manually implementing `isAt` method, you can use Selenium `@FindBy` (or `@FindBys`) annotation on the class
+extending [org.fluentlenium.core.FluentPage](https://github.com/FluentLenium/FluentLenium/blob/master/fluentlenium-core/src/main/java/org/fluentlenium/core/FluentPage.java)
+to define an Element Locator that should match this page and this page only.
+
+@FindBy(css="#my-page")
+public class MyPage extends FluentPage {
+   ...
+}
+
 Create your own methods to easily fill out forms, go to another or whatever else may be needed in your test.
 
 For example:
