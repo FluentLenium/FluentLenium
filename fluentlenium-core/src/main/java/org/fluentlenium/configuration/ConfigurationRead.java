@@ -2,8 +2,8 @@ package org.fluentlenium.configuration;
 
 import org.openqa.selenium.WebDriver;
 
-public interface ConfigurationReader {
-    enum TriggerMode {ON_FAIL, NEVER}
+public interface ConfigurationRead {
+    enum TriggerMode {ON_FAIL, NEVER, UNDEFINED}
 
     /**
      * @return
@@ -12,6 +12,12 @@ public interface ConfigurationReader {
     @Deprecated
     WebDriver getDefaultDriver();
 
+    /**
+     * Get the class name of the {@link ConfigurationFactory}
+     *
+     * @return
+     */
+    Class<? extends ConfigurationFactory> getConfigurationFactory();
 
     /**
      * Get the name of the {@link WebDriver} to used, as registered in {@link WebDrivers}.

@@ -18,8 +18,8 @@ public class JavascriptTest extends LocalFluentCase {
     @Before
     public void setup() {
         goTo(JAVASCRIPT_URL);
-        setScreenshotMode(TriggerMode.NEVER);
-        setHtmlDumpMode(TriggerMode.NEVER);
+        getConfiguration().setScreenshotMode(TriggerMode.NEVER);
+        getConfiguration().setHtmlDumpMode(TriggerMode.NEVER);
     }
 
     @Test

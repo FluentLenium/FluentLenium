@@ -3,7 +3,7 @@ package org.fluentlenium.core;
 import lombok.experimental.Delegate;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.fluentlenium.configuration.ConfigurationReader;
+import org.fluentlenium.configuration.ConfigurationRead;
 import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.alert.Alert;
@@ -40,7 +40,7 @@ public class FluentDriver implements FluentDriverControl {
 
     private String baseUrl;
 
-    private ConfigurationReader configuration;
+    private ConfigurationRead configuration;
 
     private EventsRegistry events;
 
@@ -55,7 +55,7 @@ public class FluentDriver implements FluentDriverControl {
 
     private KeyboardActions keyboardActions;
 
-    public FluentDriver(WebDriver driver, ConfigurationReader configuration) {
+    public FluentDriver(WebDriver driver, ConfigurationRead configuration) {
         initFluent(driver);
         this.configuration = configuration;
         configureDriver();

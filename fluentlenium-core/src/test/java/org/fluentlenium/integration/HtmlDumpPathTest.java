@@ -17,14 +17,14 @@ public class HtmlDumpPathTest extends LocalFluentCase {
     private final Path tempDir;
 
     public HtmlDumpPathTest() throws IOException {
-        setHtmlDumpMode(TriggerMode.ON_FAIL);
+        getConfiguration().setHtmlDumpMode(TriggerMode.ON_FAIL);
         tempDir = Files.createTempDirectory("tempfiles");
     }
 
     @Test
     public void checkHtmlIsDumpedInPath() throws IOException {
         goTo(DEFAULT_URL);
-        setHtmlDumpPath(tempDir.toFile().getAbsolutePath());
+        getConfiguration().setHtmlDumpPath(tempDir.toFile().getAbsolutePath());
 
         File file = new File("test.html");
         try {

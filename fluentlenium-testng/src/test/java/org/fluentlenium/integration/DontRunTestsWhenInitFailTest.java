@@ -15,8 +15,8 @@ public class DontRunTestsWhenInitFailTest {
     private static class TestClass extends FluentTestNg {
 
         public TestClass() {
-            setScreenshotMode(TriggerMode.ON_FAIL);
-            setHtmlDumpMode(TriggerMode.ON_FAIL);
+            getConfiguration().setScreenshotMode(TriggerMode.ON_FAIL);
+            getConfiguration().setHtmlDumpMode(TriggerMode.ON_FAIL);
         }
 
         @Override

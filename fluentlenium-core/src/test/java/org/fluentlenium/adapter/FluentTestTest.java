@@ -1,14 +1,10 @@
 package org.fluentlenium.adapter;
 
-import com.google.common.base.Supplier;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.assertj.core.util.Files;
 import org.fluentlenium.adapter.util.DeleteCookies;
 import org.fluentlenium.adapter.util.SharedDriver;
-import org.fluentlenium.adapter.util.SharedDriverStrategy;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
@@ -155,10 +151,10 @@ public class FluentTestTest {
     public static class AutomaticScreenShotTest extends FluentTest {
 
         public AutomaticScreenShotTest() {
-            setHtmlDumpPath(tmpPath.getPath());
-            setHtmlDumpMode(TriggerMode.ON_FAIL);
-            setScreenshotPath(tmpPath.getPath());
-            setScreenshotMode(TriggerMode.ON_FAIL);
+            getConfiguration().setHtmlDumpPath(tmpPath.getPath());
+            getConfiguration().setHtmlDumpMode(TriggerMode.ON_FAIL);
+            getConfiguration().setScreenshotPath(tmpPath.getPath());
+            getConfiguration().setScreenshotMode(TriggerMode.ON_FAIL);
         }
 
         @Override
