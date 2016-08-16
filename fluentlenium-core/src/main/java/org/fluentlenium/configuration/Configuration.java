@@ -1,6 +1,15 @@
 package org.fluentlenium.configuration;
 
+import org.openqa.selenium.WebDriver;
+
 public interface Configuration extends ConfigurationReader {
+    /**
+     * Set the name of the {@link WebDriver} to used, as registered in {@link WebDrivers}.
+     *
+     * @param webDriverName
+     */
+    void setWebDriver(String webDriverName);
+
     /**
      * Sets the base URL used to build absolute URL when relative URL is used.
      *

@@ -5,7 +5,20 @@ import org.openqa.selenium.WebDriver;
 public interface ConfigurationReader {
     enum TriggerMode {ON_FAIL, NEVER}
 
+    /**
+     * @return
+     * @deprecated Use {@link #getWebDriver()} instead.
+     */
+    @Deprecated
     WebDriver getDefaultDriver();
+
+
+    /**
+     * Get the name of the {@link WebDriver} to used, as registered in {@link WebDrivers}.
+     *
+     * @return
+     */
+    String getWebDriver();
 
     /**
      * Sets the base URL used to build absolute URL when relative URL is used.

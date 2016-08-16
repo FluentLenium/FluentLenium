@@ -12,7 +12,7 @@ public abstract class WebDrivers {
     private static Map<String, WebDriverFactory> factories = new HashMap<>();
 
     static {
-        register("firefox", new FirefoxDriverFactory());
+        register("firefox", new ReflectiveWebDriverFactory("org.openqa.selenium.firefox.FirefoxDriver"));
     }
 
     private WebDrivers() {

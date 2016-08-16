@@ -11,6 +11,8 @@ public class FluentAdapter implements FluentDriverControl, Configuration {
 
     private final DriverContainer driverContainer;
 
+    private String webDriverName;
+
     private String defaultBaseUrl;
 
     private String screenshotPath;
@@ -99,13 +101,23 @@ public class FluentAdapter implements FluentDriverControl, Configuration {
         }
     }
 
-    /**
-     * Override this method to change the driver
-     *
-     * @return returns WebDriver which is set to FirefoxDriver by default - can be overwritten
-     */
+    @Override
+    public String getWebDriver() {
+        return webDriverName;
+    }
+
+    @Override
+    public void setWebDriver(String webDriverName) {
+        this.webDriverName = webDriverName;
+    }
+
+    @Override
     public WebDriver getDefaultDriver() {
-        return WebDrivers.newWebDriver("firefox");
+        return WebDrivers.newWebDriver(getWebDriver());
+    }
+    
+    public WebDriver newWebDriver() {
+        return WebDrivers.newWebDriver(getWebDriver());
     }
 
     @Override
