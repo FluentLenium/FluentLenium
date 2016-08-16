@@ -1,11 +1,10 @@
 package org.fluentlenium.adapter;
 
+import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.FluentDriverControl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
-import lombok.experimental.Delegate;
 
 public class FluentAdapter implements FluentDriverControl, FluentDriverConfiguration {
 
@@ -57,9 +56,8 @@ public class FluentAdapter implements FluentDriverControl, FluentDriverConfigura
      * Load a {@link WebDriver} into this adapter.
      *
      * @param webDriver webDriver to use.
-     * @throws IllegalStateException when trying to register a different webDriver that the current one.
-     *
      * @return adapter
+     * @throws IllegalStateException when trying to register a different webDriver that the current one.
      */
     public void initFluent(WebDriver webDriver) {
         if (webDriver == null) {
@@ -79,7 +77,7 @@ public class FluentAdapter implements FluentDriverControl, FluentDriverConfigura
 
         FluentDriver fluentDriver = new FluentDriver(webDriver, this);
         setFluentDriver(fluentDriver);
-        fluentDriver.initContainer(this);
+        fluentDriver.inject(this);
     }
 
     /**

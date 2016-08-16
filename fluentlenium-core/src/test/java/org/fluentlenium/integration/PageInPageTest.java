@@ -4,7 +4,7 @@ import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.page.PageInitializerException;
+import org.fluentlenium.core.inject.FluentInjectException;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Rule;
 import org.junit.Test;
@@ -22,6 +22,7 @@ public class PageInPageTest extends LocalFluentCase {
 
     @Page
     private TestPage testPage;
+
     @Page
     private SubSubTestPage subTestPage;
 
@@ -37,7 +38,8 @@ public class PageInPageTest extends LocalFluentCase {
         assertThat(subTestPage.includedPage).isNotNull();
         assertThat(subTestPage.anotherIncludedPage).isNotNull();
 
-        SubTestPageWithParameter subTestPageWithParameter = createPage(SubTestPageWithParameter.class, "buttonId");
+        SubTestPageWithParameter subTestPageWithParameter = createPage(
+                SubTestPageWithParameter.class, "buttonId");
         assertThat(subTestPageWithParameter).isNotNull();
         assertThat(subTestPageWithParameter).isInstanceOf(SubTestPageWithParameter.class);
         assertThat(subTestPageWithParameter.buttonId).isEqualTo("buttonId");
@@ -45,13 +47,15 @@ public class PageInPageTest extends LocalFluentCase {
 
     @Test
     public void pages_should_throw_an_exception_when_constructor_with_params_not_found() {
-        expectedException.expect(PageInitializerException.class);
-        expectedException.expectMessage("You provided the wrong arguments to the createPage method, if you just want to use a page with a default constructor, use @Page or createPage(SubTestPageWithParameter.class)");
+        expectedException.expect(FluentInjectException.class);
+        expectedException.expectMessage(
+                "You provided the wrong arguments to the newInstance method, if you just want to use a page with a default constructor, use @Inject or newInstance(SubTestPageWithParameter.class)");
         createPage(SubTestPageWithParameter.class, "buttonId", "unkownConstructorField");
     }
 }
 
 class TestPage extends FluentPage {
+
     @Page
     IncludedPage includedPage;
 }
@@ -60,30 +64,32 @@ class SubSubTestPage extends SubTestPage {
 }
 
 class SubTestPage extends TestPage {
+
     @Page
     IncludedPage anotherIncludedPage;
 }
 
 class SubTestPageWithParameter extends TestPage {
-    final String buttonId;
 
+    final String buttonId;
 
     public SubTestPageWithParameter(String buttonId) {
         this.buttonId = buttonId;
     }
 }
 
-
 class SubTestPageWithCreate extends FluentPage {
+
     public IncludedPage pageWithCreatePage;
 
-    public void initPage(FluentControl control) {
-        super.initPage(control);
+    public void initFluent(FluentControl control) {
+        super.initFluent(control);
         pageWithCreatePage = createPage(IncludedPage.class);
     }
 
 }
 
 class IncludedPage extends FluentPage {
+
     FluentWebElement element;
 }

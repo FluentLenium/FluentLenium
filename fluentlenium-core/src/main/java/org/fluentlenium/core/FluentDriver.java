@@ -1,14 +1,6 @@
 package org.fluentlenium.core;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URI;
-import java.nio.file.Paths;
-import java.util.Date;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
+import lombok.experimental.Delegate;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.fluentlenium.core.action.KeyboardActions;
@@ -18,8 +10,7 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.filter.Filter;
-import org.fluentlenium.core.page.PageInitializer;
-import org.fluentlenium.core.page.PageInitializerException;
+import org.fluentlenium.core.inject.FluentInjector;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.wait.FluentWait;
@@ -32,6 +23,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URI;
+import java.nio.file.Paths;
+import java.util.Date;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
 /**
  * Util Class which offers some shortcut to webdriver methods
  */
@@ -43,7 +43,8 @@ public class FluentDriver implements FluentDriverControl {
 
     private EventsRegistry events;
 
-    private PageInitializer pageInitializer;
+    @Delegate
+    private FluentInjector fluentInjector;
 
     private Search search;
 
@@ -66,34 +67,15 @@ public class FluentDriver implements FluentDriverControl {
         }
         this.mouseActions = new MouseActions(driver);
         this.keyboardActions = new KeyboardActions(driver);
-        this.pageInitializer = new PageInitializer(this);
-        initContainer(this);
-        return this;
-    }
-
-    public FluentDriver initContainers(FluentControl... containers) {
-        for (FluentControl container : containers) {
-            initContainer(container);
-        }
-        return this;
-    }
-
-    public FluentDriver initContainer(FluentControl container) {
-        try {
-            pageInitializer.initContainer(container);
-        } catch (ClassNotFoundException e) {
-            throw new PageInitializerException("Class not found", e);
-        } catch (IllegalAccessException e) {
-            throw new PageInitializerException("IllegalAccessException", e);
-        }
+        this.fluentInjector = new FluentInjector(this);
+        inject(this);
         return this;
     }
 
     /**
      * Define the default url that will be used in the test and in the relative pages
      *
-     * @param baseUrl
-     *            base URL
+     * @param baseUrl base URL
      * @return Fluent element
      */
     @Override
@@ -110,10 +92,8 @@ public class FluentDriver implements FluentDriverControl {
     /**
      * Define an implicit time to wait for a page to be loaded
      *
-     * @param l
-     *            timeout value
-     * @param timeUnit
-     *            time unit for wait
+     * @param l        timeout value
+     * @param timeUnit time unit for wait
      * @return Fluent element
      */
     @Override
@@ -125,10 +105,8 @@ public class FluentDriver implements FluentDriverControl {
     /**
      * Define an implicit time to wait when searching an element
      *
-     * @param l
-     *            timeout value
-     * @param timeUnit
-     *            time unit for wait
+     * @param l        timeout value
+     * @param timeUnit time unit for wait
      * @return Fluent element
      */
     @Override
@@ -235,11 +213,6 @@ public class FluentDriver implements FluentDriverControl {
     @Override
     public KeyboardActions keyboard() {
         return keyboardActions;
-    }
-
-    @Override
-    public <T extends FluentPage> T createPage(Class<T> cls, Object... params) {
-        return pageInitializer.createPage(cls, params);
     }
 
     /**
@@ -457,6 +430,6 @@ public class FluentDriver implements FluentDriverControl {
     }
 
     public void releaseFluent() {
-        pageInitializer.release();
+        fluentInjector.release();
     }
 }

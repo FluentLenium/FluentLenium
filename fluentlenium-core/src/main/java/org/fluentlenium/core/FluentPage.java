@@ -1,6 +1,5 @@
 package org.fluentlenium.core;
 
-import lombok.experimental.Delegate;
 import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.core.page.PageAnnotations;
 import org.openqa.selenium.By;
@@ -8,8 +7,11 @@ import org.openqa.selenium.NoSuchElementException;
 
 /**
  * Use the Page Object Pattern to have more resilient tests.
+ * <p>
+ * Extend this class and annotate it with @{@link PageUrl} and @{@link org.openqa.selenium.support.FindBy} to provide
+ * injectable Page Objects to FluentLenium.
  */
-public abstract class FluentPage implements FluentPageControl {
+public abstract class FluentPage extends DefaultFluentContainer implements FluentPageControl {
 
     private PageAnnotations pageAnnotations = new PageAnnotations(getClass());
 
@@ -17,18 +19,7 @@ public abstract class FluentPage implements FluentPageControl {
     }
 
     protected FluentPage(FluentControl control) {
-        initPage(control);
-    }
-
-    private FluentControl control;
-
-    @Delegate
-    private FluentControl getFluentControl() {
-        return control;
-    }
-
-    public void initPage(FluentControl control) {
-        this.control = control;
+        super(control);
     }
 
     @Override
