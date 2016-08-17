@@ -3,13 +3,16 @@ package org.fluentlenium.adapter;
 import lombok.experimental.Delegate;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.configuration.ConfigurationFactoryProvider;
-import org.fluentlenium.configuration.ConfigurationRead;
+import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.configuration.WebDrivers;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.FluentDriverControl;
 import org.openqa.selenium.WebDriver;
 
-public class FluentAdapter implements FluentDriverControl, ConfigurationRead {
+/**
+ * Generic adapter to {@link FluentDriver}.
+ */
+public class FluentAdapter implements FluentDriverControl, ConfigurationProperties {
 
     private final DriverContainer driverContainer;
 
@@ -32,7 +35,7 @@ public class FluentAdapter implements FluentDriverControl, ConfigurationRead {
         initFluent(webDriver);
     }
 
-    @Delegate(types = ConfigurationRead.class)
+    @Delegate(types = ConfigurationProperties.class)
     public Configuration getConfiguration() {
         return configuration;
     }
@@ -56,6 +59,8 @@ public class FluentAdapter implements FluentDriverControl, ConfigurationRead {
 
     /**
      * Load a {@link WebDriver} into this adapter.
+     *
+     * This method should not be called by end user.
      *
      * @param webDriver webDriver to use.
      * @return adapter
@@ -84,6 +89,8 @@ public class FluentAdapter implements FluentDriverControl, ConfigurationRead {
 
     /**
      * Release the current {@link WebDriver} from this adapter.
+     *
+     * This method should not be called by end user.
      */
     public void releaseFluent() {
         if (getFluentDriver() != null) {
@@ -95,7 +102,7 @@ public class FluentAdapter implements FluentDriverControl, ConfigurationRead {
     /**
      * @return A new WebDriver instance.
      * @see #getDriver()
-     * @deprecated Override {@link #newWebDriver()} instead, or consider using {@link #getDriver()} and #ConfigurationRead{@link #getDriver()}
+     * @deprecated Override {@link #newWebDriver()} instead, or consider using {@link ConfigurationProperties#getWebDriver()}.
      */
     @Deprecated
     public WebDriver getDefaultDriver() {
@@ -103,6 +110,15 @@ public class FluentAdapter implements FluentDriverControl, ConfigurationRead {
     }
 
     /**
+     * Creates a new {@link WebDriver} instance.
+     *
+     * This method should not be called by end user, but may be overriden if required.
+     *
+     * Before overriding this method, you should consider using {@link WebDrivers} registry and configuration
+     * {@link ConfigurationProperties#getWebDriver()}.
+     *
+     * To retrieve the current managed {@link WebDriver}, call {@link #getDriver()} instead.
+     *
      * @return A new WebDriver instance.
      * @see #getDriver()
      */

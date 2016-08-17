@@ -152,9 +152,9 @@ public class FluentTestTest {
 
         public AutomaticScreenShotTest() {
             getConfiguration().setHtmlDumpPath(tmpPath.getPath());
-            getConfiguration().setHtmlDumpMode(TriggerMode.ON_FAIL);
+            getConfiguration().setHtmlDumpMode(TriggerMode.AUTOMATIC_ON_FAIL);
             getConfiguration().setScreenshotPath(tmpPath.getPath());
-            getConfiguration().setScreenshotMode(TriggerMode.ON_FAIL);
+            getConfiguration().setScreenshotMode(TriggerMode.AUTOMATIC_ON_FAIL);
         }
 
         @Override

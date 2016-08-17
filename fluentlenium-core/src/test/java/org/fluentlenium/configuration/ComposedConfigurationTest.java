@@ -22,11 +22,11 @@ public class ComposedConfigurationTest {
         }
     }
 
-    private ConfigurationRead configurationRead1;
+    private ConfigurationProperties configurationProperties1;
 
-    private ConfigurationRead configurationRead2;
+    private ConfigurationProperties configurationProperties2;
 
-    private ConfigurationRead configurationRead3;
+    private ConfigurationProperties configurationProperties3;
 
     private ComposedConfiguration composed;
 
@@ -42,11 +42,11 @@ public class ComposedConfigurationTest {
             }
         };
 
-        configurationRead1 = mock(ConfigurationRead.class, configurationReadAnswer);
-        configurationRead2 = mock(ConfigurationRead.class, configurationReadAnswer);
-        configurationRead3 = mock(ConfigurationRead.class, configurationReadAnswer);
+        configurationProperties1 = mock(ConfigurationProperties.class, configurationReadAnswer);
+        configurationProperties2 = mock(ConfigurationProperties.class, configurationReadAnswer);
+        configurationProperties3 = mock(ConfigurationProperties.class, configurationReadAnswer);
         configuration = new ProgrammaticConfiguration();
-        composed = new ComposedConfiguration(configuration, configuration, configurationRead1, configurationRead2, configurationRead3);
+        composed = new ComposedConfiguration(configuration, configuration, configurationProperties1, configurationProperties2, configurationProperties3);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class ComposedConfigurationTest {
 
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DefaultConfigurationFactory.class);
 
-        when(configurationRead2.getConfigurationFactory()).thenAnswer(new Answer<Object>() {
+        when(configurationProperties2.getConfigurationFactory()).thenAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
                 return DummyConfigurationFactory.class;
@@ -70,7 +70,7 @@ public class ComposedConfigurationTest {
 
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DummyConfigurationFactory.class);
 
-        when(configurationRead3.getConfigurationFactory()).thenAnswer(new Answer<Object>() {
+        when(configurationProperties3.getConfigurationFactory()).thenAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
                 return DefaultConfigurationFactory.class;
@@ -80,60 +80,60 @@ public class ComposedConfigurationTest {
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DummyConfigurationFactory.class);
     }
 
-    private void testString(Function<ConfigurationRead, String> getter, Function<String, Void> setter) {
+    private void testString(Function<ConfigurationProperties, String> getter, Function<String, Void> setter) {
         Assertions.assertThat(getter.apply(composed)).isNull();
 
         setter.apply("firefox");
         Assertions.assertThat(getter.apply(composed)).isEqualTo("firefox");
 
-        when(getter.apply(configurationRead2)).thenReturn("chrome");
+        when(getter.apply(configurationProperties2)).thenReturn("chrome");
         Assertions.assertThat(getter.apply(composed)).isEqualTo("firefox");
 
         setter.apply(null);
         Assertions.assertThat(getter.apply(composed)).isEqualTo("chrome");
 
-        when(getter.apply(configurationRead3)).thenReturn("firefox");
+        when(getter.apply(configurationProperties3)).thenReturn("firefox");
         Assertions.assertThat(getter.apply(composed)).isEqualTo("chrome");
     }
 
-    private void testLong(Function<ConfigurationRead, Long> getter, Function<Long, Void> setter) {
+    private void testLong(Function<ConfigurationProperties, Long> getter, Function<Long, Void> setter) {
         Assertions.assertThat(getter.apply(composed)).isNull();
 
         setter.apply(1000L);
         Assertions.assertThat(getter.apply(composed)).isEqualTo(1000L);
 
-        when(getter.apply(configurationRead2)).thenReturn(2000L);
+        when(getter.apply(configurationProperties2)).thenReturn(2000L);
         Assertions.assertThat(getter.apply(composed)).isEqualTo(1000L);
 
         setter.apply(null);
         Assertions.assertThat(getter.apply(composed)).isEqualTo(2000L);
 
-        when(getter.apply(configurationRead3)).thenReturn(1000L);
+        when(getter.apply(configurationProperties3)).thenReturn(1000L);
         Assertions.assertThat(getter.apply(composed)).isEqualTo(2000L);
     }
 
 
-    private void testTriggerMode(Function<ConfigurationRead, ConfigurationRead.TriggerMode> getter, Function<ConfigurationRead.TriggerMode, Void> setter) {
+    private void testTriggerMode(Function<ConfigurationProperties, ConfigurationProperties.TriggerMode> getter, Function<ConfigurationProperties.TriggerMode, Void> setter) {
         Assertions.assertThat(getter.apply(composed)).isNull();
 
-        setter.apply(ConfigurationRead.TriggerMode.NEVER);
-        Assertions.assertThat(getter.apply(composed)).isEqualTo(ConfigurationRead.TriggerMode.NEVER);
+        setter.apply(ConfigurationProperties.TriggerMode.MANUAL);
+        Assertions.assertThat(getter.apply(composed)).isEqualTo(ConfigurationProperties.TriggerMode.MANUAL);
 
-        when(getter.apply(configurationRead2)).thenReturn(ConfigurationRead.TriggerMode.ON_FAIL);
-        Assertions.assertThat(getter.apply(composed)).isEqualTo(ConfigurationRead.TriggerMode.NEVER);
+        when(getter.apply(configurationProperties2)).thenReturn(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
+        Assertions.assertThat(getter.apply(composed)).isEqualTo(ConfigurationProperties.TriggerMode.MANUAL);
 
         setter.apply(null);
-        Assertions.assertThat(getter.apply(composed)).isEqualTo(ConfigurationRead.TriggerMode.ON_FAIL);
+        Assertions.assertThat(getter.apply(composed)).isEqualTo(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
 
-        when(getter.apply(configurationRead3)).thenReturn(ConfigurationRead.TriggerMode.NEVER);
-        Assertions.assertThat(getter.apply(composed)).isEqualTo(ConfigurationRead.TriggerMode.ON_FAIL);
+        when(getter.apply(configurationProperties3)).thenReturn(ConfigurationProperties.TriggerMode.MANUAL);
+        Assertions.assertThat(getter.apply(composed)).isEqualTo(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
     }
 
     @Test
     public void webDriver() {
-        testString(new Function<ConfigurationRead, String>() {
+        testString(new Function<ConfigurationProperties, String>() {
             @Override
-            public String apply(ConfigurationRead input) {
+            public String apply(ConfigurationProperties input) {
                 return input.getWebDriver();
             }
         }, new Function<String, Void>() {
@@ -147,9 +147,9 @@ public class ComposedConfigurationTest {
 
     @Test
     public void baseUrl() {
-        testString(new Function<ConfigurationRead, String>() {
+        testString(new Function<ConfigurationProperties, String>() {
             @Override
-            public String apply(ConfigurationRead input) {
+            public String apply(ConfigurationProperties input) {
                 return input.getBaseUrl();
             }
         }, new Function<String, Void>() {
@@ -163,9 +163,9 @@ public class ComposedConfigurationTest {
 
     @Test
     public void pageLoadTimeout() {
-        testLong(new Function<ConfigurationRead, Long>() {
+        testLong(new Function<ConfigurationProperties, Long>() {
             @Override
-            public Long apply(ConfigurationRead input) {
+            public Long apply(ConfigurationProperties input) {
                 return input.getPageLoadTimeout();
             }
         }, new Function<Long, Void>() {
@@ -180,9 +180,9 @@ public class ComposedConfigurationTest {
 
     @Test
     public void implicitlyWait() {
-        testLong(new Function<ConfigurationRead, Long>() {
+        testLong(new Function<ConfigurationProperties, Long>() {
             @Override
-            public Long apply(ConfigurationRead input) {
+            public Long apply(ConfigurationProperties input) {
                 return input.getImplicitlyWait();
             }
         }, new Function<Long, Void>() {
@@ -196,9 +196,9 @@ public class ComposedConfigurationTest {
 
     @Test
     public void scriptTimeout() {
-        testLong(new Function<ConfigurationRead, Long>() {
+        testLong(new Function<ConfigurationProperties, Long>() {
             @Override
-            public Long apply(ConfigurationRead input) {
+            public Long apply(ConfigurationProperties input) {
                 return input.getScriptTimeout();
             }
         }, new Function<Long, Void>() {
@@ -212,9 +212,9 @@ public class ComposedConfigurationTest {
 
     @Test
     public void screenshotPath() {
-        testString(new Function<ConfigurationRead, String>() {
+        testString(new Function<ConfigurationProperties, String>() {
             @Override
-            public String apply(ConfigurationRead input) {
+            public String apply(ConfigurationProperties input) {
                 return input.getScreenshotPath();
             }
         }, new Function<String, Void>() {
@@ -228,9 +228,9 @@ public class ComposedConfigurationTest {
 
     @Test
     public void htmlDumpPath() {
-        testString(new Function<ConfigurationRead, String>() {
+        testString(new Function<ConfigurationProperties, String>() {
             @Override
-            public String apply(ConfigurationRead input) {
+            public String apply(ConfigurationProperties input) {
                 return input.getHtmlDumpPath();
             }
         }, new Function<String, Void>() {
@@ -244,14 +244,14 @@ public class ComposedConfigurationTest {
 
     @Test
     public void screenshotMode() {
-        testTriggerMode(new Function<ConfigurationRead, ConfigurationRead.TriggerMode>() {
+        testTriggerMode(new Function<ConfigurationProperties, ConfigurationProperties.TriggerMode>() {
             @Override
-            public ConfigurationRead.TriggerMode apply(ConfigurationRead input) {
+            public ConfigurationProperties.TriggerMode apply(ConfigurationProperties input) {
                 return input.getScreenshotMode();
             }
-        }, new Function<ConfigurationRead.TriggerMode, Void>() {
+        }, new Function<ConfigurationProperties.TriggerMode, Void>() {
             @Override
-            public Void apply(ConfigurationRead.TriggerMode input) {
+            public Void apply(ConfigurationProperties.TriggerMode input) {
                 composed.setScreenshotMode(input);
                 return null;
             }
@@ -260,14 +260,14 @@ public class ComposedConfigurationTest {
 
     @Test
     public void htmlDumpMode() {
-        testTriggerMode(new Function<ConfigurationRead, ConfigurationRead.TriggerMode>() {
+        testTriggerMode(new Function<ConfigurationProperties, ConfigurationProperties.TriggerMode>() {
             @Override
-            public ConfigurationRead.TriggerMode apply(ConfigurationRead input) {
+            public ConfigurationProperties.TriggerMode apply(ConfigurationProperties input) {
                 return input.getHtmlDumpMode();
             }
-        }, new Function<ConfigurationRead.TriggerMode, Void>() {
+        }, new Function<ConfigurationProperties.TriggerMode, Void>() {
             @Override
-            public Void apply(ConfigurationRead.TriggerMode input) {
+            public Void apply(ConfigurationProperties.TriggerMode input) {
                 composed.setHtmlDumpMode(input);
                 return null;
             }

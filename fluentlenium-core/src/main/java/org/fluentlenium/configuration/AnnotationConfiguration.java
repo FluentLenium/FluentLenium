@@ -2,7 +2,13 @@ package org.fluentlenium.configuration;
 
 import com.google.common.base.Strings;
 
-public class AnnotationConfiguration implements ConfigurationRead {
+/**
+ * {@link ConfigurationProperties} based on {@link FluentConfiguration} annotation.
+ *
+ * @see FluentConfiguration
+ * @see ConfigurationProperties
+ */
+public class AnnotationConfiguration implements ConfigurationProperties {
     private final FluentConfiguration configuration;
 
     public AnnotationConfiguration(Class<?> containerClass) {

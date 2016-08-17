@@ -7,7 +7,7 @@
 FluentLenium is a framework that helps you write [Selenium](http://seleniumhq.org/) tests.
 FluentLenium provides a [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to the [Selenium Web Driver](http://seleniumhq.org/docs/03_webdriver.html).
 FluentLenium lets you use the assertion framework you like, either [JUnit assertions](http://www.junit.org/apidocs/org/junit/Assert.html), [Hamcrest](http://code.google.com/p/hamcrest/wiki/Tutorial) 
-or [AssertJ](https://github.com/joel-costigliola/assertj-core)  (old one: ~~[Fest-assert](https://github.com/alexruiz/fest-assert-2.x/wiki)~~).
+or [AssertJ](https://github.com/joel-costigliola/assertj-core).
 
 
 # 5 second example
@@ -753,56 +753,180 @@ If you want to test concurrency or if you need for any reason to not use the mec
 ```
 
 
+## Configure FluentLenium
 
-## Customize FluentLenium
+FluentLenium can be configured in many ways through configuration properties.
 
-### Driver
-If you need to change your driver, just override the `getDefaultDriver` method in your test. You can use every driver.
+### Configuration properties
+
+  - **configurationFactory**
+  
+     Set this to a class implementing ```ConfigurationFactory``` to customize the ways properties are read.
+     This allow to configure properties from sources that are not supported by default FluentLenium.
+     
+     Default value: ```org.fluentlenium.configuration.DefaultConfigurationFactory```.
+     
+  - **webDriver**
+  
+    Set this property to a value supported by ```WebDrivers``` registry.
+
+    Default value: ```firefox```.
+    
+    Possible values are ```firefox```, ```chrome```, ```ie``` and ```htmlunit```, or any class name implementing ```WebDriver```.
+
+  - **baseUrl**
+  
+     Sets the base URL used to build absolute URL when relative URL is given to {@link FluentAdapter#goTo(String)}.
+     
+     Default value: ```null```.
+
+  - **pageLoadTimeout**
+     
+     Sets the amount of time to wait for a page load to complete before throwing an error.
+     If the timeout is negative, page loads can be indefinite.
+     
+     Default value: ```null```.
+
+  - **implicitlyWait**
+     
+     Specifies the amount of time the driver should wait when searching for an element if it is
+     not immediately present.
+     
+     Default value: ```null```.
+
+
+  - **scriptTimeout**
+  
+     Sets the amount of time to wait for an asynchronous script to finish execution before
+     throwing an error. If the timeout is negative, then the script will be allowed to run
+     indefinitely.
+     
+     Default value: ```null```.
+
+  - **screenshotPath**
+
+     Sets the filesystem path where screenshot will be saved when calling {@link FluentAdapter#takeScreenShot()} or
+     {@link FluentAdapter#takeScreenShot(String)}.
+     
+     Default value: ```null```.
+
+
+  - **screenshotMode**
+
+     Sets the trigger mode of screenshots. Can be ```ON_AUTOMATIC_ON_FAIL``` to take screenshot when the test fail 
+     or ```MANUAL```.
+     
+     Default value: ```null```.
+
+
+  - **htmlDumpPath**
+     
+     Sets the filesystem path where screenshot will be saved.
+     
+     Default value: ```null```.
+
+
+  - **htmlDumpMode**
+     
+     Sets the trigger mode of html dump. Can be ```ON_AUTOMATIC_ON_FAIL``` to take html dump when the test fail 
+     or ```MANUAL```.
+     
+     Default value: ```null```.
+     
+ Keep in mind that when those properties are defined through System Properties or Environment Variables, they need to
+ be prefixed with ```fluentlenium.``` (ie. ```fluentlenium.webDriver=chrome```).
+
+### Configuration Ways
+
+It's possible to define those properties using:
+
+  - **Overrides** of JavaBean **property getters** of the test class.
+  
+        public class SomeFluentTest extends FluentTest {
+            @Override
+            public String getWebDriver() {
+                return "chrome";
+            }
+        }
+  
+  - **Calls** of JavaBean **property setters** of the test class.
+  
+        public class SomeFluentTest extends FluentTest {
+            public SomeFluentTest() {
+                setWebDriver("chrome");
+            }
+        }
+  
+  - **System properties** of the Java Environment, passed using ```-D``` on the command line. Property names must be **prefixed with fluentlenium.**. 
+  
+        mvn clean test -Dfluentlenium.webDriver=chrome        
+  
+  - **Environment Variable** of the Operating System. Property names **must be prefixed with fluentlenium.**.
+  
+        $ EXPORT fluentlenium.webDriver=chrome; mvn clean test;
+  
+  
+  - **@FluentConfiguration Annotation** on test class to configure.
+
+         @FluentConfiguration(webDriver="chrome")
+         public class SomeFluentTest extends FluentTest {
+             ....
+         }
+
+
+  - **Java Properties file** located at ```/fluentlenium.properties``` in the classpath.
+
+        $ cat fluentlenium.properties
+        webDriver=chrome
+        ...
+ 
+This list of way to configure fluentlenium is ordered by priority. If a value is defined for a property in an element, 
+lower ways will just be ignored.
+
+You may implement additionnal ways to read configuration property by implementing another
+```ConfigurationFactory``` and set the new configuration factory class name in the ```configurationFactory``` property.
+
+### Driver consideration
+You can register a custom WebDriver type by providing your own implementation of ```WebDriverFactory``` in 
+```WebDrivers``` registry.
+
+A ```WebDriverFactory``` implementation is responsible for creating new instances for a type of WebDriver.
+
 For instance, to run your tests on [BrowserStack](https://browserstack.com)
 
 ```java
-  @Override
-  public WebDriver getDefaultDriver() {
-    String HUB_URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@hub.browserstack.com/wd/hub";
-
-    DesiredCapabilities caps = new DesiredCapabilities();
-    caps.setCapability("os", "OS X");
-    caps.setCapability("os_version", "El Capitan");
-    caps.setCapability("browser", "firefox");
-    caps.setCapability("browser_version", "44");
-    caps.setCapability("build", "Sample FluentLenium Tests");
-    caps.setCapability("browserstack.debug", "true");
-
-    URL hubURL = null;
-    try {
-      hubURL = new URL(HUB_URL);
-    } catch(Exception e) {
-      System.out.println("Please provide proper credentials. Error " + e);
+public class BrowserStackWebDriverFactory implements WebDriverFactory {
+    @Override
+    public WebDriver newWebDriver() {
+        String HUB_URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@hub.browserstack.com/wd/hub";
+    
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability("os", "OS X");
+        caps.setCapability("os_version", "El Capitan");
+        caps.setCapability("browser", "firefox");
+        caps.setCapability("browser_version", "44");
+        caps.setCapability("build", "Sample FluentLenium Tests");
+        caps.setCapability("browserstack.debug", "true");
+    
+        URL hubURL = null;
+        try {
+          hubURL = new URL(HUB_URL);
+        } catch(Exception e) {
+          System.out.println("Please provide proper credentials. Error " + e);
+        }
+    
+        return new RemoteWebDriver(hubURL, caps);
     }
 
-    return new RemoteWebDriver(hubURL, caps);
-  }
+    @Override
+    public String[] getNames() {
+        return new String[0];
+    }
+}
 ```
 
-### Base Url
-If you want to defined a default base url, just override the `getDefaultBaseUrl` method in your test. Every page created with @Inject will also use this variable.
-If a base url is provided, the current url will be relative to that base url.
-
-### TimeOut
-To set the time to wait when searching an element, you can use in your test:
-```java
-withDefaultSearchWait(long l, TimeUnit timeUnit);
-```
-
- To set the time to wait when loading a page, you can use:
-```java
-withDefaultPageWait(long l, TimeUnit timeUnit);
-```
-
-Be aware that when you modified this elements, the webDriver instance will be modified so your page will also be affected.
-
-### Configuration
-Override the getDefaultDriver method and use the selenium way to configure your driver.
+Instead of implementing a new ```WebDriverFactory``` class, you may also override ```newWebDriver()``` in the Test 
+class, but doing so will ignore any value defined in ```webDriver``` configuration property.
 
 ## Browser Lifecycle
 For JUnit and TestNG, you can define the browser lifecycle.
@@ -985,10 +1109,10 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 </dependency>
 ```
 
-## FluentLenium and other frameworks
+## FluentLenium Assertions
 
-### jUnit
-FluentLenium uses jUnit by default. You can use test using [jUnit](http://www.junit.org) assertions, but can of course use others frameworks such as [AssertJ](https://github.com/joel-costigliola/assertj-core) or [Hamcrest](http://code.google.com/p/hamcrest/).
+### JUnit
+FluentLenium uses JUnit by default. You can use test using [JUnit](http://www.junit.org) assertions, but can of course use others frameworks such as [AssertJ](https://github.com/joel-costigliola/assertj-core) or [Hamcrest](http://code.google.com/p/hamcrest/).
 
 ```java
 goTo("http://mywebpage/");
@@ -996,9 +1120,6 @@ $("#firstName").fill().with("toto");
 $("#create-button").click();
 assertEqual("Hello toto",title());
 ```
-
-### Fest-Assert
-Fest-Assert is now deprecated. This lib is no longer maintained. Consider switching to AssertJ
 
 ### AssertJ
 ```java
@@ -1022,15 +1143,3 @@ $("#firstName").fill().with("toto");
 $("#create-button").click();
 assertThat(title(),equalTo("Hello toto"));
 ```
-##Resources
-
-In English:
-
-  - [Play2 and FluentLenium screencast](http://www.youtube.com/watch?v=diVhWRtJuxU)  and the associated [code] (http://ics-software-engineering.github.io/play-example-fluentlenium/)
-
-In French:
-
-  - [SlideShare](http://www.slideshare.net/MathildeLemee/fluentlenium)
-  - [Cucumber and FluentLenium - more to come](http://blog.jetoile.fr/2013/04/fluentlenium-et-cucumber-jvm-complement.html)
-
-Please contact us on the mailing list if you want your post to be added to that list !

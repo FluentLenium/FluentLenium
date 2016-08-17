@@ -1,6 +1,11 @@
 package org.fluentlenium.configuration;
 
-public class DefaultConfiguration implements ConfigurationRead {
+/**
+ * Default configuration implementation.
+ *
+ * @see ConfigurationProperties
+ */
+public class DefaultConfiguration implements ConfigurationProperties {
     @Override
     public Class<? extends ConfigurationFactory> getConfigurationFactory() {
         return DefaultConfigurationFactory.class;

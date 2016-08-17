@@ -8,7 +8,7 @@ import org.openqa.selenium.NoSuchElementException;
 /**
  * Use the Page Object Pattern to have more resilient tests.
  * <p>
- * Extend this class and annotate it with @{@link PageUrl} and @{@link org.openqa.selenium.support.FindBy} to provide
+ * Extend this class and use @{@link PageUrl} and @{@link org.openqa.selenium.support.FindBy} annotations to provide
  * injectable Page Objects to FluentLenium.
  */
 public abstract class FluentPage extends DefaultFluentContainer implements FluentPageControl {

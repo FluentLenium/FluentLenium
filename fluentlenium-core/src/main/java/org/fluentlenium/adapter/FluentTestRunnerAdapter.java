@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import java.util.List;
 
 /**
- * Adapter used by any class based Test Runners adapters.
+ * Generic Test Runner Adapter to FluentDriver.
  */
 public class FluentTestRunnerAdapter extends FluentAdapter {
     private final SharedDriverStrategyReader sdsr;
@@ -201,10 +201,10 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      */
     protected void failed(Throwable e, Class<?> testClass, String testName) {
         if (isFluentDriverAvailable()) {
-            if (getScreenshotMode() == TriggerMode.ON_FAIL && canTakeScreenShot()) {
+            if (getScreenshotMode() == TriggerMode.AUTOMATIC_ON_FAIL && canTakeScreenShot()) {
                 takeScreenShot(testClass.getSimpleName() + "_" + testName + ".png");
             }
-            if (getHtmlDumpMode() == TriggerMode.ON_FAIL && getDriver() != null) {
+            if (getHtmlDumpMode() == TriggerMode.AUTOMATIC_ON_FAIL && getDriver() != null) {
                 takeHtmlDump(testClass.getSimpleName() + "_" + testName + ".html");
             }
         }

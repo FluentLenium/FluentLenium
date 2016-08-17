@@ -33,7 +33,7 @@ public class DefaultConfigurationFactoryTest {
     public void testFactoryWithAnnotation() {
         DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
             @Override
-            protected InputStream getConfigurationStream() {
+            protected InputStream getPropertiesInputStream() {
                 return IOUtils.toInputStream("pageLoadTimeout=5000");
             }
         };
@@ -60,7 +60,7 @@ public class DefaultConfigurationFactoryTest {
     public void testFactoryNoAnnotation() {
         DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
             @Override
-            protected InputStream getConfigurationStream() {
+            protected InputStream getPropertiesInputStream() {
                 return IOUtils.toInputStream("fluentlenium.pageLoadTimeout=5000\nscriptTimeout=1000");
             }
         };
@@ -87,7 +87,7 @@ public class DefaultConfigurationFactoryTest {
     public void testFactoryInvalidPropertyFile() {
         DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
             @Override
-            protected InputStream getConfigurationStream() {
+            protected InputStream getPropertiesInputStream() {
                 return new InputStream() {
                     @Override
                     public int read() throws IOException {

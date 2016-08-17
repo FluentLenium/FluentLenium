@@ -2,6 +2,11 @@ package org.fluentlenium.configuration;
 
 import java.util.Properties;
 
+/**
+ * {@link ConfigurationProperties} based on {@link Properties} object.
+ *
+ * @see ConfigurationProperties
+ */
 public class PropertiesConfiguration extends AbstractPropertiesConfiguration {
     private Properties properties;
 

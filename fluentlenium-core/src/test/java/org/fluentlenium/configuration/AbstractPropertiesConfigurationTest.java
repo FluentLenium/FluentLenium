@@ -4,7 +4,7 @@ package org.fluentlenium.configuration;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-public abstract class AbstractPropertiesConfigurationTest<T extends ConfigurationRead> {
+public abstract class AbstractPropertiesConfigurationTest<T extends ConfigurationProperties> {
 
     protected abstract T getConfiguration();
 
@@ -133,15 +133,15 @@ public abstract class AbstractPropertiesConfigurationTest<T extends Configuratio
     public void screenshotMode() {
         Assertions.assertThat(getConfiguration().getScreenshotMode()).isNull();
 
-        mockProperty("screenshotMode", ConfigurationRead.TriggerMode.ON_FAIL);
-        Assertions.assertThat(getConfiguration().getScreenshotMode()).isEqualTo(ConfigurationRead.TriggerMode.ON_FAIL);
+        mockProperty("screenshotMode", ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
+        Assertions.assertThat(getConfiguration().getScreenshotMode()).isEqualTo(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
     }
 
     @Test
     public void htmlDumpMode() {
         Assertions.assertThat(getConfiguration().getHtmlDumpMode()).isNull();
 
-        mockProperty("htmlDumpMode", ConfigurationRead.TriggerMode.ON_FAIL);
-        Assertions.assertThat(getConfiguration().getHtmlDumpMode()).isEqualTo(ConfigurationRead.TriggerMode.ON_FAIL);
+        mockProperty("htmlDumpMode", ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
+        Assertions.assertThat(getConfiguration().getHtmlDumpMode()).isEqualTo(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
     }
 }

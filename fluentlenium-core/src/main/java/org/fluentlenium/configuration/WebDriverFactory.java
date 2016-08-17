@@ -3,7 +3,7 @@ package org.fluentlenium.configuration;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Factory of {@link WebDriver}.
+ * Factory of {@link WebDriver}, that can be registered in {@link WebDrivers} registry.
  */
 public interface WebDriverFactory {
     /**

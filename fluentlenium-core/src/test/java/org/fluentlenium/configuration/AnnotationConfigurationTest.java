@@ -18,8 +18,8 @@ public class AnnotationConfigurationTest {
     }
 
     @FluentConfiguration(baseUrl = "http://localhost:3000", configurationFactory = DummyConfigurationFactory.class,
-            htmlDumpMode = ConfigurationRead.TriggerMode.ON_FAIL, htmlDumpPath = "/html-path", implicitlyWait = 1000, pageLoadTimeout = 2000,
-            screenshotMode = ConfigurationRead.TriggerMode.NEVER, screenshotPath = "/screenshot-path", scriptTimeout = 3000, webDriver = "firefox")
+            htmlDumpMode = ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL, htmlDumpPath = "/html-path", implicitlyWait = 1000, pageLoadTimeout = 2000,
+            screenshotMode = ConfigurationProperties.TriggerMode.MANUAL, screenshotPath = "/screenshot-path", scriptTimeout = 3000, webDriver = "firefox")
     public static class ConfiguredClass {
     }
 
@@ -100,7 +100,7 @@ public class AnnotationConfigurationTest {
         Assertions.assertThat(noConfiguration.getScreenshotMode()).isNull();
         Assertions.assertThat(defaultConfiguration.getScreenshotMode()).isNull();
 
-        Assertions.assertThat(configuration.getScreenshotMode()).isEqualTo(ConfigurationRead.TriggerMode.NEVER);
+        Assertions.assertThat(configuration.getScreenshotMode()).isEqualTo(ConfigurationProperties.TriggerMode.MANUAL);
     }
 
     @Test
@@ -108,6 +108,6 @@ public class AnnotationConfigurationTest {
         Assertions.assertThat(noConfiguration.getHtmlDumpMode()).isNull();
         Assertions.assertThat(defaultConfiguration.getHtmlDumpMode()).isNull();
 
-        Assertions.assertThat(configuration.getHtmlDumpMode()).isEqualTo(ConfigurationRead.TriggerMode.ON_FAIL);
+        Assertions.assertThat(configuration.getHtmlDumpMode()).isEqualTo(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
     }
 }

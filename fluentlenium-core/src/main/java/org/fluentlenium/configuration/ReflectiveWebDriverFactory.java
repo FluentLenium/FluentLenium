@@ -6,6 +6,9 @@ import org.openqa.selenium.WebDriver;
 
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * A simple {@link WebDriverFactory} that create {@link WebDriver} instances using reflection.
+ */
 public class ReflectiveWebDriverFactory implements WebDriverFactory {
     private Object[] args;
     private String webDriverClassName;

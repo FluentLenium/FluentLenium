@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class DefaultConfigurationFactory implements ConfigurationFactory {
 
-    protected InputStream getConfigurationStream() {
+    protected InputStream getPropertiesInputStream() {
         return getClass().getResourceAsStream("/fluentlenium.properties");
     }
 
@@ -14,7 +14,7 @@ public class DefaultConfigurationFactory implements ConfigurationFactory {
     public Configuration newConfiguration(Class<?> containerClass) {
         Properties properties = new Properties();
 
-        InputStream configurationFile = getConfigurationStream();
+        InputStream configurationFile = getPropertiesInputStream();
         if (configurationFile != null) {
             try {
                 properties.load(configurationFile);

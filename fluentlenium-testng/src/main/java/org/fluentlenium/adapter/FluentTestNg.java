@@ -13,7 +13,9 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 
 /**
- * All TestNG Test should extends this class. It provides default parameters.
+ * TestNG FluentLenium Test Adapter.
+ *
+ * Extends this class to provide FluentLenium support to your TestNG Test class.
  */
 public abstract class FluentTestNg extends FluentTestRunnerAdapter {
 

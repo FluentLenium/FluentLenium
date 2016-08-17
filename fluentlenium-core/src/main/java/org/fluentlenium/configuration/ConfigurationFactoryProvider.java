@@ -8,7 +8,7 @@ public abstract class ConfigurationFactoryProvider {
     private static ConfigurationFactory bootstrapFactory = new DefaultConfigurationFactory();
 
     public static ConfigurationFactory getConfigurationFactory(Class<?> container) {
-        ConfigurationRead configuration = bootstrapFactory.newConfiguration(container);
+        ConfigurationProperties configuration = bootstrapFactory.newConfiguration(container);
         Class<? extends ConfigurationFactory> configurationFactoryClass = configuration.getConfigurationFactory();
         if (configurationFactoryClass != null) {
             try {

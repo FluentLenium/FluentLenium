@@ -17,7 +17,7 @@ public class HtmlDumpPathTest extends LocalFluentCase {
     private final Path tempDir;
 
     public HtmlDumpPathTest() throws IOException {
-        getConfiguration().setHtmlDumpMode(TriggerMode.ON_FAIL);
+        getConfiguration().setHtmlDumpMode(TriggerMode.AUTOMATIC_ON_FAIL);
         tempDir = Files.createTempDirectory("tempfiles");
     }
 

@@ -2,7 +2,10 @@ package org.fluentlenium.configuration;
 
 import com.google.common.base.Strings;
 
-public abstract class AbstractPropertiesConfiguration implements ConfigurationRead {
+/**
+ * Abstract properties configuration.
+ */
+public abstract class AbstractPropertiesConfiguration implements ConfigurationProperties {
     private final String[] prefixes;
 
     protected AbstractPropertiesConfiguration() {

@@ -1,5 +1,8 @@
 package org.fluentlenium.configuration;
 
-public interface Configuration extends ConfigurationRead, ConfigurationWrite {
+/**
+ * Base configuration interface that can be read and written.
+ */
+public interface Configuration extends ConfigurationProperties, ConfigurationMutator {
 
 }

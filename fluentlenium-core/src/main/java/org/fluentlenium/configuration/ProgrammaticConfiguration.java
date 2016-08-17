@@ -1,5 +1,11 @@
 package org.fluentlenium.configuration;
 
+/**
+ * {@link Configuration} based on JavaBean properties.
+ *
+ * @see Configuration
+ * @see ConfigurationProperties
+ */
 public class ProgrammaticConfiguration implements Configuration {
     private Class<? extends ConfigurationFactory> configurationFactory;
 

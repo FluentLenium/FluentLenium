@@ -3,26 +3,26 @@ package org.fluentlenium.configuration;
 import lombok.experimental.Delegate;
 
 /**
- * A configuration composed by a writable configuration and others read configurations.
+ * A configuration composed with a writable configuration and list of read configurations.
  * <p>
- * When writing a value, it will go in the writable configuration.
+ * When writing a value, it will go in the writable configuration ({@link ConfigurationMutator}).
  * <p>
- * When reading a value, it will get the first value found in the composition of read configurations.
+ * When reading a value, it will get the first value found in the composition of read configurations ({@link ConfigurationProperties}).
  */
 public class ComposedConfiguration implements Configuration {
-    private final ConfigurationRead[] configurations;
+    private final ConfigurationProperties[] configurations;
 
     @Delegate
-    private final ConfigurationWrite writableConfiguration;
+    private final ConfigurationMutator writableConfiguration;
 
-    public ComposedConfiguration(ConfigurationWrite writableConfiguration, ConfigurationRead... configurations) {
+    public ComposedConfiguration(ConfigurationMutator writableConfiguration, ConfigurationProperties... configurations) {
         this.writableConfiguration = writableConfiguration;
         this.configurations = configurations;
     }
 
     @Override
     public Class<? extends ConfigurationFactory> getConfigurationFactory() {
-        for (ConfigurationRead configuration : configurations) {
+        for (ConfigurationProperties configuration : configurations) {
             Class<? extends ConfigurationFactory> configurationFactory = configuration.getConfigurationFactory();
             if (configurationFactory != null) return configurationFactory;
         }
@@ -31,7 +31,7 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public String getWebDriver() {
-        for (ConfigurationRead configuration : configurations) {
+        for (ConfigurationProperties configuration : configurations) {
             String webDriver = configuration.getWebDriver();
             if (webDriver != null) return webDriver;
         }
@@ -40,7 +40,7 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public String getBaseUrl() {
-        for (ConfigurationRead configuration : configurations) {
+        for (ConfigurationProperties configuration : configurations) {
             String baseUrl = configuration.getBaseUrl();
             if (baseUrl != null) return baseUrl;
         }
@@ -49,7 +49,7 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public Long getPageLoadTimeout() {
-        for (ConfigurationRead configuration : configurations) {
+        for (ConfigurationProperties configuration : configurations) {
             Long pageLoadTimeout = configuration.getPageLoadTimeout();
             if (pageLoadTimeout != null) return pageLoadTimeout;
         }
@@ -58,7 +58,7 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public Long getImplicitlyWait() {
-        for (ConfigurationRead configuration : configurations) {
+        for (ConfigurationProperties configuration : configurations) {
             Long implicitlyWait = configuration.getImplicitlyWait();
             if (implicitlyWait != null) return implicitlyWait;
         }
@@ -67,7 +67,7 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public Long getScriptTimeout() {
-        for (ConfigurationRead configuration : configurations) {
+        for (ConfigurationProperties configuration : configurations) {
             Long scriptTimeout = configuration.getScriptTimeout();
             if (scriptTimeout != null) return scriptTimeout;
         }
@@ -76,7 +76,7 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public String getScreenshotPath() {
-        for (ConfigurationRead configuration : configurations) {
+        for (ConfigurationProperties configuration : configurations) {
             String screenshotPath = configuration.getScreenshotPath();
             if (screenshotPath != null) return screenshotPath;
         }
@@ -85,7 +85,7 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public String getHtmlDumpPath() {
-        for (ConfigurationRead configuration : configurations) {
+        for (ConfigurationProperties configuration : configurations) {
             String htmlDumpPath = configuration.getHtmlDumpPath();
             if (htmlDumpPath != null) return htmlDumpPath;
         }
@@ -94,7 +94,7 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public TriggerMode getScreenshotMode() {
-        for (ConfigurationRead configuration : configurations) {
+        for (ConfigurationProperties configuration : configurations) {
             TriggerMode screenshotMode = configuration.getScreenshotMode();
             if (screenshotMode != null) return screenshotMode;
         }
@@ -103,7 +103,7 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public TriggerMode getHtmlDumpMode() {
-        for (ConfigurationRead configuration : configurations) {
+        for (ConfigurationProperties configuration : configurations) {
             TriggerMode htmlDumpMode = configuration.getHtmlDumpMode();
             if (htmlDumpMode != null) return htmlDumpMode;
         }

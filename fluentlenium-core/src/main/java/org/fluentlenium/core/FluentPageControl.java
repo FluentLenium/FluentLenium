@@ -1,5 +1,10 @@
 package org.fluentlenium.core;
 
+/**
+ * Control a Page Object.
+ *
+ * @see FluentPage
+ */
 public interface FluentPageControl extends FluentControl {
 
     /**

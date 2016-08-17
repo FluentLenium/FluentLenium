@@ -7,7 +7,9 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 /**
- * All Junit Test should extends this class. It provides default parameters.
+ * JUnit FluentLenium Test Adapter.
+ *
+ * Extends this class to provide FluentLenium support to your JUnit Test class.
  */
 public abstract class FluentTest extends FluentTestRunnerAdapter {
     public FluentTest() {

@@ -3,7 +3,8 @@ package org.fluentlenium.adapter;
 import org.fluentlenium.core.FluentDriver;
 
 /**
- * Use ThreadLocal to get and set FluentDriver.
+ * Alternative {@link DriverContainer} implementation, using a ThreadLocal variable to store the
+ * {@link FluentDriver} instance.
  */
 public class ThreadLocalDriverContainer implements DriverContainer {
     private ThreadLocal<FluentDriver> drivers = new ThreadLocal<>();

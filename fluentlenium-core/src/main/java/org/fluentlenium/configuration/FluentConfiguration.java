@@ -57,7 +57,7 @@ public @interface FluentConfiguration {
 
     String htmlDumpPath() default "";
 
-    ConfigurationRead.TriggerMode screenshotMode() default ConfigurationRead.TriggerMode.UNDEFINED;
+    ConfigurationProperties.TriggerMode screenshotMode() default ConfigurationProperties.TriggerMode.UNDEFINED;
 
-    ConfigurationRead.TriggerMode htmlDumpMode() default ConfigurationRead.TriggerMode.UNDEFINED;
+    ConfigurationProperties.TriggerMode htmlDumpMode() default ConfigurationProperties.TriggerMode.UNDEFINED;
 }
