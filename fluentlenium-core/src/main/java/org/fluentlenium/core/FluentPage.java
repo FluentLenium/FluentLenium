@@ -15,10 +15,10 @@ public abstract class FluentPage extends DefaultFluentContainer implements Fluen
 
     private PageAnnotations pageAnnotations = new PageAnnotations(getClass());
 
-    protected FluentPage() {
+    public FluentPage() {
     }
 
-    protected FluentPage(FluentControl control) {
+    public FluentPage(FluentControl control) {
         super(control);
     }
 

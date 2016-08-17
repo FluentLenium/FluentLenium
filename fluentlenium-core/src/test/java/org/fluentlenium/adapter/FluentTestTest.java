@@ -37,7 +37,7 @@ public class FluentTestTest {
     private static List<ScreenshotWebDriver> screenshotWebDrivers = new ArrayList<>();
     private static File screenshotFile;
     private static String html = "<html>FluentLenium</html>";
-    private static byte[] screenshotData = {1,4,7,9,2,4,2,4,3};
+    private static byte[] screenshotData = {1, 4, 7, 9, 2, 4, 2, 4, 3};
 
     private static File tmpPath = Files.newTemporaryFolder();
 
@@ -45,7 +45,7 @@ public class FluentTestTest {
 
     public static class InternalTest extends FluentTest {
         @Override
-        public WebDriver getDefaultDriver() {
+        public WebDriver newWebDriver() {
             WebDriver webDriver = Mockito.mock(WebDriver.class);
             drivers.add(webDriver);
             return webDriver;
@@ -70,7 +70,7 @@ public class FluentTestTest {
     @SharedDriver(SharedDriver.SharedType.PER_CLASS)
     public static class InternalTestSharedClass extends FluentTest {
         @Override
-        public WebDriver getDefaultDriver() {
+        public WebDriver newWebDriver() {
             WebDriver webDriver = Mockito.mock(WebDriver.class);
             sharedClassDrivers.add(webDriver);
             return webDriver;
@@ -95,7 +95,7 @@ public class FluentTestTest {
     @SharedDriver(SharedDriver.SharedType.ONCE)
     public static class InternalTestSharedOnce extends FluentTest {
         @Override
-        public WebDriver getDefaultDriver() {
+        public WebDriver newWebDriver() {
             WebDriver webDriver = Mockito.mock(WebDriver.class);
             sharedOnceDrivers.add(webDriver);
             return webDriver;
@@ -121,7 +121,7 @@ public class FluentTestTest {
     @DeleteCookies
     public static class ShouldDeleteCookiesTest extends FluentTest {
         @Override
-        public WebDriver getDefaultDriver() {
+        public WebDriver newWebDriver() {
             WebDriver webDriver = Mockito.mock(WebDriver.class);
 
             WebDriver.Options options = Mockito.mock(WebDriver.Options.class);
@@ -158,7 +158,7 @@ public class FluentTestTest {
         }
 
         @Override
-        public WebDriver getDefaultDriver() {
+        public WebDriver newWebDriver() {
             ScreenshotWebDriver webDriver = Mockito.mock(ScreenshotWebDriver.class);
             try {
                 screenshotFile = File.createTempFile("FluentTestTest.java", "");
@@ -251,7 +251,7 @@ public class FluentTestTest {
             Mockito.verify(driver).quit();
         }
 
-        for(WebDriver.Options options : sharedClassDriversOptions) {
+        for (WebDriver.Options options : sharedClassDriversOptions) {
             Mockito.verify(options, Mockito.times(3)).deleteAllCookies();
         }
 

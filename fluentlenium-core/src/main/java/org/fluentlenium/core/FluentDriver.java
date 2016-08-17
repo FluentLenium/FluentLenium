@@ -83,8 +83,8 @@ public class FluentDriver implements FluentDriverControl {
                 }
             }
 
-            if (this.configuration.getDefaultBaseUrl() != null) {
-                String baseUrl = this.configuration.getDefaultBaseUrl();
+            if (this.configuration.getBaseUrl() != null) {
+                String baseUrl = this.configuration.getBaseUrl();
                 if (baseUrl != null) {
                     if (baseUrl.endsWith("/")) {
                         baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
@@ -237,7 +237,7 @@ public class FluentDriver implements FluentDriverControl {
         if (events == null) {
             throw new IllegalStateException(
                     "An EventFiringWebDriver instance is required to use events. "
-                            + "Please override getDefaultDriver() to provide it.");
+                            + "Please override newWebDriver() to provide it.");
         }
         return events;
     }

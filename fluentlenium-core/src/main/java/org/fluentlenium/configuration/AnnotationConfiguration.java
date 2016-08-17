@@ -1,21 +1,17 @@
 package org.fluentlenium.configuration;
 
 import com.google.common.base.Strings;
-import org.openqa.selenium.WebDriver;
 
-public class AnnotationsConfiguration implements ConfigurationRead {
-    private final Class<?> containerClass;
+public class AnnotationConfiguration implements ConfigurationRead {
     private final FluentConfiguration configuration;
 
-    public AnnotationsConfiguration(Class<?> containerClass) {
-        super();
-        this.containerClass = containerClass;
-        this.configuration = containerClass.getAnnotation(FluentConfiguration.class);
+    public AnnotationConfiguration(Class<?> containerClass) {
+        this(containerClass != null ? containerClass.getAnnotation(FluentConfiguration.class) : null);
     }
 
-    @Override
-    public WebDriver getDefaultDriver() {
-        return null;
+    public AnnotationConfiguration(FluentConfiguration configuration) {
+        super();
+        this.configuration = configuration;
     }
 
     public String getStringValue(String property) {
@@ -51,9 +47,9 @@ public class AnnotationsConfiguration implements ConfigurationRead {
     }
 
     @Override
-    public String getDefaultBaseUrl() {
+    public String getBaseUrl() {
         if (configuration == null) return null;
-        return getStringValue(configuration.defaultBaseUrl());
+        return getStringValue(configuration.baseUrl());
     }
 
     @Override

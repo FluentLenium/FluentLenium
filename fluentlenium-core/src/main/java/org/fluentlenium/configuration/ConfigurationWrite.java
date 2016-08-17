@@ -22,7 +22,7 @@ public interface ConfigurationWrite {
      *
      * @param defaultBaseUrl base URL to use.
      */
-    void setDefaultBaseUrl(String defaultBaseUrl);
+    void setBaseUrl(String defaultBaseUrl);
 
     /**
      * Sets the amount of time to wait for a page load to complete before throwing an error.

@@ -83,12 +83,13 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getOrCreateDriver(new Supplier<WebDriver>() {
             @Override
             public WebDriver get() {
-                return FluentTestRunnerAdapter.this.getDefaultDriver();
+                return FluentTestRunnerAdapter.this.newWebDriver();
             }
         }, sharedParameters.getTestClass(), sharedParameters.getTestName(), sharedParameters.getStrategy());
 
         initFluent(sharedWebDriver.getDriver());
     }
+
 
     /**
      * Invoked when a test method has finished (whatever the success of failing status)

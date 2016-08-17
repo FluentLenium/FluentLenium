@@ -1,5 +1,9 @@
 package org.fluentlenium.configuration;
 
+import org.fluentlenium.utils.ReflectionUtils;
+
+import java.lang.reflect.InvocationTargetException;
+
 public abstract class ConfigurationFactoryProvider {
     private static ConfigurationFactory bootstrapFactory = new DefaultConfigurationFactory();
 
@@ -8,11 +12,9 @@ public abstract class ConfigurationFactoryProvider {
         Class<? extends ConfigurationFactory> configurationFactoryClass = configuration.getConfigurationFactory();
         if (configurationFactoryClass != null) {
             try {
-                return configurationFactoryClass.newInstance();
-            } catch (InstantiationException e) {
-                throw new IllegalStateException("Can't initialize ConfigurationFactory", e);
-            } catch (IllegalAccessException e) {
-                throw new IllegalStateException("Can't initialize ConfigurationFactory", e);
+                return ReflectionUtils.newInstance(configurationFactoryClass);
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                throw new ConfigurationException("Can't initialize ConfigurationFactory " + configurationFactoryClass.getName(), e);
             }
         }
         return bootstrapFactory;

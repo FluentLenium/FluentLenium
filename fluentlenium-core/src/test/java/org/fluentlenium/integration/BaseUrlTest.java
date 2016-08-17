@@ -17,7 +17,7 @@ public class BaseUrlTest extends LocalFluentCase {
     Page2 page;
 
     @Override
-    public String getDefaultBaseUrl() {
+    public String getBaseUrl() {
         return DEFAULT_URL_PATH;
     }
 

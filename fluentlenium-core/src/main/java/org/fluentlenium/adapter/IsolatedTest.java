@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 public class IsolatedTest extends FluentAdapter {
 
     public IsolatedTest() {
-        initFluent(getDefaultDriver());
+        initFluent(newWebDriver());
     }
 
     @Deprecated
@@ -21,7 +21,7 @@ public class IsolatedTest extends FluentAdapter {
     @Deprecated
     public IsolatedTest(DriverContainer driverContainer) {
         super(driverContainer);
-        initFluent(getDefaultDriver());
+        initFluent(newWebDriver());
     }
 
     @Deprecated

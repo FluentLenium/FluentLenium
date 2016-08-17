@@ -1,7 +1,6 @@
 package org.fluentlenium.configuration;
 
 import com.google.common.base.Strings;
-import org.openqa.selenium.WebDriver;
 
 public abstract class AbstractPropertiesConfiguration implements ConfigurationRead {
     private final String[] prefixes;
@@ -10,31 +9,40 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationRe
         this("fluentlenium.");
     }
 
-    protected AbstractPropertiesConfiguration(String ... prefixes) {
+    protected AbstractPropertiesConfiguration(String... prefixes) {
         this.prefixes = prefixes;
     }
 
     protected abstract String getPropertyImpl(String propertyName);
 
     private String getProperty(String propertyName) {
-        for (String prefix : prefixes) {
-            String property = getPropertyImpl(prefix + propertyName);
-            if (property != null) {
-                return property;
+        if ((prefixes.length) > 0) {
+            for (String prefix : prefixes) {
+                String property = getPropertyImpl(prefix + propertyName);
+                if (property != null) {
+                    return property;
+                }
             }
+            return null;
+        } else {
+            return getPropertyImpl(propertyName);
         }
-        return getPropertyImpl(propertyName);
+    }
+
+    private boolean isValidProperty(String property) {
+        if (Strings.isNullOrEmpty(property) || "null".equalsIgnoreCase(property)) return false;
+        return true;
     }
 
     private String getStringProperty(String propertyName) {
         String property = getProperty(propertyName);
-        if (Strings.isNullOrEmpty(property)) return null;
+        if (!isValidProperty(property)) return null;
         return property;
     }
 
     private Long getLongProperty(String propertyName) {
         String property = getProperty(propertyName);
-        if (Strings.isNullOrEmpty(property)) return null;
+        if (!isValidProperty(property)) return null;
         try {
             return Long.parseLong(property);
         } catch (NumberFormatException e) {
@@ -44,14 +52,14 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationRe
 
     private <T extends Enum<T>> T getEnumProperty(Class<T> enumClass, String propertyName) {
         String property = getProperty(propertyName);
-        if (Strings.isNullOrEmpty(property)) return null;
-        T enumValue = (T)Enum.valueOf(enumClass, property);
+        if (!isValidProperty(property)) return null;
+        T enumValue = (T) Enum.valueOf(enumClass, property);
         return enumValue;
     }
 
     private <T> Class<T> getClassProperty(Class<T> clazz, String propertyName) {
         String property = getProperty(propertyName);
-        if (Strings.isNullOrEmpty(property)) return null;
+        if (!isValidProperty(property)) return null;
         try {
             Class<?> propertyClass = Class.forName(property);
             if (clazz.isAssignableFrom(propertyClass)) {
@@ -59,11 +67,6 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationRe
             }
         } catch (ClassNotFoundException e) {
         }
-        return null;
-    }
-
-    @Override
-    public WebDriver getDefaultDriver() {
         return null;
     }
 
@@ -78,7 +81,7 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationRe
     }
 
     @Override
-    public String getDefaultBaseUrl() {
+    public String getBaseUrl() {
         return getStringProperty("baseUrl");
     }
 

@@ -19,7 +19,7 @@ public class DontRunTestsWhenInitFailTest {
         }
 
         @Override
-        public WebDriver getDefaultDriver() {
+        public WebDriver newWebDriver() {
             HtmlUnitDriver driver = new HtmlUnitDriver(false);
             driver.get("invalid:url"); // Simulate a driver initialization failure.
             return driver;

@@ -1,13 +1,11 @@
 package org.fluentlenium.configuration;
 
-import org.openqa.selenium.WebDriver;
-
 public class ProgrammaticConfiguration implements Configuration {
     private Class<? extends ConfigurationFactory> configurationFactory;
 
     private String webDriverName;
 
-    private String defaultBaseUrl;
+    private String baseUrl;
 
     private String screenshotPath;
 
@@ -34,11 +32,6 @@ public class ProgrammaticConfiguration implements Configuration {
     }
 
     @Override
-    public WebDriver getDefaultDriver() {
-        return WebDrivers.newWebDriver(getWebDriver());
-    }
-
-    @Override
     public Class<? extends ConfigurationFactory> getConfigurationFactory() {
         return configurationFactory;
     }
@@ -49,13 +42,13 @@ public class ProgrammaticConfiguration implements Configuration {
     }
 
     @Override
-    public String getDefaultBaseUrl() {
-        return defaultBaseUrl;
+    public String getBaseUrl() {
+        return baseUrl;
     }
 
     @Override
-    public void setDefaultBaseUrl(String defaultBaseUrl) {
-        this.defaultBaseUrl = defaultBaseUrl;
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
     }
 
     @Override

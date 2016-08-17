@@ -1,23 +1,25 @@
 package org.fluentlenium.configuration;
 
-import org.apache.commons.io.IOUtils;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 public class DefaultConfigurationFactory implements ConfigurationFactory {
 
+    protected InputStream getConfigurationStream() {
+        return getClass().getResourceAsStream("/fluentlenium.properties");
+    }
+
     @Override
     public Configuration newConfiguration(Class<?> containerClass) {
         Properties properties = new Properties();
 
-        InputStream configurationFile = getClass().getResourceAsStream("/fluentlenium.properties");
+        InputStream configurationFile = getConfigurationStream();
         if (configurationFile != null) {
             try {
                 properties.load(configurationFile);
             } catch (IOException e) {
-                IOUtils.closeQuietly(configurationFile);
+                throw new ConfigurationException("Can't read fluentlenium.properties. " + e);
             }
         }
 
@@ -26,9 +28,9 @@ public class DefaultConfigurationFactory implements ConfigurationFactory {
                 programmaticConfiguration,
                 programmaticConfiguration,
                 new SystemPropertiesConfiguration(),
-                new EnvironmentVariableConfiguration(),
+                new EnvironmentVariablesConfiguration(),
+                new AnnotationConfiguration(containerClass),
                 new PropertiesConfiguration(properties),
-                new AnnotationsConfiguration(containerClass),
                 new DefaultConfiguration()
         );
 

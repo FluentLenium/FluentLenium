@@ -12,4 +12,11 @@ public interface WebDriverFactory {
      * @return
      */
     WebDriver newWebDriver();
+
+    /**
+     * Names of this factory.
+     *
+     * @return
+     */
+    String[] getNames();
 }

@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
@@ -46,7 +45,7 @@ public class GoToTest extends LocalFluentCase {
     }
 
     @Override
-    public WebDriver getDefaultDriver() {
+    public WebDriver newWebDriver() {
         return webDriver;
     }
 }

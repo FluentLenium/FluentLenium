@@ -6,13 +6,6 @@ public interface ConfigurationRead {
     enum TriggerMode {ON_FAIL, NEVER, UNDEFINED}
 
     /**
-     * @return
-     * @deprecated Use {@link #getWebDriver()} instead.
-     */
-    @Deprecated
-    WebDriver getDefaultDriver();
-
-    /**
      * Get the class name of the {@link ConfigurationFactory}
      *
      * @return
@@ -29,7 +22,7 @@ public interface ConfigurationRead {
     /**
      * Sets the base URL used to build absolute URL when relative URL is used.
      */
-    String getDefaultBaseUrl();
+    String getBaseUrl();
 
     /**
      * Sets the amount of time to wait for a page load to complete before throwing an error.

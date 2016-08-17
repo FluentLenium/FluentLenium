@@ -1,8 +1,14 @@
 package org.fluentlenium.configuration;
 
 import lombok.experimental.Delegate;
-import org.openqa.selenium.WebDriver;
 
+/**
+ * A configuration composed by a writable configuration and others read configurations.
+ * <p>
+ * When writing a value, it will go in the writable configuration.
+ * <p>
+ * When reading a value, it will get the first value found in the composition of read configurations.
+ */
 public class ComposedConfiguration implements Configuration {
     private final ConfigurationRead[] configurations;
 
@@ -12,15 +18,6 @@ public class ComposedConfiguration implements Configuration {
     public ComposedConfiguration(ConfigurationWrite writableConfiguration, ConfigurationRead... configurations) {
         this.writableConfiguration = writableConfiguration;
         this.configurations = configurations;
-    }
-
-    @Override
-    public WebDriver getDefaultDriver() {
-        for (ConfigurationRead configuration : configurations) {
-            WebDriver defaultDriver = configuration.getDefaultDriver();
-            if (defaultDriver != null) return defaultDriver;
-        }
-        return null;
     }
 
     @Override
@@ -42,9 +39,9 @@ public class ComposedConfiguration implements Configuration {
     }
 
     @Override
-    public String getDefaultBaseUrl() {
+    public String getBaseUrl() {
         for (ConfigurationRead configuration : configurations) {
-            String baseUrl = configuration.getDefaultBaseUrl();
+            String baseUrl = configuration.getBaseUrl();
             if (baseUrl != null) return baseUrl;
         }
         return null;

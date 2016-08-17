@@ -14,7 +14,7 @@ public interface FluentDriverControl extends FluentControl, WrapsDriver {
      *
      * @param baseUrl base URL
      * @return Fluent element
-     * @deprecated Use {@link Configuration#getDefaultBaseUrl()}
+     * @deprecated Use {@link Configuration#getBaseUrl()}
      */
     @Deprecated
     FluentDriverControl withDefaultUrl(String baseUrl);

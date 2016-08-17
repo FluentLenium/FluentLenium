@@ -34,7 +34,7 @@ public class GoToInNewTabTest extends LocalFluentCase {
     }
 
     @Override
-    public WebDriver getDefaultDriver() {
+    public WebDriver newWebDriver() {
         return webDriver;
     }
 

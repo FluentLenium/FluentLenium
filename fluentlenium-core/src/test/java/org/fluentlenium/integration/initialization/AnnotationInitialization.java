@@ -28,7 +28,7 @@ public class AnnotationInitialization extends FluentTest {
     }
 
     @Override
-    public WebDriver getDefaultDriver() {
+    public WebDriver newWebDriver() {
         return webDriver;
     }
 

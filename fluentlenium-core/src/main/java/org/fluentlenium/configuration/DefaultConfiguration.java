@@ -1,13 +1,6 @@
 package org.fluentlenium.configuration;
 
-import org.openqa.selenium.WebDriver;
-
 public class DefaultConfiguration implements ConfigurationRead {
-    @Override
-    public WebDriver getDefaultDriver() {
-        return null;
-    }
-
     @Override
     public Class<? extends ConfigurationFactory> getConfigurationFactory() {
         return DefaultConfigurationFactory.class;
@@ -19,7 +12,7 @@ public class DefaultConfiguration implements ConfigurationRead {
     }
 
     @Override
-    public String getDefaultBaseUrl() {
+    public String getBaseUrl() {
         return null;
     }
 

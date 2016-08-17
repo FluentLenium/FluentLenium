@@ -91,8 +91,22 @@ public class FluentAdapter implements FluentDriverControl, ConfigurationRead {
             setFluentDriver(null);
         }
     }
-    
+
+    /**
+     * @return A new WebDriver instance.
+     * @see #getDriver()
+     * @deprecated Override {@link #newWebDriver()} instead, or consider using {@link #getDriver()} and #ConfigurationRead{@link #getDriver()}
+     */
+    @Deprecated
+    public WebDriver getDefaultDriver() {
+        return WebDrivers.INSTANCE.newWebDriver(getWebDriver());
+    }
+
+    /**
+     * @return A new WebDriver instance.
+     * @see #getDriver()
+     */
     public WebDriver newWebDriver() {
-        return WebDrivers.newWebDriver(getWebDriver());
+        return getDefaultDriver();
     }
 }

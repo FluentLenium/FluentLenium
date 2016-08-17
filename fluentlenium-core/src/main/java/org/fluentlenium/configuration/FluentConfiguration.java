@@ -13,10 +13,11 @@ public @interface FluentConfiguration {
      *
      * @return
      */
-    String webDriver();
+    String webDriver() default "";
 
     /**
      * Get the {@link ConfigurationFactory} lcass
+     *
      * @return
      */
     Class<? extends ConfigurationFactory> configurationFactory() default DefaultConfigurationFactory.class;
@@ -24,7 +25,7 @@ public @interface FluentConfiguration {
     /**
      * Sets the base URL used to build absolute URL when relative URL is used.
      */
-    String defaultBaseUrl();
+    String baseUrl() default "";
 
     /**
      * Sets the amount of time to wait for a page load to complete before throwing an error.
@@ -52,9 +53,9 @@ public @interface FluentConfiguration {
      */
     long scriptTimeout() default -1;
 
-    String screenshotPath();
+    String screenshotPath() default "";
 
-    String htmlDumpPath();
+    String htmlDumpPath() default "";
 
     ConfigurationRead.TriggerMode screenshotMode() default ConfigurationRead.TriggerMode.UNDEFINED;
 

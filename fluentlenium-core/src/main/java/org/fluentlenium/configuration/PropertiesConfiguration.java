@@ -6,6 +6,7 @@ public class PropertiesConfiguration extends AbstractPropertiesConfiguration {
     private Properties properties;
 
     public PropertiesConfiguration(Properties properties) {
+        super("", "fluentlenium.");
         this.properties = properties;
     }
 

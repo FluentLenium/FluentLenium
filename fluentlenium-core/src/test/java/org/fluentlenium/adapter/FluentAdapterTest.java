@@ -76,7 +76,7 @@ public class FluentAdapterTest {
         adapter.getConfiguration().setHtmlDumpPath("dumpPath");
         assertThat(adapter.getHtmlDumpPath()).isEqualTo("dumpPath");
 
-        assertThat(adapter.getDefaultBaseUrl()).isNull();
+        assertThat(adapter.getBaseUrl()).isNull();
 
         /*
 
