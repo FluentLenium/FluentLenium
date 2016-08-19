@@ -4,9 +4,9 @@
 [![Coveralls](https://img.shields.io/coveralls/FluentLenium/FluentLenium.svg)](https://coveralls.io/github/FluentLenium/FluentLenium)
 [![HuBoard](https://img.shields.io/badge/Hu-Board-7965cc.svg)](https://huboard.com/FluentLenium/FluentLenium)
 
-FluentLenium is a framework that helps you to write [Selenium](http://seleniumhq.org/) tests.
-FluentLenium provides you a [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to the [Selenium Web Driver](http://seleniumhq.org/docs/03_webdriver.html).
-FluentLenium lets you use the assertion framework you like, either [jUnit assertions](http://www.junit.org/apidocs/org/junit/Assert.html), [Hamcrest](http://code.google.com/p/hamcrest/wiki/Tutorial) 
+FluentLenium is a framework that helps you write [Selenium](http://seleniumhq.org/) tests.
+FluentLenium provides a [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to the [Selenium Web Driver](http://seleniumhq.org/docs/03_webdriver.html).
+FluentLenium lets you use the assertion framework you like, either [JUnit assertions](http://www.junit.org/apidocs/org/junit/Assert.html), [Hamcrest](http://code.google.com/p/hamcrest/wiki/Tutorial) 
 or [AssertJ](https://github.com/joel-costigliola/assertj-core)  (old one: ~~[Fest-assert](https://github.com/alexruiz/fest-assert-2.x/wiki)~~).
 
 
@@ -29,7 +29,7 @@ public class BingTest extends FluentTest {
 
 ## Maven
 
-To add FluentLenium to your project, just add the following dependency to your `pom.xml`:
+To use FluentLenium in your project, just add the following dependency to your `pom.xml`:
 
 ```xml 
 <dependency>
@@ -40,9 +40,9 @@ To add FluentLenium to your project, just add the following dependency to your `
 </dependency>
 ```
 
-By default, FluentLenium provides a jUnit adapter.
+By default, FluentLenium provides a JUnit adapter.
 
-If you need the assertj dependency to improve the legibility of your test code:
+If you like to use AssertJ to improve the legibility of your test code:
 
 ```xml 
 <dependency>
@@ -53,7 +53,7 @@ If you need the assertj dependency to improve the legibility of your test code:
 </dependency>
 ```
 
-An adapter has also been built for using FluentLenium with TestNG:
+If you like to use FluentLenium with TestNG:
 
 ```xml
 <dependency>
@@ -97,10 +97,10 @@ If you want to find the list of elements which have:
 
 You are free to use most of the CSS3 syntax, which means that
 `$("input[class=rightForm]")`
-will return the list of all input elements which have the class rightForm
+will return the list of all input elements which have the class rightForm.
 
 #### Custom filter
-But what if you want all the input that have text equal to "Sam" ?
+But what if you want all the inputs that have text equal to "Sam" ?
 You can use filters to allow that kind of search. For example:
 
 ```java
@@ -110,11 +110,11 @@ $(".small", withId("idOne"))
 $(".small", withText("This field is mandatory."))
 ```
 
-You can skip CSS selector argument:
+You can skip the CSS selector argument:
 `$(withId("idOne"))` will return the element whose id attribute is "idOne".
 
-You can use `By` locator `Selenium object` instead of CSS selector argument:
-`$(By.cssSelector(".header"))` will return the element using `By` locator as a reference - so you can use everything what `By` object offering to you.
+You can use the `By` locator `Selenium object` instead of a CSS selector argument:
+`$(By.cssSelector(".header"))` will return the element using the `By` locator as a reference - so you can use everything that the `By` object is offering.
 
 You can also write chained filters:
 `$(".small", withName("foo"), withId("id1"))` will return all the elements matching the 3 criteria.
@@ -166,7 +166,7 @@ If you want the element at the given position:
 $(myCssSelector, 2)
 ```
 
-Of course, you can use both position filter and custom filter:
+Of course, you can combine a position filter and a custom filter:
 
 ```java
 $(myCssSelector, 2, withName("foo"))
@@ -174,7 +174,7 @@ $(myCssSelector, 2, withName("foo"))
 
 
 #### Find on children
-You can also chain the find call:
+You can also chain the find calls:
 `$(myCssSelector).$("input")` will return all the input elements in the css selector tree.
 You can be more specific:
 
@@ -189,7 +189,7 @@ $(myCssSelector, 2, withName("foo")).findFirst("input", withName("bar"))
 ```
 
 ## Element
-If you need to access to the name, the id, the value, the tagname or the visible text of an element:
+If you need to access the name, the id, the value, the tagname or the visible text of an element:
 
 ```java
 findFirst(myCssSelector).getName()
@@ -220,7 +220,7 @@ $(myCssSelector).getAttributes("myCustomAttribute")
 $(myCssSelector).getTexts()
 ```
 
-If you want to know the name, the id, the value, the visible text or the value of an attribute of the first element on the list:
+If you want to know the name, the id, the value, the visible text or the value of an attribute of the first element of the list:
 ```java
 $(myCssSelector).getName()
 $(myCssSelector).getId()
