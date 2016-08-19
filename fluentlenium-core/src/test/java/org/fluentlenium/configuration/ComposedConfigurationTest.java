@@ -2,6 +2,7 @@ package org.fluentlenium.configuration;
 
 import com.google.common.base.Function;
 import org.assertj.core.api.Assertions;
+import org.fluentlenium.configuration.AbstractPropertiesConfigurationTest.DummyConfigurationFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
@@ -14,13 +15,6 @@ import static org.mockito.Mockito.when;
 
 public class ComposedConfigurationTest {
     private ProgrammaticConfiguration configuration;
-
-    public static class DummyConfigurationFactory implements ConfigurationFactory {
-        @Override
-        public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
-            return null;
-        }
-    }
 
     private ConfigurationProperties configurationProperties1;
 

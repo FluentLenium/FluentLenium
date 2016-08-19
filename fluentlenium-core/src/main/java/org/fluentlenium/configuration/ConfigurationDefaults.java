@@ -1,5 +1,7 @@
 package org.fluentlenium.configuration;
 
+import org.openqa.selenium.Capabilities;
+
 /**
  * Default configuration implementation.
  *
@@ -19,6 +21,11 @@ public class ConfigurationDefaults implements ConfigurationProperties {
     @Override
     public String getWebDriver() {
         return "firefox";
+    }
+
+    @Override
+    public Capabilities getCapabilities() {
+        return null;
     }
 
     @Override

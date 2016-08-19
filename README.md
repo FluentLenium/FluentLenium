@@ -754,11 +754,18 @@ FluentLenium can be configured in many ways through configuration properties.
 
   - **webDriver**
   
-    Set this property to a value supported by ```WebDrivers``` registry.
+    Sets the WebDriver type to use.
 
     Default value: ```firefox```.
     
     Possible values are ```firefox```, ```chrome```, ```ie``` and ```htmlunit```, or any class name implementing ```WebDriver```.
+
+  - **capabilities**
+
+     Sets the [Capabilities](https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities) to use with the WebDriver, 
+     as a JSON Object string or as an URL pointing to a JSON Object.
+
+     Default value: ```null```.
 
   - **baseUrl**
   

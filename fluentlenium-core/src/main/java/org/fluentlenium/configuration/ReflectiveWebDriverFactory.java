@@ -2,9 +2,13 @@ package org.fluentlenium.configuration;
 
 
 import org.fluentlenium.utils.ReflectionUtils;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A simple {@link WebDriverFactory} that create {@link WebDriver} instances using reflection.
@@ -44,13 +48,32 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, Alternative
         return available;
     }
 
+    protected DesiredCapabilities newDefaultCapabilities() {
+        return null;
+    }
+
     @Override
-    public WebDriver newWebDriver() {
+    public WebDriver newWebDriver(Capabilities capabilities) {
         if (!available) {
             throw new ConfigurationException("WebDriver " + webDriverClassName + " is not available.");
         }
 
         try {
+            DesiredCapabilities defaultCapabilities = newDefaultCapabilities();
+            if (defaultCapabilities != null) {
+                defaultCapabilities.merge(capabilities);
+                capabilities = defaultCapabilities;
+            }
+
+            if (capabilities != null && !capabilities.asMap().isEmpty()) {
+                ArrayList<Object> argsList = new ArrayList<>(Arrays.asList(args));
+                argsList.add(0, capabilities);
+                try {
+                    return ReflectionUtils.newInstance(webDriverClass, argsList.toArray());
+                } catch (NoSuchMethodException e) {
+                    // Ignore capabilities.
+                }
+            }
             return ReflectionUtils.newInstance(webDriverClass, args);
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             throw new ConfigurationException("Can't create new WebDriver instance", e);

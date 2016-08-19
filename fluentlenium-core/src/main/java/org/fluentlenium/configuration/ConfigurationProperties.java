@@ -1,6 +1,7 @@
 package org.fluentlenium.configuration;
 
 import org.fluentlenium.adapter.FluentAdapter;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -16,7 +17,7 @@ import org.openqa.selenium.WebDriver;
  * </li>
  * <li>System properties of the Java Environment, passed using -D on the command line.
  * Property names must be <b>prefixed with fluentlenium.</b>.
- * (ie. Launch test with <pre>-Dfluentlenium.webDriver=chrome</pre></quote>)
+ * (ie. Launch test with <i>-Dfluentlenium.webDriver=chrome</i></quote>)
  * </li>
  * <li>
  * Environment Variable of the Operating System. Property names <b>must be prefixed with fluentlenium.</b>.
@@ -34,11 +35,27 @@ import org.openqa.selenium.WebDriver;
  * </pre>
  * </li>
  * <li>
- * Java Properties file located at <code>/fluentlenium.properties</code> in the classpath
+ * Java Properties file located at <i>/fluentlenium.properties</i> in the classpath
  * <pre>
  * {@code
  * webDriver=chrome
  * ...
+ * }
+ * </pre>
+ * </li>
+ * <li>
+ * {@link ConfigurationProperties} custom implementation specified by <i>configurationDefaults</i> property.
+ * <pre>
+ * {@code
+ * public class CustomConfigurationDefaults extends ConfigurationDefaults {
+ *     @Override
+ *     public String getWebDriver() {
+ *        return "chrome";
+ *     }
+ * }
+ *
+ * $ cat fluentlenium.properties
+ * configurationDefaults=org.your.package.CustomConfigurationDefaults
  * }
  * </pre>
  * </li>
@@ -60,10 +77,11 @@ public interface ConfigurationProperties {
     /**
      * <pre>webDriver</pre> property.
      *
-     * Set this property to a value supported by {@link WebDrivers} registry.
+     * Sets the WebDriver type to use.
      *
      * When FluentLenium needs to create a new {@link WebDriver} instance, it calls FluentAdapter#newWebDriver()
-     * which delegates to {@link WebDrivers#newWebDriver(String)} registry using the value stored in webDriver property.
+     * which delegates to {@link WebDrivers#newWebDriver(String, Capabilities)} registry using the value stored in
+     * webDriver and capabilities property.
      *
      * Possible values are "firefox", "chrome", "ie", "htmlunit", or any class name implementing {@link WebDriver}.
      *
@@ -73,6 +91,21 @@ public interface ConfigurationProperties {
      * @see FluentAdapter#newWebDriver().
      */
     String getWebDriver();
+
+    /**
+     * <pre>capabilities</pre> property.
+     *
+     * Sets the <a href="https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities">Capabilities</a> to use, as a
+     * JSON Object or a URL pointing to a JSON Object.
+     *
+     * Default value is "null".
+     *
+     * @return Capabilities property value
+     * @see Capabilities
+     * @see <a href="https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities">Selenium DesiredCapabilities Wiki Page</a>
+     *
+     */
+    Capabilities getCapabilities();
 
     /**
      * <pre>baseUrl</pre> property.

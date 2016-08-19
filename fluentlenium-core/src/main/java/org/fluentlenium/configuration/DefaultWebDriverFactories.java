@@ -1,5 +1,7 @@
 package org.fluentlenium.configuration;
 
+import org.openqa.selenium.remote.DesiredCapabilities;
+
 public class DefaultWebDriverFactories {
     public static class FirefoxWebDriverFactory extends ReflectiveWebDriverFactory {
         public FirefoxWebDriverFactory() {
@@ -22,6 +24,13 @@ public class DefaultWebDriverFactories {
     public static class HtmlUnitWebDriverFactory extends ReflectiveWebDriverFactory {
         public HtmlUnitWebDriverFactory() {
             super("htmlunit", "org.openqa.selenium.htmlunit.HtmlUnitDriver");
+        }
+
+        @Override
+        protected DesiredCapabilities newDefaultCapabilities() {
+            DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+            desiredCapabilities.setJavascriptEnabled(true);
+            return desiredCapabilities;
         }
     }
 

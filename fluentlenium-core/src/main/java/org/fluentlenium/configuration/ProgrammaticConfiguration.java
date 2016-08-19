@@ -1,5 +1,7 @@
 package org.fluentlenium.configuration;
 
+import org.openqa.selenium.Capabilities;
+
 /**
  * {@link Configuration} based on JavaBean properties.
  *
@@ -12,6 +14,8 @@ public class ProgrammaticConfiguration implements Configuration {
     private Class<? extends ConfigurationProperties> configurationDefaults;
 
     private String webDriverName;
+
+    private Capabilities capabilities;
 
     private String baseUrl;
 
@@ -39,6 +43,16 @@ public class ProgrammaticConfiguration implements Configuration {
     @Override
     public void setWebDriver(String webDriverName) {
         this.webDriverName = webDriverName;
+    }
+
+    @Override
+    public Capabilities getCapabilities() {
+        return capabilities;
+    }
+
+    @Override
+    public void setCapabilities(Capabilities capabilities) {
+        this.capabilities = capabilities;
     }
 
     @Override

@@ -8,21 +8,16 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.net.MalformedURLException;
+
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(SystemPropertiesConfiguration.class)
 public class SystemPropertiesConfigurationTest extends AbstractPropertiesConfigurationTest<SystemPropertiesConfiguration> {
 
     private SystemPropertiesConfiguration configuration;
 
-    public static class DummyConfigurationFactory implements ConfigurationFactory {
-        @Override
-        public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
-            return null;
-        }
-    }
-
     @Before
-    public void before() {
+    public void before() throws MalformedURLException {
         configuration = new SystemPropertiesConfiguration();
         PowerMockito.mockStatic(System.class);
     }

@@ -50,6 +50,11 @@ public @interface FluentConfiguration {
     String webDriver() default "";
 
     /**
+     * @see ConfigurationProperties#getCapabilities()
+     */
+    String capabilities() default "";
+
+    /**
      * @see ConfigurationProperties#getBaseUrl()
      */
     String baseUrl() default "";

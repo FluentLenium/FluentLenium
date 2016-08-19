@@ -2,6 +2,7 @@ package org.fluentlenium.configuration;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -17,7 +18,7 @@ public class WebDriversTest {
 
     public static class CustomWebDriverFactory implements WebDriverFactory {
         @Override
-        public WebDriver newWebDriver() {
+        public WebDriver newWebDriver(Capabilities capabilities) {
             return new CustomWebDriver();
         }
 
@@ -49,7 +50,7 @@ public class WebDriversTest {
     @Test
     public void testCustomClassName() {
         WebDriverFactory customWebFactory = webDrivers.get(CustomWebDriver.class.getName());
-        WebDriver webDriver = customWebFactory.newWebDriver();
+        WebDriver webDriver = customWebFactory.newWebDriver(null);
 
         try {
             assertThat(webDriver).isExactlyInstanceOf(CustomWebDriver.class);
@@ -61,7 +62,7 @@ public class WebDriversTest {
 
     @Test
     public void testCustomClassNameNewWebDriver() {
-        WebDriver webDriver = webDrivers.newWebDriver(CustomWebDriver.class.getName());
+        WebDriver webDriver = webDrivers.newWebDriver(CustomWebDriver.class.getName(), null);
 
         try {
             assertThat(webDriver).isExactlyInstanceOf(CustomWebDriver.class);

@@ -1,12 +1,26 @@
 package org.fluentlenium.configuration;
 
 import com.google.common.base.Strings;
+import org.apache.commons.io.IOUtils;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.JsonException;
+import org.openqa.selenium.remote.JsonToBeanConverter;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 /**
  * Abstract properties configuration.
  */
 public abstract class AbstractPropertiesConfiguration implements ConfigurationProperties {
     private final String[] prefixes;
+
+    private final JsonToBeanConverter jsonConverter = new JsonToBeanConverter();
 
     protected AbstractPropertiesConfiguration() {
         this("fluentlenium.");
@@ -79,6 +93,31 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
         return null;
     }
 
+    protected URL newURL(String url) throws MalformedURLException {
+        return new URL(url);
+    }
+
+    private Capabilities getCapabilitiesProperty(String propertyName) {
+        String property = getProperty(propertyName);
+        if (!isValidProperty(property)) return null;
+        try {
+            URL url = newURL(property);
+            try {
+                property = IOUtils.toString(url);
+            } catch (IOException e) {
+                throw new ConfigurationException("Can't read Capabilities defined at " + url);
+            }
+        } catch (MalformedURLException e) {
+            // This is not an URL. Consider property as JSON.
+        }
+
+        try {
+            return jsonConverter.convert(DesiredCapabilities.class, property);
+        } catch (JsonException e) {
+            throw new ConfigurationException("Can't convert JSON Capabilities to Object.", e);
+        }
+    }
+
     @Override
     public Class<? extends ConfigurationFactory> getConfigurationFactory() {
         return getClassProperty(ConfigurationFactory.class, "configurationFactory");
@@ -92,6 +131,11 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
     @Override
     public String getWebDriver() {
         return getStringProperty("webDriver");
+    }
+
+    @Override
+    public Capabilities getCapabilities() {
+        return getCapabilitiesProperty("capabilities");
     }
 
     @Override

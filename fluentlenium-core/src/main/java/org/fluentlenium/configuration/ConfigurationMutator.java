@@ -1,6 +1,7 @@
 package org.fluentlenium.configuration;
 
 import org.fluentlenium.adapter.FluentAdapter;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -16,6 +17,14 @@ public interface ConfigurationMutator {
      * @see ConfigurationProperties#getWebDriver()
      */
     void setWebDriver(String webDriver);
+
+    /**
+     * Sets the value of <pre>capabilities</pre> property.
+     *
+     * @param capabilities
+     * @see ConfigurationProperties#getCapabilities()
+     */
+    void setCapabilities(Capabilities capabilities);
 
     /**
      * Sets the value of <pre>configurationFactory</pre> property.

@@ -1,10 +1,35 @@
 package org.fluentlenium.configuration;
 
 
+import org.apache.commons.io.IOUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.powermock.api.mockito.PowerMockito;
 
-public abstract class AbstractPropertiesConfigurationTest<T extends ConfigurationProperties> {
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLStreamHandler;
+import java.net.URLStreamHandlerFactory;
+
+import static org.fluentlenium.utils.ResourceUtils.getResourceAsURL;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
+
+public abstract class AbstractPropertiesConfigurationTest<T extends AbstractPropertiesConfiguration> {
+
+    public static class DummyConfigurationFactory implements ConfigurationFactory {
+        @Override
+        public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
+            return null;
+        }
+    }
+
+    public static class DummyConfigurationDefaults extends ConfigurationDefaults {
+
+    }
 
     protected abstract T getConfiguration();
 
@@ -18,19 +43,12 @@ public abstract class AbstractPropertiesConfigurationTest<T extends Configuratio
         return String.valueOf(propertyValue);
     }
 
-    public static class DummyConfigurationFactory implements ConfigurationFactory {
-        @Override
-        public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
-            return null;
-        }
-    }
-
     @Test
     public void configurationFactory() {
         Assertions.assertThat(getConfiguration().getConfigurationFactory()).isNull();
 
-        mockProperty("configurationFactory", SystemPropertiesConfigurationTest.DummyConfigurationFactory.class);
-        Assertions.assertThat(getConfiguration().getConfigurationFactory()).isEqualTo(SystemPropertiesConfigurationTest.DummyConfigurationFactory.class);
+        mockProperty("configurationFactory", DummyConfigurationFactory.class);
+        Assertions.assertThat(getConfiguration().getConfigurationFactory()).isEqualTo(DummyConfigurationFactory.class);
     }
 
     @Test
@@ -39,6 +57,14 @@ public abstract class AbstractPropertiesConfigurationTest<T extends Configuratio
 
         mockProperty("configurationFactory", Object.class);
         Assertions.assertThat(getConfiguration().getConfigurationFactory()).isNull();
+    }
+
+    @Test
+    public void configurationDefaults() {
+        Assertions.assertThat(getConfiguration().getConfigurationDefaults()).isNull();
+
+        mockProperty("configurationDefaults", DummyConfigurationDefaults.class);
+        Assertions.assertThat(getConfiguration().getConfigurationDefaults()).isEqualTo(DummyConfigurationDefaults.class);
     }
 
     @Test
@@ -55,6 +81,39 @@ public abstract class AbstractPropertiesConfigurationTest<T extends Configuratio
 
         mockProperty("webDriver", "firefox");
         Assertions.assertThat(getConfiguration().getWebDriver()).isEqualTo("firefox");
+    }
+
+    @Test
+    public void capabilities() {
+        Assertions.assertThat(getConfiguration().getWebDriver()).isNull();
+
+        mockProperty("capabilities", "{\"javascriptEnabled\": true}");
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setJavascriptEnabled(true);
+        Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilities);
+
+        mockProperty("capabilities", "{\"javascriptEnabled\": false}");
+        Assertions.assertThat(getConfiguration().getCapabilities()).isNotEqualTo(capabilities);
+    }
+
+    @Test
+    public void capabilitiesURL() throws IOException {
+        Assertions.assertThat(getConfiguration().getCapabilities()).isNull();
+
+        URL capabilitiesURL = getClass().getResource("/org/fluentlenium/configuration/capabilities.json");
+
+        mockProperty("capabilities", capabilitiesURL.toString());
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setJavascriptEnabled(true);
+        Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilities);
+
+        URL capabilitiesFalseURL = getClass().getResource("/org/fluentlenium/configuration/capabilities-false.json");
+
+        mockProperty("capabilities", capabilitiesFalseURL.toString());
+        Assertions.assertThat(getConfiguration().getCapabilities()).isNotEqualTo(capabilities);
+
     }
 
     @Test
@@ -79,6 +138,14 @@ public abstract class AbstractPropertiesConfigurationTest<T extends Configuratio
 
         mockProperty("baseUrl", null);
         Assertions.assertThat(getConfiguration().getBaseUrl()).isNull();
+    }
+
+    @Test
+    public void eventsEnabled() {
+        Assertions.assertThat(getConfiguration().getEventsEnabled()).isNull();
+
+        mockProperty("eventsEnabled", true);
+        Assertions.assertThat(getConfiguration().getEventsEnabled()).isTrue();
     }
 
     @Test

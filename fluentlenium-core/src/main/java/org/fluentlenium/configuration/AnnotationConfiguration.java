@@ -1,6 +1,16 @@
 package org.fluentlenium.configuration;
 
 import com.google.common.base.Strings;
+import org.apache.commons.io.IOUtils;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.JsonException;
+import org.openqa.selenium.remote.JsonToBeanConverter;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * {@link ConfigurationProperties} based on {@link FluentConfiguration} annotation.
@@ -10,6 +20,8 @@ import com.google.common.base.Strings;
  */
 public class AnnotationConfiguration implements ConfigurationProperties {
     private final FluentConfiguration configuration;
+
+    private final JsonToBeanConverter jsonConverter = new JsonToBeanConverter();
 
     public AnnotationConfiguration(Class<?> containerClass) {
         this(containerClass != null ? containerClass.getAnnotation(FluentConfiguration.class) : null);
@@ -35,6 +47,30 @@ public class AnnotationConfiguration implements ConfigurationProperties {
         return configurationDefaultsClass;
     }
 
+    private Capabilities getCapabilitiesValue(String property) {
+        if (Strings.isNullOrEmpty(property)) return null;
+        try {
+            URL url = new URL(property);
+            InputStream stream = null;
+            try {
+                stream = url.openStream();
+                property = IOUtils.toString(stream);
+            } catch (IOException e) {
+                throw new ConfigurationException("Can't read Capabilities defined at " + url);
+            } finally {
+                IOUtils.closeQuietly(stream);
+            }
+        } catch (MalformedURLException e) {
+            // This is not an URL. Consider property as JSON.
+        }
+
+        try {
+            return jsonConverter.convert(DesiredCapabilities.class, property);
+        } catch (JsonException e) {
+            throw new ConfigurationException("Can't convert JSON Capabilities to Object.", e);
+        }
+    }
+
     @Override
     public Class<? extends ConfigurationProperties> getConfigurationDefaults() {
         if (configuration == null) return null;
@@ -55,6 +91,12 @@ public class AnnotationConfiguration implements ConfigurationProperties {
     public String getWebDriver() {
         if (configuration == null) return null;
         return getStringValue(configuration.webDriver());
+    }
+
+    @Override
+    public Capabilities getCapabilities() {
+        if (configuration == null) return null;
+        return getCapabilitiesValue(configuration.capabilities());
     }
 
     @Override

@@ -2,6 +2,7 @@ package org.fluentlenium.configuration;
 
 import lombok.experimental.Delegate;
 import org.atteo.classindex.ClassIndex;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 
 import java.lang.reflect.InvocationTargetException;
@@ -65,10 +66,11 @@ public enum WebDrivers {
          * Creates a new {@link WebDriver} instance from factory of the given name
          *
          * @param name name of the factory used to create new WebDriver instance
+         * @param capabilities Desired capabilities for the WebDriver
          * @return a new WebDriver instance
          */
-        public synchronized WebDriver newWebDriver(String name) {
-            return get(name).newWebDriver();
+        public synchronized WebDriver newWebDriver(String name, Capabilities capabilities) {
+            return get(name).newWebDriver(capabilities);
         }
 
         /**

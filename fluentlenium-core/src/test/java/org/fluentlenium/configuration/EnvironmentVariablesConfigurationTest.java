@@ -14,13 +14,6 @@ public class EnvironmentVariablesConfigurationTest extends AbstractPropertiesCon
 
     private EnvironmentVariablesConfiguration configuration;
 
-    public static class DummyConfigurationFactory implements ConfigurationFactory {
-        @Override
-        public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
-            return null;
-        }
-    }
-
     @Before
     public void before() {
         configuration = new EnvironmentVariablesConfiguration();

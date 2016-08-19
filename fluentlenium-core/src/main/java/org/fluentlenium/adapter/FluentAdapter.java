@@ -107,7 +107,7 @@ public class FluentAdapter implements FluentDriverControl, ConfigurationProperti
      */
     @Deprecated
     public WebDriver getDefaultDriver() {
-        WebDriver webDriver = WebDrivers.INSTANCE.newWebDriver(getWebDriver());
+        WebDriver webDriver = WebDrivers.INSTANCE.newWebDriver(getWebDriver(), getCapabilities());
         if (Boolean.TRUE.equals(getEventsEnabled())) {
             webDriver = new EventFiringWebDriver(webDriver);
         }

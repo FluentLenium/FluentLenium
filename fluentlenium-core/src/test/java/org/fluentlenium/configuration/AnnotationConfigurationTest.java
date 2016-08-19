@@ -2,22 +2,20 @@ package org.fluentlenium.configuration;
 
 
 import org.assertj.core.api.Assertions;
+import org.fluentlenium.configuration.AbstractPropertiesConfigurationTest.DummyConfigurationDefaults;
+import org.fluentlenium.configuration.AbstractPropertiesConfigurationTest.DummyConfigurationFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class AnnotationConfigurationTest {
     private static AnnotationConfiguration configuration;
     private static AnnotationConfiguration defaultConfiguration;
     private static AnnotationConfiguration noConfiguration;
 
-    public static class DummyConfigurationFactory implements ConfigurationFactory {
-        @Override
-        public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
-            return null;
-        }
-    }
-
     @FluentConfiguration(baseUrl = "http://localhost:3000", configurationFactory = DummyConfigurationFactory.class,
+            configurationDefaults = DummyConfigurationDefaults.class, eventsEnabled = FluentConfiguration.BooleanValue.FALSE,
+            capabilities = "{javascriptEnabled: true}",
             htmlDumpMode = ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL, htmlDumpPath = "/html-path", implicitlyWait = 1000, pageLoadTimeout = 2000,
             screenshotMode = ConfigurationProperties.TriggerMode.MANUAL, screenshotPath = "/screenshot-path", scriptTimeout = 3000, webDriver = "firefox")
     public static class ConfiguredClass {
@@ -40,11 +38,27 @@ public class AnnotationConfigurationTest {
     }
 
     @Test
+    public void configurationDefaults() {
+        Assertions.assertThat(configuration.getConfigurationDefaults()).isEqualTo(DummyConfigurationDefaults.class);
+    }
+
+    @Test
     public void webDriver() {
         Assertions.assertThat(noConfiguration.getWebDriver()).isNull();
         Assertions.assertThat(defaultConfiguration.getWebDriver()).isNull();
 
         Assertions.assertThat(configuration.getWebDriver()).isEqualTo("firefox");
+    }
+
+    @Test
+    public void capabilities() {
+        Assertions.assertThat(noConfiguration.getCapabilities()).isNull();
+        Assertions.assertThat(defaultConfiguration.getCapabilities()).isNull();
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setJavascriptEnabled(true);
+
+        Assertions.assertThat(configuration.getCapabilities()).isEqualTo(capabilities);
     }
 
     @Test
@@ -77,6 +91,14 @@ public class AnnotationConfigurationTest {
         Assertions.assertThat(defaultConfiguration.getScriptTimeout()).isNull();
 
         Assertions.assertThat(configuration.getScriptTimeout()).isEqualTo(3000L);
+    }
+
+    @Test
+    public void eventsEnabled() {
+        Assertions.assertThat(noConfiguration.getEventsEnabled()).isNull();
+        Assertions.assertThat(defaultConfiguration.getEventsEnabled()).isNull();
+
+        Assertions.assertThat(configuration.getEventsEnabled()).isEqualTo(false);
     }
 
     @Test

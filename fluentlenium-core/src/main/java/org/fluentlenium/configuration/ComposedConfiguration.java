@@ -1,6 +1,7 @@
 package org.fluentlenium.configuration;
 
 import lombok.experimental.Delegate;
+import org.openqa.selenium.Capabilities;
 
 /**
  * A configuration composed with a writable configuration and list of read configurations.
@@ -43,6 +44,15 @@ public class ComposedConfiguration implements Configuration {
         for (ConfigurationProperties configuration : configurations) {
             String webDriver = configuration.getWebDriver();
             if (webDriver != null) return webDriver;
+        }
+        return null;
+    }
+
+    @Override
+    public Capabilities getCapabilities() {
+        for (ConfigurationProperties configuration : configurations) {
+            Capabilities capabilities = configuration.getCapabilities();
+            if (capabilities != null) return capabilities;
         }
         return null;
     }
