@@ -314,14 +314,7 @@ $("#create-button").mouseOver()
 
 Selenium has a driver wrapper named `EventFiringWebDriver` that is able to generate events and register listeners.
 
-FluentLenium brings an Events API to register those listeners easily. Make sure you have configured FluentLenium to use
-an instance of `org.openqa.selenium.support.events.EventFiringWebDriver` by overriding `getDefaultDriver`.
-
-```java
-public WebDriver getDefaultDriver() {
-    return new EventFiringWebDriver(super.getDefaultDriver());
-}
-```
+FluentLenium brings an Events API to register those listeners easily.
 
 And use `events` methods to register listeners.
 
@@ -795,11 +788,16 @@ FluentLenium can be configured in many ways through configuration properties.
      indefinitely.
      
      Default value: ```null```.
-
+     
+  - **eventsEnabled**
+  
+     Enables ```events()``` by wrapping the ```WebDriver``` in ```EventFiringWebDriver```.
+     
+     Default value: ```true```.
+     
   - **screenshotPath**
 
-     Sets the filesystem path where screenshot will be saved when calling {@link FluentAdapter#takeScreenShot()} or
-     {@link FluentAdapter#takeScreenShot(String)}.
+     Sets the filesystem path where screenshot will be saved.
      
      Default value: ```null```.
 

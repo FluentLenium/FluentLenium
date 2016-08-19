@@ -237,7 +237,8 @@ public class FluentDriver implements FluentDriverControl {
         if (events == null) {
             throw new IllegalStateException(
                     "An EventFiringWebDriver instance is required to use events. "
-                            + "Please override newWebDriver() to provide it.");
+                            + "You should set 'eventsEnabled' configuration property to 'true' "
+                            + "or override newWebDriver() to build an EventFiringWebDriver.");
         }
         return events;
     }

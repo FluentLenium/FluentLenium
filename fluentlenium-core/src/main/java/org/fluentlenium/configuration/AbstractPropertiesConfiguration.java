@@ -53,6 +53,12 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
         }
     }
 
+    private Boolean getBooleanProperty(String propertyName) {
+        String property = getProperty(propertyName);
+        if (!isValidProperty(property)) return null;
+        return Boolean.parseBoolean(property);
+    }
+
     private <T extends Enum<T>> T getEnumProperty(Class<T> enumClass, String propertyName) {
         String property = getProperty(propertyName);
         if (!isValidProperty(property)) return null;
@@ -91,6 +97,11 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
     @Override
     public String getBaseUrl() {
         return getStringProperty("baseUrl");
+    }
+
+    @Override
+    public Boolean getEventsEnabled() {
+        return getBooleanProperty("eventsEnabled");
     }
 
     @Override

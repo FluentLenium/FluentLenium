@@ -15,6 +15,8 @@ public class ProgrammaticConfiguration implements Configuration {
 
     private String baseUrl;
 
+    private Boolean eventsEnabled;
+
     private String screenshotPath;
 
     private String htmlDumpPath;
@@ -96,6 +98,16 @@ public class ProgrammaticConfiguration implements Configuration {
     @Override
     public void setScriptTimeout(Long scriptTimeout) {
         this.scriptTimeout = scriptTimeout;
+    }
+
+    @Override
+    public Boolean getEventsEnabled() {
+        return eventsEnabled;
+    }
+
+    @Override
+    public void setEventsEnabled(Boolean eventsEnabled) {
+        this.eventsEnabled = eventsEnabled;
     }
 
     @Override

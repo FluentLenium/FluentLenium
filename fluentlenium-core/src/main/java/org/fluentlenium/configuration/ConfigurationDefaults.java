@@ -42,6 +42,11 @@ public class ConfigurationDefaults implements ConfigurationProperties {
     }
 
     @Override
+    public Boolean getEventsEnabled() {
+        return true;
+    }
+
+    @Override
     public String getScreenshotPath() {
         return null;
     }

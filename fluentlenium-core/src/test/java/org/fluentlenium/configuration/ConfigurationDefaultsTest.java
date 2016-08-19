@@ -31,6 +31,9 @@ public class ConfigurationDefaultsTest {
                 case "configurationDefaults":
                     Assertions.assertThat(readMethod.invoke(configurationDefaults)).isSameAs(ConfigurationDefaults.class);
                     break;
+                case "eventsEnabled":
+                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(true);
+                    break;
                 default:
                     Assertions.assertThat(readMethod.invoke(configurationDefaults)).isNull();
             }

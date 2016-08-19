@@ -2,70 +2,95 @@ package org.fluentlenium.configuration;
 
 import org.openqa.selenium.WebDriver;
 
+import javax.annotation.processing.SupportedAnnotationTypes;
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
+/**
+ * Configure a FluentLenium test class with this annotation.
+ *
+ * @see ConfigurationProperties
+ */
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FluentConfiguration {
+    enum BooleanValue {
+        TRUE(true),
+        FALSE(false),
+        DEFAULT(null);
+
+        private final Boolean value;
+
+        BooleanValue(Boolean value) {
+            this.value = value;
+        }
+
+        Boolean asBoolean() {
+            return this.value;
+        }
+
+    }
 
     /**
-     * Get the {@link ConfigurationFactory} class
-     *
-     * @return
+     * @see ConfigurationProperties#getConfigurationFactory()
      */
     Class<? extends ConfigurationFactory> configurationFactory() default DefaultConfigurationFactory.class;
 
 
     /**
-     * <pre>configurationDefaults</pre> configuration property.
-     *
-     * @return
+     * @see ConfigurationProperties#getConfigurationDefaults()
      */
     Class<? extends ConfigurationProperties> configurationDefaults() default ConfigurationDefaults.class;
 
     /**
-     * Get the name of the {@link WebDriver} to used, as registered in {@link WebDrivers}.
-     *
-     * @return
+     * @see ConfigurationProperties#getWebDriver()
      */
     String webDriver() default "";
 
     /**
-     * Sets the base URL used to build absolute URL when relative URL is used.
+     * @see ConfigurationProperties#getBaseUrl()
      */
     String baseUrl() default "";
 
     /**
-     * Sets the amount of time to wait for a page load to complete before throwing an error.
-     * If the timeout is negative, page loads can be indefinite.
-     *
-     * @return
-     * @see org.openqa.selenium.WebDriver.Timeouts#pageLoadTimeout(long, java.util.concurrent.TimeUnit)
+     * @see ConfigurationProperties#getPageLoadTimeout()
      */
     long pageLoadTimeout() default -1;
 
     /**
-     * Specifies the amount of time the driver should wait when searching for an element if it is
-     * not immediately present.
-     *
-     * @return
-     * @see org.openqa.selenium.WebDriver.Timeouts#implicitlyWait(long, java.util.concurrent.TimeUnit)
+     * @see ConfigurationProperties#getImplicitlyWait()
      */
     long implicitlyWait() default -1;
 
     /**
-     * Sets the amount of time to wait for a page load to complete before throwing an error.
-     * If the timeout is negative, page loads can be indefinite.
-     *
-     * @see org.openqa.selenium.WebDriver.Timeouts#setScriptTimeout(long, java.util.concurrent.TimeUnit)
+     * @see ConfigurationProperties#getScriptTimeout()
      */
     long scriptTimeout() default -1;
 
+    /**
+     * @see ConfigurationProperties#getEventsEnabled()
+     */
+    BooleanValue eventsEnabled() default BooleanValue.DEFAULT;
+
+    /**
+     * @see ConfigurationProperties#getScreenshotPath()
+     */
     String screenshotPath() default "";
 
+    /**
+     * @see ConfigurationProperties#getHtmlDumpPath()
+     */
     String htmlDumpPath() default "";
 
-    ConfigurationProperties.TriggerMode screenshotMode() default ConfigurationProperties.TriggerMode.UNDEFINED;
+    /**
+     * @see ConfigurationProperties#getScreenshotMode()
+     */
+    ConfigurationProperties.TriggerMode screenshotMode() default ConfigurationProperties.TriggerMode.DEFAULT;
 
-    ConfigurationProperties.TriggerMode htmlDumpMode() default ConfigurationProperties.TriggerMode.UNDEFINED;
+    /**
+     * @see ConfigurationProperties#getHtmlDumpMode()
+     */
+    ConfigurationProperties.TriggerMode htmlDumpMode() default ConfigurationProperties.TriggerMode.DEFAULT;
 }

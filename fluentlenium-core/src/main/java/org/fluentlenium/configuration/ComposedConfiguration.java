@@ -84,6 +84,15 @@ public class ComposedConfiguration implements Configuration {
     }
 
     @Override
+    public Boolean getEventsEnabled() {
+        for (ConfigurationProperties configuration : configurations) {
+            Boolean eventsEnabled = configuration.getEventsEnabled();
+            if (eventsEnabled != null) return eventsEnabled;
+        }
+        return null;
+    }
+
+    @Override
     public String getScreenshotPath() {
         for (ConfigurationProperties configuration : configurations) {
             String screenshotPath = configuration.getScreenshotPath();

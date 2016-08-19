@@ -8,6 +8,7 @@ import org.fluentlenium.configuration.WebDrivers;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.FluentDriverControl;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 /**
  * Generic adapter to {@link FluentDriver}.
@@ -106,7 +107,11 @@ public class FluentAdapter implements FluentDriverControl, ConfigurationProperti
      */
     @Deprecated
     public WebDriver getDefaultDriver() {
-        return WebDrivers.INSTANCE.newWebDriver(getWebDriver());
+        WebDriver webDriver = WebDrivers.INSTANCE.newWebDriver(getWebDriver());
+        if (Boolean.TRUE.equals(getEventsEnabled())) {
+            webDriver = new EventFiringWebDriver(webDriver);
+        }
+        return webDriver;
     }
 
     /**

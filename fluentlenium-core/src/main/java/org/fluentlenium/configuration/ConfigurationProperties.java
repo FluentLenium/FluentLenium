@@ -55,7 +55,7 @@ import org.openqa.selenium.WebDriver;
  */
 
 public interface ConfigurationProperties {
-    enum TriggerMode {AUTOMATIC_ON_FAIL, MANUAL, UNDEFINED}
+    enum TriggerMode {AUTOMATIC_ON_FAIL, MANUAL, DEFAULT}
 
     /**
      * <pre>webDriver</pre> property.
@@ -125,6 +125,18 @@ public interface ConfigurationProperties {
      */
     Long getScriptTimeout();
 
+
+    /**
+     * <pre>eventsEnabled</pre> property.
+     *
+     * Enables {@link FluentAdapter#events()} by wrapping the {@link WebDriver} in
+     * {@link org.openqa.selenium.support.events.EventFiringWebDriver}.
+     *
+     * Default value is true.
+     *
+     * @return eventsEnabled property value.
+     */
+    Boolean getEventsEnabled();
 
     /**
      * <pre>screenshotPath</pre> property.

@@ -1,5 +1,8 @@
 package org.fluentlenium.configuration;
 
+import org.fluentlenium.adapter.FluentAdapter;
+import org.openqa.selenium.WebDriver;
+
 /**
  * Mutation interface of Configuration Properties.
  *
@@ -53,6 +56,13 @@ public interface ConfigurationMutator {
      * @see ConfigurationProperties#getScriptTimeout()
      */
     void setScriptTimeout(Long scriptTimeout);
+
+    /**
+     * Sets the value of <pre>eventsEnabled</pre> property.
+     *
+     * @param eventsEnabled
+     */
+    void setEventsEnabled(Boolean eventsEnabled);
 
     /**
      * Sets the value of <pre>screenshotPath</pre> property.

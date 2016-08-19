@@ -47,7 +47,7 @@ public class AnnotationConfiguration implements ConfigurationProperties {
     }
 
     private TriggerMode getTriggerModeValue(TriggerMode triggerMode) {
-        if (triggerMode == TriggerMode.UNDEFINED) return null;
+        if (triggerMode == TriggerMode.DEFAULT) return null;
         return triggerMode;
     }
 
@@ -85,6 +85,12 @@ public class AnnotationConfiguration implements ConfigurationProperties {
     public Long getScriptTimeout() {
         if (configuration == null) return null;
         return getLongValue(configuration.scriptTimeout());
+    }
+
+    @Override
+    public Boolean getEventsEnabled() {
+        if (configuration == null) return null;
+        return configuration.eventsEnabled().asBoolean();
     }
 
     @Override
