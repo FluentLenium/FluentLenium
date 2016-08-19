@@ -58,19 +58,6 @@ public interface ConfigurationProperties {
     enum TriggerMode {AUTOMATIC_ON_FAIL, MANUAL, UNDEFINED}
 
     /**
-     * <pre>configurationFactory</pre> property.
-     *
-     * Set this to a class implementing {@link ConfigurationFactory} to customize the ways properties are read.
-     * This allow to configure properties from sources that are not supported by default FluentLenium.
-     *
-     * Default value is {@link DefaultConfigurationFactory} class.
-     *
-     * @return Custom {@link ConfigurationFactory} class.
-     */
-    Class<? extends ConfigurationFactory> getConfigurationFactory();
-
-
-    /**
      * <pre>webDriver</pre> property.
      *
      * Set this property to a value supported by {@link WebDrivers} registry.
@@ -186,5 +173,30 @@ public interface ConfigurationProperties {
      * @see TriggerMode
      */
     TriggerMode getHtmlDumpMode();
+
+    /**
+     * <pre>configurationDefaults</pre> property.
+     *
+     * Set this to a class implementing {@link ConfigurationProperties} to provide the default values
+     * of the configuration properties.
+     *
+     * Default value is {@link ConfigurationDefaults}
+     *
+     * @return Custom {@link ConfigurationProperties} instance with default values.
+     */
+    Class<? extends ConfigurationProperties> getConfigurationDefaults();
+
+    /**
+     * <pre>configurationFactory</pre> property.
+     *
+     * Set this to a class implementing {@link ConfigurationFactory} to customize the ways properties are read.
+     * This allow to configure properties from sources that are not supported by default FluentLenium.
+     *
+     * Default value is {@link DefaultConfigurationFactory} class.
+     *
+     * @return Custom {@link ConfigurationFactory} class.
+     */
+    Class<? extends ConfigurationFactory> getConfigurationFactory();
+
 
 }

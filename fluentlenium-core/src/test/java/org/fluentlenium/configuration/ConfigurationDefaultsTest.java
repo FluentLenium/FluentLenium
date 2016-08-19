@@ -10,26 +10,29 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 
-public class DefaultConfigurationTest {
+public class ConfigurationDefaultsTest {
 
 
     @Test
     public void testConfiguration() throws IntrospectionException, InvocationTargetException, IllegalAccessException {
-        DefaultConfiguration defaultConfiguration = new DefaultConfiguration();
-        PropertyDescriptor[] props = Introspector.getBeanInfo(defaultConfiguration.getClass()).getPropertyDescriptors();
+        ConfigurationDefaults configurationDefaults = new ConfigurationDefaults();
+        PropertyDescriptor[] props = Introspector.getBeanInfo(configurationDefaults.getClass()).getPropertyDescriptors();
 
         for (PropertyDescriptor prop : props) {
             Method readMethod = prop.getReadMethod();
             if (readMethod.getDeclaringClass() == Object.class) continue;
             switch (prop.getName()) {
                 case "webDriver":
-                    Assertions.assertThat(readMethod.invoke(defaultConfiguration)).isEqualTo("firefox");
+                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo("firefox");
                     break;
                 case "configurationFactory":
-                    Assertions.assertThat(readMethod.invoke(defaultConfiguration)).isSameAs(DefaultConfigurationFactory.class);
+                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isSameAs(DefaultConfigurationFactory.class);
+                    break;
+                case "configurationDefaults":
+                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isSameAs(ConfigurationDefaults.class);
                     break;
                 default:
-                    Assertions.assertThat(readMethod.invoke(defaultConfiguration)).isNull();
+                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isNull();
             }
         }
     }

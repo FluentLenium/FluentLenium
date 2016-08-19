@@ -30,6 +30,17 @@ public class AnnotationConfiguration implements ConfigurationProperties {
         return configurationFactoryClass;
     }
 
+    private Class<? extends ConfigurationProperties> getConfigurationDefaultsClassValue(Class<? extends ConfigurationProperties> configurationDefaultsClass) {
+        if (configurationDefaultsClass == ConfigurationDefaults.class) return null;
+        return configurationDefaultsClass;
+    }
+
+    @Override
+    public Class<? extends ConfigurationProperties> getConfigurationDefaults() {
+        if (configuration == null) return null;
+        return getConfigurationDefaultsClassValue(configuration.configurationDefaults());
+    }
+
     private Long getLongValue(Long property) {
         if (property < 0) return null;
         return property;

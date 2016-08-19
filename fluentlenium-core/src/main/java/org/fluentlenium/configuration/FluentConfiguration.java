@@ -9,18 +9,26 @@ import java.lang.annotation.RetentionPolicy;
 public @interface FluentConfiguration {
 
     /**
+     * Get the {@link ConfigurationFactory} class
+     *
+     * @return
+     */
+    Class<? extends ConfigurationFactory> configurationFactory() default DefaultConfigurationFactory.class;
+
+
+    /**
+     * <pre>configurationDefaults</pre> configuration property.
+     *
+     * @return
+     */
+    Class<? extends ConfigurationProperties> configurationDefaults() default ConfigurationDefaults.class;
+
+    /**
      * Get the name of the {@link WebDriver} to used, as registered in {@link WebDrivers}.
      *
      * @return
      */
     String webDriver() default "";
-
-    /**
-     * Get the {@link ConfigurationFactory} lcass
-     *
-     * @return
-     */
-    Class<? extends ConfigurationFactory> configurationFactory() default DefaultConfigurationFactory.class;
 
     /**
      * Sets the base URL used to build absolute URL when relative URL is used.

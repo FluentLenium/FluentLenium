@@ -9,6 +9,8 @@ package org.fluentlenium.configuration;
 public class ProgrammaticConfiguration implements Configuration {
     private Class<? extends ConfigurationFactory> configurationFactory;
 
+    private Class<? extends ConfigurationProperties> configurationDefaults;
+
     private String webDriverName;
 
     private String baseUrl;
@@ -45,6 +47,15 @@ public class ProgrammaticConfiguration implements Configuration {
     @Override
     public void setConfigurationFactory(Class<? extends ConfigurationFactory> configurationFactory) {
         this.configurationFactory = configurationFactory;
+    }
+
+    @Override
+    public Class<? extends ConfigurationProperties> getConfigurationDefaults() {
+        return configurationDefaults;
+    }
+
+    public void setConfigurationDefaults(Class<? extends ConfigurationProperties> configurationDefaults) {
+        this.configurationDefaults = configurationDefaults;
     }
 
     @Override

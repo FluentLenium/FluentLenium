@@ -30,6 +30,15 @@ public class ComposedConfiguration implements Configuration {
     }
 
     @Override
+    public Class<? extends ConfigurationProperties> getConfigurationDefaults() {
+        for (ConfigurationProperties configuration : configurations) {
+            Class<? extends ConfigurationProperties> configurationDefaults = configuration.getConfigurationDefaults();
+            if (configurationDefaults != null) return configurationDefaults;
+        }
+        return null;
+    }
+
+    @Override
     public String getWebDriver() {
         for (ConfigurationProperties configuration : configurations) {
             String webDriver = configuration.getWebDriver();

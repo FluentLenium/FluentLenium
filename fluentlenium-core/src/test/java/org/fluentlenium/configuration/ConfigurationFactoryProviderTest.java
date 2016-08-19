@@ -4,6 +4,8 @@ package org.fluentlenium.configuration;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class ConfigurationFactoryProviderTest {
     public static class DummyContainer {
 
@@ -11,7 +13,7 @@ public class ConfigurationFactoryProviderTest {
 
     public static class CustomConfigurationFactory implements ConfigurationFactory {
         @Override
-        public Configuration newConfiguration(Class<?> containerClass) {
+        public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
             return new ProgrammaticConfiguration();
         }
     }
@@ -22,7 +24,7 @@ public class ConfigurationFactoryProviderTest {
         }
 
         @Override
-        public Configuration newConfiguration(Class<?> containerClass) {
+        public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
             return new ProgrammaticConfiguration();
         }
     }
@@ -37,20 +39,38 @@ public class ConfigurationFactoryProviderTest {
 
     }
 
+    public static class CustomConfigurationDefaults extends ConfigurationDefaults {
+        @Override
+        public String getBaseUrl() {
+            return "custom-base-url";
+        }
+    }
+
+    @FluentConfiguration(configurationDefaults = CustomConfigurationDefaults.class)
+    public static class CustomDefaultsContainer {
+
+    }
+
     @Test
     public void testDefaultConfiguration() {
         Configuration configuration = ConfigurationFactoryProvider.newConfiguration(DummyContainer.class);
-        Assertions.assertThat(configuration).isExactlyInstanceOf(ComposedConfiguration.class);
+        assertThat(configuration).isExactlyInstanceOf(ComposedConfiguration.class);
     }
 
     @Test
     public void testCustomConfiguration() {
         Configuration configuration = ConfigurationFactoryProvider.newConfiguration(CustomContainer.class);
-        Assertions.assertThat(configuration).isExactlyInstanceOf(ProgrammaticConfiguration.class);
+        assertThat(configuration).isExactlyInstanceOf(ProgrammaticConfiguration.class);
     }
 
     @Test(expected = ConfigurationException.class)
     public void testInvalidClassConfiguration() {
         ConfigurationFactoryProvider.newConfiguration(FailingContainer.class);
+    }
+
+    @Test
+    public void testCustomConfigurationDefaults() {
+        Configuration configuration = ConfigurationFactoryProvider.newConfiguration(CustomDefaultsContainer.class);
+        assertThat(configuration.getBaseUrl()).isEqualTo("custom-base-url");
     }
 }

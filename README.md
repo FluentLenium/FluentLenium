@@ -759,13 +759,6 @@ FluentLenium can be configured in many ways through configuration properties.
 
 ### Configuration properties
 
-  - **configurationFactory**
-  
-     Set this to a class implementing ```ConfigurationFactory``` to customize the ways properties are read.
-     This allow to configure properties from sources that are not supported by default FluentLenium.
-     
-     Default value: ```org.fluentlenium.configuration.DefaultConfigurationFactory```.
-     
   - **webDriver**
   
     Set this property to a value supported by ```WebDrivers``` registry.
@@ -833,6 +826,21 @@ FluentLenium can be configured in many ways through configuration properties.
      
      Default value: ```null```.
      
+   - **configurationDefaults**
+   
+    Set this to a class implementing ```ConfigurationProperties``` to provide the default values
+    of the configuration properties.
+
+    Default value: ```org.fluentlenium.configuration.ConfigurationDefaults```.
+      
+  - **configurationFactory**
+  
+     Set this to a class implementing ```ConfigurationFactory``` to customize the ways properties are read.
+     This allow to configure properties from sources that are not supported by default FluentLenium.
+     
+     Default value: ```org.fluentlenium.configuration.DefaultConfigurationFactory```.
+     
+     
  Keep in mind that when those properties are defined through System Properties or Environment Variables, they need to
  be prefixed with ```fluentlenium.``` (ie. ```fluentlenium.webDriver=chrome```).
 
@@ -879,6 +887,18 @@ It's possible to define those properties using:
         $ cat fluentlenium.properties
         webDriver=chrome
         ...
+
+  - **ConfigurationProperties** custom implementation specified by ```configurationDefaults``` property.
+  
+        public class CustomConfigurationDefaults extends ConfigurationDefaults {
+            @Override
+            public String getWebDriver() {
+                return "chrome";
+            }
+        }
+        
+        $ cat fluentlenium.properties
+        configurationDefaults=org.your.package.CustomConfigurationDefaults
  
 This list of way to configure fluentlenium is ordered by priority. If a value is defined for a property in an element, 
 lower ways will just be ignored.
@@ -886,7 +906,7 @@ lower ways will just be ignored.
 You may implement additionnal ways to read configuration property by implementing another
 ```ConfigurationFactory``` and set the new configuration factory class name in the ```configurationFactory``` property.
 
-### Driver consideration
+### Register a custom WebDriver
 You can register a custom WebDriver type by providing your own implementation of ```WebDriverFactory``` in 
 ```WebDrivers``` registry.
 
@@ -925,7 +945,7 @@ public class BrowserStackWebDriverFactory implements WebDriverFactory {
 }
 ```
 
-This implementation will bediscovered with [classindex](https://github.com/atteo/classindex), a 
+This implementation will be discovered with [classindex](https://github.com/atteo/classindex), a 
 compile-time alternative to run-time classpath scanning. It requires your IDE to have Annotation Processing 
 enabled in the Java Compiler configuration.
 

@@ -11,8 +11,12 @@ public class DefaultConfigurationFactory implements ConfigurationFactory {
     }
 
     @Override
-    public Configuration newConfiguration(Class<?> containerClass) {
+    public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
         Properties properties = new Properties();
+
+        if (configurationDefaults == null) {
+            configurationDefaults = new ConfigurationDefaults();
+        }
 
         InputStream configurationFile = getPropertiesInputStream();
         if (configurationFile != null) {
@@ -31,7 +35,7 @@ public class DefaultConfigurationFactory implements ConfigurationFactory {
                 new EnvironmentVariablesConfiguration(),
                 new AnnotationConfiguration(containerClass),
                 new PropertiesConfiguration(properties),
-                new DefaultConfiguration()
+                configurationDefaults
         );
 
         return configuration;

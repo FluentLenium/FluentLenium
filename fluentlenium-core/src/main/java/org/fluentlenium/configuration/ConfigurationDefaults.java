@@ -5,10 +5,15 @@ package org.fluentlenium.configuration;
  *
  * @see ConfigurationProperties
  */
-public class DefaultConfiguration implements ConfigurationProperties {
+public class ConfigurationDefaults implements ConfigurationProperties {
     @Override
     public Class<? extends ConfigurationFactory> getConfigurationFactory() {
         return DefaultConfigurationFactory.class;
+    }
+
+    @Override
+    public Class<? extends ConfigurationProperties> getConfigurationDefaults() {
+        return ConfigurationDefaults.class;
     }
 
     @Override

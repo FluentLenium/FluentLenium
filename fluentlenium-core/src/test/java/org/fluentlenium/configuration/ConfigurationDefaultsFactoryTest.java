@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({SystemPropertiesConfiguration.class, EnvironmentVariablesConfiguration.class})
-public class DefaultConfigurationFactoryTest {
+public class ConfigurationDefaultsFactoryTest {
 
     @FluentConfiguration(pageLoadTimeout = 2000L)
     public static class AnnotatedContainer {
@@ -38,7 +38,7 @@ public class DefaultConfigurationFactoryTest {
             }
         };
 
-        Configuration configuration = factory.newConfiguration(AnnotatedContainer.class);
+        Configuration configuration = factory.newConfiguration(AnnotatedContainer.class, new ConfigurationDefaults());
 
         // Annotation has higher priority than configuration file, so it should be 2000L and not 5000L.
         assertThat(configuration.getPageLoadTimeout()).isEqualTo(2000L);
@@ -65,7 +65,7 @@ public class DefaultConfigurationFactoryTest {
             }
         };
 
-        Configuration configuration = factory.newConfiguration(null);
+        Configuration configuration = factory.newConfiguration(null, null);
 
         assertThat(configuration.getPageLoadTimeout()).isEqualTo(5000L);
         assertThat(configuration.getScriptTimeout()).isEqualTo(1000L);
@@ -96,7 +96,42 @@ public class DefaultConfigurationFactoryTest {
                 };
             }
         };
-        factory.newConfiguration(null);
+        factory.newConfiguration(null, null);
+    }
+
+    public void testCustomConfigurationDefaults() {
+        DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
+            @Override
+            protected InputStream getPropertiesInputStream() {
+                return IOUtils.toInputStream("pageLoadTimeout=5000");
+            }
+        };
+
+        ConfigurationDefaults configurationDefaults = new ConfigurationDefaults() {
+            @Override
+            public String getBaseUrl() {
+                return "custom-default-value";
+            }
+        };
+
+        Configuration configuration = factory.newConfiguration(AnnotatedContainer.class, configurationDefaults);
+
+        // Annotation has higher priority than configuration file, so it should be 2000L and not 5000L.
+        assertThat(configuration.getPageLoadTimeout()).isEqualTo(2000L);
+
+        Mockito.when(System.getenv("fluentlenium.pageLoadTimeout")).thenReturn("1000");
+
+        assertThat(configuration.getPageLoadTimeout()).isEqualTo(1000L);
+
+        Mockito.when(System.getProperty("fluentlenium.pageLoadTimeout")).thenReturn("500");
+
+        assertThat(configuration.getPageLoadTimeout()).isEqualTo(500L);
+
+        configuration.setPageLoadTimeout(250L);
+
+        assertThat(configuration.getPageLoadTimeout()).isEqualTo(250L);
+
+        assertThat(configuration.getBaseUrl()).isEqualTo("custom-default-value");
     }
 
 }

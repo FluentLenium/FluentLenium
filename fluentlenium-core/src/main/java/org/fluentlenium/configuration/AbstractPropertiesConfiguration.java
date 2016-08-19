@@ -79,6 +79,11 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
     }
 
     @Override
+    public Class<? extends ConfigurationProperties> getConfigurationDefaults() {
+        return getClassProperty(ConfigurationDefaults.class, "configurationDefaults");
+    }
+
+    @Override
     public String getWebDriver() {
         return getStringProperty("webDriver");
     }
