@@ -14,11 +14,6 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 public class EventsTest extends LocalFluentCase {
 
-    @Override
-    public WebDriver newWebDriver() {
-        return new EventFiringWebDriver(super.newWebDriver());
-    }
-
     @Test
     public void clickOn() {
         final ElementListener beforeListener = Mockito.mock(ElementListener.class);

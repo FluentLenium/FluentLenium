@@ -26,7 +26,7 @@ public abstract class LocalFluentCase extends FluentTest {
     }
 
     @Override
-    public WebDriver newWebDriver() {
-        return new HtmlUnitDriver(true);
+    public String getWebDriver() {
+        return "htmlunit";
     }
 }
