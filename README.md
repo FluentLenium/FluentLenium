@@ -925,6 +925,10 @@ public class BrowserStackWebDriverFactory implements WebDriverFactory {
 }
 ```
 
+This implementation will bediscovered with [classindex](https://github.com/atteo/classindex), a 
+compile-time alternative to run-time classpath scanning. It requires your IDE to have Annotation Processing 
+enabled in the Java Compiler configuration.
+
 Instead of implementing a new ```WebDriverFactory``` class, you may also override ```newWebDriver()``` in the Test 
 class, but doing so will ignore any value defined in ```webDriver``` configuration property.
 

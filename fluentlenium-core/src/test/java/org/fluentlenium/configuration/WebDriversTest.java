@@ -22,8 +22,8 @@ public class WebDriversTest {
         }
 
         @Override
-        public String[] getNames() {
-            return new String[]{"custom-factory"};
+        public String getName() {
+            return "custom";
         }
     }
 
@@ -35,7 +35,7 @@ public class WebDriversTest {
     @Test
     public void testFirefox() {
         WebDriverFactory firefox = webDrivers.get("firefox");
-        assertThat(firefox).isExactlyInstanceOf(ReflectiveWebDriverFactory.class);
+        assertThat(firefox).isExactlyInstanceOf(DefaultWebDriverFactories.FirefoxWebDriverFactory.class);
 
         Class<? extends WebDriver> webDriverClass = ((ReflectiveWebDriverFactory) firefox).getWebDriverClass();
         assertThat(webDriverClass).isSameAs(FirefoxDriver.class);
@@ -43,7 +43,7 @@ public class WebDriversTest {
 
     @Test(expected = ConfigurationException.class)
     public void testRegisterFirefox() {
-        webDrivers.register("firefox", new CustomWebDriverFactory());
+        webDrivers.register(new CustomWebDriverFactory());
     }
 
     @Test

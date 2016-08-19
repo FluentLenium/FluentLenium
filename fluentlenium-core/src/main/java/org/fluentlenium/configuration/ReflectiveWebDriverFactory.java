@@ -9,13 +9,15 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * A simple {@link WebDriverFactory} that create {@link WebDriver} instances using reflection.
  */
-public class ReflectiveWebDriverFactory implements WebDriverFactory {
+public class ReflectiveWebDriverFactory implements WebDriverFactory, AlternativeNames {
+    private String name;
     private Object[] args;
     private String webDriverClassName;
     private Class<? extends WebDriver> webDriverClass;
     private boolean available;
 
-    public ReflectiveWebDriverFactory(String webDriverClassName, Object... args) {
+    public ReflectiveWebDriverFactory(String name, String webDriverClassName, Object... args) {
+        this.name = name;
         this.webDriverClassName = webDriverClassName;
         this.args = args;
         try {
@@ -26,7 +28,8 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory {
         }
     }
 
-    public ReflectiveWebDriverFactory(Class<? extends WebDriver> webDriverClass, Object... args) {
+    public ReflectiveWebDriverFactory(String name, Class<? extends WebDriver> webDriverClass, Object... args) {
+        this.name = name;
         this.webDriverClass = webDriverClass;
         this.args = args;
         this.webDriverClassName = webDriverClass.getName();
@@ -55,7 +58,12 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory {
     }
 
     @Override
-    public String[] getNames() {
+    public String getName() {
+       return name;
+    }
+
+    @Override
+    public String[] getAlternativeNames() {
         if (webDriverClass != null) {
             return new String[]{webDriverClass.getName(), webDriverClass.getSimpleName()};
         }

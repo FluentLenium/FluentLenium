@@ -34,7 +34,7 @@ public class ReflectiveWebDriverFactoryTest {
 
     @Test
     public void testInexistantClass() {
-        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("org.fluentlenium.ThisClassDoesntExists");
+        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("doesnt-exists", "org.fluentlenium.ThisClassDoesntExists");
         assertThat(webDriverFactory.isAvailable()).isFalse();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
@@ -45,13 +45,11 @@ public class ReflectiveWebDriverFactoryTest {
         }).isExactlyInstanceOf(ConfigurationException.class);
 
         assertThat(webDriverFactory.getWebDriverClass()).isNull();
-
-        assertThat(webDriverFactory.getNames()).isEmpty();
     }
 
     @Test
     public void testNonWebDriverClass() {
-        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory(getClass().getName());
+        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("test-class", getClass().getName());
         assertThat(webDriverFactory.isAvailable()).isFalse();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
@@ -66,7 +64,7 @@ public class ReflectiveWebDriverFactoryTest {
 
     @Test
     public void testAbstractClass() {
-        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory(AbstractDriver.class);
+        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("abstract", AbstractDriver.class);
         assertThat(webDriverFactory.isAvailable()).isTrue();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
@@ -79,7 +77,7 @@ public class ReflectiveWebDriverFactoryTest {
 
     @Test
     public void testNoConstructorClass() {
-        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory(NoConstructorDriver.class);
+        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("no-constructor", NoConstructorDriver.class);
         assertThat(webDriverFactory.isAvailable()).isTrue();
 
         WebDriver webDriver = webDriverFactory.newWebDriver();
@@ -92,7 +90,7 @@ public class ReflectiveWebDriverFactoryTest {
 
     @Test
     public void testFailingDriverClass() {
-        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory(FailingDriver.class);
+        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("failing", FailingDriver.class);
         assertThat(webDriverFactory.isAvailable()).isTrue();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
@@ -105,7 +103,7 @@ public class ReflectiveWebDriverFactoryTest {
 
     @Test
     public void testCustomConstructorClassInvalidArguments() {
-        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory(CustomConstructorDriver.class);
+        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("custom_constructor", CustomConstructorDriver.class);
         assertThat(webDriverFactory.isAvailable()).isTrue();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
@@ -118,7 +116,7 @@ public class ReflectiveWebDriverFactoryTest {
 
     @Test
     public void testCustomConstructorClass() {
-        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory(CustomConstructorDriver.class, true);
+        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("custom_constructor", CustomConstructorDriver.class, true);
         assertThat(webDriverFactory.isAvailable()).isTrue();
 
         WebDriver webDriver = webDriverFactory.newWebDriver();
@@ -131,11 +129,12 @@ public class ReflectiveWebDriverFactoryTest {
 
     @Test
     public void testHtmlUnitWebDriver() {
-        ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory(HtmlUnitDriver.class.getName());
+        ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("htmlunit", HtmlUnitDriver.class.getName());
         assertThat(webDriverFactory.isAvailable()).isTrue();
         assertThat(webDriverFactory.getWebDriverClass()).isSameAs(HtmlUnitDriver.class);
 
-        assertThat(webDriverFactory.getNames()).containsExactly(HtmlUnitDriver.class.getName(), HtmlUnitDriver.class.getSimpleName());
+        assertThat(webDriverFactory.getName()).contains("htmlunit");
+        assertThat(webDriverFactory.getAlternativeNames()).containsExactly(HtmlUnitDriver.class.getName(), HtmlUnitDriver.class.getSimpleName());
 
         WebDriver webDriver = webDriverFactory.newWebDriver();
         try {

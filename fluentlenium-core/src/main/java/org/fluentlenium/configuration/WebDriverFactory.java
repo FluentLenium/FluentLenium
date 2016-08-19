@@ -1,10 +1,14 @@
 package org.fluentlenium.configuration;
 
+import org.atteo.classindex.IndexSubclasses;
 import org.openqa.selenium.WebDriver;
+
+import javax.inject.Named;
 
 /**
  * Factory of {@link WebDriver}, that can be registered in {@link WebDrivers} registry.
  */
+@IndexSubclasses
 public interface WebDriverFactory {
     /**
      * Creates a new instance of {@link WebDriver}.
@@ -14,9 +18,11 @@ public interface WebDriverFactory {
     WebDriver newWebDriver();
 
     /**
-     * Names of this factory.
+     * Primary name of this factory.
      *
-     * @return
+     * To register it with alternative name, use {@link AlternativeNames}.
+     *
+     * @return Primary name.
      */
-    String[] getNames();
+    String getName();
 }
