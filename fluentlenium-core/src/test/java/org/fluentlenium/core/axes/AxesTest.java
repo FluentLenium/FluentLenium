@@ -2,6 +2,8 @@ package org.fluentlenium.core.axes;
 
 
 import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.components.ComponentInstantiator;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -24,14 +26,17 @@ public class AxesTest {
     @Mock
     private WebDriver driver;
 
+    private ComponentInstantiator instantiator;
+
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
+        this.instantiator = new DefaultComponentInstantiator(driver);
     }
 
     @Test
     public void testAncestors() {
-        Axes axes = new Axes(driver, element);
+        Axes axes = new Axes(element, instantiator);
 
         List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("ancestor::*"))).thenReturn(elements);
@@ -41,7 +46,7 @@ public class AxesTest {
 
     @Test
     public void testDescendants() {
-        Axes axes = new Axes(driver, element);
+        Axes axes = new Axes(element, instantiator);
 
         List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("descendant::*"))).thenReturn(elements);
@@ -51,7 +56,7 @@ public class AxesTest {
 
     @Test
     public void testFollowings() {
-        Axes axes = new Axes(driver, element);
+        Axes axes = new Axes(element, instantiator);
 
         List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("following::*"))).thenReturn(elements);
@@ -61,7 +66,7 @@ public class AxesTest {
 
     @Test
     public void testFollowingSiblings() {
-        Axes axes = new Axes(driver, element);
+        Axes axes = new Axes(element, instantiator);
 
         List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("following-sibling::*"))).thenReturn(elements);
@@ -71,7 +76,7 @@ public class AxesTest {
 
     @Test
     public void testPrecedings() {
-        Axes axes = new Axes(driver, element);
+        Axes axes = new Axes(element, instantiator);
 
         List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("preceding::*"))).thenReturn(elements);
@@ -81,7 +86,7 @@ public class AxesTest {
 
     @Test
     public void testPrecedingSiblings() {
-        Axes axes = new Axes(driver, element);
+        Axes axes = new Axes(element, instantiator);
 
         List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("preceding-sibling::*"))).thenReturn(elements);
@@ -91,7 +96,7 @@ public class AxesTest {
 
     @Test
     public void testParent() {
-        Axes axes = new Axes(driver, element);
+        Axes axes = new Axes(element, instantiator);
 
         WebElement parent = mock(WebElement.class);
         when(element.findElement(By.xpath("parent::*"))).thenReturn(parent);

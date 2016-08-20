@@ -1,6 +1,7 @@
 package org.fluentlenium.core.search;
 
 import com.google.common.collect.Lists;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
@@ -47,7 +48,7 @@ public class SearchTest {
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
-        search = new Search(driver, searchContext);
+        search = new Search(searchContext, new DefaultComponentInstantiator(driver));
     }
 
     @Test

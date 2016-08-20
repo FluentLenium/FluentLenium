@@ -27,7 +27,7 @@ public class WebElementConditionsTest {
     public void before() {
         MockitoAnnotations.initMocks(this);
 
-        fluentWebElement = new FluentWebElement(webElement);
+        fluentWebElement = new FluentWebElement(webElement, null, null);
         conditions = new WebElementConditions(fluentWebElement);
     }
 

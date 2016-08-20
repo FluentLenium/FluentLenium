@@ -3,6 +3,7 @@ package org.fluentlenium.core.search;
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
+import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -20,16 +21,11 @@ import java.util.List;
 
 public class Search implements SearchControl<FluentWebElement> {
     private final SearchContext searchContext;
-    private final WebDriver driver;
+    private final ComponentInstantiator instantiator;
 
-    public Search(WebDriver driver) {
-        this.searchContext = driver;
-        this.driver = driver;
-    }
-
-    public Search(WebDriver driver, SearchContext context) {
+    public Search(SearchContext context, ComponentInstantiator instantiator) {
         this.searchContext = context;
-        this.driver = driver;
+        this.instantiator = instantiator;
     }
 
     /**
@@ -64,7 +60,7 @@ public class Search implements SearchControl<FluentWebElement> {
         return Lists.transform(searchContext.findElements(By.cssSelector(cssSelector)),
                 new Function<WebElement, FluentWebElement>() {
                     public FluentWebElement apply(WebElement webElement) {
-                        return new FluentWebElement(webElement, driver);
+                        return instantiator.newComponent(FluentWebElement.class, webElement);
                     }
                 });
     }
@@ -72,7 +68,7 @@ public class Search implements SearchControl<FluentWebElement> {
     private List<FluentWebElement> select(By locator) {
         return Lists.transform(searchContext.findElements(locator), new Function<WebElement, FluentWebElement>() {
             public FluentWebElement apply(WebElement webElement) {
-                return new FluentWebElement(webElement, driver);
+                return instantiator.newComponent(FluentWebElement.class, webElement);
             }
         });
     }

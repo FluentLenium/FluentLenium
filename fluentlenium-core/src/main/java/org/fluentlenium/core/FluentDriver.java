@@ -7,9 +7,11 @@ import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.alert.Alert;
+import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.EventsRegistry;
+import org.fluentlenium.core.events.AnnotationsComponentListener;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.inject.FluentInjector;
 import org.fluentlenium.core.script.FluentJavascript;
@@ -42,7 +44,11 @@ public class FluentDriver implements FluentDriverControl {
 
     private ConfigurationProperties configuration;
 
+    private final ComponentsManager componentsManager;
+
     private EventsRegistry events;
+
+    private AnnotationsComponentListener eventsComponentsAnnotations;
 
     @Delegate
     private FluentInjector fluentInjector;
@@ -54,10 +60,13 @@ public class FluentDriver implements FluentDriverControl {
     private MouseActions mouseActions;
 
     private KeyboardActions keyboardActions;
+   ;
 
-    public FluentDriver(WebDriver driver, ConfigurationProperties configuration) {
-        initFluent(driver);
+    public FluentDriver(WebDriver driver, ConfigurationProperties configuration, ComponentsManager componentsManager) {
         this.configuration = configuration;
+        this.componentsManager = componentsManager;
+
+        initFluent(driver);
         configureDriver();
     }
 
@@ -98,13 +107,15 @@ public class FluentDriver implements FluentDriverControl {
 
     protected FluentDriver initFluent(WebDriver driver) {
         this.driver = driver;
-        this.search = new Search(driver);
+        this.search = new Search(driver, componentsManager);
         if (driver instanceof EventFiringWebDriver) {
             this.events = new EventsRegistry((EventFiringWebDriver) driver);
+            this.eventsComponentsAnnotations = new AnnotationsComponentListener(componentsManager);
+            this.events.register(this.eventsComponentsAnnotations);
         }
         this.mouseActions = new MouseActions(driver);
         this.keyboardActions = new KeyboardActions(driver);
-        this.fluentInjector = new FluentInjector(this);
+        this.fluentInjector = new FluentInjector(this, componentsManager);
         inject(this);
         return this;
     }
@@ -469,5 +480,8 @@ public class FluentDriver implements FluentDriverControl {
 
     public void releaseFluent() {
         fluentInjector.release();
+        if (this.events != null) {
+            this.events.unregister(this.eventsComponentsAnnotations);
+        }
     }
 }

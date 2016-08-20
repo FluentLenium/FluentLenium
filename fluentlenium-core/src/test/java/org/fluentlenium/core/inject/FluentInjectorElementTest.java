@@ -2,6 +2,9 @@ package org.fluentlenium.core.inject;
 
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.components.ComponentInstantiator;
+import org.fluentlenium.core.components.ComponentsManager;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -10,6 +13,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
+
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -34,7 +39,7 @@ public class FluentInjectorElementTest {
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
 
-        injector = new FluentInjector(fluentAdapter);
+        injector = new FluentInjector(fluentAdapter, new ComponentsManager(webDriver));
     }
 
     @After
@@ -43,8 +48,8 @@ public class FluentInjectorElementTest {
     }
 
     public static class FluentWebElementSubClass extends FluentWebElement {
-        public FluentWebElementSubClass(WebElement webElement) {
-            super(webElement);
+        public FluentWebElementSubClass(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
+            super(webElement, driver, instantiator);
         }
     }
 
@@ -80,6 +85,11 @@ public class FluentInjectorElementTest {
 
     public static class FluentWebElementContainer {
         FluentWebElement element;
+    }
+
+    private static FluentWebElement existingElement = Mockito.mock(FluentWebElement.class);
+    public static class ExistingFluentWebElementContainer {
+        FluentWebElement element = existingElement;
     }
 
     public static class FluentWebElementSubClassContainer {
@@ -124,6 +134,23 @@ public class FluentInjectorElementTest {
         Assertions.assertThat(container.element.getTagName()).isEqualTo("h1");
         Assertions.assertThat(container.element).isExactlyInstanceOf(FluentWebElement.class);
         Assertions.assertThat(container.element.getElement()).isInstanceOf(WebElement.class);
+    }
+
+    /**
+     * Existing variables should not be injected.
+     */
+    @Test
+    public void testExistingFluentWebElement() {
+        ExistingFluentWebElementContainer container = new ExistingFluentWebElementContainer();
+
+        injector.inject(container);
+
+        WebElement webElement = mock(WebElement.class);
+        when(webElement.getTagName()).thenReturn("h1");
+
+        when(webDriver.findElement(any(By.class))).thenReturn(webElement);
+
+        Assertions.assertThat(container.element).isSameAs(existingElement);
     }
 
     @Test

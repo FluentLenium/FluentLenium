@@ -1,9 +1,22 @@
 package org.fluentlenium.utils;
 
+import com.google.common.base.Function;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 
 /**
@@ -11,6 +24,7 @@ import java.util.Map;
  */
 public abstract class ReflectionUtils {
     private static Class<?>[] EMPTY_CLASS_ARRAY = new Class<?>[0];
+    private static Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
     @SuppressWarnings("unchecked")
     public static <T> Class<T> wrapPrimitive(Class<T> c) {
@@ -30,6 +44,32 @@ public abstract class ReflectionUtils {
         PRIMITIVES_TO_WRAPPERS.put(short.class, Short.class);
         PRIMITIVES_TO_WRAPPERS.put(void.class, Void.class);
     }
+
+    private static final Map<Class<?>, Object> DEFAULTS = new HashMap<>();
+
+    static {
+        // Only add to this map via put(Map, Class<T>, T)
+        Map<Class<?>, Object> map = new HashMap<Class<?>, Object>();
+        DEFAULTS.put(boolean.class, false);
+        DEFAULTS.put(char.class, '\0');
+        DEFAULTS.put(byte.class, (byte) 0);
+        DEFAULTS.put(short.class, (short) 0);
+        DEFAULTS.put(int.class, 0);
+        DEFAULTS.put(long.class, 0L);
+        DEFAULTS.put(float.class, 0f);
+        DEFAULTS.put(double.class, 0d);
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode
+    @AllArgsConstructor
+    private static class ClassAnnotationKey {
+        private Class<?> clazz;
+        private Class<? extends Annotation> annotation;
+    }
+
+    private static final Map<ClassAnnotationKey, List<Method>> DECLARED_METHODS_CACHE = new WeakHashMap<>();
 
 
     /**
@@ -54,6 +94,23 @@ public abstract class ReflectionUtils {
         return classes;
     }
 
+    public static Object[] toArgs(Function<Class<?>, Object> valueSupplier, final Class<?>... array) {
+        if (array == null) {
+            return null;
+        } else if (array.length == 0) {
+            return EMPTY_OBJECT_ARRAY;
+        }
+        final Object[] parameters = new Object[array.length];
+        for (int i = 0; i < array.length; i++) {
+            Object value = valueSupplier.apply(array[i]);
+            if (value == null) {
+                value = DEFAULTS.get(array[i]);
+            }
+            parameters[i] = value;
+        }
+        return parameters;
+    }
+
     public static <T> Constructor<T> getConstructor(Class<T> cls, Object... args) throws NoSuchMethodException {
         Class<?>[] argsTypes = toClass(args);
         return getConstructor(cls, argsTypes);
@@ -74,7 +131,12 @@ public abstract class ReflectionUtils {
                 boolean match = true;
                 for (int i = 0; i < parameterTypes.length; i++) {
                     parameterTypes[i] = wrapPrimitive(parameterTypes[i]);
-                    if (!parameterTypes[i].isAssignableFrom(argsTypes[i])) {
+                    if (argsTypes[i] != null) {
+                        if (!parameterTypes[i].isAssignableFrom(argsTypes[i])) {
+                            match = false;
+                            break;
+                        }
+                    } else if (parameterTypes[i].isPrimitive()) {
                         match = false;
                         break;
                     }
@@ -88,6 +150,29 @@ public abstract class ReflectionUtils {
         }
     }
 
+    public static <T> Constructor<T> getConstructorOptional(Class<T> cls, Class<?>... argsTypes) throws NoSuchMethodException {
+        while (argsTypes.length > 0) {
+            try {
+                return getConstructor(cls, argsTypes);
+            } catch (NoSuchMethodException e) {
+                argsTypes = Arrays.copyOf(argsTypes, argsTypes.length - 1);
+            }
+        }
+        throw new NoSuchMethodException("Can't find any valid constructor.");
+    }
+
+    /**
+     * Creates a new instance even if constructor is not accessible.
+     *
+     * @param cls
+     * @param args
+     * @param <T>
+     * @return
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     * @throws InstantiationException
+     */
     public static <T> T newInstance(Class<T> cls, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Constructor<T> declaredConstructor = getConstructor(cls, args);
         boolean accessible = declaredConstructor.isAccessible();
@@ -100,6 +185,116 @@ public abstract class ReflectionUtils {
             } finally {
                 declaredConstructor.setAccessible(accessible);
             }
+        }
+    }
+
+    /**
+     * Creates a new instance by trying every possible constructors with provided args.
+     *
+     * @param cls
+     * @param args
+     * @param <T>
+     * @return
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     * @throws InstantiationException
+     */
+    public static <T> T newInstanceOptionalArgs(Class<T> cls, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        while (args.length > 0) {
+            try {
+                return newInstance(cls, args);
+            } catch (NoSuchMethodException e) {
+                args = Arrays.copyOf(args, args.length - 1);
+            }
+        }
+        throw new NoSuchMethodException("Can't find any valid constructor.");
+    }
+
+    public static List<Method> getDeclaredMethodsWithAnnotation(Object object, Class<? extends Annotation> annotation) {
+        if (object == null) return getDeclaredMethodsWithAnnotation((Class<?>) null, annotation);
+        return getDeclaredMethodsWithAnnotation(object.getClass(), annotation);
+    }
+
+    public static List<Method> getDeclaredMethodsWithAnnotation(Class<?> objectClass, Class<? extends Annotation> annotation) {
+        List<Method> methods = new ArrayList<>();
+
+        if (objectClass == null) return methods;
+
+        ClassAnnotationKey cacheKey = new ClassAnnotationKey(objectClass, annotation);
+        if (DECLARED_METHODS_CACHE.containsKey(cacheKey)) {
+            return DECLARED_METHODS_CACHE.get(cacheKey);
+        }
+
+        Method[] declaredMethods = objectClass.getDeclaredMethods();
+        for (Method method : declaredMethods) {
+            if (method.isAnnotationPresent(annotation)) {
+                methods.add(method);
+            }
+        }
+
+        DECLARED_METHODS_CACHE.put(cacheKey, methods);
+        return methods;
+    }
+
+    /**
+     * Invoke the method event if not accessible.
+     *
+     * @param method
+     * @param obj
+     * @param args
+     * @return
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     * @see Method#invoke(Object, Object...)
+     */
+    public static Object invoke(Method method, Object obj, Object... args) throws InvocationTargetException, IllegalAccessException {
+        boolean accessible = method.isAccessible();
+        if (accessible) return method.invoke(obj, args);
+        method.setAccessible(true);
+        try {
+            return method.invoke(obj, args);
+        } finally {
+            method.setAccessible(accessible);
+        }
+    }
+
+    /**
+     * Get the field even if not accessible.
+     *
+     * @param field
+     * @param obj
+     * @throws IllegalAccessException
+     * @see Field#get(Object)
+     */
+    public static Object get(Field field, Object obj) throws IllegalAccessException {
+        boolean accessible = field.isAccessible();
+        if (accessible) return field.get(obj);
+        field.setAccessible(true);
+        try {
+            return field.get(obj);
+        } finally {
+            field.setAccessible(accessible);
+        }
+    }
+
+    /**
+     * Set the field even if not accessible.
+     *
+     * @param field
+     * @param obj
+     * @param value
+     * @throws IllegalAccessException
+     * @see Field#set(Object, Object)
+     */
+    public static void set(Field field, Object obj, Object value) throws IllegalAccessException {
+        boolean accessible = field.isAccessible();
+        if (accessible) field.set(obj, value);
+        field.setAccessible(true);
+        try {
+            field.set(obj, value);
+        } finally {
+            field.setAccessible(accessible);
         }
     }
 }

@@ -1,8 +1,10 @@
 package org.fluentlenium.integration;
 
+import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,8 +13,8 @@ public class FluentWebElementSubclassInTest extends LocalFluentCase {
     ALink linkToPage2;
 
     public static class ALink extends FluentWebElement {
-        public ALink(final WebElement webElement) {
-            super(webElement);
+        public ALink(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
+            super(webElement, driver, instantiator);
         }
 
         public void clickIfDisplayed() {

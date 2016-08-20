@@ -2,6 +2,7 @@ package org.fluentlenium.core.domain;
 
 
 import com.google.common.collect.Lists;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -49,7 +50,7 @@ public class FluentListSearchTest {
     public void before() throws IntrospectionException, NoSuchFieldException, IllegalAccessException {
         MockitoAnnotations.initMocks(this);
         webElements = new ArrayList<FluentWebElement>();
-        fluentWebElement = new FluentWebElement(webElement);
+        fluentWebElement = new FluentWebElement(webElement, null, null);
         webElements.add(fluentWebElement);
         Field field = fluentWebElement.getClass().getDeclaredField("search");
         field.setAccessible(true);

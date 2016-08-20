@@ -1,5 +1,6 @@
 package org.fluentlenium.core.axes;
 
+import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -14,14 +15,13 @@ import java.util.List;
  * Handles XPath axes for an element (http://www.w3schools.com/xsl/xpath_axes.asp)
  */
 public class Axes {
-
-    private final WebDriver driver;
     private final WebElement webElement;
+    private final ComponentInstantiator instantiator;
 
 
-    public Axes(WebDriver driver, WebElement element) {
-        this.driver = driver;
+    public Axes(WebElement element, ComponentInstantiator instantiator) {
         this.webElement = element;
+        this.instantiator = instantiator;
     }
 
 
@@ -32,7 +32,7 @@ public class Axes {
      */
     public FluentWebElement parent() {
         WebElement parentRaw = this.webElement.findElement(By.xpath("parent::*"));
-        FluentWebElement parent = new FluentWebElement(parentRaw, driver);
+        FluentWebElement parent = instantiator.newComponent(FluentWebElement.class, parentRaw);
         return parent;
     }
 
@@ -40,7 +40,7 @@ public class Axes {
         List<WebElement> ancestorsRaw = this.webElement.findElements(By.xpath(axe + "::*"));
         List<FluentWebElement> elements = new ArrayList<FluentWebElement>();
         for (WebElement ancestor : ancestorsRaw) {
-            elements.add(new FluentWebElement(ancestor, driver));
+            elements.add(instantiator.newComponent(FluentWebElement.class, ancestor));
         }
         return new FluentListImpl<>(elements);
     }

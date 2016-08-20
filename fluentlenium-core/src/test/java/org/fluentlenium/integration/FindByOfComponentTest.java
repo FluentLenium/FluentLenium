@@ -2,6 +2,7 @@ package org.fluentlenium.integration;
 
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
+import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
@@ -20,12 +21,8 @@ public class FindByOfComponentTest extends LocalFluentCase {
     private PageIndex page;
 
     public static class SomeFluentWebElement extends FluentWebElement {
-        public SomeFluentWebElement(WebElement webElement) {
-            super(webElement);
-        }
-
-        public SomeFluentWebElement(WebElement webElement, WebDriver driver) {
-            super(webElement, driver);
+        public SomeFluentWebElement(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
+            super(webElement, driver, instantiator);
         }
     }
 

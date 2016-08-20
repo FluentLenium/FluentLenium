@@ -1,0 +1,123 @@
+package org.fluentlenium.integration;
+
+import org.fluentlenium.core.components.ComponentInstantiator;
+import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentListImpl;
+import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.events.annotations.AfterClickOn;
+import org.fluentlenium.core.events.annotations.AfterFindBy;
+import org.fluentlenium.core.events.annotations.BeforeClickOn;
+import org.fluentlenium.core.events.annotations.BeforeFindBy;
+import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class AnnotationsComponentEventsTest extends LocalFluentCase {
+    private List<WebElement> beforeClick = new ArrayList<>();
+    private List<WebElement> afterClick = new ArrayList<>();
+
+    public static class Component extends FluentWebElement {
+
+        private int beforeClick = 0;
+        private int afterClick = 0;
+
+        private List<By> beforeFindBy = new ArrayList<>();
+        private List<By> afterFindBy = new ArrayList<>();
+
+        public Component(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
+            super(webElement, driver, instantiator);
+        }
+
+        @BeforeClickOn
+        public void beforeClickOn() {
+            assertThat(afterClick).isEqualTo(beforeClick);
+            beforeClick++;
+        }
+
+        @AfterClickOn
+        public void afterClickOn() {
+            assertThat(beforeClick).isEqualTo(afterClick+1);
+            afterClick++;
+        }
+
+        @BeforeFindBy
+        public void beforeFindBy(By by) {
+            beforeFindBy.add(by);
+        }
+
+        @AfterFindBy
+        public void afterFindBy(By by) {
+            assertThat(beforeFindBy).hasSize(afterFindBy.size() + 1);
+            afterFindBy.add(by);
+        }
+    }
+
+    @Test
+    public void clickOn() {
+        goTo(DEFAULT_URL);
+
+        FluentList<Component> buttons = $("button").as(Component.class);
+        buttons.click();
+
+        FluentList<Component> otherButtons = $("button").as(Component.class);
+
+        for (Component button : buttons) {
+            assertThat(button.beforeClick).isEqualTo(1);
+            assertThat(button.afterClick).isEqualTo(1);
+        }
+
+        for (Component button : otherButtons) {
+            assertThat(button.beforeClick).isEqualTo(0);
+            assertThat(button.afterClick).isEqualTo(0);
+        }
+
+
+        List<WebElement> elements = new ArrayList<>();
+        for (Component button : buttons) {
+            elements.add(button.getElement());
+        }
+
+        for (Component button : buttons) {
+            assertThat(beforeClick).containsExactlyElementsOf(elements);
+            assertThat(afterClick).containsExactlyElementsOf(elements);
+        }
+
+
+    }
+
+    @BeforeClickOn
+    private void beforeClickOn(FluentWebElement element) {
+        beforeClick.add(element.getElement());
+    }
+
+    @BeforeClickOn
+    private void afterClickOn(FluentWebElement element) {
+        afterClick.add(element.getElement());
+    }
+
+    @Test
+    public void findBy() {
+        goTo(DEFAULT_URL);
+
+        Component htmlComponent = findFirst("html").as(Component.class);
+        htmlComponent.findFirst("button");
+
+        Component otherHtmlComponent = findFirst("html").as(Component.class);
+
+        assertThat(htmlComponent.beforeFindBy).hasSize(1);
+        assertThat(htmlComponent.afterFindBy).hasSize(1);
+
+        assertThat(htmlComponent.beforeFindBy).containsExactly(By.cssSelector("button"));
+        assertThat(htmlComponent.afterFindBy).containsExactly(By.cssSelector("button"));
+
+        assertThat(otherHtmlComponent.beforeFindBy).isEmpty();
+        assertThat(otherHtmlComponent.afterFindBy).isEmpty();
+    }
+}

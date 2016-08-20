@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
+import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.AtLeastOneElementConditions;
 import org.fluentlenium.core.conditions.EachElementConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
@@ -21,7 +22,6 @@ import java.util.List;
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
  */
 public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> implements FluentList<E> {
-
     public FluentListImpl() {
         super();
     }
@@ -40,8 +40,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
      * @param elements array of Selenium elements
      * @return FluentList of FluentWebElement
      */
-    public static FluentListImpl<FluentWebElement> fromElements(WebElement... elements) {
-        return fromElements(Arrays.asList(elements));
+    public static FluentListImpl<FluentWebElement> fromElements(ComponentInstantiator instantiator, WebElement... elements) {
+        return fromElements(instantiator, Arrays.asList(elements));
     }
 
     /**
@@ -50,10 +50,10 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
      * @param elements iterable of Selenium elements
      * @return FluentList of FluentWebElement
      */
-    public static FluentListImpl<FluentWebElement> fromElements(Iterable<? extends WebElement> elements) {
+    public static FluentListImpl<FluentWebElement> fromElements(ComponentInstantiator instantiator, Iterable<? extends WebElement> elements) {
         FluentListImpl<FluentWebElement> fluentWebElements = new FluentListImpl<>();
         for (WebElement element : elements) {
-            fluentWebElements.add(new FluentWebElement(element));
+            fluentWebElements.add(instantiator.newComponent(FluentWebElement.class, element));
         }
         return fluentWebElements;
     }

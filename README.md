@@ -42,17 +42,6 @@ To use FluentLenium in your project, just add the following dependency to your `
 
 By default, FluentLenium provides a JUnit adapter.
 
-If you like to use AssertJ to improve the legibility of your test code:
-
-```xml 
-<dependency>
-    <groupId>org.fluentlenium</groupId>
-    <artifactId>fluentlenium-assertj</artifactId>
-    <version>1.0.0</version>
-    <scope>test</scope>
-</dependency>
-```
-
 If you like to use FluentLenium with TestNG:
 
 ```xml
@@ -66,7 +55,18 @@ If you like to use FluentLenium with TestNG:
 
 Just extend `org.fluentlenium.adapter.FluentTestNg` instead of `org.fluentlenium.adapter.FluentTest`.
 
-##Static imports
+If you like to use AssertJ to improve the legibility of your test code:
+
+```xml 
+<dependency>
+    <groupId>org.fluentlenium</groupId>
+    <artifactId>fluentlenium-assertj</artifactId>
+    <version>1.0.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+## Static imports
 
 If you need to do some filtering:
 
@@ -86,7 +86,9 @@ import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 You can use `url()` , `title()` or `pageSource()` to get the url, the title or the page source of the current page.
 
 ###  Selector
+
 #### Default Selector
+
 You can use CSS1, CSS2 and CSS3 selectors with the same restrictions as in Selenium.
 
 If you want to find the list of elements which have:
@@ -314,9 +316,60 @@ $("#create-button").mouseOver()
 
 Selenium has a driver wrapper named `EventFiringWebDriver` that is able to generate events and register listeners.
 
-FluentLenium brings an Events API to register those listeners easily.
+FluentLenium brings an Events Annotations and Listener API to register those listeners easily.
 
-And use `events` methods to register listeners.
+### Annotations
+
+You can use annotations from `org.fluentlenium.core.events.annotations` package to register any method as a event 
+listener.
+
+Annotations can be used in a test class.
+
+```java
+@AfterClickOn
+public void afterClickOn(FluentWebElement element);
+    System.out.println("Element Clicked: " + element);
+});
+```
+
+Annotations related to a WebElement can also be used in a component class.
+```java
+
+public class SomeComponent {
+    private WebElement element;
+    
+    public SomeComponent(WebElement element) {
+        this.element = element;
+    }
+    
+    public SomeComponent click() {
+        this.element.click();
+        return this;
+    }
+    
+    @AfterClickOn
+    private void afterClickOn() {
+        System.out.println("Element Clicked: " + this);
+    }
+}
+
+class SomeTest extends FluentTest {
+    
+    private SomeComponent clickComponent;
+    private SomeComponent otherComponent;
+    
+    @Test
+    public void test() {
+        clickComponent.click();
+        // @AfterClickOn annotated method will be invoked for clickComponent instance only.
+    }
+}
+
+```
+
+### Listener API
+
+You can also register events through API using `events` method.
 
 ```java
 events().afterClickOn(new ElementListener() {
@@ -336,7 +389,6 @@ events().afterClickOn((element, driver) -> System.out.println("Element Clicked: 
 
 findFirst("button").click(); // This will call the listener.
 ```
-
 
 ## Page Object pattern
 Selenium tests can easily become a mess.  To avoid this, you can use the [Page Object Pattern](http://code.google.com/p/selenium/wiki/PageObjects).
@@ -409,9 +461,9 @@ And the corresponding test:
 
 ```java
 public void checkLoginFailed() {
-	goTo(loginPage);
-	loginPage.fillAndSubmitLoginForm("login", "wrongPass");
-	loginPage.isAt();
+    goTo(loginPage);
+    loginPage.fillAndSubmitLoginForm("login", "wrongPass");
+    loginPage.isAt();
 }
 ```
 
@@ -419,15 +471,15 @@ Or if you have the [AssertJ](https://github.com/joel-costigliola/assertj-core) m
 
 ```java
 public void checkLoginFailed() {
-	goTo(loginPage);
-	loginPage.fillAndSubmitLoginForm("login","wrongPass");
-	assertThat($(".error")).hasSize(1);
-	assertThat(loginPage).isAt();
+    goTo(loginPage);
+    loginPage.fillAndSubmitLoginForm("login","wrongPass");
+    assertThat($(".error")).hasSize(1);
+    assertThat(loginPage).isAt();
 }
 ```
 
-###Page usage
-You can use the annotation `@Inject` to construct your page easily.
+## Injection
+You can use the annotation `@Inject` to construct your Page Objects easily.
 
 For example:
 
@@ -455,63 +507,76 @@ public class AnnotationInitialization extends FluentTest {
 ```
 It's now possible to use the `@Inject` annotation in a FluentPage.
 
-You can also use the factory method `createPage`:
+You can also use the factory method `newInstance`:
 
 ```java
 public class BeforeInitialization extends FluentTest {
-	public WebDriver webDriver = new HtmlUnitDriver();
-	public TestPage page;
-	@Before
-	public void beforeTest() {
-		page = createPage(TestPage.class);
-	}
-	@Test
-	public void test_no_exception() {
-		page.go();
-	}
-	@Override
-	public WebDriver getDefaultDriver() {
-		return webDriver;
-	}
+    private WebDriver webDriver = new HtmlUnitDriver();
+    @Inject
+    private TestPage page;
+    
+    @Before
+    public void beforeTest() {
+        page = newInstance(TestPage.class);
+    }
+    
+    @Test
+    public void test_no_exception() {
+        page.go();
+    }
+    
+    @Override
+    public WebDriver getDefaultDriver() {
+        return webDriver;
+    }
 }
 ```
 
-Within a page, all FluentWebElement fields are automatically searched for by name or id. For example, if you declare a FluentWebElement named `createButton`, 
-it will search the page for an element where `id` is `createButton` or name is `createButton`. 
+All `FluentWebElement` fields are automatically searched for by name or id. For example, if you declare a 
+`FluentWebElement` named `createButton`, it will search the page for an element where `id` is `createButton` or 
+name is `createButton`.
+
 All elements are proxified which means that the search is not done until you try to access the element.
 
 ```java
 public class LoginPage extends FluentPage {
-   FluentWebElement createButton;
-   public String getUrl() {
+    private FluentWebElement createButton;
+    
+    public String getUrl() {
        return "myCustomUrl";
-   }
-   public void isAt() {
+    }
+    
+    public void isAt() {
        assertThat(title()).isEqualTo("MyTitle");
-   }
-   public void fillAndSubmitForm(String... paramsOrdered) {
-       $("input").fill()with(paramsOrdered);
-       createButton.click();
-   }
+    }
+    
+    public void fillAndSubmitForm(String... paramsOrdered) {
+        $("input").fill().with(paramsOrdered);
+        createButton.click();
+    }
 }
 ```
 
-Not only FluentWebElement fields are populated. Every type with a constructor taking a WebElement is a candidate.
+Not only `FluentWebElement` fields are populated. Every type with a constructor taking a `WebElement` is a candidate.
 This makes it possible for the page to expose fields with functional methods and not (only) the 'technical' methods
-that FluentWebElement exposes.
+that `FluentWebElement` exposes.
 
 ```java
 public class LoginPage extends FluentPage {
-   MyButton createButton;
+   private MyButton createButton;
+   
    public void fillAndSubmitForm(String... paramsOrdered) {
        $("input").fill().with(paramsOrdered);
        createButton.clickTwice();
    }
+   
    public static class MyButton {
-       WebElement webElement;
+       private WebElement webElement;
+       
        public MyButton(WebElement webElement) {
            this.webElement = webElement;
        }
+       
        public void clickTwice() {
            webElement.click();
            webElement.click();
@@ -527,38 +592,45 @@ Selenium `@FindBy` (or `@FindBys`) annotation. The following example shows how t
 
 ```java
 public class LoginPage extends FluentPage {
-   @FindBy(css = "button.create-button")
-   FluentWebElement createButton;
-   public String getUrl() {
+    @FindBy(css = "button.create-button")
+    private FluentWebElement createButton;
+    
+    public String getUrl() {
        return "myCustomUrl";
-   }
-   public void isAt() {
+    }
+    
+    public void isAt() {
        assertThat(title()).isEqualTo("MyTitle");
-   }
-   public void fillAndSubmitForm(String... paramsOrdered) {
-       $("input").fill().with(paramsOrdered);
-       createButton.click();
-   }
+    }
+    
+    public void fillAndSubmitForm(String... paramsOrdered) {
+        $("input").fill().with(paramsOrdered);
+        createButton.click();
+    }
 }
 ```
 
-You can also refer to the list of FluentWebElements
+You can also refer to the list of FluentWebElements using `FluentList` dedicated interface,
+or `java.util.List`.
 
 ```java
 public class LoginPage extends FluentPage {
-   @FindBy(css = "button.create-button")
-   FluentList<FluentWebElement> createButtons;
-   public String getUrl() {
-       return "myCustomUrl";
-   }
-   public void isAt() {
-       assertThat(title()).isEqualTo("MyTitle");
-       assertThat(buttons).hasSize(2);
-   }
-   public void fillAndSubmitForm(String... paramsOrdered) {
-       $("input").fill().with(paramsOrdered);
-       createButtons.get(1).click();
-   }
+    @FindBy(css = "button.create-button")
+    private FluentList<FluentWebElement> createButtons;
+    
+    public String getUrl() {
+        return "myCustomUrl";
+    }
+    
+    public void isAt() {
+        assertThat(title()).isEqualTo("MyTitle");
+        assertThat(buttons).hasSize(2);
+    }
+    
+    public void fillAndSubmitForm(String... paramsOrdered) {
+        $("input").fill().with(paramsOrdered);
+        createButtons.get(1).click();
+    }
 }
 ```
 
@@ -566,35 +638,40 @@ If you need to wait for an element to be present, especially when waiting for an
 
 ```java
 public class LoginPage extends FluentPage {
-   @AjaxElement
-   FluentWebElement myAjaxElement;
+    @AjaxElement
+    private FluentWebElement myAjaxElement;
 }
 ```
 You can set the timeout in seconds for the page to throw an error if not found with `@AjaxElement(timeountOnSeconds=3)` if you want to wait 3 seconds.
 By default, the timeout is set to one second.
 
-## Extend FluentWebElement to model components
+### Components
 
-You can implement reusable components by extending FluentWebElement. Doing so will improve readability of both Page Objects and Tests.
+A ```Component``` is a object wrapping a ```WebElement``` instance. Nothing more.
+
+Using component improves readability of both Page Objects and Tests.
+
+`FluentWebElement` is the default component class in FluentLenium, so you can implement you own custom component 
+by extending `FluentWebElement` to add custom logic.
 
 ```java
 public class SelectComponent extends FluentWebElement {
-   public FluentWebElement(WebElement element) { // This constructor MUST exist !
-      super(element);
-   }
-   
-   public void doSelect(String selection) {
-      // Implement selection provided by this component.
-   }
-   
-   public String getSelection() {
-      // Return the selected value as text.
-   }
+    public FullConstructorComponent(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
+        super(webElement, driver, instantiator);
+    }
+    
+    public void doSelect(String selection) {
+        // Implement selection provided by this component.
+    }
+    
+    public String getSelection() {
+        // Return the selected value as text.
+    }
 }
 ```
 
-These kind of component can be created automatically by `FluentPage`, 
-or programmatically by calling `as` method of FluentWebElement or FluentList.
+Components are created automatically by injection, 
+or programmatically by calling `as(Class<?> componentClass)` method of ```FluentWebElement``` or ```FluentList```.
 
 ```java
 SelectComponent comp = findFirst("#some-select").as(SelectComponent.class);
@@ -603,8 +680,19 @@ comp.doSelect("Value to select");
 assertThat(comp.getSelection()).isEquals("Value to select");
 ```
 
+It's not mandatory to extend `FluentWebElement`. But a constructor with at least WebElement parameter is required.
 
-## Wait for an Ajax Call
+```java
+public class SelectComponent {
+    private WebElement element;
+    
+    private FluentWebElement(WebElement element) { // This constructor MUST exist ! But can be private.
+        this.element = element;
+    }
+}
+```
+
+## Wait for an Ajax Element to be available
 
 There are multiple ways to make your driver wait for the result of an asynchronous call.
 FluentLenium provides a rich and fluent API in order to help you to handle AJAX calls.
@@ -616,7 +704,7 @@ await().atMost(5, TimeUnit.SECONDS).until(".small").hasSize(3);
 ```
 The default wait is 500 ms.
 
-Instead of hasSize, you can also use `hasText("myTextValue")`, `isPresent()`, `isNotPresent()`, `hasId("myId")`, `hasName("myName")`, `containsText("myName")`,`areDisplayed()`, `areEnabled()`.
+Instead of `hasSize(3)`, you can also use `hasText("myTextValue")`, `isPresent()`, `isNotPresent()`, `hasId("myId")`, `hasName("myName")`, `containsText("myName")`,`areDisplayed()`, `areEnabled()`.
 The `isPresent()` assertion is going to check if there is at most one element on the page corresponding to the filter.
 
 If you need to be more precise, you can also use filters in the search:
@@ -624,7 +712,8 @@ If you need to be more precise, you can also use filters in the search:
 ```java
 await().atMost(5, TimeUnit.SECONDS).until(".small").withText("myText").hasSize(3);
 ```
-You can also use after hasSize() : 'greaterThan(int)', 'lessThan(int)', 'lessThanOrEqualTo(int)', 'greaterThanOrEqualTo(int)' , 'equalTo(int)', 'notEqualTo(int)'
+
+You can also use after `hasSize()` : `greaterThan(int)`, `lessThan(int)`, `lessThanOrEqualTo(int)`, `greaterThanOrEqualTo(int)` , `equalTo(int)`, `notEqualTo(int)`
 
 You can also use matchers:
 
@@ -644,7 +733,7 @@ You can also give instance of elements or list of elements if required.
 
 ```java
 @FindBy(css = ".button")
-FluentWebElement button;
+private FluentWebElement button;
 
 await().atMost(5, TimeUnit.SECONDS).until(element).isEnabled();
 ```

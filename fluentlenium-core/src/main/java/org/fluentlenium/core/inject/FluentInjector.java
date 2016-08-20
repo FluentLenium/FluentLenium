@@ -6,14 +6,16 @@ import org.fluentlenium.core.FluentContainer;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
+import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.events.ContainerAnnotationsEventsRegistry;
 import org.fluentlenium.utils.ReflectionUtils;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
@@ -40,11 +42,14 @@ import java.util.concurrent.ConcurrentMap;
 public class FluentInjector implements FluentInjectControl {
 
     private final ConcurrentMap<Class, Object> pageInstances = new ConcurrentHashMap<>();
+    private final ConcurrentMap<Object, ContainerAnnotationsEventsRegistry> eventsContainerSupport = new ConcurrentHashMap<>();
 
     private final FluentControl fluentControl;
+    private final ComponentsManager componentsManager;
 
-    public FluentInjector(FluentControl fluentControl) {
+    public FluentInjector(FluentControl fluentControl, ComponentsManager componentsManager) {
         this.fluentControl = fluentControl;
+        this.componentsManager = componentsManager;
     }
 
     /**
@@ -52,6 +57,10 @@ public class FluentInjector implements FluentInjectControl {
      */
     public void release() {
         pageInstances.clear();
+        for (ContainerAnnotationsEventsRegistry support : eventsContainerSupport.values()) {
+            support.close();
+        }
+        eventsContainerSupport.clear();
     }
 
     public <T> T createPage(Class<T> cls, Object... params) {
@@ -86,6 +95,13 @@ public class FluentInjector implements FluentInjectControl {
         if (container instanceof FluentContainer) {
             ((FluentContainer) container).initFluent(fluentControl);
         }
+        initEventAnnotations(container);
+    }
+
+    private void initEventAnnotations(final Object container) {
+        if (fluentControl.getDriver() instanceof EventFiringWebDriver) {
+            eventsContainerSupport.put(container, new ContainerAnnotationsEventsRegistry((EventFiringWebDriver) fluentControl.getDriver(), container));
+        }
     }
 
     private static boolean isContainer(Field field) {
@@ -101,31 +117,24 @@ public class FluentInjector implements FluentInjectControl {
         for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
             for (Field field : cls.getDeclaredFields()) {
                 if (isContainer(field)) {
-                    boolean accessible = field.isAccessible();
-                    field.setAccessible(true);
-                    try {
-                        Class fieldClass = field.getType();
-                        Object existingChildContainer = pageInstances.get(fieldClass);
-                        if (existingChildContainer != null) {
-                            try {
-                                field.set(container, existingChildContainer);
-                            } catch (IllegalAccessException e) {
-                                throw new FluentInjectException("Can't set field " + field + " with value " + existingChildContainer, e);
-                            }
-                        } else {
-                            Object childContainer = newPage(fieldClass);
-                            try {
-                                field.set(container, childContainer);
-                            } catch (IllegalAccessException e) {
-                                throw new FluentInjectException("Can't set field " + field + " with value " + childContainer, e);
-                            }
-                            pageInstances.putIfAbsent(fieldClass, childContainer);
-                            inject(childContainer);
+                    Class fieldClass = field.getType();
+                    Object existingChildContainer = pageInstances.get(fieldClass);
+                    if (existingChildContainer != null) {
+                        try {
+                            ReflectionUtils.set(field, container, existingChildContainer);
+                        } catch (IllegalAccessException e) {
+                            throw new FluentInjectException("Can't set field " + field + " with value " + existingChildContainer, e);
                         }
-                    } finally {
-                        field.setAccessible(accessible);
+                    } else {
+                        Object childContainer = newPage(fieldClass);
+                        try {
+                            ReflectionUtils.set(field, container, childContainer);
+                        } catch (IllegalAccessException e) {
+                            throw new FluentInjectException("Can't set field " + field + " with value " + childContainer, e);
+                        }
+                        pageInstances.putIfAbsent(fieldClass, childContainer);
+                        inject(childContainer);
                     }
-
                 }
             }
         }
@@ -150,46 +159,38 @@ public class FluentInjector implements FluentInjectControl {
     private <T extends FluentControl> void initFluentElements(Object container) {
         for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
             for (Field fieldFromPage : cls.getDeclaredFields()) {
-                if (isSupported(fieldFromPage)) {
-                    boolean accessible = fieldFromPage.isAccessible();
-                    fieldFromPage.setAccessible(true);
-                    try {
-                        AjaxElement elem = fieldFromPage.getAnnotation(AjaxElement.class);
-                        if (elem == null) {
-                            initFieldElements(
-                                    new DefaultElementLocatorFactory(this.fluentControl.getDriver()),
-                                    container,
-                                    fieldFromPage);
-                        } else {
-                            initFieldElements(
-                                    new AjaxElementLocatorFactory(this.fluentControl.getDriver(), elem.timeOutInSeconds()),
-                                    container,
-                                    fieldFromPage);
-                        }
-                    } finally {
-                        fieldFromPage.setAccessible(accessible);
+                if (isSupported(container, fieldFromPage)) {
+                    AjaxElement elem = fieldFromPage.getAnnotation(AjaxElement.class);
+                    if (elem == null) {
+                        initFieldElements(
+                                new DefaultElementLocatorFactory(this.fluentControl.getDriver()),
+                                container,
+                                fieldFromPage);
+                    } else {
+                        initFieldElements(
+                                new AjaxElementLocatorFactory(this.fluentControl.getDriver(), elem.timeOutInSeconds()),
+                                container,
+                                fieldFromPage);
                     }
                 }
             }
         }
     }
 
-    private static boolean isSupported(Field field) {
-        return !Modifier.isFinal(field.getModifiers()) && (isListOfFluentWebElement(field) || isList(field) || isElement(field));
+    private boolean isSupported(Object container, Field field) {
+        return isValueNull(container, field) && !Modifier.isFinal(field.getModifiers()) && (isListOfFluentWebElement(field) || isList(field) || isComponent(field));
     }
 
-    private static boolean isElement(Field field) {
+    private static boolean isValueNull(Object container, Field field) {
         try {
-            ReflectionUtils.getConstructor(field.getType(), WebElement.class);
-            return true;
-        } catch (NoSuchMethodException e) {
-            try {
-                ReflectionUtils.getConstructor(field.getType(), WebElement.class, WebDriver.class);
-            } catch (NoSuchMethodException e1) {
-                return false;
-            }
-            return true;
+            return ReflectionUtils.get(field, container) == null;
+        } catch (IllegalAccessException e) {
+            throw new FluentInjectException("Can't retrieve default value of field", e);
         }
+    }
+
+    private boolean isComponent(Field field) {
+        return componentsManager.isComponentClass(field.getType());
     }
 
     private static boolean isListOfFluentWebElement(Field field) {
@@ -246,61 +247,52 @@ public class FluentInjector implements FluentInjectControl {
         }
     }
 
-    private void initFieldElements(ElementLocatorFactory factory, Object container, Field field) {
+    private Object initFieldElements(ElementLocatorFactory factory, Object container, Field field) {
         ElementLocator locator = factory.createLocator(field);
         if (locator == null) {
-            return;
+            return null;
         }
 
-        boolean accessible = field.isAccessible();
         try {
-            field.setAccessible(true);
             if (isListOfFluentWebElement(field)) {
-                initFieldAsListOfFluentWebElement(locator, container, field);
+                return initFieldAsListOfFluentWebElement(locator, container, field);
             } else if (isList(field)) {
-                initFieldAsList(locator, container, field);
-            } else if (isElement(field)) {
-                initFieldAsElement(locator, container, field);
+                return initFieldAsList(locator, container, field);
+            } else if (isComponent(field)) {
+                return initFieldAsElement(locator, container, field);
             }
         } catch (IllegalAccessException e) {
             throw new FluentInjectException("Unable to find an accessible constructor with an argument of type WebElement in " + field.getType(), e);
-        } finally {
-            field.setAccessible(accessible);
         }
+        return null;
     }
 
-    private void initFieldAsElement(ElementLocator locator, Object container, Field field) throws IllegalAccessException {
+    private Object initFieldAsElement(ElementLocator locator, Object container, Field field) throws IllegalAccessException {
         final InvocationHandler handler = new LocatingElementHandler(locator);
         WebElement proxy = (WebElement) Proxy.newProxyInstance(container.getClass().getClassLoader(), new Class[]{WebElement.class, Locatable.class}, handler);
         Object proxyWrapper = wrapElement(proxy, field.getType());
-        field.set(container, proxyWrapper);
+        ReflectionUtils.set(field, container, proxyWrapper);
+        return proxyWrapper;
     }
 
-    private void initFieldAsList(ElementLocator locator, Object container, Field field) throws IllegalAccessException {
+    private List<?> initFieldAsList(ElementLocator locator, Object container, Field field) throws IllegalAccessException {
         final InvocationHandler handler = new ArrayListInvocationHandler(locator, getFirstGenericType(field));
-        List<? extends FluentWebElement> proxy = (List<? extends FluentWebElement>) Proxy.newProxyInstance(
+        List<?> proxy = (List<?>) Proxy.newProxyInstance(
                 container.getClass().getClassLoader(), new Class[]{List.class}, handler);
-        field.set(container, proxy);
+        ReflectionUtils.set(field, container, proxy);
+        return proxy;
     }
 
-    private void initFieldAsListOfFluentWebElement(ElementLocator locator, Object container, Field field) throws IllegalAccessException {
+    private FluentList<? extends FluentWebElement>  initFieldAsListOfFluentWebElement(ElementLocator locator, Object container, Field field) throws IllegalAccessException {
         final InvocationHandler handler = new FluentListInvocationHandler(locator, getFirstGenericType(field));
         FluentList<? extends FluentWebElement> proxy = (FluentList<? extends FluentWebElement>) Proxy.newProxyInstance(
                 container.getClass().getClassLoader(), new Class[]{FluentList.class}, handler);
-        field.set(container, proxy);
+        ReflectionUtils.set(field, container, proxy);
+        return proxy;
     }
 
     private <T> T wrapElement(WebElement element, Class<T> fluentElementClass) {
-        try {
-            return ReflectionUtils.newInstance(fluentElementClass, element, fluentControl.getDriver());
-        } catch (Exception e) {
-            try {
-                return ReflectionUtils.newInstance(fluentElementClass, element);
-            } catch (Exception e2) {
-                throw new WebElementInjectException("Can't wrap element " + element + " into " + fluentElementClass + "."
-                        + " No valid constructor found (WebElement) or (WebElement, WebDriver)", e2);
-            }
-        }
+        return this.componentsManager.newComponent(fluentElementClass, element);
     }
 
     private class FluentListInvocationHandler<T> implements InvocationHandler {
@@ -325,7 +317,7 @@ public class FluentInjector implements FluentInjectControl {
                 }
             }).toList());
             try {
-                return method.invoke(list, args);
+                return ReflectionUtils.invoke(method, list, args);
             } catch (InvocationTargetException e) {
                 // Unwrap the underlying exception
                 throw e.getCause();
@@ -355,7 +347,7 @@ public class FluentInjector implements FluentInjectControl {
                 }
             }).toList());
             try {
-                return method.invoke(list, args);
+                return ReflectionUtils.invoke(method, list, args);
             } catch (InvocationTargetException e) {
                 // Unwrap the underlying exception
                 throw e.getCause();

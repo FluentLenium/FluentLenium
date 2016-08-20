@@ -30,8 +30,8 @@ public class AbstractFluentListConditionsTest {
     public void before() {
         MockitoAnnotations.initMocks(this);
 
-        fluentWebElement1 = new FluentWebElement(webElement1);
-        fluentWebElement2 = new FluentWebElement(webElement2);
-        fluentWebElement3 = new FluentWebElement(webElement3);
+        fluentWebElement1 = new FluentWebElement(webElement1, null, null);
+        fluentWebElement2 = new FluentWebElement(webElement2, null, null);
+        fluentWebElement3 = new FluentWebElement(webElement3, null, null);
     }
 }
