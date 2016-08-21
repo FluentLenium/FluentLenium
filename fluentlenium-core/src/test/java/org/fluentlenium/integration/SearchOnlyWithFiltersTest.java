@@ -36,6 +36,7 @@ public class SearchOnlyWithFiltersTest extends LocalFluentCase {
     public void checkIndexWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement element = find(1, withClass("small"));
+        assertThat(element.isLoaded()).isFalse();
         assertThat(element.getId()).isEqualTo("id2");
     }
 

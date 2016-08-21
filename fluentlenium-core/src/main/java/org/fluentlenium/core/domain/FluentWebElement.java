@@ -7,17 +7,16 @@ import org.fluentlenium.core.action.KeyboardElementActions;
 import org.fluentlenium.core.action.MouseElementActions;
 import org.fluentlenium.core.axes.Axes;
 import org.fluentlenium.core.components.ComponentInstantiator;
-import org.fluentlenium.core.components.Components;
-import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.filter.Filter;
+import org.fluentlenium.core.proxy.FluentProxyState;
+import org.fluentlenium.core.proxy.Proxies;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchControl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -26,7 +25,7 @@ import java.util.Arrays;
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
-public class FluentWebElement implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>, SearchControl<FluentWebElement> {
+public class FluentWebElement implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>, FluentProxyState<FluentWebElement>, SearchControl<FluentWebElement> {
     private WebElement webElement;
     private final WebDriver driver;
     private final ComponentInstantiator instantiator;
@@ -57,6 +56,28 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
     public FluentWebElement click() {
         webElement.click();
         return this;
+    }
+
+    @Override
+    public boolean isPresent() {
+        return Proxies.isPresent(webElement);
+    }
+
+    @Override
+    public FluentWebElement now() {
+        Proxies.now(webElement);
+        return this;
+    }
+
+    @Override
+    public FluentWebElement reset() {
+        Proxies.reset(webElement);
+        return this;
+    }
+
+    @Override
+    public boolean isLoaded() {
+        return Proxies.isLoaded(webElement);
     }
 
     /**
@@ -276,7 +297,7 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
     }
 
     public FluentList<FluentWebElement> asList() {
-        return new FluentListImpl<>(Arrays.asList(this));
+        return new FluentListImpl<>(FluentWebElement.class, instantiator, Arrays.asList(this));
     }
 
     @Override

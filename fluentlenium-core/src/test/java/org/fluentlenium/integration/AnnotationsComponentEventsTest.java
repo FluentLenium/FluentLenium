@@ -2,7 +2,6 @@ package org.fluentlenium.integration;
 
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
-import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.annotations.AfterClickOn;
 import org.fluentlenium.core.events.annotations.AfterFindBy;
@@ -13,6 +12,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class AnnotationsComponentEventsTest extends LocalFluentCase {
 
         @AfterClickOn
         public void afterClickOn() {
-            assertThat(beforeClick).isEqualTo(afterClick+1);
+            assertThat(beforeClick).isEqualTo(afterClick + 1);
             afterClick++;
         }
 
@@ -57,6 +57,36 @@ public class AnnotationsComponentEventsTest extends LocalFluentCase {
             assertThat(beforeFindBy).hasSize(afterFindBy.size() + 1);
             afterFindBy.add(by);
         }
+    }
+
+    @Test
+    public void clickOnFirst() {
+        goTo(DEFAULT_URL);
+
+        Component button = findFirst("button").as(Component.class);
+        button.click();
+
+        Component otherButton = findFirst("button").as(Component.class);
+
+        assertThat(button.beforeClick).isEqualTo(1);
+        assertThat(button.afterClick).isEqualTo(1);
+
+        assertThat(otherButton.beforeClick).isEqualTo(0);
+        assertThat(otherButton.afterClick).isEqualTo(0);
+
+        assertThat(beforeClick).containsExactly(button.getElement());
+        assertThat(afterClick).containsExactly(button.getElement());
+
+    }
+
+    private WebElement unwrapElement(WebElement element) {
+        if (element instanceof WrapsElement) {
+            WebElement wrappedElement = ((WrapsElement) element).getWrappedElement();
+            if (wrappedElement != element && wrappedElement != null) {
+                return unwrapElement(wrappedElement);
+            }
+        }
+        return element;
     }
 
     @Test
@@ -84,11 +114,8 @@ public class AnnotationsComponentEventsTest extends LocalFluentCase {
             elements.add(button.getElement());
         }
 
-        for (Component button : buttons) {
-            assertThat(beforeClick).containsExactlyElementsOf(elements);
-            assertThat(afterClick).containsExactlyElementsOf(elements);
-        }
-
+        assertThat(beforeClick).containsExactlyElementsOf(elements);
+        assertThat(afterClick).containsExactlyElementsOf(elements);
 
     }
 
@@ -107,9 +134,10 @@ public class AnnotationsComponentEventsTest extends LocalFluentCase {
         goTo(DEFAULT_URL);
 
         Component htmlComponent = findFirst("html").as(Component.class);
-        htmlComponent.findFirst("button");
+        htmlComponent.findFirst("button").isPresent();
 
         Component otherHtmlComponent = findFirst("html").as(Component.class);
+        otherHtmlComponent.isPresent();
 
         assertThat(htmlComponent.beforeFindBy).hasSize(1);
         assertThat(htmlComponent.afterFindBy).hasSize(1);

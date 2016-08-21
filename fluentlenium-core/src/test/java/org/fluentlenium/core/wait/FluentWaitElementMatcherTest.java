@@ -50,6 +50,7 @@ public class FluentWaitElementMatcherTest {
 
         when(fluentWebElement.conditions()).thenReturn(new WebElementConditions(fluentWebElement));
         when(fluentWebElement.getElement()).thenReturn(element);
+        when(fluentWebElement.now()).thenReturn(fluentWebElement);
     }
 
     @After
@@ -213,7 +214,7 @@ public class FluentWaitElementMatcherTest {
 
     @Test
     public void isPresent() {
-        when(fluentWebElement.getTagName()).thenThrow(NoSuchElementException.class);
+        when(fluentWebElement.now()).thenThrow(NoSuchElementException.class);
 
         final FluentWaitElementMatcher matcher = new FluentWaitElementMatcher(search, wait, fluentWebElement);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
@@ -226,7 +227,7 @@ public class FluentWaitElementMatcherTest {
         reset(fluentWebElement);
         matcher.isPresent();
 
-        verify(fluentWebElement, atLeastOnce()).getTagName();
+        verify(fluentWebElement, atLeastOnce()).now();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override

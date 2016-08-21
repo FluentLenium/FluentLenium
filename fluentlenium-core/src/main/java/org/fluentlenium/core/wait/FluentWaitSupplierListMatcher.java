@@ -3,8 +3,11 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Supplier;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 
 public class FluentWaitSupplierListMatcher extends AbstractWaitElementListMatcher {
 
@@ -26,6 +29,10 @@ public class FluentWaitSupplierListMatcher extends AbstractWaitElementListMatche
 
     @Override
     protected FluentList<? extends FluentWebElement> find() {
-        return selector.get();
+        try {
+            return selector.get().now();
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
+            return new FluentListImpl<>();
+        }
     }
 }

@@ -23,7 +23,10 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -51,8 +54,19 @@ public class SearchTest {
         search = new Search(searchContext, new DefaultComponentInstantiator(driver));
     }
 
+    @After
+    public void after() {
+        reset(searchContext);
+    }
+
     @Test
     public void findCheckCssIsWellFormed() {
+        WebElement webElement = mock(WebElement.class);
+        WebElement webElement2 = mock(WebElement.class);
+        List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
+
+        when(searchContext.findElements(By.cssSelector("cssStyle[generated=true][checked=ok]"))).thenReturn(webElements);
+
         String name = "cssStyle";
         Filter[] filters = new Filter[]{filter1, filter2};
         when(filter1.isPreFilter()).thenReturn(true);
@@ -60,7 +74,7 @@ public class SearchTest {
         when(filter2.isPreFilter()).thenReturn(true);
         when(filter2.toString()).thenReturn("[checked=ok]");
 
-        search.find(name, filters);
+        search.find(name, filters).isPresent();
         verify(searchContext).findElements(By.cssSelector("cssStyle[generated=true][checked=ok]"));
     }
 
@@ -79,6 +93,11 @@ public class SearchTest {
 
     @Test
     public void findCheckCssIsWellFormedWithPostSelector() {
+        WebElement webElement = mock(WebElement.class);
+        WebElement webElement2 = mock(WebElement.class);
+        List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
+
+        when(searchContext.findElements(By.cssSelector("cssStyle[generated=true]"))).thenReturn(webElements);
 
         String name = "cssStyle";
         Filter[] filters = new Filter[]{filter1, filter2};
@@ -86,8 +105,11 @@ public class SearchTest {
         when(filter1.toString()).thenReturn("[generated=true]");
         when(filter2.isPreFilter()).thenReturn(false);
         when(filter2.toString()).thenReturn("[checked=ok]");
+        Matcher matcher = mock(Matcher.class);
+        when(matcher.isSatisfiedBy(any(String.class))).thenReturn(true);
+        when(filter2.getMatcher()).thenReturn(matcher);
 
-        search.find(name, filters);
+        search.find(name, filters).isPresent();
         verify(searchContext).findElements(By.cssSelector("cssStyle[generated=true]"));
     }
 
@@ -157,7 +179,7 @@ public class SearchTest {
     public void shouldThrowErrorWhenPositionNotFound() {
         String name = "cssStyle";
         WebElement webElement = mock(WebElement.class);
-        search.find(name, 0);
+        search.find(name, 0).now();
     }
 
     @Test

@@ -296,21 +296,21 @@ public class FluentWebElementTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.findFirst(".other");
+                fluentElement.findFirst(".other").now();
             }
         }).isInstanceOf(NoSuchElementException.class);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.findFirst(By.cssSelector(".other"));
+                fluentElement.findFirst(By.cssSelector(".other")).isPresent();
             }
         }).isInstanceOf(NoSuchElementException.class);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.findFirst();
+                fluentElement.findFirst().now();
             }
         }).isInstanceOf(IllegalArgumentException.class);
     }

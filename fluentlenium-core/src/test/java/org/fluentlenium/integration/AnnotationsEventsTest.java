@@ -84,7 +84,7 @@ public class AnnotationsEventsTest extends LocalFluentCase {
     public void findBy() {
         goTo(DEFAULT_URL);
 
-        findFirst("button");
+        findFirst("button").now();
 
         assertThat(beforeFindBy).isEqualTo(1);
         assertThat(afterFindBy).isEqualTo(1);

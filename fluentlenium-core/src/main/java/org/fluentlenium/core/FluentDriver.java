@@ -15,6 +15,7 @@ import org.fluentlenium.core.events.AnnotationsComponentListener;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.inject.DefaultContainerInstanciator;
 import org.fluentlenium.core.inject.FluentInjector;
+import org.fluentlenium.core.proxy.Proxies;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.wait.FluentWait;
@@ -448,7 +449,7 @@ public class FluentDriver implements FluentDriverControl {
         if (null == element || !"iframe".equals(element.getTagName())) {
             getDriver().switchTo().defaultContent();
         } else {
-            getDriver().switchTo().frame(element.getElement());
+            getDriver().switchTo().frame(Proxies.getElement(element.getElement()));
         }
     }
 

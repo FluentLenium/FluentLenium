@@ -1,10 +1,12 @@
 package org.fluentlenium.core.components;
 
 import com.sun.jna.WeakIdentityHashMap;
-import org.fluentlenium.utils.ReflectionUtils;
+import org.fluentlenium.core.proxy.ProxyElementListener;
+import org.fluentlenium.core.proxy.Proxies;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,13 +15,13 @@ import java.util.Map;
 
 /**
  * Manage living components for a WebDriver instance.
- *
+ * <p>
  * A component is an Object implementing no particular interface, but capable a wrapping
  * a {@link org.openqa.selenium.WebElement}.
- *
+ * <p>
  * {@link org.fluentlenium.core.domain.FluentWebElement} is the most common component.
  */
-public class ComponentsManager implements ComponentInstantiator, ComponentAccessor {
+public class ComponentsManager implements ComponentInstantiator, ComponentAccessor, ProxyElementListener {
 
     private final WebDriver driver;
     private final ComponentInstantiator instantiator;
@@ -28,8 +30,8 @@ public class ComponentsManager implements ComponentInstantiator, ComponentAccess
     private Map<WebElement, Object> components = new WeakIdentityHashMap();
 
     public ComponentsManager(WebDriver driver) {
-            this.driver = driver;
-            this.instantiator = new DefaultComponentInstantiator(this.driver, this);
+        this.driver = driver;
+        this.instantiator = new DefaultComponentInstantiator(this.driver, this);
     }
 
     public ComponentsManager(WebDriver driver, ComponentInstantiator instantiator) {
@@ -45,7 +47,6 @@ public class ComponentsManager implements ComponentInstantiator, ComponentAccess
      * Get the related component from the given element.
      *
      * @param element
-     *
      * @return
      */
     public Object getComponent(WebElement element) {
@@ -54,6 +55,7 @@ public class ComponentsManager implements ComponentInstantiator, ComponentAccess
 
     /**
      * Get all the component related to this webDriver.
+     *
      * @return
      */
     public Collection<ComponentBean> getAllComponents() {
@@ -71,19 +73,45 @@ public class ComponentsManager implements ComponentInstantiator, ComponentAccess
 
     @Override
     public <T> T newComponent(Class<T> componentClass, WebElement element) {
+        T component;
         try {
-            T component = instantiator.newComponent(componentClass, element);
-            components.put(unwrapElement(element), component);
-            return component;
+            component = instantiator.newComponent(componentClass, element);
         } catch (Exception e) {
             throw new ComponentException(componentClass.getName()
                     + " is not a valid component class. No valid constructor found (WebElement) or (WebElement, WebDriver)", e);
+        }
+        WebElement webElement = unwrapElement(element);
+        Proxies.addProxyListener(webElement, this);
+        components.put(webElement, component);
+        return component;
+    }
+
+    @Override
+    public void proxyElementSearch(WebElement proxy, ElementLocator locator) {
+    }
+
+    /**
+     * When the underlying element of a WebElement Proxy is found, we have to update the components map.
+     *
+     *
+     *  @param proxy proxy element.
+     * @param locator
+     * @param element found element.
+     */
+    @Override
+    public synchronized void proxyElementFound(WebElement proxy, ElementLocator locator, WebElement element) {
+        Object component = components.remove(proxy);
+        if (component != null) {
+            components.put(unwrapElement(proxy), component);
         }
     }
 
     private WebElement unwrapElement(WebElement element) {
         if (element instanceof WrapsElement) {
-            return unwrapElement(((WrapsElement)element).getWrappedElement());
+            WebElement wrappedElement = ((WrapsElement) element).getWrappedElement();
+            if (wrappedElement != element && wrappedElement != null) {
+                return unwrapElement(wrappedElement);
+            }
         }
         return element;
     }
@@ -92,6 +120,10 @@ public class ComponentsManager implements ComponentInstantiator, ComponentAccess
      * Release this manager.
      */
     public void release() {
+        for (WebElement element : components.keySet()) {
+            Proxies.removeProxyListener(element, this);
+        }
         components.clear();
     }
+
 }
