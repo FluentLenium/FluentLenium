@@ -1,37 +1,28 @@
 package org.fluentlenium.core.inject;
 
-import com.google.common.base.Function;
-import com.google.common.collect.FluentIterable;
 import org.fluentlenium.core.FluentContainer;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.domain.FluentList;
-import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.ContainerAnnotationsEventsRegistry;
+import org.fluentlenium.core.proxy.Proxies;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
-import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
 
 import javax.inject.Inject;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -151,17 +142,13 @@ public class FluentInjector implements FluentInjectControl {
             for (Field fieldFromPage : cls.getDeclaredFields()) {
                 if (isSupported(container, fieldFromPage)) {
                     AjaxElement elem = fieldFromPage.getAnnotation(AjaxElement.class);
+                    ElementLocatorFactory locatorFactory;
                     if (elem == null) {
-                        initFieldElements(
-                                new DefaultElementLocatorFactory(this.fluentControl.getDriver()),
-                                container,
-                                fieldFromPage);
+                        locatorFactory = new DefaultElementLocatorFactory(this.fluentControl.getDriver());
                     } else {
-                        initFieldElements(
-                                new AjaxElementLocatorFactory(this.fluentControl.getDriver(), elem.timeOutInSeconds()),
-                                container,
-                                fieldFromPage);
+                        locatorFactory = new AjaxElementLocatorFactory(this.fluentControl.getDriver(), elem.timeOutInSeconds());
                     }
+                    initFieldElements(locatorFactory, container, fieldFromPage);
                 }
             }
         }
@@ -229,90 +216,20 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private Object initFieldAsElement(ElementLocator locator, Object container, Field field) throws IllegalAccessException {
-        final InvocationHandler handler = new LocatingElementHandler(locator);
-        WebElement proxy = (WebElement) Proxy.newProxyInstance(container.getClass().getClassLoader(), new Class[]{WebElement.class, Locatable.class}, handler);
-        Object proxyWrapper = newComponent(proxy, field.getType());
-        ReflectionUtils.set(field, container, proxyWrapper);
-        return proxyWrapper;
+        Object proxy = Proxies.createComponent(locator, field.getType(), componentsManager);
+        ReflectionUtils.set(field, container, proxy);
+        return proxy;
     }
 
     private List<?> initFieldAsList(ElementLocator locator, Object container, Field field) throws IllegalAccessException {
-        final InvocationHandler handler = new ArrayListInvocationHandler(locator, getFirstGenericType(field));
-        List<?> proxy = (List<?>) Proxy.newProxyInstance(
-                container.getClass().getClassLoader(), new Class[]{List.class}, handler);
+        List<?> proxy = Proxies.createComponentList(locator, getFirstGenericType(field), componentsManager);
         ReflectionUtils.set(field, container, proxy);
         return proxy;
     }
 
     private FluentList<? extends FluentWebElement>  initFieldAsListOfFluentWebElement(ElementLocator locator, Object container, Field field) throws IllegalAccessException {
-        final InvocationHandler handler = new FluentListInvocationHandler(locator, getFirstGenericType(field));
-        FluentList<? extends FluentWebElement> proxy = (FluentList<? extends FluentWebElement>) Proxy.newProxyInstance(
-                container.getClass().getClassLoader(), new Class[]{FluentList.class}, handler);
+        FluentList<? extends FluentWebElement> proxy = Proxies.createFluentList(locator, (Class<? extends FluentWebElement>) getFirstGenericType(field), componentsManager);
         ReflectionUtils.set(field, container, proxy);
         return proxy;
-    }
-
-    private <T> T newComponent(WebElement element, Class<T> fluentElementClass) {
-        return this.componentsManager.newComponent(fluentElementClass, element);
-    }
-
-    private class FluentListInvocationHandler<T> implements InvocationHandler {
-
-        private final ElementLocator elementLocator;
-
-        private final Class<T> fluentElementClass;
-
-        public FluentListInvocationHandler(ElementLocator elementLocator, Class<T> fluentElementClass) {
-            this.elementLocator = elementLocator;
-            this.fluentElementClass = fluentElementClass;
-        }
-
-        @Override
-        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            List<WebElement> elements = elementLocator.findElements();
-            FluentListImpl list = new FluentListImpl(FluentIterable.from(elements).transform(new Function<WebElement, T>() {
-
-                @Override
-                public T apply(WebElement input) {
-                    return newComponent(input, fluentElementClass);
-                }
-            }).toList());
-            try {
-                return ReflectionUtils.invoke(method, list, args);
-            } catch (InvocationTargetException e) {
-                // Unwrap the underlying exception
-                throw e.getCause();
-            }
-        }
-    }
-
-    private class ArrayListInvocationHandler<T> implements InvocationHandler {
-
-        private final ElementLocator elementLocator;
-
-        private final Class<T> fluentElementClass;
-
-        public ArrayListInvocationHandler(ElementLocator elementLocator,
-                                          Class<T> fluentElementClass) {
-            this.elementLocator = elementLocator;
-            this.fluentElementClass = fluentElementClass;
-        }
-
-        @Override
-        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            List<WebElement> elements = elementLocator.findElements();
-            List<T> list = new ArrayList<T>(FluentIterable.from(elements).transform(new Function<WebElement, T>() {
-                @Override
-                public T apply(WebElement input) {
-                    return newComponent(input, fluentElementClass);
-                }
-            }).toList());
-            try {
-                return ReflectionUtils.invoke(method, list, args);
-            } catch (InvocationTargetException e) {
-                // Unwrap the underlying exception
-                throw e.getCause();
-            }
-        }
     }
 }
