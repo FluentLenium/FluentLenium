@@ -141,12 +141,12 @@ public class FluentInjector implements FluentInjectControl {
         for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
             for (Field fieldFromPage : cls.getDeclaredFields()) {
                 if (isSupported(container, fieldFromPage)) {
-                    AjaxElement elem = fieldFromPage.getAnnotation(AjaxElement.class);
+                    AjaxElement annotation = fieldFromPage.getAnnotation(AjaxElement.class);
                     ElementLocatorFactory locatorFactory;
-                    if (elem == null) {
+                    if (annotation == null) {
                         locatorFactory = new DefaultElementLocatorFactory(this.fluentControl.getDriver());
                     } else {
-                        locatorFactory = new AjaxElementLocatorFactory(this.fluentControl.getDriver(), elem.timeOutInSeconds());
+                        locatorFactory = new ConfigurableAjaxElementLocatorFactory(this.fluentControl.getDriver(), annotation);
                     }
                     initFieldElements(locatorFactory, container, fieldFromPage);
                 }
