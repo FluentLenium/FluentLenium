@@ -2,6 +2,7 @@ package org.fluentlenium.core.inject;
 
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
@@ -39,7 +40,7 @@ public class FluentInjectorElementTest {
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
 
-        injector = new FluentInjector(fluentAdapter, new ComponentsManager(webDriver));
+        injector = new FluentInjector(fluentAdapter, new ComponentsManager(webDriver), new DefaultContainerInstanciator(fluentAdapter));
     }
 
     @After

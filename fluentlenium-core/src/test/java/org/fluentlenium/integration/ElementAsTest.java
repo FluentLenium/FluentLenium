@@ -55,8 +55,7 @@ public class ElementAsTest extends LocalFluentCase {
 
     }
 
-    public static class DefaultConstructorComponent {
-
+    public static class InvalidComponent {
     }
 
     @FindBy(css = "a.go-next")
@@ -84,7 +83,7 @@ public class ElementAsTest extends LocalFluentCase {
     @Test(expected = ComponentException.class)
     public void testAsDefaultConstructorComponent() {
         goTo(DEFAULT_URL);
-        findFirst("span").as(DefaultConstructorComponent.class);
+        InvalidComponent span = findFirst("span").as(InvalidComponent.class);
     }
 
     @Test

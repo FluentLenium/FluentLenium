@@ -1,22 +1,11 @@
 package org.fluentlenium.core.inject;
 
-public interface FluentInjectControl {
+public interface FluentInjectControl extends ContainerInstanciator {
     /**
-     * @deprecated use {@link #newInstance(Class, Object...)} instead.
+     * @deprecated use {@link #newInstance(Class)} instead.
      */
     @Deprecated
     <T> T createPage(Class<T> cls, Object... params);
-
-    /**
-     * Creates a new instance of a class inject it.
-     *
-     * @param cls    class of the object to create
-     * @param params parameters of the constructor to use
-     * @param <T>    type of the object
-     * @return new instance
-     * @see #inject(Object)
-     */
-    <T> T newInstance(Class<T> cls, Object... params);
 
     /**
      * Inject object with FluentLenium resources.

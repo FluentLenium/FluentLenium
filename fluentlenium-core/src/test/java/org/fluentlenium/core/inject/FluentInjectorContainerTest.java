@@ -30,7 +30,7 @@ public class FluentInjectorContainerTest {
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
 
-        injector = new FluentInjector(fluentAdapter, new ComponentsManager(webDriver));
+        injector = new FluentInjector(fluentAdapter, new ComponentsManager(webDriver), new DefaultContainerInstanciator(fluentAdapter));
     }
 
     public static class ChildContainer {

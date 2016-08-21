@@ -19,5 +19,5 @@ public interface ComponentInstantiator {
      *
      * @param componentClass
      */
-    public boolean isComponentClass(Class<?> componentClass);
+    boolean isComponentClass(Class<?> componentClass);
 }

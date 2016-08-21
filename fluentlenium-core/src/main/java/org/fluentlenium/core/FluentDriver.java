@@ -13,6 +13,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.events.AnnotationsComponentListener;
 import org.fluentlenium.core.filter.Filter;
+import org.fluentlenium.core.inject.DefaultContainerInstanciator;
 import org.fluentlenium.core.inject.FluentInjector;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
@@ -115,7 +116,7 @@ public class FluentDriver implements FluentDriverControl {
         }
         this.mouseActions = new MouseActions(driver);
         this.keyboardActions = new KeyboardActions(driver);
-        this.fluentInjector = new FluentInjector(this, componentsManager);
+        this.fluentInjector = new FluentInjector(this, componentsManager, new DefaultContainerInstanciator(this));
         inject(this);
         return this;
     }

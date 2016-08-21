@@ -151,10 +151,15 @@ public abstract class ReflectionUtils {
     }
 
     public static <T> Constructor<T> getConstructorOptional(Class<T> cls, Class<?>... argsTypes) throws NoSuchMethodException {
-        while (argsTypes.length > 0) {
+        return getConstructorOptional(0, cls, argsTypes);
+    }
+
+    public static <T> Constructor<T> getConstructorOptional(int mandatoryCount, Class<T> cls, Class<?>... argsTypes) throws NoSuchMethodException {
+        while (true) {
             try {
                 return getConstructor(cls, argsTypes);
             } catch (NoSuchMethodException e) {
+                if (argsTypes.length == mandatoryCount) break;
                 argsTypes = Arrays.copyOf(argsTypes, argsTypes.length - 1);
             }
         }
@@ -174,7 +179,7 @@ public abstract class ReflectionUtils {
      * @throws InstantiationException
      */
     public static <T> T newInstance(Class<T> cls, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        Constructor<T> declaredConstructor = getConstructor(cls, args);
+        Constructor<T> declaredConstructor = args.length == 0 ? getConstructor(cls) : getConstructor(cls, args);
         boolean accessible = declaredConstructor.isAccessible();
         if (accessible) {
             return declaredConstructor.newInstance(args);
@@ -201,10 +206,28 @@ public abstract class ReflectionUtils {
      * @throws InstantiationException
      */
     public static <T> T newInstanceOptionalArgs(Class<T> cls, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        while (args.length > 0) {
+        return newInstanceOptionalArgs(0, cls, args);
+    }
+
+    /**
+     * Creates a new instance by trying every possible constructors with provided args.
+     *
+     * @param mandatoryCount
+     * @param cls
+     * @param args
+     * @param <T>
+     * @return
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     * @throws InstantiationException
+     */
+    public static <T> T newInstanceOptionalArgs(int mandatoryCount, Class<T> cls, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        while (true) {
             try {
                 return newInstance(cls, args);
             } catch (NoSuchMethodException e) {
+                if (args.length == mandatoryCount) break;
                 args = Arrays.copyOf(args, args.length - 1);
             }
         }

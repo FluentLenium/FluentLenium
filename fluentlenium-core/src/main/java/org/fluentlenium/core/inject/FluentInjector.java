@@ -46,10 +46,12 @@ public class FluentInjector implements FluentInjectControl {
 
     private final FluentControl fluentControl;
     private final ComponentsManager componentsManager;
+    private final ContainerInstanciator containerInstanciator;
 
-    public FluentInjector(FluentControl fluentControl, ComponentsManager componentsManager) {
+    public FluentInjector(FluentControl fluentControl, ComponentsManager componentsManager, ContainerInstanciator instanciator) {
         this.fluentControl = fluentControl;
         this.componentsManager = componentsManager;
+        this.containerInstanciator = instanciator;
     }
 
     /**
@@ -64,12 +66,15 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     public <T> T createPage(Class<T> cls, Object... params) {
-        return newInstance(cls, params);
+        if (params.length > 0) {
+            throw new FluentInjectException("Parameters support for createPage/newInstance has been dropped.");
+        }
+        return newInstance(cls);
     }
 
     @Override
-    public <T> T newInstance(Class<T> cls, Object... params) {
-        T container = newPage(cls, params);
+    public <T> T newInstance(Class<T> cls) {
+        T container = containerInstanciator.newInstance(cls);
         inject(container);
         return container;
     }
@@ -126,7 +131,8 @@ public class FluentInjector implements FluentInjectControl {
                             throw new FluentInjectException("Can't set field " + field + " with value " + existingChildContainer, e);
                         }
                     } else {
-                        Object childContainer = newPage(fieldClass);
+                        Object childContainer = containerInstanciator.newInstance(fieldClass);
+                        initContainer(childContainer);
                         try {
                             ReflectionUtils.set(field, container, childContainer);
                         } catch (IllegalAccessException e) {
@@ -137,22 +143,6 @@ public class FluentInjector implements FluentInjectControl {
                     }
                 }
             }
-        }
-    }
-
-    private <T> T newPage(Class<T> cls, Object... params) {
-        try {
-            T page = constructContainerWithParams(cls, params);
-            initContainer(page);
-            return page;
-        } catch (IllegalAccessException e) {
-            throw new FluentInjectException("IllegalAccessException on class " + (cls != null ? cls.getName() : " null"), e);
-        } catch (NoSuchMethodException e) {
-            throw new FluentInjectException("No constructor found on class " + (cls != null ? cls.getName() : " null"), e);
-        } catch (InstantiationException e) {
-            throw new FluentInjectException("Unable to instantiate " + (cls != null ? cls.getName() : " null"), e);
-        } catch (InvocationTargetException e) {
-            throw new FluentInjectException("Cannot build object for class " + (cls != null ? cls.getName() : " null"), e);
         }
     }
 
@@ -218,35 +208,6 @@ public class FluentInjector implements FluentInjectControl {
         return List.class.isAssignableFrom(field.getType());
     }
 
-    private <T> T constructContainerWithParams(Class<T> cls, Object[] params)
-            throws NoSuchMethodException, InstantiationException, IllegalAccessException,
-            InvocationTargetException {
-        T page;
-        List<Object> paramsList = new ArrayList<>();
-        for (int i = 0; i < params.length; i++) {
-            paramsList.add(params[i]);
-        }
-
-        try {
-            return ReflectionUtils.newInstance(cls, paramsList.toArray());
-        } catch (Exception ex) {
-            paramsList.add(0, fluentControl);
-            try {
-                return ReflectionUtils.newInstance(cls, paramsList.toArray());
-            } catch (NoSuchMethodException ex2) {
-                if (params.length != 0) {
-                    throw new FluentInjectException(
-                            "You provided the wrong arguments to the newInstance method, "
-                                    + "if you just want to use a page with a default constructor, use @Inject or newInstance("
-                                    + cls.getSimpleName() + ".class)",
-                            ex);
-                } else {
-                    throw ex;
-                }
-            }
-        }
-    }
-
     private Object initFieldElements(ElementLocatorFactory factory, Object container, Field field) {
         ElementLocator locator = factory.createLocator(field);
         if (locator == null) {
@@ -270,7 +231,7 @@ public class FluentInjector implements FluentInjectControl {
     private Object initFieldAsElement(ElementLocator locator, Object container, Field field) throws IllegalAccessException {
         final InvocationHandler handler = new LocatingElementHandler(locator);
         WebElement proxy = (WebElement) Proxy.newProxyInstance(container.getClass().getClassLoader(), new Class[]{WebElement.class, Locatable.class}, handler);
-        Object proxyWrapper = wrapElement(proxy, field.getType());
+        Object proxyWrapper = newComponent(proxy, field.getType());
         ReflectionUtils.set(field, container, proxyWrapper);
         return proxyWrapper;
     }
@@ -291,7 +252,7 @@ public class FluentInjector implements FluentInjectControl {
         return proxy;
     }
 
-    private <T> T wrapElement(WebElement element, Class<T> fluentElementClass) {
+    private <T> T newComponent(WebElement element, Class<T> fluentElementClass) {
         return this.componentsManager.newComponent(fluentElementClass, element);
     }
 
@@ -313,7 +274,7 @@ public class FluentInjector implements FluentInjectControl {
 
                 @Override
                 public T apply(WebElement input) {
-                    return wrapElement(input, fluentElementClass);
+                    return newComponent(input, fluentElementClass);
                 }
             }).toList());
             try {
@@ -343,7 +304,7 @@ public class FluentInjector implements FluentInjectControl {
             List<T> list = new ArrayList<T>(FluentIterable.from(elements).transform(new Function<WebElement, T>() {
                 @Override
                 public T apply(WebElement input) {
-                    return wrapElement(input, fluentElementClass);
+                    return newComponent(input, fluentElementClass);
                 }
             }).toList());
             try {
