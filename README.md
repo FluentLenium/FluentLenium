@@ -5,16 +5,16 @@
 [![HuBoard](https://img.shields.io/badge/Hu-Board-7965cc.svg)](https://huboard.com/FluentLenium/FluentLenium)
 
 FluentLenium is a framework that helps you write [Selenium](http://seleniumhq.org/) tests.
-FluentLenium provides a [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to the [Selenium Web Driver](http://seleniumhq.org/docs/03_webdriver.html).
-FluentLenium lets you use the assertion framework you like, either [JUnit assertions](http://www.junit.org/apidocs/org/junit/Assert.html), [Hamcrest](http://code.google.com/p/hamcrest/wiki/Tutorial) 
-or [AssertJ](https://github.com/joel-costigliola/assertj-core).
-
+FluentLenium provides a [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to the [Selenium Web Driver](http://www.seleniumhq.org/projects/webdriver/).
+FluentLenium integrates with JUnit 4.x, TestNG, Cucumber but can also be used standalone.
+FluentLenium lets you use the assertion framework you like, either [JUnit assertions](http://junit.sourceforge.net/javadoc/org/junit/Assert.html), [Hamcrest](http://hamcrest.org/JavaHamcrest/) 
+or [AssertJ](http://joel-costigliola.github.io/assertj/).
 
 # 5 second example
 ```java
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class BingTest extends FluentTest {
     @Test
@@ -29,9 +29,9 @@ public class BingTest extends FluentTest {
 
 ## Maven
 
-To use FluentLenium in your project, just add the following dependency to your `pom.xml`:
+Add the following dependency to your `pom.xml`:
 
-```xml 
+```xml
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
@@ -57,7 +57,7 @@ Just extend `org.fluentlenium.adapter.FluentTestNg` instead of `org.fluentlenium
 
 If you like to use AssertJ to improve the legibility of your test code:
 
-```xml 
+```xml
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
@@ -66,60 +66,82 @@ If you like to use AssertJ to improve the legibility of your test code:
 </dependency>
 ```
 
-## Static imports
-
-If you need to do some filtering:
-
 ```java
-import static org.fluentlenium.core.filter.FilterConstructor.*;
-```
-
-### Static import using AssertJ
-The static assertions to use AssertJ are:
-
-```java
+// AssertJ static imports
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 ```
 
-### Basic Methods
-You can use `url()` , `title()` or `pageSource()` to get the url, the title or the page source of the current page.
+## Fluent Test
 
-###  Selector
+Fluent Test is the entry point of FluentLenium. You only have to extend `FluentTest` and implement a test as usual.
 
-#### Default Selector
+```java
+public class MyTest extends FluentTest {
+    @Test
+    public void testGoogle() {
+        goTo("http://www.google.com");
+    }
+}
+```
 
-You can use CSS1, CSS2 and CSS3 selectors with the same restrictions as in Selenium.
+This example is for JUnit, but you may use other framework the exact same way, 
+by extending FluentTestNg for TestNG, and FluentCucumberTest for Cucumber.
 
-If you want to find the list of elements which have:
 
-  - the `id` "title" : `$("#title")`
-  - the `class` name "fluent" : `$(".fluent")`
-  - the `tag` name "input" : `$("input")`
 
-You are free to use most of the CSS3 syntax, which means that
-`$("input[class=rightForm]")`
-will return the list of all input elements which have the class rightForm.
+##  Fluent Selectors
 
-#### Custom filter
-But what if you want all the inputs that have text equal to "Sam" ?
-You can use filters to allow that kind of search. For example:
+FluentLenium provides a `$` method to build **Fluent Selectors**.
+
+  - **CSS Selector**: Creates a Fluent Selector from CSS Selector.
+  - **Selenium By Locator**: Creates a Fluent Selector with native Selenium API.
+  - **Filter**: Add an additional filter to the Fluent Selector.
+  - **First/Last/Index**: Get a single element from the Fluent Selector.
+  - **XPath Axes**: Get another Fluent Selector from its relative position in the DOM.
+  
+Fluent Selectors are implemented by ```FluentWebElement``` and ```FluentList<FluentWebElement>```. Those classes are 
+wrappers of Selenium ```WebElement``` and ```List<WebElement>```.
+
+### CSS Selector
+
+You can use CSS Selector with the same restrictions as in Selenium.
+
+```java
+$("#title") // Elements with id named "title"
+$(".fluent") // Elements with class named "fluent"
+$("input") // Elements with tag name "input"
+
+// Most of CSS3 syntax is supported.
+$("form > input[data-custom=selenium]")
+```
+
+### Selenium By Locator
+
+You can also use native Selenium By Locator.
+
+```java
+$(By.cssSelector(".fluent"))
+```
+
+### Filters
+
+You can use Filters to make your Fluent Selection easier to read and more powerful.
+
+```java
+// Required import to make filters available
+import static org.fluentlenium.core.filter.FilterConstructor.*;
+```
 
 ```java
 $(".fluent", withName("foo"))
 $(".fluent", withClass("foo"))
 $(".fluent", withId("idOne"))
 $(".fluent", withText("This field is mandatory."))
+$(withId("idOne")) // Filter only
+$(By.cssSelector(".header")) // Native Selium `By` locator
+$(".fluent", withName("foo"), withId("id1")) // Filter chaining
 ```
-
-You can skip the CSS selector argument:
-`$(withId("idOne"))` will return the element whose id attribute is "idOne".
-
-You can use the `By` locator `Selenium object` instead of a CSS selector argument:
-`$(By.cssSelector(".header"))` will return the element using the `By` locator as a reference - so you can use everything that the `By` object is offering.
-
-You can also write chained filters:
-`$(".fluent", withName("foo"), withId("id1"))` will return all the elements matching the 3 criteria.
 
 You can do more complex string matching on the above filters using the following methods:
 
@@ -131,117 +153,42 @@ You can do more complex string matching on the above filters using the following
   - `endsWith`
   - `notEndsWith`
 
-For each of them, you can choose to use a css selector:
-
 ```java
 $(".fluent", withName().notContains("name"))
 $(".fluent", withId().notStartsWith("id"))
 $(".fluent", withText().endsWith("Female"))
-```
-
-Or to be more precise, you can use regular expressions:
-
-```java
 $(".fluent", withName().contains(regex("na?me[0-9]*")))
 $(".fluent", withName().notStartsWith(regex("na?me[0-9]*")))
 ```
 
-Contains, startsWith and endsWith with a regexp pattern look for a subsection of the pattern.
+`contains`, `startsWith` and `endsWith` with a regexp pattern look for a subsection of the pattern.
 
-
-### N-th
-If you want the first element that matches your criteria, just use:
+### First, Last and Index
+If you want the first, last or a particular index element, just use:
 
 ```java
-$(".fluent").first()
+$(".fluent").first() // First element
+$(".fluent").last() // Last element
+$(".fluent").index(2) // Third element
+$(".fluent", withName("foo")).index(2) // Third element named "foo"
 ```
 
-If you want the element at the given position:
+### Fluent Selector chains
+You can also chain the Fluent Selectors.
 
 ```java
-$(".fluent").index(2)
-```
-
-Of course, you can combine a position filter and a custom filter:
-
-```java
-$(".fluent", withName("foo")).index(2)
-```
-
-
-#### Find on children
-You can also chain the find calls:
-
-```java
+// All the "input" tag name elements 
+// inside "fluent" class element subtree.
 $(".fluent").$("input")
-```
- 
- will return all the input elements in the css selector tree.
-You can be more specific:
 
-```java
+// The first "input" element named "bar" 
+// inside the third "fluent" class named "foo" element.
 $(".fluent", withName("foo")).index(2).$("input", withName("bar")).first()
 ```
 
-## Element
-If you need to access the name, the id, the value, the tagname or the visible text of an element:
+### XPath Axes
 
-```java
-$(".fluent").getName()
-$(By.cssSelector(".fluent")).getId()
-$(".fluent").getValue()
-$(".fluent").getTagName()
-$(".fluent").getText()
-```
-
-If you need to access the text content of an element, including hidden parts:
-
-```java
-$(".fluent").getTextContent()
-```
-
-If you need to access a specific value of an attribute:
-
-```java
-$(".fluent").getAttribute("myCustomAttribute")
-```
-
-You can also access a list of all the names, visible text, and ids of a list of elements:
-```java
-$(".fluent").getNames()
-$(By.id("foo")).getIds()
-$(".fluent").getValues()
-$(".fluent").getAttributes("myCustomAttribute")
-$(".fluent").getTexts()
-```
-
-If you want to know the name, the id, the value, the visible text or the value of an attribute of the first element of the list:
-```java
-$(".fluent").getName()
-$(".fluent").getId()
-$(".fluent").getValue()
-$(".fluent").getAttribute("myCustomAttribute")
-$(".fluent").getText()
-```
-
-If you need to get the underlying html content of an element:
-```java
-$(".fluent").html()
-```
-To know the dimension of an element (width and height):
-
-```java
-Dimension dimension = $(".fluent").getSize()
-```
-
-You can also check if the element is displayed, enabled or selected:
-```java
-$(".fluent").isDisplayed()
-$(".fluent").isEnabled()
-$(".fluent").isSelected()
-```
-
-If you need to retrieve other elements from a selected one, you 
+If you need to build another Fluent Selector from the position in the DOM of an existing one, you 
 can use [XPath axes](http://www.w3schools.com/xsl/xpath_axes.asp).
 
 ```java
@@ -254,85 +201,183 @@ $(".fluent"()).axes().precedings()
 $(".fluent"()).axes().precedingSiblings()
 ```
 
+## Selected Elements
+
+### Actions
+Fluent Selectors have methods to interact with the selected elements:
+
+```java
+// click/double-click on all the enabled elements.
+$("#create-button").click()
+$("#create-button").doubleClick()
+
+// Clear all the enabled fields
+$("#firstname").clear()
+
+// Submit all the enabled forms.
+$("#account").submit()
+
+// Place the mouse over the first found element
+$("#create-button").mouseOver()
+```
+
+### Information
+
+You can also retrieve information of selected elements:
+
+```java
+// Name of the first element
+$(".fluent").getName()
+
+// Id of the first element
+$(By.cssSelector(".fluent")).getId()
+
+// Value of the first element
+$(".fluent").getValue()
+
+// Tag name of the first element
+$(".fluent").getTagName()
+
+// Text of the first element
+$(".fluent").getText()
+
+// Text content of the first element (includes hidden parts)
+$(".fluent").getTextContent()
+
+// Value of attribute "data-custom" of the first element
+$(".fluent").getAttribute("data-custom")
+
+// HTML content of the element
+$(".fluent").html()
+
+// Size of the element (width/height)
+$(".fluent").getSize()
+```
+
+You can also access a list of all the names, visible text, and ids of a list of elements:
+```java
+$(".fluent").getNames()
+$(By.id("foo")).getIds()
+$(".fluent").getValues()
+$(".fluent").getAttributes("myCustomAttribute")
+$(".fluent").getTexts()
+$(".fluent").getTextContents()
+```
+
+You can also check if the element is displayed, enabled or selected:
+```java
+$(".fluent").isDisplayed()
+$(".fluent").isEnabled()
+$(".fluent").isSelected()
+```
+
+### Lazy Elements
+
+`$` always returns Lazy Elements. Building a selector doesn't perform the search on the element immediately. 
+But search will be performed later, just before it's really needed to interact with the selected elements. 
+(ie: clicking, retrieving text value, simulate user input).
+
+```java
+// Creates the Fluent Selector, but doesn't perform the search
+FluentList<FluentWebElement> fluentElements = $(".fluent");
+
+// Perform the search and call click() on found elements
+fluentElements.click();
+
+// NoSuchElementException will be throw if no element is found.
+```
+
+You can control the state of those Lazy Elements.
+
+```java
+// Check if the element is present  in DOM (boolean)
+$(".fluent").isPresent();
+
+// Force the underlying search if it's not already loaded
+// Throws NoSuchElementException if not found
+$(".fluent").now();
+
+// Forget the underlying search results.
+// You can then reuse the same selector to perform the search again
+$(".fluent").reset();
+
+// Check if the underlying element has been loaded (boolean)
+$(".fluent").isLoaded();
+```
+
 ## Keyboard and Mouse actions
 
 Advanced keyboard and mouse actions are available using keyboard() and mouse() in FluentTest class or element.
 
-## Form Actions
-Clicking, filling, submitting and cleaning an element or list of elements is simple and intuitive.
+## Filling forms
 
-### Fill
-`$("input").fill().with("bar")` will fill all the input elements with bar.
+A fill() builder method is available to quickly fill forms.
+
+```java
+$("input").fill().with("bar")
+```
+
+Previous statement will fill all the input elements with bar.
 If you want for example to exclude checkboxes, you can use the css filtering like `$("input:not([type='checkbox'])").fill().with("tomato")`,
 you can also use the filtering provided by FluentLenium `$("input", with("type", notContains("checkbox"))).fill().with("tomato")`
 
-
-`$("input").fill().with("myLogin","myPassword")` will fill the first element of the input selection with myLogin, the second with myPassword.
-If there are more input elements found, the last value (myPassword) will be repeated for each subsequent element.
-
-If you're trying to fill a select element, you can use `$("daySelector").fillSelect().withValue("MONDAY")` to fill it with a value, `fillSelect("daySelector").withIndex(1)` to fill it with a value by its index or `fillSelect("daySelector").withText("Monday")` to fill it with a value by its text.
-
-`fillSelect`can also be invoked directly on an element, for instance `$("daySelector").first().fillSelect().withValue("MONDAY")`.
-
-Don't forget, only visible fields will be modified. It simulates a real person using a browser!
-
-### Click
 ```java
-$("#create-button").click()
+$("input").fill().with("myLogin","myPassword")
+```
+ 
+Previous statement will fill the first element of the input selection with myLogin, the second with myPassword.
+If there are more input elements found, the last value (`"myPassword"`) will be repeated for each subsequent element.
+
+You can also fill standard select elements
+
+```java
+// Select "MONDAY" value
+$("daySelector").fillSelect().withValue("MONDAY")
+
+// Select second value
+$("daySelector").fillSelect().withIndex(1)
+
+// Select value with visible text "Monday"
+$("daySelector").fillSelect().withText("Monday")
 ```
 
-This will click on all the enabled fields returned by the search.
+Don't forget that only visible fields will be modified. It simulates a real person using a browser !
 
-### Clear
-```java
-$("#firstname").clear()
-```
-
-This will clear all the enabled fields returned by the search.
-
-### Submit
-```java
-$("#account").submit()
-```
-
-This will submit all the enabled fields returned by the search.
-
-### Double click
-```java
-$("#create-button").doubleClick()
-```
-
-### Mouse over
-```java
-$("#create-button").mouseOver()
-```
-
-## Page Object pattern
-Selenium tests can easily become a mess.  To avoid this, you can use the [Page Object Pattern](http://code.google.com/p/selenium/wiki/PageObjects).
+## Pages
+Selenium tests can easily become a mess. To avoid this, you should use the [Page Object Pattern](http://code.google.com/p/selenium/wiki/PageObjects).
 Page Object Pattern will enclose all the plumbing relating to how pages interact with each other and how the user
 interacts with the page, which makes tests a lot easier to read and to maintain.
 
 Try to construct your Page thinking that it is better if you offer services from your page rather than just the internals of the page.
 A Page Object can model the whole page or just a part of it.
 
-To construct a Page, extend [org.fluentlenium.core.FluentPage](https://github.com/FluentLenium/FluentLenium/blob/master/fluentlenium-core/src/main/java/org/fluentlenium/core/FluentPage.java).
-In most cases, you have to define the url of the page by overriding the `getUrl` method.
-By doing this, you can then use the `goTo(myPage)` method in your test code.
+To construct a Page, extend `FluentPage`.
 
-It may be necessary to ensure that you are on the right page, not just at the url returned by `getUrl` [accessible in your test via the void url() method].
-To do this, override the `isAt` method to run all the assertions necessary in order to ensure that you are on the right page.
+You can define the URL of the page by overriding the `getUrl` method. Then, it's possible tu use the `goTo()` method in 
+your test code to set the current URL to the URL of the page.
+
+You can also override isAt method, to run all the assertions necessary in order to ensure that you are on the right
+page.
+
 For example, if I choose that the title will be sufficient to know if I'm on the right page:
 
 ```java
-@Override
-public void isAt() {
-    assertThat(title()).contains("Selenium");
+public class MyPage extends FluentPage {
+    @Override
+    public void getURL() {
+        return "/app/my-page";
+    }
+    
+    @Override
+    public void isAt() {
+        assertThat(title()).contains("Selenium");
+    }
 }
 ```
 
-Instead of manually implementing `isAt` and `getUrl` method, you can use Selenium `@FindBy` (or `@FindBys`) annotation on the class
-extending [org.fluentlenium.core.FluentPage](https://github.com/FluentLenium/FluentLenium/blob/master/fluentlenium-core/src/main/java/org/fluentlenium/core/FluentPage.java)
-to define an Element Locator that should match this page and this page only, and @PageUrl to defined the URL used by `goTo()` method.
+Instead of manually implementing `isAt` and `getUrl` method, you can use Selenium `@FindBy` annotation on the page 
+class, to define an Element Locator that should identify this page, and `@PageUrl` to define the URL 
+used by `goTo()` method.
 
 ```java
 @PageUrl("/app/my-page")
@@ -392,7 +437,7 @@ public class AnnotationInitialization extends FluentTest {
     public WebDriver webDriver = new HtmlUnitDriver();
 
     @Inject
-    public TestPage page;
+    public MyPage page;
 
 
     @Test
@@ -416,11 +461,11 @@ You can also use the factory method `newInstance`:
 public class BeforeInitialization extends FluentTest {
     private WebDriver webDriver = new HtmlUnitDriver();
     @Inject
-    private TestPage page;
+    private MyPage page;
     
     @Before
     public void beforeTest() {
-        page = newInstance(TestPage.class);
+        page = newInstance(MyPage.class);
     }
     
     @Test
@@ -435,11 +480,13 @@ public class BeforeInitialization extends FluentTest {
 }
 ```
 
+Anyway, Page Objects constructors should never be called directly.
+
 All `FluentWebElement` fields are automatically searched for by name or id. For example, if you declare a 
 `FluentWebElement` named `createButton`, it will search the page for an element where `id` is `createButton` or 
 name is `createButton`.
 
-All elements are proxified which means that the search is not done until you try to access the element.
+Keep in mind that all elements are Lazy Proxy Selectors, they behave exactly like if they where found with `$` method.
 
 ```java
 public class LoginPage extends FluentPage {
@@ -552,7 +599,7 @@ By default, the timeout is set to one second.
 
 A ```Component``` is a object wrapping a ```WebElement``` instance. Nothing more.
 
-Using component improves readability of both Page Objects and Tests.
+Using components improves readability of both Page Objects and Tests.
 
 `FluentWebElement` is the default component class in FluentLenium, so you can implement you own custom component 
 by extending `FluentWebElement` to add custom logic.
@@ -762,7 +809,7 @@ await().atMost(5, TimeUnit.SECONDS).until(".fluent").with("myAttribute").startsW
 ```
 ## Alternative Syntax
 
-If you don't like the [JQuery](http://jquery.com/) syntax, you can replace `$` with find method:
+If you don't like the [JQuery](http://jquery.com/) syntax, you can replace `$` with `find` method:
 
 ```java
 goTo("http://mywebpage/");
@@ -810,12 +857,13 @@ setHtmlDumpMode(TriggerMode.ON_FAIL);
 
 ## Isolated Tests
 If you want to test concurrency or if you need for any reason to not use the mechanism of extension of FluentLenium, you can also, instead of extending FluentTest, instantiate your fluent test object directly.
-```java
-= new IsolatedTest().goTo(DEFAULT_URL).
-    await().atMost(1, SECONDS).until(".fluent").with("name").equalTo("name").isPresent().
-    $("input").first().isEnabled();
-```
 
+```java
+IsolatedTest test = new IsolatedTest()
+test.goTo(DEFAULT_URL);
+test.await().atMost(1, SECONDS).until(".fluent").with("name").equalTo("name").isPresent();
+test.$("input").first().isEnabled();
+```
 
 ## Configure FluentLenium
 
@@ -1029,9 +1077,13 @@ enabled in the Java Compiler configuration.
 Instead of implementing a new ```WebDriverFactory``` class, you may also override ```newWebDriver()``` in the Test 
 class, but doing so will ignore any value defined in ```webDriver``` configuration property.
 
-## Browser Lifecycle
-For JUnit and TestNG, you can define the browser lifecycle.
-Use the class annotation @SharedDriver and you will be able to define how the driver will be created:
+### WebDriver Lifecycle
+
+WebDriver Lifecycle is fully by FluentLenium. 
+
+You should never create the WebDriver used in the test by yourself.
+
+Use the class annotation `@SharedDriver` and you will be able to define how the driver will be created:
 ```java
 @SharedDriver(type = SharedDriver.SharedType.ONCE)
 ``` 
@@ -1045,9 +1097,9 @@ will allow you to use the same driver for every test annotate with that annotati
 ``` 
 will allow you to create a new driver for each method.
 
-The default is PER_METHOD.
+The default is `PER_METHOD`.
 
-You will also be able to decide if you want to clean the cookies between two methods using ```@SharedDriver(deleteCookies=true)``` or ```@SharedDriver(deleteCookies=false)```
+You will also be able to decide if you want to clean the cookies between two methods using `@SharedDriver(deleteCookies=true)` or `@SharedDriver(deleteCookies=false)`
 
 Please keep in mind that this annotation configures how drivers are created at runtime but it does not deal with
 concurrency. If you need to make your tests parallel you should use dedicated libraries/extensions. You can use the
@@ -1129,7 +1181,7 @@ up with ghost webdriver instances which won't be stopped after tests execution. 
 number of running process (chromedriver, firefox, etc.) before and after your tests run just to make sure the cleanup
  is working properly.
 
-##Iframe
+## Iframe
 If you want to switch the Selenium webDriver to an iframe (see this [Selenium FAQ](https://code.google.com/p/selenium/wiki/FrequentlyAskedQuestions#Q:_How_do_I_type_into_a_contentEditable_iframe?)),
 you can just call the method switchTo() :
 
@@ -1147,7 +1199,7 @@ To switch to the iframe selected:
 switchTo($("iframe#frameid"));
 ```
 
-##Alert
+## Alert
 If you want manage alert (see this [Selenium FAQ](http://code.google.com/p/selenium/wiki/FrequentlyAskedQuestions#Q:_Does_WebDriver_support_Javascript_alerts_and_prompts?)),
 
 When an alert box pops up, click on "OK":
@@ -1165,17 +1217,13 @@ Entering an input value in prompt:
 alert().prompt("FluentLenium")
 ```
 
-##Window
+## Window
 Maximize browser window:
 ```java
 maximizeWindow();
 ```
 
-##Users/dev
-If you have any comments/remarks/bugs, please raise an issue on github:
-[FluentLenium](https://github.com/FluentLenium/FluentLenium/issues) or contact us through the [mailing-list](https://groups.google.com/group/fluentlenium)
-
-##SNAPSHOT version (unstable!)
+## SNAPSHOT version (unstable!)
 
 A SNAPSHOT version is automatically packaged after each commit on master branch.
 
@@ -1213,7 +1261,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 ## FluentLenium Assertions
 
 ### JUnit
-FluentLenium uses JUnit by default. You can use test using [JUnit](http://www.junit.org) assertions, but can of course use others frameworks such as [AssertJ](https://github.com/joel-costigliola/assertj-core) or [Hamcrest](http://code.google.com/p/hamcrest/).
+FluentLenium uses JUnit by default. You can use test using [JUnit](http://www.junit.org) assertions, but can of course use others frameworks such as [AssertJ](https://github.com/joel-costigliola/assertj-core) or [Hamcrest](http://hamcrest.org/JavaHamcrest/).
 
 ```java
 goTo("http://mywebpage/");
@@ -1244,3 +1292,7 @@ $("#firstName").fill().with("toto");
 $("#create-button").click();
 assertThat(title(),equalTo("Hello toto"));
 ```
+
+## Users/dev
+If you have any comments/remarks/bugs, please raise an issue on 
+[FluentLenium Issue Tracker](https://github.com/FluentLenium/FluentLenium/issues)
