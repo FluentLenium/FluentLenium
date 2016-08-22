@@ -266,4 +266,13 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>examples</id>
+            <modules>
+                <module>fluentlenium-examples</module>
+            </modules>
+        </profile>
+    </profiles>
+
 </project>

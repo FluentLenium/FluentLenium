@@ -10,67 +10,60 @@ FluentLenium integrates with JUnit 4.x, TestNG, Cucumber but can also be used st
 FluentLenium lets you use the assertion framework you like, either [JUnit assertions](http://junit.sourceforge.net/javadoc/org/junit/Assert.html), [Hamcrest](http://hamcrest.org/JavaHamcrest/) 
 or [AssertJ](http://joel-costigliola.github.io/assertj/).
 
-# 5 second example
-```java
-import org.junit.Test;
+# Quickstart
 
-import static org.assertj.core.api.Assertions.*;
-
-public class BingTest extends FluentTest {
-    @Test
-    public void title_of_bing_should_contain_search_query_name() {
-        goTo("http://www.bing.com");
-        $("#sb_form_q").fill().with("FluentLenium");
-        $("#sb_form_go").submit();
-        assertThat(title()).contains("FluentLenium");
-    }
-}
-```
-
-## Maven
-
-Add the following dependency to your `pom.xml`:
+- Add dependencies to your `pom.xml`
 
 ```xml
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <scope>test</scope>
 </dependency>
-```
-
-By default, FluentLenium provides a JUnit adapter.
-
-If you like to use FluentLenium with TestNG:
-
-```xml
-<dependency>
-    <groupId>org.fluentlenium</groupId>
-    <artifactId>fluentlenium-testng</artifactId>
-    <version>1.0.0</version>
-    <scope>test</scope>
-</dependency>
-```
-
-Just extend `org.fluentlenium.adapter.FluentTestNg` instead of `org.fluentlenium.adapter.FluentTest`.
-
-If you like to use AssertJ to improve the legibility of your test code:
-
-```xml
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>htmlunit-driver</artifactId>
+    <version>2.21</version>
 </dependency>
 ```
 
+- Create a Fluent Test
+
 ```java
-// AssertJ static imports
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
+import org.fluentlenium.adapter.FluentTest;
+import org.fluentlenium.configuration.FluentConfiguration;
+import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.*;
+
+@FluentConfiguration(webDriver = "htmlunit")
+public class DuckDuckGoTest extends FluentTest {
+    @Test
+    public void title_of_duck_duck_go_should_contain_search_query_name() {
+        goTo("https://duckduckgo.com");
+        $("#search_form_input_homepage").fill().with("FluentLenium");
+        $("#search_button_homepage").submit();
+        assertThat(title()).contains("FluentLenium");
+    }
+}
 ```
+
+- Run as a JUnit test
+
+[More FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/fluentlenium-examples).
 
 ## Fluent Test
 
@@ -85,10 +78,7 @@ public class MyTest extends FluentTest {
 }
 ```
 
-This example is for JUnit, but you may use other framework the exact same way, 
-by extending FluentTestNg for TestNG, and FluentCucumberTest for Cucumber.
-
-
+This example is for JUnit, but you may use other framework the exact same way (See [Supported Test Runners](#supported-test-runner) section).
 
 ##  Fluent Selectors
 
@@ -318,17 +308,15 @@ $("input").fill().with("bar")
 ```
 
 Previous statement will fill all the input elements with bar.
-If you want for example to exclude checkboxes, you can use the css filtering like `$("input:not([type='checkbox'])").fill().with("tomato")`,
-you can also use the filtering provided by FluentLenium `$("input", with("type", notContains("checkbox"))).fill().with("tomato")`
 
 ```java
 $("input").fill().with("myLogin","myPassword")
 ```
  
-Previous statement will fill the first element of the input selection with myLogin, the second with myPassword.
-If there are more input elements found, the last value (`"myPassword"`) will be repeated for each subsequent element.
+Previous statement will fill the first element of the input selection with `myLogin`, the second with `myPassword`.
+If there are more input elements found, the last value `myPassword` will be repeated for each subsequent element.
 
-You can also fill standard select elements
+You can also fill `<select>` elements
 
 ```java
 // Select "MONDAY" value
@@ -389,8 +377,6 @@ public class MyPage extends FluentPage {
 
 Create your own methods to easily fill out forms, go to another or whatever else may be needed in your test.
 
-For example:
-
 ```java
 public class LoginPage extends FluentPage {
     public String getUrl() {
@@ -430,12 +416,8 @@ public void checkLoginFailed() {
 ## Injection
 You can use the annotation `@Inject` to construct your Page Objects easily.
 
-For example:
-
 ```java
 public class AnnotationInitialization extends FluentTest {
-    public WebDriver webDriver = new HtmlUnitDriver();
-
     @Inject
     public MyPage page;
 
@@ -445,13 +427,6 @@ public class AnnotationInitialization extends FluentTest {
         goTo(page);
         //put your assertions here
     }
-
-
-    @Override
-    public WebDriver getDefaultDriver() {
-        return webDriver;
-    }
-
 }
 ```
 
@@ -459,8 +434,6 @@ You can also use the factory method `newInstance`:
 
 ```java
 public class BeforeInitialization extends FluentTest {
-    private WebDriver webDriver = new HtmlUnitDriver();
-    @Inject
     private MyPage page;
     
     @Before
@@ -471,11 +444,6 @@ public class BeforeInitialization extends FluentTest {
     @Test
     public void test_no_exception() {
         page.go();
-    }
-    
-    @Override
-    public WebDriver getDefaultDriver() {
-        return webDriver;
     }
 }
 ```
@@ -1258,10 +1226,60 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 </dependency>
 ```
 
-## FluentLenium Assertions
+## Supported Test Runners
 
 ### JUnit
-FluentLenium uses JUnit by default. You can use test using [JUnit](http://www.junit.org) assertions, but can of course use others frameworks such as [AssertJ](https://github.com/joel-costigliola/assertj-core) or [Hamcrest](http://hamcrest.org/JavaHamcrest/).
+
+- JUnit is supported by default.
+
+### TestNG
+
+- Import this additional maven dependency.
+
+```xml
+<dependency>
+    <groupId>org.fluentlenium</groupId>
+    <artifactId>fluentlenium-testng</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <scope>test</scope>
+</dependency>
+```
+
+- Extends FluentTestNG instead of FluentTest
+
+### Cucumber
+
+- Import this additional maven dependency.
+
+```xml
+<dependency>
+    <groupId>org.fluentlenium</groupId>
+    <artifactId>fluentlenium-cucumber</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <scope>test</scope>
+</dependency>
+```
+
+- Extend each Step with `FluentCucumberTest` instead of `FluentTest`.
+
+- Add this piece of code for each Cucumber Step.
+
+```java
+@Before
+public void before(Scenario scenario) {
+    super.before(scenario);
+}
+
+@After
+public void after(Scenario scenario) {
+    super.after(scenario);
+}
+```
+
+## Supported Assertions Libraries
+
+### JUnit
+You can use FluentLenium using [JUnit](http://www.junit.org) assertions, but can of course use others frameworks such as [AssertJ](https://github.com/joel-costigliola/assertj-core) or [Hamcrest](http://hamcrest.org/JavaHamcrest/).
 
 ```java
 goTo("http://mywebpage/");
@@ -1271,6 +1289,25 @@ assertEqual("Hello toto",title());
 ```
 
 ### AssertJ
+
+- Import this additional maven dependency.
+
+```xml
+<dependency>
+    <groupId>org.fluentlenium</groupId>
+    <artifactId>fluentlenium-assertj</artifactId>
+    <version>1.0.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+- Add those static imports.
+
+```java
+import static org.assertj.core.api.Assertions.*;
+import static org.fluentlenium.assertj.FluentLeniumAssertions.*;
+```
+
 ```java
 goTo("http://mywebpage/");
 $("#firstName").fill().with("toto");
@@ -1286,6 +1323,25 @@ assertThat($(".another3")).hasSize().greaterThanOrEqualTo(2);
 ```
 
 ### Hamcrest
+
+- Import this additional maven dependency.
+
+```xml
+<dependency>
+    <groupId>org.hamcrest</groupId>
+    <artifactId>hamcrest-core</artifactId>
+    <version>1.3</version>
+    <scope>test</scope>
+</dependency>
+```
+
+- Add those static imports.
+
+```java
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
+```
+
 ```java
 goTo("http://mywebpage/");
 $("#firstName").fill().with("toto");
@@ -1293,6 +1349,6 @@ $("#create-button").click();
 assertThat(title(),equalTo("Hello toto"));
 ```
 
-## Users/dev
-If you have any comments/remarks/bugs, please raise an issue on 
+## Contact Us
+If you have any comment, remark or issue, please open an issue on 
 [FluentLenium Issue Tracker](https://github.com/FluentLenium/FluentLenium/issues)
