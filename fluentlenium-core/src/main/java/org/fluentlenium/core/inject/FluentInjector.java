@@ -9,6 +9,7 @@ import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.Locatable;
@@ -20,7 +21,6 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
 
 import javax.inject.Inject;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -30,7 +30,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -181,11 +180,11 @@ public class FluentInjector implements FluentInjectControl {
 
     private static boolean isElement(Field field) {
         try {
-            field.getType().getConstructor(WebElement.class);
+            ReflectionUtils.getConstructor(field.getType(), WebElement.class);
             return true;
         } catch (NoSuchMethodException e) {
             try {
-                field.getType().getConstructor(WebElement.class, WebDriver.class);
+                ReflectionUtils.getConstructor(field.getType(), WebElement.class, WebDriver.class);
             } catch (NoSuchMethodException e1) {
                 return false;
             }
@@ -223,20 +222,16 @@ public class FluentInjector implements FluentInjectControl {
             InvocationTargetException {
         T page;
         List<Object> paramsList = new ArrayList<>();
-        List<Class<?>> paramsTypeList = new ArrayList<>();
         for (int i = 0; i < params.length; i++) {
             paramsList.add(params[i]);
-            paramsTypeList.add(params[i].getClass());
         }
 
-        Constructor<T> construct;
         try {
-            construct = cls.getDeclaredConstructor(paramsTypeList.toArray(new Class<?>[paramsTypeList.size()]));
-        } catch (NoSuchMethodException ex) {
+            return ReflectionUtils.newInstance(cls, paramsList.toArray());
+        } catch (Exception ex) {
             paramsList.add(0, fluentControl);
-            paramsTypeList.add(0, FluentControl.class);
             try {
-                construct = cls.getDeclaredConstructor(paramsTypeList.toArray(new Class<?>[paramsTypeList.size()]));
+                return ReflectionUtils.newInstance(cls, paramsList.toArray());
             } catch (NoSuchMethodException ex2) {
                 if (params.length != 0) {
                     throw new FluentInjectException(
@@ -249,10 +244,6 @@ public class FluentInjector implements FluentInjectControl {
                 }
             }
         }
-
-        construct.setAccessible(true);
-        page = construct.newInstance(paramsList.toArray());
-        return page;
     }
 
     private void initFieldElements(ElementLocatorFactory factory, Object container, Field field) {
@@ -300,27 +291,15 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private <T> T wrapElement(WebElement element, Class<T> fluentElementClass) {
-        T proxyWrapper;
-        Constructor<T> constructor;
-        Object[] parameters;
         try {
-            constructor = fluentElementClass.getConstructor(WebElement.class, WebDriver.class);
-            parameters = new Object[]{element, fluentControl.getDriver()};
-        } catch (NoSuchMethodException e) {
+            return ReflectionUtils.newInstance(fluentElementClass, element, fluentControl.getDriver());
+        } catch (Exception e) {
             try {
-                constructor = fluentElementClass.getConstructor(WebElement.class);
-                parameters = new Object[]{element};
-            } catch (NoSuchMethodException e2) {
+                return ReflectionUtils.newInstance(fluentElementClass, element);
+            } catch (Exception e2) {
                 throw new WebElementInjectException("Can't wrap element " + element + " into " + fluentElementClass + "."
                         + " No valid constructor found (WebElement) or (WebElement, WebDriver)", e2);
             }
-        }
-
-        try {
-            proxyWrapper = constructor.newInstance(parameters);
-            return proxyWrapper;
-        } catch (Exception e) {
-            throw new WebElementInjectException("Can't wrap element " + element + " into " + fluentElementClass + ".", e);
         }
     }
 

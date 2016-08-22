@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 public class AfterTest extends FluentTest {
 
     @Override
-    public WebDriver getDefaultDriver() {
+    public WebDriver newWebDriver() {
         return null;    //To change body of overridden methods use File | Settings | File Templates.
     }
 

@@ -39,7 +39,7 @@ public class BeforeInitialization extends FluentTest {
     }
 
     @Override
-    public WebDriver getDefaultDriver() {
+    public WebDriver newWebDriver() {
         return webDriver;
     }
 

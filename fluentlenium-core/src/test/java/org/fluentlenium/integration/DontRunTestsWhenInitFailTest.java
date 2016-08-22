@@ -3,7 +3,6 @@ package org.fluentlenium.integration;
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.adapter.FluentTest;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
@@ -15,12 +14,12 @@ public class DontRunTestsWhenInitFailTest {
     public static class TestClass extends FluentTest {
 
         public TestClass() {
-            setScreenshotMode(TriggerMode.ON_FAIL);
-            setHtmlDumpMode(TriggerMode.ON_FAIL);
+            getConfiguration().setScreenshotMode(TriggerMode.AUTOMATIC_ON_FAIL);
+            getConfiguration().setHtmlDumpMode(TriggerMode.AUTOMATIC_ON_FAIL);
         }
 
         @Override
-        public WebDriver getDefaultDriver() {
+        public WebDriver newWebDriver() {
             HtmlUnitDriver driver = new HtmlUnitDriver(false);
             driver.get("invalid:url"); // Simulate a driver initialization failure.
             return driver;

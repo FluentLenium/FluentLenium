@@ -3,13 +3,11 @@ package org.fluentlenium.integration;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.apache.commons.io.IOUtils;
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,7 +17,7 @@ public class HtmlDumpTest extends LocalFluentCase {
     private final Path tempDir;
 
     public HtmlDumpTest() throws IOException {
-        setHtmlDumpMode(TriggerMode.ON_FAIL);
+        getConfiguration().setHtmlDumpMode(TriggerMode.AUTOMATIC_ON_FAIL);
         tempDir = Files.createTempDirectory("tempfiles");
     }
 

@@ -3,6 +3,7 @@ package org.fluentlenium.core;
 import lombok.experimental.Delegate;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.alert.Alert;
@@ -39,7 +40,7 @@ public class FluentDriver implements FluentDriverControl {
 
     private String baseUrl;
 
-    private FluentDriverConfigurationReader configuration;
+    private ConfigurationProperties configuration;
 
     private EventsRegistry events;
 
@@ -54,9 +55,45 @@ public class FluentDriver implements FluentDriverControl {
 
     private KeyboardActions keyboardActions;
 
-    public FluentDriver(WebDriver driver, FluentDriverConfigurationReader configuration) {
+    public FluentDriver(WebDriver driver, ConfigurationProperties configuration) {
         initFluent(driver);
         this.configuration = configuration;
+        configureDriver();
+    }
+
+    private void configureDriver() {
+        if (this.getDriver() != null) {
+            if (this.getDriver().manage() != null && this.getDriver().manage().timeouts() != null) {
+                if (this.configuration.getPageLoadTimeout() == null) {
+                    this.getDriver().manage().timeouts().pageLoadTimeout(-1, TimeUnit.MILLISECONDS);
+                } else {
+                    this.getDriver().manage().timeouts().pageLoadTimeout(this.configuration.getPageLoadTimeout(), TimeUnit.MILLISECONDS);
+                }
+
+                if (this.configuration.getImplicitlyWait() == null) {
+                    this.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+                } else {
+                    this.getDriver().manage().timeouts().implicitlyWait(this.configuration.getImplicitlyWait(), TimeUnit.MILLISECONDS);
+                }
+
+                if (this.configuration.getScriptTimeout() == null) {
+                    this.getDriver().manage().timeouts().setScriptTimeout(-1, TimeUnit.MILLISECONDS);
+                } else {
+                    this.getDriver().manage().timeouts().setScriptTimeout(this.configuration.getScriptTimeout(), TimeUnit.MILLISECONDS);
+                }
+            }
+
+            if (this.configuration.getBaseUrl() != null) {
+                String baseUrl = this.configuration.getBaseUrl();
+                if (baseUrl != null) {
+                    if (baseUrl.endsWith("/")) {
+                        baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
+                    }
+                    this.baseUrl = baseUrl;
+                }
+            }
+        }
+
     }
 
     protected FluentDriver initFluent(WebDriver driver) {
@@ -200,7 +237,8 @@ public class FluentDriver implements FluentDriverControl {
         if (events == null) {
             throw new IllegalStateException(
                     "An EventFiringWebDriver instance is required to use events. "
-                            + "Please override getDefaultDriver() to provide it.");
+                            + "You should set 'eventsEnabled' configuration property to 'true' "
+                            + "or override newWebDriver() to build an EventFiringWebDriver.");
         }
         return events;
     }

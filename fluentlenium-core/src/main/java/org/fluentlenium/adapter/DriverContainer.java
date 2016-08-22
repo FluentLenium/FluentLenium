@@ -4,7 +4,7 @@ import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.FluentDriverProvider;
 
 /**
- * Container for FluentDriver of the actual test.
+ * Container for {@link FluentDriver} of the actual test adapter.
  */
 public interface DriverContainer extends FluentDriverProvider {
     /**

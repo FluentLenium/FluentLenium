@@ -1,10 +1,9 @@
 package org.fluentlenium.adapter;
 
-import org.fluentlenium.core.FluentDriverConfigurationReader;
+import org.fluentlenium.configuration.ConfigurationProperties;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.WebDriver;
 
@@ -63,21 +62,21 @@ public class FluentAdapterTest {
     public void should_configure_properly() {
         FluentAdapter adapter = new FluentAdapter();
 
-        adapter.setScreenshotMode(FluentDriverConfigurationReader.TriggerMode.ON_FAIL);
-        assertThat(adapter.getScreenshotMode()).isSameAs(FluentDriverConfigurationReader.TriggerMode.ON_FAIL);
-        adapter.setScreenshotMode(null);
+        adapter.getConfiguration().setScreenshotMode(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
+        assertThat(adapter.getScreenshotMode()).isSameAs(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
+        adapter.getConfiguration().setScreenshotMode(null);
 
-        adapter.setScreenshotPath("path");
+        adapter.getConfiguration().setScreenshotPath("path");
         assertThat(adapter.getScreenshotPath()).isEqualTo("path");
-        adapter.setScreenshotPath(null);
+        adapter.getConfiguration().setScreenshotPath(null);
 
-        adapter.setHtmlDumpMode(FluentDriverConfigurationReader.TriggerMode.ON_FAIL);
-        assertThat(adapter.getHtmlDumpMode()).isSameAs(FluentDriverConfigurationReader.TriggerMode.ON_FAIL);
+        adapter.getConfiguration().setHtmlDumpMode(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
+        assertThat(adapter.getHtmlDumpMode()).isSameAs(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
 
-        adapter.setHtmlDumpPath("dumpPath");
+        adapter.getConfiguration().setHtmlDumpPath("dumpPath");
         assertThat(adapter.getHtmlDumpPath()).isEqualTo("dumpPath");
-        
-        assertThat(adapter.getDefaultBaseUrl()).isNull();
+
+        assertThat(adapter.getBaseUrl()).isNull();
 
         /*
 
@@ -126,7 +125,6 @@ public class FluentAdapterTest {
     }
     */
     }
-
 
 
 }

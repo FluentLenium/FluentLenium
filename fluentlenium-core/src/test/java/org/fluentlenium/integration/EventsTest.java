@@ -7,18 +7,12 @@ import org.fluentlenium.core.events.NavigateAllListener;
 import org.fluentlenium.core.events.NavigateListener;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 public class EventsTest extends LocalFluentCase {
-
-    @Override
-    public WebDriver getDefaultDriver() {
-        return new EventFiringWebDriver(super.getDefaultDriver());
-    }
 
     @Test
     public void clickOn() {
@@ -64,8 +58,8 @@ public class EventsTest extends LocalFluentCase {
 
         getDriver().navigate().refresh();
 
-        Mockito.verify(beforeListener, Mockito.times(1)).on((String)Mockito.isNull(), Mockito.<WebDriver>anyObject(), Mockito.eq(NavigateAllListener.Direction.REFRESH));
-        Mockito.verify(afterListener, Mockito.times(1)).on((String)Mockito.isNull(), Mockito.<WebDriver>anyObject(), Mockito.eq(NavigateAllListener.Direction.REFRESH));
+        Mockito.verify(beforeListener, Mockito.times(1)).on((String) Mockito.isNull(), Mockito.<WebDriver>anyObject(), Mockito.eq(NavigateAllListener.Direction.REFRESH));
+        Mockito.verify(afterListener, Mockito.times(1)).on((String) Mockito.isNull(), Mockito.<WebDriver>anyObject(), Mockito.eq(NavigateAllListener.Direction.REFRESH));
 
     }
 

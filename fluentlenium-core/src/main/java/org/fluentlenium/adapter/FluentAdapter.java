@@ -1,22 +1,23 @@
 package org.fluentlenium.adapter;
 
 import lombok.experimental.Delegate;
+import org.fluentlenium.configuration.Configuration;
+import org.fluentlenium.configuration.ConfigurationFactoryProvider;
+import org.fluentlenium.configuration.ConfigurationProperties;
+import org.fluentlenium.configuration.WebDrivers;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.FluentDriverControl;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-public class FluentAdapter implements FluentDriverControl, FluentDriverConfiguration {
+/**
+ * Generic adapter to {@link FluentDriver}.
+ */
+public class FluentAdapter implements FluentDriverControl, ConfigurationProperties {
 
     private final DriverContainer driverContainer;
 
-    private String screenshotPath;
-
-    private String htmlDumpPath;
-
-    private TriggerMode screenshotMode;
-
-    private TriggerMode htmlDumpMode;
+    private final Configuration configuration = ConfigurationFactoryProvider.newConfiguration(getClass());
 
     public FluentAdapter() {
         this(new DefaultDriverContainer());
@@ -33,6 +34,11 @@ public class FluentAdapter implements FluentDriverControl, FluentDriverConfigura
     public FluentAdapter(DriverContainer driverContainer, WebDriver webDriver) {
         this.driverContainer = driverContainer;
         initFluent(webDriver);
+    }
+
+    @Delegate(types = ConfigurationProperties.class)
+    public Configuration getConfiguration() {
+        return configuration;
     }
 
     @Delegate(types = FluentDriverControl.class)
@@ -54,6 +60,8 @@ public class FluentAdapter implements FluentDriverControl, FluentDriverConfigura
 
     /**
      * Load a {@link WebDriver} into this adapter.
+     *
+     * This method should not be called by end user.
      *
      * @param webDriver webDriver to use.
      * @return adapter
@@ -82,6 +90,8 @@ public class FluentAdapter implements FluentDriverControl, FluentDriverConfigura
 
     /**
      * Release the current {@link WebDriver} from this adapter.
+     *
+     * This method should not be called by end user.
      */
     public void releaseFluent() {
         if (getFluentDriver() != null) {
@@ -91,60 +101,33 @@ public class FluentAdapter implements FluentDriverControl, FluentDriverConfigura
     }
 
     /**
-     * Override this method to change the driver
-     *
-     * @return returns WebDriver which is set to FirefoxDriver by default - can be overwritten
+     * @return A new WebDriver instance.
+     * @see #getDriver()
+     * @deprecated Override {@link #newWebDriver()} instead, or consider using {@link ConfigurationProperties#getWebDriver()}.
      */
+    @Deprecated
     public WebDriver getDefaultDriver() {
-        return new FirefoxDriver();
+        WebDriver webDriver = WebDrivers.INSTANCE.newWebDriver(getWebDriver(), getCapabilities());
+        if (Boolean.TRUE.equals(getEventsEnabled())) {
+            webDriver = new EventFiringWebDriver(webDriver);
+        }
+        return webDriver;
     }
 
     /**
-     * Override this method to set the base URL to use when using relative URLs
+     * Creates a new {@link WebDriver} instance.
      *
-     * @return The base URL, or null if relative URLs should be passed to the driver untouched
+     * This method should not be called by end user, but may be overriden if required.
+     *
+     * Before overriding this method, you should consider using {@link WebDrivers} registry and configuration
+     * {@link ConfigurationProperties#getWebDriver()}.
+     *
+     * To retrieve the current managed {@link WebDriver}, call {@link #getDriver()} instead.
+     *
+     * @return A new WebDriver instance.
+     * @see #getDriver()
      */
-    public String getDefaultBaseUrl() {
-        return null;
-    }
-
-    @Override
-    public void setScreenshotPath(String path) {
-        this.screenshotPath = path;
-    }
-
-    @Override
-    public void setHtmlDumpPath(String htmlDumpPath) {
-        this.htmlDumpPath = htmlDumpPath;
-    }
-
-    @Override
-    public void setScreenshotMode(TriggerMode mode) {
-        this.screenshotMode = mode;
-    }
-
-    @Override
-    public TriggerMode getScreenshotMode() {
-        return screenshotMode;
-    }
-
-    @Override
-    public String getScreenshotPath() {
-        return screenshotPath;
-    }
-
-    @Override
-    public String getHtmlDumpPath() {
-        return htmlDumpPath;
-    }
-
-    @Override
-    public void setHtmlDumpMode(TriggerMode htmlDumpMode) {
-        this.htmlDumpMode = htmlDumpMode;
-    }
-
-    @Override
-    public TriggerMode getHtmlDumpMode() {
-        return htmlDumpMode;
+    public WebDriver newWebDriver() {
+        return getDefaultDriver();
     }
 }

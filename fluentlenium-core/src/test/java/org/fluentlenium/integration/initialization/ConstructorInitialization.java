@@ -18,7 +18,7 @@ public class ConstructorInitialization extends FluentTest {
 
 
     @Override
-    public WebDriver getDefaultDriver() {
+    public WebDriver newWebDriver() {
         return webDriver;
     }
 }
