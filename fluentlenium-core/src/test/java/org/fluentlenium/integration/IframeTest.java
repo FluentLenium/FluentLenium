@@ -38,7 +38,7 @@ public class IframeTest extends LocalFluentCase {
         iFramePage.switchTo(findFirst("#iframe1"));
         assertThat($("h1").getText()).isEqualTo("Heading");
         assertThat($("#oneline").getText()).isEqualTo("A single line of text");
-        iFramePage.switchTo(null);
+        iFramePage.switchToDefault();
         assertThat($("h2").getText()).isEqualTo("Heading 2");
     }
 

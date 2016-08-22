@@ -354,8 +354,8 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
      * @param filters  filters set
      * @return fluent web element
      */
-    public FluentWebElement find(String selector, Integer number, Filter... filters) {
-        return search.find(selector, number, filters);
+    public FluentWebElement find(String selector, Integer index, Filter... filters) {
+        return search.find(selector, filters).index(index);
     }
 
     /**
@@ -366,17 +366,17 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
      * @return fluent web element
      */
     public FluentWebElement find(By locator, Integer index, Filter... filters) {
-        return search.find(locator, index, filters);
+        return search.find(locator, filters).index(index);
     }
 
     @Override
     public FluentWebElement $(String selector, Integer index, Filter... filters) {
-        return find(selector, index, filters);
+        return find(selector, filters).index(index);
     }
 
     @Override
     public FluentWebElement $(By locator, Integer index, Filter... filters) {
-        return find(locator, index, filters);
+        return find(locator, filters).index(index);
     }
 
     /**
@@ -388,12 +388,12 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
      */
     @Override
     public FluentWebElement find(Integer index, Filter... filters) {
-        return search.find(index, filters);
+        return search.find(filters).index(index);
     }
 
     @Override
     public FluentWebElement $(Integer index, Filter... filters) {
-        return find(index, filters);
+        return find(filters).index(index);
     }
 
     /**

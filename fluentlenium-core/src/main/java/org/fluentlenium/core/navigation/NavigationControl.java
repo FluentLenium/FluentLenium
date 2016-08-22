@@ -1,6 +1,7 @@
 package org.fluentlenium.core.navigation;
 
 import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
@@ -32,6 +33,14 @@ public interface NavigationControl {
      * @param url the url of the page to
      */
     void goToInNewTab(String url);
+
+    /**
+     * Switch to the first selected Element (if element is null or not an iframe, or haven't an id then
+     * switch to the default)
+     *
+     * @param elements fluent web element
+     */
+    void switchTo(FluentList<? extends FluentWebElement> elements);
 
     /**
      * Switch to the selected Element (if element is null or not an iframe, or haven't an id then

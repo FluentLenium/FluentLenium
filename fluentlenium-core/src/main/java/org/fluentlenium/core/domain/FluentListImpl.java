@@ -112,7 +112,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
 
     @Override
     @ListElementAccessor(index = true)
-    public E atIndex(int index) {
+    public E index(int index) {
         if (this.size() <= index) {
             throw new NoSuchElementException("Element not found");
         }

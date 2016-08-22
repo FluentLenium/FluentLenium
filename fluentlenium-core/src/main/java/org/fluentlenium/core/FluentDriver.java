@@ -445,6 +445,11 @@ public class FluentDriver implements FluentDriverControl {
     }
 
     @Override
+    public void switchTo(FluentList<? extends FluentWebElement> elements) {
+        switchTo(elements.first());
+    }
+
+    @Override
     public void switchTo(FluentWebElement element) {
         if (null == element || !"iframe".equals(element.getTagName())) {
             getDriver().switchTo().defaultContent();
@@ -455,12 +460,12 @@ public class FluentDriver implements FluentDriverControl {
 
     @Override
     public void switchTo() {
-        this.switchTo(null);
+        this.switchTo((FluentWebElement)null);
     }
 
     @Override
     public void switchToDefault() {
-        this.switchTo(null);
+        this.switchTo((FluentWebElement)null);
     }
 
     @Override

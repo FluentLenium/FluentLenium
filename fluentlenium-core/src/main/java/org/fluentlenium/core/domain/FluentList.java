@@ -23,7 +23,6 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentA
 
     /**
      * Return the last element of the list.
-     * If none, return NoSuchElementException
      *
      * @return last element
      */
@@ -31,11 +30,10 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentA
 
     /**
      * Return the element at index of the list.
-     * If none, return NoSuchElementException
      *
      * @return element at index
      */
-    E atIndex(int index);
+    E index(int index);
 
     /**
      * Creates a list of Selenium {@link WebElement} from this list

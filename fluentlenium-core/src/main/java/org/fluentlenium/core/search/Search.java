@@ -113,7 +113,7 @@ public class Search implements SearchControl<FluentWebElement> {
      */
     @Override
     public FluentWebElement find(String selector, Integer number, final Filter... filters) {
-        return find(selector, filters).atIndex(number);
+        return find(selector, filters).index(number);
     }
 
     /**
@@ -207,12 +207,7 @@ public class Search implements SearchControl<FluentWebElement> {
      */
     @Override
     public FluentWebElement findFirst(String selector, final Filter... filters) {
-        FluentList<FluentWebElement> fluentList = find(selector, filters);
-        try {
-            return fluentList.first();
-        } catch (NoSuchElementException e) {
-            throw new NoSuchElementException("Could not find element matching selector: " + selector + ".", e);
-        }
+        return find(selector, filters).first();
     }
 
     /**
@@ -223,10 +218,7 @@ public class Search implements SearchControl<FluentWebElement> {
      */
     @Override
     public FluentWebElement findFirst(Filter... filters) {
-        if (filters == null || filters.length == 0) {
-            throw new IllegalArgumentException("cssSelector or filter is required");
-        }
-        return findFirst("*", filters);
+        return find(filters).first();
     }
 
     /**
@@ -238,7 +230,6 @@ public class Search implements SearchControl<FluentWebElement> {
      */
     @Override
     public FluentWebElement findFirst(By locator, final Filter... filters) {
-        FluentList<FluentWebElement> fluentList = find(locator, filters);
-        return fluentList.first();
+        return find(locator, filters).first();
     }
 }

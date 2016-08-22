@@ -94,7 +94,7 @@ You can use CSS1, CSS2 and CSS3 selectors with the same restrictions as in Selen
 If you want to find the list of elements which have:
 
   - the `id` "title" : `$("#title")`
-  - the `class` name "small" : `$(".small")`
+  - the `class` name "fluent" : `$(".fluent")`
   - the `tag` name "input" : `$("input")`
 
 You are free to use most of the CSS3 syntax, which means that
@@ -106,10 +106,10 @@ But what if you want all the inputs that have text equal to "Sam" ?
 You can use filters to allow that kind of search. For example:
 
 ```java
-$(".small", withName("foo"))
-$(".small", withClass("foo"))
-$(".small", withId("idOne"))
-$(".small", withText("This field is mandatory."))
+$(".fluent", withName("foo"))
+$(".fluent", withClass("foo"))
+$(".fluent", withId("idOne"))
+$(".fluent", withText("This field is mandatory."))
 ```
 
 You can skip the CSS selector argument:
@@ -119,7 +119,7 @@ You can use the `By` locator `Selenium object` instead of a CSS selector argumen
 `$(By.cssSelector(".header"))` will return the element using the `By` locator as a reference - so you can use everything that the `By` object is offering.
 
 You can also write chained filters:
-`$(".small", withName("foo"), withId("id1"))` will return all the elements matching the 3 criteria.
+`$(".fluent", withName("foo"), withId("id1"))` will return all the elements matching the 3 criteria.
 
 You can do more complex string matching on the above filters using the following methods:
 
@@ -134,16 +134,16 @@ You can do more complex string matching on the above filters using the following
 For each of them, you can choose to use a css selector:
 
 ```java
-$(".small", withName().notContains("name"))
-$(".small", withId().notStartsWith("id"))
-$(".small", withText().endsWith("Female"))
+$(".fluent", withName().notContains("name"))
+$(".fluent", withId().notStartsWith("id"))
+$(".fluent", withText().endsWith("Female"))
 ```
 
 Or to be more precise, you can use regular expressions:
 
 ```java
-$(".small", withName().contains(regex("na?me[0-9]*")))
-$(".small", withName().notStartsWith(regex("na?me[0-9]*")))
+$(".fluent", withName().contains(regex("na?me[0-9]*")))
+$(".fluent", withName().notStartsWith(regex("na?me[0-9]*")))
 ```
 
 Contains, startsWith and endsWith with a regexp pattern look for a subsection of the pattern.
@@ -153,111 +153,106 @@ Contains, startsWith and endsWith with a regexp pattern look for a subsection of
 If you want the first element that matches your criteria, just use:
 
 ```java
-findFirst(myCssSelector)
-```
-
-or alternatively
-
-```java
-$(myCssSelector).first()
+$(".fluent").first()
 ```
 
 If you want the element at the given position:
 
 ```java
-$(myCssSelector, 2)
+$(".fluent").index(2)
 ```
 
 Of course, you can combine a position filter and a custom filter:
 
 ```java
-$(myCssSelector, 2, withName("foo"))
+$(".fluent", withName("foo")).index(2)
 ```
 
 
 #### Find on children
 You can also chain the find calls:
-`$(myCssSelector).$("input")` will return all the input elements in the css selector tree.
+
+```java
+$(".fluent").$("input")
+```
+ 
+ will return all the input elements in the css selector tree.
 You can be more specific:
 
 ```java
-$(myCssSelector, 2, withName("foo")).$("input", withName("bar"))
-```
-
-or
-
-```java
-$(myCssSelector, 2, withName("foo")).findFirst("input", withName("bar"))
+$(".fluent", withName("foo")).index(2).$("input", withName("bar")).first()
 ```
 
 ## Element
 If you need to access the name, the id, the value, the tagname or the visible text of an element:
 
 ```java
-findFirst(myCssSelector).getName()
-findFirst(By.cssSelector(".foo")).getId()
-findFirst(myCssSelector).getValue()
-findFirst(myCssSelector).getTagName()
-findFirst(myCssSelector).getText()
+$(".fluent").getName()
+$(By.cssSelector(".fluent")).getId()
+$(".fluent").getValue()
+$(".fluent").getTagName()
+$(".fluent").getText()
 ```
 
 If you need to access the text content of an element, including hidden parts:
 
 ```java
-findFirst(myCssSelector).getTextContent()
+$(".fluent").getTextContent()
 ```
 
 If you need to access a specific value of an attribute:
 
 ```java
-findFirst(myCssSelector).getAttribute("myCustomAttribute")
+$(".fluent").getAttribute("myCustomAttribute")
 ```
 
 You can also access a list of all the names, visible text, and ids of a list of elements:
 ```java
-$(myCssSelector).getNames()
+$(".fluent").getNames()
 $(By.id("foo")).getIds()
-$(myCssSelector).getValues()
-$(myCssSelector).getAttributes("myCustomAttribute")
-$(myCssSelector).getTexts()
+$(".fluent").getValues()
+$(".fluent").getAttributes("myCustomAttribute")
+$(".fluent").getTexts()
 ```
 
 If you want to know the name, the id, the value, the visible text or the value of an attribute of the first element of the list:
 ```java
-$(myCssSelector).getName()
-$(myCssSelector).getId()
-$(myCssSelector).getValue()
-$(myCssSelector).getAttribute("myCustomAttribute")
-$(myCssSelector).getText()
+$(".fluent").getName()
+$(".fluent").getId()
+$(".fluent").getValue()
+$(".fluent").getAttribute("myCustomAttribute")
+$(".fluent").getText()
 ```
 
 If you need to get the underlying html content of an element:
 ```java
-findFirst(myCssSelector).html()
+$(".fluent").html()
 ```
-To know the dimension of an element (with and height):
+To know the dimension of an element (width and height):
 
 ```java
-Dimension dimension = findFirst(myCssSelector).getSize()
+Dimension dimension = $(".fluent").getSize()
 ```
 
 You can also check if the element is displayed, enabled or selected:
 ```java
-findFirst(myCssSelector).isDisplayed()
-findFirst(myCssSelector).isEnabled()
-findFirst(myCssSelector).isSelected()
+$(".fluent").isDisplayed()
+$(".fluent").isEnabled()
+$(".fluent").isSelected()
 ```
 
 If you need to retrieve other elements from a selected one, you 
 can use [XPath axes](http://www.w3schools.com/xsl/xpath_axes.asp).
 
-$(myCssSelector()).axes().parent()
-$(myCssSelector()).axes().descendants()
-$(myCssSelector()).axes().ancestors()
-$(myCssSelector()).axes().followings()
-$(myCssSelector()).axes().followingSiblings()
-$(myCssSelector()).axes().precedings()
-$(myCssSelector()).axes().precedingSiblings()
+```java
+$(".fluent"()).axes().parent()
+$(".fluent"()).axes().descendants()
+$(".fluent"()).axes().ancestors()
+$(".fluent"()).axes().followings()
+$(".fluent"()).axes().followingSiblings()
+$(".fluent"()).axes().precedings()
+$(".fluent"()).axes().precedingSiblings()
+```
 
 ## Keyboard and Mouse actions
 
@@ -277,7 +272,7 @@ If there are more input elements found, the last value (myPassword) will be repe
 
 If you're trying to fill a select element, you can use `$("daySelector").fillSelect().withValue("MONDAY")` to fill it with a value, `fillSelect("daySelector").withIndex(1)` to fill it with a value by its index or `fillSelect("daySelector").withText("Monday")` to fill it with a value by its text.
 
-`fillSelect`can also be invoked directly on an element, for instance `findFirst("daySelector").fillSelect().withValue("MONDAY")`.
+`fillSelect`can also be invoked directly on an element, for instance `$("daySelector").first().fillSelect().withValue("MONDAY")`.
 
 Don't forget, only visible fields will be modified. It simulates a real person using a browser!
 
@@ -312,84 +307,6 @@ $("#create-button").doubleClick()
 $("#create-button").mouseOver()
 ```
 
-## Events
-
-Selenium has a driver wrapper named `EventFiringWebDriver` that is able to generate events and register listeners.
-
-FluentLenium brings an Events Annotations and Listener API to register those listeners easily.
-
-### Annotations
-
-You can use annotations from `org.fluentlenium.core.events.annotations` package to register any method as a event 
-listener.
-
-Annotations can be used in a test class.
-
-```java
-@AfterClickOn
-public void afterClickOn(FluentWebElement element);
-    System.out.println("Element Clicked: " + element);
-});
-```
-
-Annotations related to a WebElement can also be used in a component class.
-```java
-
-public class SomeComponent {
-    private WebElement element;
-    
-    public SomeComponent(WebElement element) {
-        this.element = element;
-    }
-    
-    public SomeComponent click() {
-        this.element.click();
-        return this;
-    }
-    
-    @AfterClickOn
-    private void afterClickOn() {
-        System.out.println("Element Clicked: " + this);
-    }
-}
-
-class SomeTest extends FluentTest {
-    
-    private SomeComponent clickComponent;
-    private SomeComponent otherComponent;
-    
-    @Test
-    public void test() {
-        clickComponent.click();
-        // @AfterClickOn annotated method will be invoked for clickComponent instance only.
-    }
-}
-
-```
-
-### Listener API
-
-You can also register events through API using `events` method.
-
-```java
-events().afterClickOn(new ElementListener() {
-    @Override
-    public void on(FluentWebElement element, WebDriver driver) {
-        System.out.println("Element Clicked: " + element);
-    }
-});
-
-findFirst("button").click(); // This will call the listener.
-```
-
-This integrates nicely with Java 8 lambdas
-
-```java
-events().afterClickOn((element, driver) -> System.out.println("Element Clicked: " + element));
-
-findFirst("button").click(); // This will call the listener.
-```
-
 ## Page Object pattern
 Selenium tests can easily become a mess.  To avoid this, you can use the [Page Object Pattern](http://code.google.com/p/selenium/wiki/PageObjects).
 Page Object Pattern will enclose all the plumbing relating to how pages interact with each other and how the user
@@ -400,7 +317,6 @@ A Page Object can model the whole page or just a part of it.
 
 To construct a Page, extend [org.fluentlenium.core.FluentPage](https://github.com/FluentLenium/FluentLenium/blob/master/fluentlenium-core/src/main/java/org/fluentlenium/core/FluentPage.java).
 In most cases, you have to define the url of the page by overriding the `getUrl` method.
-It is also possible to use `@PageUrl` annotation, its value will be passed to the `getUrl` method, overriding is not required.
 By doing this, you can then use the `goTo(myPage)` method in your test code.
 
 It may be necessary to ensure that you are on the right page, not just at the url returned by `getUrl` [accessible in your test via the void url() method].
@@ -414,14 +330,17 @@ public void isAt() {
 }
 ```
 
-Instead of manually implementing `isAt` method, you can use Selenium `@FindBy` (or `@FindBys`) annotation on the class
+Instead of manually implementing `isAt` and `getUrl` method, you can use Selenium `@FindBy` (or `@FindBys`) annotation on the class
 extending [org.fluentlenium.core.FluentPage](https://github.com/FluentLenium/FluentLenium/blob/master/fluentlenium-core/src/main/java/org/fluentlenium/core/FluentPage.java)
-to define an Element Locator that should match this page and this page only.
+to define an Element Locator that should match this page and this page only, and @PageUrl to defined the URL used by `goTo()` method.
 
+```java
+@PageUrl("/app/my-page")
 @FindBy(css="#my-page")
 public class MyPage extends FluentPage {
-   ...
+    ...
 }
+```
 
 Create your own methods to easily fill out forms, go to another or whatever else may be needed in your test.
 
@@ -432,21 +351,6 @@ public class LoginPage extends FluentPage {
     public String getUrl() {
         return "myCustomUrl";
     }
-    public void isAt() {
-        assertThat(title()).isEqualTo("MyTitle");
-    }
-    public void fillAndSubmitForm(String... paramsOrdered) {
-        $("input").fill().with(paramsOrdered);
-        $("#create-button").click();
-    }
-}
-```
-
-or using `@PageUrl` annotation instead of overriding `getUrl` method
-
-```java
-@PageUrl("myCustomUrl")
-public class LoginPage extends FluentPage {
     public void isAt() {
         assertThat(title()).isEqualTo("MyTitle");
     }
@@ -505,7 +409,6 @@ public class AnnotationInitialization extends FluentTest {
 
 }
 ```
-It's now possible to use the `@Inject` annotation in a FluentPage.
 
 You can also use the factory method `newInstance`:
 
@@ -674,7 +577,7 @@ Components are created automatically by injection,
 or programmatically by calling `as(Class<?> componentClass)` method of ```FluentWebElement``` or ```FluentList```.
 
 ```java
-SelectComponent comp = findFirst("#some-select").as(SelectComponent.class);
+SelectComponent comp = $("#some-select").first().as(SelectComponent.class);
 
 comp.doSelect("Value to select");
 assertThat(comp.getSelection()).isEquals("Value to select");
@@ -692,15 +595,94 @@ public class SelectComponent {
 }
 ```
 
+
+## Events
+
+Selenium has a driver wrapper named `EventFiringWebDriver` that is able to generate events and register listeners.
+
+FluentLenium brings Events Annotations and a Listener API to register those listeners easily.
+
+### Annotations
+
+You can use annotations from `org.fluentlenium.core.events.annotations` package to register any method as a event 
+listener.
+
+Annotations can be used in a test class.
+
+```java
+@AfterClickOn
+public void afterClickOn(FluentWebElement element);
+    System.out.println("Element Clicked: " + element);
+});
+```
+
+Annotations related to a WebElement can also be used in a component class.
+```java
+
+public class SomeComponent {
+    private WebElement element;
+    
+    public SomeComponent(WebElement element) {
+        this.element = element;
+    }
+    
+    public SomeComponent click() {
+        this.element.click();
+        return this;
+    }
+    
+    @AfterClickOn
+    private void afterClickOn() {
+        System.out.println("Element Clicked: " + this);
+    }
+}
+
+public class SomeTest extends FluentTest {
+    
+    private SomeComponent clickComponent;
+    private SomeComponent otherComponent;
+    
+    @Test
+    public void test() {
+        clickComponent.click();
+        // @AfterClickOn annotated method will be invoked for clickComponent instance only.
+    }
+}
+
+```
+
+### Listener API
+
+You can also register events through API using `events` method.
+
+```java
+events().afterClickOn(new ElementListener() {
+    @Override
+    public void on(FluentWebElement element, WebDriver driver) {
+        System.out.println("Element Clicked: " + element);
+    }
+});
+
+$("button").first().click(); // This will call the listener.
+```
+
+This integrates nicely with Java 8 lambdas
+
+```java
+events().afterClickOn((element, driver) -> System.out.println("Element Clicked: " + element));
+
+$("button").first().click(); // This will call the listener.
+```
+
 ## Wait for an Ajax Element to be available
 
 There are multiple ways to make your driver wait for the result of an asynchronous call.
 FluentLenium provides a rich and fluent API in order to help you to handle AJAX calls.
-If you want to wait for at most 5 seconds until the number of elements corresponding to the until criteria (here the class small) has the requested size:
+If you want to wait for at most 5 seconds until the number of elements corresponding to the until criteria (here the class fluent) has the requested size:
 
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until(".small").hasSize(3);
+await().atMost(5, TimeUnit.SECONDS).until(".fluent").hasSize(3);
 ```
 The default wait is 500 ms.
 
@@ -710,7 +692,7 @@ The `isPresent()` assertion is going to check if there is at most one element on
 If you need to be more precise, you can also use filters in the search:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until(".small").withText("myText").hasSize(3);
+await().atMost(5, TimeUnit.SECONDS).until(".fluent").withText("myText").hasSize(3);
 ```
 
 You can also use after `hasSize()` : `greaterThan(int)`, `lessThan(int)`, `lessThanOrEqualTo(int)`, `greaterThanOrEqualTo(int)` , `equalTo(int)`, `notEqualTo(int)`
@@ -718,7 +700,7 @@ You can also use after `hasSize()` : `greaterThan(int)`, `lessThan(int)`, `lessT
 You can also use matchers:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until(".small").withText().startsWith("start").isPresent();
+await().atMost(5, TimeUnit.SECONDS).until(".fluent").withText().startsWith("start").isPresent();
 ```
      
 Just use `startsWith`, `notStartsWith`, `endsWith`, `notEndsWith`, `contains`, `notContains`, `equalTo`, `containsWord`.
@@ -726,7 +708,7 @@ Just use `startsWith`, `notStartsWith`, `endsWith`, `notEndsWith`, `contains`, `
 If you need to filter on a custom attribute name, this syntax will help:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWith("myValue").isPresent();
+await().atMost(5, TimeUnit.SECONDS).until(".fluent").with("myAttribute").startsWith("myValue").isPresent();
 ```
 
 You can also give instance of elements or list of elements if required.
@@ -740,11 +722,11 @@ await().atMost(5, TimeUnit.SECONDS).until(element).isEnabled();
 
 When running Java >= 8, you can use lambdas with `until`, `untilPredicate`, `untilElement` or `untilElements`.
 ```java
-await().atMost(5, TimeUnit.SECONDS).untilElement(() -> findFirst(".button")).isEnabled();
+await().atMost(5, TimeUnit.SECONDS).untilElement(() -> $(".button").first()).isEnabled();
 await().atMost(5, TimeUnit.SECONDS).untilElements(() -> $(".button")).areEnabled();
 
-await().atMost(5, TimeUnit.SECONDS).untilPredicate((f) -> findFirst(".button").isEnabled());
-await().atMost(5, TimeUnit.SECONDS).until(() -> findFirst(".button").isEnabled());
+await().atMost(5, TimeUnit.SECONDS).untilPredicate((f) -> $(".button").first().isEnabled());
+await().atMost(5, TimeUnit.SECONDS).until(() -> $(".button").first().isEnabled());
 ```
 
 You can also check if the page is loaded using
@@ -769,14 +751,14 @@ public FluentWait await() {
 ### Polling Every
 You can also define the polling frequency, for example, if you want to poll every 5 seconds:
 ```java
-await().pollingEvery(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWith("myValue").isPresent();
+await().pollingEvery(5, TimeUnit.SECONDS).until(".fluent").with("myAttribute").startsWith("myValue").isPresent();
 ```
 The default value is 500ms.
 
 You can also chain filter in the asynchronous API:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until(".small").with("myAttribute").startsWith("myValue").with("a second attribute").equalTo("my@ndValue").isPresent();
+await().atMost(5, TimeUnit.SECONDS).until(".fluent").with("myAttribute").startsWith("myValue").with("a second attribute").equalTo("my@ndValue").isPresent();
 ```
 ## Alternative Syntax
 
@@ -830,7 +812,7 @@ setHtmlDumpMode(TriggerMode.ON_FAIL);
 If you want to test concurrency or if you need for any reason to not use the mechanism of extension of FluentLenium, you can also, instead of extending FluentTest, instantiate your fluent test object directly.
 ```java
 = new IsolatedTest().goTo(DEFAULT_URL).
-    await().atMost(1, SECONDS).until(".small").with("name").equalTo("name").isPresent().
+    await().atMost(1, SECONDS).until(".fluent").with("name").equalTo("name").isPresent().
     $("input").first().isEnabled();
 ```
 
@@ -1162,7 +1144,7 @@ switchToDefault();
 
 To switch to the iframe selected:
 ```java
-switchTo(findFirst("iframe#frameid"));
+switchTo($("iframe#frameid"));
 ```
 
 ##Alert
@@ -1246,13 +1228,13 @@ goTo("http://mywebpage/");
 $("#firstName").fill().with("toto");
 $("#create-button").click();
 assertThat(title()).isEqualTo("Hello toto");
-assertThat($(myCssSelector)).hasText("present text");
-assertThat($(myCssSelector)).hasNotText("not present text");
-assertThat($(myCssSelecto1)).hasSize(7);
-assertThat($(myCssSelecto2)).hasSize().lessThan(5);
-assertThat($(myCssSelecto2)).hasSize().lessThanOrEqualTo(5);
-assertThat($(myCssSelecto3)).hasSize().greaterThan(2);
-assertThat($(myCssSelecto3)).hasSize().greaterThanOrEqualTo(2);
+assertThat($(".fluent")).hasText("present text");
+assertThat($(".fluent")).hasNotText("not present text");
+assertThat($(".another")).hasSize(7);
+assertThat($(".another2")).hasSize().lessThan(5);
+assertThat($(".another2")).hasSize().lessThanOrEqualTo(5);
+assertThat($(".another3")).hasSize().greaterThan(2);
+assertThat($(".another3")).hasSize().greaterThanOrEqualTo(2);
 ```
 
 ### Hamcrest
