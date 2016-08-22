@@ -674,7 +674,7 @@ If you want to wait until the page you want is the page that you are at, you can
 ```java
 await().atMost(5, TimeUnit.SECONDS).untilPage(myPage).isAt();
 ```
-This methods actually calls myPage.isAt(). If the isAt() method of the myPage object does not throw any exception during the time specified, then the framework will consider that the page is the one wanted.
+This methods actually calls `myPage.isAt()`. If the `isAt()` method of the `myPage` object does not throw any exception during the time specified, then the framework will consider that the page is the one wanted.
 
 You can override `await()` method in your own test class to define global settings on wait objects.
 ```java
@@ -777,7 +777,7 @@ For instance, to run your tests on [BrowserStack](https://browserstack.com)
     try {
       hubURL = new URL(HUB_URL);
     } catch(Exception e) {
-      System.out.println("Please provide proper crendentials. Error " + e);
+      System.out.println("Please provide proper credentials. Error " + e);
     }
 
     return new RemoteWebDriver(hubURL, caps);
@@ -785,7 +785,7 @@ For instance, to run your tests on [BrowserStack](https://browserstack.com)
 ```
 
 ### Base Url
-If you want to defined a default base url, just override the `getDefaultBaseUrl` method in your test. Every pages create with @Inject will also use this variable.
+If you want to defined a default base url, just override the `getDefaultBaseUrl` method in your test. Every page created with @Inject will also use this variable.
 If a base url is provided, the current url will be relative to that base url.
 
 ### TimeOut
@@ -824,8 +824,8 @@ The default is PER_METHOD.
 
 You will also be able to decide if you want to clean the cookies between two methods using ```@SharedDriver(deleteCookies=true)``` or ```@SharedDriver(deleteCookies=false)```
 
-Please keep in mind that this annotation tells how the drivers are created on runtime but it is not dealing with
-concurrency. If you need to make your tests parallel you should use dedicated libraries/extensions. You can use
+Please keep in mind that this annotation configures how drivers are created at runtime but it does not deal with
+concurrency. If you need to make your tests parallel you should use dedicated libraries/extensions. You can use the
 Surefire maven plugin for example.
 
 **Surefire JUnit example**
@@ -954,7 +954,7 @@ If you have any comments/remarks/bugs, please raise an issue on github:
 
 A SNAPSHOT version is automatically packaged after each commit on master branch.
 
-This version can be very instable and should be used for testing purpose only.
+This version can be very unstable and should be used for testing purpose only.
 
 To use it, you need to declare an additional repository in the ```pom.xml``` of your project.
 
