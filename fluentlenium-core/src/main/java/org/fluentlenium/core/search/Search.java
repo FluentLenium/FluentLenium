@@ -73,14 +73,6 @@ public class Search implements SearchControl<FluentWebElement> {
         };
     }
 
-    private FluentWebElement select(final String cssSelector) {
-        return select(By.cssSelector(cssSelector));
-    }
-
-    private FluentWebElement select(By locator) {
-        return Proxies.createComponent(locator(locator), FluentWebElement.class, instantiator);
-    }
-
     private FluentList<FluentWebElement> selectList(final String cssSelector) {
         return selectList(By.cssSelector(cssSelector));
     }

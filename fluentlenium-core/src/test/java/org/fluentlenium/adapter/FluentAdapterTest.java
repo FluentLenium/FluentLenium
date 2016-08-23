@@ -6,11 +6,16 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.internal.WrapsDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
 public class FluentAdapterTest {
+
+
 
     @Mock
     WebDriver webDriver;
@@ -45,7 +50,6 @@ public class FluentAdapterTest {
     public void registering_same_driver_multiple_time_doesnt_throw_exception() {
         FluentAdapter adapter = new FluentAdapter();
         adapter.initFluent(webDriver);
-        adapter.initFluent(webDriver);
 
         adapter.goTo("url");
         verify(webDriver).get("url");
@@ -56,6 +60,13 @@ public class FluentAdapterTest {
         FluentAdapter adapter = new FluentAdapter();
         adapter.initFluent(webDriver);
         adapter.initFluent(webDriver2);
+    }
+
+    @Test
+    public void registering_same_driver_doesnt_throw_exception() {
+        FluentAdapter adapter = new FluentAdapter();
+        adapter.initFluent(webDriver);
+        adapter.initFluent(webDriver);
     }
 
     @Test
@@ -77,53 +88,42 @@ public class FluentAdapterTest {
         assertThat(adapter.getHtmlDumpPath()).isEqualTo("dumpPath");
 
         assertThat(adapter.getBaseUrl()).isNull();
-
-        /*
-
-    public String getDefaultBaseUrl() {
-        return null;
     }
 
-    @Override
-    public void setScreenshotPath(String path) {
-        this.screenshotPath = path;
-    }
+    @Test
+    public void should_new_web_driver_create_new_instances() {
+        FluentAdapter adapter = new FluentAdapter() {
+            @Override
+            public String getWebDriver() {
+                return "htmlunit";
+            }
+        };
 
-    @Override
-    public void setHtmlDumpPath(String htmlDumpPath) {
-        this.htmlDumpPath = htmlDumpPath;
-    }
+        adapter.initFluent(this.webDriver);
 
-    @Override
-    public void setScreenshotMode(FluentDriverConfigurationReader.TriggerMode mode) {
-        this.screenshotMode = mode;
-    }
+        WebDriver webDriver = null;
+        WebDriver webDriver2 = null;
+        try {
+            webDriver = adapter.newWebDriver();
+            webDriver2 = adapter.newWebDriver();
 
-    @Override
-    public FluentDriverConfigurationReader.TriggerMode getScreenshotMode() {
-        return screenshotMode;
-    }
+            assertThat(webDriver).isNotSameAs(webDriver2);
+            assertThat(webDriver).isInstanceOf(EventFiringWebDriver.class);
+            assertThat(webDriver2).isInstanceOf(EventFiringWebDriver.class);
 
-    @Override
-    public String getScreenshotPath() {
-        return screenshotPath;
-    }
+            assertThat(((WrapsDriver)webDriver).getWrappedDriver()).isInstanceOf(HtmlUnitDriver.class);
+            assertThat(((WrapsDriver)webDriver).getWrappedDriver()).isInstanceOf(HtmlUnitDriver.class);
+        } finally {
+            if (webDriver != null) {
+                webDriver.quit();
+            }
+            if (webDriver2 != null) {
+                webDriver2.quit();
+            }
+        }
 
-    @Override
-    public String getHtmlDumpPath() {
-        return htmlDumpPath;
-    }
 
-    @Override
-    public void setHtmlDumpMode(FluentDriverConfigurationReader.TriggerMode htmlDumpMode) {
-        this.htmlDumpMode = htmlDumpMode;
-    }
 
-    @Override
-    public FluentDriverConfigurationReader.TriggerMode getHtmlDumpMode() {
-        return htmlDumpMode;
-    }
-    */
     }
 
 

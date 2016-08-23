@@ -102,9 +102,6 @@ public class ComponentHandler implements InvocationHandler {
         if (EQUALS.equals(method) && Proxies.getComponentHandler(args[0]) != null) {
             return equalsInternal(proxy, args[0]);
         }
-        if (HASH_CODE.equals(method)) {
-            return element.hashCode();
-        }
 
         if (!(element instanceof WrapsElement) && GET_WRAPPED_ELEMENT.equals(method)) {
             // Delegates to element getWrappedElement only if implements the interface.

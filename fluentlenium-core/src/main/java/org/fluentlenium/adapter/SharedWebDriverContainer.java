@@ -1,6 +1,8 @@
 package org.fluentlenium.adapter;
 
 import com.google.common.base.Supplier;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Delegate;
 import org.fluentlenium.adapter.util.SharedDriverStrategy;
 import org.fluentlenium.adapter.util.SharedWebDriverContainerShutdownHook;
@@ -20,31 +22,11 @@ import java.util.Objects;
 public enum SharedWebDriverContainer {
     INSTANCE;
 
+    @EqualsAndHashCode
+    @AllArgsConstructor
     private static class ClassAndTestName {
-
         private Class<?> testClass;
-
         private String testName;
-
-        public ClassAndTestName(Class<?> testClass, String testName) {
-            this.testClass = testClass;
-            this.testName = testName;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o)
-                return true;
-            if (o == null || getClass() != o.getClass())
-                return false;
-            ClassAndTestName that = (ClassAndTestName) o;
-            return Objects.equals(testClass, that.testClass) && Objects.equals(testName, that.testName);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(testClass, testName);
-        }
     }
 
     private final SharedWebDriverContainerShutdownHook shutdownHook;

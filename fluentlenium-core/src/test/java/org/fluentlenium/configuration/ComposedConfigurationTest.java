@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static org.mockito.Mockito.RETURNS_DEFAULTS;
 import static org.mockito.Mockito.mock;
@@ -74,58 +76,31 @@ public class ComposedConfigurationTest {
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DummyConfigurationFactory.class);
     }
 
-    private void testString(Function<ConfigurationProperties, String> getter, Function<String, Void> setter) {
-        Assertions.assertThat(getter.apply(composed)).isNull();
 
-        setter.apply("firefox");
-        Assertions.assertThat(getter.apply(composed)).isEqualTo("firefox");
+    private <T> void testImpl(Function<ConfigurationProperties, T> getter,
+                              Function<T, Void> setter, T defaultValue, T value1, T value2) {
+        if (defaultValue == null) {
+            Assertions.assertThat(getter.apply(composed)).isNull();
+        } else {
+            Assertions.assertThat(getter.apply(composed)).isEqualTo(defaultValue);
+        }
 
-        when(getter.apply(configurationProperties2)).thenReturn("chrome");
-        Assertions.assertThat(getter.apply(composed)).isEqualTo("firefox");
+        setter.apply(value1);
+        Assertions.assertThat(getter.apply(composed)).isEqualTo(value1);
 
-        setter.apply(null);
-        Assertions.assertThat(getter.apply(composed)).isEqualTo("chrome");
+        when(getter.apply(configurationProperties2)).thenReturn(value2);
+        Assertions.assertThat(getter.apply(composed)).isEqualTo(value1);
 
-        when(getter.apply(configurationProperties3)).thenReturn("firefox");
-        Assertions.assertThat(getter.apply(composed)).isEqualTo("chrome");
-    }
+        setter.apply(defaultValue);
+        Assertions.assertThat(getter.apply(composed)).isEqualTo(value2);
 
-    private void testLong(Function<ConfigurationProperties, Long> getter, Function<Long, Void> setter) {
-        Assertions.assertThat(getter.apply(composed)).isNull();
-
-        setter.apply(1000L);
-        Assertions.assertThat(getter.apply(composed)).isEqualTo(1000L);
-
-        when(getter.apply(configurationProperties2)).thenReturn(2000L);
-        Assertions.assertThat(getter.apply(composed)).isEqualTo(1000L);
-
-        setter.apply(null);
-        Assertions.assertThat(getter.apply(composed)).isEqualTo(2000L);
-
-        when(getter.apply(configurationProperties3)).thenReturn(1000L);
-        Assertions.assertThat(getter.apply(composed)).isEqualTo(2000L);
-    }
-
-
-    private void testTriggerMode(Function<ConfigurationProperties, ConfigurationProperties.TriggerMode> getter, Function<ConfigurationProperties.TriggerMode, Void> setter) {
-        Assertions.assertThat(getter.apply(composed)).isNull();
-
-        setter.apply(ConfigurationProperties.TriggerMode.MANUAL);
-        Assertions.assertThat(getter.apply(composed)).isEqualTo(ConfigurationProperties.TriggerMode.MANUAL);
-
-        when(getter.apply(configurationProperties2)).thenReturn(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
-        Assertions.assertThat(getter.apply(composed)).isEqualTo(ConfigurationProperties.TriggerMode.MANUAL);
-
-        setter.apply(null);
-        Assertions.assertThat(getter.apply(composed)).isEqualTo(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
-
-        when(getter.apply(configurationProperties3)).thenReturn(ConfigurationProperties.TriggerMode.MANUAL);
-        Assertions.assertThat(getter.apply(composed)).isEqualTo(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
+        when(getter.apply(configurationProperties3)).thenReturn(value1);
+        Assertions.assertThat(getter.apply(composed)).isEqualTo(value2);
     }
 
     @Test
     public void webDriver() {
-        testString(new Function<ConfigurationProperties, String>() {
+        testImpl(new Function<ConfigurationProperties, String>() {
             @Override
             public String apply(ConfigurationProperties input) {
                 return input.getWebDriver();
@@ -136,12 +111,12 @@ public class ComposedConfigurationTest {
                 composed.setWebDriver(input);
                 return null;
             }
-        });
+        }, null, "firefox", "chrome");
     }
 
     @Test
     public void baseUrl() {
-        testString(new Function<ConfigurationProperties, String>() {
+        testImpl(new Function<ConfigurationProperties, String>() {
             @Override
             public String apply(ConfigurationProperties input) {
                 return input.getBaseUrl();
@@ -152,12 +127,12 @@ public class ComposedConfigurationTest {
                 composed.setBaseUrl(input);
                 return null;
             }
-        });
+        }, null, "firefox", "chrome");
     }
 
     @Test
     public void pageLoadTimeout() {
-        testLong(new Function<ConfigurationProperties, Long>() {
+        testImpl(new Function<ConfigurationProperties, Long>() {
             @Override
             public Long apply(ConfigurationProperties input) {
                 return input.getPageLoadTimeout();
@@ -168,13 +143,13 @@ public class ComposedConfigurationTest {
                 composed.setPageLoadTimeout(input);
                 return null;
             }
-        });
+        }, null, 1000L, 2000L);
     }
 
 
     @Test
     public void implicitlyWait() {
-        testLong(new Function<ConfigurationProperties, Long>() {
+        testImpl(new Function<ConfigurationProperties, Long>() {
             @Override
             public Long apply(ConfigurationProperties input) {
                 return input.getImplicitlyWait();
@@ -185,12 +160,12 @@ public class ComposedConfigurationTest {
                 composed.setImplicitlyWait(input);
                 return null;
             }
-        });
+        }, null, 1000L, 2000L);
     }
 
     @Test
     public void scriptTimeout() {
-        testLong(new Function<ConfigurationProperties, Long>() {
+        testImpl(new Function<ConfigurationProperties, Long>() {
             @Override
             public Long apply(ConfigurationProperties input) {
                 return input.getScriptTimeout();
@@ -201,12 +176,12 @@ public class ComposedConfigurationTest {
                 composed.setScriptTimeout(input);
                 return null;
             }
-        });
+        }, null, 1000L, 2000L);
     }
 
     @Test
     public void screenshotPath() {
-        testString(new Function<ConfigurationProperties, String>() {
+        testImpl(new Function<ConfigurationProperties, String>() {
             @Override
             public String apply(ConfigurationProperties input) {
                 return input.getScreenshotPath();
@@ -217,12 +192,12 @@ public class ComposedConfigurationTest {
                 composed.setScreenshotPath(input);
                 return null;
             }
-        });
+        }, null, "firefox", "chrome");
     }
 
     @Test
     public void htmlDumpPath() {
-        testString(new Function<ConfigurationProperties, String>() {
+        testImpl(new Function<ConfigurationProperties, String>() {
             @Override
             public String apply(ConfigurationProperties input) {
                 return input.getHtmlDumpPath();
@@ -233,12 +208,12 @@ public class ComposedConfigurationTest {
                 composed.setHtmlDumpPath(input);
                 return null;
             }
-        });
+        }, null, "firefox", "chrome");
     }
 
     @Test
     public void screenshotMode() {
-        testTriggerMode(new Function<ConfigurationProperties, ConfigurationProperties.TriggerMode>() {
+        testImpl(new Function<ConfigurationProperties, ConfigurationProperties.TriggerMode>() {
             @Override
             public ConfigurationProperties.TriggerMode apply(ConfigurationProperties input) {
                 return input.getScreenshotMode();
@@ -249,12 +224,12 @@ public class ComposedConfigurationTest {
                 composed.setScreenshotMode(input);
                 return null;
             }
-        });
+        }, null, ConfigurationProperties.TriggerMode.MANUAL, ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
     }
 
     @Test
     public void htmlDumpMode() {
-        testTriggerMode(new Function<ConfigurationProperties, ConfigurationProperties.TriggerMode>() {
+        testImpl(new Function<ConfigurationProperties, ConfigurationProperties.TriggerMode>() {
             @Override
             public ConfigurationProperties.TriggerMode apply(ConfigurationProperties input) {
                 return input.getHtmlDumpMode();
@@ -265,6 +240,44 @@ public class ComposedConfigurationTest {
                 composed.setHtmlDumpMode(input);
                 return null;
             }
-        });
+        }, null, ConfigurationProperties.TriggerMode.MANUAL, ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
+    }
+
+    @Test
+    public void capabilities() {
+        DesiredCapabilities cap1 = new DesiredCapabilities();
+        cap1.setJavascriptEnabled(true);
+
+        DesiredCapabilities cap2 = new DesiredCapabilities();
+        cap2.setJavascriptEnabled(false);
+
+        testImpl(new Function<ConfigurationProperties, Capabilities>() {
+            @Override
+            public Capabilities apply(ConfigurationProperties input) {
+                return input.getCapabilities();
+            }
+        }, new Function<Capabilities, Void>() {
+            @Override
+            public Void apply(Capabilities input) {
+                composed.setCapabilities(input);
+                return null;
+            }
+        }, null, cap1, cap2);
+    }
+
+    @Test
+    public void eventsEnabled() {
+        testImpl(new Function<ConfigurationProperties, Boolean>() {
+            @Override
+            public Boolean apply(ConfigurationProperties input) {
+                return input.getEventsEnabled();
+            }
+        }, new Function<Boolean, Void>() {
+            @Override
+            public Void apply(Boolean input) {
+                composed.setEventsEnabled(input);
+                return null;
+            }
+        }, null, true, false);
     }
 }

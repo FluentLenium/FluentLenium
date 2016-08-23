@@ -26,24 +26,21 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
     }
 
     protected AbstractPropertiesConfiguration(String... prefixes) {
+        if (prefixes.length == 0) throw new IllegalArgumentException("Prefixes should be defined");
         this.prefixes = prefixes;
     }
 
     protected abstract String getPropertyImpl(String propertyName);
 
     private String getProperty(String propertyName) {
-        if ((prefixes.length) > 0) {
-            for (String prefix : prefixes) {
-                String property = getPropertyImpl(prefix + propertyName);
-                if (property != null) {
-                    return property;
-                }
+        for (String prefix : prefixes) {
+            String property = getPropertyImpl(prefix + propertyName);
+            if (property != null) {
+                return property;
             }
-            return null;
-        } else {
-            return getPropertyImpl(propertyName);
         }
-    }
+        return null;
+}
 
     private boolean isValidProperty(String property) {
         if (Strings.isNullOrEmpty(property) || "null".equalsIgnoreCase(property)) return false;

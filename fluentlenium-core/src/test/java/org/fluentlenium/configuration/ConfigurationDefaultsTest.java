@@ -25,9 +25,6 @@ public class ConfigurationDefaultsTest {
                 case "webDriver":
                     Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo("firefox");
                     break;
-                case "configurationFactory":
-                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isSameAs(DefaultConfigurationFactory.class);
-                    break;
                 case "configurationDefaults":
                     Assertions.assertThat(readMethod.invoke(configurationDefaults)).isSameAs(ConfigurationDefaults.class);
                     break;
