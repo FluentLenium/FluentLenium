@@ -49,7 +49,7 @@ public abstract class ReflectionUtils {
         }
         final Class<?>[] classes = new Class[array.length];
         for (int i = 0; i < array.length; i++) {
-            classes[i] = array[i] == null ? null : array[i].getClass();
+            classes[i] = (array[i] == null) ? null : array[i].getClass();
         }
         return classes;
     }

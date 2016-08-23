@@ -8,22 +8,21 @@ import org.openqa.selenium.remote.JsonException;
 import org.openqa.selenium.remote.JsonToBeanConverter;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
  * Abstract properties configuration.
  */
 public abstract class AbstractPropertiesConfiguration implements ConfigurationProperties {
+    public static final String PROPERTIES_PREFIX = "fluentlenium.";
+
     private final String[] prefixes;
 
     private final JsonToBeanConverter jsonConverter = new JsonToBeanConverter();
 
     protected AbstractPropertiesConfiguration() {
-        this("fluentlenium.");
+        this(PROPERTIES_PREFIX);
     }
 
     protected AbstractPropertiesConfiguration(String... prefixes) {
