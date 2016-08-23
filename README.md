@@ -758,7 +758,8 @@ FluentLenium can be configured in many ways through configuration properties.
 
     Default value: ```firefox```.
     
-    Possible values are ```firefox```, ```chrome```, ```ie``` and ```htmlunit```, or any class name implementing ```WebDriver```.
+    Possible values are ```firefox```, ```marionette```, ```chrome```, ```ie```, ```htmlunit```, ```safari```, 
+    ```phantomjs```, or any class name implementing ```WebDriver```.
 
   - **capabilities**
 

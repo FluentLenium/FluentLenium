@@ -9,6 +9,12 @@ public class DefaultWebDriverFactories {
         }
     }
 
+    public static class MarionetteWebDriverFactory extends ReflectiveWebDriverFactory {
+        public MarionetteWebDriverFactory() {
+            super("marionette", "org.openqa.selenium.firefox.MarionetteDriver");
+        }
+    }
+
     public static class ChromeWebDriverFactory extends ReflectiveWebDriverFactory {
         public ChromeWebDriverFactory() {
             super("chrome", "org.openqa.selenium.chrome.ChromeDriver");
@@ -31,6 +37,18 @@ public class DefaultWebDriverFactories {
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
             desiredCapabilities.setJavascriptEnabled(true);
             return desiredCapabilities;
+        }
+    }
+
+    public static class SafaryWebDriverFactory extends ReflectiveWebDriverFactory {
+        public SafaryWebDriverFactory() {
+            super("safari", "org.openqa.selenium.safari.SafariDriver");
+        }
+    }
+
+    public static class PhantomJSWebDriverFactory extends ReflectiveWebDriverFactory {
+        public PhantomJSWebDriverFactory() {
+            super("phantomjs", "org.openqa.selenium.phantomjs.PhantomJSDriver");
         }
     }
 
