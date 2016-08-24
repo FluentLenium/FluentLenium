@@ -1,18 +1,18 @@
 package org.fluentlenium.core.search;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
+import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterPredicate;
+import org.fluentlenium.core.proxy.Proxies;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,61 +20,65 @@ import java.util.List;
 
 public class Search implements SearchControl<FluentWebElement> {
     private final SearchContext searchContext;
-    private final WebDriver driver;
+    private final ComponentInstantiator instantiator;
 
-    public Search(WebDriver driver) {
-        this.searchContext = driver;
-        this.driver = driver;
-    }
-
-    public Search(WebDriver driver, SearchContext context) {
+    public Search(SearchContext context, ComponentInstantiator instantiator) {
         this.searchContext = context;
-        this.driver = driver;
+        this.instantiator = instantiator;
     }
 
     /**
      * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
      *
-     * @param name    elements name to find
+     * @param selector    elements name to find
      * @param filters filters set
      * @return fluent list of fluent web elements
      */
     @Override
-    public FluentList<FluentWebElement> find(String name, final Filter... filters) {
-        StringBuilder sb = new StringBuilder(name);
+    public FluentList<FluentWebElement> find(String selector, final Filter... filters) {
+        StringBuilder sb = new StringBuilder(selector);
         List<Filter> postFilterSelector = new ArrayList<Filter>();
         if (filters != null && filters.length > 0) {
-            for (Filter selector : filters) {
-                if (selector.isPreFilter()) {
-                    sb.append(selector.toString());
+            for (Filter filter : filters) {
+                if (filter.isPreFilter()) {
+                    sb.append(filter.toString());
                 } else {
-                    postFilterSelector.add(selector);
+                    postFilterSelector.add(filter);
                 }
             }
         }
-        Collection<FluentWebElement> postFiltered = select(sb.toString());
-        for (Filter selector : postFilterSelector) {
-            postFiltered = Collections2.filter(postFiltered, new FilterPredicate(selector));
+        FluentList<FluentWebElement> select = selectList(sb.toString());
+        if (postFilterSelector.size() == 0) return select;
+
+        Collection<FluentWebElement> postFiltered = new ArrayList<>(select);
+        for (Filter filter : postFilterSelector) {
+            postFiltered = Collections2.filter(select, new FilterPredicate(filter));
         }
 
-        return new FluentListImpl<FluentWebElement>(postFiltered);
+        return new FluentListImpl<>(FluentWebElement.class, instantiator, postFiltered);
     }
 
-    private List<FluentWebElement> select(String cssSelector) {
-        return Lists.transform(searchContext.findElements(By.cssSelector(cssSelector)),
-                new Function<WebElement, FluentWebElement>() {
-                    public FluentWebElement apply(WebElement webElement) {
-                        return new FluentWebElement(webElement, driver);
-                    }
-                });
-    }
 
-    private List<FluentWebElement> select(By locator) {
-        return Lists.transform(searchContext.findElements(locator), new Function<WebElement, FluentWebElement>() {
-            public FluentWebElement apply(WebElement webElement) {
-                return new FluentWebElement(webElement, driver);
+    private ElementLocator locator(final By by) {
+        return new ElementLocator() {
+            @Override
+            public WebElement findElement() {
+                return searchContext.findElement(by);
             }
-        });
+
+            @Override
+            public List<WebElement> findElements() {
+                return searchContext.findElements(by);
+            }
+        };
+    }
+
+    private FluentList<FluentWebElement> selectList(final String cssSelector) {
+        return selectList(By.cssSelector(cssSelector));
+    }
+
+    private FluentList<FluentWebElement> selectList(By locator) {
+        return Proxies.createFluentList(locator(locator), FluentWebElement.class, instantiator);
     }
 
     /**
@@ -101,13 +105,7 @@ public class Search implements SearchControl<FluentWebElement> {
      */
     @Override
     public FluentWebElement find(String selector, Integer number, final Filter... filters) {
-        List<FluentWebElement> listFiltered = find(selector, filters);
-        if (number >= listFiltered.size()) {
-            throw new NoSuchElementException(
-                    "No such element with position: " + number + ". Number of elements available: " + listFiltered
-                            .size() + ". Selector: " + selector + ".");
-        }
-        return listFiltered.get(number);
+        return find(selector, filters).index(number);
     }
 
     /**
@@ -134,13 +132,13 @@ public class Search implements SearchControl<FluentWebElement> {
      */
     @Override
     public FluentList<FluentWebElement> find(By locator, final Filter... filters) {
-        List<FluentWebElement> preFiltered = select(locator);
+        FluentList<FluentWebElement> preFiltered = selectList(locator);
         Collection<FluentWebElement> postFiltered = preFiltered;
         for (Filter selector : filters) {
             postFiltered = Collections2.filter(postFiltered, new FilterPredicate(selector));
         }
 
-        return new FluentListImpl<>(postFiltered);
+        return new FluentListImpl<>(FluentWebElement.class, instantiator, postFiltered);
     }
 
     @Override
@@ -201,12 +199,7 @@ public class Search implements SearchControl<FluentWebElement> {
      */
     @Override
     public FluentWebElement findFirst(String selector, final Filter... filters) {
-        FluentList fluentList = find(selector, filters);
-        try {
-            return fluentList.first();
-        } catch (NoSuchElementException e) {
-            throw new NoSuchElementException("Could not find element matching selector: " + selector + ".", e);
-        }
+        return find(selector, filters).first();
     }
 
     /**
@@ -217,10 +210,7 @@ public class Search implements SearchControl<FluentWebElement> {
      */
     @Override
     public FluentWebElement findFirst(Filter... filters) {
-        if (filters == null || filters.length == 0) {
-            throw new IllegalArgumentException("cssSelector or filter is required");
-        }
-        return findFirst("*", filters);
+        return find(filters).first();
     }
 
     /**
@@ -232,7 +222,6 @@ public class Search implements SearchControl<FluentWebElement> {
      */
     @Override
     public FluentWebElement findFirst(By locator, final Filter... filters) {
-        FluentList<FluentWebElement> fluentList = find(locator, filters);
-        return fluentList.first();
+        return find(locator, filters).first();
     }
 }

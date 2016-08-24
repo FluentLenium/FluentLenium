@@ -62,9 +62,13 @@ public class FillSelectTest {
         reset(driver, search, element1, element2, element3, element4);
     }
 
+    public FluentWebElement el(WebElement element) {
+        return new FluentWebElement(element, null, null);
+    }
+    
     @Test
     public void testFillCss() {
-        FluentListImpl<FluentWebElement> list = new FluentListImpl<>(Arrays.asList(new FluentWebElement(element1), new FluentWebElement(element2), new FluentWebElement(element3), new FluentWebElement(element4)));
+        FluentListImpl<FluentWebElement> list = new FluentListImpl<>(Arrays.asList(el(element1), el(element2), el(element3), el(element4)));
         final FillSelect fillConstructor = new FillSelect(list);
 
         WebElement option1 = mock(WebElement.class);
@@ -98,7 +102,7 @@ public class FillSelectTest {
 
     @Test
     public void testFillList() {
-        FluentListImpl<FluentWebElement> list = new FluentListImpl<>(Arrays.asList(new FluentWebElement(element1), new FluentWebElement(element2), new FluentWebElement(element3), new FluentWebElement(element4)));
+        FluentListImpl<FluentWebElement> list = new FluentListImpl<>(Arrays.asList(el(element1), el(element2), el(element3), el(element4)));
         FillSelect fillConstructor = new FillSelect(list);
 
         WebElement option1 = mock(WebElement.class);
@@ -128,7 +132,7 @@ public class FillSelectTest {
 
     @Test
     public void testFillElement() {
-        FillSelect fillConstructor = new FillSelect(new FluentWebElement(element1));
+        FillSelect fillConstructor = new FillSelect(el(element1));
 
         WebElement option1 = mock(WebElement.class);
 

@@ -3,6 +3,7 @@ package org.fluentlenium.core.domain;
 import org.fluentlenium.core.action.FluentActions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.filter.Filter;
+import org.fluentlenium.core.proxy.FluentProxyState;
 import org.fluentlenium.core.search.SearchControl;
 import org.openqa.selenium.WebElement;
 
@@ -11,25 +12,28 @@ import java.util.List;
 /**
  *
  */
-public interface FluentList<E extends FluentWebElement> extends List<E>, FluentActions<FluentList<E>, E>, SearchControl<E> {
+public interface FluentList<E extends FluentWebElement> extends List<E>, FluentActions<FluentList<E>, E>, FluentProxyState<FluentList<E>>, SearchControl<E> {
 
     /**
      * Return the first element of the list
-     * If none, return NoSuchElementException
      *
      * @return FluentWebElement based element
-     * @throws org.openqa.selenium.NoSuchElementException when element not found
      */
     E first();
 
     /**
      * Return the last element of the list.
-     * If none, return NoSuchElementException
      *
      * @return last element
-     * @throws org.openqa.selenium.NoSuchElementException when element not found
      */
     E last();
+
+    /**
+     * Return the element at index of the list.
+     *
+     * @return element at index
+     */
+    E index(int index);
 
     /**
      * Creates a list of Selenium {@link WebElement} from this list

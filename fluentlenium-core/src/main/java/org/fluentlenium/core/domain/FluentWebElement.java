@@ -6,42 +6,43 @@ import org.fluentlenium.core.action.FillSelect;
 import org.fluentlenium.core.action.KeyboardElementActions;
 import org.fluentlenium.core.action.MouseElementActions;
 import org.fluentlenium.core.axes.Axes;
+import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.filter.Filter;
+import org.fluentlenium.core.proxy.FluentProxyState;
+import org.fluentlenium.core.proxy.Proxies;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchControl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.lang.reflect.Constructor;
 import java.util.Arrays;
 
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
-public class FluentWebElement implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>, SearchControl<FluentWebElement> {
-    private final WebElement webElement;
+public class FluentWebElement implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>, FluentProxyState<FluentWebElement>, SearchControl<FluentWebElement> {
+    private WebElement webElement;
     private final WebDriver driver;
+    private final ComponentInstantiator instantiator;
+
     private final Search search;
     private final Axes axes;
     private final MouseElementActions mouseActions;
     private final KeyboardElementActions keyboardActions;
     private final WebElementConditions conditions;
 
-    public FluentWebElement(WebElement webElement) {
-        this(webElement, webElement instanceof WrapsDriver ? ((WrapsDriver)webElement).getWrappedDriver() : null);
-    }
-
-    public FluentWebElement(WebElement webElement, WebDriver driver) {
+    public FluentWebElement(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
         this.webElement = webElement;
         this.driver = driver;
-        this.search = new Search(this.driver, webElement);
-        this.axes = new Axes(this.driver, webElement);
+        this.instantiator = instantiator;
+
+        this.search = new Search(webElement, this.instantiator);
+        this.axes = new Axes(webElement, this.instantiator);
         this.mouseActions = new MouseElementActions(this.driver, webElement);
         this.keyboardActions = new KeyboardElementActions(this.driver, webElement);
         this.conditions = new WebElementConditions(this);
@@ -55,6 +56,28 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
     public FluentWebElement click() {
         webElement.click();
         return this;
+    }
+
+    @Override
+    public boolean isPresent() {
+        return Proxies.isPresent(webElement);
+    }
+
+    @Override
+    public FluentWebElement now() {
+        Proxies.now(webElement);
+        return this;
+    }
+
+    @Override
+    public FluentWebElement reset() {
+        Proxies.reset(webElement);
+        return this;
+    }
+
+    @Override
+    public boolean isLoaded() {
+        return Proxies.isLoaded(webElement);
     }
 
     /**
@@ -96,13 +119,9 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
      * @return element as component.
      */
     public <T> T as(Class<T> componentClass) {
-        try {
-            Constructor<T> constructor = componentClass.getConstructor(WebElement.class);
-            return constructor.newInstance(getElement());
-        } catch (Exception e) {
-            throw new IllegalArgumentException(componentClass.getName()
-                    + " is not a valid component class. It should have a single WebElement parameter constructor.", e);
-        }
+        WebElement webElement = getElement();
+        this.webElement = new FailWebElement(); // Make sure this FluentWebElement won't be used anymore.
+        return instantiator.newComponent(componentClass, webElement);
     }
 
     /**
@@ -257,6 +276,9 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
      * @return web element
      */
     public WebElement getElement() {
+        if (webElement instanceof FailWebElement) {
+            ((FailWebElement)webElement).fail();
+        }
         return webElement;
     }
 
@@ -275,7 +297,7 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
     }
 
     public FluentList<FluentWebElement> asList() {
-        return new FluentListImpl<>(Arrays.asList(this));
+        return new FluentListImpl<>(FluentWebElement.class, instantiator, Arrays.asList(this));
     }
 
     @Override
@@ -332,8 +354,8 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
      * @param filters  filters set
      * @return fluent web element
      */
-    public FluentWebElement find(String selector, Integer number, Filter... filters) {
-        return search.find(selector, number, filters);
+    public FluentWebElement find(String selector, Integer index, Filter... filters) {
+        return search.find(selector, filters).index(index);
     }
 
     /**
@@ -344,17 +366,17 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
      * @return fluent web element
      */
     public FluentWebElement find(By locator, Integer index, Filter... filters) {
-        return search.find(locator, index, filters);
+        return search.find(locator, filters).index(index);
     }
 
     @Override
     public FluentWebElement $(String selector, Integer index, Filter... filters) {
-        return find(selector, index, filters);
+        return find(selector, filters).index(index);
     }
 
     @Override
     public FluentWebElement $(By locator, Integer index, Filter... filters) {
-        return find(locator, index, filters);
+        return find(locator, filters).index(index);
     }
 
     /**
@@ -366,12 +388,12 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
      */
     @Override
     public FluentWebElement find(Integer index, Filter... filters) {
-        return search.find(index, filters);
+        return search.find(filters).index(index);
     }
 
     @Override
     public FluentWebElement $(Integer index, Filter... filters) {
-        return find(index, filters);
+        return find(filters).index(index);
     }
 
     /**

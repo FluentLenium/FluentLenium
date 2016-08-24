@@ -4,6 +4,7 @@ import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.core.page.PageAnnotations;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 
 /**
  * Use the Page Object Pattern to have more resilient tests.
@@ -38,8 +39,8 @@ public abstract class FluentPage extends DefaultFluentContainer implements Fluen
         By by = pageAnnotations.buildBy();
         if (by != null) {
             try {
-                findFirst(by);
-            } catch (NoSuchElementException e) {
+                findFirst(by).now();
+            } catch (NoSuchElementException | StaleElementReferenceException e) {
                 throw new AssertionError("@FindBy element not found for page " + getClass().getName());
             }
         }

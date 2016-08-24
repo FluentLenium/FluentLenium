@@ -1,7 +1,8 @@
 package org.fluentlenium.core.domain;
 
 import org.assertj.core.api.ThrowableAssert;
-import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.components.ComponentException;
+import org.fluentlenium.core.components.ComponentsManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +46,8 @@ public class FluentWebElementTest {
 
     private FluentWebElement fluentElement;
 
+    private ComponentsManager componentsManager;
+
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
@@ -52,8 +55,9 @@ public class FluentWebElementTest {
         when(driver.getMouse()).thenReturn(mouse);
         when(driver.getKeyboard()).thenReturn(keyboard);
 
+        componentsManager = new ComponentsManager(driver);
 
-        fluentElement = new FluentWebElement(element, driver);
+        fluentElement = new FluentWebElement(element, driver, componentsManager);
     }
 
     @After
@@ -94,10 +98,37 @@ public class FluentWebElementTest {
     public void testAs() {
         Component as = fluentElement.as(Component.class);
         assertThat(as.getElement()).isSameAs(element);
+        assertThat(componentsManager.getComponent(element)).isSameAs(as);
+    }
+
+    @Test
+    public void testAsPreviousElementFails() {
+        Component as = fluentElement.as(Component.class);
+        assertThat(as.getElement()).isSameAs(element);
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                fluentElement.as(Component.class);
+            }
+        }).isExactlyInstanceOf(ComponentException.class);
+
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                fluentElement.isEnabled();
+            }
+        }).isExactlyInstanceOf(ComponentException.class);
+
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                fluentElement.getElement();
+            }
+        }).isExactlyInstanceOf(ComponentException.class);
     }
 
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = ComponentException.class)
     public void testAsInvalidClass() {
         fluentElement.as(InvalidComponent.class);
     }
@@ -265,21 +296,21 @@ public class FluentWebElementTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.findFirst(".other");
+                fluentElement.findFirst(".other").now();
             }
         }).isInstanceOf(NoSuchElementException.class);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.findFirst(By.cssSelector(".other"));
+                fluentElement.findFirst(By.cssSelector(".other")).isPresent();
             }
         }).isInstanceOf(NoSuchElementException.class);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.findFirst();
+                fluentElement.findFirst().now();
             }
         }).isInstanceOf(IllegalArgumentException.class);
     }

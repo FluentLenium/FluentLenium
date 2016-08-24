@@ -4,6 +4,8 @@ import org.assertj.core.api.Assertions;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentContainer;
 import org.fluentlenium.core.FluentControl;
+import org.fluentlenium.core.components.ComponentsManager;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -28,7 +30,7 @@ public class FluentInjectorContainerTest {
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
 
-        injector = new FluentInjector(fluentAdapter);
+        injector = new FluentInjector(fluentAdapter, new ComponentsManager(webDriver), new DefaultContainerInstanciator(fluentAdapter));
     }
 
     public static class ChildContainer {

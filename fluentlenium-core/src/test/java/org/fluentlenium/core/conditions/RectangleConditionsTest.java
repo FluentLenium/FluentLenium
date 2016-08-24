@@ -30,7 +30,7 @@ public class RectangleConditionsTest {
         MockitoAnnotations.initMocks(this);
         when(webElement.getRect()).thenReturn(rectangle);
 
-        fluentWebElement = new FluentWebElement(webElement);
+        fluentWebElement = new FluentWebElement(webElement, null, null);
         conditions = new WebElementConditions(fluentWebElement);
     }
 

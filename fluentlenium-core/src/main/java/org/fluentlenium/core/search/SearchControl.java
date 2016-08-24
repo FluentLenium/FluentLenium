@@ -54,12 +54,16 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param index    index of the desired element
      * @param filters  set of filters in the current context
      * @return element
+     * @deprecated use {@link #find(String, Filter...)} followed by {@link FluentList#index(int)} instead.
      */
+    @Deprecated
     E find(String selector, Integer index, Filter... filters);
 
     /**
      * @see #find(String, Integer, Filter...)
+     * @deprecated use {@link #find(String, Filter...)} followed by {@link FluentList#index(int)} instead.
      */
+    @Deprecated
     E $(String selector, Integer index, Filter... filters);
 
     /**
@@ -68,7 +72,9 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param index   index of element from obtained list
      * @param filters set of filters in the current context
      * @return element
+     * @deprecated use {@link #find(Filter...)} followed by {@link FluentList#index(int)} instead.
      */
+    @Deprecated
     E find(Integer index, Filter... filters);
 
     /**
@@ -77,7 +83,9 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param index   index of element from obtained list
      * @param filters set of filters in the current context
      * @return element
+     * @deprecated use {@link #find(Filter...)} followed by {@link FluentList#index(int)} instead.
      */
+    @Deprecated
     E $(Integer index, Filter... filters);
 
 
@@ -88,13 +96,18 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param index   index of element in the list
      * @param filters filters set
      * @return element
+     * @deprecated use {@link #find(By, Filter...)} followed by {@link FluentList#index(int)} instead.
      */
+    @Deprecated
     E find(By locator, Integer index, final Filter... filters);
 
 
     /**
      * @see #find(By, Integer, Filter...)
+     *
+     * @deprecated use {@link #find(By, Filter...)} followed by {@link FluentList#index(int)} instead.
      */
+    @Deprecated
     E $(By locator, Integer index, final Filter... filters);
 
     /**
@@ -103,7 +116,9 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param selector
      * @param filters
      * @return
+     *  @deprecated use {@link #find(String, Filter...)} followed by {@link FluentList#first()} instead.
      */
+    @Deprecated
     E findFirst(String selector, Filter... filters);
 
     /**
@@ -111,7 +126,9 @@ public interface SearchControl<E extends FluentWebElement> {
      *
      * @param filters
      * @return
+     * @deprecated use {@link #find( Filter...)} followed by {@link FluentList#first()} instead.
      */
+    @Deprecated
     E findFirst(Filter... filters);
 
     /**
@@ -120,6 +137,8 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param locator
      * @param filters
      * @return
+     * @deprecated use {@link #find(By, Filter...)} followed by {@link FluentList#first()} instead.
      */
+    @Deprecated
     E findFirst(By locator, final Filter... filters);
 }

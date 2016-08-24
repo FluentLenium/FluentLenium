@@ -1,5 +1,7 @@
 package org.fluentlenium.integration;
 
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
@@ -61,12 +63,12 @@ public class ActionOnSelectorTest extends LocalFluentCase {
     public void checkClickActionWrongSelector() {
         goTo(DEFAULT_URL);
         assertThat(title()).contains("Selenium");
-        try {
-            $("#BLUB").click();
-            org.junit.Assert.fail("NoSuchElementException should have been thrown!");
-        } catch (NoSuchElementException nsee) {
-            assertThat(nsee.getMessage()).startsWith("No Element found");
-        }
+        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                $("#BLUB").click();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class);
     }
 
     @Test

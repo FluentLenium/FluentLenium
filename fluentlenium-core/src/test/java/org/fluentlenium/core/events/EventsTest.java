@@ -1,6 +1,8 @@
 package org.fluentlenium.core.events;
 
 import org.assertj.core.api.ThrowableAssert;
+import org.fluentlenium.core.components.ComponentInstantiator;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.hamcrest.CustomMatcher;
 import org.junit.Before;
@@ -39,6 +41,8 @@ public class EventsTest {
 
     private EventFiringWebDriver eventDriver;
 
+    private ComponentInstantiator instantiator;
+
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
@@ -46,6 +50,7 @@ public class EventsTest {
         when(driver.navigate()).thenReturn(navigation);
 
         eventDriver = new EventFiringWebDriver(driver);
+        instantiator = new DefaultComponentInstantiator(driver);
     }
 
     @Test
@@ -216,7 +221,7 @@ public class EventsTest {
         verify(exceptionListener).on(isA(IllegalStateException.class), notNull(WebDriver.class));
 
         reset(exceptionListener);
-        IOUtils.closeQuietly(eventsRegistry);
+        eventsRegistry.close();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -233,13 +238,13 @@ public class EventsTest {
         EventListener listener = mock(EventListener.class);
         EventListener otherListener = mock(EventListener.class);
 
-        assertThat(new EventAdapter(listener)).isEqualTo(new EventAdapter(listener));
-        assertThat(new EventAdapter(listener).hashCode()).isEqualTo(new EventAdapter(listener).hashCode());
+        assertThat(new EventAdapter(listener, instantiator)).isEqualTo(new EventAdapter(listener, instantiator));
+        assertThat(new EventAdapter(listener, instantiator).hashCode()).isEqualTo(new EventAdapter(listener, instantiator).hashCode());
 
-        assertThat(new EventAdapter(listener)).isNotEqualTo(new EventAdapter(otherListener));
-        assertThat(new EventAdapter(listener)).isNotEqualTo("OtherType");
+        assertThat(new EventAdapter(listener, instantiator)).isNotEqualTo(new EventAdapter(otherListener, instantiator));
+        assertThat(new EventAdapter(listener, instantiator)).isNotEqualTo("OtherType");
 
-        EventAdapter instance = new EventAdapter(mock(EventListener.class));
+        EventAdapter instance = new EventAdapter(mock(EventListener.class), instantiator);
         assertThat(instance).isEqualTo(instance);
     }
 

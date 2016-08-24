@@ -1,7 +1,6 @@
 package org.fluentlenium.configuration;
 
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,8 +17,8 @@ public class ConfigurationFactoryProviderTest {
         }
     }
 
-    public static class FailingConfigurationFactory implements ConfigurationFactory {
-        public FailingConfigurationFactory() {
+    public static class FailingConstructorConfigurationFactory implements ConfigurationFactory {
+        public FailingConstructorConfigurationFactory() {
             throw new IllegalStateException("This must FAIL!");
         }
 
@@ -29,13 +28,30 @@ public class ConfigurationFactoryProviderTest {
         }
     }
 
+    public static class FailingConfigurationConfigurationFactory implements ConfigurationFactory {
+        public FailingConfigurationConfigurationFactory() {
+        }
+
+        @Override
+        public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
+            ProgrammaticConfiguration programmaticConfiguration = new ProgrammaticConfiguration();
+            programmaticConfiguration.setConfigurationDefaults(FailingConfigurationDefaults.class);
+            return programmaticConfiguration;
+        }
+    }
+
     @FluentConfiguration(configurationFactory = CustomConfigurationFactory.class)
     public static class CustomContainer {
 
     }
 
-    @FluentConfiguration(configurationFactory = FailingConfigurationFactory.class)
+    @FluentConfiguration(configurationFactory = FailingConstructorConfigurationFactory.class)
     public static class FailingContainer {
+
+    }
+
+    @FluentConfiguration(configurationFactory = FailingConfigurationConfigurationFactory.class)
+    public static class FailingConfigurationContainer {
 
     }
 
@@ -46,10 +62,25 @@ public class ConfigurationFactoryProviderTest {
         }
     }
 
+    private static class PrivateConfigurationDefaults extends ConfigurationDefaults {
+        private PrivateConfigurationDefaults() {}
+    }
+
+    public static class FailingConfigurationDefaults extends ConfigurationDefaults {
+        private FailingConfigurationDefaults() { throw new IllegalStateException("This must FAIL!");}
+    }
+
     @FluentConfiguration(configurationDefaults = CustomConfigurationDefaults.class)
     public static class CustomDefaultsContainer {
 
     }
+
+    @FluentConfiguration(configurationDefaults = PrivateConfigurationDefaults.class)
+    public static class PrivateDefaultsContainer {
+
+    }
+
+
 
     @Test
     public void testDefaultConfiguration() {
@@ -63,9 +94,20 @@ public class ConfigurationFactoryProviderTest {
         assertThat(configuration).isExactlyInstanceOf(ProgrammaticConfiguration.class);
     }
 
+    @Test
+    public void testPrivateCustomConfiguration() {
+        Configuration configuration = ConfigurationFactoryProvider.newConfiguration(PrivateDefaultsContainer.class);
+        assertThat(configuration).isNotNull();
+    }
+
     @Test(expected = ConfigurationException.class)
     public void testInvalidClassConfiguration() {
         ConfigurationFactoryProvider.newConfiguration(FailingContainer.class);
+    }
+
+    @Test(expected = ConfigurationException.class)
+    public void testInvalidConfigurationClassConfiguration() {
+        ConfigurationFactoryProvider.newConfiguration(FailingConfigurationContainer.class);
     }
 
     @Test

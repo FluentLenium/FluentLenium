@@ -25,8 +25,8 @@ public class EventsTest extends LocalFluentCase {
 
         $("button").click();
 
-        Mockito.verify(beforeListener, Mockito.times(1)).on(Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
-        Mockito.verify(afterListener, Mockito.times(1)).on(Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
+        Mockito.verify(beforeListener).on(Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
+        Mockito.verify(afterListener).on(Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
     }
 
     @Test
@@ -38,10 +38,10 @@ public class EventsTest extends LocalFluentCase {
         events().afterFindBy(afterListener);
         goTo(DEFAULT_URL);
 
-        findFirst("button");
+        findFirst("button").now();
 
-        Mockito.verify(beforeListener, Mockito.times(1)).on(Mockito.<By>anyObject(), Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
-        Mockito.verify(afterListener, Mockito.times(1)).on(Mockito.<By>anyObject(), Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
+        Mockito.verify(beforeListener).on(Mockito.<By>anyObject(), Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
+        Mockito.verify(afterListener).on(Mockito.<By>anyObject(), Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
     }
 
     @Test

@@ -44,6 +44,7 @@ public class FluentWaitRectangleMatcherTest {
 
         when(fluentWebElement.conditions()).thenReturn(new WebElementConditions(fluentWebElement));
         when(fluentWebElement.getElement()).thenReturn(element);
+        when(fluentWebElement.now()).thenReturn(fluentWebElement);
     }
 
     @After

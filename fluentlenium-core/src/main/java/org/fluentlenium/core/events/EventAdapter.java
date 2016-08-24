@@ -1,5 +1,6 @@
 package org.fluentlenium.core.events;
 
+import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,9 +10,11 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 class EventAdapter implements WebDriverEventListener {
 
     private final EventListener listener;
+    private final ComponentInstantiator instantiator;
 
-    public EventAdapter(final EventListener listener) {
+    public EventAdapter(final EventListener listener, ComponentInstantiator instantiator) {
         this.listener = listener;
+        this.instantiator = instantiator;
     }
 
     @Override
@@ -56,35 +59,35 @@ class EventAdapter implements WebDriverEventListener {
 
     @Override
     public void beforeFindBy(final By by, final WebElement element, final WebDriver driver) {
-        this.listener.beforeFindBy(by, element == null ? null : new FluentWebElement(element, driver),
+        this.listener.beforeFindBy(by, element == null ? null : instantiator.newComponent(FluentWebElement.class, element),
                 driver);
     }
 
     @Override
     public void afterFindBy(final By by, final WebElement element, final WebDriver driver) {
-        this.listener.afterFindBy(by, element == null ? null : new FluentWebElement(element, driver),
+        this.listener.afterFindBy(by, element == null ? null : instantiator.newComponent(FluentWebElement.class, element),
                 driver);
     }
 
     @Override
     public void beforeClickOn(final WebElement element, final WebDriver driver) {
-        this.listener.beforeClickOn(element == null ? null : new FluentWebElement(element, driver), driver);
+        this.listener.beforeClickOn(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
     }
 
     @Override
     public void afterClickOn(final WebElement element, final WebDriver driver) {
-        this.listener.afterClickOn(element == null ? null : new FluentWebElement(element, driver), driver);
+        this.listener.afterClickOn(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
     }
 
     @Override
     public void beforeChangeValueOf(final WebElement element, final WebDriver driver) {
-        this.listener.beforeChangeValueOf(element == null ? null : new FluentWebElement(element, driver),
+        this.listener.beforeChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element),
                 driver);
     }
 
     @Override
     public void afterChangeValueOf(final WebElement element, final WebDriver driver) {
-        this.listener.afterChangeValueOf(element == null ? null : new FluentWebElement(element, driver),
+        this.listener.afterChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element),
                 driver);
     }
 

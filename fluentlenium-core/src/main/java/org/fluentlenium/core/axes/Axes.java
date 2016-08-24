@@ -1,27 +1,30 @@
 package org.fluentlenium.core.axes;
 
+import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.proxy.Proxies;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Handles XPath axes for an element (http://www.w3schools.com/xsl/xpath_axes.asp)
  */
 public class Axes {
-
-    private final WebDriver driver;
     private final WebElement webElement;
+    private final ComponentInstantiator instantiator;
 
 
-    public Axes(WebDriver driver, WebElement element) {
-        this.driver = driver;
+    public Axes(WebElement element, ComponentInstantiator instantiator) {
         this.webElement = element;
+        this.instantiator = instantiator;
     }
 
 
@@ -31,18 +34,31 @@ public class Axes {
      * @return fluent web element
      */
     public FluentWebElement parent() {
-        WebElement parentRaw = this.webElement.findElement(By.xpath("parent::*"));
-        FluentWebElement parent = new FluentWebElement(parentRaw, driver);
-        return parent;
+        return Proxies.createComponent(new ElementLocator() {
+            @Override
+            public WebElement findElement() {
+                return Axes.this.webElement.findElement(By.xpath("parent::*"));
+            }
+
+            @Override
+            public List<WebElement> findElements() {
+                return Arrays.asList(findElement());
+            }
+        }, FluentWebElement.class, instantiator);
     }
 
-    protected FluentList<FluentWebElement> handleAxe(String axe) {
-        List<WebElement> ancestorsRaw = this.webElement.findElements(By.xpath(axe + "::*"));
-        List<FluentWebElement> elements = new ArrayList<FluentWebElement>();
-        for (WebElement ancestor : ancestorsRaw) {
-            elements.add(new FluentWebElement(ancestor, driver));
-        }
-        return new FluentListImpl<>(elements);
+    protected FluentList<FluentWebElement> handleAxe(final String axe) {
+        return Proxies.createFluentList(new ElementLocator() {
+            @Override
+            public WebElement findElement() {
+                return Axes.this.webElement.findElement(By.xpath(axe + "::*"));
+            }
+
+            @Override
+            public List<WebElement> findElements() {
+                return Axes.this.webElement.findElements(By.xpath(axe + "::*"));
+            }
+        }, FluentWebElement.class, instantiator);
     }
 
     /**

@@ -7,12 +7,19 @@ import org.openqa.selenium.WebDriver;
  * <p>
  * If you want to test concurrency, or if you need for any reason to not use JUnit nor TestNG, you may use this class.
  * <p>
- * You should call {@link #releaseFluent()} manually to close the underlying webdriver.
+ * You should call {@link #quit()} manually to close the underlying webdriver.
  */
 public class IsolatedTest extends FluentAdapter {
 
     public IsolatedTest() {
         initFluent(newWebDriver());
+    }
+
+    public void quit() {
+        if (getDriver() != null) {
+            getDriver().quit();
+        }
+        releaseFluent();
     }
 
     @Deprecated

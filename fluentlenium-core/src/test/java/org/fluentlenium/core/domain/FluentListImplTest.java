@@ -1,6 +1,8 @@
 package org.fluentlenium.core.domain;
 
 import org.assertj.core.api.ThrowableAssert;
+import org.fluentlenium.core.components.ComponentInstantiator;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.junit.After;
 import org.junit.Before;
@@ -86,7 +88,7 @@ public class FluentListImplTest {
         WebElement webElement2 = mock(WebElement.class);
         WebElement webElement3 = mock(WebElement.class);
 
-        FluentListImpl<FluentWebElement> list = FluentListImpl.fromElements(webElement1, webElement2, webElement3);
+        FluentListImpl<FluentWebElement> list = FluentListImpl.fromElements(new DefaultComponentInstantiator(driver), webElement1, webElement2, webElement3);
         assertThat(list.toElements()).containsExactly(webElement1, webElement2, webElement3);
     }
 
@@ -359,8 +361,8 @@ public class FluentListImplTest {
 
 
     private static class Component extends FluentWebElement {
-        public Component(WebElement element) {
-            super(element);
+        public Component(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
+            super(webElement, driver, instantiator);
         }
     }
 

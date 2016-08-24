@@ -2,11 +2,14 @@ package org.fluentlenium.core.wait;
 
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterType;
 import org.fluentlenium.core.search.Search;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,10 +65,14 @@ public class FluentWaitLocatorSelectorMatcher extends AbstractWaitElementListMat
     }
 
     protected FluentList<FluentWebElement> find() {
-        if (filters.size() > 0) {
-            return findWithFilter();
-        } else {
-            return search.find(locator);
+        try {
+            if (filters.size() > 0) {
+                return findWithFilter().now();
+            } else {
+                return search.find(locator).now();
+            }
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
+            return new FluentListImpl<>();
         }
     }
 

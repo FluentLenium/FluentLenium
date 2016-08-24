@@ -10,7 +10,7 @@ import org.openqa.selenium.Capabilities;
 public class ConfigurationDefaults implements ConfigurationProperties {
     @Override
     public Class<? extends ConfigurationFactory> getConfigurationFactory() {
-        return DefaultConfigurationFactory.class;
+        return null;
     }
 
     @Override

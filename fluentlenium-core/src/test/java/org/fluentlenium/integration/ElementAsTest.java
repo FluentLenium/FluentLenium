@@ -1,9 +1,13 @@
 package org.fluentlenium.integration;
 
+import org.fluentlenium.core.components.ComponentException;
+import org.fluentlenium.core.components.ComponentInstantiator;
+import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -12,11 +16,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ElementAsTest extends LocalFluentCase {
 
     public static class Component extends FluentWebElement {
-
-        public Component(WebElement webElement) {
-            super(webElement);
+        public Component(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
+            super(webElement, driver, instantiator);
         }
-
     }
 
     public static class ComponentNotAnElement {
@@ -35,8 +37,25 @@ public class ElementAsTest extends LocalFluentCase {
 
     public static class NotAComponent extends FluentWebElement {
         public NotAComponent(String invalidConstructorParam) {
-            super(null);
+            super(null, null, null);
         }
+    }
+
+    public static class FullConstructorComponent {
+
+        private final WebElement element;
+        private final ComponentInstantiator instantiator;
+        private final WebDriver driver;
+
+        public FullConstructorComponent(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
+            this.element = webElement;
+            this.driver = driver;
+            this.instantiator = instantiator;
+        }
+
+    }
+
+    public static class InvalidComponent {
     }
 
     @FindBy(css = "a.go-next")
@@ -55,10 +74,26 @@ public class ElementAsTest extends LocalFluentCase {
         assertThat(spans).isNotEmpty();
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = ComponentException.class)
     public void testAsNotAComponent() {
         goTo(DEFAULT_URL);
         findFirst("span").as(NotAComponent.class);
+    }
+
+    @Test(expected = ComponentException.class)
+    public void testAsDefaultConstructorComponent() {
+        goTo(DEFAULT_URL);
+        InvalidComponent span = findFirst("span").as(InvalidComponent.class);
+    }
+
+    @Test
+    public void testAsFullConstructorComponent() {
+        goTo(DEFAULT_URL);
+        FullConstructorComponent component = findFirst("span").as(FullConstructorComponent.class);
+
+        assertThat(component.driver).isSameAs(getDriver());
+        assertThat(component.element.getTagName()).isEqualTo("span");
+        assertThat(component.instantiator).isInstanceOf(ComponentsManager.class);
     }
 
     @Test

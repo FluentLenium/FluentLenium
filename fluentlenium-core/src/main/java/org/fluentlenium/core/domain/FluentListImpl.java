@@ -4,26 +4,32 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
+import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.AtLeastOneElementConditions;
 import org.fluentlenium.core.conditions.EachElementConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.filter.Filter;
+import org.fluentlenium.core.proxy.ListElementAccessor;
+import org.fluentlenium.core.proxy.Proxies;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
  */
 public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> implements FluentList<E> {
+    private Class<E> componentClass;
+    private ComponentInstantiator instantiator;
 
     public FluentListImpl() {
-        super();
     }
 
     public FluentListImpl(E... listFiltered) {
@@ -34,14 +40,32 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         super(listFiltered);
     }
 
+    public FluentListImpl(Class<E> componentClass, ComponentInstantiator instantiator) {
+        super();
+        this.componentClass = componentClass;
+        this.instantiator = instantiator;
+    }
+
+    public FluentListImpl(Class<E> componentClass, ComponentInstantiator instantiator, E... listFiltered) {
+        super(new ArrayList<E>(Arrays.asList(listFiltered)));
+        this.componentClass = componentClass;
+        this.instantiator = instantiator;
+    }
+
+    public FluentListImpl(Class<E> componentClass, ComponentInstantiator instantiator, Collection<E> listFiltered) {
+        super(listFiltered);
+        this.componentClass = componentClass;
+        this.instantiator = instantiator;
+    }
+
     /**
      * Creates a FluentList from array of Selenium {@link WebElement}
      *
      * @param elements array of Selenium elements
      * @return FluentList of FluentWebElement
      */
-    public static FluentListImpl<FluentWebElement> fromElements(WebElement... elements) {
-        return fromElements(Arrays.asList(elements));
+    public static FluentListImpl<FluentWebElement> fromElements(ComponentInstantiator instantiator, WebElement... elements) {
+        return fromElements(instantiator, Arrays.asList(elements));
     }
 
     /**
@@ -50,10 +74,10 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
      * @param elements iterable of Selenium elements
      * @return FluentList of FluentWebElement
      */
-    public static FluentListImpl<FluentWebElement> fromElements(Iterable<? extends WebElement> elements) {
-        FluentListImpl<FluentWebElement> fluentWebElements = new FluentListImpl<>();
+    public static FluentListImpl<FluentWebElement> fromElements(ComponentInstantiator instantiator, Iterable<? extends WebElement> elements) {
+        FluentListImpl<FluentWebElement> fluentWebElements = new FluentListImpl<>(FluentWebElement.class, instantiator);
         for (WebElement element : elements) {
-            fluentWebElements.add(new FluentWebElement(element));
+            fluentWebElements.add(instantiator.newComponent(FluentWebElement.class, element));
         }
         return fluentWebElements;
     }
@@ -69,25 +93,61 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     }
 
     @Override
+    @ListElementAccessor(first = true)
     public E first() {
         if (this.size() == 0) {
             throw new NoSuchElementException("Element not found");
         }
-        return this.get(0);
+        return get(0);
     }
 
     @Override
+    @ListElementAccessor(last = true)
     public E last() {
         if (this.size() == 0) {
             throw new NoSuchElementException("Element not found");
         }
-        return this.get(this.size() - 1);
+        return get(this.size() - 1);
+    }
+
+    @Override
+    @ListElementAccessor(index = true)
+    public E index(int index) {
+        if (this.size() <= index) {
+            throw new NoSuchElementException("Element not found");
+        }
+        return get(index);
+    }
+
+    @Override
+    public boolean isPresent() {
+        return Proxies.isPresent(this);
+    }
+
+    @Override
+    public FluentList<E> now() {
+        Proxies.now(this);
+        if (this.size() == 0) {
+            throw new NoSuchElementException("Element not found");
+        }
+        return this;
+    }
+
+    @Override
+    public FluentList<E> reset() {
+        Proxies.reset(this);
+        return this;
+    }
+
+    @Override
+    public boolean isLoaded() {
+        return Proxies.isLoaded(this);
     }
 
     @Override
     public FluentList click() {
         if (this.size() == 0) {
-            throw new NoSuchElementException("No Element found");
+            throw new NoSuchElementException("Element not found");
         }
 
         for (E fluentWebElement : this) {
@@ -101,7 +161,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     @Override
     public FluentList text(String... with) {
         if (this.size() == 0) {
-            throw new NoSuchElementException("No Element found");
+            throw new NoSuchElementException("Element not found");
         }
 
         boolean atMostOne = false;
@@ -133,7 +193,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     @Override
     public FluentList<E> clearAll() {
         if (this.size() == 0) {
-            throw new NoSuchElementException("No Element found");
+            throw new NoSuchElementException("Element no found");
         }
 
         for (E fluentWebElement : this) {
@@ -168,7 +228,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     @Override
     public FluentList<E> submit() {
         if (this.size() == 0) {
-            throw new NoSuchElementException("No Element found");
+            throw new NoSuchElementException("Element no found");
         }
 
         for (E fluentWebElement : this) {
@@ -324,7 +384,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         for (FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(selector, filters));
         }
-        return new FluentListImpl<E>(finds);
+        return new FluentListImpl<E>(componentClass, instantiator, finds);
     }
 
     @Override
@@ -333,7 +393,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         for (FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(locator, filters));
         }
-        return new FluentListImpl<E>(finds);
+        return new FluentListImpl<E>(componentClass, instantiator, finds);
     }
 
     @Override
@@ -342,7 +402,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         for (FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(filters));
         }
-        return new FluentListImpl<E>(finds);
+        return new FluentListImpl<E>(componentClass, instantiator, finds);
     }
 
     @Override
@@ -410,7 +470,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
      * @return fill constructor
      */
     public Fill fill() {
-        return new Fill((FluentList<E>)this);
+        return new Fill((FluentList<E>) this);
     }
 
     /**
@@ -431,7 +491,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
             elements.add(e.as(componentClass));
         }
 
-        return new FluentListImpl<>(elements);
+        return new FluentListImpl<>(componentClass, instantiator, elements);
     }
 }
 

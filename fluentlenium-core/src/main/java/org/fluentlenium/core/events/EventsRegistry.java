@@ -1,7 +1,9 @@
 package org.fluentlenium.core.events;
 
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.WebDriverEventListener;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -9,11 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class EventsRegistry implements Closeable {
+public class EventsRegistry {
 
     private final EventFiringWebDriver eventDriver;
 
     private final EventsSupport support;
+
+    private final DefaultComponentInstantiator instantiator;
 
     List<NavigateToListener> beforeNavigateTo = new ArrayList<NavigateToListener>();
 
@@ -56,21 +60,32 @@ public class EventsRegistry implements Closeable {
     public EventsRegistry(final EventFiringWebDriver driver) {
         this.eventDriver = driver;
         this.support = new EventsSupport(this);
+        this.instantiator = new DefaultComponentInstantiator(driver);
         this.register(this.support);
     }
 
-    protected EventsRegistry register(final EventListener eventListener) {
-        this.eventDriver.register(new EventAdapter(eventListener));
+    public EventsRegistry register(final WebDriverEventListener eventListener) {
+        this.eventDriver.register(eventListener);
         return this;
     }
 
-    protected EventsRegistry unregister(final EventListener eventListener) {
-        this.eventDriver.unregister(new EventAdapter(eventListener));
+    public EventsRegistry unregister(final WebDriverEventListener eventListener) {
+        this.eventDriver.unregister(eventListener);
         return this;
     }
 
-    @Override
-    public void close() throws IOException {
+
+    public EventsRegistry register(final EventListener eventListener) {
+        this.eventDriver.register(new EventAdapter(eventListener, instantiator));
+        return this;
+    }
+
+    public EventsRegistry unregister(final EventListener eventListener) {
+        this.eventDriver.unregister(new EventAdapter(eventListener, instantiator));
+        return this;
+    }
+
+    public void close() {
         this.unregister(this.support);
     }
 

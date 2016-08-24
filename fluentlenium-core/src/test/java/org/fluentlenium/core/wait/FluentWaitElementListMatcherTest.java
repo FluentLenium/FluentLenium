@@ -67,12 +67,15 @@ public class FluentWaitElementListMatcherTest {
 
         when(fluentWebElement1.conditions()).thenReturn(new WebElementConditions(fluentWebElement1));
         when(fluentWebElement1.getElement()).thenReturn(element1);
+        when(fluentWebElement1.now()).thenReturn(fluentWebElement1);
 
         when(fluentWebElement2.conditions()).thenReturn(new WebElementConditions(fluentWebElement2));
         when(fluentWebElement2.getElement()).thenReturn(element2);
+        when(fluentWebElement2.now()).thenReturn(fluentWebElement2);
 
         when(fluentWebElement3.conditions()).thenReturn(new WebElementConditions(fluentWebElement3));
         when(fluentWebElement3.getElement()).thenReturn(element3);
+        when(fluentWebElement3.now()).thenReturn(fluentWebElement3);
 
         fluentWebElements = Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3);
     }
@@ -113,8 +116,12 @@ public class FluentWaitElementListMatcherTest {
         reset(fluentWebElement1, fluentWebElement2, fluentWebElement3);
 
         when(fluentWebElement1.isEnabled()).thenReturn(true);
+        when(fluentWebElement1.now()).thenReturn(fluentWebElement1);
         when(fluentWebElement2.isEnabled()).thenReturn(true);
+        when(fluentWebElement2.now()).thenReturn(fluentWebElement2);
         when(fluentWebElement3.isEnabled()).thenReturn(true);
+        when(fluentWebElement3.now()).thenReturn(fluentWebElement3);
+
         matcher.isVerified(predicate);
 
         verify(fluentWebElement1, atLeastOnce()).isEnabled();
@@ -173,8 +180,12 @@ public class FluentWaitElementListMatcherTest {
         reset(fluentWebElement1, fluentWebElement2, fluentWebElement3);
 
         when(fluentWebElement1.isEnabled()).thenReturn(true);
+        when(fluentWebElement1.now()).thenReturn(fluentWebElement1);
         when(fluentWebElement2.isEnabled()).thenReturn(true);
+        when(fluentWebElement2.now()).thenReturn(fluentWebElement2);
         when(fluentWebElement3.isEnabled()).thenReturn(true);
+        when(fluentWebElement3.now()).thenReturn(fluentWebElement3);
+
         matcher.not().isVerified(predicate);
 
         verify(fluentWebElement1, atLeastOnce()).isEnabled();
@@ -341,9 +352,9 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void isPresent() {
-        when(fluentWebElement1.getTagName()).thenThrow(NoSuchElementException.class);
-        when(fluentWebElement2.getTagName()).thenThrow(NoSuchElementException.class);
-        when(fluentWebElement3.getTagName()).thenThrow(NoSuchElementException.class);
+        when(fluentWebElement1.now()).thenThrow(NoSuchElementException.class);
+        when(fluentWebElement2.now()).thenThrow(NoSuchElementException.class);
+        when(fluentWebElement3.now()).thenThrow(NoSuchElementException.class);
 
         final FluentWaitElementListMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
@@ -358,9 +369,9 @@ public class FluentWaitElementListMatcherTest {
         reset(fluentWebElement3);
         matcher.isPresent();
 
-        verify(fluentWebElement1, atLeastOnce()).getTagName();
-        verify(fluentWebElement2, atLeastOnce()).getTagName();
-        verify(fluentWebElement3, atLeastOnce()).getTagName();
+        verify(fluentWebElement1, atLeastOnce()).now();
+        verify(fluentWebElement2, atLeastOnce()).now();
+        verify(fluentWebElement3, atLeastOnce()).now();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -404,9 +415,9 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void proxyIsEnabled() {
-        when(fluentWebElement1.getTagName()).thenThrow(NoSuchElementException.class);
-        when(fluentWebElement2.getTagName()).thenThrow(NoSuchElementException.class);
-        when(fluentWebElement3.getTagName()).thenThrow(NoSuchElementException.class);
+        when(fluentWebElement1.now()).thenThrow(NoSuchElementException.class);
+        when(fluentWebElement2.now()).thenThrow(NoSuchElementException.class);
+        when(fluentWebElement3.now()).thenThrow(NoSuchElementException.class);
 
         final FluentWaitElementListMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {

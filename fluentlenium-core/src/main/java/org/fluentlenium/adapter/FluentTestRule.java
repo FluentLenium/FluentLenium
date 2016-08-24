@@ -20,8 +20,6 @@ class FluentTestRule implements TestRule {
                     starting(description);
                     base.evaluate();
                     succeeded(description);
-                } catch (@SuppressWarnings("deprecation") org.junit.internal.AssumptionViolatedException e) {
-                    skipped(e, description);
                 } catch (Throwable e) {
                     failed(e, description);
                     throw e;
@@ -42,26 +40,6 @@ class FluentTestRule implements TestRule {
      * Invoked when a test fails
      */
     protected void failed(Throwable e, Description description) {
-    }
-
-    /**
-     * Invoked when a test is skipped due to a failed assumption.
-     */
-    @SuppressWarnings("deprecation")
-    protected void skipped(AssumptionViolatedException e, Description description) {
-        // For backwards compatibility with JUnit 4.11 and earlier, call the legacy version
-        org.junit.internal.AssumptionViolatedException asInternalException = e;
-        skipped(asInternalException, description);
-    }
-
-    /**
-     * Invoked when a test is skipped due to a failed assumption.
-     *
-     * @deprecated use {@link #skipped(AssumptionViolatedException, Description)}
-     */
-    @Deprecated
-    protected void skipped(org.junit.internal.AssumptionViolatedException e,
-            Description description) {
     }
 
     /**

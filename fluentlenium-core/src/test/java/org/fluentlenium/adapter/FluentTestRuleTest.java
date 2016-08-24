@@ -74,19 +74,4 @@ public class FluentTestRuleTest {
         verify(testRule).failed(any(TestException.class), eq(description));
         verify(testRule).finished(description);
     }
-
-    @Test
-    public void when_throws_assumption_violated_test_is_skipped() throws Throwable {
-        final FluentTestRule testRule = spy(new FluentTestRule());
-
-        doThrow(AssumptionViolatedException.class).when(testRule).starting(description);
-
-        testRule.apply(base, description).evaluate();
-
-        verify(base, never()).evaluate();
-        verify(testRule).skipped(any(AssumptionViolatedException.class), eq(description));
-        verify(testRule, never()).succeeded(description);
-        verify(testRule, never()).failed(any(TestException.class), eq(description));
-        verify(testRule).finished(description);
-    }
 }
