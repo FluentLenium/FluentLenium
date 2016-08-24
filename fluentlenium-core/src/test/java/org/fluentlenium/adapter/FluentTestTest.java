@@ -2,9 +2,9 @@ package org.fluentlenium.adapter;
 
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.util.Files;
-import org.fluentlenium.adapter.util.DeleteCookies;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.configuration.FluentConfiguration;
+import org.fluentlenium.configuration.FluentConfiguration.BooleanValue;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
@@ -118,8 +118,7 @@ public class FluentTestTest {
         }
     }
 
-    @FluentConfiguration(driverLifecycle = DriverLifecycle.CLASS)
-    @DeleteCookies
+    @FluentConfiguration(driverLifecycle = DriverLifecycle.CLASS, deleteCookies = BooleanValue.TRUE)
     public static class ShouldDeleteCookiesTest extends FluentTest {
         @Override
         public WebDriver newWebDriver() {

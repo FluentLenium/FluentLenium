@@ -59,6 +59,11 @@ public @interface FluentConfiguration {
     ConfigurationProperties.DriverLifecycle driverLifecycle() default ConfigurationProperties.DriverLifecycle.DEFAULT;
 
     /**
+     * @see ConfigurationProperties#getDeleteCookies()
+     */
+    BooleanValue deleteCookies() default BooleanValue.DEFAULT;
+
+    /**
      * @see ConfigurationProperties#getBaseUrl()
      */
     String baseUrl() default "";

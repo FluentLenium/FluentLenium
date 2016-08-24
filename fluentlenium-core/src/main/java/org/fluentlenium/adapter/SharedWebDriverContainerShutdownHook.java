@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.util;
+package org.fluentlenium.adapter;
 
 import org.fluentlenium.adapter.SharedWebDriverContainer;
 

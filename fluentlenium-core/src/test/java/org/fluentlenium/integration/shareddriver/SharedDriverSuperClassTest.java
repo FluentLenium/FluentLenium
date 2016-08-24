@@ -1,8 +1,8 @@
 package org.fluentlenium.integration.shareddriver;
 
-import org.fluentlenium.adapter.util.DeleteCookies;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.configuration.FluentConfiguration;
+import org.fluentlenium.configuration.FluentConfiguration.BooleanValue;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -12,8 +12,7 @@ import org.openqa.selenium.Cookie;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
-@FluentConfiguration(driverLifecycle = DriverLifecycle.JVM)
-@DeleteCookies
+@FluentConfiguration(driverLifecycle = DriverLifecycle.JVM, deleteCookies = BooleanValue.TRUE)
 class SharedDriverSuperClass extends LocalFluentCase {
 }
 

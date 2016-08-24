@@ -2,8 +2,6 @@ package org.fluentlenium.adapter;
 
 import com.google.common.base.Supplier;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
-import org.fluentlenium.adapter.util.CookieStrategyReader;
-import org.fluentlenium.adapter.util.DefaultCookieStrategyReader;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
@@ -12,7 +10,6 @@ import java.util.List;
  * Generic Test Runner Adapter to FluentDriver.
  */
 public class FluentTestRunnerAdapter extends FluentAdapter {
-    private final CookieStrategyReader csr;
     private final SharedMutator sharedMutator;
 
     public FluentTestRunnerAdapter() {
@@ -20,20 +17,15 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     }
 
     public FluentTestRunnerAdapter(DriverContainer driverContainer) {
-        this(driverContainer, new DefaultCookieStrategyReader(), new DefaultSharedMutator());
+        this(driverContainer, new DefaultSharedMutator());
     }
 
-    public FluentTestRunnerAdapter(CookieStrategyReader cookieExtractor) {
-        this(new DefaultDriverContainer(), cookieExtractor, new DefaultSharedMutator());
+    public FluentTestRunnerAdapter(SharedMutator sharedMutator) {
+        this(new DefaultDriverContainer(), sharedMutator);
     }
 
-    public FluentTestRunnerAdapter(CookieStrategyReader cookieExtractor, SharedMutator sharedMutator) {
-        this(new DefaultDriverContainer(), cookieExtractor, sharedMutator);
-    }
-
-    public FluentTestRunnerAdapter(DriverContainer driverContainer, CookieStrategyReader cookieExtractor, SharedMutator sharedMutator) {
+    public FluentTestRunnerAdapter(DriverContainer driverContainer, SharedMutator sharedMutator) {
         super(driverContainer);
-        this.csr = cookieExtractor;
         this.sharedMutator = sharedMutator;
     }
 
@@ -123,7 +115,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
             if (sharedWebDriver != null) {
                 SharedWebDriverContainer.INSTANCE.quit(sharedWebDriver);
             }
-        } else if (csr.shouldDeleteCookies(testClass, testName)) {
+        } else if (getDeleteCookies() != null && getDeleteCookies()) {
             EffectiveParameters<?> sharedParameters = this.sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle);
 
             SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getDriver(sharedParameters.getTestClass(), sharedParameters.getTestName(), sharedParameters.getDriverLifecycle());

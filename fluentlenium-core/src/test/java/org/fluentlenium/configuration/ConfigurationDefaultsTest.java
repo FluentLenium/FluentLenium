@@ -32,6 +32,9 @@ public class ConfigurationDefaultsTest {
                 case "configurationDefaults":
                     Assertions.assertThat(readMethod.invoke(configurationDefaults)).isSameAs(ConfigurationDefaults.class);
                     break;
+                case "deleteCookies":
+                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(false);
+                    break;
                 case "eventsEnabled":
                     Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(true);
                     break;

@@ -870,6 +870,13 @@ FluentLenium can be configured in many ways through configuration properties.
     concurrency of your tests.
     
     Default value: ```METHOD```
+    
+  - **deleteCookies**
+
+    When using CLASS or JVM *driverLifecycle* configuration property, allow to delete cookies between each 
+    test.
+
+    Default value: ```false```.
 
   - **baseUrl**
   

@@ -4,7 +4,6 @@ import com.google.common.base.Supplier;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Delegate;
-import org.fluentlenium.adapter.util.SharedWebDriverContainerShutdownHook;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.openqa.selenium.WebDriver;
 

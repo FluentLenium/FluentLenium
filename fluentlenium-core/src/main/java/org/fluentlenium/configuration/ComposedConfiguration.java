@@ -67,6 +67,15 @@ public class ComposedConfiguration implements Configuration {
     }
 
     @Override
+    public Boolean getDeleteCookies() {
+        for (ConfigurationProperties configuration : configurations) {
+            Boolean deleteCookies = configuration.getDeleteCookies();
+            if (deleteCookies != null) return deleteCookies;
+        }
+        return null;
+    }
+
+    @Override
     public String getBaseUrl() {
         for (ConfigurationProperties configuration : configurations) {
             String baseUrl = configuration.getBaseUrl();

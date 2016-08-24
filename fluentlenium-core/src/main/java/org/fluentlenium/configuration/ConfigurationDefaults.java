@@ -34,6 +34,11 @@ public class ConfigurationDefaults implements ConfigurationProperties {
     }
 
     @Override
+    public Boolean getDeleteCookies() {
+        return false;
+    }
+
+    @Override
     public String getBaseUrl() {
         return null;
     }

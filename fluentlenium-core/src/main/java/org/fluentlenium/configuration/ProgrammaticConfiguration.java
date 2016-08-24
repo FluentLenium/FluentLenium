@@ -19,6 +19,8 @@ public class ProgrammaticConfiguration implements Configuration {
 
     private DriverLifecycle driverLifecycle;
 
+    private Boolean deleteCookies;
+
     private String baseUrl;
 
     private Boolean eventsEnabled;
@@ -65,6 +67,16 @@ public class ProgrammaticConfiguration implements Configuration {
     @Override
     public void setDriverLifecycle(DriverLifecycle driverLifecycle) {
         this.driverLifecycle = driverLifecycle;
+    }
+
+    @Override
+    public Boolean getDeleteCookies() {
+        return deleteCookies;
+    }
+
+    @Override
+    public void setDeleteCookies(Boolean deleteCookies) {
+        this.deleteCookies = deleteCookies;
     }
 
     @Override

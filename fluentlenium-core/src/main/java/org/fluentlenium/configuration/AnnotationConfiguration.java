@@ -117,6 +117,12 @@ public class AnnotationConfiguration implements ConfigurationProperties {
     }
 
     @Override
+    public Boolean getDeleteCookies() {
+        if (configuration == null) return null;
+        return configuration.deleteCookies().asBoolean();
+    }
+
+    @Override
     public String getBaseUrl() {
         if (configuration == null) return null;
         return getStringValue(configuration.baseUrl());

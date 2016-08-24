@@ -166,6 +166,18 @@ public interface ConfigurationProperties {
     DriverLifecycle getDriverLifecycle();
 
     /**
+     * <pre>deleteCookies</pre> property.
+     *
+     * When using CLASS or JVM <pre>driverLifecycle<pre> configuration property, allow to delete cookies between
+     * each test.
+     *
+     * Default value is false.
+     *
+     * @return deleteCookies property value.
+     */
+    Boolean getDeleteCookies();
+
+    /**
      * <pre>pageLoadTimeout</pre> property.
      *
      * Sets the amount of time to wait for a page load to complete before throwing an error.
