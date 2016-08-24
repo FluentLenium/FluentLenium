@@ -92,4 +92,9 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, Alternative
         }
         return new String[0];
     }
+
+    @Override
+    public int getPriority() {
+        return 0;
+    }
 }

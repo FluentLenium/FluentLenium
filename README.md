@@ -49,7 +49,6 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-@FluentConfiguration(webDriver = "htmlunit")
 public class DuckDuckGoTest extends FluentTest {
     @Test
     public void title_of_duck_duck_go_should_contain_search_query_name() {
@@ -843,10 +842,12 @@ FluentLenium can be configured in many ways through configuration properties.
   
     Sets the WebDriver type to use.
 
-    Default value: ```firefox```.
+    Default value: ```null```. 
+        
+    Possible values are ```firefox```, ```marionette```, ```chrome```, ```ie```, ```safari```, 
+    ```phantomjs```, ```htmlunit```, or any class name implementing ```WebDriver```.
     
-    Possible values are ```firefox```, ```marionette```, ```chrome```, ```ie```, ```htmlunit```, ```safari```, 
-    ```phantomjs```, or any class name implementing ```WebDriver```.
+    If not defined, FluentLenium will use the first value for which WebDriver is available in classpath.
 
   - **capabilities**
 

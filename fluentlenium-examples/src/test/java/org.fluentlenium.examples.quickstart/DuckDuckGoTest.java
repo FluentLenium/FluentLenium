@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-@FluentConfiguration(webDriver = "htmlunit")
 public class DuckDuckGoTest extends FluentTest {
     @Test
     public void title_of_duck_duck_go_should_contain_search_query_name() {

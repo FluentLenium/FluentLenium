@@ -1,5 +1,9 @@
 package org.fluentlenium.configuration;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import lombok.experimental.Delegate;
 import org.atteo.classindex.ClassIndex;
 import org.openqa.selenium.Capabilities;
@@ -7,7 +11,14 @@ import org.openqa.selenium.WebDriver;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,7 +51,32 @@ public enum WebDrivers {
             }
         }
 
-        private Map<String, WebDriverFactory> factories = new HashMap<>();
+        private Map<String, WebDriverFactory> factories = new LinkedHashMap<>();
+
+        public synchronized WebDriverFactory getDefault() {
+            List<WebDriverFactory> factories = new ArrayList<>(this.factories.values());
+            Collections.sort(factories, new Comparator<WebDriverFactory>() {
+                @Override
+                public int compare(WebDriverFactory o1, WebDriverFactory o2) {
+                    return -Integer.compare(o1.getPriority(), o2.getPriority());
+                }
+            });
+            List<WebDriverFactory> filteredFactories = new ArrayList<>();
+            for (WebDriverFactory factory : factories) {
+                if (factory instanceof ReflectiveWebDriverFactory) {
+                    if (((ReflectiveWebDriverFactory) factory).isAvailable()) {
+                        filteredFactories.add(factory);
+                    }
+                } else {
+                    filteredFactories.add(factory);
+                }
+            }
+            if (filteredFactories.size() == 0) {
+                throw new ConfigurationException("No WebDriverFactory is available. You need add least one supported " +
+                        "WebDriver in your classpath.");
+            }
+            return filteredFactories.get(0);
+        }
 
         /**
          * Get the {@link WebDriver} factory registered under the given name.
@@ -49,6 +85,7 @@ public enum WebDrivers {
          * @return factory of {@link WebDriver}
          */
         public synchronized WebDriverFactory get(String name) {
+            if (name == null) return getDefault();
             WebDriverFactory factory = factories.get(name);
             if (factory == null) {
                 ReflectiveWebDriverFactory reflectiveFactory = new ReflectiveWebDriverFactory(name, name);

@@ -23,9 +23,6 @@ public class ConfigurationDefaultsTest {
             Method readMethod = prop.getReadMethod();
             if (readMethod.getDeclaringClass() == Object.class) continue;
             switch (prop.getName()) {
-                case "webDriver":
-                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo("firefox");
-                    break;
                 case "driverLifecycle":
                     Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(DriverLifecycle.METHOD);
                     break;

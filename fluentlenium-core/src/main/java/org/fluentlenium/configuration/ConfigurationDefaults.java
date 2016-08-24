@@ -20,7 +20,7 @@ public class ConfigurationDefaults implements ConfigurationProperties {
 
     @Override
     public String getWebDriver() {
-        return "firefox";
+        return null;
     }
 
     @Override
