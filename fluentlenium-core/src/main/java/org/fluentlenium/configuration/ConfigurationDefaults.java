@@ -29,6 +29,11 @@ public class ConfigurationDefaults implements ConfigurationProperties {
     }
 
     @Override
+    public DriverLifecycle getDriverLifecycle() {
+        return DriverLifecycle.METHOD;
+    }
+
+    @Override
     public String getBaseUrl() {
         return null;
     }

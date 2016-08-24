@@ -87,6 +87,11 @@ public class AnnotationConfiguration implements ConfigurationProperties {
         return triggerMode;
     }
 
+    private DriverLifecycle getDriverLifecycleValue(DriverLifecycle driverLifecycle) {
+        if (driverLifecycle == DriverLifecycle.DEFAULT) return null;
+        return driverLifecycle;
+    }
+
     @Override
     public String getWebDriver() {
         if (configuration == null) return null;
@@ -103,6 +108,12 @@ public class AnnotationConfiguration implements ConfigurationProperties {
     public Class<? extends ConfigurationFactory> getConfigurationFactory() {
         if (configuration == null) return null;
         return getConfigurationFactoryClassValue(configuration.configurationFactory());
+    }
+
+    @Override
+    public DriverLifecycle getDriverLifecycle() {
+        if (configuration == null) return null;
+        return getDriverLifecycleValue(configuration.driverLifecycle());
     }
 
     @Override

@@ -72,6 +72,7 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
     private <T extends Enum<T>> T getEnumProperty(Class<T> enumClass, String propertyName) {
         String property = getProperty(propertyName);
         if (!isValidProperty(property)) return null;
+        if (propertyName.equalsIgnoreCase("DEFAULT")) return null;
         T enumValue = (T) Enum.valueOf(enumClass, property);
         return enumValue;
     }
@@ -132,6 +133,11 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
     @Override
     public Capabilities getCapabilities() {
         return getCapabilitiesProperty("capabilities");
+    }
+
+    @Override
+    public DriverLifecycle getDriverLifecycle() {
+        return getEnumProperty(DriverLifecycle.class, getStringProperty("driverLifecycle"));
     }
 
     @Override

@@ -4,14 +4,15 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
+import org.fluentlenium.configuration.ConfigurationProperties;
+import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.cucumber.adapter.FluentCucumberTest;
-import org.fluentlenium.cucumber.adapter.util.SharedDriver;
 import org.fluentlenium.cucumber.page.LocalPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-@SharedDriver(type = SharedDriver.SharedType.PER_SCENARIO)
+@FluentConfiguration(driverLifecycle = ConfigurationProperties.DriverLifecycle.CLASS)
 public class SimpleFeatureMultiStep1 extends FluentCucumberTest {
 
     @Page

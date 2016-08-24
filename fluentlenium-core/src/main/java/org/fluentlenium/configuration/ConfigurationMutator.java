@@ -35,6 +35,15 @@ public interface ConfigurationMutator {
     void setConfigurationFactory(Class<? extends ConfigurationFactory> configurationFactory);
 
     /**
+     * Sets the value of <pre>driverLifecycle</pre> property.
+     *
+     * @param driverLifecycle
+     * @see ConfigurationProperties#getDriverLifecycle()
+     */
+    void setDriverLifecycle(ConfigurationProperties.DriverLifecycle driverLifecycle);
+
+
+    /**
      * Sets the value of <pre>baseUrl</pre> property.
      *
      * @param baseUrl

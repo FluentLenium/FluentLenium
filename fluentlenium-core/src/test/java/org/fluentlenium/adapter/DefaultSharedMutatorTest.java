@@ -1,7 +1,8 @@
 package org.fluentlenium.adapter;
 
 import org.assertj.core.api.Assertions;
-import org.fluentlenium.adapter.util.SharedDriverStrategy;
+import org.fluentlenium.configuration.ConfigurationProperties;
+import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.junit.Test;
 
 public class DefaultSharedMutatorTest {
@@ -12,12 +13,12 @@ public class DefaultSharedMutatorTest {
 
         Class<?> testClass = Object.class;
         String testName = "test";
-        SharedDriverStrategy strategy = SharedDriverStrategy.PER_METHOD;
+        DriverLifecycle driverLifecycle = DriverLifecycle.METHOD;
 
-        SharedMutator.EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName, strategy);
+        SharedMutator.EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle);
 
         Assertions.assertThat(parameters.getTestClass()).isSameAs(testClass);
         Assertions.assertThat(parameters.getTestName()).isSameAs(testName);
-        Assertions.assertThat(parameters.getStrategy()).isSameAs(strategy);
+        Assertions.assertThat(parameters.getDriverLifecycle()).isSameAs(driverLifecycle);
     }
 }

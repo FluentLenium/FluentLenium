@@ -72,7 +72,39 @@ import org.openqa.selenium.WebDriver;
  */
 
 public interface ConfigurationProperties {
-    enum TriggerMode {AUTOMATIC_ON_FAIL, MANUAL, DEFAULT}
+    enum TriggerMode {
+        /**
+         * Take screenshot when the test fail.
+         */
+        AUTOMATIC_ON_FAIL,
+        /**
+         * Only take screenshot manually through API.
+         */
+        MANUAL,
+        /**
+         * Default value.
+         */
+        DEFAULT
+    }
+
+    enum DriverLifecycle {
+        /**
+         * WebDriver is created once, and same instance is used for each test class and method.
+         */
+        JVM,
+        /**
+         * WebDriver is created for each test class, and same instance is used for each test method in the class.
+         */
+        CLASS,
+        /**
+         * WebDriver is created for each test method, and this instance is used only for one test method.
+         */
+        METHOD,
+        /**
+         * Default value.
+         */
+        DEFAULT
+    }
 
     /**
      * <pre>webDriver</pre> property.
@@ -117,6 +149,21 @@ public interface ConfigurationProperties {
      * @return baseUrl property value
      */
     String getBaseUrl();
+
+    /**
+     * <pre>driverLifecycle</pre> property.
+     *
+     * Sets the lifecycle of the WebDriver. WebDriver is fully managed by FluentLenium, so you should never
+     * create or quit a WebDriver by yourself.
+     *
+     * Please keep in mind that this configures when drivers are created and exited at runtime, but it does not deal with
+     * concurrency of your tests.
+     *
+     * Default value is METHOD.
+     *
+     * @return driverLifecycle property value
+     */
+    DriverLifecycle getDriverLifecycle();
 
     /**
      * <pre>pageLoadTimeout</pre> property.

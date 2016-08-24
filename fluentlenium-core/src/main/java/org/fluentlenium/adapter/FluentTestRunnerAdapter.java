@@ -1,11 +1,9 @@
 package org.fluentlenium.adapter;
 
 import com.google.common.base.Supplier;
+import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.fluentlenium.adapter.util.CookieStrategyReader;
 import org.fluentlenium.adapter.util.DefaultCookieStrategyReader;
-import org.fluentlenium.adapter.util.DefaultSharedDriverStrategyReader;
-import org.fluentlenium.adapter.util.SharedDriverStrategy;
-import org.fluentlenium.adapter.util.SharedDriverStrategyReader;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
@@ -14,32 +12,27 @@ import java.util.List;
  * Generic Test Runner Adapter to FluentDriver.
  */
 public class FluentTestRunnerAdapter extends FluentAdapter {
-    private final SharedDriverStrategyReader sdsr;
-
     private final CookieStrategyReader csr;
-
     private final SharedMutator sharedMutator;
-    protected SharedMutator staticSharedMutator;
 
     public FluentTestRunnerAdapter() {
         this(new DefaultDriverContainer());
     }
 
     public FluentTestRunnerAdapter(DriverContainer driverContainer) {
-        this(driverContainer, new DefaultSharedDriverStrategyReader(), new DefaultCookieStrategyReader(), new DefaultSharedMutator());
+        this(driverContainer, new DefaultCookieStrategyReader(), new DefaultSharedMutator());
     }
 
-    public FluentTestRunnerAdapter(SharedDriverStrategyReader sharedDriverExtractor, CookieStrategyReader cookieExtractor) {
-        this(new DefaultDriverContainer(), sharedDriverExtractor, cookieExtractor, new DefaultSharedMutator());
+    public FluentTestRunnerAdapter(CookieStrategyReader cookieExtractor) {
+        this(new DefaultDriverContainer(), cookieExtractor, new DefaultSharedMutator());
     }
 
-    public FluentTestRunnerAdapter(SharedDriverStrategyReader sharedDriverExtractor, CookieStrategyReader cookieExtractor, SharedMutator sharedMutator) {
-        this(new DefaultDriverContainer(), sharedDriverExtractor, cookieExtractor, sharedMutator);
+    public FluentTestRunnerAdapter(CookieStrategyReader cookieExtractor, SharedMutator sharedMutator) {
+        this(new DefaultDriverContainer(), cookieExtractor, sharedMutator);
     }
 
-    public FluentTestRunnerAdapter(DriverContainer driverContainer, SharedDriverStrategyReader sharedDriverExtractor, CookieStrategyReader cookieExtractor, SharedMutator sharedMutator) {
+    public FluentTestRunnerAdapter(DriverContainer driverContainer, CookieStrategyReader cookieExtractor, SharedMutator sharedMutator) {
         super(driverContainer);
-        this.sdsr = sharedDriverExtractor;
         this.csr = cookieExtractor;
         this.sharedMutator = sharedMutator;
     }
@@ -76,16 +69,14 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testName  Test name
      */
     protected void starting(Class<?> testClass, String testName) {
-        SharedDriverStrategy strategy = sdsr.getSharedDriverStrategy(testClass, testName);
-
-        SharedMutator.EffectiveParameters<?> sharedParameters = this.sharedMutator.getEffectiveParameters(testClass, testName, strategy);
+        EffectiveParameters<?> sharedParameters = this.sharedMutator.getEffectiveParameters(testClass, testName, getDriverLifecycle());
 
         SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getOrCreateDriver(new Supplier<WebDriver>() {
             @Override
             public WebDriver get() {
                 return FluentTestRunnerAdapter.this.newWebDriver();
             }
-        }, sharedParameters.getTestClass(), sharedParameters.getTestName(), sharedParameters.getStrategy());
+        }, testClass, testName, sharedParameters.getDriverLifecycle());
 
         initFluent(sharedWebDriver.getDriver());
     }
@@ -123,19 +114,19 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testName  Test name
      */
     protected void finished(Class<?> testClass, String testName) {
-        SharedDriverStrategy strategy = sdsr.getSharedDriverStrategy(testClass, testName);
+        DriverLifecycle driverLifecycle = getDriverLifecycle();
 
-        if (strategy == SharedDriverStrategy.PER_METHOD) {
-            SharedMutator.EffectiveParameters<?> sharedParameters = this.sharedMutator.getEffectiveParameters(testClass, testName, strategy);
+        if (driverLifecycle == DriverLifecycle.METHOD) {
+            EffectiveParameters<?> sharedParameters = this.sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle);
 
-            SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getDriver(sharedParameters.getTestClass(), sharedParameters.getTestName(), sharedParameters.getStrategy());
+            SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getDriver(sharedParameters.getTestClass(), sharedParameters.getTestName(), sharedParameters.getDriverLifecycle());
             if (sharedWebDriver != null) {
                 SharedWebDriverContainer.INSTANCE.quit(sharedWebDriver);
             }
         } else if (csr.shouldDeleteCookies(testClass, testName)) {
-            SharedMutator.EffectiveParameters<?> sharedParameters = this.sharedMutator.getEffectiveParameters(testClass, testName, strategy);
+            EffectiveParameters<?> sharedParameters = this.sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle);
 
-            SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getDriver(sharedParameters.getTestClass(), sharedParameters.getTestName(), sharedParameters.getStrategy());
+            SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getDriver(sharedParameters.getTestClass(), sharedParameters.getTestName(), sharedParameters.getDriverLifecycle());
             if (sharedWebDriver != null) {
                 sharedWebDriver.getDriver().manage().deleteAllCookies();
             }

@@ -1,13 +1,15 @@
 package org.fluentlenium.integration.shareddriver;
 
-import org.fluentlenium.adapter.util.SharedDriver;
+import org.fluentlenium.configuration.ConfigurationProperties;
+import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
+import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
-@SharedDriver
+@FluentConfiguration(driverLifecycle = DriverLifecycle.JVM)
 public class SharedDriverOnce2 extends LocalFluentCase {
 
 

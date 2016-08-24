@@ -1,9 +1,9 @@
 package org.fluentlenium.cucumber.page;
 
 import org.assertj.core.api.Assertions;
-import org.fluentlenium.adapter.DefaultSharedMutator;
 import org.fluentlenium.adapter.SharedMutator;
-import org.fluentlenium.adapter.util.SharedDriverStrategy;
+import org.fluentlenium.configuration.ConfigurationProperties;
+import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.cucumber.adapter.FluentCucumberSharedMutator;
 import org.junit.Test;
 
@@ -14,12 +14,12 @@ public class FluentCucumberSharedMutatorTest {
 
         Class<?> testClass = Object.class;
         String testName = "test";
-        SharedDriverStrategy strategy = SharedDriverStrategy.PER_METHOD;
+        DriverLifecycle driverLifecycle = DriverLifecycle.METHOD;
 
-        SharedMutator.EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName, strategy);
+        SharedMutator.EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle);
 
         Assertions.assertThat(parameters.getTestClass()).isNull();
-        Assertions.assertThat(parameters.getTestName()).isSameAs(testName);
-        Assertions.assertThat(parameters.getStrategy()).isSameAs(strategy);
+        Assertions.assertThat(parameters.getTestName()).isEqualTo(testName);
+        Assertions.assertThat(parameters.getDriverLifecycle()).isEqualTo(DriverLifecycle.CLASS);
     }
 }

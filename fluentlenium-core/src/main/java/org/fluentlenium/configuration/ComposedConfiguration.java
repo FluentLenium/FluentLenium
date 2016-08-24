@@ -58,6 +58,15 @@ public class ComposedConfiguration implements Configuration {
     }
 
     @Override
+    public DriverLifecycle getDriverLifecycle() {
+        for (ConfigurationProperties configuration : configurations) {
+            DriverLifecycle driverLifecycle = configuration.getDriverLifecycle();
+            if (driverLifecycle != null) return driverLifecycle;
+        }
+        return null;
+    }
+
+    @Override
     public String getBaseUrl() {
         for (ConfigurationProperties configuration : configurations) {
             String baseUrl = configuration.getBaseUrl();

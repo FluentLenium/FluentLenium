@@ -3,7 +3,8 @@ package org.fluentlenium.adapter;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.util.Files;
 import org.fluentlenium.adapter.util.DeleteCookies;
-import org.fluentlenium.adapter.util.SharedDriver;
+import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
+import org.fluentlenium.configuration.FluentConfiguration;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
@@ -67,7 +68,7 @@ public class FluentTestTest {
         }
     }
 
-    @SharedDriver(SharedDriver.SharedType.PER_CLASS)
+    @FluentConfiguration(driverLifecycle = DriverLifecycle.CLASS)
     public static class InternalTestSharedClass extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
@@ -92,7 +93,7 @@ public class FluentTestTest {
         }
     }
 
-    @SharedDriver(SharedDriver.SharedType.ONCE)
+    @FluentConfiguration(driverLifecycle = DriverLifecycle.JVM)
     public static class InternalTestSharedOnce extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
@@ -117,7 +118,7 @@ public class FluentTestTest {
         }
     }
 
-    @SharedDriver(SharedDriver.SharedType.PER_CLASS)
+    @FluentConfiguration(driverLifecycle = DriverLifecycle.CLASS)
     @DeleteCookies
     public static class ShouldDeleteCookiesTest extends FluentTest {
         @Override

@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-import org.fluentlenium.adapter.util.SharedDriver;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
@@ -8,7 +7,6 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

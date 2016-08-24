@@ -1,6 +1,7 @@
 package org.fluentlenium.integration.shareddriver;
 
-import org.fluentlenium.adapter.util.SharedDriver;
+import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
+import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.integration.localtest.LocalFluentCase;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -9,7 +10,7 @@ import org.junit.runners.MethodSorters;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
-@SharedDriver(SharedDriver.SharedType.PER_CLASS)
+@FluentConfiguration(driverLifecycle = DriverLifecycle.CLASS)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SharedDriverPerClass1 extends LocalFluentCase {
 
