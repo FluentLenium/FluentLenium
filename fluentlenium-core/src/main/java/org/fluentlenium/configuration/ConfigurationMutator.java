@@ -1,8 +1,6 @@
 package org.fluentlenium.configuration;
 
-import org.fluentlenium.adapter.FluentAdapter;
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.WebDriver;
 
 /**
  * Mutation interface of Configuration Properties.
@@ -33,6 +31,23 @@ public interface ConfigurationMutator {
      * @see ConfigurationProperties#getConfigurationFactory()
      */
     void setConfigurationFactory(Class<? extends ConfigurationFactory> configurationFactory);
+
+    /**
+     * Sets the value of <pre>driverLifecycle</pre> property.
+     *
+     * @param driverLifecycle
+     * @see ConfigurationProperties#getDriverLifecycle()
+     */
+    void setDriverLifecycle(ConfigurationProperties.DriverLifecycle driverLifecycle);
+
+    /**
+     * Sets the value of <pre>deleteCookies</pre> property.
+     *
+     * @param deleteCookies
+     * @see ConfigurationProperties#getDeleteCookies()
+     */
+    void setDeleteCookies(Boolean deleteCookies);
+
 
     /**
      * Sets the value of <pre>baseUrl</pre> property.

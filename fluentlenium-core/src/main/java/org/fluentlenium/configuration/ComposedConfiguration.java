@@ -58,6 +58,24 @@ public class ComposedConfiguration implements Configuration {
     }
 
     @Override
+    public DriverLifecycle getDriverLifecycle() {
+        for (ConfigurationProperties configuration : configurations) {
+            DriverLifecycle driverLifecycle = configuration.getDriverLifecycle();
+            if (driverLifecycle != null) return driverLifecycle;
+        }
+        return null;
+    }
+
+    @Override
+    public Boolean getDeleteCookies() {
+        for (ConfigurationProperties configuration : configurations) {
+            Boolean deleteCookies = configuration.getDeleteCookies();
+            if (deleteCookies != null) return deleteCookies;
+        }
+        return null;
+    }
+
+    @Override
     public String getBaseUrl() {
         for (ConfigurationProperties configuration : configurations) {
             String baseUrl = configuration.getBaseUrl();

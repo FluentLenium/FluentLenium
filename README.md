@@ -854,6 +854,29 @@ FluentLenium can be configured in many ways through configuration properties.
      as a JSON Object string or as an URL pointing to a JSON Object.
 
      Default value: ```null```.
+     
+  - **driverLifecycle**
+  
+    Sets the lifecycle of the WebDriver. WebDriver is fully managed by FluentLenium, so you should never 
+    create or quit a WebDriver by yourself.
+    
+    Possible values are:
+    
+      - `JVM`: WebDriver is created once, and same instance is used for each test class and method.
+      - `CLASS`: WebDriver is created for each test class, and same instance is used for each test method in the class.
+      - `METHOD`: WebDriver is created for each test method, and this instance is used only for one test method.
+    
+    Please keep in mind that this configures when drivers are created and exited at runtime, but it does not deal with
+    concurrency of your tests.
+    
+    Default value: ```METHOD```
+    
+  - **deleteCookies**
+
+    When using CLASS or JVM *driverLifecycle* configuration property, allow to delete cookies between each 
+    test.
+
+    Default value: ```false```.
 
   - **baseUrl**
   
@@ -899,7 +922,7 @@ FluentLenium can be configured in many ways through configuration properties.
 
   - **screenshotMode**
 
-     Sets the trigger mode of screenshots. Can be ```ON_AUTOMATIC_ON_FAIL``` to take screenshot when the test fail 
+     Sets the trigger mode of screenshots. Can be ```AUTOMATIC_ON_FAIL``` to take screenshot when the test fail 
      or ```MANUAL```.
      
      Default value: ```null```.
@@ -1045,33 +1068,10 @@ enabled in the Java Compiler configuration.
 Instead of implementing a new ```WebDriverFactory``` class, you may also override ```newWebDriver()``` in the Test 
 class, but doing so will ignore any value defined in ```webDriver``` configuration property.
 
-### WebDriver Lifecycle
+### Run test concurrently
 
-WebDriver Lifecycle is fully by FluentLenium. 
-
-You should never create the WebDriver used in the test by yourself.
-
-Use the class annotation `@SharedDriver` and you will be able to define how the driver will be created:
-```java
-@SharedDriver(type = SharedDriver.SharedType.ONCE)
-``` 
-will allow you to use the same driver for every test annotate with that annotation (it can also be on a parent class) for all classes and methods.
-```java
-@SharedDriver(type = SharedDriver.SharedType.PER_CLASS)
-``` 
-will allow you to use the same driver for every test annotate with that annotation (it can also be on a parent class) for all methods on a same class.
-```java
-@SharedDriver(type = SharedDriver.SharedType.PER_METHOD)
-``` 
-will allow you to create a new driver for each method.
-
-The default is `PER_METHOD`.
-
-You will also be able to decide if you want to clean the cookies between two methods using `@SharedDriver(deleteCookies=true)` or `@SharedDriver(deleteCookies=false)`
-
-Please keep in mind that this annotation configures how drivers are created at runtime but it does not deal with
-concurrency. If you need to make your tests parallel you should use dedicated libraries/extensions. You can use the
-Surefire maven plugin for example.
+If you need to make your tests run concurrently to speed them up, you should use dedicated libraries/extensions. 
+You can use the Surefire maven plugin for example.
 
 **Surefire JUnit example**
 
@@ -1140,14 +1140,10 @@ Surefire maven plugin for example.
 TestNG gives you more flexibility in order to the concurrency level, test suites and having better control on executed
  scenarios.
 
-Both test frameworks are giving possibility to define the parallelism level of tests. It is possible when you have
-multiple execution/concurrency levels set in your tests to face driver sharing issues, so please use driver
-sharing set to **PER_METHOD** when your execution methods are mixed up.
+Both test frameworks are giving possibility to define the parallelism level of tests. 
 
-*Example failure*: might occur when you set the Surefire to per method and FluentLenium to PER_CLASS and you will end
-up with ghost webdriver instances which won't be stopped after tests execution. The good practice is to check the
-number of running process (chromedriver, firefox, etc.) before and after your tests run just to make sure the cleanup
- is working properly.
+It is possible when you have multiple execution/concurrency levels set in your tests to face driver sharing issues,
+so please use ```METHOD``` ```driverLifecycle``` configuration property when your execution methods are mixed up.
 
 ## Iframe
 If you want to switch the Selenium webDriver to an iframe (see this [Selenium FAQ](https://code.google.com/p/selenium/wiki/FrequentlyAskedQuestions#Q:_How_do_I_type_into_a_contentEditable_iframe?)),

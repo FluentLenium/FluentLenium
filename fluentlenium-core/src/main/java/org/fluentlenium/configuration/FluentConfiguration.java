@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import javax.annotation.processing.SupportedAnnotationTypes;
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -15,6 +16,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
+@Inherited
 public @interface FluentConfiguration {
     enum BooleanValue {
         TRUE(true),
@@ -53,6 +55,13 @@ public @interface FluentConfiguration {
      * @see ConfigurationProperties#getCapabilities()
      */
     String capabilities() default "";
+
+    ConfigurationProperties.DriverLifecycle driverLifecycle() default ConfigurationProperties.DriverLifecycle.DEFAULT;
+
+    /**
+     * @see ConfigurationProperties#getDeleteCookies()
+     */
+    BooleanValue deleteCookies() default BooleanValue.DEFAULT;
 
     /**
      * @see ConfigurationProperties#getBaseUrl()

@@ -79,7 +79,7 @@
                 </executions>
                 <configuration>
                     <includes>
-                        <include>**/BasicRunner.java</include>
+                        <include>**/integration/**/*</include>
                     </includes>
                 </configuration>
             </plugin>

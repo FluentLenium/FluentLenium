@@ -1,7 +1,7 @@
-package org.fluentlenium.cucumber.page;
+package org.fluentlenium.cucumber.integration.page;
 
 import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.integration.util.UrlUtil;
+import org.fluentlenium.cucumber.integration.utils.UrlUtil;
 
 public class LocalPage extends FluentPage {
 

@@ -1,6 +1,7 @@
 package org.fluentlenium.configuration;
 
 import org.assertj.core.api.Assertions;
+import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.junit.Test;
 
 import java.beans.IntrospectionException;
@@ -25,8 +26,14 @@ public class ConfigurationDefaultsTest {
                 case "webDriver":
                     Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo("firefox");
                     break;
+                case "driverLifecycle":
+                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(DriverLifecycle.METHOD);
+                    break;
                 case "configurationDefaults":
                     Assertions.assertThat(readMethod.invoke(configurationDefaults)).isSameAs(ConfigurationDefaults.class);
+                    break;
+                case "deleteCookies":
+                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(false);
                     break;
                 case "eventsEnabled":
                     Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(true);

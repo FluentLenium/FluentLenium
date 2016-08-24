@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter;
 
-import org.fluentlenium.adapter.util.SharedDriverStrategy;
+import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.internal.WrapsDriver;
 
@@ -15,14 +15,14 @@ public class SharedWebDriver implements WrapsDriver {
 
     private final String testName;
 
-    private final SharedDriverStrategy sharedDriverStrategy;
+    private final DriverLifecycle driverLifecycle;
 
     public SharedWebDriver(WebDriver driver, Class<?> testClass, String testName,
-                           SharedDriverStrategy sharedDriverStrategy) {
+                           DriverLifecycle driverLifecycle) {
         this.driver = driver;
         this.testClass = testClass;
         this.testName = testName;
-        this.sharedDriverStrategy = sharedDriverStrategy;
+        this.driverLifecycle = driverLifecycle;
     }
 
     @Override
@@ -42,14 +42,14 @@ public class SharedWebDriver implements WrapsDriver {
         return testName;
     }
 
-    public SharedDriverStrategy getSharedDriverStrategy() {
-        return sharedDriverStrategy;
+    public DriverLifecycle getDriverLifecycle() {
+        return driverLifecycle;
     }
 
     @Override
     public String toString() {
         return "SharedWebDriver{" + "driver=" + driver + ", testClass=" + testClass + ", testName='"
-                + testName + '\'' + ", sharedDriverStrategy=" + sharedDriverStrategy + '}';
+                + testName + '\'' + ", driverLifecycle=" + driverLifecycle + '}';
     }
 
 }
