@@ -4,7 +4,7 @@ import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FindByOfComponentTest extends LocalFluentCase {
+public class FindByOfComponentTest extends IntegrationFluentTest {
 
     @Page
     private PageIndex page;
@@ -101,7 +101,7 @@ public class FindByOfComponentTest extends LocalFluentCase {
 
         @Override
         public String getUrl() {
-            return LocalFluentCase.DEFAULT_URL;
+            return IntegrationFluentTest.DEFAULT_URL;
         }
 
         @Override

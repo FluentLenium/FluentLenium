@@ -3,13 +3,13 @@ package org.fluentlenium.integration;
 
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SearchTest extends LocalFluentCase {
+public class SearchTest extends IntegrationFluentTest {
 
     @Test
     public void checkSearchWorks() {

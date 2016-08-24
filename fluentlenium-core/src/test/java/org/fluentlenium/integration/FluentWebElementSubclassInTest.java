@@ -2,14 +2,14 @@ package org.fluentlenium.integration;
 
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FluentWebElementSubclassInTest extends LocalFluentCase {
+public class FluentWebElementSubclassInTest extends IntegrationFluentTest {
     ALink linkToPage2;
 
     public static class ALink extends FluentWebElement {
@@ -26,8 +26,8 @@ public class FluentWebElementSubclassInTest extends LocalFluentCase {
 
     @Test
     public void when_web_element_in_test_then_they_are_instanciated() {
-        goTo(LocalFluentCase.DEFAULT_URL);
+        goTo(IntegrationFluentTest.DEFAULT_URL);
         linkToPage2.clickIfDisplayed();
-        assertThat(url()).isEqualTo(LocalFluentCase.PAGE_2_URL);
+        assertThat(url()).isEqualTo(IntegrationFluentTest.PAGE_2_URL);
     }
 }

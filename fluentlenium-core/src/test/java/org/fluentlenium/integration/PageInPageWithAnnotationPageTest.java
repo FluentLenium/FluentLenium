@@ -1,7 +1,7 @@
 package org.fluentlenium.integration;
 
 import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  *
  */
-public class PageInPageWithAnnotationPageTest extends LocalFluentCase {
+public class PageInPageWithAnnotationPageTest extends IntegrationFluentTest {
 
     @Page
     private SubSubTestPage subTestPage;
@@ -17,7 +17,7 @@ public class PageInPageWithAnnotationPageTest extends LocalFluentCase {
 
     @Test
     public void pages_should_be_injected() {
-        TestPage testPage = createPage(SubSubTestPage.class);
+        TestPage testPage = newInstance(SubSubTestPage.class);
         assertThat(testPage).isNotNull();
         assertThat(testPage).isInstanceOf(TestPage.class);
         assertThat(testPage.includedPage).isNotNull();

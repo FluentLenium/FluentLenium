@@ -9,10 +9,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.apache.commons.io.IOUtils;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 
-public class HtmlDumpPathTest extends LocalFluentCase {
+public class HtmlDumpPathTest extends IntegrationFluentTest {
 
     private final Path tempDir;
 

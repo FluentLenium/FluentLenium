@@ -1,6 +1,6 @@
 package org.fluentlenium.examples.quickstart;
 
-import org.fluentlenium.adapter.FluentTest;
+import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.configuration.FluentConfiguration;
 import org.junit.Test;
 

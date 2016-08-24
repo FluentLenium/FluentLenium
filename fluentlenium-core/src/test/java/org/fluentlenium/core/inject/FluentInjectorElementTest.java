@@ -357,15 +357,6 @@ public class FluentInjectorElementTest {
     }
 
     @Test
-    public void testDeprecatedMethod() {
-        FluentInjector injectorSpy = spy(injector);
-
-        injectorSpy.createPage(Object.class);
-
-        verify(injectorSpy).newInstance(Object.class);
-    }
-
-    @Test
     public void testInjectArray() {
         Object container1 = new Object();
         Object container2 = new Object();

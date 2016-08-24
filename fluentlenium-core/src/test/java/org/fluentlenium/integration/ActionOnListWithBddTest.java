@@ -2,12 +2,12 @@ package org.fluentlenium.integration;
 
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ActionOnListWithBddTest extends LocalFluentCase {
+public class ActionOnListWithBddTest extends IntegrationFluentTest {
 
 
     @Test

@@ -4,7 +4,7 @@ package org.fluentlenium.integration;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import org.fluentlenium.core.script.FluentJavascript;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.with;
 
-public class JavascriptTest extends LocalFluentCase {
+public class JavascriptTest extends IntegrationFluentTest {
 
     @Before
     public void setup() {

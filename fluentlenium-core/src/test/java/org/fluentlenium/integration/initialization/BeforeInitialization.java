@@ -1,8 +1,8 @@
 package org.fluentlenium.integration.initialization;
 
-import org.fluentlenium.adapter.FluentTest;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.integration.util.adapter.FluentTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -17,8 +17,8 @@ public class BeforeInitialization extends FluentTest {
 
     @Before
     public void beforeTest() {
-        page2 = createPage(TestPrivatePageWithElement.class);
-        page = createPage(TestPrivatePage2.class);
+        page2 = newInstance(TestPrivatePageWithElement.class);
+        page = newInstance(TestPrivatePage2.class);
     }
 
     @Test
@@ -28,13 +28,13 @@ public class BeforeInitialization extends FluentTest {
 
     @Test
     public void test_internal_fluentwebelement_instantiate() {
-        TestPrivatePageWithElement page = createPage(TestPrivatePageWithElement.class);
+        TestPrivatePageWithElement page = newInstance(TestPrivatePageWithElement.class);
         assertThat(page.myElement).isNotNull();
     }
 
     @Test
     public void test_superclass_fluentwebelement_instantiate() {
-        TestPrivatePageWithElementSubclass page = createPage(TestPrivatePageWithElementSubclass.class);
+        TestPrivatePageWithElementSubclass page = newInstance(TestPrivatePageWithElementSubclass.class);
         assertThat(page.myElement).isNotNull();
     }
 

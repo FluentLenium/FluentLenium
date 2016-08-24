@@ -10,7 +10,7 @@ import org.fluentlenium.core.events.annotations.BeforeClickOn;
 import org.fluentlenium.core.events.annotations.BeforeFindBy;
 import org.fluentlenium.core.events.annotations.BeforeNavigate;
 import org.fluentlenium.core.events.annotations.BeforeNavigateRefresh;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
@@ -19,7 +19,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AnnotationsEventsTest extends LocalFluentCase {
+public class AnnotationsEventsTest extends IntegrationFluentTest {
 
     private List<WebElement> beforeClick = new ArrayList<>();
     private List<WebElement> afterClick = new ArrayList<>();

@@ -1,12 +1,12 @@
 package org.fluentlenium.integration;
 
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FluentabilityTest extends LocalFluentCase {
+public class FluentabilityTest extends IntegrationFluentTest {
 
     @Test
     public void checkIsEnabled() {

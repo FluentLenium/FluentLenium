@@ -5,7 +5,7 @@ import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +13,7 @@ import org.openqa.selenium.support.FindBy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ElementAsTest extends LocalFluentCase {
+public class ElementAsTest extends IntegrationFluentTest {
 
     public static class Component extends FluentWebElement {
         public Component(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {

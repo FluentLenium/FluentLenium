@@ -1,17 +1,17 @@
 package org.fluentlenium.integration;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.openqa.selenium.support.FindBy;
 
-public class PageTest extends LocalFluentCase {
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class PageTest extends IntegrationFluentTest {
 
     @Page
     PageAccueil page;
@@ -72,7 +72,7 @@ public class PageTest extends LocalFluentCase {
 
     @Test
     public void checkManuallyCreatedSupportInjection() {
-        Page4 page4 = createPage(Page4.class);
+        Page4 page4 = newInstance(Page4.class);
         assertThat(page4.getPageAccueil()).isNotNull();
         assertThat(page4.getPage5()).isNotNull();
         assertThat(page4.getPage5().getPageAccueil()).isNotNull();
@@ -88,7 +88,7 @@ class PageAccueil extends FluentPage {
 
     @Override
     public String getUrl() {
-        return LocalFluentCase.DEFAULT_URL;
+        return IntegrationFluentTest.DEFAULT_URL;
     }
 
     @Override
@@ -109,7 +109,7 @@ class Page2 extends FluentPage {
 
     @Override
     public String getUrl() {
-        return LocalFluentCase.PAGE_2_URL;
+        return IntegrationFluentTest.PAGE_2_URL;
     }
 
     @Override
@@ -135,7 +135,7 @@ class Page4 extends FluentPage {
     @Override
     public void initFluent(FluentControl control) {
         super.initFluent(control);
-        page5 = createPage(Page5.class);
+        page5 = newInstance(Page5.class);
     }
 
     public PageAccueil getPageAccueil() {

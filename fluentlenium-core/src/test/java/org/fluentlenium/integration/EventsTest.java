@@ -5,14 +5,13 @@ import org.fluentlenium.core.events.ElementListener;
 import org.fluentlenium.core.events.FindByListener;
 import org.fluentlenium.core.events.NavigateAllListener;
 import org.fluentlenium.core.events.NavigateListener;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-public class EventsTest extends LocalFluentCase {
+public class EventsTest extends IntegrationFluentTest {
 
     @Test
     public void clickOn() {

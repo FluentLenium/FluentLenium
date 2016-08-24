@@ -77,33 +77,6 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         return true;
     }
 
-    /**
-     *  Check if the FluentWait is above top screen border
-     *
-     * @return fluent
-     * @deprecated This function will be dropped in a later release. Use {@link #isVerified(Predicate)} instead.
-     */
-    @Deprecated
-    public void isAboveScreenOrInvisible() {
-        Predicate<FluentDriver> isAbove = new com.google.common.base.Predicate<FluentDriver>() {
-            public boolean apply(FluentDriver fluent) {
-                return Iterables.all(find(), isAboveScreenTopOrInvisible());
-            }
-        };
-        until(wait, isAbove, isAboveMessage(find().getIds()));
-    }
-
-    private Predicate<FluentWebElement> isAboveScreenTopOrInvisible() {
-        return new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement element) {
-                WebElement wrapped = element.getElement();
-                int bottomPosition = wrapped.getLocation().getY() + wrapped.getSize().getHeight();
-                return !element.isDisplayed() || bottomPosition <= 0;
-            }
-        };
-    }
-
     @Override
     public boolean hasAttribute(final String attribute, final String value) {
         Predicate<FluentDriver> hasAttribute = new com.google.common.base.Predicate<FluentDriver>() {

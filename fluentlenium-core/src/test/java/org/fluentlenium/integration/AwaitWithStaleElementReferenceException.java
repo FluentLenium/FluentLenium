@@ -2,7 +2,7 @@ package org.fluentlenium.integration;
 
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.FluentDriver;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -10,7 +10,7 @@ import org.openqa.selenium.TimeoutException;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
-public class AwaitWithStaleElementReferenceException extends LocalFluentCase {
+public class AwaitWithStaleElementReferenceException extends IntegrationFluentTest {
     @Before
     public void before() {
         goTo(DEFAULT_URL);

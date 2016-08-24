@@ -7,7 +7,7 @@ import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.TimeoutException;
@@ -19,7 +19,7 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
-public class FluentLeniumWaitElementTest extends LocalFluentCase {
+public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @Before
     public void before() {
         goTo(DEFAULT_URL);
@@ -100,11 +100,6 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
     @Test(expected = TimeoutException.class)
     public void awaitForElementXPositionElementNotFound() {
         await().until(notFoundElements).hasRectangle().withX(0);
-    }
-
-    @Test
-    public void awaitToBeAbove() {
-        await().until(unvisibleElements).isAboveScreenOrInvisible();
     }
 
     @Test
@@ -363,7 +358,7 @@ public class FluentLeniumWaitElementTest extends LocalFluentCase {
 
         @Override
         public String getUrl() {
-            return LocalFluentCase.JAVASCRIPT_URL;
+            return IntegrationFluentTest.JAVASCRIPT_URL;
         }
     }
 
