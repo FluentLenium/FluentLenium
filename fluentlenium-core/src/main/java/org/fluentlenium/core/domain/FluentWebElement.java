@@ -1,16 +1,21 @@
 package org.fluentlenium.core.domain;
 
-import org.fluentlenium.core.action.FluentActions;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
+import org.fluentlenium.core.action.FluentActions;
 import org.fluentlenium.core.action.KeyboardElementActions;
 import org.fluentlenium.core.action.MouseElementActions;
 import org.fluentlenium.core.axes.Axes;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.filter.Filter;
+import org.fluentlenium.core.hook.FluentHook;
+import org.fluentlenium.core.hook.DefaultHookChainBuilder;
+import org.fluentlenium.core.hook.HookChainBuilder;
+import org.fluentlenium.core.hook.HookControl;
+import org.fluentlenium.core.hook.HookDefinition;
 import org.fluentlenium.core.proxy.FluentProxyState;
-import org.fluentlenium.core.proxy.Proxies;
+import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchControl;
 import org.openqa.selenium.By;
@@ -20,12 +25,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
-public class FluentWebElement implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>, FluentProxyState<FluentWebElement>, SearchControl<FluentWebElement> {
+public class FluentWebElement implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>, FluentProxyState<FluentWebElement>, SearchControl<FluentWebElement>, HookControl<FluentWebElement> {
     private WebElement webElement;
     private final WebDriver driver;
     private final ComponentInstantiator instantiator;
@@ -36,16 +43,23 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
     private final KeyboardElementActions keyboardActions;
     private final WebElementConditions conditions;
 
+    private final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
+    private final HookChainBuilder hookChainBuilder;
+
     public FluentWebElement(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
         this.webElement = webElement;
         this.driver = driver;
         this.instantiator = instantiator;
 
-        this.search = new Search(webElement, this.instantiator);
-        this.axes = new Axes(webElement, this.instantiator);
+        this.hookChainBuilder = new DefaultHookChainBuilder(this.driver, this.instantiator);
+
+        this.search = new Search(webElement, this.instantiator, this.hookChainBuilder);
+        this.axes = new Axes(webElement, this.instantiator, this.hookChainBuilder);
         this.mouseActions = new MouseElementActions(this.driver, webElement);
         this.keyboardActions = new KeyboardElementActions(this.driver, webElement);
         this.conditions = new WebElementConditions(this);
+
+
     }
 
     /**
@@ -60,24 +74,24 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
 
     @Override
     public boolean isPresent() {
-        return Proxies.isPresent(webElement);
+        return LocatorProxies.isPresent(webElement);
     }
 
     @Override
     public FluentWebElement now() {
-        Proxies.now(webElement);
+        LocatorProxies.now(webElement);
         return this;
     }
 
     @Override
     public FluentWebElement reset() {
-        Proxies.reset(webElement);
+        LocatorProxies.reset(webElement);
         return this;
     }
 
     @Override
     public boolean isLoaded() {
-        return Proxies.isLoaded(webElement);
+        return LocatorProxies.isLoaded(webElement);
     }
 
     /**
@@ -277,7 +291,7 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
      */
     public WebElement getElement() {
         if (webElement instanceof FailWebElement) {
-            ((FailWebElement)webElement).fail();
+            ((FailWebElement) webElement).fail();
         }
         return webElement;
     }
@@ -297,7 +311,7 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
     }
 
     public FluentList<FluentWebElement> asList() {
-        return new FluentListImpl<>(FluentWebElement.class, instantiator, Arrays.asList(this));
+        return new FluentListImpl<>(FluentWebElement.class, instantiator, hookChainBuilder, Arrays.asList(this));
     }
 
     @Override
@@ -471,5 +485,26 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
     @Override
     public String toString() {
         return this.getElement().toString();
+    }
+
+    @Override
+    public FluentWebElement noHook() {
+        hookDefinitions.clear();
+        LocatorProxies.setHooks(hookChainBuilder, getElement(), hookDefinitions);
+        return this;
+    }
+
+    @Override
+    public <O, H extends FluentHook<O>> FluentWebElement withHook(Class<H> hook) {
+        hookDefinitions.add(new HookDefinition<>(hook));
+        LocatorProxies.setHooks(hookChainBuilder, getElement(), hookDefinitions);
+        return this;
+    }
+
+    @Override
+    public <O, H extends FluentHook<O>> FluentWebElement withHook(Class<H> hook, O options) {
+        hookDefinitions.add(new HookDefinition<>(hook, options));
+        LocatorProxies.setHooks(hookChainBuilder, getElement(), hookDefinitions);
+        return this;
     }
 }

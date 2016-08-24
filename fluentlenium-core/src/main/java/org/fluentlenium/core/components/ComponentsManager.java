@@ -2,7 +2,7 @@ package org.fluentlenium.core.components;
 
 import com.sun.jna.WeakIdentityHashMap;
 import org.fluentlenium.core.proxy.ProxyElementListener;
-import org.fluentlenium.core.proxy.Proxies;
+import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
@@ -81,13 +81,13 @@ public class ComponentsManager implements ComponentInstantiator, ComponentAccess
                     + " is not a valid component class. No valid constructor found (WebElement) or (WebElement, WebDriver)", e);
         }
         WebElement webElement = unwrapElement(element);
-        Proxies.addProxyListener(webElement, this);
+        LocatorProxies.addProxyListener(webElement, this);
         components.put(webElement, component);
         return component;
     }
 
     @Override
-    public void proxyElementSearch(WebElement proxy, ElementLocator locator) {
+    public void proxyElementSearch(Object proxy, ElementLocator locator) {
     }
 
     /**
@@ -99,10 +99,10 @@ public class ComponentsManager implements ComponentInstantiator, ComponentAccess
      * @param element found element.
      */
     @Override
-    public synchronized void proxyElementFound(WebElement proxy, ElementLocator locator, WebElement element) {
+    public synchronized void proxyElementFound(Object proxy, ElementLocator locator, WebElement element) {
         Object component = components.remove(proxy);
         if (component != null) {
-            components.put(unwrapElement(proxy), component);
+            components.put(unwrapElement(element), component);
         }
     }
 
@@ -121,7 +121,7 @@ public class ComponentsManager implements ComponentInstantiator, ComponentAccess
      */
     public void release() {
         for (WebElement element : components.keySet()) {
-            Proxies.removeProxyListener(element, this);
+            LocatorProxies.removeProxyListener(element, this);
         }
         components.clear();
     }

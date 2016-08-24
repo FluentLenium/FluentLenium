@@ -46,7 +46,7 @@ public class ProxiesTest {
 
     @Test
     public void testElementIsLazy() {
-        WebElement elementProxy1 = Proxies.createWebElement(new ElementLocator() {
+        WebElement elementProxy1 = LocatorProxies.createWebElement(new ElementLocator() {
             @Override
             public WebElement findElement() {
                 return driver.findElement(By.cssSelector("#element1"));
@@ -67,7 +67,7 @@ public class ProxiesTest {
 
     @Test
     public void testElementChainIsLazy() {
-        final WebElement element1Proxy = Proxies.createWebElement(new ElementLocator() {
+        final WebElement element1Proxy = LocatorProxies.createWebElement(new ElementLocator() {
             @Override
             public WebElement findElement() {
                 return driver.findElement(By.cssSelector("#element1"));
@@ -79,7 +79,7 @@ public class ProxiesTest {
             }
         });
 
-        final WebElement element2Proxy = Proxies.createWebElement(new ElementLocator() {
+        final WebElement element2Proxy = LocatorProxies.createWebElement(new ElementLocator() {
             @Override
             public WebElement findElement() {
                 return element1Proxy.findElement(By.cssSelector("#element2"));
@@ -91,7 +91,7 @@ public class ProxiesTest {
             }
         });
 
-        WebElement element3Proxy = Proxies.createWebElement(new ElementLocator() {
+        WebElement element3Proxy = LocatorProxies.createWebElement(new ElementLocator() {
             @Override
             public WebElement findElement() {
                 return element2Proxy.findElement(By.cssSelector("#element3"));

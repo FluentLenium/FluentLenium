@@ -6,6 +6,7 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.matcher.Matcher;
+import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +52,8 @@ public class SearchTest {
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
-        search = new Search(searchContext, new DefaultComponentInstantiator(driver));
+        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(driver);
+        search = new Search(searchContext, instantiator, new DefaultHookChainBuilder(driver, instantiator));
     }
 
     @After

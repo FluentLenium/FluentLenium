@@ -7,7 +7,8 @@ import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterPredicate;
-import org.fluentlenium.core.proxy.Proxies;
+import org.fluentlenium.core.hook.HookChainBuilder;
+import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
@@ -21,17 +22,27 @@ import java.util.List;
 public class Search implements SearchControl<FluentWebElement> {
     private final SearchContext searchContext;
     private final ComponentInstantiator instantiator;
+    private final HookChainBuilder hookChainBuilder;
 
-    public Search(SearchContext context, ComponentInstantiator instantiator) {
+    public Search(SearchContext context, ComponentInstantiator instantiator, HookChainBuilder hookChainBuilder) {
         this.searchContext = context;
         this.instantiator = instantiator;
+        this.hookChainBuilder = hookChainBuilder;
+    }
+
+    public HookChainBuilder getHookChainBuilder() {
+        return hookChainBuilder;
+    }
+
+    public ComponentInstantiator getInstantiator() {
+        return instantiator;
     }
 
     /**
      * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
      *
-     * @param selector    elements name to find
-     * @param filters filters set
+     * @param selector elements name to find
+     * @param filters  filters set
      * @return fluent list of fluent web elements
      */
     @Override
@@ -55,7 +66,7 @@ public class Search implements SearchControl<FluentWebElement> {
             postFiltered = Collections2.filter(select, new FilterPredicate(filter));
         }
 
-        return new FluentListImpl<>(FluentWebElement.class, instantiator, postFiltered);
+        return new FluentListImpl<>(FluentWebElement.class, instantiator, hookChainBuilder, postFiltered);
     }
 
 
@@ -78,7 +89,7 @@ public class Search implements SearchControl<FluentWebElement> {
     }
 
     private FluentList<FluentWebElement> selectList(By locator) {
-        return Proxies.createFluentList(locator(locator), FluentWebElement.class, instantiator);
+        return LocatorProxies.createFluentList(locator(locator), FluentWebElement.class, instantiator, hookChainBuilder);
     }
 
     /**
@@ -138,7 +149,7 @@ public class Search implements SearchControl<FluentWebElement> {
             postFiltered = Collections2.filter(postFiltered, new FilterPredicate(selector));
         }
 
-        return new FluentListImpl<>(FluentWebElement.class, instantiator, postFiltered);
+        return new FluentListImpl<>(FluentWebElement.class, instantiator, hookChainBuilder, postFiltered);
     }
 
     @Override

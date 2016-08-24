@@ -1,6 +1,5 @@
 package org.fluentlenium.core.components;
 
-import org.fluentlenium.core.inject.FluentInjectException;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

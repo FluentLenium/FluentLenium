@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.proxy.Proxies;
+import org.fluentlenium.core.proxy.LocatorProxies;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -62,8 +62,8 @@ public class IsolatedTestTest {
         }
 
         public void testSomething() {
-            Assertions.assertThat(Proxies.getElement(element.now().getElement())).isSameAs(IsolatedTestTest.this.element);
-            Assertions.assertThat(Proxies.getElement(page.pageElement.now().getElement())).isSameAs(IsolatedTestTest.this.pageElement);
+            Assertions.assertThat(LocatorProxies.getLocatorResult(element.now().getElement())).isSameAs(IsolatedTestTest.this.element);
+            Assertions.assertThat(LocatorProxies.getLocatorResult(page.pageElement.now().getElement())).isSameAs(IsolatedTestTest.this.pageElement);
         }
     }
 

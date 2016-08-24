@@ -4,6 +4,7 @@ import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.conditions.WebElementConditions;
+import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -88,7 +89,10 @@ public class FluentListImplTest {
         WebElement webElement2 = mock(WebElement.class);
         WebElement webElement3 = mock(WebElement.class);
 
-        FluentListImpl<FluentWebElement> list = FluentListImpl.fromElements(new DefaultComponentInstantiator(driver), webElement1, webElement2, webElement3);
+        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(driver);
+        DefaultHookChainBuilder hookChainBuilder = new DefaultHookChainBuilder(driver, instantiator);
+
+        FluentListImpl<FluentWebElement> list = FluentListImpl.fromElements(instantiator, hookChainBuilder, webElement1, webElement2, webElement3);
         assertThat(list.toElements()).containsExactly(webElement1, webElement2, webElement3);
     }
 

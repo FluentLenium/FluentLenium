@@ -30,7 +30,7 @@ public class FluentWaitElementMatcher extends AbstractWaitElementMatcher {
 
     @Override
     protected FluentList<FluentWebElement> find() {
-        FluentListImpl<FluentWebElement> elements = new FluentListImpl<>(FluentWebElement.class, null);
+        FluentListImpl<FluentWebElement> elements = new FluentListImpl<>(FluentWebElement.class, search.getInstantiator(), search.getHookChainBuilder());
         if (untilElement != null) {
             try {
                 elements.add(untilElement.now());

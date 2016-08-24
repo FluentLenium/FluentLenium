@@ -14,9 +14,11 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.events.AnnotationsComponentListener;
 import org.fluentlenium.core.filter.Filter;
+import org.fluentlenium.core.hook.DefaultHookChainBuilder;
+import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.inject.DefaultContainerInstanciator;
 import org.fluentlenium.core.inject.FluentInjector;
-import org.fluentlenium.core.proxy.Proxies;
+import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.wait.FluentWait;
@@ -63,6 +65,8 @@ public class FluentDriver implements FluentDriverControl {
     private MouseActions mouseActions;
 
     private KeyboardActions keyboardActions;
+
+    private HookChainBuilder hookChainBuilder;
 
     private WindowAction windowAction;
 
@@ -111,7 +115,8 @@ public class FluentDriver implements FluentDriverControl {
 
     protected FluentDriver initFluent(WebDriver driver) {
         this.driver = driver;
-        this.search = new Search(driver, componentsManager);
+        this.hookChainBuilder = new DefaultHookChainBuilder(this.driver, this.componentsManager.getInstantiator());
+        this.search = new Search(driver, componentsManager, hookChainBuilder);
         if (driver instanceof EventFiringWebDriver) {
             this.events = new EventsRegistry((EventFiringWebDriver) driver);
             this.eventsComponentsAnnotations = new AnnotationsComponentListener(componentsManager);
@@ -414,7 +419,7 @@ public class FluentDriver implements FluentDriverControl {
         if (null == element || !"iframe".equals(element.getTagName())) {
             getDriver().switchTo().defaultContent();
         } else {
-            getDriver().switchTo().frame(Proxies.getElement(element.getElement()));
+            getDriver().switchTo().frame(LocatorProxies.getLocatorResult(element.getElement()));
         }
     }
 

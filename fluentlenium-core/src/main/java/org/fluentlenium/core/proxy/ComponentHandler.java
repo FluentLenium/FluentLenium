@@ -1,5 +1,9 @@
 package org.fluentlenium.core.proxy;
 
+import com.google.common.base.Supplier;
+import org.fluentlenium.core.hook.FluentHook;
+import org.fluentlenium.core.hook.HookChainBuilder;
+import org.fluentlenium.core.hook.HookDefinition;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
@@ -11,17 +15,19 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ComponentHandler implements InvocationHandler {
+public class ComponentHandler extends AbstractLocatorHandler implements InvocationHandler, LocatorHandler<WebElement> {
     private static final Method EQUALS = getMethod(Object.class, "equals", Object.class);
     private static final Method HASH_CODE = getMethod(Object.class, "hashCode");
     private static final Method TO_STRING = getMethod(Object.class, "toString");
     private static final Method GET_WRAPPED_ELEMENT = getMethod(WrapsElement.class, "getWrappedElement");
 
+    private List<FluentHook> hooks;
+    private WebElement proxy;
+
     private static Method getMethod(Class<?> declaringClass, String name, Class... types) {
         try {
             return declaringClass.getMethod(name, types);
-        }
-        catch (NoSuchMethodException e) {
+        } catch (NoSuchMethodException e) {
             throw new IllegalArgumentException(e);
         }
     }
@@ -34,47 +40,62 @@ public class ComponentHandler implements InvocationHandler {
 
     public ComponentHandler(ElementLocator locator) {
         this.locator = locator;
+        if (this.locator instanceof WrapsElement) {
+            this.element = ((WrapsElement) this.locator).getWrappedElement();
+        }
     }
 
+    public void setProxy(WebElement proxy) {
+        this.proxy = proxy;
+    }
+
+    @Override
     public ElementLocator getLocator() {
         return locator;
     }
 
-    public synchronized boolean addListener(ProxyElementListener listener) {
-        return listeners.add(listener);
-    }
 
-    public synchronized boolean removeListener(ProxyElementListener listener) {
-        return listeners.remove(listener);
-    }
-
-    protected void fireProxyElementFound(WebElement proxy, ElementLocator locator, WebElement element) {
-        for (ProxyElementListener listener : listeners) {
-            listener.proxyElementFound(proxy, locator, element);
+    @Override
+    public WebElement getLocatorResult() {
+        if (element == null) {
+            fireProxyElementSearch(proxy, locator);
+            element = getHookLocator().findElement();
+            fireProxyElementFound(proxy, locator, element);
         }
+        return element;
     }
 
-    protected void fireProxyElementSearch(WebElement proxy, ElementLocator locator) {
-        for (ProxyElementListener listener : listeners) {
-            listener.proxyElementSearch(proxy, locator);
+    @Override
+    public WebElement getHookLocatorResult() {
+        if (hooks != null && hooks.size() > 0) {
+            return hooks.get(hooks.size()-1);
         }
+        return element;
     }
 
+    @Override
+    public ElementLocator getHookLocator() {
+        if (hooks != null && hooks.size() > 0) {
+            return hooks.get(hooks.size()-1);
+        }
+        return locator;
+    }
+
+    @Override
     public synchronized boolean isLoaded() {
         return element != null;
     }
 
-    public synchronized void reset() {
-        this.element = null;
+    @Override
+    public void now() {
+        getLocatorResult();
     }
 
-    public synchronized WebElement getOrFindElement(WebElement proxy) {
-        if (element == null) {
-            fireProxyElementSearch(proxy, locator);
-            element = locator.findElement();
-            fireProxyElementFound(proxy, locator, element);
+    @Override
+    public synchronized void reset() {
+        if (this.locator != null) {
+            this.element = null;
         }
-        return element;
     }
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -86,9 +107,9 @@ public class ComponentHandler implements InvocationHandler {
                 return "Proxy Component for: " + locator;
             }
             if (EQUALS.equals(method)) {
-                ComponentHandler componentHandler = Proxies.getComponentHandler(args[0]);
-                if (componentHandler != null) {
-                    return this.equals(componentHandler);
+                LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(args[0]);
+                if (locatorHandler != null) {
+                    return this.equals(locatorHandler);
                 }
                 // Loading element if equals is called with a non ComponentHandler proxy parameter
             }
@@ -97,9 +118,9 @@ public class ComponentHandler implements InvocationHandler {
             }
         }
 
-        getOrFindElement((WebElement)proxy);
+        getLocatorResult();
 
-        if (EQUALS.equals(method) && Proxies.getComponentHandler(args[0]) != null) {
+        if (EQUALS.equals(method) && LocatorProxies.getLocatorHandler(args[0]) != null) {
             return equalsInternal(proxy, args[0]);
         }
 
@@ -109,7 +130,7 @@ public class ComponentHandler implements InvocationHandler {
         }
 
         try {
-            return method.invoke(element, args);
+            return method.invoke(getHookLocatorResult(), args);
         } catch (InvocationTargetException e) {
             // Unwrap the underlying exception
             throw e.getCause();
@@ -129,7 +150,7 @@ public class ComponentHandler implements InvocationHandler {
             // the proxies behave differently.
             return false;
         }
-        return ((ComponentHandler) handler).getOrFindElement((WebElement)me).equals(getOrFindElement((WebElement)other));
+        return ((ComponentHandler) handler).getLocatorResult().equals(getLocatorResult());
     }
 
     @Override
@@ -140,7 +161,6 @@ public class ComponentHandler implements InvocationHandler {
         ComponentHandler that = (ComponentHandler) o;
 
         return locator != null ? locator.equals(that.locator) : that.locator == null;
-
     }
 
     @Override
@@ -148,4 +168,21 @@ public class ComponentHandler implements InvocationHandler {
         return locator != null ? locator.hashCode() : 0;
     }
 
+    public void setHooks(HookChainBuilder hookChainBuilder, List<HookDefinition<?>> hookDefinitions) {
+        if (hookDefinitions == null || hookDefinitions.size() == 0) {
+            hooks = null;
+        } else {
+            hooks = hookChainBuilder.build(new Supplier<WebElement>() {
+                @Override
+                public WebElement get() {
+                    return element;
+                }
+            }, new Supplier<ElementLocator>() {
+                @Override
+                public ElementLocator get() {
+                    return locator;
+                }
+            }, hookDefinitions);
+        }
+    }
 }
