@@ -4,13 +4,13 @@ import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PageWithAjaxElementTest extends LocalFluentCase {
+public class PageWithAjaxElementTest extends IntegrationFluentTest {
     @Page
     JavascriptPage page;
 
@@ -55,7 +55,7 @@ public class PageWithAjaxElementTest extends LocalFluentCase {
 
         @Override
         public String getUrl() {
-            return LocalFluentCase.JAVASCRIPT_URL;
+            return IntegrationFluentTest.JAVASCRIPT_URL;
         }
 
         public String getText() {
@@ -70,7 +70,7 @@ public class PageWithAjaxElementTest extends LocalFluentCase {
 
         @Override
         public String getUrl() {
-            return LocalFluentCase.JAVASCRIPT_URL;
+            return IntegrationFluentTest.JAVASCRIPT_URL;
         }
 
         public String getText() {
@@ -85,7 +85,7 @@ public class PageWithAjaxElementTest extends LocalFluentCase {
 
         @Override
         public String getUrl() {
-            return LocalFluentCase.JAVASCRIPT_URL;
+            return IntegrationFluentTest.JAVASCRIPT_URL;
         }
 
         public String getText() {
@@ -100,7 +100,7 @@ public class PageWithAjaxElementTest extends LocalFluentCase {
 
         @Override
         public String getUrl() {
-            return LocalFluentCase.JAVASCRIPT_URL;
+            return IntegrationFluentTest.JAVASCRIPT_URL;
         }
 
         public String getText() {

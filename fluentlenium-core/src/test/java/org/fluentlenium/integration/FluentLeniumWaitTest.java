@@ -6,7 +6,7 @@ import com.google.common.base.Supplier;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.TimeoutException;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 import static org.junit.Assert.fail;
 
-public class FluentLeniumWaitTest extends LocalFluentCase {
+public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Before
     public void before() {
         goTo(DEFAULT_URL);
@@ -129,7 +129,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
     @Test
     public void checkAwaitPageIsAt() {
-        FluentPage isAtJavascriptPage = createPage(MyFluentPage.class);
+        FluentPage isAtJavascriptPage = newInstance(MyFluentPage.class);
         isAtJavascriptPage.go();
         await().atMost(5, TimeUnit.SECONDS).untilPage(isAtJavascriptPage).isAt();
     }
@@ -504,7 +504,7 @@ public class FluentLeniumWaitTest extends LocalFluentCase {
 
         @Override
         public String getUrl() {
-            return LocalFluentCase.JAVASCRIPT_URL;
+            return IntegrationFluentTest.JAVASCRIPT_URL;
         }
     }
 

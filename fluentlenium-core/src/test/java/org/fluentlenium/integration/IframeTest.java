@@ -2,12 +2,12 @@ package org.fluentlenium.integration;
 
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IframeTest extends LocalFluentCase {
+public class IframeTest extends IntegrationFluentTest {
 
     @Page
     private IFramePage iFramePage;
@@ -77,7 +77,7 @@ public class IframeTest extends LocalFluentCase {
 class IFramePage extends FluentPage {
     @Override
     public String getUrl() {
-        return LocalFluentCase.IFRAME_URL;
+        return IntegrationFluentTest.IFRAME_URL;
     }
 
     @Override

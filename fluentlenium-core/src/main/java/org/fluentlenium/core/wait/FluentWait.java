@@ -80,15 +80,6 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentDri
     }
 
     /**
-     * @param isTrue predicate condition for wait
-     * @deprecated This method is java8 lambda ambigous with {@link #until(Function)} and will be removed.
-     */
-    @Deprecated
-    public void until(Predicate<FluentDriver> isTrue) {
-        untilPredicate(isTrue);
-    }
-
-    /**
      * Wait until the predicate returns true.
      *
      * @param predicate predicate condition for wait

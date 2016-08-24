@@ -1,8 +1,8 @@
 package org.fluentlenium.integration.initialization;
 
-import org.fluentlenium.adapter.FluentTest;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
+import org.fluentlenium.integration.util.adapter.FluentTest;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;

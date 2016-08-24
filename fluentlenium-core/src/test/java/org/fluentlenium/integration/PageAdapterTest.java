@@ -39,7 +39,7 @@ public class PageAdapterTest extends FluentAdapter {
     public void before() {
         initFluent(driver);
 
-        page = createPage(InjectedPageAccueil.class);
+        page = newInstance(InjectedPageAccueil.class);
         page.testVariable = "test";
         reference = page;
     }

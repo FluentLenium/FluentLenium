@@ -1,7 +1,7 @@
 package org.fluentlenium.integration;
 
 import org.assertj.core.api.Assertions;
-import org.fluentlenium.adapter.FluentTest;
+import org.fluentlenium.integration.util.adapter.FluentTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
@@ -11,9 +11,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class DontRunTestsWhenInitFailTest {
 
-    public static class TestClass extends FluentTest {
+    public static class IgnoreTestClass extends FluentTest {
 
-        public TestClass() {
+        public IgnoreTestClass() {
             getConfiguration().setScreenshotMode(TriggerMode.AUTOMATIC_ON_FAIL);
             getConfiguration().setHtmlDumpMode(TriggerMode.AUTOMATIC_ON_FAIL);
         }
@@ -34,7 +34,7 @@ public class DontRunTestsWhenInitFailTest {
     @Test
     public void testRun() {
         JUnitCore junit = new JUnitCore();
-        Result run = junit.run(TestClass.class);
+        Result run = junit.run(IgnoreTestClass.class);
 
         Assertions.assertThat(run.getFailures()).hasSize(1);
         Assertions.assertThat(run.getFailures().get(0).getMessage())

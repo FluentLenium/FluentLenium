@@ -3,12 +3,12 @@ package org.fluentlenium.integration;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.annotation.PageUrl;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BaseUrlTest extends LocalFluentCase {
+public class BaseUrlTest extends IntegrationFluentTest {
 
     @Page
     Page2Relative pageRelative;

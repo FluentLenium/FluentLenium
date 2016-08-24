@@ -3,21 +3,17 @@ package org.fluentlenium.adapter;
 import com.google.common.base.Supplier;
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.proxy.Proxies;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ByIdOrName;
 
-import javax.inject.Inject;
-
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -50,7 +46,7 @@ public class IsolatedTestTest {
     }
 
     private class IsolatedTestSpy extends IsolatedTest {
-        @Inject
+        @Page
         private SomePage page;
 
         private FluentWebElement element;

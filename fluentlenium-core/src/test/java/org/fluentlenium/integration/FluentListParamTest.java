@@ -2,12 +2,12 @@ package org.fluentlenium.integration;
 
 
 import org.fluentlenium.core.domain.FluentList;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FluentListParamTest extends LocalFluentCase {
+public class FluentListParamTest extends IntegrationFluentTest {
 
     @Test
     public void checkTextsParam() {

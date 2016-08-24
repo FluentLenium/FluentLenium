@@ -16,7 +16,6 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
-import javax.inject.Inject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
@@ -26,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * Handle injection of @AjaxElement proxies, @Inject objects and @FindBy.
+ * Handle injection of @AjaxElement proxies, @Page objects and @FindBy.
  */
 public class FluentInjector implements FluentInjectControl {
 
@@ -52,13 +51,6 @@ public class FluentInjector implements FluentInjectControl {
             support.close();
         }
         eventsContainerSupport.clear();
-    }
-
-    public <T> T createPage(Class<T> cls, Object... params) {
-        if (params.length > 0) {
-            throw new FluentInjectException("Parameters support for createPage/newInstance has been dropped.");
-        }
-        return newInstance(cls);
     }
 
     @Override
@@ -99,8 +91,7 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private static boolean isContainer(Field field) {
-        return field.isAnnotationPresent(Page.class) ||
-                field.isAnnotationPresent(Inject.class);
+        return field.isAnnotationPresent(Page.class);
     }
 
     private static boolean isClassSupported(Class<?> cls) {
@@ -225,7 +216,7 @@ public class FluentInjector implements FluentInjectControl {
         return proxy;
     }
 
-    private FluentList<? extends FluentWebElement>  initFieldAsListOfFluentWebElement(ElementLocator locator, Object container, Field field) throws IllegalAccessException {
+    private FluentList<? extends FluentWebElement> initFieldAsListOfFluentWebElement(ElementLocator locator, Object container, Field field) throws IllegalAccessException {
         FluentList<? extends FluentWebElement> proxy = Proxies.createFluentList(locator, (Class<? extends FluentWebElement>) getFirstGenericType(field), componentsManager);
         ReflectionUtils.set(field, container, proxy);
         return proxy;

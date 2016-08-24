@@ -4,18 +4,15 @@ import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.inject.FluentInjectException;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
-import org.junit.Rule;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  *
  */
-public class PageInPageTest extends LocalFluentCase {
+public class PageInPageTest extends IntegrationFluentTest {
 
     @Page
     private TestPage testPage;
@@ -58,7 +55,7 @@ class SubTestPageWithCreate extends FluentPage {
 
     public void initFluent(FluentControl control) {
         super.initFluent(control);
-        pageWithCreatePage = createPage(IncludedPage.class);
+        pageWithCreatePage = newInstance(IncludedPage.class);
     }
 
 }

@@ -3,7 +3,7 @@ package org.fluentlenium.integration;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.apache.commons.io.IOUtils;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 
 import java.io.File;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class HtmlDumpTest extends LocalFluentCase {
+public class HtmlDumpTest extends IntegrationFluentTest {
 
     private final Path tempDir;
 

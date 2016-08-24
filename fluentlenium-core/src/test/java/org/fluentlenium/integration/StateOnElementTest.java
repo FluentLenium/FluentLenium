@@ -1,12 +1,12 @@
 package org.fluentlenium.integration;
 
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StateOnElementTest extends LocalFluentCase {
+public class StateOnElementTest extends IntegrationFluentTest {
     @Before
     public void before() {
         goTo(DEFAULT_URL);

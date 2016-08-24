@@ -107,20 +107,6 @@ public class FluentAdapter implements FluentDriverControl, ConfigurationProperti
     }
 
     /**
-     * @return A new WebDriver instance.
-     * @see #getDriver()
-     * @deprecated Override {@link #newWebDriver()} instead, or consider using {@link ConfigurationProperties#getWebDriver()}.
-     */
-    @Deprecated
-    public WebDriver getDefaultDriver() {
-        WebDriver webDriver = WebDrivers.INSTANCE.newWebDriver(getWebDriver(), getCapabilities());
-        if (Boolean.TRUE.equals(getEventsEnabled())) {
-            webDriver = new EventFiringWebDriver(webDriver);
-        }
-        return webDriver;
-    }
-
-    /**
      * Creates a new {@link WebDriver} instance.
      *
      * This method should not be called by end user, but may be overriden if required.
@@ -134,6 +120,10 @@ public class FluentAdapter implements FluentDriverControl, ConfigurationProperti
      * @see #getDriver()
      */
     public WebDriver newWebDriver() {
-        return getDefaultDriver();
+        WebDriver webDriver = WebDrivers.INSTANCE.newWebDriver(getWebDriver(), getCapabilities());
+        if (Boolean.TRUE.equals(getEventsEnabled())) {
+            webDriver = new EventFiringWebDriver(webDriver);
+        }
+        return webDriver;
     }
 }

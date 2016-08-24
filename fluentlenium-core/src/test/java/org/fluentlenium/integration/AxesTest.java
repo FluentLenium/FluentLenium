@@ -1,16 +1,15 @@
 package org.fluentlenium.integration;
 
-import org.fluentlenium.adapter.FluentTest;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AxesTest extends LocalFluentCase {
+public class AxesTest extends IntegrationFluentTest {
 
     @Test
     public void checkSearchParentWorks() {

@@ -122,49 +122,6 @@ public class FluentDriver implements FluentDriverControl {
         return this;
     }
 
-    /**
-     * Define the default url that will be used in the test and in the relative pages
-     *
-     * @param baseUrl base URL
-     * @return Fluent element
-     */
-    @Override
-    public FluentDriver withDefaultUrl(String baseUrl) {
-        if (baseUrl != null) {
-            if (baseUrl.endsWith("/")) {
-                baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
-            }
-            this.baseUrl = baseUrl;
-        }
-        return this;
-    }
-
-    /**
-     * Define an implicit time to wait for a page to be loaded
-     *
-     * @param l        timeout value
-     * @param timeUnit time unit for wait
-     * @return Fluent element
-     */
-    @Override
-    public FluentDriver withDefaultPageWait(long l, TimeUnit timeUnit) {
-        this.getDriver().manage().timeouts().pageLoadTimeout(l, timeUnit);
-        return this;
-    }
-
-    /**
-     * Define an implicit time to wait when searching an element
-     *
-     * @param l        timeout value
-     * @param timeUnit time unit for wait
-     * @return Fluent element
-     */
-    @Override
-    public FluentDriver withDefaultSearchWait(long l, TimeUnit timeUnit) {
-        this.getDriver().manage().timeouts().implicitlyWait(l, timeUnit);
-        return this;
-    }
-
     @Override
     public void takeHtmlDump() {
         takeHtmlDump(new Date().getTime() + ".html");

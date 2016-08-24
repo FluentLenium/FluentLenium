@@ -2,13 +2,13 @@ package org.fluentlenium.integration;
 
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ThrowableAssert;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ActionOnSelectorTest extends LocalFluentCase {
+public class ActionOnSelectorTest extends IntegrationFluentTest {
 
 
     @Test

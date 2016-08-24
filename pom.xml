@@ -14,9 +14,9 @@
     <modules>
         <module>fluentlenium-core</module>
         <module>fluentlenium-assertj</module>
+        <module>fluentlenium-junit</module>
         <module>fluentlenium-testng</module>
         <module>fluentlenium-cucumber</module>
-        <module>fluentlenium-it</module>
     </modules>
 
     <prerequisites>
@@ -100,6 +100,11 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.fluentlenium</groupId>
+                <artifactId>fluentlenium-testing-private</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
                 <version>2.53.0</version>
@@ -133,11 +138,6 @@
                 <groupId>xml-apis</groupId>
                 <artifactId>xml-apis</artifactId>
                 <version>1.4.01</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.inject</groupId>
-                <artifactId>javax.inject</artifactId>
-                <version>1</version>
             </dependency>
             <dependency>
                 <groupId>com.github.hazendaz</groupId>
@@ -195,10 +195,40 @@
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.19.1</version>
+                    <configuration>
+                        <excludes>
+                            <exclude>**/integration/**/*</exclude>
+                            <exclude>**/ignore/**/*</exclude>
+                            <exclude>**/*$*</exclude>
+                            <exclude>**/IgnoreTest*.java</exclude>
+                            <exclude>**/*IgnoreTest.java</exclude>
+                            <exclude>**/*IgnoreTestCase.java</exclude>
+                        </excludes>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>2.19.1</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <includes>
+                            <include>**/integration/**/*</include>
+                        </includes>
+                        <excludes>
+                            <exclude>**/ignore/**/*</exclude>
+                            <exclude>**/*$*</exclude>
+                            <exclude>**/IgnoreTest*.java</exclude>
+                            <exclude>**/*IgnoreTest.java</exclude>
+                            <exclude>**/*IgnoreTestCase.java</exclude>
+                        </excludes>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

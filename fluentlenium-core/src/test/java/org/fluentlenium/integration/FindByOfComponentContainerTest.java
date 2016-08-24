@@ -3,7 +3,7 @@ package org.fluentlenium.integration;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FindByOfComponentContainerTest extends LocalFluentCase {
+public class FindByOfComponentContainerTest extends IntegrationFluentTest {
 
     @Page
     private ContainerIndex page;
@@ -50,21 +50,21 @@ public class FindByOfComponentContainerTest extends LocalFluentCase {
 
     @Test
     public void testFluentWebElement() {
-        goTo(LocalFluentCase.DEFAULT_URL);
+        goTo(IntegrationFluentTest.DEFAULT_URL);
 
         assertThat(page.element).isInstanceOf(SomeFluentWebElement.class);
     }
 
     @Test
     public void testWebElementWrapper() {
-        goTo(LocalFluentCase.DEFAULT_URL);
+        goTo(IntegrationFluentTest.DEFAULT_URL);
 
         assertThat(page.wrapper).isInstanceOf(SomeWebElementWrapper.class);
     }
 
     @Test
     public void testFluentWebElementList() {
-        goTo(LocalFluentCase.DEFAULT_URL);
+        goTo(IntegrationFluentTest.DEFAULT_URL);
 
         for (SomeFluentWebElement component : page.elementList) {
             assertThat(component).isInstanceOf(SomeFluentWebElement.class);
@@ -73,7 +73,7 @@ public class FindByOfComponentContainerTest extends LocalFluentCase {
 
     @Test
     public void testFindByComponentList() {
-        goTo(LocalFluentCase.DEFAULT_URL);
+        goTo(IntegrationFluentTest.DEFAULT_URL);
 
         for (SomeWebElementWrapper component : page.wrapperList) {
             assertThat(component).isInstanceOf(SomeWebElementWrapper.class);

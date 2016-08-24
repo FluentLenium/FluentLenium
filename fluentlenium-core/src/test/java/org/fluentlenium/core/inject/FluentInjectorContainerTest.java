@@ -4,15 +4,13 @@ import org.assertj.core.api.Assertions;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentContainer;
 import org.fluentlenium.core.FluentControl;
+import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.components.ComponentsManager;
-import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.WebDriver;
-
-import javax.inject.Inject;
 
 public class FluentInjectorContainerTest {
 
@@ -38,7 +36,7 @@ public class FluentInjectorContainerTest {
     }
 
     public static class ParentContainer {
-        @Inject
+        @Page
         private ChildContainer childContainer;
     }
 
@@ -54,12 +52,12 @@ public class FluentInjectorContainerTest {
     }
 
     public static class ChildContainerRecurse {
-        @Inject
+        @Page
         private ParentContainerRecurse parentContainer;
     }
 
     public static class ParentContainerRecurse {
-        @Inject
+        @Page
         private ChildContainerRecurse childContainer;
     }
 
@@ -77,7 +75,7 @@ public class FluentInjectorContainerTest {
 
 
     public static class ChildContainerInit implements FluentContainer {
-        @Inject
+        @Page
         private ParentContainerRecurse parentContainer;
 
         private FluentControl control;
@@ -92,7 +90,7 @@ public class FluentInjectorContainerTest {
     public static class ParentContainerInit implements FluentContainer {
         private FluentControl control;
 
-        @Inject
+        @Page
         private ChildContainerInit childContainer;
 
 
@@ -115,7 +113,7 @@ public class FluentInjectorContainerTest {
     }
 
     public static class ChildContainerConstructorInit {
-        @Inject
+        @Page
         private ParentContainerConstructorInit parentContainer;
 
         private FluentControl control;
@@ -128,7 +126,7 @@ public class FluentInjectorContainerTest {
     public static class ParentContainerConstructorInit {
         private FluentControl control;
 
-        @Inject
+        @Page
         private ChildContainerConstructorInit childContainer;
 
         public ParentContainerConstructorInit(FluentControl control) {

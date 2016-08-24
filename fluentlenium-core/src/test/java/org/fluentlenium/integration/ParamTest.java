@@ -1,12 +1,12 @@
 package org.fluentlenium.integration;
 
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class ParamTest extends LocalFluentCase {
+public class ParamTest extends IntegrationFluentTest {
 
 
     @Test

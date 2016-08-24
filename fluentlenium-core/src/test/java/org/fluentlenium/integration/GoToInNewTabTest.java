@@ -1,6 +1,6 @@
 package org.fluentlenium.integration;
 
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -13,7 +13,7 @@ import java.util.HashSet;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class GoToInNewTabTest extends LocalFluentCase {
+public class GoToInNewTabTest extends IntegrationFluentTest {
     @Mock
     private JavascriptWebDriver webDriver;
 

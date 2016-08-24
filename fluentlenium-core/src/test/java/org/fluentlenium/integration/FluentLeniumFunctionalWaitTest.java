@@ -4,7 +4,7 @@ import com.google.common.base.Supplier;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.TimeoutException;
@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 import static org.junit.Assert.fail;
 
-public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
+public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     @Before
     public void before() {
         goTo(DEFAULT_URL);
@@ -613,7 +613,7 @@ public class FluentLeniumFunctionalWaitTest extends LocalFluentCase {
 
         @Override
         public String getUrl() {
-            return LocalFluentCase.JAVASCRIPT_URL;
+            return IntegrationFluentTest.JAVASCRIPT_URL;
         }
     }
 }

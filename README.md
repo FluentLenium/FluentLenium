@@ -10,14 +10,14 @@ FluentLenium integrates with JUnit 4.x, TestNG, Cucumber but can also be used st
 FluentLenium lets you use the assertion framework you like, either [JUnit assertions](http://junit.sourceforge.net/javadoc/org/junit/Assert.html), [Hamcrest](http://hamcrest.org/JavaHamcrest/) 
 or [AssertJ](http://joel-costigliola.github.io/assertj/).
 
-# Quickstart
+# Quickstart with JUnit and AssertJ
 
-- Add dependencies to your `pom.xml`
+- Add dependencies to your `pom.xml`.
 
 ```xml
 <dependency>
     <groupId>org.fluentlenium</groupId>
-    <artifactId>fluentlenium-core</artifactId>
+    <artifactId>fluentlenium-junit</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <scope>test</scope>
 </dependency>
@@ -40,7 +40,7 @@ or [AssertJ](http://joel-costigliola.github.io/assertj/).
 </dependency>
 ```
 
-- Create a Fluent Test
+- Create a Fluent Test.
 
 ```java
 import org.fluentlenium.adapter.FluentTest;
@@ -61,7 +61,7 @@ public class DuckDuckGoTest extends FluentTest {
 }
 ```
 
-- Run as a JUnit test
+- Run as a JUnit test.
 
 [More FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/fluentlenium-examples).
 
@@ -414,11 +414,11 @@ public void checkLoginFailed() {
 ```
 
 ## Injection
-You can use the annotation `@Inject` to construct your Page Objects easily.
+You can use the annotation `@Page` to construct your Page Objects easily.
 
 ```java
 public class AnnotationInitialization extends FluentTest {
-    @Inject
+    @Page
     public MyPage page;
 
 
@@ -1226,11 +1226,22 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 
 ### JUnit
 
-- JUnit is supported by default.
+- Import this maven dependency.
+
+```xml
+<dependency>
+    <groupId>org.fluentlenium</groupId>
+    <artifactId>fluentlenium-junit</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <scope>test</scope>
+</dependency>
+```
+
+- Extends FluentTest.
 
 ### TestNG
 
-- Import this additional maven dependency.
+- Import this maven dependency.
 
 ```xml
 <dependency>
@@ -1241,11 +1252,11 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 </dependency>
 ```
 
-- Extends FluentTestNG instead of FluentTest
+- Extends FluentTestNG instead of FluentTest.
 
 ### Cucumber
 
-- Import this additional maven dependency.
+- Import this maven dependency.
 
 ```xml
 <dependency>

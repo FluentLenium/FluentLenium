@@ -21,22 +21,4 @@ public class IsolatedTest extends FluentAdapter {
         }
         releaseFluent();
     }
-
-    @Deprecated
-    public IsolatedTest(WebDriver webDriver) {
-        initFluent(webDriver);
-    }
-
-    @Deprecated
-    public IsolatedTest(DriverContainer driverContainer) {
-        super(driverContainer);
-        initFluent(newWebDriver());
-    }
-
-    @Deprecated
-    public IsolatedTest(DriverContainer driverContainer, WebDriver webDriver) {
-        super(driverContainer);
-        initFluent(webDriver);
-    }
-
 }

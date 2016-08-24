@@ -2,14 +2,14 @@ package org.fluentlenium.integration;
 
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.support.ui.Select;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.*;
 
-public class SearchOnlyWithFiltersTest extends LocalFluentCase {
+public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
 
     @Test
     public void checkWithNameWorks() {

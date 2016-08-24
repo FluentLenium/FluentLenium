@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Check that @FindBy and @FindAll works with default Selenium elements.
  */
-public class SeleniumFindBy extends LocalFluentCase {
+public class SeleniumFindBy extends IntegrationFluentTest {
     @Page
     PageIndex page;
 
@@ -73,7 +73,7 @@ public class SeleniumFindBy extends LocalFluentCase {
         @FindBy(className = "small")
         List<WebElement> smalls;
 
-        @FindAll({ @FindBy(id = "location"), @FindBy(className = "small") })
+        @FindAll({@FindBy(id = "location"), @FindBy(className = "small")})
         List<WebElement> findAllElements;
 
         @FindBy(css = "#mouseover")
@@ -84,7 +84,7 @@ public class SeleniumFindBy extends LocalFluentCase {
 
         @Override
         public String getUrl() {
-            return LocalFluentCase.DEFAULT_URL;
+            return IntegrationFluentTest.DEFAULT_URL;
         }
 
         @Override

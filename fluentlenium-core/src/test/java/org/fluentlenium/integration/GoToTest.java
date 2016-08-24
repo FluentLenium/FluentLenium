@@ -1,14 +1,14 @@
 package org.fluentlenium.integration;
 
 import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.integration.localtest.LocalFluentCase;
+import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 
 import static org.mockito.Mockito.verify;
 
-public class GoToTest extends LocalFluentCase {
+public class GoToTest extends IntegrationFluentTest {
     WebDriver webDriver = Mockito.mock(WebDriver.class);
 
     @Test(expected = IllegalArgumentException.class)
@@ -39,7 +39,7 @@ public class GoToTest extends LocalFluentCase {
 
     @Test
     public void checkGoToPage() {
-        FluentPage page = createPage(MyPage.class);
+        FluentPage page = newInstance(MyPage.class);
         goTo(page);
         verify(webDriver).get(DEFAULT_URL);
     }
@@ -53,7 +53,7 @@ public class GoToTest extends LocalFluentCase {
 class MyPage extends FluentPage {
     @Override
     public String getUrl() {
-        return LocalFluentCase.DEFAULT_URL;
+        return IntegrationFluentTest.DEFAULT_URL;
     }
 
 }
