@@ -1,4 +1,4 @@
-package org.fluentlenium.cucumber.step;
+package org.fluentlenium.cucumber.integration.step;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -8,12 +8,12 @@ import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.cucumber.adapter.FluentCucumberTest;
-import org.fluentlenium.cucumber.page.LocalPage;
+import org.fluentlenium.cucumber.integration.page.LocalPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-@FluentConfiguration(driverLifecycle = ConfigurationProperties.DriverLifecycle.CLASS)
-public class SimpleFeatureMultiStep1 extends FluentCucumberTest {
+@FluentConfiguration(driverLifecycle = ConfigurationProperties.DriverLifecycle.JVM)
+public class SimpleScenarioMultiStep1 extends FluentCucumberTest {
 
     @Page
     LocalPage page;
@@ -23,7 +23,7 @@ public class SimpleFeatureMultiStep1 extends FluentCucumberTest {
         return new HtmlUnitDriver();
     }
 
-    @Given(value = "feature multi1 I am on the first page")
+    @Given(value = "scenario multi1 I am on the first page")
     public void step1() {
         goTo(page);
     }

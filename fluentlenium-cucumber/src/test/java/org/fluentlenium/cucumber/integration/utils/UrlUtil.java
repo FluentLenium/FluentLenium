@@ -1,4 +1,4 @@
-package org.fluentlenium.integration.util;
+package org.fluentlenium.cucumber.integration.utils;
 
 import java.net.URL;
 
