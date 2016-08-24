@@ -25,4 +25,11 @@ public interface WebDriverFactory {
      * @return Primary name.
      */
     String getName();
+
+    /**
+     * Priority of the factory to be grabbed as default WebDriverFactory.
+     *
+     * @return a priority index
+     */
+    int getPriority();
 }

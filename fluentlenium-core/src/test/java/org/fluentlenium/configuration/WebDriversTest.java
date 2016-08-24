@@ -1,5 +1,7 @@
 package org.fluentlenium.configuration;
 
+import org.assertj.core.api.ThrowableAssert;
+import org.fluentlenium.utils.ReflectionUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Capabilities;
@@ -7,7 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import java.util.LinkedHashMap;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WebDriversTest {
     private WebDrivers.Impl webDrivers;
@@ -16,7 +21,7 @@ public class WebDriversTest {
 
     }
 
-    public static class CustomWebDriverFactory implements WebDriverFactory {
+    public static class AnotherFactory implements WebDriverFactory {
         @Override
         public WebDriver newWebDriver(Capabilities capabilities) {
             return new CustomWebDriver();
@@ -24,7 +29,12 @@ public class WebDriversTest {
 
         @Override
         public String getName() {
-            return "custom";
+            return "another";
+        }
+
+        @Override
+        public int getPriority() {
+            return 2048;
         }
     }
 
@@ -42,9 +52,30 @@ public class WebDriversTest {
         assertThat(webDriverClass).isSameAs(FirefoxDriver.class);
     }
 
+    @Test
+    public void testDefault() {
+        WebDriverFactory webDriverFactory = webDrivers.get(null);
+        assertThat(webDriverFactory).isExactlyInstanceOf(AnotherFactory.class);
+    }
+
+    @Test
+    public void testNoDefault() throws NoSuchFieldException, IllegalAccessException {
+        ReflectionUtils.set(WebDrivers.Impl.class.getDeclaredField("factories"), webDrivers, new LinkedHashMap<>());
+
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                webDrivers.get(null);
+
+            }
+        }).isExactlyInstanceOf(ConfigurationException.class)
+                .hasMessage("No WebDriverFactory is available. You need add least one supported " +
+                        "WebDriver in your classpath.");
+    }
+
     @Test(expected = ConfigurationException.class)
     public void testRegisterFirefox() {
-        webDrivers.register(new CustomWebDriverFactory());
+        webDrivers.register(new AnotherFactory());
     }
 
     @Test
