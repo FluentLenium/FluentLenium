@@ -9,8 +9,12 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.StreamHandler;
 
 import static com.google.common.collect.Iterables.getLast;
 import static com.google.common.collect.Iterables.getOnlyElement;
@@ -94,6 +98,7 @@ public class WindowAction {
 
     /**
      * Clicks button, which opens new window and switches to newly opened window
+     * this method doesn't force opening window in new window, we assume the code under test will open new window.
      *
      * @param button button to be clicked
      * @return handle of old (parent) window
@@ -125,7 +130,8 @@ public class WindowAction {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.open('someUrl', '_blank')");
         waitForNewWindowToOpen(oldWindowHandles);
-        switchToLast();
+
+        switchToLast(oldWindowHandle);
 
         return oldWindowHandle;
     }
@@ -169,7 +175,26 @@ public class WindowAction {
      * @return the WindowAction object itself
      */
     public WindowAction switchToLast() {
-        driver.switchTo().window(getLast(driver.getWindowHandles()));
+        Set<String> windowHandles = new TreeSet<>(driver.getWindowHandles());
+
+        driver.switchTo().window(getLast(windowHandles));
+        return this;
+    }
+
+    /**
+     * Switches to lastly opened window excluding the one provided as a parameter
+     *
+     * @param windowHandleToExclude - if list size is greater then one it will be removed
+     * @return the WindowAction object itself
+     */
+    public WindowAction switchToLast(String windowHandleToExclude) {
+        Set<String> windowHandles = new TreeSet<>(driver.getWindowHandles());
+
+        if (windowHandles.size() > 1) {
+            windowHandles.remove(windowHandleToExclude);
+        }
+
+        driver.switchTo().window(getLast(windowHandles));
         return this;
     }
 
@@ -177,7 +202,6 @@ public class WindowAction {
      * Switches to particular window by handle
      *
      * @param windowHandle window handle reference as a String
-     *
      * @return the WindowAction object itself
      */
     public WindowAction switchTo(String windowHandle) {

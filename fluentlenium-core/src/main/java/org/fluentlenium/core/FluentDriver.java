@@ -6,6 +6,7 @@ import org.apache.commons.io.IOUtils;
 import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
+import org.fluentlenium.core.action.WindowAction;
 import org.fluentlenium.core.alert.Alert;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.domain.FluentList;
@@ -62,7 +63,8 @@ public class FluentDriver implements FluentDriverControl {
     private MouseActions mouseActions;
 
     private KeyboardActions keyboardActions;
-   ;
+
+    private WindowAction windowAction;
 
     public FluentDriver(WebDriver driver, ConfigurationProperties configuration, ComponentsManager componentsManager) {
         this.configuration = configuration;
@@ -118,6 +120,7 @@ public class FluentDriver implements FluentDriverControl {
         this.mouseActions = new MouseActions(driver);
         this.keyboardActions = new KeyboardActions(driver);
         this.fluentInjector = new FluentInjector(this, componentsManager, new DefaultContainerInstanciator(this));
+        this.windowAction = new WindowAction(this, driver);
         inject(this);
         return this;
     }
@@ -223,6 +226,11 @@ public class FluentDriver implements FluentDriverControl {
         return keyboardActions;
     }
 
+    @Override
+    public WindowAction window() {
+        return windowAction;
+    }
+
     /**
      * Get the base URL to use when visiting relative URLs, if one is configured
      *
@@ -235,11 +243,6 @@ public class FluentDriver implements FluentDriverControl {
     @Override
     public FluentWait await() {
         return new FluentWait(this, getSearch());
-    }
-
-    @Override
-    public String title() {
-        return getDriver().getTitle();
     }
 
     @Override
@@ -431,8 +434,15 @@ public class FluentDriver implements FluentDriverControl {
     }
 
     @Override
+    @Deprecated
     public void maximizeWindow() {
-        getDriver().manage().window().maximize();
+        window().maximizeWindow();
+    }
+
+    @Override
+    @Deprecated
+    public String title() {
+        return window().title();
     }
 
     public void quit() {

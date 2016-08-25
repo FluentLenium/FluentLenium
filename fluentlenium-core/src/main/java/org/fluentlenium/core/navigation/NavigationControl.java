@@ -1,6 +1,7 @@
 package org.fluentlenium.core.navigation;
 
 import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.action.WindowAction;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.Cookie;
@@ -61,11 +62,6 @@ public interface NavigationControl {
     void switchToDefault();
 
     /**
-     * Maximize browser window
-     */
-    void maximizeWindow();
-
-    /**
      * Return the source of the page
      *
      * @return source of the page under test
@@ -77,8 +73,21 @@ public interface NavigationControl {
      *
      * @return browser window title
      */
+    @Deprecated
     String title();
 
+    /**
+     * Maximize browser window
+     */
+    @Deprecated
+    void maximizeWindow();
+
+    /**
+     * Exposes methods on browser window
+     *
+     * @return Window actions
+     */
+    WindowAction window();
 
     /**
      * return the cookies as a set
