@@ -2,7 +2,9 @@ package org.fluentlenium.core.action;
 
 import com.google.common.collect.ImmutableSet;
 import org.assertj.core.api.Assertions;
+import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.core.wait.FluentWaitWindowMatcher;
@@ -11,7 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
@@ -19,7 +20,9 @@ import org.openqa.selenium.WebDriver;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -116,6 +119,23 @@ public class WindowActionsTest {
         verify(driver.switchTo(), times(1)).parentFrame();
     }
 
+    public void clickAndOpenNewTest() throws InterruptedException { 
+        String windowHandle = "WndH1"; 
+        String windowHandle2 = "WndH2";  FluentWebElement fluentWebElement = mock(FluentWebElement.class); 
+        FluentWait fluentWait = mock(FluentWait.class); 
+        FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class); 
+        ComponentsManager componentsManager = mock(ComponentsManager.class);   
+        ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
+
+        FluentDriver fluentDriver = new FluentDriver(driver, configurationProperties, componentsManager); 
+        FluentDriver fluentDriverSpied = spy(fluentDriver);  when(driver.getWindowHandle()).thenReturn(windowHandle); 
+        when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2)); 
+        when(fluentWebElement.click()).thenReturn(fluentWebElement);  
+        when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);  
+        WindowAction windowAction = new WindowAction(fluentDriverSpied, driver);  
+        windowAction.clickAndOpenNew(fluentWebElement); 
+    }
+
     @Test
     public void setSizeTest() {
         WindowAction windowAction = new WindowAction(fluentDriver, driver);
@@ -130,9 +150,9 @@ public class WindowActionsTest {
         String windowHandle = "WndH1";
         String windowHandle2 = "WndH2";
 
-        FluentWebElement fluentWebElement = Mockito.mock(FluentWebElement.class);
-        FluentWait fluentWait = Mockito.mock(FluentWait.class);
-        FluentWaitWindowMatcher fluentWaitWindowMatcher = Mockito.mock(FluentWaitWindowMatcher.class);
+        FluentWebElement fluentWebElement = mock(FluentWebElement.class);
+        FluentWait fluentWait = mock(FluentWait.class);
+        FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
 
         when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2));
         when(fluentWaitWindowMatcher.isNotDisplayed()).thenReturn(true);
