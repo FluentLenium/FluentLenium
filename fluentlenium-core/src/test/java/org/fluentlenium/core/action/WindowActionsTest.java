@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 
@@ -110,6 +111,42 @@ public class WindowActionsTest {
     }
 
     @Test
+    public void openNewAndSwitch() {
+        JavascriptWebDriver jsDriver = mock(JavascriptWebDriver.class);
+
+        when(fluentDriver.getDriver()).thenReturn(jsDriver);
+        when(jsDriver.manage()).thenReturn(options);
+        when(jsDriver.manage().window()).thenReturn(window);
+        when(jsDriver.switchTo()).thenReturn(targetLocator);
+        when(jsDriver.switchTo().window(anyString())).thenReturn(driver);
+
+        String windowHandle = "WndH1";
+        String windowHandle1 = "WndH2";
+        String windowHandle2 = "WndH3";
+
+        FluentWait fluentWait = mock(FluentWait.class);
+        FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
+        ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
+        ComponentsManager componentsManager = mock(ComponentsManager.class);
+
+        FluentDriver fluentDriver = new FluentDriver(jsDriver, configurationProperties,componentsManager);
+        FluentDriver fluentDriverSpied = spy(fluentDriver);
+
+        when(jsDriver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1), ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
+        when(jsDriver.getWindowHandle()).thenReturn(windowHandle1, windowHandle2);
+
+        when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);
+        WindowAction windowAction = new WindowAction(fluentDriverSpied, jsDriver);
+        windowAction.openNewAndSwitch();
+
+        verify(jsDriver, times(3)).manage();
+        verify(jsDriver, times(1)).getWindowHandle();
+        verify(jsDriver, times(3)).getWindowHandles();
+        verify(jsDriver, times(2)).switchTo();
+
+    }
+
+    @Test
     public void switchToParentFrame() {
         WindowAction windowAction = new WindowAction(fluentDriver, driver);
 
@@ -117,23 +154,6 @@ public class WindowActionsTest {
 
         verify(driver, times(1)).manage();
         verify(driver.switchTo(), times(1)).parentFrame();
-    }
-
-    public void clickAndOpenNewTest() throws InterruptedException { 
-        String windowHandle = "WndH1"; 
-        String windowHandle2 = "WndH2";  FluentWebElement fluentWebElement = mock(FluentWebElement.class); 
-        FluentWait fluentWait = mock(FluentWait.class); 
-        FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class); 
-        ComponentsManager componentsManager = mock(ComponentsManager.class);   
-        ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
-
-        FluentDriver fluentDriver = new FluentDriver(driver, configurationProperties, componentsManager); 
-        FluentDriver fluentDriverSpied = spy(fluentDriver);  when(driver.getWindowHandle()).thenReturn(windowHandle); 
-        when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2)); 
-        when(fluentWebElement.click()).thenReturn(fluentWebElement);  
-        when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);  
-        WindowAction windowAction = new WindowAction(fluentDriverSpied, driver);  
-        windowAction.clickAndOpenNew(fluentWebElement); 
     }
 
     @Test
@@ -166,6 +186,34 @@ public class WindowActionsTest {
         verify(driver, times(1)).manage();
         verify(driver, times(1)).getWindowHandle();
 
+    }
+
+    @Test
+    public void clickAndOpenNewTest() throws InterruptedException {
+        String windowHandle = "WndH1";
+        String windowHandle1 = "WndH2";
+        String windowHandle2 = "WndH3";
+
+        FluentWebElement fluentWebElement = mock(FluentWebElement.class);
+        FluentWait fluentWait = mock(FluentWait.class);
+        FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
+        ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
+        ComponentsManager componentsManager = mock(ComponentsManager.class);
+
+        FluentDriver fluentDriver = new FluentDriver(driver, configurationProperties,componentsManager);
+        FluentDriver fluentDriverSpied = spy(fluentDriver);
+
+        when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1), ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
+        when(driver.getWindowHandle()).thenReturn(windowHandle1, windowHandle2);
+
+        when(fluentWebElement.click()).thenReturn(fluentWebElement);
+
+        when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);
+        WindowAction windowAction = new WindowAction(fluentDriverSpied, driver);
+        windowAction.clickAndOpenNew(fluentWebElement);
+
+        verify(driver, times(3)).manage();
+        verify(driver, times(3)).getWindowHandles();
     }
 
     @Test
@@ -224,5 +272,9 @@ public class WindowActionsTest {
 
         verify(driver.manage(), times(0)).window();
         verify(driver, times(1)).close();
+    }
+
+    public interface JavascriptWebDriver extends WebDriver, JavascriptExecutor {
+
     }
 }
