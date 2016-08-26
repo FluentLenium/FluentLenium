@@ -25,6 +25,10 @@
             }
         }
 
+        function closeWindow() {
+            window.close();
+        }
+
         function display(s) {
             document.getElementById("result").innerHTML = s;
         }
@@ -35,6 +39,7 @@
 <a id="alertBox" href="#" onclick="alertBox()">alertBox</a>
 <a id="confirmBox" href="#" onclick="confirmBox()">confirmBox</a>
 <a id="promptBox" href="#" onclick="promptBox()">promptBox</a>
+<a id="closeMe" href="#" onclick="closeWindow()">close window</a>
 <hr>
 <div id="result"></div>
 </body>
