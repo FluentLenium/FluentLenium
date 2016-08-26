@@ -131,7 +131,7 @@ public class WindowAction {
         jse.executeScript("window.open('someUrl', '_blank')");
         waitForNewWindowToOpen(oldWindowHandles);
 
-        switchToLast();
+        switchToLast(oldWindowHandle);
 
         return oldWindowHandle;
     }
@@ -176,6 +176,23 @@ public class WindowAction {
      */
     public WindowAction switchToLast() {
         Set<String> windowHandles = new TreeSet<>(driver.getWindowHandles());
+
+        driver.switchTo().window(getLast(windowHandles));
+        return this;
+    }
+
+    /**
+     * Switches to lastly opened window excluding the one provided as a parameter
+     *
+     * @param windowHandleToExclude - if list size is greater then one it will be removed
+     * @return the WindowAction object itself
+     */
+    public WindowAction switchToLast(String windowHandleToExclude) {
+        Set<String> windowHandles = new TreeSet<>(driver.getWindowHandles());
+
+        if (windowHandles.size() > 1) {
+            windowHandles.remove(windowHandleToExclude);
+        }
 
         driver.switchTo().window(getLast(windowHandles));
         return this;
