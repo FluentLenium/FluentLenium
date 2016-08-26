@@ -187,7 +187,7 @@ public class WindowAction {
             windowHandles.remove(windowHandleToExclude);
         }
 
-        driver.switchTo().window(getLast(driver.getWindowHandles()));
+        driver.switchTo().window(getLast(windowHandles));
         return this;
     }
 
