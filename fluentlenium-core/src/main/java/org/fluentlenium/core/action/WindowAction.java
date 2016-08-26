@@ -9,8 +9,12 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.StreamHandler;
 
 import static com.google.common.collect.Iterables.getLast;
 import static com.google.common.collect.Iterables.getOnlyElement;
@@ -126,7 +130,8 @@ public class WindowAction {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.open('someUrl', '_blank')");
         waitForNewWindowToOpen(oldWindowHandles);
-        switchToLast(oldWindowHandle);
+
+        switchToLast();
 
         return oldWindowHandle;
     }
@@ -170,22 +175,7 @@ public class WindowAction {
      * @return the WindowAction object itself
      */
     public WindowAction switchToLast() {
-        driver.switchTo().window(getLast(driver.getWindowHandles()));
-        return this;
-    }
-
-    /**
-     * Switches to lastly opened window excluding the one provided as a parameter
-     *
-     * @param windowHandleToExclude - if list size is greater then one it will be removed
-     * @return the WindowAction object itself
-     */
-    public WindowAction switchToLast(String windowHandleToExclude) {
-        Set<String> windowHandles = driver.getWindowHandles();
-
-        if (windowHandles.size() > 1) {
-            windowHandles.remove(windowHandleToExclude);
-        }
+        Set<String> windowHandles = new TreeSet<>(driver.getWindowHandles());
 
         driver.switchTo().window(getLast(windowHandles));
         return this;
