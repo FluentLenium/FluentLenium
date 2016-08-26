@@ -1,46 +1,51 @@
 package org.fluentlenium.integration;
 
-import com.google.common.collect.ImmutableSet;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.openqa.selenium.JavascriptExecutor;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-//// TODO: 25/08/16  
+@RunWith(MockitoJUnitRunner.class)
 public class WindowActionsTest extends IntegrationFluentTest {
-    @Mock
-    private JavascriptWebDriver webDriver;
+    @Test
+    public void openNewAndSwitchIT() {
+        goTo(DEFAULT_URL);
 
-    @Mock
-    private WebDriver.TargetLocator locator;
+        String hWnd = getDriver().getWindowHandle();
+        String wndTitle = getDriver().getTitle();
 
-    public WindowActionsTest() {
-        MockitoAnnotations.initMocks(this);
+        assertThat(getDriver().getWindowHandles().size()).isEqualTo(1);
+
+        window().openNewAndSwitch();
+
+        assertThat(getDriver().getWindowHandles().size()).isEqualTo(2);
+        assertThat(getDriver().getTitle()).isNotEqualTo(wndTitle);
+        assertThat(getDriver().getWindowHandle()).isNotEqualTo(hWnd);
     }
 
     @Test
-    public void checkGoToInNewTab() {
-//        when(webDriver.getWindowHandles()).thenReturn(ImmutableSet.of("s"),
-//                new HashSet<String>(Arrays.asList("a", "b"), new HashSet<String>(Arrays.asList("a", "b"))));
-//        when(webDriver.switchTo()).thenReturn(locator);
-//        goToInNewTab(DEFAULT_URL);
-//        verify(locator).window("b");
+    public void clickAndOpenNewAndCloseCurrentIT() {
+        goTo(DEFAULT_URL);
+        String hWnd = getDriver().getWindowHandle();
+        assertThat(getDriver().getWindowHandles().size()).isEqualTo(1);
+
+        window().clickAndOpenNew(findFirst("#linkToAlertPage"));
+
+        assertThat(getDriver().getWindowHandles().size()).isEqualTo(2);
+        assertThat(getDriver().getWindowHandle()).isNotEqualTo(hWnd);
+
+        window().clickAndCloseCurrent(findFirst("#closeMe"));
+
+        assertThat(getDriver().getWindowHandles().size()).isEqualTo(1);
+        assertThat(getDriver().getWindowHandle()).isEqualTo(hWnd);
     }
 
     @Override
     public WebDriver newWebDriver() {
-        return webDriver;
+        return new HtmlUnitDriver(true);
     }
-
-    public interface JavascriptWebDriver extends WebDriver, JavascriptExecutor {
-
-    }
-
 }

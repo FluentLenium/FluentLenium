@@ -94,6 +94,7 @@ public class WindowAction {
 
     /**
      * Clicks button, which opens new window and switches to newly opened window
+     * this method doesn't force opening window in new window, we assume the code under test will open new window.
      *
      * @param button button to be clicked
      * @return handle of old (parent) window
@@ -177,7 +178,6 @@ public class WindowAction {
      * Switches to particular window by handle
      *
      * @param windowHandle window handle reference as a String
-     *
      * @return the WindowAction object itself
      */
     public WindowAction switchTo(String windowHandle) {
