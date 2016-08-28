@@ -294,6 +294,32 @@ $(".fluent").reset();
 $(".fluent").isLoaded();
 ```
 
+## Window actions
+
+Window actions are available by window() method in FluentTest class.
+
+We introduced few additional methods in comparison to standard ones inherited from Selenium.
+
+These methods are: clickAndOpenNew, openNewAndSwitch, clickAndCloseCurrent, switchToLast, switchToLast(previousWindowName)
+
+### clickAndOpenNew
+
+You should use this method when click action invoked on element should end up with new window opened.
+This is just about waiting for new window to open, this method is not opening new browser window.
+
+### openNewAndSwitch
+
+This method opens new window and switches the context to newly oppened one.
+
+###clickAndCloseCurrent
+
+You should use this method when click action invoked on element should end up with current window closed.
+This is just about waiting for new window to close, this method is not closing browser window.
+
+### switchToLast, switchToLast(windowHandleToExclude)
+First version (without windowHandleToExclude argument) tries to find last window and switches to it.
+Second version of this method (with argument) add certainty that switch result won't be the excluded handler of window.
+
 ## Keyboard and Mouse actions
 
 Advanced keyboard and mouse actions are available using keyboard() and mouse() in FluentTest class or element.
