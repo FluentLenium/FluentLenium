@@ -69,7 +69,7 @@ public class FluentInjector implements FluentInjectControl {
 
     @Override
     public <T> T newInstance(Class<T> cls) {
-        T container = containerInstanciator.newInstance(cls);
+        T container = containerInstanciator.newInstance(cls, null);
         inject(container);
         return container;
     }
@@ -145,7 +145,7 @@ public class FluentInjector implements FluentInjectControl {
                             throw new FluentInjectException("Can't set field " + field + " with value " + existingChildContainer, e);
                         }
                     } else {
-                        Object childContainer = containerInstanciator.newInstance(fieldClass);
+                        Object childContainer = containerInstanciator.newInstance(fieldClass, containerContexts.get(container));
                         initContainer(childContainer, container);
                         try {
                             ReflectionUtils.set(field, container, childContainer);

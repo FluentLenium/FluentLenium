@@ -1,6 +1,6 @@
 package org.fluentlenium.core.inject;
 
-public interface FluentInjectControl extends ContainerInstanciator {
+public interface FluentInjectControl {
     /**
      * Inject object with FluentLenium resources.
      *
@@ -14,4 +14,14 @@ public interface FluentInjectControl extends ContainerInstanciator {
      * @param containers container to inject with FluentLenium resources
      */
     void inject(Object... containers);
+
+    /**
+     * Creates a new instance of a class inject it.
+     *
+     * @param cls    class of the object to create
+     * @param <T>    type of the object
+     * @return new instance
+     * @see FluentInjectControl#inject(Object)
+     */
+    <T> T newInstance(Class<T> cls);
 }
