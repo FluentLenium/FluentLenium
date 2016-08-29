@@ -186,8 +186,8 @@ public class FluentInjector implements FluentInjectControl {
     private Hook getHookAnnotation(Annotation annotation) {
         if (annotation instanceof Hook) {
             return (Hook) annotation;
-        } else if (annotation.getClass().isAnnotationPresent(Hook.class)) {
-            return annotation.getClass().getAnnotation(Hook.class);
+        } else if (annotation.annotationType().isAnnotationPresent(Hook.class)) {
+            return annotation.annotationType().getAnnotation(Hook.class);
         }
         return null;
     }
@@ -195,8 +195,8 @@ public class FluentInjector implements FluentInjectControl {
     private HookOptions getHookOptionsAnnotation(Annotation annotation) {
         if (annotation instanceof HookOptions) {
             return (HookOptions) annotation;
-        } else if (annotation.getClass().isAnnotationPresent(HookOptions.class)) {
-            return annotation.getClass().getAnnotation(HookOptions.class);
+        } else if (annotation.annotationType().isAnnotationPresent(HookOptions.class)) {
+            return annotation.annotationType().getAnnotation(HookOptions.class);
         }
         return null;
     }
@@ -212,39 +212,42 @@ public class FluentInjector implements FluentInjectControl {
             }
         }
 
+        Annotation currentAnnotation = null;
         for (Annotation annotation : annotations) {
             Hook hookAnnotation = getHookAnnotation(annotation);
+            if (hookAnnotation != null) {
+                currentAnnotation = annotation;
+            }
             if (hookAnnotation != null && currentHookAnnotation != null) {
-                hookDefinitions.add(buildHookDefinition(currentHookAnnotation, currentHookOptionAnnotation));
+                hookDefinitions.add(buildHookDefinition(currentHookAnnotation, currentHookOptionAnnotation, currentAnnotation));
                 currentHookAnnotation = null;
                 currentHookOptionAnnotation = null;
 
             }
             if (hookAnnotation != null) {
                 currentHookAnnotation = hookAnnotation;
-            } else {
-                HookOptions hookOptionsAnnotation = getHookOptionsAnnotation(annotation);
-                if (hookOptionsAnnotation != null) {
-                    if (currentHookOptionAnnotation != null) {
-                        throw new FluentInjectException("Unexpected @HookOptions annotation. @Hook is missing.");
-                    }
-                    currentHookOptionAnnotation = hookOptionsAnnotation;
+            }
+            HookOptions hookOptionsAnnotation = getHookOptionsAnnotation(annotation);
+            if (hookOptionsAnnotation != null) {
+                if (currentHookOptionAnnotation != null) {
+                    throw new FluentInjectException("Unexpected @HookOptions annotation. @Hook is missing.");
                 }
+                currentHookOptionAnnotation = hookOptionsAnnotation;
             }
         }
 
         if (currentHookAnnotation != null) {
-            hookDefinitions.add(buildHookDefinition(currentHookAnnotation, currentHookOptionAnnotation));
+            hookDefinitions.add(buildHookDefinition(currentHookAnnotation, currentHookOptionAnnotation, currentAnnotation));
         }
     }
 
-    private <T> HookDefinition<T> buildHookDefinition(Hook hookAnnotation, HookOptions hookOptionsAnnotation) {
+    private <T> HookDefinition<T> buildHookDefinition(Hook hookAnnotation, HookOptions hookOptionsAnnotation, Annotation currentAnnotation) {
         Class<? extends FluentHook<T>> hookClass = (Class<? extends FluentHook<T>>) hookAnnotation.value();
         Class<? extends T> hookOptionsClass = hookOptionsAnnotation == null ? null : (Class<? extends T>) hookOptionsAnnotation.value();
         T fluentHookOptions = null;
         if (hookOptionsClass != null) {
             try {
-                fluentHookOptions = ReflectionUtils.newInstanceOptionalArgs(hookOptionsClass, hookOptionsAnnotation);
+                fluentHookOptions = ReflectionUtils.newInstanceOptionalArgs(hookOptionsClass, currentAnnotation);
             } catch (NoSuchMethodException e) {
                 throw new FluentInjectException("@HookOption class has no valid constructor", e);
             } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {

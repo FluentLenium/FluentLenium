@@ -10,5 +10,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NanoHookOptions {
+    public NanoHookOptions(NanoHookAnnotation annotation) {
+        this.value = annotation.value();
+    }
+
     private String value;
 }
