@@ -98,7 +98,7 @@ public class FluentInjector implements FluentInjectControl {
     private void initContainer(Object container, Object parentContainer) {
         initContainerContext(container, parentContainer);
         if (container instanceof FluentContainer) {
-            ((FluentContainer) container).initFluent(fluentControl);
+            ((FluentContainer) container).initFluent(new ContainerFluentControl(fluentControl, containerContexts.get(container)));
         }
         initEventAnnotations(container);
     }

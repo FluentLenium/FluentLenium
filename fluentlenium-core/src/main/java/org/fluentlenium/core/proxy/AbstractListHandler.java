@@ -7,14 +7,15 @@ import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 abstract class AbstractListHandler<T, L extends List<T>> extends AbstractLocatorHandler implements InvocationHandler, LocatorHandler<L> {
     private static final Method EQUALS = getMethod(Object.class, "equals", Object.class);
@@ -22,7 +23,7 @@ abstract class AbstractListHandler<T, L extends List<T>> extends AbstractLocator
     private static final Method TO_STRING = getMethod(Object.class, "toString");
 
     private List<FluentHook> hooks;
-    private L proxy;
+    protected L proxy;
 
     private static Method getMethod(Class<?> declaringClass, String name, Class... types) {
         try {
@@ -43,10 +44,13 @@ abstract class AbstractListHandler<T, L extends List<T>> extends AbstractLocator
     private HookChainBuilder hookChainBuilder;
     private List<HookDefinition<?>> hookDefinitions;
 
+    private Map<T, Object> componentToProxy = new HashMap<>();
+
     public AbstractListHandler(ElementLocator locator,
                                Class<T> componentClass, ComponentInstantiator instantiator, HookChainBuilder hookChainBuilder) {
         this.locator = locator;
-        this.componentClass = componentClass;;
+        this.componentClass = componentClass;
+        ;
         this.instantiator = instantiator;
         this.hookChainBuilder = hookChainBuilder;
     }
@@ -73,7 +77,7 @@ abstract class AbstractListHandler<T, L extends List<T>> extends AbstractLocator
     @Override
     public ElementLocator getHookLocator() {
         if (hooks != null && hooks.size() > 0) {
-            return hooks.get(hooks.size()-1);
+            return hooks.get(hooks.size() - 1);
         }
         return locator;
     }
@@ -121,7 +125,8 @@ abstract class AbstractListHandler<T, L extends List<T>> extends AbstractLocator
 
         if (list != null) {
             for (T component : list) {
-                LocatorHandler handler = LocatorProxies.getLocatorHandler(component);
+                Object proxy = componentToProxy.get(component);
+                LocatorHandler handler = LocatorProxies.getLocatorHandler(proxy);
                 handler.setHooks(hookChainBuilder, hookDefinitions);
             }
         }
@@ -132,14 +137,23 @@ abstract class AbstractListHandler<T, L extends List<T>> extends AbstractLocator
             return new Function<WebElement, T>() {
                 @Override
                 public T apply(WebElement input) {
-                    return LocatorProxies.createComponent(input, componentClass, instantiator, hookChainBuilder, hookDefinitions);
+                    InstanceElementLocator instanceElementLocator = new InstanceElementLocator(input);
+                    WebElement proxy = LocatorProxies.createWebElement(instanceElementLocator);
+                    LocatorProxies.setHooks(hookChainBuilder, proxy, hookDefinitions);
+                    T component = instantiator.newComponent(componentClass, proxy);
+                    componentToProxy.put(component, proxy);
+                    return component;
                 }
             };
         } else {
             return new Function<WebElement, T>() {
                 @Override
                 public T apply(WebElement input) {
-                    return LocatorProxies.createComponent(input, componentClass, instantiator);
+                    InstanceElementLocator instanceElementLocator = new InstanceElementLocator(input);
+                    WebElement proxy = LocatorProxies.createWebElement(instanceElementLocator);
+                    T component = instantiator.newComponent(componentClass, proxy);
+                    componentToProxy.put(component, proxy);
+                    return component;
                 }
             };
         }
@@ -153,6 +167,7 @@ abstract class AbstractListHandler<T, L extends List<T>> extends AbstractLocator
             for (WebElement element : elements) {
                 fireProxyElementFound(proxy, locator, element);
             }
+            componentToProxy.clear();
             list = buildList(elements);
         }
         return list;

@@ -35,6 +35,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     private final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
     private HookChainBuilder hookChainBuilder;
 
+    private Object proxy;
+
     public FluentListImpl() {
     }
 
@@ -65,6 +67,10 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         this.componentClass = componentClass;
         this.instantiator = instantiator;
         this.hookChainBuilder = hookChainBuilder;
+    }
+
+    public void setProxy(Object proxy) {
+        this.proxy = proxy;
     }
 
     /**
@@ -506,21 +512,21 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     @Override
     public FluentList<E> noHook() {
         hookDefinitions.clear();
-        LocatorProxies.setHooks(hookChainBuilder, this, hookDefinitions);
+        LocatorProxies.setHooks(hookChainBuilder, proxy, hookDefinitions);
         return this;
     }
 
     @Override
     public <O, H extends FluentHook<O>> FluentList<E> withHook(Class<H> hook) {
         hookDefinitions.add(new HookDefinition<>(hook));
-        LocatorProxies.setHooks(hookChainBuilder, this, hookDefinitions);
+        LocatorProxies.setHooks(hookChainBuilder, proxy, hookDefinitions);
         return this;
     }
 
     @Override
     public <O, H extends FluentHook<O>> FluentList<E> withHook(Class<H> hook, O options) {
         hookDefinitions.add(new HookDefinition<>(hook, options));
-        LocatorProxies.setHooks(hookChainBuilder, this, hookDefinitions);
+        LocatorProxies.setHooks(hookChainBuilder, proxy, hookDefinitions);
         return this;
     }
 }

@@ -2,6 +2,7 @@ package org.fluentlenium.core.inject;
 
 import com.google.common.base.Supplier;
 import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.ComponentsManager;
@@ -19,6 +20,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ByIdOrName;
@@ -282,7 +284,7 @@ public class FluentInjectorHookTest {
     }
 
     @Hook(NanoHook2.class)
-    public static class SubContainer2 {
+    public static class SubContainer2 extends FluentPage {
         private WebElementWrapper subInjected2;
     }
 
@@ -325,6 +327,9 @@ public class FluentInjectorHookTest {
 
         WebElement subElement3 = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("subInjected3"))).thenReturn(subElement3);
+
+        WebElement subElementMethod = mock(WebElement.class);
+        when(webDriver.findElements(By.cssSelector("#subInjectedMethod"))).thenReturn(Arrays.asList(subElementMethod));
 
         injector.inject(container);
 
@@ -385,6 +390,24 @@ public class FluentInjectorHookTest {
         LocatorHandler subNoHook3ElementWrapperHandler = LocatorProxies.getLocatorHandler(container.subContainer.subContainer3.subInjected3.getElement());
         assertThat(subNoHook3ElementWrapperHandler.getHookLocatorResult()).isSameAs(subNoHook3ElementWrapperHandler.getLocatorResult());
 
+        WebElementWrapper subInjectedMethod = container.subContainer.subContainer2.find("#subInjectedMethod").first().as(WebElementWrapper.class);
+        LocatorProxies.now(subInjectedMethod.getElement());
+
+        LocatorHandler subInjectedMethodHandler = LocatorProxies.getLocatorHandler(subInjectedMethod.getElement());
+        assertThat(subInjectedMethodHandler.getHookLocatorResult()).isExactlyInstanceOf(NanoHook2.class);
+
+
+        WebElementWrapper subInjectedMethodNoHook = container.subContainer.subContainer2.find("#subInjectedMethod").first().noHook().as(WebElementWrapper.class);
+        LocatorProxies.now(subInjectedMethodNoHook.getElement());
+
+        LocatorHandler subInjectedMethodNoHookHandler = LocatorProxies.getLocatorHandler(subInjectedMethodNoHook.getElement());
+        assertThat(subInjectedMethodNoHookHandler.getHookLocatorResult()).isSameAs(subElementMethod);
+
+        WebElementWrapper subInjectedMethodNoHook2 = container.subContainer.subContainer2.find("#subInjectedMethod").noHook().first().as(WebElementWrapper.class);
+        LocatorProxies.now(subInjectedMethodNoHook2.getElement());
+
+        LocatorHandler subInjectedMethodNoHook2Handler = LocatorProxies.getLocatorHandler(subInjectedMethodNoHook2.getElement());
+        assertThat(subInjectedMethodNoHook2Handler.getHookLocatorResult()).isSameAs(subElementMethod);
     }
 
 

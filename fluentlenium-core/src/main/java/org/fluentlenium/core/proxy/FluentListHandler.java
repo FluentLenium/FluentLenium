@@ -19,7 +19,9 @@ class FluentListHandler<T extends FluentWebElement> extends AbstractListHandler<
 
     @Override
     protected FluentList<T> buildList(List<WebElement> elements) {
-        return new FluentListImpl(getComponentClass(), getInstantiator(), getHookChainBuilder(), FluentIterable.from(elements).transform(getTransformer()).toList());
+        FluentListImpl fluentList = new FluentListImpl(getComponentClass(), getInstantiator(), getHookChainBuilder(), FluentIterable.from(elements).transform(getTransformer()).toList());
+        fluentList.setProxy(proxy);
+        return fluentList;
     }
 
 }

@@ -108,8 +108,12 @@ public class FluentInjectorContainerTest {
 
         injector.inject(parentContainer);
 
-        Assertions.assertThat(parentContainer.control).isSameAs(fluentAdapter);
-        Assertions.assertThat(parentContainer.childContainer.control).isSameAs(fluentAdapter);
+        Assertions.assertThat(parentContainer.control).isInstanceOf(ContainerFluentControl.class);
+
+        Assertions.assertThat(((ContainerFluentControl)parentContainer.control).getAdapterControl()).isSameAs(fluentAdapter);
+        Assertions.assertThat(parentContainer.childContainer.control).isInstanceOf(ContainerFluentControl.class);
+
+        Assertions.assertThat(((ContainerFluentControl)parentContainer.childContainer.control).getAdapterControl()).isSameAs(fluentAdapter);
     }
 
     public static class ChildContainerConstructorInit {
