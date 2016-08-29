@@ -19,6 +19,6 @@ public @interface Wait {
     TimeUnit timeUnit() default TimeUnit.MILLISECONDS;
     long atMost() default -1L;
     long pollingEvery() default -1L;
-    boolean withNoDefaultsException();
-    java.lang.Class<? extends Throwable>[] ignoreAll();
+    boolean withNoDefaultsException() default false;
+    java.lang.Class<? extends Throwable>[] ignoreAll() default {};
 }

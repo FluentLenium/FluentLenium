@@ -2,6 +2,7 @@ package org.fluentlenium.core.domain;
 
 
 import com.google.common.collect.Lists;
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
@@ -14,6 +15,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.beans.IntrospectionException;
@@ -39,8 +41,12 @@ public class FluentListSearchTest {
 
     @Mock
     Filter filter2;
+
     @Mock
     WebElement webElement;
+
+    @Mock
+    WebDriver driver;
 
     List<FluentWebElement> webElements;
 
@@ -50,7 +56,8 @@ public class FluentListSearchTest {
     public void before() throws IntrospectionException, NoSuchFieldException, IllegalAccessException {
         MockitoAnnotations.initMocks(this);
         webElements = new ArrayList<FluentWebElement>();
-        fluentWebElement = new FluentWebElement(webElement, null, null);
+        FluentAdapter fluentAdapter = new FluentAdapter(driver);
+        fluentWebElement = new FluentWebElement(webElement, fluentAdapter, new DefaultComponentInstantiator(fluentAdapter));
         webElements.add(fluentWebElement);
         Field field = fluentWebElement.getClass().getDeclaredField("search");
         field.setAccessible(true);

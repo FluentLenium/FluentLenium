@@ -1,6 +1,7 @@
 package org.fluentlenium.core.hook;
 
 import com.google.common.base.Supplier;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,8 +20,8 @@ public class NanoHook extends BaseHook<NanoHookOptions> {
     private long beforeFindElementNano;
     private long afterFindElementNano;
 
-    public NanoHook(WebDriver webDriver, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, NanoHookOptions options) {
-        super(webDriver, instantiator, elementSupplier, locatorSupplier, options);
+    public NanoHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, NanoHookOptions options) {
+        super(fluentControl, instantiator, elementSupplier, locatorSupplier, options);
     }
 
     @Override

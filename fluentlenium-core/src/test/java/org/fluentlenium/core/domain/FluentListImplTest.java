@@ -1,6 +1,8 @@
 package org.fluentlenium.core.domain;
 
 import org.assertj.core.api.ThrowableAssert;
+import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.conditions.WebElementConditions;
@@ -39,9 +41,13 @@ public class FluentListImplTest {
     private FluentList<FluentWebElement> list;
     private FluentList<FluentWebElement> emptyList = new FluentListImpl<>();
 
+    private FluentAdapter fluentAdapter;
+
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
+
+        fluentAdapter = new FluentAdapter(driver);
 
         when(element1.conditions()).thenReturn(new WebElementConditions(element1));
         when(element2.conditions()).thenReturn(new WebElementConditions(element2));
@@ -89,8 +95,8 @@ public class FluentListImplTest {
         WebElement webElement2 = mock(WebElement.class);
         WebElement webElement3 = mock(WebElement.class);
 
-        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(driver);
-        DefaultHookChainBuilder hookChainBuilder = new DefaultHookChainBuilder(driver, instantiator);
+        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
+        DefaultHookChainBuilder hookChainBuilder = new DefaultHookChainBuilder(fluentAdapter, instantiator);
 
         FluentListImpl<FluentWebElement> list = FluentListImpl.fromElements(instantiator, hookChainBuilder, webElement1, webElement2, webElement3);
         assertThat(list.toElements()).containsExactly(webElement1, webElement2, webElement3);
@@ -365,8 +371,8 @@ public class FluentListImplTest {
 
 
     private static class Component extends FluentWebElement {
-        public Component(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
-            super(webElement, driver, instantiator);
+        public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+            super(webElement, fluentControl, instantiator);
         }
     }
 

@@ -72,7 +72,7 @@ public class FluentDriver implements FluentDriverControl {
 
     public FluentDriver(WebDriver driver, ConfigurationProperties configuration) {
         this.configuration = configuration;
-        this.componentsManager = new ComponentsManager(driver);
+        this.componentsManager = new ComponentsManager(this);
 
         initFluent(driver);
         configureDriver();
@@ -115,10 +115,10 @@ public class FluentDriver implements FluentDriverControl {
 
     protected FluentDriver initFluent(WebDriver driver) {
         this.driver = driver;
-        this.hookChainBuilder = new DefaultHookChainBuilder(this.driver, this.componentsManager.getInstantiator());
+        this.hookChainBuilder = new DefaultHookChainBuilder(this, this.componentsManager.getInstantiator());
         this.search = new Search(driver, componentsManager, hookChainBuilder);
         if (driver instanceof EventFiringWebDriver) {
-            this.events = new EventsRegistry((EventFiringWebDriver) driver);
+            this.events = new EventsRegistry(this);
             this.eventsComponentsAnnotations = new AnnotationsComponentListener(componentsManager);
             this.events.register(this.eventsComponentsAnnotations);
         }

@@ -2,6 +2,7 @@ package org.fluentlenium.core.hook;
 
 import com.google.common.base.Suppliers;
 import org.assertj.core.api.Assertions;
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.junit.Before;
@@ -40,10 +41,13 @@ public class BaseHookTest {
 
     private BaseHook<?> hook;
 
+    private FluentAdapter fluentAdapter;
+
     @Before
     public void before() {
-        instantiator = new DefaultComponentInstantiator(webDriver);
-        hook = new BaseHook<>(webDriver, instantiator, Suppliers.ofInstance(element),  Suppliers.ofInstance(locator), options);
+        fluentAdapter = new FluentAdapter(webDriver);
+        instantiator = new DefaultComponentInstantiator(fluentAdapter);
+        hook = new BaseHook<>(fluentAdapter, instantiator, Suppliers.ofInstance(element),  Suppliers.ofInstance(locator), options);
     }
 
     @Test
@@ -61,7 +65,7 @@ public class BaseHookTest {
 
     @Test
     public void testGetters() {
-        assertThat(hook.getWebDriver()).isSameAs(webDriver);
+        assertThat(hook.getDriver()).isSameAs(webDriver);
         assertThat(hook.getInstantiator()).isSameAs(instantiator);
         assertThat(hook.getElement()).isSameAs(element);
         assertThat(hook.getElementLocator()).isSameAs(locator);
@@ -72,7 +76,7 @@ public class BaseHookTest {
     public void testNoOptionHook() {
         final Object defaultOptions = new Object();
 
-        BaseHook noOptionHook = new BaseHook<Object>(webDriver, instantiator, Suppliers.ofInstance(element),  Suppliers.ofInstance(locator), null) {
+        BaseHook noOptionHook = new BaseHook<Object>(fluentAdapter, instantiator, Suppliers.ofInstance(element),  Suppliers.ofInstance(locator), null) {
             @Override
             protected Object newOptions() {
                 return defaultOptions;
@@ -86,7 +90,7 @@ public class BaseHookTest {
     @Test
     public void testNoOptionHookWithoutDefault() {
 
-        BaseHook noOptionHook = new BaseHook<>(webDriver, instantiator, Suppliers.ofInstance(element),  Suppliers.ofInstance(locator), null);
+        BaseHook noOptionHook = new BaseHook<>(fluentAdapter, instantiator, Suppliers.ofInstance(element),  Suppliers.ofInstance(locator), null);
 
         assertThat(noOptionHook.getOptions()).isNull();
     }

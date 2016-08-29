@@ -1,6 +1,7 @@
 package org.fluentlenium.core.hook;
 
 import com.google.common.base.Suppliers;
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Before;
@@ -39,10 +40,13 @@ public class BaseFluentHookTest {
 
     private BaseFluentHook<?> hook;
 
+    private FluentAdapter fluentAdapter;
+
     @Before
     public void before() {
-        instantiator = spy(new DefaultComponentInstantiator(webDriver));
-        hook = new BaseFluentHook<>(webDriver, instantiator, Suppliers.ofInstance(element),  Suppliers.ofInstance(locator), options);
+        fluentAdapter = new FluentAdapter(webDriver);
+        instantiator = spy(new DefaultComponentInstantiator(fluentAdapter));
+        hook = new BaseFluentHook<>(fluentAdapter, instantiator, Suppliers.ofInstance(element),  Suppliers.ofInstance(locator), options);
     }
 
     @Test

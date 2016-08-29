@@ -3,6 +3,8 @@ package org.fluentlenium.core.hook;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import org.assertj.core.api.Assertions;
+import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.junit.Before;
@@ -39,13 +41,17 @@ public class HookChainBuilderTest {
 
     private DefaultHookChainBuilder hookChainBuilder;
 
+    private FluentAdapter fluentAdapter;
+
     @Before
     public void before() {
-        instantiator = new DefaultComponentInstantiator(webDriver);
-        hookChainBuilder = new DefaultHookChainBuilder(webDriver, instantiator) {
+        fluentAdapter = new FluentAdapter(webDriver);
+
+        instantiator = new DefaultComponentInstantiator(fluentAdapter);
+        hookChainBuilder = new DefaultHookChainBuilder(fluentAdapter, instantiator) {
             @Override
-            protected FluentHook<?> newInstance(Class<? extends FluentHook<?>> hookClass, WebDriver webDriver, ComponentInstantiator instantiator, Supplier<WebElement> currentSupplier, Supplier<ElementLocator> locator, Object options) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-                return spy(super.newInstance(hookClass, webDriver, instantiator, currentSupplier, locator, options));
+            protected FluentHook<?> newInstance(Class<? extends FluentHook<?>> hookClass, FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> currentSupplier, Supplier<ElementLocator> locator, Object options) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+                return spy(super.newInstance(hookClass, fluentControl, instantiator, currentSupplier, locator, options));
             }
         };
     }

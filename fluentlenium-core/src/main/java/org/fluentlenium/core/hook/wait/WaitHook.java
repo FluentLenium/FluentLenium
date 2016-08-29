@@ -2,6 +2,7 @@ package org.fluentlenium.core.hook.wait;
 
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.ComponentsManager;
@@ -17,8 +18,8 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import java.util.List;
 
 public class WaitHook extends BaseFluentHook<WaitHookOptions> {
-    public WaitHook(WebDriver webDriver, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, WaitHookOptions options) {
-        super(webDriver, instantiator, elementSupplier, locatorSupplier, options);
+    public WaitHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, WaitHookOptions options) {
+        super(fluentControl, instantiator, elementSupplier, locatorSupplier, options);
     }
 
     @Override

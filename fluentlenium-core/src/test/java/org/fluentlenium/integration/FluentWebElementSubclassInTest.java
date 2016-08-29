@@ -1,5 +1,6 @@
 package org.fluentlenium.integration;
 
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
@@ -13,8 +14,8 @@ public class FluentWebElementSubclassInTest extends IntegrationFluentTest {
     ALink linkToPage2;
 
     public static class ALink extends FluentWebElement {
-        public ALink(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
-            super(webElement, driver, instantiator);
+        public ALink(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+            super(webElement, fluentControl, instantiator);
         }
 
         public void clickIfDisplayed() {

@@ -1,5 +1,6 @@
 package org.fluentlenium.integration;
 
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -31,8 +32,8 @@ public class AnnotationsComponentEventsTest extends IntegrationFluentTest {
         private List<By> beforeFindBy = new ArrayList<>();
         private List<By> afterFindBy = new ArrayList<>();
 
-        public Component(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
-            super(webElement, driver, instantiator);
+        public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+            super(webElement, fluentControl, instantiator);
         }
 
         @BeforeClickOn

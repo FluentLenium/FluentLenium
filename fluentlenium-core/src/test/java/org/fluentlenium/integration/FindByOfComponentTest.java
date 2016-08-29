@@ -1,5 +1,6 @@
 package org.fluentlenium.integration;
 
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.components.ComponentInstantiator;
@@ -21,8 +22,8 @@ public class FindByOfComponentTest extends IntegrationFluentTest {
     private PageIndex page;
 
     public static class SomeFluentWebElement extends FluentWebElement {
-        public SomeFluentWebElement(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
-            super(webElement, driver, instantiator);
+        public SomeFluentWebElement(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+            super(webElement, fluentControl, instantiator);
         }
     }
 

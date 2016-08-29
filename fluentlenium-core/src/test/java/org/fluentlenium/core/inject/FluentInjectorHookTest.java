@@ -2,6 +2,7 @@ package org.fluentlenium.core.inject;
 
 import com.google.common.base.Supplier;
 import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.components.ComponentInstantiator;
@@ -51,10 +52,9 @@ public class FluentInjectorHookTest {
     public void before() {
         MockitoAnnotations.initMocks(this);
 
-        fluentAdapter = new FluentAdapter();
-        fluentAdapter.initFluent(webDriver);
+        fluentAdapter = new FluentAdapter(webDriver);
 
-        injector = new FluentInjector(fluentAdapter, new ComponentsManager(webDriver), new DefaultContainerInstanciator(fluentAdapter));
+        injector = new FluentInjector(fluentAdapter, new ComponentsManager(fluentAdapter), new DefaultContainerInstanciator(fluentAdapter));
     }
 
     @After
@@ -274,8 +274,8 @@ public class FluentInjectorHookTest {
     }
 
     public static class NanoHook2 extends NanoHook {
-        public NanoHook2(WebDriver webDriver, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, NanoHookOptions options) {
-            super(webDriver, instantiator, elementSupplier, locatorSupplier, options);
+        public NanoHook2(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, NanoHookOptions options) {
+            super(fluentControl, instantiator, elementSupplier, locatorSupplier, options);
         }
     }
 

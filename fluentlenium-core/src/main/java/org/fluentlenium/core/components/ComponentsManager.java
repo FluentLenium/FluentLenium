@@ -1,6 +1,7 @@
 package org.fluentlenium.core.components;
 
 import com.sun.jna.WeakIdentityHashMap;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.proxy.ProxyElementListener;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.WebDriver;
@@ -23,19 +24,19 @@ import java.util.Map;
  */
 public class ComponentsManager implements ComponentInstantiator, ComponentAccessor, ProxyElementListener {
 
-    private final WebDriver driver;
+    private final FluentControl fluentControl;
     private final ComponentInstantiator instantiator;
 
     //TODO: IdentityHashMap or WeakIdentityHashMap ?
     private Map<WebElement, Object> components = new WeakIdentityHashMap();
 
-    public ComponentsManager(WebDriver driver) {
-        this.driver = driver;
-        this.instantiator = new DefaultComponentInstantiator(this.driver, this);
+    public ComponentsManager(FluentControl fluentControl) {
+        this.fluentControl = fluentControl;
+        this.instantiator = new DefaultComponentInstantiator(this.fluentControl, this);
     }
 
-    public ComponentsManager(WebDriver driver, ComponentInstantiator instantiator) {
-        this.driver = driver;
+    public ComponentsManager(FluentControl fluentControl, ComponentInstantiator instantiator) {
+        this.fluentControl = fluentControl;
         this.instantiator = instantiator;
     }
 

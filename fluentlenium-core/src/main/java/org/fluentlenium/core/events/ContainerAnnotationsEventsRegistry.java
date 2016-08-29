@@ -1,5 +1,6 @@
 package org.fluentlenium.core.events;
 
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.events.annotations.AfterChangeValueOf;
 import org.fluentlenium.core.events.annotations.AfterClickOn;
 import org.fluentlenium.core.events.annotations.AfterFindBy;
@@ -25,8 +26,8 @@ import java.lang.reflect.Method;
 public class ContainerAnnotationsEventsRegistry extends EventsRegistry {
     private final Object container;
 
-    public ContainerAnnotationsEventsRegistry(EventFiringWebDriver webDriver, Object container) {
-        super(webDriver);
+    public ContainerAnnotationsEventsRegistry(FluentControl fluentControl, Object container) {
+        super(fluentControl);
         this.container = container;
 
         //TODO: Ordre non determiné.

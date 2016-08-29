@@ -1,5 +1,6 @@
 package org.fluentlenium.core.domain;
 
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
 import org.fluentlenium.core.action.FluentActions;
@@ -34,7 +35,7 @@ import java.util.List;
  */
 public class FluentWebElement implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>, FluentProxyState<FluentWebElement>, SearchControl<FluentWebElement>, HookControl<FluentWebElement> {
     private WebElement webElement;
-    private final WebDriver driver;
+    private final FluentControl fluentControl;
     private final ComponentInstantiator instantiator;
 
     private final Search search;
@@ -46,17 +47,17 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
     private final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
     private final HookChainBuilder hookChainBuilder;
 
-    public FluentWebElement(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
+    public FluentWebElement(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
         this.webElement = webElement;
-        this.driver = driver;
+        this.fluentControl = fluentControl;
         this.instantiator = instantiator;
 
-        this.hookChainBuilder = new DefaultHookChainBuilder(this.driver, this.instantiator);
+        this.hookChainBuilder = new DefaultHookChainBuilder(this.fluentControl, this.instantiator);
 
         this.search = new Search(webElement, this.instantiator, this.hookChainBuilder);
         this.axes = new Axes(webElement, this.instantiator, this.hookChainBuilder);
-        this.mouseActions = new MouseElementActions(this.driver, webElement);
-        this.keyboardActions = new KeyboardElementActions(this.driver, webElement);
+        this.mouseActions = new MouseElementActions(this.fluentControl.getDriver(), webElement);
+        this.keyboardActions = new KeyboardElementActions(this.fluentControl.getDriver(), webElement);
         this.conditions = new WebElementConditions(this);
 
 
@@ -263,7 +264,7 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
      */
 
     public boolean isClickable() {
-        return ExpectedConditions.elementToBeClickable(getElement()).apply(driver) != null;
+        return ExpectedConditions.elementToBeClickable(getElement()).apply(fluentControl.getDriver()) != null;
     }
 
     /**
@@ -272,7 +273,7 @@ public class FluentWebElement implements WrapsElement, FluentActions<FluentWebEl
      * @return false is the element is still attached to the DOM, true otherwise.
      */
     public boolean isStale() {
-        return ExpectedConditions.stalenessOf(getElement()).apply(driver);
+        return ExpectedConditions.stalenessOf(getElement()).apply(fluentControl.getDriver());
     }
 
     /**

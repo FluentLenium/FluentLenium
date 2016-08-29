@@ -1,6 +1,7 @@
 package org.fluentlenium.core.domain;
 
 import org.assertj.core.api.ThrowableAssert;
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.ComponentException;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.junit.After;
@@ -48,16 +49,20 @@ public class FluentWebElementTest {
 
     private ComponentsManager componentsManager;
 
+    private FluentAdapter fluentAdapter;
+
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
 
+        fluentAdapter = new FluentAdapter(driver);
+
         when(driver.getMouse()).thenReturn(mouse);
         when(driver.getKeyboard()).thenReturn(keyboard);
 
-        componentsManager = new ComponentsManager(driver);
+        componentsManager = new ComponentsManager(fluentAdapter);
 
-        fluentElement = new FluentWebElement(element, driver, componentsManager);
+        fluentElement = new FluentWebElement(element, fluentAdapter, componentsManager);
     }
 
     @After

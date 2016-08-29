@@ -1,6 +1,7 @@
 package org.fluentlenium.core.hook;
 
 import org.assertj.core.api.Assertions;
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.proxy.LocatorHandler;
@@ -32,10 +33,12 @@ public class SearchHookTest {
 
     @Before
     public void before() {
-        Mockito.when(driver.findElements(By.cssSelector(".selector"))).thenReturn(Arrays.asList(element));
+        FluentAdapter fluentAdapter = new FluentAdapter(driver);
 
-        instantiator = new DefaultComponentInstantiator(driver);
-        search = new Search(driver, instantiator, new DefaultHookChainBuilder(driver, instantiator));
+        instantiator = new DefaultComponentInstantiator(fluentAdapter);
+        search = new Search(driver, instantiator, new DefaultHookChainBuilder(fluentAdapter, instantiator));
+
+        Mockito.when(driver.findElements(By.cssSelector(".selector"))).thenReturn(Arrays.asList(element));
     }
 
     @Test

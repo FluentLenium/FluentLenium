@@ -1,5 +1,8 @@
 package org.fluentlenium.core.conditions;
 
+import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.FluentControl;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
@@ -9,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,15 +26,20 @@ public class RectangleConditionsTest {
     @Mock
     private Rectangle rectangle;
 
+    @Mock
+    private WebDriver driver;
+
     private FluentWebElement fluentWebElement;
     private WebElementConditions conditions;
+    private FluentAdapter fluentAdapter;
 
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
         when(webElement.getRect()).thenReturn(rectangle);
 
-        fluentWebElement = new FluentWebElement(webElement, null, null);
+        fluentAdapter = new FluentAdapter(driver);
+        fluentWebElement = new FluentWebElement(webElement, fluentAdapter, new DefaultComponentInstantiator(fluentAdapter));
         conditions = new WebElementConditions(fluentWebElement);
     }
 

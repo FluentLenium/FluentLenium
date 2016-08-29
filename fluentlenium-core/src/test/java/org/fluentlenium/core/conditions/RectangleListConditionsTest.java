@@ -1,6 +1,8 @@
 package org.fluentlenium.core.conditions;
 
 import com.google.common.base.Predicate;
+import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
@@ -8,6 +10,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
@@ -27,6 +30,9 @@ public class RectangleListConditionsTest {
     @Mock
     private WebElement webElement3;
 
+    @Mock
+    private WebDriver webDriver;
+
     private FluentWebElement fluentWebElement1;
 
     private FluentWebElement fluentWebElement2;
@@ -37,9 +43,12 @@ public class RectangleListConditionsTest {
     public void before() {
         MockitoAnnotations.initMocks(this);
 
-        fluentWebElement1 = new FluentWebElement(webElement1, null, null);
-        fluentWebElement2 = new FluentWebElement(webElement2, null, null);
-        fluentWebElement3 = new FluentWebElement(webElement3, null, null);
+        FluentAdapter fluentAdapter = new FluentAdapter(webDriver);
+        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
+
+        fluentWebElement1 = new FluentWebElement(webElement1, fluentAdapter, instantiator);
+        fluentWebElement2 = new FluentWebElement(webElement2, fluentAdapter, instantiator);
+        fluentWebElement3 = new FluentWebElement(webElement3, fluentAdapter, instantiator);
     }
 
     @After

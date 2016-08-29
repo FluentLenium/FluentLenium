@@ -1,5 +1,6 @@
 package org.fluentlenium.core.components;
 
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,16 +8,16 @@ import org.openqa.selenium.WebElement;
 import java.lang.reflect.InvocationTargetException;
 
 public class DefaultComponentInstantiator implements ComponentInstantiator {
-    private final WebDriver driver;
+    private final FluentControl fluentControl;
     private final ComponentInstantiator instantiator;
 
-    public DefaultComponentInstantiator(WebDriver driver) {
-        this.driver = driver;
+    public DefaultComponentInstantiator(FluentControl fluentControl) {
+        this.fluentControl = fluentControl;
         this.instantiator = this;
     }
 
-    public DefaultComponentInstantiator(WebDriver driver, ComponentInstantiator instantiator) {
-        this.driver = driver;
+    public DefaultComponentInstantiator(FluentControl fluentControl, ComponentInstantiator instantiator) {
+        this.fluentControl = fluentControl;
         this.instantiator = instantiator;
     }
 
@@ -24,7 +25,7 @@ public class DefaultComponentInstantiator implements ComponentInstantiator {
     @Override
     public boolean isComponentClass(Class<?> componentClass) {
         try {
-            ReflectionUtils.getConstructorOptional(1, componentClass, WebElement.class, WebDriver.class, ComponentInstantiator.class);
+            ReflectionUtils.getConstructorOptional(1, componentClass, WebElement.class, FluentControl.class, ComponentInstantiator.class);
             return true;
         } catch (NoSuchMethodException e) {
             return false;
@@ -34,7 +35,7 @@ public class DefaultComponentInstantiator implements ComponentInstantiator {
     @Override
     public <T> T newComponent(Class<T> componentClass, WebElement element) {
         try {
-            return ReflectionUtils.newInstanceOptionalArgs(1, componentClass, element, driver, instantiator);
+            return ReflectionUtils.newInstanceOptionalArgs(1, componentClass, element, fluentControl, instantiator);
         } catch (NoSuchMethodException e) {
             throw new ComponentException(componentClass.getName() + " is not a valid component class.", e);
         } catch (IllegalAccessException e) {

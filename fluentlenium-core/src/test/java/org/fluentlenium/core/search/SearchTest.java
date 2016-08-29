@@ -1,6 +1,7 @@
 package org.fluentlenium.core.search;
 
 import com.google.common.collect.Lists;
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -52,8 +53,11 @@ public class SearchTest {
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
-        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(driver);
-        search = new Search(searchContext, instantiator, new DefaultHookChainBuilder(driver, instantiator));
+
+        FluentAdapter fluentAdapter = new FluentAdapter(driver);
+
+        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
+        search = new Search(searchContext, instantiator, new DefaultHookChainBuilder(fluentAdapter, instantiator));
     }
 
     @After

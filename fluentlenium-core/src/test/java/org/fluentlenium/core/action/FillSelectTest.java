@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.SearchControl;
@@ -46,9 +47,13 @@ public class FillSelectTest {
     @Mock
     private WebElement element4;
 
+    private FluentAdapter fluentAdapter;
+
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
+
+        fluentAdapter = new FluentAdapter(driver);
 
         when(element1.getTagName()).thenReturn("select");
         when(element2.getTagName()).thenReturn("span");
@@ -63,7 +68,7 @@ public class FillSelectTest {
     }
 
     public FluentWebElement el(WebElement element) {
-        return new FluentWebElement(element, null, null);
+        return new FluentWebElement(element, fluentAdapter, new DefaultComponentInstantiator(fluentAdapter));
     }
     
     @Test

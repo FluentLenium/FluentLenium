@@ -1,6 +1,7 @@
 package org.fluentlenium.core.inject;
 
 import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.domain.FluentList;
@@ -37,7 +38,7 @@ public class FluentInjectorElementTest {
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
 
-        injector = new FluentInjector(fluentAdapter, new ComponentsManager(webDriver), new DefaultContainerInstanciator(fluentAdapter));
+        injector = new FluentInjector(fluentAdapter, new ComponentsManager(fluentAdapter), new DefaultContainerInstanciator(fluentAdapter));
     }
 
     @After
@@ -46,8 +47,8 @@ public class FluentInjectorElementTest {
     }
 
     public static class FluentWebElementSubClass extends FluentWebElement {
-        public FluentWebElementSubClass(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
-            super(webElement, driver, instantiator);
+        public FluentWebElementSubClass(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+            super(webElement, fluentControl, instantiator);
         }
     }
 
@@ -65,19 +66,19 @@ public class FluentInjectorElementTest {
 
     public static class WebElementDriverWrapper {
         private final WebElement element;
-        private final WebDriver webDriver;
+        private final FluentControl fluentControl;
 
-        public WebElementDriverWrapper(WebElement element, WebDriver webDriver) {
+        public WebElementDriverWrapper(WebElement element, FluentControl fluentControl) {
             this.element = element;
-            this.webDriver = webDriver;
+            this.fluentControl = fluentControl;
         }
 
         public WebElement getElement() {
             return element;
         }
 
-        public WebDriver getWebDriver() {
-            return webDriver;
+        public FluentControl getFluentControl() {
+            return fluentControl;
         }
     }
 
@@ -195,7 +196,7 @@ public class FluentInjectorElementTest {
 
         assertThat(container.element).isExactlyInstanceOf(WebElementDriverWrapper.class);
         assertThat(container.element.getElement()).isInstanceOf(WebElement.class);
-        assertThat(container.element.getWebDriver()).isSameAs(webDriver);
+        assertThat(container.element.getFluentControl()).isSameAs(fluentAdapter);
     }
 
     @Test
@@ -314,13 +315,13 @@ public class FluentInjectorElementTest {
         assertThat(container.element.get(0)).isExactlyInstanceOf(WebElementDriverWrapper.class);
         assertThat(container.element.get(0).getElement()).isInstanceOf(WebElement.class);
         assertThat(container.element.get(0).getElement().getTagName()).isEqualTo("h1");
-        assertThat(container.element.get(0).getWebDriver()).isSameAs(webDriver);
+        assertThat(container.element.get(0).getFluentControl()).isSameAs(fluentAdapter);
 
 
         assertThat(container.element.get(1)).isExactlyInstanceOf(WebElementDriverWrapper.class);
         assertThat(container.element.get(1).getElement()).isInstanceOf(WebElement.class);
         assertThat(container.element.get(1).getElement().getTagName()).isEqualTo("h2");
-        assertThat(container.element.get(1).getWebDriver()).isSameAs(webDriver);
+        assertThat(container.element.get(1).getFluentControl()).isSameAs(fluentAdapter);
     }
 
     @Test
@@ -345,12 +346,12 @@ public class FluentInjectorElementTest {
         assertThat(container.element.get(0)).isExactlyInstanceOf(WebElementDriverWrapper.class);
         assertThat(container.element.get(0).getElement()).isInstanceOf(WebElement.class);
         assertThat(container.element.get(0).getElement().getTagName()).isEqualTo("h1");
-        assertThat(container.element.get(0).getWebDriver()).isSameAs(webDriver);
+        assertThat(container.element.get(0).getFluentControl()).isSameAs(fluentAdapter);
 
         assertThat(container.element.get(1)).isExactlyInstanceOf(WebElementDriverWrapper.class);
         assertThat(container.element.get(1).getElement()).isInstanceOf(WebElement.class);
         assertThat(container.element.get(1).getElement().getTagName()).isEqualTo("h2");
-        assertThat(container.element.get(1).getWebDriver()).isSameAs(webDriver);
+        assertThat(container.element.get(1).getFluentControl()).isSameAs(fluentAdapter);
     }
 
     @Test

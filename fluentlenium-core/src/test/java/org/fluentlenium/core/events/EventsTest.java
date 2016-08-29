@@ -1,6 +1,7 @@
 package org.fluentlenium.core.events;
 
 import org.assertj.core.api.ThrowableAssert;
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -39,23 +40,34 @@ public class EventsTest {
     @Mock
     private WebDriver.Navigation navigation;
 
+    @Mock
+    private WebDriver.Options options;
+
+    @Mock
+    private WebDriver.Timeouts timeouts;
+
     private EventFiringWebDriver eventDriver;
 
     private ComponentInstantiator instantiator;
+    private FluentAdapter fluentAdapter;
 
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
 
         when(driver.navigate()).thenReturn(navigation);
+        when(driver.manage()).thenReturn(options);
+        when(options.timeouts()).thenReturn(timeouts);
 
         eventDriver = new EventFiringWebDriver(driver);
-        instantiator = new DefaultComponentInstantiator(driver);
+        fluentAdapter = new FluentAdapter(eventDriver);
+
+        instantiator = new DefaultComponentInstantiator(fluentAdapter);
     }
 
     @Test
     public void testFindBy() {
-        EventsRegistry eventsRegistry = new EventsRegistry(eventDriver);
+        EventsRegistry eventsRegistry = new EventsRegistry(fluentAdapter);
 
         FindByListener beforeListener = mock(FindByListener.class);
         FindByListener afterListener = mock(FindByListener.class);
@@ -82,7 +94,7 @@ public class EventsTest {
 
     @Test
     public void testClickOn() {
-        EventsRegistry eventsRegistry = new EventsRegistry(eventDriver);
+        EventsRegistry eventsRegistry = new EventsRegistry(fluentAdapter);
 
         ElementListener beforeListener = mock(ElementListener.class);
         ElementListener afterListener = mock(ElementListener.class);
@@ -106,7 +118,7 @@ public class EventsTest {
 
     @Test
     public void testChangeValueOf() {
-        EventsRegistry eventsRegistry = new EventsRegistry(eventDriver);
+        EventsRegistry eventsRegistry = new EventsRegistry(fluentAdapter);
 
         ElementListener beforeListener = mock(ElementListener.class);
         ElementListener afterListener = mock(ElementListener.class);
@@ -130,7 +142,7 @@ public class EventsTest {
 
     @Test
     public void testNavigate() {
-        EventsRegistry eventsRegistry = new EventsRegistry(eventDriver);
+        EventsRegistry eventsRegistry = new EventsRegistry(fluentAdapter);
 
         assertThat(eventsRegistry.getWrappedDriver()).isSameAs(driver);
 

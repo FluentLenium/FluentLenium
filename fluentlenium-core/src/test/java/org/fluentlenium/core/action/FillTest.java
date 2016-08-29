@@ -1,6 +1,8 @@
 package org.fluentlenium.core.action;
 
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
@@ -41,9 +43,13 @@ public class FillTest {
     @Mock
     private WebElement element4;
 
+    private FluentAdapter fluentAdapter;
+
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
+
+        fluentAdapter = new FluentAdapter(driver);
     }
 
     @After
@@ -52,7 +58,7 @@ public class FillTest {
     }
 
     public FluentWebElement el(WebElement element) {
-        return new FluentWebElement(element, null, null);
+        return new FluentWebElement(element, fluentAdapter, new DefaultComponentInstantiator(fluentAdapter));
     }
     
     @Test

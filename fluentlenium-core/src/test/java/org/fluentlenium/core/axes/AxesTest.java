@@ -1,7 +1,7 @@
 package org.fluentlenium.core.axes;
 
 
-import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
@@ -28,14 +28,18 @@ public class AxesTest {
     private WebDriver driver;
 
     private ComponentInstantiator instantiator;
-    
+
     private DefaultHookChainBuilder hookChainBuilder;
+
+    private FluentAdapter fluentAdapter;
 
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
-        this.instantiator = new DefaultComponentInstantiator(driver);
-        this.hookChainBuilder = new DefaultHookChainBuilder(driver, instantiator);
+        fluentAdapter = new FluentAdapter(driver);
+
+        instantiator = new DefaultComponentInstantiator(fluentAdapter);
+        hookChainBuilder = new DefaultHookChainBuilder(fluentAdapter, instantiator);
     }
 
     @Test

@@ -52,7 +52,7 @@ public class FluentInjector implements FluentInjectControl {
         this.fluentControl = fluentControl;
         this.componentsManager = componentsManager;
         this.containerInstanciator = instanciator;
-        this.hookChainBuilder = new DefaultHookChainBuilder(fluentControl.getDriver(), componentsManager.getInstantiator());
+        this.hookChainBuilder = new DefaultHookChainBuilder(fluentControl, componentsManager.getInstantiator());
     }
 
     /**
@@ -121,7 +121,7 @@ public class FluentInjector implements FluentInjectControl {
 
     private void initEventAnnotations(final Object container) {
         if (fluentControl.getDriver() instanceof EventFiringWebDriver) {
-            eventsContainerSupport.put(container, new ContainerAnnotationsEventsRegistry((EventFiringWebDriver) fluentControl.getDriver(), container));
+            eventsContainerSupport.put(container, new ContainerAnnotationsEventsRegistry(fluentControl, container));
         }
     }
 
@@ -347,7 +347,6 @@ public class FluentInjector implements FluentInjectControl {
     private FluentList<? extends FluentWebElement> initFieldAsListOfFluentWebElement(ElementLocator locator, Object container, Field field, List<HookDefinition<?>> hookDefinitions) throws IllegalAccessException {
         FluentList<? extends FluentWebElement> proxy = LocatorProxies.createFluentList(locator, (Class<? extends FluentWebElement>) getFirstGenericType(field), componentsManager, hookChainBuilder);
         if (hookDefinitions.size() > 0) {
-            HookChainBuilder hookChainBuilder = new DefaultHookChainBuilder(fluentControl.getDriver(), componentsManager.getInstantiator());
             LocatorProxies.setHooks(hookChainBuilder, proxy, hookDefinitions);
         }
         ReflectionUtils.set(field, container, proxy);

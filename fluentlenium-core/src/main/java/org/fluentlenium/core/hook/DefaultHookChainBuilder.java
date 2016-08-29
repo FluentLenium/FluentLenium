@@ -1,6 +1,7 @@
 package org.fluentlenium.core.hook;
 
 import com.google.common.base.Supplier;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.WebDriver;
@@ -12,11 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultHookChainBuilder implements HookChainBuilder {
-    private final WebDriver webDriver;
+    private final FluentControl fluentControl;
     private final ComponentInstantiator instantiator;
 
-    public DefaultHookChainBuilder(WebDriver webDriver, ComponentInstantiator instantiator) {
-        this.webDriver = webDriver;
+    public DefaultHookChainBuilder(FluentControl fluentControl, ComponentInstantiator instantiator) {
+        this.fluentControl = fluentControl;
         this.instantiator = instantiator;
     }
 
@@ -29,7 +30,7 @@ public class DefaultHookChainBuilder implements HookChainBuilder {
         for (HookDefinition<?> hook : hooks) {
             FluentHook<?> newObject;
             try {
-                newObject = newInstance(hook.getHookClass(), webDriver, instantiator, currentSupplier, locator, hook.getOptions());
+                newObject = newInstance(hook.getHookClass(), fluentControl, instantiator, currentSupplier, locator, hook.getOptions());
             } catch (NoSuchMethodException e) {
                 throw new HookException(e);
             } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
@@ -50,7 +51,7 @@ public class DefaultHookChainBuilder implements HookChainBuilder {
         return chain;
     }
 
-    protected FluentHook<?> newInstance(Class<? extends FluentHook<?>> hookClass, WebDriver webDriver, ComponentInstantiator instantiator, Supplier<WebElement> currentSupplier, Supplier<ElementLocator> locator, Object options) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        return ReflectionUtils.newInstance(hookClass, webDriver, instantiator, currentSupplier, locator, options);
+    protected FluentHook<?> newInstance(Class<? extends FluentHook<?>> hookClass, FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> currentSupplier, Supplier<ElementLocator> locator, Object options) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        return ReflectionUtils.newInstance(hookClass, fluentControl, instantiator, currentSupplier, locator, options);
     }
 }
