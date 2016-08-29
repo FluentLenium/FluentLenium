@@ -9,7 +9,6 @@ import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.FluentDriverControl;
 import org.fluentlenium.core.components.ComponentException;
 import org.fluentlenium.core.components.ComponentsManager;
-import org.fluentlenium.core.components.Components;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
@@ -86,9 +85,7 @@ public class FluentAdapter implements FluentDriverControl, ConfigurationProperti
             }
         }
 
-        ComponentsManager componentsManager = Components.INSTANCE.getOrCreate(webDriver);
-
-        FluentDriver fluentDriver = new FluentDriver(webDriver, this, componentsManager);
+        FluentDriver fluentDriver = new FluentDriver(webDriver, this);
         setFluentDriver(fluentDriver);
         fluentDriver.inject(this);
     }
@@ -101,7 +98,6 @@ public class FluentAdapter implements FluentDriverControl, ConfigurationProperti
     public void releaseFluent() {
         if (getFluentDriver() != null) {
             getFluentDriver().releaseFluent();
-            Components.INSTANCE.release(getFluentDriver().getDriver());
             setFluentDriver(null);
         }
     }

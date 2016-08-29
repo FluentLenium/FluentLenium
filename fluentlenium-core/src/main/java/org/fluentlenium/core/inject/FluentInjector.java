@@ -65,6 +65,7 @@ public class FluentInjector implements FluentInjectControl {
         }
         eventsContainerSupport.clear();
         containerContexts.clear();
+        componentsManager.release();
     }
 
     @Override

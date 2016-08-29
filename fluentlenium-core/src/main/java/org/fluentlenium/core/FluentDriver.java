@@ -70,9 +70,9 @@ public class FluentDriver implements FluentDriverControl {
 
     private WindowAction windowAction;
 
-    public FluentDriver(WebDriver driver, ConfigurationProperties configuration, ComponentsManager componentsManager) {
+    public FluentDriver(WebDriver driver, ConfigurationProperties configuration) {
         this.configuration = configuration;
-        this.componentsManager = componentsManager;
+        this.componentsManager = new ComponentsManager(driver);
 
         initFluent(driver);
         configureDriver();
