@@ -39,8 +39,8 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class FluentInjector implements FluentInjectControl {
 
-    private final ConcurrentMap<Class, Object> pageInstances = new ConcurrentHashMap<>();
-    private final ConcurrentMap<Object, List<HookDefinition<?>>> pageHookDefinitions = new ConcurrentHashMap<>();
+    private final ConcurrentMap<Class, Object> containerInstances = new ConcurrentHashMap<>();
+    private final ConcurrentMap<Object, ContainerContext> containerContexts = new ConcurrentHashMap<>();
     private final ConcurrentMap<Object, ContainerAnnotationsEventsRegistry> eventsContainerSupport = new ConcurrentHashMap<>();
 
     private final FluentControl fluentControl;
@@ -59,11 +59,12 @@ public class FluentInjector implements FluentInjectControl {
      * Release all loaded containers.
      */
     public void release() {
-        pageInstances.clear();
+        containerInstances.clear();
         for (ContainerAnnotationsEventsRegistry support : eventsContainerSupport.values()) {
             support.close();
         }
         eventsContainerSupport.clear();
+        containerContexts.clear();
     }
 
     @Override
@@ -82,23 +83,39 @@ public class FluentInjector implements FluentInjectControl {
 
     @Override
     public void inject(Object container) {
-        inject(container, new ArrayList<HookDefinition<?>>());
+        inject(container, null);
     }
 
-    private void inject(Object container, List<HookDefinition<?>> hookDefinitions) {
-        initContainer(container);
-        initFluentElements(container, hookDefinitions);
-        initChildrenContainers(container, hookDefinitions);
+    private void inject(Object container, Object parentContainer) {
+        initContainer(container, parentContainer);
+        initFluentElements(container);
+        initChildrenContainers(container);
 
         // Default Selenium WebElement injection.
         PageFactory.initElements(fluentControl.getDriver(), container);
     }
 
-    private void initContainer(Object container) {
+    private void initContainer(Object container, Object parentContainer) {
+        initContainerContext(container, parentContainer);
         if (container instanceof FluentContainer) {
             ((FluentContainer) container).initFluent(fluentControl);
         }
         initEventAnnotations(container);
+    }
+
+    private void initContainerContext(Object container, Object parentContainer) {
+        ContainerContext parentContainerContext = parentContainer != null ? containerContexts.get(parentContainer) : null;
+
+        DefaultContainerContext containerContext = new DefaultContainerContext(container, parentContainerContext);
+        containerContexts.put(container, containerContext);
+
+        if (parentContainerContext != null) {
+            containerContext.getHookDefinitions().addAll(parentContainerContext.getHookDefinitions());
+        }
+
+        for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
+            addHookDefinitions(cls.getDeclaredAnnotations(), containerContext.getHookDefinitions());
+        }
     }
 
     private void initEventAnnotations(final Object container) {
@@ -115,12 +132,12 @@ public class FluentInjector implements FluentInjectControl {
         return cls != Object.class && cls != null;
     }
 
-    private void initChildrenContainers(Object container, List<HookDefinition<?>> hookDefinitions) {
+    private void initChildrenContainers(Object container) {
         for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
             for (Field field : cls.getDeclaredFields()) {
                 if (isContainer(field)) {
                     Class fieldClass = field.getType();
-                    Object existingChildContainer = pageInstances.get(fieldClass);
+                    Object existingChildContainer = containerInstances.get(fieldClass);
                     if (existingChildContainer != null) {
                         try {
                             ReflectionUtils.set(field, container, existingChildContainer);
@@ -129,27 +146,27 @@ public class FluentInjector implements FluentInjectControl {
                         }
                     } else {
                         Object childContainer = containerInstanciator.newInstance(fieldClass);
-                        initContainer(childContainer);
+                        initContainer(childContainer, container);
                         try {
                             ReflectionUtils.set(field, container, childContainer);
                         } catch (IllegalAccessException e) {
                             throw new FluentInjectException("Can't set field " + field + " with value " + childContainer, e);
                         }
-                        pageInstances.putIfAbsent(fieldClass, childContainer);
-                        inject(childContainer, hookDefinitions);
+                        containerInstances.putIfAbsent(fieldClass, childContainer);
+                        inject(childContainer, container);
                     }
                 }
             }
         }
     }
 
-    private <T extends FluentControl> void initFluentElements(Object container, List<HookDefinition<?>> hookDefinitions) {
-        for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
-            addHookDefinitions(cls.getDeclaredAnnotations(), hookDefinitions);
+    private <T extends FluentControl> void initFluentElements(Object container) {
+        ContainerContext containerContext = containerContexts.get(container);
 
+        for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
             for (Field field : cls.getDeclaredFields()) {
                 if (isSupported(container, field)) {
-                    ArrayList<HookDefinition<?>> fieldHookDefinitions = new ArrayList<>(hookDefinitions);
+                    ArrayList<HookDefinition<?>> fieldHookDefinitions = new ArrayList<>(containerContext.getHookDefinitions());
                     addHookDefinitions(field.getAnnotations(), fieldHookDefinitions);
 
                     AjaxElement annotation = field.getAnnotation(AjaxElement.class);
@@ -164,8 +181,6 @@ public class FluentInjector implements FluentInjectControl {
                 }
             }
         }
-
-        pageHookDefinitions.put(container, new ArrayList<>(hookDefinitions));
     }
 
     private Hook getHookAnnotation(Annotation annotation) {
