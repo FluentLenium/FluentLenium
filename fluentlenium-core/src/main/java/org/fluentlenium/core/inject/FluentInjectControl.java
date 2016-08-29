@@ -6,14 +6,14 @@ public interface FluentInjectControl {
      *
      * @param container container to inject with FluentLenium resources
      */
-    void inject(Object container);
+    ContainerContext inject(Object container);
 
     /**
      * Inject array of object with FluentLenium resources.
      *
      * @param containers container to inject with FluentLenium resources
      */
-    void inject(Object... containers);
+    ContainerContext[] inject(Object... containers);
 
     /**
      * Creates a new instance of a class inject it.

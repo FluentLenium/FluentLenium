@@ -13,18 +13,18 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     private final SharedMutator sharedMutator;
 
     public FluentTestRunnerAdapter() {
-        this(new DefaultDriverContainer());
+        this(new DefaultFluentControlContainer());
     }
 
-    public FluentTestRunnerAdapter(DriverContainer driverContainer) {
+    public FluentTestRunnerAdapter(FluentControlContainer driverContainer) {
         this(driverContainer, new DefaultSharedMutator());
     }
 
     public FluentTestRunnerAdapter(SharedMutator sharedMutator) {
-        this(new DefaultDriverContainer(), sharedMutator);
+        this(new DefaultFluentControlContainer(), sharedMutator);
     }
 
-    public FluentTestRunnerAdapter(DriverContainer driverContainer, SharedMutator sharedMutator) {
+    public FluentTestRunnerAdapter(FluentControlContainer driverContainer, SharedMutator sharedMutator) {
         super(driverContainer);
         this.sharedMutator = sharedMutator;
     }

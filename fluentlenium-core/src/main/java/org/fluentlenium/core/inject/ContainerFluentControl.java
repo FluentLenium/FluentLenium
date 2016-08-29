@@ -14,14 +14,22 @@ public class ContainerFluentControl implements FluentControl {
     @Delegate(excludes = SearchControl.class)
     private final FluentControl adapterControl;
 
-    private final ContainerContext context;
+    private ContainerContext context;
 
     public FluentControl getAdapterControl() {
         return adapterControl;
     }
 
+    public ContainerFluentControl(FluentControl adapterControl) {
+        this(adapterControl, null);
+    }
+
     public ContainerFluentControl(FluentControl adapterControl, ContainerContext context) {
         this.adapterControl = adapterControl;
+        this.context = context;
+    }
+
+    public void setContext(ContainerContext context) {
         this.context = context;
     }
 

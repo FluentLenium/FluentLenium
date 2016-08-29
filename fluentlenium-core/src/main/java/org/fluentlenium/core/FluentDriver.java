@@ -43,7 +43,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Util Class which offers some shortcut to webdriver methods
  */
-public class FluentDriver implements FluentDriverControl {
+public class FluentDriver implements FluentControl {
 
     private String baseUrl;
 
@@ -126,7 +126,6 @@ public class FluentDriver implements FluentDriverControl {
         this.keyboardActions = new KeyboardActions(driver);
         this.fluentInjector = new FluentInjector(this, componentsManager, new DefaultContainerInstanciator(this));
         this.windowAction = new WindowAction(this, driver);
-        inject(this);
         return this;
     }
 
@@ -199,11 +198,6 @@ public class FluentDriver implements FluentDriverControl {
     @Override
     public WebDriver getDriver() {
         return this.driver;
-    }
-
-    @Override
-    public WebDriver getWrappedDriver() {
-        return getDriver();
     }
 
     private Search getSearch() {

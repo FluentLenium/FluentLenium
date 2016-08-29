@@ -76,15 +76,18 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     @Override
-    public void inject(Object... containers) {
-        for (Object container : containers) {
-            inject(container);
+    public ContainerContext[] inject(Object... containers) {
+        ContainerContext[] context = new ContainerContext[containers.length];
+        for (int i=0; i<containers.length; i++) {
+            context[i] = inject(containers[i]);
         }
+        return context;
     }
 
     @Override
-    public void inject(Object container) {
+    public ContainerContext inject(Object container) {
         inject(container, null);
+        return containerContexts.get(container);
     }
 
     private void inject(Object container, Object parentContainer) {

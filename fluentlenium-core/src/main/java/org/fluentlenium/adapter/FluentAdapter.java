@@ -5,35 +5,35 @@ import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.configuration.ConfigurationFactoryProvider;
 import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.configuration.WebDrivers;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentDriver;
-import org.fluentlenium.core.FluentDriverControl;
-import org.fluentlenium.core.components.ComponentException;
-import org.fluentlenium.core.components.ComponentsManager;
+import org.fluentlenium.core.inject.ContainerContext;
+import org.fluentlenium.core.inject.ContainerFluentControl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 /**
  * Generic adapter to {@link FluentDriver}.
  */
-public class FluentAdapter implements FluentDriverControl, ConfigurationProperties {
+public class FluentAdapter implements FluentControl, ConfigurationProperties {
 
-    private final DriverContainer driverContainer;
+    private final FluentControlContainer driverContainer;
 
     private final Configuration configuration = ConfigurationFactoryProvider.newConfiguration(getClass());
 
     public FluentAdapter() {
-        this(new DefaultDriverContainer());
+        this(new DefaultFluentControlContainer());
     }
 
-    public FluentAdapter(DriverContainer driverContainer) {
+    public FluentAdapter(FluentControlContainer driverContainer) {
         this.driverContainer = driverContainer;
     }
 
     public FluentAdapter(WebDriver webDriver) {
-        this(new DefaultDriverContainer(), webDriver);
+        this(new DefaultFluentControlContainer(), webDriver);
     }
 
-    public FluentAdapter(DriverContainer driverContainer, WebDriver webDriver) {
+    public FluentAdapter(FluentControlContainer driverContainer, WebDriver webDriver) {
         this.driverContainer = driverContainer;
         initFluent(webDriver);
     }
@@ -43,20 +43,20 @@ public class FluentAdapter implements FluentDriverControl, ConfigurationProperti
         return configuration;
     }
 
-    @Delegate(types = FluentDriverControl.class)
-    private FluentDriver getFluentDriver() {
-        return getDriverContainer().getFluentDriver();
+    @Delegate(types = FluentControl.class)
+    private ContainerFluentControl getFluentControl() {
+        return (ContainerFluentControl)getDriverContainer().getFluentControl();
     }
 
     boolean isFluentDriverAvailable() {
-        return getDriverContainer().getFluentDriver() != null;
+        return getDriverContainer().getFluentControl() != null;
     }
 
-    private void setFluentDriver(FluentDriver driver) {
-        getDriverContainer().setFluentDriver(driver);
+    private void setFluentControl(ContainerFluentControl fluentControl) {
+        getDriverContainer().setFluentControl(fluentControl);
     }
 
-    protected DriverContainer getDriverContainer() {
+    protected FluentControlContainer getDriverContainer() {
         return driverContainer;
     }
 
@@ -75,19 +75,20 @@ public class FluentAdapter implements FluentDriverControl, ConfigurationProperti
             return;
         }
 
-        if (getFluentDriver() != null) {
-            if (getFluentDriver().getDriver() == webDriver) {
+        if (getFluentControl() != null) {
+            if (getFluentControl().getDriver() == webDriver) {
                 return;
             }
-            if (getFluentDriver().getDriver() != null) {
+            if (getFluentControl().getDriver() != null) {
                 throw new IllegalStateException(
                         "Trying to init a WebDriver, but another one is still running");
             }
         }
 
-        FluentDriver fluentDriver = new FluentDriver(webDriver, this);
-        setFluentDriver(fluentDriver);
-        fluentDriver.inject(this);
+        ContainerFluentControl adapterFluentControl = new ContainerFluentControl(new FluentDriver(webDriver, this));
+        setFluentControl(adapterFluentControl);
+        ContainerContext context = adapterFluentControl.inject(this);
+        adapterFluentControl.setContext(context);
     }
 
     /**
@@ -96,9 +97,9 @@ public class FluentAdapter implements FluentDriverControl, ConfigurationProperti
      * This method should not be called by end user.
      */
     public void releaseFluent() {
-        if (getFluentDriver() != null) {
-            getFluentDriver().releaseFluent();
-            setFluentDriver(null);
+        if (getFluentControl() != null) {
+            ((FluentDriver)getFluentControl().getAdapterControl()).releaseFluent();
+            setFluentControl(null);
         }
     }
 
