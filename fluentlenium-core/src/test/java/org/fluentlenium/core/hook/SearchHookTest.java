@@ -48,7 +48,7 @@ public class SearchHookTest {
         Mockito.verify(element).click();
 
         LocatorHandler<WebElement> componentHandler = LocatorProxies.getLocatorHandler(hookedElement.getElement());
-        NanoHook hookElement = (NanoHook) componentHandler.getHookLocatorResult();
+        NanoHook hookElement = (NanoHook) componentHandler.getHookElement();
 
         Assertions.assertThat(hookElement.getBeforeClickNano()).isNotEqualTo(0L);
         Assertions.assertThat(hookElement.getAfterClickNano()).isNotEqualTo(0L);

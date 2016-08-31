@@ -1,5 +1,6 @@
 package org.fluentlenium.core.search;
 
+import com.google.common.base.Supplier;
 import com.google.common.collect.Collections2;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
@@ -30,12 +31,12 @@ public class Search implements SearchControl<FluentWebElement> {
         this.hookChainBuilder = hookChainBuilder;
     }
 
-    public HookChainBuilder getHookChainBuilder() {
-        return hookChainBuilder;
-    }
-
     public ComponentInstantiator getInstantiator() {
         return instantiator;
+    }
+
+    public HookChainBuilder getHookChainBuilder() {
+        return hookChainBuilder;
     }
 
     /**
@@ -48,7 +49,7 @@ public class Search implements SearchControl<FluentWebElement> {
     @Override
     public FluentList<FluentWebElement> find(String selector, final Filter... filters) {
         StringBuilder sb = new StringBuilder(selector);
-        List<Filter> postFilterSelector = new ArrayList<Filter>();
+        final List<Filter> postFilterSelector = new ArrayList<>();
         if (filters != null && filters.length > 0) {
             for (Filter filter : filters) {
                 if (filter.isPreFilter()) {
@@ -58,15 +59,35 @@ public class Search implements SearchControl<FluentWebElement> {
                 }
             }
         }
-        FluentList<FluentWebElement> select = selectList(sb.toString());
-        if (postFilterSelector.size() == 0) return select;
-
-        Collection<FluentWebElement> postFiltered = new ArrayList<>(select);
-        for (Filter filter : postFilterSelector) {
-            postFiltered = Collections2.filter(select, new FilterPredicate(filter));
+        List<WebElement> select = selectList(sb.toString());
+        final FluentListImpl fluentList = instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, select);
+        if (postFilterSelector.size() == 0) {
+            return fluentList;
         }
 
-        return new FluentListImpl<>(FluentWebElement.class, instantiator, hookChainBuilder, postFiltered);
+        Collection<FluentWebElement> postFiltered = fluentList;
+        for (Filter filter : postFilterSelector) {
+            postFiltered = Collections2.filter(postFiltered, new FilterPredicate(filter));
+        }
+
+        List<WebElement> postFilteredElements = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
+            @Override
+            public List<WebElement> get() {
+                Collection<FluentWebElement> postFiltered = fluentList;
+                for (Filter filter : postFilterSelector) {
+                    postFiltered = Collections2.filter(postFiltered, new FilterPredicate(filter));
+                }
+
+                ArrayList<WebElement> webElements = new ArrayList<>();
+                for (FluentWebElement element : postFiltered) {
+                    webElements.add(element.getElement());
+                }
+
+                return webElements;
+            }
+        });
+
+        return instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, postFilteredElements);
     }
 
 
@@ -84,12 +105,12 @@ public class Search implements SearchControl<FluentWebElement> {
         };
     }
 
-    private FluentList<FluentWebElement> selectList(final String cssSelector) {
+    private List<WebElement> selectList(final String cssSelector) {
         return selectList(By.cssSelector(cssSelector));
     }
 
-    private FluentList<FluentWebElement> selectList(By locator) {
-        return LocatorProxies.createFluentList(locator(locator), FluentWebElement.class, instantiator, hookChainBuilder);
+    private List<WebElement> selectList(By locator) {
+        return LocatorProxies.createWebElementList(locator(locator));
     }
 
     /**
@@ -143,13 +164,31 @@ public class Search implements SearchControl<FluentWebElement> {
      */
     @Override
     public FluentList<FluentWebElement> find(By locator, final Filter... filters) {
-        FluentList<FluentWebElement> preFiltered = selectList(locator);
-        Collection<FluentWebElement> postFiltered = preFiltered;
-        for (Filter selector : filters) {
-            postFiltered = Collections2.filter(postFiltered, new FilterPredicate(selector));
+        List<WebElement> select = selectList(locator);
+
+        final FluentListImpl fluentList = instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, select);
+        if (filters.length == 0) {
+            return fluentList;
         }
 
-        return new FluentListImpl<>(FluentWebElement.class, instantiator, hookChainBuilder, postFiltered);
+        List<WebElement> postFilteredElements = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
+            @Override
+            public List<WebElement> get() {
+                Collection<FluentWebElement> postFiltered = fluentList;
+                for (Filter selector : filters) {
+                    postFiltered = Collections2.filter(postFiltered, new FilterPredicate(selector));
+                }
+
+                List<WebElement> webElements = new ArrayList<>();
+                for (FluentWebElement element : postFiltered) {
+                    webElements.add(element.getElement());
+                }
+
+                return webElements;
+            }
+        });
+
+        return instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, postFilteredElements);
     }
 
     @Override
@@ -182,13 +221,7 @@ public class Search implements SearchControl<FluentWebElement> {
      */
     @Override
     public FluentWebElement find(By locator, Integer index, final Filter... filters) {
-        List<FluentWebElement> listFiltered = find(locator, filters);
-        if (index >= listFiltered.size()) {
-            throw new NoSuchElementException(
-                    "No such element with position :" + index + ". Number of elements available :" + listFiltered
-                            .size());
-        }
-        return listFiltered.get(index);
+        return find(locator, filters).index(index);
     }
 
     @Override

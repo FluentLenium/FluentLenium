@@ -39,7 +39,8 @@ public class FluentListImplTest {
     private WebDriver driver;
 
     private FluentList<FluentWebElement> list;
-    private FluentList<FluentWebElement> emptyList = new FluentListImpl<>();
+    private FluentList<FluentWebElement> emptyList;
+
 
     private FluentAdapter fluentAdapter;
 
@@ -49,15 +50,14 @@ public class FluentListImplTest {
 
         fluentAdapter = new FluentAdapter(driver);
 
+        emptyList = fluentAdapter.newFluentList();
+
         when(element1.conditions()).thenReturn(new WebElementConditions(element1));
         when(element2.conditions()).thenReturn(new WebElementConditions(element2));
         when(element3.conditions()).thenReturn(new WebElementConditions(element3));
 
 
-        list = new FluentListImpl<>();
-        list.add(element1);
-        list.add(element2);
-        list.add(element3);
+        list = fluentAdapter.newFluentList(element1, element2, element3);
     }
 
     @After
@@ -98,7 +98,7 @@ public class FluentListImplTest {
         DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
         DefaultHookChainBuilder hookChainBuilder = new DefaultHookChainBuilder(fluentAdapter, instantiator);
 
-        FluentListImpl<FluentWebElement> list = FluentListImpl.fromElements(instantiator, hookChainBuilder, webElement1, webElement2, webElement3);
+        FluentList<FluentWebElement> list = FluentListImpl.fromElements(instantiator, hookChainBuilder, webElement1, webElement2, webElement3);
         assertThat(list.toElements()).containsExactly(webElement1, webElement2, webElement3);
     }
 
@@ -305,9 +305,9 @@ public class FluentListImplTest {
         FluentWebElement ret2 = mock(FluentWebElement.class);
         FluentWebElement ret3 = mock(FluentWebElement.class);
 
-        when(element1.find()).thenReturn(new FluentListImpl<FluentWebElement>(ret1));
-        when(element2.find()).thenReturn(new FluentListImpl<FluentWebElement>(ret2));
-        when(element3.find()).thenReturn(new FluentListImpl<FluentWebElement>(ret3));
+        when(element1.find()).thenReturn(fluentAdapter.newFluentList(ret1));
+        when(element2.find()).thenReturn(fluentAdapter.newFluentList(ret2));
+        when(element3.find()).thenReturn(fluentAdapter.newFluentList(ret3));
 
         assertThat(list.findFirst()).isSameAs(ret1);
         assertThat(list.find()).containsExactly(ret1, ret2, ret3);
@@ -324,9 +324,9 @@ public class FluentListImplTest {
 
         reset(element1, element2, element3);
 
-        when(element1.find(".test")).thenReturn(new FluentListImpl<FluentWebElement>(ret1));
-        when(element2.find(".test")).thenReturn(new FluentListImpl<FluentWebElement>(ret2));
-        when(element3.find(".test")).thenReturn(new FluentListImpl<FluentWebElement>(ret3));
+        when(element1.find(".test")).thenReturn(fluentAdapter.newFluentList(ret1));
+        when(element2.find(".test")).thenReturn(fluentAdapter.newFluentList(ret2));
+        when(element3.find(".test")).thenReturn(fluentAdapter.newFluentList(ret3));
 
         assertThat(list.findFirst(".test")).isSameAs(ret1);
         assertThat(list.find(".test")).containsExactly(ret1, ret2, ret3);
@@ -343,9 +343,9 @@ public class FluentListImplTest {
 
         reset(element1, element2, element3);
 
-        when(element1.find(By.cssSelector(".test"))).thenReturn(new FluentListImpl<FluentWebElement>(ret1));
-        when(element2.find(By.cssSelector(".test"))).thenReturn(new FluentListImpl<FluentWebElement>(ret2));
-        when(element3.find(By.cssSelector(".test"))).thenReturn(new FluentListImpl<FluentWebElement>(ret3));
+        when(element1.find(By.cssSelector(".test"))).thenReturn(fluentAdapter.newFluentList(ret1));
+        when(element2.find(By.cssSelector(".test"))).thenReturn(fluentAdapter.newFluentList(ret2));
+        when(element3.find(By.cssSelector(".test"))).thenReturn(fluentAdapter.newFluentList(ret3));
 
         assertThat(list.findFirst(By.cssSelector(".test"))).isSameAs(ret1);
         assertThat(list.find(By.cssSelector(".test"))).containsExactly(ret1, ret2, ret3);

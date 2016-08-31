@@ -295,8 +295,8 @@ public class FluentWebElementTest {
 
         when(element.findElements(By.cssSelector(".test"))).thenReturn(Arrays.asList(findElement));
 
-        assertThat(fluentElement.findFirst(".test").getElement()).isEqualTo(findElement);
-        assertThat(fluentElement.findFirst(By.cssSelector(".test")).getElement()).isEqualTo(findElement);
+        assertThat(fluentElement.findFirst(".test").now().getElement()).isEqualTo(findElement);
+        assertThat(fluentElement.findFirst(By.cssSelector(".test")).now().getElement()).isEqualTo(findElement);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -305,10 +305,12 @@ public class FluentWebElementTest {
             }
         }).isInstanceOf(NoSuchElementException.class);
 
+        assertThat(fluentElement.findFirst(By.cssSelector(".other")).isPresent()).isFalse();
+
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.findFirst(By.cssSelector(".other")).isPresent();
+                fluentElement.findFirst(By.cssSelector(".other")).now();
             }
         }).isInstanceOf(NoSuchElementException.class);
 

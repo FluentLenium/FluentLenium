@@ -5,6 +5,7 @@ import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.components.ComponentsManager;
+import org.fluentlenium.core.domain.ComponentList;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.ContainerAnnotationsEventsRegistry;
@@ -12,16 +13,17 @@ import org.fluentlenium.core.hook.NoHook;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.Hook;
-import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
 import org.fluentlenium.core.hook.HookOptions;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.utils.ReflectionUtils;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
+import org.xml.sax.Locator;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -328,31 +330,27 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private Object initFieldAsElement(ElementLocator locator, Object container, Field field, List<HookDefinition<?>> hookDefinitions) throws IllegalAccessException {
-        Object proxy;
-        if (hookDefinitions.size() > 0) {
-            proxy = LocatorProxies.createComponent(locator, field.getType(), componentsManager, hookChainBuilder, hookDefinitions);
-        } else {
-            proxy = LocatorProxies.createComponent(locator, field.getType(), componentsManager);
-        }
-        ReflectionUtils.set(field, container, proxy);
-        return proxy;
+        WebElement element = LocatorProxies.createWebElement(locator);
+        Object component = componentsManager.newComponent(field.getType(), element);
+
+        LocatorProxies.setHooks(element, hookChainBuilder, hookDefinitions);
+        ReflectionUtils.set(field, container, component);
+        return component;
     }
 
-    private List<?> initFieldAsList(ElementLocator locator, Object container, Field field, List<HookDefinition<?>> hookDefinitions) throws IllegalAccessException {
-        List<?> proxy = LocatorProxies.createComponentList(locator, getFirstGenericType(field), componentsManager, hookChainBuilder);
-        if (hookDefinitions.size() > 0) {
-            LocatorProxies.setHooks(hookChainBuilder, proxy, hookDefinitions);
-        }
-        ReflectionUtils.set(field, container, proxy);
-        return proxy;
+    private ComponentList<?> initFieldAsList(ElementLocator locator, Object container, Field field, List<HookDefinition<?>> hookDefinitions) throws IllegalAccessException {
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
+        ComponentList<?> componentList = componentsManager.asComponentList(getFirstGenericType(field), webElementList);
+        LocatorProxies.setHooks(webElementList, hookChainBuilder, hookDefinitions);
+        ReflectionUtils.set(field, container, componentList);
+        return componentList;
     }
 
     private FluentList<? extends FluentWebElement> initFieldAsListOfFluentWebElement(ElementLocator locator, Object container, Field field, List<HookDefinition<?>> hookDefinitions) throws IllegalAccessException {
-        FluentList<? extends FluentWebElement> proxy = LocatorProxies.createFluentList(locator, (Class<? extends FluentWebElement>) getFirstGenericType(field), componentsManager, hookChainBuilder);
-        if (hookDefinitions.size() > 0) {
-            LocatorProxies.setHooks(hookChainBuilder, proxy, hookDefinitions);
-        }
-        ReflectionUtils.set(field, container, proxy);
-        return proxy;
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
+        FluentList<? extends FluentWebElement> fluentList = componentsManager.asFluentList((Class<? extends FluentWebElement>) getFirstGenericType(field), webElementList);
+        LocatorProxies.setHooks(webElementList, hookChainBuilder, hookDefinitions);
+        ReflectionUtils.set(field, container, fluentList);
+        return fluentList;
     }
 }

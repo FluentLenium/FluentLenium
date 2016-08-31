@@ -3,6 +3,7 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Predicate;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
@@ -64,6 +65,8 @@ public class FluentWaitElementListMatcherTest {
         wait = new FluentWait(fluent, search);
         wait.atMost(1L, TimeUnit.MILLISECONDS);
         wait.pollingEvery(1L, TimeUnit.MILLISECONDS);
+
+        when(search.getInstantiator()).thenReturn(new DefaultComponentInstantiator(fluent));
 
         when(fluentWebElement1.conditions()).thenReturn(new WebElementConditions(fluentWebElement1));
         when(fluentWebElement1.getElement()).thenReturn(element1);

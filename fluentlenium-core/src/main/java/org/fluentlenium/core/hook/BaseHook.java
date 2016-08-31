@@ -23,6 +23,11 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
         return elementSupplier.get();
     }
 
+    @Override
+    public WebElement getWrappedElement() {
+        return getElement();
+    }
+
     @Delegate
     public final ElementLocator getElementLocator() {
         return locatorSupplier.get();

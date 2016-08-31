@@ -2,11 +2,11 @@ package org.fluentlenium.core.axes;
 
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
@@ -27,14 +27,13 @@ public class Axes {
         this.hookChainBuilder = hookChainBuilder;
     }
 
-
     /**
      * Find parent element.
      *
      * @return fluent web element
      */
     public FluentWebElement parent() {
-        return LocatorProxies.createComponent(new ElementLocator() {
+        WebElement webElement = LocatorProxies.createWebElement(new ElementLocator() {
             @Override
             public WebElement findElement() {
                 return Axes.this.webElement.findElement(By.xpath("parent::*"));
@@ -44,11 +43,13 @@ public class Axes {
             public List<WebElement> findElements() {
                 return Arrays.asList(findElement());
             }
-        }, FluentWebElement.class, instantiator);
+        });
+
+        return instantiator.newComponent(FluentWebElement.class, webElement);
     }
 
     protected FluentList<FluentWebElement> handleAxe(final String axe) {
-        return LocatorProxies.createFluentList(new ElementLocator() {
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(new ElementLocator() {
             @Override
             public WebElement findElement() {
                 return Axes.this.webElement.findElement(By.xpath(axe + "::*"));
@@ -58,7 +59,9 @@ public class Axes {
             public List<WebElement> findElements() {
                 return Axes.this.webElement.findElements(By.xpath(axe + "::*"));
             }
-        }, FluentWebElement.class, instantiator, hookChainBuilder);
+        });
+
+        return instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, webElementList);
     }
 
     /**

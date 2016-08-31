@@ -1,6 +1,7 @@
 package org.fluentlenium.core.search;
 
 import com.google.common.collect.Lists;
+import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
@@ -25,6 +26,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
@@ -80,7 +82,7 @@ public class SearchTest {
         when(filter2.isPreFilter()).thenReturn(true);
         when(filter2.toString()).thenReturn("[checked=ok]");
 
-        search.find(name, filters).isPresent();
+        search.find(name, filters).now();
         verify(searchContext).findElements(By.cssSelector("cssStyle[generated=true][checked=ok]"));
     }
 
@@ -136,16 +138,22 @@ public class SearchTest {
 
     @Test
     public void findPostSelectorFilterWithElementThatDontMatch() {
-        String name = "cssStyle";
-        Filter[] filters = new Filter[]{filter1};
+        final String name = "cssStyle";
+        final Filter[] filters = new Filter[]{filter1};
         when(filter1.isPreFilter()).thenReturn(false);
         WebElement webElement = mock(WebElement.class);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(Collections.singletonList(webElement));
         when(filter1.getMatcher()).thenReturn(matcher1);
         when(matcher1.isSatisfiedBy(Matchers.<String>anyObject())).thenReturn(false);
 
-        FluentList fluentList = search.find(name, filters);
-        assertThat(fluentList).hasSize(0);
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                search.find(name, filters).now();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class);
+
+        assertThat(search.find(name, filters).isPresent()).isFalse();
     }
 
     @Test
@@ -160,7 +168,7 @@ public class SearchTest {
         when(filter1.getAttribut()).thenReturn("text");
         when(webElement.getText()).thenReturn("Ok");
 
-        search.find(name, filters);
+        assertThat(search.find(name, filters).isPresent()).isFalse();
 
         verify(matcher1).isSatisfiedBy("Ok");
     }

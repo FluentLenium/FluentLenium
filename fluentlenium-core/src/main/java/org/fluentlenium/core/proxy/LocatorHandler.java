@@ -2,6 +2,9 @@ package org.fluentlenium.core.proxy;
 
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
+import org.fluentlenium.core.proxy.plugin.LocatorHandlerPlugin;
+import org.fluentlenium.core.proxy.plugin.listelement.ListElementAccessorPlugin;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.List;
@@ -27,10 +30,9 @@ public interface LocatorHandler<T> {
     ElementLocator getHookLocator();
 
     /**
-     * Result retrieved by the locator, with all hooks applied.
-     * @return
+     * Element used by this proxy, with all hooks applied.
      */
-    T getHookLocatorResult();
+    WebElement getHookElement();
 
     /**
      * Set hooks of this locator handler.
@@ -55,4 +57,16 @@ public interface LocatorHandler<T> {
      */
     void now();
 
+    /**
+     * Is the result present or absent.
+     * @return
+     */
+    boolean isPresent();
+
+    /**
+     * Add a plugin to this locator handler.
+     *
+     * @param plugin
+     */
+    void addPlugin(LocatorHandlerPlugin<T> plugin);
 }

@@ -1,4 +1,4 @@
-package org.fluentlenium.core.proxy;
+package org.fluentlenium.core.proxy.plugin.listelement;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

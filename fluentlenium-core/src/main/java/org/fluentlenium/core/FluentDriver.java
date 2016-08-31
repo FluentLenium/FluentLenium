@@ -8,6 +8,7 @@ import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.action.WindowAction;
 import org.fluentlenium.core.alert.Alert;
+import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -49,6 +50,7 @@ public class FluentDriver implements FluentControl {
 
     private ConfigurationProperties configuration;
 
+    @Delegate(types = ComponentInstantiator.class)
     private final ComponentsManager componentsManager;
 
     private EventsRegistry events;

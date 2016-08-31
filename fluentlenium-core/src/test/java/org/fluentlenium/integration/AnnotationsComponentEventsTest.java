@@ -75,8 +75,8 @@ public class AnnotationsComponentEventsTest extends IntegrationFluentTest {
         assertThat(otherButton.beforeClick).isEqualTo(0);
         assertThat(otherButton.afterClick).isEqualTo(0);
 
-        assertThat(beforeClick).containsExactly(button.getElement());
-        assertThat(afterClick).containsExactly(button.getElement());
+        assertThat(beforeClick).containsExactly(unwrapElement(button.getElement()));
+        assertThat(afterClick).containsExactly(unwrapElement(button.getElement()));
 
     }
 
@@ -88,6 +88,14 @@ public class AnnotationsComponentEventsTest extends IntegrationFluentTest {
             }
         }
         return element;
+    }
+
+    private List<WebElement> unwrapElements(List<WebElement> elements) {
+        ArrayList<WebElement> unwrapElements = new ArrayList<>();
+        for (WebElement element : elements) {
+            unwrapElements.add(unwrapElement(element));
+        }
+        return unwrapElements;
     }
 
     @Test
@@ -112,7 +120,7 @@ public class AnnotationsComponentEventsTest extends IntegrationFluentTest {
 
         List<WebElement> elements = new ArrayList<>();
         for (Component button : buttons) {
-            elements.add(button.getElement());
+            elements.add(unwrapElement(button.getElement()));
         }
 
         assertThat(beforeClick).containsExactlyElementsOf(elements);

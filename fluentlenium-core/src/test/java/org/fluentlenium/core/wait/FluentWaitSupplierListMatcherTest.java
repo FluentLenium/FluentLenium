@@ -3,6 +3,7 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Suppliers;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -54,6 +55,8 @@ public class FluentWaitSupplierListMatcherTest {
     @Mock
     private WebElement element3;
 
+    private DefaultComponentInstantiator instantiator;
+
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
@@ -61,6 +64,10 @@ public class FluentWaitSupplierListMatcherTest {
         wait = new FluentWait(fluent, search);
         wait.atMost(1L, TimeUnit.MILLISECONDS);
         wait.pollingEvery(1L, TimeUnit.MILLISECONDS);
+
+        instantiator = new DefaultComponentInstantiator(fluent);
+
+        when(search.getInstantiator()).thenReturn(instantiator);
 
         when(fluentWebElement1.conditions()).thenReturn(new WebElementConditions(fluentWebElement1));
         when(fluentWebElement1.getElement()).thenReturn(element1);
@@ -72,6 +79,8 @@ public class FluentWaitSupplierListMatcherTest {
         when(fluentWebElement3.getElement()).thenReturn(element3);
 
         fluentWebElements = Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3);
+
+
     }
 
     @After
@@ -88,7 +97,7 @@ public class FluentWaitSupplierListMatcherTest {
 
     @Test
     public void isEnabled() {
-        final FluentWaitSupplierListMatcher matcher = new FluentWaitSupplierListMatcher(search, wait, Suppliers.ofInstance(new FluentListImpl<FluentWebElement>(fluentWebElements)));
+        final FluentWaitSupplierListMatcher matcher = new FluentWaitSupplierListMatcher(search, wait, Suppliers.ofInstance(instantiator.newFluentList(fluentWebElements)));
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -99,6 +108,8 @@ public class FluentWaitSupplierListMatcherTest {
         verify(fluentWebElement1, atLeastOnce()).isEnabled();
         verify(fluentWebElement2, atLeastOnce()).isEnabled();
         verify(fluentWebElement3, atLeastOnce()).isEnabled();
+
+        when(search.getInstantiator()).thenReturn(new DefaultComponentInstantiator(fluent));
 
         when(fluentWebElement1.isEnabled()).thenReturn(true);
         when(fluentWebElement2.isEnabled()).thenReturn(true);

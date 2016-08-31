@@ -1,9 +1,8 @@
 package org.fluentlenium.core.action;
 
 import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
-import org.fluentlenium.core.domain.FluentListImpl;
+import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
 import org.junit.After;
@@ -45,11 +44,14 @@ public class FillTest {
 
     private FluentAdapter fluentAdapter;
 
+    private DefaultComponentInstantiator instantiator;
+
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
 
         fluentAdapter = new FluentAdapter(driver);
+        instantiator = new DefaultComponentInstantiator(fluentAdapter);
     }
 
     @After
@@ -63,7 +65,7 @@ public class FillTest {
     
     @Test
     public void testFillList() {
-        FluentListImpl<FluentWebElement> list = new FluentListImpl<>(Arrays.asList(el(element1), el(element2), el(element3), el(element4)));
+        FluentList<FluentWebElement> list = instantiator.asFluentList(Arrays.asList(element1, element2, element3, element4));
         Fill fill = new Fill(list);
 
         when(element2.isDisplayed()).thenReturn(true);
