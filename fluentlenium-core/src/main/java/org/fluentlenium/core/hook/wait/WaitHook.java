@@ -5,13 +5,9 @@ import com.google.common.base.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.components.ComponentInstantiator;
-import org.fluentlenium.core.components.ComponentsManager;
-import org.fluentlenium.core.components.DefaultComponentInstantiator;
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.hook.BaseFluentHook;
-import org.fluentlenium.core.hook.BaseHook;
 import org.fluentlenium.core.wait.FluentWait;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
@@ -57,20 +53,24 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
 
     @Override
     public List<WebElement> findElements() {
-        return buildAwait().until(new Function<FluentDriver, List<WebElement>>() {
+        return buildAwait().ignoring(NoSuchElementException.class).until(new Function<FluentDriver, List<WebElement>>() {
             @Override
             public List<WebElement> apply(FluentDriver input) {
-                return WaitHook.super.findElements();
+                List<WebElement> elements = WaitHook.super.findElements();
+                if (elements.size() == 0) throw new NoSuchElementException("No such element");
+                return elements;
             }
         });
     }
 
     @Override
     public WebElement findElement() {
-        return buildAwait().until(new Function<FluentDriver, WebElement>() {
+        return buildAwait().ignoring(NoSuchElementException.class).until(new Function<FluentDriver, WebElement>() {
             @Override
             public WebElement apply(FluentDriver input) {
-                return WaitHook.super.findElement();
+                WebElement element = WaitHook.super.findElement();
+                if (element == null) throw new NoSuchElementException("No such element");
+                return element;
             }
         });
     }

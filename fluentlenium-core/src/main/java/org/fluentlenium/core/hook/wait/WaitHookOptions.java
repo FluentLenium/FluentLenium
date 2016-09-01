@@ -10,15 +10,19 @@ import java.util.concurrent.TimeUnit;
 
 @Getter
 @Setter
+@Wait
 public class WaitHookOptions {
 
     private TimeUnit timeUnit = TimeUnit.MILLISECONDS;
     private Long atMost;
+    private TimeUnit pollingTimeUnit = TimeUnit.MILLISECONDS;
     private Long pollingEvery;
     private java.util.Collection<Class<? extends Throwable>> ignoreAll;
     private boolean withNoDefaultsException;
 
-    public WaitHookOptions() {}
+    public WaitHookOptions() {
+        this(WaitHookOptions.class.getAnnotation(Wait.class));
+    }
 
     public WaitHookOptions(Wait annotation) {
         timeUnit = annotation.timeUnit();
@@ -34,7 +38,7 @@ public class WaitHookOptions {
         }
 
         if (pollingEvery != null) {
-            await.pollingEvery(pollingEvery, timeUnit);
+            await.pollingEvery(pollingEvery, pollingTimeUnit);
         }
 
         if (withNoDefaultsException) {

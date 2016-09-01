@@ -10,15 +10,27 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Annotation to enable the Wait Hook.
+ *
+ * @see WaitHook
+ * @see WaitHookOptions
+ */
 @Inherited
 @Target({ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Hook(WaitHook.class)
 @HookOptions(WaitHookOptions.class)
 public @interface Wait {
-    TimeUnit timeUnit() default TimeUnit.MILLISECONDS;
-    long atMost() default -1L;
-    long pollingEvery() default -1L;
+    long atMost() default 5000L;
+
+    TimeUnit timeUnit() default TimeUnit.SECONDS;
+
+    long pollingEvery() default 250L;
+
+    TimeUnit pollingTimeUnit() default TimeUnit.MILLISECONDS;
+
     boolean withNoDefaultsException() default false;
+
     java.lang.Class<? extends Throwable>[] ignoreAll() default {};
 }
