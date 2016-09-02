@@ -37,6 +37,13 @@ or [AssertJ](http://joel-costigliola.github.io/assertj/).
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>htmlunit-driver</artifactId>
     <version>2.21</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>xml-apis</groupId>
+    <artifactId>xml-apis</artifactId>
+    <version>1.4.01</version>
+    <scope>test</scope>
 </dependency>
 ```
 
@@ -577,15 +584,15 @@ public class LoginPage extends FluentPage {
 }
 ```
 
-If you need to wait for an element to be present, especially when waiting for an ajax call to complete, you can use the @AjaxElement annotation on the fields:
+If you need to wait for an element to be present, especially when waiting for an ajax call to complete, you can use the @Wait annotation on the fields:
 
 ```java
 public class LoginPage extends FluentPage {
-    @AjaxElement
+    @Wait
     private FluentWebElement myAjaxElement;
 }
 ```
-You can set the timeout in seconds for the page to throw an error if not found with `@AjaxElement(timeountOnSeconds=3)` if you want to wait 3 seconds.
+You can set the timeout in seconds for the page to throw an error if not found with `@Wait(atMost=3)` if you want to wait 3 seconds.
 By default, the timeout is set to one second.
 
 ### Components
@@ -599,7 +606,7 @@ by extending `FluentWebElement` to add custom logic.
 
 ```java
 public class SelectComponent extends FluentWebElement {
-    public FullConstructorComponent(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
+    public SelectComponent(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
         super(webElement, driver, instantiator);
     }
     

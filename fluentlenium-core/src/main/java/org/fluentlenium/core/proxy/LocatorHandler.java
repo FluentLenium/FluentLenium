@@ -2,8 +2,6 @@ package org.fluentlenium.core.proxy;
 
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
-import org.fluentlenium.core.proxy.plugin.LocatorHandlerPlugin;
-import org.fluentlenium.core.proxy.plugin.listelement.ListElementAccessorPlugin;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
@@ -19,12 +17,14 @@ public interface LocatorHandler<T> {
 
     /**
      * Result retrieved by the locator, without any hook applied.
+     *
      * @return
      */
     T getLocatorResult();
 
     /**
      * Locator used by this proxy, with all hooks applied.
+     *
      * @return
      */
     ElementLocator getHookLocator();
@@ -36,6 +36,7 @@ public interface LocatorHandler<T> {
 
     /**
      * Set hooks of this locator handler.
+     *
      * @param hookChainBuilder
      * @param hookDefinitions
      */
@@ -43,6 +44,7 @@ public interface LocatorHandler<T> {
 
     /**
      * Check if this handler has loaded it's result.
+     *
      * @return
      */
     boolean isLoaded();
@@ -59,14 +61,25 @@ public interface LocatorHandler<T> {
 
     /**
      * Is the result present or absent.
+     *
      * @return
      */
     boolean isPresent();
 
     /**
-     * Add a plugin to this locator handler.
+     * Add a proxy element listener.
      *
-     * @param plugin
+     * @param listener
+     * @return
      */
-    void addPlugin(LocatorHandlerPlugin<T> plugin);
+    boolean addListener(ProxyElementListener listener);
+
+    /**
+     * Removes a proxy element listener.
+     *
+     * @param listener
+     * @return
+     */
+    boolean removeListener(ProxyElementListener listener);
+
 }

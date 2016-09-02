@@ -12,9 +12,10 @@ import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
@@ -30,10 +31,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class SearchTest {
     @Mock
     private WebDriver driver;
@@ -54,8 +55,6 @@ public class SearchTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-
         FluentAdapter fluentAdapter = new FluentAdapter(driver);
 
         DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);

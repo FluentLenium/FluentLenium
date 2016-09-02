@@ -32,7 +32,7 @@ public class WaitHookOptions {
         withNoDefaultsException = annotation.withNoDefaultsException();
     }
 
-    FluentWait configureAwait(FluentWait await) {
+    protected FluentWait configureAwait(FluentWait await) {
         if (atMost != null) {
             await.atMost(atMost, timeUnit);
         }

@@ -3,11 +3,11 @@ package org.fluentlenium.core.hook.wait;
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
 import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.hook.BaseFluentHook;
 import org.fluentlenium.core.wait.FluentWait;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
@@ -53,25 +53,34 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
 
     @Override
     public List<WebElement> findElements() {
-        return buildAwait().ignoring(NoSuchElementException.class).until(new Function<FluentDriver, List<WebElement>>() {
-            @Override
-            public List<WebElement> apply(FluentDriver input) {
-                List<WebElement> elements = WaitHook.super.findElements();
-                if (elements.size() == 0) throw new NoSuchElementException("No such element");
-                return elements;
-            }
-        });
+        try {
+            return buildAwait().ignoring(NoSuchElementException.class).until(new Function<FluentControl, List<WebElement>>() {
+                @Override
+                public List<WebElement> apply(FluentControl input) {
+                    List<WebElement> elements = WaitHook.super.findElements();
+                    if (elements.size() == 0) throw new NoSuchElementException("No such element");
+                    return elements;
+                }
+            });
+        } catch (TimeoutException e) {
+            throw new NoSuchElementException("No such element", e);
+        }
+
     }
 
     @Override
     public WebElement findElement() {
-        return buildAwait().ignoring(NoSuchElementException.class).until(new Function<FluentDriver, WebElement>() {
-            @Override
-            public WebElement apply(FluentDriver input) {
-                WebElement element = WaitHook.super.findElement();
-                if (element == null) throw new NoSuchElementException("No such element");
-                return element;
-            }
-        });
+        try {
+            return buildAwait().ignoring(NoSuchElementException.class).until(new Function<FluentControl, WebElement>() {
+                @Override
+                public WebElement apply(FluentControl input) {
+                    WebElement element = WaitHook.super.findElement();
+                    if (element == null) throw new NoSuchElementException("No such element");
+                    return element;
+                }
+            });
+        } catch (TimeoutException e) {
+            throw new NoSuchElementException("No such element", e);
+        }
     }
 }

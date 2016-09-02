@@ -1,30 +1,27 @@
 package org.fluentlenium.core.proxy;
 
-import com.google.common.base.Supplier;
-import org.fluentlenium.core.hook.FluentHook;
-import org.fluentlenium.core.hook.HookChainBuilder;
-import org.fluentlenium.core.hook.HookDefinition;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
+/**
+ * Proxy handler for {@link WebElement}.
+ */
 public class ComponentHandler extends AbstractLocatorHandler<WebElement> implements InvocationHandler, LocatorHandler<WebElement> {
     private static final Method GET_WRAPPED_ELEMENT = getMethod(WrapsElement.class, "getWrappedElement");
 
     public ComponentHandler(ElementLocator locator) {
         super(locator);
         if (this.locator instanceof WrapsElement) {
-            this.result = ((WrapsElement) this.locator).getWrappedElement();
-            this.loaded = true;
+            WebElement result = ((WrapsElement) this.locator).getWrappedElement();
+            if (result == null) {
+                throw new NoSuchElementException("Element not found");
+            }
+            this.result = result;
         }
     }
 
@@ -51,7 +48,7 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement> impleme
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (GET_WRAPPED_ELEMENT.equals(method)) {
-            return loaded ? getLocatorResult() : proxy;
+            return isLoaded() ? getLocatorResult() : proxy;
         }
         return super.invoke(proxy, method, args);
     }

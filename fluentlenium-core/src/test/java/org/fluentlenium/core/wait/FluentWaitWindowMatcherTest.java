@@ -1,16 +1,15 @@
 package org.fluentlenium.core.wait;
 
 
-import com.google.common.base.Predicate;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentDriver;
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
@@ -24,6 +23,7 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class FluentWaitWindowMatcherTest {
     @Mock
     private Search search;
@@ -38,8 +38,6 @@ public class FluentWaitWindowMatcherTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-
         wait = new FluentWait(fluent, search);
         wait.atMost(1L, TimeUnit.MILLISECONDS);
         wait.pollingEvery(1L, TimeUnit.MILLISECONDS);
@@ -55,13 +53,6 @@ public class FluentWaitWindowMatcherTest {
     public void testWindow() {
         when(fluent.getDriver()).thenReturn(webDriver);
 
-        final Predicate<FluentWebElement> predicate = new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement input) {
-                return input.isEnabled();
-            }
-        };
-
         final FluentWaitWindowMatcher matcher = new FluentWaitWindowMatcher(wait, "testWindow");
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -75,7 +66,7 @@ public class FluentWaitWindowMatcherTest {
 
         matcher.isNotDisplayed();
 
-        when(webDriver.getWindowHandles()).thenReturn(new HashSet<String>(Arrays.asList("testWindow", "otherWindow")));
+        when(webDriver.getWindowHandles()).thenReturn(new HashSet<>(Arrays.asList("testWindow", "otherWindow")));
         matcher.isDisplayed();
 
         verify(webDriver, atLeastOnce()).getWindowHandles();

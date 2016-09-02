@@ -3,6 +3,7 @@ package org.fluentlenium.core.hook;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
@@ -26,7 +27,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class HookChainBuilderTest {
+public class DefaultHookChainBuilderTest {
     @Mock
     private WebElement element;
 
@@ -39,7 +40,7 @@ public class HookChainBuilderTest {
 
     private ComponentInstantiator instantiator;
 
-    private DefaultHookChainBuilder hookChainBuilder;
+    private HookChainBuilder hookChainBuilder;
 
     private FluentAdapter fluentAdapter;
 
@@ -61,7 +62,7 @@ public class HookChainBuilderTest {
         List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
 
         hookDefinitions.add(new HookDefinition<>(NanoHook.class));
-        hookDefinitions.add(new HookDefinition<>(NanoHook.class,  new NanoHookOptions("option")));
+        hookDefinitions.add(new HookDefinition<>(NanoHook.class, new NanoHookOptions("option")));
         hookDefinitions.add(new HookDefinition<>(NanoHook.class));
 
         List<FluentHook> fluentHooks = hookChainBuilder.build(Suppliers.ofInstance(element), Suppliers.ofInstance(locator), hookDefinitions);
@@ -97,5 +98,49 @@ public class HookChainBuilderTest {
         Assertions.assertThat(((NanoHook) fluentHooks.get(0)).getOptionValue()).isNull();
         Assertions.assertThat(((NanoHook) fluentHooks.get(1)).getOptionValue()).isEqualTo("option");
         Assertions.assertThat(((NanoHook) fluentHooks.get(2)).getOptionValue()).isNull();
+    }
+
+    private static class InvalidConstructorHook extends BaseHook<Object> {
+        public InvalidConstructorHook() {
+            super(null, null, null, null, null);
+        }
+    }
+
+
+    @Test
+    public void testInvalidConstructorHook() {
+        final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
+
+        hookDefinitions.add(new HookDefinition<>(InvalidConstructorHook.class));
+
+        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                hookChainBuilder.build(Suppliers.ofInstance(element), Suppliers.ofInstance(locator), hookDefinitions);
+            }
+        }).isExactlyInstanceOf(HookException.class).hasMessage("An error has occurred with a defined hook.");
+
+    }
+
+    private static class FailingConstructorHook extends BaseHook<Object> {
+        public FailingConstructorHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Object options) {
+            super(fluentControl, instantiator, elementSupplier, locatorSupplier, options);
+            throw new IllegalStateException();
+        }
+    }
+
+    @Test
+    public void testFailingConstructorHook() {
+        final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
+
+        hookDefinitions.add(new HookDefinition<>(FailingConstructorHook.class));
+
+        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                hookChainBuilder.build(Suppliers.ofInstance(element), Suppliers.ofInstance(locator), hookDefinitions);
+            }
+        }).isExactlyInstanceOf(HookException.class).hasMessage("An error has occurred with a defined hook.");
+
     }
 }

@@ -2,12 +2,11 @@ package org.fluentlenium.core.wait;
 
 
 import com.google.common.base.Predicate;
-import org.fluentlenium.core.wait.FluentWait;
-import org.fluentlenium.core.wait.FluentWaitPageMatcher;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +20,7 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class WaitForPageToLoadTest {
 
     @Mock
@@ -34,7 +34,6 @@ public class WaitForPageToLoadTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
         when(wait.withMessage(anyString())).thenReturn(wait);
     }
 

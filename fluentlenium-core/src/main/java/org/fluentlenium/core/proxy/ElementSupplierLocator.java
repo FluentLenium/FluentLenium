@@ -8,6 +8,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Element locator implemented by a {@link Supplier} of {@link WebElement}.
+ */
 public class ElementSupplierLocator implements ElementLocator {
     private final Supplier<WebElement> elementSupplier;
 

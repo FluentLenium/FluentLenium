@@ -11,8 +11,9 @@ import org.fluentlenium.core.search.Search;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.TimeoutException;
@@ -26,6 +27,7 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class FluentWaitElementMatcherTest {
     @Mock
     private Search search;
@@ -43,8 +45,6 @@ public class FluentWaitElementMatcherTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-
         wait = new FluentWait(fluent, search);
         wait.atMost(1L, TimeUnit.MILLISECONDS);
         wait.pollingEvery(1L, TimeUnit.MILLISECONDS);

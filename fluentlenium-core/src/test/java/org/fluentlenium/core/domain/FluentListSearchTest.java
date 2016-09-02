@@ -1,19 +1,16 @@
 package org.fluentlenium.core.domain;
 
 
-import com.google.common.collect.Lists;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
-import org.fluentlenium.core.domain.FluentList;
-import org.fluentlenium.core.domain.FluentListImpl;
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.matcher.Matcher;
 import org.fluentlenium.core.search.Search;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,12 +18,12 @@ import org.openqa.selenium.WebElement;
 import java.beans.IntrospectionException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class FluentListSearchTest {
     @Mock
     Search search;
@@ -56,9 +53,7 @@ public class FluentListSearchTest {
 
     @Before
     public void before() throws IntrospectionException, NoSuchFieldException, IllegalAccessException {
-        MockitoAnnotations.initMocks(this);
-
-        webElements = new ArrayList<FluentWebElement>();
+        webElements = new ArrayList<>();
         fluentAdapter = new FluentAdapter(driver);
         fluentWebElement = new FluentWebElement(webElement, fluentAdapter, new DefaultComponentInstantiator(fluentAdapter));
         webElements.add(fluentWebElement);

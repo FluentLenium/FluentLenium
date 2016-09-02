@@ -7,8 +7,9 @@ import org.fluentlenium.core.components.ComponentsManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
@@ -31,6 +32,7 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class FluentWebElementTest {
 
     @Mock
@@ -53,8 +55,6 @@ public class FluentWebElementTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-
         fluentAdapter = new FluentAdapter(driver);
 
         when(driver.getMouse()).thenReturn(mouse);

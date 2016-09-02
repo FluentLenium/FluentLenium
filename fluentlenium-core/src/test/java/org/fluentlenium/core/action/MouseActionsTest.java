@@ -4,8 +4,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
@@ -18,6 +19,7 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class MouseActionsTest {
     @Mock
     private Keyboard keyboard;
@@ -30,8 +32,6 @@ public class MouseActionsTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-
         when(driver.getKeyboard()).thenReturn(keyboard);
         when(driver.getMouse()).thenReturn(mouse);
     }

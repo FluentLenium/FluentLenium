@@ -5,16 +5,14 @@ import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
-
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +20,15 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@RunWith(MockitoJUnitRunner.class)
 public class FluentInjectorElementTest {
 
     @Mock
@@ -33,8 +40,6 @@ public class FluentInjectorElementTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
 
@@ -87,6 +92,7 @@ public class FluentInjectorElementTest {
     }
 
     private static FluentWebElement existingElement = mock(FluentWebElement.class);
+
     public static class ExistingFluentWebElementContainer {
         FluentWebElement element = existingElement;
     }
@@ -117,6 +123,16 @@ public class FluentInjectorElementTest {
 
     public static class WebElementDriverWrapperListContainer {
         List<WebElementDriverWrapper> element;
+    }
+
+    public static class FluentListSubClass<T extends FluentWebElementSubClass> extends FluentListImpl<T> {
+        public FluentListSubClass(Class<T> componentClass, List<T> list, FluentControl fluentControl, ComponentInstantiator instantiator) {
+            super(componentClass, list, fluentControl, instantiator);
+        }
+    }
+
+    public static class ListSubClassContainer {
+        FluentListSubClass<FluentWebElementSubClass> element;
     }
 
     @Test
@@ -249,6 +265,36 @@ public class FluentInjectorElementTest {
 
         assertThat(container.element).hasSize(2);
         assertThat(container.element).isInstanceOf(FluentList.class);
+
+        assertThat(container.element.get(0).getTagName()).isEqualTo("h1");
+        assertThat(container.element.get(0)).isExactlyInstanceOf(FluentWebElementSubClass.class);
+        assertThat(container.element.get(0).getElement()).isInstanceOf(WebElement.class);
+
+        assertThat(container.element.get(1).getTagName()).isEqualTo("h2");
+        assertThat(container.element.get(1)).isExactlyInstanceOf(FluentWebElementSubClass.class);
+        assertThat(container.element.get(1).getElement()).isInstanceOf(WebElement.class);
+    }
+
+    @Test
+    public void testListSubClass() {
+        ListSubClassContainer container = new ListSubClassContainer();
+
+        injector.inject(container);
+
+        WebElement webElement = mock(WebElement.class);
+        when(webElement.getTagName()).thenReturn("h1");
+
+        WebElement webElement2 = mock(WebElement.class);
+        when(webElement2.getTagName()).thenReturn("h2");
+
+        ArrayList<WebElement> webElements = new ArrayList<>();
+        webElements.add(webElement);
+        webElements.add(webElement2);
+
+        when(webDriver.findElements(any(By.class))).thenReturn(webElements);
+
+        assertThat(container.element).hasSize(2);
+        assertThat(container.element).isExactlyInstanceOf(FluentListSubClass.class);
 
         assertThat(container.element.get(0).getTagName()).isEqualTo("h1");
         assertThat(container.element.get(0)).isExactlyInstanceOf(FluentWebElementSubClass.class);

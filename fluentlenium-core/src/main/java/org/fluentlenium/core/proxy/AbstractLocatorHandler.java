@@ -4,8 +4,6 @@ import com.google.common.base.Supplier;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
-import org.fluentlenium.core.proxy.plugin.LocatorHandlerPlugin;
-import org.fluentlenium.core.proxy.plugin.LocatorHandlerReturn;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -17,6 +15,11 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Abstract proxy handler supporting lazy loading and hooks on {@link WebElement}.
+ *
+ * @param <T> type of underlying object.
+ */
 public abstract class AbstractLocatorHandler<T> implements InvocationHandler, LocatorHandler<T> {
     private static final Method TO_STRING = getMethod(Object.class, "toString");
     private static final Method EQUALS = getMethod(Object.class, "equals", Object.class);
@@ -35,10 +38,12 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     private List<ProxyElementListener> listeners = new ArrayList<>();
 
+    @Override
     public synchronized boolean addListener(ProxyElementListener listener) {
         return listeners.add(listener);
     }
 
+    @Override
     public synchronized boolean removeListener(ProxyElementListener listener) {
         return listeners.remove(listener);
     }
@@ -55,11 +60,9 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         }
     }
 
-    private List<LocatorHandlerPlugin<T>> plugins = new ArrayList<>();
     protected T proxy;
     protected final ElementLocator locator;
     protected T result;
-    protected boolean loaded;
 
     private List<FluentHook> hooks;
 
@@ -74,19 +77,13 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     abstract public T getLocatorResultImpl();
 
     public synchronized T getLocatorResult() {
-        if (!loaded) {
+        if (result == null) {
             result = getLocatorResultImpl();
-            loaded = true;
         }
         return result;
     }
 
     protected abstract WebElement getElement();
-
-    @Override
-    public void addPlugin(LocatorHandlerPlugin<T> plugin) {
-        plugins.add(plugin);
-    }
 
     @Override
     public void setHooks(HookChainBuilder hookChainBuilder, List<HookDefinition<?>> hookDefinitions) {
@@ -137,7 +134,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     @Override
     public boolean isLoaded() {
-        return loaded;
+        return result != null;
     }
 
     @Override
@@ -172,25 +169,27 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
             if (EQUALS.equals(method)) {
                 LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
                 if (otherLocatorHandler != null) {
-                    return this.equals(otherLocatorHandler);
+                    if (!otherLocatorHandler.isLoaded() || args[0] == null) {
+                        return this.equals(otherLocatorHandler);
+                    } else {
+                        return args[0].equals(proxy);
+                    }
                 }
             }
 
             if (HASH_CODE.equals(method)) {
-                return ListHandler.class.hashCode() + locator.hashCode();
-            }
-
-            for (LocatorHandlerPlugin plugin : plugins) {
-                LocatorHandlerReturn locatorHandlerReturn = plugin.beforeSearch(proxy, method, args, locator);
-                if (locatorHandlerReturn != null) return locatorHandlerReturn.getReturnValue();
+                return 2048 + locator.hashCode();
             }
         }
 
         getLocatorResult();
 
-        for (LocatorHandlerPlugin plugin : plugins) {
-            LocatorHandlerReturn locatorHandlerReturn = plugin.afterSearch(proxy, method, args, locator, result);
-            if (locatorHandlerReturn != null) return locatorHandlerReturn.getReturnValue();
+        if (EQUALS.equals(method)) {
+            LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
+            if (otherLocatorHandler != null && !otherLocatorHandler.isLoaded()) {
+                otherLocatorHandler.now();
+                return otherLocatorHandler.equals(this);
+            }
         }
 
         Object returnValue;
@@ -200,12 +199,6 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
             // Unwrap the underlying exception
             throw e.getCause();
         }
-
-        for (LocatorHandlerPlugin plugin : plugins) {
-            LocatorHandlerReturn locatorHandlerReturn = plugin.afterInvoke(proxy, method, args, locator, result, returnValue);
-            if (locatorHandlerReturn != null) returnValue = locatorHandlerReturn.getReturnValue();
-        }
-
         return returnValue;
     }
 
@@ -218,11 +211,6 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         AbstractLocatorHandler that = (AbstractLocatorHandler) o;
 
         return locator != null ? locator.equals(that.locator) : that.locator == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return locator != null ? locator.hashCode() : 0;
     }
 
     @Override

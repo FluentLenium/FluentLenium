@@ -7,8 +7,9 @@ import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class AxesTest {
     @Mock
     private WebElement element;
@@ -35,7 +37,6 @@ public class AxesTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
         fluentAdapter = new FluentAdapter(driver);
 
         instantiator = new DefaultComponentInstantiator(fluentAdapter);

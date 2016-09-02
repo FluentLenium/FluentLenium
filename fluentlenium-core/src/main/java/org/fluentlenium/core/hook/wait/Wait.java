@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 @Hook(WaitHook.class)
 @HookOptions(WaitHookOptions.class)
 public @interface Wait {
-    long atMost() default 5000L;
+    long atMost() default 5L;
 
     TimeUnit timeUnit() default TimeUnit.SECONDS;
 

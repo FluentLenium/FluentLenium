@@ -10,8 +10,9 @@ import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -25,6 +26,7 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class FluentListImplTest {
     @Mock
     private FluentWebElement element1;
@@ -46,8 +48,6 @@ public class FluentListImplTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-
         fluentAdapter = new FluentAdapter(driver);
 
         emptyList = fluentAdapter.newFluentList();

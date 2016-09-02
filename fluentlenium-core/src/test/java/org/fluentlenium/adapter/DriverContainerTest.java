@@ -3,8 +3,9 @@ package org.fluentlenium.adapter;
 import org.fluentlenium.core.FluentDriver;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -12,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(MockitoJUnitRunner.class)
 public class DriverContainerTest {
     @Mock
     private FluentDriver driver1;
@@ -26,8 +28,6 @@ public class DriverContainerTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-
         executor = Executors.newSingleThreadExecutor();
 
         threadLocalContainer = new ThreadLocalFluentControlContainer();

@@ -5,8 +5,6 @@ import lombok.experimental.UtilityClass;
 import org.fluentlenium.core.domain.WrapsElements;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.internal.WrapsElement;
@@ -22,11 +20,8 @@ import java.util.List;
 @UtilityClass
 public class LocatorProxies {
     public LocatorHandler getLocatorHandler(Object proxy) {
-        if (proxy instanceof WrapsElements && !Proxy.isProxyClass(proxy.getClass())) {
+        while (proxy instanceof WrapsElements && !Proxy.isProxyClass(proxy.getClass())) {
             proxy = ((WrapsElements) proxy).getWrappedElements();
-        }
-        if (proxy instanceof WrapsElement && !Proxy.isProxyClass(proxy.getClass())) {
-            proxy = ((WrapsElement) proxy).getWrappedElement();
         }
         if (proxy != null && Proxy.isProxyClass(proxy.getClass())) {
             InvocationHandler proxyHandler = Proxy.getInvocationHandler(proxy);
@@ -58,7 +53,7 @@ public class LocatorProxies {
         return locatorHandler.isPresent();
     }
 
-    public static void now(Object proxy) {
+    public void now(Object proxy) {
         LocatorHandler<?> handler = getLocatorHandler(proxy);
         if (handler != null) {
             handler.now();
@@ -73,24 +68,28 @@ public class LocatorProxies {
         return true;
     }
 
-    public boolean addProxyListener(WebElement proxy, ProxyElementListener listener) {
+    public boolean addProxyListener(Object proxy, ProxyElementListener listener) {
         if (Proxy.isProxyClass(proxy.getClass())) {
             InvocationHandler invocationHandler = Proxy.getInvocationHandler(proxy);
-            if (invocationHandler instanceof ComponentHandler) {
-                return ((ComponentHandler) invocationHandler).addListener(listener);
+            if (invocationHandler instanceof LocatorHandler) {
+                return ((LocatorHandler) invocationHandler).addListener(listener);
             }
         }
         return false;
     }
 
-    public boolean removeProxyListener(WebElement proxy, ProxyElementListener listener) {
+    public boolean removeProxyListener(Object proxy, ProxyElementListener listener) {
         if (Proxy.isProxyClass(proxy.getClass())) {
             InvocationHandler invocationHandler = Proxy.getInvocationHandler(proxy);
-            if (invocationHandler instanceof ComponentHandler) {
-                return ((ComponentHandler) invocationHandler).removeListener(listener);
+            if (invocationHandler instanceof LocatorHandler) {
+                return ((LocatorHandler) invocationHandler).removeListener(listener);
             }
         }
         return false;
+    }
+
+    public WebElement createWebElement(final WebElement element) {
+        return createWebElement(new ElementInstanceLocator(element));
     }
 
     public WebElement createWebElement(Supplier<WebElement> elementSupplier) {
@@ -102,6 +101,10 @@ public class LocatorProxies {
         WebElement proxy = (WebElement) Proxy.newProxyInstance(locator.getClass().getClassLoader(), new Class[]{WebElement.class, Locatable.class, WrapsElement.class}, handler);
         handler.setProxy(proxy);
         return proxy;
+    }
+
+    public List<WebElement> createWebElementList(final List<WebElement> elements) {
+        return createWebElementList(new ElementListInstanceLocator(elements));
     }
 
     public List<WebElement> createWebElementList(Supplier<List<WebElement>> elementsSupplier) {
@@ -125,17 +128,17 @@ public class LocatorProxies {
         componentHandler.setHooks(hookChainBuilder, hookDefinitions);
     }
 
-    public static WebElement first(List<WebElement> proxy) {
+    public WebElement first(List<WebElement> proxy) {
         LocatorHandler locatorHandler = getLocatorHandler(proxy);
         return createWebElement(new FirstElementLocator(locatorHandler.getLocator()));
     }
 
-    public static WebElement last(List<WebElement> proxy) {
+    public WebElement last(List<WebElement> proxy) {
         LocatorHandler locatorHandler = getLocatorHandler(proxy);
         return createWebElement(new LastElementLocator(locatorHandler.getLocator()));
     }
 
-    public static WebElement index(List<WebElement> proxy, int index) {
+    public WebElement index(List<WebElement> proxy, int index) {
         LocatorHandler locatorHandler = getLocatorHandler(proxy);
         return createWebElement(new AtIndexElementLocator(locatorHandler.getLocator(), index));
     }

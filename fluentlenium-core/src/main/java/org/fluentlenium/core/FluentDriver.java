@@ -12,14 +12,13 @@ import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.events.AnnotationsComponentListener;
+import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.inject.DefaultContainerInstanciator;
 import org.fluentlenium.core.inject.FluentInjector;
-import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.wait.FluentWait;
@@ -30,6 +29,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.io.File;
@@ -415,18 +416,22 @@ public class FluentDriver implements FluentControl {
         if (null == element || !"iframe".equals(element.getTagName())) {
             getDriver().switchTo().defaultContent();
         } else {
-            getDriver().switchTo().frame(LocatorProxies.getLocatorResult(element.getElement()));
+            WebElement target = element.getElement();
+            while (target instanceof WrapsElement && target != ((WrapsElement) target).getWrappedElement()) {
+                target = ((WrapsElement) target).getWrappedElement();
+            }
+            getDriver().switchTo().frame(target);
         }
     }
 
     @Override
     public void switchTo() {
-        this.switchTo((FluentWebElement)null);
+        this.switchTo((FluentWebElement) null);
     }
 
     @Override
     public void switchToDefault() {
-        this.switchTo((FluentWebElement)null);
+        this.switchTo((FluentWebElement) null);
     }
 
     @Override

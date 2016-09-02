@@ -3,8 +3,6 @@ package org.fluentlenium.core.domain;
 import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
-import org.fluentlenium.core.proxy.LocatorProxies;
-import org.fluentlenium.core.proxy.plugin.listelement.ListElementAccessorPlugin;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;

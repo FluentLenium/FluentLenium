@@ -2,7 +2,7 @@ package org.fluentlenium.core.wait;
 
 
 import com.google.common.base.Predicate;
-import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.conditions.IntegerConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
@@ -23,9 +23,9 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
     }
 
     public boolean isVerified(final Predicate<FluentWebElement> predicate, final boolean defaultValue) {
-        until(wait, new Predicate<FluentDriver>() {
+        until(wait, new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentDriver input) {
+            public boolean apply(FluentControl input) {
                 return condition().isVerified(predicate, defaultValue);
             }
         }, negation ? isPredicateNotVerifiedMessage(selectionName) : isPredicateVerifiedMessage(selectionName));

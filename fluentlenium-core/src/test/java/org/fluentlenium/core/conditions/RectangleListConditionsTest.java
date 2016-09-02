@@ -7,8 +7,9 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class RectangleListConditionsTest {
 
     @Mock
@@ -41,8 +43,6 @@ public class RectangleListConditionsTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-
         FluentAdapter fluentAdapter = new FluentAdapter(webDriver);
         DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
 

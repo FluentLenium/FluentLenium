@@ -1,5 +1,6 @@
 package org.fluentlenium.core.axes;
 
+import com.google.common.base.Supplier;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
@@ -8,9 +9,7 @@ import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,15 +32,10 @@ public class Axes {
      * @return fluent web element
      */
     public FluentWebElement parent() {
-        WebElement webElement = LocatorProxies.createWebElement(new ElementLocator() {
+        WebElement webElement = LocatorProxies.createWebElement(new Supplier<WebElement>() {
             @Override
-            public WebElement findElement() {
+            public WebElement get() {
                 return Axes.this.webElement.findElement(By.xpath("parent::*"));
-            }
-
-            @Override
-            public List<WebElement> findElements() {
-                return Arrays.asList(findElement());
             }
         });
 
@@ -49,14 +43,9 @@ public class Axes {
     }
 
     protected FluentList<FluentWebElement> handleAxe(final String axe) {
-        List<WebElement> webElementList = LocatorProxies.createWebElementList(new ElementLocator() {
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
             @Override
-            public WebElement findElement() {
-                return Axes.this.webElement.findElement(By.xpath(axe + "::*"));
-            }
-
-            @Override
-            public List<WebElement> findElements() {
+            public List<WebElement> get() {
                 return Axes.this.webElement.findElements(By.xpath(axe + "::*"));
             }
         });

@@ -10,8 +10,9 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -22,6 +23,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class IntegerListConditionsTest {
 
     @Mock
@@ -44,8 +46,6 @@ public class IntegerListConditionsTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-
         FluentAdapter fluentAdapter = new FluentAdapter(driver);
         DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
 

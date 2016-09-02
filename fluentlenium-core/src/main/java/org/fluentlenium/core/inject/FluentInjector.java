@@ -2,19 +2,18 @@ package org.fluentlenium.core.inject;
 
 import org.fluentlenium.core.FluentContainer;
 import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.domain.ComponentList;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.ContainerAnnotationsEventsRegistry;
-import org.fluentlenium.core.hook.NoHook;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.Hook;
 import org.fluentlenium.core.hook.HookDefinition;
 import org.fluentlenium.core.hook.HookOptions;
+import org.fluentlenium.core.hook.NoHook;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.WebElement;
@@ -23,7 +22,6 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
-import org.xml.sax.Locator;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -37,7 +35,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * Handle injection of @AjaxElement proxies, @Page objects and @FindBy.
+ * Handle injection of element proxies, @Page objects and @FindBy.
  */
 public class FluentInjector implements FluentInjectControl {
 
@@ -80,7 +78,7 @@ public class FluentInjector implements FluentInjectControl {
     @Override
     public ContainerContext[] inject(Object... containers) {
         ContainerContext[] context = new ContainerContext[containers.length];
-        for (int i=0; i<containers.length; i++) {
+        for (int i = 0; i < containers.length; i++) {
             context[i] = inject(containers[i]);
         }
         return context;
@@ -174,15 +172,7 @@ public class FluentInjector implements FluentInjectControl {
                 if (isSupported(container, field)) {
                     ArrayList<HookDefinition<?>> fieldHookDefinitions = new ArrayList<>(containerContext.getHookDefinitions());
                     addHookDefinitions(field.getAnnotations(), fieldHookDefinitions);
-
-                    AjaxElement annotation = field.getAnnotation(AjaxElement.class);
-                    ElementLocatorFactory locatorFactory;
-                    if (annotation == null) {
-                        locatorFactory = new DefaultElementLocatorFactory(this.fluentControl.getDriver());
-                    } else {
-                        locatorFactory = new ConfigurableAjaxElementLocatorFactory(this.fluentControl.getDriver(), annotation);
-                    }
-
+                    ElementLocatorFactory locatorFactory = new DefaultElementLocatorFactory(this.fluentControl.getDriver());
                     initFieldElements(locatorFactory, fieldHookDefinitions, container, field);
                 }
             }
@@ -269,7 +259,7 @@ public class FluentInjector implements FluentInjectControl {
 
 
     private boolean isSupported(Object container, Field field) {
-        return isValueNull(container, field) && !field.isAnnotationPresent(NoInject.class) && !Modifier.isFinal(field.getModifiers()) && (isListOfFluentWebElement(field) || isList(field) || isComponent(field));
+        return isValueNull(container, field) && !field.isAnnotationPresent(NoInject.class) && !Modifier.isFinal(field.getModifiers()) && (isListOfFluentWebElement(field) || isList(field) || isComponent(field)) || isComponentList(field);
     }
 
     private static boolean isValueNull(Object container, Field field) {
@@ -282,6 +272,21 @@ public class FluentInjector implements FluentInjectControl {
 
     private boolean isComponent(Field field) {
         return componentsManager.isComponentClass(field.getType());
+    }
+
+    private boolean isComponentList(Field field) {
+        if (isList(field)) {
+            boolean componentListClass = componentsManager.isComponentListClass((Class<? extends List<?>>) field.getType());
+            if (componentListClass) {
+                Class<?> genericType = getFirstGenericType(field);
+                boolean componentClass = componentsManager.isComponentClass(genericType);
+
+                if (componentClass) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static boolean isListOfFluentWebElement(Field field) {
@@ -316,17 +321,27 @@ public class FluentInjector implements FluentInjectControl {
         }
 
         try {
-            if (isListOfFluentWebElement(field)) {
+            if (isComponentList(field)) {
+                return initFieldAsComponentList(locator, container, field, hookDefinitions);
+            } else if (isComponent(field)) {
+                return initFieldAsElement(locator, container, field, hookDefinitions);
+            } else if (isListOfFluentWebElement(field)) {
                 return initFieldAsListOfFluentWebElement(locator, container, field, hookDefinitions);
             } else if (isList(field)) {
                 return initFieldAsList(locator, container, field, hookDefinitions);
-            } else if (isComponent(field)) {
-                return initFieldAsElement(locator, container, field, hookDefinitions);
             }
         } catch (IllegalAccessException e) {
             throw new FluentInjectException("Unable to find an accessible constructor with an argument of type WebElement in " + field.getType(), e);
         }
         return null;
+    }
+
+    private <L extends List<T>, T> L initFieldAsComponentList(ElementLocator locator, Object container, Field field, List<HookDefinition<?>> hookDefinitions) throws IllegalAccessException {
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
+        L componentList = componentsManager.asComponentList((Class<L>) field.getType(), (Class<T>) getFirstGenericType(field), webElementList);
+        LocatorProxies.setHooks(webElementList, hookChainBuilder, hookDefinitions);
+        ReflectionUtils.set(field, container, componentList);
+        return componentList;
     }
 
     private Object initFieldAsElement(ElementLocator locator, Object container, Field field, List<HookDefinition<?>> hookDefinitions) throws IllegalAccessException {

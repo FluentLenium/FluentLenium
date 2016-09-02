@@ -8,10 +8,12 @@ import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriver;
 
+@RunWith(MockitoJUnitRunner.class)
 public class FluentInjectorContainerTest {
 
     @Mock
@@ -23,8 +25,6 @@ public class FluentInjectorContainerTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
 
@@ -110,10 +110,10 @@ public class FluentInjectorContainerTest {
 
         Assertions.assertThat(parentContainer.control).isInstanceOf(ContainerFluentControl.class);
 
-        Assertions.assertThat(((ContainerFluentControl)parentContainer.control).getAdapterControl()).isSameAs(fluentAdapter);
+        Assertions.assertThat(((ContainerFluentControl) parentContainer.control).getAdapterControl()).isSameAs(fluentAdapter);
         Assertions.assertThat(parentContainer.childContainer.control).isInstanceOf(ContainerFluentControl.class);
 
-        Assertions.assertThat(((ContainerFluentControl)parentContainer.childContainer.control).getAdapterControl()).isSameAs(fluentAdapter);
+        Assertions.assertThat(((ContainerFluentControl) parentContainer.childContainer.control).getAdapterControl()).isSameAs(fluentAdapter);
     }
 
     public static class ChildContainerConstructorInit {
@@ -149,7 +149,7 @@ public class FluentInjectorContainerTest {
         Assertions.assertThat(parentContainer.control).isSameAs(fluentAdapter);
         Assertions.assertThat(parentContainer.childContainer.control).isInstanceOf(ContainerFluentControl.class);
 
-        Assertions.assertThat(((ContainerFluentControl)parentContainer.childContainer.control).getAdapterControl()).isSameAs(fluentAdapter);
+        Assertions.assertThat(((ContainerFluentControl) parentContainer.childContainer.control).getAdapterControl()).isSameAs(fluentAdapter);
 
     }
 

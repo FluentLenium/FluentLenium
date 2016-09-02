@@ -1,10 +1,10 @@
 package org.fluentlenium.adapter;
 
 import org.fluentlenium.configuration.ConfigurationProperties;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.internal.WrapsDriver;
@@ -13,20 +13,17 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
+@RunWith(MockitoJUnitRunner.class)
 public class FluentAdapterTest {
-
-
+    @Mock
+    private WebDriver webDriver;
 
     @Mock
-    WebDriver webDriver;
+    private WebDriver webDriver2;
 
     @Mock
-    WebDriver webDriver2;
+    private SharedMutator sharedMutator;
 
-    @Before
-    public void before() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     public void is_driver_available_behaves_as_expected() {
@@ -111,8 +108,8 @@ public class FluentAdapterTest {
             assertThat(webDriver).isInstanceOf(EventFiringWebDriver.class);
             assertThat(webDriver2).isInstanceOf(EventFiringWebDriver.class);
 
-            assertThat(((WrapsDriver)webDriver).getWrappedDriver()).isInstanceOf(HtmlUnitDriver.class);
-            assertThat(((WrapsDriver)webDriver).getWrappedDriver()).isInstanceOf(HtmlUnitDriver.class);
+            assertThat(((WrapsDriver) webDriver).getWrappedDriver()).isInstanceOf(HtmlUnitDriver.class);
+            assertThat(((WrapsDriver) webDriver).getWrappedDriver()).isInstanceOf(HtmlUnitDriver.class);
         } finally {
             if (webDriver != null) {
                 webDriver.quit();
@@ -123,8 +120,5 @@ public class FluentAdapterTest {
         }
 
 
-
     }
-
-
 }
