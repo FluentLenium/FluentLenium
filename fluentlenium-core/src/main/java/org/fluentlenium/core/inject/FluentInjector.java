@@ -16,8 +16,8 @@ import org.fluentlenium.core.hook.HookOptions;
 import org.fluentlenium.core.hook.NoHook;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.utils.ReflectionUtils;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
@@ -42,6 +42,8 @@ public class FluentInjector implements FluentInjectControl {
     private final ConcurrentMap<Class, Object> containerInstances = new ConcurrentHashMap<>();
     private final ConcurrentMap<Object, ContainerContext> containerContexts = new ConcurrentHashMap<>();
     private final ConcurrentMap<Object, ContainerAnnotationsEventsRegistry> eventsContainerSupport = new ConcurrentHashMap<>();
+    private final ConcurrentMap<Object, SearchContext> searchContexts = new ConcurrentHashMap<>();
+
 
     private final FluentControl fluentControl;
     private final ComponentsManager componentsManager;
@@ -86,31 +88,54 @@ public class FluentInjector implements FluentInjectControl {
 
     @Override
     public ContainerContext inject(Object container) {
-        inject(container, null);
+        inject(container, null, fluentControl.getDriver());
         return containerContexts.get(container);
     }
 
-    private void inject(Object container, Object parentContainer) {
-        initContainer(container, parentContainer);
-        initFluentElements(container);
-        initChildrenContainers(container);
-
-        // Default Selenium WebElement injection.
-        PageFactory.initElements(fluentControl.getDriver(), container);
+    private void inject(Object container, Object parentContainer, SearchContext searchContext) {
+        initContainer(container, parentContainer, searchContext);
+        initParentContainer(container, parentContainer);
+        initFluentElements(container, searchContext);
+        initChildrenContainers(container, searchContext);
     }
 
-    private void initContainer(Object container, Object parentContainer) {
-        initContainerContext(container, parentContainer);
+    private void injectComponent(Object componentContainer, Object parentContainer, SearchContext searchContext) {
+        initContainerContext(componentContainer, parentContainer, searchContext);
+        initParentContainer(componentContainer, parentContainer);
+        initFluentElements(componentContainer, searchContext);
+        initChildrenContainers(componentContainer, searchContext);
+    }
+
+    private void initParentContainer(Object container, Object parentContainer) {
+        for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
+            for (Field field : cls.getDeclaredFields()) {
+                if (isParent(field)) {
+                    try {
+                        ReflectionUtils.set(field, container, parentContainer);
+                    } catch (IllegalAccessException | IllegalArgumentException e) {
+                        throw new FluentInjectException("Can't set field " + field + " with value " + parentContainer, e);
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean isParent(Field field) {
+        return field.isAnnotationPresent(Parent.class);
+    }
+
+    private void initContainer(Object container, Object parentContainer, SearchContext searchContext) {
+        initContainerContext(container, parentContainer, searchContext);
         if (container instanceof FluentContainer) {
             ((FluentContainer) container).initFluent(new ContainerFluentControl(fluentControl, containerContexts.get(container)));
         }
         initEventAnnotations(container);
     }
 
-    private void initContainerContext(Object container, Object parentContainer) {
+    private void initContainerContext(Object container, Object parentContainer, SearchContext searchContext) {
         ContainerContext parentContainerContext = parentContainer != null ? containerContexts.get(parentContainer) : null;
 
-        DefaultContainerContext containerContext = new DefaultContainerContext(container, parentContainerContext);
+        DefaultContainerContext containerContext = new DefaultContainerContext(container, parentContainerContext, searchContext);
         containerContexts.put(container, containerContext);
 
         if (parentContainerContext != null) {
@@ -136,7 +161,7 @@ public class FluentInjector implements FluentInjectControl {
         return cls != Object.class && cls != null;
     }
 
-    private void initChildrenContainers(Object container) {
+    private void initChildrenContainers(Object container, SearchContext searchContext) {
         for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
             for (Field field : cls.getDeclaredFields()) {
                 if (isContainer(field)) {
@@ -150,21 +175,32 @@ public class FluentInjector implements FluentInjectControl {
                         }
                     } else {
                         Object childContainer = containerInstanciator.newInstance(fieldClass, containerContexts.get(container));
-                        initContainer(childContainer, container);
+                        initContainer(childContainer, container, searchContext);
                         try {
                             ReflectionUtils.set(field, container, childContainer);
                         } catch (IllegalAccessException e) {
                             throw new FluentInjectException("Can't set field " + field + " with value " + childContainer, e);
                         }
                         containerInstances.putIfAbsent(fieldClass, childContainer);
-                        inject(childContainer, container);
+                        inject(childContainer, container, searchContext);
+                    }
+                } else if (isComponent(field) && !isParent(field)) {
+                    try {
+                        Object o = ReflectionUtils.get(field, container);
+                        SearchContext componentSearchContext = searchContexts.get(o);
+                        if (componentSearchContext == null) {
+                            componentSearchContext = fluentControl.getDriver();
+                        }
+                        injectComponent(o, container, componentSearchContext); // SearchContext from the component
+                    } catch (IllegalAccessException e) {
+                        throw new FluentInjectException("Can't get field " + field + " from container " + container, e);
                     }
                 }
             }
         }
     }
 
-    private <T extends FluentControl> void initFluentElements(Object container) {
+    private <T extends FluentControl> void initFluentElements(Object container, SearchContext searchContext) {
         ContainerContext containerContext = containerContexts.get(container);
 
         for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
@@ -172,8 +208,15 @@ public class FluentInjector implements FluentInjectControl {
                 if (isSupported(container, field)) {
                     ArrayList<HookDefinition<?>> fieldHookDefinitions = new ArrayList<>(containerContext.getHookDefinitions());
                     addHookDefinitions(field.getAnnotations(), fieldHookDefinitions);
-                    ElementLocatorFactory locatorFactory = new DefaultElementLocatorFactory(this.fluentControl.getDriver());
-                    initFieldElements(locatorFactory, fieldHookDefinitions, container, field);
+                    ElementLocatorFactory locatorFactory = new DefaultElementLocatorFactory(searchContext);
+                    ElementLocator locator = locatorFactory.createLocator(field);
+                    if (locator == null) {
+                        continue;
+                    }
+                    Object fieldValue = initFieldElements(locator, fieldHookDefinitions, container, field);
+                    if (fieldValue != null) {
+                        searchContexts.put(fieldValue, new ElementLocatorSearchContext(locator));
+                    }
                 }
             }
         }
@@ -259,7 +302,11 @@ public class FluentInjector implements FluentInjectControl {
 
 
     private boolean isSupported(Object container, Field field) {
-        return isValueNull(container, field) && !field.isAnnotationPresent(NoInject.class) && !Modifier.isFinal(field.getModifiers()) && (isListOfFluentWebElement(field) || isList(field) || isComponent(field)) || isComponentList(field);
+        return isValueNull(container, field) && !field.isAnnotationPresent(NoInject.class) && !Modifier.isFinal(field.getModifiers()) &&
+                (isListOfFluentWebElement(field) ||
+                        isListOfComponent(field) ||
+                        isComponent(field) ||
+                        isComponentList(field) || isElement(field) || isListOfElement(field));
     }
 
     private static boolean isValueNull(Object container, Field field) {
@@ -292,9 +339,15 @@ public class FluentInjector implements FluentInjectControl {
     private static boolean isListOfFluentWebElement(Field field) {
         if (isList(field)) {
             Class<?> genericType = getFirstGenericType(field);
-            if (FluentWebElement.class.isAssignableFrom(genericType)) {
-                return true;
-            }
+            return FluentWebElement.class.isAssignableFrom(genericType);
+        }
+        return false;
+    }
+
+    private boolean isListOfComponent(Field field) {
+        if (isList(field)) {
+            Class<?> genericType = getFirstGenericType(field);
+            return componentsManager.isComponentClass(genericType);
         }
         return false;
     }
@@ -314,21 +367,32 @@ public class FluentInjector implements FluentInjectControl {
         return List.class.isAssignableFrom(field.getType());
     }
 
-    private Object initFieldElements(ElementLocatorFactory factory, List<HookDefinition<?>> hookDefinitions, Object container, Field field) {
-        ElementLocator locator = factory.createLocator(field);
-        if (locator == null) {
-            return null;
-        }
+    private static boolean isElement(Field field) {
+        return WebElement.class.isAssignableFrom(field.getType());
+    }
 
+    private static boolean isListOfElement(Field field) {
+        if (isList(field)) {
+            Class<?> genericType = getFirstGenericType(field);
+            return WebElement.class.isAssignableFrom(genericType);
+        }
+        return false;
+    }
+
+    private Object initFieldElements(ElementLocator locator, List<HookDefinition<?>> hookDefinitions, Object container, Field field) {
         try {
-            if (isComponentList(field)) {
+            if (isComponent(field)) {
+                return initFieldAsComponent(locator, container, field, hookDefinitions);
+            } else if (isComponentList(field)) {
                 return initFieldAsComponentList(locator, container, field, hookDefinitions);
-            } else if (isComponent(field)) {
-                return initFieldAsElement(locator, container, field, hookDefinitions);
             } else if (isListOfFluentWebElement(field)) {
                 return initFieldAsListOfFluentWebElement(locator, container, field, hookDefinitions);
-            } else if (isList(field)) {
-                return initFieldAsList(locator, container, field, hookDefinitions);
+            } else if (isListOfComponent(field)) {
+                return initFieldAsListOfComponent(locator, container, field, hookDefinitions);
+            } else if (isElement(field)) {
+                return initFieldAsElement(locator, container, field, hookDefinitions);
+            } else if (isListOfElement(field)) {
+                return initFieldAsListOfElement(locator, container, field, hookDefinitions);
             }
         } catch (IllegalAccessException e) {
             throw new FluentInjectException("Unable to find an accessible constructor with an argument of type WebElement in " + field.getType(), e);
@@ -344,7 +408,7 @@ public class FluentInjector implements FluentInjectControl {
         return componentList;
     }
 
-    private Object initFieldAsElement(ElementLocator locator, Object container, Field field, List<HookDefinition<?>> hookDefinitions) throws IllegalAccessException {
+    private Object initFieldAsComponent(ElementLocator locator, Object container, Field field, List<HookDefinition<?>> hookDefinitions) throws IllegalAccessException {
         WebElement element = LocatorProxies.createWebElement(locator);
         Object component = componentsManager.newComponent(field.getType(), element);
 
@@ -353,7 +417,7 @@ public class FluentInjector implements FluentInjectControl {
         return component;
     }
 
-    private ComponentList<?> initFieldAsList(ElementLocator locator, Object container, Field field, List<HookDefinition<?>> hookDefinitions) throws IllegalAccessException {
+    private ComponentList<?> initFieldAsListOfComponent(ElementLocator locator, Object container, Field field, List<HookDefinition<?>> hookDefinitions) throws IllegalAccessException {
         List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
         ComponentList<?> componentList = componentsManager.asComponentList(getFirstGenericType(field), webElementList);
         LocatorProxies.setHooks(webElementList, hookChainBuilder, hookDefinitions);
@@ -367,5 +431,19 @@ public class FluentInjector implements FluentInjectControl {
         LocatorProxies.setHooks(webElementList, hookChainBuilder, hookDefinitions);
         ReflectionUtils.set(field, container, fluentList);
         return fluentList;
+    }
+
+    private WebElement initFieldAsElement(ElementLocator locator, Object container, Field field, List<HookDefinition<?>> hookDefinitions) throws IllegalAccessException {
+        WebElement element = LocatorProxies.createWebElement(locator);
+        LocatorProxies.setHooks(element, hookChainBuilder, hookDefinitions);
+        ReflectionUtils.set(field, container, element);
+        return element;
+    }
+
+    private List<WebElement> initFieldAsListOfElement(ElementLocator locator, Object container, Field field, List<HookDefinition<?>> hookDefinitions) throws IllegalAccessException {
+        List<WebElement> elements = LocatorProxies.createWebElementList(locator);
+        LocatorProxies.setHooks(elements, hookChainBuilder, hookDefinitions);
+        ReflectionUtils.set(field, container, elements);
+        return elements;
     }
 }
