@@ -16,9 +16,9 @@ public class DefaultContainerInstanciator implements ContainerInstanciator {
     }
 
     @Override
-    public <T> T newInstance(Class<T> cls) {
+    public <T> T newInstance(Class<T> cls, ContainerContext context) {
         try {
-            return ReflectionUtils.newInstanceOptionalArgs(cls, fluentControl);
+            return ReflectionUtils.newInstanceOptionalArgs(cls, new ContainerFluentControl(fluentControl, context));
         } catch (NoSuchMethodException e) {
             throw new FluentInjectException(cls.getName() + " is not a valid component class.", e);
         } catch (IllegalAccessException e) {

@@ -32,13 +32,13 @@ public class FluentWaitSupplierMatcher extends AbstractWaitElementMatcher {
     protected FluentList<FluentWebElement> find() {
         try {
             FluentWebElement fluentWebElement = selector.get().now();
-            FluentListImpl<FluentWebElement> elements = new FluentListImpl<>(FluentWebElement.class, null);
+            FluentList<FluentWebElement> elements = search.getInstantiator().newFluentList();
             if (fluentWebElement != null) {
                 elements.add(fluentWebElement);
             }
             return elements;
         } catch (NoSuchElementException | StaleElementReferenceException e) {
-            return new FluentListImpl<>();
+            return search.getInstantiator().newFluentList();
         }
 
     }

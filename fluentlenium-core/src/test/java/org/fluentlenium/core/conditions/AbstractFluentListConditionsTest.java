@@ -1,13 +1,16 @@
 package org.fluentlenium.core.conditions;
 
 import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Before;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.WebElement;
 
-public class AbstractFluentListConditionsTest {
+@RunWith(MockitoJUnitRunner.class)
+abstract class AbstractFluentListConditionsTest {
     @Mock
     protected WebElement webElement1;
 
@@ -28,10 +31,8 @@ public class AbstractFluentListConditionsTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-
-        fluentWebElement1 = new FluentWebElement(webElement1, null, null);
-        fluentWebElement2 = new FluentWebElement(webElement2, null, null);
-        fluentWebElement3 = new FluentWebElement(webElement3, null, null);
+        fluentWebElement1 = new FluentWebElement(webElement1, fluentDriver, new DefaultComponentInstantiator(fluentDriver));
+        fluentWebElement2 = new FluentWebElement(webElement2, fluentDriver, new DefaultComponentInstantiator(fluentDriver));
+        fluentWebElement3 = new FluentWebElement(webElement3, fluentDriver, new DefaultComponentInstantiator(fluentDriver));
     }
 }

@@ -32,7 +32,7 @@ public class FluentWaitElementListMatcher extends AbstractWaitElementListMatcher
 
     @Override
     protected FluentList<FluentWebElement> find() {
-        FluentListImpl<FluentWebElement> elements = new FluentListImpl<>(FluentWebElement.class, null);
+        FluentList<FluentWebElement> elements = search.getInstantiator().newFluentList();
         if (untilElements != null) {
             try {
                 for (FluentWebElement untilElement : untilElements) {

@@ -8,15 +8,17 @@ import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.action.WindowAction;
 import org.fluentlenium.core.alert.Alert;
+import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.events.AnnotationsComponentListener;
+import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.filter.Filter;
+import org.fluentlenium.core.hook.DefaultHookChainBuilder;
+import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.inject.DefaultContainerInstanciator;
 import org.fluentlenium.core.inject.FluentInjector;
-import org.fluentlenium.core.proxy.Proxies;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.wait.FluentWait;
@@ -27,6 +29,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.io.File;
@@ -41,12 +45,13 @@ import java.util.concurrent.TimeUnit;
 /**
  * Util Class which offers some shortcut to webdriver methods
  */
-public class FluentDriver implements FluentDriverControl {
+public class FluentDriver implements FluentControl {
 
     private String baseUrl;
 
     private ConfigurationProperties configuration;
 
+    @Delegate(types = ComponentInstantiator.class)
     private final ComponentsManager componentsManager;
 
     private EventsRegistry events;
@@ -64,11 +69,13 @@ public class FluentDriver implements FluentDriverControl {
 
     private KeyboardActions keyboardActions;
 
+    private HookChainBuilder hookChainBuilder;
+
     private WindowAction windowAction;
 
-    public FluentDriver(WebDriver driver, ConfigurationProperties configuration, ComponentsManager componentsManager) {
+    public FluentDriver(WebDriver driver, ConfigurationProperties configuration) {
         this.configuration = configuration;
-        this.componentsManager = componentsManager;
+        this.componentsManager = new ComponentsManager(this);
 
         initFluent(driver);
         configureDriver();
@@ -111,9 +118,10 @@ public class FluentDriver implements FluentDriverControl {
 
     protected FluentDriver initFluent(WebDriver driver) {
         this.driver = driver;
-        this.search = new Search(driver, componentsManager);
+        this.hookChainBuilder = new DefaultHookChainBuilder(this, this.componentsManager.getInstantiator());
+        this.search = new Search(driver, componentsManager, hookChainBuilder);
         if (driver instanceof EventFiringWebDriver) {
-            this.events = new EventsRegistry((EventFiringWebDriver) driver);
+            this.events = new EventsRegistry(this);
             this.eventsComponentsAnnotations = new AnnotationsComponentListener(componentsManager);
             this.events.register(this.eventsComponentsAnnotations);
         }
@@ -121,7 +129,6 @@ public class FluentDriver implements FluentDriverControl {
         this.keyboardActions = new KeyboardActions(driver);
         this.fluentInjector = new FluentInjector(this, componentsManager, new DefaultContainerInstanciator(this));
         this.windowAction = new WindowAction(this, driver);
-        inject(this);
         return this;
     }
 
@@ -194,11 +201,6 @@ public class FluentDriver implements FluentDriverControl {
     @Override
     public WebDriver getDriver() {
         return this.driver;
-    }
-
-    @Override
-    public WebDriver getWrappedDriver() {
-        return getDriver();
     }
 
     private Search getSearch() {
@@ -414,18 +416,22 @@ public class FluentDriver implements FluentDriverControl {
         if (null == element || !"iframe".equals(element.getTagName())) {
             getDriver().switchTo().defaultContent();
         } else {
-            getDriver().switchTo().frame(Proxies.getElement(element.getElement()));
+            WebElement target = element.getElement();
+            while (target instanceof WrapsElement && target != ((WrapsElement) target).getWrappedElement()) {
+                target = ((WrapsElement) target).getWrappedElement();
+            }
+            getDriver().switchTo().frame(target);
         }
     }
 
     @Override
     public void switchTo() {
-        this.switchTo((FluentWebElement)null);
+        this.switchTo((FluentWebElement) null);
     }
 
     @Override
     public void switchToDefault() {
-        this.switchTo((FluentWebElement)null);
+        this.switchTo((FluentWebElement) null);
     }
 
     @Override

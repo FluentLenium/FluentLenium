@@ -7,6 +7,9 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
 import org.openqa.selenium.NoSuchElementException;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * Base Matcher for waiting on single element.
  */
@@ -30,7 +33,7 @@ public class FluentWaitElementMatcher extends AbstractWaitElementMatcher {
 
     @Override
     protected FluentList<FluentWebElement> find() {
-        FluentListImpl<FluentWebElement> elements = new FluentListImpl<>(FluentWebElement.class, null);
+        FluentList<FluentWebElement> elements = search.getInstantiator().newFluentList(new ArrayList<FluentWebElement>());
         if (untilElement != null) {
             try {
                 elements.add(untilElement.now());

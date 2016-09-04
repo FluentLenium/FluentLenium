@@ -2,6 +2,7 @@ package org.fluentlenium.core.domain;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
 import org.fluentlenium.core.components.ComponentInstantiator;
@@ -9,53 +10,32 @@ import org.fluentlenium.core.conditions.AtLeastOneElementConditions;
 import org.fluentlenium.core.conditions.EachElementConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.filter.Filter;
-import org.fluentlenium.core.proxy.ListElementAccessor;
-import org.fluentlenium.core.proxy.Proxies;
+import org.fluentlenium.core.hook.DefaultHookChainBuilder;
+import org.fluentlenium.core.hook.FluentHook;
+import org.fluentlenium.core.hook.HookChainBuilder;
+import org.fluentlenium.core.hook.HookDefinition;
+import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
  */
-public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> implements FluentList<E> {
-    private Class<E> componentClass;
-    private ComponentInstantiator instantiator;
+public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E> implements FluentList<E> {
+    private final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
+    private HookChainBuilder hookChainBuilder;
 
-    public FluentListImpl() {
-    }
-
-    public FluentListImpl(E... listFiltered) {
-        super(new ArrayList<E>(Arrays.asList(listFiltered)));
-    }
-
-    public FluentListImpl(Collection<E> listFiltered) {
-        super(listFiltered);
-    }
-
-    public FluentListImpl(Class<E> componentClass, ComponentInstantiator instantiator) {
-        super();
-        this.componentClass = componentClass;
-        this.instantiator = instantiator;
-    }
-
-    public FluentListImpl(Class<E> componentClass, ComponentInstantiator instantiator, E... listFiltered) {
-        super(new ArrayList<E>(Arrays.asList(listFiltered)));
-        this.componentClass = componentClass;
-        this.instantiator = instantiator;
-    }
-
-    public FluentListImpl(Class<E> componentClass, ComponentInstantiator instantiator, Collection<E> listFiltered) {
-        super(listFiltered);
-        this.componentClass = componentClass;
-        this.instantiator = instantiator;
+    public FluentListImpl(Class<E> componentClass, List<E> list, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        super(componentClass, list, fluentControl, instantiator);
+        this.hookChainBuilder = new DefaultHookChainBuilder(fluentControl, instantiator);
     }
 
     /**
@@ -64,8 +44,9 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
      * @param elements array of Selenium elements
      * @return FluentList of FluentWebElement
      */
-    public static FluentListImpl<FluentWebElement> fromElements(ComponentInstantiator instantiator, WebElement... elements) {
-        return fromElements(instantiator, Arrays.asList(elements));
+    @Deprecated
+    public static FluentList<FluentWebElement> fromElements(ComponentInstantiator instantiator, HookChainBuilder hookChainBuilder, WebElement... elements) {
+        return fromElements(instantiator, hookChainBuilder, Arrays.asList(elements));
     }
 
     /**
@@ -74,12 +55,9 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
      * @param elements iterable of Selenium elements
      * @return FluentList of FluentWebElement
      */
-    public static FluentListImpl<FluentWebElement> fromElements(ComponentInstantiator instantiator, Iterable<? extends WebElement> elements) {
-        FluentListImpl<FluentWebElement> fluentWebElements = new FluentListImpl<>(FluentWebElement.class, instantiator);
-        for (WebElement element : elements) {
-            fluentWebElements.add(instantiator.newComponent(FluentWebElement.class, element));
-        }
-        return fluentWebElements;
+    @Deprecated
+    public static FluentList<FluentWebElement> fromElements(ComponentInstantiator instantiator, HookChainBuilder hookChainBuilder, Iterable<WebElement> elements) {
+        return instantiator.asFluentList(FluentWebElement.class, elements);
     }
 
     @Override
@@ -93,8 +71,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     }
 
     @Override
-    @ListElementAccessor(first = true)
     public E first() {
+        if (!LocatorProxies.isLoaded(proxy)) {
+            WebElement first = LocatorProxies.first(proxy);
+            LocatorProxies.setHooks(first, hookChainBuilder, hookDefinitions);
+            return instantiator.newComponent(componentClass, first);
+        }
         if (this.size() == 0) {
             throw new NoSuchElementException("Element not found");
         }
@@ -102,8 +84,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     }
 
     @Override
-    @ListElementAccessor(last = true)
     public E last() {
+        if (!LocatorProxies.isLoaded(proxy)) {
+            WebElement last = LocatorProxies.last(proxy);
+            LocatorProxies.setHooks(last, hookChainBuilder, hookDefinitions);
+            return instantiator.newComponent(componentClass, last);
+        }
         if (this.size() == 0) {
             throw new NoSuchElementException("Element not found");
         }
@@ -111,8 +97,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     }
 
     @Override
-    @ListElementAccessor(index = true)
     public E index(int index) {
+        if (!LocatorProxies.isLoaded(proxy)) {
+            WebElement indexElement = LocatorProxies.index(proxy, index);
+            LocatorProxies.setHooks(indexElement, hookChainBuilder, hookDefinitions);
+            return instantiator.newComponent(componentClass, indexElement);
+        }
         if (this.size() <= index) {
             throw new NoSuchElementException("Element not found");
         }
@@ -121,12 +111,15 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
 
     @Override
     public boolean isPresent() {
-        return Proxies.isPresent(this);
+        if (LocatorProxies.getLocatorHandler(proxy) != null) {
+            return LocatorProxies.isPresent(this);
+        }
+        return this.size() > 0;
     }
 
     @Override
     public FluentList<E> now() {
-        Proxies.now(this);
+        LocatorProxies.now(this);
         if (this.size() == 0) {
             throw new NoSuchElementException("Element not found");
         }
@@ -135,13 +128,13 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
 
     @Override
     public FluentList<E> reset() {
-        Proxies.reset(this);
+        LocatorProxies.reset(this);
         return this;
     }
 
     @Override
     public boolean isLoaded() {
-        return Proxies.isLoaded(this);
+        return LocatorProxies.isLoaded(this);
     }
 
     @Override
@@ -206,13 +199,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
     }
 
     @Override
-    public void clear() {
-        clearAll();
-    }
-
-    @Override
     public void clearList() {
-        super.clear();
+        list.clear();
     }
 
     @Override
@@ -380,11 +368,11 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
 
     @Override
     public FluentList<E> find(String selector, Filter... filters) {
-        List<E> finds = new ArrayList<E>();
+        List<E> finds = new ArrayList<>();
         for (FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(selector, filters));
         }
-        return new FluentListImpl<E>(componentClass, instantiator, finds);
+        return instantiator.newComponentList(getClass(), componentClass, finds);
     }
 
     @Override
@@ -393,7 +381,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         for (FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(locator, filters));
         }
-        return new FluentListImpl<E>(componentClass, instantiator, finds);
+        return instantiator.newComponentList(getClass(), componentClass, finds);
     }
 
     @Override
@@ -402,7 +390,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
         for (FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(filters));
         }
-        return new FluentListImpl<E>(componentClass, instantiator, finds);
+        return instantiator.newComponentList(getClass(), componentClass, finds);
     }
 
     @Override
@@ -491,7 +479,154 @@ public class FluentListImpl<E extends FluentWebElement> extends ArrayList<E> imp
             elements.add(e.as(componentClass));
         }
 
-        return new FluentListImpl<>(componentClass, instantiator, elements);
+        return instantiator.newComponentList(getClass(), componentClass, elements);
+    }
+
+    @Override
+    public FluentList<E> noHook() {
+        hookDefinitions.clear();
+        LocatorProxies.setHooks(proxy, hookChainBuilder, hookDefinitions);
+        return this;
+    }
+
+    @Override
+    public <O, H extends FluentHook<O>> FluentList<E> withHook(Class<H> hook) {
+        hookDefinitions.add(new HookDefinition<>(hook));
+        LocatorProxies.setHooks(proxy, hookChainBuilder, hookDefinitions);
+        return this;
+    }
+
+    @Override
+    public <O, H extends FluentHook<O>> FluentList<E> withHook(Class<H> hook, O options) {
+        hookDefinitions.add(new HookDefinition<>(hook, options));
+        LocatorProxies.setHooks(proxy, hookChainBuilder, hookDefinitions);
+        return this;
+    }
+
+
+    @Override
+    public void clear() {
+        clearAll();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return list.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return list.hashCode();
+    }
+
+    @Override
+    public E get(int index) {
+        return list.get(index);
+    }
+
+    @Override
+    public E set(int index, E element) {
+        return list.set(index, element);
+    }
+
+    @Override
+    public void add(int index, E element) {
+        list.add(index, element);
+    }
+
+    @Override
+    public E remove(int index) {
+        return list.remove(index);
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        return list.indexOf(o);
+    }
+
+    @Override
+    public int lastIndexOf(Object o) {
+        return list.lastIndexOf(o);
+    }
+
+    @Override
+    public ListIterator<E> listIterator() {
+        return list.listIterator();
+    }
+
+    @Override
+    public ListIterator<E> listIterator(int index) {
+        return list.listIterator(index);
+    }
+
+    @Override
+    public List<E> subList(int fromIndex, int toIndex) {
+        return list.subList(fromIndex, toIndex);
+    }
+
+    @Override
+    public int size() {
+        return list.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        return list.contains(o);
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return list.iterator();
+    }
+
+    @Override
+    public Object[] toArray() {
+        return list.toArray();
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a) {
+        return list.toArray(a);
+    }
+
+    @Override
+    public boolean add(E e) {
+        return list.add(e);
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return list.remove(o);
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        return list.containsAll(c);
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        return list.addAll(c);
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends E> c) {
+        return list.addAll(index, c);
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return list.removeAll(c);
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return list.retainAll(c);
     }
 }
 

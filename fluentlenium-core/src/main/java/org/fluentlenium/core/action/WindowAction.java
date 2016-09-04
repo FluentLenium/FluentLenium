@@ -1,6 +1,7 @@
 package org.fluentlenium.core.action;
 
 import com.google.common.base.Predicate;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.wait.FluentWait;
@@ -9,12 +10,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.StreamHandler;
 
 import static com.google.common.collect.Iterables.getLast;
 import static com.google.common.collect.Iterables.getOnlyElement;
@@ -218,7 +216,7 @@ public class WindowAction {
         return driver.manage().window();
     }
 
-    private class WindowHandlesCountIs implements Predicate<FluentDriver> {
+    private class WindowHandlesCountIs implements Predicate<FluentControl> {
         private final int expectedValue;
 
         WindowHandlesCountIs(int expectedValue) {
@@ -226,7 +224,7 @@ public class WindowAction {
         }
 
         @Override
-        public boolean apply(FluentDriver input) {
+        public boolean apply(FluentControl input) {
             return driver.getWindowHandles().size() == expectedValue;
         }
     }

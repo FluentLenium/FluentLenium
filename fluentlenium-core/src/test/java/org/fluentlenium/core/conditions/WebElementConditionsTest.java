@@ -1,33 +1,42 @@
 package org.fluentlenium.core.conditions;
 
 import com.google.common.base.Predicates;
-import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class WebElementConditionsTest {
 
     @Mock
     private WebElement webElement;
 
+    @Mock
+    private WebDriver webDriver;
+
     private FluentWebElement fluentWebElement;
     private WebElementConditions conditions;
 
+    private FluentAdapter fluentAdapter;
+
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
+        fluentAdapter = new FluentAdapter(webDriver);
 
-        fluentWebElement = new FluentWebElement(webElement, null, null);
+        fluentWebElement = new FluentWebElement(webElement, fluentAdapter, new DefaultComponentInstantiator(fluentAdapter));
         conditions = new WebElementConditions(fluentWebElement);
     }
 

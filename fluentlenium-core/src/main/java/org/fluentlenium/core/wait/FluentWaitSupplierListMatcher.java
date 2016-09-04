@@ -32,7 +32,7 @@ public class FluentWaitSupplierListMatcher extends AbstractWaitElementListMatche
         try {
             return selector.get().now();
         } catch (NoSuchElementException | StaleElementReferenceException e) {
-            return new FluentListImpl<>();
+            return search.getInstantiator().newFluentList();
         }
     }
 }

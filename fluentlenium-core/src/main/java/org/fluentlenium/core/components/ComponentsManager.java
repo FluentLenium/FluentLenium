@@ -1,9 +1,9 @@
 package org.fluentlenium.core.components;
 
 import com.sun.jna.WeakIdentityHashMap;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.proxy.ProxyElementListener;
-import org.fluentlenium.core.proxy.Proxies;
-import org.openqa.selenium.WebDriver;
+import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
@@ -21,22 +21,17 @@ import java.util.Map;
  * <p>
  * {@link org.fluentlenium.core.domain.FluentWebElement} is the most common component.
  */
-public class ComponentsManager implements ComponentInstantiator, ComponentAccessor, ProxyElementListener {
+public class ComponentsManager extends AbstractComponentInstantiator implements ComponentInstantiator, ComponentAccessor, ProxyElementListener {
 
-    private final WebDriver driver;
-    private final ComponentInstantiator instantiator;
+    private final FluentControl fluentControl;
+    private final DefaultComponentInstantiator instantiator;
 
     //TODO: IdentityHashMap or WeakIdentityHashMap ?
     private Map<WebElement, Object> components = new WeakIdentityHashMap();
 
-    public ComponentsManager(WebDriver driver) {
-        this.driver = driver;
-        this.instantiator = new DefaultComponentInstantiator(this.driver, this);
-    }
-
-    public ComponentsManager(WebDriver driver, ComponentInstantiator instantiator) {
-        this.driver = driver;
-        this.instantiator = instantiator;
+    public ComponentsManager(FluentControl fluentControl) {
+        this.fluentControl = fluentControl;
+        this.instantiator = new DefaultComponentInstantiator(this.fluentControl, this);
     }
 
     public ComponentInstantiator getInstantiator() {
@@ -72,22 +67,43 @@ public class ComponentsManager implements ComponentInstantiator, ComponentAccess
     }
 
     @Override
-    public <T> T newComponent(Class<T> componentClass, WebElement element) {
-        T component;
-        try {
-            component = instantiator.newComponent(componentClass, element);
-        } catch (Exception e) {
-            throw new ComponentException(componentClass.getName()
-                    + " is not a valid component class. No valid constructor found (WebElement) or (WebElement, WebDriver)", e);
-        }
-        WebElement webElement = unwrapElement(element);
-        Proxies.addProxyListener(webElement, this);
-        components.put(webElement, component);
-        return component;
+    public boolean isComponentListClass(Class<? extends List<?>> componentListClass) {
+        return instantiator.isComponentListClass(componentListClass);
     }
 
     @Override
-    public void proxyElementSearch(WebElement proxy, ElementLocator locator) {
+    public <T> T newComponent(Class<T> componentClass, WebElement element) {
+        T component = instantiator.newComponent(componentClass, element);
+        register(element, component);
+        return component;
+    }
+
+    private <T> void register(WebElement element, T component) {
+        WebElement webElement = unwrapElement(element);
+        LocatorProxies.addProxyListener(webElement, this);
+        components.put(webElement, component);
+    }
+
+    @Override
+    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, List<T> componentsList) {
+        return instantiator.newComponentList(listClass, componentClass, componentsList);
+    }
+
+    @Override
+    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, Iterable<WebElement> elementList) {
+        L componentList = instantiator.asComponentList(listClass, componentClass, elementList);
+
+        int i = 0;
+        for (WebElement element : elementList) {
+            register(element, componentList.get(i));
+            i++;
+        }
+
+        return componentList;
+    }
+
+    @Override
+    public void proxyElementSearch(Object proxy, ElementLocator locator) {
     }
 
     /**
@@ -99,10 +115,11 @@ public class ComponentsManager implements ComponentInstantiator, ComponentAccess
      * @param element found element.
      */
     @Override
-    public synchronized void proxyElementFound(WebElement proxy, ElementLocator locator, WebElement element) {
+    public synchronized void proxyElementFound(Object proxy, ElementLocator locator, WebElement element) {
+        // TODO: this should be handled for list too.
         Object component = components.remove(proxy);
         if (component != null) {
-            components.put(unwrapElement(proxy), component);
+            components.put(unwrapElement(element), component);
         }
     }
 
@@ -121,7 +138,7 @@ public class ComponentsManager implements ComponentInstantiator, ComponentAccess
      */
     public void release() {
         for (WebElement element : components.keySet()) {
-            Proxies.removeProxyListener(element, this);
+            LocatorProxies.removeProxyListener(element, this);
         }
         components.clear();
     }

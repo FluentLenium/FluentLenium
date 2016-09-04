@@ -10,5 +10,5 @@ public interface ContainerInstanciator {
      * @return new instance
      * @see FluentInjectControl#inject(Object)
      */
-    <T> T newInstance(Class<T> cls);
+    <T> T newInstance(Class<T> cls, ContainerContext context);
 }

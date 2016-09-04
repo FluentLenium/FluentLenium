@@ -1,7 +1,7 @@
 package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
-import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -34,8 +34,8 @@ public class FluentWaitPageMatcher extends AbstractWaitMatcher {
         if (!(webDriver instanceof JavascriptExecutor)) {
             throw new UnsupportedOperationException("Driver must support javascript execution to use this feature");
         } else {
-            Predicate<FluentDriver> isLoaded = new com.google.common.base.Predicate<FluentDriver>() {
-                public boolean apply(FluentDriver fluent) {
+            Predicate<FluentControl> isLoaded = new com.google.common.base.Predicate<FluentControl>() {
+                public boolean apply(FluentControl fluent) {
                     Object result = fluent.executeScript("if (document.readyState) return document.readyState;").getStringResult();
                     return result != null && "complete".equals(result);
                 }
@@ -51,8 +51,8 @@ public class FluentWaitPageMatcher extends AbstractWaitMatcher {
         if (page == null) {
             throw new IllegalArgumentException("You should use a page argument when you call the untilPage method to specify the page you want to be. Example : await().untilPage(myPage).isAt();");
         }
-        Predicate<FluentDriver> isLoaded = new com.google.common.base.Predicate<FluentDriver>() {
-            public boolean apply(FluentDriver fluent) {
+        Predicate<FluentControl> isLoaded = new com.google.common.base.Predicate<FluentControl>() {
+            public boolean apply(FluentControl fluent) {
                 try {
                     page.isAt();
                 } catch (Error e) {

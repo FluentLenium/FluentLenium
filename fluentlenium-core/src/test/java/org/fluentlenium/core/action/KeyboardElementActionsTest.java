@@ -4,8 +4,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,12 +16,11 @@ import org.openqa.selenium.interactions.Mouse;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class KeyboardElementActionsTest {
     @Mock
     private Keyboard keyboard;
@@ -39,8 +39,6 @@ public class KeyboardElementActionsTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-
         when(driver.getKeyboard()).thenReturn(keyboard);
         when(driver.getMouse()).thenReturn(mouse);
 

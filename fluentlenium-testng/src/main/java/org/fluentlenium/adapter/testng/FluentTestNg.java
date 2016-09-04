@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.fluentlenium.adapter.FluentTestRunnerAdapter;
-import org.fluentlenium.adapter.ThreadLocalDriverContainer;
+import org.fluentlenium.adapter.ThreadLocalFluentControlContainer;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
@@ -22,7 +22,7 @@ import org.testng.annotations.BeforeMethod;
 public abstract class FluentTestNg extends FluentTestRunnerAdapter {
 
     public FluentTestNg() {
-        super(new ThreadLocalDriverContainer());
+        super(new ThreadLocalFluentControlContainer());
     }
 
     private Map<ITestContext, Map<Method, ITestNGMethod>> methods = new HashMap<>();

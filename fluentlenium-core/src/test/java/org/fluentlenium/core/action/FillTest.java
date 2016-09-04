@@ -1,14 +1,16 @@
 package org.fluentlenium.core.action;
 
-import org.fluentlenium.core.FluentDriver;
-import org.fluentlenium.core.domain.FluentListImpl;
+import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
+import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +24,7 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class FillTest {
     @Mock
     private WebDriver driver;
@@ -41,9 +44,14 @@ public class FillTest {
     @Mock
     private WebElement element4;
 
+    private FluentAdapter fluentAdapter;
+
+    private DefaultComponentInstantiator instantiator;
+
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
+        fluentAdapter = new FluentAdapter(driver);
+        instantiator = new DefaultComponentInstantiator(fluentAdapter);
     }
 
     @After
@@ -52,12 +60,12 @@ public class FillTest {
     }
 
     public FluentWebElement el(WebElement element) {
-        return new FluentWebElement(element, null, null);
+        return new FluentWebElement(element, fluentAdapter, new DefaultComponentInstantiator(fluentAdapter));
     }
-    
+
     @Test
     public void testFillList() {
-        FluentListImpl<FluentWebElement> list = new FluentListImpl<>(Arrays.asList(el(element1), el(element2), el(element3), el(element4)));
+        FluentList<FluentWebElement> list = instantiator.asFluentList(Arrays.asList(element1, element2, element3, element4));
         Fill fill = new Fill(list);
 
         when(element2.isDisplayed()).thenReturn(true);

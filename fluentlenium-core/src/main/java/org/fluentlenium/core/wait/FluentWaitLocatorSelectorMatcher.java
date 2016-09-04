@@ -72,7 +72,7 @@ public class FluentWaitLocatorSelectorMatcher extends AbstractWaitElementListMat
                 return search.find(locator).now();
             }
         } catch (NoSuchElementException | StaleElementReferenceException e) {
-            return new FluentListImpl<>();
+            return search.getInstantiator().newFluentList();
         }
     }
 

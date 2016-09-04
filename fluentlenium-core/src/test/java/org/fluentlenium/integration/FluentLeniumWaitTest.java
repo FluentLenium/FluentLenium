@@ -4,7 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
@@ -427,9 +427,9 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test
     public void checkPredicate() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(800, TimeUnit.MILLISECONDS).untilPredicate(new Predicate<FluentDriver>() {
+        await().pollingEvery(800, TimeUnit.MILLISECONDS).untilPredicate(new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentDriver o) {
+            public boolean apply(FluentControl o) {
                 return true;
             }
         });
@@ -438,9 +438,9 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test(expected = TimeoutException.class)
     public void checkPredicateFail() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1000).untilPredicate(new Predicate<FluentDriver>() {
+        await().atMost(1000).untilPredicate(new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentDriver o) {
+            public boolean apply(FluentControl o) {
                 return false;
             }
         });
@@ -449,9 +449,9 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test
     public void checkFunction() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1000, TimeUnit.MILLISECONDS).until(new Function<FluentDriver, Boolean>() {
+        await().pollingEvery(1000, TimeUnit.MILLISECONDS).until(new Function<FluentControl, Boolean>() {
             @Override
-            public Boolean apply(FluentDriver fluent) {
+            public Boolean apply(FluentControl fluent) {
                 return true;
             }
         });
@@ -460,9 +460,9 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test(expected = TimeoutException.class)
     public void checkFunctionFail() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1000).until(new Function<FluentDriver, Boolean>() {
+        await().atMost(1000).until(new Function<FluentControl, Boolean>() {
             @Override
-            public Boolean apply(FluentDriver fluent) {
+            public Boolean apply(FluentControl fluent) {
                 return false;
             }
         });

@@ -1,5 +1,7 @@
 package org.fluentlenium.integration;
 
+import org.fluentlenium.core.FluentControl;
+import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.components.ComponentException;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.ComponentsManager;
@@ -16,8 +18,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ElementAsTest extends IntegrationFluentTest {
 
     public static class Component extends FluentWebElement {
-        public Component(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
-            super(webElement, driver, instantiator);
+        public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+            super(webElement, fluentControl, instantiator);
         }
     }
 
@@ -45,11 +47,11 @@ public class ElementAsTest extends IntegrationFluentTest {
 
         private final WebElement element;
         private final ComponentInstantiator instantiator;
-        private final WebDriver driver;
+        private final FluentControl fluentControl;
 
-        public FullConstructorComponent(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
+        public FullConstructorComponent(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
             this.element = webElement;
-            this.driver = driver;
+            this.fluentControl = fluentControl;
             this.instantiator = instantiator;
         }
 
@@ -91,7 +93,7 @@ public class ElementAsTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         FullConstructorComponent component = findFirst("span").as(FullConstructorComponent.class);
 
-        assertThat(component.driver).isSameAs(getDriver());
+        assertThat(component.fluentControl).isInstanceOf(FluentDriver.class);
         assertThat(component.element.getTagName()).isEqualTo("span");
         assertThat(component.instantiator).isInstanceOf(ComponentsManager.class);
     }

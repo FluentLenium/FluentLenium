@@ -1,13 +1,15 @@
 package org.fluentlenium.core.domain;
 
 import org.assertj.core.api.ThrowableAssert;
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.ComponentException;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
@@ -30,6 +32,7 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class FluentWebElementTest {
 
     @Mock
@@ -48,16 +51,18 @@ public class FluentWebElementTest {
 
     private ComponentsManager componentsManager;
 
+    private FluentAdapter fluentAdapter;
+
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
+        fluentAdapter = new FluentAdapter(driver);
 
         when(driver.getMouse()).thenReturn(mouse);
         when(driver.getKeyboard()).thenReturn(keyboard);
 
-        componentsManager = new ComponentsManager(driver);
+        componentsManager = new ComponentsManager(fluentAdapter);
 
-        fluentElement = new FluentWebElement(element, driver, componentsManager);
+        fluentElement = new FluentWebElement(element, fluentAdapter, componentsManager);
     }
 
     @After
@@ -290,8 +295,8 @@ public class FluentWebElementTest {
 
         when(element.findElements(By.cssSelector(".test"))).thenReturn(Arrays.asList(findElement));
 
-        assertThat(fluentElement.findFirst(".test").getElement()).isEqualTo(findElement);
-        assertThat(fluentElement.findFirst(By.cssSelector(".test")).getElement()).isEqualTo(findElement);
+        assertThat(fluentElement.findFirst(".test").now().getElement()).isEqualTo(findElement);
+        assertThat(fluentElement.findFirst(By.cssSelector(".test")).now().getElement()).isEqualTo(findElement);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -300,10 +305,12 @@ public class FluentWebElementTest {
             }
         }).isInstanceOf(NoSuchElementException.class);
 
+        assertThat(fluentElement.findFirst(By.cssSelector(".other")).isPresent()).isFalse();
+
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.findFirst(By.cssSelector(".other")).isPresent();
+                fluentElement.findFirst(By.cssSelector(".other")).now();
             }
         }).isInstanceOf(NoSuchElementException.class);
 

@@ -1,5 +1,6 @@
 package org.fluentlenium.core.events;
 
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -57,10 +58,10 @@ public class EventsRegistry {
 
     List<ExceptionListener> onException = new ArrayList<ExceptionListener>();
 
-    public EventsRegistry(final EventFiringWebDriver driver) {
-        this.eventDriver = driver;
+    public EventsRegistry(final FluentControl fluentControl) {
+        this.eventDriver = (EventFiringWebDriver) fluentControl.getDriver();
         this.support = new EventsSupport(this);
-        this.instantiator = new DefaultComponentInstantiator(driver);
+        this.instantiator = new DefaultComponentInstantiator(fluentControl);
         this.register(this.support);
     }
 

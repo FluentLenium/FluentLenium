@@ -1,9 +1,9 @@
 package org.fluentlenium.integration;
 
 import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.hook.wait.Wait;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
@@ -50,7 +50,7 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
 
     private static class JavascriptPage extends FluentPage {
 
-        @AjaxElement
+        @Wait
         FluentWebElement newField;
 
         @Override
@@ -65,7 +65,7 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
 
     private static class JavascriptPageSlow extends FluentPage {
 
-        @AjaxElement(timeOutInSeconds = 12)
+        @Wait(timeout = 12)
         FluentWebElement newFieldSlow;
 
         @Override
@@ -80,7 +80,7 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
 
     private static class JavascriptPageTooSlow extends FluentPage {
 
-        @AjaxElement
+        @Wait
         FluentWebElement newFieldSlow;
 
         @Override

@@ -2,18 +2,20 @@ package org.fluentlenium.core.wait;
 
 
 import org.fluentlenium.core.search.Search;
-import org.fluentlenium.core.wait.FluentWait;
-import org.fluentlenium.core.wait.FluentWaitLocatorSelectorMatcher;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class AwaitMessageTest {
 
     @Mock
@@ -23,7 +25,6 @@ public class AwaitMessageTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
         builder = new FluentWaitLocatorSelectorMatcher(mock(Search.class), wait, "select");
         when(wait.withMessage(anyString())).thenReturn(wait);
     }

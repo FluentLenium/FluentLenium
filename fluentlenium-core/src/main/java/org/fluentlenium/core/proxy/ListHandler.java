@@ -1,51 +1,71 @@
 package org.fluentlenium.core.proxy;
 
-import com.google.common.base.Function;
-import com.google.common.collect.FluentIterable;
-import org.fluentlenium.core.components.ComponentInstantiator;
+import org.fluentlenium.core.domain.WrapsElements;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-class ListHandler<T> implements InvocationHandler {
-    private final ElementLocator elementLocator;
+/**
+ * Proxy handler for list of {@link WebElement}.
+ */
+class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
+    private static final Method GET_WRAPPED_ELEMENTS = getMethod(WrapsElements.class, "getWrappedElements");
 
-    private List<T> list;
+    public ListHandler(ElementLocator locator) {
+        super(locator);
+        if (this.locator instanceof WrapsElements) {
+            List<WebElement> foundElements = ((WrapsElements) this.locator).getWrappedElements();
+            if (foundElements == null) foundElements = Collections.emptyList();
+            this.result = wrapElements(foundElements);
+        }
+    }
 
-    private final Class<T> componentClass;
+    @Override
+    protected WebElement getElement() {
+        return null;
+    }
 
-    private final ComponentInstantiator instantiator;
+    @Override
+    protected List<WebElement> getInvocationTarget() {
+        return result;
+    }
 
-    public ListHandler(ElementLocator elementLocator,
-                       Class<T> componentClass, ComponentInstantiator instantiator) {
-        this.elementLocator = elementLocator;
-        this.componentClass = componentClass;
-        this.instantiator = instantiator;
+    @Override
+    public boolean isPresent() {
+        return super.isPresent() && result.size() > 0;
+    }
+
+    @Override
+    public List<WebElement> getLocatorResultImpl() {
+        fireProxyElementSearch(proxy, locator);
+        List<WebElement> foundElements = getHookLocator().findElements();
+        if (foundElements == null) foundElements = Collections.emptyList();
+        foundElements = wrapElements(foundElements);
+        for (WebElement element : foundElements) {
+            fireProxyElementFound(proxy, locator, element);
+        }
+        return foundElements;
+    }
+
+    protected List<WebElement> wrapElements(List<WebElement> foundElements) {
+        List<WebElement> proxyElements = new ArrayList<>();
+        for (WebElement element : foundElements) {
+            WebElement proxyElement = LocatorProxies.createWebElement(new ElementInstanceLocator(element));
+            LocatorProxies.setHooks(proxyElement, hookChainBuilder, hookDefinitions);
+            proxyElements.add(proxyElement);
+        }
+        return proxyElements;
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        synchronized (this) {
-            if (list == null) {
-                List<WebElement> elements = elementLocator.findElements();
-                list = new ArrayList<T>(FluentIterable.from(elements).transform(new Function<WebElement, T>() {
-                    @Override
-                    public T apply(WebElement input) {
-                        return instantiator.newComponent(componentClass, input);
-                    }
-                }).toList());
-            }
+        if (GET_WRAPPED_ELEMENTS.equals(method)) {
+            return result != null ? getLocatorResult() : proxy;
         }
-        try {
-            return method.invoke(list, args);
-        } catch (InvocationTargetException e) {
-            // Unwrap the underlying exception
-            throw e.getCause();
-        }
+        return super.invoke(proxy, method, args);
     }
 }

@@ -4,12 +4,16 @@ package org.fluentlenium.core.conditions;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import org.assertj.core.api.ThrowableAssert;
+import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
@@ -19,6 +23,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class IntegerListConditionsTest {
 
     @Mock
@@ -30,6 +35,9 @@ public class IntegerListConditionsTest {
     @Mock
     private WebElement webElement3;
 
+    @Mock
+    private WebDriver driver;
+
     private FluentWebElement fluentWebElement1;
 
     private FluentWebElement fluentWebElement2;
@@ -38,11 +46,12 @@ public class IntegerListConditionsTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
+        FluentAdapter fluentAdapter = new FluentAdapter(driver);
+        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
 
-        fluentWebElement1 = new FluentWebElement(webElement1, null, null);
-        fluentWebElement2 = new FluentWebElement(webElement2, null, null);
-        fluentWebElement3 = new FluentWebElement(webElement3, null, null);
+        fluentWebElement1 = new FluentWebElement(webElement1, fluentAdapter, instantiator);
+        fluentWebElement2 = new FluentWebElement(webElement2, fluentAdapter, instantiator);
+        fluentWebElement3 = new FluentWebElement(webElement3, fluentAdapter, instantiator);
     }
 
     @After

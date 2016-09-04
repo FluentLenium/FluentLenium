@@ -3,8 +3,9 @@ package org.fluentlenium.adapter;
 import org.fluentlenium.core.FluentDriver;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -12,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(MockitoJUnitRunner.class)
 public class DriverContainerTest {
     @Mock
     private FluentDriver driver1;
@@ -21,56 +23,54 @@ public class DriverContainerTest {
 
     private ExecutorService executor;
 
-    private DriverContainer threadLocalContainer;
-    private DriverContainer defaultContainer;
+    private FluentControlContainer threadLocalContainer;
+    private FluentControlContainer defaultContainer;
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-
         executor = Executors.newSingleThreadExecutor();
 
-        threadLocalContainer = new ThreadLocalDriverContainer();
-        defaultContainer = new DefaultDriverContainer();
+        threadLocalContainer = new ThreadLocalFluentControlContainer();
+        defaultContainer = new DefaultFluentControlContainer();
     }
 
     @Test
     public void testDriverContainer() throws InterruptedException {
-        defaultContainer.setFluentDriver(driver1);
-        threadLocalContainer.setFluentDriver(driver1);
+        defaultContainer.setFluentControl(driver1);
+        threadLocalContainer.setFluentControl(driver1);
 
-        assertThat(defaultContainer.getFluentDriver()).isSameAs(driver1);
-        assertThat(threadLocalContainer.getFluentDriver()).isSameAs(driver1);
+        assertThat(defaultContainer.getFluentControl()).isSameAs(driver1);
+        assertThat(threadLocalContainer.getFluentControl()).isSameAs(driver1);
 
-        defaultContainer.setFluentDriver(null);
-        threadLocalContainer.setFluentDriver(null);
+        defaultContainer.setFluentControl(null);
+        threadLocalContainer.setFluentControl(null);
 
-        assertThat(defaultContainer.getFluentDriver()).isNull();
-        assertThat(threadLocalContainer.getFluentDriver()).isNull();
+        assertThat(defaultContainer.getFluentControl()).isNull();
+        assertThat(threadLocalContainer.getFluentControl()).isNull();
 
-        defaultContainer.setFluentDriver(driver2);
-        threadLocalContainer.setFluentDriver(driver2);
+        defaultContainer.setFluentControl(driver2);
+        threadLocalContainer.setFluentControl(driver2);
 
-        assertThat(defaultContainer.getFluentDriver()).isSameAs(driver2);
-        assertThat(threadLocalContainer.getFluentDriver()).isSameAs(driver2);
+        assertThat(defaultContainer.getFluentControl()).isSameAs(driver2);
+        assertThat(threadLocalContainer.getFluentControl()).isSameAs(driver2);
 
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                assertThat(defaultContainer.getFluentDriver()).isSameAs(driver2);
-                assertThat(threadLocalContainer.getFluentDriver()).isNull();
+                assertThat(defaultContainer.getFluentControl()).isSameAs(driver2);
+                assertThat(threadLocalContainer.getFluentControl()).isNull();
 
-                defaultContainer.setFluentDriver(driver1);
-                threadLocalContainer.setFluentDriver(driver1);
+                defaultContainer.setFluentControl(driver1);
+                threadLocalContainer.setFluentControl(driver1);
 
-                assertThat(defaultContainer.getFluentDriver()).isSameAs(driver1);
-                assertThat(threadLocalContainer.getFluentDriver()).isSameAs(driver1);
+                assertThat(defaultContainer.getFluentControl()).isSameAs(driver1);
+                assertThat(threadLocalContainer.getFluentControl()).isSameAs(driver1);
             }
         });
         executor.shutdown();
         executor.awaitTermination(1L, TimeUnit.MINUTES);
 
-        assertThat(defaultContainer.getFluentDriver()).isSameAs(driver1);
-        assertThat(threadLocalContainer.getFluentDriver()).isSameAs(driver2);
+        assertThat(defaultContainer.getFluentControl()).isSameAs(driver1);
+        assertThat(threadLocalContainer.getFluentControl()).isSameAs(driver2);
     }
 }

@@ -1,17 +1,15 @@
 package org.fluentlenium.core.axes;
 
+import com.google.common.base.Supplier;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.proxy.Proxies;
+import org.fluentlenium.core.hook.HookChainBuilder;
+import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,13 +18,13 @@ import java.util.List;
 public class Axes {
     private final WebElement webElement;
     private final ComponentInstantiator instantiator;
+    private final HookChainBuilder hookChainBuilder;
 
-
-    public Axes(WebElement element, ComponentInstantiator instantiator) {
+    public Axes(WebElement element, ComponentInstantiator instantiator, HookChainBuilder hookChainBuilder) {
         this.webElement = element;
         this.instantiator = instantiator;
+        this.hookChainBuilder = hookChainBuilder;
     }
-
 
     /**
      * Find parent element.
@@ -34,31 +32,25 @@ public class Axes {
      * @return fluent web element
      */
     public FluentWebElement parent() {
-        return Proxies.createComponent(new ElementLocator() {
+        WebElement webElement = LocatorProxies.createWebElement(new Supplier<WebElement>() {
             @Override
-            public WebElement findElement() {
+            public WebElement get() {
                 return Axes.this.webElement.findElement(By.xpath("parent::*"));
             }
+        });
 
-            @Override
-            public List<WebElement> findElements() {
-                return Arrays.asList(findElement());
-            }
-        }, FluentWebElement.class, instantiator);
+        return instantiator.newComponent(FluentWebElement.class, webElement);
     }
 
     protected FluentList<FluentWebElement> handleAxe(final String axe) {
-        return Proxies.createFluentList(new ElementLocator() {
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
             @Override
-            public WebElement findElement() {
-                return Axes.this.webElement.findElement(By.xpath(axe + "::*"));
-            }
-
-            @Override
-            public List<WebElement> findElements() {
+            public List<WebElement> get() {
                 return Axes.this.webElement.findElements(By.xpath(axe + "::*"));
             }
-        }, FluentWebElement.class, instantiator);
+        });
+
+        return instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, webElementList);
     }
 
     /**

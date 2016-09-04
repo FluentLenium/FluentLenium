@@ -1,17 +1,21 @@
 package org.fluentlenium.core.search;
 
 import com.google.common.collect.Lists;
+import org.assertj.core.api.ThrowableAssert;
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.matcher.Matcher;
+import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
@@ -23,13 +27,14 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class SearchTest {
     @Mock
     private WebDriver driver;
@@ -50,8 +55,10 @@ public class SearchTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-        search = new Search(searchContext, new DefaultComponentInstantiator(driver));
+        FluentAdapter fluentAdapter = new FluentAdapter(driver);
+
+        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
+        search = new Search(searchContext, instantiator, new DefaultHookChainBuilder(fluentAdapter, instantiator));
     }
 
     @After
@@ -74,7 +81,7 @@ public class SearchTest {
         when(filter2.isPreFilter()).thenReturn(true);
         when(filter2.toString()).thenReturn("[checked=ok]");
 
-        search.find(name, filters).isPresent();
+        search.find(name, filters).now();
         verify(searchContext).findElements(By.cssSelector("cssStyle[generated=true][checked=ok]"));
     }
 
@@ -130,16 +137,22 @@ public class SearchTest {
 
     @Test
     public void findPostSelectorFilterWithElementThatDontMatch() {
-        String name = "cssStyle";
-        Filter[] filters = new Filter[]{filter1};
+        final String name = "cssStyle";
+        final Filter[] filters = new Filter[]{filter1};
         when(filter1.isPreFilter()).thenReturn(false);
         WebElement webElement = mock(WebElement.class);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(Collections.singletonList(webElement));
         when(filter1.getMatcher()).thenReturn(matcher1);
         when(matcher1.isSatisfiedBy(Matchers.<String>anyObject())).thenReturn(false);
 
-        FluentList fluentList = search.find(name, filters);
-        assertThat(fluentList).hasSize(0);
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                search.find(name, filters).now();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class);
+
+        assertThat(search.find(name, filters).isPresent()).isFalse();
     }
 
     @Test
@@ -154,7 +167,7 @@ public class SearchTest {
         when(filter1.getAttribut()).thenReturn("text");
         when(webElement.getText()).thenReturn("Ok");
 
-        search.find(name, filters);
+        assertThat(search.find(name, filters).isPresent()).isFalse();
 
         verify(matcher1).isSatisfiedBy("Ok");
     }

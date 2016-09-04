@@ -4,14 +4,16 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Predicate;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.TimeoutException;
@@ -25,6 +27,7 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class FluentWaitElementMatcherTest {
     @Mock
     private Search search;
@@ -42,11 +45,11 @@ public class FluentWaitElementMatcherTest {
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
-
         wait = new FluentWait(fluent, search);
         wait.atMost(1L, TimeUnit.MILLISECONDS);
         wait.pollingEvery(1L, TimeUnit.MILLISECONDS);
+
+        when(search.getInstantiator()).thenReturn(new DefaultComponentInstantiator(fluent));
 
         when(fluentWebElement.conditions()).thenReturn(new WebElementConditions(fluentWebElement));
         when(fluentWebElement.getElement()).thenReturn(element);

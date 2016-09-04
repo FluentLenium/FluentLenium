@@ -1,14 +1,18 @@
 package org.fluentlenium.core.domain;
 
 import org.assertj.core.api.ThrowableAssert;
+import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.conditions.WebElementConditions;
+import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +26,7 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class FluentListImplTest {
     @Mock
     private FluentWebElement element1;
@@ -36,21 +41,23 @@ public class FluentListImplTest {
     private WebDriver driver;
 
     private FluentList<FluentWebElement> list;
-    private FluentList<FluentWebElement> emptyList = new FluentListImpl<>();
+    private FluentList<FluentWebElement> emptyList;
+
+
+    private FluentAdapter fluentAdapter;
 
     @Before
     public void before() {
-        MockitoAnnotations.initMocks(this);
+        fluentAdapter = new FluentAdapter(driver);
+
+        emptyList = fluentAdapter.newFluentList();
 
         when(element1.conditions()).thenReturn(new WebElementConditions(element1));
         when(element2.conditions()).thenReturn(new WebElementConditions(element2));
         when(element3.conditions()).thenReturn(new WebElementConditions(element3));
 
 
-        list = new FluentListImpl<>();
-        list.add(element1);
-        list.add(element2);
-        list.add(element3);
+        list = fluentAdapter.newFluentList(element1, element2, element3);
     }
 
     @After
@@ -88,7 +95,10 @@ public class FluentListImplTest {
         WebElement webElement2 = mock(WebElement.class);
         WebElement webElement3 = mock(WebElement.class);
 
-        FluentListImpl<FluentWebElement> list = FluentListImpl.fromElements(new DefaultComponentInstantiator(driver), webElement1, webElement2, webElement3);
+        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
+        DefaultHookChainBuilder hookChainBuilder = new DefaultHookChainBuilder(fluentAdapter, instantiator);
+
+        FluentList<FluentWebElement> list = FluentListImpl.fromElements(instantiator, hookChainBuilder, webElement1, webElement2, webElement3);
         assertThat(list.toElements()).containsExactly(webElement1, webElement2, webElement3);
     }
 
@@ -295,9 +305,9 @@ public class FluentListImplTest {
         FluentWebElement ret2 = mock(FluentWebElement.class);
         FluentWebElement ret3 = mock(FluentWebElement.class);
 
-        when(element1.find()).thenReturn(new FluentListImpl<FluentWebElement>(ret1));
-        when(element2.find()).thenReturn(new FluentListImpl<FluentWebElement>(ret2));
-        when(element3.find()).thenReturn(new FluentListImpl<FluentWebElement>(ret3));
+        when(element1.find()).thenReturn(fluentAdapter.newFluentList(ret1));
+        when(element2.find()).thenReturn(fluentAdapter.newFluentList(ret2));
+        when(element3.find()).thenReturn(fluentAdapter.newFluentList(ret3));
 
         assertThat(list.findFirst()).isSameAs(ret1);
         assertThat(list.find()).containsExactly(ret1, ret2, ret3);
@@ -314,9 +324,9 @@ public class FluentListImplTest {
 
         reset(element1, element2, element3);
 
-        when(element1.find(".test")).thenReturn(new FluentListImpl<FluentWebElement>(ret1));
-        when(element2.find(".test")).thenReturn(new FluentListImpl<FluentWebElement>(ret2));
-        when(element3.find(".test")).thenReturn(new FluentListImpl<FluentWebElement>(ret3));
+        when(element1.find(".test")).thenReturn(fluentAdapter.newFluentList(ret1));
+        when(element2.find(".test")).thenReturn(fluentAdapter.newFluentList(ret2));
+        when(element3.find(".test")).thenReturn(fluentAdapter.newFluentList(ret3));
 
         assertThat(list.findFirst(".test")).isSameAs(ret1);
         assertThat(list.find(".test")).containsExactly(ret1, ret2, ret3);
@@ -333,9 +343,9 @@ public class FluentListImplTest {
 
         reset(element1, element2, element3);
 
-        when(element1.find(By.cssSelector(".test"))).thenReturn(new FluentListImpl<FluentWebElement>(ret1));
-        when(element2.find(By.cssSelector(".test"))).thenReturn(new FluentListImpl<FluentWebElement>(ret2));
-        when(element3.find(By.cssSelector(".test"))).thenReturn(new FluentListImpl<FluentWebElement>(ret3));
+        when(element1.find(By.cssSelector(".test"))).thenReturn(fluentAdapter.newFluentList(ret1));
+        when(element2.find(By.cssSelector(".test"))).thenReturn(fluentAdapter.newFluentList(ret2));
+        when(element3.find(By.cssSelector(".test"))).thenReturn(fluentAdapter.newFluentList(ret3));
 
         assertThat(list.findFirst(By.cssSelector(".test"))).isSameAs(ret1);
         assertThat(list.find(By.cssSelector(".test"))).containsExactly(ret1, ret2, ret3);
@@ -361,8 +371,8 @@ public class FluentListImplTest {
 
 
     private static class Component extends FluentWebElement {
-        public Component(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
-            super(webElement, driver, instantiator);
+        public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+            super(webElement, fluentControl, instantiator);
         }
     }
 

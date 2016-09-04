@@ -2,7 +2,7 @@ package org.fluentlenium.core.wait;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
-import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.conditions.IntegerConditions;
 import org.fluentlenium.core.conditions.RectangleConditions;
 import org.openqa.selenium.Rectangle;
@@ -36,9 +36,9 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
 
     @Override
     public boolean isVerified(final Predicate<Rectangle> predicate) {
-        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
+        matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentDriver input) {
+            public boolean apply(FluentControl input) {
                 return hasRectangle().isVerified(predicate);
             }
         }, matcher.negation ? isPredicateNotVerifiedMessage(matcher.selectionName) : isPredicateVerifiedMessage(matcher.selectionName));
@@ -52,9 +52,9 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
 
     @Override
     public boolean withX(final int x) {
-        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
+        matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentDriver input) {
+            public boolean apply(FluentControl input) {
                 return hasRectangle().withX(x);
             }
         }, matcher.negation ? notEqualToMessage(matcher.selectionName, x) : equalToMessage(matcher.selectionName, x));
@@ -73,9 +73,9 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
 
     @Override
     public boolean withY(final int y) {
-        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
+        matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentDriver input) {
+            public boolean apply(FluentControl input) {
                 return hasRectangle().withY(y);
             }
         }, matcher.negation ? notEqualToMessage(matcher.selectionName, y) : equalToMessage(matcher.selectionName, y));
@@ -94,9 +94,9 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
 
     @Override
     public boolean withPosition(final int x, final int y) {
-        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
+        matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentDriver input) {
+            public boolean apply(FluentControl input) {
                 return hasRectangle().withPosition(x, y);
             }
         }, matcher.negation ? hasNotPositionMessage(matcher.selectionName, x, y) : hasPositionMessage(matcher.selectionName, x, y));
@@ -105,9 +105,9 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
 
     @Override
     public boolean withWidth(final int width) {
-        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
+        matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentDriver input) {
+            public boolean apply(FluentControl input) {
                 return hasRectangle().withWidth(width);
             }
         }, matcher.negation ? notEqualToMessage(matcher.selectionName, width) : equalToMessage(matcher.selectionName, width));
@@ -126,9 +126,9 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
 
     @Override
     public boolean withHeight(final int height) {
-        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
+        matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentDriver input) {
+            public boolean apply(FluentControl input) {
                 return hasRectangle().withHeight(height);
             }
         }, matcher.negation ? notEqualToMessage(matcher.selectionName, height) : equalToMessage(matcher.selectionName, height));
@@ -147,9 +147,9 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
 
     @Override
     public boolean withDimension(final int width, final int height) {
-        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
+        matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentDriver input) {
+            public boolean apply(FluentControl input) {
                 return hasRectangle().withDimension(width, height);
             }
         }, matcher.negation ? FluentWaitMessages.hasNotDimensionMessage(matcher.selectionName, width, height) : FluentWaitMessages.hasDimensionMessage(matcher.selectionName, width, height));
@@ -158,9 +158,9 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
 
     @Override
     public boolean withPositionAndDimension(final int x, final int y, final int width, final int height) {
-        matcher.until(matcher.wait, new Predicate<FluentDriver>() {
+        matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentDriver input) {
+            public boolean apply(FluentControl input) {
                 return hasRectangle().withPositionAndDimension(x, y, width, height);
             }
         }, matcher.negation ? hasNotPositionAndDimensionMessage(matcher.selectionName, x, y, width, height) : hasPositionAndDimensionMessage(matcher.selectionName, x, y, width, height));

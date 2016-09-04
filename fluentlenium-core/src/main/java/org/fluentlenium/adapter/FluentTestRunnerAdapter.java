@@ -13,18 +13,18 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     private final SharedMutator sharedMutator;
 
     public FluentTestRunnerAdapter() {
-        this(new DefaultDriverContainer());
+        this(new DefaultFluentControlContainer());
     }
 
-    public FluentTestRunnerAdapter(DriverContainer driverContainer) {
+    public FluentTestRunnerAdapter(FluentControlContainer driverContainer) {
         this(driverContainer, new DefaultSharedMutator());
     }
 
     public FluentTestRunnerAdapter(SharedMutator sharedMutator) {
-        this(new DefaultDriverContainer(), sharedMutator);
+        this(new DefaultFluentControlContainer(), sharedMutator);
     }
 
-    public FluentTestRunnerAdapter(DriverContainer driverContainer, SharedMutator sharedMutator) {
+    public FluentTestRunnerAdapter(FluentControlContainer driverContainer, SharedMutator sharedMutator) {
         super(driverContainer);
         this.sharedMutator = sharedMutator;
     }
@@ -153,7 +153,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testName Test name
      */
     protected void failed(String testName) {
-        failed(null, getClass(), testName);
+        failed(getClass(), testName);
     }
 
     /**
@@ -162,7 +162,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testClass Test class
      */
     protected void failed(Class<?> testClass) {
-        failed(null, testClass, testClass.getName());
+        failed(testClass, testClass.getName());
     }
 
     /**

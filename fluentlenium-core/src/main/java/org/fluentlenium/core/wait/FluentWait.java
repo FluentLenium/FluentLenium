@@ -3,7 +3,7 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
-import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -18,9 +18,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * A Fluent wait object.
  */
-public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentDriver> {
+public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentControl> {
 
-    private final org.openqa.selenium.support.ui.FluentWait<FluentDriver> wait;
+    private final org.openqa.selenium.support.ui.FluentWait<FluentControl> wait;
     private final Search search;
     private final WebDriver driver;
     private boolean useDefaultException;
@@ -30,10 +30,10 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentDri
         return wait;
     }
 
-    public FluentWait(FluentDriver fluent, Search search) {
-        wait = new org.openqa.selenium.support.ui.FluentWait<FluentDriver>(fluent);
+    public FluentWait(FluentControl fluentControl, Search search) {
+        wait = new org.openqa.selenium.support.ui.FluentWait<FluentControl>(fluentControl);
         this.search = search;
-        driver = fluent.getDriver();
+        driver = fluentControl.getDriver();
         useDefaultException = true;
     }
 
@@ -74,7 +74,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentDri
      * @return this fluent wait
      */
     public FluentWait ignoring(java.lang.Class<? extends java.lang.RuntimeException> firstType,
-            java.lang.Class<? extends java.lang.RuntimeException> secondType) {
+                               java.lang.Class<? extends java.lang.RuntimeException> secondType) {
         wait.ignoring(firstType, secondType);
         return this;
     }
@@ -84,7 +84,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentDri
      *
      * @param predicate predicate condition for wait
      */
-    public void untilPredicate(Predicate<FluentDriver> predicate) {
+    public void untilPredicate(Predicate<FluentControl> predicate) {
         updateWaitWithDefaultExceptions();
         wait.until(predicate);
     }
@@ -234,7 +234,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentDri
      * @param isTrue function of a condition returning a boolean or any other object.
      */
     @Override
-    public <T> T until(Function<? super FluentDriver, T> isTrue) {
+    public <T> T until(Function<? super FluentControl, T> isTrue) {
         updateWaitWithDefaultExceptions();
         return wait.until(isTrue);
     }

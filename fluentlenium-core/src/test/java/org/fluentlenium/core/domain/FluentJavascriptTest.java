@@ -3,10 +3,10 @@ package org.fluentlenium.core.domain;
 
 import org.fluentlenium.core.script.FluentJavascript;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
@@ -18,15 +18,10 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 
+@RunWith(MockitoJUnitRunner.class)
 public class FluentJavascriptTest {
     @Mock
     private JavascriptWebDriver driver;
-
-    @Before
-    public void before() {
-        MockitoAnnotations.initMocks(this);
-
-    }
 
     @After
     public void after() {
