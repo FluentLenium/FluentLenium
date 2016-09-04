@@ -50,12 +50,13 @@ or [AssertJ](http://joel-costigliola.github.io/assertj/).
 - Create a Fluent Test.
 
 ```java
-import org.fluentlenium.adapter.FluentTest;
-import org.fluentlenium.configuration.FluentConfiguration;
+import org.fluentlenium.adapter.junit.FluentTest;
+import org.fluentlenium.core.hook.wait.Wait;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
+@Wait
 public class DuckDuckGoTest extends FluentTest {
     @Test
     public void title_of_duck_duck_go_should_contain_search_query_name() {
@@ -73,7 +74,7 @@ public class DuckDuckGoTest extends FluentTest {
 
 ## Fluent Test
 
-Fluent Test is the entry point of FluentLenium. You only have to extend `FluentTest` and implement a test as usual.
+Fluent Test is the entry point of FluentLenium. You only have to extend ```FluentTest``` and implement a test as usual.
 
 ```java
 public class MyTest extends FluentTest {
@@ -86,17 +87,17 @@ public class MyTest extends FluentTest {
 
 This example is for JUnit, but you may use other framework the exact same way (See [Supported Test Runners](#supported-test-runner) section).
 
-##  Fluent Selectors
+##  Fluent Locators
 
-FluentLenium provides a `$` method to build **Fluent Selectors**.
+FluentLenium provides a `$` method to build **Fluent Locators**.
 
-  - **CSS Selector**: Creates a Fluent Selector from CSS Selector.
-  - **Selenium By Locator**: Creates a Fluent Selector with native Selenium API.
-  - **Filter**: Add an additional filter to the Fluent Selector.
-  - **First/Last/Index**: Get a single element from the Fluent Selector.
-  - **XPath Axes**: Get another Fluent Selector from its relative position in the DOM.
+  - **CSS Selector**: Creates a Fluent Locator from CSS Selector.
+  - **Selenium By Locator**: Creates a Fluent Locator with native Selenium API.
+  - **Filter**: Add an additional filter to the Fluent Locator.
+  - **First/Last/Index**: Get a single element from the Fluent Locator.
+  - **XPath Axes**: Get another Fluent Locator from its relative position in the DOM.
   
-Fluent Selectors are implemented by ```FluentWebElement``` and ```FluentList<FluentWebElement>```. Those classes are 
+Fluent Locators are implemented by ```FluentWebElement``` and ```FluentList<FluentWebElement>```. Those classes are 
 wrappers of Selenium ```WebElement``` and ```List<WebElement>```.
 
 ### CSS Selector
@@ -169,8 +170,8 @@ $(".fluent").index(2) // Third element
 $(".fluent", withName("foo")).index(2) // Third element named "foo"
 ```
 
-### Fluent Selector chains
-You can also chain the Fluent Selectors.
+### Fluent Locator chains
+You can also chain the Fluent Locators.
 
 ```java
 // All the "input" tag name elements 
@@ -184,7 +185,7 @@ $(".fluent", withName("foo")).index(2).$("input", withName("bar")).first()
 
 ### XPath Axes
 
-If you need to build another Fluent Selector from the position in the DOM of an existing one, you 
+If you need to build another Fluent Locator from the position in the DOM of an existing one, you 
 can use [XPath axes](http://www.w3schools.com/xsl/xpath_axes.asp).
 
 ```java
@@ -197,10 +198,10 @@ $(".fluent"()).axes().precedings()
 $(".fluent"()).axes().precedingSiblings()
 ```
 
-## Selected Elements
+## Located Elements
 
 ### Actions
-Fluent Selectors have methods to interact with the selected elements:
+Fluent Locators have methods to interact with located elements:
 
 ```java
 // click/double-click on all the enabled elements.
@@ -219,7 +220,7 @@ $("#create-button").mouseOver()
 
 ### Information
 
-You can also retrieve information of selected elements:
+You can also retrieve information of located elements:
 
 ```java
 // Name of the first element
@@ -267,14 +268,14 @@ $(".fluent").isEnabled()
 $(".fluent").isSelected()
 ```
 
-### Lazy Elements
+### Lazy Fluent Locators
 
-`$` always returns Lazy Elements. Building a selector doesn't perform the search on the element immediately. 
-But search will be performed later, just before it's really needed to interact with the selected elements. 
-(ie: clicking, retrieving text value, simulate user input).
+`$` always returns Lazy Fluent Locators. Building a Locator doesn't perform the search immediately. 
+It will be searched later, just before it's really needed to interact with the located elements. 
+(ie: clicking, retrieving text value, send user input).
 
 ```java
-// Creates the Fluent Selector, but doesn't perform the search
+// Creates the Fluent Locator, but doesn't perform the search
 FluentList<FluentWebElement> fluentElements = $(".fluent");
 
 // Perform the search and call click() on found elements
@@ -283,10 +284,10 @@ fluentElements.click();
 // NoSuchElementException will be throw if no element is found.
 ```
 
-You can control the state of those Lazy Elements.
+You can control the state of those Lazy Fluent Locators.
 
 ```java
-// Check if the element is present  in DOM (boolean)
+// Check if the element is present in DOM (boolean)
 $(".fluent").isPresent();
 
 // Force the underlying search if it's not already loaded
@@ -294,7 +295,7 @@ $(".fluent").isPresent();
 $(".fluent").now();
 
 // Forget the underlying search results.
-// You can then reuse the same selector to perform the search again
+// You can then reuse the same locator to perform the search again
 $(".fluent").reset();
 
 // Check if the underlying element has been loaded (boolean)
@@ -486,7 +487,7 @@ All `FluentWebElement` fields are automatically searched for by name or id. For 
 `FluentWebElement` named `createButton`, it will search the page for an element where `id` is `createButton` or 
 name is `createButton`.
 
-Keep in mind that all elements are Lazy Proxy Selectors, they behave exactly like if they where found with `$` method.
+Keep in mind that all elements are Lazy Proxy Locators, they behave exactly like if they where found with `$` method.
 
 ```java
 public class LoginPage extends FluentPage {
@@ -584,17 +585,6 @@ public class LoginPage extends FluentPage {
 }
 ```
 
-If you need to wait for an element to be present, especially when waiting for an ajax call to complete, you can use the @Wait annotation on the fields:
-
-```java
-public class LoginPage extends FluentPage {
-    @Wait
-    private FluentWebElement myAjaxElement;
-}
-```
-You can set the timeout in seconds for the page to throw an error if not found with `@Wait(atMost=3)` if you want to wait 3 seconds.
-By default, the timeout is set to one second.
-
 ### Components
 
 A ```Component``` is a object wrapping a ```WebElement``` instance. Nothing more.
@@ -630,7 +620,7 @@ comp.doSelect("Value to select");
 assertThat(comp.getSelection()).isEquals("Value to select");
 ```
 
-It's not mandatory to extend `FluentWebElement`. But a constructor with at least WebElement parameter is required.
+It's not mandatory to extend `FluentWebElement`, but a constructor with at least WebElement parameter is required.
 
 ```java
 public class SelectComponent {
@@ -807,6 +797,145 @@ You can also chain filter in the asynchronous API:
 ```java
 await().atMost(5, TimeUnit.SECONDS).until(".fluent").with("myAttribute").startsWith("myValue").with("a second attribute").equalTo("my@ndValue").isPresent();
 ```
+
+## Hooks
+
+It's possible add some behavior for any element without changing it's code by using hooks. 
+
+FluentLenium is shipped with the ```Wait``` hook.
+
+```
+// This call will wait for ajax-element to be clickable.
+find(".fluent").withHook(WaitHook.class).click();
+
+// Hooks can be chained and their effect will be associated.
+find(".fluent").withHook(WaitHook.class).withHook(AnotherHook.class).click();
+
+// Options can be given to hooks.
+find(".fluent")
+    .withHook(WaitHook.class, WaitHookOptions.builder().atMost(20L).build())
+    .click()
+```
+
+### Hook Annotations
+
+Hooks can also be mapped to an annotation, like ```@Wait``` for the ```WaitHook``` class.
+
+You can a place hook annotation on an injected Field, a Fluent Test class or a Page.
+
+The hook will be effective for a field if annotation is present on the field, all fields from a Fluent Test class if 
+it's present on a Fluent Test class, and all fields from a Page if it's present on a Page.
+
+Aso, page build through Injection recursively inherits hooks from parent pages and fluent test.
+
+If you need to disable all inherited hooks in a Page or Field, you should use ```@NoHook``` annotation,
+or call ```noHook()``` function on the element;
+
+It's also possible to use the generic ```@Hook``` annotation to enable a hook class.
+
+```java
+@Wait
+public class MyTest extends FluentTest {
+    FluentWebElement waitElement;
+    
+    @Hook(AnotherHook.class)
+    FluentWebElement waitAndAnotherHookElement;
+    
+    @NoHook
+    FluentWebElement noHookElement;
+    
+    @Page
+    MyPage page;
+}
+
+@Hook(PageHook.class)
+public class MyPage extends FluentPage {
+    
+}
+```
+
+### @Wait Hook
+
+```Wait``` hook automatically waits for conditions to be filled before interacting with Elements, avoiding the need 
+of writing technical waiting and condition code in tests and page objects.
+
+Default timeout for ```@Wait``` hook is 5 seconds.
+
+### Custom hook
+
+It's possible to implement you own hook by extending ```BaseHook``` or ```BaseFluentHook```.
+
+Let's implement an Example hook writing a configurable message before and after click.
+
+- Create the hook option class. It should be a JavaBean containing configuration options for the hook.
+
+```
+public class ExampleHookOptions {
+    private String message = "ExampleHook";
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+}
+```
+
+- Create the hook implementation class extending ```BaseHook<ExampleHookOptions>``` or ```BaseFluentHook<ExampleHookOptions>```. It should at least have a public 
+constructor matching the parent class, and generic type should be the hook option class.
+
+```
+public class ExampleHook extends BaseHook<ExampleHookOptions> {
+    public ExampleHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, ExampleHookOptions options) {
+        super(fluentControl, instantiator, elementSupplier, locatorSupplier, options);
+    }
+}
+
+```
+
+- Create the hook annotation. Annotation parameters should match options found in hook option class.
+
+```
+@Inherited
+@Target({ElementType.FIELD, ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Hook(ExampleHook.class)
+@HookOptions(ExampleHookOptions.class)
+public @interface Example {
+    String message() default "";
+}
+```
+
+- Add a constructor to hook options class that will support loading of hook annotation into hook option class.
+
+```
+public class ExampleHookOptions {
+    public ExampleHookOptions(Example annotation) {
+        message = annotation.message();
+    }
+
+    public ExampleHookOptions() {
+    }
+```
+
+- Override methods from ```WebElement``` or ```ElementLocator``` in the hook implementation class to add desired 
+behavior.
+
+```
+@Override
+public void click() {
+    System.out.println(getOptions().getMessage() + ": before click!");
+    super.click();
+    System.out.println(getOptions().getMessage() + ": after click!");
+}
+```
+
+[Example sources are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/fluentlenium-examples/src/test/java/org/fluentlenium/examples/hooks).
+
+You may also read [sources for @Wait hook](https://github.com/FluentLenium/FluentLenium/tree/master/fluentlenium-core/src/main/java/org/fluentlenium/core/hook/wait) to read how it's implemented.
+
 ## Alternative Syntax
 
 If you don't like the [JQuery](http://jquery.com/) syntax, you can replace `$` with `find` method:

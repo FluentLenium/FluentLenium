@@ -65,7 +65,7 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
 
     private static class JavascriptPageSlow extends FluentPage {
 
-        @Wait(atMost = 12)
+        @Wait(timeout = 12)
         FluentWebElement newFieldSlow;
 
         @Override

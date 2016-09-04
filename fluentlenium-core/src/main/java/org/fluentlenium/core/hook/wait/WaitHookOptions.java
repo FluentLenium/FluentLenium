@@ -1,5 +1,7 @@
 package org.fluentlenium.core.hook.wait;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.fluentlenium.core.wait.FluentWait;
@@ -10,7 +12,9 @@ import java.util.concurrent.TimeUnit;
 
 @Getter
 @Setter
+@Builder
 @Wait
+@AllArgsConstructor
 public class WaitHookOptions {
 
     private TimeUnit timeUnit = TimeUnit.MILLISECONDS;
@@ -26,8 +30,8 @@ public class WaitHookOptions {
 
     public WaitHookOptions(Wait annotation) {
         timeUnit = annotation.timeUnit();
-        atMost = annotation.atMost() == -1L ? null : annotation.atMost();
-        pollingEvery = annotation.pollingEvery() == -1L ? null : annotation.pollingEvery();
+        atMost = annotation.timeout() == -1L ? null : annotation.timeout();
+        pollingEvery = annotation.pollingInterval() == -1L ? null : annotation.pollingInterval();
         ignoreAll = new ArrayList<Class<? extends Throwable>>(Arrays.asList(annotation.ignoreAll()));
         withNoDefaultsException = annotation.withNoDefaultsException();
     }
