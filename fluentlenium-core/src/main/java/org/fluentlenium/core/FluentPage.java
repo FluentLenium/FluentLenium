@@ -1,7 +1,7 @@
 package org.fluentlenium.core;
 
 import org.fluentlenium.core.annotation.PageUrl;
-import org.fluentlenium.core.page.PageAnnotations;
+import org.fluentlenium.core.page.ClassAnnotations;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -14,7 +14,7 @@ import org.openqa.selenium.StaleElementReferenceException;
  */
 public abstract class FluentPage extends DefaultFluentContainer implements FluentPageControl {
 
-    private PageAnnotations pageAnnotations = new PageAnnotations(getClass());
+    private ClassAnnotations classAnnotations = new ClassAnnotations(getClass());
 
     public FluentPage() {
     }
@@ -36,7 +36,7 @@ public abstract class FluentPage extends DefaultFluentContainer implements Fluen
 
     @Override
     public void isAt() {
-        By by = pageAnnotations.buildBy();
+        By by = classAnnotations.buildBy();
         if (by != null) {
             try {
                 findFirst(by).now();
