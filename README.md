@@ -800,7 +800,7 @@ await().atMost(5, TimeUnit.SECONDS).until(".fluent").with("myAttribute").startsW
 
 ## Hooks
 
-It's possible add some behavior for any element without changing it's code by using hooks. 
+It's possible to add some behavior for any element without changing its code by using hooks. 
 
 FluentLenium is shipped with the ```Wait``` hook.
 
@@ -819,16 +819,16 @@ find(".fluent")
 
 ### Hook Annotations
 
-Hooks can also be mapped to an annotation, like ```@Wait``` for the ```WaitHook``` class.
+Hooks can also be mapped to annotation, like ```@Wait``` for the ```WaitHook``` class.
 
-You can a place hook annotation on an injected Field, a Fluent Test class or a Page.
+You can place a hook annotation on injected Field, Fluent Test class or Page.
 
-The hook will be effective for a field if annotation is present on the field, all fields from a Fluent Test class if 
-it's present on a Fluent Test class, and all fields from a Page if it's present on a Page.
+The hook will be effective for a field if annotation is present on it. All fields from a Fluent Test class if 
+it's present on a Fluent Test class and all fields from a Page if it's present on a Page.
 
-Aso, page build through Injection recursively inherits hooks from parent pages and fluent test.
+Page build through Injection recursively inherits hooks from parent pages and fluent test.
 
-If you need to disable all inherited hooks in a Page or Field, you should use ```@NoHook``` annotation,
+If you need to disable all inherited hooks in particular Page or Field, you should use ```@NoHook``` annotation,
 or call ```noHook()``` function on the element;
 
 It's also possible to use the generic ```@Hook``` annotation to enable a hook class.
@@ -856,16 +856,16 @@ public class MyPage extends FluentPage {
 
 ### @Wait Hook
 
-```Wait``` hook automatically waits for conditions to be filled before interacting with Elements, avoiding the need 
+```Wait``` hook automatically waits for conditions to be applied before interacting with Elements, avoiding the need 
 of writing technical waiting and condition code in tests and page objects.
 
 Default timeout for ```@Wait``` hook is 5 seconds.
 
 ### Custom hook
 
-It's possible to implement you own hook by extending ```BaseHook``` or ```BaseFluentHook```.
+It's possible to implement your own hook by extending ```BaseHook``` or ```BaseFluentHook```.
 
-Let's implement an Example hook writing a configurable message before and after click.
+Let's implement Example hook by writing a configurable message before and after click.
 
 - Create the hook option class. It should be a JavaBean containing configuration options for the hook.
 
@@ -883,8 +883,8 @@ public class ExampleHookOptions {
 }
 ```
 
-- Create the hook implementation class extending ```BaseHook<ExampleHookOptions>``` or ```BaseFluentHook<ExampleHookOptions>```. It should at least have a public 
-constructor matching the parent class, and generic type should be the hook option class.
+- Create the hook by extending of following class ```BaseHook<ExampleHookOptions>``` or ```BaseFluentHook<ExampleHookOptions>```. It should at least have a public 
+constructor matching parent class, and generic type should be a hook option class.
 
 ```
 public class ExampleHook extends BaseHook<ExampleHookOptions> {
