@@ -7,6 +7,8 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Proxy handler for {@link WebElement}.
@@ -17,12 +19,19 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement> impleme
     public ComponentHandler(ElementLocator locator) {
         super(locator);
         if (this.locator instanceof WrapsElement) {
+            fireProxyElementSearch();
             WebElement result = ((WrapsElement) this.locator).getWrappedElement();
             if (result == null) {
                 throw new NoSuchElementException("Element not found");
             }
             this.result = result;
+            fireProxyElementFound(this.result);
         }
+    }
+
+    @Override
+    protected List<WebElement> resultToList(WebElement result) {
+        return Arrays.asList(result);
     }
 
     @Override
@@ -32,12 +41,10 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement> impleme
 
     @Override
     public WebElement getLocatorResultImpl() {
-        fireProxyElementSearch(proxy, locator);
         WebElement element = getHookLocator().findElement();
         if (element == null) {
             throw new NoSuchElementException("Element not found");
         }
-        fireProxyElementFound(proxy, locator, element);
         return element;
     }
 

@@ -12,16 +12,23 @@ import java.util.List;
 /**
  * Proxy handler for list of {@link WebElement}.
  */
-class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
+public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     private static final Method GET_WRAPPED_ELEMENTS = getMethod(WrapsElements.class, "getWrappedElements");
 
     public ListHandler(ElementLocator locator) {
         super(locator);
         if (this.locator instanceof WrapsElements) {
+            fireProxyElementSearch();
             List<WebElement> foundElements = ((WrapsElements) this.locator).getWrappedElements();
             if (foundElements == null) foundElements = Collections.emptyList();
             this.result = wrapElements(foundElements);
+            fireProxyElementFound(this.result);
         }
+    }
+
+    @Override
+    protected List<WebElement> resultToList(List<WebElement> result) {
+        return result;
     }
 
     @Override
@@ -41,14 +48,9 @@ class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
 
     @Override
     public List<WebElement> getLocatorResultImpl() {
-        fireProxyElementSearch(proxy, locator);
         List<WebElement> foundElements = getHookLocator().findElements();
         if (foundElements == null) foundElements = Collections.emptyList();
-        foundElements = wrapElements(foundElements);
-        for (WebElement element : foundElements) {
-            fireProxyElementFound(proxy, locator, element);
-        }
-        return foundElements;
+        return wrapElements(foundElements);
     }
 
     protected List<WebElement> wrapElements(List<WebElement> foundElements) {

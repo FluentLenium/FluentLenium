@@ -1,0 +1,71 @@
+<html>
+<head>
+    <title>Components</title>
+</head>
+<body>
+<div class="header">
+    <span class="title" style="display: none">Header Title</span>
+</div>
+<span class="component">Not a component</span>
+<span class="sub-component">Not a sub component</span>
+<div class="content">
+    <div class="page">
+        <span class="page-content">Page Content</span>
+    </div>
+    <div class="component component-1">
+        <span class="title">Component 1</span>
+        <div class="sub-component sub-component-1"><a class="action" href="#">Sub Component 1 (1)</a></div>
+        <div class="sub-component sub-component-1"><a class="action" href="#">Sub Component 1 (2)</a></div>
+        <div class="sub-component sub-component-1"><a class="action" href="#">Sub Component 1 (3)</a></div>
+    </div>
+    <div class="component component-2">
+        <span class="title" style="display: none">Component 2</span>
+        <div class="sub-component sub-component-2"><a class="action" href="#">Sub Component 2 (1)</a></div>
+        <div class="sub-component sub-component-2"><a class="action" href="#">Sub Component 2 (2)</a></div>
+        <div class="sub-component sub-component-2"><a class="action" href="#">Sub Component 2 (3)</a></div>
+    </div>
+</div>
+<div class="footer">
+    <span class="copyright" style="display: none">(c) FluentLenium</span>
+</div>
+<script language="JavaScript">
+    function displayAfter(timeout, selector, before) {
+        var element = document.querySelector(".header > .title");
+        var parentElement = element.parentNode;
+        parentElement.removeChild(element);
+        element.display = "inherit";
+
+        return setTimeout(function () {
+            parentElement.appendChild(element);
+        }, timeout)
+    }
+
+    var headerTitle = document.querySelector(".header > .title");
+    var footerCopyright = document.querySelector(".footer > .copyright");
+    var component2Title = document.querySelector(".component-2 > .title");
+
+    headerTitle.parentNode.removeChild(headerTitle);
+    footerCopyright.parentNode.removeChild(footerCopyright);
+    component2Title.parentNode.removeChild(component2Title);
+
+    headerTitle.style.display = "inherit";
+    footerCopyright.style.display = "inherit";
+    component2Title.style.display = "inherit";
+
+    setTimeout(function () {
+        document.querySelector(".header").appendChild(headerTitle);
+    }, 1500);
+
+
+    setTimeout(function () {
+        var component2 = document.querySelector(".component-2");
+        component2.insertBefore(component2Title, component2.children[0]);
+    }, 2500);
+
+    setTimeout(function () {
+        document.querySelector(".footer").appendChild(footerCopyright);
+    }, 3500);
+
+</script>
+</body>
+</html>

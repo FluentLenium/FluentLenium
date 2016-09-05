@@ -77,7 +77,7 @@ public class FluentInjectorComponentTest {
     }
 
     @Test
-    public void test() {
+    public void testHierarchy() {
         Container container = new Container();
 
         WebElement component = Mockito.mock(WebElement.class);

@@ -2,8 +2,8 @@ package org.fluentlenium.core.components;
 
 import com.sun.jna.WeakIdentityHashMap;
 import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.proxy.ProxyElementListener;
 import org.fluentlenium.core.proxy.LocatorProxies;
+import org.fluentlenium.core.proxy.ProxyElementListener;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
@@ -47,6 +47,7 @@ public class ComponentsManager extends AbstractComponentInstantiator implements 
     public Object getComponent(WebElement element) {
         return components.get(unwrapElement(element));
     }
+
 
     /**
      * Get all the component related to this webDriver.
@@ -106,20 +107,13 @@ public class ComponentsManager extends AbstractComponentInstantiator implements 
     public void proxyElementSearch(Object proxy, ElementLocator locator) {
     }
 
-    /**
-     * When the underlying element of a WebElement Proxy is found, we have to update the components map.
-     *
-     *
-     *  @param proxy proxy element.
-     * @param locator
-     * @param element found element.
-     */
     @Override
-    public synchronized void proxyElementFound(Object proxy, ElementLocator locator, WebElement element) {
-        // TODO: this should be handled for list too.
-        Object component = components.remove(proxy);
-        if (component != null) {
-            components.put(unwrapElement(element), component);
+    public void proxyElementFound(Object proxy, ElementLocator locator, List<WebElement> elements) {
+        for (WebElement element : elements) {
+            Object component = components.remove(proxy);
+            if (component != null) {
+                components.put(unwrapElement(element), component);
+            }
         }
     }
 

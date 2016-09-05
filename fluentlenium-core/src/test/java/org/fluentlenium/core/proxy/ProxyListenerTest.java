@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class ProxyListenerTest {
         proxy.click();
 
         verify(listener).proxyElementSearch(refEq(proxy), any(ElementLocator.class));
-        verify(listener).proxyElementFound(refEq(proxy), any(ElementLocator.class), refEq(element1));
+        verify(listener).proxyElementFound(refEq(proxy), any(ElementLocator.class), refEq(Arrays.asList(element1)));
 
         LocatorProxies.removeProxyListener(proxy, listener);
 
@@ -61,17 +62,21 @@ public class ProxyListenerTest {
         verifyZeroInteractions(listener);
     }
 
-    private static class ElementMatcher extends CustomMatcher<WebElement> {
-        private final WebElement expected;
+    private static class ElementMatcher extends CustomMatcher<List<WebElement>> {
+        private final List<WebElement> expected;
 
-        public ElementMatcher(WebElement expected) {
+        public ElementMatcher(List<WebElement> expected) {
             super("matches element");
             this.expected = expected;
         }
 
         @Override
         public boolean matches(Object item) {
-            return ((WrapsElement) item).getWrappedElement().equals(expected);
+            List<WebElement> unwrapped = new ArrayList<>();
+            for (Object o : (Iterable) item) {
+                unwrapped.add(((WrapsElement) o).getWrappedElement());
+            }
+            return unwrapped.equals(expected);
         }
     }
 
@@ -91,9 +96,7 @@ public class ProxyListenerTest {
         LocatorProxies.now(proxy);
 
         verify(listener).proxyElementSearch(refEq(proxy), any(ElementLocator.class));
-        verify(listener).proxyElementFound(refEq(proxy), any(ElementLocator.class), Matchers.argThat(new ElementMatcher(element1)));
-        verify(listener).proxyElementFound(refEq(proxy), any(ElementLocator.class), Matchers.argThat(new ElementMatcher(element2)));
-        verify(listener).proxyElementFound(refEq(proxy), any(ElementLocator.class), Matchers.argThat(new ElementMatcher(element3)));
+        verify(listener).proxyElementFound(refEq(proxy), any(ElementLocator.class), Matchers.argThat(new ElementMatcher(Arrays.asList(element1, element2, element3))));
 
 
         LocatorProxies.removeProxyListener(proxy, listener);

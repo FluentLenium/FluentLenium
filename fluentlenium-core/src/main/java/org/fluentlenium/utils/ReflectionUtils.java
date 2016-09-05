@@ -12,6 +12,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -321,5 +323,16 @@ public class ReflectionUtils {
         } finally {
             field.setAccessible(accessible);
         }
+    }
+
+    public static Class<?> getFirstGenericType(Field field) {
+        Type[] actualTypeArguments = ((ParameterizedType) field.getGenericType())
+                .getActualTypeArguments();
+
+        if (actualTypeArguments.length > 0) {
+            return (Class<?>) actualTypeArguments[0];
+        }
+
+        return null;
     }
 }

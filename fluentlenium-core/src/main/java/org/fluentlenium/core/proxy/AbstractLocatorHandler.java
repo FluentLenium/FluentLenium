@@ -48,17 +48,19 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         return listeners.remove(listener);
     }
 
-    protected void fireProxyElementFound(Object proxy, ElementLocator locator, WebElement element) {
-        for (ProxyElementListener listener : listeners) {
-            listener.proxyElementFound(proxy, locator, element);
-        }
-    }
-
-    protected void fireProxyElementSearch(Object proxy, ElementLocator locator) {
+    protected void fireProxyElementSearch() {
         for (ProxyElementListener listener : listeners) {
             listener.proxyElementSearch(proxy, locator);
         }
     }
+
+    protected void fireProxyElementFound(T result) {
+        for (ProxyElementListener listener : listeners) {
+            listener.proxyElementFound(proxy, locator, resultToList(result));
+        }
+    }
+
+    protected abstract List<WebElement> resultToList(T result);
 
     protected T proxy;
     protected final ElementLocator locator;
@@ -78,7 +80,9 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     public synchronized T getLocatorResult() {
         if (result == null) {
+            fireProxyElementSearch();
             result = getLocatorResultImpl();
+            fireProxyElementFound(result);
         }
         return result;
     }
