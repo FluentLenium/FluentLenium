@@ -2,6 +2,7 @@
 engines:
   pmd:
     enabled: true
+    config: dev-config/pmd/fluentlenium_pmd.xml
     channel: "beta"
   checkstyle:
     enabled: true
