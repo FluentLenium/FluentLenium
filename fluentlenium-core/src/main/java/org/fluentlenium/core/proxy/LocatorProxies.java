@@ -118,12 +118,7 @@ public class LocatorProxies {
         return proxy;
     }
 
-    public void setHooks(List<WebElement> proxy, HookChainBuilder hookChainBuilder, List<HookDefinition<?>> hookDefinitions) {
-        LocatorHandler<?> componentHandler = getLocatorHandler(proxy);
-        componentHandler.setHooks(hookChainBuilder, hookDefinitions);
-    }
-
-    public void setHooks(WebElement proxy, HookChainBuilder hookChainBuilder, List<HookDefinition<?>> hookDefinitions) {
+    public void setHooks(Object proxy, HookChainBuilder hookChainBuilder, List<HookDefinition<?>> hookDefinitions) {
         LocatorHandler<?> componentHandler = getLocatorHandler(proxy);
         componentHandler.setHooks(hookChainBuilder, hookDefinitions);
     }

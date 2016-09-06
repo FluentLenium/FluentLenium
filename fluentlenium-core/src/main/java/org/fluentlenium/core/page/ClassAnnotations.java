@@ -1,7 +1,6 @@
 package org.fluentlenium.core.page;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ByIdOrName;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -13,13 +12,13 @@ import org.openqa.selenium.support.pagefactory.AbstractAnnotations;
  * Inspired by {@link org.openqa.selenium.support.pagefactory.Annotations}, but use a Class instead of a Field
  * to retrieve the annotations.
  */
-public class PageAnnotations extends AbstractAnnotations {
+public class ClassAnnotations extends AbstractAnnotations {
     private final Class<?> cls;
 
     /**
      * @param cls Class expected to be a Page Object
      */
-    public PageAnnotations(Class<?> cls) {
+    public ClassAnnotations(Class<?> cls) {
         this.cls = cls;
     }
 

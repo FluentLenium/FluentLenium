@@ -585,9 +585,13 @@ public class LoginPage extends FluentPage {
 }
 ```
 
+Injection is recursive, and it's possible to retrieve the parent container using ```@Parent``` annotation.
+
 ### Components
 
-A ```Component``` is a object wrapping a ```WebElement``` instance. Nothing more.
+A ```Component``` is an object wrapping a ```WebElement``` instance.
+
+A ```Component``` supports Injection like a Page Object, but all searchs are performed in the local context of the wrapped element.
 
 Using components improves readability of both Page Objects and Tests.
 
