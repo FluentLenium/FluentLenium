@@ -27,6 +27,7 @@ public class Alert implements org.openqa.selenium.Alert {
     /**
      * Switch to an alert box.
      *
+     * @return this object reference to chain calls.
      * @throws org.openqa.selenium.NoAlertPresentException if there is currently no alert box.
      */
     public org.openqa.selenium.Alert switchTo() {

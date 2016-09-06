@@ -16,23 +16,24 @@ import java.util.List;
 public interface FluentList<E extends FluentWebElement> extends List<E>, FluentActions<FluentList<E>, E>, FluentProxyState<FluentList<E>>, SearchControl<E>, HookControl<FluentList<E>> {
 
     /**
-     * Return the first element of the list
+     * Retrieve the first element.
      *
-     * @return FluentWebElement based element
+     * @return first element
      */
     E first();
 
     /**
-     * Return the last element of the list.
+     * Retrieve the last element.
      *
      * @return last element
      */
     E last();
 
     /**
-     * Return the element at index of the list.
+     * Retrieve an element at given index.
      *
-     * @return element at index
+     * @param index position of the element to retrieve
+     * @return element at given index
      */
     E index(int index);
 
@@ -235,11 +236,7 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentA
     FluentList<E> clearAll();
 
     /**
-     * Clear all elements on the list
-     * <p>
-     * Only the visible elements are cleared.
-     *
-     * @return extended by FluentWebElement object
+     * Clear visible elements on the list
      */
     @Override
     void clear();
@@ -261,16 +258,16 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentA
     <T extends FluentWebElement> FluentList<T> as(Class<T> componentClass);
 
     /**
-     * Get a condition object on this element list that will match if each underlying element match.
+     * Build a condition object on this element list that will match if each underlying element match.
      *
-     * @return
+     * @return a condition object
      */
     FluentListConditions each();
 
     /**
-     * Get a condition object on this element list that will match if one or more underlying element match.
+     * Build a condition object on this element list that will match if one or more underlying element match.
      *
-     * @return
+     * @return a condition object
      */
     FluentListConditions one();
 }

@@ -1,7 +1,5 @@
 package org.fluentlenium.adapter;
 
-import org.openqa.selenium.WebDriver;
-
 /**
  * Instead of extending FluentTest, you can instantiate this class directly.
  * <p>

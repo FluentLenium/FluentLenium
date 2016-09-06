@@ -2,18 +2,15 @@ package org.fluentlenium.core.components;
 
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
+/**
+ * Accessor interface to retrieve a component from it's selenium element.
+ */
 public interface ComponentAccessor {
     /**
      * Get the related component from the given element.
      *
-     * @param element
-     *
-     * @return
+     * @param element selenium element
+     * @return component wrapping the given selenium element
      */
     Object getComponent(WebElement element);
 

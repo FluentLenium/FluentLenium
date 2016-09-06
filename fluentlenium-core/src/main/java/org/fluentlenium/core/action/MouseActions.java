@@ -42,6 +42,9 @@ public class MouseActions {
     }
 
     /**
+     * Clicks (without releasing) at the current mouse location.
+     *
+     * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#clickAndHold()
      */
     public MouseActions clickAndHold() {
@@ -50,6 +53,9 @@ public class MouseActions {
     }
 
     /**
+     * Releases the depressed left mouse button at the current mouse location.
+     *
+     * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#release()
      */
     public MouseActions release() {
@@ -58,6 +64,9 @@ public class MouseActions {
     }
 
     /**
+     * Clicks at the current mouse location. Useful when combined with
+     *
+     * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#click()
      */
     public MouseActions click() {
@@ -66,7 +75,9 @@ public class MouseActions {
     }
 
     /**
-     * @see org.openqa.selenium.interactions.Actions#doubleClick()
+     * Performs a double-click at the current mouse location.
+     *
+     * @return this object reference to chain calls
      */
     public MouseActions doubleClick() {
         actions().doubleClick().perform();
@@ -74,6 +85,9 @@ public class MouseActions {
     }
 
     /**
+     * Performs a context-click at the current mouse location.
+     *
+     * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#contextClick()
      */
     public MouseActions contextClick() {

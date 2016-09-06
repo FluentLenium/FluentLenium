@@ -1,9 +1,9 @@
 package org.fluentlenium.adapter.testng.integration;
 
+import org.fluentlenium.adapter.testng.integration.localtest.LocalFluentCase;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.adapter.testng.integration.localtest.LocalFluentCase;
 import org.junit.ComparisonFailure;
 import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.BeforeMethod;

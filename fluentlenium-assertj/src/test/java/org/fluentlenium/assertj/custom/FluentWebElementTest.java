@@ -2,7 +2,6 @@ package org.fluentlenium.assertj.custom;
 
 
 import org.fluentlenium.assertj.FluentLeniumAssertions;
-import org.fluentlenium.assertj.custom.FluentWebElementAssert;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Before;
 import org.junit.Test;

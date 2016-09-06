@@ -9,16 +9,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import java.lang.annotation.Annotation;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -46,7 +41,7 @@ public class BaseFluentHookTest {
     public void before() {
         fluentAdapter = new FluentAdapter(webDriver);
         instantiator = spy(new DefaultComponentInstantiator(fluentAdapter));
-        hook = new BaseFluentHook<>(fluentAdapter, instantiator, Suppliers.ofInstance(element),  Suppliers.ofInstance(locator), options);
+        hook = new BaseFluentHook<>(fluentAdapter, instantiator, Suppliers.ofInstance(element), Suppliers.ofInstance(locator), options);
     }
 
     @Test

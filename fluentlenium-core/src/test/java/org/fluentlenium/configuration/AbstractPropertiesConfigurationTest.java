@@ -1,22 +1,12 @@
 package org.fluentlenium.configuration;
 
 
-import org.apache.commons.io.IOUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.powermock.api.mockito.PowerMockito;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLStreamHandler;
-import java.net.URLStreamHandlerFactory;
-
-import static org.fluentlenium.utils.ResourceUtils.getResourceAsURL;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.when;
 
 public abstract class AbstractPropertiesConfigurationTest<T extends AbstractPropertiesConfiguration> {
 

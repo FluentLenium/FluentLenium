@@ -10,8 +10,8 @@ import org.fluentlenium.core.axes.Axes;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.filter.Filter;
-import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
+import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookControl;
 import org.fluentlenium.core.hook.HookDefinition;
@@ -471,7 +471,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      * @return boolean value for is input file type
      */
     private boolean isInputOfTypeFile() {
-        return ("input".equalsIgnoreCase(this.getTagName()) && "file".equalsIgnoreCase(this.getAttribute("type")));
+        return "input".equalsIgnoreCase(this.getTagName()) && "file".equalsIgnoreCase(this.getAttribute("type"));
     }
 
     @Override

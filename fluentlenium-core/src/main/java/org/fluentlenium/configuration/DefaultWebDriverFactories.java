@@ -1,11 +1,9 @@
 package org.fluentlenium.configuration;
 
-import lombok.experimental.UtilityClass;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-@UtilityClass
 public class DefaultWebDriverFactories {
-    public class FirefoxWebDriverFactory extends ReflectiveWebDriverFactory {
+    public static class FirefoxWebDriverFactory extends ReflectiveWebDriverFactory {
         public FirefoxWebDriverFactory() {
             super("firefox", "org.openqa.selenium.firefox.FirefoxDriver");
         }
@@ -16,7 +14,7 @@ public class DefaultWebDriverFactories {
         }
     }
 
-    public class MarionetteWebDriverFactory extends ReflectiveWebDriverFactory {
+    public static class MarionetteWebDriverFactory extends ReflectiveWebDriverFactory {
         public MarionetteWebDriverFactory() {
             super("marionette", "org.openqa.selenium.firefox.MarionetteDriver");
         }
@@ -27,7 +25,7 @@ public class DefaultWebDriverFactories {
         }
     }
 
-    public class ChromeWebDriverFactory extends ReflectiveWebDriverFactory {
+    public static class ChromeWebDriverFactory extends ReflectiveWebDriverFactory {
         public ChromeWebDriverFactory() {
             super("chrome", "org.openqa.selenium.chrome.ChromeDriver");
         }
@@ -38,7 +36,7 @@ public class DefaultWebDriverFactories {
         }
     }
 
-    public class InternetExplorerWebDriverFactory extends ReflectiveWebDriverFactory {
+    public static class InternetExplorerWebDriverFactory extends ReflectiveWebDriverFactory {
         public InternetExplorerWebDriverFactory() {
             super("ie", "org.openqa.selenium.ie.InternetExplorerDriver");
         }
@@ -49,7 +47,7 @@ public class DefaultWebDriverFactories {
         }
     }
 
-    public class EdgeWebDriverFactory extends ReflectiveWebDriverFactory {
+    public static class EdgeWebDriverFactory extends ReflectiveWebDriverFactory {
         public EdgeWebDriverFactory() {
             super("edge", "org.openqa.selenium.edge.EdgeDriver");
         }
@@ -60,7 +58,7 @@ public class DefaultWebDriverFactories {
         }
     }
 
-    public class SafaryWebDriverFactory extends ReflectiveWebDriverFactory {
+    public static class SafaryWebDriverFactory extends ReflectiveWebDriverFactory {
         public SafaryWebDriverFactory() {
             super("safari", "org.openqa.selenium.safari.SafariDriver");
         }
@@ -71,7 +69,7 @@ public class DefaultWebDriverFactories {
         }
     }
 
-    public class PhantomJSWebDriverFactory extends ReflectiveWebDriverFactory {
+    public static class PhantomJSWebDriverFactory extends ReflectiveWebDriverFactory {
         public PhantomJSWebDriverFactory() {
             super("phantomjs", "org.openqa.selenium.phantomjs.PhantomJSDriver");
         }
@@ -82,7 +80,7 @@ public class DefaultWebDriverFactories {
         }
     }
 
-    public class HtmlUnitWebDriverFactory extends ReflectiveWebDriverFactory {
+    public static class HtmlUnitWebDriverFactory extends ReflectiveWebDriverFactory {
         public HtmlUnitWebDriverFactory() {
             super("htmlunit", "org.openqa.selenium.htmlunit.HtmlUnitDriver");
         }

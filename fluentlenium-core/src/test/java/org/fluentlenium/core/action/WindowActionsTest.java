@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableSet;
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.core.FluentDriver;
-import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.core.wait.FluentWaitWindowMatcher;

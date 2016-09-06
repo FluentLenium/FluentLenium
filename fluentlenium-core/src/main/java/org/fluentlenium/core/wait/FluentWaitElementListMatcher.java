@@ -1,8 +1,6 @@
 package org.fluentlenium.core.wait;
 
-import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.domain.FluentList;
-import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
 import org.openqa.selenium.NoSuchElementException;

@@ -1,8 +1,8 @@
 package org.fluentlenium.adapter.testng.integration.shareddriver;
 
+import org.fluentlenium.adapter.testng.integration.localtest.LocalFluentCase;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.configuration.FluentConfiguration;
-import org.fluentlenium.adapter.testng.integration.localtest.LocalFluentCase;
 import org.openqa.selenium.Cookie;
 import org.testng.annotations.Test;
 

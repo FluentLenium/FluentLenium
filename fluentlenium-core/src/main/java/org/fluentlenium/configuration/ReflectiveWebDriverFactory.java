@@ -82,7 +82,7 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, Alternative
 
     @Override
     public String getName() {
-       return name;
+        return name;
     }
 
     @Override

@@ -2,7 +2,6 @@ package org.fluentlenium.assertj.custom;
 
 
 import org.fluentlenium.assertj.FluentLeniumAssertions;
-import org.fluentlenium.assertj.custom.PageAssert;
 import org.fluentlenium.core.FluentPage;
 import org.junit.Before;
 import org.junit.Test;

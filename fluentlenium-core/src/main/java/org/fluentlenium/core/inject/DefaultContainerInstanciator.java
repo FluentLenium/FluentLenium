@@ -1,12 +1,9 @@
 package org.fluentlenium.core.inject;
 
 import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.components.ComponentException;
 import org.fluentlenium.utils.ReflectionUtils;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DefaultContainerInstanciator implements ContainerInstanciator {
     private final FluentControl fluentControl;

@@ -1,6 +1,5 @@
 package org.fluentlenium.adapter;
 
-import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 
 /**

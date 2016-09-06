@@ -26,7 +26,7 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
     }
 
     protected void findByHandler(Class<? extends Annotation> annotation, final By by, WebElement element, WebDriver driver) {
-        if( element == null) return;
+        if (element == null) return;
         Object component = this.componentAccessor.getComponent(element);
         if (component == null) return;
         for (Method method : ReflectionUtils.getDeclaredMethodsWithAnnotation(component, annotation)) {
@@ -48,9 +48,9 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
                 throw new EventAnnotationsException("An error has occured in @BeforeFindBy " + method, e);
             } catch (InvocationTargetException e) {
                 if (e.getTargetException() instanceof RuntimeException) {
-                    throw (RuntimeException)e.getTargetException();
+                    throw (RuntimeException) e.getTargetException();
                 } else if (e.getTargetException() instanceof Error) {
-                    throw (Error)e.getTargetException();
+                    throw (Error) e.getTargetException();
                 }
                 throw new EventAnnotationsException("An error has occured in @BeforeFindBy " + method, e);
             }
@@ -88,9 +88,9 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
                 throw new EventAnnotationsException("An error has occured in @" + annotation.getSimpleName() + " " + method, e);
             } catch (InvocationTargetException e) {
                 if (e.getTargetException() instanceof RuntimeException) {
-                    throw (RuntimeException)e.getTargetException();
+                    throw (RuntimeException) e.getTargetException();
                 } else if (e.getTargetException() instanceof Error) {
-                    throw (Error)e.getTargetException();
+                    throw (Error) e.getTargetException();
                 }
                 throw new EventAnnotationsException("An error has occured in @" + annotation.getSimpleName() + " " + method, e);
             }

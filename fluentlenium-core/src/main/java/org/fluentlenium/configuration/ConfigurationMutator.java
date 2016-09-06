@@ -11,7 +11,7 @@ public interface ConfigurationMutator {
     /**
      * Sets the value of <pre>webDriver</pre> property.
      *
-     * @param webDriver
+     * @param webDriver property value
      * @see ConfigurationProperties#getWebDriver()
      */
     void setWebDriver(String webDriver);
@@ -19,7 +19,7 @@ public interface ConfigurationMutator {
     /**
      * Sets the value of <pre>capabilities</pre> property.
      *
-     * @param capabilities
+     * @param capabilities property value
      * @see ConfigurationProperties#getCapabilities()
      */
     void setCapabilities(Capabilities capabilities);
@@ -27,7 +27,7 @@ public interface ConfigurationMutator {
     /**
      * Sets the value of <pre>configurationFactory</pre> property.
      *
-     * @param configurationFactory
+     * @param configurationFactory property value
      * @see ConfigurationProperties#getConfigurationFactory()
      */
     void setConfigurationFactory(Class<? extends ConfigurationFactory> configurationFactory);
@@ -35,7 +35,7 @@ public interface ConfigurationMutator {
     /**
      * Sets the value of <pre>driverLifecycle</pre> property.
      *
-     * @param driverLifecycle
+     * @param driverLifecycle property value
      * @see ConfigurationProperties#getDriverLifecycle()
      */
     void setDriverLifecycle(ConfigurationProperties.DriverLifecycle driverLifecycle);
@@ -43,7 +43,7 @@ public interface ConfigurationMutator {
     /**
      * Sets the value of <pre>deleteCookies</pre> property.
      *
-     * @param deleteCookies
+     * @param deleteCookies property value
      * @see ConfigurationProperties#getDeleteCookies()
      */
     void setDeleteCookies(Boolean deleteCookies);
@@ -52,7 +52,7 @@ public interface ConfigurationMutator {
     /**
      * Sets the value of <pre>baseUrl</pre> property.
      *
-     * @param baseUrl
+     * @param baseUrl property value
      * @see ConfigurationProperties#getBaseUrl() ()
      */
     void setBaseUrl(String baseUrl);
@@ -60,7 +60,7 @@ public interface ConfigurationMutator {
     /**
      * Sets the value of <pre>pageLoadTimeout</pre> property.
      *
-     * @param pageLoadTimeout
+     * @param pageLoadTimeout property value
      * @see ConfigurationProperties#getPageLoadTimeout()
      */
     void setPageLoadTimeout(Long pageLoadTimeout);
@@ -68,7 +68,7 @@ public interface ConfigurationMutator {
     /**
      * Sets the value of <pre>implicitlyWait</pre> property.
      *
-     * @param implicitlyWait
+     * @param implicitlyWait property value
      * @see ConfigurationProperties#getImplicitlyWait()
      */
     void setImplicitlyWait(Long implicitlyWait);
@@ -76,7 +76,7 @@ public interface ConfigurationMutator {
     /**
      * Sets the value of <pre>scriptTimeout</pre> property.
      *
-     * @param scriptTimeout
+     * @param scriptTimeout property value
      * @see ConfigurationProperties#getScriptTimeout()
      */
     void setScriptTimeout(Long scriptTimeout);
@@ -84,14 +84,14 @@ public interface ConfigurationMutator {
     /**
      * Sets the value of <pre>eventsEnabled</pre> property.
      *
-     * @param eventsEnabled
+     * @param eventsEnabled property value
      */
     void setEventsEnabled(Boolean eventsEnabled);
 
     /**
      * Sets the value of <pre>screenshotPath</pre> property.
      *
-     * @param screenshotPath
+     * @param screenshotPath property value
      * @see ConfigurationProperties#getScreenshotPath()
      */
     void setScreenshotPath(String screenshotPath);
@@ -99,7 +99,7 @@ public interface ConfigurationMutator {
     /**
      * Sets the value of <pre>screenshotMode</pre> property.
      *
-     * @param screenshotMode
+     * @param screenshotMode property value
      * @see ConfigurationProperties#getScreenshotMode()
      */
     void setScreenshotMode(ConfigurationProperties.TriggerMode screenshotMode);
@@ -107,7 +107,7 @@ public interface ConfigurationMutator {
     /**
      * Sets the value of <pre>htmlDumpPath</pre> property.
      *
-     * @param htmlDumpPath
+     * @param htmlDumpPath property value
      * @see ConfigurationProperties#getHtmlDumpPath()
      */
     void setHtmlDumpPath(String htmlDumpPath);
@@ -115,7 +115,7 @@ public interface ConfigurationMutator {
     /**
      * Sets the value of <pre>htmlDumpMode</pre> property.
      *
-     * @param htmlDumpMode
+     * @param htmlDumpMode property value
      * @see ConfigurationProperties#getHtmlDumpMode()
      */
     void setHtmlDumpMode(ConfigurationProperties.TriggerMode htmlDumpMode);

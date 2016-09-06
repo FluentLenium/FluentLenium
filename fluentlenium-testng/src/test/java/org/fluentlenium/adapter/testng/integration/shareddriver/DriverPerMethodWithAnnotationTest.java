@@ -1,8 +1,8 @@
 package org.fluentlenium.adapter.testng.integration.shareddriver;
 
+import org.fluentlenium.adapter.testng.integration.localtest.LocalFluentCase;
 import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.configuration.FluentConfiguration;
-import org.fluentlenium.adapter.testng.integration.localtest.LocalFluentCase;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

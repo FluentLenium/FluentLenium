@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.UtilityClass;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
@@ -25,17 +24,16 @@ import java.util.WeakHashMap;
 /**
  * Utility class for reflection.
  */
-@UtilityClass
 public class ReflectionUtils {
-    private Class<?>[] EMPTY_CLASS_ARRAY = new Class<?>[0];
-    private Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+    private static final Class<?>[] EMPTY_CLASS_ARRAY = new Class<?>[0];
+    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
     @SuppressWarnings("unchecked")
-    public <T> Class<T> wrapPrimitive(Class<T> c) {
+    public static <T> Class<T> wrapPrimitive(Class<T> c) {
         return c.isPrimitive() ? (Class<T>) PRIMITIVES_TO_WRAPPERS.get(c) : c;
     }
 
-    private final Map<Class<?>, Class<?>> PRIMITIVES_TO_WRAPPERS = new HashMap<>();
+    private static final Map<Class<?>, Class<?>> PRIMITIVES_TO_WRAPPERS = new HashMap<>();
 
     static {
         PRIMITIVES_TO_WRAPPERS.put(boolean.class, Boolean.class);
@@ -49,7 +47,7 @@ public class ReflectionUtils {
         PRIMITIVES_TO_WRAPPERS.put(void.class, Void.class);
     }
 
-    private final Map<Class<?>, Object> DEFAULTS = new HashMap<>();
+    private static final Map<Class<?>, Object> DEFAULTS = new HashMap<>();
 
     static {
         // Only add to this map via put(Map, Class<T>, T)
@@ -73,19 +71,18 @@ public class ReflectionUtils {
         private Class<? extends Annotation> annotation;
     }
 
-    private final Map<ClassAnnotationKey, List<Method>> DECLARED_METHODS_CACHE = new WeakHashMap<>();
+    private static final Map<ClassAnnotationKey, List<Method>> DECLARED_METHODS_CACHE = new WeakHashMap<>();
 
 
     /**
-     * <p>Converts an array of {@code Object} in to an array of {@code Class} objects.
-     * If any of these objects is null, a null element will be inserted into the array.</p>
-     * <p>
+     * Converts an array of {@code Object} into an array of {@code Class} objects.
+     * <p>If any of these objects is null, a null element will be inserted into the array.</p>
      * <p>This method returns {@code null} for a {@code null} input array.</p>
      *
      * @param array an {@code Object} array
      * @return a {@code Class} array, {@code null} if null array input
      */
-    public Class<?>[] toClass(final Object... array) {
+    public static Class<?>[] toClass(final Object... array) {
         if (array == null) {
             return null;
         } else if (array.length == 0) {
@@ -98,7 +95,15 @@ public class ReflectionUtils {
         return classes;
     }
 
-    public Object[] toArgs(Function<Class<?>, Object> valueSupplier, final Class<?>... array) {
+    /**
+     * Converts an array of values provided by an array of {@link Class} and {@link Function} supplying value for each
+     * class into an array of {@link Object}
+     *
+     * @param valueSupplier supplier of values for each class
+     * @param array         array of class
+     * @return array of values
+     */
+    public static Object[] toArgs(Function<Class<?>, Object> valueSupplier, final Class<?>... array) {
         if (array == null) {
             return null;
         } else if (array.length == 0) {
@@ -115,12 +120,30 @@ public class ReflectionUtils {
         return parameters;
     }
 
-    public <T> Constructor<T> getConstructor(Class<T> cls, Object... args) throws NoSuchMethodException {
+    /**
+     * Retrieve the constructor of a class for given argument values.
+     *
+     * @param cls  class to retrieve the constructor from
+     * @param args argument values
+     * @param <T>  type to retrieve the constructor from
+     * @return matching constructor for given argument values
+     * @throws NoSuchMethodException if a matching method is not found.
+     */
+    public static <T> Constructor<T> getConstructor(Class<T> cls, Object... args) throws NoSuchMethodException {
         Class<?>[] argsTypes = toClass(args);
         return getConstructor(cls, argsTypes);
     }
 
-    public <T> Constructor<T> getConstructor(Class<T> cls, Class<?>... argsTypes) throws NoSuchMethodException {
+    /**
+     * Retrieve the constructor of a class for given argument types.
+     *
+     * @param cls       class to retrieve the constructor from
+     * @param argsTypes argument types
+     * @param <T>       type to retrieve the constructor from
+     * @return matching constructor for given argument values
+     * @throws NoSuchMethodException if a matching method is not found.
+     */
+    public static <T> Constructor<T> getConstructor(Class<T> cls, Class<?>... argsTypes) throws NoSuchMethodException {
         if (argsTypes == null || argsTypes.length == 0) {
             return cls.getDeclaredConstructor();
         }
@@ -154,11 +177,31 @@ public class ReflectionUtils {
         }
     }
 
-    public <T> Constructor<T> getConstructorOptional(Class<T> cls, Class<?>... argsTypes) throws NoSuchMethodException {
+    /**
+     * Retrieve the constructor of a class for given optional argument types.
+     *
+     * @param cls       class to retrieve the constructor from
+     * @param argsTypes argument types
+     * @param <T>       type to retrieve the constructor from
+     * @return matching constructor for given optional argument values
+     * @throws NoSuchMethodException if a matching method is not found.
+     */
+    public static <T> Constructor<T> getConstructorOptional(Class<T> cls, Class<?>... argsTypes) throws NoSuchMethodException {
         return getConstructorOptional(0, cls, argsTypes);
     }
 
-    public <T> Constructor<T> getConstructorOptional(int mandatoryCount, Class<T> cls, Class<?>... argsTypes) throws NoSuchMethodException {
+    /**
+     * Retrieve the constructor of a class for given optional argument types, considering mandatory values at the
+     * beginning of the given types.
+     *
+     * @param mandatoryCount number of mandatory arguments at the beginning of the given arguments
+     * @param cls            class to retrieve the constructor from
+     * @param argsTypes      argument types
+     * @param <T>            type to retrieve the constructor from
+     * @return matching constructor for given optional argument values
+     * @throws NoSuchMethodException if a matching method is not found.
+     */
+    public static <T> Constructor<T> getConstructorOptional(int mandatoryCount, Class<T> cls, Class<?>... argsTypes) throws NoSuchMethodException {
         while (true) {
             try {
                 return getConstructor(cls, argsTypes);
@@ -171,18 +214,22 @@ public class ReflectionUtils {
     }
 
     /**
-     * Creates a new instance even if constructor is not accessible.
+     * Creates a new instance matching possible constructors with provided args.
      *
-     * @param cls
-     * @param args
-     * @param <T>
-     * @return
-     * @throws NoSuchMethodException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException
-     * @throws InstantiationException
+     * @param cls  class to instantiate
+     * @param args arguments of the constructor
+     * @param <T>  type of the instance
+     * @return new instance
+     * @throws NoSuchMethodException     if a matching method is not found.
+     * @throws IllegalAccessException    if this {@code Constructor} object
+     *                                   is enforcing Java language access control and the underlying
+     *                                   constructor is inaccessible.
+     * @throws InstantiationException    if the class that declares the
+     *                                   underlying constructor represents an abstract class.
+     * @throws InvocationTargetException if the underlying constructor
+     *                                   throws an exception.
      */
-    public <T> T newInstance(Class<T> cls, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static <T> T newInstance(Class<T> cls, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Constructor<T> declaredConstructor = args.length == 0 ? getConstructor(cls) : getConstructor(cls, args);
         boolean accessible = declaredConstructor.isAccessible();
         if (accessible) {
@@ -200,33 +247,41 @@ public class ReflectionUtils {
     /**
      * Creates a new instance by trying every possible constructors with provided args.
      *
-     * @param cls
-     * @param args
-     * @param <T>
-     * @return
-     * @throws NoSuchMethodException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException
-     * @throws InstantiationException
+     * @param cls  class to instantiate
+     * @param args arguments of the constructor
+     * @param <T>  type of the instance
+     * @return new instance
+     * @throws NoSuchMethodException     if a matching method is not found.
+     * @throws IllegalAccessException    if this {@code Constructor} object
+     *                                   is enforcing Java language access control and the underlying
+     *                                   constructor is inaccessible.
+     * @throws InstantiationException    if the class that declares the
+     *                                   underlying constructor represents an abstract class.
+     * @throws InvocationTargetException if the underlying constructor
+     *                                   throws an exception.
      */
-    public <T> T newInstanceOptionalArgs(Class<T> cls, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static <T> T newInstanceOptionalArgs(Class<T> cls, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         return newInstanceOptionalArgs(0, cls, args);
     }
 
     /**
      * Creates a new instance by trying every possible constructors with provided args.
      *
-     * @param mandatoryCount
-     * @param cls
-     * @param args
-     * @param <T>
-     * @return
-     * @throws NoSuchMethodException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException
-     * @throws InstantiationException
+     * @param mandatoryCount count of mandatory arguments
+     * @param cls            class to instantiate
+     * @param args           arguments of the constructor
+     * @param <T>            type of the instance
+     * @return new instance
+     * @throws NoSuchMethodException     if a matching method is not found.
+     * @throws IllegalAccessException    if this {@code Constructor} object
+     *                                   is enforcing Java language access control and the underlying
+     *                                   constructor is inaccessible.
+     * @throws InstantiationException    if the class that declares the
+     *                                   underlying constructor represents an abstract class.
+     * @throws InvocationTargetException if the underlying constructor
+     *                                   throws an exception.
      */
-    public <T> T newInstanceOptionalArgs(int mandatoryCount, Class<T> cls, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static <T> T newInstanceOptionalArgs(int mandatoryCount, Class<T> cls, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         while (true) {
             try {
                 return newInstance(cls, args);
@@ -238,12 +293,19 @@ public class ReflectionUtils {
         throw new NoSuchMethodException("Can't find any valid constructor.");
     }
 
-    public List<Method> getDeclaredMethodsWithAnnotation(Object object, Class<? extends Annotation> annotation) {
+    public static List<Method> getDeclaredMethodsWithAnnotation(Object object, Class<? extends Annotation> annotation) {
         if (object == null) return getDeclaredMethodsWithAnnotation((Class<?>) null, annotation);
         return getDeclaredMethodsWithAnnotation(object.getClass(), annotation);
     }
 
-    public List<Method> getDeclaredMethodsWithAnnotation(Class<?> objectClass, Class<? extends Annotation> annotation) {
+    /**
+     * Retrieve declared methods marked with given annotation.
+     *
+     * @param objectClass class to analyze
+     * @param annotation  marker annotation
+     * @return Lise of methods that are marked with given annotation
+     */
+    public static List<Method> getDeclaredMethodsWithAnnotation(Class<?> objectClass, Class<? extends Annotation> annotation) {
         List<Method> methods = new ArrayList<>();
 
         if (objectClass == null) return methods;
@@ -267,15 +329,18 @@ public class ReflectionUtils {
     /**
      * Invoke the method event if not accessible.
      *
-     * @param method
-     * @param obj
-     * @param args
-     * @return
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
+     * @param method method to invoke
+     * @param obj    object to invoke
+     * @param args   arguments of the method
+     * @return return value from the method invocation
+     * @throws IllegalAccessException    if this {@code Method} object
+     *                                   is enforcing Java language access control and the underlying
+     *                                   method is inaccessible.
+     * @throws InvocationTargetException if the underlying method
+     *                                   throws an exception.
      * @see Method#invoke(Object, Object...)
      */
-    public Object invoke(Method method, Object obj, Object... args) throws InvocationTargetException, IllegalAccessException {
+    public static Object invoke(Method method, Object obj, Object... args) throws InvocationTargetException, IllegalAccessException {
         boolean accessible = method.isAccessible();
         if (accessible) return method.invoke(obj, args);
         method.setAccessible(true);
@@ -287,14 +352,17 @@ public class ReflectionUtils {
     }
 
     /**
-     * Get the field even if not accessible.
+     * Get the field value even if not accessible.
      *
-     * @param field
-     * @param obj
-     * @throws IllegalAccessException
+     * @param field field to get
+     * @param obj   instance to get
+     * @return field value
+     * @throws IllegalAccessException if this {@code Field} object
+     *                                is enforcing Java language access control and the underlying
+     *                                field is inaccessible.
      * @see Field#get(Object)
      */
-    public Object get(Field field, Object obj) throws IllegalAccessException {
+    public static Object get(Field field, Object obj) throws IllegalAccessException {
         boolean accessible = field.isAccessible();
         if (accessible) return field.get(obj);
         field.setAccessible(true);
@@ -308,13 +376,15 @@ public class ReflectionUtils {
     /**
      * Set the field even if not accessible.
      *
-     * @param field
-     * @param obj
-     * @param value
-     * @throws IllegalAccessException
+     * @param field field to set
+     * @param obj   instance to set
+     * @param value value of the field to set
+     * @throws IllegalAccessException if this {@code Field} object
+     *                                is enforcing Java language access control and the underlying
+     *                                field is either inaccessible or final.
      * @see Field#set(Object, Object)
      */
-    public void set(Field field, Object obj, Object value) throws IllegalAccessException {
+    public static void set(Field field, Object obj, Object value) throws IllegalAccessException {
         boolean accessible = field.isAccessible();
         if (accessible) field.set(obj, value);
         field.setAccessible(true);
@@ -325,6 +395,12 @@ public class ReflectionUtils {
         }
     }
 
+    /**
+     * Retrieve the first generic type of the field type.
+     *
+     * @param field field to analyze
+     * @return first generic type, or null if no generic type is found
+     */
     public static Class<?> getFirstGenericType(Field field) {
         Type[] actualTypeArguments = ((ParameterizedType) field.getGenericType())
                 .getActualTypeArguments();

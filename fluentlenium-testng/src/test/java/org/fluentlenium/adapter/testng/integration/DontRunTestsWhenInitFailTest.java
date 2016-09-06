@@ -36,7 +36,7 @@ public class DontRunTestsWhenInitFailTest {
     public void testRun() {
 
         TestNG testNG = new TestNG(false);
-        testNG.setTestClasses(new Class[] {TestClass.class});
+        testNG.setTestClasses(new Class[]{TestClass.class});
 
         TestListenerAdapter listenerAdapter = Mockito.mock(TestListenerAdapter.class);
         testNG.addListener(listenerAdapter);

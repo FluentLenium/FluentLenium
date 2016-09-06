@@ -17,7 +17,7 @@ import org.openqa.selenium.WebDriver;
  * </li>
  * <li>System properties of the Java Environment, passed using -D on the command line.
  * Property names must be <b>prefixed with fluentlenium.</b>.
- * (ie. Launch test with <i>-Dfluentlenium.webDriver=chrome</i></quote>)
+ * (ie. Launch test with <pre>-Dfluentlenium.webDriver=chrome</pre>)
  * </li>
  * <li>
  * Environment Variable of the Operating System. Property names <b>must be prefixed with fluentlenium.</b>.
@@ -27,15 +27,15 @@ import org.openqa.selenium.WebDriver;
  * {@link FluentConfiguration} annotation on test class to configure.
  * <pre>
  * {@code
- * @FluentConfiguration(webDriver="chrome")
- * public class SomeFluentTest extends FluentTest {
- *     ....
+ *
+ * {@literal @FluentConfiguration(webDriver="chrome")} public class SomeFluentTest extends FluentTest {
+ * ....
  * }
  * }
  * </pre>
  * </li>
  * <li>
- * Java Properties file located at <i>/fluentlenium.properties</i> in the classpath
+ * Java Properties file located at <pre>/fluentlenium.properties</pre> in the classpath
  * <pre>
  * {@code
  * webDriver=chrome
@@ -44,14 +44,13 @@ import org.openqa.selenium.WebDriver;
  * </pre>
  * </li>
  * <li>
- * {@link ConfigurationProperties} custom implementation specified by <i>configurationDefaults</i> property.
+ * {@link ConfigurationProperties} custom implementation specified by <pre>configurationDefaults</pre> property.
  * <pre>
  * {@code
  * public class CustomConfigurationDefaults extends ConfigurationDefaults {
- *     @Override
- *     public String getWebDriver() {
- *        return "chrome";
- *     }
+ * {@literal @Override} public String getWebDriver() {
+ * return "chrome";
+ * }
  * }
  *
  * $ cat fluentlenium.properties
@@ -111,8 +110,8 @@ public interface ConfigurationProperties {
      *
      * Sets the WebDriver type to use.
      *
-     * When FluentLenium needs to create a new {@link WebDriver} instance, it calls FluentAdapter#newWebDriver()
-     * which delegates to {@link WebDrivers#newWebDriver(String, Capabilities)} registry using the value stored in
+     * When FluentLenium needs to create a new {@link WebDriver} instance, it calls {@link FluentAdapter#newWebDriver()}
+     * which delegates to {@link org.fluentlenium.configuration.WebDrivers.Impl#newWebDriver(String, Capabilities)} registry using the value stored in
      * webDriver and capabilities property.
      *
      * Possible values are "firefox", "chrome", "ie", "htmlunit", or any class name implementing {@link WebDriver}.
@@ -120,7 +119,7 @@ public interface ConfigurationProperties {
      * Default value is "firefox".
      *
      * @return webDriver property value
-     * @see FluentAdapter#newWebDriver().
+     * @see FluentAdapter#newWebDriver()
      */
     String getWebDriver();
 
@@ -135,7 +134,6 @@ public interface ConfigurationProperties {
      * @return Capabilities property value
      * @see Capabilities
      * @see <a href="https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities">Selenium DesiredCapabilities Wiki Page</a>
-     *
      */
     Capabilities getCapabilities();
 
@@ -168,7 +166,7 @@ public interface ConfigurationProperties {
     /**
      * <pre>deleteCookies</pre> property.
      *
-     * When using CLASS or JVM <pre>driverLifecycle<pre> configuration property, allow to delete cookies between
+     * When using CLASS or JVM <pre>driverLifecycle</pre> configuration property, allow to delete cookies between
      * each test.
      *
      * Default value is false.

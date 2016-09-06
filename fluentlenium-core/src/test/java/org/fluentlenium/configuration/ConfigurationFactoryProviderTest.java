@@ -63,11 +63,14 @@ public class ConfigurationFactoryProviderTest {
     }
 
     private static class PrivateConfigurationDefaults extends ConfigurationDefaults {
-        private PrivateConfigurationDefaults() {}
+        private PrivateConfigurationDefaults() {
+        }
     }
 
     public static class FailingConfigurationDefaults extends ConfigurationDefaults {
-        private FailingConfigurationDefaults() { throw new IllegalStateException("This must FAIL!");}
+        private FailingConfigurationDefaults() {
+            throw new IllegalStateException("This must FAIL!");
+        }
     }
 
     @FluentConfiguration(configurationDefaults = CustomConfigurationDefaults.class)
@@ -79,7 +82,6 @@ public class ConfigurationFactoryProviderTest {
     public static class PrivateDefaultsContainer {
 
     }
-
 
 
     @Test

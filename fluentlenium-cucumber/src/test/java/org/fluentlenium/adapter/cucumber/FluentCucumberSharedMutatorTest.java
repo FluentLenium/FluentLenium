@@ -5,7 +5,6 @@ import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.configuration.ConfigurationException;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
-import org.fluentlenium.adapter.cucumber.FluentCucumberSharedMutator;
 import org.junit.Before;
 import org.junit.Test;
 

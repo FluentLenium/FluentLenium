@@ -1,8 +1,5 @@
 package org.fluentlenium.core.hook;
 
-import org.fluentlenium.core.hook.wait.WaitHook;
-import org.fluentlenium.core.hook.wait.WaitHookOptions;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;

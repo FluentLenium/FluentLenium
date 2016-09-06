@@ -31,6 +31,6 @@ public class ProxyLazynessTest extends IntegrationFluentTest {
             public void call() throws Throwable {
                 fluentWebElement.now();
             }
-        }).isExactlyInstanceOf(NoSuchElementException.class);;
+        }).isExactlyInstanceOf(NoSuchElementException.class);
     }
 }

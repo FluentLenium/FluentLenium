@@ -4,7 +4,6 @@ package org.fluentlenium.configuration;
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.Test;
 import org.openqa.selenium.HasCapabilities;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -142,7 +141,7 @@ public class ReflectiveWebDriverFactoryTest {
         WebDriver webDriver = webDriverFactory.newWebDriver(null);
         try {
             assertThat(webDriver).isExactlyInstanceOf(HtmlUnitDriver.class);
-            assertThat(((HasCapabilities)webDriver).getCapabilities().isJavascriptEnabled()).isTrue();
+            assertThat(((HasCapabilities) webDriver).getCapabilities().isJavascriptEnabled()).isTrue();
         } finally {
             webDriver.quit();
         }
@@ -163,7 +162,7 @@ public class ReflectiveWebDriverFactoryTest {
         WebDriver webDriver = webDriverFactory.newWebDriver(desiredCapabilities);
         try {
             assertThat(webDriver).isExactlyInstanceOf(HtmlUnitDriver.class);
-            assertThat(((HasCapabilities)webDriver).getCapabilities().isJavascriptEnabled()).isFalse();
+            assertThat(((HasCapabilities) webDriver).getCapabilities().isJavascriptEnabled()).isFalse();
         } finally {
             webDriver.quit();
         }

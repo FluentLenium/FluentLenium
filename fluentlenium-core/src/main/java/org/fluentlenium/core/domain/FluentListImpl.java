@@ -36,11 +36,14 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         this.hookChainBuilder = new DefaultHookChainBuilder(fluentControl, instantiator);
     }
 
+
     /**
      * Creates a FluentList from array of Selenium {@link WebElement}
      *
-     * @param elements array of Selenium elements
-     * @return FluentList of FluentWebElement
+     * @param instantiator     component instantiator
+     * @param hookChainBuilder hook chain builder
+     * @param elements         array of Selenium elements
+     * @return list of elements
      */
     @Deprecated
     public static FluentList<FluentWebElement> fromElements(ComponentInstantiator instantiator, HookChainBuilder hookChainBuilder, WebElement... elements) {
@@ -50,7 +53,9 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     /**
      * Creates a FluentList from an iterable of Selenium {@link WebElement}
      *
-     * @param elements iterable of Selenium elements
+     * @param instantiator     component instantiator
+     * @param hookChainBuilder hook chain builder
+     * @param elements         iterable of Selenium elements
      * @return FluentList of FluentWebElement
      */
     @Deprecated

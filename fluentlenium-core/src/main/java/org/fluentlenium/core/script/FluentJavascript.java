@@ -5,7 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import java.util.List;
 
 /**
- * Map result of executed javascript.
+ * Execute a script and map it's result.
  *
  * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
  */
@@ -21,7 +21,9 @@ public class FluentJavascript {
     }
 
     /**
-     * @return true if the result of javascript execution can be retrieved to String.
+     * Check if the result is a {@link String}.
+     *
+     * @return true if the result of javascript execution can be retrieved as a {@link String}
      * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
      */
     public boolean isStringResult() {
@@ -29,7 +31,9 @@ public class FluentJavascript {
     }
 
     /**
-     * @return true if the result of javascript execution can be retrieved to Boolean.
+     * Check if the result is a {@link Boolean}.
+     *
+     * @return true if the result of javascript execution can be retrieved as a {@link Boolean}
      * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
      */
     public boolean isBooleanResult() {
@@ -37,7 +41,9 @@ public class FluentJavascript {
     }
 
     /**
-     * @return true if the result of javascript execution can be retrieved to Double.
+     * Check if the result is a {@link Double}.
+     *
+     * @return true if the result of javascript execution can be retrieved as a {@link Double}
      * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
      */
     public boolean isDoubleResult() {
@@ -45,7 +51,9 @@ public class FluentJavascript {
     }
 
     /**
-     * @return true if the result of javascript execution can be retrieved to Long.
+     * Check if the result is a {@link Long}.
+     *
+     * @return true if the result of javascript execution can be retrieved as a {@link Long}
      * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
      */
     public boolean isLongResult() {
@@ -53,7 +61,9 @@ public class FluentJavascript {
     }
 
     /**
-     * @return true if the result of javascript execution can be retrieved to List.
+     * Check if the result is a {@link List}.
+     *
+     * @return true if the result of javascript execution can be retrieved as a {@link List}
      * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
      */
     public boolean isListResult() {
@@ -61,7 +71,9 @@ public class FluentJavascript {
     }
 
     /**
-     * @return the result of javascript execution.
+     * Retrieve the result of the script execution.
+     *
+     * @return the result.
      * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
      */
     public Object getResult() {
@@ -69,7 +81,9 @@ public class FluentJavascript {
     }
 
     /**
-     * @return the result of javascript execution cast as Double.
+     * Retrieve the result as a {@link Double}.
+     *
+     * @return the result of script execution cast as a {@link Double}
      * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
      */
     public Double getDoubleResult() {
@@ -77,7 +91,9 @@ public class FluentJavascript {
     }
 
     /**
-     * @return the result of javascript execution cast as Boolean.
+     * Retrieve the result as a {@link Boolean}.
+     *
+     * @return the result of script execution cast as a {@link Boolean}
      * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
      */
     public Boolean getBooleanResult() {
@@ -85,7 +101,9 @@ public class FluentJavascript {
     }
 
     /**
-     * @return the result of javascript execution cast as Long.
+     * Retrieve the result as a {@link Long}.
+     *
+     * @return the result of script execution cast as a {@link Long}
      * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
      */
     public Long getLongResult() {
@@ -93,7 +111,9 @@ public class FluentJavascript {
     }
 
     /**
-     * @return the result of javascript execution cast as String.
+     * Retrieve the result as a {@link String}.
+     *
+     * @return the result of script execution cast as a {@link String}
      * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
      */
     public String getStringResult() {
@@ -101,7 +121,9 @@ public class FluentJavascript {
     }
 
     /**
-     * @return result of javascript execution cast as String.
+     * Retrieve the result as a {@link List}.
+     *
+     * @return result of javascript script cast as a {@link List}
      * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
      */
     public List<?> getListResult() {
@@ -109,8 +131,11 @@ public class FluentJavascript {
     }
 
     /**
-     * @param <T> type of list elements
-     * @return the result of javascript execution cast as List.
+     * Retrieve the result as a typed {@link List}
+     *
+     * @param listType class of list elements
+     * @param <T>      type of list elements
+     * @return the result of javascript execution cast as a a typed {@link List}
      * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
      */
     public <T> List<T> getListResult(Class<T> listType) {

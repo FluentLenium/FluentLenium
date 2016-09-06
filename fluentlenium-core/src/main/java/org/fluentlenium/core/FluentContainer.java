@@ -7,7 +7,7 @@ public interface FluentContainer {
     /**
      * Init this container with a {@link FluentControl} instance.
      *
-     * @param control
+     * @param control control interface of the container
      */
     void initFluent(FluentControl control);
 }

@@ -59,10 +59,11 @@ public class WindowAction {
     /**
      * Sets the current window size
      *
+     * @param size size of the window
      * @return the WindowAction object itself
      */
-    public WindowAction setSize(Dimension var1) {
-        driver.manage().window().setSize(var1);
+    public WindowAction setSize(Dimension size) {
+        driver.manage().window().setSize(size);
         return this;
     }
 
@@ -78,10 +79,11 @@ public class WindowAction {
     /**
      * Sets the current window position
      *
+     * @param position position to set
      * @return the WindowAction object itself
      */
-    public WindowAction setPosition(Point var1) {
-        driver.manage().window().setPosition(var1);
+    public WindowAction setPosition(Point position) {
+        driver.manage().window().setPosition(position);
         return this;
     }
 
