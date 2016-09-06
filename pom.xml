@@ -38,7 +38,6 @@
         <url>https://github.com/FluentLenium/FluentLenium</url>
         <connection>scm:git:https://github.com/FluentLenium/FluentLenium.git</connection>
         <developerConnection>scm:git:https://github.com/FluentLenium/FluentLenium.git</developerConnection>
-        <tag>v0.13.1</tag>
     </scm>
 
     <licenses>
