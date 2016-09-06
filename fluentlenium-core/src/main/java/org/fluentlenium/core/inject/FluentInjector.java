@@ -230,7 +230,7 @@ public class FluentInjector implements FluentInjectControl {
                             }
                         }
                     });
-                }/* else {
+                } /* else {
                     Iterator componentIterator = ((Iterable) fieldValue.getComponent()).iterator();
                     Iterator proxyIterator = (((Iterable) fieldValue.getProxy()).iterator());
                     while (componentIterator.hasNext()) {
@@ -238,7 +238,7 @@ public class FluentInjector implements FluentInjectControl {
                         SearchContext proxy = (SearchContext) proxyIterator.next();
                         injectComponent(component, container, proxy);
                     }
-                }*/
+                } */
             } else {
                 ElementLocatorSearchContext componentSearchContext = new ElementLocatorSearchContext(locator);
                 injectComponent(fieldValue.getComponent(), container, componentSearchContext);

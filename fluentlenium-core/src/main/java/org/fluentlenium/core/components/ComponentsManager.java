@@ -8,8 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -38,28 +36,9 @@ public class ComponentsManager extends AbstractComponentInstantiator implements 
         return instantiator;
     }
 
-    /**
-     * Get the related component from the given element.
-     *
-     * @param element
-     * @return
-     */
+    @Override
     public Object getComponent(WebElement element) {
         return components.get(unwrapElement(element));
-    }
-
-
-    /**
-     * Get all the component related to this webDriver.
-     *
-     * @return
-     */
-    public Collection<ComponentBean> getAllComponents() {
-        List<ComponentBean> allComponents = new ArrayList<>();
-        for (Map.Entry<WebElement, Object> entry : components.entrySet()) {
-            allComponents.add(new ComponentBean(entry.getValue(), entry.getKey()));
-        }
-        return allComponents;
     }
 
     @Override

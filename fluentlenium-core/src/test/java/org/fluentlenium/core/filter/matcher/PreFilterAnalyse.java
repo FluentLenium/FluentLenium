@@ -3,9 +3,6 @@ package org.fluentlenium.core.filter.matcher;
 
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterType;
-import org.fluentlenium.core.filter.matcher.EqualMatcher;
-import org.fluentlenium.core.filter.matcher.Matcher;
-import org.fluentlenium.core.filter.matcher.NotContainsMatcher;
 import org.junit.Test;
 
 import java.util.regex.Pattern;

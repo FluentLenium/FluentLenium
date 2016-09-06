@@ -218,6 +218,11 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     }
 
     @Override
+    public int hashCode() {
+        return locator != null ? locator.hashCode() : 2048;
+    }
+
+    @Override
     public String toString() {
         return "Proxy for " + locator;
     }

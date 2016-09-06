@@ -1,9 +1,5 @@
 package org.fluentlenium.adapter.testng;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.fluentlenium.adapter.FluentTestRunnerAdapter;
 import org.fluentlenium.adapter.ThreadLocalFluentControlContainer;
 import org.testng.ITestContext;
@@ -14,9 +10,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * TestNG FluentLenium Test Adapter.
- *
+ * <p>
  * Extends this class to provide FluentLenium support to your TestNG Test class.
  */
 public abstract class FluentTestNg extends FluentTestRunnerAdapter {

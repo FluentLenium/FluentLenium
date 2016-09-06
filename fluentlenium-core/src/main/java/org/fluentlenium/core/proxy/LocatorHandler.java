@@ -7,45 +7,53 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.List;
 
+/**
+ * Public interface to control handler for proxies of {@link List} of
+ * {@link org.fluentlenium.core.domain.FluentWebElement} and {@link org.fluentlenium.core.domain.FluentWebElement}.
+ *
+ * @param <T> type of the result retrieved by the element locator
+ */
 public interface LocatorHandler<T> {
     /**
-     * Locator used by this proxy, without any hook applied.
+     * Retrieve the element locator used by this proxy, without any hook applied.
      *
-     * @return
+     * @return element locator
      */
     ElementLocator getLocator();
 
     /**
-     * Result retrieved by the locator, without any hook applied.
+     * Get the result retrieved by the element locator, without any hook applied.
      *
-     * @return
+     * @return results of the element locator
      */
     T getLocatorResult();
 
     /**
-     * Locator used by this proxy, with all hooks applied.
+     * Retrieve the element locator used by this proxy, with hooks applied.
      *
-     * @return
+     * @return element locator wrapped with hooks
      */
     ElementLocator getHookLocator();
 
     /**
-     * Element used by this proxy, with all hooks applied.
+     * Retrieve the element matching this proxy, with all hooks applied.
+     *
+     * @return element wrapped with hooks
      */
     WebElement getHookElement();
 
     /**
-     * Set hooks of this locator handler.
+     * Apply this hook list.
      *
-     * @param hookChainBuilder
-     * @param hookDefinitions
+     * @param hookChainBuilder hook chain builder
+     * @param hookDefinitions  hook definitions
      */
     void setHooks(HookChainBuilder hookChainBuilder, List<HookDefinition<?>> hookDefinitions);
 
     /**
      * Check if this handler has loaded it's result.
      *
-     * @return
+     * @return true if the result is loaded, false otherwise
      */
     boolean isLoaded();
 
@@ -55,31 +63,31 @@ public interface LocatorHandler<T> {
     void reset();
 
     /**
-     * Force loading of the results.
+     * If result is not loaded, load result immediatly. If it's already loaded, it has no effect.
      */
     void now();
 
     /**
-     * Is the result present or absent.
+     * Check if the result is present.
      *
-     * @return
+     * @return true if result is present, false otherwise
      */
     boolean isPresent();
 
     /**
-     * Add a proxy element listener.
+     * Add a listener for this locator handler.
      *
-     * @param listener
-     * @return
+     * @param listener listener to add, which will be notified when result is searched and found
+     * @return true if the listener was added, false otherwise
      */
     boolean addListener(ProxyElementListener listener);
 
     /**
      * Removes a proxy element listener.
      *
-     * @param listener
-     * @return
+     * @param listener listener to remove
+     * @return true if the listener was removed, false otherwise
      */
     boolean removeListener(ProxyElementListener listener);
-    
+
 }

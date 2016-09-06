@@ -1,8 +1,8 @@
 package org.fluentlenium.adapter.testng.integration;
 
+import org.fluentlenium.adapter.testng.integration.localtest.LocalFluentCase;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.adapter.testng.integration.localtest.LocalFluentCase;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

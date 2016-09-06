@@ -11,7 +11,6 @@ import org.fluentlenium.core.filter.FilterPredicate;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;

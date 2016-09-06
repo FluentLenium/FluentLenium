@@ -1,6 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.Rectangle;
 
 

@@ -45,6 +45,10 @@ public class MouseElementActions {
     }
 
     /**
+     * Clicks (without releasing) in the middle of the given element. This is equivalent to:
+     * <i>Actions.moveToElement(onElement).clickAndHold()</i>
+     *
+     * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#clickAndHold(WebElement)
      */
     public MouseElementActions clickAndHold() {
@@ -53,6 +57,14 @@ public class MouseElementActions {
     }
 
     /**
+     * Releases the depressed left mouse button, in the middle of the given element.
+     * This is equivalent to:
+     * <i>Actions.moveToElement(onElement).release()</i>
+     * <p>
+     * Invoking this action without invoking {@link #clickAndHold()} first will result in
+     * undefined behaviour.
+     *
+     * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#release(WebElement)
      */
     public MouseElementActions release() {
@@ -61,6 +73,10 @@ public class MouseElementActions {
     }
 
     /**
+     * Clicks in the middle of the given element. Equivalent to:
+     * <i>Actions.moveToElement(onElement).click()</i>
+     *
+     * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#click(WebElement)
      */
     public MouseElementActions click() {
@@ -69,6 +85,10 @@ public class MouseElementActions {
     }
 
     /**
+     * Performs a double-click at middle of the given element. Equivalent to:
+     * <i>Actions.moveToElement(element).doubleClick()</i>
+     *
+     * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#doubleClick(WebElement)
      */
     public MouseElementActions doubleClick() {
@@ -77,6 +97,10 @@ public class MouseElementActions {
     }
 
     /**
+     * Moves the mouse to the middle of the element. The element is scrolled into view and its
+     * location is calculated using getBoundingClientRect.
+     *
+     * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement)
      */
     public MouseElementActions moveToElement() {
@@ -85,6 +109,14 @@ public class MouseElementActions {
     }
 
     /**
+     * Moves the mouse to an offset from the top-left corner of the element.
+     * The element is scrolled into view and its location is calculated using getBoundingClientRect.
+     *
+     * @param xOffset Offset from the top-left corner. A negative value means coordinates left from
+     *                the element
+     * @param yOffset Offset from the top-left corner. A negative value means coordinates above
+     *                the element
+     * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement, int, int)
      */
     public MouseElementActions moveToElement(int xOffset, int yOffset) {
@@ -93,6 +125,10 @@ public class MouseElementActions {
     }
 
     /**
+     * Performs a context-click at middle of the given element. First performs a mouseMove
+     * to the location of the element.
+     *
+     * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#contextClick(WebElement)
      */
     public MouseElementActions contextClick() {
@@ -101,6 +137,11 @@ public class MouseElementActions {
     }
 
     /**
+     * A convenience method that performs click-and-hold at the location of the source element,
+     * moves to the location of this element (target), then releases the mouse.
+     *
+     * @param source element to emulate button down at
+     * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#dragAndDrop(WebElement, WebElement)
      */
     public MouseElementActions dragAndDropFrom(WebElement source) {
@@ -109,6 +150,11 @@ public class MouseElementActions {
     }
 
     /**
+     * A convenience method that performs click-and-hold at the location of this element (source),
+     * moves to the location of the target element, then releases the mouse.
+     *
+     * @param target element to move to and release the mouse at.
+     * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#dragAndDrop(WebElement, WebElement)
      */
     public MouseElementActions dragAndDropTo(WebElement target) {
@@ -117,6 +163,12 @@ public class MouseElementActions {
     }
 
     /**
+     * A convenience method that performs click-and-hold at the location of this element,
+     * moves by a given offset, then releases the mouse.
+     *
+     * @param xOffset horizontal move offset.
+     * @param yOffset vertical move offset.
+     * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#dragAndDropBy(WebElement, int, int)
      */
     public MouseElementActions dragAndDropBy(int xOffset, int yOffset) {

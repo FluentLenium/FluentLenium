@@ -1,10 +1,6 @@
 package org.fluentlenium.adapter;
 
 import com.google.common.base.Supplier;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.junit.After;
 import org.junit.Before;
@@ -14,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class SharedWebDriverContainerTest implements Supplier<WebDriver> {

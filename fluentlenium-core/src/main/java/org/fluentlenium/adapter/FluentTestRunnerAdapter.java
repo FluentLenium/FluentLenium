@@ -131,7 +131,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     /**
      * Invoked when a test class has finished (whatever the success of failing status)
      *
-     * @param testClass
+     * @param testClass test class to terminate
      */
     public static void afterClass(Class<?> testClass) {
         List<SharedWebDriver> sharedWebDrivers = SharedWebDriverContainer.INSTANCE.getTestClassDrivers(testClass);

@@ -12,8 +12,7 @@ public final class UrlUtil {
      * Converts a file String to a valid URL String.<br>
      * Example: <code>index.html</code> converts to <code>file://C:/path/to/file/index.html</code>.
      *
-     * @param file
-     *            the file String
+     * @param file the file String
      * @return the URL String
      */
     public static String getAbsoluteUrlFromFile(final String file) {
@@ -32,8 +31,7 @@ public final class UrlUtil {
     /**
      * Removes file name from URL string
      *
-     * @param file
-     *            the file String
+     * @param file the file String
      * @return the URL String
      */
     public static String getAbsoluteUrlPathFromFile(final String file) {

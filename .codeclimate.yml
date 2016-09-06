@@ -1,0 +1,15 @@
+---
+engines:
+  pmd:
+    enabled: true
+    channel: "beta"
+  checkstyle:
+    enabled: true
+    config: dev-config/checkstyle/fluentlenium_checks.xml
+    channel: "beta"
+
+ratings:
+  paths:
+  - "**.java"
+
+exclude_paths: []

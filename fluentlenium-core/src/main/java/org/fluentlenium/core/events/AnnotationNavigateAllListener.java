@@ -7,8 +7,7 @@ import org.openqa.selenium.WebDriver;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-class AnnotationNavigateAllListener implements NavigateAllListener
-{
+class AnnotationNavigateAllListener implements NavigateAllListener {
     private final Method method;
     private final Object container;
     private final String annotationName;
@@ -49,9 +48,9 @@ class AnnotationNavigateAllListener implements NavigateAllListener
             throw new EventAnnotationsException("An error has occured in " + annotationName + " " + method, e);
         } catch (InvocationTargetException e) {
             if (e.getTargetException() instanceof RuntimeException) {
-                throw (RuntimeException)e.getTargetException();
+                throw (RuntimeException) e.getTargetException();
             } else if (e.getTargetException() instanceof Error) {
-                throw (Error)e.getTargetException();
+                throw (Error) e.getTargetException();
             }
             throw new EventAnnotationsException("An error has occured in " + annotationName + " " + method, e);
         }

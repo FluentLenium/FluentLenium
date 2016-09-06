@@ -147,7 +147,6 @@ public class ProxiesTest {
                 LocatorProxies.createWebElement((WebElement) null);
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
-        ;
 
         final WebElement proxy = LocatorProxies.createWebElement(new ElementLocator() {
             @Override
@@ -167,7 +166,6 @@ public class ProxiesTest {
                 LocatorProxies.now(proxy);
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
-        ;
     }
 
     @Test

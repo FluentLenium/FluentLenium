@@ -5,13 +5,14 @@ import com.google.common.base.Predicate;
 /**
  * Common interface for conditions.
  *
- * @param <T>
+ * @param <T> type of condition
  */
 public interface Conditions<T> {
     /**
      * Check that the given predicate is verified against this condition object.
      *
      * @param predicate predicate to check
+     * @return true if the predicated is checked, false otherwise
      */
     boolean isVerified(Predicate<T> predicate);
 

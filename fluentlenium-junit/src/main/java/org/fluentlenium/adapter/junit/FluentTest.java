@@ -9,7 +9,7 @@ import org.junit.runners.model.Statement;
 
 /**
  * JUnit FluentLenium Test Adapter.
- *
+ * <p>
  * Extends this class to provide FluentLenium support to your JUnit Test class.
  */
 public abstract class FluentTest extends FluentTestRunnerAdapter {

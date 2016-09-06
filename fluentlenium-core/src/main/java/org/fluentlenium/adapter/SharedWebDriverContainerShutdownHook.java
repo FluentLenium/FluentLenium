@@ -1,7 +1,5 @@
 package org.fluentlenium.adapter;
 
-import org.fluentlenium.adapter.SharedWebDriverContainer;
-
 public class SharedWebDriverContainerShutdownHook extends Thread {
 
     public SharedWebDriverContainerShutdownHook(final String s) {

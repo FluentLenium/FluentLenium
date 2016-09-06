@@ -1,7 +1,6 @@
 package org.fluentlenium.assertj.custom;
 
 import org.fluentlenium.assertj.FluentLeniumAssertions;
-import org.fluentlenium.assertj.custom.AlertAssert;
 import org.fluentlenium.core.alert.Alert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +8,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.NoAlertPresentException;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class AlertAssertTest {
 

@@ -1,6 +1,5 @@
 package org.fluentlenium.core.proxy;
 
-import com.google.common.base.Supplier;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;

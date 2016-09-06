@@ -18,7 +18,6 @@ import org.junit.runners.Suite;
         SharedDriverPerClass1.class,
         SharedDriverPerClass2.class,
         SharedDriverPerMethodByAnnotation.class,
-        SharedDriverPerMethodByDefault.class
-})
+        SharedDriverPerMethodByDefault.class})
 public class SharedDriverSuiteTest {
 }

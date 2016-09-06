@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
 
 /**
  * Add this annotation on a method to register it in {@link org.fluentlenium.core.events.EventsRegistry}.
- *
+ * <p>
  * Can be used in test adapter and component.
- *
+ * <p>
  * Parameters from {@link NavigateAllListener} will be injected in the method based on parameters types.
  *
  * @see org.fluentlenium.core.events.EventsRegistry#beforeNavigate(NavigateAllListener)

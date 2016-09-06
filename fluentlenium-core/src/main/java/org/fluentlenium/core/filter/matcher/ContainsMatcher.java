@@ -3,7 +3,6 @@ package org.fluentlenium.core.filter.matcher;
 
 import java.util.regex.Pattern;
 
-//TODO Remove matching pattern from there
 public class ContainsMatcher extends Matcher {
 
     public ContainsMatcher(String value) {

@@ -1,7 +1,7 @@
 package org.fluentlenium.adapter.cucumber.integration.page;
 
-import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.adapter.cucumber.integration.utils.UrlUtil;
+import org.fluentlenium.core.FluentPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

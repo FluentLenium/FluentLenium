@@ -1,7 +1,6 @@
 package org.fluentlenium.adapter;
 
 import org.assertj.core.api.Assertions;
-import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.junit.Test;
 

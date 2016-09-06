@@ -4,7 +4,10 @@ import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.fluentlenium.core.filter.FilterConstructor.*;
+import static org.fluentlenium.core.filter.FilterConstructor.with;
+import static org.fluentlenium.core.filter.FilterConstructor.withClass;
+import static org.fluentlenium.core.filter.FilterConstructor.withId;
+import static org.fluentlenium.core.filter.FilterConstructor.withName;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 
 public class FluentSelectorTest extends IntegrationFluentTest {

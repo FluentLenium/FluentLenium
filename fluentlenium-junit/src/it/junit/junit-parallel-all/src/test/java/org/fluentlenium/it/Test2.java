@@ -3,7 +3,6 @@ package org.fluentlenium.it;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 public class Test2 extends FluentIntegTest {
     @Test

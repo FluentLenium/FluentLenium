@@ -19,7 +19,6 @@ import org.fluentlenium.core.events.annotations.BeforeNavigateForward;
 import org.fluentlenium.core.events.annotations.BeforeNavigateRefresh;
 import org.fluentlenium.core.events.annotations.BeforeNavigateTo;
 import org.fluentlenium.core.events.annotations.BeforeScript;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.lang.reflect.Method;
 

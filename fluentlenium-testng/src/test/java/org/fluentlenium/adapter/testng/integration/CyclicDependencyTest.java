@@ -1,8 +1,8 @@
 package org.fluentlenium.adapter.testng.integration;
 
+import org.fluentlenium.adapter.testng.integration.localtest.LocalFluentCase;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.adapter.testng.integration.localtest.LocalFluentCase;
 import org.testng.annotations.Test;
 
 public class CyclicDependencyTest extends LocalFluentCase {

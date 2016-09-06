@@ -1,6 +1,5 @@
 package org.fluentlenium.core.events.annotations;
 
-import org.fluentlenium.core.events.NavigateListener;
 import org.fluentlenium.core.events.NavigateToListener;
 
 import java.lang.annotation.ElementType;

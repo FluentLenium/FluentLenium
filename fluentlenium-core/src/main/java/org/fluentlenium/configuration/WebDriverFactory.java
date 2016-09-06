@@ -13,7 +13,7 @@ public interface WebDriverFactory {
      * Creates a new instance of {@link WebDriver}.
      *
      * @param desiredCapabilities Desired capabilities for the web driver
-     * @return
+     * @return new instance of web driver
      */
     WebDriver newWebDriver(Capabilities desiredCapabilities);
 
@@ -22,7 +22,7 @@ public interface WebDriverFactory {
      * <p>
      * To register it with alternative name, use {@link AlternativeNames}.
      *
-     * @return Primary name.
+     * @return Primary name
      */
     String getName();
 

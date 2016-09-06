@@ -1,7 +1,6 @@
 package org.fluentlenium.adapter;
 
 import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.FluentControlProvider;
 
 /**

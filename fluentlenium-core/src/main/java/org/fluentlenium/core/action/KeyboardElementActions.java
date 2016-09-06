@@ -46,6 +46,13 @@ public class KeyboardElementActions {
     }
 
     /**
+     * Performs a modifier key press after focusing on an element. Equivalent to:
+     * <i>Actions.click(element).sendKeys(theKey);</i>
+     *
+     * @param theKey Either {@link Keys#SHIFT}, {@link Keys#ALT} or {@link Keys#CONTROL}. If the
+     *               provided key is none of those, {@link IllegalArgumentException} is thrown.
+     * @return this object reference to chain calls
+     * @see #keyDown(org.openqa.selenium.Keys)
      * @see org.openqa.selenium.interactions.Actions#keyDown(WebElement, Keys)
      */
     public KeyboardElementActions keyDown(Keys theKey) {
@@ -54,6 +61,11 @@ public class KeyboardElementActions {
     }
 
     /**
+     * Performs a modifier key release after focusing on an element. Equivalent to:
+     * <i>Actions.click(element).sendKeys(theKey);</i>
+     *
+     * @param theKey Either {@link Keys#SHIFT}, {@link Keys#ALT} or {@link Keys#CONTROL}.
+     * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#keyUp(WebElement, Keys)
      */
     public KeyboardElementActions keyUp(Keys theKey) {
@@ -62,7 +74,17 @@ public class KeyboardElementActions {
     }
 
     /**
-     * @see org.openqa.selenium.interactions.Actions#sendKeys(CharSequence...)
+     * Sends keys to the active element. This differs from calling
+     * {@link WebElement#sendKeys(CharSequence...)} on the active element in two ways:
+     * <ul>
+     * <li>The modifier keys included in this call are not released.</li>
+     * <li>There is no attempt to re-focus the element - so sendKeys(Keys.TAB) for switching
+     * elements should work. </li>
+     * </ul>
+     *
+     * @param keysToSend The keys.
+     * @return this object reference to chain calls
+     * @see org.openqa.selenium.interactions.Actions#sendKeys(WebElement, CharSequence...)
      */
     public KeyboardElementActions sendKeys(CharSequence... keysToSend) {
         actions().sendKeys(element, keysToSend).perform();

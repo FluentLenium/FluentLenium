@@ -40,7 +40,7 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
             }
         }
         return null;
-}
+    }
 
     private boolean isValidProperty(String property) {
         if (Strings.isNullOrEmpty(property) || "null".equalsIgnoreCase(property)) return false;

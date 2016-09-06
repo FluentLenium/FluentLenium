@@ -378,7 +378,7 @@ public class FluentInjectorHookTest {
         LocatorHandler subElement2WrapperHandler = LocatorProxies.getLocatorHandler(container.subContainer.subContainer2.subInjected2.getElement());
         assertThat(subElement2WrapperHandler.getHookElement()).isExactlyInstanceOf(NanoHook2.class);
 
-        NanoHook2 nanoHook2 = ((NanoHook2) subElement2WrapperHandler.getHookElement());
+        NanoHook2 nanoHook2 = (NanoHook2) subElement2WrapperHandler.getHookElement();
 
         assertThat(nanoHook2.getElement()).isExactlyInstanceOf(NanoHook.class);
         assertThat(((NanoHook) nanoHook2.getElement()).getElement()).isSameAs(subElement2);

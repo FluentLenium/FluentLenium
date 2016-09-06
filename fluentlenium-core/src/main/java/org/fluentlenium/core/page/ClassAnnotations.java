@@ -28,7 +28,7 @@ public class ClassAnnotations extends AbstractAnnotations {
      * @return true if @CacheLookup annotation exists on a class
      */
     public boolean isLookupCached() {
-        return (cls.getAnnotation(CacheLookup.class) != null);
+        return cls.getAnnotation(CacheLookup.class) != null;
     }
 
     /**

@@ -5,7 +5,6 @@ package org.fluentlenium.core;
  */
 public interface FluentControlProvider {
     /**
-     *
      * @return FluentDriver for actual test.
      */
     FluentControl getFluentControl();

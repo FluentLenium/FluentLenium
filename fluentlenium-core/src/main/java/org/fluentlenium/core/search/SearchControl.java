@@ -16,7 +16,11 @@ public interface SearchControl<E extends FluentWebElement> {
     FluentList<E> find(String selector, Filter... filters);
 
     /**
-     * @see #find(String, Filter...)
+     * Find list of elements with CSS selector and filters.
+     *
+     * @param selector CSS selector
+     * @param filters  set of filters
+     * @return list of element
      */
     FluentList<E> $(String selector, Filter... filters);
 
@@ -29,7 +33,10 @@ public interface SearchControl<E extends FluentWebElement> {
     FluentList<E> find(Filter... filters);
 
     /**
-     * @see #find(Filter...)
+     * Find list of elements with filters.
+     *
+     * @param filters set of filters in the current context
+     * @return list of elements
      */
     FluentList<E> $(Filter... filters);
 
@@ -43,7 +50,11 @@ public interface SearchControl<E extends FluentWebElement> {
     FluentList<E> find(By locator, final Filter... filters);
 
     /**
-     * @see #find(By, Filter...)
+     * Find list of elements with Selenium locator and filters.
+     *
+     * @param locator elements locator
+     * @param filters filters set
+     * @return list of elements
      */
     FluentList<E> $(By locator, final Filter... filters);
 
@@ -60,8 +71,13 @@ public interface SearchControl<E extends FluentWebElement> {
     E find(String selector, Integer index, Filter... filters);
 
     /**
-     * @see #find(String, Integer, Filter...)
-     * @deprecated use {@link #find(String, Filter...)} followed by {@link FluentList#index(int)} instead.
+     * Find an element with CSS selector, position in the list and filters.
+     *
+     * @param selector CSS selector
+     * @param index    index of the desired element
+     * @param filters  set of filters in the current context
+     * @return element
+     * @deprecated use {@link #$(String, Filter...)} followed by {@link FluentList#index(int)} instead.
      */
     @Deprecated
     E $(String selector, Integer index, Filter... filters);
@@ -83,7 +99,7 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param index   index of element from obtained list
      * @param filters set of filters in the current context
      * @return element
-     * @deprecated use {@link #find(Filter...)} followed by {@link FluentList#index(int)} instead.
+     * @deprecated use {@link #$(Filter...)} followed by {@link FluentList#index(int)} instead.
      */
     @Deprecated
     E $(Integer index, Filter... filters);
@@ -103,9 +119,13 @@ public interface SearchControl<E extends FluentWebElement> {
 
 
     /**
-     * @see #find(By, Integer, Filter...)
+     * Find an element with Selenium locator, position in the list and filters.
      *
-     * @deprecated use {@link #find(By, Filter...)} followed by {@link FluentList#index(int)} instead.
+     * @param locator elements locator
+     * @param index   index of element in the list
+     * @param filters filters set
+     * @return element
+     * @deprecated use {@link #$(By, Filter...)} followed by {@link FluentList#index(int)} instead.
      */
     @Deprecated
     E $(By locator, Integer index, final Filter... filters);
@@ -113,10 +133,10 @@ public interface SearchControl<E extends FluentWebElement> {
     /**
      * Find an element with CSS selector and filters.
      *
-     * @param selector
-     * @param filters
-     * @return
-     *  @deprecated use {@link #find(String, Filter...)} followed by {@link FluentList#first()} instead.
+     * @param selector css selector
+     * @param filters  filters set
+     * @return element
+     * @deprecated use {@link #find(String, Filter...)} followed by {@link FluentList#first()} instead.
      */
     @Deprecated
     E findFirst(String selector, Filter... filters);
@@ -124,9 +144,9 @@ public interface SearchControl<E extends FluentWebElement> {
     /**
      * Find an element with filters.
      *
-     * @param filters
-     * @return
-     * @deprecated use {@link #find( Filter...)} followed by {@link FluentList#first()} instead.
+     * @param filters filters set
+     * @return element
+     * @deprecated use {@link #find(Filter...)} followed by {@link FluentList#first()} instead.
      */
     @Deprecated
     E findFirst(Filter... filters);
@@ -134,9 +154,9 @@ public interface SearchControl<E extends FluentWebElement> {
     /**
      * Find an element with Selenium locator and filter.
      *
-     * @param locator
-     * @param filters
-     * @return
+     * @param locator elements locator
+     * @param filters filters set
+     * @return element
      * @deprecated use {@link #find(By, Filter...)} followed by {@link FluentList#first()} instead.
      */
     @Deprecated

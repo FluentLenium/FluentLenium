@@ -1,7 +1,6 @@
 package org.fluentlenium.core.filter.matcher;
 
 
-import org.fluentlenium.core.filter.matcher.CalculateService;
 import org.junit.Test;
 
 import java.util.regex.Pattern;

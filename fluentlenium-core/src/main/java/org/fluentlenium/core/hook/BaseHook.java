@@ -5,7 +5,6 @@ import lombok.experimental.Delegate;
 import org.fluentlenium.core.DefaultFluentContainer;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 

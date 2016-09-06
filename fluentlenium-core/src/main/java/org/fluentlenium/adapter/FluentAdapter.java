@@ -45,7 +45,7 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
 
     @Delegate(types = FluentControl.class)
     private ContainerFluentControl getFluentControl() {
-        return (ContainerFluentControl)getDriverContainer().getFluentControl();
+        return (ContainerFluentControl) getDriverContainer().getFluentControl();
     }
 
     boolean isFluentDriverAvailable() {
@@ -62,11 +62,10 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
 
     /**
      * Load a {@link WebDriver} into this adapter.
-     *
+     * <p>
      * This method should not be called by end user.
      *
      * @param webDriver webDriver to use.
-     * @return adapter
      * @throws IllegalStateException when trying to register a different webDriver that the current one.
      */
     public void initFluent(WebDriver webDriver) {
@@ -93,24 +92,24 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
 
     /**
      * Release the current {@link WebDriver} from this adapter.
-     *
+     * <p>
      * This method should not be called by end user.
      */
     public void releaseFluent() {
         if (getFluentControl() != null) {
-            ((FluentDriver)getFluentControl().getAdapterControl()).releaseFluent();
+            ((FluentDriver) getFluentControl().getAdapterControl()).releaseFluent();
             setFluentControl(null);
         }
     }
 
     /**
      * Creates a new {@link WebDriver} instance.
-     *
+     * <p>
      * This method should not be called by end user, but may be overriden if required.
-     *
+     * <p>
      * Before overriding this method, you should consider using {@link WebDrivers} registry and configuration
      * {@link ConfigurationProperties#getWebDriver()}.
-     *
+     * <p>
      * To retrieve the current managed {@link WebDriver}, call {@link #getDriver()} instead.
      *
      * @return A new WebDriver instance.

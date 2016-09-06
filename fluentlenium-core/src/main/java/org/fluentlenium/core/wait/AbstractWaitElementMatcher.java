@@ -131,6 +131,8 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
 
     /**
      * Check that one or more element is present
+     *
+     * @return true if one or more element is present, false otherwise
      */
     public boolean isPresent() {
         Predicate<FluentControl> isPresent = new com.google.common.base.Predicate<FluentControl>() {

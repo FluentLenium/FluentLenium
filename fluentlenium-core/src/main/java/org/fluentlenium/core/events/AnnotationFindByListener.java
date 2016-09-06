@@ -50,9 +50,9 @@ class AnnotationFindByListener implements FindByListener {
             throw new EventAnnotationsException("An error has occured in " + annotationName + " " + method, e);
         } catch (InvocationTargetException e) {
             if (e.getTargetException() instanceof RuntimeException) {
-                throw (RuntimeException)e.getTargetException();
+                throw (RuntimeException) e.getTargetException();
             } else if (e.getTargetException() instanceof Error) {
-                throw (Error)e.getTargetException();
+                throw (Error) e.getTargetException();
             }
             throw new EventAnnotationsException("An error has occured in " + annotationName + " " + method, e);
         }
