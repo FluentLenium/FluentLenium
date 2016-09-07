@@ -1110,12 +1110,14 @@ FluentLenium can be configured in many ways through configuration properties.
      
      Default value: ```null```.
      
-   - **configurationDefaults**
+     
+  - **configurationDefaults**
    
     Set this to a class implementing ```ConfigurationProperties``` to provide the default values
     of the configuration properties.
 
     Default value: ```org.fluentlenium.configuration.ConfigurationDefaults```.
+      
       
   - **configurationFactory**
   
