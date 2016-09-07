@@ -6,7 +6,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static org.fluentlenium.adapter.testng.integration.util.UrlUtil.getAbsoluteUrlFromFile;
 
-public abstract class LocalFluentCase extends FluentTestNg {
+public abstract class IntegrationFluentTestNg extends FluentTestNg {
 
     public static final String DEFAULT_URL;
     public static final String PAGE_2_URL;

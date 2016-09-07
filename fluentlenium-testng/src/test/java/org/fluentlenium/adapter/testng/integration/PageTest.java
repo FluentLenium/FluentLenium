@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.testng.integration;
 
-import org.fluentlenium.adapter.testng.integration.localtest.LocalFluentCase;
+import org.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PageTest extends LocalFluentCase {
+public class PageTest extends IntegrationFluentTestNg {
     @Page
     PageAccueil page;
 
@@ -69,7 +69,7 @@ class PageAccueil extends FluentPage {
 
     @Override
     public String getUrl() {
-        return LocalFluentCase.DEFAULT_URL;
+        return IntegrationFluentTestNg.DEFAULT_URL;
     }
 
     @Override
@@ -90,7 +90,7 @@ class Page2 extends FluentPage {
 
     @Override
     public String getUrl() {
-        return LocalFluentCase.DEFAULT_URL + "/page2.html";
+        return IntegrationFluentTestNg.DEFAULT_URL + "/page2.html";
     }
 
     @Override

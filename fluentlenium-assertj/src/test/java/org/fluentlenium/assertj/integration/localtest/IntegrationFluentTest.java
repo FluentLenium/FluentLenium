@@ -1,17 +1,16 @@
 package org.fluentlenium.assertj.integration.localtest;
 
-import org.fluentlenium.adapter.junit.FluentTest;
+import org.fluentlenium.assertj.integration.util.UrlUtil;
+import org.fluentlenium.assertj.integration.util.adapter.FluentTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import static org.fluentlenium.assertj.integration.util.UrlUtil.getAbsoluteUrlFromFile;
-
-public abstract class LocalFluentCase extends FluentTest {
+public abstract class IntegrationFluentTest extends FluentTest {
 
     public static final String DEFAULT_URL;
 
     static {
-        DEFAULT_URL = getAbsoluteUrlFromFile("index.html");
+        DEFAULT_URL = UrlUtil.getAbsoluteUrlFromFile("index.html");
     }
 
     @Override

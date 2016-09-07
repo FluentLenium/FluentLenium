@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.testng.integration.shareddriver;
 
-import org.fluentlenium.adapter.testng.integration.localtest.LocalFluentCase;
+import org.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.configuration.FluentConfiguration;
 import org.openqa.selenium.Cookie;
@@ -10,13 +10,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
 @FluentConfiguration(driverLifecycle = DriverLifecycle.CLASS)
-class SharedDriverSuperClass extends LocalFluentCase {
+class SharedDriverSuperClass extends IntegrationFluentTestNg {
 }
 
 public class SharedDriverSuperClassTest extends SharedDriverSuperClass {
     @Test
     public void firstMethod() {
-        goTo(LocalFluentCase.DEFAULT_URL);
+        goTo(IntegrationFluentTestNg.DEFAULT_URL);
         this.getDriver().manage().addCookie(new Cookie("cookie", "fluent"));
         assertThat($(".small", withName("name"))).hasSize(1);
     }

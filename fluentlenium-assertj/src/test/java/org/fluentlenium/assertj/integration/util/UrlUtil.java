@@ -27,4 +27,15 @@ public final class UrlUtil {
 
         return url.toString();
     }
+
+    /**
+     * Removes file name from URL string
+     *
+     * @param file the file String
+     * @return the URL String
+     */
+    public static String getAbsoluteUrlPathFromFile(final String file) {
+        String url = getAbsoluteUrlFromFile(file);
+        return url.substring(0, url.lastIndexOf("/"));
+    }
 }

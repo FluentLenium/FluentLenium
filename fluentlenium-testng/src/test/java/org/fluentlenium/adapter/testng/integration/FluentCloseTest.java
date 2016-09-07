@@ -1,12 +1,12 @@
 package org.fluentlenium.adapter.testng.integration;
 
-import org.fluentlenium.adapter.testng.integration.localtest.LocalFluentCase;
+import org.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.fail;
 
-public class FluentCloseTest extends LocalFluentCase {
+public class FluentCloseTest extends IntegrationFluentTestNg {
 
     @Test
     public void when_default_shared_driver_then_driver_is_closed_after_method_call() {

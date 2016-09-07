@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.testng.integration.shareddriver;
 
-import org.fluentlenium.adapter.testng.integration.localtest.LocalFluentCase;
+import org.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.configuration.FluentConfiguration;
 import org.testng.annotations.Test;
@@ -10,7 +10,7 @@ import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
 @FluentConfiguration(driverLifecycle = DriverLifecycle.JVM)
 @Test(dependsOnGroups = "DriverOnce1", suiteName = "Once")
-public class DriverOnce2Test extends LocalFluentCase {
+public class DriverOnce2Test extends IntegrationFluentTestNg {
 
     @Test
     public void firstMethod() {

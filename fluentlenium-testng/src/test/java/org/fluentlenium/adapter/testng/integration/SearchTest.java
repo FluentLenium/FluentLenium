@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.testng.integration;
 
-import org.fluentlenium.adapter.testng.integration.localtest.LocalFluentCase;
+import org.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;
@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SearchTest extends LocalFluentCase {
+public class SearchTest extends IntegrationFluentTestNg {
 
     @BeforeMethod
     public void beforeTest() {
