@@ -1,6 +1,15 @@
 package org.fluentlenium.configuration;
 
+import org.fluentlenium.utils.ReflectionUtils;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class DefaultWebDriverFactories {
     public static class FirefoxWebDriverFactory extends ReflectiveWebDriverFactory {
@@ -77,6 +86,45 @@ public class DefaultWebDriverFactories {
         @Override
         public int getPriority() {
             return 8;
+        }
+    }
+
+    public static class RemoteWebDriverFactory extends ReflectiveWebDriverFactory {
+        public RemoteWebDriverFactory() {
+            super("remote", RemoteWebDriver.class);
+        }
+
+        @Override
+        protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration, Object[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+            URL url = null;
+            if (configuration != null) {
+                String remoteUrl = configuration.getRemoteUrl();
+
+
+                if (remoteUrl != null) {
+                    try {
+                        url = new URL(remoteUrl);
+                    } catch (MalformedURLException e) {
+                        throw new ConfigurationException("remoteUrl configuration property is not a valid URL.", e);
+                    }
+                }
+            }
+
+            Object[] urlArgs = new Object[2];
+            urlArgs[0] = url;
+            urlArgs[1] = args.length > 0 ? args[0] : new DesiredCapabilities();
+
+            return newRemoteWebDriver(urlArgs);
+        }
+
+        protected WebDriver newRemoteWebDriver(Object[] args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+            WebDriver webDriver = ReflectionUtils.getConstructor(webDriverClass, URL.class, Capabilities.class).newInstance(args);
+            return new Augmenter().augment(webDriver);
+        }
+
+        @Override
+        public int getPriority() {
+            return 0;
         }
     }
 

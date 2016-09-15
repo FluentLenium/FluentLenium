@@ -13,7 +13,8 @@ public interface WebDriverFactory extends Factory {
      * Creates a new instance of {@link WebDriver}.
      *
      * @param desiredCapabilities Desired capabilities for the web driver
+     * @param configuration       Configuration
      * @return new instance of web driver
      */
-    WebDriver newWebDriver(Capabilities desiredCapabilities);
+    WebDriver newWebDriver(Capabilities desiredCapabilities, ConfigurationProperties configuration);
 }

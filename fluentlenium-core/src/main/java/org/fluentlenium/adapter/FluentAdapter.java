@@ -116,7 +116,7 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
      * @see #getDriver()
      */
     public WebDriver newWebDriver() {
-        WebDriver webDriver = WebDrivers.INSTANCE.newWebDriver(getWebDriver(), getCapabilities());
+        WebDriver webDriver = WebDrivers.INSTANCE.newWebDriver(getWebDriver(), getCapabilities(), this);
         if (Boolean.TRUE.equals(getEventsEnabled())) {
             webDriver = new EventFiringWebDriver(webDriver);
         }

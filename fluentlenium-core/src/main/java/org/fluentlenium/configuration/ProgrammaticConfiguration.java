@@ -15,6 +15,8 @@ public class ProgrammaticConfiguration implements Configuration {
 
     private String webDriverName;
 
+    private String remoteUrl;
+
     private Capabilities capabilities;
 
     private DriverLifecycle driverLifecycle;
@@ -47,6 +49,16 @@ public class ProgrammaticConfiguration implements Configuration {
     @Override
     public void setWebDriver(String webDriverName) {
         this.webDriverName = webDriverName;
+    }
+
+    @Override
+    public String getRemoteUrl() {
+        return remoteUrl;
+    }
+
+    @Override
+    public void setRemoteUrl(String remoteUrl) {
+        this.remoteUrl = remoteUrl;
     }
 
     @Override

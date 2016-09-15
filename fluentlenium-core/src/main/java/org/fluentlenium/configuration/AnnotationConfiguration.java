@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 /**
  * {@link ConfigurationProperties} based on {@link FluentConfiguration} annotation.
@@ -54,7 +55,7 @@ public class AnnotationConfiguration implements ConfigurationProperties {
             InputStream stream = null;
             try {
                 stream = url.openStream();
-                property = IOUtils.toString(stream);
+                property = IOUtils.toString(stream, Charset.defaultCharset());
             } catch (IOException e) {
                 throw new ConfigurationException("Can't read Capabilities defined at " + url);
             } finally {
@@ -100,6 +101,12 @@ public class AnnotationConfiguration implements ConfigurationProperties {
     public String getWebDriver() {
         if (configuration == null) return null;
         return getStringValue(configuration.webDriver());
+    }
+
+    @Override
+    public String getRemoteUrl() {
+        if (configuration == null) return null;
+        return getStringValue(configuration.remoteUrl());
     }
 
     @Override

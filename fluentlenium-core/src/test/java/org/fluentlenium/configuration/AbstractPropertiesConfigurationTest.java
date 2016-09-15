@@ -74,6 +74,14 @@ public abstract class AbstractPropertiesConfigurationTest<T extends AbstractProp
     }
 
     @Test
+    public void remoteUrl() {
+        Assertions.assertThat(getConfiguration().getRemoteUrl()).isNull();
+
+        mockProperty("remoteUrl", "http://localhost:4444");
+        Assertions.assertThat(getConfiguration().getRemoteUrl()).isEqualTo("http://localhost:4444");
+    }
+
+    @Test
     public void capabilities() {
         Assertions.assertThat(getConfiguration().getWebDriver()).isNull();
 

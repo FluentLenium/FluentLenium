@@ -14,11 +14,11 @@ import java.util.Arrays;
  * A simple {@link WebDriverFactory} that create {@link WebDriver} instances using reflection.
  */
 public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveFactory, AlternativeNames {
-    private String name;
-    private Object[] args;
-    private String webDriverClassName;
-    private Class<? extends WebDriver> webDriverClass;
-    private boolean available;
+    protected String name;
+    protected Object[] args;
+    protected String webDriverClassName;
+    protected Class<? extends WebDriver> webDriverClass;
+    protected boolean available;
 
     public ReflectiveWebDriverFactory(String name, String webDriverClassName, Object... args) {
         this.name = name;
@@ -53,7 +53,7 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
     }
 
     @Override
-    public WebDriver newWebDriver(Capabilities capabilities) {
+    public WebDriver newWebDriver(Capabilities capabilities, ConfigurationProperties configuration) {
         if (!available) {
             throw new ConfigurationException("WebDriver " + webDriverClassName + " is not available.");
         }
@@ -69,15 +69,19 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
                 ArrayList<Object> argsList = new ArrayList<>(Arrays.asList(args));
                 argsList.add(0, capabilities);
                 try {
-                    return ReflectionUtils.newInstance(webDriverClass, argsList.toArray());
+                    return newInstance(webDriverClass, configuration, argsList.toArray());
                 } catch (NoSuchMethodException e) {
                     // Ignore capabilities.
                 }
             }
-            return ReflectionUtils.newInstance(webDriverClass, args);
+            return newInstance(webDriverClass, configuration, args);
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             throw new ConfigurationException("Can't create new WebDriver instance", e);
         }
+    }
+
+    protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration, Object[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        return ReflectionUtils.newInstance(webDriverClass, args);
     }
 
     @Override
