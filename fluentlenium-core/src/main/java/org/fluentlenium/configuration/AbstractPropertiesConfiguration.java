@@ -10,6 +10,7 @@ import org.openqa.selenium.remote.JsonToBeanConverter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 /**
  * Abstract properties configuration.
@@ -100,14 +101,17 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
         try {
             URL url = newURL(property);
             try {
-                property = IOUtils.toString(url);
+                property = IOUtils.toString(url, Charset.defaultCharset());
             } catch (IOException e) {
                 throw new ConfigurationException("Can't read Capabilities defined at " + url);
             }
         } catch (MalformedURLException e) {
             // This is not an URL. Consider property as JSON.
         }
-
+        CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
+        if (factory != null) {
+            return factory.newCapabilities();
+        }
         try {
             return jsonConverter.convert(DesiredCapabilities.class, property);
         } catch (JsonException e) {

@@ -1018,8 +1018,14 @@ FluentLenium can be configured in many ways through configuration properties.
 
   - **capabilities**
 
-     Sets the [Capabilities](https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities) to use with the WebDriver, 
-     as a JSON Object string or as an URL pointing to a JSON Object.
+     Sets the [Capabilities](https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities) to use with the WebDriver.
+     
+     Can be:
+       - a `Capabilities` JSON Object string.
+       - an URL pointing to a `Capabilities` JSON Object string.
+       - a static method available in `org.openqa.selenium.remote.DesiredCapabilities`, like `firefox` or `chrome`.
+       - a class name implementing `Capabilities`.
+       - a reference to a `CapabilitiesFactory`.
 
      Default value: ```null```.
      

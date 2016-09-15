@@ -13,7 +13,7 @@ import java.util.Arrays;
 /**
  * A simple {@link WebDriverFactory} that create {@link WebDriver} instances using reflection.
  */
-public class ReflectiveWebDriverFactory implements WebDriverFactory, AlternativeNames {
+public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveFactory, AlternativeNames {
     private String name;
     private Object[] args;
     private String webDriverClassName;

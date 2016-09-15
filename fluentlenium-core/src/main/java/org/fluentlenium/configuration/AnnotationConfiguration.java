@@ -63,6 +63,10 @@ public class AnnotationConfiguration implements ConfigurationProperties {
         } catch (MalformedURLException e) {
             // This is not an URL. Consider property as JSON.
         }
+        CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
+        if (factory != null) {
+            return factory.newCapabilities();
+        }
 
         try {
             return jsonConverter.convert(DesiredCapabilities.class, property);

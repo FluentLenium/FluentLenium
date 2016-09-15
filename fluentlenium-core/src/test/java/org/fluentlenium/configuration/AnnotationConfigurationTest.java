@@ -12,6 +12,9 @@ public class AnnotationConfigurationTest {
     private static AnnotationConfiguration configuration;
     private static AnnotationConfiguration defaultConfiguration;
     private static AnnotationConfiguration noConfiguration;
+    private static AnnotationConfiguration desiredCapabilitiesConfiguration;
+    private static AnnotationConfiguration capabilitiesClassNameConfiguration;
+    private static AnnotationConfiguration capabilitiesFactoryConfiguration;
 
     @FluentConfiguration(baseUrl = "http://localhost:3000", configurationFactory = DummyConfigurationFactory.class,
             configurationDefaults = DummyConfigurationDefaults.class, eventsEnabled = FluentConfiguration.BooleanValue.FALSE,
@@ -19,6 +22,18 @@ public class AnnotationConfigurationTest {
             htmlDumpMode = ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL, htmlDumpPath = "/html-path", implicitlyWait = 1000, pageLoadTimeout = 2000,
             screenshotMode = ConfigurationProperties.TriggerMode.MANUAL, screenshotPath = "/screenshot-path", scriptTimeout = 3000, webDriver = "firefox")
     public static class ConfiguredClass {
+    }
+
+    @FluentConfiguration(capabilities = "firefox")
+    public static class DesiredCapabilitiesClass {
+    }
+
+    @FluentConfiguration(capabilities = "org.fluentlenium.configuration.TestCapabilities")
+    public static class CapabilitiesClassNameClass {
+    }
+
+    @FluentConfiguration(capabilities = "test-capabilities-factory")
+    public static class CapabilitiesFactoryClass {
     }
 
     @FluentConfiguration
@@ -30,6 +45,9 @@ public class AnnotationConfigurationTest {
         configuration = new AnnotationConfiguration(ConfiguredClass.class);
         defaultConfiguration = new AnnotationConfiguration(DefaultClass.class);
         noConfiguration = new AnnotationConfiguration(Object.class);
+        desiredCapabilitiesConfiguration = new AnnotationConfiguration(DesiredCapabilitiesClass.class);
+        capabilitiesClassNameConfiguration = new AnnotationConfiguration(CapabilitiesClassNameClass.class);
+        capabilitiesFactoryConfiguration = new AnnotationConfiguration(CapabilitiesFactoryClass.class);
     }
 
     @Test
@@ -59,6 +77,25 @@ public class AnnotationConfigurationTest {
         capabilities.setJavascriptEnabled(true);
 
         Assertions.assertThat(configuration.getCapabilities()).isEqualTo(capabilities);
+    }
+
+    @Test
+    public void desiredCapabilities() {
+        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        Assertions.assertThat(desiredCapabilitiesConfiguration.getCapabilities()).isEqualTo(capabilities);
+
+        DesiredCapabilities differentCapabilities = DesiredCapabilities.chrome();
+        Assertions.assertThat(desiredCapabilitiesConfiguration.getCapabilities()).isNotEqualTo(differentCapabilities);
+    }
+
+    @Test
+    public void capabilitiesClassName() {
+        Assertions.assertThat(capabilitiesClassNameConfiguration.getCapabilities()).isExactlyInstanceOf(TestCapabilities.class);
+    }
+
+    @Test
+    public void capabilitiesFactory() {
+        Assertions.assertThat(capabilitiesFactoryConfiguration.getCapabilities()).isExactlyInstanceOf(TestCapabilities.class);
     }
 
     @Test
