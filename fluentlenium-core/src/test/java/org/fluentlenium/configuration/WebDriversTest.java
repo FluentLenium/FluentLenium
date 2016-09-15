@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WebDriversTest {
-    private WebDrivers.Impl webDrivers;
+    private WebDriversRegistryImpl webDrivers;
 
     public static class CustomWebDriver extends HtmlUnitDriver {
 
@@ -40,7 +40,7 @@ public class WebDriversTest {
 
     @Before
     public void before() {
-        webDrivers = new WebDrivers.Impl();
+        webDrivers = new WebDriversRegistryImpl();
     }
 
     @Test
@@ -60,7 +60,7 @@ public class WebDriversTest {
 
     @Test
     public void testNoDefault() throws NoSuchFieldException, IllegalAccessException {
-        ReflectionUtils.set(WebDrivers.Impl.class.getDeclaredField("factories"), webDrivers, new LinkedHashMap<>());
+        ReflectionUtils.set(AbstractFactoryRegistryImpl.class.getDeclaredField("factories"), webDrivers, new LinkedHashMap<>());
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override

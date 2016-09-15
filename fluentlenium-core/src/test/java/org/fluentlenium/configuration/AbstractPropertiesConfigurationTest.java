@@ -88,6 +88,37 @@ public abstract class AbstractPropertiesConfigurationTest<T extends AbstractProp
     }
 
     @Test
+    public void desiredCapabilities() {
+        Assertions.assertThat(getConfiguration().getWebDriver()).isNull();
+
+        mockProperty("capabilities", "firefox");
+
+        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilities);
+
+        mockProperty("capabilities", "chrome");
+        Assertions.assertThat(getConfiguration().getCapabilities()).isNotEqualTo(capabilities);
+    }
+
+    @Test
+    public void capabilitiesClassName() {
+        Assertions.assertThat(getConfiguration().getWebDriver()).isNull();
+
+        mockProperty("capabilities", TestCapabilities.class.getName());
+
+        Assertions.assertThat(getConfiguration().getCapabilities()).isExactlyInstanceOf(TestCapabilities.class);
+    }
+
+    @Test
+    public void capabilitiesFactory() {
+        Assertions.assertThat(getConfiguration().getWebDriver()).isNull();
+
+        mockProperty("capabilities", "test-capabilities-factory");
+
+        Assertions.assertThat(getConfiguration().getCapabilities()).isExactlyInstanceOf(TestCapabilities.class);
+    }
+
+    @Test
     public void capabilitiesURL() throws IOException {
         Assertions.assertThat(getConfiguration().getCapabilities()).isNull();
 
