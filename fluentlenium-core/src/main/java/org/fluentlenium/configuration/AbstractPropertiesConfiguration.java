@@ -135,6 +135,11 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
     }
 
     @Override
+    public String getRemoteUrl() {
+        return getStringProperty("remoteUrl");
+    }
+
+    @Override
     public Capabilities getCapabilities() {
         return getCapabilitiesProperty("capabilities");
     }

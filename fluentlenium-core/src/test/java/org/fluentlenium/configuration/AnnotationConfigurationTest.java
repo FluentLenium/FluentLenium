@@ -19,6 +19,7 @@ public class AnnotationConfigurationTest {
     @FluentConfiguration(baseUrl = "http://localhost:3000", configurationFactory = DummyConfigurationFactory.class,
             configurationDefaults = DummyConfigurationDefaults.class, eventsEnabled = FluentConfiguration.BooleanValue.FALSE,
             capabilities = "{javascriptEnabled: true}",
+            remoteUrl = "http://localhost:4444",
             htmlDumpMode = ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL, htmlDumpPath = "/html-path", implicitlyWait = 1000, pageLoadTimeout = 2000,
             screenshotMode = ConfigurationProperties.TriggerMode.MANUAL, screenshotPath = "/screenshot-path", scriptTimeout = 3000, webDriver = "firefox")
     public static class ConfiguredClass {
@@ -66,6 +67,14 @@ public class AnnotationConfigurationTest {
         Assertions.assertThat(defaultConfiguration.getWebDriver()).isNull();
 
         Assertions.assertThat(configuration.getWebDriver()).isEqualTo("firefox");
+    }
+
+    @Test
+    public void remoteUrl() {
+        Assertions.assertThat(noConfiguration.getRemoteUrl()).isNull();
+        Assertions.assertThat(defaultConfiguration.getRemoteUrl()).isNull();
+
+        Assertions.assertThat(configuration.getRemoteUrl()).isEqualTo("http://localhost:4444");
     }
 
     @Test

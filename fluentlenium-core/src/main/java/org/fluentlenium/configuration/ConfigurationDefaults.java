@@ -24,6 +24,11 @@ public class ConfigurationDefaults implements ConfigurationProperties {
     }
 
     @Override
+    public String getRemoteUrl() {
+        return null;
+    }
+
+    @Override
     public Capabilities getCapabilities() {
         return null;
     }

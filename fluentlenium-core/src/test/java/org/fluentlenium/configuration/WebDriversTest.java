@@ -23,7 +23,7 @@ public class WebDriversTest {
 
     public static class AnotherFactory implements WebDriverFactory {
         @Override
-        public WebDriver newWebDriver(Capabilities capabilities) {
+        public WebDriver newWebDriver(Capabilities capabilities, ConfigurationProperties configuration) {
             return new CustomWebDriver();
         }
 
@@ -81,7 +81,7 @@ public class WebDriversTest {
     @Test
     public void testCustomClassName() {
         WebDriverFactory customWebFactory = webDrivers.get(CustomWebDriver.class.getName());
-        WebDriver webDriver = customWebFactory.newWebDriver(null);
+        WebDriver webDriver = customWebFactory.newWebDriver(null, null);
 
         try {
             assertThat(webDriver).isExactlyInstanceOf(CustomWebDriver.class);
@@ -93,7 +93,7 @@ public class WebDriversTest {
 
     @Test
     public void testCustomClassNameNewWebDriver() {
-        WebDriver webDriver = webDrivers.newWebDriver(CustomWebDriver.class.getName(), null);
+        WebDriver webDriver = webDrivers.newWebDriver(CustomWebDriver.class.getName(), null, null);
 
         try {
             assertThat(webDriver).isExactlyInstanceOf(CustomWebDriver.class);

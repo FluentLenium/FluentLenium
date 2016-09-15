@@ -49,6 +49,15 @@ public class ComposedConfiguration implements Configuration {
     }
 
     @Override
+    public String getRemoteUrl() {
+        for (ConfigurationProperties configuration : configurations) {
+            String remoteUrl = configuration.getRemoteUrl();
+            if (remoteUrl != null) return remoteUrl;
+        }
+        return null;
+    }
+
+    @Override
     public Capabilities getCapabilities() {
         for (ConfigurationProperties configuration : configurations) {
             Capabilities capabilities = configuration.getCapabilities();

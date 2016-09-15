@@ -17,6 +17,14 @@ public interface ConfigurationMutator {
     void setWebDriver(String webDriver);
 
     /**
+     * Sets the value of <pre>remoteUrl</pre> property.
+     *
+     * @param remoteUrl property value
+     * @see ConfigurationProperties#getRemoteUrl()
+     */
+    void setRemoteUrl(String remoteUrl);
+
+    /**
      * Sets the value of <pre>capabilities</pre> property.
      *
      * @param capabilities property value

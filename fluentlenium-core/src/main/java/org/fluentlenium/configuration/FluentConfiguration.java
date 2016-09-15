@@ -58,6 +58,14 @@ public @interface FluentConfiguration {
     String webDriver() default "";
 
     /**
+     * <i>remoteUrl</i> property.
+     *
+     * @return remoteUrl
+     * @see ConfigurationProperties#getRemoteUrl()
+     */
+    String remoteUrl() default "";
+
+    /**
      * <i>capabilities</i> property.
      *
      * @return capabilities
