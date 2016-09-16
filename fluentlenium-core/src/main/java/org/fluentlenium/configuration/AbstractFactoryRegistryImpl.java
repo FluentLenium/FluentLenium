@@ -4,6 +4,7 @@ import org.atteo.classindex.ClassIndex;
 
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -45,7 +46,13 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
         Collections.sort(factories, new Comparator<T>() {
             @Override
             public int compare(T o1, T o2) {
-                return -Integer.compare(o1.getPriority(), o2.getPriority());
+                FactoryPriority annotation1 = o1.getClass().getAnnotation(FactoryPriority.class);
+                int p1 = annotation1 == null ? 0 : annotation1.value();
+
+                FactoryPriority annotation2 = o2.getClass().getAnnotation(FactoryPriority.class);
+                int p2 = annotation2 == null ? 0 : annotation2.value();
+
+                return -Integer.compare(p1, p2);
             }
         });
         List<T> filteredFactories = new ArrayList<>();
@@ -97,23 +104,42 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
     /**
      * Register a new factory.
      * <p>
-     * It will also register the factory under names returned by {@link AlternativeNames#getAlternativeNames()} if
-     * it implements {@link AlternativeNames}.
+     * It will use {@link FactoryName} value as the default name.
+     * <p>
+     * It will also register the factory under names returned by {@link FactoryNames#getNames()}} if
+     * it implements {@link FactoryNames}.
      *
      * @param factory factory to register
      */
     public synchronized void register(T factory) {
-        if (factories.containsKey(factory.getName())) {
-            throw new ConfigurationException("A factory is already registered with this name: " +
-                    factory.getName() + " (" + factories.get(factory.getName()) + ")");
-        }
-        factories.put(factory.getName(), factory);
-        if (factory instanceof AlternativeNames) {
-            for (String alternativeName : ((AlternativeNames) factory).getAlternativeNames()) {
-                if (!factories.containsKey(alternativeName)) {
-                    factories.put(alternativeName, factory);
-                }
+        FactoryName annotation = factory.getClass().getAnnotation(FactoryName.class);
+        String annotationName = annotation == null ? null : annotation.value();
 
+        List<String> names = new ArrayList<>();
+        if (annotationName != null) {
+            names.add(annotationName);
+        }
+        if (factory instanceof FactoryNames) {
+            names.addAll(Arrays.asList(((FactoryNames) factory).getNames()));
+        }
+
+        boolean registered = false;
+
+        if (names.size() == 0) {
+            throw new ConfigurationException("Factory " + factory.getClass().getName() + " has no name defined. Use @FactoryName annotation or implement FactoryNames.");
+        }
+
+        for (String name : names) {
+            if (!registered) {
+                if (factories.containsKey(name)) {
+                    throw new ConfigurationException("A factory is already registered with this name: " +
+                            name + " (" + factories.get(name) + ")");
+                }
+                factories.put(name, factory);
+                registered = true;
+            }
+            if (!factories.containsKey(name)) {
+                factories.put(name, factory);
             }
         }
 

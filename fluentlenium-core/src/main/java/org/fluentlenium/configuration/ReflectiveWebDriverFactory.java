@@ -9,11 +9,12 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link WebDriverFactory} that create {@link WebDriver} instances using reflection.
  */
-public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveFactory, AlternativeNames {
+public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveFactory, FactoryNames {
     protected String name;
     protected Object[] args;
     protected String webDriverClassName;
@@ -85,20 +86,12 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
     }
 
     @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String[] getAlternativeNames() {
+    public String[] getNames() {
+        List<String> names = new ArrayList<>(Arrays.asList(name));
         if (webDriverClass != null) {
-            return new String[]{webDriverClass.getName(), webDriverClass.getSimpleName()};
+            names.add(webDriverClass.getName());
+            names.add(webDriverClass.getSimpleName());
         }
-        return new String[0];
-    }
-
-    @Override
-    public int getPriority() {
-        return 0;
+        return names.toArray(new String[names.size()]);
     }
 }

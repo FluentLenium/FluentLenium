@@ -6,11 +6,14 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link CapabilitiesFactory} that create {@link Capabilities} instances using reflection.
  */
-public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, AlternativeNames, ReflectiveFactory {
+public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, FactoryNames, ReflectiveFactory {
     private String name;
     private Object[] args;
     private String capabilitiesClassName;
@@ -62,21 +65,12 @@ public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, Alter
         }
     }
 
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String[] getAlternativeNames() {
+    public String[] getNames() {
+        List<String> names = new ArrayList<>(Arrays.asList(name));
         if (capabilitiesClass != null) {
-            return new String[]{capabilitiesClass.getName(), capabilitiesClass.getSimpleName()};
+            names.add(capabilitiesClass.getName());
+            names.add(capabilitiesClass.getSimpleName());
         }
-        return new String[0];
-    }
-
-    @Override
-    public int getPriority() {
-        return 0;
+        return names.toArray(new String[names.size()]);
     }
 }

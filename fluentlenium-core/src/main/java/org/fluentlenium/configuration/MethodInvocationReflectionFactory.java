@@ -6,7 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 @IndexIgnore
-public class MethodInvocationReflectionFactory implements CapabilitiesFactory, AlternativeNames {
+public class MethodInvocationReflectionFactory implements CapabilitiesFactory, FactoryNames {
     private final Method method;
     private final Object instance;
     private final Object[] args;
@@ -15,16 +15,6 @@ public class MethodInvocationReflectionFactory implements CapabilitiesFactory, A
         this.method = method;
         this.instance = instance;
         this.args = args;
-    }
-
-    @Override
-    public String getName() {
-        return this.method.getDeclaringClass().getName() + "." + this.method.getName();
-    }
-
-    @Override
-    public int getPriority() {
-        return 0;
     }
 
     @Override
@@ -39,8 +29,9 @@ public class MethodInvocationReflectionFactory implements CapabilitiesFactory, A
     }
 
     @Override
-    public String[] getAlternativeNames() {
+    public String[] getNames() {
         return new String[]{
+                this.method.getDeclaringClass().getName() + "." + this.method.getName(),
                 this.method.getDeclaringClass().getSimpleName() + "." + this.method.getName(),
                 this.method.getName()
         };
