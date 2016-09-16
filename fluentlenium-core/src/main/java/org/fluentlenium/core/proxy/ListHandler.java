@@ -1,6 +1,7 @@
 package org.fluentlenium.core.proxy;
 
 import org.fluentlenium.core.domain.WrapsElements;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
@@ -44,6 +45,18 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     @Override
     public boolean isPresent() {
         return super.isPresent() && result.size() > 0;
+    }
+
+    @Override
+    protected boolean isStale() {
+        if (result.size() > 0) {
+            try {
+                result.get(0).isEnabled();
+            } catch (StaleElementReferenceException e) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package org.fluentlenium.core.proxy;
 
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
@@ -32,6 +33,16 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement> impleme
     @Override
     protected List<WebElement> resultToList(WebElement result) {
         return Arrays.asList(result);
+    }
+
+    @Override
+    protected boolean isStale() {
+        try {
+            result.isEnabled();
+            return false;
+        } catch (StaleElementReferenceException e) {
+            return true;
+        }
     }
 
     @Override
