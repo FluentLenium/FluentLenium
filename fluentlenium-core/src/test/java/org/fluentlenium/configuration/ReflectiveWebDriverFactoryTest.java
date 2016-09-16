@@ -135,8 +135,7 @@ public class ReflectiveWebDriverFactoryTest {
         assertThat(webDriverFactory.isAvailable()).isTrue();
         assertThat(webDriverFactory.getWebDriverClass()).isSameAs(HtmlUnitDriver.class);
 
-        assertThat(webDriverFactory.getName()).isEqualTo("htmlunit");
-        assertThat(webDriverFactory.getAlternativeNames()).containsExactly(HtmlUnitDriver.class.getName(), HtmlUnitDriver.class.getSimpleName());
+        assertThat(webDriverFactory.getNames()).containsExactly("htmlunit", HtmlUnitDriver.class.getName(), HtmlUnitDriver.class.getSimpleName());
 
         WebDriver webDriver = webDriverFactory.newWebDriver(null, null);
         try {
@@ -153,8 +152,7 @@ public class ReflectiveWebDriverFactoryTest {
         assertThat(webDriverFactory.isAvailable()).isTrue();
         assertThat(webDriverFactory.getWebDriverClass()).isSameAs(HtmlUnitDriver.class);
 
-        assertThat(webDriverFactory.getName()).isEqualTo("htmlunit");
-        assertThat(webDriverFactory.getAlternativeNames()).containsExactly(HtmlUnitDriver.class.getName(), HtmlUnitDriver.class.getSimpleName());
+        assertThat(webDriverFactory.getNames()).containsExactly("htmlunit", HtmlUnitDriver.class.getName(), HtmlUnitDriver.class.getSimpleName());
 
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setJavascriptEnabled(false);

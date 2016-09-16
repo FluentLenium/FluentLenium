@@ -1211,6 +1211,7 @@ A ```WebDriverFactory``` implementation is responsible for creating new instance
 For instance, to run your tests on [BrowserStack](https://browserstack.com)
 
 ```java
+@FactoryName("browserstack")
 public class BrowserStackWebDriverFactory implements WebDriverFactory {
     @Override
     public WebDriver newWebDriver() {
@@ -1232,11 +1233,6 @@ public class BrowserStackWebDriverFactory implements WebDriverFactory {
         }
     
         return new RemoteWebDriver(hubURL, caps);
-    }
-
-    @Override
-    public String[] getNames() {
-        return new String[0];
     }
 }
 ```

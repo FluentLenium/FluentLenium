@@ -21,20 +21,12 @@ public class WebDriversTest {
 
     }
 
+    @FactoryPriority(2048)
+    @FactoryName("another")
     public static class AnotherFactory implements WebDriverFactory {
         @Override
         public WebDriver newWebDriver(Capabilities capabilities, ConfigurationProperties configuration) {
             return new CustomWebDriver();
-        }
-
-        @Override
-        public String getName() {
-            return "another";
-        }
-
-        @Override
-        public int getPriority() {
-            return 2048;
         }
     }
 
