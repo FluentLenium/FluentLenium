@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
@@ -22,6 +23,9 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
@@ -368,5 +372,32 @@ public class ProxiesTest {
 
         assertThat(LocatorProxies.isLoaded(atIndex)).isFalse();
         assertThat(atIndex).isEqualTo(element2);
+    }
+
+    @Test
+    public void testStateElement() {
+        ElementLocator locator = mock(ElementLocator.class);
+        when(locator.findElement()).thenReturn(element1);
+
+        final WebElement webElement = LocatorProxies.createWebElement(locator);
+
+        assertThat(LocatorProxies.isPresent(webElement)).isTrue();
+        webElement.isEnabled();
+
+        when(element1.isEnabled()).thenThrow(StaleElementReferenceException.class);
+
+        assertThat(LocatorProxies.isPresent(webElement)).isFalse();
+
+        reset(element1);
+        when(element1.isEnabled()).thenThrow(StaleElementReferenceException.class);
+
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                webElement.isEnabled();
+            }
+        }).isExactlyInstanceOf(StaleElementReferenceException.class);
+
+        verify(element1, times(6)).isEnabled();
     }
 }

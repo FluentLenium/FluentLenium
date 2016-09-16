@@ -79,6 +79,11 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     abstract public T getLocatorResultImpl();
 
     public synchronized T getLocatorResult() {
+        if (result != null) {
+            if (isStale()) {
+                result = null;
+            }
+        }
         if (result == null) {
             fireProxyElementSearch();
             result = getLocatorResultImpl();
@@ -86,6 +91,8 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         }
         return result;
     }
+
+    protected abstract boolean isStale();
 
     protected abstract WebElement getElement();
 
@@ -148,7 +155,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         } catch (NoSuchElementException | StaleElementReferenceException e) {
             return false;
         }
-        return result != null;
+        return result != null && !isStale();
     }
 
     @Override
@@ -186,8 +193,6 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
             }
         }
 
-        getLocatorResult();
-
         if (EQUALS.equals(method)) {
             LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
             if (otherLocatorHandler != null && !otherLocatorHandler.isLoaded()) {
@@ -196,6 +201,23 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
             }
         }
 
+        getLocatorResult();
+
+        Throwable lastThrowable = null;
+        for (int i = 0; i < 5; i++) {
+            try {
+                return invoke(method, args);
+            } catch (StaleElementReferenceException e) {
+                lastThrowable = e;
+                reset();
+                getLocatorResult(); // Reload the stale element
+            }
+        }
+
+        throw lastThrowable;
+    }
+
+    private Object invoke(Method method, Object[] args) throws Throwable {
         Object returnValue;
         try {
             returnValue = method.invoke(getInvocationTarget(), args);
