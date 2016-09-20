@@ -75,7 +75,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentWebElement get() {
                 return findFirst(".small", withText("Small 1"));
             }
-        }).hasText("Small 1");
+        }).text().equals("Small 1");
     }
 
     @Test
@@ -136,7 +136,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
                 public FluentWebElement get() {
                     return findFirst(".small", withText("Small 1"));
                 }
-            }).containsText("Small 21");
+            }).text().contains("Small 21");
             fail();
         } catch (TimeoutException e) {
             assertThat(e.getMessage()).contains("toto");
@@ -150,7 +150,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentWebElement get() {
                 return findFirst(".small");
             }
-        }).containsText("Small 1");
+        }).text().contains("Small 1");
     }
 
     @Test
@@ -190,7 +190,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentWebElement get() {
                 return findFirst(".small");
             }
-        }).hasText("Small 1");
+        }).text().equals("Small 1");
     }
 
     @Test
@@ -606,7 +606,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find("#default");
             }
-        }).hasText("wait");
+        }).text().equals("wait");
     }
 
     private static class MyFluentPage extends FluentPage {

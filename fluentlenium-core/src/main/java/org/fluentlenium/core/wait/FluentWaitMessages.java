@@ -127,11 +127,11 @@ final class FluentWaitMessages {
         return selectionName + IS_NOT_SELECTED;
     }
 
-    static final String hasTextMessage(String selectionName, String value) {
+    static final String hasTextMessage(CharSequence selectionName, CharSequence value) {
         return selectionName + HAS_NOT_THE_TEXT + value + POINT;
     }
 
-    static final String hasNotTextMessage(String selectionName, String value) {
+    static final String hasNotTextMessage(CharSequence selectionName, CharSequence value) {
         return selectionName + HAS_THE_TEXT + value + POINT;
     }
 

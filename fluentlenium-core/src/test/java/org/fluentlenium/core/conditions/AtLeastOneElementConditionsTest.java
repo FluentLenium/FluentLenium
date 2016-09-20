@@ -101,16 +101,16 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
     public void hasText() {
         when(webElement3.getText()).thenReturn("Some Text");
 
-        assertThat(conditions.hasText("Some Text")).isTrue();
-        assertThat(conditions.hasText("Other Text")).isFalse();
+        assertThat(conditions.text().contains("Some Text")).isTrue();
+        assertThat(conditions.text().contains("Other Text")).isFalse();
     }
 
     @Test
     public void containsText() {
         when(webElement1.getText()).thenReturn("Some Text");
 
-        assertThat(conditions.containsText("Te")).isTrue();
-        assertThat(conditions.containsText("Other")).isFalse();
+        assertThat(conditions.text().contains("Te")).isTrue();
+        assertThat(conditions.text().contains("Other")).isFalse();
     }
 
     @Test

@@ -1,5 +1,6 @@
 package org.fluentlenium.core.conditions;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
@@ -98,26 +99,6 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean hasText(final String text) {
-        return isVerified(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement input) {
-                return input.conditions().hasText(text);
-            }
-        }, false);
-    }
-
-    @Override
-    public boolean containsText(final String text) {
-        return isVerified(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement input) {
-                return input.conditions().containsText(text);
-            }
-        }, false);
-    }
-
-    @Override
     public boolean hasAttribute(final String attribute, final String value) {
         return isVerified(new Predicate<FluentWebElement>() {
             @Override
@@ -146,6 +127,46 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
                 return input.conditions().hasName(name);
             }
         }, false);
+    }
+
+    @Override
+    public StringConditions text() {
+        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
+            @Override
+            public String apply(FluentWebElement input) {
+                return input.getText();
+            }
+        }, new Function<FluentWebElement, StringConditions>() {
+            @Override
+            public StringConditions apply(FluentWebElement input) {
+                return input.conditions().text();
+            }
+        });
+    }
+
+    @Override
+    public boolean text(String anotherString) {
+        return text().equals(anotherString);
+    }
+
+    @Override
+    public StringConditions textContent() {
+        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
+            @Override
+            public String apply(FluentWebElement input) {
+                return input.getTextContent();
+            }
+        }, new Function<FluentWebElement, StringConditions>() {
+            @Override
+            public StringConditions apply(FluentWebElement input) {
+                return input.conditions().textContent();
+            }
+        });
+    }
+
+    @Override
+    public boolean textContext(String anotherString) {
+        return textContent().equals(anotherString);
     }
 
     @Override

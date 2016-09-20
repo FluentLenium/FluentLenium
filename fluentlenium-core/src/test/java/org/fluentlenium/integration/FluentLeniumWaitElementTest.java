@@ -119,12 +119,12 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitContainsText() {
-        await().atMost(1, NANOSECONDS).until(smallElements).containsText("Small 1");
+        await().atMost(1, NANOSECONDS).until(smallElements).text().contains("Small 1");
     }
 
     @Test
     public void checkAwaitHasText() {
-        await().atMost(1, NANOSECONDS).until(smallElements).hasText("Small 1");
+        await().atMost(1, NANOSECONDS).until(smallElements).text().equals("Small 1");
     }
 
     @Test
@@ -265,7 +265,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @Test(expected = TimeoutException.class)
     public void checkPolling() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1500, TimeUnit.MILLISECONDS).until(defaultElements).hasText("wait");
+        await().pollingEvery(1500, TimeUnit.MILLISECONDS).until(defaultElements).text().equals("wait");
     }
 
     @Test

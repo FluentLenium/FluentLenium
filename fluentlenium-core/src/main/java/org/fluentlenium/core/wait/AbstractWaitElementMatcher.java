@@ -6,6 +6,7 @@ import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.RectangleConditions;
+import org.fluentlenium.core.conditions.StringConditions;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
@@ -16,8 +17,6 @@ import static org.fluentlenium.core.wait.FluentWaitMessages.hasNameMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotAttributeMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotIdMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotNameMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotTextMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasTextMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isClickableMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
@@ -107,28 +106,6 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         return true;
     }
 
-    @Override
-    public boolean containsText(final String value) {
-        Predicate<FluentControl> containsText = new com.google.common.base.Predicate<FluentControl>() {
-            public boolean apply(FluentControl fluent) {
-                return condition().containsText(value);
-            }
-        };
-        until(wait, containsText, negation ? hasNotTextMessage(selectionName, value) : hasTextMessage(selectionName, value));
-        return true;
-    }
-
-    @Override
-    public boolean hasText(final String value) {
-        Predicate<FluentControl> hasText = new com.google.common.base.Predicate<FluentControl>() {
-            public boolean apply(FluentControl fluent) {
-                return condition().hasText(value);
-            }
-        };
-        until(wait, hasText, negation ? hasNotTextMessage(selectionName, value) : hasTextMessage(selectionName, value));
-        return true;
-    }
-
     /**
      * Check that one or more element is present
      *
@@ -202,6 +179,36 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         };
         until(wait, isStale, negation ? isNotStaleMessage(selectionName) : isStaleMessage(selectionName));
         return true;
+    }
+
+    @Override
+    public StringConditions text() {
+        return new FluentWaitStringMatcher(this, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return find().one().text();
+            }
+        });
+    }
+
+    @Override
+    public boolean text(String anotherString) {
+        return text().equals(anotherString);
+    }
+
+    @Override
+    public StringConditions textContent() {
+        return new FluentWaitStringMatcher(this, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return find().one().textContent();
+            }
+        });
+    }
+
+    @Override
+    public boolean textContext(String anotherString) {
+        return textContent().equals(anotherString);
     }
 
     @Override

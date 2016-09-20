@@ -5,28 +5,19 @@ import com.google.common.base.Predicate;
 /**
  * Conditions implementation for Integer.
  */
-public class IntegerConditionsImpl implements IntegerConditions {
-    private final Integer integer;
-    private boolean negation;
-
+public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> implements IntegerConditions {
     public IntegerConditionsImpl(Integer integer) {
-        this.integer = integer;
+        super(integer);
+    }
+
+    @Override
+    protected AbstractObjectConditions<Integer> newInstance() {
+        return new IntegerConditionsImpl(object);
     }
 
     @Override
     public IntegerConditionsImpl not() {
-        IntegerConditionsImpl negatedConditions = new IntegerConditionsImpl(integer);
-        negatedConditions.negation = !negation;
-        return negatedConditions;
-    }
-
-    @Override
-    public boolean isVerified(Predicate<Integer> predicate) {
-        boolean predicateResult = predicate.apply(integer);
-        if (negation) {
-            predicateResult = !predicateResult;
-        }
-        return predicateResult;
+        return (IntegerConditionsImpl) super.not();
     }
 
     @Override

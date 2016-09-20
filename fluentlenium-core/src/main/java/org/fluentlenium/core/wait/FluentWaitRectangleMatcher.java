@@ -12,42 +12,17 @@ import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotPositionAndDim
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotPositionMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasPositionAndDimensionMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasPositionMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateNotVerifiedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateVerifiedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.notEqualToMessage;
 
 
-public class FluentWaitRectangleMatcher implements RectangleConditions {
-    private final AbstractWaitElementMatcher matcher;
-    private final Supplier<RectangleConditions> rectangleConditionsSupplier;
-
+public class FluentWaitRectangleMatcher extends AbstractFluentWaitConditionsMatcher<Rectangle, RectangleConditions> implements RectangleConditions {
     protected FluentWaitRectangleMatcher(AbstractWaitElementMatcher matcher, Supplier<RectangleConditions> rectangleConditionsSupplier) {
-        this.matcher = matcher;
-        this.rectangleConditionsSupplier = rectangleConditionsSupplier;
-    }
-
-    protected RectangleConditions hasRectangle() {
-        RectangleConditions conditions = rectangleConditionsSupplier.get();
-        if (matcher.negation) {
-            conditions = conditions.not();
-        }
-        return conditions;
-    }
-
-    @Override
-    public boolean isVerified(final Predicate<Rectangle> predicate) {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
-            @Override
-            public boolean apply(FluentControl input) {
-                return hasRectangle().isVerified(predicate);
-            }
-        }, matcher.negation ? isPredicateNotVerifiedMessage(matcher.selectionName) : isPredicateVerifiedMessage(matcher.selectionName));
-        return true;
+        super(matcher, rectangleConditionsSupplier);
     }
 
     @Override
     public FluentWaitRectangleMatcher not() {
-        return new FluentWaitRectangleMatcher((AbstractWaitElementMatcher) matcher.not(), rectangleConditionsSupplier);
+        return new FluentWaitRectangleMatcher((AbstractWaitElementMatcher) matcher.not(), conditionsSupplier);
     }
 
     @Override
@@ -55,7 +30,7 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return hasRectangle().withX(x);
+                return conditions().withX(x);
             }
         }, matcher.negation ? notEqualToMessage(matcher.selectionName, x) : equalToMessage(matcher.selectionName, x));
         return true;
@@ -76,7 +51,7 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return hasRectangle().withY(y);
+                return conditions().withY(y);
             }
         }, matcher.negation ? notEqualToMessage(matcher.selectionName, y) : equalToMessage(matcher.selectionName, y));
         return true;
@@ -97,7 +72,7 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return hasRectangle().withPosition(x, y);
+                return conditions().withPosition(x, y);
             }
         }, matcher.negation ? hasNotPositionMessage(matcher.selectionName, x, y) : hasPositionMessage(matcher.selectionName, x, y));
         return true;
@@ -108,7 +83,7 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return hasRectangle().withWidth(width);
+                return conditions().withWidth(width);
             }
         }, matcher.negation ? notEqualToMessage(matcher.selectionName, width) : equalToMessage(matcher.selectionName, width));
         return true;
@@ -129,7 +104,7 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return hasRectangle().withHeight(height);
+                return conditions().withHeight(height);
             }
         }, matcher.negation ? notEqualToMessage(matcher.selectionName, height) : equalToMessage(matcher.selectionName, height));
         return true;
@@ -150,7 +125,7 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return hasRectangle().withDimension(width, height);
+                return conditions().withDimension(width, height);
             }
         }, matcher.negation ? FluentWaitMessages.hasNotDimensionMessage(matcher.selectionName, width, height) : FluentWaitMessages.hasDimensionMessage(matcher.selectionName, width, height));
         return true;
@@ -161,7 +136,7 @@ public class FluentWaitRectangleMatcher implements RectangleConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return hasRectangle().withPositionAndDimension(x, y, width, height);
+                return conditions().withPositionAndDimension(x, y, width, height);
             }
         }, matcher.negation ? hasNotPositionAndDimensionMessage(matcher.selectionName, x, y, width, height) : hasPositionAndDimensionMessage(matcher.selectionName, x, y, width, height));
         return true;

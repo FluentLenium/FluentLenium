@@ -6,6 +6,7 @@ import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.IntegerConditions;
 import org.fluentlenium.core.conditions.RectangleConditions;
+import org.fluentlenium.core.conditions.StringConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasAttributeMessage;
@@ -15,9 +16,7 @@ import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotAttributeMessa
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotIdMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotNameMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotSizeMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotTextMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasSizeMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasTextMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isClickableMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
@@ -131,28 +130,6 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
     }
 
     @Override
-    public boolean hasText(final String text) {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
-            @Override
-            public boolean apply(FluentControl input) {
-                return eachCondition().hasText(text);
-            }
-        }, matcher.negation ? hasNotTextMessage(matcher.selectionName, text) : hasTextMessage(matcher.selectionName, text));
-        return true;
-    }
-
-    @Override
-    public boolean containsText(final String text) {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
-            @Override
-            public boolean apply(FluentControl input) {
-                return eachCondition().containsText(text);
-            }
-        }, matcher.negation ? hasNotTextMessage(matcher.selectionName, text) : hasTextMessage(matcher.selectionName, text));
-        return true;
-    }
-
-    @Override
     public boolean hasAttribute(final String attribute, final String value) {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
@@ -215,6 +192,36 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
                 return matcher.find().each().hasSize();
             }
         });
+    }
+
+    @Override
+    public StringConditions text() {
+        return new FluentWaitStringMatcher(matcher, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return matcher.find().each().text();
+            }
+        });
+    }
+
+    @Override
+    public boolean text(String anotherString) {
+        return text().equals(anotherString);
+    }
+
+    @Override
+    public StringConditions textContent() {
+        return new FluentWaitStringMatcher(matcher, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return matcher.find().each().textContent();
+            }
+        });
+    }
+
+    @Override
+    public boolean textContext(String anotherString) {
+        return textContent().equals(anotherString);
     }
 
     @Override

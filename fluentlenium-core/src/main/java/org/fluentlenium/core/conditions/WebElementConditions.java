@@ -7,28 +7,19 @@ import org.fluentlenium.core.domain.FluentWebElement;
 /**
  * Fluent object to handle {@link org.openqa.selenium.support.ui.ExpectedConditions} on FluentWebElement in fluentlenium API.
  */
-public class WebElementConditions implements FluentConditions {
-    private FluentWebElement element;
-    private boolean negation;
-
+public class WebElementConditions extends AbstractObjectConditions<FluentWebElement> implements FluentConditions {
     public WebElementConditions(FluentWebElement element) {
-        this.element = element;
+        super(element);
+    }
+
+    @Override
+    protected AbstractObjectConditions<FluentWebElement> newInstance() {
+        return new WebElementConditions(object);
     }
 
     @Override
     public WebElementConditions not() {
-        WebElementConditions negatedConditions = new WebElementConditions(element);
-        negatedConditions.negation = !negation;
-        return negatedConditions;
-    }
-
-    @Override
-    public boolean isVerified(Predicate<FluentWebElement> predicate) {
-        boolean predicateResult = predicate.apply(element);
-        if (negation) {
-            predicateResult = !predicateResult;
-        }
-        return predicateResult;
+        return (WebElementConditions) super.not();
     }
 
     @Override
@@ -56,7 +47,7 @@ public class WebElementConditions implements FluentConditions {
         return isVerified(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return element.isDisplayed();
+                return input.isDisplayed();
             }
         });
     }
@@ -66,7 +57,7 @@ public class WebElementConditions implements FluentConditions {
         return isVerified(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return element.isEnabled();
+                return input.isEnabled();
             }
         });
     }
@@ -76,32 +67,7 @@ public class WebElementConditions implements FluentConditions {
         return isVerified(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return element.isSelected();
-            }
-        });
-    }
-
-    @Override
-    public boolean hasText(final String text) {
-        return isVerified(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement input) {
-                String elementText = element.getText();
-                return Objects.equal(elementText, text);
-            }
-        });
-    }
-
-    @Override
-    public boolean containsText(final String text) {
-        return isVerified(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement input) {
-                String elementText = element.getText();
-                if (elementText == null && text != null) {
-                    return false;
-                }
-                return elementText.contains(text);
+                return input.isSelected();
             }
         });
     }
@@ -111,7 +77,7 @@ public class WebElementConditions implements FluentConditions {
         return isVerified(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                String elementValue = element.getAttribute(attribute);
+                String elementValue = input.getAttribute(attribute);
                 return Objects.equal(elementValue, value);
             }
         });
@@ -122,7 +88,7 @@ public class WebElementConditions implements FluentConditions {
         return isVerified(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                String elementId = element.getId();
+                String elementId = input.getId();
                 return Objects.equal(elementId, id);
             }
         });
@@ -134,15 +100,43 @@ public class WebElementConditions implements FluentConditions {
         return isVerified(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                String elementName = element.getName();
+                String elementName = input.getName();
                 return Objects.equal(elementName, name);
             }
         });
     }
 
     @Override
+    public boolean text(String anotherString) {
+        return text().equals(anotherString);
+    }
+
+    @Override
+    public StringConditions text() {
+        StringConditionsImpl conditions = new StringConditionsImpl(object.getText());
+        if (negation) {
+            conditions = conditions.not();
+        }
+        return conditions;
+    }
+
+    @Override
+    public boolean textContext(String anotherString) {
+        return textContent().equals(anotherString);
+    }
+
+    @Override
+    public StringConditions textContent() {
+        StringConditionsImpl conditions = new StringConditionsImpl(object.getTextContent());
+        if (negation) {
+            conditions = conditions.not();
+        }
+        return conditions;
+    }
+
+    @Override
     public RectangleConditions hasRectangle() {
-        RectangleConditionsImpl conditions = new RectangleConditionsImpl(element.getElement().getRect());
+        RectangleConditionsImpl conditions = new RectangleConditionsImpl(object.getElement().getRect());
         if (negation) {
             conditions = conditions.not();
         }

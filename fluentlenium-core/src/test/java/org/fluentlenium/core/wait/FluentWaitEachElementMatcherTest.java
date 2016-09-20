@@ -295,7 +295,7 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.hasText("text");
+                matcher.text().equals("text");
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
@@ -306,7 +306,7 @@ public class FluentWaitEachElementMatcherTest {
         when(fluentWebElement1.getText()).thenReturn("text");
         when(fluentWebElement2.getText()).thenReturn("text");
         when(fluentWebElement3.getText()).thenReturn("text");
-        matcher.hasText("text");
+        matcher.text().equals("text");
 
         verify(fluentWebElement1, atLeastOnce()).getText();
         verify(fluentWebElement2, atLeastOnce()).getText();
@@ -315,7 +315,7 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().hasText("text");
+                matcher.not().text().equals("text");
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
@@ -326,7 +326,7 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.containsText("ex");
+                matcher.text().contains("ex");
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
@@ -337,7 +337,7 @@ public class FluentWaitEachElementMatcherTest {
         when(fluentWebElement1.getText()).thenReturn("text");
         when(fluentWebElement2.getText()).thenReturn("text");
         when(fluentWebElement3.getText()).thenReturn("text");
-        matcher.containsText("ex");
+        matcher.text().contains("ex");
 
         verify(fluentWebElement1, atLeastOnce()).getText();
         verify(fluentWebElement2, atLeastOnce()).getText();
@@ -346,7 +346,7 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().containsText("ex");
+                matcher.not().text().contains("ex");
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }

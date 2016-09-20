@@ -181,18 +181,18 @@ public class FluentWaitElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.hasText("text");
+                matcher.text().equals("text");
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement, atLeastOnce()).getText();
 
         when(fluentWebElement.getText()).thenReturn("text");
-        matcher.hasText("text");
+        matcher.text().equals("text");
 
         verify(fluentWebElement, atLeastOnce()).getText();
 
-        matcher.not().hasText("not");
+        matcher.not().text().equals("not");
     }
 
     @Test
@@ -201,18 +201,18 @@ public class FluentWaitElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.containsText("ex");
+                matcher.text().contains("ex");
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement, atLeastOnce()).getText();
 
         when(fluentWebElement.getText()).thenReturn("text");
-        matcher.containsText("ex");
+        matcher.text().contains("ex");
 
         verify(fluentWebElement, atLeastOnce()).getText();
 
-        matcher.not().containsText("not");
+        matcher.not().text().contains("not");
     }
 
     @Test

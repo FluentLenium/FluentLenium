@@ -50,32 +50,6 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
     boolean isSelected();
 
     /**
-     * Check that this element has the given text.
-     *
-     * @param text text to check
-     * @return true if this element has the given text, false otherwise.
-     */
-    boolean hasText(final String text);
-
-    /**
-     * Check that this element contains the given text.
-     *
-     * @param text text to check
-     * @return true if this element contains the given text, false otherwise.
-     */
-    boolean containsText(final String text);
-
-    /**
-     * Check that the attribute has the given value.
-     *
-     * @param attribute attribute name to check
-     * @param value     attribute value to check
-     * @return true if the given attribute has the given value, false otherwise.
-     */
-    boolean hasAttribute(final String attribute, final String value);
-
-
-    /**
      * Check that this element has the given id.
      *
      * @param id id to check
@@ -90,6 +64,45 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @return true if the element has the given name, false otherwise.
      */
     boolean hasName(String name);
+
+    /**
+     * Check conditions on this element text.
+     *
+     * @return true if the element has the given text, false otherwise.
+     * @see StringConditions#equals(Object)
+     */
+    boolean text(String anotherString);
+
+    /**
+     * Check conditions on this element text.
+     *
+     * @return An object to configure text conditions.
+     */
+    StringConditions text();
+
+    /**
+     * Check conditions on this element text content.
+     *
+     * @return true if the element has the given text content, false otherwise.
+     * @see StringConditions#equals(Object)
+     */
+    boolean textContext(String anotherString);
+
+    /**
+     * Check conditions on this element text content.
+     *
+     * @return An object to configure text content conditions.
+     */
+    StringConditions textContent();
+
+    /**
+     * Check that the attribute has the given value.
+     *
+     * @param attribute attribute name to check
+     * @param value     attribute value to check
+     * @return true if the given attribute has the given value, false otherwise.
+     */
+    boolean hasAttribute(final String attribute, final String value);
 
     /**
      * check conditions on rectangle of this element

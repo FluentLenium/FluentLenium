@@ -8,17 +8,11 @@ import org.openqa.selenium.Rectangle;
 /**
  * Conditions implement for rectangles of list of elements.
  */
-public class RectangleListConditionsImpl implements RectangleConditions {
-    private Conditions<FluentWebElement> listConditions;
-    private final Function<FluentWebElement, Rectangle> rectangleGetter;
-    private final Function<FluentWebElement, RectangleConditions> conditionsGetter;
-
+public class RectangleListConditionsImpl extends AbstractObjectListConditions<Rectangle, RectangleConditions> implements RectangleConditions {
     public RectangleListConditionsImpl(Conditions<FluentWebElement> listConditions,
                                        Function<FluentWebElement, Rectangle> rectangleGetter,
                                        Function<FluentWebElement, RectangleConditions> conditionsGetter) {
-        this.listConditions = listConditions;
-        this.rectangleGetter = rectangleGetter;
-        this.conditionsGetter = conditionsGetter;
+        super(listConditions, rectangleGetter, conditionsGetter);
     }
 
     public RectangleListConditionsImpl(Conditions<FluentWebElement> listConditions) {
@@ -35,25 +29,14 @@ public class RectangleListConditionsImpl implements RectangleConditions {
         });
     }
 
-
-    @Override
-    public boolean isVerified(final Predicate<Rectangle> predicate) {
-        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement input) {
-                return predicate.apply(rectangleGetter.apply(input));
-            }
-        });
-    }
-
     @Override
     public RectangleListConditionsImpl not() {
-        return new RectangleListConditionsImpl(this.listConditions.not(), rectangleGetter, conditionsGetter);
+        return new RectangleListConditionsImpl(this.conditions.not(), objectGetter, conditionsGetter);
     }
 
     @Override
     public boolean withX(final int x) {
-        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.conditions.isVerified(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).withX(x);
@@ -63,7 +46,7 @@ public class RectangleListConditionsImpl implements RectangleConditions {
 
     @Override
     public boolean withY(final int y) {
-        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.conditions.isVerified(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).withY(y);
@@ -73,7 +56,7 @@ public class RectangleListConditionsImpl implements RectangleConditions {
 
     @Override
     public IntegerConditions withX() {
-        return new IntegerListConditionsImpl(this.listConditions, new Function<FluentWebElement, Integer>() {
+        return new IntegerListConditionsImpl(this.conditions, new Function<FluentWebElement, Integer>() {
             @Override
             public Integer apply(FluentWebElement input) {
                 return input.getElement().getRect().getX();
@@ -83,7 +66,7 @@ public class RectangleListConditionsImpl implements RectangleConditions {
 
     @Override
     public IntegerConditions withY() {
-        return new IntegerListConditionsImpl(this.listConditions, new Function<FluentWebElement, Integer>() {
+        return new IntegerListConditionsImpl(this.conditions, new Function<FluentWebElement, Integer>() {
             @Override
             public Integer apply(FluentWebElement input) {
                 return input.getElement().getRect().getY();
@@ -93,7 +76,7 @@ public class RectangleListConditionsImpl implements RectangleConditions {
 
     @Override
     public boolean withPosition(final int x, final int y) {
-        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.conditions.isVerified(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).withPosition(x, y);
@@ -103,7 +86,7 @@ public class RectangleListConditionsImpl implements RectangleConditions {
 
     @Override
     public boolean withWidth(final int width) {
-        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.conditions.isVerified(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).withWidth(width);
@@ -113,7 +96,7 @@ public class RectangleListConditionsImpl implements RectangleConditions {
 
     @Override
     public IntegerConditions withWidth() {
-        return new IntegerListConditionsImpl(this.listConditions, new Function<FluentWebElement, Integer>() {
+        return new IntegerListConditionsImpl(this.conditions, new Function<FluentWebElement, Integer>() {
             @Override
             public Integer apply(FluentWebElement input) {
                 return input.getElement().getRect().getWidth();
@@ -123,7 +106,7 @@ public class RectangleListConditionsImpl implements RectangleConditions {
 
     @Override
     public boolean withHeight(final int height) {
-        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.conditions.isVerified(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).withHeight(height);
@@ -133,7 +116,7 @@ public class RectangleListConditionsImpl implements RectangleConditions {
 
     @Override
     public IntegerConditions withHeight() {
-        return new IntegerListConditionsImpl(this.listConditions, new Function<FluentWebElement, Integer>() {
+        return new IntegerListConditionsImpl(this.conditions, new Function<FluentWebElement, Integer>() {
             @Override
             public Integer apply(FluentWebElement input) {
                 return input.getElement().getRect().getHeight();
@@ -143,7 +126,7 @@ public class RectangleListConditionsImpl implements RectangleConditions {
 
     @Override
     public boolean withDimension(final int width, final int height) {
-        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.conditions.isVerified(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).withDimension(width, height);
@@ -153,7 +136,7 @@ public class RectangleListConditionsImpl implements RectangleConditions {
 
     @Override
     public boolean withPositionAndDimension(final int x, final int y, final int width, final int height) {
-        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.conditions.isVerified(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).withPositionAndDimension(x, y, width, height);

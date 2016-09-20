@@ -73,7 +73,7 @@ public class AwaitMessageTest {
 
     @Test
     public void when_has_text_then_print_principal_message() {
-        builder.hasText("myText");
+        builder.text().contains("myText");
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
         assertThat(message.getValue()).contains("select").contains("text").contains("myText");

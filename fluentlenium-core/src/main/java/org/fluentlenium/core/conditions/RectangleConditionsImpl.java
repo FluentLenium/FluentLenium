@@ -6,28 +6,19 @@ import org.openqa.selenium.Rectangle;
 /**
  * Conditions implementation for rectangle.
  */
-public class RectangleConditionsImpl implements RectangleConditions {
-    private final Rectangle rectangle;
-    private boolean negation = false;
-
+public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle> implements RectangleConditions {
     public RectangleConditionsImpl(Rectangle rectangle) {
-        this.rectangle = rectangle;
+        super(rectangle);
     }
 
     @Override
-    public boolean isVerified(Predicate<Rectangle> predicate) {
-        boolean predicateResult = predicate.apply(rectangle);
-        if (negation) {
-            predicateResult = !predicateResult;
-        }
-        return predicateResult;
+    protected RectangleConditionsImpl newInstance() {
+        return new RectangleConditionsImpl(object);
     }
 
     @Override
     public RectangleConditionsImpl not() {
-        RectangleConditionsImpl negatedConditions = new RectangleConditionsImpl(rectangle);
-        negatedConditions.negation = !negation;
-        return negatedConditions;
+        return (RectangleConditionsImpl) super.not();
     }
 
     @Override
@@ -35,14 +26,14 @@ public class RectangleConditionsImpl implements RectangleConditions {
         return isVerified(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
-                return rectangle.getX() == x;
+                return input.getX() == x;
             }
         });
     }
 
     @Override
     public IntegerConditions withX() {
-        return new IntegerConditionsImpl(rectangle.getX());
+        return new IntegerConditionsImpl(object.getX());
     }
 
     @Override
@@ -50,14 +41,14 @@ public class RectangleConditionsImpl implements RectangleConditions {
         return isVerified(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
-                return rectangle.getY() == y;
+                return input.getY() == y;
             }
         });
     }
 
     @Override
     public IntegerConditions withY() {
-        return new IntegerConditionsImpl(rectangle.getY());
+        return new IntegerConditionsImpl(object.getY());
     }
 
     @Override
@@ -65,7 +56,7 @@ public class RectangleConditionsImpl implements RectangleConditions {
         return isVerified(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
-                return rectangle.getX() == x && rectangle.getY() == y;
+                return input.getX() == x && input.getY() == y;
             }
         });
     }
@@ -75,14 +66,14 @@ public class RectangleConditionsImpl implements RectangleConditions {
         return isVerified(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
-                return rectangle.getWidth() == width;
+                return input.getWidth() == width;
             }
         });
     }
 
     @Override
     public IntegerConditions withWidth() {
-        return new IntegerConditionsImpl(rectangle.getWidth());
+        return new IntegerConditionsImpl(object.getWidth());
     }
 
     @Override
@@ -90,14 +81,14 @@ public class RectangleConditionsImpl implements RectangleConditions {
         return isVerified(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
-                return rectangle.getHeight() == height;
+                return object.getHeight() == height;
             }
         });
     }
 
     @Override
     public IntegerConditions withHeight() {
-        return new IntegerConditionsImpl(rectangle.getHeight());
+        return new IntegerConditionsImpl(object.getHeight());
     }
 
     @Override
@@ -105,7 +96,7 @@ public class RectangleConditionsImpl implements RectangleConditions {
         return isVerified(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
-                return rectangle.getWidth() == width && rectangle.getHeight() == height;
+                return input.getWidth() == width && input.getHeight() == height;
             }
         });
     }
@@ -115,7 +106,7 @@ public class RectangleConditionsImpl implements RectangleConditions {
         return isVerified(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
-                return rectangle.getX() == x && rectangle.getY() == y && rectangle.getWidth() == width && rectangle.getHeight() == height;
+                return input.getX() == x && input.getY() == y && input.getWidth() == width && input.getHeight() == height;
             }
         });
     }

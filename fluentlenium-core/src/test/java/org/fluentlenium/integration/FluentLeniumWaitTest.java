@@ -83,7 +83,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitHasTextWithText() {
-        await().atMost(1, NANOSECONDS).until(".small").withText("Small 1").hasText("Small 1");
+        await().atMost(1, NANOSECONDS).until(".small").withText("Small 1").text().equals("Small 1");
     }
 
     @Test
@@ -108,14 +108,14 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitContainsTextWithText() {
-        await().atMost(1, NANOSECONDS).until(".small").withText("Small 1").containsText("Small 1");
+        await().atMost(1, NANOSECONDS).until(".small").withText("Small 1").text().contains("Small 1");
     }
 
     @Test
     public void checkUseCustomMessage() {
         try {
             await().withMessage("toto").atMost(1, NANOSECONDS).until(".small").withText("Small 1")
-                    .containsText("Small 21");
+                    .text().contains("Small 21");
             fail();
         } catch (TimeoutException e) {
             assertThat(e.getMessage()).contains("toto");
@@ -142,7 +142,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitContainsText() {
-        await().atMost(1, NANOSECONDS).until(".small").containsText("Small 1");
+        await().atMost(1, NANOSECONDS).until(".small").text().contains("Small 1");
     }
 
     @Test
@@ -162,7 +162,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitHasText() {
-        await().atMost(1, NANOSECONDS).until(".small").hasText("Small 1");
+        await().atMost(1, NANOSECONDS).until(".small").text().equals("Small 1");
     }
 
     @Test
@@ -399,7 +399,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test(expected = TimeoutException.class)
     public void checkPolling() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1500, TimeUnit.MILLISECONDS).until("#default").hasText("wait");
+        await().pollingEvery(1500, TimeUnit.MILLISECONDS).until("#default").text().equals("wait");
     }
 
     @Test
