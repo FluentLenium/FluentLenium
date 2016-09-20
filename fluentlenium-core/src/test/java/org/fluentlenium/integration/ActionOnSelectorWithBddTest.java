@@ -11,9 +11,9 @@ public class ActionOnSelectorWithBddTest extends IntegrationFluentTest {
     @Test
     public void checkFillAction() {
         goTo(DEFAULT_URL);
-        assertThat(findFirst("#name").getValue()).contains("John");
+        assertThat(findFirst("#name").value()).contains("John");
         findFirst("#name").fill().with("zzz");
-        assertThat(findFirst("#name").getValue()).isEqualTo("zzz");
+        assertThat(findFirst("#name").value()).isEqualTo("zzz");
     }
 
     @Test
@@ -44,9 +44,9 @@ public class ActionOnSelectorWithBddTest extends IntegrationFluentTest {
     @Test
     public void checkClearAction() {
         goTo(DEFAULT_URL);
-        assertThat(findFirst("#name").getValue()).contains("John");
+        assertThat(findFirst("#name").value()).contains("John");
         findFirst("#name").clear();
-        assertThat($("#name").first().getValue()).isEqualTo("");
+        assertThat($("#name").first().value()).isEqualTo("");
     }
 
     @Test

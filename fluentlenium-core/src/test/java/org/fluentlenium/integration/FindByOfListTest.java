@@ -22,7 +22,7 @@ public class FindByOfListTest extends IntegrationFluentTest {
         page.go();
         page.isAt();
         Assertions.assertThat(page.smalls).hasSize(3);
-        Assertions.assertThat(page.smalls.getTexts()).containsExactly("Small 1", "Small 2", "Small 3");
+        Assertions.assertThat(page.smalls.texts()).containsExactly("Small 1", "Small 2", "Small 3");
     }
 
     @Test
@@ -30,7 +30,7 @@ public class FindByOfListTest extends IntegrationFluentTest {
         page.go();
         page.isAt();
         Assertions.assertThat(page.findAllElements).hasSize(4);
-        Assertions.assertThat(page.findAllElements.getTexts()).containsExactly("Pharmacy", "Small 1", "Small 2", "Small 3");
+        Assertions.assertThat(page.findAllElements.texts()).containsExactly("Pharmacy", "Small 1", "Small 2", "Small 3");
     }
 
     private static class PageIndex extends FluentPage {

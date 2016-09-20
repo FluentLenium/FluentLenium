@@ -14,7 +14,7 @@ public interface Conditions<T> {
      * @param predicate predicate to check
      * @return true if the predicated is checked, false otherwise
      */
-    boolean isVerified(Predicate<T> predicate);
+    boolean verify(Predicate<T> predicate);
 
     /**
      * Negates this condition object.

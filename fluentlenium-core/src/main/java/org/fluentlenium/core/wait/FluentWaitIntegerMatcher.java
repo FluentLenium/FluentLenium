@@ -95,11 +95,11 @@ public class FluentWaitIntegerMatcher implements IntegerConditions {
     }
 
     @Override
-    public boolean isVerified(final Predicate<Integer> predicate) {
+    public boolean verify(final Predicate<Integer> predicate) {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return hasSize().isVerified(predicate);
+                return hasSize().verify(predicate);
             }
         }, matcher.negation ? isPredicateNotVerifiedMessage(matcher.selectionName) : isPredicateVerifiedMessage(matcher.selectionName));
         return true;

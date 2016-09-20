@@ -52,44 +52,44 @@ public class RectangleConditionsTest {
     public void withX() {
         when(rectangle.getX()).thenReturn(1);
 
-        assertThat(conditions.hasRectangle().withX(1)).isTrue();
-        assertThat(conditions.hasRectangle().withX(2)).isFalse();
+        assertThat(conditions.rectangle().withX(1)).isTrue();
+        assertThat(conditions.rectangle().withX(2)).isFalse();
 
-        assertThat(conditions.hasRectangle().withX().equalTo(1)).isTrue();
-        assertThat(conditions.hasRectangle().withX().equalTo(2)).isFalse();
+        assertThat(conditions.rectangle().withX().equalTo(1)).isTrue();
+        assertThat(conditions.rectangle().withX().equalTo(2)).isFalse();
     }
 
     @Test
     public void notWithX() {
         when(rectangle.getX()).thenReturn(1);
 
-        assertThat(conditions.hasRectangle().not().withX(1)).isFalse();
-        assertThat(conditions.hasRectangle().not().withX(2)).isTrue();
+        assertThat(conditions.rectangle().not().withX(1)).isFalse();
+        assertThat(conditions.rectangle().not().withX(2)).isTrue();
 
-        assertThat(conditions.hasRectangle().not().withX().equalTo(1)).isTrue();
-        assertThat(conditions.hasRectangle().not().withX().equalTo(2)).isFalse();
+        assertThat(conditions.rectangle().not().withX().equalTo(1)).isTrue();
+        assertThat(conditions.rectangle().not().withX().equalTo(2)).isFalse();
     }
 
     @Test
     public void notHasRectangleWithX() {
         when(rectangle.getX()).thenReturn(1);
 
-        assertThat(conditions.not().hasRectangle().withX(1)).isFalse();
-        assertThat(conditions.not().hasRectangle().withX(2)).isTrue();
+        assertThat(conditions.not().rectangle().withX(1)).isFalse();
+        assertThat(conditions.not().rectangle().withX(2)).isTrue();
 
-        assertThat(conditions.not().hasRectangle().withX().equalTo(1)).isTrue();
-        assertThat(conditions.not().hasRectangle().withX().equalTo(2)).isFalse();
+        assertThat(conditions.not().rectangle().withX().equalTo(1)).isTrue();
+        assertThat(conditions.not().rectangle().withX().equalTo(2)).isFalse();
     }
 
     @Test
     public void withY() {
         when(rectangle.getY()).thenReturn(1);
 
-        assertThat(conditions.hasRectangle().withY(1)).isTrue();
-        assertThat(conditions.hasRectangle().withY(2)).isFalse();
+        assertThat(conditions.rectangle().withY(1)).isTrue();
+        assertThat(conditions.rectangle().withY(2)).isFalse();
 
-        assertThat(conditions.hasRectangle().withY().equalTo(1)).isTrue();
-        assertThat(conditions.hasRectangle().withY().equalTo(2)).isFalse();
+        assertThat(conditions.rectangle().withY().equalTo(1)).isTrue();
+        assertThat(conditions.rectangle().withY().equalTo(2)).isFalse();
     }
 
     @Test
@@ -98,33 +98,33 @@ public class RectangleConditionsTest {
         when(rectangle.getY()).thenReturn(4);
         when(rectangle.getPoint()).thenReturn(new Point(3, 4));
 
-        assertThat(conditions.hasRectangle().withPosition(3, 4)).isTrue();
-        assertThat(conditions.hasRectangle().withPosition(3, 5)).isFalse();
+        assertThat(conditions.rectangle().withPosition(3, 4)).isTrue();
+        assertThat(conditions.rectangle().withPosition(3, 5)).isFalse();
     }
 
     @Test
     public void withWidth() {
         when(rectangle.getWidth()).thenReturn(1);
 
-        assertThat(conditions.hasRectangle().withWidth(1)).isTrue();
-        assertThat(conditions.hasRectangle().withWidth(2)).isFalse();
+        assertThat(conditions.rectangle().withWidth(1)).isTrue();
+        assertThat(conditions.rectangle().withWidth(2)).isFalse();
 
-        assertThat(conditions.hasRectangle().withWidth().equalTo(1)).isTrue();
-        assertThat(conditions.hasRectangle().withWidth().equalTo(2)).isFalse();
+        assertThat(conditions.rectangle().withWidth().equalTo(1)).isTrue();
+        assertThat(conditions.rectangle().withWidth().equalTo(2)).isFalse();
     }
 
     @Test
     public void withHeight() {
         when(rectangle.getHeight()).thenReturn(1);
 
-        assertThat(conditions.hasRectangle().withHeight(1)).isTrue();
-        assertThat(conditions.hasRectangle().withHeight(2)).isFalse();
+        assertThat(conditions.rectangle().withHeight(1)).isTrue();
+        assertThat(conditions.rectangle().withHeight(2)).isFalse();
 
-        assertThat(conditions.hasRectangle().withHeight(1)).isTrue();
-        assertThat(conditions.hasRectangle().withHeight(2)).isFalse();
+        assertThat(conditions.rectangle().withHeight(1)).isTrue();
+        assertThat(conditions.rectangle().withHeight(2)).isFalse();
 
-        assertThat(conditions.hasRectangle().withHeight().equalTo(1)).isTrue();
-        assertThat(conditions.hasRectangle().withHeight().equalTo(2)).isFalse();
+        assertThat(conditions.rectangle().withHeight().equalTo(1)).isTrue();
+        assertThat(conditions.rectangle().withHeight().equalTo(2)).isFalse();
     }
 
     @Test
@@ -133,8 +133,8 @@ public class RectangleConditionsTest {
         when(rectangle.getHeight()).thenReturn(4);
         when(rectangle.getDimension()).thenReturn(new Dimension(3, 4));
 
-        assertThat(conditions.hasRectangle().withDimension(3, 4)).isTrue();
-        assertThat(conditions.hasRectangle().withDimension(3, 5)).isFalse();
+        assertThat(conditions.rectangle().withDimension(3, 4)).isTrue();
+        assertThat(conditions.rectangle().withDimension(3, 5)).isFalse();
     }
 
     @Test
@@ -147,8 +147,8 @@ public class RectangleConditionsTest {
         when(rectangle.getHeight()).thenReturn(6);
         when(rectangle.getDimension()).thenReturn(new Dimension(5, 6));
 
-        assertThat(conditions.hasRectangle().withPositionAndDimension(3, 4, 5, 6)).isTrue();
-        assertThat(conditions.hasRectangle().withPositionAndDimension(3, 4, 5, 7)).isFalse();
+        assertThat(conditions.rectangle().withPositionAndDimension(3, 4, 5, 6)).isTrue();
+        assertThat(conditions.rectangle().withPositionAndDimension(3, 4, 5, 7)).isFalse();
     }
 
 }

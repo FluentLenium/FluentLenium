@@ -15,39 +15,39 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
     FluentConditions not();
 
     /**
-     * Check that this element is visible and isEnabled such that you can click it.
+     * Check that this element is visible and enabled such that you can click it.
      *
      * @return true if the element can be clicked, false otherwise.
      */
-    boolean isClickable();
+    boolean clickable();
 
     /**
      * Check that this element is no longer attached to the DOM.
      *
      * @return false is the element is still attached to the DOM, true otherwise.
      */
-    boolean isStale();
+    boolean stale();
 
     /**
      * Check that this element is displayed.
      *
      * @return true if element is displayed, false otherwise.
      */
-    boolean isDisplayed();
+    boolean displayed();
 
     /**
      * Check that this element is enabled.
      *
      * @return true if element is enabled, false otherwise.
      */
-    boolean isEnabled();
+    boolean enabled();
 
     /**
      * Check that this element is selected.
      *
      * @return true if element is selected, false otherwise.
      */
-    boolean isSelected();
+    boolean selected();
 
     /**
      * Check conditions on this element id.
@@ -62,7 +62,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @param id id to check
      * @return true if the element has the given id, false otherwise.
      */
-    boolean hasId(String id);
+    boolean id(String id);
 
     /**
      * Check conditions on this element name.
@@ -77,7 +77,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @param name name to check
      * @return true if the element has the given name, false otherwise.
      */
-    boolean hasName(String name);
+    boolean name(String name);
 
     /**
      * Check conditions on this element tagName.
@@ -142,16 +142,24 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
     /**
      * Check that the attribute has the given value.
      *
-     * @param attribute attribute name to check
-     * @param value     attribute value to check
+     * @param name  attribute name to check
+     * @param value attribute value to check
      * @return true if the given attribute has the given value, false otherwise.
      */
-    boolean hasAttribute(final String attribute, final String value);
+    boolean attribute(final String name, final String value);
+
+    /**
+     * Check conditions on the given attribute the attribute has the given value.
+     *
+     * @param name attribute name to check
+     * @return An object to configure text attribute value conditions.
+     */
+    StringConditions attribute(final String name);
 
     /**
      * check conditions on rectangle of this element
      *
      * @return An object to configure advanced position conditions
      */
-    RectangleConditions hasRectangle();
+    RectangleConditions rectangle();
 }

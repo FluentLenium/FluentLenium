@@ -47,58 +47,58 @@ public class WebElementConditionsTest {
 
     @Test
     public void isVerified() {
-        assertThat(conditions.isVerified(Predicates.<FluentWebElement>alwaysTrue())).isTrue();
-        assertThat(conditions.isVerified(Predicates.<FluentWebElement>alwaysFalse())).isFalse();
+        assertThat(conditions.verify(Predicates.<FluentWebElement>alwaysTrue())).isTrue();
+        assertThat(conditions.verify(Predicates.<FluentWebElement>alwaysFalse())).isFalse();
 
-        assertThat(conditions.not().isVerified(Predicates.<FluentWebElement>alwaysTrue())).isFalse();
-        assertThat(conditions.not().isVerified(Predicates.<FluentWebElement>alwaysFalse())).isTrue();
+        assertThat(conditions.not().verify(Predicates.<FluentWebElement>alwaysTrue())).isFalse();
+        assertThat(conditions.not().verify(Predicates.<FluentWebElement>alwaysFalse())).isTrue();
     }
 
     @Test
     public void isClickable() {
-        assertThat(conditions.isClickable()).isFalse();
+        assertThat(conditions.clickable()).isFalse();
 
         when(webElement.isEnabled()).thenReturn(true);
         when(webElement.isDisplayed()).thenReturn(true);
 
-        assertThat(conditions.isClickable()).isTrue();
+        assertThat(conditions.clickable()).isTrue();
     }
 
     @Test
     public void isStale() {
-        assertThat(conditions.isStale()).isFalse();
+        assertThat(conditions.stale()).isFalse();
 
-        // Selenium invokes isEnabled to check staleness.
+        // Selenium invokes enabled to check staleness.
         when(webElement.isEnabled()).thenThrow(StaleElementReferenceException.class);
 
-        assertThat(conditions.isStale()).isTrue();
+        assertThat(conditions.stale()).isTrue();
     }
 
     @Test
     public void isEnabled() {
-        assertThat(conditions.isEnabled()).isFalse();
+        assertThat(conditions.enabled()).isFalse();
 
         when(webElement.isEnabled()).thenReturn(true);
 
-        assertThat(conditions.isEnabled()).isTrue();
+        assertThat(conditions.enabled()).isTrue();
     }
 
     @Test
     public void isDisplayed() {
-        assertThat(conditions.isDisplayed()).isFalse();
+        assertThat(conditions.displayed()).isFalse();
 
         when(webElement.isDisplayed()).thenReturn(true);
 
-        assertThat(conditions.isDisplayed()).isTrue();
+        assertThat(conditions.displayed()).isTrue();
     }
 
     @Test
     public void isSelected() {
-        assertThat(conditions.isSelected()).isFalse();
+        assertThat(conditions.selected()).isFalse();
 
         when(webElement.isSelected()).thenReturn(true);
 
-        assertThat(conditions.isSelected()).isTrue();
+        assertThat(conditions.selected()).isTrue();
     }
 
     @Test
@@ -119,29 +119,29 @@ public class WebElementConditionsTest {
 
     @Test
     public void hasAttribute() {
-        assertThat(conditions.hasAttribute("attr", "value")).isFalse();
+        assertThat(conditions.attribute("attr", "value")).isFalse();
 
         when(webElement.getAttribute("attr")).thenReturn("value");
 
-        assertThat(conditions.hasAttribute("attr", "value")).isTrue();
+        assertThat(conditions.attribute("attr", "value")).isTrue();
     }
 
     @Test
     public void hasId() {
-        assertThat(conditions.hasId("value")).isFalse();
+        assertThat(conditions.id("value")).isFalse();
 
         when(webElement.getAttribute("id")).thenReturn("value");
 
-        assertThat(conditions.hasId("value")).isTrue();
+        assertThat(conditions.id("value")).isTrue();
     }
 
     @Test
     public void hasName() {
-        assertThat(conditions.hasName("value")).isFalse();
+        assertThat(conditions.name("value")).isFalse();
 
         when(webElement.getAttribute("name")).thenReturn("value");
 
-        assertThat(conditions.hasName("value")).isTrue();
+        assertThat(conditions.name("value")).isTrue();
     }
 
 }

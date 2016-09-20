@@ -62,9 +62,9 @@ public class FluentWaitIntegerMatcherTest {
     public void testInteger() {
         when(element.getRect()).thenReturn(new Rectangle(1, 2, 100, 200));
 
-        final RectangleConditions rectangleConditions = new FluentWaitElementMatcher(search, wait, fluentWebElement).hasRectangle();
+        final RectangleConditions rectangleConditions = new FluentWaitElementMatcher(search, wait, fluentWebElement).rectangle();
 
-        rectangleConditions.isVerified(new Predicate<Rectangle>() {
+        rectangleConditions.verify(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
                 return true;
@@ -86,21 +86,21 @@ public class FluentWaitIntegerMatcherTest {
         rectangleConditions.withX().lessThan(2);
         rectangleConditions.withX().not().lessThan(1);
 
-        rectangleConditions.withX().isVerified(new Predicate<Integer>() {
+        rectangleConditions.withX().verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
                 return input == 1;
             }
         });
 
-        rectangleConditions.withX().not().isVerified(new Predicate<Integer>() {
+        rectangleConditions.withX().not().verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
                 return input != 1;
             }
         });
 
-        rectangleConditions.not().withX().not().isVerified(new Predicate<Integer>() {
+        rectangleConditions.not().withX().not().verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
                 return input == 1;

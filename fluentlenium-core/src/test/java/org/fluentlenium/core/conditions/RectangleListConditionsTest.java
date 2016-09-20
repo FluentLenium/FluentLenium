@@ -62,20 +62,20 @@ public class RectangleListConditionsTest {
     public void fromEachElementConditions() {
         EachElementConditions conditions = new EachElementConditions(Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
-        final RectangleConditions rectConditions = conditions.hasRectangle();
+        final RectangleConditions rectConditions = conditions.rectangle();
 
         when(webElement1.getRect()).thenReturn(new Rectangle(1, 2, 3, 4));
         when(webElement2.getRect()).thenReturn(new Rectangle(1, 2, 3, 4));
         when(webElement3.getRect()).thenReturn(new Rectangle(1, 2, 3, 4));
 
-        assertThat(rectConditions.isVerified(new Predicate<Rectangle>() {
+        assertThat(rectConditions.verify(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
                 return input.equals(new Rectangle(1, 2, 3, 4));
             }
         })).isTrue();
 
-        assertThat(rectConditions.not().isVerified(new Predicate<Rectangle>() {
+        assertThat(rectConditions.not().verify(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
                 return input.equals(new Rectangle(1, 2, 3, 4));
@@ -166,20 +166,20 @@ public class RectangleListConditionsTest {
     public void fromAtLeastOneElementConditions() {
         AtLeastOneElementConditions conditions = new AtLeastOneElementConditions(Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
-        RectangleConditions rectConditions = conditions.hasRectangle();
+        RectangleConditions rectConditions = conditions.rectangle();
 
         when(webElement1.getRect()).thenReturn(new Rectangle(1, 2, 3, 4));
         when(webElement2.getRect()).thenReturn(new Rectangle(1, 2, 3, 4));
         when(webElement3.getRect()).thenReturn(new Rectangle(10, 20, 30, 40));
 
-        assertThat(rectConditions.isVerified(new Predicate<Rectangle>() {
+        assertThat(rectConditions.verify(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
                 return input.equals(new Rectangle(1, 2, 3, 4));
             }
         })).isTrue();
 
-        assertThat(rectConditions.not().isVerified(new Predicate<Rectangle>() {
+        assertThat(rectConditions.not().verify(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
                 return input.equals(new Rectangle(1, 2, 3, 4));

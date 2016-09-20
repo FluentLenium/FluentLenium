@@ -34,7 +34,7 @@ public class AwaitMessageTest {
 
     @Test
     public void when_is_present_and_no_filter_then_print_only_principal_message() {
-        builder.isPresent();
+        builder.present();
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
         assertThat(message.getValue()).contains("select");
@@ -44,7 +44,7 @@ public class AwaitMessageTest {
     public void when_is_present_filter_then_print_principal_message_and_filters() {
         builder.withId("myId");
         builder.with("custom").equalTo("myCustom");
-        builder.isPresent();
+        builder.present();
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
         assertThat(message.getValue()).contains("[id=\"myId\"]").contains("[custom=\"myCustom\"]");
@@ -60,7 +60,7 @@ public class AwaitMessageTest {
 
     @Test
     public void when_has_attribute_then_print_principal_message() {
-        builder.hasAttribute("attr", "val");
+        builder.attribute("attr", "val");
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
         assertThat(message.getValue()).contains("select").contains("attr").contains("val");
@@ -68,7 +68,7 @@ public class AwaitMessageTest {
 
     @Test
     public void when_has_id_then_print_principal_message() {
-        builder.hasId("myId");
+        builder.id("myId");
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
         assertThat(message.getValue()).contains("select").contains("id").contains("myId");
@@ -84,7 +84,7 @@ public class AwaitMessageTest {
 
     @Test
     public void when_has_name_then_print_principal_message() {
-        builder.hasName("myName");
+        builder.name("myName");
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
         assertThat(message.getValue()).contains("select").contains("name").contains("myName");

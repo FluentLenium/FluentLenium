@@ -22,7 +22,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
 
     @Override
     public boolean contains(final CharSequence s) {
-        return isVerified(new Predicate<String>() {
+        return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
                 if (input == null) return false;
@@ -33,7 +33,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
 
     @Override
     public boolean startsWith(final String prefix) {
-        return isVerified(new Predicate<String>() {
+        return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
                 if (input == null) return false;
@@ -44,7 +44,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
 
     @Override
     public boolean endsWith(final String suffix) {
-        return isVerified(new Predicate<String>() {
+        return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
                 if (input == null) return false;
@@ -55,7 +55,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
 
     @Override
     public boolean equals(final String anotherString) {
-        return isVerified(new Predicate<String>() {
+        return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
                 if (input == null) return false;
@@ -66,7 +66,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
 
     @Override
     public boolean equalsIgnoreCase(final String anotherString) {
-        return isVerified(new Predicate<String>() {
+        return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
                 if (input == null) return false;
@@ -77,7 +77,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
 
     @Override
     public boolean matches(final String regex) {
-        return isVerified(new Predicate<String>() {
+        return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
                 if (input == null) return false;
@@ -88,7 +88,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
 
     @Override
     public boolean matches(final Pattern pattern) {
-        return isVerified(new Predicate<String>() {
+        return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
                 if (input == null) return false;

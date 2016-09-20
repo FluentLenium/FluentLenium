@@ -9,9 +9,7 @@ import org.fluentlenium.core.conditions.RectangleConditions;
 import org.fluentlenium.core.conditions.StringConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
 
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasAttributeMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNameMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotAttributeMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotNameMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotSizeMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasSizeMessage;
@@ -62,84 +60,88 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
     }
 
     @Override
-    public boolean isVerified(final Predicate<FluentWebElement> predicate) {
+    public boolean verify(final Predicate<FluentWebElement> predicate) {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().isVerified(predicate);
+                return eachCondition().verify(predicate);
             }
         }, matcher.negation ? isPredicateNotVerifiedMessage(matcher.selectionName) : isPredicateVerifiedMessage(matcher.selectionName));
         return true;
     }
 
     @Override
-    public boolean isClickable() {
+    public boolean clickable() {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().isClickable();
+                return eachCondition().clickable();
             }
         }, matcher.negation ? isNotClickableMessage(matcher.selectionName) : isClickableMessage(matcher.selectionName));
         return true;
     }
 
     @Override
-    public boolean isStale() {
+    public boolean stale() {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().isStale();
+                return eachCondition().stale();
             }
         }, matcher.negation ? isNotStaleMessage(matcher.selectionName) : isStaleMessage(matcher.selectionName));
         return true;
     }
 
     @Override
-    public boolean isDisplayed() {
+    public boolean displayed() {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().isDisplayed();
+                return eachCondition().displayed();
             }
         }, matcher.negation ? isNotDisplayedMessage(matcher.selectionName) : isDisplayedMessage(matcher.selectionName));
         return true;
     }
 
     @Override
-    public boolean isEnabled() {
+    public boolean enabled() {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().isEnabled();
+                return eachCondition().enabled();
             }
         }, matcher.negation ? isNotEnabledMessage(matcher.selectionName) : isEnabledMessage(matcher.selectionName));
         return true;
     }
 
     @Override
-    public boolean isSelected() {
+    public boolean selected() {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().isSelected();
+                return eachCondition().selected();
             }
         }, matcher.negation ? isNotSelectedMessage(matcher.selectionName) : isSelectedMessage(matcher.selectionName));
         return true;
     }
 
     @Override
-    public boolean hasAttribute(final String attribute, final String value) {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
-            @Override
-            public boolean apply(FluentControl input) {
-                return eachCondition().hasAttribute(attribute, value);
-            }
-        }, matcher.negation ? hasNotAttributeMessage(matcher.selectionName, attribute, value) : hasAttributeMessage(matcher.selectionName, attribute, value));
-        return true;
+    public boolean attribute(final String attribute, final String value) {
+        return attribute(attribute).equals(value);
     }
 
     @Override
-    public boolean hasId(final String id) {
+    public StringConditions attribute(final String name) {
+        return new FluentWaitStringMatcher(matcher, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return matcher.find().each().attribute(name);
+            }
+        });
+    }
+
+    @Override
+    public boolean id(final String id) {
         return id().equals(id);
     }
 
@@ -154,11 +156,11 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
     }
 
     @Override
-    public boolean hasName(final String name) {
+    public boolean name(final String name) {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().hasName(name);
+                return eachCondition().name(name);
             }
         }, matcher.negation ? hasNotNameMessage(matcher.selectionName, name) : hasNameMessage(matcher.selectionName, name));
         return true;
@@ -267,11 +269,11 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
     }
 
     @Override
-    public RectangleConditions hasRectangle() {
+    public RectangleConditions rectangle() {
         return new FluentWaitRectangleMatcher(matcher, new Supplier<RectangleConditions>() {
             @Override
             public RectangleConditions get() {
-                return matcher.find().each().hasRectangle();
+                return matcher.find().each().rectangle();
             }
         });
     }

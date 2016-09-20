@@ -25,11 +25,11 @@ public abstract class AbstractFluentWaitConditionsMatcher<T, C extends Condition
         return conditions;
     }
 
-    public boolean isVerified(final Predicate<T> predicate) {
+    public boolean verify(final Predicate<T> predicate) {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return conditions().isVerified(predicate);
+                return conditions().verify(predicate);
             }
         }, matcher.negation ? isPredicateNotVerifiedMessage(matcher.selectionName) : isPredicateVerifiedMessage(matcher.selectionName));
         return true;

@@ -18,7 +18,7 @@ public class FluentWebElementSubclassInTest extends IntegrationFluentTest {
         }
 
         public void clickIfDisplayed() {
-            if (isDisplayed()) {
+            if (displayed()) {
                 click();
             }
         }

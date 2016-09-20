@@ -100,7 +100,7 @@ public class FluentWaitEachElementMatcherTest {
         final Predicate<FluentWebElement> predicate = new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.isEnabled();
+                return input.enabled();
             }
         };
 
@@ -108,27 +108,27 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.isVerified(predicate);
+                matcher.verify(predicate);
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement1, atLeastOnce()).isEnabled();
-        verify(fluentWebElement2, never()).isEnabled();
-        verify(fluentWebElement3, never()).isEnabled();
+        verify(fluentWebElement1, atLeastOnce()).enabled();
+        verify(fluentWebElement2, never()).enabled();
+        verify(fluentWebElement3, never()).enabled();
 
         reset(fluentWebElement1, fluentWebElement2, fluentWebElement3);
 
-        when(fluentWebElement1.isEnabled()).thenReturn(true);
+        when(fluentWebElement1.enabled()).thenReturn(true);
         when(fluentWebElement1.now()).thenReturn(fluentWebElement1);
-        when(fluentWebElement2.isEnabled()).thenReturn(true);
+        when(fluentWebElement2.enabled()).thenReturn(true);
         when(fluentWebElement2.now()).thenReturn(fluentWebElement2);
-        when(fluentWebElement3.isEnabled()).thenReturn(true);
+        when(fluentWebElement3.enabled()).thenReturn(true);
         when(fluentWebElement3.now()).thenReturn(fluentWebElement3);
-        matcher.isVerified(predicate);
+        matcher.verify(predicate);
 
-        verify(fluentWebElement1, atLeastOnce()).isEnabled();
-        verify(fluentWebElement2, atLeastOnce()).isEnabled();
-        verify(fluentWebElement3, atLeastOnce()).isEnabled();
+        verify(fluentWebElement1, atLeastOnce()).enabled();
+        verify(fluentWebElement2, atLeastOnce()).enabled();
+        verify(fluentWebElement3, atLeastOnce()).enabled();
     }
 
     @Test
@@ -136,7 +136,7 @@ public class FluentWaitEachElementMatcherTest {
         final Predicate<FluentWebElement> predicate = new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.isEnabled();
+                return input.enabled();
             }
         };
 
@@ -163,7 +163,7 @@ public class FluentWaitEachElementMatcherTest {
         final Predicate<FluentWebElement> predicate = new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return !input.isEnabled();
+                return !input.enabled();
             }
         };
 
@@ -171,27 +171,27 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().isVerified(predicate);
+                matcher.not().verify(predicate);
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement1, atLeastOnce()).isEnabled();
-        verify(fluentWebElement2, never()).isEnabled();
-        verify(fluentWebElement3, never()).isEnabled();
+        verify(fluentWebElement1, atLeastOnce()).enabled();
+        verify(fluentWebElement2, never()).enabled();
+        verify(fluentWebElement3, never()).enabled();
 
         reset(fluentWebElement1, fluentWebElement2, fluentWebElement3);
 
-        when(fluentWebElement1.isEnabled()).thenReturn(true);
+        when(fluentWebElement1.enabled()).thenReturn(true);
         when(fluentWebElement1.now()).thenReturn(fluentWebElement1);
-        when(fluentWebElement2.isEnabled()).thenReturn(true);
+        when(fluentWebElement2.enabled()).thenReturn(true);
         when(fluentWebElement2.now()).thenReturn(fluentWebElement2);
-        when(fluentWebElement3.isEnabled()).thenReturn(true);
+        when(fluentWebElement3.enabled()).thenReturn(true);
         when(fluentWebElement3.now()).thenReturn(fluentWebElement3);
-        matcher.not().isVerified(predicate);
+        matcher.not().verify(predicate);
 
-        verify(fluentWebElement1, atLeastOnce()).isEnabled();
-        verify(fluentWebElement2, atLeastOnce()).isEnabled();
-        verify(fluentWebElement3, atLeastOnce()).isEnabled();
+        verify(fluentWebElement1, atLeastOnce()).enabled();
+        verify(fluentWebElement2, atLeastOnce()).enabled();
+        verify(fluentWebElement3, atLeastOnce()).enabled();
     }
 
 
@@ -201,27 +201,27 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.hasAttribute("test", "value");
+                matcher.attribute("test", "value");
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement1, atLeastOnce()).getAttribute("test");
-        verify(fluentWebElement2, never()).getAttribute("test");
-        verify(fluentWebElement3, never()).getAttribute("test");
+        verify(fluentWebElement1, atLeastOnce()).attribute("test");
+        verify(fluentWebElement2, never()).attribute("test");
+        verify(fluentWebElement3, never()).attribute("test");
 
-        when(fluentWebElement1.getAttribute("test")).thenReturn("value");
-        when(fluentWebElement2.getAttribute("test")).thenReturn("value");
-        when(fluentWebElement3.getAttribute("test")).thenReturn("value");
-        matcher.hasAttribute("test", "value");
+        when(fluentWebElement1.attribute("test")).thenReturn("value");
+        when(fluentWebElement2.attribute("test")).thenReturn("value");
+        when(fluentWebElement3.attribute("test")).thenReturn("value");
+        matcher.attribute("test", "value");
 
-        verify(fluentWebElement1, atLeastOnce()).getAttribute("test");
-        verify(fluentWebElement2, atLeastOnce()).getAttribute("test");
-        verify(fluentWebElement3, atLeastOnce()).getAttribute("test");
+        verify(fluentWebElement1, atLeastOnce()).attribute("test");
+        verify(fluentWebElement2, atLeastOnce()).attribute("test");
+        verify(fluentWebElement3, atLeastOnce()).attribute("test");
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().hasAttribute("test", "value");
+                matcher.not().attribute("test", "value");
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
@@ -233,27 +233,27 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.hasId("value");
+                matcher.id("value");
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement1, atLeastOnce()).getId();
-        verify(fluentWebElement2, never()).getId();
-        verify(fluentWebElement3, never()).getId();
+        verify(fluentWebElement1, atLeastOnce()).id();
+        verify(fluentWebElement2, never()).id();
+        verify(fluentWebElement3, never()).id();
 
-        when(fluentWebElement1.getId()).thenReturn("value");
-        when(fluentWebElement2.getId()).thenReturn("value");
-        when(fluentWebElement3.getId()).thenReturn("value");
-        matcher.hasId("value");
+        when(fluentWebElement1.id()).thenReturn("value");
+        when(fluentWebElement2.id()).thenReturn("value");
+        when(fluentWebElement3.id()).thenReturn("value");
+        matcher.id("value");
 
-        verify(fluentWebElement1, atLeastOnce()).getId();
-        verify(fluentWebElement2, atLeastOnce()).getId();
-        verify(fluentWebElement3, atLeastOnce()).getId();
+        verify(fluentWebElement1, atLeastOnce()).id();
+        verify(fluentWebElement2, atLeastOnce()).id();
+        verify(fluentWebElement3, atLeastOnce()).id();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().hasId("value");
+                matcher.not().id("value");
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
@@ -264,27 +264,27 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.hasName("name");
+                matcher.name("name");
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement1, atLeastOnce()).getName();
-        verify(fluentWebElement2, never()).getName();
-        verify(fluentWebElement3, never()).getName();
+        verify(fluentWebElement1, atLeastOnce()).name();
+        verify(fluentWebElement2, never()).name();
+        verify(fluentWebElement3, never()).name();
 
-        when(fluentWebElement1.getName()).thenReturn("name");
-        when(fluentWebElement2.getName()).thenReturn("name");
-        when(fluentWebElement3.getName()).thenReturn("name");
-        matcher.hasName("name");
+        when(fluentWebElement1.name()).thenReturn("name");
+        when(fluentWebElement2.name()).thenReturn("name");
+        when(fluentWebElement3.name()).thenReturn("name");
+        matcher.name("name");
 
-        verify(fluentWebElement1, atLeastOnce()).getName();
-        verify(fluentWebElement2, atLeastOnce()).getName();
-        verify(fluentWebElement3, atLeastOnce()).getName();
+        verify(fluentWebElement1, atLeastOnce()).name();
+        verify(fluentWebElement2, atLeastOnce()).name();
+        verify(fluentWebElement3, atLeastOnce()).name();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().hasName("name");
+                matcher.not().name("name");
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
@@ -299,18 +299,18 @@ public class FluentWaitEachElementMatcherTest {
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement1, atLeastOnce()).getText();
-        verify(fluentWebElement2, never()).getText();
-        verify(fluentWebElement3, never()).getText();
+        verify(fluentWebElement1, atLeastOnce()).text();
+        verify(fluentWebElement2, never()).text();
+        verify(fluentWebElement3, never()).text();
 
-        when(fluentWebElement1.getText()).thenReturn("text");
-        when(fluentWebElement2.getText()).thenReturn("text");
-        when(fluentWebElement3.getText()).thenReturn("text");
+        when(fluentWebElement1.text()).thenReturn("text");
+        when(fluentWebElement2.text()).thenReturn("text");
+        when(fluentWebElement3.text()).thenReturn("text");
         matcher.text().equals("text");
 
-        verify(fluentWebElement1, atLeastOnce()).getText();
-        verify(fluentWebElement2, atLeastOnce()).getText();
-        verify(fluentWebElement3, atLeastOnce()).getText();
+        verify(fluentWebElement1, atLeastOnce()).text();
+        verify(fluentWebElement2, atLeastOnce()).text();
+        verify(fluentWebElement3, atLeastOnce()).text();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -330,18 +330,18 @@ public class FluentWaitEachElementMatcherTest {
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement1, atLeastOnce()).getText();
-        verify(fluentWebElement2, never()).getText();
-        verify(fluentWebElement3, never()).getText();
+        verify(fluentWebElement1, atLeastOnce()).text();
+        verify(fluentWebElement2, never()).text();
+        verify(fluentWebElement3, never()).text();
 
-        when(fluentWebElement1.getText()).thenReturn("text");
-        when(fluentWebElement2.getText()).thenReturn("text");
-        when(fluentWebElement3.getText()).thenReturn("text");
+        when(fluentWebElement1.text()).thenReturn("text");
+        when(fluentWebElement2.text()).thenReturn("text");
+        when(fluentWebElement3.text()).thenReturn("text");
         matcher.text().contains("ex");
 
-        verify(fluentWebElement1, atLeastOnce()).getText();
-        verify(fluentWebElement2, atLeastOnce()).getText();
-        verify(fluentWebElement3, atLeastOnce()).getText();
+        verify(fluentWebElement1, atLeastOnce()).text();
+        verify(fluentWebElement2, atLeastOnce()).text();
+        verify(fluentWebElement3, atLeastOnce()).text();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -389,42 +389,42 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.isEnabled();
+                matcher.enabled();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement1, atLeastOnce()).isEnabled();
-        verify(fluentWebElement2, never()).isEnabled();
-        verify(fluentWebElement3, never()).isEnabled();
+        verify(fluentWebElement1, atLeastOnce()).enabled();
+        verify(fluentWebElement2, never()).enabled();
+        verify(fluentWebElement3, never()).enabled();
 
-        when(fluentWebElement1.isEnabled()).thenReturn(true);
-        when(fluentWebElement2.isEnabled()).thenReturn(true);
-        when(fluentWebElement3.isEnabled()).thenReturn(true);
-        matcher.isEnabled();
+        when(fluentWebElement1.enabled()).thenReturn(true);
+        when(fluentWebElement2.enabled()).thenReturn(true);
+        when(fluentWebElement3.enabled()).thenReturn(true);
+        matcher.enabled();
 
-        verify(fluentWebElement1, atLeastOnce()).isEnabled();
-        verify(fluentWebElement2, atLeastOnce()).isEnabled();
-        verify(fluentWebElement3, atLeastOnce()).isEnabled();
+        verify(fluentWebElement1, atLeastOnce()).enabled();
+        verify(fluentWebElement2, atLeastOnce()).enabled();
+        verify(fluentWebElement3, atLeastOnce()).enabled();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().isEnabled();
+                matcher.not().enabled();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void proxyIsEnabled() {
-        when(fluentWebElement1.getTagName()).thenThrow(NoSuchElementException.class);
-        when(fluentWebElement2.getTagName()).thenThrow(NoSuchElementException.class);
-        when(fluentWebElement3.getTagName()).thenThrow(NoSuchElementException.class);
+        when(fluentWebElement1.tagName()).thenThrow(NoSuchElementException.class);
+        when(fluentWebElement2.tagName()).thenThrow(NoSuchElementException.class);
+        when(fluentWebElement3.tagName()).thenThrow(NoSuchElementException.class);
 
         final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.isEnabled();
+                matcher.enabled();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
@@ -435,27 +435,27 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.isSelected();
+                matcher.selected();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement1, atLeastOnce()).isSelected();
-        verify(fluentWebElement2, never()).isSelected();
-        verify(fluentWebElement3, never()).isSelected();
+        verify(fluentWebElement1, atLeastOnce()).selected();
+        verify(fluentWebElement2, never()).selected();
+        verify(fluentWebElement3, never()).selected();
 
-        when(fluentWebElement1.isSelected()).thenReturn(true);
-        when(fluentWebElement2.isSelected()).thenReturn(true);
-        when(fluentWebElement3.isSelected()).thenReturn(true);
-        matcher.isSelected();
+        when(fluentWebElement1.selected()).thenReturn(true);
+        when(fluentWebElement2.selected()).thenReturn(true);
+        when(fluentWebElement3.selected()).thenReturn(true);
+        matcher.selected();
 
-        verify(fluentWebElement1, atLeastOnce()).isSelected();
-        verify(fluentWebElement2, atLeastOnce()).isSelected();
-        verify(fluentWebElement3, atLeastOnce()).isSelected();
+        verify(fluentWebElement1, atLeastOnce()).selected();
+        verify(fluentWebElement2, atLeastOnce()).selected();
+        verify(fluentWebElement3, atLeastOnce()).selected();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().isSelected();
+                matcher.not().selected();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
@@ -466,27 +466,27 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.isDisplayed();
+                matcher.displayed();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement1, atLeastOnce()).isDisplayed();
-        verify(fluentWebElement2, never()).isDisplayed();
-        verify(fluentWebElement3, never()).isDisplayed();
+        verify(fluentWebElement1, atLeastOnce()).displayed();
+        verify(fluentWebElement2, never()).displayed();
+        verify(fluentWebElement3, never()).displayed();
 
-        when(fluentWebElement1.isDisplayed()).thenReturn(true);
-        when(fluentWebElement2.isDisplayed()).thenReturn(true);
-        when(fluentWebElement3.isDisplayed()).thenReturn(true);
-        matcher.isDisplayed();
+        when(fluentWebElement1.displayed()).thenReturn(true);
+        when(fluentWebElement2.displayed()).thenReturn(true);
+        when(fluentWebElement3.displayed()).thenReturn(true);
+        matcher.displayed();
 
-        verify(fluentWebElement1, atLeastOnce()).isDisplayed();
-        verify(fluentWebElement2, atLeastOnce()).isDisplayed();
-        verify(fluentWebElement3, atLeastOnce()).isDisplayed();
+        verify(fluentWebElement1, atLeastOnce()).displayed();
+        verify(fluentWebElement2, atLeastOnce()).displayed();
+        verify(fluentWebElement3, atLeastOnce()).displayed();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().isDisplayed();
+                matcher.not().displayed();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
@@ -497,27 +497,27 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.isClickable();
+                matcher.clickable();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement1, atLeastOnce()).isClickable();
-        verify(fluentWebElement2, never()).isClickable();
-        verify(fluentWebElement3, never()).isClickable();
+        verify(fluentWebElement1, atLeastOnce()).clickable();
+        verify(fluentWebElement2, never()).clickable();
+        verify(fluentWebElement3, never()).clickable();
 
-        when(fluentWebElement1.isClickable()).thenReturn(true);
-        when(fluentWebElement2.isClickable()).thenReturn(true);
-        when(fluentWebElement3.isClickable()).thenReturn(true);
-        matcher.isClickable();
+        when(fluentWebElement1.clickable()).thenReturn(true);
+        when(fluentWebElement2.clickable()).thenReturn(true);
+        when(fluentWebElement3.clickable()).thenReturn(true);
+        matcher.clickable();
 
-        verify(fluentWebElement1, atLeastOnce()).isClickable();
-        verify(fluentWebElement2, atLeastOnce()).isClickable();
-        verify(fluentWebElement3, atLeastOnce()).isClickable();
+        verify(fluentWebElement1, atLeastOnce()).clickable();
+        verify(fluentWebElement2, atLeastOnce()).clickable();
+        verify(fluentWebElement3, atLeastOnce()).clickable();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().isClickable();
+                matcher.not().clickable();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
@@ -528,27 +528,27 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.isStale();
+                matcher.stale();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement1, atLeastOnce()).isStale();
-        verify(fluentWebElement2, never()).isStale();
-        verify(fluentWebElement3, never()).isStale();
+        verify(fluentWebElement1, atLeastOnce()).stale();
+        verify(fluentWebElement2, never()).stale();
+        verify(fluentWebElement3, never()).stale();
 
-        when(fluentWebElement1.isStale()).thenReturn(true);
-        when(fluentWebElement2.isStale()).thenReturn(true);
-        when(fluentWebElement3.isStale()).thenReturn(true);
-        matcher.isStale();
+        when(fluentWebElement1.stale()).thenReturn(true);
+        when(fluentWebElement2.stale()).thenReturn(true);
+        when(fluentWebElement3.stale()).thenReturn(true);
+        matcher.stale();
 
-        verify(fluentWebElement1, atLeastOnce()).isStale();
-        verify(fluentWebElement2, atLeastOnce()).isStale();
-        verify(fluentWebElement3, atLeastOnce()).isStale();
+        verify(fluentWebElement1, atLeastOnce()).stale();
+        verify(fluentWebElement2, atLeastOnce()).stale();
+        verify(fluentWebElement3, atLeastOnce()).stale();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().isStale();
+                matcher.not().stale();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
@@ -604,7 +604,7 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.hasRectangle().withX(5);
+                matcher.rectangle().withX(5);
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
@@ -612,7 +612,7 @@ public class FluentWaitEachElementMatcherTest {
         verify(element2, never()).getRect();
         verify(element3, never()).getRect();
 
-        matcher.hasRectangle().withX(1);
+        matcher.rectangle().withX(1);
 
         verify(element1, atLeastOnce()).getRect();
         verify(element2, atLeastOnce()).getRect();
@@ -621,7 +621,7 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().hasRectangle().withX(1);
+                matcher.not().rectangle().withX(1);
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }

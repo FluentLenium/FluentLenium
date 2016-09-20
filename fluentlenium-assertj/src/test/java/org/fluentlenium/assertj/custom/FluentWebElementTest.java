@@ -24,20 +24,20 @@ public class FluentWebElementTest {
 
     @Test
     public void testIsEnabledOk() {
-        when(fluentWebElement.isEnabled()).thenReturn(true);
+        when(fluentWebElement.enabled()).thenReturn(true);
         fluentWebElementAssert.isEnabled();
     }
 
     @Test(expected = AssertionError.class)
     public void testIsEnabledKo() throws Exception {
-        when(fluentWebElement.isEnabled()).thenReturn(false);
+        when(fluentWebElement.enabled()).thenReturn(false);
         fluentWebElementAssert.isEnabled();
     }
 
 
     @Test
     public void testIsNotEnabledOk() throws Exception {
-        when(fluentWebElement.isEnabled()).thenReturn(false);
+        when(fluentWebElement.enabled()).thenReturn(false);
         fluentWebElementAssert.isNotEnabled();
         assertTrue(true);
     }
@@ -45,116 +45,116 @@ public class FluentWebElementTest {
 
     @Test(expected = AssertionError.class)
     public void testIsNotEnabledKo() throws Exception {
-        when(fluentWebElement.isEnabled()).thenReturn(true);
+        when(fluentWebElement.enabled()).thenReturn(true);
         fluentWebElementAssert.isNotEnabled();
     }
 
     @Test
     public void testIsDisplayedOk() throws Exception {
-        when(fluentWebElement.isDisplayed()).thenReturn(true);
+        when(fluentWebElement.displayed()).thenReturn(true);
         fluentWebElementAssert.isDisplayed();
         assertTrue(true);
     }
 
     @Test(expected = AssertionError.class)
     public void testIsDisplayedKo() throws Exception {
-        when(fluentWebElement.isDisplayed()).thenReturn(false);
+        when(fluentWebElement.displayed()).thenReturn(false);
         fluentWebElementAssert.isDisplayed();
     }
 
     @Test
     public void testIsNotDisplayed() throws Exception {
-        when(fluentWebElement.isDisplayed()).thenReturn(false);
+        when(fluentWebElement.displayed()).thenReturn(false);
         fluentWebElementAssert.isNotDisplayed();
         assertTrue(true);
     }
 
     @Test(expected = AssertionError.class)
     public void testIsSelected() throws Exception {
-        when(fluentWebElement.isDisplayed()).thenReturn(true);
+        when(fluentWebElement.displayed()).thenReturn(true);
         fluentWebElementAssert.isNotDisplayed();
     }
 
     @Test
     public void testIsNotSelectedOk() throws Exception {
-        when(fluentWebElement.isSelected()).thenReturn(false);
+        when(fluentWebElement.selected()).thenReturn(false);
         fluentWebElementAssert.isNotSelected();
         assertTrue(true);
     }
 
     @Test(expected = AssertionError.class)
     public void testIsNotSelectedKo() throws Exception {
-        when(fluentWebElement.isSelected()).thenReturn(true);
+        when(fluentWebElement.selected()).thenReturn(true);
         fluentWebElementAssert.isNotSelected();
     }
 
     @Test
     public void testIsSelectedOk() throws Exception {
-        when(fluentWebElement.isSelected()).thenReturn(true);
+        when(fluentWebElement.selected()).thenReturn(true);
         fluentWebElementAssert.isSelected();
         assertTrue(true);
     }
 
     @Test(expected = AssertionError.class)
     public void testIsSelectedKo() throws Exception {
-        when(fluentWebElement.isSelected()).thenReturn(false);
+        when(fluentWebElement.selected()).thenReturn(false);
         fluentWebElementAssert.isSelected();
     }
 
     @Test
     public void testHasIdOk() throws Exception {
-        when(fluentWebElement.getId()).thenReturn("some id");
+        when(fluentWebElement.id()).thenReturn("some id");
         fluentWebElementAssert.hasId("some id");
         assertTrue(true);
     }
 
     @Test(expected = AssertionError.class)
     public void testHasIdKo() throws Exception {
-        when(fluentWebElement.getId()).thenReturn("other id");
+        when(fluentWebElement.id()).thenReturn("other id");
         fluentWebElementAssert.hasId("some id");
     }
 
     @Test
     public void testHasClassOk() throws Exception {
-        when(fluentWebElement.getAttribute("class")).thenReturn("some-class");
+        when(fluentWebElement.attribute("class")).thenReturn("some-class");
         fluentWebElementAssert.hasClass("some-class");
     }
 
     @Test(expected = AssertionError.class)
     public void testHasClassKo() throws Exception {
-        when(fluentWebElement.getAttribute("class")).thenReturn("other-class");
+        when(fluentWebElement.attribute("class")).thenReturn("other-class");
         fluentWebElementAssert.hasClass("some-class");
     }
 
     @Test(expected = AssertionError.class)
     public void testSubstringKo() throws Exception {
-        when(fluentWebElement.getAttribute("class")).thenReturn("yolokitten");
+        when(fluentWebElement.attribute("class")).thenReturn("yolokitten");
         fluentWebElementAssert.hasClass("yolo");
     }
 
     @Test
     public void testHasTextOk() throws Exception {
-        when(fluentWebElement.getText()).thenReturn("There is a 5% increase");
+        when(fluentWebElement.text()).thenReturn("There is a 5% increase");
         fluentWebElementAssert.hasText("There is a 5% increase");
     }
 
     @Test
     public void testHasTextWithSpecialCharactersInElement() throws Exception {
         String textWithStringFormatError = "%A";
-        when(fluentWebElement.getText()).thenReturn(textWithStringFormatError);
+        when(fluentWebElement.text()).thenReturn(textWithStringFormatError);
         fluentWebElementAssert.hasText(textWithStringFormatError);
     }
 
     @Test(expected = AssertionError.class)
     public void testHasTextWithSpecialCharactersInAssertion() throws Exception {
         String textWithStringFormatError = "%A";
-        when(fluentWebElement.getText()).thenReturn("someText");
+        when(fluentWebElement.text()).thenReturn("someText");
         fluentWebElementAssert.hasText(textWithStringFormatError);
     }
 
     @Test
     public void testHasMultipleClassesOk() throws Exception {
-        when(fluentWebElement.getAttribute("class")).thenReturn("yolokitten mark");
+        when(fluentWebElement.attribute("class")).thenReturn("yolokitten mark");
         fluentWebElementAssert.hasClass("mark");
     }
 }

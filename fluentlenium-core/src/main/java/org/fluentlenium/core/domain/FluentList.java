@@ -57,7 +57,7 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentA
      * If there is more elements on the list than in the with table, the last element of the table is repeated
      */
     @Override
-    FluentList text(String... with);
+    FluentList write(String... with);
 
     /**
      * submit on all elements on the list
@@ -71,14 +71,14 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentA
      *
      * @return list of string values
      */
-    List<String> getValues();
+    List<String> values();
 
     /**
      * Return the id of elements on the list
      *
      * @return list of string values
      */
-    List<String> getIds();
+    List<String> ids();
 
     /**
      * Return a custom attribute of elements on the list
@@ -86,49 +86,49 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentA
      * @param attribute attribute name
      * @return list of string values
      */
-    List<String> getAttributes(String attribute);
+    List<String> attributes(String attribute);
 
     /**
      * Return the name of elements on the list
      *
      * @return list of string values
      */
-    List<String> getNames();
+    List<String> names();
 
     /**
      * Return the tag name of elements on the list
      *
      * @return list of string values
      */
-    List<String> getTagNames();
+    List<String> tagNames();
 
     /**
      * Return the texts of list elements
      *
      * @return list of string values
      */
-    List<String> getTexts();
+    List<String> texts();
 
     /**
      * Return the text contents of list elements
      *
      * @return list of string values
      */
-    List<String> getTextContents();
+    List<String> textContents();
 
     /**
      * Return the value of the first element in the list
      *
      * @return string value
      */
-    String getValue();
+    String value();
 
     /**
      * Return the id of the first element on the list
      *
      * @return id of first element as string
      */
-    String getId();
+    String id();
 
     /**
      * Return a custom attribute of the first element on the list
@@ -136,28 +136,28 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentA
      * @param attribute attribute name
      * @return custom attribute name for the first element
      */
-    String getAttribute(String attribute);
+    String attribute(String attribute);
 
     /**
      * Return the name of the first element on the list
      *
      * @return name of the first element
      */
-    String getName();
+    String name();
 
     /**
      * Return the tag name of the first element on the list
      *
      * @return tag name of the first element
      */
-    String getTagName();
+    String tagName();
 
     /**
      * Return the text of the first element on the list
      *
      * @return text of the first element on the list
      */
-    String getText();
+    String text();
 
 
     /**
@@ -165,7 +165,7 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentA
      *
      * @return text content of the first element on the list
      */
-    String getTextContent();
+    String textContent();
 
     /**
      * find elements into the children with the corresponding filters

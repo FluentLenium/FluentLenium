@@ -159,7 +159,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      * @param text value to set
      * @return fluent web element
      */
-    public FluentWebElement text(String... text) {
+    public FluentWebElement write(String... text) {
         clear();
         if (text.length != 0) {
             webElement.sendKeys(text[0]);
@@ -172,18 +172,18 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return name of the element
      */
-    public String getName() {
+    public String name() {
         return webElement.getAttribute("name");
     }
 
     /**
-     * return any value of custom attribute (generated=true will return "true" if getAttribute("generated") is called.
+     * return any value of custom attribute (generated=true will return "true" if attribute("generated") is called.
      *
-     * @param attribute custom attribute name
+     * @param name custom attribute name
      * @return name value
      */
-    public String getAttribute(String attribute) {
-        return webElement.getAttribute(attribute);
+    public String attribute(String name) {
+        return webElement.getAttribute(name);
     }
 
     /**
@@ -191,7 +191,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return id of element
      */
-    public String getId() {
+    public String id() {
         return webElement.getAttribute("id");
     }
 
@@ -200,7 +200,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return text of element
      */
-    public String getText() {
+    public String text() {
         return webElement.getText();
     }
 
@@ -209,7 +209,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return text content of element
      */
-    public String getTextContent() {
+    public String textContent() {
         return webElement.getAttribute("textContent");
     }
 
@@ -218,7 +218,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return value of attribute
      */
-    public String getValue() {
+    public String value() {
         return webElement.getAttribute("value");
     }
 
@@ -227,7 +227,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return boolean value of displayed check
      */
-    public boolean isDisplayed() {
+    public boolean displayed() {
         return webElement.isDisplayed();
     }
 
@@ -236,7 +236,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return boolean value of enabled check
      */
-    public boolean isEnabled() {
+    public boolean enabled() {
         return webElement.isEnabled();
     }
 
@@ -245,7 +245,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return boolean value of selected check
      */
-    public boolean isSelected() {
+    public boolean selected() {
         return webElement.isSelected();
     }
 
@@ -255,7 +255,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      * @return true if the element can be clicked, false otherwise.
      */
 
-    public boolean isClickable() {
+    public boolean clickable() {
         return ExpectedConditions.elementToBeClickable(getElement()).apply(fluentControl.getDriver()) != null;
     }
 
@@ -264,7 +264,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return false is the element is still attached to the DOM, true otherwise.
      */
-    public boolean isStale() {
+    public boolean stale() {
         return ExpectedConditions.stalenessOf(getElement()).apply(fluentControl.getDriver());
     }
 
@@ -273,7 +273,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return string value of tag name
      */
-    public String getTagName() {
+    public String tagName() {
         return webElement.getTagName();
     }
 
@@ -299,7 +299,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return dimension/size of element
      */
-    public Dimension getSize() {
+    public Dimension size() {
         return webElement.getSize();
     }
 
@@ -472,7 +472,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      * @return boolean value for is input file type
      */
     private boolean isInputOfTypeFile() {
-        return "input".equalsIgnoreCase(this.getTagName()) && "file".equalsIgnoreCase(this.getAttribute("type"));
+        return "input".equalsIgnoreCase(this.tagName()) && "file".equalsIgnoreCase(this.attribute("type"));
     }
 
     @Override

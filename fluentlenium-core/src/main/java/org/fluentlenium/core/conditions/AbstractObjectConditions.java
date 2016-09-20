@@ -11,7 +11,7 @@ public abstract class AbstractObjectConditions<T> implements Conditions<T> {
     }
 
     @Override
-    public boolean isVerified(Predicate<T> predicate) {
+    public boolean verify(Predicate<T> predicate) {
         boolean predicateResult = predicate.apply(object);
         if (negation) {
             predicateResult = !predicateResult;

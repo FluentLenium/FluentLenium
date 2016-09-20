@@ -116,10 +116,10 @@ public class ComponentsTest extends IntegrationFluentTest {
         assertThat(footer.isLoaded()).isTrue();
 
 
-        assertThat(header.title.getText()).isEqualTo("Header Title");
-        assertThat(footer.copyright.getText()).isEqualTo("(c) FluentLenium");
+        assertThat(header.title.text()).isEqualTo("Header Title");
+        assertThat(footer.copyright.text()).isEqualTo("(c) FluentLenium");
 
-        assertThat(content.page.pageContent.getText()).isEqualTo("Page Content");
+        assertThat(content.page.pageContent.text()).isEqualTo("Page Content");
         assertThat(content.components).hasSize(2);
 
         assertThat(content.page.parent).isSameAs(content);
@@ -127,15 +127,15 @@ public class ComponentsTest extends IntegrationFluentTest {
         int i = 1;
         for (Component component : content.components) {
             assertThat(component.parent).isSameAs(content);
-            assertThat(component.title.getText()).isEqualTo("Component " + i);
+            assertThat(component.title.text()).isEqualTo("Component " + i);
 
             assertThat(component.subComponent).isNotNull();
-            assertThat(component.subComponent.action.getText()).isEqualTo("Sub Component " + i + " (" + 1 + ")");
+            assertThat(component.subComponent.action.text()).isEqualTo("Sub Component " + i + " (" + 1 + ")");
             assertThat(component.subComponents).hasSize(3);
             int j = 1;
             for (SubComponent subComponent : component.subComponents) {
                 assertThat(subComponent.parent).isSameAs(component);
-                assertThat(subComponent.action.getText()).isEqualTo("Sub Component " + i + " (" + j + ")");
+                assertThat(subComponent.action.text()).isEqualTo("Sub Component " + i + " (" + j + ")");
                 j++;
             }
             i++;

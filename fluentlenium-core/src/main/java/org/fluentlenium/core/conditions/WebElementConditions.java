@@ -1,6 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
@@ -23,84 +22,83 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public boolean isClickable() {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean clickable() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.isClickable();
+                return input.clickable();
             }
         });
     }
 
     @Override
-    public boolean isStale() {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean stale() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.isStale();
+                return input.stale();
             }
         });
     }
 
     @Override
-    public boolean isDisplayed() {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean displayed() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.isDisplayed();
+                return input.displayed();
             }
         });
     }
 
     @Override
-    public boolean isEnabled() {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean enabled() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.isEnabled();
+                return input.enabled();
             }
         });
     }
 
     @Override
-    public boolean isSelected() {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean selected() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.isSelected();
+                return input.selected();
             }
         });
     }
 
     @Override
-    public boolean hasAttribute(final String attribute, final String value) {
-        return isVerified(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement input) {
-                String elementValue = input.getAttribute(attribute);
-                return Objects.equal(elementValue, value);
-            }
-        });
+    public boolean attribute(final String name, final String value) {
+        return attribute(name).equals(value);
     }
 
     @Override
-    public boolean hasId(final String id) {
+    public StringConditions attribute(String name) {
+        return new StringConditionsImpl(object.attribute(name));
+    }
+
+    @Override
+    public boolean id(final String id) {
         return id().equals(id);
     }
 
     @Override
     public StringConditions id() {
-        return new StringConditionsImpl(object.getId());
+        return new StringConditionsImpl(object.id());
     }
 
     @Override
-    public boolean hasName(final String name) {
+    public boolean name(final String name) {
         return name().equals(name);
     }
 
     @Override
     public StringConditions name() {
-        return new StringConditionsImpl(object.getName());
+        return new StringConditionsImpl(object.name());
     }
 
     @Override
@@ -110,7 +108,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public StringConditions tagName() {
-        return new StringConditionsImpl(object.getTagName());
+        return new StringConditionsImpl(object.tagName());
     }
 
 
@@ -121,7 +119,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public StringConditions value() {
-        return new StringConditionsImpl(object.getValue());
+        return new StringConditionsImpl(object.value());
     }
 
     @Override
@@ -131,7 +129,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public StringConditions text() {
-        StringConditionsImpl conditions = new StringConditionsImpl(object.getText());
+        StringConditionsImpl conditions = new StringConditionsImpl(object.text());
         if (negation) {
             conditions = conditions.not();
         }
@@ -145,7 +143,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public StringConditions textContent() {
-        StringConditionsImpl conditions = new StringConditionsImpl(object.getTextContent());
+        StringConditionsImpl conditions = new StringConditionsImpl(object.textContent());
         if (negation) {
             conditions = conditions.not();
         }
@@ -153,7 +151,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public RectangleConditions hasRectangle() {
+    public RectangleConditions rectangle() {
         RectangleConditionsImpl conditions = new RectangleConditionsImpl(object.getElement().getRect());
         if (negation) {
             conditions = conditions.not();

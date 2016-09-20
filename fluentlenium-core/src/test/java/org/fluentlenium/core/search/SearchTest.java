@@ -185,7 +185,7 @@ public class SearchTest {
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(webElements);
 
         FluentWebElement fluentWebElement = search.find(name, 1);
-        assertThat(fluentWebElement.getTagName()).isEqualTo("a");
+        assertThat(fluentWebElement.tagName()).isEqualTo("a");
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -208,14 +208,14 @@ public class SearchTest {
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(webElements);
 
         FluentWebElement fluentWebElement = search.findFirst(name);
-        assertThat(fluentWebElement.getTagName()).isEqualTo("span");
+        assertThat(fluentWebElement.tagName()).isEqualTo("span");
     }
 
     @Test(expected = NoSuchElementException.class)
     public void shouldThrowErrorWhenFirstNotFound() {
         String name = "cssStyle";
         FluentWebElement fluentWebElement = search.findFirst(name);
-        assertThat(fluentWebElement.getTagName()).isEqualTo("span");
+        assertThat(fluentWebElement.tagName()).isEqualTo("span");
     }
 
 }

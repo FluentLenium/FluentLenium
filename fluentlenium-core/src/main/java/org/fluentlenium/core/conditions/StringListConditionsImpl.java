@@ -23,7 +23,7 @@ public class StringListConditionsImpl extends AbstractObjectListConditions<Strin
 
     @Override
     public boolean contains(final CharSequence s) {
-        return this.conditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).contains(s);
@@ -33,7 +33,7 @@ public class StringListConditionsImpl extends AbstractObjectListConditions<Strin
 
     @Override
     public boolean startsWith(final String prefix) {
-        return this.conditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).startsWith(prefix);
@@ -43,7 +43,7 @@ public class StringListConditionsImpl extends AbstractObjectListConditions<Strin
 
     @Override
     public boolean endsWith(final String suffix) {
-        return this.conditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).endsWith(suffix);
@@ -53,7 +53,7 @@ public class StringListConditionsImpl extends AbstractObjectListConditions<Strin
 
     @Override
     public boolean equals(final String anotherString) {
-        return this.conditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).equals(anotherString);
@@ -63,7 +63,7 @@ public class StringListConditionsImpl extends AbstractObjectListConditions<Strin
 
     @Override
     public boolean equalsIgnoreCase(final String anotherString) {
-        return this.conditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).equalsIgnoreCase(anotherString);
@@ -73,7 +73,7 @@ public class StringListConditionsImpl extends AbstractObjectListConditions<Strin
 
     @Override
     public boolean matches(final String regex) {
-        return this.conditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).matches(regex);
@@ -83,7 +83,7 @@ public class StringListConditionsImpl extends AbstractObjectListConditions<Strin
 
     @Override
     public boolean matches(final Pattern pattern) {
-        return this.conditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).matches(pattern);

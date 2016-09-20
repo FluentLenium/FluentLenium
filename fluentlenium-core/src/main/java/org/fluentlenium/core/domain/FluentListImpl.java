@@ -147,7 +147,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         }
 
         for (E fluentWebElement : this) {
-            if (fluentWebElement.isEnabled()) {
+            if (fluentWebElement.enabled()) {
                 fluentWebElement.click();
             }
         }
@@ -155,7 +155,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public FluentList text(String... with) {
+    public FluentList write(String... with) {
         if (this.size() == 0) {
             throw new NoSuchElementException("Element not found");
         }
@@ -166,15 +166,15 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             String value;
 
             for (E fluentWebElement : this) {
-                if (fluentWebElement.isDisplayed()) {
+                if (fluentWebElement.displayed()) {
                     if (with.length > id) {
                         value = with[id++];
                     } else {
                         value = with[with.length - 1];
                     }
-                    if (fluentWebElement.isEnabled()) {
+                    if (fluentWebElement.enabled()) {
                         atMostOne = true;
-                        fluentWebElement.text(value);
+                        fluentWebElement.write(value);
                     }
                 }
             }
@@ -193,7 +193,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         }
 
         for (E fluentWebElement : this) {
-            if (fluentWebElement.isEnabled()) {
+            if (fluentWebElement.enabled()) {
                 fluentWebElement.clear();
             }
         }
@@ -223,7 +223,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         }
 
         for (E fluentWebElement : this) {
-            if (fluentWebElement.isEnabled()) {
+            if (fluentWebElement.enabled()) {
                 fluentWebElement.submit();
             }
         }
@@ -231,120 +231,120 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public List<String> getValues() {
+    public List<String> values() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
-                return webElement.getValue();
+                return webElement.value();
             }
         });
     }
 
     @Override
-    public List<String> getIds() {
+    public List<String> ids() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
-                return webElement.getId();
+                return webElement.id();
             }
         });
     }
 
     @Override
-    public List<String> getAttributes(final String attribute) {
+    public List<String> attributes(final String attribute) {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
-                return webElement.getAttribute(attribute);
+                return webElement.attribute(attribute);
             }
         });
     }
 
     @Override
-    public List<String> getNames() {
+    public List<String> names() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
-                return webElement.getName();
+                return webElement.name();
             }
         });
     }
 
     @Override
-    public List<String> getTagNames() {
+    public List<String> tagNames() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
-                return webElement.getTagName();
+                return webElement.tagName();
             }
         });
     }
 
     @Override
-    public List<String> getTextContents() {
+    public List<String> textContents() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
-                return webElement.getTextContent();
+                return webElement.textContent();
             }
         });
     }
 
     @Override
-    public List<String> getTexts() {
+    public List<String> texts() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
-                return webElement.getText();
+                return webElement.text();
             }
         });
     }
 
     @Override
-    public String getValue() {
+    public String value() {
         if (this.size() > 0) {
-            return this.get(0).getValue();
+            return this.get(0).value();
         }
         return null;
     }
 
     @Override
-    public String getId() {
+    public String id() {
         if (this.size() > 0) {
-            return this.get(0).getId();
+            return this.get(0).id();
         }
         return null;
     }
 
     @Override
-    public String getAttribute(final String attribute) {
+    public String attribute(final String attribute) {
         if (this.size() > 0) {
-            return this.get(0).getAttribute(attribute);
+            return this.get(0).attribute(attribute);
         }
         return null;
     }
 
     @Override
-    public String getName() {
+    public String name() {
         if (this.size() > 0) {
-            return this.get(0).getName();
+            return this.get(0).name();
         }
         return null;
     }
 
     @Override
-    public String getTagName() {
+    public String tagName() {
         if (this.size() > 0) {
-            return this.get(0).getTagName();
+            return this.get(0).tagName();
         }
         return null;
     }
 
     @Override
-    public String getText() {
+    public String text() {
         if (this.size() > 0) {
-            return this.get(0).getText();
+            return this.get(0).text();
         }
         return null;
     }
 
     @Override
-    public String getTextContent() {
+    public String textContent() {
         if (this.size() > 0) {
-            return this.get(0).getTextContent();
+            return this.get(0).textContent();
         }
         return null;
     }

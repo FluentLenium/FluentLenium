@@ -22,7 +22,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
 
     @Override
     public boolean equalTo(final int value) {
-        return isVerified(new Predicate<Integer>() {
+        return verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
                 return input.equals(value);
@@ -32,7 +32,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
 
     @Override
     public boolean lessThan(final int value) {
-        return isVerified(new Predicate<Integer>() {
+        return verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
                 return input < value;
@@ -42,7 +42,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
 
     @Override
     public boolean lessThanOrEqualTo(final int value) {
-        return isVerified(new Predicate<Integer>() {
+        return verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
                 return input <= value;
@@ -52,7 +52,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
 
     @Override
     public boolean greaterThan(final int value) {
-        return isVerified(new Predicate<Integer>() {
+        return verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
                 return input > value;
@@ -62,7 +62,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
 
     @Override
     public boolean greaterThanOrEqualTo(final int value) {
-        return isVerified(new Predicate<Integer>() {
+        return verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
                 return input >= value;

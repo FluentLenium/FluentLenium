@@ -100,7 +100,7 @@ public class ElementAsTest extends IntegrationFluentTest {
     @Test
     public void findByComponent() {
         goTo(DEFAULT_URL);
-        assertThat(goNextLink.isDisplayed()).isTrue();
+        assertThat(goNextLink.displayed()).isTrue();
     }
 
     @Test

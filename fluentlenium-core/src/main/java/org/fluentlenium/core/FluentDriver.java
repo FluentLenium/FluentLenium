@@ -413,7 +413,7 @@ public class FluentDriver implements FluentControl {
 
     @Override
     public void switchTo(FluentWebElement element) {
-        if (null == element || !"iframe".equals(element.getTagName())) {
+        if (null == element || !"iframe".equals(element.tagName())) {
             getDriver().switchTo().defaultContent();
         } else {
             WebElement target = element.getElement();

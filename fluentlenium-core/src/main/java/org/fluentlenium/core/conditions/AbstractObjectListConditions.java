@@ -17,8 +17,8 @@ public class AbstractObjectListConditions<T, C extends Conditions<T>> {
         this.conditionsGetter = conditionsGetter;
     }
 
-    public boolean isVerified(final Predicate<T> predicate) {
-        return this.conditions.isVerified(new Predicate<FluentWebElement>() {
+    public boolean verify(final Predicate<T> predicate) {
+        return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return predicate.apply(objectGetter.apply(input));

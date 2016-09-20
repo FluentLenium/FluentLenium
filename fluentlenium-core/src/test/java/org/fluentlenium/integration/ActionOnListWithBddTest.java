@@ -15,7 +15,7 @@ public class ActionOnListWithBddTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         FluentList input = find("input[type=text]");
         input.fill().with("zzz");
-        assertThat(input.getValues()).contains("zzz");
+        assertThat(input.values()).contains("zzz");
     }
 
     @Test
@@ -23,16 +23,16 @@ public class ActionOnListWithBddTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         FluentWebElement input = find("input").first();
         input.fill().with("zzz");
-        assertThat(input.getValue()).contains("zzz");
+        assertThat(input.value()).contains("zzz");
     }
 
     @Test
     public void checkClearAction() {
         goTo(DEFAULT_URL);
         FluentList name = find("#name");
-        assertThat(name.getValues()).contains("John");
+        assertThat(name.values()).contains("John");
         name.clear();
-        assertThat(name.getValues()).contains("");
+        assertThat(name.values()).contains("");
     }
 
     @Test

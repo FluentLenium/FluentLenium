@@ -67,21 +67,21 @@ public class FluentWaitSupplierMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.isEnabled();
+                matcher.enabled();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement, atLeastOnce()).isEnabled();
+        verify(fluentWebElement, atLeastOnce()).enabled();
 
-        when(fluentWebElement.isEnabled()).thenReturn(true);
-        matcher.isEnabled();
+        when(fluentWebElement.enabled()).thenReturn(true);
+        matcher.enabled();
 
-        verify(fluentWebElement, atLeastOnce()).isEnabled();
+        verify(fluentWebElement, atLeastOnce()).enabled();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().isEnabled();
+                matcher.not().enabled();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }

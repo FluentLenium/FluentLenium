@@ -947,7 +947,7 @@ If you don't like the [JQuery](http://jquery.com/) syntax, you can replace `$` w
 
 ```java
 goTo("http://mywebpage/");
-find("#firstName").text("toto");
+find("#firstName").write("toto");
 find("#create-button").click();
 assertThat(title()).isEqualTo("Hello toto");
 ```

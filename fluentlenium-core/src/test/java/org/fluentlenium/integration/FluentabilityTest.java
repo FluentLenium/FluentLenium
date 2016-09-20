@@ -11,9 +11,9 @@ public class FluentabilityTest extends IntegrationFluentTest {
     @Test
     public void checkIsEnabled() {
         goTo(DEFAULT_URL);
-        await().atMost(1, NANOSECONDS).until(".small").with("name").equalTo("name").isPresent();
+        await().atMost(1, NANOSECONDS).until(".small").with("name").equalTo("name").present();
 
-        assertThat(find("input").first().isEnabled()).isTrue();
+        assertThat(find("input").first().enabled()).isTrue();
     }
 
 }

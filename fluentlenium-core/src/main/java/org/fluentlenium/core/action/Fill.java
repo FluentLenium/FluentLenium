@@ -19,7 +19,7 @@ public class Fill<E extends FluentWebElement> extends AbstractFill<E> {
      * @return fill constructor
      */
     public Fill with(String... textValues) {
-        findElements().text(textValues);
+        findElements().write(textValues);
         return this;
     }
 

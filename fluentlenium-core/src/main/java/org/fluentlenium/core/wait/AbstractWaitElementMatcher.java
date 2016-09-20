@@ -11,8 +11,6 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
 
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasAttributeMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotAttributeMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isClickableMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
@@ -59,11 +57,11 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
     }
 
     @Override
-    public boolean isVerified(final Predicate<FluentWebElement> predicate) {
+    public boolean verify(final Predicate<FluentWebElement> predicate) {
         until(wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return condition().isVerified(predicate);
+                return condition().verify(predicate);
             }
         }, negation ? isPredicateNotVerifiedMessage(selectionName) : isPredicateVerifiedMessage(selectionName));
         return true;
@@ -74,22 +72,22 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
      *
      * @return true if one or more element is present, false otherwise
      */
-    public boolean isPresent() {
-        Predicate<FluentControl> isPresent = new com.google.common.base.Predicate<FluentControl>() {
+    public boolean present() {
+        Predicate<FluentControl> present = new com.google.common.base.Predicate<FluentControl>() {
             public boolean apply(FluentControl fluent) {
                 return condition().isPresent();
             }
         };
-        until(wait, isPresent, negation ? isNotPresentMessage(selectionName) : isPresentMessage(selectionName));
+        until(wait, present, negation ? isNotPresentMessage(selectionName) : isPresentMessage(selectionName));
         return true;
     }
 
     @Override
-    public boolean isDisplayed() {
+    public boolean displayed() {
         Predicate<FluentControl> isDisplayed = new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return condition().isDisplayed();
+                return condition().displayed();
             }
         };
         until(wait, isDisplayed, negation ? isNotDisplayedMessage(selectionName) : isDisplayedMessage(selectionName));
@@ -97,11 +95,11 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
     }
 
     @Override
-    public boolean isEnabled() {
+    public boolean enabled() {
         Predicate<FluentControl> isEnabled = new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return condition().isEnabled();
+                return condition().enabled();
             }
         };
         until(wait, isEnabled, negation ? isNotEnabledMessage(selectionName) : isEnabledMessage(selectionName));
@@ -109,11 +107,11 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
     }
 
     @Override
-    public boolean isSelected() {
+    public boolean selected() {
         Predicate<FluentControl> isSelected = new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return condition().isSelected();
+                return condition().selected();
             }
         };
         until(wait, isSelected, negation ? isNotSelectedMessage(selectionName) : isSelectedMessage(selectionName));
@@ -121,11 +119,11 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
     }
 
     @Override
-    public boolean isClickable() {
+    public boolean clickable() {
         Predicate<FluentControl> isClickable = new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return condition().isClickable();
+                return condition().clickable();
             }
         };
         until(wait, isClickable, negation ? isNotClickableMessage(selectionName) : isClickableMessage(selectionName));
@@ -133,11 +131,11 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
     }
 
     @Override
-    public boolean isStale() {
+    public boolean stale() {
         Predicate<FluentControl> isStale = new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return condition().isStale();
+                return condition().stale();
             }
         };
         until(wait, isStale, negation ? isNotStaleMessage(selectionName) : isStaleMessage(selectionName));
@@ -146,18 +144,22 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
 
 
     @Override
-    public boolean hasAttribute(final String attribute, final String value) {
-        Predicate<FluentControl> hasAttribute = new com.google.common.base.Predicate<FluentControl>() {
-            public boolean apply(FluentControl fluent) {
-                return condition().hasAttribute(attribute, value);
-            }
-        };
-        until(wait, hasAttribute, negation ? hasNotAttributeMessage(selectionName, attribute, value) : hasAttributeMessage(selectionName, attribute, value));
-        return true;
+    public boolean attribute(final String name, final String value) {
+        return attribute(name).equals(value);
     }
 
     @Override
-    public boolean hasId(final String value) {
+    public StringConditions attribute(final String name) {
+        return new FluentWaitStringMatcher(this, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return find().one().attribute(name);
+            }
+        });
+    }
+
+    @Override
+    public boolean id(final String value) {
         return id().equals(value);
     }
 
@@ -172,7 +174,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
     }
 
     @Override
-    public boolean hasName(final String value) {
+    public boolean name(final String value) {
         return name().equals(value);
     }
 
@@ -247,11 +249,11 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
     }
 
     @Override
-    public RectangleConditions hasRectangle() {
+    public RectangleConditions rectangle() {
         return new FluentWaitRectangleMatcher(this, new Supplier<RectangleConditions>() {
             @Override
             public RectangleConditions get() {
-                return find().one().hasRectangle();
+                return find().one().rectangle();
             }
         });
     }

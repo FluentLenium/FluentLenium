@@ -100,29 +100,29 @@ public class FluentWaitSupplierListMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.isEnabled();
+                matcher.enabled();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement1, atLeastOnce()).isEnabled();
-        verify(fluentWebElement2, atLeastOnce()).isEnabled();
-        verify(fluentWebElement3, atLeastOnce()).isEnabled();
+        verify(fluentWebElement1, atLeastOnce()).enabled();
+        verify(fluentWebElement2, atLeastOnce()).enabled();
+        verify(fluentWebElement3, atLeastOnce()).enabled();
 
         when(search.getInstantiator()).thenReturn(new DefaultComponentInstantiator(fluent));
 
-        when(fluentWebElement1.isEnabled()).thenReturn(true);
-        when(fluentWebElement2.isEnabled()).thenReturn(true);
-        when(fluentWebElement3.isEnabled()).thenReturn(true);
-        matcher.isEnabled();
+        when(fluentWebElement1.enabled()).thenReturn(true);
+        when(fluentWebElement2.enabled()).thenReturn(true);
+        when(fluentWebElement3.enabled()).thenReturn(true);
+        matcher.enabled();
 
-        verify(fluentWebElement1, atLeastOnce()).isEnabled();
-        verify(fluentWebElement2, atLeastOnce()).isEnabled();
-        verify(fluentWebElement3, atLeastOnce()).isEnabled();
+        verify(fluentWebElement1, atLeastOnce()).enabled();
+        verify(fluentWebElement2, atLeastOnce()).enabled();
+        verify(fluentWebElement3, atLeastOnce()).enabled();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().isEnabled();
+                matcher.not().enabled();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }

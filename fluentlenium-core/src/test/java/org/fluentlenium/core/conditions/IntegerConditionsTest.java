@@ -16,7 +16,7 @@ public class IntegerConditionsTest {
     }
 
     static void assertConditions(IntegerConditions conditions, final int value) {
-        assertThat(conditions.isVerified(new Predicate<Integer>() {
+        assertThat(conditions.verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
                 return input == value;
@@ -45,7 +45,7 @@ public class IntegerConditionsTest {
     }
 
     static void assertNotConditions(IntegerConditions conditions, final int value) {
-        assertThat(conditions.isVerified(new Predicate<Integer>() {
+        assertThat(conditions.verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
                 return input == value;

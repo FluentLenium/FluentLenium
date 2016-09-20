@@ -29,25 +29,25 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
 
     @Override
     public void click() {
-        buildAwait().until(getFluentWebElement()).isClickable();
+        buildAwait().until(getFluentWebElement()).clickable();
         super.click();
     }
 
     @Override
     public void sendKeys(CharSequence... keysToSend) {
-        buildAwait().until(getFluentWebElement()).isEnabled();
+        buildAwait().until(getFluentWebElement()).enabled();
         super.sendKeys(keysToSend);
     }
 
     @Override
     public void submit() {
-        buildAwait().until(getFluentWebElement()).isEnabled();
+        buildAwait().until(getFluentWebElement()).enabled();
         super.submit();
     }
 
     @Override
     public void clear() {
-        buildAwait().until(getFluentWebElement()).isEnabled();
+        buildAwait().until(getFluentWebElement()).enabled();
         super.clear();
     }
 
