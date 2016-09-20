@@ -120,6 +120,10 @@ public class ReflectionUtils {
         return parameters;
     }
 
+    public static <T> T getDefault(Class<T> type) {
+        return (T) DEFAULTS.get(type);
+    }
+
     /**
      * Retrieve the constructor of a class for given argument values.
      *

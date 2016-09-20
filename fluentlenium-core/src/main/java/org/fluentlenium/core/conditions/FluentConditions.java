@@ -1,6 +1,8 @@
 package org.fluentlenium.core.conditions;
 
 
+import org.fluentlenium.core.conditions.message.Message;
+import org.fluentlenium.core.conditions.message.MessageContext;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
@@ -19,6 +21,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return true if the element can be clicked, false otherwise.
      */
+    @Message("should [not ]be clickable")
     boolean clickable();
 
     /**
@@ -26,6 +29,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return false is the element is still attached to the DOM, true otherwise.
      */
+    @Message("should [not ]be stale")
     boolean stale();
 
     /**
@@ -33,6 +37,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return true if element is displayed, false otherwise.
      */
+    @Message("should [not ]be displayed")
     boolean displayed();
 
     /**
@@ -40,6 +45,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return true if element is enabled, false otherwise.
      */
+    @Message("should [not ]be enabled")
     boolean enabled();
 
     /**
@@ -47,6 +53,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return true if element is selected, false otherwise.
      */
+    @Message("should [not ]be selected")
     boolean selected();
 
     /**
@@ -54,6 +61,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return An object to configure id conditions.
      */
+    @MessageContext("id")
     StringConditions id();
 
     /**
@@ -62,6 +70,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @param id id to check
      * @return true if the element has the given id, false otherwise.
      */
+    @Message("should [not ] have id=\"{0}\"")
     boolean id(String id);
 
     /**
@@ -69,6 +78,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return An object to configure name conditions.
      */
+    @MessageContext("name")
     StringConditions name();
 
     /**
@@ -77,6 +87,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @param name name to check
      * @return true if the element has the given name, false otherwise.
      */
+    @Message("should [not ] have name=\"{0}\"")
     boolean name(String name);
 
     /**
@@ -84,6 +95,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return An object to configure tagName conditions.
      */
+    @MessageContext("tagName")
     StringConditions tagName();
 
     /**
@@ -92,6 +104,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @param tagName tagName to check
      * @return true if the element has the given tagName, false otherwise.
      */
+    @Message("should [not ] have tagName=\"{0}\"")
     boolean tagName(String tagName);
 
     /**
@@ -99,6 +112,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return An object to configure value conditions.
      */
+    @MessageContext("value")
     StringConditions value();
 
     /**
@@ -107,6 +121,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @param value value to check
      * @return true if the element has the given value, false otherwise.
      */
+    @Message("should [not ] have value=\"{0}\"")
     boolean value(String value);
 
     /**
@@ -115,6 +130,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @return true if the element has the given text, false otherwise.
      * @see StringConditions#equals(Object)
      */
+    @Message("should [not ] have text=\"{0}\"")
     boolean text(String anotherString);
 
     /**
@@ -122,6 +138,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return An object to configure text conditions.
      */
+    @MessageContext("text")
     StringConditions text();
 
     /**
@@ -130,6 +147,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @return true if the element has the given text content, false otherwise.
      * @see StringConditions#equals(Object)
      */
+    @Message("should [not ] have textContent=\"{0}\"")
     boolean textContext(String anotherString);
 
     /**
@@ -137,6 +155,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return An object to configure text content conditions.
      */
+    @MessageContext("textContext")
     StringConditions textContent();
 
     /**
@@ -146,6 +165,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @param value attribute value to check
      * @return true if the given attribute has the given value, false otherwise.
      */
+    @Message("should [not ] have attribute \"{0}\"=\"{1}\"")
     boolean attribute(final String name, final String value);
 
     /**
@@ -154,6 +174,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @param name attribute name to check
      * @return An object to configure text attribute value conditions.
      */
+    @MessageContext("attribute(\"{0}\"")
     StringConditions attribute(final String name);
 
     /**
@@ -161,5 +182,6 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return An object to configure advanced position conditions
      */
+    @MessageContext("rectangle(\"{0}\"")
     RectangleConditions rectangle();
 }
