@@ -85,25 +85,43 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public boolean hasId(final String id) {
-        return isVerified(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement input) {
-                String elementId = input.getId();
-                return Objects.equal(elementId, id);
-            }
-        });
+        return id().equals(id);
+    }
 
+    @Override
+    public StringConditions id() {
+        return new StringConditionsImpl(object.getId());
     }
 
     @Override
     public boolean hasName(final String name) {
-        return isVerified(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement input) {
-                String elementName = input.getName();
-                return Objects.equal(elementName, name);
-            }
-        });
+        return name().equals(name);
+    }
+
+    @Override
+    public StringConditions name() {
+        return new StringConditionsImpl(object.getName());
+    }
+
+    @Override
+    public boolean tagName(String tagName) {
+        return tagName().equals(tagName);
+    }
+
+    @Override
+    public StringConditions tagName() {
+        return new StringConditionsImpl(object.getTagName());
+    }
+
+
+    @Override
+    public boolean value(String value) {
+        return value().equals(value);
+    }
+
+    @Override
+    public StringConditions value() {
+        return new StringConditionsImpl(object.getValue());
     }
 
     @Override

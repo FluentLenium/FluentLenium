@@ -50,6 +50,13 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
     boolean isSelected();
 
     /**
+     * Check conditions on this element id.
+     *
+     * @return An object to configure id conditions.
+     */
+    StringConditions id();
+
+    /**
      * Check that this element has the given id.
      *
      * @param id id to check
@@ -58,12 +65,49 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
     boolean hasId(String id);
 
     /**
+     * Check conditions on this element name.
+     *
+     * @return An object to configure name conditions.
+     */
+    StringConditions name();
+
+    /**
      * Check that this element has the given name
      *
      * @param name name to check
      * @return true if the element has the given name, false otherwise.
      */
     boolean hasName(String name);
+
+    /**
+     * Check conditions on this element tagName.
+     *
+     * @return An object to configure tagName conditions.
+     */
+    StringConditions tagName();
+
+    /**
+     * Check that this element has the given tagName
+     *
+     * @param tagName tagName to check
+     * @return true if the element has the given tagName, false otherwise.
+     */
+    boolean tagName(String tagName);
+
+    /**
+     * Check conditions on this element value.
+     *
+     * @return An object to configure value conditions.
+     */
+    StringConditions value();
+
+    /**
+     * Check that this element has the given value
+     *
+     * @param value value to check
+     * @return true if the element has the given value, false otherwise.
+     */
+    boolean value(String value);
 
     /**
      * Check conditions on this element text.

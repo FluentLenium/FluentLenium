@@ -111,22 +111,82 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean hasId(final String id) {
-        return isVerified(new Predicate<FluentWebElement>() {
+        return id().equals(id);
+    }
+
+    @Override
+    public StringConditions id() {
+        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
             @Override
-            public boolean apply(FluentWebElement input) {
-                return input.conditions().hasId(id);
+            public String apply(FluentWebElement input) {
+                return input.getId();
             }
-        }, false);
+        }, new Function<FluentWebElement, StringConditions>() {
+            @Override
+            public StringConditions apply(FluentWebElement input) {
+                return input.conditions().id();
+            }
+        });
+    }
+
+    @Override
+    public StringConditions name() {
+        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
+            @Override
+            public String apply(FluentWebElement input) {
+                return input.getName();
+            }
+        }, new Function<FluentWebElement, StringConditions>() {
+            @Override
+            public StringConditions apply(FluentWebElement input) {
+                return input.conditions().name();
+            }
+        });
     }
 
     @Override
     public boolean hasName(final String name) {
-        return isVerified(new Predicate<FluentWebElement>() {
+        return name().equals(name);
+    }
+
+    @Override
+    public StringConditions tagName() {
+        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
             @Override
-            public boolean apply(FluentWebElement input) {
-                return input.conditions().hasName(name);
+            public String apply(FluentWebElement input) {
+                return input.getName();
             }
-        }, false);
+        }, new Function<FluentWebElement, StringConditions>() {
+            @Override
+            public StringConditions apply(FluentWebElement input) {
+                return input.conditions().name();
+            }
+        });
+    }
+
+    @Override
+    public boolean tagName(String tagName) {
+        return tagName().equals(tagName);
+    }
+
+    @Override
+    public StringConditions value() {
+        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
+            @Override
+            public String apply(FluentWebElement input) {
+                return input.getValue();
+            }
+        }, new Function<FluentWebElement, StringConditions>() {
+            @Override
+            public StringConditions apply(FluentWebElement input) {
+                return input.conditions().value();
+            }
+        });
+    }
+
+    @Override
+    public boolean value(String value) {
+        return value.equals(value);
     }
 
     @Override

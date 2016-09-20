@@ -10,10 +10,8 @@ import org.fluentlenium.core.conditions.StringConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasAttributeMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasIdMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNameMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotAttributeMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotIdMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotNameMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotSizeMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasSizeMessage;
@@ -142,13 +140,17 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     @Override
     public boolean hasId(final String id) {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+        return id().equals(id);
+    }
+
+    @Override
+    public StringConditions id() {
+        return new FluentWaitStringMatcher(matcher, new Supplier<StringConditions>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return eachCondition().hasId(id);
+            public StringConditions get() {
+                return matcher.find().each().id();
             }
-        }, matcher.negation ? hasNotIdMessage(matcher.selectionName, id) : hasIdMessage(matcher.selectionName, id));
-        return true;
+        });
     }
 
     @Override
@@ -160,6 +162,46 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
             }
         }, matcher.negation ? hasNotNameMessage(matcher.selectionName, name) : hasNameMessage(matcher.selectionName, name));
         return true;
+    }
+
+    @Override
+    public StringConditions name() {
+        return new FluentWaitStringMatcher(matcher, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return matcher.find().each().name();
+            }
+        });
+    }
+
+    @Override
+    public boolean tagName(String tagName) {
+        return tagName().equals(tagName);
+    }
+
+    @Override
+    public StringConditions tagName() {
+        return new FluentWaitStringMatcher(matcher, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return matcher.find().each().tagName();
+            }
+        });
+    }
+
+    @Override
+    public boolean value(String value) {
+        return value().equals(value);
+    }
+
+    @Override
+    public StringConditions value() {
+        return new FluentWaitStringMatcher(matcher, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return matcher.find().each().value();
+            }
+        });
     }
 
     @Override

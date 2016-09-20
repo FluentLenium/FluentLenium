@@ -12,11 +12,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
 
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasAttributeMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasIdMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasNameMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotAttributeMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotIdMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotNameMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isClickableMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
 import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
@@ -70,39 +66,6 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
                 return condition().isVerified(predicate);
             }
         }, negation ? isPredicateNotVerifiedMessage(selectionName) : isPredicateVerifiedMessage(selectionName));
-        return true;
-    }
-
-    @Override
-    public boolean hasAttribute(final String attribute, final String value) {
-        Predicate<FluentControl> hasAttribute = new com.google.common.base.Predicate<FluentControl>() {
-            public boolean apply(FluentControl fluent) {
-                return condition().hasAttribute(attribute, value);
-            }
-        };
-        until(wait, hasAttribute, negation ? hasNotAttributeMessage(selectionName, attribute, value) : hasAttributeMessage(selectionName, attribute, value));
-        return true;
-    }
-
-    @Override
-    public boolean hasId(final String value) {
-        Predicate<FluentControl> hasId = new com.google.common.base.Predicate<FluentControl>() {
-            public boolean apply(FluentControl fluent) {
-                return condition().hasId(value);
-            }
-        };
-        until(wait, hasId, negation ? hasNotIdMessage(selectionName, value) : hasIdMessage(selectionName, value));
-        return true;
-    }
-
-    @Override
-    public boolean hasName(final String value) {
-        Predicate<FluentControl> hasName = new com.google.common.base.Predicate<FluentControl>() {
-            public boolean apply(FluentControl fluent) {
-                return condition().hasName(value);
-            }
-        };
-        until(wait, hasName, negation ? hasNotNameMessage(selectionName, value) : hasNameMessage(selectionName, value));
         return true;
     }
 
@@ -181,6 +144,63 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         return true;
     }
 
+
+    @Override
+    public boolean hasAttribute(final String attribute, final String value) {
+        Predicate<FluentControl> hasAttribute = new com.google.common.base.Predicate<FluentControl>() {
+            public boolean apply(FluentControl fluent) {
+                return condition().hasAttribute(attribute, value);
+            }
+        };
+        until(wait, hasAttribute, negation ? hasNotAttributeMessage(selectionName, attribute, value) : hasAttributeMessage(selectionName, attribute, value));
+        return true;
+    }
+
+    @Override
+    public boolean hasId(final String value) {
+        return id().equals(value);
+    }
+
+    @Override
+    public StringConditions id() {
+        return new FluentWaitStringMatcher(this, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return find().one().id();
+            }
+        });
+    }
+
+    @Override
+    public boolean hasName(final String value) {
+        return name().equals(value);
+    }
+
+    @Override
+    public StringConditions name() {
+        return new FluentWaitStringMatcher(this, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return find().one().name();
+            }
+        });
+    }
+
+    @Override
+    public boolean tagName(String tagName) {
+        return tagName().equals(tagName);
+    }
+
+    @Override
+    public StringConditions tagName() {
+        return new FluentWaitStringMatcher(this, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return find().one().tagName();
+            }
+        });
+    }
+
     @Override
     public StringConditions text() {
         return new FluentWaitStringMatcher(this, new Supplier<StringConditions>() {
@@ -209,6 +229,21 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
     @Override
     public boolean textContext(String anotherString) {
         return textContent().equals(anotherString);
+    }
+
+    @Override
+    public boolean value(String value) {
+        return value().equals(value);
+    }
+
+    @Override
+    public StringConditions value() {
+        return new FluentWaitStringMatcher(this, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return find().one().value();
+            }
+        });
     }
 
     @Override
