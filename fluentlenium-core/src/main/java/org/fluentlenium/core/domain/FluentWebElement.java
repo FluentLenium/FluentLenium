@@ -19,8 +19,6 @@ import org.fluentlenium.core.proxy.FluentProxyState;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchControl;
-import org.fluentlenium.core.wait.AwaitControl;
-import org.fluentlenium.core.wait.FluentWait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -35,7 +33,7 @@ import java.util.List;
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
 public class FluentWebElement extends Component implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>,
-        FluentProxyState<FluentWebElement>, SearchControl<FluentWebElement>, HookControl<FluentWebElement>, AwaitControl {
+        FluentProxyState<FluentWebElement>, SearchControl<FluentWebElement>, HookControl<FluentWebElement> {
     private final Search search;
     private final Axes axes;
     private final MouseElementActions mouseActions;
@@ -501,10 +499,5 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
         hookDefinitions.add(new HookDefinition<>(hook, options));
         LocatorProxies.setHooks(getElement(), hookChainBuilder, hookDefinitions);
         return this;
-    }
-
-    @Override
-    public FluentWait await() {
-        return fluentControl.await();
     }
 }
