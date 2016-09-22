@@ -48,9 +48,13 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
      */
     abstract protected FluentList<? extends FluentWebElement> find();
 
-    protected FluentListConditions condition() {
+    protected FluentListConditions conditions() {
+        return conditions(false);
+    }
+
+    protected FluentListConditions conditions(boolean ignoreNot) {
         FluentListConditions conditions = find().one();
-        if (negation) {
+        if (!ignoreNot && negation) {
             conditions = conditions.not();
         }
         return conditions;
@@ -61,7 +65,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         until(wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return condition().verify(predicate);
+                return conditions().verify(predicate);
             }
         }, negation ? isPredicateNotVerifiedMessage(selectionName) : isPredicateVerifiedMessage(selectionName));
         return true;
@@ -75,7 +79,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
     public boolean present() {
         Predicate<FluentControl> present = new com.google.common.base.Predicate<FluentControl>() {
             public boolean apply(FluentControl fluent) {
-                return condition().isPresent();
+                return conditions().isPresent();
             }
         };
         until(wait, present, negation ? isNotPresentMessage(selectionName) : isPresentMessage(selectionName));
@@ -87,7 +91,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         Predicate<FluentControl> isDisplayed = new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return condition().displayed();
+                return conditions().displayed();
             }
         };
         until(wait, isDisplayed, negation ? isNotDisplayedMessage(selectionName) : isDisplayedMessage(selectionName));
@@ -99,7 +103,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         Predicate<FluentControl> isEnabled = new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return condition().enabled();
+                return conditions().enabled();
             }
         };
         until(wait, isEnabled, negation ? isNotEnabledMessage(selectionName) : isEnabledMessage(selectionName));
@@ -111,7 +115,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         Predicate<FluentControl> isSelected = new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return condition().selected();
+                return conditions().selected();
             }
         };
         until(wait, isSelected, negation ? isNotSelectedMessage(selectionName) : isSelectedMessage(selectionName));
@@ -123,7 +127,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         Predicate<FluentControl> isClickable = new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return condition().clickable();
+                return conditions().clickable();
             }
         };
         until(wait, isClickable, negation ? isNotClickableMessage(selectionName) : isClickableMessage(selectionName));
@@ -135,7 +139,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         Predicate<FluentControl> isStale = new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return condition().stale();
+                return conditions().stale();
             }
         };
         until(wait, isStale, negation ? isNotStaleMessage(selectionName) : isStaleMessage(selectionName));
@@ -153,7 +157,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         return new FluentWaitStringMatcher(this, new Supplier<StringConditions>() {
             @Override
             public StringConditions get() {
-                return find().one().attribute(name);
+                return conditions(true).attribute(name);
             }
         });
     }
@@ -168,7 +172,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         return new FluentWaitStringMatcher(this, new Supplier<StringConditions>() {
             @Override
             public StringConditions get() {
-                return find().one().id();
+                return conditions(true).id();
             }
         });
     }
@@ -183,7 +187,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         return new FluentWaitStringMatcher(this, new Supplier<StringConditions>() {
             @Override
             public StringConditions get() {
-                return find().one().name();
+                return conditions(true).name();
             }
         });
     }
@@ -198,7 +202,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         return new FluentWaitStringMatcher(this, new Supplier<StringConditions>() {
             @Override
             public StringConditions get() {
-                return find().one().tagName();
+                return conditions(true).tagName();
             }
         });
     }
@@ -208,7 +212,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         return new FluentWaitStringMatcher(this, new Supplier<StringConditions>() {
             @Override
             public StringConditions get() {
-                return find().one().text();
+                return conditions(true).text();
             }
         });
     }
@@ -223,7 +227,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         return new FluentWaitStringMatcher(this, new Supplier<StringConditions>() {
             @Override
             public StringConditions get() {
-                return find().one().textContent();
+                return conditions(true).textContent();
             }
         });
     }
@@ -243,7 +247,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         return new FluentWaitStringMatcher(this, new Supplier<StringConditions>() {
             @Override
             public StringConditions get() {
-                return find().one().value();
+                return conditions(true).value();
             }
         });
     }
@@ -253,7 +257,7 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
         return new FluentWaitRectangleMatcher(this, new Supplier<RectangleConditions>() {
             @Override
             public RectangleConditions get() {
-                return find().one().rectangle();
+                return conditions(true).rectangle();
             }
         });
     }

@@ -35,9 +35,13 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         this.matcher = matcher;
     }
 
-    protected FluentListConditions eachCondition() {
+    protected FluentListConditions conditions() {
+        return conditions(false);
+    }
+
+    protected FluentListConditions conditions(boolean ignoreNot) {
         FluentListConditions conditions = matcher.find().each();
-        if (matcher.negation) {
+        if (!ignoreNot && matcher.negation) {
             conditions = conditions.not();
         }
         return conditions;
@@ -53,7 +57,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().isVerified(predicate, defaultValue);
+                return conditions().isVerified(predicate, defaultValue);
             }
         }, matcher.negation ? isPredicateNotVerifiedMessage(matcher.selectionName) : isPredicateVerifiedMessage(matcher.selectionName));
         return true;
@@ -64,7 +68,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().verify(predicate);
+                return conditions().verify(predicate);
             }
         }, matcher.negation ? isPredicateNotVerifiedMessage(matcher.selectionName) : isPredicateVerifiedMessage(matcher.selectionName));
         return true;
@@ -75,7 +79,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().clickable();
+                return conditions().clickable();
             }
         }, matcher.negation ? isNotClickableMessage(matcher.selectionName) : isClickableMessage(matcher.selectionName));
         return true;
@@ -86,7 +90,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().stale();
+                return conditions().stale();
             }
         }, matcher.negation ? isNotStaleMessage(matcher.selectionName) : isStaleMessage(matcher.selectionName));
         return true;
@@ -97,7 +101,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().displayed();
+                return conditions().displayed();
             }
         }, matcher.negation ? isNotDisplayedMessage(matcher.selectionName) : isDisplayedMessage(matcher.selectionName));
         return true;
@@ -108,7 +112,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().enabled();
+                return conditions().enabled();
             }
         }, matcher.negation ? isNotEnabledMessage(matcher.selectionName) : isEnabledMessage(matcher.selectionName));
         return true;
@@ -119,7 +123,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().selected();
+                return conditions().selected();
             }
         }, matcher.negation ? isNotSelectedMessage(matcher.selectionName) : isSelectedMessage(matcher.selectionName));
         return true;
@@ -135,7 +139,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         return new FluentWaitStringMatcher(matcher, new Supplier<StringConditions>() {
             @Override
             public StringConditions get() {
-                return matcher.find().each().attribute(name);
+                return conditions(true).attribute(name);
             }
         });
     }
@@ -150,7 +154,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         return new FluentWaitStringMatcher(matcher, new Supplier<StringConditions>() {
             @Override
             public StringConditions get() {
-                return matcher.find().each().id();
+                return conditions(true).id();
             }
         });
     }
@@ -160,7 +164,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().name(name);
+                return conditions().name(name);
             }
         }, matcher.negation ? hasNotNameMessage(matcher.selectionName, name) : hasNameMessage(matcher.selectionName, name));
         return true;
@@ -171,7 +175,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         return new FluentWaitStringMatcher(matcher, new Supplier<StringConditions>() {
             @Override
             public StringConditions get() {
-                return matcher.find().each().name();
+                return conditions(true).name();
             }
         });
     }
@@ -186,7 +190,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         return new FluentWaitStringMatcher(matcher, new Supplier<StringConditions>() {
             @Override
             public StringConditions get() {
-                return matcher.find().each().tagName();
+                return conditions(true).tagName();
             }
         });
     }
@@ -201,7 +205,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         return new FluentWaitStringMatcher(matcher, new Supplier<StringConditions>() {
             @Override
             public StringConditions get() {
-                return matcher.find().each().value();
+                return conditions(true).value();
             }
         });
     }
@@ -211,7 +215,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().isPresent();
+                return conditions().isPresent();
             }
         }, matcher.negation ? isNotPresentMessage(matcher.selectionName) : isPresentMessage(matcher.selectionName));
         return true;
@@ -222,7 +226,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         matcher.until(matcher.wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return eachCondition().hasSize(size);
+                return conditions().hasSize(size);
             }
         }, matcher.negation ? hasNotSizeMessage(matcher.selectionName, size) : hasSizeMessage(matcher.selectionName, size));
         return true;
@@ -233,7 +237,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         return new FluentWaitIntegerMatcher(matcher, new Supplier<IntegerConditions>() {
             @Override
             public IntegerConditions get() {
-                return matcher.find().each().hasSize();
+                return conditions(true).hasSize();
             }
         });
     }
@@ -243,7 +247,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         return new FluentWaitStringMatcher(matcher, new Supplier<StringConditions>() {
             @Override
             public StringConditions get() {
-                return matcher.find().each().text();
+                return conditions(true).text();
             }
         });
     }
@@ -258,7 +262,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         return new FluentWaitStringMatcher(matcher, new Supplier<StringConditions>() {
             @Override
             public StringConditions get() {
-                return matcher.find().each().textContent();
+                return conditions(true).textContent();
             }
         });
     }
@@ -273,7 +277,7 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
         return new FluentWaitRectangleMatcher(matcher, new Supplier<RectangleConditions>() {
             @Override
             public RectangleConditions get() {
-                return matcher.find().each().rectangle();
+                return conditions(true).rectangle();
             }
         });
     }

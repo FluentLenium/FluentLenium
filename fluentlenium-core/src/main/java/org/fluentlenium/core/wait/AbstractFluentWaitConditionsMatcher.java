@@ -18,8 +18,12 @@ public abstract class AbstractFluentWaitConditionsMatcher<T, C extends Condition
     }
 
     protected C conditions() {
+        return conditions(false);
+    }
+
+    protected C conditions(boolean ignoreNot) {
         C conditions = conditionsSupplier.get();
-        if (matcher.negation) {
+        if (!ignoreNot && matcher.negation) {
             conditions = (C) conditions.not();
         }
         return conditions;

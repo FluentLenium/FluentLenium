@@ -41,7 +41,7 @@ public class FluentWaitRectangleMatcher extends AbstractFluentWaitConditionsMatc
         return new FluentWaitIntegerMatcher(matcher, new Supplier<IntegerConditions>() {
             @Override
             public IntegerConditions get() {
-                return matcher.find().each().rectangle().withX();
+                return conditions(true).withX();
             }
         });
     }
@@ -62,7 +62,7 @@ public class FluentWaitRectangleMatcher extends AbstractFluentWaitConditionsMatc
         return new FluentWaitIntegerMatcher(matcher, new Supplier<IntegerConditions>() {
             @Override
             public IntegerConditions get() {
-                return matcher.find().each().rectangle().withY();
+                return conditions(true).withY();
             }
         });
     }
@@ -94,7 +94,7 @@ public class FluentWaitRectangleMatcher extends AbstractFluentWaitConditionsMatc
         return new FluentWaitIntegerMatcher(matcher, new Supplier<IntegerConditions>() {
             @Override
             public IntegerConditions get() {
-                return matcher.find().each().rectangle().withWidth();
+                return conditions(true).withWidth();
             }
         });
     }
@@ -115,7 +115,7 @@ public class FluentWaitRectangleMatcher extends AbstractFluentWaitConditionsMatc
         return new FluentWaitIntegerMatcher(matcher, new Supplier<IntegerConditions>() {
             @Override
             public IntegerConditions get() {
-                return matcher.find().each().rectangle().withHeight();
+                return conditions(true).withHeight();
             }
         });
     }

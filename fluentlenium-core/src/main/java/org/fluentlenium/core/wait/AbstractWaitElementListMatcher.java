@@ -26,7 +26,7 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
         until(wait, new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
-                return condition().isVerified(predicate, defaultValue);
+                return conditions().isVerified(predicate, defaultValue);
             }
         }, negation ? isPredicateNotVerifiedMessage(selectionName) : isPredicateVerifiedMessage(selectionName));
         return true;
