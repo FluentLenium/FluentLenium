@@ -26,7 +26,7 @@ public interface FluentListConditions extends FluentConditions {
      * @return true if the predicated is verified, false otherwise
      */
     @Message("should [not ]verify predicate {0}")
-    boolean isVerified(Predicate<FluentWebElement> predicate, boolean defaultValue);
+    boolean verify(Predicate<FluentWebElement> predicate, boolean defaultValue);
 
     /**
      * Check that this element is present.
@@ -34,7 +34,7 @@ public interface FluentListConditions extends FluentConditions {
      * @return true if the element is present, false otherwise
      */
     @Message("should [not ]be present {0}")
-    boolean isPresent();
+    boolean present();
 
     /**
      * Check that this element list has the given size.

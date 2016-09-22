@@ -1,14 +1,12 @@
 package org.fluentlenium.core.wait;
 
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import org.fluentlenium.core.FluentControl;
+import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.IntegerConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
-
-import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateNotVerifiedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateVerifiedMessage;
 
 /**
  * Base Matcher for waiting on element list.
@@ -22,21 +20,21 @@ public abstract class AbstractWaitElementListMatcher extends AbstractWaitElement
         return new FluentWaitElementEachMatcher(this);
     }
 
-    public boolean isVerified(final Predicate<FluentWebElement> predicate, final boolean defaultValue) {
-        until(wait, new Predicate<FluentControl>() {
+    public boolean verified(final Predicate<FluentWebElement> predicate, final boolean defaultValue) {
+        until(wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().isVerified(predicate, defaultValue);
+            public Boolean apply(FluentListConditions input) {
+                return input.verify(predicate, defaultValue);
             }
-        }, negation ? isPredicateNotVerifiedMessage(selectionName) : isPredicateVerifiedMessage(selectionName));
+        });
         return true;
     }
 
-    public IntegerConditions hasSize() {
+    public IntegerConditions size() {
         return each().hasSize();
     }
 
-    public boolean hasSize(final int size) {
+    public boolean size(final int size) {
         return each().hasSize(size);
     }
 

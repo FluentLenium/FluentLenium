@@ -340,7 +340,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains("d"));
             }
-        }).hasSize().equalTo(1);
+        }).size().equalTo(1);
     }
 
     @Test
@@ -350,7 +350,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains("d"));
             }
-        }).hasSize().not().equalTo(10);
+        }).size().not().equalTo(10);
     }
 
     @Test
@@ -360,7 +360,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains("d"));
             }
-        }).hasSize().lessThan(4);
+        }).size().lessThan(4);
     }
 
     @Test
@@ -370,7 +370,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains("d"));
             }
-        }).hasSize().lessThanOrEqualTo(1);
+        }).size().lessThanOrEqualTo(1);
     }
 
     @Test
@@ -380,7 +380,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains("d"));
             }
-        }).hasSize().greaterThan(-1);
+        }).size().greaterThan(-1);
     }
 
     @Test
@@ -390,7 +390,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains("d"));
             }
-        }).hasSize().greaterThanOrEqualTo(1);
+        }).size().greaterThanOrEqualTo(1);
     }
 
     @Test

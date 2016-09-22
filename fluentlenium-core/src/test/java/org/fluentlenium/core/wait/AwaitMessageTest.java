@@ -16,7 +16,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-//TODO: Find a new way to generate messages based on annotations on FluentConditions interface.
+//TODO: Update this test
 @Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class AwaitMessageTest {
@@ -24,11 +24,14 @@ public class AwaitMessageTest {
     @Mock
     FluentWait wait;
 
+    @Mock
+    Search search;
+
     FluentWaitLocatorSelectorMatcher builder;
 
     @Before
     public void before() {
-        builder = new FluentWaitLocatorSelectorMatcher(mock(Search.class), wait, "select");
+        builder = new FluentWaitLocatorSelectorMatcher(search, wait, "select");
         when(wait.withMessage(anyString())).thenReturn(wait);
     }
 
@@ -93,7 +96,7 @@ public class AwaitMessageTest {
 
     @Test
     public void when_has_size_equalTo_5_then_print_principal_message() {
-        builder.hasSize().equalTo(5);
+        builder.size().equalTo(5);
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
         assertThat(message.getValue()).contains("select").contains("size").contains("5");
@@ -101,7 +104,7 @@ public class AwaitMessageTest {
 
     @Test
     public void when_has_size_not_equalTo_5_then_print_principal_message() {
-        builder.hasSize().not().equalTo(5);
+        builder.size().not().equalTo(5);
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
         assertThat(message.getValue()).contains("select").contains("is equal").contains("5");
@@ -109,7 +112,7 @@ public class AwaitMessageTest {
 
     @Test
     public void when_has_size_less_than_then_print_principal_message() {
-        builder.hasSize().lessThan(5);
+        builder.size().lessThan(5);
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
         assertThat(message.getValue()).contains("select").contains("less than").contains("5");
@@ -117,7 +120,7 @@ public class AwaitMessageTest {
 
     @Test
     public void when_has_size_less_than_or_equalTo_5_then_print_principal_message() {
-        builder.hasSize().lessThanOrEqualTo(5);
+        builder.size().lessThanOrEqualTo(5);
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
         assertThat(message.getValue()).contains("select").contains("less").contains("equal").contains("5");
@@ -125,7 +128,7 @@ public class AwaitMessageTest {
 
     @Test
     public void when_has_size_greater_than_then_print_principal_message() {
-        builder.hasSize().greaterThan(5);
+        builder.size().greaterThan(5);
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
         assertThat(message.getValue()).contains("select").contains("greater than").contains("5");
@@ -133,7 +136,7 @@ public class AwaitMessageTest {
 
     @Test
     public void when_has_size_greater_or_equal_to_than_then_print_principal_message() {
-        builder.hasSize().greaterThanOrEqualTo(5);
+        builder.size().greaterThanOrEqualTo(5);
         ArgumentCaptor<String> message = ArgumentCaptor.forClass(String.class);
         verify(wait).withMessage(message.capture());
         assertThat(message.getValue()).contains("select").contains("greater than").contains("equal").contains("5");

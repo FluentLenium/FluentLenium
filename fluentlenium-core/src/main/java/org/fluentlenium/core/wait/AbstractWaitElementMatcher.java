@@ -1,30 +1,16 @@
 package org.fluentlenium.core.wait;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
-import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.RectangleConditions;
 import org.fluentlenium.core.conditions.StringConditions;
+import org.fluentlenium.core.conditions.message.MessageProxy;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
-
-import static org.fluentlenium.core.wait.FluentWaitMessages.isClickableMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isNotClickableMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isNotDisplayedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isNotEnabledMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isNotPresentMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isNotSelectedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isNotStaleMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateNotVerifiedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateVerifiedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isPresentMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isSelectedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isStaleMessage;
 
 /**
  * Base Matcher for waiting on a single element.
@@ -54,20 +40,32 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
 
     protected FluentListConditions conditions(boolean ignoreNot) {
         FluentListConditions conditions = find().one();
-        if (!ignoreNot && negation) {
-            conditions = conditions.not();
-        }
+        return applyNegation(conditions, ignoreNot);
+    }
+
+    protected FluentListConditions applyNegation(FluentListConditions conditions, boolean ignoreNot) {
+        if (!ignoreNot && negation) return conditions.not();
+        return conditions;
+    }
+
+    protected FluentListConditions messageBuilder() {
+        return messageBuilder(false);
+    }
+
+    protected FluentListConditions messageBuilder(boolean ignoreNot) {
+        FluentListConditions conditions = MessageProxy.builder(FluentListConditions.class, selectionName);
+        applyNegation(conditions, ignoreNot);
         return conditions;
     }
 
     @Override
     public boolean verify(final Predicate<FluentWebElement> predicate) {
-        until(wait, new Predicate<FluentControl>() {
+        until(wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().verify(predicate);
+            public Boolean apply(FluentListConditions input) {
+                return input.verify(predicate);
             }
-        }, negation ? isPredicateNotVerifiedMessage(selectionName) : isPredicateVerifiedMessage(selectionName));
+        });
         return true;
     }
 
@@ -77,72 +75,67 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
      * @return true if one or more element is present, false otherwise
      */
     public boolean present() {
-        Predicate<FluentControl> present = new com.google.common.base.Predicate<FluentControl>() {
-            public boolean apply(FluentControl fluent) {
-                return conditions().isPresent();
+        until(wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
+            @Override
+            public Boolean apply(FluentListConditions input) {
+                return input.present();
             }
-        };
-        until(wait, present, negation ? isNotPresentMessage(selectionName) : isPresentMessage(selectionName));
+        });
         return true;
     }
 
     @Override
     public boolean displayed() {
-        Predicate<FluentControl> isDisplayed = new Predicate<FluentControl>() {
+        until(wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().displayed();
+            public Boolean apply(FluentListConditions input) {
+                return input.displayed();
             }
-        };
-        until(wait, isDisplayed, negation ? isNotDisplayedMessage(selectionName) : isDisplayedMessage(selectionName));
+        });
         return true;
     }
 
     @Override
     public boolean enabled() {
-        Predicate<FluentControl> isEnabled = new Predicate<FluentControl>() {
+        until(wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().enabled();
+            public Boolean apply(FluentListConditions input) {
+                return input.enabled();
             }
-        };
-        until(wait, isEnabled, negation ? isNotEnabledMessage(selectionName) : isEnabledMessage(selectionName));
+        });
         return true;
     }
 
     @Override
     public boolean selected() {
-        Predicate<FluentControl> isSelected = new Predicate<FluentControl>() {
+        until(wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().selected();
+            public Boolean apply(FluentListConditions input) {
+                return input.selected();
             }
-        };
-        until(wait, isSelected, negation ? isNotSelectedMessage(selectionName) : isSelectedMessage(selectionName));
+        });
         return true;
     }
 
     @Override
     public boolean clickable() {
-        Predicate<FluentControl> isClickable = new Predicate<FluentControl>() {
+        until(wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().clickable();
+            public Boolean apply(FluentListConditions input) {
+                return input.clickable();
             }
-        };
-        until(wait, isClickable, negation ? isNotClickableMessage(selectionName) : isClickableMessage(selectionName));
+        });
         return true;
     }
 
     @Override
     public boolean stale() {
-        Predicate<FluentControl> isStale = new Predicate<FluentControl>() {
+        until(wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().stale();
+            public Boolean apply(FluentListConditions input) {
+                return input.stale();
             }
-        };
-        until(wait, isStale, negation ? isNotStaleMessage(selectionName) : isStaleMessage(selectionName));
+        });
         return true;
     }
 
@@ -159,6 +152,11 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
             public StringConditions get() {
                 return conditions(true).attribute(name);
             }
+        }, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return messageBuilder(true).attribute(name);
+            }
         });
     }
 
@@ -173,6 +171,11 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
             @Override
             public StringConditions get() {
                 return conditions(true).id();
+            }
+        }, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return messageBuilder(true).id();
             }
         });
     }
@@ -189,6 +192,11 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
             public StringConditions get() {
                 return conditions(true).name();
             }
+        }, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return messageBuilder(true).name();
+            }
         });
     }
 
@@ -204,6 +212,11 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
             public StringConditions get() {
                 return conditions(true).tagName();
             }
+        }, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return messageBuilder(true).tagName();
+            }
         });
     }
 
@@ -213,6 +226,11 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
             @Override
             public StringConditions get() {
                 return conditions(true).text();
+            }
+        }, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return messageBuilder(true).text();
             }
         });
     }
@@ -229,11 +247,16 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
             public StringConditions get() {
                 return conditions(true).textContent();
             }
+        }, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return messageBuilder(true).textContent();
+            }
         });
     }
 
     @Override
-    public boolean textContext(String anotherString) {
+    public boolean textContent(String anotherString) {
         return textContent().equals(anotherString);
     }
 
@@ -249,6 +272,11 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
             public StringConditions get() {
                 return conditions(true).value();
             }
+        }, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return messageBuilder(true).value();
+            }
         });
     }
 
@@ -258,6 +286,11 @@ public abstract class AbstractWaitElementMatcher extends AbstractWaitMatcher imp
             @Override
             public RectangleConditions get() {
                 return conditions(true).rectangle();
+            }
+        }, new Supplier<RectangleConditions>() {
+            @Override
+            public RectangleConditions get() {
+                return messageBuilder(true).rectangle();
             }
         });
     }

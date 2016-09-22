@@ -19,7 +19,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean isPresent() {
+    public boolean present() {
         if (negation) {
             return elements.size() <= 0;
         }
@@ -45,12 +45,12 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean verify(Predicate<FluentWebElement> predicate) {
-        return isVerified(predicate, false);
+        return verify(predicate, false);
     }
 
     @Override
     public boolean clickable() {
-        return isVerified(new Predicate<FluentWebElement>() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return input.clickable();
@@ -60,7 +60,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean stale() {
-        return isVerified(new Predicate<FluentWebElement>() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return input.conditions().stale();
@@ -70,7 +70,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean displayed() {
-        return isVerified(new Predicate<FluentWebElement>() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return input.conditions().displayed();
@@ -80,7 +80,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean enabled() {
-        return isVerified(new Predicate<FluentWebElement>() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return input.conditions().enabled();
@@ -90,7 +90,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean selected() {
-        return isVerified(new Predicate<FluentWebElement>() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return input.conditions().selected();
@@ -234,7 +234,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean textContext(String anotherString) {
+    public boolean textContent(String anotherString) {
         return textContent().equals(anotherString);
     }
 

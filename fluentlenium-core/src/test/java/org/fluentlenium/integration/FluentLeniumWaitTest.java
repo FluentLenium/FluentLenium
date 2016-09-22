@@ -237,32 +237,32 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitEquals() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().equalTo(1);
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").size().equalTo(1);
     }
 
     @Test
     public void checkAwaitNotEquals() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().not().equalTo(10);
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").size().not().equalTo(10);
     }
 
     @Test
     public void checkAwaitLessThan() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().lessThan(4);
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").size().lessThan(4);
     }
 
     @Test
     public void checkAwaitLessThanOrEquals() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().lessThanOrEqualTo(1);
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").size().lessThanOrEqualTo(1);
     }
 
     @Test
     public void checkAwaitGreaterThan() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().greaterThan(-1);
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").size().greaterThan(-1);
     }
 
     @Test
     public void checkAwaitGreaterThanOrEquals() {
-        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").hasSize().greaterThanOrEqualTo(1);
+        await().atMost(1, NANOSECONDS).until(".small").with("id").notContains("d").size().greaterThanOrEqualTo(1);
     }
 
     @Test

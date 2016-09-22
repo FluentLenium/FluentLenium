@@ -144,16 +144,16 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.isVerified(predicate, false);
+                matcher.verify(predicate, false);
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        matcher.isVerified(predicate, true);
+        matcher.verify(predicate, true);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().isVerified(predicate, true);
+                matcher.not().verify(predicate, true);
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
@@ -361,14 +361,14 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.isPresent();
+                matcher.present();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
         reset(fluentWebElement1);
         reset(fluentWebElement2);
         reset(fluentWebElement3);
-        matcher.isPresent();
+        matcher.present();
 
         verify(fluentWebElement1, atLeastOnce()).now();
         verify(fluentWebElement2, atLeastOnce()).now();
@@ -377,7 +377,7 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().isPresent();
+                matcher.not().present();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }

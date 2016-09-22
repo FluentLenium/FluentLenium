@@ -62,6 +62,7 @@ public class MessageProxy {
      */
     public static String message(Object proxy) {
         MessageBuilderInvocationHandler invocationHandler = (MessageBuilderInvocationHandler) Proxy.getInvocationHandler(proxy);
+        if (invocationHandler == null) return null;
         return invocationHandler.buildMessage();
     }
 }

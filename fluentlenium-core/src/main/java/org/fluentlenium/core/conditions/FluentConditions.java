@@ -148,14 +148,14 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @see StringConditions#equals(Object)
      */
     @Message("should [not ] have textContent=\"{0}\"")
-    boolean textContext(String anotherString);
+    boolean textContent(String anotherString);
 
     /**
      * Check conditions on this element text content.
      *
      * @return An object to configure text content conditions.
      */
-    @MessageContext("textContext")
+    @MessageContext("textContent")
     StringConditions textContent();
 
     /**

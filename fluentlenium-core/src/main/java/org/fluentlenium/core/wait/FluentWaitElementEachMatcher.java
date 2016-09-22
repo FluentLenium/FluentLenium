@@ -1,32 +1,14 @@
 package org.fluentlenium.core.wait;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
-import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.IntegerConditions;
 import org.fluentlenium.core.conditions.RectangleConditions;
 import org.fluentlenium.core.conditions.StringConditions;
+import org.fluentlenium.core.conditions.message.MessageProxy;
 import org.fluentlenium.core.domain.FluentWebElement;
-
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasNameMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotNameMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasNotSizeMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.hasSizeMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isClickableMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isDisplayedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isEnabledMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isNotClickableMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isNotDisplayedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isNotEnabledMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isNotPresentMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isNotSelectedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isNotStaleMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateNotVerifiedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateVerifiedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isPresentMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isSelectedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isStaleMessage;
 
 public class FluentWaitElementEachMatcher implements FluentListConditions {
     private final AbstractWaitElementListMatcher matcher;
@@ -41,10 +23,16 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
 
     protected FluentListConditions conditions(boolean ignoreNot) {
         FluentListConditions conditions = matcher.find().each();
-        if (!ignoreNot && matcher.negation) {
-            conditions = conditions.not();
-        }
-        return conditions;
+        return matcher.applyNegation(conditions, ignoreNot);
+    }
+
+    protected FluentListConditions messageBuilder() {
+        return messageBuilder(false);
+    }
+
+    protected FluentListConditions messageBuilder(boolean ignoreNot) {
+        FluentListConditions conditions = MessageProxy.builder(FluentListConditions.class, matcher.selectionName);
+        return matcher.applyNegation(conditions, ignoreNot);
     }
 
     @Override
@@ -53,85 +41,91 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
     }
 
     @Override
-    public boolean isVerified(final Predicate<FluentWebElement> predicate, final boolean defaultValue) {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+    public boolean verify(final Predicate<FluentWebElement> predicate, final boolean defaultValue) {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().isVerified(predicate, defaultValue);
+            public Boolean apply(FluentListConditions input) {
+                return input.verify(predicate, defaultValue);
             }
-        }, matcher.negation ? isPredicateNotVerifiedMessage(matcher.selectionName) : isPredicateVerifiedMessage(matcher.selectionName));
+        });
         return true;
     }
 
     @Override
     public boolean verify(final Predicate<FluentWebElement> predicate) {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().verify(predicate);
+            public Boolean apply(FluentListConditions input) {
+                return input.verify(predicate);
             }
-        }, matcher.negation ? isPredicateNotVerifiedMessage(matcher.selectionName) : isPredicateVerifiedMessage(matcher.selectionName));
+        });
         return true;
     }
 
     @Override
     public boolean clickable() {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().clickable();
+            public Boolean apply(FluentListConditions input) {
+                return input.clickable();
             }
-        }, matcher.negation ? isNotClickableMessage(matcher.selectionName) : isClickableMessage(matcher.selectionName));
+        });
         return true;
     }
 
     @Override
     public boolean stale() {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().stale();
+            public Boolean apply(FluentListConditions input) {
+                return input.stale();
             }
-        }, matcher.negation ? isNotStaleMessage(matcher.selectionName) : isStaleMessage(matcher.selectionName));
+        });
         return true;
     }
 
     @Override
     public boolean displayed() {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().displayed();
+            public Boolean apply(FluentListConditions input) {
+                return input.displayed();
             }
-        }, matcher.negation ? isNotDisplayedMessage(matcher.selectionName) : isDisplayedMessage(matcher.selectionName));
+        });
         return true;
     }
 
     @Override
     public boolean enabled() {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().enabled();
+            public Boolean apply(FluentListConditions input) {
+                return input.enabled();
             }
-        }, matcher.negation ? isNotEnabledMessage(matcher.selectionName) : isEnabledMessage(matcher.selectionName));
+        });
         return true;
     }
 
     @Override
     public boolean selected() {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().selected();
+            public Boolean apply(FluentListConditions input) {
+                return input.selected();
             }
-        }, matcher.negation ? isNotSelectedMessage(matcher.selectionName) : isSelectedMessage(matcher.selectionName));
+        });
         return true;
     }
 
     @Override
-    public boolean attribute(final String attribute, final String value) {
-        return attribute(attribute).equals(value);
+    public boolean attribute(final String name, final String value) {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
+            @Override
+            public Boolean apply(FluentListConditions input) {
+                return input.attribute(name, value);
+            }
+        });
+        return true;
     }
 
     @Override
@@ -141,12 +135,23 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
             public StringConditions get() {
                 return conditions(true).attribute(name);
             }
+        }, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return messageBuilder(true).attribute(name);
+            }
         });
     }
 
     @Override
     public boolean id(final String id) {
-        return id().equals(id);
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
+            @Override
+            public Boolean apply(FluentListConditions input) {
+                return input.id(id);
+            }
+        });
+        return true;
     }
 
     @Override
@@ -156,17 +161,22 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
             public StringConditions get() {
                 return conditions(true).id();
             }
+        }, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return messageBuilder(true).id();
+            }
         });
     }
 
     @Override
     public boolean name(final String name) {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().name(name);
+            public Boolean apply(FluentListConditions input) {
+                return input.name(name);
             }
-        }, matcher.negation ? hasNotNameMessage(matcher.selectionName, name) : hasNameMessage(matcher.selectionName, name));
+        });
         return true;
     }
 
@@ -177,12 +187,23 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
             public StringConditions get() {
                 return conditions(true).name();
             }
+        }, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return messageBuilder(true).name();
+            }
         });
     }
 
     @Override
-    public boolean tagName(String tagName) {
-        return tagName().equals(tagName);
+    public boolean tagName(final String tagName) {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
+            @Override
+            public Boolean apply(FluentListConditions input) {
+                return input.tagName(tagName);
+            }
+        });
+        return true;
     }
 
     @Override
@@ -192,12 +213,23 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
             public StringConditions get() {
                 return conditions(true).tagName();
             }
+        }, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return messageBuilder(true).tagName();
+            }
         });
     }
 
     @Override
-    public boolean value(String value) {
-        return value().equals(value);
+    public boolean value(final String value) {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
+            @Override
+            public Boolean apply(FluentListConditions input) {
+                return input.value(value);
+            }
+        });
+        return true;
     }
 
     @Override
@@ -207,28 +239,33 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
             public StringConditions get() {
                 return conditions(true).value();
             }
+        }, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return messageBuilder(true).value();
+            }
         });
     }
 
     @Override
-    public boolean isPresent() {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+    public boolean present() {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().isPresent();
+            public Boolean apply(FluentListConditions input) {
+                return input.present();
             }
-        }, matcher.negation ? isNotPresentMessage(matcher.selectionName) : isPresentMessage(matcher.selectionName));
+        });
         return true;
     }
 
     @Override
     public boolean hasSize(final int size) {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return conditions().hasSize(size);
+            public Boolean apply(FluentListConditions input) {
+                return input.hasSize(size);
             }
-        }, matcher.negation ? hasNotSizeMessage(matcher.selectionName, size) : hasSizeMessage(matcher.selectionName, size));
+        });
         return true;
     }
 
@@ -238,6 +275,11 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
             @Override
             public IntegerConditions get() {
                 return conditions(true).hasSize();
+            }
+        }, new Supplier<IntegerConditions>() {
+            @Override
+            public IntegerConditions get() {
+                return messageBuilder(true).hasSize();
             }
         });
     }
@@ -249,12 +291,23 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
             public StringConditions get() {
                 return conditions(true).text();
             }
+        }, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return messageBuilder(true).text();
+            }
         });
     }
 
     @Override
-    public boolean text(String anotherString) {
-        return text().equals(anotherString);
+    public boolean text(final String anotherString) {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
+            @Override
+            public Boolean apply(FluentListConditions input) {
+                return input.text(anotherString);
+            }
+        });
+        return true;
     }
 
     @Override
@@ -264,12 +317,23 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
             public StringConditions get() {
                 return conditions(true).textContent();
             }
+        }, new Supplier<StringConditions>() {
+            @Override
+            public StringConditions get() {
+                return messageBuilder(true).textContent();
+            }
         });
     }
 
     @Override
-    public boolean textContext(String anotherString) {
-        return textContent().equals(anotherString);
+    public boolean textContent(final String anotherString) {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<FluentListConditions, Boolean>() {
+            @Override
+            public Boolean apply(FluentListConditions input) {
+                return input.textContent(anotherString);
+            }
+        });
+        return true;
     }
 
     @Override
@@ -278,6 +342,11 @@ public class FluentWaitElementEachMatcher implements FluentListConditions {
             @Override
             public RectangleConditions get() {
                 return conditions(true).rectangle();
+            }
+        }, new Supplier<RectangleConditions>() {
+            @Override
+            public RectangleConditions get() {
+                return messageBuilder(true).rectangle();
             }
         });
     }

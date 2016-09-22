@@ -1,5 +1,6 @@
 package org.fluentlenium.core.wait;
 
+import com.google.common.base.Function;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
@@ -51,15 +52,21 @@ public class FluentWaitLocatorSelectorMatcher extends AbstractWaitElementListMat
         this.filters.add(filter);
     }
 
-    protected String buildMessage(String defaultMessage) {
-        StringBuilder message = new StringBuilder(defaultMessage);
-        if (filters != null && !filters.isEmpty()) {
-            for (Filter filter : filters) {
-                message.append(filter.toString());
+    @Override
+    protected Function<String, String> messageCustomizer() {
+        return new Function<String, String>() {
+            @Override
+            public String apply(String defaultMessage) {
+                StringBuilder message = new StringBuilder(defaultMessage);
+                if (filters != null && !filters.isEmpty()) {
+                    for (Filter filter : filters) {
+                        message.append(filter.toString());
+                    }
+                    message.append(" Filters : ");
+                }
+                return message.toString();
             }
-            message.append(" Filters : ");
-        }
-        return message.toString();
+        };
     }
 
     protected FluentList<FluentWebElement> find() {

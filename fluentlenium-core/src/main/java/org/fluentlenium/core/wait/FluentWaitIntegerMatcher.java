@@ -1,112 +1,87 @@
 package org.fluentlenium.core.wait;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
-import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.conditions.IntegerConditions;
-
-import static org.fluentlenium.core.wait.FluentWaitMessages.equalToMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.greaterThanMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.greaterThanOrEqualToMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateNotVerifiedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.isPredicateVerifiedMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.lessThanMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.lessThanOrEqualToMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.notEqualToMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.notGreaterThanMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.notGreaterThanOrEqualToMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.notLessThanMessage;
-import static org.fluentlenium.core.wait.FluentWaitMessages.notLessThanOrEqualToMessage;
 
 
 /**
  * Matcher used for integers like elements size
  */
-public class FluentWaitIntegerMatcher implements IntegerConditions {
-    private final AbstractWaitElementMatcher matcher;
-    private final Supplier<IntegerConditions> conditionsSupplier;
-
-    protected FluentWaitIntegerMatcher(AbstractWaitElementMatcher matcher, Supplier<IntegerConditions> conditionsSupplier) {
-        this.matcher = matcher;
-        this.conditionsSupplier = conditionsSupplier;
+public class FluentWaitIntegerMatcher extends AbstractFluentWaitConditionsMatcher<Integer, IntegerConditions> implements IntegerConditions {
+    protected FluentWaitIntegerMatcher(AbstractWaitElementMatcher matcher, Supplier<IntegerConditions> conditionsSupplier, Supplier<IntegerConditions> messageBuilderSupplier) {
+        super(matcher, conditionsSupplier, messageBuilderSupplier);
     }
 
-    protected IntegerConditions hasSize() {
-        IntegerConditions conditions = this.conditionsSupplier.get();
-        if (matcher.negation) {
-            conditions = conditions.not();
-        }
-        return conditions;
+    @Override
+    public FluentWaitIntegerMatcher not() {
+        return new FluentWaitIntegerMatcher((AbstractWaitElementMatcher) matcher.not(), conditionsSupplier, messageBuilderSupplier);
     }
 
     @Override
     public boolean equalTo(final int value) {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<IntegerConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return hasSize().equalTo(value);
+            public Boolean apply(IntegerConditions input) {
+                return input.equalTo(value);
             }
-        }, matcher.negation ? notEqualToMessage(matcher.selectionName, value) : equalToMessage(matcher.selectionName, value));
+        });
         return true;
     }
 
     @Override
     public boolean lessThan(final int value) {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<IntegerConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return hasSize().lessThan(value);
+            public Boolean apply(IntegerConditions input) {
+                return input.lessThan(value);
             }
-        }, matcher.negation ? notLessThanMessage(matcher.selectionName, value) : lessThanMessage(matcher.selectionName, value));
+        });
         return true;
     }
 
     @Override
     public boolean lessThanOrEqualTo(final int value) {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<IntegerConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return hasSize().lessThanOrEqualTo(value);
+            public Boolean apply(IntegerConditions input) {
+                return input.lessThanOrEqualTo(value);
             }
-        }, matcher.negation ? notLessThanOrEqualToMessage(matcher.selectionName, value) : lessThanOrEqualToMessage(matcher.selectionName, value));
+        });
         return true;
     }
 
     @Override
     public boolean greaterThan(final int value) {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<IntegerConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return hasSize().greaterThan(value);
+            public Boolean apply(IntegerConditions input) {
+                return input.greaterThan(value);
             }
-        }, matcher.negation ? notGreaterThanMessage(matcher.selectionName, value) : greaterThanMessage(matcher.selectionName, value));
+        });
         return true;
     }
 
     @Override
     public boolean greaterThanOrEqualTo(final int value) {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<IntegerConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return hasSize().greaterThanOrEqualTo(value);
+            public Boolean apply(IntegerConditions input) {
+                return input.greaterThanOrEqualTo(value);
             }
-        }, matcher.negation ? notGreaterThanOrEqualToMessage(matcher.selectionName, value) : greaterThanOrEqualToMessage(matcher.selectionName, value));
+        });
         return true;
     }
 
     @Override
     public boolean verify(final Predicate<Integer> predicate) {
-        matcher.until(matcher.wait, new Predicate<FluentControl>() {
+        matcher.until(matcher.wait, conditions(), messageBuilder(), new Function<IntegerConditions, Boolean>() {
             @Override
-            public boolean apply(FluentControl input) {
-                return hasSize().verify(predicate);
+            public Boolean apply(IntegerConditions input) {
+                return input.verify(predicate);
             }
-        }, matcher.negation ? isPredicateNotVerifiedMessage(matcher.selectionName) : isPredicateVerifiedMessage(matcher.selectionName));
+        });
         return true;
-    }
-
-    @Override
-    public FluentWaitIntegerMatcher not() {
-        return new FluentWaitIntegerMatcher((AbstractWaitElementMatcher) matcher.not(), conditionsSupplier);
     }
 }

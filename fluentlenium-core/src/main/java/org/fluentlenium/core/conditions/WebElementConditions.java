@@ -137,7 +137,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public boolean textContext(String anotherString) {
+    public boolean textContent(String anotherString) {
         return textContent().equals(anotherString);
     }
 

@@ -41,13 +41,13 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
 
     @Test
     public void isPresent() {
-        assertThat(conditions.isPresent()).isTrue();
-        assertThat(conditions.not().isPresent()).isFalse();
+        assertThat(conditions.present()).isTrue();
+        assertThat(conditions.not().present()).isFalse();
 
         AtLeastOneElementConditions emptyConditions = new AtLeastOneElementConditions(Collections.<FluentWebElement>emptyList());
 
-        assertThat(emptyConditions.isPresent()).isFalse();
-        assertThat(emptyConditions.not().isPresent()).isTrue();
+        assertThat(emptyConditions.present()).isFalse();
+        assertThat(emptyConditions.not().present()).isTrue();
     }
 
     @Test
