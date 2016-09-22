@@ -2,6 +2,7 @@ package org.fluentlenium.core.wait;
 
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Supplier;
 import org.fluentlenium.core.FluentControl;
 
 /**
@@ -9,28 +10,32 @@ import org.fluentlenium.core.FluentControl;
  */
 public abstract class AbstractWaitMatcher {
     /**
-     * Build the final message from default message.
+     * Perform the wait.
      *
-     * @param defaultMessage the default message that will be used as base.
-     * @return final message
+     * @param wait    fluent wait object.
+     * @param present predicate to wait for.
+     * @param message message to use.
      */
-    protected String buildMessage(String defaultMessage) {
-        return defaultMessage;
+    protected void until(FluentWait wait, Predicate<FluentControl> present, String message) {
+        if (wait.useCustomMessage()) {
+            wait.untilPredicate(present);
+        } else {
+            wait.withMessage(message).untilPredicate(present);
+        }
     }
 
     /**
      * Perform the wait.
      *
-     * @param wait           fluent wait object.
-     * @param present        predicate to wait for.
-     * @param defaultMessage default message to use.
+     * @param wait            fluent wait object.
+     * @param present         predicate to wait for.
+     * @param messageSupplier default message to use.
      */
-    protected void until(FluentWait wait, Predicate<FluentControl> present, String defaultMessage) {
+    protected void until(FluentWait wait, Predicate<FluentControl> present, Supplier<String> messageSupplier) {
         if (wait.useCustomMessage()) {
             wait.untilPredicate(present);
         } else {
-            String message = buildMessage(defaultMessage);
-            wait.withMessage(message).untilPredicate(present);
+            wait.withMessage(messageSupplier).untilPredicate(present);
         }
     }
 }

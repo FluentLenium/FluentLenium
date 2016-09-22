@@ -100,6 +100,16 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
     }
 
     /**
+     * @param message - the failing message supplier
+     * @return fluent wait
+     */
+    public FluentWait withMessage(Supplier<String> message) {
+        wait.withMessage(message);
+        useCustomMessage = true;
+        return this;
+    }
+
+    /**
      * Use this methods only to avoid ignoring StateElementReferenceException
      *
      * @return fluent wait
