@@ -21,6 +21,7 @@ import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchControl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -292,6 +293,15 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
     @Override
     public WebElement getWrappedElement() {
         return getElement();
+    }
+
+    /**
+     * return the location of the elements
+     *
+     * @return
+     */
+    public Point getLocation() {
+        return webElement.getLocation();
     }
 
     /**
