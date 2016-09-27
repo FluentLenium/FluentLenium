@@ -291,7 +291,7 @@ public class FluentWaitElementListMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.text().equals("text");
+                matcher.text().equalsTo("text");
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
@@ -302,7 +302,7 @@ public class FluentWaitElementListMatcherTest {
         when(fluentWebElement1.text()).thenReturn("text");
         when(fluentWebElement2.text()).thenReturn("text");
         when(fluentWebElement3.text()).thenReturn("text");
-        matcher.text().equals("text");
+        matcher.text().equalsTo("text");
 
         verify(fluentWebElement1, atLeastOnce()).text();
         verify(fluentWebElement2, atLeastOnce()).text();
@@ -311,7 +311,7 @@ public class FluentWaitElementListMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().text().equals("text");
+                matcher.not().text().equalsTo("text");
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }

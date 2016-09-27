@@ -17,6 +17,7 @@ import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
 import org.fluentlenium.core.proxy.LocatorProxies;
+import org.fluentlenium.core.wait.FluentWaitElementList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -73,6 +74,10 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             elements.add(fluentElement.getElement());
         }
         return elements;
+    }
+
+    public FluentWaitElementList await() {
+        return new FluentWaitElementList(fluentControl.await(), this);
     }
 
     @Override

@@ -88,7 +88,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitHasTextWithText() {
-        await().atMost(1, NANOSECONDS).until($(".small", withText("Small 1"))).text().equals("Small 1");
+        await().atMost(1, NANOSECONDS).until($(".small", withText("Small 1"))).text().equalsTo("Small 1");
     }
 
     @Test
@@ -150,6 +150,15 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).until($(".small")).text().contains("Small 1");
     }
 
+
+    @Test
+    public void checkAwaitContainsTextAlternative() {
+        $(".small").await().atMost(1, NANOSECONDS).until().text().contains("Small 1");
+        $(".small", withText("Small 1")).await().atMost(1, NANOSECONDS).untilEach().text().contains("Small 1");
+        findFirst(".small").await().atMost(1, NANOSECONDS).until().text().contains("Small 1");
+    }
+
+
     @Test
     public void checkAwaitContainsIdWithId() {
         await().atMost(1, NANOSECONDS).until($(".small", withId("id2"))).id("id2");
@@ -167,7 +176,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitHasText() {
-        await().atMost(1, NANOSECONDS).until($(".small")).text().equals("Small 1");
+        await().atMost(1, NANOSECONDS).until($(".small")).text().equalsTo("Small 1");
     }
 
     @Test
@@ -404,7 +413,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test(expected = TimeoutException.class)
     public void checkPolling() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1500, TimeUnit.MILLISECONDS).until($("#default")).text().equals("wait");
+        await().pollingEvery(1500, TimeUnit.MILLISECONDS).until($("#default")).text().equalsTo("wait");
     }
 
     @Test

@@ -41,7 +41,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
         return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.present();
+                return input.conditions().present();
             }
         }, false);
     }
@@ -51,7 +51,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
         return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.clickable();
+                return input.conditions().clickable();
             }
         }, false);
     }
@@ -98,7 +98,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean attribute(final String name, final String value) {
-        return attribute(name).equals(value);
+        return attribute(name).equalsTo(value);
     }
 
     @Override
@@ -118,7 +118,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean id(final String id) {
-        return id().equals(id);
+        return id().equalsTo(id);
     }
 
     @Override
@@ -153,7 +153,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean name(final String name) {
-        return name().equals(name);
+        return name().equalsTo(name);
     }
 
     @Override
@@ -173,7 +173,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean tagName(String tagName) {
-        return tagName().equals(tagName);
+        return tagName().equalsTo(tagName);
     }
 
     @Override
@@ -213,7 +213,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean text(String anotherString) {
-        return text().equals(anotherString);
+        return text().equalsTo(anotherString);
     }
 
     @Override
@@ -233,7 +233,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean textContent(String anotherString) {
-        return textContent().equals(anotherString);
+        return textContent().equalsTo(anotherString);
     }
 
     @Override

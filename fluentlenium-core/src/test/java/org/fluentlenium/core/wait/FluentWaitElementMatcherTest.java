@@ -174,18 +174,18 @@ public class FluentWaitElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.text().equals("text");
+                matcher.text().equalsTo("text");
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement, atLeastOnce()).text();
 
         when(fluentWebElement.text()).thenReturn("text");
-        matcher.text().equals("text");
+        matcher.text().equalsTo("text");
 
         verify(fluentWebElement, atLeastOnce()).text();
 
-        matcher.not().text().equals("not");
+        matcher.not().text().equalsTo("not");
     }
 
     @Test

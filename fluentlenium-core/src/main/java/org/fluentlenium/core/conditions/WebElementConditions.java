@@ -88,7 +88,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public boolean attribute(final String name, final String value) {
-        return attribute(name).equals(value);
+        return attribute(name).equalsTo(value);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public boolean id(final String id) {
-        return id().equals(id);
+        return id().equalsTo(id);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public boolean name(final String name) {
-        return name().equals(name);
+        return name().equalsTo(name);
     }
 
     @Override
@@ -118,7 +118,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public boolean tagName(String tagName) {
-        return tagName().equals(tagName);
+        return tagName().equalsTo(tagName);
     }
 
     @Override
@@ -129,7 +129,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public boolean value(String value) {
-        return value().equals(value);
+        return value().equalsTo(value);
     }
 
     @Override
@@ -139,7 +139,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public boolean text(String anotherString) {
-        return text().equals(anotherString);
+        return text().equalsTo(anotherString);
     }
 
     @Override
@@ -149,7 +149,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public boolean textContent(String anotherString) {
-        return textContent().equals(anotherString);
+        return textContent().equalsTo(anotherString);
     }
 
     @Override

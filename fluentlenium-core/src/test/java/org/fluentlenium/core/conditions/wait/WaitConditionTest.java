@@ -136,7 +136,7 @@ public class WaitConditionTest {
             }
         }, 100L);
 
-        conditions.id().equalsIgnoreCase("test");
+        conditions.id().equalsToIgnoreCase("test");
         verify(wait).untilPredicate(any(Predicate.class));
     }
 
@@ -159,7 +159,7 @@ public class WaitConditionTest {
             }
         }, 100L);
 
-        conditions.id().equalsIgnoreCase("test");
+        conditions.id().equalsToIgnoreCase("test");
     }
 
     @Test

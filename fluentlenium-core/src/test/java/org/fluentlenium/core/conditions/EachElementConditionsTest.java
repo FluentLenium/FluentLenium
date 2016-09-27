@@ -122,10 +122,10 @@ public class EachElementConditionsTest extends AbstractFluentListConditionsTest 
         when(webElement2.getText()).thenReturn("Some Text");
         when(webElement3.getText()).thenReturn("Some Text");
 
-        assertThat(conditions.text().equals("Some Text")).isTrue();
+        assertThat(conditions.text().equalsTo("Some Text")).isTrue();
 
         reset(webElement3);
-        assertThat(conditions.text().equals("Other Text")).isFalse();
+        assertThat(conditions.text().equalsTo("Other Text")).isFalse();
     }
 
     @Test

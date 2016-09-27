@@ -105,8 +105,8 @@ public class WebElementConditionsTest {
     public void hasText() {
         when(webElement.getText()).thenReturn("Some Text");
 
-        assertThat(conditions.text().equals("Some Text")).isTrue();
-        assertThat(conditions.text().equals("Other Text")).isFalse();
+        assertThat(conditions.text().equalsTo("Some Text")).isTrue();
+        assertThat(conditions.text().equalsTo("Other Text")).isFalse();
     }
 
     @Test

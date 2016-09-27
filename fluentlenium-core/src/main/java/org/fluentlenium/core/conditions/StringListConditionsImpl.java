@@ -52,21 +52,21 @@ public class StringListConditionsImpl extends AbstractObjectListConditions<Strin
     }
 
     @Override
-    public boolean equals(final String anotherString) {
+    public boolean equalsTo(final String anotherString) {
         return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return conditionsGetter.apply(input).equals(anotherString);
+                return conditionsGetter.apply(input).equalsTo(anotherString);
             }
         });
     }
 
     @Override
-    public boolean equalsIgnoreCase(final String anotherString) {
+    public boolean equalsToIgnoreCase(final String anotherString) {
         return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return conditionsGetter.apply(input).equalsIgnoreCase(anotherString);
+                return conditionsGetter.apply(input).equalsToIgnoreCase(anotherString);
             }
         });
     }

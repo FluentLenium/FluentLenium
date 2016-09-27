@@ -1,17 +1,17 @@
 package org.fluentlenium.core.domain;
 
-import com.google.common.base.Suppliers;
+import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
 import org.fluentlenium.core.action.FluentActions;
+import org.fluentlenium.core.action.InputControl;
 import org.fluentlenium.core.action.KeyboardElementActions;
 import org.fluentlenium.core.action.MouseElementActions;
 import org.fluentlenium.core.axes.Axes;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
-import org.fluentlenium.core.conditions.wait.WaitConditionProxy;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.fluentlenium.core.hook.FluentHook;
@@ -22,6 +22,8 @@ import org.fluentlenium.core.proxy.FluentProxyState;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchControl;
+import org.fluentlenium.core.wait.AwaitControl;
+import org.fluentlenium.core.wait.FluentWaitElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -56,6 +58,11 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
         this.mouseActions = new MouseElementActions(this.fluentControl.getDriver(), webElement);
         this.keyboardActions = new KeyboardElementActions(this.fluentControl.getDriver(), webElement);
         this.conditions = new WebElementConditions(this);
+    }
+
+    @Delegate(excludes = {InputControl.class, AwaitControl.class, SearchControl.class})
+    private FluentControl getFluentControl() {
+        return fluentControl;
     }
 
     /**
@@ -103,8 +110,8 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
         return conditions;
     }
 
-    public FluentConditions awaitUntil() {
-        return WaitConditionProxy.element(await(), "", Suppliers.ofInstance(this));
+    public FluentWaitElement await() {
+        return new FluentWaitElement(fluentControl.await(), this);
     }
 
     /**

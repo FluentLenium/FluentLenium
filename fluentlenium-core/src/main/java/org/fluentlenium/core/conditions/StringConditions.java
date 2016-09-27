@@ -22,10 +22,10 @@ public interface StringConditions extends Conditions<String> {
     boolean endsWith(String suffix);
 
     @Message("should [not ]be equal to \"{0}\"")
-    boolean equals(String anotherString);
+    boolean equalsTo(String anotherString);
 
     @Message("should [not ]be equal to \"{0}\" (ignore case)")
-    boolean equalsIgnoreCase(String anotherString);
+    boolean equalsToIgnoreCase(String anotherString);
 
     @Message("should [not ]match \"{0}\" regular expression")
     boolean matches(String regex);

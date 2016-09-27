@@ -6,6 +6,7 @@ import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.hook.HookControl;
 import org.fluentlenium.core.proxy.FluentProxyState;
 import org.fluentlenium.core.search.SearchControl;
+import org.fluentlenium.core.wait.FluentWaitElementList;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -270,4 +271,11 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentA
      * @return a condition object
      */
     FluentListConditions one();
+
+    /**
+     * Build a wait object to wait on particular conditions of this list.
+     *
+     * @return a wait object
+     */
+    FluentWaitElementList await();
 }
