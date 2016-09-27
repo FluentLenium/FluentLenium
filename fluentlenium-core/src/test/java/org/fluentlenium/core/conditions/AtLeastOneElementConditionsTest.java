@@ -31,7 +31,7 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
     }
 
     @Test
-    public void isVerified() {
+    public void verify() {
         assertThat(conditions.verify(Predicates.<FluentWebElement>alwaysTrue())).isTrue();
         assertThat(conditions.verify(Predicates.<FluentWebElement>alwaysFalse())).isFalse();
 
@@ -40,7 +40,7 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
     }
 
     @Test
-    public void isPresent() {
+    public void present() {
         assertThat(conditions.present()).isTrue();
         assertThat(conditions.not().present()).isFalse();
 
@@ -51,7 +51,7 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
     }
 
     @Test
-    public void isClickable() {
+    public void clickable() {
         assertThat(conditions.clickable()).isFalse();
 
         when(webElement1.isEnabled()).thenReturn(true);
@@ -61,7 +61,7 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
     }
 
     @Test
-    public void isStale() {
+    public void stale() {
         assertThat(conditions.stale()).isFalse();
 
         // Selenium invokes isEnabled to check staleness.
@@ -71,7 +71,7 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
     }
 
     @Test
-    public void isEnabled() {
+    public void enabled() {
         assertThat(conditions.enabled()).isFalse();
 
         when(webElement3.isEnabled()).thenReturn(true);
@@ -80,7 +80,7 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
     }
 
     @Test
-    public void isDisplayed() {
+    public void displayed() {
         assertThat(conditions.displayed()).isFalse();
 
         when(webElement1.isDisplayed()).thenReturn(true);
@@ -89,7 +89,7 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
     }
 
     @Test
-    public void isSelected() {
+    public void selected() {
         assertThat(conditions.selected()).isFalse();
 
         when(webElement2.isSelected()).thenReturn(true);
@@ -98,7 +98,7 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
     }
 
     @Test
-    public void hasText() {
+    public void text() {
         when(webElement3.getText()).thenReturn("Some Text");
 
         assertThat(conditions.text().contains("Some Text")).isTrue();
@@ -106,7 +106,7 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
     }
 
     @Test
-    public void containsText() {
+    public void textContains() {
         when(webElement1.getText()).thenReturn("Some Text");
 
         assertThat(conditions.text().contains("Te")).isTrue();
@@ -114,7 +114,7 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
     }
 
     @Test
-    public void hasAttribute() {
+    public void attributeValue() {
         assertThat(conditions.attribute("attr", "value")).isFalse();
 
         when(webElement2.getAttribute("attr")).thenReturn("value");
@@ -123,7 +123,16 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
     }
 
     @Test
-    public void hasId() {
+    public void attribute() {
+        assertThat(conditions.attribute("attr").equalsTo("value")).isFalse();
+
+        when(webElement2.getAttribute("attr")).thenReturn("value");
+
+        assertThat(conditions.attribute("attr").equalsTo("value")).isTrue();
+    }
+
+    @Test
+    public void idValue() {
         assertThat(conditions.id("value")).isFalse();
 
         when(webElement3.getAttribute("id")).thenReturn("value");
@@ -132,12 +141,66 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
     }
 
     @Test
-    public void hasName() {
+    public void id() {
+        assertThat(conditions.id().equalsTo("value")).isFalse();
+
+        when(webElement3.getAttribute("id")).thenReturn("value");
+
+        assertThat(conditions.id().equalsTo("value")).isTrue();
+    }
+
+    @Test
+    public void nameValue() {
         assertThat(conditions.name("value")).isFalse();
 
         when(webElement1.getAttribute("name")).thenReturn("value");
 
         assertThat(conditions.name("value")).isTrue();
+    }
+
+    @Test
+    public void name() {
+        assertThat(conditions.name().equalsTo("value")).isFalse();
+
+        when(webElement1.getAttribute("name")).thenReturn("value");
+
+        assertThat(conditions.name().equalsTo("value")).isTrue();
+    }
+
+    @Test
+    public void tagNameValue() {
+        assertThat(conditions.tagName("value")).isFalse();
+
+        when(webElement1.getTagName()).thenReturn("value");
+
+        assertThat(conditions.tagName("value")).isTrue();
+    }
+
+    @Test
+    public void tagName() {
+        assertThat(conditions.tagName().equalsTo("value")).isFalse();
+
+        when(webElement1.getTagName()).thenReturn("value");
+
+        assertThat(conditions.tagName().equalsTo("value")).isTrue();
+    }
+
+    @Test
+    public void valueValue() {
+        assertThat(conditions.value("value")).isFalse();
+
+        when(webElement1.getAttribute("value")).thenReturn("value");
+
+        assertThat(conditions.value("value")).isTrue();
+    }
+
+    @Test
+    public void value() {
+        assertThat(conditions.value().equalsTo("value")).isFalse();
+
+        when(webElement1.getAttribute("value")).thenReturn("value");
+
+        assertThat(conditions.value().equalsTo("value")).isTrue();
     }
 
     @Test

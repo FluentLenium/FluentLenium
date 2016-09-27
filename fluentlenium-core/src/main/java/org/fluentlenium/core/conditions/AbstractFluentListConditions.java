@@ -161,12 +161,12 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
         return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
             @Override
             public String apply(FluentWebElement input) {
-                return input.name();
+                return input.tagName();
             }
         }, new Function<FluentWebElement, StringConditions>() {
             @Override
             public StringConditions apply(FluentWebElement input) {
-                return input.conditions().name();
+                return input.conditions().tagName();
             }
         });
     }
@@ -193,7 +193,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean value(String value) {
-        return value.equals(value);
+        return value().equalsTo(value);
     }
 
     @Override
