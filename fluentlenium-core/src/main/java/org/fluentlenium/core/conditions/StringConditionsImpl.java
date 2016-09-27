@@ -10,12 +10,17 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
         super(string);
     }
 
-    @Override
-    protected StringConditionsImpl newInstance() {
-        return new StringConditionsImpl(object);
+    public StringConditionsImpl(String object, boolean negation) {
+        super(object, negation);
     }
 
     @Override
+    protected StringConditionsImpl newInstance(boolean negationValue) {
+        return new StringConditionsImpl(object, negationValue);
+    }
+
+    @Override
+    @Negation
     public StringConditionsImpl not() {
         return (StringConditionsImpl) super.not();
     }

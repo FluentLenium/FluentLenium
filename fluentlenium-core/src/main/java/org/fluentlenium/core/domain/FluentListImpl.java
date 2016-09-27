@@ -1,6 +1,7 @@
 package org.fluentlenium.core.domain;
 
 import com.google.common.base.Function;
+import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
@@ -9,6 +10,7 @@ import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.AtLeastOneElementConditions;
 import org.fluentlenium.core.conditions.EachElementConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
+import org.fluentlenium.core.conditions.wait.WaitConditionProxy;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.fluentlenium.core.hook.FluentHook;
@@ -113,7 +115,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public boolean isPresent() {
+    public boolean present() {
         if (LocatorProxies.getLocatorHandler(proxy) != null) {
             return LocatorProxies.isPresent(this);
         }
@@ -211,9 +213,17 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         return new EachElementConditions(this);
     }
 
+    public FluentListConditions awaitUntilEach() {
+        return WaitConditionProxy.each(fluentControl.await(), this.toString(), Suppliers.ofInstance(this));
+    }
+
     @Override
     public FluentListConditions one() {
         return new AtLeastOneElementConditions(this);
+    }
+
+    public FluentListConditions awaitUntilOne() {
+        return WaitConditionProxy.one(fluentControl.await(), this.toString(), Suppliers.ofInstance(this));
     }
 
     @Override

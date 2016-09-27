@@ -16,6 +16,7 @@ public interface FluentListConditions extends FluentConditions {
      * @return a new negated condition object
      */
     @Override
+    @Negation
     FluentListConditions not();
 
     /**

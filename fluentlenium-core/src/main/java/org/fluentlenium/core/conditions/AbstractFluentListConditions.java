@@ -19,14 +19,6 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean present() {
-        if (negation) {
-            return elements.size() <= 0;
-        }
-        return elements.size() > 0;
-    }
-
-    @Override
     public boolean hasSize(int size) {
         if (negation) {
             return elements.size() != size;
@@ -36,16 +28,22 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public IntegerConditions hasSize() {
-        IntegerConditionsImpl conditions = new IntegerConditionsImpl(elements.size());
-        if (negation) {
-            conditions = conditions.not();
-        }
-        return conditions;
+        return new IntegerConditionsImpl(elements.size(), negation);
     }
 
     @Override
     public boolean verify(Predicate<FluentWebElement> predicate) {
         return verify(predicate, false);
+    }
+
+    @Override
+    public boolean present() {
+        return verify(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return input.present();
+            }
+        }, false);
     }
 
     @Override

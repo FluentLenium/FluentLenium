@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
+import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
@@ -104,7 +105,8 @@ public class FluentWaitEachElementMatcherTest {
             }
         };
 
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -140,7 +142,7 @@ public class FluentWaitEachElementMatcherTest {
             }
         };
 
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, new ArrayList<FluentWebElement>()).each();
+        final FluentListConditions matcher = wait.untilEach(new ArrayList<FluentWebElement>());
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -167,7 +169,7 @@ public class FluentWaitEachElementMatcherTest {
             }
         };
 
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -197,7 +199,7 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void hasAttribute() {
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -229,7 +231,7 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void hasId() {
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -260,7 +262,7 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void hasName() {
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -291,7 +293,7 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void hasText() {
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -322,7 +324,7 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void containsText() {
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -353,11 +355,7 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void isPresent() {
-        when(fluentWebElement1.now()).thenThrow(NoSuchElementException.class);
-        when(fluentWebElement2.now()).thenThrow(NoSuchElementException.class);
-        when(fluentWebElement3.now()).thenThrow(NoSuchElementException.class);
-
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -365,14 +363,14 @@ public class FluentWaitEachElementMatcherTest {
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        reset(fluentWebElement1);
-        reset(fluentWebElement2);
-        reset(fluentWebElement3);
+        when(fluentWebElement1.present()).thenReturn(true);
+        when(fluentWebElement2.present()).thenReturn(true);
+        when(fluentWebElement3.present()).thenReturn(true);
         matcher.present();
 
-        verify(fluentWebElement1, atLeastOnce()).now();
-        verify(fluentWebElement2, atLeastOnce()).now();
-        verify(fluentWebElement3, atLeastOnce()).now();
+        verify(fluentWebElement1, atLeastOnce()).present();
+        verify(fluentWebElement2, atLeastOnce()).present();
+        verify(fluentWebElement3, atLeastOnce()).present();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -385,7 +383,7 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void isEnabled() {
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -420,7 +418,7 @@ public class FluentWaitEachElementMatcherTest {
         when(fluentWebElement2.tagName()).thenThrow(NoSuchElementException.class);
         when(fluentWebElement3.tagName()).thenThrow(NoSuchElementException.class);
 
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -431,7 +429,7 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void isSelected() {
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -462,7 +460,7 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void isDisplayed() {
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -493,7 +491,7 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void isClickable() {
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -524,7 +522,7 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void isStale() {
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -555,7 +553,7 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void hasSize() {
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -575,7 +573,7 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void hasSizeBuilder() {
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -595,7 +593,7 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void hasRectangle() {
-        final FluentWaitElementEachMatcher matcher = new FluentWaitElementListMatcher(search, wait, fluentWebElements).each();
+        final FluentListConditions matcher = wait.untilEach(fluentWebElements);
 
         when(element1.getRect()).thenReturn(new Rectangle(1, 2, 100, 200));
         when(element2.getRect()).thenReturn(new Rectangle(1, 2, 100, 200));

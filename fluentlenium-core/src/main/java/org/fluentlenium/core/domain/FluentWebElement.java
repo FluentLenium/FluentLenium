@@ -1,5 +1,6 @@
 package org.fluentlenium.core.domain;
 
+import com.google.common.base.Suppliers;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
@@ -8,7 +9,9 @@ import org.fluentlenium.core.action.KeyboardElementActions;
 import org.fluentlenium.core.action.MouseElementActions;
 import org.fluentlenium.core.axes.Axes;
 import org.fluentlenium.core.components.ComponentInstantiator;
+import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
+import org.fluentlenium.core.conditions.wait.WaitConditionProxy;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.fluentlenium.core.hook.FluentHook;
@@ -66,7 +69,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
     }
 
     @Override
-    public boolean isPresent() {
+    public boolean present() {
         return LocatorProxies.isPresent(webElement);
     }
 
@@ -96,8 +99,12 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
         return axes;
     }
 
-    public WebElementConditions conditions() {
+    public FluentConditions conditions() {
         return conditions;
+    }
+
+    public FluentConditions awaitUntil() {
+        return WaitConditionProxy.element(fluentControl.await(), "", Suppliers.ofInstance(this));
     }
 
     /**

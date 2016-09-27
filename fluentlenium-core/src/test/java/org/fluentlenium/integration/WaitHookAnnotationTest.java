@@ -41,7 +41,7 @@ public class WaitHookAnnotationTest extends IntegrationFluentTest {
         assertThat(newField.isLoaded()).isFalse();
         newField.click();
         assertThat(newField.isLoaded()).isTrue();
-        assertThat(newField.isPresent()).isTrue();
+        assertThat(newField.present()).isTrue();
     }
 
     @Test

@@ -66,8 +66,8 @@ public class RectangleConditionsTest {
         assertThat(conditions.rectangle().not().withX(1)).isFalse();
         assertThat(conditions.rectangle().not().withX(2)).isTrue();
 
-        assertThat(conditions.rectangle().not().withX().equalTo(1)).isTrue();
-        assertThat(conditions.rectangle().not().withX().equalTo(2)).isFalse();
+        assertThat(conditions.rectangle().not().withX().equalTo(1)).isFalse();
+        assertThat(conditions.rectangle().not().withX().equalTo(2)).isTrue();
     }
 
     @Test
@@ -77,8 +77,8 @@ public class RectangleConditionsTest {
         assertThat(conditions.not().rectangle().withX(1)).isFalse();
         assertThat(conditions.not().rectangle().withX(2)).isTrue();
 
-        assertThat(conditions.not().rectangle().withX().equalTo(1)).isTrue();
-        assertThat(conditions.not().rectangle().withX().equalTo(2)).isFalse();
+        assertThat(conditions.not().rectangle().withX().equalTo(1)).isFalse();
+        assertThat(conditions.not().rectangle().withX().equalTo(2)).isTrue();
     }
 
     @Test

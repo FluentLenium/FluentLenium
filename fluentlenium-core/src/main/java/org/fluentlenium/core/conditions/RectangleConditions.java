@@ -11,6 +11,7 @@ import org.openqa.selenium.Rectangle;
  */
 public interface RectangleConditions extends Conditions<Rectangle> {
     @Override
+    @Negation
     RectangleConditions not();
 
     @Message("should have x={0}")

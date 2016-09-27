@@ -305,7 +305,7 @@ public class FluentWebElementTest {
             }
         }).isInstanceOf(NoSuchElementException.class);
 
-        assertThat(fluentElement.findFirst(By.cssSelector(".other")).isPresent()).isFalse();
+        assertThat(fluentElement.findFirst(By.cssSelector(".other")).present()).isFalse();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override

@@ -10,12 +10,17 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
         super(integer);
     }
 
-    @Override
-    protected AbstractObjectConditions<Integer> newInstance() {
-        return new IntegerConditionsImpl(object);
+    public IntegerConditionsImpl(Integer object, boolean negation) {
+        super(object, negation);
     }
 
     @Override
+    protected AbstractObjectConditions<Integer> newInstance(boolean negationValue) {
+        return new IntegerConditionsImpl(object, negationValue);
+    }
+
+    @Override
+    @Negation
     public IntegerConditionsImpl not() {
         return (IntegerConditionsImpl) super.not();
     }

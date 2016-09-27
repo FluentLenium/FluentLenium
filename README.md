@@ -734,7 +734,7 @@ The `isPresent()` assertion is going to check if there is at most one element on
 If you need to be more precise, you can also use filters in the search:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until(".fluent").withText("myText").hasSize(3);
+await().atMost(5, TimeUnit.SECONDS).until($(".fluent", withText("myText"))).hasSize(3);
 ```
 
 You can also use after `hasSize()` : `greaterThan(int)`, `lessThan(int)`, `lessThanOrEqualTo(int)`, `greaterThanOrEqualTo(int)` , `equalTo(int)`, `notEqualTo(int)`
@@ -742,7 +742,7 @@ You can also use after `hasSize()` : `greaterThan(int)`, `lessThan(int)`, `lessT
 You can also use matchers:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until(".fluent").withText().startsWith("start").isPresent();
+await().atMost(5, TimeUnit.SECONDS).until($(".fluent", withText().startsWith("start"))).isPresent();
 ```
      
 Just use `startsWith`, `notStartsWith`, `endsWith`, `notEndsWith`, `contains`, `notContains`, `equalTo`, `containsWord`.
@@ -750,7 +750,7 @@ Just use `startsWith`, `notStartsWith`, `endsWith`, `notEndsWith`, `contains`, `
 If you need to filter on a custom attribute name, this syntax will help:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until(".fluent").with("myAttribute").startsWith("myValue").isPresent();
+await().atMost(5, TimeUnit.SECONDS).until($(".fluent", with("myAttribute").startsWith("myValue"))).isPresent();
 ```
 
 You can also give instance of elements or list of elements if required.
@@ -782,7 +782,7 @@ await().atMost(5, TimeUnit.SECONDS).untilPage(myPage).isAt();
 ```
 This methods actually calls `myPage.isAt()`. If the `isAt()` method of the `myPage` object does not throw any exception during the time specified, then the framework will consider that the page is the one wanted.
 
-You can override `await()` method in your own test class to define global settings on wait objects.
+You can override `await()` method in your own test class to define default settings for wait objects.
 ```java
 @Override
 public FluentWait await() {
@@ -793,14 +793,14 @@ public FluentWait await() {
 ### Polling Every
 You can also define the polling frequency, for example, if you want to poll every 5 seconds:
 ```java
-await().pollingEvery(5, TimeUnit.SECONDS).until(".fluent").with("myAttribute").startsWith("myValue").isPresent();
+await().pollingEvery(5, TimeUnit.SECONDS).until($(".fluent", with("myAttribute").startsWith("myValue"))).isPresent();
 ```
 The default value is 500ms.
 
 You can also chain filter in the asynchronous API:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until(".fluent").with("myAttribute").startsWith("myValue").with("a second attribute").equalTo("my@ndValue").isPresent();
+await().atMost(5, TimeUnit.SECONDS).until($(".fluent", with("myAttribute").startsWith("myValue"), with("a second attribute").equalTo("my@ndValue"))).isPresent();
 ```
 
 ## Hooks
@@ -995,7 +995,7 @@ If you want to test concurrency or if you need for any reason to not use the mec
 ```java
 IsolatedTest test = new IsolatedTest()
 test.goTo(DEFAULT_URL);
-test.await().atMost(1, SECONDS).until(".fluent").with("name").equalTo("name").isPresent();
+test.await().atMost(1, SECONDS).until(test.$(".fluent", with("name").equalTo("name"))).isPresent();
 test.$("input").first().isEnabled();
 ```
 

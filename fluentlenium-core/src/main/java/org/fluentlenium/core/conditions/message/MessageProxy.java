@@ -3,14 +3,18 @@ package org.fluentlenium.core.conditions.message;
 import java.lang.reflect.Proxy;
 import java.util.List;
 
+/**
+ * Provides message proxy implementations of interface that records calls to build message from methods annotated with
+ * {@link Message}, {@link NotMessage} and {@link MessageContext}.
+ */
 public class MessageProxy {
     /**
      * Wrap an object into a message proxy supporting {@link Message}, {@link NotMessage} and {@link MessageContext}.
      *
      * @param messageClass class to wrap in the proxy.
-     * @param instance original instance.
-     * @param context initial context for generated message.
-     * @param <T> type of the class to wrap.
+     * @param instance     original instance.
+     * @param context      initial context for generated message.
+     * @param <T>          type of the class to wrap.
      * @return a proxy generating message from annotations.
      */
     public static <T> T wrap(Class<T> messageClass, Object instance, String context) {
@@ -21,9 +25,9 @@ public class MessageProxy {
      * Wrap an object into a message proxy supporting {@link Message}, {@link NotMessage} and {@link MessageContext}.
      *
      * @param messageClass class to wrap in the proxy.
-     * @param instance original instance.
-     * @param calls call stack of the proxy.
-     * @param <T> type of the class to wrap.
+     * @param instance     original instance.
+     * @param calls        call stack of the proxy.
+     * @param <T>          type of the class to wrap.
      * @return a proxy generating message from annotations.
      */
     protected static <T> T wrap(Class<T> messageClass, Object instance, List<MessageBuilderCall> calls) {
@@ -34,8 +38,8 @@ public class MessageProxy {
      * Build a message proxy supporting {@link Message}, {@link NotMessage} and {@link MessageContext}.
      *
      * @param messageClass class to wrap in the proxy.
-     * @param context initial context for generated message.
-     * @param <T> type of the class to wrap.
+     * @param context      initial context for generated message.
+     * @param <T>          type of the class to wrap.
      * @return a proxy generating message from annotations.
      */
     public static <T> T builder(Class<T> messageClass, String context) {
@@ -46,8 +50,8 @@ public class MessageProxy {
      * Build a message proxy supporting {@link Message}, {@link NotMessage} and {@link MessageContext}.
      *
      * @param messageClass class to wrap in the proxy.
-     * @param calls call stack of the proxy.
-     * @param <T> type of the class to wrap.
+     * @param calls        call stack of the proxy.
+     * @param <T>          type of the class to wrap.
      * @return a proxy generating message from annotations.
      */
     protected static <T> T builder(Class<T> messageClass, List<MessageBuilderCall> calls) {

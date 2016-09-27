@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
  */
 public interface StringConditions extends Conditions<String> {
     @Override
+    @Negation
     StringConditions not();
 
     @Message("should [not ]contain \"{0}\"")

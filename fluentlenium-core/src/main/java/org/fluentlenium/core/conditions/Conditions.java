@@ -23,5 +23,6 @@ public interface Conditions<T> {
      *
      * @return a negated condition object
      */
+    @Negation
     Conditions<T> not();
 }

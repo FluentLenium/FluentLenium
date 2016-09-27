@@ -107,9 +107,9 @@ public class ComponentsTest extends IntegrationFluentTest {
         assertThat(content.isLoaded()).isFalse();
         assertThat(footer.isLoaded()).isFalse();
 
-        assertThat(header.isPresent()).isTrue();
-        assertThat(content.isPresent()).isTrue();
-        assertThat(footer.isPresent()).isTrue();
+        assertThat(header.present()).isTrue();
+        assertThat(content.present()).isTrue();
+        assertThat(footer.present()).isTrue();
 
         assertThat(header.isLoaded()).isTrue();
         assertThat(content.isLoaded()).isTrue();
@@ -141,7 +141,7 @@ public class ComponentsTest extends IntegrationFluentTest {
             i++;
         }
 
-        assertThat(content.notPresent.isPresent()).isFalse();
+        assertThat(content.notPresent.present()).isFalse();
 
 
     }

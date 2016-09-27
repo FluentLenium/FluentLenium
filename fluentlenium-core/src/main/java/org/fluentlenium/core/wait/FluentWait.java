@@ -3,12 +3,14 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.conditions.FluentConditions;
+import org.fluentlenium.core.conditions.FluentListConditions;
+import org.fluentlenium.core.conditions.wait.WaitConditionProxy;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
-import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
@@ -37,7 +39,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
         useDefaultException = true;
     }
 
-    public FluentWait atMost(long duration, java.util.concurrent.TimeUnit unit) {
+    public FluentWait atMost(long duration, TimeUnit unit) {
         wait.withTimeout(duration, unit);
         return this;
     }
@@ -47,13 +49,16 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
      * @return fluent wait
      */
     public FluentWait atMost(long timeInMillis) {
-        wait.withTimeout(timeInMillis, TimeUnit.MILLISECONDS);
+        return atMost(timeInMillis, TimeUnit.MILLISECONDS);
+    }
+
+    public FluentWait pollingEvery(long duration, TimeUnit unit) {
+        wait.pollingEvery(duration, unit);
         return this;
     }
 
-    public FluentWait pollingEvery(long duration, java.util.concurrent.TimeUnit unit) {
-        wait.pollingEvery(duration, unit);
-        return this;
+    public FluentWait pollingEvery(long duration) {
+        return pollingEvery(duration, TimeUnit.MILLISECONDS);
     }
 
     public FluentWait ignoreAll(java.util.Collection<java.lang.Class<? extends Throwable>> types) {
@@ -120,25 +125,14 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
     }
 
     /**
-     * Return a matcher configured to wait for particular condition for elements matching then given selector.
-     *
-     * @param selector - CSS selector
-     * @return fluent wait matcher
-     */
-    public FluentWaitLocatorSelectorMatcher until(String selector) {
-        updateWaitWithDefaultExceptions();
-        return new FluentWaitLocatorSelectorMatcher(search, this, selector);
-    }
-
-    /**
      * Return a matcher configured to wait for particular condition for given element.
      *
      * @param element Element to wait for.
      * @return fluent wait matcher
      */
-    public FluentWaitElementMatcher until(FluentWebElement element) {
+    public FluentConditions until(FluentWebElement element) {
         updateWaitWithDefaultExceptions();
-        return new FluentWaitElementMatcher(search, this, element);
+        return WaitConditionProxy.element(this, "Element " + element.toString(), Suppliers.ofInstance(element));
     }
 
     /**
@@ -147,9 +141,20 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
      * @param elements Elements to wait for.
      * @return fluent wait matcher
      */
-    public FluentWaitElementListMatcher until(List<? extends FluentWebElement> elements) {
+    public FluentListConditions until(final List<? extends FluentWebElement> elements) {
         updateWaitWithDefaultExceptions();
-        return new FluentWaitElementListMatcher(search, this, elements);
+        return WaitConditionProxy.one(this, "Elements " + elements.toString(), Suppliers.<List<? extends FluentWebElement>>ofInstance(elements));
+    }
+
+    /**
+     * Return a matcher configured to wait for particular condition for given elements.
+     *
+     * @param elements Elements to wait for.
+     * @return fluent wait matcher
+     */
+    public FluentListConditions untilEach(final List<? extends FluentWebElement> elements) {
+        updateWaitWithDefaultExceptions();
+        return WaitConditionProxy.each(this, "Elements " + elements.toString(), Suppliers.<List<? extends FluentWebElement>>ofInstance(elements));
     }
 
     /**
@@ -158,9 +163,9 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
      * @param selector Supplier of the element to wait for.
      * @return fluent wait matcher
      */
-    public FluentWaitSupplierMatcher untilElement(Supplier<? extends FluentWebElement> selector) {
+    public FluentConditions untilElement(Supplier<? extends FluentWebElement> selector) {
         updateWaitWithDefaultExceptions();
-        return new FluentWaitSupplierMatcher(search, this, selector);
+        return WaitConditionProxy.element(this, "Element " + selector, selector);
     }
 
     /**
@@ -169,15 +174,22 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
      * @param selector Supplier of the element to wait for.
      * @return fluent wait matcher
      */
-    public FluentWaitSupplierListMatcher untilElements(
-            Supplier<? extends FluentList<? extends FluentWebElement>> selector) {
+    public FluentListConditions untilElements(
+            Supplier<? extends List<? extends FluentWebElement>> selector) {
         updateWaitWithDefaultExceptions();
-        return new FluentWaitSupplierListMatcher(search, this, selector);
+        return WaitConditionProxy.one(this, "Elements " + selector.toString(), selector);
     }
 
-    @SuppressWarnings("unchecked")
-    public FluentWaitLocatorSelectorMatcher until(By locator) {
-        return new FluentWaitLocatorSelectorMatcher(search, this, locator);
+    /**
+     * Return a matcher configured to wait for particular condition for elements matching then given functional supplier.
+     *
+     * @param selector Supplier of the element to wait for.
+     * @return fluent wait matcher
+     */
+    public FluentListConditions untilEachElements(
+            Supplier<? extends List<? extends FluentWebElement>> selector) {
+        updateWaitWithDefaultExceptions();
+        return WaitConditionProxy.each(this, "Elements " + selector.toString(), selector);
     }
 
     @SuppressWarnings("unchecked")

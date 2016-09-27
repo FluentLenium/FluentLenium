@@ -104,7 +104,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitHasSize() {
-        await().atMost(1, NANOSECONDS).until(smallElements).each().hasSize(3);
+        await().atMost(1, NANOSECONDS).untilEach(smallElements).hasSize(3);
     }
 
     @Test
@@ -145,7 +145,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @Test
     public void when_element_is_present_then_areDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(defaultElements).each().displayed();
+        await().atMost(1, NANOSECONDS).untilEach(defaultElements).displayed();
     }
 
     @Test
@@ -157,7 +157,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_displayed_then_areDisplayed_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(unvisibleElements).each().displayed();
+        await().atMost(1, NANOSECONDS).untilEach(unvisibleElements).displayed();
     }
 
     @Test(expected = TimeoutException.class)
@@ -169,7 +169,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @Test
     public void when_element_is_not_present_then_areNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(nonexistentElements).each().not().displayed();
+        await().atMost(1, NANOSECONDS).untilEach(nonexistentElements).not().displayed();
     }
 
     @Test
@@ -181,7 +181,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @Test
     public void when_element_is_not_displayed_then_areNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(unvisibleElements).each().not().displayed();
+        await().atMost(1, NANOSECONDS).untilEach(unvisibleElements).not().displayed();
     }
 
     @Test
@@ -193,7 +193,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @Test(expected = TimeoutException.class)
     public void when_element_is_displayed_then_areNotDisplayed_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(defaultElements).each().not().displayed();
+        await().atMost(1, NANOSECONDS).untilEach(defaultElements).not().displayed();
     }
 
     @Test(expected = TimeoutException.class)
@@ -205,7 +205,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @Test
     public void when_element_is_enabled_then_areEnabled_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(defaultElements).each().enabled();
+        await().atMost(1, NANOSECONDS).untilEach(defaultElements).enabled();
     }
 
     @Test
@@ -229,7 +229,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_enabled_then_areEnabled_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(disabledElements).each().enabled();
+        await().atMost(1, NANOSECONDS).untilEach(disabledElements).enabled();
     }
 
     @Test(expected = TimeoutException.class)

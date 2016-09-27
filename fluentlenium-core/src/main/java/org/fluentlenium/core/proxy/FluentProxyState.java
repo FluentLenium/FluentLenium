@@ -12,7 +12,7 @@ public interface FluentProxyState<T> {
      *
      * @return true if the element is present, false otherwise
      */
-    boolean isPresent();
+    boolean present();
 
     /**
      * Search for the element now, actually performing the search on the {@link org.openqa.selenium.WebDriver}.

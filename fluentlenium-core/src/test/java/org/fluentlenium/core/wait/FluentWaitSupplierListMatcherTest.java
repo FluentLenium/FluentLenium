@@ -4,6 +4,7 @@ import com.google.common.base.Suppliers;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
+import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.Search;
@@ -96,7 +97,7 @@ public class FluentWaitSupplierListMatcherTest {
 
     @Test
     public void isEnabled() {
-        final FluentWaitSupplierListMatcher matcher = new FluentWaitSupplierListMatcher(search, wait, Suppliers.ofInstance(instantiator.newFluentList(fluentWebElements)));
+        final FluentListConditions matcher = wait.untilElements(Suppliers.ofInstance(instantiator.newFluentList(fluentWebElements)));
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {

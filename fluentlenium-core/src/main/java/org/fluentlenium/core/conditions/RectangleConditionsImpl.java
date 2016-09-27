@@ -11,12 +11,17 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
         super(rectangle);
     }
 
-    @Override
-    protected RectangleConditionsImpl newInstance() {
-        return new RectangleConditionsImpl(object);
+    public RectangleConditionsImpl(Rectangle object, boolean negation) {
+        super(object, negation);
     }
 
     @Override
+    protected RectangleConditionsImpl newInstance(boolean negationValue) {
+        return new RectangleConditionsImpl(object, negationValue);
+    }
+
+    @Override
+    @Negation
     public RectangleConditionsImpl not() {
         return (RectangleConditionsImpl) super.not();
     }
@@ -33,7 +38,7 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
 
     @Override
     public IntegerConditions withX() {
-        return new IntegerConditionsImpl(object.getX());
+        return new IntegerConditionsImpl(object.getX(), negation);
     }
 
     @Override
@@ -48,7 +53,7 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
 
     @Override
     public IntegerConditions withY() {
-        return new IntegerConditionsImpl(object.getY());
+        return new IntegerConditionsImpl(object.getY(), negation);
     }
 
     @Override
@@ -73,7 +78,7 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
 
     @Override
     public IntegerConditions withWidth() {
-        return new IntegerConditionsImpl(object.getWidth());
+        return new IntegerConditionsImpl(object.getWidth(), negation);
     }
 
     @Override
@@ -88,7 +93,7 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
 
     @Override
     public IntegerConditions withHeight() {
-        return new IntegerConditionsImpl(object.getHeight());
+        return new IntegerConditionsImpl(object.getHeight(), negation);
     }
 
     @Override

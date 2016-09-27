@@ -7,6 +7,7 @@ import org.fluentlenium.core.conditions.message.Message;
  */
 public interface IntegerConditions extends Conditions<Integer> {
     @Override
+    @Negation
     IntegerConditions not();
 
     /**

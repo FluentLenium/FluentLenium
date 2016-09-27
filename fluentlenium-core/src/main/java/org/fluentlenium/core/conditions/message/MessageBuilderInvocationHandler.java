@@ -1,5 +1,6 @@
 package org.fluentlenium.core.conditions.message;
 
+import org.fluentlenium.core.conditions.Negation;
 import org.fluentlenium.utils.ReflectionUtils;
 
 import java.lang.reflect.InvocationHandler;
@@ -48,7 +49,7 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
             callItem.setContext(method.getAnnotation(MessageContext.class).value());
         }
         callItem.setArgs(args);
-        if (method.getName().equals("not")) {
+        if (method.isAnnotationPresent(Negation.class)) {
             callItem.setNegation(true);
         }
 

@@ -11,14 +11,29 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
         super(element);
     }
 
-    @Override
-    protected AbstractObjectConditions<FluentWebElement> newInstance() {
-        return new WebElementConditions(object);
+    public WebElementConditions(FluentWebElement object, boolean negation) {
+        super(object, negation);
     }
 
     @Override
+    protected AbstractObjectConditions<FluentWebElement> newInstance(boolean negationValue) {
+        return new WebElementConditions(object, negationValue);
+    }
+
+    @Override
+    @Negation
     public WebElementConditions not() {
         return (WebElementConditions) super.not();
+    }
+
+    @Override
+    public boolean present() {
+        return verify(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(FluentWebElement input) {
+                return input.present();
+            }
+        });
     }
 
     @Override
@@ -78,7 +93,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public StringConditions attribute(String name) {
-        return new StringConditionsImpl(object.attribute(name));
+        return new StringConditionsImpl(object.attribute(name), negation);
     }
 
     @Override
@@ -88,7 +103,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public StringConditions id() {
-        return new StringConditionsImpl(object.id());
+        return new StringConditionsImpl(object.id(), negation);
     }
 
     @Override
@@ -98,7 +113,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public StringConditions name() {
-        return new StringConditionsImpl(object.name());
+        return new StringConditionsImpl(object.name(), negation);
     }
 
     @Override
@@ -108,7 +123,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public StringConditions tagName() {
-        return new StringConditionsImpl(object.tagName());
+        return new StringConditionsImpl(object.tagName(), negation);
     }
 
 
@@ -119,7 +134,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public StringConditions value() {
-        return new StringConditionsImpl(object.value());
+        return new StringConditionsImpl(object.value(), negation);
     }
 
     @Override
@@ -129,11 +144,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public StringConditions text() {
-        StringConditionsImpl conditions = new StringConditionsImpl(object.text());
-        if (negation) {
-            conditions = conditions.not();
-        }
-        return conditions;
+        return new StringConditionsImpl(object.text(), negation);
     }
 
     @Override
@@ -143,19 +154,11 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public StringConditions textContent() {
-        StringConditionsImpl conditions = new StringConditionsImpl(object.textContent());
-        if (negation) {
-            conditions = conditions.not();
-        }
-        return conditions;
+        return new StringConditionsImpl(object.textContent(), negation);
     }
 
     @Override
     public RectangleConditions rectangle() {
-        RectangleConditionsImpl conditions = new RectangleConditionsImpl(object.getElement().getRect());
-        if (negation) {
-            conditions = conditions.not();
-        }
-        return conditions;
+        return new RectangleConditionsImpl(object.getElement().getRect(), negation);
     }
 }

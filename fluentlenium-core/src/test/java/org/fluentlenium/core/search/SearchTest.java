@@ -116,7 +116,7 @@ public class SearchTest {
         when(matcher.isSatisfiedBy(any(String.class))).thenReturn(true);
         when(filter2.getMatcher()).thenReturn(matcher);
 
-        search.find(name, filters).isPresent();
+        search.find(name, filters).present();
         verify(searchContext).findElements(By.cssSelector("cssStyle[generated=true]"));
     }
 
@@ -152,7 +152,7 @@ public class SearchTest {
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
 
-        assertThat(search.find(name, filters).isPresent()).isFalse();
+        assertThat(search.find(name, filters).present()).isFalse();
     }
 
     @Test
@@ -167,7 +167,7 @@ public class SearchTest {
         when(filter1.getAttribut()).thenReturn("text");
         when(webElement.getText()).thenReturn("Ok");
 
-        assertThat(search.find(name, filters).isPresent()).isFalse();
+        assertThat(search.find(name, filters).present()).isFalse();
 
         verify(matcher1).isSatisfiedBy("Ok");
     }
