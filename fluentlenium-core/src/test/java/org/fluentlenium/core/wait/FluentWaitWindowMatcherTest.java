@@ -3,7 +3,6 @@ package org.fluentlenium.core.wait;
 
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentDriver;
-import org.fluentlenium.core.search.Search;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,9 +25,6 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class FluentWaitWindowMatcherTest {
     @Mock
-    private Search search;
-
-    @Mock
     private FluentDriver fluent;
 
     private FluentWait wait;
@@ -38,14 +34,13 @@ public class FluentWaitWindowMatcherTest {
 
     @Before
     public void before() {
-        wait = new FluentWait(fluent, search);
+        wait = new FluentWait(fluent);
         wait.atMost(1L, TimeUnit.MILLISECONDS);
         wait.pollingEvery(1L, TimeUnit.MILLISECONDS);
     }
 
     @After
     public void after() {
-        reset(search);
         reset(fluent);
     }
 

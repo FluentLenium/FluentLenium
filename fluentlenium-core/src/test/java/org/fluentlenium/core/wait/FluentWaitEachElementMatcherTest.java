@@ -63,7 +63,7 @@ public class FluentWaitEachElementMatcherTest {
 
     @Before
     public void before() {
-        wait = new FluentWait(fluent, search);
+        wait = new FluentWait(fluent);
         wait.atMost(1L, TimeUnit.MILLISECONDS);
         wait.pollingEvery(1L, TimeUnit.MILLISECONDS);
 

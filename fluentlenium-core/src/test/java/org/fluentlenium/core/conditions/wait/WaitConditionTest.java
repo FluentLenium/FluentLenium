@@ -8,7 +8,6 @@ import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.wait.FluentWait;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +30,6 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class WaitConditionTest {
-
     @Mock
     private FluentControl control;
 
@@ -43,8 +41,6 @@ public class WaitConditionTest {
 
     private FluentWait wait;
 
-    private Search search;
-
     private String context = "context";
 
     private ComponentInstantiator instantiator;
@@ -52,9 +48,8 @@ public class WaitConditionTest {
     @Before
     public void before() {
         instantiator = new DefaultComponentInstantiator(control);
-        search = new Search(driver, instantiator, null);
 
-        wait = spy(new FluentWait(control, search).atMost(1000).pollingEvery(50));
+        wait = spy(new FluentWait(control).atMost(1000).pollingEvery(50));
 
         when(wait.withMessage(any(Supplier.class))).thenReturn(wait);
     }

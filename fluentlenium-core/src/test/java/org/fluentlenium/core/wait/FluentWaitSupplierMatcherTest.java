@@ -3,11 +3,9 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Suppliers;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentDriver;
-import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.search.Search;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,9 +26,6 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class FluentWaitSupplierMatcherTest {
     @Mock
-    private Search search;
-
-    @Mock
     private FluentDriver fluent;
 
     private FluentWait wait;
@@ -43,11 +38,9 @@ public class FluentWaitSupplierMatcherTest {
 
     @Before
     public void before() {
-        wait = new FluentWait(fluent, search);
+        wait = new FluentWait(fluent);
         wait.atMost(1L, TimeUnit.MILLISECONDS);
         wait.pollingEvery(1L, TimeUnit.MILLISECONDS);
-
-        when(search.getInstantiator()).thenReturn(new DefaultComponentInstantiator(fluent));
 
         when(fluentWebElement.conditions()).thenReturn(new WebElementConditions(fluentWebElement));
         when(fluentWebElement.getElement()).thenReturn(element);
@@ -56,7 +49,6 @@ public class FluentWaitSupplierMatcherTest {
 
     @After
     public void after() {
-        reset(search);
         reset(fluent);
         reset(fluentWebElement);
         reset(element);

@@ -104,7 +104,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
     }
 
     public FluentConditions awaitUntil() {
-        return WaitConditionProxy.element(fluentControl.await(), "", Suppliers.ofInstance(this));
+        return WaitConditionProxy.element(await(), "", Suppliers.ofInstance(this));
     }
 
     /**

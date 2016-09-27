@@ -244,7 +244,7 @@ public class FluentDriver implements FluentControl {
 
     @Override
     public FluentWait await() {
-        return new FluentWait(this, getSearch());
+        return new FluentWait(this);
     }
 
     @Override

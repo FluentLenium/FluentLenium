@@ -10,7 +10,6 @@ import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.wait.WaitConditionProxy;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.search.Search;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
@@ -23,7 +22,6 @@ import java.util.concurrent.TimeUnit;
 public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentControl> {
 
     private final org.openqa.selenium.support.ui.FluentWait<FluentControl> wait;
-    private final Search search;
     private final WebDriver driver;
     private boolean useDefaultException;
     private boolean useCustomMessage;
@@ -32,9 +30,8 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
         return wait;
     }
 
-    public FluentWait(FluentControl fluentControl, Search search) {
+    public FluentWait(FluentControl fluentControl) {
         wait = new org.openqa.selenium.support.ui.FluentWait<FluentControl>(fluentControl);
-        this.search = search;
         driver = fluentControl.getDriver();
         useDefaultException = true;
     }
