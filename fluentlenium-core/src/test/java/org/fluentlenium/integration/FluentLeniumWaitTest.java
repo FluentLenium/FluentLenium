@@ -82,6 +82,11 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     }
 
     @Test
+    public void explicitWaitMillis() {
+        await().explicitlyFor(1);
+    }
+
+    @Test
     public void checkAwaitHasSize() {
         await().atMost(1, NANOSECONDS).untilEach($(".small")).hasSize(3);
     }

@@ -19,7 +19,7 @@ public class SearchTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void checkSearcByLocatorhWorks() {
+    public void checkSearchByLocatorWorks() {
         goTo(DEFAULT_URL);
         By locator = By.cssSelector(".small");
         FluentList list = find(locator);

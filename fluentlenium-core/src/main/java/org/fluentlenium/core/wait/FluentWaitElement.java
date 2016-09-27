@@ -126,6 +126,11 @@ public class FluentWaitElement {
         return fluentControlWait.untilPage(page);
     }
 
+    public FluentWaitElement explicitlyFor(long amount) {
+        fluentControlWait.explicitlyFor(amount);
+        return this;
+    }
+
     public FluentWaitElement explicitlyFor(long amount, TimeUnit timeUnit) {
         fluentControlWait.explicitlyFor(amount, timeUnit);
         return this;
@@ -142,4 +147,6 @@ public class FluentWaitElement {
     public boolean useCustomMessage() {
         return fluentControlWait.useCustomMessage();
     }
+
+
 }

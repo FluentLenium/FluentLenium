@@ -58,7 +58,7 @@ public class SearchTest {
         FluentAdapter fluentAdapter = new FluentAdapter(driver);
 
         DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
-        search = new Search(searchContext, instantiator, new DefaultHookChainBuilder(fluentAdapter, instantiator));
+        search = new Search(searchContext, instantiator);
     }
 
     @After
@@ -118,6 +118,28 @@ public class SearchTest {
 
         search.find(name, filters).present();
         verify(searchContext).findElements(By.cssSelector("cssStyle[generated=true]"));
+    }
+
+    @Test
+    public void findCheckCssIsWellFormedWithPostSelectorAndByLocator() {
+        WebElement webElement = mock(WebElement.class);
+        WebElement webElement2 = mock(WebElement.class);
+        List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
+
+        when(searchContext.findElements(By.cssSelector("cssStyle[generated=true]"))).thenReturn(webElements);
+
+        By locator = By.cssSelector("cssStyle");
+        Filter[] filters = new Filter[]{filter1, filter2};
+        when(filter1.isPreFilter()).thenReturn(true);
+        when(filter1.toString()).thenReturn("[generated=true]");
+        when(filter2.isPreFilter()).thenReturn(false);
+        when(filter2.toString()).thenReturn("[checked=ok]");
+        Matcher matcher = mock(Matcher.class);
+        when(matcher.isSatisfiedBy(any(String.class))).thenReturn(true);
+        when(filter2.getMatcher()).thenReturn(matcher);
+
+        search.find(locator, filters).present();
+        verify(searchContext).findElements(By.cssSelector("cssStyle"));
     }
 
 

@@ -215,6 +215,17 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
      * Waits unconditionally for explicit amount of time. The method should be used only as a last resort. In most
      * cases you should wait for some condition, e.g. visibility of particular element on the page.
      *
+     * @param amount   amount of time in milliseconds
+     * @return {@code this} to allow chaining method invocations
+     */
+    public FluentWait explicitlyFor(long amount) {
+        return explicitlyFor(amount, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * Waits unconditionally for explicit amount of time. The method should be used only as a last resort. In most
+     * cases you should wait for some condition, e.g. visibility of particular element on the page.
+     *
      * @param amount   amount of time
      * @param timeUnit unit of time
      * @return {@code this} to allow chaining method invocations

@@ -53,7 +53,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
 
         this.hookChainBuilder = new DefaultHookChainBuilder(this.fluentControl, this.instantiator);
 
-        this.search = new Search(webElement, this.instantiator, this.hookChainBuilder);
+        this.search = new Search(webElement, this.instantiator);
         this.axes = new Axes(webElement, this.instantiator, this.hookChainBuilder);
         this.mouseActions = new MouseElementActions(this.fluentControl.getDriver(), webElement);
         this.keyboardActions = new KeyboardElementActions(this.fluentControl.getDriver(), webElement);

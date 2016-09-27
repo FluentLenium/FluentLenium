@@ -125,9 +125,16 @@ public class FluentWaitElementList {
         return fluentControlWait.untilPage(page);
     }
 
-    public FluentWait explicitlyFor(long amount, TimeUnit timeUnit) {
-        return fluentControlWait.explicitlyFor(amount, timeUnit);
+    public FluentWaitElementList explicitlyFor(long amount, TimeUnit timeUnit) {
+        fluentControlWait.explicitlyFor(amount, timeUnit);
+        return this;
     }
+
+    public FluentWaitElementList explicitlyFor(long amount) {
+        fluentControlWait.explicitlyFor(amount);
+        return this;
+    }
+
 
     public void until(Supplier<Boolean> isTrue) {
         fluentControlWait.until(isTrue);
