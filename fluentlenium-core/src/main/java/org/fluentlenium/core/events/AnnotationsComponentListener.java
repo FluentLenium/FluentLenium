@@ -108,13 +108,13 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
     }
 
     @Override
-    public void beforeChangeValueOf(WebElement element, WebDriver driver) {
+    public void beforeChangeValueOf(WebElement element, WebDriver driver, CharSequence[] charSequences) {
         defaultHandler(BeforeChangeValueOf.class, element, driver);
     }
 
     @Override
-    public void afterChangeValueOf(WebElement element, WebDriver driver) {
-        defaultHandler(AfterChangeValueOf.class, element, driver);
+    public void afterChangeValueOf(WebElement element, WebDriver webDriver, CharSequence[] charSequences) {
+        defaultHandler(AfterChangeValueOf.class, element, webDriver);
     }
 
     @Override
