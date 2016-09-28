@@ -4,6 +4,7 @@ import org.fluentlenium.core.action.FluentActions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.hook.HookControl;
+import org.fluentlenium.core.label.FluentLabel;
 import org.fluentlenium.core.proxy.FluentProxyState;
 import org.fluentlenium.core.search.SearchControl;
 import org.fluentlenium.core.wait.FluentWaitElementList;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  *
  */
-public interface FluentList<E extends FluentWebElement> extends List<E>, FluentActions<FluentList<E>, E>, FluentProxyState<FluentList<E>>, SearchControl<E>, HookControl<FluentList<E>> {
+public interface FluentList<E extends FluentWebElement> extends List<E>, FluentActions<FluentList<E>, E>, FluentProxyState<FluentList<E>>, SearchControl<E>, HookControl<FluentList<E>>, FluentLabel<FluentList<E>> {
 
     /**
      * Retrieve the first element.

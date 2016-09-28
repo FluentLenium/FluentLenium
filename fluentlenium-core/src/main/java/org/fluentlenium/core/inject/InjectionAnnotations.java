@@ -10,9 +10,10 @@ import org.openqa.selenium.support.pagefactory.Annotations;
 import java.lang.reflect.Field;
 import java.util.List;
 
-public class FieldAndReturnTypeAnnotations extends AbstractAnnotations {
+public class InjectionAnnotations extends AbstractAnnotations {
     private final ClassAnnotations classAnnotations;
     private final Annotations fieldAnnotations;
+    private final LabelAnnotations labelFieldAnnotations;
 
     private static boolean isList(Field field) {
         return List.class.isAssignableFrom(field.getType());
@@ -26,10 +27,10 @@ public class FieldAndReturnTypeAnnotations extends AbstractAnnotations {
         return field.getType();
     }
 
-    public FieldAndReturnTypeAnnotations(Field field) {
+    public InjectionAnnotations(Field field) {
         classAnnotations = new ClassAnnotations(getEffectiveClass(field));
         fieldAnnotations = new Annotations(field);
-
+        labelFieldAnnotations = new LabelAnnotations(field);
     }
 
     @Override
@@ -43,5 +44,13 @@ public class FieldAndReturnTypeAnnotations extends AbstractAnnotations {
     @Override
     public boolean isLookupCached() {
         return classAnnotations.isLookupCached() || fieldAnnotations.isLookupCached();
+    }
+
+    public String getLabel() {
+        return labelFieldAnnotations.getLabel();
+    }
+
+    public String[] getLabelHints() {
+        return labelFieldAnnotations.getLabelHints();
     }
 }

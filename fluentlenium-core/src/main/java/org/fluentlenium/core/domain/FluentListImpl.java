@@ -1,8 +1,10 @@
 package org.fluentlenium.core.domain;
 
 import com.google.common.base.Function;
+import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
+import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
@@ -16,6 +18,8 @@ import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
+import org.fluentlenium.core.label.FluentLabel;
+import org.fluentlenium.core.label.FluentLabelImpl;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.wait.FluentWaitElementList;
 import org.openqa.selenium.By;
@@ -34,11 +38,23 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     private final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
     private HookChainBuilder hookChainBuilder;
 
-    public FluentListImpl(Class<E> componentClass, List<E> list, FluentControl fluentControl, ComponentInstantiator instantiator) {
+    private final FluentLabelImpl<FluentListImpl<E>> label;
+
+    public FluentListImpl(Class<E> componentClass, final List<E> list, FluentControl fluentControl, ComponentInstantiator instantiator) {
         super(componentClass, list, fluentControl, instantiator);
         this.hookChainBuilder = new DefaultHookChainBuilder(fluentControl, instantiator);
+        this.label = new FluentLabelImpl<>(this, new Supplier<String>() {
+            @Override
+            public String get() {
+                return list.toString();
+            }
+        });
     }
 
+    @Delegate
+    private FluentLabel<FluentListImpl<E>> getLabel() {
+        return label;
+    }
 
     /**
      * Creates a FluentList from array of Selenium {@link WebElement}
@@ -85,7 +101,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         if (!LocatorProxies.isLoaded(proxy)) {
             WebElement first = LocatorProxies.first(proxy);
             LocatorProxies.setHooks(first, hookChainBuilder, hookDefinitions);
-            return instantiator.newComponent(componentClass, first);
+            E component = instantiator.newComponent(componentClass, first);
+            if (component instanceof FluentLabel) {
+                component.withLabel(label.getLabel());
+                component.withLabelHint(label.getLabelHints());
+            }
+            return component;
         }
         if (this.size() == 0) {
             throw new NoSuchElementException("Element not found");
@@ -98,7 +119,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         if (!LocatorProxies.isLoaded(proxy)) {
             WebElement last = LocatorProxies.last(proxy);
             LocatorProxies.setHooks(last, hookChainBuilder, hookDefinitions);
-            return instantiator.newComponent(componentClass, last);
+            E component = instantiator.newComponent(componentClass, last);
+            if (component instanceof FluentLabel) {
+                component.withLabel(label.getLabel());
+                component.withLabelHint(label.getLabelHints());
+            }
+            return component;
         }
         if (this.size() == 0) {
             throw new NoSuchElementException("Element not found");
@@ -111,7 +137,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         if (!LocatorProxies.isLoaded(proxy)) {
             WebElement indexElement = LocatorProxies.index(proxy, index);
             LocatorProxies.setHooks(indexElement, hookChainBuilder, hookDefinitions);
-            return instantiator.newComponent(componentClass, indexElement);
+            E component = instantiator.newComponent(componentClass, indexElement);
+            if (component instanceof FluentLabel) {
+                component.withLabel(label.getLabel());
+                component.withLabelHint(label.getLabelHints());
+            }
+            return component;
         }
         if (this.size() <= index) {
             throw new NoSuchElementException("Element not found");
@@ -529,7 +560,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public String toString() {
-        return list.toString();
+        return label.toString();
     }
 }
 

@@ -85,7 +85,7 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     }
 
     @Override
-    public String toString() {
-        return "[" + super.toString() + "]";
+    protected String getLazyToString() {
+        return "Lazy Element List";
     }
 }

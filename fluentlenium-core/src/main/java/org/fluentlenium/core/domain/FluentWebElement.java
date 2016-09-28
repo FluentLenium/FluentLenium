@@ -1,5 +1,6 @@
 package org.fluentlenium.core.domain;
 
+import com.google.common.base.Supplier;
 import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
@@ -18,6 +19,8 @@ import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookControl;
 import org.fluentlenium.core.hook.HookDefinition;
+import org.fluentlenium.core.label.FluentLabel;
+import org.fluentlenium.core.label.FluentLabelImpl;
 import org.fluentlenium.core.proxy.FluentProxyState;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.search.Search;
@@ -38,7 +41,7 @@ import java.util.List;
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
 public class FluentWebElement extends Component implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>,
-        FluentProxyState<FluentWebElement>, SearchControl<FluentWebElement>, HookControl<FluentWebElement> {
+        FluentProxyState<FluentWebElement>, SearchControl<FluentWebElement>, HookControl<FluentWebElement>, FluentLabel<FluentWebElement> {
     private final Search search;
     private final Axes axes;
     private final MouseElementActions mouseActions;
@@ -47,6 +50,9 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
 
     private final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
     private final HookChainBuilder hookChainBuilder;
+
+    @Delegate
+    private FluentLabel<FluentWebElement> label;
 
     public FluentWebElement(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
         super(webElement, fluentControl, instantiator);
@@ -58,6 +64,12 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
         this.mouseActions = new MouseElementActions(this.fluentControl.getDriver(), webElement);
         this.keyboardActions = new KeyboardElementActions(this.fluentControl.getDriver(), webElement);
         this.conditions = new WebElementConditions(this);
+        this.label = new FluentLabelImpl<>(this, new Supplier<String>() {
+            @Override
+            public String get() {
+                return getElement().toString();
+            }
+        });
     }
 
     @Delegate(excludes = {InputControl.class, AwaitControl.class, SearchControl.class})
@@ -490,11 +502,6 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
     }
 
     @Override
-    public String toString() {
-        return this.getElement().toString();
-    }
-
-    @Override
     public FluentWebElement noHook() {
         hookDefinitions.clear();
         LocatorProxies.setHooks(getElement(), hookChainBuilder, hookDefinitions);
@@ -513,5 +520,10 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
         hookDefinitions.add(new HookDefinition<>(hook, options));
         LocatorProxies.setHooks(getElement(), hookChainBuilder, hookDefinitions);
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return label.toString();
     }
 }
