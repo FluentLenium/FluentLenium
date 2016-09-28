@@ -2,6 +2,7 @@ package org.fluentlenium.core.conditions;
 
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.conditions.message.Message;
+import org.fluentlenium.core.conditions.message.NotMessage;
 
 /**
  * Common interface for conditions.
@@ -15,7 +16,8 @@ public interface Conditions<T> {
      * @param predicate predicate to check
      * @return true if the predicated is checked, false otherwise
      */
-    @Message("should [not ]verify predicate {0}")
+    @NotMessage("does not verify predicate {0}")
+    @Message("verify predicate {0}")
     boolean verify(Predicate<T> predicate);
 
     /**

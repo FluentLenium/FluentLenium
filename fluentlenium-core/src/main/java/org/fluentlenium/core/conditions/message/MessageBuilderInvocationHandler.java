@@ -71,7 +71,7 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
         for (MessageBuilderCall call : calls) {
             if (call.getContext() != null) {
                 if (messageBuilder.length() > 0) {
-                    messageBuilder.append(".");
+                    messageBuilder.append(" ");
                 }
                 messageBuilder.append(call.getContext());
             }
@@ -88,31 +88,21 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
         Collections.reverse(reversedCalls);
 
         for (MessageBuilderCall call : reversedCalls) {
-            if (call.getMessage() != null) {
-                String validationMessage = "";
-                if (negation) {
-                    if (call.getNotMessage() != null) {
-                        validationMessage = call.getNotMessage();
-                    } else {
-                        validationMessage = call.getMessage();
-                        validationMessage = validationMessage.replaceAll("\\[(.*?)\\]", "$1");
-                    }
-                } else {
-                    validationMessage = call.getMessage();
-                    validationMessage = validationMessage.replaceAll("\\[(.*?)\\]", "");
-                }
+            String validationMessage = negation ? call.getMessage() : call.getNotMessage();
 
-                validationMessage = MessageFormat.format(validationMessage, call.getArgs());
-
-
-                messageBuilder.append(" ");
-                messageBuilder.append(validationMessage);
-
-                return messageBuilder.toString();
+            if (validationMessage == null) {
+                continue;
             }
+
+            validationMessage = MessageFormat.format(validationMessage, call.getArgs());
+
+            messageBuilder.append(" ");
+            messageBuilder.append(validationMessage);
+
+            return messageBuilder.toString();
         }
 
-        throw new IllegalStateException("No @Message annotation found in the calls.");
+        throw new IllegalStateException("No @Message/@NotMessage annotation found in the calls.");
 
 
     }

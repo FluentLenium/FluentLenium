@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class AtIndexElementLocator implements ElementLocator {
     private final int index;
-    private ElementLocator listLocator;
+    protected ElementLocator listLocator;
 
     public AtIndexElementLocator(ElementLocator listLocator, int index) {
         this.listLocator = listLocator;
@@ -31,5 +31,10 @@ public class AtIndexElementLocator implements ElementLocator {
         WebElement element = findElement();
         if (element == null) return Collections.emptyList();
         return Arrays.asList(element);
+    }
+
+    @Override
+    public String toString() {
+        return listLocator.toString() + " (index=" + index + ")";
     }
 }

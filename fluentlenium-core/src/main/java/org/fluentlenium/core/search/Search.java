@@ -90,6 +90,11 @@ public class Search implements SearchControl<FluentWebElement> {
             public List<WebElement> findElements() {
                 return searchContext.findElements(by);
             }
+
+            @Override
+            public String toString() {
+                return by.toString();
+            }
         };
     }
 

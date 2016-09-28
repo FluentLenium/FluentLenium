@@ -59,7 +59,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     }
 
     @Override
-    public boolean equalsTo(final String anotherString) {
+    public boolean equalTo(final String anotherString) {
         return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
@@ -70,7 +70,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     }
 
     @Override
-    public boolean equalsToIgnoreCase(final String anotherString) {
+    public boolean equalToIgnoreCase(final String anotherString) {
         return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {

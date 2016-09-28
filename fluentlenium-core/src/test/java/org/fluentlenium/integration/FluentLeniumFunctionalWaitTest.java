@@ -75,7 +75,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentWebElement get() {
                 return findFirst(".small", withText("Small 1"));
             }
-        }).text().equalsTo("Small 1");
+        }).text().equalTo("Small 1");
     }
 
     @Test
@@ -606,7 +606,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find("#default");
             }
-        }).text().equalsTo("wait");
+        }).text().equalTo("wait");
     }
 
     private static class MyFluentPage extends FluentPage {

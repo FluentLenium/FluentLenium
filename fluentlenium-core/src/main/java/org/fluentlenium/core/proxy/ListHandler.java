@@ -83,4 +83,9 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
         }
         return super.invoke(proxy, method, args);
     }
+
+    @Override
+    public String toString() {
+        return "[" + super.toString() + "]";
+    }
 }

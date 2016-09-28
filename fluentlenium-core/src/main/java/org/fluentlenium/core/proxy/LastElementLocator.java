@@ -30,4 +30,9 @@ public class LastElementLocator implements ElementLocator {
         if (element == null) return Collections.emptyList();
         return Arrays.asList(element);
     }
+
+    @Override
+    public String toString() {
+        return listLocator.toString() + " (last)";
+    }
 }

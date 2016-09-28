@@ -124,11 +124,11 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
 
     @Test
     public void attribute() {
-        assertThat(conditions.attribute("attr").equalsTo("value")).isFalse();
+        assertThat(conditions.attribute("attr").equalTo("value")).isFalse();
 
         when(webElement2.getAttribute("attr")).thenReturn("value");
 
-        assertThat(conditions.attribute("attr").equalsTo("value")).isTrue();
+        assertThat(conditions.attribute("attr").equalTo("value")).isTrue();
     }
 
     @Test
@@ -142,11 +142,11 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
 
     @Test
     public void id() {
-        assertThat(conditions.id().equalsTo("value")).isFalse();
+        assertThat(conditions.id().equalTo("value")).isFalse();
 
         when(webElement3.getAttribute("id")).thenReturn("value");
 
-        assertThat(conditions.id().equalsTo("value")).isTrue();
+        assertThat(conditions.id().equalTo("value")).isTrue();
     }
 
     @Test
@@ -160,11 +160,11 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
 
     @Test
     public void name() {
-        assertThat(conditions.name().equalsTo("value")).isFalse();
+        assertThat(conditions.name().equalTo("value")).isFalse();
 
         when(webElement1.getAttribute("name")).thenReturn("value");
 
-        assertThat(conditions.name().equalsTo("value")).isTrue();
+        assertThat(conditions.name().equalTo("value")).isTrue();
     }
 
     @Test
@@ -178,11 +178,11 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
 
     @Test
     public void tagName() {
-        assertThat(conditions.tagName().equalsTo("value")).isFalse();
+        assertThat(conditions.tagName().equalTo("value")).isFalse();
 
         when(webElement1.getTagName()).thenReturn("value");
 
-        assertThat(conditions.tagName().equalsTo("value")).isTrue();
+        assertThat(conditions.tagName().equalTo("value")).isTrue();
     }
 
     @Test
@@ -196,11 +196,11 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
 
     @Test
     public void value() {
-        assertThat(conditions.value().equalsTo("value")).isFalse();
+        assertThat(conditions.value().equalTo("value")).isFalse();
 
         when(webElement1.getAttribute("value")).thenReturn("value");
 
-        assertThat(conditions.value().equalsTo("value")).isTrue();
+        assertThat(conditions.value().equalTo("value")).isTrue();
     }
 
     @Test

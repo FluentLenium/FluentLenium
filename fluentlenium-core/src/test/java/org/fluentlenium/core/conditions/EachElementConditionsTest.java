@@ -122,10 +122,10 @@ public class EachElementConditionsTest extends AbstractFluentListConditionsTest 
         when(webElement2.getText()).thenReturn("Some Text");
         when(webElement3.getText()).thenReturn("Some Text");
 
-        assertThat(conditions.text().equalsTo("Some Text")).isTrue();
+        assertThat(conditions.text().equalTo("Some Text")).isTrue();
 
         reset(webElement3);
-        assertThat(conditions.text().equalsTo("Other Text")).isFalse();
+        assertThat(conditions.text().equalTo("Other Text")).isFalse();
     }
 
     @Test
@@ -156,12 +156,12 @@ public class EachElementConditionsTest extends AbstractFluentListConditionsTest 
     public void attribute() {
         when(webElement1.getAttribute("attr")).thenReturn("value");
 
-        assertThat(conditions.attribute("attr").equalsTo("value")).isFalse();
+        assertThat(conditions.attribute("attr").equalTo("value")).isFalse();
 
         when(webElement2.getAttribute("attr")).thenReturn("value");
         when(webElement3.getAttribute("attr")).thenReturn("value");
 
-        assertThat(conditions.attribute("attr").equalsTo("value")).isTrue();
+        assertThat(conditions.attribute("attr").equalTo("value")).isTrue();
     }
 
     @Test
@@ -180,12 +180,12 @@ public class EachElementConditionsTest extends AbstractFluentListConditionsTest 
     public void id() {
         when(webElement1.getAttribute("id")).thenReturn("value");
 
-        assertThat(conditions.id().equalsTo("value")).isFalse();
+        assertThat(conditions.id().equalTo("value")).isFalse();
 
         when(webElement2.getAttribute("id")).thenReturn("value");
         when(webElement3.getAttribute("id")).thenReturn("value");
 
-        assertThat(conditions.id().equalsTo("value")).isTrue();
+        assertThat(conditions.id().equalTo("value")).isTrue();
     }
 
     @Test
@@ -216,12 +216,12 @@ public class EachElementConditionsTest extends AbstractFluentListConditionsTest 
     public void tagName() {
         when(webElement1.getTagName()).thenReturn("value");
 
-        assertThat(conditions.tagName().equalsTo("value")).isFalse();
+        assertThat(conditions.tagName().equalTo("value")).isFalse();
 
         when(webElement2.getTagName()).thenReturn("value");
         when(webElement3.getTagName()).thenReturn("value");
 
-        assertThat(conditions.tagName().equalsTo("value")).isTrue();
+        assertThat(conditions.tagName().equalTo("value")).isTrue();
     }
 
     @Test
@@ -240,12 +240,12 @@ public class EachElementConditionsTest extends AbstractFluentListConditionsTest 
     public void value() {
         when(webElement1.getAttribute("value")).thenReturn("value");
 
-        assertThat(conditions.value().equalsTo("value")).isFalse();
+        assertThat(conditions.value().equalTo("value")).isFalse();
 
         when(webElement2.getAttribute("value")).thenReturn("value");
         when(webElement3.getAttribute("value")).thenReturn("value");
 
-        assertThat(conditions.value().equalsTo("value")).isTrue();
+        assertThat(conditions.value().equalTo("value")).isTrue();
     }
 
     @Test

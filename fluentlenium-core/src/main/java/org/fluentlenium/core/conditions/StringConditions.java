@@ -1,6 +1,7 @@
 package org.fluentlenium.core.conditions;
 
 import org.fluentlenium.core.conditions.message.Message;
+import org.fluentlenium.core.conditions.message.NotMessage;
 
 import java.util.regex.Pattern;
 
@@ -12,24 +13,31 @@ public interface StringConditions extends Conditions<String> {
     @Negation
     StringConditions not();
 
-    @Message("should [not ]contain \"{0}\"")
+    @Message("contains \"{0}\"")
+    @NotMessage("does not contain \"{0}\"")
     boolean contains(CharSequence s);
 
-    @Message("should [not ]starts with \"{0}\"")
+    @Message("starts with \"{0}\"")
+    @NotMessage("does not start with \"{0}\"")
     boolean startsWith(String prefix);
 
-    @Message("should [not ]ends with \"{0}\"")
+    @Message("ends with \"{0}\"")
+    @NotMessage("does not end with \"{0}\"")
     boolean endsWith(String suffix);
 
-    @Message("should [not ]be equal to \"{0}\"")
-    boolean equalsTo(String anotherString);
+    @Message("is equal to \"{0}\"")
+    @NotMessage("is not equal to \"{0}\"")
+    boolean equalTo(String anotherString);
 
-    @Message("should [not ]be equal to \"{0}\" (ignore case)")
-    boolean equalsToIgnoreCase(String anotherString);
+    @Message("is equal (ignore case) to \"{0}\"")
+    @NotMessage("is not equal (ignore case) to \"{0}\"")
+    boolean equalToIgnoreCase(String anotherString);
 
-    @Message("should [not ]match \"{0}\" regular expression")
+    @Message("matches \"{0}\"")
+    @NotMessage("does not match \"{0}\"")
     boolean matches(String regex);
 
-    @Message("should [not ]match \"{0}\" regular expression")
+    @Message("matches \"{0}\"")
+    @NotMessage("does not match \"{0}\"")
     boolean matches(Pattern pattern);
 }

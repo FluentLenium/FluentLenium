@@ -9,6 +9,7 @@ import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.conditions.Conditions;
 import org.fluentlenium.core.conditions.Negation;
 import org.fluentlenium.core.conditions.NoSuchElementValue;
+import org.fluentlenium.core.conditions.message.MessageContext;
 import org.fluentlenium.core.conditions.message.MessageProxy;
 import org.fluentlenium.core.wait.FluentWait;
 import org.openqa.selenium.NoSuchElementException;
@@ -24,7 +25,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
     private final Class<C> conditionClass;
     private final Supplier<C> conditionSupplier;
     private final FluentWait wait;
-    private final String context;
+    private String context;
     private boolean negation;
 
     public WaitConditionInvocationHandler(Class<C> conditionClass,
@@ -172,6 +173,10 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
             WaitConditionInvocationHandler negationHandler = (WaitConditionInvocationHandler) Proxy.getInvocationHandler(negationProxy);
             negationHandler.negation = !negation;
             return negationProxy;
+        }
+
+        if (method.isAnnotationPresent(MessageContext.class)) {
+            context = context + " " + method.getAnnotation(MessageContext.class).value();
         }
 
         if (boolean.class.equals(returnType) || Boolean.class.equals(returnType)) {

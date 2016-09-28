@@ -3,6 +3,7 @@ package org.fluentlenium.core.conditions;
 
 import org.fluentlenium.core.conditions.message.Message;
 import org.fluentlenium.core.conditions.message.MessageContext;
+import org.fluentlenium.core.conditions.message.NotMessage;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
@@ -22,7 +23,8 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return true if the element is present, false otherwise.
      */
-    @Message("should [not ]be present")
+    @Message("is present")
+    @NotMessage("is not present")
     boolean present();
 
     /**
@@ -30,7 +32,8 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return true if the element can be clicked, false otherwise.
      */
-    @Message("should [not ]be clickable")
+    @Message("is clickable")
+    @NotMessage("is not clickable")
     boolean clickable();
 
     /**
@@ -38,7 +41,8 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return false is the element is still attached to the DOM, true otherwise.
      */
-    @Message("should [not ]be stale")
+    @Message("is stale")
+    @NotMessage("is not stale")
     @NoSuchElementValue(true)
     boolean stale();
 
@@ -47,7 +51,8 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return true if element is displayed, false otherwise.
      */
-    @Message("should [not ]be displayed")
+    @Message("is displayed")
+    @NotMessage("is not displayed")
     boolean displayed();
 
     /**
@@ -55,7 +60,8 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return true if element is enabled, false otherwise.
      */
-    @Message("should [not ]be enabled")
+    @Message("is enabled")
+    @NotMessage("is not enabled")
     boolean enabled();
 
     /**
@@ -63,7 +69,8 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return true if element is selected, false otherwise.
      */
-    @Message("should [not ]be selected")
+    @Message("is selected")
+    @NotMessage("is not selected")
     boolean selected();
 
     /**
@@ -80,7 +87,8 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @param id id to check
      * @return true if the element has the given id, false otherwise.
      */
-    @Message("should [not ]have id=\"{0}\"")
+    @Message("has id=\"{0}\"")
+    @NotMessage("does not have id=\"{0}\"")
     boolean id(String id);
 
     /**
@@ -97,7 +105,8 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @param name name to check
      * @return true if the element has the given name, false otherwise.
      */
-    @Message("should [not ]have name=\"{0}\"")
+    @Message("has name=\"{0}\"")
+    @NotMessage("does not have name=\"{0}\"")
     boolean name(String name);
 
     /**
@@ -114,7 +123,8 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @param tagName tagName to check
      * @return true if the element has the given tagName, false otherwise.
      */
-    @Message("should [not ]have tagName=\"{0}\"")
+    @Message("has tagName=\"{0}\"")
+    @NotMessage("does not have tagName=\"{0}\"")
     boolean tagName(String tagName);
 
     /**
@@ -131,7 +141,8 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @param value value to check
      * @return true if the element has the given value, false otherwise.
      */
-    @Message("should [not ]have value=\"{0}\"")
+    @Message("has value=\"{0}\"")
+    @NotMessage("does not have value=\"{0}\"")
     boolean value(String value);
 
     /**
@@ -140,7 +151,8 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @return true if the element has the given text, false otherwise.
      * @see StringConditions#equals(Object)
      */
-    @Message("should [not ]have text=\"{0}\"")
+    @Message("has text=\"{0}\"")
+    @NotMessage("does not have text=\"{0}\"")
     boolean text(String anotherString);
 
     /**
@@ -157,7 +169,8 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @return true if the element has the given text content, false otherwise.
      * @see StringConditions#equals(Object)
      */
-    @Message("should [not ]have textContent=\"{0}\"")
+    @Message("has textContent=\"{0}\"")
+    @NotMessage("does not have textContent=\"{0}\"")
     boolean textContent(String anotherString);
 
     /**
@@ -175,7 +188,8 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @param value attribute value to check
      * @return true if the given attribute has the given value, false otherwise.
      */
-    @Message("should [not ]have attribute \"{0}\"=\"{1}\"")
+    @Message("has attribute \"{0}\"=\"{1}\"")
+    @NotMessage("does not have attribute \"{0}\"=\"{1}\"")
     boolean attribute(final String name, final String value);
 
     /**
@@ -192,6 +206,6 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return An object to configure advanced position conditions
      */
-    @MessageContext("rectangle(\"{0}\"")
+    @MessageContext("rectangle")
     RectangleConditions rectangle();
 }

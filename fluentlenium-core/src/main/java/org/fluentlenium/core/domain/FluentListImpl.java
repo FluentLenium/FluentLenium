@@ -526,5 +526,10 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     public void clear() {
         clearAll();
     }
+
+    @Override
+    public String toString() {
+        return list.toString();
+    }
 }
 

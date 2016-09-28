@@ -4,6 +4,7 @@ package org.fluentlenium.core.conditions;
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.conditions.message.Message;
 import org.fluentlenium.core.conditions.message.MessageContext;
+import org.fluentlenium.core.conditions.message.NotMessage;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
@@ -26,7 +27,8 @@ public interface FluentListConditions extends FluentConditions {
      * @param defaultValue default value if input is not present
      * @return true if the predicated is verified, false otherwise
      */
-    @Message("should [not ]verify predicate {0}")
+    @Message("verifies predicate {0}")
+    @NotMessage("does not verify predicate {0}")
     boolean verify(Predicate<FluentWebElement> predicate, boolean defaultValue);
 
     /**
@@ -34,7 +36,8 @@ public interface FluentListConditions extends FluentConditions {
      *
      * @return true if the element is present, false otherwise
      */
-    @Message("should [not ]be present {0}")
+    @Message("is present")
+    @NotMessage("is not present")
     boolean present();
 
     /**
@@ -43,7 +46,8 @@ public interface FluentListConditions extends FluentConditions {
      * @param size size of the list
      * @return true if it has the given size, false otherwise
      */
-    @Message("should [not ]have size {0}")
+    @Message("has size == {0}")
+    @NotMessage("has size != {0}")
     boolean hasSize(int size);
 
     /**

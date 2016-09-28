@@ -246,6 +246,6 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     @Override
     public String toString() {
-        return "Proxy for " + locator;
+        return locator + " (Lazy)";
     }
 }

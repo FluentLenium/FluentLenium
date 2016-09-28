@@ -19,7 +19,7 @@ public class MessageProxyTest {
         builder.name().contains("test");
 
         String message = MessageProxy.message(builder);
-        Assertions.assertThat(message).isEqualTo("element.name should contain \"test\"");
+        Assertions.assertThat(message).isEqualTo("element name does not contain \"test\"");
     }
 
     @Test
@@ -28,7 +28,7 @@ public class MessageProxyTest {
         builder.name().not().contains("test");
 
         String message = MessageProxy.message(builder);
-        Assertions.assertThat(message).isEqualTo("element.name should not contain \"test\"");
+        Assertions.assertThat(message).isEqualTo("element name contains \"test\"");
     }
 
     @Test
@@ -39,7 +39,7 @@ public class MessageProxyTest {
         builder.contains("es");
 
         String message = MessageProxy.message(builder);
-        Assertions.assertThat(message).isEqualTo("string should contain \"es\"");
+        Assertions.assertThat(message).isEqualTo("string does not contain \"es\"");
 
         verify(test).contains("es");
 
