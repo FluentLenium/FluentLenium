@@ -4,12 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.fluentlenium.example.spring</groupId>
-    <artifactId>FluentLeniumSpringExample</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>fluentlenium-examples-spring</artifactId>
+    <groupId>org.fluentlenium</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <name>FluentLenium Examples Spring</name>
 
     <properties>
-        <fluentlenium.version>1.0.0-rc3</fluentlenium.version>
+        <!-- Configure this property to latest available version -->
+        <fluentlenium.version>1.0.0-SNAPSHOT</fluentlenium.version>
         <spring.version>4.2.4.RELEASE</spring.version>
     </properties>
 

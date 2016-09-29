@@ -19,7 +19,7 @@ public class MainPage extends FluentPage {
 
     public MainPage typeTextIn() {
         searchInputBorder.click();
-        searchInput.text("Something");
+        searchInput.write("Something");
         return this;
     }
 

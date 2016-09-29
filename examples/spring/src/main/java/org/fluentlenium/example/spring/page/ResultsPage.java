@@ -11,6 +11,6 @@ public class ResultsPage extends FluentPage {
     private FluentWebElement results;
 
     public void waitForResults() {
-        await().until(results).isDisplayed();
+        await().until(results).displayed();
     }
 }

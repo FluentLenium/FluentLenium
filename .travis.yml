@@ -4,6 +4,7 @@ jdk:
   - oraclejdk7
   #- openjdk7 # It currently fails because of Jacoco ...
 script:
+  - mvn -Pexamples clean compile # Ensure examples compiles properly
   - mvn clean verify jacoco:report
 after_success:
   - mvn coveralls:report
