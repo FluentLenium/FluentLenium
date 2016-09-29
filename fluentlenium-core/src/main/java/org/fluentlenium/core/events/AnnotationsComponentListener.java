@@ -1,7 +1,7 @@
 package org.fluentlenium.core.events;
 
 import com.google.common.base.Function;
-import org.fluentlenium.core.components.ComponentAccessor;
+import org.fluentlenium.core.components.ComponentsAccessor;
 import org.fluentlenium.core.events.annotations.AfterChangeValueOf;
 import org.fluentlenium.core.events.annotations.AfterClickOn;
 import org.fluentlenium.core.events.annotations.AfterFindBy;
@@ -17,42 +17,45 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Set;
 
 public class AnnotationsComponentListener implements WebDriverEventListener {
-    private ComponentAccessor componentAccessor;
+    private ComponentsAccessor componentsAccessor;
 
-    public AnnotationsComponentListener(ComponentAccessor componentAccessor) {
-        this.componentAccessor = componentAccessor;
+    public AnnotationsComponentListener(ComponentsAccessor componentsAccessor) {
+        this.componentsAccessor = componentsAccessor;
     }
 
     protected void findByHandler(Class<? extends Annotation> annotation, final By by, WebElement element, WebDriver driver) {
         if (element == null) return;
-        Object component = this.componentAccessor.getComponent(element);
-        if (component == null) return;
-        for (Method method : ReflectionUtils.getDeclaredMethodsWithAnnotation(component, annotation)) {
-            Class<?>[] parameterTypes = method.getParameterTypes();
+        Set<Object> components = this.componentsAccessor.getComponents(element);
+        if (components == null) return;
+        for (Object component : components) {
+            for (Method method : ReflectionUtils.getDeclaredMethodsWithAnnotation(component, annotation)) {
+                Class<?>[] parameterTypes = method.getParameterTypes();
 
-            Object[] args = ReflectionUtils.toArgs(new Function<Class<?>, Object>() {
-                @Override
-                public Object apply(Class<?> input) {
-                    if (input.isAssignableFrom(By.class)) {
-                        return by;
+                Object[] args = ReflectionUtils.toArgs(new Function<Class<?>, Object>() {
+                    @Override
+                    public Object apply(Class<?> input) {
+                        if (input.isAssignableFrom(By.class)) {
+                            return by;
+                        }
+                        return null;
                     }
-                    return null;
-                }
-            }, parameterTypes);
+                }, parameterTypes);
 
-            try {
-                ReflectionUtils.invoke(method, component, args);
-            } catch (IllegalAccessException e) {
-                throw new EventAnnotationsException("An error has occured in @BeforeFindBy " + method, e);
-            } catch (InvocationTargetException e) {
-                if (e.getTargetException() instanceof RuntimeException) {
-                    throw (RuntimeException) e.getTargetException();
-                } else if (e.getTargetException() instanceof Error) {
-                    throw (Error) e.getTargetException();
+                try {
+                    ReflectionUtils.invoke(method, component, args);
+                } catch (IllegalAccessException e) {
+                    throw new EventAnnotationsException("An error has occured in @BeforeFindBy " + method, e);
+                } catch (InvocationTargetException e) {
+                    if (e.getTargetException() instanceof RuntimeException) {
+                        throw (RuntimeException) e.getTargetException();
+                    } else if (e.getTargetException() instanceof Error) {
+                        throw (Error) e.getTargetException();
+                    }
+                    throw new EventAnnotationsException("An error has occured in @BeforeFindBy " + method, e);
                 }
-                throw new EventAnnotationsException("An error has occured in @BeforeFindBy " + method, e);
             }
         }
     }
@@ -70,29 +73,31 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
 
     protected void defaultHandler(Class<? extends Annotation> annotation, WebElement element, WebDriver driver) {
         if (element == null) return;
-        Object component = this.componentAccessor.getComponent(element);
-        if (component == null) return;
-        for (Method method : ReflectionUtils.getDeclaredMethodsWithAnnotation(component, annotation)) {
-            Class<?>[] parameterTypes = method.getParameterTypes();
+        Set<Object> components = this.componentsAccessor.getComponents(element);
+        if (components == null) return;
+        for (Object component : components) {
+            for (Method method : ReflectionUtils.getDeclaredMethodsWithAnnotation(component, annotation)) {
+                Class<?>[] parameterTypes = method.getParameterTypes();
 
-            Object[] args = ReflectionUtils.toArgs(new Function<Class<?>, Object>() {
-                @Override
-                public Object apply(Class<?> input) {
-                    return null;
-                }
-            }, parameterTypes);
+                Object[] args = ReflectionUtils.toArgs(new Function<Class<?>, Object>() {
+                    @Override
+                    public Object apply(Class<?> input) {
+                        return null;
+                    }
+                }, parameterTypes);
 
-            try {
-                ReflectionUtils.invoke(method, component, args);
-            } catch (IllegalAccessException e) {
-                throw new EventAnnotationsException("An error has occured in @" + annotation.getSimpleName() + " " + method, e);
-            } catch (InvocationTargetException e) {
-                if (e.getTargetException() instanceof RuntimeException) {
-                    throw (RuntimeException) e.getTargetException();
-                } else if (e.getTargetException() instanceof Error) {
-                    throw (Error) e.getTargetException();
+                try {
+                    ReflectionUtils.invoke(method, component, args);
+                } catch (IllegalAccessException e) {
+                    throw new EventAnnotationsException("An error has occured in @" + annotation.getSimpleName() + " " + method, e);
+                } catch (InvocationTargetException e) {
+                    if (e.getTargetException() instanceof RuntimeException) {
+                        throw (RuntimeException) e.getTargetException();
+                    } else if (e.getTargetException() instanceof Error) {
+                        throw (Error) e.getTargetException();
+                    }
+                    throw new EventAnnotationsException("An error has occured in @" + annotation.getSimpleName() + " " + method, e);
                 }
-                throw new EventAnnotationsException("An error has occured in @" + annotation.getSimpleName() + " " + method, e);
             }
         }
     }
