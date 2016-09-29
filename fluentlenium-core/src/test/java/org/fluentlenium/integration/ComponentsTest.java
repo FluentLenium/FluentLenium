@@ -103,17 +103,17 @@ public class ComponentsTest extends IntegrationFluentTest {
     public void testComponents() {
         goTo(COMPONENTS_URL);
 
-        assertThat(header.isLoaded()).isFalse();
-        assertThat(content.isLoaded()).isFalse();
-        assertThat(footer.isLoaded()).isFalse();
+        assertThat(header.loaded()).isFalse();
+        assertThat(content.loaded()).isFalse();
+        assertThat(footer.loaded()).isFalse();
 
         assertThat(header.present()).isTrue();
         assertThat(content.present()).isTrue();
         assertThat(footer.present()).isTrue();
 
-        assertThat(header.isLoaded()).isTrue();
-        assertThat(content.isLoaded()).isTrue();
-        assertThat(footer.isLoaded()).isTrue();
+        assertThat(header.loaded()).isTrue();
+        assertThat(content.loaded()).isTrue();
+        assertThat(footer.loaded()).isTrue();
 
 
         assertThat(header.title.text()).isEqualTo("Header Title");

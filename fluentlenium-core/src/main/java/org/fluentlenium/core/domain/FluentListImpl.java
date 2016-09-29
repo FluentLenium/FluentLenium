@@ -174,7 +174,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public boolean isLoaded() {
+    public boolean loaded() {
         return LocatorProxies.isLoaded(this);
     }
 

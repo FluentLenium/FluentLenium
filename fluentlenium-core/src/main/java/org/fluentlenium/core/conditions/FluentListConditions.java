@@ -48,7 +48,7 @@ public interface FluentListConditions extends FluentConditions {
      */
     @Message("has size == {0}")
     @NotMessage("has size != {0}")
-    boolean hasSize(int size);
+    boolean size(int size);
 
     /**
      * Check that this element list has the given size.
@@ -56,5 +56,5 @@ public interface FluentListConditions extends FluentConditions {
      * @return an object to configure advanced conditions on size
      */
     @MessageContext("size")
-    IntegerConditions hasSize();
+    IntegerConditions size();
 }

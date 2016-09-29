@@ -256,7 +256,7 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                select.await().until().rectangle().withWidth().lessThan(0);
+                select.await().until().rectangle().width().lessThan(0);
             }
         }).hasMessageStartingWith("Timed out after 0 seconds: Element By.cssSelector: #select (first) (Lazy Element) rectangle width is not less than 0")
                 .isExactlyInstanceOf(TimeoutException.class);
@@ -270,7 +270,7 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                select.await().until().rectangle().withWidth().lessThan(0);
+                select.await().until().rectangle().width().lessThan(0);
             }
         }).hasMessageStartingWith("Timed out after 0 seconds: Element My Value Select [hint1, hint2] rectangle width is not less than 0")
                 .isExactlyInstanceOf(TimeoutException.class);
@@ -284,7 +284,7 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                select.await().until().rectangle().withWidth().lessThan(0);
+                select.await().until().rectangle().width().lessThan(0);
             }
         }).hasMessageStartingWith("Timed out after 0 seconds: Element My Value Select [hint1, hint2] rectangle width is not less than 0")
                 .isExactlyInstanceOf(TimeoutException.class);

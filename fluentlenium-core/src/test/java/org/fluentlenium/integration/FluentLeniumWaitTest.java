@@ -88,7 +88,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitHasSize() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small")).hasSize(3);
+        await().atMost(1, NANOSECONDS).untilEach($(".small")).size(3);
     }
 
     @Test
@@ -171,12 +171,12 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitNameStartsWith() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", withName().startsWith("name"))).hasSize(2);
+        await().atMost(1, NANOSECONDS).untilEach($(".small", withName().startsWith("name"))).size(2);
     }
 
     @Test
     public void checkAwaitContainsIdWithIdContains() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", withId().contains("id"))).hasSize(2);
+        await().atMost(1, NANOSECONDS).untilEach($(".small", withId().contains("id"))).size(2);
     }
 
     @Test
@@ -211,27 +211,27 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitStartWithRegex() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").startsWith(regex(".d")))).hasSize(2);
+        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").startsWith(regex(".d")))).size(2);
     }
 
     @Test
     public void checkAwaitStartWithString() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").startsWith("id"))).hasSize(2);
+        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").startsWith("id"))).size(2);
     }
 
     @Test
     public void checkAwaitNotStartWith() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").notStartsWith("id"))).hasSize(1);
+        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").notStartsWith("id"))).size(1);
     }
 
     @Test
     public void checkAwaitNotStartWithRegex() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").notStartsWith(regex("id")))).hasSize(1);
+        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").notStartsWith(regex("id")))).size(1);
     }
 
     @Test
     public void checkAwaitEndsWithRegex() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").endsWith(regex("2")))).hasSize(1);
+        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").endsWith(regex("2")))).size(1);
     }
 
     @Test
@@ -246,53 +246,53 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitNotContains() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").notContains("d"))).hasSize(1);
+        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").notContains("d"))).size(1);
     }
 
     @Test
     public void checkAwaitNotContainsRegex() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").notContains(regex("d")))).hasSize(1);
+        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").notContains(regex("d")))).size(1);
     }
 
     @Test
     public void checkAwaitEquals() {
-        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).hasSize().equalTo(1);
+        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().equalTo(1);
     }
 
     @Test
     public void checkAwaitNotEquals() {
-        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).hasSize().not().equalTo(10);
+        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().not().equalTo(10);
     }
 
     @Test
     public void checkAwaitLessThan() {
-        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).hasSize().lessThan(4);
+        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().lessThan(4);
     }
 
     @Test
     public void checkAwaitLessThanOrEquals() {
-        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).hasSize().lessThanOrEqualTo(1);
+        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().lessThanOrEqualTo(1);
     }
 
     @Test
     public void checkAwaitGreaterThan() {
-        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).hasSize().greaterThan(-1);
+        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().greaterThan(-1);
     }
 
     @Test
     public void checkAwaitGreaterThanOrEquals() {
-        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).hasSize().greaterThanOrEqualTo(1);
+        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().greaterThanOrEqualTo(1);
     }
 
     @Test
     public void checkWithValue() {
-        await().atMost(1, NANOSECONDS).untilEach($("input", with("value").equalTo("John"))).hasSize(4);
+        await().atMost(1, NANOSECONDS).untilEach($("input", with("value").equalTo("John"))).size(4);
     }
 
     @Test
     public void checkMultipleFilter() {
         await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").startsWith(regex("id")), with("text").endsWith("2")))
-                .hasSize(1);
+                .size(1);
     }
 
     @Test

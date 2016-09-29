@@ -38,16 +38,16 @@ public class WaitHookAnnotationTest extends IntegrationFluentTest {
     @Test
     public void testWaitingInject() {
         goTo(JAVASCRIPT_URL);
-        assertThat(newField.isLoaded()).isFalse();
+        assertThat(newField.loaded()).isFalse();
         newField.click();
-        assertThat(newField.isLoaded()).isTrue();
+        assertThat(newField.loaded()).isTrue();
         assertThat(newField.present()).isTrue();
     }
 
     @Test
     public void testWaitingInjectNotFound() {
         goTo(JAVASCRIPT_URL);
-        assertThat(anotherField.isLoaded()).isFalse();
+        assertThat(anotherField.loaded()).isFalse();
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {

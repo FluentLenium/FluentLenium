@@ -27,7 +27,7 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
     }
 
     @Override
-    public boolean withX(final int x) {
+    public boolean x(final int x) {
         return verify(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
@@ -37,12 +37,12 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
     }
 
     @Override
-    public IntegerConditions withX() {
+    public IntegerConditions x() {
         return new IntegerConditionsImpl(object.getX(), negation);
     }
 
     @Override
-    public boolean withY(final int y) {
+    public boolean y(final int y) {
         return verify(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
@@ -52,12 +52,12 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
     }
 
     @Override
-    public IntegerConditions withY() {
+    public IntegerConditions y() {
         return new IntegerConditionsImpl(object.getY(), negation);
     }
 
     @Override
-    public boolean withPosition(final int x, final int y) {
+    public boolean position(final int x, final int y) {
         return verify(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
@@ -67,7 +67,7 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
     }
 
     @Override
-    public boolean withWidth(final int width) {
+    public boolean width(final int width) {
         return verify(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
@@ -77,12 +77,12 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
     }
 
     @Override
-    public IntegerConditions withWidth() {
+    public IntegerConditions width() {
         return new IntegerConditionsImpl(object.getWidth(), negation);
     }
 
     @Override
-    public boolean withHeight(final int height) {
+    public boolean height(final int height) {
         return verify(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
@@ -92,12 +92,12 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
     }
 
     @Override
-    public IntegerConditions withHeight() {
+    public IntegerConditions height() {
         return new IntegerConditionsImpl(object.getHeight(), negation);
     }
 
     @Override
-    public boolean withDimension(final int width, final int height) {
+    public boolean dimension(final int width, final int height) {
         return verify(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {
@@ -107,7 +107,7 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
     }
 
     @Override
-    public boolean withPositionAndDimension(final int x, final int y, final int width, final int height) {
+    public boolean positionAndDimension(final int x, final int y, final int width, final int height) {
         return verify(new Predicate<Rectangle>() {
             @Override
             public boolean apply(Rectangle input) {

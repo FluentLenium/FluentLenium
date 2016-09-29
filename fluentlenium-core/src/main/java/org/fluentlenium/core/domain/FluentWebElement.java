@@ -105,7 +105,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
     }
 
     @Override
-    public boolean isLoaded() {
+    public boolean loaded() {
         return LocatorProxies.isLoaded(webElement);
     }
 

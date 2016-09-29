@@ -383,20 +383,20 @@ public class FluentWaitElementMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.rectangle().withX(5);
+                matcher.rectangle().x(5);
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
         verify(element, atLeastOnce()).getRect();
 
-        matcher.rectangle().withX(1);
+        matcher.rectangle().x(1);
 
         verify(element, atLeastOnce()).getRect();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().rectangle().withX(1);
+                matcher.not().rectangle().x(1);
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }

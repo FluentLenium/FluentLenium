@@ -16,41 +16,41 @@ public interface RectangleConditions extends Conditions<Rectangle> {
 
     @Message("has x == {0}")
     @NotMessage("has x != {0}")
-    boolean withX(int x);
+    boolean x(int x);
 
     @MessageContext("x")
-    IntegerConditions withX();
+    IntegerConditions x();
 
     @Message("has y == {0}")
     @NotMessage("has y != {0}")
-    boolean withY(int y);
+    boolean y(int y);
 
     @MessageContext("y")
-    IntegerConditions withY();
+    IntegerConditions y();
 
     @Message("has position == (x:{0}, y:{1})")
     @NotMessage("has position != (x:{0}, y:{1})")
-    boolean withPosition(int x, int y);
+    boolean position(int x, int y);
 
     @Message("has width == {0}")
     @NotMessage("has width != {0}")
-    boolean withWidth(int width);
+    boolean width(int width);
 
     @MessageContext("width")
-    IntegerConditions withWidth();
+    IntegerConditions width();
 
     @Message("has height == {0}")
     @NotMessage("has height != {0}")
-    boolean withHeight(int height);
+    boolean height(int height);
 
     @MessageContext("height")
-    IntegerConditions withHeight();
+    IntegerConditions height();
 
     @Message("has dimension == (width:{0}, height:{1})")
     @NotMessage("has dimension != (width:{0}, height:{1})")
-    boolean withDimension(int width, int height);
+    boolean dimension(int width, int height);
 
     @Message("has position/dimension == (x:{0}, y:{1}, width:{2}, height:{4})")
     @NotMessage("has position/dimension != (x:{0}, y:{1}, width:{2}, height:{3})")
-    boolean withPositionAndDimension(int x, int y, int width, int height);
+    boolean positionAndDimension(int x, int y, int width, int height);
 }

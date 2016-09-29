@@ -205,22 +205,22 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
 
     @Test
     public void hasSize() {
-        assertThat(conditions.hasSize(3)).isTrue();
-        assertThat(conditions.hasSize().equalTo(3)).isTrue();
-        assertThat(conditions.hasSize(2)).isFalse();
-        assertThat(conditions.hasSize().equalTo(2)).isFalse();
+        assertThat(conditions.size(3)).isTrue();
+        assertThat(conditions.size().equalTo(3)).isTrue();
+        assertThat(conditions.size(2)).isFalse();
+        assertThat(conditions.size().equalTo(2)).isFalse();
 
-        assertThat(conditions.not().hasSize(3)).isFalse();
-        assertThat(conditions.not().hasSize().equalTo(3)).isFalse();
-        assertThat(conditions.not().hasSize(2)).isTrue();
-        assertThat(conditions.not().hasSize().equalTo(2)).isTrue();
+        assertThat(conditions.not().size(3)).isFalse();
+        assertThat(conditions.not().size().equalTo(3)).isFalse();
+        assertThat(conditions.not().size(2)).isTrue();
+        assertThat(conditions.not().size().equalTo(2)).isTrue();
 
         AtLeastOneElementConditions conditions2 = new AtLeastOneElementConditions(Arrays.asList(fluentWebElement1, fluentWebElement3));
 
-        assertThat(conditions2.hasSize(3)).isFalse();
-        assertThat(conditions2.hasSize().equalTo(3)).isFalse();
-        assertThat(conditions2.hasSize(2)).isTrue();
-        assertThat(conditions2.hasSize().equalTo(2)).isTrue();
+        assertThat(conditions2.size(3)).isFalse();
+        assertThat(conditions2.size().equalTo(3)).isFalse();
+        assertThat(conditions2.size(2)).isTrue();
+        assertThat(conditions2.size().equalTo(2)).isTrue();
     }
 
     @Test

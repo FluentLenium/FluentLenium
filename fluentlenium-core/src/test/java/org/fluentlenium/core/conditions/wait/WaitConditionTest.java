@@ -183,7 +183,7 @@ public class WaitConditionTest {
             }
         }, 100L);
 
-        conditions.rectangle().withWidth().greaterThan(30);
+        conditions.rectangle().width().greaterThan(30);
     }
 
     @Test(expected = TimeoutException.class)
@@ -200,6 +200,6 @@ public class WaitConditionTest {
             }
         });
 
-        conditions.rectangle().withWidth().greaterThan(30);
+        conditions.rectangle().width().greaterThan(30);
     }
 }

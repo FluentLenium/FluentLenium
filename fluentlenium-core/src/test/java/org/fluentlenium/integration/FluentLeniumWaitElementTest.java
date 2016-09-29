@@ -94,17 +94,17 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
 
     @Test
     public void awaitForElementXPosition() {
-        await().until(inputDisabledElements).rectangle().withX(5);
+        await().until(inputDisabledElements).rectangle().x(5);
     }
 
     @Test(expected = TimeoutException.class)
     public void awaitForElementXPositionElementNotFound() {
-        await().until(notFoundElements).rectangle().withX(0);
+        await().until(notFoundElements).rectangle().x(0);
     }
 
     @Test
     public void checkAwaitHasSize() {
-        await().atMost(1, NANOSECONDS).untilEach(smallElements).hasSize(3);
+        await().atMost(1, NANOSECONDS).untilEach(smallElements).size(3);
     }
 
     @Test

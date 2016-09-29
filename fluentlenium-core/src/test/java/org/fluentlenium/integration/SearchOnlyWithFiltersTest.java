@@ -39,7 +39,7 @@ public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     public void checkIndexWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement element = find(1, withClass("small"));
-        assertThat(element.isLoaded()).isFalse();
+        assertThat(element.loaded()).isFalse();
         assertThat(element.id()).isEqualTo("id2");
     }
 

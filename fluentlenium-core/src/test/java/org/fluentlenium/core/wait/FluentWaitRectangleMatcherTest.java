@@ -63,21 +63,21 @@ public class FluentWaitRectangleMatcherTest {
             }
         });
 
-        rectangleConditions.withX(1);
-        rectangleConditions.withY(2);
+        rectangleConditions.x(1);
+        rectangleConditions.y(2);
 
-        rectangleConditions.withX().equalTo(1);
-        rectangleConditions.withY().equalTo(2);
+        rectangleConditions.x().equalTo(1);
+        rectangleConditions.y().equalTo(2);
 
-        rectangleConditions.withHeight(100);
-        rectangleConditions.withHeight().equalTo(100);
+        rectangleConditions.height(100);
+        rectangleConditions.height().equalTo(100);
 
-        rectangleConditions.withWidth(200);
-        rectangleConditions.withWidth().equalTo(200);
+        rectangleConditions.width(200);
+        rectangleConditions.width().equalTo(200);
 
-        rectangleConditions.withPosition(1, 2);
-        rectangleConditions.withDimension(200, 100);
-        rectangleConditions.withPositionAndDimension(1, 2, 200, 100);
+        rectangleConditions.position(1, 2);
+        rectangleConditions.dimension(200, 100);
+        rectangleConditions.positionAndDimension(1, 2, 200, 100);
 
         rectangleConditions.not().verify(new Predicate<Rectangle>() {
             @Override
@@ -86,21 +86,21 @@ public class FluentWaitRectangleMatcherTest {
             }
         });
 
-        rectangleConditions.not().withX(3);
-        rectangleConditions.not().withY(4);
+        rectangleConditions.not().x(3);
+        rectangleConditions.not().y(4);
 
-        rectangleConditions.not().withX().equalTo(3);
-        rectangleConditions.not().withY().equalTo(4);
+        rectangleConditions.not().x().equalTo(3);
+        rectangleConditions.not().y().equalTo(4);
 
-        rectangleConditions.not().withHeight(300);
-        rectangleConditions.not().withHeight().equalTo(400);
+        rectangleConditions.not().height(300);
+        rectangleConditions.not().height().equalTo(400);
 
-        rectangleConditions.not().withWidth(300);
-        rectangleConditions.not().withWidth().equalTo(400);
+        rectangleConditions.not().width(300);
+        rectangleConditions.not().width().equalTo(400);
 
-        rectangleConditions.not().withPosition(3, 4);
-        rectangleConditions.not().withDimension(400, 300);
-        rectangleConditions.not().withPositionAndDimension(3, 4, 400, 300);
+        rectangleConditions.not().position(3, 4);
+        rectangleConditions.not().dimension(400, 300);
+        rectangleConditions.not().positionAndDimension(3, 4, 400, 300);
 
     }
 }

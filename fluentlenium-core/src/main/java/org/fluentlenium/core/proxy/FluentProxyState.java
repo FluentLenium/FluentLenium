@@ -33,9 +33,9 @@ public interface FluentProxyState<T> {
     T reset();
 
     /**
-     * Check this element is loaded.
+     * Check if the element is loaded.
      *
      * @return true if the element is loaded, false otherwise
      */
-    boolean isLoaded();
+    boolean loaded();
 }

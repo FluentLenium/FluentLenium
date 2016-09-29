@@ -19,7 +19,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean hasSize(int size) {
+    public boolean size(int size) {
         if (negation) {
             return elements.size() != size;
         }
@@ -27,7 +27,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public IntegerConditions hasSize() {
+    public IntegerConditions size() {
         return new IntegerConditionsImpl(elements.size(), negation);
     }
 

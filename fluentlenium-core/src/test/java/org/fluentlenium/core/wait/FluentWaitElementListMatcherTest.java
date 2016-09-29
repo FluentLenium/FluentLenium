@@ -551,16 +551,16 @@ public class FluentWaitElementListMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.hasSize(2);
+                matcher.size(2);
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        matcher.hasSize(3);
+        matcher.size(3);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().hasSize(3);
+                matcher.not().size(3);
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
@@ -571,16 +571,16 @@ public class FluentWaitElementListMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.hasSize().equalTo(2);
+                matcher.size().equalTo(2);
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        matcher.hasSize().equalTo(3);
+        matcher.size().equalTo(3);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().hasSize().equalTo(3);
+                matcher.not().size().equalTo(3);
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
@@ -596,7 +596,7 @@ public class FluentWaitElementListMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.rectangle().withX(5);
+                matcher.rectangle().x(5);
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
@@ -604,7 +604,7 @@ public class FluentWaitElementListMatcherTest {
         verify(element2, atLeastOnce()).getRect();
         verify(element3, atLeastOnce()).getRect();
 
-        matcher.rectangle().withX(1);
+        matcher.rectangle().x(1);
 
         verify(element1, atLeastOnce()).getRect();
         verify(element2, atLeastOnce()).getRect();
@@ -613,7 +613,7 @@ public class FluentWaitElementListMatcherTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().rectangle().withX(1);
+                matcher.not().rectangle().x(1);
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }

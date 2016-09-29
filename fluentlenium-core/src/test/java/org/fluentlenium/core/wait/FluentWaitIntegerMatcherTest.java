@@ -63,36 +63,36 @@ public class FluentWaitIntegerMatcherTest {
             }
         });
 
-        rectangleConditions.withX().equalTo(1);
-        rectangleConditions.withX().not().equalTo(2);
+        rectangleConditions.x().equalTo(1);
+        rectangleConditions.x().not().equalTo(2);
 
-        rectangleConditions.withX().greaterThanOrEqualTo(1);
-        rectangleConditions.withX().not().greaterThanOrEqualTo(2);
+        rectangleConditions.x().greaterThanOrEqualTo(1);
+        rectangleConditions.x().not().greaterThanOrEqualTo(2);
 
-        rectangleConditions.withX().greaterThan(0);
-        rectangleConditions.withX().not().greaterThan(1);
+        rectangleConditions.x().greaterThan(0);
+        rectangleConditions.x().not().greaterThan(1);
 
-        rectangleConditions.withX().lessThanOrEqualTo(1);
-        rectangleConditions.withX().not().lessThanOrEqualTo(0);
+        rectangleConditions.x().lessThanOrEqualTo(1);
+        rectangleConditions.x().not().lessThanOrEqualTo(0);
 
-        rectangleConditions.withX().lessThan(2);
-        rectangleConditions.withX().not().lessThan(1);
+        rectangleConditions.x().lessThan(2);
+        rectangleConditions.x().not().lessThan(1);
 
-        rectangleConditions.withX().verify(new Predicate<Integer>() {
+        rectangleConditions.x().verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
                 return input == 1;
             }
         });
 
-        rectangleConditions.withX().not().verify(new Predicate<Integer>() {
+        rectangleConditions.x().not().verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
                 return input != 1;
             }
         });
 
-        rectangleConditions.not().withX().not().verify(new Predicate<Integer>() {
+        rectangleConditions.not().x().not().verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
                 return input == 1;
