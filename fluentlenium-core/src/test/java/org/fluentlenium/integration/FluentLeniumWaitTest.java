@@ -160,7 +160,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     public void checkAwaitContainsTextAlternative() {
         $(".small").await().atMost(1, NANOSECONDS).until().text().contains("Small 1");
         $(".small", withText("Small 1")).await().atMost(1, NANOSECONDS).untilEach().text().contains("Small 1");
-        findFirst(".small").await().atMost(1, NANOSECONDS).until().text().contains("Small 1");
+        el(".small").await().atMost(1, NANOSECONDS).until().text().contains("Small 1");
     }
 
 

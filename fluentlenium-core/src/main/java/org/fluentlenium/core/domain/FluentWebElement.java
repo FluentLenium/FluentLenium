@@ -339,13 +339,28 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
     }
 
     @Override
+    public FluentWebElement el(String selector, Filter... filters) {
+        return find(selector, filters).first();
+    }
+
+    @Override
     public FluentList<FluentWebElement> $(Filter... filters) {
         return find(filters);
     }
 
     @Override
+    public FluentWebElement el(Filter... filters) {
+        return find(filters).first();
+    }
+
+    @Override
     public FluentList<FluentWebElement> $(By locator, Filter... filters) {
         return find(locator, filters);
+    }
+
+    @Override
+    public FluentWebElement el(By locator, Filter... filters) {
+        return find(locator, filters).first();
     }
 
     /**
@@ -378,89 +393,6 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      */
     public FluentList<FluentWebElement> find(Filter... filters) {
         return search.find(filters);
-    }
-
-    /**
-     * find elements into the children with the corresponding filters at the given position
-     *
-     * @param selector name of element
-     * @param filters  filters set
-     * @return fluent web element
-     */
-    public FluentWebElement find(String selector, Integer index, Filter... filters) {
-        return search.find(selector, filters).index(index);
-    }
-
-    /**
-     * find elements into the children with the corresponding filters at the given position
-     *
-     * @param locator elements locator
-     * @param filters filters set
-     * @return fluent web element
-     */
-    public FluentWebElement find(By locator, Integer index, Filter... filters) {
-        return search.find(locator, filters).index(index);
-    }
-
-    @Override
-    public FluentWebElement $(String selector, Integer index, Filter... filters) {
-        return find(selector, filters).index(index);
-    }
-
-    @Override
-    public FluentWebElement $(By locator, Integer index, Filter... filters) {
-        return find(locator, filters).index(index);
-    }
-
-    /**
-     * find element in the children with the corresponding filters at the given position
-     *
-     * @param index   index of element
-     * @param filters filters set
-     * @return fluent web element
-     */
-    @Override
-    public FluentWebElement find(Integer index, Filter... filters) {
-        return search.find(filters).index(index);
-    }
-
-    @Override
-    public FluentWebElement $(Integer index, Filter... filters) {
-        return find(filters).index(index);
-    }
-
-    /**
-     * find elements into the children with the corresponding filters at the first position
-     *
-     * @param selector name of element
-     * @param filters  filters set
-     * @return fluent web element
-     */
-    @Override
-    public FluentWebElement findFirst(String selector, Filter... filters) {
-        return search.findFirst(selector, filters);
-    }
-
-    /**
-     * find elements into the children with the corresponding filters at the first position
-     *
-     * @param locator elements locator
-     * @param filters filters set
-     * @return fluent web element
-     */
-    public FluentWebElement findFirst(By locator, Filter... filters) {
-        return search.findFirst(locator, filters);
-    }
-
-    /**
-     * find element in the children with the corresponding filters at the first position
-     *
-     * @param filters filters set
-     * @return fluent web element
-     */
-    @Override
-    public FluentWebElement findFirst(Filter... filters) {
-        return search.findFirst(filters);
     }
 
     /**

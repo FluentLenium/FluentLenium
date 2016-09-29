@@ -15,7 +15,6 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.AnnotationsComponentListener;
 import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.filter.Filter;
-import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.fluentlenium.core.inject.DefaultContainerInstanciator;
 import org.fluentlenium.core.inject.FluentInjector;
 import org.fluentlenium.core.script.FluentJavascript;
@@ -144,7 +143,7 @@ public class FluentDriver implements FluentControl {
             }
             String html;
             synchronized (FluentDriver.class) {
-                html = this.findFirst("html").html();
+                html = $("html").first().html();
             }
             FileUtils.write(destFile, html, "UTF-8");
         } catch (Exception e) {
@@ -333,8 +332,18 @@ public class FluentDriver implements FluentControl {
     }
 
     @Override
+    public FluentWebElement el(String selector, final Filter... filters) {
+        return find(selector, filters).first();
+    }
+
+    @Override
     public FluentList<FluentWebElement> $(final Filter... filters) {
         return find(filters);
+    }
+
+    @Override
+    public FluentWebElement el(final Filter... filters) {
+        return find(filters).first();
     }
 
     @Override
@@ -343,18 +352,8 @@ public class FluentDriver implements FluentControl {
     }
 
     @Override
-    public FluentWebElement $(String selector, Integer index, final Filter... filters) {
-        return find(selector, index, filters);
-    }
-
-    @Override
-    public FluentWebElement $(By locator, Integer index, final Filter... filters) {
-        return find(locator, index, filters);
-    }
-
-    @Override
-    public FluentWebElement $(Integer index, Filter... filters) {
-        return find(index, filters);
+    public FluentWebElement el(By locator, final Filter... filters) {
+        return find(locator, filters).first();
     }
 
     @Override
@@ -370,36 +369,6 @@ public class FluentDriver implements FluentControl {
     @Override
     public FluentList<FluentWebElement> find(final Filter... filters) {
         return getSearch().find(filters);
-    }
-
-    @Override
-    public FluentWebElement find(String selector, Integer number, final Filter... filters) {
-        return getSearch().find(selector, number, filters);
-    }
-
-    @Override
-    public FluentWebElement find(By locator, Integer index, final Filter... filters) {
-        return getSearch().find(locator, index, filters);
-    }
-
-    @Override
-    public FluentWebElement find(Integer index, final Filter... filters) {
-        return getSearch().find(index, filters);
-    }
-
-    @Override
-    public FluentWebElement findFirst(String selector, final Filter... filters) {
-        return getSearch().findFirst(selector, filters);
-    }
-
-    @Override
-    public FluentWebElement findFirst(final Filter... filters) {
-        return getSearch().findFirst(filters);
-    }
-
-    @Override
-    public FluentWebElement findFirst(By locator, final Filter... filters) {
-        return getSearch().findFirst(locator, filters);
     }
 
     @Override
@@ -433,18 +402,6 @@ public class FluentDriver implements FluentControl {
     @Override
     public Alert alert() {
         return new Alert(getDriver());
-    }
-
-    @Override
-    @Deprecated
-    public void maximizeWindow() {
-        window().maximizeWindow();
-    }
-
-    @Override
-    @Deprecated
-    public String title() {
-        return window().title();
     }
 
     public void quit() {

@@ -30,20 +30,20 @@ public class SearchTest extends IntegrationFluentTestNg {
 
     @Test
     public void checkSearchOnElementWorks() {
-        FluentWebElement element = findFirst(".parent");
+        FluentWebElement element = el(".parent");
         assertThat(element.find(".child").texts()).containsOnly("Alex");
     }
 
     @Test
     public void checkSearchFirstOnListWorks() {
         FluentList list = find(".parent");
-        assertThat(list.findFirst(".child").text()).isEqualTo("Alex");
+        assertThat(list.el(".child").text()).isEqualTo("Alex");
     }
 
     @Test
     public void checkSearchFirstOnElementWorks() {
-        FluentWebElement element = findFirst(".parent");
-        assertThat(element.findFirst(".child").text()).isEqualTo("Alex");
+        FluentWebElement element = el(".parent");
+        assertThat(element.el(".child").text()).isEqualTo("Alex");
     }
 
     @Test
@@ -63,7 +63,7 @@ public class SearchTest extends IntegrationFluentTestNg {
     @Test
     public void checkSearchOnElementByLocatorWorks() {
         By locator = By.cssSelector(".parent");
-        FluentWebElement element = findFirst(locator);
+        FluentWebElement element = el(locator);
         assertThat(element.find(".child").texts()).containsOnly("Alex");
     }
 
@@ -71,14 +71,14 @@ public class SearchTest extends IntegrationFluentTestNg {
     public void checkSearchFirstOnListByLocatorWorks() {
         FluentList list = find(".parent");
         By locator = By.cssSelector(".child");
-        assertThat(list.findFirst(locator).text()).isEqualTo("Alex");
+        assertThat(list.el(locator).text()).isEqualTo("Alex");
     }
 
     @Test
     public void checkSearchFirstOnElementByLocatorWorks() {
         By locator = By.cssSelector(".parent");
-        FluentWebElement element = findFirst(locator);
-        assertThat(element.findFirst(".child").text()).isEqualTo("Alex");
+        FluentWebElement element = el(locator);
+        assertThat(element.el(".child").text()).isEqualTo("Alex");
     }
 
 }

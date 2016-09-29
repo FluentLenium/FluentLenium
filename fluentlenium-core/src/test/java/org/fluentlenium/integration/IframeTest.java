@@ -35,7 +35,7 @@ public class IframeTest extends IntegrationFluentTest {
         // Then
         iFramePage.isAt();
         assertThat($("h1").text()).isEqualTo("Heading 1");
-        iFramePage.switchTo(findFirst("#iframe1"));
+        iFramePage.switchTo(el("#iframe1"));
         assertThat($("h1").text()).isEqualTo("Heading");
         assertThat($("#oneline").text()).isEqualTo("A single line of text");
         iFramePage.switchToDefault();
@@ -50,7 +50,7 @@ public class IframeTest extends IntegrationFluentTest {
         // Then
         iFramePage.isAt();
         assertThat($("h1").text()).isEqualTo("Heading 1");
-        iFramePage.switchTo(findFirst("#iframe1"));
+        iFramePage.switchTo(el("#iframe1"));
         assertThat($("h1").text()).isEqualTo("Heading");
         assertThat($("#oneline").text()).isEqualTo("A single line of text");
         iFramePage.switchTo();
@@ -65,7 +65,7 @@ public class IframeTest extends IntegrationFluentTest {
         // Then
         iFramePage.isAt();
         assertThat($("h1").text()).isEqualTo("Heading 1");
-        iFramePage.switchTo(findFirst("#iframe1"));
+        iFramePage.switchTo(el("#iframe1"));
         assertThat($("h1").text()).isEqualTo("Heading");
         assertThat($("#oneline").text()).isEqualTo("A single line of text");
         iFramePage.switchToDefault();

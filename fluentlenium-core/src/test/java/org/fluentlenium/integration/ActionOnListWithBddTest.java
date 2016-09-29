@@ -39,9 +39,9 @@ public class ActionOnListWithBddTest extends IntegrationFluentTest {
     public void checkClickAction() {
         goTo(DEFAULT_URL);
         FluentList name = find("#linkToPage2");
-        assertThat(title()).contains("Selenium");
+        assertThat(window().title()).contains("Selenium");
         name.click();
-        assertThat(title()).isEqualTo("Page 2");
+        assertThat(window().title()).isEqualTo("Page 2");
     }
 
 

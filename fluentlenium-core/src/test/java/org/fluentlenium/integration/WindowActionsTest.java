@@ -33,12 +33,12 @@ public class WindowActionsTest extends IntegrationFluentTest {
         String hWnd = getDriver().getWindowHandle();
         assertThat(getDriver().getWindowHandles().size()).isEqualTo(1);
 
-        window().clickAndOpenNew(findFirst("#linkToAlertPage"));
+        window().clickAndOpenNew(el("#linkToAlertPage"));
 
         assertThat(getDriver().getWindowHandles().size()).isEqualTo(2);
         assertThat(getDriver().getWindowHandle()).isNotEqualTo(hWnd);
 
-        window().clickAndCloseCurrent(findFirst("#closeMe"));
+        window().clickAndCloseCurrent(el("#closeMe"));
 
         assertThat(getDriver().getWindowHandles().size()).isEqualTo(1);
         assertThat(getDriver().getWindowHandle()).isEqualTo(hWnd);

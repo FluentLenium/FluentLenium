@@ -37,7 +37,7 @@ public class EventsTest extends IntegrationFluentTest {
         events().afterFindBy(afterListener);
         goTo(DEFAULT_URL);
 
-        findFirst("button").now();
+        el("button").now();
 
         Mockito.verify(beforeListener).on(Mockito.<By>anyObject(), Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
         Mockito.verify(afterListener).on(Mockito.<By>anyObject(), Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());

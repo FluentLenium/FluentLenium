@@ -31,7 +31,7 @@ public class HtmlDumpPathTest extends IntegrationFluentTest {
             takeHtmlDump("test.html");
             FileInputStream fis = new FileInputStream(new File(tempDir.toFile(), "test.html"));
             String html = IOUtils.toString(fis, "UTF-8");
-            assertThat(html).isEqualTo(this.findFirst("html").html());
+            assertThat(html).isEqualTo(this.el("html").html());
             assertThat(html).isNotEmpty();
         } finally {
             file.delete();

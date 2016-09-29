@@ -33,7 +33,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small");
+                return el(".small");
             }
         }).present();
     }
@@ -43,7 +43,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small");
+                return el(".small");
             }
         }).clickable();
     }
@@ -53,7 +53,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst("input[disabled]");
+                return el("input[disabled]");
             }
         }).clickable();
     }
@@ -73,7 +73,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", withText("Small 1"));
+                return el(".small", withText("Small 1"));
             }
         }).text().equalTo("Small 1");
     }
@@ -83,7 +83,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", withName("name"));
+                return el(".small", withName("name"));
             }
         }).name("name");
     }
@@ -93,7 +93,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst("span", withClass("small"));
+                return el("span", withClass("small"));
             }
         }).name("name");
     }
@@ -103,7 +103,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst("span", withClass().contains(regex("smal?")));
+                return el("span", withClass().contains(regex("smal?")));
             }
         }).name("name");
     }
@@ -113,7 +113,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst("span", withClass().containsWord("small"));
+                return el("span", withClass().containsWord("small"));
             }
         }).name("name");
     }
@@ -123,7 +123,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", withText("Small 1"), containingText("Small 1"));
+                return el(".small", withText("Small 1"), containingText("Small 1"));
             }
         });
     }
@@ -134,7 +134,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             await().withMessage("toto").atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
                 @Override
                 public FluentWebElement get() {
-                    return findFirst(".small", withText("Small 1"));
+                    return el(".small", withText("Small 1"));
                 }
             }).text().contains("Small 21");
             fail();
@@ -148,7 +148,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small");
+                return el(".small");
             }
         }).text().contains("Small 1");
     }
@@ -158,7 +158,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", withId("id2"));
+                return el(".small", withId("id2"));
             }
         }).id("id2");
     }
@@ -188,7 +188,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small");
+                return el(".small");
             }
         }).text("Small 1");
     }
@@ -198,7 +198,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small");
+                return el(".small");
             }
         }).name("name");
     }
@@ -218,7 +218,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", withText().contains("Small 1"));
+                return el(".small", withText().contains("Small 1"));
             }
         }).present();
     }
@@ -238,7 +238,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", withText().contains("Small 1"));
+                return el(".small", withText().contains("Small 1"));
             }
         }).not().present();
     }
@@ -298,7 +298,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", with("id").notEndsWith("2"));
+                return el(".small", with("id").notEndsWith("2"));
             }
         }).id("id");
     }
@@ -308,7 +308,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", with("id").notEndsWith(regex("2")));
+                return el(".small", with("id").notEndsWith(regex("2")));
             }
         }).id("id");
     }
@@ -418,7 +418,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst("input");
+                return el("input");
             }
         }).attribute("value", "John");
     }
@@ -428,7 +428,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst("input", with("value").equalTo("John"));
+                return el("input", with("value").equalTo("John"));
             }
         }).attribute("value", "John");
     }

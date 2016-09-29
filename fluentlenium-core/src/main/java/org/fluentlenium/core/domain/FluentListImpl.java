@@ -27,7 +27,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -54,32 +53,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Delegate
     private FluentLabel<FluentListImpl<E>> getLabel() {
         return label;
-    }
-
-    /**
-     * Creates a FluentList from array of Selenium {@link WebElement}
-     *
-     * @param instantiator     component instantiator
-     * @param hookChainBuilder hook chain builder
-     * @param elements         array of Selenium elements
-     * @return list of elements
-     */
-    @Deprecated
-    public static FluentList<FluentWebElement> fromElements(ComponentInstantiator instantiator, HookChainBuilder hookChainBuilder, WebElement... elements) {
-        return fromElements(instantiator, hookChainBuilder, Arrays.asList(elements));
-    }
-
-    /**
-     * Creates a FluentList from an iterable of Selenium {@link WebElement}
-     *
-     * @param instantiator     component instantiator
-     * @param hookChainBuilder hook chain builder
-     * @param elements         iterable of Selenium elements
-     * @return FluentList of FluentWebElement
-     */
-    @Deprecated
-    public static FluentList<FluentWebElement> fromElements(ComponentInstantiator instantiator, HookChainBuilder hookChainBuilder, Iterable<WebElement> elements) {
-        return instantiator.asFluentList(FluentWebElement.class, elements);
     }
 
     @Override
@@ -401,8 +374,18 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
+    public E el(String selector, Filter... filters) {
+        return find(selector, filters).first();
+    }
+
+    @Override
     public FluentList<E> $(Filter... filters) {
         return find(filters);
+    }
+
+    @Override
+    public E el(Filter... filters) {
+        return find(filters).first();
     }
 
     @Override
@@ -411,8 +394,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public E $(Integer index, Filter... filters) {
-        return find(index, filters);
+    public E el(By locator, Filter... filters) {
+        return find(locator, filters).first();
     }
 
     @Override
@@ -440,64 +423,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             finds.addAll((Collection<E>) e.find(filters));
         }
         return instantiator.newComponentList(getClass(), componentClass, finds);
-    }
-
-    @Override
-    public E find(String selector, Integer number, Filter... filters) {
-        FluentList<E> fluentList = find(selector, filters);
-        if (number >= fluentList.size()) {
-            throw new NoSuchElementException(
-                    "No such element with position: " + number + ". Number of elements available: " + fluentList.size()
-                            + ". Selector: " + selector + ".");
-        }
-        return fluentList.get(number);
-    }
-
-    @Override
-    public E find(By locator, Integer index, Filter... filters) {
-        FluentList<E> fluentList = find(locator, filters);
-        if (index >= fluentList.size()) {
-            throw new NoSuchElementException(
-                    "No such element with position: " + index + ". Number of elements available: " + fluentList
-                            .size());
-        }
-        return fluentList.get(index);
-    }
-
-    @Override
-    public E $(String selector, Integer index, Filter... filters) {
-        return find(selector, index, filters);
-    }
-
-    @Override
-    public E $(By locator, Integer index, Filter... filters) {
-        return find(locator, index, filters);
-    }
-
-    @Override
-    public E find(Integer index, Filter... filters) {
-        FluentList<E> fluentList = find(filters);
-        if (index >= fluentList.size()) {
-            throw new NoSuchElementException(
-                    "No such element with position: " + index + ". Number of elements available: " + fluentList.size()
-                            + ".");
-        }
-        return fluentList.get(index);
-    }
-
-    @Override
-    public E findFirst(By locator, Filter... filters) {
-        return find(locator, 0, filters);
-    }
-
-    @Override
-    public E findFirst(String selector, Filter... filters) {
-        return find(selector, 0, filters);
-    }
-
-    @Override
-    public E findFirst(Filter... filters) {
-        return find(0, filters);
     }
 
     /**

@@ -14,6 +14,6 @@ public class LocalPage2 extends FluentPage {
 
     @Override
     public void isAt() {
-        assertThat(title()).contains("Page 2");
+        assertThat(window().title()).contains("Page 2");
     }
 }

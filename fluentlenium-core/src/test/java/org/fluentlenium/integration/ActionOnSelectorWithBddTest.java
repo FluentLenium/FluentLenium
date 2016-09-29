@@ -11,15 +11,15 @@ public class ActionOnSelectorWithBddTest extends IntegrationFluentTest {
     @Test
     public void checkFillAction() {
         goTo(DEFAULT_URL);
-        assertThat(findFirst("#name").value()).contains("John");
-        findFirst("#name").fill().with("zzz");
-        assertThat(findFirst("#name").value()).isEqualTo("zzz");
+        assertThat(el("#name").value()).contains("John");
+        el("#name").fill().with("zzz");
+        assertThat(el("#name").value()).isEqualTo("zzz");
     }
 
     @Test
     public void checkFillSelectAction() {
         goTo(DEFAULT_URL);
-        Select select = new Select(findFirst("#select").getElement());
+        Select select = new Select(el("#select").getElement());
         $("#select").fillSelect().withValue("value-1"); // by value
         assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 1");
         $("#select").fillSelect().withIndex(1); // by index
@@ -31,7 +31,7 @@ public class ActionOnSelectorWithBddTest extends IntegrationFluentTest {
     @Test
     public void checkFillSelectActionOnSelectElement() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = findFirst("#select");
+        FluentWebElement element = el("#select");
         Select select = new Select(element.getElement());
         element.fillSelect().withValue("value-1"); // by value
         assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 1");
@@ -44,16 +44,16 @@ public class ActionOnSelectorWithBddTest extends IntegrationFluentTest {
     @Test
     public void checkClearAction() {
         goTo(DEFAULT_URL);
-        assertThat(findFirst("#name").value()).contains("John");
-        findFirst("#name").clear();
+        assertThat(el("#name").value()).contains("John");
+        el("#name").clear();
         assertThat($("#name").first().value()).isEqualTo("");
     }
 
     @Test
     public void checkClickAction() {
         goTo(DEFAULT_URL);
-        assertThat(title()).contains("Selenium");
-        findFirst("#linkToPage2").click();
-        assertThat(title()).isEqualTo("Page 2");
+        assertThat(window().title()).contains("Selenium");
+        el("#linkToPage2").click();
+        assertThat(window().title()).isEqualTo("Page 2");
     }
 }
