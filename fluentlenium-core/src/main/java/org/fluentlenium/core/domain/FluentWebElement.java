@@ -321,7 +321,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
     }
 
     /**
-     * return the size of the elements
+     * return the size of the element
      *
      * @return dimension/size of element
      */
