@@ -1,5 +1,7 @@
 package org.fluentlenium.core.proxy;
 
+import com.google.common.base.Optional;
+
 /**
  * State of the element locator proxy.
  *
@@ -38,4 +40,13 @@ public interface FluentProxyState<T> {
      * @return true if the element is loaded, false otherwise
      */
     boolean loaded();
+
+    /**
+     * Builds an optional. If underlying element is lazy, search will be perfomed when invoking this method.
+     *
+     * @return An optional wrapping this.
+     * @see #present()
+     * @see #now()
+     */
+    Optional<T> optional();
 }
