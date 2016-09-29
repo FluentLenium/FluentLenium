@@ -1,5 +1,6 @@
 package org.fluentlenium.core.conditions;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
@@ -18,15 +19,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean isPresent() {
-        if (negation) {
-            return elements.size() <= 0;
-        }
-        return elements.size() > 0;
-    }
-
-    @Override
-    public boolean hasSize(int size) {
+    public boolean size(int size) {
         if (negation) {
             return elements.size() != size;
         }
@@ -34,122 +27,217 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public IntegerConditions hasSize() {
-        IntegerConditionsImpl conditions = new IntegerConditionsImpl(elements.size());
-        if (negation) {
-            conditions = conditions.not();
-        }
-        return conditions;
+    public IntegerConditions size() {
+        return new IntegerConditionsImpl(elements.size(), negation);
     }
 
     @Override
-    public boolean isVerified(Predicate<FluentWebElement> predicate) {
-        return isVerified(predicate, false);
+    public boolean verify(Predicate<FluentWebElement> predicate) {
+        return verify(predicate, false);
     }
 
     @Override
-    public boolean isClickable() {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean present() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.isClickable();
+                return input.conditions().present();
             }
         }, false);
     }
 
     @Override
-    public boolean isStale() {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean clickable() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.conditions().isStale();
+                return input.conditions().clickable();
             }
         }, false);
     }
 
     @Override
-    public boolean isDisplayed() {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean stale() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.conditions().isDisplayed();
+                return input.conditions().stale();
             }
         }, false);
     }
 
     @Override
-    public boolean isEnabled() {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean displayed() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.conditions().isEnabled();
+                return input.conditions().displayed();
             }
         }, false);
     }
 
     @Override
-    public boolean isSelected() {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean enabled() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.conditions().isSelected();
+                return input.conditions().enabled();
             }
         }, false);
     }
 
     @Override
-    public boolean hasText(final String text) {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean selected() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.conditions().hasText(text);
+                return input.conditions().selected();
             }
         }, false);
     }
 
     @Override
-    public boolean containsText(final String text) {
-        return isVerified(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement input) {
-                return input.conditions().containsText(text);
-            }
-        }, false);
+    public boolean attribute(final String name, final String value) {
+        return attribute(name).equalTo(value);
     }
 
     @Override
-    public boolean hasAttribute(final String attribute, final String value) {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public StringConditions attribute(final String name) {
+        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
             @Override
-            public boolean apply(FluentWebElement input) {
-                return input.conditions().hasAttribute(attribute, value);
+            public String apply(FluentWebElement input) {
+                return input.attribute(name);
             }
-        }, false);
-    }
-
-
-    @Override
-    public boolean hasId(final String id) {
-        return isVerified(new Predicate<FluentWebElement>() {
+        }, new Function<FluentWebElement, StringConditions>() {
             @Override
-            public boolean apply(FluentWebElement input) {
-                return input.conditions().hasId(id);
+            public StringConditions apply(FluentWebElement input) {
+                return input.conditions().attribute(name);
             }
-        }, false);
+        });
     }
 
     @Override
-    public boolean hasName(final String name) {
-        return isVerified(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement input) {
-                return input.conditions().hasName(name);
-            }
-        }, false);
+    public boolean id(final String id) {
+        return id().equalTo(id);
     }
 
     @Override
-    public RectangleConditions hasRectangle() {
+    public StringConditions id() {
+        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
+            @Override
+            public String apply(FluentWebElement input) {
+                return input.id();
+            }
+        }, new Function<FluentWebElement, StringConditions>() {
+            @Override
+            public StringConditions apply(FluentWebElement input) {
+                return input.conditions().id();
+            }
+        });
+    }
+
+    @Override
+    public StringConditions name() {
+        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
+            @Override
+            public String apply(FluentWebElement input) {
+                return input.name();
+            }
+        }, new Function<FluentWebElement, StringConditions>() {
+            @Override
+            public StringConditions apply(FluentWebElement input) {
+                return input.conditions().name();
+            }
+        });
+    }
+
+    @Override
+    public boolean name(final String name) {
+        return name().equalTo(name);
+    }
+
+    @Override
+    public StringConditions tagName() {
+        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
+            @Override
+            public String apply(FluentWebElement input) {
+                return input.tagName();
+            }
+        }, new Function<FluentWebElement, StringConditions>() {
+            @Override
+            public StringConditions apply(FluentWebElement input) {
+                return input.conditions().tagName();
+            }
+        });
+    }
+
+    @Override
+    public boolean tagName(String tagName) {
+        return tagName().equalTo(tagName);
+    }
+
+    @Override
+    public StringConditions value() {
+        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
+            @Override
+            public String apply(FluentWebElement input) {
+                return input.value();
+            }
+        }, new Function<FluentWebElement, StringConditions>() {
+            @Override
+            public StringConditions apply(FluentWebElement input) {
+                return input.conditions().value();
+            }
+        });
+    }
+
+    @Override
+    public boolean value(String value) {
+        return value().equalTo(value);
+    }
+
+    @Override
+    public StringConditions text() {
+        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
+            @Override
+            public String apply(FluentWebElement input) {
+                return input.text();
+            }
+        }, new Function<FluentWebElement, StringConditions>() {
+            @Override
+            public StringConditions apply(FluentWebElement input) {
+                return input.conditions().text();
+            }
+        });
+    }
+
+    @Override
+    public boolean text(String anotherString) {
+        return text().equalTo(anotherString);
+    }
+
+    @Override
+    public StringConditions textContent() {
+        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
+            @Override
+            public String apply(FluentWebElement input) {
+                return input.textContent();
+            }
+        }, new Function<FluentWebElement, StringConditions>() {
+            @Override
+            public StringConditions apply(FluentWebElement input) {
+                return input.conditions().textContent();
+            }
+        });
+    }
+
+    @Override
+    public boolean textContent(String anotherString) {
+        return textContent().equalTo(anotherString);
+    }
+
+    @Override
+    public RectangleConditions rectangle() {
         return new RectangleListConditionsImpl(this);
     }
 }

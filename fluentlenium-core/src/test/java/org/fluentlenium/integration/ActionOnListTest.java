@@ -10,17 +10,17 @@ public class ActionOnListTest extends IntegrationFluentTest {
     @Test
     public void checkFillAction() {
         goTo(DEFAULT_URL);
-        $("input[type=text]").text("zzz");
+        $("input[type=text]").write("zzz");
 
-        assertThat($("input[type=text]").getValues()).contains("zzz");
+        assertThat($("input[type=text]").values()).contains("zzz");
     }
 
     @Test
     public void checkClearAction() {
         goTo(DEFAULT_URL);
-        assertThat($("#name").getValues()).contains("John");
+        assertThat($("#name").values()).contains("John");
         $("#name").clear();
-        assertThat($("#name").getValues()).contains("");
+        assertThat($("#name").values()).contains("");
     }
 
     @Test
@@ -35,21 +35,21 @@ public class ActionOnListTest extends IntegrationFluentTest {
     @Test
     public void checkTextAction() {
         goTo(DEFAULT_URL);
-        assertThat($("#name").getValues()).contains("John");
-        assertThat($(".small").getTexts()).contains("Small 1", "Small 2", "Small 3");
+        assertThat($("#name").values()).contains("John");
+        assertThat($(".small").texts()).contains("Small 1", "Small 2", "Small 3");
     }
 
     @Test
     public void checkFillFileInput() {
         goTo(DEFAULT_URL);
         $("#fileUpload").fill().with("/data/fileName");
-        assertThat($("#fileUpload").getValue()).endsWith("fileName");
+        assertThat($("#fileUpload").value()).endsWith("fileName");
     }
 
     @Test
     public void checkFillFileInputUpperCase() {
         goTo(DEFAULT_URL);
         $("#fileUpload2").fill().with("/data/fileName");
-        assertThat($("#fileUpload2").getValue()).endsWith("fileName");
+        assertThat($("#fileUpload2").value()).endsWith("fileName");
     }
 }

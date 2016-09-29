@@ -85,7 +85,7 @@ public class FluentListSearchTest {
 
     @Test(expected = NoSuchElementException.class)
     public void when_no_element_matching_fill_then_throws_exceptions() {
-        fluentList.text("toto");
+        fluentList.write("toto");
         assertThat(fluentWebElement).isEqualTo(this.fluentWebElement);
     }
 

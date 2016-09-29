@@ -1,151 +1,164 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
  * Fluent object to handle {@link org.openqa.selenium.support.ui.ExpectedConditions} on FluentWebElement in fluentlenium API.
  */
-public class WebElementConditions implements FluentConditions {
-    private FluentWebElement element;
-    private boolean negation;
-
+public class WebElementConditions extends AbstractObjectConditions<FluentWebElement> implements FluentConditions {
     public WebElementConditions(FluentWebElement element) {
-        this.element = element;
+        super(element);
+    }
+
+    public WebElementConditions(FluentWebElement object, boolean negation) {
+        super(object, negation);
     }
 
     @Override
+    protected AbstractObjectConditions<FluentWebElement> newInstance(boolean negationValue) {
+        return new WebElementConditions(object, negationValue);
+    }
+
+    @Override
+    @Negation
     public WebElementConditions not() {
-        WebElementConditions negatedConditions = new WebElementConditions(element);
-        negatedConditions.negation = !negation;
-        return negatedConditions;
+        return (WebElementConditions) super.not();
     }
 
     @Override
-    public boolean isVerified(Predicate<FluentWebElement> predicate) {
-        boolean predicateResult = predicate.apply(element);
-        if (negation) {
-            predicateResult = !predicateResult;
-        }
-        return predicateResult;
-    }
-
-    @Override
-    public boolean isClickable() {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean present() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.isClickable();
+                return input.present();
             }
         });
     }
 
     @Override
-    public boolean isStale() {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean clickable() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return input.isStale();
+                return input.clickable();
             }
         });
     }
 
     @Override
-    public boolean isDisplayed() {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean stale() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return element.isDisplayed();
+                return input.stale();
             }
         });
     }
 
     @Override
-    public boolean isEnabled() {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean displayed() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return element.isEnabled();
+                return input.displayed();
             }
         });
     }
 
     @Override
-    public boolean isSelected() {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean enabled() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                return element.isSelected();
+                return input.enabled();
             }
         });
     }
 
     @Override
-    public boolean hasText(final String text) {
-        return isVerified(new Predicate<FluentWebElement>() {
+    public boolean selected() {
+        return verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
-                String elementText = element.getText();
-                return Objects.equal(elementText, text);
+                return input.selected();
             }
         });
     }
 
     @Override
-    public boolean containsText(final String text) {
-        return isVerified(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement input) {
-                String elementText = element.getText();
-                if (elementText == null && text != null) {
-                    return false;
-                }
-                return elementText.contains(text);
-            }
-        });
+    public boolean attribute(final String name, final String value) {
+        return attribute(name).equalTo(value);
     }
 
     @Override
-    public boolean hasAttribute(final String attribute, final String value) {
-        return isVerified(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement input) {
-                String elementValue = element.getAttribute(attribute);
-                return Objects.equal(elementValue, value);
-            }
-        });
+    public StringConditions attribute(String name) {
+        return new StringConditionsImpl(object.attribute(name), negation);
     }
 
     @Override
-    public boolean hasId(final String id) {
-        return isVerified(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement input) {
-                String elementId = element.getId();
-                return Objects.equal(elementId, id);
-            }
-        });
-
+    public boolean id(final String id) {
+        return id().equalTo(id);
     }
 
     @Override
-    public boolean hasName(final String name) {
-        return isVerified(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(FluentWebElement input) {
-                String elementName = element.getName();
-                return Objects.equal(elementName, name);
-            }
-        });
+    public StringConditions id() {
+        return new StringConditionsImpl(object.id(), negation);
     }
 
     @Override
-    public RectangleConditions hasRectangle() {
-        RectangleConditionsImpl conditions = new RectangleConditionsImpl(element.getElement().getRect());
-        if (negation) {
-            conditions = conditions.not();
-        }
-        return conditions;
+    public boolean name(final String name) {
+        return name().equalTo(name);
+    }
+
+    @Override
+    public StringConditions name() {
+        return new StringConditionsImpl(object.name(), negation);
+    }
+
+    @Override
+    public boolean tagName(String tagName) {
+        return tagName().equalTo(tagName);
+    }
+
+    @Override
+    public StringConditions tagName() {
+        return new StringConditionsImpl(object.tagName(), negation);
+    }
+
+
+    @Override
+    public boolean value(String value) {
+        return value().equalTo(value);
+    }
+
+    @Override
+    public StringConditions value() {
+        return new StringConditionsImpl(object.value(), negation);
+    }
+
+    @Override
+    public boolean text(String anotherString) {
+        return text().equalTo(anotherString);
+    }
+
+    @Override
+    public StringConditions text() {
+        return new StringConditionsImpl(object.text(), negation);
+    }
+
+    @Override
+    public boolean textContent(String anotherString) {
+        return textContent().equalTo(anotherString);
+    }
+
+    @Override
+    public StringConditions textContent() {
+        return new StringConditionsImpl(object.textContent(), negation);
+    }
+
+    @Override
+    public RectangleConditions rectangle() {
+        return new RectangleConditionsImpl(object.getElement().getRect(), negation);
     }
 }

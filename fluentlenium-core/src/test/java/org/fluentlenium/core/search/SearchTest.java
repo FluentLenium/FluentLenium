@@ -58,7 +58,7 @@ public class SearchTest {
         FluentAdapter fluentAdapter = new FluentAdapter(driver);
 
         DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
-        search = new Search(searchContext, instantiator, new DefaultHookChainBuilder(fluentAdapter, instantiator));
+        search = new Search(searchContext, instantiator);
     }
 
     @After
@@ -116,8 +116,30 @@ public class SearchTest {
         when(matcher.isSatisfiedBy(any(String.class))).thenReturn(true);
         when(filter2.getMatcher()).thenReturn(matcher);
 
-        search.find(name, filters).isPresent();
+        search.find(name, filters).present();
         verify(searchContext).findElements(By.cssSelector("cssStyle[generated=true]"));
+    }
+
+    @Test
+    public void findCheckCssIsWellFormedWithPostSelectorAndByLocator() {
+        WebElement webElement = mock(WebElement.class);
+        WebElement webElement2 = mock(WebElement.class);
+        List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
+
+        when(searchContext.findElements(By.cssSelector("cssStyle[generated=true]"))).thenReturn(webElements);
+
+        By locator = By.cssSelector("cssStyle");
+        Filter[] filters = new Filter[]{filter1, filter2};
+        when(filter1.isPreFilter()).thenReturn(true);
+        when(filter1.toString()).thenReturn("[generated=true]");
+        when(filter2.isPreFilter()).thenReturn(false);
+        when(filter2.toString()).thenReturn("[checked=ok]");
+        Matcher matcher = mock(Matcher.class);
+        when(matcher.isSatisfiedBy(any(String.class))).thenReturn(true);
+        when(filter2.getMatcher()).thenReturn(matcher);
+
+        search.find(locator, filters).present();
+        verify(searchContext).findElements(By.cssSelector("cssStyle"));
     }
 
 
@@ -152,7 +174,7 @@ public class SearchTest {
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
 
-        assertThat(search.find(name, filters).isPresent()).isFalse();
+        assertThat(search.find(name, filters).present()).isFalse();
     }
 
     @Test
@@ -167,7 +189,7 @@ public class SearchTest {
         when(filter1.getAttribut()).thenReturn("text");
         when(webElement.getText()).thenReturn("Ok");
 
-        assertThat(search.find(name, filters).isPresent()).isFalse();
+        assertThat(search.find(name, filters).present()).isFalse();
 
         verify(matcher1).isSatisfiedBy("Ok");
     }
@@ -185,7 +207,7 @@ public class SearchTest {
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(webElements);
 
         FluentWebElement fluentWebElement = search.find(name, 1);
-        assertThat(fluentWebElement.getTagName()).isEqualTo("a");
+        assertThat(fluentWebElement.tagName()).isEqualTo("a");
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -208,14 +230,14 @@ public class SearchTest {
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(webElements);
 
         FluentWebElement fluentWebElement = search.findFirst(name);
-        assertThat(fluentWebElement.getTagName()).isEqualTo("span");
+        assertThat(fluentWebElement.tagName()).isEqualTo("span");
     }
 
     @Test(expected = NoSuchElementException.class)
     public void shouldThrowErrorWhenFirstNotFound() {
         String name = "cssStyle";
         FluentWebElement fluentWebElement = search.findFirst(name);
-        assertThat(fluentWebElement.getTagName()).isEqualTo("span");
+        assertThat(fluentWebElement.tagName()).isEqualTo("span");
     }
 
 }

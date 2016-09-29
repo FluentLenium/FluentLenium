@@ -142,10 +142,10 @@ public class AnnotationsComponentEventsTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
 
         Component htmlComponent = findFirst("html").as(Component.class);
-        htmlComponent.findFirst("button").isPresent();
+        htmlComponent.findFirst("button").present();
 
         Component otherHtmlComponent = findFirst("html").as(Component.class);
-        otherHtmlComponent.isPresent();
+        otherHtmlComponent.present();
 
         assertThat(htmlComponent.beforeFindBy).hasSize(1);
         assertThat(htmlComponent.afterFindBy).hasSize(1);

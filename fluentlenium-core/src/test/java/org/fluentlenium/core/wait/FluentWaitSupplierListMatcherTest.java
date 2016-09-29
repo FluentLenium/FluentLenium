@@ -4,9 +4,9 @@ import com.google.common.base.Suppliers;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
+import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.search.Search;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,9 +28,6 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FluentWaitSupplierListMatcherTest {
-    @Mock
-    private Search search;
-
     @Mock
     private FluentDriver fluent;
 
@@ -60,13 +57,11 @@ public class FluentWaitSupplierListMatcherTest {
 
     @Before
     public void before() {
-        wait = new FluentWait(fluent, search);
+        wait = new FluentWait(fluent);
         wait.atMost(1L, TimeUnit.MILLISECONDS);
         wait.pollingEvery(1L, TimeUnit.MILLISECONDS);
 
         instantiator = new DefaultComponentInstantiator(fluent);
-
-        when(search.getInstantiator()).thenReturn(instantiator);
 
         when(fluentWebElement1.conditions()).thenReturn(new WebElementConditions(fluentWebElement1));
         when(fluentWebElement1.getElement()).thenReturn(element1);
@@ -84,7 +79,6 @@ public class FluentWaitSupplierListMatcherTest {
 
     @After
     public void after() {
-        reset(search);
         reset(fluent);
         reset(fluentWebElement1);
         reset(fluentWebElement2);
@@ -96,33 +90,31 @@ public class FluentWaitSupplierListMatcherTest {
 
     @Test
     public void isEnabled() {
-        final FluentWaitSupplierListMatcher matcher = new FluentWaitSupplierListMatcher(search, wait, Suppliers.ofInstance(instantiator.newFluentList(fluentWebElements)));
+        final FluentListConditions matcher = wait.untilElements(Suppliers.ofInstance(instantiator.newFluentList(fluentWebElements)));
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.isEnabled();
+                matcher.enabled();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement1, atLeastOnce()).isEnabled();
-        verify(fluentWebElement2, atLeastOnce()).isEnabled();
-        verify(fluentWebElement3, atLeastOnce()).isEnabled();
+        verify(fluentWebElement1, atLeastOnce()).enabled();
+        verify(fluentWebElement2, atLeastOnce()).enabled();
+        verify(fluentWebElement3, atLeastOnce()).enabled();
 
-        when(search.getInstantiator()).thenReturn(new DefaultComponentInstantiator(fluent));
+        when(fluentWebElement1.enabled()).thenReturn(true);
+        when(fluentWebElement2.enabled()).thenReturn(true);
+        when(fluentWebElement3.enabled()).thenReturn(true);
+        matcher.enabled();
 
-        when(fluentWebElement1.isEnabled()).thenReturn(true);
-        when(fluentWebElement2.isEnabled()).thenReturn(true);
-        when(fluentWebElement3.isEnabled()).thenReturn(true);
-        matcher.isEnabled();
-
-        verify(fluentWebElement1, atLeastOnce()).isEnabled();
-        verify(fluentWebElement2, atLeastOnce()).isEnabled();
-        verify(fluentWebElement3, atLeastOnce()).isEnabled();
+        verify(fluentWebElement1, atLeastOnce()).enabled();
+        verify(fluentWebElement2, atLeastOnce()).enabled();
+        verify(fluentWebElement3, atLeastOnce()).enabled();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.not().isEnabled();
+                matcher.not().enabled();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }

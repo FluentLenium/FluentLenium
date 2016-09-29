@@ -16,7 +16,6 @@ import org.fluentlenium.core.events.AnnotationsComponentListener;
 import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
-import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.inject.DefaultContainerInstanciator;
 import org.fluentlenium.core.inject.FluentInjector;
 import org.fluentlenium.core.script.FluentJavascript;
@@ -69,8 +68,6 @@ public class FluentDriver implements FluentControl {
 
     private KeyboardActions keyboardActions;
 
-    private HookChainBuilder hookChainBuilder;
-
     private WindowAction windowAction;
 
     public FluentDriver(WebDriver driver, ConfigurationProperties configuration) {
@@ -118,8 +115,7 @@ public class FluentDriver implements FluentControl {
 
     protected FluentDriver initFluent(WebDriver driver) {
         this.driver = driver;
-        this.hookChainBuilder = new DefaultHookChainBuilder(this, this.componentsManager.getInstantiator());
-        this.search = new Search(driver, componentsManager, hookChainBuilder);
+        this.search = new Search(driver, componentsManager);
         if (driver instanceof EventFiringWebDriver) {
             this.events = new EventsRegistry(this);
             this.eventsComponentsAnnotations = new AnnotationsComponentListener(componentsManager);
@@ -244,7 +240,7 @@ public class FluentDriver implements FluentControl {
 
     @Override
     public FluentWait await() {
-        return new FluentWait(this, getSearch());
+        return new FluentWait(this);
     }
 
     @Override
@@ -413,7 +409,7 @@ public class FluentDriver implements FluentControl {
 
     @Override
     public void switchTo(FluentWebElement element) {
-        if (null == element || !"iframe".equals(element.getTagName())) {
+        if (null == element || !"iframe".equals(element.tagName())) {
             getDriver().switchTo().defaultContent();
         } else {
             WebElement target = element.getElement();

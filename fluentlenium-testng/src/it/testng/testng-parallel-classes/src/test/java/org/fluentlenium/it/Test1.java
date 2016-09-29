@@ -14,7 +14,7 @@ public class Test1 extends FluentIntegTestNg {
         } catch (InterruptedException e) {
         }
 
-        assertThat(findFirst("input").getValue()).isEqualTo("1");
+        assertThat(findFirst("input").value()).isEqualTo("1");
     }
 
     @Test
@@ -27,7 +27,7 @@ public class Test1 extends FluentIntegTestNg {
         } catch (InterruptedException e) {
         }
 
-        assertThat(findFirst("input").getValue()).isEqualTo("2");
+        assertThat(findFirst("input").value()).isEqualTo("2");
     }
 
     @Test
@@ -40,7 +40,7 @@ public class Test1 extends FluentIntegTestNg {
         } catch (InterruptedException e) {
         }
 
-        assertThat(findFirst("input").getValue()).isEqualTo("3");
+        assertThat(findFirst("input").value()).isEqualTo("3");
     }
 
     @Test
@@ -53,6 +53,6 @@ public class Test1 extends FluentIntegTestNg {
         } catch (InterruptedException e) {
         }
 
-        assertThat(findFirst("input").getValue()).isEqualTo("4");
+        assertThat(findFirst("input").value()).isEqualTo("4");
     }
 }

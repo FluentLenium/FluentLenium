@@ -97,7 +97,7 @@ public class SeleniumFindBy extends IntegrationFluentTest {
         }
 
         public String getText() {
-            return id3.getText();
+            return id3.text();
         }
     }
 }

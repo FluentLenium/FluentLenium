@@ -29,13 +29,13 @@ public class FluentListAssertTest<E extends FluentWebElement> {
 
     @Test
     public void testHasText() {
-        when(fluentList.getTexts()).thenReturn(Arrays.asList("some text"));
+        when(fluentList.texts()).thenReturn(Arrays.asList("some text"));
         assertNotNull(listAssert.hasText("some text"));
     }
 
     @Test
     public void testHasNotText() {
-        when(fluentList.getTexts()).thenReturn(Arrays.asList("other text"));
+        when(fluentList.texts()).thenReturn(Arrays.asList("other text"));
         assertNotNull(listAssert.hasNotText("some text"));
     }
 
@@ -105,55 +105,55 @@ public class FluentListAssertTest<E extends FluentWebElement> {
 
     @Test
     public void testHasIdOk() {
-        when(fluentList.getIds()).thenReturn(Arrays.asList("some-id"));
+        when(fluentList.ids()).thenReturn(Arrays.asList("some-id"));
         listAssert.hasId("some-id");
     }
 
     @Test(expected = AssertionError.class)
     public void testHasIdKo() throws Exception {
-        when(fluentList.getIds()).thenReturn(Arrays.asList("other-id"));
+        when(fluentList.ids()).thenReturn(Arrays.asList("other-id"));
         listAssert.hasId("some-id");
     }
 
     @Test(expected = AssertionError.class)
     public void testHasIdEmptyKo() throws Exception {
-        when(fluentList.getIds()).thenReturn(Collections.<String>emptyList());
+        when(fluentList.ids()).thenReturn(Collections.<String>emptyList());
         listAssert.hasId("some-id");
     }
 
     @Test
     public void testHasClassOk() {
-        when(fluentList.getAttributes("class")).thenReturn(Arrays.asList("some-class"));
+        when(fluentList.attributes("class")).thenReturn(Arrays.asList("some-class"));
         listAssert.hasClass("some-class");
     }
 
     @Test(expected = AssertionError.class)
     public void testHasClassKo() {
-        when(fluentList.getAttributes("class")).thenReturn(Arrays.asList("other-class"));
+        when(fluentList.attributes("class")).thenReturn(Arrays.asList("other-class"));
         listAssert.hasClass("some-class");
     }
 
     @Test(expected = AssertionError.class)
     public void testHasClassEmptyKo() {
-        when(fluentList.getAttributes("class")).thenReturn(Collections.<String>emptyList());
+        when(fluentList.attributes("class")).thenReturn(Collections.<String>emptyList());
         listAssert.hasClass("some-class");
     }
 
     @Test(expected = AssertionError.class)
     public void testSubstringKo() throws Exception {
-        when(fluentList.getAttributes("class")).thenReturn(Arrays.asList("yolokitten"));
+        when(fluentList.attributes("class")).thenReturn(Arrays.asList("yolokitten"));
         listAssert.hasClass("yolo");
     }
 
     @Test
     public void testHasMultipleClassesOk() throws Exception {
-        when(fluentList.getAttributes("class")).thenReturn(Arrays.asList("yolokitten mark"));
+        when(fluentList.attributes("class")).thenReturn(Arrays.asList("yolokitten mark"));
         listAssert.hasClass("mark");
     }
 
     @Test
     public void testHasMultipleClassesOkBanana() throws Exception {
-        when(fluentList.getAttributes("class")).thenReturn(Arrays.asList("beta product", "alpha male"));
+        when(fluentList.attributes("class")).thenReturn(Arrays.asList("beta product", "alpha male"));
         listAssert.hasClass("male");
     }
 }

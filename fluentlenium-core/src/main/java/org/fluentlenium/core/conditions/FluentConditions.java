@@ -1,6 +1,9 @@
 package org.fluentlenium.core.conditions;
 
 
+import org.fluentlenium.core.conditions.message.Message;
+import org.fluentlenium.core.conditions.message.MessageContext;
+import org.fluentlenium.core.conditions.message.NotMessage;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
@@ -12,68 +15,71 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      *
      * @return a new negated condition object
      */
+    @Negation
     FluentConditions not();
 
     /**
-     * Check that this element is visible and isEnabled such that you can click it.
+     * Check that this element is present
+     *
+     * @return true if the element is present, false otherwise.
+     */
+    @Message("is present")
+    @NotMessage("is not present")
+    boolean present();
+
+    /**
+     * Check that this element is visible and enabled such that you can click it.
      *
      * @return true if the element can be clicked, false otherwise.
      */
-    boolean isClickable();
+    @Message("is clickable")
+    @NotMessage("is not clickable")
+    boolean clickable();
 
     /**
      * Check that this element is no longer attached to the DOM.
      *
      * @return false is the element is still attached to the DOM, true otherwise.
      */
-    boolean isStale();
+    @Message("is stale")
+    @NotMessage("is not stale")
+    @NoSuchElementValue(true)
+    boolean stale();
 
     /**
      * Check that this element is displayed.
      *
      * @return true if element is displayed, false otherwise.
      */
-    boolean isDisplayed();
+    @Message("is displayed")
+    @NotMessage("is not displayed")
+    boolean displayed();
 
     /**
      * Check that this element is enabled.
      *
      * @return true if element is enabled, false otherwise.
      */
-    boolean isEnabled();
+    @Message("is enabled")
+    @NotMessage("is not enabled")
+    boolean enabled();
 
     /**
      * Check that this element is selected.
      *
      * @return true if element is selected, false otherwise.
      */
-    boolean isSelected();
+    @Message("is selected")
+    @NotMessage("is not selected")
+    boolean selected();
 
     /**
-     * Check that this element has the given text.
+     * Check conditions on this element id.
      *
-     * @param text text to check
-     * @return true if this element has the given text, false otherwise.
+     * @return An object to configure id conditions.
      */
-    boolean hasText(final String text);
-
-    /**
-     * Check that this element contains the given text.
-     *
-     * @param text text to check
-     * @return true if this element contains the given text, false otherwise.
-     */
-    boolean containsText(final String text);
-
-    /**
-     * Check that the attribute has the given value.
-     *
-     * @param attribute attribute name to check
-     * @param value     attribute value to check
-     * @return true if the given attribute has the given value, false otherwise.
-     */
-    boolean hasAttribute(final String attribute, final String value);
-
+    @MessageContext("id")
+    StringConditions id();
 
     /**
      * Check that this element has the given id.
@@ -81,7 +87,17 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @param id id to check
      * @return true if the element has the given id, false otherwise.
      */
-    boolean hasId(String id);
+    @Message("has id=\"{0}\"")
+    @NotMessage("does not have id=\"{0}\"")
+    boolean id(String id);
+
+    /**
+     * Check conditions on this element name.
+     *
+     * @return An object to configure name conditions.
+     */
+    @MessageContext("name")
+    StringConditions name();
 
     /**
      * Check that this element has the given name
@@ -89,12 +105,107 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @param name name to check
      * @return true if the element has the given name, false otherwise.
      */
-    boolean hasName(String name);
+    @Message("has name=\"{0}\"")
+    @NotMessage("does not have name=\"{0}\"")
+    boolean name(String name);
+
+    /**
+     * Check conditions on this element tagName.
+     *
+     * @return An object to configure tagName conditions.
+     */
+    @MessageContext("tagName")
+    StringConditions tagName();
+
+    /**
+     * Check that this element has the given tagName
+     *
+     * @param tagName tagName to check
+     * @return true if the element has the given tagName, false otherwise.
+     */
+    @Message("has tagName=\"{0}\"")
+    @NotMessage("does not have tagName=\"{0}\"")
+    boolean tagName(String tagName);
+
+    /**
+     * Check conditions on this element value.
+     *
+     * @return An object to configure value conditions.
+     */
+    @MessageContext("value")
+    StringConditions value();
+
+    /**
+     * Check that this element has the given value
+     *
+     * @param value value to check
+     * @return true if the element has the given value, false otherwise.
+     */
+    @Message("has value=\"{0}\"")
+    @NotMessage("does not have value=\"{0}\"")
+    boolean value(String value);
+
+    /**
+     * Check conditions on this element text.
+     *
+     * @return true if the element has the given text, false otherwise.
+     * @see StringConditions#equals(Object)
+     */
+    @Message("has text=\"{0}\"")
+    @NotMessage("does not have text=\"{0}\"")
+    boolean text(String anotherString);
+
+    /**
+     * Check conditions on this element text.
+     *
+     * @return An object to configure text conditions.
+     */
+    @MessageContext("text")
+    StringConditions text();
+
+    /**
+     * Check conditions on this element text content.
+     *
+     * @return true if the element has the given text content, false otherwise.
+     * @see StringConditions#equals(Object)
+     */
+    @Message("has textContent=\"{0}\"")
+    @NotMessage("does not have textContent=\"{0}\"")
+    boolean textContent(String anotherString);
+
+    /**
+     * Check conditions on this element text content.
+     *
+     * @return An object to configure text content conditions.
+     */
+    @MessageContext("textContent")
+    StringConditions textContent();
+
+    /**
+     * Check that the attribute has the given value.
+     *
+     * @param name  attribute name to check
+     * @param value attribute value to check
+     * @return true if the given attribute has the given value, false otherwise.
+     */
+    @Message("has attribute \"{0}\"=\"{1}\"")
+    @NotMessage("does not have attribute \"{0}\"=\"{1}\"")
+    boolean attribute(final String name, final String value);
+
+    /**
+     * Check conditions on the given attribute the attribute has the given value.
+     *
+     * @param name attribute name to check
+     * @return An object to configure text attribute value conditions.
+     */
+    @MessageContext("attribute(\"{0}\"")
+    StringConditions attribute(final String name);
 
     /**
      * check conditions on rectangle of this element
      *
      * @return An object to configure advanced position conditions
      */
-    RectangleConditions hasRectangle();
+    @MessageContext("rectangle")
+    RectangleConditions rectangle();
 }

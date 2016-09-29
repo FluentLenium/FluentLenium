@@ -8,7 +8,6 @@ import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterPredicate;
-import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -22,20 +21,10 @@ import java.util.List;
 public class Search implements SearchControl<FluentWebElement> {
     private final SearchContext searchContext;
     private final ComponentInstantiator instantiator;
-    private final HookChainBuilder hookChainBuilder;
 
-    public Search(SearchContext context, ComponentInstantiator instantiator, HookChainBuilder hookChainBuilder) {
+    public Search(SearchContext context, ComponentInstantiator instantiator) {
         this.searchContext = context;
         this.instantiator = instantiator;
-        this.hookChainBuilder = hookChainBuilder;
-    }
-
-    public ComponentInstantiator getInstantiator() {
-        return instantiator;
-    }
-
-    public HookChainBuilder getHookChainBuilder() {
-        return hookChainBuilder;
     }
 
     /**
@@ -101,6 +90,11 @@ public class Search implements SearchControl<FluentWebElement> {
             public List<WebElement> findElements() {
                 return searchContext.findElements(by);
             }
+
+            @Override
+            public String toString() {
+                return by.toString();
+            }
         };
     }
 
@@ -148,9 +142,6 @@ public class Search implements SearchControl<FluentWebElement> {
      */
     @Override
     public FluentWebElement find(Integer index, Filter... filters) {
-        if (filters == null || filters.length == 0) {
-            throw new IllegalArgumentException("cssSelector or filter is required");
-        }
         return find("*", index, filters);
     }
 

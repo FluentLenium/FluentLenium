@@ -24,7 +24,7 @@ public class AtLeastOneElementConditions extends AbstractFluentListConditions {
     }
 
     @Override
-    public boolean isVerified(Predicate<FluentWebElement> predicate, boolean defaultValue) {
+    public boolean verify(Predicate<FluentWebElement> predicate, boolean defaultValue) {
         if (negation) {
             predicate = Predicates.not(predicate);
             defaultValue = !defaultValue;

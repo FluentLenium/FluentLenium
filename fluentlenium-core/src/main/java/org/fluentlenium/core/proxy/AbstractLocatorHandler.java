@@ -7,6 +7,7 @@ import org.fluentlenium.core.hook.HookDefinition;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.lang.reflect.InvocationHandler;
@@ -172,11 +173,10 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        if (TO_STRING.equals(method)) {
+            return proxyToString(result == null ? null : (String) invoke(method, args));
+        }
         if (result == null) {
-            if (TO_STRING.equals(method)) {
-                return toString();
-            }
-
             if (EQUALS.equals(method)) {
                 LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
                 if (otherLocatorHandler != null) {
@@ -244,8 +244,24 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         return locator != null ? locator.hashCode() : 2048;
     }
 
+    protected String getLazyToString() {
+        return "Lazy Element";
+    }
+
+    public String proxyToString(String elementToString) {
+        if (elementToString == null) {
+            elementToString = getLazyToString();
+        }
+
+        if (locator instanceof WrapsElement) {
+            return elementToString;
+        }
+
+        return locator + " (" + elementToString + ")";
+    }
+
     @Override
     public String toString() {
-        return "Proxy for " + locator;
+        return proxyToString(null);
     }
 }

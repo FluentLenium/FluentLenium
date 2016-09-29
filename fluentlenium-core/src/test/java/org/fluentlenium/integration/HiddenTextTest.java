@@ -12,13 +12,13 @@ public class HiddenTextTest extends IntegrationFluentTest {
     public void checkGetTextWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement line = findFirst("#hidden");
-        assertThat(line.getText()).isEmpty();
+        assertThat(line.text()).isEmpty();
     }
 
     @Test
     public void checkGetTextContentWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement line = findFirst("#hidden");
-        assertThat(line.getTextContent()).isNotEmpty();
+        assertThat(line.textContent()).isNotEmpty();
     }
 }

@@ -1,5 +1,8 @@
 package org.fluentlenium.core.conditions;
 
+import org.fluentlenium.core.conditions.message.Message;
+import org.fluentlenium.core.conditions.message.MessageContext;
+import org.fluentlenium.core.conditions.message.NotMessage;
 import org.openqa.selenium.Rectangle;
 
 
@@ -8,27 +11,46 @@ import org.openqa.selenium.Rectangle;
  */
 public interface RectangleConditions extends Conditions<Rectangle> {
     @Override
+    @Negation
     RectangleConditions not();
 
-    boolean withX(int x);
+    @Message("has x == {0}")
+    @NotMessage("has x != {0}")
+    boolean x(int x);
 
-    IntegerConditions withX();
+    @MessageContext("x")
+    IntegerConditions x();
 
-    boolean withY(int y);
+    @Message("has y == {0}")
+    @NotMessage("has y != {0}")
+    boolean y(int y);
 
-    IntegerConditions withY();
+    @MessageContext("y")
+    IntegerConditions y();
 
-    boolean withPosition(int x, int y);
+    @Message("has position == (x:{0}, y:{1})")
+    @NotMessage("has position != (x:{0}, y:{1})")
+    boolean position(int x, int y);
 
-    boolean withWidth(int width);
+    @Message("has width == {0}")
+    @NotMessage("has width != {0}")
+    boolean width(int width);
 
-    IntegerConditions withWidth();
+    @MessageContext("width")
+    IntegerConditions width();
 
-    boolean withHeight(int height);
+    @Message("has height == {0}")
+    @NotMessage("has height != {0}")
+    boolean height(int height);
 
-    IntegerConditions withHeight();
+    @MessageContext("height")
+    IntegerConditions height();
 
-    boolean withDimension(int width, int height);
+    @Message("has dimension == (width:{0}, height:{1})")
+    @NotMessage("has dimension != (width:{0}, height:{1})")
+    boolean dimension(int width, int height);
 
-    boolean withPositionAndDimension(int x, int y, int width, int height);
+    @Message("has position/dimension == (x:{0}, y:{1}, width:{2}, height:{4})")
+    @NotMessage("has position/dimension != (x:{0}, y:{1}, width:{2}, height:{3})")
+    boolean positionAndDimension(int x, int y, int width, int height);
 }

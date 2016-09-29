@@ -64,14 +64,14 @@ public class AnnotationsEventsTest extends IntegrationFluentTest {
 
     @BeforeClickOn
     private void beforeClickOn(FluentWebElement element) {
-        assertThat(element.getTagName()).isEqualTo("button");
+        assertThat(element.tagName()).isEqualTo("button");
         assertThat(afterClick).doesNotContain(element.getElement());
         beforeClick.add(element.getElement());
     }
 
     @AfterClickOn
     public void afterClickOn(FluentWebElement element) {
-        assertThat(element.getTagName()).isEqualTo("button");
+        assertThat(element.tagName()).isEqualTo("button");
 
         ArrayList<WebElement> webElements = new ArrayList<>(afterClick);
         webElements.add(element.getElement());

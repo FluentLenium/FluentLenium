@@ -59,7 +59,7 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
         }
 
         public String getText() {
-            return newField.getText();
+            return newField.text();
         }
     }
 
@@ -74,7 +74,7 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
         }
 
         public String getText() {
-            return newFieldSlow.getText();
+            return newFieldSlow.text();
         }
     }
 
@@ -89,7 +89,7 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
         }
 
         public String getText() {
-            return newFieldSlow.getText();
+            return newFieldSlow.text();
         }
     }
 
@@ -107,7 +107,7 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
 
             newField.click();
 
-            return newField.getText();
+            return newField.text();
         }
     }
 }

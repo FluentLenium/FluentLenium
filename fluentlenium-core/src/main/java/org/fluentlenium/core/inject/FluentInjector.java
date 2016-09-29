@@ -24,7 +24,6 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
-import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -198,8 +197,8 @@ public class FluentInjector implements FluentInjectControl {
                 if (isSupported(container, field)) {
                     ArrayList<HookDefinition<?>> fieldHookDefinitions = new ArrayList<>(containerContext.getHookDefinitions());
                     addHookDefinitions(field.getAnnotations(), fieldHookDefinitions);
-                    ElementLocatorFactory locatorFactory = new FieldAndReturnTypeElementLocatorFactory(searchContext);
-                    ElementLocator locator = locatorFactory.createLocator(field);
+                    InjectionElementLocatorFactory locatorFactory = new InjectionElementLocatorFactory(searchContext);
+                    InjectionElementLocator locator = locatorFactory.createLocator(field);
                     if (locator != null) {
                         ComponentAndProxy fieldValue = initFieldElements(locator, field);
                         injectComponent(fieldValue, locator, container, field, fieldHookDefinitions);

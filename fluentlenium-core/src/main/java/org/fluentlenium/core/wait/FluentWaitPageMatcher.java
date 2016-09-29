@@ -6,8 +6,6 @@ import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import static org.fluentlenium.core.wait.FluentWaitMessages.isPageLoaded;
-
 public class FluentWaitPageMatcher extends AbstractWaitMatcher {
     private FluentWait wait;
     private WebDriver webDriver;
@@ -17,7 +15,6 @@ public class FluentWaitPageMatcher extends AbstractWaitMatcher {
         this.wait = wait;
         this.webDriver = driver;
     }
-
 
     protected FluentWaitPageMatcher(FluentWait wait, WebDriver driver, FluentPage page) {
         this.wait = wait;
@@ -40,7 +37,7 @@ public class FluentWaitPageMatcher extends AbstractWaitMatcher {
                     return result != null && "complete".equals(result);
                 }
             };
-            until(wait, isLoaded, isPageLoaded(webDriver.getCurrentUrl()));
+            until(wait, isLoaded, String.format("Page %s should be loaded.", webDriver.getCurrentUrl()));
         }
     }
 

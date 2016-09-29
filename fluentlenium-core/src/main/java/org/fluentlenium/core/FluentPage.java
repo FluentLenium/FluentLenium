@@ -41,7 +41,7 @@ public abstract class FluentPage extends DefaultFluentContainer implements Fluen
             try {
                 findFirst(by).now();
             } catch (NoSuchElementException | StaleElementReferenceException e) {
-                throw new AssertionError("@FindBy element not found for page " + getClass().getName());
+                throw new AssertionError("@FindBy element not found for page " + getClass().getName(), e);
             }
         }
     }
