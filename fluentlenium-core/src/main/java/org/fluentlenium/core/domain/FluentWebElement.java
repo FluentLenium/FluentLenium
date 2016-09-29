@@ -153,9 +153,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      * @return element as component.
      */
     public <T> T as(Class<T> componentClass) {
-        WebElement webElement = getElement();
-        this.webElement = new FailWebElement(); // Make sure this FluentWebElement won't be used anymore.
-        return instantiator.newComponent(componentClass, webElement);
+        return instantiator.newComponent(componentClass, getElement());
     }
 
     /**
@@ -310,9 +308,6 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      * @return web element
      */
     public WebElement getElement() {
-        if (webElement instanceof FailWebElement) {
-            ((FailWebElement) webElement).fail();
-        }
         return webElement;
     }
 

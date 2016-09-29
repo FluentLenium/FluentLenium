@@ -103,35 +103,8 @@ public class FluentWebElementTest {
     public void testAs() {
         Component as = fluentElement.as(Component.class);
         assertThat(as.getElement()).isSameAs(element);
-        assertThat(componentsManager.getComponent(element)).isSameAs(as);
+        assertThat(componentsManager.getComponents(element)).containsExactly(as);
     }
-
-    @Test
-    public void testAsPreviousElementFails() {
-        Component as = fluentElement.as(Component.class);
-        assertThat(as.getElement()).isSameAs(element);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fluentElement.as(Component.class);
-            }
-        }).isExactlyInstanceOf(ComponentException.class);
-
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fluentElement.enabled();
-            }
-        }).isExactlyInstanceOf(ComponentException.class);
-
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fluentElement.getElement();
-            }
-        }).isExactlyInstanceOf(ComponentException.class);
-    }
-
 
     @Test(expected = ComponentException.class)
     public void testAsInvalidClass() {
@@ -373,6 +346,11 @@ public class FluentWebElementTest {
 
         public WebElement getElement() {
             return element;
+        }
+
+        @Override
+        public String toString() {
+            return "Component";
         }
     }
 
