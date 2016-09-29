@@ -30,6 +30,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -174,6 +175,7 @@ public class SearchTest {
         }).isExactlyInstanceOf(NoSuchElementException.class);
 
         assertThat(search.find(name, filters).present()).isFalse();
+        assertThat(search.find(name, filters).optional().isPresent()).isFalse();
     }
 
     @Test
@@ -189,8 +191,9 @@ public class SearchTest {
         when(webElement.getText()).thenReturn("Ok");
 
         assertThat(search.find(name, filters).present()).isFalse();
+        assertThat(search.find(name, filters).optional().isPresent()).isFalse();
 
-        verify(matcher1).isSatisfiedBy("Ok");
+        verify(matcher1, times(2)).isSatisfiedBy("Ok");
     }
 
     @Test
