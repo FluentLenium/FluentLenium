@@ -203,7 +203,7 @@ public class SearchTest {
         when(webElement1.getTagName()).thenReturn("span");
         WebElement webElement2 = mock(WebElement.class);
         when(webElement2.getTagName()).thenReturn("a");
-        List<WebElement> webElements = new ArrayList<WebElement>();
+        List<WebElement> webElements = new ArrayList<>();
         webElements.add(webElement1);
         webElements.add(webElement2);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(webElements);
@@ -226,7 +226,7 @@ public class SearchTest {
         when(webElement1.getTagName()).thenReturn("span");
         WebElement webElement2 = mock(WebElement.class);
         when(webElement2.getTagName()).thenReturn("a");
-        List<WebElement> webElements = new ArrayList<WebElement>();
+        List<WebElement> webElements = new ArrayList<>();
         webElements.add(webElement1);
         webElements.add(webElement2);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(webElements);

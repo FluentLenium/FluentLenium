@@ -88,7 +88,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      */
     protected C messageBuilder(boolean ignoreNegation) {
         C conditions = MessageProxy.builder(conditionClass, context);
-        applyNegation(conditions, ignoreNegation);
+        conditions = applyNegation(conditions, ignoreNegation);
         return conditions;
     }
 

@@ -50,7 +50,7 @@ public class WaitForPageToLoadTest {
         verify(wait).untilPredicate(any(Predicate.class));
     }
 
-    private class WebDriverWithJavascriptExecutor implements WebDriver, JavascriptExecutor {
+    private static class WebDriverWithJavascriptExecutor implements WebDriver, JavascriptExecutor {
 
         public Object executeScript(String s, Object... objects) {
             return null;  //To change body of implemented methods use File | Settings | File Templates.

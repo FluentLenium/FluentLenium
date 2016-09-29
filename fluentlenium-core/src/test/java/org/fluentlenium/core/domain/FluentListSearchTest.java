@@ -84,13 +84,13 @@ public class FluentListSearchTest {
 
 
     @Test(expected = NoSuchElementException.class)
-    public void when_no_element_matching_fill_then_throws_exceptions() {
+    public void whenNoElementMatchingFillThenThrowsExceptions() {
         fluentList.write("toto");
         assertThat(fluentWebElement).isEqualTo(this.fluentWebElement);
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void ShouldThrowAnErrorWhenWrongPosition() {
+    public void shouldThrowAnErrorWhenWrongPosition() {
         String name = "cssStyle";
         when(search.find(name, null)).thenReturn(fluentAdapter.newFluentList(webElements));
         FluentWebElement fluentWebElement = fluentList.find(name, null).index(1);

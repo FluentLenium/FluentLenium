@@ -1,5 +1,8 @@
 package org.fluentlenium.core.action;
 
+/**
+ * Access interface for input controls.
+ */
 public interface InputControl {
     /**
      * Execute keyboard actions

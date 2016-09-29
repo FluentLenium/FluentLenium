@@ -24,7 +24,7 @@ public final class MatcherConstructor {
      * @param matcher string matcher
      * @return matcher object
      */
-    public static Matcher contains(String matcher) {
+    public static Matcher contains(final String matcher) {
         return new ContainsMatcher(matcher);
     }
 
@@ -34,7 +34,7 @@ public final class MatcherConstructor {
      * @param pattern pattern object
      * @return matcher object
      */
-    public static Matcher contains(Pattern pattern) {
+    public static Matcher contains(final Pattern pattern) {
         return new ContainsMatcher(pattern);
     }
 
@@ -45,7 +45,7 @@ public final class MatcherConstructor {
      * @return matcher object
      */
 
-    public static Matcher notContains(String matcher) {
+    public static Matcher notContains(final String matcher) {
         return new NotContainsMatcher(matcher);
     }
 
@@ -55,7 +55,7 @@ public final class MatcherConstructor {
      * @param pattern string pattern
      * @return matcher object
      */
-    public static Matcher notContains(Pattern pattern) {
+    public static Matcher notContains(final Pattern pattern) {
         return new NotContainsMatcher(pattern);
     }
 
@@ -65,7 +65,7 @@ public final class MatcherConstructor {
      * @param matcher string matcher
      * @return matcher object
      */
-    public static Matcher equal(String matcher) {
+    public static Matcher equal(final String matcher) {
         return new EqualMatcher(matcher);
     }
 
@@ -75,7 +75,7 @@ public final class MatcherConstructor {
      * @param pattern string pattern
      * @return pattern
      */
-    public static Pattern regex(String pattern) {
+    public static Pattern regex(final String pattern) {
         return Pattern.compile(pattern);
 
     }
@@ -86,7 +86,7 @@ public final class MatcherConstructor {
      * @param matcher string matcher
      * @return matcher object
      */
-    public static Matcher startsWith(String matcher) {
+    public static Matcher startsWith(final String matcher) {
         return new StartsWithMatcher(matcher);
     }
 
@@ -96,7 +96,7 @@ public final class MatcherConstructor {
      * @param pattern pattern
      * @return matcher object
      */
-    public static Matcher startsWith(Pattern pattern) {
+    public static Matcher startsWith(final Pattern pattern) {
         return new StartsWithMatcher(pattern);
     }
 
@@ -106,7 +106,7 @@ public final class MatcherConstructor {
      * @param matcher string matcher
      * @return matcher
      */
-    public static Matcher endsWith(String matcher) {
+    public static Matcher endsWith(final String matcher) {
         return new EndsWithMatcher(matcher);
     }
 
@@ -117,7 +117,7 @@ public final class MatcherConstructor {
      * @return matcher
      */
 
-    public static Matcher endsWith(Pattern pattern) {
+    public static Matcher endsWith(final Pattern pattern) {
         return new EndsWithMatcher(pattern);
     }
 
@@ -127,7 +127,7 @@ public final class MatcherConstructor {
      * @param matcher string matcher
      * @return matcher
      */
-    public static Matcher notStartsWith(String matcher) {
+    public static Matcher notStartsWith(final String matcher) {
         return new NotStartsWithMatcher(matcher);
     }
 
@@ -138,7 +138,7 @@ public final class MatcherConstructor {
      * @return matcher
      */
 
-    public static Matcher notStartsWith(Pattern pattern) {
+    public static Matcher notStartsWith(final Pattern pattern) {
         return new NotStartsWithMatcher(pattern);
     }
 
@@ -148,7 +148,7 @@ public final class MatcherConstructor {
      * @param matcher string matcher
      * @return matcher
      */
-    public static Matcher notEndsWith(String matcher) {
+    public static Matcher notEndsWith(final String matcher) {
         return new NotEndsWithMatcher(matcher);
     }
 
@@ -158,7 +158,7 @@ public final class MatcherConstructor {
      * @param pattern pattern
      * @return matcher
      */
-    public static Matcher notEndsWith(Pattern pattern) {
+    public static Matcher notEndsWith(final Pattern pattern) {
         return new NotEndsWithMatcher(pattern);
     }
 

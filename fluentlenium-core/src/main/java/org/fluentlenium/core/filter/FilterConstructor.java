@@ -16,7 +16,7 @@ public final class FilterConstructor {
      * @param matcherType class for matcherType
      * @return filter object
      */
-    public static Filter buildFilter(String name, FilterType type, Class matcherType) {
+    public static Filter buildFilter(final String name, final FilterType type, final Class matcherType) {
         if (matcherType.equals(ContainsWordMatcher.class)) {
             return new Filter(FilterType.NAME, name);
         }
@@ -29,7 +29,7 @@ public final class FilterConstructor {
      * @param name element name
      * @return filter object
      */
-    public static Filter withName(String name) {
+    public static Filter withName(final String name) {
         return new Filter(FilterType.NAME, name);
     }
 
@@ -39,7 +39,7 @@ public final class FilterConstructor {
      * @param id element id
      * @return filter object
      */
-    public static Filter withId(String id) {
+    public static Filter withId(final String id) {
         return new Filter(FilterType.ID, id);
     }
 
@@ -49,7 +49,7 @@ public final class FilterConstructor {
      * @param klass CSS class name
      * @return filter object
      */
-    public static Filter withClass(String klass) {
+    public static Filter withClass(final String klass) {
         return new Filter(FilterType.CLASS, klass);
     }
 
@@ -59,7 +59,7 @@ public final class FilterConstructor {
      * @param text to filter in content
      * @return filter object
      */
-    public static Filter withText(String text) {
+    public static Filter withText(final String text) {
         return new Filter(FilterType.TEXT, MatcherConstructor.equal(text));
     }
 
@@ -69,7 +69,7 @@ public final class FilterConstructor {
      * @param text to filter in content
      * @return filter object
      */
-    public static Filter containingText(String text) {
+    public static Filter containingText(final String text) {
         return new Filter(FilterType.TEXT, MatcherConstructor.contains(text));
     }
 
@@ -79,7 +79,7 @@ public final class FilterConstructor {
      * @param attribute attribute name
      * @return filter builder object
      */
-    public static FilterBuilder with(String attribute) {
+    public static FilterBuilder with(final String attribute) {
         return new FilterBuilder(attribute);
     }
 

@@ -189,7 +189,7 @@ public interface ConfigurationProperties {
     /**
      * <pre>pageLoadTimeout</pre> property.
      *
-     * Sets the amount of time to wait for a page load to complete before throwing an error.
+     * Sets the amount of time in millisecond to wait for a page load to complete before throwing an error.
      * If the timeout is negative, page loads can be indefinite.
      *
      * Default value is null.
@@ -202,7 +202,7 @@ public interface ConfigurationProperties {
     /**
      * <pre>implicitlyWait</pre> property.
      *
-     * Specifies the amount of time the driver should wait when searching for an element if it is
+     * Specifies the amount of time in millisecond the driver should wait when searching for an element if it is
      * not immediately present.
      *
      * Default value is null.
@@ -215,7 +215,7 @@ public interface ConfigurationProperties {
     /**
      * <pre>scriptTimeout</pre> property.
      *
-     * Sets the amount of time to wait for an asynchronous script to finish execution before
+     * Sets the amount of time in millisecond to wait for an asynchronous script to finish execution before
      * throwing an error. If the timeout is negative, then the script will be allowed to run
      * indefinitely.
      *

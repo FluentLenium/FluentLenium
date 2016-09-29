@@ -31,7 +31,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
     }
 
     public FluentWait(FluentControl fluentControl) {
-        wait = new org.openqa.selenium.support.ui.FluentWait<FluentControl>(fluentControl);
+        wait = new org.openqa.selenium.support.ui.FluentWait<>(fluentControl);
         driver = fluentControl.getDriver();
         useDefaultException = true;
     }

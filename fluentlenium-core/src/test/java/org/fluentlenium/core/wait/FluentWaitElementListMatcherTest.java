@@ -162,7 +162,7 @@ public class FluentWaitElementListMatcherTest {
         };
 
         final FluentListConditions matcher = wait.until(fluentWebElements);
-        ;
+
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {

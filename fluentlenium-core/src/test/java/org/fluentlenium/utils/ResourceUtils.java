@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 public class ResourceUtils {
-    public static File getResourceAsFile(String resourcePath) throws IOException {
+    public static File getResourceAsFile(final String resourcePath) throws IOException {
         InputStream resourceStream = ClassLoader.getSystemClassLoader().getResourceAsStream(resourcePath);
         if (resourceStream == null) {
             return null;
@@ -28,7 +28,7 @@ public class ResourceUtils {
         return tempFile;
     }
 
-    public static URL getResourceAsURL(String resourcePath) throws IOException {
+    public static URL getResourceAsURL(final String resourcePath) throws IOException {
         File resourceAsFile = getResourceAsFile(resourcePath);
         if (resourceAsFile == null) {
             return null;

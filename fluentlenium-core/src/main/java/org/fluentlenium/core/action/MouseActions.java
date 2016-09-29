@@ -5,17 +5,31 @@ import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
 
+/**
+ * Global mouse control interface.
+ */
 public class MouseActions {
     private WebDriver driver;
 
     private Keyboard keyboard;
     private Mouse mouse;
 
-    public MouseActions(WebDriver driver) {
+    /**
+     * Creates a new mouse actions.
+     *
+     * @param driver driver
+     */
+    public MouseActions(final WebDriver driver) {
         this.driver = driver;
     }
 
-    public MouseActions(Keyboard keyboard, Mouse mouse) {
+    /**
+     * Creates a new mouse actions.
+     *
+     * @param keyboard the selenium keyboard interface
+     * @param mouse    the selenium mouse interface
+     */
+    public MouseActions(final Keyboard keyboard, final Mouse mouse) {
         this.keyboard = keyboard;
         this.mouse = mouse;
     }
