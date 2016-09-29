@@ -90,7 +90,7 @@ This example is for JUnit, but you may use other framework the exact same way (S
 
 ##  Fluent Locators
 
-FluentLenium provides a `$` method to build **Fluent Locators**.
+FluentLenium provides `$` and `el` methods to build **Fluent Locators**.
 
   - **CSS Selector**: Creates a Fluent Locator from CSS Selector.
   - **Selenium By Locator**: Creates a Fluent Locator with native Selenium API.
@@ -98,8 +98,8 @@ FluentLenium provides a `$` method to build **Fluent Locators**.
   - **First/Last/Index**: Get a single element from the Fluent Locator.
   - **XPath Axes**: Get another Fluent Locator from its relative position in the DOM.
   
-Fluent Locators are implemented by ```FluentWebElement``` and ```FluentList<FluentWebElement>```. Those classes are 
-wrappers of Selenium ```WebElement``` and ```List<WebElement>```.
+Fluent Locators are implemented by ```FluentWebElement``` (`el`) and ```FluentList<FluentWebElement>``` (`$`). 
+Those classes are wrappers of Selenium ```WebElement``` and ```List<WebElement>```.
 
 ### CSS Selector
 
