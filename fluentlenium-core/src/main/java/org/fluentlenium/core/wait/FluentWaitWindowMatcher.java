@@ -21,7 +21,7 @@ public class FluentWaitWindowMatcher extends AbstractWaitMatcher {
             }
         };
 
-        until(wait, isDisplayed, FluentWaitMessages.isWindowDisplayedMessage(windowName));
+        until(wait, isDisplayed, String.format("Window %s should be displayed.", windowName));
         return true;
     }
 
@@ -33,7 +33,7 @@ public class FluentWaitWindowMatcher extends AbstractWaitMatcher {
             }
         };
 
-        until(wait, isNotDisplayed, FluentWaitMessages.isWindowNotDisplayedMessage(windowName));
+        until(wait, isNotDisplayed, String.format("Window %s should not be displayed.", windowName));
         return true;
     }
 

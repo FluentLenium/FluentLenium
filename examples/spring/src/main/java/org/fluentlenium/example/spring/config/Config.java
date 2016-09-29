@@ -1,0 +1,18 @@
+package org.fluentlenium.example.spring.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+
+@Configuration
+@ComponentScan(value = { "org.fluentlenium.example.spring" })
+@PropertySources(@PropertySource("config.properties"))
+public class Config {
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+}

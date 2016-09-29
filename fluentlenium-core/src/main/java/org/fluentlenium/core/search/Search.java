@@ -8,7 +8,6 @@ import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterPredicate;
-import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -19,23 +18,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Perform FluentLenium search in given context.
+ */
 public class Search implements SearchControl<FluentWebElement> {
     private final SearchContext searchContext;
     private final ComponentInstantiator instantiator;
-    private final HookChainBuilder hookChainBuilder;
 
-    public Search(SearchContext context, ComponentInstantiator instantiator, HookChainBuilder hookChainBuilder) {
+    public Search(SearchContext context, ComponentInstantiator instantiator) {
         this.searchContext = context;
         this.instantiator = instantiator;
-        this.hookChainBuilder = hookChainBuilder;
-    }
-
-    public ComponentInstantiator getInstantiator() {
-        return instantiator;
-    }
-
-    public HookChainBuilder getHookChainBuilder() {
-        return hookChainBuilder;
     }
 
     /**
@@ -101,6 +93,11 @@ public class Search implements SearchControl<FluentWebElement> {
             public List<WebElement> findElements() {
                 return searchContext.findElements(by);
             }
+
+            @Override
+            public String toString() {
+                return by.toString();
+            }
         };
     }
 
@@ -124,34 +121,6 @@ public class Search implements SearchControl<FluentWebElement> {
             throw new IllegalArgumentException("cssSelector or filter is required");
         }
         return find("*", filters);
-    }
-
-    /**
-     * Return the elements at the number position into the the lists corresponding to the cssSelector with it filters
-     *
-     * @param selector elements name to find
-     * @param number   index of element in the list
-     * @param filters  filters set
-     * @return fluent web element
-     */
-    @Override
-    public FluentWebElement find(String selector, Integer number, final Filter... filters) {
-        return find(selector, filters).index(number);
-    }
-
-    /**
-     * Return the element at the number position in the lists corresponding to the filters
-     *
-     * @param index   index of element in container
-     * @param filters filters set
-     * @return fluent web element
-     */
-    @Override
-    public FluentWebElement find(Integer index, Filter... filters) {
-        if (filters == null || filters.length == 0) {
-            throw new IllegalArgumentException("cssSelector or filter is required");
-        }
-        return find("*", index, filters);
     }
 
     /**
@@ -196,8 +165,18 @@ public class Search implements SearchControl<FluentWebElement> {
     }
 
     @Override
+    public FluentWebElement el(String selector, Filter... filters) {
+        return find(selector, filters).first();
+    }
+
+    @Override
     public FluentList<FluentWebElement> $(Filter... filters) {
         return find(filters);
+    }
+
+    @Override
+    public FluentWebElement el(Filter... filters) {
+        return find(filters).first();
     }
 
     @Override
@@ -206,65 +185,8 @@ public class Search implements SearchControl<FluentWebElement> {
     }
 
     @Override
-    public FluentWebElement $(Integer index, Filter... filters) {
-        return find(index, filters);
-    }
-
-    /**
-     * Return the elements at the number position into the the lists corresponding to the cssSelector with it filters
-     *
-     * @param locator elements locator
-     * @param index   index of element in the list
-     * @param filters filters set
-     * @return fluent web element
-     */
-    @Override
-    public FluentWebElement find(By locator, Integer index, final Filter... filters) {
-        return find(locator, filters).index(index);
-    }
-
-    @Override
-    public FluentWebElement $(String selector, Integer index, Filter... filters) {
-        return find(selector, index, filters);
-    }
-
-    @Override
-    public FluentWebElement $(By locator, Integer index, Filter... filters) {
-        return find(locator, index, filters);
-    }
-
-    /**
-     * Return the first elements corresponding to the name and the filters
-     *
-     * @param selector element name to find
-     * @param filters  filters set
-     * @return fluent web element
-     */
-    @Override
-    public FluentWebElement findFirst(String selector, final Filter... filters) {
-        return find(selector, filters).first();
-    }
-
-    /**
-     * Return the first element corresponding to the filters.
-     *
-     * @param filters filters set
-     * @return fluent web element
-     */
-    @Override
-    public FluentWebElement findFirst(Filter... filters) {
-        return find(filters).first();
-    }
-
-    /**
-     * Return the first elements corresponding to the name and the filters
-     *
-     * @param locator element locator
-     * @param filters filters set
-     * @return fluent web element
-     */
-    @Override
-    public FluentWebElement findFirst(By locator, final Filter... filters) {
+    public FluentWebElement el(By locator, Filter... filters) {
         return find(locator, filters).first();
     }
+
 }

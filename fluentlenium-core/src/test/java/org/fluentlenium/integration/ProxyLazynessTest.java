@@ -24,7 +24,7 @@ public class ProxyLazynessTest extends IntegrationFluentTest {
 
     @Test
     public void testMissingElement() {
-        final FluentWebElement fluentWebElement = findFirst("#missing");
+        final FluentWebElement fluentWebElement = el("#missing");
 
         Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override

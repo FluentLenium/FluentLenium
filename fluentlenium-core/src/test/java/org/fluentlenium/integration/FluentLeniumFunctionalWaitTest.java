@@ -33,9 +33,9 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small");
+                return el(".small");
             }
-        }).isPresent();
+        }).present();
     }
 
     @Test
@@ -43,9 +43,9 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small");
+                return el(".small");
             }
-        }).isClickable();
+        }).clickable();
     }
 
     @Test(expected = TimeoutException.class)
@@ -53,19 +53,19 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst("input[disabled]");
+                return el("input[disabled]");
             }
-        }).isClickable();
+        }).clickable();
     }
 
     @Test
     public void checkAwaitHasSize() {
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find(".small");
             }
-        }).each().hasSize(3);
+        }).size(3);
     }
 
     @Test
@@ -73,9 +73,9 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", withText("Small 1"));
+                return el(".small", withText("Small 1"));
             }
-        }).hasText("Small 1");
+        }).text().equalTo("Small 1");
     }
 
     @Test
@@ -83,9 +83,9 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", withName("name"));
+                return el(".small", withName("name"));
             }
-        }).hasName("name");
+        }).name("name");
     }
 
     @Test
@@ -93,9 +93,9 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst("span", withClass("small"));
+                return el("span", withClass("small"));
             }
-        }).hasName("name");
+        }).name("name");
     }
 
     @Test
@@ -103,9 +103,9 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst("span", withClass().contains(regex("smal?")));
+                return el("span", withClass().contains(regex("smal?")));
             }
-        }).hasName("name");
+        }).name("name");
     }
 
     @Test
@@ -113,9 +113,9 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst("span", withClass().containsWord("small"));
+                return el("span", withClass().containsWord("small"));
             }
-        }).hasName("name");
+        }).name("name");
     }
 
     @Test
@@ -123,7 +123,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", withText("Small 1"), containingText("Small 1"));
+                return el(".small", withText("Small 1"), containingText("Small 1"));
             }
         });
     }
@@ -134,9 +134,9 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             await().withMessage("toto").atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
                 @Override
                 public FluentWebElement get() {
-                    return findFirst(".small", withText("Small 1"));
+                    return el(".small", withText("Small 1"));
                 }
-            }).containsText("Small 21");
+            }).text().contains("Small 21");
             fail();
         } catch (TimeoutException e) {
             assertThat(e.getMessage()).contains("toto");
@@ -148,9 +148,9 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small");
+                return el(".small");
             }
-        }).containsText("Small 1");
+        }).text().contains("Small 1");
     }
 
     @Test
@@ -158,29 +158,29 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", withId("id2"));
+                return el(".small", withId("id2"));
             }
-        }).hasId("id2");
+        }).id("id2");
     }
 
     @Test
     public void checkAwaitStartsWithName() {
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find(".small", withName().startsWith("name"));
             }
-        }).each().hasSize(2);
+        }).size(2);
     }
 
     @Test
     public void checkAwaitContainsIdWithIdContains() {
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find(".small", withId().contains("id"));
             }
-        }).each().hasSize(2);
+        }).size(2);
     }
 
     @Test
@@ -188,9 +188,9 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small");
+                return el(".small");
             }
-        }).hasText("Small 1");
+        }).text("Small 1");
     }
 
     @Test
@@ -198,9 +198,9 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small");
+                return el(".small");
             }
-        }).hasName("name");
+        }).name("name");
     }
 
     @Test
@@ -210,7 +210,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find(".small");
             }
-        }).hasId("id2");
+        }).id("id2");
     }
 
     @Test
@@ -218,9 +218,9 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", withText().contains("Small 1"));
+                return el(".small", withText().contains("Small 1"));
             }
-        }).isPresent();
+        }).present();
     }
 
     @Test
@@ -230,7 +230,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find(".small", withText().contains("notPresent"));
             }
-        }).not().isPresent();
+        }).not().present();
     }
 
     @Test(expected = TimeoutException.class)
@@ -238,59 +238,59 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", withText().contains("Small 1"));
+                return el(".small", withText().contains("Small 1"));
             }
-        }).not().isPresent();
+        }).not().present();
     }
 
     @Test
     public void checkAwaitStartWithRegex() {
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").startsWith(regex(".d")));
             }
-        }).each().hasSize(2);
+        }).size(2);
     }
 
     @Test
     public void checkAwaitStartWithString() {
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").startsWith("id"));
             }
-        }).each().hasSize(2);
+        }).size(2);
     }
 
     @Test
     public void checkAwaitNotStartWith() {
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notStartsWith("id"));
             }
-        }).each().hasSize(1);
+        }).size(1);
     }
 
     @Test
     public void checkAwaitNotStartWithRegex() {
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notStartsWith(regex("id")));
             }
-        }).each().hasSize(1);
+        }).size(1);
     }
 
     @Test
     public void checkAwaitEndsWithRegex() {
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").endsWith(regex("2")));
             }
-        }).each().hasSize(1);
+        }).size(1);
     }
 
     @Test
@@ -298,9 +298,9 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", with("id").notEndsWith("2"));
+                return el(".small", with("id").notEndsWith("2"));
             }
-        }).hasId("id");
+        }).id("id");
     }
 
     @Test
@@ -308,29 +308,29 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst(".small", with("id").notEndsWith(regex("2")));
+                return el(".small", with("id").notEndsWith(regex("2")));
             }
-        }).hasId("id");
+        }).id("id");
     }
 
     @Test
     public void checkAwaitNotContains() {
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains("d"));
             }
-        }).each().hasSize(1);
+        }).size(1);
     }
 
     @Test
     public void checkAwaitNotContainsRegex() {
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains(regex("d")));
             }
-        }).each().hasSize(1);
+        }).size(1);
     }
 
     @Test
@@ -340,7 +340,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains("d"));
             }
-        }).hasSize().equalTo(1);
+        }).size().equalTo(1);
     }
 
     @Test
@@ -350,7 +350,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains("d"));
             }
-        }).hasSize().not().equalTo(10);
+        }).size().not().equalTo(10);
     }
 
     @Test
@@ -360,7 +360,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains("d"));
             }
-        }).hasSize().lessThan(4);
+        }).size().lessThan(4);
     }
 
     @Test
@@ -370,7 +370,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains("d"));
             }
-        }).hasSize().lessThanOrEqualTo(1);
+        }).size().lessThanOrEqualTo(1);
     }
 
     @Test
@@ -380,7 +380,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains("d"));
             }
-        }).hasSize().greaterThan(-1);
+        }).size().greaterThan(-1);
     }
 
     @Test
@@ -390,27 +390,27 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").notContains("d"));
             }
-        }).hasSize().greaterThanOrEqualTo(1);
+        }).size().greaterThanOrEqualTo(1);
     }
 
     @Test
     public void checkWithValue() {
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find("input", with("value").equalTo("John"));
             }
-        }).each().hasSize(4);
+        }).size(4);
     }
 
     @Test
     public void checkMultipleFilter() {
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find(".small", with("id").startsWith(regex("id")), with("text").endsWith("2"));
             }
-        }).each().hasSize(1);
+        }).size(1);
     }
 
     @Test
@@ -418,9 +418,9 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst("input");
+                return el("input");
             }
-        }).hasAttribute("value", "John");
+        }).attribute("value", "John");
     }
 
     @Test
@@ -428,20 +428,20 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
-                return findFirst("input", with("value").equalTo("John"));
+                return el("input", with("value").equalTo("John"));
             }
-        }).hasAttribute("value", "John");
+        }).attribute("value", "John");
     }
 
     @Test
     public void when_element_is_present_then_areDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find("#default");
             }
-        }).each().isDisplayed();
+        }).displayed();
     }
 
     @Test
@@ -452,18 +452,18 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find("#default");
             }
-        }).isDisplayed();
+        }).displayed();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_displayed_then_areDisplayed_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find("#unvisible");
             }
-        }).each().isDisplayed();
+        }).displayed();
     }
 
     @Test(expected = TimeoutException.class)
@@ -474,62 +474,62 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find("#unvisible");
             }
-        }).isDisplayed();
+        }).displayed();
     }
 
     @Test
     public void when_element_is_not_present_then_areNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find("#nonexistent");
             }
-        }).each().not().isDisplayed();
+        }).not().displayed();
     }
 
     @Test
     public void when_element_is_not_present_then_isNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find("#nonexistent");
             }
-        }).each().not().isDisplayed();
+        }).not().displayed();
     }
 
     @Test
     public void when_element_is_not_displayed_then_areNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find("#unvisible");
             }
-        }).each().not().isDisplayed();
+        }).not().displayed();
     }
 
     @Test
     public void when_element_is_not_displayed_then_isNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find("#unvisible");
             }
-        }).not().isDisplayed();
+        }).not().displayed();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_displayed_then_areNotDisplayed_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find("#default");
             }
-        }).each().not().isDisplayed();
+        }).not().displayed();
     }
 
     @Test(expected = TimeoutException.class)
@@ -540,18 +540,18 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find("#default");
             }
-        }).not().isDisplayed();
+        }).not().displayed();
     }
 
     @Test
     public void when_element_is_enabled_then_areEnabled_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find("#default");
             }
-        }).each().isEnabled();
+        }).enabled();
     }
 
     @Test
@@ -562,18 +562,18 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find("#default");
             }
-        }).isEnabled();
+        }).enabled();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_enabled_then_areEnabled_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
+        await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
                 return find("#disabled");
             }
-        }).each().isEnabled();
+        }).enabled();
     }
 
     @Test(expected = TimeoutException.class)
@@ -584,7 +584,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find("#disabled");
             }
-        }).isEnabled();
+        }).enabled();
     }
 
     @Test
@@ -595,7 +595,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find("#unvisible");
             }
-        }).isPresent();
+        }).present();
     }
 
     @Test(expected = TimeoutException.class)
@@ -606,13 +606,13 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             public FluentList<FluentWebElement> get() {
                 return find("#default");
             }
-        }).hasText("wait");
+        }).text().equalTo("wait");
     }
 
     private static class MyFluentPage extends FluentPage {
         @Override
         public void isAt() {
-            assertThat(find("#newField").getTexts()).contains("new");
+            assertThat(find("#newField").texts()).contains("new");
         }
 
         @Override

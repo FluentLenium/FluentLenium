@@ -52,7 +52,7 @@ public class PageAdapterTest extends FluentAdapter {
     @Test
     public void checkGoToOnInjectedPage() {
         page.go();
-        Assertions.assertThat(title()).contains("Selenium");
+        Assertions.assertThat(window().title()).contains("Selenium");
     }
 
     @Test

@@ -17,7 +17,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @return
      */
     public FluentListAssert hasText(String textToFind) {
-        List<String> actualTexts = actual.getTexts();
+        List<String> actualTexts = actual.texts();
         for (String text : actualTexts) {
             if (text.contains(textToFind)) {
                 return this;
@@ -33,7 +33,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @return
      */
     public FluentListAssert hasNotText(String textToFind) {
-        List<String> actualTexts = actual.getTexts();
+        List<String> actualTexts = actual.texts();
         for (String text : actualTexts) {
             if (text.contains(textToFind)) {
                 super.failWithMessage("At least one selected elements contains text: " + textToFind + " . Actual texts found : " + actualTexts);
@@ -60,7 +60,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @return
      */
     public FluentListAssert hasId(String idToFind) {
-        List actualIds = actual.getIds();
+        List actualIds = actual.ids();
         if (!actualIds.contains(idToFind)) {
             super.failWithMessage("No selected elements has id: " + idToFind + " . Actual texts found : " + actualIds);
         }
@@ -73,7 +73,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @return
      */
     public FluentListAssert hasClass(String classToFind) {
-        List<String> classesFromElements = (List<String>) actual.getAttributes("class");
+        List<String> classesFromElements = (List<String>) actual.attributes("class");
 
         for (String classesStr : classesFromElements) {
             List<String> classesLst = Arrays.asList(classesStr.split(" "));

@@ -146,7 +146,7 @@ public class FluentInjectorElementTest {
 
         when(webDriver.findElement(any(By.class))).thenReturn(webElement);
 
-        assertThat(container.element.getTagName()).isEqualTo("h1");
+        assertThat(container.element.tagName()).isEqualTo("h1");
         assertThat(container.element).isExactlyInstanceOf(FluentWebElement.class);
         assertThat(container.element.getElement()).isInstanceOf(WebElement.class);
     }
@@ -179,7 +179,7 @@ public class FluentInjectorElementTest {
 
         when(webDriver.findElement(any(By.class))).thenReturn(webElement);
 
-        assertThat(container.element.getTagName()).isEqualTo("h1");
+        assertThat(container.element.tagName()).isEqualTo("h1");
         assertThat(container.element).isExactlyInstanceOf(FluentWebElementSubClass.class);
         assertThat(container.element.getElement()).isInstanceOf(WebElement.class);
     }
@@ -236,11 +236,11 @@ public class FluentInjectorElementTest {
         assertThat(container.element).hasSize(2);
         assertThat(container.element).isInstanceOf(FluentList.class);
 
-        assertThat(container.element.get(0).getTagName()).isEqualTo("h1");
+        assertThat(container.element.get(0).tagName()).isEqualTo("h1");
         assertThat(container.element.get(0)).isExactlyInstanceOf(FluentWebElement.class);
         assertThat(container.element.get(0).getElement()).isInstanceOf(WebElement.class);
 
-        assertThat(container.element.get(1).getTagName()).isEqualTo("h2");
+        assertThat(container.element.get(1).tagName()).isEqualTo("h2");
         assertThat(container.element.get(1)).isExactlyInstanceOf(FluentWebElement.class);
         assertThat(container.element.get(1).getElement()).isInstanceOf(WebElement.class);
     }
@@ -266,11 +266,11 @@ public class FluentInjectorElementTest {
         assertThat(container.element).hasSize(2);
         assertThat(container.element).isInstanceOf(FluentList.class);
 
-        assertThat(container.element.get(0).getTagName()).isEqualTo("h1");
+        assertThat(container.element.get(0).tagName()).isEqualTo("h1");
         assertThat(container.element.get(0)).isExactlyInstanceOf(FluentWebElementSubClass.class);
         assertThat(container.element.get(0).getElement()).isInstanceOf(WebElement.class);
 
-        assertThat(container.element.get(1).getTagName()).isEqualTo("h2");
+        assertThat(container.element.get(1).tagName()).isEqualTo("h2");
         assertThat(container.element.get(1)).isExactlyInstanceOf(FluentWebElementSubClass.class);
         assertThat(container.element.get(1).getElement()).isInstanceOf(WebElement.class);
     }
@@ -296,11 +296,11 @@ public class FluentInjectorElementTest {
         assertThat(container.element).hasSize(2);
         assertThat(container.element).isExactlyInstanceOf(FluentListSubClass.class);
 
-        assertThat(container.element.get(0).getTagName()).isEqualTo("h1");
+        assertThat(container.element.get(0).tagName()).isEqualTo("h1");
         assertThat(container.element.get(0)).isExactlyInstanceOf(FluentWebElementSubClass.class);
         assertThat(container.element.get(0).getElement()).isInstanceOf(WebElement.class);
 
-        assertThat(container.element.get(1).getTagName()).isEqualTo("h2");
+        assertThat(container.element.get(1).tagName()).isEqualTo("h2");
         assertThat(container.element.get(1)).isExactlyInstanceOf(FluentWebElementSubClass.class);
         assertThat(container.element.get(1).getElement()).isInstanceOf(WebElement.class);
     }

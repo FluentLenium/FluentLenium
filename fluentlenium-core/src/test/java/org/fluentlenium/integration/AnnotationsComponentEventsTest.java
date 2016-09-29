@@ -63,10 +63,10 @@ public class AnnotationsComponentEventsTest extends IntegrationFluentTest {
     public void clickOnFirst() {
         goTo(DEFAULT_URL);
 
-        Component button = findFirst("button").as(Component.class);
+        Component button = el("button").as(Component.class);
         button.click();
 
-        Component otherButton = findFirst("button").as(Component.class);
+        Component otherButton = el("button").as(Component.class);
 
         assertThat(button.beforeClick).isEqualTo(1);
         assertThat(button.afterClick).isEqualTo(1);
@@ -141,11 +141,11 @@ public class AnnotationsComponentEventsTest extends IntegrationFluentTest {
     public void findBy() {
         goTo(DEFAULT_URL);
 
-        Component htmlComponent = findFirst("html").as(Component.class);
-        htmlComponent.findFirst("button").isPresent();
+        Component htmlComponent = el("html").as(Component.class);
+        htmlComponent.el("button").present();
 
-        Component otherHtmlComponent = findFirst("html").as(Component.class);
-        otherHtmlComponent.isPresent();
+        Component otherHtmlComponent = el("html").as(Component.class);
+        otherHtmlComponent.present();
 
         assertThat(htmlComponent.beforeFindBy).hasSize(1);
         assertThat(htmlComponent.afterFindBy).hasSize(1);

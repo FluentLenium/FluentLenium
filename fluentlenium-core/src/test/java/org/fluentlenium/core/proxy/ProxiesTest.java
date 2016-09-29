@@ -219,13 +219,13 @@ public class ProxiesTest {
         when(locator.toString()).thenReturn("element1-locator");
 
         WebElement webElement = LocatorProxies.createWebElement(locator);
-        assertThat(webElement.toString()).isEqualTo("Proxy for element1-locator");
+        assertThat(webElement.toString()).isEqualTo("element1-locator (Lazy Element)");
 
         assertThat(LocatorProxies.isLoaded(webElement)).isFalse();
 
         LocatorProxies.now(webElement);
 
-        assertThat(webElement.toString()).isEqualTo(element1.toString());
+        assertThat(webElement.toString()).isEqualTo("element1-locator (" + element1.toString() + ")");
     }
 
     @Test

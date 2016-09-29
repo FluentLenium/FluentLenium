@@ -19,12 +19,12 @@ public class IframeTest extends IntegrationFluentTest {
         iFramePage.go();
         // Then
         iFramePage.isAt();
-        assertThat($("h1").getText()).isEqualTo("Heading 1");
+        assertThat($("h1").text()).isEqualTo("Heading 1");
         getDriver().switchTo().frame("iframe1");
-        assertThat($("h1").getText()).isEqualTo("Heading");
-        assertThat($("#oneline").getText()).isEqualTo("A single line of text");
+        assertThat($("h1").text()).isEqualTo("Heading");
+        assertThat($("#oneline").text()).isEqualTo("A single line of text");
         getDriver().switchTo().defaultContent();
-        assertThat($("h2").getText()).isEqualTo("Heading 2");
+        assertThat($("h2").text()).isEqualTo("Heading 2");
     }
 
     @Test
@@ -34,12 +34,12 @@ public class IframeTest extends IntegrationFluentTest {
         iFramePage.go();
         // Then
         iFramePage.isAt();
-        assertThat($("h1").getText()).isEqualTo("Heading 1");
-        iFramePage.switchTo(findFirst("#iframe1"));
-        assertThat($("h1").getText()).isEqualTo("Heading");
-        assertThat($("#oneline").getText()).isEqualTo("A single line of text");
+        assertThat($("h1").text()).isEqualTo("Heading 1");
+        iFramePage.switchTo(el("#iframe1"));
+        assertThat($("h1").text()).isEqualTo("Heading");
+        assertThat($("#oneline").text()).isEqualTo("A single line of text");
         iFramePage.switchToDefault();
-        assertThat($("h2").getText()).isEqualTo("Heading 2");
+        assertThat($("h2").text()).isEqualTo("Heading 2");
     }
 
     @Test
@@ -49,12 +49,12 @@ public class IframeTest extends IntegrationFluentTest {
         iFramePage.go();
         // Then
         iFramePage.isAt();
-        assertThat($("h1").getText()).isEqualTo("Heading 1");
-        iFramePage.switchTo(findFirst("#iframe1"));
-        assertThat($("h1").getText()).isEqualTo("Heading");
-        assertThat($("#oneline").getText()).isEqualTo("A single line of text");
+        assertThat($("h1").text()).isEqualTo("Heading 1");
+        iFramePage.switchTo(el("#iframe1"));
+        assertThat($("h1").text()).isEqualTo("Heading");
+        assertThat($("#oneline").text()).isEqualTo("A single line of text");
         iFramePage.switchTo();
-        assertThat($("h2").getText()).isEqualTo("Heading 2");
+        assertThat($("h2").text()).isEqualTo("Heading 2");
     }
 
     @Test
@@ -64,12 +64,12 @@ public class IframeTest extends IntegrationFluentTest {
         iFramePage.go();
         // Then
         iFramePage.isAt();
-        assertThat($("h1").getText()).isEqualTo("Heading 1");
-        iFramePage.switchTo(findFirst("#iframe1"));
-        assertThat($("h1").getText()).isEqualTo("Heading");
-        assertThat($("#oneline").getText()).isEqualTo("A single line of text");
+        assertThat($("h1").text()).isEqualTo("Heading 1");
+        iFramePage.switchTo(el("#iframe1"));
+        assertThat($("h1").text()).isEqualTo("Heading");
+        assertThat($("#oneline").text()).isEqualTo("A single line of text");
         iFramePage.switchToDefault();
-        assertThat($("h2").getText()).isEqualTo("Heading 2");
+        assertThat($("h2").text()).isEqualTo("Heading 2");
     }
 
 }

@@ -1,7 +1,10 @@
 package org.fluentlenium.core.domain;
 
 import com.google.common.base.Function;
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
+import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
@@ -9,18 +12,21 @@ import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.AtLeastOneElementConditions;
 import org.fluentlenium.core.conditions.EachElementConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
+import org.fluentlenium.core.conditions.wait.WaitConditionProxy;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
+import org.fluentlenium.core.label.FluentLabel;
+import org.fluentlenium.core.label.FluentLabelImpl;
 import org.fluentlenium.core.proxy.LocatorProxies;
+import org.fluentlenium.core.wait.FluentWaitElementList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -31,36 +37,22 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     private final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
     private HookChainBuilder hookChainBuilder;
 
-    public FluentListImpl(Class<E> componentClass, List<E> list, FluentControl fluentControl, ComponentInstantiator instantiator) {
+    private final FluentLabelImpl<FluentListImpl<E>> label;
+
+    public FluentListImpl(Class<E> componentClass, final List<E> list, FluentControl fluentControl, ComponentInstantiator instantiator) {
         super(componentClass, list, fluentControl, instantiator);
         this.hookChainBuilder = new DefaultHookChainBuilder(fluentControl, instantiator);
+        this.label = new FluentLabelImpl<>(this, new Supplier<String>() {
+            @Override
+            public String get() {
+                return list.toString();
+            }
+        });
     }
 
-
-    /**
-     * Creates a FluentList from array of Selenium {@link WebElement}
-     *
-     * @param instantiator     component instantiator
-     * @param hookChainBuilder hook chain builder
-     * @param elements         array of Selenium elements
-     * @return list of elements
-     */
-    @Deprecated
-    public static FluentList<FluentWebElement> fromElements(ComponentInstantiator instantiator, HookChainBuilder hookChainBuilder, WebElement... elements) {
-        return fromElements(instantiator, hookChainBuilder, Arrays.asList(elements));
-    }
-
-    /**
-     * Creates a FluentList from an iterable of Selenium {@link WebElement}
-     *
-     * @param instantiator     component instantiator
-     * @param hookChainBuilder hook chain builder
-     * @param elements         iterable of Selenium elements
-     * @return FluentList of FluentWebElement
-     */
-    @Deprecated
-    public static FluentList<FluentWebElement> fromElements(ComponentInstantiator instantiator, HookChainBuilder hookChainBuilder, Iterable<WebElement> elements) {
-        return instantiator.asFluentList(FluentWebElement.class, elements);
+    @Delegate
+    private FluentLabel<FluentListImpl<E>> getLabel() {
+        return label;
     }
 
     @Override
@@ -73,12 +65,21 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         return elements;
     }
 
+    public FluentWaitElementList await() {
+        return new FluentWaitElementList(fluentControl.await(), this);
+    }
+
     @Override
     public E first() {
         if (!LocatorProxies.isLoaded(proxy)) {
             WebElement first = LocatorProxies.first(proxy);
             LocatorProxies.setHooks(first, hookChainBuilder, hookDefinitions);
-            return instantiator.newComponent(componentClass, first);
+            E component = instantiator.newComponent(componentClass, first);
+            if (component instanceof FluentLabel) {
+                component.withLabel(label.getLabel());
+                component.withLabelHint(label.getLabelHints());
+            }
+            return component;
         }
         if (this.size() == 0) {
             throw new NoSuchElementException("Element not found");
@@ -91,7 +92,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         if (!LocatorProxies.isLoaded(proxy)) {
             WebElement last = LocatorProxies.last(proxy);
             LocatorProxies.setHooks(last, hookChainBuilder, hookDefinitions);
-            return instantiator.newComponent(componentClass, last);
+            E component = instantiator.newComponent(componentClass, last);
+            if (component instanceof FluentLabel) {
+                component.withLabel(label.getLabel());
+                component.withLabelHint(label.getLabelHints());
+            }
+            return component;
         }
         if (this.size() == 0) {
             throw new NoSuchElementException("Element not found");
@@ -104,7 +110,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         if (!LocatorProxies.isLoaded(proxy)) {
             WebElement indexElement = LocatorProxies.index(proxy, index);
             LocatorProxies.setHooks(indexElement, hookChainBuilder, hookDefinitions);
-            return instantiator.newComponent(componentClass, indexElement);
+            E component = instantiator.newComponent(componentClass, indexElement);
+            if (component instanceof FluentLabel) {
+                component.withLabel(label.getLabel());
+                component.withLabelHint(label.getLabelHints());
+            }
+            return component;
         }
         if (this.size() <= index) {
             throw new NoSuchElementException("Element not found");
@@ -113,7 +124,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public boolean isPresent() {
+    public boolean present() {
         if (LocatorProxies.getLocatorHandler(proxy) != null) {
             return LocatorProxies.isPresent(this);
         }
@@ -136,7 +147,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public boolean isLoaded() {
+    public boolean loaded() {
         return LocatorProxies.isLoaded(this);
     }
 
@@ -147,7 +158,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         }
 
         for (E fluentWebElement : this) {
-            if (fluentWebElement.isEnabled()) {
+            if (fluentWebElement.enabled()) {
                 fluentWebElement.click();
             }
         }
@@ -155,7 +166,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public FluentList text(String... with) {
+    public FluentList write(String... with) {
         if (this.size() == 0) {
             throw new NoSuchElementException("Element not found");
         }
@@ -166,15 +177,15 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             String value;
 
             for (E fluentWebElement : this) {
-                if (fluentWebElement.isDisplayed()) {
+                if (fluentWebElement.displayed()) {
                     if (with.length > id) {
                         value = with[id++];
                     } else {
                         value = with[with.length - 1];
                     }
-                    if (fluentWebElement.isEnabled()) {
+                    if (fluentWebElement.enabled()) {
                         atMostOne = true;
-                        fluentWebElement.text(value);
+                        fluentWebElement.write(value);
                     }
                 }
             }
@@ -193,7 +204,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         }
 
         for (E fluentWebElement : this) {
-            if (fluentWebElement.isEnabled()) {
+            if (fluentWebElement.enabled()) {
                 fluentWebElement.clear();
             }
         }
@@ -211,9 +222,17 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         return new EachElementConditions(this);
     }
 
+    public FluentListConditions awaitUntilEach() {
+        return WaitConditionProxy.each(fluentControl.await(), this.toString(), Suppliers.ofInstance(this));
+    }
+
     @Override
     public FluentListConditions one() {
         return new AtLeastOneElementConditions(this);
+    }
+
+    public FluentListConditions awaitUntilOne() {
+        return WaitConditionProxy.one(fluentControl.await(), this.toString(), Suppliers.ofInstance(this));
     }
 
     @Override
@@ -223,7 +242,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         }
 
         for (E fluentWebElement : this) {
-            if (fluentWebElement.isEnabled()) {
+            if (fluentWebElement.enabled()) {
                 fluentWebElement.submit();
             }
         }
@@ -231,120 +250,120 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public List<String> getValues() {
+    public List<String> values() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
-                return webElement.getValue();
+                return webElement.value();
             }
         });
     }
 
     @Override
-    public List<String> getIds() {
+    public List<String> ids() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
-                return webElement.getId();
+                return webElement.id();
             }
         });
     }
 
     @Override
-    public List<String> getAttributes(final String attribute) {
+    public List<String> attributes(final String attribute) {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
-                return webElement.getAttribute(attribute);
+                return webElement.attribute(attribute);
             }
         });
     }
 
     @Override
-    public List<String> getNames() {
+    public List<String> names() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
-                return webElement.getName();
+                return webElement.name();
             }
         });
     }
 
     @Override
-    public List<String> getTagNames() {
+    public List<String> tagNames() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
-                return webElement.getTagName();
+                return webElement.tagName();
             }
         });
     }
 
     @Override
-    public List<String> getTextContents() {
+    public List<String> textContents() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
-                return webElement.getTextContent();
+                return webElement.textContent();
             }
         });
     }
 
     @Override
-    public List<String> getTexts() {
+    public List<String> texts() {
         return Lists.transform(this, new Function<E, String>() {
             public String apply(E webElement) {
-                return webElement.getText();
+                return webElement.text();
             }
         });
     }
 
     @Override
-    public String getValue() {
+    public String value() {
         if (this.size() > 0) {
-            return this.get(0).getValue();
+            return this.get(0).value();
         }
         return null;
     }
 
     @Override
-    public String getId() {
+    public String id() {
         if (this.size() > 0) {
-            return this.get(0).getId();
+            return this.get(0).id();
         }
         return null;
     }
 
     @Override
-    public String getAttribute(final String attribute) {
+    public String attribute(final String attribute) {
         if (this.size() > 0) {
-            return this.get(0).getAttribute(attribute);
+            return this.get(0).attribute(attribute);
         }
         return null;
     }
 
     @Override
-    public String getName() {
+    public String name() {
         if (this.size() > 0) {
-            return this.get(0).getName();
+            return this.get(0).name();
         }
         return null;
     }
 
     @Override
-    public String getTagName() {
+    public String tagName() {
         if (this.size() > 0) {
-            return this.get(0).getTagName();
+            return this.get(0).tagName();
         }
         return null;
     }
 
     @Override
-    public String getText() {
+    public String text() {
         if (this.size() > 0) {
-            return this.get(0).getText();
+            return this.get(0).text();
         }
         return null;
     }
 
     @Override
-    public String getTextContent() {
+    public String textContent() {
         if (this.size() > 0) {
-            return this.get(0).getTextContent();
+            return this.get(0).textContent();
         }
         return null;
     }
@@ -355,8 +374,18 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
+    public E el(String selector, Filter... filters) {
+        return find(selector, filters).first();
+    }
+
+    @Override
     public FluentList<E> $(Filter... filters) {
         return find(filters);
+    }
+
+    @Override
+    public E el(Filter... filters) {
+        return find(filters).first();
     }
 
     @Override
@@ -365,8 +394,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public E $(Integer index, Filter... filters) {
-        return find(index, filters);
+    public E el(By locator, Filter... filters) {
+        return find(locator, filters).first();
     }
 
     @Override
@@ -394,64 +423,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             finds.addAll((Collection<E>) e.find(filters));
         }
         return instantiator.newComponentList(getClass(), componentClass, finds);
-    }
-
-    @Override
-    public E find(String selector, Integer number, Filter... filters) {
-        FluentList<E> fluentList = find(selector, filters);
-        if (number >= fluentList.size()) {
-            throw new NoSuchElementException(
-                    "No such element with position: " + number + ". Number of elements available: " + fluentList.size()
-                            + ". Selector: " + selector + ".");
-        }
-        return fluentList.get(number);
-    }
-
-    @Override
-    public E find(By locator, Integer index, Filter... filters) {
-        FluentList<E> fluentList = find(locator, filters);
-        if (index >= fluentList.size()) {
-            throw new NoSuchElementException(
-                    "No such element with position: " + index + ". Number of elements available: " + fluentList
-                            .size());
-        }
-        return fluentList.get(index);
-    }
-
-    @Override
-    public E $(String selector, Integer index, Filter... filters) {
-        return find(selector, index, filters);
-    }
-
-    @Override
-    public E $(By locator, Integer index, Filter... filters) {
-        return find(locator, index, filters);
-    }
-
-    @Override
-    public E find(Integer index, Filter... filters) {
-        FluentList<E> fluentList = find(filters);
-        if (index >= fluentList.size()) {
-            throw new NoSuchElementException(
-                    "No such element with position: " + index + ". Number of elements available: " + fluentList.size()
-                            + ".");
-        }
-        return fluentList.get(index);
-    }
-
-    @Override
-    public E findFirst(By locator, Filter... filters) {
-        return find(locator, 0, filters);
-    }
-
-    @Override
-    public E findFirst(String selector, Filter... filters) {
-        return find(selector, 0, filters);
-    }
-
-    @Override
-    public E findFirst(Filter... filters) {
-        return find(0, filters);
     }
 
     /**
@@ -510,6 +481,11 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Override
     public void clear() {
         clearAll();
+    }
+
+    @Override
+    public String toString() {
+        return label.toString();
     }
 }
 

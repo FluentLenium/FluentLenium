@@ -68,7 +68,7 @@ public class ElementAsTest extends IntegrationFluentTest {
     @Test
     public void testAsComponent() {
         goTo(DEFAULT_URL);
-        Component span = findFirst("span").as(Component.class);
+        Component span = el("span").as(Component.class);
         assertThat(span).isNotNull();
 
         FluentList<Component> spans = find("span").as(Component.class);
@@ -78,19 +78,19 @@ public class ElementAsTest extends IntegrationFluentTest {
     @Test(expected = ComponentException.class)
     public void testAsNotAComponent() {
         goTo(DEFAULT_URL);
-        findFirst("span").as(NotAComponent.class);
+        el("span").as(NotAComponent.class);
     }
 
     @Test(expected = ComponentException.class)
     public void testAsDefaultConstructorComponent() {
         goTo(DEFAULT_URL);
-        InvalidComponent span = findFirst("span").as(InvalidComponent.class);
+        InvalidComponent span = el("span").as(InvalidComponent.class);
     }
 
     @Test
     public void testAsFullConstructorComponent() {
         goTo(DEFAULT_URL);
-        FullConstructorComponent component = findFirst("span").as(FullConstructorComponent.class);
+        FullConstructorComponent component = el("span").as(FullConstructorComponent.class);
 
         assertThat(component.fluentControl).isInstanceOf(FluentDriver.class);
         assertThat(component.element.getTagName()).isEqualTo("span");
@@ -100,7 +100,7 @@ public class ElementAsTest extends IntegrationFluentTest {
     @Test
     public void findByComponent() {
         goTo(DEFAULT_URL);
-        assertThat(goNextLink.isDisplayed()).isTrue();
+        assertThat(goNextLink.displayed()).isTrue();
     }
 
     @Test

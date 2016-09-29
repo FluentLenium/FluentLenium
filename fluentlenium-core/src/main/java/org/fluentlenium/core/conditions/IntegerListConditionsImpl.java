@@ -29,8 +29,8 @@ public class IntegerListConditionsImpl implements IntegerConditions {
     }
 
     @Override
-    public boolean isVerified(final Predicate<Integer> predicate) {
-        return listConditions.isVerified(new Predicate<FluentWebElement>() {
+    public boolean verify(final Predicate<Integer> predicate) {
+        return listConditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return predicate.apply(integerGetter.apply(input));
@@ -45,7 +45,7 @@ public class IntegerListConditionsImpl implements IntegerConditions {
 
     @Override
     public boolean equalTo(final int value) {
-        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.listConditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).equalTo(value);
@@ -55,7 +55,7 @@ public class IntegerListConditionsImpl implements IntegerConditions {
 
     @Override
     public boolean lessThan(final int value) {
-        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.listConditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).lessThan(value);
@@ -65,7 +65,7 @@ public class IntegerListConditionsImpl implements IntegerConditions {
 
     @Override
     public boolean lessThanOrEqualTo(final int value) {
-        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.listConditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).lessThanOrEqualTo(value);
@@ -75,7 +75,7 @@ public class IntegerListConditionsImpl implements IntegerConditions {
 
     @Override
     public boolean greaterThan(final int value) {
-        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.listConditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).greaterThan(value);
@@ -85,7 +85,7 @@ public class IntegerListConditionsImpl implements IntegerConditions {
 
     @Override
     public boolean greaterThanOrEqualTo(final int value) {
-        return this.listConditions.isVerified(new Predicate<FluentWebElement>() {
+        return this.listConditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).greaterThanOrEqualTo(value);

@@ -75,4 +75,9 @@ public class LazyComponentList<T> implements List<T>, WrapsElements, LazyCompone
     public List<WebElement> getWrappedElements() {
         return this.elements;
     }
+
+    @Override
+    public String toString() {
+        return isLazyInitialized() ? list.toString() : this.elements.toString();
+    }
 }

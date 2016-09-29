@@ -36,14 +36,14 @@ public class SearchHookTest {
         FluentAdapter fluentAdapter = new FluentAdapter(driver);
 
         instantiator = new DefaultComponentInstantiator(fluentAdapter);
-        search = new Search(driver, instantiator, new DefaultHookChainBuilder(fluentAdapter, instantiator));
+        search = new Search(driver, instantiator);
 
         Mockito.when(driver.findElements(By.cssSelector(".selector"))).thenReturn(Arrays.asList(element));
     }
 
     @Test
     public void testHookedSearch() {
-        FluentWebElement hookedElement = search.findFirst(".selector").withHook(NanoHook.class).click();
+        FluentWebElement hookedElement = search.el(".selector").withHook(NanoHook.class).click();
 
         Mockito.verify(element).click();
 

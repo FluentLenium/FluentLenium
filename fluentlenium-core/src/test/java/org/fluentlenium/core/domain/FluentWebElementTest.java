@@ -84,7 +84,7 @@ public class FluentWebElementTest {
     @Test
     public void testConditions() {
         when(element.isEnabled()).thenReturn(true);
-        assertThat(fluentElement.conditions().isEnabled()).isTrue();
+        assertThat(fluentElement.conditions().enabled()).isTrue();
     }
 
     @Test
@@ -120,7 +120,7 @@ public class FluentWebElementTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.isEnabled();
+                fluentElement.enabled();
             }
         }).isExactlyInstanceOf(ComponentException.class);
 
@@ -152,7 +152,7 @@ public class FluentWebElementTest {
 
     @Test
     public void testText() {
-        fluentElement.text("abc");
+        fluentElement.write("abc");
         verify(element).clear();
         verify(element).sendKeys("abc");
     }
@@ -160,80 +160,80 @@ public class FluentWebElementTest {
     @Test
     public void testGetName() {
         when(element.getAttribute("name")).thenReturn("test");
-        assertThat(fluentElement.getName()).isEqualTo("test");
+        assertThat(fluentElement.name()).isEqualTo("test");
     }
 
 
     @Test
     public void testGetAttribute() {
         when(element.getAttribute("attr")).thenReturn("test");
-        assertThat(fluentElement.getAttribute("attr")).isEqualTo("test");
+        assertThat(fluentElement.attribute("attr")).isEqualTo("test");
     }
 
     @Test
     public void testGetId() {
         when(element.getAttribute("id")).thenReturn("test");
-        assertThat(fluentElement.getId()).isEqualTo("test");
+        assertThat(fluentElement.id()).isEqualTo("test");
     }
 
     @Test
     public void testGetText() {
         when(element.getText()).thenReturn("test");
-        assertThat(fluentElement.getText()).isEqualTo("test");
+        assertThat(fluentElement.text()).isEqualTo("test");
     }
 
     @Test
     public void testGetTextContext() {
         when(element.getAttribute("textContent")).thenReturn("test");
-        assertThat(fluentElement.getTextContent()).isEqualTo("test");
+        assertThat(fluentElement.textContent()).isEqualTo("test");
     }
 
     @Test
     public void testGetValue() {
         when(element.getAttribute("value")).thenReturn("test");
-        assertThat(fluentElement.getValue()).isEqualTo("test");
+        assertThat(fluentElement.value()).isEqualTo("test");
     }
 
     @Test
     public void testIsDisplayed() {
-        assertThat(fluentElement.isDisplayed()).isFalse();
+        assertThat(fluentElement.displayed()).isFalse();
         when(element.isDisplayed()).thenReturn(true);
-        assertThat(fluentElement.isDisplayed()).isTrue();
+        assertThat(fluentElement.displayed()).isTrue();
     }
 
     @Test
     public void testIsEnabled() {
-        assertThat(fluentElement.isEnabled()).isFalse();
+        assertThat(fluentElement.enabled()).isFalse();
         when(element.isEnabled()).thenReturn(true);
-        assertThat(fluentElement.isEnabled()).isTrue();
+        assertThat(fluentElement.enabled()).isTrue();
     }
 
     @Test
     public void testIsSelected() {
-        assertThat(fluentElement.isSelected()).isFalse();
+        assertThat(fluentElement.selected()).isFalse();
         when(element.isSelected()).thenReturn(true);
-        assertThat(fluentElement.isSelected()).isTrue();
+        assertThat(fluentElement.selected()).isTrue();
     }
 
     @Test
     public void testIsClickable() {
-        assertThat(fluentElement.isClickable()).isFalse();
+        assertThat(fluentElement.clickable()).isFalse();
         when(element.isEnabled()).thenReturn(true);
         when(element.isDisplayed()).thenReturn(true);
-        assertThat(fluentElement.isClickable()).isTrue();
+        assertThat(fluentElement.clickable()).isTrue();
     }
 
     @Test
     public void testIsStable() {
-        assertThat(fluentElement.isStale()).isFalse();
+        assertThat(fluentElement.stale()).isFalse();
         when(element.isEnabled()).thenThrow(StaleElementReferenceException.class);
-        assertThat(fluentElement.isStale()).isTrue();
+        assertThat(fluentElement.stale()).isTrue();
     }
 
     @Test
     public void testGetTagName() {
         when(element.getTagName()).thenReturn("test");
-        assertThat(fluentElement.getTagName()).isEqualTo("test");
+        assertThat(fluentElement.tagName()).isEqualTo("test");
     }
 
     @Test
@@ -244,7 +244,7 @@ public class FluentWebElementTest {
     @Test
     public void testGetSize() {
         when(element.getSize()).thenReturn(new Dimension(10, 20));
-        assertThat(fluentElement.getSize()).isEqualTo(new Dimension(10, 20));
+        assertThat(fluentElement.size()).isEqualTo(new Dimension(10, 20));
     }
 
     @Test
@@ -257,11 +257,11 @@ public class FluentWebElementTest {
         fluentElement.find(".test");
         fluentElement.find(By.cssSelector(".test"));
 
-        fluentElement.$(".test", 1);
-        fluentElement.$(By.cssSelector(".test"), 1);
+        fluentElement.$(".test").index(1);
+        fluentElement.$(By.cssSelector(".test")).index(1);
 
-        fluentElement.find(".test", 1);
-        fluentElement.find(By.cssSelector(".test"), 1);
+        fluentElement.find(".test").index(1);
+        fluentElement.find(By.cssSelector(".test")).index(1);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -272,7 +272,7 @@ public class FluentWebElementTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.$(1);
+                fluentElement.$().index(1);
             }
         }).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
@@ -284,40 +284,40 @@ public class FluentWebElementTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.find(1);
+                fluentElement.find().index(1);
             }
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    public void testFindFirst() {
+    public void testel() {
         WebElement findElement = mock(WebElement.class);
 
         when(element.findElements(By.cssSelector(".test"))).thenReturn(Arrays.asList(findElement));
 
-        assertThat(fluentElement.findFirst(".test").now().getElement()).isEqualTo(findElement);
-        assertThat(fluentElement.findFirst(By.cssSelector(".test")).now().getElement()).isEqualTo(findElement);
+        assertThat(fluentElement.el(".test").now().getElement()).isEqualTo(findElement);
+        assertThat(fluentElement.el(By.cssSelector(".test")).now().getElement()).isEqualTo(findElement);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.findFirst(".other").now();
+                fluentElement.el(".other").now();
             }
         }).isInstanceOf(NoSuchElementException.class);
 
-        assertThat(fluentElement.findFirst(By.cssSelector(".other")).isPresent()).isFalse();
+        assertThat(fluentElement.el(By.cssSelector(".other")).present()).isFalse();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.findFirst(By.cssSelector(".other")).now();
+                fluentElement.el(By.cssSelector(".other")).now();
             }
         }).isInstanceOf(NoSuchElementException.class);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.findFirst().now();
+                fluentElement.el().now();
             }
         }).isInstanceOf(IllegalArgumentException.class);
     }

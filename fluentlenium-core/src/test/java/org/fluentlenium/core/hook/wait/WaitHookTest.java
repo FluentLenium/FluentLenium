@@ -5,9 +5,6 @@ import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
-import org.fluentlenium.core.hook.DefaultHookChainBuilder;
-import org.fluentlenium.core.hook.HookChainBuilder;
-import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.wait.FluentWait;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,16 +46,13 @@ public class WaitHookTest {
     private ComponentInstantiator instantiator;
 
     private WaitHook waitHook;
-
-    private HookChainBuilder hookChainBuilder;
-
+    
     private FluentWait wait;
 
     @Before
     public void before() {
         instantiator = new DefaultComponentInstantiator(fluentControl);
-        hookChainBuilder = new DefaultHookChainBuilder(fluentControl, instantiator);
-        wait = new FluentWait(fluentControl, new Search(driver, instantiator, hookChainBuilder));
+        wait = new FluentWait(fluentControl);
 
         when(fluentControl.await()).thenReturn(wait);
         when(element.isEnabled()).thenReturn(true);

@@ -24,13 +24,13 @@ public interface FluentActions<T, E extends FluentWebElement> {
     T submit();
 
     /**
-     * Send text.
+     * Write text in the element.
      *
      * @param text one or many text to send.
      * @return this object reference to chain methods calls.
      * @see WebElement#sendKeys(CharSequence...)
      */
-    T text(String... text);
+    T write(String... text);
 
     /**
      * Construct a Fill Builder in order to allow easy fill of visible input fields.

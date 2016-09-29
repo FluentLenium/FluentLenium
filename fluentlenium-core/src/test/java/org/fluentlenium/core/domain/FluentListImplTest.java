@@ -4,9 +4,7 @@ import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
-import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.conditions.WebElementConditions;
-import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -90,47 +88,34 @@ public class FluentListImplTest {
     }
 
     @Test
-    public void testFromToElements() {
-        WebElement webElement1 = mock(WebElement.class);
-        WebElement webElement2 = mock(WebElement.class);
-        WebElement webElement3 = mock(WebElement.class);
-
-        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
-        DefaultHookChainBuilder hookChainBuilder = new DefaultHookChainBuilder(fluentAdapter, instantiator);
-
-        FluentList<FluentWebElement> list = FluentListImpl.fromElements(instantiator, hookChainBuilder, webElement1, webElement2, webElement3);
-        assertThat(list.toElements()).containsExactly(webElement1, webElement2, webElement3);
-    }
-
-    @Test
     public void testEach() {
-        when(element1.isEnabled()).thenReturn(true);
-        when(element2.isEnabled()).thenReturn(true);
-        when(element3.isEnabled()).thenReturn(true);
+        when(element1.enabled()).thenReturn(true);
+        when(element2.enabled()).thenReturn(true);
+        when(element3.enabled()).thenReturn(true);
 
-        assertThat(list.each().isEnabled()).isTrue();
+        assertThat(list.each().enabled()).isTrue();
 
-        verify(element1).isEnabled();
-        verify(element2).isEnabled();
-        verify(element3).isEnabled();
+        verify(element1).enabled();
+        verify(element2).enabled();
+        verify(element3).enabled();
     }
 
     @Test
     public void testOne() {
-        when(element2.isEnabled()).thenReturn(true);
-        when(element3.isEnabled()).thenReturn(true);
+        when(element2.enabled()).thenReturn(true);
+        when(element3.enabled()).thenReturn(true);
 
-        assertThat(list.one().isEnabled()).isTrue();
+        assertThat(list.one().enabled()).isTrue();
 
-        verify(element1).isEnabled();
-        verify(element2).isEnabled();
-        verify(element3, never()).isEnabled();
+        verify(element1).enabled();
+        verify(element2).enabled();
+        verify(element3, never()).enabled();
     }
 
     @Test
     public void testClick() {
-        when(element2.isEnabled()).thenReturn(true);
-        when(element3.isEnabled()).thenReturn(true);
+        when(element2.enabled()).thenReturn(true);
+        when(element3.enabled()).thenReturn(true);
 
         list.click();
 
@@ -148,21 +133,21 @@ public class FluentListImplTest {
 
     @Test
     public void testText() {
-        when(element2.isDisplayed()).thenReturn(true);
-        when(element3.isDisplayed()).thenReturn(true);
-        when(element2.isEnabled()).thenReturn(true);
-        when(element3.isEnabled()).thenReturn(true);
+        when(element2.displayed()).thenReturn(true);
+        when(element3.displayed()).thenReturn(true);
+        when(element2.enabled()).thenReturn(true);
+        when(element3.enabled()).thenReturn(true);
 
-        list.text("abc");
+        list.write("abc");
 
-        verify(element1, never()).text("abc");
-        verify(element2).text("abc");
-        verify(element3).text("abc");
+        verify(element1, never()).write("abc");
+        verify(element2).write("abc");
+        verify(element3).write("abc");
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                emptyList.text("abc");
+                emptyList.write("abc");
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
 
@@ -171,15 +156,15 @@ public class FluentListImplTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                list.text("abc");
+                list.write("abc");
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
     }
 
     @Test
     public void testSubmit() {
-        when(element2.isEnabled()).thenReturn(true);
-        when(element3.isEnabled()).thenReturn(true);
+        when(element2.enabled()).thenReturn(true);
+        when(element3.enabled()).thenReturn(true);
 
         list.submit();
 
@@ -197,8 +182,8 @@ public class FluentListImplTest {
 
     @Test
     public void testClearAll() {
-        when(element2.isEnabled()).thenReturn(true);
-        when(element3.isEnabled()).thenReturn(true);
+        when(element2.enabled()).thenReturn(true);
+        when(element3.enabled()).thenReturn(true);
 
         list.clearAll();
 
@@ -216,85 +201,85 @@ public class FluentListImplTest {
 
     @Test
     public void testProperties() {
-        when(element1.getValue()).thenReturn("1");
-        when(element2.getValue()).thenReturn("2");
-        when(element3.getValue()).thenReturn("3");
+        when(element1.value()).thenReturn("1");
+        when(element2.value()).thenReturn("2");
+        when(element3.value()).thenReturn("3");
 
-        assertThat(list.getValues()).containsExactly("1", "2", "3");
-        assertThat(list.getValue()).isEqualTo("1");
-        assertThat(emptyList.getValues()).isEmpty();
-        assertThat(emptyList.getValue()).isNull();
+        assertThat(list.values()).containsExactly("1", "2", "3");
+        assertThat(list.value()).isEqualTo("1");
+        assertThat(emptyList.values()).isEmpty();
+        assertThat(emptyList.value()).isNull();
         reset(element1, element2, element3);
 
-        when(element1.getId()).thenReturn("1");
-        when(element2.getId()).thenReturn("2");
-        when(element3.getId()).thenReturn("3");
+        when(element1.id()).thenReturn("1");
+        when(element2.id()).thenReturn("2");
+        when(element3.id()).thenReturn("3");
 
-        assertThat(list.getIds()).containsExactly("1", "2", "3");
-        assertThat(list.getId()).isEqualTo("1");
-        assertThat(emptyList.getIds()).isEmpty();
-        assertThat(emptyList.getId()).isNull();
+        assertThat(list.ids()).containsExactly("1", "2", "3");
+        assertThat(list.id()).isEqualTo("1");
+        assertThat(emptyList.ids()).isEmpty();
+        assertThat(emptyList.id()).isNull();
         reset(element1, element2, element3);
 
 
-        when(element1.getAttribute("attr")).thenReturn("1");
-        when(element2.getAttribute("attr")).thenReturn("2");
-        when(element3.getAttribute("attr")).thenReturn("3");
+        when(element1.attribute("attr")).thenReturn("1");
+        when(element2.attribute("attr")).thenReturn("2");
+        when(element3.attribute("attr")).thenReturn("3");
 
-        assertThat(list.getAttributes("attr")).containsExactly("1", "2", "3");
-        assertThat(list.getAttribute("attr")).isEqualTo("1");
-        assertThat(emptyList.getAttributes("attr")).isEmpty();
-        assertThat(emptyList.getAttribute("attr")).isNull();
+        assertThat(list.attributes("attr")).containsExactly("1", "2", "3");
+        assertThat(list.attribute("attr")).isEqualTo("1");
+        assertThat(emptyList.attributes("attr")).isEmpty();
+        assertThat(emptyList.attribute("attr")).isNull();
         reset(element1, element2, element3);
 
-        when(element1.getName()).thenReturn("1");
-        when(element2.getName()).thenReturn("2");
-        when(element3.getName()).thenReturn("3");
+        when(element1.name()).thenReturn("1");
+        when(element2.name()).thenReturn("2");
+        when(element3.name()).thenReturn("3");
 
-        assertThat(list.getNames()).containsExactly("1", "2", "3");
-        assertThat(list.getName()).isEqualTo("1");
-        assertThat(emptyList.getNames()).isEmpty();
-        assertThat(emptyList.getName()).isNull();
+        assertThat(list.names()).containsExactly("1", "2", "3");
+        assertThat(list.name()).isEqualTo("1");
+        assertThat(emptyList.names()).isEmpty();
+        assertThat(emptyList.name()).isNull();
         reset(element1, element2, element3);
 
-        when(element1.getTagName()).thenReturn("1");
-        when(element2.getTagName()).thenReturn("2");
-        when(element3.getTagName()).thenReturn("3");
+        when(element1.tagName()).thenReturn("1");
+        when(element2.tagName()).thenReturn("2");
+        when(element3.tagName()).thenReturn("3");
 
-        assertThat(list.getTagNames()).containsExactly("1", "2", "3");
-        assertThat(list.getTagName()).isEqualTo("1");
-        assertThat(emptyList.getTagNames()).isEmpty();
-        assertThat(emptyList.getTagName()).isNull();
+        assertThat(list.tagNames()).containsExactly("1", "2", "3");
+        assertThat(list.tagName()).isEqualTo("1");
+        assertThat(emptyList.tagNames()).isEmpty();
+        assertThat(emptyList.tagName()).isNull();
         reset(element1, element2, element3);
 
-        when(element1.getText()).thenReturn("1");
-        when(element2.getText()).thenReturn("2");
-        when(element3.getText()).thenReturn("3");
+        when(element1.text()).thenReturn("1");
+        when(element2.text()).thenReturn("2");
+        when(element3.text()).thenReturn("3");
 
-        assertThat(list.getTexts()).containsExactly("1", "2", "3");
-        assertThat(list.getText()).isEqualTo("1");
-        assertThat(emptyList.getTexts()).isEmpty();
-        assertThat(emptyList.getText()).isNull();
+        assertThat(list.texts()).containsExactly("1", "2", "3");
+        assertThat(list.text()).isEqualTo("1");
+        assertThat(emptyList.texts()).isEmpty();
+        assertThat(emptyList.text()).isNull();
         reset(element1, element2, element3);
 
-        when(element1.getTextContent()).thenReturn("1");
-        when(element2.getTextContent()).thenReturn("2");
-        when(element3.getTextContent()).thenReturn("3");
+        when(element1.textContent()).thenReturn("1");
+        when(element2.textContent()).thenReturn("2");
+        when(element3.textContent()).thenReturn("3");
 
-        assertThat(list.getTextContents()).containsExactly("1", "2", "3");
-        assertThat(list.getTextContent()).isEqualTo("1");
-        assertThat(emptyList.getTextContents()).isEmpty();
-        assertThat(emptyList.getTextContent()).isNull();
+        assertThat(list.textContents()).containsExactly("1", "2", "3");
+        assertThat(list.textContent()).isEqualTo("1");
+        assertThat(emptyList.textContents()).isEmpty();
+        assertThat(emptyList.textContent()).isNull();
         reset(element1, element2, element3);
 
-        when(element1.getValue()).thenReturn("1");
-        when(element2.getValue()).thenReturn("2");
-        when(element3.getValue()).thenReturn("3");
+        when(element1.value()).thenReturn("1");
+        when(element2.value()).thenReturn("2");
+        when(element3.value()).thenReturn("3");
 
-        assertThat(list.getValues()).containsExactly("1", "2", "3");
-        assertThat(list.getValue()).isEqualTo("1");
-        assertThat(emptyList.getValues()).isEmpty();
-        assertThat(emptyList.getValue()).isNull();
+        assertThat(list.values()).containsExactly("1", "2", "3");
+        assertThat(list.value()).isEqualTo("1");
+        assertThat(emptyList.values()).isEmpty();
+        assertThat(emptyList.value()).isNull();
 
         reset(element1, element2, element3);
     }
@@ -309,16 +294,16 @@ public class FluentListImplTest {
         when(element2.find()).thenReturn(fluentAdapter.newFluentList(ret2));
         when(element3.find()).thenReturn(fluentAdapter.newFluentList(ret3));
 
-        assertThat(list.findFirst()).isSameAs(ret1);
+        assertThat(list.el()).isSameAs(ret1);
         assertThat(list.find()).containsExactly(ret1, ret2, ret3);
-        assertThat(list.find(1)).isSameAs(ret2);
+        assertThat(list.find().index(1)).isSameAs(ret2);
         assertThat(list.$()).containsExactly(ret1, ret2, ret3);
-        assertThat(list.$(1)).isSameAs(ret2);
+        assertThat(list.$().index(1)).isSameAs(ret2);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                list.find(3);
+                list.find().index(3);
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
 
@@ -328,16 +313,16 @@ public class FluentListImplTest {
         when(element2.find(".test")).thenReturn(fluentAdapter.newFluentList(ret2));
         when(element3.find(".test")).thenReturn(fluentAdapter.newFluentList(ret3));
 
-        assertThat(list.findFirst(".test")).isSameAs(ret1);
+        assertThat(list.el(".test")).isSameAs(ret1);
         assertThat(list.find(".test")).containsExactly(ret1, ret2, ret3);
-        assertThat(list.find(".test", 1)).isSameAs(ret2);
+        assertThat(list.find(".test").index(1)).isSameAs(ret2);
         assertThat(list.$(".test")).containsExactly(ret1, ret2, ret3);
-        assertThat(list.$(".test", 1)).isSameAs(ret2);
+        assertThat(list.$(".test").index(1)).isSameAs(ret2);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                list.find(".test", 3);
+                list.find(".test").index(3);
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
 
@@ -347,16 +332,16 @@ public class FluentListImplTest {
         when(element2.find(By.cssSelector(".test"))).thenReturn(fluentAdapter.newFluentList(ret2));
         when(element3.find(By.cssSelector(".test"))).thenReturn(fluentAdapter.newFluentList(ret3));
 
-        assertThat(list.findFirst(By.cssSelector(".test"))).isSameAs(ret1);
+        assertThat(list.el(By.cssSelector(".test"))).isSameAs(ret1);
         assertThat(list.find(By.cssSelector(".test"))).containsExactly(ret1, ret2, ret3);
-        assertThat(list.find(By.cssSelector(".test"), 1)).isSameAs(ret2);
+        assertThat(list.find(By.cssSelector(".test")).index(1)).isSameAs(ret2);
         assertThat(list.$(By.cssSelector(".test"))).containsExactly(ret1, ret2, ret3);
-        assertThat(list.$(By.cssSelector(".test"), 1)).isSameAs(ret2);
+        assertThat(list.$(By.cssSelector(".test")).index(1)).isSameAs(ret2);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                list.find(By.cssSelector(".test"), 3);
+                list.find(By.cssSelector(".test")).index(3);
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
 

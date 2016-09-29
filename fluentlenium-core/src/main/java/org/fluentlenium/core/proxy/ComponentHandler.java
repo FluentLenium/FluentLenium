@@ -71,5 +71,4 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement> impleme
         return super.invoke(proxy, method, args);
     }
 
-
 }

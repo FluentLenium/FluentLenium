@@ -9,4 +9,10 @@ public class FirstElementLocator extends AtIndexElementLocator {
     public FirstElementLocator(ElementLocator listLocator) {
         super(listLocator, 0);
     }
+
+
+    @Override
+    public String toString() {
+        return listLocator.toString() + " (first)";
+    }
 }

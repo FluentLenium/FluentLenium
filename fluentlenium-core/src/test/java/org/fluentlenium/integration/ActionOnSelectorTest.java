@@ -14,17 +14,17 @@ public class ActionOnSelectorTest extends IntegrationFluentTest {
     @Test
     public void checkFillAction() {
         goTo(DEFAULT_URL);
-        assertThat($("#name").getValues()).contains("John");
-        $("#name").first().text("zzz");
-        assertThat($("#name").getValues()).contains("zzz");
+        assertThat($("#name").values()).contains("John");
+        $("#name").first().write("zzz");
+        assertThat($("#name").values()).contains("zzz");
     }
 
     @Test
     public void checkClearAction() {
         goTo(DEFAULT_URL);
-        assertThat($("#name").first().getValue()).isEqualTo("John");
+        assertThat($("#name").first().value()).isEqualTo("John");
         $("#name").first().clear();
-        assertThat($("#name").first().getValue()).isEqualTo("");
+        assertThat($("#name").first().value()).isEqualTo("");
     }
 
     @Test
@@ -54,15 +54,15 @@ public class ActionOnSelectorTest extends IntegrationFluentTest {
     @Test
     public void checkClickAction() {
         goTo(DEFAULT_URL);
-        assertThat(title()).contains("Selenium");
+        assertThat(window().title()).contains("Selenium");
         $("#linkToPage2").first().click();
-        assertThat(title()).isEqualTo("Page 2");
+        assertThat(window().title()).isEqualTo("Page 2");
     }
 
     @Test
     public void checkClickActionWrongSelector() {
         goTo(DEFAULT_URL);
-        assertThat(title()).contains("Selenium");
+        assertThat(window().title()).contains("Selenium");
         Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
@@ -74,24 +74,24 @@ public class ActionOnSelectorTest extends IntegrationFluentTest {
     @Test
     public void checkDoubleClickAction() {
         goTo(DEFAULT_URL);
-        assertThat(title()).contains("Selenium");
+        assertThat(window().title()).contains("Selenium");
         $("#linkToPage2").first().mouse().doubleClick();
-        assertThat(title()).isEqualTo("Page 2");
+        assertThat(window().title()).isEqualTo("Page 2");
     }
 
     @Test
     public void checkMouseOverAction() {
         goTo(DEFAULT_URL);
-        assertThat(title()).contains("Selenium");
-        assertThat($("#id3").getText()).isEqualTo("This text should change on MouseOver");
+        assertThat(window().title()).contains("Selenium");
+        assertThat($("#id3").text()).isEqualTo("This text should change on MouseOver");
         $("#mouseover").first().mouse().moveToElement();
-        assertThat($("#id3").getText()).isEqualTo("abc");
+        assertThat($("#id3").text()).isEqualTo("abc");
     }
 
     @Test
     public void checkTextAction() {
         goTo(DEFAULT_URL);
-        assertThat($("#name").getValues()).contains("John");
-        assertThat($(".small").first().getText()).contains("Small 1");
+        assertThat($("#name").values()).contains("John");
+        assertThat($(".small").first().text()).contains("Small 1");
     }
 }

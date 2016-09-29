@@ -17,4 +17,9 @@ public class ElementInstanceLocator extends ElementSupplierLocator implements Wr
     public WebElement getWrappedElement() {
         return findElement();
     }
+
+    @Override
+    public String toString() {
+        return getWrappedElement().toString();
+    }
 }

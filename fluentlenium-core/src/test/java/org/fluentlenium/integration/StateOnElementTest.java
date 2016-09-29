@@ -14,37 +14,37 @@ public class StateOnElementTest extends IntegrationFluentTest {
 
     @Test
     public void checkIsEnabled() {
-        assertThat($("input").first().isEnabled()).isTrue();
+        assertThat($("input").first().enabled()).isTrue();
     }
 
     @Test
     public void checkIsDisplayed() {
-        assertThat($("input").first().isDisplayed()).isTrue();
+        assertThat($("input").first().displayed()).isTrue();
     }
 
     @Test
     public void checkIsNotSelected() {
-        assertThat($("input").first().isSelected()).isFalse();
+        assertThat($("input").first().selected()).isFalse();
     }
 
     @Test
     public void checkIsSelected() {
-        assertThat($("#selected").first().isSelected()).isTrue();
+        assertThat($("#selected").first().selected()).isTrue();
     }
 
     @Test
     public void checkIsDisabled() {
-        assertThat($("#disabled").first().isSelected()).isFalse();
+        assertThat($("#disabled").first().selected()).isFalse();
     }
 
     @Test
     public void checkIsNonDisplay() {
-        assertThat($("#non_display").first().isDisplayed()).isFalse();
+        assertThat($("#non_display").first().displayed()).isFalse();
     }
 
     @Test
     public void checkDisabledIsNotEnabled() {
-        assertThat($("#disabled").first().isEnabled()).isFalse();
+        assertThat($("#disabled").first().enabled()).isFalse();
     }
 
 }

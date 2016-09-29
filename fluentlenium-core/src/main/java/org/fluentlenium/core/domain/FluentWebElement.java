@@ -1,13 +1,17 @@
 package org.fluentlenium.core.domain;
 
+import com.google.common.base.Supplier;
+import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
 import org.fluentlenium.core.action.FluentActions;
+import org.fluentlenium.core.action.InputControl;
 import org.fluentlenium.core.action.KeyboardElementActions;
 import org.fluentlenium.core.action.MouseElementActions;
 import org.fluentlenium.core.axes.Axes;
 import org.fluentlenium.core.components.ComponentInstantiator;
+import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
@@ -15,10 +19,14 @@ import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookControl;
 import org.fluentlenium.core.hook.HookDefinition;
+import org.fluentlenium.core.label.FluentLabel;
+import org.fluentlenium.core.label.FluentLabelImpl;
 import org.fluentlenium.core.proxy.FluentProxyState;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchControl;
+import org.fluentlenium.core.wait.AwaitControl;
+import org.fluentlenium.core.wait.FluentWaitElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -33,7 +41,7 @@ import java.util.List;
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
 public class FluentWebElement extends Component implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>,
-        FluentProxyState<FluentWebElement>, SearchControl<FluentWebElement>, HookControl<FluentWebElement> {
+        FluentProxyState<FluentWebElement>, SearchControl<FluentWebElement>, HookControl<FluentWebElement>, FluentLabel<FluentWebElement> {
     private final Search search;
     private final Axes axes;
     private final MouseElementActions mouseActions;
@@ -43,16 +51,30 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
     private final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
     private final HookChainBuilder hookChainBuilder;
 
+    @Delegate
+    private FluentLabel<FluentWebElement> label;
+
     public FluentWebElement(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
         super(webElement, fluentControl, instantiator);
 
         this.hookChainBuilder = new DefaultHookChainBuilder(this.fluentControl, this.instantiator);
 
-        this.search = new Search(webElement, this.instantiator, this.hookChainBuilder);
+        this.search = new Search(webElement, this.instantiator);
         this.axes = new Axes(webElement, this.instantiator, this.hookChainBuilder);
         this.mouseActions = new MouseElementActions(this.fluentControl.getDriver(), webElement);
         this.keyboardActions = new KeyboardElementActions(this.fluentControl.getDriver(), webElement);
         this.conditions = new WebElementConditions(this);
+        this.label = new FluentLabelImpl<>(this, new Supplier<String>() {
+            @Override
+            public String get() {
+                return getElement().toString();
+            }
+        });
+    }
+
+    @Delegate(excludes = {InputControl.class, AwaitControl.class, SearchControl.class})
+    private FluentControl getFluentControl() {
+        return fluentControl;
     }
 
     /**
@@ -66,7 +88,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
     }
 
     @Override
-    public boolean isPresent() {
+    public boolean present() {
         return LocatorProxies.isPresent(webElement);
     }
 
@@ -83,7 +105,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
     }
 
     @Override
-    public boolean isLoaded() {
+    public boolean loaded() {
         return LocatorProxies.isLoaded(webElement);
     }
 
@@ -96,8 +118,12 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
         return axes;
     }
 
-    public WebElementConditions conditions() {
+    public FluentConditions conditions() {
         return conditions;
+    }
+
+    public FluentWaitElement await() {
+        return new FluentWaitElement(fluentControl.await(), this);
     }
 
     /**
@@ -159,7 +185,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      * @param text value to set
      * @return fluent web element
      */
-    public FluentWebElement text(String... text) {
+    public FluentWebElement write(String... text) {
         clear();
         if (text.length != 0) {
             webElement.sendKeys(text[0]);
@@ -172,18 +198,18 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return name of the element
      */
-    public String getName() {
+    public String name() {
         return webElement.getAttribute("name");
     }
 
     /**
-     * return any value of custom attribute (generated=true will return "true" if getAttribute("generated") is called.
+     * return any value of custom attribute (generated=true will return "true" if attribute("generated") is called.
      *
-     * @param attribute custom attribute name
+     * @param name custom attribute name
      * @return name value
      */
-    public String getAttribute(String attribute) {
-        return webElement.getAttribute(attribute);
+    public String attribute(String name) {
+        return webElement.getAttribute(name);
     }
 
     /**
@@ -191,7 +217,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return id of element
      */
-    public String getId() {
+    public String id() {
         return webElement.getAttribute("id");
     }
 
@@ -200,7 +226,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return text of element
      */
-    public String getText() {
+    public String text() {
         return webElement.getText();
     }
 
@@ -209,7 +235,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return text content of element
      */
-    public String getTextContent() {
+    public String textContent() {
         return webElement.getAttribute("textContent");
     }
 
@@ -218,7 +244,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return value of attribute
      */
-    public String getValue() {
+    public String value() {
         return webElement.getAttribute("value");
     }
 
@@ -227,7 +253,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return boolean value of displayed check
      */
-    public boolean isDisplayed() {
+    public boolean displayed() {
         return webElement.isDisplayed();
     }
 
@@ -236,7 +262,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return boolean value of enabled check
      */
-    public boolean isEnabled() {
+    public boolean enabled() {
         return webElement.isEnabled();
     }
 
@@ -245,7 +271,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return boolean value of selected check
      */
-    public boolean isSelected() {
+    public boolean selected() {
         return webElement.isSelected();
     }
 
@@ -255,7 +281,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      * @return true if the element can be clicked, false otherwise.
      */
 
-    public boolean isClickable() {
+    public boolean clickable() {
         return ExpectedConditions.elementToBeClickable(getElement()).apply(fluentControl.getDriver()) != null;
     }
 
@@ -264,7 +290,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return false is the element is still attached to the DOM, true otherwise.
      */
-    public boolean isStale() {
+    public boolean stale() {
         return ExpectedConditions.stalenessOf(getElement()).apply(fluentControl.getDriver());
     }
 
@@ -273,7 +299,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return string value of tag name
      */
-    public String getTagName() {
+    public String tagName() {
         return webElement.getTagName();
     }
 
@@ -299,7 +325,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      *
      * @return dimension/size of element
      */
-    public Dimension getSize() {
+    public Dimension size() {
         return webElement.getSize();
     }
 
@@ -313,13 +339,28 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
     }
 
     @Override
+    public FluentWebElement el(String selector, Filter... filters) {
+        return find(selector, filters).first();
+    }
+
+    @Override
     public FluentList<FluentWebElement> $(Filter... filters) {
         return find(filters);
     }
 
     @Override
+    public FluentWebElement el(Filter... filters) {
+        return find(filters).first();
+    }
+
+    @Override
     public FluentList<FluentWebElement> $(By locator, Filter... filters) {
         return find(locator, filters);
+    }
+
+    @Override
+    public FluentWebElement el(By locator, Filter... filters) {
+        return find(locator, filters).first();
     }
 
     /**
@@ -352,89 +393,6 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      */
     public FluentList<FluentWebElement> find(Filter... filters) {
         return search.find(filters);
-    }
-
-    /**
-     * find elements into the children with the corresponding filters at the given position
-     *
-     * @param selector name of element
-     * @param filters  filters set
-     * @return fluent web element
-     */
-    public FluentWebElement find(String selector, Integer index, Filter... filters) {
-        return search.find(selector, filters).index(index);
-    }
-
-    /**
-     * find elements into the children with the corresponding filters at the given position
-     *
-     * @param locator elements locator
-     * @param filters filters set
-     * @return fluent web element
-     */
-    public FluentWebElement find(By locator, Integer index, Filter... filters) {
-        return search.find(locator, filters).index(index);
-    }
-
-    @Override
-    public FluentWebElement $(String selector, Integer index, Filter... filters) {
-        return find(selector, filters).index(index);
-    }
-
-    @Override
-    public FluentWebElement $(By locator, Integer index, Filter... filters) {
-        return find(locator, filters).index(index);
-    }
-
-    /**
-     * find element in the children with the corresponding filters at the given position
-     *
-     * @param index   index of element
-     * @param filters filters set
-     * @return fluent web element
-     */
-    @Override
-    public FluentWebElement find(Integer index, Filter... filters) {
-        return search.find(filters).index(index);
-    }
-
-    @Override
-    public FluentWebElement $(Integer index, Filter... filters) {
-        return find(filters).index(index);
-    }
-
-    /**
-     * find elements into the children with the corresponding filters at the first position
-     *
-     * @param selector name of element
-     * @param filters  filters set
-     * @return fluent web element
-     */
-    @Override
-    public FluentWebElement findFirst(String selector, Filter... filters) {
-        return search.findFirst(selector, filters);
-    }
-
-    /**
-     * find elements into the children with the corresponding filters at the first position
-     *
-     * @param locator elements locator
-     * @param filters filters set
-     * @return fluent web element
-     */
-    public FluentWebElement findFirst(By locator, Filter... filters) {
-        return search.findFirst(locator, filters);
-    }
-
-    /**
-     * find element in the children with the corresponding filters at the first position
-     *
-     * @param filters filters set
-     * @return fluent web element
-     */
-    @Override
-    public FluentWebElement findFirst(Filter... filters) {
-        return search.findFirst(filters);
     }
 
     /**
@@ -472,12 +430,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      * @return boolean value for is input file type
      */
     private boolean isInputOfTypeFile() {
-        return "input".equalsIgnoreCase(this.getTagName()) && "file".equalsIgnoreCase(this.getAttribute("type"));
-    }
-
-    @Override
-    public String toString() {
-        return this.getElement().toString();
+        return "input".equalsIgnoreCase(this.tagName()) && "file".equalsIgnoreCase(this.attribute("type"));
     }
 
     @Override
@@ -499,5 +452,10 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
         hookDefinitions.add(new HookDefinition<>(hook, options));
         LocatorProxies.setHooks(getElement(), hookChainBuilder, hookDefinitions);
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return label.toString();
     }
 }

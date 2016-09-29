@@ -26,7 +26,7 @@ public class PageTest extends IntegrationFluentTestNg {
 
     @Test
     public void checkGoTo() {
-        assertThat(title()).contains("Selenium");
+        assertThat(window().title()).contains("Selenium");
     }
 
     @Test

@@ -22,7 +22,7 @@ public class FillSelect<E extends FluentWebElement> extends AbstractFill<E> {
         Iterator<E> iterator = elements.iterator();
         while (iterator.hasNext()) {
             FluentWebElement next = iterator.next();
-            if (next.getTagName() == null || !next.getTagName().equalsIgnoreCase("select")) {
+            if (next.tagName() == null || !next.tagName().equalsIgnoreCase("select")) {
                 iterator.remove();
             }
         }

@@ -24,13 +24,13 @@ public class BaseUrlTest extends IntegrationFluentTest {
     @Test
     public void baseUrlShouldBeUsedForRelativeUrlInGoTo() {
         goTo(PAGE_2_URL);
-        assertThat(title()).isEqualTo("Page 2");
+        assertThat(window().title()).isEqualTo("Page 2");
     }
 
     @Test
     public void baseUrlShouldNotBeUsedForAbsoluteUrlInGoTo() {
         goTo(DEFAULT_URL);
-        assertThat(title()).isEqualTo("Fluent Selenium Documentation");
+        assertThat(window().title()).isEqualTo("Fluent Selenium Documentation");
     }
 
     @Test

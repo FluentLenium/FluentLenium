@@ -69,20 +69,6 @@ public interface NavigationControl {
     String pageSource();
 
     /**
-     * Return the title of the page
-     *
-     * @return browser window title
-     */
-    @Deprecated
-    String title();
-
-    /**
-     * Maximize browser window
-     */
-    @Deprecated
-    void maximizeWindow();
-
-    /**
      * Exposes methods on browser window
      *
      * @return Window actions

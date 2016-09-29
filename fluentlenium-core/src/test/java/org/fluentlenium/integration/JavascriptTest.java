@@ -24,11 +24,11 @@ public class JavascriptTest extends IntegrationFluentTest {
 
     @Test
     public void checkTextParam() {
-        assertThat(find("span", with("id").equalTo("default")).first().getText()).isEqualTo("unchanged");
+        assertThat(find("span", with("id").equalTo("default")).first().text()).isEqualTo("unchanged");
 
-        assertThat(find("#default").first().getText()).isEqualTo("unchanged");
+        assertThat(find("#default").first().text()).isEqualTo("unchanged");
         executeScript("change();");
-        assertThat(find("#default").first().getText()).isEqualTo("changed");
+        assertThat(find("#default").first().text()).isEqualTo("changed");
     }
 
     @Test

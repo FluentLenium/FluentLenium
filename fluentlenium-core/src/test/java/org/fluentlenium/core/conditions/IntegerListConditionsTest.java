@@ -68,7 +68,7 @@ public class IntegerListConditionsTest {
         final IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions, new Function<FluentWebElement, Integer>() {
             @Override
             public Integer apply(FluentWebElement input) {
-                return Integer.valueOf(input.getId());
+                return Integer.valueOf(input.id());
             }
         });
 
@@ -76,7 +76,7 @@ public class IntegerListConditionsTest {
         when(webElement2.getAttribute("id")).thenReturn("1");
         when(webElement3.getAttribute("id")).thenReturn("1");
 
-        assertThat(integerConditions.isVerified(new Predicate<Integer>() {
+        assertThat(integerConditions.verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
                 return input == 1;
@@ -90,7 +90,7 @@ public class IntegerListConditionsTest {
         when(webElement2.getAttribute("id")).thenReturn("2");
         when(webElement3.getAttribute("id")).thenReturn("1");
 
-        assertThat(integerConditions.isVerified(new Predicate<Integer>() {
+        assertThat(integerConditions.verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
                 return input == 1 || input == 2;
@@ -114,7 +114,7 @@ public class IntegerListConditionsTest {
         final IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions, new Function<FluentWebElement, Integer>() {
             @Override
             public Integer apply(FluentWebElement input) {
-                return Integer.valueOf(input.getId());
+                return Integer.valueOf(input.id());
             }
         });
 

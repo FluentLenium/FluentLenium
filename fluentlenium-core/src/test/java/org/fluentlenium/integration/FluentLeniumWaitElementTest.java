@@ -69,48 +69,48 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitIsPresent() {
-        await().atMost(1, NANOSECONDS).until(smallElements).isPresent();
+        await().atMost(1, NANOSECONDS).until(smallElements).present();
     }
 
     @Test
     public void checkAwaitIsClickable() {
-        await().atMost(1, NANOSECONDS).until(smallElements).isClickable();
+        await().atMost(1, NANOSECONDS).until(smallElements).clickable();
     }
 
     @Test
     public void checkAwaitIsClickableForSingleElement() {
-        await().atMost(1, NANOSECONDS).until(inputElement).isClickable();
+        await().atMost(1, NANOSECONDS).until(inputElement).clickable();
     }
 
     @Test(expected = TimeoutException.class)
     public void checkAwaitDisabledIsClickableThrowTimeoutException() {
-        await().atMost(1, NANOSECONDS).until(inputDisabledElements).isClickable();
+        await().atMost(1, NANOSECONDS).until(inputDisabledElements).clickable();
     }
 
     @Test(expected = TimeoutException.class)
     public void checkAwaitDisabledIsClickableThrowTimeoutExceptionForSingleElement() {
-        await().atMost(1, NANOSECONDS).until(inputDisabledElement).isClickable();
+        await().atMost(1, NANOSECONDS).until(inputDisabledElement).clickable();
     }
 
     @Test
     public void awaitForElementXPosition() {
-        await().until(inputDisabledElements).hasRectangle().withX(5);
+        await().until(inputDisabledElements).rectangle().x(5);
     }
 
     @Test(expected = TimeoutException.class)
     public void awaitForElementXPositionElementNotFound() {
-        await().until(notFoundElements).hasRectangle().withX(0);
+        await().until(notFoundElements).rectangle().x(0);
     }
 
     @Test
     public void checkAwaitHasSize() {
-        await().atMost(1, NANOSECONDS).until(smallElements).each().hasSize(3);
+        await().atMost(1, NANOSECONDS).untilEach(smallElements).size(3);
     }
 
     @Test
     public void checkUseCustomMessage() {
         try {
-            await().withMessage("toto").atMost(1, NANOSECONDS).until(notFoundElement).isPresent();
+            await().withMessage("toto").atMost(1, NANOSECONDS).until(notFoundElement).present();
             fail();
         } catch (TimeoutException e) {
             assertThat(e.getMessage()).contains("toto");
@@ -119,153 +119,153 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitContainsText() {
-        await().atMost(1, NANOSECONDS).until(smallElements).containsText("Small 1");
+        await().atMost(1, NANOSECONDS).until(smallElements).text().contains("Small 1");
     }
 
     @Test
     public void checkAwaitHasText() {
-        await().atMost(1, NANOSECONDS).until(smallElements).hasText("Small 1");
+        await().atMost(1, NANOSECONDS).until(smallElements).text().equalTo("Small 1");
     }
 
     @Test
     public void checkAwaitContainsName() {
-        await().atMost(1, NANOSECONDS).until(smallElements).hasName("name");
+        await().atMost(1, NANOSECONDS).until(smallElements).name("name");
     }
 
     @Test
     public void checkAwaitContainsId() {
-        await().atMost(1, NANOSECONDS).until(smallElements).hasId("id2");
+        await().atMost(1, NANOSECONDS).until(smallElements).id("id2");
     }
 
     @Test
     public void checkHasAttribute() {
-        await().atMost(1, NANOSECONDS).until(inputElements).hasAttribute("value", "John");
+        await().atMost(1, NANOSECONDS).until(inputElements).attribute("value", "John");
     }
 
     @Test
     public void when_element_is_present_then_areDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(defaultElements).each().isDisplayed();
+        await().atMost(1, NANOSECONDS).untilEach(defaultElements).displayed();
     }
 
     @Test
     public void when_element_is_present_then_isDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(defaultElements).isDisplayed();
+        await().atMost(1, NANOSECONDS).until(defaultElements).displayed();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_displayed_then_areDisplayed_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(unvisibleElements).each().isDisplayed();
+        await().atMost(1, NANOSECONDS).untilEach(unvisibleElements).displayed();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_displayed_then_isDisplayed_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(unvisibleElements).isDisplayed();
+        await().atMost(1, NANOSECONDS).until(unvisibleElements).displayed();
     }
 
     @Test
     public void when_element_is_not_present_then_areNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(nonexistentElements).each().not().isDisplayed();
+        await().atMost(1, NANOSECONDS).untilEach(nonexistentElements).not().displayed();
     }
 
     @Test
     public void when_element_is_not_present_then_isNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(nonexistentElements).not().isDisplayed();
+        await().atMost(1, NANOSECONDS).until(nonexistentElements).not().displayed();
     }
 
     @Test
     public void when_element_is_not_displayed_then_areNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(unvisibleElements).each().not().isDisplayed();
+        await().atMost(1, NANOSECONDS).untilEach(unvisibleElements).not().displayed();
     }
 
     @Test
     public void when_element_is_not_displayed_then_isNotDisplayed_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(unvisibleElements).not().isDisplayed();
+        await().atMost(1, NANOSECONDS).until(unvisibleElements).not().displayed();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_displayed_then_areNotDisplayed_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(defaultElements).each().not().isDisplayed();
+        await().atMost(1, NANOSECONDS).untilEach(defaultElements).not().displayed();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_displayed_then_isNotDisplayed_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(defaultElements).not().isDisplayed();
+        await().atMost(1, NANOSECONDS).until(defaultElements).not().displayed();
     }
 
     @Test
     public void when_element_is_enabled_then_areEnabled_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(defaultElements).each().isEnabled();
+        await().atMost(1, NANOSECONDS).untilEach(defaultElements).enabled();
     }
 
     @Test
     public void when_element_is_enabled_then_isEnabled_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(defaultElements).isEnabled();
+        await().atMost(1, NANOSECONDS).until(defaultElements).enabled();
     }
 
     @Test
     public void when_single_element_is_enabled_then_isEnabled_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(defaultElement).isEnabled();
+        await().atMost(1, NANOSECONDS).until(defaultElement).enabled();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_single_nonexisting_element_then_isEnabled_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(nonexistentElement).isEnabled();
+        await().atMost(1, NANOSECONDS).until(nonexistentElement).enabled();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_enabled_then_areEnabled_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(disabledElements).each().isEnabled();
+        await().atMost(1, NANOSECONDS).untilEach(disabledElements).enabled();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_element_is_not_enabled_then_isEnabled_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(disabledElements).isEnabled();
+        await().atMost(1, NANOSECONDS).until(disabledElements).enabled();
     }
 
     @Test
     public void when_element_is_not_enabled_then_isNotEnabled_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(disabledElements).not().isEnabled();
+        await().atMost(1, NANOSECONDS).until(disabledElements).not().enabled();
     }
 
     @Test(expected = TimeoutException.class)
     public void when_single_element_is_not_enabled_then_isEnabled_throws_exception() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(disabledElement).isEnabled();
+        await().atMost(1, NANOSECONDS).until(disabledElement).enabled();
     }
 
     @Test
     public void when_single_element_is_not_enabled_then_isNotEnabled_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(disabledElement).not().isEnabled();
+        await().atMost(1, NANOSECONDS).until(disabledElement).not().enabled();
     }
 
     @Test
     public void when_element_is_not_displayed_then_isPresent_return_true() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(unvisibleElements).isPresent();
+        await().atMost(1, NANOSECONDS).until(unvisibleElements).present();
     }
 
     @Test(expected = TimeoutException.class)
     public void checkPolling() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1500, TimeUnit.MILLISECONDS).until(defaultElements).hasText("wait");
+        await().pollingEvery(1500, TimeUnit.MILLISECONDS).until(defaultElements).text().equalTo("wait");
     }
 
     @Test
@@ -353,7 +353,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     private static class MyFluentPage extends FluentPage {
         @Override
         public void isAt() {
-            assertThat(find("#newField").getTexts()).contains("new");
+            assertThat(find("#newField").texts()).contains("new");
         }
 
         @Override
