@@ -43,7 +43,7 @@ public class SearchHookTest {
 
     @Test
     public void testHookedSearch() {
-        FluentWebElement hookedElement = search.findFirst(".selector").withHook(NanoHook.class).click();
+        FluentWebElement hookedElement = search.el(".selector").withHook(NanoHook.class).click();
 
         Mockito.verify(element).click();
 

@@ -17,15 +17,15 @@ public class SuperclassPageTest extends PageTest {
     @Test
     public void checkGoToPagesDeclaredInThisClassAndSuperclass() {
         page.go();
-        assertThat(title()).contains("Selenium");
+        assertThat(window().title()).contains("Selenium");
         anotherPage.go();
-        assertThat(title()).contains("Another Page");
+        assertThat(window().title()).contains("Another Page");
     }
 
     @Test
     public void checkGoToPagesOverridingPageDeclaredInSuperclass() {
         page2.go();
-        assertThat(title()).contains("Another Page");
+        assertThat(window().title()).contains("Another Page");
     }
 }
 

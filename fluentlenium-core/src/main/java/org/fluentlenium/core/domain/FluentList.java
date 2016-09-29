@@ -189,46 +189,6 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentA
     FluentList<E> find(Filter... filters);
 
     /**
-     * find elements into the children with the corresponding filters at the position indicated by the number
-     *
-     * @param selector element name
-     * @param number   set of filters
-     * @param filters  set of filters
-     * @return extended by FluentWebElement object
-     */
-    @Override
-    E find(String selector, Integer number, Filter... filters);
-
-    /**
-     * find element in the children with the corresponding filters at the position indicated by the number
-     *
-     * @param index   element name
-     * @param filters set of filters
-     * @return extended by FluentWebElement object
-     */
-    @Override
-    E find(Integer index, Filter... filters);
-
-    /**
-     * find elements into the children with the corresponding filters at the first position
-     *
-     * @param selector element name
-     * @param filters  set of filters
-     * @return extended by FluentWebElement object
-     */
-    @Override
-    E findFirst(String selector, Filter... filters);
-
-    /**
-     * find element in the children with the corresponding filters at the first position
-     *
-     * @param filters set of filters
-     * @return extended by FluentWebElement object
-     */
-    @Override
-    E findFirst(Filter... filters);
-
-    /**
      * Clear all elements on the list
      * <p>
      * Only the visible elements are cleared.

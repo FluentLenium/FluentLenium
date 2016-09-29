@@ -26,9 +26,9 @@ public class ActionOnListTest extends IntegrationFluentTest {
     @Test
     public void checkClickAction() {
         goTo(DEFAULT_URL);
-        assertThat(title()).contains("Selenium");
+        assertThat(window().title()).contains("Selenium");
         $("#linkToPage2").click();
-        assertThat(title()).isEqualTo("Page 2");
+        assertThat(window().title()).isEqualTo("Page 2");
     }
 
 

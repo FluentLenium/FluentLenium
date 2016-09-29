@@ -12,7 +12,7 @@ public class ParamTest extends IntegrationFluentTest {
     @Test
     public void checkTitleParam() {
         goTo(DEFAULT_URL);
-        assertThat(title()).contains("Selenium");
+        assertThat(window().title()).contains("Selenium");
     }
 
     @Test

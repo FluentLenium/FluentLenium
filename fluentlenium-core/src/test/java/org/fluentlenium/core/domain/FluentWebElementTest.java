@@ -257,11 +257,11 @@ public class FluentWebElementTest {
         fluentElement.find(".test");
         fluentElement.find(By.cssSelector(".test"));
 
-        fluentElement.$(".test", 1);
-        fluentElement.$(By.cssSelector(".test"), 1);
+        fluentElement.$(".test").index(1);
+        fluentElement.$(By.cssSelector(".test")).index(1);
 
-        fluentElement.find(".test", 1);
-        fluentElement.find(By.cssSelector(".test"), 1);
+        fluentElement.find(".test").index(1);
+        fluentElement.find(By.cssSelector(".test")).index(1);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -272,7 +272,7 @@ public class FluentWebElementTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.$(1);
+                fluentElement.$().index(1);
             }
         }).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
@@ -284,40 +284,40 @@ public class FluentWebElementTest {
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.find(1);
+                fluentElement.find().index(1);
             }
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    public void testFindFirst() {
+    public void testel() {
         WebElement findElement = mock(WebElement.class);
 
         when(element.findElements(By.cssSelector(".test"))).thenReturn(Arrays.asList(findElement));
 
-        assertThat(fluentElement.findFirst(".test").now().getElement()).isEqualTo(findElement);
-        assertThat(fluentElement.findFirst(By.cssSelector(".test")).now().getElement()).isEqualTo(findElement);
+        assertThat(fluentElement.el(".test").now().getElement()).isEqualTo(findElement);
+        assertThat(fluentElement.el(By.cssSelector(".test")).now().getElement()).isEqualTo(findElement);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.findFirst(".other").now();
+                fluentElement.el(".other").now();
             }
         }).isInstanceOf(NoSuchElementException.class);
 
-        assertThat(fluentElement.findFirst(By.cssSelector(".other")).present()).isFalse();
+        assertThat(fluentElement.el(By.cssSelector(".other")).present()).isFalse();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.findFirst(By.cssSelector(".other")).now();
+                fluentElement.el(By.cssSelector(".other")).now();
             }
         }).isInstanceOf(NoSuchElementException.class);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                fluentElement.findFirst().now();
+                fluentElement.el().now();
             }
         }).isInstanceOf(IllegalArgumentException.class);
     }

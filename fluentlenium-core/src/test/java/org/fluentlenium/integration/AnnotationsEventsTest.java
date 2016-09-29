@@ -84,7 +84,7 @@ public class AnnotationsEventsTest extends IntegrationFluentTest {
     public void findBy() {
         goTo(DEFAULT_URL);
 
-        findFirst("button").now();
+        el("button").now();
 
         assertThat(beforeFindBy).isEqualTo(1);
         assertThat(afterFindBy).isEqualTo(1);

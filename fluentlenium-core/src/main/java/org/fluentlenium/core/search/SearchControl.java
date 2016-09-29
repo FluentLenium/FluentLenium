@@ -25,6 +25,15 @@ public interface SearchControl<E extends FluentWebElement> {
     FluentList<E> $(String selector, Filter... filters);
 
     /**
+     * Find first element with CSS selector and filters.
+     *
+     * @param selector CSS selector
+     * @param filters  set of filters
+     * @return element
+     */
+    E el(String selector, Filter... filters);
+
+    /**
      * Find list of elements with filters.
      *
      * @param filters set of filters in the current context
@@ -39,6 +48,14 @@ public interface SearchControl<E extends FluentWebElement> {
      * @return list of elements
      */
     FluentList<E> $(Filter... filters);
+
+    /**
+     * Find first element with filters.
+     *
+     * @param filters set of filters in the current context
+     * @return element
+     */
+    E el(Filter... filters);
 
     /**
      * Find list of elements with Selenium locator and filters.
@@ -59,106 +76,11 @@ public interface SearchControl<E extends FluentWebElement> {
     FluentList<E> $(By locator, final Filter... filters);
 
     /**
-     * Find an element with CSS selector, position in the list and filters.
-     *
-     * @param selector CSS selector
-     * @param index    index of the desired element
-     * @param filters  set of filters in the current context
-     * @return element
-     * @deprecated use {@link #find(String, Filter...)} followed by {@link FluentList#index(int)} instead.
-     */
-    @Deprecated
-    E find(String selector, Integer index, Filter... filters);
-
-    /**
-     * Find an element with CSS selector, position in the list and filters.
-     *
-     * @param selector CSS selector
-     * @param index    index of the desired element
-     * @param filters  set of filters in the current context
-     * @return element
-     * @deprecated use {@link #$(String, Filter...)} followed by {@link FluentList#index(int)} instead.
-     */
-    @Deprecated
-    E $(String selector, Integer index, Filter... filters);
-
-    /**
-     * Find an element with position in the list and filters.
-     *
-     * @param index   index of element from obtained list
-     * @param filters set of filters in the current context
-     * @return element
-     * @deprecated use {@link #find(Filter...)} followed by {@link FluentList#index(int)} instead.
-     */
-    @Deprecated
-    E find(Integer index, Filter... filters);
-
-    /**
-     * Find an element with position in the list and filters.
-     *
-     * @param index   index of element from obtained list
-     * @param filters set of filters in the current context
-     * @return element
-     * @deprecated use {@link #$(Filter...)} followed by {@link FluentList#index(int)} instead.
-     */
-    @Deprecated
-    E $(Integer index, Filter... filters);
-
-
-    /**
-     * Find an element with Selenium locator, position in the list and filters.
-     *
-     * @param locator elements locator
-     * @param index   index of element in the list
-     * @param filters filters set
-     * @return element
-     * @deprecated use {@link #find(By, Filter...)} followed by {@link FluentList#index(int)} instead.
-     */
-    @Deprecated
-    E find(By locator, Integer index, final Filter... filters);
-
-
-    /**
-     * Find an element with Selenium locator, position in the list and filters.
-     *
-     * @param locator elements locator
-     * @param index   index of element in the list
-     * @param filters filters set
-     * @return element
-     * @deprecated use {@link #$(By, Filter...)} followed by {@link FluentList#index(int)} instead.
-     */
-    @Deprecated
-    E $(By locator, Integer index, final Filter... filters);
-
-    /**
-     * Find an element with CSS selector and filters.
-     *
-     * @param selector css selector
-     * @param filters  filters set
-     * @return element
-     * @deprecated use {@link #find(String, Filter...)} followed by {@link FluentList#first()} instead.
-     */
-    @Deprecated
-    E findFirst(String selector, Filter... filters);
-
-    /**
-     * Find an element with filters.
-     *
-     * @param filters filters set
-     * @return element
-     * @deprecated use {@link #find(Filter...)} followed by {@link FluentList#first()} instead.
-     */
-    @Deprecated
-    E findFirst(Filter... filters);
-
-    /**
-     * Find an element with Selenium locator and filter.
+     * Find first element with Selenium locator and filters.
      *
      * @param locator elements locator
      * @param filters filters set
      * @return element
-     * @deprecated use {@link #find(By, Filter...)} followed by {@link FluentList#first()} instead.
      */
-    @Deprecated
-    E findFirst(By locator, final Filter... filters);
+    E el(By locator, final Filter... filters);
 }

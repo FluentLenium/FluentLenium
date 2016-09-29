@@ -38,7 +38,7 @@ public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     @Test
     public void checkIndexWorks() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = find(1, withClass("small"));
+        FluentWebElement element = find(withClass("small")).index(1);
         assertThat(element.loaded()).isFalse();
         assertThat(element.id()).isEqualTo("id2");
     }
@@ -46,7 +46,7 @@ public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     @Test
     public void checkFindFirstWorks() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = findFirst(withClass("small"));
+        FluentWebElement element = el(withClass("small"));
         assertThat(element.id()).isEqualTo("id");
     }
 
@@ -67,7 +67,7 @@ public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     @Test
     public void check$AndIndexWorks() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = $(1, withClass("small"));
+        FluentWebElement element = $(withClass("small")).index(1);
         assertThat(element.id()).isEqualTo("id2");
     }
 
@@ -81,7 +81,7 @@ public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     @Test
     public void checkFillSelectWorks() {
         goTo(DEFAULT_URL);
-        Select select = new Select(findFirst("#select").getElement());
+        Select select = new Select(el("#select").getElement());
         assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 1");
         $(withId("select")).fillSelect().withValue("value-3");
         assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 3");
@@ -90,9 +90,9 @@ public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     @Test
     public void checkClickWorks() {
         goTo(DEFAULT_URL);
-        assertThat(title()).contains("Selenium");
+        assertThat(window().title()).contains("Selenium");
         $(withId("linkToPage2")).click();
-        assertThat(title()).isEqualTo("Page 2");
+        assertThat(window().title()).isEqualTo("Page 2");
     }
 
     @Test
@@ -125,35 +125,35 @@ public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     @Test
     public void checkFindChildFindWithIndexWorks() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = find(withClass("parent")).find(0, withClass("child"));
+        FluentWebElement element = find(withClass("parent")).find(withClass("child")).index(0);
         assertThat(element.text()).isEqualTo("Alex");
     }
 
     @Test
     public void checkFindChildFindFirstWorks() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = find(withClass("parent")).findFirst(withClass("child"));
+        FluentWebElement element = find(withClass("parent")).el(withClass("child"));
         assertThat(element.text()).isEqualTo("Alex");
     }
 
     @Test
     public void checkFindFirstChildFindWorks() {
         goTo(DEFAULT_URL);
-        FluentList list = findFirst(withClass("parent")).find(withClass("child"));
+        FluentList list = el(withClass("parent")).find(withClass("child"));
         assertThat(list.texts()).containsOnly("Alex");
     }
 
     @Test
     public void checkFindFirstChildFindWithIndexWorks() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = findFirst(withClass("parent")).find(0, withClass("child"));
+        FluentWebElement element = el(withClass("parent")).find(withClass("child")).index(0);
         assertThat(element.text()).isEqualTo("Alex");
     }
 
     @Test
     public void checkFindFirstChildFindFirstWorks() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = findFirst(withClass("parent")).findFirst(withClass("child"));
+        FluentWebElement element = el(withClass("parent")).el(withClass("child"));
         assertThat(element.text()).isEqualTo("Alex");
     }
 }

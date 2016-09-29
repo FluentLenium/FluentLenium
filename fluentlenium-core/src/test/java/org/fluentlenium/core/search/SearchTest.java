@@ -8,7 +8,6 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.matcher.Matcher;
-import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -206,7 +205,7 @@ public class SearchTest {
         webElements.add(webElement2);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(webElements);
 
-        FluentWebElement fluentWebElement = search.find(name, 1);
+        FluentWebElement fluentWebElement = search.find(name).index(1);
         assertThat(fluentWebElement.tagName()).isEqualTo("a");
     }
 
@@ -214,7 +213,7 @@ public class SearchTest {
     public void shouldThrowErrorWhenPositionNotFound() {
         String name = "cssStyle";
         WebElement webElement = mock(WebElement.class);
-        search.find(name, 0).now();
+        search.find(name).index(0).now();
     }
 
     @Test
@@ -229,14 +228,14 @@ public class SearchTest {
         webElements.add(webElement2);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(webElements);
 
-        FluentWebElement fluentWebElement = search.findFirst(name);
+        FluentWebElement fluentWebElement = search.el(name);
         assertThat(fluentWebElement.tagName()).isEqualTo("span");
     }
 
     @Test(expected = NoSuchElementException.class)
     public void shouldThrowErrorWhenFirstNotFound() {
         String name = "cssStyle";
-        FluentWebElement fluentWebElement = search.findFirst(name);
+        FluentWebElement fluentWebElement = search.el(name);
         assertThat(fluentWebElement.tagName()).isEqualTo("span");
     }
 

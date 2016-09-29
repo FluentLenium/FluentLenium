@@ -54,6 +54,11 @@ public class ContainerFluentControl implements FluentControl {
     }
 
     @Override
+    public FluentWebElement el(String selector, Filter... filters) {
+        return applyHooks(adapterControl.el(selector, filters));
+    }
+
+    @Override
     public FluentList<FluentWebElement> find(Filter... filters) {
         return applyHooks(adapterControl.find(filters));
     }
@@ -61,6 +66,11 @@ public class ContainerFluentControl implements FluentControl {
     @Override
     public FluentList<FluentWebElement> $(Filter... filters) {
         return applyHooks(adapterControl.$(filters));
+    }
+
+    @Override
+    public FluentWebElement el(Filter... filters) {
+        return applyHooks(adapterControl.el(filters));
     }
 
     @Override
@@ -74,57 +84,8 @@ public class ContainerFluentControl implements FluentControl {
     }
 
     @Override
-    @Deprecated
-    public FluentWebElement find(String selector, Integer index, Filter... filters) {
-        return applyHooks(adapterControl.find(selector, index, filters));
-    }
-
-    @Override
-    @Deprecated
-    public FluentWebElement $(String selector, Integer index, Filter... filters) {
-        return applyHooks(adapterControl.$(selector, index, filters));
-    }
-
-    @Override
-    @Deprecated
-    public FluentWebElement find(Integer index, Filter... filters) {
-        return applyHooks(adapterControl.find(index, filters));
-    }
-
-    @Override
-    @Deprecated
-    public FluentWebElement $(Integer index, Filter... filters) {
-        return applyHooks(adapterControl.$(index, filters));
-    }
-
-    @Override
-    @Deprecated
-    public FluentWebElement find(By locator, Integer index, Filter... filters) {
-        return applyHooks(adapterControl.find(locator, index, filters));
-    }
-
-    @Override
-    @Deprecated
-    public FluentWebElement $(By locator, Integer index, Filter... filters) {
-        return applyHooks(adapterControl.$(locator, index, filters));
-    }
-
-    @Override
-    @Deprecated
-    public FluentWebElement findFirst(String selector, Filter... filters) {
-        return applyHooks(adapterControl.findFirst(selector, filters));
-    }
-
-    @Override
-    @Deprecated
-    public FluentWebElement findFirst(Filter... filters) {
-        return applyHooks(adapterControl.findFirst(filters));
-    }
-
-    @Override
-    @Deprecated
-    public FluentWebElement findFirst(By locator, Filter... filters) {
-        return applyHooks(adapterControl.findFirst(locator, filters));
+    public FluentWebElement el(By locator, Filter... filters) {
+        return applyHooks(adapterControl.el(locator, filters));
     }
 
 }

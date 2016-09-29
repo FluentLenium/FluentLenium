@@ -4,9 +4,7 @@ import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
-import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.conditions.WebElementConditions;
-import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -87,19 +85,6 @@ public class FluentListImplTest {
                 emptyList.last();
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
-    }
-
-    @Test
-    public void testFromToElements() {
-        WebElement webElement1 = mock(WebElement.class);
-        WebElement webElement2 = mock(WebElement.class);
-        WebElement webElement3 = mock(WebElement.class);
-
-        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
-        DefaultHookChainBuilder hookChainBuilder = new DefaultHookChainBuilder(fluentAdapter, instantiator);
-
-        FluentList<FluentWebElement> list = FluentListImpl.fromElements(instantiator, hookChainBuilder, webElement1, webElement2, webElement3);
-        assertThat(list.toElements()).containsExactly(webElement1, webElement2, webElement3);
     }
 
     @Test
@@ -309,16 +294,16 @@ public class FluentListImplTest {
         when(element2.find()).thenReturn(fluentAdapter.newFluentList(ret2));
         when(element3.find()).thenReturn(fluentAdapter.newFluentList(ret3));
 
-        assertThat(list.findFirst()).isSameAs(ret1);
+        assertThat(list.el()).isSameAs(ret1);
         assertThat(list.find()).containsExactly(ret1, ret2, ret3);
-        assertThat(list.find(1)).isSameAs(ret2);
+        assertThat(list.find().index(1)).isSameAs(ret2);
         assertThat(list.$()).containsExactly(ret1, ret2, ret3);
-        assertThat(list.$(1)).isSameAs(ret2);
+        assertThat(list.$().index(1)).isSameAs(ret2);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                list.find(3);
+                list.find().index(3);
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
 
@@ -328,16 +313,16 @@ public class FluentListImplTest {
         when(element2.find(".test")).thenReturn(fluentAdapter.newFluentList(ret2));
         when(element3.find(".test")).thenReturn(fluentAdapter.newFluentList(ret3));
 
-        assertThat(list.findFirst(".test")).isSameAs(ret1);
+        assertThat(list.el(".test")).isSameAs(ret1);
         assertThat(list.find(".test")).containsExactly(ret1, ret2, ret3);
-        assertThat(list.find(".test", 1)).isSameAs(ret2);
+        assertThat(list.find(".test").index(1)).isSameAs(ret2);
         assertThat(list.$(".test")).containsExactly(ret1, ret2, ret3);
-        assertThat(list.$(".test", 1)).isSameAs(ret2);
+        assertThat(list.$(".test").index(1)).isSameAs(ret2);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                list.find(".test", 3);
+                list.find(".test").index(3);
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
 
@@ -347,16 +332,16 @@ public class FluentListImplTest {
         when(element2.find(By.cssSelector(".test"))).thenReturn(fluentAdapter.newFluentList(ret2));
         when(element3.find(By.cssSelector(".test"))).thenReturn(fluentAdapter.newFluentList(ret3));
 
-        assertThat(list.findFirst(By.cssSelector(".test"))).isSameAs(ret1);
+        assertThat(list.el(By.cssSelector(".test"))).isSameAs(ret1);
         assertThat(list.find(By.cssSelector(".test"))).containsExactly(ret1, ret2, ret3);
-        assertThat(list.find(By.cssSelector(".test"), 1)).isSameAs(ret2);
+        assertThat(list.find(By.cssSelector(".test")).index(1)).isSameAs(ret2);
         assertThat(list.$(By.cssSelector(".test"))).containsExactly(ret1, ret2, ret3);
-        assertThat(list.$(By.cssSelector(".test"), 1)).isSameAs(ret2);
+        assertThat(list.$(By.cssSelector(".test")).index(1)).isSameAs(ret2);
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                list.find(By.cssSelector(".test"), 3);
+                list.find(By.cssSelector(".test")).index(3);
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
 
