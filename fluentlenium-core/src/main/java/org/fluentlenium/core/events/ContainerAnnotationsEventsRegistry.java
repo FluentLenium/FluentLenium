@@ -30,62 +30,66 @@ public class ContainerAnnotationsEventsRegistry extends EventsRegistry {
         this.container = container;
 
         //TODO: Ordre non determiné.
-        for (final Method method : this.container.getClass().getDeclaredMethods()) {
-            if (method.getAnnotation(BeforeClickOn.class) != null) {
-                beforeClickOn(new AnnotationElementListener(method, container, BeforeClickOn.class.getSimpleName()));
-            }
-            if (method.getAnnotation(AfterClickOn.class) != null) {
-                afterClickOn(new AnnotationElementListener(method, container, AfterClickOn.class.getSimpleName()));
-            }
-            if (method.getAnnotation(BeforeChangeValueOf.class) != null) {
-                beforeChangeValueOf(new AnnotationElementListener(method, container, BeforeChangeValueOf.class.getSimpleName()));
-            }
-            if (method.getAnnotation(AfterChangeValueOf.class) != null) {
-                afterChangeValueOf(new AnnotationElementListener(method, container, AfterChangeValueOf.class.getSimpleName()));
-            }
-            if (method.getAnnotation(BeforeFindBy.class) != null) {
-                beforeFindBy(new AnnotationFindByListener(method, container, BeforeFindBy.class.getSimpleName()));
-            }
-            if (method.getAnnotation(AfterFindBy.class) != null) {
-                afterFindBy(new AnnotationFindByListener(method, container, AfterFindBy.class.getSimpleName()));
-            }
-            if (method.getAnnotation(BeforeNavigateBack.class) != null) {
-                beforeNavigateBack(new AnnotationNavigateListener(method, container, BeforeNavigateBack.class.getSimpleName()));
-            }
-            if (method.getAnnotation(AfterNavigateBack.class) != null) {
-                afterNavigateBack(new AnnotationNavigateListener(method, container, AfterNavigateBack.class.getSimpleName()));
-            }
-            if (method.getAnnotation(BeforeNavigateForward.class) != null) {
-                beforeNavigateForward(new AnnotationNavigateListener(method, container, BeforeNavigateForward.class.getSimpleName()));
-            }
-            if (method.getAnnotation(AfterNavigateForward.class) != null) {
-                afterNavigateForward(new AnnotationNavigateListener(method, container, AfterNavigateForward.class.getSimpleName()));
-            }
-            if (method.getAnnotation(BeforeNavigateTo.class) != null) {
-                beforeNavigateTo(new AnnotationNavigateToListener(method, container, BeforeNavigateTo.class.getSimpleName()));
-            }
-            if (method.getAnnotation(AfterNavigateTo.class) != null) {
-                beforeNavigateTo(new AnnotationNavigateToListener(method, container, AfterNavigateTo.class.getSimpleName()));
-            }
-            if (method.getAnnotation(BeforeNavigate.class) != null) {
-                beforeNavigate(new AnnotationNavigateAllListener(method, container, BeforeNavigate.class.getSimpleName()));
-            }
-            if (method.getAnnotation(AfterNavigate.class) != null) {
-                afterNavigate(new AnnotationNavigateAllListener(method, container, AfterNavigate.class.getSimpleName()));
-            }
-            if (method.getAnnotation(BeforeNavigateRefresh.class) != null) {
-                beforeNavigateRefresh(new AnnotationNavigateListener(method, container, BeforeNavigateRefresh.class.getSimpleName()));
-            }
-            if (method.getAnnotation(AfterNavigateRefresh.class) != null) {
-                beforeNavigateRefresh(new AnnotationNavigateListener(method, container, AfterNavigateRefresh.class.getSimpleName()));
-            }
-            if (method.getAnnotation(BeforeScript.class) != null) {
-                beforeScript(new AnnotationScriptListener(method, container, BeforeScript.class.getSimpleName()));
-            }
-            if (method.getAnnotation(AfterScript.class) != null) {
-                afterScript(new AnnotationScriptListener(method, container, AfterScript.class.getSimpleName()));
+        for (Class<?> current = this.container.getClass(); current != null; current = current.getSuperclass()) {
+
+            for (final Method method : current.getDeclaredMethods()) {
+                if (method.getAnnotation(BeforeClickOn.class) != null) {
+                    beforeClickOn(new AnnotationElementListener(method, container, BeforeClickOn.class.getSimpleName()));
+                }
+                if (method.getAnnotation(AfterClickOn.class) != null) {
+                    afterClickOn(new AnnotationElementListener(method, container, AfterClickOn.class.getSimpleName()));
+                }
+                if (method.getAnnotation(BeforeChangeValueOf.class) != null) {
+                    beforeChangeValueOf(new AnnotationElementListener(method, container, BeforeChangeValueOf.class.getSimpleName()));
+                }
+                if (method.getAnnotation(AfterChangeValueOf.class) != null) {
+                    afterChangeValueOf(new AnnotationElementListener(method, container, AfterChangeValueOf.class.getSimpleName()));
+                }
+                if (method.getAnnotation(BeforeFindBy.class) != null) {
+                    beforeFindBy(new AnnotationFindByListener(method, container, BeforeFindBy.class.getSimpleName()));
+                }
+                if (method.getAnnotation(AfterFindBy.class) != null) {
+                    afterFindBy(new AnnotationFindByListener(method, container, AfterFindBy.class.getSimpleName()));
+                }
+                if (method.getAnnotation(BeforeNavigateBack.class) != null) {
+                    beforeNavigateBack(new AnnotationNavigateListener(method, container, BeforeNavigateBack.class.getSimpleName()));
+                }
+                if (method.getAnnotation(AfterNavigateBack.class) != null) {
+                    afterNavigateBack(new AnnotationNavigateListener(method, container, AfterNavigateBack.class.getSimpleName()));
+                }
+                if (method.getAnnotation(BeforeNavigateForward.class) != null) {
+                    beforeNavigateForward(new AnnotationNavigateListener(method, container, BeforeNavigateForward.class.getSimpleName()));
+                }
+                if (method.getAnnotation(AfterNavigateForward.class) != null) {
+                    afterNavigateForward(new AnnotationNavigateListener(method, container, AfterNavigateForward.class.getSimpleName()));
+                }
+                if (method.getAnnotation(BeforeNavigateTo.class) != null) {
+                    beforeNavigateTo(new AnnotationNavigateToListener(method, container, BeforeNavigateTo.class.getSimpleName()));
+                }
+                if (method.getAnnotation(AfterNavigateTo.class) != null) {
+                    beforeNavigateTo(new AnnotationNavigateToListener(method, container, AfterNavigateTo.class.getSimpleName()));
+                }
+                if (method.getAnnotation(BeforeNavigate.class) != null) {
+                    beforeNavigate(new AnnotationNavigateAllListener(method, container, BeforeNavigate.class.getSimpleName()));
+                }
+                if (method.getAnnotation(AfterNavigate.class) != null) {
+                    afterNavigate(new AnnotationNavigateAllListener(method, container, AfterNavigate.class.getSimpleName()));
+                }
+                if (method.getAnnotation(BeforeNavigateRefresh.class) != null) {
+                    beforeNavigateRefresh(new AnnotationNavigateListener(method, container, BeforeNavigateRefresh.class.getSimpleName()));
+                }
+                if (method.getAnnotation(AfterNavigateRefresh.class) != null) {
+                    beforeNavigateRefresh(new AnnotationNavigateListener(method, container, AfterNavigateRefresh.class.getSimpleName()));
+                }
+                if (method.getAnnotation(BeforeScript.class) != null) {
+                    beforeScript(new AnnotationScriptListener(method, container, BeforeScript.class.getSimpleName()));
+                }
+                if (method.getAnnotation(AfterScript.class) != null) {
+                    afterScript(new AnnotationScriptListener(method, container, AfterScript.class.getSimpleName()));
+                }
             }
         }
+
     }
 
 }
