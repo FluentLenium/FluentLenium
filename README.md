@@ -90,7 +90,7 @@ This example is for JUnit, but you may use other framework the exact same way (S
 
 ##  Fluent Locators
 
-FluentLenium provides a `$` method to build **Fluent Locators**.
+FluentLenium provides `$` and `el` methods to build **Fluent Locators**.
 
   - **CSS Selector**: Creates a Fluent Locator from CSS Selector.
   - **Selenium By Locator**: Creates a Fluent Locator with native Selenium API.
@@ -98,8 +98,8 @@ FluentLenium provides a `$` method to build **Fluent Locators**.
   - **First/Last/Index**: Get a single element from the Fluent Locator.
   - **XPath Axes**: Get another Fluent Locator from its relative position in the DOM.
   
-Fluent Locators are implemented by ```FluentWebElement``` and ```FluentList<FluentWebElement>```. Those classes are 
-wrappers of Selenium ```WebElement``` and ```List<WebElement>```.
+Fluent Locators are implemented by ```FluentWebElement``` (`el`) and ```FluentList<FluentWebElement>``` (`$`). 
+Those classes are wrappers of Selenium ```WebElement``` and ```List<WebElement>```.
 
 ### CSS Selector
 
@@ -1070,14 +1070,14 @@ FluentLenium can be configured in many ways through configuration properties.
 
   - **pageLoadTimeout**
      
-     Sets the amount of time to wait for a page load to complete before throwing an error.
+     Sets the amount of time in millisecond to wait for a page load to complete before throwing an error.
      If the timeout is negative, page loads can be indefinite.
      
      Default value: ```null```.
 
   - **implicitlyWait**
      
-     Specifies the amount of time the driver should wait when searching for an element if it is
+     Specifies the amount of time in millisecond the driver should wait when searching for an element if it is
      not immediately present.
      
      Default value: ```null```.
@@ -1085,7 +1085,7 @@ FluentLenium can be configured in many ways through configuration properties.
 
   - **scriptTimeout**
   
-     Sets the amount of time to wait for an asynchronous script to finish execution before
+     Sets the amount of time in millisecond to wait for an asynchronous script to finish execution before
      throwing an error. If the timeout is negative, then the script will be allowed to run
      indefinitely.
      
