@@ -8,7 +8,6 @@ import org.fluentlenium.core.events.annotations.AfterClickOn;
 import org.fluentlenium.core.events.annotations.AfterFindBy;
 import org.fluentlenium.core.events.annotations.BeforeClickOn;
 import org.fluentlenium.core.events.annotations.BeforeFindBy;
-import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -19,9 +18,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AnnotationsComponentEventsTest extends IntegrationFluentTest {
+public class AnnotationsComponentEventsTest extends AnnotationsComponentEventsTestSubClass {
     private List<WebElement> beforeClick = new ArrayList<>();
-    private List<WebElement> afterClick = new ArrayList<>();
 
     public static class Component extends FluentWebElement {
 
@@ -130,11 +128,6 @@ public class AnnotationsComponentEventsTest extends IntegrationFluentTest {
     @BeforeClickOn
     private void beforeClickOn(FluentWebElement element) {
         beforeClick.add(element.getElement());
-    }
-
-    @BeforeClickOn
-    private void afterClickOn(FluentWebElement element) {
-        afterClick.add(element.getElement());
     }
 
     @Test
