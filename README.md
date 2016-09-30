@@ -870,8 +870,6 @@ public class MyPage extends FluentPage {
 ```Wait``` hook automatically waits for conditions to be applied before interacting with Elements, avoiding the need 
 of writing technical waiting and condition code in tests and page objects.
 
-Default timeout for ```@Wait``` hook is 5 seconds.
-
 ### Custom hook
 
 It's possible to implement your own hook by extending ```BaseHook``` or ```BaseFluentHook```.

@@ -32,6 +32,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
 
     public FluentWait(FluentControl fluentControl) {
         wait = new org.openqa.selenium.support.ui.FluentWait<>(fluentControl);
+        wait.withTimeout(5, TimeUnit.SECONDS);
         driver = fluentControl.getDriver();
         useDefaultException = true;
     }
@@ -215,7 +216,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
      * Waits unconditionally for explicit amount of time. The method should be used only as a last resort. In most
      * cases you should wait for some condition, e.g. visibility of particular element on the page.
      *
-     * @param amount   amount of time in milliseconds
+     * @param amount amount of time in milliseconds
      * @return {@code this} to allow chaining method invocations
      */
     public FluentWait explicitlyFor(long amount) {

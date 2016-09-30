@@ -84,7 +84,7 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
             }
         }
 
-        ContainerFluentControl adapterFluentControl = new ContainerFluentControl(new FluentDriver(webDriver, this));
+        ContainerFluentControl adapterFluentControl = new ContainerFluentControl(new FluentDriver(webDriver, this, this));
         setFluentControl(adapterFluentControl);
         ContainerContext context = adapterFluentControl.inject(this);
         adapterFluentControl.setContext(context);

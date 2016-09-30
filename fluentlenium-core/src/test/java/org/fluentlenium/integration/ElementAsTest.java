@@ -1,7 +1,6 @@
 package org.fluentlenium.integration;
 
 import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.components.ComponentException;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.ComponentsManager;
@@ -92,7 +91,7 @@ public class ElementAsTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         FullConstructorComponent component = el("span").as(FullConstructorComponent.class);
 
-        assertThat(component.fluentControl).isInstanceOf(FluentDriver.class);
+        assertThat(component.fluentControl).isSameAs(this);
         assertThat(component.element.getTagName()).isEqualTo("span");
         assertThat(component.instantiator).isInstanceOf(ComponentsManager.class);
     }

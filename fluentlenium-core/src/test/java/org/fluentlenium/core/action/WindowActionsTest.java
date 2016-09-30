@@ -3,6 +3,7 @@ package org.fluentlenium.core.action;
 import com.google.common.collect.ImmutableSet;
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.configuration.ConfigurationProperties;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.wait.FluentWait;
@@ -37,6 +38,8 @@ public class WindowActionsTest {
     private WebDriver.Options options;
     @Mock
     private FluentDriver fluentDriver;
+    @Mock
+    private FluentControl fluentControl;
     @Mock
     private WebDriver.TargetLocator targetLocator;
 
@@ -127,7 +130,7 @@ public class WindowActionsTest {
         FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
         ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
 
-        FluentDriver fluentDriver = new FluentDriver(jsDriver, configurationProperties);
+        FluentDriver fluentDriver = new FluentDriver(jsDriver, configurationProperties, fluentControl);
         FluentDriver fluentDriverSpied = spy(fluentDriver);
 
         when(jsDriver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1), ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
@@ -197,7 +200,7 @@ public class WindowActionsTest {
         FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
         ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
 
-        FluentDriver fluentDriver = new FluentDriver(driver, configurationProperties);
+        FluentDriver fluentDriver = new FluentDriver(driver, configurationProperties, fluentControl);
         FluentDriver fluentDriverSpied = spy(fluentDriver);
 
         when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1), ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
