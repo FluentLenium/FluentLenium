@@ -410,7 +410,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> find(By locator, Filter... filters) {
-        List<E> finds = new ArrayList<E>();
+        List<E> finds = new ArrayList<>();
         for (FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(locator, filters));
         }
@@ -419,7 +419,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> find(Filter... filters) {
-        List<E> finds = new ArrayList<E>();
+        List<E> finds = new ArrayList<>();
         for (FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(filters));
         }

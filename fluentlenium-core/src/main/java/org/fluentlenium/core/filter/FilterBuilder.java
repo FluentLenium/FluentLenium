@@ -14,70 +14,70 @@ import java.util.regex.Pattern;
 
 public class FilterBuilder {
 
-    private String attribute;
+    private final String attribute;
 
-    public FilterBuilder(String customAttribute) {
+    public FilterBuilder(final String customAttribute) {
         this.attribute = customAttribute;
     }
 
-    public FilterBuilder(FilterType filterType) {
+    public FilterBuilder(final FilterType filterType) {
         this.attribute = filterType.name();
 
     }
 
-    public Filter equalTo(String equal) {
+    public Filter equalTo(final String equal) {
         return new Filter(attribute, new EqualMatcher(equal));
     }
 
-    public Filter contains(String equal) {
+    public Filter contains(final String equal) {
         return new Filter(attribute, new ContainsMatcher(equal));
     }
 
-    public Filter containsWord(String equal) {
+    public Filter containsWord(final String equal) {
         return new Filter(attribute, new ContainsWordMatcher(equal));
     }
 
-    public Filter contains(Pattern equal) {
+    public Filter contains(final Pattern equal) {
         return new Filter(attribute, new ContainsMatcher(equal));
     }
 
-    public Filter startsWith(String equal) {
+    public Filter startsWith(final String equal) {
         return new Filter(attribute, new StartsWithMatcher(equal));
     }
 
-    public Filter startsWith(Pattern equal) {
+    public Filter startsWith(final Pattern equal) {
         return new Filter(attribute, new StartsWithMatcher(equal));
     }
 
-    public Filter endsWith(String equal) {
+    public Filter endsWith(final String equal) {
         return new Filter(attribute, new EndsWithMatcher(equal));
     }
 
-    public Filter endsWith(Pattern equal) {
+    public Filter endsWith(final Pattern equal) {
         return new Filter(attribute, new EndsWithMatcher(equal));
     }
 
-    public Filter notContains(String equal) {
+    public Filter notContains(final String equal) {
         return new Filter(attribute, new NotContainsMatcher(equal));
     }
 
-    public Filter notContains(Pattern equal) {
+    public Filter notContains(final Pattern equal) {
         return new Filter(attribute, new NotContainsMatcher(equal));
     }
 
-    public Filter notStartsWith(String equal) {
+    public Filter notStartsWith(final String equal) {
         return new Filter(attribute, new NotStartsWithMatcher(equal));
     }
 
-    public Filter notStartsWith(Pattern equal) {
+    public Filter notStartsWith(final Pattern equal) {
         return new Filter(attribute, new NotStartsWithMatcher(equal));
     }
 
-    public Filter notEndsWith(String equal) {
+    public Filter notEndsWith(final String equal) {
         return new Filter(attribute, new NotEndsWithMatcher(equal));
     }
 
-    public Filter notEndsWith(Pattern equal) {
+    public Filter notEndsWith(final Pattern equal) {
         return new Filter(attribute, new NotEndsWithMatcher(equal));
     }
 

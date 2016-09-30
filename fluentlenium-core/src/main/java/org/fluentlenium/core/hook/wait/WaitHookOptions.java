@@ -32,7 +32,7 @@ public class WaitHookOptions {
         timeUnit = annotation.timeUnit();
         atMost = annotation.timeout() == -1L ? null : annotation.timeout();
         pollingEvery = annotation.pollingInterval() == -1L ? null : annotation.pollingInterval();
-        ignoreAll = new ArrayList<Class<? extends Throwable>>(Arrays.asList(annotation.ignoreAll()));
+        ignoreAll = new ArrayList<>(Arrays.asList(annotation.ignoreAll()));
         withNoDefaultsException = annotation.withNoDefaultsException();
     }
 

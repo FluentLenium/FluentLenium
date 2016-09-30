@@ -18,7 +18,7 @@ public class AwaitWithStaleElementReferenceException extends IntegrationFluentTe
     }
 
     @Test(expected = TimeoutException.class)
-    public void given_default_when_state_element_reference_exception_is_thrown_then_it_is_ignored() {
+    public void givenDefaultWhenStateElementReferenceExceptionIsThrownThenItIsIgnored() {
         await().atMost(3, SECONDS).untilPredicate(new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl fluent) {
@@ -30,7 +30,7 @@ public class AwaitWithStaleElementReferenceException extends IntegrationFluentTe
 
 
     @Test(expected = StaleElementReferenceException.class)
-    public void given_no_defaults_when_state_element_reference_exception_is_thrown_then_it_is_not_ignored() {
+    public void givenNoDefaultsWhenStateElementReferenceExceptionIsThrownThenItIsNotIgnored() {
         await().atMost(3, SECONDS).withNoDefaultsException().untilPredicate(new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl fluent) {

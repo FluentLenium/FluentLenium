@@ -7,11 +7,11 @@ public abstract class Matcher {
     private String value;
     private Pattern pattern;
 
-    protected Matcher(String value) {
+    protected Matcher(final String value) {
         this.value = value;
     }
 
-    protected Matcher(Pattern value) {
+    protected Matcher(final Pattern value) {
         this.pattern = value;
     }
 

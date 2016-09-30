@@ -8,11 +8,11 @@ import java.lang.reflect.Field;
 public class InjectionElementLocatorFactory implements ElementLocatorFactory {
     private final SearchContext searchContext;
 
-    public InjectionElementLocatorFactory(SearchContext searchContext) {
+    public InjectionElementLocatorFactory(final SearchContext searchContext) {
         this.searchContext = searchContext;
     }
 
-    public InjectionElementLocator createLocator(Field field) {
+    public InjectionElementLocator createLocator(final Field field) {
         return new InjectionElementLocator(searchContext, new InjectionAnnotations(field), !Iterable.class.isAssignableFrom(field.getType()));
     }
 }

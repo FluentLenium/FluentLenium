@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class ReflectionUtilsTest {
     @Test
     public void testToClass() {
-        Object[] objects = {"test", 1, 2L, true, new Integer(3)};
+        Object[] objects = {"test", 1, 2L, true, Integer.valueOf(3)};
 
         Class<?>[] classes = ReflectionUtils.toClass(objects);
 
