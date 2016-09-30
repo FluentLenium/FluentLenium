@@ -1,6 +1,5 @@
 package org.fluentlenium.core.components;
 
-import com.sun.jna.WeakIdentityHashMap;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.proxy.ProxyElementListener;
@@ -8,8 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
+import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Manage living components for a WebDriver instance.
@@ -19,13 +21,12 @@ import java.util.Map;
  * <p>
  * {@link org.fluentlenium.core.domain.FluentWebElement} is the most common component.
  */
-public class ComponentsManager extends AbstractComponentInstantiator implements ComponentInstantiator, ComponentAccessor, ProxyElementListener {
+public class ComponentsManager extends AbstractComponentInstantiator implements ComponentInstantiator, ComponentsAccessor, ProxyElementListener {
 
     private final FluentControl fluentControl;
     private final DefaultComponentInstantiator instantiator;
 
-    //TODO: IdentityHashMap or WeakIdentityHashMap ?
-    private Map<WebElement, Object> components = new WeakIdentityHashMap();
+    private Map<WebElement, Set<Object>> components = new IdentityHashMap<>();
 
     public ComponentsManager(FluentControl fluentControl) {
         this.fluentControl = fluentControl;
@@ -37,7 +38,7 @@ public class ComponentsManager extends AbstractComponentInstantiator implements 
     }
 
     @Override
-    public Object getComponent(WebElement element) {
+    public Set<Object> getComponents(WebElement element) {
         return components.get(unwrapElement(element));
     }
 
@@ -58,10 +59,15 @@ public class ComponentsManager extends AbstractComponentInstantiator implements 
         return component;
     }
 
-    private <T> void register(WebElement element, T component) {
+    private synchronized <T> void register(WebElement element, T component) {
         WebElement webElement = unwrapElement(element);
         LocatorProxies.addProxyListener(webElement, this);
-        components.put(webElement, component);
+        Set<Object> elementComponents = components.get(webElement);
+        if (elementComponents == null) {
+            elementComponents = new HashSet<>();
+            components.put(webElement, elementComponents);
+        }
+        elementComponents.add(component);
     }
 
     @Override
@@ -87,11 +93,11 @@ public class ComponentsManager extends AbstractComponentInstantiator implements 
     }
 
     @Override
-    public void proxyElementFound(Object proxy, ElementLocator locator, List<WebElement> elements) {
+    public synchronized void proxyElementFound(Object proxy, ElementLocator locator, List<WebElement> elements) {
         for (WebElement element : elements) {
-            Object component = components.remove(proxy);
-            if (component != null) {
-                components.put(unwrapElement(element), component);
+            Set<Object> proxyComponents = components.remove(proxy);
+            if (proxyComponents != null) {
+                components.put(unwrapElement(element), proxyComponents);
             }
         }
     }

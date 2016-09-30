@@ -1,5 +1,6 @@
 package org.fluentlenium.core.domain;
 
+import com.google.common.base.Optional;
 import com.google.common.base.Supplier;
 import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
@@ -152,9 +153,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      * @return element as component.
      */
     public <T> T as(Class<T> componentClass) {
-        WebElement webElement = getElement();
-        this.webElement = new FailWebElement(); // Make sure this FluentWebElement won't be used anymore.
-        return instantiator.newComponent(componentClass, webElement);
+        return instantiator.newComponent(componentClass, getElement());
     }
 
     /**
@@ -309,9 +308,6 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      * @return web element
      */
     public WebElement getElement() {
-        if (webElement instanceof FailWebElement) {
-            ((FailWebElement) webElement).fail();
-        }
         return webElement;
     }
 
@@ -321,7 +317,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
     }
 
     /**
-     * return the size of the elements
+     * return the size of the element
      *
      * @return dimension/size of element
      */
@@ -363,34 +359,17 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
         return find(locator, filters).first();
     }
 
-    /**
-     * find elements into the children with the corresponding filters
-     *
-     * @param locator elements locator
-     * @param filters filters set
-     * @return list of Fluent web elements
-     */
+    @Override
     public FluentList<FluentWebElement> find(By locator, Filter... filters) {
         return search.find(locator, filters);
     }
 
-    /**
-     * find elements into the children with the corresponding filters
-     *
-     * @param selector name of element
-     * @param filters  filters set
-     * @return list of Fluent web elements
-     */
+    @Override
     public FluentList<FluentWebElement> find(String selector, Filter... filters) {
         return search.find(selector, filters);
     }
 
-    /**
-     * find elements in the children with the corresponding filters
-     *
-     * @param filters filters set
-     * @return list of Fluent web elements
-     */
+    @Override
     public FluentList<FluentWebElement> find(Filter... filters) {
         return search.find(filters);
     }
@@ -404,24 +383,23 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
         return webElement.getAttribute("innerHTML");
     }
 
-    /**
-     * Construct a FillConstructor in order to allow easy fill
-     * Be careful - only the visible elements are filled
-     *
-     * @return fill constructor
-     */
+    @Override
     public Fill fill() {
         return new Fill(this);
     }
 
-    /**
-     * Construct a FillSelectConstructor in order to allow easy list selection
-     * Be careful - only the visible elements are filled
-     *
-     * @return fill constructor
-     */
+    @Override
     public FillSelect fillSelect() {
         return new FillSelect(this);
+    }
+
+    @Override
+    public Optional<FluentWebElement> optional() {
+        if (present()) {
+            return Optional.of(this);
+        } else {
+            return Optional.absent();
+        }
     }
 
     /**

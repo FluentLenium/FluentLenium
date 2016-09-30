@@ -104,7 +104,7 @@ public class MouseActionsTest {
         Assertions.assertThat(actionsAlt.basic()).isSameAs(mouse);
     }
 
-    private abstract class InputDevicesDriver implements WebDriver, HasInputDevices {
+    private static abstract class InputDevicesDriver implements WebDriver, HasInputDevices {
 
     }
 }

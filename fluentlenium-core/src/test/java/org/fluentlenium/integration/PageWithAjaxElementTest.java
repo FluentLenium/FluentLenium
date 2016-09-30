@@ -4,6 +4,7 @@ import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.hook.wait.Wait;
+import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
@@ -22,6 +23,11 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
 
     @Page
     JavascriptPageWithoutAjax pageWithoutAjax;
+
+    @Override
+    public FluentWait await() {
+        return super.await().atMost(500);
+    }
 
     @Test
     public void when_ajax_fields_are_considered_as_ajax_fields_then_wait_for_them() {
@@ -50,7 +56,7 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
 
     private static class JavascriptPage extends FluentPage {
 
-        @Wait
+        @Wait(timeout = 5000)
         FluentWebElement newField;
 
         @Override
@@ -65,7 +71,7 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
 
     private static class JavascriptPageSlow extends FluentPage {
 
-        @Wait(timeout = 12)
+        @Wait(timeout = 12000)
         FluentWebElement newFieldSlow;
 
         @Override
@@ -80,7 +86,7 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
 
     private static class JavascriptPageTooSlow extends FluentPage {
 
-        @Wait
+        @Wait(timeout = 5000)
         FluentWebElement newFieldSlow;
 
         @Override

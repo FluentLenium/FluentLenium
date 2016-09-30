@@ -22,11 +22,11 @@ import java.util.concurrent.TimeUnit;
 @Hook(WaitHook.class)
 @HookOptions(WaitHookOptions.class)
 public @interface Wait {
-    long timeout() default 5L;
+    long timeout() default -1L;
 
-    TimeUnit timeUnit() default TimeUnit.SECONDS;
+    TimeUnit timeUnit() default TimeUnit.MILLISECONDS;
 
-    long pollingInterval() default 250L;
+    long pollingInterval() default -1L;
 
     TimeUnit pollingTimeUnit() default TimeUnit.MILLISECONDS;
 

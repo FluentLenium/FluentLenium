@@ -148,8 +148,9 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
     /**
      * Check conditions on this element text.
      *
+     * @param anotherString string to compare with
      * @return true if the element has the given text, false otherwise.
-     * @see StringConditions#equals(Object)
+     * @see StringConditions#equalTo(String)
      */
     @Message("has text=\"{0}\"")
     @NotMessage("does not have text=\"{0}\"")
@@ -166,8 +167,9 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
     /**
      * Check conditions on this element text content.
      *
+     * @param anotherString string to compare with
      * @return true if the element has the given text content, false otherwise.
-     * @see StringConditions#equals(Object)
+     * @see StringConditions#equalTo(String)
      */
     @Message("has textContent=\"{0}\"")
     @NotMessage("does not have textContent=\"{0}\"")

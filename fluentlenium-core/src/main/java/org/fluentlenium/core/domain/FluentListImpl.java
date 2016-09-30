@@ -1,6 +1,7 @@
 package org.fluentlenium.core.domain;
 
 import com.google.common.base.Function;
+import com.google.common.base.Optional;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
@@ -409,7 +410,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> find(By locator, Filter... filters) {
-        List<E> finds = new ArrayList<E>();
+        List<E> finds = new ArrayList<>();
         for (FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(locator, filters));
         }
@@ -418,31 +419,30 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> find(Filter... filters) {
-        List<E> finds = new ArrayList<E>();
+        List<E> finds = new ArrayList<>();
         for (FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(filters));
         }
         return instantiator.newComponentList(getClass(), componentClass, finds);
     }
 
-    /**
-     * Construct a FillConstructor in order to allow easy fill
-     * Be careful - only the visible elements are filled
-     *
-     * @return fill constructor
-     */
+    @Override
     public Fill fill() {
         return new Fill((FluentList<E>) this);
     }
 
-    /**
-     * Construct a FillSelectConstructor in order to allow easy list selection
-     * Be careful - only the visible elements are filled
-     *
-     * @return fill constructor
-     */
+    @Override
     public FillSelect fillSelect() {
         return new FillSelect(this);
+    }
+
+    @Override
+    public Optional<FluentList<E>> optional() {
+        if (present()) {
+            return Optional.of((FluentList<E>) this);
+        } else {
+            return Optional.absent();
+        }
     }
 
     @Override

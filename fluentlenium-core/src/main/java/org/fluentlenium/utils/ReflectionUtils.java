@@ -51,7 +51,6 @@ public class ReflectionUtils {
 
     static {
         // Only add to this map via put(Map, Class<T>, T)
-        Map<Class<?>, Object> map = new HashMap<Class<?>, Object>();
         DEFAULTS.put(boolean.class, false);
         DEFAULTS.put(char.class, '\0');
         DEFAULTS.put(byte.class, (byte) 0);

@@ -12,7 +12,7 @@ public class LabelAnnotations {
     private String label;
     private String[] labelHints;
 
-    public LabelAnnotations(Field field) {
+    public LabelAnnotations(final Field field) {
         Label labelAnnotation = field.getAnnotation(Label.class);
         if (labelAnnotation != null) {
             this.label = labelAnnotation.value();

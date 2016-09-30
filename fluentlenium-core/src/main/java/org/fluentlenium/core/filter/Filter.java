@@ -14,7 +14,7 @@ public class Filter {
      * @param filterType filter type
      * @param value      value to filter
      */
-    public Filter(FilterType filterType, String value) {
+    public Filter(final FilterType filterType, final String value) {
         this.attribut = filterType.name();
         this.matcher = new EqualMatcher(value);
     }
@@ -25,7 +25,7 @@ public class Filter {
      * @param filterType filter type
      * @param matcher    matcher
      */
-    public Filter(FilterType filterType, Matcher matcher) {
+    public Filter(final FilterType filterType, final Matcher matcher) {
         this.attribut = filterType.name();
         this.matcher = matcher;
     }
@@ -36,7 +36,7 @@ public class Filter {
      * @param customAttribute custom attribute name
      * @param value           custom attribute value
      */
-    public Filter(String customAttribute, String value) {
+    public Filter(final String customAttribute, final String value) {
         this.attribut = customAttribute;
         this.matcher = new EqualMatcher(value);
     }
@@ -48,7 +48,7 @@ public class Filter {
      * @param customAttribute custom attribute name
      * @param matcher         matcher
      */
-    public Filter(String customAttribute, Matcher matcher) {
+    public Filter(final String customAttribute, final Matcher matcher) {
         this.attribut = customAttribute;
         this.matcher = matcher;
     }
@@ -59,6 +59,7 @@ public class Filter {
 
     public String toString() {
         String matcherAttribute = matcher != null ? matcher.getMatcherSymbol() : "";
+        if (matcherAttribute == null) matcherAttribute = "";
         return "[" + attribut.toLowerCase() + matcherAttribute + "=\"" + matcher.getValue() + "\"]";
     }
 

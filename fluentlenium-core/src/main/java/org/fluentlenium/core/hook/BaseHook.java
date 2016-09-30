@@ -56,4 +56,9 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
     public T getOptions() {
         return options;
     }
+
+    @Override
+    public String toString() {
+        return getWrappedElement().toString();
+    }
 }

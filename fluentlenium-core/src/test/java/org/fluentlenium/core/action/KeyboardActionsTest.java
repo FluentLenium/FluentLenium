@@ -88,7 +88,7 @@ public class KeyboardActionsTest {
         Assertions.assertThat(actionsAlt.basic()).isSameAs(keyboard);
     }
 
-    private abstract class InputDevicesDriver implements WebDriver, HasInputDevices {
+    private static abstract class InputDevicesDriver implements WebDriver, HasInputDevices {
 
     }
 }

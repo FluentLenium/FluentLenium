@@ -1,18 +1,29 @@
 package org.fluentlenium.core.events;
 
+/**
+ * Thrown when something wrong occurs with event annotations.
+ */
 public class EventAnnotationsException extends RuntimeException {
     public EventAnnotationsException() {
+        // Default constructor
     }
 
-    public EventAnnotationsException(String message) {
+    /**
+     * Creates a new event annotations exception.
+     *
+     * @param message exception message
+     */
+    public EventAnnotationsException(final String message) {
         super(message);
     }
 
-    public EventAnnotationsException(String message, Throwable cause) {
+    /**
+     * Creates a new event annotations exception.
+     *
+     * @param message exception message
+     * @param cause   exception cause
+     */
+    public EventAnnotationsException(final String message, final Throwable cause) {
         super(message, cause);
-    }
-
-    public EventAnnotationsException(Throwable cause) {
-        super(cause);
     }
 }

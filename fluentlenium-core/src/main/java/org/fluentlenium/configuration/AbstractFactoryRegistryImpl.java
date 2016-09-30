@@ -52,7 +52,7 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
                 FactoryPriority annotation2 = o2.getClass().getAnnotation(FactoryPriority.class);
                 int p2 = annotation2 == null ? 0 : annotation2.value();
 
-                return -Integer.compare(p1, p2);
+                return Integer.compare(p2, p1);
             }
         });
         List<T> filteredFactories = new ArrayList<>();

@@ -19,13 +19,13 @@ or [AssertJ](http://joel-costigliola.github.io/assertj/).
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>1.0.0-RC2</version>
+    <version>1.0.0-RC5</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>1.0.0-RC2</version>
+    <version>1.0.0-RC5</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -90,7 +90,7 @@ This example is for JUnit, but you may use other framework the exact same way (S
 
 ##  Fluent Locators
 
-FluentLenium provides a `$` method to build **Fluent Locators**.
+FluentLenium provides `$` and `el` methods to build **Fluent Locators**.
 
   - **CSS Selector**: Creates a Fluent Locator from CSS Selector.
   - **Selenium By Locator**: Creates a Fluent Locator with native Selenium API.
@@ -98,8 +98,8 @@ FluentLenium provides a `$` method to build **Fluent Locators**.
   - **First/Last/Index**: Get a single element from the Fluent Locator.
   - **XPath Axes**: Get another Fluent Locator from its relative position in the DOM.
   
-Fluent Locators are implemented by ```FluentWebElement``` and ```FluentList<FluentWebElement>```. Those classes are 
-wrappers of Selenium ```WebElement``` and ```List<WebElement>```.
+Fluent Locators are implemented by ```FluentWebElement``` (`el`) and ```FluentList<FluentWebElement>``` (`$`). 
+Those classes are wrappers of Selenium ```WebElement``` and ```List<WebElement>```.
 
 ### CSS Selector
 
@@ -166,6 +166,7 @@ If you want the first, last or a particular index element, just use:
 
 ```java
 $(".fluent").first() // First element
+el(".fluent") // First element (short form)
 $(".fluent").last() // Last element
 $(".fluent").index(2) // Third element
 $(".fluent", withName("foo")).index(2) // Third element named "foo"
@@ -182,6 +183,8 @@ $(".fluent").$("input")
 // The first "input" element named "bar" 
 // inside the third "fluent" class named "foo" element.
 $(".fluent", withName("foo")).index(2).$("input", withName("bar")).first()
+// or using el
+el(".fluent", withName("foo")).index(2).$("input", withName("bar"))
 ```
 
 ### XPath Axes
@@ -228,45 +231,51 @@ You can also retrieve information of located elements:
 $(".fluent").getName()
 
 // Id of the first element
-$(By.cssSelector(".fluent")).getId()
+$(By.cssSelector(".fluent")).id()
 
 // Value of the first element
-$(".fluent").getValue()
+$(".fluent").value()
 
 // Tag name of the first element
-$(".fluent").getTagName()
+$(".fluent").tagName()
 
 // Text of the first element
-$(".fluent").getText()
+$(".fluent").text()
 
 // Text content of the first element (includes hidden parts)
-$(".fluent").getTextContent()
+$(".fluent").textContent()
 
 // Value of attribute "data-custom" of the first element
-$(".fluent").getAttribute("data-custom")
+$(".fluent").attribute("data-custom")
 
 // HTML content of the element
-$(".fluent").html()
+el(".fluent").html()
 
 // Size of the element (width/height)
-$(".fluent").getSize()
+el(".fluent").size()
 ```
 
 You can also access a list of all the names, visible text, and ids of a list of elements:
 ```java
-$(".fluent").getNames()
-$(By.id("foo")).getIds()
-$(".fluent").getValues()
-$(".fluent").getAttributes("myCustomAttribute")
-$(".fluent").getTexts()
-$(".fluent").getTextContents()
+$(".fluent").names()
+$(By.id("foo")).ids()
+$(".fluent").values()
+$(".fluent").attributes("myCustomAttribute")
+$(".fluent").texts()
+$(".fluent").textContents()
 ```
 
 You can also check if the element is displayed, enabled or selected:
 ```java
-$(".fluent").isDisplayed()
-$(".fluent").isEnabled()
-$(".fluent").isSelected()
+el(".fluent").displayed()
+el(".fluent").enabled()
+el(".fluent").selected()
+```
+
+Advanced conditions are also available
+```java
+el(".fluent").conditions().clickable();
+el(".fluent").conditions().rectangle().size().width().greaterThan(50);
 ```
 
 ### Lazy Fluent Locators
@@ -289,7 +298,7 @@ You can control the state of those Lazy Fluent Locators.
 
 ```java
 // Check if the element is present in DOM (boolean)
-$(".fluent").isPresent();
+$(".fluent").present();
 
 // Force the underlying search if it's not already loaded
 // Throws NoSuchElementException if not found
@@ -300,7 +309,7 @@ $(".fluent").now();
 $(".fluent").reset();
 
 // Check if the underlying element has been loaded (boolean)
-$(".fluent").isLoaded();
+$(".fluent").loaded();
 ```
 
 ## Window actions
@@ -619,7 +628,7 @@ Components are created automatically by injection,
 or programmatically by calling `as(Class<?> componentClass)` method of ```FluentWebElement``` or ```FluentList```.
 
 ```java
-SelectComponent comp = $("#some-select").first().as(SelectComponent.class);
+SelectComponent comp = el("#some-select").as(SelectComponent.class);
 
 comp.doSelect("Value to select");
 assertThat(comp.getSelection()).isEquals("Value to select");
@@ -705,7 +714,7 @@ events().afterClickOn(new ElementListener() {
     }
 });
 
-$("button").first().click(); // This will call the listener.
+el("button").click(); // This will call the listener.
 ```
 
 This integrates nicely with Java 8 lambdas
@@ -713,7 +722,7 @@ This integrates nicely with Java 8 lambdas
 ```java
 events().afterClickOn((element, driver) -> System.out.println("Element Clicked: " + element));
 
-$("button").first().click(); // This will call the listener.
+el("button").click(); // This will call the listener.
 ```
 
 ## Wait for an Ajax Element to be available
@@ -724,25 +733,21 @@ If you want to wait for at most 5 seconds until the number of elements correspon
 
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until(".fluent").hasSize(3);
+await().atMost(5, TimeUnit.SECONDS).until(".fluent").size(3);
 ```
 The default wait is 500 ms.
 
-Instead of `hasSize(3)`, you can also use `text("myTextValue")`, `isPresent()`, `isNotPresent()`, `hasId("myId")`, `hasName("myName")`, `containsText("myName")`,`areDisplayed()`, `areEnabled()`.
-The `isPresent()` assertion is going to check if there is at most one element on the page corresponding to the filter.
+You can also use after `size()` : `greaterThan(int)`, `lessThan(int)`, `lessThanOrEqualTo(int)`, `greaterThanOrEqualTo(int)` , `equalTo(int)`, `notEqualTo(int)`
 
-If you need to be more precise, you can also use filters in the search:
+Many others conditions like `size(3)` are availables, like `present()`, `displayed()`, `enabled()`, `text()`, `id()`, `name()`.
 
-```java
-await().atMost(5, TimeUnit.SECONDS).until($(".fluent", withText("myText"))).hasSize(3);
-```
+You can use `not()` function to negate any condition.
 
-You can also use after `hasSize()` : `greaterThan(int)`, `lessThan(int)`, `lessThanOrEqualTo(int)`, `greaterThanOrEqualTo(int)` , `equalTo(int)`, `notEqualTo(int)`
-
-You can also use matchers:
+If you need to be more precise, you can also use filters and matchers in the search:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until($(".fluent", withText().startsWith("start"))).isPresent();
+await().atMost(5, TimeUnit.SECONDS).until($(".fluent", withText("myText"))).size(3);
+await().atMost(5, TimeUnit.SECONDS).until($(".fluent", withText().startsWith("start"))).present();
 ```
      
 Just use `startsWith`, `notStartsWith`, `endsWith`, `notEndsWith`, `contains`, `notContains`, `equalTo`, `containsWord`.
@@ -750,7 +755,7 @@ Just use `startsWith`, `notStartsWith`, `endsWith`, `notEndsWith`, `contains`, `
 If you need to filter on a custom attribute name, this syntax will help:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until($(".fluent", with("myAttribute").startsWith("myValue"))).isPresent();
+await().atMost(5, TimeUnit.SECONDS).until($(".fluent", with("myAttribute").startsWith("myValue"))).present();
 ```
 
 You can also give instance of elements or list of elements if required.
@@ -759,21 +764,22 @@ You can also give instance of elements or list of elements if required.
 @FindBy(css = ".button")
 private FluentWebElement button;
 
-await().atMost(5, TimeUnit.SECONDS).until(element).isEnabled();
+await().atMost(5, TimeUnit.SECONDS).until(element).enabled();
 ```
 
 When running Java >= 8, you can use lambdas with `until`, `untilPredicate`, `untilElement` or `untilElements`.
 ```java
-await().atMost(5, TimeUnit.SECONDS).untilElement(() -> $(".button").first()).isEnabled();
-await().atMost(5, TimeUnit.SECONDS).untilElements(() -> $(".button")).areEnabled();
+await().atMost(5, TimeUnit.SECONDS).untilElement(() -> el(".button").enabled();
+await().atMost(5, TimeUnit.SECONDS).untilElements(() -> $(".button").each().enabled();
+await().atMost(5, TimeUnit.SECONDS).untilElements(() -> $(".button").one().enabled();
 
-await().atMost(5, TimeUnit.SECONDS).untilPredicate((f) -> $(".button").first().isEnabled());
-await().atMost(5, TimeUnit.SECONDS).until(() -> $(".button").first().isEnabled());
+await().atMost(5, TimeUnit.SECONDS).untilPredicate((f) -> el(".button").enabled());
+await().atMost(5, TimeUnit.SECONDS).until(() -> el(".button").enabled());
 ```
 
 You can also check if the page is loaded using
 ```java
-await().atMost(1, NANOSECONDS).untilPage().isLoaded();
+await().atMost(1, NANOSECONDS).untilPage().loaded();
 ```
 
 If you want to wait until the page you want is the page that you are at, you can use:
@@ -793,14 +799,14 @@ public FluentWait await() {
 ### Polling Every
 You can also define the polling frequency, for example, if you want to poll every 5 seconds:
 ```java
-await().pollingEvery(5, TimeUnit.SECONDS).until($(".fluent", with("myAttribute").startsWith("myValue"))).isPresent();
+await().pollingEvery(5, TimeUnit.SECONDS).until($(".fluent", with("myAttribute").startsWith("myValue"))).present();
 ```
 The default value is 500ms.
 
 You can also chain filter in the asynchronous API:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until($(".fluent", with("myAttribute").startsWith("myValue"), with("a second attribute").equalTo("my@ndValue"))).isPresent();
+await().atMost(5, TimeUnit.SECONDS).until($(".fluent", with("myAttribute").startsWith("myValue"), with("a second attribute").equalTo("my@ndValue"))).present();
 ```
 
 ## Hooks
@@ -863,8 +869,6 @@ public class MyPage extends FluentPage {
 
 ```Wait``` hook automatically waits for conditions to be applied before interacting with Elements, avoiding the need 
 of writing technical waiting and condition code in tests and page objects.
-
-Default timeout for ```@Wait``` hook is 5 seconds.
 
 ### Custom hook
 
@@ -943,7 +947,7 @@ You may also read [sources for @Wait hook](https://github.com/FluentLenium/Fluen
 
 ## Alternative Syntax
 
-If you don't like the [JQuery](http://jquery.com/) syntax, you can replace `$` with `find` method:
+If you don't like the [JQuery](http://jquery.com/) syntax, you can replace `$` and `el` with `find` method:
 
 ```java
 goTo("http://mywebpage/");
@@ -952,7 +956,7 @@ find("#create-button").click();
 assertThat(title()).isEqualTo("Hello toto");
 ```
 
-Both syntax are equivalent. `$` is simply an alias for the `find` method.
+Both syntax are equivalent. `$` is simply an alias for the `find()` method, and `el` for `find().first()`.
 
 
 ## Execute javascript
@@ -995,8 +999,8 @@ If you want to test concurrency or if you need for any reason to not use the mec
 ```java
 IsolatedTest test = new IsolatedTest()
 test.goTo(DEFAULT_URL);
-test.await().atMost(1, SECONDS).until(test.$(".fluent", with("name").equalTo("name"))).isPresent();
-test.$("input").first().isEnabled();
+test.await().atMost(1, SECONDS).until(test.$(".fluent", with("name").equalTo("name"))).present();
+test.el("input").enabled();
 ```
 
 ## Configure FluentLenium
@@ -1064,14 +1068,14 @@ FluentLenium can be configured in many ways through configuration properties.
 
   - **pageLoadTimeout**
      
-     Sets the amount of time to wait for a page load to complete before throwing an error.
+     Sets the amount of time in millisecond to wait for a page load to complete before throwing an error.
      If the timeout is negative, page loads can be indefinite.
      
      Default value: ```null```.
 
   - **implicitlyWait**
      
-     Specifies the amount of time the driver should wait when searching for an element if it is
+     Specifies the amount of time in millisecond the driver should wait when searching for an element if it is
      not immediately present.
      
      Default value: ```null```.
@@ -1079,7 +1083,7 @@ FluentLenium can be configured in many ways through configuration properties.
 
   - **scriptTimeout**
   
-     Sets the amount of time to wait for an asynchronous script to finish execution before
+     Sets the amount of time in millisecond to wait for an asynchronous script to finish execution before
      throwing an error. If the timeout is negative, then the script will be allowed to run
      indefinitely.
      
@@ -1393,7 +1397,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
-    <version>1.0.0-RC2</version>
+    <version>1.0.0-RC5</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1408,7 +1412,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>1.0.0-RC2</version>
+    <version>1.0.0-RC5</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1423,7 +1427,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>1.0.0-RC2</version>
+    <version>1.0.0-RC5</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1438,7 +1442,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-cucumber</artifactId>
-    <version>1.0.0-RC2</version>
+    <version>1.0.0-RC5</version>
     <scope>test</scope>
 </dependency>
 ```

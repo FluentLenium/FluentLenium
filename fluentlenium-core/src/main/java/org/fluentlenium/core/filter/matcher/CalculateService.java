@@ -18,7 +18,7 @@ public final class CalculateService {
      * @param currentValue   current value
      * @return boolean value for contains check
      */
-    public static boolean contains(Pattern patternValue, String referenceValue, String currentValue) {
+    public static boolean contains(final Pattern patternValue, final String referenceValue, final String currentValue) {
         if (currentValue == null) {
             return false;
         }
@@ -36,7 +36,7 @@ public final class CalculateService {
      * @param currentValue   current value
      * @return boolean value for equal check
      */
-    public static boolean equal(Pattern patternValue, String referenceValue, String currentValue) {
+    public static boolean equal(final Pattern patternValue, final String referenceValue, final String currentValue) {
         if (currentValue == null) {
             return false;
         }
@@ -55,7 +55,7 @@ public final class CalculateService {
      * @return boolean value for startsWith check
      */
 
-    public static boolean startsWith(Pattern patternValue, String referenceValue, String currentValue) {
+    public static boolean startsWith(final Pattern patternValue, final String referenceValue, final String currentValue) {
         if (currentValue == null) {
             return false;
         }
@@ -75,7 +75,7 @@ public final class CalculateService {
      * @return boolean value for endsWith check
      */
 
-    public static boolean endsWith(Pattern patternValue, String referenceValue, String currentValue) {
+    public static boolean endsWith(final Pattern patternValue, final String referenceValue, final String currentValue) {
         if (currentValue == null) {
             return false;
         }

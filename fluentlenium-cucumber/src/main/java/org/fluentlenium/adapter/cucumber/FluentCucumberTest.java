@@ -9,12 +9,12 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
     }
 
     // It's not allowed by Cucumber JVM to add @Before in the base class.
-    public void before(Scenario scenario) {
+    public void before(final Scenario scenario) {
         starting(scenario.getId());
     }
 
     // It's not allowed by Cucumber JVM to add @After in the base class.
-    public void after(Scenario scenario) {
+    public void after(final Scenario scenario) {
         if (scenario.isFailed()) {
             failed(scenario.getId());
         }

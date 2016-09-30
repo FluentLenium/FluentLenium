@@ -6,24 +6,40 @@ import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
 
+/**
+ * Element specific mouse control interface.
+ */
 public class MouseElementActions {
     private WebDriver driver;
     private Keyboard keyboard;
     private Mouse mouse;
     private final WebElement element;
 
-    public MouseElementActions(WebDriver driver, WebElement element) {
+    /**
+     * Creates a new mouse element actions.
+     *
+     * @param driver  selenium driver
+     * @param element selenium element
+     */
+    public MouseElementActions(final WebDriver driver, final WebElement element) {
         this.driver = driver;
         this.element = element;
     }
 
-    public MouseElementActions(Keyboard keyboard, Mouse mouse, WebElement element) {
+    /**
+     * Creates a new mouse element actions.
+     *
+     * @param keyboard selenium keyboard interface
+     * @param mouse    selenium mouse interface
+     * @param element  selenium element
+     */
+    public MouseElementActions(final Keyboard keyboard, final Mouse mouse, final WebElement element) {
         this.keyboard = keyboard;
         this.mouse = mouse;
         this.element = element;
     }
 
-    protected org.openqa.selenium.interactions.Actions actions() {
+    private org.openqa.selenium.interactions.Actions actions() {
         if (driver != null) {
             return new org.openqa.selenium.interactions.Actions(driver);
         } else {
@@ -119,7 +135,7 @@ public class MouseElementActions {
      * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement, int, int)
      */
-    public MouseElementActions moveToElement(int xOffset, int yOffset) {
+    public MouseElementActions moveToElement(final int xOffset, final int yOffset) {
         actions().moveToElement(element, xOffset, yOffset).perform();
         return this;
     }
@@ -144,7 +160,7 @@ public class MouseElementActions {
      * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#dragAndDrop(WebElement, WebElement)
      */
-    public MouseElementActions dragAndDropFrom(WebElement source) {
+    public MouseElementActions dragAndDropFrom(final WebElement source) {
         actions().dragAndDrop(source, element).perform();
         return this;
     }
@@ -157,7 +173,7 @@ public class MouseElementActions {
      * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#dragAndDrop(WebElement, WebElement)
      */
-    public MouseElementActions dragAndDropTo(WebElement target) {
+    public MouseElementActions dragAndDropTo(final WebElement target) {
         actions().dragAndDrop(element, target).perform();
         return this;
     }
@@ -171,7 +187,7 @@ public class MouseElementActions {
      * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#dragAndDropBy(WebElement, int, int)
      */
-    public MouseElementActions dragAndDropBy(int xOffset, int yOffset) {
+    public MouseElementActions dragAndDropBy(final int xOffset, final int yOffset) {
         actions().dragAndDropBy(element, xOffset, yOffset).perform();
         return this;
     }
