@@ -184,12 +184,22 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      */
     protected void failed(Throwable e, Class<?> testClass, String testName) {
         if (isFluentDriverAvailable()) {
-            if (getScreenshotMode() == TriggerMode.AUTOMATIC_ON_FAIL && canTakeScreenShot()) {
-                takeScreenShot(testClass.getSimpleName() + "_" + testName + ".png");
+            try {
+                if (getScreenshotMode() == TriggerMode.AUTOMATIC_ON_FAIL && canTakeScreenShot()) {
+                    takeScreenShot(testClass.getSimpleName() + "_" + testName + ".png");
+                }
+            } catch (Exception exception) {
+                // Can't write screenshot, for some reason.
             }
-            if (getHtmlDumpMode() == TriggerMode.AUTOMATIC_ON_FAIL && getDriver() != null) {
-                takeHtmlDump(testClass.getSimpleName() + "_" + testName + ".html");
+
+            try {
+                if (getHtmlDumpMode() == TriggerMode.AUTOMATIC_ON_FAIL && getDriver() != null) {
+                    takeHtmlDump(testClass.getSimpleName() + "_" + testName + ".html");
+                }
+            } catch (Exception exception) {
+                // Can't write htmldump, for some reason.
             }
+
         }
     }
 }
