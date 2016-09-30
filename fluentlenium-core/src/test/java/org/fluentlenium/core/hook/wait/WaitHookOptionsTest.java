@@ -11,6 +11,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.never;
 
 @RunWith(MockitoJUnitRunner.class)
 public class WaitHookOptionsTest {
@@ -27,9 +29,9 @@ public class WaitHookOptionsTest {
 
     @Test
     public void testDefaultValues() {
-        assertThat(waitHookOptions.getAtMost()).isEqualTo(5);
-        assertThat(waitHookOptions.getTimeUnit()).isEqualTo(TimeUnit.SECONDS);
-        assertThat(waitHookOptions.getPollingEvery()).isEqualTo(250);
+        assertThat(waitHookOptions.getAtMost()).isNull();
+        assertThat(waitHookOptions.getTimeUnit()).isEqualTo(TimeUnit.MILLISECONDS);
+        assertThat(waitHookOptions.getPollingEvery()).isNull();
         assertThat(waitHookOptions.getPollingTimeUnit()).isEqualTo(TimeUnit.MILLISECONDS);
         assertThat(waitHookOptions.getIgnoreAll()).isEmpty();
         assertThat(waitHookOptions.isWithNoDefaultsException()).isFalse();
@@ -39,7 +41,10 @@ public class WaitHookOptionsTest {
     public void testDefaultValuesConfigureAwait() {
         waitHookOptions.configureAwait(wait);
 
-        Mockito.verify(wait).atMost(5, TimeUnit.SECONDS);
+        Mockito.verify(wait, never()).atMost(any(Integer.class));
+        Mockito.verify(wait, never()).atMost(any(Integer.class), any(TimeUnit.class));
+        Mockito.verify(wait, never()).pollingEvery(any(Integer.class));
+        Mockito.verify(wait, never()).pollingEvery(any(Integer.class), any(TimeUnit.class));
     }
 
     @Test

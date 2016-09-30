@@ -44,6 +44,7 @@ import java.util.concurrent.TimeUnit;
  * Util Class which offers some shortcut to webdriver methods
  */
 public class FluentDriver implements FluentControl {
+    private final FluentControl adapter;
 
     private String baseUrl;
 
@@ -69,9 +70,10 @@ public class FluentDriver implements FluentControl {
 
     private WindowAction windowAction;
 
-    public FluentDriver(WebDriver driver, ConfigurationProperties configuration) {
+    public FluentDriver(WebDriver driver, ConfigurationProperties configuration, FluentControl adapter) {
         this.configuration = configuration;
-        this.componentsManager = new ComponentsManager(this);
+        this.adapter = adapter;
+        this.componentsManager = new ComponentsManager(adapter);
 
         initFluent(driver);
         configureDriver();
@@ -122,8 +124,8 @@ public class FluentDriver implements FluentControl {
         }
         this.mouseActions = new MouseActions(driver);
         this.keyboardActions = new KeyboardActions(driver);
-        this.fluentInjector = new FluentInjector(this, componentsManager, new DefaultContainerInstanciator(this));
-        this.windowAction = new WindowAction(this, driver);
+        this.fluentInjector = new FluentInjector(adapter, componentsManager, new DefaultContainerInstanciator(this));
+        this.windowAction = new WindowAction(adapter, driver);
         return this;
     }
 

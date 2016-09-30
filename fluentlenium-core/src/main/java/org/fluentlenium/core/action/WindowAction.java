@@ -2,9 +2,7 @@ package org.fluentlenium.core.action;
 
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.wait.FluentWait;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
@@ -19,12 +17,12 @@ import static com.google.common.collect.Iterables.getOnlyElement;
 import static com.google.common.collect.Sets.difference;
 
 public class WindowAction {
+    private final FluentControl fluentControl;
     private WebDriver driver;
-    private final FluentWait wait;
 
-    public WindowAction(FluentDriver fluent, WebDriver driver) {
+    public WindowAction(FluentControl fluentControl, WebDriver driver) {
         this.driver = driver;
-        this.wait = fluent.await();
+        this.fluentControl = fluentControl;
     }
 
     /**
@@ -147,7 +145,7 @@ public class WindowAction {
         String currentWindowHandle = driver.getWindowHandle();
         button.click();
 
-        wait.untilWindow(currentWindowHandle).isNotDisplayed();
+        fluentControl.await().untilWindow(currentWindowHandle).isNotDisplayed();
 
         switchToLast();
     }
@@ -232,7 +230,7 @@ public class WindowAction {
     }
 
     private void waitForNewWindowToOpen(Set<String> oldWindowHandles) {
-        wait.atMost(10, TimeUnit.SECONDS).withMessage("Timed out waiting for new window to open.")
+        fluentControl.await().atMost(10, TimeUnit.SECONDS).withMessage("Timed out waiting for new window to open.")
                 .untilPredicate(new WindowHandlesCountIs(oldWindowHandles.size() + 1));
     }
 }
