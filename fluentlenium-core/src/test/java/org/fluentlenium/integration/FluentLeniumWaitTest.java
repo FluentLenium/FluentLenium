@@ -26,6 +26,21 @@ import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 import static org.junit.Assert.fail;
 
 public class FluentLeniumWaitTest extends IntegrationFluentTest {
+
+    private static final int MINIMAL_TIMEOUT = 1;
+    public static final int SECOND_TIMEOUT = 1000;
+    public static final int SMALL_EXPECTED_SIZE = 3;
+    public static final int FIVE_SECONDS_TIMEOUT = 5;
+    public static final int EXACTLY_ONE = 1;
+    public static final int INVALID_EQUALS_NUMBER = 10;
+    public static final int LESS_THAN_FOUR = 4;
+    public static final int LESS_THAN_OR_EQ_1 = 1;
+    public static final int GREATER_THAN_MINUS_ONE = -1;
+    public static final int JOHN_FOUR_MATCHED = 4;
+    public static final int ONLY_ONE_ENDS_WITH_TWO = 1;
+    public static final int SECOND_AND_A_HALF_TIMEOUT = 1500;
+    public static final int LESS_THAN_SECOND_TIMEOUT = 800;
+
     @Before
     public void before() {
         goTo(DEFAULT_URL);
@@ -33,92 +48,92 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitIsPresent() {
-        await().atMost(1, NANOSECONDS).until($(".small")).present();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small")).present();
     }
 
     @Test
     public void checkAwaitIsNotPresent() {
-        await().atMost(1, NANOSECONDS).until($(".not-present")).not().present();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".not-present")).not().present();
     }
 
     @Test
     public void checkAwaitIsDisplayed() {
-        await().atMost(1, NANOSECONDS).until($(".small")).displayed();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small")).displayed();
     }
 
     @Test
     public void checkAwaitIsNotDisplayed() {
-        await().atMost(1, NANOSECONDS).until($("#hidden")).not().displayed();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("#hidden")).not().displayed();
     }
 
     @Test
     public void checkAwaitIsClickable() throws Exception {
-        await().atMost(1, NANOSECONDS).until($(".small")).clickable();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small")).clickable();
     }
 
     @Test
     public void checkAwaitIsNotClickable() {
-        await().atMost(1, NANOSECONDS).until($("input[disabled]")).not().clickable();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("input[disabled]")).not().clickable();
     }
 
     @Test
     public void checkAwaitIsSelected() throws Exception {
-        await().atMost(1, NANOSECONDS).until($("#selected")).selected();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("#selected")).selected();
     }
 
     @Test
     public void checkAwaitIsNotSelected() {
-        await().atMost(1, NANOSECONDS).until($("#non_selected")).not().selected();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("#non_selected")).not().selected();
     }
 
     @Test(expected = TimeoutException.class)
     public void checkAwaitDisabledIsClickableThrowTimeoutException() {
-        await().atMost(1, NANOSECONDS).until($("input[disabled]")).clickable();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("input[disabled]")).clickable();
     }
 
     @Test
     public void explicitWait() {
-        await().explicitlyFor(1, NANOSECONDS);
+        await().explicitlyFor(MINIMAL_TIMEOUT, NANOSECONDS);
     }
 
     @Test
     public void explicitWaitMillis() {
-        await().explicitlyFor(1);
+        await().explicitlyFor(MINIMAL_TIMEOUT);
     }
 
     @Test
     public void checkAwaitHasSize() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small")).size(3);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($(".small")).size(SMALL_EXPECTED_SIZE);
     }
 
     @Test
     public void checkAwaitHasTextWithText() {
-        await().atMost(1, NANOSECONDS).until($(".small", withText("Small 1"))).text().equalTo("Small 1");
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", withText("Small 1"))).text().equalTo("Small 1");
     }
 
     @Test
     public void checkAwaitContainsNameWithName() {
-        await().atMost(1, NANOSECONDS).until($(".small", withName("name"))).name("name");
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", withName("name"))).name("name");
     }
 
     @Test
     public void checkAwaitContainsNameWithClass() {
-        await().atMost(1, NANOSECONDS).until($("span", withClass("small"))).name("name");
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("span", withClass("small"))).name("name");
     }
 
     @Test
     public void checkAwaitContainsNameWithClassRegex() {
-        await().atMost(1, NANOSECONDS).until($("span", withClass().contains(regex("smal?")))).name("name");
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("span", withClass().contains(regex("smal?")))).name("name");
     }
 
     @Test
     public void checkAwaitContainsNameWithClassAndContainsWord() {
-        await().atMost(1, NANOSECONDS).until($("span", withClass().containsWord("small"))).name("name");
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("span", withClass().containsWord("small"))).name("name");
     }
 
     @Test
     public void checkAwaitContainsTextWithText() {
-        await().atMost(1, NANOSECONDS).until($(".small", withText("Small 1"))).text().contains("Small 1");
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", withText("Small 1"))).text().contains("Small 1");
     }
 
     @Test
@@ -134,297 +149,306 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitPageToLoad() {
-        await().atMost(1, NANOSECONDS).untilPage().isLoaded();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilPage().isLoaded();
     }
 
     @Test
     public void checkAwaitPageIsAt() {
         FluentPage isAtJavascriptPage = newInstance(MyFluentPage.class);
         isAtJavascriptPage.go();
-        await().atMost(5, TimeUnit.SECONDS).untilPage(isAtJavascriptPage).isAt();
+        await().atMost(FIVE_SECONDS_TIMEOUT, TimeUnit.SECONDS).untilPage(isAtJavascriptPage).isAt();
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void checkAwaitPageToLoadWithNoJSEnabled() {
         FluentAdapter fluentTest = new FluentAdapter(new HtmlUnitDriver(false));
-        fluentTest.await().atMost(1, NANOSECONDS).untilPage().isLoaded();
+        fluentTest.await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilPage().isLoaded();
     }
 
     @Test
     public void checkAwaitContainsText() {
-        await().atMost(1, NANOSECONDS).until($(".small")).text().contains("Small 1");
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small")).text().contains("Small 1");
     }
 
 
     @Test
     public void checkAwaitContainsTextAlternative() {
-        $(".small").await().atMost(1, NANOSECONDS).until().text().contains("Small 1");
-        $(".small", withText("Small 1")).await().atMost(1, NANOSECONDS).untilEach().text().contains("Small 1");
-        el(".small").await().atMost(1, NANOSECONDS).until().text().contains("Small 1");
+        $(".small").await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until().text().contains("Small 1");
+        $(".small", withText("Small 1")).await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach().text().contains("Small 1");
+        el(".small").await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until().text().contains("Small 1");
     }
 
 
     @Test
     public void checkAwaitContainsIdWithId() {
-        await().atMost(1, NANOSECONDS).until($(".small", withId("id2"))).id("id2");
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", withId("id2"))).id("id2");
     }
 
     @Test
     public void checkAwaitNameStartsWith() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", withName().startsWith("name"))).size(2);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($(".small", withName().startsWith("name"))).size(2);
     }
 
     @Test
     public void checkAwaitContainsIdWithIdContains() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", withId().contains("id"))).size(2);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($(".small", withId().contains("id"))).size(2);
     }
 
     @Test
     public void checkAwaitHasText() {
-        await().atMost(1, NANOSECONDS).until($(".small")).text().equalTo("Small 1");
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small")).text().equalTo("Small 1");
     }
 
     @Test
     public void checkAwaitContainsName() {
-        await().atMost(1, NANOSECONDS).until($(".small")).name("name");
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small")).name("name");
     }
 
     @Test
     public void checkAwaitContainsId() {
-        await().atMost(1, NANOSECONDS).until($(".small")).id("id2");
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small")).id("id2");
     }
 
     @Test
     public void checkAwaitContainsTextWithTextMatcher() {
-        await().atMost(1, NANOSECONDS).until($(".small", withText().contains("Small 1"))).present();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", withText().contains("Small 1"))).present();
     }
 
     @Test
-    public void when_a_element_is_not_present_then_isNotPresent_return_true() {
-        await().atMost(1, NANOSECONDS).until($(".small", withText().contains("notPresent"))).not().present();
+    public void whenAElementIsNotPresentThenIsNotPresentReturnTrue() {
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", withText().contains("notPresent"))).not().present();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_a_element_is_present_then_isNotPresent_throw_an_exception() {
-        await().atMost(1, NANOSECONDS).until($(".small", withText().contains("Small 1"))).not().present();
+    public void whenAElementIsPresentThenIsNotPresentThrowAnException() {
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", withText().contains("Small 1"))).not().present();
     }
 
     @Test
     public void checkAwaitStartWithRegex() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").startsWith(regex(".d")))).size(2);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($(".small", with("id").startsWith(regex(".d")))).size(2);
     }
 
     @Test
     public void checkAwaitStartWithString() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").startsWith("id"))).size(2);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($(".small", with("id").startsWith("id"))).size(2);
     }
 
     @Test
     public void checkAwaitNotStartWith() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").notStartsWith("id"))).size(1);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($(".small", with("id").notStartsWith("id"))).size(1);
     }
 
     @Test
     public void checkAwaitNotStartWithRegex() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").notStartsWith(regex("id")))).size(1);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($(".small", with("id").notStartsWith(regex("id")))).size(1);
     }
 
     @Test
     public void checkAwaitEndsWithRegex() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").endsWith(regex("2")))).size(1);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($(".small", with("id").endsWith(regex("2")))).size(1);
     }
 
     @Test
     public void checkAwaitNotEndsWith() {
-        await().atMost(1, NANOSECONDS).until($(".small", with("id").notEndsWith("2"))).id("id");
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", with("id").notEndsWith("2"))).id("id");
     }
 
     @Test
     public void checkAwaitNotEndsWithRegex() {
-        await().atMost(1, NANOSECONDS).until($(".small", with("id").notEndsWith(regex("2")))).id("id");
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", with("id").notEndsWith(regex("2")))).id("id");
     }
 
     @Test
     public void checkAwaitNotContains() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").notContains("d"))).size(1);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($(".small", with("id").notContains("d"))).
+                size(EXACTLY_ONE);
     }
 
     @Test
     public void checkAwaitNotContainsRegex() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").notContains(regex("d")))).size(1);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($(".small", with("id").notContains(regex("d")))).
+                size(EXACTLY_ONE);
     }
 
     @Test
     public void checkAwaitEquals() {
-        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().equalTo(1);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().
+                equalTo(EXACTLY_ONE);
     }
 
     @Test
     public void checkAwaitNotEquals() {
-        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().not().equalTo(10);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().not().
+                equalTo(INVALID_EQUALS_NUMBER);
     }
 
     @Test
     public void checkAwaitLessThan() {
-        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().lessThan(4);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().
+                lessThan(LESS_THAN_FOUR);
     }
 
     @Test
     public void checkAwaitLessThanOrEquals() {
-        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().lessThanOrEqualTo(1);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().
+                lessThanOrEqualTo(LESS_THAN_OR_EQ_1);
     }
 
     @Test
     public void checkAwaitGreaterThan() {
-        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().greaterThan(-1);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().
+                greaterThan(GREATER_THAN_MINUS_ONE);
     }
 
     @Test
     public void checkAwaitGreaterThanOrEquals() {
-        await().atMost(1, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().greaterThanOrEqualTo(1);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", with("id").notContains("d"))).size().
+                greaterThanOrEqualTo(1);
     }
 
     @Test
     public void checkWithValue() {
-        await().atMost(1, NANOSECONDS).untilEach($("input", with("value").equalTo("John"))).size(4);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($("input", with("value").equalTo("John"))).size(
+                JOHN_FOUR_MATCHED);
     }
 
     @Test
     public void checkMultipleFilter() {
-        await().atMost(1, NANOSECONDS).untilEach($(".small", with("id").startsWith(regex("id")), with("text").endsWith("2")))
-                .size(1);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($(".small", with("id").startsWith(regex("id")),
+                with("text").endsWith("2"))).size(ONLY_ONE_ENDS_WITH_TWO);
     }
 
     @Test
     public void checkHasAttribute() {
-        await().atMost(1, NANOSECONDS).until($("input")).attribute("value", "John");
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("input")).attribute("value", "John");
     }
 
     @Test
     public void checkHasAttributeWithOthersFilters() {
-        await().atMost(1, NANOSECONDS).until($("input", with("value").equalTo("John"))).attribute("value", "John");
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("input", with("value").equalTo("John"))).attribute("value", "John");
     }
 
     @Test
-    public void when_element_is_present_then_areDisplayed_return_true() {
+    public void whenElementIsPresentThenAreDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilEach($("#default")).displayed();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($("#default")).displayed();
     }
 
     @Test
-    public void when_element_is_present_then_isDisplayed_return_true() {
+    public void whenElementIsPresentThenIsDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until($("#default")).displayed();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("#default")).displayed();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_displayed_then_areDisplayed_throws_exception() {
+    public void whenElementIsNotDisplayedThenAreDisplayedThrowsException() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilEach($("#unvisible")).displayed();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($("#unvisible")).displayed();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_displayed_then_isDisplayed_throws_exception() {
+    public void whenElementIsNotDisplayedThenIsDisplayedThrowsException() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until($("#unvisible")).displayed();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("#unvisible")).displayed();
     }
 
     @Test
-    public void when_element_is_not_present_then_areNotDisplayed_return_true() {
+    public void whenElementIsNotPresentThenAreNotDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until($("#nonexistent")).not().displayed();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("#nonexistent")).not().displayed();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_present_then_areDisplayed_throws_exception() {
+    public void whenElementIsNotPresentThenAreDisplayedThrowsException() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilEach($("#nonexistent")).displayed();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($("#nonexistent")).displayed();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_present_then_areEnabled_throws_exception() {
+    public void whenElementIsNotPresentThenAreEnabledThrowsException() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilEach($("#nonexistent")).enabled();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($("#nonexistent")).enabled();
     }
 
     @Test
-    public void when_element_is_not_displayed_then_areNotDisplayed_return_true() {
+    public void whenElementIsNotDisplayedThenAreNotDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilEach($("#unvisible")).not().displayed();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($("#unvisible")).not().displayed();
     }
 
     @Test
-    public void when_element_is_not_displayed_then_isNotDisplayed_return_true() {
+    public void whenElementIsNotDisplayedThenIsNotDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until($("#unvisible")).not().displayed();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("#unvisible")).not().displayed();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_displayed_then_areNotDisplayed_throws_exception() {
+    public void whenElementIsDisplayedThenAreNotDisplayedThrowsException() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilEach($("#default")).not().displayed();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($("#default")).not().displayed();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_displayed_then_isNotDisplayed_throws_exception() {
+    public void whenElementIsDisplayedThenIsNotDisplayedThrowsException() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilEach($("#default")).not().displayed();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($("#default")).not().displayed();
     }
 
     @Test
-    public void when_element_is_enabled_then_areEnabled_return_true() {
+    public void whenElementIsEnabledThenAreEnabledReturnTrue() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilEach($("#default")).enabled();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($("#default")).enabled();
     }
 
     @Test
-    public void when_element_is_enabled_then_isEnabled_return_true() {
+    public void whenElementIsEnabledThenIsEnabledReturnTrue() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until($("#default")).enabled();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("#default")).enabled();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_enabled_then_areEnabled_throws_exception() {
+    public void whenElementIsNotEnabledThenAreEnabledThrowsException() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilEach($("#disabled")).enabled();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($("#disabled")).enabled();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_enabled_then_isEnabled_throws_exception() {
+    public void whenElementIsNotEnabledThenIsEnabledThrowsException() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until($("#disabled")).enabled();
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("#disabled")).enabled();
     }
 
     @Test
-    public void when_element_is_selected_then_isSelected_return_true() {
-        await().atMost(1, NANOSECONDS).until($("#selected")).selected();
+    public void whenElementIsSelectedThenIsSelectedReturnTrue() {
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("#selected")).selected();
     }
 
     @Test
-    public void when_element_is_not_selected_then_isNotSelected_return_true() {
-        await().atMost(1, NANOSECONDS).until($("#non_selected")).not().selected();
+    public void whenElementIsNotSelectedThenIsNotSelectedReturnTrue() {
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("#non_selected")).not().selected();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_selected_then_areSelected_throws_exception() {
-        await().atMost(1, NANOSECONDS).untilEach($("#non_selected")).selected();
+    public void whenElementIsNotSelectedThenAreSelectedThrowsException() {
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($("#non_selected")).selected();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_selected_then_isSelected_throws_exception() {
-        await().atMost(1, NANOSECONDS).until($("#non_selected")).selected();
+    public void whenElementIsNotSelectedThenIsSelectedThrowsException() {
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("#non_selected")).selected();
     }
 
     @Test(expected = TimeoutException.class)
     public void checkPolling() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1500, TimeUnit.MILLISECONDS).until($("#default")).text().equalTo("wait");
+        await().pollingEvery(SECOND_AND_A_HALF_TIMEOUT, TimeUnit.MILLISECONDS).until($("#default")).text().equalTo("wait");
     }
 
     @Test
     public void checkIsAt() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1000, TimeUnit.MILLISECONDS).untilPage(new FluentPage() {
+        await().pollingEvery(SECOND_TIMEOUT, TimeUnit.MILLISECONDS).untilPage(new FluentPage() {
             @Override
             public void isAt() {
             }
@@ -434,19 +458,19 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test(expected = IllegalArgumentException.class)
     public void checkIsAtWithNullPage() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1000, TimeUnit.MILLISECONDS).untilPage().isAt();
+        await().pollingEvery(SECOND_TIMEOUT, TimeUnit.MILLISECONDS).untilPage().isAt();
     }
 
     @Test
     public void checkLoaded() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1000, TimeUnit.MILLISECONDS).untilPage().isLoaded();
+        await().pollingEvery(SECOND_TIMEOUT, TimeUnit.MILLISECONDS).untilPage().isLoaded();
     }
 
     @Test
     public void checkPredicate() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(800, TimeUnit.MILLISECONDS).untilPredicate(new Predicate<FluentControl>() {
+        await().pollingEvery(LESS_THAN_SECOND_TIMEOUT, TimeUnit.MILLISECONDS).untilPredicate(new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl o) {
                 return true;
@@ -457,7 +481,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test(expected = TimeoutException.class)
     public void checkPredicateFail() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1000).untilPredicate(new Predicate<FluentControl>() {
+        await().atMost(SECOND_TIMEOUT).untilPredicate(new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl o) {
                 return false;
@@ -468,7 +492,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test
     public void checkFunction() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1000, TimeUnit.MILLISECONDS).until(new Function<FluentControl, Boolean>() {
+        await().pollingEvery(SECOND_TIMEOUT, TimeUnit.MILLISECONDS).until(new Function<FluentControl, Boolean>() {
             @Override
             public Boolean apply(FluentControl fluent) {
                 return true;
@@ -479,7 +503,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test(expected = TimeoutException.class)
     public void checkFunctionFail() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1000).until(new Function<FluentControl, Boolean>() {
+        await().atMost(SECOND_TIMEOUT).until(new Function<FluentControl, Boolean>() {
             @Override
             public Boolean apply(FluentControl fluent) {
                 return false;
@@ -490,7 +514,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test
     public void checkSupplier() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1000, TimeUnit.MILLISECONDS).until(new Supplier<Boolean>() {
+        await().pollingEvery(SECOND_TIMEOUT, TimeUnit.MILLISECONDS).until(new Supplier<Boolean>() {
             @Override
             public Boolean get() {
                 return true;
@@ -501,7 +525,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test(expected = TimeoutException.class)
     public void checkSupplierFail() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1000).until(new Supplier<Boolean>() {
+        await().atMost(SECOND_TIMEOUT).until(new Supplier<Boolean>() {
             @Override
             public Boolean get() {
                 return false;
