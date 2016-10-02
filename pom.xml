@@ -352,7 +352,7 @@
                                     <goal>check</goal>
                                 </goals>
                                 <configuration>
-                                    <configLocation>checkStyleConfig.xml</configLocation>
+                                    <configLocation>dev-config/checkstyle/fluentlenium_checks.xml</configLocation>
                                     <consoleOutput>true</consoleOutput>
                                     <encoding>${project.build.sourceEncoding}</encoding>
                                     <failOnViolation>true</failOnViolation>
