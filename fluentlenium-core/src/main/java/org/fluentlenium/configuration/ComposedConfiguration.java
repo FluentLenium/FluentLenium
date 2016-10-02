@@ -8,7 +8,8 @@ import org.openqa.selenium.Capabilities;
  * <p>
  * When writing a value, it will go in the writable configuration ({@link ConfigurationMutator}).
  * <p>
- * When reading a value, it will get the first value found in the composition of read configurations ({@link ConfigurationProperties}).
+ * When reading a value, it will get the first value found in the composition of read configurations
+ * ({@link ConfigurationProperties}).
  */
 public class ComposedConfiguration implements Configuration {
     private final ConfigurationProperties[] configurations;
@@ -16,7 +17,8 @@ public class ComposedConfiguration implements Configuration {
     @Delegate
     private final ConfigurationMutator writableConfiguration;
 
-    public ComposedConfiguration(ConfigurationMutator writableConfiguration, ConfigurationProperties... configurations) {
+    public ComposedConfiguration(ConfigurationMutator writableConfiguration,
+            ConfigurationProperties... configurations) {
         this.writableConfiguration = writableConfiguration;
         this.configurations = configurations;
     }
@@ -25,7 +27,9 @@ public class ComposedConfiguration implements Configuration {
     public Class<? extends ConfigurationFactory> getConfigurationFactory() {
         for (ConfigurationProperties configuration : configurations) {
             Class<? extends ConfigurationFactory> configurationFactory = configuration.getConfigurationFactory();
-            if (configurationFactory != null) return configurationFactory;
+            if (configurationFactory != null) {
+                return configurationFactory;
+            }
         }
         return null;
     }
@@ -34,7 +38,9 @@ public class ComposedConfiguration implements Configuration {
     public Class<? extends ConfigurationProperties> getConfigurationDefaults() {
         for (ConfigurationProperties configuration : configurations) {
             Class<? extends ConfigurationProperties> configurationDefaults = configuration.getConfigurationDefaults();
-            if (configurationDefaults != null) return configurationDefaults;
+            if (configurationDefaults != null) {
+                return configurationDefaults;
+            }
         }
         return null;
     }
@@ -43,7 +49,9 @@ public class ComposedConfiguration implements Configuration {
     public String getWebDriver() {
         for (ConfigurationProperties configuration : configurations) {
             String webDriver = configuration.getWebDriver();
-            if (webDriver != null) return webDriver;
+            if (webDriver != null) {
+                return webDriver;
+            }
         }
         return null;
     }
@@ -52,7 +60,9 @@ public class ComposedConfiguration implements Configuration {
     public String getRemoteUrl() {
         for (ConfigurationProperties configuration : configurations) {
             String remoteUrl = configuration.getRemoteUrl();
-            if (remoteUrl != null) return remoteUrl;
+            if (remoteUrl != null) {
+                return remoteUrl;
+            }
         }
         return null;
     }
@@ -61,7 +71,9 @@ public class ComposedConfiguration implements Configuration {
     public Capabilities getCapabilities() {
         for (ConfigurationProperties configuration : configurations) {
             Capabilities capabilities = configuration.getCapabilities();
-            if (capabilities != null) return capabilities;
+            if (capabilities != null) {
+                return capabilities;
+            }
         }
         return null;
     }
@@ -70,7 +82,9 @@ public class ComposedConfiguration implements Configuration {
     public DriverLifecycle getDriverLifecycle() {
         for (ConfigurationProperties configuration : configurations) {
             DriverLifecycle driverLifecycle = configuration.getDriverLifecycle();
-            if (driverLifecycle != null) return driverLifecycle;
+            if (driverLifecycle != null) {
+                return driverLifecycle;
+            }
         }
         return null;
     }
@@ -79,7 +93,9 @@ public class ComposedConfiguration implements Configuration {
     public Boolean getDeleteCookies() {
         for (ConfigurationProperties configuration : configurations) {
             Boolean deleteCookies = configuration.getDeleteCookies();
-            if (deleteCookies != null) return deleteCookies;
+            if (deleteCookies != null) {
+                return deleteCookies;
+            }
         }
         return null;
     }
@@ -88,7 +104,9 @@ public class ComposedConfiguration implements Configuration {
     public String getBaseUrl() {
         for (ConfigurationProperties configuration : configurations) {
             String baseUrl = configuration.getBaseUrl();
-            if (baseUrl != null) return baseUrl;
+            if (baseUrl != null) {
+                return baseUrl;
+            }
         }
         return null;
     }
@@ -97,7 +115,9 @@ public class ComposedConfiguration implements Configuration {
     public Long getPageLoadTimeout() {
         for (ConfigurationProperties configuration : configurations) {
             Long pageLoadTimeout = configuration.getPageLoadTimeout();
-            if (pageLoadTimeout != null) return pageLoadTimeout;
+            if (pageLoadTimeout != null) {
+                return pageLoadTimeout;
+            }
         }
         return null;
     }
@@ -106,7 +126,9 @@ public class ComposedConfiguration implements Configuration {
     public Long getImplicitlyWait() {
         for (ConfigurationProperties configuration : configurations) {
             Long implicitlyWait = configuration.getImplicitlyWait();
-            if (implicitlyWait != null) return implicitlyWait;
+            if (implicitlyWait != null) {
+                return implicitlyWait;
+            }
         }
         return null;
     }
@@ -115,7 +137,9 @@ public class ComposedConfiguration implements Configuration {
     public Long getScriptTimeout() {
         for (ConfigurationProperties configuration : configurations) {
             Long scriptTimeout = configuration.getScriptTimeout();
-            if (scriptTimeout != null) return scriptTimeout;
+            if (scriptTimeout != null) {
+                return scriptTimeout;
+            }
         }
         return null;
     }
@@ -124,7 +148,9 @@ public class ComposedConfiguration implements Configuration {
     public Boolean getEventsEnabled() {
         for (ConfigurationProperties configuration : configurations) {
             Boolean eventsEnabled = configuration.getEventsEnabled();
-            if (eventsEnabled != null) return eventsEnabled;
+            if (eventsEnabled != null) {
+                return eventsEnabled;
+            }
         }
         return null;
     }
@@ -133,7 +159,9 @@ public class ComposedConfiguration implements Configuration {
     public String getScreenshotPath() {
         for (ConfigurationProperties configuration : configurations) {
             String screenshotPath = configuration.getScreenshotPath();
-            if (screenshotPath != null) return screenshotPath;
+            if (screenshotPath != null) {
+                return screenshotPath;
+            }
         }
         return null;
     }
@@ -142,7 +170,9 @@ public class ComposedConfiguration implements Configuration {
     public String getHtmlDumpPath() {
         for (ConfigurationProperties configuration : configurations) {
             String htmlDumpPath = configuration.getHtmlDumpPath();
-            if (htmlDumpPath != null) return htmlDumpPath;
+            if (htmlDumpPath != null) {
+                return htmlDumpPath;
+            }
         }
         return null;
     }
@@ -151,7 +181,9 @@ public class ComposedConfiguration implements Configuration {
     public TriggerMode getScreenshotMode() {
         for (ConfigurationProperties configuration : configurations) {
             TriggerMode screenshotMode = configuration.getScreenshotMode();
-            if (screenshotMode != null) return screenshotMode;
+            if (screenshotMode != null) {
+                return screenshotMode;
+            }
         }
         return null;
     }
@@ -160,7 +192,9 @@ public class ComposedConfiguration implements Configuration {
     public TriggerMode getHtmlDumpMode() {
         for (ConfigurationProperties configuration : configurations) {
             TriggerMode htmlDumpMode = configuration.getHtmlDumpMode();
-            if (htmlDumpMode != null) return htmlDumpMode;
+            if (htmlDumpMode != null) {
+                return htmlDumpMode;
+            }
         }
         return null;
     }

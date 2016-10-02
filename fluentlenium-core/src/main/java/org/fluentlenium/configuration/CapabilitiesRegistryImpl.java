@@ -35,9 +35,13 @@ public class CapabilitiesRegistryImpl extends AbstractFactoryRegistryImpl<Capabi
         List<CapabilitiesFactory> defaultFactories = new ArrayList<>();
         L:
         for (CapabilitiesFactory factory : filteredFactories) {
-            if (factory.getClass().isAnnotationPresent(IndexIgnore.class)) continue;
+            if (factory.getClass().isAnnotationPresent(IndexIgnore.class)) {
+                continue;
+            }
             for (Class<?> iface : factory.getClass().getInterfaces()) {
-                if (iface.isAnnotationPresent(IndexIgnore.class)) continue L;
+                if (iface.isAnnotationPresent(IndexIgnore.class)) {
+                    continue L;
+                }
             }
             defaultFactories.add(factory);
         }

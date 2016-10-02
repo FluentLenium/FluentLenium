@@ -21,6 +21,26 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RectangleConditionsTest {
+    private static final int RECTANGLE_X_VALID_POS = 1;
+    private static final int RECTANGLE_X_INVALID_POS = 2;
+    private static final int RECTANGLE_Y_VALID_POS = 1;
+    private static final int RECTANGLE_Y_INVALID_POS = 2;
+    private static final int RECTANGLE_X_POS = 3;
+    private static final int RECTANGLE_Y_POS = 4;
+    private static final int RECTANGLE_INVALID_Y_POS = 5;
+    private static final int RECTANGLE_WIDTH = 1;
+    private static final int RECTANGLE_INVALID_WIDTH = 2;
+    private static final int RECTANGLE_HEIGHT = 1;
+    private static final int RECTANGLE_INVALID_HEIGHT = 2;
+    private static final int RECTANGLE_DIMENSION_WIDTH = 3;
+    private static final int RECTANGLE_DIMENSION_HEIGHT = 4;
+    private static final int RECTANGLE_DIMENSION_INVALID_HEIGHT = 5;
+    private static final int RECTANGLE_POSITION_X = 3;
+    private static final int RECTANGLE_POSITION_Y = 4;
+    private static final int RECTANGLE_DIMENSION_WIDTH1 = 5;
+    private static final int RECTANGLE_DIMENSION_HEIGHT1 = 6;
+    private static final int RECTANGLE_DIMENSION_INVALID_HEIGHT1 = 7;
+
     @Mock
     private WebElement webElement;
 
@@ -30,16 +50,15 @@ public class RectangleConditionsTest {
     @Mock
     private WebDriver driver;
 
-    private FluentWebElement fluentWebElement;
     private WebElementConditions conditions;
-    private FluentAdapter fluentAdapter;
 
     @Before
     public void before() {
         when(webElement.getRect()).thenReturn(rectangle);
 
-        fluentAdapter = new FluentAdapter(driver);
-        fluentWebElement = new FluentWebElement(webElement, fluentAdapter, new DefaultComponentInstantiator(fluentAdapter));
+        FluentAdapter fluentAdapter = new FluentAdapter(driver);
+        FluentWebElement fluentWebElement = new FluentWebElement(webElement, fluentAdapter,
+                new DefaultComponentInstantiator(fluentAdapter));
         conditions = new WebElementConditions(fluentWebElement);
     }
 
@@ -50,105 +69,106 @@ public class RectangleConditionsTest {
 
     @Test
     public void withX() {
-        when(rectangle.getX()).thenReturn(1);
+        when(rectangle.getX()).thenReturn(RECTANGLE_X_VALID_POS);
 
-        assertThat(conditions.rectangle().x(1)).isTrue();
-        assertThat(conditions.rectangle().x(2)).isFalse();
+        assertThat(conditions.rectangle().x(RECTANGLE_X_VALID_POS)).isTrue();
+        assertThat(conditions.rectangle().x(RECTANGLE_X_INVALID_POS)).isFalse();
 
-        assertThat(conditions.rectangle().x().equalTo(1)).isTrue();
-        assertThat(conditions.rectangle().x().equalTo(2)).isFalse();
+        assertThat(conditions.rectangle().x().equalTo(RECTANGLE_X_VALID_POS)).isTrue();
+        assertThat(conditions.rectangle().x().equalTo(RECTANGLE_X_INVALID_POS)).isFalse();
     }
 
     @Test
     public void notWithX() {
-        when(rectangle.getX()).thenReturn(1);
+        when(rectangle.getX()).thenReturn(RECTANGLE_X_VALID_POS);
 
-        assertThat(conditions.rectangle().not().x(1)).isFalse();
-        assertThat(conditions.rectangle().not().x(2)).isTrue();
+        assertThat(conditions.rectangle().not().x(RECTANGLE_X_VALID_POS)).isFalse();
+        assertThat(conditions.rectangle().not().x(RECTANGLE_X_INVALID_POS)).isTrue();
 
-        assertThat(conditions.rectangle().not().x().equalTo(1)).isFalse();
-        assertThat(conditions.rectangle().not().x().equalTo(2)).isTrue();
+        assertThat(conditions.rectangle().not().x().equalTo(RECTANGLE_X_VALID_POS)).isFalse();
+        assertThat(conditions.rectangle().not().x().equalTo(RECTANGLE_X_INVALID_POS)).isTrue();
     }
 
     @Test
     public void notHasRectangleWithX() {
-        when(rectangle.getX()).thenReturn(1);
+        when(rectangle.getX()).thenReturn(RECTANGLE_X_VALID_POS);
 
-        assertThat(conditions.not().rectangle().x(1)).isFalse();
-        assertThat(conditions.not().rectangle().x(2)).isTrue();
+        assertThat(conditions.not().rectangle().x(RECTANGLE_X_VALID_POS)).isFalse();
+        assertThat(conditions.not().rectangle().x(RECTANGLE_X_INVALID_POS)).isTrue();
 
-        assertThat(conditions.not().rectangle().x().equalTo(1)).isFalse();
-        assertThat(conditions.not().rectangle().x().equalTo(2)).isTrue();
+        assertThat(conditions.not().rectangle().x().equalTo(RECTANGLE_X_VALID_POS)).isFalse();
+        assertThat(conditions.not().rectangle().x().equalTo(RECTANGLE_X_INVALID_POS)).isTrue();
     }
 
     @Test
     public void withY() {
-        when(rectangle.getY()).thenReturn(1);
+        when(rectangle.getY()).thenReturn(RECTANGLE_Y_VALID_POS);
 
-        assertThat(conditions.rectangle().y(1)).isTrue();
-        assertThat(conditions.rectangle().y(2)).isFalse();
+        assertThat(conditions.rectangle().y(RECTANGLE_Y_VALID_POS)).isTrue();
+        assertThat(conditions.rectangle().y(RECTANGLE_Y_INVALID_POS)).isFalse();
 
-        assertThat(conditions.rectangle().y().equalTo(1)).isTrue();
-        assertThat(conditions.rectangle().y().equalTo(2)).isFalse();
+        assertThat(conditions.rectangle().y().equalTo(RECTANGLE_Y_VALID_POS)).isTrue();
+        assertThat(conditions.rectangle().y().equalTo(RECTANGLE_Y_INVALID_POS)).isFalse();
     }
 
     @Test
     public void withPosition() {
-        when(rectangle.getX()).thenReturn(3);
-        when(rectangle.getY()).thenReturn(4);
-        when(rectangle.getPoint()).thenReturn(new Point(3, 4));
+        when(rectangle.getX()).thenReturn(RECTANGLE_X_POS);
+        when(rectangle.getY()).thenReturn(RECTANGLE_Y_POS);
+        when(rectangle.getPoint()).thenReturn(new Point(RECTANGLE_X_POS, RECTANGLE_Y_POS));
 
-        assertThat(conditions.rectangle().position(3, 4)).isTrue();
-        assertThat(conditions.rectangle().position(3, 5)).isFalse();
+        assertThat(conditions.rectangle().position(RECTANGLE_X_POS, RECTANGLE_Y_POS)).isTrue();
+        assertThat(conditions.rectangle().position(RECTANGLE_X_POS, RECTANGLE_INVALID_Y_POS)).isFalse();
     }
 
     @Test
     public void withWidth() {
-        when(rectangle.getWidth()).thenReturn(1);
+        when(rectangle.getWidth()).thenReturn(RECTANGLE_WIDTH);
 
-        assertThat(conditions.rectangle().width(1)).isTrue();
-        assertThat(conditions.rectangle().width(2)).isFalse();
+        assertThat(conditions.rectangle().width(RECTANGLE_WIDTH)).isTrue();
+        assertThat(conditions.rectangle().width(RECTANGLE_INVALID_WIDTH)).isFalse();
 
-        assertThat(conditions.rectangle().width().equalTo(1)).isTrue();
-        assertThat(conditions.rectangle().width().equalTo(2)).isFalse();
+        assertThat(conditions.rectangle().width().equalTo(RECTANGLE_WIDTH)).isTrue();
+        assertThat(conditions.rectangle().width().equalTo(RECTANGLE_INVALID_WIDTH)).isFalse();
     }
 
     @Test
     public void withHeight() {
-        when(rectangle.getHeight()).thenReturn(1);
+        when(rectangle.getHeight()).thenReturn(RECTANGLE_HEIGHT);
 
-        assertThat(conditions.rectangle().height(1)).isTrue();
-        assertThat(conditions.rectangle().height(2)).isFalse();
+        assertThat(conditions.rectangle().height(RECTANGLE_HEIGHT)).isTrue();
+        assertThat(conditions.rectangle().height(RECTANGLE_INVALID_HEIGHT)).isFalse();
 
-        assertThat(conditions.rectangle().height(1)).isTrue();
-        assertThat(conditions.rectangle().height(2)).isFalse();
+        assertThat(conditions.rectangle().height(RECTANGLE_HEIGHT)).isTrue();
+        assertThat(conditions.rectangle().height(RECTANGLE_INVALID_HEIGHT)).isFalse();
 
-        assertThat(conditions.rectangle().height().equalTo(1)).isTrue();
-        assertThat(conditions.rectangle().height().equalTo(2)).isFalse();
+        assertThat(conditions.rectangle().height().equalTo(RECTANGLE_HEIGHT)).isTrue();
+        assertThat(conditions.rectangle().height().equalTo(RECTANGLE_INVALID_HEIGHT)).isFalse();
     }
 
     @Test
     public void withDimension() {
-        when(rectangle.getWidth()).thenReturn(3);
-        when(rectangle.getHeight()).thenReturn(4);
-        when(rectangle.getDimension()).thenReturn(new Dimension(3, 4));
+        when(rectangle.getWidth()).thenReturn(RECTANGLE_DIMENSION_WIDTH);
+        when(rectangle.getHeight()).thenReturn(RECTANGLE_DIMENSION_HEIGHT);
+        when(rectangle.getDimension()).thenReturn(new Dimension(RECTANGLE_DIMENSION_WIDTH, RECTANGLE_DIMENSION_HEIGHT));
 
-        assertThat(conditions.rectangle().dimension(3, 4)).isTrue();
-        assertThat(conditions.rectangle().dimension(3, 5)).isFalse();
+        assertThat(conditions.rectangle().dimension(RECTANGLE_DIMENSION_WIDTH, RECTANGLE_DIMENSION_HEIGHT)).isTrue();
+        assertThat(conditions.rectangle().dimension(RECTANGLE_DIMENSION_WIDTH, RECTANGLE_DIMENSION_INVALID_HEIGHT)).isFalse();
     }
 
     @Test
     public void withPositionAndDimension() {
-        when(rectangle.getX()).thenReturn(3);
-        when(rectangle.getY()).thenReturn(4);
-        when(rectangle.getPoint()).thenReturn(new Point(3, 4));
+        when(rectangle.getX()).thenReturn(RECTANGLE_POSITION_X);
+        when(rectangle.getY()).thenReturn(RECTANGLE_POSITION_Y);
+        when(rectangle.getPoint()).thenReturn(new Point(RECTANGLE_POSITION_X, RECTANGLE_POSITION_Y));
 
-        when(rectangle.getWidth()).thenReturn(5);
-        when(rectangle.getHeight()).thenReturn(6);
-        when(rectangle.getDimension()).thenReturn(new Dimension(5, 6));
+        when(rectangle.getWidth()).thenReturn(RECTANGLE_DIMENSION_WIDTH1);
+        when(rectangle.getHeight()).thenReturn(RECTANGLE_DIMENSION_HEIGHT1);
+        when(rectangle.getDimension()).thenReturn(new Dimension(RECTANGLE_DIMENSION_WIDTH1, RECTANGLE_DIMENSION_HEIGHT1));
 
-        assertThat(conditions.rectangle().positionAndDimension(3, 4, 5, 6)).isTrue();
-        assertThat(conditions.rectangle().positionAndDimension(3, 4, 5, 7)).isFalse();
+        assertThat(conditions.rectangle().positionAndDimension(RECTANGLE_POSITION_X, RECTANGLE_POSITION_Y, RECTANGLE_DIMENSION_WIDTH1, RECTANGLE_DIMENSION_HEIGHT1)).isTrue();
+        assertThat(conditions.rectangle().positionAndDimension(RECTANGLE_POSITION_X, RECTANGLE_POSITION_Y, RECTANGLE_DIMENSION_HEIGHT1,
+                RECTANGLE_DIMENSION_INVALID_HEIGHT1)).isFalse();
     }
 
 }

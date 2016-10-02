@@ -27,7 +27,9 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
     }
 
     protected AbstractPropertiesConfiguration(String... prefixes) {
-        if (prefixes.length == 0) throw new IllegalArgumentException("Prefixes should be defined");
+        if (prefixes.length == 0) {
+            throw new IllegalArgumentException("Prefixes should be defined");
+        }
         this.prefixes = prefixes;
     }
 
@@ -44,19 +46,25 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
     }
 
     private boolean isValidProperty(String property) {
-        if (Strings.isNullOrEmpty(property) || "null".equalsIgnoreCase(property)) return false;
+        if (Strings.isNullOrEmpty(property) || "null".equalsIgnoreCase(property)) {
+            return false;
+        }
         return true;
     }
 
     private String getStringProperty(String propertyName) {
         String property = getProperty(propertyName);
-        if (!isValidProperty(property)) return null;
+        if (!isValidProperty(property)) {
+            return null;
+        }
         return property;
     }
 
     private Long getLongProperty(String propertyName) {
         String property = getProperty(propertyName);
-        if (!isValidProperty(property)) return null;
+        if (!isValidProperty(property)) {
+            return null;
+        }
         try {
             return Long.parseLong(property);
         } catch (NumberFormatException e) {
@@ -66,21 +74,29 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
 
     private Boolean getBooleanProperty(String propertyName) {
         String property = getProperty(propertyName);
-        if (!isValidProperty(property)) return null;
+        if (!isValidProperty(property)) {
+            return null;
+        }
         return Boolean.parseBoolean(property);
     }
 
     private <T extends Enum<T>> T getEnumProperty(Class<T> enumClass, String propertyName) {
         String property = getProperty(propertyName);
-        if (!isValidProperty(property)) return null;
-        if (propertyName.equalsIgnoreCase("DEFAULT")) return null;
+        if (!isValidProperty(property)) {
+            return null;
+        }
+        if (propertyName.equalsIgnoreCase("DEFAULT")) {
+            return null;
+        }
         T enumValue = (T) Enum.valueOf(enumClass, property);
         return enumValue;
     }
 
     private <T> Class<T> getClassProperty(Class<T> clazz, String propertyName) {
         String property = getProperty(propertyName);
-        if (!isValidProperty(property)) return null;
+        if (!isValidProperty(property)) {
+            return null;
+        }
         try {
             Class<?> propertyClass = Class.forName(property);
             if (clazz.isAssignableFrom(propertyClass)) {
@@ -97,7 +113,9 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
 
     private Capabilities getCapabilitiesProperty(String propertyName) {
         String property = getProperty(propertyName);
-        if (!isValidProperty(property)) return null;
+        if (!isValidProperty(property)) {
+            return null;
+        }
         try {
             URL url = newURL(property);
             try {
