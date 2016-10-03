@@ -19,13 +19,11 @@ public class FluentWebElementAssertTest extends IntegrationFluentTest {
         assertThat(el("#disabled")).isEnabled();
     }
 
-
     @Test
     public void testIsNotEnabledOk() throws Exception {
         goTo(DEFAULT_URL);
         assertThat(el("#disabled")).isNotEnabled();
     }
-
 
     @Test(expected = AssertionError.class)
     public void testIsNotEnabledKo() throws Exception {

@@ -11,18 +11,15 @@ import static org.fluentlenium.core.filter.FilterConstructor.withName;
 @FluentConfiguration(driverLifecycle = ConfigurationProperties.DriverLifecycle.METHOD)
 public class DriverPerMethodWithAnnotationTest extends IntegrationFluentTestNg {
 
-
     @Test
     public void firstMethod() {
         goTo(IntegrationFluentTestNg.DEFAULT_URL);
         assertThat($(".small", withName("name"))).hasSize(1);
     }
 
-
     @Test
     public void secondMethod() {
         assertThat($(".small", withName("name"))).hasSize(0);
     }
-
 
 }

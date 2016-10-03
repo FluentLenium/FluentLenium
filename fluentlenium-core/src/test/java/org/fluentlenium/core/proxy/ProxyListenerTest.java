@@ -96,8 +96,8 @@ public class ProxyListenerTest {
         LocatorProxies.now(proxy);
 
         verify(listener).proxyElementSearch(refEq(proxy), any(ElementLocator.class));
-        verify(listener).proxyElementFound(refEq(proxy), any(ElementLocator.class), Matchers.argThat(new ElementMatcher(Arrays.asList(element1, element2, element3))));
-
+        verify(listener).proxyElementFound(refEq(proxy), any(ElementLocator.class),
+                Matchers.argThat(new ElementMatcher(Arrays.asList(element1, element2, element3))));
 
         LocatorProxies.removeProxyListener(proxy, listener);
 

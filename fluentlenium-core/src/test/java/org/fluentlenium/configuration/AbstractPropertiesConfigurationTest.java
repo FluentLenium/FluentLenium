@@ -1,6 +1,5 @@
 package org.fluentlenium.configuration;
 
-
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -26,7 +25,8 @@ public abstract class AbstractPropertiesConfigurationTest<T extends AbstractProp
     protected abstract void mockProperty(String propertyName, Object propertyValue);
 
     protected String valueToString(Object propertyValue) {
-        if (propertyValue == null) return null;
+        if (propertyValue == null)
+            return null;
         if (propertyValue instanceof Class) {
             return ((Class) propertyValue).getName();
         }
@@ -230,7 +230,8 @@ public abstract class AbstractPropertiesConfigurationTest<T extends AbstractProp
         Assertions.assertThat(getConfiguration().getScreenshotMode()).isNull();
 
         mockProperty("screenshotMode", ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
-        Assertions.assertThat(getConfiguration().getScreenshotMode()).isEqualTo(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
+        Assertions.assertThat(getConfiguration().getScreenshotMode())
+                .isEqualTo(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
     }
 
     @Test
@@ -238,6 +239,7 @@ public abstract class AbstractPropertiesConfigurationTest<T extends AbstractProp
         Assertions.assertThat(getConfiguration().getHtmlDumpMode()).isNull();
 
         mockProperty("htmlDumpMode", ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
-        Assertions.assertThat(getConfiguration().getHtmlDumpMode()).isEqualTo(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
+        Assertions.assertThat(getConfiguration().getHtmlDumpMode())
+                .isEqualTo(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
     }
 }

@@ -13,7 +13,8 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import java.util.List;
 
 public class WaitHook extends BaseFluentHook<WaitHookOptions> {
-    public WaitHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, WaitHookOptions options) {
+    public WaitHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
+            Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, WaitHookOptions options) {
         super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
     }
 

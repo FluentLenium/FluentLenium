@@ -73,7 +73,7 @@ public class SeleniumFindBy extends IntegrationFluentTest {
         @FindBy(className = "small")
         List<WebElement> smalls;
 
-        @FindAll({@FindBy(id = "location"), @FindBy(className = "small")})
+        @FindAll({ @FindBy(id = "location"), @FindBy(className = "small") })
         List<WebElement> findAllElements;
 
         @FindBy(css = "#mouseover")

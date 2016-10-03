@@ -97,7 +97,6 @@ public class FluentWaitEachElementMatcherTest {
             }
         };
 
-
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -188,7 +187,6 @@ public class FluentWaitEachElementMatcherTest {
         verify(fluentWebElement3, atLeastOnce()).enabled();
     }
 
-
     @Test
     public void hasAttribute() {
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
@@ -219,7 +217,6 @@ public class FluentWaitEachElementMatcherTest {
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
-
 
     @Test
     public void hasId() {
@@ -371,7 +368,6 @@ public class FluentWaitEachElementMatcherTest {
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
-
 
     @Test
     public void isEnabled() {

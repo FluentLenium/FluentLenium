@@ -59,7 +59,6 @@ public class KeyboardElementActionsTest {
         verify(keyboard).pressKey(Keys.SHIFT);
     }
 
-
     @Test
     public void testKeyDownKeyboardMouse() {
         KeyboardElementActions actions = new KeyboardElementActions(keyboard, mouse, element);

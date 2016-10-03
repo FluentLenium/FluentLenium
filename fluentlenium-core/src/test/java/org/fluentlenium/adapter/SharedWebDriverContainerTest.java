@@ -13,7 +13,6 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
 
     private SharedWebDriverContainer.Impl container;
@@ -117,7 +116,8 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
     }
 
     @Test
-    public void getOrCreateDriver_with_different_test_names_and_different_test_class_and_strategy_per_class_creates_distinct_instance() {
+    public void
+    getOrCreateDriver_with_different_test_names_and_different_test_class_and_strategy_per_class_creates_distinct_instance() {
         SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.CLASS);
 
         assertThat(container.getAllDrivers()).containsOnly(driver);

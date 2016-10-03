@@ -1,6 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import org.assertj.core.api.ThrowableAssert;
@@ -63,14 +62,16 @@ public class IntegerListConditionsTest {
 
     @Test
     public void fromEachElementConditions() {
-        EachElementConditions conditions = new EachElementConditions(Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
+        EachElementConditions conditions = new EachElementConditions(
+                Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
-        final IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions, new Function<FluentWebElement, Integer>() {
-            @Override
-            public Integer apply(FluentWebElement input) {
-                return Integer.valueOf(input.id());
-            }
-        });
+        final IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions,
+                new Function<FluentWebElement, Integer>() {
+                    @Override
+                    public Integer apply(FluentWebElement input) {
+                        return Integer.valueOf(input.id());
+                    }
+                });
 
         when(webElement1.getAttribute("id")).thenReturn("1");
         when(webElement2.getAttribute("id")).thenReturn("1");
@@ -104,19 +105,20 @@ public class IntegerListConditionsTest {
             }
         });
 
-
     }
 
     @Test
     public void fromAtLeastOneElementConditions() {
-        AtLeastOneElementConditions conditions = new AtLeastOneElementConditions(Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
+        AtLeastOneElementConditions conditions = new AtLeastOneElementConditions(
+                Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
-        final IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions, new Function<FluentWebElement, Integer>() {
-            @Override
-            public Integer apply(FluentWebElement input) {
-                return Integer.valueOf(input.id());
-            }
-        });
+        final IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions,
+                new Function<FluentWebElement, Integer>() {
+                    @Override
+                    public Integer apply(FluentWebElement input) {
+                        return Integer.valueOf(input.id());
+                    }
+                });
 
         when(webElement1.getAttribute("id")).thenReturn("1");
         when(webElement2.getAttribute("id")).thenReturn("1");

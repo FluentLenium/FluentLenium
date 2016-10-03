@@ -6,5 +6,5 @@ import org.openqa.selenium.WebDriver;
 
 public interface FindByListener {
 
-    void on(final By by, final FluentWebElement element, final WebDriver driver);
+    void on(By by, FluentWebElement element, WebDriver driver);
 }

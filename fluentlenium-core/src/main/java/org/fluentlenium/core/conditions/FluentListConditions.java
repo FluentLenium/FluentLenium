@@ -1,6 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.conditions.message.Message;
 import org.fluentlenium.core.conditions.message.MessageContext;

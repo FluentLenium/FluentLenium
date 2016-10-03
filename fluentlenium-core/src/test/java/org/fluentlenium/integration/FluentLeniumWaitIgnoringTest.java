@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 
 public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
 
-
     @Before
     public void before() {
         goTo(DEFAULT_URL);
@@ -38,14 +37,12 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             exceptions.add(CustomException.class);
             exceptions.add(CustomException2.class);
 
-            await().atMost(1, TimeUnit.NANOSECONDS)
-                    .ignoreAll(exceptions)
-                    .until(new Supplier<Boolean>() {
-                        @Override
-                        public Boolean get() {
-                            throw new CustomException();
-                        }
-                    });
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoreAll(exceptions).until(new Supplier<Boolean>() {
+                @Override
+                public Boolean get() {
+                    throw new CustomException();
+                }
+            });
 
             throw new AssertionError();
         } catch (TimeoutException e) {
@@ -61,14 +58,12 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             exceptions.add(CustomException.class);
             exceptions.add(CustomException2.class);
 
-            await().atMost(1, TimeUnit.NANOSECONDS)
-                    .ignoreAll(exceptions)
-                    .until(new Supplier<Boolean>() {
-                        @Override
-                        public Boolean get() {
-                            throw new CustomException3();
-                        }
-                    });
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoreAll(exceptions).until(new Supplier<Boolean>() {
+                @Override
+                public Boolean get() {
+                    throw new CustomException3();
+                }
+            });
 
             throw new AssertionError();
         } catch (TimeoutException e) {
@@ -80,9 +75,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     public void test_ignoring_1_positive() {
 
         try {
-            await().atMost(1, TimeUnit.NANOSECONDS)
-                    .ignoring(CustomException.class)
-                    .ignoring(CustomException2.class)
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class).ignoring(CustomException2.class)
                     .until(new Supplier<Boolean>() {
                         @Override
                         public Boolean get() {
@@ -100,9 +93,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     public void test_ignoring_1_negative() {
 
         try {
-            await().atMost(1, TimeUnit.NANOSECONDS)
-                    .ignoring(CustomException.class)
-                    .ignoring(CustomException2.class)
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class).ignoring(CustomException2.class)
                     .until(new Supplier<Boolean>() {
                         @Override
                         public Boolean get() {
@@ -120,8 +111,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     public void test_ignoring_2_positive() {
 
         try {
-            await().atMost(1, TimeUnit.NANOSECONDS)
-                    .ignoring(CustomException.class, CustomException2.class)
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class, CustomException2.class)
                     .until(new Supplier<Boolean>() {
                         @Override
                         public Boolean get() {
@@ -139,8 +129,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     public void test_ignoring_2_negative() {
 
         try {
-            await().atMost(1, TimeUnit.NANOSECONDS)
-                    .ignoring(CustomException.class, CustomException2.class)
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class, CustomException2.class)
                     .until(new Supplier<Boolean>() {
                         @Override
                         public Boolean get() {

@@ -33,7 +33,8 @@ public class FluentWaitPageMatcher extends AbstractWaitMatcher {
         } else {
             Predicate<FluentControl> isLoaded = new com.google.common.base.Predicate<FluentControl>() {
                 public boolean apply(FluentControl fluent) {
-                    Object result = fluent.executeScript("if (document.readyState) return document.readyState;").getStringResult();
+                    Object result = fluent.executeScript("if (document.readyState) return document.readyState;")
+                            .getStringResult();
                     return result != null && "complete".equals(result);
                 }
             };
@@ -46,7 +47,9 @@ public class FluentWaitPageMatcher extends AbstractWaitMatcher {
      */
     public void isAt() {
         if (page == null) {
-            throw new IllegalArgumentException("You should use a page argument when you call the untilPage method to specify the page you want to be. Example : await().untilPage(myPage).isAt();");
+            throw new IllegalArgumentException(
+                    "You should use a page argument when you call the untilPage method to specify the page you want to be. "
+                            + "Example : await().untilPage(myPage).isAt();");
         }
         Predicate<FluentControl> isLoaded = new com.google.common.base.Predicate<FluentControl>() {
             public boolean apply(FluentControl fluent) {

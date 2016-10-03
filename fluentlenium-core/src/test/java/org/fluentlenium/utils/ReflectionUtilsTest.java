@@ -12,14 +12,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class ReflectionUtilsTest {
     @Test
     public void testToClass() {
-        Object[] objects = {"test", 1, 2L, true, Integer.valueOf(3)};
+        Object[] objects = { "test", 1, 2L, true, Integer.valueOf(3) };
 
         Class<?>[] classes = ReflectionUtils.toClass(objects);
 
         assertThat(classes).containsExactly(String.class, Integer.class, Long.class, Boolean.class, Integer.class);
 
         assertThat(ReflectionUtils.toClass(null)).isNull();
-        assertThat(ReflectionUtils.toClass(new Object[]{})).isEmpty();
+        assertThat(ReflectionUtils.toClass(new Object[] {})).isEmpty();
     }
 
     public static class SuperClass {
@@ -43,9 +43,9 @@ public class ReflectionUtilsTest {
 
     }
 
-
     @Test
-    public void testGetDeclaredConstructor() throws NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
+    public void testGetDeclaredConstructor()
+            throws NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
         Constructor<TestClass> testClassConstructor = ReflectionUtils.getConstructor(TestClass.class);
         assertThat(testClassConstructor.getParameterTypes()).isEmpty();
 
@@ -57,7 +57,8 @@ public class ReflectionUtilsTest {
         }).isExactlyInstanceOf(NoSuchMethodException.class);
 
         Constructor<SuperClass> superClassConstructor = ReflectionUtils.getConstructor(SuperClass.class, "1", 2, true, "object");
-        assertThat(superClassConstructor.getParameterTypes()).isEqualTo(new Class<?>[]{String.class, Integer.class, boolean.class, Object.class});
+        assertThat(superClassConstructor.getParameterTypes())
+                .isEqualTo(new Class<?>[] { String.class, Integer.class, boolean.class, Object.class });
 
         SuperClass object = ReflectionUtils.newInstance(SuperClass.class, "1", 2, true, "object");
         assertThat(object.param1).isEqualTo("1");
@@ -79,11 +80,11 @@ public class ReflectionUtilsTest {
             }
         }).isExactlyInstanceOf(NoSuchMethodException.class);
 
-
     }
 
     @Test
-    public void testNewInstance() throws NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
+    public void testNewInstance()
+            throws NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
         TestClass testClass = ReflectionUtils.newInstance(TestClass.class);
 
         assertThat(testClass).isExactlyInstanceOf(TestClass.class);

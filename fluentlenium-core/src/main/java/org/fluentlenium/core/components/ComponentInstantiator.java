@@ -112,7 +112,6 @@ public interface ComponentInstantiator {
      */
     <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, WebElement... elements);
 
-
     /**
      * create and register a new fluent list.
      *
@@ -215,7 +214,6 @@ public interface ComponentInstantiator {
      */
     <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, WebElement... elements);
 
-
     /**
      * Create and register a new list of component from the given element iterable.
      *
@@ -228,7 +226,6 @@ public interface ComponentInstantiator {
      */
     <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, Iterable<WebElement> elements);
 
-
     /**
      * Create and register a new list of component from the given element iterable.
      *
@@ -240,7 +237,6 @@ public interface ComponentInstantiator {
      * @return new list of components
      */
     <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, List<WebElement> elements);
-
 
     /**
      * Create and register a new list of component from the given component list.

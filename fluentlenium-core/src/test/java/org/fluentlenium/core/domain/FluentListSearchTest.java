@@ -1,6 +1,5 @@
 package org.fluentlenium.core.domain;
 
-
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.filter.Filter;
@@ -61,7 +60,6 @@ public class FluentListSearchTest {
         field.setAccessible(true);
         field.set(fluentWebElement, search);
 
-
         fluentList = fluentAdapter.newFluentList(webElements);
     }
 
@@ -81,7 +79,6 @@ public class FluentListSearchTest {
         FluentWebElement fluentWebElement = fluentList.find(name, null).index(0);
         assertThat(fluentWebElement).isEqualTo(this.fluentWebElement);
     }
-
 
     @Test(expected = NoSuchElementException.class)
     public void whenNoElementMatchingFillThenThrowsExceptions() {

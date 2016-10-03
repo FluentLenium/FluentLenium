@@ -75,12 +75,10 @@ public interface ConfigurationProperties {
         /**
          * Take screenshot when the test fail.
          */
-        AUTOMATIC_ON_FAIL,
-        /**
+        AUTOMATIC_ON_FAIL, /**
          * Only take screenshot manually through API.
          */
-        MANUAL,
-        /**
+        MANUAL, /**
          * Default value.
          */
         DEFAULT
@@ -90,16 +88,13 @@ public interface ConfigurationProperties {
         /**
          * WebDriver is created once, and same instance is used for each test class and method.
          */
-        JVM,
-        /**
+        JVM, /**
          * WebDriver is created for each test class, and same instance is used for each test method in the class.
          */
-        CLASS,
-        /**
+        CLASS, /**
          * WebDriver is created for each test method, and this instance is used only for one test method.
          */
-        METHOD,
-        /**
+        METHOD, /**
          * Default value.
          */
         DEFAULT
@@ -226,7 +221,6 @@ public interface ConfigurationProperties {
      */
     Long getScriptTimeout();
 
-
     /**
      * <pre>eventsEnabled</pre> property.
      *
@@ -310,6 +304,5 @@ public interface ConfigurationProperties {
      * @return Custom {@link ConfigurationFactory} class.
      */
     Class<? extends ConfigurationFactory> getConfigurationFactory();
-
 
 }

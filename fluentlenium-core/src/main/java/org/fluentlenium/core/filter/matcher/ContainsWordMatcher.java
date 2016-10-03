@@ -1,6 +1,5 @@
 package org.fluentlenium.core.filter.matcher;
 
-
 public class ContainsWordMatcher extends Matcher {
 
     public ContainsWordMatcher(String value) {
@@ -16,6 +15,5 @@ public class ContainsWordMatcher extends Matcher {
     public boolean isSatisfiedBy(String o) {
         return CalculateService.contains(getPattern(), getValue(), o);
     }
-
 
 }

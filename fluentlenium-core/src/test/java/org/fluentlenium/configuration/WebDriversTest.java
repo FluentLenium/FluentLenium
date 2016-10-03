@@ -60,9 +60,8 @@ public class WebDriversTest {
                 webDrivers.get(null);
 
             }
-        }).isExactlyInstanceOf(ConfigurationException.class)
-                .hasMessage("No WebDriverFactory is available. You need add least one supported " +
-                        "WebDriver in your classpath.");
+        }).isExactlyInstanceOf(ConfigurationException.class).hasMessage(
+                "No WebDriverFactory is available. You need add least one supported " + "WebDriver in your classpath.");
     }
 
     @Test(expected = ConfigurationException.class)
@@ -104,6 +103,5 @@ public class WebDriversTest {
         assertThat(WebDrivers.INSTANCE.get("firefox")).isNotNull();
         assertThat(WebDrivers.INSTANCE.get("htmlunit")).isNotNull();
     }
-
 
 }

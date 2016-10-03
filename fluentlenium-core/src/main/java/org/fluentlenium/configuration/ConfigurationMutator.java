@@ -56,7 +56,6 @@ public interface ConfigurationMutator {
      */
     void setDeleteCookies(Boolean deleteCookies);
 
-
     /**
      * Sets the value of <pre>baseUrl</pre> property.
      *

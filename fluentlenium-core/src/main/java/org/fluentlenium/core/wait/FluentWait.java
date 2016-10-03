@@ -77,7 +77,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
      * @return this fluent wait
      */
     public FluentWait ignoring(java.lang.Class<? extends java.lang.RuntimeException> firstType,
-                               java.lang.Class<? extends java.lang.RuntimeException> secondType) {
+            java.lang.Class<? extends java.lang.RuntimeException> secondType) {
         wait.ignoring(firstType, secondType);
         return this;
     }
@@ -141,7 +141,8 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
      */
     public FluentListConditions until(final List<? extends FluentWebElement> elements) {
         updateWaitWithDefaultExceptions();
-        return WaitConditionProxy.one(this, "Elements " + elements.toString(), Suppliers.<List<? extends FluentWebElement>>ofInstance(elements));
+        return WaitConditionProxy
+                .one(this, "Elements " + elements.toString(), Suppliers.<List<? extends FluentWebElement>>ofInstance(elements));
     }
 
     /**
@@ -152,7 +153,8 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
      */
     public FluentListConditions untilEach(final List<? extends FluentWebElement> elements) {
         updateWaitWithDefaultExceptions();
-        return WaitConditionProxy.each(this, "Elements " + elements.toString(), Suppliers.<List<? extends FluentWebElement>>ofInstance(elements));
+        return WaitConditionProxy
+                .each(this, "Elements " + elements.toString(), Suppliers.<List<? extends FluentWebElement>>ofInstance(elements));
     }
 
     /**
@@ -172,8 +174,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
      * @param selector Supplier of the element to wait for.
      * @return fluent wait matcher
      */
-    public FluentListConditions untilElements(
-            Supplier<? extends List<? extends FluentWebElement>> selector) {
+    public FluentListConditions untilElements(Supplier<? extends List<? extends FluentWebElement>> selector) {
         updateWaitWithDefaultExceptions();
         return WaitConditionProxy.one(this, "Elements " + selector.toString(), selector);
     }
@@ -184,8 +185,7 @@ public class FluentWait implements org.openqa.selenium.support.ui.Wait<FluentCon
      * @param selector Supplier of the element to wait for.
      * @return fluent wait matcher
      */
-    public FluentListConditions untilEachElements(
-            Supplier<? extends List<? extends FluentWebElement>> selector) {
+    public FluentListConditions untilEachElements(Supplier<? extends List<? extends FluentWebElement>> selector) {
         updateWaitWithDefaultExceptions();
         return WaitConditionProxy.each(this, "Elements " + selector.toString(), selector);
     }

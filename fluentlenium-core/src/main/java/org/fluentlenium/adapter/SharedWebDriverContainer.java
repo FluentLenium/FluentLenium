@@ -54,8 +54,8 @@ public enum SharedWebDriverContainer {
          * @param driverLifecycle  WebDriver lifecycle
          * @return
          */
-        public synchronized <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory,
-                Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
+        public synchronized <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass,
+                String testName, DriverLifecycle driverLifecycle) {
             SharedWebDriver driver = getDriver(testClass, testName, driverLifecycle);
             if (driver == null) {
                 driver = createDriver(webDriverFactory, testClass, testName, driverLifecycle);
@@ -64,8 +64,8 @@ public enum SharedWebDriverContainer {
             return driver;
         }
 
-        private <T> SharedWebDriver createDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass,
-                String testName, DriverLifecycle driverLifecycle) {
+        private <T> SharedWebDriver createDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass, String testName,
+                DriverLifecycle driverLifecycle) {
             WebDriver webDriver = webDriverFactory.get();
             SharedWebDriver sharedWebDriver = new SharedWebDriver(webDriver, testClass, testName, driverLifecycle);
             return sharedWebDriver;
@@ -86,8 +86,7 @@ public enum SharedWebDriverContainer {
             }
         }
 
-        public synchronized <T> SharedWebDriver getDriver(Class<T> testClass, String testName,
-                DriverLifecycle driverLifecycle) {
+        public synchronized <T> SharedWebDriver getDriver(Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
             switch (driverLifecycle) {
             case JVM:
                 return jvmDriver;

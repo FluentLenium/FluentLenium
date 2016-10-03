@@ -14,7 +14,8 @@ import java.util.List;
 /**
  * Proxy handler for {@link WebElement}.
  */
-public class ComponentHandler extends AbstractLocatorHandler<WebElement> implements InvocationHandler, LocatorHandler<WebElement> {
+public class ComponentHandler extends AbstractLocatorHandler<WebElement>
+        implements InvocationHandler, LocatorHandler<WebElement> {
     private static final Method GET_WRAPPED_ELEMENT = getMethod(WrapsElement.class, "getWrappedElement");
 
     public ComponentHandler(ElementLocator locator) {

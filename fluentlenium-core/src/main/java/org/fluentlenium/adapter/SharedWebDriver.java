@@ -17,8 +17,7 @@ public class SharedWebDriver implements WrapsDriver {
 
     private final DriverLifecycle driverLifecycle;
 
-    public SharedWebDriver(WebDriver driver, Class<?> testClass, String testName,
-                           DriverLifecycle driverLifecycle) {
+    public SharedWebDriver(WebDriver driver, Class<?> testClass, String testName, DriverLifecycle driverLifecycle) {
         this.driver = driver;
         this.testClass = testClass;
         this.testName = testName;
@@ -48,8 +47,8 @@ public class SharedWebDriver implements WrapsDriver {
 
     @Override
     public String toString() {
-        return "SharedWebDriver{" + "driver=" + driver + ", testClass=" + testClass +
-                ", testName='" + testName + '\'' + ", driverLifecycle=" + driverLifecycle + '}';
+        return "SharedWebDriver{" + "driver=" + driver + ", testClass=" + testClass + ", testName='" + testName + '\''
+                + ", driverLifecycle=" + driverLifecycle + '}';
     }
 
 }

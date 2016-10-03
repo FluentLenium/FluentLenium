@@ -1,6 +1,5 @@
 package org.fluentlenium.core.wait;
 
-
 import com.google.common.base.Function;
 import com.google.common.base.Functions;
 import com.google.common.base.Predicate;
@@ -68,10 +67,8 @@ public abstract class AbstractWaitMatcher {
      * @param conditionFunction condition fonction
      * @param <T>               type of the condition.
      */
-    protected <T extends Conditions<?>> void until(FluentWait wait,
-                                                   final T condition,
-                                                   final T messageBuilder,
-                                                   final Function<T, Boolean> conditionFunction) {
+    protected <T extends Conditions<?>> void until(FluentWait wait, final T condition, final T messageBuilder,
+            final Function<T, Boolean> conditionFunction) {
         Predicate<FluentControl> predicate = new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {

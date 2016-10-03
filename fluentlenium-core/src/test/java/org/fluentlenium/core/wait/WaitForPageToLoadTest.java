@@ -1,6 +1,5 @@
 package org.fluentlenium.core.wait;
 
-
 import com.google.common.base.Predicate;
 import org.junit.Before;
 import org.junit.Test;

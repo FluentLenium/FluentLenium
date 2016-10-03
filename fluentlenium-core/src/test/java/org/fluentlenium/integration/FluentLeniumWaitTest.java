@@ -139,8 +139,8 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test
     public void checkUseCustomMessage() {
         try {
-            await().withMessage("toto").atMost(1, NANOSECONDS).until($(".small", withText("Small 1")))
-                    .text().contains("Small 21");
+            await().withMessage("toto").atMost(1, NANOSECONDS).until($(".small", withText("Small 1"))).text()
+                    .contains("Small 21");
             fail();
         } catch (TimeoutException e) {
             assertThat(e.getMessage()).contains("toto");
@@ -170,14 +170,12 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
         await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small")).text().contains("Small 1");
     }
 
-
     @Test
     public void checkAwaitContainsTextAlternative() {
         $(".small").await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until().text().contains("Small 1");
         $(".small", withText("Small 1")).await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach().text().contains("Small 1");
         el(".small").await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until().text().contains("Small 1");
     }
-
 
     @Test
     public void checkAwaitContainsIdWithId() {
@@ -309,14 +307,14 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkWithValue() {
-        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($("input", with("value").equalTo("John"))).size(
-                JOHN_FOUR_MATCHED);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($("input", with("value").equalTo("John"))).size(JOHN_FOUR_MATCHED);
     }
 
     @Test
     public void checkMultipleFilter() {
-        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilEach($(".small", with("id").startsWith(regex("id")),
-                with("text").endsWith("2"))).size(ONLY_ONE_ENDS_WITH_TWO);
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS)
+                .untilEach($(".small", with("id").startsWith(regex("id")), with("text").endsWith("2")))
+                .size(ONLY_ONE_ENDS_WITH_TWO);
     }
 
     @Test

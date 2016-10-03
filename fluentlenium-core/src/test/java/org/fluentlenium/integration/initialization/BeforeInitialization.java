@@ -43,11 +43,9 @@ public class BeforeInitialization extends FluentTest {
         return webDriver;
     }
 
-
 }
 
 class TestPrivatePage2 extends FluentPage {
-
 
     @Override
     public String getUrl() {

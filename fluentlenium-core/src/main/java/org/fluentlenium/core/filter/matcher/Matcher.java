@@ -1,6 +1,5 @@
 package org.fluentlenium.core.filter.matcher;
 
-
 import java.util.regex.Pattern;
 
 public abstract class Matcher {
@@ -63,6 +62,5 @@ public abstract class Matcher {
      * @return boolean value for isSatisfiedBy
      */
     public abstract boolean isSatisfiedBy(String value);
-
 
 }

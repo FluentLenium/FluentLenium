@@ -18,8 +18,8 @@ public class AlertAssert extends AbstractAssert<AlertAssert, Alert> {
     public AlertAssert hasText(String textToFind) {
         try {
             if (!actual.getText().contains(textToFind)) {
-                super.failWithMessage("The alert box does not contain the text: " + textToFind
-                        + " . Actual text found : " + actual.getText());
+                super.failWithMessage(
+                        "The alert box does not contain the text: " + textToFind + " . Actual text found : " + actual.getText());
             }
         } catch (NoAlertPresentException e) {
             super.failWithMessage("There is no alert box");

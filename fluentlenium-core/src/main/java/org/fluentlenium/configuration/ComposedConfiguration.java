@@ -17,8 +17,7 @@ public class ComposedConfiguration implements Configuration {
     @Delegate
     private final ConfigurationMutator writableConfiguration;
 
-    public ComposedConfiguration(ConfigurationMutator writableConfiguration,
-            ConfigurationProperties... configurations) {
+    public ComposedConfiguration(ConfigurationMutator writableConfiguration, ConfigurationProperties... configurations) {
         this.writableConfiguration = writableConfiguration;
         this.configurations = configurations;
     }
@@ -198,6 +197,5 @@ public class ComposedConfiguration implements Configuration {
         }
         return null;
     }
-
 
 }

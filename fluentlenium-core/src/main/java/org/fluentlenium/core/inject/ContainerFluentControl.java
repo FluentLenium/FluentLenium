@@ -42,7 +42,6 @@ public class ContainerFluentControl implements FluentControl {
         return hookControl;
     }
 
-
     @Override
     public FluentList<FluentWebElement> find(String selector, Filter... filters) {
         return applyHooks(adapterControl.find(selector, filters));

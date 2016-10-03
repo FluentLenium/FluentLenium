@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-
 /**
  * Utility class for reflection.
  */
@@ -71,7 +70,6 @@ public class ReflectionUtils {
     }
 
     private static final Map<ClassAnnotationKey, List<Method>> DECLARED_METHODS_CACHE = new WeakHashMap<>();
-
 
     /**
      * Converts an array of {@code Object} into an array of {@code Class} objects.
@@ -156,7 +154,8 @@ public class ReflectionUtils {
         } catch (NoSuchMethodException e) {
             for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
                 Class<?>[] parameterTypes = constructor.getParameterTypes();
-                if (parameterTypes.length != argsTypes.length) continue;
+                if (parameterTypes.length != argsTypes.length)
+                    continue;
 
                 boolean match = true;
                 for (int i = 0; i < parameterTypes.length; i++) {
@@ -204,12 +203,14 @@ public class ReflectionUtils {
      * @return matching constructor for given optional argument values
      * @throws NoSuchMethodException if a matching method is not found.
      */
-    public static <T> Constructor<T> getConstructorOptional(int mandatoryCount, Class<T> cls, Class<?>... argsTypes) throws NoSuchMethodException {
+    public static <T> Constructor<T> getConstructorOptional(int mandatoryCount, Class<T> cls, Class<?>... argsTypes)
+            throws NoSuchMethodException {
         while (true) {
             try {
                 return getConstructor(cls, argsTypes);
             } catch (NoSuchMethodException e) {
-                if (argsTypes.length == mandatoryCount) break;
+                if (argsTypes.length == mandatoryCount)
+                    break;
                 argsTypes = Arrays.copyOf(argsTypes, argsTypes.length - 1);
             }
         }
@@ -232,7 +233,8 @@ public class ReflectionUtils {
      * @throws InvocationTargetException if the underlying constructor
      *                                   throws an exception.
      */
-    public static <T> T newInstance(Class<T> cls, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static <T> T newInstance(Class<T> cls, Object... args)
+            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Constructor<T> declaredConstructor = args.length == 0 ? getConstructor(cls) : getConstructor(cls, args);
         boolean accessible = declaredConstructor.isAccessible();
         if (accessible) {
@@ -263,7 +265,8 @@ public class ReflectionUtils {
      * @throws InvocationTargetException if the underlying constructor
      *                                   throws an exception.
      */
-    public static <T> T newInstanceOptionalArgs(Class<T> cls, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static <T> T newInstanceOptionalArgs(Class<T> cls, Object... args)
+            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         return newInstanceOptionalArgs(0, cls, args);
     }
 
@@ -284,12 +287,14 @@ public class ReflectionUtils {
      * @throws InvocationTargetException if the underlying constructor
      *                                   throws an exception.
      */
-    public static <T> T newInstanceOptionalArgs(int mandatoryCount, Class<T> cls, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static <T> T newInstanceOptionalArgs(int mandatoryCount, Class<T> cls, Object... args)
+            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         while (true) {
             try {
                 return newInstance(cls, args);
             } catch (NoSuchMethodException e) {
-                if (args.length == mandatoryCount) break;
+                if (args.length == mandatoryCount)
+                    break;
                 args = Arrays.copyOf(args, args.length - 1);
             }
         }
@@ -297,7 +302,8 @@ public class ReflectionUtils {
     }
 
     public static List<Method> getDeclaredMethodsWithAnnotation(Object object, Class<? extends Annotation> annotation) {
-        if (object == null) return getDeclaredMethodsWithAnnotation((Class<?>) null, annotation);
+        if (object == null)
+            return getDeclaredMethodsWithAnnotation((Class<?>) null, annotation);
         return getDeclaredMethodsWithAnnotation(object.getClass(), annotation);
     }
 
@@ -311,7 +317,8 @@ public class ReflectionUtils {
     public static List<Method> getDeclaredMethodsWithAnnotation(Class<?> objectClass, Class<? extends Annotation> annotation) {
         List<Method> methods = new ArrayList<>();
 
-        if (objectClass == null) return methods;
+        if (objectClass == null)
+            return methods;
 
         ClassAnnotationKey cacheKey = new ClassAnnotationKey(objectClass, annotation);
         if (DECLARED_METHODS_CACHE.containsKey(cacheKey)) {
@@ -343,9 +350,11 @@ public class ReflectionUtils {
      *                                   throws an exception.
      * @see Method#invoke(Object, Object...)
      */
-    public static Object invoke(Method method, Object obj, Object... args) throws InvocationTargetException, IllegalAccessException {
+    public static Object invoke(Method method, Object obj, Object... args)
+            throws InvocationTargetException, IllegalAccessException {
         boolean accessible = method.isAccessible();
-        if (accessible) return method.invoke(obj, args);
+        if (accessible)
+            return method.invoke(obj, args);
         method.setAccessible(true);
         try {
             return method.invoke(obj, args);
@@ -367,7 +376,8 @@ public class ReflectionUtils {
      */
     public static Object get(Field field, Object obj) throws IllegalAccessException {
         boolean accessible = field.isAccessible();
-        if (accessible) return field.get(obj);
+        if (accessible)
+            return field.get(obj);
         field.setAccessible(true);
         try {
             return field.get(obj);
@@ -389,7 +399,8 @@ public class ReflectionUtils {
      */
     public static void set(Field field, Object obj, Object value) throws IllegalAccessException {
         boolean accessible = field.isAccessible();
-        if (accessible) field.set(obj, value);
+        if (accessible)
+            field.set(obj, value);
         field.setAccessible(true);
         try {
             field.set(obj, value);
@@ -405,8 +416,7 @@ public class ReflectionUtils {
      * @return first generic type, or null if no generic type is found
      */
     public static Class<?> getFirstGenericType(Field field) {
-        Type[] actualTypeArguments = ((ParameterizedType) field.getGenericType())
-                .getActualTypeArguments();
+        Type[] actualTypeArguments = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
 
         if (actualTypeArguments.length > 0) {
             return (Class<?>) actualTypeArguments[0];

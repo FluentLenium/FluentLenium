@@ -90,19 +90,22 @@ public class FluentDriver implements FluentControl {
                 if (this.configuration.getPageLoadTimeout() == null) {
                     this.getDriver().manage().timeouts().pageLoadTimeout(-1, TimeUnit.MILLISECONDS);
                 } else {
-                    this.getDriver().manage().timeouts().pageLoadTimeout(this.configuration.getPageLoadTimeout(), TimeUnit.MILLISECONDS);
+                    this.getDriver().manage().timeouts()
+                            .pageLoadTimeout(this.configuration.getPageLoadTimeout(), TimeUnit.MILLISECONDS);
                 }
 
                 if (this.configuration.getImplicitlyWait() == null) {
                     this.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
                 } else {
-                    this.getDriver().manage().timeouts().implicitlyWait(this.configuration.getImplicitlyWait(), TimeUnit.MILLISECONDS);
+                    this.getDriver().manage().timeouts()
+                            .implicitlyWait(this.configuration.getImplicitlyWait(), TimeUnit.MILLISECONDS);
                 }
 
                 if (this.configuration.getScriptTimeout() == null) {
                     this.getDriver().manage().timeouts().setScriptTimeout(-1, TimeUnit.MILLISECONDS);
                 } else {
-                    this.getDriver().manage().timeouts().setScriptTimeout(this.configuration.getScriptTimeout(), TimeUnit.MILLISECONDS);
+                    this.getDriver().manage().timeouts()
+                            .setScriptTimeout(this.configuration.getScriptTimeout(), TimeUnit.MILLISECONDS);
                 }
             }
 
@@ -215,10 +218,9 @@ public class FluentDriver implements FluentControl {
     @Override
     public EventsRegistry events() {
         if (events == null) {
-            throw new IllegalStateException(
-                    "An EventFiringWebDriver instance is required to use events. "
-                            + "You should set 'eventsEnabled' configuration property to 'true' "
-                            + "or override newWebDriver() to build an EventFiringWebDriver.");
+            throw new IllegalStateException("An EventFiringWebDriver instance is required to use events. "
+                    + "You should set 'eventsEnabled' configuration property to 'true' "
+                    + "or override newWebDriver() to build an EventFiringWebDriver.");
         }
         return events;
     }

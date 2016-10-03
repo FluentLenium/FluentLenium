@@ -10,7 +10,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Inherited
-@Target({ElementType.FIELD, ElementType.TYPE})
+@Target({ ElementType.FIELD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Hook(ExampleHook.class)
 @HookOptions(ExampleHookOptions.class)

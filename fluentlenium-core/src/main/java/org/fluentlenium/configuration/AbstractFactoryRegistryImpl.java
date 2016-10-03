@@ -136,15 +136,15 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
         boolean registered = false;
 
         if (names.size() == 0) {
-            throw new ConfigurationException("Factory " + factory.getClass().getName() +
-                    " has no name defined. Use @FactoryName annotation or implement FactoryNames.");
+            throw new ConfigurationException("Factory " + factory.getClass().getName()
+                    + " has no name defined. Use @FactoryName annotation or implement FactoryNames.");
         }
 
         for (String name : names) {
             if (!registered) {
                 if (factories.containsKey(name)) {
-                    throw new ConfigurationException("A factory is already registered with this name: " +
-                            name + " (" + factories.get(name) + ")");
+                    throw new ConfigurationException(
+                            "A factory is already registered with this name: " + name + " (" + factories.get(name) + ")");
                 }
                 factories.put(name, factory);
                 registered = true;

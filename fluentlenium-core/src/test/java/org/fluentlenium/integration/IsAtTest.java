@@ -51,5 +51,4 @@ public class IsAtTest extends IntegrationFluentTest {
         pageOk.isAt();
     }
 
-
 }

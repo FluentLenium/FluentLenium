@@ -16,5 +16,4 @@ public class FluentWebElementInTest extends IntegrationFluentTest {
         assertThat(url()).isEqualTo(IntegrationFluentTest.PAGE_2_URL);
     }
 
-
 }

@@ -5,7 +5,6 @@ import org.fluentlenium.core.FluentPage;
 
 public class PageAssert extends AbstractAssert<PageAssert, FluentPage> {
 
-
     public PageAssert(FluentPage actual) {
         super(actual, PageAssert.class);
     }

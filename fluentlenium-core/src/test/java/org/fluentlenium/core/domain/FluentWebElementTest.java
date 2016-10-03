@@ -136,7 +136,6 @@ public class FluentWebElementTest {
         assertThat(fluentElement.name()).isEqualTo("test");
     }
 
-
     @Test
     public void testGetAttribute() {
         when(element.getAttribute("attr")).thenReturn("test");
@@ -222,7 +221,8 @@ public class FluentWebElementTest {
 
     @Test
     public void testFind() {
-        when(element.findElements(By.cssSelector(".test"))).thenReturn(Arrays.asList(mock(WebElement.class), mock(WebElement.class)));
+        when(element.findElements(By.cssSelector(".test")))
+                .thenReturn(Arrays.asList(mock(WebElement.class), mock(WebElement.class)));
 
         fluentElement.$(".test");
         fluentElement.$(By.cssSelector(".test"));
@@ -353,7 +353,6 @@ public class FluentWebElementTest {
             return "Component";
         }
     }
-
 
     private static class InvalidComponent {
     }

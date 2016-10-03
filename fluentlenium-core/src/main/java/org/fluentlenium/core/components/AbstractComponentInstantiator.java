@@ -117,7 +117,6 @@ public abstract class AbstractComponentInstantiator implements ComponentInstanti
         return newComponentList(listClass, componentClass, new ArrayList<>(Arrays.asList(componentsList)));
     }
 
-
     @Override
     public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, WebElement... elements) {
         return asComponentList(listClass, componentClass, Arrays.asList(elements));

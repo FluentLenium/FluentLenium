@@ -14,7 +14,6 @@ import static org.mockito.Mockito.RETURNS_DEFAULTS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-
 public class ComposedConfigurationTest {
     private ProgrammaticConfiguration configuration;
 
@@ -42,7 +41,8 @@ public class ComposedConfigurationTest {
         configurationProperties2 = mock(ConfigurationProperties.class, configurationReadAnswer);
         configurationProperties3 = mock(ConfigurationProperties.class, configurationReadAnswer);
         configuration = new ProgrammaticConfiguration();
-        composed = new ComposedConfiguration(configuration, configuration, configurationProperties1, configurationProperties2, configurationProperties3);
+        composed = new ComposedConfiguration(configuration, configuration, configurationProperties1, configurationProperties2,
+                configurationProperties3);
     }
 
     @Test
@@ -76,9 +76,8 @@ public class ComposedConfigurationTest {
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DummyConfigurationFactory.class);
     }
 
-
-    private <T> void testImpl(Function<ConfigurationProperties, T> getter,
-                              Function<T, Void> setter, T defaultValue, T value1, T value2) {
+    private <T> void testImpl(Function<ConfigurationProperties, T> getter, Function<T, Void> setter, T defaultValue, T value1,
+            T value2) {
         if (defaultValue == null) {
             Assertions.assertThat(getter.apply(composed)).isNull();
         } else {
@@ -145,7 +144,6 @@ public class ComposedConfigurationTest {
             }
         }, null, 1000L, 2000L);
     }
-
 
     @Test
     public void implicitlyWait() {

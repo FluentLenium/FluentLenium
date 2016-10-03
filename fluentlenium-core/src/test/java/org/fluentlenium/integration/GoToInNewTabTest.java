@@ -24,8 +24,7 @@ public class GoToInNewTabTest extends IntegrationFluentTest {
 
     @Test
     public void checkGoToInNewTab() {
-        when(webDriver.getWindowHandles()).thenReturn(new HashSet<>(Arrays.asList("a")),
-                new HashSet<>(Arrays.asList("a", "b")));
+        when(webDriver.getWindowHandles()).thenReturn(new HashSet<>(Arrays.asList("a")), new HashSet<>(Arrays.asList("a", "b")));
         when(webDriver.switchTo()).thenReturn(locator);
         goToInNewTab(DEFAULT_URL);
         verify(locator).window("b");

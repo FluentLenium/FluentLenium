@@ -34,7 +34,8 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
         return locatorSupplier.get();
     }
 
-    public BaseHook(FluentControl control, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, T options) {
+    public BaseHook(FluentControl control, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
+            Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, T options) {
         super(control);
         this.instantiator = instantiator;
         this.elementSupplier = elementSupplier;

@@ -25,7 +25,6 @@ public class HtmlDumpTest extends IntegrationFluentTest {
     public void checkHtmlIsDumped() throws IOException {
         goTo(DEFAULT_URL);
 
-
         File file = new File(tempDir.toFile(), "test.html");
         try {
             takeHtmlDump(file.getAbsolutePath());

@@ -41,8 +41,9 @@ import java.util.List;
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
-public class FluentWebElement extends Component implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>,
-        FluentProxyState<FluentWebElement>, SearchControl<FluentWebElement>, HookControl<FluentWebElement>, FluentLabel<FluentWebElement> {
+public class FluentWebElement extends Component
+        implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>, FluentProxyState<FluentWebElement>,
+        SearchControl<FluentWebElement>, HookControl<FluentWebElement>, FluentLabel<FluentWebElement> {
     private final Search search;
     private final Axes axes;
     private final MouseElementActions mouseActions;
@@ -73,7 +74,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
         });
     }
 
-    @Delegate(excludes = {InputControl.class, AwaitControl.class, SearchControl.class})
+    @Delegate(excludes = { InputControl.class, AwaitControl.class, SearchControl.class })
     private FluentControl getFluentControl() {
         return control;
     }

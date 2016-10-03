@@ -45,7 +45,6 @@ public class EachElementConditionsTest extends AbstractFluentListConditionsTest 
         assertThat(conditions.present()).isTrue();
         assertThat(conditions.not().present()).isFalse();
 
-
         EachElementConditions emptyConditions = new EachElementConditions(Collections.<FluentWebElement>emptyList());
 
         assertThat(emptyConditions.present()).isFalse();

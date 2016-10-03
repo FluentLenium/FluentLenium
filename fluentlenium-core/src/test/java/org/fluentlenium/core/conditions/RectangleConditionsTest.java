@@ -166,9 +166,12 @@ public class RectangleConditionsTest {
         when(rectangle.getHeight()).thenReturn(RECTANGLE_DIMENSION_HEIGHT1);
         when(rectangle.getDimension()).thenReturn(new Dimension(RECTANGLE_DIMENSION_WIDTH1, RECTANGLE_DIMENSION_HEIGHT1));
 
-        assertThat(conditions.rectangle().positionAndDimension(RECTANGLE_POSITION_X, RECTANGLE_POSITION_Y, RECTANGLE_DIMENSION_WIDTH1, RECTANGLE_DIMENSION_HEIGHT1)).isTrue();
-        assertThat(conditions.rectangle().positionAndDimension(RECTANGLE_POSITION_X, RECTANGLE_POSITION_Y, RECTANGLE_DIMENSION_HEIGHT1,
-                RECTANGLE_DIMENSION_INVALID_HEIGHT1)).isFalse();
+        assertThat(conditions.rectangle()
+                .positionAndDimension(RECTANGLE_POSITION_X, RECTANGLE_POSITION_Y, RECTANGLE_DIMENSION_WIDTH1,
+                        RECTANGLE_DIMENSION_HEIGHT1)).isTrue();
+        assertThat(conditions.rectangle()
+                .positionAndDimension(RECTANGLE_POSITION_X, RECTANGLE_POSITION_Y, RECTANGLE_DIMENSION_HEIGHT1,
+                        RECTANGLE_DIMENSION_INVALID_HEIGHT1)).isFalse();
     }
 
 }

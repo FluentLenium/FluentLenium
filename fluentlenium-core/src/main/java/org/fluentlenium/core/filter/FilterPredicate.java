@@ -23,7 +23,9 @@ public class FilterPredicate implements Predicate<FluentWebElement> {
     }
 
     private String returnTextIfTextAttributeElseAttributeValue(FluentWebElement webElementCustom) {
-        return ("text".equalsIgnoreCase(filter.getAttribut())) ? webElementCustom.text() : webElementCustom.attribute(filter.getAttribut());
+        return ("text".equalsIgnoreCase(filter.getAttribut())) ?
+                webElementCustom.text() :
+                webElementCustom.attribute(filter.getAttribut());
     }
 
 }

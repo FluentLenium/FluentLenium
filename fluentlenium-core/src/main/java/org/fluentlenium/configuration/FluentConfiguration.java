@@ -16,9 +16,7 @@ import java.lang.annotation.Target;
 @Inherited
 public @interface FluentConfiguration {
     enum BooleanValue {
-        TRUE(true),
-        FALSE(false),
-        DEFAULT(null);
+        TRUE(true), FALSE(false), DEFAULT(null);
 
         private final Boolean value;
 
@@ -39,7 +37,6 @@ public @interface FluentConfiguration {
      * @see ConfigurationProperties#getConfigurationFactory()
      */
     Class<? extends ConfigurationFactory> configurationFactory() default DefaultConfigurationFactory.class;
-
 
     /**
      * <i>configurationDefaults</i> property.
@@ -72,7 +69,6 @@ public @interface FluentConfiguration {
      * @see ConfigurationProperties#getCapabilities()
      */
     String capabilities() default "";
-
 
     /**
      * <i>driverLifecycle</i> property.

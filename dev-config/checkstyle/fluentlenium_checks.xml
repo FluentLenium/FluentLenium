@@ -192,8 +192,10 @@
         <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType"/>
         <module name="VisibilityModifier">
-            <property name="ignoreAnnotationCanonicalNames" value="org.jboss.arquillian.test.api.ArquillianResource,org.junit.Rule"/>
-            <property name="immutableClassCanonicalNames" value="org.joda.time.DateTime,java.lang.Boolean,java.lang.Long,java.lang.String,java.util.UUID"/>
+            <property name="ignoreAnnotationCanonicalNames"
+                      value="org.jboss.arquillian.test.api.ArquillianResource,org.junit.Rule"/>
+            <property name="immutableClassCanonicalNames"
+                      value="org.joda.time.DateTime,java.lang.Boolean,java.lang.Long,java.lang.String,java.util.UUID"/>
         </module>
 
 

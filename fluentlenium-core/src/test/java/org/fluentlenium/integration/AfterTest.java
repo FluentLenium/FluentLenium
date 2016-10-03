@@ -4,7 +4,6 @@ import org.fluentlenium.integration.util.adapter.FluentTest;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-
 public class AfterTest extends FluentTest {
 
     @Override

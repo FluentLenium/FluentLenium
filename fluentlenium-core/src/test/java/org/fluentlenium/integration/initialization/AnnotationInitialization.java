@@ -16,7 +16,6 @@ public class AnnotationInitialization extends FluentTest {
     @Page
     public TestPrivatePage page;
 
-
     @Test
     public void test_no_exception() {
         page2.go();
@@ -34,9 +33,7 @@ public class AnnotationInitialization extends FluentTest {
 
 }
 
-
 class TestPrivatePage extends FluentPage {
-
 
     @Override
     public String getUrl() {

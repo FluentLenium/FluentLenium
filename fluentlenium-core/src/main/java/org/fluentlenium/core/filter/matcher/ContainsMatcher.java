@@ -1,6 +1,5 @@
 package org.fluentlenium.core.filter.matcher;
 
-
 import java.util.regex.Pattern;
 
 public class ContainsMatcher extends Matcher {
@@ -22,6 +21,5 @@ public class ContainsMatcher extends Matcher {
     public boolean isSatisfiedBy(String o) {
         return CalculateService.contains(getPattern(), getValue(), o);
     }
-
 
 }

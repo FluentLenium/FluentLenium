@@ -10,7 +10,6 @@ public class FirstElementLocator extends AtIndexElementLocator {
         super(listLocator, 0);
     }
 
-
     @Override
     public String toString() {
         return listLocator.toString() + " (first)";

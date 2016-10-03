@@ -18,7 +18,6 @@ public class PageTest extends IntegrationFluentTestNg {
     @Page
     Page2 page2;
 
-
     @BeforeMethod
     public void beforeTest() {
         goTo(page);

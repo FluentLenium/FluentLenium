@@ -14,7 +14,6 @@ public class PageInPageWithAnnotationPageTest extends IntegrationFluentTest {
     @Page
     private SubSubTestPage subTestPage;
 
-
     @Test
     public void pages_should_be_injected() {
         TestPage testPage = newInstance(SubSubTestPage.class);

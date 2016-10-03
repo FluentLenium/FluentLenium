@@ -5,7 +5,6 @@ import org.fluentlenium.core.conditions.message.MessageContext;
 import org.fluentlenium.core.conditions.message.NotMessage;
 import org.openqa.selenium.Rectangle;
 
-
 /**
  * Conditions API for Rectangle
  */

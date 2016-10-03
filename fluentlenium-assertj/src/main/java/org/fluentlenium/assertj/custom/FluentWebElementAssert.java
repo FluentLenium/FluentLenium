@@ -8,11 +8,9 @@ import java.util.List;
 
 public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAssert, FluentWebElement> {
 
-
     public FluentWebElementAssert(FluentWebElement actual) {
         super(actual, FluentWebElementAssert.class);
     }
-
 
     private void failIsEnabled() {
         failWithMessage("Object not enabled");
@@ -132,7 +130,8 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      */
     public FluentWebElementAssert hasTextMatching(String regexToBeMatched) {
         if (!actual.text().matches(regexToBeMatched)) {
-            failWithMessage("The element does not match the regex: " + regexToBeMatched + " . Actual text found : " + actual.text());
+            failWithMessage(
+                    "The element does not match the regex: " + regexToBeMatched + " . Actual text found : " + actual.text());
 
         }
 
@@ -181,7 +180,8 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      */
     public FluentWebElementAssert hasClass(String classToFind) {
         if (!getClasses().contains(classToFind)) {
-            failWithMessage("The element does not have the class: " + classToFind + " . Actual class found : " + actual.attribute("class"));
+            failWithMessage("The element does not have the class: " + classToFind + " . Actual class found : " + actual
+                    .attribute("class"));
         }
         return this;
     }

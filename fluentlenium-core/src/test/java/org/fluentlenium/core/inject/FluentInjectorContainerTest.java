@@ -28,7 +28,8 @@ public class FluentInjectorContainerTest {
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
 
-        injector = new FluentInjector(fluentAdapter, null, new ComponentsManager(fluentAdapter), new DefaultContainerInstanciator(fluentAdapter));
+        injector = new FluentInjector(fluentAdapter, null, new ComponentsManager(fluentAdapter),
+                new DefaultContainerInstanciator(fluentAdapter));
     }
 
     public static class ChildContainer {
@@ -73,13 +74,11 @@ public class FluentInjectorContainerTest {
         Assertions.assertThat(parentContainer.childContainer.parentContainer).isExactlyInstanceOf(ParentContainerRecurse.class);
     }
 
-
     public static class ChildContainerInit implements FluentContainer {
         @Page
         private ParentContainerRecurse parentContainer;
 
         private FluentControl control;
-
 
         @Override
         public void initFluent(FluentControl control) {
@@ -92,7 +91,6 @@ public class FluentInjectorContainerTest {
 
         @Page
         private ChildContainerInit childContainer;
-
 
         @Override
         public void initFluent(FluentControl control) {
@@ -113,7 +111,8 @@ public class FluentInjectorContainerTest {
         Assertions.assertThat(((ContainerFluentControl) parentContainer.control).getAdapterControl()).isSameAs(fluentAdapter);
         Assertions.assertThat(parentContainer.childContainer.control).isInstanceOf(ContainerFluentControl.class);
 
-        Assertions.assertThat(((ContainerFluentControl) parentContainer.childContainer.control).getAdapterControl()).isSameAs(fluentAdapter);
+        Assertions.assertThat(((ContainerFluentControl) parentContainer.childContainer.control).getAdapterControl())
+                .isSameAs(fluentAdapter);
     }
 
     public static class ChildContainerConstructorInit {
@@ -149,9 +148,9 @@ public class FluentInjectorContainerTest {
         Assertions.assertThat(parentContainer.control).isSameAs(fluentAdapter);
         Assertions.assertThat(parentContainer.childContainer.control).isInstanceOf(ContainerFluentControl.class);
 
-        Assertions.assertThat(((ContainerFluentControl) parentContainer.childContainer.control).getAdapterControl()).isSameAs(fluentAdapter);
+        Assertions.assertThat(((ContainerFluentControl) parentContainer.childContainer.control).getAdapterControl())
+                .isSameAs(fluentAdapter);
 
     }
-
 
 }

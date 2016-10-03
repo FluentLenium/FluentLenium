@@ -60,7 +60,8 @@ public class RectangleListConditionsTest {
 
     @Test
     public void fromEachElementConditions() {
-        EachElementConditions conditions = new EachElementConditions(Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
+        EachElementConditions conditions = new EachElementConditions(
+                Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
         final RectangleConditions rectConditions = conditions.rectangle();
 
@@ -164,7 +165,8 @@ public class RectangleListConditionsTest {
 
     @Test
     public void fromAtLeastOneElementConditions() {
-        AtLeastOneElementConditions conditions = new AtLeastOneElementConditions(Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
+        AtLeastOneElementConditions conditions = new AtLeastOneElementConditions(
+                Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
         RectangleConditions rectConditions = conditions.rectangle();
 

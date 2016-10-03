@@ -44,5 +44,4 @@ public class CapabilitiesTest {
         assertThat(CapabilitiesRegistry.INSTANCE.get("DesiredCapabilities.firefox")).isNotNull();
     }
 
-
 }

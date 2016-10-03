@@ -22,7 +22,8 @@ public class InjectionAnnotations extends AbstractAnnotations {
     private static Class<?> getEffectiveClass(Field field) {
         if (isList(field)) {
             Class<?> effectiveClass = ReflectionUtils.getFirstGenericType(field);
-            if (effectiveClass != null) return effectiveClass;
+            if (effectiveClass != null)
+                return effectiveClass;
         }
         return field.getType();
     }
@@ -37,7 +38,8 @@ public class InjectionAnnotations extends AbstractAnnotations {
     public By buildBy() {
         By fieldBy = fieldAnnotations.buildBy();
         By classBy = classAnnotations.buildBy();
-        if (classBy != null && fieldBy instanceof ByIdOrName) return classBy;
+        if (classBy != null && fieldBy instanceof ByIdOrName)
+            return classBy;
         return fieldBy;
     }
 

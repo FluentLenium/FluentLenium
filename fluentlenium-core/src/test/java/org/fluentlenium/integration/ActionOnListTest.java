@@ -31,7 +31,6 @@ public class ActionOnListTest extends IntegrationFluentTest {
         assertThat(window().title()).isEqualTo("Page 2");
     }
 
-
     @Test
     public void checkTextAction() {
         goTo(DEFAULT_URL);

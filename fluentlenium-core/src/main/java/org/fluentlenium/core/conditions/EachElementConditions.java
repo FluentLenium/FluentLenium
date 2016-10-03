@@ -1,6 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import org.fluentlenium.core.FluentDriver;
@@ -31,7 +30,8 @@ public class EachElementConditions extends AbstractFluentListConditions {
         return buildEachElementPredicate(predicate, defaultValue).apply(null);
     }
 
-    protected Predicate<FluentDriver> buildEachElementPredicate(final Predicate<FluentWebElement> predicate, final boolean defaultValue) {
+    protected Predicate<FluentDriver> buildEachElementPredicate(final Predicate<FluentWebElement> predicate,
+            final boolean defaultValue) {
         Predicate<FluentDriver> untilPredicate = new com.google.common.base.Predicate<FluentDriver>() {
             public boolean apply(FluentDriver fluent) {
                 if (elements.size() > 0) {

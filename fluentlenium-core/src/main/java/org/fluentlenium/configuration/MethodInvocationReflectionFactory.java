@@ -30,10 +30,7 @@ public class MethodInvocationReflectionFactory implements CapabilitiesFactory, F
 
     @Override
     public String[] getNames() {
-        return new String[]{
-                this.method.getDeclaringClass().getName() + "." + this.method.getName(),
-                this.method.getDeclaringClass().getSimpleName() + "." + this.method.getName(),
-                this.method.getName()
-        };
+        return new String[] { this.method.getDeclaringClass().getName() + "." + this.method.getName(),
+                this.method.getDeclaringClass().getSimpleName() + "." + this.method.getName(), this.method.getName() };
     }
 }

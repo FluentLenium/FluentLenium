@@ -1,6 +1,5 @@
 package org.fluentlenium.configuration;
 
-
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +15,7 @@ import java.io.InputStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({SystemPropertiesConfiguration.class, EnvironmentVariablesConfiguration.class})
+@PrepareForTest({ SystemPropertiesConfiguration.class, EnvironmentVariablesConfiguration.class })
 public class ConfigurationDefaultsFactoryTest {
 
     @FluentConfiguration(pageLoadTimeout = 2000L)

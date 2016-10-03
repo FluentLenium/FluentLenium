@@ -13,6 +13,8 @@ import org.fluentlenium.core.search.SearchControl;
 import org.fluentlenium.core.snapshot.SnapshotControl;
 import org.fluentlenium.core.wait.AwaitControl;
 
-public interface FluentControl extends SearchControl<FluentWebElement>, AwaitControl, InputControl, JavascriptControl, AlertControl, SnapshotControl, EventsControl, NavigationControl, SeleniumDriverControl, CssControl, FluentInjectControl, ComponentInstantiator {
+public interface FluentControl
+        extends SearchControl<FluentWebElement>, AwaitControl, InputControl, JavascriptControl, AlertControl, SnapshotControl,
+        EventsControl, NavigationControl, SeleniumDriverControl, CssControl, FluentInjectControl, ComponentInstantiator {
 
 }

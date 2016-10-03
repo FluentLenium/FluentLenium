@@ -94,10 +94,10 @@ public class FindByOfComponentTest extends IntegrationFluentTest {
         @FindBy(className = "small")
         SomeWebElementWrapper wrapper;
 
-        @FindAll({@FindBy(id = "location"), @FindBy(className = "small")})
+        @FindAll({ @FindBy(id = "location"), @FindBy(className = "small") })
         List<SomeFluentWebElement> elementList;
 
-        @FindAll({@FindBy(id = "location"), @FindBy(className = "small")})
+        @FindAll({ @FindBy(id = "location"), @FindBy(className = "small") })
         List<SomeWebElementWrapper> wrapperList;
 
         @Override

@@ -1,6 +1,5 @@
 package org.fluentlenium.assertj.custom;
 
-
 import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Before;
@@ -34,14 +33,12 @@ public class FluentWebElementTest {
         fluentWebElementAssert.isEnabled();
     }
 
-
     @Test
     public void testIsNotEnabledOk() throws Exception {
         when(fluentWebElement.enabled()).thenReturn(false);
         fluentWebElementAssert.isNotEnabled();
         assertTrue(true);
     }
-
 
     @Test(expected = AssertionError.class)
     public void testIsNotEnabledKo() throws Exception {

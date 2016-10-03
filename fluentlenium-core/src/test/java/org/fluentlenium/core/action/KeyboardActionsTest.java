@@ -51,7 +51,6 @@ public class KeyboardActionsTest {
         verify(keyboard).pressKey(Keys.SHIFT);
     }
 
-
     @Test
     public void testKeyDownKeyboardMouse() {
         KeyboardActions actions = new KeyboardActions(keyboard, mouse);

@@ -143,7 +143,8 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     @Override
     public WebElement getHookElement() {
-        if (getElement() == null) return null;
+        if (getElement() == null)
+            return null;
         if (hooks != null && hooks.size() > 0) {
             return hooks.get(hooks.size() - 1);
         }
@@ -234,11 +235,12 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         return returnValue;
     }
 
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         AbstractLocatorHandler that = (AbstractLocatorHandler) o;
 

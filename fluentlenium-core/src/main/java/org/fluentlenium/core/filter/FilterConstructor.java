@@ -2,7 +2,6 @@ package org.fluentlenium.core.filter;
 
 import org.fluentlenium.core.filter.matcher.ContainsWordMatcher;
 
-
 public final class FilterConstructor {
 
     private FilterConstructor() {

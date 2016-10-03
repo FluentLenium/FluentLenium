@@ -13,6 +13,7 @@ public class InjectionElementLocatorFactory implements ElementLocatorFactory {
     }
 
     public InjectionElementLocator createLocator(final Field field) {
-        return new InjectionElementLocator(searchContext, new InjectionAnnotations(field), !Iterable.class.isAssignableFrom(field.getType()));
+        return new InjectionElementLocator(searchContext, new InjectionAnnotations(field),
+                !Iterable.class.isAssignableFrom(field.getType()));
     }
 }

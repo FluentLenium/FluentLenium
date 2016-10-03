@@ -1,6 +1,5 @@
 package org.fluentlenium.core;
 
-
 import org.fluentlenium.adapter.FluentAdapter;
 import org.junit.After;
 import org.junit.Rule;
@@ -96,7 +95,6 @@ class CustomWebDriverNoScreenshot implements WebDriver {
         return null;
     }
 }
-
 
 class CustomWebDriverScreenshot implements WebDriver, TakesScreenshot {
 

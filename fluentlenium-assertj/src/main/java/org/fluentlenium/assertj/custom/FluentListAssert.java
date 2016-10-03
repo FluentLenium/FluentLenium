@@ -36,7 +36,8 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         List<String> actualTexts = actual.texts();
         for (String text : actualTexts) {
             if (text.contains(textToFind)) {
-                super.failWithMessage("At least one selected elements contains text: " + textToFind + " . Actual texts found : " + actualTexts);
+                super.failWithMessage(
+                        "At least one selected elements contains text: " + textToFind + " . Actual texts found : " + actualTexts);
             }
         }
         return this;
@@ -77,7 +78,8 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
 
         for (String classesStr : classesFromElements) {
             List<String> classesLst = Arrays.asList(classesStr.split(" "));
-            if (classesLst.contains(classToFind)) return this;
+            if (classesLst.contains(classToFind))
+                return this;
         }
 
         StringBuilder sb = new StringBuilder();

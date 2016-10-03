@@ -59,14 +59,14 @@ class EventAdapter implements WebDriverEventListener {
 
     @Override
     public void beforeFindBy(final By by, final WebElement element, final WebDriver driver) {
-        this.listener.beforeFindBy(by, element == null ? null : instantiator.newComponent(FluentWebElement.class, element),
-                driver);
+        this.listener
+                .beforeFindBy(by, element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
     }
 
     @Override
     public void afterFindBy(final By by, final WebElement element, final WebDriver driver) {
-        this.listener.afterFindBy(by, element == null ? null : instantiator.newComponent(FluentWebElement.class, element),
-                driver);
+        this.listener
+                .afterFindBy(by, element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
     }
 
     @Override
@@ -81,14 +81,14 @@ class EventAdapter implements WebDriverEventListener {
 
     @Override
     public void beforeChangeValueOf(final WebElement element, final WebDriver driver) {
-        this.listener.beforeChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element),
-                driver);
+        this.listener
+                .beforeChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
     }
 
     @Override
     public void afterChangeValueOf(final WebElement element, final WebDriver driver) {
-        this.listener.afterChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element),
-                driver);
+        this.listener
+                .afterChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
     }
 
     @Override
@@ -117,8 +117,7 @@ class EventAdapter implements WebDriverEventListener {
 
         EventAdapter that = (EventAdapter) o;
 
-        return !(this.listener != null ? !this.listener.equals(that.listener)
-                : that.listener != null);
+        return !(this.listener != null ? !this.listener.equals(that.listener) : that.listener != null);
 
     }
 

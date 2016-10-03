@@ -53,7 +53,6 @@ public class CssSupportImpl implements CssSupport {
         this.inject(cssText);
     }
 
-
     private void executeScriptRetry(final String script) {
         int retries = 0;
         while (true) {

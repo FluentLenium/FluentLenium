@@ -11,7 +11,6 @@ import org.fluentlenium.core.filter.matcher.StartsWithMatcher;
 
 import java.util.regex.Pattern;
 
-
 public class FilterBuilder {
 
     private final String attribute;
@@ -80,6 +79,5 @@ public class FilterBuilder {
     public Filter notEndsWith(final Pattern equal) {
         return new Filter(attribute, new NotEndsWithMatcher(equal));
     }
-
 
 }

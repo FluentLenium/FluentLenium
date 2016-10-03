@@ -26,7 +26,6 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
         this.instance = instance;
     }
 
-
     public MessageBuilderInvocationHandler(List<MessageBuilderCall> calls) {
         this.calls = calls;
     }
@@ -103,7 +102,6 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
         }
 
         throw new IllegalStateException("No @Message/@NotMessage annotation found in the calls.");
-
 
     }
 }

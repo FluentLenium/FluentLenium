@@ -85,8 +85,7 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
                 return;
             }
             if (getFluentControl().getDriver() != null) {
-                throw new IllegalStateException(
-                        "Trying to init a WebDriver, but another one is still running");
+                throw new IllegalStateException("Trying to init a WebDriver, but another one is still running");
             }
         }
 

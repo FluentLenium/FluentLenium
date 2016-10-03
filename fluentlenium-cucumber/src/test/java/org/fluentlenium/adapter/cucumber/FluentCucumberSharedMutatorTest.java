@@ -22,7 +22,8 @@ public class FluentCucumberSharedMutatorTest {
         final String testName = "test";
         DriverLifecycle driverLifecycle = DriverLifecycle.JVM;
 
-        SharedMutator.EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle);
+        SharedMutator.EffectiveParameters<?> parameters = sharedMutator
+                .getEffectiveParameters(testClass, testName, driverLifecycle);
 
         Assertions.assertThat(parameters.getTestClass()).isNull();
         Assertions.assertThat(parameters.getTestName()).isEqualTo(testName);

@@ -172,7 +172,6 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
         return getBooleanProperty("deleteCookies");
     }
 
-
     @Override
     public String getBaseUrl() {
         return getStringProperty("baseUrl");

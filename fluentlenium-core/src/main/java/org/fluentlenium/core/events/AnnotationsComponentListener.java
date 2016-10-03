@@ -27,9 +27,11 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
     }
 
     protected void findByHandler(Class<? extends Annotation> annotation, final By by, WebElement element, WebDriver driver) {
-        if (element == null) return;
+        if (element == null)
+            return;
         Set<Object> components = this.componentsAccessor.getComponents(element);
-        if (components == null) return;
+        if (components == null)
+            return;
         for (Object component : components) {
             for (Method method : ReflectionUtils.getDeclaredMethodsWithAnnotation(component, annotation)) {
                 Class<?>[] parameterTypes = method.getParameterTypes();
@@ -60,7 +62,6 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
         }
     }
 
-
     @Override
     public void beforeFindBy(By by, WebElement element, WebDriver driver) {
         findByHandler(BeforeFindBy.class, by, element, driver);
@@ -72,9 +73,11 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
     }
 
     protected void defaultHandler(Class<? extends Annotation> annotation, WebElement element, WebDriver driver) {
-        if (element == null) return;
+        if (element == null)
+            return;
         Set<Object> components = this.componentsAccessor.getComponents(element);
-        if (components == null) return;
+        if (components == null)
+            return;
         for (Object component : components) {
             for (Method method : ReflectionUtils.getDeclaredMethodsWithAnnotation(component, annotation)) {
                 Class<?>[] parameterTypes = method.getParameterTypes();
@@ -89,14 +92,16 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
                 try {
                     ReflectionUtils.invoke(method, component, args);
                 } catch (IllegalAccessException e) {
-                    throw new EventAnnotationsException("An error has occured in @" + annotation.getSimpleName() + " " + method, e);
+                    throw new EventAnnotationsException("An error has occured in @" + annotation.getSimpleName() + " " + method,
+                            e);
                 } catch (InvocationTargetException e) {
                     if (e.getTargetException() instanceof RuntimeException) {
                         throw (RuntimeException) e.getTargetException();
                     } else if (e.getTargetException() instanceof Error) {
                         throw (Error) e.getTargetException();
                     }
-                    throw new EventAnnotationsException("An error has occured in @" + annotation.getSimpleName() + " " + method, e);
+                    throw new EventAnnotationsException("An error has occured in @" + annotation.getSimpleName() + " " + method,
+                            e);
                 }
             }
         }

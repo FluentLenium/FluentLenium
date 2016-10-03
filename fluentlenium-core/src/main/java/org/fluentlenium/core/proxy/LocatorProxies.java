@@ -47,7 +47,8 @@ public class LocatorProxies {
 
     public static boolean isPresent(Object proxy) {
         LocatorHandler locatorHandler = getLocatorHandler(proxy);
-        if (locatorHandler == null) return true;
+        if (locatorHandler == null)
+            return true;
         return locatorHandler.isPresent();
     }
 
@@ -96,7 +97,8 @@ public class LocatorProxies {
 
     public static WebElement createWebElement(ElementLocator locator) {
         final ComponentHandler handler = new ComponentHandler(locator);
-        WebElement proxy = (WebElement) Proxy.newProxyInstance(locator.getClass().getClassLoader(), new Class[]{WebElement.class, Locatable.class, WrapsElement.class}, handler);
+        WebElement proxy = (WebElement) Proxy.newProxyInstance(locator.getClass().getClassLoader(),
+                new Class[] { WebElement.class, Locatable.class, WrapsElement.class }, handler);
         handler.setProxy(proxy);
         return proxy;
     }
@@ -111,7 +113,8 @@ public class LocatorProxies {
 
     public static List<WebElement> createWebElementList(ElementLocator locator) {
         final ListHandler handler = new ListHandler(locator);
-        List<WebElement> proxy = (List<WebElement>) Proxy.newProxyInstance(locator.getClass().getClassLoader(), new Class[]{List.class, WrapsElements.class}, handler);
+        List<WebElement> proxy = (List<WebElement>) Proxy
+                .newProxyInstance(locator.getClass().getClassLoader(), new Class[] { List.class, WrapsElements.class }, handler);
         handler.setProxy(proxy);
         return proxy;
     }

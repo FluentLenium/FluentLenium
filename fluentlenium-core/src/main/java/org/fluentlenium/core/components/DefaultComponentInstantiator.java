@@ -24,7 +24,8 @@ public class DefaultComponentInstantiator extends AbstractComponentInstantiator 
     @Override
     public boolean isComponentClass(Class<?> componentClass) {
         try {
-            ReflectionUtils.getConstructorOptional(1, componentClass, WebElement.class, FluentControl.class, ComponentInstantiator.class);
+            ReflectionUtils.getConstructorOptional(1, componentClass, WebElement.class, FluentControl.class,
+                    ComponentInstantiator.class);
             return true;
         } catch (NoSuchMethodException e) {
             return false;
@@ -34,7 +35,8 @@ public class DefaultComponentInstantiator extends AbstractComponentInstantiator 
     @Override
     public boolean isComponentListClass(Class<? extends List<?>> componentListClass) {
         try {
-            ReflectionUtils.getConstructorOptional(1, componentListClass, Class.class, List.class, FluentControl.class, ComponentInstantiator.class);
+            ReflectionUtils.getConstructorOptional(1, componentListClass, Class.class, List.class, FluentControl.class,
+                    ComponentInstantiator.class);
             return true;
         } catch (NoSuchMethodException e) {
             return false;
@@ -59,7 +61,8 @@ public class DefaultComponentInstantiator extends AbstractComponentInstantiator 
     @Override
     public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, List<T> componentsList) {
         try {
-            return ReflectionUtils.newInstanceOptionalArgs(1, listClass, componentClass, componentsList, fluentControl, instantiator);
+            return ReflectionUtils
+                    .newInstanceOptionalArgs(1, listClass, componentClass, componentsList, fluentControl, instantiator);
         } catch (NoSuchMethodException e) {
             throw new ComponentException(listClass.getName() + " is not a valid component list class.", e);
         } catch (IllegalAccessException e) {

@@ -28,7 +28,6 @@ public class AwaitWithStaleElementReferenceException extends IntegrationFluentTe
         });
     }
 
-
     @Test(expected = StaleElementReferenceException.class)
     public void givenNoDefaultsWhenStateElementReferenceExceptionIsThrownThenItIsNotIgnored() {
         await().atMost(3, SECONDS).withNoDefaultsException().untilPredicate(new Predicate<FluentControl>() {

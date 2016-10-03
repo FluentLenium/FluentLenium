@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-
 public class EventsRegistry {
 
     private final EventFiringWebDriver eventDriver;
@@ -75,7 +74,6 @@ public class EventsRegistry {
         this.eventDriver.unregister(eventListener);
         return this;
     }
-
 
     public EventsRegistry register(final EventListener eventListener) {
         this.eventDriver.register(new EventAdapter(eventListener, instantiator));

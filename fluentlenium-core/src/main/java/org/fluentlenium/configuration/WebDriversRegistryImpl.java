@@ -18,8 +18,8 @@ public class WebDriversRegistryImpl extends AbstractFactoryRegistryImpl<WebDrive
     @Override
     protected WebDriverFactory getDefault(List<WebDriverFactory> filteredFactories) {
         if (filteredFactories.size() == 0) {
-            throw new ConfigurationException("No WebDriverFactory is available. You need add least one supported " +
-                    "WebDriver in your classpath.");
+            throw new ConfigurationException(
+                    "No WebDriverFactory is available. You need add least one supported " + "WebDriver in your classpath.");
         }
         return filteredFactories.get(0);
     }

@@ -11,7 +11,6 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.List;
 
-
 /**
  * The injection element locator, which will lazily locate an element or an element list on a page. This class is
  * designed for use with the {@link org.openqa.selenium.support.PageFactory} and understands the

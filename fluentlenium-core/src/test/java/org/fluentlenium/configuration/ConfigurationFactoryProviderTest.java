@@ -1,6 +1,5 @@
 package org.fluentlenium.configuration;
 
-
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -82,7 +81,6 @@ public class ConfigurationFactoryProviderTest {
     public static class PrivateDefaultsContainer {
 
     }
-
 
     @Test
     public void testDefaultConfiguration() {

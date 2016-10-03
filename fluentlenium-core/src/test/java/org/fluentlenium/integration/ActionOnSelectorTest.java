@@ -10,7 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ActionOnSelectorTest extends IntegrationFluentTest {
 
-
     @Test
     public void checkFillAction() {
         goTo(DEFAULT_URL);

@@ -1,6 +1,5 @@
 package org.fluentlenium.configuration;
 
-
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;

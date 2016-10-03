@@ -38,7 +38,7 @@ public class FindByOfListTest extends IntegrationFluentTest {
         @FindBy(className = "small")
         FluentList<FluentWebElement> smalls;
 
-        @FindAll({@FindBy(id = "location"), @FindBy(className = "small")})
+        @FindAll({ @FindBy(id = "location"), @FindBy(className = "small") })
         FluentList<FluentWebElement> findAllElements;
 
         @Override

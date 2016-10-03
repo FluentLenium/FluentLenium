@@ -190,7 +190,6 @@ public class FluentWaitElementListMatcherTest {
         verify(fluentWebElement3, never()).enabled();
     }
 
-
     @Test
     public void hasAttribute() {
         final FluentListConditions matcher = wait.until(fluentWebElements);
@@ -221,7 +220,6 @@ public class FluentWaitElementListMatcherTest {
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
-
 
     @Test
     public void hasId() {
@@ -373,7 +371,6 @@ public class FluentWaitElementListMatcherTest {
             }
         }).isExactlyInstanceOf(TimeoutException.class);
     }
-
 
     @Test
     public void isEnabled() {

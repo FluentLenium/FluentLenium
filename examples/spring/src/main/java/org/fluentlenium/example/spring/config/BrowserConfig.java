@@ -34,7 +34,8 @@ public class BrowserConfig {
 
     public WebDriver resolveDriver(final BrowserConfig browserConfig) {
         return browserConfig.usesHub() ?
-                browserType.getRemoteWebDriver(browserConfig.getHubLocation()) : browserType.getWebDriver();
+                browserType.getRemoteWebDriver(browserConfig.getHubLocation()) :
+                browserType.getWebDriver();
     }
 
 }

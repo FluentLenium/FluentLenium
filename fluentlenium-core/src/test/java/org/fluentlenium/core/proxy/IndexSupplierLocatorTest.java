@@ -24,14 +24,11 @@ public class IndexSupplierLocatorTest {
     @Mock
     private WebElement element1;
 
-
     @Mock
     private WebElement element2;
 
-
     @Mock
     private WebElement element3;
-
 
     @Mock
     private WebElement element4;

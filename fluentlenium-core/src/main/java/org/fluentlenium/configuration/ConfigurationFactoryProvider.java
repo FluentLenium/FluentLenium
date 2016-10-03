@@ -8,18 +8,16 @@ public class ConfigurationFactoryProvider {
     private static ConfigurationFactory bootstrapFactory = new DefaultConfigurationFactory();
 
     public static ConfigurationFactory getConfigurationFactory(Class<?> container) {
-        ConfigurationProperties configuration = bootstrapFactory.newConfiguration(container,
-                new ConfigurationDefaults());
+        ConfigurationProperties configuration = bootstrapFactory.newConfiguration(container, new ConfigurationDefaults());
 
         Class<? extends ConfigurationFactory> configurationFactoryClass = configuration.getConfigurationFactory();
 
         if (configurationFactoryClass != null) {
             try {
                 return ReflectionUtils.newInstance(configurationFactoryClass);
-            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
-                    InvocationTargetException e) {
-                throw new ConfigurationException("Can't initialize ConfigurationFactory " +
-                        configurationFactoryClass.getName(), e);
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                throw new ConfigurationException("Can't initialize ConfigurationFactory " + configurationFactoryClass.getName(),
+                        e);
             }
         }
         return bootstrapFactory;
@@ -29,17 +27,16 @@ public class ConfigurationFactoryProvider {
         ConfigurationFactory configurationFactory = getConfigurationFactory(container);
         Configuration configuration = configurationFactory.newConfiguration(container, new ConfigurationDefaults());
 
-        if (configuration.getConfigurationDefaults() != null &&
-                configuration.getConfigurationDefaults() != ConfigurationDefaults.class) {
+        if (configuration.getConfigurationDefaults() != null
+                && configuration.getConfigurationDefaults() != ConfigurationDefaults.class) {
 
             ConfigurationProperties configurationDefaults;
 
             try {
                 configurationDefaults = ReflectionUtils.newInstance(configuration.getConfigurationDefaults());
-            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
-                    InvocationTargetException e) {
-                throw new ConfigurationException("Can't initialize ConfigurationDefaults:" +
-                        configuration.getConfigurationDefaults(), e);
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                throw new ConfigurationException(
+                        "Can't initialize ConfigurationDefaults:" + configuration.getConfigurationDefaults(), e);
             }
 
             configuration = configurationFactory.newConfiguration(container, configurationDefaults);

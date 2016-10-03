@@ -1,7 +1,7 @@
 //var cssText = "";
 var css = document.createElement("style");
 css.type = "text/css";
-if("textContent" in css) {
+if ("textContent" in css) {
     css.textContent = cssText;
 } else {
     css.innerText = cssText;

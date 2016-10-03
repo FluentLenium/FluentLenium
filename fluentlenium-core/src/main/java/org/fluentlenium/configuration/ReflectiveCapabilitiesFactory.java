@@ -1,6 +1,5 @@
 package org.fluentlenium.configuration;
 
-
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;

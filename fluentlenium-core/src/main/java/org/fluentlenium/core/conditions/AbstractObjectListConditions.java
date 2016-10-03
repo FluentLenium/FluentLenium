@@ -9,9 +9,8 @@ public class AbstractObjectListConditions<T, C extends Conditions<T>> {
     protected final Function<FluentWebElement, T> objectGetter;
     protected final Function<FluentWebElement, C> conditionsGetter;
 
-    public AbstractObjectListConditions(Conditions<FluentWebElement> conditions,
-                                        Function<FluentWebElement, T> objectGetter,
-                                        Function<FluentWebElement, C> conditionsGetter) {
+    public AbstractObjectListConditions(Conditions<FluentWebElement> conditions, Function<FluentWebElement, T> objectGetter,
+            Function<FluentWebElement, C> conditionsGetter) {
         this.conditions = conditions;
         this.objectGetter = objectGetter;
         this.conditionsGetter = conditionsGetter;

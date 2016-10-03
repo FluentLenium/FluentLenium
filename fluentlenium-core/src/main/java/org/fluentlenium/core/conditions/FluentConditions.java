@@ -1,6 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-
 import org.fluentlenium.core.conditions.message.Message;
 import org.fluentlenium.core.conditions.message.MessageContext;
 import org.fluentlenium.core.conditions.message.NotMessage;

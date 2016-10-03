@@ -11,12 +11,10 @@ import org.fluentlenium.core.filter.matcher.StartsWithMatcher;
 
 import java.util.regex.Pattern;
 
-
 public final class MatcherConstructor {
 
     private MatcherConstructor() {
     }
-
 
     /**
      * Create a matcher for a containing string
