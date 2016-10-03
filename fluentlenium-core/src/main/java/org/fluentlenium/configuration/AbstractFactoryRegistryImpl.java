@@ -21,12 +21,20 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
         Iterable<Class<? extends T>> factoryClasses = ClassIndex.getSubclasses(factoryType);
         L:
         for (Class<? extends T> factoryClass : factoryClasses) {
-            if (factoryClass.isAnnotationPresent(IndexIgnore.class)) continue;
-            for (Class<?> iface : factoryClass.getInterfaces()) {
-                if (iface.isAnnotationPresent(IndexIgnore.class)) continue L;
+            if (factoryClass.isAnnotationPresent(IndexIgnore.class)) {
+                continue;
             }
-            if (Modifier.isAbstract(factoryClass.getModifiers())) continue;
-            if (!Modifier.isPublic(factoryClass.getModifiers())) continue;
+            for (Class<?> iface : factoryClass.getInterfaces()) {
+                if (iface.isAnnotationPresent(IndexIgnore.class)) {
+                    continue L;
+                }
+            }
+            if (Modifier.isAbstract(factoryClass.getModifiers())) {
+                continue;
+            }
+            if (!Modifier.isPublic(factoryClass.getModifiers())) {
+                continue;
+            }
             T factory;
             try {
                 factory = factoryClass.getConstructor().newInstance();
@@ -77,7 +85,9 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
      * @return factory
      */
     public synchronized T get(String name) {
-        if (name == null) return getDefault();
+        if (name == null) {
+            return getDefault();
+        }
         T factory = factories.get(name);
         if (factory == null) {
             R reflectiveFactory = newReflectiveInstance(name);
@@ -126,7 +136,8 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
         boolean registered = false;
 
         if (names.size() == 0) {
-            throw new ConfigurationException("Factory " + factory.getClass().getName() + " has no name defined. Use @FactoryName annotation or implement FactoryNames.");
+            throw new ConfigurationException("Factory " + factory.getClass().getName() +
+                    " has no name defined. Use @FactoryName annotation or implement FactoryNames.");
         }
 
         for (String name : names) {

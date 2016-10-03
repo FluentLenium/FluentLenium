@@ -8,56 +8,58 @@ import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PageWithAjaxElementTest extends IntegrationFluentTest {
-    @Page
-    JavascriptPage page;
+    public static final int TIMEOUT_IN_MILLIS = 500;
 
     @Page
-    JavascriptPageSlow pageSlow;
+    private JavascriptPage page;
 
     @Page
-    JavascriptPageTooSlow pageTooSlow;
+    private JavascriptPageSlow pageSlow;
 
     @Page
-    JavascriptPageWithoutAjax pageWithoutAjax;
+    private JavascriptPageTooSlow pageTooSlow;
+
+    @Page
+    private JavascriptPageWithoutAjax pageWithoutAjax;
 
     @Override
     public FluentWait await() {
-        return super.await().atMost(500);
+        return super.await().atMost(TIMEOUT_IN_MILLIS);
     }
 
     @Test
-    public void when_ajax_fields_are_considered_as_ajax_fields_then_wait_for_them() {
+    public void whenAjaxFieldsAreConsideredAsAjaxFieldsThenWaitForThem() {
         page.go();
         assertThat(page.getText()).isEqualTo("new");
     }
 
     @Test
-    public void when_ajax_fields_are_faster_than_timeout_then_wait_for_them() {
+    public void whenAjaxFieldsAreFasterThanTimeoutThenWaitForThem() {
         pageSlow.go();
         assertThat(pageSlow.getText()).isEqualTo("new");
     }
 
-    @Test(expected = NoSuchElementException.class)
-    public void when_ajax_fields_are_slower_than_timeout_then_NoSuchElementException_is_thrown() {
+    @Test(expected = TimeoutException.class)
+    public void whenAjaxFieldsAreSlowerThanTimeoutThenNoSuchElementExceptionIsThrown() {
         pageTooSlow.go();
         assertThat(pageTooSlow.getText()).isEqualTo("new");
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void when_ajax_fields_are_considered_as_normal_fields_then_NoSuchElementException_is_thrown() {
+    public void whenAjaxFieldsAreConsideredAsNormalFieldsThenNoSuchElementExceptionIsThrown() {
         pageWithoutAjax.go();
         assertThat(pageWithoutAjax.getText()).isEqualTo("new");
     }
 
-
     private static class JavascriptPage extends FluentPage {
 
         @Wait(timeout = 5000)
-        FluentWebElement newField;
+        private FluentWebElement newField;
 
         @Override
         public String getUrl() {
@@ -72,7 +74,7 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
     private static class JavascriptPageSlow extends FluentPage {
 
         @Wait(timeout = 12000)
-        FluentWebElement newFieldSlow;
+        private FluentWebElement newFieldSlow;
 
         @Override
         public String getUrl() {
@@ -99,10 +101,9 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
         }
     }
 
-
     private static class JavascriptPageWithoutAjax extends FluentPage {
 
-        FluentWebElement newField;
+        private FluentWebElement newField;
 
         @Override
         public String getUrl() {

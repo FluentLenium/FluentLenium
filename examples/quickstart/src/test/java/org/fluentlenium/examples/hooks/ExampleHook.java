@@ -8,8 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 public class ExampleHook extends BaseHook<ExampleHookOptions> {
-    public ExampleHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, ExampleHookOptions options) {
-        super(fluentControl, instantiator, elementSupplier, locatorSupplier, options);
+    public ExampleHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, ExampleHookOptions options) {
+        super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
     }
 
     @Override

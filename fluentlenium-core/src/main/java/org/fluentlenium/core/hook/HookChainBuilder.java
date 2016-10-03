@@ -7,5 +7,5 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import java.util.List;
 
 public interface HookChainBuilder {
-    List<FluentHook> build(Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locator, List<HookDefinition<?>> hooks);
+    List<FluentHook> build(Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locator, Supplier<String> toStringSupplier, List<HookDefinition<?>> hooks);
 }

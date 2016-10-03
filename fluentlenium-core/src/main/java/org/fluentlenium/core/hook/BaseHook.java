@@ -13,6 +13,8 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
 
     private final Supplier<ElementLocator> locatorSupplier;
 
+    private final Supplier<String> toStringSupplier;
+
     private T options;
 
     private final Supplier<WebElement> elementSupplier;
@@ -32,11 +34,12 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
         return locatorSupplier.get();
     }
 
-    public BaseHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, T options) {
+    public BaseHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, T options) {
         super(fluentControl);
         this.instantiator = instantiator;
         this.elementSupplier = elementSupplier;
         this.locatorSupplier = locatorSupplier;
+        this.toStringSupplier = toStringSupplier;
         this.options = options;
 
         if (this.options == null) {
@@ -59,6 +62,6 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
 
     @Override
     public String toString() {
-        return getWrappedElement().toString();
+        return toStringSupplier.get();
     }
 }

@@ -44,7 +44,6 @@ public enum SharedWebDriverContainer {
 
         private final Map<ClassAndTestName, SharedWebDriver> methodDrivers = new HashMap<>();
 
-
         /**
          * Get an existing or create a new driver for the given test, with the given shared driver
          * strategy.
@@ -55,7 +54,8 @@ public enum SharedWebDriverContainer {
          * @param driverLifecycle  WebDriver lifecycle
          * @return
          */
-        public synchronized <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
+        public synchronized <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory,
+                Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
             SharedWebDriver driver = getDriver(testClass, testName, driverLifecycle);
             if (driver == null) {
                 driver = createDriver(webDriverFactory, testClass, testName, driverLifecycle);
@@ -64,7 +64,8 @@ public enum SharedWebDriverContainer {
             return driver;
         }
 
-        private <T> SharedWebDriver createDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
+        private <T> SharedWebDriver createDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass,
+                String testName, DriverLifecycle driverLifecycle) {
             WebDriver webDriver = webDriverFactory.get();
             SharedWebDriver sharedWebDriver = new SharedWebDriver(webDriver, testClass, testName, driverLifecycle);
             return sharedWebDriver;
@@ -72,55 +73,56 @@ public enum SharedWebDriverContainer {
 
         private void registerDriver(SharedWebDriver driver) {
             switch (driver.getDriverLifecycle()) {
-                case JVM:
-                    jvmDriver = driver;
-                    break;
-                case CLASS:
-                    classDrivers.put(driver.getTestClass(), driver);
-                    break;
-                case METHOD:
-                default:
-                    methodDrivers.put(new ClassAndTestName(driver.getTestClass(), driver.getTestName()), driver);
-                    break;
+            case JVM:
+                jvmDriver = driver;
+                break;
+            case CLASS:
+                classDrivers.put(driver.getTestClass(), driver);
+                break;
+            case METHOD:
+            default:
+                methodDrivers.put(new ClassAndTestName(driver.getTestClass(), driver.getTestName()), driver);
+                break;
             }
         }
 
-        public synchronized <T> SharedWebDriver getDriver(Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
+        public synchronized <T> SharedWebDriver getDriver(Class<T> testClass, String testName,
+                DriverLifecycle driverLifecycle) {
             switch (driverLifecycle) {
-                case JVM:
-                    return jvmDriver;
-                case CLASS:
-                    return classDrivers.get(testClass);
-                case METHOD:
-                default:
-                    return methodDrivers.get(new ClassAndTestName(testClass, testName));
+            case JVM:
+                return jvmDriver;
+            case CLASS:
+                return classDrivers.get(testClass);
+            case METHOD:
+            default:
+                return methodDrivers.get(new ClassAndTestName(testClass, testName));
             }
         }
 
         public synchronized void quit(SharedWebDriver driver) {
             switch (driver.getDriverLifecycle()) {
-                case JVM:
-                    if (jvmDriver == driver) {
-                        if (jvmDriver.getDriver() != null) {
-                            jvmDriver.getDriver().quit();
-                        }
-                        jvmDriver = null;
+            case JVM:
+                if (jvmDriver == driver) {
+                    if (jvmDriver.getDriver() != null) {
+                        jvmDriver.getDriver().quit();
                     }
-                    break;
-                case CLASS:
-                    SharedWebDriver classDriver = classDrivers.remove(driver.getTestClass());
-                    if (classDriver == driver && classDriver.getDriver() != null) {
-                        classDriver.getDriver().quit();
-                    }
-                    break;
-                case METHOD:
-                default:
-                    SharedWebDriver testDriver = methodDrivers
-                            .remove(new ClassAndTestName(driver.getTestClass(), driver.getTestName()));
-                    if (testDriver == driver && testDriver.getDriver() != null) {
-                        testDriver.getDriver().quit();
-                    }
-                    break;
+                    jvmDriver = null;
+                }
+                break;
+            case CLASS:
+                SharedWebDriver classDriver = classDrivers.remove(driver.getTestClass());
+                if (classDriver == driver && classDriver.getDriver() != null) {
+                    classDriver.getDriver().quit();
+                }
+                break;
+            case METHOD:
+            default:
+                SharedWebDriver testDriver = methodDrivers
+                        .remove(new ClassAndTestName(driver.getTestClass(), driver.getTestName()));
+                if (testDriver == driver && testDriver.getDriver() != null) {
+                    testDriver.getDriver().quit();
+                }
+                break;
             }
         }
 

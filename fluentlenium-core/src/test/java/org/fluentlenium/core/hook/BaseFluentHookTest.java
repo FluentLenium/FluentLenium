@@ -41,7 +41,7 @@ public class BaseFluentHookTest {
     public void before() {
         fluentAdapter = new FluentAdapter(webDriver);
         instantiator = spy(new DefaultComponentInstantiator(fluentAdapter));
-        hook = new BaseFluentHook<>(fluentAdapter, instantiator, Suppliers.ofInstance(element), Suppliers.ofInstance(locator), options);
+        hook = new BaseFluentHook<>(fluentAdapter, instantiator, Suppliers.ofInstance(element), Suppliers.ofInstance(locator), Suppliers.ofInstance("toString"), options);
     }
 
     @Test
@@ -51,6 +51,7 @@ public class BaseFluentHookTest {
 
         assertThat(fluentWebElement).isInstanceOf(FluentWebElement.class);
         assertThat(fluentWebElement.getElement()).isSameAs(element);
+        assertThat(hook.toString()).isEqualTo("toString");
     }
 
 }

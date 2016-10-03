@@ -7,15 +7,14 @@ import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.hook.BaseFluentHook;
 import org.fluentlenium.core.wait.FluentWait;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.List;
 
 public class WaitHook extends BaseFluentHook<WaitHookOptions> {
-    public WaitHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, WaitHookOptions options) {
-        super(fluentControl, instantiator, elementSupplier, locatorSupplier, options);
+    public WaitHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, WaitHookOptions options) {
+        super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
     }
 
     @Override
@@ -53,34 +52,35 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
 
     @Override
     public List<WebElement> findElements() {
-        try {
-            return buildAwait().ignoring(NoSuchElementException.class).until(new Function<FluentControl, List<WebElement>>() {
-                @Override
-                public List<WebElement> apply(FluentControl input) {
-                    List<WebElement> elements = WaitHook.super.findElements();
-                    if (elements.size() == 0) throw new NoSuchElementException("No such element");
-                    return elements;
+        return buildAwait().ignoring(NoSuchElementException.class).until(new Function<FluentControl, List<WebElement>>() {
+            @Override
+            public List<WebElement> apply(FluentControl input) {
+                List<WebElement> elements = WaitHook.super.findElements();
+                if (elements.size() == 0) {
+                    return null;
                 }
-            });
-        } catch (TimeoutException e) {
-            throw new NoSuchElementException("No such element", e);
-        }
+                return elements;
+            }
 
+            @Override
+            public String toString() {
+                return WaitHook.super.toString();
+            }
+        });
     }
 
     @Override
     public WebElement findElement() {
-        try {
-            return buildAwait().ignoring(NoSuchElementException.class).until(new Function<FluentControl, WebElement>() {
-                @Override
-                public WebElement apply(FluentControl input) {
-                    WebElement element = WaitHook.super.findElement();
-                    if (element == null) throw new NoSuchElementException("No such element");
-                    return element;
-                }
-            });
-        } catch (TimeoutException e) {
-            throw new NoSuchElementException("No such element", e);
-        }
+        return buildAwait().ignoring(NoSuchElementException.class).until(new Function<FluentControl, WebElement>() {
+            @Override
+            public WebElement apply(FluentControl input) {
+                return WaitHook.super.findElement();
+            }
+
+            @Override
+            public String toString() {
+                return WaitHook.super.toString();
+            }
+        });
     }
 }

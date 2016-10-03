@@ -51,8 +51,8 @@ public class ProxyHookTest {
     }
 
     public static class TestHook extends BaseHook<Object> {
-        public TestHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Object options) {
-            super(fluentControl, instantiator, elementSupplier, locatorSupplier, options);
+        public TestHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, Object options) {
+            super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
         }
     }
 

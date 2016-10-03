@@ -5,6 +5,7 @@ import org.fluentlenium.core.annotation.Label;
 import org.fluentlenium.core.annotation.LabelHint;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.hook.wait.Wait;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
@@ -14,7 +15,8 @@ import org.openqa.selenium.support.FindBy;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class FluentWaitMessageTest extends IntegrationFluentTest {
+@Wait
+public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     @Override
     public FluentWait await() {
         return super.await().atMost(100).pollingEvery(10);
@@ -98,24 +100,24 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
     public void testDisabledDefaultLabelInjection() {
         goTo(DEFAULT_URL);
         final FluentWebElement first = disabledDefaultLabel;
-        assertThat(first.toString()).isEqualTo("FluentWaitMessageTest.disabledDefaultLabel (Lazy Element)");
+        assertThat(first.toString()).isEqualTo("FluentWaitMessageWithHookTest.disabledDefaultLabel (Lazy Element)");
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
                 first.await().until().enabled();
             }
-        }).hasMessageStartingWith("Timed out after 0 seconds: Element FluentWaitMessageTest.disabledDefaultLabel (Lazy Element) is not enabled")
+        }).hasMessageStartingWith("Timed out after 0 seconds: Element FluentWaitMessageWithHookTest.disabledDefaultLabel (Lazy Element) is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
 
         first.now();
-        assertThat(first.toString()).isEqualTo("FluentWaitMessageTest.disabledDefaultLabel (<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />)");
+        assertThat(first.toString()).isEqualTo("FluentWaitMessageWithHookTest.disabledDefaultLabel (<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />)");
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
                 first.await().until().enabled();
             }
-        }).hasMessageStartingWith("Timed out after 0 seconds: Element FluentWaitMessageTest.disabledDefaultLabel (<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />) is not enabled")
+        }).hasMessageStartingWith("Timed out after 0 seconds: Element FluentWaitMessageWithHookTest.disabledDefaultLabel (<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />) is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
     }
 
@@ -200,24 +202,24 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
     public void testDisabledDefaultLabelListInjection() {
         goTo(DEFAULT_URL);
         final FluentList<FluentWebElement> list = disabledDefaultLabelList;
-        assertThat(list.toString()).isEqualTo("FluentWaitMessageTest.disabledDefaultLabelList (Lazy Element List)");
+        assertThat(list.toString()).isEqualTo("FluentWaitMessageWithHookTest.disabledDefaultLabelList (Lazy Element List)");
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
                 list.await().until().enabled();
             }
-        }).hasMessageStartingWith("Timed out after 0 seconds: Elements FluentWaitMessageTest.disabledDefaultLabelList (Lazy Element List) is not enabled")
+        }).hasMessageStartingWith("Timed out after 0 seconds: Elements FluentWaitMessageWithHookTest.disabledDefaultLabelList (Lazy Element List) is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
 
         list.now();
-        assertThat(list.toString()).isEqualTo("FluentWaitMessageTest.disabledDefaultLabelList ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />])");
+        assertThat(list.toString()).isEqualTo("FluentWaitMessageWithHookTest.disabledDefaultLabelList ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />])");
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
                 list.await().until().enabled();
             }
-        }).hasMessageStartingWith("Timed out after 0 seconds: Elements FluentWaitMessageTest.disabledDefaultLabelList ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />]) is not enabled")
+        }).hasMessageStartingWith("Timed out after 0 seconds: Elements FluentWaitMessageWithHookTest.disabledDefaultLabelList ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />]) is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
 
     }
