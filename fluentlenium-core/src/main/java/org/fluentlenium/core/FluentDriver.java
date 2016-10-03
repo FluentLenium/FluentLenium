@@ -10,6 +10,8 @@ import org.fluentlenium.core.action.WindowAction;
 import org.fluentlenium.core.alert.Alert;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.ComponentsManager;
+import org.fluentlenium.core.css.CssControl;
+import org.fluentlenium.core.css.CssControlImpl;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.AnnotationsComponentListener;
@@ -59,6 +61,9 @@ public class FluentDriver implements FluentControl {
 
     @Delegate
     private FluentInjector fluentInjector;
+
+    @Delegate
+    private CssControl cssControl;
 
     private Search search;
 
@@ -125,6 +130,7 @@ public class FluentDriver implements FluentControl {
         this.mouseActions = new MouseActions(driver);
         this.keyboardActions = new KeyboardActions(driver);
         this.fluentInjector = new FluentInjector(adapter, componentsManager, new DefaultContainerInstanciator(this));
+        this.cssControl = new CssControlImpl(adapter, adapter);
         this.windowAction = new WindowAction(adapter, driver);
         return this;
     }

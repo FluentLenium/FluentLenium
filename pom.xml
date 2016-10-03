@@ -136,6 +136,11 @@
                 <version>2.5</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.4</version>
+            </dependency>
+            <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>4.12</version>
@@ -290,7 +295,7 @@
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.7</version>
                 <configuration>
-                    <check />
+                    <check/>
                     <format>xml</format>
                     <maxmem>256m</maxmem>
                     <!-- aggregated reports for multi-module projects -->
