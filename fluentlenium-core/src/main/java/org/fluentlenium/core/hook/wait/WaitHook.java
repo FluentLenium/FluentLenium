@@ -13,8 +13,8 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import java.util.List;
 
 public class WaitHook extends BaseFluentHook<WaitHookOptions> {
-    public WaitHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, WaitHookOptions options) {
-        super(fluentControl, instantiator, elementSupplier, locatorSupplier, options);
+    public WaitHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, WaitHookOptions options) {
+        super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
             public List<WebElement> apply(FluentControl input) {
                 List<WebElement> elements = WaitHook.super.findElements();
                 if (elements.size() == 0) {
-                    throw new NoSuchElementException("Locator returns an empty list");
+                    return null;
                 }
                 return elements;
             }

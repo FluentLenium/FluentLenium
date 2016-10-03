@@ -119,6 +119,11 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
                 public ElementLocator get() {
                     return locator;
                 }
+            }, new Supplier<String>() {
+                @Override
+                public String get() {
+                    return proxy.toString();
+                }
             }, hookDefinitions);
         }
     }
@@ -170,7 +175,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         getLocatorResult();
     }
 
-    protected abstract T getInvocationTarget();
+    protected abstract T getInvocationTarget(Method method);
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -221,7 +226,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     private Object invoke(Method method, Object[] args) throws Throwable {
         Object returnValue;
         try {
-            returnValue = method.invoke(getInvocationTarget(), args);
+            returnValue = method.invoke(getInvocationTarget(method), args);
         } catch (InvocationTargetException e) {
             // Unwrap the underlying exception
             throw e.getCause();

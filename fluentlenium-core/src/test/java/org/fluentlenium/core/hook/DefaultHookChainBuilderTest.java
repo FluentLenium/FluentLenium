@@ -51,8 +51,8 @@ public class DefaultHookChainBuilderTest {
         instantiator = new DefaultComponentInstantiator(fluentAdapter);
         hookChainBuilder = new DefaultHookChainBuilder(fluentAdapter, instantiator) {
             @Override
-            protected FluentHook<?> newInstance(Class<? extends FluentHook<?>> hookClass, FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> currentSupplier, Supplier<ElementLocator> locator, Object options) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-                return spy(super.newInstance(hookClass, fluentControl, instantiator, currentSupplier, locator, options));
+            protected FluentHook<?> newInstance(Class<? extends FluentHook<?>> hookClass, FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> currentSupplier, Supplier<ElementLocator> locator, Supplier<String> toStringSupplier, Object options) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+                return spy(super.newInstance(hookClass, fluentControl, instantiator, currentSupplier, locator, toStringSupplier, options));
             }
         };
     }
@@ -65,7 +65,7 @@ public class DefaultHookChainBuilderTest {
         hookDefinitions.add(new HookDefinition<>(NanoHook.class, new NanoHookOptions("option")));
         hookDefinitions.add(new HookDefinition<>(NanoHook.class));
 
-        List<FluentHook> fluentHooks = hookChainBuilder.build(Suppliers.ofInstance(element), Suppliers.ofInstance(locator), hookDefinitions);
+        List<FluentHook> fluentHooks = hookChainBuilder.build(Suppliers.ofInstance(element), Suppliers.ofInstance(locator), Suppliers.ofInstance("toString"), hookDefinitions);
 
         Assertions.assertThat(fluentHooks).hasSize(hookDefinitions.size());
 
@@ -102,7 +102,7 @@ public class DefaultHookChainBuilderTest {
 
     private static class InvalidConstructorHook extends BaseHook<Object> {
         public InvalidConstructorHook() {
-            super(null, null, null, null, null);
+            super(null, null, null, null, null, null);
         }
     }
 
@@ -116,15 +116,15 @@ public class DefaultHookChainBuilderTest {
         Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                hookChainBuilder.build(Suppliers.ofInstance(element), Suppliers.ofInstance(locator), hookDefinitions);
+                hookChainBuilder.build(Suppliers.ofInstance(element), Suppliers.ofInstance(locator), Suppliers.ofInstance("toString"), hookDefinitions);
             }
         }).isExactlyInstanceOf(HookException.class).hasMessage("An error has occurred with a defined hook.");
 
     }
 
     private static class FailingConstructorHook extends BaseHook<Object> {
-        public FailingConstructorHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Object options) {
-            super(fluentControl, instantiator, elementSupplier, locatorSupplier, options);
+        public FailingConstructorHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, Object options) {
+            super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
             throw new IllegalStateException();
         }
     }
@@ -138,7 +138,7 @@ public class DefaultHookChainBuilderTest {
         Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                hookChainBuilder.build(Suppliers.ofInstance(element), Suppliers.ofInstance(locator), hookDefinitions);
+                hookChainBuilder.build(Suppliers.ofInstance(element), Suppliers.ofInstance(locator), Suppliers.ofInstance("toString"), hookDefinitions);
             }
         }).isExactlyInstanceOf(HookException.class).hasMessage("An error has occurred with a defined hook.");
 

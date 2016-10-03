@@ -38,7 +38,7 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     }
 
     @Override
-    protected List<WebElement> getInvocationTarget() {
+    protected List<WebElement> getInvocationTarget(Method method) {
         return result;
     }
 

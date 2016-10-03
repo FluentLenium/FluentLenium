@@ -62,7 +62,7 @@ public class WaitHookTest {
         waitHookOptions.setTimeUnit(TimeUnit.MILLISECONDS);
         waitHookOptions.setPollingEvery(10L);
 
-        waitHook = new WaitHook(fluentControl, instantiator, Suppliers.ofInstance(element), Suppliers.ofInstance(locator), waitHookOptions);
+        waitHook = new WaitHook(fluentControl, instantiator, Suppliers.ofInstance(element), Suppliers.ofInstance(locator), Suppliers.ofInstance("toString"), waitHookOptions);
     }
 
     @Test
@@ -149,7 +149,7 @@ public class WaitHookTest {
 
     @Test
     public void testDefaultOptions() {
-        WaitHook waitHook = new WaitHook(fluentControl, instantiator, Suppliers.ofInstance(element), Suppliers.ofInstance(locator), null);
+        WaitHook waitHook = new WaitHook(fluentControl, instantiator, Suppliers.ofInstance(element), Suppliers.ofInstance(locator), Suppliers.ofInstance("toString"), null);
 
         assertThat(waitHook.getOptions()).isEqualToComparingFieldByField(new WaitHookOptions());
     }

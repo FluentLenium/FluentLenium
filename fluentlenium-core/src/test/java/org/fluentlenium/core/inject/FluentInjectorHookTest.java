@@ -272,8 +272,8 @@ public class FluentInjectorHookTest {
     }
 
     public static class NanoHook2 extends NanoHook {
-        public NanoHook2(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, NanoHookOptions options) {
-            super(fluentControl, instantiator, elementSupplier, locatorSupplier, options);
+        public NanoHook2(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, NanoHookOptions options) {
+            super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
         }
     }
 

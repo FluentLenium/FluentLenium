@@ -60,7 +60,10 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement> impleme
     }
 
     @Override
-    protected WebElement getInvocationTarget() {
+    protected WebElement getInvocationTarget(Method method) {
+        if (method.getDeclaringClass().equals(Object.class)) {
+            return result;
+        }
         return getHookElement();
     }
 

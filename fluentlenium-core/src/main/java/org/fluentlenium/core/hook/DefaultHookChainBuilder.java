@@ -21,7 +21,7 @@ public class DefaultHookChainBuilder implements HookChainBuilder {
     }
 
     @Override
-    public List<FluentHook> build(Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locator, List<HookDefinition<?>> hooks) {
+    public List<FluentHook> build(Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locator, Supplier<String> toStringSupplier, List<HookDefinition<?>> hooks) {
         List<FluentHook> chain = new ArrayList<>();
 
         Supplier<WebElement> currentSupplier = elementSupplier;
@@ -29,7 +29,7 @@ public class DefaultHookChainBuilder implements HookChainBuilder {
         for (HookDefinition<?> hook : hooks) {
             FluentHook<?> newObject;
             try {
-                newObject = newInstance(hook.getHookClass(), fluentControl, instantiator, currentSupplier, locator, hook.getOptions());
+                newObject = newInstance(hook.getHookClass(), fluentControl, instantiator, currentSupplier, locator, toStringSupplier, hook.getOptions());
             } catch (NoSuchMethodException e) {
                 throw new HookException(e);
             } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
@@ -50,7 +50,7 @@ public class DefaultHookChainBuilder implements HookChainBuilder {
         return chain;
     }
 
-    protected FluentHook<?> newInstance(Class<? extends FluentHook<?>> hookClass, FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> currentSupplier, Supplier<ElementLocator> locator, Object options) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        return ReflectionUtils.newInstance(hookClass, fluentControl, instantiator, currentSupplier, locator, options);
+    protected FluentHook<?> newInstance(Class<? extends FluentHook<?>> hookClass, FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> currentSupplier, Supplier<ElementLocator> locator, Supplier<String> toStringSupplier, Object options) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        return ReflectionUtils.newInstance(hookClass, fluentControl, instantiator, currentSupplier, locator, toStringSupplier, options);
     }
 }
