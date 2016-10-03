@@ -5,6 +5,7 @@ import org.fluentlenium.core.page.ClassAnnotations;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
 
 /**
  * Use the Page Object Pattern to have more resilient tests.
@@ -40,7 +41,7 @@ public abstract class FluentPage extends DefaultFluentContainer implements Fluen
         if (by != null) {
             try {
                 $(by).first().now();
-            } catch (NoSuchElementException | StaleElementReferenceException e) {
+            } catch (TimeoutException | NoSuchElementException | StaleElementReferenceException e) {
                 throw new AssertionError("@FindBy element not found for page " + getClass().getName(), e);
             }
         }

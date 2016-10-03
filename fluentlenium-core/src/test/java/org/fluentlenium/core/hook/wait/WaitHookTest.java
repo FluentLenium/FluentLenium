@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -46,7 +45,7 @@ public class WaitHookTest {
     private ComponentInstantiator instantiator;
 
     private WaitHook waitHook;
-    
+
     private FluentWait wait;
 
     @Before
@@ -73,7 +72,7 @@ public class WaitHookTest {
             public void call() throws Throwable {
                 waitHook.findElement();
             }
-        }).isExactlyInstanceOf(NoSuchElementException.class).hasCauseExactlyInstanceOf(TimeoutException.class);
+        }).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -83,7 +82,7 @@ public class WaitHookTest {
             public void call() throws Throwable {
                 waitHook.findElements();
             }
-        }).isExactlyInstanceOf(NoSuchElementException.class).hasCauseExactlyInstanceOf(TimeoutException.class);
+        }).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test

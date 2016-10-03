@@ -14,6 +14,7 @@ import org.fluentlenium.core.conditions.message.MessageProxy;
 import org.fluentlenium.core.wait.FluentWait;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -189,7 +190,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
                         throw new IllegalStateException("An internal error has occured while waiting", e);
                     } catch (InvocationTargetException e) {
                         Throwable targetException = e.getTargetException();
-                        if (targetException instanceof NoSuchElementException || targetException instanceof StaleElementReferenceException) {
+                        if (targetException instanceof TimeoutException || targetException instanceof NoSuchElementException || targetException instanceof StaleElementReferenceException) {
                             NoSuchElementValue annotation = method.getAnnotation(NoSuchElementValue.class);
                             return annotation == null ? false : annotation.value();
                         }

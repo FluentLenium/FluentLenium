@@ -8,6 +8,7 @@ import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,7 +44,7 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
         assertThat(pageSlow.getText()).isEqualTo("new");
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test(expected = TimeoutException.class)
     public void whenAjaxFieldsAreSlowerThanTimeoutThenNoSuchElementExceptionIsThrown() {
         pageTooSlow.go();
         assertThat(pageTooSlow.getText()).isEqualTo("new");

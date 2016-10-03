@@ -59,6 +59,7 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
 
     @Override
     public String toString() {
-        return getWrappedElement().toString();
+        WebElement wrappedElement = getWrappedElement();
+        return wrappedElement == null ? getElementLocator().toString() : wrappedElement.toString();
     }
 }
