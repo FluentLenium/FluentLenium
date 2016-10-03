@@ -5,7 +5,6 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.hook.wait.Wait;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,7 +30,7 @@ public class WaitHookAnnotationTest extends IntegrationFluentTest {
             public void call() throws Throwable {
                 find("#anotherField").click();
             }
-        }).isExactlyInstanceOf(NoSuchElementException.class).hasCauseExactlyInstanceOf(TimeoutException.class);
+        }).isExactlyInstanceOf(TimeoutException.class).hasMessageStartingWith("Timed out after 5 seconds waiting for By.cssSelector: #anotherField");
 
     }
 
@@ -53,6 +52,6 @@ public class WaitHookAnnotationTest extends IntegrationFluentTest {
             public void call() throws Throwable {
                 anotherField.click();
             }
-        }).isExactlyInstanceOf(NoSuchElementException.class).hasCauseExactlyInstanceOf(TimeoutException.class);
+        }).isExactlyInstanceOf(TimeoutException.class);
     }
 }

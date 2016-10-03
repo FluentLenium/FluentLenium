@@ -6,6 +6,7 @@ import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
@@ -153,7 +154,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     public boolean isPresent() {
         try {
             now();
-        } catch (NoSuchElementException | StaleElementReferenceException e) {
+        } catch (TimeoutException | NoSuchElementException | StaleElementReferenceException e) {
             return false;
         }
         return result != null && !isStale();
