@@ -32,14 +32,14 @@ public class Axes {
      * @return fluent web element
      */
     public FluentWebElement parent() {
-        WebElement webElement = LocatorProxies.createWebElement(new Supplier<WebElement>() {
+        WebElement parentElement = LocatorProxies.createWebElement(new Supplier<WebElement>() {
             @Override
             public WebElement get() {
                 return Axes.this.webElement.findElement(By.xpath("parent::*"));
             }
         });
 
-        return instantiator.newComponent(FluentWebElement.class, webElement);
+        return instantiator.newComponent(FluentWebElement.class, parentElement);
     }
 
     protected FluentList<FluentWebElement> handleAxe(final String axe) {

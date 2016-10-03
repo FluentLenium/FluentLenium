@@ -27,7 +27,7 @@ public abstract class FluentTestNg extends FluentTestRunnerAdapter {
 
     private Map<ITestContext, Map<Method, ITestNGMethod>> methods = new HashMap<>();
 
-    synchronized public Map<Method, ITestNGMethod> getMethods(ITestContext context) {
+    public synchronized Map<Method, ITestNGMethod> getMethods(ITestContext context) {
         Map<Method, ITestNGMethod> testMethods = methods.get(context);
 
         if (testMethods == null) {
@@ -43,7 +43,7 @@ public abstract class FluentTestNg extends FluentTestRunnerAdapter {
     }
 
     @AfterTest(alwaysRun = true)
-    synchronized public void afterTest(ITestContext context) {
+    public synchronized void afterTest(ITestContext context) {
         methods.remove(context);
     }
 

@@ -269,8 +269,8 @@ public class EachElementConditionsTest extends AbstractFluentListConditionsTest 
 
     @Test
     public void defaultValueWhenEmpty() {
-        EachElementConditions conditions = new EachElementConditions(Arrays.<FluentWebElement>asList());
+        EachElementConditions defaultConditions = new EachElementConditions(Arrays.<FluentWebElement>asList());
 
-        assertThat(conditions.enabled()).isFalse();
+        assertThat(defaultConditions.enabled()).isFalse();
     }
 }

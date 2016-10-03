@@ -27,11 +27,13 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
     }
 
     protected void findByHandler(Class<? extends Annotation> annotation, final By by, WebElement element, WebDriver driver) {
-        if (element == null)
+        if (element == null) {
             return;
+        }
         Set<Object> components = this.componentsAccessor.getComponents(element);
-        if (components == null)
+        if (components == null) {
             return;
+        }
         for (Object component : components) {
             for (Method method : ReflectionUtils.getDeclaredMethodsWithAnnotation(component, annotation)) {
                 Class<?>[] parameterTypes = method.getParameterTypes();
@@ -73,11 +75,13 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
     }
 
     protected void defaultHandler(Class<? extends Annotation> annotation, WebElement element, WebDriver driver) {
-        if (element == null)
+        if (element == null) {
             return;
+        }
         Set<Object> components = this.componentsAccessor.getComponents(element);
-        if (components == null)
+        if (components == null) {
             return;
+        }
         for (Object component : components) {
             for (Method method : ReflectionUtils.getDeclaredMethodsWithAnnotation(component, annotation)) {
                 Class<?>[] parameterTypes = method.getParameterTypes();

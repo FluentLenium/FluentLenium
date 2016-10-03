@@ -17,5 +17,5 @@ public interface CssSupport {
      *
      * @param cssResource css classpath resource to inject.
      */
-    void injectResource(final String cssResource);
+    void injectResource(String cssResource);
 }

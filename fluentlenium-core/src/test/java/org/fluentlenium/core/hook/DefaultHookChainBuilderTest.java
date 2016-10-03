@@ -110,7 +110,7 @@ public class DefaultHookChainBuilderTest {
     }
 
     private static class InvalidConstructorHook extends BaseHook<Object> {
-        public InvalidConstructorHook() {
+        InvalidConstructorHook() {
             super(null, null, null, null, null, null);
         }
     }
@@ -133,7 +133,7 @@ public class DefaultHookChainBuilderTest {
     }
 
     private static class FailingConstructorHook extends BaseHook<Object> {
-        public FailingConstructorHook(FluentControl fluentControl, ComponentInstantiator instantiator,
+        FailingConstructorHook(FluentControl fluentControl, ComponentInstantiator instantiator,
                 Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier,
                 Object options) {
             super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);

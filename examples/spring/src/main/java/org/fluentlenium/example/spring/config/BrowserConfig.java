@@ -14,9 +14,9 @@ public class BrowserConfig {
     /**
      * Creates a new browser configuration
      *
-     * @param browserType
-     * @param useHub
-     * @param hubLocation
+     * @param browserType browser type
+     * @param useHub      use hub
+     * @param hubLocation hub url
      */
     public BrowserConfig(final BrowserType browserType, final boolean useHub, final String hubLocation) {
         this.browserType = browserType;
@@ -33,9 +33,9 @@ public class BrowserConfig {
     }
 
     public WebDriver resolveDriver(final BrowserConfig browserConfig) {
-        return browserConfig.usesHub() ?
-                browserType.getRemoteWebDriver(browserConfig.getHubLocation()) :
-                browserType.getWebDriver();
+        return browserConfig.usesHub()
+                ? browserType.getRemoteWebDriver(browserConfig.getHubLocation())
+                : browserType.getWebDriver();
     }
 
 }

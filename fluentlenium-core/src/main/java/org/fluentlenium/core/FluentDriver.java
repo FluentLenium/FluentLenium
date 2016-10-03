@@ -110,12 +110,12 @@ public class FluentDriver implements FluentControl {
             }
 
             if (this.configuration.getBaseUrl() != null) {
-                String baseUrl = this.configuration.getBaseUrl();
-                if (baseUrl != null) {
-                    if (baseUrl.endsWith("/")) {
-                        baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
+                String configBaseUrl = this.configuration.getBaseUrl();
+                if (configBaseUrl != null) {
+                    if (configBaseUrl.endsWith("/")) {
+                        configBaseUrl = configBaseUrl.substring(0, configBaseUrl.length() - 1);
                     }
-                    this.baseUrl = baseUrl;
+                    this.baseUrl = configBaseUrl;
                 }
             }
         }

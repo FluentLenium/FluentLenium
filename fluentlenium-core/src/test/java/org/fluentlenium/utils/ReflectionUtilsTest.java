@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class ReflectionUtilsTest {
     @Test
     public void testToClass() {
-        Object[] objects = { "test", 1, 2L, true, Integer.valueOf(3) };
+        Object[] objects = {"test", 1, 2L, true, Integer.valueOf(3)};
 
         Class<?>[] classes = ReflectionUtils.toClass(objects);
 
@@ -58,7 +58,7 @@ public class ReflectionUtilsTest {
 
         Constructor<SuperClass> superClassConstructor = ReflectionUtils.getConstructor(SuperClass.class, "1", 2, true, "object");
         assertThat(superClassConstructor.getParameterTypes())
-                .isEqualTo(new Class<?>[] { String.class, Integer.class, boolean.class, Object.class });
+                .isEqualTo(new Class<?>[] {String.class, Integer.class, boolean.class, Object.class});
 
         SuperClass object = ReflectionUtils.newInstance(SuperClass.class, "1", 2, true, "object");
         assertThat(object.param1).isEqualTo("1");

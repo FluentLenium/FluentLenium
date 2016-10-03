@@ -149,9 +149,9 @@ public class WaitHookTest {
 
     @Test
     public void testDefaultOptions() {
-        WaitHook waitHook = new WaitHook(fluentControl, instantiator, Suppliers.ofInstance(element),
+        WaitHook defaultWaitHook = new WaitHook(fluentControl, instantiator, Suppliers.ofInstance(element),
                 Suppliers.ofInstance(locator), Suppliers.ofInstance("toString"), null);
 
-        assertThat(waitHook.getOptions()).isEqualToComparingFieldByField(new WaitHookOptions());
+        assertThat(defaultWaitHook.getOptions()).isEqualToComparingFieldByField(new WaitHookOptions());
     }
 }

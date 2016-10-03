@@ -130,8 +130,8 @@ public class WindowActionsTest {
         FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
         ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
 
-        FluentDriver fluentDriver = new FluentDriver(jsDriver, configurationProperties, fluentControl);
-        FluentDriver fluentDriverSpied = spy(fluentDriver);
+        FluentDriver currentFluentDriver = new FluentDriver(jsDriver, configurationProperties, fluentControl);
+        FluentDriver fluentDriverSpied = spy(currentFluentDriver);
 
         when(jsDriver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),
                 ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
@@ -201,8 +201,8 @@ public class WindowActionsTest {
         FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
         ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
 
-        FluentDriver fluentDriver = new FluentDriver(driver, configurationProperties, fluentControl);
-        FluentDriver fluentDriverSpied = spy(fluentDriver);
+        FluentDriver currentFluentDriver = new FluentDriver(driver, configurationProperties, fluentControl);
+        FluentDriver fluentDriverSpied = spy(currentFluentDriver);
 
         when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),
                 ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));

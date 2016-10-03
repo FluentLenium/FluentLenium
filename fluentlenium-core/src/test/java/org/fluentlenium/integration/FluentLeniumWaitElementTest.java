@@ -143,121 +143,121 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void when_element_is_present_then_areDisplayed_return_true() {
+    public void whenElementIsPresentThenAreDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEach(defaultElements).displayed();
     }
 
     @Test
-    public void when_element_is_present_then_isDisplayed_return_true() {
+    public void whenElementIsPresentThenIsDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until(defaultElements).displayed();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_displayed_then_areDisplayed_throws_exception() {
+    public void whenElementIsNotDisplayedThenAreDisplayedThrowsException() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEach(unvisibleElements).displayed();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_displayed_then_isDisplayed_throws_exception() {
+    public void whenElementIsNotDisplayedThenIsDisplayedThrowsException() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until(unvisibleElements).displayed();
     }
 
     @Test
-    public void when_element_is_not_present_then_areNotDisplayed_return_true() {
+    public void whenElementIsNotPresentThenAreNotDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEach(nonexistentElements).not().displayed();
     }
 
     @Test
-    public void when_element_is_not_present_then_isNotDisplayed_return_true() {
+    public void whenElementIsNotPresentThenIsNotDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until(nonexistentElements).not().displayed();
     }
 
     @Test
-    public void when_element_is_not_displayed_then_areNotDisplayed_return_true() {
+    public void whenElementIsNotDisplayedThenAreNotDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEach(unvisibleElements).not().displayed();
     }
 
     @Test
-    public void when_element_is_not_displayed_then_isNotDisplayed_return_true() {
+    public void whenElementIsNotDisplayedThenIsNotDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until(unvisibleElements).not().displayed();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_displayed_then_areNotDisplayed_throws_exception() {
+    public void whenElementIsDisplayedThenAreNotDisplayedThrowsException() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEach(defaultElements).not().displayed();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_displayed_then_isNotDisplayed_throws_exception() {
+    public void whenElementIsDisplayedThenIsNotDisplayedThrowsException() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until(defaultElements).not().displayed();
     }
 
     @Test
-    public void when_element_is_enabled_then_areEnabled_return_true() {
+    public void whenElementIsEnabledThenAreEnabledReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEach(defaultElements).enabled();
     }
 
     @Test
-    public void when_element_is_enabled_then_isEnabled_return_true() {
+    public void whenElementIsEnabledThenIsEnabledReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until(defaultElements).enabled();
     }
 
     @Test
-    public void when_single_element_is_enabled_then_isEnabled_return_true() {
+    public void whenSingleElementIsEnabledThenIsEnabledReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until(defaultElement).enabled();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_single_nonexisting_element_then_isEnabled_throws_exception() {
+    public void whenSingleNonexistingElementThenIsEnabledThrowsException() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until(nonexistentElement).enabled();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_enabled_then_areEnabled_throws_exception() {
+    public void whenElementIsNotEnabledThenAreEnabledThrowsException() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEach(disabledElements).enabled();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_enabled_then_isEnabled_throws_exception() {
+    public void whenElementIsNotEnabledThenIsEnabledThrowsException() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until(disabledElements).enabled();
     }
 
     @Test
-    public void when_element_is_not_enabled_then_isNotEnabled_return_true() {
+    public void whenElementIsNotEnabledThenIsNotEnabledReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until(disabledElements).not().enabled();
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_single_element_is_not_enabled_then_isEnabled_throws_exception() {
+    public void whenSingleElementIsNotEnabledThenIsEnabledThrowsException() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until(disabledElement).enabled();
     }
 
     @Test
-    public void when_single_element_is_not_enabled_then_isNotEnabled_return_true() {
+    public void whenSingleElementIsNotEnabledThenIsNotEnabledReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until(disabledElement).not().enabled();
     }
 
     @Test
-    public void when_element_is_not_displayed_then_isPresent_return_true() {
+    public void whenElementIsNotDisplayedThenIsPresentReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).until(unvisibleElements).present();
     }

@@ -263,7 +263,7 @@ public class EventsTest {
         assertThat(instance).isEqualTo(instance);
     }
 
-    private static class ElementMatcher extends CustomMatcher<FluentWebElement> {
+    private static final class ElementMatcher extends CustomMatcher<FluentWebElement> {
         private final WebElement element;
 
         private ElementMatcher(WebElement element) {
@@ -279,15 +279,15 @@ public class EventsTest {
             if (argument == null && this.element != null) {
                 return false;
             }
-            WebElement element = ((FluentWebElement) argument).getElement();
-            while (element instanceof WrapsElement) {
-                element = ((WrapsElement) element).getWrappedElement();
+            WebElement argElement = ((FluentWebElement) argument).getElement();
+            while (argElement instanceof WrapsElement) {
+                argElement = ((WrapsElement) argElement).getWrappedElement();
             }
-            return element == this.element;
+            return argElement == this.element;
         }
     }
 
-    private static abstract class JavascriptWebDriver implements WebDriver, JavascriptExecutor {
+    private abstract static class JavascriptWebDriver implements WebDriver, JavascriptExecutor {
 
     }
 }

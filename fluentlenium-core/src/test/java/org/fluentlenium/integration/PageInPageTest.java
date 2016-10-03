@@ -21,7 +21,7 @@ public class PageInPageTest extends IntegrationFluentTest {
     private SubSubTestPage subTestPage;
 
     @Test
-    public void pages_should_be_injected() {
+    public void pagesShouldBeInjected() {
         assertThat(testPage).isNotNull();
         assertThat(testPage).isInstanceOf(TestPage.class);
         assertThat(testPage.includedPage).isNotNull();
@@ -51,13 +51,16 @@ class SubTestPage extends TestPage {
 
 class SubTestPageWithCreate extends FluentPage {
 
-    public IncludedPage pageWithCreatePage;
+    private IncludedPage pageWithCreatePage;
 
     public void initFluent(FluentControl control) {
         super.initFluent(control);
         pageWithCreatePage = newInstance(IncludedPage.class);
     }
 
+    public IncludedPage getPageWithCreatePage() {
+        return pageWithCreatePage;
+    }
 }
 
 class IncludedPage extends FluentPage {

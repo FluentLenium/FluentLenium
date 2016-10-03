@@ -21,8 +21,9 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
         if (this.locator instanceof WrapsElements) {
             fireProxyElementSearch();
             List<WebElement> foundElements = ((WrapsElements) this.locator).getWrappedElements();
-            if (foundElements == null)
+            if (foundElements == null) {
                 foundElements = Collections.emptyList();
+            }
             this.result = wrapElements(foundElements);
             fireProxyElementFound(this.result);
         }
@@ -63,8 +64,9 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     @Override
     public List<WebElement> getLocatorResultImpl() {
         List<WebElement> foundElements = getHookLocator().findElements();
-        if (foundElements == null)
+        if (foundElements == null) {
             foundElements = Collections.emptyList();
+        }
         return wrapElements(foundElements);
     }
 

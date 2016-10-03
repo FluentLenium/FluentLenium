@@ -19,8 +19,9 @@ public class ConfigurationDefaultsTest {
 
         for (PropertyDescriptor prop : props) {
             Method readMethod = prop.getReadMethod();
-            if (readMethod.getDeclaringClass() == Object.class)
+            if (readMethod.getDeclaringClass() == Object.class) {
                 continue;
+            }
             switch (prop.getName()) {
             case "driverLifecycle":
                 Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(DriverLifecycle.METHOD);

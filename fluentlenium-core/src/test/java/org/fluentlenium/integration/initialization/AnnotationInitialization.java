@@ -8,21 +8,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class AnnotationInitialization extends FluentTest {
-    public WebDriver webDriver = new HtmlUnitDriver();
+    private WebDriver webDriver = new HtmlUnitDriver();
 
     @Page
-    public TestAboutBlankPage page2;
+    private TestAboutBlankPage page2;
 
     @Page
-    public TestPrivatePage page;
+    private TestPrivatePage page;
 
     @Test
-    public void test_no_exception() {
+    public void testNoException() {
         page2.go();
     }
 
     @Test
-    public void test_no_exception_when_inner_class() {
+    public void testNoExceptionWhenInnerClass() {
         page2.go();
     }
 

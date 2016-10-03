@@ -23,7 +23,11 @@ import java.util.WeakHashMap;
 /**
  * Utility class for reflection.
  */
-public class ReflectionUtils {
+public final class ReflectionUtils {
+    private ReflectionUtils() {
+        // Utility class
+    }
+
     private static final Class<?>[] EMPTY_CLASS_ARRAY = new Class<?>[0];
     private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
@@ -154,8 +158,9 @@ public class ReflectionUtils {
         } catch (NoSuchMethodException e) {
             for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
                 Class<?>[] parameterTypes = constructor.getParameterTypes();
-                if (parameterTypes.length != argsTypes.length)
+                if (parameterTypes.length != argsTypes.length) {
                     continue;
+                }
 
                 boolean match = true;
                 for (int i = 0; i < parameterTypes.length; i++) {
@@ -209,8 +214,9 @@ public class ReflectionUtils {
             try {
                 return getConstructor(cls, argsTypes);
             } catch (NoSuchMethodException e) {
-                if (argsTypes.length == mandatoryCount)
+                if (argsTypes.length == mandatoryCount) {
                     break;
+                }
                 argsTypes = Arrays.copyOf(argsTypes, argsTypes.length - 1);
             }
         }
@@ -293,8 +299,9 @@ public class ReflectionUtils {
             try {
                 return newInstance(cls, args);
             } catch (NoSuchMethodException e) {
-                if (args.length == mandatoryCount)
+                if (args.length == mandatoryCount) {
                     break;
+                }
                 args = Arrays.copyOf(args, args.length - 1);
             }
         }
@@ -302,8 +309,9 @@ public class ReflectionUtils {
     }
 
     public static List<Method> getDeclaredMethodsWithAnnotation(Object object, Class<? extends Annotation> annotation) {
-        if (object == null)
-            return getDeclaredMethodsWithAnnotation((Class<?>) null, annotation);
+        if (object == null) {
+            return getDeclaredMethodsWithAnnotation(null, annotation);
+        }
         return getDeclaredMethodsWithAnnotation(object.getClass(), annotation);
     }
 
@@ -317,8 +325,9 @@ public class ReflectionUtils {
     public static List<Method> getDeclaredMethodsWithAnnotation(Class<?> objectClass, Class<? extends Annotation> annotation) {
         List<Method> methods = new ArrayList<>();
 
-        if (objectClass == null)
+        if (objectClass == null) {
             return methods;
+        }
 
         ClassAnnotationKey cacheKey = new ClassAnnotationKey(objectClass, annotation);
         if (DECLARED_METHODS_CACHE.containsKey(cacheKey)) {
@@ -353,8 +362,9 @@ public class ReflectionUtils {
     public static Object invoke(Method method, Object obj, Object... args)
             throws InvocationTargetException, IllegalAccessException {
         boolean accessible = method.isAccessible();
-        if (accessible)
+        if (accessible) {
             return method.invoke(obj, args);
+        }
         method.setAccessible(true);
         try {
             return method.invoke(obj, args);
@@ -376,8 +386,9 @@ public class ReflectionUtils {
      */
     public static Object get(Field field, Object obj) throws IllegalAccessException {
         boolean accessible = field.isAccessible();
-        if (accessible)
+        if (accessible) {
             return field.get(obj);
+        }
         field.setAccessible(true);
         try {
             return field.get(obj);
@@ -399,8 +410,9 @@ public class ReflectionUtils {
      */
     public static void set(Field field, Object obj, Object value) throws IllegalAccessException {
         boolean accessible = field.isAccessible();
-        if (accessible)
+        if (accessible) {
             field.set(obj, value);
+        }
         field.setAccessible(true);
         try {
             field.set(obj, value);

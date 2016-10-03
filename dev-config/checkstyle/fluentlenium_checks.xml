@@ -22,6 +22,8 @@
 -->
 
 <module name="Checker">
+    <property name="fileExtensions" value="java, js, json, xml, yml"/>
+
     <!--    Ability to turn off checkstyle using comments. Example :
         //CHECKSTYLE.OFF: IllegalCatch - Much more readable than catching 7 exceptions
         catch (Exception e)
@@ -142,7 +144,7 @@
         <module name="NoWhitespaceAfter"/>
         <module name="NoWhitespaceBefore"/>
         <module name="OperatorWrap">
-            <property name="option" value="eol"/>
+            <property name="option" value="nl"/>
         </module>
         <module name="ParenPad"/>
         <module name="TypecastParenPad"/>
@@ -176,10 +178,12 @@
         </module>
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
+        <!--
         <module name="MagicNumber">
             <property name="ignoreHashCodeMethod" value="true"/>
             <property name="ignoreAnnotation" value="true"/>
         </module>
+        -->
         <module name="MissingSwitchDefault"/>
         <module name="IllegalThrows"/>
         <module name="SimplifyBooleanExpression"/>
@@ -192,6 +196,8 @@
         <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType"/>
         <module name="VisibilityModifier">
+            <property name="protectedAllowed" value="true"/>
+            <property name="packageAllowed" value="true"/>
             <property name="ignoreAnnotationCanonicalNames"
                       value="org.jboss.arquillian.test.api.ArquillianResource,org.junit.Rule"/>
             <property name="immutableClassCanonicalNames"

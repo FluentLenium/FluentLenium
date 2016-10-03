@@ -33,7 +33,7 @@ public class AnnotationsEventsTest extends IntegrationFluentTest {
     private int beforeNavigateRefresh;
     private int afterNavigateRefresh;
 
-    private static class Component {
+    private static final class Component {
         private final WebElement element;
 
         private Component(WebElement element) {

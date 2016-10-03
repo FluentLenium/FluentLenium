@@ -54,6 +54,8 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
 
     /**
      * Find the element.
+     *
+     * @return then found element
      */
     public WebElement findElement() {
         if (cachedElement != null && shouldCache) {
@@ -70,6 +72,8 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
 
     /**
      * Find the element list.
+     *
+     * @return list of found elements
      */
     public List<WebElement> findElements() {
         if (cachedElementList != null && shouldCache) {

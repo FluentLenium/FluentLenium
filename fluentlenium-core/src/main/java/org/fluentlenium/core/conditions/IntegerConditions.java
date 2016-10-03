@@ -19,7 +19,7 @@ public interface IntegerConditions extends Conditions<Integer> {
      */
     @Message("is equal to {0}")
     @NotMessage("is not equal to {0}")
-    boolean equalTo(final int value);
+    boolean equalTo(int value);
 
     /**
      * Check that this is less than given value
@@ -29,7 +29,7 @@ public interface IntegerConditions extends Conditions<Integer> {
      */
     @Message("is less than {0}")
     @NotMessage("is not less than {0}")
-    boolean lessThan(final int value);
+    boolean lessThan(int value);
 
     /**
      * Check that this is less than or equal given value
@@ -39,7 +39,7 @@ public interface IntegerConditions extends Conditions<Integer> {
      */
     @Message("is less than or equal to {0}")
     @NotMessage("is not less than or equal to {0}")
-    boolean lessThanOrEqualTo(final int value);
+    boolean lessThanOrEqualTo(int value);
 
     /**
      * Check that this is greater than given value
@@ -49,7 +49,7 @@ public interface IntegerConditions extends Conditions<Integer> {
      */
     @Message("is greater than {0}")
     @NotMessage("is not greater than {0}")
-    boolean greaterThan(final int value);
+    boolean greaterThan(int value);
 
     /**
      * Check that this is greater than or equal given value
@@ -59,6 +59,6 @@ public interface IntegerConditions extends Conditions<Integer> {
      */
     @Message("is greater than or equal to {0}")
     @NotMessage("is not greater than or equal to {0}")
-    boolean greaterThanOrEqualTo(final int value);
+    boolean greaterThanOrEqualTo(int value);
 
 }

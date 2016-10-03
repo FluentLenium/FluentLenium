@@ -29,7 +29,7 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
     }
 
     @Test
-    public void getOrCreateDriver_with_same_test_names_creates_one_instance() {
+    public void getOrCreateDriverWithSameTestNamesCreatesOneInstance() {
         SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.METHOD);
 
         assertThat(container.getAllDrivers()).containsOnly(driver);
@@ -48,7 +48,7 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
     }
 
     @Test
-    public void getOrCreateDriver_with_different_test_names_creates_distinct_instances() {
+    public void getOrCreateDriverWithDifferentTestNamesCreatesDistinctInstances() {
         SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.METHOD);
 
         assertThat(container.getAllDrivers()).containsOnly(driver);
@@ -71,7 +71,7 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
     }
 
     @Test
-    public void getOrCreateDriver_with_different_test_classes_creates_distinct_instances() {
+    public void getOrCreateDriverWithDifferentTestClassesCreatesDistinctInstances() {
         SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.METHOD);
 
         assertThat(container.getAllDrivers()).containsOnly(driver);
@@ -97,7 +97,7 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
     }
 
     @Test
-    public void getOrCreateDriver_with_different_test_names_and_strategy_per_class_creates_one_instance() {
+    public void getOrCreateDriverWithDifferentTestNamesAndStrategyPerClassCreatesOneInstance() {
         SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.CLASS);
 
         assertThat(container.getAllDrivers()).containsOnly(driver);
@@ -116,8 +116,7 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
     }
 
     @Test
-    public void
-    getOrCreateDriver_with_different_test_names_and_different_test_class_and_strategy_per_class_creates_distinct_instance() {
+    public void getOrCreateDriverWithDifferentTestNamesAndDifferentTestClassAndStrategyPerClassCreatesDistinctInstance() {
         SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.CLASS);
 
         assertThat(container.getAllDrivers()).containsOnly(driver);
@@ -143,7 +142,7 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
     }
 
     @Test
-    public void getOrCreateDriver_with_different_test_names_and_different_test_class_and_strategy_once_creates_one_instance() {
+    public void getOrCreateDriverWithDifferentTestNamesAndDifferentTestClassAndStrategyOnceCreatesOneInstance() {
         SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.JVM);
 
         assertThat(container.getAllDrivers()).containsOnly(driver);
@@ -165,7 +164,7 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
     }
 
     @Test
-    public void quitAll_should_quit_all_drivers() {
+    public void quitAllShouldQuitAllDrivers() {
         SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.METHOD);
         SharedWebDriver driver2 = container.getOrCreateDriver(this, String.class, "test", DriverLifecycle.METHOD);
 

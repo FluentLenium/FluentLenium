@@ -65,7 +65,7 @@ public class ProxyListenerTest {
     private static class ElementMatcher extends CustomMatcher<List<WebElement>> {
         private final List<WebElement> expected;
 
-        public ElementMatcher(List<WebElement> expected) {
+        ElementMatcher(List<WebElement> expected) {
             super("matches element");
             this.expected = expected;
         }

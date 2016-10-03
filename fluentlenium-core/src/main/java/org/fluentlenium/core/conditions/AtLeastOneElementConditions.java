@@ -17,14 +17,14 @@ public class AtLeastOneElementConditions extends AbstractFluentListConditions {
 
     @Override
     public AtLeastOneElementConditions not() {
-        AtLeastOneElementConditions negatedConditions = new AtLeastOneElementConditions(elements);
-        negatedConditions.negation = !negation;
+        AtLeastOneElementConditions negatedConditions = new AtLeastOneElementConditions(getElements());
+        negatedConditions.setNegation(!isNegation());
         return negatedConditions;
     }
 
     @Override
     public boolean verify(Predicate<FluentWebElement> predicate, boolean defaultValue) {
-        if (negation) {
+        if (isNegation()) {
             predicate = Predicates.not(predicate);
             defaultValue = !defaultValue;
         }
@@ -35,8 +35,8 @@ public class AtLeastOneElementConditions extends AbstractFluentListConditions {
             final boolean defaultValue) {
         Predicate<FluentDriver> untilPredicate = new com.google.common.base.Predicate<FluentDriver>() {
             public boolean apply(FluentDriver fluent) {
-                if (elements.size() > 0) {
-                    for (FluentWebElement element : elements) {
+                if (getElements().size() > 0) {
+                    for (FluentWebElement element : getElements()) {
                         if (predicate.apply(element)) {
                             return true;
                         }

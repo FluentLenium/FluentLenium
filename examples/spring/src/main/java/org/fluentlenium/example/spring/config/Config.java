@@ -7,6 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
+//CHECKSTYLE.OFF: HideUtilityClassConstructor
 @Configuration
 @ComponentScan(value = { "org.fluentlenium.example.spring" })
 @PropertySources(@PropertySource("config.properties"))
@@ -16,3 +17,4 @@ public class Config {
         return new PropertySourcesPlaceholderConfigurer();
     }
 }
+//CHECKSTYLE.ON: HideUtilityClassConstructor

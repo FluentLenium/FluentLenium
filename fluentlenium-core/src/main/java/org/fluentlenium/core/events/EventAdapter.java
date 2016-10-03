@@ -12,7 +12,7 @@ class EventAdapter implements WebDriverEventListener {
     private final EventListener listener;
     private final ComponentInstantiator instantiator;
 
-    public EventAdapter(final EventListener listener, ComponentInstantiator instantiator) {
+    EventAdapter(final EventListener listener, ComponentInstantiator instantiator) {
         this.listener = listener;
         this.instantiator = instantiator;
     }

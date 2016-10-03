@@ -352,7 +352,7 @@ public class FluentListImplTest {
     }
 
     private static class Component extends FluentWebElement {
-        public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
     }

@@ -4,5 +4,5 @@ import org.openqa.selenium.WebDriver;
 
 public interface NavigateToListener {
 
-    void on(final String url, final WebDriver driver);
+    void on(String url, WebDriver driver);
 }

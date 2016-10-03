@@ -8,7 +8,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-public class ResourceUtils {
+/**
+ * Utility class to access classpath resource
+ */
+public final class ResourceUtils {
+    private ResourceUtils() {
+        // Utility class
+    }
+
     public static File getResourceAsFile(final String resourcePath) throws IOException {
         InputStream resourceStream = ClassLoader.getSystemClassLoader().getResourceAsStream(resourcePath);
         if (resourceStream == null) {

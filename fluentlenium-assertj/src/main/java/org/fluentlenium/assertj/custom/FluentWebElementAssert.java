@@ -23,7 +23,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     /**
      * check if the element is enabled
      *
-     * @return
+     * @return {@code this} assertion object.
      */
     public FluentWebElementAssert isEnabled() {
         if (!actual.enabled()) {
@@ -35,7 +35,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     /**
      * check if the element is not enabled
      *
-     * @return
+     * @return {@code this} assertion object.
      */
     public FluentWebElementAssert isNotEnabled() {
         if (actual.enabled()) {
@@ -47,7 +47,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     /**
      * check if the element is displayed
      *
-     * @return
+     * @return {@code this} assertion object.
      */
     public FluentWebElementAssert isDisplayed() {
         if (!actual.displayed()) {
@@ -60,7 +60,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     /**
      * check if the element is not displayed
      *
-     * @return
+     * @return {@code this} assertion object.
      */
     public FluentWebElementAssert isNotDisplayed() {
         if (actual.displayed()) {
@@ -80,7 +80,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     /**
      * check if the element is selected
      *
-     * @return
+     * @return {@code this} assertion object.
      */
     public FluentWebElementAssert isSelected() {
         if (!actual.selected()) {
@@ -92,7 +92,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     /**
      * check if the element is not selected
      *
-     * @return
+     * @return {@code this} assertion object.
      */
     public FluentWebElementAssert isNotSelected() {
         if (actual.selected()) {
@@ -113,7 +113,8 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     /**
      * check if the element contains the text
      *
-     * @return
+     * @param textToFind text to find
+     * @return {@code this} assertion object.
      */
     public FluentWebElementAssert hasText(String textToFind) {
         if (!actual.text().contains(textToFind)) {
@@ -126,7 +127,8 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     /**
      * check if the element matches the given regex
      *
-     * @return
+     * @param regexToBeMatched regex to be matched
+     * @return {@code this} assertion object.
      */
     public FluentWebElementAssert hasTextMatching(String regexToBeMatched) {
         if (!actual.text().matches(regexToBeMatched)) {
@@ -141,7 +143,8 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     /**
      * check if the element does not contain the text
      *
-     * @return
+     * @param textToFind text to find
+     * @return {@code this} assertion object.
      */
     public FluentWebElementAssert hasNotText(String textToFind) {
         if (actual.text().contains(textToFind)) {
@@ -162,12 +165,12 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     /**
      * check if the element has the given id
      *
-     * @param id to check
-     * @return
+     * @param idToFind id to find
+     * @return {@code this} assertion object.
      */
-    public FluentWebElementAssert hasId(String id) {
-        if (!actual.id().equals(id)) {
-            failWithMessage("The element does not have the id: " + id + " . Actual id found : " + actual.id());
+    public FluentWebElementAssert hasId(String idToFind) {
+        if (!actual.id().equals(idToFind)) {
+            failWithMessage("The element does not have the id: " + idToFind + " . Actual id found : " + actual.id());
         }
         return this;
     }
@@ -175,8 +178,8 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     /**
      * check if the element has the class
      *
-     * @param classToFind
-     * @return
+     * @param classToFind class to find
+     * @return {@code this} assertion object.
      */
     public FluentWebElementAssert hasClass(String classToFind) {
         if (!getClasses().contains(classToFind)) {

@@ -50,8 +50,8 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
     protected Map<String, T> factories = new LinkedHashMap<>();
 
     public synchronized T getDefault() {
-        List<T> factories = new ArrayList<>(this.factories.values());
-        Collections.sort(factories, new Comparator<T>() {
+        List<T> factoriesList = new ArrayList<>(this.factories.values());
+        Collections.sort(factoriesList, new Comparator<T>() {
             @Override
             public int compare(T o1, T o2) {
                 FactoryPriority annotation1 = o1.getClass().getAnnotation(FactoryPriority.class);
@@ -64,7 +64,7 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
             }
         });
         List<T> filteredFactories = new ArrayList<>();
-        for (T factory : factories) {
+        for (T factory : factoriesList) {
             if (factory instanceof ReflectiveFactory) {
                 if (((ReflectiveFactory) factory).isAvailable()) {
                     filteredFactories.add(factory);

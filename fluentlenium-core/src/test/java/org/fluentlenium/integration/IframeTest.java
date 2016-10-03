@@ -13,7 +13,7 @@ public class IframeTest extends IntegrationFluentTest {
     private IFramePage iFramePage;
 
     @Test
-    public void should_get_element_into_a_frame_with_native_instructions() {
+    public void shouldGetElementIntoAFrameWithNativeInstructions() {
         // Given
         // When
         iFramePage.go();
@@ -28,7 +28,7 @@ public class IframeTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void should_get_element_into_a_frame_with_Fluent_switchTo() {
+    public void shouldGetElementIntoAFrameWithFluentSwitchTo() {
         // Given
         // When
         iFramePage.go();
@@ -43,7 +43,7 @@ public class IframeTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void should_get_element_into_a_frame_with_Fluent_switchTo_bis() {
+    public void shouldGetElementIntoAFrameWithFluentSwitchToBis() {
         // Given
         // When
         iFramePage.go();
@@ -58,7 +58,7 @@ public class IframeTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void should_get_element_into_a_frame_with_Fluent_switchToDefault() {
+    public void shouldGetElementIntoAFrameWithFluentSwitchToDefault() {
         // Given
         // When
         iFramePage.go();

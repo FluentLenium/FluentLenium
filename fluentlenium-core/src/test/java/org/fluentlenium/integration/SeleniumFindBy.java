@@ -22,7 +22,7 @@ public class SeleniumFindBy extends IntegrationFluentTest {
     @Page
     PageIndex page;
 
-    public void should_findBy_retrieve_element() {
+    public void shouldFindByRetrieveElement() {
         page.go();
         page.isAt();
 
@@ -30,7 +30,7 @@ public class SeleniumFindBy extends IntegrationFluentTest {
     }
 
     @Test
-    public void should_findBy_retrieve_list() {
+    public void shouldFindByRetrieveList() {
         page.go();
         page.isAt();
         Assertions.assertThat(page.smalls).hasSize(3);
@@ -44,7 +44,7 @@ public class SeleniumFindBy extends IntegrationFluentTest {
     }
 
     @Test
-    public void should_findAll_findBy_retrieve_list() {
+    public void shouldFindAllFindByRetrieveList() {
         page.go();
         page.isAt();
         Assertions.assertThat(page.findAllElements).hasSize(4);
@@ -58,7 +58,7 @@ public class SeleniumFindBy extends IntegrationFluentTest {
     }
 
     @Test
-    public void should_findBy_retrieved_object_work_for_selenium_actions() {
+    public void shouldFindByRetrievedObjectWorkForSeleniumActions() {
         page.go();
         page.isAt();
         assertThat(page.getText()).isEqualTo("This text should change on MouseOver");

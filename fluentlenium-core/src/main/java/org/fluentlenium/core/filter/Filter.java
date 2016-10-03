@@ -57,8 +57,9 @@ public class Filter {
 
     public String toString() {
         String matcherAttribute = matcher != null ? matcher.getMatcherSymbol() : "";
-        if (matcherAttribute == null)
+        if (matcherAttribute == null) {
             matcherAttribute = "";
+        }
         return "[" + attribut.toLowerCase() + matcherAttribute + "=\"" + matcher.getValue() + "\"]";
     }
 

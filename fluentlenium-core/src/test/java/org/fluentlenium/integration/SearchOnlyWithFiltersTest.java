@@ -58,14 +58,14 @@ public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void check$Works() {
+    public void checkDollarWorks() {
         goTo(DEFAULT_URL);
         FluentList list = $(withName("name"));
         assertThat(list.ids()).containsOnly("id");
     }
 
     @Test
-    public void check$AndIndexWorks() {
+    public void checkDollarAndIndexWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement element = $(withClass("small")).index(1);
         assertThat(element.id()).isEqualTo("id2");

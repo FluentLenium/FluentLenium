@@ -4,7 +4,11 @@ import org.fluentlenium.utils.ReflectionUtils;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class ConfigurationFactoryProvider {
+public final class ConfigurationFactoryProvider {
+    private ConfigurationFactoryProvider() {
+        // Utility class
+    }
+
     private static ConfigurationFactory bootstrapFactory = new DefaultConfigurationFactory();
 
     public static ConfigurationFactory getConfigurationFactory(Class<?> container) {

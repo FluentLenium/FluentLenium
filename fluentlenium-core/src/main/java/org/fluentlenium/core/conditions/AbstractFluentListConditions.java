@@ -10,9 +10,9 @@ import java.util.List;
  * Abstract class conditions on list of elements.
  */
 public abstract class AbstractFluentListConditions implements FluentListConditions {
-    protected boolean negation = false;
+    private boolean negation = false;
 
-    protected final List<? extends FluentWebElement> elements;
+    private final List<? extends FluentWebElement> elements;
 
     protected AbstractFluentListConditions(List<? extends FluentWebElement> elements) {
         this.elements = elements;
@@ -24,6 +24,18 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
             return elements.size() != size;
         }
         return elements.size() == size;
+    }
+
+    protected boolean isNegation() {
+        return negation;
+    }
+
+    public void setNegation(boolean negation) {
+        this.negation = negation;
+    }
+
+    protected List<? extends FluentWebElement> getElements() {
+        return elements;
     }
 
     @Override

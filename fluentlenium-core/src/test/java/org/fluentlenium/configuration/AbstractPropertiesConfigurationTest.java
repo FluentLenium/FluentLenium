@@ -25,8 +25,9 @@ public abstract class AbstractPropertiesConfigurationTest<T extends AbstractProp
     protected abstract void mockProperty(String propertyName, Object propertyValue);
 
     protected String valueToString(Object propertyValue) {
-        if (propertyValue == null)
+        if (propertyValue == null) {
             return null;
+        }
         if (propertyValue instanceof Class) {
             return ((Class) propertyValue).getName();
         }

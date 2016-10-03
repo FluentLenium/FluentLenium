@@ -8,5 +8,5 @@ public interface NavigateAllListener {
         BACK, FORWARD, REFRESH
     }
 
-    void on(final String url, final WebDriver driver, final Direction direction);
+    void on(String url, WebDriver driver, Direction direction);
 }

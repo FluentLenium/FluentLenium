@@ -61,12 +61,12 @@ public class ConfigurationFactoryProviderTest {
         }
     }
 
-    private static class PrivateConfigurationDefaults extends ConfigurationDefaults {
+    private static final class PrivateConfigurationDefaults extends ConfigurationDefaults {
         private PrivateConfigurationDefaults() {
         }
     }
 
-    public static class FailingConfigurationDefaults extends ConfigurationDefaults {
+    public static final class FailingConfigurationDefaults extends ConfigurationDefaults {
         private FailingConfigurationDefaults() {
             throw new IllegalStateException("This must FAIL!");
         }

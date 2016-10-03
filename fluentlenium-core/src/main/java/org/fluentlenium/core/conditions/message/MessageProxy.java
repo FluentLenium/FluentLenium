@@ -7,7 +7,11 @@ import java.util.List;
  * Provides message proxy implementations of interface that records calls to build message from methods annotated with
  * {@link Message}, {@link NotMessage} and {@link MessageContext}.
  */
-public class MessageProxy {
+public final class MessageProxy {
+    private MessageProxy() {
+        // Utility class
+    }
+
     /**
      * Wrap an object into a message proxy supporting {@link Message}, {@link NotMessage} and {@link MessageContext}.
      *
@@ -18,7 +22,7 @@ public class MessageProxy {
      * @return a proxy generating message from annotations.
      */
     public static <T> T wrap(Class<T> messageClass, Object instance, String context) {
-        return (T) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] { messageClass },
+        return (T) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {messageClass},
                 new MessageBuilderInvocationHandler(context, instance));
     }
 
@@ -32,7 +36,7 @@ public class MessageProxy {
      * @return a proxy generating message from annotations.
      */
     protected static <T> T wrap(Class<T> messageClass, Object instance, List<MessageBuilderCall> calls) {
-        return (T) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] { messageClass },
+        return (T) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {messageClass},
                 new MessageBuilderInvocationHandler(calls));
     }
 
@@ -45,7 +49,7 @@ public class MessageProxy {
      * @return a proxy generating message from annotations.
      */
     public static <T> T builder(Class<T> messageClass, String context) {
-        return (T) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] { messageClass },
+        return (T) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {messageClass},
                 new MessageBuilderInvocationHandler(context));
     }
 
@@ -58,20 +62,21 @@ public class MessageProxy {
      * @return a proxy generating message from annotations.
      */
     protected static <T> T builder(Class<T> messageClass, List<MessageBuilderCall> calls) {
-        return (T) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] { messageClass },
+        return (T) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {messageClass},
                 new MessageBuilderInvocationHandler(calls));
     }
 
     /**
      * Build the message from a proxy
      *
-     * @param proxy
+     * @param proxy message builder proxy
      * @return generated message.
      */
     public static String message(Object proxy) {
         MessageBuilderInvocationHandler invocationHandler = (MessageBuilderInvocationHandler) Proxy.getInvocationHandler(proxy);
-        if (invocationHandler == null)
+        if (invocationHandler == null) {
             return null;
+        }
         return invocationHandler.buildMessage();
     }
 }

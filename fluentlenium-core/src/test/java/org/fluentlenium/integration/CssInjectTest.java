@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CssInjectTest extends IntegrationFluentTest {
-    public FluentWebElement location;
+    private FluentWebElement location;
 
     @Test
     public void injectDisplayNoneShouldMakeElementNotPresent() {

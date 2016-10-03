@@ -340,7 +340,7 @@ public class FluentWebElementTest {
     private static class Component {
         private WebElement element;
 
-        public Component(WebElement element) {
+        Component(WebElement element) {
             this.element = element;
         }
 
@@ -357,11 +357,11 @@ public class FluentWebElementTest {
     private static class InvalidComponent {
     }
 
-    private static abstract class InputDevicesDriver implements WebDriver, HasInputDevices {
+    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices {
 
     }
 
-    private static abstract class LocatableElement implements WebElement, Locatable {
+    private abstract static class LocatableElement implements WebElement, Locatable {
 
     }
 

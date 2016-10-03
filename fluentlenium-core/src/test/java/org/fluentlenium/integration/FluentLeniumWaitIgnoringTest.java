@@ -30,7 +30,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void test_ignoreAll_positive() {
+    public void testIgnoreAllPositive() {
 
         try {
             Collection<Class<? extends Throwable>> exceptions = new ArrayList<>();
@@ -51,7 +51,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     }
 
     @Test(expected = CustomException3.class)
-    public void test_ignoreAll_negative() {
+    public void testIgnoreAllNegative() {
 
         try {
             Collection<Class<? extends Throwable>> exceptions = new ArrayList<>();
@@ -72,7 +72,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void test_ignoring_1_positive() {
+    public void testIgnoring1Positive() {
 
         try {
             await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class).ignoring(CustomException2.class)
@@ -90,7 +90,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     }
 
     @Test(expected = CustomException3.class)
-    public void test_ignoring_1_negative() {
+    public void testIgnoring1Negative() {
 
         try {
             await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class).ignoring(CustomException2.class)
@@ -108,7 +108,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void test_ignoring_2_positive() {
+    public void testIgnoring2Positive() {
 
         try {
             await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class, CustomException2.class)
@@ -126,7 +126,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     }
 
     @Test(expected = CustomException3.class)
-    public void test_ignoring_2_negative() {
+    public void testIgnoring2Negative() {
 
         try {
             await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class, CustomException2.class)

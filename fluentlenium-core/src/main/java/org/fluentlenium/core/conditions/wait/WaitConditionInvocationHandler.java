@@ -65,8 +65,9 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      * @return conditions with the negation applied.
      */
     protected C applyNegation(C conditions, boolean ignoreNegation) {
-        if (!ignoreNegation && negation)
+        if (!ignoreNegation && negation) {
             return (C) conditions.not();
+        }
         return conditions;
     }
 

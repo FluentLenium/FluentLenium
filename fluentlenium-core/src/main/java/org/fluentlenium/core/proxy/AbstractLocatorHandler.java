@@ -27,6 +27,9 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     private static final Method EQUALS = getMethod(Object.class, "equals", Object.class);
     private static final Method HASH_CODE = getMethod(Object.class, "hashCode");
 
+    private static final int MAX_RETRY = 5;
+    private static final int HASH_CODE_SEED = 2048;
+
     protected HookChainBuilder hookChainBuilder = null;
     protected List<HookDefinition<?>> hookDefinitions = null;
 
@@ -78,7 +81,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         this.proxy = proxy;
     }
 
-    abstract public T getLocatorResultImpl();
+    public abstract T getLocatorResultImpl();
 
     public synchronized T getLocatorResult() {
         if (result != null) {
@@ -143,8 +146,9 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     @Override
     public WebElement getHookElement() {
-        if (getElement() == null)
+        if (getElement() == null) {
             return null;
+        }
         if (hooks != null && hooks.size() > 0) {
             return hooks.get(hooks.size() - 1);
         }
@@ -196,7 +200,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
             }
 
             if (HASH_CODE.equals(method)) {
-                return 2048 + locator.hashCode();
+                return HASH_CODE_SEED + locator.hashCode();
             }
         }
 
@@ -211,7 +215,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         getLocatorResult();
 
         Throwable lastThrowable = null;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < MAX_RETRY; i++) {
             try {
                 return invoke(method, args);
             } catch (StaleElementReferenceException e) {
@@ -224,6 +228,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         throw lastThrowable;
     }
 
+    //CHECKSTYLE.OFF: IllegalThrows
     private Object invoke(Method method, Object[] args) throws Throwable {
         Object returnValue;
         try {
@@ -234,13 +239,16 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         }
         return returnValue;
     }
+    //CHECKSTYLE.ON: IllegalThrows
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (o == null || getClass() != o.getClass())
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
+        }
 
         AbstractLocatorHandler that = (AbstractLocatorHandler) o;
 

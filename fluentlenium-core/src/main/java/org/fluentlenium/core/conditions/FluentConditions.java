@@ -191,7 +191,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      */
     @Message("has attribute \"{0}\"=\"{1}\"")
     @NotMessage("does not have attribute \"{0}\"=\"{1}\"")
-    boolean attribute(final String name, final String value);
+    boolean attribute(String name, String value);
 
     /**
      * Check conditions on the given attribute the attribute has the given value.
@@ -200,7 +200,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * @return An object to configure text attribute value conditions.
      */
     @MessageContext("attribute(\"{0}\"")
-    StringConditions attribute(final String name);
+    StringConditions attribute(String name);
 
     /**
      * check conditions on rectangle of this element
