@@ -61,6 +61,11 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
                     if (elements.size() == 0) throw new NoSuchElementException("No such element");
                     return elements;
                 }
+
+                @Override
+                public String toString() {
+                    return WaitHook.super.toString();
+                }
             });
         } catch (TimeoutException e) {
             throw new NoSuchElementException("No such element", e);
@@ -77,6 +82,11 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
                     WebElement element = WaitHook.super.findElement();
                     if (element == null) throw new NoSuchElementException("No such element");
                     return element;
+                }
+
+                @Override
+                public String toString() {
+                    return WaitHook.super.toString();
                 }
             });
         } catch (TimeoutException e) {
