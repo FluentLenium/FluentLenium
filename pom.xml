@@ -245,6 +245,8 @@
                         </execution>
                     </executions>
                     <configuration>
+                        <useUnlimitedThreads>true</useUnlimitedThreads>
+                        <parallel>methods</parallel>
                         <includes>
                             <include>**/integration/**/*</include>
                         </includes>
