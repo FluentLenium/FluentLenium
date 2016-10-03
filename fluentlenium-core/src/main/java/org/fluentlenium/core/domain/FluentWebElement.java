@@ -58,12 +58,12 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
     public FluentWebElement(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
         super(webElement, fluentControl, instantiator);
 
-        this.hookChainBuilder = new DefaultHookChainBuilder(this.fluentControl, this.instantiator);
+        this.hookChainBuilder = new DefaultHookChainBuilder(this.control, this.instantiator);
 
         this.search = new Search(webElement, this.instantiator);
         this.axes = new Axes(webElement, this.instantiator, this.hookChainBuilder);
-        this.mouseActions = new MouseElementActions(this.fluentControl.getDriver(), webElement);
-        this.keyboardActions = new KeyboardElementActions(this.fluentControl.getDriver(), webElement);
+        this.mouseActions = new MouseElementActions(this.control.getDriver(), webElement);
+        this.keyboardActions = new KeyboardElementActions(this.control.getDriver(), webElement);
         this.conditions = new WebElementConditions(this);
         this.label = new FluentLabelImpl<>(this, new Supplier<String>() {
             @Override
@@ -75,7 +75,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
 
     @Delegate(excludes = {InputControl.class, AwaitControl.class, SearchControl.class})
     private FluentControl getFluentControl() {
-        return fluentControl;
+        return control;
     }
 
     /**
@@ -124,7 +124,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
     }
 
     public FluentWaitElement await() {
-        return new FluentWaitElement(fluentControl.await(), this);
+        return new FluentWaitElement(control.await(), this);
     }
 
     /**
@@ -281,7 +281,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      */
 
     public boolean clickable() {
-        return ExpectedConditions.elementToBeClickable(getElement()).apply(fluentControl.getDriver()) != null;
+        return ExpectedConditions.elementToBeClickable(getElement()).apply(control.getDriver()) != null;
     }
 
     /**
@@ -290,7 +290,7 @@ public class FluentWebElement extends Component implements WrapsElement, FluentA
      * @return false is the element is still attached to the DOM, true otherwise.
      */
     public boolean stale() {
-        return ExpectedConditions.stalenessOf(getElement()).apply(fluentControl.getDriver());
+        return ExpectedConditions.stalenessOf(getElement()).apply(control.getDriver());
     }
 
     /**
