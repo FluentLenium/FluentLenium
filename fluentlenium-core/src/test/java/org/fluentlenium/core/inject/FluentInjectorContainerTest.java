@@ -28,7 +28,7 @@ public class FluentInjectorContainerTest {
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
 
-        injector = new FluentInjector(fluentAdapter, new ComponentsManager(fluentAdapter), new DefaultContainerInstanciator(fluentAdapter));
+        injector = new FluentInjector(fluentAdapter, null, new ComponentsManager(fluentAdapter), new DefaultContainerInstanciator(fluentAdapter));
     }
 
     public static class ChildContainer {

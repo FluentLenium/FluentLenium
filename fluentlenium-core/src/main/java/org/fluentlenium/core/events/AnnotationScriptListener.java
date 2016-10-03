@@ -7,15 +7,22 @@ import org.openqa.selenium.WebDriver;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-class AnnotationScriptListener implements ScriptListener {
+class AnnotationScriptListener implements ScriptListener, ListenerPriority {
     private final Method method;
     private final Object container;
     private final String annotationName;
+    private final int priority;
 
-    AnnotationScriptListener(Method method, Object container, String annotationName) {
+    AnnotationScriptListener(Method method, Object container, String annotationName, int priority) {
         this.method = method;
         this.container = container;
         this.annotationName = annotationName;
+        this.priority = priority;
+    }
+
+    @Override
+    public int getPriority() {
+        return priority;
     }
 
     protected Function<Class<?>, Object> getArgsFunction(final String script, final WebDriver driver) {
