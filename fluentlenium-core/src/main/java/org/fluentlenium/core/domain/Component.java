@@ -8,12 +8,12 @@ import org.openqa.selenium.WebElement;
 public class Component {
     @NoInject
     protected WebElement webElement;
-    protected FluentControl fluentControl;
+    protected FluentControl control;
     protected ComponentInstantiator instantiator;
 
-    public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+    public Component(WebElement webElement, FluentControl control, ComponentInstantiator instantiator) {
         this.webElement = webElement;
-        this.fluentControl = fluentControl;
+        this.control = control;
         this.instantiator = instantiator;
     }
 }

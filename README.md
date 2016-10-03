@@ -897,8 +897,8 @@ constructor matching parent class, and generic type should be a hook option clas
 
 ```
 public class ExampleHook extends BaseHook<ExampleHookOptions> {
-    public ExampleHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, ExampleHookOptions options) {
-        super(fluentControl, instantiator, elementSupplier, locatorSupplier, options);
+    public ExampleHook(FluentControl control, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, ExampleHookOptions options) {
+        super(control, instantiator, elementSupplier, locatorSupplier, options);
     }
 }
 

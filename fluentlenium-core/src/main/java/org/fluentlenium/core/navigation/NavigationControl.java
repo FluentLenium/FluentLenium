@@ -5,7 +5,6 @@ import org.fluentlenium.core.action.WindowAction;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.Cookie;
-import org.openqa.selenium.WebDriver;
 
 import java.util.Set;
 
@@ -96,11 +95,4 @@ public interface NavigationControl {
      * @return current URL
      */
     String url();
-
-    /**
-     * Return the raw Selenium WebDriver
-     *
-     * @return selenium webdriver
-     */
-    WebDriver getDriver();
 }
