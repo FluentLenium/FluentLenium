@@ -126,10 +126,12 @@ public class FluentDriver implements FluentControl {
             this.events = new EventsRegistry(this);
             this.eventsComponentsAnnotations = new AnnotationsComponentListener(componentsManager);
             this.events.register(this.eventsComponentsAnnotations);
+        } else {
+            this.events = null;
         }
         this.mouseActions = new MouseActions(driver);
         this.keyboardActions = new KeyboardActions(driver);
-        this.fluentInjector = new FluentInjector(adapter, componentsManager, new DefaultContainerInstanciator(this));
+        this.fluentInjector = new FluentInjector(adapter, events, componentsManager, new DefaultContainerInstanciator(this));
         this.cssControl = new CssControlImpl(adapter, adapter);
         this.windowAction = new WindowAction(adapter, driver);
         return this;

@@ -12,6 +12,7 @@ import org.fluentlenium.core.domain.ComponentList;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.ContainerAnnotationsEventsRegistry;
+import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.Hook;
@@ -22,7 +23,6 @@ import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.lang.annotation.Annotation;
@@ -49,9 +49,11 @@ public class FluentInjector implements FluentInjectControl {
     private final ComponentsManager componentsManager;
     private final ContainerInstanciator containerInstanciator;
     private final DefaultHookChainBuilder hookChainBuilder;
+    private final EventsRegistry eventsRegistry;
 
-    public FluentInjector(FluentControl fluentControl, ComponentsManager componentsManager, ContainerInstanciator instanciator) {
+    public FluentInjector(FluentControl fluentControl, EventsRegistry eventsRegistry, ComponentsManager componentsManager, ContainerInstanciator instanciator) {
         this.fluentControl = fluentControl;
+        this.eventsRegistry = eventsRegistry;
         this.componentsManager = componentsManager;
         this.containerInstanciator = instanciator;
         this.hookChainBuilder = new DefaultHookChainBuilder(fluentControl, componentsManager.getInstantiator());
@@ -148,8 +150,8 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private void initEventAnnotations(final Object container) {
-        if (fluentControl.getDriver() instanceof EventFiringWebDriver) {
-            eventsContainerSupport.put(container, new ContainerAnnotationsEventsRegistry(fluentControl, container));
+        if (eventsRegistry != null) {
+            eventsContainerSupport.put(container, new ContainerAnnotationsEventsRegistry(eventsRegistry, container));
         }
     }
 

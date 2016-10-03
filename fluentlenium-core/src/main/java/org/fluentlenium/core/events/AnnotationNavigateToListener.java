@@ -7,14 +7,13 @@ import org.openqa.selenium.WebDriver;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-class AnnotationNavigateToListener implements NavigateToListener {
+class AnnotationNavigateToListener extends AbstractAnnotationListener implements NavigateToListener {
     private final Method method;
-    private final Object container;
     private final String annotationName;
 
-    AnnotationNavigateToListener(Method method, Object container, String annotationName) {
+    AnnotationNavigateToListener(Method method, Object container, String annotationName, int priority) {
+        super(container, priority);
         this.method = method;
-        this.container = container;
         this.annotationName = annotationName;
     }
 
@@ -40,7 +39,7 @@ class AnnotationNavigateToListener implements NavigateToListener {
         Object[] args = ReflectionUtils.toArgs(getArgsFunction(url, driver), parameterTypes);
 
         try {
-            ReflectionUtils.invoke(method, container, args);
+            ReflectionUtils.invoke(method, getContainer(), args);
         } catch (IllegalAccessException e) {
             throw new EventAnnotationsException("An error has occured in " + annotationName + " " + method, e);
         } catch (InvocationTargetException e) {
