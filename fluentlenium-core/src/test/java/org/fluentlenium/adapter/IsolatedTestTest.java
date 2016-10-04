@@ -47,7 +47,7 @@ public class IsolatedTestTest {
 
         @Override
         public WebDriver newWebDriver() {
-            WebDriver webDriver = webDriverFactory.get();
+            final WebDriver webDriver = webDriverFactory.get();
 
             when(webDriver.findElement(new ByIdOrName("element"))).thenReturn(IsolatedTestTest.this.element);
             when(webDriver.findElement(new ByIdOrName("pageElement"))).thenReturn(IsolatedTestTest.this.pageElement);
@@ -65,7 +65,7 @@ public class IsolatedTestTest {
 
     @Test
     public void testIsolated() {
-        IsolatedTestSpy spy = spy(new IsolatedTestSpy());
+        final IsolatedTestSpy spy = spy(new IsolatedTestSpy());
         spy.testSomething();
 
         verify(spy.getDriver(), never()).quit();

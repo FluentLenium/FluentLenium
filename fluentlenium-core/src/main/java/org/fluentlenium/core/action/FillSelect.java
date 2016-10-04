@@ -7,21 +7,21 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.Iterator;
 
-public class FillSelect<E extends FluentWebElement> extends AbstractFill<E> {
-    public FillSelect(FluentList<E> list) {
+public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
+    public FillSelect(final FluentList<E> list) {
         super(list);
     }
 
-    public FillSelect(E element) {
+    public FillSelect(final E element) {
         super(element);
     }
 
     @Override
     protected FluentList<E> findElements() {
-        FluentList<E> elements = super.findElements();
-        Iterator<E> iterator = elements.iterator();
+        final FluentList<E> elements = super.findElements();
+        final Iterator<E> iterator = elements.iterator();
         while (iterator.hasNext()) {
-            FluentWebElement next = iterator.next();
+            final FluentWebElement next = iterator.next();
             if (next.tagName() == null || !next.tagName().equalsIgnoreCase("select")) {
                 iterator.remove();
             }
@@ -35,15 +35,15 @@ public class FillSelect<E extends FluentWebElement> extends AbstractFill<E> {
      * @param value the select matching string
      * @return fill select constructor
      */
-    public FillSelect withValue(String value) {
-        FluentList<E> elements = findElements();
+    public FillSelect withValue(final String value) {
+        final FluentList<E> elements = findElements();
 
         if (elements.size() == 0) {
             throw new NoSuchElementException("No select element found");
         }
 
-        for (FluentWebElement element : elements) {
-            Select select = new Select(element.getElement());
+        for (final FluentWebElement element : elements) {
+            final Select select = new Select(element.getElement());
             select.selectByValue(value);
         }
         return this;
@@ -55,14 +55,14 @@ public class FillSelect<E extends FluentWebElement> extends AbstractFill<E> {
      * @param index the select index value
      * @return fill select constructor
      */
-    public FillSelect withIndex(int index) {
+    public FillSelect withIndex(final int index) {
         boolean noSuchElement = true;
-        for (E element : findElements()) {
-            Select select = new Select(element.getElement());
+        for (final E element : findElements()) {
+            final Select select = new Select(element.getElement());
             try {
                 select.selectByIndex(index);
                 noSuchElement = false;
-            } catch (NoSuchElementException e) {
+            } catch (final NoSuchElementException e) { // NOPMD EmptyCatchBlock
             }
         }
 
@@ -79,15 +79,15 @@ public class FillSelect<E extends FluentWebElement> extends AbstractFill<E> {
      * @param text the select string part
      * @return fill select constructor
      */
-    public FillSelect withText(String text) {
-        FluentList<E> elements = findElements();
+    public FillSelect withText(final String text) {
+        final FluentList<E> elements = findElements();
 
         if (elements.size() == 0) {
             throw new NoSuchElementException("No select element found");
         }
 
-        for (FluentWebElement element : elements) {
-            Select select = new Select(element.getElement());
+        for (final FluentWebElement element : elements) {
+            final Select select = new Select(element.getElement());
             select.selectByVisibleText(text);
         }
 

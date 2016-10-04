@@ -44,7 +44,8 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
         assertThat(conditions.present()).isTrue();
         assertThat(conditions.not().present()).isFalse();
 
-        AtLeastOneElementConditions emptyConditions = new AtLeastOneElementConditions(Collections.<FluentWebElement>emptyList());
+        final AtLeastOneElementConditions emptyConditions = new AtLeastOneElementConditions(
+                Collections.<FluentWebElement>emptyList());
 
         assertThat(emptyConditions.present()).isFalse();
         assertThat(emptyConditions.not().present()).isTrue();
@@ -215,7 +216,7 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
         assertThat(conditions.not().size(2)).isTrue();
         assertThat(conditions.not().size().equalTo(2)).isTrue();
 
-        AtLeastOneElementConditions conditions2 = new AtLeastOneElementConditions(
+        final AtLeastOneElementConditions conditions2 = new AtLeastOneElementConditions(
                 Arrays.asList(fluentWebElement1, fluentWebElement3));
 
         assertThat(conditions2.size(3)).isFalse();
@@ -226,7 +227,7 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
 
     @Test
     public void defaultValueWhenEmpty() {
-        AtLeastOneElementConditions emptyConditions = new AtLeastOneElementConditions(Arrays.<FluentWebElement>asList());
+        final AtLeastOneElementConditions emptyConditions = new AtLeastOneElementConditions(Arrays.<FluentWebElement>asList());
 
         assertThat(emptyConditions.enabled()).isFalse();
     }

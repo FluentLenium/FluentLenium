@@ -14,17 +14,18 @@ import java.util.Map;
 public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends ReflectiveFactory> {
     protected final Class<T> factoryType;
     protected final Class<R> reflectiveFactoryType;
+    protected Map<String, T> factories = new LinkedHashMap<>();
 
-    public AbstractFactoryRegistryImpl(Class<T> factoryType, Class<R> reflectiveFactoryType) {
+    public AbstractFactoryRegistryImpl(final Class<T> factoryType, final Class<R> reflectiveFactoryType) {
         this.factoryType = factoryType;
         this.reflectiveFactoryType = reflectiveFactoryType;
-        Iterable<Class<? extends T>> factoryClasses = ClassIndex.getSubclasses(factoryType);
+        final Iterable<Class<? extends T>> factoryClasses = ClassIndex.getSubclasses(factoryType);
         L:
-        for (Class<? extends T> factoryClass : factoryClasses) {
+        for (final Class<? extends T> factoryClass : factoryClasses) {
             if (factoryClass.isAnnotationPresent(IndexIgnore.class)) {
                 continue;
             }
-            for (Class<?> iface : factoryClass.getInterfaces()) {
+            for (final Class<?> iface : factoryClass.getInterfaces()) {
                 if (iface.isAnnotationPresent(IndexIgnore.class)) {
                     continue L;
                 }
@@ -35,36 +36,37 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
             if (!Modifier.isPublic(factoryClass.getModifiers())) {
                 continue;
             }
-            T factory;
+            final T factory;
             try {
                 factory = factoryClass.getConstructor().newInstance();
-            } catch (NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 throw new ConfigurationException(factoryClass + " should have a public default constructor.", e);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 throw new ConfigurationException(factoryClass + " can't be instantiated.", e);
             }
             register(factory);
         }
     }
 
-    protected Map<String, T> factories = new LinkedHashMap<>();
-
-    public synchronized T getDefault() {
-        List<T> factoriesList = new ArrayList<>(this.factories.values());
+    public T getDefault() {
+        final List<T> factoriesList;
+        synchronized (this) {
+            factoriesList = new ArrayList<>(this.factories.values());
+        }
         Collections.sort(factoriesList, new Comparator<T>() {
             @Override
-            public int compare(T o1, T o2) {
-                FactoryPriority annotation1 = o1.getClass().getAnnotation(FactoryPriority.class);
-                int p1 = annotation1 == null ? 0 : annotation1.value();
+            public int compare(final T o1, final T o2) {
+                final FactoryPriority annotation1 = o1.getClass().getAnnotation(FactoryPriority.class);
+                final int p1 = annotation1 == null ? 0 : annotation1.value();
 
-                FactoryPriority annotation2 = o2.getClass().getAnnotation(FactoryPriority.class);
-                int p2 = annotation2 == null ? 0 : annotation2.value();
+                final FactoryPriority annotation2 = o2.getClass().getAnnotation(FactoryPriority.class);
+                final int p2 = annotation2 == null ? 0 : annotation2.value();
 
                 return Integer.compare(p2, p1);
             }
         });
-        List<T> filteredFactories = new ArrayList<>();
-        for (T factory : factoriesList) {
+        final List<T> filteredFactories = new ArrayList<>();
+        for (final T factory : factoriesList) {
             if (factory instanceof ReflectiveFactory) {
                 if (((ReflectiveFactory) factory).isAvailable()) {
                     filteredFactories.add(factory);
@@ -84,21 +86,23 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
      * @param name name of the factory
      * @return factory
      */
-    public synchronized T get(String name) {
+    public T get(final String name) {
         if (name == null) {
             return getDefault();
         }
-        T factory = factories.get(name);
-        if (factory == null) {
-            R reflectiveFactory = newReflectiveInstance(name);
-            if (reflectiveFactory.isAvailable()) {
-                factories.put(name, (T) reflectiveFactory);
-                factory = (T) reflectiveFactory;
-            } else {
-                handleNoFactoryAvailable(name);
+        synchronized (this) {
+            T factory = factories.get(name);
+            if (factory == null) {
+                final R reflectiveFactory = newReflectiveInstance(name);
+                if (reflectiveFactory.isAvailable()) {
+                    factories.put(name, (T) reflectiveFactory);
+                    factory = (T) reflectiveFactory;
+                } else {
+                    handleNoFactoryAvailable(name);
+                }
             }
+            return factory;
         }
-        return factory;
     }
 
     protected abstract void handleNoFactoryAvailable(String name);
@@ -121,11 +125,11 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
      *
      * @param factory factory to register
      */
-    public synchronized void register(T factory) {
-        FactoryName annotation = factory.getClass().getAnnotation(FactoryName.class);
-        String annotationName = annotation == null ? null : annotation.value();
+    public final void register(final T factory) {
+        final FactoryName annotation = factory.getClass().getAnnotation(FactoryName.class);
+        final String annotationName = annotation == null ? null : annotation.value();
 
-        List<String> names = new ArrayList<>();
+        final List<String> names = new ArrayList<>();
         if (annotationName != null) {
             names.add(annotationName);
         }
@@ -133,14 +137,19 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
             names.addAll(Arrays.asList(((FactoryNames) factory).getNames()));
         }
 
-        boolean registered = false;
-
-        if (names.size() == 0) {
+        if (names.isEmpty()) {
             throw new ConfigurationException("Factory " + factory.getClass().getName()
                     + " has no name defined. Use @FactoryName annotation or implement FactoryNames.");
         }
 
-        for (String name : names) {
+        synchronized (this) {
+            registerImpl(names, factory);
+        }
+    }
+
+    private void registerImpl(final List<String> names, final T factory) {
+        boolean registered = false;
+        for (final String name : names) {
             if (!registered) {
                 if (factories.containsKey(name)) {
                     throw new ConfigurationException(
@@ -153,6 +162,5 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
                 factories.put(name, factory);
             }
         }
-
     }
 }

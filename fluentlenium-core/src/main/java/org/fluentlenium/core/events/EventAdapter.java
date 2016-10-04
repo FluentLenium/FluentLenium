@@ -7,12 +7,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
+import java.util.Objects;
+
 class EventAdapter implements WebDriverEventListener {
 
     private final EventListener listener;
     private final ComponentInstantiator instantiator;
 
-    EventAdapter(final EventListener listener, ComponentInstantiator instantiator) {
+    EventAdapter(final EventListener listener, final ComponentInstantiator instantiator) {
         this.listener = listener;
         this.instantiator = instantiator;
     }
@@ -48,12 +50,12 @@ class EventAdapter implements WebDriverEventListener {
     }
 
     @Override
-    public void beforeNavigateRefresh(WebDriver driver) {
+    public void beforeNavigateRefresh(final WebDriver driver) {
         this.listener.beforeNavigateRefresh(driver);
     }
 
     @Override
-    public void afterNavigateRefresh(WebDriver driver) {
+    public void afterNavigateRefresh(final WebDriver driver) {
         this.listener.afterNavigateRefresh(driver);
     }
 
@@ -111,18 +113,15 @@ class EventAdapter implements WebDriverEventListener {
         if (this == o) {
             return true;
         }
-        if (o == null || this.getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
-        EventAdapter that = (EventAdapter) o;
-
-        return !(this.listener != null ? !this.listener.equals(that.listener) : that.listener != null);
-
+        final EventAdapter that = (EventAdapter) o;
+        return Objects.equals(listener, that.listener);
     }
 
     @Override
     public int hashCode() {
-        return this.listener != null ? this.listener.hashCode() : 0;
+        return Objects.hash(listener);
     }
 }

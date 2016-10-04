@@ -11,8 +11,8 @@ import static org.mockito.Mockito.verify;
 
 public class PageAssertJTest {
     @Mock
-    FluentPage fluentPage;
-    PageAssert pageAssert;
+    private FluentPage fluentPage;
+    private PageAssert pageAssert;
 
     @Before
     public void before() {

@@ -28,7 +28,7 @@ public class FluentJavascriptTest {
 
     @Test
     public void testSync() {
-        String scriptRet = "value";
+        final String scriptRet = "value";
 
         when(driver.executeScript("script", "arg1", "arg2")).thenReturn(scriptRet);
         FluentJavascript fluentJavascript = new FluentJavascript(driver, false, "script", "arg1", "arg2");
@@ -37,7 +37,7 @@ public class FluentJavascriptTest {
         assertThat(fluentJavascript.getStringResult()).isEqualTo(scriptRet);
         assertThat(fluentJavascript.getResult()).isEqualTo(scriptRet);
 
-        Boolean booleanRet = true;
+        final Boolean booleanRet = true;
 
         when(driver.executeScript("script", "arg1", "arg2")).thenReturn(booleanRet);
         fluentJavascript = new FluentJavascript(driver, false, "script", "arg1", "arg2");
@@ -45,7 +45,7 @@ public class FluentJavascriptTest {
         assertThat(fluentJavascript.getBooleanResult()).isEqualTo(booleanRet);
         assertThat(fluentJavascript.isBooleanResult()).isTrue();
 
-        Long longRet = 1L;
+        final Long longRet = 1L;
 
         when(driver.executeScript("script", "arg1", "arg2")).thenReturn(longRet);
         fluentJavascript = new FluentJavascript(driver, false, "script", "arg1", "arg2");
@@ -53,7 +53,7 @@ public class FluentJavascriptTest {
         assertThat(fluentJavascript.getLongResult()).isEqualTo(longRet);
         assertThat(fluentJavascript.isLongResult()).isTrue();
 
-        Double doubleRet = 1.5;
+        final Double doubleRet = 1.5;
 
         when(driver.executeScript("script", "arg1", "arg2")).thenReturn(doubleRet);
         fluentJavascript = new FluentJavascript(driver, false, "script", "arg1", "arg2");
@@ -61,7 +61,7 @@ public class FluentJavascriptTest {
         assertThat(fluentJavascript.getDoubleResult()).isEqualTo(doubleRet);
         assertThat(fluentJavascript.isDoubleResult()).isTrue();
 
-        List<String> listRet = Collections.emptyList();
+        final List<String> listRet = Collections.emptyList();
 
         when(driver.executeScript("script", "arg1", "arg2")).thenReturn(listRet);
         fluentJavascript = new FluentJavascript(driver, false, "script", "arg1", "arg2");
@@ -73,16 +73,16 @@ public class FluentJavascriptTest {
 
     @Test
     public void testAsync() {
-        String scriptRet = "value";
+        final String scriptRet = "value";
 
         when(driver.executeAsyncScript("script", "arg1", "arg2")).thenReturn(scriptRet);
-        FluentJavascript fluentJavascript = new FluentJavascript(driver, true, "script", "arg1", "arg2");
+        final FluentJavascript fluentJavascript = new FluentJavascript(driver, true, "script", "arg1", "arg2");
 
         assertThat(fluentJavascript.getStringResult()).isEqualTo(scriptRet);
         assertThat(fluentJavascript.getResult()).isEqualTo(scriptRet);
     }
 
-    private abstract static class JavascriptWebDriver implements WebDriver, JavascriptExecutor {
+    private abstract static class JavascriptWebDriver implements WebDriver, JavascriptExecutor { // NOPMD AbstractNaming
 
     }
 }

@@ -53,7 +53,8 @@ public class FluentInjectorElementTest {
     }
 
     public static class FluentWebElementSubClass extends FluentWebElement {
-        public FluentWebElementSubClass(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        public FluentWebElementSubClass(final WebElement webElement, final FluentControl fluentControl,
+                final ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
     }
@@ -61,7 +62,7 @@ public class FluentInjectorElementTest {
     public static class WebElementWrapper {
         private final WebElement element;
 
-        public WebElementWrapper(WebElement element) {
+        public WebElementWrapper(final WebElement element) {
             this.element = element;
         }
 
@@ -74,7 +75,7 @@ public class FluentInjectorElementTest {
         private final WebElement element;
         private final FluentControl fluentControl;
 
-        public WebElementDriverWrapper(WebElement element, FluentControl fluentControl) {
+        public WebElementDriverWrapper(final WebElement element, final FluentControl fluentControl) {
             this.element = element;
             this.fluentControl = fluentControl;
         }
@@ -89,61 +90,62 @@ public class FluentInjectorElementTest {
     }
 
     public static class FluentWebElementContainer {
-        FluentWebElement element;
+        private FluentWebElement element;
     }
 
+    @SuppressWarnings("PMD.FieldDeclarationsShouldBeAtStartOfClass")
     private static FluentWebElement existingElement = mock(FluentWebElement.class);
 
     public static class ExistingFluentWebElementContainer {
-        FluentWebElement element = existingElement;
+        private final FluentWebElement element = existingElement;
     }
 
     public static class FluentWebElementSubClassContainer {
-        FluentWebElementSubClass element;
+        private FluentWebElementSubClass element;
     }
 
     public static class WebElementWrapperContainer {
-        WebElementWrapper element;
+        private WebElementWrapper element;
     }
 
     public static class WebElementDriverWrapperContainer {
-        WebElementDriverWrapper element;
+        private WebElementDriverWrapper element;
     }
 
     public static class FluentWebElementListContainer {
-        List<FluentWebElement> element;
+        private List<FluentWebElement> element;
     }
 
     public static class FluentWebElementSubClassListContainer {
-        List<FluentWebElementSubClass> element;
+        private List<FluentWebElementSubClass> element;
     }
 
     public static class WebElementWrapperListContainer {
-        List<WebElementWrapper> element;
+        private List<WebElementWrapper> element;
     }
 
     public static class WebElementDriverWrapperListContainer {
-        List<WebElementDriverWrapper> element;
+        private List<WebElementDriverWrapper> element;
     }
 
     public static class FluentListSubClass<T extends FluentWebElementSubClass> extends FluentListImpl<T> {
-        public FluentListSubClass(Class<T> componentClass, List<T> list, FluentControl fluentControl,
-                ComponentInstantiator instantiator) {
+        public FluentListSubClass(final Class<T> componentClass, final List<T> list, final FluentControl fluentControl,
+                final ComponentInstantiator instantiator) {
             super(componentClass, list, fluentControl, instantiator);
         }
     }
 
     public static class ListSubClassContainer {
-        FluentListSubClass<FluentWebElementSubClass> element;
+        private FluentListSubClass<FluentWebElementSubClass> element;
     }
 
     @Test
     public void testFluentWebElement() {
-        FluentWebElementContainer container = new FluentWebElementContainer();
+        final FluentWebElementContainer container = new FluentWebElementContainer();
 
         injector.inject(container);
 
-        WebElement webElement = mock(WebElement.class);
+        final WebElement webElement = mock(WebElement.class);
         when(webElement.getTagName()).thenReturn("h1");
 
         when(webDriver.findElement(any(By.class))).thenReturn(webElement);
@@ -158,11 +160,11 @@ public class FluentInjectorElementTest {
      */
     @Test
     public void testExistingFluentWebElement() {
-        ExistingFluentWebElementContainer container = new ExistingFluentWebElementContainer();
+        final ExistingFluentWebElementContainer container = new ExistingFluentWebElementContainer();
 
         injector.inject(container);
 
-        WebElement webElement = mock(WebElement.class);
+        final WebElement webElement = mock(WebElement.class);
         when(webElement.getTagName()).thenReturn("h1");
 
         when(webDriver.findElement(any(By.class))).thenReturn(webElement);
@@ -172,11 +174,11 @@ public class FluentInjectorElementTest {
 
     @Test
     public void testFluentWebElementExtends() {
-        FluentWebElementSubClassContainer container = new FluentWebElementSubClassContainer();
+        final FluentWebElementSubClassContainer container = new FluentWebElementSubClassContainer();
 
         injector.inject(container);
 
-        WebElement webElement = mock(WebElement.class);
+        final WebElement webElement = mock(WebElement.class);
         when(webElement.getTagName()).thenReturn("h1");
 
         when(webDriver.findElement(any(By.class))).thenReturn(webElement);
@@ -188,9 +190,9 @@ public class FluentInjectorElementTest {
 
     @Test
     public void testWebElementWrapper() {
-        WebElementWrapperContainer container = new WebElementWrapperContainer();
+        final WebElementWrapperContainer container = new WebElementWrapperContainer();
 
-        WebElement webElement = mock(WebElement.class);
+        final WebElement webElement = mock(WebElement.class);
         when(webElement.getTagName()).thenReturn("h1");
 
         when(webDriver.findElement(any(By.class))).thenReturn(webElement);
@@ -203,9 +205,9 @@ public class FluentInjectorElementTest {
 
     @Test
     public void testWebElementDriverWrapper() {
-        WebElementDriverWrapperContainer container = new WebElementDriverWrapperContainer();
+        final WebElementDriverWrapperContainer container = new WebElementDriverWrapperContainer();
 
-        WebElement webElement = mock(WebElement.class);
+        final WebElement webElement = mock(WebElement.class);
         when(webElement.getTagName()).thenReturn("h1");
 
         when(webDriver.findElement(any(By.class))).thenReturn(webElement);
@@ -219,17 +221,17 @@ public class FluentInjectorElementTest {
 
     @Test
     public void testFluentWebElementList() {
-        FluentWebElementListContainer container = new FluentWebElementListContainer();
+        final FluentWebElementListContainer container = new FluentWebElementListContainer();
 
         injector.inject(container);
 
-        WebElement webElement = mock(WebElement.class);
+        final WebElement webElement = mock(WebElement.class);
         when(webElement.getTagName()).thenReturn("h1");
 
-        WebElement webElement2 = mock(WebElement.class);
+        final WebElement webElement2 = mock(WebElement.class);
         when(webElement2.getTagName()).thenReturn("h2");
 
-        ArrayList<WebElement> webElements = new ArrayList<>();
+        final ArrayList<WebElement> webElements = new ArrayList<>();
         webElements.add(webElement);
         webElements.add(webElement2);
 
@@ -249,17 +251,17 @@ public class FluentInjectorElementTest {
 
     @Test
     public void testFluentWebElementExtendsList() {
-        FluentWebElementSubClassListContainer container = new FluentWebElementSubClassListContainer();
+        final FluentWebElementSubClassListContainer container = new FluentWebElementSubClassListContainer();
 
         injector.inject(container);
 
-        WebElement webElement = mock(WebElement.class);
+        final WebElement webElement = mock(WebElement.class);
         when(webElement.getTagName()).thenReturn("h1");
 
-        WebElement webElement2 = mock(WebElement.class);
+        final WebElement webElement2 = mock(WebElement.class);
         when(webElement2.getTagName()).thenReturn("h2");
 
-        ArrayList<WebElement> webElements = new ArrayList<>();
+        final ArrayList<WebElement> webElements = new ArrayList<>();
         webElements.add(webElement);
         webElements.add(webElement2);
 
@@ -279,17 +281,17 @@ public class FluentInjectorElementTest {
 
     @Test
     public void testListSubClass() {
-        ListSubClassContainer container = new ListSubClassContainer();
+        final ListSubClassContainer container = new ListSubClassContainer();
 
         injector.inject(container);
 
-        WebElement webElement = mock(WebElement.class);
+        final WebElement webElement = mock(WebElement.class);
         when(webElement.getTagName()).thenReturn("h1");
 
-        WebElement webElement2 = mock(WebElement.class);
+        final WebElement webElement2 = mock(WebElement.class);
         when(webElement2.getTagName()).thenReturn("h2");
 
-        ArrayList<WebElement> webElements = new ArrayList<>();
+        final ArrayList<WebElement> webElements = new ArrayList<>();
         webElements.add(webElement);
         webElements.add(webElement2);
 
@@ -309,17 +311,17 @@ public class FluentInjectorElementTest {
 
     @Test
     public void testWebElementWrapperList() {
-        WebElementWrapperListContainer container = new WebElementWrapperListContainer();
+        final WebElementWrapperListContainer container = new WebElementWrapperListContainer();
 
         injector.inject(container);
 
-        WebElement webElement = mock(WebElement.class);
+        final WebElement webElement = mock(WebElement.class);
         when(webElement.getTagName()).thenReturn("h1");
 
-        WebElement webElement2 = mock(WebElement.class);
+        final WebElement webElement2 = mock(WebElement.class);
         when(webElement2.getTagName()).thenReturn("h2");
 
-        ArrayList<WebElement> webElements = new ArrayList<>();
+        final ArrayList<WebElement> webElements = new ArrayList<>();
         webElements.add(webElement);
         webElements.add(webElement2);
 
@@ -339,17 +341,17 @@ public class FluentInjectorElementTest {
 
     @Test
     public void testWebElementDriverWrapperList() {
-        WebElementDriverWrapperListContainer container = new WebElementDriverWrapperListContainer();
+        final WebElementDriverWrapperListContainer container = new WebElementDriverWrapperListContainer();
 
         injector.inject(container);
 
-        WebElement webElement = mock(WebElement.class);
+        final WebElement webElement = mock(WebElement.class);
         when(webElement.getTagName()).thenReturn("h1");
 
-        WebElement webElement2 = mock(WebElement.class);
+        final WebElement webElement2 = mock(WebElement.class);
         when(webElement2.getTagName()).thenReturn("h2");
 
-        ArrayList<WebElement> webElements = new ArrayList<>();
+        final ArrayList<WebElement> webElements = new ArrayList<>();
         webElements.add(webElement);
         webElements.add(webElement2);
 
@@ -371,19 +373,19 @@ public class FluentInjectorElementTest {
 
     @Test
     public void testNewInstance() {
-        WebElement webElement = mock(WebElement.class);
+        final WebElement webElement = mock(WebElement.class);
         when(webElement.getTagName()).thenReturn("h1");
 
-        WebElement webElement2 = mock(WebElement.class);
+        final WebElement webElement2 = mock(WebElement.class);
         when(webElement2.getTagName()).thenReturn("h2");
 
-        ArrayList<WebElement> webElements = new ArrayList<>();
+        final ArrayList<WebElement> webElements = new ArrayList<>();
         webElements.add(webElement);
         webElements.add(webElement2);
 
         when(webDriver.findElements(any(By.class))).thenReturn(webElements);
 
-        WebElementDriverWrapperListContainer container = injector.newInstance(WebElementDriverWrapperListContainer.class);
+        final WebElementDriverWrapperListContainer container = injector.newInstance(WebElementDriverWrapperListContainer.class);
 
         assertThat(container.element).hasSize(2);
         assertThat(container.element).isNotInstanceOf(FluentList.class);
@@ -401,11 +403,11 @@ public class FluentInjectorElementTest {
 
     @Test
     public void testInjectArray() {
-        Object container1 = new Object();
-        Object container2 = new Object();
-        Object container3 = new Object();
+        final Object container1 = new Object();
+        final Object container2 = new Object();
+        final Object container3 = new Object();
 
-        FluentInjector injectorSpy = spy(injector);
+        final FluentInjector injectorSpy = spy(injector);
 
         injectorSpy.inject(container1, container2, container3);
 

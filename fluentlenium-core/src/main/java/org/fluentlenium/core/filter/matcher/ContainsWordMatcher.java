@@ -1,8 +1,8 @@
 package org.fluentlenium.core.filter.matcher;
 
-public class ContainsWordMatcher extends Matcher {
+public class ContainsWordMatcher extends AbstractMacher {
 
-    public ContainsWordMatcher(String value) {
+    public ContainsWordMatcher(final String value) {
         super(value);
     }
 
@@ -12,7 +12,7 @@ public class ContainsWordMatcher extends Matcher {
     }
 
     @Override
-    public boolean isSatisfiedBy(String o) {
+    public boolean isSatisfiedBy(final String o) {
         return CalculateService.contains(getPattern(), getValue(), o);
     }
 

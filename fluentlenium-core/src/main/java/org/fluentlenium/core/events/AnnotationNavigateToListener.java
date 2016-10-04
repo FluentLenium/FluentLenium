@@ -11,7 +11,7 @@ class AnnotationNavigateToListener extends AbstractAnnotationListener implements
     private final Method method;
     private final String annotationName;
 
-    AnnotationNavigateToListener(Method method, Object container, String annotationName, int priority) {
+    AnnotationNavigateToListener(final Method method, final Object container, final String annotationName, final int priority) {
         super(container, priority);
         this.method = method;
         this.annotationName = annotationName;
@@ -20,7 +20,7 @@ class AnnotationNavigateToListener extends AbstractAnnotationListener implements
     protected Function<Class<?>, Object> getArgsFunction(final String url, final WebDriver driver) {
         return new Function<Class<?>, Object>() {
             @Override
-            public Object apply(Class<?> input) {
+            public Object apply(final Class<?> input) {
                 if (input.isAssignableFrom(String.class)) {
                     return url;
                 }
@@ -33,16 +33,16 @@ class AnnotationNavigateToListener extends AbstractAnnotationListener implements
     }
 
     @Override
-    public void on(String url, WebDriver driver) {
-        Class<?>[] parameterTypes = method.getParameterTypes();
+    public void on(final String url, final WebDriver driver) {
+        final Class<?>[] parameterTypes = method.getParameterTypes();
 
-        Object[] args = ReflectionUtils.toArgs(getArgsFunction(url, driver), parameterTypes);
+        final Object[] args = ReflectionUtils.toArgs(getArgsFunction(url, driver), parameterTypes);
 
         try {
             ReflectionUtils.invoke(method, getContainer(), args);
-        } catch (IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             throw new EventAnnotationsException("An error has occured in " + annotationName + " " + method, e);
-        } catch (InvocationTargetException e) {
+        } catch (final InvocationTargetException e) {
             if (e.getTargetException() instanceof RuntimeException) {
                 throw (RuntimeException) e.getTargetException();
             } else if (e.getTargetException() instanceof Error) {

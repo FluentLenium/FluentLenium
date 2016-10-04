@@ -14,5 +14,5 @@ public interface ElementListener {
      * @param element the element
      * @param driver  the selenium driver
      */
-    void on(FluentWebElement element, WebDriver driver);
+    void on(FluentWebElement element, WebDriver driver); // NOPMD ShortMethodName
 }

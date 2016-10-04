@@ -43,7 +43,7 @@ public class FluentInjectorListComponentTest {
         private final WebElement foundElement;
         private FluentWebElement element;
 
-        public Component(WebElement webElement) {
+        public Component(final WebElement webElement) {
             this.foundElement = webElement;
         }
     }
@@ -54,14 +54,14 @@ public class FluentInjectorListComponentTest {
 
     @Test
     public void testListComponent() {
-        Container container = new Container();
+        final Container container = new Container();
 
-        WebElement component1 = Mockito.mock(WebElement.class);
-        WebElement component2 = Mockito.mock(WebElement.class);
-        WebElement component3 = Mockito.mock(WebElement.class);
-        WebElement componentElement1 = Mockito.mock(WebElement.class);
-        WebElement componentElement2 = Mockito.mock(WebElement.class);
-        WebElement componentElement3 = Mockito.mock(WebElement.class);
+        final WebElement component1 = Mockito.mock(WebElement.class);
+        final WebElement component2 = Mockito.mock(WebElement.class);
+        final WebElement component3 = Mockito.mock(WebElement.class);
+        final WebElement componentElement1 = Mockito.mock(WebElement.class);
+        final WebElement componentElement2 = Mockito.mock(WebElement.class);
+        final WebElement componentElement3 = Mockito.mock(WebElement.class);
 
         when(webDriver.findElements(new ByIdOrName("components"))).thenReturn(Arrays.asList(component1, component2, component3));
         when(component1.findElement(new ByIdOrName("element"))).thenReturn(componentElement1);
@@ -73,7 +73,7 @@ public class FluentInjectorListComponentTest {
         Assertions.assertThat(container.components).isNotNull();
         Assertions.assertThat(LocatorProxies.isLoaded(container.components)).isFalse();
 
-        for (Component component : container.components) {
+        for (final Component component : container.components) {
             Assertions.assertThat(component.element).isNotNull();
         }
 

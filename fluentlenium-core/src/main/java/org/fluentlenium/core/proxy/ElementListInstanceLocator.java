@@ -10,7 +10,7 @@ import java.util.List;
  * {@link org.openqa.selenium.support.pagefactory.ElementLocator} for an already found list of {@link WebElement} instance.
  */
 public class ElementListInstanceLocator extends ElementListSupplierLocator implements WrapsElements {
-    public ElementListInstanceLocator(List<WebElement> elements) {
+    public ElementListInstanceLocator(final List<WebElement> elements) {
         super(Suppliers.ofInstance(elements));
     }
 

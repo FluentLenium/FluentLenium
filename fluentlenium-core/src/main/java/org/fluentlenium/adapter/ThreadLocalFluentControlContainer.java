@@ -8,7 +8,7 @@ import org.fluentlenium.core.FluentDriver;
  * {@link FluentDriver} instance.
  */
 public class ThreadLocalFluentControlContainer implements FluentControlContainer {
-    private ThreadLocal<FluentControl> fluentControls = new ThreadLocal<>();
+    private final ThreadLocal<FluentControl> fluentControls = new ThreadLocal<>();
 
     @Override
     public FluentControl getFluentControl() {
@@ -16,7 +16,7 @@ public class ThreadLocalFluentControlContainer implements FluentControlContainer
     }
 
     @Override
-    public void setFluentControl(FluentControl fluentControl) {
+    public void setFluentControl(final FluentControl fluentControl) {
         if (fluentControl == null) {
             this.fluentControls.remove();
         } else {

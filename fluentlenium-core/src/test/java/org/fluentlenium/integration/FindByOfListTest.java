@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-import org.assertj.core.api.Assertions;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentList;
@@ -21,25 +20,25 @@ public class FindByOfListTest extends IntegrationFluentTest {
     public void shouldFindByRetrieveList() {
         page.go();
         page.isAt();
-        Assertions.assertThat(page.smalls).hasSize(3);
-        Assertions.assertThat(page.smalls.texts()).containsExactly("Small 1", "Small 2", "Small 3");
+        assertThat(page.smalls).hasSize(3);
+        assertThat(page.smalls.texts()).containsExactly("Small 1", "Small 2", "Small 3");
     }
 
     @Test
     public void shouldFindAllFindByRetrieveList() {
         page.go();
         page.isAt();
-        Assertions.assertThat(page.findAllElements).hasSize(4);
-        Assertions.assertThat(page.findAllElements.texts()).containsExactly("Pharmacy", "Small 1", "Small 2", "Small 3");
+        assertThat(page.findAllElements).hasSize(4);
+        assertThat(page.findAllElements.texts()).containsExactly("Pharmacy", "Small 1", "Small 2", "Small 3");
     }
 
     private static class PageIndex extends FluentPage {
 
         @FindBy(className = "small")
-        FluentList<FluentWebElement> smalls;
+        private FluentList<FluentWebElement> smalls;
 
-        @FindAll({ @FindBy(id = "location"), @FindBy(className = "small") })
-        FluentList<FluentWebElement> findAllElements;
+        @FindAll({@FindBy(id = "location"), @FindBy(className = "small")})
+        private FluentList<FluentWebElement> findAllElements;
 
         @Override
         public String getUrl() {

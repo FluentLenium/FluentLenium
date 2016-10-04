@@ -16,7 +16,7 @@ import java.util.List;
 public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     private static final Method GET_WRAPPED_ELEMENTS = getMethod(WrapsElements.class, "getWrappedElements");
 
-    public ListHandler(ElementLocator locator) {
+    public ListHandler(final ElementLocator locator) {
         super(locator);
         if (this.locator instanceof WrapsElements) {
             fireProxyElementSearch();
@@ -30,7 +30,7 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     }
 
     @Override
-    protected List<WebElement> resultToList(List<WebElement> result) {
+    protected List<WebElement> resultToList(final List<WebElement> result) {
         return result;
     }
 
@@ -40,7 +40,7 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     }
 
     @Override
-    protected List<WebElement> getInvocationTarget(Method method) {
+    protected List<WebElement> getInvocationTarget(final Method method) {
         return result;
     }
 
@@ -54,7 +54,7 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
         if (result.size() > 0) {
             try {
                 result.get(0).isEnabled();
-            } catch (StaleElementReferenceException e) {
+            } catch (final StaleElementReferenceException e) {
                 return true;
             }
         }
@@ -70,10 +70,10 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
         return wrapElements(foundElements);
     }
 
-    protected List<WebElement> wrapElements(List<WebElement> foundElements) {
-        List<WebElement> proxyElements = new ArrayList<>();
-        for (WebElement element : foundElements) {
-            WebElement proxyElement = LocatorProxies.createWebElement(new ElementInstanceLocator(element));
+    private List<WebElement> wrapElements(final List<WebElement> foundElements) {
+        final List<WebElement> proxyElements = new ArrayList<>();
+        for (final WebElement element : foundElements) {
+            final WebElement proxyElement = LocatorProxies.createWebElement(new ElementInstanceLocator(element));
             LocatorProxies.setHooks(proxyElement, hookChainBuilder, hookDefinitions);
             proxyElements.add(proxyElement);
         }
@@ -81,9 +81,9 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     }
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable { // NOPMD UseVarargs
         if (GET_WRAPPED_ELEMENTS.equals(method)) {
-            return result != null ? getLocatorResult() : proxy;
+            return result == null ? proxy : getLocatorResult();
         }
         return super.invoke(proxy, method, args);
     }

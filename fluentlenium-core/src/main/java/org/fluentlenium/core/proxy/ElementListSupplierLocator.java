@@ -13,17 +13,17 @@ import java.util.List;
 public class ElementListSupplierLocator implements ElementLocator {
     private final Supplier<List<WebElement>> elementsSupplier;
 
-    public ElementListSupplierLocator(List<WebElement> elementsSupplier) {
+    public ElementListSupplierLocator(final List<WebElement> elementsSupplier) {
         this.elementsSupplier = Suppliers.ofInstance(elementsSupplier);
     }
 
-    public ElementListSupplierLocator(Supplier<List<WebElement>> elementsSupplier) {
+    public ElementListSupplierLocator(final Supplier<List<WebElement>> elementsSupplier) {
         this.elementsSupplier = elementsSupplier;
     }
 
     @Override
     public WebElement findElement() {
-        List<WebElement> webElements = elementsSupplier.get();
+        final List<WebElement> webElements = elementsSupplier.get();
         if (webElements != null && !webElements.isEmpty()) {
             return webElements.iterator().next();
         }

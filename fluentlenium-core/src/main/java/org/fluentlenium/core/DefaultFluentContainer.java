@@ -9,20 +9,29 @@ public class DefaultFluentContainer implements FluentControl, FluentContainer {
 
     protected FluentControl control;
 
+    /**
+     * Creates a new container.
+     */
     public DefaultFluentContainer() {
+        // Default constructor
     }
 
-    public DefaultFluentContainer(FluentControl control) {
+    /**
+     * Creates a new container, using given fluent control.
+     *
+     * @param control fluent control
+     */
+    public DefaultFluentContainer(final FluentControl control) {
         this.control = control;
     }
 
     @Delegate
-    private FluentControl getFluentControl() {
+    private FluentControl getFluentControl() { // NOPMD UnusedPrivateMethod
         return control;
     }
 
     @Override
-    public void initFluent(FluentControl control) {
+    public void initFluent(final FluentControl control) {
         this.control = control;
     }
 }

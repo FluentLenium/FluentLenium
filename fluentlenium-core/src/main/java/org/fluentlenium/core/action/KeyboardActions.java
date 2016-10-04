@@ -12,21 +12,20 @@ public class KeyboardActions {
     private Keyboard keyboard;
     private Mouse mouse;
 
-    public KeyboardActions(WebDriver driver) {
+    public KeyboardActions(final WebDriver driver) {
         this.driver = driver;
     }
 
-    public KeyboardActions(Keyboard keyboard, Mouse mouse) {
+    public KeyboardActions(final Keyboard keyboard, final Mouse mouse) {
         this.keyboard = keyboard;
         this.mouse = mouse;
     }
 
     protected org.openqa.selenium.interactions.Actions actions() {
-        if (driver != null) {
-            return new org.openqa.selenium.interactions.Actions(driver);
-        } else {
+        if (driver == null) {
             return new org.openqa.selenium.interactions.Actions(keyboard, mouse);
         }
+        return new org.openqa.selenium.interactions.Actions(driver);
     }
 
     /**
@@ -35,11 +34,10 @@ public class KeyboardActions {
      * @return low level interface to control the keyboard
      */
     public Keyboard basic() {
-        if (keyboard != null) {
-            return keyboard;
-        } else {
+        if (keyboard == null) {
             return ((HasInputDevices) driver).getKeyboard();
         }
+        return keyboard;
     }
 
     /**
@@ -54,7 +52,7 @@ public class KeyboardActions {
      * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#keyDown(Keys)
      */
-    public KeyboardActions keyDown(Keys theKey) {
+    public KeyboardActions keyDown(final Keys theKey) {
         actions().keyDown(theKey).perform();
         return this;
     }
@@ -67,7 +65,7 @@ public class KeyboardActions {
      * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#keyUp(Keys)
      */
-    public KeyboardActions keyUp(Keys theKey) {
+    public KeyboardActions keyUp(final Keys theKey) {
         actions().keyUp(theKey).perform();
         return this;
     }
@@ -85,7 +83,7 @@ public class KeyboardActions {
      * @return A self reference.
      * @see org.openqa.selenium.interactions.Actions#sendKeys(CharSequence...)
      */
-    public KeyboardActions sendKeys(CharSequence... keysToSend) {
+    public KeyboardActions sendKeys(final CharSequence... keysToSend) {
         actions().sendKeys(keysToSend).perform();
         return this;
     }

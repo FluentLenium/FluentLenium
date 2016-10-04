@@ -37,7 +37,7 @@ public class PageInPageTest extends IntegrationFluentTest {
 class TestPage extends FluentPage {
 
     @Page
-    IncludedPage includedPage;
+    /* default */ IncludedPage includedPage;
 }
 
 class SubSubTestPage extends SubTestPage {
@@ -46,14 +46,14 @@ class SubSubTestPage extends SubTestPage {
 class SubTestPage extends TestPage {
 
     @Page
-    IncludedPage anotherIncludedPage;
+    /* default */ IncludedPage anotherIncludedPage;
 }
 
 class SubTestPageWithCreate extends FluentPage {
 
     private IncludedPage pageWithCreatePage;
 
-    public void initFluent(FluentControl control) {
+    public void initFluent(final FluentControl control) {
         super.initFluent(control);
         pageWithCreatePage = newInstance(IncludedPage.class);
     }
@@ -65,5 +65,5 @@ class SubTestPageWithCreate extends FluentPage {
 
 class IncludedPage extends FluentPage {
 
-    FluentWebElement element;
+    /* default */ FluentWebElement element;
 }

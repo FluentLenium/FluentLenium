@@ -3,7 +3,6 @@ package org.fluentlenium.core.axes;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
-import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,23 +29,21 @@ public class AxesTest {
 
     private ComponentInstantiator instantiator;
 
-    private DefaultHookChainBuilder hookChainBuilder;
-
     private FluentAdapter fluentAdapter;
 
     @Before
     public void before() {
-        fluentAdapter = new FluentAdapter(driver);
+        fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(driver);
 
         instantiator = new DefaultComponentInstantiator(fluentAdapter);
-        hookChainBuilder = new DefaultHookChainBuilder(fluentAdapter, instantiator);
     }
 
     @Test
     public void testAncestors() {
-        Axes axes = new Axes(element, instantiator, hookChainBuilder);
+        final Axes axes = new Axes(element, instantiator);
 
-        List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
+        final List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("ancestor::*"))).thenReturn(elements);
 
         assertThat(axes.ancestors().toElements()).isEqualTo(elements);
@@ -54,9 +51,9 @@ public class AxesTest {
 
     @Test
     public void testDescendants() {
-        Axes axes = new Axes(element, instantiator, hookChainBuilder);
+        final Axes axes = new Axes(element, instantiator);
 
-        List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
+        final List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("descendant::*"))).thenReturn(elements);
 
         assertThat(axes.descendants().toElements()).isEqualTo(elements);
@@ -64,9 +61,9 @@ public class AxesTest {
 
     @Test
     public void testFollowings() {
-        Axes axes = new Axes(element, instantiator, hookChainBuilder);
+        final Axes axes = new Axes(element, instantiator);
 
-        List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
+        final List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("following::*"))).thenReturn(elements);
 
         assertThat(axes.followings().toElements()).isEqualTo(elements);
@@ -74,9 +71,9 @@ public class AxesTest {
 
     @Test
     public void testFollowingSiblings() {
-        Axes axes = new Axes(element, instantiator, hookChainBuilder);
+        final Axes axes = new Axes(element, instantiator);
 
-        List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
+        final List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("following-sibling::*"))).thenReturn(elements);
 
         assertThat(axes.followingSiblings().toElements()).isEqualTo(elements);
@@ -84,9 +81,9 @@ public class AxesTest {
 
     @Test
     public void testPrecedings() {
-        Axes axes = new Axes(element, instantiator, hookChainBuilder);
+        final Axes axes = new Axes(element, instantiator);
 
-        List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
+        final List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("preceding::*"))).thenReturn(elements);
 
         assertThat(axes.precedings().toElements()).isEqualTo(elements);
@@ -94,9 +91,9 @@ public class AxesTest {
 
     @Test
     public void testPrecedingSiblings() {
-        Axes axes = new Axes(element, instantiator, hookChainBuilder);
+        final Axes axes = new Axes(element, instantiator);
 
-        List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
+        final List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("preceding-sibling::*"))).thenReturn(elements);
 
         assertThat(axes.precedingSiblings().toElements()).isEqualTo(elements);
@@ -104,9 +101,9 @@ public class AxesTest {
 
     @Test
     public void testParent() {
-        Axes axes = new Axes(element, instantiator, hookChainBuilder);
+        final Axes axes = new Axes(element, instantiator);
 
-        WebElement parent = mock(WebElement.class);
+        final WebElement parent = mock(WebElement.class);
         when(element.findElement(By.xpath("parent::*"))).thenReturn(parent);
 
         assertThat(axes.parent().getElement()).isEqualTo(parent);

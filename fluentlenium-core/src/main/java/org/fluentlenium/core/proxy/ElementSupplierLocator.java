@@ -14,7 +14,7 @@ import java.util.List;
 public class ElementSupplierLocator implements ElementLocator {
     private final Supplier<WebElement> elementSupplier;
 
-    public ElementSupplierLocator(Supplier<WebElement> elementSupplier) {
+    public ElementSupplierLocator(final Supplier<WebElement> elementSupplier) {
         this.elementSupplier = elementSupplier;
     }
 
@@ -25,7 +25,7 @@ public class ElementSupplierLocator implements ElementLocator {
 
     @Override
     public List<WebElement> findElements() {
-        WebElement webElement = elementSupplier.get();
+        final WebElement webElement = elementSupplier.get();
         if (webElement == null) {
             return Collections.emptyList();
         }

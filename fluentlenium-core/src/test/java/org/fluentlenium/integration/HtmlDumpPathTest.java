@@ -26,11 +26,11 @@ public class HtmlDumpPathTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         getConfiguration().setHtmlDumpPath(tempDir.toFile().getAbsolutePath());
 
-        File file = new File("test.html");
+        final File file = new File("test.html");
         try {
             takeHtmlDump("test.html");
-            FileInputStream fis = new FileInputStream(new File(tempDir.toFile(), "test.html"));
-            String html = IOUtils.toString(fis, "UTF-8");
+            final FileInputStream fis = new FileInputStream(new File(tempDir.toFile(), "test.html"));
+            final String html = IOUtils.toString(fis, "UTF-8");
             assertThat(html).isEqualTo(this.el("html").html());
             assertThat(html).isNotEmpty();
         } finally {

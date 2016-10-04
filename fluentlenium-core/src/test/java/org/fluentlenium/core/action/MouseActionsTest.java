@@ -43,7 +43,7 @@ public class MouseActionsTest {
 
     @Test
     public void testClickAndHold() {
-        MouseActions actions = new MouseActions(driver);
+        final MouseActions actions = new MouseActions(driver);
         actions.clickAndHold();
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
@@ -52,7 +52,7 @@ public class MouseActionsTest {
 
     @Test
     public void testClick() {
-        MouseActions actions = new MouseActions(driver);
+        final MouseActions actions = new MouseActions(driver);
         actions.click();
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
@@ -61,7 +61,7 @@ public class MouseActionsTest {
 
     @Test
     public void testClickKeyboardMouse() {
-        MouseActions actions = new MouseActions(keyboard, mouse);
+        final MouseActions actions = new MouseActions(keyboard, mouse);
         actions.click();
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
@@ -70,7 +70,7 @@ public class MouseActionsTest {
 
     @Test
     public void testContextClick() {
-        MouseActions actions = new MouseActions(driver);
+        final MouseActions actions = new MouseActions(driver);
         actions.contextClick();
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
@@ -79,7 +79,7 @@ public class MouseActionsTest {
 
     @Test
     public void testDoubleClick() {
-        MouseActions actions = new MouseActions(driver);
+        final MouseActions actions = new MouseActions(driver);
         actions.doubleClick();
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
@@ -88,7 +88,7 @@ public class MouseActionsTest {
 
     @Test
     public void testRelease() {
-        MouseActions actions = new MouseActions(driver);
+        final MouseActions actions = new MouseActions(driver);
         actions.release();
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
@@ -97,14 +97,13 @@ public class MouseActionsTest {
 
     @Test
     public void testBasic() {
-        MouseActions actions = new MouseActions(driver);
+        final MouseActions actions = new MouseActions(driver);
         Assertions.assertThat(actions.basic()).isSameAs(mouse);
 
-        MouseActions actionsAlt = new MouseActions(keyboard, mouse);
+        final MouseActions actionsAlt = new MouseActions(keyboard, mouse);
         Assertions.assertThat(actionsAlt.basic()).isSameAs(mouse);
     }
 
-    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices {
-
+    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices { // NOPMD AbstractNaming
     }
 }

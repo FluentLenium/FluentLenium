@@ -8,19 +8,19 @@ import org.openqa.selenium.WebDriver;
  */
 public class Alert implements org.openqa.selenium.Alert {
 
-    private WebDriver webDriver;
+    private final WebDriver webDriver;
 
     @Delegate
-    private org.openqa.selenium.Alert getSeleniumAlert() {
+    private org.openqa.selenium.Alert getSeleniumAlert() { // NOPMD UnusedPrivateMethod
         return webDriver.switchTo().alert();
     }
 
-    public Alert(WebDriver webDriver) {
+    public Alert(final WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
-    public void prompt(String s) {
-        sendKeys(s);
+    public void prompt(final String text) {
+        sendKeys(text);
         accept();
     }
 

@@ -10,22 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class IsAtTest extends IntegrationFluentTest {
-    @FindBy(css = "#oneline")
-    public static class PageIsAt extends FluentPage {
-        @Override
-        public String getUrl() {
-            return IntegrationFluentTest.DEFAULT_URL;
-        }
-    }
-
-    @FindBy(css = "#invalid")
-    public static class PageIsNotAt extends FluentPage {
-        @Override
-        public String getUrl() {
-            return IntegrationFluentTest.DEFAULT_URL;
-        }
-    }
-
     @Page
     private PageIsAt pageOk;
 
@@ -49,6 +33,22 @@ public class IsAtTest extends IntegrationFluentTest {
     public void testIsAt() {
         pageOk.go();
         pageOk.isAt();
+    }
+
+    @FindBy(css = "#oneline")
+    public static class PageIsAt extends FluentPage {
+        @Override
+        public String getUrl() {
+            return IntegrationFluentTest.DEFAULT_URL;
+        }
+    }
+
+    @FindBy(css = "#invalid")
+    public static class PageIsNotAt extends FluentPage {
+        @Override
+        public String getUrl() {
+            return IntegrationFluentTest.DEFAULT_URL;
+        }
     }
 
 }

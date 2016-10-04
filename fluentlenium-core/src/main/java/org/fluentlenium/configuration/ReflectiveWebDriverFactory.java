@@ -20,19 +20,19 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
     protected Class<? extends WebDriver> webDriverClass;
     protected boolean available;
 
-    public ReflectiveWebDriverFactory(String name, String webDriverClassName, Object... args) {
+    public ReflectiveWebDriverFactory(final String name, final String webDriverClassName, final Object... args) {
         this.name = name;
         this.webDriverClassName = webDriverClassName;
         this.args = args;
         try {
             this.webDriverClass = (Class<? extends WebDriver>) Class.forName(webDriverClassName);
             this.available = WebDriver.class.isAssignableFrom(this.webDriverClass);
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
             this.available = false;
         }
     }
 
-    public ReflectiveWebDriverFactory(String name, Class<? extends WebDriver> webDriverClass, Object... args) {
+    public ReflectiveWebDriverFactory(final String name, final Class<? extends WebDriver> webDriverClass, final Object... args) {
         this.name = name;
         this.webDriverClass = webDriverClass;
         this.args = args;
@@ -53,24 +53,24 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
     }
 
     @Override
-    public WebDriver newWebDriver(Capabilities capabilities, ConfigurationProperties configuration) {
+    public WebDriver newWebDriver(Capabilities capabilities, final ConfigurationProperties configuration) {
         if (!available) {
             throw new ConfigurationException("WebDriver " + webDriverClassName + " is not available.");
         }
 
         try {
-            DesiredCapabilities defaultCapabilities = newDefaultCapabilities();
+            final DesiredCapabilities defaultCapabilities = newDefaultCapabilities();
             if (defaultCapabilities != null) {
                 defaultCapabilities.merge(capabilities);
                 capabilities = defaultCapabilities;
             }
 
             if (capabilities != null && !capabilities.asMap().isEmpty()) {
-                ArrayList<Object> argsList = new ArrayList<>(Arrays.asList(args));
+                final ArrayList<Object> argsList = new ArrayList<>(Arrays.asList(args));
                 argsList.add(0, capabilities);
                 try {
                     return newInstance(webDriverClass, configuration, argsList.toArray());
-                } catch (NoSuchMethodException e) {
+                } catch (final NoSuchMethodException e) { // NOPMD EmptyCatchBlock
                     // Ignore capabilities.
                 }
             }
@@ -80,15 +80,15 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
         }
     }
 
-    protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration,
-            Object[] args)
+    protected WebDriver newInstance(final Class<? extends WebDriver> webDriverClass, final ConfigurationProperties configuration,
+            final Object... args)
             throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return ReflectionUtils.newInstance(webDriverClass, args);
     }
 
     @Override
     public String[] getNames() {
-        List<String> names = new ArrayList<>(Arrays.asList(name));
+        final List<String> names = new ArrayList<>(Arrays.asList(name));
         if (webDriverClass != null) {
             names.add(webDriverClass.getName());
             names.add(webDriverClass.getSimpleName());

@@ -19,17 +19,18 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnnotationsComponentEventsTest extends AnnotationsComponentEventsTestSubClass {
-    private List<WebElement> beforeClick = new ArrayList<>();
+    private final List<WebElement> beforeClick = new ArrayList<>();
 
     public static class Component extends FluentWebElement {
 
-        private int beforeClick = 0;
-        private int afterClick = 0;
+        private int beforeClick;
+        private int afterClick;
 
-        private List<By> beforeFindBy = new ArrayList<>();
-        private List<By> afterFindBy = new ArrayList<>();
+        private final List<By> beforeFindBy = new ArrayList<>();
+        private final List<By> afterFindBy = new ArrayList<>();
 
-        public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        public Component(final WebElement webElement, final FluentControl fluentControl,
+                final ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
 
@@ -46,12 +47,12 @@ public class AnnotationsComponentEventsTest extends AnnotationsComponentEventsTe
         }
 
         @BeforeFindBy
-        public void beforeFindBy(By by) {
+        public void beforeFindBy(final By by) {
             beforeFindBy.add(by);
         }
 
         @AfterFindBy
-        public void afterFindBy(By by) {
+        public void afterFindBy(final By by) {
             assertThat(beforeFindBy).hasSize(afterFindBy.size() + 1);
             afterFindBy.add(by);
         }
@@ -61,10 +62,10 @@ public class AnnotationsComponentEventsTest extends AnnotationsComponentEventsTe
     public void clickOnFirst() {
         goTo(DEFAULT_URL);
 
-        Component button = el("button").as(Component.class);
+        final Component button = el("button").as(Component.class);
         button.click();
 
-        Component otherButton = el("button").as(Component.class);
+        final Component otherButton = el("button").as(Component.class);
 
         assertThat(button.beforeClick).isEqualTo(1);
         assertThat(button.afterClick).isEqualTo(1);
@@ -77,45 +78,37 @@ public class AnnotationsComponentEventsTest extends AnnotationsComponentEventsTe
 
     }
 
-    private WebElement unwrapElement(WebElement element) {
+    private WebElement unwrapElement(final WebElement element) {
         if (element instanceof WrapsElement) {
-            WebElement wrappedElement = ((WrapsElement) element).getWrappedElement();
-            if (wrappedElement != element && wrappedElement != null) {
+            final WebElement wrappedElement = ((WrapsElement) element).getWrappedElement();
+            if (wrappedElement != element && wrappedElement != null) { // NOPMD CompareObjectsWithEquals
                 return unwrapElement(wrappedElement);
             }
         }
         return element;
     }
 
-    private List<WebElement> unwrapElements(List<WebElement> elements) {
-        ArrayList<WebElement> unwrapElements = new ArrayList<>();
-        for (WebElement element : elements) {
-            unwrapElements.add(unwrapElement(element));
-        }
-        return unwrapElements;
-    }
-
     @Test
     public void clickOn() {
         goTo(DEFAULT_URL);
 
-        FluentList<Component> buttons = $("button").as(Component.class);
+        final FluentList<Component> buttons = $("button").as(Component.class);
         buttons.click();
 
-        FluentList<Component> otherButtons = $("button").as(Component.class);
+        final FluentList<Component> otherButtons = $("button").as(Component.class);
 
-        for (Component button : buttons) {
+        for (final Component button : buttons) {
             assertThat(button.beforeClick).isEqualTo(1);
             assertThat(button.afterClick).isEqualTo(1);
         }
 
-        for (Component button : otherButtons) {
+        for (final Component button : otherButtons) {
             assertThat(button.beforeClick).isEqualTo(0);
             assertThat(button.afterClick).isEqualTo(0);
         }
 
-        List<WebElement> elements = new ArrayList<>();
-        for (Component button : buttons) {
+        final List<WebElement> elements = new ArrayList<>();
+        for (final Component button : buttons) {
             elements.add(unwrapElement(button.getElement()));
         }
 
@@ -125,7 +118,7 @@ public class AnnotationsComponentEventsTest extends AnnotationsComponentEventsTe
     }
 
     @BeforeClickOn
-    private void beforeClickOn(FluentWebElement element) {
+    private void beforeClickOn(final FluentWebElement element) { // NOPMD UnusedPrivateMethod
         beforeClick.add(element.getElement());
     }
 
@@ -133,10 +126,10 @@ public class AnnotationsComponentEventsTest extends AnnotationsComponentEventsTe
     public void findBy() {
         goTo(DEFAULT_URL);
 
-        Component htmlComponent = el("html").as(Component.class);
+        final Component htmlComponent = el("html").as(Component.class);
         htmlComponent.el("button").present();
 
-        Component otherHtmlComponent = el("html").as(Component.class);
+        final Component otherHtmlComponent = el("html").as(Component.class);
         otherHtmlComponent.present();
 
         assertThat(htmlComponent.beforeFindBy).hasSize(1);

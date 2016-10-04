@@ -2,10 +2,13 @@ package org.fluentlenium.adapter.cucumber.integration.utils;
 
 import java.net.URL;
 
+/**
+ * Utility class for Url.
+ */
 public final class UrlUtil {
 
     private UrlUtil() {
-        // No instances allowed
+        // Utility class
     }
 
     /**

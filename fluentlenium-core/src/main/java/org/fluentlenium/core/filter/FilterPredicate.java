@@ -9,21 +9,18 @@ import org.fluentlenium.core.domain.FluentWebElement;
 public class FilterPredicate implements Predicate<FluentWebElement> {
     private final Filter filter;
 
-    public FilterPredicate(Filter text) {
+    public FilterPredicate(final Filter text) {
         this.filter = text;
     }
 
-    public boolean apply(FluentWebElement webElementCustom) {
+    public boolean apply(final FluentWebElement webElementCustom) {
 
-        String attribute = returnTextIfTextAttributeElseAttributeValue(webElementCustom);
-        if (filter != null && filter.getMatcher().isSatisfiedBy(attribute)) {
-            return true;
-        }
-        return false;
+        final String attribute = returnTextIfTextAttributeElseAttributeValue(webElementCustom);
+        return filter != null && filter.getMatcher().isSatisfiedBy(attribute);
     }
 
-    private String returnTextIfTextAttributeElseAttributeValue(FluentWebElement webElementCustom) {
-        return ("text".equalsIgnoreCase(filter.getAttribut()))
+    private String returnTextIfTextAttributeElseAttributeValue(final FluentWebElement webElementCustom) {
+        return "text".equalsIgnoreCase(filter.getAttribut())
                 ? webElementCustom.text()
                 : webElementCustom.attribute(filter.getAttribut());
     }

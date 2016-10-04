@@ -25,7 +25,7 @@ public class ContainerAnnotationsEventsRegistry {
     private final EventsRegistry registry;
     private final Object container;
 
-    public ContainerAnnotationsEventsRegistry(EventsRegistry registry, Object container) {
+    public ContainerAnnotationsEventsRegistry(final EventsRegistry registry, final Object container) {
         this.registry = registry;
         this.container = container;
 

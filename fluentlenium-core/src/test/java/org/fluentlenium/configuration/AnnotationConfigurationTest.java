@@ -81,7 +81,7 @@ public class AnnotationConfigurationTest {
         Assertions.assertThat(noConfiguration.getCapabilities()).isNull();
         Assertions.assertThat(defaultConfiguration.getCapabilities()).isNull();
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
+        final DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setJavascriptEnabled(true);
 
         Assertions.assertThat(configuration.getCapabilities()).isEqualTo(capabilities);
@@ -89,10 +89,10 @@ public class AnnotationConfigurationTest {
 
     @Test
     public void desiredCapabilities() {
-        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        final DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         Assertions.assertThat(desiredCapabilitiesConfiguration.getCapabilities()).isEqualTo(capabilities);
 
-        DesiredCapabilities differentCapabilities = DesiredCapabilities.chrome();
+        final DesiredCapabilities differentCapabilities = DesiredCapabilities.chrome();
         Assertions.assertThat(desiredCapabilitiesConfiguration.getCapabilities()).isNotEqualTo(differentCapabilities);
     }
 

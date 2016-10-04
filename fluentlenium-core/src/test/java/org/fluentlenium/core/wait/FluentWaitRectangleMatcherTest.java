@@ -58,7 +58,7 @@ public class FluentWaitRectangleMatcherTest {
 
         rectangleConditions.verify(new Predicate<Rectangle>() {
             @Override
-            public boolean apply(Rectangle input) {
+            public boolean apply(final Rectangle input) {
                 return true;
             }
         });
@@ -81,7 +81,7 @@ public class FluentWaitRectangleMatcherTest {
 
         rectangleConditions.not().verify(new Predicate<Rectangle>() {
             @Override
-            public boolean apply(Rectangle input) {
+            public boolean apply(final Rectangle input) {
                 return false;
             }
         });

@@ -67,32 +67,29 @@ public class DefaultWebDriverFactories {
         }
 
         @Override
-        protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration,
-                Object[] args)
+        protected WebDriver newInstance(final Class<? extends WebDriver> webDriverClass,
+                final ConfigurationProperties configuration, final Object... args)
                 throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
             URL url = null;
             if (configuration != null) {
-                String remoteUrl = configuration.getRemoteUrl();
+                final String remoteUrl = configuration.getRemoteUrl();
 
                 if (remoteUrl != null) {
                     try {
                         url = new URL(remoteUrl);
-                    } catch (MalformedURLException e) {
+                    } catch (final MalformedURLException e) {
                         throw new ConfigurationException("remoteUrl configuration property is not a valid URL.", e);
                     }
                 }
             }
 
-            Object[] urlArgs = new Object[2];
-            urlArgs[0] = url;
-            urlArgs[1] = args.length > 0 ? args[0] : new DesiredCapabilities();
-
-            return newRemoteWebDriver(urlArgs);
+            return newRemoteWebDriver(url, args.length > 0 ? args[0] : new DesiredCapabilities());
         }
 
-        protected WebDriver newRemoteWebDriver(Object[] args)
+        protected WebDriver newRemoteWebDriver(final Object... args)
                 throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-            WebDriver webDriver = ReflectionUtils.getConstructor(webDriverClass, URL.class, Capabilities.class).newInstance(args);
+            final WebDriver webDriver = ReflectionUtils.getConstructor(webDriverClass, URL.class, Capabilities.class)
+                    .newInstance(args);
             return new Augmenter().augment(webDriver);
         }
     }
@@ -104,7 +101,7 @@ public class DefaultWebDriverFactories {
 
         @Override
         protected DesiredCapabilities newDefaultCapabilities() {
-            DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+            final DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
             desiredCapabilities.setJavascriptEnabled(true);
             return desiredCapabilities;
         }

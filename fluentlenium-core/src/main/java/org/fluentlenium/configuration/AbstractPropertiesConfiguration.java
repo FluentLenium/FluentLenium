@@ -26,7 +26,7 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
         this(PROPERTIES_PREFIX);
     }
 
-    protected AbstractPropertiesConfiguration(String... prefixes) {
+    protected AbstractPropertiesConfiguration(final String... prefixes) {
         if (prefixes.length == 0) {
             throw new IllegalArgumentException("Prefixes should be defined");
         }
@@ -35,9 +35,9 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
 
     protected abstract String getPropertyImpl(String propertyName);
 
-    private String getProperty(String propertyName) {
-        for (String prefix : prefixes) {
-            String property = getPropertyImpl(prefix + propertyName);
+    private String getProperty(final String propertyName) {
+        for (final String prefix : prefixes) {
+            final String property = getPropertyImpl(prefix + propertyName);
             if (property != null) {
                 return property;
             }
@@ -45,94 +45,90 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
         return null;
     }
 
-    private boolean isValidProperty(String property) {
-        if (Strings.isNullOrEmpty(property) || "null".equalsIgnoreCase(property)) {
-            return false;
-        }
-        return true;
+    private boolean isValidProperty(final String property) {
+        return !Strings.isNullOrEmpty(property) && !"null".equalsIgnoreCase(property);
     }
 
-    private String getStringProperty(String propertyName) {
-        String property = getProperty(propertyName);
+    private String getStringProperty(final String propertyName) {
+        final String property = getProperty(propertyName);
         if (!isValidProperty(property)) {
             return null;
         }
         return property;
     }
 
-    private Long getLongProperty(String propertyName) {
-        String property = getProperty(propertyName);
+    private Long getLongProperty(final String propertyName) {
+        final String property = getProperty(propertyName);
         if (!isValidProperty(property)) {
             return null;
         }
         try {
             return Long.parseLong(property);
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             return null;
         }
     }
 
-    private Boolean getBooleanProperty(String propertyName) {
-        String property = getProperty(propertyName);
+    private Boolean getBooleanProperty(final String propertyName) {
+        final String property = getProperty(propertyName);
         if (!isValidProperty(property)) {
             return null;
         }
         return Boolean.parseBoolean(property);
     }
 
-    private <T extends Enum<T>> T getEnumProperty(Class<T> enumClass, String propertyName) {
-        String property = getProperty(propertyName);
+    private <T extends Enum<T>> T getEnumProperty(final Class<T> enumClass, final String propertyName) {
+        final String property = getProperty(propertyName);
         if (!isValidProperty(property)) {
             return null;
         }
-        if (propertyName.equalsIgnoreCase("DEFAULT")) {
+        if ("DEFAULT".equalsIgnoreCase(propertyName)) {
             return null;
         }
-        T enumValue = (T) Enum.valueOf(enumClass, property);
-        return enumValue;
+        return (T) Enum.valueOf(enumClass, property);
     }
 
-    private <T> Class<T> getClassProperty(Class<T> clazz, String propertyName) {
-        String property = getProperty(propertyName);
+    private <T> Class<T> getClassProperty(final Class<T> clazz, final String propertyName) {
+        final String property = getProperty(propertyName);
         if (!isValidProperty(property)) {
             return null;
         }
         try {
-            Class<?> propertyClass = Class.forName(property);
+            final Class<?> propertyClass = Class.forName(property);
             if (clazz.isAssignableFrom(propertyClass)) {
                 return (Class<T>) propertyClass;
             }
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) { // NOPMD EmptyCatchBlock
         }
         return null;
     }
 
-    protected URL newURL(String url) throws MalformedURLException {
+    protected URL newURL(final String url) throws MalformedURLException {
         return new URL(url);
     }
 
-    private Capabilities getCapabilitiesProperty(String propertyName) {
+    private Capabilities getCapabilitiesProperty(final String propertyName) {
         String property = getProperty(propertyName);
         if (!isValidProperty(property)) {
             return null;
         }
         try {
-            URL url = newURL(property);
+            final URL url = newURL(property);
             try {
                 property = IOUtils.toString(url, Charset.defaultCharset());
-            } catch (IOException e) {
-                throw new ConfigurationException("Can't read Capabilities defined at " + url);
+            } catch (final IOException e) {
+                throw new ConfigurationException("Can't read Capabilities defined at " + url, e);
             }
-        } catch (MalformedURLException e) {
+        } catch (final MalformedURLException e) { // NOPMD EmptyCatchBlock PreserveStackTrace
             // This is not an URL. Consider property as JSON.
         }
-        CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
+        final CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
         if (factory != null) {
             return factory.newCapabilities();
         }
         try {
             return jsonConverter.convert(DesiredCapabilities.class, property);
-        } catch (JsonException e) {
+        } catch (final JsonException e) {
             throw new ConfigurationException("Can't convert JSON Capabilities to Object.", e);
         }
     }

@@ -2,13 +2,13 @@ package org.fluentlenium.core.filter.matcher;
 
 import java.util.regex.Pattern;
 
-public class EqualMatcher extends Matcher {
+public class EqualMatcher extends AbstractMacher {
 
-    public EqualMatcher(String value) {
+    public EqualMatcher(final String value) {
         super(value);
     }
 
-    public EqualMatcher(Pattern pattern) {
+    public EqualMatcher(final Pattern pattern) {
         super(pattern);
     }
 
@@ -18,7 +18,7 @@ public class EqualMatcher extends Matcher {
     }
 
     @Override
-    public boolean isSatisfiedBy(String o) {
+    public boolean isSatisfiedBy(final String o) {
         return CalculateService.equal(getPattern(), getValue(), o);
     }
 

@@ -6,16 +6,16 @@ import com.google.common.base.Predicate;
  * Conditions implementation for Integer.
  */
 public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> implements IntegerConditions {
-    public IntegerConditionsImpl(Integer integer) {
+    public IntegerConditionsImpl(final Integer integer) {
         super(integer);
     }
 
-    public IntegerConditionsImpl(Integer object, boolean negation) {
+    public IntegerConditionsImpl(final Integer object, final boolean negation) {
         super(object, negation);
     }
 
     @Override
-    protected AbstractObjectConditions<Integer> newInstance(boolean negationValue) {
+    protected AbstractObjectConditions<Integer> newInstance(final boolean negationValue) {
         return new IntegerConditionsImpl(object, negationValue);
     }
 
@@ -29,7 +29,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
     public boolean equalTo(final int value) {
         return verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(Integer input) {
+            public boolean apply(final Integer input) {
                 return input.equals(value);
             }
         });
@@ -39,7 +39,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
     public boolean lessThan(final int value) {
         return verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(Integer input) {
+            public boolean apply(final Integer input) {
                 return input < value;
             }
         });
@@ -49,7 +49,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
     public boolean lessThanOrEqualTo(final int value) {
         return verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(Integer input) {
+            public boolean apply(final Integer input) {
                 return input <= value;
             }
         });
@@ -59,7 +59,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
     public boolean greaterThan(final int value) {
         return verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(Integer input) {
+            public boolean apply(final Integer input) {
                 return input > value;
             }
         });
@@ -69,7 +69,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
     public boolean greaterThanOrEqualTo(final int value) {
         return verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(Integer input) {
+            public boolean apply(final Integer input) {
                 return input >= value;
             }
         });

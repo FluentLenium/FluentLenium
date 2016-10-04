@@ -21,7 +21,7 @@ public final class MessageProxy {
      * @param <T>          type of the class to wrap.
      * @return a proxy generating message from annotations.
      */
-    public static <T> T wrap(Class<T> messageClass, Object instance, String context) {
+    public static <T> T wrap(final Class<T> messageClass, final Object instance, final String context) {
         return (T) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {messageClass},
                 new MessageBuilderInvocationHandler(context, instance));
     }
@@ -35,7 +35,7 @@ public final class MessageProxy {
      * @param <T>          type of the class to wrap.
      * @return a proxy generating message from annotations.
      */
-    protected static <T> T wrap(Class<T> messageClass, Object instance, List<MessageBuilderCall> calls) {
+    public static <T> T wrap(final Class<T> messageClass, final Object instance, final List<MessageBuilderCall> calls) {
         return (T) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {messageClass},
                 new MessageBuilderInvocationHandler(calls));
     }
@@ -48,7 +48,7 @@ public final class MessageProxy {
      * @param <T>          type of the class to wrap.
      * @return a proxy generating message from annotations.
      */
-    public static <T> T builder(Class<T> messageClass, String context) {
+    public static <T> T builder(final Class<T> messageClass, final String context) {
         return (T) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {messageClass},
                 new MessageBuilderInvocationHandler(context));
     }
@@ -61,7 +61,7 @@ public final class MessageProxy {
      * @param <T>          type of the class to wrap.
      * @return a proxy generating message from annotations.
      */
-    protected static <T> T builder(Class<T> messageClass, List<MessageBuilderCall> calls) {
+    public static <T> T builder(final Class<T> messageClass, final List<MessageBuilderCall> calls) {
         return (T) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {messageClass},
                 new MessageBuilderInvocationHandler(calls));
     }
@@ -72,8 +72,9 @@ public final class MessageProxy {
      * @param proxy message builder proxy
      * @return generated message.
      */
-    public static String message(Object proxy) {
-        MessageBuilderInvocationHandler invocationHandler = (MessageBuilderInvocationHandler) Proxy.getInvocationHandler(proxy);
+    public static String message(final Object proxy) {
+        final MessageBuilderInvocationHandler invocationHandler = (MessageBuilderInvocationHandler) Proxy
+                .getInvocationHandler(proxy);
         if (invocationHandler == null) {
             return null;
         }

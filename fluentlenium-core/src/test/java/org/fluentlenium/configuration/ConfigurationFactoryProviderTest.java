@@ -11,7 +11,8 @@ public class ConfigurationFactoryProviderTest {
 
     public static class CustomConfigurationFactory implements ConfigurationFactory {
         @Override
-        public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
+        public Configuration newConfiguration(final Class<?> containerClass,
+                final ConfigurationProperties configurationDefaults) {
             return new ProgrammaticConfiguration();
         }
     }
@@ -22,18 +23,17 @@ public class ConfigurationFactoryProviderTest {
         }
 
         @Override
-        public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
+        public Configuration newConfiguration(final Class<?> containerClass,
+                final ConfigurationProperties configurationDefaults) {
             return new ProgrammaticConfiguration();
         }
     }
 
     public static class FailingConfigurationConfigurationFactory implements ConfigurationFactory {
-        public FailingConfigurationConfigurationFactory() {
-        }
-
         @Override
-        public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
-            ProgrammaticConfiguration programmaticConfiguration = new ProgrammaticConfiguration();
+        public Configuration newConfiguration(final Class<?> containerClass,
+                final ConfigurationProperties configurationDefaults) {
+            final ProgrammaticConfiguration programmaticConfiguration = new ProgrammaticConfiguration();
             programmaticConfiguration.setConfigurationDefaults(FailingConfigurationDefaults.class);
             return programmaticConfiguration;
         }
@@ -84,19 +84,19 @@ public class ConfigurationFactoryProviderTest {
 
     @Test
     public void testDefaultConfiguration() {
-        Configuration configuration = ConfigurationFactoryProvider.newConfiguration(DummyContainer.class);
+        final Configuration configuration = ConfigurationFactoryProvider.newConfiguration(DummyContainer.class);
         assertThat(configuration).isExactlyInstanceOf(ComposedConfiguration.class);
     }
 
     @Test
     public void testCustomConfiguration() {
-        Configuration configuration = ConfigurationFactoryProvider.newConfiguration(CustomContainer.class);
+        final Configuration configuration = ConfigurationFactoryProvider.newConfiguration(CustomContainer.class);
         assertThat(configuration).isExactlyInstanceOf(ProgrammaticConfiguration.class);
     }
 
     @Test
     public void testPrivateCustomConfiguration() {
-        Configuration configuration = ConfigurationFactoryProvider.newConfiguration(PrivateDefaultsContainer.class);
+        final Configuration configuration = ConfigurationFactoryProvider.newConfiguration(PrivateDefaultsContainer.class);
         assertThat(configuration).isNotNull();
     }
 
@@ -112,7 +112,7 @@ public class ConfigurationFactoryProviderTest {
 
     @Test
     public void testCustomConfigurationDefaults() {
-        Configuration configuration = ConfigurationFactoryProvider.newConfiguration(CustomDefaultsContainer.class);
+        final Configuration configuration = ConfigurationFactoryProvider.newConfiguration(CustomDefaultsContainer.class);
         assertThat(configuration.getBaseUrl()).isEqualTo("custom-base-url");
     }
 }

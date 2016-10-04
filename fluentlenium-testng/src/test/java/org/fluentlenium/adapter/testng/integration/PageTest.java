@@ -13,10 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PageTest extends IntegrationFluentTestNg {
     @Page
-    PageAccueil page;
+    /* default */ PageAccueil page;
 
     @Page
-    Page2 page2;
+    /* default */ Page2 page2;
 
     @BeforeMethod
     public void beforeTest() {
@@ -61,10 +61,10 @@ public class PageTest extends IntegrationFluentTestNg {
 
 class PageAccueil extends FluentPage {
 
-    FluentWebElement linkToPage2;
+    /* default */ FluentWebElement linkToPage2;
 
     @FindBy(css = "a.go-next")
-    FluentWebElement linkToPage2FoundWithFindBy;
+    /* default */ FluentWebElement linkToPage2FoundWithFindBy;
 
     @Override
     public String getUrl() {

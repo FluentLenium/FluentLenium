@@ -11,10 +11,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BaseUrlTest extends IntegrationFluentTest {
 
     @Page
-    Page2Relative pageRelative;
+    private Page2Relative pageRelative;
 
     @Page
-    Page2 page;
+    private Page2 page;
 
     @Override
     public String getBaseUrl() {

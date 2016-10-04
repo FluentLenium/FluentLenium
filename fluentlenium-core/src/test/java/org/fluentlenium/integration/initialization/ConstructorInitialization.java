@@ -8,7 +8,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConstructorInitialization extends FluentTest {
-    private WebDriver webDriver = new HtmlUnitDriver();
+    private final WebDriver webDriver = new HtmlUnitDriver();
 
     @Test
     public void doNotUseOverridableMethodsInAConstructor() {

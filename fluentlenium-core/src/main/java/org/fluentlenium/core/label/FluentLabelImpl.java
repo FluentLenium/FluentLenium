@@ -12,15 +12,15 @@ public class FluentLabelImpl<T> implements FluentLabel<T>, FluentLabelProvider {
     private final Supplier<String> defaultLabelSupplier;
 
     private String label;
-    private List<String> labelHints = new ArrayList<>();
+    private final List<String> labelHints = new ArrayList<>();
 
-    public FluentLabelImpl(T reference, Supplier<String> defaultLabelSupplier) {
+    public FluentLabelImpl(final T reference, final Supplier<String> defaultLabelSupplier) {
         this.reference = reference;
         this.defaultLabelSupplier = defaultLabelSupplier;
     }
 
     @Override
-    public T withLabel(String label) {
+    public T withLabel(final String label) {
         this.label = label;
         return reference;
     }
@@ -30,7 +30,7 @@ public class FluentLabelImpl<T> implements FluentLabel<T>, FluentLabelProvider {
     }
 
     @Override
-    public T withLabelHint(String... labelHint) {
+    public T withLabelHint(final String... labelHint) {
         if (labelHint != null) {
             this.labelHints.addAll(Arrays.asList(labelHint));
         }
@@ -43,24 +43,24 @@ public class FluentLabelImpl<T> implements FluentLabel<T>, FluentLabelProvider {
 
     @Override
     public String toString() {
-        StringBuilder toStringBuilder = new StringBuilder();
-        if (this.label != null) {
-            toStringBuilder.append(this.label);
-        } else {
+        final StringBuilder toStringBuilder = new StringBuilder();
+        if (this.label == null) {
             toStringBuilder.append(defaultLabelSupplier.get());
+        } else {
+            toStringBuilder.append(this.label);
         }
 
-        if (labelHints.size() > 0) {
+        if (!labelHints.isEmpty()) {
             toStringBuilder.append(" [");
             boolean notFirst = false;
-            for (String labelHint : labelHints) {
+            for (final String labelHint : labelHints) {
                 if (notFirst) {
                     toStringBuilder.append(", ");
                 }
                 toStringBuilder.append(labelHint);
                 notFirst = true;
             }
-            toStringBuilder.append("]");
+            toStringBuilder.append(']');
         }
 
         return toStringBuilder.toString();

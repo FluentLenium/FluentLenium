@@ -142,7 +142,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
             await().withMessage("toto").atMost(1, NANOSECONDS).until($(".small", withText("Small 1"))).text()
                     .contains("Small 21");
             fail();
-        } catch (TimeoutException e) {
+        } catch (final TimeoutException e) {
             assertThat(e.getMessage()).contains("toto");
         }
     }
@@ -154,15 +154,16 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitPageIsAt() {
-        FluentPage isAtJavascriptPage = newInstance(MyFluentPage.class);
+        final FluentPage isAtJavascriptPage = newInstance(MyFluentPage.class);
         isAtJavascriptPage.go();
         await().atMost(FIVE_SECONDS_TIMEOUT, TimeUnit.SECONDS).untilPage(isAtJavascriptPage).isAt();
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void checkAwaitPageToLoadWithNoJSEnabled() {
-        FluentAdapter fluentTest = new FluentAdapter(new HtmlUnitDriver(false));
-        fluentTest.await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilPage().isLoaded();
+        final FluentAdapter adapter = new FluentAdapter();
+        adapter.initFluent(new HtmlUnitDriver(false));
+        adapter.await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilPage().isLoaded();
     }
 
     @Test
@@ -446,11 +447,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test
     public void checkIsAt() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(SECOND_TIMEOUT, TimeUnit.MILLISECONDS).untilPage(new FluentPage() {
-            @Override
-            public void isAt() {
-            }
-        }).isAt();
+        await().pollingEvery(SECOND_TIMEOUT, TimeUnit.MILLISECONDS).untilPage(new FluentPage()).isAt();
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -470,7 +467,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().pollingEvery(LESS_THAN_SECOND_TIMEOUT, TimeUnit.MILLISECONDS).untilPredicate(new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentControl o) {
+            public boolean apply(final FluentControl o) {
                 return true;
             }
         });
@@ -481,7 +478,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().atMost(SECOND_TIMEOUT).untilPredicate(new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentControl o) {
+            public boolean apply(final FluentControl o) {
                 return false;
             }
         });
@@ -492,7 +489,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().pollingEvery(SECOND_TIMEOUT, TimeUnit.MILLISECONDS).until(new Function<FluentControl, Boolean>() {
             @Override
-            public Boolean apply(FluentControl fluent) {
+            public Boolean apply(final FluentControl fluent) {
                 return true;
             }
         });
@@ -503,7 +500,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().atMost(SECOND_TIMEOUT).until(new Function<FluentControl, Boolean>() {
             @Override
-            public Boolean apply(FluentControl fluent) {
+            public Boolean apply(final FluentControl fluent) {
                 return false;
             }
         });
@@ -533,7 +530,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test
     public void seleniumWaitIsAvailable() {
-        FluentWait wait = await().getWait();
+        final FluentWait wait = await().getWait();
         assertThat(wait).isInstanceOf(FluentWait.class);
     }
 

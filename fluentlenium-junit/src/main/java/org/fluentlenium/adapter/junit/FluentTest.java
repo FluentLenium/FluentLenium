@@ -12,27 +12,24 @@ import org.junit.runners.model.Statement;
  * <p>
  * Extends this class to provide FluentLenium support to your JUnit Test class.
  */
-public abstract class FluentTest extends FluentTestRunnerAdapter {
-    public FluentTest() {
-    }
-
+public class FluentTest extends FluentTestRunnerAdapter {
     @Rule
     public TestRule watchman = new FluentTestRule() {
 
         @Override
-        public void starting(Description description) {
+        public void starting(final Description description) {
             super.starting(description);
             FluentTest.this.starting(description.getTestClass(), description.getDisplayName());
         }
 
         @Override
-        public void finished(Description description) {
+        public void finished(final Description description) {
             super.finished(description);
             FluentTest.this.finished(description.getTestClass(), description.getDisplayName());
         }
 
         @Override
-        public void failed(Throwable e, Description description) {
+        public void failed(final Throwable e, final Description description) {
             super.failed(e, description);
             FluentTest.this.failed(e, description.getTestClass(), description.getDisplayName());
         }

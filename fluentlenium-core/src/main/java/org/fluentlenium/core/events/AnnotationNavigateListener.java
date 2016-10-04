@@ -11,7 +11,7 @@ class AnnotationNavigateListener extends AbstractAnnotationListener implements N
     private final Method method;
     private final String annotationName;
 
-    AnnotationNavigateListener(Method method, Object container, String annotationName, int priority) {
+    AnnotationNavigateListener(final Method method, final Object container, final String annotationName, final int priority) {
         super(container, priority);
         this.method = method;
         this.annotationName = annotationName;
@@ -20,7 +20,7 @@ class AnnotationNavigateListener extends AbstractAnnotationListener implements N
     protected Function<Class<?>, Object> getArgsFunction(final WebDriver driver) {
         return new Function<Class<?>, Object>() {
             @Override
-            public Object apply(Class<?> input) {
+            public Object apply(final Class<?> input) {
                 if (input.isAssignableFrom(WebDriver.class)) {
                     return driver;
                 }
@@ -30,16 +30,16 @@ class AnnotationNavigateListener extends AbstractAnnotationListener implements N
     }
 
     @Override
-    public void on(WebDriver driver) {
-        Class<?>[] parameterTypes = method.getParameterTypes();
+    public void on(final WebDriver driver) {
+        final Class<?>[] parameterTypes = method.getParameterTypes();
 
-        Object[] args = ReflectionUtils.toArgs(getArgsFunction(driver), parameterTypes);
+        final Object[] args = ReflectionUtils.toArgs(getArgsFunction(driver), parameterTypes);
 
         try {
             ReflectionUtils.invoke(method, getContainer(), args);
-        } catch (IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             throw new EventAnnotationsException("An error has occured in " + annotationName + " " + method, e);
-        } catch (InvocationTargetException e) {
+        } catch (final InvocationTargetException e) {
             if (e.getTargetException() instanceof RuntimeException) {
                 throw (RuntimeException) e.getTargetException();
             } else if (e.getTargetException() instanceof Error) {

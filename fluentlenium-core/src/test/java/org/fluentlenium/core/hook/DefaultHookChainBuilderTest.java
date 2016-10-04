@@ -45,14 +45,15 @@ public class DefaultHookChainBuilderTest {
 
     @Before
     public void before() {
-        fluentAdapter = new FluentAdapter(webDriver);
+        fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(webDriver);
 
         instantiator = new DefaultComponentInstantiator(fluentAdapter);
         hookChainBuilder = new DefaultHookChainBuilder(fluentAdapter, instantiator) {
             @Override
-            protected FluentHook<?> newInstance(Class<? extends FluentHook<?>> hookClass, FluentControl fluentControl,
-                    ComponentInstantiator instantiator, Supplier<WebElement> currentSupplier, Supplier<ElementLocator> locator,
-                    Supplier<String> toStringSupplier, Object options)
+            protected FluentHook<?> newInstance(final Class<? extends FluentHook<?>> hookClass, final FluentControl fluentControl,
+                    final ComponentInstantiator instantiator, final Supplier<WebElement> currentSupplier,
+                    final Supplier<ElementLocator> locator, final Supplier<String> toStringSupplier, final Object options)
                     throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
                 return spy(super.newInstance(hookClass, fluentControl, instantiator, currentSupplier, locator, toStringSupplier,
                         options));
@@ -62,13 +63,13 @@ public class DefaultHookChainBuilderTest {
 
     @Test
     public void testBuildHook() {
-        List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
+        final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
 
         hookDefinitions.add(new HookDefinition<>(NanoHook.class));
         hookDefinitions.add(new HookDefinition<>(NanoHook.class, new NanoHookOptions("option")));
         hookDefinitions.add(new HookDefinition<>(NanoHook.class));
 
-        List<FluentHook> fluentHooks = hookChainBuilder
+        final List<FluentHook> fluentHooks = hookChainBuilder
                 .build(Suppliers.ofInstance(element), Suppliers.ofInstance(locator), Suppliers.ofInstance("toString"),
                         hookDefinitions);
 
@@ -133,9 +134,9 @@ public class DefaultHookChainBuilderTest {
     }
 
     private static class FailingConstructorHook extends BaseHook<Object> {
-        FailingConstructorHook(FluentControl fluentControl, ComponentInstantiator instantiator,
-                Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier,
-                Object options) {
+        FailingConstructorHook(final FluentControl fluentControl, final ComponentInstantiator instantiator,
+                final Supplier<WebElement> elementSupplier, final Supplier<ElementLocator> locatorSupplier,
+                final Supplier<String> toStringSupplier, final Object options) {
             super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
             throw new IllegalStateException();
         }

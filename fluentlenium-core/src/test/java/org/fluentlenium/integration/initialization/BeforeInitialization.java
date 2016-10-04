@@ -11,8 +11,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BeforeInitialization extends FluentTest {
-    private WebDriver webDriver = new HtmlUnitDriver();
-    private TestPrivatePageWithElement page2;
+    private final WebDriver webDriver = new HtmlUnitDriver();
+    private TestPrivatePageWithElement page2; // NOPMD UsunedPrivateField
     private TestPrivatePage2 page;
 
     @Before
@@ -28,13 +28,13 @@ public class BeforeInitialization extends FluentTest {
 
     @Test
     public void testInternalFluentWebElementInstantiate() {
-        TestPrivatePageWithElement privatePage = newInstance(TestPrivatePageWithElement.class);
+        final TestPrivatePageWithElement privatePage = newInstance(TestPrivatePageWithElement.class);
         assertThat(privatePage.myElement).isNotNull();
     }
 
     @Test
     public void testSuperclassFluentWebElementInstantiate() {
-        TestPrivatePageWithElementSubclass privatePage = newInstance(TestPrivatePageWithElementSubclass.class);
+        final TestPrivatePageWithElementSubclass privatePage = newInstance(TestPrivatePageWithElementSubclass.class);
         assertThat(privatePage.myElement).isNotNull();
     }
 
@@ -55,7 +55,7 @@ class TestPrivatePage2 extends FluentPage {
 
 class TestPrivatePageWithElement extends FluentPage {
 
-    FluentWebElement myElement;
+    /* default */ FluentWebElement myElement;
 
     @Override
     public String getUrl() {

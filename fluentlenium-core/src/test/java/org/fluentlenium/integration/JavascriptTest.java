@@ -15,7 +15,7 @@ import static org.fluentlenium.core.filter.FilterConstructor.with;
 public class JavascriptTest extends IntegrationFluentTest {
 
     @Before
-    public void setup() {
+    public void before() {
         goTo(JAVASCRIPT_URL);
         getConfiguration().setScreenshotMode(TriggerMode.MANUAL);
         getConfiguration().setHtmlDumpMode(TriggerMode.MANUAL);

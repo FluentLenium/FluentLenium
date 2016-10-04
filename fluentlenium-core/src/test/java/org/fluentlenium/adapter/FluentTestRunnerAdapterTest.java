@@ -24,16 +24,15 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FluentTestRunnerAdapterTest {
-    interface TestWebDriver extends WebDriver, TakesScreenshot {
-
-    }
-
     @Mock
     private TestWebDriver driver;
 
+    private interface TestWebDriver extends WebDriver, TakesScreenshot {
+    }
+
     @Test
     public void testStartingFinish() {
-        FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
+        final FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
 
         adapter.starting();
 
@@ -42,7 +41,7 @@ public class FluentTestRunnerAdapterTest {
 
     @Test
     public void testStartingFinishWithName() {
-        FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter(new DefaultSharedMutator()));
+        final FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter(new DefaultSharedMutator()));
 
         adapter.starting("test");
 
@@ -51,14 +50,14 @@ public class FluentTestRunnerAdapterTest {
 
     @Test
     public void testFailedWhenNoDriverAvailable() throws IOException {
-        FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
+        final FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
         adapter.initFluent(driver);
 
-        Path tmpDirectory = Files.createTempDirectory("testFailedWhenNoDriverAvailable");
+        final Path tmpDirectory = Files.createTempDirectory("testFailedWhenNoDriverAvailable");
         adapter.getConfiguration().setScreenshotPath(tmpDirectory.toFile().getPath());
         adapter.getConfiguration().setHtmlDumpPath(tmpDirectory.toFile().getPath());
 
-        Path tempFile = Files.createTempFile("testFailedWhenNoDriverAvailable", "");
+        final Path tempFile = Files.createTempFile("testFailedWhenNoDriverAvailable", "");
         when(driver.getScreenshotAs(OutputType.FILE)).thenReturn(tempFile.toFile());
 
         adapter.getConfiguration().setScreenshotMode(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
@@ -83,14 +82,14 @@ public class FluentTestRunnerAdapterTest {
 
     @Test
     public void testFailedWhenDriverAvailable() throws IOException {
-        FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
+        final FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
         adapter.initFluent(driver);
 
-        Path tmpDirectory = Files.createTempDirectory("testFailedWhenDriverAvailable");
+        final Path tmpDirectory = Files.createTempDirectory("testFailedWhenDriverAvailable");
         adapter.getConfiguration().setScreenshotPath(tmpDirectory.toFile().getPath());
         adapter.getConfiguration().setHtmlDumpPath(tmpDirectory.toFile().getPath());
 
-        Path tempFile = Files.createTempFile("testFailedWhenDriverAvailable", "");
+        final Path tempFile = Files.createTempFile("testFailedWhenDriverAvailable", "");
         when(driver.getScreenshotAs(OutputType.FILE)).thenReturn(tempFile.toFile());
         tempFile.toFile().deleteOnExit();
 

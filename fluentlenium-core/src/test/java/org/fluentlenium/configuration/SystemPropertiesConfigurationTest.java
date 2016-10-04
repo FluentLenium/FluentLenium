@@ -27,7 +27,7 @@ public class SystemPropertiesConfigurationTest extends AbstractPropertiesConfigu
     }
 
     @Override
-    protected void mockProperty(String propertyName, Object propertyValue) {
+    protected void mockProperty(final String propertyName, final Object propertyValue) {
         Mockito.when(System.getProperty("fluentlenium." + propertyName)).thenReturn(valueToString(propertyValue));
     }
 }

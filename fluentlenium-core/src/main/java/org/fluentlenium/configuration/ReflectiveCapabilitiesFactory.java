@@ -13,25 +13,26 @@ import java.util.List;
  * A simple {@link CapabilitiesFactory} that create {@link Capabilities} instances using reflection.
  */
 public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, FactoryNames, ReflectiveFactory {
-    private String name;
-    private Object[] args;
-    private String capabilitiesClassName;
+    private final String name;
+    private final Object[] args;
+    private final String capabilitiesClassName;
     private Class<? extends Capabilities> capabilitiesClass;
     private boolean available;
 
-    public ReflectiveCapabilitiesFactory(String name, String capabilitiesClassName, Object... args) {
+    public ReflectiveCapabilitiesFactory(final String name, final String capabilitiesClassName, final Object... args) {
         this.name = name;
         this.capabilitiesClassName = capabilitiesClassName;
         this.args = args;
         try {
             this.capabilitiesClass = (Class<? extends Capabilities>) Class.forName(capabilitiesClassName);
             this.available = Capabilities.class.isAssignableFrom(this.capabilitiesClass);
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
             this.available = false;
         }
     }
 
-    public ReflectiveCapabilitiesFactory(String name, Class<? extends Capabilities> capabilitiesClass, Object... args) {
+    public ReflectiveCapabilitiesFactory(final String name, final Class<? extends Capabilities> capabilitiesClass,
+            final Object... args) {
         this.name = name;
         this.capabilitiesClass = capabilitiesClass;
         this.args = args;
@@ -65,7 +66,7 @@ public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, Facto
     }
 
     public String[] getNames() {
-        List<String> names = new ArrayList<>(Arrays.asList(name));
+        final List<String> names = new ArrayList<>(Arrays.asList(name));
         if (capabilitiesClass != null) {
             names.add(capabilitiesClass.getName());
             names.add(capabilitiesClass.getSimpleName());

@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-import org.assertj.core.api.Assertions;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -20,41 +19,41 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class SeleniumFindBy extends IntegrationFluentTest {
     @Page
-    PageIndex page;
+    private PageIndex page;
 
     public void shouldFindByRetrieveElement() {
         page.go();
         page.isAt();
 
-        Assertions.assertThat(page.location.getText()).isEqualTo("Pharmacy");
+        assertThat(page.location.getText()).isEqualTo("Pharmacy");
     }
 
     @Test
     public void shouldFindByRetrieveList() {
         page.go();
         page.isAt();
-        Assertions.assertThat(page.smalls).hasSize(3);
+        assertThat(page.smalls).hasSize(3);
 
-        ArrayList<String> texts = new ArrayList<>();
-        for (WebElement e : page.smalls) {
+        final List<String> texts = new ArrayList<>();
+        for (final WebElement e : page.smalls) {
             texts.add(e.getText());
         }
 
-        Assertions.assertThat(texts).containsExactly("Small 1", "Small 2", "Small 3");
+        assertThat(texts).containsExactly("Small 1", "Small 2", "Small 3");
     }
 
     @Test
     public void shouldFindAllFindByRetrieveList() {
         page.go();
         page.isAt();
-        Assertions.assertThat(page.findAllElements).hasSize(4);
+        assertThat(page.findAllElements).hasSize(4);
 
-        ArrayList<String> texts = new ArrayList<>();
-        for (WebElement e : page.findAllElements) {
+        final List<String> texts = new ArrayList<>();
+        for (final WebElement e : page.findAllElements) {
             texts.add(e.getText());
         }
 
-        Assertions.assertThat(texts).containsExactly("Pharmacy", "Small 1", "Small 2", "Small 3");
+        assertThat(texts).containsExactly("Pharmacy", "Small 1", "Small 2", "Small 3");
     }
 
     @Test
@@ -68,13 +67,13 @@ public class SeleniumFindBy extends IntegrationFluentTest {
 
     private static class PageIndex extends FluentPage {
         @FindBy(id = "location")
-        WebElement location;
+        private WebElement location;
 
         @FindBy(className = "small")
-        List<WebElement> smalls;
+        private List<WebElement> smalls;
 
-        @FindAll({ @FindBy(id = "location"), @FindBy(className = "small") })
-        List<WebElement> findAllElements;
+        @FindAll({@FindBy(id = "location"), @FindBy(className = "small")})
+        private List<WebElement> findAllElements;
 
         @FindBy(css = "#mouseover")
         private FluentWebElement mouseOverElement;

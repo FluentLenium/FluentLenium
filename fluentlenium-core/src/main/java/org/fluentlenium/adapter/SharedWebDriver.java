@@ -17,7 +17,8 @@ public class SharedWebDriver implements WrapsDriver {
 
     private final DriverLifecycle driverLifecycle;
 
-    public SharedWebDriver(WebDriver driver, Class<?> testClass, String testName, DriverLifecycle driverLifecycle) {
+    public SharedWebDriver(final WebDriver driver, final Class<?> testClass, final String testName,
+            final DriverLifecycle driverLifecycle) {
         this.driver = driver;
         this.testClass = testClass;
         this.testName = testName;

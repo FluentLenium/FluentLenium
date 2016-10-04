@@ -59,7 +59,7 @@ public class WindowActionsTest {
 
     @Test
     public void getWindowTest() {
-        WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
 
         windowAction.getWindow();
         verify(driver.manage(), times(1)).window();
@@ -67,7 +67,7 @@ public class WindowActionsTest {
 
     @Test
     public void maximizeWindowTest() {
-        WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
 
         windowAction.maximizeWindow();
         verify(driver.manage(), times(1)).window();
@@ -76,7 +76,7 @@ public class WindowActionsTest {
 
     @Test
     public void fullScreenWindowTest() {
-        WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
 
         windowAction.fullScreen();
         verify(driver.manage(), times(1)).window();
@@ -85,9 +85,9 @@ public class WindowActionsTest {
 
     @Test
     public void switchToTest() {
-        String windowHandle = "WndH1";
+        final String windowHandle = "WndH1";
 
-        WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
 
         when(driver.getWindowHandle()).thenReturn(windowHandle);
 
@@ -99,10 +99,10 @@ public class WindowActionsTest {
 
     @Test
     public void switchToLast() {
-        String windowHandle = "WndH1";
-        String windowHandle2 = "WndH2";
+        final String windowHandle = "WndH1";
+        final String windowHandle2 = "WndH2";
 
-        WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
 
         when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2));
 
@@ -114,7 +114,7 @@ public class WindowActionsTest {
 
     @Test
     public void openNewAndSwitch() {
-        JavascriptWebDriver jsDriver = mock(JavascriptWebDriver.class);
+        final JavascriptWebDriver jsDriver = mock(JavascriptWebDriver.class);
 
         when(fluentDriver.getDriver()).thenReturn(jsDriver);
         when(jsDriver.manage()).thenReturn(options);
@@ -122,26 +122,26 @@ public class WindowActionsTest {
         when(jsDriver.switchTo()).thenReturn(targetLocator);
         when(jsDriver.switchTo().window(anyString())).thenReturn(driver);
 
-        String windowHandle = "WndH1";
-        String windowHandle1 = "WndH2";
-        String windowHandle2 = "WndH3";
+        final String windowHandle = "WndH1";
+        final String windowHandle1 = "WndH2";
+        final String windowHandle2 = "WndH3";
 
-        FluentWait fluentWait = mock(FluentWait.class);
-        FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
-        ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
+        final FluentWait fluentWait = mock(FluentWait.class);
+        final FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
+        final ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
 
-        FluentDriver currentFluentDriver = new FluentDriver(jsDriver, configurationProperties, fluentControl);
-        FluentDriver fluentDriverSpied = spy(currentFluentDriver);
+        final FluentDriver currentFluentDriver = new FluentDriver(driver, configurationProperties, fluentControl);
+        final FluentDriver fluentDriverSpied = spy(currentFluentDriver);
 
         when(jsDriver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),
                 ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
         when(jsDriver.getWindowHandle()).thenReturn(windowHandle1, windowHandle2);
 
         when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);
-        WindowAction windowAction = new WindowAction(fluentDriverSpied, jsDriver);
+        final WindowAction windowAction = new WindowAction(fluentDriverSpied, jsDriver);
         windowAction.openNewAndSwitch();
 
-        verify(jsDriver, times(3)).manage();
+        verify(jsDriver, times(1)).manage();
         verify(jsDriver, times(1)).getWindowHandle();
         verify(jsDriver, times(3)).getWindowHandles();
         verify(jsDriver, times(2)).switchTo();
@@ -150,7 +150,7 @@ public class WindowActionsTest {
 
     @Test
     public void switchToParentFrame() {
-        WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
 
         windowAction.switchToParentFrame();
 
@@ -160,8 +160,8 @@ public class WindowActionsTest {
 
     @Test
     public void setSizeTest() {
-        WindowAction windowAction = new WindowAction(fluentDriver, driver);
-        Dimension dim = new Dimension(100, 200);
+        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final Dimension dim = new Dimension(100, 200);
         windowAction.setSize(dim);
         verify(driver.manage(), times(1)).window();
         verify(driver.manage().window(), times(1)).setSize(eq(dim));
@@ -169,12 +169,12 @@ public class WindowActionsTest {
 
     @Test
     public void clickAndCloseCurrentTest() throws InterruptedException {
-        String windowHandle = "WndH1";
-        String windowHandle2 = "WndH2";
+        final String windowHandle = "WndH1";
+        final String windowHandle2 = "WndH2";
 
-        FluentWebElement fluentWebElement = mock(FluentWebElement.class);
-        FluentWait fluentWait = mock(FluentWait.class);
-        FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
+        final FluentWebElement fluentWebElement = mock(FluentWebElement.class);
+        final FluentWait fluentWait = mock(FluentWait.class);
+        final FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
 
         when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2));
         when(fluentWaitWindowMatcher.isNotDisplayed()).thenReturn(true);
@@ -182,7 +182,7 @@ public class WindowActionsTest {
         when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);
         when(fluentDriver.await()).thenReturn(fluentWait);
 
-        WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
         windowAction.clickAndCloseCurrent(fluentWebElement);
 
         verify(driver, times(1)).manage();
@@ -192,17 +192,17 @@ public class WindowActionsTest {
 
     @Test
     public void clickAndOpenNewTest() throws InterruptedException {
-        String windowHandle = "WndH1";
-        String windowHandle1 = "WndH2";
-        String windowHandle2 = "WndH3";
+        final String windowHandle = "WndH1";
+        final String windowHandle1 = "WndH2";
+        final String windowHandle2 = "WndH3";
 
-        FluentWebElement fluentWebElement = mock(FluentWebElement.class);
-        FluentWait fluentWait = mock(FluentWait.class);
-        FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
-        ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
+        final FluentWebElement fluentWebElement = mock(FluentWebElement.class);
+        final FluentWait fluentWait = mock(FluentWait.class);
+        final FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
+        final ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
 
-        FluentDriver currentFluentDriver = new FluentDriver(driver, configurationProperties, fluentControl);
-        FluentDriver fluentDriverSpied = spy(currentFluentDriver);
+        final FluentDriver currentFluentDriver = new FluentDriver(driver, configurationProperties, fluentControl);
+        final FluentDriver fluentDriverSpied = spy(currentFluentDriver);
 
         when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),
                 ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
@@ -211,7 +211,7 @@ public class WindowActionsTest {
         when(fluentWebElement.click()).thenReturn(fluentWebElement);
 
         when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);
-        WindowAction windowAction = new WindowAction(fluentDriverSpied, driver);
+        final WindowAction windowAction = new WindowAction(fluentDriverSpied, driver);
         windowAction.clickAndOpenNew(fluentWebElement);
 
         verify(driver, times(3)).manage();
@@ -220,12 +220,12 @@ public class WindowActionsTest {
 
     @Test
     public void getSizeTest() {
-        WindowAction windowAction = new WindowAction(fluentDriver, driver);
-        Point pos = new Point(101, 201);
+        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final Point pos = new Point(101, 201);
 
         when(driver.manage().window().getPosition()).thenReturn(pos);
 
-        Point getPos = windowAction.getPosition();
+        final Point getPos = windowAction.getPosition();
 
         verify(driver.manage(), times(2)).window();
         verify(driver.manage().window(), times(1)).getPosition();
@@ -234,12 +234,12 @@ public class WindowActionsTest {
 
     @Test
     public void getPositionTest() {
-        WindowAction windowAction = new WindowAction(fluentDriver, driver);
-        Dimension dim = new Dimension(101, 201);
+        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final Dimension dim = new Dimension(101, 201);
 
         when(driver.manage().window().getSize()).thenReturn(dim);
 
-        Dimension getSizeDim = windowAction.getSize();
+        final Dimension getSizeDim = windowAction.getSize();
 
         verify(driver.manage(), times(2)).window();
         verify(driver.manage().window(), times(1)).getSize();
@@ -248,8 +248,8 @@ public class WindowActionsTest {
 
     @Test
     public void setPositionTest() {
-        WindowAction windowAction = new WindowAction(fluentDriver, driver);
-        Point pos = new Point(101, 201);
+        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final Point pos = new Point(101, 201);
 
         windowAction.setPosition(pos);
         verify(driver.manage(), times(1)).window();
@@ -258,8 +258,8 @@ public class WindowActionsTest {
 
     @Test
     public void titleTest() {
-        String title = "title";
-        WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final String title = "title";
+        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
         when(driver.getTitle()).thenReturn(title);
 
         Assertions.assertThat(windowAction.title()).isEqualTo(title);
@@ -269,7 +269,7 @@ public class WindowActionsTest {
 
     @Test
     public void closeTest() {
-        WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
         windowAction.close();
 
         verify(driver.manage(), times(0)).window();

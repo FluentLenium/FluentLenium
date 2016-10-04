@@ -24,23 +24,24 @@ public class AnnotationConfiguration implements ConfigurationProperties {
 
     private final JsonToBeanConverter jsonConverter = new JsonToBeanConverter();
 
-    public AnnotationConfiguration(Class<?> containerClass) {
-        this(containerClass != null ? containerClass.getAnnotation(FluentConfiguration.class) : null);
+    public AnnotationConfiguration(final Class<?> containerClass) {
+        this(containerClass == null ? null : containerClass.getAnnotation(FluentConfiguration.class));
     }
 
-    public AnnotationConfiguration(FluentConfiguration configuration) {
+    public AnnotationConfiguration(final FluentConfiguration configuration) {
         super();
         this.configuration = configuration;
     }
 
-    public String getStringValue(String property) {
+    public String getStringValue(final String property) {
         if (Strings.isNullOrEmpty(property)) {
             return null;
         }
         return property;
     }
 
-    private <T extends ConfigurationFactory> Class<T> getConfigurationFactoryClassValue(Class<T> configurationFactoryClass) {
+    private <T extends ConfigurationFactory> Class<T> getConfigurationFactoryClassValue(
+            final Class<T> configurationFactoryClass) {
         if (configurationFactoryClass == DefaultConfigurationFactory.class) {
             return null;
         }
@@ -48,7 +49,7 @@ public class AnnotationConfiguration implements ConfigurationProperties {
     }
 
     private Class<? extends ConfigurationProperties> getConfigurationDefaultsClassValue(
-            Class<? extends ConfigurationProperties> configurationDefaultsClass) {
+            final Class<? extends ConfigurationProperties> configurationDefaultsClass) {
         if (configurationDefaultsClass == ConfigurationDefaults.class) {
             return null;
         }
@@ -60,27 +61,27 @@ public class AnnotationConfiguration implements ConfigurationProperties {
             return null;
         }
         try {
-            URL url = new URL(property);
+            final URL url = new URL(property);
             InputStream stream = null;
             try {
                 stream = url.openStream();
                 property = IOUtils.toString(stream, Charset.defaultCharset());
-            } catch (IOException e) {
-                throw new ConfigurationException("Can't read Capabilities defined at " + url);
+            } catch (final IOException e) {
+                throw new ConfigurationException("Can't read Capabilities defined at " + url, e);
             } finally {
                 IOUtils.closeQuietly(stream);
             }
-        } catch (MalformedURLException e) {
+        } catch (final MalformedURLException e) { // NOPMD EmptyCatchBlock
             // This is not an URL. Consider property as JSON.
         }
-        CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
+        final CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
         if (factory != null) {
             return factory.newCapabilities();
         }
 
         try {
             return jsonConverter.convert(DesiredCapabilities.class, property);
-        } catch (JsonException e) {
+        } catch (final JsonException e) {
             throw new ConfigurationException("Can't convert JSON Capabilities to Object.", e);
         }
     }
@@ -93,21 +94,21 @@ public class AnnotationConfiguration implements ConfigurationProperties {
         return getConfigurationDefaultsClassValue(configuration.configurationDefaults());
     }
 
-    private Long getLongValue(Long property) {
+    private Long getLongValue(final Long property) {
         if (property < 0) {
             return null;
         }
         return property;
     }
 
-    private TriggerMode getTriggerModeValue(TriggerMode triggerMode) {
+    private TriggerMode getTriggerModeValue(final TriggerMode triggerMode) {
         if (triggerMode == TriggerMode.DEFAULT) {
             return null;
         }
         return triggerMode;
     }
 
-    private DriverLifecycle getDriverLifecycleValue(DriverLifecycle driverLifecycle) {
+    private DriverLifecycle getDriverLifecycleValue(final DriverLifecycle driverLifecycle) {
         if (driverLifecycle == DriverLifecycle.DEFAULT) {
             return null;
         }

@@ -138,7 +138,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
                 }
             }).text().contains("Small 21");
             fail();
-        } catch (TimeoutException e) {
+        } catch (final TimeoutException e) {
             assertThat(e.getMessage()).contains("toto");
         }
     }

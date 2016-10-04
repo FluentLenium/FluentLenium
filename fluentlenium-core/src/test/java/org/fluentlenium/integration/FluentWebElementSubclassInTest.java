@@ -10,10 +10,10 @@ import org.openqa.selenium.WebElement;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluentWebElementSubclassInTest extends IntegrationFluentTest {
-    ALink linkToPage2;
+    private ALink linkToPage2;
 
     public static class ALink extends FluentWebElement {
-        public ALink(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        public ALink(final WebElement webElement, final FluentControl fluentControl, final ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
 

@@ -7,7 +7,9 @@ public class SharedWebDriverContainerShutdownHook extends Thread {
     }
 
     @Override
-    public synchronized void start() {
-        SharedWebDriverContainer.INSTANCE.quitAll();
+    public void start() {
+        synchronized (this) {
+            SharedWebDriverContainer.INSTANCE.quitAll();
+        }
     }
 }

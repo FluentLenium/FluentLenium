@@ -14,11 +14,11 @@ public class ConfigurationDefaultsTest {
 
     @Test
     public void testConfiguration() throws IntrospectionException, InvocationTargetException, IllegalAccessException {
-        ConfigurationDefaults configurationDefaults = new ConfigurationDefaults();
-        PropertyDescriptor[] props = Introspector.getBeanInfo(configurationDefaults.getClass()).getPropertyDescriptors();
+        final ConfigurationDefaults configurationDefaults = new ConfigurationDefaults();
+        final PropertyDescriptor[] props = Introspector.getBeanInfo(configurationDefaults.getClass()).getPropertyDescriptors();
 
-        for (PropertyDescriptor prop : props) {
-            Method readMethod = prop.getReadMethod();
+        for (final PropertyDescriptor prop : props) {
+            final Method readMethod = prop.getReadMethod();
             if (readMethod.getDeclaringClass() == Object.class) {
                 continue;
             }
@@ -37,6 +37,7 @@ public class ConfigurationDefaultsTest {
                 break;
             default:
                 Assertions.assertThat(readMethod.invoke(configurationDefaults)).isNull();
+                break;
             }
         }
     }

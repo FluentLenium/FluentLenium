@@ -10,9 +10,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NanoHookOptions {
-    public NanoHookOptions(NanoHookAnnotation annotation) {
+    private String value; // NOPMD ImmutableField
+
+    public NanoHookOptions(final NanoHookAnnotation annotation) {
         this.value = annotation.value();
     }
-
-    private String value;
 }

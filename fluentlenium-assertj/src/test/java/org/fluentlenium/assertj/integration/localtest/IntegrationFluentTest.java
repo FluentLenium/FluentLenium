@@ -5,7 +5,7 @@ import org.fluentlenium.assertj.integration.util.adapter.FluentTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-public abstract class IntegrationFluentTest extends FluentTest {
+public class IntegrationFluentTest extends FluentTest {
 
     public static final String DEFAULT_URL;
 

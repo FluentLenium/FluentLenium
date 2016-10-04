@@ -16,7 +16,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -34,14 +33,9 @@ public class WaitConditionTest {
     private FluentControl control;
 
     @Mock
-    private WebDriver driver;
-
-    @Mock
     private WebElement element;
 
     private FluentWait wait;
-
-    private String context = "context";
 
     private ComponentInstantiator instantiator;
 
@@ -57,11 +51,11 @@ public class WaitConditionTest {
     @Test
     public void testWaitEnabled() {
         final FluentConditions conditions = WaitConditionProxy
-                .one(wait, context, new Supplier<List<? extends FluentWebElement>>() {
+                .one(wait, "context", new Supplier<List<? extends FluentWebElement>>() {
                     @Override
                     public List<? extends FluentWebElement> get() {
-                        FluentList<FluentWebElement> list = instantiator.newFluentList();
-                        FluentWebElement fluentWebElement = instantiator.newFluent(element);
+                        final FluentList<FluentWebElement> list = instantiator.newFluentList();
+                        final FluentWebElement fluentWebElement = instantiator.newFluent(element);
                         list.add(fluentWebElement);
                         return list;
                     }
@@ -83,11 +77,11 @@ public class WaitConditionTest {
         when(element.isEnabled()).thenReturn(true);
 
         final FluentConditions conditions = WaitConditionProxy
-                .one(wait, context, new Supplier<List<? extends FluentWebElement>>() {
+                .one(wait, "context", new Supplier<List<? extends FluentWebElement>>() {
                     @Override
                     public List<? extends FluentWebElement> get() {
-                        FluentList<FluentWebElement> list = instantiator.newFluentList();
-                        FluentWebElement fluentWebElement = instantiator.newFluent(element);
+                        final FluentList<FluentWebElement> list = instantiator.newFluentList();
+                        final FluentWebElement fluentWebElement = instantiator.newFluent(element);
                         list.add(fluentWebElement);
                         return list;
                     }
@@ -107,11 +101,11 @@ public class WaitConditionTest {
     @Test(expected = TimeoutException.class)
     public void testWaitEnabledTimeout() {
         final FluentConditions conditions = WaitConditionProxy
-                .one(wait, context, new Supplier<List<? extends FluentWebElement>>() {
+                .one(wait, "context", new Supplier<List<? extends FluentWebElement>>() {
                     @Override
                     public List<? extends FluentWebElement> get() {
-                        FluentList<FluentWebElement> list = instantiator.newFluentList();
-                        FluentWebElement fluentWebElement = instantiator.newFluent(element);
+                        final FluentList<FluentWebElement> list = instantiator.newFluentList();
+                        final FluentWebElement fluentWebElement = instantiator.newFluent(element);
                         list.add(fluentWebElement);
                         return list;
                     }
@@ -123,11 +117,11 @@ public class WaitConditionTest {
     @Test
     public void testId() {
         final FluentConditions conditions = WaitConditionProxy
-                .one(wait, context, new Supplier<List<? extends FluentWebElement>>() {
+                .one(wait, "context", new Supplier<List<? extends FluentWebElement>>() {
                     @Override
                     public List<? extends FluentWebElement> get() {
-                        FluentList<FluentWebElement> list = instantiator.newFluentList();
-                        FluentWebElement fluentWebElement = instantiator.newFluent(element);
+                        final FluentList<FluentWebElement> list = instantiator.newFluentList();
+                        final FluentWebElement fluentWebElement = instantiator.newFluent(element);
                         list.add(fluentWebElement);
                         return list;
                     }
@@ -147,11 +141,11 @@ public class WaitConditionTest {
     @Test(expected = TimeoutException.class)
     public void testIdTimeout() {
         final FluentConditions conditions = WaitConditionProxy
-                .one(wait, context, new Supplier<List<? extends FluentWebElement>>() {
+                .one(wait, "context", new Supplier<List<? extends FluentWebElement>>() {
                     @Override
                     public List<? extends FluentWebElement> get() {
-                        FluentList<FluentWebElement> list = instantiator.newFluentList();
-                        FluentWebElement fluentWebElement = instantiator.newFluent(element);
+                        final FluentList<FluentWebElement> list = instantiator.newFluentList();
+                        final FluentWebElement fluentWebElement = instantiator.newFluent(element);
                         list.add(fluentWebElement);
                         return list;
                     }
@@ -172,11 +166,11 @@ public class WaitConditionTest {
         when(element.getRect()).thenReturn(new Rectangle(10, 20, 30, 30));
 
         final FluentConditions conditions = WaitConditionProxy
-                .one(wait, context, new Supplier<List<? extends FluentWebElement>>() {
+                .one(wait, "context", new Supplier<List<? extends FluentWebElement>>() {
                     @Override
                     public List<? extends FluentWebElement> get() {
-                        FluentList<FluentWebElement> list = instantiator.newFluentList();
-                        FluentWebElement fluentWebElement = instantiator.newFluent(element);
+                        final FluentList<FluentWebElement> list = instantiator.newFluentList();
+                        final FluentWebElement fluentWebElement = instantiator.newFluent(element);
                         list.add(fluentWebElement);
                         return list;
                     }
@@ -197,11 +191,11 @@ public class WaitConditionTest {
         when(element.getRect()).thenReturn(new Rectangle(10, 20, 30, 30));
 
         final FluentConditions conditions = WaitConditionProxy
-                .one(wait, context, new Supplier<List<? extends FluentWebElement>>() {
+                .one(wait, "context", new Supplier<List<? extends FluentWebElement>>() {
                     @Override
                     public List<? extends FluentWebElement> get() {
-                        FluentList<FluentWebElement> list = instantiator.newFluentList();
-                        FluentWebElement fluentWebElement = instantiator.newFluent(element);
+                        final FluentList<FluentWebElement> list = instantiator.newFluentList();
+                        final FluentWebElement fluentWebElement = instantiator.newFluent(element);
                         list.add(fluentWebElement);
                         return list;
                     }

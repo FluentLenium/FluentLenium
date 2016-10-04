@@ -11,7 +11,7 @@ public class MethodInvocationReflectionFactory implements CapabilitiesFactory, F
     private final Object instance;
     private final Object[] args;
 
-    public MethodInvocationReflectionFactory(Method method, Object instance, Object... args) {
+    public MethodInvocationReflectionFactory(final Method method, final Object instance, final Object... args) {
         this.method = method;
         this.instance = instance;
         this.args = args;
@@ -21,9 +21,9 @@ public class MethodInvocationReflectionFactory implements CapabilitiesFactory, F
     public Capabilities newCapabilities() {
         try {
             return (Capabilities) this.method.invoke(instance, args);
-        } catch (IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             throw new ConfigurationException("Can't create capabilities instance", e);
-        } catch (InvocationTargetException e) {
+        } catch (final InvocationTargetException e) {
             throw new ConfigurationException("Can't create capabilities instance", e);
         }
     }

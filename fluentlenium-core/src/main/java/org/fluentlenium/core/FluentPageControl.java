@@ -26,5 +26,5 @@ public interface FluentPageControl extends FluentControl {
     /**
      * Go to the url defined in the page
      */
-    void go();
+    void go(); // NOPMD ShortMethodName
 }

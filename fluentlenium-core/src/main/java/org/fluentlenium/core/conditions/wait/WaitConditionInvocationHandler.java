@@ -29,8 +29,8 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
     private String context;
     private boolean negation;
 
-    public WaitConditionInvocationHandler(Class<C> conditionClass, FluentWait wait, String context,
-            Supplier<C> conditionSupplier) {
+    public WaitConditionInvocationHandler(final Class<C> conditionClass, final FluentWait wait, final String context,
+            final Supplier<C> conditionSupplier) {
         this.conditionClass = conditionClass;
         this.wait = wait;
         this.context = context;
@@ -52,8 +52,8 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      * @param ignoreNot true if the negation should be ignored.
      * @return underlying conditions.
      */
-    protected C conditions(boolean ignoreNot) {
-        C conditions = conditionSupplier.get();
+    protected C conditions(final boolean ignoreNot) {
+        final C conditions = conditionSupplier.get();
         return applyNegation(conditions, ignoreNot);
     }
 
@@ -64,7 +64,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      * @param ignoreNegation true if the negation should be ignored.
      * @return conditions with the negation applied.
      */
-    protected C applyNegation(C conditions, boolean ignoreNegation) {
+    protected C applyNegation(final C conditions, final boolean ignoreNegation) {
         if (!ignoreNegation && negation) {
             return (C) conditions.not();
         }
@@ -86,7 +86,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      * @param ignoreNegation true if the negation should be ignored.
      * @return message builder proxy
      */
-    protected C messageBuilder(boolean ignoreNegation) {
+    protected C messageBuilder(final boolean ignoreNegation) {
         C conditions = MessageProxy.builder(conditionClass, context);
         conditions = applyNegation(conditions, ignoreNegation);
         return conditions;
@@ -107,7 +107,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      * @param present predicate to wait for.
      * @param message message to use.
      */
-    protected void until(Predicate<FluentControl> present, String message) {
+    protected void until(final Predicate<FluentControl> present, String message) {
         if (wait.useCustomMessage()) {
             wait.untilPredicate(present);
         } else {
@@ -122,11 +122,11 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      * @param present         predicate to wait for.
      * @param messageSupplier default message to use.
      */
-    protected void until(Predicate<FluentControl> present, final Supplier<String> messageSupplier) {
+    protected void until(final Predicate<FluentControl> present, final Supplier<String> messageSupplier) {
         if (wait.useCustomMessage()) {
             wait.untilPredicate(present);
         } else {
-            Supplier<String> customMessageSupplier = new Supplier<String>() {
+            final Supplier<String> customMessageSupplier = new Supplier<String>() {
                 @Override
                 public String get() {
                     return messageCustomizer().apply(messageSupplier.get());
@@ -144,13 +144,13 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      * @param conditionFunction condition fonction
      */
     protected void until(final C condition, final C messageBuilder, final Function<C, Boolean> conditionFunction) {
-        Predicate<FluentControl> predicate = new Predicate<FluentControl>() {
+        final Predicate<FluentControl> predicate = new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentControl input) {
+            public boolean apply(final FluentControl input) {
                 return conditionFunction.apply(condition);
             }
         };
-        Supplier<String> messageSupplier = new Supplier<String>() {
+        final Supplier<String> messageSupplier = new Supplier<String>() {
             @Override
             public String get() {
                 conditionFunction.apply(messageBuilder);
@@ -162,12 +162,10 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
     }
 
     @Override
-    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
-        Class<?> returnType = method.getReturnType();
-
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable { // NOPMD UseVarargs
         if (method.isAnnotationPresent(Negation.class)) {
-            Conditions<?> negationProxy = WaitConditionProxy.custom(conditionClass, wait, context, conditionSupplier);
-            WaitConditionInvocationHandler negationHandler = (WaitConditionInvocationHandler) Proxy
+            final Conditions<?> negationProxy = WaitConditionProxy.custom(conditionClass, wait, context, conditionSupplier);
+            final WaitConditionInvocationHandler negationHandler = (WaitConditionInvocationHandler) Proxy
                     .getInvocationHandler(negationProxy);
             negationHandler.negation = !negation;
             return negationProxy;
@@ -177,20 +175,21 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
             context = context + " " + method.getAnnotation(MessageContext.class).value();
         }
 
+        final Class<?> returnType = method.getReturnType();
         if (boolean.class.equals(returnType) || Boolean.class.equals(returnType)) {
             until(conditions(), messageBuilder(), new Function<C, Boolean>() {
                 @Override
-                public Boolean apply(C input) {
+                public Boolean apply(final C input) {
                     try {
                         return (Boolean) method.invoke(input, args);
-                    } catch (IllegalAccessException e) {
+                    } catch (final IllegalAccessException e) {
                         throw new IllegalStateException("An internal error has occured while waiting", e);
-                    } catch (InvocationTargetException e) {
-                        Throwable targetException = e.getTargetException();
+                    } catch (final InvocationTargetException e) {
+                        final Throwable targetException = e.getTargetException();
                         if (targetException instanceof TimeoutException || targetException instanceof NoSuchElementException
                                 || targetException instanceof StaleElementReferenceException) {
-                            NoSuchElementValue annotation = method.getAnnotation(NoSuchElementValue.class);
-                            return annotation == null ? false : annotation.value();
+                            final NoSuchElementValue annotation = method.getAnnotation(NoSuchElementValue.class);
+                            return annotation != null && annotation.value();
                         }
                         throw new IllegalStateException("An internal error has occured while waiting", e);
                     }
@@ -198,12 +197,14 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
             });
             return true;
         } else if (Conditions.class.isAssignableFrom(returnType)) {
-            Method conditionGetter = conditions().getClass().getMethod(method.getName(), method.getParameterTypes());
-            Conditions<?> childConditions = (Conditions<?>) conditionGetter.invoke(conditions(true), args);
+            final Method conditionGetter = conditions().getClass().getMethod(method.getName(), method.getParameterTypes());
+            final Conditions<?> childConditions = (Conditions<?>) conditionGetter.invoke(conditions(true), args);
 
-            Conditions<?> childProxy = WaitConditionProxy.custom((Class<Conditions<?>>) method.getReturnType(), wait, context,
-                    Suppliers.<Conditions<?>>ofInstance(childConditions));
-            WaitConditionInvocationHandler childHandler = (WaitConditionInvocationHandler) Proxy.getInvocationHandler(childProxy);
+            final Conditions<?> childProxy = WaitConditionProxy
+                    .custom((Class<Conditions<?>>) method.getReturnType(), wait, context,
+                            Suppliers.<Conditions<?>>ofInstance(childConditions));
+            final WaitConditionInvocationHandler childHandler = (WaitConditionInvocationHandler) Proxy
+                    .getInvocationHandler(childProxy);
             childHandler.negation = negation;
             return childProxy;
         } else {

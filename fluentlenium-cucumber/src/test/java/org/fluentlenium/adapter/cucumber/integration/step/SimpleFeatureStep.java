@@ -18,10 +18,10 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 public class SimpleFeatureStep extends FluentCucumberTest {
 
     @Page
-    LocalPage page;
+    private LocalPage page;
 
     @Page
-    LocalPage page2;
+    private LocalPage page2;
 
     @Override
     public WebDriver newWebDriver() {
@@ -44,12 +44,12 @@ public class SimpleFeatureStep extends FluentCucumberTest {
     }
 
     @Before
-    public void before(Scenario scenario) {
+    public void before(final Scenario scenario) {
         super.before(scenario);
     }
 
     @After
-    public void after(Scenario scenario) {
+    public void after(final Scenario scenario) {
         super.after(scenario);
     }
 }

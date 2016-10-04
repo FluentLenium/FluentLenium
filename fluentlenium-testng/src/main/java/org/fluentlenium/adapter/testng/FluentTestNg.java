@@ -19,42 +19,45 @@ import java.util.Map;
  * <p>
  * Extends this class to provide FluentLenium support to your TestNG Test class.
  */
-public abstract class FluentTestNg extends FluentTestRunnerAdapter {
+public class FluentTestNg extends FluentTestRunnerAdapter {
+    private final Map<ITestContext, Map<Method, ITestNGMethod>> methods = new HashMap<>();
 
     public FluentTestNg() {
         super(new ThreadLocalFluentControlContainer());
     }
 
-    private Map<ITestContext, Map<Method, ITestNGMethod>> methods = new HashMap<>();
+    public Map<Method, ITestNGMethod> getMethods(final ITestContext context) {
+        synchronized (this) {
+            Map<Method, ITestNGMethod> testMethods = methods.get(context);
 
-    public synchronized Map<Method, ITestNGMethod> getMethods(ITestContext context) {
-        Map<Method, ITestNGMethod> testMethods = methods.get(context);
+            if (testMethods == null) {
+                testMethods = new HashMap<>();
 
-        if (testMethods == null) {
-            testMethods = new HashMap<>();
+                for (final ITestNGMethod method : context.getAllTestMethods()) {
+                    testMethods.put(method.getConstructorOrMethod().getMethod(), method);
+                }
 
-            for (ITestNGMethod method : context.getAllTestMethods()) {
-                testMethods.put(method.getConstructorOrMethod().getMethod(), method);
+                methods.put(context, testMethods);
             }
-
-            methods.put(context, testMethods);
+            return testMethods;
         }
-        return testMethods;
     }
 
     @AfterTest(alwaysRun = true)
-    public synchronized void afterTest(ITestContext context) {
-        methods.remove(context);
+    public void afterTest(final ITestContext context) {
+        synchronized (this) {
+            methods.remove(context);
+        }
     }
 
     @BeforeMethod(alwaysRun = true)
-    public void beforeMethod(Method m, ITestContext context) {
-        ITestNGMethod testNGMethod = getMethods(context).get(m);
+    public void beforeMethod(final Method m, final ITestContext context) {
+        final ITestNGMethod testNGMethod = getMethods(context).get(m);
         starting(testNGMethod.getRealClass(), testNGMethod.getMethodName());
     }
 
     @AfterMethod(alwaysRun = true)
-    public void afterMethod(ITestResult result) {
+    public void afterMethod(final ITestResult result) {
         if (!result.isSuccess()) {
             failed(result.getThrowable(), result.getTestClass().getRealClass(), result.getName());
         }

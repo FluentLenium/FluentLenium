@@ -50,7 +50,8 @@ public class FluentInjectorHookTest {
 
     @Before
     public void before() {
-        fluentAdapter = new FluentAdapter(webDriver);
+        fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(webDriver);
 
         injector = new FluentInjector(fluentAdapter, null, new ComponentsManager(fluentAdapter),
                 new DefaultContainerInstanciator(fluentAdapter));
@@ -68,9 +69,9 @@ public class FluentInjectorHookTest {
 
     @Test
     public void testFluentWebElement() {
-        FluentWebElementContainer container = new FluentWebElementContainer();
+        final FluentWebElementContainer container = new FluentWebElementContainer();
 
-        WebElement element = mock(WebElement.class);
+        final WebElement element = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("injected"))).thenReturn(element);
 
         injector.inject(container);
@@ -80,8 +81,8 @@ public class FluentInjectorHookTest {
         container.injected.getElement().click();
         verify(element).click();
 
-        LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(container.injected.getElement());
-        NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
+        final LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(container.injected.getElement());
+        final NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
 
         assertThat(elementWrapperHook.getBeforeClickNano()).isNotEqualTo(0L);
         assertThat(elementWrapperHook.getAfterClickNano()).isNotEqualTo(0L);
@@ -107,9 +108,9 @@ public class FluentInjectorHookTest {
 
     @Test
     public void testFluentWebElementOption() {
-        FluentWebElementOptionContainer container = new FluentWebElementOptionContainer();
+        final FluentWebElementOptionContainer container = new FluentWebElementOptionContainer();
 
-        WebElement element = mock(WebElement.class);
+        final WebElement element = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("injected"))).thenReturn(element);
 
         injector.inject(container);
@@ -119,8 +120,8 @@ public class FluentInjectorHookTest {
         container.injected.getElement().click();
         verify(element).click();
 
-        LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(container.injected.getElement());
-        NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
+        final LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(container.injected.getElement());
+        final NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
 
         assertThat(elementWrapperHook.getBeforeClickNano()).isNotEqualTo(0L);
         assertThat(elementWrapperHook.getAfterClickNano()).isNotEqualTo(0L);
@@ -135,7 +136,7 @@ public class FluentInjectorHookTest {
     public static class WebElementWrapper {
         private final WebElement element;
 
-        public WebElementWrapper(WebElement element) {
+        public WebElementWrapper(final WebElement element) {
             this.element = element;
         }
 
@@ -151,9 +152,9 @@ public class FluentInjectorHookTest {
 
     @Test
     public void testWebElementWrapper() {
-        WebElementWrapperContainer container = new WebElementWrapperContainer();
+        final WebElementWrapperContainer container = new WebElementWrapperContainer();
 
-        WebElement element = mock(WebElement.class);
+        final WebElement element = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("injected"))).thenReturn(element);
 
         injector.inject(container);
@@ -163,8 +164,8 @@ public class FluentInjectorHookTest {
         container.injected.getElement().click();
         verify(element).click();
 
-        LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(container.injected.getElement());
-        NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
+        final LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(container.injected.getElement());
+        final NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
 
         assertThat(elementWrapperHook.getBeforeClickNano()).isNotEqualTo(0L);
         assertThat(elementWrapperHook.getAfterClickNano()).isNotEqualTo(0L);
@@ -182,18 +183,18 @@ public class FluentInjectorHookTest {
 
     @Test
     public void testFluentList() {
-        FluentListContainer container = new FluentListContainer();
+        final FluentListContainer container = new FluentListContainer();
 
-        WebElement element1 = mock(WebElement.class);
-        WebElement element2 = mock(WebElement.class);
-        WebElement element3 = mock(WebElement.class);
+        final WebElement element1 = mock(WebElement.class);
+        final WebElement element2 = mock(WebElement.class);
+        final WebElement element3 = mock(WebElement.class);
 
         when(webDriver.findElements(new ByIdOrName("injected"))).thenReturn(Arrays.asList(element1, element2, element3));
 
         injector.inject(container);
 
-        LocatorHandler listLocatorHandler = LocatorProxies.getLocatorHandler(container.injected);
-        NanoHook listLocatorHook = (NanoHook) listLocatorHandler.getHookLocator();
+        final LocatorHandler listLocatorHandler = LocatorProxies.getLocatorHandler(container.injected);
+        final NanoHook listLocatorHook = (NanoHook) listLocatorHandler.getHookLocator();
 
         assertThat(listLocatorHook.getBeforeFindElementNano()).isEqualTo(0L);
         assertThat(listLocatorHook.getAfterFindElementNano()).isEqualTo(0L);
@@ -207,14 +208,14 @@ public class FluentInjectorHookTest {
         assertThat(listLocatorHook.getBeforeFindElementsNano()).isNotEqualTo(0L);
         assertThat(listLocatorHook.getAfterFindElementsNano()).isNotEqualTo(0L);
 
-        for (FluentWebElement webElement : container.injected) {
+        for (final FluentWebElement webElement : container.injected) {
             assertThat(webElement).isNotNull();
 
             webElement.click();
             verify(LocatorProxies.getLocatorResult(webElement.getElement())).click();
 
-            LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(webElement.getElement());
-            NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
+            final LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(webElement.getElement());
+            final NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
 
             assertThat(elementWrapperHook.getBeforeClickNano()).isNotEqualTo(0L);
             assertThat(elementWrapperHook.getAfterClickNano()).isNotEqualTo(0L);
@@ -233,18 +234,18 @@ public class FluentInjectorHookTest {
 
     @Test
     public void testWebElementWrapperList() {
-        WebElementWrapperListContainer container = new WebElementWrapperListContainer();
+        final WebElementWrapperListContainer container = new WebElementWrapperListContainer();
 
-        WebElement element1 = mock(WebElement.class);
-        WebElement element2 = mock(WebElement.class);
-        WebElement element3 = mock(WebElement.class);
+        final WebElement element1 = mock(WebElement.class);
+        final WebElement element2 = mock(WebElement.class);
+        final WebElement element3 = mock(WebElement.class);
 
         when(webDriver.findElements(new ByIdOrName("injected"))).thenReturn(Arrays.asList(element1, element2, element3));
 
         injector.inject(container);
 
-        LocatorHandler listLocatorHandler = LocatorProxies.getLocatorHandler(container.injected);
-        NanoHook listLocatorHook = (NanoHook) listLocatorHandler.getHookLocator();
+        final LocatorHandler listLocatorHandler = LocatorProxies.getLocatorHandler(container.injected);
+        final NanoHook listLocatorHook = (NanoHook) listLocatorHandler.getHookLocator();
 
         assertThat(listLocatorHook.getBeforeFindElementNano()).isEqualTo(0L);
         assertThat(listLocatorHook.getAfterFindElementNano()).isEqualTo(0L);
@@ -258,14 +259,14 @@ public class FluentInjectorHookTest {
         assertThat(listLocatorHook.getBeforeFindElementsNano()).isNotEqualTo(0L);
         assertThat(listLocatorHook.getAfterFindElementsNano()).isNotEqualTo(0L);
 
-        for (WebElementWrapper webElement : container.injected) {
+        for (final WebElementWrapper webElement : container.injected) {
             assertThat(webElement).isNotNull();
 
             webElement.getElement().click();
             verify(LocatorProxies.getLocatorResult(webElement.getElement())).click();
 
-            LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(webElement.getElement());
-            NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
+            final LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(webElement.getElement());
+            final NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
 
             assertThat(elementWrapperHook.getBeforeClickNano()).isNotEqualTo(0L);
             assertThat(elementWrapperHook.getAfterClickNano()).isNotEqualTo(0L);
@@ -273,8 +274,9 @@ public class FluentInjectorHookTest {
     }
 
     public static class NanoHook2 extends NanoHook {
-        public NanoHook2(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
-                Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, NanoHookOptions options) {
+        public NanoHook2(final FluentControl fluentControl, final ComponentInstantiator instantiator,
+                final Supplier<WebElement> elementSupplier, final Supplier<ElementLocator> locatorSupplier,
+                final Supplier<String> toStringSupplier, final NanoHookOptions options) {
             super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
         }
     }
@@ -311,25 +313,25 @@ public class FluentInjectorHookTest {
     }
 
     @Test
-    public void testFluentWebElementClass() {
-        FluentWebElementClassContainer container = new FluentWebElementClassContainer();
+    public void testFluentWebElementClass() { // NOPMD ExcessiveMethodLength
+        final FluentWebElementClassContainer container = new FluentWebElementClassContainer();
 
-        WebElement element = mock(WebElement.class);
+        final WebElement element = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("injected"))).thenReturn(element);
 
-        WebElement subElement = mock(WebElement.class);
+        final WebElement subElement = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("subInjected"))).thenReturn(subElement);
 
-        WebElement subNoHookElement = mock(WebElement.class);
+        final WebElement subNoHookElement = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("subNoHookInjected"))).thenReturn(subNoHookElement);
 
-        WebElement subElement2 = mock(WebElement.class);
+        final WebElement subElement2 = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("subInjected2"))).thenReturn(subElement2);
 
-        WebElement subElement3 = mock(WebElement.class);
+        final WebElement subElement3 = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("subInjected3"))).thenReturn(subElement3);
 
-        WebElement subElementMethod = mock(WebElement.class);
+        final WebElement subElementMethod = mock(WebElement.class);
         when(webDriver.findElements(By.cssSelector("#subInjectedMethod"))).thenReturn(Arrays.asList(subElementMethod));
 
         injector.inject(container);
@@ -339,8 +341,8 @@ public class FluentInjectorHookTest {
         container.injected.getElement().click();
         verify(element).click();
 
-        LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(container.injected.getElement());
-        NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
+        final LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(container.injected.getElement());
+        final NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
 
         assertThat(elementWrapperHook.getBeforeClickNano()).isNotEqualTo(0L);
         assertThat(elementWrapperHook.getAfterClickNano()).isNotEqualTo(0L);
@@ -356,9 +358,9 @@ public class FluentInjectorHookTest {
         container.subContainer.subInjected.getElement().click();
         verify(subElement).click();
 
-        LocatorHandler subElementWrapperHandler = LocatorProxies
+        final LocatorHandler subElementWrapperHandler = LocatorProxies
                 .getLocatorHandler(container.subContainer.subInjected.getElement());
-        NanoHook subElementWrapperHook = (NanoHook) subElementWrapperHandler.getHookElement();
+        final NanoHook subElementWrapperHook = (NanoHook) subElementWrapperHandler.getHookElement();
 
         assertThat(subElementWrapperHook.getBeforeClickNano()).isNotEqualTo(0L);
         assertThat(subElementWrapperHook.getAfterClickNano()).isNotEqualTo(0L);
@@ -372,18 +374,18 @@ public class FluentInjectorHookTest {
         container.subContainer.subNoHookInjected.getElement().click();
         verify(subNoHookElement).click();
 
-        LocatorHandler subNoHookElementWrapperHandler = LocatorProxies
+        final LocatorHandler subNoHookElementWrapperHandler = LocatorProxies
                 .getLocatorHandler(container.subContainer.subNoHookInjected.getElement());
         assertThat(subNoHookElementWrapperHandler.getHookElement()).isSameAs(subNoHookElementWrapperHandler.getLocatorResult());
 
         container.subContainer.subContainer2.subInjected2.getElement().click();
         verify(subElement2).click();
 
-        LocatorHandler subElement2WrapperHandler = LocatorProxies
+        final LocatorHandler subElement2WrapperHandler = LocatorProxies
                 .getLocatorHandler(container.subContainer.subContainer2.subInjected2.getElement());
         assertThat(subElement2WrapperHandler.getHookElement()).isExactlyInstanceOf(NanoHook2.class);
 
-        NanoHook2 nanoHook2 = (NanoHook2) subElement2WrapperHandler.getHookElement();
+        final NanoHook2 nanoHook2 = (NanoHook2) subElement2WrapperHandler.getHookElement();
 
         assertThat(nanoHook2.getElement()).isExactlyInstanceOf(NanoHook.class);
         assertThat(((NanoHook) nanoHook2.getElement()).getElement()).isSameAs(subElement2);
@@ -391,29 +393,31 @@ public class FluentInjectorHookTest {
         container.subContainer.subContainer3.subInjected3.getElement().click();
         verify(subElement3).click();
 
-        LocatorHandler subNoHook3ElementWrapperHandler = LocatorProxies
+        final LocatorHandler subNoHook3ElementWrapperHandler = LocatorProxies
                 .getLocatorHandler(container.subContainer.subContainer3.subInjected3.getElement());
         assertThat(subNoHook3ElementWrapperHandler.getHookElement()).isSameAs(subNoHook3ElementWrapperHandler.getLocatorResult());
 
-        WebElementWrapper subInjectedMethod = container.subContainer.subContainer2.find("#subInjectedMethod").first()
+        final WebElementWrapper subInjectedMethod = container.subContainer.subContainer2.find("#subInjectedMethod").first()
                 .as(WebElementWrapper.class);
         LocatorProxies.now(subInjectedMethod.getElement());
 
-        LocatorHandler subInjectedMethodHandler = LocatorProxies.getLocatorHandler(subInjectedMethod.getElement());
+        final LocatorHandler subInjectedMethodHandler = LocatorProxies.getLocatorHandler(subInjectedMethod.getElement());
         assertThat(subInjectedMethodHandler.getHookElement()).isExactlyInstanceOf(NanoHook2.class);
 
-        WebElementWrapper subInjectedMethodNoHook = container.subContainer.subContainer2.find("#subInjectedMethod").first()
+        final WebElementWrapper subInjectedMethodNoHook = container.subContainer.subContainer2.find("#subInjectedMethod").first()
                 .noHook().as(WebElementWrapper.class);
         LocatorProxies.now(subInjectedMethodNoHook.getElement());
 
-        LocatorHandler subInjectedMethodNoHookHandler = LocatorProxies.getLocatorHandler(subInjectedMethodNoHook.getElement());
+        final LocatorHandler subInjectedMethodNoHookHandler = LocatorProxies
+                .getLocatorHandler(subInjectedMethodNoHook.getElement());
         assertThat(subInjectedMethodNoHookHandler.getHookElement()).isSameAs(subElementMethod);
 
-        WebElementWrapper subInjectedMethodNoHook2 = container.subContainer.subContainer2.find("#subInjectedMethod").noHook()
-                .first().as(WebElementWrapper.class);
+        final WebElementWrapper subInjectedMethodNoHook2 = container.subContainer.subContainer2.find("#subInjectedMethod")
+                .noHook().first().as(WebElementWrapper.class);
         LocatorProxies.now(subInjectedMethodNoHook2.getElement());
 
-        LocatorHandler subInjectedMethodNoHook2Handler = LocatorProxies.getLocatorHandler(subInjectedMethodNoHook2.getElement());
+        final LocatorHandler subInjectedMethodNoHook2Handler = LocatorProxies
+                .getLocatorHandler(subInjectedMethodNoHook2.getElement());
         assertThat(subInjectedMethodNoHook2Handler.getHookElement()).isSameAs(subElementMethod);
     }
 
@@ -427,12 +431,12 @@ public class FluentInjectorHookTest {
 
     @Test
     public void testFluentWebElementAnnotationContainer() {
-        FluentWebElementAnnotationContainer container = new FluentWebElementAnnotationContainer();
+        final FluentWebElementAnnotationContainer container = new FluentWebElementAnnotationContainer();
 
-        WebElement element = mock(WebElement.class);
+        final WebElement element = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("injected"))).thenReturn(element);
 
-        WebElement elementNoHook = mock(WebElement.class);
+        final WebElement elementNoHook = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("injectedNoHook"))).thenReturn(elementNoHook);
 
         injector.inject(container);
@@ -442,8 +446,8 @@ public class FluentInjectorHookTest {
         container.injected.getElement().click();
         verify(element).click();
 
-        LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(container.injected.getElement());
-        NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
+        final LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(container.injected.getElement());
+        final NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
 
         assertThat(elementWrapperHook.getBeforeClickNano()).isNotEqualTo(0L);
         assertThat(elementWrapperHook.getAfterClickNano()).isNotEqualTo(0L);
@@ -459,8 +463,8 @@ public class FluentInjectorHookTest {
         container.injectedNoHook.getElement().click();
         verify(elementNoHook).click();
 
-        LocatorHandler elementNoHookHandler = LocatorProxies.getLocatorHandler(container.injectedNoHook.getElement());
-        WebElement elementNoHookLocatorResult = (WebElement) elementNoHookHandler.getHookElement();
+        final LocatorHandler elementNoHookHandler = LocatorProxies.getLocatorHandler(container.injectedNoHook.getElement());
+        final WebElement elementNoHookLocatorResult = (WebElement) elementNoHookHandler.getHookElement();
 
         assertThat(elementNoHookLocatorResult).isSameAs(elementNoHook);
     }
@@ -472,9 +476,9 @@ public class FluentInjectorHookTest {
 
     @Test
     public void testFluentWebElementAnnotation() {
-        FluentWebElementAnnotation container = new FluentWebElementAnnotation();
+        final FluentWebElementAnnotation container = new FluentWebElementAnnotation();
 
-        WebElement element = mock(WebElement.class);
+        final WebElement element = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("injected"))).thenReturn(element);
 
         injector.inject(container);
@@ -484,8 +488,8 @@ public class FluentInjectorHookTest {
         container.injected.getElement().click();
         verify(element).click();
 
-        LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(container.injected.getElement());
-        NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
+        final LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(container.injected.getElement());
+        final NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
 
         assertThat(elementWrapperHook.getBeforeClickNano()).isNotEqualTo(0L);
         assertThat(elementWrapperHook.getAfterClickNano()).isNotEqualTo(0L);
@@ -503,15 +507,15 @@ public class FluentInjectorHookTest {
 
     @Test
     public void testFluentWebElementExtendsContainer() {
-        FluentWebElementExtendsContainer container = new FluentWebElementExtendsContainer();
+        final FluentWebElementExtendsContainer container = new FluentWebElementExtendsContainer();
 
-        WebElement element = mock(WebElement.class);
+        final WebElement element = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("injected"))).thenReturn(element);
 
-        WebElement element2 = mock(WebElement.class);
+        final WebElement element2 = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("injected2"))).thenReturn(element2);
 
-        WebElement elementNoHook = mock(WebElement.class);
+        final WebElement elementNoHook = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("injectedNoHook"))).thenReturn(elementNoHook);
 
         injector.inject(container);
@@ -521,8 +525,8 @@ public class FluentInjectorHookTest {
         container.injected.getElement().click();
         verify(element).click();
 
-        LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(container.injected.getElement());
-        NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
+        final LocatorHandler elementWrapperHandler = LocatorProxies.getLocatorHandler(container.injected.getElement());
+        final NanoHook elementWrapperHook = (NanoHook) elementWrapperHandler.getHookElement();
 
         assertThat(elementWrapperHook.getBeforeClickNano()).isNotEqualTo(0L);
         assertThat(elementWrapperHook.getAfterClickNano()).isNotEqualTo(0L);
@@ -538,8 +542,8 @@ public class FluentInjectorHookTest {
         container.injected2.getElement().click();
         verify(element2).click();
 
-        LocatorHandler elementWrapperHandler2 = LocatorProxies.getLocatorHandler(container.injected2.getElement());
-        NanoHook elementWrapperHook2 = (NanoHook) elementWrapperHandler2.getHookElement();
+        final LocatorHandler elementWrapperHandler2 = LocatorProxies.getLocatorHandler(container.injected2.getElement());
+        final NanoHook elementWrapperHook2 = (NanoHook) elementWrapperHandler2.getHookElement();
 
         assertThat(elementWrapperHook2.getBeforeClickNano()).isNotEqualTo(0L);
         assertThat(elementWrapperHook2.getAfterClickNano()).isNotEqualTo(0L);
@@ -555,8 +559,8 @@ public class FluentInjectorHookTest {
         container.injectedNoHook.getElement().click();
         verify(elementNoHook).click();
 
-        LocatorHandler elementNoHookHandler = LocatorProxies.getLocatorHandler(container.injectedNoHook.getElement());
-        WebElement elementNoHookLocatorResult = (WebElement) elementNoHookHandler.getHookElement();
+        final LocatorHandler elementNoHookHandler = LocatorProxies.getLocatorHandler(container.injectedNoHook.getElement());
+        final WebElement elementNoHookLocatorResult = (WebElement) elementNoHookHandler.getHookElement();
 
         assertThat(elementNoHookLocatorResult).isSameAs(elementNoHook);
     }

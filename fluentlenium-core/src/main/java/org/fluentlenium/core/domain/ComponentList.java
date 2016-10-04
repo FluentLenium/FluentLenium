@@ -16,9 +16,10 @@ public class ComponentList<T> extends DelegatingList<T> implements WrapsElements
     protected List<WebElement> proxy;
 
     @Delegate
-    private LazyComponents lazyComponents = new NotLazyComponents();
+    private LazyComponents lazyComponents = new NotLazyComponents(); // NOPMD UnusedPrivateField
 
-    public ComponentList(Class<T> componentClass, List<T> list, FluentControl fluentControl, ComponentInstantiator instantiator) {
+    public ComponentList(final Class<T> componentClass, final List<T> list, final FluentControl fluentControl,
+            final ComponentInstantiator instantiator) {
         super(list);
         if (list instanceof LazyComponents) {
             lazyComponents = (LazyComponents) list;
@@ -28,12 +29,8 @@ public class ComponentList<T> extends DelegatingList<T> implements WrapsElements
         this.instantiator = instantiator;
 
         if (this.list instanceof WrapsElements) {
-            setProxy(((WrapsElements) this.list).getWrappedElements());
+            this.proxy = ((WrapsElements) this.list).getWrappedElements();
         }
-    }
-
-    public void setProxy(List<WebElement> proxy) {
-        this.proxy = proxy;
     }
 
     @Override

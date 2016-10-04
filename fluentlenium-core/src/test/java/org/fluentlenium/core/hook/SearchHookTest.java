@@ -22,18 +22,19 @@ import java.util.Arrays;
 @RunWith(MockitoJUnitRunner.class)
 public class SearchHookTest {
     @Mock
-    WebElement element;
+    private WebElement element;
 
     @Mock
-    WebDriver driver;
+    private WebDriver driver;
 
-    DefaultComponentInstantiator instantiator;
+    private DefaultComponentInstantiator instantiator;
 
     private Search search;
 
     @Before
     public void before() {
-        FluentAdapter fluentAdapter = new FluentAdapter(driver);
+        final FluentAdapter fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(driver);
 
         instantiator = new DefaultComponentInstantiator(fluentAdapter);
         search = new Search(driver, instantiator);
@@ -43,12 +44,12 @@ public class SearchHookTest {
 
     @Test
     public void testHookedSearch() {
-        FluentWebElement hookedElement = search.el(".selector").withHook(NanoHook.class).click();
+        final FluentWebElement hookedElement = search.el(".selector").withHook(NanoHook.class).click();
 
         Mockito.verify(element).click();
 
-        LocatorHandler<WebElement> componentHandler = LocatorProxies.getLocatorHandler(hookedElement.getElement());
-        NanoHook hookElement = (NanoHook) componentHandler.getHookElement();
+        final LocatorHandler<WebElement> componentHandler = LocatorProxies.getLocatorHandler(hookedElement.getElement());
+        final NanoHook hookElement = (NanoHook) componentHandler.getHookElement();
 
         Assertions.assertThat(hookElement.getBeforeClickNano()).isNotEqualTo(0L);
         Assertions.assertThat(hookElement.getAfterClickNano()).isNotEqualTo(0L);

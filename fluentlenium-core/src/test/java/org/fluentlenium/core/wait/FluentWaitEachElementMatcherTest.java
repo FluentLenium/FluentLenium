@@ -92,7 +92,7 @@ public class FluentWaitEachElementMatcherTest {
     public void isVerified() {
         final Predicate<FluentWebElement> predicate = new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return input.enabled();
             }
         };
@@ -128,7 +128,7 @@ public class FluentWaitEachElementMatcherTest {
     public void isVerifiedEmpty() {
         final Predicate<FluentWebElement> predicate = new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return input.enabled();
             }
         };
@@ -155,7 +155,7 @@ public class FluentWaitEachElementMatcherTest {
     public void isNotVerified() {
         final Predicate<FluentWebElement> predicate = new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return !input.enabled();
             }
         };

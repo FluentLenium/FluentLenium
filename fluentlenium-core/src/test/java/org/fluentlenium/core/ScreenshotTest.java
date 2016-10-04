@@ -25,13 +25,15 @@ public class ScreenshotTest {
 
     @Test(expected = WebDriverException.class)
     public void whenBrowserDoesntAcceptScreenshotThenCustomError() {
-        adapter = new FluentAdapter(new CustomWebDriverNoScreenshot());
+        adapter = new FluentAdapter();
+        adapter.initFluent(new CustomWebDriverNoScreenshot());
         adapter.takeScreenShot();
     }
 
     @Test
     public void whenBrowserDoesAcceptScreenshotThenNoException() throws IOException {
-        adapter = new FluentAdapter(new CustomWebDriverScreenshot());
+        adapter = new FluentAdapter();
+        adapter.initFluent(new CustomWebDriverScreenshot());
         adapter.takeScreenShot(folder.newFile("test.jpg").getAbsolutePath());
     }
 
@@ -43,8 +45,8 @@ public class ScreenshotTest {
 
 class CustomWebDriverNoScreenshot implements WebDriver {
 
-    public void get(String s) {
-
+    public void get(final String s) {
+        //Do nothing.
     }
 
     public String getCurrentUrl() {
@@ -55,11 +57,11 @@ class CustomWebDriverNoScreenshot implements WebDriver {
         return null;
     }
 
-    public List<WebElement> findElements(By by) {
+    public List<WebElement> findElements(final By by) {
         return null;
     }
 
-    public WebElement findElement(By by) {
+    public WebElement findElement(final By by) {
         return null;
     }
 
@@ -68,11 +70,11 @@ class CustomWebDriverNoScreenshot implements WebDriver {
     }
 
     public void close() {
-
+        //Do nothing.
     }
 
     public void quit() {
-
+        //Do nothing.
     }
 
     public Set<String> getWindowHandles() {
@@ -98,8 +100,8 @@ class CustomWebDriverNoScreenshot implements WebDriver {
 
 class CustomWebDriverScreenshot implements WebDriver, TakesScreenshot {
 
-    public void get(String s) {
-
+    public void get(final String s) {
+        // Do nothing.
     }
 
     public String getCurrentUrl() {
@@ -110,11 +112,11 @@ class CustomWebDriverScreenshot implements WebDriver, TakesScreenshot {
         return null;
     }
 
-    public List<WebElement> findElements(By by) {
+    public List<WebElement> findElements(final By by) {
         return null;
     }
 
-    public WebElement findElement(By by) {
+    public WebElement findElement(final By by) {
         return null;
     }
 
@@ -123,11 +125,11 @@ class CustomWebDriverScreenshot implements WebDriver, TakesScreenshot {
     }
 
     public void close() {
-
+        // Do nothing.
     }
 
     public void quit() {
-
+        // Do nothing.
     }
 
     public Set<String> getWindowHandles() {
@@ -150,7 +152,7 @@ class CustomWebDriverScreenshot implements WebDriver, TakesScreenshot {
         return null;
     }
 
-    public <X> X getScreenshotAs(OutputType<X> xOutputType) throws WebDriverException {
+    public <X> X getScreenshotAs(final OutputType<X> xOutputType) throws WebDriverException {
         return xOutputType.convertFromBase64Png("test");
     }
 }

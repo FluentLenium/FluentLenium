@@ -10,9 +10,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SuperclassPageTest extends PageTest {
 
     @Page
-    AnotherPage anotherPage;
+    private AnotherPage anotherPage;
     @Page
-    AnotherPage page2;
+    private AnotherPage page2;
 
     @Test
     public void checkGoToPagesDeclaredInThisClassAndSuperclass() {

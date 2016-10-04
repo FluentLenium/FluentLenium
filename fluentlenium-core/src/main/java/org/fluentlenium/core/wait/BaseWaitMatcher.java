@@ -11,7 +11,7 @@ import org.fluentlenium.core.conditions.message.MessageProxy;
 /**
  * Common class for all WaitMatcher instances.
  */
-public abstract class AbstractWaitMatcher {
+public class BaseWaitMatcher {
     /**
      * Build the final message from default message.
      *
@@ -28,7 +28,7 @@ public abstract class AbstractWaitMatcher {
      * @param present predicate to wait for.
      * @param message message to use.
      */
-    protected void until(FluentWait wait, Predicate<FluentControl> present, String message) {
+    protected void until(final FluentWait wait, final Predicate<FluentControl> present, String message) {
         if (wait.useCustomMessage()) {
             wait.untilPredicate(present);
         } else {
@@ -44,11 +44,11 @@ public abstract class AbstractWaitMatcher {
      * @param present         predicate to wait for.
      * @param messageSupplier default message to use.
      */
-    protected void until(FluentWait wait, Predicate<FluentControl> present, final Supplier<String> messageSupplier) {
+    protected void until(final FluentWait wait, final Predicate<FluentControl> present, final Supplier<String> messageSupplier) {
         if (wait.useCustomMessage()) {
             wait.untilPredicate(present);
         } else {
-            Supplier<String> customMessageSupplier = new Supplier<String>() {
+            final Supplier<String> customMessageSupplier = new Supplier<String>() {
                 @Override
                 public String get() {
                     return messageCustomizer().apply(messageSupplier.get());
@@ -67,15 +67,15 @@ public abstract class AbstractWaitMatcher {
      * @param conditionFunction condition fonction
      * @param <T>               type of the condition.
      */
-    protected <T extends Conditions<?>> void until(FluentWait wait, final T condition, final T messageBuilder,
+    protected <T extends Conditions<?>> void until(final FluentWait wait, final T condition, final T messageBuilder,
             final Function<T, Boolean> conditionFunction) {
-        Predicate<FluentControl> predicate = new Predicate<FluentControl>() {
+        final Predicate<FluentControl> predicate = new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentControl input) {
+            public boolean apply(final FluentControl input) {
                 return conditionFunction.apply(condition);
             }
         };
-        Supplier<String> messageSupplier = new Supplier<String>() {
+        final Supplier<String> messageSupplier = new Supplier<String>() {
             @Override
             public String get() {
                 conditionFunction.apply(messageBuilder);

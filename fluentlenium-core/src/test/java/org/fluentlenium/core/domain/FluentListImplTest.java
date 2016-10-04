@@ -45,7 +45,8 @@ public class FluentListImplTest {
 
     @Before
     public void before() {
-        fluentAdapter = new FluentAdapter(driver);
+        fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(driver);
 
         emptyList = fluentAdapter.newFluentList();
 
@@ -283,9 +284,9 @@ public class FluentListImplTest {
 
     @Test
     public void testFind() {
-        FluentWebElement ret1 = mock(FluentWebElement.class);
-        FluentWebElement ret2 = mock(FluentWebElement.class);
-        FluentWebElement ret3 = mock(FluentWebElement.class);
+        final FluentWebElement ret1 = mock(FluentWebElement.class);
+        final FluentWebElement ret2 = mock(FluentWebElement.class);
+        final FluentWebElement ret3 = mock(FluentWebElement.class);
 
         when(element1.find()).thenReturn(fluentAdapter.newFluentList(ret1));
         when(element2.find()).thenReturn(fluentAdapter.newFluentList(ret2));
@@ -347,12 +348,12 @@ public class FluentListImplTest {
 
     @Test
     public void testAs() {
-        FluentList<Component> as = list.as(Component.class);
+        final FluentList<Component> as = list.as(Component.class);
         assertThat(as).hasSameSizeAs(list);
     }
 
     private static class Component extends FluentWebElement {
-        Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        Component(final WebElement webElement, final FluentControl fluentControl, final ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
     }

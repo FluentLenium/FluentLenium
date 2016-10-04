@@ -13,17 +13,17 @@ public class LabelAnnotations {
     private String[] labelHints;
 
     public LabelAnnotations(final Field field) {
-        Label labelAnnotation = field.getAnnotation(Label.class);
-        if (labelAnnotation != null) {
-            this.label = labelAnnotation.value();
+        final Label labelAnno = field.getAnnotation(Label.class);
+        if (labelAnno != null) {
+            this.label = labelAnno.value();
             if (this.label.isEmpty()) {
                 this.label = field.getDeclaringClass().getSimpleName() + "." + field.getName();
             }
         }
 
-        LabelHint labelHintAnnotation = field.getAnnotation(LabelHint.class);
-        if (labelHintAnnotation != null) {
-            this.labelHints = labelHintAnnotation.value();
+        final LabelHint labelHint = field.getAnnotation(LabelHint.class);
+        if (labelHint != null) {
+            this.labelHints = labelHint.value();
         }
     }
 
@@ -31,6 +31,7 @@ public class LabelAnnotations {
         return label;
     }
 
+    @SuppressWarnings("PMD.MethodReturnsInternalArray")
     public String[] getLabelHints() {
         return labelHints;
     }

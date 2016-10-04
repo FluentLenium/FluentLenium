@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAssert, FluentWebElement> {
 
-    public FluentWebElementAssert(FluentWebElement actual) {
+    public FluentWebElementAssert(final FluentWebElement actual) {
         super(actual, FluentWebElementAssert.class);
     }
 
@@ -106,7 +106,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      *
      * @see #failWithMessage(String, Object...)
      */
-    protected void failWithMessage(String errorMessage) {
+    protected void failWithMessage(final String errorMessage) {
         super.failWithMessage(errorMessage.replaceAll("(?:[^%]|\\A)%(?:[^%]|\\z)", "%%"));
     }
 
@@ -116,7 +116,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @param textToFind text to find
      * @return {@code this} assertion object.
      */
-    public FluentWebElementAssert hasText(String textToFind) {
+    public FluentWebElementAssert hasText(final String textToFind) {
         if (!actual.text().contains(textToFind)) {
             failWithMessage("The element does not contain the text: " + textToFind + " . Actual text found : " + actual.text());
         }
@@ -130,7 +130,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @param regexToBeMatched regex to be matched
      * @return {@code this} assertion object.
      */
-    public FluentWebElementAssert hasTextMatching(String regexToBeMatched) {
+    public FluentWebElementAssert hasTextMatching(final String regexToBeMatched) {
         if (!actual.text().matches(regexToBeMatched)) {
             failWithMessage(
                     "The element does not match the regex: " + regexToBeMatched + " . Actual text found : " + actual.text());
@@ -146,7 +146,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @param textToFind text to find
      * @return {@code this} assertion object.
      */
-    public FluentWebElementAssert hasNotText(String textToFind) {
+    public FluentWebElementAssert hasNotText(final String textToFind) {
         if (actual.text().contains(textToFind)) {
             failWithMessage("The element contain the text: " + textToFind);
         }
@@ -168,7 +168,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @param idToFind id to find
      * @return {@code this} assertion object.
      */
-    public FluentWebElementAssert hasId(String idToFind) {
+    public FluentWebElementAssert hasId(final String idToFind) {
         if (!actual.id().equals(idToFind)) {
             failWithMessage("The element does not have the id: " + idToFind + " . Actual id found : " + actual.id());
         }
@@ -181,7 +181,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @param classToFind class to find
      * @return {@code this} assertion object.
      */
-    public FluentWebElementAssert hasClass(String classToFind) {
+    public FluentWebElementAssert hasClass(final String classToFind) {
         if (!getClasses().contains(classToFind)) {
             failWithMessage("The element does not have the class: " + classToFind + " . Actual class found : " + actual
                     .attribute("class"));

@@ -55,7 +55,8 @@ public class FluentWebElementTest {
 
     @Before
     public void before() {
-        fluentAdapter = new FluentAdapter(driver);
+        fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(driver);
 
         when(driver.getMouse()).thenReturn(mouse);
         when(driver.getKeyboard()).thenReturn(keyboard);
@@ -101,7 +102,7 @@ public class FluentWebElementTest {
 
     @Test
     public void testAs() {
-        Component as = fluentElement.as(Component.class);
+        final Component as = fluentElement.as(Component.class);
         assertThat(as.getElement()).isSameAs(element);
         assertThat(componentsManager.getComponents(element)).containsExactly(as);
     }
@@ -264,7 +265,7 @@ public class FluentWebElementTest {
 
     @Test
     public void testel() {
-        WebElement findElement = mock(WebElement.class);
+        final WebElement findElement = mock(WebElement.class);
 
         when(element.findElements(By.cssSelector(".test"))).thenReturn(Arrays.asList(findElement));
 
@@ -313,7 +314,7 @@ public class FluentWebElementTest {
     @Test
     public void testFillSelect() {
         when(element.getTagName()).thenReturn("select");
-        WebElement valueElement = mock(WebElement.class);
+        final WebElement valueElement = mock(WebElement.class);
         when(element.findElements(any(By.class))).thenReturn(Arrays.asList(valueElement));
 
         fluentElement.fillSelect().withValue("value");
@@ -323,7 +324,7 @@ public class FluentWebElementTest {
     @Test(expected = NoSuchElementException.class)
     public void testFillSelectInvalidElement() {
         when(element.getTagName()).thenReturn("span");
-        WebElement valueElement = mock(WebElement.class);
+        final WebElement valueElement = mock(WebElement.class);
         when(element.findElements(any(By.class))).thenReturn(Arrays.asList(valueElement));
 
         when(element.isDisplayed()).thenReturn(true);
@@ -337,10 +338,10 @@ public class FluentWebElementTest {
         assertThat(fluentElement.toString()).isEqualTo(element.toString());
     }
 
-    private static class Component {
-        private WebElement element;
+    private static final class Component {
+        private final WebElement element;
 
-        Component(WebElement element) {
+        Component(final WebElement element) {
             this.element = element;
         }
 
@@ -357,12 +358,10 @@ public class FluentWebElementTest {
     private static class InvalidComponent {
     }
 
-    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices {
-
+    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices { // NOPMD AbstractNaming
     }
 
-    private abstract static class LocatableElement implements WebElement, Locatable {
-
+    private abstract static class LocatableElement implements WebElement, Locatable { // NOPMD AbstractNaming
     }
 
 }

@@ -26,7 +26,7 @@ public class ElementListInstanceLocatorTest {
 
     @Test
     public void testWithMockElements() {
-        ElementListInstanceLocator locator = new ElementListInstanceLocator(
+        final ElementListInstanceLocator locator = new ElementListInstanceLocator(
                 Arrays.asList(element1, element2, element3, element4));
 
         Assertions.assertThat(locator.findElement()).isSameAs(element1);
@@ -37,7 +37,7 @@ public class ElementListInstanceLocatorTest {
 
     @Test
     public void testWithNoElement() {
-        ElementListInstanceLocator locator = new ElementListInstanceLocator(Collections.<WebElement>emptyList());
+        final ElementListInstanceLocator locator = new ElementListInstanceLocator(Collections.<WebElement>emptyList());
 
         Assertions.assertThat(locator.findElement()).isNull();
         Assertions.assertThat(locator.findElements()).isEmpty();

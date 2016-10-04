@@ -2,13 +2,13 @@ package org.fluentlenium.core.filter.matcher;
 
 import java.util.regex.Pattern;
 
-public class NotStartsWithMatcher extends Matcher {
+public class NotStartsWithMatcher extends AbstractMacher {
 
-    public NotStartsWithMatcher(String value) {
+    public NotStartsWithMatcher(final String value) {
         super(value);
     }
 
-    public NotStartsWithMatcher(Pattern value) {
+    public NotStartsWithMatcher(final Pattern value) {
         super(value);
     }
 
@@ -18,7 +18,7 @@ public class NotStartsWithMatcher extends Matcher {
     }
 
     @Override
-    public boolean isSatisfiedBy(String o) {
+    public boolean isSatisfiedBy(final String o) {
         return !CalculateService.startsWith(getPattern(), getValue(), o);
     }
 

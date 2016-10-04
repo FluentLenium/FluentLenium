@@ -54,15 +54,15 @@ public class FluentWebElement extends Component
     private final HookChainBuilder hookChainBuilder;
 
     @Delegate
-    private FluentLabel<FluentWebElement> label;
+    private final FluentLabel<FluentWebElement> label;
 
-    public FluentWebElement(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+    public FluentWebElement(final WebElement webElement, final FluentControl fluentControl,
+            final ComponentInstantiator instantiator) {
         super(webElement, fluentControl, instantiator);
 
         this.hookChainBuilder = new DefaultHookChainBuilder(this.control, this.instantiator);
-
         this.search = new Search(webElement, this.instantiator);
-        this.axes = new Axes(webElement, this.instantiator, this.hookChainBuilder);
+        this.axes = new Axes(webElement, this.instantiator);
         this.mouseActions = new MouseElementActions(this.control.getDriver(), webElement);
         this.keyboardActions = new KeyboardElementActions(this.control.getDriver(), webElement);
         this.conditions = new WebElementConditions(this);
@@ -74,8 +74,8 @@ public class FluentWebElement extends Component
         });
     }
 
-    @Delegate(excludes = { InputControl.class, AwaitControl.class, SearchControl.class })
-    private FluentControl getFluentControl() {
+    @Delegate(excludes = {InputControl.class, AwaitControl.class, SearchControl.class})
+    private FluentControl getFluentControl() { // NOPMD UnusedPrivateMethod
         return control;
     }
 
@@ -153,7 +153,7 @@ public class FluentWebElement extends Component
      * @param <T>            type of component
      * @return element as component.
      */
-    public <T> T as(Class<T> componentClass) {
+    public <T> T as(final Class<T> componentClass) {
         return instantiator.newComponent(componentClass, getElement());
     }
 
@@ -185,7 +185,7 @@ public class FluentWebElement extends Component
      * @param text value to set
      * @return fluent web element
      */
-    public FluentWebElement write(String... text) {
+    public FluentWebElement write(final String... text) {
         clear();
         if (text.length != 0) {
             webElement.sendKeys(text[0]);
@@ -208,7 +208,7 @@ public class FluentWebElement extends Component
      * @param name custom attribute name
      * @return name value
      */
-    public String attribute(String name) {
+    public String attribute(final String name) {
         return webElement.getAttribute(name);
     }
 
@@ -331,47 +331,47 @@ public class FluentWebElement extends Component
     }
 
     @Override
-    public FluentList<FluentWebElement> $(String selector, Filter... filters) {
+    public FluentList<FluentWebElement> $(final String selector, final Filter... filters) {
         return find(selector, filters);
     }
 
     @Override
-    public FluentWebElement el(String selector, Filter... filters) {
+    public FluentWebElement el(final String selector, final Filter... filters) {
         return find(selector, filters).first();
     }
 
     @Override
-    public FluentList<FluentWebElement> $(Filter... filters) {
+    public FluentList<FluentWebElement> $(final Filter... filters) {
         return find(filters);
     }
 
     @Override
-    public FluentWebElement el(Filter... filters) {
+    public FluentWebElement el(final Filter... filters) {
         return find(filters).first();
     }
 
     @Override
-    public FluentList<FluentWebElement> $(By locator, Filter... filters) {
+    public FluentList<FluentWebElement> $(final By locator, final Filter... filters) {
         return find(locator, filters);
     }
 
     @Override
-    public FluentWebElement el(By locator, Filter... filters) {
+    public FluentWebElement el(final By locator, final Filter... filters) {
         return find(locator, filters).first();
     }
 
     @Override
-    public FluentList<FluentWebElement> find(By locator, Filter... filters) {
+    public FluentList<FluentWebElement> find(final By locator, final Filter... filters) {
         return search.find(locator, filters);
     }
 
     @Override
-    public FluentList<FluentWebElement> find(String selector, Filter... filters) {
+    public FluentList<FluentWebElement> find(final String selector, final Filter... filters) {
         return search.find(selector, filters);
     }
 
     @Override
-    public FluentList<FluentWebElement> find(Filter... filters) {
+    public FluentList<FluentWebElement> find(final Filter... filters) {
         return search.find(filters);
     }
 
@@ -420,14 +420,14 @@ public class FluentWebElement extends Component
     }
 
     @Override
-    public <O, H extends FluentHook<O>> FluentWebElement withHook(Class<H> hook) {
+    public <O, H extends FluentHook<O>> FluentWebElement withHook(final Class<H> hook) {
         hookDefinitions.add(new HookDefinition<>(hook));
         LocatorProxies.setHooks(getElement(), hookChainBuilder, hookDefinitions);
         return this;
     }
 
     @Override
-    public <O, H extends FluentHook<O>> FluentWebElement withHook(Class<H> hook, O options) {
+    public <O, H extends FluentHook<O>> FluentWebElement withHook(final Class<H> hook, final O options) {
         hookDefinitions.add(new HookDefinition<>(hook, options));
         LocatorProxies.setHooks(getElement(), hookChainBuilder, hookDefinitions);
         return this;

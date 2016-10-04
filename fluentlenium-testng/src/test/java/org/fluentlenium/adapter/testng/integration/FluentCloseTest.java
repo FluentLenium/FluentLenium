@@ -18,7 +18,7 @@ public class FluentCloseTest extends IntegrationFluentTestNg {
         try {
             getDriver().get("about:blank");
             fail("should have a NullPointerException because driver is closed");
-        } catch (NullPointerException e) {
+        } catch (final NullPointerException e) { // NOPMD EmptyCatchBlock
 
         }
     }

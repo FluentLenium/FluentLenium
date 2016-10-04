@@ -34,12 +34,16 @@ public class MouseActions {
         this.mouse = mouse;
     }
 
+    /**
+     * Get the actions object.
+     *
+     * @return actions object
+     */
     protected org.openqa.selenium.interactions.Actions actions() {
-        if (driver != null) {
-            return new org.openqa.selenium.interactions.Actions(driver);
-        } else {
+        if (driver == null) {
             return new org.openqa.selenium.interactions.Actions(keyboard, mouse);
         }
+        return new org.openqa.selenium.interactions.Actions(driver);
     }
 
     /**
@@ -48,11 +52,10 @@ public class MouseActions {
      * @return low level interface to control the mouse
      */
     public Mouse basic() {
-        if (mouse != null) {
-            return mouse;
-        } else {
+        if (mouse == null) {
             return ((HasInputDevices) driver).getMouse();
         }
+        return mouse;
     }
 
     /**
