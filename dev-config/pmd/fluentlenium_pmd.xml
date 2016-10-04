@@ -40,13 +40,19 @@
     <rule ref="rulesets/java/naming.xml/ShortVariable">
         <properties>
             <property name="xpath">
-                <value>
-                    //VariableDeclaratorId[(string-length(@Image) &lt; 3) and (not (@Image='id')) and (not
-                    (@Image='by')) and (not (@Image='e')) and (not (@Image='o1')) and (not (@Image='o2')) and (not
-                    (@Image='i')) and (not (@Image='x')), and (not (@Image='y'))]
-                    [not(ancestor::ForInit)]
-                    [not((ancestor::FormalParameter) and (ancestor::TryStatement))]
-                </value>
+                <value><![CDATA[
+//VariableDeclaratorId[(string-length(@Image) < 3)
+and (not (@Image='id'))
+and (not (@Image='by'))
+and (not (@Image='e'))
+and (not (@Image='o1'))
+and (not (@Image='o2'))
+and (not (@Image='i'))
+and (not (@Image='x'))
+and (not (@Image='y'))]
+[not(ancestor::ForInit)]
+[not((ancestor::FormalParameter) and (ancestor::TryStatement))]
+]]></value>
             </property>
         </properties>
     </rule>
