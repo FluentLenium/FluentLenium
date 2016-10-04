@@ -69,7 +69,7 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement>
     }
 
     //CHECKSTYLE.OFF: IllegalThrows
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable { // NOPMD UseVarargs
         if (GET_WRAPPED_ELEMENT.equals(method)) {
             return isLoaded() ? getLocatorResult() : proxy;
         }

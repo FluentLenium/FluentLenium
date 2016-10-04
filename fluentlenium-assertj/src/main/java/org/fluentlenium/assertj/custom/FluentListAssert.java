@@ -94,7 +94,8 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
             builder.append(classFromElement);
         }
 
-        super.failWithMessage("No selected elements has class: " + classToFind + " . Actual classes found : " + builder.toString());
+        super.failWithMessage(
+                "No selected elements has class: " + classToFind + " . Actual classes found : " + builder.toString());
         return this;
     }
 

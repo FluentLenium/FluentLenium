@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.Iterator;
 
-public class FillSelect<E extends FluentWebElement> extends AbstractFill<E> {
+public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
     public FillSelect(FluentList<E> list) {
         super(list);
     }

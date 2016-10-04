@@ -13,6 +13,7 @@ public class DefaultFluentContainer implements FluentControl, FluentContainer {
      * Creates a new container.
      */
     public DefaultFluentContainer() {
+        // Default constructor
     }
 
     /**
@@ -25,7 +26,7 @@ public class DefaultFluentContainer implements FluentControl, FluentContainer {
     }
 
     @Delegate
-    private FluentControl getFluentControl() {
+    private FluentControl getFluentControl() { // NOPMD UnusedPrivateMethod
         return control;
     }
 

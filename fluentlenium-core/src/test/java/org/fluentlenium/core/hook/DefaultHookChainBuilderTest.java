@@ -52,8 +52,8 @@ public class DefaultHookChainBuilderTest {
         hookChainBuilder = new DefaultHookChainBuilder(fluentAdapter, instantiator) {
             @Override
             protected FluentHook<?> newInstance(Class<? extends FluentHook<?>> hookClass, FluentControl fluentControl,
-                                                ComponentInstantiator instantiator, Supplier<WebElement> currentSupplier, Supplier<ElementLocator> locator,
-                                                Supplier<String> toStringSupplier, Object options)
+                    ComponentInstantiator instantiator, Supplier<WebElement> currentSupplier, Supplier<ElementLocator> locator,
+                    Supplier<String> toStringSupplier, Object options)
                     throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
                 return spy(super.newInstance(hookClass, fluentControl, instantiator, currentSupplier, locator, toStringSupplier,
                         options));
@@ -135,8 +135,8 @@ public class DefaultHookChainBuilderTest {
 
     private static class FailingConstructorHook extends BaseHook<Object> {
         FailingConstructorHook(FluentControl fluentControl, ComponentInstantiator instantiator,
-                               Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier,
-                               Object options) {
+                Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier,
+                Object options) {
             super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
             throw new IllegalStateException();
         }

@@ -23,9 +23,14 @@
             <property name="fieldCommentRequirement" value="Ignored"/>
         </properties>
     </rule>
-    <rule ref="rulesets/java/design.xml"/>
+    <rule ref="rulesets/java/design.xml">
+        <exclude name="AvoidReassigningParameters"/>
+        <exclude name="SingularField"/>
+    </rule>
     <rule ref="rulesets/java/empty.xml"/>
-    <rule ref="rulesets/java/imports.xml"/>
+    <rule ref="rulesets/java/imports.xml">
+        <exclude name="TooManyStaticImports"/>
+    </rule>
     <rule ref="rulesets/java/junit.xml">
         <exclude name="TestClassWithoutTestCases"/>
         <exclude name="JUnitTestsShouldIncludeAssert"/>
@@ -50,7 +55,9 @@
             <property name="minimum" value="4"></property>
         </properties>
     </rule>
-    <rule ref="rulesets/java/optimizations.xml"/>
+    <rule ref="rulesets/java/optimizations.xml">
+        <exclude name="AvoidInstantiatingObjectsInLoops"/>
+    </rule>
     <rule ref="rulesets/java/strings.xml">
         <exclude name="AvoidDuplicateLiterals"/>
     </rule>

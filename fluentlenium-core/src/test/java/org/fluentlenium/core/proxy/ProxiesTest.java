@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -73,7 +72,7 @@ public class ProxiesTest {
         verifyZeroInteractions(element1);
 
         elementProxy1.click();
-        Mockito.verify(element1).click();
+        verify(element1).click();
     }
 
     @Test
@@ -120,9 +119,9 @@ public class ProxiesTest {
         verifyZeroInteractions(element3);
 
         element3Proxy.click();
-        Mockito.verify(driver).findElement(By.cssSelector("#element1"));
-        Mockito.verify(element1).findElement(By.cssSelector("#element2"));
-        Mockito.verify(element2).findElement(By.cssSelector("#element3"));
+        verify(driver).findElement(By.cssSelector("#element1"));
+        verify(element1).findElement(By.cssSelector("#element2"));
+        verify(element2).findElement(By.cssSelector("#element3"));
     }
 
     @Test

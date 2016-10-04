@@ -31,8 +31,8 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     private static final int MAX_RETRY = 5;
     private static final int HASH_CODE_SEED = 2048;
 
-    protected HookChainBuilder hookChainBuilder = null;
-    protected List<HookDefinition<?>> hookDefinitions = null;
+    protected HookChainBuilder hookChainBuilder;
+    protected List<HookDefinition<?>> hookDefinitions;
 
     private final List<ProxyElementListener> listeners = new ArrayList<>();
 
@@ -87,10 +87,8 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     public T getLocatorResult() {
         synchronized (this) {
-            if (result != null) {
-                if (isStale()) {
-                    result = null;
-                }
+            if (result != null && isStale()) {
+                result = null;
             }
             if (result == null) {
                 fireProxyElementSearch();
@@ -187,7 +185,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     protected abstract T getInvocationTarget(Method method);
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable { // NOPMD UseVarargs
         if (TO_STRING.equals(method)) {
             return proxyToString(result == null ? null : (String) invoke(method, args));
         }
@@ -233,7 +231,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     }
 
     //CHECKSTYLE.OFF: IllegalThrows
-    private Object invoke(Method method, Object[] args) throws Throwable {
+    private Object invoke(Method method, Object[] args) throws Throwable { // NOPMD UseVarargs
         Object returnValue;
         try {
             returnValue = method.invoke(getInvocationTarget(method), args);

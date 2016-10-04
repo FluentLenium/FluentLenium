@@ -21,9 +21,6 @@ public class FluentAdapterTest {
     @Mock
     private WebDriver webDriver2;
 
-    @Mock
-    private SharedMutator sharedMutator;
-
     @Test
     public void isDriverAvailableBehavesAsExpected() {
         FluentAdapter adapter = new FluentAdapter();

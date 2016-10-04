@@ -11,7 +11,7 @@ public class Alert implements org.openqa.selenium.Alert {
     private final WebDriver webDriver;
 
     @Delegate
-    private org.openqa.selenium.Alert getSeleniumAlert() {
+    private org.openqa.selenium.Alert getSeleniumAlert() { // NOPMD UnusedPrivateMethod
         return webDriver.switchTo().alert();
     }
 

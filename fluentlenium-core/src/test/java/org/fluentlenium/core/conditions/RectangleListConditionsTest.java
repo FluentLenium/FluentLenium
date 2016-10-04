@@ -60,7 +60,7 @@ public class RectangleListConditionsTest {
     }
 
     @Test
-    public void fromEachElementConditions() {
+    public void fromEachElementConditions() { // NOPMD ExcessiveMethodLength
         EachElementConditions conditions = new EachElementConditions(
                 Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
@@ -165,7 +165,7 @@ public class RectangleListConditionsTest {
     }
 
     @Test
-    public void fromAtLeastOneElementConditions() {
+    public void fromAtLeastOneElementConditions() { // NOPMD ExcessiveMethodLength
         AtLeastOneElementConditions conditions = new AtLeastOneElementConditions(
                 Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 

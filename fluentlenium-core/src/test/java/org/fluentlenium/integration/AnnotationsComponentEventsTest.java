@@ -23,8 +23,8 @@ public class AnnotationsComponentEventsTest extends AnnotationsComponentEventsTe
 
     public static class Component extends FluentWebElement {
 
-        private int beforeClick = 0;
-        private int afterClick = 0;
+        private int beforeClick;
+        private int afterClick;
 
         private final List<By> beforeFindBy = new ArrayList<>();
         private final List<By> afterFindBy = new ArrayList<>();
@@ -87,14 +87,6 @@ public class AnnotationsComponentEventsTest extends AnnotationsComponentEventsTe
         return element;
     }
 
-    private List<WebElement> unwrapElements(List<WebElement> elements) {
-        ArrayList<WebElement> unwrapElements = new ArrayList<>();
-        for (WebElement element : elements) {
-            unwrapElements.add(unwrapElement(element));
-        }
-        return unwrapElements;
-    }
-
     @Test
     public void clickOn() {
         goTo(DEFAULT_URL);
@@ -125,7 +117,7 @@ public class AnnotationsComponentEventsTest extends AnnotationsComponentEventsTe
     }
 
     @BeforeClickOn
-    private void beforeClickOn(FluentWebElement element) {
+    private void beforeClickOn(FluentWebElement element) { // NOPMD UnusedPrivateMethod
         beforeClick.add(element.getElement());
     }
 

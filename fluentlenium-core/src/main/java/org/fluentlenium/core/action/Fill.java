@@ -3,7 +3,7 @@ package org.fluentlenium.core.action;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 
-public class Fill<E extends FluentWebElement> extends AbstractFill<E> {
+public class Fill<E extends FluentWebElement> extends BaseFill<E> {
     public Fill(FluentList<E> list) {
         super(list);
     }

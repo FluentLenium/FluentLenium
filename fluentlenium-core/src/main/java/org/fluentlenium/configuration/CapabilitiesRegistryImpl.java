@@ -63,7 +63,7 @@ public class CapabilitiesRegistryImpl extends AbstractFactoryRegistryImpl<Capabi
      * @param name name of the factory used to create new WebDriver instance
      * @return a new Capabilities instance
      */
-    public org.openqa.selenium.Capabilities newCapabilities(String name) {
+    public Capabilities newCapabilities(String name) {
         synchronized (this) {
             return get(name).newCapabilities();
         }

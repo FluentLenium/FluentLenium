@@ -312,7 +312,7 @@ public class FluentInjectorHookTest {
     }
 
     @Test
-    public void testFluentWebElementClass() {
+    public void testFluentWebElementClass() { // NOPMD ExcessiveMethodLength
         FluentWebElementClassContainer container = new FluentWebElementClassContainer();
 
         WebElement element = mock(WebElement.class);

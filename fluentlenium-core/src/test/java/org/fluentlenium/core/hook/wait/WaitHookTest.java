@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
@@ -31,9 +30,6 @@ public class WaitHookTest {
 
     @Mock
     private FluentControl fluentControl;
-
-    @Mock
-    private WebDriver driver;
 
     @Mock
     private WebElement element;

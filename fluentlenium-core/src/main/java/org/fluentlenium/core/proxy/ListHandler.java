@@ -81,7 +81,7 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     }
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable { // NOPMD UseVarargs
         if (GET_WRAPPED_ELEMENTS.equals(method)) {
             return result == null ? proxy : getLocatorResult();
         }

@@ -12,7 +12,7 @@ public class AnnotationsComponentEventsTestSubClass extends IntegrationFluentTes
     protected List<WebElement> afterClick = new ArrayList<>();
 
     @BeforeClickOn
-    private void afterClickOn(FluentWebElement element) {
+    private void afterClickOn(FluentWebElement element) { // NOPMD UnusedPrivateMethod
         afterClick.add(element.getElement());
     }
 }

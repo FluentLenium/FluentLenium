@@ -10,7 +10,7 @@ import java.util.List;
  * Abstract class conditions on list of elements.
  */
 public abstract class AbstractFluentListConditions implements FluentListConditions {
-    private boolean negation = false;
+    private boolean negation;
 
     private final List<? extends FluentWebElement> elements;
 

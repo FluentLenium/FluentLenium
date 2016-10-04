@@ -60,7 +60,7 @@ public class FluentLabelImpl<T> implements FluentLabel<T>, FluentLabelProvider {
                 toStringBuilder.append(labelHint);
                 notFirst = true;
             }
-            toStringBuilder.append("]");
+            toStringBuilder.append(']');
         }
 
         return toStringBuilder.toString();

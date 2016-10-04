@@ -3,7 +3,6 @@ package org.fluentlenium.core.domain;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.filter.Filter;
-import org.fluentlenium.core.filter.matcher.AbstractMacher;
 import org.fluentlenium.core.search.Search;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,15 +27,6 @@ public class FluentListSearchTest {
     private Search search;
 
     private FluentList<FluentWebElement> fluentList;
-
-    @Mock
-    private Filter filter1;
-
-    @Mock
-    private AbstractMacher matcher1;
-
-    @Mock
-    private Filter filter2;
 
     @Mock
     private WebElement webElement;

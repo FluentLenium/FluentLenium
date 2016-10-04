@@ -46,8 +46,6 @@ import java.util.concurrent.TimeUnit;
  * Util Class which offers some shortcut to webdriver methods
  */
 public class FluentDriver implements FluentControl {
-    private final FluentControl adapter;
-
     private String baseUrl;
 
     private final ConfigurationProperties configuration;
@@ -60,24 +58,23 @@ public class FluentDriver implements FluentControl {
     private AnnotationsComponentListener eventsComponentsAnnotations;
 
     @Delegate
-    private FluentInjector fluentInjector;
+    private final FluentInjector fluentInjector;
 
     @Delegate
-    private CssControl cssControl; // NOPMD SingularField
+    private final CssControl cssControl; // NOPMD UnusedPrivateField
 
-    private Search search;
+    private final Search search;
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
-    private MouseActions mouseActions;
+    private final MouseActions mouseActions;
 
-    private KeyboardActions keyboardActions;
+    private final KeyboardActions keyboardActions;
 
-    private WindowAction windowAction;
+    private final WindowAction windowAction;
 
     public FluentDriver(WebDriver driver, ConfigurationProperties configuration, FluentControl adapter) {
         this.configuration = configuration;
-        this.adapter = adapter;
         this.componentsManager = new ComponentsManager(adapter);
         this.driver = driver;
         this.search = new Search(driver, componentsManager);
@@ -165,7 +162,7 @@ public class FluentDriver implements FluentControl {
                 e.printStackTrace(printWriter);
                 IOUtils.closeQuietly(printWriter);
             } catch (IOException e1) {
-                throw new RuntimeException("error when dumping HTML", e);
+                throw new RuntimeException("error when dumping HTML", e); //NOPMD PreserveStackTrace
             }
         }
     }

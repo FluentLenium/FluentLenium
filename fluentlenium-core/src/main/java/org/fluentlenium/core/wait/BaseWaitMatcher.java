@@ -11,7 +11,7 @@ import org.fluentlenium.core.conditions.message.MessageProxy;
 /**
  * Common class for all WaitMatcher instances.
  */
-public abstract class AbstractWaitMatcher {
+public class BaseWaitMatcher {
     /**
      * Build the final message from default message.
      *
@@ -68,7 +68,7 @@ public abstract class AbstractWaitMatcher {
      * @param <T>               type of the condition.
      */
     protected <T extends Conditions<?>> void until(FluentWait wait, final T condition, final T messageBuilder,
-            final Function<T, Boolean> conditionFunction) {
+                                                   final Function<T, Boolean> conditionFunction) {
         Predicate<FluentControl> predicate = new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {

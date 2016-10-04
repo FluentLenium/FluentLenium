@@ -17,7 +17,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 public class SimpleScenarioMultiStep2 extends FluentCucumberTest {
 
     @Page
-    private LocalPage page;
+    private LocalPage page; // NOPMD UsunedPrivateField
 
     @Page
     private LocalPage page2;

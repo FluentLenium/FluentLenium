@@ -32,6 +32,7 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+// NOPMD AccessorClassGeneration
 @RunWith(MockitoJUnitRunner.class)
 public class EventsTest {
     @Mock
@@ -140,7 +141,7 @@ public class EventsTest {
     }
 
     @Test
-    public void testNavigate() {
+    public void testNavigate() { // NOPMD ExcessiveMethodLength
         EventsRegistry eventsRegistry = new EventsRegistry(fluentAdapter);
 
         assertThat(eventsRegistry.getWrappedDriver()).isSameAs(driver);
@@ -267,7 +268,7 @@ public class EventsTest {
     private static final class ElementMatcher extends CustomMatcher<FluentWebElement> {
         private final WebElement element;
 
-        private ElementMatcher(WebElement element) {
+        ElementMatcher(WebElement element) {
             super("Element");
             this.element = element;
         }

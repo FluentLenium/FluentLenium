@@ -92,7 +92,8 @@ public class FluentInjectorElementTest {
         private FluentWebElement element;
     }
 
-    private static FluentWebElement existingElement = mock(FluentWebElement.class); // NOPMD FieldDeclarationsShouldBeAtStartOfClass
+    @SuppressWarnings("PMD.FieldDeclarationsShouldBeAtStartOfClass")
+    private static FluentWebElement existingElement = mock(FluentWebElement.class);
 
     public static class ExistingFluentWebElementContainer {
         private final FluentWebElement element = existingElement;
@@ -128,7 +129,7 @@ public class FluentInjectorElementTest {
 
     public static class FluentListSubClass<T extends FluentWebElementSubClass> extends FluentListImpl<T> {
         public FluentListSubClass(Class<T> componentClass, List<T> list, FluentControl fluentControl,
-                                  ComponentInstantiator instantiator) {
+                ComponentInstantiator instantiator) {
             super(componentClass, list, fluentControl, instantiator);
         }
     }

@@ -74,7 +74,7 @@ public class FluentWebElement extends Component
     }
 
     @Delegate(excludes = {InputControl.class, AwaitControl.class, SearchControl.class})
-    private FluentControl getFluentControl() {
+    private FluentControl getFluentControl() { // NOPMD UnusedPrivateMethod
         return control;
     }
 

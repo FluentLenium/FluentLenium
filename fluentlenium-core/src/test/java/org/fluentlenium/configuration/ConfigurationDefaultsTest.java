@@ -37,6 +37,7 @@ public class ConfigurationDefaultsTest {
                 break;
             default:
                 Assertions.assertThat(readMethod.invoke(configurationDefaults)).isNull();
+                break;
             }
         }
     }

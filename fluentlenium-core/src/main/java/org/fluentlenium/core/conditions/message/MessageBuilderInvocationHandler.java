@@ -31,7 +31,7 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
     }
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable { // NOPMD UseVarargs
         Object instanceReturn = null;
         if (instance != null) {
             instanceReturn = method.invoke(instance, args);
@@ -69,7 +69,7 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
         for (MessageBuilderCall call : calls) {
             if (call.getContext() != null) {
                 if (messageBuilder.length() > 0) {
-                    messageBuilder.append(" ");
+                    messageBuilder.append(' ');
                 }
                 messageBuilder.append(call.getContext());
             }
@@ -94,10 +94,10 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
 
             validationMessage = MessageFormat.format(validationMessage, call.getArgs());
 
-            messageBuilder.append(" ");
+            messageBuilder.append(' ');
             messageBuilder.append(validationMessage);
 
-            return messageBuilder.toString();
+            return messageBuilder.toString(); // NOPMD AvoidBranchingStatementAsLastInLoop
         }
 
         throw new IllegalStateException("No @Message/@NotMessage annotation found in the calls.");

@@ -48,7 +48,7 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
     }
 
     @Delegate
-    private FluentLabelProvider getLabelProvider() {
+    private FluentLabelProvider getLabelProvider() { // NOPMD UnusedPrivateMethod
         return this.label;
     }
 

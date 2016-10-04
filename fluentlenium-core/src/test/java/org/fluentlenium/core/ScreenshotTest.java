@@ -101,7 +101,7 @@ class CustomWebDriverNoScreenshot implements WebDriver {
 class CustomWebDriverScreenshot implements WebDriver, TakesScreenshot {
 
     public void get(String s) {
-
+        // Do nothing.
     }
 
     public String getCurrentUrl() {
@@ -125,11 +125,11 @@ class CustomWebDriverScreenshot implements WebDriver, TakesScreenshot {
     }
 
     public void close() {
-
+        // Do nothing.
     }
 
     public void quit() {
-
+        // Do nothing.
     }
 
     public Set<String> getWindowHandles() {

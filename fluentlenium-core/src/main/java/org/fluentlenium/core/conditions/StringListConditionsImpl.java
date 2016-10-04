@@ -9,9 +9,9 @@ import java.util.regex.Pattern;
 /**
  * Conditions implement for string lists of elements.
  */
-public class StringListConditionsImpl extends AbstractObjectListConditions<String, StringConditions> implements StringConditions {
+public class StringListConditionsImpl extends BaseObjectListConditions<String, StringConditions> implements StringConditions {
     public StringListConditionsImpl(Conditions<FluentWebElement> listConditions, Function<FluentWebElement, String> stringGetter,
-            Function<FluentWebElement, StringConditions> conditionsGetter) {
+                                    Function<FluentWebElement, StringConditions> conditionsGetter) {
         super(listConditions, stringGetter, conditionsGetter);
     }
 

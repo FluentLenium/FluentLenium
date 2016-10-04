@@ -68,7 +68,7 @@ public class DefaultWebDriverFactories {
 
         @Override
         protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration,
-                Object[] args)
+                                        Object... args)
                 throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
             URL url = null;
             if (configuration != null) {
@@ -83,14 +83,10 @@ public class DefaultWebDriverFactories {
                 }
             }
 
-            Object[] urlArgs = new Object[2];
-            urlArgs[0] = url;
-            urlArgs[1] = args.length > 0 ? args[0] : new DesiredCapabilities();
-
-            return newRemoteWebDriver(urlArgs);
+            return newRemoteWebDriver(url, args.length > 0 ? args[0] : new DesiredCapabilities());
         }
 
-        protected WebDriver newRemoteWebDriver(Object[] args)
+        protected WebDriver newRemoteWebDriver(Object... args)
                 throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
             WebDriver webDriver = ReflectionUtils.getConstructor(webDriverClass, URL.class, Capabilities.class).newInstance(args);
             return new Augmenter().augment(webDriver);

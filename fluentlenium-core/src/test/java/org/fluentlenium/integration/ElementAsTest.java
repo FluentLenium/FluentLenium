@@ -39,7 +39,7 @@ public class ElementAsTest extends IntegrationFluentTest {
     @Test(expected = ComponentException.class)
     public void testAsDefaultConstructorComponent() {
         goTo(DEFAULT_URL);
-        InvalidComponent span = el("span").as(InvalidComponent.class);
+        el("span").as(InvalidComponent.class);
     }
 
     @Test
@@ -64,7 +64,6 @@ public class ElementAsTest extends IntegrationFluentTest {
         assertThat(goNextLink2.isDisplayed()).isTrue();
     }
 
-
     public static class Component extends FluentWebElement {
         public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
@@ -86,7 +85,7 @@ public class ElementAsTest extends IntegrationFluentTest {
     }
 
     public static class NotAComponent extends FluentWebElement {
-        public NotAComponent(String invalidConstructorParam) {
+        public NotAComponent(String invalidConstructorParam) { // NOPMD UnusedFormalParameter
             super(null, null, null);
         }
     }

@@ -117,7 +117,7 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
             try {
                 property = IOUtils.toString(url, Charset.defaultCharset());
             } catch (IOException e) {
-                throw new ConfigurationException("Can't read Capabilities defined at " + url);
+                throw new ConfigurationException("Can't read Capabilities defined at " + url, e);
             }
         } catch (MalformedURLException e) { // NOPMD EmptyCatchBlock PreserveStackTrace
             // This is not an URL. Consider property as JSON.

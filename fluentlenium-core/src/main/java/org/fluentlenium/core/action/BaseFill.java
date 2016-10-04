@@ -2,16 +2,15 @@ package org.fluentlenium.core.action;
 
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.filter.Filter;
 
-public abstract class AbstractFill<E extends FluentWebElement> {
+public class BaseFill<E extends FluentWebElement> {
     private FluentList<E> fluentList;
 
-    public AbstractFill(FluentList<E> list, Filter... filters) {
+    public BaseFill(FluentList<E> list) {
         this.fluentList = list;
     }
 
-    public AbstractFill(E element) {
+    public BaseFill(E element) {
         this((FluentList<E>) element.asList());
     }
 

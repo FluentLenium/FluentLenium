@@ -21,6 +21,7 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
      * Creates a new fluent page.
      */
     public FluentPage() {
+        // Default constructor
     }
 
     /**

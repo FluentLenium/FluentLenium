@@ -3,7 +3,7 @@ package org.fluentlenium.core.wait;
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.FluentControl;
 
-public class FluentWaitWindowMatcher extends AbstractWaitMatcher {
+public class FluentWaitWindowMatcher extends BaseWaitMatcher {
 
     private final FluentWait wait;
     private final String windowName;

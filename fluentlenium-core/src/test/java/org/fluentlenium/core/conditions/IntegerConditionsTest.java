@@ -14,8 +14,7 @@ public class IntegerConditionsTest {
         assertNotConditions(condition.not(), value);
     }
 
-    /* default */
-    static void assertConditions(IntegerConditions conditions, final int value) {
+    static void assertConditions(IntegerConditions conditions, final int value) { // NOPMD CommentDefaultAccessModifier
         assertThat(conditions.verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {
@@ -44,8 +43,7 @@ public class IntegerConditionsTest {
         assertThat(conditions.lessThan(value + 1)).isTrue();
     }
 
-    /* default */
-    static void assertNotConditions(IntegerConditions conditions, final int value) {
+    static void assertNotConditions(IntegerConditions conditions, final int value) { // NOPMD CommentDefaultAccessModifier
         assertThat(conditions.verify(new Predicate<Integer>() {
             @Override
             public boolean apply(Integer input) {

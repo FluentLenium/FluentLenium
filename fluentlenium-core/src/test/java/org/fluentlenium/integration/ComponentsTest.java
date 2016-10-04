@@ -71,7 +71,6 @@ public class ComponentsTest extends IntegrationFluentTest {
 
     }
 
-
     public static class Header extends FluentWebElement {
         @FindBy(css = ".title")
         private FluentWebElement title;
@@ -133,16 +132,16 @@ public class ComponentsTest extends IntegrationFluentTest {
 
     @FindBy(css = ".content")
     public static class Content extends FluentWebElement {
-
-        public Content(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
-            super(webElement, fluentControl, instantiator);
-        }
-
         @Page
         private ComponentsPage page;
 
         private List<Component> components;
 
         private FluentWebElement notPresent;
+
+        public Content(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+            super(webElement, fluentControl, instantiator);
+        }
+
     }
 }

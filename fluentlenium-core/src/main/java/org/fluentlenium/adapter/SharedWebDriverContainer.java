@@ -23,15 +23,12 @@ public enum SharedWebDriverContainer {
     @Delegate
     private final Impl impl = new Impl();
 
-
     private final SharedWebDriverContainerShutdownHook shutdownHook; // NOPMD SingularField
-
 
     SharedWebDriverContainer() {
         shutdownHook = new SharedWebDriverContainerShutdownHook("SharedWebDriverContainerShutdownHook");
         Runtime.getRuntime().addShutdownHook(shutdownHook);
     }
-
 
     @EqualsAndHashCode
     @AllArgsConstructor
@@ -57,8 +54,8 @@ public enum SharedWebDriverContainer {
          * @param driverLifecycle  WebDriver lifecycle
          * @return
          */
-        public <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass,
-                                                     String testName, DriverLifecycle driverLifecycle) {
+        public <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass, String testName,
+                DriverLifecycle driverLifecycle) {
             synchronized (this) {
                 SharedWebDriver driver = getDriver(testClass, testName, driverLifecycle);
                 if (driver == null) {
@@ -70,36 +67,36 @@ public enum SharedWebDriverContainer {
         }
 
         private <T> SharedWebDriver createDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass, String testName,
-                                                 DriverLifecycle driverLifecycle) {
+                DriverLifecycle driverLifecycle) {
             WebDriver webDriver = webDriverFactory.get();
             return new SharedWebDriver(webDriver, testClass, testName, driverLifecycle);
         }
 
         private void registerDriver(SharedWebDriver driver) {
             switch (driver.getDriverLifecycle()) {
-                case JVM:
-                    jvmDriver = driver;
-                    break;
-                case CLASS:
-                    classDrivers.put(driver.getTestClass(), driver);
-                    break;
-                case METHOD:
-                default:
-                    methodDrivers.put(new ClassAndTestName(driver.getTestClass(), driver.getTestName()), driver);
-                    break;
+            case JVM:
+                jvmDriver = driver;
+                break;
+            case CLASS:
+                classDrivers.put(driver.getTestClass(), driver);
+                break;
+            case METHOD:
+            default:
+                methodDrivers.put(new ClassAndTestName(driver.getTestClass(), driver.getTestName()), driver);
+                break;
             }
         }
 
         public <T> SharedWebDriver getDriver(Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
             synchronized (this) {
                 switch (driverLifecycle) {
-                    case JVM:
-                        return jvmDriver;
-                    case CLASS:
-                        return classDrivers.get(testClass);
-                    case METHOD:
-                    default:
-                        return methodDrivers.get(new ClassAndTestName(testClass, testName));
+                case JVM:
+                    return jvmDriver;
+                case CLASS:
+                    return classDrivers.get(testClass);
+                case METHOD:
+                default:
+                    return methodDrivers.get(new ClassAndTestName(testClass, testName));
                 }
             }
         }
@@ -107,28 +104,28 @@ public enum SharedWebDriverContainer {
         public void quit(SharedWebDriver driver) {
             synchronized (this) {
                 switch (driver.getDriverLifecycle()) {
-                    case JVM:
-                        if (jvmDriver == driver) { // NOPMD CompareObjectsWithEquals
-                            if (jvmDriver.getDriver() != null) {
-                                jvmDriver.getDriver().quit();
-                            }
-                            jvmDriver = null;
+                case JVM:
+                    if (jvmDriver == driver) { // NOPMD CompareObjectsWithEquals
+                        if (jvmDriver.getDriver() != null) {
+                            jvmDriver.getDriver().quit();
                         }
-                        break;
-                    case CLASS:
-                        SharedWebDriver classDriver = classDrivers.remove(driver.getTestClass());
-                        if (classDriver == driver && classDriver.getDriver() != null) { // NOPMD CompareObjectsWithEquals
-                            classDriver.getDriver().quit();
-                        }
-                        break;
-                    case METHOD:
-                    default:
-                        SharedWebDriver testDriver = methodDrivers
-                                .remove(new ClassAndTestName(driver.getTestClass(), driver.getTestName()));
-                        if (testDriver == driver && testDriver.getDriver() != null) { // NOPMD CompareObjectsWithEquals
-                            testDriver.getDriver().quit();
-                        }
-                        break;
+                        jvmDriver = null;
+                    }
+                    break;
+                case CLASS:
+                    SharedWebDriver classDriver = classDrivers.remove(driver.getTestClass());
+                    if (classDriver == driver && classDriver.getDriver() != null) { // NOPMD CompareObjectsWithEquals
+                        classDriver.getDriver().quit();
+                    }
+                    break;
+                case METHOD:
+                default:
+                    SharedWebDriver testDriver = methodDrivers
+                            .remove(new ClassAndTestName(driver.getTestClass(), driver.getTestName()));
+                    if (testDriver == driver && testDriver.getDriver() != null) { // NOPMD CompareObjectsWithEquals
+                        testDriver.getDriver().quit();
+                    }
+                    break;
                 }
             }
         }

@@ -77,7 +77,7 @@ public class ComposedConfigurationTest {
     }
 
     private <T> void testImpl(Function<ConfigurationProperties, T> getter, Function<T, Void> setter, T defaultValue, T value1,
-            T value2) {
+                              T value2) {
         if (defaultValue == null) {
             Assertions.assertThat(getter.apply(composed)).isNull();
         } else {

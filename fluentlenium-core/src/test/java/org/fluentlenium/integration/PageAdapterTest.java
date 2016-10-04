@@ -68,5 +68,5 @@ public class PageAdapterTest extends FluentAdapter {
 
 class InjectedPageAccueil extends PageAccueil {
 
-    /* defult */ String testVariable;
+    /* default */ String testVariable;
 }

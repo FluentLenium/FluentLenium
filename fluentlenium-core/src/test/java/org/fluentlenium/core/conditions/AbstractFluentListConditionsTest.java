@@ -10,7 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.WebElement;
 
 @RunWith(MockitoJUnitRunner.class)
-abstract class AbstractFluentListConditionsTest {
+abstract class AbstractFluentListConditionsTest { //NOPMD AbstractClassWithoutAbstractMethod
     @Mock
     protected WebElement webElement1;
 

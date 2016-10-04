@@ -32,8 +32,8 @@ public class AtLeastOneElementConditions extends AbstractFluentListConditions {
     }
 
     protected Predicate<FluentDriver> buildAtLeastOnePredicate(final Predicate<FluentWebElement> predicate,
-            final boolean defaultValue) {
-        Predicate<FluentDriver> untilPredicate = new com.google.common.base.Predicate<FluentDriver>() {
+                                                               final boolean defaultValue) {
+        Predicate<FluentDriver> untilPredicate = new Predicate<FluentDriver>() {
             public boolean apply(FluentDriver fluent) {
                 if (getElements().size() > 0) {
                     for (FluentWebElement element : getElements()) {

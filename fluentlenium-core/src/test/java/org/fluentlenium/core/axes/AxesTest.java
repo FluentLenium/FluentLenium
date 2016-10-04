@@ -3,7 +3,6 @@ package org.fluentlenium.core.axes;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
-import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,8 +29,6 @@ public class AxesTest {
 
     private ComponentInstantiator instantiator;
 
-    private DefaultHookChainBuilder hookChainBuilder;
-
     private FluentAdapter fluentAdapter;
 
     @Before
@@ -40,7 +37,6 @@ public class AxesTest {
         fluentAdapter.initFluent(driver);
 
         instantiator = new DefaultComponentInstantiator(fluentAdapter);
-        hookChainBuilder = new DefaultHookChainBuilder(fluentAdapter, instantiator);
     }
 
     @Test

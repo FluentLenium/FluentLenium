@@ -339,7 +339,7 @@ public class FluentWebElementTest {
     }
 
     private static final class Component {
-        private WebElement element;
+        private final WebElement element;
 
         Component(WebElement element) {
             this.element = element;

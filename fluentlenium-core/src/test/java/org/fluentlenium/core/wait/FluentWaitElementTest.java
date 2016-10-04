@@ -225,7 +225,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void untilFunction() {
-        Function<? super FluentControl, ?> isTrue = Mockito.mock(Function.class);
+        Function<? super FluentControl, ?> isTrue = mock(Function.class);
 
         wait.until(isTrue);
         Mockito.verify(fluentControlWait).until(isTrue);

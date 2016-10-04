@@ -28,9 +28,6 @@ public class WaitForPageToLoadTest {
     @Mock
     private FluentWait wait;
 
-    @Mock
-    private WebDriverWithJavascriptExecutor webDriverWithJavascriptExecutor;
-
     @Before
     public void before() {
         when(wait.withMessage(anyString())).thenReturn(wait);

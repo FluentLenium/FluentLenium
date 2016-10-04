@@ -16,7 +16,7 @@ public class ComponentList<T> extends DelegatingList<T> implements WrapsElements
     protected List<WebElement> proxy;
 
     @Delegate
-    private LazyComponents lazyComponents = new NotLazyComponents();
+    private LazyComponents lazyComponents = new NotLazyComponents(); // NOPMD UnusedPrivateField
 
     public ComponentList(Class<T> componentClass, List<T> list, FluentControl fluentControl, ComponentInstantiator instantiator) {
         super(list);

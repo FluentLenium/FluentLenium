@@ -4,13 +4,13 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
-public abstract class AbstractObjectListConditions<T, C extends Conditions<T>> {
+public class BaseObjectListConditions<T, C extends Conditions<T>> {
     protected Conditions<FluentWebElement> conditions;
     protected final Function<FluentWebElement, T> objectGetter;
     protected final Function<FluentWebElement, C> conditionsGetter;
 
-    public AbstractObjectListConditions(Conditions<FluentWebElement> conditions, Function<FluentWebElement, T> objectGetter,
-                                        Function<FluentWebElement, C> conditionsGetter) {
+    public BaseObjectListConditions(Conditions<FluentWebElement> conditions, Function<FluentWebElement, T> objectGetter,
+                                    Function<FluentWebElement, C> conditionsGetter) {
         this.conditions = conditions;
         this.objectGetter = objectGetter;
         this.conditionsGetter = conditionsGetter;

@@ -162,7 +162,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
     }
 
     @Override
-    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable { // NOPMD UseVarargs
         if (method.isAnnotationPresent(Negation.class)) {
             Conditions<?> negationProxy = WaitConditionProxy.custom(conditionClass, wait, context, conditionSupplier);
             WaitConditionInvocationHandler negationHandler = (WaitConditionInvocationHandler) Proxy
@@ -189,7 +189,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
                         if (targetException instanceof TimeoutException || targetException instanceof NoSuchElementException
                                 || targetException instanceof StaleElementReferenceException) {
                             NoSuchElementValue annotation = method.getAnnotation(NoSuchElementValue.class);
-                            return annotation == null ? false : annotation.value();
+                            return annotation != null && annotation.value();
                         }
                         throw new IllegalStateException("An internal error has occured while waiting", e);
                     }

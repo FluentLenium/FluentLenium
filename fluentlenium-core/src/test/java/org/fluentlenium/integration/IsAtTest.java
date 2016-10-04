@@ -35,7 +35,6 @@ public class IsAtTest extends IntegrationFluentTest {
         pageOk.isAt();
     }
 
-
     @FindBy(css = "#oneline")
     public static class PageIsAt extends FluentPage {
         @Override

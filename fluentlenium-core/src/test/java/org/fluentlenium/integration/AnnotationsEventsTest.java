@@ -62,14 +62,14 @@ public class AnnotationsEventsTest extends IntegrationFluentTest {
     }
 
     @BeforeClickOn
-    private void beforeClickOn(FluentWebElement element) {
+    private void beforeClickOn(FluentWebElement element) { // NOPMD UnusedPrivateMethod
         assertThat(element.tagName()).isEqualTo("button");
         assertThat(afterClick).doesNotContain(element.getElement());
         beforeClick.add(element.getElement());
     }
 
     @AfterClickOn
-    public void afterClickOn(FluentWebElement element) {
+    public void afterClickOn(FluentWebElement element) { // NOPMD UnusedPrivateMethod
         assertThat(element.tagName()).isEqualTo("button");
 
         ArrayList<WebElement> webElements = new ArrayList<>(afterClick);

@@ -28,6 +28,7 @@ public final class ReflectionUtils {
     private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
     private static final Map<Class<?>, Class<?>> PRIMITIVES_TO_WRAPPERS = new HashMap<>();
     private static final Map<Class<?>, Object> DEFAULTS = new HashMap<>();
+    private static final Map<ClassAnnotationKey, List<Method>> DECLARED_METHODS_CACHE = new WeakHashMap<>();
 
     private ReflectionUtils() {
         // Utility class
@@ -71,8 +72,6 @@ public final class ReflectionUtils {
         private Class<? extends Annotation> annotation;
     }
 
-    private static final Map<ClassAnnotationKey, List<Method>> DECLARED_METHODS_CACHE = new WeakHashMap<>();
-
     /**
      * Converts an array of {@code Object} into an array of {@code Class} objects.
      * <p>If any of these objects is null, a null element will be inserted into the array.</p>
@@ -85,7 +84,7 @@ public final class ReflectionUtils {
         if (array == null) {
             return null;
         } else if (array.length == 0) {
-            return EMPTY_CLASS_ARRAY;
+            return EMPTY_CLASS_ARRAY; // NOPMD MethodReturnsInternalArray
         }
         final Class<?>[] classes = new Class[array.length];
         for (int i = 0; i < array.length; i++) {
@@ -106,7 +105,7 @@ public final class ReflectionUtils {
         if (array == null) {
             return null;
         } else if (array.length == 0) {
-            return EMPTY_OBJECT_ARRAY;
+            return EMPTY_OBJECT_ARRAY; // NOPMD MethodReturnsInternalArray
         }
         final Object[] parameters = new Object[array.length];
         for (int i = 0; i < array.length; i++) {

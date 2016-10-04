@@ -11,10 +11,10 @@ public class AnnotationInitialization extends FluentTest {
     private final WebDriver webDriver = new HtmlUnitDriver();
 
     @Page
-    private TestAboutBlankPage page2;
+    private TestAboutBlankPage page2; // NOPMD UsunedPrivateField
 
     @Page
-    private TestPrivatePage page;
+    private TestPrivatePage page; // NOPMD UsunedPrivateField
 
     @Test
     public void testNoException() {

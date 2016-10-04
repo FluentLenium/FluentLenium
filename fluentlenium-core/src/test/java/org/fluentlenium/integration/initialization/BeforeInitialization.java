@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BeforeInitialization extends FluentTest {
     private final WebDriver webDriver = new HtmlUnitDriver();
-    private TestPrivatePageWithElement page2;
+    private TestPrivatePageWithElement page2; // NOPMD UsunedPrivateField
     private TestPrivatePage2 page;
 
     @Before

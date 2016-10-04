@@ -4,7 +4,6 @@ import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.search.Search;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,9 +27,6 @@ import static org.mockito.Mockito.when;
 public class FillTest {
     @Mock
     private WebDriver driver;
-
-    @Mock
-    private Search search;
 
     @Mock
     private WebElement element1;

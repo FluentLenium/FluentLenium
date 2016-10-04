@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-import org.assertj.core.api.Assertions;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -26,35 +25,35 @@ public class SeleniumFindBy extends IntegrationFluentTest {
         page.go();
         page.isAt();
 
-        Assertions.assertThat(page.location.getText()).isEqualTo("Pharmacy");
+        assertThat(page.location.getText()).isEqualTo("Pharmacy");
     }
 
     @Test
     public void shouldFindByRetrieveList() {
         page.go();
         page.isAt();
-        Assertions.assertThat(page.smalls).hasSize(3);
+        assertThat(page.smalls).hasSize(3);
 
-        ArrayList<String> texts = new ArrayList<>();
+        List<String> texts = new ArrayList<>();
         for (WebElement e : page.smalls) {
             texts.add(e.getText());
         }
 
-        Assertions.assertThat(texts).containsExactly("Small 1", "Small 2", "Small 3");
+        assertThat(texts).containsExactly("Small 1", "Small 2", "Small 3");
     }
 
     @Test
     public void shouldFindAllFindByRetrieveList() {
         page.go();
         page.isAt();
-        Assertions.assertThat(page.findAllElements).hasSize(4);
+        assertThat(page.findAllElements).hasSize(4);
 
-        ArrayList<String> texts = new ArrayList<>();
+        List<String> texts = new ArrayList<>();
         for (WebElement e : page.findAllElements) {
             texts.add(e.getText());
         }
 
-        Assertions.assertThat(texts).containsExactly("Pharmacy", "Small 1", "Small 2", "Small 3");
+        assertThat(texts).containsExactly("Pharmacy", "Small 1", "Small 2", "Small 3");
     }
 
     @Test

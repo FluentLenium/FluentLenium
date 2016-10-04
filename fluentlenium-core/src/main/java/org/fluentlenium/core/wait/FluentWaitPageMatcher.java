@@ -6,7 +6,7 @@ import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-public class FluentWaitPageMatcher extends AbstractWaitMatcher {
+public class FluentWaitPageMatcher extends BaseWaitMatcher {
     private final FluentWait wait;
     private final WebDriver webDriver;
     private FluentPage page;
@@ -29,7 +29,7 @@ public class FluentWaitPageMatcher extends AbstractWaitMatcher {
     public void isLoaded() {
 
         if (webDriver instanceof JavascriptExecutor) {
-            Predicate<FluentControl> isLoaded = new com.google.common.base.Predicate<FluentControl>() {
+            Predicate<FluentControl> isLoaded = new Predicate<FluentControl>() {
                 public boolean apply(FluentControl fluent) {
                     Object result = fluent.executeScript("if (document.readyState) return document.readyState;")
                             .getStringResult();
@@ -51,7 +51,7 @@ public class FluentWaitPageMatcher extends AbstractWaitMatcher {
                     "You should use a page argument when you call the untilPage method to specify the page you want to be. "
                             + "Example : await().untilPage(myPage).isAt();");
         }
-        Predicate<FluentControl> isLoaded = new com.google.common.base.Predicate<FluentControl>() {
+        Predicate<FluentControl> isLoaded = new Predicate<FluentControl>() {
             public boolean apply(FluentControl fluent) {
                 try {
                     page.isAt();

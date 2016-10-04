@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class EventsRegistry {
+public class EventsRegistry { // NOPMD TooManyFields
 
     private final EventFiringWebDriver eventDriver;
 

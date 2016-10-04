@@ -216,7 +216,6 @@ public class SearchTest {
     @Test(expected = NoSuchElementException.class)
     public void shouldThrowErrorWhenPositionNotFound() {
         String name = "cssStyle";
-        WebElement webElement = mock(WebElement.class);
         search.find(name).index(0).now();
     }
 

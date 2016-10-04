@@ -8,7 +8,7 @@ import org.openqa.selenium.Capabilities;
  * @see Configuration
  * @see ConfigurationProperties
  */
-public class ProgrammaticConfiguration implements Configuration {
+public class ProgrammaticConfiguration implements Configuration { // NOPMD TooManyFields
     private Class<? extends ConfigurationFactory> configurationFactory;
 
     private Class<? extends ConfigurationProperties> configurationDefaults;
