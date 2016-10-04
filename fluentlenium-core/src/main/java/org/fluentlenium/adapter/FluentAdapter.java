@@ -30,15 +30,6 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
         this.driverContainer = driverContainer;
     }
 
-    public FluentAdapter(WebDriver webDriver) {
-        this(new DefaultFluentControlContainer(), webDriver);
-    }
-
-    public FluentAdapter(FluentControlContainer driverContainer, WebDriver webDriver) {
-        this.driverContainer = driverContainer;
-        initFluent(webDriver);
-    }
-
     @Delegate(types = ConfigurationProperties.class)
     public Configuration getConfiguration() {
         return configuration;
@@ -49,7 +40,7 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
         return (ContainerFluentControl) getDriverContainer().getFluentControl();
     }
 
-    boolean isFluentDriverAvailable() {
+    /* default */ boolean isFluentDriverAvailable() {
         return getDriverContainer().getFluentControl() != null;
     }
 

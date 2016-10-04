@@ -14,50 +14,6 @@ import org.openqa.selenium.support.FindBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ElementAsTest extends IntegrationFluentTest {
-
-    public static class Component extends FluentWebElement {
-        public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
-            super(webElement, fluentControl, instantiator);
-        }
-    }
-
-    public static class ComponentNotAnElement {
-
-        private final WebElement element;
-
-        public ComponentNotAnElement(WebElement webElement) {
-            this.element = webElement;
-        }
-
-        public boolean isDisplayed() {
-            return this.element.isDisplayed();
-        }
-
-    }
-
-    public static class NotAComponent extends FluentWebElement {
-        public NotAComponent(String invalidConstructorParam) {
-            super(null, null, null);
-        }
-    }
-
-    public static class FullConstructorComponent {
-
-        private final WebElement element;
-        private final ComponentInstantiator instantiator;
-        private final FluentControl fluentControl;
-
-        public FullConstructorComponent(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
-            this.element = webElement;
-            this.fluentControl = fluentControl;
-            this.instantiator = instantiator;
-        }
-
-    }
-
-    public static class InvalidComponent {
-    }
-
     @FindBy(css = "a.go-next")
     private Component goNextLink;
 
@@ -106,6 +62,50 @@ public class ElementAsTest extends IntegrationFluentTest {
     public void findByComponentNotFluentWebElement() {
         goTo(DEFAULT_URL);
         assertThat(goNextLink2.isDisplayed()).isTrue();
+    }
+
+
+    public static class Component extends FluentWebElement {
+        public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+            super(webElement, fluentControl, instantiator);
+        }
+    }
+
+    public static class ComponentNotAnElement {
+
+        private final WebElement element;
+
+        public ComponentNotAnElement(WebElement webElement) {
+            this.element = webElement;
+        }
+
+        public boolean isDisplayed() {
+            return this.element.isDisplayed();
+        }
+
+    }
+
+    public static class NotAComponent extends FluentWebElement {
+        public NotAComponent(String invalidConstructorParam) {
+            super(null, null, null);
+        }
+    }
+
+    public static class FullConstructorComponent {
+
+        private final WebElement element;
+        private final ComponentInstantiator instantiator;
+        private final FluentControl fluentControl;
+
+        public FullConstructorComponent(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+            this.element = webElement;
+            this.fluentControl = fluentControl;
+            this.instantiator = instantiator;
+        }
+
+    }
+
+    public static class InvalidComponent {
     }
 
 }

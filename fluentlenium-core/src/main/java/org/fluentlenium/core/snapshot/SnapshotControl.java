@@ -1,5 +1,8 @@
 package org.fluentlenium.core.snapshot;
 
+/**
+ * Control interface for Screenshot and HTML Dumps.
+ */
 public interface SnapshotControl {
 
     /**

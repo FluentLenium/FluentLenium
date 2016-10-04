@@ -12,7 +12,7 @@ public class FluentLabelImpl<T> implements FluentLabel<T>, FluentLabelProvider {
     private final Supplier<String> defaultLabelSupplier;
 
     private String label;
-    private List<String> labelHints = new ArrayList<>();
+    private final List<String> labelHints = new ArrayList<>();
 
     public FluentLabelImpl(T reference, Supplier<String> defaultLabelSupplier) {
         this.reference = reference;
@@ -44,13 +44,13 @@ public class FluentLabelImpl<T> implements FluentLabel<T>, FluentLabelProvider {
     @Override
     public String toString() {
         StringBuilder toStringBuilder = new StringBuilder();
-        if (this.label != null) {
-            toStringBuilder.append(this.label);
-        } else {
+        if (this.label == null) {
             toStringBuilder.append(defaultLabelSupplier.get());
+        } else {
+            toStringBuilder.append(this.label);
         }
 
-        if (labelHints.size() > 0) {
+        if (!labelHints.isEmpty()) {
             toStringBuilder.append(" [");
             boolean notFirst = false;
             for (String labelHint : labelHints) {

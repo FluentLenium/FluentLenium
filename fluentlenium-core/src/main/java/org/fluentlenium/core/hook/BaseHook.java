@@ -35,7 +35,7 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
     }
 
     public BaseHook(FluentControl control, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
-            Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, T options) {
+                    Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, T options) {
         super(control);
         this.instantiator = instantiator;
         this.elementSupplier = elementSupplier;
@@ -44,7 +44,7 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
         this.options = options;
 
         if (this.options == null) {
-            this.options = newOptions();
+            this.options = newOptions(); // NOPMD ConstructorCallsOverridableMethod
         }
     }
 

@@ -17,7 +17,7 @@ public class WebDriversRegistryImpl extends AbstractFactoryRegistryImpl<WebDrive
 
     @Override
     protected WebDriverFactory getDefault(List<WebDriverFactory> filteredFactories) {
-        if (filteredFactories.size() == 0) {
+        if (filteredFactories.isEmpty()) {
             throw new ConfigurationException(
                     "No WebDriverFactory is available. You need add least one supported " + "WebDriver in your classpath.");
         }
@@ -37,7 +37,9 @@ public class WebDriversRegistryImpl extends AbstractFactoryRegistryImpl<WebDrive
      * @param configuration Configuration for the WebDriver
      * @return a new WebDriver instance
      */
-    public synchronized WebDriver newWebDriver(String name, Capabilities capabilities, ConfigurationProperties configuration) {
-        return get(name).newWebDriver(capabilities, configuration);
+    public WebDriver newWebDriver(String name, Capabilities capabilities, ConfigurationProperties configuration) {
+        synchronized (this) {
+            return get(name).newWebDriver(capabilities, configuration);
+        }
     }
 }

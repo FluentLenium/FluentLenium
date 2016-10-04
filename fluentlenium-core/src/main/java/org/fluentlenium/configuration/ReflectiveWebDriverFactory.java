@@ -70,7 +70,7 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
                 argsList.add(0, capabilities);
                 try {
                     return newInstance(webDriverClass, configuration, argsList.toArray());
-                } catch (NoSuchMethodException e) {
+                } catch (NoSuchMethodException e) { // NOPMD EmptyCatchBlock
                     // Ignore capabilities.
                 }
             }
@@ -81,7 +81,7 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
     }
 
     protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration,
-            Object[] args)
+                                    Object[] args)
             throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return ReflectionUtils.newInstance(webDriverClass, args);
     }

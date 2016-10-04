@@ -21,7 +21,7 @@ public class LazyComponentList<T> implements List<T>, WrapsElements, LazyCompone
 
     private final List<WebElement> elements;
 
-    private List<LazyComponentsListener<T>> lazyComponentsListeners = new ArrayList<>();
+    private final List<LazyComponentsListener<T>> lazyComponentsListeners = new ArrayList<>();
 
     @Delegate
     @Getter(lazy = true)

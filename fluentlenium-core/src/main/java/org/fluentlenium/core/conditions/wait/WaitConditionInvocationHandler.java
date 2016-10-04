@@ -30,7 +30,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
     private boolean negation;
 
     public WaitConditionInvocationHandler(Class<C> conditionClass, FluentWait wait, String context,
-            Supplier<C> conditionSupplier) {
+                                          Supplier<C> conditionSupplier) {
         this.conditionClass = conditionClass;
         this.wait = wait;
         this.context = context;
@@ -163,8 +163,6 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
 
     @Override
     public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
-        Class<?> returnType = method.getReturnType();
-
         if (method.isAnnotationPresent(Negation.class)) {
             Conditions<?> negationProxy = WaitConditionProxy.custom(conditionClass, wait, context, conditionSupplier);
             WaitConditionInvocationHandler negationHandler = (WaitConditionInvocationHandler) Proxy
@@ -177,6 +175,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
             context = context + " " + method.getAnnotation(MessageContext.class).value();
         }
 
+        Class<?> returnType = method.getReturnType();
         if (boolean.class.equals(returnType) || Boolean.class.equals(returnType)) {
             until(conditions(), messageBuilder(), new Function<C, Boolean>() {
                 @Override

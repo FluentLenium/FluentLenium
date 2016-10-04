@@ -2,7 +2,15 @@ package org.fluentlenium.core.events;
 
 import org.openqa.selenium.WebDriver;
 
+/**
+ * Listener interface for Navigate events
+ */
 public interface NavigateListener {
 
-    void on(WebDriver driver);
+    /**
+     * Invoked when a navigation event occurs.
+     *
+     * @param driver selenium webdriver
+     */
+    void on(WebDriver driver); // NOPMD ShortMethodName
 }

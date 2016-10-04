@@ -8,7 +8,6 @@ package org.fluentlenium.adapter;
  * <p>
  * You should call {@link #quit()} manually to close the underlying webdriver.
  */
-@SuppressWarnings("PMD.TestClassWithoutTestCases")
 public class IsolatedTest extends FluentAdapter {
 
     public IsolatedTest() {

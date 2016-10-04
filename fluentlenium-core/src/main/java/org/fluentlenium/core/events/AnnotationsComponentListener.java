@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
 import java.util.Set;
 
 public class AnnotationsComponentListener implements WebDriverEventListener {
-    private ComponentsAccessor componentsAccessor;
+    private final ComponentsAccessor componentsAccessor;
 
     public AnnotationsComponentListener(ComponentsAccessor componentsAccessor) {
         this.componentsAccessor = componentsAccessor;
@@ -133,45 +133,56 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
 
     @Override
     public void beforeNavigateTo(String url, WebDriver driver) {
+        //Do nothing.
     }
 
     @Override
     public void afterNavigateTo(String url, WebDriver driver) {
+        //Do nothing.
     }
 
     @Override
     public void beforeNavigateBack(WebDriver driver) {
+        //Do nothing.
     }
 
     @Override
     public void afterNavigateBack(WebDriver driver) {
+        //Do nothing.
     }
 
     @Override
     public void beforeNavigateForward(WebDriver driver) {
+        //Do nothing.
     }
 
     @Override
     public void afterNavigateForward(WebDriver driver) {
+        //Do nothing.
     }
 
     @Override
     public void beforeNavigateRefresh(WebDriver driver) {
+        //Do nothing.
     }
 
     @Override
     public void afterNavigateRefresh(WebDriver driver) {
+        //Do nothing.
     }
 
     @Override
     public void beforeScript(String script, WebDriver driver) {
+        //Do nothing.
     }
 
     @Override
     public void afterScript(String script, WebDriver driver) {
+        //Do nothing.
     }
 
     @Override
     public void onException(Throwable throwable, WebDriver driver) {
+        //Do nothing.
     }
 }

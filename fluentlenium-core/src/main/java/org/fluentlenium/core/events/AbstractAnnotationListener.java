@@ -1,8 +1,8 @@
 package org.fluentlenium.core.events;
 
-public class AbstractAnnotationListener implements ListenerPriority, ListenerContainer {
-    private Object container;
-    private int priority;
+public abstract class AbstractAnnotationListener implements ListenerPriority, ListenerContainer {
+    private final Object container;
+    private final int priority;
 
     public AbstractAnnotationListener(Object container, int priority) {
         this.container = container;

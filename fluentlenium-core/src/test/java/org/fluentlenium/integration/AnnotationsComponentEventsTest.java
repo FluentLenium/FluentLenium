@@ -19,15 +19,15 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnnotationsComponentEventsTest extends AnnotationsComponentEventsTestSubClass {
-    private List<WebElement> beforeClick = new ArrayList<>();
+    private final List<WebElement> beforeClick = new ArrayList<>();
 
     public static class Component extends FluentWebElement {
 
         private int beforeClick = 0;
         private int afterClick = 0;
 
-        private List<By> beforeFindBy = new ArrayList<>();
-        private List<By> afterFindBy = new ArrayList<>();
+        private final List<By> beforeFindBy = new ArrayList<>();
+        private final List<By> afterFindBy = new ArrayList<>();
 
         public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
@@ -80,7 +80,7 @@ public class AnnotationsComponentEventsTest extends AnnotationsComponentEventsTe
     private WebElement unwrapElement(WebElement element) {
         if (element instanceof WrapsElement) {
             WebElement wrappedElement = ((WrapsElement) element).getWrappedElement();
-            if (wrappedElement != element && wrappedElement != null) {
+            if (wrappedElement != element && wrappedElement != null) { // NOPMD CompareObjectsWithEquals
                 return unwrapElement(wrappedElement);
             }
         }

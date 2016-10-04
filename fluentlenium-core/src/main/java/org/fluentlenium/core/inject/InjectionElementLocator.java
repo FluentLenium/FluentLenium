@@ -48,7 +48,7 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
     }
 
     @Delegate
-    FluentLabelProvider getLabelProvider() {
+    private FluentLabelProvider getLabelProvider() {
         return this.label;
     }
 

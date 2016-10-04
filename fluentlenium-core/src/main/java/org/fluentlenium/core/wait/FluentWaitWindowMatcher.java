@@ -5,8 +5,8 @@ import org.fluentlenium.core.FluentControl;
 
 public class FluentWaitWindowMatcher extends AbstractWaitMatcher {
 
-    private FluentWait wait;
-    private String windowName;
+    private final FluentWait wait;
+    private final String windowName;
 
     protected FluentWaitWindowMatcher(FluentWait wait, String windowName) {
         this.wait = wait;

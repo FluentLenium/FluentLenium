@@ -62,7 +62,7 @@ public class FillSelect<E extends FluentWebElement> extends AbstractFill<E> {
             try {
                 select.selectByIndex(index);
                 noSuchElement = false;
-            } catch (NoSuchElementException e) {
+            } catch (NoSuchElementException e) { // NOPMD EmptyCatchBlock
             }
         }
 

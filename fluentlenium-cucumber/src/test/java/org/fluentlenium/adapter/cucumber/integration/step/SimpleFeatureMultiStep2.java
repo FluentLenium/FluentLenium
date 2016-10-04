@@ -14,7 +14,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 public class SimpleFeatureMultiStep2 extends FluentCucumberTest {
 
     @Page
-    LocalPage2 page2;
+    private LocalPage2 page2;
 
     @Override
     public WebDriver newWebDriver() {

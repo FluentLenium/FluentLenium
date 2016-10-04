@@ -58,11 +58,10 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
             return MessageProxy.wrap(method.getReturnType(), instanceReturn, calls);
         }
 
-        if (instance != null) {
-            return instanceReturn;
-        } else {
+        if (instance == null) {
             return ReflectionUtils.getDefault(method.getReturnType());
         }
+        return instanceReturn;
     }
 
     public String buildMessage() {

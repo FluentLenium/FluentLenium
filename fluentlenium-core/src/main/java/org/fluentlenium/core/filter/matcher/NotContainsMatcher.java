@@ -2,7 +2,7 @@ package org.fluentlenium.core.filter.matcher;
 
 import java.util.regex.Pattern;
 
-public class NotContainsMatcher extends Matcher {
+public class NotContainsMatcher extends AbstractMacher {
 
     public NotContainsMatcher(String value) {
         super(value);

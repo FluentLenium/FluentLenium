@@ -10,10 +10,7 @@ import org.junit.runners.model.Statement;
 /**
  * Duplicate of fluentlenium-junit adapter classes to avoid maven dependency cycle.
  */
-public abstract class FluentTest extends FluentTestRunnerAdapter {
-    public FluentTest() {
-    }
-
+public class FluentTest extends FluentTestRunnerAdapter {
     @Rule
     public TestRule watchman = new FluentTestRule() {
 

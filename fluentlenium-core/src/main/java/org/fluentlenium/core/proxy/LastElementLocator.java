@@ -11,7 +11,7 @@ import java.util.List;
  * {@link ElementLocator} retrieving the last element from another locator.
  */
 public class LastElementLocator implements ElementLocator {
-    private ElementLocator listLocator;
+    private final ElementLocator listLocator;
 
     public LastElementLocator(ElementLocator listLocator) {
         this.listLocator = listLocator;
@@ -20,7 +20,7 @@ public class LastElementLocator implements ElementLocator {
     @Override
     public WebElement findElement() {
         List<WebElement> elements = this.listLocator.findElements();
-        if (elements.size() == 0) {
+        if (elements.isEmpty()) {
             return null;
         }
         return elements.get(elements.size() - 1);

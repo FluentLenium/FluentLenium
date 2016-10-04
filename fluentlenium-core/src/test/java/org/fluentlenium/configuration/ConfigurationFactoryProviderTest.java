@@ -28,9 +28,6 @@ public class ConfigurationFactoryProviderTest {
     }
 
     public static class FailingConfigurationConfigurationFactory implements ConfigurationFactory {
-        public FailingConfigurationConfigurationFactory() {
-        }
-
         @Override
         public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
             ProgrammaticConfiguration programmaticConfiguration = new ProgrammaticConfiguration();

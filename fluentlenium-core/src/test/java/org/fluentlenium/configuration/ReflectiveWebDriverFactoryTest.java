@@ -12,13 +12,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ReflectiveWebDriverFactoryTest {
     public static final class NoConstructorDriver extends HtmlUnitDriver {
-        private NoConstructorDriver() {
-        }
     }
 
     public abstract static class AbstractDriver extends HtmlUnitDriver {
-        public AbstractDriver() {
-        }
     }
 
     public static class CustomConstructorDriver extends HtmlUnitDriver {

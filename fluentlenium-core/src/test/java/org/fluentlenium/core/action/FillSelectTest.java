@@ -50,7 +50,8 @@ public class FillSelectTest {
 
     @Before
     public void before() {
-        fluentAdapter = new FluentAdapter(driver);
+        fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(driver);
 
         when(element1.getTagName()).thenReturn("select");
         when(element2.getTagName()).thenReturn("span");

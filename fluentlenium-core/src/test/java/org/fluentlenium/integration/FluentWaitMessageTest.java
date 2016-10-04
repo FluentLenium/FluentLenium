@@ -15,11 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class FluentWaitMessageTest extends IntegrationFluentTest {
-    @Override
-    public FluentWait await() {
-        return super.await().atMost(100).pollingEvery(10);
-    }
-
     @FindBy(css = "#disabled")
     private FluentWebElement disabled;
 
@@ -43,6 +38,11 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
     @Label("custom")
     @LabelHint("hint")
     private FluentList<FluentWebElement> disabledCustomLabelList;
+
+    @Override
+    public FluentWait await() {
+        return super.await().atMost(100).pollingEvery(10);
+    }
 
     @Test
     public void testDisabled() {

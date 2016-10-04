@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class AnnotationInitialization extends FluentTest {
-    private WebDriver webDriver = new HtmlUnitDriver();
+    private final WebDriver webDriver = new HtmlUnitDriver();
 
     @Page
     private TestAboutBlankPage page2;

@@ -54,15 +54,14 @@ public class FluentWebElement extends Component
     private final HookChainBuilder hookChainBuilder;
 
     @Delegate
-    private FluentLabel<FluentWebElement> label;
+    private final FluentLabel<FluentWebElement> label;
 
     public FluentWebElement(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
         super(webElement, fluentControl, instantiator);
 
         this.hookChainBuilder = new DefaultHookChainBuilder(this.control, this.instantiator);
-
         this.search = new Search(webElement, this.instantiator);
-        this.axes = new Axes(webElement, this.instantiator, this.hookChainBuilder);
+        this.axes = new Axes(webElement, this.instantiator);
         this.mouseActions = new MouseElementActions(this.control.getDriver(), webElement);
         this.keyboardActions = new KeyboardElementActions(this.control.getDriver(), webElement);
         this.conditions = new WebElementConditions(this);
@@ -74,7 +73,7 @@ public class FluentWebElement extends Component
         });
     }
 
-    @Delegate(excludes = { InputControl.class, AwaitControl.class, SearchControl.class })
+    @Delegate(excludes = {InputControl.class, AwaitControl.class, SearchControl.class})
     private FluentControl getFluentControl() {
         return control;
     }

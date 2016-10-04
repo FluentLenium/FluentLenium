@@ -7,7 +7,7 @@ import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
-import org.fluentlenium.core.filter.matcher.Matcher;
+import org.fluentlenium.core.filter.matcher.AbstractMacher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class SearchTest {
     private Filter filter1;
 
     @Mock
-    private Matcher matcher1;
+    private AbstractMacher matcher1;
 
     @Mock
     private Filter filter2;
@@ -55,7 +55,8 @@ public class SearchTest {
 
     @Before
     public void before() {
-        FluentAdapter fluentAdapter = new FluentAdapter(driver);
+        FluentAdapter fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(driver);
 
         DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
         search = new Search(searchContext, instantiator);
@@ -75,7 +76,7 @@ public class SearchTest {
         when(searchContext.findElements(By.cssSelector("cssStyle[generated=true][checked=ok]"))).thenReturn(webElements);
 
         String name = "cssStyle";
-        Filter[] filters = new Filter[] {filter1, filter2};
+        Filter[] filters = new Filter[]{filter1, filter2};
         when(filter1.isPreFilter()).thenReturn(true);
         when(filter1.toString()).thenReturn("[generated=true]");
         when(filter2.isPreFilter()).thenReturn(true);
@@ -108,12 +109,12 @@ public class SearchTest {
         when(searchContext.findElements(By.cssSelector("cssStyle[generated=true]"))).thenReturn(webElements);
 
         String name = "cssStyle";
-        Filter[] filters = new Filter[] {filter1, filter2};
+        Filter[] filters = new Filter[]{filter1, filter2};
         when(filter1.isPreFilter()).thenReturn(true);
         when(filter1.toString()).thenReturn("[generated=true]");
         when(filter2.isPreFilter()).thenReturn(false);
         when(filter2.toString()).thenReturn("[checked=ok]");
-        Matcher matcher = mock(Matcher.class);
+        AbstractMacher matcher = mock(AbstractMacher.class);
         when(matcher.isSatisfiedBy(any(String.class))).thenReturn(true);
         when(filter2.getMatcher()).thenReturn(matcher);
 
@@ -130,12 +131,12 @@ public class SearchTest {
         when(searchContext.findElements(By.cssSelector("cssStyle[generated=true]"))).thenReturn(webElements);
 
         By locator = By.cssSelector("cssStyle");
-        Filter[] filters = new Filter[] {filter1, filter2};
+        Filter[] filters = new Filter[]{filter1, filter2};
         when(filter1.isPreFilter()).thenReturn(true);
         when(filter1.toString()).thenReturn("[generated=true]");
         when(filter2.isPreFilter()).thenReturn(false);
         when(filter2.toString()).thenReturn("[checked=ok]");
-        Matcher matcher = mock(Matcher.class);
+        AbstractMacher matcher = mock(AbstractMacher.class);
         when(matcher.isSatisfiedBy(any(String.class))).thenReturn(true);
         when(filter2.getMatcher()).thenReturn(matcher);
 
@@ -146,7 +147,7 @@ public class SearchTest {
     @Test
     public void findPostSelectorFilterWithElementThatMatch() {
         String name = "cssStyle";
-        Filter[] filters = new Filter[] {filter1};
+        Filter[] filters = new Filter[]{filter1};
         when(filter1.isPreFilter()).thenReturn(false);
         WebElement webElement = mock(WebElement.class);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(Collections.singletonList(webElement));
@@ -160,7 +161,7 @@ public class SearchTest {
     @Test
     public void findPostSelectorFilterWithElementThatDontMatch() {
         final String name = "cssStyle";
-        final Filter[] filters = new Filter[] {filter1};
+        final Filter[] filters = new Filter[]{filter1};
         when(filter1.isPreFilter()).thenReturn(false);
         WebElement webElement = mock(WebElement.class);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(Collections.singletonList(webElement));
@@ -181,7 +182,7 @@ public class SearchTest {
     @Test
     public void findPostSelectorFilterWithFilterOnText() {
         String name = "cssStyle";
-        Filter[] filters = new Filter[] {filter1};
+        Filter[] filters = new Filter[]{filter1};
         when(filter1.isPreFilter()).thenReturn(false);
         WebElement webElement = mock(WebElement.class);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(Collections.singletonList(webElement));

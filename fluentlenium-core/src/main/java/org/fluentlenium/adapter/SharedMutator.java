@@ -7,9 +7,9 @@ import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
  */
 public interface SharedMutator {
     class EffectiveParameters<T> {
-        private Class<T> testClass;
-        private String testName;
-        private DriverLifecycle driverLifecycle;
+        private final Class<T> testClass;
+        private final String testName;
+        private final DriverLifecycle driverLifecycle;
 
         public EffectiveParameters(Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
             this.testClass = testClass;

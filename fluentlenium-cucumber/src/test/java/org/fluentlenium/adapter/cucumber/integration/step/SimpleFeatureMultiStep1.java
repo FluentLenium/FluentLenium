@@ -13,7 +13,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 public class SimpleFeatureMultiStep1 extends FluentCucumberTest {
 
     @Page
-    LocalPage page;
+    private LocalPage page;
 
     @Override
     public WebDriver newWebDriver() {

@@ -2,15 +2,15 @@ package org.fluentlenium.core.filter.matcher;
 
 import java.util.regex.Pattern;
 
-public abstract class Matcher {
+public abstract class AbstractMacher {
     private String value;
     private Pattern pattern;
 
-    protected Matcher(final String value) {
+    protected AbstractMacher(final String value) {
         this.value = value;
     }
 
-    protected Matcher(final Pattern value) {
+    protected AbstractMacher(final Pattern value) {
         this.pattern = value;
     }
 
@@ -29,14 +29,11 @@ public abstract class Matcher {
      * @return matcher symbol
      */
     public String getMatcherSymbol() {
-        return getMatcherType() != null ? getMatcherType().getCssRepresentations() : null;
+        return getMatcherType() == null ? null : getMatcherType().getCssRepresentations();
     }
 
     public final boolean isPreFilter() {
-        if (pattern != null || null == getMatcherSymbol()) {
-            return false;
-        }
-        return true;
+        return pattern == null && getMatcherSymbol() != null;
     }
 
     /**

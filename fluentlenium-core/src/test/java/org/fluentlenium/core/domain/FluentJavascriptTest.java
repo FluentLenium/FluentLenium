@@ -82,7 +82,7 @@ public class FluentJavascriptTest {
         assertThat(fluentJavascript.getResult()).isEqualTo(scriptRet);
     }
 
-    private abstract static class JavascriptWebDriver implements WebDriver, JavascriptExecutor {
+    private abstract static class JavascriptWebDriver implements WebDriver, JavascriptExecutor { // NOPMD AbstractNaming
 
     }
 }

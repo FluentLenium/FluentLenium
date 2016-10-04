@@ -119,7 +119,7 @@ public class FluentInjectorContainerTest {
         @Page
         private ParentContainerConstructorInit parentContainer;
 
-        private FluentControl control;
+        private final FluentControl control;
 
         public ChildContainerConstructorInit(FluentControl control) {
             this.control = control;
@@ -127,7 +127,7 @@ public class FluentInjectorContainerTest {
     }
 
     public static class ParentContainerConstructorInit {
-        private FluentControl control;
+        private final FluentControl control;
 
         @Page
         private ChildContainerConstructorInit childContainer;

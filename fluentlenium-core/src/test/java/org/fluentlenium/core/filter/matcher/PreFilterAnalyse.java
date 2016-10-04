@@ -12,19 +12,19 @@ public class PreFilterAnalyse {
 
     @Test
     public void checkMatcherIsPreFilterElligible() {
-        Matcher matcher = new EqualMatcher("toto");
+        AbstractMacher matcher = new EqualMatcher("toto");
         assertThat(matcher.isPreFilter()).isTrue();
     }
 
     @Test
     public void checkMatcherIsNotPreFilterElligibleCausePattern() {
-        Matcher matcher = new EqualMatcher(Pattern.compile("toto"));
+        AbstractMacher matcher = new EqualMatcher(Pattern.compile("toto"));
         assertThat(matcher.isPreFilter()).isFalse();
     }
 
     @Test
     public void checkMatcherIsNotPreFilterElligibleCauseImpossible() {
-        Matcher matcher = new NotContainsMatcher("toto");
+        AbstractMacher matcher = new NotContainsMatcher("toto");
         assertThat(matcher.isPreFilter()).isFalse();
     }
 

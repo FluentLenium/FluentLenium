@@ -61,8 +61,8 @@ public final class CalculateService {
         if (patternValue == null) {
             return currentValue.startsWith(referenceValue);
         }
-        java.util.regex.Matcher m2 = patternValue.matcher(currentValue);
-        return m2.find() && 0 == m2.start();
+        final java.util.regex.Matcher matcher = patternValue.matcher(currentValue);
+        return matcher.find() && 0 == matcher.start();
     }
 
     /**
@@ -81,10 +81,10 @@ public final class CalculateService {
         if (patternValue == null) {
             return currentValue.endsWith(referenceValue);
         }
-        java.util.regex.Matcher m2 = patternValue.matcher(currentValue);
+        final java.util.regex.Matcher matcher = patternValue.matcher(currentValue);
         int end = 0;
-        while (m2.find()) {
-            end = m2.end();
+        while (matcher.find()) {
+            end = matcher.end();
         }
         return currentValue.length() == end;
     }

@@ -84,15 +84,15 @@ public class FindByOfComponentContainerTest extends IntegrationFluentTest {
     private static class ContainerIndex {
 
         @FindBy(className = "small")
-        SomeFluentWebElement element;
+        private SomeFluentWebElement element;
 
         @FindBy(className = "small")
-        SomeWebElementWrapper wrapper;
+        private SomeWebElementWrapper wrapper;
 
-        @FindAll({ @FindBy(id = "location"), @FindBy(className = "small") })
-        List<SomeFluentWebElement> elementList;
+        @FindAll({@FindBy(id = "location"), @FindBy(className = "small")})
+        private List<SomeFluentWebElement> elementList;
 
-        @FindAll({ @FindBy(id = "location"), @FindBy(className = "small") })
-        List<SomeWebElementWrapper> wrapperList;
+        @FindAll({@FindBy(id = "location"), @FindBy(className = "small")})
+        private List<SomeWebElementWrapper> wrapperList;
     }
 }

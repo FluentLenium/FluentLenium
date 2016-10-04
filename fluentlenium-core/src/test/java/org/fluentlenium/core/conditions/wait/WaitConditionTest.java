@@ -41,7 +41,7 @@ public class WaitConditionTest {
 
     private FluentWait wait;
 
-    private String context = "context";
+    private final String context = "context";
 
     private ComponentInstantiator instantiator;
 

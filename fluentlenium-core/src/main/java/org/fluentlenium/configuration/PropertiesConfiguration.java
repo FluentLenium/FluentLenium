@@ -8,7 +8,7 @@ import java.util.Properties;
  * @see ConfigurationProperties
  */
 public class PropertiesConfiguration extends AbstractPropertiesConfiguration {
-    private Properties properties;
+    private final Properties properties;
 
     public PropertiesConfiguration(Properties properties) {
         super("", PROPERTIES_PREFIX);

@@ -34,7 +34,8 @@ public class WebElementConditionsTest {
 
     @Before
     public void before() {
-        fluentAdapter = new FluentAdapter(webDriver);
+        fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(webDriver);
 
         fluentWebElement = new FluentWebElement(webElement, fluentAdapter, new DefaultComponentInstantiator(fluentAdapter));
         conditions = new WebElementConditions(fluentWebElement);

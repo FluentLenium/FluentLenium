@@ -13,13 +13,21 @@ import org.openqa.selenium.TimeoutException;
  * Extend this class and use @{@link PageUrl} and @{@link org.openqa.selenium.support.FindBy} annotations to provide
  * injectable Page Objects to FluentLenium.
  */
-public abstract class FluentPage extends DefaultFluentContainer implements FluentPageControl {
+public class FluentPage extends DefaultFluentContainer implements FluentPageControl {
 
-    private ClassAnnotations classAnnotations = new ClassAnnotations(getClass());
+    private final ClassAnnotations classAnnotations = new ClassAnnotations(getClass());
 
+    /**
+     * Creates a new fluent page.
+     */
     public FluentPage() {
     }
 
+    /**
+     * Creates a new fluent page, using given fluent control.
+     *
+     * @param control fluent control
+     */
     public FluentPage(FluentControl control) {
         super(control);
     }

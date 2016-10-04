@@ -193,7 +193,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
                 if (getScreenshotMode() == TriggerMode.AUTOMATIC_ON_FAIL && canTakeScreenShot()) {
                     takeScreenShot(testClass.getSimpleName() + "_" + testName + ".png");
                 }
-            } catch (Exception exception) {
+            } catch (Exception exception) { // NOPMD EmptyCatchBlock
                 // Can't write screenshot, for some reason.
             }
 
@@ -201,7 +201,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
                 if (getHtmlDumpMode() == TriggerMode.AUTOMATIC_ON_FAIL && getDriver() != null) {
                     takeHtmlDump(testClass.getSimpleName() + "_" + testName + ".html");
                 }
-            } catch (Exception exception) {
+            } catch (Exception exception) { // NOPMD EmptyCatchBlock
                 // Can't write htmldump, for some reason.
             }
 

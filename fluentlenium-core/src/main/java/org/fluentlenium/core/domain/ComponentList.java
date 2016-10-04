@@ -28,12 +28,8 @@ public class ComponentList<T> extends DelegatingList<T> implements WrapsElements
         this.instantiator = instantiator;
 
         if (this.list instanceof WrapsElements) {
-            setProxy(((WrapsElements) this.list).getWrappedElements());
+            this.proxy = ((WrapsElements) this.list).getWrappedElements();
         }
-    }
-
-    public void setProxy(List<WebElement> proxy) {
-        this.proxy = proxy;
     }
 
     @Override

@@ -20,43 +20,43 @@ public class EventsRegistry {
 
     private final DefaultComponentInstantiator instantiator;
 
-    List<NavigateToListener> beforeNavigateTo = new ArrayList<>();
+    /* default */ final List<NavigateToListener> beforeNavigateTo = new ArrayList<>();
 
-    List<NavigateToListener> afterNavigateTo = new ArrayList<>();
+    /* default */ final List<NavigateToListener> afterNavigateTo = new ArrayList<>();
 
-    List<NavigateListener> beforeNavigateBack = new ArrayList<>();
+    /* default */ final List<NavigateListener> beforeNavigateBack = new ArrayList<>();
 
-    List<NavigateListener> afterNavigateBack = new ArrayList<>();
+    /* default */ final List<NavigateListener> afterNavigateBack = new ArrayList<>();
 
-    List<NavigateListener> beforeNavigateForward = new ArrayList<>();
+    /* default */ final List<NavigateListener> beforeNavigateForward = new ArrayList<>();
 
-    List<NavigateListener> afterNavigateForward = new ArrayList<>();
+    /* default */ final List<NavigateListener> afterNavigateForward = new ArrayList<>();
 
-    List<NavigateAllListener> beforeNavigate = new ArrayList<>();
+    /* default */ final List<NavigateAllListener> beforeNavigate = new ArrayList<>();
 
-    List<NavigateAllListener> afterNavigate = new ArrayList<>();
+    /* default */ final List<NavigateAllListener> afterNavigate = new ArrayList<>();
 
-    List<NavigateListener> beforeNavigateRefresh = new ArrayList<>();
+    /* default */ final List<NavigateListener> beforeNavigateRefresh = new ArrayList<>();
 
-    List<NavigateListener> afterNavigateRefresh = new ArrayList<>();
+    /* default */ final List<NavigateListener> afterNavigateRefresh = new ArrayList<>();
 
-    List<FindByListener> beforeFindBy = new ArrayList<>();
+    /* default */ final List<FindByListener> beforeFindBy = new ArrayList<>();
 
-    List<FindByListener> afterFindBy = new ArrayList<>();
+    /* default */ final List<FindByListener> afterFindBy = new ArrayList<>();
 
-    List<ElementListener> beforeClickOn = new ArrayList<>();
+    /* default */ final List<ElementListener> beforeClickOn = new ArrayList<>();
 
-    List<ElementListener> afterClickOn = new ArrayList<>();
+    /* default */ final List<ElementListener> afterClickOn = new ArrayList<>();
 
-    List<ElementListener> beforeChangeValueOf = new ArrayList<>();
+    /* default */ final List<ElementListener> beforeChangeValueOf = new ArrayList<>();
 
-    List<ElementListener> afterChangeValueOf = new ArrayList<>();
+    /* default */ final List<ElementListener> afterChangeValueOf = new ArrayList<>();
 
-    List<ScriptListener> beforeScript = new ArrayList<>();
+    /* default */ final List<ScriptListener> beforeScript = new ArrayList<>();
 
-    List<ScriptListener> afterScript = new ArrayList<>();
+    /* default */ final List<ScriptListener> afterScript = new ArrayList<>();
 
-    List<ExceptionListener> onException = new ArrayList<>();
+    /* default */ final List<ExceptionListener> onException = new ArrayList<>();
 
     public EventsRegistry(final FluentControl fluentControl) {
         this.eventDriver = (EventFiringWebDriver) fluentControl.getDriver();
@@ -261,7 +261,7 @@ public class EventsRegistry {
         Iterator<?> iterator = iterable.iterator();
         while (iterator.hasNext()) {
             Object next = iterator.next();
-            if (next instanceof ContainerListener && next == container) {
+            if (next instanceof ContainerListener && next == container) { // NOPMD CompareObjectsWithEquals
                 iterator.remove();
             }
         }

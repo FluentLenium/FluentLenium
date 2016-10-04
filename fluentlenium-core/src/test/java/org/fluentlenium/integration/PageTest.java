@@ -14,13 +14,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PageTest extends IntegrationFluentTest {
 
     @Page
-    PageAccueil page;
+    /* default */ PageAccueil page;
 
     @Page
-    Page2 page2;
+    private Page2 page2;
 
     @Page
-    Page3 page3;
+    private Page3 page3;
 
     @Test
     public void checkGoTo() {
@@ -81,10 +81,10 @@ public class PageTest extends IntegrationFluentTest {
 
 class PageAccueil extends FluentPage {
 
-    FluentWebElement linkToPage2;
+    private FluentWebElement linkToPage2;
 
     @FindBy(css = "a.go-next")
-    FluentWebElement linkToPage2FoundWithFindBy;
+    /* default */ FluentWebElement linkToPage2FoundWithFindBy;
 
     @Override
     public String getUrl() {
@@ -122,7 +122,7 @@ class Page2 extends FluentPage {
 class Page3 extends PageAccueil {
 
     @FindBy(css = "a.go-next")
-    FluentWebElement linkToPage2FoundWithFindByOnPage3;
+    /* default */ FluentWebElement linkToPage2FoundWithFindByOnPage3;
 }
 
 class Page4 extends FluentPage {

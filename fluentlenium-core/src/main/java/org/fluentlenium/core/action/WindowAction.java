@@ -18,7 +18,7 @@ import static com.google.common.collect.Sets.difference;
 
 public class WindowAction {
     private final FluentControl fluentControl;
-    private WebDriver driver;
+    private final WebDriver driver;
 
     public WindowAction(FluentControl fluentControl, WebDriver driver) {
         this.driver = driver;

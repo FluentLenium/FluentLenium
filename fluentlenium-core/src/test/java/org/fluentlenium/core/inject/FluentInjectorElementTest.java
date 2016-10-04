@@ -89,52 +89,52 @@ public class FluentInjectorElementTest {
     }
 
     public static class FluentWebElementContainer {
-        FluentWebElement element;
+        private FluentWebElement element;
     }
 
-    private static FluentWebElement existingElement = mock(FluentWebElement.class);
+    private static FluentWebElement existingElement = mock(FluentWebElement.class); // NOPMD FieldDeclarationsShouldBeAtStartOfClass
 
     public static class ExistingFluentWebElementContainer {
-        FluentWebElement element = existingElement;
+        private final FluentWebElement element = existingElement;
     }
 
     public static class FluentWebElementSubClassContainer {
-        FluentWebElementSubClass element;
+        private FluentWebElementSubClass element;
     }
 
     public static class WebElementWrapperContainer {
-        WebElementWrapper element;
+        private WebElementWrapper element;
     }
 
     public static class WebElementDriverWrapperContainer {
-        WebElementDriverWrapper element;
+        private WebElementDriverWrapper element;
     }
 
     public static class FluentWebElementListContainer {
-        List<FluentWebElement> element;
+        private List<FluentWebElement> element;
     }
 
     public static class FluentWebElementSubClassListContainer {
-        List<FluentWebElementSubClass> element;
+        private List<FluentWebElementSubClass> element;
     }
 
     public static class WebElementWrapperListContainer {
-        List<WebElementWrapper> element;
+        private List<WebElementWrapper> element;
     }
 
     public static class WebElementDriverWrapperListContainer {
-        List<WebElementDriverWrapper> element;
+        private List<WebElementDriverWrapper> element;
     }
 
     public static class FluentListSubClass<T extends FluentWebElementSubClass> extends FluentListImpl<T> {
         public FluentListSubClass(Class<T> componentClass, List<T> list, FluentControl fluentControl,
-                ComponentInstantiator instantiator) {
+                                  ComponentInstantiator instantiator) {
             super(componentClass, list, fluentControl, instantiator);
         }
     }
 
     public static class ListSubClassContainer {
-        FluentListSubClass<FluentWebElementSubClass> element;
+        private FluentListSubClass<FluentWebElementSubClass> element;
     }
 
     @Test

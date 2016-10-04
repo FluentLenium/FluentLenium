@@ -50,7 +50,8 @@ public class FillTest {
 
     @Before
     public void before() {
-        fluentAdapter = new FluentAdapter(driver);
+        fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(driver);
         instantiator = new DefaultComponentInstantiator(fluentAdapter);
     }
 

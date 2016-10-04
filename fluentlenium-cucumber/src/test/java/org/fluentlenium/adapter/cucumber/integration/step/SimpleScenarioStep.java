@@ -15,10 +15,10 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 public class SimpleScenarioStep extends FluentCucumberTest {
 
     @Page
-    LocalPage page;
+    private LocalPage page;
 
     @Page
-    LocalPage page2;
+    private LocalPage page2;
 
     @Override
     public WebDriver newWebDriver() {

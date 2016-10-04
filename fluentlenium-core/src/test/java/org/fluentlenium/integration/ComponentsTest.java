@@ -18,79 +18,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Wait
 public class ComponentsTest extends IntegrationFluentTest {
-    public static class Header extends FluentWebElement {
-        @FindBy(css = ".title")
-        private FluentWebElement title;
-
-        public Header(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
-            super(webElement, fluentControl, instantiator);
-        }
-    }
-
-    public static class Footer extends FluentWebElement {
-        @FindBy(css = ".copyright")
-        private FluentWebElement copyright;
-
-        public Footer(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
-            super(webElement, fluentControl, instantiator);
-        }
-    }
-
-    @FindBy(css = ".component")
-    public static class Component extends FluentWebElement {
-        public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
-            super(webElement, fluentControl, instantiator);
-        }
-
-        @Parent
-        private Content parent;
-
-        @FindBy(css = ".title")
-        private FluentWebElement title;
-
-        @FindBy(css = ".sub-component")
-        private List<SubComponent> subComponents;
-
-        @FindBy(css = ".sub-component")
-        private SubComponent subComponent;
-    }
-
-    public static class SubComponent {
-        private final WebElement webElement;
-
-        @Parent
-        private Component parent;
-
-        public SubComponent(WebElement webElement) {
-            this.webElement = webElement;
-        }
-
-        @FindBy(css = "a.action")
-        private FluentWebElement action;
-    }
-
-    public static class ComponentsPage extends FluentPage {
-        @FindBy(css = ".page > .page-content")
-        private FluentWebElement pageContent;
-
-        @Parent
-        private Content parent;
-    }
-
-    @FindBy(css = ".content")
-    public static class Content extends FluentWebElement {
-        public Content(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
-            super(webElement, fluentControl, instantiator);
-        }
-
-        @Page
-        private ComponentsPage page;
-
-        private List<Component> components;
-
-        private FluentWebElement notPresent;
-    }
-
     @FindBy(css = ".header")
     private Header header;
 
@@ -142,5 +69,80 @@ public class ComponentsTest extends IntegrationFluentTest {
 
         assertThat(content.notPresent.present()).isFalse();
 
+    }
+
+
+    public static class Header extends FluentWebElement {
+        @FindBy(css = ".title")
+        private FluentWebElement title;
+
+        public Header(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+            super(webElement, fluentControl, instantiator);
+        }
+    }
+
+    public static class Footer extends FluentWebElement {
+        @FindBy(css = ".copyright")
+        private FluentWebElement copyright;
+
+        public Footer(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+            super(webElement, fluentControl, instantiator);
+        }
+    }
+
+    @FindBy(css = ".component")
+    public static class Component extends FluentWebElement {
+        @Parent
+        private Content parent;
+
+        @FindBy(css = ".title")
+        private FluentWebElement title;
+
+        @FindBy(css = ".sub-component")
+        private List<SubComponent> subComponents;
+
+        @FindBy(css = ".sub-component")
+        private SubComponent subComponent;
+
+        public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+            super(webElement, fluentControl, instantiator);
+        }
+    }
+
+    public static class SubComponent {
+        private final WebElement webElement;
+
+        @Parent
+        private Component parent;
+
+        @FindBy(css = "a.action")
+        private FluentWebElement action;
+
+        public SubComponent(WebElement webElement) {
+            this.webElement = webElement;
+        }
+    }
+
+    public static class ComponentsPage extends FluentPage {
+        @FindBy(css = ".page > .page-content")
+        private FluentWebElement pageContent;
+
+        @Parent
+        private Content parent;
+    }
+
+    @FindBy(css = ".content")
+    public static class Content extends FluentWebElement {
+
+        public Content(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+            super(webElement, fluentControl, instantiator);
+        }
+
+        @Page
+        private ComponentsPage page;
+
+        private List<Component> components;
+
+        private FluentWebElement notPresent;
     }
 }

@@ -95,11 +95,9 @@ public class KeyboardElementActionsTest {
         Assertions.assertThat(actionsAlt.basic()).isSameAs(keyboard);
     }
 
-    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices {
-
+    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices { // NOPMD AbstractNaming
     }
 
-    private abstract static class LocatableElement implements WebElement, Locatable {
-
+    private abstract static class LocatableElement implements WebElement, Locatable { // NOPMD AbstractNaming
     }
 }

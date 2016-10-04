@@ -3,7 +3,6 @@ package org.fluentlenium.core.events;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * Listener interface for events.
@@ -64,8 +63,9 @@ public interface EventListener {
 
     /**
      * Called before {@link WebDriver#findElement WebDriver.findElement(...)}, or
-     * {@link WebDriver#findElements WebDriver.findElements(...)}, or {@link WebElement#findElement
-     * WebElement.findElement(...)}, or {@link WebElement#findElement WebElement.findElements(...)}.
+     * {@link WebDriver#findElements WebDriver.findElements(...)}, or {@link org.openqa.selenium.WebElement#findElement
+     * WebElement.findElement(...)}, or {@link org.openqa.selenium.WebElement
+     * #findElement WebElement.findElements(...)}.
      *
      * @param element will be <code>null</code>, if a find method of <code>WebDriver</code> is called.
      * @param by      locator being used
@@ -75,8 +75,8 @@ public interface EventListener {
 
     /**
      * Called after {@link WebDriver#findElement WebDriver.findElement(...)}, or
-     * {@link WebDriver#findElements WebDriver.findElements(...)}, or {@link WebElement#findElement
-     * WebElement.findElement(...)}, or {@link WebElement#findElement WebElement.findElements(...)}.
+     * {@link WebDriver#findElements WebDriver.findElements(...)}, or {@link org.openqa.selenium.WebElement#findElement
+     * WebElement.findElement(...)}, or {@link org.openqa.selenium.WebElement#findElement WebElement.findElements(...)}.
      *
      * @param element will be <code>null</code>, if a find method of <code>WebDriver</code> is called.
      * @param by      locator being used
@@ -85,7 +85,7 @@ public interface EventListener {
     void afterFindBy(By by, FluentWebElement element, WebDriver driver);
 
     /**
-     * Called before {@link WebElement#click WebElement.click()}.
+     * Called before {@link org.openqa.selenium.WebElement#click WebElement.click()}.
      *
      * @param driver  WebDriver
      * @param element the WebElement being used for the action
@@ -93,7 +93,7 @@ public interface EventListener {
     void beforeClickOn(FluentWebElement element, WebDriver driver);
 
     /**
-     * Called after {@link WebElement#click WebElement.click()}. Not called, if an exception is
+     * Called after {@link org.openqa.selenium.WebElement#click WebElement.click()}. Not called, if an exception is
      * thrown.
      *
      * @param driver  WebDriver
@@ -102,8 +102,9 @@ public interface EventListener {
     void afterClickOn(FluentWebElement element, WebDriver driver);
 
     /**
-     * Called before {@link WebElement#clear WebElement.clear()}, {@link WebElement#sendKeys
-     * WebElement.sendKeys(...)}.
+     * Called before {@link org.openqa.selenium.WebElement#clear WebElement.clear()},
+     * {@link org.openqa.selenium.WebElement#sendKeys},
+     * {@link org.openqa.selenium.WebElement#sendKeys(CharSequence...)}.
      *
      * @param driver  WebDriver
      * @param element the WebElement being used for the action
@@ -111,8 +112,9 @@ public interface EventListener {
     void beforeChangeValueOf(FluentWebElement element, WebDriver driver);
 
     /**
-     * Called after {@link WebElement#clear WebElement.clear()}, {@link WebElement#sendKeys
-     * WebElement.sendKeys(...)} . Not called, if an exception is thrown.
+     * Called after {@link org.openqa.selenium.WebElement#clear WebElement.clear()},
+     * {@link org.openqa.selenium.WebElement#sendKeys},
+     * {@link org.openqa.selenium.WebElement#sendKeys(CharSequence...)} . Not called, if an exception is thrown.
      *
      * @param driver  WebDriver
      * @param element the WebElement being used for the action

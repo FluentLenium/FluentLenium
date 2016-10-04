@@ -25,13 +25,15 @@ public class ScreenshotTest {
 
     @Test(expected = WebDriverException.class)
     public void whenBrowserDoesntAcceptScreenshotThenCustomError() {
-        adapter = new FluentAdapter(new CustomWebDriverNoScreenshot());
+        adapter = new FluentAdapter();
+        adapter.initFluent(new CustomWebDriverNoScreenshot());
         adapter.takeScreenShot();
     }
 
     @Test
     public void whenBrowserDoesAcceptScreenshotThenNoException() throws IOException {
-        adapter = new FluentAdapter(new CustomWebDriverScreenshot());
+        adapter = new FluentAdapter();
+        adapter.initFluent(new CustomWebDriverScreenshot());
         adapter.takeScreenShot(folder.newFile("test.jpg").getAbsolutePath());
     }
 
@@ -44,7 +46,7 @@ public class ScreenshotTest {
 class CustomWebDriverNoScreenshot implements WebDriver {
 
     public void get(String s) {
-
+        //Do nothing.
     }
 
     public String getCurrentUrl() {
@@ -68,11 +70,11 @@ class CustomWebDriverNoScreenshot implements WebDriver {
     }
 
     public void close() {
-
+        //Do nothing.
     }
 
     public void quit() {
-
+        //Do nothing.
     }
 
     public Set<String> getWindowHandles() {

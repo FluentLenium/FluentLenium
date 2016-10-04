@@ -50,7 +50,7 @@ public class FluentDriver implements FluentControl {
 
     private String baseUrl;
 
-    private ConfigurationProperties configuration;
+    private final ConfigurationProperties configuration;
 
     @Delegate(types = ComponentInstantiator.class)
     private final ComponentsManager componentsManager;
@@ -63,7 +63,7 @@ public class FluentDriver implements FluentControl {
     private FluentInjector fluentInjector;
 
     @Delegate
-    private CssControl cssControl;
+    private CssControl cssControl; // NOPMD SingularField
 
     private Search search;
 
@@ -79,8 +79,21 @@ public class FluentDriver implements FluentControl {
         this.configuration = configuration;
         this.adapter = adapter;
         this.componentsManager = new ComponentsManager(adapter);
+        this.driver = driver;
+        this.search = new Search(driver, componentsManager);
+        if (driver instanceof EventFiringWebDriver) {
+            this.events = new EventsRegistry(this);
+            this.eventsComponentsAnnotations = new AnnotationsComponentListener(componentsManager);
+            this.events.register(this.eventsComponentsAnnotations);
+        } else {
+            this.events = null;
+        }
+        this.mouseActions = new MouseActions(driver);
+        this.keyboardActions = new KeyboardActions(driver);
+        this.fluentInjector = new FluentInjector(adapter, events, componentsManager, new DefaultContainerInstanciator(this));
+        this.cssControl = new CssControlImpl(adapter, adapter);
+        this.windowAction = new WindowAction(adapter, driver);
 
-        initFluent(driver);
         configureDriver();
     }
 
@@ -122,24 +135,6 @@ public class FluentDriver implements FluentControl {
 
     }
 
-    protected FluentDriver initFluent(WebDriver driver) {
-        this.driver = driver;
-        this.search = new Search(driver, componentsManager);
-        if (driver instanceof EventFiringWebDriver) {
-            this.events = new EventsRegistry(this);
-            this.eventsComponentsAnnotations = new AnnotationsComponentListener(componentsManager);
-            this.events.register(this.eventsComponentsAnnotations);
-        } else {
-            this.events = null;
-        }
-        this.mouseActions = new MouseActions(driver);
-        this.keyboardActions = new KeyboardActions(driver);
-        this.fluentInjector = new FluentInjector(adapter, events, componentsManager, new DefaultContainerInstanciator(this));
-        this.cssControl = new CssControlImpl(adapter, adapter);
-        this.windowAction = new WindowAction(adapter, driver);
-        return this;
-    }
-
     @Override
     public void takeHtmlDump() {
         takeHtmlDump(new Date().getTime() + ".html");
@@ -149,10 +144,10 @@ public class FluentDriver implements FluentControl {
     public void takeHtmlDump(String fileName) {
         File destFile = null;
         try {
-            if (configuration.getHtmlDumpPath() != null) {
-                destFile = Paths.get(configuration.getHtmlDumpPath(), fileName).toFile();
-            } else {
+            if (configuration.getHtmlDumpPath() == null) {
                 destFile = new File(fileName);
+            } else {
+                destFile = Paths.get(configuration.getHtmlDumpPath(), fileName).toFile();
             }
             String html;
             synchronized (FluentDriver.class) {
@@ -193,10 +188,10 @@ public class FluentDriver implements FluentControl {
         File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         try {
             File destFile;
-            if (configuration.getScreenshotPath() != null) {
-                destFile = Paths.get(configuration.getScreenshotPath(), fileName).toFile();
-            } else {
+            if (configuration.getScreenshotPath() == null) {
                 destFile = new File(fileName);
+            } else {
+                destFile = Paths.get(configuration.getScreenshotPath(), fileName).toFile();
             }
             FileUtils.copyFile(scrFile, destFile);
         } catch (IOException e) {

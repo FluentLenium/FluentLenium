@@ -1,11 +1,13 @@
 package org.fluentlenium.core.filter;
 
+import org.fluentlenium.core.filter.matcher.AbstractMacher;
 import org.fluentlenium.core.filter.matcher.EqualMatcher;
-import org.fluentlenium.core.filter.matcher.Matcher;
+
+import java.util.Locale;
 
 public class Filter {
     private final String attribut;
-    private final Matcher matcher;
+    private final AbstractMacher matcher;
 
     /**
      * Construct a filter with a type and an associated value
@@ -24,7 +26,7 @@ public class Filter {
      * @param filterType filter type
      * @param matcher    matcher
      */
-    public Filter(final FilterType filterType, final Matcher matcher) {
+    public Filter(final FilterType filterType, final AbstractMacher matcher) {
         this.attribut = filterType.name();
         this.matcher = matcher;
     }
@@ -46,31 +48,28 @@ public class Filter {
      * @param customAttribute custom attribute name
      * @param matcher         matcher
      */
-    public Filter(final String customAttribute, final Matcher matcher) {
+    public Filter(final String customAttribute, final AbstractMacher matcher) {
         this.attribut = customAttribute;
         this.matcher = matcher;
     }
 
     public String getAttribut() {
-        return attribut.toLowerCase();
+        return attribut.toLowerCase(Locale.ENGLISH);
     }
 
     public String toString() {
-        String matcherAttribute = matcher != null ? matcher.getMatcherSymbol() : "";
+        String matcherAttribute = matcher == null ? null : matcher.getMatcherSymbol();
         if (matcherAttribute == null) {
             matcherAttribute = "";
         }
-        return "[" + attribut.toLowerCase() + matcherAttribute + "=\"" + matcher.getValue() + "\"]";
+        return "[" + attribut.toLowerCase(Locale.ENGLISH) + matcherAttribute + "=\"" + matcher.getValue() + "\"]";
     }
 
-    public Matcher getMatcher() {
+    public AbstractMacher getMatcher() {
         return matcher;
     }
 
     public boolean isPreFilter() {
-        if ((matcher != null && matcher.isPreFilter()) && !FilterType.TEXT.name().equalsIgnoreCase(getAttribut())) {
-            return true;
-        }
-        return false;
+        return matcher != null && matcher.isPreFilter() && !FilterType.TEXT.name().equalsIgnoreCase(getAttribut());
     }
 }

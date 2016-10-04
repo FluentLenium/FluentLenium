@@ -9,11 +9,12 @@ public class IntegerConditionsTest {
 
     private void numberImpl(int value) {
         IntegerConditions condition = new IntegerConditionsImpl(value);
-        assertConditions(condition, value);
 
+        assertConditions(condition, value);
         assertNotConditions(condition.not(), value);
     }
 
+    /* default */
     static void assertConditions(IntegerConditions conditions, final int value) {
         assertThat(conditions.verify(new Predicate<Integer>() {
             @Override
@@ -43,6 +44,7 @@ public class IntegerConditionsTest {
         assertThat(conditions.lessThan(value + 1)).isTrue();
     }
 
+    /* default */
     static void assertNotConditions(IntegerConditions conditions, final int value) {
         assertThat(conditions.verify(new Predicate<Integer>() {
             @Override

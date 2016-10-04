@@ -22,18 +22,19 @@ import java.util.Arrays;
 @RunWith(MockitoJUnitRunner.class)
 public class SearchHookTest {
     @Mock
-    WebElement element;
+    private WebElement element;
 
     @Mock
-    WebDriver driver;
+    private WebDriver driver;
 
-    DefaultComponentInstantiator instantiator;
+    private DefaultComponentInstantiator instantiator;
 
     private Search search;
 
     @Before
     public void before() {
-        FluentAdapter fluentAdapter = new FluentAdapter(driver);
+        FluentAdapter fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(driver);
 
         instantiator = new DefaultComponentInstantiator(fluentAdapter);
         search = new Search(driver, instantiator);

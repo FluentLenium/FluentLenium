@@ -89,7 +89,7 @@ public class PageWithAjaxElementTest extends IntegrationFluentTest {
     private static class JavascriptPageTooSlow extends FluentPage {
 
         @Wait(timeout = 5000)
-        FluentWebElement newFieldSlow;
+        private FluentWebElement newFieldSlow;
 
         @Override
         public String getUrl() {

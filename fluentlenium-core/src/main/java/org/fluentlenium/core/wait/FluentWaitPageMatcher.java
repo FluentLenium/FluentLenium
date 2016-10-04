@@ -7,8 +7,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 public class FluentWaitPageMatcher extends AbstractWaitMatcher {
-    private FluentWait wait;
-    private WebDriver webDriver;
+    private final FluentWait wait;
+    private final WebDriver webDriver;
     private FluentPage page;
 
     protected FluentWaitPageMatcher(FluentWait wait, WebDriver driver) {
@@ -28,9 +28,7 @@ public class FluentWaitPageMatcher extends AbstractWaitMatcher {
      */
     public void isLoaded() {
 
-        if (!(webDriver instanceof JavascriptExecutor)) {
-            throw new UnsupportedOperationException("Driver must support javascript execution to use this feature");
-        } else {
+        if (webDriver instanceof JavascriptExecutor) {
             Predicate<FluentControl> isLoaded = new com.google.common.base.Predicate<FluentControl>() {
                 public boolean apply(FluentControl fluent) {
                     Object result = fluent.executeScript("if (document.readyState) return document.readyState;")
@@ -39,6 +37,8 @@ public class FluentWaitPageMatcher extends AbstractWaitMatcher {
                 }
             };
             until(wait, isLoaded, String.format("Page %s should be loaded.", webDriver.getCurrentUrl()));
+        } else {
+            throw new UnsupportedOperationException("Driver must support javascript execution to use this feature");
         }
     }
 

@@ -8,7 +8,7 @@ import org.fluentlenium.core.FluentDriver;
  * {@link FluentDriver} instance.
  */
 public class ThreadLocalFluentControlContainer implements FluentControlContainer {
-    private ThreadLocal<FluentControl> fluentControls = new ThreadLocal<>();
+    private final ThreadLocal<FluentControl> fluentControls = new ThreadLocal<>();
 
     @Override
     public FluentControl getFluentControl() {

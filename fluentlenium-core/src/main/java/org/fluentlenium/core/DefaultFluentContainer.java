@@ -9,9 +9,17 @@ public class DefaultFluentContainer implements FluentControl, FluentContainer {
 
     protected FluentControl control;
 
+    /**
+     * Creates a new container.
+     */
     public DefaultFluentContainer() {
     }
 
+    /**
+     * Creates a new container, using given fluent control.
+     *
+     * @param control fluent control
+     */
     public DefaultFluentContainer(FluentControl control) {
         this.control = control;
     }

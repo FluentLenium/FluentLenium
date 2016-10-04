@@ -24,12 +24,11 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FluentTestRunnerAdapterTest {
-    interface TestWebDriver extends WebDriver, TakesScreenshot {
-
-    }
-
     @Mock
     private TestWebDriver driver;
+
+    private interface TestWebDriver extends WebDriver, TakesScreenshot {
+    }
 
     @Test
     public void testStartingFinish() {

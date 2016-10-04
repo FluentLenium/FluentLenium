@@ -5,7 +5,6 @@ import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -18,12 +17,10 @@ import java.util.List;
 public class Axes {
     private final WebElement webElement;
     private final ComponentInstantiator instantiator;
-    private final HookChainBuilder hookChainBuilder;
 
-    public Axes(WebElement element, ComponentInstantiator instantiator, HookChainBuilder hookChainBuilder) {
+    public Axes(WebElement element, ComponentInstantiator instantiator) {
         this.webElement = element;
         this.instantiator = instantiator;
-        this.hookChainBuilder = hookChainBuilder;
     }
 
     /**

@@ -25,7 +25,7 @@ public class AnnotationConfiguration implements ConfigurationProperties {
     private final JsonToBeanConverter jsonConverter = new JsonToBeanConverter();
 
     public AnnotationConfiguration(Class<?> containerClass) {
-        this(containerClass != null ? containerClass.getAnnotation(FluentConfiguration.class) : null);
+        this(containerClass == null ? null : containerClass.getAnnotation(FluentConfiguration.class));
     }
 
     public AnnotationConfiguration(FluentConfiguration configuration) {
@@ -66,11 +66,11 @@ public class AnnotationConfiguration implements ConfigurationProperties {
                 stream = url.openStream();
                 property = IOUtils.toString(stream, Charset.defaultCharset());
             } catch (IOException e) {
-                throw new ConfigurationException("Can't read Capabilities defined at " + url);
+                throw new ConfigurationException("Can't read Capabilities defined at " + url, e);
             } finally {
                 IOUtils.closeQuietly(stream);
             }
-        } catch (MalformedURLException e) {
+        } catch (MalformedURLException e) { // NOPMD EmptyCatchBlock
             // This is not an URL. Consider property as JSON.
         }
         CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);

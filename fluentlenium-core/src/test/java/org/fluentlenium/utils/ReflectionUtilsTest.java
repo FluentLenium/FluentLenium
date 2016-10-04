@@ -18,8 +18,8 @@ public class ReflectionUtilsTest {
 
         assertThat(classes).containsExactly(String.class, Integer.class, Long.class, Boolean.class, Integer.class);
 
-        assertThat(ReflectionUtils.toClass(null)).isNull();
-        assertThat(ReflectionUtils.toClass(new Object[] {})).isEmpty();
+        assertThat(ReflectionUtils.toClass((Object[]) null)).isNull();
+        assertThat(ReflectionUtils.toClass(new Object[]{})).isEmpty();
     }
 
     public static class SuperClass {
@@ -29,6 +29,7 @@ public class ReflectionUtilsTest {
         private Object param4;
 
         public SuperClass() {
+            // Default constructor
         }
 
         public SuperClass(String param1, Integer param2, boolean param3, Object param4) {
@@ -58,7 +59,7 @@ public class ReflectionUtilsTest {
 
         Constructor<SuperClass> superClassConstructor = ReflectionUtils.getConstructor(SuperClass.class, "1", 2, true, "object");
         assertThat(superClassConstructor.getParameterTypes())
-                .isEqualTo(new Class<?>[] {String.class, Integer.class, boolean.class, Object.class});
+                .isEqualTo(new Class<?>[]{String.class, Integer.class, boolean.class, Object.class});
 
         SuperClass object = ReflectionUtils.newInstance(SuperClass.class, "1", 2, true, "object");
         assertThat(object.param1).isEqualTo("1");

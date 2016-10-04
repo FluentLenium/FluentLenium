@@ -45,7 +45,8 @@ public class FluentListImplTest {
 
     @Before
     public void before() {
-        fluentAdapter = new FluentAdapter(driver);
+        fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(driver);
 
         emptyList = fluentAdapter.newFluentList();
 

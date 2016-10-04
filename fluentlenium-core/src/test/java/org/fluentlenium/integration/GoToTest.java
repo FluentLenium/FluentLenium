@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import static org.mockito.Mockito.verify;
 
 public class GoToTest extends IntegrationFluentTest {
-    WebDriver webDriver = Mockito.mock(WebDriver.class);
+    private final WebDriver webDriver = Mockito.mock(WebDriver.class);
 
     @Test(expected = IllegalArgumentException.class)
     public void goToWithNullString() {

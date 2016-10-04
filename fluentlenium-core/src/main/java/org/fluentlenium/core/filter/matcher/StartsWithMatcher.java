@@ -2,7 +2,7 @@ package org.fluentlenium.core.filter.matcher;
 
 import java.util.regex.Pattern;
 
-public class StartsWithMatcher extends Matcher {
+public class StartsWithMatcher extends AbstractMacher {
     /**
      * Constructor using a string as a value
      *

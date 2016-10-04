@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluentWebElementInTest extends IntegrationFluentTest {
-    FluentWebElement linkToPage2;
+    private FluentWebElement linkToPage2;
 
     @Test
     public void whenWebElementInTestThenTheyAreInstanciated() {

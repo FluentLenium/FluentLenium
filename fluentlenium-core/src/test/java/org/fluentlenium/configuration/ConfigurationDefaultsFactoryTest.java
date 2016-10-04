@@ -11,11 +11,12 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ SystemPropertiesConfiguration.class, EnvironmentVariablesConfiguration.class })
+@PrepareForTest({SystemPropertiesConfiguration.class, EnvironmentVariablesConfiguration.class})
 public class ConfigurationDefaultsFactoryTest {
 
     @FluentConfiguration(pageLoadTimeout = 2000L)
@@ -33,7 +34,7 @@ public class ConfigurationDefaultsFactoryTest {
         DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
             @Override
             protected InputStream getPropertiesInputStream() {
-                return IOUtils.toInputStream("pageLoadTimeout=5000");
+                return IOUtils.toInputStream("pageLoadTimeout=5000", Charset.forName("UTF-8"));
             }
         };
 
@@ -60,7 +61,7 @@ public class ConfigurationDefaultsFactoryTest {
         DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
             @Override
             protected InputStream getPropertiesInputStream() {
-                return IOUtils.toInputStream("fluentlenium.pageLoadTimeout=5000\nscriptTimeout=1000");
+                return IOUtils.toInputStream("fluentlenium.pageLoadTimeout=5000\nscriptTimeout=1000", Charset.forName("UTF-8"));
             }
         };
 
@@ -102,7 +103,7 @@ public class ConfigurationDefaultsFactoryTest {
         DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
             @Override
             protected InputStream getPropertiesInputStream() {
-                return IOUtils.toInputStream("pageLoadTimeout=5000");
+                return IOUtils.toInputStream("pageLoadTimeout=5000", Charset.forName("UTF-8"));
             }
         };
 

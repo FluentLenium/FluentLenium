@@ -15,8 +15,8 @@ import static org.mockito.Mockito.when;
 public class AlertAssertTest {
 
     @Mock
-    Alert alert;
-    AlertAssert alertAssert;
+    private Alert alert;
+    private AlertAssert alertAssert;
 
     @Before
     public void before() {

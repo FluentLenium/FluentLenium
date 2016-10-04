@@ -45,7 +45,8 @@ public class IntegerListConditionsTest {
 
     @Before
     public void before() {
-        FluentAdapter fluentAdapter = new FluentAdapter(driver);
+        FluentAdapter fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(driver);
         DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
 
         fluentWebElement1 = new FluentWebElement(webElement1, fluentAdapter, instantiator);

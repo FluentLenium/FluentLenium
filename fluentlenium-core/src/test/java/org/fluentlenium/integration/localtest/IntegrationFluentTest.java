@@ -5,7 +5,7 @@ import org.fluentlenium.integration.util.adapter.FluentTest;
 import static org.fluentlenium.integration.util.UrlUtil.getAbsoluteUrlFromFile;
 import static org.fluentlenium.integration.util.UrlUtil.getAbsoluteUrlPathFromFile;
 
-public abstract class IntegrationFluentTest extends FluentTest {
+public class IntegrationFluentTest extends FluentTest {
 
     public static final String DEFAULT_URL;
     public static final String DEFAULT_URL_PATH;

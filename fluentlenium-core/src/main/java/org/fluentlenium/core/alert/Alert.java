@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
  */
 public class Alert implements org.openqa.selenium.Alert {
 
-    private WebDriver webDriver;
+    private final WebDriver webDriver;
 
     @Delegate
     private org.openqa.selenium.Alert getSeleniumAlert() {
@@ -19,8 +19,8 @@ public class Alert implements org.openqa.selenium.Alert {
         this.webDriver = webDriver;
     }
 
-    public void prompt(String s) {
-        sendKeys(s);
+    public void prompt(String text) {
+        sendKeys(text);
         accept();
     }
 

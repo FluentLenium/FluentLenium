@@ -58,7 +58,8 @@ public class EventsTest {
         when(options.timeouts()).thenReturn(timeouts);
 
         eventDriver = new EventFiringWebDriver(driver);
-        fluentAdapter = new FluentAdapter(eventDriver);
+        fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(eventDriver);
 
         instantiator = new DefaultComponentInstantiator(fluentAdapter);
     }
@@ -287,7 +288,7 @@ public class EventsTest {
         }
     }
 
-    private abstract static class JavascriptWebDriver implements WebDriver, JavascriptExecutor {
+    private abstract static class JavascriptWebDriver implements WebDriver, JavascriptExecutor { // NOPMD AbstractNaming
 
     }
 }

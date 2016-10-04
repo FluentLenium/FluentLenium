@@ -11,7 +11,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BeforeInitialization extends FluentTest {
-    private WebDriver webDriver = new HtmlUnitDriver();
+    private final WebDriver webDriver = new HtmlUnitDriver();
     private TestPrivatePageWithElement page2;
     private TestPrivatePage2 page;
 
@@ -55,7 +55,7 @@ class TestPrivatePage2 extends FluentPage {
 
 class TestPrivatePageWithElement extends FluentPage {
 
-    FluentWebElement myElement;
+    /* default */ FluentWebElement myElement;
 
     @Override
     public String getUrl() {

@@ -12,10 +12,7 @@ import org.junit.runners.model.Statement;
  * <p>
  * Extends this class to provide FluentLenium support to your JUnit Test class.
  */
-public abstract class FluentTest extends FluentTestRunnerAdapter {
-    public FluentTest() {
-    }
-
+public class FluentTest extends FluentTestRunnerAdapter {
     @Rule
     public TestRule watchman = new FluentTestRule() {
 

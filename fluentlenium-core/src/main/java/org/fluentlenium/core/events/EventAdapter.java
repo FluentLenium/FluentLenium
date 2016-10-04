@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
+import java.util.Objects;
+
 class EventAdapter implements WebDriverEventListener {
 
     private final EventListener listener;
@@ -107,22 +109,19 @@ class EventAdapter implements WebDriverEventListener {
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (o == null || this.getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         EventAdapter that = (EventAdapter) o;
-
-        return !(this.listener != null ? !this.listener.equals(that.listener) : that.listener != null);
-
+        return Objects.equals(listener, that.listener);
     }
 
     @Override
     public int hashCode() {
-        return this.listener != null ? this.listener.hashCode() : 0;
+        return Objects.hash(listener);
     }
 }

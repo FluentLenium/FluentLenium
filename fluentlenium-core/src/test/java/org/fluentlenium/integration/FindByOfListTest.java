@@ -36,10 +36,10 @@ public class FindByOfListTest extends IntegrationFluentTest {
     private static class PageIndex extends FluentPage {
 
         @FindBy(className = "small")
-        FluentList<FluentWebElement> smalls;
+        private FluentList<FluentWebElement> smalls;
 
-        @FindAll({ @FindBy(id = "location"), @FindBy(className = "small") })
-        FluentList<FluentWebElement> findAllElements;
+        @FindAll({@FindBy(id = "location"), @FindBy(className = "small")})
+        private FluentList<FluentWebElement> findAllElements;
 
         @Override
         public String getUrl() {

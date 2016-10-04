@@ -36,12 +36,12 @@ import java.util.List;
  */
 public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E> implements FluentList<E> {
     private final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
-    private HookChainBuilder hookChainBuilder;
+    private final HookChainBuilder hookChainBuilder;
 
     private final FluentLabelImpl<FluentListImpl<E>> label;
 
     public FluentListImpl(Class<E> componentClass, final List<E> list, FluentControl fluentControl,
-            ComponentInstantiator instantiator) {
+                          ComponentInstantiator instantiator) {
         super(componentClass, list, fluentControl, instantiator);
         this.hookChainBuilder = new DefaultHookChainBuilder(fluentControl, instantiator);
         this.label = new FluentLabelImpl<>(this, new Supplier<String>() {

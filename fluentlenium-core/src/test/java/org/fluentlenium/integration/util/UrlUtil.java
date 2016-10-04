@@ -2,10 +2,13 @@ package org.fluentlenium.integration.util;
 
 import java.net.URL;
 
+/**
+ * Utility class for Url.
+ */
 public final class UrlUtil {
 
     private UrlUtil() {
-        // No instances allowed
+        // Utility class
     }
 
     /**
@@ -35,7 +38,7 @@ public final class UrlUtil {
      * @return the URL String
      */
     public static String getAbsoluteUrlPathFromFile(final String file) {
-        String url = getAbsoluteUrlFromFile(file);
-        return url.substring(0, url.lastIndexOf("/"));
+        final String url = getAbsoluteUrlFromFile(file);
+        return url.substring(0, url.lastIndexOf('/'));
     }
 }

@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class SeleniumFindBy extends IntegrationFluentTest {
     @Page
-    PageIndex page;
+    private PageIndex page;
 
     public void shouldFindByRetrieveElement() {
         page.go();
@@ -68,13 +68,13 @@ public class SeleniumFindBy extends IntegrationFluentTest {
 
     private static class PageIndex extends FluentPage {
         @FindBy(id = "location")
-        WebElement location;
+        private WebElement location;
 
         @FindBy(className = "small")
-        List<WebElement> smalls;
+        private List<WebElement> smalls;
 
-        @FindAll({ @FindBy(id = "location"), @FindBy(className = "small") })
-        List<WebElement> findAllElements;
+        @FindAll({@FindBy(id = "location"), @FindBy(className = "small")})
+        private List<WebElement> findAllElements;
 
         @FindBy(css = "#mouseover")
         private FluentWebElement mouseOverElement;

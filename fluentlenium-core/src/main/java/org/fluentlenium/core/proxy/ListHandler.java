@@ -70,7 +70,7 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
         return wrapElements(foundElements);
     }
 
-    protected List<WebElement> wrapElements(List<WebElement> foundElements) {
+    private List<WebElement> wrapElements(List<WebElement> foundElements) {
         List<WebElement> proxyElements = new ArrayList<>();
         for (WebElement element : foundElements) {
             WebElement proxyElement = LocatorProxies.createWebElement(new ElementInstanceLocator(element));
@@ -83,7 +83,7 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (GET_WRAPPED_ELEMENTS.equals(method)) {
-            return result != null ? getLocatorResult() : proxy;
+            return result == null ? proxy : getLocatorResult();
         }
         return super.invoke(proxy, method, args);
     }

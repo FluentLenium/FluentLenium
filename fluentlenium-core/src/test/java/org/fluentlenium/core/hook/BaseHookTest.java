@@ -40,7 +40,8 @@ public class BaseHookTest {
 
     @Before
     public void before() {
-        fluentAdapter = new FluentAdapter(webDriver);
+        fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(webDriver);
         instantiator = new DefaultComponentInstantiator(fluentAdapter);
         hook = new BaseHook<>(fluentAdapter, instantiator, Suppliers.ofInstance(element), Suppliers.ofInstance(locator),
                 Suppliers.ofInstance("toString"), options);

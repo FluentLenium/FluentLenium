@@ -77,31 +77,31 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @return assertion object
      */
     public FluentListAssert hasClass(String classToFind) {
-        List<String> classesFromElements = (List<String>) actual.attributes("class");
+        List<String> classes = (List<String>) actual.attributes("class");
 
-        for (String classesStr : classesFromElements) {
+        for (String classesStr : classes) {
             List<String> classesLst = Arrays.asList(classesStr.split(" "));
             if (classesLst.contains(classToFind)) {
                 return this;
             }
         }
 
-        StringBuilder sb = new StringBuilder();
-        for (String classFromElement : classesFromElements) {
-            if (sb.length() > 0) {
-                sb.append(", ");
+        StringBuilder builder = new StringBuilder();
+        for (String classFromElement : classes) {
+            if (builder.length() > 0) {
+                builder.append(", ");
             }
-            sb.append(classFromElement);
+            builder.append(classFromElement);
         }
 
-        super.failWithMessage("No selected elements has class: " + classToFind + " . Actual classes found : " + sb.toString());
+        super.failWithMessage("No selected elements has class: " + classToFind + " . Actual classes found : " + builder.toString());
         return this;
     }
 
     /*
      * Used in FluentListSizeBuilder to raise AssertionError
      */
-    void internalFail(String reason) {
+    /* default */ void internalFail(String reason) {
         super.failWithMessage(reason);
     }
 

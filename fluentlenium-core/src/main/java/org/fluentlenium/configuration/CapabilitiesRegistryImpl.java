@@ -46,7 +46,7 @@ public class CapabilitiesRegistryImpl extends AbstractFactoryRegistryImpl<Capabi
             defaultFactories.add(factory);
         }
 
-        if (defaultFactories.size() == 0) {
+        if (defaultFactories.isEmpty()) {
             return null;
         }
         return defaultFactories.get(0);
@@ -54,6 +54,7 @@ public class CapabilitiesRegistryImpl extends AbstractFactoryRegistryImpl<Capabi
 
     @Override
     protected void handleNoFactoryAvailable(String name) {
+        // Do nothing.
     }
 
     /**
@@ -62,7 +63,9 @@ public class CapabilitiesRegistryImpl extends AbstractFactoryRegistryImpl<Capabi
      * @param name name of the factory used to create new WebDriver instance
      * @return a new Capabilities instance
      */
-    public synchronized org.openqa.selenium.Capabilities newCapabilities(String name) {
-        return get(name).newCapabilities();
+    public org.openqa.selenium.Capabilities newCapabilities(String name) {
+        synchronized (this) {
+            return get(name).newCapabilities();
+        }
     }
 }

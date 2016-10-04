@@ -22,10 +22,10 @@ public class PropertiesConfigurationTest extends AbstractPropertiesConfiguration
 
     @Override
     protected void mockProperty(String propertyName, Object propertyValue) {
-        if (propertyValue != null) {
-            properties.setProperty(propertyName, valueToString(propertyValue));
-        } else {
+        if (propertyValue == null) {
             properties.remove(propertyName);
+        } else {
+            properties.setProperty(propertyName, valueToString(propertyValue));
         }
 
     }

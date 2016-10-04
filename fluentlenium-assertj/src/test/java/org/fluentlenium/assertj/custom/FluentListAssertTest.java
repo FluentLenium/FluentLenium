@@ -17,9 +17,9 @@ import static org.mockito.Mockito.when;
 public class FluentListAssertTest<E extends FluentWebElement> {
 
     @Mock
-    FluentList<E> fluentList;
+    private FluentList<E> fluentList;
 
-    FluentListAssert listAssert;
+    private FluentListAssert listAssert;
 
     @Before
     public void before() {

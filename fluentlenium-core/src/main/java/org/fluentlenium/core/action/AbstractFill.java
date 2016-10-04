@@ -4,7 +4,7 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.Filter;
 
-public class AbstractFill<E extends FluentWebElement> {
+public abstract class AbstractFill<E extends FluentWebElement> {
     private FluentList<E> fluentList;
 
     public AbstractFill(FluentList<E> list, Filter... filters) {

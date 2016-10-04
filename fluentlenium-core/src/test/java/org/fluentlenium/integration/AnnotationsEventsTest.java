@@ -21,8 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnnotationsEventsTest extends IntegrationFluentTest {
 
-    private List<WebElement> beforeClick = new ArrayList<>();
-    private List<WebElement> afterClick = new ArrayList<>();
+    private final List<WebElement> beforeClick = new ArrayList<>();
+    private final List<WebElement> afterClick = new ArrayList<>();
 
     private int beforeFindBy;
     private int afterFindBy;
@@ -46,7 +46,7 @@ public class AnnotationsEventsTest extends IntegrationFluentTest {
 
         @BeforeClickOn
         public void beforeClickOn() {
-
+            //Do nothing.
         }
 
     }

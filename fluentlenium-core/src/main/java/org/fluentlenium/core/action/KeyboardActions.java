@@ -22,11 +22,10 @@ public class KeyboardActions {
     }
 
     protected org.openqa.selenium.interactions.Actions actions() {
-        if (driver != null) {
-            return new org.openqa.selenium.interactions.Actions(driver);
-        } else {
+        if (driver == null) {
             return new org.openqa.selenium.interactions.Actions(keyboard, mouse);
         }
+        return new org.openqa.selenium.interactions.Actions(driver);
     }
 
     /**
@@ -35,11 +34,10 @@ public class KeyboardActions {
      * @return low level interface to control the keyboard
      */
     public Keyboard basic() {
-        if (keyboard != null) {
-            return keyboard;
-        } else {
+        if (keyboard == null) {
             return ((HasInputDevices) driver).getKeyboard();
         }
+        return keyboard;
     }
 
     /**

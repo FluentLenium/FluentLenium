@@ -69,7 +69,7 @@ public class ClassAnnotations extends AbstractAnnotations {
 
     protected void assertValidAnnotations() {
         FindBys findBys = cls.getAnnotation(FindBys.class);
-        FindAll findAll = cls.getAnnotation(FindAll.class);
+        FindAll findAll = cls.getAnnotation(FindAll.class); // NOPMD PrematureDeclaration
         FindBy findBy = cls.getAnnotation(FindBy.class);
         if (findBys != null && findBy != null) {
             throw new IllegalArgumentException(

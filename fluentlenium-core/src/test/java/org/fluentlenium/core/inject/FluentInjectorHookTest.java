@@ -50,7 +50,8 @@ public class FluentInjectorHookTest {
 
     @Before
     public void before() {
-        fluentAdapter = new FluentAdapter(webDriver);
+        fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(webDriver);
 
         injector = new FluentInjector(fluentAdapter, null, new ComponentsManager(fluentAdapter),
                 new DefaultContainerInstanciator(fluentAdapter));
@@ -274,7 +275,7 @@ public class FluentInjectorHookTest {
 
     public static class NanoHook2 extends NanoHook {
         public NanoHook2(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
-                Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, NanoHookOptions options) {
+                         Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, NanoHookOptions options) {
             super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
         }
     }

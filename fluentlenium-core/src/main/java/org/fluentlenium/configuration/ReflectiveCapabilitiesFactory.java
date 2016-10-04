@@ -13,9 +13,9 @@ import java.util.List;
  * A simple {@link CapabilitiesFactory} that create {@link Capabilities} instances using reflection.
  */
 public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, FactoryNames, ReflectiveFactory {
-    private String name;
-    private Object[] args;
-    private String capabilitiesClassName;
+    private final String name;
+    private final Object[] args;
+    private final String capabilitiesClassName;
     private Class<? extends Capabilities> capabilitiesClass;
     private boolean available;
 

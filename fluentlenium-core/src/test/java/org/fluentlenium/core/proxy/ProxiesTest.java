@@ -33,16 +33,16 @@ import static org.mockito.Mockito.when;
 public class ProxiesTest {
 
     @Mock
-    WebDriver driver;
+    private WebDriver driver;
 
     @Mock
-    WebElement element1;
+    private WebElement element1;
 
     @Mock
-    WebElement element2;
+    private WebElement element2;
 
     @Mock
-    WebElement element3;
+    private WebElement element3;
 
     @Before
     public void before() {

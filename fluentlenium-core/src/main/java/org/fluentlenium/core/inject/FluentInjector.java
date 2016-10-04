@@ -51,7 +51,7 @@ public class FluentInjector implements FluentInjectControl {
     private final EventsRegistry eventsRegistry;
 
     public FluentInjector(FluentControl fluentControl, EventsRegistry eventsRegistry, ComponentsManager componentsManager,
-            ContainerInstanciator instanciator) {
+                          ContainerInstanciator instanciator) {
         this.fluentControl = fluentControl;
         this.eventsRegistry = eventsRegistry;
         this.componentsManager = componentsManager;
@@ -135,7 +135,7 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private void initContainerContext(Object container, Object parentContainer, SearchContext searchContext) {
-        ContainerContext parentContainerContext = parentContainer != null ? containerContexts.get(parentContainer) : null;
+        ContainerContext parentContainerContext = parentContainer == null ? null : containerContexts.get(parentContainer);
 
         DefaultContainerContext containerContext = new DefaultContainerContext(container, parentContainerContext, searchContext);
         containerContexts.put(container, containerContext);
@@ -169,14 +169,7 @@ public class FluentInjector implements FluentInjectControl {
                 if (isContainer(field)) {
                     Class fieldClass = field.getType();
                     Object existingChildContainer = containerInstances.get(fieldClass);
-                    if (existingChildContainer != null) {
-                        try {
-                            ReflectionUtils.set(field, container, existingChildContainer);
-                        } catch (IllegalAccessException e) {
-                            throw new FluentInjectException("Can't set field " + field + " with value " + existingChildContainer,
-                                    e);
-                        }
-                    } else {
+                    if (existingChildContainer == null) {
                         Object childContainer = containerInstanciator.newInstance(fieldClass, containerContexts.get(container));
                         initContainer(childContainer, container, searchContext);
                         try {
@@ -186,6 +179,13 @@ public class FluentInjector implements FluentInjectControl {
                         }
                         containerInstances.put(fieldClass, childContainer);
                         inject(childContainer, container, searchContext);
+                    } else {
+                        try {
+                            ReflectionUtils.set(field, container, existingChildContainer);
+                        } catch (IllegalAccessException e) {
+                            throw new FluentInjectException("Can't set field " + field + " with value " + existingChildContainer,
+                                    e);
+                        }
                     }
                 }
             }
@@ -212,7 +212,7 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private void injectComponent(ComponentAndProxy fieldValue, ElementLocator locator, final Object container, Field field,
-            ArrayList<HookDefinition<?>> fieldHookDefinitions) {
+                                 ArrayList<HookDefinition<?>> fieldHookDefinitions) {
         if (fieldValue != null) {
             LocatorProxies.setHooks(fieldValue.getProxy(), hookChainBuilder, fieldHookDefinitions);
             try {
@@ -317,8 +317,7 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private <T> HookDefinition<T> buildHookDefinition(Hook hookAnnotation, HookOptions hookOptionsAnnotation,
-            Annotation currentAnnotation) {
-        Class<? extends FluentHook<T>> hookClass = (Class<? extends FluentHook<T>>) hookAnnotation.value();
+                                                      Annotation currentAnnotation) {
         Class<? extends T> hookOptionsClass =
                 hookOptionsAnnotation == null ? null : (Class<? extends T>) hookOptionsAnnotation.value();
         T fluentHookOptions = null;
@@ -331,11 +330,11 @@ public class FluentInjector implements FluentInjectControl {
                 throw new FluentInjectException("Can't create @HookOption class instance", e);
             }
         }
-        if (fluentHookOptions != null) {
-            return new HookDefinition<>(hookClass, fluentHookOptions);
-        } else {
+        Class<? extends FluentHook<T>> hookClass = (Class<? extends FluentHook<T>>) hookAnnotation.value();
+        if (fluentHookOptions == null) {
             return new HookDefinition<>(hookClass);
         }
+        return new HookDefinition<>(hookClass, fluentHookOptions);
     }
 
     private boolean isSupported(Object container, Field field) {
@@ -428,7 +427,7 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private <L extends List<T>, T> ComponentAndProxy<L, List<WebElement>> initFieldAsComponentList(ElementLocator locator,
-            Field field) {
+                                                                                                   Field field) {
         List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
         L componentList = componentsManager
                 .asComponentList((Class<L>) field.getType(), (Class<T>) ReflectionUtils.getFirstGenericType(field),
@@ -443,7 +442,7 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private ComponentAndProxy<ComponentList<?>, List<WebElement>> initFieldAsListOfComponent(ElementLocator locator,
-            Field field) {
+                                                                                             Field field) {
         List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
         ComponentList<?> componentList = componentsManager
                 .asComponentList(ReflectionUtils.getFirstGenericType(field), webElementList);

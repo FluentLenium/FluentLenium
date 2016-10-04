@@ -29,10 +29,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
 public class FluentTestTest {
-    private interface ScreenshotWebDriver extends WebDriver, TakesScreenshot {
-
-    }
-
     private static List<WebDriver> drivers = new ArrayList<>();
     private static List<WebDriver> sharedClassDrivers = new ArrayList<>();
     private static List<WebDriver> sharedOnceDrivers = new ArrayList<>();
@@ -45,6 +41,9 @@ public class FluentTestTest {
     private static File tmpPath = Files.newTemporaryFolder();
 
     private static List<WebDriver.Options> sharedClassDriversOptions = new ArrayList<>();
+
+    private interface ScreenshotWebDriver extends WebDriver, TakesScreenshot {
+    }
 
     public static class InternalTest extends FluentTest {
         @Override
@@ -161,7 +160,6 @@ public class FluentTestTest {
 
         @Override
         public WebDriver newWebDriver() {
-            ScreenshotWebDriver webDriver = Mockito.mock(ScreenshotWebDriver.class);
             try {
                 screenshotFile = File.createTempFile("FluentTestTest.java", "");
                 FileUtils.writeByteArrayToFile(screenshotFile, screenshotData);
@@ -170,6 +168,7 @@ public class FluentTestTest {
                 throw new IOError(e);
             }
 
+            ScreenshotWebDriver webDriver = Mockito.mock(ScreenshotWebDriver.class);
             Mockito.when(webDriver.getScreenshotAs(OutputType.FILE)).thenReturn(screenshotFile);
 
             WebElement htmlElement = Mockito.mock(WebElement.class);

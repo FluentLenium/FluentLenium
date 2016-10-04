@@ -16,10 +16,7 @@ public class FilterPredicate implements Predicate<FluentWebElement> {
     public boolean apply(FluentWebElement webElementCustom) {
 
         String attribute = returnTextIfTextAttributeElseAttributeValue(webElementCustom);
-        if (filter != null && filter.getMatcher().isSatisfiedBy(attribute)) {
-            return true;
-        }
-        return false;
+        return filter != null && filter.getMatcher().isSatisfiedBy(attribute);
     }
 
     private String returnTextIfTextAttributeElseAttributeValue(FluentWebElement webElementCustom) {

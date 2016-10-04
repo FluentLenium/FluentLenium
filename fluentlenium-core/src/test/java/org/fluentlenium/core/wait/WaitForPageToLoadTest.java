@@ -23,13 +23,13 @@ import static org.mockito.Mockito.when;
 public class WaitForPageToLoadTest {
 
     @Mock
-    WebDriver webDriver;
+    private WebDriver webDriver;
 
     @Mock
-    FluentWait wait;
+    private FluentWait wait;
 
     @Mock
-    WebDriverWithJavascriptExecutor webDriverWithJavascriptExecutor;
+    private WebDriverWithJavascriptExecutor webDriverWithJavascriptExecutor;
 
     @Before
     public void before() {

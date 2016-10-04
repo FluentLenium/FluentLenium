@@ -37,7 +37,7 @@ public class PageInPageTest extends IntegrationFluentTest {
 class TestPage extends FluentPage {
 
     @Page
-    IncludedPage includedPage;
+    /* default */ IncludedPage includedPage;
 }
 
 class SubSubTestPage extends SubTestPage {
@@ -46,7 +46,7 @@ class SubSubTestPage extends SubTestPage {
 class SubTestPage extends TestPage {
 
     @Page
-    IncludedPage anotherIncludedPage;
+    /* default */ IncludedPage anotherIncludedPage;
 }
 
 class SubTestPageWithCreate extends FluentPage {
@@ -65,5 +65,5 @@ class SubTestPageWithCreate extends FluentPage {
 
 class IncludedPage extends FluentPage {
 
-    FluentWebElement element;
+    /* default */ FluentWebElement element;
 }

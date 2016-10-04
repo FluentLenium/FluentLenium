@@ -20,11 +20,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
 public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
-    @Before
-    public void before() {
-        goTo(DEFAULT_URL);
-    }
-
     @FindBy(className = "small")
     private FluentList<FluentWebElement> smallElements;
 
@@ -66,6 +61,11 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
 
     @FindBy(id = "disabled")
     private FluentWebElement disabledElement;
+
+    @Before
+    public void before() {
+        goTo(DEFAULT_URL);
+    }
 
     @Test
     public void checkAwaitIsPresent() {
@@ -271,11 +271,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @Test
     public void checkIsAt() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1000, TimeUnit.MILLISECONDS).untilPage(new FluentPage() {
-            @Override
-            public void isAt() {
-            }
-        }).isAt();
+        await().pollingEvery(1000, TimeUnit.MILLISECONDS).untilPage(new FluentPage()).isAt();
     }
 
     @Test

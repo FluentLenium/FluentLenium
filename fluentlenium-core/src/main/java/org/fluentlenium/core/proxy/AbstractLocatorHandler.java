@@ -16,6 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Abstract proxy handler supporting lazy loading and hooks on {@link WebElement}.
@@ -33,6 +34,14 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     protected HookChainBuilder hookChainBuilder = null;
     protected List<HookDefinition<?>> hookDefinitions = null;
 
+    private final List<ProxyElementListener> listeners = new ArrayList<>();
+
+    protected T proxy;
+    protected final ElementLocator locator;
+    protected T result;
+
+    private List<FluentHook> hooks;
+
     protected static Method getMethod(Class<?> declaringClass, String name, Class... types) {
         try {
             return declaringClass.getMethod(name, types);
@@ -41,15 +50,14 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         }
     }
 
-    private List<ProxyElementListener> listeners = new ArrayList<>();
 
     @Override
-    public synchronized boolean addListener(ProxyElementListener listener) {
+    public boolean addListener(ProxyElementListener listener) {
         return listeners.add(listener);
     }
 
     @Override
-    public synchronized boolean removeListener(ProxyElementListener listener) {
+    public boolean removeListener(ProxyElementListener listener) {
         return listeners.remove(listener);
     }
 
@@ -67,12 +75,6 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     protected abstract List<WebElement> resultToList(T result);
 
-    protected T proxy;
-    protected final ElementLocator locator;
-    protected T result;
-
-    private List<FluentHook> hooks;
-
     public AbstractLocatorHandler(ElementLocator locator) {
         this.locator = locator;
     }
@@ -83,18 +85,20 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     public abstract T getLocatorResultImpl();
 
-    public synchronized T getLocatorResult() {
-        if (result != null) {
-            if (isStale()) {
-                result = null;
+    public T getLocatorResult() {
+        synchronized (this) {
+            if (result != null) {
+                if (isStale()) {
+                    result = null;
+                }
             }
+            if (result == null) {
+                fireProxyElementSearch();
+                result = getLocatorResultImpl();
+                fireProxyElementFound(result);
+            }
+            return result;
         }
-        if (result == null) {
-            fireProxyElementSearch();
-            result = getLocatorResultImpl();
-            fireProxyElementFound(result);
-        }
-        return result;
     }
 
     protected abstract boolean isStale();
@@ -103,7 +107,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     @Override
     public void setHooks(HookChainBuilder hookChainBuilder, List<HookDefinition<?>> hookDefinitions) {
-        if (hookDefinitions == null || hookDefinitions.size() == 0) {
+        if (hookDefinitions == null || hookDefinitions.isEmpty()) {
             this.hookChainBuilder = null;
             this.hookDefinitions = null;
 
@@ -138,7 +142,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     @Override
     public ElementLocator getHookLocator() {
-        if (hooks != null && hooks.size() > 0) {
+        if (hooks != null && !hooks.isEmpty()) {
             return hooks.get(hooks.size() - 1);
         }
         return locator;
@@ -149,7 +153,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         if (getElement() == null) {
             return null;
         }
-        if (hooks != null && hooks.size() > 0) {
+        if (hooks != null && !hooks.isEmpty()) {
             return hooks.get(hooks.size() - 1);
         }
         return getElement();
@@ -241,6 +245,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     }
     //CHECKSTYLE.ON: IllegalThrows
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -249,15 +254,13 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
-        AbstractLocatorHandler that = (AbstractLocatorHandler) o;
-
-        return locator != null ? locator.equals(that.locator) : that.locator == null;
+        AbstractLocatorHandler<?> that = (AbstractLocatorHandler<?>) o;
+        return Objects.equals(locator, that.locator);
     }
 
     @Override
     public int hashCode() {
-        return locator != null ? locator.hashCode() : 2048;
+        return Objects.hash(locator);
     }
 
     protected String getLazyToString() {

@@ -161,8 +161,9 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void checkAwaitPageToLoadWithNoJSEnabled() {
-        FluentAdapter fluentTest = new FluentAdapter(new HtmlUnitDriver(false));
-        fluentTest.await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilPage().isLoaded();
+        FluentAdapter adapter = new FluentAdapter();
+        adapter.initFluent(new HtmlUnitDriver(false));
+        adapter.await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilPage().isLoaded();
     }
 
     @Test
@@ -446,11 +447,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test
     public void checkIsAt() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(SECOND_TIMEOUT, TimeUnit.MILLISECONDS).untilPage(new FluentPage() {
-            @Override
-            public void isAt() {
-            }
-        }).isAt();
+        await().pollingEvery(SECOND_TIMEOUT, TimeUnit.MILLISECONDS).untilPage(new FluentPage()).isAt();
     }
 
     @Test(expected = IllegalArgumentException.class)

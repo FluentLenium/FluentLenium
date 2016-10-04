@@ -24,19 +24,19 @@ import java.util.WeakHashMap;
  * Utility class for reflection.
  */
 public final class ReflectionUtils {
+    private static final Class<?>[] EMPTY_CLASS_ARRAY = new Class<?>[0];
+    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+    private static final Map<Class<?>, Class<?>> PRIMITIVES_TO_WRAPPERS = new HashMap<>();
+    private static final Map<Class<?>, Object> DEFAULTS = new HashMap<>();
+
     private ReflectionUtils() {
         // Utility class
     }
-
-    private static final Class<?>[] EMPTY_CLASS_ARRAY = new Class<?>[0];
-    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
     @SuppressWarnings("unchecked")
     public static <T> Class<T> wrapPrimitive(Class<T> c) {
         return c.isPrimitive() ? (Class<T>) PRIMITIVES_TO_WRAPPERS.get(c) : c;
     }
-
-    private static final Map<Class<?>, Class<?>> PRIMITIVES_TO_WRAPPERS = new HashMap<>();
 
     static {
         PRIMITIVES_TO_WRAPPERS.put(boolean.class, Boolean.class);
@@ -49,8 +49,6 @@ public final class ReflectionUtils {
         PRIMITIVES_TO_WRAPPERS.put(short.class, Short.class);
         PRIMITIVES_TO_WRAPPERS.put(void.class, Void.class);
     }
-
-    private static final Map<Class<?>, Object> DEFAULTS = new HashMap<>();
 
     static {
         // Only add to this map via put(Map, Class<T>, T)
@@ -165,7 +163,7 @@ public final class ReflectionUtils {
                 boolean match = true;
                 for (int i = 0; i < parameterTypes.length; i++) {
                     parameterTypes[i] = wrapPrimitive(parameterTypes[i]);
-                    if (argsTypes[i] != null) {
+                    if (argsTypes[i] != null) { // NOPMD ConfusingTernary
                         if (!parameterTypes[i].isAssignableFrom(argsTypes[i])) {
                             match = false;
                             break;

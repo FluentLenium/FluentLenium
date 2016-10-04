@@ -55,7 +55,8 @@ public class FluentWebElementTest {
 
     @Before
     public void before() {
-        fluentAdapter = new FluentAdapter(driver);
+        fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(driver);
 
         when(driver.getMouse()).thenReturn(mouse);
         when(driver.getKeyboard()).thenReturn(keyboard);
@@ -337,7 +338,7 @@ public class FluentWebElementTest {
         assertThat(fluentElement.toString()).isEqualTo(element.toString());
     }
 
-    private static class Component {
+    private static final class Component {
         private WebElement element;
 
         Component(WebElement element) {
@@ -357,12 +358,10 @@ public class FluentWebElementTest {
     private static class InvalidComponent {
     }
 
-    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices {
-
+    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices { // NOPMD AbstractNaming
     }
 
-    private abstract static class LocatableElement implements WebElement, Locatable {
-
+    private abstract static class LocatableElement implements WebElement, Locatable { // NOPMD AbstractNaming
     }
 
 }

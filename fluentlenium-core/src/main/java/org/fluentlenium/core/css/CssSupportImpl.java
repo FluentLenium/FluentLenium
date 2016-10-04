@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriverException;
 import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
 /**
  * Inject CSS into active page.
@@ -28,7 +29,7 @@ public class CssSupportImpl implements CssSupport {
         InputStream injectorScript = this.getClass().getResourceAsStream("/org/fluentlenium/core/css/injector.js");
         String injectorJs;
         try {
-            injectorJs = IOUtils.toString(injectorScript);
+            injectorJs = IOUtils.toString(injectorScript, Charset.forName("UTF-8"));
         } catch (IOException e) {
             throw new IOError(e);
         } finally {
@@ -44,7 +45,7 @@ public class CssSupportImpl implements CssSupport {
         InputStream cssStream = this.getClass().getResourceAsStream(cssResourceName);
         String cssText;
         try {
-            cssText = IOUtils.toString(cssStream);
+            cssText = IOUtils.toString(cssStream, Charset.forName("UTF-8"));
         } catch (IOException e) {
             throw new IOError(e);
         } finally {

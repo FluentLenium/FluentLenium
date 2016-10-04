@@ -43,7 +43,8 @@ public class RectangleListConditionsTest {
 
     @Before
     public void before() {
-        FluentAdapter fluentAdapter = new FluentAdapter(webDriver);
+        FluentAdapter fluentAdapter = new FluentAdapter();
+        fluentAdapter.initFluent(webDriver);
         DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
 
         fluentWebElement1 = new FluentWebElement(webElement1, fluentAdapter, instantiator);

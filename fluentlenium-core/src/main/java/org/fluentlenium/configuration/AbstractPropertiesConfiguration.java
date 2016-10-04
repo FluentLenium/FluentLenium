@@ -46,10 +46,7 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
     }
 
     private boolean isValidProperty(String property) {
-        if (Strings.isNullOrEmpty(property) || "null".equalsIgnoreCase(property)) {
-            return false;
-        }
-        return true;
+        return !Strings.isNullOrEmpty(property) && !"null".equalsIgnoreCase(property);
     }
 
     private String getStringProperty(String propertyName) {
@@ -85,11 +82,10 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
         if (!isValidProperty(property)) {
             return null;
         }
-        if (propertyName.equalsIgnoreCase("DEFAULT")) {
+        if ("DEFAULT".equalsIgnoreCase(propertyName)) {
             return null;
         }
-        T enumValue = (T) Enum.valueOf(enumClass, property);
-        return enumValue;
+        return (T) Enum.valueOf(enumClass, property);
     }
 
     private <T> Class<T> getClassProperty(Class<T> clazz, String propertyName) {
@@ -102,7 +98,7 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
             if (clazz.isAssignableFrom(propertyClass)) {
                 return (Class<T>) propertyClass;
             }
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) { // NOPMD EmptyCatchBlock
         }
         return null;
     }
@@ -123,7 +119,7 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
             } catch (IOException e) {
                 throw new ConfigurationException("Can't read Capabilities defined at " + url);
             }
-        } catch (MalformedURLException e) {
+        } catch (MalformedURLException e) { // NOPMD EmptyCatchBlock PreserveStackTrace
             // This is not an URL. Consider property as JSON.
         }
         CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
