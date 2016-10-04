@@ -86,12 +86,12 @@ public final class WaitConditionProxy {
         return (FluentConditions) Proxy
                 .newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {FluentConditions.class},
                         new WaitConditionInvocationHandler(FluentConditions.class, wait, context,
-                                new Supplier<FluentConditions>() {
-                                    @Override
-                                    public FluentConditions get() {
-                                        return new WebElementConditions(elementSupplier.get());
-                                    }
-                                }));
+                            new Supplier<FluentConditions>() {
+                                @Override
+                                public FluentConditions get() {
+                                    return new WebElementConditions(elementSupplier.get());
+                                }
+                            }));
     }
 
     /**
