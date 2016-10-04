@@ -224,7 +224,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void when_a_element_is_not_present_then_isNotPresent_return_true() {
+    public void whenAElementIsNotPresentThenIsNotPresentReturnTrue() {
         await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
             public FluentList<FluentWebElement> get() {
@@ -234,7 +234,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_a_element_is_present_then_isNotPresent_throw_an_exception() {
+    public void whenAElementIsPresentThenIsNotPresentThrowAnException() {
         await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
@@ -434,7 +434,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void when_element_is_present_then_areDisplayed_return_true() {
+    public void whenElementIsPresentThenAreDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
@@ -445,7 +445,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void when_element_is_present_then_isDisplayed_return_true() {
+    public void whenElementIsPresentThenIsDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
@@ -456,7 +456,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_displayed_then_areDisplayed_throws_exception() {
+    public void whenElementIsNotDisplayedThenAreDisplayedThrowsException() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
@@ -467,7 +467,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_displayed_then_isDisplayed_throws_exception() {
+    public void whenElementIsNotDisplayedThenIsDisplayedThrowsException() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
@@ -478,7 +478,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void when_element_is_not_present_then_areNotDisplayed_return_true() {
+    public void whenElementIsNotPresentThenAreNotDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
@@ -489,7 +489,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void when_element_is_not_present_then_isNotDisplayed_return_true() {
+    public void whenElementIsNotPresentThenIsNotDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
@@ -500,7 +500,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void when_element_is_not_displayed_then_areNotDisplayed_return_true() {
+    public void whenElementIsNotDisplayedThenAreNotDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
@@ -511,7 +511,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void when_element_is_not_displayed_then_isNotDisplayed_return_true() {
+    public void whenElementIsNotDisplayedThenIsNotDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
@@ -522,7 +522,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_displayed_then_areNotDisplayed_throws_exception() {
+    public void whenElementIsDisplayedThenAreNotDisplayedThrowsException() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
@@ -533,7 +533,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_displayed_then_isNotDisplayed_throws_exception() {
+    public void whenElementIsDisplayedThenIsNotDisplayedThrowsException() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
@@ -544,7 +544,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void when_element_is_enabled_then_areEnabled_return_true() {
+    public void whenElementIsEnabledThenAreEnabledReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
@@ -555,7 +555,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void when_element_is_enabled_then_isEnabled_return_true() {
+    public void whenElementIsEnabledThenIsEnabledReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
@@ -566,7 +566,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_enabled_then_areEnabled_throws_exception() {
+    public void whenElementIsNotEnabledThenAreEnabledThrowsException() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilEachElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
@@ -577,7 +577,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test(expected = TimeoutException.class)
-    public void when_element_is_not_enabled_then_isEnabled_throws_exception() {
+    public void whenElementIsNotEnabledThenIsEnabledThrowsException() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
@@ -588,7 +588,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void when_element_is_not_displayed_then_isPresent_return_true() {
+    public void whenElementIsNotDisplayedThenIsPresentReturnTrue() {
         goTo(JAVASCRIPT_URL);
         await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override

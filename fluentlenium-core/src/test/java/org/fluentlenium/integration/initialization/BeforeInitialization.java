@@ -11,9 +11,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BeforeInitialization extends FluentTest {
-    public WebDriver webDriver = new HtmlUnitDriver();
-    public TestPrivatePageWithElement page2;
-    public TestPrivatePage2 page;
+    private WebDriver webDriver = new HtmlUnitDriver();
+    private TestPrivatePageWithElement page2;
+    private TestPrivatePage2 page;
 
     @Before
     public void beforeTest() {
@@ -22,20 +22,20 @@ public class BeforeInitialization extends FluentTest {
     }
 
     @Test
-    public void test_no_exception() {
+    public void testNoException() {
         page.go();
     }
 
     @Test
-    public void test_internal_fluentwebelement_instantiate() {
-        TestPrivatePageWithElement page = newInstance(TestPrivatePageWithElement.class);
-        assertThat(page.myElement).isNotNull();
+    public void testInternalFluentWebElementInstantiate() {
+        TestPrivatePageWithElement privatePage = newInstance(TestPrivatePageWithElement.class);
+        assertThat(privatePage.myElement).isNotNull();
     }
 
     @Test
-    public void test_superclass_fluentwebelement_instantiate() {
-        TestPrivatePageWithElementSubclass page = newInstance(TestPrivatePageWithElementSubclass.class);
-        assertThat(page.myElement).isNotNull();
+    public void testSuperclassFluentWebElementInstantiate() {
+        TestPrivatePageWithElementSubclass privatePage = newInstance(TestPrivatePageWithElementSubclass.class);
+        assertThat(privatePage.myElement).isNotNull();
     }
 
     @Override
@@ -43,11 +43,9 @@ public class BeforeInitialization extends FluentTest {
         return webDriver;
     }
 
-
 }
 
 class TestPrivatePage2 extends FluentPage {
-
 
     @Override
     public String getUrl() {

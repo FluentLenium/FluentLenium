@@ -11,11 +11,9 @@ import static org.fluentlenium.core.filter.FilterConstructor.withName;
 @FluentConfiguration(driverLifecycle = DriverLifecycle.JVM)
 public class SharedDriverOnce2 extends IntegrationFluentTest {
 
-
     @Test
     public void secondMethod() {
         assertThat($(".small", withName("name"))).hasSize(1);
     }
-
 
 }

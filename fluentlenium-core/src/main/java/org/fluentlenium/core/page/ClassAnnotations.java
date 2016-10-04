@@ -7,7 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.pagefactory.AbstractAnnotations;
 
-
 /**
  * Inspired by {@link org.openqa.selenium.support.pagefactory.Annotations}, but use a Class instead of a Field
  * to retrieve the annotations.
@@ -73,16 +72,16 @@ public class ClassAnnotations extends AbstractAnnotations {
         FindAll findAll = cls.getAnnotation(FindAll.class);
         FindBy findBy = cls.getAnnotation(FindBy.class);
         if (findBys != null && findBy != null) {
-            throw new IllegalArgumentException("If you use a '@FindBys' annotation, " +
-                    "you must not also use a '@FindBy' annotation");
+            throw new IllegalArgumentException(
+                    "If you use a '@FindBys' annotation, " + "you must not also use a '@FindBy' annotation");
         }
         if (findAll != null && findBy != null) {
-            throw new IllegalArgumentException("If you use a '@FindAll' annotation, " +
-                    "you must not also use a '@FindBy' annotation");
+            throw new IllegalArgumentException(
+                    "If you use a '@FindAll' annotation, " + "you must not also use a '@FindBy' annotation");
         }
         if (findAll != null && findBys != null) {
-            throw new IllegalArgumentException("If you use a '@FindAll' annotation, " +
-                    "you must not also use a '@FindBys' annotation");
+            throw new IllegalArgumentException(
+                    "If you use a '@FindAll' annotation, " + "you must not also use a '@FindBys' annotation");
         }
     }
 }

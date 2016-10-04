@@ -114,7 +114,6 @@ public class ProxiesTest {
             }
         });
 
-
         verifyZeroInteractions(driver);
         verifyZeroInteractions(element1);
         verifyZeroInteractions(element2);
@@ -137,7 +136,6 @@ public class ProxiesTest {
     @Test
     public void testAlreadyLoadedElementListShouldBeLoaded() {
         List<WebElement> webElementList = LocatorProxies.createWebElementList(Arrays.asList(element1, element2, element3));
-
 
         assertThat(LocatorProxies.isLoaded(webElementList)).isTrue();
         assertThat(((WrapsElements) webElementList).getWrappedElements()).containsExactly(element1, element2, element3);
@@ -332,7 +330,6 @@ public class ProxiesTest {
     public void testLocatorGetter() {
         ElementLocator locator = mock(ElementLocator.class);
         WebElement webElement = LocatorProxies.createWebElement(locator);
-
 
         LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(webElement);
         assertThat(locatorHandler.getLocator()).isSameAs(locator);

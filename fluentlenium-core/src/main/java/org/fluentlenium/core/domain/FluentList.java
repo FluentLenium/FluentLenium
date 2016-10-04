@@ -15,7 +15,9 @@ import java.util.List;
 /**
  *
  */
-public interface FluentList<E extends FluentWebElement> extends List<E>, FluentActions<FluentList<E>, E>, FluentProxyState<FluentList<E>>, SearchControl<E>, HookControl<FluentList<E>>, FluentLabel<FluentList<E>> {
+public interface FluentList<E extends FluentWebElement>
+        extends List<E>, FluentActions<FluentList<E>, E>, FluentProxyState<FluentList<E>>, SearchControl<E>,
+        HookControl<FluentList<E>>, FluentLabel<FluentList<E>> {
 
     /**
      * Retrieve the first element.
@@ -160,7 +162,6 @@ public interface FluentList<E extends FluentWebElement> extends List<E>, FluentA
      * @return text of the first element on the list
      */
     String text();
-
 
     /**
      * Return the text content of the first element on the list

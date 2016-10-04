@@ -40,7 +40,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     private final FluentLabelImpl<FluentListImpl<E>> label;
 
-    public FluentListImpl(Class<E> componentClass, final List<E> list, FluentControl fluentControl, ComponentInstantiator instantiator) {
+    public FluentListImpl(Class<E> componentClass, final List<E> list, FluentControl fluentControl,
+            ComponentInstantiator instantiator) {
         super(componentClass, list, fluentControl, instantiator);
         this.hookChainBuilder = new DefaultHookChainBuilder(fluentControl, instantiator);
         this.label = new FluentLabelImpl<>(this, new Supplier<String>() {
@@ -476,7 +477,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         LocatorProxies.setHooks(proxy, hookChainBuilder, hookDefinitions);
         return this;
     }
-
 
     @Override
     public void clear() {

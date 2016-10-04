@@ -4,7 +4,6 @@ import org.fluentlenium.integration.util.adapter.FluentTest;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-
 public class AfterTest extends FluentTest {
 
     @Override
@@ -13,7 +12,7 @@ public class AfterTest extends FluentTest {
     }
 
     @Test
-    public void when_driver_is_null_then_it_is_handle() {
+    public void whenDriverIsNullThenItIsHandle() {
         // after();
     }
 }

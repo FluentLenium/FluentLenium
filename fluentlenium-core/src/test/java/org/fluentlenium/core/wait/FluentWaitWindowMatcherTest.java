@@ -1,6 +1,5 @@
 package org.fluentlenium.core.wait;
 
-
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentDriver;
 import org.junit.After;

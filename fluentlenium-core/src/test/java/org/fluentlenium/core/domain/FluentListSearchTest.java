@@ -1,6 +1,5 @@
 package org.fluentlenium.core.domain;
 
-
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.filter.Filter;
@@ -61,7 +60,6 @@ public class FluentListSearchTest {
         field.setAccessible(true);
         field.set(fluentWebElement, search);
 
-
         fluentList = fluentAdapter.newFluentList(webElements);
     }
 
@@ -78,10 +76,9 @@ public class FluentListSearchTest {
     public void findElementByPosition() {
         String name = "cssStyle";
         when(search.find(name, null)).thenReturn(fluentAdapter.newFluentList(webElements));
-        FluentWebElement fluentWebElement = fluentList.find(name, null).index(0);
-        assertThat(fluentWebElement).isEqualTo(this.fluentWebElement);
+        FluentWebElement element = fluentList.find(name, null).index(0);
+        assertThat(element).isEqualTo(this.fluentWebElement);
     }
-
 
     @Test(expected = NoSuchElementException.class)
     public void whenNoElementMatchingFillThenThrowsExceptions() {
@@ -93,24 +90,24 @@ public class FluentListSearchTest {
     public void shouldThrowAnErrorWhenWrongPosition() {
         String name = "cssStyle";
         when(search.find(name, null)).thenReturn(fluentAdapter.newFluentList(webElements));
-        FluentWebElement fluentWebElement = fluentList.find(name, null).index(1);
-        fluentWebElement.now();
+        FluentWebElement element = fluentList.find(name, null).index(1);
+        element.now();
     }
 
     @Test
     public void findFirstElement() {
         String name = "cssStyle";
         when(search.find(name, null)).thenReturn(fluentAdapter.newFluentList(webElements));
-        FluentWebElement fluentWebElement = fluentList.el(name, null);
-        assertThat(fluentWebElement).isEqualTo(this.fluentWebElement);
+        FluentWebElement element = fluentList.el(name, null);
+        assertThat(element).isEqualTo(this.fluentWebElement);
     }
 
     @Test(expected = NoSuchElementException.class)
     public void shouldThrowAnErrorWhenNoFirstPosition() {
         String name = "cssStyle";
         when(search.find(name, null)).thenReturn(fluentAdapter.newFluentList());
-        FluentWebElement fluentWebElement = fluentList.el(name, null);
-        fluentWebElement.now();
+        FluentWebElement element = fluentList.el(name, null);
+        element.now();
     }
 
 }

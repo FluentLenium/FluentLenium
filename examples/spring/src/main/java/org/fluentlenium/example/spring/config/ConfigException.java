@@ -8,8 +8,8 @@ public class ConfigException extends RuntimeException {
     /**
      * Creates configuration exception
      *
-     * @param message
-     * @param cause
+     * @param message message
+     * @param cause cause
      */
     public ConfigException(final String message, final Exception cause) {
         super(message, cause);

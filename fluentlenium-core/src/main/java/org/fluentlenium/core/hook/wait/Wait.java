@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @see WaitHookOptions
  */
 @Inherited
-@Target({ElementType.FIELD, ElementType.TYPE})
+@Target({ ElementType.FIELD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Hook(WaitHook.class)
 @HookOptions(WaitHookOptions.class)

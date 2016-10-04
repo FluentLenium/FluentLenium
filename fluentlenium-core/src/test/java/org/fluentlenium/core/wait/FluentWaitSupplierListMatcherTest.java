@@ -74,7 +74,6 @@ public class FluentWaitSupplierListMatcherTest {
 
         fluentWebElements = Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3);
 
-
     }
 
     @After
@@ -90,7 +89,8 @@ public class FluentWaitSupplierListMatcherTest {
 
     @Test
     public void isEnabled() {
-        final FluentListConditions matcher = wait.untilElements(Suppliers.ofInstance(instantiator.newFluentList(fluentWebElements)));
+        final FluentListConditions matcher = wait
+                .untilElements(Suppliers.ofInstance(instantiator.newFluentList(fluentWebElements)));
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {

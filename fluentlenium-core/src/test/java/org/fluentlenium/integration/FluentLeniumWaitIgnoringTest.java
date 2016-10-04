@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 
 public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
 
-
     @Before
     public void before() {
         goTo(DEFAULT_URL);
@@ -31,15 +30,52 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void test_ignoreAll_positive() {
+    public void testIgnoreAllPositive() {
 
         try {
             Collection<Class<? extends Throwable>> exceptions = new ArrayList<>();
             exceptions.add(CustomException.class);
             exceptions.add(CustomException2.class);
 
-            await().atMost(1, TimeUnit.NANOSECONDS)
-                    .ignoreAll(exceptions)
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoreAll(exceptions).until(new Supplier<Boolean>() {
+                @Override
+                public Boolean get() {
+                    throw new CustomException();
+                }
+            });
+
+            throw new AssertionError();
+        } catch (TimeoutException e) {
+        }
+
+    }
+
+    @Test(expected = CustomException3.class)
+    public void testIgnoreAllNegative() {
+
+        try {
+            Collection<Class<? extends Throwable>> exceptions = new ArrayList<>();
+            exceptions.add(CustomException.class);
+            exceptions.add(CustomException2.class);
+
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoreAll(exceptions).until(new Supplier<Boolean>() {
+                @Override
+                public Boolean get() {
+                    throw new CustomException3();
+                }
+            });
+
+            throw new AssertionError();
+        } catch (TimeoutException e) {
+        }
+
+    }
+
+    @Test
+    public void testIgnoring1Positive() {
+
+        try {
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class).ignoring(CustomException2.class)
                     .until(new Supplier<Boolean>() {
                         @Override
                         public Boolean get() {
@@ -54,15 +90,10 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     }
 
     @Test(expected = CustomException3.class)
-    public void test_ignoreAll_negative() {
+    public void testIgnoring1Negative() {
 
         try {
-            Collection<Class<? extends Throwable>> exceptions = new ArrayList<>();
-            exceptions.add(CustomException.class);
-            exceptions.add(CustomException2.class);
-
-            await().atMost(1, TimeUnit.NANOSECONDS)
-                    .ignoreAll(exceptions)
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class).ignoring(CustomException2.class)
                     .until(new Supplier<Boolean>() {
                         @Override
                         public Boolean get() {
@@ -77,12 +108,10 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void test_ignoring_1_positive() {
+    public void testIgnoring2Positive() {
 
         try {
-            await().atMost(1, TimeUnit.NANOSECONDS)
-                    .ignoring(CustomException.class)
-                    .ignoring(CustomException2.class)
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class, CustomException2.class)
                     .until(new Supplier<Boolean>() {
                         @Override
                         public Boolean get() {
@@ -97,50 +126,10 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     }
 
     @Test(expected = CustomException3.class)
-    public void test_ignoring_1_negative() {
+    public void testIgnoring2Negative() {
 
         try {
-            await().atMost(1, TimeUnit.NANOSECONDS)
-                    .ignoring(CustomException.class)
-                    .ignoring(CustomException2.class)
-                    .until(new Supplier<Boolean>() {
-                        @Override
-                        public Boolean get() {
-                            throw new CustomException3();
-                        }
-                    });
-
-            throw new AssertionError();
-        } catch (TimeoutException e) {
-        }
-
-    }
-
-    @Test
-    public void test_ignoring_2_positive() {
-
-        try {
-            await().atMost(1, TimeUnit.NANOSECONDS)
-                    .ignoring(CustomException.class, CustomException2.class)
-                    .until(new Supplier<Boolean>() {
-                        @Override
-                        public Boolean get() {
-                            throw new CustomException();
-                        }
-                    });
-
-            throw new AssertionError();
-        } catch (TimeoutException e) {
-        }
-
-    }
-
-    @Test(expected = CustomException3.class)
-    public void test_ignoring_2_negative() {
-
-        try {
-            await().atMost(1, TimeUnit.NANOSECONDS)
-                    .ignoring(CustomException.class, CustomException2.class)
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class, CustomException2.class)
                     .until(new Supplier<Boolean>() {
                         @Override
                         public Boolean get() {

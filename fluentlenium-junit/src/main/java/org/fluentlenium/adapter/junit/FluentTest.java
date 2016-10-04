@@ -38,6 +38,7 @@ public abstract class FluentTest extends FluentTestRunnerAdapter {
         }
     };
 
+    //CHECKSTYLE.OFF: VisibilityModifier
     @ClassRule
     public static TestRule classWatchman = new TestRule() {
 
@@ -56,5 +57,6 @@ public abstract class FluentTest extends FluentTestRunnerAdapter {
             };
         }
     };
+    //CHECKSTYLE.ON: VisibilityModifier
 
 }

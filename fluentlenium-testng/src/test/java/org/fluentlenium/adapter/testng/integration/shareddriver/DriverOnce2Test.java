@@ -17,5 +17,4 @@ public class DriverOnce2Test extends IntegrationFluentTestNg {
         assertThat($(".small", withName("name"))).hasSize(1);
     }
 
-
 }

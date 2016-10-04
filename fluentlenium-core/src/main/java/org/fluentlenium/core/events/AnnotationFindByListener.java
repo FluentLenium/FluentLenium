@@ -9,14 +9,13 @@ import org.openqa.selenium.WebDriver;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-class AnnotationFindByListener implements FindByListener {
+class AnnotationFindByListener extends AbstractAnnotationListener implements FindByListener {
     private final Method method;
-    private final Object container;
     private final String annotationName;
 
-    AnnotationFindByListener(Method method, Object container, String annotationName) {
+    AnnotationFindByListener(Method method, Object container, String annotationName, int priority) {
+        super(container, priority);
         this.method = method;
-        this.container = container;
         this.annotationName = annotationName;
     }
 
@@ -45,7 +44,7 @@ class AnnotationFindByListener implements FindByListener {
         Object[] args = ReflectionUtils.toArgs(getArgsFunction(by, element, driver), parameterTypes);
 
         try {
-            ReflectionUtils.invoke(method, container, args);
+            ReflectionUtils.invoke(method, getContainer(), args);
         } catch (IllegalAccessException e) {
             throw new EventAnnotationsException("An error has occured in " + annotationName + " " + method, e);
         } catch (InvocationTargetException e) {

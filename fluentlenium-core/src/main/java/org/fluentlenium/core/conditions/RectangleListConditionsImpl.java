@@ -8,10 +8,11 @@ import org.openqa.selenium.Rectangle;
 /**
  * Conditions implement for rectangles of list of elements.
  */
-public class RectangleListConditionsImpl extends AbstractObjectListConditions<Rectangle, RectangleConditions> implements RectangleConditions {
+public class RectangleListConditionsImpl extends AbstractObjectListConditions<Rectangle, RectangleConditions>
+        implements RectangleConditions {
     public RectangleListConditionsImpl(Conditions<FluentWebElement> listConditions,
-                                       Function<FluentWebElement, Rectangle> rectangleGetter,
-                                       Function<FluentWebElement, RectangleConditions> conditionsGetter) {
+            Function<FluentWebElement, Rectangle> rectangleGetter,
+            Function<FluentWebElement, RectangleConditions> conditionsGetter) {
         super(listConditions, rectangleGetter, conditionsGetter);
     }
 

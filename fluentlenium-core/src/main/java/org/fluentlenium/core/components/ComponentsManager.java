@@ -21,7 +21,8 @@ import java.util.Set;
  * <p>
  * {@link org.fluentlenium.core.domain.FluentWebElement} is the most common component.
  */
-public class ComponentsManager extends AbstractComponentInstantiator implements ComponentInstantiator, ComponentsAccessor, ProxyElementListener {
+public class ComponentsManager extends AbstractComponentInstantiator
+        implements ComponentInstantiator, ComponentsAccessor, ProxyElementListener {
 
     private final FluentControl fluentControl;
     private final DefaultComponentInstantiator instantiator;
@@ -76,7 +77,8 @@ public class ComponentsManager extends AbstractComponentInstantiator implements 
     }
 
     @Override
-    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, Iterable<WebElement> elementList) {
+    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass,
+            Iterable<WebElement> elementList) {
         L componentList = instantiator.asComponentList(listClass, componentClass, elementList);
 
         int i = 0;

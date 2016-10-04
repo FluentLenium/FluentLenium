@@ -21,31 +21,33 @@ public class FluentIntegTest extends FluentTest {
 
     @Before
     public void printBefore() {
-        System.out.println("Starting test " + getClass().getName() + "." + name.getMethodName() +
-                " [" + System.identityHashCode(this) + "]" + " @ " + new Date() +
-                ". forkNumber=" + System.getProperty("surefire.forkNumber") +
-                ", thread=" + Thread.currentThread().getName());
+        System.out.println(
+                "Starting test " + getClass().getName() + "." + name.getMethodName() + " [" + System.identityHashCode(this) + "]"
+                        + " @ " + new Date() + ". forkNumber=" + System.getProperty("surefire.forkNumber") + ", thread=" + Thread
+                        .currentThread().getName());
     }
 
     @After
     public void printAfter() {
-        System.out.println("Terminating test " + getClass().getName() + "." + name.getMethodName() +
-                " [" + System.identityHashCode(this) + "]" + " @ " + new Date() +
-                ". forkNumber=" + System.getProperty("surefire.forkNumber") +
-                ", thread=" + Thread.currentThread().getName());
+        System.out.println(
+                "Terminating test " + getClass().getName() + "." + name.getMethodName() + " [" + System.identityHashCode(this)
+                        + "]" + " @ " + new Date() + ". forkNumber=" + System.getProperty("surefire.forkNumber") + ", thread="
+                        + Thread.currentThread().getName());
     }
 
     @Override
     public void initFluent(WebDriver webDriver) {
-        System.out.println("Init WebDriver " + webDriver + " for test " + getClass().getName() +
-                "." + name.getMethodName() + " [" + System.identityHashCode(this) + "]");
+        System.out.println(
+                "Init WebDriver " + webDriver + " for test " + getClass().getName() + "." + name.getMethodName() + " [" + System
+                        .identityHashCode(this) + "]");
         super.initFluent(webDriver);
     }
 
     @Override
     public void releaseFluent() {
-        System.out.println("Release WebDriver " + getDriver() + " for test " + getClass().getName() +
-                "." + name.getMethodName() + " [" + System.identityHashCode(this) + "]");
+        System.out.println(
+                "Release WebDriver " + getDriver() + " for test " + getClass().getName() + "." + name.getMethodName() + " ["
+                        + System.identityHashCode(this) + "]");
         super.releaseFluent();
     }
 }

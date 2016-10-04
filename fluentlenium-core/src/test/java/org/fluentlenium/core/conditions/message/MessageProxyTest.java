@@ -9,9 +9,7 @@ import org.junit.Test;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-
 public class MessageProxyTest {
-
 
     @Test
     public void testElementContains() {

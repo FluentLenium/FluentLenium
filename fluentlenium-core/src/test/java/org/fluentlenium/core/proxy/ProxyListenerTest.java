@@ -65,7 +65,7 @@ public class ProxyListenerTest {
     private static class ElementMatcher extends CustomMatcher<List<WebElement>> {
         private final List<WebElement> expected;
 
-        public ElementMatcher(List<WebElement> expected) {
+        ElementMatcher(List<WebElement> expected) {
             super("matches element");
             this.expected = expected;
         }
@@ -96,8 +96,8 @@ public class ProxyListenerTest {
         LocatorProxies.now(proxy);
 
         verify(listener).proxyElementSearch(refEq(proxy), any(ElementLocator.class));
-        verify(listener).proxyElementFound(refEq(proxy), any(ElementLocator.class), Matchers.argThat(new ElementMatcher(Arrays.asList(element1, element2, element3))));
-
+        verify(listener).proxyElementFound(refEq(proxy), any(ElementLocator.class),
+                Matchers.argThat(new ElementMatcher(Arrays.asList(element1, element2, element3))));
 
         LocatorProxies.removeProxyListener(proxy, listener);
 

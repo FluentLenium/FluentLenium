@@ -1,6 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import org.fluentlenium.core.FluentDriver;
@@ -18,24 +17,25 @@ public class EachElementConditions extends AbstractFluentListConditions {
 
     @Override
     public EachElementConditions not() {
-        EachElementConditions negatedConditions = new EachElementConditions(elements);
-        negatedConditions.negation = !negation;
+        EachElementConditions negatedConditions = new EachElementConditions(getElements());
+        negatedConditions.setNegation(!isNegation());
         return negatedConditions;
     }
 
     public boolean verify(Predicate<FluentWebElement> predicate, boolean defaultValue) {
-        if (negation) {
+        if (isNegation()) {
             predicate = Predicates.not(predicate);
             defaultValue = !defaultValue;
         }
         return buildEachElementPredicate(predicate, defaultValue).apply(null);
     }
 
-    protected Predicate<FluentDriver> buildEachElementPredicate(final Predicate<FluentWebElement> predicate, final boolean defaultValue) {
+    protected Predicate<FluentDriver> buildEachElementPredicate(final Predicate<FluentWebElement> predicate,
+            final boolean defaultValue) {
         Predicate<FluentDriver> untilPredicate = new com.google.common.base.Predicate<FluentDriver>() {
             public boolean apply(FluentDriver fluent) {
-                if (elements.size() > 0) {
-                    for (FluentWebElement element : elements) {
+                if (getElements().size() > 0) {
+                    for (FluentWebElement element : getElements()) {
                         if (!predicate.apply(element)) {
                             return false;
                         }

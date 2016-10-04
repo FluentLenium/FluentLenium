@@ -1,6 +1,5 @@
 package org.fluentlenium.configuration;
 
-
 import org.junit.Before;
 
 import java.util.Properties;

@@ -1,6 +1,5 @@
 package org.fluentlenium.core.events;
 
-import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.events.annotations.AfterChangeValueOf;
 import org.fluentlenium.core.events.annotations.AfterClickOn;
 import org.fluentlenium.core.events.annotations.AfterFindBy;
@@ -22,74 +21,107 @@ import org.fluentlenium.core.events.annotations.BeforeScript;
 
 import java.lang.reflect.Method;
 
-public class ContainerAnnotationsEventsRegistry extends EventsRegistry {
+public class ContainerAnnotationsEventsRegistry {
+    private final EventsRegistry registry;
     private final Object container;
 
-    public ContainerAnnotationsEventsRegistry(FluentControl fluentControl, Object container) {
-        super(fluentControl);
+    public ContainerAnnotationsEventsRegistry(EventsRegistry registry, Object container) {
+        this.registry = registry;
         this.container = container;
 
-        //TODO: Ordre non determiné.
         for (Class<?> current = this.container.getClass(); current != null; current = current.getSuperclass()) {
-
             for (final Method method : current.getDeclaredMethods()) {
                 if (method.getAnnotation(BeforeClickOn.class) != null) {
-                    beforeClickOn(new AnnotationElementListener(method, container, BeforeClickOn.class.getSimpleName()));
+                    registry.beforeClickOn(new AnnotationElementListener(method, container, BeforeClickOn.class.getSimpleName(),
+                            method.getAnnotation(BeforeClickOn.class).value()));
                 }
                 if (method.getAnnotation(AfterClickOn.class) != null) {
-                    afterClickOn(new AnnotationElementListener(method, container, AfterClickOn.class.getSimpleName()));
+                    registry.afterClickOn(new AnnotationElementListener(method, container, AfterClickOn.class.getSimpleName(),
+                            method.getAnnotation(AfterClickOn.class).value()));
                 }
                 if (method.getAnnotation(BeforeChangeValueOf.class) != null) {
-                    beforeChangeValueOf(new AnnotationElementListener(method, container, BeforeChangeValueOf.class.getSimpleName()));
+                    registry.beforeChangeValueOf(
+                            new AnnotationElementListener(method, container, BeforeChangeValueOf.class.getSimpleName(),
+                                    method.getAnnotation(BeforeChangeValueOf.class).value()));
                 }
                 if (method.getAnnotation(AfterChangeValueOf.class) != null) {
-                    afterChangeValueOf(new AnnotationElementListener(method, container, AfterChangeValueOf.class.getSimpleName()));
+                    registry.afterChangeValueOf(
+                            new AnnotationElementListener(method, container, AfterChangeValueOf.class.getSimpleName(),
+                                    method.getAnnotation(AfterChangeValueOf.class).value()));
                 }
                 if (method.getAnnotation(BeforeFindBy.class) != null) {
-                    beforeFindBy(new AnnotationFindByListener(method, container, BeforeFindBy.class.getSimpleName()));
+                    registry.beforeFindBy(new AnnotationFindByListener(method, container, BeforeFindBy.class.getSimpleName(),
+                            method.getAnnotation(BeforeFindBy.class).value()));
                 }
                 if (method.getAnnotation(AfterFindBy.class) != null) {
-                    afterFindBy(new AnnotationFindByListener(method, container, AfterFindBy.class.getSimpleName()));
+                    registry.afterFindBy(new AnnotationFindByListener(method, container, AfterFindBy.class.getSimpleName(),
+                            method.getAnnotation(AfterFindBy.class).value()));
                 }
                 if (method.getAnnotation(BeforeNavigateBack.class) != null) {
-                    beforeNavigateBack(new AnnotationNavigateListener(method, container, BeforeNavigateBack.class.getSimpleName()));
+                    registry.beforeNavigateBack(
+                            new AnnotationNavigateListener(method, container, BeforeNavigateBack.class.getSimpleName(),
+                                    method.getAnnotation(BeforeNavigateBack.class).value()));
                 }
                 if (method.getAnnotation(AfterNavigateBack.class) != null) {
-                    afterNavigateBack(new AnnotationNavigateListener(method, container, AfterNavigateBack.class.getSimpleName()));
+                    registry.afterNavigateBack(
+                            new AnnotationNavigateListener(method, container, AfterNavigateBack.class.getSimpleName(),
+                                    method.getAnnotation(AfterNavigateBack.class).value()));
                 }
                 if (method.getAnnotation(BeforeNavigateForward.class) != null) {
-                    beforeNavigateForward(new AnnotationNavigateListener(method, container, BeforeNavigateForward.class.getSimpleName()));
+                    registry.beforeNavigateForward(
+                            new AnnotationNavigateListener(method, container, BeforeNavigateForward.class.getSimpleName(),
+                                    method.getAnnotation(BeforeNavigateForward.class).value()));
                 }
                 if (method.getAnnotation(AfterNavigateForward.class) != null) {
-                    afterNavigateForward(new AnnotationNavigateListener(method, container, AfterNavigateForward.class.getSimpleName()));
+                    registry.afterNavigateForward(
+                            new AnnotationNavigateListener(method, container, AfterNavigateForward.class.getSimpleName(),
+                                    method.getAnnotation(AfterNavigateForward.class).value()));
                 }
                 if (method.getAnnotation(BeforeNavigateTo.class) != null) {
-                    beforeNavigateTo(new AnnotationNavigateToListener(method, container, BeforeNavigateTo.class.getSimpleName()));
+                    registry.beforeNavigateTo(
+                            new AnnotationNavigateToListener(method, container, BeforeNavigateTo.class.getSimpleName(),
+                                    method.getAnnotation(BeforeNavigateTo.class).value()));
                 }
                 if (method.getAnnotation(AfterNavigateTo.class) != null) {
-                    beforeNavigateTo(new AnnotationNavigateToListener(method, container, AfterNavigateTo.class.getSimpleName()));
+                    registry.beforeNavigateTo(
+                            new AnnotationNavigateToListener(method, container, AfterNavigateTo.class.getSimpleName(),
+                                    method.getAnnotation(AfterNavigateTo.class).value()));
                 }
                 if (method.getAnnotation(BeforeNavigate.class) != null) {
-                    beforeNavigate(new AnnotationNavigateAllListener(method, container, BeforeNavigate.class.getSimpleName()));
+                    registry.beforeNavigate(
+                            new AnnotationNavigateAllListener(method, container, BeforeNavigate.class.getSimpleName(),
+                                    method.getAnnotation(BeforeNavigate.class).value()));
                 }
                 if (method.getAnnotation(AfterNavigate.class) != null) {
-                    afterNavigate(new AnnotationNavigateAllListener(method, container, AfterNavigate.class.getSimpleName()));
+                    registry.afterNavigate(
+                            new AnnotationNavigateAllListener(method, container, AfterNavigate.class.getSimpleName(),
+                                    method.getAnnotation(AfterNavigate.class).value()));
                 }
                 if (method.getAnnotation(BeforeNavigateRefresh.class) != null) {
-                    beforeNavigateRefresh(new AnnotationNavigateListener(method, container, BeforeNavigateRefresh.class.getSimpleName()));
+                    registry.beforeNavigateRefresh(
+                            new AnnotationNavigateListener(method, container, BeforeNavigateRefresh.class.getSimpleName(),
+                                    method.getAnnotation(BeforeNavigateRefresh.class).value()));
                 }
                 if (method.getAnnotation(AfterNavigateRefresh.class) != null) {
-                    beforeNavigateRefresh(new AnnotationNavigateListener(method, container, AfterNavigateRefresh.class.getSimpleName()));
+                    registry.beforeNavigateRefresh(
+                            new AnnotationNavigateListener(method, container, AfterNavigateRefresh.class.getSimpleName(),
+                                    method.getAnnotation(AfterNavigateRefresh.class).value()));
                 }
                 if (method.getAnnotation(BeforeScript.class) != null) {
-                    beforeScript(new AnnotationScriptListener(method, container, BeforeScript.class.getSimpleName()));
+                    registry.beforeScript(new AnnotationScriptListener(method, container, BeforeScript.class.getSimpleName(),
+                            method.getAnnotation(BeforeScript.class).value()));
                 }
                 if (method.getAnnotation(AfterScript.class) != null) {
-                    afterScript(new AnnotationScriptListener(method, container, AfterScript.class.getSimpleName()));
+                    registry.afterScript(new AnnotationScriptListener(method, container, AfterScript.class.getSimpleName(),
+                            method.getAnnotation(AfterScript.class).value()));
                 }
             }
         }
 
+        registry.sortListeners();
     }
 
+    public void close() {
+        registry.unregisterContainer(container);
+    }
 }

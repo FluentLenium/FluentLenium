@@ -7,7 +7,7 @@ import lombok.experimental.Delegate;
  */
 public class DefaultFluentContainer implements FluentControl, FluentContainer {
 
-    private FluentControl control;
+    protected FluentControl control;
 
     public DefaultFluentContainer() {
     }

@@ -19,4 +19,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface BeforeScript {
+    /**
+     * Priority of the method. Higher priority will be executed first.
+     *
+     * @return priority value
+     */
+    int value() default 0;
 }

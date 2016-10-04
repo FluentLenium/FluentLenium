@@ -17,7 +17,7 @@ public interface EventListener {
      * @param url    URL
      * @param driver WebDriver
      */
-    void beforeNavigateTo(final String url, final WebDriver driver);
+    void beforeNavigateTo(String url, WebDriver driver);
 
     /**
      * Called after {@link org.openqa.selenium.WebDriver#get get(String url)} respectively
@@ -28,14 +28,14 @@ public interface EventListener {
      * @param url    URL
      * @param driver WebDriver
      */
-    void afterNavigateTo(final String url, final WebDriver driver);
+    void afterNavigateTo(String url, WebDriver driver);
 
     /**
      * Called before {@link org.openqa.selenium.WebDriver.Navigation#back navigate().back()}.
      *
      * @param driver WebDriver
      */
-    void beforeNavigateBack(final WebDriver driver);
+    void beforeNavigateBack(WebDriver driver);
 
     /**
      * Called after {@link org.openqa.selenium.WebDriver.Navigation navigate().back()}. Not called,
@@ -44,14 +44,14 @@ public interface EventListener {
      *
      * @param driver WebDriver
      */
-    void afterNavigateBack(final WebDriver driver);
+    void afterNavigateBack(WebDriver driver);
 
     /**
      * Called before {@link org.openqa.selenium.WebDriver.Navigation#forward navigate().forward()}.
      *
      * @param driver WebDriver
      */
-    void beforeNavigateForward(final WebDriver driver);
+    void beforeNavigateForward(WebDriver driver);
 
     /**
      * Called after {@link org.openqa.selenium.WebDriver.Navigation#forward navigate().forward()}.
@@ -60,7 +60,7 @@ public interface EventListener {
      *
      * @param driver WebDriver
      */
-    void afterNavigateForward(final WebDriver driver);
+    void afterNavigateForward(WebDriver driver);
 
     /**
      * Called before {@link WebDriver#findElement WebDriver.findElement(...)}, or
@@ -71,7 +71,7 @@ public interface EventListener {
      * @param by      locator being used
      * @param driver  WebDriver
      */
-    void beforeFindBy(final By by, final FluentWebElement element, final WebDriver driver);
+    void beforeFindBy(By by, FluentWebElement element, WebDriver driver);
 
     /**
      * Called after {@link WebDriver#findElement WebDriver.findElement(...)}, or
@@ -82,7 +82,7 @@ public interface EventListener {
      * @param by      locator being used
      * @param driver  WebDriver
      */
-    void afterFindBy(final By by, final FluentWebElement element, final WebDriver driver);
+    void afterFindBy(By by, FluentWebElement element, WebDriver driver);
 
     /**
      * Called before {@link WebElement#click WebElement.click()}.
@@ -90,7 +90,7 @@ public interface EventListener {
      * @param driver  WebDriver
      * @param element the WebElement being used for the action
      */
-    void beforeClickOn(final FluentWebElement element, final WebDriver driver);
+    void beforeClickOn(FluentWebElement element, WebDriver driver);
 
     /**
      * Called after {@link WebElement#click WebElement.click()}. Not called, if an exception is
@@ -99,7 +99,7 @@ public interface EventListener {
      * @param driver  WebDriver
      * @param element the WebElement being used for the action
      */
-    void afterClickOn(final FluentWebElement element, final WebDriver driver);
+    void afterClickOn(FluentWebElement element, WebDriver driver);
 
     /**
      * Called before {@link WebElement#clear WebElement.clear()}, {@link WebElement#sendKeys
@@ -108,7 +108,7 @@ public interface EventListener {
      * @param driver  WebDriver
      * @param element the WebElement being used for the action
      */
-    void beforeChangeValueOf(final FluentWebElement element, final WebDriver driver);
+    void beforeChangeValueOf(FluentWebElement element, WebDriver driver);
 
     /**
      * Called after {@link WebElement#clear WebElement.clear()}, {@link WebElement#sendKeys
@@ -117,7 +117,7 @@ public interface EventListener {
      * @param driver  WebDriver
      * @param element the WebElement being used for the action
      */
-    void afterChangeValueOf(final FluentWebElement element, final WebDriver driver);
+    void afterChangeValueOf(FluentWebElement element, WebDriver driver);
 
     /**
      * Called before
@@ -128,7 +128,7 @@ public interface EventListener {
      */
     // Previously: Called before {@link WebDriver#executeScript(String)}
     // See the same issue below.
-    void beforeScript(final String script, final WebDriver driver);
+    void beforeScript(String script, WebDriver driver);
 
     /**
      * Called after
@@ -143,7 +143,7 @@ public interface EventListener {
     // is thrown
     // So someone should check if this is right. There is no executeScript method
     // in WebDriver, but there is in several other places, like this one
-    void afterScript(final String script, final WebDriver driver);
+    void afterScript(String script, WebDriver driver);
 
     /**
      * Called whenever an exception would be thrown.
@@ -151,7 +151,7 @@ public interface EventListener {
      * @param driver    WebDriver
      * @param throwable the exception that will be thrown
      */
-    void onException(final Throwable throwable, final WebDriver driver);
+    void onException(Throwable throwable, WebDriver driver);
 
     /**
      * Called before {@link org.openqa.selenium.WebDriver.Navigation#refresh navigate().refresh()}.

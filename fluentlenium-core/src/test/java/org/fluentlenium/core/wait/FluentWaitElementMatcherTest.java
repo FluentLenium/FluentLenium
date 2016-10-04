@@ -1,6 +1,5 @@
 package org.fluentlenium.core.wait;
 
-
 import com.google.common.base.Predicate;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentDriver;
@@ -127,7 +126,6 @@ public class FluentWaitElementMatcherTest {
         matcher.not().attribute("test", "not");
     }
 
-
     @Test
     public void hasId() {
         final FluentConditions matcher = wait.until(fluentWebElement);
@@ -232,7 +230,6 @@ public class FluentWaitElementMatcherTest {
         }).isExactlyInstanceOf(TimeoutException.class);
 
     }
-
 
     @Test
     public void isEnabled() {

@@ -6,6 +6,7 @@ import org.fluentlenium.core.filter.Filter;
 import org.openqa.selenium.By;
 
 public interface SearchControl<E extends FluentWebElement> {
+    //CHECKSTYLE.OFF: MethodName
     /**
      * Find list of elements with CSS selector and filters.
      *
@@ -64,7 +65,7 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param filters filters set
      * @return list of elements
      */
-    FluentList<E> find(By locator, final Filter... filters);
+    FluentList<E> find(By locator, Filter... filters);
 
     /**
      * Find list of elements with Selenium locator and filters.
@@ -73,7 +74,7 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param filters filters set
      * @return list of elements
      */
-    FluentList<E> $(By locator, final Filter... filters);
+    FluentList<E> $(By locator, Filter... filters);
 
     /**
      * Find first element with Selenium locator and filters.
@@ -82,5 +83,6 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param filters filters set
      * @return element
      */
-    E el(By locator, final Filter... filters);
+    E el(By locator, Filter... filters);
+    //CHECKSTYLE.ON: MethodName
 }

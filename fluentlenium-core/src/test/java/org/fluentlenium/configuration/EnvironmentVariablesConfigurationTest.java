@@ -1,6 +1,5 @@
 package org.fluentlenium.configuration;
 
-
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -10,7 +9,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(EnvironmentVariablesConfiguration.class)
-public class EnvironmentVariablesConfigurationTest extends AbstractPropertiesConfigurationTest<EnvironmentVariablesConfiguration> {
+public class EnvironmentVariablesConfigurationTest
+        extends AbstractPropertiesConfigurationTest<EnvironmentVariablesConfiguration> {
 
     private EnvironmentVariablesConfiguration configuration;
 

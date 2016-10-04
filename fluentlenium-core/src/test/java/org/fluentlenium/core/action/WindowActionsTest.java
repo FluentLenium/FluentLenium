@@ -130,10 +130,11 @@ public class WindowActionsTest {
         FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
         ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
 
-        FluentDriver fluentDriver = new FluentDriver(jsDriver, configurationProperties, fluentControl);
-        FluentDriver fluentDriverSpied = spy(fluentDriver);
+        FluentDriver currentFluentDriver = new FluentDriver(jsDriver, configurationProperties, fluentControl);
+        FluentDriver fluentDriverSpied = spy(currentFluentDriver);
 
-        when(jsDriver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1), ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
+        when(jsDriver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),
+                ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
         when(jsDriver.getWindowHandle()).thenReturn(windowHandle1, windowHandle2);
 
         when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);
@@ -200,10 +201,11 @@ public class WindowActionsTest {
         FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
         ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
 
-        FluentDriver fluentDriver = new FluentDriver(driver, configurationProperties, fluentControl);
-        FluentDriver fluentDriverSpied = spy(fluentDriver);
+        FluentDriver currentFluentDriver = new FluentDriver(driver, configurationProperties, fluentControl);
+        FluentDriver fluentDriverSpied = spy(currentFluentDriver);
 
-        when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1), ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
+        when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),
+                ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
         when(driver.getWindowHandle()).thenReturn(windowHandle1, windowHandle2);
 
         when(fluentWebElement.click()).thenReturn(fluentWebElement);

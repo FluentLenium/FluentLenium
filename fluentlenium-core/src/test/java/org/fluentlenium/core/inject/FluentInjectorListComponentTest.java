@@ -35,7 +35,8 @@ public class FluentInjectorListComponentTest {
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
 
-        injector = new FluentInjector(fluentAdapter, new ComponentsManager(fluentAdapter), new DefaultContainerInstanciator(fluentAdapter));
+        injector = new FluentInjector(fluentAdapter, null, new ComponentsManager(fluentAdapter),
+                new DefaultContainerInstanciator(fluentAdapter));
     }
 
     public static class Component {
@@ -78,6 +79,5 @@ public class FluentInjectorListComponentTest {
 
         //verify(webDriver).findElements(new ByIdOrName("components"));
     }
-
 
 }

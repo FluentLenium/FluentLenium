@@ -1,6 +1,5 @@
 package org.fluentlenium.configuration;
 
-
 import com.codebox.bean.JavaBeanTester;
 import org.junit.Test;
 

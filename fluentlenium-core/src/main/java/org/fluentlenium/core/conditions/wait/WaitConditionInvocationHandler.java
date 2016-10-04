@@ -29,16 +29,13 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
     private String context;
     private boolean negation;
 
-    public WaitConditionInvocationHandler(Class<C> conditionClass,
-                                          FluentWait wait,
-                                          String context,
-                                          Supplier<C> conditionSupplier) {
+    public WaitConditionInvocationHandler(Class<C> conditionClass, FluentWait wait, String context,
+            Supplier<C> conditionSupplier) {
         this.conditionClass = conditionClass;
         this.wait = wait;
         this.context = context;
         this.conditionSupplier = conditionSupplier;
     }
-
 
     /**
      * Get the underlying conditions of wait matcher.
@@ -68,7 +65,9 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      * @return conditions with the negation applied.
      */
     protected C applyNegation(C conditions, boolean ignoreNegation) {
-        if (!ignoreNegation && negation) return (C) conditions.not();
+        if (!ignoreNegation && negation) {
+            return (C) conditions.not();
+        }
         return conditions;
     }
 
@@ -92,7 +91,6 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
         conditions = applyNegation(conditions, ignoreNegation);
         return conditions;
     }
-
 
     /**
      * Build the final message from default message.
@@ -145,9 +143,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      * @param messageBuilder    message builder matching the condition object
      * @param conditionFunction condition fonction
      */
-    protected void until(final C condition,
-                         final C messageBuilder,
-                         final Function<C, Boolean> conditionFunction) {
+    protected void until(final C condition, final C messageBuilder, final Function<C, Boolean> conditionFunction) {
         Predicate<FluentControl> predicate = new Predicate<FluentControl>() {
             @Override
             public boolean apply(FluentControl input) {
@@ -171,7 +167,8 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
 
         if (method.isAnnotationPresent(Negation.class)) {
             Conditions<?> negationProxy = WaitConditionProxy.custom(conditionClass, wait, context, conditionSupplier);
-            WaitConditionInvocationHandler negationHandler = (WaitConditionInvocationHandler) Proxy.getInvocationHandler(negationProxy);
+            WaitConditionInvocationHandler negationHandler = (WaitConditionInvocationHandler) Proxy
+                    .getInvocationHandler(negationProxy);
             negationHandler.negation = !negation;
             return negationProxy;
         }
@@ -190,7 +187,8 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
                         throw new IllegalStateException("An internal error has occured while waiting", e);
                     } catch (InvocationTargetException e) {
                         Throwable targetException = e.getTargetException();
-                        if (targetException instanceof TimeoutException || targetException instanceof NoSuchElementException || targetException instanceof StaleElementReferenceException) {
+                        if (targetException instanceof TimeoutException || targetException instanceof NoSuchElementException
+                                || targetException instanceof StaleElementReferenceException) {
                             NoSuchElementValue annotation = method.getAnnotation(NoSuchElementValue.class);
                             return annotation == null ? false : annotation.value();
                         }
@@ -203,7 +201,8 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
             Method conditionGetter = conditions().getClass().getMethod(method.getName(), method.getParameterTypes());
             Conditions<?> childConditions = (Conditions<?>) conditionGetter.invoke(conditions(true), args);
 
-            Conditions<?> childProxy = WaitConditionProxy.custom((Class<Conditions<?>>) method.getReturnType(), wait, context, Suppliers.<Conditions<?>>ofInstance(childConditions));
+            Conditions<?> childProxy = WaitConditionProxy.custom((Class<Conditions<?>>) method.getReturnType(), wait, context,
+                    Suppliers.<Conditions<?>>ofInstance(childConditions));
             WaitConditionInvocationHandler childHandler = (WaitConditionInvocationHandler) Proxy.getInvocationHandler(childProxy);
             childHandler.negation = negation;
             return childProxy;

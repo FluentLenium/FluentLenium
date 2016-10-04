@@ -26,7 +26,9 @@ public class ElementSupplierLocator implements ElementLocator {
     @Override
     public List<WebElement> findElements() {
         WebElement webElement = elementSupplier.get();
-        if (webElement == null) return Collections.emptyList();
+        if (webElement == null) {
+            return Collections.emptyList();
+        }
         return Arrays.asList(webElement);
     }
 }

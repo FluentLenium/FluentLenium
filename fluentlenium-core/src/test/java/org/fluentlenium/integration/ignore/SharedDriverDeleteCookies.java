@@ -16,7 +16,6 @@ import static org.fluentlenium.core.filter.FilterConstructor.withName;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SharedDriverDeleteCookies extends IntegrationFluentTest {
 
-
     @Test
     public void cookieFirstMethod() {
         goTo(IntegrationFluentTest.DEFAULT_URL);
@@ -24,12 +23,10 @@ public class SharedDriverDeleteCookies extends IntegrationFluentTest {
         this.getDriver().manage().addCookie(new Cookie("cookie", "fluent"));
     }
 
-
     @Test
     public void cookieSecondMethod() {
         assertThat($(".small", withName("name"))).hasSize(1);
         assertThat(this.getCookie("cookie")).isNull();
     }
-
 
 }

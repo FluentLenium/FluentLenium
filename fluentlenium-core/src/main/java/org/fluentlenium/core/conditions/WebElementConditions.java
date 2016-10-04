@@ -126,7 +126,6 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
         return new StringConditionsImpl(object.tagName(), negation);
     }
 
-
     @Override
     public boolean value(String value) {
         return value().equalTo(value);

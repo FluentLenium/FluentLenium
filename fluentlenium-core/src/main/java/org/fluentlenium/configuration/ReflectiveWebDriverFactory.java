@@ -1,6 +1,5 @@
 package org.fluentlenium.configuration;
 
-
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
@@ -81,7 +80,9 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
         }
     }
 
-    protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration, Object[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration,
+            Object[] args)
+            throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return ReflectionUtils.newInstance(webDriverClass, args);
     }
 

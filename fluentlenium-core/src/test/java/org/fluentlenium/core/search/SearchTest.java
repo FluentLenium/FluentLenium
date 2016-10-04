@@ -75,7 +75,7 @@ public class SearchTest {
         when(searchContext.findElements(By.cssSelector("cssStyle[generated=true][checked=ok]"))).thenReturn(webElements);
 
         String name = "cssStyle";
-        Filter[] filters = new Filter[]{filter1, filter2};
+        Filter[] filters = new Filter[] {filter1, filter2};
         when(filter1.isPreFilter()).thenReturn(true);
         when(filter1.toString()).thenReturn("[generated=true]");
         when(filter2.isPreFilter()).thenReturn(true);
@@ -86,7 +86,7 @@ public class SearchTest {
     }
 
     @Test
-    public void can_loop_into_fluentWebElement_after_a_search() {
+    public void canLoopIntoFluentWebElementAfterASearch() {
         WebElement webElement = mock(WebElement.class);
         WebElement webElement2 = mock(WebElement.class);
         List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
@@ -94,6 +94,7 @@ public class SearchTest {
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(webElements);
         for (FluentWebElement fluentWebElement : search.find("cssStyle")) {
             //just to check the cast
+            assertThat(fluentWebElement).isInstanceOf(FluentWebElement.class);
         }
 
     }
@@ -107,7 +108,7 @@ public class SearchTest {
         when(searchContext.findElements(By.cssSelector("cssStyle[generated=true]"))).thenReturn(webElements);
 
         String name = "cssStyle";
-        Filter[] filters = new Filter[]{filter1, filter2};
+        Filter[] filters = new Filter[] {filter1, filter2};
         when(filter1.isPreFilter()).thenReturn(true);
         when(filter1.toString()).thenReturn("[generated=true]");
         when(filter2.isPreFilter()).thenReturn(false);
@@ -129,7 +130,7 @@ public class SearchTest {
         when(searchContext.findElements(By.cssSelector("cssStyle[generated=true]"))).thenReturn(webElements);
 
         By locator = By.cssSelector("cssStyle");
-        Filter[] filters = new Filter[]{filter1, filter2};
+        Filter[] filters = new Filter[] {filter1, filter2};
         when(filter1.isPreFilter()).thenReturn(true);
         when(filter1.toString()).thenReturn("[generated=true]");
         when(filter2.isPreFilter()).thenReturn(false);
@@ -142,11 +143,10 @@ public class SearchTest {
         verify(searchContext).findElements(By.cssSelector("cssStyle"));
     }
 
-
     @Test
     public void findPostSelectorFilterWithElementThatMatch() {
         String name = "cssStyle";
-        Filter[] filters = new Filter[]{filter1};
+        Filter[] filters = new Filter[] {filter1};
         when(filter1.isPreFilter()).thenReturn(false);
         WebElement webElement = mock(WebElement.class);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(Collections.singletonList(webElement));
@@ -160,7 +160,7 @@ public class SearchTest {
     @Test
     public void findPostSelectorFilterWithElementThatDontMatch() {
         final String name = "cssStyle";
-        final Filter[] filters = new Filter[]{filter1};
+        final Filter[] filters = new Filter[] {filter1};
         when(filter1.isPreFilter()).thenReturn(false);
         WebElement webElement = mock(WebElement.class);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(Collections.singletonList(webElement));
@@ -181,7 +181,7 @@ public class SearchTest {
     @Test
     public void findPostSelectorFilterWithFilterOnText() {
         String name = "cssStyle";
-        Filter[] filters = new Filter[]{filter1};
+        Filter[] filters = new Filter[] {filter1};
         when(filter1.isPreFilter()).thenReturn(false);
         WebElement webElement = mock(WebElement.class);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(Collections.singletonList(webElement));

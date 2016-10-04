@@ -31,7 +31,8 @@ public class Search implements SearchControl<FluentWebElement> {
     }
 
     /**
-     * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
+     * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver
+     * restrictions
      *
      * @param selector elements name to find
      * @param filters  filters set
@@ -81,7 +82,6 @@ public class Search implements SearchControl<FluentWebElement> {
         return instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, postFilteredElements);
     }
 
-
     private ElementLocator locator(final By by) {
         return new ElementLocator() {
             @Override
@@ -124,7 +124,8 @@ public class Search implements SearchControl<FluentWebElement> {
     }
 
     /**
-     * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver  restrictions
+     * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver
+     * restrictions
      *
      * @param locator elements locator
      * @param filters filters set

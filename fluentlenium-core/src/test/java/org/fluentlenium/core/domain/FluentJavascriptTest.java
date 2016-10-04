@@ -1,6 +1,5 @@
 package org.fluentlenium.core.domain;
 
-
 import org.fluentlenium.core.script.FluentJavascript;
 import org.junit.After;
 import org.junit.Test;
@@ -17,7 +16,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
-
 @RunWith(MockitoJUnitRunner.class)
 public class FluentJavascriptTest {
     @Mock
@@ -27,7 +25,6 @@ public class FluentJavascriptTest {
     public void after() {
         reset(driver);
     }
-
 
     @Test
     public void testSync() {
@@ -85,7 +82,7 @@ public class FluentJavascriptTest {
         assertThat(fluentJavascript.getResult()).isEqualTo(scriptRet);
     }
 
-    private static abstract class JavascriptWebDriver implements WebDriver, JavascriptExecutor {
+    private abstract static class JavascriptWebDriver implements WebDriver, JavascriptExecutor {
 
     }
 }

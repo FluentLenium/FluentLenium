@@ -1,6 +1,5 @@
 package org.fluentlenium.core.wait;
 
-
 import com.google.common.base.Predicate;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,13 +37,13 @@ public class WaitForPageToLoadTest {
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void when_browser_do_not_implemets_Javascript_executor_throws_exception() {
+    public void whenBrowserDoNotImplementsJavascriptExecutorThrowsException() {
         FluentWaitPageMatcher fluentWaitPageBuilder = new FluentWaitPageMatcher(wait, webDriver);
         fluentWaitPageBuilder.isLoaded();
     }
 
     @Test
-    public void when_browser_implemets_Javascript_executor_then_go_to_predicate() {
+    public void whenBrowserImplementsJavascriptExecutorThenGoToPredicate() {
         FluentWaitPageMatcher fluentWaitPageBuilder = new FluentWaitPageMatcher(wait, new WebDriverWithJavascriptExecutor());
         fluentWaitPageBuilder.isLoaded();
         verify(wait).untilPredicate(any(Predicate.class));

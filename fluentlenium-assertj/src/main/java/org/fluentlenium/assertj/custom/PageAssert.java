@@ -5,7 +5,6 @@ import org.fluentlenium.core.FluentPage;
 
 public class PageAssert extends AbstractAssert<PageAssert, FluentPage> {
 
-
     public PageAssert(FluentPage actual) {
         super(actual, PageAssert.class);
     }
@@ -13,7 +12,7 @@ public class PageAssert extends AbstractAssert<PageAssert, FluentPage> {
     /**
      * check if it is at the current page. Call the page.isAt() methods
      *
-     * @return
+     * @return page assertion object
      */
     public PageAssert isAt() {
         actual.isAt();

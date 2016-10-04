@@ -13,5 +13,5 @@ public interface ExceptionListener {
      * @param throwable thrown exception
      * @param driver    selenium driver
      */
-    void on(final Throwable throwable, final WebDriver driver);
+    void on(Throwable throwable, WebDriver driver);
 }

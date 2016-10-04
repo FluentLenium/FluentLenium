@@ -13,13 +13,15 @@ public class IntegerListConditionsImpl implements IntegerConditions {
     private final Function<FluentWebElement, Integer> integerGetter;
     private final Function<FluentWebElement, IntegerConditions> conditionsGetter;
 
-    public IntegerListConditionsImpl(Conditions<FluentWebElement> listConditions, Function<FluentWebElement, Integer> integerGetter, Function<FluentWebElement, IntegerConditions> conditionsGetter) {
+    public IntegerListConditionsImpl(Conditions<FluentWebElement> listConditions,
+            Function<FluentWebElement, Integer> integerGetter, Function<FluentWebElement, IntegerConditions> conditionsGetter) {
         this.listConditions = listConditions;
         this.integerGetter = integerGetter;
         this.conditionsGetter = conditionsGetter;
     }
 
-    public IntegerListConditionsImpl(Conditions<FluentWebElement> listConditions, final Function<FluentWebElement, Integer> integerGetter) {
+    public IntegerListConditionsImpl(Conditions<FluentWebElement> listConditions,
+            final Function<FluentWebElement, Integer> integerGetter) {
         this(listConditions, integerGetter, new Function<FluentWebElement, IntegerConditions>() {
             @Override
             public IntegerConditions apply(FluentWebElement input) {

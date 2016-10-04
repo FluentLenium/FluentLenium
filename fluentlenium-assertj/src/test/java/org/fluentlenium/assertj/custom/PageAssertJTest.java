@@ -1,6 +1,5 @@
 package org.fluentlenium.assertj.custom;
 
-
 import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.core.FluentPage;
 import org.junit.Before;
@@ -26,6 +25,5 @@ public class PageAssertJTest {
         pageAssert.isAt();
         verify(fluentPage).isAt();
     }
-
 
 }

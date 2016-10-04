@@ -6,9 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
+import java.awt.event.ContainerListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
-
 
 public class EventsRegistry {
 
@@ -72,7 +74,6 @@ public class EventsRegistry {
         this.eventDriver.unregister(eventListener);
         return this;
     }
-
 
     public EventsRegistry register(final EventListener eventListener) {
         this.eventDriver.register(new EventAdapter(eventListener, instantiator));
@@ -185,5 +186,84 @@ public class EventsRegistry {
     public EventsRegistry onException(final ExceptionListener listener) {
         this.onException.add(listener);
         return this;
+    }
+
+    /**
+     * Sort listeners based on priority.
+     *
+     * @see ListenerPriorityComparator
+     */
+    protected void sortListeners() {
+        ListenerPriorityComparator comparator = new ListenerPriorityComparator();
+
+        Collections.sort(beforeNavigateTo, comparator);
+        Collections.sort(afterNavigateTo, comparator);
+
+        Collections.sort(beforeNavigateBack, comparator);
+        Collections.sort(afterNavigateBack, comparator);
+
+        Collections.sort(beforeNavigateForward, comparator);
+        Collections.sort(afterNavigateForward, comparator);
+
+        Collections.sort(beforeNavigate, comparator);
+        Collections.sort(afterNavigate, comparator);
+
+        Collections.sort(beforeNavigateRefresh, comparator);
+        Collections.sort(afterNavigateRefresh, comparator);
+
+        Collections.sort(beforeFindBy, comparator);
+        Collections.sort(afterFindBy, comparator);
+
+        Collections.sort(beforeClickOn, comparator);
+        Collections.sort(afterClickOn, comparator);
+
+        Collections.sort(beforeChangeValueOf, comparator);
+        Collections.sort(afterChangeValueOf, comparator);
+
+        Collections.sort(beforeScript, comparator);
+        Collections.sort(afterScript, comparator);
+
+        Collections.sort(onException, comparator);
+    }
+
+    public void unregisterContainer(Object container) {
+        unregisterContainer(beforeNavigateTo, container);
+        unregisterContainer(afterNavigateTo, container);
+
+        unregisterContainer(beforeNavigateBack, container);
+        unregisterContainer(afterNavigateBack, container);
+
+        unregisterContainer(beforeNavigateForward, container);
+        unregisterContainer(afterNavigateForward, container);
+
+        unregisterContainer(beforeNavigate, container);
+        unregisterContainer(afterNavigate, container);
+
+        unregisterContainer(beforeNavigateRefresh, container);
+        unregisterContainer(afterNavigateRefresh, container);
+
+        unregisterContainer(beforeFindBy, container);
+        unregisterContainer(afterFindBy, container);
+
+        unregisterContainer(beforeClickOn, container);
+        unregisterContainer(afterClickOn, container);
+
+        unregisterContainer(beforeChangeValueOf, container);
+        unregisterContainer(afterChangeValueOf, container);
+
+        unregisterContainer(beforeScript, container);
+        unregisterContainer(afterScript, container);
+
+        unregisterContainer(onException, container);
+    }
+
+    private void unregisterContainer(Iterable iterable, Object container) {
+        Iterator<?> iterator = iterable.iterator();
+        while (iterator.hasNext()) {
+            Object next = iterator.next();
+            if (next instanceof ContainerListener && next == container) {
+                iterator.remove();
+            }
+        }
     }
 }

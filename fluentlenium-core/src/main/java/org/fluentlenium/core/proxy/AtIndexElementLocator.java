@@ -22,14 +22,18 @@ public class AtIndexElementLocator implements ElementLocator {
     @Override
     public WebElement findElement() {
         List<WebElement> elements = this.listLocator.findElements();
-        if (index >= elements.size()) return null;
+        if (index >= elements.size()) {
+            return null;
+        }
         return elements.get(index);
     }
 
     @Override
     public List<WebElement> findElements() {
         WebElement element = findElement();
-        if (element == null) return Collections.emptyList();
+        if (element == null) {
+            return Collections.emptyList();
+        }
         return Arrays.asList(element);
     }
 

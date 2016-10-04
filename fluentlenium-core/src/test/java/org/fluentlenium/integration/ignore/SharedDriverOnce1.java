@@ -20,11 +20,9 @@ public class SharedDriverOnce1 extends IntegrationFluentTest {
         assertThat($(".small", withName("name"))).hasSize(1);
     }
 
-
     @Test
     public void secondMethod() {
         assertThat($(".small", withName("name"))).hasSize(1);
     }
-
 
 }

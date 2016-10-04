@@ -18,7 +18,7 @@ public class FindByOfListTest extends IntegrationFluentTest {
     private PageIndex page;
 
     @Test
-    public void should_findBy_retrieve_list() {
+    public void shouldFindByRetrieveList() {
         page.go();
         page.isAt();
         Assertions.assertThat(page.smalls).hasSize(3);
@@ -26,7 +26,7 @@ public class FindByOfListTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void should_findAll_findBy_retrieve_list() {
+    public void shouldFindAllFindByRetrieveList() {
         page.go();
         page.isAt();
         Assertions.assertThat(page.findAllElements).hasSize(4);
@@ -38,7 +38,7 @@ public class FindByOfListTest extends IntegrationFluentTest {
         @FindBy(className = "small")
         FluentList<FluentWebElement> smalls;
 
-        @FindAll({@FindBy(id = "location"), @FindBy(className = "small")})
+        @FindAll({ @FindBy(id = "location"), @FindBy(className = "small") })
         FluentList<FluentWebElement> findAllElements;
 
         @Override

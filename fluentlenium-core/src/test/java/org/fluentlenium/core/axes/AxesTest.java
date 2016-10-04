@@ -1,6 +1,5 @@
 package org.fluentlenium.core.axes;
 
-
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;

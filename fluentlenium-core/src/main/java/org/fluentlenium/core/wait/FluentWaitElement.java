@@ -148,5 +148,4 @@ public class FluentWaitElement {
         return fluentControlWait.useCustomMessage();
     }
 
-
 }

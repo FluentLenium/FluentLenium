@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
@@ -41,7 +40,6 @@ public class SearchTest extends IntegrationFluentTest {
         assertThat(list.find(locator).texts()).containsOnly("Alex");
     }
 
-
     @Test
     public void checkSearchOnElementWorks() {
         goTo(DEFAULT_URL);
@@ -71,7 +69,6 @@ public class SearchTest extends IntegrationFluentTest {
         By locator = By.cssSelector(".child");
         assertThat(list.el(locator).text()).isEqualTo("Alex");
     }
-
 
     @Test
     public void checkSearchFirstOnElementWorks() {

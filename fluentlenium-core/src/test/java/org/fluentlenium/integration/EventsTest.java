@@ -39,8 +39,10 @@ public class EventsTest extends IntegrationFluentTest {
 
         el("button").now();
 
-        Mockito.verify(beforeListener).on(Mockito.<By>anyObject(), Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
-        Mockito.verify(afterListener).on(Mockito.<By>anyObject(), Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
+        Mockito.verify(beforeListener)
+                .on(Mockito.<By>anyObject(), Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
+        Mockito.verify(afterListener)
+                .on(Mockito.<By>anyObject(), Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
     }
 
     @Test
@@ -52,13 +54,17 @@ public class EventsTest extends IntegrationFluentTest {
         events().afterNavigate(afterListener);
         goTo(DEFAULT_URL);
 
-        Mockito.verify(beforeListener, Mockito.times(1)).on(Mockito.eq(DEFAULT_URL), Mockito.<WebDriver>anyObject(), Mockito.<NavigateAllListener.Direction>anyObject());
-        Mockito.verify(afterListener, Mockito.times(1)).on(Mockito.eq(DEFAULT_URL), Mockito.<WebDriver>anyObject(), Mockito.<NavigateAllListener.Direction>anyObject());
+        Mockito.verify(beforeListener, Mockito.times(1))
+                .on(Mockito.eq(DEFAULT_URL), Mockito.<WebDriver>anyObject(), Mockito.<NavigateAllListener.Direction>anyObject());
+        Mockito.verify(afterListener, Mockito.times(1))
+                .on(Mockito.eq(DEFAULT_URL), Mockito.<WebDriver>anyObject(), Mockito.<NavigateAllListener.Direction>anyObject());
 
         getDriver().navigate().refresh();
 
-        Mockito.verify(beforeListener, Mockito.times(1)).on((String) Mockito.isNull(), Mockito.<WebDriver>anyObject(), Mockito.eq(NavigateAllListener.Direction.REFRESH));
-        Mockito.verify(afterListener, Mockito.times(1)).on((String) Mockito.isNull(), Mockito.<WebDriver>anyObject(), Mockito.eq(NavigateAllListener.Direction.REFRESH));
+        Mockito.verify(beforeListener, Mockito.times(1))
+                .on((String) Mockito.isNull(), Mockito.<WebDriver>anyObject(), Mockito.eq(NavigateAllListener.Direction.REFRESH));
+        Mockito.verify(afterListener, Mockito.times(1))
+                .on((String) Mockito.isNull(), Mockito.<WebDriver>anyObject(), Mockito.eq(NavigateAllListener.Direction.REFRESH));
 
     }
 

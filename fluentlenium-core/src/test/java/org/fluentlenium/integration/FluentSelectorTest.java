@@ -12,7 +12,6 @@ import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 
 public class FluentSelectorTest extends IntegrationFluentTest {
 
-
     @Test
     public void checkWithNameCssSelector() {
         goTo(DEFAULT_URL);
@@ -48,7 +47,6 @@ public class FluentSelectorTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         assertThat($(".small", withName().notContains("toto"))).hasSize(3);
     }
-
 
     @Test
     public void checkCustomSelectAttribute() {
@@ -86,7 +84,6 @@ public class FluentSelectorTest extends IntegrationFluentTest {
         assertThat($("span", withName().startsWith(regex("am")))).hasSize(0);
     }
 
-
     @Test
     public void checkEndAttributeMatcher() {
         goTo(DEFAULT_URL);
@@ -98,7 +95,6 @@ public class FluentSelectorTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         assertThat($("span", withName().endsWith(regex("am?")))).hasSize(0);
     }
-
 
     @Test
     public void checkNotStartAttribute() {

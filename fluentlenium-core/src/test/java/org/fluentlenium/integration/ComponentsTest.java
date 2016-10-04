@@ -115,7 +115,6 @@ public class ComponentsTest extends IntegrationFluentTest {
         assertThat(content.loaded()).isTrue();
         assertThat(footer.loaded()).isTrue();
 
-
         assertThat(header.title.text()).isEqualTo("Header Title");
         assertThat(footer.copyright.text()).isEqualTo("(c) FluentLenium");
 
@@ -142,7 +141,6 @@ public class ComponentsTest extends IntegrationFluentTest {
         }
 
         assertThat(content.notPresent.present()).isFalse();
-
 
     }
 }

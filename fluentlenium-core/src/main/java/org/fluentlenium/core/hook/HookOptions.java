@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Inherited
-@Target({ElementType.FIELD, ElementType.TYPE, ElementType.ANNOTATION_TYPE})
+@Target({ ElementType.FIELD, ElementType.TYPE, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface HookOptions {
     Class<?> value();

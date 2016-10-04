@@ -3,7 +3,6 @@ package org.fluentlenium.core.filter;
 import org.fluentlenium.core.filter.matcher.EqualMatcher;
 import org.fluentlenium.core.filter.matcher.Matcher;
 
-
 public class Filter {
     private final String attribut;
     private final Matcher matcher;
@@ -41,7 +40,6 @@ public class Filter {
         this.matcher = new EqualMatcher(value);
     }
 
-
     /**
      * Construct a filter with a custom attribute and an associated matcher
      *
@@ -59,7 +57,9 @@ public class Filter {
 
     public String toString() {
         String matcherAttribute = matcher != null ? matcher.getMatcherSymbol() : "";
-        if (matcherAttribute == null) matcherAttribute = "";
+        if (matcherAttribute == null) {
+            matcherAttribute = "";
+        }
         return "[" + attribut.toLowerCase() + matcherAttribute + "=\"" + matcher.getValue() + "\"]";
     }
 

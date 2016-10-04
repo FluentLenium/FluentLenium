@@ -14,7 +14,8 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     /**
      * check if at least one element of the FluentList contains the text
      *
-     * @return
+     * @param textToFind text to find
+     * @return assertion object
      */
     public FluentListAssert hasText(String textToFind) {
         List<String> actualTexts = actual.texts();
@@ -30,13 +31,15 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     /**
      * check if at no element of the FluentList contains the text
      *
-     * @return
+     * @param textToFind text to find
+     * @return assertion object
      */
     public FluentListAssert hasNotText(String textToFind) {
         List<String> actualTexts = actual.texts();
         for (String text : actualTexts) {
             if (text.contains(textToFind)) {
-                super.failWithMessage("At least one selected elements contains text: " + textToFind + " . Actual texts found : " + actualTexts);
+                super.failWithMessage(
+                        "At least one selected elements contains text: " + textToFind + " . Actual texts found : " + actualTexts);
             }
         }
         return this;
@@ -56,8 +59,8 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     /**
      * check if an element of the FluentList has the id
      *
-     * @param idToFind
-     * @return
+     * @param idToFind id to find
+     * @return assertion object
      */
     public FluentListAssert hasId(String idToFind) {
         List actualIds = actual.ids();
@@ -70,14 +73,17 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     /**
      * check if at least one element of the FluentList contains the text
      *
-     * @return
+     * @param classToFind class to find
+     * @return assertion object
      */
     public FluentListAssert hasClass(String classToFind) {
         List<String> classesFromElements = (List<String>) actual.attributes("class");
 
         for (String classesStr : classesFromElements) {
             List<String> classesLst = Arrays.asList(classesStr.split(" "));
-            if (classesLst.contains(classToFind)) return this;
+            if (classesLst.contains(classToFind)) {
+                return this;
+            }
         }
 
         StringBuilder sb = new StringBuilder();

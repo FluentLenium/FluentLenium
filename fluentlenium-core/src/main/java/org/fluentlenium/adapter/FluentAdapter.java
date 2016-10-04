@@ -7,6 +7,7 @@ import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.configuration.WebDrivers;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.SeleniumDriverControl;
 import org.fluentlenium.core.inject.ContainerContext;
 import org.fluentlenium.core.inject.ContainerFluentControl;
 import org.openqa.selenium.WebDriver;
@@ -43,7 +44,7 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
         return configuration;
     }
 
-    @Delegate(types = FluentControl.class)
+    @Delegate(types = FluentControl.class, excludes = SeleniumDriverControl.class) // We want getDriver to be final.
     private ContainerFluentControl getFluentControl() {
         return (ContainerFluentControl) getDriverContainer().getFluentControl();
     }
@@ -54,6 +55,11 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
 
     private void setFluentControl(ContainerFluentControl fluentControl) {
         getDriverContainer().setFluentControl(fluentControl);
+    }
+
+    @Override
+    public final WebDriver getDriver() {
+        return getFluentControl().getDriver();
     }
 
     protected FluentControlContainer getDriverContainer() {
@@ -79,8 +85,7 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
                 return;
             }
             if (getFluentControl().getDriver() != null) {
-                throw new IllegalStateException(
-                        "Trying to init a WebDriver, but another one is still running");
+                throw new IllegalStateException("Trying to init a WebDriver, but another one is still running");
             }
         }
 

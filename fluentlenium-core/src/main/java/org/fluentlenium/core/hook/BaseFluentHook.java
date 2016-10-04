@@ -10,7 +10,8 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 public class BaseFluentHook<T> extends BaseHook<T> {
     private FluentWebElement fluentWebElement;
 
-    public BaseFluentHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, T options) {
+    public BaseFluentHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
+            Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, T options) {
         super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
     }
 

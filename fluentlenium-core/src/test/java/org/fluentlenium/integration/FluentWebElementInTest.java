@@ -10,11 +10,10 @@ public class FluentWebElementInTest extends IntegrationFluentTest {
     FluentWebElement linkToPage2;
 
     @Test
-    public void when_web_element_in_test_then_they_are_instanciated() {
+    public void whenWebElementInTestThenTheyAreInstanciated() {
         goTo(IntegrationFluentTest.DEFAULT_URL);
         linkToPage2.click();
         assertThat(url()).isEqualTo(IntegrationFluentTest.PAGE_2_URL);
     }
-
 
 }

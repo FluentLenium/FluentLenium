@@ -43,7 +43,8 @@ public class FluentInjectorElementTest {
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
 
-        injector = new FluentInjector(fluentAdapter, new ComponentsManager(fluentAdapter), new DefaultContainerInstanciator(fluentAdapter));
+        injector = new FluentInjector(fluentAdapter, null, new ComponentsManager(fluentAdapter),
+                new DefaultContainerInstanciator(fluentAdapter));
     }
 
     @After
@@ -126,7 +127,8 @@ public class FluentInjectorElementTest {
     }
 
     public static class FluentListSubClass<T extends FluentWebElementSubClass> extends FluentListImpl<T> {
-        public FluentListSubClass(Class<T> componentClass, List<T> list, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        public FluentListSubClass(Class<T> componentClass, List<T> list, FluentControl fluentControl,
+                ComponentInstantiator instantiator) {
             super(componentClass, list, fluentControl, instantiator);
         }
     }
@@ -326,7 +328,6 @@ public class FluentInjectorElementTest {
         assertThat(container.element).hasSize(2);
         assertThat(container.element).isNotInstanceOf(FluentList.class);
 
-
         assertThat(container.element.get(0)).isExactlyInstanceOf(WebElementWrapper.class);
         assertThat(container.element.get(0).getElement()).isInstanceOf(WebElement.class);
         assertThat(container.element.get(0).getElement().getTagName()).isEqualTo("h1");
@@ -357,12 +358,10 @@ public class FluentInjectorElementTest {
         assertThat(container.element).hasSize(2);
         assertThat(container.element).isNotInstanceOf(FluentList.class);
 
-
         assertThat(container.element.get(0)).isExactlyInstanceOf(WebElementDriverWrapper.class);
         assertThat(container.element.get(0).getElement()).isInstanceOf(WebElement.class);
         assertThat(container.element.get(0).getElement().getTagName()).isEqualTo("h1");
         assertThat(container.element.get(0).getFluentControl()).isSameAs(fluentAdapter);
-
 
         assertThat(container.element.get(1)).isExactlyInstanceOf(WebElementDriverWrapper.class);
         assertThat(container.element.get(1).getElement()).isInstanceOf(WebElement.class);

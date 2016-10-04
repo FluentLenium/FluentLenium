@@ -31,5 +31,4 @@ public class SharedDriverSuperClassTest extends SharedDriverSuperClass {
         assertThat(this.getCookie("cookie")).isNull();
     }
 
-
 }

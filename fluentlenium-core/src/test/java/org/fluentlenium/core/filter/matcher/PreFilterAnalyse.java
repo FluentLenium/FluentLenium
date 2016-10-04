@@ -1,6 +1,5 @@
 package org.fluentlenium.core.filter.matcher;
 
-
 import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.filter.FilterType;
 import org.junit.Test;

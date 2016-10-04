@@ -50,8 +50,8 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
     protected Map<String, T> factories = new LinkedHashMap<>();
 
     public synchronized T getDefault() {
-        List<T> factories = new ArrayList<>(this.factories.values());
-        Collections.sort(factories, new Comparator<T>() {
+        List<T> factoriesList = new ArrayList<>(this.factories.values());
+        Collections.sort(factoriesList, new Comparator<T>() {
             @Override
             public int compare(T o1, T o2) {
                 FactoryPriority annotation1 = o1.getClass().getAnnotation(FactoryPriority.class);
@@ -64,7 +64,7 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
             }
         });
         List<T> filteredFactories = new ArrayList<>();
-        for (T factory : factories) {
+        for (T factory : factoriesList) {
             if (factory instanceof ReflectiveFactory) {
                 if (((ReflectiveFactory) factory).isAvailable()) {
                     filteredFactories.add(factory);
@@ -136,15 +136,15 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
         boolean registered = false;
 
         if (names.size() == 0) {
-            throw new ConfigurationException("Factory " + factory.getClass().getName() +
-                    " has no name defined. Use @FactoryName annotation or implement FactoryNames.");
+            throw new ConfigurationException("Factory " + factory.getClass().getName()
+                    + " has no name defined. Use @FactoryName annotation or implement FactoryNames.");
         }
 
         for (String name : names) {
             if (!registered) {
                 if (factories.containsKey(name)) {
-                    throw new ConfigurationException("A factory is already registered with this name: " +
-                            name + " (" + factories.get(name) + ")");
+                    throw new ConfigurationException(
+                            "A factory is already registered with this name: " + name + " (" + factories.get(name) + ")");
                 }
                 factories.put(name, factory);
                 registered = true;

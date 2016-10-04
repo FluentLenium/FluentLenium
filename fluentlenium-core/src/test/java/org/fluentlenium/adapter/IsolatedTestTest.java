@@ -56,8 +56,10 @@ public class IsolatedTestTest {
         }
 
         public void testSomething() {
-            Assertions.assertThat(LocatorProxies.getLocatorResult(element.now().getElement())).isSameAs(IsolatedTestTest.this.element);
-            Assertions.assertThat(LocatorProxies.getLocatorResult(page.pageElement.now().getElement())).isSameAs(IsolatedTestTest.this.pageElement);
+            Assertions.assertThat(LocatorProxies.getLocatorResult(element.now().getElement()))
+                    .isSameAs(IsolatedTestTest.this.element);
+            Assertions.assertThat(LocatorProxies.getLocatorResult(page.pageElement.now().getElement()))
+                    .isSameAs(IsolatedTestTest.this.pageElement);
         }
     }
 

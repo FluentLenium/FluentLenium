@@ -175,7 +175,6 @@ public class FluentTestTest {
             WebElement htmlElement = Mockito.mock(WebElement.class);
             Mockito.when(htmlElement.getAttribute("innerHTML")).thenReturn(html);
 
-
             Mockito.when(webDriver.findElements(By.cssSelector("html"))).thenReturn(Arrays.asList(htmlElement));
             screenshotWebDrivers.add(webDriver);
             return webDriver;
@@ -273,11 +272,16 @@ public class FluentTestTest {
         Mockito.verify(driver).getScreenshotAs(OutputType.FILE);
         Mockito.verify(driver).findElements(By.cssSelector("html"));
 
-        assertThat(tmpPath.list()).contains("AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration.FluentTestTest$AutomaticScreenShotTest).html");
-        assertThat(tmpPath.list()).contains("AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration.FluentTestTest$AutomaticScreenShotTest).png");
+        assertThat(tmpPath.list()).contains("AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
+                + ".FluentTestTest$AutomaticScreenShotTest).html");
+        assertThat(tmpPath.list()).contains("AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
+                + ".FluentTestTest$AutomaticScreenShotTest).png");
 
-        File screenshotGeneratedFile = new File(tmpPath, "AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration.FluentTestTest$AutomaticScreenShotTest).png");
-        File htmlDumpFile = new File(tmpPath, "AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration.FluentTestTest$AutomaticScreenShotTest).html");
+        File screenshotGeneratedFile = new File(tmpPath,
+                "AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
+                        + ".FluentTestTest$AutomaticScreenShotTest).png");
+        File htmlDumpFile = new File(tmpPath, "AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
+                + ".FluentTestTest$AutomaticScreenShotTest).html");
 
         try {
             assertThat(FileUtils.readFileToByteArray(screenshotGeneratedFile)).isEqualTo(screenshotData);

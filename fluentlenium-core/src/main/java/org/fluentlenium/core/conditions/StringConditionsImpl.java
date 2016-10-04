@@ -30,7 +30,9 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
         return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
-                if (input == null) return false;
+                if (input == null) {
+                    return false;
+                }
                 return input.contains(s);
             }
         });
@@ -41,7 +43,9 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
         return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
-                if (input == null) return false;
+                if (input == null) {
+                    return false;
+                }
                 return input.startsWith(prefix);
             }
         });
@@ -52,7 +56,9 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
         return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
-                if (input == null) return false;
+                if (input == null) {
+                    return false;
+                }
                 return input.endsWith(suffix);
             }
         });
@@ -63,7 +69,9 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
         return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
-                if (input == null) return false;
+                if (input == null) {
+                    return false;
+                }
                 return input.equals(anotherString);
             }
         });
@@ -74,7 +82,9 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
         return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
-                if (input == null) return false;
+                if (input == null) {
+                    return false;
+                }
                 return input.equalsIgnoreCase(anotherString);
             }
         });
@@ -85,7 +95,9 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
         return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
-                if (input == null) return false;
+                if (input == null) {
+                    return false;
+                }
                 return input.matches(regex);
             }
         });
@@ -96,7 +108,9 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
         return verify(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
-                if (input == null) return false;
+                if (input == null) {
+                    return false;
+                }
                 Matcher m = pattern.matcher(input);
                 return m.matches();
             }

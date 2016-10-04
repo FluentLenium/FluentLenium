@@ -114,7 +114,6 @@ public class AnnotationsComponentEventsTest extends AnnotationsComponentEventsTe
             assertThat(button.afterClick).isEqualTo(0);
         }
 
-
         List<WebElement> elements = new ArrayList<>();
         for (Component button : buttons) {
             elements.add(unwrapElement(button.getElement()));

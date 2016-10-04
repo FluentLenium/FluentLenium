@@ -59,7 +59,6 @@ public class KeyboardElementActionsTest {
         verify(keyboard).pressKey(Keys.SHIFT);
     }
 
-
     @Test
     public void testKeyDownKeyboardMouse() {
         KeyboardElementActions actions = new KeyboardElementActions(keyboard, mouse, element);
@@ -96,11 +95,11 @@ public class KeyboardElementActionsTest {
         Assertions.assertThat(actionsAlt.basic()).isSameAs(keyboard);
     }
 
-    private static abstract class InputDevicesDriver implements WebDriver, HasInputDevices {
+    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices {
 
     }
 
-    private static abstract class LocatableElement implements WebElement, Locatable {
+    private abstract static class LocatableElement implements WebElement, Locatable {
 
     }
 }

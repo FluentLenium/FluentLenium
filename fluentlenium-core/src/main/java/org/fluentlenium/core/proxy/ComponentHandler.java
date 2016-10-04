@@ -14,7 +14,8 @@ import java.util.List;
 /**
  * Proxy handler for {@link WebElement}.
  */
-public class ComponentHandler extends AbstractLocatorHandler<WebElement> implements InvocationHandler, LocatorHandler<WebElement> {
+public class ComponentHandler extends AbstractLocatorHandler<WebElement>
+        implements InvocationHandler, LocatorHandler<WebElement> {
     private static final Method GET_WRAPPED_ELEMENT = getMethod(WrapsElement.class, "getWrappedElement");
 
     public ComponentHandler(ElementLocator locator) {
@@ -67,11 +68,13 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement> impleme
         return getHookElement();
     }
 
+    //CHECKSTYLE.OFF: IllegalThrows
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (GET_WRAPPED_ELEMENT.equals(method)) {
             return isLoaded() ? getLocatorResult() : proxy;
         }
         return super.invoke(proxy, method, args);
     }
+    //CHECKSTYLE.ON: IllegalThrows
 
 }

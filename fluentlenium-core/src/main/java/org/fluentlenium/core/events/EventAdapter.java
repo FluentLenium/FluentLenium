@@ -12,7 +12,7 @@ class EventAdapter implements WebDriverEventListener {
     private final EventListener listener;
     private final ComponentInstantiator instantiator;
 
-    public EventAdapter(final EventListener listener, ComponentInstantiator instantiator) {
+    EventAdapter(final EventListener listener, ComponentInstantiator instantiator) {
         this.listener = listener;
         this.instantiator = instantiator;
     }
@@ -59,14 +59,14 @@ class EventAdapter implements WebDriverEventListener {
 
     @Override
     public void beforeFindBy(final By by, final WebElement element, final WebDriver driver) {
-        this.listener.beforeFindBy(by, element == null ? null : instantiator.newComponent(FluentWebElement.class, element),
-                driver);
+        this.listener
+                .beforeFindBy(by, element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
     }
 
     @Override
     public void afterFindBy(final By by, final WebElement element, final WebDriver driver) {
-        this.listener.afterFindBy(by, element == null ? null : instantiator.newComponent(FluentWebElement.class, element),
-                driver);
+        this.listener
+                .afterFindBy(by, element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
     }
 
     @Override
@@ -80,15 +80,15 @@ class EventAdapter implements WebDriverEventListener {
     }
 
     @Override
-    public void beforeChangeValueOf(WebElement element, WebDriver driver, CharSequence[] charSequences) {
-        this.listener.beforeChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element),
-                driver);
+    public void beforeChangeValueOf(final WebElement element, final WebDriver driver) {
+        this.listener
+                .beforeChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
     }
 
     @Override
-    public void afterChangeValueOf(WebElement element, WebDriver driver, CharSequence[] charSequences) {
-        this.listener.afterChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element),
-                driver);
+    public void afterChangeValueOf(final WebElement element, final WebDriver driver) {
+        this.listener
+                .afterChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
     }
 
     @Override
@@ -117,8 +117,7 @@ class EventAdapter implements WebDriverEventListener {
 
         EventAdapter that = (EventAdapter) o;
 
-        return !(this.listener != null ? !this.listener.equals(that.listener)
-                : that.listener != null);
+        return !(this.listener != null ? !this.listener.equals(that.listener) : that.listener != null);
 
     }
 

@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ActionOnListWithBddTest extends IntegrationFluentTest {
 
-
     @Test
     public void checkFillAction() {
         goTo(DEFAULT_URL);
@@ -43,6 +42,5 @@ public class ActionOnListWithBddTest extends IntegrationFluentTest {
         name.click();
         assertThat(window().title()).isEqualTo("Page 2");
     }
-
 
 }

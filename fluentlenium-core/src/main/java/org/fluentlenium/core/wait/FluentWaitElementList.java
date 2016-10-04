@@ -65,7 +65,8 @@ public class FluentWaitElementList {
         return this;
     }
 
-    public FluentWaitElementList ignoring(Class<? extends RuntimeException> firstType, Class<? extends RuntimeException> secondType) {
+    public FluentWaitElementList ignoring(Class<? extends RuntimeException> firstType,
+            Class<? extends RuntimeException> secondType) {
         fluentControlWait.ignoring(firstType, secondType);
         return this;
     }
@@ -134,7 +135,6 @@ public class FluentWaitElementList {
         fluentControlWait.explicitlyFor(amount);
         return this;
     }
-
 
     public void until(Supplier<Boolean> isTrue) {
         fluentControlWait.until(isTrue);

@@ -1,6 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-
 import com.google.common.base.Predicate;
 import org.junit.Test;
 

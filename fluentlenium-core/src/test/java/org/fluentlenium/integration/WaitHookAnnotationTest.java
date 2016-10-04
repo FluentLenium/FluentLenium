@@ -30,9 +30,8 @@ public class WaitHookAnnotationTest extends IntegrationFluentTest {
             public void call() throws Throwable {
                 find("#anotherField").click();
             }
-        }).isExactlyInstanceOf(TimeoutException.class).
-                hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector: #anotherField " +
-                        "(Lazy Element List) (tried for 5 second(s) with 500 MILLISECONDS interval");
+        }).isExactlyInstanceOf(TimeoutException.class)
+                .hasMessageStartingWith("Timed out after 5 seconds waiting for By.cssSelector: #anotherField");
 
     }
 

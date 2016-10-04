@@ -39,8 +39,9 @@ public class FluentTestRuleTest {
 
     }
 
+    //CHECKSTYLE.OFF: IllegalThrows
     @Test
-    public void when_no_error_everything_is_called() throws Throwable {
+    public void whenNoErrorEverythingIsCalled() throws Throwable {
         final FluentTestRule testRule = spy(new FluentTestRule());
 
         testRule.apply(base, description).evaluate();
@@ -53,7 +54,7 @@ public class FluentTestRuleTest {
     }
 
     @Test
-    public void when_init_fails_test_is_not_called() throws Throwable {
+    public void whenInitFailsTestIsNotCalled() throws Throwable {
         final FluentTestRule testRule = spy(new FluentTestRule());
 
         doThrow(TestException.class).when(testRule).starting(description);
@@ -70,4 +71,5 @@ public class FluentTestRuleTest {
         verify(testRule).failed(any(TestException.class), eq(description));
         verify(testRule).finished(description);
     }
+    //CHECKSTYLE.ON: IllegalThrows
 }

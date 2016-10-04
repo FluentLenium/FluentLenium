@@ -86,7 +86,6 @@ public class FillSelect<E extends FluentWebElement> extends AbstractFill<E> {
             throw new NoSuchElementException("No select element found");
         }
 
-
         for (FluentWebElement element : elements) {
             Select select = new Select(element.getElement());
             select.selectByVisibleText(text);

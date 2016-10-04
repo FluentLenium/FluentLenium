@@ -14,5 +14,5 @@ public interface ElementListener {
      * @param element the element
      * @param driver  the selenium driver
      */
-    void on(final FluentWebElement element, final WebDriver driver);
+    void on(FluentWebElement element, WebDriver driver);
 }

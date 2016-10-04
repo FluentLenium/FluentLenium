@@ -51,7 +51,6 @@ public class KeyboardActionsTest {
         verify(keyboard).pressKey(Keys.SHIFT);
     }
 
-
     @Test
     public void testKeyDownKeyboardMouse() {
         KeyboardActions actions = new KeyboardActions(keyboard, mouse);
@@ -88,7 +87,7 @@ public class KeyboardActionsTest {
         Assertions.assertThat(actionsAlt.basic()).isSameAs(keyboard);
     }
 
-    private static abstract class InputDevicesDriver implements WebDriver, HasInputDevices {
+    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices {
 
     }
 }

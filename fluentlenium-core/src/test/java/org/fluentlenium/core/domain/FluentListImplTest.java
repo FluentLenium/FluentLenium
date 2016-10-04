@@ -41,7 +41,6 @@ public class FluentListImplTest {
     private FluentList<FluentWebElement> list;
     private FluentList<FluentWebElement> emptyList;
 
-
     private FluentAdapter fluentAdapter;
 
     @Before
@@ -53,7 +52,6 @@ public class FluentListImplTest {
         when(element1.conditions()).thenReturn(new WebElementConditions(element1));
         when(element2.conditions()).thenReturn(new WebElementConditions(element2));
         when(element3.conditions()).thenReturn(new WebElementConditions(element3));
-
 
         list = fluentAdapter.newFluentList(element1, element2, element3);
     }
@@ -221,7 +219,6 @@ public class FluentListImplTest {
         assertThat(emptyList.id()).isNull();
         reset(element1, element2, element3);
 
-
         when(element1.attribute("attr")).thenReturn("1");
         when(element2.attribute("attr")).thenReturn("2");
         when(element3.attribute("attr")).thenReturn("3");
@@ -354,9 +351,8 @@ public class FluentListImplTest {
         assertThat(as).hasSameSizeAs(list);
     }
 
-
     private static class Component extends FluentWebElement {
-        public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
     }

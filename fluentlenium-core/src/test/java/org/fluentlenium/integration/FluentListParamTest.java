@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
@@ -30,7 +29,6 @@ public class FluentListParamTest extends IntegrationFluentTest {
         assertThat(list.ids()).contains("id", "id2");
     }
 
-
     @Test
     public void checkAttributesAction() {
         goTo(DEFAULT_URL);
@@ -44,7 +42,6 @@ public class FluentListParamTest extends IntegrationFluentTest {
         FluentList list = find("input");
         assertThat(list.values()).contains("John", "Doe");
     }
-
 
     @Test
     public void checkTextParam() {

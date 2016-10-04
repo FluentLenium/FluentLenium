@@ -38,7 +38,8 @@ public class FluentInjectorComponentTest {
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
 
-        injector = new FluentInjector(fluentAdapter, new ComponentsManager(fluentAdapter), new DefaultContainerInstanciator(fluentAdapter));
+        injector = new FluentInjector(fluentAdapter, null, new ComponentsManager(fluentAdapter),
+                new DefaultContainerInstanciator(fluentAdapter));
     }
 
     public static class SomeChildComponent extends FluentWebElement {
@@ -126,11 +127,9 @@ public class FluentInjectorComponentTest {
 
         Assertions.assertThat(container.component.childComponent.webElement).isEqualTo(childWebElement);
 
-
         verify(webDriver).findElement(new ByIdOrName("component"));
         verify(component).findElement(new ByIdOrName("childComponent"));
         verify(childComponent).findElement(new ByIdOrName("webElement"));
     }
-
 
 }

@@ -10,6 +10,8 @@ import org.fluentlenium.core.action.WindowAction;
 import org.fluentlenium.core.alert.Alert;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.ComponentsManager;
+import org.fluentlenium.core.css.CssControl;
+import org.fluentlenium.core.css.CssControlImpl;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.AnnotationsComponentListener;
@@ -60,6 +62,9 @@ public class FluentDriver implements FluentControl {
     @Delegate
     private FluentInjector fluentInjector;
 
+    @Delegate
+    private CssControl cssControl;
+
     private Search search;
 
     private WebDriver driver;
@@ -85,29 +90,32 @@ public class FluentDriver implements FluentControl {
                 if (this.configuration.getPageLoadTimeout() == null) {
                     this.getDriver().manage().timeouts().pageLoadTimeout(-1, TimeUnit.MILLISECONDS);
                 } else {
-                    this.getDriver().manage().timeouts().pageLoadTimeout(this.configuration.getPageLoadTimeout(), TimeUnit.MILLISECONDS);
+                    this.getDriver().manage().timeouts()
+                            .pageLoadTimeout(this.configuration.getPageLoadTimeout(), TimeUnit.MILLISECONDS);
                 }
 
                 if (this.configuration.getImplicitlyWait() == null) {
                     this.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
                 } else {
-                    this.getDriver().manage().timeouts().implicitlyWait(this.configuration.getImplicitlyWait(), TimeUnit.MILLISECONDS);
+                    this.getDriver().manage().timeouts()
+                            .implicitlyWait(this.configuration.getImplicitlyWait(), TimeUnit.MILLISECONDS);
                 }
 
                 if (this.configuration.getScriptTimeout() == null) {
                     this.getDriver().manage().timeouts().setScriptTimeout(-1, TimeUnit.MILLISECONDS);
                 } else {
-                    this.getDriver().manage().timeouts().setScriptTimeout(this.configuration.getScriptTimeout(), TimeUnit.MILLISECONDS);
+                    this.getDriver().manage().timeouts()
+                            .setScriptTimeout(this.configuration.getScriptTimeout(), TimeUnit.MILLISECONDS);
                 }
             }
 
             if (this.configuration.getBaseUrl() != null) {
-                String baseUrl = this.configuration.getBaseUrl();
-                if (baseUrl != null) {
-                    if (baseUrl.endsWith("/")) {
-                        baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
+                String configBaseUrl = this.configuration.getBaseUrl();
+                if (configBaseUrl != null) {
+                    if (configBaseUrl.endsWith("/")) {
+                        configBaseUrl = configBaseUrl.substring(0, configBaseUrl.length() - 1);
                     }
-                    this.baseUrl = baseUrl;
+                    this.baseUrl = configBaseUrl;
                 }
             }
         }
@@ -121,10 +129,13 @@ public class FluentDriver implements FluentControl {
             this.events = new EventsRegistry(this);
             this.eventsComponentsAnnotations = new AnnotationsComponentListener(componentsManager);
             this.events.register(this.eventsComponentsAnnotations);
+        } else {
+            this.events = null;
         }
         this.mouseActions = new MouseActions(driver);
         this.keyboardActions = new KeyboardActions(driver);
-        this.fluentInjector = new FluentInjector(adapter, componentsManager, new DefaultContainerInstanciator(this));
+        this.fluentInjector = new FluentInjector(adapter, events, componentsManager, new DefaultContainerInstanciator(this));
+        this.cssControl = new CssControlImpl(adapter, adapter);
         this.windowAction = new WindowAction(adapter, driver);
         return this;
     }
@@ -207,10 +218,9 @@ public class FluentDriver implements FluentControl {
     @Override
     public EventsRegistry events() {
         if (events == null) {
-            throw new IllegalStateException(
-                    "An EventFiringWebDriver instance is required to use events. "
-                            + "You should set 'eventsEnabled' configuration property to 'true' "
-                            + "or override newWebDriver() to build an EventFiringWebDriver.");
+            throw new IllegalStateException("An EventFiringWebDriver instance is required to use events. "
+                    + "You should set 'eventsEnabled' configuration property to 'true' "
+                    + "or override newWebDriver() to build an EventFiringWebDriver.");
         }
         return events;
     }

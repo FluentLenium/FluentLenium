@@ -23,7 +23,8 @@ public class WaitHookWithTest extends IntegrationFluentTest {
             public void call() throws Throwable {
                 find("#anotherField").withHook(WaitHook.class).click();
             }
-        }).isExactlyInstanceOf(TimeoutException.class).hasMessageStartingWith("Timed out after 5 seconds waiting for By.cssSelector: #anotherField");
+        }).isExactlyInstanceOf(TimeoutException.class)
+                .hasMessageStartingWith("Timed out after 5 seconds waiting for By.cssSelector: #anotherField");
 
     }
 }

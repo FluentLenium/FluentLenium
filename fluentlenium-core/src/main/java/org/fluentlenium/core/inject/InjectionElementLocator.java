@@ -11,7 +11,6 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.List;
 
-
 /**
  * The injection element locator, which will lazily locate an element or an element list on a page. This class is
  * designed for use with the {@link org.openqa.selenium.support.PageFactory} and understands the
@@ -55,6 +54,8 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
 
     /**
      * Find the element.
+     *
+     * @return then found element
      */
     public WebElement findElement() {
         if (cachedElement != null && shouldCache) {
@@ -71,6 +72,8 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
 
     /**
      * Find the element list.
+     *
+     * @return list of found elements
      */
     public List<WebElement> findElements() {
         if (cachedElementList != null && shouldCache) {

@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import org.fluentlenium.core.script.FluentJavascript;
@@ -32,7 +31,7 @@ public class JavascriptTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void should_executeScript_return_String() {
+    public void shouldExecuteScriptReturnString() {
         final String script = "return 'string';";
         final FluentJavascript fluentJavascript = executeScript(script);
         assertThat(fluentJavascript.isBooleanResult()).isFalse();
@@ -46,7 +45,7 @@ public class JavascriptTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void should_executeScript_return_Boolean() {
+    public void shouldExecuteScriptReturnBoolean() {
         final String script = "return true;";
         final FluentJavascript fluentJavascript = executeScript(script);
         assertThat(fluentJavascript.isBooleanResult()).isTrue();
@@ -60,7 +59,7 @@ public class JavascriptTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void should_executeScript_return_Double() {
+    public void shouldExecuteScriptReturnDouble() {
         final String script = "return 12.12;";
         final FluentJavascript fluentJavascript = executeScript(script);
         assertThat(fluentJavascript.isBooleanResult()).isFalse();
@@ -74,7 +73,7 @@ public class JavascriptTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void should_executeScript_return_Long() {
+    public void shouldExecuteScriptReturnLong() {
         final String script = "return 5;";
         final FluentJavascript fluentJavascript = executeScript(script);
         assertThat(fluentJavascript.isBooleanResult()).isFalse();
@@ -88,7 +87,7 @@ public class JavascriptTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void should_executeScript_return_List() {
+    public void shouldExecuteScriptReturnList() {
         final String script = "return Array('string 1', 'string 2', 5, 12.12, true, Array('test 1', 'test 2'));";
         final FluentJavascript fluentJavascript = executeScript(script);
         assertThat(fluentJavascript.isBooleanResult()).isFalse();
@@ -98,17 +97,16 @@ public class JavascriptTest extends IntegrationFluentTest {
         assertThat(fluentJavascript.isStringResult()).isFalse();
 
         assertThat((Object) fluentJavascript.getListResult()).isEqualTo(fluentJavascript.getResult());
-        assertThat(fluentJavascript.getListResult()).containsExactly("string 1", "string 2", 5L, 12.12D, true, Lists.newArrayList("test 1", "test 2"));
+        assertThat(fluentJavascript.getListResult())
+                .containsExactly("string 1", "string 2", 5L, 12.12D, true, Lists.newArrayList("test 1", "test 2"));
     }
 
-
     @Test
-    public void should_executeAsyncScript_return_String() {
+    public void shouldExecuteAsyncScriptReturnString() {
         getDriver().manage().timeouts().setScriptTimeout(200, TimeUnit.MILLISECONDS);
 
         final Stopwatch stopwatch = Stopwatch.createStarted();
-        final FluentJavascript fluentJavascript = executeAsyncScript(
-                "window.setTimeout(arguments[arguments.length - 1], 100);");
+        final FluentJavascript fluentJavascript = executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 100);");
         assertThat(stopwatch.elapsed(TimeUnit.MILLISECONDS)).isGreaterThanOrEqualTo(100);
         assertThat(fluentJavascript.getResult()).isNull();
     }

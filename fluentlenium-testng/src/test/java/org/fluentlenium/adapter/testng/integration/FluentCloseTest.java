@@ -9,7 +9,7 @@ import static org.testng.Assert.fail;
 public class FluentCloseTest extends IntegrationFluentTestNg {
 
     @Test
-    public void when_default_shared_driver_then_driver_is_closed_after_method_call() {
+    public void whenDefaultSharedDriverThenDriverIsClosedAfterMethodCall() {
         goTo("about:blank");
     }
 

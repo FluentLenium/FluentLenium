@@ -20,14 +20,18 @@ public class LastElementLocator implements ElementLocator {
     @Override
     public WebElement findElement() {
         List<WebElement> elements = this.listLocator.findElements();
-        if (elements.size() == 0) return null;
+        if (elements.size() == 0) {
+            return null;
+        }
         return elements.get(elements.size() - 1);
     }
 
     @Override
     public List<WebElement> findElements() {
         WebElement element = findElement();
-        if (element == null) return Collections.emptyList();
+        if (element == null) {
+            return Collections.emptyList();
+        }
         return Arrays.asList(element);
     }
 

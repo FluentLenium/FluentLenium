@@ -31,7 +31,6 @@ public class FluentTestRunnerAdapterTest {
     @Mock
     private TestWebDriver driver;
 
-
     @Test
     public void testStartingFinish() {
         FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
