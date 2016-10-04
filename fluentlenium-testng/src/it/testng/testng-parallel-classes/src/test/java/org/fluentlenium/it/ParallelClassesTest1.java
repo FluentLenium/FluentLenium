@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Test1 extends FluentIntegTestNg {
+public class ParallelClassesTest1 extends FluentIntegTestNg {
     @Test
     public void test() {
         goTo(UrlUtil.getAbsoluteUrlFromFile("inputs.html"));

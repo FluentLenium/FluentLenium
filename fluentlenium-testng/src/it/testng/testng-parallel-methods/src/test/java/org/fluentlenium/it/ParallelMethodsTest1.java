@@ -4,55 +4,55 @@ import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Test2 extends FluentIntegTestNg {
+public class ParallelMethodsTest1 extends FluentIntegTestNg {
     @Test
-    public void test5() {
+    public void test() {
         goTo(UrlUtil.getAbsoluteUrlFromFile("inputs.html"));
-        el("input").fill().with("5");
+        el("input").fill().with("1");
         try {
             Thread.sleep(5000L);
         } catch (InterruptedException e) {
         }
 
-        assertThat(el("input").value()).isEqualTo("5");
+        assertThat(el("input").value()).isEqualTo("1");
     }
 
     @Test
-    public void test6() {
+    public void test2() {
         goTo(UrlUtil.getAbsoluteUrlFromFile("inputs.html"));
-        el("input").fill().with("6");
+        el("input").fill().with("2");
 
         try {
             Thread.sleep(4000L);
         } catch (InterruptedException e) {
         }
 
-        assertThat(el("input").value()).isEqualTo("6");
+        assertThat(el("input").value()).isEqualTo("2");
     }
 
     @Test
-    public void test7() {
+    public void test3() {
         goTo(UrlUtil.getAbsoluteUrlFromFile("inputs.html"));
-        el("input").fill().with("7");
+        el("input").fill().with("3");
 
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {
         }
 
-        assertThat(el("input").value()).isEqualTo("7");
+        assertThat(el("input").value()).isEqualTo("3");
     }
 
     @Test
-    public void test8() {
+    public void test4() {
         goTo(UrlUtil.getAbsoluteUrlFromFile("inputs.html"));
-        el("input").fill().with("8");
+        el("input").fill().with("4");
 
         try {
             Thread.sleep(2000L);
         } catch (InterruptedException e) {
         }
 
-        assertThat(el("input").value()).isEqualTo("8");
+        assertThat(el("input").value()).isEqualTo("4");
     }
 }
