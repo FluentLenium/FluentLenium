@@ -19,7 +19,7 @@ class FluentTestRule implements TestRule {
                     starting(description);
                     base.evaluate();
                     succeeded(description);
-                } catch (Throwable e) {
+                } catch (final Throwable e) {
                     failed(e, description);
                     throw e;
                 } finally {
@@ -32,28 +32,28 @@ class FluentTestRule implements TestRule {
     /**
      * Invoked when a test succeeds
      */
-    protected void succeeded(Description description) {
+    protected void succeeded(final Description description) {
         // Do nothing.
     }
 
     /**
      * Invoked when a test fails
      */
-    protected void failed(Throwable e, Description description) {
+    protected void failed(final Throwable e, final Description description) {
         // Do nothing.
     }
 
     /**
      * Invoked when a test is about to start
      */
-    protected void starting(Description description) {
+    protected void starting(final Description description) {
         // Do nothing.
     }
 
     /**
      * Invoked when a test method finishes (whether passing or failing)
      */
-    protected void finished(Description description) {
+    protected void finished(final Description description) {
         // Do nothing.
     }
 }

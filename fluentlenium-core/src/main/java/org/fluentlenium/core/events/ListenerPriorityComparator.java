@@ -7,14 +7,14 @@ import java.util.Comparator;
  */
 public class ListenerPriorityComparator implements Comparator<Object> {
     @Override
-    public int compare(Object o1, Object o2) {
-        int priority1 = getPriority(o1);
-        int priority2 = getPriority(o2);
+    public int compare(final Object o1, final Object o2) {
+        final int priority1 = getPriority(o1);
+        final int priority2 = getPriority(o2);
 
         return Integer.compare(priority2, priority1);
     }
 
-    public int getPriority(Object o) {
+    public int getPriority(final Object o) {
         if (o instanceof ListenerPriority) {
             return ((ListenerPriority) o).getPriority();
         }

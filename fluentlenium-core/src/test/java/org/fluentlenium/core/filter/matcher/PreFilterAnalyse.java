@@ -12,55 +12,55 @@ public class PreFilterAnalyse {
 
     @Test
     public void checkMatcherIsPreFilterElligible() {
-        AbstractMacher matcher = new EqualMatcher("toto");
+        final AbstractMacher matcher = new EqualMatcher("toto");
         assertThat(matcher.isPreFilter()).isTrue();
     }
 
     @Test
     public void checkMatcherIsNotPreFilterElligibleCausePattern() {
-        AbstractMacher matcher = new EqualMatcher(Pattern.compile("toto"));
+        final AbstractMacher matcher = new EqualMatcher(Pattern.compile("toto"));
         assertThat(matcher.isPreFilter()).isFalse();
     }
 
     @Test
     public void checkMatcherIsNotPreFilterElligibleCauseImpossible() {
-        AbstractMacher matcher = new NotContainsMatcher("toto");
+        final AbstractMacher matcher = new NotContainsMatcher("toto");
         assertThat(matcher.isPreFilter()).isFalse();
     }
 
     @Test
     public void checkFilterIsPreFilterElligible() {
-        Filter filter = new Filter(FilterType.ID, "1");
+        final Filter filter = new Filter(FilterType.ID, "1");
         assertThat(filter.isPreFilter()).isTrue();
     }
 
     @Test
     public void checkFilterIsNotPreFilterElligibleCauseMatcher() {
-        Filter filter = new Filter(FilterType.ID, new NotContainsMatcher("toto"));
+        final Filter filter = new Filter(FilterType.ID, new NotContainsMatcher("toto"));
         assertThat(filter.isPreFilter()).isFalse();
     }
 
     @Test
     public void checkFilterIsNotPreFilterElligibleCauseText() {
-        Filter filter = new Filter(FilterType.TEXT, "1");
+        final Filter filter = new Filter(FilterType.TEXT, "1");
         assertThat(filter.isPreFilter()).isFalse();
     }
 
     @Test
     public void checkFilterIsNotPreFilterElligibleCauseCustomAttributendMatcher() {
-        Filter filter = new Filter("ida", new NotContainsMatcher("toto"));
+        final Filter filter = new Filter("ida", new NotContainsMatcher("toto"));
         assertThat(filter.isPreFilter()).isFalse();
     }
 
     @Test
     public void checkFilterIsPreFilterElligibleCauseCustomAttributeMatcher() {
-        Filter filter = new Filter("ida", "1");
+        final Filter filter = new Filter("ida", "1");
         assertThat(filter.isPreFilter()).isTrue();
     }
 
     @Test
     public void checkFilterIsPreFilterElligibleCauseCustomAttribute() {
-        Filter filter = new Filter("id", "1");
+        final Filter filter = new Filter("id", "1");
         assertThat(filter.isPreFilter()).isTrue();
     }
 }

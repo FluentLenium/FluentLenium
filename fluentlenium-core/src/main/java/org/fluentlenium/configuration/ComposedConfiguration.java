@@ -17,15 +17,16 @@ public class ComposedConfiguration implements Configuration {
     @Delegate
     private final ConfigurationMutator writableConfiguration; // NOPMD SingularField
 
-    public ComposedConfiguration(ConfigurationMutator writableConfiguration, ConfigurationProperties... configurations) {
+    public ComposedConfiguration(final ConfigurationMutator writableConfiguration,
+            final ConfigurationProperties... configurations) {
         this.writableConfiguration = writableConfiguration;
         this.configurations = configurations;
     }
 
     @Override
     public Class<? extends ConfigurationFactory> getConfigurationFactory() {
-        for (ConfigurationProperties configuration : configurations) {
-            Class<? extends ConfigurationFactory> configurationFactory = configuration.getConfigurationFactory();
+        for (final ConfigurationProperties configuration : configurations) {
+            final Class<? extends ConfigurationFactory> configurationFactory = configuration.getConfigurationFactory();
             if (configurationFactory != null) {
                 return configurationFactory;
             }
@@ -35,8 +36,8 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public Class<? extends ConfigurationProperties> getConfigurationDefaults() {
-        for (ConfigurationProperties configuration : configurations) {
-            Class<? extends ConfigurationProperties> configurationDefaults = configuration.getConfigurationDefaults();
+        for (final ConfigurationProperties configuration : configurations) {
+            final Class<? extends ConfigurationProperties> configurationDefaults = configuration.getConfigurationDefaults();
             if (configurationDefaults != null) {
                 return configurationDefaults;
             }
@@ -46,8 +47,8 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public String getWebDriver() {
-        for (ConfigurationProperties configuration : configurations) {
-            String webDriver = configuration.getWebDriver();
+        for (final ConfigurationProperties configuration : configurations) {
+            final String webDriver = configuration.getWebDriver();
             if (webDriver != null) {
                 return webDriver;
             }
@@ -57,8 +58,8 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public String getRemoteUrl() {
-        for (ConfigurationProperties configuration : configurations) {
-            String remoteUrl = configuration.getRemoteUrl();
+        for (final ConfigurationProperties configuration : configurations) {
+            final String remoteUrl = configuration.getRemoteUrl();
             if (remoteUrl != null) {
                 return remoteUrl;
             }
@@ -68,8 +69,8 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public Capabilities getCapabilities() {
-        for (ConfigurationProperties configuration : configurations) {
-            Capabilities capabilities = configuration.getCapabilities();
+        for (final ConfigurationProperties configuration : configurations) {
+            final Capabilities capabilities = configuration.getCapabilities();
             if (capabilities != null) {
                 return capabilities;
             }
@@ -79,8 +80,8 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public DriverLifecycle getDriverLifecycle() {
-        for (ConfigurationProperties configuration : configurations) {
-            DriverLifecycle driverLifecycle = configuration.getDriverLifecycle();
+        for (final ConfigurationProperties configuration : configurations) {
+            final DriverLifecycle driverLifecycle = configuration.getDriverLifecycle();
             if (driverLifecycle != null) {
                 return driverLifecycle;
             }
@@ -90,8 +91,8 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public Boolean getDeleteCookies() {
-        for (ConfigurationProperties configuration : configurations) {
-            Boolean deleteCookies = configuration.getDeleteCookies();
+        for (final ConfigurationProperties configuration : configurations) {
+            final Boolean deleteCookies = configuration.getDeleteCookies();
             if (deleteCookies != null) {
                 return deleteCookies;
             }
@@ -101,8 +102,8 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public String getBaseUrl() {
-        for (ConfigurationProperties configuration : configurations) {
-            String baseUrl = configuration.getBaseUrl();
+        for (final ConfigurationProperties configuration : configurations) {
+            final String baseUrl = configuration.getBaseUrl();
             if (baseUrl != null) {
                 return baseUrl;
             }
@@ -112,8 +113,8 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public Long getPageLoadTimeout() {
-        for (ConfigurationProperties configuration : configurations) {
-            Long pageLoadTimeout = configuration.getPageLoadTimeout();
+        for (final ConfigurationProperties configuration : configurations) {
+            final Long pageLoadTimeout = configuration.getPageLoadTimeout();
             if (pageLoadTimeout != null) {
                 return pageLoadTimeout;
             }
@@ -123,8 +124,8 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public Long getImplicitlyWait() {
-        for (ConfigurationProperties configuration : configurations) {
-            Long implicitlyWait = configuration.getImplicitlyWait();
+        for (final ConfigurationProperties configuration : configurations) {
+            final Long implicitlyWait = configuration.getImplicitlyWait();
             if (implicitlyWait != null) {
                 return implicitlyWait;
             }
@@ -134,8 +135,8 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public Long getScriptTimeout() {
-        for (ConfigurationProperties configuration : configurations) {
-            Long scriptTimeout = configuration.getScriptTimeout();
+        for (final ConfigurationProperties configuration : configurations) {
+            final Long scriptTimeout = configuration.getScriptTimeout();
             if (scriptTimeout != null) {
                 return scriptTimeout;
             }
@@ -145,8 +146,8 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public Boolean getEventsEnabled() {
-        for (ConfigurationProperties configuration : configurations) {
-            Boolean eventsEnabled = configuration.getEventsEnabled();
+        for (final ConfigurationProperties configuration : configurations) {
+            final Boolean eventsEnabled = configuration.getEventsEnabled();
             if (eventsEnabled != null) {
                 return eventsEnabled;
             }
@@ -156,8 +157,8 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public String getScreenshotPath() {
-        for (ConfigurationProperties configuration : configurations) {
-            String screenshotPath = configuration.getScreenshotPath();
+        for (final ConfigurationProperties configuration : configurations) {
+            final String screenshotPath = configuration.getScreenshotPath();
             if (screenshotPath != null) {
                 return screenshotPath;
             }
@@ -167,8 +168,8 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public String getHtmlDumpPath() {
-        for (ConfigurationProperties configuration : configurations) {
-            String htmlDumpPath = configuration.getHtmlDumpPath();
+        for (final ConfigurationProperties configuration : configurations) {
+            final String htmlDumpPath = configuration.getHtmlDumpPath();
             if (htmlDumpPath != null) {
                 return htmlDumpPath;
             }
@@ -178,8 +179,8 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public TriggerMode getScreenshotMode() {
-        for (ConfigurationProperties configuration : configurations) {
-            TriggerMode screenshotMode = configuration.getScreenshotMode();
+        for (final ConfigurationProperties configuration : configurations) {
+            final TriggerMode screenshotMode = configuration.getScreenshotMode();
             if (screenshotMode != null) {
                 return screenshotMode;
             }
@@ -189,8 +190,8 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public TriggerMode getHtmlDumpMode() {
-        for (ConfigurationProperties configuration : configurations) {
-            TriggerMode htmlDumpMode = configuration.getHtmlDumpMode();
+        for (final ConfigurationProperties configuration : configurations) {
+            final TriggerMode htmlDumpMode = configuration.getHtmlDumpMode();
             if (htmlDumpMode != null) {
                 return htmlDumpMode;
             }

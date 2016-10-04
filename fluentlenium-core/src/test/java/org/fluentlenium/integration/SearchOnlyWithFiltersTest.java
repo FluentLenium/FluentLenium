@@ -17,28 +17,28 @@ public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     @Test
     public void checkWithNameWorks() {
         goTo(DEFAULT_URL);
-        FluentList list = find(withName("name"));
+        final FluentList list = find(withName("name"));
         assertThat(list.ids()).containsOnly("id");
     }
 
     @Test
     public void checkWithTextWorks() {
         goTo(DEFAULT_URL);
-        FluentList list = find(withText("Pharmacy"));
+        final FluentList list = find(withText("Pharmacy"));
         assertThat(list.ids()).containsOnly("location");
     }
 
     @Test
     public void checkWithTextStartsWithWorks() {
         goTo(DEFAULT_URL);
-        FluentList list = find(withText().startsWith("Pharmac"));
+        final FluentList list = find(withText().startsWith("Pharmac"));
         assertThat(list.ids()).containsOnly("location");
     }
 
     @Test
     public void checkIndexWorks() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = find(withClass("small")).index(1);
+        final FluentWebElement element = find(withClass("small")).index(1);
         assertThat(element.loaded()).isFalse();
         assertThat(element.id()).isEqualTo("id2");
     }
@@ -46,28 +46,28 @@ public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     @Test
     public void checkFindFirstWorks() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = el(withClass("small"));
+        final FluentWebElement element = el(withClass("small"));
         assertThat(element.id()).isEqualTo("id");
     }
 
     @Test
     public void checkMultipleWithWorks() {
         goTo(DEFAULT_URL);
-        FluentList list = find(withClass("small"), withName("name"));
+        final FluentList list = find(withClass("small"), withName("name"));
         assertThat(list.ids()).containsOnly("id");
     }
 
     @Test
     public void checkDollarWorks() {
         goTo(DEFAULT_URL);
-        FluentList list = $(withName("name"));
+        final FluentList list = $(withName("name"));
         assertThat(list.ids()).containsOnly("id");
     }
 
     @Test
     public void checkDollarAndIndexWorks() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = $(withClass("small")).index(1);
+        final FluentWebElement element = $(withClass("small")).index(1);
         assertThat(element.id()).isEqualTo("id2");
     }
 
@@ -81,7 +81,7 @@ public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     @Test
     public void checkFillSelectWorks() {
         goTo(DEFAULT_URL);
-        Select select = new Select(el("#select").getElement());
+        final Select select = new Select(el("#select").getElement());
         assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 1");
         $(withId("select")).fillSelect().withValue("value-3");
         assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 3");
@@ -118,42 +118,42 @@ public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     @Test
     public void checkFindChildFindWorks() {
         goTo(DEFAULT_URL);
-        FluentList list = find(withClass("parent")).find(withClass("child"));
+        final FluentList list = find(withClass("parent")).find(withClass("child"));
         assertThat(list.texts()).containsOnly("Alex");
     }
 
     @Test
     public void checkFindChildFindWithIndexWorks() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = find(withClass("parent")).find(withClass("child")).index(0);
+        final FluentWebElement element = find(withClass("parent")).find(withClass("child")).index(0);
         assertThat(element.text()).isEqualTo("Alex");
     }
 
     @Test
     public void checkFindChildFindFirstWorks() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = find(withClass("parent")).el(withClass("child"));
+        final FluentWebElement element = find(withClass("parent")).el(withClass("child"));
         assertThat(element.text()).isEqualTo("Alex");
     }
 
     @Test
     public void checkFindFirstChildFindWorks() {
         goTo(DEFAULT_URL);
-        FluentList list = el(withClass("parent")).find(withClass("child"));
+        final FluentList list = el(withClass("parent")).find(withClass("child"));
         assertThat(list.texts()).containsOnly("Alex");
     }
 
     @Test
     public void checkFindFirstChildFindWithIndexWorks() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = el(withClass("parent")).find(withClass("child")).index(0);
+        final FluentWebElement element = el(withClass("parent")).find(withClass("child")).index(0);
         assertThat(element.text()).isEqualTo("Alex");
     }
 
     @Test
     public void checkFindFirstChildFindFirstWorks() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = el(withClass("parent")).el(withClass("child"));
+        final FluentWebElement element = el(withClass("parent")).el(withClass("child"));
         assertThat(element.text()).isEqualTo("Alex");
     }
 }

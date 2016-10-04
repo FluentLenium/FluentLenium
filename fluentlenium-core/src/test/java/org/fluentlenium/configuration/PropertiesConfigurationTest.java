@@ -21,7 +21,7 @@ public class PropertiesConfigurationTest extends AbstractPropertiesConfiguration
     }
 
     @Override
-    protected void mockProperty(String propertyName, Object propertyValue) {
+    protected void mockProperty(final String propertyName, final Object propertyValue) {
         if (propertyValue == null) {
             properties.remove(propertyName);
         } else {

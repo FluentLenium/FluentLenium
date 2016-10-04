@@ -4,7 +4,7 @@ public abstract class AbstractAnnotationListener implements ListenerPriority, Li
     private final Object container;
     private final int priority;
 
-    public AbstractAnnotationListener(Object container, int priority) {
+    public AbstractAnnotationListener(final Object container, final int priority) {
         this.container = container;
         this.priority = priority;
     }

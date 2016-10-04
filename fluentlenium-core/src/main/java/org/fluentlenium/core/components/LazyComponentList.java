@@ -27,17 +27,18 @@ public class LazyComponentList<T> implements List<T>, WrapsElements, LazyCompone
     @Getter(lazy = true)
     private final List<T> list = transformList();
 
-    public LazyComponentList(ComponentInstantiator instantiator, Class<T> componentClass, List<WebElement> elements) {
+    public LazyComponentList(final ComponentInstantiator instantiator, final Class<T> componentClass,
+            final List<WebElement> elements) {
         this.componentClass = componentClass;
         this.instantiator = instantiator;
         this.elements = elements;
     }
 
     protected List<T> transformList() {
-        List<T> components = new ArrayList<>();
-        Map<WebElement, T> componentMap = new LinkedHashMap<>();
-        for (WebElement element : this.elements) {
-            T component = this.instantiator.newComponent(componentClass, element);
+        final List<T> components = new ArrayList<>();
+        final Map<WebElement, T> componentMap = new LinkedHashMap<>();
+        for (final WebElement element : this.elements) {
+            final T component = this.instantiator.newComponent(componentClass, element);
             components.add(component);
             componentMap.put(element, component);
         }
@@ -45,19 +46,19 @@ public class LazyComponentList<T> implements List<T>, WrapsElements, LazyCompone
         return components;
     }
 
-    protected void fireLazyComponentsInitialized(Map<WebElement, T> componentMap) {
-        for (LazyComponentsListener<T> listener : lazyComponentsListeners) {
+    protected void fireLazyComponentsInitialized(final Map<WebElement, T> componentMap) {
+        for (final LazyComponentsListener<T> listener : lazyComponentsListeners) {
             listener.lazyComponentsInitialized(componentMap);
         }
     }
 
     @Override
-    public boolean addLazyComponentsListener(LazyComponentsListener<T> listener) {
+    public boolean addLazyComponentsListener(final LazyComponentsListener<T> listener) {
         return lazyComponentsListeners.add(listener);
     }
 
     @Override
-    public boolean removeLazyComponentsListener(LazyComponentsListener<T> listener) {
+    public boolean removeLazyComponentsListener(final LazyComponentsListener<T> listener) {
         return lazyComponentsListeners.remove(listener);
     }
 

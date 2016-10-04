@@ -15,24 +15,24 @@ public class DefaultHookChainBuilder implements HookChainBuilder {
     private final FluentControl fluentControl;
     private final ComponentInstantiator instantiator;
 
-    public DefaultHookChainBuilder(FluentControl fluentControl, ComponentInstantiator instantiator) {
+    public DefaultHookChainBuilder(final FluentControl fluentControl, final ComponentInstantiator instantiator) {
         this.fluentControl = fluentControl;
         this.instantiator = instantiator;
     }
 
     @Override
-    public List<FluentHook> build(Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locator,
-            Supplier<String> toStringSupplier, List<HookDefinition<?>> hooks) {
-        List<FluentHook> chain = new ArrayList<>();
+    public List<FluentHook> build(final Supplier<WebElement> elementSupplier, final Supplier<ElementLocator> locator,
+            final Supplier<String> toStringSupplier, final List<HookDefinition<?>> hooks) {
+        final List<FluentHook> chain = new ArrayList<>();
 
         Supplier<WebElement> currentSupplier = elementSupplier;
 
-        for (HookDefinition<?> hook : hooks) {
-            FluentHook<?> newObject;
+        for (final HookDefinition<?> hook : hooks) {
+            final FluentHook<?> newObject;
             try {
                 newObject = newInstance(hook.getHookClass(), fluentControl, instantiator, currentSupplier, locator,
                         toStringSupplier, hook.getOptions());
-            } catch (NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 throw new HookException(e);
             } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
                 throw new HookException(e);
@@ -52,9 +52,9 @@ public class DefaultHookChainBuilder implements HookChainBuilder {
         return chain;
     }
 
-    protected FluentHook<?> newInstance(Class<? extends FluentHook<?>> hookClass, FluentControl fluentControl,
-            ComponentInstantiator instantiator, Supplier<WebElement> currentSupplier, Supplier<ElementLocator> locator,
-            Supplier<String> toStringSupplier, Object options)
+    protected FluentHook<?> newInstance(final Class<? extends FluentHook<?>> hookClass, final FluentControl fluentControl,
+            final ComponentInstantiator instantiator, final Supplier<WebElement> currentSupplier,
+            final Supplier<ElementLocator> locator, final Supplier<String> toStringSupplier, final Object options)
             throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return ReflectionUtils
                 .newInstance(hookClass, fluentControl, instantiator, currentSupplier, locator, toStringSupplier, options);

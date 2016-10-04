@@ -15,13 +15,13 @@ public class InjectionAnnotations extends AbstractAnnotations {
     private final Annotations fieldAnnotations;
     private final LabelAnnotations labelFieldAnnotations;
 
-    private static boolean isList(Field field) {
+    private static boolean isList(final Field field) {
         return List.class.isAssignableFrom(field.getType());
     }
 
-    private static Class<?> getEffectiveClass(Field field) {
+    private static Class<?> getEffectiveClass(final Field field) {
         if (isList(field)) {
-            Class<?> effectiveClass = ReflectionUtils.getFirstGenericType(field);
+            final Class<?> effectiveClass = ReflectionUtils.getFirstGenericType(field);
             if (effectiveClass != null) {
                 return effectiveClass;
             }
@@ -29,7 +29,7 @@ public class InjectionAnnotations extends AbstractAnnotations {
         return field.getType();
     }
 
-    public InjectionAnnotations(Field field) {
+    public InjectionAnnotations(final Field field) {
         classAnnotations = new ClassAnnotations(getEffectiveClass(field));
         fieldAnnotations = new Annotations(field);
         labelFieldAnnotations = new LabelAnnotations(field);
@@ -37,8 +37,8 @@ public class InjectionAnnotations extends AbstractAnnotations {
 
     @Override
     public By buildBy() {
-        By fieldBy = fieldAnnotations.buildBy();
-        By classBy = classAnnotations.buildBy();
+        final By fieldBy = fieldAnnotations.buildBy();
+        final By classBy = classAnnotations.buildBy();
         if (classBy != null && fieldBy instanceof ByIdOrName) {
             return classBy;
         }

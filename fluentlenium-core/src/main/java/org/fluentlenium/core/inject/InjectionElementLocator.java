@@ -32,7 +32,8 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
      * @param annotations   InjectionAnnotations class implementation
      * @param isFirst       Is this locator used to retrieve list or single element.
      */
-    public InjectionElementLocator(SearchContext searchContext, InjectionAnnotations annotations, boolean isFirst) {
+    public InjectionElementLocator(final SearchContext searchContext, final InjectionAnnotations annotations,
+            final boolean isFirst) {
         this.searchContext = searchContext;
         this.shouldCache = annotations.isLookupCached();
         this.by = annotations.buildBy();
@@ -62,7 +63,7 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
             return cachedElement;
         }
 
-        WebElement element = searchContext.findElement(by);
+        final WebElement element = searchContext.findElement(by);
         if (shouldCache) {
             cachedElement = element;
         }
@@ -80,7 +81,7 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
             return cachedElementList;
         }
 
-        List<WebElement> elements = searchContext.findElements(by);
+        final List<WebElement> elements = searchContext.findElements(by);
         if (shouldCache) {
             cachedElementList = elements;
         }

@@ -12,7 +12,7 @@ import java.util.List;
 public class FluentJavascript {
     private final Object result;
 
-    public FluentJavascript(JavascriptExecutor executor, boolean async, String script, Object... args) {
+    public FluentJavascript(final JavascriptExecutor executor, final boolean async, final String script, final Object... args) {
         if (async) {
             this.result = executor.executeAsyncScript(script, args);
         } else {
@@ -138,7 +138,7 @@ public class FluentJavascript {
      * @return the result of javascript execution cast as a a typed {@link List}
      * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
      */
-    public <T> List<T> getListResult(Class<T> listType) {
+    public <T> List<T> getListResult(final Class<T> listType) {
         return (List<T>) result;
     }
 }

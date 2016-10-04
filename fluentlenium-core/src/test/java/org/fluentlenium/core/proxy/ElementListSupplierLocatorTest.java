@@ -27,7 +27,7 @@ public class ElementListSupplierLocatorTest {
 
     @Test
     public void testWithMockElements() {
-        ElementListSupplierLocator locator = new ElementListSupplierLocator(
+        final ElementListSupplierLocator locator = new ElementListSupplierLocator(
                 Arrays.asList(element1, element2, element3, element4));
 
         Assertions.assertThat(locator.findElement()).isSameAs(element1);
@@ -36,7 +36,7 @@ public class ElementListSupplierLocatorTest {
 
     @Test
     public void testWithNoElement() {
-        ElementListSupplierLocator locator = new ElementListSupplierLocator(new Supplier<List<WebElement>>() {
+        final ElementListSupplierLocator locator = new ElementListSupplierLocator(new Supplier<List<WebElement>>() {
             @Override
             public List<WebElement> get() {
                 return Arrays.asList();

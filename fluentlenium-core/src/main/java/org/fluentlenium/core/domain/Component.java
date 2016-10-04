@@ -11,7 +11,7 @@ public class Component {
     protected FluentControl control;
     protected ComponentInstantiator instantiator;
 
-    public Component(WebElement webElement, FluentControl control, ComponentInstantiator instantiator) {
+    public Component(final WebElement webElement, final FluentControl control, final ComponentInstantiator instantiator) {
         this.webElement = webElement;
         this.control = control;
         this.instantiator = instantiator;

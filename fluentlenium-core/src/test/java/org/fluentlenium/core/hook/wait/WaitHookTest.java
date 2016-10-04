@@ -52,7 +52,7 @@ public class WaitHookTest {
         when(element.isEnabled()).thenReturn(true);
         when(element.isDisplayed()).thenReturn(true);
 
-        WaitHookOptions waitHookOptions = new WaitHookOptions();
+        final WaitHookOptions waitHookOptions = new WaitHookOptions();
         waitHookOptions.setAtMost(100L);
         waitHookOptions.setTimeUnit(TimeUnit.MILLISECONDS);
         waitHookOptions.setPollingEvery(10L);
@@ -83,29 +83,29 @@ public class WaitHookTest {
 
     @Test
     public void testElementFound() {
-        WebElement childElement = mock(WebElement.class);
+        final WebElement childElement = mock(WebElement.class);
 
         when(locator.findElement()).thenReturn(childElement);
 
-        WebElement found = waitHook.findElement();
+        final WebElement found = waitHook.findElement();
         assertThat(found).isSameAs(childElement);
     }
 
     @Test
     public void testElementListFound() {
-        WebElement element1 = mock(WebElement.class);
-        WebElement element2 = mock(WebElement.class);
-        WebElement element3 = mock(WebElement.class);
+        final WebElement element1 = mock(WebElement.class);
+        final WebElement element2 = mock(WebElement.class);
+        final WebElement element3 = mock(WebElement.class);
 
         when(locator.findElements()).thenReturn(Arrays.asList(element1, element2, element3));
 
-        List<WebElement> found = waitHook.findElements();
+        final List<WebElement> found = waitHook.findElements();
         assertThat(found).containsExactly(element1, element2, element3);
     }
 
     @Test
     public void testElementClick() {
-        WebElement childElement = mock(WebElement.class);
+        final WebElement childElement = mock(WebElement.class);
 
         when(locator.findElement()).thenReturn(childElement);
 
@@ -115,7 +115,7 @@ public class WaitHookTest {
 
     @Test
     public void testElementSendKeys() {
-        WebElement childElement = mock(WebElement.class);
+        final WebElement childElement = mock(WebElement.class);
 
         when(locator.findElement()).thenReturn(childElement);
 
@@ -125,7 +125,7 @@ public class WaitHookTest {
 
     @Test
     public void testElementSubmit() {
-        WebElement childElement = mock(WebElement.class);
+        final WebElement childElement = mock(WebElement.class);
 
         when(locator.findElement()).thenReturn(childElement);
 
@@ -135,7 +135,7 @@ public class WaitHookTest {
 
     @Test
     public void testElementClear() {
-        WebElement childElement = mock(WebElement.class);
+        final WebElement childElement = mock(WebElement.class);
 
         when(locator.findElement()).thenReturn(childElement);
 
@@ -145,7 +145,7 @@ public class WaitHookTest {
 
     @Test
     public void testDefaultOptions() {
-        WaitHook defaultWaitHook = new WaitHook(fluentControl, instantiator, Suppliers.ofInstance(element),
+        final WaitHook defaultWaitHook = new WaitHook(fluentControl, instantiator, Suppliers.ofInstance(element),
                 Suppliers.ofInstance(locator), Suppliers.ofInstance("toString"), null);
 
         assertThat(defaultWaitHook.getOptions()).isEqualToComparingFieldByField(new WaitHookOptions());

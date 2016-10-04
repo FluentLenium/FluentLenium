@@ -7,17 +7,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class IntegerConditionsTest {
 
-    private void numberImpl(int value) {
-        IntegerConditions condition = new IntegerConditionsImpl(value);
+    private void numberImpl(final int value) {
+        final IntegerConditions condition = new IntegerConditionsImpl(value);
 
         assertConditions(condition, value);
         assertNotConditions(condition.not(), value);
     }
 
-    static void assertConditions(IntegerConditions conditions, final int value) { // NOPMD CommentDefaultAccessModifier
+    static void assertConditions(final IntegerConditions conditions, final int value) { // NOPMD CommentDefaultAccessModifier
         assertThat(conditions.verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(Integer input) {
+            public boolean apply(final Integer input) {
                 return input == value;
             }
         })).isTrue();
@@ -43,10 +43,10 @@ public class IntegerConditionsTest {
         assertThat(conditions.lessThan(value + 1)).isTrue();
     }
 
-    static void assertNotConditions(IntegerConditions conditions, final int value) { // NOPMD CommentDefaultAccessModifier
+    static void assertNotConditions(final IntegerConditions conditions, final int value) { // NOPMD CommentDefaultAccessModifier
         assertThat(conditions.verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(Integer input) {
+            public boolean apply(final Integer input) {
                 return input == value;
             }
         })).isFalse();

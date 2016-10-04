@@ -13,30 +13,30 @@ public class MessageProxyTest {
 
     @Test
     public void testElementContains() {
-        FluentConditions builder = MessageProxy.builder(FluentConditions.class, "element");
+        final FluentConditions builder = MessageProxy.builder(FluentConditions.class, "element");
         builder.name().contains("test");
 
-        String message = MessageProxy.message(builder);
+        final String message = MessageProxy.message(builder);
         Assertions.assertThat(message).isEqualTo("element name does not contain \"test\"");
     }
 
     @Test
     public void testElementNotContains() {
-        FluentConditions builder = MessageProxy.builder(FluentConditions.class, "element");
+        final FluentConditions builder = MessageProxy.builder(FluentConditions.class, "element");
         builder.name().not().contains("test");
 
-        String message = MessageProxy.message(builder);
+        final String message = MessageProxy.message(builder);
         Assertions.assertThat(message).isEqualTo("element name contains \"test\"");
     }
 
     @Test
     public void testStringContainsInstance() {
-        StringConditionsImpl test = spy(new StringConditionsImpl("test"));
+        final StringConditionsImpl test = spy(new StringConditionsImpl("test"));
 
-        StringConditions builder = MessageProxy.wrap(StringConditions.class, test, "string");
+        final StringConditions builder = MessageProxy.wrap(StringConditions.class, test, "string");
         builder.contains("es");
 
-        String message = MessageProxy.message(builder);
+        final String message = MessageProxy.message(builder);
         Assertions.assertThat(message).isEqualTo("string does not contain \"es\"");
 
         verify(test).contains("es");

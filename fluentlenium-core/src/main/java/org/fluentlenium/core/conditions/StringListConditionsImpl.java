@@ -10,8 +10,9 @@ import java.util.regex.Pattern;
  * Conditions implement for string lists of elements.
  */
 public class StringListConditionsImpl extends BaseObjectListConditions<String, StringConditions> implements StringConditions {
-    public StringListConditionsImpl(Conditions<FluentWebElement> listConditions, Function<FluentWebElement, String> stringGetter,
-                                    Function<FluentWebElement, StringConditions> conditionsGetter) {
+    public StringListConditionsImpl(final Conditions<FluentWebElement> listConditions,
+            final Function<FluentWebElement, String> stringGetter,
+            final Function<FluentWebElement, StringConditions> conditionsGetter) {
         super(listConditions, stringGetter, conditionsGetter);
     }
 
@@ -24,7 +25,7 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
     public boolean contains(final CharSequence s) {
         return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).contains(s);
             }
         });
@@ -34,7 +35,7 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
     public boolean startsWith(final String prefix) {
         return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).startsWith(prefix);
             }
         });
@@ -44,7 +45,7 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
     public boolean endsWith(final String suffix) {
         return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).endsWith(suffix);
             }
         });
@@ -54,7 +55,7 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
     public boolean equalTo(final String anotherString) {
         return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).equalTo(anotherString);
             }
         });
@@ -64,7 +65,7 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
     public boolean equalToIgnoreCase(final String anotherString) {
         return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).equalToIgnoreCase(anotherString);
             }
         });
@@ -74,7 +75,7 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
     public boolean matches(final String regex) {
         return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).matches(regex);
             }
         });
@@ -84,7 +85,7 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
     public boolean matches(final Pattern pattern) {
         return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).matches(pattern);
             }
         });

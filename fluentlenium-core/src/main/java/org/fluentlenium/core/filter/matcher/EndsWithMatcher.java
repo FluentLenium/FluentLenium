@@ -4,11 +4,11 @@ import java.util.regex.Pattern;
 
 public class EndsWithMatcher extends AbstractMacher {
 
-    public EndsWithMatcher(String value) {
+    public EndsWithMatcher(final String value) {
         super(value);
     }
 
-    public EndsWithMatcher(Pattern value) {
+    public EndsWithMatcher(final Pattern value) {
         super(value);
     }
 
@@ -18,7 +18,7 @@ public class EndsWithMatcher extends AbstractMacher {
     }
 
     @Override
-    public boolean isSatisfiedBy(String o) {
+    public boolean isSatisfiedBy(final String o) {
         return CalculateService.endsWith(getPattern(), getValue(), o);
     }
 

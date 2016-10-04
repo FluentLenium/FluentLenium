@@ -56,14 +56,15 @@ public class FillTest {
         reset(driver, element1, element2, element3, element4);
     }
 
-    public FluentWebElement el(WebElement element) {
+    public FluentWebElement el(final WebElement element) {
         return new FluentWebElement(element, fluentAdapter, new DefaultComponentInstantiator(fluentAdapter));
     }
 
     @Test
     public void testFillList() {
-        FluentList<FluentWebElement> list = instantiator.asFluentList(Arrays.asList(element1, element2, element3, element4));
-        Fill fill = new Fill(list);
+        final FluentList<FluentWebElement> list = instantiator
+                .asFluentList(Arrays.asList(element1, element2, element3, element4));
+        final Fill fill = new Fill(list);
 
         when(element2.isDisplayed()).thenReturn(true);
         when(element2.isEnabled()).thenReturn(true);
@@ -88,7 +89,7 @@ public class FillTest {
         when(element1.isDisplayed()).thenReturn(true);
         when(element1.isEnabled()).thenReturn(true);
 
-        Fill fill = new Fill(el(element1));
+        final Fill fill = new Fill(el(element1));
 
         verify(driver, never()).findElement(any(By.class));
 

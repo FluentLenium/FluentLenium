@@ -11,7 +11,7 @@ public interface SharedMutator {
         private final String testName;
         private final DriverLifecycle driverLifecycle;
 
-        public EffectiveParameters(Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
+        public EffectiveParameters(final Class<T> testClass, final String testName, final DriverLifecycle driverLifecycle) {
             this.testClass = testClass;
             this.testName = testName;
             this.driverLifecycle = driverLifecycle;

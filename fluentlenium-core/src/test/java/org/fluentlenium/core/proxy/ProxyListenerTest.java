@@ -37,7 +37,7 @@ public class ProxyListenerTest {
 
     @Test
     public void testElement() {
-        WebElement proxy = LocatorProxies.createWebElement(new Supplier<WebElement>() {
+        final WebElement proxy = LocatorProxies.createWebElement(new Supplier<WebElement>() {
             @Override
             public WebElement get() {
                 return element1;
@@ -65,15 +65,15 @@ public class ProxyListenerTest {
     private static class ElementMatcher extends CustomMatcher<List<WebElement>> {
         private final List<WebElement> expected;
 
-        ElementMatcher(List<WebElement> expected) {
+        ElementMatcher(final List<WebElement> expected) {
             super("matches element");
             this.expected = expected;
         }
 
         @Override
-        public boolean matches(Object item) {
-            List<WebElement> unwrapped = new ArrayList<>();
-            for (Object o : (Iterable) item) {
+        public boolean matches(final Object item) {
+            final List<WebElement> unwrapped = new ArrayList<>();
+            for (final Object o : (Iterable) item) {
                 unwrapped.add(((WrapsElement) o).getWrappedElement());
             }
             return unwrapped.equals(expected);
@@ -82,7 +82,7 @@ public class ProxyListenerTest {
 
     @Test
     public void testElementList() {
-        List<WebElement> proxy = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
+        final List<WebElement> proxy = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
             @Override
             public List<WebElement> get() {
                 return Arrays.asList(element1, element2, element3);

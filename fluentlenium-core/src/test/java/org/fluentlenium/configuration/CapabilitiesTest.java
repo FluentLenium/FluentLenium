@@ -18,24 +18,24 @@ public class CapabilitiesTest {
 
     @Test
     public void testDesiredCapabilities() {
-        CapabilitiesFactory firefox = capabilities.get("DesiredCapabilities.firefox");
+        final CapabilitiesFactory firefox = capabilities.get("DesiredCapabilities.firefox");
         assertThat(firefox).isExactlyInstanceOf(MethodInvocationReflectionFactory.class);
     }
 
     @Test
     public void testNoDefault() throws NoSuchFieldException, IllegalAccessException {
-        Field factoriesField = AbstractFactoryRegistryImpl.class.getDeclaredField("factories");
+        final Field factoriesField = AbstractFactoryRegistryImpl.class.getDeclaredField("factories");
         factoriesField.setAccessible(true);
-        Map<String, Object> factories = (Map<String, Object>) factoriesField.get(capabilities);
+        final Map<String, Object> factories = (Map<String, Object>) factoriesField.get(capabilities);
         factories.remove("test-capabilities-factory");
 
-        CapabilitiesFactory webDriverFactory = capabilities.get(null);
+        final CapabilitiesFactory webDriverFactory = capabilities.get(null);
         assertThat(webDriverFactory).isNull();
     }
 
     @Test
     public void testDefault() throws NoSuchFieldException, IllegalAccessException {
-        CapabilitiesFactory webDriverFactory = capabilities.get(null);
+        final CapabilitiesFactory webDriverFactory = capabilities.get(null);
         assertThat(webDriverFactory).isExactlyInstanceOf(TestCapabilitiesFactory.class);
     }
 

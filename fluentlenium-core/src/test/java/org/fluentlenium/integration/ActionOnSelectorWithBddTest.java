@@ -19,7 +19,7 @@ public class ActionOnSelectorWithBddTest extends IntegrationFluentTest {
     @Test
     public void checkFillSelectAction() {
         goTo(DEFAULT_URL);
-        Select select = new Select(el("#select").getElement());
+        final Select select = new Select(el("#select").getElement());
         $("#select").fillSelect().withValue("value-1"); // by value
         assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 1");
         $("#select").fillSelect().withIndex(1); // by index
@@ -31,8 +31,8 @@ public class ActionOnSelectorWithBddTest extends IntegrationFluentTest {
     @Test
     public void checkFillSelectActionOnSelectElement() {
         goTo(DEFAULT_URL);
-        FluentWebElement element = el("#select");
-        Select select = new Select(element.getElement());
+        final FluentWebElement element = el("#select");
+        final Select select = new Select(element.getElement());
         element.fillSelect().withValue("value-1"); // by value
         assertThat(select.getFirstSelectedOption().getText()).isEqualTo("value 1");
         element.fillSelect().withIndex(1); // by index

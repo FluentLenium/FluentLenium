@@ -15,7 +15,7 @@ public class DefaultFluentControlContainer implements FluentControlContainer {
     }
 
     @Override
-    public void setFluentControl(FluentControl fluentControl) {
+    public void setFluentControl(final FluentControl fluentControl) {
         this.fluentControl = fluentControl;
     }
 }

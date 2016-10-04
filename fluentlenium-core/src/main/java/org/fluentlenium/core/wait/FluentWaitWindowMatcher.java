@@ -8,15 +8,15 @@ public class FluentWaitWindowMatcher extends BaseWaitMatcher {
     private final FluentWait wait;
     private final String windowName;
 
-    protected FluentWaitWindowMatcher(FluentWait wait, String windowName) {
+    protected FluentWaitWindowMatcher(final FluentWait wait, final String windowName) {
         this.wait = wait;
         this.windowName = windowName;
     }
 
     public boolean isDisplayed() {
-        Predicate<FluentControl> isDisplayed = new Predicate<FluentControl>() {
+        final Predicate<FluentControl> isDisplayed = new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentControl fluent) {
+            public boolean apply(final FluentControl fluent) {
                 return fluent.getDriver().getWindowHandles().contains(windowName);
             }
         };
@@ -26,9 +26,9 @@ public class FluentWaitWindowMatcher extends BaseWaitMatcher {
     }
 
     public boolean isNotDisplayed() {
-        Predicate<FluentControl> isNotDisplayed = new Predicate<FluentControl>() {
+        final Predicate<FluentControl> isNotDisplayed = new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentControl fluent) {
+            public boolean apply(final FluentControl fluent) {
                 return !fluent.getDriver().getWindowHandles().contains(windowName);
             }
         };

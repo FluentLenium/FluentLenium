@@ -41,7 +41,7 @@ public class IndexSupplierLocatorTest {
 
     @Test
     public void testFirstElementLocator() {
-        ElementLocator locator = new FirstElementLocator(elementLocator);
+        final ElementLocator locator = new FirstElementLocator(elementLocator);
 
         Assertions.assertThat(locator.findElement()).isSameAs(element1);
         Assertions.assertThat(locator.findElements()).containsExactly(element1);
@@ -49,7 +49,7 @@ public class IndexSupplierLocatorTest {
 
     @Test
     public void testFirstElementLocatorEmpty() {
-        ElementLocator locator = new FirstElementLocator(emptyLocator);
+        final ElementLocator locator = new FirstElementLocator(emptyLocator);
 
         Assertions.assertThat(locator.findElement()).isNull();
         Assertions.assertThat(locator.findElements()).isEmpty();
@@ -57,7 +57,7 @@ public class IndexSupplierLocatorTest {
 
     @Test
     public void testLastElementLocator() {
-        ElementLocator locator = new LastElementLocator(elementLocator);
+        final ElementLocator locator = new LastElementLocator(elementLocator);
 
         Assertions.assertThat(locator.findElement()).isSameAs(element4);
         Assertions.assertThat(locator.findElements()).containsExactly(element4);
@@ -65,7 +65,7 @@ public class IndexSupplierLocatorTest {
 
     @Test
     public void testLastElementLocatorEmpty() {
-        ElementLocator locator = new LastElementLocator(emptyLocator);
+        final ElementLocator locator = new LastElementLocator(emptyLocator);
 
         Assertions.assertThat(locator.findElement()).isNull();
         Assertions.assertThat(locator.findElements()).isEmpty();
@@ -73,7 +73,7 @@ public class IndexSupplierLocatorTest {
 
     @Test
     public void testAtIndexElementLocator() {
-        ElementLocator locator = new AtIndexElementLocator(elementLocator, 2);
+        final ElementLocator locator = new AtIndexElementLocator(elementLocator, 2);
 
         Assertions.assertThat(locator.findElement()).isSameAs(element3);
         Assertions.assertThat(locator.findElements()).containsExactly(element3);
@@ -81,7 +81,7 @@ public class IndexSupplierLocatorTest {
 
     @Test
     public void testAtIndexElementLocatorEmpty() {
-        ElementLocator locator = new AtIndexElementLocator(emptyLocator, 2);
+        final ElementLocator locator = new AtIndexElementLocator(emptyLocator, 2);
 
         Assertions.assertThat(locator.findElement()).isNull();
         Assertions.assertThat(locator.findElements()).isEmpty();

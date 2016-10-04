@@ -15,7 +15,7 @@ public class FluentLabelImplTest {
 
     @Test
     public void testFluentLabel() {
-        FluentLabel<FluentWebElement> fluentLabel = new FluentLabelImpl<>(element, Suppliers.ofInstance("default"));
+        final FluentLabel<FluentWebElement> fluentLabel = new FluentLabelImpl<>(element, Suppliers.ofInstance("default"));
 
         Assertions.assertThat(fluentLabel.toString()).isEqualTo("default");
 

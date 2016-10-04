@@ -8,21 +8,21 @@ import java.lang.reflect.InvocationTargetException;
 public class DefaultContainerInstanciator implements ContainerInstanciator {
     private final FluentControl fluentControl;
 
-    public DefaultContainerInstanciator(FluentControl fluentControl) {
+    public DefaultContainerInstanciator(final FluentControl fluentControl) {
         this.fluentControl = fluentControl;
     }
 
     @Override
-    public <T> T newInstance(Class<T> cls, ContainerContext context) {
+    public <T> T newInstance(final Class<T> cls, final ContainerContext context) {
         try {
             return ReflectionUtils.newInstanceOptionalArgs(cls, new ContainerFluentControl(fluentControl, context));
-        } catch (NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             throw new FluentInjectException(cls.getName() + " is not a valid component class.", e);
-        } catch (IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             throw new FluentInjectException(cls.getName() + " can't be instantiated.", e);
-        } catch (InvocationTargetException e) {
+        } catch (final InvocationTargetException e) {
             throw new FluentInjectException(cls.getName() + " can't be instantiated.", e);
-        } catch (InstantiationException e) {
+        } catch (final InstantiationException e) {
             throw new FluentInjectException(cls.getName() + " can't be instantiated.", e);
         }
     }

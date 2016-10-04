@@ -17,7 +17,7 @@ public class ClassAnnotations extends AbstractAnnotations {
     /**
      * @param cls Class expected to be a Page Object
      */
-    public ClassAnnotations(Class<?> cls) {
+    public ClassAnnotations(final Class<?> cls) {
         this.cls = cls;
     }
 
@@ -45,17 +45,17 @@ public class ClassAnnotations extends AbstractAnnotations {
 
         By ans = null;
 
-        FindBys findBys = cls.getAnnotation(FindBys.class);
+        final FindBys findBys = cls.getAnnotation(FindBys.class);
         if (findBys != null) {
             ans = buildByFromFindBys(findBys);
         }
 
-        FindAll findAll = cls.getAnnotation(FindAll.class);
+        final FindAll findAll = cls.getAnnotation(FindAll.class);
         if (ans == null && findAll != null) {
             ans = buildBysFromFindByOneOf(findAll);
         }
 
-        FindBy findBy = cls.getAnnotation(FindBy.class);
+        final FindBy findBy = cls.getAnnotation(FindBy.class);
         if (ans == null && findBy != null) {
             ans = buildByFromFindBy(findBy);
         }
@@ -68,9 +68,9 @@ public class ClassAnnotations extends AbstractAnnotations {
     }
 
     protected void assertValidAnnotations() {
-        FindBys findBys = cls.getAnnotation(FindBys.class);
-        FindAll findAll = cls.getAnnotation(FindAll.class); // NOPMD PrematureDeclaration
-        FindBy findBy = cls.getAnnotation(FindBy.class);
+        final FindBys findBys = cls.getAnnotation(FindBys.class);
+        final FindAll findAll = cls.getAnnotation(FindAll.class); // NOPMD PrematureDeclaration
+        final FindBy findBy = cls.getAnnotation(FindBy.class);
         if (findBys != null && findBy != null) {
             throw new IllegalArgumentException(
                     "If you use a '@FindBys' annotation, " + "you must not also use a '@FindBy' annotation");

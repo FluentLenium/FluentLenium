@@ -13,13 +13,13 @@ import java.util.List;
 public class LastElementLocator implements ElementLocator {
     private final ElementLocator listLocator;
 
-    public LastElementLocator(ElementLocator listLocator) {
+    public LastElementLocator(final ElementLocator listLocator) {
         this.listLocator = listLocator;
     }
 
     @Override
     public WebElement findElement() {
-        List<WebElement> elements = this.listLocator.findElements();
+        final List<WebElement> elements = this.listLocator.findElements();
         if (elements.isEmpty()) {
             return null;
         }
@@ -28,7 +28,7 @@ public class LastElementLocator implements ElementLocator {
 
     @Override
     public List<WebElement> findElements() {
-        WebElement element = findElement();
+        final WebElement element = findElement();
         if (element == null) {
             return Collections.emptyList();
         }

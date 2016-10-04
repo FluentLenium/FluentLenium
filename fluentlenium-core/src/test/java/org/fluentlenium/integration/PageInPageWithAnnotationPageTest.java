@@ -16,7 +16,7 @@ public class PageInPageWithAnnotationPageTest extends IntegrationFluentTest {
 
     @Test
     public void pagesShouldBeInjected() {
-        TestPage testPage = newInstance(SubSubTestPage.class);
+        final TestPage testPage = newInstance(SubSubTestPage.class);
         assertThat(testPage).isNotNull();
         assertThat(testPage).isInstanceOf(TestPage.class);
         assertThat(testPage.includedPage).isNotNull();

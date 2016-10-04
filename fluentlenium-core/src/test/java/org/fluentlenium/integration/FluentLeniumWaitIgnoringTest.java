@@ -33,7 +33,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     public void testIgnoreAllPositive() {
 
         try {
-            Collection<Class<? extends Throwable>> exceptions = new ArrayList<>();
+            final Collection<Class<? extends Throwable>> exceptions = new ArrayList<>();
             exceptions.add(CustomException.class);
             exceptions.add(CustomException2.class);
 
@@ -45,7 +45,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (final TimeoutException e) { // NOPMD EmptyCatchBlock
         }
 
     }
@@ -54,7 +54,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     public void testIgnoreAllNegative() {
 
         try {
-            Collection<Class<? extends Throwable>> exceptions = new ArrayList<>();
+            final Collection<Class<? extends Throwable>> exceptions = new ArrayList<>();
             exceptions.add(CustomException.class);
             exceptions.add(CustomException2.class);
 
@@ -66,7 +66,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (final TimeoutException e) { // NOPMD EmptyCatchBlock
         }
 
     }
@@ -84,7 +84,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
                     });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (final TimeoutException e) { // NOPMD EmptyCatchBlock
         }
 
     }
@@ -102,7 +102,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
                     });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (final TimeoutException e) { // NOPMD EmptyCatchBlock
         }
 
     }
@@ -120,7 +120,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
                     });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (final TimeoutException e) { // NOPMD EmptyCatchBlock
         }
 
     }
@@ -138,7 +138,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
                     });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (final TimeoutException e) { // NOPMD EmptyCatchBlock
         }
 
     }

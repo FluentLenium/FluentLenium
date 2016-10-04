@@ -11,7 +11,7 @@ public enum MatcherType {
 
     private String cssRepresentations;
 
-    MatcherType(String cssRepresentations) {
+    MatcherType(final String cssRepresentations) {
         this.cssRepresentations = cssRepresentations;
     }
 

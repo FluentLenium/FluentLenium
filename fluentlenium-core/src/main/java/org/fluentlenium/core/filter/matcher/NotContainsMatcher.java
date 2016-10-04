@@ -4,11 +4,11 @@ import java.util.regex.Pattern;
 
 public class NotContainsMatcher extends AbstractMacher {
 
-    public NotContainsMatcher(String value) {
+    public NotContainsMatcher(final String value) {
         super(value);
     }
 
-    public NotContainsMatcher(Pattern pattern) {
+    public NotContainsMatcher(final Pattern pattern) {
         super(pattern);
     }
 
@@ -18,7 +18,7 @@ public class NotContainsMatcher extends AbstractMacher {
     }
 
     @Override
-    public boolean isSatisfiedBy(String o) {
+    public boolean isSatisfiedBy(final String o) {
         return !CalculateService.contains(getPattern(), getValue(), o);
     }
 

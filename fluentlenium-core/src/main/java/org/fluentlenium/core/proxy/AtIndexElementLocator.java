@@ -14,14 +14,14 @@ public class AtIndexElementLocator implements ElementLocator {
     private final int index;
     protected ElementLocator listLocator;
 
-    public AtIndexElementLocator(ElementLocator listLocator, int index) {
+    public AtIndexElementLocator(final ElementLocator listLocator, final int index) {
         this.listLocator = listLocator;
         this.index = index;
     }
 
     @Override
     public WebElement findElement() {
-        List<WebElement> elements = this.listLocator.findElements();
+        final List<WebElement> elements = this.listLocator.findElements();
         if (index >= elements.size()) {
             return null;
         }
@@ -30,7 +30,7 @@ public class AtIndexElementLocator implements ElementLocator {
 
     @Override
     public List<WebElement> findElements() {
-        WebElement element = findElement();
+        final WebElement element = findElement();
         if (element == null) {
             return Collections.emptyList();
         }

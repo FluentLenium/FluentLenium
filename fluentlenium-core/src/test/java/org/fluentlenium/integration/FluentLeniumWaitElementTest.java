@@ -112,7 +112,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
         try {
             await().withMessage("toto").atMost(1, NANOSECONDS).until(notFoundElement).present();
             fail();
-        } catch (TimeoutException e) {
+        } catch (final TimeoutException e) {
             assertThat(e.getMessage()).contains("toto");
         }
     }
@@ -285,7 +285,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().pollingEvery(800, TimeUnit.MILLISECONDS).untilPredicate(new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentControl o) {
+            public boolean apply(final FluentControl o) {
                 return true;
             }
         });
@@ -296,7 +296,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().atMost(1000).untilPredicate(new Predicate<FluentControl>() {
             @Override
-            public boolean apply(FluentControl o) {
+            public boolean apply(final FluentControl o) {
                 return false;
             }
         });
@@ -307,7 +307,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().pollingEvery(1000, TimeUnit.MILLISECONDS).until(new Function<FluentControl, Boolean>() {
             @Override
-            public Boolean apply(FluentControl fluent) {
+            public Boolean apply(final FluentControl fluent) {
                 return true;
             }
         });
@@ -318,7 +318,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().atMost(1000).until(new Function<FluentControl, Boolean>() {
             @Override
-            public Boolean apply(FluentControl fluent) {
+            public Boolean apply(final FluentControl fluent) {
                 return false;
             }
         });

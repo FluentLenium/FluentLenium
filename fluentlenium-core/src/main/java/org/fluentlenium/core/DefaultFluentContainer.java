@@ -21,7 +21,7 @@ public class DefaultFluentContainer implements FluentControl, FluentContainer {
      *
      * @param control fluent control
      */
-    public DefaultFluentContainer(FluentControl control) {
+    public DefaultFluentContainer(final FluentControl control) {
         this.control = control;
     }
 
@@ -31,7 +31,7 @@ public class DefaultFluentContainer implements FluentControl, FluentContainer {
     }
 
     @Override
-    public void initFluent(FluentControl control) {
+    public void initFluent(final FluentControl control) {
         this.control = control;
     }
 }

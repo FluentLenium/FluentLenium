@@ -7,7 +7,7 @@ public class CssControlImpl implements CssControl {
 
     private final CssSupportImpl support;
 
-    public CssControlImpl(JavascriptControl javascriptControl, AwaitControl awaitControl) {
+    public CssControlImpl(final JavascriptControl javascriptControl, final AwaitControl awaitControl) {
         this.support = new CssSupportImpl(javascriptControl, awaitControl);
     }
 

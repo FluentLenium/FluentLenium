@@ -14,29 +14,29 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
     private Object instance;
     private List<MessageBuilderCall> calls;
 
-    public MessageBuilderInvocationHandler(String context) {
+    public MessageBuilderInvocationHandler(final String context) {
         this(new ArrayList<MessageBuilderCall>());
-        MessageBuilderCall messageBuilderCall = new MessageBuilderCall();
+        final MessageBuilderCall messageBuilderCall = new MessageBuilderCall();
         messageBuilderCall.setContext(context);
         calls.add(messageBuilderCall);
     }
 
-    public <T> MessageBuilderInvocationHandler(String context, Object instance) {
+    public <T> MessageBuilderInvocationHandler(final String context, final Object instance) {
         this(context);
         this.instance = instance;
     }
 
-    public MessageBuilderInvocationHandler(List<MessageBuilderCall> calls) {
+    public MessageBuilderInvocationHandler(final List<MessageBuilderCall> calls) {
         this.calls = calls;
     }
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable { // NOPMD UseVarargs
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable { // NOPMD UseVarargs
         Object instanceReturn = null;
         if (instance != null) {
             instanceReturn = method.invoke(instance, args);
         }
-        MessageBuilderCall callItem = new MessageBuilderCall();
+        final MessageBuilderCall callItem = new MessageBuilderCall();
 
         if (method.isAnnotationPresent(Message.class)) {
             callItem.setMessage(method.getAnnotation(Message.class).value());
@@ -65,8 +65,8 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
     }
 
     public String buildMessage() {
-        StringBuilder messageBuilder = new StringBuilder();
-        for (MessageBuilderCall call : calls) {
+        final StringBuilder messageBuilder = new StringBuilder();
+        for (final MessageBuilderCall call : calls) {
             if (call.getContext() != null) {
                 if (messageBuilder.length() > 0) {
                     messageBuilder.append(' ');
@@ -76,16 +76,16 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
         }
 
         boolean negation = false;
-        for (MessageBuilderCall call : calls) {
+        for (final MessageBuilderCall call : calls) {
             if (call.isNegation()) {
                 negation = !negation;
             }
         }
 
-        List<MessageBuilderCall> reversedCalls = new ArrayList<>(calls);
+        final List<MessageBuilderCall> reversedCalls = new ArrayList<>(calls);
         Collections.reverse(reversedCalls);
 
-        for (MessageBuilderCall call : reversedCalls) {
+        for (final MessageBuilderCall call : reversedCalls) {
             String validationMessage = negation ? call.getMessage() : call.getNotMessage();
 
             if (validationMessage == null) {

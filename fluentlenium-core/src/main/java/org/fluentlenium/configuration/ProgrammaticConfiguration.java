@@ -47,7 +47,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setWebDriver(String webDriverName) {
+    public void setWebDriver(final String webDriverName) {
         this.webDriverName = webDriverName;
     }
 
@@ -57,7 +57,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setRemoteUrl(String remoteUrl) {
+    public void setRemoteUrl(final String remoteUrl) {
         this.remoteUrl = remoteUrl;
     }
 
@@ -67,7 +67,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setCapabilities(Capabilities capabilities) {
+    public void setCapabilities(final Capabilities capabilities) {
         this.capabilities = capabilities;
     }
 
@@ -77,7 +77,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setDriverLifecycle(DriverLifecycle driverLifecycle) {
+    public void setDriverLifecycle(final DriverLifecycle driverLifecycle) {
         this.driverLifecycle = driverLifecycle;
     }
 
@@ -87,7 +87,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setDeleteCookies(Boolean deleteCookies) {
+    public void setDeleteCookies(final Boolean deleteCookies) {
         this.deleteCookies = deleteCookies;
     }
 
@@ -97,7 +97,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setConfigurationFactory(Class<? extends ConfigurationFactory> configurationFactory) {
+    public void setConfigurationFactory(final Class<? extends ConfigurationFactory> configurationFactory) {
         this.configurationFactory = configurationFactory;
     }
 
@@ -106,7 +106,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
         return configurationDefaults;
     }
 
-    public void setConfigurationDefaults(Class<? extends ConfigurationProperties> configurationDefaults) {
+    public void setConfigurationDefaults(final Class<? extends ConfigurationProperties> configurationDefaults) {
         this.configurationDefaults = configurationDefaults;
     }
 
@@ -116,7 +116,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setBaseUrl(String baseUrl) {
+    public void setBaseUrl(final String baseUrl) {
         this.baseUrl = baseUrl;
     }
 
@@ -126,7 +126,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setPageLoadTimeout(Long pageLoadTimeout) {
+    public void setPageLoadTimeout(final Long pageLoadTimeout) {
         this.pageLoadTimeout = pageLoadTimeout;
     }
 
@@ -136,7 +136,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setImplicitlyWait(Long implicitlyWait) {
+    public void setImplicitlyWait(final Long implicitlyWait) {
         this.implicitlyWait = implicitlyWait;
     }
 
@@ -146,7 +146,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setScriptTimeout(Long scriptTimeout) {
+    public void setScriptTimeout(final Long scriptTimeout) {
         this.scriptTimeout = scriptTimeout;
     }
 
@@ -156,22 +156,22 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setEventsEnabled(Boolean eventsEnabled) {
+    public void setEventsEnabled(final Boolean eventsEnabled) {
         this.eventsEnabled = eventsEnabled;
     }
 
     @Override
-    public void setScreenshotPath(String path) {
+    public void setScreenshotPath(final String path) {
         this.screenshotPath = path;
     }
 
     @Override
-    public void setHtmlDumpPath(String htmlDumpPath) {
+    public void setHtmlDumpPath(final String htmlDumpPath) {
         this.htmlDumpPath = htmlDumpPath;
     }
 
     @Override
-    public void setScreenshotMode(TriggerMode mode) {
+    public void setScreenshotMode(final TriggerMode mode) {
         this.screenshotMode = mode;
     }
 
@@ -191,7 +191,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setHtmlDumpMode(TriggerMode htmlDumpMode) {
+    public void setHtmlDumpMode(final TriggerMode htmlDumpMode) {
         this.htmlDumpMode = htmlDumpMode;
     }
 

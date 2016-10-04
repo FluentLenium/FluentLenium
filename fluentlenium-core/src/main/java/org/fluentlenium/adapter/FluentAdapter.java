@@ -26,7 +26,7 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
         this(new DefaultFluentControlContainer());
     }
 
-    public FluentAdapter(FluentControlContainer driverContainer) {
+    public FluentAdapter(final FluentControlContainer driverContainer) {
         this.driverContainer = driverContainer;
     }
 
@@ -44,7 +44,7 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
         return getDriverContainer().getFluentControl() != null;
     }
 
-    private void setFluentControl(ContainerFluentControl fluentControl) {
+    private void setFluentControl(final ContainerFluentControl fluentControl) {
         getDriverContainer().setFluentControl(fluentControl);
     }
 
@@ -65,7 +65,7 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
      * @param webDriver webDriver to use.
      * @throws IllegalStateException when trying to register a different webDriver that the current one.
      */
-    public void initFluent(WebDriver webDriver) {
+    public void initFluent(final WebDriver webDriver) {
         if (webDriver == null) {
             releaseFluent();
             return;
@@ -80,9 +80,9 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
             }
         }
 
-        ContainerFluentControl adapterFluentControl = new ContainerFluentControl(new FluentDriver(webDriver, this, this));
+        final ContainerFluentControl adapterFluentControl = new ContainerFluentControl(new FluentDriver(webDriver, this, this));
         setFluentControl(adapterFluentControl);
-        ContainerContext context = adapterFluentControl.inject(this);
+        final ContainerContext context = adapterFluentControl.inject(this);
         adapterFluentControl.setContext(context);
     }
 

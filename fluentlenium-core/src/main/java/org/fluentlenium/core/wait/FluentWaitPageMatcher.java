@@ -11,12 +11,12 @@ public class FluentWaitPageMatcher extends BaseWaitMatcher {
     private final WebDriver webDriver;
     private FluentPage page;
 
-    protected FluentWaitPageMatcher(FluentWait wait, WebDriver driver) {
+    protected FluentWaitPageMatcher(final FluentWait wait, final WebDriver driver) {
         this.wait = wait;
         this.webDriver = driver;
     }
 
-    protected FluentWaitPageMatcher(FluentWait wait, WebDriver driver, FluentPage page) {
+    protected FluentWaitPageMatcher(final FluentWait wait, final WebDriver driver, final FluentPage page) {
         this.wait = wait;
         this.webDriver = driver;
         this.page = page;
@@ -29,9 +29,9 @@ public class FluentWaitPageMatcher extends BaseWaitMatcher {
     public void isLoaded() {
 
         if (webDriver instanceof JavascriptExecutor) {
-            Predicate<FluentControl> isLoaded = new Predicate<FluentControl>() {
-                public boolean apply(FluentControl fluent) {
-                    Object result = fluent.executeScript("if (document.readyState) return document.readyState;")
+            final Predicate<FluentControl> isLoaded = new Predicate<FluentControl>() {
+                public boolean apply(final FluentControl fluent) {
+                    final Object result = fluent.executeScript("if (document.readyState) return document.readyState;")
                             .getStringResult();
                     return result != null && "complete".equals(result);
                 }
@@ -51,11 +51,11 @@ public class FluentWaitPageMatcher extends BaseWaitMatcher {
                     "You should use a page argument when you call the untilPage method to specify the page you want to be. "
                             + "Example : await().untilPage(myPage).isAt();");
         }
-        Predicate<FluentControl> isLoaded = new Predicate<FluentControl>() {
-            public boolean apply(FluentControl fluent) {
+        final Predicate<FluentControl> isLoaded = new Predicate<FluentControl>() {
+            public boolean apply(final FluentControl fluent) {
                 try {
                     page.isAt();
-                } catch (Error e) {
+                } catch (final Error e) {
                     return false;
                 }
                 return true;

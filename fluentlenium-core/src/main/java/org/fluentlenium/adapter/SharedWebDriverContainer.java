@@ -54,8 +54,8 @@ public enum SharedWebDriverContainer {
          * @param driverLifecycle  WebDriver lifecycle
          * @return
          */
-        public <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass, String testName,
-                DriverLifecycle driverLifecycle) {
+        public <T> SharedWebDriver getOrCreateDriver(final Supplier<WebDriver> webDriverFactory, final Class<T> testClass,
+                final String testName, final DriverLifecycle driverLifecycle) {
             synchronized (this) {
                 SharedWebDriver driver = getDriver(testClass, testName, driverLifecycle);
                 if (driver == null) {
@@ -66,13 +66,13 @@ public enum SharedWebDriverContainer {
             }
         }
 
-        private <T> SharedWebDriver createDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass, String testName,
-                DriverLifecycle driverLifecycle) {
-            WebDriver webDriver = webDriverFactory.get();
+        private <T> SharedWebDriver createDriver(final Supplier<WebDriver> webDriverFactory, final Class<T> testClass,
+                final String testName, final DriverLifecycle driverLifecycle) {
+            final WebDriver webDriver = webDriverFactory.get();
             return new SharedWebDriver(webDriver, testClass, testName, driverLifecycle);
         }
 
-        private void registerDriver(SharedWebDriver driver) {
+        private void registerDriver(final SharedWebDriver driver) {
             switch (driver.getDriverLifecycle()) {
             case JVM:
                 jvmDriver = driver;
@@ -87,7 +87,8 @@ public enum SharedWebDriverContainer {
             }
         }
 
-        public <T> SharedWebDriver getDriver(Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
+        public <T> SharedWebDriver getDriver(final Class<T> testClass, final String testName,
+                final DriverLifecycle driverLifecycle) {
             synchronized (this) {
                 switch (driverLifecycle) {
                 case JVM:
@@ -101,7 +102,7 @@ public enum SharedWebDriverContainer {
             }
         }
 
-        public void quit(SharedWebDriver driver) {
+        public void quit(final SharedWebDriver driver) {
             synchronized (this) {
                 switch (driver.getDriverLifecycle()) {
                 case JVM:
@@ -113,14 +114,14 @@ public enum SharedWebDriverContainer {
                     }
                     break;
                 case CLASS:
-                    SharedWebDriver classDriver = classDrivers.remove(driver.getTestClass());
+                    final SharedWebDriver classDriver = classDrivers.remove(driver.getTestClass());
                     if (classDriver == driver && classDriver.getDriver() != null) { // NOPMD CompareObjectsWithEquals
                         classDriver.getDriver().quit();
                     }
                     break;
                 case METHOD:
                 default:
-                    SharedWebDriver testDriver = methodDrivers
+                    final SharedWebDriver testDriver = methodDrivers
                             .remove(new ClassAndTestName(driver.getTestClass(), driver.getTestName()));
                     if (testDriver == driver && testDriver.getDriver() != null) { // NOPMD CompareObjectsWithEquals
                         testDriver.getDriver().quit();
@@ -136,16 +137,16 @@ public enum SharedWebDriverContainer {
          * @return List of {@link SharedWebDriver}
          */
         public List<SharedWebDriver> getAllDrivers() {
-            List<SharedWebDriver> drivers = new ArrayList<>();
+            final List<SharedWebDriver> drivers = new ArrayList<>();
             synchronized (this) {
                 if (jvmDriver != null) {
                     drivers.add(jvmDriver);
                 }
-                for (SharedWebDriver classDriver : classDrivers.values()) {
+                for (final SharedWebDriver classDriver : classDrivers.values()) {
                     drivers.add(classDriver);
                 }
 
-                for (SharedWebDriver testDriver : methodDrivers.values()) {
+                for (final SharedWebDriver testDriver : methodDrivers.values()) {
                     drivers.add(testDriver);
                 }
             }
@@ -155,16 +156,16 @@ public enum SharedWebDriverContainer {
         /**
          * Get all WebDriver of this container for given class.
          */
-        public List<SharedWebDriver> getTestClassDrivers(Class<?> testClass) {
-            List<SharedWebDriver> drivers = new ArrayList<>();
+        public List<SharedWebDriver> getTestClassDrivers(final Class<?> testClass) {
+            final List<SharedWebDriver> drivers = new ArrayList<>();
 
             synchronized (this) {
-                SharedWebDriver classDriver = classDrivers.get(testClass);
+                final SharedWebDriver classDriver = classDrivers.get(testClass);
                 if (classDriver != null) {
                     drivers.add(classDriver);
                 }
 
-                for (SharedWebDriver testDriver : methodDrivers.values()) {
+                for (final SharedWebDriver testDriver : methodDrivers.values()) {
                     if (testDriver.getTestClass() == testClass) {
                         drivers.add(testDriver);
                     }
@@ -181,13 +182,13 @@ public enum SharedWebDriverContainer {
                     jvmDriver = null;
                 }
 
-                Iterator<SharedWebDriver> classDriversIterator = classDrivers.values().iterator();
+                final Iterator<SharedWebDriver> classDriversIterator = classDrivers.values().iterator();
                 while (classDriversIterator.hasNext()) {
                     classDriversIterator.next().getDriver().quit();
                     classDriversIterator.remove();
                 }
 
-                Iterator<SharedWebDriver> testDriversIterator = methodDrivers.values().iterator();
+                final Iterator<SharedWebDriver> testDriversIterator = methodDrivers.values().iterator();
                 while (testDriversIterator.hasNext()) {
                     testDriversIterator.next().getDriver().quit();
                     testDriversIterator.remove();

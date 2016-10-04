@@ -52,7 +52,7 @@ public class KeyboardElementActionsTest {
 
     @Test
     public void testKeyDown() {
-        KeyboardElementActions actions = new KeyboardElementActions(driver, element);
+        final KeyboardElementActions actions = new KeyboardElementActions(driver, element);
         actions.keyDown(Keys.SHIFT);
 
         verify(mouse).click(coordinates);
@@ -61,7 +61,7 @@ public class KeyboardElementActionsTest {
 
     @Test
     public void testKeyDownKeyboardMouse() {
-        KeyboardElementActions actions = new KeyboardElementActions(keyboard, mouse, element);
+        final KeyboardElementActions actions = new KeyboardElementActions(keyboard, mouse, element);
         actions.keyDown(Keys.SHIFT);
 
         verify(mouse).click(coordinates);
@@ -70,7 +70,7 @@ public class KeyboardElementActionsTest {
 
     @Test
     public void testKeyUp() {
-        KeyboardElementActions actions = new KeyboardElementActions(driver, element);
+        final KeyboardElementActions actions = new KeyboardElementActions(driver, element);
         actions.keyUp(Keys.SHIFT);
 
         verify(mouse).click(coordinates);
@@ -79,7 +79,7 @@ public class KeyboardElementActionsTest {
 
     @Test
     public void testSendKeys() {
-        KeyboardElementActions actions = new KeyboardElementActions(driver, element);
+        final KeyboardElementActions actions = new KeyboardElementActions(driver, element);
         actions.sendKeys(Keys.ENTER, Keys.SPACE);
 
         verify(mouse).click(coordinates);
@@ -88,10 +88,10 @@ public class KeyboardElementActionsTest {
 
     @Test
     public void testBasic() {
-        KeyboardElementActions actions = new KeyboardElementActions(driver, element);
+        final KeyboardElementActions actions = new KeyboardElementActions(driver, element);
         Assertions.assertThat(actions.basic()).isSameAs(keyboard);
 
-        KeyboardElementActions actionsAlt = new KeyboardElementActions(keyboard, mouse, element);
+        final KeyboardElementActions actionsAlt = new KeyboardElementActions(keyboard, mouse, element);
         Assertions.assertThat(actionsAlt.basic()).isSameAs(keyboard);
     }
 

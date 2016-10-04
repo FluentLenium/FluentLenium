@@ -20,7 +20,7 @@ public @interface FluentConfiguration {
 
         private final Boolean value;
 
-        BooleanValue(Boolean value) {
+        BooleanValue(final Boolean value) {
             this.value = value;
         }
 

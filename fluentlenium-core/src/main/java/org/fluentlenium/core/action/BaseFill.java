@@ -6,11 +6,11 @@ import org.fluentlenium.core.domain.FluentWebElement;
 public class BaseFill<E extends FluentWebElement> {
     private FluentList<E> fluentList;
 
-    public BaseFill(FluentList<E> list) {
+    public BaseFill(final FluentList<E> list) {
         this.fluentList = list;
     }
 
-    public BaseFill(E element) {
+    public BaseFill(final E element) {
         this((FluentList<E>) element.asList());
     }
 

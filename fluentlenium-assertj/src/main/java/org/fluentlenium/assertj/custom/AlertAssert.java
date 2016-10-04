@@ -6,7 +6,7 @@ import org.openqa.selenium.NoAlertPresentException;
 
 public class AlertAssert extends AbstractAssert<AlertAssert, Alert> {
 
-    public AlertAssert(Alert actual) {
+    public AlertAssert(final Alert actual) {
         super(actual, AlertAssert.class);
     }
 
@@ -16,13 +16,13 @@ public class AlertAssert extends AbstractAssert<AlertAssert, Alert> {
      * @param text text to search for
      * @return self
      */
-    public AlertAssert hasText(String text) {
+    public AlertAssert hasText(final String text) {
         try {
             if (!actual.getText().contains(text)) {
                 super.failWithMessage(
                         "The alert box does not contain the text: " + text + " . Actual text found : " + actual.getText());
             }
-        } catch (NoAlertPresentException e) {
+        } catch (final NoAlertPresentException e) {
             super.failWithMessage("There is no alert box");
         }
 
@@ -37,7 +37,7 @@ public class AlertAssert extends AbstractAssert<AlertAssert, Alert> {
     public AlertAssert isPresent() {
         try {
             actual.switchTo();
-        } catch (NoAlertPresentException e) {
+        } catch (final NoAlertPresentException e) {
             super.failWithMessage("There is no alert box");
         }
 

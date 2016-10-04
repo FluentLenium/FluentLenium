@@ -19,7 +19,7 @@ public class ExampleFluentTest extends FluentTest {
 
     @Override
     public WebDriver newWebDriver() {
-        BrowserConfig browserConfig = getBrowserConfig();
+        final BrowserConfig browserConfig = getBrowserConfig();
         return browserConfig.resolveDriver(browserConfig);
     }
 

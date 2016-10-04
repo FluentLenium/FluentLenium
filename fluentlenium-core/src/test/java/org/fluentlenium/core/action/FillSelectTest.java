@@ -66,13 +66,13 @@ public class FillSelectTest {
 
     @Test
     public void testFillCss() {
-        FluentList<FluentWebElement> list = fluentAdapter.asFluentList(element1, element2, element3);
+        final FluentList<FluentWebElement> list = fluentAdapter.asFluentList(element1, element2, element3);
         final FillSelect fillConstructor = new FillSelect(list);
 
-        WebElement option1 = mock(WebElement.class);
-        WebElement option2 = mock(WebElement.class);
-        WebElement option3 = mock(WebElement.class);
-        WebElement option4 = mock(WebElement.class);
+        final WebElement option1 = mock(WebElement.class);
+        final WebElement option2 = mock(WebElement.class);
+        final WebElement option3 = mock(WebElement.class);
+        final WebElement option4 = mock(WebElement.class);
 
         when(element1.findElements(any(By.class))).thenReturn(Arrays.asList(option1));
         when(element2.findElements(any(By.class))).thenReturn(Arrays.asList(option2));
@@ -100,13 +100,13 @@ public class FillSelectTest {
 
     @Test
     public void testFillList() {
-        FluentList<FluentWebElement> list = fluentAdapter.asFluentList(element1, element2, element3, element4);
-        FillSelect fillConstructor = new FillSelect(list);
+        final FluentList<FluentWebElement> list = fluentAdapter.asFluentList(element1, element2, element3, element4);
+        final FillSelect fillConstructor = new FillSelect(list);
 
-        WebElement option1 = mock(WebElement.class);
-        WebElement option2 = mock(WebElement.class);
-        WebElement option3 = mock(WebElement.class);
-        WebElement option4 = mock(WebElement.class);
+        final WebElement option1 = mock(WebElement.class);
+        final WebElement option2 = mock(WebElement.class);
+        final WebElement option3 = mock(WebElement.class);
+        final WebElement option4 = mock(WebElement.class);
 
         when(element1.findElements(any(By.class))).thenReturn(Arrays.asList(option1));
         when(element2.findElements(any(By.class))).thenReturn(Arrays.asList(option2));
@@ -130,9 +130,9 @@ public class FillSelectTest {
 
     @Test
     public void testFillElement() {
-        FillSelect fillConstructor = new FillSelect(fluentAdapter.newFluent(element1));
+        final FillSelect fillConstructor = new FillSelect(fluentAdapter.newFluent(element1));
 
-        WebElement option1 = mock(WebElement.class);
+        final WebElement option1 = mock(WebElement.class);
 
         when(element1.findElements(any(By.class))).thenReturn(Arrays.asList(option1));
 

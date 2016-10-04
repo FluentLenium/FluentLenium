@@ -13,18 +13,19 @@ public class IntegerListConditionsImpl implements IntegerConditions {
     private final Function<FluentWebElement, Integer> integerGetter;
     private final Function<FluentWebElement, IntegerConditions> conditionsGetter;
 
-    public IntegerListConditionsImpl(Conditions<FluentWebElement> listConditions,
-            Function<FluentWebElement, Integer> integerGetter, Function<FluentWebElement, IntegerConditions> conditionsGetter) {
+    public IntegerListConditionsImpl(final Conditions<FluentWebElement> listConditions,
+            final Function<FluentWebElement, Integer> integerGetter,
+            final Function<FluentWebElement, IntegerConditions> conditionsGetter) {
         this.listConditions = listConditions;
         this.integerGetter = integerGetter;
         this.conditionsGetter = conditionsGetter;
     }
 
-    public IntegerListConditionsImpl(Conditions<FluentWebElement> listConditions,
+    public IntegerListConditionsImpl(final Conditions<FluentWebElement> listConditions,
             final Function<FluentWebElement, Integer> integerGetter) {
         this(listConditions, integerGetter, new Function<FluentWebElement, IntegerConditions>() {
             @Override
-            public IntegerConditions apply(FluentWebElement input) {
+            public IntegerConditions apply(final FluentWebElement input) {
                 return new IntegerConditionsImpl(integerGetter.apply(input));
             }
         });
@@ -34,7 +35,7 @@ public class IntegerListConditionsImpl implements IntegerConditions {
     public boolean verify(final Predicate<Integer> predicate) {
         return listConditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return predicate.apply(integerGetter.apply(input));
             }
         });
@@ -49,7 +50,7 @@ public class IntegerListConditionsImpl implements IntegerConditions {
     public boolean equalTo(final int value) {
         return this.listConditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).equalTo(value);
             }
         });
@@ -59,7 +60,7 @@ public class IntegerListConditionsImpl implements IntegerConditions {
     public boolean lessThan(final int value) {
         return this.listConditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).lessThan(value);
             }
         });
@@ -69,7 +70,7 @@ public class IntegerListConditionsImpl implements IntegerConditions {
     public boolean lessThanOrEqualTo(final int value) {
         return this.listConditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).lessThanOrEqualTo(value);
             }
         });
@@ -79,7 +80,7 @@ public class IntegerListConditionsImpl implements IntegerConditions {
     public boolean greaterThan(final int value) {
         return this.listConditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).greaterThan(value);
             }
         });
@@ -89,7 +90,7 @@ public class IntegerListConditionsImpl implements IntegerConditions {
     public boolean greaterThanOrEqualTo(final int value) {
         return this.listConditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).greaterThanOrEqualTo(value);
             }
         });

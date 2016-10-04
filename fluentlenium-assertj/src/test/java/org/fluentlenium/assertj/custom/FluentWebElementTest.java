@@ -130,14 +130,14 @@ public class FluentWebElementTest {
 
     @Test
     public void testHasTextWithSpecialCharactersInElement() throws Exception {
-        String textWithStringFormatError = "%A";
+        final String textWithStringFormatError = "%A";
         when(element.text()).thenReturn(textWithStringFormatError);
         elementAssert.hasText(textWithStringFormatError);
     }
 
     @Test(expected = AssertionError.class)
     public void testHasTextWithSpecialCharactersInAssertion() throws Exception {
-        String textWithStringFormatError = "%A";
+        final String textWithStringFormatError = "%A";
         when(element.text()).thenReturn("someText");
         elementAssert.hasText(textWithStringFormatError);
     }

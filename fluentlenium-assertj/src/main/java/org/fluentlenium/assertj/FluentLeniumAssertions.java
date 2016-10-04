@@ -15,19 +15,19 @@ public final class FluentLeniumAssertions {
         //only static
     }
 
-    public static AlertAssert assertThat(Alert actual) {
+    public static AlertAssert assertThat(final Alert actual) {
         return new AlertAssert(actual);
     }
 
-    public static PageAssert assertThat(FluentPage actual) {
+    public static PageAssert assertThat(final FluentPage actual) {
         return new PageAssert(actual);
     }
 
-    public static FluentWebElementAssert assertThat(FluentWebElement actual) {
+    public static FluentWebElementAssert assertThat(final FluentWebElement actual) {
         return new FluentWebElementAssert(actual);
     }
 
-    public static FluentListAssert assertThat(FluentList<?> actual) {
+    public static FluentListAssert assertThat(final FluentList<?> actual) {
         return new FluentListAssert(actual);
     }
 

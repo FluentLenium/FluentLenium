@@ -50,8 +50,8 @@ public class FluentInjector implements FluentInjectControl {
     private final DefaultHookChainBuilder hookChainBuilder;
     private final EventsRegistry eventsRegistry;
 
-    public FluentInjector(FluentControl fluentControl, EventsRegistry eventsRegistry, ComponentsManager componentsManager,
-                          ContainerInstanciator instanciator) {
+    public FluentInjector(final FluentControl fluentControl, final EventsRegistry eventsRegistry,
+            final ComponentsManager componentsManager, final ContainerInstanciator instanciator) {
         this.fluentControl = fluentControl;
         this.eventsRegistry = eventsRegistry;
         this.componentsManager = componentsManager;
@@ -64,7 +64,7 @@ public class FluentInjector implements FluentInjectControl {
      */
     public void release() {
         containerInstances.clear();
-        for (ContainerAnnotationsEventsRegistry support : eventsContainerSupport.values()) {
+        for (final ContainerAnnotationsEventsRegistry support : eventsContainerSupport.values()) {
             support.close();
         }
         eventsContainerSupport.clear();
@@ -73,15 +73,15 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     @Override
-    public <T> T newInstance(Class<T> cls) {
-        T container = containerInstanciator.newInstance(cls, null);
+    public <T> T newInstance(final Class<T> cls) {
+        final T container = containerInstanciator.newInstance(cls, null);
         inject(container);
         return container;
     }
 
     @Override
-    public ContainerContext[] inject(Object... containers) {
-        ContainerContext[] context = new ContainerContext[containers.length];
+    public ContainerContext[] inject(final Object... containers) {
+        final ContainerContext[] context = new ContainerContext[containers.length];
         for (int i = 0; i < containers.length; i++) {
             context[i] = inject(containers[i]);
         }
@@ -89,28 +89,29 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     @Override
-    public ContainerContext inject(Object container) {
+    public ContainerContext inject(final Object container) {
         inject(container, null, fluentControl.getDriver());
         return containerContexts.get(container);
     }
 
-    private void inject(Object container, Object parentContainer, SearchContext searchContext) {
+    private void inject(final Object container, final Object parentContainer, final SearchContext searchContext) {
         initContainer(container, parentContainer, searchContext);
         initParentContainer(container, parentContainer);
         initFluentElements(container, searchContext);
         initChildrenContainers(container, searchContext);
     }
 
-    private void injectComponent(Object componentContainer, Object parentContainer, SearchContext searchContext) {
+    private void injectComponent(final Object componentContainer, final Object parentContainer,
+            final SearchContext searchContext) {
         initContainerContext(componentContainer, parentContainer, searchContext);
         initParentContainer(componentContainer, parentContainer);
         initFluentElements(componentContainer, searchContext);
         initChildrenContainers(componentContainer, searchContext);
     }
 
-    private void initParentContainer(Object container, Object parentContainer) {
+    private void initParentContainer(final Object container, final Object parentContainer) {
         for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
-            for (Field field : cls.getDeclaredFields()) {
+            for (final Field field : cls.getDeclaredFields()) {
                 if (isParent(field)) {
                     try {
                         ReflectionUtils.set(field, container, parentContainer);
@@ -122,11 +123,11 @@ public class FluentInjector implements FluentInjectControl {
         }
     }
 
-    private boolean isParent(Field field) {
+    private boolean isParent(final Field field) {
         return field.isAnnotationPresent(Parent.class);
     }
 
-    private void initContainer(Object container, Object parentContainer, SearchContext searchContext) {
+    private void initContainer(final Object container, final Object parentContainer, final SearchContext searchContext) {
         initContainerContext(container, parentContainer, searchContext);
         if (container instanceof FluentContainer) {
             ((FluentContainer) container).initFluent(new ContainerFluentControl(fluentControl, containerContexts.get(container)));
@@ -134,10 +135,11 @@ public class FluentInjector implements FluentInjectControl {
         initEventAnnotations(container);
     }
 
-    private void initContainerContext(Object container, Object parentContainer, SearchContext searchContext) {
-        ContainerContext parentContainerContext = parentContainer == null ? null : containerContexts.get(parentContainer);
+    private void initContainerContext(final Object container, final Object parentContainer, final SearchContext searchContext) {
+        final ContainerContext parentContainerContext = parentContainer == null ? null : containerContexts.get(parentContainer);
 
-        DefaultContainerContext containerContext = new DefaultContainerContext(container, parentContainerContext, searchContext);
+        final DefaultContainerContext containerContext = new DefaultContainerContext(container, parentContainerContext,
+                searchContext);
         containerContexts.put(container, containerContext);
 
         if (parentContainerContext != null) {
@@ -155,26 +157,27 @@ public class FluentInjector implements FluentInjectControl {
         }
     }
 
-    private static boolean isContainer(Field field) {
+    private static boolean isContainer(final Field field) {
         return field.isAnnotationPresent(Page.class);
     }
 
-    private static boolean isClassSupported(Class<?> cls) {
+    private static boolean isClassSupported(final Class<?> cls) {
         return cls != Object.class && cls != null;
     }
 
-    private void initChildrenContainers(final Object container, SearchContext searchContext) {
+    private void initChildrenContainers(final Object container, final SearchContext searchContext) {
         for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
-            for (Field field : cls.getDeclaredFields()) {
+            for (final Field field : cls.getDeclaredFields()) {
                 if (isContainer(field)) {
-                    Class fieldClass = field.getType();
-                    Object existingChildContainer = containerInstances.get(fieldClass);
+                    final Class fieldClass = field.getType();
+                    final Object existingChildContainer = containerInstances.get(fieldClass);
                     if (existingChildContainer == null) {
-                        Object childContainer = containerInstanciator.newInstance(fieldClass, containerContexts.get(container));
+                        final Object childContainer = containerInstanciator
+                                .newInstance(fieldClass, containerContexts.get(container));
                         initContainer(childContainer, container, searchContext);
                         try {
                             ReflectionUtils.set(field, container, childContainer);
-                        } catch (IllegalAccessException e) {
+                        } catch (final IllegalAccessException e) {
                             throw new FluentInjectException("Can't set field " + field + " with value " + childContainer, e);
                         }
                         containerInstances.put(fieldClass, childContainer);
@@ -182,7 +185,7 @@ public class FluentInjector implements FluentInjectControl {
                     } else {
                         try {
                             ReflectionUtils.set(field, container, existingChildContainer);
-                        } catch (IllegalAccessException e) {
+                        } catch (final IllegalAccessException e) {
                             throw new FluentInjectException("Can't set field " + field + " with value " + existingChildContainer,
                                     e);
                         }
@@ -192,18 +195,19 @@ public class FluentInjector implements FluentInjectControl {
         }
     }
 
-    private void initFluentElements(final Object container, SearchContext searchContext) {
-        ContainerContext containerContext = containerContexts.get(container);
+    private void initFluentElements(final Object container, final SearchContext searchContext) {
+        final ContainerContext containerContext = containerContexts.get(container);
 
         for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
             for (final Field field : cls.getDeclaredFields()) {
                 if (isSupported(container, field)) {
-                    ArrayList<HookDefinition<?>> fieldHookDefinitions = new ArrayList<>(containerContext.getHookDefinitions());
+                    final ArrayList<HookDefinition<?>> fieldHookDefinitions = new ArrayList<>(
+                            containerContext.getHookDefinitions());
                     addHookDefinitions(field.getAnnotations(), fieldHookDefinitions);
-                    InjectionElementLocatorFactory locatorFactory = new InjectionElementLocatorFactory(searchContext);
-                    InjectionElementLocator locator = locatorFactory.createLocator(field);
+                    final InjectionElementLocatorFactory locatorFactory = new InjectionElementLocatorFactory(searchContext);
+                    final InjectionElementLocator locator = locatorFactory.createLocator(field);
                     if (locator != null) {
-                        ComponentAndProxy fieldValue = initFieldElements(locator, field);
+                        final ComponentAndProxy fieldValue = initFieldElements(locator, field);
                         injectComponent(fieldValue, locator, container, field, fieldHookDefinitions);
                     }
                 }
@@ -211,25 +215,25 @@ public class FluentInjector implements FluentInjectControl {
         }
     }
 
-    private void injectComponent(ComponentAndProxy fieldValue, ElementLocator locator, final Object container, Field field,
-                                 ArrayList<HookDefinition<?>> fieldHookDefinitions) {
+    private void injectComponent(final ComponentAndProxy fieldValue, final ElementLocator locator, final Object container,
+            final Field field, final ArrayList<HookDefinition<?>> fieldHookDefinitions) {
         if (fieldValue != null) {
             LocatorProxies.setHooks(fieldValue.getProxy(), hookChainBuilder, fieldHookDefinitions);
             try {
                 ReflectionUtils.set(field, container, fieldValue.getComponent());
-            } catch (IllegalAccessException e) {
+            } catch (final IllegalAccessException e) {
                 throw new FluentInjectException(
                         "Unable to find an accessible constructor with an argument of type WebElement in " + field.getType(), e);
             }
 
             if (fieldValue.getComponent() instanceof Iterable) {
                 if (isLazyComponentsAndNotInitialized(fieldValue.getComponent())) {
-                    LazyComponents lazyComponents = (LazyComponents) fieldValue.getComponent();
+                    final LazyComponents lazyComponents = (LazyComponents) fieldValue.getComponent();
 
                     lazyComponents.addLazyComponentsListener(new LazyComponentsListener<Object>() {
                         @Override
-                        public void lazyComponentsInitialized(Map<WebElement, Object> componentMap) {
-                            for (Entry<WebElement, Object> componentEntry : componentMap.entrySet()) {
+                        public void lazyComponentsInitialized(final Map<WebElement, Object> componentMap) {
+                            for (final Entry<WebElement, Object> componentEntry : componentMap.entrySet()) {
                                 injectComponent(componentEntry.getValue(), container, componentEntry.getKey());
                             }
                         }
@@ -244,21 +248,21 @@ public class FluentInjector implements FluentInjectControl {
                     }
                 } */
             } else {
-                ElementLocatorSearchContext componentSearchContext = new ElementLocatorSearchContext(locator);
+                final ElementLocatorSearchContext componentSearchContext = new ElementLocatorSearchContext(locator);
                 injectComponent(fieldValue.getComponent(), container, componentSearchContext);
             }
         }
     }
 
-    private boolean isLazyComponentsAndNotInitialized(Object component) {
+    private boolean isLazyComponentsAndNotInitialized(final Object component) {
         if (component instanceof LazyComponents) {
-            LazyComponents lazyComponents = (LazyComponents) component;
+            final LazyComponents lazyComponents = (LazyComponents) component;
             return lazyComponents.isLazy() && !lazyComponents.isLazyInitialized();
         }
         return false;
     }
 
-    private Hook getHookAnnotation(Annotation annotation) {
+    private Hook getHookAnnotation(final Annotation annotation) {
         if (annotation instanceof Hook) {
             return (Hook) annotation;
         } else if (annotation.annotationType().isAnnotationPresent(Hook.class)) {
@@ -267,7 +271,7 @@ public class FluentInjector implements FluentInjectControl {
         return null;
     }
 
-    private HookOptions getHookOptionsAnnotation(Annotation annotation) {
+    private HookOptions getHookOptionsAnnotation(final Annotation annotation) {
         if (annotation instanceof HookOptions) {
             return (HookOptions) annotation;
         } else if (annotation.annotationType().isAnnotationPresent(HookOptions.class)) {
@@ -276,11 +280,11 @@ public class FluentInjector implements FluentInjectControl {
         return null;
     }
 
-    private void addHookDefinitions(Annotation[] annotations, List<HookDefinition<?>> hookDefinitions) {
+    private void addHookDefinitions(final Annotation[] annotations, final List<HookDefinition<?>> hookDefinitions) {
         Hook currentHookAnnotation = null;
         HookOptions currentHookOptionAnnotation = null;
 
-        for (Annotation annotation : annotations) {
+        for (final Annotation annotation : annotations) {
             if (annotation instanceof NoHook) {
                 hookDefinitions.clear();
                 break;
@@ -288,8 +292,8 @@ public class FluentInjector implements FluentInjectControl {
         }
 
         Annotation currentAnnotation = null;
-        for (Annotation annotation : annotations) {
-            Hook hookAnnotation = getHookAnnotation(annotation);
+        for (final Annotation annotation : annotations) {
+            final Hook hookAnnotation = getHookAnnotation(annotation);
             if (hookAnnotation != null) {
                 currentAnnotation = annotation;
             }
@@ -302,7 +306,7 @@ public class FluentInjector implements FluentInjectControl {
             if (hookAnnotation != null) {
                 currentHookAnnotation = hookAnnotation;
             }
-            HookOptions hookOptionsAnnotation = getHookOptionsAnnotation(annotation);
+            final HookOptions hookOptionsAnnotation = getHookOptionsAnnotation(annotation);
             if (hookOptionsAnnotation != null) {
                 if (currentHookOptionAnnotation != null) {
                     throw new FluentInjectException("Unexpected @HookOptions annotation. @Hook is missing.");
@@ -316,51 +320,51 @@ public class FluentInjector implements FluentInjectControl {
         }
     }
 
-    private <T> HookDefinition<T> buildHookDefinition(Hook hookAnnotation, HookOptions hookOptionsAnnotation,
-                                                      Annotation currentAnnotation) {
-        Class<? extends T> hookOptionsClass =
+    private <T> HookDefinition<T> buildHookDefinition(final Hook hookAnnotation, final HookOptions hookOptionsAnnotation,
+            final Annotation currentAnnotation) {
+        final Class<? extends T> hookOptionsClass =
                 hookOptionsAnnotation == null ? null : (Class<? extends T>) hookOptionsAnnotation.value();
         T fluentHookOptions = null;
         if (hookOptionsClass != null) {
             try {
                 fluentHookOptions = ReflectionUtils.newInstanceOptionalArgs(hookOptionsClass, currentAnnotation);
-            } catch (NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 throw new FluentInjectException("@HookOption class has no valid constructor", e);
             } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
                 throw new FluentInjectException("Can't create @HookOption class instance", e);
             }
         }
-        Class<? extends FluentHook<T>> hookClass = (Class<? extends FluentHook<T>>) hookAnnotation.value();
+        final Class<? extends FluentHook<T>> hookClass = (Class<? extends FluentHook<T>>) hookAnnotation.value();
         if (fluentHookOptions == null) {
             return new HookDefinition<>(hookClass);
         }
         return new HookDefinition<>(hookClass, fluentHookOptions);
     }
 
-    private boolean isSupported(Object container, Field field) {
+    private boolean isSupported(final Object container, final Field field) {
         return isValueNull(container, field) && !field.isAnnotationPresent(NoInject.class) && !Modifier
                 .isFinal(field.getModifiers()) && (isListOfFluentWebElement(field) || isListOfComponent(field) || isComponent(
                 field) || isComponentList(field) || isElement(field) || isListOfElement(field));
     }
 
-    private static boolean isValueNull(Object container, Field field) {
+    private static boolean isValueNull(final Object container, final Field field) {
         try {
             return ReflectionUtils.get(field, container) == null;
-        } catch (IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             throw new FluentInjectException("Can't retrieve default value of field", e);
         }
     }
 
-    private boolean isComponent(Field field) {
+    private boolean isComponent(final Field field) {
         return componentsManager.isComponentClass(field.getType());
     }
 
-    private boolean isComponentList(Field field) {
+    private boolean isComponentList(final Field field) {
         if (isList(field)) {
-            boolean componentListClass = componentsManager.isComponentListClass((Class<? extends List<?>>) field.getType());
+            final boolean componentListClass = componentsManager.isComponentListClass((Class<? extends List<?>>) field.getType());
             if (componentListClass) {
-                Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
-                boolean componentClass = componentsManager.isComponentClass(genericType);
+                final Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
+                final boolean componentClass = componentsManager.isComponentClass(genericType);
 
                 if (componentClass) {
                     return true;
@@ -370,33 +374,33 @@ public class FluentInjector implements FluentInjectControl {
         return false;
     }
 
-    private static boolean isListOfFluentWebElement(Field field) {
+    private static boolean isListOfFluentWebElement(final Field field) {
         if (isList(field)) {
-            Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
+            final Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
             return FluentWebElement.class.isAssignableFrom(genericType);
         }
         return false;
     }
 
-    private boolean isListOfComponent(Field field) {
+    private boolean isListOfComponent(final Field field) {
         if (isList(field)) {
-            Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
+            final Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
             return componentsManager.isComponentClass(genericType);
         }
         return false;
     }
 
-    private static boolean isList(Field field) {
+    private static boolean isList(final Field field) {
         return List.class.isAssignableFrom(field.getType());
     }
 
-    private static boolean isElement(Field field) {
+    private static boolean isElement(final Field field) {
         return WebElement.class.isAssignableFrom(field.getType());
     }
 
-    private static boolean isListOfElement(Field field) {
+    private static boolean isListOfElement(final Field field) {
         if (isList(field)) {
-            Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
+            final Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
             return WebElement.class.isAssignableFrom(genericType);
         }
         return false;
@@ -409,7 +413,7 @@ public class FluentInjector implements FluentInjectControl {
         private P proxy;
     }
 
-    private ComponentAndProxy<?, ?> initFieldElements(ElementLocator locator, Field field) {
+    private ComponentAndProxy<?, ?> initFieldElements(final ElementLocator locator, final Field field) {
         if (isComponent(field)) {
             return initFieldAsComponent(locator, field);
         } else if (isComponentList(field)) {
@@ -426,44 +430,44 @@ public class FluentInjector implements FluentInjectControl {
         return null;
     }
 
-    private <L extends List<T>, T> ComponentAndProxy<L, List<WebElement>> initFieldAsComponentList(ElementLocator locator,
-                                                                                                   Field field) {
-        List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
-        L componentList = componentsManager
+    private <L extends List<T>, T> ComponentAndProxy<L, List<WebElement>> initFieldAsComponentList(final ElementLocator locator,
+            final Field field) {
+        final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
+        final L componentList = componentsManager
                 .asComponentList((Class<L>) field.getType(), (Class<T>) ReflectionUtils.getFirstGenericType(field),
                         webElementList);
         return new ComponentAndProxy<>(componentList, webElementList);
     }
 
-    private ComponentAndProxy<Object, WebElement> initFieldAsComponent(ElementLocator locator, Field field) {
-        WebElement element = LocatorProxies.createWebElement(locator);
-        Object component = componentsManager.newComponent(field.getType(), element);
+    private ComponentAndProxy<Object, WebElement> initFieldAsComponent(final ElementLocator locator, final Field field) {
+        final WebElement element = LocatorProxies.createWebElement(locator);
+        final Object component = componentsManager.newComponent(field.getType(), element);
         return new ComponentAndProxy(component, element);
     }
 
-    private ComponentAndProxy<ComponentList<?>, List<WebElement>> initFieldAsListOfComponent(ElementLocator locator,
-                                                                                             Field field) {
-        List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
-        ComponentList<?> componentList = componentsManager
+    private ComponentAndProxy<ComponentList<?>, List<WebElement>> initFieldAsListOfComponent(final ElementLocator locator,
+            final Field field) {
+        final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
+        final ComponentList<?> componentList = componentsManager
                 .asComponentList(ReflectionUtils.getFirstGenericType(field), webElementList);
         return new ComponentAndProxy(componentList, webElementList);
     }
 
     private ComponentAndProxy<FluentList<? extends FluentWebElement>, List<WebElement>> initFieldAsListOfFluentWebElement(
-            ElementLocator locator, Field field) {
-        List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
-        FluentList<? extends FluentWebElement> fluentList = componentsManager
+            final ElementLocator locator, final Field field) {
+        final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
+        final FluentList<? extends FluentWebElement> fluentList = componentsManager
                 .asFluentList((Class<? extends FluentWebElement>) ReflectionUtils.getFirstGenericType(field), webElementList);
         return new ComponentAndProxy(fluentList, webElementList);
     }
 
-    private ComponentAndProxy<WebElement, WebElement> initFieldAsElement(ElementLocator locator) {
-        WebElement element = LocatorProxies.createWebElement(locator);
+    private ComponentAndProxy<WebElement, WebElement> initFieldAsElement(final ElementLocator locator) {
+        final WebElement element = LocatorProxies.createWebElement(locator);
         return new ComponentAndProxy<>(element, element);
     }
 
-    private ComponentAndProxy<List<WebElement>, List<WebElement>> initFieldAsListOfElement(ElementLocator locator) {
-        List<WebElement> elements = LocatorProxies.createWebElementList(locator);
+    private ComponentAndProxy<List<WebElement>, List<WebElement>> initFieldAsListOfElement(final ElementLocator locator) {
+        final List<WebElement> elements = LocatorProxies.createWebElementList(locator);
         return new ComponentAndProxy(elements, elements);
     }
 }

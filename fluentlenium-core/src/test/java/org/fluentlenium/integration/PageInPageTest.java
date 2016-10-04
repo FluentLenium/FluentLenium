@@ -53,7 +53,7 @@ class SubTestPageWithCreate extends FluentPage {
 
     private IncludedPage pageWithCreatePage;
 
-    public void initFluent(FluentControl control) {
+    public void initFluent(final FluentControl control) {
         super.initFluent(control);
         pageWithCreatePage = newInstance(IncludedPage.class);
     }

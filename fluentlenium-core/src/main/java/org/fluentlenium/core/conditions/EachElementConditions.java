@@ -11,13 +11,13 @@ import java.util.List;
  * Conditions implementation for list of elements, matching when each element matches.
  */
 public class EachElementConditions extends AbstractFluentListConditions {
-    public EachElementConditions(List<? extends FluentWebElement> elements) {
+    public EachElementConditions(final List<? extends FluentWebElement> elements) {
         super(elements);
     }
 
     @Override
     public EachElementConditions not() {
-        EachElementConditions negatedConditions = new EachElementConditions(getElements());
+        final EachElementConditions negatedConditions = new EachElementConditions(getElements());
         negatedConditions.setNegation(!isNegation());
         return negatedConditions;
     }
@@ -31,11 +31,11 @@ public class EachElementConditions extends AbstractFluentListConditions {
     }
 
     protected Predicate<FluentDriver> buildEachElementPredicate(final Predicate<FluentWebElement> predicate,
-                                                                final boolean defaultValue) {
-        Predicate<FluentDriver> untilPredicate = new Predicate<FluentDriver>() {
-            public boolean apply(FluentDriver fluent) {
+            final boolean defaultValue) {
+        final Predicate<FluentDriver> untilPredicate = new Predicate<FluentDriver>() {
+            public boolean apply(final FluentDriver fluent) {
                 if (getElements().size() > 0) {
-                    for (FluentWebElement element : getElements()) {
+                    for (final FluentWebElement element : getElements()) {
                         if (!predicate.apply(element)) {
                             return false;
                         }

@@ -9,8 +9,8 @@ public class BaseObjectListConditions<T, C extends Conditions<T>> {
     protected final Function<FluentWebElement, T> objectGetter;
     protected final Function<FluentWebElement, C> conditionsGetter;
 
-    public BaseObjectListConditions(Conditions<FluentWebElement> conditions, Function<FluentWebElement, T> objectGetter,
-                                    Function<FluentWebElement, C> conditionsGetter) {
+    public BaseObjectListConditions(final Conditions<FluentWebElement> conditions,
+            final Function<FluentWebElement, T> objectGetter, final Function<FluentWebElement, C> conditionsGetter) {
         this.conditions = conditions;
         this.objectGetter = objectGetter;
         this.conditionsGetter = conditionsGetter;
@@ -19,7 +19,7 @@ public class BaseObjectListConditions<T, C extends Conditions<T>> {
     public boolean verify(final Predicate<T> predicate) {
         return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return predicate.apply(objectGetter.apply(input));
             }
         });

@@ -18,7 +18,7 @@ public class FluentWaitElement {
 
     private final FluentWait fluentControlWait;
 
-    public FluentWaitElement(FluentWait fluentControlWait, FluentWebElement element) {
+    public FluentWaitElement(final FluentWait fluentControlWait, final FluentWebElement element) {
         this.fluentControlWait = fluentControlWait;
         this.element = element;
     }
@@ -36,51 +36,52 @@ public class FluentWaitElement {
         return fluentControlWait.getWait();
     }
 
-    public FluentWaitElement atMost(long duration, TimeUnit unit) {
+    public FluentWaitElement atMost(final long duration, final TimeUnit unit) {
         fluentControlWait.atMost(duration, unit);
         return this;
     }
 
-    public FluentWaitElement atMost(long timeInMillis) {
+    public FluentWaitElement atMost(final long timeInMillis) {
         fluentControlWait.atMost(timeInMillis);
         return this;
     }
 
-    public FluentWaitElement pollingEvery(long duration, TimeUnit unit) {
+    public FluentWaitElement pollingEvery(final long duration, final TimeUnit unit) {
         fluentControlWait.pollingEvery(duration, unit);
         return this;
     }
 
-    public FluentWaitElement pollingEvery(long duration) {
+    public FluentWaitElement pollingEvery(final long duration) {
         fluentControlWait.pollingEvery(duration);
         return this;
     }
 
-    public FluentWaitElement ignoreAll(Collection<Class<? extends Throwable>> types) {
+    public FluentWaitElement ignoreAll(final Collection<Class<? extends Throwable>> types) {
         fluentControlWait.ignoreAll(types);
         return this;
     }
 
-    public FluentWaitElement ignoring(Class<? extends RuntimeException> exceptionType) {
+    public FluentWaitElement ignoring(final Class<? extends RuntimeException> exceptionType) {
         fluentControlWait.ignoring(exceptionType);
         return this;
     }
 
-    public FluentWaitElement ignoring(Class<? extends RuntimeException> firstType, Class<? extends RuntimeException> secondType) {
+    public FluentWaitElement ignoring(final Class<? extends RuntimeException> firstType,
+            final Class<? extends RuntimeException> secondType) {
         fluentControlWait.ignoring(firstType, secondType);
         return this;
     }
 
-    public void untilPredicate(Predicate<FluentControl> predicate) {
+    public void untilPredicate(final Predicate<FluentControl> predicate) {
         fluentControlWait.untilPredicate(predicate);
     }
 
-    public FluentWaitElement withMessage(String message) {
+    public FluentWaitElement withMessage(final String message) {
         fluentControlWait.withMessage(message);
         return this;
     }
 
-    public FluentWaitElement withMessage(Supplier<String> message) {
+    public FluentWaitElement withMessage(final Supplier<String> message) {
         fluentControlWait.withMessage(message);
         return this;
     }
@@ -90,31 +91,31 @@ public class FluentWaitElement {
         return this;
     }
 
-    public FluentConditions until(FluentWebElement element) {
+    public FluentConditions until(final FluentWebElement element) {
         return fluentControlWait.until(element);
     }
 
-    public FluentListConditions until(List<? extends FluentWebElement> elements) {
+    public FluentListConditions until(final List<? extends FluentWebElement> elements) {
         return fluentControlWait.until(elements);
     }
 
-    public FluentListConditions untilEach(List<? extends FluentWebElement> elements) {
+    public FluentListConditions untilEach(final List<? extends FluentWebElement> elements) {
         return fluentControlWait.untilEach(elements);
     }
 
-    public FluentConditions untilElement(Supplier<? extends FluentWebElement> selector) {
+    public FluentConditions untilElement(final Supplier<? extends FluentWebElement> selector) {
         return fluentControlWait.untilElement(selector);
     }
 
-    public FluentListConditions untilElements(Supplier<? extends List<? extends FluentWebElement>> selector) {
+    public FluentListConditions untilElements(final Supplier<? extends List<? extends FluentWebElement>> selector) {
         return fluentControlWait.untilElements(selector);
     }
 
-    public FluentListConditions untilEachElements(Supplier<? extends List<? extends FluentWebElement>> selector) {
+    public FluentListConditions untilEachElements(final Supplier<? extends List<? extends FluentWebElement>> selector) {
         return fluentControlWait.untilEachElements(selector);
     }
 
-    public FluentWaitWindowMatcher untilWindow(String windowName) {
+    public FluentWaitWindowMatcher untilWindow(final String windowName) {
         return fluentControlWait.untilWindow(windowName);
     }
 
@@ -122,25 +123,25 @@ public class FluentWaitElement {
         return fluentControlWait.untilPage();
     }
 
-    public FluentWaitPageMatcher untilPage(FluentPage page) {
+    public FluentWaitPageMatcher untilPage(final FluentPage page) {
         return fluentControlWait.untilPage(page);
     }
 
-    public FluentWaitElement explicitlyFor(long amount) {
+    public FluentWaitElement explicitlyFor(final long amount) {
         fluentControlWait.explicitlyFor(amount);
         return this;
     }
 
-    public FluentWaitElement explicitlyFor(long amount, TimeUnit timeUnit) {
+    public FluentWaitElement explicitlyFor(final long amount, final TimeUnit timeUnit) {
         fluentControlWait.explicitlyFor(amount, timeUnit);
         return this;
     }
 
-    public void until(Supplier<Boolean> isTrue) {
+    public void until(final Supplier<Boolean> isTrue) {
         fluentControlWait.until(isTrue);
     }
 
-    public <T> T until(Function<? super FluentControl, T> isTrue) {
+    public <T> T until(final Function<? super FluentControl, T> isTrue) {
         return fluentControlWait.until(isTrue);
     }
 

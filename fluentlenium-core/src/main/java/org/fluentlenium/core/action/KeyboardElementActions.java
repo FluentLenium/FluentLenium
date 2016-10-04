@@ -13,12 +13,12 @@ public class KeyboardElementActions {
     private Mouse mouse;
     private final WebElement element;
 
-    public KeyboardElementActions(WebDriver driver, WebElement element) {
+    public KeyboardElementActions(final WebDriver driver, final WebElement element) {
         this.driver = driver;
         this.element = element;
     }
 
-    public KeyboardElementActions(Keyboard keyboard, Mouse mouse, WebElement element) {
+    public KeyboardElementActions(final Keyboard keyboard, final Mouse mouse, final WebElement element) {
         this.keyboard = keyboard;
         this.mouse = mouse;
         this.element = element;
@@ -53,7 +53,7 @@ public class KeyboardElementActions {
      * @see #keyDown(org.openqa.selenium.Keys)
      * @see org.openqa.selenium.interactions.Actions#keyDown(WebElement, Keys)
      */
-    public KeyboardElementActions keyDown(Keys theKey) {
+    public KeyboardElementActions keyDown(final Keys theKey) {
         actions().keyDown(element, theKey).perform();
         return this;
     }
@@ -66,7 +66,7 @@ public class KeyboardElementActions {
      * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#keyUp(WebElement, Keys)
      */
-    public KeyboardElementActions keyUp(Keys theKey) {
+    public KeyboardElementActions keyUp(final Keys theKey) {
         actions().keyUp(element, theKey).perform();
         return this;
     }
@@ -84,7 +84,7 @@ public class KeyboardElementActions {
      * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#sendKeys(WebElement, CharSequence...)
      */
-    public KeyboardElementActions sendKeys(CharSequence... keysToSend) {
+    public KeyboardElementActions sendKeys(final CharSequence... keysToSend) {
         actions().sendKeys(element, keysToSend).perform();
         return this;
     }

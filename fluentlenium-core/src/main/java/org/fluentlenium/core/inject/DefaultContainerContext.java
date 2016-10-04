@@ -12,11 +12,12 @@ public class DefaultContainerContext implements ContainerContext {
     private final SearchContext searchContext;
     private final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
 
-    public DefaultContainerContext(Object container) {
+    public DefaultContainerContext(final Object container) {
         this(container, null, null);
     }
 
-    public DefaultContainerContext(Object container, ContainerContext parentContext, SearchContext searchContext) {
+    public DefaultContainerContext(final Object container, final ContainerContext parentContext,
+            final SearchContext searchContext) {
         this.container = container;
         this.parentContext = parentContext;
         this.searchContext = searchContext;

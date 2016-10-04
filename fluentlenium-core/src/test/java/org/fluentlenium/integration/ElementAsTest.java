@@ -23,10 +23,10 @@ public class ElementAsTest extends IntegrationFluentTest {
     @Test
     public void testAsComponent() {
         goTo(DEFAULT_URL);
-        Component span = el("span").as(Component.class);
+        final Component span = el("span").as(Component.class);
         assertThat(span).isNotNull();
 
-        FluentList<Component> spans = find("span").as(Component.class);
+        final FluentList<Component> spans = find("span").as(Component.class);
         assertThat(spans).isNotEmpty();
     }
 
@@ -45,7 +45,7 @@ public class ElementAsTest extends IntegrationFluentTest {
     @Test
     public void testAsFullConstructorComponent() {
         goTo(DEFAULT_URL);
-        FullConstructorComponent component = el("span").as(FullConstructorComponent.class);
+        final FullConstructorComponent component = el("span").as(FullConstructorComponent.class);
 
         assertThat(component.fluentControl).isSameAs(this);
         assertThat(component.element.getTagName()).isEqualTo("span");
@@ -65,7 +65,8 @@ public class ElementAsTest extends IntegrationFluentTest {
     }
 
     public static class Component extends FluentWebElement {
-        public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        public Component(final WebElement webElement, final FluentControl fluentControl,
+                final ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
     }
@@ -74,7 +75,7 @@ public class ElementAsTest extends IntegrationFluentTest {
 
         private final WebElement element;
 
-        public ComponentNotAnElement(WebElement webElement) {
+        public ComponentNotAnElement(final WebElement webElement) {
             this.element = webElement;
         }
 
@@ -85,7 +86,7 @@ public class ElementAsTest extends IntegrationFluentTest {
     }
 
     public static class NotAComponent extends FluentWebElement {
-        public NotAComponent(String invalidConstructorParam) { // NOPMD UnusedFormalParameter
+        public NotAComponent(final String invalidConstructorParam) { // NOPMD UnusedFormalParameter
             super(null, null, null);
         }
     }
@@ -96,7 +97,8 @@ public class ElementAsTest extends IntegrationFluentTest {
         private final ComponentInstantiator instantiator;
         private final FluentControl fluentControl;
 
-        public FullConstructorComponent(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        public FullConstructorComponent(final WebElement webElement, final FluentControl fluentControl,
+                final ComponentInstantiator instantiator) {
             this.element = webElement;
             this.fluentControl = fluentControl;
             this.instantiator = instantiator;

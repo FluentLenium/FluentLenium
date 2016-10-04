@@ -36,7 +36,7 @@ public class AnnotationsEventsTest extends IntegrationFluentTest {
     private static final class Component {
         private final WebElement element;
 
-        private Component(WebElement element) {
+        private Component(final WebElement element) {
             this.element = element;
         }
 
@@ -62,17 +62,17 @@ public class AnnotationsEventsTest extends IntegrationFluentTest {
     }
 
     @BeforeClickOn
-    private void beforeClickOn(FluentWebElement element) { // NOPMD UnusedPrivateMethod
+    private void beforeClickOn(final FluentWebElement element) { // NOPMD UnusedPrivateMethod
         assertThat(element.tagName()).isEqualTo("button");
         assertThat(afterClick).doesNotContain(element.getElement());
         beforeClick.add(element.getElement());
     }
 
     @AfterClickOn
-    public void afterClickOn(FluentWebElement element) { // NOPMD UnusedPrivateMethod
+    public void afterClickOn(final FluentWebElement element) { // NOPMD UnusedPrivateMethod
         assertThat(element.tagName()).isEqualTo("button");
 
-        ArrayList<WebElement> webElements = new ArrayList<>(afterClick);
+        final ArrayList<WebElement> webElements = new ArrayList<>(afterClick);
         webElements.add(element.getElement());
 
         assertThat(beforeClick).containsExactlyElementsOf(webElements);
@@ -90,13 +90,13 @@ public class AnnotationsEventsTest extends IntegrationFluentTest {
     }
 
     @BeforeFindBy
-    public void beforeFindBy(FluentWebElement element) {
+    public void beforeFindBy(final FluentWebElement element) {
         assertThat(element).isNull();
         beforeFindBy++;
     }
 
     @AfterFindBy
-    public void afterFindBy(FluentWebElement element) {
+    public void afterFindBy(final FluentWebElement element) {
         assertThat(element).isNull();
         afterFindBy++;
     }
@@ -115,7 +115,7 @@ public class AnnotationsEventsTest extends IntegrationFluentTest {
     }
 
     @BeforeNavigate
-    public void beforeNavigate(String url, NavigateAllListener.Direction direction) {
+    public void beforeNavigate(final String url, final NavigateAllListener.Direction direction) {
         beforeNavigate++;
 
         if (beforeNavigate == 1) {
@@ -131,7 +131,7 @@ public class AnnotationsEventsTest extends IntegrationFluentTest {
     }
 
     @AfterNavigate
-    public void afterNavigate(String url, NavigateAllListener.Direction direction) {
+    public void afterNavigate(final String url, final NavigateAllListener.Direction direction) {
         afterNavigate++;
 
         if (afterNavigate == 1) {

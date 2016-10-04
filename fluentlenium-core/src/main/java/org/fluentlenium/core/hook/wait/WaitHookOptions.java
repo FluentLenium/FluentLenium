@@ -28,7 +28,7 @@ public class WaitHookOptions {
         this(WaitHookOptions.class.getAnnotation(Wait.class));
     }
 
-    public WaitHookOptions(Wait annotation) {
+    public WaitHookOptions(final Wait annotation) {
         timeUnit = annotation.timeUnit();
         pollingTimeUnit = annotation.pollingTimeUnit();
         atMost = annotation.timeout() == -1L ? null : annotation.timeout();
@@ -37,7 +37,7 @@ public class WaitHookOptions {
         withNoDefaultsException = annotation.withNoDefaultsException();
     }
 
-    protected FluentWait configureAwait(FluentWait await) {
+    protected FluentWait configureAwait(final FluentWait await) {
         if (atMost != null) {
             await.atMost(atMost, timeUnit);
         }

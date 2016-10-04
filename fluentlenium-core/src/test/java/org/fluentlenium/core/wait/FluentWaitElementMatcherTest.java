@@ -60,7 +60,7 @@ public class FluentWaitElementMatcherTest {
     public void isVerified() {
         final Predicate<FluentWebElement> predicate = new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return input.enabled();
             }
         };
@@ -85,7 +85,7 @@ public class FluentWaitElementMatcherTest {
     public void isNotVerified() {
         final Predicate<FluentWebElement> predicate = new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return !input.enabled();
             }
         };

@@ -15,12 +15,12 @@ public class NotLazyComponents implements LazyComponents {
     }
 
     @Override
-    public boolean addLazyComponentsListener(LazyComponentsListener listener) {
+    public boolean addLazyComponentsListener(final LazyComponentsListener listener) {
         return false;
     }
 
     @Override
-    public boolean removeLazyComponentsListener(LazyComponentsListener listener) {
+    public boolean removeLazyComponentsListener(final LazyComponentsListener listener) {
         return false;
     }
 }

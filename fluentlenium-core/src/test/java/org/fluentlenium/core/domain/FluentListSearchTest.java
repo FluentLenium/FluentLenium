@@ -47,7 +47,7 @@ public class FluentListSearchTest {
         fluentAdapter.initFluent(driver);
         fluentWebElement = new FluentWebElement(webElement, fluentAdapter, new DefaultComponentInstantiator(fluentAdapter));
         webElements.add(fluentWebElement);
-        Field field = fluentWebElement.getClass().getDeclaredField("search");
+        final Field field = fluentWebElement.getClass().getDeclaredField("search");
         field.setAccessible(true);
         field.set(fluentWebElement, search);
 
@@ -56,18 +56,18 @@ public class FluentListSearchTest {
 
     @Test
     public void findElementsIsSearched() {
-        String name = "cssStyle";
-        FluentList fluentList1 = fluentAdapter.newFluentList(webElements);
+        final String name = "cssStyle";
+        final FluentList fluentList1 = fluentAdapter.newFluentList(webElements);
         when(search.find(name, (Filter) null)).thenReturn(fluentList1);
-        FluentList fluentListResponse = fluentList.find(name, null);
+        final FluentList fluentListResponse = fluentList.find(name, null);
         assertThat(fluentListResponse).hasSize(1);
     }
 
     @Test
     public void findElementByPosition() {
-        String name = "cssStyle";
+        final String name = "cssStyle";
         when(search.find(name, (Filter) null)).thenReturn(fluentAdapter.newFluentList(webElements));
-        FluentWebElement element = fluentList.find(name, null).index(0);
+        final FluentWebElement element = fluentList.find(name, null).index(0);
         assertThat(element).isEqualTo(this.fluentWebElement);
     }
 
@@ -79,25 +79,25 @@ public class FluentListSearchTest {
 
     @Test(expected = NoSuchElementException.class)
     public void shouldThrowAnErrorWhenWrongPosition() {
-        String name = "cssStyle";
+        final String name = "cssStyle";
         when(search.find(name, (Filter) null)).thenReturn(fluentAdapter.newFluentList(webElements));
-        FluentWebElement element = fluentList.find(name, (Filter) null).index(1);
+        final FluentWebElement element = fluentList.find(name, (Filter) null).index(1);
         element.now();
     }
 
     @Test
     public void findFirstElement() {
-        String name = "cssStyle";
+        final String name = "cssStyle";
         when(search.find(name, (Filter) null)).thenReturn(fluentAdapter.newFluentList(webElements));
-        FluentWebElement element = fluentList.el(name, (Filter) null);
+        final FluentWebElement element = fluentList.el(name, (Filter) null);
         assertThat(element).isEqualTo(this.fluentWebElement);
     }
 
     @Test(expected = NoSuchElementException.class)
     public void shouldThrowAnErrorWhenNoFirstPosition() {
-        String name = "cssStyle";
+        final String name = "cssStyle";
         when(search.find(name, (Filter) null)).thenReturn(fluentAdapter.newFluentList());
-        FluentWebElement element = fluentList.el(name, (Filter) null);
+        final FluentWebElement element = fluentList.el(name, (Filter) null);
         element.now();
     }
 

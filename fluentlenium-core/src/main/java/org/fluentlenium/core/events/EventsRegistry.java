@@ -194,7 +194,7 @@ public class EventsRegistry { // NOPMD TooManyFields
      * @see ListenerPriorityComparator
      */
     protected void sortListeners() {
-        ListenerPriorityComparator comparator = new ListenerPriorityComparator();
+        final ListenerPriorityComparator comparator = new ListenerPriorityComparator();
 
         Collections.sort(beforeNavigateTo, comparator);
         Collections.sort(afterNavigateTo, comparator);
@@ -226,7 +226,7 @@ public class EventsRegistry { // NOPMD TooManyFields
         Collections.sort(onException, comparator);
     }
 
-    public void unregisterContainer(Object container) {
+    public void unregisterContainer(final Object container) {
         unregisterContainer(beforeNavigateTo, container);
         unregisterContainer(afterNavigateTo, container);
 
@@ -257,10 +257,10 @@ public class EventsRegistry { // NOPMD TooManyFields
         unregisterContainer(onException, container);
     }
 
-    private void unregisterContainer(Iterable iterable, Object container) {
-        Iterator<?> iterator = iterable.iterator();
+    private void unregisterContainer(final Iterable iterable, final Object container) {
+        final Iterator<?> iterator = iterable.iterator();
         while (iterator.hasNext()) {
-            Object next = iterator.next();
+            final Object next = iterator.next();
             if (next instanceof ContainerListener && next == container) { // NOPMD CompareObjectsWithEquals
                 iterator.remove();
             }

@@ -6,16 +6,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringConditionsImpl extends AbstractObjectConditions<String> implements StringConditions {
-    public StringConditionsImpl(String string) {
+    public StringConditionsImpl(final String string) {
         super(string);
     }
 
-    public StringConditionsImpl(String object, boolean negation) {
+    public StringConditionsImpl(final String object, final boolean negation) {
         super(object, negation);
     }
 
     @Override
-    protected StringConditionsImpl newInstance(boolean negationValue) {
+    protected StringConditionsImpl newInstance(final boolean negationValue) {
         return new StringConditionsImpl(object, negationValue);
     }
 
@@ -29,7 +29,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     public boolean contains(final CharSequence s) {
         return verify(new Predicate<String>() {
             @Override
-            public boolean apply(String input) {
+            public boolean apply(final String input) {
                 if (input == null) {
                     return false;
                 }
@@ -42,7 +42,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     public boolean startsWith(final String prefix) {
         return verify(new Predicate<String>() {
             @Override
-            public boolean apply(String input) {
+            public boolean apply(final String input) {
                 if (input == null) {
                     return false;
                 }
@@ -55,7 +55,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     public boolean endsWith(final String suffix) {
         return verify(new Predicate<String>() {
             @Override
-            public boolean apply(String input) {
+            public boolean apply(final String input) {
                 if (input == null) {
                     return false;
                 }
@@ -68,7 +68,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     public boolean equalTo(final String anotherString) {
         return verify(new Predicate<String>() {
             @Override
-            public boolean apply(String input) {
+            public boolean apply(final String input) {
                 if (input == null) {
                     return false;
                 }
@@ -81,7 +81,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     public boolean equalToIgnoreCase(final String anotherString) {
         return verify(new Predicate<String>() {
             @Override
-            public boolean apply(String input) {
+            public boolean apply(final String input) {
                 if (input == null) {
                     return false;
                 }
@@ -94,7 +94,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     public boolean matches(final String regex) {
         return verify(new Predicate<String>() {
             @Override
-            public boolean apply(String input) {
+            public boolean apply(final String input) {
                 if (input == null) {
                     return false;
                 }
@@ -107,11 +107,11 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     public boolean matches(final Pattern pattern) {
         return verify(new Predicate<String>() {
             @Override
-            public boolean apply(String input) {
+            public boolean apply(final String input) {
                 if (input == null) {
                     return false;
                 }
-                Matcher m = pattern.matcher(input);
+                final Matcher m = pattern.matcher(input);
                 return m.matches();
             }
         });

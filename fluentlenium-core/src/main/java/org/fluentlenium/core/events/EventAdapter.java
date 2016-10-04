@@ -14,7 +14,7 @@ class EventAdapter implements WebDriverEventListener {
     private final EventListener listener;
     private final ComponentInstantiator instantiator;
 
-    EventAdapter(final EventListener listener, ComponentInstantiator instantiator) {
+    EventAdapter(final EventListener listener, final ComponentInstantiator instantiator) {
         this.listener = listener;
         this.instantiator = instantiator;
     }
@@ -50,12 +50,12 @@ class EventAdapter implements WebDriverEventListener {
     }
 
     @Override
-    public void beforeNavigateRefresh(WebDriver driver) {
+    public void beforeNavigateRefresh(final WebDriver driver) {
         this.listener.beforeNavigateRefresh(driver);
     }
 
     @Override
-    public void afterNavigateRefresh(WebDriver driver) {
+    public void afterNavigateRefresh(final WebDriver driver) {
         this.listener.afterNavigateRefresh(driver);
     }
 
@@ -109,14 +109,14 @@ class EventAdapter implements WebDriverEventListener {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        EventAdapter that = (EventAdapter) o;
+        final EventAdapter that = (EventAdapter) o;
         return Objects.equals(listener, that.listener);
     }
 

@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentList> {
-    public FluentListAssert(FluentList<?> actual) {
+    public FluentListAssert(final FluentList<?> actual) {
         super(actual, FluentListAssert.class);
     }
 
@@ -17,9 +17,9 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @param textToFind text to find
      * @return assertion object
      */
-    public FluentListAssert hasText(String textToFind) {
-        List<String> actualTexts = actual.texts();
-        for (String text : actualTexts) {
+    public FluentListAssert hasText(final String textToFind) {
+        final List<String> actualTexts = actual.texts();
+        for (final String text : actualTexts) {
             if (text.contains(textToFind)) {
                 return this;
             }
@@ -34,9 +34,9 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @param textToFind text to find
      * @return assertion object
      */
-    public FluentListAssert hasNotText(String textToFind) {
-        List<String> actualTexts = actual.texts();
-        for (String text : actualTexts) {
+    public FluentListAssert hasNotText(final String textToFind) {
+        final List<String> actualTexts = actual.texts();
+        for (final String text : actualTexts) {
             if (text.contains(textToFind)) {
                 super.failWithMessage(
                         "At least one selected elements contains text: " + textToFind + " . Actual texts found : " + actualTexts);
@@ -45,7 +45,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
-    public FluentListAssert hasSize(int expectedSize) {
+    public FluentListAssert hasSize(final int expectedSize) {
         if (actual.size() != expectedSize) {
             super.failWithMessage("Expected size: " + expectedSize + ". Actual size: " + actual.size() + ".");
         }
@@ -62,8 +62,8 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @param idToFind id to find
      * @return assertion object
      */
-    public FluentListAssert hasId(String idToFind) {
-        List actualIds = actual.ids();
+    public FluentListAssert hasId(final String idToFind) {
+        final List actualIds = actual.ids();
         if (!actualIds.contains(idToFind)) {
             super.failWithMessage("No selected elements has id: " + idToFind + " . Actual texts found : " + actualIds);
         }
@@ -76,18 +76,18 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @param classToFind class to find
      * @return assertion object
      */
-    public FluentListAssert hasClass(String classToFind) {
-        List<String> classes = (List<String>) actual.attributes("class");
+    public FluentListAssert hasClass(final String classToFind) {
+        final List<String> classes = (List<String>) actual.attributes("class");
 
-        for (String classesStr : classes) {
-            List<String> classesLst = Arrays.asList(classesStr.split(" "));
+        for (final String classesStr : classes) {
+            final List<String> classesLst = Arrays.asList(classesStr.split(" "));
             if (classesLst.contains(classToFind)) {
                 return this;
             }
         }
 
-        StringBuilder builder = new StringBuilder();
-        for (String classFromElement : classes) {
+        final StringBuilder builder = new StringBuilder();
+        for (final String classFromElement : classes) {
             if (builder.length() > 0) {
                 builder.append(", ");
             }
@@ -102,7 +102,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     /*
      * Used in FluentListSizeBuilder to raise AssertionError
      */
-    /* default */ void internalFail(String reason) {
+    /* default */ void internalFail(final String reason) {
         super.failWithMessage(reason);
     }
 

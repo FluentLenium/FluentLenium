@@ -53,7 +53,7 @@ public class MouseElementActionsTest {
 
     @Test
     public void testClickAndHold() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        final MouseElementActions actions = new MouseElementActions(driver, element);
         actions.clickAndHold();
 
         verify(mouse).mouseMove(coordinates);
@@ -62,7 +62,7 @@ public class MouseElementActionsTest {
 
     @Test
     public void testClick() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        final MouseElementActions actions = new MouseElementActions(driver, element);
         actions.click();
 
         verify(mouse).mouseMove(coordinates);
@@ -71,7 +71,7 @@ public class MouseElementActionsTest {
 
     @Test
     public void testClickKeyboardMouse() {
-        MouseElementActions actions = new MouseElementActions(keyboard, mouse, element);
+        final MouseElementActions actions = new MouseElementActions(keyboard, mouse, element);
         actions.click();
 
         verify(mouse).mouseMove(coordinates);
@@ -80,7 +80,7 @@ public class MouseElementActionsTest {
 
     @Test
     public void testContextClick() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        final MouseElementActions actions = new MouseElementActions(driver, element);
         actions.contextClick();
 
         verify(mouse).mouseMove(coordinates);
@@ -89,7 +89,7 @@ public class MouseElementActionsTest {
 
     @Test
     public void testDoubleClick() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        final MouseElementActions actions = new MouseElementActions(driver, element);
         actions.doubleClick();
 
         verify(mouse).mouseMove(coordinates);
@@ -98,7 +98,7 @@ public class MouseElementActionsTest {
 
     @Test
     public void testRelease() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        final MouseElementActions actions = new MouseElementActions(driver, element);
         actions.release();
 
         verify(mouse).mouseMove(coordinates);
@@ -107,7 +107,7 @@ public class MouseElementActionsTest {
 
     @Test
     public void moveToElement() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        final MouseElementActions actions = new MouseElementActions(driver, element);
         actions.moveToElement();
 
         verify(mouse).mouseMove(coordinates);
@@ -115,7 +115,7 @@ public class MouseElementActionsTest {
 
     @Test
     public void moveToElementOffset() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        final MouseElementActions actions = new MouseElementActions(driver, element);
         actions.moveToElement(10, 20);
 
         verify(mouse).mouseMove(coordinates, 10, 20);
@@ -123,10 +123,10 @@ public class MouseElementActionsTest {
 
     @Test
     public void dragAndDropFrom() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        final MouseElementActions actions = new MouseElementActions(driver, element);
 
-        LocatableElement source = mock(LocatableElement.class);
-        Coordinates sourceCoordinates = mock(Coordinates.class);
+        final LocatableElement source = mock(LocatableElement.class);
+        final Coordinates sourceCoordinates = mock(Coordinates.class);
         when(source.getCoordinates()).thenReturn(sourceCoordinates);
 
         actions.dragAndDropFrom(source);
@@ -139,10 +139,10 @@ public class MouseElementActionsTest {
 
     @Test
     public void dragAndDropTo() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        final MouseElementActions actions = new MouseElementActions(driver, element);
 
-        LocatableElement target = mock(LocatableElement.class);
-        Coordinates targetCoordinates = mock(Coordinates.class);
+        final LocatableElement target = mock(LocatableElement.class);
+        final Coordinates targetCoordinates = mock(Coordinates.class);
         when(target.getCoordinates()).thenReturn(targetCoordinates);
 
         actions.dragAndDropTo(target);
@@ -155,7 +155,7 @@ public class MouseElementActionsTest {
 
     @Test
     public void dragAndDropBy() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        final MouseElementActions actions = new MouseElementActions(driver, element);
         actions.dragAndDropBy(10, 20);
 
         verify(mouse).mouseMove(coordinates);
@@ -166,10 +166,10 @@ public class MouseElementActionsTest {
 
     @Test
     public void testBasic() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        final MouseElementActions actions = new MouseElementActions(driver, element);
         Assertions.assertThat(actions.basic()).isSameAs(mouse);
 
-        MouseElementActions actionsAlt = new MouseElementActions(keyboard, mouse, element);
+        final MouseElementActions actionsAlt = new MouseElementActions(keyboard, mouse, element);
         Assertions.assertThat(actionsAlt.basic()).isSameAs(mouse);
     }
 

@@ -20,7 +20,7 @@ public class WindowAction {
     private final FluentControl fluentControl;
     private final WebDriver driver;
 
-    public WindowAction(FluentControl fluentControl, WebDriver driver) {
+    public WindowAction(final FluentControl fluentControl, final WebDriver driver) {
         this.driver = driver;
         this.fluentControl = fluentControl;
     }
@@ -60,7 +60,7 @@ public class WindowAction {
      * @param size size of the window
      * @return the WindowAction object itself
      */
-    public WindowAction setSize(Dimension size) {
+    public WindowAction setSize(final Dimension size) {
         driver.manage().window().setSize(size);
         return this;
     }
@@ -80,7 +80,7 @@ public class WindowAction {
      * @param position position to set
      * @return the WindowAction object itself
      */
-    public WindowAction setPosition(Point position) {
+    public WindowAction setPosition(final Point position) {
         driver.manage().window().setPosition(position);
         return this;
     }
@@ -101,7 +101,7 @@ public class WindowAction {
      * @param button button to be clicked
      * @return handle of old (parent) window
      */
-    public String clickAndOpenNew(FluentWebElement button) {
+    public String clickAndOpenNew(final FluentWebElement button) {
         final String oldWindowHandle = driver.getWindowHandle();
 
         final Set<String> oldWindowHandles = driver.getWindowHandles();
@@ -109,8 +109,8 @@ public class WindowAction {
 
         waitForNewWindowToOpen(oldWindowHandles);
 
-        Set<String> newWindowHandles = driver.getWindowHandles();
-        String newWindowHandle = getOnlyElement(difference(newWindowHandles, oldWindowHandles));
+        final Set<String> newWindowHandles = driver.getWindowHandles();
+        final String newWindowHandle = getOnlyElement(difference(newWindowHandles, oldWindowHandles));
         switchTo(newWindowHandle);
 
         return oldWindowHandle;
@@ -123,9 +123,9 @@ public class WindowAction {
      */
     public String openNewAndSwitch() {
         final Set<String> oldWindowHandles = driver.getWindowHandles();
-        String oldWindowHandle = driver.getWindowHandle();
+        final String oldWindowHandle = driver.getWindowHandle();
 
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        final JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.open('someUrl', '_blank')");
         waitForNewWindowToOpen(oldWindowHandles);
 
@@ -141,8 +141,8 @@ public class WindowAction {
      *
      * @param button button to be clicked
      */
-    public void clickAndCloseCurrent(FluentWebElement button) {
-        String currentWindowHandle = driver.getWindowHandle();
+    public void clickAndCloseCurrent(final FluentWebElement button) {
+        final String currentWindowHandle = driver.getWindowHandle();
         button.click();
 
         fluentControl.await().untilWindow(currentWindowHandle).isNotDisplayed();
@@ -173,7 +173,7 @@ public class WindowAction {
      * @return the WindowAction object itself
      */
     public WindowAction switchToLast() {
-        Set<String> windowHandles = new TreeSet<>(driver.getWindowHandles());
+        final Set<String> windowHandles = new TreeSet<>(driver.getWindowHandles());
 
         driver.switchTo().window(getLast(windowHandles));
         return this;
@@ -185,8 +185,8 @@ public class WindowAction {
      * @param windowHandleToExclude - if list size is greater then one it will be removed
      * @return the WindowAction object itself
      */
-    public WindowAction switchToLast(String windowHandleToExclude) {
-        Set<String> windowHandles = new TreeSet<>(driver.getWindowHandles());
+    public WindowAction switchToLast(final String windowHandleToExclude) {
+        final Set<String> windowHandles = new TreeSet<>(driver.getWindowHandles());
 
         if (windowHandles.size() > 1) {
             windowHandles.remove(windowHandleToExclude);
@@ -202,7 +202,7 @@ public class WindowAction {
      * @param windowHandle window handle reference as a String
      * @return the WindowAction object itself
      */
-    public WindowAction switchTo(String windowHandle) {
+    public WindowAction switchTo(final String windowHandle) {
         driver.switchTo().window(windowHandle);
         return this;
     }
@@ -219,17 +219,17 @@ public class WindowAction {
     private class WindowHandlesCountIs implements Predicate<FluentControl> {
         private final int expectedValue;
 
-        WindowHandlesCountIs(int expectedValue) {
+        WindowHandlesCountIs(final int expectedValue) {
             this.expectedValue = expectedValue;
         }
 
         @Override
-        public boolean apply(FluentControl input) {
+        public boolean apply(final FluentControl input) {
             return driver.getWindowHandles().size() == expectedValue;
         }
     }
 
-    private void waitForNewWindowToOpen(Set<String> oldWindowHandles) {
+    private void waitForNewWindowToOpen(final Set<String> oldWindowHandles) {
         fluentControl.await().atMost(10, TimeUnit.SECONDS).withMessage("Timed out waiting for new window to open.")
                 .untilPredicate(new WindowHandlesCountIs(oldWindowHandles.size() + 1));
     }

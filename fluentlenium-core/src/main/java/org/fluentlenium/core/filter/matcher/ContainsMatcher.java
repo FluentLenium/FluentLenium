@@ -4,11 +4,11 @@ import java.util.regex.Pattern;
 
 public class ContainsMatcher extends AbstractMacher {
 
-    public ContainsMatcher(String value) {
+    public ContainsMatcher(final String value) {
         super(value);
     }
 
-    public ContainsMatcher(Pattern value) {
+    public ContainsMatcher(final Pattern value) {
         super(value);
     }
 
@@ -18,7 +18,7 @@ public class ContainsMatcher extends AbstractMacher {
     }
 
     @Override
-    public boolean isSatisfiedBy(String o) {
+    public boolean isSatisfiedBy(final String o) {
         return CalculateService.contains(getPattern(), getValue(), o);
     }
 

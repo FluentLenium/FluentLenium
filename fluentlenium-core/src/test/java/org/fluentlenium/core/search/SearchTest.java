@@ -55,10 +55,10 @@ public class SearchTest {
 
     @Before
     public void before() {
-        FluentAdapter fluentAdapter = new FluentAdapter();
+        final FluentAdapter fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(driver);
 
-        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
+        final DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
         search = new Search(searchContext, instantiator);
     }
 
@@ -69,14 +69,14 @@ public class SearchTest {
 
     @Test
     public void findCheckCssIsWellFormed() {
-        WebElement webElement = mock(WebElement.class);
-        WebElement webElement2 = mock(WebElement.class);
-        List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
+        final WebElement webElement = mock(WebElement.class);
+        final WebElement webElement2 = mock(WebElement.class);
+        final List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
 
         when(searchContext.findElements(By.cssSelector("cssStyle[generated=true][checked=ok]"))).thenReturn(webElements);
 
-        String name = "cssStyle";
-        Filter[] filters = new Filter[]{filter1, filter2};
+        final String name = "cssStyle";
+        final Filter[] filters = new Filter[] {filter1, filter2};
         when(filter1.isPreFilter()).thenReturn(true);
         when(filter1.toString()).thenReturn("[generated=true]");
         when(filter2.isPreFilter()).thenReturn(true);
@@ -88,12 +88,12 @@ public class SearchTest {
 
     @Test
     public void canLoopIntoFluentWebElementAfterASearch() {
-        WebElement webElement = mock(WebElement.class);
-        WebElement webElement2 = mock(WebElement.class);
-        List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
+        final WebElement webElement = mock(WebElement.class);
+        final WebElement webElement2 = mock(WebElement.class);
+        final List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
 
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(webElements);
-        for (FluentWebElement fluentWebElement : search.find("cssStyle")) {
+        for (final FluentWebElement fluentWebElement : search.find("cssStyle")) {
             //just to check the cast
             assertThat(fluentWebElement).isInstanceOf(FluentWebElement.class);
         }
@@ -102,19 +102,19 @@ public class SearchTest {
 
     @Test
     public void findCheckCssIsWellFormedWithPostSelector() {
-        WebElement webElement = mock(WebElement.class);
-        WebElement webElement2 = mock(WebElement.class);
-        List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
+        final WebElement webElement = mock(WebElement.class);
+        final WebElement webElement2 = mock(WebElement.class);
+        final List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
 
         when(searchContext.findElements(By.cssSelector("cssStyle[generated=true]"))).thenReturn(webElements);
 
-        String name = "cssStyle";
-        Filter[] filters = new Filter[]{filter1, filter2};
+        final String name = "cssStyle";
+        final Filter[] filters = new Filter[] {filter1, filter2};
         when(filter1.isPreFilter()).thenReturn(true);
         when(filter1.toString()).thenReturn("[generated=true]");
         when(filter2.isPreFilter()).thenReturn(false);
         when(filter2.toString()).thenReturn("[checked=ok]");
-        AbstractMacher matcher = mock(AbstractMacher.class);
+        final AbstractMacher matcher = mock(AbstractMacher.class);
         when(matcher.isSatisfiedBy(any(String.class))).thenReturn(true);
         when(filter2.getMatcher()).thenReturn(matcher);
 
@@ -124,19 +124,19 @@ public class SearchTest {
 
     @Test
     public void findCheckCssIsWellFormedWithPostSelectorAndByLocator() {
-        WebElement webElement = mock(WebElement.class);
-        WebElement webElement2 = mock(WebElement.class);
-        List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
+        final WebElement webElement = mock(WebElement.class);
+        final WebElement webElement2 = mock(WebElement.class);
+        final List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
 
         when(searchContext.findElements(By.cssSelector("cssStyle[generated=true]"))).thenReturn(webElements);
 
-        By locator = By.cssSelector("cssStyle");
-        Filter[] filters = new Filter[]{filter1, filter2};
+        final By locator = By.cssSelector("cssStyle");
+        final Filter[] filters = new Filter[] {filter1, filter2};
         when(filter1.isPreFilter()).thenReturn(true);
         when(filter1.toString()).thenReturn("[generated=true]");
         when(filter2.isPreFilter()).thenReturn(false);
         when(filter2.toString()).thenReturn("[checked=ok]");
-        AbstractMacher matcher = mock(AbstractMacher.class);
+        final AbstractMacher matcher = mock(AbstractMacher.class);
         when(matcher.isSatisfiedBy(any(String.class))).thenReturn(true);
         when(filter2.getMatcher()).thenReturn(matcher);
 
@@ -146,24 +146,24 @@ public class SearchTest {
 
     @Test
     public void findPostSelectorFilterWithElementThatMatch() {
-        String name = "cssStyle";
-        Filter[] filters = new Filter[]{filter1};
+        final String name = "cssStyle";
+        final Filter[] filters = new Filter[] {filter1};
         when(filter1.isPreFilter()).thenReturn(false);
-        WebElement webElement = mock(WebElement.class);
+        final WebElement webElement = mock(WebElement.class);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(Collections.singletonList(webElement));
         when(filter1.getMatcher()).thenReturn(matcher1);
         when(matcher1.isSatisfiedBy(Matchers.<String>anyObject())).thenReturn(true);
 
-        FluentList fluentList = search.find(name, filters);
+        final FluentList fluentList = search.find(name, filters);
         assertThat(fluentList).hasSize(1);
     }
 
     @Test
     public void findPostSelectorFilterWithElementThatDontMatch() {
         final String name = "cssStyle";
-        final Filter[] filters = new Filter[]{filter1};
+        final Filter[] filters = new Filter[] {filter1};
         when(filter1.isPreFilter()).thenReturn(false);
-        WebElement webElement = mock(WebElement.class);
+        final WebElement webElement = mock(WebElement.class);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(Collections.singletonList(webElement));
         when(filter1.getMatcher()).thenReturn(matcher1);
         when(matcher1.isSatisfiedBy(Matchers.<String>anyObject())).thenReturn(false);
@@ -181,10 +181,10 @@ public class SearchTest {
 
     @Test
     public void findPostSelectorFilterWithFilterOnText() {
-        String name = "cssStyle";
-        Filter[] filters = new Filter[]{filter1};
+        final String name = "cssStyle";
+        final Filter[] filters = new Filter[] {filter1};
         when(filter1.isPreFilter()).thenReturn(false);
-        WebElement webElement = mock(WebElement.class);
+        final WebElement webElement = mock(WebElement.class);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(Collections.singletonList(webElement));
         when(filter1.getMatcher()).thenReturn(matcher1);
         when(matcher1.isSatisfiedBy(Matchers.<String>anyObject())).thenReturn(false);
@@ -199,46 +199,46 @@ public class SearchTest {
 
     @Test
     public void findByPosition() {
-        String name = "cssStyle";
-        WebElement webElement1 = mock(WebElement.class);
+        final String name = "cssStyle";
+        final WebElement webElement1 = mock(WebElement.class);
         when(webElement1.getTagName()).thenReturn("span");
-        WebElement webElement2 = mock(WebElement.class);
+        final WebElement webElement2 = mock(WebElement.class);
         when(webElement2.getTagName()).thenReturn("a");
-        List<WebElement> webElements = new ArrayList<>();
+        final List<WebElement> webElements = new ArrayList<>();
         webElements.add(webElement1);
         webElements.add(webElement2);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(webElements);
 
-        FluentWebElement fluentWebElement = search.find(name).index(1);
+        final FluentWebElement fluentWebElement = search.find(name).index(1);
         assertThat(fluentWebElement.tagName()).isEqualTo("a");
     }
 
     @Test(expected = NoSuchElementException.class)
     public void shouldThrowErrorWhenPositionNotFound() {
-        String name = "cssStyle";
+        final String name = "cssStyle";
         search.find(name).index(0).now();
     }
 
     @Test
     public void findFirstShouldReturnFirst() {
-        String name = "cssStyle";
-        WebElement webElement1 = mock(WebElement.class);
+        final String name = "cssStyle";
+        final WebElement webElement1 = mock(WebElement.class);
         when(webElement1.getTagName()).thenReturn("span");
-        WebElement webElement2 = mock(WebElement.class);
+        final WebElement webElement2 = mock(WebElement.class);
         when(webElement2.getTagName()).thenReturn("a");
-        List<WebElement> webElements = new ArrayList<>();
+        final List<WebElement> webElements = new ArrayList<>();
         webElements.add(webElement1);
         webElements.add(webElement2);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(webElements);
 
-        FluentWebElement fluentWebElement = search.el(name);
+        final FluentWebElement fluentWebElement = search.el(name);
         assertThat(fluentWebElement.tagName()).isEqualTo("span");
     }
 
     @Test(expected = NoSuchElementException.class)
     public void shouldThrowErrorWhenFirstNotFound() {
-        String name = "cssStyle";
-        FluentWebElement fluentWebElement = search.el(name);
+        final String name = "cssStyle";
+        final FluentWebElement fluentWebElement = search.el(name);
         assertThat(fluentWebElement.tagName()).isEqualTo("span");
     }
 

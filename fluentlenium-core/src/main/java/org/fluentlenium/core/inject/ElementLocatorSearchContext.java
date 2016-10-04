@@ -11,17 +11,17 @@ import java.util.List;
 public class ElementLocatorSearchContext implements SearchContext {
     private final ElementLocator locator;
 
-    public ElementLocatorSearchContext(ElementLocator locator) {
+    public ElementLocatorSearchContext(final ElementLocator locator) {
         this.locator = locator;
     }
 
     @Override
-    public List<WebElement> findElements(By by) {
-        List<WebElement> elements = new ArrayList<>();
+    public List<WebElement> findElements(final By by) {
+        final List<WebElement> elements = new ArrayList<>();
 
-        List<WebElement> baseElements = locator.findElements();
+        final List<WebElement> baseElements = locator.findElements();
 
-        for (WebElement element : baseElements) {
+        for (final WebElement element : baseElements) {
             elements.addAll(element.findElements(by));
         }
 
@@ -29,7 +29,7 @@ public class ElementLocatorSearchContext implements SearchContext {
     }
 
     @Override
-    public WebElement findElement(By by) {
+    public WebElement findElement(final By by) {
         return locator.findElement().findElement(by);
     }
 }

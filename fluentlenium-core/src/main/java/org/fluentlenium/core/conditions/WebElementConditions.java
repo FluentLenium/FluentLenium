@@ -7,16 +7,16 @@ import org.fluentlenium.core.domain.FluentWebElement;
  * Fluent object to handle {@link org.openqa.selenium.support.ui.ExpectedConditions} on FluentWebElement in fluentlenium API.
  */
 public class WebElementConditions extends AbstractObjectConditions<FluentWebElement> implements FluentConditions {
-    public WebElementConditions(FluentWebElement element) {
+    public WebElementConditions(final FluentWebElement element) {
         super(element);
     }
 
-    public WebElementConditions(FluentWebElement object, boolean negation) {
+    public WebElementConditions(final FluentWebElement object, final boolean negation) {
         super(object, negation);
     }
 
     @Override
-    protected AbstractObjectConditions<FluentWebElement> newInstance(boolean negationValue) {
+    protected AbstractObjectConditions<FluentWebElement> newInstance(final boolean negationValue) {
         return new WebElementConditions(object, negationValue);
     }
 
@@ -30,7 +30,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     public boolean present() {
         return verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return input.present();
             }
         });
@@ -40,7 +40,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     public boolean clickable() {
         return verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return input.clickable();
             }
         });
@@ -50,7 +50,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     public boolean stale() {
         return verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return input.stale();
             }
         });
@@ -60,7 +60,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     public boolean displayed() {
         return verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return input.displayed();
             }
         });
@@ -70,7 +70,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     public boolean enabled() {
         return verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return input.enabled();
             }
         });
@@ -80,7 +80,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     public boolean selected() {
         return verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(FluentWebElement input) {
+            public boolean apply(final FluentWebElement input) {
                 return input.selected();
             }
         });
@@ -92,7 +92,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public StringConditions attribute(String name) {
+    public StringConditions attribute(final String name) {
         return new StringConditionsImpl(object.attribute(name), negation);
     }
 
@@ -117,7 +117,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public boolean tagName(String tagName) {
+    public boolean tagName(final String tagName) {
         return tagName().equalTo(tagName);
     }
 
@@ -127,7 +127,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public boolean value(String value) {
+    public boolean value(final String value) {
         return value().equalTo(value);
     }
 
@@ -137,7 +137,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public boolean text(String anotherString) {
+    public boolean text(final String anotherString) {
         return text().equalTo(anotherString);
     }
 
@@ -147,7 +147,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public boolean textContent(String anotherString) {
+    public boolean textContent(final String anotherString) {
         return textContent().equalTo(anotherString);
     }
 

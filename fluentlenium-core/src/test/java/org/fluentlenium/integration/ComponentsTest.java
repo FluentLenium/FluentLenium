@@ -51,7 +51,7 @@ public class ComponentsTest extends IntegrationFluentTest {
         assertThat(content.page.parent).isSameAs(content);
 
         int i = 1;
-        for (Component component : content.components) {
+        for (final Component component : content.components) {
             assertThat(component.parent).isSameAs(content);
             assertThat(component.title.text()).isEqualTo("Component " + i);
 
@@ -59,7 +59,7 @@ public class ComponentsTest extends IntegrationFluentTest {
             assertThat(component.subComponent.action.text()).isEqualTo("Sub Component " + i + " (" + 1 + ")");
             assertThat(component.subComponents).hasSize(3);
             int j = 1;
-            for (SubComponent subComponent : component.subComponents) {
+            for (final SubComponent subComponent : component.subComponents) {
                 assertThat(subComponent.parent).isSameAs(component);
                 assertThat(subComponent.action.text()).isEqualTo("Sub Component " + i + " (" + j + ")");
                 j++;
@@ -75,7 +75,7 @@ public class ComponentsTest extends IntegrationFluentTest {
         @FindBy(css = ".title")
         private FluentWebElement title;
 
-        public Header(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        public Header(final WebElement webElement, final FluentControl fluentControl, final ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
     }
@@ -84,7 +84,7 @@ public class ComponentsTest extends IntegrationFluentTest {
         @FindBy(css = ".copyright")
         private FluentWebElement copyright;
 
-        public Footer(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        public Footer(final WebElement webElement, final FluentControl fluentControl, final ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
     }
@@ -103,7 +103,8 @@ public class ComponentsTest extends IntegrationFluentTest {
         @FindBy(css = ".sub-component")
         private SubComponent subComponent;
 
-        public Component(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        public Component(final WebElement webElement, final FluentControl fluentControl,
+                final ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
     }
@@ -117,7 +118,7 @@ public class ComponentsTest extends IntegrationFluentTest {
         @FindBy(css = "a.action")
         private FluentWebElement action;
 
-        public SubComponent(WebElement webElement) {
+        public SubComponent(final WebElement webElement) {
             this.webElement = webElement;
         }
     }
@@ -139,7 +140,7 @@ public class ComponentsTest extends IntegrationFluentTest {
 
         private FluentWebElement notPresent;
 
-        public Content(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        public Content(final WebElement webElement, final FluentControl fluentControl, final ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
 

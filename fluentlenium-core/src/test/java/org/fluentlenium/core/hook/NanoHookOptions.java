@@ -12,7 +12,7 @@ import lombok.Setter;
 public class NanoHookOptions {
     private String value; // NOPMD ImmutableField
 
-    public NanoHookOptions(NanoHookAnnotation annotation) {
+    public NanoHookOptions(final NanoHookAnnotation annotation) {
         this.value = annotation.value();
     }
 }

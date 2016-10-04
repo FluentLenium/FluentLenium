@@ -26,14 +26,14 @@ public class FluentTestNg extends FluentTestRunnerAdapter {
         super(new ThreadLocalFluentControlContainer());
     }
 
-    public Map<Method, ITestNGMethod> getMethods(ITestContext context) {
+    public Map<Method, ITestNGMethod> getMethods(final ITestContext context) {
         synchronized (this) {
             Map<Method, ITestNGMethod> testMethods = methods.get(context);
 
             if (testMethods == null) {
                 testMethods = new HashMap<>();
 
-                for (ITestNGMethod method : context.getAllTestMethods()) {
+                for (final ITestNGMethod method : context.getAllTestMethods()) {
                     testMethods.put(method.getConstructorOrMethod().getMethod(), method);
                 }
 
@@ -44,20 +44,20 @@ public class FluentTestNg extends FluentTestRunnerAdapter {
     }
 
     @AfterTest(alwaysRun = true)
-    public void afterTest(ITestContext context) {
+    public void afterTest(final ITestContext context) {
         synchronized (this) {
             methods.remove(context);
         }
     }
 
     @BeforeMethod(alwaysRun = true)
-    public void beforeMethod(Method m, ITestContext context) {
-        ITestNGMethod testNGMethod = getMethods(context).get(m);
+    public void beforeMethod(final Method m, final ITestContext context) {
+        final ITestNGMethod testNGMethod = getMethods(context).get(m);
         starting(testNGMethod.getRealClass(), testNGMethod.getMethodName());
     }
 
     @AfterMethod(alwaysRun = true)
-    public void afterMethod(ITestResult result) {
+    public void afterMethod(final ITestResult result) {
         if (!result.isSuccess()) {
             failed(result.getThrowable(), result.getTestClass().getRealClass(), result.getName());
         }

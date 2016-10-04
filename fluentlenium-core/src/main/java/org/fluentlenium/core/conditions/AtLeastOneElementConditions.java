@@ -11,13 +11,13 @@ import java.util.List;
  * Conditions implementation for list of elements, matching when at least one element of the list matches.
  */
 public class AtLeastOneElementConditions extends AbstractFluentListConditions {
-    public AtLeastOneElementConditions(List<? extends FluentWebElement> elements) {
+    public AtLeastOneElementConditions(final List<? extends FluentWebElement> elements) {
         super(elements);
     }
 
     @Override
     public AtLeastOneElementConditions not() {
-        AtLeastOneElementConditions negatedConditions = new AtLeastOneElementConditions(getElements());
+        final AtLeastOneElementConditions negatedConditions = new AtLeastOneElementConditions(getElements());
         negatedConditions.setNegation(!isNegation());
         return negatedConditions;
     }
@@ -32,11 +32,11 @@ public class AtLeastOneElementConditions extends AbstractFluentListConditions {
     }
 
     protected Predicate<FluentDriver> buildAtLeastOnePredicate(final Predicate<FluentWebElement> predicate,
-                                                               final boolean defaultValue) {
-        Predicate<FluentDriver> untilPredicate = new Predicate<FluentDriver>() {
-            public boolean apply(FluentDriver fluent) {
+            final boolean defaultValue) {
+        final Predicate<FluentDriver> untilPredicate = new Predicate<FluentDriver>() {
+            public boolean apply(final FluentDriver fluent) {
                 if (getElements().size() > 0) {
-                    for (FluentWebElement element : getElements()) {
+                    for (final FluentWebElement element : getElements()) {
                         if (predicate.apply(element)) {
                             return true;
                         }

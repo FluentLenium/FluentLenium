@@ -13,7 +13,7 @@ public class GoToTest extends IntegrationFluentTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void goToWithNullString() {
-        String url = null;
+        final String url = null;
         goTo(url);
     }
 
@@ -25,13 +25,13 @@ public class GoToTest extends IntegrationFluentTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void goToWithNullPage() {
-        FluentPage page = null;
+        final FluentPage page = null;
         goTo(page);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void goToWithNullUrlOnPage() {
-        FluentPage page = new FluentPage() {
+        final FluentPage page = new FluentPage() {
         };
         page.initFluent(this);
         goTo(page);
@@ -39,7 +39,7 @@ public class GoToTest extends IntegrationFluentTest {
 
     @Test
     public void checkGoToPage() {
-        FluentPage page = newInstance(MyPage.class);
+        final FluentPage page = newInstance(MyPage.class);
         goTo(page);
         verify(webDriver).get(DEFAULT_URL);
     }

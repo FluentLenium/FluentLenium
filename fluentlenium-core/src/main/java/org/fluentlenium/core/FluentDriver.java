@@ -73,7 +73,7 @@ public class FluentDriver implements FluentControl {
 
     private final WindowAction windowAction;
 
-    public FluentDriver(WebDriver driver, ConfigurationProperties configuration, FluentControl adapter) {
+    public FluentDriver(final WebDriver driver, final ConfigurationProperties configuration, final FluentControl adapter) {
         this.configuration = configuration;
         this.componentsManager = new ComponentsManager(adapter);
         this.driver = driver;
@@ -138,7 +138,7 @@ public class FluentDriver implements FluentControl {
     }
 
     @Override
-    public void takeHtmlDump(String fileName) {
+    public void takeHtmlDump(final String fileName) {
         File destFile = null;
         try {
             if (configuration.getHtmlDumpPath() == null) {
@@ -146,22 +146,22 @@ public class FluentDriver implements FluentControl {
             } else {
                 destFile = Paths.get(configuration.getHtmlDumpPath(), fileName).toFile();
             }
-            String html;
+            final String html;
             synchronized (FluentDriver.class) {
                 html = $("html").first().html();
             }
             FileUtils.write(destFile, html, "UTF-8");
-        } catch (Exception e) {
+        } catch (final Exception e) {
             if (destFile == null) {
                 destFile = new File(fileName);
             }
             try {
-                PrintWriter printWriter = new PrintWriter(destFile, "UTF-8");
+                final PrintWriter printWriter = new PrintWriter(destFile, "UTF-8");
                 printWriter.write("Can't dump HTML");
                 printWriter.println();
                 e.printStackTrace(printWriter);
                 IOUtils.closeQuietly(printWriter);
-            } catch (IOException e1) {
+            } catch (final IOException e1) {
                 throw new RuntimeException("error when dumping HTML", e); //NOPMD PreserveStackTrace
             }
         }
@@ -178,20 +178,20 @@ public class FluentDriver implements FluentControl {
     }
 
     @Override
-    public void takeScreenShot(String fileName) {
+    public void takeScreenShot(final String fileName) {
         if (!canTakeScreenShot()) {
             throw new WebDriverException("Current browser doesn't allow taking screenshot.");
         }
-        File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+        final File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         try {
-            File destFile;
+            final File destFile;
             if (configuration.getScreenshotPath() == null) {
                 destFile = new File(fileName);
             } else {
                 destFile = Paths.get(configuration.getScreenshotPath(), fileName).toFile();
             }
             FileUtils.copyFile(scrFile, destFile);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
             throw new RuntimeException("error when taking the snapshot", e);
         }
@@ -252,7 +252,7 @@ public class FluentDriver implements FluentControl {
     }
 
     @Override
-    public Cookie getCookie(String name) {
+    public Cookie getCookie(final String name) {
         return getDriver().manage().getCookieNamed(name);
     }
 
@@ -273,7 +273,7 @@ public class FluentDriver implements FluentControl {
     }
 
     @Override
-    public <P extends FluentPage> P goTo(P page) {
+    public <P extends FluentPage> P goTo(final P page) {
         if (page == null) {
             throw new IllegalArgumentException("Page is mandatory");
         }
@@ -287,7 +287,7 @@ public class FluentDriver implements FluentControl {
             throw new IllegalArgumentException("Url is mandatory");
         }
         if (baseUrl != null) {
-            URI uri = URI.create(url);
+            final URI uri = URI.create(url);
             if (!uri.isAbsolute()) {
                 url = baseUrl + url;
             }
@@ -302,17 +302,17 @@ public class FluentDriver implements FluentControl {
         }
 
         if (baseUrl != null) {
-            URI uri = URI.create(url);
+            final URI uri = URI.create(url);
             if (!uri.isAbsolute()) {
                 url = baseUrl + url;
             }
         }
 
-        String newTab;
+        final String newTab;
         synchronized (getClass()) {
-            Set<String> initialTabs = getDriver().getWindowHandles();
+            final Set<String> initialTabs = getDriver().getWindowHandles();
             executeScript("window.open('" + url + "', '_blank');");
-            Set<String> tabs = getDriver().getWindowHandles();
+            final Set<String> tabs = getDriver().getWindowHandles();
             tabs.removeAll(initialTabs);
             newTab = tabs.iterator().next();
         }
@@ -321,22 +321,22 @@ public class FluentDriver implements FluentControl {
     }
 
     @Override
-    public FluentJavascript executeScript(String script, Object... args) {
+    public FluentJavascript executeScript(final String script, final Object... args) {
         return new FluentJavascript((JavascriptExecutor) getDriver(), false, script, args);
     }
 
     @Override
-    public FluentJavascript executeAsyncScript(String script, Object... args) {
+    public FluentJavascript executeAsyncScript(final String script, final Object... args) {
         return new FluentJavascript((JavascriptExecutor) getDriver(), true, script, args);
     }
 
     @Override
-    public FluentList<FluentWebElement> $(String selector, final Filter... filters) {
+    public FluentList<FluentWebElement> $(final String selector, final Filter... filters) {
         return find(selector, filters);
     }
 
     @Override
-    public FluentWebElement el(String selector, final Filter... filters) {
+    public FluentWebElement el(final String selector, final Filter... filters) {
         return find(selector, filters).first();
     }
 
@@ -351,22 +351,22 @@ public class FluentDriver implements FluentControl {
     }
 
     @Override
-    public FluentList<FluentWebElement> $(By locator, final Filter... filters) {
+    public FluentList<FluentWebElement> $(final By locator, final Filter... filters) {
         return find(locator, filters);
     }
 
     @Override
-    public FluentWebElement el(By locator, final Filter... filters) {
+    public FluentWebElement el(final By locator, final Filter... filters) {
         return find(locator, filters).first();
     }
 
     @Override
-    public FluentList<FluentWebElement> find(String selector, final Filter... filters) {
+    public FluentList<FluentWebElement> find(final String selector, final Filter... filters) {
         return getSearch().find(selector, filters);
     }
 
     @Override
-    public FluentList<FluentWebElement> find(By locator, final Filter... filters) {
+    public FluentList<FluentWebElement> find(final By locator, final Filter... filters) {
         return getSearch().find(locator, filters);
     }
 
@@ -376,12 +376,12 @@ public class FluentDriver implements FluentControl {
     }
 
     @Override
-    public void switchTo(FluentList<? extends FluentWebElement> elements) {
+    public void switchTo(final FluentList<? extends FluentWebElement> elements) {
         switchTo(elements.first());
     }
 
     @Override
-    public void switchTo(FluentWebElement element) {
+    public void switchTo(final FluentWebElement element) {
         if (null == element || !"iframe".equals(element.tagName())) {
             getDriver().switchTo().defaultContent();
         } else {

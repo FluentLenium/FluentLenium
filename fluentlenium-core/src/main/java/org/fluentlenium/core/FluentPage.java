@@ -29,14 +29,14 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
      *
      * @param control fluent control
      */
-    public FluentPage(FluentControl control) {
+    public FluentPage(final FluentControl control) {
         super(control);
     }
 
     @Override
     public String getUrl() {
         if (this.getClass().isAnnotationPresent(PageUrl.class)) {
-            String url = this.getClass().getAnnotation(PageUrl.class).value();
+            final String url = this.getClass().getAnnotation(PageUrl.class).value();
             if (!url.isEmpty()) {
                 return url;
             }
@@ -46,7 +46,7 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
 
     @Override
     public void isAt() {
-        By by = classAnnotations.buildBy();
+        final By by = classAnnotations.buildBy();
         if (by != null) {
             try {
                 $(by).first().now();

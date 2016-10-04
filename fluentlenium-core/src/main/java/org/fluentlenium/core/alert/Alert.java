@@ -15,11 +15,11 @@ public class Alert implements org.openqa.selenium.Alert {
         return webDriver.switchTo().alert();
     }
 
-    public Alert(WebDriver webDriver) {
+    public Alert(final WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
-    public void prompt(String text) {
+    public void prompt(final String text) {
         sendKeys(text);
         accept();
     }

@@ -11,7 +11,8 @@ public abstract class AbstractPropertiesConfigurationTest<T extends AbstractProp
 
     public static class DummyConfigurationFactory implements ConfigurationFactory {
         @Override
-        public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
+        public Configuration newConfiguration(final Class<?> containerClass,
+                final ConfigurationProperties configurationDefaults) {
             return null;
         }
     }
@@ -24,7 +25,7 @@ public abstract class AbstractPropertiesConfigurationTest<T extends AbstractProp
 
     protected abstract void mockProperty(String propertyName, Object propertyValue);
 
-    protected String valueToString(Object propertyValue) {
+    protected String valueToString(final Object propertyValue) {
         if (propertyValue == null) {
             return null;
         }
@@ -88,7 +89,7 @@ public abstract class AbstractPropertiesConfigurationTest<T extends AbstractProp
 
         mockProperty("capabilities", "{\"javascriptEnabled\": true}");
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
+        final DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setJavascriptEnabled(true);
         Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilities);
 
@@ -102,7 +103,7 @@ public abstract class AbstractPropertiesConfigurationTest<T extends AbstractProp
 
         mockProperty("capabilities", "firefox");
 
-        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        final DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilities);
 
         mockProperty("capabilities", "chrome");
@@ -131,15 +132,15 @@ public abstract class AbstractPropertiesConfigurationTest<T extends AbstractProp
     public void capabilitiesURL() throws IOException {
         Assertions.assertThat(getConfiguration().getCapabilities()).isNull();
 
-        URL capabilitiesURL = getClass().getResource("/org/fluentlenium/configuration/capabilities.json");
+        final URL capabilitiesURL = getClass().getResource("/org/fluentlenium/configuration/capabilities.json");
 
         mockProperty("capabilities", capabilitiesURL.toString());
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
+        final DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setJavascriptEnabled(true);
         Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilities);
 
-        URL capabilitiesFalseURL = getClass().getResource("/org/fluentlenium/configuration/capabilities-false.json");
+        final URL capabilitiesFalseURL = getClass().getResource("/org/fluentlenium/configuration/capabilities-false.json");
 
         mockProperty("capabilities", capabilitiesFalseURL.toString());
         Assertions.assertThat(getConfiguration().getCapabilities()).isNotEqualTo(capabilities);

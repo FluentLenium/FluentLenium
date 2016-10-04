@@ -18,7 +18,8 @@ public class ComponentList<T> extends DelegatingList<T> implements WrapsElements
     @Delegate
     private LazyComponents lazyComponents = new NotLazyComponents(); // NOPMD UnusedPrivateField
 
-    public ComponentList(Class<T> componentClass, List<T> list, FluentControl fluentControl, ComponentInstantiator instantiator) {
+    public ComponentList(final Class<T> componentClass, final List<T> list, final FluentControl fluentControl,
+            final ComponentInstantiator instantiator) {
         super(list);
         if (list instanceof LazyComponents) {
             lazyComponents = (LazyComponents) list;
