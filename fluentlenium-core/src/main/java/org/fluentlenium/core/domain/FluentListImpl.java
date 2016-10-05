@@ -92,7 +92,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             return component;
         }
         if (this.size() == 0) {
-            throw new NoSuchElementException("Element not found");
+            throw LocatorProxies.noSuchElement(proxy);
         }
         return get(0);
     }
@@ -113,7 +113,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             return component;
         }
         if (this.size() == 0) {
-            throw new NoSuchElementException("Element not found");
+            throw LocatorProxies.noSuchElement(proxy);
         }
         return get(this.size() - 1);
     }
@@ -137,7 +137,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             return component;
         }
         if (this.size() <= index) {
-            throw new NoSuchElementException("Element not found");
+            throw LocatorProxies.noSuchElement(proxy);
         }
         return get(index);
     }
@@ -154,7 +154,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     public FluentList<E> now() {
         LocatorProxies.now(this);
         if (this.size() == 0) {
-            throw new NoSuchElementException("Element not found");
+            throw LocatorProxies.noSuchElement(proxy);
         }
         return this;
     }
@@ -181,7 +181,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Override
     public FluentList click() {
         if (this.size() == 0) {
-            throw new NoSuchElementException("Element not found");
+            throw LocatorProxies.noSuchElement(proxy);
         }
 
         for (final E fluentWebElement : this) {
@@ -195,7 +195,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Override
     public FluentList write(final String... with) {
         if (this.size() == 0) {
-            throw new NoSuchElementException("Element not found");
+            throw LocatorProxies.noSuchElement(proxy);
         }
 
         boolean atMostOne = false;
@@ -218,7 +218,9 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             }
 
             if (!atMostOne) {
-                throw new NoSuchElementException("No element is displayed and enabled. Can't set a new value.");
+                throw new NoSuchElementException(
+                        LocatorProxies.getMessageContext(proxy) + " has no element displayed and enabled."
+                                + " At least one element should be displayed and enabled to define values.");
             }
         }
         return this;
@@ -227,7 +229,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Override
     public FluentList<E> clearAll() {
         if (this.size() == 0) {
-            throw new NoSuchElementException("Element no found");
+            throw LocatorProxies.noSuchElement(proxy);
         }
 
         for (final E fluentWebElement : this) {
@@ -265,7 +267,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Override
     public FluentList<E> submit() {
         if (this.size() == 0) {
-            throw new NoSuchElementException("Element no found");
+            throw LocatorProxies.noSuchElement(proxy);
         }
 
         for (final E fluentWebElement : this) {

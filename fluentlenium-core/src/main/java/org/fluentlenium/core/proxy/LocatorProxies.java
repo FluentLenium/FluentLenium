@@ -4,6 +4,7 @@ import com.google.common.base.Supplier;
 import org.fluentlenium.core.domain.WrapsElements;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.internal.WrapsElement;
@@ -19,6 +20,34 @@ import java.util.List;
 public final class LocatorProxies {
     private LocatorProxies() {
         // Utility class
+    }
+
+    /**
+     * Build a NoSuchElementException using message provided by proxy.
+     *
+     * @param proxy proxy
+     * @return NoSuchElementException No such element exception
+     */
+    public static NoSuchElementException noSuchElement(Object proxy) {
+        LocatorHandler locatorHandler = getLocatorHandler(proxy);
+        if (locatorHandler == null) {
+            return new NoSuchElementException("No such element");
+        }
+        return locatorHandler.noSuchElement();
+    }
+
+    /**
+     * Get the message context of given proxy.
+     *
+     * @param proxy proxy
+     * @return message context
+     */
+    public static String getMessageContext(Object proxy) {
+        LocatorHandler locatorHandler = getLocatorHandler(proxy);
+        if (locatorHandler == null) {
+            return "";
+        }
+        return locatorHandler.getMessageContext();
     }
 
     public static LocatorHandler getLocatorHandler(Object proxy) {

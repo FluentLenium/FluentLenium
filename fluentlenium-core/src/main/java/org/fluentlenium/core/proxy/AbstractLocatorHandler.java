@@ -1,6 +1,8 @@
 package org.fluentlenium.core.proxy;
 
 import com.google.common.base.Supplier;
+import org.fluentlenium.core.conditions.FluentConditions;
+import org.fluentlenium.core.conditions.message.MessageProxy;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
@@ -101,6 +103,13 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     protected abstract boolean isStale();
 
     protected abstract WebElement getElement();
+
+    public NoSuchElementException noSuchElement() {
+        FluentConditions messageBuilder = MessageProxy.builder(FluentConditions.class, getMessageContext());
+        messageBuilder.present();
+        String message = MessageProxy.message(messageBuilder);
+        return new NoSuchElementException(message);
+    }
 
     @Override
     public void setHooks(final HookChainBuilder hookChainBuilder, final List<HookDefinition<?>> hookDefinitions) {

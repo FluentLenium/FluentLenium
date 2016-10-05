@@ -30,6 +30,11 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     }
 
     @Override
+    public String getMessageContext() {
+        return "Elements " + toString();
+    }
+
+    @Override
     protected List<WebElement> resultToList(final List<WebElement> result) {
         return result;
     }
