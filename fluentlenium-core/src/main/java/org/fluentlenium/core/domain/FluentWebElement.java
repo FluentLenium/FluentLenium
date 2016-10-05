@@ -1,5 +1,6 @@
 package org.fluentlenium.core.domain;
 
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Supplier;
 import lombok.experimental.Delegate;
@@ -414,6 +415,14 @@ public class FluentWebElement extends Component
      */
     private boolean isInputOfTypeFile() {
         return "input".equalsIgnoreCase(this.tagName()) && "file".equalsIgnoreCase(this.attribute("type"));
+    }
+
+    @Override
+    public <R> R noHook(final Function<FluentWebElement, R> function) {
+        noHook();
+        R functionReturn = function.apply(this);
+        restoreHooks();
+        return functionReturn;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package org.fluentlenium.core.hook;
 
+import com.google.common.base.Function;
+
 public interface HookControl<T> {
     /**
      * Disable all hooks from actual context.
@@ -35,4 +37,13 @@ public interface HookControl<T> {
      * @return this object reference to chain calls
      */
     <O, H extends FluentHook<O>> T withHook(Class<H> hook, O options);
+
+    /**
+     * Invoke a function with no hook.
+     *
+     * @param function function to invoke
+     * @param <R>      return type
+     * @return return value of the given function
+     */
+    <R> R noHook(Function<T, R> function);
 }

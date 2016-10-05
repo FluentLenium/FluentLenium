@@ -473,6 +473,14 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
+    public <R> R noHook(final Function<FluentList<E>, R> function) {
+        noHook();
+        R functionReturn = function.apply(this);
+        restoreHooks();
+        return functionReturn;
+    }
+
+    @Override
     public FluentList<E> noHook() {
         hookDefinitionsBackup = new ArrayList<>(hookDefinitions);
         hookDefinitions.clear();

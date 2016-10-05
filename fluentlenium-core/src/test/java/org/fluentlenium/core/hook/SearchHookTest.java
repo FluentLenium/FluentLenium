@@ -1,5 +1,6 @@
 package org.fluentlenium.core.hook;
 
+import com.google.common.base.Function;
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
@@ -110,6 +111,44 @@ public class SearchHookTest {
     public void testHookSearchHookBeforeFirstNoHookClickAndRestore() {
         final FluentWebElement hookedElement = search.$(".selector").withHook(NanoHook.class).first().noHook().click()
                 .restoreHooks();
+
+        Mockito.verify(element).click();
+
+        final LocatorHandler<WebElement> componentHandler = LocatorProxies.getLocatorHandler(hookedElement.getElement());
+        final NanoHook hookElement = (NanoHook) componentHandler.getHookElement();
+
+        Assertions.assertThat(hookElement.getBeforeClickNano()).isEqualTo(0L);
+        Assertions.assertThat(hookElement.getAfterClickNano()).isEqualTo(0L);
+    }
+
+    @Test
+    public void testHookSearchNoHookFunction() {
+        final FluentWebElement hookedElement = search.$(".selector").withHook(NanoHook.class).first()
+                .noHook(new Function<FluentWebElement, FluentWebElement>() {
+                    @Override
+                    public FluentWebElement apply(final FluentWebElement input) {
+                        return input.click();
+                    }
+                });
+
+        Mockito.verify(element).click();
+
+        final LocatorHandler<WebElement> componentHandler = LocatorProxies.getLocatorHandler(hookedElement.getElement());
+        final NanoHook hookElement = (NanoHook) componentHandler.getHookElement();
+
+        Assertions.assertThat(hookElement.getBeforeClickNano()).isEqualTo(0L);
+        Assertions.assertThat(hookElement.getAfterClickNano()).isEqualTo(0L);
+    }
+
+    @Test
+    public void testHookSearchFirstNoHookFunction() {
+        final FluentWebElement hookedElement = search.$(".selector").first().withHook(NanoHook.class)
+                .noHook(new Function<FluentWebElement, FluentWebElement>() {
+                    @Override
+                    public FluentWebElement apply(final FluentWebElement input) {
+                        return input.click();
+                    }
+                });
 
         Mockito.verify(element).click();
 
