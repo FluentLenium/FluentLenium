@@ -4,7 +4,7 @@ import com.google.common.base.Function;
 
 public interface HookControl<T> {
     /**
-     * Disable all hooks from actual context.
+     * Disable all hooks from actual element.
      *
      * @return this object reference to chain calls
      */
@@ -46,4 +46,11 @@ public interface HookControl<T> {
      * @return return value of the given function
      */
     <R> R noHook(Function<T, R> function);
+
+    /**
+     * Creates a new element locator instance with hook disabled.
+     *
+     * @return new element locator with hook disabled.
+     */
+    T noHookInstance();
 }

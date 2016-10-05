@@ -21,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -54,7 +55,7 @@ public class FluentListImplTest {
         when(element2.conditions()).thenReturn(new WebElementConditions(element2));
         when(element3.conditions()).thenReturn(new WebElementConditions(element3));
 
-        list = fluentAdapter.newFluentList(element1, element2, element3);
+        list = spy(fluentAdapter.newFluentList(element1, element2, element3));
     }
 
     @After
@@ -344,6 +345,20 @@ public class FluentListImplTest {
         }).isExactlyInstanceOf(NoSuchElementException.class);
 
         reset(element1, element2, element3);
+    }
+
+    @Test
+    public void testNowTrue() {
+        list.now(true);
+        verify(list).reset();
+        verify(list).now();
+    }
+
+    @Test
+    public void testNowFalse() {
+        list.now(false);
+        verify(list, never()).reset();
+        verify(list).now();
     }
 
     @Test

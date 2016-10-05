@@ -22,11 +22,13 @@ import org.fluentlenium.core.hook.HookControl;
 import org.fluentlenium.core.hook.HookDefinition;
 import org.fluentlenium.core.label.FluentLabel;
 import org.fluentlenium.core.label.FluentLabelImpl;
+import org.fluentlenium.core.proxy.LocatorHandler;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.wait.FluentWaitElementList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -155,6 +157,14 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             throw new NoSuchElementException("Element not found");
         }
         return this;
+    }
+
+    @Override
+    public FluentList<E> now(final boolean force) {
+        if (force) {
+            reset();
+        }
+        return now();
     }
 
     @Override
@@ -470,6 +480,14 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         }
 
         return instantiator.newComponentList(getClass(), componentClass, elements);
+    }
+
+    @Override
+    public FluentList<E> noHookInstance() {
+        LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(proxy);
+        ElementLocator locator = locatorHandler.getLocator();
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
+        return instantiator.asComponentList(getClass(), componentClass, webElementList);
     }
 
     @Override

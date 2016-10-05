@@ -40,7 +40,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     protected final ElementLocator locator;
     protected T result;
 
-    private List<FluentHook> hooks;
+    protected List<FluentHook> hooks;
 
     protected static Method getMethod(final Class<?> declaringClass, final String name, final Class... types) {
         try {
@@ -146,17 +146,6 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     }
 
     @Override
-    public WebElement getHookElement() {
-        if (getElement() == null) {
-            return null;
-        }
-        if (hooks != null && !hooks.isEmpty()) {
-            return hooks.get(hooks.size() - 1);
-        }
-        return getElement();
-    }
-
-    @Override
     public boolean isLoaded() {
         return result != null;
     }
@@ -180,8 +169,6 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     public void now() {
         getLocatorResult();
     }
-
-    protected abstract T getInvocationTarget(Method method);
 
     @Override
     public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable { // NOPMD UseVarargs

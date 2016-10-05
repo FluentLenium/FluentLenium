@@ -25,6 +25,7 @@ import org.fluentlenium.core.inject.NoInject;
 import org.fluentlenium.core.label.FluentLabel;
 import org.fluentlenium.core.label.FluentLabelImpl;
 import org.fluentlenium.core.proxy.FluentProxyState;
+import org.fluentlenium.core.proxy.LocatorHandler;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchControl;
@@ -34,6 +35,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
@@ -103,6 +105,14 @@ public class FluentWebElement extends Component
     public FluentWebElement now() {
         LocatorProxies.now(webElement);
         return this;
+    }
+
+    @Override
+    public FluentWebElement now(final boolean force) {
+        if (force) {
+            reset();
+        }
+        return now();
     }
 
     @Override
@@ -435,6 +445,14 @@ public class FluentWebElement extends Component
 
     /* default */ void setHookDefinitionsBackup(List<HookDefinition<?>> hookDefinitionsBackup) {
         this.hookDefinitionsBackup = hookDefinitionsBackup;
+    }
+
+    @Override
+    public FluentWebElement noHookInstance() {
+        LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
+        ElementLocator locator = locatorHandler.getLocator();
+        WebElement noHookElement = LocatorProxies.createWebElement(locator);
+        return newComponent(getClass(), noHookElement);
     }
 
     @Override

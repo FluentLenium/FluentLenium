@@ -2,9 +2,9 @@ package org.fluentlenium.core.proxy;
 
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -36,11 +36,12 @@ public interface LocatorHandler<T> {
     ElementLocator getHookLocator();
 
     /**
-     * Retrieve the element matching this proxy, with all hooks applied.
+     * Retrieve the invocation target of this proxy handler.
      *
-     * @return element wrapped with hooks
+     * @param method method to invoke
+     * @return invocation target
      */
-    WebElement getHookElement();
+    T getInvocationTarget(Method method);
 
     /**
      * Apply this hook list.

@@ -28,7 +28,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -63,7 +65,7 @@ public class FluentWebElementTest {
 
         componentsManager = new ComponentsManager(fluentAdapter);
 
-        fluentElement = new FluentWebElement(element, fluentAdapter, componentsManager);
+        fluentElement = spy(new FluentWebElement(element, fluentAdapter, componentsManager));
     }
 
     @After
@@ -264,7 +266,7 @@ public class FluentWebElementTest {
     }
 
     @Test
-    public void testel() {
+    public void testEl() {
         final WebElement findElement = mock(WebElement.class);
 
         when(element.findElements(By.cssSelector(".test"))).thenReturn(Arrays.asList(findElement));
@@ -295,6 +297,20 @@ public class FluentWebElementTest {
                 fluentElement.el().now();
             }
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void testNowTrue() {
+        fluentElement.now(true);
+        verify(fluentElement).reset();
+        verify(fluentElement).now();
+    }
+
+    @Test
+    public void testNowFalse() {
+        fluentElement.now(false);
+        verify(fluentElement, never()).reset();
+        verify(fluentElement).now();
     }
 
     @Test
