@@ -2,6 +2,7 @@ package org.fluentlenium.core.proxy;
 
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.lang.reflect.Method;
@@ -91,4 +92,17 @@ public interface LocatorHandler<T> {
      */
     boolean removeListener(ProxyElementListener listener);
 
+    /**
+     * Build a {@link NoSuchElementException} with message from this locator.
+     *
+     * @return Exception with not present message
+     */
+    NoSuchElementException noSuchElement();
+
+    /**
+     * Retrieve the message context from this proxy locator.
+     *
+     * @return message context
+     */
+    String getMessageContext();
 }
