@@ -40,7 +40,7 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     }
 
     @Override
-    protected List<WebElement> getInvocationTarget(final Method method) {
+    public List<WebElement> getInvocationTarget(final Method method) {
         return result;
     }
 

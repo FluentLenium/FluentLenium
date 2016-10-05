@@ -61,11 +61,17 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement>
     }
 
     @Override
-    protected WebElement getInvocationTarget(final Method method) {
-        if (method.getDeclaringClass().equals(Object.class)) {
+    public WebElement getInvocationTarget(final Method method) {
+        if (method != null && method.getDeclaringClass().equals(Object.class)) {
             return result;
         }
-        return getHookElement();
+        if (getElement() == null) {
+            return null;
+        }
+        if (hooks != null && !hooks.isEmpty()) {
+            return hooks.get(hooks.size() - 1);
+        }
+        return getElement();
     }
 
     //CHECKSTYLE.OFF: IllegalThrows

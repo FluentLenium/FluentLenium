@@ -69,7 +69,7 @@ public class ProxyHookTest {
         hooks.add(hookDefinition);
 
         ElementLocator hookLocator = LocatorProxies.getLocatorHandler(proxy).getHookLocator();
-        WebElement hookElement = LocatorProxies.getLocatorHandler(proxy).getHookElement();
+        WebElement hookElement = (WebElement) LocatorProxies.getLocatorHandler(proxy).getInvocationTarget(null);
 
         Assertions.assertThat(hookLocator).isSameAs(locator);
         Assertions.assertThat(hookElement).isSameAs(element1);
@@ -77,7 +77,7 @@ public class ProxyHookTest {
         LocatorProxies.setHooks(proxy, hookChainBuilder, hooks);
 
         hookLocator = LocatorProxies.getLocatorHandler(proxy).getHookLocator();
-        hookElement = LocatorProxies.getLocatorHandler(proxy).getHookElement();
+        hookElement = (WebElement) LocatorProxies.getLocatorHandler(proxy).getInvocationTarget(null);
 
         Assertions.assertThat(hookLocator).isExactlyInstanceOf(TestHook.class);
         Assertions.assertThat(hookElement).isExactlyInstanceOf(TestHook.class);
@@ -95,17 +95,21 @@ public class ProxyHookTest {
         hooks.add(hookDefinition);
 
         ElementLocator hookLocator = LocatorProxies.getLocatorHandler(proxy).getHookLocator();
-        WebElement hookElement = LocatorProxies.getLocatorHandler(proxy).getHookElement();
+        List<WebElement> hookElements = (List<WebElement>) LocatorProxies.getLocatorHandler(proxy).getInvocationTarget(null);
 
         Assertions.assertThat(hookLocator).isSameAs(locator);
-        Assertions.assertThat(hookElement).isNull();
+        Assertions.assertThat(LocatorProxies.getLocatorHandler(hookElements.get(0)).getInvocationTarget(null)).isSameAs(element1);
 
+        LocatorProxies.reset(proxy);
         LocatorProxies.setHooks(proxy, hookChainBuilder, hooks);
+        LocatorProxies.now(proxy);
 
         hookLocator = LocatorProxies.getLocatorHandler(proxy).getHookLocator();
-        hookElement = LocatorProxies.getLocatorHandler(proxy).getHookElement();
+        hookElements = (List<WebElement>) LocatorProxies.getLocatorHandler(proxy).getInvocationTarget(null);
 
         Assertions.assertThat(hookLocator).isExactlyInstanceOf(TestHook.class);
-        Assertions.assertThat(hookElement).isNull();
+        Assertions.assertThat(LocatorProxies.getLocatorHandler(hookElements.get(0)).getInvocationTarget(null))
+                .isExactlyInstanceOf(TestHook.class);
+
     }
 }

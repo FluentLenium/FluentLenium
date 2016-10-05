@@ -1,5 +1,6 @@
 package org.fluentlenium.core.domain;
 
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Supplier;
 import lombok.experimental.Delegate;
@@ -20,9 +21,11 @@ import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookControl;
 import org.fluentlenium.core.hook.HookDefinition;
+import org.fluentlenium.core.inject.NoInject;
 import org.fluentlenium.core.label.FluentLabel;
 import org.fluentlenium.core.label.FluentLabelImpl;
 import org.fluentlenium.core.proxy.FluentProxyState;
+import org.fluentlenium.core.proxy.LocatorHandler;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchControl;
@@ -32,6 +35,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
@@ -52,6 +56,9 @@ public class FluentWebElement extends Component
 
     private final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
     private final HookChainBuilder hookChainBuilder;
+
+    @NoInject
+    private List<HookDefinition<?>> hookDefinitionsBackup;
 
     @Delegate
     private final FluentLabel<FluentWebElement> label;
@@ -98,6 +105,14 @@ public class FluentWebElement extends Component
     public FluentWebElement now() {
         LocatorProxies.now(webElement);
         return this;
+    }
+
+    @Override
+    public FluentWebElement now(final boolean force) {
+        if (force) {
+            reset();
+        }
+        return now();
     }
 
     @Override
@@ -413,8 +428,40 @@ public class FluentWebElement extends Component
     }
 
     @Override
+    public <R> R noHook(final Function<FluentWebElement, R> function) {
+        noHook();
+        R functionReturn = function.apply(this);
+        restoreHooks();
+        return functionReturn;
+    }
+
+    @Override
     public FluentWebElement noHook() {
+        setHookDefinitionsBackup(new ArrayList<>(hookDefinitions));
         hookDefinitions.clear();
+        LocatorProxies.setHooks(getElement(), hookChainBuilder, hookDefinitions);
+        return this;
+    }
+
+    /* default */ void setHookDefinitionsBackup(List<HookDefinition<?>> hookDefinitionsBackup) {
+        this.hookDefinitionsBackup = hookDefinitionsBackup;
+    }
+
+    @Override
+    public FluentWebElement noHookInstance() {
+        LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
+        ElementLocator locator = locatorHandler.getLocator();
+        WebElement noHookElement = LocatorProxies.createWebElement(locator);
+        return newComponent(getClass(), noHookElement);
+    }
+
+    @Override
+    public FluentWebElement restoreHooks() {
+        if (hookDefinitionsBackup != null) {
+            hookDefinitions.clear();
+            hookDefinitions.addAll(hookDefinitionsBackup);
+            setHookDefinitionsBackup(null);
+        }
         LocatorProxies.setHooks(getElement(), hookChainBuilder, hookDefinitions);
         return this;
     }
