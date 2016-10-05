@@ -54,4 +54,69 @@ public class SearchHookTest {
         Assertions.assertThat(hookElement.getBeforeClickNano()).isNotEqualTo(0L);
         Assertions.assertThat(hookElement.getAfterClickNano()).isNotEqualTo(0L);
     }
+
+    @Test
+    public void testHookSearchFirstAfter() {
+        final FluentWebElement hookedElement = search.$(".selector").withHook(NanoHook.class).first().click();
+
+        Mockito.verify(element).click();
+
+        final LocatorHandler<WebElement> componentHandler = LocatorProxies.getLocatorHandler(hookedElement.getElement());
+        final NanoHook hookElement = (NanoHook) componentHandler.getHookElement();
+
+        Assertions.assertThat(hookElement.getBeforeClickNano()).isNotEqualTo(0L);
+        Assertions.assertThat(hookElement.getAfterClickNano()).isNotEqualTo(0L);
+    }
+
+    @Test
+    public void testHookSearchFirstBefore() {
+        final FluentWebElement hookedElement = search.$(".selector").first().withHook(NanoHook.class).click();
+
+        Mockito.verify(element).click();
+
+        final LocatorHandler<WebElement> componentHandler = LocatorProxies.getLocatorHandler(hookedElement.getElement());
+        final NanoHook hookElement = (NanoHook) componentHandler.getHookElement();
+
+        Assertions.assertThat(hookElement.getBeforeClickNano()).isNotEqualTo(0L);
+        Assertions.assertThat(hookElement.getAfterClickNano()).isNotEqualTo(0L);
+    }
+
+    @Test
+    public void testHookSearchNoHook() {
+        final FluentWebElement hookedElement = search.$(".selector").first().withHook(NanoHook.class).noHook().click();
+
+        Mockito.verify(element).click();
+
+        final LocatorHandler<WebElement> componentHandler = LocatorProxies.getLocatorHandler(hookedElement.getElement());
+        WebElement hookElement = componentHandler.getHookElement();
+        Assertions.assertThat(hookElement).isNotInstanceOf(NanoHook.class);
+    }
+
+    @Test
+    public void testHookSearchNoHookClickAndRestore() {
+        final FluentWebElement hookedElement = search.$(".selector").first().withHook(NanoHook.class).noHook().click()
+                .restoreHooks();
+
+        Mockito.verify(element).click();
+
+        final LocatorHandler<WebElement> componentHandler = LocatorProxies.getLocatorHandler(hookedElement.getElement());
+        final NanoHook hookElement = (NanoHook) componentHandler.getHookElement();
+
+        Assertions.assertThat(hookElement.getBeforeClickNano()).isEqualTo(0L);
+        Assertions.assertThat(hookElement.getAfterClickNano()).isEqualTo(0L);
+    }
+
+    @Test
+    public void testHookSearchHookBeforeFirstNoHookClickAndRestore() {
+        final FluentWebElement hookedElement = search.$(".selector").withHook(NanoHook.class).first().noHook().click()
+                .restoreHooks();
+
+        Mockito.verify(element).click();
+
+        final LocatorHandler<WebElement> componentHandler = LocatorProxies.getLocatorHandler(hookedElement.getElement());
+        final NanoHook hookElement = (NanoHook) componentHandler.getHookElement();
+
+        Assertions.assertThat(hookElement.getBeforeClickNano()).isEqualTo(0L);
+        Assertions.assertThat(hookElement.getAfterClickNano()).isEqualTo(0L);
+    }
 }

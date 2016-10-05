@@ -20,6 +20,7 @@ import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookControl;
 import org.fluentlenium.core.hook.HookDefinition;
+import org.fluentlenium.core.inject.NoInject;
 import org.fluentlenium.core.label.FluentLabel;
 import org.fluentlenium.core.label.FluentLabelImpl;
 import org.fluentlenium.core.proxy.FluentProxyState;
@@ -52,6 +53,9 @@ public class FluentWebElement extends Component
 
     private final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
     private final HookChainBuilder hookChainBuilder;
+
+    @NoInject
+    private List<HookDefinition<?>> hookDefinitionsBackup;
 
     @Delegate
     private final FluentLabel<FluentWebElement> label;
@@ -414,7 +418,23 @@ public class FluentWebElement extends Component
 
     @Override
     public FluentWebElement noHook() {
+        setHookDefinitionsBackup(new ArrayList<>(hookDefinitions));
         hookDefinitions.clear();
+        LocatorProxies.setHooks(getElement(), hookChainBuilder, hookDefinitions);
+        return this;
+    }
+
+    /* default */ void setHookDefinitionsBackup(List<HookDefinition<?>> hookDefinitionsBackup) {
+        this.hookDefinitionsBackup = hookDefinitionsBackup;
+    }
+
+    @Override
+    public FluentWebElement restoreHooks() {
+        if (hookDefinitionsBackup != null) {
+            hookDefinitions.clear();
+            hookDefinitions.addAll(hookDefinitionsBackup);
+            setHookDefinitionsBackup(null);
+        }
         LocatorProxies.setHooks(getElement(), hookChainBuilder, hookDefinitions);
         return this;
     }

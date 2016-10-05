@@ -9,6 +9,13 @@ public interface HookControl<T> {
     T noHook();
 
     /**
+     * Retore hooks that were defined on {@link #noHook()} call.
+     *
+     * @return this object reference to chain calls
+     */
+    T restoreHooks();
+
+    /**
      * Enable a hook with default options.
      *
      * @param hook hook class to enable
