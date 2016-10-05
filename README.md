@@ -1206,44 +1206,67 @@ lower ways will just be ignored.
 You may implement additionnal ways to read configuration property by implementing another
 ```ConfigurationFactory``` and set the new configuration factory class name in the ```configurationFactory``` property.
 
-### Register a custom WebDriver
-You can register a custom WebDriver type by providing your own implementation of ```WebDriverFactory``` in 
-```WebDrivers``` registry.
+### Custom Capabilities (BrowserStack example)
+You can register custom Capabilities by providing your own implementation of ```CapabilitiesFactory```.
 
-A ```WebDriverFactory``` implementation is responsible for creating new instances for a type of WebDriver.
+A ```CapabilitiesFactory``` is responsible for creating new instances of ```Capabilities``` that will be 
+available through ```capabilities``` configuration property
 
-For instance, to run your tests on [BrowserStack](https://browserstack.com)
+This implementation will be discovered with [classindex](https://github.com/atteo/classindex), a 
+compile-time alternative to run-time classpath scanning. It requires your IDE to have Annotation Processing 
+enabled in the Java Compiler configuration.
+
+
+For instance, to run your tests on [BrowserStack Automate](https://www.browserstack.com/automate), your first need to create a Capabilities 
+factory.
 
 ```java
-@FactoryName("browserstack")
-public class BrowserStackWebDriverFactory implements WebDriverFactory {
+@FactoryName("browserstack-os-x") // Name to use in capabilities configuration property
+public class BrowserStackOsXCapabilitiesFactory implements CapabilitiesFactory {
     @Override
-    public WebDriver newWebDriver() {
-        String HUB_URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@hub.browserstack.com/wd/hub";
-    
+    public Capabilities newCapabilities();    
         DesiredCapabilities caps = new DesiredCapabilities();
+        
         caps.setCapability("os", "OS X");
         caps.setCapability("os_version", "El Capitan");
         caps.setCapability("browser", "firefox");
         caps.setCapability("browser_version", "44");
         caps.setCapability("build", "Sample FluentLenium Tests");
         caps.setCapability("browserstack.debug", "true");
-    
-        URL hubURL = null;
-        try {
-          hubURL = new URL(HUB_URL);
-        } catch(Exception e) {
-          System.out.println("Please provide proper credentials. Error " + e);
-        }
-    
-        return new RemoteWebDriver(hubURL, caps);
+        
+        return caps;
     }
 }
 ```
 
+And then, configure the following properties.
+
+```
+webDriver=remote
+capabilities=browserstack-os-x
+remoteUrl=http://USERNAME:AUTOMATE_KEY@hub-cloud.browserstack.com/wd/hub
+```
+
+### Custom WebDriver
+
+You can register custom WebDriver by providing your own implementation of ```WebDriverFactory```.
+
+A ```WebDriverFactory``` is responsible for creating new instances of ```WebDriver``` that will be available
+through ```webDriver``` configuration property
+
 This implementation will be discovered with [classindex](https://github.com/atteo/classindex), a 
 compile-time alternative to run-time classpath scanning. It requires your IDE to have Annotation Processing 
 enabled in the Java Compiler configuration.
+
+```java
+@FactoryName("custom") // Name to use in webDriver configuration property
+public class CustomWebDriverFactory implements WebDriverFactory {
+    @Override
+    public WebDriver newWebDriver(Capabilities desiredCapabilities, ConfigurationProperties configuration)
+        return new CustomWebDriver(desiredCapabilities);
+    }
+}
+```
 
 Instead of implementing a new ```WebDriverFactory``` class, you may also override ```newWebDriver()``` in the Test 
 class, but doing so will ignore any value defined in ```webDriver``` configuration property.
@@ -1397,7 +1420,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
-    <version>1.0.0-RC7</version>
+    <version>1.0.0-SNAPSHOT</version>
     <scope>test</scope>
 </dependency>
 ```
