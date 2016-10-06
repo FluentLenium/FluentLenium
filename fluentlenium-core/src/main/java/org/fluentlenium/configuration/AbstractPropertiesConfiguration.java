@@ -15,7 +15,7 @@ import java.nio.charset.Charset;
 /**
  * Abstract properties configuration.
  */
-public abstract class AbstractPropertiesConfiguration implements ConfigurationProperties {
+public abstract class AbstractPropertiesConfiguration extends BaseConfiguration implements ConfigurationProperties {
     public static final String PROPERTIES_PREFIX = "fluentlenium.";
 
     private final String[] prefixes;
@@ -124,7 +124,7 @@ public abstract class AbstractPropertiesConfiguration implements ConfigurationPr
         }
         final CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
         if (factory != null) {
-            return factory.newCapabilities();
+            return factory.newCapabilities(getGlobalConfiguration());
         }
         try {
             return jsonConverter.convert(DesiredCapabilities.class, property);

@@ -10,7 +10,8 @@ public interface CapabilitiesFactory extends Factory {
     /**
      * Creates a new instance of {@link CapabilitiesRegistry}.
      *
+     * @param configuration configuration
      * @return new instance of capabilities
      */
-    org.openqa.selenium.Capabilities newCapabilities();
+    org.openqa.selenium.Capabilities newCapabilities(ConfigurationProperties configuration);
 }

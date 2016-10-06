@@ -21,6 +21,9 @@ public class ComposedConfiguration implements Configuration {
             final ConfigurationProperties... configurations) {
         this.writableConfiguration = writableConfiguration;
         this.configurations = configurations;
+        if (writableConfiguration instanceof BaseConfiguration) {
+            ((BaseConfiguration) writableConfiguration).setGlobalConfiguration(this);
+        }
     }
 
     @Override

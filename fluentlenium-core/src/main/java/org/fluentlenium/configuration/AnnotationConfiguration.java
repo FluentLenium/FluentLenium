@@ -19,7 +19,7 @@ import java.nio.charset.Charset;
  * @see FluentConfiguration
  * @see ConfigurationProperties
  */
-public class AnnotationConfiguration implements ConfigurationProperties {
+public class AnnotationConfiguration extends BaseConfiguration implements ConfigurationProperties {
     private final FluentConfiguration configuration;
 
     private final JsonToBeanConverter jsonConverter = new JsonToBeanConverter();
@@ -76,7 +76,7 @@ public class AnnotationConfiguration implements ConfigurationProperties {
         }
         final CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
         if (factory != null) {
-            return factory.newCapabilities();
+            return factory.newCapabilities(getGlobalConfiguration());
         }
 
         try {
