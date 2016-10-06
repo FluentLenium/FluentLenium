@@ -157,4 +157,12 @@ public @interface FluentConfiguration {
      * @see ConfigurationProperties#getHtmlDumpMode()
      */
     ConfigurationProperties.TriggerMode htmlDumpMode() default ConfigurationProperties.TriggerMode.DEFAULT;
+
+    /**
+     * Custom properties.
+     *
+     * @return array of CustomProperty annotations
+     * @see ConfigurationProperties#getCustomProperty(String)
+     */
+    CustomProperty[] custom() default {};
 }

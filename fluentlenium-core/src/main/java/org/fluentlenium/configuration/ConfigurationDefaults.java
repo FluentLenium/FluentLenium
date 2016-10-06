@@ -87,4 +87,9 @@ public class ConfigurationDefaults extends BaseConfiguration implements Configur
     public TriggerMode getHtmlDumpMode() {
         return null;
     }
+
+    @Override
+    public String getCustomProperty(final String propertyName) {
+        return null;
+    }
 }

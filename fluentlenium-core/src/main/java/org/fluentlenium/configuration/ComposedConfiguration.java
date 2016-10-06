@@ -202,4 +202,14 @@ public class ComposedConfiguration implements Configuration {
         return null;
     }
 
+    @Override
+    public String getCustomProperty(final String propertyName) {
+        for (final ConfigurationProperties configuration : configurations) {
+            final String value = configuration.getCustomProperty(propertyName);
+            if (value != null) {
+                return value;
+            }
+        }
+        return null;
+    }
 }

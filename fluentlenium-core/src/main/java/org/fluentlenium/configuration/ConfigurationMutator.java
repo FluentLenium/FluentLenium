@@ -126,5 +126,13 @@ public interface ConfigurationMutator {
      * @see ConfigurationProperties#getHtmlDumpMode()
      */
     void setHtmlDumpMode(ConfigurationProperties.TriggerMode htmlDumpMode);
+
+    /**
+     * Sets custom value for a custom property key
+     *
+     * @param key   custom property key
+     * @param value custom property value
+     */
+    void setCustomProperty(String key, String value);
 }
 

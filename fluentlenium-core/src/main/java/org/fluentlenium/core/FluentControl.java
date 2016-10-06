@@ -1,7 +1,6 @@
 package org.fluentlenium.core;
 
 import org.fluentlenium.configuration.Configuration;
-import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.core.action.InputControl;
 import org.fluentlenium.core.alert.AlertControl;
 import org.fluentlenium.core.components.ComponentInstantiator;

@@ -305,4 +305,12 @@ public interface ConfigurationProperties {
      */
     Class<? extends ConfigurationFactory> getConfigurationFactory();
 
+    /**
+     * Get custom property value.
+     *
+     * @param propertyName name of the property
+     * @return property value
+     */
+    String getCustomProperty(String propertyName);
+
 }

@@ -12,6 +12,8 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * {@link ConfigurationProperties} based on {@link FluentConfiguration} annotation.
@@ -22,6 +24,8 @@ import java.nio.charset.Charset;
 public class AnnotationConfiguration extends BaseConfiguration implements ConfigurationProperties {
     private final FluentConfiguration configuration;
 
+    private final Map<String, String> customProperties = new HashMap<>();
+
     private final JsonToBeanConverter jsonConverter = new JsonToBeanConverter();
 
     public AnnotationConfiguration(final Class<?> containerClass) {
@@ -31,6 +35,15 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
     public AnnotationConfiguration(final FluentConfiguration configuration) {
         super();
         this.configuration = configuration;
+
+        if (this.configuration != null) {
+            CustomProperty[] custom = this.configuration.custom();
+            if (custom != null) {
+                for (CustomProperty customProperty : custom) {
+                    customProperties.put(customProperty.key(), customProperty.value());
+                }
+            }
+        }
     }
 
     public String getStringValue(final String property) {
@@ -233,5 +246,10 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
             return null;
         }
         return getTriggerModeValue(configuration.htmlDumpMode());
+    }
+
+    @Override
+    public String getCustomProperty(final String propertyName) {
+        return customProperties.get(propertyName);
     }
 }

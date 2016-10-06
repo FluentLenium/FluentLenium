@@ -3,7 +3,6 @@ package org.fluentlenium.core.action;
 import com.google.common.collect.ImmutableSet;
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.configuration.Configuration;
-import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.domain.FluentWebElement;

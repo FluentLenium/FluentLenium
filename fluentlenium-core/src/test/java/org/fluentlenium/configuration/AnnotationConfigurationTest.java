@@ -20,7 +20,8 @@ public class AnnotationConfigurationTest {
             capabilities = "{javascriptEnabled: true}", remoteUrl = "http://localhost:4444", htmlDumpMode =
             ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL, htmlDumpPath = "/html-path", implicitlyWait = 1000,
             pageLoadTimeout = 2000, screenshotMode = ConfigurationProperties.TriggerMode.MANUAL, screenshotPath =
-            "/screenshot-path", scriptTimeout = 3000, webDriver = "firefox")
+            "/screenshot-path", scriptTimeout = 3000, webDriver = "firefox", custom = @CustomProperty(key = "key", value =
+            "value"))
     public static class ConfiguredClass {
     }
 
@@ -176,5 +177,13 @@ public class AnnotationConfigurationTest {
         Assertions.assertThat(defaultConfiguration.getHtmlDumpMode()).isNull();
 
         Assertions.assertThat(configuration.getHtmlDumpMode()).isEqualTo(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
+    }
+
+    @Test
+    public void custom() {
+        Assertions.assertThat(noConfiguration.getCustomProperty("key")).isNull();
+        Assertions.assertThat(defaultConfiguration.getCustomProperty("key")).isNull();
+
+        Assertions.assertThat(configuration.getCustomProperty("key")).isEqualTo("value");
     }
 }
