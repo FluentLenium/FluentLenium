@@ -60,12 +60,13 @@ public class CapabilitiesRegistryImpl extends AbstractFactoryRegistryImpl<Capabi
     /**
      * Creates a new {@link CapabilitiesRegistry} instance from factory of the given name
      *
-     * @param name name of the factory used to create new WebDriver instance
+     * @param name          name of the factory used to create new WebDriver instance
+     * @param configuration configuration
      * @return a new Capabilities instance
      */
-    public Capabilities newCapabilities(final String name) {
+    public Capabilities newCapabilities(final String name, final ConfigurationProperties configuration) {
         synchronized (this) {
-            return get(name).newCapabilities();
+            return get(name).newCapabilities(configuration);
         }
     }
 }

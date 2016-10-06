@@ -1224,7 +1224,7 @@ factory.
 @FactoryName("browserstack-os-x") // Name to use in capabilities configuration property
 public class BrowserStackOsXCapabilitiesFactory implements CapabilitiesFactory {
     @Override
-    public Capabilities newCapabilities();    
+    public Capabilities newCapabilities(ConfigurationProperties configuration);    
         DesiredCapabilities caps = new DesiredCapabilities();
         
         caps.setCapability("os", "OS X");

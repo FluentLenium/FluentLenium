@@ -18,7 +18,7 @@ public class MethodInvocationReflectionFactory implements CapabilitiesFactory, F
     }
 
     @Override
-    public Capabilities newCapabilities() {
+    public Capabilities newCapabilities(final ConfigurationProperties configuration) {
         try {
             return (Capabilities) this.method.invoke(instance, args);
         } catch (final IllegalAccessException e) {

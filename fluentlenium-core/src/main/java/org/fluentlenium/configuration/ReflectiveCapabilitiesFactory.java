@@ -53,7 +53,7 @@ public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, Facto
     }
 
     @Override
-    public Capabilities newCapabilities() {
+    public Capabilities newCapabilities(final ConfigurationProperties configuration) {
         if (!available) {
             throw new ConfigurationException("Capabilities " + capabilitiesClassName + " is not available.");
         }
