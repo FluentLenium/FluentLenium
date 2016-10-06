@@ -36,6 +36,13 @@ public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     }
 
     @Test
+    public void checkWithTextContentStartsWithWorks() {
+        goTo(DEFAULT_URL);
+        final FluentList list = find(withText().startsWith("Pharmac"));
+        assertThat(list.ids()).containsOnly("location");
+    }
+
+    @Test
     public void checkIndexWorks() {
         goTo(DEFAULT_URL);
         final FluentWebElement element = find(withClass("small")).index(1);

@@ -19,6 +19,7 @@ import static org.fluentlenium.core.filter.FilterConstructor.withClass;
 import static org.fluentlenium.core.filter.FilterConstructor.withId;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 import static org.fluentlenium.core.filter.FilterConstructor.withText;
+import static org.fluentlenium.core.filter.FilterConstructor.withTextContent;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 import static org.junit.Assert.fail;
 
@@ -219,6 +220,16 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
             @Override
             public FluentWebElement get() {
                 return el(".small", withText().contains("Small 1"));
+            }
+        }).present();
+    }
+
+    @Test
+    public void checkAwaitContainsTextWithTextContentMatcher() {
+        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
+            @Override
+            public FluentWebElement get() {
+                return el(".small", withTextContent().contains("Small 1"));
             }
         }).present();
     }

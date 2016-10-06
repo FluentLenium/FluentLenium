@@ -2,15 +2,15 @@ package org.fluentlenium.core.filter.matcher;
 
 import java.util.regex.Pattern;
 
-public abstract class AbstractMacher {
+public abstract class AbstractMatcher {
     private String value;
     private Pattern pattern;
 
-    protected AbstractMacher(final String value) {
+    protected AbstractMatcher(final String value) {
         this.value = value;
     }
 
-    protected AbstractMacher(final Pattern value) {
+    protected AbstractMatcher(final Pattern value) {
         this.pattern = value;
     }
 
@@ -32,7 +32,7 @@ public abstract class AbstractMacher {
         return getMatcherType() == null ? null : getMatcherType().getCssRepresentations();
     }
 
-    public final boolean isPreFilter() {
+    public final boolean isCssFilterSupported() {
         return pattern == null && getMatcherSymbol() != null;
     }
 

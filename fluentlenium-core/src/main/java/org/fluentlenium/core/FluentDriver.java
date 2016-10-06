@@ -16,11 +16,11 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.AnnotationsComponentListener;
 import org.fluentlenium.core.events.EventsRegistry;
-import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.inject.DefaultContainerInstanciator;
 import org.fluentlenium.core.inject.FluentInjector;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
+import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
@@ -323,47 +323,47 @@ public class FluentDriver implements FluentControl {
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final String selector, final Filter... filters) {
+    public FluentList<FluentWebElement> $(final String selector, final SearchFilter... filters) {
         return find(selector, filters);
     }
 
     @Override
-    public FluentWebElement el(final String selector, final Filter... filters) {
+    public FluentWebElement el(final String selector, final SearchFilter... filters) {
         return find(selector, filters).first();
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final Filter... filters) {
+    public FluentList<FluentWebElement> $(final SearchFilter... filters) {
         return find(filters);
     }
 
     @Override
-    public FluentWebElement el(final Filter... filters) {
+    public FluentWebElement el(final SearchFilter... filters) {
         return find(filters).first();
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final By locator, final Filter... filters) {
+    public FluentList<FluentWebElement> $(final By locator, final SearchFilter... filters) {
         return find(locator, filters);
     }
 
     @Override
-    public FluentWebElement el(final By locator, final Filter... filters) {
+    public FluentWebElement el(final By locator, final SearchFilter... filters) {
         return find(locator, filters).first();
     }
 
     @Override
-    public FluentList<FluentWebElement> find(final String selector, final Filter... filters) {
+    public FluentList<FluentWebElement> find(final String selector, final SearchFilter... filters) {
         return getSearch().find(selector, filters);
     }
 
     @Override
-    public FluentList<FluentWebElement> find(final By locator, final Filter... filters) {
+    public FluentList<FluentWebElement> find(final By locator, final SearchFilter... filters) {
         return getSearch().find(locator, filters);
     }
 
     @Override
-    public FluentList<FluentWebElement> find(final Filter... filters) {
+    public FluentList<FluentWebElement> find(final SearchFilter... filters) {
         return getSearch().find(filters);
     }
 

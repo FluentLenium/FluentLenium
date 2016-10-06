@@ -2,11 +2,11 @@ package org.fluentlenium.core.domain;
 
 import org.fluentlenium.core.action.FluentActions;
 import org.fluentlenium.core.conditions.FluentListConditions;
-import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.hook.HookControl;
 import org.fluentlenium.core.label.FluentLabel;
 import org.fluentlenium.core.proxy.FluentProxyState;
 import org.fluentlenium.core.search.SearchControl;
+import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWaitElementList;
 import org.openqa.selenium.WebElement;
 
@@ -178,7 +178,7 @@ public interface FluentList<E extends FluentWebElement>
      * @return extended by FluentWebElement objects list
      */
     @Override
-    FluentList<E> find(String selector, Filter... filters);
+    FluentList<E> find(String selector, SearchFilter... filters);
 
     /**
      * find elements in the children with the corresponding filters
@@ -187,7 +187,7 @@ public interface FluentList<E extends FluentWebElement>
      * @return extended by FluentWebElement objects list
      */
     @Override
-    FluentList<E> find(Filter... filters);
+    FluentList<E> find(SearchFilter... filters);
 
     /**
      * Clear all elements on the list

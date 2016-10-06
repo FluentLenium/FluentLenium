@@ -1,6 +1,6 @@
 package org.fluentlenium.core.filter.matcher;
 
-public class ContainsWordMatcher extends AbstractMacher {
+public class ContainsWordMatcher extends AbstractMatcher {
 
     public ContainsWordMatcher(final String value) {
         super(value);
