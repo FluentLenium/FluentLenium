@@ -184,11 +184,63 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             throw LocatorProxies.noSuchElement(proxy);
         }
 
+        boolean atLeastOne = false;
         for (final E fluentWebElement : this) {
-            if (fluentWebElement.enabled()) {
+            if (fluentWebElement.conditions().clickable()) {
+                atLeastOne = true;
                 fluentWebElement.click();
             }
         }
+
+        if (!atLeastOne) {
+            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element clickable."
+                    + " At least one element should be clickable to perform a click.");
+        }
+
+        return this;
+    }
+
+    @Override
+    public FluentList doubleClick() {
+        if (this.size() == 0) {
+            throw LocatorProxies.noSuchElement(proxy);
+        }
+
+        boolean atLeastOne = false;
+        for (final E fluentWebElement : this) {
+            if (fluentWebElement.conditions().clickable()) {
+                atLeastOne = true;
+                fluentWebElement.doubleClick();
+            }
+        }
+
+        if (!atLeastOne) {
+            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element clickable."
+                    + " At least one element should be clickable to perform a double click.");
+        }
+
+        return this;
+    }
+
+    @Override
+    public FluentList<E> contextClick() {
+        if (this.size() == 0) {
+            throw LocatorProxies.noSuchElement(proxy);
+        }
+
+        boolean atLeastOne = false;
+        for (final E fluentWebElement : this) {
+            if (fluentWebElement.conditions().clickable()) {
+                atLeastOne = true;
+                fluentWebElement.contextClick();
+            }
+        }
+
+        if (!atLeastOne) {
+            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element clickable."
+                    + " At least one element should be clickable to perform a context click.");
+        }
+
         return this;
     }
 
@@ -198,7 +250,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             throw LocatorProxies.noSuchElement(proxy);
         }
 
-        boolean atMostOne = false;
+        boolean atLeastOne = false;
         if (with.length > 0) {
             int id = 0;
             String value;
@@ -211,13 +263,13 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
                         value = with[with.length - 1];
                     }
                     if (fluentWebElement.enabled()) {
-                        atMostOne = true;
+                        atLeastOne = true;
                         fluentWebElement.write(value);
                     }
                 }
             }
 
-            if (!atMostOne) {
+            if (!atLeastOne) {
                 throw new NoSuchElementException(
                         LocatorProxies.getMessageContext(proxy) + " has no element displayed and enabled."
                                 + " At least one element should be displayed and enabled to define values.");
@@ -232,10 +284,17 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             throw LocatorProxies.noSuchElement(proxy);
         }
 
+        boolean atLeastOne = false;
         for (final E fluentWebElement : this) {
             if (fluentWebElement.enabled()) {
+                atLeastOne = true;
                 fluentWebElement.clear();
             }
+        }
+
+        if (!atLeastOne) {
+            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element enabled."
+                    + " At least one element should be enabled to clear values.");
         }
 
         return this;
@@ -270,10 +329,17 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             throw LocatorProxies.noSuchElement(proxy);
         }
 
+        boolean atLeastOne = false;
         for (final E fluentWebElement : this) {
             if (fluentWebElement.enabled()) {
+                atLeastOne = true;
                 fluentWebElement.submit();
             }
+        }
+
+        if (!atLeastOne) {
+            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element enabled."
+                    + " At least one element should be enabled to perform a submit.");
         }
         return this;
     }

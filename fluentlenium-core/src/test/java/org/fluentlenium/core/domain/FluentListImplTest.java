@@ -114,8 +114,8 @@ public class FluentListImplTest {
 
     @Test
     public void testClick() {
-        when(element2.enabled()).thenReturn(true);
-        when(element3.enabled()).thenReturn(true);
+        when(element2.conditions().clickable()).thenReturn(true);
+        when(element3.conditions().clickable()).thenReturn(true);
 
         list.click();
 
@@ -129,6 +129,74 @@ public class FluentListImplTest {
                 emptyList.click();
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
+
+        when(element2.conditions().clickable()).thenReturn(false);
+        when(element3.conditions().clickable()).thenReturn(false);
+
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                list.contextClick();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element clickable");;
+    }
+
+    @Test
+    public void testDoubleClick() {
+        when(element2.conditions().clickable()).thenReturn(true);
+        when(element3.conditions().clickable()).thenReturn(true);
+
+        list.doubleClick();
+
+        verify(element1, never()).doubleClick();
+        verify(element2).doubleClick();
+        verify(element3).doubleClick();
+
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                emptyList.doubleClick();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class);
+
+        when(element2.conditions().clickable()).thenReturn(false);
+        when(element3.conditions().clickable()).thenReturn(false);
+
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                list.contextClick();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element clickable");;
+    }
+
+    @Test
+    public void testContextClick() {
+        when(element2.conditions().clickable()).thenReturn(true);
+        when(element3.conditions().clickable()).thenReturn(true);
+
+        list.contextClick();
+
+        verify(element1, never()).contextClick();
+        verify(element2).contextClick();
+        verify(element3).contextClick();
+
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                emptyList.contextClick();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class);
+
+        when(element2.conditions().clickable()).thenReturn(false);
+        when(element3.conditions().clickable()).thenReturn(false);
+
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                list.contextClick();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element clickable");
     }
 
     @Test
@@ -178,6 +246,17 @@ public class FluentListImplTest {
                 emptyList.submit();
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
+
+        when(element2.enabled()).thenReturn(false);
+        when(element3.enabled()).thenReturn(false);
+
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                list.submit();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element enabled");
+
     }
 
     @Test
@@ -197,6 +276,16 @@ public class FluentListImplTest {
                 emptyList.clearAll();
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
+
+        when(element2.enabled()).thenReturn(false);
+        when(element3.enabled()).thenReturn(false);
+
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                list.submit();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element enabled");
     }
 
     @Test

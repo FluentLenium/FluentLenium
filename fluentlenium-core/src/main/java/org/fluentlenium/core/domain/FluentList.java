@@ -50,10 +50,24 @@ public interface FluentList<E extends FluentWebElement>
 
     /**
      * Click on all elements on the list
-     * Only the visible elements are filled
+     * Only the clickable elements are clicked
      */
     @Override
     FluentList<E> click();
+
+    /**
+     * double click on all elements on the list
+     * Only the clickable elements are clicked
+     */
+    @Override
+    FluentList<E> doubleClick();
+
+    /**
+     * context click on all elements on the list
+     * Only the clickable elements are clicked
+     */
+    @Override
+    FluentList<E> contextClick();
 
     /**
      * Fill  all elements on the list with the corresponding cell in the with table.

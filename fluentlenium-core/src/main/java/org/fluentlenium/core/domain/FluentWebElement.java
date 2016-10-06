@@ -86,13 +86,21 @@ public class FluentWebElement extends Component
         return control;
     }
 
-    /**
-     * Click on the element
-     *
-     * @return fluent web element
-     */
+    @Override
     public FluentWebElement click() {
         webElement.click();
+        return this;
+    }
+
+    @Override
+    public FluentWebElement doubleClick() {
+        mouse().doubleClick();
+        return this;
+    }
+
+    @Override
+    public FluentWebElement contextClick() {
+        mouseActions.contextClick();
         return this;
     }
 
