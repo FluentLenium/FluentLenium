@@ -212,4 +212,9 @@ public abstract class AbstractPropertiesConfiguration extends BaseConfiguration 
     public TriggerMode getHtmlDumpMode() {
         return getEnumProperty(TriggerMode.class, "htmlDumpMode");
     }
+
+    @Override
+    public String getCustomProperty(final String propertyName) {
+        return getStringProperty(propertyName);
+    }
 }

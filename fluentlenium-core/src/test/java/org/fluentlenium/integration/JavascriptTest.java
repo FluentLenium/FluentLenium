@@ -17,8 +17,8 @@ public class JavascriptTest extends IntegrationFluentTest {
     @Before
     public void before() {
         goTo(JAVASCRIPT_URL);
-        getConfiguration().setScreenshotMode(TriggerMode.MANUAL);
-        getConfiguration().setHtmlDumpMode(TriggerMode.MANUAL);
+        setScreenshotMode(TriggerMode.MANUAL);
+        setHtmlDumpMode(TriggerMode.MANUAL);
     }
 
     @Test

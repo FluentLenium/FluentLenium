@@ -3,7 +3,7 @@ package org.fluentlenium.core;
 import lombok.experimental.Delegate;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.fluentlenium.configuration.ConfigurationProperties;
+import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.action.WindowAction;
@@ -46,9 +46,8 @@ import java.util.concurrent.TimeUnit;
  * Util Class which offers some shortcut to webdriver methods
  */
 public class FluentDriver implements FluentControl {
-    private String baseUrl;
-
-    private final ConfigurationProperties configuration;
+    @Delegate
+    private final Configuration configuration;
 
     @Delegate(types = ComponentInstantiator.class)
     private final ComponentsManager componentsManager;
@@ -73,7 +72,7 @@ public class FluentDriver implements FluentControl {
 
     private final WindowAction windowAction;
 
-    public FluentDriver(final WebDriver driver, final ConfigurationProperties configuration, final FluentControl adapter) {
+    public FluentDriver(final WebDriver driver, final Configuration configuration, final FluentControl adapter) {
         this.configuration = configuration;
         this.componentsManager = new ComponentsManager(adapter);
         this.driver = driver;
@@ -118,18 +117,7 @@ public class FluentDriver implements FluentControl {
                             .setScriptTimeout(this.configuration.getScriptTimeout(), TimeUnit.MILLISECONDS);
                 }
             }
-
-            if (this.configuration.getBaseUrl() != null) {
-                String configBaseUrl = this.configuration.getBaseUrl();
-                if (configBaseUrl != null) {
-                    if (configBaseUrl.endsWith("/")) {
-                        configBaseUrl = configBaseUrl.substring(0, configBaseUrl.length() - 1);
-                    }
-                    this.baseUrl = configBaseUrl;
-                }
-            }
         }
-
     }
 
     @Override
@@ -232,15 +220,6 @@ public class FluentDriver implements FluentControl {
         return windowAction;
     }
 
-    /**
-     * Get the base URL to use when visiting relative URLs, if one is configured
-     *
-     * @return The base URL, or null if none configured
-     */
-    public String getBaseUrl() {
-        return baseUrl;
-    }
-
     @Override
     public FluentWait await() {
         return new FluentWait(this);
@@ -256,9 +235,34 @@ public class FluentDriver implements FluentControl {
         return getDriver().manage().getCookieNamed(name);
     }
 
+    private String buildUrl(String url) {
+        String baseUrl = getBaseUrl();
+        if (baseUrl != null) {
+            String configBaseUrl = baseUrl;
+            if (configBaseUrl != null) {
+                if (configBaseUrl.endsWith("/")) {
+                    configBaseUrl = configBaseUrl.substring(0, configBaseUrl.length() - 1);
+                }
+                baseUrl = configBaseUrl;
+            }
+        }
+        if (baseUrl != null) {
+            final URI uri = URI.create(url);
+            if (!uri.isAbsolute()) {
+                url = baseUrl + url;
+            }
+        }
+        if (url == null) {
+            url = baseUrl;
+        }
+        return url;
+    }
+
     @Override
     public String url() {
         String currentUrl = getDriver().getCurrentUrl();
+
+        String baseUrl = buildUrl(null);
 
         if (currentUrl != null && baseUrl != null && currentUrl.startsWith(baseUrl)) {
             currentUrl = currentUrl.substring(baseUrl.length());
@@ -286,13 +290,8 @@ public class FluentDriver implements FluentControl {
         if (url == null) {
             throw new IllegalArgumentException("Url is mandatory");
         }
-        if (baseUrl != null) {
-            final URI uri = URI.create(url);
-            if (!uri.isAbsolute()) {
-                url = baseUrl + url;
-            }
-        }
-        getDriver().get(url);
+
+        getDriver().get(buildUrl(url));
     }
 
     @Override
@@ -301,17 +300,10 @@ public class FluentDriver implements FluentControl {
             throw new IllegalArgumentException("Url is mandatory");
         }
 
-        if (baseUrl != null) {
-            final URI uri = URI.create(url);
-            if (!uri.isAbsolute()) {
-                url = baseUrl + url;
-            }
-        }
-
         final String newTab;
         synchronized (getClass()) {
             final Set<String> initialTabs = getDriver().getWindowHandles();
-            executeScript("window.open('" + url + "', '_blank');");
+            executeScript("window.open('" + buildUrl(url) + "', '_blank');");
             final Set<String> tabs = getDriver().getWindowHandles();
             tabs.removeAll(initialTabs);
             newTab = tabs.iterator().next();

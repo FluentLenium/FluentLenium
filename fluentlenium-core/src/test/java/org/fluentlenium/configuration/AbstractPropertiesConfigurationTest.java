@@ -244,4 +244,13 @@ public abstract class AbstractPropertiesConfigurationTest<T extends AbstractProp
         Assertions.assertThat(getConfiguration().getHtmlDumpMode())
                 .isEqualTo(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
     }
+
+    @Test
+    public void custom() {
+        Assertions.assertThat(getConfiguration().getHtmlDumpMode()).isNull();
+
+        mockProperty("key", "value");
+        Assertions.assertThat(getConfiguration().getCustomProperty("key"))
+                .isEqualTo("value");
+    }
 }

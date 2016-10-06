@@ -2,7 +2,7 @@ package org.fluentlenium.core.action;
 
 import com.google.common.collect.ImmutableSet;
 import org.assertj.core.api.Assertions;
-import org.fluentlenium.configuration.ConfigurationProperties;
+import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -128,9 +128,9 @@ public class WindowActionsTest {
 
         final FluentWait fluentWait = mock(FluentWait.class);
         final FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
-        final ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
+        final Configuration configuration = mock(Configuration.class);
 
-        final FluentDriver currentFluentDriver = new FluentDriver(driver, configurationProperties, fluentControl);
+        final FluentDriver currentFluentDriver = new FluentDriver(driver, configuration, fluentControl);
         final FluentDriver fluentDriverSpied = spy(currentFluentDriver);
 
         when(jsDriver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),
@@ -199,9 +199,9 @@ public class WindowActionsTest {
         final FluentWebElement fluentWebElement = mock(FluentWebElement.class);
         final FluentWait fluentWait = mock(FluentWait.class);
         final FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
-        final ConfigurationProperties configurationProperties = mock(ConfigurationProperties.class);
+        final Configuration configuration = mock(Configuration.class);
 
-        final FluentDriver currentFluentDriver = new FluentDriver(driver, configurationProperties, fluentControl);
+        final FluentDriver currentFluentDriver = new FluentDriver(driver, configuration, fluentControl);
         final FluentDriver fluentDriverSpied = spy(currentFluentDriver);
 
         when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),

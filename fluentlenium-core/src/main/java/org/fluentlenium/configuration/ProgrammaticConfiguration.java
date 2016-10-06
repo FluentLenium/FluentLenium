@@ -2,6 +2,9 @@ package org.fluentlenium.configuration;
 
 import org.openqa.selenium.Capabilities;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * {@link Configuration} based on JavaBean properties.
  *
@@ -40,6 +43,8 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     private Long implicitlyWait;
 
     private Long scriptTimeout;
+
+    private final Map<String, String> custom = new HashMap<>();
 
     @Override
     public String getWebDriver() {
@@ -198,5 +203,19 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     @Override
     public TriggerMode getHtmlDumpMode() {
         return htmlDumpMode;
+    }
+
+    @Override
+    public String getCustomProperty(final String propertyName) {
+        return custom.get(propertyName);
+    }
+
+    @Override
+    public void setCustomProperty(final String key, final String value) {
+        if (value == null) {
+            custom.remove(key);
+        } else {
+            custom.put(key, value);
+        }
     }
 }
