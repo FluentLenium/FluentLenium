@@ -80,6 +80,18 @@ public class FluentWebElementTest {
     }
 
     @Test
+    public void testDoubleClick() {
+        fluentElement.doubleClick();
+        verify(mouse).doubleClick(any(Coordinates.class));
+    }
+
+    @Test
+    public void testContextClick() {
+        fluentElement.contextClick();
+        verify(mouse).contextClick(any(Coordinates.class));
+    }
+
+    @Test
     public void testAxes() {
         fluentElement.axes().parent();
     }

@@ -16,6 +16,20 @@ public interface FluentActions<T, E extends FluentWebElement> {
     T click();
 
     /**
+     * Perform a double click.
+     *
+     * @return this object reference to chain methods calls
+     */
+    T doubleClick();
+
+    /**
+     * Perform a context click.
+     *
+     * @return
+     */
+    T contextClick();
+
+    /**
      * Perform a form submission.
      *
      * @return this object reference to chain methods calls.

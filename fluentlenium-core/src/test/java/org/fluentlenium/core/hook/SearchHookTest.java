@@ -45,6 +45,7 @@ public class SearchHookTest {
         search = new Search(driver, instantiator);
 
         when(driver.findElements(By.cssSelector(".selector"))).thenReturn(Arrays.asList(element));
+        when(element.isDisplayed()).thenReturn(true);
         when(element.isEnabled()).thenReturn(true);
     }
 
