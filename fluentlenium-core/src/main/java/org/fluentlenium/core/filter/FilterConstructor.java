@@ -1,5 +1,8 @@
 package org.fluentlenium.core.filter;
 
+import com.google.common.base.Predicate;
+import org.fluentlenium.core.domain.FluentWebElement;
+
 /**
  * Filter constructors.
  */
@@ -132,6 +135,16 @@ public final class FilterConstructor {
      */
     public static FilterBuilder withClass() {
         return new FilterBuilder("class");
+    }
+
+    /**
+     * Create a filter based on a element predicate
+     *
+     * @param predicate predicate
+     * @return predicate filter
+     */
+    public static PredicateFilter withPredicate(Predicate<FluentWebElement> predicate) {
+        return new PredicateFilter(predicate);
     }
 
 }

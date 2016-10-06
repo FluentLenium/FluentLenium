@@ -1,5 +1,7 @@
 package org.fluentlenium.integration;
 
+import com.google.common.base.Predicate;
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 
@@ -8,6 +10,7 @@ import static org.fluentlenium.core.filter.FilterConstructor.with;
 import static org.fluentlenium.core.filter.FilterConstructor.withClass;
 import static org.fluentlenium.core.filter.FilterConstructor.withId;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
+import static org.fluentlenium.core.filter.FilterConstructor.withPredicate;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 
 public class FluentSelectorTest extends IntegrationFluentTest {
@@ -100,6 +103,17 @@ public class FluentSelectorTest extends IntegrationFluentTest {
     public void checkNotStartAttribute() {
         goTo(DEFAULT_URL);
         assertThat($("span", withName().notStartsWith("na")).ids()).contains("oneline");
+    }
+
+    @Test
+    public void checkPredicate() {
+        goTo(DEFAULT_URL);
+        assertThat($("span", withPredicate(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(final FluentWebElement input) {
+                return input.id() != null && !input.id().startsWith("na");
+            }
+        })).ids().contains("oneline"));
     }
 
     @Test
