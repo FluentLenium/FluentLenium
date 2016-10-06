@@ -16,7 +16,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 /**
  * Generic adapter to {@link FluentDriver}.
  */
-public class FluentAdapter implements FluentControl, ConfigurationProperties {
+public class FluentAdapter implements FluentControl {
 
     private final FluentControlContainer driverContainer;
 
@@ -30,12 +30,13 @@ public class FluentAdapter implements FluentControl, ConfigurationProperties {
         this.driverContainer = driverContainer;
     }
 
-    @Delegate(types = ConfigurationProperties.class)
+    @Delegate
     public Configuration getConfiguration() {
         return configuration;
     }
 
-    @Delegate(types = FluentControl.class, excludes = SeleniumDriverControl.class) // We want getDriver to be final.
+    @Delegate(types = FluentControl.class, excludes = {SeleniumDriverControl.class, Configuration.class})
+    // We want getDriver to be final.
     private ContainerFluentControl getFluentControl() {
         return (ContainerFluentControl) getDriverContainer().getFluentControl();
     }
