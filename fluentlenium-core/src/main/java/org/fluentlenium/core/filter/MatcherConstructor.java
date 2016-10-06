@@ -1,6 +1,6 @@
 package org.fluentlenium.core.filter;
 
-import org.fluentlenium.core.filter.matcher.AbstractMacher;
+import org.fluentlenium.core.filter.matcher.AbstractMatcher;
 import org.fluentlenium.core.filter.matcher.ContainsMatcher;
 import org.fluentlenium.core.filter.matcher.EndsWithMatcher;
 import org.fluentlenium.core.filter.matcher.EqualMatcher;
@@ -26,7 +26,7 @@ public final class MatcherConstructor {
      * @param matcher string matcher
      * @return matcher object
      */
-    public static AbstractMacher contains(final String matcher) {
+    public static AbstractMatcher contains(final String matcher) {
         return new ContainsMatcher(matcher);
     }
 
@@ -36,7 +36,7 @@ public final class MatcherConstructor {
      * @param pattern pattern object
      * @return matcher object
      */
-    public static AbstractMacher contains(final Pattern pattern) {
+    public static AbstractMatcher contains(final Pattern pattern) {
         return new ContainsMatcher(pattern);
     }
 
@@ -47,7 +47,7 @@ public final class MatcherConstructor {
      * @return matcher object
      */
 
-    public static AbstractMacher notContains(final String matcher) {
+    public static AbstractMatcher notContains(final String matcher) {
         return new NotContainsMatcher(matcher);
     }
 
@@ -57,7 +57,7 @@ public final class MatcherConstructor {
      * @param pattern string pattern
      * @return matcher object
      */
-    public static AbstractMacher notContains(final Pattern pattern) {
+    public static AbstractMatcher notContains(final Pattern pattern) {
         return new NotContainsMatcher(pattern);
     }
 
@@ -67,7 +67,7 @@ public final class MatcherConstructor {
      * @param matcher string matcher
      * @return matcher object
      */
-    public static AbstractMacher equal(final String matcher) {
+    public static AbstractMatcher equal(final String matcher) {
         return new EqualMatcher(matcher);
     }
 
@@ -88,7 +88,7 @@ public final class MatcherConstructor {
      * @param matcher string matcher
      * @return matcher object
      */
-    public static AbstractMacher startsWith(final String matcher) {
+    public static AbstractMatcher startsWith(final String matcher) {
         return new StartsWithMatcher(matcher);
     }
 
@@ -98,7 +98,7 @@ public final class MatcherConstructor {
      * @param pattern pattern
      * @return matcher object
      */
-    public static AbstractMacher startsWith(final Pattern pattern) {
+    public static AbstractMatcher startsWith(final Pattern pattern) {
         return new StartsWithMatcher(pattern);
     }
 
@@ -108,7 +108,7 @@ public final class MatcherConstructor {
      * @param matcher string matcher
      * @return matcher
      */
-    public static AbstractMacher endsWith(final String matcher) {
+    public static AbstractMatcher endsWith(final String matcher) {
         return new EndsWithMatcher(matcher);
     }
 
@@ -119,7 +119,7 @@ public final class MatcherConstructor {
      * @return matcher
      */
 
-    public static AbstractMacher endsWith(final Pattern pattern) {
+    public static AbstractMatcher endsWith(final Pattern pattern) {
         return new EndsWithMatcher(pattern);
     }
 
@@ -129,7 +129,7 @@ public final class MatcherConstructor {
      * @param matcher string matcher
      * @return matcher
      */
-    public static AbstractMacher notStartsWith(final String matcher) {
+    public static AbstractMatcher notStartsWith(final String matcher) {
         return new NotStartsWithMatcher(matcher);
     }
 
@@ -140,7 +140,7 @@ public final class MatcherConstructor {
      * @return matcher
      */
 
-    public static AbstractMacher notStartsWith(final Pattern pattern) {
+    public static AbstractMatcher notStartsWith(final Pattern pattern) {
         return new NotStartsWithMatcher(pattern);
     }
 
@@ -150,7 +150,7 @@ public final class MatcherConstructor {
      * @param matcher string matcher
      * @return matcher
      */
-    public static AbstractMacher notEndsWith(final String matcher) {
+    public static AbstractMatcher notEndsWith(final String matcher) {
         return new NotEndsWithMatcher(matcher);
     }
 
@@ -160,7 +160,7 @@ public final class MatcherConstructor {
      * @param pattern pattern
      * @return matcher
      */
-    public static AbstractMacher notEndsWith(final Pattern pattern) {
+    public static AbstractMatcher notEndsWith(final Pattern pattern) {
         return new NotEndsWithMatcher(pattern);
     }
 

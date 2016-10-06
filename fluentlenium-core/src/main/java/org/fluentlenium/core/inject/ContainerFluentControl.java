@@ -4,10 +4,10 @@ import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.hook.HookControl;
 import org.fluentlenium.core.hook.HookDefinition;
 import org.fluentlenium.core.search.SearchControl;
+import org.fluentlenium.core.search.SearchFilter;
 import org.openqa.selenium.By;
 
 public class ContainerFluentControl implements FluentControl {
@@ -43,47 +43,47 @@ public class ContainerFluentControl implements FluentControl {
     }
 
     @Override
-    public FluentList<FluentWebElement> find(final String selector, final Filter... filters) {
+    public FluentList<FluentWebElement> find(final String selector, final SearchFilter... filters) {
         return applyHooks(adapterControl.find(selector, filters));
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final String selector, final Filter... filters) {
+    public FluentList<FluentWebElement> $(final String selector, final SearchFilter... filters) {
         return applyHooks(adapterControl.$(selector, filters));
     }
 
     @Override
-    public FluentWebElement el(final String selector, final Filter... filters) {
+    public FluentWebElement el(final String selector, final SearchFilter... filters) {
         return applyHooks(adapterControl.el(selector, filters));
     }
 
     @Override
-    public FluentList<FluentWebElement> find(final Filter... filters) {
+    public FluentList<FluentWebElement> find(final SearchFilter... filters) {
         return applyHooks(adapterControl.find(filters));
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final Filter... filters) {
+    public FluentList<FluentWebElement> $(final SearchFilter... filters) {
         return applyHooks(adapterControl.$(filters));
     }
 
     @Override
-    public FluentWebElement el(final Filter... filters) {
+    public FluentWebElement el(final SearchFilter... filters) {
         return applyHooks(adapterControl.el(filters));
     }
 
     @Override
-    public FluentList<FluentWebElement> find(final By locator, final Filter... filters) {
+    public FluentList<FluentWebElement> find(final By locator, final SearchFilter... filters) {
         return applyHooks(adapterControl.find(locator, filters));
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final By locator, final Filter... filters) {
+    public FluentList<FluentWebElement> $(final By locator, final SearchFilter... filters) {
         return applyHooks(adapterControl.$(locator, filters));
     }
 
     @Override
-    public FluentWebElement el(final By locator, final Filter... filters) {
+    public FluentWebElement el(final By locator, final SearchFilter... filters) {
         return applyHooks(adapterControl.el(locator, filters));
     }
 

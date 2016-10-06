@@ -14,7 +14,6 @@ import org.fluentlenium.core.conditions.AtLeastOneElementConditions;
 import org.fluentlenium.core.conditions.EachElementConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.wait.WaitConditionProxy;
-import org.fluentlenium.core.filter.Filter;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
@@ -24,6 +23,7 @@ import org.fluentlenium.core.label.FluentLabel;
 import org.fluentlenium.core.label.FluentLabelImpl;
 import org.fluentlenium.core.proxy.LocatorHandler;
 import org.fluentlenium.core.proxy.LocatorProxies;
+import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWaitElementList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -398,37 +398,37 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public FluentList<E> $(final String selector, final Filter... filters) {
+    public FluentList<E> $(final String selector, final SearchFilter... filters) {
         return find(selector, filters);
     }
 
     @Override
-    public E el(final String selector, final Filter... filters) {
+    public E el(final String selector, final SearchFilter... filters) {
         return find(selector, filters).first();
     }
 
     @Override
-    public FluentList<E> $(final Filter... filters) {
+    public FluentList<E> $(final SearchFilter... filters) {
         return find(filters);
     }
 
     @Override
-    public E el(final Filter... filters) {
+    public E el(final SearchFilter... filters) {
         return find(filters).first();
     }
 
     @Override
-    public FluentList<E> $(final By locator, final Filter... filters) {
+    public FluentList<E> $(final By locator, final SearchFilter... filters) {
         return find(locator, filters);
     }
 
     @Override
-    public E el(final By locator, final Filter... filters) {
+    public E el(final By locator, final SearchFilter... filters) {
         return find(locator, filters).first();
     }
 
     @Override
-    public FluentList<E> find(final String selector, final Filter... filters) {
+    public FluentList<E> find(final String selector, final SearchFilter... filters) {
         final List<E> finds = new ArrayList<>();
         for (final FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(selector, filters));
@@ -437,7 +437,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public FluentList<E> find(final By locator, final Filter... filters) {
+    public FluentList<E> find(final By locator, final SearchFilter... filters) {
         final List<E> finds = new ArrayList<>();
         for (final FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(locator, filters));
@@ -446,7 +446,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public FluentList<E> find(final Filter... filters) {
+    public FluentList<E> find(final SearchFilter... filters) {
         final List<E> finds = new ArrayList<>();
         for (final FluentWebElement e : this) {
             finds.addAll((Collection<E>) e.find(filters));

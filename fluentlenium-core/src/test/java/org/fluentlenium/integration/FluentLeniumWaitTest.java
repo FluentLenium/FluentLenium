@@ -22,6 +22,7 @@ import static org.fluentlenium.core.filter.FilterConstructor.withClass;
 import static org.fluentlenium.core.filter.FilterConstructor.withId;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 import static org.fluentlenium.core.filter.FilterConstructor.withText;
+import static org.fluentlenium.core.filter.FilterConstructor.withTextContent;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 import static org.junit.Assert.fail;
 
@@ -211,6 +212,11 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test
     public void checkAwaitContainsTextWithTextMatcher() {
         await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", withText().contains("Small 1"))).present();
+    }
+
+    @Test
+    public void checkAwaitContainsTextWithTextContentMatcher() {
+        await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($(".small", withTextContent().contains("Small 1"))).present();
     }
 
     @Test

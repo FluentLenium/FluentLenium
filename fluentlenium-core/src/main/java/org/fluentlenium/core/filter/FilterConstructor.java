@@ -1,7 +1,5 @@
 package org.fluentlenium.core.filter;
 
-import org.fluentlenium.core.filter.matcher.ContainsWordMatcher;
-
 /**
  * Filter constructors.
  */
@@ -14,26 +12,11 @@ public final class FilterConstructor {
     /**
      * Create a filter by name
      *
-     * @param name        element name
-     * @param type        filter type
-     * @param matcherType class for matcherType
-     * @return filter object
-     */
-    public static Filter buildFilter(final String name, final FilterType type, final Class matcherType) {
-        if (matcherType.equals(ContainsWordMatcher.class)) {
-            return new Filter(FilterType.NAME, name);
-        }
-        return null;
-    }
-
-    /**
-     * Create a filter by name
-     *
      * @param name element name
      * @return filter object
      */
-    public static Filter withName(final String name) {
-        return new Filter(FilterType.NAME, name);
+    public static AttributeFilter withName(final String name) {
+        return new AttributeFilter("name", name);
     }
 
     /**
@@ -42,8 +25,8 @@ public final class FilterConstructor {
      * @param id element id
      * @return filter object
      */
-    public static Filter withId(final String id) {
-        return new Filter(FilterType.ID, id);
+    public static AttributeFilter withId(final String id) {
+        return new AttributeFilter("id", id);
     }
 
     /**
@@ -52,8 +35,8 @@ public final class FilterConstructor {
      * @param klass CSS class name
      * @return filter object
      */
-    public static Filter withClass(final String klass) {
-        return new Filter(FilterType.CLASS, klass);
+    public static AttributeFilter withClass(final String klass) {
+        return new AttributeFilter("class", klass);
     }
 
     /**
@@ -62,8 +45,8 @@ public final class FilterConstructor {
      * @param text to filter in content
      * @return filter object
      */
-    public static Filter withText(final String text) {
-        return new Filter(FilterType.TEXT, MatcherConstructor.equal(text));
+    public static AttributeFilter withText(final String text) {
+        return new AttributeFilter("text", MatcherConstructor.equal(text));
     }
 
     /**
@@ -72,8 +55,46 @@ public final class FilterConstructor {
      * @param text to filter in content
      * @return filter object
      */
-    public static Filter containingText(final String text) {
-        return new Filter(FilterType.TEXT, MatcherConstructor.contains(text));
+    public static AttributeFilter containingText(final String text) {
+        return new AttributeFilter("text", MatcherConstructor.contains(text));
+    }
+
+    /**
+     * Create a filter builder for the attribute by text
+     *
+     * @return filter builder object
+     */
+    public static FilterBuilder withText() {
+        return new FilterBuilder("text");
+    }
+
+    /**
+     * Create a filter by text content
+     *
+     * @param text to filter in content
+     * @return filter object
+     */
+    public static AttributeFilter withTextContent(final String text) {
+        return new AttributeFilter("textContent", MatcherConstructor.equal(text));
+    }
+
+    /**
+     * Create a filter by text content
+     *
+     * @param text to filter in content
+     * @return filter object
+     */
+    public static AttributeFilter containingTextContent(final String text) {
+        return new AttributeFilter("textContent", MatcherConstructor.contains(text));
+    }
+
+    /**
+     * Create a filter builder by text content
+     *
+     * @return filter builder object
+     */
+    public static FilterBuilder withTextContent() {
+        return new FilterBuilder("textContent");
     }
 
     /**
@@ -92,7 +113,7 @@ public final class FilterConstructor {
      * @return filter builder object
      */
     public static FilterBuilder withName() {
-        return new FilterBuilder(FilterType.NAME);
+        return new FilterBuilder("name");
     }
 
     /**
@@ -101,7 +122,7 @@ public final class FilterConstructor {
      * @return filter builder object
      */
     public static FilterBuilder withId() {
-        return new FilterBuilder(FilterType.ID);
+        return new FilterBuilder("id");
     }
 
     /**
@@ -110,16 +131,7 @@ public final class FilterConstructor {
      * @return filter builder object
      */
     public static FilterBuilder withClass() {
-        return new FilterBuilder(FilterType.CLASS);
-    }
-
-    /**
-     * Create a filter builder for the attribute by text
-     *
-     * @return filter builder object
-     */
-    public static FilterBuilder withText() {
-        return new FilterBuilder(FilterType.TEXT);
+        return new FilterBuilder("class");
     }
 
 }

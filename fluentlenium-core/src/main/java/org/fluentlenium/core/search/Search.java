@@ -6,8 +6,8 @@ import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.filter.Filter;
-import org.fluentlenium.core.filter.FilterPredicate;
+import org.fluentlenium.core.filter.AttributeFilter;
+import org.fluentlenium.core.filter.AttributeFilterPredicate;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -39,13 +39,13 @@ public class Search implements SearchControl<FluentWebElement> {
      * @return fluent list of fluent web elements
      */
     @Override
-    public FluentList<FluentWebElement> find(final String selector, final Filter... filters) {
+    public FluentList<FluentWebElement> find(final String selector, final SearchFilter... filters) {
         final StringBuilder sb = new StringBuilder(selector);
-        final List<Filter> postFilterSelector = new ArrayList<>();
+        final List<SearchFilter> postFilterSelector = new ArrayList<>();
         if (filters != null && filters.length > 0) {
-            for (final Filter filter : filters) {
-                if (filter.isPreFilter()) {
-                    sb.append(filter.toString());
+            for (final SearchFilter filter : filters) {
+                if (filter.isCssFilterSupported()) {
+                    sb.append(filter.getCssFilter());
                 } else {
                     postFilterSelector.add(filter);
                 }
@@ -57,17 +57,12 @@ public class Search implements SearchControl<FluentWebElement> {
             return fluentList;
         }
 
-        Collection<FluentWebElement> postFiltered = fluentList;
-        for (final Filter filter : postFilterSelector) {
-            postFiltered = Collections2.filter(postFiltered, new FilterPredicate(filter));
-        }
-
         final List<WebElement> postFilteredElements = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
             @Override
             public List<WebElement> get() {
                 Collection<FluentWebElement> postFiltered = fluentList;
-                for (final Filter filter : postFilterSelector) {
-                    postFiltered = Collections2.filter(postFiltered, new FilterPredicate(filter));
+                for (final SearchFilter filter : postFilterSelector) {
+                    postFiltered = filter.applyFilter(postFiltered);
                 }
 
                 final ArrayList<WebElement> webElements = new ArrayList<>();
@@ -116,7 +111,7 @@ public class Search implements SearchControl<FluentWebElement> {
      * @return fluent list of fluent web elements
      */
     @Override
-    public FluentList<FluentWebElement> find(final Filter... filters) {
+    public FluentList<FluentWebElement> find(final SearchFilter... filters) {
         if (filters == null || filters.length == 0) {
             throw new IllegalArgumentException("cssSelector or filter is required");
         }
@@ -132,7 +127,7 @@ public class Search implements SearchControl<FluentWebElement> {
      * @return fluent list of fluent web elements
      */
     @Override
-    public FluentList<FluentWebElement> find(final By locator, final Filter... filters) {
+    public FluentList<FluentWebElement> find(final By locator, final SearchFilter... filters) {
         final List<WebElement> select = selectList(locator);
 
         final FluentListImpl fluentList = instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, select);
@@ -144,8 +139,8 @@ public class Search implements SearchControl<FluentWebElement> {
             @Override
             public List<WebElement> get() {
                 Collection<FluentWebElement> postFiltered = fluentList;
-                for (final Filter selector : filters) {
-                    postFiltered = Collections2.filter(postFiltered, new FilterPredicate(selector));
+                for (final SearchFilter filter : filters) {
+                    postFiltered = filter.applyFilter(postFiltered);
                 }
 
                 final List<WebElement> webElements = new ArrayList<>();
@@ -161,32 +156,32 @@ public class Search implements SearchControl<FluentWebElement> {
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final String selector, final Filter... filters) {
+    public FluentList<FluentWebElement> $(final String selector, final SearchFilter... filters) {
         return find(selector, filters);
     }
 
     @Override
-    public FluentWebElement el(final String selector, final Filter... filters) {
+    public FluentWebElement el(final String selector, final SearchFilter... filters) {
         return find(selector, filters).first();
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final Filter... filters) {
+    public FluentList<FluentWebElement> $(final SearchFilter... filters) {
         return find(filters);
     }
 
     @Override
-    public FluentWebElement el(final Filter... filters) {
+    public FluentWebElement el(final SearchFilter... filters) {
         return find(filters).first();
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final By locator, final Filter... filters) {
+    public FluentList<FluentWebElement> $(final By locator, final SearchFilter... filters) {
         return find(locator, filters);
     }
 
     @Override
-    public FluentWebElement el(final By locator, final Filter... filters) {
+    public FluentWebElement el(final By locator, final SearchFilter... filters) {
         return find(locator, filters).first();
     }
 
