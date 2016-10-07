@@ -19,13 +19,13 @@ or [AssertJ](http://joel-costigliola.github.io/assertj/).
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>1.0.0-RC8</version>
+    <version>1.0.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>1.0.0-RC8</version>
+    <version>1.0.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -222,13 +222,13 @@ $("#account").submit()
 $("#create-button").mouseOver()
 ```
 
-### Information
+### Information
 
 You can also retrieve information of located elements:
 
 ```java
 // Name of the first element
-$(".fluent").getName()
+$(".fluent").name()
 
 // Id of the first element
 $(By.cssSelector(".fluent")).id()
@@ -329,7 +329,7 @@ This is just about waiting for new window to open, this method is not opening ne
 
 This method opens new window and switches the context to newly oppened one.
 
-###clickAndCloseCurrent
+### clickAndCloseCurrent
 
 You should use this method when click action invoked on element should end up with current window closed.
 This is just about waiting for new window to close, this method is not closing browser window.
@@ -395,7 +395,7 @@ For example, if I choose that the title will be sufficient to know if I'm on the
 ```java
 public class MyPage extends FluentPage {
     @Override
-    public void getURL() {
+    public void getUrl() {
         return "/app/my-page";
     }
     
@@ -1435,7 +1435,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>1.0.0-RC8</version>
+    <version>1.0.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1450,7 +1450,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>1.0.0-RC8</version>
+    <version>1.0.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1465,7 +1465,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-cucumber</artifactId>
-    <version>1.0.0-RC8</version>
+    <version>1.0.0</version>
     <scope>test</scope>
 </dependency>
 ```
