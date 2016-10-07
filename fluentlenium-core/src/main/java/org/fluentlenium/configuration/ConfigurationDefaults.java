@@ -9,6 +9,12 @@ import org.openqa.selenium.Capabilities;
  */
 public class ConfigurationDefaults extends BaseConfiguration implements ConfigurationProperties {
     @Override
+    protected ConfigurationProperties getGlobalConfiguration() {
+        // This class can be extended by end-user, so it has to be protected.
+        return super.getGlobalConfiguration();
+    }
+
+    @Override
     public Class<? extends ConfigurationFactory> getConfigurationFactory() {
         return null;
     }
