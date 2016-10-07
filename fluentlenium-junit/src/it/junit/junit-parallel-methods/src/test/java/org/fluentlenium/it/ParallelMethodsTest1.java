@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Test1 extends FluentIntegTest {
+public class ParallelMethodsTest1 extends FluentIntegTest {
     @Test
     public void test() {
         goTo(UrlUtil.getAbsoluteUrlFromFile("inputs.html"));
@@ -23,7 +23,7 @@ public class Test1 extends FluentIntegTest {
         el("input").fill().with("2");
 
         try {
-            Thread.sleep(4000L);
+            Thread.sleep(400L);
         } catch (InterruptedException e) {
         }
 

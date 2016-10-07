@@ -1,58 +1,58 @@
 package org.fluentlenium.it;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Test1 extends FluentIntegTest {
+public class ParallelTest2 extends FluentIntegTestNg {
     @Test
-    public void test() {
+    public void test5() {
         goTo(UrlUtil.getAbsoluteUrlFromFile("inputs.html"));
-        el("input").fill().with("1");
+        el("input").fill().with("5");
         try {
             Thread.sleep(5000L);
         } catch (InterruptedException e) {
         }
 
-        assertThat(el("input").value()).isEqualTo("1");
+        assertThat(el("input").value()).isEqualTo("5");
     }
 
     @Test
-    public void test2() {
+    public void test6() {
         goTo(UrlUtil.getAbsoluteUrlFromFile("inputs.html"));
-        el("input").fill().with("2");
+        el("input").fill().with("6");
 
         try {
             Thread.sleep(4000L);
         } catch (InterruptedException e) {
         }
 
-        assertThat(el("input").value()).isEqualTo("2");
+        assertThat(el("input").value()).isEqualTo("6");
     }
 
     @Test
-    public void test3() {
+    public void test7() {
         goTo(UrlUtil.getAbsoluteUrlFromFile("inputs.html"));
-        el("input").fill().with("3");
+        el("input").fill().with("7");
 
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {
         }
 
-        assertThat(el("input").value()).isEqualTo("3");
+        assertThat(el("input").value()).isEqualTo("7");
     }
 
     @Test
-    public void test4() {
+    public void test8() {
         goTo(UrlUtil.getAbsoluteUrlFromFile("inputs.html"));
-        el("input").fill().with("4");
+        el("input").fill().with("8");
 
         try {
             Thread.sleep(2000L);
         } catch (InterruptedException e) {
         }
 
-        assertThat(el("input").value()).isEqualTo("4");
+        assertThat(el("input").value()).isEqualTo("8");
     }
 }
