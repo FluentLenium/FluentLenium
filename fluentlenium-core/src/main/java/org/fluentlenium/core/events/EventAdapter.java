@@ -82,15 +82,17 @@ class EventAdapter implements WebDriverEventListener {
     }
 
     @Override
-    public void beforeChangeValueOf(final WebElement element, final WebDriver driver) {
+    public void beforeChangeValueOf(final WebElement element, final WebDriver driver, CharSequence[] charSequence) {
         this.listener
-                .beforeChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
+                .beforeChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver,
+                        charSequence);
     }
 
     @Override
-    public void afterChangeValueOf(final WebElement element, final WebDriver driver) {
+    public void afterChangeValueOf(final WebElement element, final WebDriver driver, CharSequence[] charSequence) {
         this.listener
-                .afterChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
+                .afterChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver,
+                        charSequence);
     }
 
     @Override

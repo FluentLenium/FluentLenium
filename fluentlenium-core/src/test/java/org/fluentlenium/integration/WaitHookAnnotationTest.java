@@ -31,7 +31,7 @@ public class WaitHookAnnotationTest extends IntegrationFluentTest {
                 find("#anotherField").click();
             }
         }).isExactlyInstanceOf(TimeoutException.class)
-                .hasMessageStartingWith("Timed out after 5 seconds waiting for By.cssSelector: #anotherField");
+                .hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector: #anotherField");
 
     }
 

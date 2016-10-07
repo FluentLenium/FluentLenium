@@ -106,20 +106,22 @@ public interface EventListener {
      * {@link org.openqa.selenium.WebElement#sendKeys},
      * {@link org.openqa.selenium.WebElement#sendKeys(CharSequence...)}.
      *
-     * @param driver  WebDriver
-     * @param element the WebElement being used for the action
+     * @param element      the WebElement being used for the action
+     * @param driver       WebDriver
+     * @param charSequence value of the element
      */
-    void beforeChangeValueOf(FluentWebElement element, WebDriver driver);
+    void beforeChangeValueOf(FluentWebElement element, WebDriver driver, CharSequence[] charSequence);
 
     /**
      * Called after {@link org.openqa.selenium.WebElement#clear WebElement.clear()},
      * {@link org.openqa.selenium.WebElement#sendKeys},
      * {@link org.openqa.selenium.WebElement#sendKeys(CharSequence...)} . Not called, if an exception is thrown.
      *
-     * @param driver  WebDriver
-     * @param element the WebElement being used for the action
+     * @param element      the WebElement being used for the action
+     * @param driver       WebDriver
+     * @param charSequence value of the element
      */
-    void afterChangeValueOf(FluentWebElement element, WebDriver driver);
+    void afterChangeValueOf(FluentWebElement element, WebDriver driver, CharSequence[] charSequence);
 
     /**
      * Called before

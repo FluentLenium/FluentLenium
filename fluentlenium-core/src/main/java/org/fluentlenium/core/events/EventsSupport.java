@@ -121,14 +121,14 @@ public class EventsSupport implements EventListener {
     }
 
     @Override
-    public void beforeChangeValueOf(final FluentWebElement element, final WebDriver driver) {
+    public void beforeChangeValueOf(final FluentWebElement element, final WebDriver driver, final CharSequence[] charSequence) {
         for (final ElementListener listener : this.eventsRegistry.beforeChangeValueOf) {
             listener.on(element, driver);
         }
     }
 
     @Override
-    public void afterChangeValueOf(final FluentWebElement element, final WebDriver driver) {
+    public void afterChangeValueOf(final FluentWebElement element, final WebDriver driver, final CharSequence[] charSequence) {
         for (final ElementListener listener : this.eventsRegistry.afterChangeValueOf) {
             listener.on(element, driver);
         }

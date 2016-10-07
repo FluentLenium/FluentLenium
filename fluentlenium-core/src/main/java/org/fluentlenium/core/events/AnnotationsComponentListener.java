@@ -76,7 +76,7 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
     }
 
     protected void defaultHandler(final Class<? extends Annotation> annotation, final WebElement element,
-            final WebDriver driver) {
+            final CharSequence[] charSequence) {
         if (element == null) {
             return;
         }
@@ -91,6 +91,9 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
                 final Object[] args = ReflectionUtils.toArgs(new Function<Class<?>, Object>() {
                     @Override
                     public Object apply(final Class<?> input) {
+                        if (CharSequence.class.isAssignableFrom(input)) {
+                            return charSequence;
+                        }
                         return null;
                     }
                 }, parameterTypes);
@@ -115,22 +118,22 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
 
     @Override
     public void beforeClickOn(final WebElement element, final WebDriver driver) {
-        defaultHandler(BeforeClickOn.class, element, driver);
+        defaultHandler(BeforeClickOn.class, element, null);
     }
 
     @Override
     public void afterClickOn(final WebElement element, final WebDriver driver) {
-        defaultHandler(AfterClickOn.class, element, driver);
+        defaultHandler(AfterClickOn.class, element, null);
     }
 
     @Override
-    public void beforeChangeValueOf(final WebElement element, final WebDriver driver) {
-        defaultHandler(BeforeChangeValueOf.class, element, driver);
+    public void beforeChangeValueOf(final WebElement element, final WebDriver driver, final CharSequence[] charSequence) {
+        defaultHandler(BeforeChangeValueOf.class, element, charSequence);
     }
 
     @Override
-    public void afterChangeValueOf(final WebElement element, final WebDriver driver) {
-        defaultHandler(AfterChangeValueOf.class, element, driver);
+    public void afterChangeValueOf(final WebElement element, final WebDriver driver, final CharSequence[] charSequence) {
+        defaultHandler(AfterChangeValueOf.class, element, charSequence);
     }
 
     @Override
