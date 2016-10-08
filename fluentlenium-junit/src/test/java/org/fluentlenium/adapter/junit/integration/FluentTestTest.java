@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.junit.integration;
 
+import net.jcip.annotations.NotThreadSafe;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.util.Files;
 import org.fluentlenium.adapter.SharedWebDriverContainer;
@@ -28,6 +29,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
+@NotThreadSafe
 public class FluentTestTest {
     private static List<WebDriver> drivers = new ArrayList<>();
     private static List<WebDriver> sharedClassDrivers = new ArrayList<>();
