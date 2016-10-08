@@ -15,7 +15,7 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
     private List<MessageBuilderCall> calls;
 
     public MessageBuilderInvocationHandler(final String context) {
-        this(new ArrayList<MessageBuilderCall>());
+        this(new ArrayList<>());
         final MessageBuilderCall messageBuilderCall = new MessageBuilderCall();
         messageBuilderCall.setContext(context);
         calls.add(messageBuilderCall);

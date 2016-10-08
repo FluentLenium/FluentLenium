@@ -133,7 +133,7 @@ public class FluentWaitEachElementMatcherTest {
             }
         };
 
-        final FluentListConditions matcher = wait.untilEach(new ArrayList<FluentWebElement>());
+        final FluentListConditions matcher = wait.untilEach(new ArrayList<>());
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {

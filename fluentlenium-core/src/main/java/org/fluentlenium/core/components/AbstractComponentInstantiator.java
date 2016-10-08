@@ -81,7 +81,7 @@ public abstract class AbstractComponentInstantiator implements ComponentInstanti
 
     @Override
     public <L extends List<T>, T> L newComponentList(final Class<L> listClass, final Class<T> componentClass) {
-        return newComponentList(listClass, componentClass, new ArrayList<T>());
+        return newComponentList(listClass, componentClass, new ArrayList<>());
     }
 
     @Override
