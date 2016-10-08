@@ -7,6 +7,7 @@
         FluentLenium PMD RuleSet
     </description>
 
+    <exclude-pattern>.*/examples/.*</exclude-pattern>
     <rule ref="rulesets/java/basic.xml"/>
     <rule ref="rulesets/java/braces.xml"/>
     <rule ref="rulesets/java/clone.xml"/>
@@ -26,6 +27,7 @@
     <rule ref="rulesets/java/design.xml">
         <exclude name="AvoidReassigningParameters"/>
         <exclude name="SingularField"/>
+        <exclude name="UseVarargs"/>
     </rule>
     <rule ref="rulesets/java/empty.xml"/>
     <rule ref="rulesets/java/imports.xml">
@@ -44,10 +46,14 @@
 //VariableDeclaratorId[(string-length(@Image) < 3)
 and (not (@Image='id'))
 and (not (@Image='by'))
+and (not (@Image='as'))
 and (not (@Image='e'))
 and (not (@Image='o1'))
 and (not (@Image='o2'))
+and (not (@Image='p1'))
+and (not (@Image='p2'))
 and (not (@Image='i'))
+and (not (@Image='j'))
 and (not (@Image='x'))
 and (not (@Image='y'))]
 [not(ancestor::ForInit)]
