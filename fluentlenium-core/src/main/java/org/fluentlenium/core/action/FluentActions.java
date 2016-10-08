@@ -25,7 +25,7 @@ public interface FluentActions<T, E extends FluentWebElement> {
     /**
      * Perform a context click.
      *
-     * @return
+     * @return this object reference to chain methods calls
      */
     T contextClick();
 
