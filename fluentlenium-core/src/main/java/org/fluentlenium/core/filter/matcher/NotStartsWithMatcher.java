@@ -18,8 +18,8 @@ public class NotStartsWithMatcher extends AbstractMatcher {
     }
 
     @Override
-    public boolean isSatisfiedBy(final String o) {
-        return !CalculateService.startsWith(getPattern(), getValue(), o);
+    public boolean isSatisfiedBy(final String obj) {
+        return !CalculateService.startsWith(getPattern(), getValue(), obj);
     }
 
 }

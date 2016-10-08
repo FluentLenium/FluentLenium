@@ -29,7 +29,7 @@ public class ComponentList<T> extends DelegatingList<T> implements WrapsElements
         this.instantiator = instantiator;
 
         if (this.list instanceof WrapsElements) {
-            this.proxy = ((WrapsElements) this.list).getWrappedElements();
+            this.proxy = ((WrapsElements) this.list).getWrappedElements(); // NOPMD ConstructorCallsOverridableMethod
         }
     }
 

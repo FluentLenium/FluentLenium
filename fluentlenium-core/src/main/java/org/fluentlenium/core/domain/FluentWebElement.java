@@ -45,6 +45,7 @@ import java.util.List;
 /**
  * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
  */
+@SuppressWarnings({"PMD.GodClass", "PMD.ExcessivePublicCount"})
 public class FluentWebElement extends Component
         implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>, FluentProxyState<FluentWebElement>,
         SearchControl<FluentWebElement>, HookControl<FluentWebElement>, FluentLabel<FluentWebElement> {
@@ -438,7 +439,7 @@ public class FluentWebElement extends Component
     @Override
     public <R> R noHook(final Function<FluentWebElement, R> function) {
         noHook();
-        R functionReturn = function.apply(this);
+        final R functionReturn = function.apply(this);
         restoreHooks();
         return functionReturn;
     }
@@ -451,15 +452,15 @@ public class FluentWebElement extends Component
         return this;
     }
 
-    /* default */ void setHookDefinitionsBackup(List<HookDefinition<?>> hookDefinitionsBackup) {
+    /* default */ void setHookDefinitionsBackup(final List<HookDefinition<?>> hookDefinitionsBackup) {
         this.hookDefinitionsBackup = hookDefinitionsBackup;
     }
 
     @Override
     public FluentWebElement noHookInstance() {
-        LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
-        ElementLocator locator = locatorHandler.getLocator();
-        WebElement noHookElement = LocatorProxies.createWebElement(locator);
+        final LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
+        final ElementLocator locator = locatorHandler.getLocator();
+        final WebElement noHookElement = LocatorProxies.createWebElement(locator);
         return newComponent(getClass(), noHookElement);
     }
 

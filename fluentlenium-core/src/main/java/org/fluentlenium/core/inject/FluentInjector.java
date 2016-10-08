@@ -38,6 +38,7 @@ import java.util.Map.Entry;
 /**
  * Handle injection of element proxies, @Page objects and @FindBy.
  */
+@SuppressWarnings("PMD.GodClass")
 public class FluentInjector implements FluentInjectControl {
 
     private final Map<Class, Object> containerInstances = new IdentityHashMap<>();

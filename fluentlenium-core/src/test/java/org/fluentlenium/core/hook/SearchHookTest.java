@@ -95,7 +95,7 @@ public class SearchHookTest {
         Mockito.verify(element).click();
 
         final LocatorHandler<WebElement> componentHandler = LocatorProxies.getLocatorHandler(hookedElement.getElement());
-        WebElement hookElement = componentHandler.getInvocationTarget(null);
+        final WebElement hookElement = componentHandler.getInvocationTarget(null);
         Assertions.assertThat(hookElement).isNotInstanceOf(NanoHook.class);
     }
 

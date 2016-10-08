@@ -49,15 +49,15 @@ public class WaitForPageToLoadTest {
 
     private static class WebDriverWithJavascriptExecutor implements WebDriver, JavascriptExecutor {
 
-        public Object executeScript(final String s, final Object... objects) {
+        public Object executeScript(final String script, final Object... args) {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        public Object executeAsyncScript(final String s, final Object... objects) {
+        public Object executeAsyncScript(final String script, final Object... args) {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        public void get(final String s) {
+        public void get(final String url) {
             //To change body of implemented methods use File | Settings | File Templates.
         }
 

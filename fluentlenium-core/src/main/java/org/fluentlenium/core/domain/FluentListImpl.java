@@ -37,6 +37,7 @@ import java.util.List;
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
  */
+@SuppressWarnings({"PMD.GodClass", "PMD.ExcessivePublicCount"})
 public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E> implements FluentList<E> {
     private final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
     private final HookChainBuilder hookChainBuilder;
@@ -85,7 +86,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
                 component.withLabelHint(label.getLabelHints());
             }
             if (component instanceof HookControl) {
-                for (HookDefinition definition : hookDefinitions) {
+                for (final HookDefinition definition : hookDefinitions) {
                     component.withHook(definition.getHookClass(), definition.getOptions());
                 }
             }
@@ -106,7 +107,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
                 component.withLabelHint(label.getLabelHints());
             }
             if (component instanceof HookControl) {
-                for (HookDefinition definition : hookDefinitions) {
+                for (final HookDefinition definition : hookDefinitions) {
                     component.withHook(definition.getHookClass(), definition.getOptions());
                 }
             }
@@ -127,7 +128,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
                 component.withLabelHint(label.getLabelHints());
             }
             if (component instanceof HookControl) {
-                for (HookDefinition definition : hookDefinitions) {
+                for (final HookDefinition definition : hookDefinitions) {
                     component.withHook(definition.getHookClass(), definition.getOptions());
                 }
             }
@@ -552,16 +553,16 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> noHookInstance() {
-        LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(proxy);
-        ElementLocator locator = locatorHandler.getLocator();
-        List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
+        final LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(proxy);
+        final ElementLocator locator = locatorHandler.getLocator();
+        final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
         return instantiator.asComponentList(getClass(), componentClass, webElementList);
     }
 
     @Override
     public <R> R noHook(final Function<FluentList<E>, R> function) {
         noHook();
-        R functionReturn = function.apply(this);
+        final R functionReturn = function.apply(this);
         restoreHooks();
         return functionReturn;
     }

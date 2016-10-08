@@ -26,6 +26,7 @@ import static org.fluentlenium.core.filter.FilterConstructor.withTextContent;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 import static org.junit.Assert.fail;
 
+@SuppressWarnings("PMD.ExcessivePublicCount")
 public class FluentLeniumWaitTest extends IntegrationFluentTest {
 
     private static final int MINIMAL_TIMEOUT = 1;
@@ -473,7 +474,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().pollingEvery(LESS_THAN_SECOND_TIMEOUT, TimeUnit.MILLISECONDS).untilPredicate(new Predicate<FluentControl>() {
             @Override
-            public boolean apply(final FluentControl o) {
+            public boolean apply(final FluentControl input) {
                 return true;
             }
         });
@@ -484,7 +485,7 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().atMost(SECOND_TIMEOUT).untilPredicate(new Predicate<FluentControl>() {
             @Override
-            public boolean apply(final FluentControl o) {
+            public boolean apply(final FluentControl input) {
                 return false;
             }
         });

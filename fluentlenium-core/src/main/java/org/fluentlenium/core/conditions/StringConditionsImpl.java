@@ -26,14 +26,14 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     }
 
     @Override
-    public boolean contains(final CharSequence s) {
+    public boolean contains(final CharSequence charSequence) {
         return verify(new Predicate<String>() {
             @Override
             public boolean apply(final String input) {
                 if (input == null) {
                     return false;
                 }
-                return input.contains(s);
+                return input.contains(charSequence);
             }
         });
     }
@@ -111,8 +111,8 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
                 if (input == null) {
                     return false;
                 }
-                final Matcher m = pattern.matcher(input);
-                return m.matches();
+                final Matcher matcher = pattern.matcher(input);
+                return matcher.matches();
             }
         });
     }

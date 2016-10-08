@@ -37,9 +37,9 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
         this.configuration = configuration;
 
         if (this.configuration != null) {
-            CustomProperty[] custom = this.configuration.custom();
+            final CustomProperty[] custom = this.configuration.custom();
             if (custom != null) {
-                for (CustomProperty customProperty : custom) {
+                for (final CustomProperty customProperty : custom) {
                     customProperties.put(customProperty.key(), customProperty.value());
                 }
             }

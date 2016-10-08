@@ -23,6 +23,7 @@ import java.util.WeakHashMap;
 /**
  * Utility class for reflection.
  */
+@SuppressWarnings("PMD.GodClass")
 public final class ReflectionUtils {
     private static final Class<?>[] EMPTY_CLASS_ARRAY = new Class<?>[0];
     private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
@@ -35,8 +36,8 @@ public final class ReflectionUtils {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> Class<T> wrapPrimitive(final Class<T> c) {
-        return c.isPrimitive() ? (Class<T>) PRIMITIVES_TO_WRAPPERS.get(c) : c;
+    public static <T> Class<T> wrapPrimitive(final Class<T> clazz) {
+        return clazz.isPrimitive() ? (Class<T>) PRIMITIVES_TO_WRAPPERS.get(clazz) : clazz;
     }
 
     static {

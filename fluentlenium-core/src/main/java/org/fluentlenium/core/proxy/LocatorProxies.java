@@ -28,8 +28,8 @@ public final class LocatorProxies {
      * @param proxy proxy
      * @return NoSuchElementException No such element exception
      */
-    public static NoSuchElementException noSuchElement(Object proxy) {
-        LocatorHandler locatorHandler = getLocatorHandler(proxy);
+    public static NoSuchElementException noSuchElement(final Object proxy) {
+        final LocatorHandler locatorHandler = getLocatorHandler(proxy);
         if (locatorHandler == null) {
             return new NoSuchElementException("No such element");
         }
@@ -42,8 +42,8 @@ public final class LocatorProxies {
      * @param proxy proxy
      * @return message context
      */
-    public static String getMessageContext(Object proxy) {
-        LocatorHandler locatorHandler = getLocatorHandler(proxy);
+    public static String getMessageContext(final Object proxy) {
+        final LocatorHandler locatorHandler = getLocatorHandler(proxy);
         if (locatorHandler == null) {
             return "";
         }

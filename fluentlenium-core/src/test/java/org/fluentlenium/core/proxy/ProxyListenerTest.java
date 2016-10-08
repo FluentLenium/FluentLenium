@@ -71,10 +71,10 @@ public class ProxyListenerTest {
         }
 
         @Override
-        public boolean matches(final Object item) {
+        public boolean matches(final Object items) {
             final List<WebElement> unwrapped = new ArrayList<>();
-            for (final Object o : (Iterable) item) {
-                unwrapped.add(((WrapsElement) o).getWrappedElement());
+            for (final Object item : (Iterable) items) {
+                unwrapped.add(((WrapsElement) item).getWrappedElement());
             }
             return unwrapped.equals(expected);
         }

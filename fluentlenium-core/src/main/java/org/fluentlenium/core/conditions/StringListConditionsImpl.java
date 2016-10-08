@@ -22,11 +22,11 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
     }
 
     @Override
-    public boolean contains(final CharSequence s) {
+    public boolean contains(final CharSequence charSequence) {
         return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(final FluentWebElement input) {
-                return conditionsGetter.apply(input).contains(s);
+                return conditionsGetter.apply(input).contains(charSequence);
             }
         });
     }

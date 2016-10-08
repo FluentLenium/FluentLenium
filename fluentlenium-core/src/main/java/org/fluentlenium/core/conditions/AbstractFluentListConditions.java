@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * Abstract class conditions on list of elements.
  */
+@SuppressWarnings("PMD.ExcessivePublicCount")
 public abstract class AbstractFluentListConditions implements FluentListConditions {
     private boolean negation;
 
