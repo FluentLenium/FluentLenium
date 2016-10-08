@@ -164,11 +164,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
     @Override
     public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
         if (method.isAnnotationPresent(Negation.class)) {
-            final Conditions<?> negationProxy = WaitConditionProxy.custom(conditionClass, wait, context, conditionSupplier);
-            final WaitConditionInvocationHandler negationHandler = (WaitConditionInvocationHandler) Proxy
-                    .getInvocationHandler(negationProxy);
-            negationHandler.negation = !negation;
-            return negationProxy;
+            return buildNegationProxy();
         }
 
         if (method.isAnnotationPresent(MessageContext.class)) {
@@ -177,38 +173,58 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
 
         final Class<?> returnType = method.getReturnType();
         if (boolean.class.equals(returnType) || Boolean.class.equals(returnType)) {
-            until(conditions(), messageBuilder(), new Function<C, Boolean>() {
-                @Override
-                public Boolean apply(final C input) {
-                    try {
-                        return (Boolean) method.invoke(input, args);
-                    } catch (final IllegalAccessException e) {
-                        throw new IllegalStateException("An internal error has occured while waiting", e);
-                    } catch (final InvocationTargetException e) {
-                        final Throwable targetException = e.getTargetException();
-                        if (targetException instanceof TimeoutException || targetException instanceof NoSuchElementException
-                                || targetException instanceof StaleElementReferenceException) {
-                            final NoSuchElementValue annotation = method.getAnnotation(NoSuchElementValue.class);
-                            return annotation != null && annotation.value();
-                        }
-                        throw new IllegalStateException("An internal error has occured while waiting", e);
-                    }
-                }
-            });
-            return true;
+            return waitForCondition(method, args);
         } else if (Conditions.class.isAssignableFrom(returnType)) {
-            final Method conditionGetter = conditions().getClass().getMethod(method.getName(), method.getParameterTypes());
-            final Conditions<?> childConditions = (Conditions<?>) conditionGetter.invoke(conditions(true), args);
-
-            final Conditions<?> childProxy = WaitConditionProxy
-                    .custom((Class<Conditions<?>>) method.getReturnType(), wait, context,
-                            Suppliers.<Conditions<?>>ofInstance(childConditions));
-            final WaitConditionInvocationHandler childHandler = (WaitConditionInvocationHandler) Proxy
-                    .getInvocationHandler(childProxy);
-            childHandler.negation = negation;
-            return childProxy;
+            return buildChildProxy(method, args);
         } else {
             throw new IllegalStateException("An internal error has occured.");
         }
+    }
+
+    private Object buildChildProxy(final Method method, final Object[] args)
+            throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        final Method conditionGetter = conditions().getClass().getMethod(method.getName(), method.getParameterTypes());
+        final Conditions<?> childConditions = (Conditions<?>) conditionGetter.invoke(conditions(true), args);
+
+        final Conditions<?> childProxy = WaitConditionProxy.custom((Class<Conditions<?>>) method.getReturnType(), wait, context,
+                Suppliers.<Conditions<?>>ofInstance(childConditions));
+        final WaitConditionInvocationHandler childHandler = (WaitConditionInvocationHandler) Proxy
+                .getInvocationHandler(childProxy);
+        childHandler.negation = negation;
+        return childProxy;
+    }
+
+    private boolean waitForCondition(final Method method, final Object[] args) {
+        until(conditions(), messageBuilder(), new Function<C, Boolean>() {
+            @Override
+            public Boolean apply(final C input) {
+                try {
+                    return (Boolean) method.invoke(input, args);
+                } catch (final IllegalAccessException e) {
+                    throw new IllegalStateException("An internal error has occured while waiting", e);
+                } catch (final InvocationTargetException e) {
+                    final Throwable targetException = e.getTargetException();
+                    if (isNoSuchElementException(targetException)) {
+                        final NoSuchElementValue annotation = method.getAnnotation(NoSuchElementValue.class);
+                        return annotation != null && annotation.value();
+                    }
+                    throw new IllegalStateException("An internal error has occured while waiting", e);
+                }
+            }
+        });
+        return true;
+    }
+
+    private boolean isNoSuchElementException(final Throwable targetException) {
+        return targetException instanceof TimeoutException || targetException instanceof NoSuchElementException
+                || targetException instanceof StaleElementReferenceException;
+    }
+
+    private Conditions<?> buildNegationProxy() {
+        final Conditions<?> negationProxy = WaitConditionProxy.custom(conditionClass, wait, context, conditionSupplier);
+        final WaitConditionInvocationHandler negationHandler = (WaitConditionInvocationHandler) Proxy
+                .getInvocationHandler(negationProxy);
+        negationHandler.negation = !negation;
+        return negationProxy;
     }
 }

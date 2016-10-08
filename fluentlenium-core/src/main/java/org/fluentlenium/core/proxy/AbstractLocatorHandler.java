@@ -181,6 +181,8 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     }
 
     @Override
+    @SuppressWarnings({"PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity",
+            "PMD.NPathComplexity"})
     public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
         if (TO_STRING.equals(method)) {
             return proxyToString(result == null ? null : (String) invoke(method, args));
@@ -212,6 +214,11 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
         getLocatorResult();
 
+        return invokeWithRetry(method, args);
+    }
+
+    //CHECKSTYLE.OFF: IllegalThrows
+    private Object invokeWithRetry(final Method method, final Object[] args) throws Throwable {
         Throwable lastThrowable = null;
         for (int i = 0; i < MAX_RETRY; i++) {
             try {
@@ -226,7 +233,6 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         throw lastThrowable;
     }
 
-    //CHECKSTYLE.OFF: IllegalThrows
     private Object invoke(final Method method, final Object[] args) throws Throwable {
         final Object returnValue;
         try {

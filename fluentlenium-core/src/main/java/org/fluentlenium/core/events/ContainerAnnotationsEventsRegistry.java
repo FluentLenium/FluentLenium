@@ -25,6 +25,7 @@ public class ContainerAnnotationsEventsRegistry {
     private final EventsRegistry registry;
     private final Object container;
 
+    @SuppressWarnings({"PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity"})
     public ContainerAnnotationsEventsRegistry(final EventsRegistry registry, final Object container) {
         this.registry = registry;
         this.container = container;
@@ -83,7 +84,7 @@ public class ContainerAnnotationsEventsRegistry {
                                     method.getAnnotation(BeforeNavigateTo.class).value()));
                 }
                 if (method.getAnnotation(AfterNavigateTo.class) != null) {
-                    registry.beforeNavigateTo(
+                    registry.afterNavigateTo(
                             new AnnotationNavigateToListener(method, container, AfterNavigateTo.class.getSimpleName(),
                                     method.getAnnotation(AfterNavigateTo.class).value()));
                 }
@@ -103,7 +104,7 @@ public class ContainerAnnotationsEventsRegistry {
                                     method.getAnnotation(BeforeNavigateRefresh.class).value()));
                 }
                 if (method.getAnnotation(AfterNavigateRefresh.class) != null) {
-                    registry.beforeNavigateRefresh(
+                    registry.afterNavigateRefresh(
                             new AnnotationNavigateListener(method, container, AfterNavigateRefresh.class.getSimpleName(),
                                     method.getAnnotation(AfterNavigateRefresh.class).value()));
                 }
