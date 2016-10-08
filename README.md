@@ -11,6 +11,13 @@ FluentLenium integrates with JUnit 4.x, TestNG, Cucumber but can also be used st
 FluentLenium lets you use the assertion framework you like, either [JUnit assertions](http://junit.sourceforge.net/javadoc/org/junit/Assert.html), [Hamcrest](http://hamcrest.org/JavaHamcrest/) 
 or [AssertJ](http://joel-costigliola.github.io/assertj/).
 
+# Which version should I use ?
+
+Version 1 of FluentLenium is maintained for bug fixes only, but no new feature will be added anymore. 
+
+To have the best experience, you should switch to FluentLenium 3 to get enhancements and new features 
+(requires Selenium 3 and Java 8).
+
 # Quickstart with JUnit and AssertJ
 
 - Add dependencies to your `pom.xml`.
