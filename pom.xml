@@ -247,7 +247,7 @@
                     <version>2.19.1</version>
                     <configuration>
                         <useUnlimitedThreads>true</useUnlimitedThreads>
-                        <parallel>all</parallel>
+                        <parallel>methods</parallel>
                         <excludes>
                             <exclude>**/integration/**/*</exclude>
                             <exclude>**/ignore/**/*</exclude>
@@ -271,7 +271,7 @@
                     </executions>
                     <configuration>
                         <useUnlimitedThreads>true</useUnlimitedThreads>
-                        <parallel>all</parallel>
+                        <parallel>methods</parallel>
                         <includes>
                             <include>**/integration/**/*</include>
                         </includes>
