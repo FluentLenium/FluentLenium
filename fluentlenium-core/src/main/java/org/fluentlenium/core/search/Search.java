@@ -1,13 +1,10 @@
 package org.fluentlenium.core.search;
 
 import com.google.common.base.Supplier;
-import com.google.common.collect.Collections2;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.filter.AttributeFilter;
-import org.fluentlenium.core.filter.AttributeFilterPredicate;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;

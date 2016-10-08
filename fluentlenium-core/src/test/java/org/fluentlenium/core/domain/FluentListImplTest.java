@@ -138,7 +138,7 @@ public class FluentListImplTest {
             public void call() throws Throwable {
                 list.contextClick();
             }
-        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element clickable");;
+        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element clickable");
     }
 
     @Test
@@ -167,7 +167,7 @@ public class FluentListImplTest {
             public void call() throws Throwable {
                 list.contextClick();
             }
-        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element clickable");;
+        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element clickable");
     }
 
     @Test
