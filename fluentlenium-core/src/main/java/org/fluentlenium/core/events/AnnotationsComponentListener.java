@@ -37,31 +37,36 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
         }
         for (final Object component : components) {
             for (final Method method : ReflectionUtils.getDeclaredMethodsWithAnnotation(component, annotation)) {
-                final Class<?>[] parameterTypes = method.getParameterTypes();
-
-                final Object[] args = ReflectionUtils.toArgs(new Function<Class<?>, Object>() {
-                    @Override
-                    public Object apply(final Class<?> input) {
-                        if (input.isAssignableFrom(By.class)) {
-                            return by;
-                        }
-                        return null;
-                    }
-                }, parameterTypes);
-
-                try {
-                    ReflectionUtils.invoke(method, component, args);
-                } catch (final IllegalAccessException e) {
-                    throw new EventAnnotationsException("An error has occured in @BeforeFindBy " + method, e);
-                } catch (final InvocationTargetException e) {
-                    if (e.getTargetException() instanceof RuntimeException) {
-                        throw (RuntimeException) e.getTargetException();
-                    } else if (e.getTargetException() instanceof Error) {
-                        throw (Error) e.getTargetException();
-                    }
-                    throw new EventAnnotationsException("An error has occured in @BeforeFindBy " + method, e);
-                }
+                findByHandlerComponentMethod(component, method, annotation, by);
             }
+        }
+    }
+
+    protected void findByHandlerComponentMethod(final Object component, final Method method,
+            final Class<? extends Annotation> annotation, final By by) {
+        final Class<?>[] parameterTypes = method.getParameterTypes();
+
+        final Object[] args = ReflectionUtils.toArgs(new Function<Class<?>, Object>() {
+            @Override
+            public Object apply(final Class<?> input) {
+                if (input.isAssignableFrom(By.class)) {
+                    return by;
+                }
+                return null;
+            }
+        }, parameterTypes);
+
+        try {
+            ReflectionUtils.invoke(method, component, args);
+        } catch (final IllegalAccessException e) {
+            throw new EventAnnotationsException("An error has occured in @BeforeFindBy " + method, e);
+        } catch (final InvocationTargetException e) {
+            if (e.getTargetException() instanceof RuntimeException) {
+                throw (RuntimeException) e.getTargetException();
+            } else if (e.getTargetException() instanceof Error) {
+                throw (Error) e.getTargetException();
+            }
+            throw new EventAnnotationsException("An error has occured in @BeforeFindBy " + method, e);
         }
     }
 
@@ -86,33 +91,36 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
         }
         for (final Object component : components) {
             for (final Method method : ReflectionUtils.getDeclaredMethodsWithAnnotation(component, annotation)) {
-                final Class<?>[] parameterTypes = method.getParameterTypes();
-
-                final Object[] args = ReflectionUtils.toArgs(new Function<Class<?>, Object>() {
-                    @Override
-                    public Object apply(final Class<?> input) {
-                        if (CharSequence.class.isAssignableFrom(input)) {
-                            return charSequence;
-                        }
-                        return null;
-                    }
-                }, parameterTypes);
-
-                try {
-                    ReflectionUtils.invoke(method, component, args);
-                } catch (final IllegalAccessException e) {
-                    throw new EventAnnotationsException("An error has occured in @" + annotation.getSimpleName() + " " + method,
-                            e);
-                } catch (final InvocationTargetException e) {
-                    if (e.getTargetException() instanceof RuntimeException) {
-                        throw (RuntimeException) e.getTargetException();
-                    } else if (e.getTargetException() instanceof Error) {
-                        throw (Error) e.getTargetException();
-                    }
-                    throw new EventAnnotationsException("An error has occured in @" + annotation.getSimpleName() + " " + method,
-                            e);
-                }
+                defaultHandlerComponentMethod(component, method, annotation, charSequence);
             }
+        }
+    }
+
+    protected void defaultHandlerComponentMethod(final Object component, final Method method,
+            final Class<? extends Annotation> annotation, final CharSequence[] charSequence) {
+        final Class<?>[] parameterTypes = method.getParameterTypes();
+
+        final Object[] args = ReflectionUtils.toArgs(new Function<Class<?>, Object>() {
+            @Override
+            public Object apply(final Class<?> input) {
+                if (CharSequence.class.isAssignableFrom(input)) {
+                    return charSequence;
+                }
+                return null;
+            }
+        }, parameterTypes);
+
+        try {
+            ReflectionUtils.invoke(method, component, args);
+        } catch (final IllegalAccessException e) {
+            throw new EventAnnotationsException("An error has occured in @" + annotation.getSimpleName() + " " + method, e);
+        } catch (final InvocationTargetException e) {
+            if (e.getTargetException() instanceof RuntimeException) {
+                throw (RuntimeException) e.getTargetException();
+            } else if (e.getTargetException() instanceof Error) {
+                throw (Error) e.getTargetException();
+            }
+            throw new EventAnnotationsException("An error has occured in @" + annotation.getSimpleName() + " " + method, e);
         }
     }
 

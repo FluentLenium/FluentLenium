@@ -285,12 +285,7 @@ public class FluentInjector implements FluentInjectControl {
         Hook currentHookAnnotation = null;
         HookOptions currentHookOptionAnnotation = null;
 
-        for (final Annotation annotation : annotations) {
-            if (annotation instanceof NoHook) {
-                hookDefinitions.clear();
-                break;
-            }
-        }
+        applyNoHook(hookDefinitions, annotations);
 
         Annotation currentAnnotation = null;
         for (final Annotation annotation : annotations) {
@@ -318,6 +313,15 @@ public class FluentInjector implements FluentInjectControl {
 
         if (currentHookAnnotation != null) {
             hookDefinitions.add(buildHookDefinition(currentHookAnnotation, currentHookOptionAnnotation, currentAnnotation));
+        }
+    }
+
+    private void applyNoHook(final List<HookDefinition<?>> hookDefinitions, final Annotation[] annotations) {
+        for (final Annotation annotation : annotations) {
+            if (annotation instanceof NoHook) {
+                hookDefinitions.clear();
+                break;
+            }
         }
     }
 

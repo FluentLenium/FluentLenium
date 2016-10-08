@@ -156,31 +156,34 @@ public final class ReflectionUtils {
             return cls.getDeclaredConstructor(argsTypes);
         } catch (final NoSuchMethodException e) {
             for (final Constructor<?> constructor : cls.getDeclaredConstructors()) {
-                final Class<?>[] parameterTypes = constructor.getParameterTypes();
-                if (parameterTypes.length != argsTypes.length) {
-                    continue;
-                }
-
-                boolean match = true;
-                for (int i = 0; i < parameterTypes.length; i++) {
-                    parameterTypes[i] = wrapPrimitive(parameterTypes[i]);
-                    if (argsTypes[i] != null) { // NOPMD ConfusingTernary
-                        if (!parameterTypes[i].isAssignableFrom(argsTypes[i])) {
-                            match = false;
-                            break;
-                        }
-                    } else if (parameterTypes[i].isPrimitive()) {
-                        match = false;
-                        break;
-                    }
-                }
-                if (match) {
+                if (isMatchingConstructor(constructor, argsTypes)) {
                     return (Constructor<T>) constructor;
                 }
             }
-
             throw e;
         }
+    }
+
+    private static boolean isMatchingConstructor(final Constructor<?> constructor, final Class<?>[] argsTypes) {
+        final Class<?>[] parameterTypes = constructor.getParameterTypes();
+        if (parameterTypes.length != argsTypes.length) {
+            return false;
+        }
+
+        boolean match = true;
+        for (int i = 0; i < parameterTypes.length; i++) {
+            parameterTypes[i] = wrapPrimitive(parameterTypes[i]);
+            if (argsTypes[i] != null) { // NOPMD ConfusingTernary
+                if (!parameterTypes[i].isAssignableFrom(argsTypes[i])) {
+                    match = false;
+                    break;
+                }
+            } else if (parameterTypes[i].isPrimitive()) {
+                match = false;
+                break;
+            }
+        }
+        return match;
     }
 
     /**
