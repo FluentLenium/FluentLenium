@@ -7,18 +7,34 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.Iterator;
 
+/**
+ * Select form filling features.
+ *
+ * @param <E> type of element to fill
+ */
 public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
+
+    /**
+     * Creates a new fill, from a list of element.
+     *
+     * @param list list of element to fill
+     */
     public FillSelect(final FluentList<E> list) {
         super(list);
     }
 
+    /**
+     * Creates a new fill, from a single element.
+     *
+     * @param element element to fill
+     */
     public FillSelect(final E element) {
         super(element);
     }
 
     @Override
-    protected FluentList<E> findElements() {
-        final FluentList<E> elements = super.findElements();
+    protected FluentList<E> getElements() {
+        final FluentList<E> elements = super.getElements();
         final Iterator<E> iterator = elements.iterator();
         while (iterator.hasNext()) {
             final FluentWebElement next = iterator.next();
@@ -36,7 +52,7 @@ public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
      * @return fill select constructor
      */
     public FillSelect withValue(final String value) {
-        final FluentList<E> elements = findElements();
+        final FluentList<E> elements = getElements();
 
         if (elements.size() == 0) {
             throw new NoSuchElementException("No select element found");
@@ -57,7 +73,7 @@ public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
      */
     public FillSelect withIndex(final int index) {
         boolean noSuchElement = true;
-        for (final E element : findElements()) {
+        for (final E element : getElements()) {
             final Select select = new Select(element.getElement());
             try {
                 select.selectByIndex(index);
@@ -80,7 +96,7 @@ public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
      * @return fill select constructor
      */
     public FillSelect withText(final String text) {
-        final FluentList<E> elements = findElements();
+        final FluentList<E> elements = getElements();
 
         if (elements.size() == 0) {
             throw new NoSuchElementException("No select element found");

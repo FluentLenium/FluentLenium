@@ -10,25 +10,49 @@ import org.fluentlenium.core.search.SearchControl;
 import org.fluentlenium.core.search.SearchFilter;
 import org.openqa.selenium.By;
 
+/**
+ * Container global FluentLenium control interface.
+ */
 public class ContainerFluentControl implements FluentControl {
     @Delegate(excludes = SearchControl.class)
     private final FluentControl adapterControl;
 
     private ContainerContext context;
 
+    /**
+     * Get the underlying control from the test adapter.
+     *
+     * @return underlying control interface from the test adapter
+     */
     public FluentControl getAdapterControl() {
         return adapterControl;
     }
 
+    /**
+     * Creates a new container fluent control.
+     *
+     * @param adapterControl test adapter control interface
+     */
     public ContainerFluentControl(final FluentControl adapterControl) {
         this(adapterControl, null);
     }
 
+    /**
+     * Creates a new container fluent control.
+     *
+     * @param adapterControl test adapter control interface
+     * @param context        container context
+     */
     public ContainerFluentControl(final FluentControl adapterControl, final ContainerContext context) {
         this.adapterControl = adapterControl;
         this.context = context;
     }
 
+    /**
+     * Define the container context of this container fluent control interface.
+     *
+     * @param context container context
+     */
     public void setContext(final ContainerContext context) {
         this.context = context;
     }

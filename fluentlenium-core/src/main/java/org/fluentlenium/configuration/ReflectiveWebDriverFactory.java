@@ -20,6 +20,13 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
     protected Class<? extends WebDriver> webDriverClass;
     protected boolean available;
 
+    /**
+     * Creates a new reflective web driver factory.
+     *
+     * @param name               factory name
+     * @param webDriverClassName web driver class name
+     * @param args               web driver class constructor arguments
+     */
     public ReflectiveWebDriverFactory(final String name, final String webDriverClassName, final Object... args) {
         this.name = name;
         this.webDriverClassName = webDriverClassName;
@@ -32,6 +39,13 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
         }
     }
 
+    /**
+     * Creates a new reflective web driver factory.
+     *
+     * @param name           factory name
+     * @param webDriverClass web driver class
+     * @param args           web driver class constructor arguments
+     */
     public ReflectiveWebDriverFactory(final String name, final Class<? extends WebDriver> webDriverClass, final Object... args) {
         this.name = name;
         this.webDriverClass = webDriverClass;
@@ -40,14 +54,25 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
         this.available = WebDriver.class.isAssignableFrom(this.webDriverClass);
     }
 
+    /**
+     * Get web driver class.
+     *
+     * @return web driver class
+     */
     public Class<? extends WebDriver> getWebDriverClass() {
         return webDriverClass;
     }
 
+    @Override
     public boolean isAvailable() {
         return available;
     }
 
+    /**
+     * Creates new default capabilities.
+     *
+     * @return default capabilities
+     */
     protected DesiredCapabilities newDefaultCapabilities() {
         return null;
     }
@@ -80,6 +105,22 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
         }
     }
 
+    /**
+     * Creates a new instance of web driver.
+     *
+     * @param webDriverClass web driver class
+     * @param configuration  configuration
+     * @param args           web driver class constructor arguments
+     * @return new web driver instance
+     * @throws NoSuchMethodException     if a matching method is not found.
+     * @throws IllegalAccessException    if this {@code Constructor} object
+     *                                   is enforcing Java language access control and the underlying
+     *                                   constructor is inaccessible.
+     * @throws InstantiationException    if the class that declares the
+     *                                   underlying constructor represents an abstract class.
+     * @throws InvocationTargetException if the underlying constructor
+     *                                   throws an exception.
+     */
     protected WebDriver newInstance(final Class<? extends WebDriver> webDriverClass, final ConfigurationProperties configuration,
             final Object... args)
             throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {

@@ -46,6 +46,15 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
 
     private final Map<String, String> custom = new HashMap<>();
 
+    /**
+     * Set the configuration defaults.
+     *
+     * @param configurationDefaults configuration defaults
+     */
+    public void setConfigurationDefaults(final Class<? extends ConfigurationProperties> configurationDefaults) {
+        this.configurationDefaults = configurationDefaults;
+    }
+
     @Override
     public String getWebDriver() {
         return webDriverName;
@@ -109,10 +118,6 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     @Override
     public Class<? extends ConfigurationProperties> getConfigurationDefaults() {
         return configurationDefaults;
-    }
-
-    public void setConfigurationDefaults(final Class<? extends ConfigurationProperties> configurationDefaults) {
-        this.configurationDefaults = configurationDefaults;
     }
 
     @Override

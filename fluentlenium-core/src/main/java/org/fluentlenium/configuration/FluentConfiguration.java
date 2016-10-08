@@ -15,15 +15,28 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface FluentConfiguration {
+    /**
+     * Boolean value used in  annotation that can has a third DEFAULT value equivalent to null.
+     */
     enum BooleanValue {
         TRUE(true), FALSE(false), DEFAULT(null);
 
         private final Boolean value;
 
+        /**
+         * Creates a new boolean value.
+         *
+         * @param value boolean value
+         */
         BooleanValue(final Boolean value) {
             this.value = value;
         }
 
+        /**
+         * Get this Boolean value as a {@link Boolean}
+         *
+         * @return boolean value
+         */
         Boolean asBoolean() {
             return this.value;
         }

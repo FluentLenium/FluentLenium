@@ -14,7 +14,13 @@ public class ListenerPriorityComparator implements Comparator<Object> {
         return Integer.compare(priority2, priority1);
     }
 
-    public int getPriority(final Object obj) {
+    /**
+     * Get the priority of the object.
+     *
+     * @param obj object to get the priority
+     * @return priority value
+     */
+    protected int getPriority(final Object obj) {
         if (obj instanceof ListenerPriority) {
             return ((ListenerPriority) obj).getPriority();
         }

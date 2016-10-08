@@ -28,10 +28,20 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
 
     private final JsonToBeanConverter jsonConverter = new JsonToBeanConverter();
 
+    /**
+     * Creates a new annotation based configuration.
+     *
+     * @param containerClass container class on which to read annotation
+     */
     public AnnotationConfiguration(final Class<?> containerClass) {
         this(containerClass == null ? null : containerClass.getAnnotation(FluentConfiguration.class));
     }
 
+    /**
+     * Creates a new annotation based configuration.
+     *
+     * @param configuration annotation to read values from
+     */
     public AnnotationConfiguration(final FluentConfiguration configuration) {
         super();
         this.configuration = configuration;
@@ -40,13 +50,13 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
             final CustomProperty[] custom = this.configuration.custom();
             if (custom != null) {
                 for (final CustomProperty customProperty : custom) {
-                    customProperties.put(customProperty.key(), customProperty.value());
+                    customProperties.put(customProperty.name(), customProperty.value());
                 }
             }
         }
     }
 
-    public String getStringValue(final String property) {
+    private String getStringValue(final String property) {
         if (Strings.isNullOrEmpty(property)) {
             return null;
         }

@@ -1,5 +1,6 @@
 package org.fluentlenium.core.inject;
 
+import org.fluentlenium.core.label.FluentLabelProvider;
 import org.fluentlenium.core.page.ClassAnnotations;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.By;
@@ -10,7 +11,11 @@ import org.openqa.selenium.support.pagefactory.Annotations;
 import java.lang.reflect.Field;
 import java.util.List;
 
-public class InjectionAnnotations extends AbstractAnnotations {
+/**
+ * Inspired by {@link org.openqa.selenium.support.pagefactory.Annotations}, but also supports annotations defined on
+ * return type class.
+ */
+public class InjectionAnnotations extends AbstractAnnotations implements FluentLabelProvider {
     private final ClassAnnotations classAnnotations;
     private final Annotations fieldAnnotations;
     private final LabelAnnotations labelFieldAnnotations;
@@ -29,6 +34,11 @@ public class InjectionAnnotations extends AbstractAnnotations {
         return field.getType();
     }
 
+    /**
+     * Creates a new injection annotations object
+     *
+     * @param field field to analyze
+     */
     public InjectionAnnotations(final Field field) {
         classAnnotations = new ClassAnnotations(getEffectiveClass(field));
         fieldAnnotations = new Annotations(field);
@@ -50,10 +60,12 @@ public class InjectionAnnotations extends AbstractAnnotations {
         return classAnnotations.isLookupCached() || fieldAnnotations.isLookupCached();
     }
 
+    @Override
     public String getLabel() {
         return labelFieldAnnotations.getLabel();
     }
 
+    @Override
     public String[] getLabelHints() {
         return labelFieldAnnotations.getLabelHints();
     }

@@ -4,21 +4,31 @@ import lombok.experimental.Delegate;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Util Class for manage alert
+ * Manage browser alert.
  */
 public class Alert implements org.openqa.selenium.Alert {
 
-    private final WebDriver webDriver;
+    private final WebDriver driver;
 
     @Delegate
     private org.openqa.selenium.Alert getSeleniumAlert() { // NOPMD UnusedPrivateMethod
-        return webDriver.switchTo().alert();
+        return driver.switchTo().alert();
     }
 
-    public Alert(final WebDriver webDriver) {
-        this.webDriver = webDriver;
+    /**
+     * Creates a new alert object.
+     *
+     * @param driver selenium driver
+     */
+    public Alert(final WebDriver driver) {
+        this.driver = driver;
     }
 
+    /**
+     * Send input to the alert prompt.
+     *
+     * @param text test to send to the prompt
+     */
     public void prompt(final String text) {
         sendKeys(text);
         accept();
@@ -31,7 +41,7 @@ public class Alert implements org.openqa.selenium.Alert {
      * @throws org.openqa.selenium.NoAlertPresentException if there is currently no alert box.
      */
     public org.openqa.selenium.Alert switchTo() {
-        return webDriver.switchTo().alert();
+        return driver.switchTo().alert();
     }
 
 }

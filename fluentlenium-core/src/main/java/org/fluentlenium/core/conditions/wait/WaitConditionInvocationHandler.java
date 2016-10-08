@@ -21,6 +21,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+/**
+ * Invocation handler used to wait for a particular conditions call.
+ *
+ * @param <C> type of conditions
+ */
 public class WaitConditionInvocationHandler<C extends Conditions<?>> implements InvocationHandler {
 
     private final Class<C> conditionClass;
@@ -29,6 +34,14 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
     private String context;
     private boolean negation;
 
+    /**
+     * Creates a new wait condition invocation handler.
+     *
+     * @param conditionClass    condition class
+     * @param wait              fluent wait
+     * @param context           base context of generated message if condition is not verified
+     * @param conditionSupplier supplier of conditions
+     */
     public WaitConditionInvocationHandler(final Class<C> conditionClass, final FluentWait wait, final String context,
             final Supplier<C> conditionSupplier) {
         this.conditionClass = conditionClass;
@@ -108,7 +121,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      * @param message message to use.
      */
     protected void until(final Predicate<FluentControl> present, String message) {
-        if (wait.useCustomMessage()) {
+        if (wait.hasMessageDefined()) {
             wait.untilPredicate(present);
         } else {
             message = messageCustomizer().apply(message);
@@ -123,7 +136,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      * @param messageSupplier default message to use.
      */
     protected void until(final Predicate<FluentControl> present, final Supplier<String> messageSupplier) {
-        if (wait.useCustomMessage()) {
+        if (wait.hasMessageDefined()) {
             wait.untilPredicate(present);
         } else {
             final Supplier<String> customMessageSupplier = new Supplier<String>() {

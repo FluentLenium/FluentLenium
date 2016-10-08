@@ -24,6 +24,10 @@
 <module name="Checker">
     <property name="fileExtensions" value="java, js, json, xml, yml"/>
 
+    <module name="SuppressionFilter">
+        <property name="file" value="fluentlenium_checks_suppressions.xml"/>
+    </module>
+
     <!--    Ability to turn off checkstyle using comments. Example :
         //CHECKSTYLE.OFF: IllegalCatch - Much more readable than catching 7 exceptions
         catch (Exception e)
@@ -225,5 +229,19 @@
             <property name="tokens" value="PACKAGE_DEF, IMPORT, CLASS_DEF, INTERFACE_DEF"/>
             <property name="allowMultipleEmptyLines" value="false"/>
         </module>
+
+        <module name="JavadocMethod">
+            <property name="excludeScope" value="private"/>
+        </module>
+        <module name="JavadocVariable">
+            <property name="scope" value="public"/>
+        </module>
+        <module name="JavadocType">
+            <property name="scope" value="package"/>
+        </module>
+        <module name="JavadocStyle">
+            <property name="excludeScope" value="private"/>
+        </module>
+
     </module>
 </module>

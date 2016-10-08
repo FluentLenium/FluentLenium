@@ -9,9 +9,9 @@ import org.fluentlenium.core.conditions.Conditions;
 import org.fluentlenium.core.conditions.message.MessageProxy;
 
 /**
- * Common class for all WaitMatcher instances.
+ * Common class for all wait conditions instances.
  */
-public class BaseWaitMatcher {
+public class BaseWaitConditions {
     /**
      * Build the final message from default message.
      *
@@ -29,7 +29,7 @@ public class BaseWaitMatcher {
      * @param message message to use.
      */
     protected void until(final FluentWait wait, final Predicate<FluentControl> present, String message) {
-        if (wait.useCustomMessage()) {
+        if (wait.hasMessageDefined()) {
             wait.untilPredicate(present);
         } else {
             message = messageCustomizer().apply(message);
@@ -45,7 +45,7 @@ public class BaseWaitMatcher {
      * @param messageSupplier default message to use.
      */
     protected void until(final FluentWait wait, final Predicate<FluentControl> present, final Supplier<String> messageSupplier) {
-        if (wait.useCustomMessage()) {
+        if (wait.hasMessageDefined()) {
             wait.untilPredicate(present);
         } else {
             final Supplier<String> customMessageSupplier = new Supplier<String>() {

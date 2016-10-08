@@ -20,7 +20,7 @@ public class AnnotationConfigurationTest {
             capabilities = "{javascriptEnabled: true}", remoteUrl = "http://localhost:4444", htmlDumpMode =
             ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL, htmlDumpPath = "/html-path", implicitlyWait = 1000,
             pageLoadTimeout = 2000, screenshotMode = ConfigurationProperties.TriggerMode.MANUAL, screenshotPath =
-            "/screenshot-path", scriptTimeout = 3000, webDriver = "firefox", custom = @CustomProperty(key = "key", value =
+            "/screenshot-path", scriptTimeout = 3000, webDriver = "firefox", custom = @CustomProperty(name = "key", value =
             "value"))
     public static class ConfiguredClass {
     }

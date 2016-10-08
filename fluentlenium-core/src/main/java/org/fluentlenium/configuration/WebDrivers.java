@@ -9,6 +9,9 @@ import org.openqa.selenium.WebDriver;
  * Supported drivers are "firefox", "chrome", "ie", "htmlunit", or any class name implementing {@link WebDriver}.
  */
 public enum WebDrivers {
+    /**
+     * Singleton
+     */
     INSTANCE;
 
     @Delegate

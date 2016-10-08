@@ -7,6 +7,9 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+/**
+ * Factory building new components.
+ */
 public interface ComponentInstantiator {
     /**
      * Create and register a new fluent element from the given element.

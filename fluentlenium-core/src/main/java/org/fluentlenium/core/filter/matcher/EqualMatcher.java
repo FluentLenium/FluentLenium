@@ -2,19 +2,32 @@ package org.fluentlenium.core.filter.matcher;
 
 import java.util.regex.Pattern;
 
+/**
+ * Matcher checking that actual is equal to input value.
+ */
 public class EqualMatcher extends AbstractMatcher {
 
+    /**
+     * Creates a equal matcher.
+     *
+     * @param value input value
+     */
     public EqualMatcher(final String value) {
         super(value);
     }
 
-    public EqualMatcher(final Pattern pattern) {
-        super(pattern);
+    /**
+     * Creates a equal matcher.
+     *
+     * @param value input value
+     */
+    public EqualMatcher(final Pattern value) {
+        super(value);
     }
 
     @Override
     public MatcherType getMatcherType() {
-        return MatcherType.EQUAL;
+        return MatcherType.EQUALS;
     }
 
     @Override

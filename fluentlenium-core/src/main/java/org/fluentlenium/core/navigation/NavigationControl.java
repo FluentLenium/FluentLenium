@@ -8,6 +8,9 @@ import org.openqa.selenium.Cookie;
 
 import java.util.Set;
 
+/**
+ * Control interface for navigation.
+ */
 public interface NavigationControl {
 
     /**

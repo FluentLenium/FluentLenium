@@ -19,13 +19,29 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Set;
 
+/**
+ * Listen to WebDriver events and delegates to methods with annotations registered on FluentLenium components.
+ */
 public class AnnotationsComponentListener implements WebDriverEventListener {
     private final ComponentsAccessor componentsAccessor;
 
+    /**
+     * Creates a new annotations component listener.
+     *
+     * @param componentsAccessor components accessor
+     */
     public AnnotationsComponentListener(final ComponentsAccessor componentsAccessor) {
         this.componentsAccessor = componentsAccessor;
     }
 
+    /**
+     * Handle find by events.
+     *
+     * @param annotation event annotation
+     * @param by         selenium locator
+     * @param element    selenium element
+     * @param driver     selenium driver
+     */
     protected void findByHandler(final Class<? extends Annotation> annotation, final By by, final WebElement element,
             final WebDriver driver) {
         if (element == null) {
@@ -42,6 +58,14 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
         }
     }
 
+    /**
+     * Handle find by events for a given component method.
+     *
+     * @param component  component instance
+     * @param method     component method
+     * @param annotation event annotation
+     * @param by         selenium locator
+     */
     protected void findByHandlerComponentMethod(final Object component, final Method method,
             final Class<? extends Annotation> annotation, final By by) {
         final Class<?>[] parameterTypes = method.getParameterTypes();
@@ -80,6 +104,12 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
         findByHandler(AfterFindBy.class, by, element, driver);
     }
 
+    /**
+     * Handle default events.
+     *
+     * @param annotation event annotation
+     * @param element    selenium event
+     */
     protected void defaultHandler(final Class<? extends Annotation> annotation, final WebElement element) {
         if (element == null) {
             return;
@@ -95,6 +125,13 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
         }
     }
 
+    /**
+     * Handle default events for a given component method.
+     *
+     * @param component  component instance
+     * @param method     component method
+     * @param annotation event annotation
+     */
     protected void defaultHandlerComponentMethod(final Object component, final Method method,
             final Class<? extends Annotation> annotation) {
         final Class<?>[] parameterTypes = method.getParameterTypes();

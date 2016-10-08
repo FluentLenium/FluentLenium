@@ -5,13 +5,27 @@ import com.google.common.base.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Conditions for string
+ */
 public class StringConditionsImpl extends AbstractObjectConditions<String> implements StringConditions {
+    /**
+     * Creates a new conditions object on string.
+     *
+     * @param string underlying string
+     */
     public StringConditionsImpl(final String string) {
         super(string);
     }
 
-    public StringConditionsImpl(final String object, final boolean negation) {
-        super(object, negation);
+    /**
+     * Creates a new conditions object on string.
+     *
+     * @param string   underlying string
+     * @param negation negation value
+     */
+    public StringConditionsImpl(final String string, final boolean negation) {
+        super(string, negation);
     }
 
     @Override
@@ -28,6 +42,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     @Override
     public boolean contains(final CharSequence charSequence) {
         return verify(new Predicate<String>() {
+
             @Override
             public boolean apply(final String input) {
                 if (input == null) {
@@ -41,6 +56,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     @Override
     public boolean startsWith(final String prefix) {
         return verify(new Predicate<String>() {
+
             @Override
             public boolean apply(final String input) {
                 if (input == null) {
@@ -54,6 +70,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     @Override
     public boolean endsWith(final String suffix) {
         return verify(new Predicate<String>() {
+
             @Override
             public boolean apply(final String input) {
                 if (input == null) {
@@ -67,6 +84,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     @Override
     public boolean equalTo(final String anotherString) {
         return verify(new Predicate<String>() {
+
             @Override
             public boolean apply(final String input) {
                 if (input == null) {
@@ -80,6 +98,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     @Override
     public boolean equalToIgnoreCase(final String anotherString) {
         return verify(new Predicate<String>() {
+
             @Override
             public boolean apply(final String input) {
                 if (input == null) {
@@ -93,6 +112,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     @Override
     public boolean matches(final String regex) {
         return verify(new Predicate<String>() {
+
             @Override
             public boolean apply(final String input) {
                 if (input == null) {
@@ -106,6 +126,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     @Override
     public boolean matches(final Pattern pattern) {
         return verify(new Predicate<String>() {
+
             @Override
             public boolean apply(final String input) {
                 if (input == null) {

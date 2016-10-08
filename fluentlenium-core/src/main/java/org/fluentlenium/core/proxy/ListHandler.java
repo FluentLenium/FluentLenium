@@ -16,6 +16,11 @@ import java.util.List;
 public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     private static final Method GET_WRAPPED_ELEMENTS = getMethod(WrapsElements.class, "getWrappedElements");
 
+    /**
+     * Creates a new proxy handler for elements.
+     *
+     * @param locator elements locator
+     */
     public ListHandler(final ElementLocator locator) {
         super(locator);
         if (this.locator instanceof WrapsElements) {
@@ -50,8 +55,8 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     }
 
     @Override
-    public boolean isPresent() {
-        return super.isPresent() && result.size() > 0;
+    public boolean present() {
+        return super.present() && result.size() > 0;
     }
 
     @Override

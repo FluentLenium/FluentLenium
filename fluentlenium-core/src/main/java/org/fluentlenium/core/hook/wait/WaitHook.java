@@ -12,11 +12,24 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.List;
 
+/**
+ * Hook that automatically wait for actions beeing available on the underlying element.
+ */
 public class WaitHook extends BaseFluentHook<WaitHookOptions> {
-    public WaitHook(final FluentControl fluentControl, final ComponentInstantiator instantiator,
+    /**
+     * Creates a new wait hook
+     *
+     * @param control          FluentLenium control interface
+     * @param instantiator     FluentLenium instantiator
+     * @param elementSupplier  element supplier
+     * @param locatorSupplier  element locator supplier
+     * @param toStringSupplier element toString supplier
+     * @param options          hook options
+     */
+    public WaitHook(final FluentControl control, final ComponentInstantiator instantiator,
             final Supplier<WebElement> elementSupplier, final Supplier<ElementLocator> locatorSupplier,
             final Supplier<String> toStringSupplier, final WaitHookOptions options) {
-        super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
+        super(control, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
     }
 
     @Override
@@ -24,7 +37,7 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
         return new WaitHookOptions();
     }
 
-    public FluentWait buildAwait() {
+    private FluentWait buildAwait() {
         return getOptions().configureAwait(await());
     }
 
@@ -55,6 +68,7 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
     @Override
     public List<WebElement> findElements() {
         return buildAwait().ignoring(NoSuchElementException.class).until(new Function<FluentControl, List<WebElement>>() {
+
             @Override
             public List<WebElement> apply(final FluentControl input) {
                 final List<WebElement> elements = WaitHook.super.findElements();
@@ -74,6 +88,7 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
     @Override
     public WebElement findElement() {
         return buildAwait().ignoring(NoSuchElementException.class).until(new Function<FluentControl, WebElement>() {
+
             @Override
             public WebElement apply(final FluentControl input) {
                 return WaitHook.super.findElement();

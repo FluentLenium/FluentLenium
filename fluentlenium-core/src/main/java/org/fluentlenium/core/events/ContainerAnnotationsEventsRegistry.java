@@ -21,10 +21,19 @@ import org.fluentlenium.core.events.annotations.BeforeScript;
 
 import java.lang.reflect.Method;
 
+/**
+ * Register event annotations from a container in the events registry.
+ */
 public class ContainerAnnotationsEventsRegistry {
     private final EventsRegistry registry;
     private final Object container;
 
+    /**
+     * Creates a new container annotations events registry.
+     *
+     * @param registry  events registry
+     * @param container container to register
+     */
     @SuppressWarnings({"PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity"})
     public ContainerAnnotationsEventsRegistry(final EventsRegistry registry, final Object container) {
         this.registry = registry;
@@ -122,6 +131,9 @@ public class ContainerAnnotationsEventsRegistry {
         registry.sortListeners();
     }
 
+    /**
+     * Release resources associated with this component event registrations.
+     */
     public void close() {
         registry.unregisterContainer(container);
     }

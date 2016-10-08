@@ -10,6 +10,7 @@ import org.junit.runners.model.Statement;
  */
 class FluentTestRule implements TestRule {
 
+    @Override
     public Statement apply(final Statement base, final Description description) {
         return new Statement() {
 
@@ -30,7 +31,9 @@ class FluentTestRule implements TestRule {
     }
 
     /**
-     * Invoked when a test succeeds
+     * Invoked when a test succeeds.
+     *
+     * @param description test description
      */
     protected void succeeded(final Description description) {
         //Do nothing.
@@ -38,6 +41,9 @@ class FluentTestRule implements TestRule {
 
     /**
      * Invoked when a test fails
+     *
+     * @param e           exception
+     * @param description test description
      */
     protected void failed(final Throwable e, final Description description) {
         //Do nothing.
@@ -45,6 +51,8 @@ class FluentTestRule implements TestRule {
 
     /**
      * Invoked when a test is about to start
+     *
+     * @param description test description
      */
     protected void starting(final Description description) {
         //Do nothing.
@@ -52,6 +60,8 @@ class FluentTestRule implements TestRule {
 
     /**
      * Invoked when a test method finishes (whether passing or failing)
+     *
+     * @param description test description
      */
     protected void finished(final Description description) {
         //Do nothing.

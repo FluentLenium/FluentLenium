@@ -16,16 +16,27 @@ import java.nio.charset.Charset;
  * Abstract properties configuration.
  */
 public abstract class AbstractPropertiesConfiguration extends BaseConfiguration implements ConfigurationProperties {
+    /**
+     * Default properties prefix.
+     */
     public static final String PROPERTIES_PREFIX = "fluentlenium.";
 
     private final String[] prefixes;
 
     private final JsonToBeanConverter jsonConverter = new JsonToBeanConverter();
 
+    /**
+     * Creates a new abstract properties configuration, using default properties prefix.
+     */
     protected AbstractPropertiesConfiguration() {
         this(PROPERTIES_PREFIX);
     }
 
+    /**
+     * Creates a new abstract properties configuration, using given properties prefixes.
+     *
+     * @param prefixes array of allowed prefixes
+     */
     protected AbstractPropertiesConfiguration(final String... prefixes) {
         if (prefixes.length == 0) {
             throw new IllegalArgumentException("Prefixes should be defined");
@@ -33,6 +44,12 @@ public abstract class AbstractPropertiesConfiguration extends BaseConfiguration 
         this.prefixes = prefixes;
     }
 
+    /**
+     * Get the property value used by underlying property storage.
+     *
+     * @param propertyName property key
+     * @return property value
+     */
     protected abstract String getPropertyImpl(String propertyName);
 
     private String getProperty(final String propertyName) {
@@ -103,6 +120,13 @@ public abstract class AbstractPropertiesConfiguration extends BaseConfiguration 
         return null;
     }
 
+    /**
+     * Creates a new URL from it's representation
+     *
+     * @param url url
+     * @return URL object
+     * @throws MalformedURLException if given url is not valid
+     */
     protected URL newURL(final String url) throws MalformedURLException {
         return new URL(url);
     }

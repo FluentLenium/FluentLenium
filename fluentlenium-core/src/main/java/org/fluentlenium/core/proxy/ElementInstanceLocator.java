@@ -9,6 +9,11 @@ import org.openqa.selenium.internal.WrapsElement;
  */
 public class ElementInstanceLocator extends ElementSupplierLocator implements WrapsElement {
 
+    /**
+     * Creates a new element instance locator
+     *
+     * @param element element instance
+     */
     public ElementInstanceLocator(final WebElement element) {
         super(Suppliers.ofInstance(element));
     }

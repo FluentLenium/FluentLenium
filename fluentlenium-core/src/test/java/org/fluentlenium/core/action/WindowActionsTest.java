@@ -7,7 +7,7 @@ import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.wait.FluentWait;
-import org.fluentlenium.core.wait.FluentWaitWindowMatcher;
+import org.fluentlenium.core.wait.FluentWaitWindowConditions;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -127,7 +127,7 @@ public class WindowActionsTest {
         final String windowHandle2 = "WndH3";
 
         final FluentWait fluentWait = mock(FluentWait.class);
-        final FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
+        final FluentWaitWindowConditions fluentWaitWindowMatcher = mock(FluentWaitWindowConditions.class);
         final Configuration configuration = mock(Configuration.class);
 
         final FluentDriver currentFluentDriver = new FluentDriver(driver, configuration, fluentControl);
@@ -174,10 +174,10 @@ public class WindowActionsTest {
 
         final FluentWebElement fluentWebElement = mock(FluentWebElement.class);
         final FluentWait fluentWait = mock(FluentWait.class);
-        final FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
+        final FluentWaitWindowConditions fluentWaitWindowMatcher = mock(FluentWaitWindowConditions.class);
 
         when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2));
-        when(fluentWaitWindowMatcher.isNotDisplayed()).thenReturn(true);
+        when(fluentWaitWindowMatcher.notDisplayed()).thenReturn(true);
         when(fluentWebElement.click()).thenReturn(fluentWebElement);
         when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);
         when(fluentDriver.await()).thenReturn(fluentWait);
@@ -198,7 +198,7 @@ public class WindowActionsTest {
 
         final FluentWebElement fluentWebElement = mock(FluentWebElement.class);
         final FluentWait fluentWait = mock(FluentWait.class);
-        final FluentWaitWindowMatcher fluentWaitWindowMatcher = mock(FluentWaitWindowMatcher.class);
+        final FluentWaitWindowConditions fluentWaitWindowMatcher = mock(FluentWaitWindowConditions.class);
         final Configuration configuration = mock(Configuration.class);
 
         final FluentDriver currentFluentDriver = new FluentDriver(driver, configuration, fluentControl);

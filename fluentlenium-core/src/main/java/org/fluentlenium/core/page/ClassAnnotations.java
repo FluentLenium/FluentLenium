@@ -12,22 +12,20 @@ import org.openqa.selenium.support.pagefactory.AbstractAnnotations;
  * to retrieve the annotations.
  */
 public class ClassAnnotations extends AbstractAnnotations {
-    private final Class<?> cls;
+    private final Class<?> containerClass;
 
     /**
-     * @param cls Class expected to be a Page Object
+     * Creates a new class annotations.
+     *
+     * @param containerClass container class on witch to read annotations
      */
-    public ClassAnnotations(final Class<?> cls) {
-        this.cls = cls;
+    public ClassAnnotations(final Class<?> containerClass) {
+        this.containerClass = containerClass;
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @return true if @CacheLookup annotation exists on a class
-     */
+    @Override
     public boolean isLookupCached() {
-        return cls.getAnnotation(CacheLookup.class) != null;
+        return containerClass.getAnnotation(CacheLookup.class) != null;
     }
 
     /**
@@ -36,7 +34,7 @@ public class ClassAnnotations extends AbstractAnnotations {
      * Looks for one of {@link org.openqa.selenium.support.FindBy},
      * {@link org.openqa.selenium.support.FindBys} or
      * {@link org.openqa.selenium.support.FindAll} class annotations. In case
-     * no annotaions provided for field, returns null.
+     * no annotation is provided for the field, returns null.
      *
      * @throws IllegalArgumentException when more than one annotation on a class provided
      */
@@ -45,17 +43,17 @@ public class ClassAnnotations extends AbstractAnnotations {
 
         By ans = null;
 
-        final FindBys findBys = cls.getAnnotation(FindBys.class);
+        final FindBys findBys = containerClass.getAnnotation(FindBys.class);
         if (findBys != null) {
             ans = buildByFromFindBys(findBys);
         }
 
-        final FindAll findAll = cls.getAnnotation(FindAll.class);
+        final FindAll findAll = containerClass.getAnnotation(FindAll.class);
         if (ans == null && findAll != null) {
             ans = buildBysFromFindByOneOf(findAll);
         }
 
-        final FindBy findBy = cls.getAnnotation(FindBy.class);
+        final FindBy findBy = containerClass.getAnnotation(FindBy.class);
         if (ans == null && findBy != null) {
             ans = buildByFromFindBy(findBy);
         }
@@ -63,14 +61,22 @@ public class ClassAnnotations extends AbstractAnnotations {
         return ans;
     }
 
-    protected Class<?> getCls() {
-        return cls;
+    /**
+     * Get the underlying container class
+     *
+     * @return container class
+     */
+    protected Class<?> getContainerClass() {
+        return containerClass;
     }
 
+    /**
+     * Assert that defined annotations are valid.
+     */
     protected void assertValidAnnotations() {
-        final FindBys findBys = cls.getAnnotation(FindBys.class);
-        final FindAll findAll = cls.getAnnotation(FindAll.class); // NOPMD PrematureDeclaration
-        final FindBy findBy = cls.getAnnotation(FindBy.class);
+        final FindBys findBys = containerClass.getAnnotation(FindBys.class);
+        final FindAll findAll = containerClass.getAnnotation(FindAll.class); // NOPMD PrematureDeclaration
+        final FindBy findBy = containerClass.getAnnotation(FindBy.class);
         if (findBys != null && findBy != null) {
             throw new IllegalArgumentException(
                     "If you use a '@FindBys' annotation, " + "you must not also use a '@FindBy' annotation");

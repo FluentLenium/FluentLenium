@@ -8,6 +8,13 @@ import org.fluentlenium.core.components.ComponentInstantiator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
+/**
+ * Base hook implementation.
+ * <p>
+ * You should extends this class to implement your own hook.
+ *
+ * @param <T> type of options for the hook
+ */
 public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T> {
     private final ComponentInstantiator instantiator;
 
@@ -19,6 +26,13 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
 
     private final Supplier<WebElement> elementSupplier;
 
+    /**
+     * Get the underlying element of the hook.
+     * <p>
+     * Can be another hook, or a real element.
+     *
+     * @return underlying element
+     */
     @Delegate
     public final WebElement getElement() {
         return elementSupplier.get();
@@ -29,11 +43,26 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
         return getElement();
     }
 
+    /**
+     * Get the underlying element locator of the hook.
+     *
+     * @return underlying element locator
+     */
     @Delegate
     public final ElementLocator getElementLocator() {
         return locatorSupplier.get();
     }
 
+    /**
+     * Creates a new base hook.
+     *
+     * @param control          control interface
+     * @param instantiator     component instantiator
+     * @param elementSupplier  element supplier
+     * @param locatorSupplier  element locator supplier
+     * @param toStringSupplier element toString supplier
+     * @param options          hook options
+     */
     public BaseHook(final FluentControl control, final ComponentInstantiator instantiator,
             final Supplier<WebElement> elementSupplier, final Supplier<ElementLocator> locatorSupplier,
             final Supplier<String> toStringSupplier, final T options) {
@@ -49,10 +78,20 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
         }
     }
 
+    /**
+     * Builds default options.
+     *
+     * @return default options
+     */
     protected T newOptions() {
         return null;
     }
 
+    /**
+     * Get the component instantiator.
+     *
+     * @return component instantiator
+     */
     public ComponentInstantiator getInstantiator() {
         return instantiator;
     }

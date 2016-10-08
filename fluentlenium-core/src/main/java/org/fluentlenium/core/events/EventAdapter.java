@@ -9,11 +9,20 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 
 import java.util.Objects;
 
+/**
+ * FluentLenium adapter for Selenium events listener.
+ */
 class EventAdapter implements WebDriverEventListener {
 
     private final EventListener listener;
     private final ComponentInstantiator instantiator;
 
+    /**
+     * Creates a new event adapter.
+     *
+     * @param listener     underlysing listener
+     * @param instantiator component instantiator
+     */
     EventAdapter(final EventListener listener, final ComponentInstantiator instantiator) {
         this.listener = listener;
         this.instantiator = instantiator;

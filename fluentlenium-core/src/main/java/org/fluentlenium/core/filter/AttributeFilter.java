@@ -38,16 +38,27 @@ public class AttributeFilter implements SearchFilter {
         this.matcher = matcher;
     }
 
+    /**
+     * Get the attribute name (lower case).
+     *
+     * @return attribute name (lower case)
+     */
     public String getAttribut() {
         return attributeName.toLowerCase(Locale.ENGLISH);
     }
 
-    public String toString() {
-        return getCssFilter();
-    }
-
+    /**
+     * Get the matcher of this filter
+     *
+     * @return matcher
+     */
     public AbstractMatcher getMatcher() {
         return matcher;
+    }
+
+    @Override
+    public String toString() {
+        return getCssFilter();
     }
 
     @Override

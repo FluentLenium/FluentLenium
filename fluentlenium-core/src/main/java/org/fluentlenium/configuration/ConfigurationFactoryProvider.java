@@ -4,15 +4,24 @@ import org.fluentlenium.utils.ReflectionUtils;
 
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * Provider of configuration factory.
+ */
 public final class ConfigurationFactoryProvider {
-    private static ConfigurationFactory bootstrapFactory = new DefaultConfigurationFactory();
+    private static final ConfigurationFactory BOOTSTRAP_FACTORY = new DefaultConfigurationFactory();
 
     private ConfigurationFactoryProvider() {
         // Utility class
     }
 
+    /**
+     * Provides the configuration factory for a given container, base on configuration of this configuration.
+     *
+     * @param container container class
+     * @return configuration factory
+     */
     public static ConfigurationFactory getConfigurationFactory(final Class<?> container) {
-        final ConfigurationProperties configuration = bootstrapFactory.newConfiguration(container, new ConfigurationDefaults());
+        final ConfigurationProperties configuration = BOOTSTRAP_FACTORY.newConfiguration(container, new ConfigurationDefaults());
 
         final Class<? extends ConfigurationFactory> configurationFactoryClass = configuration.getConfigurationFactory();
 
@@ -24,9 +33,15 @@ public final class ConfigurationFactoryProvider {
                         e);
             }
         }
-        return bootstrapFactory;
+        return BOOTSTRAP_FACTORY;
     }
 
+    /**
+     * Creates a new configuration for a given container, using configuration factory from this provider.
+     *
+     * @param container container class
+     * @return configuration
+     */
     public static Configuration newConfiguration(final Class<?> container) {
         final ConfigurationFactory configurationFactory = getConfigurationFactory(container);
         Configuration configuration = configurationFactory.newConfiguration(container, new ConfigurationDefaults());

@@ -5,17 +5,25 @@ import org.fluentlenium.utils.ReflectionUtils;
 
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * Creates container instances
+ */
 public class DefaultContainerInstanciator implements ContainerInstanciator {
-    private final FluentControl fluentControl;
+    private final FluentControl control;
 
-    public DefaultContainerInstanciator(final FluentControl fluentControl) {
-        this.fluentControl = fluentControl;
+    /**
+     * Creates a new container instanciator
+     *
+     * @param control FluentLenium control
+     */
+    public DefaultContainerInstanciator(final FluentControl control) {
+        this.control = control;
     }
 
     @Override
     public <T> T newInstance(final Class<T> cls, final ContainerContext context) {
         try {
-            return ReflectionUtils.newInstanceOptionalArgs(cls, new ContainerFluentControl(fluentControl, context));
+            return ReflectionUtils.newInstanceOptionalArgs(cls, new ContainerFluentControl(control, context));
         } catch (final NoSuchMethodException e) {
             throw new FluentInjectException(cls.getName() + " is not a valid component class.", e);
         } catch (final IllegalAccessException e) {

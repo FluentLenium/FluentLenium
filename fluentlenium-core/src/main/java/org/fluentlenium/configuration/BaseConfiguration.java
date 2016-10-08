@@ -9,7 +9,7 @@ public class BaseConfiguration {
     /**
      * Set the global configuration.
      *
-     * @param configuration
+     * @param configuration global configuration to retrieve values defined in other configuration sources
      */
     /* default */ void setGlobalConfiguration(final ConfigurationProperties configuration) {
         this.globalConfiguration = configuration;
@@ -18,7 +18,7 @@ public class BaseConfiguration {
     /**
      * Get the global configuration
      *
-     * @return global configuration
+     * @return global configuration to retrieve values defined in other configuration sources
      */
     /* default */ ConfigurationProperties getGlobalConfiguration() {
         return globalConfiguration;

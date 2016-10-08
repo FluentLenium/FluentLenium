@@ -71,6 +71,9 @@ import org.openqa.selenium.WebDriver;
  */
 
 public interface ConfigurationProperties {
+    /**
+     * Trigger mode for Screenshots and HtmlDump features
+     */
     enum TriggerMode {
         /**
          * Take screenshot when the test fail.
@@ -84,6 +87,9 @@ public interface ConfigurationProperties {
         DEFAULT
     }
 
+    /**
+     * Driver lifecycle.
+     */
     enum DriverLifecycle {
         /**
          * WebDriver is created once, and same instance is used for each test class and method.

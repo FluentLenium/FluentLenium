@@ -57,7 +57,7 @@ public interface LocatorHandler<T> {
      *
      * @return true if the result is loaded, false otherwise
      */
-    boolean isLoaded();
+    boolean loaded();
 
     /**
      * Reset the loaded data.
@@ -74,7 +74,7 @@ public interface LocatorHandler<T> {
      *
      * @return true if result is present, false otherwise
      */
-    boolean isPresent();
+    boolean present();
 
     /**
      * Add a listener for this locator handler.

@@ -12,13 +12,19 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 
 /**
- * Inject CSS into active page.
+ * Features related to CSS loaded in the active page.
  */
 public class CssSupportImpl implements CssSupport {
 
     private final JavascriptControl javascriptControl;
     private final AwaitControl awaitControl;
 
+    /**
+     * Creates a new implementation of css support
+     *
+     * @param javascriptControl javascript control
+     * @param awaitControl      await control
+     */
     public CssSupportImpl(final JavascriptControl javascriptControl, final AwaitControl awaitControl) {
         this.javascriptControl = javascriptControl;
         this.awaitControl = awaitControl;

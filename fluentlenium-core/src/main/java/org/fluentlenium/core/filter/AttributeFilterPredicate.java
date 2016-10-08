@@ -9,10 +9,16 @@ import org.fluentlenium.core.domain.FluentWebElement;
 public class AttributeFilterPredicate implements Predicate<FluentWebElement> {
     private final AttributeFilter filter;
 
-    public AttributeFilterPredicate(final AttributeFilter text) {
-        this.filter = text;
+    /**
+     * Creates a new Attribute Filter Predicated, from an attribute filter
+     *
+     * @param filter attribute filter
+     */
+    public AttributeFilterPredicate(final AttributeFilter filter) {
+        this.filter = filter;
     }
 
+    @Override
     public boolean apply(final FluentWebElement element) {
 
         final String attribute = getAttributeValue(element);

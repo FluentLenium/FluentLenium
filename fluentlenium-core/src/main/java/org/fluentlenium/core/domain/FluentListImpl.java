@@ -36,6 +36,8 @@ import java.util.List;
 
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
+ *
+ * @param <E> type of fluent element
  */
 @SuppressWarnings({"PMD.GodClass", "PMD.ExcessivePublicCount"})
 public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E> implements FluentList<E> {
@@ -46,10 +48,18 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     private final FluentLabelImpl<FluentListImpl<E>> label;
 
-    public FluentListImpl(final Class<E> componentClass, final List<E> list, final FluentControl fluentControl,
+    /**
+     * Creates a new fluent list.
+     *
+     * @param componentClass component class
+     * @param list           list of fluent element
+     * @param control        control interface
+     * @param instantiator   component instantiator
+     */
+    public FluentListImpl(final Class<E> componentClass, final List<E> list, final FluentControl control,
             final ComponentInstantiator instantiator) {
-        super(componentClass, list, fluentControl, instantiator);
-        this.hookChainBuilder = new DefaultHookChainBuilder(fluentControl, instantiator);
+        super(componentClass, list, control, instantiator);
+        this.hookChainBuilder = new DefaultHookChainBuilder(control, instantiator);
         this.label = new FluentLabelImpl<>(this, new Supplier<String>() {
             @Override
             public String get() {
@@ -73,13 +83,14 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         return elements;
     }
 
+    @Override
     public FluentWaitElementList await() {
-        return new FluentWaitElementList(fluentControl.await(), this);
+        return new FluentWaitElementList(control.await(), this);
     }
 
     @Override
     public E first() {
-        if (!LocatorProxies.isLoaded(proxy)) {
+        if (!LocatorProxies.loaded(proxy)) {
             final E component = instantiator.newComponent(componentClass, LocatorProxies.first(proxy));
             if (component instanceof FluentLabel) {
                 component.withLabel(label.getLabel());
@@ -100,7 +111,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public E last() {
-        if (!LocatorProxies.isLoaded(proxy)) {
+        if (!LocatorProxies.loaded(proxy)) {
             final E component = instantiator.newComponent(componentClass, LocatorProxies.last(proxy));
             if (component instanceof FluentLabel) {
                 component.withLabel(label.getLabel());
@@ -121,7 +132,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public E index(final int index) {
-        if (!LocatorProxies.isLoaded(proxy)) {
+        if (!LocatorProxies.loaded(proxy)) {
             final E component = instantiator.newComponent(componentClass, LocatorProxies.index(proxy, index));
             if (component instanceof FluentLabel) {
                 component.withLabel(label.getLabel());
@@ -146,7 +157,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Override
     public boolean present() {
         if (LocatorProxies.getLocatorHandler(proxy) != null) {
-            return LocatorProxies.isPresent(this);
+            return LocatorProxies.present(this);
         }
         return this.size() > 0;
     }
@@ -176,7 +187,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public boolean loaded() {
-        return LocatorProxies.isLoaded(this);
+        return LocatorProxies.loaded(this);
     }
 
     @Override
@@ -311,17 +322,19 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         return new EachElementConditions(this);
     }
 
-    public FluentListConditions awaitUntilEach() {
-        return WaitConditionProxy.each(fluentControl.await(), this.toString(), Suppliers.ofInstance(this));
-    }
-
     @Override
     public FluentListConditions one() {
         return new AtLeastOneElementConditions(this);
     }
 
+    @Override
+    public FluentListConditions awaitUntilEach() {
+        return WaitConditionProxy.each(control.await(), this.toString(), Suppliers.ofInstance(this));
+    }
+
+    @Override
     public FluentListConditions awaitUntilOne() {
-        return WaitConditionProxy.one(fluentControl.await(), this.toString(), Suppliers.ofInstance(this));
+        return WaitConditionProxy.one(control.await(), this.toString(), Suppliers.ofInstance(this));
     }
 
     @Override

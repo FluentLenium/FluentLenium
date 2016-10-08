@@ -4,7 +4,9 @@ import cucumber.api.Scenario;
 import org.fluentlenium.adapter.FluentTestRunnerAdapter;
 
 /**
- * FluentLenium test adapter for Cucumber.
+ * Cucumber FluentLenium Test Runner Adapter.
+ * <p>
+ * Extends this class to provide FluentLenium support to your Cucumber Test class.
  */
 public class FluentCucumberTest extends FluentTestRunnerAdapter {
     /**

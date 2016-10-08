@@ -8,9 +8,9 @@ package org.fluentlenium.configuration;
  */
 public interface FactoryNames {
     /**
-     * Get the names.
+     * Get the factory names.
      *
-     * @return array of names
+     * @return array of factory names
      */
     String[] getNames();
 }

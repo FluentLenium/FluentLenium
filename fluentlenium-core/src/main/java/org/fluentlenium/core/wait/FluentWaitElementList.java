@@ -13,138 +13,189 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class FluentWaitElementList {
+/**
+ * A wait object wrapping default selenium {@link org.openqa.selenium.support.ui.FluentWait} object into a more
+ * complete API, allowing to wait for any condition to be verified on underlying elements.
+ */
+public class FluentWaitElementList implements FluentWaitFunctional<FluentControl>, FluentWaitConditions<FluentWaitElementList>,
+        FluentWaitConfiguration<FluentWaitElementList> {
     private final List<? extends FluentWebElement> elements;
 
-    private final FluentWait fluentControlWait;
+    private final FluentWait controlWait;
 
-    public FluentWaitElementList(final FluentWait fluentControlWait, final List<? extends FluentWebElement> elements) {
-        this.fluentControlWait = fluentControlWait;
+    /**
+     * Creates a new fluent wait for a given elements.
+     *
+     * @param controlWait underlying wait from control interface
+     * @param elements    underlying elements
+     */
+    public FluentWaitElementList(final FluentWait controlWait, final List<? extends FluentWebElement> elements) {
+        this.controlWait = controlWait;
         this.elements = elements;
     }
 
+    /**
+     * Get a conditions object used to wait for condition on current elements.
+     * <p>
+     * At least one element must verify the condition to be verified.
+     *
+     * @return conditions object
+     */
     public FluentConditions until() {
-        return fluentControlWait.until(elements);
+        return controlWait.until(elements);
     }
 
+    /**
+     * Get a conditions object used to wait for condition on current elements.
+     * <p>
+     * Each element must verify the condition to be verified.
+     *
+     * @return conditions object
+     */
     public FluentConditions untilEach() {
-        return fluentControlWait.untilEach(elements);
+        return controlWait.untilEach(elements);
     }
 
+    @Override
     public org.openqa.selenium.support.ui.FluentWait getWait() {
-        return fluentControlWait.getWait();
+        return controlWait.getWait();
     }
 
+    @Override
     public FluentWaitElementList atMost(final long duration, final TimeUnit unit) {
-        fluentControlWait.atMost(duration, unit);
+        controlWait.atMost(duration, unit);
         return this;
     }
 
+    @Override
     public FluentWaitElementList atMost(final long timeInMillis) {
-        fluentControlWait.atMost(timeInMillis);
+        controlWait.atMost(timeInMillis);
         return this;
     }
 
+    @Override
     public FluentWaitElementList pollingEvery(final long duration, final TimeUnit unit) {
-        fluentControlWait.pollingEvery(duration, unit);
+        controlWait.pollingEvery(duration, unit);
         return this;
     }
 
+    @Override
     public FluentWaitElementList pollingEvery(final long duration) {
-        fluentControlWait.pollingEvery(duration);
+        controlWait.pollingEvery(duration);
         return this;
     }
 
+    @Override
     public FluentWaitElementList ignoreAll(final Collection<Class<? extends Throwable>> types) {
-        fluentControlWait.ignoreAll(types);
+        controlWait.ignoreAll(types);
         return this;
     }
 
+    @Override
     public FluentWaitElementList ignoring(final Class<? extends RuntimeException> exceptionType) {
-        fluentControlWait.ignoring(exceptionType);
+        controlWait.ignoring(exceptionType);
         return this;
     }
 
+    @Override
     public FluentWaitElementList ignoring(final Class<? extends RuntimeException> firstType,
             final Class<? extends RuntimeException> secondType) {
-        fluentControlWait.ignoring(firstType, secondType);
+        controlWait.ignoring(firstType, secondType);
         return this;
     }
 
+    @Override
     public void untilPredicate(final Predicate<FluentControl> predicate) {
-        fluentControlWait.untilPredicate(predicate);
+        controlWait.untilPredicate(predicate);
     }
 
+    @Override
+    public void until(final Supplier<Boolean> supplier) {
+        controlWait.until(supplier);
+    }
+
+    @Override
+    public <T> T until(final Function<? super FluentControl, T> function) {
+        return controlWait.until(function);
+    }
+
+    @Override
     public FluentWaitElementList withMessage(final String message) {
-        fluentControlWait.withMessage(message);
+        controlWait.withMessage(message);
         return this;
     }
 
+    @Override
     public FluentWaitElementList withMessage(final Supplier<String> message) {
-        fluentControlWait.withMessage(message);
+        controlWait.withMessage(message);
         return this;
     }
 
+    @Override
+    public boolean hasMessageDefined() {
+        return controlWait.hasMessageDefined();
+    }
+
+    @Override
     public FluentWaitElementList withNoDefaultsException() {
-        fluentControlWait.withNoDefaultsException();
+        controlWait.withNoDefaultsException();
         return this;
     }
 
+    @Override
     public FluentConditions until(final FluentWebElement element) {
-        return fluentControlWait.until(element);
+        return controlWait.until(element);
     }
 
+    @Override
     public FluentListConditions until(final List<? extends FluentWebElement> elements) {
-        return fluentControlWait.until(elements);
+        return controlWait.until(elements);
     }
 
+    @Override
     public FluentListConditions untilEach(final List<? extends FluentWebElement> elements) {
-        return fluentControlWait.untilEach(elements);
+        return controlWait.untilEach(elements);
     }
 
+    @Override
     public FluentConditions untilElement(final Supplier<? extends FluentWebElement> selector) {
-        return fluentControlWait.untilElement(selector);
+        return controlWait.untilElement(selector);
     }
 
+    @Override
     public FluentListConditions untilElements(final Supplier<? extends List<? extends FluentWebElement>> selector) {
-        return fluentControlWait.untilElements(selector);
+        return controlWait.untilElements(selector);
     }
 
+    @Override
     public FluentListConditions untilEachElements(final Supplier<? extends List<? extends FluentWebElement>> selector) {
-        return fluentControlWait.untilEachElements(selector);
+        return controlWait.untilEachElements(selector);
     }
 
-    public FluentWaitWindowMatcher untilWindow(final String windowName) {
-        return fluentControlWait.untilWindow(windowName);
+    @Override
+    public FluentWaitWindowConditions untilWindow(final String windowName) {
+        return controlWait.untilWindow(windowName);
     }
 
-    public FluentWaitPageMatcher untilPage() {
-        return fluentControlWait.untilPage();
+    @Override
+    public FluentWaitPageConditions untilPage() {
+        return controlWait.untilPage();
     }
 
-    public FluentWaitPageMatcher untilPage(final FluentPage page) {
-        return fluentControlWait.untilPage(page);
+    @Override
+    public FluentWaitPageConditions untilPage(final FluentPage page) {
+        return controlWait.untilPage(page);
     }
 
+    @Override
     public FluentWaitElementList explicitlyFor(final long amount, final TimeUnit timeUnit) {
-        fluentControlWait.explicitlyFor(amount, timeUnit);
+        controlWait.explicitlyFor(amount, timeUnit);
         return this;
     }
 
+    @Override
     public FluentWaitElementList explicitlyFor(final long amount) {
-        fluentControlWait.explicitlyFor(amount);
+        controlWait.explicitlyFor(amount);
         return this;
-    }
-
-    public void until(final Supplier<Boolean> isTrue) {
-        fluentControlWait.until(isTrue);
-    }
-
-    public <T> T until(final Function<? super FluentControl, T> isTrue) {
-        return fluentControlWait.until(isTrue);
-    }
-
-    public boolean useCustomMessage() {
-        return fluentControlWait.useCustomMessage();
     }
 }

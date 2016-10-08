@@ -14,6 +14,11 @@ import java.util.List;
 public class ElementSupplierLocator implements ElementLocator {
     private final Supplier<WebElement> elementSupplier;
 
+    /**
+     * Creates a new element supplier locator.
+     *
+     * @param elementSupplier element supplier
+     */
     public ElementSupplierLocator(final Supplier<WebElement> elementSupplier) {
         this.elementSupplier = elementSupplier;
     }

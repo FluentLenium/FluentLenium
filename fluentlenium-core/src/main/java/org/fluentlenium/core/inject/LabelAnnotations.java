@@ -2,16 +2,22 @@ package org.fluentlenium.core.inject;
 
 import org.fluentlenium.core.annotation.Label;
 import org.fluentlenium.core.annotation.LabelHint;
+import org.fluentlenium.core.label.FluentLabelProvider;
 
 import java.lang.reflect.Field;
 
 /**
  * Parse {@link Label} and {@link LabelHint} annotation from field.
  */
-public class LabelAnnotations {
+public class LabelAnnotations implements FluentLabelProvider {
     private String label;
     private String[] labelHints;
 
+    /**
+     * Creates a  new label annotations object.
+     *
+     * @param field field to parse
+     */
     public LabelAnnotations(final Field field) {
         final Label labelAnno = field.getAnnotation(Label.class);
         if (labelAnno != null) {
@@ -27,11 +33,13 @@ public class LabelAnnotations {
         }
     }
 
+    @Override
     public String getLabel() {
         return label;
     }
 
     @SuppressWarnings("PMD.MethodReturnsInternalArray")
+    @Override
     public String[] getLabelHints() {
         return labelHints;
     }

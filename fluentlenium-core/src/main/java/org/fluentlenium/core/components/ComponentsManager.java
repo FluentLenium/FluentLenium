@@ -24,16 +24,26 @@ import java.util.Set;
 public class ComponentsManager extends AbstractComponentInstantiator
         implements ComponentInstantiator, ComponentsAccessor, ProxyElementListener {
 
-    private final FluentControl fluentControl;
+    private final FluentControl control;
     private final DefaultComponentInstantiator instantiator;
 
     private final Map<WebElement, Set<Object>> components = new IdentityHashMap<>();
 
-    public ComponentsManager(final FluentControl fluentControl) {
-        this.fluentControl = fluentControl;
-        this.instantiator = new DefaultComponentInstantiator(this.fluentControl, this);
+    /**
+     * Creates a new components manager.
+     *
+     * @param control control interface
+     */
+    public ComponentsManager(final FluentControl control) {
+        this.control = control;
+        this.instantiator = new DefaultComponentInstantiator(this.control, this);
     }
 
+    /**
+     * Get the component instantiator used by this components manager.
+     *
+     * @return component instantiator
+     */
     public ComponentInstantiator getInstantiator() {
         return instantiator;
     }

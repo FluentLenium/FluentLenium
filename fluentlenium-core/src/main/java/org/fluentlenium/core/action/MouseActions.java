@@ -6,7 +6,7 @@ import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
 
 /**
- * Global mouse control interface.
+ * Execute actions with the mouse.
  */
 public class MouseActions {
     private WebDriver driver;

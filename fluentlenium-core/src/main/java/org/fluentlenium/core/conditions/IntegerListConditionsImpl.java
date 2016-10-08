@@ -5,14 +5,21 @@ import com.google.common.base.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
- * Conditions implementation for integer on list of elements.
+ * Conditions for list of integers.
  */
 public class IntegerListConditionsImpl implements IntegerConditions {
 
-    private Conditions<FluentWebElement> listConditions;
+    private final Conditions<FluentWebElement> listConditions;
     private final Function<FluentWebElement, Integer> integerGetter;
     private final Function<FluentWebElement, IntegerConditions> conditionsGetter;
 
+    /**
+     * Creates a new list conditions
+     *
+     * @param listConditions   list conditions
+     * @param integerGetter    getter of the underlying object
+     * @param conditionsGetter getter of the underlying conditions
+     */
     public IntegerListConditionsImpl(final Conditions<FluentWebElement> listConditions,
             final Function<FluentWebElement, Integer> integerGetter,
             final Function<FluentWebElement, IntegerConditions> conditionsGetter) {
@@ -21,6 +28,12 @@ public class IntegerListConditionsImpl implements IntegerConditions {
         this.conditionsGetter = conditionsGetter;
     }
 
+    /**
+     * Creates a new list conditions, with default integer condition implementation
+     *
+     * @param listConditions list conditions
+     * @param integerGetter  getter of the underlying object
+     */
     public IntegerListConditionsImpl(final Conditions<FluentWebElement> listConditions,
             final Function<FluentWebElement, Integer> integerGetter) {
         this(listConditions, integerGetter, new Function<FluentWebElement, IntegerConditions>() {

@@ -6,7 +6,15 @@ import org.fluentlenium.core.domain.FluentList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Element list assertions.
+ */
 public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentList> {
+    /**
+     * Creates a new element list assertion object.
+     *
+     * @param actual actual element list
+     */
     public FluentListAssert(final FluentList<?> actual) {
         super(actual, FluentListAssert.class);
     }
@@ -45,6 +53,12 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
+    /**
+     * Check the list size
+     *
+     * @param expectedSize expected size
+     * @return assertion object
+     */
     public FluentListAssert hasSize(final int expectedSize) {
         if (actual.size() != expectedSize) {
             super.failWithMessage("Expected size: " + expectedSize + ". Actual size: " + actual.size() + ".");
@@ -52,6 +66,11 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
+    /**
+     * Check the list size
+     *
+     * @return List size builder
+     */
     public FluentListSizeBuilder hasSize() {
         return new FluentListSizeBuilder(actual.size(), this);
     }
@@ -99,11 +118,9 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
-    /*
-     * Used in FluentListSizeBuilder to raise AssertionError
-     */
-    /* default */ void internalFail(final String reason) {
-        super.failWithMessage(reason);
+    @Override
+    protected void failWithMessage(final String errorMessage, final Object... arguments) {
+        super.failWithMessage(errorMessage);
     }
 
 }

@@ -25,10 +25,10 @@ public class FluentAdapterTest {
     public void isDriverAvailableBehavesAsExpected() {
         final FluentAdapter adapter = new FluentAdapter();
         adapter.initFluent(webDriver);
-        assertThat(adapter.isFluentDriverAvailable()).isTrue();
+        assertThat(adapter.isFluentControlAvailable()).isTrue();
 
         adapter.initFluent(null);
-        assertThat(adapter.isFluentDriverAvailable()).isFalse();
+        assertThat(adapter.isFluentControlAvailable()).isFalse();
     }
 
     @Test

@@ -6,6 +6,9 @@ import lombok.experimental.Delegate;
  * A registry of {@link CapabilitiesFactory}.
  */
 public enum CapabilitiesRegistry {
+    /**
+     * Singleton.
+     */
     INSTANCE;
 
     @Delegate

@@ -4,8 +4,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Creates new configuration from a container class.
+ */
 public class DefaultConfigurationFactory implements ConfigurationFactory {
 
+    /**
+     * Get inputstream containing fluentlenium properties.
+     *
+     * @return propertiers input stream
+     */
     protected InputStream getPropertiesInputStream() {
         return getClass().getResourceAsStream("/fluentlenium.properties");
     }

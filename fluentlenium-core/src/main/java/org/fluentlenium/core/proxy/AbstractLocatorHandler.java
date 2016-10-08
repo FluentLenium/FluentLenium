@@ -45,6 +45,14 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     protected List<FluentHook> hooks;
 
+    /**
+     * Get declared method.
+     *
+     * @param declaringClass declaring class
+     * @param name           method name
+     * @param types          argument types
+     * @return method
+     */
     protected static Method getMethod(final Class<?> declaringClass, final String name, final Class... types) {
         try {
             return declaringClass.getMethod(name, types);
@@ -63,30 +71,66 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         return listeners.remove(listener);
     }
 
+    /**
+     * Fire proxy element search event.
+     */
     protected void fireProxyElementSearch() {
         for (final ProxyElementListener listener : listeners) {
             listener.proxyElementSearch(proxy, locator);
         }
     }
 
+    /**
+     * Fire proxy element found event.
+     *
+     * @param result found element
+     */
     protected void fireProxyElementFound(final T result) {
         for (final ProxyElementListener listener : listeners) {
             listener.proxyElementFound(proxy, locator, resultToList(result));
         }
     }
 
+    /**
+     * Convert result to a list of selenium element.
+     *
+     * @param result found result
+     * @return list of selenium element
+     */
     protected abstract List<WebElement> resultToList(T result);
 
+    /**
+     * Creates a new locator handler.
+     *
+     * @param locator selenium element locator
+     */
     public AbstractLocatorHandler(final ElementLocator locator) {
         this.locator = locator;
     }
 
+    /**
+     * Set the proxy using this handler.
+     *
+     * @param proxy proxy using this handler
+     */
     public void setProxy(final T proxy) {
         this.proxy = proxy;
     }
 
+    /**
+     * Get the actual result of the locator.
+     *
+     * @return result of the locator
+     */
     public abstract T getLocatorResultImpl();
 
+    /**
+     * Get the actual result of the locator, if result is not defined and not stale.
+     * <p>
+     * It also raise events.
+     *
+     * @return result of the locator
+     */
     public T getLocatorResult() {
         synchronized (this) {
             if (result != null && isStale()) {
@@ -101,10 +145,25 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         }
     }
 
+    /**
+     * Get the stale status of the element.
+     *
+     * @return true if element is stale, false otherwise
+     */
     protected abstract boolean isStale();
 
+    /**
+     * Get the underlying element.
+     *
+     * @return underlying element
+     */
     protected abstract WebElement getElement();
 
+    /**
+     * Builds a {@link NoSuchElementException} with a message matching this locator handler.
+     *
+     * @return no such element exception
+     */
     public NoSuchElementException noSuchElement() {
         final FluentConditions messageBuilder = MessageProxy.builder(FluentConditions.class, getMessageContext());
         messageBuilder.present();
@@ -156,12 +215,12 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     }
 
     @Override
-    public boolean isLoaded() {
+    public boolean loaded() {
         return result != null;
     }
 
     @Override
-    public boolean isPresent() {
+    public boolean present() {
         try {
             now();
         } catch (TimeoutException | NoSuchElementException | StaleElementReferenceException e) {
@@ -191,7 +250,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
             if (EQUALS.equals(method)) {
                 final LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
                 if (otherLocatorHandler != null) {
-                    if (!otherLocatorHandler.isLoaded() || args[0] == null) {
+                    if (!otherLocatorHandler.loaded() || args[0] == null) {
                         return this.equals(otherLocatorHandler);
                     } else {
                         return args[0].equals(proxy);
@@ -206,7 +265,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
         if (EQUALS.equals(method)) {
             final LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
-            if (otherLocatorHandler != null && !otherLocatorHandler.isLoaded()) {
+            if (otherLocatorHandler != null && !otherLocatorHandler.loaded()) {
                 otherLocatorHandler.now();
                 return otherLocatorHandler.equals(this);
             }
@@ -262,10 +321,21 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         return Objects.hash(locator);
     }
 
+    /**
+     * Get string representation of not already found element.
+     *
+     * @return string representation of not already found element
+     */
     protected String getLazyToString() {
         return "Lazy Element";
     }
 
+    /**
+     * Get string representation of the proxy
+     *
+     * @param elementToString string representation of the underlying element
+     * @return string representation of the proxy
+     */
     public String proxyToString(String elementToString) {
         if (elementToString == null) {
             elementToString = getLazyToString();

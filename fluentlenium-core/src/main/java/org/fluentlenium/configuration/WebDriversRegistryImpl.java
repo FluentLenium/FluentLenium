@@ -5,7 +5,13 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
+/**
+ * WebDrivers registry implementation.
+ */
 public class WebDriversRegistryImpl extends AbstractFactoryRegistryImpl<WebDriverFactory, ReflectiveWebDriverFactory> {
+    /**
+     * Creates a new registry.
+     */
     public WebDriversRegistryImpl() {
         super(WebDriverFactory.class, ReflectiveWebDriverFactory.class);
     }

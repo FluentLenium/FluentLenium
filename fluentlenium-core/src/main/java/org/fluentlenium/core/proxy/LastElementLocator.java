@@ -13,6 +13,11 @@ import java.util.List;
 public class LastElementLocator implements ElementLocator {
     private final ElementLocator listLocator;
 
+    /**
+     * Creates a new last element locator.
+     *
+     * @param listLocator element list locator
+     */
     public LastElementLocator(final ElementLocator listLocator) {
         this.listLocator = listLocator;
     }

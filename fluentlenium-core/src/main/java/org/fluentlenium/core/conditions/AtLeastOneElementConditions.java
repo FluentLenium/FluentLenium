@@ -8,9 +8,14 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import java.util.List;
 
 /**
- * Conditions implementation for list of elements, matching when at least one element of the list matches.
+ * Conditions for list of elements, matching when at least one element of the list matches.
  */
 public class AtLeastOneElementConditions extends AbstractFluentListConditions {
+    /**
+     * Creates a new condition.
+     *
+     * @param elements underlying elements
+     */
     public AtLeastOneElementConditions(final List<? extends FluentWebElement> elements) {
         super(elements);
     }
@@ -31,11 +36,19 @@ public class AtLeastOneElementConditions extends AbstractFluentListConditions {
         return buildAtLeastOnePredicate(predicate, defaultValue).apply(null);
     }
 
+    /**
+     * Build predicate for this condition.
+     *
+     * @param predicate    predicate
+     * @param defaultValue default value if elements list is empty.
+     * @return predicate
+     */
     protected Predicate<FluentDriver> buildAtLeastOnePredicate(final Predicate<FluentWebElement> predicate,
             final boolean defaultValue) {
         final Predicate<FluentDriver> untilPredicate = new Predicate<FluentDriver>() {
+            @Override
             public boolean apply(final FluentDriver fluent) {
-                if (getElements().size() > 0) {
+                if (!getElements().isEmpty()) {
                     for (final FluentWebElement element : getElements()) {
                         if (predicate.apply(element)) {
                             return true;

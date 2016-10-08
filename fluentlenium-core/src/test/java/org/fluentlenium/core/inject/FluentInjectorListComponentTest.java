@@ -71,7 +71,7 @@ public class FluentInjectorListComponentTest {
         injector.inject(container);
 
         Assertions.assertThat(container.components).isNotNull();
-        Assertions.assertThat(LocatorProxies.isLoaded(container.components)).isFalse();
+        Assertions.assertThat(LocatorProxies.loaded(container.components)).isFalse();
 
         for (final Component component : container.components) {
             Assertions.assertThat(component.element).isNotNull();
