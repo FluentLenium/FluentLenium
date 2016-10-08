@@ -1,5 +1,8 @@
 package org.fluentlenium.configuration;
 
+/**
+ * Reflective factory.
+ */
 @IndexIgnore
 public interface ReflectiveFactory extends Factory {
     /**

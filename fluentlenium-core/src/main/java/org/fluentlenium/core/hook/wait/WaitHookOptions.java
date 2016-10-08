@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Options for {@link WaitHook}.
+ */
 @Getter
 @Setter
 @Builder
@@ -24,10 +27,18 @@ public class WaitHookOptions {
     private java.util.Collection<Class<? extends Throwable>> ignoreAll;
     private boolean withNoDefaultsException;
 
+    /**
+     * Creates a new wait hook options, with default annotation options.
+     */
     public WaitHookOptions() {
         this(WaitHookOptions.class.getAnnotation(Wait.class));
     }
 
+    /**
+     * Creates a new wait hook options, with given annotation options.
+     *
+     * @param annotation wait annotation
+     */
     public WaitHookOptions(final Wait annotation) {
         timeUnit = annotation.timeUnit();
         pollingTimeUnit = annotation.pollingTimeUnit();
@@ -37,6 +48,12 @@ public class WaitHookOptions {
         withNoDefaultsException = annotation.withNoDefaultsException();
     }
 
+    /**
+     * Configure fluent wait with this options.
+     *
+     * @param await fluent wait object to configure
+     * @return configured fluent wait object
+     */
     protected FluentWait configureAwait(final FluentWait await) {
         if (atMost != null) {
             await.atMost(atMost, timeUnit);

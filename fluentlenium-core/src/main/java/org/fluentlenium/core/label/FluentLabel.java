@@ -1,5 +1,10 @@
 package org.fluentlenium.core.label;
 
+/**
+ * Apply label and label hints to element.
+ *
+ * @param <T> {@code this} class to chain method calls
+ */
 public interface FluentLabel<T> {
     /**
      * Apply a label that will be displayed as the representation of this object for error message.

@@ -8,9 +8,17 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Search context backed by an ElementLocator.
+ */
 public class ElementLocatorSearchContext implements SearchContext {
     private final ElementLocator locator;
 
+    /**
+     * Creates a new element locator search context.
+     *
+     * @param locator element locator
+     */
     public ElementLocatorSearchContext(final ElementLocator locator) {
         this.locator = locator;
     }

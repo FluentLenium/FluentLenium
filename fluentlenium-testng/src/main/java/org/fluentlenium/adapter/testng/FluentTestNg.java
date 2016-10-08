@@ -15,18 +15,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * TestNG FluentLenium Test Adapter.
+ * TestNG FluentLenium Test Runner Adapter.
  * <p>
  * Extends this class to provide FluentLenium support to your TestNG Test class.
  */
 public class FluentTestNg extends FluentTestRunnerAdapter {
     private final Map<ITestContext, Map<Method, ITestNGMethod>> methods = new HashMap<>();
 
+    /**
+     * Creates a new test runner adapter.
+     */
     public FluentTestNg() {
         super(new ThreadLocalFluentControlContainer());
     }
 
-    public Map<Method, ITestNGMethod> getMethods(final ITestContext context) {
+    private Map<Method, ITestNGMethod> getMethods(final ITestContext context) {
         synchronized (this) {
             Map<Method, ITestNGMethod> testMethods = methods.get(context);
 
@@ -43,6 +46,11 @@ public class FluentTestNg extends FluentTestRunnerAdapter {
         }
     }
 
+    /**
+     * After test.
+     *
+     * @param context test context
+     */
     @AfterTest(alwaysRun = true)
     public void afterTest(final ITestContext context) {
         synchronized (this) {
@@ -50,12 +58,23 @@ public class FluentTestNg extends FluentTestRunnerAdapter {
         }
     }
 
+    /**
+     * Before test.
+     *
+     * @param method  test method
+     * @param context test context
+     */
     @BeforeMethod(alwaysRun = true)
     public void beforeMethod(final Method method, final ITestContext context) {
         final ITestNGMethod testNGMethod = getMethods(context).get(method);
         starting(testNGMethod.getRealClass(), testNGMethod.getMethodName());
     }
 
+    /**
+     * After test method.
+     *
+     * @param result test result
+     */
     @AfterMethod(alwaysRun = true)
     public void afterMethod(final ITestResult result) {
         if (!result.isSuccess()) {
@@ -64,6 +83,9 @@ public class FluentTestNg extends FluentTestRunnerAdapter {
         finished(result.getTestClass().getRealClass(), result.getName());
     }
 
+    /**
+     * After test class.
+     */
     @AfterClass(alwaysRun = true)
     public void afterClass() {
         FluentTestRunnerAdapter.afterClass(getClass());

@@ -18,18 +18,31 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
  */
 public class FluentAdapter implements FluentControl {
 
-    private final FluentControlContainer driverContainer;
+    private final FluentControlContainer controlContainer;
 
     private final Configuration configuration = ConfigurationFactoryProvider.newConfiguration(getClass());
 
+    /**
+     * Creates a new fluent adapter.
+     */
     public FluentAdapter() {
         this(new DefaultFluentControlContainer());
     }
 
-    public FluentAdapter(final FluentControlContainer driverContainer) {
-        this.driverContainer = driverContainer;
+    /**
+     * Creates a new fluent adapter, using given control interface container.
+     *
+     * @param controlContainer control interface container
+     */
+    public FluentAdapter(final FluentControlContainer controlContainer) {
+        this.controlContainer = controlContainer;
     }
 
+    /**
+     * Get the test adapter configuration.
+     *
+     * @return configuration
+     */
     @Delegate
     public Configuration getConfiguration() {
         return configuration;
@@ -38,15 +51,20 @@ public class FluentAdapter implements FluentControl {
     @Delegate(types = FluentControl.class, excludes = {SeleniumDriverControl.class, Configuration.class})
     // We want getDriver to be final.
     private ContainerFluentControl getFluentControl() {
-        return (ContainerFluentControl) getDriverContainer().getFluentControl();
+        return (ContainerFluentControl) getControlContainer().getFluentControl();
     }
 
-    /* default */ boolean isFluentDriverAvailable() {
-        return getDriverContainer().getFluentControl() != null;
+    /**
+     * Check if fluent control interface is available from the control interface container.
+     *
+     * @return true if the fluent control interface is available, false otherwise
+     */
+    /* default */ boolean isFluentControlAvailable() {
+        return getControlContainer().getFluentControl() != null;
     }
 
     private void setFluentControl(final ContainerFluentControl fluentControl) {
-        getDriverContainer().setFluentControl(fluentControl);
+        getControlContainer().setFluentControl(fluentControl);
     }
 
     @Override
@@ -54,8 +72,13 @@ public class FluentAdapter implements FluentControl {
         return getFluentControl().getDriver();
     }
 
-    protected FluentControlContainer getDriverContainer() {
-        return driverContainer;
+    /**
+     * Get the control interface container
+     *
+     * @return control interface container
+     */
+    protected FluentControlContainer getControlContainer() {
+        return controlContainer;
     }
 
     /**

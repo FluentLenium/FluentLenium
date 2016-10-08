@@ -8,11 +8,14 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 /**
- * JUnit FluentLenium Test Adapter.
+ * JUnit 4 FluentLenium Test Runner Adapter.
  * <p>
  * Extends this class to provide FluentLenium support to your JUnit Test class.
  */
 public class FluentTest extends FluentTestRunnerAdapter {
+    /**
+     * Fluent test adapter JUnit rule.
+     */
     @Rule
     public TestRule watchman = new FluentTestRule() {
 
@@ -36,6 +39,9 @@ public class FluentTest extends FluentTestRunnerAdapter {
     };
 
     //CHECKSTYLE.OFF: VisibilityModifier
+    /**
+     * Fluent test adapter JUnit class rule.
+     */
     @ClassRule
     public static TestRule classWatchman = new TestRule() {
 

@@ -2,6 +2,11 @@ package org.fluentlenium.core.hook;
 
 import com.google.common.base.Function;
 
+/**
+ * Control interface for hooks.
+ *
+ * @param <T> self type
+ */
 public interface HookControl<T> {
     /**
      * Disable all hooks from actual element.

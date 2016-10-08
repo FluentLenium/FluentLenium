@@ -7,17 +7,31 @@ import org.openqa.selenium.WebElement;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+/**
+ * Default component instantiator.
+ */
 public class DefaultComponentInstantiator extends AbstractComponentInstantiator {
-    private final FluentControl fluentControl;
+    private final FluentControl control;
     private final ComponentInstantiator instantiator;
 
-    public DefaultComponentInstantiator(final FluentControl fluentControl) {
-        this.fluentControl = fluentControl;
+    /**
+     * Creates a new component instantiator, using given fluent control.
+     *
+     * @param control control interface
+     */
+    public DefaultComponentInstantiator(final FluentControl control) {
+        this.control = control;
         this.instantiator = this;
     }
 
-    public DefaultComponentInstantiator(final FluentControl fluentControl, final ComponentInstantiator instantiator) {
-        this.fluentControl = fluentControl;
+    /**
+     * Creates a new component instantiator, using given fluent control and underlying instantiator.
+     *
+     * @param control      control interface
+     * @param instantiator component instantiator
+     */
+    public DefaultComponentInstantiator(final FluentControl control, final ComponentInstantiator instantiator) {
+        this.control = control;
         this.instantiator = instantiator;
     }
 
@@ -46,7 +60,7 @@ public class DefaultComponentInstantiator extends AbstractComponentInstantiator 
     @Override
     public <T> T newComponent(final Class<T> componentClass, final WebElement element) {
         try {
-            return ReflectionUtils.newInstanceOptionalArgs(1, componentClass, element, fluentControl, instantiator);
+            return ReflectionUtils.newInstanceOptionalArgs(1, componentClass, element, control, instantiator);
         } catch (final NoSuchMethodException e) {
             throw new ComponentException(componentClass.getName() + " is not a valid component class.", e);
         } catch (final IllegalAccessException e) {
@@ -62,8 +76,7 @@ public class DefaultComponentInstantiator extends AbstractComponentInstantiator 
     public <L extends List<T>, T> L newComponentList(final Class<L> listClass, final Class<T> componentClass,
             final List<T> componentsList) {
         try {
-            return ReflectionUtils
-                    .newInstanceOptionalArgs(1, listClass, componentClass, componentsList, fluentControl, instantiator);
+            return ReflectionUtils.newInstanceOptionalArgs(1, listClass, componentClass, componentsList, control, instantiator);
         } catch (final NoSuchMethodException e) {
             throw new ComponentException(listClass.getName() + " is not a valid component list class.", e);
         } catch (final IllegalAccessException e) {

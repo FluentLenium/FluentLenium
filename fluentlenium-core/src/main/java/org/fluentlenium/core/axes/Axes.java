@@ -18,6 +18,12 @@ public class Axes {
     private final WebElement webElement;
     private final ComponentInstantiator instantiator;
 
+    /**
+     * Creates a new axes object to find other elements based on XPath axes.
+     *
+     * @param element      reference element
+     * @param instantiator component instantiator used to build found elements.
+     */
     public Axes(final WebElement element, final ComponentInstantiator instantiator) {
         this.webElement = element;
         this.instantiator = instantiator;
@@ -39,6 +45,12 @@ public class Axes {
         return instantiator.newComponent(FluentWebElement.class, parentElement);
     }
 
+    /**
+     * Handle an XPath axe
+     *
+     * @param axe axe to handle
+     * @return list of found elements
+     */
     protected FluentList<FluentWebElement> handleAxe(final String axe) {
         final List<WebElement> webElementList = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
             @Override

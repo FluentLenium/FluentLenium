@@ -13,5 +13,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface FactoryPriority {
+    /**
+     * Priority of the factory
+     *
+     * @return factory priority
+     */
     int value();
 }

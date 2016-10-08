@@ -5,6 +5,11 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Definition of a hook, containing class of the hook and defined options
+ *
+ * @param <T> type of the option class
+ */
 @Getter
 @AllArgsConstructor
 @RequiredArgsConstructor

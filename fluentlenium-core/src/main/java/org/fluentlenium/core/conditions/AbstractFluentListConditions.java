@@ -15,6 +15,11 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     private final List<? extends FluentWebElement> elements;
 
+    /**
+     * Creates a new conditions on list of elements.
+     *
+     * @param elements underlying elements
+     */
     protected AbstractFluentListConditions(final List<? extends FluentWebElement> elements) {
         this.elements = elements;
     }
@@ -27,14 +32,29 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
         return elements.size() == size;
     }
 
+    /**
+     * Is this conditions list negated ?
+     *
+     * @return true if this conditions list is negated, false otherwise.
+     */
     protected boolean isNegation() {
         return negation;
     }
 
+    /**
+     * Set negation value
+     *
+     * @param negation negation value
+     */
     public void setNegation(final boolean negation) {
         this.negation = negation;
     }
 
+    /**
+     * Get the underlying list of elements
+     *
+     * @return underlying list of elements
+     */
     protected List<? extends FluentWebElement> getElements() {
         return elements;
     }
@@ -225,8 +245,8 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean text(final String anotherString) {
-        return text().equalTo(anotherString);
+    public boolean text(final String text) {
+        return text().equalTo(text);
     }
 
     @Override

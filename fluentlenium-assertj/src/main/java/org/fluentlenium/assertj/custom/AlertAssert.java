@@ -4,8 +4,16 @@ import org.assertj.core.api.AbstractAssert;
 import org.fluentlenium.core.alert.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 
+/**
+ * Alert assertions.
+ */
 public class AlertAssert extends AbstractAssert<AlertAssert, Alert> {
 
+    /**
+     * Creates a new assertion object for alert.
+     *
+     * @param actual actual alert
+     */
     public AlertAssert(final Alert actual) {
         super(actual, AlertAssert.class);
     }

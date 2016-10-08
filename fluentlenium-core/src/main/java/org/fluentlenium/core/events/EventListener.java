@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 public interface EventListener {
 
     /**
-     * Called before {@link org.openqa.selenium.WebDriver#get get(String url)} respectively
+     * Called before {@link org.openqa.selenium.WebDriver#get get(String url)},
      * {@link org.openqa.selenium.WebDriver.Navigation#to navigate().to(String url)}.
      *
      * @param url    URL
@@ -19,10 +19,9 @@ public interface EventListener {
     void beforeNavigateTo(String url, WebDriver driver);
 
     /**
-     * Called after {@link org.openqa.selenium.WebDriver#get get(String url)} respectively
+     * Called after {@link org.openqa.selenium.WebDriver#get get(String url)},
      * {@link org.openqa.selenium.WebDriver.Navigation#to navigate().to(String url)}. Not called, if
-     * an
-     * exception is thrown.
+     * an exception is thrown.
      *
      * @param url    URL
      * @param driver WebDriver
@@ -62,9 +61,9 @@ public interface EventListener {
     void afterNavigateForward(WebDriver driver);
 
     /**
-     * Called before {@link WebDriver#findElement WebDriver.findElement(...)}, or
-     * {@link WebDriver#findElements WebDriver.findElements(...)}, or {@link org.openqa.selenium.WebElement#findElement
-     * WebElement.findElement(...)}, or {@link org.openqa.selenium.WebElement
+     * Called before {@link WebDriver#findElement WebDriver.findElement(...)},
+     * {@link WebDriver#findElements WebDriver.findElements(...)}, {@link org.openqa.selenium.WebElement#findElement
+     * WebElement.findElement(...)}, {@link org.openqa.selenium.WebElement
      * #findElement WebElement.findElements(...)}.
      *
      * @param element will be <code>null</code>, if a find method of <code>WebDriver</code> is called.
@@ -74,9 +73,9 @@ public interface EventListener {
     void beforeFindBy(By by, FluentWebElement element, WebDriver driver);
 
     /**
-     * Called after {@link WebDriver#findElement WebDriver.findElement(...)}, or
-     * {@link WebDriver#findElements WebDriver.findElements(...)}, or {@link org.openqa.selenium.WebElement#findElement
-     * WebElement.findElement(...)}, or {@link org.openqa.selenium.WebElement#findElement WebElement.findElements(...)}.
+     * Called after {@link WebDriver#findElement WebDriver.findElement(...)},
+     * {@link WebDriver#findElements WebDriver.findElements(...)}, {@link org.openqa.selenium.WebElement#findElement
+     * WebElement.findElement(...)}, {@link org.openqa.selenium.WebElement#findElement WebElement.findElements(...)}.
      *
      * @param element will be <code>null</code>, if a find method of <code>WebDriver</code> is called.
      * @param by      locator being used
@@ -125,28 +124,22 @@ public interface EventListener {
 
     /**
      * Called before
-     * {@link org.openqa.selenium.remote.RemoteWebDriver#executeScript(String, Object[]) }
+     * {@link org.openqa.selenium.JavascriptExecutor#executeScript(String, Object[]) }
      *
      * @param driver WebDriver
      * @param script the script to be executed
      */
-    // Previously: Called before {@link WebDriver#executeScript(String)}
-    // See the same issue below.
     void beforeScript(String script, WebDriver driver);
 
     /**
      * Called after
-     * {@link org.openqa.selenium.remote.RemoteWebDriver#executeScript(String, Object[]) }
+     * {@link org.openqa.selenium.JavascriptExecutor#executeScript(String, Object[]) }
      * .
      * Not called if an exception is thrown
      *
      * @param driver WebDriver
      * @param script the script that was executed
      */
-    // Previously: Called after {@link WebDriver#executeScript(String)}. Not called if an exception
-    // is thrown
-    // So someone should check if this is right. There is no executeScript method
-    // in WebDriver, but there is in several other places, like this one
     void afterScript(String script, WebDriver driver);
 
     /**

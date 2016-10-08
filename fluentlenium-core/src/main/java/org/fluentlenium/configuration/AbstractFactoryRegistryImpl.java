@@ -11,11 +11,23 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Abstract registry of FluentLenium factories.
+ *
+ * @param <T> type of factories
+ * @param <R> type of reflective factories
+ */
 public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends ReflectiveFactory> {
     protected final Class<T> factoryType;
     protected final Class<R> reflectiveFactoryType;
     protected Map<String, T> factories = new LinkedHashMap<>();
 
+    /**
+     * Creates a new factory registry.
+     *
+     * @param factoryType           type of factories
+     * @param reflectiveFactoryType type of reflective factories
+     */
     public AbstractFactoryRegistryImpl(final Class<T> factoryType, final Class<R> reflectiveFactoryType) {
         this.factoryType = factoryType;
         this.reflectiveFactoryType = reflectiveFactoryType;
@@ -48,6 +60,11 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
         }
     }
 
+    /**
+     * Get the default factory.
+     *
+     * @return default factory
+     */
     public T getDefault() {
         final List<T> factoriesList;
         synchronized (this) {
@@ -78,6 +95,12 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
         return getDefault(filteredFactories);
     }
 
+    /**
+     * Get the default factory from given list of available factories.
+     *
+     * @param filteredFactories available factories
+     * @return default factory
+     */
     protected abstract T getDefault(List<T> filteredFactories);
 
     /**
@@ -105,6 +128,11 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
         }
     }
 
+    /**
+     * Handle the case when no factory is available for given name
+     *
+     * @param name request factory name
+     */
     protected abstract void handleNoFactoryAvailable(String name);
 
     /**

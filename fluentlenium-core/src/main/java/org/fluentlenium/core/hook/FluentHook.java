@@ -4,6 +4,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
+/**
+ * Hook interface.
+ *
+ * @param <T> type of hook options
+ */
 public interface FluentHook<T> extends WebElement, ElementLocator, WrapsElement {
+    /**
+     * Get the options of the hook.
+     *
+     * @return hook options
+     */
     T getOptions();
 }

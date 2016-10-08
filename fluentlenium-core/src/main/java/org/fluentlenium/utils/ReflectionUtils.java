@@ -35,6 +35,13 @@ public final class ReflectionUtils {
         // Utility class
     }
 
+    /**
+     * Wrap given class to it's primitive class if it's matching a primitive class.
+     *
+     * @param clazz primitive class or not
+     * @param <T>   type of class
+     * @return class or primitive class
+     */
     @SuppressWarnings("unchecked")
     public static <T> Class<T> wrapPrimitive(final Class<T> clazz) {
         return clazz.isPrimitive() ? (Class<T>) PRIMITIVES_TO_WRAPPERS.get(clazz) : clazz;
@@ -119,6 +126,13 @@ public final class ReflectionUtils {
         return parameters;
     }
 
+    /**
+     * Get default value for given type.
+     *
+     * @param type type of value to get the default
+     * @param <T>  type of value
+     * @return default value
+     */
     public static <T> T getDefault(final Class<T> type) {
         return (T) DEFAULTS.get(type);
     }
@@ -311,6 +325,13 @@ public final class ReflectionUtils {
         throw new NoSuchMethodException("Can't find any valid constructor.");
     }
 
+    /**
+     * Get declared methods that have the given annotation defined.
+     *
+     * @param object     object instance
+     * @param annotation annotation to look for
+     * @return list of methods
+     */
     public static List<Method> getDeclaredMethodsWithAnnotation(final Object object,
             final Class<? extends Annotation> annotation) {
         if (object == null) {

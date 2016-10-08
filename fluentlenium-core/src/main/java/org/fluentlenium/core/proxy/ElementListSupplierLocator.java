@@ -13,10 +13,20 @@ import java.util.List;
 public class ElementListSupplierLocator implements ElementLocator {
     private final Supplier<List<WebElement>> elementsSupplier;
 
-    public ElementListSupplierLocator(final List<WebElement> elementsSupplier) {
-        this.elementsSupplier = Suppliers.ofInstance(elementsSupplier);
+    /**
+     * Creates a new element list supplier locator
+     *
+     * @param elements element list instance
+     */
+    public ElementListSupplierLocator(final List<WebElement> elements) {
+        this.elementsSupplier = Suppliers.ofInstance(elements);
     }
 
+    /**
+     * Creates a new element list supplier locator
+     *
+     * @param elementsSupplier element list supplier
+     */
     public ElementListSupplierLocator(final Supplier<List<WebElement>> elementsSupplier) {
         this.elementsSupplier = elementsSupplier;
     }

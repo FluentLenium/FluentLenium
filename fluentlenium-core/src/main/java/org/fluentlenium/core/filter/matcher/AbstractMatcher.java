@@ -2,14 +2,27 @@ package org.fluentlenium.core.filter.matcher;
 
 import java.util.regex.Pattern;
 
+/**
+ * Abstract search matcher.
+ */
 public abstract class AbstractMatcher {
     private String value;
     private Pattern pattern;
 
+    /**
+     * Creates a new abstract search matcher.
+     *
+     * @param value string predicate
+     */
     protected AbstractMatcher(final String value) {
         this.value = value;
     }
 
+    /**
+     * Creates a new abstract search matcher.
+     *
+     * @param value regular expression predicate
+     */
     protected AbstractMatcher(final Pattern value) {
         this.pattern = value;
     }
@@ -29,9 +42,14 @@ public abstract class AbstractMatcher {
      * @return matcher symbol
      */
     public String getMatcherSymbol() {
-        return getMatcherType() == null ? null : getMatcherType().getCssRepresentations();
+        return getMatcherType() == null ? null : getMatcherType().getCssRepresentation();
     }
 
+    /**
+     * Does this matcher supports CSS filtering.
+     *
+     * @return true if css filtering is supported, false otherwise
+     */
     public final boolean isCssFilterSupported() {
         return pattern == null && getMatcherSymbol() != null;
     }

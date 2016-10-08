@@ -27,6 +27,13 @@ public class LazyComponentList<T> implements List<T>, WrapsElements, LazyCompone
     @Getter(lazy = true)
     private final List<T> list = transformList();
 
+    /**
+     * Creates a new lazy component list.
+     *
+     * @param instantiator   component instantiator
+     * @param componentClass component class
+     * @param elements       underlying element list
+     */
     public LazyComponentList(final ComponentInstantiator instantiator, final Class<T> componentClass,
             final List<WebElement> elements) {
         this.componentClass = componentClass;
@@ -34,6 +41,11 @@ public class LazyComponentList<T> implements List<T>, WrapsElements, LazyCompone
         this.elements = elements;
     }
 
+    /**
+     * Transform the actual list into components.
+     *
+     * @return transformed list
+     */
     protected List<T> transformList() {
         final List<T> components = new ArrayList<>();
         final Map<WebElement, T> componentMap = new LinkedHashMap<>();
@@ -46,6 +58,11 @@ public class LazyComponentList<T> implements List<T>, WrapsElements, LazyCompone
         return components;
     }
 
+    /**
+     * First lazy components initialized event.
+     *
+     * @param componentMap components
+     */
     protected void fireLazyComponentsInitialized(final Map<WebElement, T> componentMap) {
         for (final LazyComponentsListener<T> listener : lazyComponentsListeners) {
             listener.lazyComponentsInitialized(componentMap);

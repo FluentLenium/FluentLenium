@@ -12,6 +12,14 @@ import java.util.List;
 public class FluentJavascript {
     private final Object result;
 
+    /**
+     * Creates a new fluent javascript.
+     *
+     * @param executor underlying javascript executor
+     * @param async    if true, scripts will be executed aynschronously, else it will be executed synchronously
+     * @param script   script source to execute
+     * @param args     script arguments
+     */
     public FluentJavascript(final JavascriptExecutor executor, final boolean async, final String script, final Object... args) {
         if (async) {
             this.result = executor.executeAsyncScript(script, args);

@@ -128,7 +128,7 @@ public class ProxiesTest {
     public void testAlreadyLoadedElementsShouldBeLoaded() {
         final WebElement webElement = LocatorProxies.createWebElement(element1);
 
-        assertThat(LocatorProxies.isLoaded(webElement)).isTrue();
+        assertThat(LocatorProxies.loaded(webElement)).isTrue();
         assertThat(((WrapsElement) webElement).getWrappedElement()).isSameAs(element1);
     }
 
@@ -136,7 +136,7 @@ public class ProxiesTest {
     public void testAlreadyLoadedElementListShouldBeLoaded() {
         final List<WebElement> webElementList = LocatorProxies.createWebElementList(Arrays.asList(element1, element2, element3));
 
-        assertThat(LocatorProxies.isLoaded(webElementList)).isTrue();
+        assertThat(LocatorProxies.loaded(webElementList)).isTrue();
         assertThat(((WrapsElements) webElementList).getWrappedElements()).containsExactly(element1, element2, element3);
     }
 
@@ -218,7 +218,7 @@ public class ProxiesTest {
         final WebElement webElement = LocatorProxies.createWebElement(locator);
         assertThat(webElement.toString()).isEqualTo("element1-locator (Lazy Element)");
 
-        assertThat(LocatorProxies.isLoaded(webElement)).isFalse();
+        assertThat(LocatorProxies.loaded(webElement)).isFalse();
 
         LocatorProxies.now(webElement);
 
@@ -235,7 +235,7 @@ public class ProxiesTest {
         final WebElement webElement = LocatorProxies.createWebElement(locator);
         assertThat(webElement.hashCode()).isEqualTo(2048 + locator.hashCode());
 
-        assertThat(LocatorProxies.isLoaded(webElement)).isFalse();
+        assertThat(LocatorProxies.loaded(webElement)).isFalse();
 
         LocatorProxies.now(webElement);
 
@@ -258,37 +258,37 @@ public class ProxiesTest {
 
         assertThat(webElement).isNotEqualTo(otherWebElement);
 
-        assertThat(LocatorProxies.isLoaded(webElement)).isFalse();
-        assertThat(LocatorProxies.isLoaded(sameWebElement)).isFalse();
-        assertThat(LocatorProxies.isLoaded(otherWebElement)).isFalse();
+        assertThat(LocatorProxies.loaded(webElement)).isFalse();
+        assertThat(LocatorProxies.loaded(sameWebElement)).isFalse();
+        assertThat(LocatorProxies.loaded(otherWebElement)).isFalse();
 
         LocatorProxies.now(webElement);
 
         assertThat(webElement).isEqualTo(sameWebElement);
 
-        assertThat(LocatorProxies.isLoaded(webElement)).isTrue();
-        assertThat(LocatorProxies.isLoaded(sameWebElement)).isTrue();
-        assertThat(LocatorProxies.isLoaded(otherWebElement)).isFalse();
+        assertThat(LocatorProxies.loaded(webElement)).isTrue();
+        assertThat(LocatorProxies.loaded(sameWebElement)).isTrue();
+        assertThat(LocatorProxies.loaded(otherWebElement)).isFalse();
 
         LocatorProxies.reset(webElement);
         LocatorProxies.reset(sameWebElement);
         LocatorProxies.reset(otherWebElement);
 
-        assertThat(LocatorProxies.isLoaded(webElement)).isFalse();
-        assertThat(LocatorProxies.isLoaded(sameWebElement)).isFalse();
-        assertThat(LocatorProxies.isLoaded(otherWebElement)).isFalse();
+        assertThat(LocatorProxies.loaded(webElement)).isFalse();
+        assertThat(LocatorProxies.loaded(sameWebElement)).isFalse();
+        assertThat(LocatorProxies.loaded(otherWebElement)).isFalse();
 
         LocatorProxies.now(webElement);
 
         assertThat(sameWebElement).isEqualTo(webElement);
 
-        assertThat(LocatorProxies.isLoaded(webElement)).isTrue();
-        assertThat(LocatorProxies.isLoaded(sameWebElement)).isTrue();
-        assertThat(LocatorProxies.isLoaded(otherWebElement)).isFalse();
+        assertThat(LocatorProxies.loaded(webElement)).isTrue();
+        assertThat(LocatorProxies.loaded(sameWebElement)).isTrue();
+        assertThat(LocatorProxies.loaded(otherWebElement)).isFalse();
 
         assertThat(webElement).isNotEqualTo(otherWebElement);
 
-        assertThat(LocatorProxies.isLoaded(otherWebElement)).isTrue();
+        assertThat(LocatorProxies.loaded(otherWebElement)).isTrue();
     }
 
     @Test
@@ -302,27 +302,27 @@ public class ProxiesTest {
         final ElementLocator otherLocator = mock(ElementLocator.class);
         final WebElement otherWebElement = LocatorProxies.createWebElement(otherLocator);
 
-        assertThat(LocatorProxies.isLoaded(webElement)).isFalse();
-        assertThat(LocatorProxies.isPresent(webElement)).isTrue();
-        assertThat(LocatorProxies.isLoaded(webElement)).isTrue();
+        assertThat(LocatorProxies.loaded(webElement)).isFalse();
+        assertThat(LocatorProxies.present(webElement)).isTrue();
+        assertThat(LocatorProxies.loaded(webElement)).isTrue();
 
-        assertThat(LocatorProxies.isLoaded(otherWebElement)).isFalse();
-        assertThat(LocatorProxies.isPresent(otherWebElement)).isFalse();
-        assertThat(LocatorProxies.isLoaded(otherWebElement)).isFalse();
+        assertThat(LocatorProxies.loaded(otherWebElement)).isFalse();
+        assertThat(LocatorProxies.present(otherWebElement)).isFalse();
+        assertThat(LocatorProxies.loaded(otherWebElement)).isFalse();
 
         final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
 
-        assertThat(LocatorProxies.isLoaded(webElementList)).isFalse();
-        assertThat(LocatorProxies.isPresent(webElementList)).isTrue();
-        assertThat(LocatorProxies.isLoaded(webElementList)).isTrue();
+        assertThat(LocatorProxies.loaded(webElementList)).isFalse();
+        assertThat(LocatorProxies.present(webElementList)).isTrue();
+        assertThat(LocatorProxies.loaded(webElementList)).isTrue();
 
         when(locator.findElements()).thenReturn(Collections.<WebElement>emptyList());
 
         LocatorProxies.reset(webElementList);
 
-        assertThat(LocatorProxies.isLoaded(webElementList)).isFalse();
-        assertThat(LocatorProxies.isPresent(webElementList)).isFalse();
-        assertThat(LocatorProxies.isLoaded(webElementList)).isTrue();
+        assertThat(LocatorProxies.loaded(webElementList)).isFalse();
+        assertThat(LocatorProxies.present(webElementList)).isFalse();
+        assertThat(LocatorProxies.loaded(webElementList)).isTrue();
     }
 
     @Test
@@ -342,7 +342,7 @@ public class ProxiesTest {
         final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
         final WebElement first = LocatorProxies.first(webElementList);
 
-        assertThat(LocatorProxies.isLoaded(first)).isFalse();
+        assertThat(LocatorProxies.loaded(first)).isFalse();
         assertThat(first).isEqualTo(element1);
     }
 
@@ -354,7 +354,7 @@ public class ProxiesTest {
         final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
         final WebElement last = LocatorProxies.last(webElementList);
 
-        assertThat(LocatorProxies.isLoaded(last)).isFalse();
+        assertThat(LocatorProxies.loaded(last)).isFalse();
         assertThat(last).isEqualTo(element3);
     }
 
@@ -366,7 +366,7 @@ public class ProxiesTest {
         final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
         final WebElement atIndex = LocatorProxies.index(webElementList, 1);
 
-        assertThat(LocatorProxies.isLoaded(atIndex)).isFalse();
+        assertThat(LocatorProxies.loaded(atIndex)).isFalse();
         assertThat(atIndex).isEqualTo(element2);
     }
 
@@ -377,12 +377,12 @@ public class ProxiesTest {
 
         final WebElement webElement = LocatorProxies.createWebElement(locator);
 
-        assertThat(LocatorProxies.isPresent(webElement)).isTrue();
+        assertThat(LocatorProxies.present(webElement)).isTrue();
         webElement.isEnabled();
 
         when(element1.isEnabled()).thenThrow(StaleElementReferenceException.class);
 
-        assertThat(LocatorProxies.isPresent(webElement)).isFalse();
+        assertThat(LocatorProxies.present(webElement)).isFalse();
 
         reset(element1);
         when(element1.isEnabled()).thenThrow(StaleElementReferenceException.class);

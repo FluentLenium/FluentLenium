@@ -19,6 +19,13 @@ public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, Facto
     private Class<? extends Capabilities> capabilitiesClass;
     private boolean available;
 
+    /**
+     * Creates a new reflective capabilities factory.
+     *
+     * @param name                  factory name
+     * @param capabilitiesClassName capabilities class name
+     * @param args                  capabilities class constructor arguments
+     */
     public ReflectiveCapabilitiesFactory(final String name, final String capabilitiesClassName, final Object... args) {
         this.name = name;
         this.capabilitiesClassName = capabilitiesClassName;
@@ -31,6 +38,13 @@ public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, Facto
         }
     }
 
+    /**
+     * Creates a new reflective capabilities factory.
+     *
+     * @param name              factory name
+     * @param capabilitiesClass capabilities class
+     * @param args              capabilities class constructor arguments
+     */
     public ReflectiveCapabilitiesFactory(final String name, final Class<? extends Capabilities> capabilitiesClass,
             final Object... args) {
         this.name = name;
@@ -40,14 +54,25 @@ public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, Facto
         this.available = Capabilities.class.isAssignableFrom(this.capabilitiesClass);
     }
 
+    /**
+     * Get the capabilities class
+     *
+     * @return capabilities class
+     */
     public Class<? extends Capabilities> getCapabilitiesClass() {
         return capabilitiesClass;
     }
 
+    @Override
     public boolean isAvailable() {
         return available;
     }
 
+    /**
+     * Creates default capabilities.
+     *
+     * @return default capabilities
+     */
     protected DesiredCapabilities newDefaultCapabilities() {
         return null;
     }
@@ -65,6 +90,7 @@ public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, Facto
         }
     }
 
+    @Override
     public String[] getNames() {
         final List<String> names = new ArrayList<>(Arrays.asList(name));
         if (capabilitiesClass != null) {

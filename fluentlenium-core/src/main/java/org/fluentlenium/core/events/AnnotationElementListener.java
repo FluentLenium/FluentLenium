@@ -8,16 +8,34 @@ import org.openqa.selenium.WebDriver;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * Element annotation listener
+ */
 class AnnotationElementListener extends AbstractAnnotationListener implements ElementListener {
     private final Method method;
     private final String annotationName;
 
+    /**
+     * Creates a new element annotation listener
+     *
+     * @param method         method to call when the event occurs
+     * @param container      container to call when the event occurs
+     * @param annotationName name of the annotation
+     * @param priority       priority of this listener
+     */
     AnnotationElementListener(final Method method, final Object container, final String annotationName, final int priority) {
         super(container, priority);
         this.method = method;
         this.annotationName = annotationName;
     }
 
+    /**
+     * Get a function that retrieves argument value based on argument type.
+     *
+     * @param element element
+     * @param driver  driver
+     * @return function
+     */
     protected Function<Class<?>, Object> getArgsFunction(final FluentWebElement element, final WebDriver driver) {
         return new Function<Class<?>, Object>() {
             @Override

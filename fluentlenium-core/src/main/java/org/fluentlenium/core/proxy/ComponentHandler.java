@@ -17,6 +17,11 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement>
         implements InvocationHandler, LocatorHandler<WebElement> {
     private static final Method GET_WRAPPED_ELEMENT = getMethod(WrapsElement.class, "getWrappedElement");
 
+    /**
+     * Creates a new component handler
+     *
+     * @param locator element locator for this component
+     */
     public ComponentHandler(final ElementLocator locator) {
         super(locator);
         if (this.locator instanceof WrapsElement) {
@@ -79,9 +84,10 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement>
     }
 
     //CHECKSTYLE.OFF: IllegalThrows
+    @Override
     public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
         if (GET_WRAPPED_ELEMENT.equals(method)) {
-            return isLoaded() ? getLocatorResult() : proxy;
+            return loaded() ? getLocatorResult() : proxy;
         }
         return super.invoke(proxy, method, args);
     }

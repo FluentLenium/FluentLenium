@@ -6,8 +6,16 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Element assertions.
+ */
 public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAssert, FluentWebElement> {
 
+    /**
+     * Creates a new element assertions object.
+     *
+     * @param actual actual element
+     */
     public FluentWebElementAssert(final FluentWebElement actual) {
         super(actual, FluentWebElementAssert.class);
     }
@@ -104,6 +112,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     /**
      * Secure failWithMessage by escaping String.format tokens when called without arguments.
      *
+     * @param errorMessage error message
      * @see #failWithMessage(String, Object...)
      */
     protected void failWithMessage(final String errorMessage) {

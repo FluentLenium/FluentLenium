@@ -16,12 +16,18 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Perform FluentLenium search in given context.
+ * Perform element searchs in a given context.
  */
 public class Search implements SearchControl<FluentWebElement> {
     private final SearchContext searchContext;
     private final ComponentInstantiator instantiator;
 
+    /**
+     * Creates a new search object.
+     *
+     * @param context      search context
+     * @param instantiator component instantiator
+     */
     public Search(final SearchContext context, final ComponentInstantiator instantiator) {
         this.searchContext = context;
         this.instantiator = instantiator;

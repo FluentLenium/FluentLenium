@@ -13,5 +13,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface FactoryName {
+    /**
+     * Name of the factory
+     *
+     * @return factory name
+     */
     String value();
 }

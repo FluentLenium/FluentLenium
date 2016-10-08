@@ -11,13 +11,13 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import java.util.Date;
 
 public class FluentIntegTest extends FluentTest {
+    @Rule
+    public TestName name = new TestName();
+
     @Override
     public WebDriver newWebDriver() {
         return new HtmlUnitDriver(true);
     }
-
-    @Rule
-    public TestName name = new TestName();
 
     @Before
     public void printBefore() {
@@ -36,7 +36,7 @@ public class FluentIntegTest extends FluentTest {
     }
 
     @Override
-    public void initFluent(WebDriver webDriver) {
+    public void initFluent(final WebDriver webDriver) {
         System.out.println(
                 "Init WebDriver " + webDriver + " for test " + getClass().getName() + "." + name.getMethodName() + " [" + System
                         .identityHashCode(this) + "]");

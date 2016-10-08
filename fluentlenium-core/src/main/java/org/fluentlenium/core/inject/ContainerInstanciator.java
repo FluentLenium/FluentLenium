@@ -1,5 +1,8 @@
 package org.fluentlenium.core.inject;
 
+/**
+ * Creates container instances.
+ */
 public interface ContainerInstanciator {
 
     /**

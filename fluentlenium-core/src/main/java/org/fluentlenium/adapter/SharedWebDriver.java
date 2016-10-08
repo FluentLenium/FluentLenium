@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.internal.WrapsDriver;
 
 /**
- * A reference to a {@link WebDriver} used by a test.
+ * A reference to a shared {@link WebDriver} used by a test.
  */
 public class SharedWebDriver implements WrapsDriver {
 
@@ -17,6 +17,14 @@ public class SharedWebDriver implements WrapsDriver {
 
     private final DriverLifecycle driverLifecycle;
 
+    /**
+     * Creates a new shared WebDriver.
+     *
+     * @param driver          selenium WebDriver
+     * @param testClass       test class
+     * @param testName        test name
+     * @param driverLifecycle driver lifecycle
+     */
     public SharedWebDriver(final WebDriver driver, final Class<?> testClass, final String testName,
             final DriverLifecycle driverLifecycle) {
         this.driver = driver;
@@ -30,18 +38,38 @@ public class SharedWebDriver implements WrapsDriver {
         return this.driver;
     }
 
+    /**
+     * Get the underlying driver.
+     *
+     * @return selenium driver
+     */
     public WebDriver getDriver() {
         return driver;
     }
 
+    /**
+     * Get the test class.
+     *
+     * @return test class
+     */
     public Class<?> getTestClass() {
         return testClass;
     }
 
+    /**
+     * Get the test name.
+     *
+     * @return test name
+     */
     public String getTestName() {
         return testName;
     }
 
+    /**
+     * Get the driver lifecycle of this shared driver.
+     *
+     * @return driver lifecycle
+     */
     public DriverLifecycle getDriverLifecycle() {
         return driverLifecycle;
     }

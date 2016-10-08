@@ -4,6 +4,11 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;
 
+/**
+ * Control interface to search for elements.
+ *
+ * @param <E> fluent web element type
+ */
 public interface SearchControl<E extends FluentWebElement> {
     //CHECKSTYLE.OFF: MethodName
 

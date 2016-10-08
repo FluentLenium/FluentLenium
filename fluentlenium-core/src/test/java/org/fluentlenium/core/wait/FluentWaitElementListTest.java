@@ -239,7 +239,7 @@ public class FluentWaitElementListTest {
 
     @Test
     public void useCustomMessage() {
-        wait.useCustomMessage();
-        Mockito.verify(fluentControlWait).useCustomMessage();
+        wait.hasMessageDefined();
+        Mockito.verify(fluentControlWait).hasMessageDefined();
     }
 }

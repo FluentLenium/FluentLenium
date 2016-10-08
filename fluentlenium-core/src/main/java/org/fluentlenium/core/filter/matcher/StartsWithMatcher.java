@@ -2,20 +2,23 @@ package org.fluentlenium.core.filter.matcher;
 
 import java.util.regex.Pattern;
 
+/**
+ * Matcher checking that actual starts with input value.
+ */
 public class StartsWithMatcher extends AbstractMatcher {
     /**
-     * Constructor using a string as a value
+     * Creates a starts with matcher.
      *
-     * @param value as string for class constructor
+     * @param value input value
      */
     public StartsWithMatcher(final String value) {
         super(value);
     }
 
     /**
-     * Constructor using a pattern as a value
+     * Creates a starts with matcher.
      *
-     * @param value as pattern for class constructor
+     * @param value input value
      */
     public StartsWithMatcher(final Pattern value) {
         super(value);
@@ -23,7 +26,7 @@ public class StartsWithMatcher extends AbstractMatcher {
 
     @Override
     public MatcherType getMatcherType() {
-        return MatcherType.START_WITH;
+        return MatcherType.STARTS_WITH;
     }
 
     @Override

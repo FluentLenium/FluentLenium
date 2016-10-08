@@ -14,5 +14,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface LabelHint {
+    /**
+     * Array of label hints
+     *
+     * @return array of label hints
+     */
     String[] value();
 }

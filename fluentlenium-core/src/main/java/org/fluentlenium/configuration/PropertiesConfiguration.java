@@ -10,6 +10,11 @@ import java.util.Properties;
 public class PropertiesConfiguration extends AbstractPropertiesConfiguration {
     private final Properties properties;
 
+    /**
+     * Creates a new configuration based on properties object.
+     *
+     * @param properties properties object
+     */
     public PropertiesConfiguration(final Properties properties) {
         super("", PROPERTIES_PREFIX);
         this.properties = properties;

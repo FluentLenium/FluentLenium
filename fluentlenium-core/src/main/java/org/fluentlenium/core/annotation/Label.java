@@ -14,5 +14,12 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Label {
+    /**
+     * Label value.
+     * <p>
+     * If not defined, it will use the class name and field name as the label.
+     *
+     * @return label value
+     */
     String value() default "";
 }

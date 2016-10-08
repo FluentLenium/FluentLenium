@@ -3,15 +3,26 @@ package org.fluentlenium.core.conditions;
 import com.google.common.base.Predicate;
 
 /**
- * Conditions implementation for Integer.
+ * Conditions for integer
  */
 public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> implements IntegerConditions {
+    /**
+     * Creates a new conditions object on integer.
+     *
+     * @param integer underlying integer
+     */
     public IntegerConditionsImpl(final Integer integer) {
         super(integer);
     }
 
-    public IntegerConditionsImpl(final Integer object, final boolean negation) {
-        super(object, negation);
+    /**
+     * Creates a new conditions object on integer.
+     *
+     * @param integer  underlying integer
+     * @param negation negation value
+     */
+    public IntegerConditionsImpl(final Integer integer, final boolean negation) {
+        super(integer, negation);
     }
 
     @Override

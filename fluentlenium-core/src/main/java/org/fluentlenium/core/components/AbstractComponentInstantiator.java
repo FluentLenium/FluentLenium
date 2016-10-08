@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Abstract component instantiator.
+ */
 public abstract class AbstractComponentInstantiator implements ComponentInstantiator {
 
     @Override

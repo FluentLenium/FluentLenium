@@ -16,17 +16,26 @@ import static com.google.common.collect.Iterables.getLast;
 import static com.google.common.collect.Iterables.getOnlyElement;
 import static com.google.common.collect.Sets.difference;
 
+/**
+ * Execute actions on active window.
+ */
 public class WindowAction {
     private final FluentControl fluentControl;
     private final WebDriver driver;
 
-    public WindowAction(final FluentControl fluentControl, final WebDriver driver) {
+    /**
+     * Creates a new window action.
+     *
+     * @param control control interface
+     * @param driver  selenium driver
+     */
+    public WindowAction(final FluentControl control, final WebDriver driver) {
         this.driver = driver;
-        this.fluentControl = fluentControl;
+        this.fluentControl = control;
     }
 
     /**
-     * Gets the page title
+     * Gets the page title.
      *
      * @return page title text
      */
@@ -35,7 +44,7 @@ public class WindowAction {
     }
 
     /**
-     * Maximize the current window
+     * Maximize the current window.
      *
      * @return the WindowAction object itself
      */
@@ -45,7 +54,7 @@ public class WindowAction {
     }
 
     /**
-     * FullScreen the current window
+     * FullScreen the current window.
      *
      * @return the WindowAction object itself
      */
@@ -55,7 +64,7 @@ public class WindowAction {
     }
 
     /**
-     * Sets the current window size
+     * Sets the current window size.
      *
      * @param size size of the window
      * @return the WindowAction object itself
@@ -66,7 +75,7 @@ public class WindowAction {
     }
 
     /**
-     * Gets the current window size
+     * Gets the current window size.
      *
      * @return the current window size
      */
@@ -75,7 +84,7 @@ public class WindowAction {
     }
 
     /**
-     * Sets the current window position
+     * Sets the current window position.
      *
      * @param position position to set
      * @return the WindowAction object itself
@@ -86,7 +95,7 @@ public class WindowAction {
     }
 
     /**
-     * Gets the current window position
+     * Gets the current window position.
      *
      * @return the WindowAction object itself
      */
@@ -95,8 +104,9 @@ public class WindowAction {
     }
 
     /**
-     * Clicks button, which opens new window and switches to newly opened window
-     * this method doesn't force opening window in new window, we assume the code under test will open new window.
+     * Clicks button, which opens new window and switches to newly opened window.
+     * <p>
+     * This method doesn't force opening window in new window, we assume the code under test will open new window.
      *
      * @param button button to be clicked
      * @return handle of old (parent) window
@@ -117,7 +127,7 @@ public class WindowAction {
     }
 
     /**
-     * Opens new window
+     * Opens new window.
      *
      * @return handle of old (parent) window
      */
@@ -136,7 +146,9 @@ public class WindowAction {
 
     /**
      * Clicks button, which closes current window and switches to last window (in set returned by
-     * {@link WebDriver#getWindowHandles()}). If the last window is not the target window, use {@link #switchTo(String)}
+     * {@link WebDriver#getWindowHandles()}).
+     * <p>
+     * If the last window is not the target window, use {@link #switchTo(String)}
      * to focus on desired window
      *
      * @param button button to be clicked
@@ -145,20 +157,20 @@ public class WindowAction {
         final String currentWindowHandle = driver.getWindowHandle();
         button.click();
 
-        fluentControl.await().untilWindow(currentWindowHandle).isNotDisplayed();
+        fluentControl.await().untilWindow(currentWindowHandle).notDisplayed();
 
         switchToLast();
     }
 
     /**
-     * Close the current window
+     * Close the current window.
      */
     public void close() {
         driver.close();
     }
 
     /**
-     * Switches to parent frame
+     * Switches to parent frame.
      *
      * @return the WindowAction object itself
      */
@@ -168,7 +180,7 @@ public class WindowAction {
     }
 
     /**
-     * Switches to lastly opened window
+     * Switches to lastly opened window.
      *
      * @return the WindowAction object itself
      */
@@ -180,7 +192,7 @@ public class WindowAction {
     }
 
     /**
-     * Switches to lastly opened window excluding the one provided as a parameter
+     * Switches to lastly opened window excluding the one provided as a parameter.
      *
      * @param windowHandleToExclude - if list size is greater then one it will be removed
      * @return the WindowAction object itself
@@ -197,7 +209,7 @@ public class WindowAction {
     }
 
     /**
-     * Switches to particular window by handle
+     * Switches to particular window by handle.
      *
      * @param windowHandle window handle reference as a String
      * @return the WindowAction object itself
@@ -208,7 +220,7 @@ public class WindowAction {
     }
 
     /**
-     * Gets the current window object
+     * Gets the current window object.
      *
      * @return the WebDriver.Window object
      */

@@ -47,28 +47,28 @@ public class FluentWaitWindowMatcherTest {
     public void testWindow() {
         when(fluent.getDriver()).thenReturn(webDriver);
 
-        final FluentWaitWindowMatcher matcher = new FluentWaitWindowMatcher(wait, "testWindow");
+        final FluentWaitWindowConditions matcher = new FluentWaitWindowConditions(wait, "testWindow");
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.isDisplayed();
+                matcher.displayed();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
         verify(webDriver, atLeastOnce()).getWindowHandles();
         reset(webDriver);
 
-        matcher.isNotDisplayed();
+        matcher.notDisplayed();
 
         when(webDriver.getWindowHandles()).thenReturn(new HashSet<>(Arrays.asList("testWindow", "otherWindow")));
-        matcher.isDisplayed();
+        matcher.displayed();
 
         verify(webDriver, atLeastOnce()).getWindowHandles();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                matcher.isNotDisplayed();
+                matcher.notDisplayed();
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 

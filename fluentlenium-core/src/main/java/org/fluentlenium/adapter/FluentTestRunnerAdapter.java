@@ -7,23 +7,44 @@ import org.openqa.selenium.WebDriver;
 import java.util.List;
 
 /**
- * Generic Test Runner Adapter to FluentDriver.
+ * FluentLenium Test Runner Adapter.
+ * <p>
+ * Extends this class to provide FluentLenium support to your Test class.
  */
 public class FluentTestRunnerAdapter extends FluentAdapter {
     private final SharedMutator sharedMutator;
 
+    /**
+     * Creates a new test runner adapter.
+     */
     public FluentTestRunnerAdapter() {
         this(new DefaultFluentControlContainer());
     }
 
+    /**
+     * Creates a test runner adapter, with a custom driver container.
+     *
+     * @param driverContainer driver container
+     */
     public FluentTestRunnerAdapter(final FluentControlContainer driverContainer) {
         this(driverContainer, new DefaultSharedMutator());
     }
 
+    /**
+     * Creates a test runner adapter, with a custom shared mutator.
+     *
+     * @param sharedMutator shared mutator.
+     */
     public FluentTestRunnerAdapter(final SharedMutator sharedMutator) {
         this(new DefaultFluentControlContainer(), sharedMutator);
     }
 
+    /**
+     * Creates a test runner adapter, with a customer driver container and a customer shared mutator.
+     *
+     * @param driverContainer driver container
+     * @param sharedMutator   shared mutator
+     */
     public FluentTestRunnerAdapter(final FluentControlContainer driverContainer, final SharedMutator sharedMutator) {
         super(driverContainer);
         this.sharedMutator = sharedMutator;
@@ -190,7 +211,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testName  Test name
      */
     protected void failed(final Throwable e, final Class<?> testClass, final String testName) {
-        if (isFluentDriverAvailable()) {
+        if (isFluentControlAvailable()) {
             try {
                 if (getScreenshotMode() == TriggerMode.AUTOMATIC_ON_FAIL && canTakeScreenShot()) {
                     takeScreenShot(testClass.getSimpleName() + "_" + testName + ".png");

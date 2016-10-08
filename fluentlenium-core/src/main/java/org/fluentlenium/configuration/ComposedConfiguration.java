@@ -17,6 +17,12 @@ public class ComposedConfiguration implements Configuration {
     @Delegate
     private final ConfigurationMutator writableConfiguration; // NOPMD SingularField
 
+    /**
+     * Creates a new composed configuration
+     *
+     * @param writableConfiguration writable configuration
+     * @param configurations        readable configurations
+     */
     public ComposedConfiguration(final ConfigurationMutator writableConfiguration,
             final ConfigurationProperties... configurations) {
         this.writableConfiguration = writableConfiguration;

@@ -145,15 +145,15 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
     boolean value(String value);
 
     /**
-     * Check conditions on this element text.
+     * Check that this element has the given text.
      *
-     * @param anotherString string to compare with
+     * @param text string to compare with
      * @return true if the element has the given text, false otherwise.
      * @see StringConditions#equalTo(String)
      */
     @Message("has text=\"{0}\"")
     @NotMessage("does not have text=\"{0}\"")
-    boolean text(String anotherString);
+    boolean text(String text);
 
     /**
      * Check conditions on this element text.

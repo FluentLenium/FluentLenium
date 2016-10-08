@@ -64,7 +64,7 @@ public class FluentTestRunnerAdapterTest {
         adapter.getConfiguration().setHtmlDumpMode(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
         when(adapter.canTakeScreenShot()).thenReturn(true);
 
-        when(adapter.isFluentDriverAvailable()).thenReturn(false);
+        when(adapter.isFluentControlAvailable()).thenReturn(false);
 
         try {
             adapter.failed();
@@ -97,7 +97,7 @@ public class FluentTestRunnerAdapterTest {
         adapter.getConfiguration().setHtmlDumpMode(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
         when(adapter.canTakeScreenShot()).thenReturn(true);
 
-        when(adapter.isFluentDriverAvailable()).thenReturn(true);
+        when(adapter.isFluentControlAvailable()).thenReturn(true);
 
         try {
             adapter.failed("test");

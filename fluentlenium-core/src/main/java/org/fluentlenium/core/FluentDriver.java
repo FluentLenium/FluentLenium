@@ -53,7 +53,7 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
     @Delegate(types = ComponentInstantiator.class)
     private final ComponentsManager componentsManager;
 
-    private EventsRegistry events;
+    private final EventsRegistry events;
 
     private AnnotationsComponentListener eventsComponentsAnnotations;
 
@@ -73,6 +73,13 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
 
     private final WindowAction windowAction;
 
+    /**
+     * Wrap the driver into a Fluent driver.
+     *
+     * @param driver        underlying selenium driver
+     * @param configuration configuration
+     * @param adapter       adapter fluent control interface
+     */
     public FluentDriver(final WebDriver driver, final Configuration configuration, final FluentControl adapter) {
         this.configuration = configuration;
         this.componentsManager = new ComponentsManager(adapter);
@@ -403,6 +410,9 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
         return new Alert(getDriver());
     }
 
+    /**
+     * Quit the underlying web driver and release fluent driver resources.
+     */
     public void quit() {
         if (getDriver() != null) {
             getDriver().quit();
@@ -410,6 +420,9 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
         releaseFluent();
     }
 
+    /**
+     * Release fluent driver resources.
+     */
     public void releaseFluent() {
         fluentInjector.release();
         if (this.events != null) {

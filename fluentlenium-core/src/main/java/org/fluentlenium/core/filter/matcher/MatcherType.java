@@ -1,26 +1,52 @@
 package org.fluentlenium.core.filter.matcher;
 
 /**
- * Different fluentlenium.integration. actually supported by the framework.
- * PreFilter are fluentlenium.integration. than are supported by WebDriver as CSS Selector
- * PostFilter are used after the webdriver selection to fluentlenium.integration. the collection
+ * Matcher types actually actually supported by the framework.
  */
 public enum MatcherType {
-    CONTAINS("*"), START_WITH("^"), END_WITH("$"), CONTAINS_WORD("~"), EQUAL(""), NOT_CONTAINS(null), NOT_START_WITH(
-            null), NOT_END_WITH(null);
+    /**
+     * Contains.
+     */
+    CONTAINS("*"), /**
+     * Starts with.
+     */
+    STARTS_WITH("^"), /**
+     * Ends with.
+     */
+    ENDS_WITH("$"), /**
+     * Contains word.
+     */
+    CONTAINS_WORD("~"), /**
+     * Equal.
+     */
+    EQUALS(""), /**
+     * Not contains.
+     */
+    NOT_CONTAINS(null), /**
+     * Not starts with.
+     */
+    NOT_STARTS_WITH(null), /**
+     * Not ends with.
+     */
+    NOT_ENDS_WITH(null);
 
-    private String cssRepresentations;
+    private final String cssRepresentation;
 
-    MatcherType(final String cssRepresentations) {
-        this.cssRepresentations = cssRepresentations;
+    /**
+     * Creates a new matcher type enum value.
+     *
+     * @param cssRepresentation css representation.
+     */
+    MatcherType(final String cssRepresentation) {
+        this.cssRepresentation = cssRepresentation;
     }
 
     /**
-     * Return the css representations of the matcher
+     * Return the css representation of the matcher
      *
-     * @return CSS representations
+     * @return CSS representation
      */
-    public String getCssRepresentations() {
-        return cssRepresentations;
+    public String getCssRepresentation() {
+        return cssRepresentation;
     }
 }

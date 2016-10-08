@@ -6,28 +6,46 @@ import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-public class FluentWaitPageMatcher extends BaseWaitMatcher {
+/**
+ * Page wait conditions
+ */
+public class FluentWaitPageConditions extends BaseWaitConditions {
     private final FluentWait wait;
     private final WebDriver webDriver;
     private FluentPage page;
 
-    protected FluentWaitPageMatcher(final FluentWait wait, final WebDriver driver) {
+    /**
+     * Creates a new page wait conditions.
+     *
+     * @param wait   underlying wait
+     * @param driver driver
+     */
+    protected FluentWaitPageConditions(final FluentWait wait, final WebDriver driver) {
         this.wait = wait;
         this.webDriver = driver;
     }
 
-    protected FluentWaitPageMatcher(final FluentWait wait, final WebDriver driver, final FluentPage page) {
+    /**
+     * Creates a new page wait conditions.
+     *
+     * @param wait   underlying wait
+     * @param driver driver
+     * @param page   page to wait for
+     */
+    protected FluentWaitPageConditions(final FluentWait wait, final WebDriver driver, final FluentPage page) {
         this.wait = wait;
         this.webDriver = driver;
         this.page = page;
     }
 
     /**
-     * check if the page is loaded or not.
-     * Be careful, it needs javascript enabled. Throw an UnsupportedOperationException if not.
+     * Check if the current browser page is loaded.
+     * <p>
+     * Requires javascript to be enabled. Throw an UnsupportedOperationException if not.
+     *
+     * @return true
      */
-    public void isLoaded() {
-
+    public boolean isLoaded() {
         if (webDriver instanceof JavascriptExecutor) {
             final Predicate<FluentControl> isLoaded = new Predicate<FluentControl>() {
                 public boolean apply(final FluentControl fluent) {
@@ -40,12 +58,15 @@ public class FluentWaitPageMatcher extends BaseWaitMatcher {
         } else {
             throw new UnsupportedOperationException("Driver must support javascript execution to use this feature");
         }
+        return true;
     }
 
     /**
-     * check if ou are on the good page calling isAt.
+     * Check if browser is on the page.
+     *
+     * @return true
      */
-    public void isAt() {
+    public boolean isAt() {
         if (page == null) {
             throw new IllegalArgumentException(
                     "You should use a page argument when you call the untilPage method to specify the page you want to be. "
@@ -62,6 +83,6 @@ public class FluentWaitPageMatcher extends BaseWaitMatcher {
             }
         };
         until(wait, isLoaded, "");
-
+        return true;
     }
 }

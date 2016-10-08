@@ -35,13 +35,13 @@ public class WaitForPageToLoadTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void whenBrowserDoNotImplementsJavascriptExecutorThrowsException() {
-        final FluentWaitPageMatcher fluentWaitPageBuilder = new FluentWaitPageMatcher(wait, webDriver);
+        final FluentWaitPageConditions fluentWaitPageBuilder = new FluentWaitPageConditions(wait, webDriver);
         fluentWaitPageBuilder.isLoaded();
     }
 
     @Test
     public void whenBrowserImplementsJavascriptExecutorThenGoToPredicate() {
-        final FluentWaitPageMatcher fluentWaitPageBuilder = new FluentWaitPageMatcher(wait,
+        final FluentWaitPageConditions fluentWaitPageBuilder = new FluentWaitPageConditions(wait,
                 new WebDriverWithJavascriptExecutor());
         fluentWaitPageBuilder.isLoaded();
         verify(wait).untilPredicate(any(Predicate.class));

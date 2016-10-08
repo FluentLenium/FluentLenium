@@ -10,10 +10,16 @@ package org.fluentlenium.adapter;
  */
 public class IsolatedTest extends FluentAdapter {
 
+    /**
+     * Creates a new isolated test.
+     */
     public IsolatedTest() {
         initFluent(newWebDriver());
     }
 
+    /**
+     * Quite the test.
+     */
     public void quit() {
         if (getDriver() != null) {
             getDriver().quit();

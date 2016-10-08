@@ -8,24 +8,38 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+/**
+ * List of Component.
+ *
+ * @param <T> type of component
+ * @see Component
+ */
 public class ComponentList<T> extends DelegatingList<T> implements WrapsElements, LazyComponents {
     protected final Class<T> componentClass;
 
     protected final ComponentInstantiator instantiator;
-    protected final FluentControl fluentControl;
+    protected final FluentControl control;
     protected List<WebElement> proxy;
 
     @Delegate
     private LazyComponents lazyComponents = new NotLazyComponents(); // NOPMD UnusedPrivateField
 
-    public ComponentList(final Class<T> componentClass, final List<T> list, final FluentControl fluentControl,
+    /**
+     * Creates a new list of components
+     *
+     * @param componentClass component class
+     * @param list           underlying list of components
+     * @param control        control interface
+     * @param instantiator   component instantiator
+     */
+    public ComponentList(final Class<T> componentClass, final List<T> list, final FluentControl control,
             final ComponentInstantiator instantiator) {
         super(list);
         if (list instanceof LazyComponents) {
             lazyComponents = (LazyComponents) list;
         }
         this.componentClass = componentClass;
-        this.fluentControl = fluentControl;
+        this.control = control;
         this.instantiator = instantiator;
 
         if (this.list instanceof WrapsElements) {

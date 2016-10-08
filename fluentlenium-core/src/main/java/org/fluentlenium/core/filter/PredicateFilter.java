@@ -7,9 +7,17 @@ import org.fluentlenium.core.search.SearchFilter;
 
 import java.util.Collection;
 
+/**
+ * Search filter based on a predicate.
+ */
 public class PredicateFilter implements SearchFilter {
     private final Predicate<FluentWebElement> predicate;
 
+    /**
+     * Creates a new predicate search filter.
+     *
+     * @param predicate search filter
+     */
     PredicateFilter(final Predicate<FluentWebElement> predicate) {
         this.predicate = predicate;
     }

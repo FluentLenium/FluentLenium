@@ -29,7 +29,7 @@ public class FluentListSizeBuilder {
      */
     public FluentListAssert lessThan(final int size) {
         if (this.actualSize >= size) {
-            this.listAssert.internalFail(ACTUAL_SIZE + actualSize + " is not less than: " + size);
+            this.listAssert.failWithMessage(ACTUAL_SIZE + actualSize + " is not less than: " + size);
         }
         return this.listAssert;
     }
@@ -42,7 +42,7 @@ public class FluentListSizeBuilder {
      */
     public Object lessThanOrEqualTo(final int size) {
         if (this.actualSize > size) {
-            this.listAssert.internalFail(ACTUAL_SIZE + actualSize + " is not less than or equal to: " + size);
+            this.listAssert.failWithMessage(ACTUAL_SIZE + actualSize + " is not less than or equal to: " + size);
         }
         return this.listAssert;
     }
@@ -55,7 +55,7 @@ public class FluentListSizeBuilder {
      */
     public FluentListAssert greaterThan(final int size) {
         if (this.actualSize <= size) {
-            this.listAssert.internalFail(ACTUAL_SIZE + actualSize + " is not greater than: " + size);
+            this.listAssert.failWithMessage(ACTUAL_SIZE + actualSize + " is not greater than: " + size);
         }
         return this.listAssert;
     }
@@ -68,7 +68,7 @@ public class FluentListSizeBuilder {
      */
     public Object greaterThanOrEqualTo(final int size) {
         if (this.actualSize < size) {
-            this.listAssert.internalFail(ACTUAL_SIZE + actualSize + " is not greater than or equal to: " + size);
+            this.listAssert.failWithMessage(ACTUAL_SIZE + actualSize + " is not greater than or equal to: " + size);
         }
         return this.listAssert;
     }

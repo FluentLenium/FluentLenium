@@ -17,20 +17,50 @@ import java.util.concurrent.TimeUnit;
  * @see WaitHookOptions
  */
 @Inherited
-@Target({ ElementType.FIELD, ElementType.TYPE })
+@Target({ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Hook(WaitHook.class)
 @HookOptions(WaitHookOptions.class)
 public @interface Wait {
+    /**
+     * Maximum amount of time to wait before throwing a {@link org.openqa.selenium.TimeoutException}.
+     *
+     * @return timeout value
+     */
     long timeout() default -1L;
 
+    /**
+     * Time unit used for timeout value.
+     *
+     * @return time unit
+     */
     TimeUnit timeUnit() default TimeUnit.MILLISECONDS;
 
+    /**
+     * Time interval to wait between each condition check.
+     *
+     * @return polling interval value
+     */
     long pollingInterval() default -1L;
 
+    /**
+     * Time unit used for polling interval.
+     *
+     * @return time unit
+     */
     TimeUnit pollingTimeUnit() default TimeUnit.MILLISECONDS;
 
+    /**
+     * Enable this option to disable default exceptions from {@link org.fluentlenium.core.wait.FluentWait}.
+     *
+     * @return boolean
+     */
     boolean withNoDefaultsException() default false;
 
+    /**
+     * Throwables that will be ignored while waiting for a condition.
+     *
+     * @return array of ignored throwable
+     */
     java.lang.Class<? extends Throwable>[] ignoreAll() default {};
 }

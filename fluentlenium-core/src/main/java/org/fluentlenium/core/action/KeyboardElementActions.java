@@ -7,23 +7,44 @@ import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
 
+/**
+ * Execute actions with the keyboard on a defined element.
+ */
 public class KeyboardElementActions {
     private WebDriver driver;
     private Keyboard keyboard;
     private Mouse mouse;
     private final WebElement element;
 
+    /**
+     * Creates a new object to execute actions with the keyboard, using given selenium driver and element.
+     *
+     * @param driver  selenium driver
+     * @param element element on which to execute actions
+     */
     public KeyboardElementActions(final WebDriver driver, final WebElement element) {
         this.driver = driver;
         this.element = element;
     }
 
+    /**
+     * Creates a new object to execute actions with the keyboard, using selenium Keyboard and Mouse interfaces and element.
+     *
+     * @param keyboard keyboard interface
+     * @param mouse    mouse interface
+     * @param element  element on which to execute actions
+     */
     public KeyboardElementActions(final Keyboard keyboard, final Mouse mouse, final WebElement element) {
         this.keyboard = keyboard;
         this.mouse = mouse;
         this.element = element;
     }
 
+    /**
+     * Get selenium interactions actions.
+     *
+     * @return selenium actions
+     */
     protected org.openqa.selenium.interactions.Actions actions() {
         if (driver == null) {
             return new org.openqa.selenium.interactions.Actions(keyboard, mouse);

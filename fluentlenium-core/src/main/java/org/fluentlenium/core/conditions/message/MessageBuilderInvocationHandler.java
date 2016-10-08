@@ -10,10 +10,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Invocation handler that builds message based on called performed.
+ */
 public class MessageBuilderInvocationHandler implements InvocationHandler {
     private Object instance;
-    private List<MessageBuilderCall> calls;
+    private final List<MessageBuilderCall> calls;
 
+    /**
+     * Creates a new message builder invocation handler.
+     *
+     * @param context base context of the generated message
+     */
     public MessageBuilderInvocationHandler(final String context) {
         this(new ArrayList<>());
         final MessageBuilderCall messageBuilderCall = new MessageBuilderCall();
@@ -21,11 +29,22 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
         calls.add(messageBuilderCall);
     }
 
-    public <T> MessageBuilderInvocationHandler(final String context, final Object instance) {
+    /**
+     * Creates a new message builder invocation handler.
+     *
+     * @param context  base context of the generated message
+     * @param instance underlying wrapped instance. If not null, calls will also be performed on this instance.
+     */
+    public MessageBuilderInvocationHandler(final String context, final Object instance) {
         this(context);
         this.instance = instance;
     }
 
+    /**
+     * Creates a new message builder invocation handler, with initial calls.
+     *
+     * @param calls initial calls.
+     */
     public MessageBuilderInvocationHandler(final List<MessageBuilderCall> calls) {
         this.calls = calls;
     }
@@ -64,6 +83,12 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
         return instanceReturn;
     }
 
+    /**
+     * Build the message based on annotations from methods called previously.
+     *
+     * @return built message
+     * @throws IllegalStateException if one of the recorded call has no @Message/@NotMessage annotation.
+     */
     public String buildMessage() {
         final StringBuilder messageBuilder = new StringBuilder();
         for (final MessageBuilderCall call : calls) {

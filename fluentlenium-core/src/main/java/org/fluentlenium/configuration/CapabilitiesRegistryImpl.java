@@ -8,7 +8,13 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Capabilities registry default implementation.
+ */
 public class CapabilitiesRegistryImpl extends AbstractFactoryRegistryImpl<CapabilitiesFactory, ReflectiveCapabilitiesFactory> {
+    /**
+     * Creates a new capabilities registry.
+     */
     public CapabilitiesRegistryImpl() {
         super(CapabilitiesFactory.class, ReflectiveCapabilitiesFactory.class);
         registerDesiredCapabilities();

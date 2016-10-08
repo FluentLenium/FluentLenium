@@ -14,6 +14,12 @@ public class AtIndexElementLocator implements ElementLocator {
     private final int index;
     protected ElementLocator listLocator;
 
+    /**
+     * Creates a new at-index element locator.
+     *
+     * @param listLocator element list locator
+     * @param index       index to retrieve
+     */
     public AtIndexElementLocator(final ElementLocator listLocator, final int index) {
         this.listLocator = listLocator;
         this.index = index;

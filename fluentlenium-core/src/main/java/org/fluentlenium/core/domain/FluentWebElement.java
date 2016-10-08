@@ -43,7 +43,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * WebElementCustom include a Selenium WebElement. It provides a lot of shortcuts to make selenium more fluent
+ * Wraps a Selenium {@link WebElement}. It provides an enhanced API to control selenium element.
  */
 @SuppressWarnings({"PMD.GodClass", "PMD.ExcessivePublicCount"})
 public class FluentWebElement extends Component
@@ -64,15 +64,21 @@ public class FluentWebElement extends Component
     @Delegate
     private final FluentLabel<FluentWebElement> label;
 
-    public FluentWebElement(final WebElement webElement, final FluentControl fluentControl,
-            final ComponentInstantiator instantiator) {
-        super(webElement, fluentControl, instantiator);
+    /**
+     * Creates a new fluent web element.
+     *
+     * @param element      underlying element
+     * @param control      controle interface
+     * @param instantiator component instantiator
+     */
+    public FluentWebElement(final WebElement element, final FluentControl control, final ComponentInstantiator instantiator) {
+        super(element, control, instantiator);
 
         this.hookChainBuilder = new DefaultHookChainBuilder(this.control, this.instantiator);
-        this.search = new Search(webElement, this.instantiator);
-        this.axes = new Axes(webElement, this.instantiator);
-        this.mouseActions = new MouseElementActions(this.control.getDriver(), webElement);
-        this.keyboardActions = new KeyboardElementActions(this.control.getDriver(), webElement);
+        this.search = new Search(element, this.instantiator);
+        this.axes = new Axes(element, this.instantiator);
+        this.mouseActions = new MouseElementActions(this.control.getDriver(), element);
+        this.keyboardActions = new KeyboardElementActions(this.control.getDriver(), element);
         this.conditions = new WebElementConditions(this);
         this.label = new FluentLabelImpl<>(this, new Supplier<String>() {
             @Override
@@ -107,7 +113,7 @@ public class FluentWebElement extends Component
 
     @Override
     public boolean present() {
-        return LocatorProxies.isPresent(webElement);
+        return LocatorProxies.present(webElement);
     }
 
     @Override
@@ -132,7 +138,7 @@ public class FluentWebElement extends Component
 
     @Override
     public boolean loaded() {
-        return LocatorProxies.isLoaded(webElement);
+        return LocatorProxies.loaded(webElement);
     }
 
     /**
@@ -144,10 +150,20 @@ public class FluentWebElement extends Component
         return axes;
     }
 
+    /**
+     * Get a conditions object used to verify condition on this element.
+     *
+     * @return conditions object
+     */
     public FluentConditions conditions() {
         return conditions;
     }
 
+    /**
+     * Build a wait object to wait for a condition of this element.
+     *
+     * @return a wait object
+     */
     public FluentWaitElement await() {
         return new FluentWaitElement(control.await(), this);
     }
@@ -350,6 +366,11 @@ public class FluentWebElement extends Component
         return webElement.getSize();
     }
 
+    /**
+     * Converts this element as a single element list.
+     *
+     * @return list of element
+     */
     public FluentList<FluentWebElement> asList() {
         return instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, Arrays.asList(webElement));
     }
@@ -452,6 +473,11 @@ public class FluentWebElement extends Component
         return this;
     }
 
+    /**
+     * Save actual hook definitions to backup.
+     *
+     * @param hookDefinitionsBackup backup list
+     */
     /* default */ void setHookDefinitionsBackup(final List<HookDefinition<?>> hookDefinitionsBackup) {
         this.hookDefinitionsBackup = hookDefinitionsBackup;
     }

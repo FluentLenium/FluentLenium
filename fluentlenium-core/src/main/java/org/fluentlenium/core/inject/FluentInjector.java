@@ -51,13 +51,21 @@ public class FluentInjector implements FluentInjectControl {
     private final DefaultHookChainBuilder hookChainBuilder;
     private final EventsRegistry eventsRegistry;
 
-    public FluentInjector(final FluentControl fluentControl, final EventsRegistry eventsRegistry,
+    /**
+     * Creates a new injector.
+     *
+     * @param control           control interface
+     * @param eventsRegistry    events registry
+     * @param componentsManager components manager
+     * @param instanciator      container instantiator
+     */
+    public FluentInjector(final FluentControl control, final EventsRegistry eventsRegistry,
             final ComponentsManager componentsManager, final ContainerInstanciator instanciator) {
-        this.fluentControl = fluentControl;
+        this.fluentControl = control;
         this.eventsRegistry = eventsRegistry;
         this.componentsManager = componentsManager;
         this.containerInstanciator = instanciator;
-        this.hookChainBuilder = new DefaultHookChainBuilder(fluentControl, componentsManager.getInstantiator());
+        this.hookChainBuilder = new DefaultHookChainBuilder(control, componentsManager.getInstantiator());
     }
 
     /**
@@ -239,15 +247,7 @@ public class FluentInjector implements FluentInjectControl {
                             }
                         }
                     });
-                } /* else {
-                    Iterator componentIterator = ((Iterable) fieldValue.getComponent()).iterator();
-                    Iterator proxyIterator = (((Iterable) fieldValue.getProxy()).iterator());
-                    while (componentIterator.hasNext()) {
-                        Object component = componentIterator.next();
-                        SearchContext proxy = (SearchContext) proxyIterator.next();
-                        injectComponent(component, container, proxy);
-                    }
-                } */
+                }
             } else {
                 final ElementLocatorSearchContext componentSearchContext = new ElementLocatorSearchContext(locator);
                 injectComponent(fieldValue.getComponent(), container, componentSearchContext);

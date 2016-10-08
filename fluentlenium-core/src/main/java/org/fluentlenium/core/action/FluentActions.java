@@ -4,7 +4,10 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.WebElement;
 
 /**
- * All actions that can be used on the list or on a web element
+ * All actions that can be used on the list or on a web element.
+ *
+ * @param <T> {@code this} object type to chain method calls
+ * @param <E> type of fluent web element
  */
 public interface FluentActions<T, E extends FluentWebElement> {
     /**

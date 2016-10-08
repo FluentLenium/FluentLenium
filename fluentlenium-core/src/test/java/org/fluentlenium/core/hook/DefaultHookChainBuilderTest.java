@@ -52,11 +52,11 @@ public class DefaultHookChainBuilderTest {
         hookChainBuilder = new DefaultHookChainBuilder(fluentAdapter, instantiator) {
             @Override
             protected FluentHook<?> newInstance(final Class<? extends FluentHook<?>> hookClass, final FluentControl fluentControl,
-                    final ComponentInstantiator instantiator, final Supplier<WebElement> currentSupplier,
-                    final Supplier<ElementLocator> locator, final Supplier<String> toStringSupplier, final Object options)
+                    final ComponentInstantiator instantiator, final Supplier<WebElement> elementSupplier,
+                    final Supplier<ElementLocator> locatorSupplier, final Supplier<String> toStringSupplier, final Object options)
                     throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-                return spy(super.newInstance(hookClass, fluentControl, instantiator, currentSupplier, locator, toStringSupplier,
-                        options));
+                return spy(super.newInstance(hookClass, fluentControl, instantiator, elementSupplier, locatorSupplier,
+                        toStringSupplier, options));
             }
         };
     }

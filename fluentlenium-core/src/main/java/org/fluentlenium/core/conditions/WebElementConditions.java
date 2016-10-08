@@ -7,12 +7,23 @@ import org.fluentlenium.core.domain.FluentWebElement;
  * Fluent object to handle {@link org.openqa.selenium.support.ui.ExpectedConditions} on FluentWebElement in fluentlenium API.
  */
 public class WebElementConditions extends AbstractObjectConditions<FluentWebElement> implements FluentConditions {
+    /**
+     * Creates a new conditions object on element
+     *
+     * @param element underlying element
+     */
     public WebElementConditions(final FluentWebElement element) {
         super(element);
     }
 
-    public WebElementConditions(final FluentWebElement object, final boolean negation) {
-        super(object, negation);
+    /**
+     * Creates a new conditions object on element
+     *
+     * @param element  underlying element
+     * @param negation negation value
+     */
+    public WebElementConditions(final FluentWebElement element, final boolean negation) {
+        super(element, negation);
     }
 
     @Override
@@ -137,8 +148,8 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public boolean text(final String anotherString) {
-        return text().equalTo(anotherString);
+    public boolean text(final String text) {
+        return text().equalTo(text);
     }
 
     @Override

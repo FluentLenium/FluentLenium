@@ -3,6 +3,9 @@ package org.fluentlenium.core;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.openqa.selenium.WebDriver;
 
+/**
+ * Control interface for selenium underlying web driver.
+ */
 public interface SeleniumDriverControl {
     /**
      * Get the actual underlying Selenium WebDriver.

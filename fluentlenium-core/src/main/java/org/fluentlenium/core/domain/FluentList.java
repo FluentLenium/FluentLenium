@@ -13,7 +13,9 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
+ * Wraps a list of {@link FluentWebElement}. It provides an enhanced API to control list of selenium elements.
  *
+ * @param <E> type of element
  */
 public interface FluentList<E extends FluentWebElement>
         extends List<E>, FluentActions<FluentList<E>, E>, FluentProxyState<FluentList<E>>, SearchControl<E>,
@@ -249,9 +251,25 @@ public interface FluentList<E extends FluentWebElement>
     FluentListConditions one();
 
     /**
-     * Build a wait object to wait on particular conditions of this list.
+     * Build a wait object to wait for a condition of this element list.
      *
      * @return a wait object
      */
     FluentWaitElementList await();
+
+    /**
+     * Build a condition object on this element list that will match if each underlying element match,
+     * automatically waiting for condition to be verified.
+     *
+     * @return a condition object
+     */
+    FluentListConditions awaitUntilEach();
+
+    /**
+     * Build a condition object on this element list that will match if one or more underlying element match,
+     * automatically waiting for condition to be verified.
+     *
+     * @return a condition object
+     */
+    FluentListConditions awaitUntilOne();
 }

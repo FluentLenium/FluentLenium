@@ -18,6 +18,9 @@ import java.util.Map;
  * A singleton container for all running {@link SharedWebDriver} in the JVM.
  */
 public enum SharedWebDriverContainer {
+    /**
+     * Singleton
+     */
     INSTANCE;
 
     @Delegate
@@ -25,6 +28,9 @@ public enum SharedWebDriverContainer {
 
     private final SharedWebDriverContainerShutdownHook shutdownHook; // NOPMD SingularField
 
+    /**
+     * Creates a new Shared WebDriver Container.
+     */
     SharedWebDriverContainer() {
         shutdownHook = new SharedWebDriverContainerShutdownHook("SharedWebDriverContainerShutdownHook");
         Runtime.getRuntime().addShutdownHook(shutdownHook);
@@ -37,6 +43,9 @@ public enum SharedWebDriverContainer {
         private String testName;
     }
 
+    /**
+     * Shared web driver container singleton implementation.
+     */
     static class Impl {
         private SharedWebDriver jvmDriver;
 
@@ -45,14 +54,15 @@ public enum SharedWebDriverContainer {
         private final Map<ClassAndTestName, SharedWebDriver> methodDrivers = new HashMap<>();
 
         /**
-         * Get an existing or create a new driver for the given test, with the given shared driver
-         * strategy.
+         * Get an existing or create a new shared driver for the given test, with the given shared driver
+         * lifecycle strategy.
          *
          * @param webDriverFactory Supplier supplying new WebDriver instances
          * @param testClass        Test class
          * @param testName         Test name
-         * @param driverLifecycle  WebDriver lifecycle
-         * @return
+         * @param driverLifecycle  shared driver lifecycle
+         * @param <T>              type of test
+         * @return shared web driver
          */
         public <T> SharedWebDriver getOrCreateDriver(final Supplier<WebDriver> webDriverFactory, final Class<T> testClass,
                 final String testName, final DriverLifecycle driverLifecycle) {
@@ -87,6 +97,15 @@ public enum SharedWebDriverContainer {
             }
         }
 
+        /**
+         * Get the current driver for given test class.
+         *
+         * @param testClass       test class
+         * @param testName        test name
+         * @param driverLifecycle driver lifecycle
+         * @param <T>             type of test class
+         * @return shared WebDriver
+         */
         public <T> SharedWebDriver getDriver(final Class<T> testClass, final String testName,
                 final DriverLifecycle driverLifecycle) {
             synchronized (this) {
@@ -102,6 +121,11 @@ public enum SharedWebDriverContainer {
             }
         }
 
+        /**
+         * Quit an existing shared driver.
+         *
+         * @param driver Shared WebDriver
+         */
         public void quit(final SharedWebDriver driver) {
             synchronized (this) {
                 switch (driver.getDriverLifecycle()) {
@@ -154,7 +178,10 @@ public enum SharedWebDriverContainer {
         }
 
         /**
-         * Get all WebDriver of this container for given class.
+         * Get all shared WebDriver of this container for a given test class.
+         *
+         * @param testClass test class
+         * @return list of shared WebDriver
          */
         public List<SharedWebDriver> getTestClassDrivers(final Class<?> testClass) {
             final List<SharedWebDriver> drivers = new ArrayList<>();
@@ -175,6 +202,9 @@ public enum SharedWebDriverContainer {
             }
         }
 
+        /**
+         * Quit all shared web driver.
+         */
         public void quitAll() {
             synchronized (this) {
                 if (jvmDriver != null) {

@@ -1,5 +1,8 @@
 package org.fluentlenium.core.inject;
 
+/**
+ * Control interface for FluentLenium injection.
+ */
 public interface FluentInjectControl {
     /**
      * Inject object with FluentLenium resources.
