@@ -10,7 +10,7 @@ import java.util.Collection;
 public class PredicateFilter implements SearchFilter {
     private final Predicate<FluentWebElement> predicate;
 
-    PredicateFilter(Predicate<FluentWebElement> predicate) {
+    PredicateFilter(final Predicate<FluentWebElement> predicate) {
         this.predicate = predicate;
     }
 

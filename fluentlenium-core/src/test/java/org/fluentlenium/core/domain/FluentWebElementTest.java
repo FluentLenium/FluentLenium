@@ -35,6 +35,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
+@SuppressWarnings("PMD.ExcessivePublicCount")
 public class FluentWebElementTest {
 
     @Mock

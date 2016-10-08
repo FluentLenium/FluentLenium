@@ -18,8 +18,8 @@ public class EqualMatcher extends AbstractMatcher {
     }
 
     @Override
-    public boolean isSatisfiedBy(final String o) {
-        return CalculateService.equal(getPattern(), getValue(), o);
+    public boolean isSatisfiedBy(final String obj) {
+        return CalculateService.equal(getPattern(), getValue(), obj);
     }
 
 }

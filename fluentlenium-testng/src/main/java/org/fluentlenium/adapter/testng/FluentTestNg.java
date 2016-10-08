@@ -51,8 +51,8 @@ public class FluentTestNg extends FluentTestRunnerAdapter {
     }
 
     @BeforeMethod(alwaysRun = true)
-    public void beforeMethod(final Method m, final ITestContext context) {
-        final ITestNGMethod testNGMethod = getMethods(context).get(m);
+    public void beforeMethod(final Method method, final ITestContext context) {
+        final ITestNGMethod testNGMethod = getMethods(context).get(method);
         starting(testNGMethod.getRealClass(), testNGMethod.getMethodName());
     }
 

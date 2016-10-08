@@ -23,6 +23,7 @@ import static org.fluentlenium.core.filter.FilterConstructor.withTextContent;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 import static org.junit.Assert.fail;
 
+@SuppressWarnings({"PMD.GodClass", "PMD.ExcessivePublicCount"})
 public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     @Before
     public void before() {

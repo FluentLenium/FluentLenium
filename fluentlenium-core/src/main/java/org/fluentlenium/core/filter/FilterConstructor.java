@@ -143,7 +143,7 @@ public final class FilterConstructor {
      * @param predicate predicate
      * @return predicate filter
      */
-    public static PredicateFilter withPredicate(Predicate<FluentWebElement> predicate) {
+    public static PredicateFilter withPredicate(final Predicate<FluentWebElement> predicate) {
         return new PredicateFilter(predicate);
     }
 

@@ -30,6 +30,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
+@SuppressWarnings("PMD.ExcessivePublicCount")
 public class FluentWaitEachElementMatcherTest {
     @Mock
     private FluentDriver fluent;

@@ -19,6 +19,7 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
+@SuppressWarnings({"PMD.GodClass", "PMD.ExcessivePublicCount"})
 public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @FindBy(className = "small")
     private FluentList<FluentWebElement> smallElements;
@@ -285,7 +286,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().pollingEvery(800, TimeUnit.MILLISECONDS).untilPredicate(new Predicate<FluentControl>() {
             @Override
-            public boolean apply(final FluentControl o) {
+            public boolean apply(final FluentControl input) {
                 return true;
             }
         });
@@ -296,7 +297,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().atMost(1000).untilPredicate(new Predicate<FluentControl>() {
             @Override
-            public boolean apply(final FluentControl o) {
+            public boolean apply(final FluentControl input) {
                 return false;
             }
         });

@@ -45,7 +45,7 @@ public class ScreenshotTest {
 
 class CustomWebDriverNoScreenshot implements WebDriver {
 
-    public void get(final String s) {
+    public void get(final String url) {
         //Do nothing.
     }
 
@@ -100,7 +100,7 @@ class CustomWebDriverNoScreenshot implements WebDriver {
 
 class CustomWebDriverScreenshot implements WebDriver, TakesScreenshot {
 
-    public void get(final String s) {
+    public void get(final String url) {
         // Do nothing.
     }
 

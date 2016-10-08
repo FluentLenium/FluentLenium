@@ -15,7 +15,7 @@ public interface StringConditions extends Conditions<String> {
 
     @Message("contains \"{0}\"")
     @NotMessage("does not contain \"{0}\"")
-    boolean contains(CharSequence s);
+    boolean contains(CharSequence charSequence);
 
     @Message("starts with \"{0}\"")
     @NotMessage("does not start with \"{0}\"")

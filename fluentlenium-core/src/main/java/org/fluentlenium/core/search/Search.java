@@ -37,18 +37,18 @@ public class Search implements SearchControl<FluentWebElement> {
      */
     @Override
     public FluentList<FluentWebElement> find(final String selector, final SearchFilter... filters) {
-        final StringBuilder sb = new StringBuilder(selector);
+        final StringBuilder stringBuilder = new StringBuilder(selector);
         final List<SearchFilter> postFilterSelector = new ArrayList<>();
         if (filters != null && filters.length > 0) {
             for (final SearchFilter filter : filters) {
                 if (filter.isCssFilterSupported()) {
-                    sb.append(filter.getCssFilter());
+                    stringBuilder.append(filter.getCssFilter());
                 } else {
                     postFilterSelector.add(filter);
                 }
             }
         }
-        final List<WebElement> select = selectList(sb.toString());
+        final List<WebElement> select = selectList(stringBuilder.toString());
         final FluentListImpl fluentList = instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, select);
         if (postFilterSelector.isEmpty()) {
             return fluentList;

@@ -9,7 +9,7 @@ import org.openqa.selenium.Capabilities;
  */
 public class ConfigurationDefaults extends BaseConfiguration implements ConfigurationProperties {
     @Override
-    protected ConfigurationProperties getGlobalConfiguration() {
+    protected ConfigurationProperties getGlobalConfiguration() { // NOPMD UselessOverridingMethod
         // This class can be extended by end-user, so it has to be protected.
         return super.getGlobalConfiguration();
     }

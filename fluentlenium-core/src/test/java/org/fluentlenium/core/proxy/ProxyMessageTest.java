@@ -1,12 +1,6 @@
 package org.fluentlenium.core.proxy;
 
 import org.assertj.core.api.Assertions;
-import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.components.ComponentInstantiator;
-import org.fluentlenium.core.components.DefaultComponentInstantiator;
-import org.fluentlenium.core.hook.DefaultHookChainBuilder;
-import org.fluentlenium.core.hook.HookChainBuilder;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -33,19 +27,6 @@ public class ProxyMessageTest {
     @Mock
     private ElementLocator locator;
 
-    @Mock
-    private FluentControl fluentControl;
-
-    private HookChainBuilder hookChainBuilder;
-
-    private ComponentInstantiator componentInstantiator;
-
-    @Before
-    public void before() {
-        componentInstantiator = new DefaultComponentInstantiator(fluentControl);
-        hookChainBuilder = new DefaultHookChainBuilder(fluentControl, componentInstantiator);
-    }
-
     @Test
     public void testNoSuchElementMessage() {
         Mockito.when(locator.findElement()).thenReturn(element1);
@@ -53,7 +34,7 @@ public class ProxyMessageTest {
         final WebElement proxy = LocatorProxies.createWebElement(locator);
         LocatorProxies.now(proxy);
 
-        NoSuchElementException noSuchElementException = LocatorProxies.noSuchElement(proxy);
+        final NoSuchElementException noSuchElementException = LocatorProxies.noSuchElement(proxy);
 
         Assertions.assertThat(noSuchElementException).hasMessageStartingWith("Element locator (Lazy Element) is not present");
     }
@@ -65,7 +46,7 @@ public class ProxyMessageTest {
         final List<WebElement> proxy = LocatorProxies.createWebElementList(locator);
         LocatorProxies.now(proxy);
 
-        NoSuchElementException noSuchElementException = LocatorProxies.noSuchElement(proxy);
+        final NoSuchElementException noSuchElementException = LocatorProxies.noSuchElement(proxy);
 
         Assertions.assertThat(noSuchElementException)
                 .hasMessageStartingWith("Elements locator (Lazy Element List) is not present");

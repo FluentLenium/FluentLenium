@@ -45,7 +45,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * Util Class which offers some shortcut to webdriver methods
  */
-public class FluentDriver implements FluentControl {
+@SuppressWarnings("PMD.GodClass")
+public class FluentDriver implements FluentControl { // NOPMD GodClass
     @Delegate
     private final Configuration configuration;
 
@@ -90,12 +91,14 @@ public class FluentDriver implements FluentControl {
         this.cssControl = new CssControlImpl(adapter, adapter);
         this.windowAction = new WindowAction(adapter, driver);
 
-        configureDriver();
+        configureDriver(); // NOPMD ConstructorCallsOverridableMethod
     }
 
     private void configureDriver() {
         if (this.getDriver() != null) {
-            if (this.getDriver().manage() != null && this.getDriver().manage().timeouts() != null) {
+
+            if (this.getDriver().manage() != null && // NOPMD CollapsibleIfStatements
+                    this.getDriver().manage().timeouts() != null) {
                 if (this.configuration.getPageLoadTimeout() == null) {
                     this.getDriver().manage().timeouts().pageLoadTimeout(-1, TimeUnit.MILLISECONDS);
                 } else {
@@ -262,7 +265,7 @@ public class FluentDriver implements FluentControl {
     public String url() {
         String currentUrl = getDriver().getCurrentUrl();
 
-        String baseUrl = buildUrl(null);
+        final String baseUrl = buildUrl(null);
 
         if (currentUrl != null && baseUrl != null && currentUrl.startsWith(baseUrl)) {
             currentUrl = currentUrl.substring(baseUrl.length());
@@ -286,7 +289,7 @@ public class FluentDriver implements FluentControl {
     }
 
     @Override
-    public void goTo(String url) {
+    public void goTo(final String url) {
         if (url == null) {
             throw new IllegalArgumentException("Url is mandatory");
         }
@@ -295,7 +298,7 @@ public class FluentDriver implements FluentControl {
     }
 
     @Override
-    public void goToInNewTab(String url) {
+    public void goToInNewTab(final String url) {
         if (url == null) {
             throw new IllegalArgumentException("Url is mandatory");
         }

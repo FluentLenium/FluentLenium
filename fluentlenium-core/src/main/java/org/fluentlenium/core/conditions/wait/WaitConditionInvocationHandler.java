@@ -162,7 +162,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
     }
 
     @Override
-    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable { // NOPMD UseVarargs
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
         if (method.isAnnotationPresent(Negation.class)) {
             final Conditions<?> negationProxy = WaitConditionProxy.custom(conditionClass, wait, context, conditionSupplier);
             final WaitConditionInvocationHandler negationHandler = (WaitConditionInvocationHandler) Proxy

@@ -22,7 +22,7 @@ public class AttributeFilter implements SearchFilter {
      * @param attributeName attribute name
      * @param value         value to filter
      */
-    public AttributeFilter(String attributeName, final String value) {
+    public AttributeFilter(final String attributeName, final String value) {
         this.attributeName = attributeName;
         this.matcher = new EqualMatcher(value);
     }

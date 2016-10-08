@@ -82,14 +82,14 @@ class EventAdapter implements WebDriverEventListener {
     }
 
     @Override
-    public void beforeChangeValueOf(final WebElement element, final WebDriver driver, CharSequence[] charSequence) {
+    public void beforeChangeValueOf(final WebElement element, final WebDriver driver, final CharSequence[] charSequence) {
         this.listener
                 .beforeChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver,
                         charSequence);
     }
 
     @Override
-    public void afterChangeValueOf(final WebElement element, final WebDriver driver, CharSequence[] charSequence) {
+    public void afterChangeValueOf(final WebElement element, final WebDriver driver, final CharSequence[] charSequence) {
         this.listener
                 .afterChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver,
                         charSequence);
@@ -111,14 +111,14 @@ class EventAdapter implements WebDriverEventListener {
     }
 
     @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        final EventAdapter that = (EventAdapter) o;
+        final EventAdapter that = (EventAdapter) obj;
         return Objects.equals(listener, that.listener);
     }
 

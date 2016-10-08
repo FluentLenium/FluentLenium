@@ -31,7 +31,7 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
     }
 
     @Override
-    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable { // NOPMD UseVarargs
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
         Object instanceReturn = null;
         if (instance != null) {
             instanceReturn = method.invoke(instance, args);

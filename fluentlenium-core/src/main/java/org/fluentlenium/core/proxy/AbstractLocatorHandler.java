@@ -25,6 +25,7 @@ import java.util.Objects;
  *
  * @param <T> type of underlying object.
  */
+@SuppressWarnings("PMD.GodClass")
 public abstract class AbstractLocatorHandler<T> implements InvocationHandler, LocatorHandler<T> {
     private static final Method TO_STRING = getMethod(Object.class, "toString");
     private static final Method EQUALS = getMethod(Object.class, "equals", Object.class);
@@ -105,9 +106,9 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     protected abstract WebElement getElement();
 
     public NoSuchElementException noSuchElement() {
-        FluentConditions messageBuilder = MessageProxy.builder(FluentConditions.class, getMessageContext());
+        final FluentConditions messageBuilder = MessageProxy.builder(FluentConditions.class, getMessageContext());
         messageBuilder.present();
-        String message = MessageProxy.message(messageBuilder);
+        final String message = MessageProxy.message(messageBuilder);
         return new NoSuchElementException(message);
     }
 
@@ -180,7 +181,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     }
 
     @Override
-    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable { // NOPMD UseVarargs
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
         if (TO_STRING.equals(method)) {
             return proxyToString(result == null ? null : (String) invoke(method, args));
         }
@@ -226,7 +227,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     }
 
     //CHECKSTYLE.OFF: IllegalThrows
-    private Object invoke(final Method method, final Object[] args) throws Throwable { // NOPMD UseVarargs
+    private Object invoke(final Method method, final Object[] args) throws Throwable {
         final Object returnValue;
         try {
             returnValue = method.invoke(getInvocationTarget(method), args);
@@ -239,14 +240,14 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     //CHECKSTYLE.ON: IllegalThrows
 
     @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        final AbstractLocatorHandler<?> that = (AbstractLocatorHandler<?>) o;
+        final AbstractLocatorHandler<?> that = (AbstractLocatorHandler<?>) obj;
         return Objects.equals(locator, that.locator);
     }
 
