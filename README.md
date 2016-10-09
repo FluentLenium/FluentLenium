@@ -2,7 +2,6 @@
 
 [![Travis](https://img.shields.io/travis/FluentLenium/FluentLenium/1.x.svg)](https://travis-ci.org/FluentLenium/FluentLenium)
 [![Coveralls](https://img.shields.io/coveralls/FluentLenium/FluentLenium.svg?branch=1.x)](https://coveralls.io/github/FluentLenium/FluentLenium?branch=1.x)
-[![Code Climate](https://img.shields.io/codeclimate/github/FluentLenium/FluentLenium.svg)](https://codeclimate.com/github/FluentLenium/FluentLenium)
 
 FluentLenium is a framework that helps you write [Selenium](http://seleniumhq.org/) tests.
 FluentLenium provides a [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to the [Selenium Web Driver](http://www.seleniumhq.org/projects/webdriver/).
