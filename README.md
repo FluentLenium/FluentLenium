@@ -99,7 +99,7 @@ public class DuckDuckGoTest extends FluentTest {
 
 - Run as a JUnit test.
 
-[More FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/fluentlenium-examples).
+[More FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/examples).
 
 # Documentation
 

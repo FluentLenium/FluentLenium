@@ -98,7 +98,7 @@ public class DuckDuckGoTest extends FluentTest {
 
 - Run as a JUnit test.
 
-[More FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/fluentlenium-examples).
+[More FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/examples).
 
 ## Fluent Test
 
@@ -974,7 +974,7 @@ public void click() {
 }
 ```
 
-[Example sources are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/fluentlenium-examples/src/test/java/org/fluentlenium/examples/hooks).
+[Example sources are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/examples/quickstart/src/test/java/org/fluentlenium/examples/hooks).
 
 You may also read [sources for @Wait hook](https://github.com/FluentLenium/FluentLenium/tree/master/fluentlenium-core/src/main/java/org/fluentlenium/core/hook/wait) to read how it's implemented.
 
