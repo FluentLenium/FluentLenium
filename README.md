@@ -4,6 +4,7 @@
 [![Coveralls](https://img.shields.io/coveralls/FluentLenium/FluentLenium.svg)](https://coveralls.io/github/FluentLenium/FluentLenium)
 [![Code Climate](https://img.shields.io/codeclimate/github/FluentLenium/FluentLenium.svg)](https://codeclimate.com/github/FluentLenium/FluentLenium)
 [![Code Climate Issues](https://img.shields.io/codeclimate/issues/github/FluentLenium/FluentLenium.svg)](https://codeclimate.com/github/FluentLenium/FluentLenium/issues)
+[![Maven Central](https://img.shields.io/maven-central/v/org.fluentlenium/fluentlenium-parent.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.fluentlenium%22%20AND%20a%3A%22fluentlenium-parent%22)
 
 FluentLenium helps you writing readable, reusable, reliable, and resilient UI functionnal tests for the browser.
 
