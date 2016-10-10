@@ -1,7 +1,10 @@
-FluentLenium Migration Guidelines (0.x to 1.x)
-==============================================
+---
+layout: page
+title: Migration
+subtitle: Guidelines to migrate from 0.13.2 to 1.0 or 3.0
+---
 
-FluentLenium 1.0 brings many new features but also comes with breaking changes.
+FluentLenium 1.0 and 3.0 brings many new features but also comes with breaking changes.
 
 If you have some tests written using previous version, reading this guideline should help you to migrate.
 

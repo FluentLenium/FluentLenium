@@ -26,6 +26,7 @@ navbar-links:
   Home: ""
   News: "news"
   Docs: "docs"
+  Migration: "migration/from-0.13.2-to-1.0-or-3.0"
   About: "about"
   Github:
     - Sources: "https://github.com/FluentLenium/FluentLenium"
