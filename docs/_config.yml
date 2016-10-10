@@ -24,6 +24,7 @@ description: Functional testing automation framework
 # List of links in the navigation bar
 navbar-links:
   Home: ""
+  News: "news"
   Docs: "docs"
   About: "about"
   Github:
@@ -97,6 +98,7 @@ markdown: kramdown
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
 paginate: 5
+paginate_path: "/news/page:num/"
 
 kramdown:
   input: GFM
