@@ -1344,6 +1344,7 @@ You can use the Surefire maven plugin for example.
 ```
 
 **TestNG test suite file**
+
 ```xml
 <suite name="Parallel tests" parallel="tests" thread-count="10">
     <test name="Home Page Tests" parallel="methods" thread-count="10">
