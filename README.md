@@ -1,7 +1,7 @@
 # What is FluentLenium ?
 
-[![Travis](https://img.shields.io/travis/FluentLenium/FluentLenium/1.x.svg)](https://travis-ci.org/FluentLenium/FluentLenium)
-[![Coveralls](https://img.shields.io/coveralls/FluentLenium/FluentLenium.svg?branch=1.x)](https://coveralls.io/github/FluentLenium/FluentLenium?branch=1.x)
+[![Travis](https://img.shields.io/travis/FluentLenium/FluentLenium/support/1.x.svg)](https://travis-ci.org/FluentLenium/FluentLenium)
+[![Coveralls](https://img.shields.io/coveralls/FluentLenium/FluentLenium.svg?branch=support/1.x)](https://coveralls.io/github/FluentLenium/FluentLenium?branch=1.x)
 [![Website](https://img.shields.io/website-up-down-green-red/http/fluentlenium.org.svg)](http://fluentlenium.org)
 
 FluentLenium helps you writing readable, reusable, reliable, and resilient UI functionnal tests for the browser.
@@ -87,7 +87,7 @@ public class DuckDuckGoTest extends FluentTest {
 
 # Documentation (1.x)
 
-Full documentation is available in the [docs sources directory](https://github.com/FluentLenium/FluentLenium/tree/1.x/docs).
+Full documentation is available in the [docs sources directory](https://github.com/FluentLenium/FluentLenium/tree/support/1.x/docs).
 
 ## Contact Us
 If you have any comment, remark or issue, please open an issue on 
