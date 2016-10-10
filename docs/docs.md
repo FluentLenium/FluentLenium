@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Docs
+subtitle: FluentLenium
 ---
 
 # What is FluentLenium ?
