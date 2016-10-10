@@ -19,11 +19,11 @@ the assertion framework you want.
 
 # Choose the right version
 
-FluentLenium 1.x is in maintenance state, and no new feature will be added anymore. It requires Selenium 2 and
-Java 7, but can also be used with Java 8. Selenium 3 is not supported in this version though.
-
 FluentLenium 3.x is still in development and includes latest enhancements and features, but selenium 3 and Java 8 are 
 required to run it.
+
+FluentLenium 1.x is in maintenance state, and no new feature will be added anymore. It requires Selenium 2 and
+Java 7, but can also be used with Java 8. Selenium 3 is not supported in this version though.
 
 # Quickstart with JUnit and AssertJ
 
@@ -33,13 +33,13 @@ required to run it.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>1.0.0</version>
+    <version>3.0.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>1.0.0</version>
+    <version>3.0.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -51,7 +51,20 @@ required to run it.
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>htmlunit-driver</artifactId>
-    <version>2.21</version>
+    <version>2.23</version>
+    <scope>test</scope>
+</dependency>
+<!-- jetty websocket is currently required by htmlunit-driver -->
+<dependency>
+    <groupId>org.eclipse.jetty.websocket</groupId>
+    <artifactId>websocket-api</artifactId>
+    <version>9.3.5.v20151012</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.eclipse.jetty.websocket</groupId>
+    <artifactId>websocket-client</artifactId>
+    <version>9.3.5.v20151012</version>
     <scope>test</scope>
 </dependency>
 <dependency>
