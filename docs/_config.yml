@@ -5,7 +5,7 @@
 
 # If you are building a simple GitHub user page (http://username.github.io) then use these settings:
 url: "https://fluentlenium.org"
-baseurl: "/"
+baseurl: ""
 
 # If you are building a GitHub project page then use these settings:
 #url: "http://username.github.io/projectname"
@@ -23,11 +23,12 @@ description: Functional testing automation framework
 
 # List of links in the navigation bar
 navbar-links:
+  Home: ""
+  Documentation: "docs"
   About: "about"
-  Docs:
-    - New starters guide: "http://deanattali.com/beautiful-jekyll/"
-    - Readme: "docs"
-    - Features: "https://github.com/FluentLenium/FluentLenium/issues"
+  Github:
+    - Sources: "https://github.com/FluentLenium/FluentLenium"
+    - Issues: "https://github.com/FluentLenium/FluentLenium/issues"
     - Releases: "https://github.com/FluentLenium/FluentLenium/releases"
 
 # Image to show in the navigation bar - image must be a square (width = height)
@@ -40,24 +41,24 @@ avatar: "/img/avatar-icon.png"
 # Important: you must keep the "name" parameter, everything else you can remove
 author:
   name: FluentLenium
-  email: "fluentlenium@gmail.com"
-  facebook: yourname  # eg. daattali
+  #email: "fluentlenium@gmail.com"
+  #facebook: yourname  # eg. daattali
   github: FluentLenium    # eg. daattali
-  twitter: yourname   # eg. daattali
-  google-plus: +yourname   # eg. +DeanAttali or 109424658772469020925
-  linkedin: yourname  # eg. daattali
-  xing: yourname      # eg. daattali
-  stackoverflow: yourlink  # eg. "3943160/daattali"
-  snapchat: yourname  # eg. daattali
-  instagram: yourname # eg. daattali
-  youtube: yourlink   # eg. user/daattali or channel/daattali
-  spotify: yourname   # eg. daattali
+  #twitter: yourname   # eg. daattali
+  #google-plus: +yourname   # eg. +DeanAttali or 109424658772469020925
+  #linkedin: yourname  # eg. daattali
+  #xing: yourname      # eg. daattali
+  #stackoverflow: yourlink  # eg. "3943160/daattali"
+  #snapchat: yourname  # eg. daattali
+  #instagram: yourname # eg. daattali
+  #youtube: yourlink   # eg. user/daattali or channel/daattali
+  #spotify: yourname   # eg. daattali
 
 # Select which links to show in the footer
 footer-links-active:
   rss: false
   facebook: false
-  email: true
+  email: false
   twitter: false
   google-plus: false
   github: true
@@ -73,7 +74,7 @@ footer-links-active:
 share-links-active:
   twitter: true
   facebook: true
-  google: false
+  google: true
   linkedin: true
 
 # How to display the link to the website in the footer
