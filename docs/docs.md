@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Documentation
+title: Docs
 ---
 
 # What is FluentLenium ?
@@ -330,29 +330,29 @@ $(".fluent").loaded();
 
 ## Window actions
 
-Window actions are available by window() method in FluentTest class.
+Window actions are available on ```window()``` method.
 
-We introduced few additional methods in comparison to standard ones inherited from Selenium.
+Few additional methods are available from ones inherited from Selenium, like ```clickAndOpenNew```, 
+```openNewAndSwitch```, ```clickAndCloseCurrent``` and ```switchToLast```
 
-These methods are: clickAndOpenNew, openNewAndSwitch, clickAndCloseCurrent, switchToLast, switchToLast(previousWindowName)
+  - **clickAndOpenNew**
 
-### clickAndOpenNew
+    You should use this method when click action invoked on element should end up with new window opened.
+    This is just about waiting for new window to open, this method is not opening new browser window.
 
-You should use this method when click action invoked on element should end up with new window opened.
-This is just about waiting for new window to open, this method is not opening new browser window.
+  - **openNewAndSwitch**
 
-### openNewAndSwitch
+    This method opens new window and switches the context to newly opened one.
 
-This method opens new window and switches the context to newly oppened one.
+  - **clickAndCloseCurrent**
 
-### clickAndCloseCurrent
+    You should use this method when click action invoked on element should end up with current window closed.
+    This is just about waiting for new window to close, this method is not closing browser window.
 
-You should use this method when click action invoked on element should end up with current window closed.
-This is just about waiting for new window to close, this method is not closing browser window.
+  - **switchToLast**
 
-### switchToLast, switchToLast(windowHandleToExclude)
-First version (without windowHandleToExclude argument) tries to find last window and switches to it.
-Second version of this method (with argument) add certainty that switch result won't be the excluded handler of window.
+    This method switch to the last window. If argument is provided with the name of a window, ensure that the last
+    window has this name.
 
 ## Keyboard and Mouse actions
 
@@ -461,7 +461,7 @@ public void checkLoginFailed() {
 }
 ```
 
-Or if you have the [AssertJ](https://github.com/joel-costigliola/assertj-core) module (just static import org.fluentlenium.assertj.FluentLeniumAssertions.assertThat)
+Or using [AssertJ](https://github.com/joel-costigliola/assertj-core).
 
 ```java
 public void checkLoginFailed() {
@@ -670,7 +670,7 @@ FluentLenium brings Events Annotations and a Listener API to register those list
 
 ### Annotations
 
-You can use annotations from `org.fluentlenium.core.events.annotations` package to register any method as a event 
+You can use annotations from `core.events.annotations` package to register any method as an event 
 listener.
 
 Annotations can be used in a test class.
@@ -683,8 +683,8 @@ public void afterClickOn(FluentWebElement element);
 ```
 
 Annotations related to a WebElement can also be used in a component class.
-```java
 
+```java
 public class SomeComponent {
     private WebElement element;
     
@@ -746,7 +746,6 @@ There are multiple ways to make your driver wait for the result of an asynchrono
 FluentLenium provides a rich and fluent API in order to help you to handle AJAX calls.
 If you want to wait for at most 5 seconds until the number of elements corresponding to the until criteria (here the class fluent) has the requested size:
 
-
 ```java
 await().atMost(5, TimeUnit.SECONDS).until(".fluent").size(3);
 ```
@@ -782,7 +781,8 @@ private FluentWebElement button;
 await().atMost(5, TimeUnit.SECONDS).until(element).enabled();
 ```
 
-When running Java >= 8, you can use lambdas with `until`, `untilPredicate`, `untilElement` or `untilElements`.
+When running Java 8, you can use lambdas with `until`, `untilPredicate`, `untilElement` or `untilElements`.
+
 ```java
 await().atMost(5, TimeUnit.SECONDS).untilElement(() -> el(".button").enabled();
 await().atMost(5, TimeUnit.SECONDS).untilElements(() -> $(".button").each().enabled();
@@ -792,16 +792,17 @@ await().atMost(5, TimeUnit.SECONDS).untilPredicate((f) -> el(".button").enabled(
 await().atMost(5, TimeUnit.SECONDS).until(() -> el(".button").enabled());
 ```
 
-You can also check if the page is loaded using
+You can also check if the page is loaded.
+
 ```java
 await().atMost(1, NANOSECONDS).untilPage().loaded();
 ```
 
 If you want to wait until the page you want is the page that you are at, you can use:
+
 ```java
 await().atMost(5, TimeUnit.SECONDS).untilPage(myPage).isAt();
 ```
-This methods actually calls `myPage.isAt()`. If the `isAt()` method of the `myPage` object does not throw any exception during the time specified, then the framework will consider that the page is the one wanted.
 
 You can override `await()` method in your own test class to define default settings for wait objects:
 
@@ -909,7 +910,7 @@ public class ExampleHookOptions {
 }
 ```
 
-- Create the hook by extending of following class ```BaseHook<ExampleHookOptions>``` or ```BaseFluentHook<ExampleHookOptions>```. It should at least have a public 
+- Create the hook by extending ```BaseHook``` or ```BaseFluentHook```. It should at least have a public 
 constructor matching parent class, and generic type should be a hook option class.
 
 ```java
@@ -1052,7 +1053,7 @@ FluentLenium can be configured in many ways through configuration properties.
      Can be:
        - a `Capabilities` JSON Object string.
        - an URL pointing to a `Capabilities` JSON Object string.
-       - a static method available in `org.openqa.selenium.remote.DesiredCapabilities`, like `firefox` or `chrome`.
+       - a static method available in Selenium `DesiredCapabilities` class, like `firefox` or `chrome`.
        - a class name implementing `Capabilities`.
        - a reference to a `CapabilitiesFactory`.
 
@@ -1151,7 +1152,7 @@ FluentLenium can be configured in many ways through configuration properties.
     Set this to a class implementing ```ConfigurationProperties``` to provide the default values
     of the configuration properties.
 
-    Default value: ```org.fluentlenium.configuration.ConfigurationDefaults```.
+    Default value: ```ConfigurationDefaults```.
       
       
   - **configurationFactory**
@@ -1159,7 +1160,7 @@ FluentLenium can be configured in many ways through configuration properties.
      Set this to a class implementing ```ConfigurationFactory``` to customize the ways properties are read.
      This allow to configure properties from sources that are not supported by default FluentLenium.
      
-     Default value: ```org.fluentlenium.configuration.DefaultConfigurationFactory```.
+     Default value: ```DefaultConfigurationFactory```.
      
      
  Keep in mind that when those properties are defined through System Properties or Environment Variables, they need to
@@ -1381,6 +1382,7 @@ switchToDefault(); // Alternative method
 ```
 
 To switch to the iframe selected:
+
 ```java
 switchTo($("iframe#frameid"));
 ```

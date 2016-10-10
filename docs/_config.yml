@@ -24,7 +24,7 @@ description: Functional testing automation framework
 # List of links in the navigation bar
 navbar-links:
   Home: ""
-  Documentation: "docs"
+  Docs: "docs"
   About: "about"
   Github:
     - Sources: "https://github.com/FluentLenium/FluentLenium"
