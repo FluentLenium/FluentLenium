@@ -2,6 +2,7 @@
 
 [![Travis](https://img.shields.io/travis/FluentLenium/FluentLenium/1.x.svg)](https://travis-ci.org/FluentLenium/FluentLenium)
 [![Coveralls](https://img.shields.io/coveralls/FluentLenium/FluentLenium.svg?branch=1.x)](https://coveralls.io/github/FluentLenium/FluentLenium?branch=1.x)
+[![Maven Central](https://img.shields.io/maven-central/v/org.fluentlenium/fluentlenium-parent.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.fluentlenium%22%20AND%20a%3A%22fluentlenium-parent%22)
 
 FluentLenium is a framework that helps you write [Selenium](http://seleniumhq.org/) tests.
 FluentLenium provides a [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to the [Selenium Web Driver](http://www.seleniumhq.org/projects/webdriver/).
