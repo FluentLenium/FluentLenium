@@ -20,11 +20,11 @@ the assertion framework you want.
 
 # Choose the right version
 
-FluentLenium 1.x is in maintenance state, and no new feature will be added anymore. It requires Selenium 2 and
-Java 7, but can also be used with Java 8. Selenium 3 is not supported in this version though.
-
 FluentLenium 3.x is still in development and includes latest enhancements and features, but Selenium 3 and Java 8 are 
 required to run it.
+
+FluentLenium 1.x is in maintenance state, and no new feature will be added anymore. It requires Selenium 2 and
+Java 7, but can also be used with Java 8. Selenium 3 is not supported in this version though.
 
 # Quickstart with JUnit and AssertJ
 
