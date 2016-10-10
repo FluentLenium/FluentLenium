@@ -1419,9 +1419,9 @@ maximizeWindow();
 
 ## SNAPSHOT version (unstable!)
 
-A SNAPSHOT version is automatically packaged after each commit on master branch.
+A SNAPSHOT version is automatically packaged and deployed for github ```develop``` branch.
 
-This version can be very unstable and should be used for testing purpose only.
+This version can be unstable and should be used for testing purpose only.
 
 To use it, you need to declare an additional repository in the ```pom.xml``` of your project.
 
