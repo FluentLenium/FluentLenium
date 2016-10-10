@@ -5,6 +5,7 @@
 [![Code Climate](https://img.shields.io/codeclimate/github/FluentLenium/FluentLenium.svg)](https://codeclimate.com/github/FluentLenium/FluentLenium)
 [![Code Climate Issues](https://img.shields.io/codeclimate/issues/github/FluentLenium/FluentLenium.svg)](https://codeclimate.com/github/FluentLenium/FluentLenium/issues)
 [![Maven Central](https://img.shields.io/maven-central/v/org.fluentlenium/fluentlenium-parent.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.fluentlenium%22%20AND%20a%3A%22fluentlenium-parent%22)
+[![Website](https://img.shields.io/website-up-down-green-red/http/fluentlenium.org.svg)](http://fluentlenium.org)
 
 FluentLenium helps you writing readable, reusable, reliable, and resilient UI functionnal tests for the browser.
 
@@ -89,7 +90,7 @@ public class DuckDuckGoTest extends FluentTest {
 
 # Documentation
 
-Full documentation is available on [fluentlenium.org/docs](https://fluentlenium.org/docs), or in the 
+Full documentation is available on [fluentlenium.org](http://fluentlenium.org/docs), or in the 
 [docs sources directory](https://github.com/FluentLenium/FluentLenium/tree/develop/docs).
 
 ## Contact Us
