@@ -94,15 +94,19 @@ url-pretty: "fluentlenium.org"  # eg. "deanattali.com/beautiful-jekyll"
 # --- Don't need to touch anything below here (but you can if you want) --- #
 
 # Output options (more information on Jekyll's site)
-timezone: "Europe/London"
+timezone: "Europe/Paris"
 markdown: kramdown
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
 paginate: 5
 paginate_path: "/news/page:num/"
+excerpt_separator: "<!-- more -->"
 
 kramdown:
   input: GFM
+
+sass:
+    sass_dir: _sass
 
 # Default YAML values (more information on Jekyll's site)
 defaults:

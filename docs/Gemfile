@@ -2,5 +2,6 @@ source 'https://rubygems.org'
 
 gem 'execjs'
 gem 'therubyracer'
+gem 'sass'
 gem 'github-pages'
 gem 'jekyll-paginate'
