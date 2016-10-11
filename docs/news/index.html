@@ -2,6 +2,7 @@
 layout: page
 title: News
 subtitle: FluentLenium
+css: news.css
 ---
 <div class="posts-list">
     {% for post in paginator.posts %}
@@ -21,7 +22,7 @@ subtitle: FluentLenium
         </p>
 
         <div class="post-entry">
-            {{ post.excerpt | strip_html | xml_escape | truncatewords: 50 }}
+            {{ post.excerpt }}
             <a href="{{ post.url | prepend: site.baseurl }}" class="post-read-more">[Read&nbsp;More]</a>
         </div>
 
