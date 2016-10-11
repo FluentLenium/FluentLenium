@@ -22,10 +22,10 @@ the `WebDriver` to use. FluentLenium now provides configuration features includi
 `webDriver` and `capabilities` properties that should be enough for most use case.
 
 If you still need to instantiate the WebDriver manually, or if configuration
-features seems to apply in your environnment, `getDefaultDriver()` has been renamed to `newWebDriver()`
+features doesn't seem to integrates well in your environnment, `getDefaultDriver()` has been renamed to `newWebDriver()`
 and can still be overriden.
 
-Keep in mind that event features requires to wrap the `WebDriver` instance into `EventFiringWebDriver`.
+Keep in mind that events related features requires to wrap the `WebDriver` instance into `EventFiringWebDriver`.
 
 Search method names
 -------------------
@@ -63,7 +63,7 @@ Pages and Components
 --------------------
 
 - Each method available in `FluentTest` is now available in both `FluentPage` and `FluentWebElement`, allowing 
-implementation of complex any logic into Pages and Components.
+implementation of any logic into Pages and Components.
 - Ensure your Page Objects extends `FluentPage` and have a public empty constructor.
 - Ensure your Components extends `FluentWebElement` and have a constructor matching `FluentWebElement` constructor.
 
@@ -100,9 +100,9 @@ But using implicit waits may hard to diagnose delays when running tests.
  
 FluentLenium now advocates for never using implicit wait, in favor of using explicit waits only. FluentLenium hides the
 complexity of explicit waits so them become readable when invoked manually, and can even automate them before each action with the
-use of `@WaitHook` so you don't have to care about them.
+use of `@Wait` hook so you don't have to care about them.
 
-- `withDefaultSearchWait` has been removed. Use `@WaitHook` instead.
+- `withDefaultSearchWait` has been removed. Use `@Wait` instead.
 
 Something wrong ?
 ------
