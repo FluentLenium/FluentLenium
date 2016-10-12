@@ -1,7 +1,7 @@
 package org.fluentlenium.core.proxy;
 
-import com.google.common.base.Suppliers;
 import org.fluentlenium.core.domain.WrapsElements;
+import org.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class ElementListInstanceLocator extends ElementListSupplierLocator imple
      * @param elements element list instance
      */
     public ElementListInstanceLocator(final List<WebElement> elements) {
-        super(Suppliers.ofInstance(elements));
+        super(new SupplierOfInstance<>(elements));
     }
 
     @Override

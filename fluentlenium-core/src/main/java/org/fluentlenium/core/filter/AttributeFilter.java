@@ -58,7 +58,17 @@ public class AttributeFilter implements SearchFilter {
 
     @Override
     public String toString() {
-        return getCssFilter();
+        final StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("with ").append(getAttribut());
+
+        final String matcherRepr = matcher == null ? null : matcher.toString();
+        if (matcherRepr != null) {
+            stringBuilder.append(' ').append(matcherRepr).append(' ');
+        }
+
+        stringBuilder.append('"').append(matcher.getValue()).append('"');
+
+        return stringBuilder.toString();
     }
 
     @Override
@@ -67,7 +77,7 @@ public class AttributeFilter implements SearchFilter {
         if (matcherAttribute == null) {
             matcherAttribute = "";
         }
-        return "[" + attributeName.toLowerCase(Locale.ENGLISH) + matcherAttribute + "=\"" + matcher.getValue() + "\"]";
+        return "[" + getAttribut() + matcherAttribute + "=\"" + matcher.getValue() + "\"]";
     }
 
     @Override
