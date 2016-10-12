@@ -13,5 +13,12 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NoHook {
-
+    /**
+     * Hook annotations to remove.
+     * <p>
+     * If no annotation is provided, all hook will be removed.
+     *
+     * @return
+     */
+    Hook[] value() default {};
 }

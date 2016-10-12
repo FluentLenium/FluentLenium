@@ -2,6 +2,7 @@ package org.fluentlenium.core.inject;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.apache.commons.lang3.ArrayUtils;
 import org.fluentlenium.core.FluentContainer;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.annotation.Page;
@@ -16,6 +17,7 @@ import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.Hook;
+import org.fluentlenium.core.hook.HookControlImpl;
 import org.fluentlenium.core.hook.HookDefinition;
 import org.fluentlenium.core.hook.HookOptions;
 import org.fluentlenium.core.hook.NoHook;
@@ -30,10 +32,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * Handle injection of element proxies, @Page objects and @FindBy.
@@ -285,10 +289,10 @@ public class FluentInjector implements FluentInjectControl {
         Hook currentHookAnnotation = null;
         HookOptions currentHookOptionAnnotation = null;
 
-        applyNoHook(hookDefinitions, annotations);
-
         Annotation currentAnnotation = null;
         for (final Annotation annotation : annotations) {
+            applyNoHook(hookDefinitions, annotation);
+
             final Hook hookAnnotation = getHookAnnotation(annotation);
             if (hookAnnotation != null) {
                 currentAnnotation = annotation;
@@ -316,11 +320,15 @@ public class FluentInjector implements FluentInjectControl {
         }
     }
 
-    private void applyNoHook(final List<HookDefinition<?>> hookDefinitions, final Annotation[] annotations) {
-        for (final Annotation annotation : annotations) {
-            if (annotation instanceof NoHook) {
+    private void applyNoHook(final List<HookDefinition<?>> hookDefinitions, final Annotation annotation) {
+        if (annotation instanceof NoHook) {
+            final Hook[] value = ((NoHook) annotation).value();
+            if (ArrayUtils.isEmpty(value)) {
                 hookDefinitions.clear();
-                break;
+            } else {
+                final List<? extends Class<? extends FluentHook<?>>> toRemove = Arrays.stream(value).map(Hook::value)
+                        .collect(Collectors.toList());
+                HookControlImpl.removeHooksFromDefinitions(hookDefinitions, toRemove.toArray(new Class[toRemove.size()]));
             }
         }
     }

@@ -13,10 +13,8 @@ import org.fluentlenium.core.conditions.AtLeastOneElementConditions;
 import org.fluentlenium.core.conditions.EachElementConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.wait.WaitConditionProxy;
-import org.fluentlenium.core.hook.DefaultHookChainBuilder;
-import org.fluentlenium.core.hook.FluentHook;
-import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookControl;
+import org.fluentlenium.core.hook.HookControlImpl;
 import org.fluentlenium.core.hook.HookDefinition;
 import org.fluentlenium.core.label.FluentLabel;
 import org.fluentlenium.core.label.FluentLabelImpl;
@@ -41,12 +39,9 @@ import java.util.List;
  */
 @SuppressWarnings({"PMD.GodClass", "PMD.ExcessivePublicCount"})
 public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E> implements FluentList<E> {
-    private final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
-    private final HookChainBuilder hookChainBuilder;
+    private final FluentLabelImpl<FluentList<E>> label;
 
-    private List<HookDefinition<?>> hookDefinitionsBackup;
-
-    private final FluentLabelImpl<FluentListImpl<E>> label;
+    private final HookControlImpl<FluentList<E>> hookControl;
 
     /**
      * Creates a new fluent list.
@@ -59,7 +54,15 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     public FluentListImpl(final Class<E> componentClass, final List<E> list, final FluentControl control,
             final ComponentInstantiator instantiator) {
         super(componentClass, list, control, instantiator);
-        this.hookChainBuilder = new DefaultHookChainBuilder(control, instantiator);
+        this.hookControl = new HookControlImpl<>(this, proxy, control, instantiator, new Supplier<FluentList<E>>() {
+            @Override
+            public FluentList<E> get() {
+                final LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(proxy);
+                final ElementLocator locator = locatorHandler.getLocator();
+                final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
+                return instantiator.asComponentList(FluentListImpl.this.getClass(), componentClass, webElementList);
+            }
+        });
         this.label = new FluentLabelImpl<>(this, new Supplier<String>() {
             @Override
             public String get() {
@@ -69,8 +72,13 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Delegate
-    private FluentLabel<FluentListImpl<E>> getLabel() {
+    private FluentLabel<FluentList<E>> getLabel() {
         return label;
+    }
+
+    @Delegate
+    private HookControl<FluentList<E>> getHookControl() { //NOPMD UnusedPrivateMethod
+        return hookControl;
     }
 
     @Override
@@ -97,7 +105,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
                 component.withLabelHint(label.getLabelHints());
             }
             if (component instanceof HookControl) {
-                for (final HookDefinition definition : hookDefinitions) {
+                for (final HookDefinition definition : hookControl.getHookDefinitions()) {
                     component.withHook(definition.getHookClass(), definition.getOptions());
                 }
             }
@@ -118,7 +126,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
                 component.withLabelHint(label.getLabelHints());
             }
             if (component instanceof HookControl) {
-                for (final HookDefinition definition : hookDefinitions) {
+                for (final HookDefinition definition : hookControl.getHookDefinitions()) {
                     component.withHook(definition.getHookClass(), definition.getOptions());
                 }
             }
@@ -139,12 +147,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
                 component.withLabelHint(label.getLabelHints());
             }
             if (component instanceof HookControl) {
-                for (final HookDefinition definition : hookDefinitions) {
+                for (final HookDefinition definition : hookControl.getHookDefinitions()) {
                     component.withHook(definition.getHookClass(), definition.getOptions());
                 }
             }
             if (component instanceof FluentWebElement) {
-                component.setHookDefinitionsBackup(hookDefinitionsBackup);
+                component.setHookRestoreStack(hookControl.getHookRestoreStack());
             }
             return component;
         }
@@ -564,55 +572,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         }
 
         return instantiator.newComponentList(getClass(), componentClass, elements);
-    }
-
-    @Override
-    public FluentList<E> noHookInstance() {
-        final LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(proxy);
-        final ElementLocator locator = locatorHandler.getLocator();
-        final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
-        return instantiator.asComponentList(getClass(), componentClass, webElementList);
-    }
-
-    @Override
-    public <R> R noHook(final Function<FluentList<E>, R> function) {
-        noHook();
-        final R functionReturn = function.apply(this);
-        restoreHooks();
-        return functionReturn;
-    }
-
-    @Override
-    public FluentList<E> noHook() {
-        hookDefinitionsBackup = new ArrayList<>(hookDefinitions);
-        hookDefinitions.clear();
-        LocatorProxies.setHooks(proxy, hookChainBuilder, hookDefinitions);
-        return this;
-    }
-
-    @Override
-    public FluentList<E> restoreHooks() {
-        if (hookDefinitionsBackup != null) {
-            hookDefinitions.clear();
-            hookDefinitions.addAll(hookDefinitionsBackup);
-            hookDefinitionsBackup = null;
-        }
-        LocatorProxies.setHooks(proxy, hookChainBuilder, hookDefinitions);
-        return this;
-    }
-
-    @Override
-    public <O, H extends FluentHook<O>> FluentList<E> withHook(final Class<H> hook) {
-        hookDefinitions.add(new HookDefinition<>(hook));
-        LocatorProxies.setHooks(proxy, hookChainBuilder, hookDefinitions);
-        return this;
-    }
-
-    @Override
-    public <O, H extends FluentHook<O>> FluentList<E> withHook(final Class<H> hook, final O options) {
-        hookDefinitions.add(new HookDefinition<>(hook, options));
-        LocatorProxies.setHooks(proxy, hookChainBuilder, hookDefinitions);
-        return this;
     }
 
     @Override
