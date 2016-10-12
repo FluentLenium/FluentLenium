@@ -1,9 +1,7 @@
 package org.fluentlenium.core.search;
 
-import com.google.common.base.Supplier;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
-import org.fluentlenium.core.domain.FluentListImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.By;
@@ -12,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -55,29 +54,30 @@ public class Search implements SearchControl<FluentWebElement> {
             }
         }
         final List<WebElement> select = selectList(stringBuilder.toString());
-        final FluentListImpl fluentList = instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, select);
+        final FluentList fluentList = instantiator.asFluentList(select);
         if (postFilterSelector.isEmpty()) {
             return fluentList;
         }
 
-        final List<WebElement> postFilteredElements = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
-            @Override
-            public List<WebElement> get() {
-                Collection<FluentWebElement> postFiltered = fluentList;
-                for (final SearchFilter filter : postFilterSelector) {
-                    postFiltered = filter.applyFilter(postFiltered);
-                }
+        final List<WebElement> postFilteredElements = LocatorProxies
+                .createWebElementList(new AbstractSearchSupplier(postFilterSelector, select) {
+                    @Override
+                    public List<WebElement> get() {
+                        Collection<FluentWebElement> postFiltered = fluentList;
+                        for (final SearchFilter filter : postFilterSelector) {
+                            postFiltered = filter.applyFilter(postFiltered);
+                        }
 
-                final ArrayList<WebElement> webElements = new ArrayList<>();
-                for (final FluentWebElement element : postFiltered) {
-                    webElements.add(element.getElement());
-                }
+                        final ArrayList<WebElement> webElements = new ArrayList<>();
+                        for (final FluentWebElement element : postFiltered) {
+                            webElements.add(element.getElement());
+                        }
 
-                return webElements;
-            }
-        });
+                        return webElements;
+                    }
+                });
 
-        return instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, postFilteredElements);
+        return instantiator.asFluentList(postFilteredElements);
     }
 
     private ElementLocator locator(final By by) {
@@ -133,29 +133,30 @@ public class Search implements SearchControl<FluentWebElement> {
     public FluentList<FluentWebElement> find(final By locator, final SearchFilter... filters) {
         final List<WebElement> select = selectList(locator);
 
-        final FluentListImpl fluentList = instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, select);
+        final FluentList fluentList = instantiator.asFluentList(select);
         if (filters.length == 0) {
             return fluentList;
         }
 
-        final List<WebElement> postFilteredElements = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
-            @Override
-            public List<WebElement> get() {
-                Collection<FluentWebElement> postFiltered = fluentList;
-                for (final SearchFilter filter : filters) {
-                    postFiltered = filter.applyFilter(postFiltered);
-                }
+        final List<WebElement> postFilteredElements = LocatorProxies
+                .createWebElementList(new AbstractSearchSupplier(Arrays.asList(filters), select) {
+                    @Override
+                    public List<WebElement> get() {
+                        Collection<FluentWebElement> postFiltered = fluentList;
+                        for (final SearchFilter filter : filters) {
+                            postFiltered = filter.applyFilter(postFiltered);
+                        }
 
-                final List<WebElement> webElements = new ArrayList<>();
-                for (final FluentWebElement element : postFiltered) {
-                    webElements.add(element.getElement());
-                }
+                        final List<WebElement> webElements = new ArrayList<>();
+                        for (final FluentWebElement element : postFiltered) {
+                            webElements.add(element.getElement());
+                        }
 
-                return webElements;
-            }
-        });
+                        return webElements;
+                    }
+                });
 
-        return instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, postFilteredElements);
+        return instantiator.asFluentList(postFilteredElements);
     }
 
     @Override

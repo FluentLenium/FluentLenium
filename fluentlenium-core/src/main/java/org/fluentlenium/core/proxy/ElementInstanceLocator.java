@@ -1,6 +1,6 @@
 package org.fluentlenium.core.proxy;
 
-import com.google.common.base.Suppliers;
+import org.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 
@@ -15,16 +15,11 @@ public class ElementInstanceLocator extends ElementSupplierLocator implements Wr
      * @param element element instance
      */
     public ElementInstanceLocator(final WebElement element) {
-        super(Suppliers.ofInstance(element));
+        super(new SupplierOfInstance<>(element));
     }
 
     @Override
     public WebElement getWrappedElement() {
         return findElement();
-    }
-
-    @Override
-    public String toString() {
-        return getWrappedElement().toString();
     }
 }

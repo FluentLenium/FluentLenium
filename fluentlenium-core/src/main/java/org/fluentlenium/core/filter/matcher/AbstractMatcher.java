@@ -45,6 +45,11 @@ public abstract class AbstractMatcher {
         return getMatcherType() == null ? null : getMatcherType().getCssRepresentation();
     }
 
+    @Override
+    public String toString() {
+        return getMatcherType() == null ? String.valueOf(null) : getMatcherType().getLabel();
+    }
+
     /**
      * Does this matcher supports CSS filtering.
      *

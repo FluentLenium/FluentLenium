@@ -1,7 +1,7 @@
 package org.fluentlenium.core.proxy;
 
 import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
+import org.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
@@ -19,7 +19,7 @@ public class ElementListSupplierLocator implements ElementLocator {
      * @param elements element list instance
      */
     public ElementListSupplierLocator(final List<WebElement> elements) {
-        this.elementsSupplier = Suppliers.ofInstance(elements);
+        this.elementsSupplier = new SupplierOfInstance<>(elements);
     }
 
     /**
@@ -42,6 +42,11 @@ public class ElementListSupplierLocator implements ElementLocator {
 
     @Override
     public List<WebElement> findElements() {
-        return this.elementsSupplier.get();
+        return elementsSupplier.get();
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(elementsSupplier);
     }
 }

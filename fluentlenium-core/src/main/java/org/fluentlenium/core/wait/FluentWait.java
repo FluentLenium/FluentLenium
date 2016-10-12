@@ -10,6 +10,7 @@ import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.wait.WaitConditionProxy;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
@@ -150,7 +151,7 @@ public class FluentWait
     @Override
     public FluentConditions until(final FluentWebElement element) {
         updateWaitWithDefaultExceptions();
-        return WaitConditionProxy.element(this, "Element " + element.toString(), Suppliers.ofInstance(element));
+        return WaitConditionProxy.element(this, "Element " + element.toString(), new SupplierOfInstance<>(element));
     }
 
     @Override

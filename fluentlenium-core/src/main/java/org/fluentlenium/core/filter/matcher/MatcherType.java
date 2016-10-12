@@ -7,38 +7,50 @@ public enum MatcherType {
     /**
      * Contains.
      */
-    CONTAINS("*"), /**
+    CONTAINS("contains", "*"), /**
      * Starts with.
      */
-    STARTS_WITH("^"), /**
+    STARTS_WITH("starts with", "^"), /**
      * Ends with.
      */
-    ENDS_WITH("$"), /**
+    ENDS_WITH("ends with", "$"), /**
      * Contains word.
      */
-    CONTAINS_WORD("~"), /**
+    CONTAINS_WORD("contains", "~"), /**
      * Equal.
      */
-    EQUALS(""), /**
+    EQUALS("equals to", ""), /**
      * Not contains.
      */
-    NOT_CONTAINS(null), /**
+    NOT_CONTAINS("doesn't contain", null), /**
      * Not starts with.
      */
-    NOT_STARTS_WITH(null), /**
+    NOT_STARTS_WITH("doesn't start with", null), /**
      * Not ends with.
      */
-    NOT_ENDS_WITH(null);
+    NOT_ENDS_WITH("doesn't end with", null);
 
+    private final String label;
     private final String cssRepresentation;
 
     /**
      * Creates a new matcher type enum value.
      *
+     * @param label             label used in error message
      * @param cssRepresentation css representation.
      */
-    MatcherType(final String cssRepresentation) {
+    MatcherType(final String label, final String cssRepresentation) {
+        this.label = label;
         this.cssRepresentation = cssRepresentation;
+    }
+
+    /**
+     * Get the label of this matcher type
+     *
+     * @return label
+     */
+    public String getLabel() {
+        return label;
     }
 
     /**

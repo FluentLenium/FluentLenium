@@ -3,7 +3,6 @@ package org.fluentlenium.core.domain;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
 import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
@@ -25,6 +24,7 @@ import org.fluentlenium.core.proxy.LocatorHandler;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWaitElementList;
+import org.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -329,12 +329,14 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentListConditions awaitUntilEach() {
-        return WaitConditionProxy.each(control.await(), this.toString(), Suppliers.ofInstance(this));
+        return WaitConditionProxy
+                .each(control.await(), this.toString(), new SupplierOfInstance<List<? extends FluentWebElement>>(this));
     }
 
     @Override
     public FluentListConditions awaitUntilOne() {
-        return WaitConditionProxy.one(control.await(), this.toString(), Suppliers.ofInstance(this));
+        return WaitConditionProxy
+                .one(control.await(), this.toString(), new SupplierOfInstance<List<? extends FluentWebElement>>(this));
     }
 
     @Override
