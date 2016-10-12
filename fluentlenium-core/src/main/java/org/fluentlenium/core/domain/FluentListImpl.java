@@ -1,7 +1,6 @@
 package org.fluentlenium.core.domain;
 
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 import lombok.experimental.Delegate;
@@ -33,6 +32,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
@@ -551,7 +551,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         if (present()) {
             return Optional.of((FluentList<E>) this);
         } else {
-            return Optional.absent();
+            return Optional.empty();
         }
     }
 

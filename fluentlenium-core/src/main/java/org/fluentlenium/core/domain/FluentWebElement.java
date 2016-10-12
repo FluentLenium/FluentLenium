@@ -1,7 +1,6 @@
 package org.fluentlenium.core.domain;
 
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
 import com.google.common.base.Supplier;
 import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
@@ -41,6 +40,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Wraps a Selenium {@link WebElement}. It provides an enhanced API to control selenium element.
@@ -444,7 +444,7 @@ public class FluentWebElement extends Component
         if (present()) {
             return Optional.of(this);
         } else {
-            return Optional.absent();
+            return Optional.empty();
         }
     }
 
