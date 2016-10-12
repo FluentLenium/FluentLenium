@@ -8,7 +8,7 @@ script:
   - mvn clean verify jacoco:report
 after_success:
   - mvn coveralls:report
-  - "[[ ${TRAVIS_JDK_VERSION} == 'oraclejdk8' ]] && [[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_BRANCH} == 'master' ]] && [[ ${TRAVIS_TAG} == '' ]] && mvn deploy -DskipTests --settings deploy-settings.xml"
+  - "[[ ${TRAVIS_JDK_VERSION} == 'oraclejdk8' ]] && [[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_BRANCH} == 'support/1.x' ]] && [[ ${TRAVIS_TAG} == '' ]] && mvn deploy -DskipTests --settings deploy-settings.xml"
 env:
   global:
   # env.CI_DEPLOY_USERNAME
