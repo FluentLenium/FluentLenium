@@ -4,7 +4,7 @@
 [![Coveralls](https://img.shields.io/coveralls/FluentLenium/FluentLenium.svg?branch=support/1.x)](https://coveralls.io/github/FluentLenium/FluentLenium?branch=1.x)
 [![Website](https://img.shields.io/website-up-down-green-red/http/fluentlenium.org.svg)](http://fluentlenium.org)
 
-FluentLenium helps you writing readable, reusable, reliable, and resilient UI functionnal tests for the browser.
+FluentLenium helps you writing readable, reusable, reliable and resilient UI functionnal tests for the browser.
 
 FluentLenium provides a Java [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to 
 [Selenium](http://www.seleniumhq.org/), and brings some magic to avoid common issues faced by Selenium users.
