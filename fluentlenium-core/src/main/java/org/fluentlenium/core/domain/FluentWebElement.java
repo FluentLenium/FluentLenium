@@ -1,6 +1,5 @@
 package org.fluentlenium.core.domain;
 
-import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Supplier;
 import lombok.experimental.Delegate;
@@ -15,12 +14,9 @@ import org.fluentlenium.core.axes.Axes;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
-import org.fluentlenium.core.hook.DefaultHookChainBuilder;
-import org.fluentlenium.core.hook.FluentHook;
-import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookControl;
+import org.fluentlenium.core.hook.HookControlImpl;
 import org.fluentlenium.core.hook.HookDefinition;
-import org.fluentlenium.core.inject.NoInject;
 import org.fluentlenium.core.label.FluentLabel;
 import org.fluentlenium.core.label.FluentLabelImpl;
 import org.fluentlenium.core.proxy.FluentProxyState;
@@ -38,9 +34,9 @@ import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Wraps a Selenium {@link WebElement}. It provides an enhanced API to control selenium element.
@@ -55,11 +51,7 @@ public class FluentWebElement extends Component
     private final KeyboardElementActions keyboardActions;
     private final WebElementConditions conditions;
 
-    private final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
-    private final HookChainBuilder hookChainBuilder;
-
-    @NoInject
-    private List<HookDefinition<?>> hookDefinitionsBackup;
+    private final HookControlImpl<FluentWebElement> hookControl;
 
     @Delegate
     private final FluentLabel<FluentWebElement> label;
@@ -74,7 +66,16 @@ public class FluentWebElement extends Component
     public FluentWebElement(final WebElement element, final FluentControl control, final ComponentInstantiator instantiator) {
         super(element, control, instantiator);
 
-        this.hookChainBuilder = new DefaultHookChainBuilder(this.control, this.instantiator);
+        this.hookControl = new HookControlImpl<>(this, this.webElement, this.control, this.instantiator,
+                new Supplier<FluentWebElement>() {
+                    @Override
+                    public FluentWebElement get() {
+                        final LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
+                        final ElementLocator locator = locatorHandler.getLocator();
+                        final WebElement noHookElement = LocatorProxies.createWebElement(locator);
+                        return newComponent(FluentWebElement.this.getClass(), noHookElement);
+                    }
+                });
         this.search = new Search(element, this.instantiator);
         this.axes = new Axes(element, this.instantiator);
         this.mouseActions = new MouseElementActions(this.control.getDriver(), element);
@@ -91,6 +92,11 @@ public class FluentWebElement extends Component
     @Delegate(excludes = {InputControl.class, AwaitControl.class, SearchControl.class})
     private FluentControl getFluentControl() { // NOPMD UnusedPrivateMethod
         return control;
+    }
+
+    @Delegate
+    private HookControl<FluentWebElement> getHookControl() { // NOPMD UnusedPrivateMethod
+        return hookControl;
     }
 
     @Override
@@ -457,62 +463,13 @@ public class FluentWebElement extends Component
         return "input".equalsIgnoreCase(this.tagName()) && "file".equalsIgnoreCase(this.attribute("type"));
     }
 
-    @Override
-    public <R> R noHook(final Function<FluentWebElement, R> function) {
-        noHook();
-        final R functionReturn = function.apply(this);
-        restoreHooks();
-        return functionReturn;
-    }
-
-    @Override
-    public FluentWebElement noHook() {
-        setHookDefinitionsBackup(new ArrayList<>(hookDefinitions));
-        hookDefinitions.clear();
-        LocatorProxies.setHooks(getElement(), hookChainBuilder, hookDefinitions);
-        return this;
-    }
-
     /**
      * Save actual hook definitions to backup.
      *
-     * @param hookDefinitionsBackup backup list
+     * @param hookRestoreStack restore stack
      */
-    /* default */ void setHookDefinitionsBackup(final List<HookDefinition<?>> hookDefinitionsBackup) {
-        this.hookDefinitionsBackup = hookDefinitionsBackup;
-    }
-
-    @Override
-    public FluentWebElement noHookInstance() {
-        final LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
-        final ElementLocator locator = locatorHandler.getLocator();
-        final WebElement noHookElement = LocatorProxies.createWebElement(locator);
-        return newComponent(getClass(), noHookElement);
-    }
-
-    @Override
-    public FluentWebElement restoreHooks() {
-        if (hookDefinitionsBackup != null) {
-            hookDefinitions.clear();
-            hookDefinitions.addAll(hookDefinitionsBackup);
-            setHookDefinitionsBackup(null);
-        }
-        LocatorProxies.setHooks(getElement(), hookChainBuilder, hookDefinitions);
-        return this;
-    }
-
-    @Override
-    public <O, H extends FluentHook<O>> FluentWebElement withHook(final Class<H> hook) {
-        hookDefinitions.add(new HookDefinition<>(hook));
-        LocatorProxies.setHooks(getElement(), hookChainBuilder, hookDefinitions);
-        return this;
-    }
-
-    @Override
-    public <O, H extends FluentHook<O>> FluentWebElement withHook(final Class<H> hook, final O options) {
-        hookDefinitions.add(new HookDefinition<>(hook, options));
-        LocatorProxies.setHooks(getElement(), hookChainBuilder, hookDefinitions);
-        return this;
+    /* default */ void setHookRestoreStack(final Stack<List<HookDefinition<?>>> hookRestoreStack) {
+        this.hookControl.setHookRestoreStack(hookRestoreStack);
     }
 
     @Override
