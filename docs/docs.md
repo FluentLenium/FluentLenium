@@ -1051,7 +1051,7 @@ FluentLenium can be configured in many ways through configuration properties.
 
     Default value: ```null```. 
         
-    Possible values are ```remote```, ```firefox```, ```marionette```, ```chrome```, ```ie```, ```safari```, 
+    Possible values are ```remote```, ```firefox```, ```chrome```, ```ie```, ```safari```, 
     ```phantomjs```, ```htmlunit```, or any class name implementing ```WebDriver```.
     
     If not defined, FluentLenium will use the first value for which WebDriver is available in classpath.

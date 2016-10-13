@@ -29,19 +29,6 @@ public class DefaultWebDriverFactories {
     }
 
     /**
-     * Marionette WebDriver factory.
-     */
-    @FactoryPriority(127)
-    public static class MarionetteWebDriverFactory extends ReflectiveWebDriverFactory {
-        /**
-         * Creates a new marionette WebDriver factory.
-         */
-        public MarionetteWebDriverFactory() {
-            super("marionette", "org.openqa.selenium.firefox.MarionetteDriver");
-        }
-    }
-
-    /**
      * Chrome WebDriver factory.
      */
     @FactoryPriority(64)
