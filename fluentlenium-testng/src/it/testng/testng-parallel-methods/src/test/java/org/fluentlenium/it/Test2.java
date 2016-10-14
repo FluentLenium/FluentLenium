@@ -9,10 +9,8 @@ public class Test2 extends FluentIntegTestNg {
     public void test5() {
         goTo(UrlUtil.getAbsoluteUrlFromFile("inputs.html"));
         el("input").fill().with("5");
-        try {
-            Thread.sleep(5000L);
-        } catch (InterruptedException e) {
-        }
+
+        await().explicitlyFor(5000L);
 
         assertThat(el("input").value()).isEqualTo("5");
     }
@@ -22,10 +20,7 @@ public class Test2 extends FluentIntegTestNg {
         goTo(UrlUtil.getAbsoluteUrlFromFile("inputs.html"));
         el("input").fill().with("6");
 
-        try {
-            Thread.sleep(4000L);
-        } catch (InterruptedException e) {
-        }
+        await().explicitlyFor(4000L);
 
         assertThat(el("input").value()).isEqualTo("6");
     }
@@ -35,10 +30,7 @@ public class Test2 extends FluentIntegTestNg {
         goTo(UrlUtil.getAbsoluteUrlFromFile("inputs.html"));
         el("input").fill().with("7");
 
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-        }
+        await().explicitlyFor(3000L);
 
         assertThat(el("input").value()).isEqualTo("7");
     }
@@ -48,10 +40,7 @@ public class Test2 extends FluentIntegTestNg {
         goTo(UrlUtil.getAbsoluteUrlFromFile("inputs.html"));
         el("input").fill().with("8");
 
-        try {
-            Thread.sleep(2000L);
-        } catch (InterruptedException e) {
-        }
+        await().explicitlyFor(2000L);
 
         assertThat(el("input").value()).isEqualTo("8");
     }

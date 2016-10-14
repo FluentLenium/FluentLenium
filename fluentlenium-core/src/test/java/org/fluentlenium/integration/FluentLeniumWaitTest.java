@@ -3,6 +3,7 @@ package org.fluentlenium.integration;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
+import net.jcip.annotations.NotThreadSafe;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
@@ -26,6 +27,7 @@ import static org.fluentlenium.core.filter.FilterConstructor.withTextContent;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 import static org.junit.Assert.fail;
 
+@NotThreadSafe
 @SuppressWarnings("PMD.ExcessivePublicCount")
 public class FluentLeniumWaitTest extends IntegrationFluentTest {
 

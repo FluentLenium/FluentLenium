@@ -20,6 +20,9 @@ public class CapabilitiesRegistryImpl extends AbstractFactoryRegistryImpl<Capabi
         registerDesiredCapabilities();
     }
 
+    /**
+     * Desired capabilities factory.
+     */
     @DefaultFactory
     public static class DesiredCapabilitiesFactory extends MethodInvocationReflectionFactory {
 

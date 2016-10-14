@@ -29,7 +29,7 @@ public class WebDriversTest {
             return new CustomWebDriver();
         }
     }
-    
+
     @FactoryName("another-default")
     @DefaultFactory
     public static class AnotherDefaultFactory implements WebDriverFactory {
