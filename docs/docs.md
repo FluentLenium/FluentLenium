@@ -872,7 +872,8 @@ it's present on a Fluent Test class and all fields from a Page if it's present o
 Page build through Injection recursively inherits hooks from parent pages and fluent test.
 
 If you need to disable all inherited hooks in particular Page or Field, you should use ```@NoHook``` annotation,
-or call ```noHook()``` function on the element;
+or call ```noHook()``` function on the element, with no parameter to remove all hooks, of with parameters to remove
+only given hooks.
 
 It's also possible to use the generic ```@Hook``` annotation to enable a hook class.
 
