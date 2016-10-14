@@ -45,56 +45,56 @@ public class WindowActionsTest {
 
     @Before
     public void before() {
-        when(fluentDriver.getDriver()).thenReturn(driver);
-        when(driver.manage()).thenReturn(options);
-        when(driver.manage().window()).thenReturn(window);
-        when(driver.switchTo()).thenReturn(targetLocator);
-        when(driver.switchTo().window(anyString())).thenReturn(driver);
+        when(this.fluentDriver.getDriver()).thenReturn(this.driver);
+        when(this.driver.manage()).thenReturn(this.options);
+        when(this.driver.manage().window()).thenReturn(this.window);
+        when(this.driver.switchTo()).thenReturn(this.targetLocator);
+        when(this.driver.switchTo().window(anyString())).thenReturn(this.driver);
     }
 
     @After
     public void after() {
-        reset(driver, window, fluentDriver);
+        reset(this.driver, this.window, this.fluentDriver);
     }
 
     @Test
     public void getWindowTest() {
-        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
 
         windowAction.getWindow();
-        verify(driver.manage(), times(1)).window();
+        verify(this.driver.manage(), times(1)).window();
     }
 
     @Test
     public void maximizeWindowTest() {
-        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
 
-        windowAction.maximizeWindow();
-        verify(driver.manage(), times(1)).window();
-        verify(driver.manage().window(), times(1)).maximize();
+        windowAction.maximize();
+        verify(this.driver.manage(), times(1)).window();
+        verify(this.driver.manage().window(), times(1)).maximize();
     }
 
     @Test
     public void fullScreenWindowTest() {
-        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
 
-        windowAction.fullScreen();
-        verify(driver.manage(), times(1)).window();
-        verify(driver.manage().window(), times(1)).fullscreen();
+        windowAction.fullscreen();
+        verify(this.driver.manage(), times(1)).window();
+        verify(this.driver.manage().window(), times(1)).fullscreen();
     }
 
     @Test
     public void switchToTest() {
         final String windowHandle = "WndH1";
 
-        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
 
-        when(driver.getWindowHandle()).thenReturn(windowHandle);
+        when(this.driver.getWindowHandle()).thenReturn(windowHandle);
 
         windowAction.switchTo(windowHandle);
 
-        verify(driver, times(1)).manage();
-        verify(driver, times(2)).switchTo();
+        verify(this.driver, times(1)).manage();
+        verify(this.driver, times(2)).switchTo();
     }
 
     @Test
@@ -102,25 +102,25 @@ public class WindowActionsTest {
         final String windowHandle = "WndH1";
         final String windowHandle2 = "WndH2";
 
-        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
 
-        when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2));
+        when(this.driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2));
 
         windowAction.switchToLast();
 
-        verify(driver, times(1)).manage();
-        verify(driver, times(2)).switchTo();
+        verify(this.driver, times(1)).manage();
+        verify(this.driver, times(2)).switchTo();
     }
 
     @Test
     public void openNewAndSwitch() {
         final JavascriptWebDriver jsDriver = mock(JavascriptWebDriver.class);
 
-        when(fluentDriver.getDriver()).thenReturn(jsDriver);
-        when(jsDriver.manage()).thenReturn(options);
-        when(jsDriver.manage().window()).thenReturn(window);
-        when(jsDriver.switchTo()).thenReturn(targetLocator);
-        when(jsDriver.switchTo().window(anyString())).thenReturn(driver);
+        when(this.fluentDriver.getDriver()).thenReturn(jsDriver);
+        when(jsDriver.manage()).thenReturn(this.options);
+        when(jsDriver.manage().window()).thenReturn(this.window);
+        when(jsDriver.switchTo()).thenReturn(this.targetLocator);
+        when(jsDriver.switchTo().window(anyString())).thenReturn(this.driver);
 
         final String windowHandle = "WndH1";
         final String windowHandle1 = "WndH2";
@@ -130,7 +130,7 @@ public class WindowActionsTest {
         final FluentWaitWindowConditions fluentWaitWindowMatcher = mock(FluentWaitWindowConditions.class);
         final Configuration configuration = mock(Configuration.class);
 
-        final FluentDriver currentFluentDriver = new FluentDriver(driver, configuration, fluentControl);
+        final FluentDriver currentFluentDriver = new FluentDriver(this.driver, configuration, this.fluentControl);
         final FluentDriver fluentDriverSpied = spy(currentFluentDriver);
 
         when(jsDriver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),
@@ -150,21 +150,21 @@ public class WindowActionsTest {
 
     @Test
     public void switchToParentFrame() {
-        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
 
         windowAction.switchToParentFrame();
 
-        verify(driver, times(1)).manage();
-        verify(driver.switchTo(), times(1)).parentFrame();
+        verify(this.driver, times(1)).manage();
+        verify(this.driver.switchTo(), times(1)).parentFrame();
     }
 
     @Test
     public void setSizeTest() {
-        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
         final Dimension dim = new Dimension(100, 200);
         windowAction.setSize(dim);
-        verify(driver.manage(), times(1)).window();
-        verify(driver.manage().window(), times(1)).setSize(eq(dim));
+        verify(this.driver.manage(), times(1)).window();
+        verify(this.driver.manage().window(), times(1)).setSize(eq(dim));
     }
 
     @Test
@@ -176,17 +176,17 @@ public class WindowActionsTest {
         final FluentWait fluentWait = mock(FluentWait.class);
         final FluentWaitWindowConditions fluentWaitWindowMatcher = mock(FluentWaitWindowConditions.class);
 
-        when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2));
+        when(this.driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2));
         when(fluentWaitWindowMatcher.notDisplayed()).thenReturn(true);
         when(fluentWebElement.click()).thenReturn(fluentWebElement);
         when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);
-        when(fluentDriver.await()).thenReturn(fluentWait);
+        when(this.fluentDriver.await()).thenReturn(fluentWait);
 
-        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
         windowAction.clickAndCloseCurrent(fluentWebElement);
 
-        verify(driver, times(1)).manage();
-        verify(driver, times(1)).getWindowHandle();
+        verify(this.driver, times(1)).manage();
+        verify(this.driver, times(1)).getWindowHandle();
 
     }
 
@@ -201,79 +201,79 @@ public class WindowActionsTest {
         final FluentWaitWindowConditions fluentWaitWindowMatcher = mock(FluentWaitWindowConditions.class);
         final Configuration configuration = mock(Configuration.class);
 
-        final FluentDriver currentFluentDriver = new FluentDriver(driver, configuration, fluentControl);
+        final FluentDriver currentFluentDriver = new FluentDriver(this.driver, configuration, this.fluentControl);
         final FluentDriver fluentDriverSpied = spy(currentFluentDriver);
 
-        when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),
+        when(this.driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),
                 ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
-        when(driver.getWindowHandle()).thenReturn(windowHandle1, windowHandle2);
+        when(this.driver.getWindowHandle()).thenReturn(windowHandle1, windowHandle2);
 
         when(fluentWebElement.click()).thenReturn(fluentWebElement);
 
         when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);
-        final WindowAction windowAction = new WindowAction(fluentDriverSpied, driver);
+        final WindowAction windowAction = new WindowAction(fluentDriverSpied, this.driver);
         windowAction.clickAndOpenNew(fluentWebElement);
 
-        verify(driver, times(3)).manage();
-        verify(driver, times(3)).getWindowHandles();
+        verify(this.driver, times(3)).manage();
+        verify(this.driver, times(3)).getWindowHandles();
     }
 
     @Test
     public void getSizeTest() {
-        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
         final Point pos = new Point(101, 201);
 
-        when(driver.manage().window().getPosition()).thenReturn(pos);
+        when(this.driver.manage().window().getPosition()).thenReturn(pos);
 
         final Point getPos = windowAction.getPosition();
 
-        verify(driver.manage(), times(2)).window();
-        verify(driver.manage().window(), times(1)).getPosition();
+        verify(this.driver.manage(), times(2)).window();
+        verify(this.driver.manage().window(), times(1)).getPosition();
         Assertions.assertThat(getPos).isEqualTo(pos);
     }
 
     @Test
     public void getPositionTest() {
-        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
         final Dimension dim = new Dimension(101, 201);
 
-        when(driver.manage().window().getSize()).thenReturn(dim);
+        when(this.driver.manage().window().getSize()).thenReturn(dim);
 
         final Dimension getSizeDim = windowAction.getSize();
 
-        verify(driver.manage(), times(2)).window();
-        verify(driver.manage().window(), times(1)).getSize();
+        verify(this.driver.manage(), times(2)).window();
+        verify(this.driver.manage().window(), times(1)).getSize();
         Assertions.assertThat(getSizeDim).isEqualTo(dim);
     }
 
     @Test
     public void setPositionTest() {
-        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
         final Point pos = new Point(101, 201);
 
         windowAction.setPosition(pos);
-        verify(driver.manage(), times(1)).window();
-        verify(driver.manage().window(), times(1)).setPosition(eq(pos));
+        verify(this.driver.manage(), times(1)).window();
+        verify(this.driver.manage().window(), times(1)).setPosition(eq(pos));
     }
 
     @Test
     public void titleTest() {
         final String title = "title";
-        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
-        when(driver.getTitle()).thenReturn(title);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
+        when(this.driver.getTitle()).thenReturn(title);
 
         Assertions.assertThat(windowAction.title()).isEqualTo(title);
 
-        verify(driver.manage(), times(0)).window();
+        verify(this.driver.manage(), times(0)).window();
     }
 
     @Test
     public void closeTest() {
-        final WindowAction windowAction = new WindowAction(fluentDriver, driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
         windowAction.close();
 
-        verify(driver.manage(), times(0)).window();
-        verify(driver, times(1)).close();
+        verify(this.driver.manage(), times(0)).window();
+        verify(this.driver, times(1)).close();
     }
 
     public interface JavascriptWebDriver extends WebDriver, JavascriptExecutor {
