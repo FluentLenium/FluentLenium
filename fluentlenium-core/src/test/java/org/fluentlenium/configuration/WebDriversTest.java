@@ -29,6 +29,15 @@ public class WebDriversTest {
             return new CustomWebDriver();
         }
     }
+    
+    @FactoryName("another-default")
+    @DefaultFactory
+    public static class AnotherDefaultFactory implements WebDriverFactory {
+        @Override
+        public WebDriver newWebDriver(final Capabilities capabilities, final ConfigurationProperties configuration) {
+            return new CustomWebDriver();
+        }
+    }
 
     @Before
     public void before() {
@@ -65,8 +74,13 @@ public class WebDriversTest {
     }
 
     @Test(expected = ConfigurationException.class)
-    public void testRegisterFirefox() {
+    public void testRegisterExistingNameShouldFail() {
         webDrivers.register(new AnotherFactory());
+    }
+
+    @Test
+    public void testRegisterExistingNameShouldNotFailWhenDefault() {
+        webDrivers.register(new AnotherDefaultFactory());
     }
 
     @Test
