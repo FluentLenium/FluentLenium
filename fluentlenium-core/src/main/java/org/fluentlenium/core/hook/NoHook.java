@@ -18,7 +18,7 @@ public @interface NoHook {
      * <p>
      * If no annotation is provided, all hook will be removed.
      *
-     * @return
+     * @return Hook annotations to remove
      */
     Hook[] value() default {};
 }

@@ -446,6 +446,12 @@ public class FluentWebElement extends Component
     }
 
     @Override
+    public FluentWebElement frame() {
+        window().switchTo().frame(this);
+        return this;
+    }
+
+    @Override
     public Optional<FluentWebElement> optional() {
         if (present()) {
             return Optional.of(this);
