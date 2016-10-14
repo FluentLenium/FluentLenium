@@ -2,13 +2,35 @@ package org.fluentlenium.adapter.junit;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.MultipleFailureException;
 import org.junit.runners.model.Statement;
+import org.junit.runners.model.TestClass;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Equivalent of {@link org.junit.rules.TestWatcher}, but stop process if exception occurs on
  * starting method call.
+ * <p>
+ * It also supports {@link After} annotations.
  */
 class FluentTestRule implements TestRule {
+    private final Object target;
+    private final TestClass testClass;
+    private final List<FrameworkMethod> afters;
+
+    /**
+     * Creates a new fluent test rule.
+     *
+     * @param target target of the rule.
+     */
+    FluentTestRule(final Object target) {
+        this.target = target;
+        this.testClass = new TestClass(target.getClass());
+        this.afters = testClass.getAnnotatedMethods(After.class);
+    }
 
     @Override
     public Statement apply(final Statement base, final Description description) {
@@ -16,16 +38,33 @@ class FluentTestRule implements TestRule {
 
             @Override
             public void evaluate() throws Throwable {
+                final List<Throwable> errors = new ArrayList<>();
                 try {
                     starting(description);
                     base.evaluate();
                     succeeded(description);
                 } catch (final Throwable e) {
-                    failed(e, description);
-                    throw e;
+                    errors.add(e);
+                    try {
+                        failed(e, description);
+                    } catch (final Throwable failedException) {
+                        errors.add(failedException);
+                    }
+                    for (final FrameworkMethod each : afters) {
+                        try {
+                            each.invokeExplosively(target);
+                        } catch (final Throwable afterException) {
+                            errors.add(afterException);
+                        }
+                    }
                 } finally {
-                    finished(description);
+                    try {
+                        finished(description);
+                    } catch (final Throwable failedException) {
+                        errors.add(failedException);
+                    }
                 }
+                MultipleFailureException.assertEmpty(errors);
             }
         };
     }
