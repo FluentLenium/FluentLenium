@@ -8,11 +8,16 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 /**
- * Duplicate of fluentlenium-junit adapter classes to avoid maven dependency cycle.
+ * JUnit 4 FluentLenium Test Runner Adapter.
+ * <p>
+ * Extends this class to provide FluentLenium support to your JUnit Test class.
  */
 public class FluentTest extends FluentTestRunnerAdapter {
+    /**
+     * Fluent test adapter JUnit rule.
+     */
     @Rule
-    public TestRule watchman = new FluentTestRule() {
+    public TestRule watchman = new FluentTestRule(this) {
 
         @Override
         public void starting(final Description description) {
@@ -34,6 +39,9 @@ public class FluentTest extends FluentTestRunnerAdapter {
     };
 
     //CHECKSTYLE.OFF: VisibilityModifier
+    /**
+     * Fluent test adapter JUnit class rule.
+     */
     @ClassRule
     public static TestRule classWatchman = new TestRule() {
 

@@ -1021,13 +1021,11 @@ takeScreenShot(pathAndfileName);
 takeHtmlDump(pathAndfileName);
 ```
 
-Screenshot and HTML Dump can be automatically performed on test fail.
-```java
-setScreenShotPath(path);
-setHtmlDumpPath(path);
-setScreenShotMode(TriggerMode.ON_FAIL);
-setHtmlDumpMode(TriggerMode.ON_FAIL);
-```
+Screenshot and HTML Dump can be automatically performed on test fail using configuration properties.
+
+When using `AUTOMATIC_ON_FAIL` with JUnit, you should use custom `@After` annotation from 
+`org.fluentlenium.adapter.junit` package for screenshot and HTML dump to be performed 
+just after an exception occurs, before methods annotated with `@After` invocation.
 
 ## Isolated Tests
 If you want to test concurrency or if you need for any reason to not use the mechanism of extension of FluentLenium, you can also, instead of extending FluentTest, instantiate your fluent test object directly.
