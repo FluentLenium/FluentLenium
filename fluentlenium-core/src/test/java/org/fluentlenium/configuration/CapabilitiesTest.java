@@ -19,7 +19,7 @@ public class CapabilitiesTest {
     @Test
     public void testDesiredCapabilities() {
         final CapabilitiesFactory firefox = capabilities.get("DesiredCapabilities.firefox");
-        assertThat(firefox).isExactlyInstanceOf(MethodInvocationReflectionFactory.class);
+        assertThat(firefox).isInstanceOf(MethodInvocationReflectionFactory.class);
     }
 
     @Test

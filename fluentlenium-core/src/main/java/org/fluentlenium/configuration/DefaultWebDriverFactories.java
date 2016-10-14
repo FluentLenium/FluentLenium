@@ -19,6 +19,7 @@ public class DefaultWebDriverFactories {
      * Firefox WebDriver factory.
      */
     @FactoryPriority(128)
+    @DefaultFactory
     public static class FirefoxWebDriverFactory extends ReflectiveWebDriverFactory {
         /**
          * Creates a new firefox WebDriver factory.
@@ -32,6 +33,7 @@ public class DefaultWebDriverFactories {
      * Chrome WebDriver factory.
      */
     @FactoryPriority(64)
+    @DefaultFactory
     public static class ChromeWebDriverFactory extends ReflectiveWebDriverFactory {
         /**
          * Creates a new chrome WebDriver factory.
@@ -45,6 +47,7 @@ public class DefaultWebDriverFactories {
      * Internet Explorer WebDriver factory.
      */
     @FactoryPriority(32)
+    @DefaultFactory
     public static class InternetExplorerWebDriverFactory extends ReflectiveWebDriverFactory {
         /**
          * Creates a new internet explorer WebDriver factory.
@@ -58,6 +61,7 @@ public class DefaultWebDriverFactories {
      * Edge WebDriver factory.
      */
     @FactoryPriority(31)
+    @DefaultFactory
     public static class EdgeWebDriverFactory extends ReflectiveWebDriverFactory {
         /**
          * Creates a new edge WebDriver factory.
@@ -71,6 +75,7 @@ public class DefaultWebDriverFactories {
      * Safary WebDriver factory.
      */
     @FactoryPriority(16)
+    @DefaultFactory
     public static class SafariWebDriverFactory extends ReflectiveWebDriverFactory {
         /**
          * Creates a new safary WebDriver factory.
@@ -84,6 +89,7 @@ public class DefaultWebDriverFactories {
      * PhantomJS WebDriver factory.
      */
     @FactoryPriority(8)
+    @DefaultFactory
     public static class PhantomJSWebDriverFactory extends ReflectiveWebDriverFactory {
         /**
          * Creates a new phantomJs WebDriver factory.
@@ -96,6 +102,7 @@ public class DefaultWebDriverFactories {
     /**
      * Remote WebDriver factory.
      */
+    @DefaultFactory
     public static class RemoteWebDriverFactory extends ReflectiveWebDriverFactory {
         /**
          * Creates a new remote WebDriver factory.
@@ -149,6 +156,7 @@ public class DefaultWebDriverFactories {
     /**
      * HtmlUnit WebDriver factory.
      */
+    @DefaultFactory
     public static class HtmlUnitWebDriverFactory extends ReflectiveWebDriverFactory {
         /**
          * Creates a new htmlUnit WebDriver factory.
