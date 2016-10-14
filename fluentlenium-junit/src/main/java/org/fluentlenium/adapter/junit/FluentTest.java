@@ -17,7 +17,7 @@ public class FluentTest extends FluentTestRunnerAdapter {
      * Fluent test adapter JUnit rule.
      */
     @Rule
-    public TestRule watchman = new FluentTestRule() {
+    public TestRule watchman = new FluentTestRule(this) {
 
         @Override
         public void starting(final Description description) {

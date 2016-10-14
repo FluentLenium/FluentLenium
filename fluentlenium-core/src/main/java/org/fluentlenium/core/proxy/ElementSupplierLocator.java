@@ -36,4 +36,9 @@ public class ElementSupplierLocator implements ElementLocator {
         }
         return Arrays.asList(webElement);
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(elementSupplier);
+    }
 }

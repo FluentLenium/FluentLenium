@@ -88,21 +88,17 @@
     <!-- </module> -->
 
     <module name="TreeWalker">
+        <module name="AnnotationLocation">
+            <property name="allowSamelineMultipleAnnotations" value="false"/>
+            <property name="allowSamelineSingleParameterlessAnnotation" value="false"/>
+            <property name="allowSamelineParameterizedAnnotation" value="false"/>
+        </module>
+
         <module name="FileContentsHolder"/> <!-- to make checking comments possible -->
 
-        <!-- Checks for Javadoc comments.                     -->
-        <!-- See http://checkstyle.sf.net/config_javadoc.html -->
-        <!--<module name="JavadocType"/>-->
-
-        <module name="JavadocMethod">
-            <property name="scope" value="public"/>
-            <property name="allowMissingPropertyJavadoc" value="true"/>
-            <property name="allowMissingJavadoc" value="true"/>
-        </module>
-        <!--
-        <module name="JavadocVariable"/>
-        <module name="JavadocStyle"/>-->
-
+        <!-- Check this. qualifier -->
+        <!-- See http://checkstyle.sourceforge.net/config_coding.html#RequireThis -->
+        <module name="RequireThis"/>
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->
@@ -166,6 +162,7 @@
         <!-- See http://checkstyle.sf.net/config_blocks.html -->
         <module name="AvoidNestedBlocks"/>
         <module name="EmptyBlock"/>
+        <module name="EmptyCatchBlock"/>
         <module name="LeftCurly"/>
         <module name="NeedBraces"/>
         <module name="RightCurly"/>

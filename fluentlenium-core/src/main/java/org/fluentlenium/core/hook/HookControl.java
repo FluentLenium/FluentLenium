@@ -16,7 +16,15 @@ public interface HookControl<T> {
     T noHook();
 
     /**
-     * Retore hooks that were defined on {@link #noHook()} call.
+     * Disable given hook from actual element.
+     *
+     * @param hooks hook classes to disable
+     * @return this object reference to chain calls
+     */
+    T noHook(Class<? extends FluentHook>... hooks);
+
+    /**
+     * Retore hooks that were defined initially.
      *
      * @return this object reference to chain calls
      */
@@ -53,9 +61,27 @@ public interface HookControl<T> {
     <R> R noHook(Function<T, R> function);
 
     /**
-     * Creates a new element locator instance with hook disabled.
+     * Invoke a function with no hook.
+     *
+     * @param hook     hook class to disable
+     * @param function function to invoke
+     * @param <R>      return type
+     * @return return value of the given function
+     */
+    <R> R noHook(Class<? extends FluentHook> hook, Function<T, R> function);
+
+    /**
+     * Creates a new element locator instance with all hooks disabled.
      *
      * @return new element locator with hook disabled.
      */
     T noHookInstance();
+
+    /**
+     * Creates a new element locator instance with given hook disabled.
+     *
+     * @param hooks hook classes to disable
+     * @return new element locator with hook disabled.
+     */
+    T noHookInstance(Class<? extends FluentHook>... hooks);
 }

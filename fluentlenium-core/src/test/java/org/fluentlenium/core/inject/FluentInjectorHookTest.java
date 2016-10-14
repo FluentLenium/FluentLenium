@@ -289,6 +289,9 @@ public class FluentInjectorHookTest {
     @Hook(NanoHook2.class)
     public static class SubContainer2 extends FluentPage {
         private WebElementWrapper subInjected2;
+
+        @NoHook(@Hook(NanoHook.class))
+        private WebElementWrapper subInjected2NoHook;
     }
 
     public static class SubContainer {
@@ -327,6 +330,9 @@ public class FluentInjectorHookTest {
 
         final WebElement subElement2 = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("subInjected2"))).thenReturn(subElement2);
+
+        final WebElement subElement2NoHook = mock(WebElement.class);
+        when(webDriver.findElement(new ByIdOrName("subInjected2NoHook"))).thenReturn(subElement2NoHook);
 
         final WebElement subElement3 = mock(WebElement.class);
         when(webDriver.findElement(new ByIdOrName("subInjected3"))).thenReturn(subElement3);
@@ -390,6 +396,17 @@ public class FluentInjectorHookTest {
 
         assertThat(nanoHook2.getElement()).isExactlyInstanceOf(NanoHook.class);
         assertThat(((NanoHook) nanoHook2.getElement()).getElement()).isSameAs(subElement2);
+
+        container.subContainer.subContainer2.subInjected2NoHook.getElement().click();
+        verify(subElement2NoHook).click();
+
+        final LocatorHandler subElement2NoHookWrapperHandler = LocatorProxies
+                .getLocatorHandler(container.subContainer.subContainer2.subInjected2NoHook.getElement());
+        assertThat(subElement2NoHookWrapperHandler.getInvocationTarget(null)).isExactlyInstanceOf(NanoHook2.class);
+
+        final NanoHook2 nanoHook2NoHook = (NanoHook2) subElement2NoHookWrapperHandler.getInvocationTarget(null);
+
+        assertThat(nanoHook2NoHook.getElement()).isSameAs(subElement2NoHook);
 
         container.subContainer.subContainer3.subInjected3.getElement().click();
         verify(subElement3).click();

@@ -33,13 +33,13 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -872,7 +872,8 @@ it's present on a Fluent Test class and all fields from a Page if it's present o
 Page build through Injection recursively inherits hooks from parent pages and fluent test.
 
 If you need to disable all inherited hooks in particular Page or Field, you should use ```@NoHook``` annotation,
-or call ```noHook()``` function on the element;
+or call ```noHook()``` function on the element, with no parameter to remove all hooks, of with parameters to remove
+only given hooks.
 
 It's also possible to use the generic ```@Hook``` annotation to enable a hook class.
 
@@ -1021,13 +1022,11 @@ takeScreenShot(pathAndfileName);
 takeHtmlDump(pathAndfileName);
 ```
 
-Screenshot and HTML Dump can be automatically performed on test fail.
-```java
-setScreenShotPath(path);
-setHtmlDumpPath(path);
-setScreenShotMode(TriggerMode.ON_FAIL);
-setHtmlDumpMode(TriggerMode.ON_FAIL);
-```
+Screenshot and HTML Dump can be automatically performed on test fail using configuration properties.
+
+When using `AUTOMATIC_ON_FAIL` with JUnit, you should use custom `@After` annotation from 
+`org.fluentlenium.adapter.junit` package for screenshot and HTML dump to be performed 
+just after an exception occurs, before methods annotated with `@After` invocation.
 
 ## Isolated Tests
 If you want to test concurrency or if you need for any reason to not use the mechanism of extension of FluentLenium, you can also, instead of extending FluentTest, instantiate your fluent test object directly.
@@ -1051,7 +1050,7 @@ FluentLenium can be configured in many ways through configuration properties.
 
     Default value: ```null```. 
         
-    Possible values are ```remote```, ```firefox```, ```marionette```, ```chrome```, ```ie```, ```safari```, 
+    Possible values are ```remote```, ```firefox```, ```chrome```, ```ie```, ```safari```, 
     ```phantomjs```, ```htmlunit```, or any class name implementing ```WebDriver```.
     
     If not defined, FluentLenium will use the first value for which WebDriver is available in classpath.
@@ -1460,7 +1459,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.1-SNAPSHOT</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1475,7 +1474,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1490,7 +1489,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1505,7 +1504,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-cucumber</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1546,7 +1545,7 @@ assertEqual("Hello toto",title());
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
     <scope>test</scope>
 </dependency>
 ```

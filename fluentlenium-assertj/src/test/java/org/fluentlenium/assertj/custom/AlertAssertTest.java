@@ -1,7 +1,7 @@
 package org.fluentlenium.assertj.custom;
 
 import org.fluentlenium.assertj.FluentLeniumAssertions;
-import org.fluentlenium.core.alert.Alert;
+import org.fluentlenium.core.alert.AlertImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 public class AlertAssertTest {
 
     @Mock
-    private Alert alert;
+    private AlertImpl alert;
     private AlertAssert alertAssert;
 
     @Before
@@ -44,13 +44,13 @@ public class AlertAssertTest {
 
     @Test
     public void testIsPresentOk() {
+        when(alert.present()).thenReturn(true);
         alertAssert.isPresent();
-        verify(alert).switchTo();
+        verify(alert).present();
     }
 
     @Test(expected = AssertionError.class)
     public void testIsPresentKo() {
-        doThrow(new NoAlertPresentException()).when(alert).switchTo();
         alertAssert.isPresent();
     }
 

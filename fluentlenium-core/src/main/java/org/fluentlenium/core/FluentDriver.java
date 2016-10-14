@@ -8,6 +8,7 @@ import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.action.WindowAction;
 import org.fluentlenium.core.alert.Alert;
+import org.fluentlenium.core.alert.AlertImpl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.css.CssControl;
@@ -96,7 +97,7 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
         this.keyboardActions = new KeyboardActions(driver);
         this.fluentInjector = new FluentInjector(adapter, events, componentsManager, new DefaultContainerInstanciator(this));
         this.cssControl = new CssControlImpl(adapter, adapter);
-        this.windowAction = new WindowAction(adapter, driver);
+        this.windowAction = new WindowAction(adapter, componentsManager.getInstantiator(), driver);
 
         configureDriver(); // NOPMD ConstructorCallsOverridableMethod
     }
@@ -407,7 +408,7 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
 
     @Override
     public Alert alert() {
-        return new Alert(getDriver());
+        return new AlertImpl(getDriver());
     }
 
     /**
