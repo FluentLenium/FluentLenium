@@ -20,12 +20,25 @@ public class CapabilitiesRegistryImpl extends AbstractFactoryRegistryImpl<Capabi
         registerDesiredCapabilities();
     }
 
+    @DefaultFactory
+    public static class DesiredCapabilitiesFactory extends MethodInvocationReflectionFactory {
+
+        /**
+         * Creates a new desired capabilities factory.
+         *
+         * @param method method to invoke that returns a {@link Capabilities} instance
+         */
+        public DesiredCapabilitiesFactory(final Method method) {
+            super(method, null);
+        }
+    }
+
     private void registerDesiredCapabilities() {
         final Method[] declaredMethods = DesiredCapabilities.class.getDeclaredMethods();
 
         for (final Method method : declaredMethods) {
             if (Modifier.isStatic(method.getModifiers()) && Capabilities.class.isAssignableFrom(method.getReturnType())) {
-                final MethodInvocationReflectionFactory factory = new MethodInvocationReflectionFactory(method, null);
+                final DesiredCapabilitiesFactory factory = new DesiredCapabilitiesFactory(method);
                 register(factory);
             }
         }
