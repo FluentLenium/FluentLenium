@@ -1,47 +1,20 @@
 package org.fluentlenium.core.alert;
 
-import lombok.experimental.Delegate;
-import org.openqa.selenium.WebDriver;
-
 /**
  * Manage browser alert.
  */
-public class Alert implements org.openqa.selenium.Alert {
-
-    private final WebDriver driver;
-
-    @Delegate
-    private org.openqa.selenium.Alert getSeleniumAlert() { // NOPMD UnusedPrivateMethod
-        return driver.switchTo().alert();
-    }
-
-    /**
-     * Creates a new alert object.
-     *
-     * @param driver selenium driver
-     */
-    public Alert(final WebDriver driver) {
-        this.driver = driver;
-    }
-
+public interface Alert extends org.openqa.selenium.Alert {
     /**
      * Send input to the alert prompt.
      *
      * @param text test to send to the prompt
      */
-    public void prompt(final String text) {
-        sendKeys(text);
-        accept();
-    }
+    void prompt(String text);
 
     /**
-     * Switch to an alert box.
+     * Check if this alert is present.
      *
-     * @return this object reference to chain calls.
-     * @throws org.openqa.selenium.NoAlertPresentException if there is currently no alert box.
+     * @return true if alert is present, false otherwise
      */
-    public org.openqa.selenium.Alert switchTo() {
-        return driver.switchTo().alert();
-    }
-
+    boolean present();
 }

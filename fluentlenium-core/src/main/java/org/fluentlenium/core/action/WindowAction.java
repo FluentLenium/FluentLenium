@@ -2,7 +2,10 @@ package org.fluentlenium.core.action;
 
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.FluentControl;
+import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.switchto.FluentTargetLocator;
+import org.fluentlenium.core.switchto.FluentTargetLocatorImpl;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
@@ -21,16 +24,19 @@ import static com.google.common.collect.Sets.difference;
  */
 public class WindowAction {
     private final FluentControl fluentControl;
+    private final ComponentInstantiator instantiator;
     private final WebDriver driver;
 
     /**
      * Creates a new window action.
      *
-     * @param control control interface
-     * @param driver  selenium driver
+     * @param control      control interface
+     * @param instantiator component instantiator
+     * @param driver       selenium driver
      */
-    public WindowAction(final FluentControl control, final WebDriver driver) {
+    public WindowAction(final FluentControl control, final ComponentInstantiator instantiator, final WebDriver driver) {
         this.driver = driver;
+        this.instantiator = instantiator;
         this.fluentControl = control;
     }
 
@@ -170,13 +176,12 @@ public class WindowAction {
     }
 
     /**
-     * Switches to parent frame.
+     * Create a switch target locator.
      *
-     * @return the WindowAction object itself
+     * @return an object to perform switch on various target.
      */
-    public WindowAction switchToParentFrame() {
-        this.driver.switchTo().parentFrame();
-        return this;
+    public FluentTargetLocator<WindowAction> switchTo() {
+        return new FluentTargetLocatorImpl<>(this, instantiator, this.driver.switchTo());
     }
 
     /**
@@ -186,7 +191,6 @@ public class WindowAction {
      */
     public WindowAction switchToLast() {
         final Set<String> windowHandles = new TreeSet<>(this.driver.getWindowHandles());
-
         this.driver.switchTo().window(getLast(windowHandles));
         return this;
     }
@@ -194,14 +198,14 @@ public class WindowAction {
     /**
      * Switches to lastly opened window excluding the one provided as a parameter.
      *
-     * @param windowHandleToExclude - if list size is greater then one it will be removed
+     * @param nameOrHandleToExclude if list size is greater than one it will be removed
      * @return the WindowAction object itself
      */
-    public WindowAction switchToLast(final String windowHandleToExclude) {
+    public WindowAction switchToLast(final String nameOrHandleToExclude) {
         final Set<String> windowHandles = new TreeSet<>(this.driver.getWindowHandles());
 
         if (windowHandles.size() > 1) {
-            windowHandles.remove(windowHandleToExclude);
+            windowHandles.remove(nameOrHandleToExclude);
         }
 
         this.driver.switchTo().window(getLast(windowHandles));
@@ -211,12 +215,11 @@ public class WindowAction {
     /**
      * Switches to particular window by handle.
      *
-     * @param windowHandle window handle reference as a String
+     * @param nameOrHandle window name or handle
      * @return the WindowAction object itself
      */
-    public WindowAction switchTo(final String windowHandle) {
-        this.driver.switchTo().window(windowHandle);
-        return this;
+    public WindowAction switchTo(final String nameOrHandle) {
+        return switchTo().window(nameOrHandle);
     }
 
     /**

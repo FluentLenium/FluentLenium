@@ -555,6 +555,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
+    public FluentList<E> frame() {
+        control.window().switchTo().frame(first());
+        return this;
+    }
+
+    @Override
     public Optional<FluentList<E>> optional() {
         if (present()) {
             return Optional.of((FluentList<E>) this);

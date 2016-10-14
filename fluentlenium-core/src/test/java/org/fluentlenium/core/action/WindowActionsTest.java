@@ -1,11 +1,12 @@
 package org.fluentlenium.core.action;
 
 import com.google.common.collect.ImmutableSet;
-import org.assertj.core.api.Assertions;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.switchto.FluentTargetLocator;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.core.wait.FluentWaitWindowConditions;
 import org.junit.After;
@@ -19,6 +20,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -41,6 +43,8 @@ public class WindowActionsTest {
     @Mock
     private FluentControl fluentControl;
     @Mock
+    private ComponentInstantiator instantiator;
+    @Mock
     private WebDriver.TargetLocator targetLocator;
 
     @Before
@@ -59,7 +63,7 @@ public class WindowActionsTest {
 
     @Test
     public void getWindowTest() {
-        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.instantiator, this.driver);
 
         windowAction.getWindow();
         verify(this.driver.manage(), times(1)).window();
@@ -67,7 +71,7 @@ public class WindowActionsTest {
 
     @Test
     public void maximizeWindowTest() {
-        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.instantiator, this.driver);
 
         windowAction.maximize();
         verify(this.driver.manage(), times(1)).window();
@@ -76,7 +80,7 @@ public class WindowActionsTest {
 
     @Test
     public void fullScreenWindowTest() {
-        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.instantiator, this.driver);
 
         windowAction.fullscreen();
         verify(this.driver.manage(), times(1)).window();
@@ -84,10 +88,20 @@ public class WindowActionsTest {
     }
 
     @Test
+    public void switchToTargetLocatorTest() {
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.instantiator, this.driver);
+
+        final FluentTargetLocator<WindowAction> switchTargetLocator = windowAction.switchTo();
+        assertThat(switchTargetLocator).isNotNull();
+
+        switchTargetLocator.parentFrame();
+    }
+
+    @Test
     public void switchToTest() {
         final String windowHandle = "WndH1";
 
-        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.instantiator, this.driver);
 
         when(this.driver.getWindowHandle()).thenReturn(windowHandle);
 
@@ -102,7 +116,7 @@ public class WindowActionsTest {
         final String windowHandle = "WndH1";
         final String windowHandle2 = "WndH2";
 
-        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.instantiator, this.driver);
 
         when(this.driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2));
 
@@ -138,7 +152,7 @@ public class WindowActionsTest {
         when(jsDriver.getWindowHandle()).thenReturn(windowHandle1, windowHandle2);
 
         when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);
-        final WindowAction windowAction = new WindowAction(fluentDriverSpied, jsDriver);
+        final WindowAction windowAction = new WindowAction(fluentDriverSpied, this.instantiator, jsDriver);
         windowAction.openNewAndSwitch();
 
         verify(jsDriver, times(1)).manage();
@@ -150,9 +164,9 @@ public class WindowActionsTest {
 
     @Test
     public void switchToParentFrame() {
-        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.instantiator, this.driver);
 
-        windowAction.switchToParentFrame();
+        windowAction.switchTo().parentFrame();
 
         verify(this.driver, times(1)).manage();
         verify(this.driver.switchTo(), times(1)).parentFrame();
@@ -160,7 +174,7 @@ public class WindowActionsTest {
 
     @Test
     public void setSizeTest() {
-        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.instantiator, this.driver);
         final Dimension dim = new Dimension(100, 200);
         windowAction.setSize(dim);
         verify(this.driver.manage(), times(1)).window();
@@ -182,7 +196,7 @@ public class WindowActionsTest {
         when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);
         when(this.fluentDriver.await()).thenReturn(fluentWait);
 
-        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.instantiator, this.driver);
         windowAction.clickAndCloseCurrent(fluentWebElement);
 
         verify(this.driver, times(1)).manage();
@@ -211,7 +225,7 @@ public class WindowActionsTest {
         when(fluentWebElement.click()).thenReturn(fluentWebElement);
 
         when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);
-        final WindowAction windowAction = new WindowAction(fluentDriverSpied, this.driver);
+        final WindowAction windowAction = new WindowAction(fluentDriverSpied, this.instantiator, this.driver);
         windowAction.clickAndOpenNew(fluentWebElement);
 
         verify(this.driver, times(3)).manage();
@@ -220,7 +234,7 @@ public class WindowActionsTest {
 
     @Test
     public void getSizeTest() {
-        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.instantiator, this.driver);
         final Point pos = new Point(101, 201);
 
         when(this.driver.manage().window().getPosition()).thenReturn(pos);
@@ -229,12 +243,12 @@ public class WindowActionsTest {
 
         verify(this.driver.manage(), times(2)).window();
         verify(this.driver.manage().window(), times(1)).getPosition();
-        Assertions.assertThat(getPos).isEqualTo(pos);
+        assertThat(getPos).isEqualTo(pos);
     }
 
     @Test
     public void getPositionTest() {
-        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.instantiator, this.driver);
         final Dimension dim = new Dimension(101, 201);
 
         when(this.driver.manage().window().getSize()).thenReturn(dim);
@@ -243,12 +257,12 @@ public class WindowActionsTest {
 
         verify(this.driver.manage(), times(2)).window();
         verify(this.driver.manage().window(), times(1)).getSize();
-        Assertions.assertThat(getSizeDim).isEqualTo(dim);
+        assertThat(getSizeDim).isEqualTo(dim);
     }
 
     @Test
     public void setPositionTest() {
-        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.instantiator, this.driver);
         final Point pos = new Point(101, 201);
 
         windowAction.setPosition(pos);
@@ -259,21 +273,12 @@ public class WindowActionsTest {
     @Test
     public void titleTest() {
         final String title = "title";
-        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
+        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.instantiator, this.driver);
         when(this.driver.getTitle()).thenReturn(title);
 
-        Assertions.assertThat(windowAction.title()).isEqualTo(title);
+        assertThat(windowAction.title()).isEqualTo(title);
 
         verify(this.driver.manage(), times(0)).window();
-    }
-
-    @Test
-    public void closeTest() {
-        final WindowAction windowAction = new WindowAction(this.fluentDriver, this.driver);
-        windowAction.close();
-
-        verify(this.driver.manage(), times(0)).window();
-        verify(this.driver, times(1)).close();
     }
 
     public interface JavascriptWebDriver extends WebDriver, JavascriptExecutor {

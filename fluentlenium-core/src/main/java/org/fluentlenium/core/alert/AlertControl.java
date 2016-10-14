@@ -5,7 +5,7 @@ package org.fluentlenium.core.alert;
  */
 public interface AlertControl {
     /**
-     * Get an object to control the alter window.
+     * Get an object to control the alert window.
      *
      * @return an alert object
      */
