@@ -63,7 +63,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
                 return instantiator.asComponentList(FluentListImpl.this.getClass(), componentClass, webElementList);
             }
         });
-        this.label = new FluentLabelImpl<>(this, new Supplier<String>() {
+        this.label = new FluentLabelImpl<FluentList<E>>(this, new Supplier<String>() {
             @Override
             public String get() {
                 return list.toString();

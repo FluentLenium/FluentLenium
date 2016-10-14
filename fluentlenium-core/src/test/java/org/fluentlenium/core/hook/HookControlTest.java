@@ -118,7 +118,7 @@ public class HookControlTest {
     public void testHook() {
         hookControl.withHook(Hook1.class);
 
-        verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class));
+        verify(hookControl).applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition(Hook1.class));
         resetAndMock(this.hookControl);
     }
 
@@ -126,12 +126,12 @@ public class HookControlTest {
     public void testNoHook() {
         this.hookControl.withHook(Hook1.class);
 
-        verify(this.hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class));
+        verify(this.hookControl).applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition(Hook1.class));
         resetAndMock(this.hookControl);
 
         hookControl.noHook();
 
-        verify(this.hookControl).applyHooks(eq(proxy), any(), hookDefinition());
+        verify(this.hookControl).applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition());
         resetAndMock(this.hookControl);
     }
 
@@ -139,7 +139,7 @@ public class HookControlTest {
     public void testNoHookInstance() {
         this.hookControl.withHook(Hook1.class);
 
-        verify(this.hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class));
+        verify(this.hookControl).applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition(Hook1.class));
         resetAndMock(this.hookControl);
 
         final HookControlImpl newInstance = (HookControlImpl) hookControl.noHookInstance();
@@ -154,7 +154,7 @@ public class HookControlTest {
         resetAndMock(this.hookControl);
         this.hookControl.withHook(Hook2.class);
 
-        verify(this.hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class, Hook2.class));
+        verify(this.hookControl).applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition(Hook1.class, Hook2.class));
         resetAndMock(this.hookControl);
 
         final HookControlImpl newInstance = (HookControlImpl) hookControl.noHookInstance(Hook1.class);
@@ -170,12 +170,12 @@ public class HookControlTest {
 
         this.hookControl.withHook(Hook2.class);
 
-        verify(this.hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class, Hook2.class));
+        verify(this.hookControl).applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition(Hook1.class, Hook2.class));
         resetAndMock(this.hookControl);
 
         hookControl.noHook(Hook2.class);
 
-        verify(this.hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class));
+        verify(this.hookControl).applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition(Hook1.class));
         resetAndMock(this.hookControl);
     }
 
@@ -187,17 +187,19 @@ public class HookControlTest {
         resetAndMock(this.hookControl);
         hookControl.withHook(Hook3.class);
 
-        verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class, Hook2.class, Hook3.class));
+        verify(hookControl)
+                .applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition(Hook1.class, Hook2.class, Hook3.class));
         resetAndMock(this.hookControl);
 
         hookControl.noHook();
 
-        verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition());
+        verify(hookControl).applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition());
         resetAndMock(this.hookControl);
 
         hookControl.restoreHooks();
 
-        verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class, Hook2.class, Hook3.class));
+        verify(hookControl)
+                .applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition(Hook1.class, Hook2.class, Hook3.class));
         resetAndMock(this.hookControl);
     }
 
@@ -212,18 +214,19 @@ public class HookControlTest {
             public String apply(final HookControl input) {
                 assertThat(input).isSameAs(hookControl);
                 assertThat(hookControl.getHookDefinitions()).isEmpty();
-                verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition());
+                verify(hookControl).applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition());
                 resetAndMock(hookControl);
                 return "test";
             }
         })).isEqualTo("test");
 
-        verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class, Hook2.class));
+        verify(hookControl).applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition(Hook1.class, Hook2.class));
 
         resetAndMock(hookControl);
         hookControl.withHook(Hook3.class);
 
-        verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class, Hook2.class, Hook3.class));
+        verify(hookControl)
+                .applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition(Hook1.class, Hook2.class, Hook3.class));
         resetAndMock(this.hookControl);
     }
 
@@ -239,18 +242,19 @@ public class HookControlTest {
                 assertThat(input).isSameAs(hookControl);
                 assertThat(hookControl.getHookDefinitions()).hasSize(1);
                 assertThat(hookControl.getHookDefinitions().get(0).getHookClass()).isEqualTo(Hook2.class);
-                verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook2.class));
+                verify(hookControl).applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition(Hook2.class));
                 resetAndMock(hookControl);
                 return "test";
             }
         })).isEqualTo("test");
 
-        verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class, Hook2.class));
+        verify(hookControl).applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition(Hook1.class, Hook2.class));
 
         resetAndMock(hookControl);
         hookControl.withHook(Hook3.class);
 
-        verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class, Hook2.class, Hook3.class));
+        verify(hookControl)
+                .applyHooks(eq(proxy), any(HookChainBuilder.class), hookDefinition(Hook1.class, Hook2.class, Hook3.class));
         resetAndMock(this.hookControl);
     }
 

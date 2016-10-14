@@ -1,5 +1,7 @@
 package org.fluentlenium.core.inject;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.apache.commons.lang3.ArrayUtils;
@@ -33,11 +35,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 /**
  * Handle injection of element proxies, @Page objects and @FindBy.
@@ -326,8 +328,13 @@ public class FluentInjector implements FluentInjectControl {
             if (ArrayUtils.isEmpty(value)) {
                 hookDefinitions.clear();
             } else {
-                final List<? extends Class<? extends FluentHook<?>>> toRemove = Arrays.stream(value).map(Hook::value)
-                        .collect(Collectors.toList());
+                final Collection<Class<? extends FluentHook<?>>> toRemove = Collections2
+                        .transform(Arrays.asList(value), new Function<Hook, Class<? extends FluentHook<?>>>() {
+                            @Override
+                            public Class<? extends FluentHook<?>> apply(final Hook input) {
+                                return input.value();
+                            }
+                        });
                 HookControlImpl.removeHooksFromDefinitions(hookDefinitions, toRemove.toArray(new Class[toRemove.size()]));
             }
         }
