@@ -1,6 +1,7 @@
 package org.fluentlenium.integration;
 
 import com.google.common.base.Supplier;
+import net.jcip.annotations.NotThreadSafe;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -23,6 +24,7 @@ import static org.fluentlenium.core.filter.FilterConstructor.withTextContent;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 import static org.junit.Assert.fail;
 
+@NotThreadSafe
 @SuppressWarnings({"PMD.GodClass", "PMD.ExcessivePublicCount"})
 public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     @Before
