@@ -142,6 +142,10 @@ public class HookControlImpl<T> implements HookControl<T> {
 
     /**
      * Apply defined hooks on the proxy.
+     *
+     * @param proxy            proxy
+     * @param hookChainBuilder hook chain builder
+     * @param hookDefinitions  hook definitions
      */
     protected void applyHooks(final Object proxy, final HookChainBuilder hookChainBuilder,
             final List<HookDefinition<?>> hookDefinitions) {

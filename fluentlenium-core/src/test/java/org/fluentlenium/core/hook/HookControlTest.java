@@ -2,8 +2,6 @@ package org.fluentlenium.core.hook;
 
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
-import org.assertj.core.api.Assertions;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
@@ -25,7 +23,6 @@ import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.argThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -48,13 +45,13 @@ public class HookControlTest {
     public static class HookDefinitionMatcher extends ArgumentMatcher<List<HookDefinition<?>>> {
         private final Class<?>[] hooks;
 
-        public HookDefinitionMatcher(Class<?>[] hooks) {
+        public HookDefinitionMatcher(final Class<?>[] hooks) {
             this.hooks = hooks;
         }
 
         @Override
-        public boolean matches(Object argument) {
-            List<HookDefinition<?>> hookDefinitions = (List<HookDefinition<?>>) argument;
+        public boolean matches(final Object argument) {
+            final List<HookDefinition<?>> hookDefinitions = (List<HookDefinition<?>>) argument;
 
             if (hookDefinitions.size() != hooks.length) {
                 return false;
@@ -70,7 +67,7 @@ public class HookControlTest {
         }
     }
 
-    public static List<HookDefinition<?>> hookDefinition(Class<?>... hooks) {
+    public static List<HookDefinition<?>> hookDefinition(final Class<?>... hooks) {
         return argThat(new HookDefinitionMatcher(hooks));
     }
 
@@ -95,7 +92,7 @@ public class HookControlTest {
         }
     }
 
-    public void resetAndMock(HookControlImpl<?> hookControl) {
+    public void resetAndMock(final HookControlImpl<?> hookControl) {
         reset(hookControl);
         doNothing().when(hookControl).applyHooks(any(Object.class), any(HookChainBuilder.class), anyList());
     }
@@ -106,9 +103,9 @@ public class HookControlTest {
         ReflectionUtils.set(HookControlImpl.class.getDeclaredField("self"), hookControl, hookControl);
         when(supplier.get()).thenAnswer(new Answer<HookControlImpl>() {
             @Override
-            public HookControlImpl answer(InvocationOnMock invocation) throws Throwable {
-                HookControlImpl<HookControl> answer = spy(new HookControlImpl<>(null, proxy, control, instantiator,
-                        supplier));
+            public HookControlImpl answer(final InvocationOnMock invocation) throws Throwable {
+                final HookControlImpl<HookControl> answer = spy(
+                        new HookControlImpl<>(null, proxy, control, instantiator, supplier));
                 ReflectionUtils.set(HookControlImpl.class.getDeclaredField("self"), answer, answer);
                 resetAndMock(answer);
                 return answer;
@@ -145,7 +142,7 @@ public class HookControlTest {
         verify(this.hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class));
         resetAndMock(this.hookControl);
 
-        HookControlImpl newInstance = (HookControlImpl) hookControl.noHookInstance();
+        final HookControlImpl newInstance = (HookControlImpl) hookControl.noHookInstance();
         assertThat(newInstance.getHookDefinitions()).isEmpty();
         assertThat(this.hookControl.getHookDefinitions()).hasSize(1);
     }
@@ -160,7 +157,7 @@ public class HookControlTest {
         verify(this.hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class, Hook2.class));
         resetAndMock(this.hookControl);
 
-        HookControlImpl newInstance = (HookControlImpl) hookControl.noHookInstance(Hook1.class);
+        final HookControlImpl newInstance = (HookControlImpl) hookControl.noHookInstance(Hook1.class);
 
         assertThat(newInstance.getHookDefinitions()).hasSize(1);
         assertThat(this.hookControl.getHookDefinitions()).hasSize(2);
@@ -210,10 +207,9 @@ public class HookControlTest {
         hookControl.withHook(Hook2.class);
         resetAndMock(hookControl);
 
-
         assertThat(hookControl.noHook(new Function<HookControl, String>() {
             @Override
-            public String apply(HookControl input) {
+            public String apply(final HookControl input) {
                 assertThat(input).isSameAs(hookControl);
                 assertThat(hookControl.getHookDefinitions()).isEmpty();
                 verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition());
@@ -237,10 +233,9 @@ public class HookControlTest {
         hookControl.withHook(Hook2.class);
         resetAndMock(hookControl);
 
-
         assertThat(hookControl.noHook(Hook1.class, new Function<HookControl, String>() {
             @Override
-            public String apply(HookControl input) {
+            public String apply(final HookControl input) {
                 assertThat(input).isSameAs(hookControl);
                 assertThat(hookControl.getHookDefinitions()).hasSize(1);
                 assertThat(hookControl.getHookDefinitions().get(0).getHookClass()).isEqualTo(Hook2.class);

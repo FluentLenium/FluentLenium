@@ -1,20 +1,20 @@
 package org.fluentlenium.assertj.custom;
 
 import org.assertj.core.api.AbstractAssert;
-import org.fluentlenium.core.alert.Alert;
+import org.fluentlenium.core.alert.AlertImpl;
 import org.openqa.selenium.NoAlertPresentException;
 
 /**
  * Alert assertions.
  */
-public class AlertAssert extends AbstractAssert<AlertAssert, Alert> {
+public class AlertAssert extends AbstractAssert<AlertAssert, AlertImpl> {
 
     /**
      * Creates a new assertion object for alert.
      *
      * @param actual actual alert
      */
-    public AlertAssert(final Alert actual) {
+    public AlertAssert(final AlertImpl actual) {
         super(actual, AlertAssert.class);
     }
 
@@ -43,12 +43,9 @@ public class AlertAssert extends AbstractAssert<AlertAssert, Alert> {
      * @return self
      */
     public AlertAssert isPresent() {
-        try {
-            actual.switchTo();
-        } catch (final NoAlertPresentException e) {
+        if (!actual.present()) {
             super.failWithMessage("There is no alert box");
         }
-
         return this;
     }
 

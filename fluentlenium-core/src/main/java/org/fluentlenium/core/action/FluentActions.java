@@ -62,4 +62,11 @@ public interface FluentActions<T, E extends FluentWebElement> {
      * @return Fill select builder
      */
     FillSelect<E> fillSelect();
+
+    /**
+     * Select a frame using this element.
+     *
+     * @return this object reference to chain methods calls.
+     */
+    T frame();
 }

@@ -21,26 +21,19 @@ public class AlertTest {
     @Mock
     private org.openqa.selenium.Alert seleniumAlert;
 
-    private Alert alert;
+    private AlertImpl alert;
 
     @Before
     public void before() {
         when(driver.switchTo()).thenReturn(targetLocator);
         when(targetLocator.alert()).thenReturn(seleniumAlert);
-        alert = new Alert(driver);
+        alert = new AlertImpl(driver);
     }
 
     @Test
     public void testAlert() {
         alert.accept();
         verify(seleniumAlert).accept();
-    }
-
-    @Test
-    public void testSwitchTo() {
-        alert.switchTo();
-        verify(driver).switchTo();
-        verify(targetLocator).alert();
     }
 
     @Test
