@@ -13,6 +13,7 @@
     <properties>
         <!-- Configure this property to latest available version -->
         <fluentlenium.version>3.0.1-SNAPSHOT</fluentlenium.version>
+        <selenium.version>3.0.0</selenium.version>
         <spring.version>4.2.4.RELEASE</spring.version>
     </properties>
 
@@ -30,7 +31,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>3.0.0-beta4</version>
+            <version>${selenium.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
