@@ -11,6 +11,7 @@ import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.wait.WaitConditionProxy;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.utils.SupplierOfInstance;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
@@ -28,6 +29,7 @@ public class FluentWait
     private final WebDriver driver;
     private boolean useDefaultException;
     private boolean messageDefined;
+    private boolean defaultExceptionsRegistered;
 
     /**
      * Creates a new fluent wait.
@@ -108,7 +110,9 @@ public class FluentWait
     }
 
     private void updateWaitWithDefaultExceptions() {
-        if (useDefaultException) {
+        if (useDefaultException & !defaultExceptionsRegistered) {
+            defaultExceptionsRegistered = true;
+            wait.ignoring(NoSuchElementException.class);
             wait.ignoring(StaleElementReferenceException.class);
         }
     }

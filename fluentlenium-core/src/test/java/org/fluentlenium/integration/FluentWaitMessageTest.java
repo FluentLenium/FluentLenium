@@ -8,6 +8,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.FindBy;
 
@@ -288,7 +289,22 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
             }
         }).hasMessageStartingWith(
                 "Expected condition failed: Element By.cssSelector: #select (first) (Lazy Element) rectangle width is not less "
-                        + "than 0").isExactlyInstanceOf(TimeoutException.class);
+                        + "than 0 (actual: 1256)").isExactlyInstanceOf(TimeoutException.class);
+    }
+
+    @Test
+    public void testMessageContextList() {
+        goTo(DEFAULT_URL);
+        final FluentList<FluentWebElement> select = $("#select");
+
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                select.await().until().rectangle().width().lessThan(0);
+            }
+        }).hasMessageStartingWith(
+                "Expected condition failed: Elements By.cssSelector: #select (Lazy Element List) rectangle width is not"
+                        + " less " + "than 0 (actual: [1256])").isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -302,8 +318,8 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
                 select.await().until().rectangle().width().lessThan(0);
             }
         }).hasMessageStartingWith(
-                "Expected condition failed: Element My Value Select [hint1, hint2] rectangle width is not less than 0")
-                .isExactlyInstanceOf(TimeoutException.class);
+                "Expected condition failed: Element My Value Select [hint1, hint2] rectangle width is not less than 0 (actual: "
+                        + "1256)").isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -317,8 +333,8 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
                 select.await().until().rectangle().width().lessThan(0);
             }
         }).hasMessageStartingWith(
-                "Expected condition failed: Element My Value Select [hint1, hint2] rectangle width is not less than 0")
-                .isExactlyInstanceOf(TimeoutException.class);
+                "Expected condition failed: Element My Value Select [hint1, hint2] rectangle width is not less than 0 (actual: "
+                        + "1256)").isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -333,7 +349,7 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
             }
         }).hasMessageStartingWith(
                 "Expected condition failed: Element By.cssSelector: #not-found (first) (Lazy Element) is not enabled")
-                .isExactlyInstanceOf(TimeoutException.class);
+                .isExactlyInstanceOf(TimeoutException.class).hasCauseExactlyInstanceOf(NoSuchElementException.class);
     }
 
     @Test

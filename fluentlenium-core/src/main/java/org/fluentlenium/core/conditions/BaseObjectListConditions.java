@@ -2,7 +2,11 @@ package org.fluentlenium.core.conditions;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import org.fluentlenium.core.domain.FluentWebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Base condition for list of objects
@@ -10,7 +14,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
  * @param <T> type of underlying object in the list
  * @param <C> type of conditions
  */
-public class BaseObjectListConditions<T, C extends Conditions<T>> {
+public class BaseObjectListConditions<T, C extends Conditions<T>> implements ConditionsObject<List<T>> {
     protected Conditions<FluentWebElement> conditions;
     protected final Function<FluentWebElement, T> objectGetter;
     protected final Function<FluentWebElement, C> conditionsGetter;
@@ -27,6 +31,15 @@ public class BaseObjectListConditions<T, C extends Conditions<T>> {
         this.conditions = conditions;
         this.objectGetter = objectGetter;
         this.conditionsGetter = conditionsGetter;
+    }
+
+    @Override
+    public List<T> getActualObject() {
+        if (conditions instanceof ListConditionsElements) {
+            final List<? extends FluentWebElement> elements = ((ListConditionsElements) conditions).getActualElements();
+            return new ArrayList<>(Collections2.transform(elements, objectGetter));
+        }
+        return new ArrayList<>();
     }
 
     /**

@@ -10,7 +10,7 @@ import java.util.List;
  * Abstract class conditions on list of elements.
  */
 @SuppressWarnings("PMD.ExcessivePublicCount")
-public abstract class AbstractFluentListConditions implements FluentListConditions {
+public abstract class AbstractFluentListConditions implements FluentListConditions, ListConditionsElements {
     private boolean negation;
 
     private final List<? extends FluentWebElement> elements;
@@ -60,6 +60,12 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
+    public List<? extends FluentWebElement> getActualElements() {
+        return elements;
+    }
+
+    @Override
+
     public IntegerConditions size() {
         return new IntegerConditionsImpl(elements.size(), negation);
     }
