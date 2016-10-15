@@ -9,6 +9,7 @@ import org.fluentlenium.core.hook.wait.Wait;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.FindBy;
 
@@ -72,8 +73,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
             }
         }).hasMessageStartingWith(
                 "Timed out after 0 seconds: Element By.cssSelector: #disabled (first) (<input id=\"disabled\" type=\"checkbox\""
-                        + " value=\"John\" disabled=\"disabled\" />) is not enabled")
-                .isExactlyInstanceOf(TimeoutException.class);
+                        + " value=\"John\" disabled=\"disabled\" />) is not enabled").isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -102,8 +102,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
             }
         }).hasMessageStartingWith(
                 "Timed out after 0 seconds: Element By.cssSelector: #disabled (first) (<input id=\"disabled\" type=\"checkbox\""
-                        + " value=\"John\" disabled=\"disabled\" />) is not enabled")
-                .isExactlyInstanceOf(TimeoutException.class);
+                        + " value=\"John\" disabled=\"disabled\" />) is not enabled").isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -118,8 +117,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
             }
         }).hasMessageStartingWith(
                 "Timed out after 0 seconds: Element FluentWaitMessageWithHookTest.disabledDefaultLabel (Lazy Element) is not "
-                        + "enabled")
-                .isExactlyInstanceOf(TimeoutException.class);
+                        + "enabled").isExactlyInstanceOf(TimeoutException.class);
 
         first.now();
         assertThat(first.toString()).isEqualTo(
@@ -161,8 +159,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
             }
         }).hasMessageStartingWith(
                 "Timed out after 0 seconds: Element custom [hint] (<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
-                        + "disabled=\"disabled\" />) is not enabled")
-                .isExactlyInstanceOf(TimeoutException.class);
+                        + "disabled=\"disabled\" />) is not enabled").isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -190,8 +187,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
             }
         }).hasMessageStartingWith(
                 "Timed out after 0 seconds: Elements By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" "
-                        + "value=\"John\" disabled=\"disabled\" />]) is not enabled")
-                .isExactlyInstanceOf(TimeoutException.class);
+                        + "value=\"John\" disabled=\"disabled\" />]) is not enabled").isExactlyInstanceOf(TimeoutException.class);
 
     }
 
@@ -220,8 +216,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
             }
         }).hasMessageStartingWith(
                 "Timed out after 0 seconds: Elements By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" "
-                        + "value=\"John\" disabled=\"disabled\" />]) is not enabled")
-                .isExactlyInstanceOf(TimeoutException.class);
+                        + "value=\"John\" disabled=\"disabled\" />]) is not enabled").isExactlyInstanceOf(TimeoutException.class);
 
     }
 
@@ -237,8 +232,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
             }
         }).hasMessageStartingWith(
                 "Timed out after 0 seconds: Elements FluentWaitMessageWithHookTest.disabledDefaultLabelList (Lazy Element List)"
-                        + " is not enabled")
-                .isExactlyInstanceOf(TimeoutException.class);
+                        + " is not enabled").isExactlyInstanceOf(TimeoutException.class);
 
         list.now();
         assertThat(list.toString()).isEqualTo(
@@ -281,8 +275,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
             }
         }).hasMessageStartingWith(
                 "Timed out after 0 seconds: Elements custom [hint] ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
-                        + "disabled=\"disabled\" />]) is not enabled")
-                .isExactlyInstanceOf(TimeoutException.class);
+                        + "disabled=\"disabled\" />]) is not enabled").isExactlyInstanceOf(TimeoutException.class);
 
     }
 
@@ -298,8 +291,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
             }
         }).hasMessageStartingWith(
                 "Timed out after 0 seconds: Element By.cssSelector: #select (first) (Lazy Element) rectangle width is not less "
-                        + "than 0")
-                .isExactlyInstanceOf(TimeoutException.class);
+                        + "than 0").isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -342,9 +334,8 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
             public void call() throws Throwable {
                 first.await().until().enabled();
             }
-        }).hasMessageStartingWith(
-                "Timed out after 0 seconds: Element By.cssSelector: #not-found (first) (Lazy Element) is not enabled")
-                .isExactlyInstanceOf(TimeoutException.class);
+        }).hasMessageStartingWith("Timed out after 0 seconds waiting for By.cssSelector: #not-found (first) (Lazy Element)")
+                .isExactlyInstanceOf(TimeoutException.class).hasCauseExactlyInstanceOf(NoSuchElementException.class);
     }
 
     @Test
@@ -357,8 +348,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
             public void call() throws Throwable {
                 list.await().until().enabled();
             }
-        }).hasMessageStartingWith(
-                "Timed out after 0 seconds: Elements By.cssSelector: #not-found (Lazy Element List) is not enabled")
+        }).hasMessageStartingWith("Timed out after 0 seconds waiting for By.cssSelector: #not-found (Lazy Element List)")
                 .isExactlyInstanceOf(TimeoutException.class);
     }
 }

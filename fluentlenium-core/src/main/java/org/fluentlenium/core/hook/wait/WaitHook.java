@@ -6,7 +6,6 @@ import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.hook.BaseFluentHook;
 import org.fluentlenium.core.wait.FluentWait;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
@@ -67,7 +66,7 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
 
     @Override
     public List<WebElement> findElements() {
-        return buildAwait().ignoring(NoSuchElementException.class).until(new Function<FluentControl, List<WebElement>>() {
+        return buildAwait().until(new Function<FluentControl, List<WebElement>>() {
 
             @Override
             public List<WebElement> apply(final FluentControl input) {
@@ -87,7 +86,7 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
 
     @Override
     public WebElement findElement() {
-        return buildAwait().ignoring(NoSuchElementException.class).until(new Function<FluentControl, WebElement>() {
+        return buildAwait().until(new Function<FluentControl, WebElement>() {
 
             @Override
             public WebElement apply(final FluentControl input) {

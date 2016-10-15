@@ -7,14 +7,12 @@ import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.conditions.Conditions;
+import org.fluentlenium.core.conditions.ConditionsObject;
 import org.fluentlenium.core.conditions.Negation;
-import org.fluentlenium.core.conditions.NoSuchElementValue;
 import org.fluentlenium.core.conditions.message.MessageContext;
 import org.fluentlenium.core.conditions.message.MessageProxy;
 import org.fluentlenium.core.wait.FluentWait;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.internal.WrapsElement;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -167,7 +165,20 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
             @Override
             public String get() {
                 conditionFunction.apply(messageBuilder);
-                return MessageProxy.message(messageBuilder);
+                final StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append(MessageProxy.message(messageBuilder));
+
+                if (condition instanceof ConditionsObject) {
+                    final Object actualObject = ((ConditionsObject) condition).getActualObject();
+
+                    if (!(actualObject instanceof WrapsElement)) {
+                        stringBuilder.append(" (actual: ");
+                        stringBuilder.append(actualObject);
+                        stringBuilder.append(')');
+                    }
+                }
+
+                return stringBuilder.toString();
             }
         };
 
@@ -208,7 +219,8 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
     }
 
     private boolean waitForCondition(final Method method, final Object[] args) {
-        until(conditions(), messageBuilder(), new Function<C, Boolean>() {
+        final C messageBuilder = messageBuilder();
+        until(conditions(), messageBuilder, new Function<C, Boolean>() {
             @Override
             public Boolean apply(final C input) {
                 try {
@@ -217,20 +229,14 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
                     throw new IllegalStateException("An internal error has occured while waiting", e);
                 } catch (final InvocationTargetException e) {
                     final Throwable targetException = e.getTargetException();
-                    if (isNoSuchElementException(targetException)) {
-                        final NoSuchElementValue annotation = method.getAnnotation(NoSuchElementValue.class);
-                        return annotation != null && annotation.value();
+                    if (targetException instanceof RuntimeException) {
+                        throw (RuntimeException) targetException;
                     }
                     throw new IllegalStateException("An internal error has occured while waiting", e);
                 }
             }
         });
         return true;
-    }
-
-    private boolean isNoSuchElementException(final Throwable targetException) {
-        return targetException instanceof TimeoutException || targetException instanceof NoSuchElementException
-                || targetException instanceof StaleElementReferenceException;
     }
 
     private Conditions<?> buildNegationProxy() {

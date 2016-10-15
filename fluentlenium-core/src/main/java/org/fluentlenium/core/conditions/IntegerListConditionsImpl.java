@@ -4,64 +4,60 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
+import java.util.List;
+
 /**
  * Conditions for list of integers.
  */
-public class IntegerListConditionsImpl implements IntegerConditions {
-
-    private final Conditions<FluentWebElement> listConditions;
-    private final Function<FluentWebElement, Integer> integerGetter;
-    private final Function<FluentWebElement, IntegerConditions> conditionsGetter;
-
+public class IntegerListConditionsImpl extends BaseObjectListConditions<Integer, IntegerConditions>
+        implements IntegerConditions, ConditionsObject<List<Integer>> {
     /**
      * Creates a new list conditions
      *
-     * @param listConditions   list conditions
-     * @param integerGetter    getter of the underlying object
+     * @param conditions       list conditions
+     * @param objectGetter     getter of the underlying object
      * @param conditionsGetter getter of the underlying conditions
      */
-    public IntegerListConditionsImpl(final Conditions<FluentWebElement> listConditions,
-            final Function<FluentWebElement, Integer> integerGetter,
+    public IntegerListConditionsImpl(final Conditions<FluentWebElement> conditions,
+            final Function<FluentWebElement, Integer> objectGetter,
             final Function<FluentWebElement, IntegerConditions> conditionsGetter) {
-        this.listConditions = listConditions;
-        this.integerGetter = integerGetter;
-        this.conditionsGetter = conditionsGetter;
+        super(conditions, objectGetter, conditionsGetter);
     }
 
     /**
      * Creates a new list conditions, with default integer condition implementation
      *
-     * @param listConditions list conditions
-     * @param integerGetter  getter of the underlying object
+     * @param conditions   list conditions
+     * @param objectGetter getter of the underlying object
      */
-    public IntegerListConditionsImpl(final Conditions<FluentWebElement> listConditions,
-            final Function<FluentWebElement, Integer> integerGetter) {
-        this(listConditions, integerGetter, new Function<FluentWebElement, IntegerConditions>() {
+    public IntegerListConditionsImpl(final Conditions<FluentWebElement> conditions,
+            final Function<FluentWebElement, Integer> objectGetter) {
+        this(conditions, objectGetter, new Function<FluentWebElement, IntegerConditions>() {
             @Override
             public IntegerConditions apply(final FluentWebElement input) {
-                return new IntegerConditionsImpl(integerGetter.apply(input));
+                return new IntegerConditionsImpl(objectGetter.apply(input));
             }
         });
     }
 
     @Override
     public boolean verify(final Predicate<Integer> predicate) {
-        return listConditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(final FluentWebElement input) {
-                return predicate.apply(integerGetter.apply(input));
+                return predicate.apply(objectGetter.apply(input));
             }
         });
     }
 
     @Override
     public IntegerListConditionsImpl not() {
-        return new IntegerListConditionsImpl(listConditions.not(), integerGetter, conditionsGetter);
+        return new IntegerListConditionsImpl(conditions.not(), objectGetter, conditionsGetter);
     }
 
     @Override
     public boolean equalTo(final int value) {
-        return this.listConditions.verify(new Predicate<FluentWebElement>() {
+        return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).equalTo(value);
@@ -71,7 +67,7 @@ public class IntegerListConditionsImpl implements IntegerConditions {
 
     @Override
     public boolean lessThan(final int value) {
-        return this.listConditions.verify(new Predicate<FluentWebElement>() {
+        return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).lessThan(value);
@@ -81,7 +77,7 @@ public class IntegerListConditionsImpl implements IntegerConditions {
 
     @Override
     public boolean lessThanOrEqualTo(final int value) {
-        return this.listConditions.verify(new Predicate<FluentWebElement>() {
+        return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).lessThanOrEqualTo(value);
@@ -91,7 +87,7 @@ public class IntegerListConditionsImpl implements IntegerConditions {
 
     @Override
     public boolean greaterThan(final int value) {
-        return this.listConditions.verify(new Predicate<FluentWebElement>() {
+        return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).greaterThan(value);
@@ -101,7 +97,7 @@ public class IntegerListConditionsImpl implements IntegerConditions {
 
     @Override
     public boolean greaterThanOrEqualTo(final int value) {
-        return this.listConditions.verify(new Predicate<FluentWebElement>() {
+        return this.conditions.verify(new Predicate<FluentWebElement>() {
             @Override
             public boolean apply(final FluentWebElement input) {
                 return conditionsGetter.apply(input).greaterThanOrEqualTo(value);

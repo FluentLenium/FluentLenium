@@ -291,10 +291,6 @@ public class FluentWaitEachElementMatcherTest {
             }
         }).isExactlyInstanceOf(TimeoutException.class);
 
-        verify(fluentWebElement1, atLeastOnce()).text();
-        verify(fluentWebElement2, never()).text();
-        verify(fluentWebElement3, never()).text();
-
         when(fluentWebElement1.text()).thenReturn("text");
         when(fluentWebElement2.text()).thenReturn("text");
         when(fluentWebElement3.text()).thenReturn("text");
@@ -323,8 +319,8 @@ public class FluentWaitEachElementMatcherTest {
         }).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).text();
-        verify(fluentWebElement2, never()).text();
-        verify(fluentWebElement3, never()).text();
+        verify(fluentWebElement2, atLeastOnce()).text();
+        verify(fluentWebElement3, atLeastOnce()).text();
 
         when(fluentWebElement1.text()).thenReturn("text");
         when(fluentWebElement2.text()).thenReturn("text");
@@ -596,8 +592,8 @@ public class FluentWaitEachElementMatcherTest {
         }).isExactlyInstanceOf(TimeoutException.class);
 
         verify(element1, atLeastOnce()).getRect();
-        verify(element2, never()).getRect();
-        verify(element3, never()).getRect();
+        verify(element2, atLeastOnce()).getRect();
+        verify(element3, atLeastOnce()).getRect();
 
         matcher.rectangle().x(1);
 
