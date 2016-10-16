@@ -1,8 +1,8 @@
 package org.fluentlenium.configuration;
 
 import org.assertj.core.api.Assertions;
-import org.fluentlenium.configuration.AbstractPropertiesConfigurationTest.DummyConfigurationDefaults;
-import org.fluentlenium.configuration.AbstractPropertiesConfigurationTest.DummyConfigurationFactory;
+import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationDefaults;
+import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;

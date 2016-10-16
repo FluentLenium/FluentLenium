@@ -83,13 +83,13 @@ public class FluentWebElementTest {
     @Test
     public void testDoubleClick() {
         fluentElement.doubleClick();
-        verify(mouse).doubleClick(any(Coordinates.class));
+        verify(mouse).doubleClick((Coordinates) any());
     }
 
     @Test
     public void testContextClick() {
         fluentElement.contextClick();
-        verify(mouse).contextClick(any(Coordinates.class));
+        verify(mouse).contextClick((Coordinates) any());
     }
 
     @Test
@@ -106,7 +106,7 @@ public class FluentWebElementTest {
     @Test
     public void testMouse() {
         assertThat(fluentElement.mouse().click());
-        verify(mouse).click(any(Coordinates.class));
+        verify(mouse).click((Coordinates) any());
     }
 
     @Test

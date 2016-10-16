@@ -3,6 +3,9 @@ package org.fluentlenium.configuration;
 import lombok.experimental.Delegate;
 import org.openqa.selenium.Capabilities;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * A configuration composed with a writable configuration and list of read configurations.
  * <p>
@@ -30,6 +33,24 @@ public class ComposedConfiguration implements Configuration {
         if (writableConfiguration instanceof BaseConfiguration) {
             ((BaseConfiguration) writableConfiguration).setGlobalConfiguration(this);
         }
+    }
+
+    /**
+     * Get configurations.
+     *
+     * @return configurations
+     */
+    List<ConfigurationProperties> getConfigurations() {
+        return Arrays.asList(configurations);
+    }
+
+    /**
+     * Get writable configuration.
+     *
+     * @return writable configuration
+     */
+    ConfigurationMutator getWritableConfiguration() {
+        return writableConfiguration;
     }
 
     @Override

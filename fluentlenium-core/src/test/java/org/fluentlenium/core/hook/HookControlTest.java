@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -19,7 +20,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.argThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
@@ -42,7 +42,7 @@ public class HookControlTest {
 
     private HookControlImpl<HookControl> hookControl;
 
-    public static class HookDefinitionMatcher extends ArgumentMatcher<List<HookDefinition<?>>> {
+    public static class HookDefinitionMatcher implements ArgumentMatcher<List<HookDefinition<?>>> {
         private final Class<?>[] hooks;
 
         public HookDefinitionMatcher(final Class<?>[] hooks) {
@@ -50,15 +50,13 @@ public class HookControlTest {
         }
 
         @Override
-        public boolean matches(final Object argument) {
-            final List<HookDefinition<?>> hookDefinitions = (List<HookDefinition<?>>) argument;
-
-            if (hookDefinitions.size() != hooks.length) {
+        public boolean matches(final List<HookDefinition<?>> argument) {
+            if (argument.size() != hooks.length) {
                 return false;
             }
 
-            for (int i = 0; i < hookDefinitions.size(); i++) {
-                if (!hookDefinitions.get(i).getHookClass().equals(hooks[i])) {
+            for (int i = 0; i < argument.size(); i++) {
+                if (!argument.get(i).getHookClass().equals(hooks[i])) {
                     return false;
                 }
             }
@@ -94,7 +92,8 @@ public class HookControlTest {
 
     public void resetAndMock(final HookControlImpl<?> hookControl) {
         reset(hookControl);
-        doNothing().when(hookControl).applyHooks(any(Object.class), any(HookChainBuilder.class), anyList());
+        doNothing().when(hookControl)
+                .applyHooks(any(Object.class), any(HookChainBuilder.class), ArgumentMatchers.<HookDefinition<?>>anyList());
     }
 
     @Before
