@@ -3,21 +3,18 @@ package org.fluentlenium.configuration;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({SystemPropertiesConfiguration.class, EnvironmentVariablesConfiguration.class})
 public class ConfigurationDefaultsFactoryTest {
+
+    private final Properties environmentVariables = new Properties();
+    private final Properties systemProperties = new Properties();
 
     @FluentConfiguration(pageLoadTimeout = 2000L)
     public static class AnnotatedContainer {
@@ -26,7 +23,16 @@ public class ConfigurationDefaultsFactoryTest {
 
     @Before
     public void before() {
-        PowerMockito.mockStatic(System.class);
+        environmentVariables.clear();
+        systemProperties.clear();
+    }
+
+    public void mockEnvironmentVariable(final String property, final String value) {
+        environmentVariables.put(property, value);
+    }
+
+    public void mockSystemProperty(final String property, final String value) {
+        systemProperties.put(property, value);
     }
 
     @Test
@@ -39,21 +45,35 @@ public class ConfigurationDefaultsFactoryTest {
         };
 
         final Configuration configuration = factory.newConfiguration(AnnotatedContainer.class, new ConfigurationDefaults());
+        setupConfiguration((ComposedConfiguration) configuration);
 
         // Annotation has higher priority than configuration file, so it should be 2000L and not 5000L.
         assertThat(configuration.getPageLoadTimeout()).isEqualTo(2000L);
 
-        Mockito.when(System.getenv("fluentlenium.pageLoadTimeout")).thenReturn("1000");
+        mockEnvironmentVariable("fluentlenium.pageLoadTimeout", "1000");
 
         assertThat(configuration.getPageLoadTimeout()).isEqualTo(1000L);
 
-        Mockito.when(System.getProperty("fluentlenium.pageLoadTimeout")).thenReturn("500");
+        mockSystemProperty("fluentlenium.pageLoadTimeout", "500");
 
         assertThat(configuration.getPageLoadTimeout()).isEqualTo(500L);
 
         configuration.setPageLoadTimeout(250L);
 
         assertThat(configuration.getPageLoadTimeout()).isEqualTo(250L);
+    }
+
+    private void setupConfiguration(final ComposedConfiguration composedConfiguration) {
+        for (final ConfigurationProperties configuration : composedConfiguration.getConfigurations()) {
+            if (configuration instanceof PropertiesBackendConfiguration) {
+                final PropertiesBackendConfiguration readerConfiguration = (PropertiesBackendConfiguration) configuration;
+                if (readerConfiguration.getPropertiesBackend() instanceof EnvironmentVariablesBackend) {
+                    readerConfiguration.setPropertiesBackend(new DefaultPropertiesBackend(environmentVariables));
+                } else if (readerConfiguration.getPropertiesBackend() instanceof SystemPropertiesBackend) {
+                    readerConfiguration.setPropertiesBackend(new DefaultPropertiesBackend(systemProperties));
+                }
+            }
+        }
     }
 
     @Test
@@ -66,15 +86,16 @@ public class ConfigurationDefaultsFactoryTest {
         };
 
         final Configuration configuration = factory.newConfiguration(null, null);
+        setupConfiguration((ComposedConfiguration) configuration);
 
         assertThat(configuration.getPageLoadTimeout()).isEqualTo(5000L);
         assertThat(configuration.getScriptTimeout()).isEqualTo(1000L);
 
-        Mockito.when(System.getenv("fluentlenium.pageLoadTimeout")).thenReturn("1000");
+        mockEnvironmentVariable("fluentlenium.pageLoadTimeout", "1000");
 
         assertThat(configuration.getPageLoadTimeout()).isEqualTo(1000L);
 
-        Mockito.when(System.getProperty("fluentlenium.pageLoadTimeout")).thenReturn("500");
+        mockSystemProperty("fluentlenium.pageLoadTimeout", "500");
 
         assertThat(configuration.getPageLoadTimeout()).isEqualTo(500L);
 
@@ -115,15 +136,16 @@ public class ConfigurationDefaultsFactoryTest {
         };
 
         final Configuration configuration = factory.newConfiguration(AnnotatedContainer.class, configurationDefaults);
+        setupConfiguration((ComposedConfiguration) configuration);
 
         // Annotation has higher priority than configuration file, so it should be 2000L and not 5000L.
         assertThat(configuration.getPageLoadTimeout()).isEqualTo(2000L);
 
-        Mockito.when(System.getenv("fluentlenium.pageLoadTimeout")).thenReturn("1000");
+        mockEnvironmentVariable("fluentlenium.pageLoadTimeout", "1000");
 
         assertThat(configuration.getPageLoadTimeout()).isEqualTo(1000L);
 
-        Mockito.when(System.getProperty("fluentlenium.pageLoadTimeout")).thenReturn("500");
+        mockSystemProperty("fluentlenium.pageLoadTimeout", "500");
 
         assertThat(configuration.getPageLoadTimeout()).isEqualTo(500L);
 

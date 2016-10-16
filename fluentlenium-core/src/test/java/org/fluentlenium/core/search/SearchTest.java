@@ -133,15 +133,12 @@ public class SearchTest {
 
         final By locator = By.cssSelector("cssStyle");
         final AttributeFilter[] filters = new AttributeFilter[] {filter1, filter2};
-        when(filter1.isCssFilterSupported()).thenReturn(true);
-        when(filter1.getCssFilter()).thenReturn("[generated=true]");
         when(filter1.applyFilter(anyCollection())).thenAnswer(new Answer<Collection<FluentWebElement>>() {
             @Override
             public Collection<FluentWebElement> answer(final InvocationOnMock invocation) throws Throwable {
                 return (Collection<FluentWebElement>) invocation.getArguments()[0];
             }
         });
-        when(filter2.isCssFilterSupported()).thenReturn(false);
         when(filter2.applyFilter(anyCollection())).thenAnswer(new Answer<Collection<FluentWebElement>>() {
             @Override
             public Collection<FluentWebElement> answer(final InvocationOnMock invocation) throws Throwable {
@@ -197,8 +194,6 @@ public class SearchTest {
         when(filter1.isCssFilterSupported()).thenReturn(false);
         final WebElement webElement = mock(WebElement.class);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(Collections.singletonList(webElement));
-        when(filter1.getAttribut()).thenReturn("text");
-        when(webElement.getText()).thenReturn("Ok");
 
         assertThat(search.find(name, filters).present()).isFalse();
         assertThat(search.find(name, filters).optional().isPresent()).isFalse();
@@ -210,7 +205,6 @@ public class SearchTest {
     public void findByPosition() {
         final String name = "cssStyle";
         final WebElement webElement1 = mock(WebElement.class);
-        when(webElement1.getTagName()).thenReturn("span");
         final WebElement webElement2 = mock(WebElement.class);
         when(webElement2.getTagName()).thenReturn("a");
         final List<WebElement> webElements = new ArrayList<>();
@@ -234,7 +228,7 @@ public class SearchTest {
         final WebElement webElement1 = mock(WebElement.class);
         when(webElement1.getTagName()).thenReturn("span");
         final WebElement webElement2 = mock(WebElement.class);
-        when(webElement2.getTagName()).thenReturn("a");
+
         final List<WebElement> webElements = new ArrayList<>();
         webElements.add(webElement1);
         webElements.add(webElement2);

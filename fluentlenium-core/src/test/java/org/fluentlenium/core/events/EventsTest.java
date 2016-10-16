@@ -5,10 +5,10 @@ import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.hamcrest.CustomMatcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.By;
@@ -107,7 +107,6 @@ public class EventsTest {
         final WebElement eventElement = eventDriver.findElement(By.cssSelector(".test"));
 
         final WebElement childElement = mock(WebElement.class);
-        when(element.findElement(By.cssSelector(".test2"))).thenReturn(childElement);
 
         reset(beforeListener, afterListener);
         eventElement.click();
@@ -131,7 +130,6 @@ public class EventsTest {
         final WebElement eventElement = eventDriver.findElement(By.cssSelector(".test"));
 
         final WebElement childElement = mock(WebElement.class);
-        when(element.findElement(By.cssSelector(".test2"))).thenReturn(childElement);
 
         reset(beforeListener, afterListener);
         eventElement.sendKeys("changeValue");
@@ -265,23 +263,22 @@ public class EventsTest {
         assertThat(instance).isEqualTo(instance);
     }
 
-    private static final class ElementMatcher extends CustomMatcher<FluentWebElement> {
+    private static final class ElementMatcher implements ArgumentMatcher<FluentWebElement> {
         private final WebElement element;
 
         ElementMatcher(final WebElement element) {
-            super("Element");
             this.element = element;
         }
 
         @Override
-        public boolean matches(final Object argument) {
+        public boolean matches(final FluentWebElement argument) {
             if (argument == null && this.element == null) {
                 return true;
             }
             if (argument == null && this.element != null) {
                 return false;
             }
-            WebElement argElement = ((FluentWebElement) argument).getElement();
+            WebElement argElement = argument.getElement();
             while (argElement instanceof WrapsElement) {
                 argElement = ((WrapsElement) argElement).getWrappedElement();
             }

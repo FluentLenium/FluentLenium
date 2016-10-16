@@ -9,8 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -116,7 +114,6 @@ public class RectangleConditionsTest {
     public void withPosition() {
         when(rectangle.getX()).thenReturn(RECTANGLE_X_POS);
         when(rectangle.getY()).thenReturn(RECTANGLE_Y_POS);
-        when(rectangle.getPoint()).thenReturn(new Point(RECTANGLE_X_POS, RECTANGLE_Y_POS));
 
         assertThat(conditions.rectangle().position(RECTANGLE_X_POS, RECTANGLE_Y_POS)).isTrue();
         assertThat(conditions.rectangle().position(RECTANGLE_X_POS, RECTANGLE_INVALID_Y_POS)).isFalse();
@@ -151,7 +148,6 @@ public class RectangleConditionsTest {
     public void withDimension() {
         when(rectangle.getWidth()).thenReturn(RECTANGLE_DIMENSION_WIDTH);
         when(rectangle.getHeight()).thenReturn(RECTANGLE_DIMENSION_HEIGHT);
-        when(rectangle.getDimension()).thenReturn(new Dimension(RECTANGLE_DIMENSION_WIDTH, RECTANGLE_DIMENSION_HEIGHT));
 
         assertThat(conditions.rectangle().dimension(RECTANGLE_DIMENSION_WIDTH, RECTANGLE_DIMENSION_HEIGHT)).isTrue();
         assertThat(conditions.rectangle().dimension(RECTANGLE_DIMENSION_WIDTH, RECTANGLE_DIMENSION_INVALID_HEIGHT)).isFalse();
@@ -161,11 +157,9 @@ public class RectangleConditionsTest {
     public void withPositionAndDimension() {
         when(rectangle.getX()).thenReturn(RECTANGLE_POSITION_X);
         when(rectangle.getY()).thenReturn(RECTANGLE_POSITION_Y);
-        when(rectangle.getPoint()).thenReturn(new Point(RECTANGLE_POSITION_X, RECTANGLE_POSITION_Y));
 
         when(rectangle.getWidth()).thenReturn(RECTANGLE_DIMENSION_WIDTH1);
         when(rectangle.getHeight()).thenReturn(RECTANGLE_DIMENSION_HEIGHT1);
-        when(rectangle.getDimension()).thenReturn(new Dimension(RECTANGLE_DIMENSION_WIDTH1, RECTANGLE_DIMENSION_HEIGHT1));
 
         assertThat(conditions.rectangle()
                 .positionAndDimension(RECTANGLE_POSITION_X, RECTANGLE_POSITION_Y, RECTANGLE_DIMENSION_WIDTH1,

@@ -15,7 +15,8 @@ import java.nio.charset.Charset;
 /**
  * Abstract properties configuration.
  */
-public abstract class AbstractPropertiesConfiguration extends BaseConfiguration implements ConfigurationProperties {
+@SuppressWarnings("PMD.GodClass")
+public class PropertiesBackendConfiguration extends BaseConfiguration implements ConfigurationProperties {
     /**
      * Default properties prefix.
      */
@@ -25,23 +26,47 @@ public abstract class AbstractPropertiesConfiguration extends BaseConfiguration 
 
     private final JsonToBeanConverter jsonConverter = new JsonToBeanConverter();
 
+    private PropertiesBackend propertiesBackend;
+
     /**
      * Creates a new abstract properties configuration, using default properties prefix.
+     *
+     * @param propertiesReader properties reader
      */
-    protected AbstractPropertiesConfiguration() {
-        this(PROPERTIES_PREFIX);
+    protected PropertiesBackendConfiguration(final PropertiesBackend propertiesReader) {
+        this(propertiesReader, PROPERTIES_PREFIX);
     }
 
     /**
      * Creates a new abstract properties configuration, using given properties prefixes.
      *
-     * @param prefixes array of allowed prefixes
+     * @param propertiesReader properties reader
+     * @param prefixes         array of allowed prefixes
      */
-    protected AbstractPropertiesConfiguration(final String... prefixes) {
+    protected PropertiesBackendConfiguration(final PropertiesBackend propertiesReader, final String... prefixes) {
         if (prefixes.length == 0) {
             throw new IllegalArgumentException("Prefixes should be defined");
         }
+        this.propertiesBackend = propertiesReader;
         this.prefixes = prefixes;
+    }
+
+    /**
+     * Get the underlying properties backend.
+     *
+     * @return properties backend
+     */
+    PropertiesBackend getPropertiesBackend() {
+        return propertiesBackend;
+    }
+
+    /**
+     * Set the underlying properties backend.
+     *
+     * @param propertiesBackend properties backend
+     */
+    void setPropertiesBackend(final PropertiesBackend propertiesBackend) {
+        this.propertiesBackend = propertiesBackend;
     }
 
     /**
@@ -50,7 +75,9 @@ public abstract class AbstractPropertiesConfiguration extends BaseConfiguration 
      * @param propertyName property key
      * @return property value
      */
-    protected abstract String getPropertyImpl(String propertyName);
+    protected String getPropertyImpl(final String propertyName) {
+        return propertiesBackend.getProperty(propertyName);
+    }
 
     private String getProperty(final String propertyName) {
         for (final String prefix : prefixes) {
