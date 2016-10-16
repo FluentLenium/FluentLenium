@@ -44,8 +44,6 @@ public class WaitConditionTest {
         instantiator = new DefaultComponentInstantiator(control);
 
         wait = spy(new FluentWait(control).atMost(1000).pollingEvery(50));
-
-        when(wait.withMessage(any(Supplier.class))).thenReturn(wait);
     }
 
     @Test

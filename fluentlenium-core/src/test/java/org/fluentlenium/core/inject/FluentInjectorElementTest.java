@@ -94,7 +94,7 @@ public class FluentInjectorElementTest {
     }
 
     @SuppressWarnings("PMD.FieldDeclarationsShouldBeAtStartOfClass")
-    private static FluentWebElement existingElement = mock(FluentWebElement.class);
+    private static final FluentWebElement existingElement = mock(FluentWebElement.class);
 
     public static class ExistingFluentWebElementContainer {
         private final FluentWebElement element = existingElement;
@@ -165,7 +165,6 @@ public class FluentInjectorElementTest {
         injector.inject(container);
 
         final WebElement webElement = mock(WebElement.class);
-        when(webElement.getTagName()).thenReturn("h1");
 
         when(webDriver.findElement(any(By.class))).thenReturn(webElement);
 
@@ -193,7 +192,6 @@ public class FluentInjectorElementTest {
         final WebElementWrapperContainer container = new WebElementWrapperContainer();
 
         final WebElement webElement = mock(WebElement.class);
-        when(webElement.getTagName()).thenReturn("h1");
 
         when(webDriver.findElement(any(By.class))).thenReturn(webElement);
 
@@ -208,7 +206,6 @@ public class FluentInjectorElementTest {
         final WebElementDriverWrapperContainer container = new WebElementDriverWrapperContainer();
 
         final WebElement webElement = mock(WebElement.class);
-        when(webElement.getTagName()).thenReturn("h1");
 
         when(webDriver.findElement(any(By.class))).thenReturn(webElement);
 

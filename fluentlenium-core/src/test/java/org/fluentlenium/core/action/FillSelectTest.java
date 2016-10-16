@@ -81,7 +81,6 @@ public class FillSelectTest {
 
         when(option1.getAttribute("index")).thenReturn("1");
         when(option3.getAttribute("index")).thenReturn("1");
-        when(option4.getAttribute("index")).thenReturn("2");
 
         fillConstructor.withIndex(1);
 

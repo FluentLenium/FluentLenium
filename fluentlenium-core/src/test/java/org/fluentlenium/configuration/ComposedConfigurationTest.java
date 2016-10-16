@@ -2,7 +2,7 @@ package org.fluentlenium.configuration;
 
 import com.google.common.base.Function;
 import org.assertj.core.api.Assertions;
-import org.fluentlenium.configuration.AbstractPropertiesConfigurationTest.DummyConfigurationFactory;
+import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;

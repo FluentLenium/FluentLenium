@@ -48,10 +48,6 @@ public class ProxiesTest {
         when(driver.findElement(By.cssSelector("#element1"))).thenReturn(element1);
         when(element1.findElement(By.cssSelector("#element2"))).thenReturn(element2);
         when(element2.findElement(By.cssSelector("#element3"))).thenReturn(element3);
-
-        when(driver.findElements(By.cssSelector("#element1"))).thenReturn(Arrays.asList(element1));
-        when(element1.findElements(By.cssSelector("#element2"))).thenReturn(Arrays.asList(element2));
-        when(element2.findElements(By.cssSelector("#element3"))).thenReturn(Arrays.asList(element3));
     }
 
     @Test
@@ -227,8 +223,6 @@ public class ProxiesTest {
 
     @Test
     public void testHashcode() {
-        when(element1.toString()).thenReturn("element1");
-
         final ElementLocator locator = mock(ElementLocator.class);
         when(locator.findElement()).thenReturn(element1);
 

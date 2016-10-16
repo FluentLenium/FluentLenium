@@ -3,11 +3,9 @@ package org.fluentlenium.configuration;
 import java.util.Properties;
 
 /**
- * {@link ConfigurationProperties} based on {@link Properties} object.
- *
- * @see ConfigurationProperties
+ * Properties backend based on java {@link Properties} object.
  */
-public class PropertiesConfiguration extends AbstractPropertiesConfiguration {
+public class DefaultPropertiesBackend implements PropertiesBackend {
     private final Properties properties;
 
     /**
@@ -15,13 +13,12 @@ public class PropertiesConfiguration extends AbstractPropertiesConfiguration {
      *
      * @param properties properties object
      */
-    public PropertiesConfiguration(final Properties properties) {
-        super("", PROPERTIES_PREFIX);
+    public DefaultPropertiesBackend(final Properties properties) {
         this.properties = properties;
     }
 
     @Override
-    protected String getPropertyImpl(final String propertyName) {
+    public String getProperty(final String propertyName) {
         return properties.getProperty(propertyName);
     }
 }

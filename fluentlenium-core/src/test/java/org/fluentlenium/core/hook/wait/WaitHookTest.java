@@ -107,8 +107,6 @@ public class WaitHookTest {
     public void testElementClick() {
         final WebElement childElement = mock(WebElement.class);
 
-        when(locator.findElement()).thenReturn(childElement);
-
         waitHook.click();
         verify(element).click();
     }
@@ -116,8 +114,6 @@ public class WaitHookTest {
     @Test
     public void testElementSendKeys() {
         final WebElement childElement = mock(WebElement.class);
-
-        when(locator.findElement()).thenReturn(childElement);
 
         waitHook.sendKeys("abc");
         verify(element).sendKeys("abc");
@@ -127,8 +123,6 @@ public class WaitHookTest {
     public void testElementSubmit() {
         final WebElement childElement = mock(WebElement.class);
 
-        when(locator.findElement()).thenReturn(childElement);
-
         waitHook.submit();
         verify(element).submit();
     }
@@ -136,8 +130,6 @@ public class WaitHookTest {
     @Test
     public void testElementClear() {
         final WebElement childElement = mock(WebElement.class);
-
-        when(locator.findElement()).thenReturn(childElement);
 
         waitHook.clear();
         verify(element).clear();

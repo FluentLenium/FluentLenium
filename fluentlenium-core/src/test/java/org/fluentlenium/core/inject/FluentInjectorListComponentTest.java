@@ -59,14 +59,8 @@ public class FluentInjectorListComponentTest {
         final WebElement component1 = Mockito.mock(WebElement.class);
         final WebElement component2 = Mockito.mock(WebElement.class);
         final WebElement component3 = Mockito.mock(WebElement.class);
-        final WebElement componentElement1 = Mockito.mock(WebElement.class);
-        final WebElement componentElement2 = Mockito.mock(WebElement.class);
-        final WebElement componentElement3 = Mockito.mock(WebElement.class);
 
         when(webDriver.findElements(new ByIdOrName("components"))).thenReturn(Arrays.asList(component1, component2, component3));
-        when(component1.findElement(new ByIdOrName("element"))).thenReturn(componentElement1);
-        when(component2.findElement(new ByIdOrName("element"))).thenReturn(componentElement2);
-        when(component3.findElement(new ByIdOrName("element"))).thenReturn(componentElement3);
 
         injector.inject(container);
 

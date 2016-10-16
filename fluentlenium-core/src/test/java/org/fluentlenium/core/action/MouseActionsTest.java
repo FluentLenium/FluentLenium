@@ -47,7 +47,7 @@ public class MouseActionsTest {
         actions.clickAndHold();
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
-        verify(mouse).mouseDown(any(Coordinates.class));
+        verify(mouse).mouseDown(any());
     }
 
     @Test
@@ -56,7 +56,7 @@ public class MouseActionsTest {
         actions.click();
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
-        verify(mouse).click(any(Coordinates.class));
+        verify(mouse).click(any());
     }
 
     @Test
@@ -65,7 +65,7 @@ public class MouseActionsTest {
         actions.click();
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
-        verify(mouse).click(any(Coordinates.class));
+        verify(mouse).click(any());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class MouseActionsTest {
         actions.contextClick();
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
-        verify(mouse).contextClick(any(Coordinates.class));
+        verify(mouse).contextClick(any());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class MouseActionsTest {
         actions.doubleClick();
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
-        verify(mouse).doubleClick(any(Coordinates.class));
+        verify(mouse).doubleClick(any());
     }
 
     @Test
@@ -92,7 +92,7 @@ public class MouseActionsTest {
         actions.release();
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
-        verify(mouse).mouseUp(any(Coordinates.class));
+        verify(mouse).mouseUp(any());
     }
 
     @Test

@@ -57,12 +57,8 @@ public class FluentTestRunnerAdapterTest {
         adapter.getConfiguration().setScreenshotPath(tmpDirectory.toFile().getPath());
         adapter.getConfiguration().setHtmlDumpPath(tmpDirectory.toFile().getPath());
 
-        final Path tempFile = Files.createTempFile("testFailedWhenNoDriverAvailable", "");
-        when(driver.getScreenshotAs(OutputType.FILE)).thenReturn(tempFile.toFile());
-
         adapter.getConfiguration().setScreenshotMode(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
         adapter.getConfiguration().setHtmlDumpMode(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
-        when(adapter.canTakeScreenShot()).thenReturn(true);
 
         when(adapter.isFluentControlAvailable()).thenReturn(false);
 

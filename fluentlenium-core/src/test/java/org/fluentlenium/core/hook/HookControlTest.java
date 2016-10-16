@@ -42,7 +42,7 @@ public class HookControlTest {
 
     private HookControlImpl<HookControl> hookControl;
 
-    public static class HookDefinitionMatcher extends ArgumentMatcher<List<HookDefinition<?>>> {
+    public static class HookDefinitionMatcher implements ArgumentMatcher<List<HookDefinition<?>>> {
         private final Class<?>[] hooks;
 
         public HookDefinitionMatcher(final Class<?>[] hooks) {
@@ -50,15 +50,13 @@ public class HookControlTest {
         }
 
         @Override
-        public boolean matches(final Object argument) {
-            final List<HookDefinition<?>> hookDefinitions = (List<HookDefinition<?>>) argument;
-
-            if (hookDefinitions.size() != hooks.length) {
+        public boolean matches(final List<HookDefinition<?>> argument) {
+            if (argument.size() != hooks.length) {
                 return false;
             }
 
-            for (int i = 0; i < hookDefinitions.size(); i++) {
-                if (!hookDefinitions.get(i).getHookClass().equals(hooks[i])) {
+            for (int i = 0; i < argument.size(); i++) {
+                if (!argument.get(i).getHookClass().equals(hooks[i])) {
                     return false;
                 }
             }

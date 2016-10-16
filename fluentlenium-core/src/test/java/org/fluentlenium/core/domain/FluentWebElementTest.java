@@ -19,7 +19,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
-import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
 
 import java.util.Arrays;
@@ -83,13 +82,13 @@ public class FluentWebElementTest {
     @Test
     public void testDoubleClick() {
         fluentElement.doubleClick();
-        verify(mouse).doubleClick(any(Coordinates.class));
+        verify(mouse).doubleClick(any());
     }
 
     @Test
     public void testContextClick() {
         fluentElement.contextClick();
-        verify(mouse).contextClick(any(Coordinates.class));
+        verify(mouse).contextClick(any());
     }
 
     @Test
@@ -106,7 +105,7 @@ public class FluentWebElementTest {
     @Test
     public void testMouse() {
         assertThat(fluentElement.mouse().click());
-        verify(mouse).click(any(Coordinates.class));
+        verify(mouse).click(any());
     }
 
     @Test

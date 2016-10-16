@@ -1,13 +1,15 @@
 package org.fluentlenium.configuration;
 
 import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Properties;
 
-public abstract class AbstractPropertiesConfigurationTest<T extends AbstractPropertiesConfiguration> {
+public class PropertiesBackendConfigurationTest {
 
     public static class DummyConfigurationFactory implements ConfigurationFactory {
         @Override
@@ -21,9 +23,26 @@ public abstract class AbstractPropertiesConfigurationTest<T extends AbstractProp
 
     }
 
-    protected abstract T getConfiguration();
+    private PropertiesBackendConfiguration configuration;
+    private Properties properties;
 
-    protected abstract void mockProperty(String propertyName, Object propertyValue);
+    @Before
+    public void before() {
+        properties = new Properties();
+        configuration = new PropertiesBackendConfiguration(new DefaultPropertiesBackend(properties), "");
+    }
+
+    public PropertiesBackendConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    protected void mockProperty(final String propertyName, final Object propertyValue) {
+        if (propertyValue == null) {
+            properties.remove(propertyName);
+        } else {
+            properties.setProperty(propertyName, valueToString(propertyValue));
+        }
+    }
 
     protected String valueToString(final Object propertyValue) {
         if (propertyValue == null) {
@@ -250,7 +269,6 @@ public abstract class AbstractPropertiesConfigurationTest<T extends AbstractProp
         Assertions.assertThat(getConfiguration().getHtmlDumpMode()).isNull();
 
         mockProperty("key", "value");
-        Assertions.assertThat(getConfiguration().getCustomProperty("key"))
-                .isEqualTo("value");
+        Assertions.assertThat(getConfiguration().getCustomProperty("key")).isEqualTo("value");
     }
 }

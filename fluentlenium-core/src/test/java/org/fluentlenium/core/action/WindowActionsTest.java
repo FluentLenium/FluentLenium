@@ -21,7 +21,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
@@ -53,7 +53,7 @@ public class WindowActionsTest {
         when(this.driver.manage()).thenReturn(this.options);
         when(this.driver.manage().window()).thenReturn(this.window);
         when(this.driver.switchTo()).thenReturn(this.targetLocator);
-        when(this.driver.switchTo().window(anyString())).thenReturn(this.driver);
+        when(this.driver.switchTo().window(any())).thenReturn(this.driver);
     }
 
     @After
@@ -131,17 +131,13 @@ public class WindowActionsTest {
         final JavascriptWebDriver jsDriver = mock(JavascriptWebDriver.class);
 
         when(this.fluentDriver.getDriver()).thenReturn(jsDriver);
-        when(jsDriver.manage()).thenReturn(this.options);
-        when(jsDriver.manage().window()).thenReturn(this.window);
         when(jsDriver.switchTo()).thenReturn(this.targetLocator);
-        when(jsDriver.switchTo().window(anyString())).thenReturn(this.driver);
+        when(jsDriver.switchTo().window(any())).thenReturn(this.driver);
 
         final String windowHandle = "WndH1";
         final String windowHandle1 = "WndH2";
         final String windowHandle2 = "WndH3";
 
-        final FluentWait fluentWait = mock(FluentWait.class);
-        final FluentWaitWindowConditions fluentWaitWindowMatcher = mock(FluentWaitWindowConditions.class);
         final Configuration configuration = mock(Configuration.class);
 
         final FluentDriver currentFluentDriver = new FluentDriver(this.driver, configuration, this.fluentControl);
@@ -151,11 +147,9 @@ public class WindowActionsTest {
                 ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
         when(jsDriver.getWindowHandle()).thenReturn(windowHandle1, windowHandle2);
 
-        when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);
         final WindowAction windowAction = new WindowAction(fluentDriverSpied, this.instantiator, jsDriver);
         windowAction.openNewAndSwitch();
 
-        verify(jsDriver, times(1)).manage();
         verify(jsDriver, times(1)).getWindowHandle();
         verify(jsDriver, times(3)).getWindowHandles();
         verify(jsDriver, times(2)).switchTo();
@@ -193,7 +187,7 @@ public class WindowActionsTest {
         when(this.driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2));
         when(fluentWaitWindowMatcher.notDisplayed()).thenReturn(true);
         when(fluentWebElement.click()).thenReturn(fluentWebElement);
-        when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);
+        when(fluentWait.untilWindow(any())).thenReturn(fluentWaitWindowMatcher);
         when(this.fluentDriver.await()).thenReturn(fluentWait);
 
         final WindowAction windowAction = new WindowAction(this.fluentDriver, this.instantiator, this.driver);
@@ -216,7 +210,7 @@ public class WindowActionsTest {
         final Configuration configuration = mock(Configuration.class);
 
         final FluentDriver currentFluentDriver = new FluentDriver(this.driver, configuration, this.fluentControl);
-        final FluentDriver fluentDriverSpied = spy(currentFluentDriver);
+        final FluentDriver fluentDriverSpy = spy(currentFluentDriver);
 
         when(this.driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),
                 ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
@@ -224,8 +218,7 @@ public class WindowActionsTest {
 
         when(fluentWebElement.click()).thenReturn(fluentWebElement);
 
-        when(fluentWait.untilWindow(anyString())).thenReturn(fluentWaitWindowMatcher);
-        final WindowAction windowAction = new WindowAction(fluentDriverSpied, this.instantiator, this.driver);
+        final WindowAction windowAction = new WindowAction(fluentDriverSpy, this.instantiator, this.driver);
         windowAction.clickAndOpenNew(fluentWebElement);
 
         verify(this.driver, times(3)).manage();

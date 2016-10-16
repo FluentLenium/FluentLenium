@@ -1,9 +1,9 @@
 package org.fluentlenium.core.proxy;
 
 import com.google.common.base.Supplier;
-import org.hamcrest.CustomMatcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -62,19 +62,21 @@ public class ProxyListenerTest {
         verifyZeroInteractions(listener);
     }
 
-    private static class ElementMatcher extends CustomMatcher<List<WebElement>> {
+    private static class ElementMatcher implements ArgumentMatcher<List<WebElement>> {
         private final List<WebElement> expected;
 
         ElementMatcher(final List<WebElement> expected) {
-            super("matches element");
             this.expected = expected;
         }
 
         @Override
-        public boolean matches(final Object items) {
+        public boolean matches(final List<WebElement> items) {
             final List<WebElement> unwrapped = new ArrayList<>();
-            for (final Object item : (Iterable) items) {
-                unwrapped.add(((WrapsElement) item).getWrappedElement());
+            for (WebElement item : items) {
+                if (item instanceof WrapsElement) {
+                    item = ((WrapsElement) item).getWrappedElement();
+                }
+                unwrapped.add(item);
             }
             return unwrapped.equals(expected);
         }
