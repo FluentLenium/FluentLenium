@@ -45,6 +45,8 @@ public class RectangleAssertTest {
 
         when(rectangle.getX()).thenReturn(1);
         assertThat(element).hasRectangle().withX(1);
+
+        assertThat(element).hasRectangle().withX().isEqualTo(2);
     }
 
 }

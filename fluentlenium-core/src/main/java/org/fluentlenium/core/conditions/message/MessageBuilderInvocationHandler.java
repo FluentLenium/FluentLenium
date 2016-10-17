@@ -97,10 +97,11 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
     /**
      * Build the message based on annotations from methods called previously.
      *
+     * @param template true to return template message, false otherwise
      * @return built message
      * @throws IllegalStateException if one of the recorded call has no @Message/@NotMessage annotation.
      */
-    public String buildMessage() {
+    public String buildMessage(final boolean template) {
         final StringBuilder messageBuilder = new StringBuilder();
         for (final MessageBuilderCall call : calls) {
             if (call.getContext() != null) {
@@ -128,7 +129,9 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
                 continue;
             }
 
-            validationMessage = MessageFormat.format(validationMessage, call.getArgs());
+            if (!template) {
+                validationMessage = MessageFormat.format(validationMessage, call.getArgs());
+            }
 
             messageBuilder.append(' ');
             messageBuilder.append(validationMessage);
@@ -136,7 +139,9 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
             return messageBuilder.toString(); // NOPMD AvoidBranchingStatementAsLastInLoop
         }
 
-        throw new IllegalStateException("No @Message/@NotMessage annotation found in the calls.");
+        return messageBuilder.toString();
+
+        //throw new IllegalStateException("No @Message/@NotMessage annotation found in the calls.");
 
     }
 }

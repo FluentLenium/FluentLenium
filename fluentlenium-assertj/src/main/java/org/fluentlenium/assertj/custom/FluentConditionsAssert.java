@@ -1,9 +1,11 @@
 package org.fluentlenium.assertj.custom;
 
 import com.google.common.base.Function;
+import com.google.common.base.Supplier;
 import org.assertj.core.api.AbstractAssert;
 import org.fluentlenium.core.conditions.ConditionsObject;
 import org.fluentlenium.core.conditions.FluentConditions;
+import org.fluentlenium.core.conditions.RectangleConditions;
 import org.fluentlenium.core.conditions.message.MessageProxy;
 
 /**
@@ -76,9 +78,21 @@ public class FluentConditionsAssert<S extends FluentConditionsAssert<S, A>, A ex
         });
     }
 
+    /**
+     * Perform assertions on rectangle of actual object
+     *
+     * @return rectangle assertion object
+     */
     public RectangleConditionsAssert hasRectangle() {
         final String actualContext = getActualMessageContext();
-        final FluentConditions actualProxy = MessageProxy.wrap(FluentConditions.class, actual, actualContext);
-        return new RectangleConditionsAssert(actualProxy.rectangle());
+
+        return new RectangleConditionsAssert(actual.rectangle(), new Supplier<RectangleConditions>() {
+            @Override
+            public RectangleConditions get() {
+                final FluentConditions actualProxy = MessageProxy.wrap(FluentConditions.class, actual, actualContext);
+                final RectangleConditions messageBuilder = actualProxy.rectangle();
+                return messageBuilder;
+            }
+        });
     }
 }

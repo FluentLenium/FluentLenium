@@ -4,7 +4,6 @@ import org.fluentlenium.assertj.custom.AlertAssert;
 import org.fluentlenium.assertj.custom.FluentConditionsAssert;
 import org.fluentlenium.assertj.custom.FluentListAssert;
 import org.fluentlenium.assertj.custom.FluentWebElementAssert;
-import org.fluentlenium.assertj.custom.OldFluentWebElementAssert;
 import org.fluentlenium.assertj.custom.PageAssert;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.alert.AlertImpl;
@@ -39,16 +38,6 @@ public final class FluentLeniumAssertions {
      */
     public static PageAssert assertThat(final FluentPage actual) {
         return new PageAssert(actual);
-    }
-
-    /**
-     * Perform assertions on element.
-     *
-     * @param actual actual element
-     * @return Element assertion object
-     */
-    public static OldFluentWebElementAssert assertThatOld(final FluentWebElement actual) {
-        return new OldFluentWebElementAssert(actual);
     }
 
     /**
