@@ -132,6 +132,22 @@ public @interface FluentConfiguration {
     long scriptTimeout() default -1;
 
     /**
+     * <i>awaitAtMost</i> property.
+     *
+     * @return awaitAtMost
+     * @see ConfigurationProperties#getAwaitAtMost()
+     */
+    long awaitAtMost() default -1;
+
+    /**
+     * <i>awaitPollingEvery</i> property.
+     *
+     * @return awaitPollingEvery
+     * @see ConfigurationProperties#getAwaitPollingEvery() ()
+     */
+    long awaitPollingEvery() default -1;
+
+    /**
      * <i>eventsEnabled</i> property.
      *
      * @return eventsEnabled

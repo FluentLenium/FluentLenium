@@ -1,6 +1,7 @@
 package org.fluentlenium.configuration;
 
 import org.fluentlenium.adapter.FluentAdapter;
+import org.fluentlenium.core.FluentControl;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 
@@ -226,6 +227,30 @@ public interface ConfigurationProperties {
      * @see org.openqa.selenium.WebDriver.Timeouts#setScriptTimeout(long, java.util.concurrent.TimeUnit)
      */
     Long getScriptTimeout();
+
+    /**
+     * <pre>awaitAtMost</pre> property.
+     *
+     * Sets the default timeout in millisecond when using {@link FluentControl#await()} or
+     * {@link org.fluentlenium.core.hook.wait.Wait} hook.
+     *
+     * @return awaitTimeout property value
+     * @see org.fluentlenium.core.wait.FluentWait#atMost(long, java.util.concurrent.TimeUnit)
+     * @see org.fluentlenium.core.wait.FluentWait#atMost(long)
+     */
+    Long getAwaitAtMost();
+
+    /**
+     * <pre>awaitPollingEvery</pre> property.
+     *
+     * Sets the default polling frequency in millisecond when using {@link FluentControl#await()} or
+     * {@link org.fluentlenium.core.hook.wait.Wait} hook.
+     *
+     * @return awaitPollingEvery property value
+     * @see org.fluentlenium.core.wait.FluentWait#pollingEvery(long, java.util.concurrent.TimeUnit)
+     * @see org.fluentlenium.core.wait.FluentWait#pollingEvery(long)
+     */
+    Long getAwaitPollingEvery();
 
     /**
      * <pre>eventsEnabled</pre> property.

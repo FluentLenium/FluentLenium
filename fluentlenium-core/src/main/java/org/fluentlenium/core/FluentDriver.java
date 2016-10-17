@@ -233,7 +233,16 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
 
     @Override
     public FluentWait await() {
-        return new FluentWait(this);
+        final FluentWait fluentWait = new FluentWait(this);
+        final Long atMost = configuration.getAwaitAtMost();
+        if (atMost != null) {
+            fluentWait.atMost(atMost);
+        }
+        final Long pollingEvery = configuration.getAwaitPollingEvery();
+        if (pollingEvery != null) {
+            fluentWait.pollingEvery(pollingEvery);
+        }
+        return fluentWait;
     }
 
     @Override
