@@ -75,4 +75,10 @@ public class FluentConditionsAssert<S extends FluentConditionsAssert<S, A>, A ex
             }
         });
     }
+
+    public RectangleConditionsAssert hasRectangle() {
+        final String actualContext = getActualMessageContext();
+        final FluentConditions actualProxy = MessageProxy.wrap(FluentConditions.class, actual, actualContext);
+        return new RectangleConditionsAssert(actualProxy.rectangle());
+    }
 }

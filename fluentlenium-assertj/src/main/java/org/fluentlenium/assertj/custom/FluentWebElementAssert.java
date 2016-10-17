@@ -6,6 +6,6 @@ import org.fluentlenium.core.domain.FluentWebElement;
 public class FluentWebElementAssert extends FluentConditionsAssert<FluentWebElementAssert, FluentConditions> {
 
     public FluentWebElementAssert(final FluentWebElement actual) {
-        super(actual.conditions(), FluentConditions.class);
+        super(actual.conditions(), FluentWebElementAssert.class);
     }
 }

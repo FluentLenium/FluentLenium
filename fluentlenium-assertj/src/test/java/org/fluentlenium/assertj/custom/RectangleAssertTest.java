@@ -9,46 +9,42 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.WebElement;
 
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class FluentWebElementAssertTest {
+public class RectangleAssertTest {
 
     @Mock
     private FluentWebElement element;
 
+    @Mock
+    private WebElement webElement;
+
+    @Mock
+    private Rectangle rectangle;
+
     @Before
     public void before() {
         when(element.conditions()).thenReturn(new WebElementConditions(element));
+        when(element.getElement()).thenReturn(webElement);
+        when(webElement.getRect()).thenReturn(rectangle);
     }
 
     @Test
-    public void isPresent() {
+    public void withX() {
         Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {
-                assertThat(element).isPresent();
+                assertThat(element).hasRectangle().withX(1);
             }
-        }).hasMessage("element is not present");
+        }).hasMessage("element rectangle has x != 1");
 
-        when(element.present()).thenReturn(true);
-        assertThat(element).isPresent();
-    }
-
-    @Test
-    public void isNotPresent() {
-        when(element.present()).thenReturn(true);
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                assertThat(element).isNotPresent();
-            }
-        }).hasMessage("element is present");
-
-        when(element.present()).thenReturn(false);
-        assertThat(element).isNotPresent();
+        when(rectangle.getX()).thenReturn(1);
+        assertThat(element).hasRectangle().withX(1);
     }
 
 }
