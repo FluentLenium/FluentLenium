@@ -8,6 +8,7 @@ import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
+import org.fluentlenium.core.action.FluentJavascriptActionsImpl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.AtLeastOneElementConditions;
 import org.fluentlenium.core.conditions.EachElementConditions;
@@ -43,6 +44,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     private final HookControlImpl<FluentList<E>> hookControl;
 
+    private final FluentJavascriptActionsImpl<FluentList<E>> javascriptActions;
+
     /**
      * Creates a new fluent list.
      *
@@ -69,6 +72,17 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
                 return list.toString();
             }
         });
+        this.javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new Supplier<FluentWebElement>() {
+            @Override
+            public FluentWebElement get() {
+                return first();
+            }
+
+            @Override
+            public String toString() {
+                return String.valueOf(first());
+            }
+        });
     }
 
     @Delegate
@@ -79,6 +93,11 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Delegate
     private HookControl<FluentList<E>> getHookControl() { //NOPMD UnusedPrivateMethod
         return hookControl;
+    }
+
+    @Delegate
+    private FluentJavascriptActionsImpl<FluentList<E>> getJavascriptActions() { //NOPMD UnusedPrivateMethod
+        return javascriptActions;
     }
 
     @Override
