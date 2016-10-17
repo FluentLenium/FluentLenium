@@ -219,6 +219,22 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
     }
 
     @Override
+    public Long getAwaitAtMost() {
+        if (configuration == null) {
+            return null;
+        }
+        return getLongValue(configuration.awaitAtMost());
+    }
+
+    @Override
+    public Long getAwaitPollingEvery() {
+        if (configuration == null) {
+            return null;
+        }
+        return getLongValue(configuration.awaitPollingEvery());
+    }
+
+    @Override
     public Boolean getEventsEnabled() {
         if (configuration == null) {
             return null;

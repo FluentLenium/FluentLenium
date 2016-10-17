@@ -81,6 +81,22 @@ public interface ConfigurationMutator {
     void setImplicitlyWait(Long implicitlyWait);
 
     /**
+     * Sets the value of <pre>awaitAtMost</pre> property
+     *
+     * @param awaitAtMost property value
+     * @see ConfigurationProperties#getAwaitAtMost()
+     */
+    void setAwaitAtMost(Long awaitAtMost);
+
+    /**
+     * Sets the value of <pre>awaitPollingEvery</pre> property
+     *
+     * @param awaitPollingEvery property value
+     * @see ConfigurationProperties#getAwaitPollingEvery()
+     */
+    void setAwaitPollingEvery(Long awaitPollingEvery);
+
+    /**
      * Sets the value of <pre>scriptTimeout</pre> property.
      *
      * @param scriptTimeout property value

@@ -231,6 +231,22 @@ public class PropertiesBackendConfigurationTest {
     }
 
     @Test
+    public void awaitAtMost() {
+        Assertions.assertThat(getConfiguration().getAwaitAtMost()).isNull();
+
+        mockProperty("awaitAtMost", 1000L);
+        Assertions.assertThat(getConfiguration().getAwaitAtMost()).isEqualTo(1000L);
+    }
+
+    @Test
+    public void awaitPollingEvery() {
+        Assertions.assertThat(getConfiguration().getAwaitPollingEvery()).isNull();
+
+        mockProperty("awaitPollingEvery", 1000L);
+        Assertions.assertThat(getConfiguration().getAwaitPollingEvery()).isEqualTo(1000L);
+    }
+
+    @Test
     public void screenshotPath() {
         Assertions.assertThat(getConfiguration().getScreenshotPath()).isNull();
 

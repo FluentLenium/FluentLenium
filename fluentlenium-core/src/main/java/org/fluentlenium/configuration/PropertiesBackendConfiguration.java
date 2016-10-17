@@ -245,6 +245,16 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
     }
 
     @Override
+    public Long getAwaitAtMost() {
+        return getLongProperty("awaitAtMost");
+    }
+
+    @Override
+    public Long getAwaitPollingEvery() {
+        return getLongProperty("awaitPollingEvery");
+    }
+
+    @Override
     public String getScreenshotPath() {
         return getStringProperty("screenshotPath");
     }

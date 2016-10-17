@@ -175,6 +175,28 @@ public class ComposedConfiguration implements Configuration {
     }
 
     @Override
+    public Long getAwaitAtMost() {
+        for (final ConfigurationProperties configuration : configurations) {
+            final Long awaitAtMost = configuration.getAwaitAtMost();
+            if (awaitAtMost != null) {
+                return awaitAtMost;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Long getAwaitPollingEvery() {
+        for (final ConfigurationProperties configuration : configurations) {
+            final Long awaitPollingEvery = configuration.getAwaitPollingEvery();
+            if (awaitPollingEvery != null) {
+                return awaitPollingEvery;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public Boolean getEventsEnabled() {
         for (final ConfigurationProperties configuration : configurations) {
             final Boolean eventsEnabled = configuration.getEventsEnabled();
