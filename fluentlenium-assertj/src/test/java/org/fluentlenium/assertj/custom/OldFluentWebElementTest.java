@@ -9,15 +9,16 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.when;
 
-public class FluentWebElementTest {
+@Deprecated
+public class OldFluentWebElementTest {
     @Mock
     private FluentWebElement element;
-    private FluentWebElementAssert elementAssert;
+    private OldFluentWebElementAssert elementAssert;
 
     @Before
     public void before() {
         MockitoAnnotations.initMocks(this);
-        elementAssert = FluentLeniumAssertions.assertThat(element);
+        elementAssert = FluentLeniumAssertions.assertThatOld(element);
     }
 
     @Test

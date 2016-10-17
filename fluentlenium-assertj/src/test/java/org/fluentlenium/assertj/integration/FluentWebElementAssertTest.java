@@ -1,12 +1,10 @@
 package org.fluentlenium.assertj.integration;
 
 import org.fluentlenium.assertj.integration.localtest.IntegrationFluentTest;
-import org.junit.Test;
-
-import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
 public class FluentWebElementAssertTest extends IntegrationFluentTest {
 
+    /*
     @Test
     public void testIsEnabledOk() throws Exception {
         goTo(DEFAULT_URL);
@@ -119,4 +117,5 @@ public class FluentWebElementAssertTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         assertThat(el("#multiple-css-class")).hasClass("cla");
     }
+    */
 }

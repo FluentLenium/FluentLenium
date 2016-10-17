@@ -37,7 +37,7 @@ public final class MessageProxy {
      */
     public static <T> T wrap(final Class<T> messageClass, final Object instance, final List<MessageBuilderCall> calls) {
         return (T) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {messageClass},
-                new MessageBuilderInvocationHandler(calls));
+                new MessageBuilderInvocationHandler(calls, instance));
     }
 
     /**

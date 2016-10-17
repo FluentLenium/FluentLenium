@@ -49,6 +49,17 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
         this.calls = calls;
     }
 
+    /**
+     * Creates a new message builder invocation handler, with initial calls.
+     *
+     * @param calls    initial calls.
+     * @param instance underlying wrapped instance. If not null, calls will also be performed on this instance.
+     */
+    public MessageBuilderInvocationHandler(final List<MessageBuilderCall> calls, final Object instance) {
+        this.calls = calls;
+        this.instance = instance;
+    }
+
     @Override
     public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
         Object instanceReturn = null;
