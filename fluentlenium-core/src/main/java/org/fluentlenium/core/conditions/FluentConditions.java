@@ -42,7 +42,6 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      */
     @Message("is stale")
     @NotMessage("is not stale")
-    @NoSuchElementValue(true)
     boolean stale();
 
     /**

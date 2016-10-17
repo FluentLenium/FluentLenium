@@ -9,6 +9,7 @@ import org.fluentlenium.core.hook.wait.Wait;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.FindBy;
 
@@ -333,9 +334,8 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
             public void call() throws Throwable {
                 first.await().until().enabled();
             }
-        }).hasMessageStartingWith(
-                "Expected condition failed: Element By.cssSelector: #not-found (first) (Lazy Element) is not enabled")
-                .isExactlyInstanceOf(TimeoutException.class);
+        }).hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector: #not-found (first) (Lazy Element)")
+                .isExactlyInstanceOf(TimeoutException.class).hasCauseExactlyInstanceOf(NoSuchElementException.class);
     }
 
     @Test
@@ -348,8 +348,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
             public void call() throws Throwable {
                 list.await().until().enabled();
             }
-        }).hasMessageStartingWith(
-                "Expected condition failed: Elements By.cssSelector: #not-found (Lazy Element List) is not enabled")
+        }).hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector: #not-found (Lazy Element List)")
                 .isExactlyInstanceOf(TimeoutException.class);
     }
 }

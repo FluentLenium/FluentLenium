@@ -1,5 +1,6 @@
 package org.fluentlenium.core.proxy;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
@@ -62,7 +63,12 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement>
 
     @Override
     public WebElement getLocatorResultImpl() {
-        final WebElement element = getHookLocator().findElement();
+        WebElement element;
+        try {
+            element = getHookLocator().findElement();
+        } catch (final NoSuchElementException e) {
+            element = null;
+        }
         if (element == null) {
             throw noSuchElement();
         }

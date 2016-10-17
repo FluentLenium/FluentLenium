@@ -7,7 +7,7 @@ import com.google.common.base.Predicate;
  *
  * @param <T> type of condition
  */
-public abstract class AbstractObjectConditions<T> implements Conditions<T> {
+public abstract class AbstractObjectConditions<T> implements Conditions<T>, ConditionsObject<T> {
     protected final T object;
     protected boolean negation;
 
@@ -38,6 +38,11 @@ public abstract class AbstractObjectConditions<T> implements Conditions<T> {
             predicateResult = !predicateResult;
         }
         return predicateResult;
+    }
+
+    @Override
+    public T getActualObject() {
+        return object;
     }
 
     /**

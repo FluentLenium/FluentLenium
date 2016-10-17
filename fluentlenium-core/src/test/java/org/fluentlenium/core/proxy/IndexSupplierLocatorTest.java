@@ -1,12 +1,14 @@
 package org.fluentlenium.core.proxy;
 
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
@@ -51,7 +53,12 @@ public class IndexSupplierLocatorTest {
     public void testFirstElementLocatorEmpty() {
         final ElementLocator locator = new FirstElementLocator(emptyLocator);
 
-        Assertions.assertThat(locator.findElement()).isNull();
+        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                locator.findElement();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class);
         Assertions.assertThat(locator.findElements()).isEmpty();
     }
 
@@ -67,7 +74,12 @@ public class IndexSupplierLocatorTest {
     public void testLastElementLocatorEmpty() {
         final ElementLocator locator = new LastElementLocator(emptyLocator);
 
-        Assertions.assertThat(locator.findElement()).isNull();
+        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                locator.findElement();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class);
         Assertions.assertThat(locator.findElements()).isEmpty();
     }
 
@@ -83,7 +95,12 @@ public class IndexSupplierLocatorTest {
     public void testAtIndexElementLocatorEmpty() {
         final ElementLocator locator = new AtIndexElementLocator(emptyLocator, 2);
 
-        Assertions.assertThat(locator.findElement()).isNull();
+        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                locator.findElement();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class);
         Assertions.assertThat(locator.findElements()).isEmpty();
     }
 
