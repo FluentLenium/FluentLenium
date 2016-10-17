@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
  * @param <T> {@code this} object type to chain method calls
  * @param <E> type of fluent web element
  */
-public interface FluentActions<T, E extends FluentWebElement> {
+public interface FluentActions<T, E extends FluentWebElement> extends FluentJavascriptActions {
     /**
      * Perform a click.
      *

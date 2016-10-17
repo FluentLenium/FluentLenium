@@ -234,6 +234,9 @@ $("#account").submit()
 
 // Place the mouse over the first found element
 $("#create-button").mouseOver()
+
+// Scroll the viewport to make the first found element visible
+$("#create-button").scrollIntoView();
 ```
 
 ### Information

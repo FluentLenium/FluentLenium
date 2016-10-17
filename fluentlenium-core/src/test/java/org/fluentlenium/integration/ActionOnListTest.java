@@ -16,6 +16,17 @@ public class ActionOnListTest extends IntegrationFluentTest {
     }
 
     @Test
+    public void checkScrollIntoView() {
+        goTo(DEFAULT_URL);
+
+        $("#name").scrollIntoView();
+        el("#name").scrollIntoView();
+
+        $("#name").scrollIntoView(false);
+        el("#name").scrollIntoView(false);
+    }
+
+    @Test
     public void checkClearAction() {
         goTo(DEFAULT_URL);
         assertThat($("#name").values()).contains("John");

@@ -7,6 +7,7 @@ import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
 import org.fluentlenium.core.action.FluentActions;
+import org.fluentlenium.core.action.FluentJavascriptActionsImpl;
 import org.fluentlenium.core.action.InputControl;
 import org.fluentlenium.core.action.KeyboardElementActions;
 import org.fluentlenium.core.action.MouseElementActions;
@@ -27,6 +28,7 @@ import org.fluentlenium.core.search.SearchControl;
 import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.AwaitControl;
 import org.fluentlenium.core.wait.FluentWaitElement;
+import org.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -55,6 +57,8 @@ public class FluentWebElement extends Component
 
     @Delegate
     private final FluentLabel<FluentWebElement> label;
+
+    private final FluentJavascriptActionsImpl<FluentWebElement> javascriptActions;
 
     /**
      * Creates a new fluent web element.
@@ -87,6 +91,7 @@ public class FluentWebElement extends Component
                 return getElement().toString();
             }
         });
+        this.javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new SupplierOfInstance<>(this));
     }
 
     @Delegate(excludes = {InputControl.class, AwaitControl.class, SearchControl.class})
@@ -97,6 +102,11 @@ public class FluentWebElement extends Component
     @Delegate
     private HookControl<FluentWebElement> getHookControl() { // NOPMD UnusedPrivateMethod
         return hookControl;
+    }
+
+    @Delegate
+    private FluentJavascriptActionsImpl<FluentWebElement> getJavascriptActions() { //NOPMD UnusedPrivateMethod
+        return javascriptActions;
     }
 
     @Override
