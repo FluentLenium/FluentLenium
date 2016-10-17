@@ -1,5 +1,7 @@
 package org.fluentlenium.core.script;
 
+import org.fluentlenium.core.proxy.LocatorHandler;
+import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.List;
@@ -21,10 +23,26 @@ public class FluentJavascript {
      * @param args     script arguments
      */
     public FluentJavascript(final JavascriptExecutor executor, final boolean async, final String script, final Object... args) {
+        loadElements(args);
         if (async) {
             this.result = executor.executeAsyncScript(script, args);
         } else {
             this.result = executor.executeScript(script, args);
+        }
+    }
+
+    /**
+     * Load lazy elements
+     *
+     * @param args
+     * @return
+     */
+    private void loadElements(final Object[] args) {
+        for (final Object arg : args) {
+            final LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(arg);
+            if (locatorHandler != null) {
+                locatorHandler.now();
+            }
         }
     }
 
