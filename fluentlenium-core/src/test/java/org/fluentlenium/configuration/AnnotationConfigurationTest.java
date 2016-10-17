@@ -19,9 +19,9 @@ public class AnnotationConfigurationTest {
             configurationDefaults = DummyConfigurationDefaults.class, eventsEnabled = FluentConfiguration.BooleanValue.FALSE,
             capabilities = "{javascriptEnabled: true}", remoteUrl = "http://localhost:4444", htmlDumpMode =
             ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL, htmlDumpPath = "/html-path", implicitlyWait = 1000,
-            pageLoadTimeout = 2000, screenshotMode = ConfigurationProperties.TriggerMode.MANUAL, screenshotPath =
-            "/screenshot-path", scriptTimeout = 3000, webDriver = "firefox", custom = @CustomProperty(name = "key", value =
-            "value"))
+            pageLoadTimeout = 2000, awaitPollingEvery = 10, awaitAtMost = 100, screenshotMode = ConfigurationProperties
+            .TriggerMode.MANUAL, screenshotPath = "/screenshot-path", scriptTimeout = 3000, webDriver = "firefox", custom =
+    @CustomProperty(name = "key", value = "value"))
     public static class ConfiguredClass {
     }
 
@@ -129,6 +129,22 @@ public class AnnotationConfigurationTest {
         Assertions.assertThat(defaultConfiguration.getImplicitlyWait()).isNull();
 
         Assertions.assertThat(configuration.getImplicitlyWait()).isEqualTo(1000L);
+    }
+
+    @Test
+    public void awaitAtMost() {
+        Assertions.assertThat(noConfiguration.getAwaitAtMost()).isNull();
+        Assertions.assertThat(defaultConfiguration.getAwaitAtMost()).isNull();
+
+        Assertions.assertThat(configuration.getAwaitAtMost()).isEqualTo(100L);
+    }
+
+    @Test
+    public void awaitPollingEvery() {
+        Assertions.assertThat(noConfiguration.getAwaitPollingEvery()).isNull();
+        Assertions.assertThat(defaultConfiguration.getAwaitPollingEvery()).isNull();
+
+        Assertions.assertThat(configuration.getAwaitPollingEvery()).isEqualTo(10L);
     }
 
     @Test

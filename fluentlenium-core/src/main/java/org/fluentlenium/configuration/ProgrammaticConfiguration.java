@@ -44,6 +44,10 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
 
     private Long scriptTimeout;
 
+    private Long awaitAtMost;
+
+    private Long awaitPollingEvery;
+
     private final Map<String, String> custom = new HashMap<>();
 
     /**
@@ -158,6 +162,26 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     @Override
     public void setScriptTimeout(final Long scriptTimeout) {
         this.scriptTimeout = scriptTimeout;
+    }
+
+    @Override
+    public Long getAwaitAtMost() {
+        return awaitAtMost;
+    }
+
+    @Override
+    public void setAwaitAtMost(final Long awaitAtMost) {
+        this.awaitAtMost = awaitAtMost;
+    }
+
+    @Override
+    public Long getAwaitPollingEvery() {
+        return awaitPollingEvery;
+    }
+
+    @Override
+    public void setAwaitPollingEvery(final Long awaitPollingEvery) {
+        this.awaitPollingEvery = awaitPollingEvery;
     }
 
     @Override

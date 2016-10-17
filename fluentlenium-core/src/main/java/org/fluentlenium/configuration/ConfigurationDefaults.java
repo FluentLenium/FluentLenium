@@ -65,6 +65,16 @@ public class ConfigurationDefaults extends BaseConfiguration implements Configur
     }
 
     @Override
+    public Long getAwaitAtMost() {
+        return null;
+    }
+
+    @Override
+    public Long getAwaitPollingEvery() {
+        return null;
+    }
+
+    @Override
     public Long getScriptTimeout() {
         return null;
     }
