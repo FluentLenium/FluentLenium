@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>1.0.2</version>
+        <version>1.1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>fluentlenium-junit</artifactId>
