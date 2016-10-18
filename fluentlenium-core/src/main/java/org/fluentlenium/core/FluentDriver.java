@@ -103,30 +103,20 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
     }
 
     private void configureDriver() {
-        if (this.getDriver() != null) {
+        if (this.getDriver() != null && this.getDriver().manage() != null && this.getDriver().manage().timeouts() != null) {
+            if (this.configuration.getPageLoadTimeout() != null) {
+                this.getDriver().manage().timeouts()
+                        .pageLoadTimeout(this.configuration.getPageLoadTimeout(), TimeUnit.MILLISECONDS);
+            }
 
-            if (this.getDriver().manage() != null && // NOPMD CollapsibleIfStatements
-                    this.getDriver().manage().timeouts() != null) {
-                if (this.configuration.getPageLoadTimeout() == null) {
-                    this.getDriver().manage().timeouts().pageLoadTimeout(-1, TimeUnit.MILLISECONDS);
-                } else {
-                    this.getDriver().manage().timeouts()
-                            .pageLoadTimeout(this.configuration.getPageLoadTimeout(), TimeUnit.MILLISECONDS);
-                }
+            if (this.configuration.getImplicitlyWait() != null) {
+                this.getDriver().manage().timeouts()
+                        .implicitlyWait(this.configuration.getImplicitlyWait(), TimeUnit.MILLISECONDS);
+            }
 
-                if (this.configuration.getImplicitlyWait() == null) {
-                    this.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
-                } else {
-                    this.getDriver().manage().timeouts()
-                            .implicitlyWait(this.configuration.getImplicitlyWait(), TimeUnit.MILLISECONDS);
-                }
-
-                if (this.configuration.getScriptTimeout() == null) {
-                    this.getDriver().manage().timeouts().setScriptTimeout(-1, TimeUnit.MILLISECONDS);
-                } else {
-                    this.getDriver().manage().timeouts()
-                            .setScriptTimeout(this.configuration.getScriptTimeout(), TimeUnit.MILLISECONDS);
-                }
+            if (this.configuration.getScriptTimeout() != null) {
+                this.getDriver().manage().timeouts()
+                        .setScriptTimeout(this.configuration.getScriptTimeout(), TimeUnit.MILLISECONDS);
             }
         }
     }
