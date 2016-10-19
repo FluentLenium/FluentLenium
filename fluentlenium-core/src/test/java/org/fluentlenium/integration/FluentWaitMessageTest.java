@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.fail;
 
 public class FluentWaitMessageTest extends IntegrationFluentTest {
     @FindBy(css = "#disabled")
@@ -365,5 +366,30 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
         }).hasMessageStartingWith(
                 "Expected condition failed: Elements By.cssSelector: #not-found (Lazy Element List) is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
+    }
+
+    @Test
+    public void testChains() {
+        goTo(DEFAULT_URL);
+
+        try {
+            el("#not-found").el("#not-found2").el("#not-found3").el(".button").now();
+            fail("Should throw NoSuchElementException");
+        } catch (Throwable e) {
+            assertThat(e).isExactlyInstanceOf(NoSuchElementException.class);
+            assertThat(e).hasMessageStartingWith("Element By.cssSelector: .button (first) (Lazy Element) is not present");
+            e = e.getCause();
+            assertThat(e).isExactlyInstanceOf(NoSuchElementException.class);
+            assertThat(e).hasMessageStartingWith("Element By.cssSelector: #not-found3 (first) (Lazy Element) is not present");
+            e = e.getCause();
+            assertThat(e).isExactlyInstanceOf(NoSuchElementException.class);
+            assertThat(e).hasMessageStartingWith("Element By.cssSelector: #not-found2 (first) (Lazy Element) is not present");
+            e = e.getCause();
+            assertThat(e).isExactlyInstanceOf(NoSuchElementException.class);
+            assertThat(e).hasMessageStartingWith("Element By.cssSelector: #not-found (first) (Lazy Element) is not present");
+            e = e.getCause();
+            assertThat(e).isExactlyInstanceOf(NoSuchElementException.class);
+            assertThat(e).hasMessageStartingWith("Element By.cssSelector: #not-found (first) is not present");
+        }
     }
 }

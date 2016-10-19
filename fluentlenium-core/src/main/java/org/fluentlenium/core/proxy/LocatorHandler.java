@@ -100,6 +100,14 @@ public interface LocatorHandler<T> {
     NoSuchElementException noSuchElement();
 
     /**
+     * Build a {@link NoSuchElementException} with message from this locator.
+     *
+     * @param cause exception cause
+     * @return Exception with not present message
+     */
+    NoSuchElementException noSuchElement(Throwable cause);
+
+    /**
      * Retrieve the message context from this proxy locator.
      *
      * @return message context

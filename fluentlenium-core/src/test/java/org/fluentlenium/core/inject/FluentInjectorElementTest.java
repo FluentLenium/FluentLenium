@@ -94,10 +94,10 @@ public class FluentInjectorElementTest {
     }
 
     @SuppressWarnings("PMD.FieldDeclarationsShouldBeAtStartOfClass")
-    private static final FluentWebElement existingElement = mock(FluentWebElement.class);
+    private static final FluentWebElement EXISTING_ELEMENT = mock(FluentWebElement.class);
 
     public static class ExistingFluentWebElementContainer {
-        private final FluentWebElement element = existingElement;
+        private final FluentWebElement element = EXISTING_ELEMENT;
     }
 
     public static class FluentWebElementSubClassContainer {
@@ -168,7 +168,7 @@ public class FluentInjectorElementTest {
 
         when(webDriver.findElement(any(By.class))).thenReturn(webElement);
 
-        assertThat(container.element).isSameAs(existingElement);
+        assertThat(container.element).isSameAs(EXISTING_ELEMENT);
     }
 
     @Test

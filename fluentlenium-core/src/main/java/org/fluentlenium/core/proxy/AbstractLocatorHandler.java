@@ -1,7 +1,6 @@
 package org.fluentlenium.core.proxy;
 
 import com.google.common.base.Supplier;
-import org.fluentlenium.core.domain.ElementUtils;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
@@ -158,13 +157,14 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
      */
     protected abstract WebElement getElement();
 
-    /**
-     * Builds a {@link NoSuchElementException} with a message matching this locator handler.
-     *
-     * @return no such element exception
-     */
+    @Override
     public NoSuchElementException noSuchElement() {
-        return ElementUtils.noSuchElementException(getMessageContext());
+        return ElementLocatorUtils.noSuchElementException(getMessageContext());
+    }
+
+    @Override
+    public NoSuchElementException noSuchElement(final Throwable cause) {
+        return ElementLocatorUtils.noSuchElementException(getMessageContext(), cause);
     }
 
     @Override

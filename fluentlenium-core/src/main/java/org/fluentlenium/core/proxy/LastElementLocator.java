@@ -1,6 +1,5 @@
 package org.fluentlenium.core.proxy;
 
-import org.fluentlenium.core.domain.ElementUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
@@ -35,7 +34,7 @@ public class LastElementLocator implements ElementLocator {
     public WebElement findElement() {
         final WebElement element = findElementImpl();
         if (element == null) {
-            throw ElementUtils.noSuchElementException(String.valueOf("Element " + this));
+            throw ElementLocatorUtils.noSuchElementException(String.valueOf("Element " + this));
         }
         return element;
     }

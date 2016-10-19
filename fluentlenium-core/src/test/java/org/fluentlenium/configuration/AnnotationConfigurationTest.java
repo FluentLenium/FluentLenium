@@ -20,8 +20,8 @@ public class AnnotationConfigurationTest {
             capabilities = "{javascriptEnabled: true}", remoteUrl = "http://localhost:4444", htmlDumpMode =
             ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL, htmlDumpPath = "/html-path", implicitlyWait = 1000,
             pageLoadTimeout = 2000, awaitPollingEvery = 10, awaitAtMost = 100, screenshotMode = ConfigurationProperties
-            .TriggerMode.MANUAL, screenshotPath = "/screenshot-path", scriptTimeout = 3000, webDriver = "firefox", custom =
-    @CustomProperty(name = "key", value = "value"))
+            .TriggerMode.MANUAL, screenshotPath = "/screenshot-path", scriptTimeout = 3000, // Formatter issue
+            webDriver = "firefox", custom = @CustomProperty(name = "key", value = "value"))
     public static class ConfiguredClass {
     }
 

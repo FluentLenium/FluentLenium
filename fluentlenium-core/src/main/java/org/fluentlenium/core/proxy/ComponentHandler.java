@@ -67,7 +67,7 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement>
         try {
             element = getHookLocator().findElement();
         } catch (final NoSuchElementException e) {
-            element = null;
+            throw noSuchElement(e);
         }
         if (element == null) {
             throw noSuchElement();
