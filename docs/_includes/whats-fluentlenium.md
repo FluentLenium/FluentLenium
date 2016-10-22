@@ -1,10 +1,10 @@
-FluentLenium helps you writing readable, reusable, reliable, and resilient UI functionnal tests for the browser.
+FluentLenium helps you writing readable, reusable, reliable, and resilient UI functional tests for web browser.
 
-Written in Java, It provides [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to 
+Written in Java, provides [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to
 [Selenium](http://www.seleniumhq.org/) and brings some magic to avoid common issues faced by Selenium users.
 
 It's shipped with adapters for [JUnit](junit.org/), [TestNG](http://testng.org/doc/index.html) and 
-[Cucumber](https://cucumber.io), but it can also be used standalone.
+[Cucumber](https://cucumber.io), but it may be used standalone too.
 
-It best integrates with [AssertJ](http://joel-costigliola.github.io/assertj/), but you can also choose to use 
-the assertion framework you want.
+FluentLenium integrates the best with [AssertJ](http://joel-costigliola.github.io/assertj/), but you can also choose
+different assertion library if you want.
