@@ -1,4 +1,4 @@
-FluentLenium helps you writing readable, reusable, reliable, and resilient UI functionnal tests for the browser.
+FluentLenium helps you writing readable, reusable, reliable, and resilient UI functional tests for the browser.
 
 Written in Java, It provides [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to 
 [Selenium](http://www.seleniumhq.org/) and brings some magic to avoid common issues faced by Selenium users.
