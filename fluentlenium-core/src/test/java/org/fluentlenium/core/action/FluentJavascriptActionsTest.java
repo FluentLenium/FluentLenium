@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 
 import static org.mockito.Mockito.verify;
@@ -32,6 +33,7 @@ public class FluentJavascriptActionsTest {
     @Before
     public void before() {
         when(fluentWebElement.getElement()).thenReturn(element);
+        when(fluentWebElement.getElement().getLocation()).thenReturn(new Point(1024,768));
         actions = new FluentJavascriptActionsImpl(self, javascript, Suppliers.ofInstance(fluentWebElement));
     }
 
@@ -47,4 +49,9 @@ public class FluentJavascriptActionsTest {
         verify(javascript).executeScript("arguments[0].scrollIntoView(arguments[1]);", element, true);
     }
 
+    @Test
+    public void testToElement() {
+        actions.scrollToElement();
+        verify(javascript).executeScript("window.scrollTo(0,768 - window.innerHeight / 2)");
+    }
 }
