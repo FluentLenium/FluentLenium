@@ -113,6 +113,27 @@ public class DefaultWebDriverFactories {
     }
 
     /**
+     * HtmlUnit WebDriver factory.
+     */
+    @FactoryPriority(4)
+    @DefaultFactory
+    public static class HtmlUnitWebDriverFactory extends ReflectiveWebDriverFactory {
+        /**
+         * Creates a new htmlUnit WebDriver factory.
+         */
+        public HtmlUnitWebDriverFactory() {
+            super("htmlunit", "org.openqa.selenium.htmlunit.HtmlUnitDriver");
+        }
+
+        @Override
+        protected DesiredCapabilities newDefaultCapabilities() {
+            final DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+            desiredCapabilities.setJavascriptEnabled(true);
+            return desiredCapabilities;
+        }
+    }
+
+    /**
      * Remote WebDriver factory.
      */
     @DefaultFactory
@@ -163,26 +184,6 @@ public class DefaultWebDriverFactories {
             final WebDriver webDriver = ReflectionUtils.getConstructor(webDriverClass, URL.class, Capabilities.class)
                     .newInstance(args);
             return new Augmenter().augment(webDriver);
-        }
-    }
-
-    /**
-     * HtmlUnit WebDriver factory.
-     */
-    @DefaultFactory
-    public static class HtmlUnitWebDriverFactory extends ReflectiveWebDriverFactory {
-        /**
-         * Creates a new htmlUnit WebDriver factory.
-         */
-        public HtmlUnitWebDriverFactory() {
-            super("htmlunit", "org.openqa.selenium.htmlunit.HtmlUnitDriver");
-        }
-
-        @Override
-        protected DesiredCapabilities newDefaultCapabilities() {
-            final DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-            desiredCapabilities.setJavascriptEnabled(true);
-            return desiredCapabilities;
         }
     }
 
