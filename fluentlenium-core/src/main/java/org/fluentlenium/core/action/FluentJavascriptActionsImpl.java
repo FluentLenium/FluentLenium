@@ -41,4 +41,15 @@ public class FluentJavascriptActionsImpl<T> implements FluentJavascriptActions<T
         javascript.executeScript("arguments[0].scrollIntoView(arguments[1]);", element.get().getElement(), alignWithTop);
         return self;
     }
+
+    @Override
+    public T scrollToElement() {
+        int y = element.get().getElement().getLocation().getY();
+        this.scrollCentrallyTo(y);
+        return self;
+    }
+
+    public void scrollCentrallyTo(int y) {
+        javascript.executeScript("window.scrollTo(0," + y + " - window.innerHeight / 2)", new Object[0]);
+    }
 }
