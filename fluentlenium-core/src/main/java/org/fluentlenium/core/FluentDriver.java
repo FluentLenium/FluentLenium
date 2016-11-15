@@ -201,7 +201,7 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
         if (events == null) {
             throw new IllegalStateException("An EventFiringWebDriver instance is required to use events. "
                     + "You should set 'eventsEnabled' configuration property to 'true' "
-                    + "or override newWebDriver() to build an EventFiringWebDriver.");
+                    + "or override newWebDriver() to FluentDriver an EventFiringWebDriver.");
         }
         return events;
     }
@@ -256,7 +256,7 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
                 baseUrl = configBaseUrl;
             }
         }
-        if (baseUrl != null) {
+        if (baseUrl != null && url != null) {
             final URI uri = URI.create(url);
             if (!uri.isAbsolute()) {
                 url = baseUrl + url;
