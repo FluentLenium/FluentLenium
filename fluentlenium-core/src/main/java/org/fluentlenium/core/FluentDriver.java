@@ -256,7 +256,7 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
                 baseUrl = configBaseUrl;
             }
         }
-        if (baseUrl != null) {
+        if (baseUrl != null && url != null) {
             final URI uri = URI.create(url);
             if (!uri.isAbsolute()) {
                 url = baseUrl + url;
