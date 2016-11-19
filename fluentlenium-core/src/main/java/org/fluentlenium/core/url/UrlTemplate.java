@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 /**
  * A simple template engine for URL parameters.
  */
-public class UrlParametersTemplate {
+public class UrlTemplate {
     private static final Pattern FORMAT_REGEX = Pattern.compile("\\{(.+?)\\}");
     private static final Pattern FORMAT_REGEX_OPTIONAL = Pattern.compile("/?\\{\\?(.+?)\\}");
     private final String template;
@@ -18,14 +18,14 @@ public class UrlParametersTemplate {
     private final List<String> parameterNames = new ArrayList<>();
     private final Map<String, UrlParameter> parameters = new LinkedHashMap<>();
     private final Map<String, String> parameterGroups = new LinkedHashMap<>();
-    private final Map<UrlParameter, Object> properties = new LinkedHashMap<>();
+    private final Map<UrlParameter, String> properties = new LinkedHashMap<>();
 
     /**
      * Creates a new template
      *
      * @param template template string
      */
-    public UrlParametersTemplate(final String template) {
+    public UrlTemplate(final String template) {
         this.template = template;
         final Matcher matcher = FORMAT_REGEX.matcher(template);
         while (matcher.find()) {
@@ -64,7 +64,7 @@ public class UrlParametersTemplate {
      * @param value property value
      * @return {@code this} reference to chain calls
      */
-    public UrlParametersTemplate add(final Object value) {
+    public UrlTemplate add(final String value) {
         properties.put(parameters.get(parameterNames.get(properties.size())), value);
         return this;
     }
@@ -76,7 +76,7 @@ public class UrlParametersTemplate {
      * @param value value
      * @return {@code this} reference to chain calls
      */
-    public UrlParametersTemplate put(final String name, final Object value) {
+    public UrlTemplate put(final String name, final String value) {
         final UrlParameter parameter = parameters.get(name);
         if (parameter == null) {
             throw new IllegalArgumentException("Invalid parameter name: " + name);
@@ -91,8 +91,8 @@ public class UrlParametersTemplate {
      * @param values property properties
      * @return {@code this} reference to chain calls
      */
-    public void addAll(final List<Object> values) {
-        for (final Object value : values) {
+    public void addAll(final List<String> values) {
+        for (final String value : values) {
             add(value);
         }
     }
@@ -103,7 +103,7 @@ public class UrlParametersTemplate {
      * @param values properties
      * @return {@code this} reference to chain calls
      */
-    public UrlParametersTemplate put(final Map<String, Object> values) {
+    public UrlTemplate put(final Map<String, String> values) {
         values.putAll(values);
         return this;
     }
@@ -121,7 +121,7 @@ public class UrlParametersTemplate {
                 if (parameter.isOptional()) {
                     rendered = rendered.replaceAll(String.format("/\\{%s\\}", parameterGroups.get(parameter.getName())), "");
                 } else {
-                    throw new IllegalStateException(String.format("Parameter %s is not defined", parameter.getName()));
+                    throw new IllegalArgumentException(String.format("Value for parameter %s is missing.", parameter));
                 }
             } else {
                 rendered = rendered
@@ -138,7 +138,7 @@ public class UrlParametersTemplate {
      * @param input string
      * @return properties
      */
-    public UrlParametersParsed parse(final String input) {
+    public ParsedUrlTemplate parse(final String input) {
         final LinkedHashMap<String, String> parsedValues = new LinkedHashMap<>();
 
         final Pattern inputRegex = Pattern.compile(template.replaceAll(FORMAT_REGEX_OPTIONAL.pattern(), "(?:/([^/]+))?")
@@ -156,7 +156,7 @@ public class UrlParametersTemplate {
             }
         }
 
-        return new UrlParametersParsed(input, matches, parsedValues);
+        return new ParsedUrlTemplate(matches, parsedValues);
     }
 
 }
