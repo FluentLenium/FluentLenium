@@ -9,4 +9,9 @@ public class LocalPage extends FluentPage {
     public String getUrl() {
         return UrlUtil.getAbsoluteUrlFromFile("html/index.html");
     }
+
+    @Override
+    protected void isAtUsingUrl(final String urlTemplate) {
+        // Skip because it doesn't work with file:// urls ...
+    }
 }

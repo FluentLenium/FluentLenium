@@ -4,33 +4,21 @@ import java.util.Collections;
 import java.util.Map;
 
 /**
- * Parsed URL.
+ * Parsed URL template.
  */
-public class UrlParametersParsed {
-    private final String url;
+public class ParsedUrlTemplate {
     private final boolean matches;
     private final Map<String, String> parameters;
 
     /**
      * Creates a new url parameters parsed.
      *
-     * @param url        url
      * @param matches    true if matches, false otherwise
      * @param parameters parameter values
      */
-    UrlParametersParsed(final String url, final boolean matches, final Map<String, String> parameters) {
-        this.url = url;
+    ParsedUrlTemplate(final boolean matches, final Map<String, String> parameters) {
         this.matches = matches;
         this.parameters = Collections.unmodifiableMap(parameters);
-    }
-
-    /**
-     * Url containing parameters.
-     *
-     * @return url
-     */
-    public String url() {
-        return this.url;
     }
 
     /**
