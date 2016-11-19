@@ -1,5 +1,9 @@
 package org.fluentlenium.core.url;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URIBuilder;
+
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -139,14 +143,38 @@ public class UrlTemplate {
      * @return properties
      */
     public ParsedUrlTemplate parse(final String input) {
-        final LinkedHashMap<String, String> parsedValues = new LinkedHashMap<>();
+        String fixedTemplate = template;
+        if (fixedTemplate.startsWith("/")) {
+            fixedTemplate = fixedTemplate.replaceFirst("/", "/?");
+        } else {
+            fixedTemplate = "/?" + fixedTemplate;
+        }
 
-        final Pattern inputRegex = Pattern.compile(template.replaceAll(FORMAT_REGEX_OPTIONAL.pattern(), "(?:/([^/]+))?")
-                .replaceAll(FORMAT_REGEX.pattern(), "([^/]+)") + "/?");
+        if (fixedTemplate.endsWith("/")) {
+            fixedTemplate = fixedTemplate + "?";
+        } else {
+            fixedTemplate = fixedTemplate + "/?";
+        }
 
-        final Matcher matcher = inputRegex.matcher(input);
+        String noQueryInput = input;
+        List<NameValuePair> queryParameters = new ArrayList<>();
+
+        try {
+            final URIBuilder uriBuilder = new URIBuilder(input);
+            queryParameters = uriBuilder.getQueryParams();
+            uriBuilder.setCustomQuery(null);
+            noQueryInput = uriBuilder.toString();
+        } catch (final URISyntaxException e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
+        }
+
+        final Pattern pathRegex = Pattern.compile(fixedTemplate.replaceAll(FORMAT_REGEX_OPTIONAL.pattern(), "(?:/([^/]+))?")
+                .replaceAll(FORMAT_REGEX.pattern(), "([^/]+)"));
+
+        final Matcher matcher = pathRegex.matcher(noQueryInput);
         final boolean matches = matcher.matches();
 
+        final LinkedHashMap<String, String> parsedValues = new LinkedHashMap<>();
         if (matches) {
             for (int i = 0; i < parameterNames.size() && i < matcher.groupCount(); i++) {
                 final String value = matcher.group(i + 1);
@@ -156,7 +184,7 @@ public class UrlTemplate {
             }
         }
 
-        return new ParsedUrlTemplate(matches, parsedValues);
+        return new ParsedUrlTemplate(matches, parsedValues, queryParameters);
     }
 
 }
