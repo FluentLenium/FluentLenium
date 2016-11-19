@@ -1,6 +1,9 @@
 package org.fluentlenium.core.url;
 
+import org.apache.http.NameValuePair;
+
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -9,6 +12,7 @@ import java.util.Map;
 public class ParsedUrlTemplate {
     private final boolean matches;
     private final Map<String, String> parameters;
+    private final List<NameValuePair> queryParameters;
 
     /**
      * Creates a new url parameters parsed.
@@ -16,9 +20,10 @@ public class ParsedUrlTemplate {
      * @param matches    true if matches, false otherwise
      * @param parameters parameter values
      */
-    ParsedUrlTemplate(final boolean matches, final Map<String, String> parameters) {
+    ParsedUrlTemplate(final boolean matches, final Map<String, String> parameters, final List<NameValuePair> queryParameters) {
         this.matches = matches;
         this.parameters = Collections.unmodifiableMap(parameters);
+        this.queryParameters = queryParameters;
     }
 
     /**
@@ -39,4 +44,12 @@ public class ParsedUrlTemplate {
         return parameters;
     }
 
+    /**
+     * Get query string parameter values.
+     *
+     * @return list of name value pair
+     */
+    public List<NameValuePair> queryParameters() {
+        return queryParameters;
+    }
 }
