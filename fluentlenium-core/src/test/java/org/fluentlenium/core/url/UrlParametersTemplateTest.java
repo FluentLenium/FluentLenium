@@ -2,8 +2,6 @@ package org.fluentlenium.core.url;
 
 import org.junit.Test;
 
-import java.util.Map;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -39,10 +37,12 @@ public class UrlParametersTemplateTest {
         assertThat(urlParametersTemplate.getParameters())
                 .containsExactly(new UrlParameter("param1"), new UrlParameter("param2"), new UrlParameter("param3"));
 
-        final Map<String, String> parse = urlParametersTemplate.parse("/abc/v1/def/v2/v3");
-        assertThat(parse).hasSize(3);
-        assertThat(parse.keySet()).containsExactly("param1", "param2", "param3");
-        assertThat(parse.values()).containsExactly("v1", "v2", "v3");
+        final UrlParametersParsed parsed = urlParametersTemplate.parse("/abc/v1/def/v2/v3");
+        assertThat(parsed.url()).isEqualTo("/abc/v1/def/v2/v3");
+        assertThat(parsed.matches()).isTrue();
+        assertThat(parsed.parameters()).hasSize(3);
+        assertThat(parsed.parameters().keySet()).containsExactly("param1", "param2", "param3");
+        assertThat(parsed.parameters().values()).containsExactly("v1", "v2", "v3");
     }
 
     @Test
@@ -51,9 +51,69 @@ public class UrlParametersTemplateTest {
         assertThat(urlParametersTemplate.getParameters())
                 .containsExactly(new UrlParameter("param1"), new UrlParameter("param2"), new UrlParameter("param3", true));
 
-        final Map<String, String> parse = urlParametersTemplate.parse("/abc/v1/def/v2");
-        assertThat(parse).hasSize(2);
-        assertThat(parse.keySet()).containsExactly("param1", "param2");
-        assertThat(parse.values()).containsExactly("v1", "v2");
+        final UrlParametersParsed parsed = urlParametersTemplate.parse("/abc/v1/def/v2");
+        assertThat(parsed.matches()).isTrue();
+        assertThat(parsed.parameters()).hasSize(2);
+        assertThat(parsed.parameters().keySet()).containsExactly("param1", "param2");
+        assertThat(parsed.parameters().values()).containsExactly("v1", "v2");
+    }
+
+    @Test
+    public void testParseOptionalMiddleParameter() {
+        final UrlParametersTemplate urlParametersTemplate = new UrlParametersTemplate("/abc/{param1}/def/{?param2}/ghi/{param3}");
+        assertThat(urlParametersTemplate.getParameters())
+                .containsExactly(new UrlParameter("param1"), new UrlParameter("param2", true), new UrlParameter("param3"));
+
+        final UrlParametersParsed parsed = urlParametersTemplate.parse("/abc/v1/def/ghi/v3");
+        assertThat(parsed.matches()).isTrue();
+        assertThat(parsed.parameters()).hasSize(2);
+        assertThat(parsed.parameters().keySet()).containsExactly("param1", "param3");
+        assertThat(parsed.parameters().values()).containsExactly("v1", "v3");
+    }
+
+    @Test
+    public void testParseNotMatchingOptionalMiddleParameter() {
+        final UrlParametersTemplate urlParametersTemplate = new UrlParametersTemplate("/abc/{param1}/def/{?param2}/ghi/{param3}");
+        assertThat(urlParametersTemplate.getParameters())
+                .containsExactly(new UrlParameter("param1"), new UrlParameter("param2", true), new UrlParameter("param3"));
+
+        final UrlParametersParsed parsed = urlParametersTemplate.parse("/abc/v1/def/ghi");
+        assertThat(parsed.matches()).isFalse();
+        assertThat(parsed.parameters()).hasSize(0);
+    }
+
+    @Test
+    public void testParseNotMatchingUrl() {
+        final UrlParametersTemplate urlParametersTemplate = new UrlParametersTemplate("/abc/{param1}/def/{param2}/{?param3}");
+        assertThat(urlParametersTemplate.getParameters())
+                .containsExactly(new UrlParameter("param1"), new UrlParameter("param2"), new UrlParameter("param3", true));
+
+        final UrlParametersParsed parsed = urlParametersTemplate.parse("/abc/v1/abc/v2");
+        assertThat(parsed.matches()).isFalse();
+        assertThat(parsed.parameters()).hasSize(0);
+    }
+
+    @Test
+    public void testParseNotMatchingStartingUrl() {
+        final UrlParametersTemplate urlParametersTemplate = new UrlParametersTemplate("/abc/{param1}/def/{param2}/{?param3}");
+        assertThat(urlParametersTemplate.getParameters())
+                .containsExactly(new UrlParameter("param1"), new UrlParameter("param2"), new UrlParameter("param3", true));
+
+        final UrlParametersParsed parsed = urlParametersTemplate.parse("/abc/v1/def/v2/v3/ghi");
+        assertThat(parsed.matches()).isFalse();
+        assertThat(parsed.parameters()).hasSize(0);
+    }
+
+    @Test
+    public void testParseMatchingWithTrailingSlash() {
+        final UrlParametersTemplate urlParametersTemplate = new UrlParametersTemplate("/abc/{param1}/def/{param2}/{?param3}");
+        assertThat(urlParametersTemplate.getParameters())
+                .containsExactly(new UrlParameter("param1"), new UrlParameter("param2"), new UrlParameter("param3", true));
+
+        final UrlParametersParsed parsed = urlParametersTemplate.parse("/abc/v1/def/v2/v3/");
+        assertThat(parsed.matches()).isTrue();
+        assertThat(parsed.parameters()).hasSize(3);
+        assertThat(parsed.parameters().keySet()).containsExactly("param1", "param2", "param3");
+        assertThat(parsed.parameters().values()).containsExactly("v1", "v2", "v3");
     }
 }
