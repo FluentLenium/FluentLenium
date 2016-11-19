@@ -138,15 +138,16 @@ public class UrlParametersTemplate {
      * @param input string
      * @return properties
      */
-    public Map<String, String> parse(final String input) {
+    public UrlParametersParsed parse(final String input) {
         final LinkedHashMap<String, String> parsedValues = new LinkedHashMap<>();
 
-        final Pattern inputRegex = Pattern.compile(
-                template.replaceAll(FORMAT_REGEX_OPTIONAL.pattern(), "(?:/(.+))?").replaceAll(FORMAT_REGEX.pattern(), "(.+)"));
+        final Pattern inputRegex = Pattern.compile(template.replaceAll(FORMAT_REGEX_OPTIONAL.pattern(), "(?:/([^/]+))?")
+                .replaceAll(FORMAT_REGEX.pattern(), "([^/]+)") + "/?");
 
         final Matcher matcher = inputRegex.matcher(input);
+        final boolean matches = matcher.matches();
 
-        if (matcher.find()) {
+        if (matches) {
             for (int i = 0; i < parameterNames.size() && i < matcher.groupCount(); i++) {
                 final String value = matcher.group(i + 1);
                 if (value != null) {
@@ -154,7 +155,8 @@ public class UrlParametersTemplate {
                 }
             }
         }
-        return parsedValues;
+
+        return new UrlParametersParsed(input, matches, parsedValues);
     }
 
 }
