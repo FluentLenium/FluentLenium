@@ -50,7 +50,7 @@ public final class UrlUtils { // NOPMD CyclomaticComplexity
     }
 
     /**
-     * Sanitize base url from current url.
+     * Sanitize base url from current url, by using the same scheme.
      *
      * @param baseUriSpec
      * @param uriSpec
@@ -60,32 +60,26 @@ public final class UrlUtils { // NOPMD CyclomaticComplexity
         if (baseUriSpec == null) {
             return null;
         }
-        if (uriSpec == null) {
-            return baseUriSpec;
-        }
 
-        final URI baseUri = URI.create(baseUriSpec);
+        URI baseUri = URI.create(baseUriSpec);
 
-        if (baseUri.getScheme() != null) {
-            return baseUri.toString();
-        }
-
-        if (baseUri.getScheme() == null) {
-            try {
-                String fixedBaseUriSpec = baseUriSpec;
+        try {
+            String fixedBaseUriSpec = baseUriSpec;
+            if (baseUri.getScheme() == null) {
                 while (!fixedBaseUriSpec.startsWith("//")) {
                     fixedBaseUriSpec = "/" + fixedBaseUriSpec;
                 }
-
-                final URI uri = URI.create(uriSpec);
-
-                final URI withSchemeBaseUri = new URIBuilder(fixedBaseUriSpec).setScheme(uri.getScheme()).build();
-                if (withSchemeBaseUri.getAuthority().equals(uri.getAuthority())) {
-                    return withSchemeBaseUri.toString();
-                }
-            } catch (final URISyntaxException e) {
-                throw new IllegalArgumentException(e.getMessage(), e);
+                baseUri = new URIBuilder(fixedBaseUriSpec).setScheme("http").build();
             }
+
+            URI uri = uriSpec == null ? null : URI.create(uriSpec);
+            String scheme = uri == null || !baseUri.getAuthority().equals(uri.getAuthority()) ? baseUri.getScheme() : uri.getScheme();
+
+            if (!scheme.equals(baseUri.getScheme())) {
+                return new URIBuilder(baseUri).setScheme(scheme).build().toString();
+            }
+        } catch (final URISyntaxException e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
         }
 
         return baseUri.toString();
