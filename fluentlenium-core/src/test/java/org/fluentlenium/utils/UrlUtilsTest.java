@@ -1,6 +1,7 @@
 package org.fluentlenium.utils;
 
 import org.assertj.core.api.Assertions;
+import org.fluentlenium.integration.util.UrlUtil;
 import org.junit.Test;
 
 public class UrlUtilsTest {
@@ -74,5 +75,35 @@ public class UrlUtilsTest {
     public void testAbsoluteUrlReplaceBaseUrl() {
         final String test = UrlUtils.concat("http://fluentlenium.org/path/", "http://www.google.fr/test");
         Assertions.assertThat(test).isEqualTo("http://www.google.fr/test");
+    }
+
+    @Test
+    public void testSanitizeBaseUrl() {
+        String baseUrl = UrlUtils.sanitizeBaseUrl("http://fluentlenium.org/path/", "https://fluentlenium.org/path/abc");
+        Assertions.assertThat(baseUrl).isEqualTo("https://fluentlenium.org/path/");
+    }
+
+    @Test
+    public void testSanitizeBaseUrlOtherDomain() {
+        String baseUrl = UrlUtils.sanitizeBaseUrl("http://fluentlenium.org/path/", "https://www.google.com/path/abc");
+        Assertions.assertThat(baseUrl).isEqualTo("http://fluentlenium.org/path/");
+    }
+
+    @Test
+    public void testSanitizeBaseUrlNull() {
+        String baseUrl = UrlUtils.sanitizeBaseUrl(null, "https://www.google.com/path/abc");
+        Assertions.assertThat(baseUrl).isNull();
+    }
+
+    @Test
+    public void testSanitizeBaseUrlMissingScheme() {
+        String baseUrl = UrlUtils.sanitizeBaseUrl("fluentlenium.org/path/", "https://fluentlenium.org/path/abc");
+        Assertions.assertThat(baseUrl).isEqualTo("https://fluentlenium.org/path/");
+    }
+
+    @Test
+    public void testSanitizeBaseUrlMissingSchemeOtherDomain() {
+        String baseUrl = UrlUtils.sanitizeBaseUrl("fluentlenium.org/path/", "https://www.google.com/path/abc");
+        Assertions.assertThat(baseUrl).isEqualTo("http://fluentlenium.org/path/");
     }
 }
