@@ -246,15 +246,15 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
     }
 
     private String buildUrl(final String url) {
-        String currentUrl = getDriver().getCurrentUrl();
-        String baseUrl = UrlUtils.sanitizeBaseUrl(getBaseUrl(), currentUrl);
+        final String currentUrl = getDriver().getCurrentUrl();
+        final String baseUrl = UrlUtils.sanitizeBaseUrl(getBaseUrl(), currentUrl);
 
         return UrlUtils.concat(baseUrl, url);
     }
 
     @Override
     public String url() {
-        String baseUrl = buildUrl(null);
+        final String baseUrl = buildUrl(null);
 
         String currentUrl = getDriver().getCurrentUrl();
         if (currentUrl != null && baseUrl != null && currentUrl.startsWith(baseUrl)) {

@@ -4,6 +4,8 @@ import org.apache.http.client.utils.URIBuilder;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Utils class for Url manipulation.
@@ -50,10 +52,10 @@ public final class UrlUtils { // NOPMD CyclomaticComplexity
     }
 
     /**
-     * Sanitize base url from current url, by using the same scheme.
+     * Sanitize base url from current url by using the same scheme if http/https.
      *
-     * @param baseUriSpec
-     * @param uriSpec
+     * @param baseUriSpec base URI
+     * @param uriSpec     current URI
      * @return
      */
     public static String sanitizeBaseUrl(final String baseUriSpec, final String uriSpec) {
@@ -64,16 +66,11 @@ public final class UrlUtils { // NOPMD CyclomaticComplexity
         URI baseUri = URI.create(baseUriSpec);
 
         try {
-            String fixedBaseUriSpec = baseUriSpec;
-            if (baseUri.getScheme() == null) {
-                while (!fixedBaseUriSpec.startsWith("//")) {
-                    fixedBaseUriSpec = "/" + fixedBaseUriSpec;
-                }
-                baseUri = new URIBuilder(fixedBaseUriSpec).setScheme("http").build();
-            }
+            baseUri = ensureScheme(baseUri, "http");
 
-            URI uri = uriSpec == null ? null : URI.create(uriSpec);
-            String scheme = uri == null || !baseUri.getAuthority().equals(uri.getAuthority()) ? baseUri.getScheme() : uri.getScheme();
+            final URI uri = uriSpec == null ? null : URI.create(uriSpec);
+            final String scheme = uri == null || !Objects.equals(baseUri.getAuthority(), uri.getAuthority()) || !Arrays
+                    .asList(new String[] {"http", "https"}).contains(uri.getScheme()) ? baseUri.getScheme() : uri.getScheme();
 
             if (!scheme.equals(baseUri.getScheme())) {
                 return new URIBuilder(baseUri).setScheme(scheme).build().toString();
@@ -83,6 +80,25 @@ public final class UrlUtils { // NOPMD CyclomaticComplexity
         }
 
         return baseUri.toString();
+    }
+
+    /**
+     * Ensure a scheme is defined on the URI.
+     *
+     * @param uri           uri
+     * @param defaultScheme scheme to use when no scheme is defined on uri
+     * @return uri with scheme defined
+     * @throws URISyntaxException
+     */
+    private static URI ensureScheme(final URI uri, final String defaultScheme) throws URISyntaxException {
+        String fixedBaseUriSpec = uri.toString();
+        if (uri.getScheme() == null) {
+            while (!fixedBaseUriSpec.startsWith("//")) {
+                fixedBaseUriSpec = "/" + fixedBaseUriSpec;
+            }
+            return new URIBuilder(fixedBaseUriSpec).setScheme(defaultScheme).build();
+        }
+        return uri;
     }
 
 }
