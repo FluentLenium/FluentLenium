@@ -456,6 +456,33 @@ public class MyPage extends FluentPage {
 }
 ```
 
+It's possible to define parameters in FluentPage url using `{[?][/path/]parameter}` syntax.
+If it starts with `?`, it means that the parameter is optional. Path can be included in the braces so it 
+is removed when parameter value is not defined.
+
+```java
+@PageUrl("/document/{document}{?/page/page}{?/format}")
+public class DocumentPage extends FluentPage {
+    ...
+}
+```
+
+Parameter values are given in order to `isAt` and `go` methods.
+
+```java
+@Page
+private DocumentPage page;
+
+@Test
+public void test() {
+    page.go(267) // go to "/document/267"
+    page.go(174, 3) // go to "/document/174/page/3"
+    page.go(124, 1, "pdf") // go to "/document/124/page/1/pdf"
+    page.go(124, null, "html") // go to "/document/124/html"
+    page.isAt(174, 3) // Assert that current url is "/document/174/page/3"
+}
+```
+
 Create your own methods to easily fill out forms, go to another or whatever else may be needed in your test.
 
 ```java
