@@ -15,13 +15,11 @@ import java.util.regex.Pattern;
  * A simple template engine for URL parameters.
  */
 public class UrlTemplate {
-    private static final Pattern FORMAT_REGEX = Pattern.compile("\\{(.+?)\\}");
-    private static final Pattern FORMAT_REGEX_OPTIONAL = Pattern.compile("/?\\{\\?(.+?)\\}");
+    private static final Pattern PARAM_REGEX = Pattern.compile("\\{(.+?)\\}");
     private final String template;
 
     private final List<String> parameterNames = new ArrayList<>();
     private final Map<String, UrlParameter> parameters = new LinkedHashMap<>();
-    private final Map<String, String> parameterGroups = new LinkedHashMap<>();
     private final Map<UrlParameter, String> properties = new LinkedHashMap<>();
 
     /**
@@ -31,17 +29,35 @@ public class UrlTemplate {
      */
     public UrlTemplate(final String template) {
         this.template = template;
-        final Matcher matcher = FORMAT_REGEX.matcher(template);
+        final Matcher matcher = PARAM_REGEX.matcher(template);
         while (matcher.find()) {
+            final String match = matcher.group(0);
             final String group = matcher.group(1);
-            final UrlParameter parameter;
-            if (group.startsWith("?")) {
-                parameter = new UrlParameter(group.substring(1), true);
+
+            final boolean optional = group.startsWith("?");
+            final int lastIndex = group.lastIndexOf('/');
+
+            final String parameterName;
+            final String path;
+            if (lastIndex > -1 && lastIndex < group.length()) {
+                path = group.substring(optional ? 1 : 0, lastIndex + 1);
+                parameterName = group.substring(lastIndex + 1);
+            } else if (group.startsWith("?")) {
+                path = null;
+                parameterName = group.substring(1);
             } else {
-                parameter = new UrlParameter(group, false);
+                path = null;
+                parameterName = group;
             }
+
+            final UrlParameter parameter = new UrlParameter(parameterName, group, path, match, optional);
+
+            if (parameters.containsKey(parameter.getName())) {
+                throw new IllegalStateException(
+                        String.format("Multiple parameters are defined with the same name (%s).", parameter.getName()));
+            }
+
             parameters.put(parameter.getName(), parameter);
-            parameterGroups.put(parameter.getName(), Pattern.quote(group));
             parameterNames.add(parameter.getName());
         }
     }
@@ -121,28 +137,29 @@ public class UrlTemplate {
         String rendered = template;
         for (final UrlParameter parameter : parameters.values()) {
             final Object value = properties.get(parameter);
-            if (value == null) {
-                if (parameter.isOptional()) {
-                    rendered = rendered.replaceAll(String.format("/\\{%s\\}", parameterGroups.get(parameter.getName())), "");
-                } else {
-                    throw new IllegalArgumentException(String.format("Value for parameter %s is missing.", parameter));
-                }
+            final String group = parameter.getGroup();
+            if (value == null && !parameter.isOptional()) {
+                throw new IllegalArgumentException(String.format("Value for parameter %s is missing.", parameter));
             } else {
-                rendered = rendered
-                        .replaceAll(String.format("\\{%s\\}", parameterGroups.get(parameter.getName())), String.valueOf(value));
+                rendered = rendered.replaceAll(Pattern.quote(String.format("{%s}", group)),
+                        buildRenderReplacement(parameter, value == null ? null : String.valueOf(value)));
             }
 
-        }
-        return rendered;
+        } return rendered;
     }
 
-    /**
-     * Get properties from string
-     *
-     * @param input string
-     * @return properties
-     */
-    public ParsedUrlTemplate parse(final String input) {
+    private String buildRenderReplacement(final UrlParameter parameter, final String value) {
+        if (value == null || value.isEmpty()) {
+            return "";
+        }
+        final String path = parameter.getPath();
+        if (path != null) {
+            return path + value;
+        }
+        return value;
+    }
+
+    private String buildParsePattern() {
         String fixedTemplate = template;
         if (fixedTemplate.startsWith("/")) {
             fixedTemplate = fixedTemplate.replaceFirst("/", "/?");
@@ -156,6 +173,25 @@ public class UrlTemplate {
             fixedTemplate = fixedTemplate + "/?";
         }
 
+
+        for (final UrlParameter parameter : parameters.values()) {
+            String replacementPattern = "%s([^/]+)";
+            if (parameter.isOptional()) {
+                replacementPattern = "(?:" + replacementPattern + ")?";
+            }
+            fixedTemplate = fixedTemplate.replaceAll(Pattern.quote(parameter.getMatch()), String.format(replacementPattern, parameter.getPath() == null ? "" : parameter.getPath()));
+        }
+
+        return fixedTemplate;
+    }
+
+    /**
+     * Get properties from string
+     *
+     * @param input string
+     * @return properties
+     */
+    public ParsedUrlTemplate parse(final String input) {
         String noQueryInput = input;
         List<NameValuePair> queryParameters = new ArrayList<>();
 
@@ -168,8 +204,7 @@ public class UrlTemplate {
             throw new IllegalArgumentException(e.getMessage(), e);
         }
 
-        final Pattern pathRegex = Pattern.compile(fixedTemplate.replaceAll(FORMAT_REGEX_OPTIONAL.pattern(), "(?:/([^/]+))?")
-                .replaceAll(FORMAT_REGEX.pattern(), "([^/]+)"));
+        final Pattern pathRegex = Pattern.compile(buildParsePattern());
 
         final Matcher matcher = pathRegex.matcher(noQueryInput);
         final boolean matches = matcher.matches();
