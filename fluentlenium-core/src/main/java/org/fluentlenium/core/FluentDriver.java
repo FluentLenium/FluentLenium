@@ -23,6 +23,7 @@ import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWait;
+import org.fluentlenium.utils.UrlUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
@@ -37,7 +38,6 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URI;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Set;
@@ -245,35 +245,18 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
         return getDriver().manage().getCookieNamed(name);
     }
 
-    private String buildUrl(String url) {
-        String baseUrl = getBaseUrl();
-        if (baseUrl != null) {
-            String configBaseUrl = baseUrl;
-            if (configBaseUrl != null) {
-                if (configBaseUrl.endsWith("/")) {
-                    configBaseUrl = configBaseUrl.substring(0, configBaseUrl.length() - 1);
-                }
-                baseUrl = configBaseUrl;
-            }
-        }
-        if (baseUrl != null) {
-            final URI uri = URI.create(url);
-            if (!uri.isAbsolute()) {
-                url = baseUrl + url;
-            }
-        }
-        if (url == null) {
-            url = baseUrl;
-        }
-        return url;
+    private String buildUrl(final String url) {
+        final String currentUrl = getDriver().getCurrentUrl();
+        final String baseUrl = UrlUtils.sanitizeBaseUrl(getBaseUrl(), currentUrl);
+
+        return UrlUtils.concat(baseUrl, url);
     }
 
     @Override
     public String url() {
-        String currentUrl = getDriver().getCurrentUrl();
-
         final String baseUrl = buildUrl(null);
 
+        String currentUrl = getDriver().getCurrentUrl();
         if (currentUrl != null && baseUrl != null && currentUrl.startsWith(baseUrl)) {
             currentUrl = currentUrl.substring(baseUrl.length());
         }

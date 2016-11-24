@@ -1,5 +1,6 @@
 package org.fluentlenium.integration;
 
+import org.assertj.core.api.Assertions;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
@@ -23,18 +24,20 @@ public class GoToTest extends IntegrationFluentTest {
         verify(webDriver).get(DEFAULT_URL);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void goToWithNullPage() {
         final FluentPage page = null;
-        goTo(page);
+        Assertions.assertThatThrownBy(() -> goTo(page)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Page is mandatory");
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void goToWithNullUrlOnPage() {
         final FluentPage page = new FluentPage() {
         };
         page.initFluent(this);
-        goTo(page);
+        Assertions.assertThatThrownBy(() -> goTo(page)).isInstanceOf(IllegalStateException.class)
+                .hasMessage("An URL should be defined on the page. Use @PageUrl annotation or override getUrl() method.");
     }
 
     @Test
