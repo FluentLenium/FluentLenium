@@ -1029,6 +1029,11 @@ You can either execute javascript with arguments, with async `executeAsyncScript
 executeScript("change();", 12L).getStringResult();
 ```
 
+## Underlying WebDriver and Capabilities
+
+It's possible to retrieve the underlying WebDriver with `getDriver()` method. Effective Capabilities can be retrieved 
+with `capabilities()` method.
+
 ## Taking ScreenShots and HTML Dumps
 You can take a ScreenShot and a HTML Dump of the browser.
 
