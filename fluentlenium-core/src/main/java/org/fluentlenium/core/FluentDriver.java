@@ -25,13 +25,16 @@ import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.utils.UrlUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
@@ -303,6 +306,19 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
         }
 
         getDriver().switchTo().window(newTab);
+    }
+
+    @Override
+    public Capabilities capabilities() {
+        WebDriver currentDriver = getDriver();
+        Capabilities capabilities = currentDriver instanceof HasCapabilities
+                ? ((HasCapabilities) currentDriver).getCapabilities()
+                : null;
+        while (currentDriver instanceof WrapsDriver && capabilities == null) {
+            currentDriver = ((WrapsDriver) currentDriver).getWrappedDriver();
+            capabilities = currentDriver instanceof HasCapabilities ? ((HasCapabilities) currentDriver).getCapabilities() : null;
+        }
+        return capabilities;
     }
 
     @Override
