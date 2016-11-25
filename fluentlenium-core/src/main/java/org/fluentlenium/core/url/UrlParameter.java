@@ -16,13 +16,13 @@ public class UrlParameter {
     private final String match;
     private final boolean optional;
 
-
     /**
      * Creates a new parameter
      *
      * @param name     parameter name
-     * @param group parameter match group
-     * @param path  parameter path
+     * @param group    parameter match group
+     * @param path     parameter path
+     * @param match    parameter matche
      * @param optional optional parameter
      */
     public UrlParameter(final String name, final String group, final String path, final String match, final boolean optional) {

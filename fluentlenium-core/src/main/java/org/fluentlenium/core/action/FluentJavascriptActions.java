@@ -28,11 +28,10 @@ public interface FluentJavascriptActions<T> {
     T scrollIntoView(boolean alignWithTop);
 
     /**
-     * Scrolls centrally the current element into the visible area of the browser window, respecting window size.
+     * Scrolls center of the current element into the visible area of the browser window, respecting window size.
      *
      * @return this object reference to chain methods calls
-     * @see <a href="https://developer.mozilla.org/en/docs/Web/API/Element/scrollIntoView">element.scrollIntoView</a>
      */
-    T scrollToElement();
+    T scrollToCenter();
 }
 
