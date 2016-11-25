@@ -7,11 +7,11 @@
 
     <artifactId>fluentlenium-examples-quickstart</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>1.0.4</version>
+    <version>1.0.5-SNAPSHOT</version>
 
     <properties>
         <!-- Configure this property to latest available version -->
-        <fluentlenium.version>1.0.4</fluentlenium.version>
+        <fluentlenium.version>1.0.5-SNAPSHOT</fluentlenium.version>
     </properties>
 
     <name>FluentLenium Examples Quickstart</name>
