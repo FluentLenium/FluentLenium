@@ -14,6 +14,7 @@ public class IntegrationFluentTest extends FluentTest {
     public static final String IFRAME_URL;
     public static final String ANOTHERPAGE_URL;
     public static final String COMPONENTS_URL;
+    public static final String COUNT_URL;
 
     static {
         DEFAULT_URL = getAbsoluteUrlFromFile("index.html");
@@ -23,6 +24,7 @@ public class IntegrationFluentTest extends FluentTest {
         IFRAME_URL = getAbsoluteUrlFromFile("iframe.html");
         ANOTHERPAGE_URL = getAbsoluteUrlFromFile("anotherpage.html");
         COMPONENTS_URL = getAbsoluteUrlFromFile("components.html");
+        COUNT_URL = getAbsoluteUrlFromFile("count.html");
     }
 
     @Override
