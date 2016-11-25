@@ -43,13 +43,9 @@ public class FluentJavascriptActionsImpl<T> implements FluentJavascriptActions<T
     }
 
     @Override
-    public T scrollToElement() {
-        int y = element.get().getElement().getLocation().getY();
-        this.scrollCentrallyTo(y);
-        return self;
-    }
-
-    public void scrollCentrallyTo(int y) {
+    public T scrollToCenter() {
+        final int y = element.get().getElement().getLocation().getY();
         javascript.executeScript("window.scrollTo(0," + y + " - window.innerHeight / 2)", new Object[0]);
+        return self;
     }
 }

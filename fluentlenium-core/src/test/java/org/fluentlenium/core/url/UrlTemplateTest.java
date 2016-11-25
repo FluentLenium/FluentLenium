@@ -190,6 +190,8 @@ public class UrlTemplateTest {
 
     @Test
     public void testDuplicateParameters() {
-        assertThatThrownBy(() -> new UrlTemplate("/abc/{param1}{?/def/param1}{?/ghi/param3}")).isInstanceOf(IllegalStateException.class).hasMessage("Multiple parameters are defined with the same name (param1).");
+        assertThatThrownBy(() -> new UrlTemplate("/abc/{param1}{?/def/param1}{?/ghi/param3}"))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("Multiple parameters are defined with the same name (param1).");
     }
 }

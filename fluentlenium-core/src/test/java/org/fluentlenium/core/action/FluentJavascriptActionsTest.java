@@ -33,7 +33,7 @@ public class FluentJavascriptActionsTest {
     @Before
     public void before() {
         when(fluentWebElement.getElement()).thenReturn(element);
-        when(fluentWebElement.getElement().getLocation()).thenReturn(new Point(1024,768));
+        when(fluentWebElement.getElement().getLocation()).thenReturn(new Point(1024, 768));
         actions = new FluentJavascriptActionsImpl(self, javascript, Suppliers.ofInstance(fluentWebElement));
     }
 
@@ -50,8 +50,8 @@ public class FluentJavascriptActionsTest {
     }
 
     @Test
-    public void testToElement() {
-        actions.scrollToElement();
+    public void testToCenter() {
+        actions.scrollToCenter();
         verify(javascript).executeScript("window.scrollTo(0,768 - window.innerHeight / 2)");
     }
 }

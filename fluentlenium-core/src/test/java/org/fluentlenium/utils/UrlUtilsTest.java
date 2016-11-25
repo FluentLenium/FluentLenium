@@ -1,7 +1,6 @@
 package org.fluentlenium.utils;
 
 import org.assertj.core.api.Assertions;
-import org.fluentlenium.integration.util.UrlUtil;
 import org.junit.Test;
 
 public class UrlUtilsTest {

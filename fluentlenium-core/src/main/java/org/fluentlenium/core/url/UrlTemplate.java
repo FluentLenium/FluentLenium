@@ -111,10 +111,11 @@ public class UrlTemplate {
      * @param values property properties
      * @return {@code this} reference to chain calls
      */
-    public void addAll(final List<String> values) {
+    public UrlTemplate addAll(final List<String> values) {
         for (final String value : values) {
             add(value);
         }
+        return this;
     }
 
     /**
@@ -131,7 +132,7 @@ public class UrlTemplate {
     /**
      * Render the string.
      *
-     * @return
+     * @return rendered url, based on template with parameters applied.
      */
     public String render() {
         String rendered = template;
@@ -145,7 +146,8 @@ public class UrlTemplate {
                         buildRenderReplacement(parameter, value == null ? null : String.valueOf(value)));
             }
 
-        } return rendered;
+        }
+        return rendered;
     }
 
     private String buildRenderReplacement(final UrlParameter parameter, final String value) {
@@ -173,13 +175,13 @@ public class UrlTemplate {
             fixedTemplate = fixedTemplate + "/?";
         }
 
-
         for (final UrlParameter parameter : parameters.values()) {
             String replacementPattern = "%s([^/]+)";
             if (parameter.isOptional()) {
                 replacementPattern = "(?:" + replacementPattern + ")?";
             }
-            fixedTemplate = fixedTemplate.replaceAll(Pattern.quote(parameter.getMatch()), String.format(replacementPattern, parameter.getPath() == null ? "" : parameter.getPath()));
+            fixedTemplate = fixedTemplate.replaceAll(Pattern.quote(parameter.getMatch()),
+                    String.format(replacementPattern, parameter.getPath() == null ? "" : parameter.getPath()));
         }
 
         return fixedTemplate;

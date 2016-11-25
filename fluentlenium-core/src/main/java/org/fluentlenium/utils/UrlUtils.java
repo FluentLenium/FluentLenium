@@ -56,7 +56,7 @@ public final class UrlUtils { // NOPMD CyclomaticComplexity
      *
      * @param baseUriSpec base URI
      * @param uriSpec     current URI
-     * @return
+     * @return Sanitized base url
      */
     public static String sanitizeBaseUrl(final String baseUriSpec, final String uriSpec) {
         if (baseUriSpec == null) {
