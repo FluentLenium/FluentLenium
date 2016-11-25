@@ -3,6 +3,8 @@ package org.fluentlenium.core.conditions;
 import com.google.common.base.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
+import java.util.Arrays;
+
 /**
  * Fluent object to handle {@link org.openqa.selenium.support.ui.ExpectedConditions} on FluentWebElement in fluentlenium API.
  */
@@ -170,5 +172,19 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     @Override
     public RectangleConditions rectangle() {
         return new RectangleConditionsImpl(object.getElement().getRect(), negation);
+    }
+
+    @Override
+    public boolean className(final String className) {
+
+        final FluentWebElement element = getActualObject();
+        final String classAttribute = element.attribute("class");
+
+        if (classAttribute == null) {
+            return false;
+        }
+
+        final String[] classes = classAttribute.split(" ");
+        return Arrays.asList(classes).contains(className);
     }
 }

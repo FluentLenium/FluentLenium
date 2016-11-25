@@ -226,6 +226,17 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
     }
 
     @Test
+    public void className() {
+        when(webElement1.getAttribute("class")).thenReturn("some-class-1 some-class-3");
+        when(webElement2.getAttribute("class")).thenReturn("some-class-1 some-class-2 some-class-3");
+        when(webElement3.getAttribute("class")).thenReturn("some-class-1");
+
+        assertThat(conditions.className("some-class-1")).isTrue();
+        assertThat(conditions.className("some-class-2")).isTrue();
+        assertThat(conditions.className("some-class-4")).isFalse();
+    }
+
+    @Test
     public void defaultValueWhenEmpty() {
         final AtLeastOneElementConditions emptyConditions = new AtLeastOneElementConditions(Arrays.<FluentWebElement>asList());
 
