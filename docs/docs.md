@@ -78,7 +78,7 @@ public class DuckDuckGoTest extends FluentTest {
         goTo("https://duckduckgo.com");
         $("#search_form_input_homepage").fill().with("FluentLenium");
         $("#search_button_homepage").submit();
-        assertThat(windows().title()).contains("FluentLenium");
+        assertThat(window().title()).contains("FluentLenium");
     }
 }
 ```
@@ -426,7 +426,7 @@ public class MyPage extends FluentPage {
     
     @Override
     public void isAt() {
-        assertThat(title()).contains("Selenium");
+        assertThat(window().title()).contains("Selenium");
     }
 }
 ```
@@ -478,7 +478,7 @@ public class LoginPage extends FluentPage {
         return "myCustomUrl";
     }
     public void isAt() {
-        assertThat(title()).isEqualTo("MyTitle");
+        assertThat(window().title()).isEqualTo("MyTitle");
     }
     public void fillAndSubmitForm(String... paramsOrdered) {
         $("input").fill().with(paramsOrdered);
@@ -559,7 +559,7 @@ public class LoginPage extends FluentPage {
     }
     
     public void isAt() {
-       assertThat(title()).isEqualTo("MyTitle");
+       assertThat(window().title()).isEqualTo("MyTitle");
     }
     
     public void fillAndSubmitForm(String... paramsOrdered) {
@@ -612,7 +612,7 @@ public class LoginPage extends FluentPage {
     }
     
     public void isAt() {
-       assertThat(title()).isEqualTo("MyTitle");
+       assertThat(window().title()).isEqualTo("MyTitle");
     }
     
     public void fillAndSubmitForm(String... paramsOrdered) {
@@ -635,7 +635,7 @@ public class LoginPage extends FluentPage {
     }
     
     public void isAt() {
-        assertThat(title()).isEqualTo("MyTitle");
+        assertThat(window().title()).isEqualTo("MyTitle");
         assertThat(buttons).hasSize(2);
     }
     
@@ -1009,7 +1009,7 @@ If you don't like the [JQuery](http://jquery.com/) syntax, you can replace `$` a
 goTo("http://mywebpage/");
 find("#firstName").write("toto");
 find("#create-button").click();
-assertThat(title()).isEqualTo("Hello toto");
+assertThat(window().title()).isEqualTo("Hello toto");
 ```
 
 Both syntax are equivalent. `$` is simply an alias for the `find()` method, and `el` for `find().first()`.
@@ -1561,7 +1561,7 @@ You can use FluentLenium using [JUnit](http://www.junit.org) assertions, but can
 goTo("http://mywebpage/");
 $("#firstName").fill().with("toto");
 $("#create-button").click();
-assertEqual("Hello toto",title());
+assertEqual("Hello toto",window().title());
 ```
 
 ### AssertJ
@@ -1588,7 +1588,7 @@ import static org.fluentlenium.assertj.FluentLeniumAssertions.*;
 goTo("http://mywebpage/");
 $("#firstName").fill().with("toto");
 $("#create-button").click();
-assertThat(title()).isEqualTo("Hello toto");
+assertThat(window().title()).isEqualTo("Hello toto");
 assertThat($(".fluent")).hasText("present text");
 assertThat($(".fluent")).hasNotText("not present text");
 assertThat($(".another")).hasSize(7);
@@ -1622,7 +1622,7 @@ import static org.junit.Assert.assertThat;
 goTo("http://mywebpage/");
 $("#firstName").fill().with("toto");
 $("#create-button").click();
-assertThat(title(),equalTo("Hello toto"));
+assertThat(window().title(),equalTo("Hello toto"));
 ```
 
 ## Contact Us
