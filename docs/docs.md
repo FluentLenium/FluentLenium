@@ -1055,14 +1055,50 @@ When using `AUTOMATIC_ON_FAIL` with JUnit, you should use custom `@After` annota
 `org.fluentlenium.adapter.junit` package for screenshot and HTML dump to be performed 
 just after an exception occurs, before methods annotated with `@After` invocation.
 
-## Isolated Tests
-If you want to test concurrency or if you need for any reason to not use the mechanism of extension of FluentLenium, you can also, instead of extending FluentTest, instantiate your fluent test object directly.
+## Standalone mode
+
+If you want to use FluentLenium as a pure automation Framework, without any testing framework adapter,
+you can create an instance of `FluentStandalone` and use it directly, or extend `FluentStandaloneRunnable` and 
+implement `doRun()` method.
+
+### FluentStandalone
+
+Create an instanceof `FluentStandalone` and use it directly. You have to manually invoke `init()` to initialize the 
+WebDriver, and `quit()` to close it.
 
 ```java
-IsolatedTest test = new IsolatedTest()
-test.goTo(DEFAULT_URL);
-test.await().atMost(1, SECONDS).until(test.$(".fluent", with("name").equalTo("name"))).present();
-test.el("input").enabled();
+FluentStandalone standalone = new FluentStandalone()
+standalone.init();
+
+standalone.goTo(DEFAULT_URL);
+standalone.await().atMost(1, SECONDS).until(test.$(".fluent", with("name").equalTo("name"))).present();
+standalone.el("input").enabled();
+
+standalone.quit();
+```
+
+Using a `FluentStandalone` instance is quite verbose because of the need to repeat the instance name before each 
+instruction. If it's a probleme for your, you should consider extending `FluentStandaloneRunnable`.
+ 
+### FluentStandaloneRunnable
+
+Another option is to extend `FluentStandaloneRunnable`, implement `doRun()` method and invoke `run()` method on an 
+instance of this class. Fluent WebDriver is initialized before and released after `run()` method invocation.
+
+```java
+public class MyStandaloneRunnable extends FluentStandaloneRunnable {
+    @Override
+    protected void doRun() {
+        goTo(DEFAULT_URL);
+        await().atMost(1, SECONDS).until(test.$(".fluent", with("name").equalTo("name"))).present();
+        el("input").enabled();
+    }
+};
+```
+
+```java
+MyStandaloneRunnable runnable = new MyStandaloneRunnable();
+runnable.run();
 ```
 
 ## Configure FluentLenium

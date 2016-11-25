@@ -7,23 +7,16 @@ package org.fluentlenium.adapter;
  * you may use this class.
  * <p>
  * You should call {@link #quit()} manually to close the underlying webdriver.
+ *
+ * @deprecated use either {@link FluentStandaloneRunnable} and {@link FluentStandalone}.
  */
-public class IsolatedTest extends FluentAdapter {
+@Deprecated
+public class IsolatedTest extends FluentStandalone {
 
     /**
      * Creates a new isolated test.
      */
     public IsolatedTest() {
-        initFluent(newWebDriver());
-    }
-
-    /**
-     * Quite the test.
-     */
-    public void quit() {
-        if (getDriver() != null) {
-            getDriver().quit();
-        }
-        releaseFluent();
+        init();
     }
 }
