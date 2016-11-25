@@ -24,6 +24,8 @@ Releases
 </settings>
 ```
 
+- Update references of FluentLenium version number to next release version number in docs and examples projects.
+
 - Prepare the release.
 
 ```bash
@@ -41,3 +43,8 @@ $ mvn release:perform -Dusername=GITHUB_USERNAME -Dpassword=GITHUB_PASSWORD
 - In Staging Repositories, select ```orgfluentlenium-XXXX``` repository.
 
 - Click Close, then Refresh, then Release.
+
+- Reset `master` branch to `develop`. `master` branch should always match a released version, so the website is 
+updated with docs from the released version.
+
+- Update references of FluentLenium version number to new snapshot version number in docs and examples projects.
