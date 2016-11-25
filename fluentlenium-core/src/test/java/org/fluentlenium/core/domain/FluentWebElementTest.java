@@ -171,6 +171,12 @@ public class FluentWebElementTest {
     }
 
     @Test
+    public void testGetCssValue() {
+        when(element.getCssValue("property")).thenReturn("test");
+        assertThat(fluentElement.cssValue("property")).isEqualTo("test");
+    }
+
+    @Test
     public void testGetTextContext() {
         when(element.getAttribute("textContent")).thenReturn("test");
         assertThat(fluentElement.textContent()).isEqualTo("test");

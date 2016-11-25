@@ -263,9 +263,21 @@ public class FluentWebElement extends Component
      *
      * @param name custom attribute name
      * @return name value
+     * @see WebElement#getAttribute(String)
      */
     public String attribute(final String name) {
         return webElement.getAttribute(name);
+    }
+
+    /**
+     * Get the value of a given CSS property.
+     *
+     * @param propertyName the css property name of the element
+     * @return The current, computed value of the property.
+     * @see WebElement#getCssValue(String)
+     */
+    public String cssValue(final String propertyName) {
+        return webElement.getCssValue(propertyName);
     }
 
     /**
@@ -281,6 +293,7 @@ public class FluentWebElement extends Component
      * return the visible text of the element
      *
      * @return text of element
+     * @see WebElement#getText()
      */
     public String text() {
         return webElement.getText();
@@ -317,6 +330,7 @@ public class FluentWebElement extends Component
      * return true if the element is enabled, other way return false
      *
      * @return boolean value of enabled check
+     * @see WebElement#isEnabled()
      */
     public boolean enabled() {
         return webElement.isEnabled();
@@ -326,6 +340,7 @@ public class FluentWebElement extends Component
      * return true if the element is selected, other way false
      *
      * @return boolean value of selected check
+     * @see WebElement#isSelected()
      */
     public boolean selected() {
         return webElement.isSelected();
@@ -354,6 +369,7 @@ public class FluentWebElement extends Component
      * return the tag name
      *
      * @return string value of tag name
+     * @see WebElement#getTagName()
      */
     public String tagName() {
         return webElement.getTagName();
