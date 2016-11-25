@@ -206,6 +206,15 @@ public interface FluentList<E extends FluentWebElement>
     FluentList<E> find(SearchFilter... filters);
 
     /**
+     * Count elements without actually loading the lazy list.
+     * <p>
+     * This method ignore defined hooks.
+     *
+     * @return elements count
+     */
+    int count();
+
+    /**
      * Clear all elements on the list
      * <p>
      * Only the visible elements are cleared.
