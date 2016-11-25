@@ -1,6 +1,7 @@
 package org.fluentlenium.core;
 
 import org.apache.http.message.BasicNameValuePair;
+import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.url.ParsedUrlTemplate;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,13 +55,23 @@ public class FluentPageUrlTemplateTest {
 
     @Test
     public void testGetUrlMissingParams() {
-        assertThatThrownBy(() -> fluentPage.getUrl("test1")).isExactlyInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                fluentPage.getUrl("test1");
+            }
+        }).isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Value for parameter param2 is missing.");
     }
 
     @Test
     public void testGetUrlMissingParams2() {
-        assertThatThrownBy(() -> fluentPage2.getUrl("test1")).isExactlyInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                fluentPage2.getUrl("test1");
+            }
+        }).isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Value for parameter param2 is missing.");
     }
 
@@ -78,13 +89,23 @@ public class FluentPageUrlTemplateTest {
 
     @Test
     public void testGoMissingParams() {
-        assertThatThrownBy(() -> fluentPage.go("test1")).isExactlyInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                fluentPage.go("test1");
+            }
+        }).isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Value for parameter param2 is missing.");
     }
 
     @Test
     public void testGoMissingParams2() {
-        assertThatThrownBy(() -> fluentPage2.go("test1")).isExactlyInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                fluentPage2.go("test1");
+            }
+        }).isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Value for parameter param2 is missing.");
     }
 
@@ -139,14 +160,24 @@ public class FluentPageUrlTemplateTest {
     @Test
     public void testIsAtFailing() {
         Mockito.when(control.url()).thenReturn("/abc/test1/test2");
-        assertThatThrownBy(() -> fluentPage.isAt()).isInstanceOf(AssertionError.class)
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                fluentPage.isAt();
+            }
+        }).isInstanceOf(AssertionError.class)
                 .hasMessage("Current URL [/abc/test1/test2] doesn't match expected Page URL [/abc/{param1}/def/{param2}]");
     }
 
     @Test
     public void testIsAtFailing2() {
         Mockito.when(control.url()).thenReturn("/abc/test1/test2");
-        assertThatThrownBy(() -> fluentPage2.isAt()).isInstanceOf(AssertionError.class)
+        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                fluentPage2.isAt();
+            }
+        }).isInstanceOf(AssertionError.class)
                 .hasMessage("Current URL [/abc/test1/test2] doesn't match expected Page URL [abc/{param1}/def/{param2}/]");
     }
 }
