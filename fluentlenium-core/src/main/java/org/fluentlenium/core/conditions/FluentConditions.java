@@ -208,4 +208,14 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      */
     @MessageContext("rectangle")
     RectangleConditions rectangle();
+
+    /**
+     * Check that the class attribute has the given class name.
+     *
+     * @param className class name
+     */
+    @Message("has class \"{0}\"")
+    @NotMessage("does not have class \"{0}\"")
+    boolean className(String className);
+
 }

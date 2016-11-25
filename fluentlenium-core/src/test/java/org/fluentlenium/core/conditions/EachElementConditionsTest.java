@@ -268,6 +268,17 @@ public class EachElementConditionsTest extends AbstractFluentListConditionsTest 
     }
 
     @Test
+    public void className() {
+        when(webElement1.getAttribute("class")).thenReturn("some-class-1 some-class-3");
+        when(webElement2.getAttribute("class")).thenReturn("some-class-1 some-class-2 some-class-3");
+        when(webElement3.getAttribute("class")).thenReturn("some-class-1");
+
+        assertThat(conditions.className("some-class-2")).isFalse();
+        assertThat(conditions.className("some-class-4")).isFalse();
+        assertThat(conditions.className("some-class-1")).isTrue();
+    }
+
+    @Test
     public void defaultValueWhenEmpty() {
         final EachElementConditions defaultConditions = new EachElementConditions(Arrays.<FluentWebElement>asList());
 

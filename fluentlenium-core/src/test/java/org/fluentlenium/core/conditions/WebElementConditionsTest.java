@@ -145,4 +145,16 @@ public class WebElementConditionsTest {
         assertThat(conditions.name("value")).isTrue();
     }
 
+    @Test
+    public void className() {
+        assertThat(conditions.className("some-class-2")).isFalse();
+
+        when(webElement.getAttribute("class")).thenReturn("some-class-1 some-class-2 some-class-3");
+
+        assertThat(conditions.className("some-class-1")).isTrue();
+        assertThat(conditions.className("some-class-2")).isTrue();
+        assertThat(conditions.className("some-class-3")).isTrue();
+        assertThat(conditions.className("some-class-4")).isFalse();
+    }
+
 }

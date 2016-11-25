@@ -279,4 +279,14 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     public RectangleConditions rectangle() {
         return new RectangleListConditionsImpl(this);
     }
+
+    @Override
+    public boolean className(final String className) {
+        return verify(new Predicate<FluentWebElement>() {
+            @Override
+            public boolean apply(final FluentWebElement input) {
+                return input.conditions().className(className);
+            }
+        }, false);
+    }
 }
