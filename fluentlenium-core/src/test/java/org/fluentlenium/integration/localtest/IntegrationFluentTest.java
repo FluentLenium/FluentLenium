@@ -1,6 +1,12 @@
 package org.fluentlenium.integration.localtest;
 
+import org.apache.commons.io.IOUtils;
 import org.fluentlenium.integration.util.adapter.FluentTest;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOError;
+import java.io.IOException;
 
 import static org.fluentlenium.integration.util.UrlUtil.getAbsoluteUrlFromFile;
 import static org.fluentlenium.integration.util.UrlUtil.getAbsoluteUrlPathFromFile;
@@ -30,5 +36,20 @@ public class IntegrationFluentTest extends FluentTest {
     @Override
     public String getWebDriver() {
         return "htmlunit";
+    }
+
+    public void goToSource(String htmlSource) {
+        FileOutputStream fos = null;
+        try {
+            File source = File.createTempFile("source", ".tmp.html");
+            fos = new FileOutputStream(source);
+            IOUtils.write(htmlSource, fos, "UTF-8");
+            source.deleteOnExit();
+            goTo(source.toURI().toString());
+        } catch (IOException e) {
+            throw new IOError(e);
+        } finally {
+            IOUtils.closeQuietly(fos);
+        }
     }
 }
