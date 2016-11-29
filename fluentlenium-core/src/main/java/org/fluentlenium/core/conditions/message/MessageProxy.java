@@ -37,7 +37,7 @@ public final class MessageProxy {
      */
     public static <T> T wrap(final Class<T> messageClass, final Object instance, final List<MessageBuilderCall> calls) {
         return (T) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {messageClass},
-                new MessageBuilderInvocationHandler(calls));
+                new MessageBuilderInvocationHandler(calls, instance));
     }
 
     /**
@@ -67,17 +67,28 @@ public final class MessageProxy {
     }
 
     /**
-     * Build the message from a proxy
+     * Build the message from a proxy.
      *
      * @param proxy message builder proxy
      * @return generated message.
      */
     public static String message(final Object proxy) {
+        return message(proxy, false);
+    }
+
+    /**
+     * Build the message from a proxy.
+     *
+     * @param proxy    message builder proxy
+     * @param template true to get the template message, false otherwise
+     * @return generated message.
+     */
+    public static String message(final Object proxy, final boolean template) {
         final MessageBuilderInvocationHandler invocationHandler = (MessageBuilderInvocationHandler) Proxy
                 .getInvocationHandler(proxy);
         if (invocationHandler == null) {
             return null;
         }
-        return invocationHandler.buildMessage();
+        return invocationHandler.buildMessage(template);
     }
 }

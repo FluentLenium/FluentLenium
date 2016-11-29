@@ -1,11 +1,13 @@
 package org.fluentlenium.assertj;
 
 import org.fluentlenium.assertj.custom.AlertAssert;
+import org.fluentlenium.assertj.custom.FluentConditionsAssert;
 import org.fluentlenium.assertj.custom.FluentListAssert;
 import org.fluentlenium.assertj.custom.FluentWebElementAssert;
 import org.fluentlenium.assertj.custom.PageAssert;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.alert.AlertImpl;
+import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 
@@ -56,6 +58,16 @@ public final class FluentLeniumAssertions {
      */
     public static FluentListAssert assertThat(final FluentList<?> actual) {
         return new FluentListAssert(actual);
+    }
+
+    /**
+     * Perform assertions on fluent conditions.
+     *
+     * @param actual actual conditions object
+     * @return Conditions assertion object
+     */
+    public static FluentConditionsAssert assertThat(final FluentConditions actual) {
+        return new FluentConditionsAssert(actual, FluentConditions.class);
     }
 
 }
