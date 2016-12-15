@@ -60,8 +60,9 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @return assertion object
      */
     public FluentListAssert hasSize(final int expectedSize) {
-        if (actual.size() != expectedSize) {
-            super.failWithMessage("Expected size: " + expectedSize + ". Actual size: " + actual.size() + ".");
+        final int actualSize = actual.size();
+        if (actualSize != expectedSize) {
+            super.failWithMessage("Expected size: " + expectedSize + ". Actual size: " + actualSize + ".");
         }
         return this;
     }
