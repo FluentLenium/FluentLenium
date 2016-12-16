@@ -1,9 +1,9 @@
 package org.fluentlenium.core.action;
 
-import java.util.function.Supplier;
-
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.script.JavascriptControl;
+
+import java.util.function.Supplier;
 
 /**
  * Javascript actions that can be used on the list or on a web element.
@@ -24,8 +24,7 @@ public class FluentJavascriptActionsImpl<T> implements FluentJavascriptActions<T
      * @param javascript javascript control
      * @param element    Supplier of element on which execute the action
      */
-    public FluentJavascriptActionsImpl(final T self, final JavascriptControl javascript,
-            final Supplier<FluentWebElement> element) {
+    public FluentJavascriptActionsImpl(T self, JavascriptControl javascript, Supplier<FluentWebElement> element) {
         this.self = self;
         this.javascript = javascript;
         this.element = element;
@@ -38,14 +37,14 @@ public class FluentJavascriptActionsImpl<T> implements FluentJavascriptActions<T
     }
 
     @Override
-    public T scrollIntoView(final boolean alignWithTop) {
+    public T scrollIntoView(boolean alignWithTop) {
         javascript.executeScript("arguments[0].scrollIntoView(arguments[1]);", element.get().getElement(), alignWithTop);
         return self;
     }
 
     @Override
     public T scrollToCenter() {
-        final int y = element.get().getElement().getLocation().getY();
+        int y = element.get().getElement().getLocation().getY();
         javascript.executeScript("window.scrollTo(0," + y + " - window.innerHeight / 2)", new Object[0]);
         return self;
     }

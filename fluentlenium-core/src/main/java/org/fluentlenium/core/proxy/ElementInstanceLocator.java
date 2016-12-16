@@ -14,7 +14,7 @@ public class ElementInstanceLocator extends ElementSupplierLocator implements Wr
      *
      * @param element element instance
      */
-    public ElementInstanceLocator(final WebElement element) {
+    public ElementInstanceLocator(WebElement element) {
         super(new SupplierOfInstance<>(element));
     }
 

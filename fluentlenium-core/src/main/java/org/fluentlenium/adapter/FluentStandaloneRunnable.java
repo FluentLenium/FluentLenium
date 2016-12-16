@@ -19,5 +19,5 @@ public abstract class FluentStandaloneRunnable extends FluentStandalone implemen
     /**
      * Implement this method using FluentLenium API.
      */
-    abstract protected void doRun();
+    protected abstract void doRun();
 }

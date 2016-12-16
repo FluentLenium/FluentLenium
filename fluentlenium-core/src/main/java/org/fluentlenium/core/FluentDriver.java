@@ -84,42 +84,39 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
      * @param configuration configuration
      * @param adapter       adapter fluent control interface
      */
-    public FluentDriver(final WebDriver driver, final Configuration configuration, final FluentControl adapter) {
+    public FluentDriver(WebDriver driver, Configuration configuration, FluentControl adapter) {
         this.configuration = configuration;
-        this.componentsManager = new ComponentsManager(adapter);
+        componentsManager = new ComponentsManager(adapter);
         this.driver = driver;
-        this.search = new Search(driver, componentsManager);
+        search = new Search(driver, componentsManager);
         if (driver instanceof EventFiringWebDriver) {
-            this.events = new EventsRegistry(this);
-            this.eventsComponentsAnnotations = new AnnotationsComponentListener(componentsManager);
-            this.events.register(this.eventsComponentsAnnotations);
+            events = new EventsRegistry(this);
+            eventsComponentsAnnotations = new AnnotationsComponentListener(componentsManager);
+            events.register(eventsComponentsAnnotations);
         } else {
-            this.events = null;
+            events = null;
         }
-        this.mouseActions = new MouseActions(driver);
-        this.keyboardActions = new KeyboardActions(driver);
-        this.fluentInjector = new FluentInjector(adapter, events, componentsManager, new DefaultContainerInstanciator(this));
-        this.cssControl = new CssControlImpl(adapter, adapter);
-        this.windowAction = new WindowAction(adapter, componentsManager.getInstantiator(), driver);
+        mouseActions = new MouseActions(driver);
+        keyboardActions = new KeyboardActions(driver);
+        fluentInjector = new FluentInjector(adapter, events, componentsManager, new DefaultContainerInstanciator(this));
+        cssControl = new CssControlImpl(adapter, adapter);
+        windowAction = new WindowAction(adapter, componentsManager.getInstantiator(), driver);
 
         configureDriver(); // NOPMD ConstructorCallsOverridableMethod
     }
 
     private void configureDriver() {
-        if (this.getDriver() != null && this.getDriver().manage() != null && this.getDriver().manage().timeouts() != null) {
-            if (this.configuration.getPageLoadTimeout() != null) {
-                this.getDriver().manage().timeouts()
-                        .pageLoadTimeout(this.configuration.getPageLoadTimeout(), TimeUnit.MILLISECONDS);
+        if (getDriver() != null && getDriver().manage() != null && getDriver().manage().timeouts() != null) {
+            if (configuration.getPageLoadTimeout() != null) {
+                getDriver().manage().timeouts().pageLoadTimeout(configuration.getPageLoadTimeout(), TimeUnit.MILLISECONDS);
             }
 
-            if (this.configuration.getImplicitlyWait() != null) {
-                this.getDriver().manage().timeouts()
-                        .implicitlyWait(this.configuration.getImplicitlyWait(), TimeUnit.MILLISECONDS);
+            if (configuration.getImplicitlyWait() != null) {
+                getDriver().manage().timeouts().implicitlyWait(configuration.getImplicitlyWait(), TimeUnit.MILLISECONDS);
             }
 
-            if (this.configuration.getScriptTimeout() != null) {
-                this.getDriver().manage().timeouts()
-                        .setScriptTimeout(this.configuration.getScriptTimeout(), TimeUnit.MILLISECONDS);
+            if (configuration.getScriptTimeout() != null) {
+                getDriver().manage().timeouts().setScriptTimeout(configuration.getScriptTimeout(), TimeUnit.MILLISECONDS);
             }
         }
     }
@@ -130,7 +127,7 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
     }
 
     @Override
-    public void takeHtmlDump(final String fileName) {
+    public void takeHtmlDump(String fileName) {
         File destFile = null;
         try {
             if (configuration.getHtmlDumpPath() == null) {
@@ -138,22 +135,22 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
             } else {
                 destFile = Paths.get(configuration.getHtmlDumpPath(), fileName).toFile();
             }
-            final String html;
+            String html;
             synchronized (FluentDriver.class) {
                 html = $("html").first().html();
             }
             FileUtils.write(destFile, html, "UTF-8");
-        } catch (final Exception e) {
+        } catch (Exception e) {
             if (destFile == null) {
                 destFile = new File(fileName);
             }
             try {
-                final PrintWriter printWriter = new PrintWriter(destFile, "UTF-8");
+                PrintWriter printWriter = new PrintWriter(destFile, "UTF-8");
                 printWriter.write("Can't dump HTML");
                 printWriter.println();
                 e.printStackTrace(printWriter);
                 IOUtils.closeQuietly(printWriter);
-            } catch (final IOException e1) {
+            } catch (IOException e1) {
                 throw new RuntimeException("error when dumping HTML", e); //NOPMD PreserveStackTrace
             }
         }
@@ -170,20 +167,20 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
     }
 
     @Override
-    public void takeScreenShot(final String fileName) {
+    public void takeScreenShot(String fileName) {
         if (!canTakeScreenShot()) {
             throw new WebDriverException("Current browser doesn't allow taking screenshot.");
         }
-        final File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+        File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         try {
-            final File destFile;
+            File destFile;
             if (configuration.getScreenshotPath() == null) {
                 destFile = new File(fileName);
             } else {
                 destFile = Paths.get(configuration.getScreenshotPath(), fileName).toFile();
             }
             FileUtils.copyFile(scrFile, destFile);
-        } catch (final IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("error when taking the snapshot", e);
         }
@@ -192,11 +189,11 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
 
     @Override
     public WebDriver getDriver() {
-        return this.driver;
+        return driver;
     }
 
     private Search getSearch() {
-        return this.search;
+        return search;
     }
 
     @Override
@@ -226,12 +223,12 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
 
     @Override
     public FluentWait await() {
-        final FluentWait fluentWait = new FluentWait(this);
-        final Long atMost = configuration.getAwaitAtMost();
+        FluentWait fluentWait = new FluentWait(this);
+        Long atMost = configuration.getAwaitAtMost();
         if (atMost != null) {
             fluentWait.atMost(atMost);
         }
-        final Long pollingEvery = configuration.getAwaitPollingEvery();
+        Long pollingEvery = configuration.getAwaitPollingEvery();
         if (pollingEvery != null) {
             fluentWait.pollingEvery(pollingEvery);
         }
@@ -244,20 +241,20 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
     }
 
     @Override
-    public Cookie getCookie(final String name) {
+    public Cookie getCookie(String name) {
         return getDriver().manage().getCookieNamed(name);
     }
 
-    private String buildUrl(final String url) {
-        final String currentUrl = getDriver().getCurrentUrl();
-        final String baseUrl = UrlUtils.sanitizeBaseUrl(getBaseUrl(), currentUrl);
+    private String buildUrl(String url) {
+        String currentUrl = getDriver().getCurrentUrl();
+        String baseUrl = UrlUtils.sanitizeBaseUrl(getBaseUrl(), currentUrl);
 
         return UrlUtils.concat(baseUrl, url);
     }
 
     @Override
     public String url() {
-        final String baseUrl = buildUrl(null);
+        String baseUrl = buildUrl(null);
 
         String currentUrl = getDriver().getCurrentUrl();
         if (currentUrl != null && baseUrl != null && currentUrl.startsWith(baseUrl)) {
@@ -273,7 +270,7 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
     }
 
     @Override
-    public <P extends FluentPage> P goTo(final P page) {
+    public <P extends FluentPage> P goTo(P page) {
         if (page == null) {
             throw new IllegalArgumentException("Page is mandatory");
         }
@@ -282,7 +279,7 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
     }
 
     @Override
-    public void goTo(final String url) {
+    public void goTo(String url) {
         if (url == null) {
             throw new IllegalArgumentException("Url is mandatory");
         }
@@ -291,16 +288,16 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
     }
 
     @Override
-    public void goToInNewTab(final String url) {
+    public void goToInNewTab(String url) {
         if (url == null) {
             throw new IllegalArgumentException("Url is mandatory");
         }
 
-        final String newTab;
+        String newTab;
         synchronized (getClass()) {
-            final Set<String> initialTabs = getDriver().getWindowHandles();
+            Set<String> initialTabs = getDriver().getWindowHandles();
             executeScript("window.open('" + buildUrl(url) + "', '_blank');");
-            final Set<String> tabs = getDriver().getWindowHandles();
+            Set<String> tabs = getDriver().getWindowHandles();
             tabs.removeAll(initialTabs);
             newTab = tabs.iterator().next();
         }
@@ -322,67 +319,67 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
     }
 
     @Override
-    public FluentJavascript executeScript(final String script, final Object... args) {
+    public FluentJavascript executeScript(String script, Object... args) {
         return new FluentJavascript((JavascriptExecutor) getDriver(), false, script, args);
     }
 
     @Override
-    public FluentJavascript executeAsyncScript(final String script, final Object... args) {
+    public FluentJavascript executeAsyncScript(String script, Object... args) {
         return new FluentJavascript((JavascriptExecutor) getDriver(), true, script, args);
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final String selector, final SearchFilter... filters) {
+    public FluentList<FluentWebElement> $(String selector, SearchFilter... filters) {
         return find(selector, filters);
     }
 
     @Override
-    public FluentWebElement el(final String selector, final SearchFilter... filters) {
+    public FluentWebElement el(String selector, SearchFilter... filters) {
         return find(selector, filters).first();
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final SearchFilter... filters) {
+    public FluentList<FluentWebElement> $(SearchFilter... filters) {
         return find(filters);
     }
 
     @Override
-    public FluentWebElement el(final SearchFilter... filters) {
+    public FluentWebElement el(SearchFilter... filters) {
         return find(filters).first();
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final By locator, final SearchFilter... filters) {
+    public FluentList<FluentWebElement> $(By locator, SearchFilter... filters) {
         return find(locator, filters);
     }
 
     @Override
-    public FluentWebElement el(final By locator, final SearchFilter... filters) {
+    public FluentWebElement el(By locator, SearchFilter... filters) {
         return find(locator, filters).first();
     }
 
     @Override
-    public FluentList<FluentWebElement> find(final String selector, final SearchFilter... filters) {
+    public FluentList<FluentWebElement> find(String selector, SearchFilter... filters) {
         return getSearch().find(selector, filters);
     }
 
     @Override
-    public FluentList<FluentWebElement> find(final By locator, final SearchFilter... filters) {
+    public FluentList<FluentWebElement> find(By locator, SearchFilter... filters) {
         return getSearch().find(locator, filters);
     }
 
     @Override
-    public FluentList<FluentWebElement> find(final SearchFilter... filters) {
+    public FluentList<FluentWebElement> find(SearchFilter... filters) {
         return getSearch().find(filters);
     }
 
     @Override
-    public void switchTo(final FluentList<? extends FluentWebElement> elements) {
+    public void switchTo(FluentList<? extends FluentWebElement> elements) {
         switchTo(elements.first());
     }
 
     @Override
-    public void switchTo(final FluentWebElement element) {
+    public void switchTo(FluentWebElement element) {
         if (null == element || !"iframe".equals(element.tagName())) {
             getDriver().switchTo().defaultContent();
         } else {
@@ -396,12 +393,12 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
 
     @Override
     public void switchTo() {
-        this.switchTo((FluentWebElement) null);
+        switchTo((FluentWebElement) null);
     }
 
     @Override
     public void switchToDefault() {
-        this.switchTo((FluentWebElement) null);
+        switchTo((FluentWebElement) null);
     }
 
     @Override
@@ -424,8 +421,8 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
      */
     public void releaseFluent() {
         fluentInjector.release();
-        if (this.events != null) {
-            this.events.unregister(this.eventsComponentsAnnotations);
+        if (events != null) {
+            events.unregister(eventsComponentsAnnotations);
         }
     }
 }

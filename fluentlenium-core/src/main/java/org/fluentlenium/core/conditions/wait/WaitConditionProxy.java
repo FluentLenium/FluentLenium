@@ -1,6 +1,5 @@
 package org.fluentlenium.core.conditions.wait;
 
-import java.util.function.Supplier;
 import org.fluentlenium.core.conditions.AtLeastOneElementConditions;
 import org.fluentlenium.core.conditions.Conditions;
 import org.fluentlenium.core.conditions.EachElementConditions;
@@ -13,6 +12,7 @@ import org.fluentlenium.core.wait.FluentWait;
 
 import java.lang.reflect.Proxy;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Provides proxy implementations of conditions that performs wait from those conditions.
@@ -30,8 +30,8 @@ public final class WaitConditionProxy {
      * @param elementsSupplier Supplier for elements to wait.
      * @return a proxy generating message from annotations.
      */
-    public static FluentListConditions each(final FluentWait wait, final String context,
-            final Supplier<? extends List<? extends FluentWebElement>> elementsSupplier) {
+    public static FluentListConditions each(FluentWait wait, String context,
+            Supplier<? extends List<? extends FluentWebElement>> elementsSupplier) {
         return list(wait, context, new Supplier<FluentListConditions>() {
             @Override
             public FluentListConditions get() {
@@ -48,8 +48,8 @@ public final class WaitConditionProxy {
      * @param elementsSupplier Supplier for elements to wait.
      * @return a proxy generating message from annotations.
      */
-    public static FluentListConditions one(final FluentWait wait, final String context,
-            final Supplier<? extends List<? extends FluentWebElement>> elementsSupplier) {
+    public static FluentListConditions one(FluentWait wait, String context,
+            Supplier<? extends List<? extends FluentWebElement>> elementsSupplier) {
         return list(wait, context, new Supplier<FluentListConditions>() {
             @Override
             public FluentListConditions get() {
@@ -66,8 +66,8 @@ public final class WaitConditionProxy {
      * @param conditionsSupplier Supplier for elements to wait.
      * @return a proxy generating message from annotations.
      */
-    public static FluentListConditions list(final FluentWait wait, final String context,
-            final Supplier<? extends FluentListConditions> conditionsSupplier) {
+    public static FluentListConditions list(FluentWait wait, String context,
+            Supplier<? extends FluentListConditions> conditionsSupplier) {
         return (FluentListConditions) Proxy
                 .newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {FluentListConditions.class},
                         new WaitConditionInvocationHandler(FluentListConditions.class, wait, context, conditionsSupplier));
@@ -81,17 +81,17 @@ public final class WaitConditionProxy {
      * @param elementSupplier Supplier for element to wait.
      * @return a proxy generating message from annotations.
      */
-    public static FluentConditions element(final FluentWait wait, final String context,
-            final Supplier<? extends FluentWebElement> elementSupplier) {
+    public static FluentConditions element(FluentWait wait, String context,
+            Supplier<? extends FluentWebElement> elementSupplier) {
         return (FluentConditions) Proxy
                 .newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {FluentConditions.class},
-                    new WaitConditionInvocationHandler(FluentConditions.class, wait, context,
-                            new Supplier<FluentConditions>() {
-                                @Override
-                                public FluentConditions get() {
-                                    return new WebElementConditions(elementSupplier.get());
-                                }
-                            }));
+                        new WaitConditionInvocationHandler(FluentConditions.class, wait, context,
+                                new Supplier<FluentConditions>() {
+                                    @Override
+                                    public FluentConditions get() {
+                                        return new WebElementConditions(elementSupplier.get());
+                                    }
+                                }));
     }
 
     /**
@@ -104,8 +104,8 @@ public final class WaitConditionProxy {
      * @param <C>                condition type
      * @return a proxy generating message from annotations.
      */
-    public static <C extends Conditions<?>> C custom(final Class<C> conditionClass, final FluentWait wait, final String context,
-            final Supplier<C> conditionsSupplier) {
+    public static <C extends Conditions<?>> C custom(Class<C> conditionClass, FluentWait wait, String context,
+            Supplier<C> conditionsSupplier) {
         return (C) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {conditionClass},
                 new WaitConditionInvocationHandler(conditionClass, wait, context, conditionsSupplier));
     }

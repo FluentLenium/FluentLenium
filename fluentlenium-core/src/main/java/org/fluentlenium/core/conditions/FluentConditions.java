@@ -213,6 +213,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      * Check that the class attribute has the given class name.
      *
      * @param className class name
+     * @return true if it has the given class name, false otherwise.
      */
     @Message("has class \"{0}\"")
     @NotMessage("does not have class \"{0}\"")

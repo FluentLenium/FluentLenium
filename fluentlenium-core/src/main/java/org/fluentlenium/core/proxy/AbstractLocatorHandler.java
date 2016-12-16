@@ -1,6 +1,5 @@
 package org.fluentlenium.core.proxy;
 
-import java.util.function.Supplier;
 import org.fluentlenium.core.domain.ElementUtils;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
@@ -18,6 +17,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 /**
  * Abstract proxy handler supporting lazy loading and hooks on {@link WebElement}.
@@ -52,21 +52,21 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
      * @param types          argument types
      * @return method
      */
-    protected static Method getMethod(final Class<?> declaringClass, final String name, final Class... types) {
+    protected static Method getMethod(Class<?> declaringClass, String name, Class... types) {
         try {
             return declaringClass.getMethod(name, types);
-        } catch (final NoSuchMethodException e) {
+        } catch (NoSuchMethodException e) {
             throw new IllegalArgumentException(e);
         }
     }
 
     @Override
-    public boolean addListener(final ProxyElementListener listener) {
+    public boolean addListener(ProxyElementListener listener) {
         return listeners.add(listener);
     }
 
     @Override
-    public boolean removeListener(final ProxyElementListener listener) {
+    public boolean removeListener(ProxyElementListener listener) {
         return listeners.remove(listener);
     }
 
@@ -74,7 +74,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
      * Fire proxy element search event.
      */
     protected void fireProxyElementSearch() {
-        for (final ProxyElementListener listener : listeners) {
+        for (ProxyElementListener listener : listeners) {
             listener.proxyElementSearch(proxy, locator);
         }
     }
@@ -84,8 +84,8 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
      *
      * @param result found element
      */
-    protected void fireProxyElementFound(final T result) {
-        for (final ProxyElementListener listener : listeners) {
+    protected void fireProxyElementFound(T result) {
+        for (ProxyElementListener listener : listeners) {
             listener.proxyElementFound(proxy, locator, resultToList(result));
         }
     }
@@ -103,7 +103,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
      *
      * @param locator selenium element locator
      */
-    public AbstractLocatorHandler(final ElementLocator locator) {
+    public AbstractLocatorHandler(ElementLocator locator) {
         this.locator = locator;
     }
 
@@ -112,7 +112,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
      *
      * @param proxy proxy using this handler
      */
-    public void setProxy(final T proxy) {
+    public void setProxy(T proxy) {
         this.proxy = proxy;
     }
 
@@ -168,7 +168,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     }
 
     @Override
-    public void setHooks(final HookChainBuilder hookChainBuilder, final List<HookDefinition<?>> hookDefinitions) {
+    public void setHooks(HookChainBuilder hookChainBuilder, List<HookDefinition<?>> hookDefinitions) {
         if (hookDefinitions == null || hookDefinitions.isEmpty()) {
             this.hookChainBuilder = null;
             this.hookDefinitions = null;
@@ -238,16 +238,16 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     @Override
     @SuppressWarnings({"PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity",
             "PMD.NPathComplexity"})
-    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (TO_STRING.equals(method)) {
             return proxyToString(result == null ? null : (String) invoke(method, args));
         }
         if (result == null) {
             if (EQUALS.equals(method)) {
-                final LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
+                LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
                 if (otherLocatorHandler != null) {
                     if (!otherLocatorHandler.loaded() || args[0] == null) {
-                        return this.equals(otherLocatorHandler);
+                        return equals(otherLocatorHandler);
                     } else {
                         return args[0].equals(proxy);
                     }
@@ -260,7 +260,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         }
 
         if (EQUALS.equals(method)) {
-            final LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
+            LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
             if (otherLocatorHandler != null && !otherLocatorHandler.loaded()) {
                 otherLocatorHandler.now();
                 return otherLocatorHandler.equals(this);
@@ -273,12 +273,12 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     }
 
     //CHECKSTYLE.OFF: IllegalThrows
-    private Object invokeWithRetry(final Method method, final Object[] args) throws Throwable {
+    private Object invokeWithRetry(Method method, Object[] args) throws Throwable {
         Throwable lastThrowable = null;
         for (int i = 0; i < MAX_RETRY; i++) {
             try {
                 return invoke(method, args);
-            } catch (final StaleElementReferenceException e) {
+            } catch (StaleElementReferenceException e) {
                 lastThrowable = e;
                 reset();
                 getLocatorResult(); // Reload the stale element
@@ -288,11 +288,11 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         throw lastThrowable;
     }
 
-    private Object invoke(final Method method, final Object[] args) throws Throwable {
-        final Object returnValue;
+    private Object invoke(Method method, Object[] args) throws Throwable {
+        Object returnValue;
         try {
             returnValue = method.invoke(getInvocationTarget(method), args);
-        } catch (final InvocationTargetException e) {
+        } catch (InvocationTargetException e) {
             // Unwrap the underlying exception
             throw e.getCause();
         }
@@ -301,14 +301,14 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     //CHECKSTYLE.ON: IllegalThrows
 
     @Override
-    public boolean equals(final Object obj) {
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        final AbstractLocatorHandler<?> that = (AbstractLocatorHandler<?>) obj;
+        AbstractLocatorHandler<?> that = (AbstractLocatorHandler<?>) obj;
         return Objects.equals(locator, that.locator);
     }
 

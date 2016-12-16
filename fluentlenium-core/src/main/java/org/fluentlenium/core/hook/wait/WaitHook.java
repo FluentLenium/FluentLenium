@@ -1,7 +1,5 @@
 package org.fluentlenium.core.hook.wait;
 
-import java.util.function.Function;
-import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.hook.BaseFluentHook;
@@ -10,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * Hook that automatically wait for actions beeing available on the underlying element.
@@ -25,9 +25,8 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
      * @param toStringSupplier element toString supplier
      * @param options          hook options
      */
-    public WaitHook(final FluentControl control, final ComponentInstantiator instantiator,
-            final Supplier<WebElement> elementSupplier, final Supplier<ElementLocator> locatorSupplier,
-            final Supplier<String> toStringSupplier, final WaitHookOptions options) {
+    public WaitHook(FluentControl control, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
+            Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, WaitHookOptions options) {
         super(control, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
     }
 
@@ -47,7 +46,7 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
     }
 
     @Override
-    public void sendKeys(final CharSequence... keysToSend) {
+    public void sendKeys(CharSequence... keysToSend) {
         buildAwait().until(getFluentWebElement()).enabled();
         super.sendKeys(keysToSend);
     }
@@ -69,8 +68,8 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
         return buildAwait().until(new Function<FluentControl, List<WebElement>>() {
 
             @Override
-            public List<WebElement> apply(final FluentControl input) {
-                final List<WebElement> elements = WaitHook.super.findElements();
+            public List<WebElement> apply(FluentControl input) {
+                List<WebElement> elements = WaitHook.super.findElements();
                 if (elements.size() == 0) {
                     return null;
                 }
@@ -89,7 +88,7 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
         return buildAwait().until(new Function<FluentControl, WebElement>() {
 
             @Override
-            public WebElement apply(final FluentControl input) {
+            public WebElement apply(FluentControl input) {
                 return WaitHook.super.findElement();
             }
 

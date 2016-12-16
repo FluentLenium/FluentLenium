@@ -47,7 +47,7 @@ public class FluentWaitWindowMatcherTest {
     public void testWindow() {
         when(fluent.getDriver()).thenReturn(webDriver);
 
-        final FluentWaitWindowConditions matcher = new FluentWaitWindowConditions(wait, "testWindow");
+        FluentWaitWindowConditions matcher = new FluentWaitWindowConditions(wait, "testWindow");
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
             public void call() throws Throwable {

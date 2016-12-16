@@ -14,7 +14,7 @@ public abstract class AbstractMatcher {
      *
      * @param value string predicate
      */
-    protected AbstractMatcher(final String value) {
+    protected AbstractMatcher(String value) {
         this.value = value;
     }
 
@@ -23,8 +23,8 @@ public abstract class AbstractMatcher {
      *
      * @param value regular expression predicate
      */
-    protected AbstractMatcher(final Pattern value) {
-        this.pattern = value;
+    protected AbstractMatcher(Pattern value) {
+        pattern = value;
     }
 
     /**

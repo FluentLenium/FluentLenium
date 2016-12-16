@@ -14,7 +14,7 @@ public class Fill<E extends FluentWebElement> extends BaseFill<E> {
      *
      * @param list list of element to fill
      */
-    public Fill(final FluentList<E> list) {
+    public Fill(FluentList<E> list) {
         super(list);
     }
 
@@ -23,7 +23,7 @@ public class Fill<E extends FluentWebElement> extends BaseFill<E> {
      *
      * @param element element to fill
      */
-    public Fill(final E element) {
+    public Fill(E element) {
         super(element);
     }
 
@@ -34,7 +34,7 @@ public class Fill<E extends FluentWebElement> extends BaseFill<E> {
      * @param textValues value to search
      * @return fill constructor
      */
-    public Fill with(final String... textValues) {
+    public Fill with(String... textValues) {
         getElements().write(textValues);
         return this;
     }
@@ -46,7 +46,7 @@ public class Fill<E extends FluentWebElement> extends BaseFill<E> {
      * @param textValues value to search
      * @return fill constructor
      */
-    public Fill withText(final String... textValues) {
+    public Fill withText(String... textValues) {
         return with(textValues);
     }
 }

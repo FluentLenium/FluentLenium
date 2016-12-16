@@ -12,7 +12,7 @@ public class NotContainsMatcher extends AbstractMatcher {
      *
      * @param value input value
      */
-    public NotContainsMatcher(final String value) {
+    public NotContainsMatcher(String value) {
         super(value);
     }
 
@@ -21,7 +21,7 @@ public class NotContainsMatcher extends AbstractMatcher {
      *
      * @param value input value
      */
-    public NotContainsMatcher(final Pattern value) {
+    public NotContainsMatcher(Pattern value) {
         super(value);
     }
 
@@ -31,7 +31,7 @@ public class NotContainsMatcher extends AbstractMatcher {
     }
 
     @Override
-    public boolean isSatisfiedBy(final String obj) {
+    public boolean isSatisfiedBy(String obj) {
         return !CalculateService.contains(getPattern(), getValue(), obj);
     }
 

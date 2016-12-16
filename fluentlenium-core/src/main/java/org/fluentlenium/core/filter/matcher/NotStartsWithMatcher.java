@@ -12,7 +12,7 @@ public class NotStartsWithMatcher extends AbstractMatcher {
      *
      * @param value input value
      */
-    public NotStartsWithMatcher(final String value) {
+    public NotStartsWithMatcher(String value) {
         super(value);
     }
 
@@ -21,7 +21,7 @@ public class NotStartsWithMatcher extends AbstractMatcher {
      *
      * @param value input value
      */
-    public NotStartsWithMatcher(final Pattern value) {
+    public NotStartsWithMatcher(Pattern value) {
         super(value);
     }
 
@@ -31,7 +31,7 @@ public class NotStartsWithMatcher extends AbstractMatcher {
     }
 
     @Override
-    public boolean isSatisfiedBy(final String obj) {
+    public boolean isSatisfiedBy(String obj) {
         return !CalculateService.startsWith(getPattern(), getValue(), obj);
     }
 

@@ -12,7 +12,7 @@ public class EndsWithMatcher extends AbstractMatcher {
      *
      * @param value input value
      */
-    public EndsWithMatcher(final String value) {
+    public EndsWithMatcher(String value) {
         super(value);
     }
 
@@ -21,7 +21,7 @@ public class EndsWithMatcher extends AbstractMatcher {
      *
      * @param value input value
      */
-    public EndsWithMatcher(final Pattern value) {
+    public EndsWithMatcher(Pattern value) {
         super(value);
     }
 
@@ -31,7 +31,7 @@ public class EndsWithMatcher extends AbstractMatcher {
     }
 
     @Override
-    public boolean isSatisfiedBy(final String obj) {
+    public boolean isSatisfiedBy(String obj) {
         return CalculateService.endsWith(getPattern(), getValue(), obj);
     }
 

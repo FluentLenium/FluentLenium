@@ -9,7 +9,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
      *
      * @param integer underlying integer
      */
-    public IntegerConditionsImpl(final Integer integer) {
+    public IntegerConditionsImpl(Integer integer) {
         super(integer);
     }
 
@@ -19,12 +19,12 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
      * @param integer  underlying integer
      * @param negation negation value
      */
-    public IntegerConditionsImpl(final Integer integer, final boolean negation) {
+    public IntegerConditionsImpl(Integer integer, boolean negation) {
         super(integer, negation);
     }
 
     @Override
-    protected AbstractObjectConditions<Integer> newInstance(final boolean negationValue) {
+    protected AbstractObjectConditions<Integer> newInstance(boolean negationValue) {
         return new IntegerConditionsImpl(object, negationValue);
     }
 
@@ -35,27 +35,27 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
     }
 
     @Override
-    public boolean equalTo(final int value) {
+    public boolean equalTo(int value) {
         return verify(input -> input.equals(value));
     }
 
     @Override
-    public boolean lessThan(final int value) {
+    public boolean lessThan(int value) {
         return verify(input -> input < value);
     }
 
     @Override
-    public boolean lessThanOrEqualTo(final int value) {
+    public boolean lessThanOrEqualTo(int value) {
         return verify(input -> input <= value);
     }
 
     @Override
-    public boolean greaterThan(final int value) {
+    public boolean greaterThan(int value) {
         return verify(input -> input > value);
     }
 
     @Override
-    public boolean greaterThanOrEqualTo(final int value) {
+    public boolean greaterThanOrEqualTo(int value) {
         return verify(input -> input >= value);
     }
 }

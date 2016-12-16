@@ -1,7 +1,8 @@
 package org.fluentlenium.core.filter;
 
-import java.util.function.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
+
+import java.util.function.Predicate;
 
 /**
  * Filter constructors.
@@ -18,7 +19,7 @@ public final class FilterConstructor {
      * @param name element name
      * @return filter object
      */
-    public static AttributeFilter withName(final String name) {
+    public static AttributeFilter withName(String name) {
         return new AttributeFilter("name", name);
     }
 
@@ -28,7 +29,7 @@ public final class FilterConstructor {
      * @param id element id
      * @return filter object
      */
-    public static AttributeFilter withId(final String id) {
+    public static AttributeFilter withId(String id) {
         return new AttributeFilter("id", id);
     }
 
@@ -38,7 +39,7 @@ public final class FilterConstructor {
      * @param klass CSS class name
      * @return filter object
      */
-    public static AttributeFilter withClass(final String klass) {
+    public static AttributeFilter withClass(String klass) {
         return new AttributeFilter("class", klass);
     }
 
@@ -48,7 +49,7 @@ public final class FilterConstructor {
      * @param text to filter in content
      * @return filter object
      */
-    public static AttributeFilter withText(final String text) {
+    public static AttributeFilter withText(String text) {
         return new AttributeFilter("text", MatcherConstructor.equal(text));
     }
 
@@ -58,7 +59,7 @@ public final class FilterConstructor {
      * @param text to filter in content
      * @return filter object
      */
-    public static AttributeFilter containingText(final String text) {
+    public static AttributeFilter containingText(String text) {
         return new AttributeFilter("text", MatcherConstructor.contains(text));
     }
 
@@ -77,7 +78,7 @@ public final class FilterConstructor {
      * @param text to filter in content
      * @return filter object
      */
-    public static AttributeFilter withTextContent(final String text) {
+    public static AttributeFilter withTextContent(String text) {
         return new AttributeFilter("textContent", MatcherConstructor.equal(text));
     }
 
@@ -87,7 +88,7 @@ public final class FilterConstructor {
      * @param text to filter in content
      * @return filter object
      */
-    public static AttributeFilter containingTextContent(final String text) {
+    public static AttributeFilter containingTextContent(String text) {
         return new AttributeFilter("textContent", MatcherConstructor.contains(text));
     }
 
@@ -106,7 +107,7 @@ public final class FilterConstructor {
      * @param attribute attribute name
      * @return filter builder object
      */
-    public static FilterBuilder with(final String attribute) {
+    public static FilterBuilder with(String attribute) {
         return new FilterBuilder(attribute);
     }
 
@@ -143,7 +144,7 @@ public final class FilterConstructor {
      * @param predicate predicate
      * @return predicate filter
      */
-    public static PredicateFilter withPredicate(final Predicate<FluentWebElement> predicate) {
+    public static PredicateFilter withPredicate(Predicate<FluentWebElement> predicate) {
         return new PredicateFilter(predicate);
     }
 

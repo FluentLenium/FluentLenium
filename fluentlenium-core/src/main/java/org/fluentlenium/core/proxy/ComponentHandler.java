@@ -23,11 +23,11 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement>
      *
      * @param locator element locator for this component
      */
-    public ComponentHandler(final ElementLocator locator) {
+    public ComponentHandler(ElementLocator locator) {
         super(locator);
         if (this.locator instanceof WrapsElement) {
             fireProxyElementSearch();
-            final WebElement result = ((WrapsElement) this.locator).getWrappedElement();
+            WebElement result = ((WrapsElement) this.locator).getWrappedElement();
             if (result == null) {
                 throw noSuchElement();
             }
@@ -42,7 +42,7 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement>
     }
 
     @Override
-    protected List<WebElement> resultToList(final WebElement result) {
+    protected List<WebElement> resultToList(WebElement result) {
         return Arrays.asList(result);
     }
 
@@ -51,7 +51,7 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement>
         try {
             result.isEnabled();
             return false;
-        } catch (final StaleElementReferenceException e) {
+        } catch (StaleElementReferenceException e) {
             return true;
         }
     }
@@ -66,7 +66,7 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement>
         WebElement element;
         try {
             element = getHookLocator().findElement();
-        } catch (final NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             element = null;
         }
         if (element == null) {
@@ -76,7 +76,7 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement>
     }
 
     @Override
-    public WebElement getInvocationTarget(final Method method) {
+    public WebElement getInvocationTarget(Method method) {
         if (method != null && method.getDeclaringClass().equals(Object.class)) {
             return result;
         }
@@ -91,7 +91,7 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement>
 
     //CHECKSTYLE.OFF: IllegalThrows
     @Override
-    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (GET_WRAPPED_ELEMENT.equals(method)) {
             return loaded() ? getLocatorResult() : proxy;
         }

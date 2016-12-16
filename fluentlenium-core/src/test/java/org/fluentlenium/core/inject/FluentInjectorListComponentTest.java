@@ -43,8 +43,8 @@ public class FluentInjectorListComponentTest {
         private final WebElement foundElement;
         private FluentWebElement element;
 
-        public Component(final WebElement webElement) {
-            this.foundElement = webElement;
+        public Component(WebElement webElement) {
+            foundElement = webElement;
         }
     }
 
@@ -54,11 +54,11 @@ public class FluentInjectorListComponentTest {
 
     @Test
     public void testListComponent() {
-        final Container container = new Container();
+        Container container = new Container();
 
-        final WebElement component1 = Mockito.mock(WebElement.class);
-        final WebElement component2 = Mockito.mock(WebElement.class);
-        final WebElement component3 = Mockito.mock(WebElement.class);
+        WebElement component1 = Mockito.mock(WebElement.class);
+        WebElement component2 = Mockito.mock(WebElement.class);
+        WebElement component3 = Mockito.mock(WebElement.class);
 
         when(webDriver.findElements(new ByIdOrName("components"))).thenReturn(Arrays.asList(component1, component2, component3));
 
@@ -67,7 +67,7 @@ public class FluentInjectorListComponentTest {
         Assertions.assertThat(container.components).isNotNull();
         Assertions.assertThat(LocatorProxies.loaded(container.components)).isFalse();
 
-        for (final Component component : container.components) {
+        for (Component component : container.components) {
             Assertions.assertThat(component.element).isNotNull();
         }
 

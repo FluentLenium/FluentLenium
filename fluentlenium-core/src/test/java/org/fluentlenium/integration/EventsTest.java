@@ -15,8 +15,8 @@ public class EventsTest extends IntegrationFluentTest {
 
     @Test
     public void clickOn() {
-        final ElementListener beforeListener = Mockito.mock(ElementListener.class);
-        final ElementListener afterListener = Mockito.mock(ElementListener.class);
+        ElementListener beforeListener = Mockito.mock(ElementListener.class);
+        ElementListener afterListener = Mockito.mock(ElementListener.class);
 
         events().beforeClickOn(beforeListener);
         events().afterClickOn(afterListener);
@@ -30,8 +30,8 @@ public class EventsTest extends IntegrationFluentTest {
 
     @Test
     public void findBy() {
-        final FindByListener beforeListener = Mockito.mock(FindByListener.class);
-        final FindByListener afterListener = Mockito.mock(FindByListener.class);
+        FindByListener beforeListener = Mockito.mock(FindByListener.class);
+        FindByListener afterListener = Mockito.mock(FindByListener.class);
 
         events().beforeFindBy(beforeListener);
         events().afterFindBy(afterListener);
@@ -47,8 +47,8 @@ public class EventsTest extends IntegrationFluentTest {
 
     @Test
     public void navigate() {
-        final NavigateAllListener beforeListener = Mockito.mock(NavigateAllListener.class);
-        final NavigateAllListener afterListener = Mockito.mock(NavigateAllListener.class);
+        NavigateAllListener beforeListener = Mockito.mock(NavigateAllListener.class);
+        NavigateAllListener afterListener = Mockito.mock(NavigateAllListener.class);
 
         events().beforeNavigate(beforeListener);
         events().afterNavigate(afterListener);
@@ -70,8 +70,8 @@ public class EventsTest extends IntegrationFluentTest {
 
     @Test
     public void refresh() {
-        final NavigateListener beforeListener = Mockito.mock(NavigateListener.class);
-        final NavigateListener afterListener = Mockito.mock(NavigateListener.class);
+        NavigateListener beforeListener = Mockito.mock(NavigateListener.class);
+        NavigateListener afterListener = Mockito.mock(NavigateListener.class);
 
         events().beforeNavigateRefresh(beforeListener);
         events().afterNavigateRefresh(afterListener);

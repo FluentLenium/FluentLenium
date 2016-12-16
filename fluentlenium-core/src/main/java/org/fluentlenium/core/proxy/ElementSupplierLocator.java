@@ -1,12 +1,12 @@
 package org.fluentlenium.core.proxy;
 
-import java.util.function.Supplier;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Element locator implemented by a {@link Supplier} of {@link WebElement}.
@@ -19,7 +19,7 @@ public class ElementSupplierLocator implements ElementLocator {
      *
      * @param elementSupplier element supplier
      */
-    public ElementSupplierLocator(final Supplier<WebElement> elementSupplier) {
+    public ElementSupplierLocator(Supplier<WebElement> elementSupplier) {
         this.elementSupplier = elementSupplier;
     }
 
@@ -30,7 +30,7 @@ public class ElementSupplierLocator implements ElementLocator {
 
     @Override
     public List<WebElement> findElements() {
-        final WebElement webElement = elementSupplier.get();
+        WebElement webElement = elementSupplier.get();
         if (webElement == null) {
             return Collections.emptyList();
         }

@@ -1,6 +1,5 @@
 package org.fluentlenium.core.events;
 
-import java.util.function.Function;
 import org.fluentlenium.core.components.ComponentsAccessor;
 import org.fluentlenium.core.events.annotations.AfterChangeValueOf;
 import org.fluentlenium.core.events.annotations.AfterClickOn;
@@ -18,6 +17,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Set;
+import java.util.function.Function;
 
 /**
  * Listen to WebDriver events and delegates to methods with annotations registered on FluentLenium components.
@@ -30,7 +30,7 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
      *
      * @param componentsAccessor components accessor
      */
-    public AnnotationsComponentListener(final ComponentsAccessor componentsAccessor) {
+    public AnnotationsComponentListener(ComponentsAccessor componentsAccessor) {
         this.componentsAccessor = componentsAccessor;
     }
 
@@ -42,17 +42,16 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
      * @param element    selenium element
      * @param driver     selenium driver
      */
-    protected void findByHandler(final Class<? extends Annotation> annotation, final By by, final WebElement element,
-            final WebDriver driver) {
+    protected void findByHandler(Class<? extends Annotation> annotation, By by, WebElement element, WebDriver driver) {
         if (element == null) {
             return;
         }
-        final Set<Object> components = this.componentsAccessor.getComponents(element);
+        Set<Object> components = componentsAccessor.getComponents(element);
         if (components == null) {
             return;
         }
-        for (final Object component : components) {
-            for (final Method method : ReflectionUtils.getDeclaredMethodsWithAnnotation(component, annotation)) {
+        for (Object component : components) {
+            for (Method method : ReflectionUtils.getDeclaredMethodsWithAnnotation(component, annotation)) {
                 findByHandlerComponentMethod(component, method, annotation, by);
             }
         }
@@ -66,13 +65,12 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
      * @param annotation event annotation
      * @param by         selenium locator
      */
-    protected void findByHandlerComponentMethod(final Object component, final Method method,
-            final Class<? extends Annotation> annotation, final By by) {
-        final Class<?>[] parameterTypes = method.getParameterTypes();
+    protected void findByHandlerComponentMethod(Object component, Method method, Class<? extends Annotation> annotation, By by) {
+        Class<?>[] parameterTypes = method.getParameterTypes();
 
-        final Object[] args = ReflectionUtils.toArgs(new Function<Class<?>, Object>() {
+        Object[] args = ReflectionUtils.toArgs(new Function<Class<?>, Object>() {
             @Override
-            public Object apply(final Class<?> input) {
+            public Object apply(Class<?> input) {
                 if (input.isAssignableFrom(By.class)) {
                     return by;
                 }
@@ -82,9 +80,9 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
 
         try {
             ReflectionUtils.invoke(method, component, args);
-        } catch (final IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             throw new EventAnnotationsException("An error has occured in @BeforeFindBy " + method, e);
-        } catch (final InvocationTargetException e) {
+        } catch (InvocationTargetException e) {
             if (e.getTargetException() instanceof RuntimeException) {
                 throw (RuntimeException) e.getTargetException();
             } else if (e.getTargetException() instanceof Error) {
@@ -95,12 +93,12 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
     }
 
     @Override
-    public void beforeFindBy(final By by, final WebElement element, final WebDriver driver) {
+    public void beforeFindBy(By by, WebElement element, WebDriver driver) {
         findByHandler(BeforeFindBy.class, by, element, driver);
     }
 
     @Override
-    public void afterFindBy(final By by, final WebElement element, final WebDriver driver) {
+    public void afterFindBy(By by, WebElement element, WebDriver driver) {
         findByHandler(AfterFindBy.class, by, element, driver);
     }
 
@@ -111,17 +109,16 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
      * @param element      selenium event
      * @param charSequence new value of the element (null if not revelant)
      */
-    protected void defaultHandler(final Class<? extends Annotation> annotation, final WebElement element,
-            final CharSequence[] charSequence) {
+    protected void defaultHandler(Class<? extends Annotation> annotation, WebElement element, CharSequence[] charSequence) {
         if (element == null) {
             return;
         }
-        final Set<Object> components = this.componentsAccessor.getComponents(element);
+        Set<Object> components = componentsAccessor.getComponents(element);
         if (components == null) {
             return;
         }
-        for (final Object component : components) {
-            for (final Method method : ReflectionUtils.getDeclaredMethodsWithAnnotation(component, annotation)) {
+        for (Object component : components) {
+            for (Method method : ReflectionUtils.getDeclaredMethodsWithAnnotation(component, annotation)) {
                 defaultHandlerComponentMethod(component, method, annotation, charSequence);
             }
         }
@@ -135,13 +132,13 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
      * @param annotation   event annotation
      * @param charSequence new value of the element (null if not revelant)
      */
-    protected void defaultHandlerComponentMethod(final Object component, final Method method,
-            final Class<? extends Annotation> annotation, final CharSequence[] charSequence) {
-        final Class<?>[] parameterTypes = method.getParameterTypes();
+    protected void defaultHandlerComponentMethod(Object component, Method method, Class<? extends Annotation> annotation,
+            CharSequence[] charSequence) {
+        Class<?>[] parameterTypes = method.getParameterTypes();
 
-        final Object[] args = ReflectionUtils.toArgs(new Function<Class<?>, Object>() {
+        Object[] args = ReflectionUtils.toArgs(new Function<Class<?>, Object>() {
             @Override
-            public Object apply(final Class<?> input) {
+            public Object apply(Class<?> input) {
                 if (CharSequence.class.isAssignableFrom(input)) {
                     return charSequence;
                 }
@@ -151,9 +148,9 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
 
         try {
             ReflectionUtils.invoke(method, component, args);
-        } catch (final IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             throw new EventAnnotationsException("An error has occured in @" + annotation.getSimpleName() + " " + method, e);
-        } catch (final InvocationTargetException e) {
+        } catch (InvocationTargetException e) {
             if (e.getTargetException() instanceof RuntimeException) {
                 throw (RuntimeException) e.getTargetException();
             } else if (e.getTargetException() instanceof Error) {
@@ -164,77 +161,77 @@ public class AnnotationsComponentListener implements WebDriverEventListener {
     }
 
     @Override
-    public void beforeClickOn(final WebElement element, final WebDriver driver) {
+    public void beforeClickOn(WebElement element, WebDriver driver) {
         defaultHandler(BeforeClickOn.class, element, null);
     }
 
     @Override
-    public void afterClickOn(final WebElement element, final WebDriver driver) {
+    public void afterClickOn(WebElement element, WebDriver driver) {
         defaultHandler(AfterClickOn.class, element, null);
     }
 
     @Override
-    public void beforeChangeValueOf(final WebElement element, final WebDriver driver, final CharSequence[] charSequence) {
+    public void beforeChangeValueOf(WebElement element, WebDriver driver, CharSequence[] charSequence) {
         defaultHandler(BeforeChangeValueOf.class, element, charSequence);
     }
 
     @Override
-    public void afterChangeValueOf(final WebElement element, final WebDriver driver, final CharSequence[] charSequence) {
+    public void afterChangeValueOf(WebElement element, WebDriver driver, CharSequence[] charSequence) {
         defaultHandler(AfterChangeValueOf.class, element, charSequence);
     }
 
     @Override
-    public void beforeNavigateTo(final String url, final WebDriver driver) {
+    public void beforeNavigateTo(String url, WebDriver driver) {
         //Do nothing.
     }
 
     @Override
-    public void afterNavigateTo(final String url, final WebDriver driver) {
+    public void afterNavigateTo(String url, WebDriver driver) {
         //Do nothing.
     }
 
     @Override
-    public void beforeNavigateBack(final WebDriver driver) {
+    public void beforeNavigateBack(WebDriver driver) {
         //Do nothing.
     }
 
     @Override
-    public void afterNavigateBack(final WebDriver driver) {
+    public void afterNavigateBack(WebDriver driver) {
         //Do nothing.
     }
 
     @Override
-    public void beforeNavigateForward(final WebDriver driver) {
+    public void beforeNavigateForward(WebDriver driver) {
         //Do nothing.
     }
 
     @Override
-    public void afterNavigateForward(final WebDriver driver) {
+    public void afterNavigateForward(WebDriver driver) {
         //Do nothing.
     }
 
     @Override
-    public void beforeNavigateRefresh(final WebDriver driver) {
+    public void beforeNavigateRefresh(WebDriver driver) {
         //Do nothing.
     }
 
     @Override
-    public void afterNavigateRefresh(final WebDriver driver) {
+    public void afterNavigateRefresh(WebDriver driver) {
         //Do nothing.
     }
 
     @Override
-    public void beforeScript(final String script, final WebDriver driver) {
+    public void beforeScript(String script, WebDriver driver) {
         //Do nothing.
     }
 
     @Override
-    public void afterScript(final String script, final WebDriver driver) {
+    public void afterScript(String script, WebDriver driver) {
         //Do nothing.
     }
 
     @Override
-    public void onException(final Throwable throwable, final WebDriver driver) {
+    public void onException(Throwable throwable, WebDriver driver) {
         //Do nothing.
     }
 }

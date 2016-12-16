@@ -34,8 +34,7 @@ public class LazyComponentList<T> implements List<T>, WrapsElements, LazyCompone
      * @param componentClass component class
      * @param elements       underlying element list
      */
-    public LazyComponentList(final ComponentInstantiator instantiator, final Class<T> componentClass,
-            final List<WebElement> elements) {
+    public LazyComponentList(ComponentInstantiator instantiator, Class<T> componentClass, List<WebElement> elements) {
         this.componentClass = componentClass;
         this.instantiator = instantiator;
         this.elements = elements;
@@ -47,10 +46,10 @@ public class LazyComponentList<T> implements List<T>, WrapsElements, LazyCompone
      * @return transformed list
      */
     protected List<T> transformList() {
-        final List<T> components = new ArrayList<>();
-        final Map<WebElement, T> componentMap = new LinkedHashMap<>();
-        for (final WebElement element : this.elements) {
-            final T component = this.instantiator.newComponent(componentClass, element);
+        List<T> components = new ArrayList<>();
+        Map<WebElement, T> componentMap = new LinkedHashMap<>();
+        for (WebElement element : elements) {
+            T component = instantiator.newComponent(componentClass, element);
             components.add(component);
             componentMap.put(element, component);
         }
@@ -63,19 +62,19 @@ public class LazyComponentList<T> implements List<T>, WrapsElements, LazyCompone
      *
      * @param componentMap components
      */
-    protected void fireLazyComponentsInitialized(final Map<WebElement, T> componentMap) {
-        for (final LazyComponentsListener<T> listener : lazyComponentsListeners) {
+    protected void fireLazyComponentsInitialized(Map<WebElement, T> componentMap) {
+        for (LazyComponentsListener<T> listener : lazyComponentsListeners) {
             listener.lazyComponentsInitialized(componentMap);
         }
     }
 
     @Override
-    public boolean addLazyComponentsListener(final LazyComponentsListener<T> listener) {
+    public boolean addLazyComponentsListener(LazyComponentsListener<T> listener) {
         return lazyComponentsListeners.add(listener);
     }
 
     @Override
-    public boolean removeLazyComponentsListener(final LazyComponentsListener<T> listener) {
+    public boolean removeLazyComponentsListener(LazyComponentsListener<T> listener) {
         return lazyComponentsListeners.remove(listener);
     }
 
@@ -91,11 +90,11 @@ public class LazyComponentList<T> implements List<T>, WrapsElements, LazyCompone
 
     @Override
     public List<WebElement> getWrappedElements() {
-        return this.elements;
+        return elements;
     }
 
     @Override
     public String toString() {
-        return isLazyInitialized() ? list.toString() : this.elements.toString();
+        return isLazyInitialized() ? list.toString() : elements.toString();
     }
 }

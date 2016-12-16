@@ -1,6 +1,5 @@
 package org.fluentlenium.core.wait;
 
-import java.util.function.Predicate;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
@@ -20,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.atLeastOnce;
@@ -90,9 +90,9 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void isVerified() {
-        final Predicate<FluentWebElement> predicate = FluentWebElement::enabled;
+        Predicate<FluentWebElement> predicate = FluentWebElement::enabled;
 
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
         assertThatThrownBy(() -> matcher.verify(predicate)).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).enabled();
@@ -117,9 +117,9 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void isVerifiedEmpty() {
-        final Predicate<FluentWebElement> predicate = FluentWebElement::enabled;
+        Predicate<FluentWebElement> predicate = FluentWebElement::enabled;
 
-        final FluentListConditions matcher = wait.until(new ArrayList<>());
+        FluentListConditions matcher = wait.until(new ArrayList<>());
         assertThatThrownBy(() -> matcher.verify(predicate, false)).isExactlyInstanceOf(TimeoutException.class);
 
         matcher.verify(predicate, true);
@@ -129,9 +129,9 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void isNotVerified() {
-        final Predicate<FluentWebElement> predicate = input -> !input.enabled();
+        Predicate<FluentWebElement> predicate = input -> !input.enabled();
 
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
 
         assertThatThrownBy(() -> matcher.not().verify(predicate)).isExactlyInstanceOf(TimeoutException.class);
 
@@ -157,7 +157,7 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void hasAttribute() {
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
         assertThatThrownBy(() -> matcher.attribute("test", "value")).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).attribute("test");
@@ -178,7 +178,7 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void hasId() {
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
         assertThatThrownBy(() -> matcher.id("value")).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).id();
@@ -199,7 +199,7 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void hasName() {
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
         assertThatThrownBy(() -> matcher.name("name")).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).name();
@@ -220,7 +220,7 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void hasText() {
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
         assertThatThrownBy(() -> matcher.text().equalTo("text")).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).text();
@@ -241,7 +241,7 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void containsText() {
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
         assertThatThrownBy(() -> matcher.text().contains("ex")).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).text();
@@ -262,7 +262,7 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void isPresent() {
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
         assertThatThrownBy(matcher::present).isExactlyInstanceOf(TimeoutException.class);
 
         when(fluentWebElement1.present()).thenReturn(true);
@@ -279,7 +279,7 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void isEnabled() {
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
         assertThatThrownBy(matcher::enabled).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).enabled();
@@ -304,13 +304,13 @@ public class FluentWaitElementListMatcherTest {
         when(fluentWebElement2.now()).thenThrow(NoSuchElementException.class);
         when(fluentWebElement3.now()).thenThrow(NoSuchElementException.class);
 
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
         assertThatThrownBy(matcher::enabled).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void isSelected() {
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
         assertThatThrownBy(matcher::selected).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).selected();
@@ -331,7 +331,7 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void isDisplayed() {
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
         assertThatThrownBy(matcher::displayed).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).displayed();
@@ -352,7 +352,7 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void isClickable() {
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
         assertThatThrownBy(matcher::clickable).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).clickable();
@@ -373,7 +373,7 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void isStale() {
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
         assertThatThrownBy(matcher::stale).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).stale();
@@ -394,7 +394,7 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void hasSize() {
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
         assertThatThrownBy(() -> matcher.size(2)).isExactlyInstanceOf(TimeoutException.class);
 
         matcher.size(3);
@@ -404,7 +404,7 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void hasSizeBuilder() {
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
         assertThatThrownBy(() -> matcher.size().equalTo(2)).isExactlyInstanceOf(TimeoutException.class);
 
         matcher.size().equalTo(3);
@@ -414,7 +414,7 @@ public class FluentWaitElementListMatcherTest {
 
     @Test
     public void hasRectangle() {
-        final FluentListConditions matcher = wait.until(fluentWebElements);
+        FluentListConditions matcher = wait.until(fluentWebElements);
 
         when(element1.getRect()).thenReturn(new Rectangle(1, 2, 100, 200));
         when(element2.getRect()).thenReturn(new Rectangle(1, 2, 100, 200));

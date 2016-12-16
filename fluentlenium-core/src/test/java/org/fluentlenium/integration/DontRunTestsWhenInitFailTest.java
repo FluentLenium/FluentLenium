@@ -20,7 +20,7 @@ public class DontRunTestsWhenInitFailTest {
 
         @Override
         public WebDriver newWebDriver() {
-            final HtmlUnitDriver driver = new HtmlUnitDriver(false);
+            HtmlUnitDriver driver = new HtmlUnitDriver(false);
             driver.get("invalid:url"); // Simulate a driver initialization failure.
             return driver;
         }
@@ -33,8 +33,8 @@ public class DontRunTestsWhenInitFailTest {
 
     @Test
     public void testRun() {
-        final JUnitCore junit = new JUnitCore();
-        final Result run = junit.run(IgnoreTestClass.class);
+        JUnitCore junit = new JUnitCore();
+        Result run = junit.run(IgnoreTestClass.class);
 
         Assertions.assertThat(run.getFailures()).hasSize(1);
         Assertions.assertThat(run.getFailures().get(0).getMessage()).startsWith("java.net.MalformedURLException");

@@ -31,14 +31,14 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
      *
      * @param control fluent control
      */
-    public FluentPage(final FluentControl control) {
+    public FluentPage(FluentControl control) {
         super(control);
     }
 
     @Override
     public String getUrl() {
-        if (this.getClass().isAnnotationPresent(PageUrl.class)) {
-            final String url = this.getClass().getAnnotation(PageUrl.class).value();
+        if (getClass().isAnnotationPresent(PageUrl.class)) {
+            String url = getClass().getAnnotation(PageUrl.class).value();
             if (!url.isEmpty()) {
                 return url;
             }
@@ -47,15 +47,15 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
     }
 
     @Override
-    public String getUrl(final Object... parameters) {
-        final String url = getUrl();
+    public String getUrl(Object... parameters) {
+        String url = getUrl();
         if (url == null) {
             return null;
         }
 
-        final UrlTemplate template = new UrlTemplate(url);
+        UrlTemplate template = new UrlTemplate(url);
 
-        for (final Object parameter : parameters) {
+        for (Object parameter : parameters) {
             template.add(parameter == null ? null : String.valueOf(parameter));
         }
 
@@ -64,12 +64,12 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
 
     @Override
     public void isAt() {
-        final By by = classAnnotations.buildBy();
+        By by = classAnnotations.buildBy();
         if (by != null) {
             isAtUsingSelector(by);
         }
 
-        final String url = getUrl();
+        String url = getUrl();
         if (url != null) {
             isAtUsingUrl(url);
         }
@@ -80,11 +80,11 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
      *
      * @param urlTemplate URL Template
      */
-    protected void isAtUsingUrl(final String urlTemplate) {
-        final UrlTemplate template = new UrlTemplate(urlTemplate);
+    protected void isAtUsingUrl(String urlTemplate) {
+        UrlTemplate template = new UrlTemplate(urlTemplate);
 
-        final String url = url();
-        final ParsedUrlTemplate parse = template.parse(url);
+        String url = url();
+        ParsedUrlTemplate parse = template.parse(url);
 
         if (!parse.matches()) {
             throw new AssertionError(String.format("Current URL [%s] doesn't match expected Page URL [%s]", url, urlTemplate));
@@ -96,7 +96,7 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
      *
      * @param by by selector
      */
-    protected void isAtUsingSelector(final By by) {
+    protected void isAtUsingSelector(By by) {
         try {
             $(by).first().now();
         } catch (TimeoutException | NoSuchElementException | StaleElementReferenceException e) {
@@ -106,7 +106,7 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
 
     @Override
     public final void go() {
-        final String url = getUrl();
+        String url = getUrl();
         if (url == null) {
             throw new IllegalStateException(
                     "An URL should be defined on the page. Use @PageUrl annotation or override getUrl() method.");
@@ -115,8 +115,8 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
     }
 
     @Override
-    public void go(final Object... params) {
-        final String url = getUrl(params);
+    public void go(Object... params) {
+        String url = getUrl(params);
         if (url == null) {
             throw new IllegalStateException(
                     "An URL should be defined on the page. Use @PageUrl annotation or override getUrl() method.");
@@ -130,15 +130,15 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
     }
 
     @Override
-    public ParsedUrlTemplate parseUrl(final String url) {
-        final String templateUrl = getUrl();
+    public ParsedUrlTemplate parseUrl(String url) {
+        String templateUrl = getUrl();
         if (templateUrl == null) {
             throw new IllegalStateException(
                     "An URL should be defined on the page. Use @PageUrl annotation or override getUrl() method.");
         }
 
-        final UrlTemplate template = new UrlTemplate(templateUrl);
-        final ParsedUrlTemplate parse = template.parse(url);
+        UrlTemplate template = new UrlTemplate(templateUrl);
+        ParsedUrlTemplate parse = template.parse(url);
 
         return parse;
     }

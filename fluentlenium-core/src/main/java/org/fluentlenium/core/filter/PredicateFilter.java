@@ -1,10 +1,10 @@
 package org.fluentlenium.core.filter;
 
-import java.util.function.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.search.SearchFilter;
 
 import java.util.Collection;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -18,7 +18,7 @@ public class PredicateFilter implements SearchFilter {
      *
      * @param predicate search filter
      */
-    PredicateFilter(final Predicate<FluentWebElement> predicate) {
+    PredicateFilter(Predicate<FluentWebElement> predicate) {
         this.predicate = predicate;
     }
 
@@ -33,7 +33,7 @@ public class PredicateFilter implements SearchFilter {
     }
 
     @Override
-    public Collection<FluentWebElement> applyFilter(final Collection<FluentWebElement> elements) {
+    public Collection<FluentWebElement> applyFilter(Collection<FluentWebElement> elements) {
         return elements.stream().filter(predicate).collect(Collectors.toList());
     }
 }

@@ -11,7 +11,7 @@ public class StartsWithMatcher extends AbstractMatcher {
      *
      * @param value input value
      */
-    public StartsWithMatcher(final String value) {
+    public StartsWithMatcher(String value) {
         super(value);
     }
 
@@ -20,7 +20,7 @@ public class StartsWithMatcher extends AbstractMatcher {
      *
      * @param value input value
      */
-    public StartsWithMatcher(final Pattern value) {
+    public StartsWithMatcher(Pattern value) {
         super(value);
     }
 
@@ -30,7 +30,7 @@ public class StartsWithMatcher extends AbstractMatcher {
     }
 
     @Override
-    public boolean isSatisfiedBy(final String obj) {
+    public boolean isSatisfiedBy(String obj) {
         return CalculateService.startsWith(getPattern(), getValue(), obj);
     }
 

@@ -1,11 +1,12 @@
 package org.fluentlenium.core.hook;
 
-import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+
+import java.util.function.Supplier;
 
 /**
  * Base hook supporting {@link FluentWebElement} API.
@@ -28,9 +29,8 @@ public class BaseFluentHook<T> extends BaseHook<T> {
      * @param toStringSupplier element toString supplier
      * @param options          hook options
      */
-    public BaseFluentHook(final FluentControl control, final ComponentInstantiator instantiator,
-            final Supplier<WebElement> elementSupplier, final Supplier<ElementLocator> locatorSupplier,
-            final Supplier<String> toStringSupplier, final T options) {
+    public BaseFluentHook(FluentControl control, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
+            Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, T options) {
         super(control, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
     }
 
@@ -40,7 +40,7 @@ public class BaseFluentHook<T> extends BaseHook<T> {
      * @return underlying element as a FluentWebElement
      */
     public FluentWebElement getFluentWebElement() {
-        final WebElement element = getElement();
+        WebElement element = getElement();
         if (fluentWebElement == null || element != fluentWebElement.getElement()) {
             fluentWebElement = getInstantiator().newComponent(FluentWebElement.class, element);
         }

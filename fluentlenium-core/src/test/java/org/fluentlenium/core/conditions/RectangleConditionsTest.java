@@ -54,9 +54,9 @@ public class RectangleConditionsTest {
     public void before() {
         when(webElement.getRect()).thenReturn(rectangle);
 
-        final FluentAdapter fluentAdapter = new FluentAdapter();
+        FluentAdapter fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(driver);
-        final FluentWebElement fluentWebElement = new FluentWebElement(webElement, fluentAdapter,
+        FluentWebElement fluentWebElement = new FluentWebElement(webElement, fluentAdapter,
                 new DefaultComponentInstantiator(fluentAdapter));
         conditions = new WebElementConditions(fluentWebElement);
     }

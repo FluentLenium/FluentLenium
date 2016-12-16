@@ -1,6 +1,5 @@
 package org.fluentlenium.utils;
 
-import java.util.function.Function;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
+import java.util.function.Function;
 
 /**
  * Utility class for reflection.
@@ -43,7 +43,7 @@ public final class ReflectionUtils {
      * @return class or primitive class
      */
     @SuppressWarnings("unchecked")
-    public static <T> Class<T> wrapPrimitive(final Class<T> clazz) {
+    public static <T> Class<T> wrapPrimitive(Class<T> clazz) {
         return clazz.isPrimitive() ? (Class<T>) PRIMITIVES_TO_WRAPPERS.get(clazz) : clazz;
     }
 
@@ -88,13 +88,13 @@ public final class ReflectionUtils {
      * @param array an {@code Object} array
      * @return a {@code Class} array, {@code null} if null array input
      */
-    public static Class<?>[] toClass(final Object... array) {
+    public static Class<?>[] toClass(Object... array) {
         if (array == null) {
             return null;
         } else if (array.length == 0) {
             return EMPTY_CLASS_ARRAY; // NOPMD MethodReturnsInternalArray
         }
-        final Class<?>[] classes = new Class[array.length];
+        Class<?>[] classes = new Class[array.length];
         for (int i = 0; i < array.length; i++) {
             classes[i] = (array[i] == null) ? null : array[i].getClass();
         }
@@ -109,13 +109,13 @@ public final class ReflectionUtils {
      * @param array         array of class
      * @return array of values
      */
-    public static Object[] toArgs(final Function<Class<?>, Object> valueSupplier, final Class<?>... array) {
+    public static Object[] toArgs(Function<Class<?>, Object> valueSupplier, Class<?>... array) {
         if (array == null) {
             return null;
         } else if (array.length == 0) {
             return EMPTY_OBJECT_ARRAY; // NOPMD MethodReturnsInternalArray
         }
-        final Object[] parameters = new Object[array.length];
+        Object[] parameters = new Object[array.length];
         for (int i = 0; i < array.length; i++) {
             Object value = valueSupplier.apply(array[i]);
             if (value == null) {
@@ -133,7 +133,7 @@ public final class ReflectionUtils {
      * @param <T>  type of value
      * @return default value
      */
-    public static <T> T getDefault(final Class<T> type) {
+    public static <T> T getDefault(Class<T> type) {
         return (T) DEFAULTS.get(type);
     }
 
@@ -146,8 +146,8 @@ public final class ReflectionUtils {
      * @return matching constructor for given argument values
      * @throws NoSuchMethodException if a matching method is not found.
      */
-    public static <T> Constructor<T> getConstructor(final Class<T> cls, final Object... args) throws NoSuchMethodException {
-        final Class<?>[] argsTypes = toClass(args);
+    public static <T> Constructor<T> getConstructor(Class<T> cls, Object... args) throws NoSuchMethodException {
+        Class<?>[] argsTypes = toClass(args);
         return getConstructor(cls, argsTypes);
     }
 
@@ -160,16 +160,15 @@ public final class ReflectionUtils {
      * @return matching constructor for given argument values
      * @throws NoSuchMethodException if a matching method is not found.
      */
-    public static <T> Constructor<T> getConstructor(final Class<T> cls, final Class<?>... argsTypes)
-            throws NoSuchMethodException {
+    public static <T> Constructor<T> getConstructor(Class<T> cls, Class<?>... argsTypes) throws NoSuchMethodException {
         if (argsTypes == null || argsTypes.length == 0) {
             return cls.getDeclaredConstructor();
         }
 
         try {
             return cls.getDeclaredConstructor(argsTypes);
-        } catch (final NoSuchMethodException e) {
-            for (final Constructor<?> constructor : cls.getDeclaredConstructors()) {
+        } catch (NoSuchMethodException e) {
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
                 if (isMatchingConstructor(constructor, argsTypes)) {
                     return (Constructor<T>) constructor;
                 }
@@ -178,8 +177,8 @@ public final class ReflectionUtils {
         }
     }
 
-    private static boolean isMatchingConstructor(final Constructor<?> constructor, final Class<?>[] argsTypes) {
-        final Class<?>[] parameterTypes = constructor.getParameterTypes();
+    private static boolean isMatchingConstructor(Constructor<?> constructor, Class<?>[] argsTypes) {
+        Class<?>[] parameterTypes = constructor.getParameterTypes();
         if (parameterTypes.length != argsTypes.length) {
             return false;
         }
@@ -209,8 +208,7 @@ public final class ReflectionUtils {
      * @return matching constructor for given optional argument values
      * @throws NoSuchMethodException if a matching method is not found.
      */
-    public static <T> Constructor<T> getConstructorOptional(final Class<T> cls, final Class<?>... argsTypes)
-            throws NoSuchMethodException {
+    public static <T> Constructor<T> getConstructorOptional(Class<T> cls, Class<?>... argsTypes) throws NoSuchMethodException {
         return getConstructorOptional(0, cls, argsTypes);
     }
 
@@ -225,12 +223,12 @@ public final class ReflectionUtils {
      * @return matching constructor for given optional argument values
      * @throws NoSuchMethodException if a matching method is not found.
      */
-    public static <T> Constructor<T> getConstructorOptional(final int mandatoryCount, final Class<T> cls, Class<?>... argsTypes)
+    public static <T> Constructor<T> getConstructorOptional(int mandatoryCount, Class<T> cls, Class<?>... argsTypes)
             throws NoSuchMethodException {
         while (true) {
             try {
                 return getConstructor(cls, argsTypes);
-            } catch (final NoSuchMethodException e) {
+            } catch (NoSuchMethodException e) {
                 if (argsTypes.length == mandatoryCount) {
                     break;
                 }
@@ -256,10 +254,10 @@ public final class ReflectionUtils {
      * @throws InvocationTargetException if the underlying constructor
      *                                   throws an exception.
      */
-    public static <T> T newInstance(final Class<T> cls, final Object... args)
+    public static <T> T newInstance(Class<T> cls, Object... args)
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        final Constructor<T> declaredConstructor = args.length == 0 ? getConstructor(cls) : getConstructor(cls, args);
-        final boolean accessible = declaredConstructor.isAccessible();
+        Constructor<T> declaredConstructor = args.length == 0 ? getConstructor(cls) : getConstructor(cls, args);
+        boolean accessible = declaredConstructor.isAccessible();
         if (accessible) {
             return declaredConstructor.newInstance(args);
         } else {
@@ -288,7 +286,7 @@ public final class ReflectionUtils {
      * @throws InvocationTargetException if the underlying constructor
      *                                   throws an exception.
      */
-    public static <T> T newInstanceOptionalArgs(final Class<T> cls, final Object... args)
+    public static <T> T newInstanceOptionalArgs(Class<T> cls, Object... args)
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         return newInstanceOptionalArgs(0, cls, args);
     }
@@ -310,12 +308,12 @@ public final class ReflectionUtils {
      * @throws InvocationTargetException if the underlying constructor
      *                                   throws an exception.
      */
-    public static <T> T newInstanceOptionalArgs(final int mandatoryCount, final Class<T> cls, Object... args)
+    public static <T> T newInstanceOptionalArgs(int mandatoryCount, Class<T> cls, Object... args)
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         while (true) {
             try {
                 return newInstance(cls, args);
-            } catch (final NoSuchMethodException e) {
+            } catch (NoSuchMethodException e) {
                 if (args.length == mandatoryCount) {
                     break;
                 }
@@ -332,8 +330,7 @@ public final class ReflectionUtils {
      * @param annotation annotation to look for
      * @return list of methods
      */
-    public static List<Method> getDeclaredMethodsWithAnnotation(final Object object,
-            final Class<? extends Annotation> annotation) {
+    public static List<Method> getDeclaredMethodsWithAnnotation(Object object, Class<? extends Annotation> annotation) {
         if (object == null) {
             return getDeclaredMethodsWithAnnotation(null, annotation);
         }
@@ -347,21 +344,20 @@ public final class ReflectionUtils {
      * @param annotation  marker annotation
      * @return Lise of methods that are marked with given annotation
      */
-    public static List<Method> getDeclaredMethodsWithAnnotation(final Class<?> objectClass,
-            final Class<? extends Annotation> annotation) {
-        final List<Method> methods = new ArrayList<>();
+    public static List<Method> getDeclaredMethodsWithAnnotation(Class<?> objectClass, Class<? extends Annotation> annotation) {
+        List<Method> methods = new ArrayList<>();
 
         if (objectClass == null) {
             return methods;
         }
 
-        final ClassAnnotationKey cacheKey = new ClassAnnotationKey(objectClass, annotation);
+        ClassAnnotationKey cacheKey = new ClassAnnotationKey(objectClass, annotation);
         if (DECLARED_METHODS_CACHE.containsKey(cacheKey)) {
             return DECLARED_METHODS_CACHE.get(cacheKey);
         }
 
-        final Method[] declaredMethods = objectClass.getDeclaredMethods();
-        for (final Method method : declaredMethods) {
+        Method[] declaredMethods = objectClass.getDeclaredMethods();
+        for (Method method : declaredMethods) {
             if (method.isAnnotationPresent(annotation)) {
                 methods.add(method);
             }
@@ -385,9 +381,9 @@ public final class ReflectionUtils {
      *                                   throws an exception.
      * @see Method#invoke(Object, Object...)
      */
-    public static Object invoke(final Method method, final Object obj, final Object... args)
+    public static Object invoke(Method method, Object obj, Object... args)
             throws InvocationTargetException, IllegalAccessException {
-        final boolean accessible = method.isAccessible();
+        boolean accessible = method.isAccessible();
         if (accessible) {
             return method.invoke(obj, args);
         }
@@ -410,8 +406,8 @@ public final class ReflectionUtils {
      *                                field is inaccessible.
      * @see Field#get(Object)
      */
-    public static Object get(final Field field, final Object obj) throws IllegalAccessException {
-        final boolean accessible = field.isAccessible();
+    public static Object get(Field field, Object obj) throws IllegalAccessException {
+        boolean accessible = field.isAccessible();
         if (accessible) {
             return field.get(obj);
         }
@@ -434,8 +430,8 @@ public final class ReflectionUtils {
      *                                field is either inaccessible or final.
      * @see Field#set(Object, Object)
      */
-    public static void set(final Field field, final Object obj, final Object value) throws IllegalAccessException {
-        final boolean accessible = field.isAccessible();
+    public static void set(Field field, Object obj, Object value) throws IllegalAccessException {
+        boolean accessible = field.isAccessible();
         if (accessible) {
             field.set(obj, value);
         }
@@ -453,8 +449,8 @@ public final class ReflectionUtils {
      * @param field field to analyze
      * @return first generic type, or null if no generic type is found
      */
-    public static Class<?> getFirstGenericType(final Field field) {
-        final Type[] actualTypeArguments = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
+    public static Class<?> getFirstGenericType(Field field) {
+        Type[] actualTypeArguments = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
 
         if (actualTypeArguments.length > 0) {
             return (Class<?>) actualTypeArguments[0];

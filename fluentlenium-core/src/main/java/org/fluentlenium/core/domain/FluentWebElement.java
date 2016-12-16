@@ -1,7 +1,5 @@
 package org.fluentlenium.core.domain;
 
-import java.util.Optional;
-import java.util.function.Supplier;
 import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
@@ -38,7 +36,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Stack;
+import java.util.function.Supplier;
 
 /**
  * Wraps a Selenium {@link WebElement}. It provides an enhanced API to control selenium element.

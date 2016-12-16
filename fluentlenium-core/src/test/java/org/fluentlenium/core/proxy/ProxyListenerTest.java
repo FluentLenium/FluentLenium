@@ -1,6 +1,5 @@
 package org.fluentlenium.core.proxy;
 
-import java.util.function.Supplier;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
@@ -14,6 +13,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.refEq;
@@ -37,7 +37,7 @@ public class ProxyListenerTest {
 
     @Test
     public void testElement() {
-        final WebElement proxy = LocatorProxies.createWebElement(new Supplier<WebElement>() {
+        WebElement proxy = LocatorProxies.createWebElement(new Supplier<WebElement>() {
             @Override
             public WebElement get() {
                 return element1;
@@ -65,13 +65,13 @@ public class ProxyListenerTest {
     private static class ElementMatcher implements ArgumentMatcher<List<WebElement>> {
         private final List<WebElement> expected;
 
-        ElementMatcher(final List<WebElement> expected) {
+        ElementMatcher(List<WebElement> expected) {
             this.expected = expected;
         }
 
         @Override
-        public boolean matches(final List<WebElement> items) {
-            final List<WebElement> unwrapped = new ArrayList<>();
+        public boolean matches(List<WebElement> items) {
+            List<WebElement> unwrapped = new ArrayList<>();
             for (WebElement item : items) {
                 if (item instanceof WrapsElement) {
                     item = ((WrapsElement) item).getWrappedElement();
@@ -84,7 +84,7 @@ public class ProxyListenerTest {
 
     @Test
     public void testElementList() {
-        final List<WebElement> proxy = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
+        List<WebElement> proxy = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
             @Override
             public List<WebElement> get() {
                 return Arrays.asList(element1, element2, element3);

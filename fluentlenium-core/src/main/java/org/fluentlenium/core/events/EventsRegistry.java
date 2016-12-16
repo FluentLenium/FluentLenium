@@ -67,11 +67,11 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      *
      * @param control control interface
      */
-    public EventsRegistry(final FluentControl control) {
-        this.eventDriver = (EventFiringWebDriver) control.getDriver();
-        this.support = new EventsSupport(this);
-        this.instantiator = new DefaultComponentInstantiator(control);
-        this.register(this.support);
+    public EventsRegistry(FluentControl control) {
+        eventDriver = (EventFiringWebDriver) control.getDriver();
+        support = new EventsSupport(this);
+        instantiator = new DefaultComponentInstantiator(control);
+        eventDriver.register(new EventAdapter(support, instantiator));
     }
 
     /**
@@ -80,8 +80,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param eventListener event listener to register
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry register(final WebDriverEventListener eventListener) {
-        this.eventDriver.register(eventListener);
+    public EventsRegistry register(WebDriverEventListener eventListener) {
+        eventDriver.register(eventListener);
         return this;
     }
 
@@ -91,8 +91,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param eventListener existing event listener to unregister
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry unregister(final WebDriverEventListener eventListener) {
-        this.eventDriver.unregister(eventListener);
+    public EventsRegistry unregister(WebDriverEventListener eventListener) {
+        eventDriver.unregister(eventListener);
         return this;
     }
 
@@ -102,8 +102,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param eventListener event listener to register
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry register(final EventListener eventListener) {
-        this.eventDriver.register(new EventAdapter(eventListener, instantiator));
+    public EventsRegistry register(EventListener eventListener) {
+        eventDriver.register(new EventAdapter(eventListener, instantiator));
         return this;
     }
 
@@ -113,8 +113,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param eventListener existing event listener to unregister
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry unregister(final EventListener eventListener) {
-        this.eventDriver.unregister(new EventAdapter(eventListener, instantiator));
+    public EventsRegistry unregister(EventListener eventListener) {
+        eventDriver.unregister(new EventAdapter(eventListener, instantiator));
         return this;
     }
 
@@ -122,12 +122,12 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * Unregister all event listeners.
      */
     public void close() {
-        this.unregister(this.support);
+        unregister(support);
     }
 
     @Override
     public WebDriver getWrappedDriver() {
-        return this.eventDriver.getWrappedDriver();
+        return eventDriver.getWrappedDriver();
     }
 
     /**
@@ -136,8 +136,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked before navigating to an url.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry beforeNavigateTo(final NavigateToListener listener) {
-        this.beforeNavigateTo.add(listener);
+    public EventsRegistry beforeNavigateTo(NavigateToListener listener) {
+        beforeNavigateTo.add(listener);
         return this;
     }
 
@@ -147,8 +147,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked after navigation.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry afterNavigateTo(final NavigateToListener listener) {
-        this.afterNavigateTo.add(listener);
+    public EventsRegistry afterNavigateTo(NavigateToListener listener) {
+        afterNavigateTo.add(listener);
         return this;
     }
 
@@ -158,8 +158,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked before navigating back.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry beforeNavigateBack(final NavigateListener listener) {
-        this.beforeNavigateBack.add(listener);
+    public EventsRegistry beforeNavigateBack(NavigateListener listener) {
+        beforeNavigateBack.add(listener);
         return this;
     }
 
@@ -169,8 +169,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked after navigating back.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry afterNavigateBack(final NavigateListener listener) {
-        this.afterNavigateBack.add(listener);
+    public EventsRegistry afterNavigateBack(NavigateListener listener) {
+        afterNavigateBack.add(listener);
         return this;
     }
 
@@ -180,8 +180,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked before navigating forward.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry beforeNavigateForward(final NavigateListener listener) {
-        this.beforeNavigateForward.add(listener);
+    public EventsRegistry beforeNavigateForward(NavigateListener listener) {
+        beforeNavigateForward.add(listener);
         return this;
     }
 
@@ -191,8 +191,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked after navigating forward.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry afterNavigateForward(final NavigateListener listener) {
-        this.afterNavigateForward.add(listener);
+    public EventsRegistry afterNavigateForward(NavigateListener listener) {
+        afterNavigateForward.add(listener);
         return this;
     }
 
@@ -202,8 +202,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked before navigating.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry beforeNavigate(final NavigateAllListener listener) {
-        this.beforeNavigate.add(listener);
+    public EventsRegistry beforeNavigate(NavigateAllListener listener) {
+        beforeNavigate.add(listener);
         return this;
     }
 
@@ -213,8 +213,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked after navigating.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry afterNavigate(final NavigateAllListener listener) {
-        this.afterNavigate.add(listener);
+    public EventsRegistry afterNavigate(NavigateAllListener listener) {
+        afterNavigate.add(listener);
         return this;
     }
 
@@ -224,8 +224,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked before refresh.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry beforeNavigateRefresh(final NavigateListener listener) {
-        this.beforeNavigateRefresh.add(listener);
+    public EventsRegistry beforeNavigateRefresh(NavigateListener listener) {
+        beforeNavigateRefresh.add(listener);
         return this;
     }
 
@@ -235,8 +235,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked after refresh.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry afterNavigateRefresh(final NavigateListener listener) {
-        this.afterNavigateRefresh.add(listener);
+    public EventsRegistry afterNavigateRefresh(NavigateListener listener) {
+        afterNavigateRefresh.add(listener);
         return this;
     }
 
@@ -246,8 +246,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked before finding an element.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry beforeFindBy(final FindByListener listener) {
-        this.beforeFindBy.add(listener);
+    public EventsRegistry beforeFindBy(FindByListener listener) {
+        beforeFindBy.add(listener);
         return this;
     }
 
@@ -257,8 +257,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked after finding an element.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry afterFindBy(final FindByListener listener) {
-        this.afterFindBy.add(listener);
+    public EventsRegistry afterFindBy(FindByListener listener) {
+        afterFindBy.add(listener);
         return this;
     }
 
@@ -268,8 +268,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked before clicking an element.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry beforeClickOn(final ElementListener listener) {
-        this.beforeClickOn.add(listener);
+    public EventsRegistry beforeClickOn(ElementListener listener) {
+        beforeClickOn.add(listener);
         return this;
     }
 
@@ -279,8 +279,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked after clicking an element.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry afterClickOn(final ElementListener listener) {
-        this.afterClickOn.add(listener);
+    public EventsRegistry afterClickOn(ElementListener listener) {
+        afterClickOn.add(listener);
         return this;
     }
 
@@ -290,8 +290,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked before changing value of an element.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry beforeChangeValueOf(final ElementListener listener) {
-        this.beforeChangeValueOf.add(listener);
+    public EventsRegistry beforeChangeValueOf(ElementListener listener) {
+        beforeChangeValueOf.add(listener);
         return this;
     }
 
@@ -301,8 +301,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked after changing value of an element.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry afterChangeValueOf(final ElementListener listener) {
-        this.afterChangeValueOf.add(listener);
+    public EventsRegistry afterChangeValueOf(ElementListener listener) {
+        afterChangeValueOf.add(listener);
         return this;
     }
 
@@ -312,8 +312,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked before executing a script.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry beforeScript(final ScriptListener listener) {
-        this.beforeScript.add(listener);
+    public EventsRegistry beforeScript(ScriptListener listener) {
+        beforeScript.add(listener);
         return this;
     }
 
@@ -323,8 +323,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked after executing a script.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry afterScript(final ScriptListener listener) {
-        this.afterScript.add(listener);
+    public EventsRegistry afterScript(ScriptListener listener) {
+        afterScript.add(listener);
         return this;
     }
 
@@ -334,8 +334,8 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param listener listener invoked after an exception occurred.
      * @return {@code this} to chain method calls
      */
-    public EventsRegistry onException(final ExceptionListener listener) {
-        this.onException.add(listener);
+    public EventsRegistry onException(ExceptionListener listener) {
+        onException.add(listener);
         return this;
     }
 
@@ -345,7 +345,7 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @see ListenerPriorityComparator
      */
     protected void sortListeners() {
-        final ListenerPriorityComparator comparator = new ListenerPriorityComparator();
+        ListenerPriorityComparator comparator = new ListenerPriorityComparator();
 
         Collections.sort(beforeNavigateTo, comparator);
         Collections.sort(afterNavigateTo, comparator);
@@ -382,7 +382,7 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      *
      * @param container container
      */
-    public void unregisterContainer(final Object container) {
+    public void unregisterContainer(Object container) {
         unregisterContainer(beforeNavigateTo, container);
         unregisterContainer(afterNavigateTo, container);
 
@@ -413,10 +413,10 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
         unregisterContainer(onException, container);
     }
 
-    private void unregisterContainer(final Iterable iterable, final Object container) {
-        final Iterator<?> iterator = iterable.iterator();
+    private void unregisterContainer(Iterable iterable, Object container) {
+        Iterator<?> iterator = iterable.iterator();
         while (iterator.hasNext()) {
-            final Object next = iterator.next();
+            Object next = iterator.next();
             if (next instanceof ContainerListener && next == container) { // NOPMD CompareObjectsWithEquals
                 iterator.remove();
             }

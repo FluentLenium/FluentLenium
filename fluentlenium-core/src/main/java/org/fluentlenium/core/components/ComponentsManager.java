@@ -34,9 +34,9 @@ public class ComponentsManager extends AbstractComponentInstantiator
      *
      * @param control control interface
      */
-    public ComponentsManager(final FluentControl control) {
+    public ComponentsManager(FluentControl control) {
         this.control = control;
-        this.instantiator = new DefaultComponentInstantiator(this.control, this);
+        instantiator = new DefaultComponentInstantiator(this.control, this);
     }
 
     /**
@@ -49,29 +49,29 @@ public class ComponentsManager extends AbstractComponentInstantiator
     }
 
     @Override
-    public Set<Object> getComponents(final WebElement element) {
+    public Set<Object> getComponents(WebElement element) {
         return components.get(unwrapElement(element));
     }
 
     @Override
-    public boolean isComponentClass(final Class<?> componentClass) {
+    public boolean isComponentClass(Class<?> componentClass) {
         return instantiator.isComponentClass(componentClass);
     }
 
     @Override
-    public boolean isComponentListClass(final Class<? extends List<?>> componentListClass) {
+    public boolean isComponentListClass(Class<? extends List<?>> componentListClass) {
         return instantiator.isComponentListClass(componentListClass);
     }
 
     @Override
-    public <T> T newComponent(final Class<T> componentClass, final WebElement element) {
-        final T component = instantiator.newComponent(componentClass, element);
+    public <T> T newComponent(Class<T> componentClass, WebElement element) {
+        T component = instantiator.newComponent(componentClass, element);
         register(element, component);
         return component;
     }
 
-    private <T> void register(final WebElement element, final T component) {
-        final WebElement webElement = unwrapElement(element);
+    private <T> void register(WebElement element, T component) {
+        WebElement webElement = unwrapElement(element);
         LocatorProxies.addProxyListener(webElement, this);
         synchronized (this) {
             Set<Object> elementComponents = components.get(webElement);
@@ -84,18 +84,17 @@ public class ComponentsManager extends AbstractComponentInstantiator
     }
 
     @Override
-    public <L extends List<T>, T> L newComponentList(final Class<L> listClass, final Class<T> componentClass,
-            final List<T> componentsList) {
+    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, List<T> componentsList) {
         return instantiator.newComponentList(listClass, componentClass, componentsList);
     }
 
     @Override
-    public <L extends List<T>, T> L asComponentList(final Class<L> listClass, final Class<T> componentClass,
-            final Iterable<WebElement> elementList) {
-        final L componentList = instantiator.asComponentList(listClass, componentClass, elementList);
+    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass,
+            Iterable<WebElement> elementList) {
+        L componentList = instantiator.asComponentList(listClass, componentClass, elementList);
 
         int i = 0;
-        for (final WebElement element : elementList) {
+        for (WebElement element : elementList) {
             register(element, componentList.get(i));
             i++;
         }
@@ -104,15 +103,15 @@ public class ComponentsManager extends AbstractComponentInstantiator
     }
 
     @Override
-    public void proxyElementSearch(final Object proxy, final ElementLocator locator) {
+    public void proxyElementSearch(Object proxy, ElementLocator locator) {
         // Do nothing.
     }
 
     @Override
-    public void proxyElementFound(final Object proxy, final ElementLocator locator, final List<WebElement> elements) {
+    public void proxyElementFound(Object proxy, ElementLocator locator, List<WebElement> elements) {
         synchronized (this) {
-            for (final WebElement element : elements) {
-                final Set<Object> proxyComponents = components.remove(proxy);
+            for (WebElement element : elements) {
+                Set<Object> proxyComponents = components.remove(proxy);
                 if (proxyComponents != null) {
                     components.put(unwrapElement(element), proxyComponents);
                 }
@@ -120,9 +119,9 @@ public class ComponentsManager extends AbstractComponentInstantiator
         }
     }
 
-    private WebElement unwrapElement(final WebElement element) {
+    private WebElement unwrapElement(WebElement element) {
         if (element instanceof WrapsElement) {
-            final WebElement wrappedElement = ((WrapsElement) element).getWrappedElement();
+            WebElement wrappedElement = ((WrapsElement) element).getWrappedElement();
             if (wrappedElement != element && wrappedElement != null) { // NOPMD CompareObjectsWithEquals
                 return unwrapElement(wrappedElement);
             }
@@ -134,7 +133,7 @@ public class ComponentsManager extends AbstractComponentInstantiator
      * Release this manager.
      */
     public void release() {
-        for (final WebElement element : components.keySet()) {
+        for (WebElement element : components.keySet()) {
             LocatorProxies.removeProxyListener(element, this);
         }
         components.clear();

@@ -23,9 +23,9 @@ public class RemoteWebDriverTest {
 
     @Before
     public void before() {
-        final RemoteWebDriverFactory factory = new RemoteWebDriverFactory() {
+        RemoteWebDriverFactory factory = new RemoteWebDriverFactory() {
             @Override
-            protected WebDriver newRemoteWebDriver(final Object... args)
+            protected WebDriver newRemoteWebDriver(Object... args)
                     throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
                 return webDriver;
             }
@@ -36,10 +36,10 @@ public class RemoteWebDriverTest {
     @Test
     public void testDefault()
             throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        final WebDriver newWebDriver = factorySpy.newWebDriver(null, null);
+        WebDriver newWebDriver = factorySpy.newWebDriver(null, null);
         Assertions.assertThat(newWebDriver).isSameAs(webDriver);
 
-        final DesiredCapabilities defaultCapabilities = new DesiredCapabilities();
+        DesiredCapabilities defaultCapabilities = new DesiredCapabilities();
 
         verify(factorySpy).newRemoteWebDriver(new Object[] {null, defaultCapabilities});
     }
@@ -49,13 +49,13 @@ public class RemoteWebDriverTest {
             throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException,
             MalformedURLException {
 
-        final ProgrammaticConfiguration programmaticConfiguration = new ProgrammaticConfiguration();
+        ProgrammaticConfiguration programmaticConfiguration = new ProgrammaticConfiguration();
         programmaticConfiguration.setRemoteUrl("http://localhost:4444");
 
-        final WebDriver newWebDriver = factorySpy.newWebDriver(null, programmaticConfiguration);
+        WebDriver newWebDriver = factorySpy.newWebDriver(null, programmaticConfiguration);
         Assertions.assertThat(newWebDriver).isSameAs(webDriver);
 
-        final DesiredCapabilities defaultCapabilities = new DesiredCapabilities();
+        DesiredCapabilities defaultCapabilities = new DesiredCapabilities();
 
         verify(factorySpy).newRemoteWebDriver(new Object[] {new URL("http://localhost:4444"), defaultCapabilities});
     }
@@ -65,7 +65,7 @@ public class RemoteWebDriverTest {
             throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException,
             MalformedURLException {
 
-        final ProgrammaticConfiguration programmaticConfiguration = new ProgrammaticConfiguration();
+        ProgrammaticConfiguration programmaticConfiguration = new ProgrammaticConfiguration();
         programmaticConfiguration.setRemoteUrl("dummy");
 
         factorySpy.newWebDriver(null, programmaticConfiguration);
@@ -76,12 +76,12 @@ public class RemoteWebDriverTest {
             throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException,
             MalformedURLException {
 
-        final ProgrammaticConfiguration programmaticConfiguration = new ProgrammaticConfiguration();
+        ProgrammaticConfiguration programmaticConfiguration = new ProgrammaticConfiguration();
         programmaticConfiguration.setRemoteUrl("http://localhost:4444");
 
-        final DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 
-        final WebDriver newWebDriver = factorySpy.newWebDriver(capabilities, programmaticConfiguration);
+        WebDriver newWebDriver = factorySpy.newWebDriver(capabilities, programmaticConfiguration);
         Assertions.assertThat(newWebDriver).isSameAs(webDriver);
 
         verify(factorySpy).newRemoteWebDriver(new Object[] {new URL("http://localhost:4444"), capabilities});
@@ -92,9 +92,9 @@ public class RemoteWebDriverTest {
             throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException,
             MalformedURLException {
 
-        final DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 
-        final WebDriver newWebDriver = factorySpy.newWebDriver(capabilities, null);
+        WebDriver newWebDriver = factorySpy.newWebDriver(capabilities, null);
         Assertions.assertThat(newWebDriver).isSameAs(webDriver);
 
         verify(factorySpy).newRemoteWebDriver(new Object[] {null, capabilities});

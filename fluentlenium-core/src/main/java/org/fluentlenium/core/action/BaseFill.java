@@ -16,8 +16,8 @@ public class BaseFill<E extends FluentWebElement> {
      *
      * @param list list of element to fill
      */
-    public BaseFill(final FluentList<E> list) {
-        this.fluentList = list;
+    public BaseFill(FluentList<E> list) {
+        fluentList = list;
     }
 
     /**
@@ -25,7 +25,7 @@ public class BaseFill<E extends FluentWebElement> {
      *
      * @param element element to fill
      */
-    public BaseFill(final E element) {
+    public BaseFill(E element) {
         this((FluentList<E>) element.asList());
     }
 

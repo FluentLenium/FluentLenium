@@ -33,7 +33,7 @@ public class ContainerFluentControl implements FluentControl {
      *
      * @param adapterControl test adapter control interface
      */
-    public ContainerFluentControl(final FluentControl adapterControl) {
+    public ContainerFluentControl(FluentControl adapterControl) {
         this(adapterControl, null);
     }
 
@@ -43,7 +43,7 @@ public class ContainerFluentControl implements FluentControl {
      * @param adapterControl test adapter control interface
      * @param context        container context
      */
-    public ContainerFluentControl(final FluentControl adapterControl, final ContainerContext context) {
+    public ContainerFluentControl(FluentControl adapterControl, ContainerContext context) {
         this.adapterControl = adapterControl;
         this.context = context;
     }
@@ -53,13 +53,13 @@ public class ContainerFluentControl implements FluentControl {
      *
      * @param context container context
      */
-    public void setContext(final ContainerContext context) {
+    public void setContext(ContainerContext context) {
         this.context = context;
     }
 
-    private <T extends HookControl<?>> T applyHooks(final T hookControl) {
+    private <T extends HookControl<?>> T applyHooks(T hookControl) {
         if (context != null) {
-            for (final HookDefinition hookDefinition : context.getHookDefinitions()) {
+            for (HookDefinition hookDefinition : context.getHookDefinitions()) {
                 hookControl.withHook(hookDefinition.getHookClass(), hookDefinition.getOptions());
             }
         }
@@ -67,47 +67,47 @@ public class ContainerFluentControl implements FluentControl {
     }
 
     @Override
-    public FluentList<FluentWebElement> find(final String selector, final SearchFilter... filters) {
+    public FluentList<FluentWebElement> find(String selector, SearchFilter... filters) {
         return applyHooks(adapterControl.find(selector, filters));
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final String selector, final SearchFilter... filters) {
+    public FluentList<FluentWebElement> $(String selector, SearchFilter... filters) {
         return applyHooks(adapterControl.$(selector, filters));
     }
 
     @Override
-    public FluentWebElement el(final String selector, final SearchFilter... filters) {
+    public FluentWebElement el(String selector, SearchFilter... filters) {
         return applyHooks(adapterControl.el(selector, filters));
     }
 
     @Override
-    public FluentList<FluentWebElement> find(final SearchFilter... filters) {
+    public FluentList<FluentWebElement> find(SearchFilter... filters) {
         return applyHooks(adapterControl.find(filters));
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final SearchFilter... filters) {
+    public FluentList<FluentWebElement> $(SearchFilter... filters) {
         return applyHooks(adapterControl.$(filters));
     }
 
     @Override
-    public FluentWebElement el(final SearchFilter... filters) {
+    public FluentWebElement el(SearchFilter... filters) {
         return applyHooks(adapterControl.el(filters));
     }
 
     @Override
-    public FluentList<FluentWebElement> find(final By locator, final SearchFilter... filters) {
+    public FluentList<FluentWebElement> find(By locator, SearchFilter... filters) {
         return applyHooks(adapterControl.find(locator, filters));
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final By locator, final SearchFilter... filters) {
+    public FluentList<FluentWebElement> $(By locator, SearchFilter... filters) {
         return applyHooks(adapterControl.$(locator, filters));
     }
 
     @Override
-    public FluentWebElement el(final By locator, final SearchFilter... filters) {
+    public FluentWebElement el(By locator, SearchFilter... filters) {
         return applyHooks(adapterControl.el(locator, filters));
     }
 

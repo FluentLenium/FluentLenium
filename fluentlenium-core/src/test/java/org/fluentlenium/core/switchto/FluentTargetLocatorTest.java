@@ -52,15 +52,15 @@ public class FluentTargetLocatorTest {
 
     @Test
     public void frameElement() {
-        final WebElement webElement = mock(WebElement.class);
+        WebElement webElement = mock(WebElement.class);
         assertThat(fluentTargetLocator.frame(webElement)).isSameAs(self);
         verify(targetLocator).frame(webElement);
     }
 
     @Test
     public void frameFluentElement() {
-        final FluentWebElement fluentWebElement = mock(FluentWebElement.class);
-        final WebElement element = mock(WebElement.class);
+        FluentWebElement fluentWebElement = mock(FluentWebElement.class);
+        WebElement element = mock(WebElement.class);
         when(fluentWebElement.getElement()).thenReturn(element);
         assertThat(fluentTargetLocator.frame(fluentWebElement)).isSameAs(self);
         verify(targetLocator).frame(element);
@@ -86,10 +86,10 @@ public class FluentTargetLocatorTest {
 
     @Test
     public void activeElement() {
-        final WebElement element = mock(WebElement.class);
+        WebElement element = mock(WebElement.class);
 
         when(targetLocator.activeElement()).thenReturn(element);
-        final FluentWebElement activeElement = fluentTargetLocator.activeElement();
+        FluentWebElement activeElement = fluentTargetLocator.activeElement();
 
         assertThat(activeElement).isNotNull();
         assertThat(activeElement.getElement()).isSameAs(element);
@@ -97,7 +97,7 @@ public class FluentTargetLocatorTest {
 
     @Test
     public void alert() {
-        final Alert alertMock = mock(Alert.class);
+        Alert alertMock = mock(Alert.class);
         when(targetLocator.alert()).thenReturn(alertMock);
 
         fluentTargetLocator.alert();

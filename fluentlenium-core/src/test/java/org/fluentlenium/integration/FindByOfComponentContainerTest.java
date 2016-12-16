@@ -21,8 +21,7 @@ public class FindByOfComponentContainerTest extends IntegrationFluentTest {
     private ContainerIndex page;
 
     public static class SomeFluentWebElement extends FluentWebElement {
-        public SomeFluentWebElement(final WebElement webElement, final FluentControl fluentControl,
-                final ComponentInstantiator instantiator) {
+        public SomeFluentWebElement(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
     }
@@ -31,13 +30,13 @@ public class FindByOfComponentContainerTest extends IntegrationFluentTest {
         private final WebElement element;
         private final WebDriver driver;
 
-        public SomeWebElementWrapper(final WebElement webElement) {
-            this.element = webElement;
-            this.driver = null;
+        public SomeWebElementWrapper(WebElement webElement) {
+            element = webElement;
+            driver = null;
         }
 
-        public SomeWebElementWrapper(final WebElement webElement, final WebDriver driver) {
-            this.element = webElement;
+        public SomeWebElementWrapper(WebElement webElement, WebDriver driver) {
+            element = webElement;
             this.driver = driver;
         }
 
@@ -68,7 +67,7 @@ public class FindByOfComponentContainerTest extends IntegrationFluentTest {
     public void testFluentWebElementList() {
         goTo(IntegrationFluentTest.DEFAULT_URL);
 
-        for (final SomeFluentWebElement component : page.elementList) {
+        for (SomeFluentWebElement component : page.elementList) {
             assertThat(component).isInstanceOf(SomeFluentWebElement.class);
         }
     }
@@ -77,7 +76,7 @@ public class FindByOfComponentContainerTest extends IntegrationFluentTest {
     public void testFindByComponentList() {
         goTo(IntegrationFluentTest.DEFAULT_URL);
 
-        for (final SomeWebElementWrapper component : page.wrapperList) {
+        for (SomeWebElementWrapper component : page.wrapperList) {
             assertThat(component).isInstanceOf(SomeWebElementWrapper.class);
         }
     }

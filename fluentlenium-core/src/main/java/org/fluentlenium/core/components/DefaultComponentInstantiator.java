@@ -19,9 +19,9 @@ public class DefaultComponentInstantiator extends AbstractComponentInstantiator 
      *
      * @param control control interface
      */
-    public DefaultComponentInstantiator(final FluentControl control) {
+    public DefaultComponentInstantiator(FluentControl control) {
         this.control = control;
-        this.instantiator = this;
+        instantiator = this;
     }
 
     /**
@@ -30,60 +30,59 @@ public class DefaultComponentInstantiator extends AbstractComponentInstantiator 
      * @param control      control interface
      * @param instantiator component instantiator
      */
-    public DefaultComponentInstantiator(final FluentControl control, final ComponentInstantiator instantiator) {
+    public DefaultComponentInstantiator(FluentControl control, ComponentInstantiator instantiator) {
         this.control = control;
         this.instantiator = instantiator;
     }
 
     @Override
-    public boolean isComponentClass(final Class<?> componentClass) {
+    public boolean isComponentClass(Class<?> componentClass) {
         try {
             ReflectionUtils.getConstructorOptional(1, componentClass, WebElement.class, FluentControl.class,
                     ComponentInstantiator.class);
             return true;
-        } catch (final NoSuchMethodException e) {
+        } catch (NoSuchMethodException e) {
             return false;
         }
     }
 
     @Override
-    public boolean isComponentListClass(final Class<? extends List<?>> componentListClass) {
+    public boolean isComponentListClass(Class<? extends List<?>> componentListClass) {
         try {
             ReflectionUtils.getConstructorOptional(1, componentListClass, Class.class, List.class, FluentControl.class,
                     ComponentInstantiator.class);
             return true;
-        } catch (final NoSuchMethodException e) {
+        } catch (NoSuchMethodException e) {
             return false;
         }
     }
 
     @Override
-    public <T> T newComponent(final Class<T> componentClass, final WebElement element) {
+    public <T> T newComponent(Class<T> componentClass, WebElement element) {
         try {
             return ReflectionUtils.newInstanceOptionalArgs(1, componentClass, element, control, instantiator);
-        } catch (final NoSuchMethodException e) {
+        } catch (NoSuchMethodException e) {
             throw new ComponentException(componentClass.getName() + " is not a valid component class.", e);
-        } catch (final IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             throw new ComponentException(componentClass.getName() + " can't be instantiated.", e);
-        } catch (final InvocationTargetException e) {
+        } catch (InvocationTargetException e) {
             throw new ComponentException(componentClass.getName() + " can't be instantiated.", e);
-        } catch (final InstantiationException e) {
+        } catch (InstantiationException e) {
             throw new ComponentException(componentClass.getName() + " can't be instantiated.", e);
         }
     }
 
     @Override
-    public <L extends List<T>, T> L newComponentList(final Class<L> listClass, final Class<T> componentClass,
-            final List<T> componentsList) {
+    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, List<T> componentsList) {
         try {
             return ReflectionUtils.newInstanceOptionalArgs(1, listClass, componentClass, componentsList, control, instantiator);
-        } catch (final NoSuchMethodException e) {
+        } catch (NoSuchMethodException e) {
             throw new ComponentException(listClass.getName() + " is not a valid component list class.", e);
-        } catch (final IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             throw new ComponentException(listClass.getName() + " can't be instantiated.", e);
-        } catch (final InvocationTargetException e) {
+        } catch (InvocationTargetException e) {
             throw new ComponentException(listClass.getName() + " can't be instantiated.", e);
-        } catch (final InstantiationException e) {
+        } catch (InstantiationException e) {
             throw new ComponentException(listClass.getName() + " can't be instantiated.", e);
         }
     }

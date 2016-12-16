@@ -16,12 +16,12 @@ public class InjectionElementLocatorFactory implements ElementLocatorFactory {
      *
      * @param searchContext search context
      */
-    public InjectionElementLocatorFactory(final SearchContext searchContext) {
+    public InjectionElementLocatorFactory(SearchContext searchContext) {
         this.searchContext = searchContext;
     }
 
     @Override
-    public InjectionElementLocator createLocator(final Field field) {
+    public InjectionElementLocator createLocator(Field field) {
         return new InjectionElementLocator(searchContext, new InjectionAnnotations(field),
                 !Iterable.class.isAssignableFrom(field.getType()));
     }

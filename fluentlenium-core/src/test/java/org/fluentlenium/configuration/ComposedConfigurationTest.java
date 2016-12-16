@@ -6,14 +6,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.function.Function;
 
 import static org.mockito.Mockito.RETURNS_DEFAULTS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import java.util.function.Function;
 
 public class ComposedConfigurationTest {
     private ProgrammaticConfiguration configuration;
@@ -28,9 +27,9 @@ public class ComposedConfigurationTest {
 
     @Before
     public void before() {
-        final Answer configurationReadAnswer = new Answer() {
+        Answer configurationReadAnswer = new Answer() {
             @Override
-            public Object answer(final InvocationOnMock invocation) throws Throwable {
+            public Object answer(InvocationOnMock invocation) throws Throwable {
                 if (invocation.getMethod().getReturnType().isPrimitive()) {
                     return RETURNS_DEFAULTS.answer(invocation);
                 }
@@ -56,7 +55,7 @@ public class ComposedConfigurationTest {
 
         when(configurationProperties2.getConfigurationFactory()).thenAnswer(new Answer<Object>() {
             @Override
-            public Object answer(final InvocationOnMock invocation) throws Throwable {
+            public Object answer(InvocationOnMock invocation) throws Throwable {
                 return DummyConfigurationFactory.class;
             }
         });
@@ -69,7 +68,7 @@ public class ComposedConfigurationTest {
 
         when(configurationProperties3.getConfigurationFactory()).thenAnswer(new Answer<Object>() {
             @Override
-            public Object answer(final InvocationOnMock invocation) throws Throwable {
+            public Object answer(InvocationOnMock invocation) throws Throwable {
                 return DefaultConfigurationFactory.class;
             }
         });
@@ -77,8 +76,8 @@ public class ComposedConfigurationTest {
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DummyConfigurationFactory.class);
     }
 
-    private <T> void testImpl(final Function<ConfigurationProperties, T> getter, final Function<T, Void> setter,
-                              final T defaultValue, final T value1, final T value2) {
+    private <T> void testImpl(Function<ConfigurationProperties, T> getter, Function<T, Void> setter, T defaultValue, T value1,
+            T value2) {
         if (defaultValue == null) {
             Assertions.assertThat(getter.apply(composed)).isNull();
         } else {
@@ -102,12 +101,12 @@ public class ComposedConfigurationTest {
     public void webDriver() {
         testImpl(new Function<ConfigurationProperties, String>() {
             @Override
-            public String apply(final ConfigurationProperties input) {
+            public String apply(ConfigurationProperties input) {
                 return input.getWebDriver();
             }
         }, new Function<String, Void>() {
             @Override
-            public Void apply(final String input) {
+            public Void apply(String input) {
                 composed.setWebDriver(input);
                 return null;
             }
@@ -180,10 +179,10 @@ public class ComposedConfigurationTest {
 
     @Test
     public void capabilities() {
-        final DesiredCapabilities cap1 = new DesiredCapabilities();
+        DesiredCapabilities cap1 = new DesiredCapabilities();
         cap1.setJavascriptEnabled(true);
 
-        final DesiredCapabilities cap2 = new DesiredCapabilities();
+        DesiredCapabilities cap2 = new DesiredCapabilities();
         cap2.setJavascriptEnabled(false);
 
         testImpl(input -> input.getCapabilities(), input -> {

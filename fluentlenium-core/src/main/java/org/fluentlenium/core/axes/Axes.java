@@ -1,6 +1,5 @@
 package org.fluentlenium.core.axes;
 
-import java.util.function.Supplier;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentListImpl;
@@ -10,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Handles XPath axes for an element (http://www.w3schools.com/xsl/xpath_axes.asp)
@@ -24,8 +24,8 @@ public class Axes {
      * @param element      reference element
      * @param instantiator component instantiator used to build found elements.
      */
-    public Axes(final WebElement element, final ComponentInstantiator instantiator) {
-        this.webElement = element;
+    public Axes(WebElement element, ComponentInstantiator instantiator) {
+        webElement = element;
         this.instantiator = instantiator;
     }
 
@@ -35,10 +35,10 @@ public class Axes {
      * @return fluent web element
      */
     public FluentWebElement parent() {
-        final WebElement parentElement = LocatorProxies.createWebElement(new Supplier<WebElement>() {
+        WebElement parentElement = LocatorProxies.createWebElement(new Supplier<WebElement>() {
             @Override
             public WebElement get() {
-                return Axes.this.webElement.findElement(By.xpath("parent::*"));
+                return webElement.findElement(By.xpath("parent::*"));
             }
         });
 
@@ -51,11 +51,11 @@ public class Axes {
      * @param axe axe to handle
      * @return list of found elements
      */
-    protected FluentList<FluentWebElement> handleAxe(final String axe) {
-        final List<WebElement> webElementList = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
+    protected FluentList<FluentWebElement> handleAxe(String axe) {
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
             @Override
             public List<WebElement> get() {
-                return Axes.this.webElement.findElements(By.xpath(axe + "::*"));
+                return webElement.findElements(By.xpath(axe + "::*"));
             }
         });
 

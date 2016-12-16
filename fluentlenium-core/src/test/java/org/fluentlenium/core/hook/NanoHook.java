@@ -1,12 +1,12 @@
 package org.fluentlenium.core.hook;
 
-import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class NanoHook extends BaseHook<NanoHookOptions> {
     private long beforeClickNano;
@@ -19,9 +19,8 @@ public class NanoHook extends BaseHook<NanoHookOptions> {
     private long beforeFindElementNano;
     private long afterFindElementNano;
 
-    public NanoHook(final FluentControl fluentControl, final ComponentInstantiator instantiator,
-            final Supplier<WebElement> elementSupplier, final Supplier<ElementLocator> locatorSupplier,
-            final Supplier<String> toStringSupplier, final NanoHookOptions options) {
+    public NanoHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
+            Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, NanoHookOptions options) {
         super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
     }
 

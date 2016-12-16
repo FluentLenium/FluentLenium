@@ -21,26 +21,26 @@ public class MethodInvocationReflectionFactory implements CapabilitiesFactory, F
      * @param instance instance to use
      * @param args     arguments to pass
      */
-    public MethodInvocationReflectionFactory(final Method method, final Object instance, final Object... args) {
+    public MethodInvocationReflectionFactory(Method method, Object instance, Object... args) {
         this.method = method;
         this.instance = instance;
         this.args = args;
     }
 
     @Override
-    public Capabilities newCapabilities(final ConfigurationProperties configuration) {
+    public Capabilities newCapabilities(ConfigurationProperties configuration) {
         try {
-            return (Capabilities) this.method.invoke(instance, args);
-        } catch (final IllegalAccessException e) {
+            return (Capabilities) method.invoke(instance, args);
+        } catch (IllegalAccessException e) {
             throw new ConfigurationException("Can't create capabilities instance", e);
-        } catch (final InvocationTargetException e) {
+        } catch (InvocationTargetException e) {
             throw new ConfigurationException("Can't create capabilities instance", e);
         }
     }
 
     @Override
     public String[] getNames() {
-        return new String[] {this.method.getDeclaringClass().getName() + "." + this.method.getName(),
-                this.method.getDeclaringClass().getSimpleName() + "." + this.method.getName(), this.method.getName()};
+        return new String[] {method.getDeclaringClass().getName() + "." + method.getName(),
+                method.getDeclaringClass().getSimpleName() + "." + method.getName(), method.getName()};
     }
 }

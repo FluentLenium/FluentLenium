@@ -5,7 +5,7 @@ package org.fluentlenium.configuration;
  */
 public class SystemPropertiesBackend implements PropertiesBackend {
     @Override
-    public String getProperty(final String propertyName) {
+    public String getProperty(String propertyName) {
         return System.getProperty(propertyName);
     }
 }

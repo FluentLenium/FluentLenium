@@ -12,7 +12,7 @@ public class ConstructorInitialization extends FluentTest {
 
     @Test
     public void doNotUseOverridableMethodsInAConstructor() {
-        assertThat(webDriver).isEqualTo(this.getDriver());
+        assertThat(webDriver).isEqualTo(getDriver());
     }
 
     @Override

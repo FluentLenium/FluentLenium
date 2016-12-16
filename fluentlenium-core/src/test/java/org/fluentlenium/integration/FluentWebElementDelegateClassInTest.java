@@ -12,7 +12,7 @@ public class FluentWebElementDelegateClassInTest extends IntegrationFluentTest {
     public static class ALink {
         private final WebElement webElement;
 
-        public ALink(final WebElement webElement) {
+        public ALink(WebElement webElement) {
             this.webElement = webElement;
         }
 

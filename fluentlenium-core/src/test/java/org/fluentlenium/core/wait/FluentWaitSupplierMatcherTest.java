@@ -1,6 +1,5 @@
 package org.fluentlenium.core.wait;
 
-import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
@@ -55,7 +54,7 @@ public class FluentWaitSupplierMatcherTest {
 
     @Test
     public void isEnabled() {
-        final FluentConditions matcher = wait.untilElement(() -> fluentWebElement);
+        FluentConditions matcher = wait.untilElement(() -> fluentWebElement);
         assertThatThrownBy(() -> matcher.enabled()).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement, atLeastOnce()).enabled();

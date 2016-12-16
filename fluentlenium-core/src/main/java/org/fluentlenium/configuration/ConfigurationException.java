@@ -9,7 +9,7 @@ public class ConfigurationException extends RuntimeException {
      *
      * @param message the exception message
      */
-    public ConfigurationException(final String message) {
+    public ConfigurationException(String message) {
         super(message);
     }
 
@@ -19,7 +19,7 @@ public class ConfigurationException extends RuntimeException {
      * @param message the exception message
      * @param cause   the exception cause
      */
-    public ConfigurationException(final String message, final Throwable cause) {
+    public ConfigurationException(String message, Throwable cause) {
         super(message, cause);
     }
 }

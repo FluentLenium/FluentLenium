@@ -17,7 +17,7 @@ public final class CalculateService {
      * @param currentValue   current value
      * @return boolean value for contains check
      */
-    public static boolean contains(final Pattern patternValue, final String referenceValue, final String currentValue) {
+    public static boolean contains(Pattern patternValue, String referenceValue, String currentValue) {
         if (currentValue == null) {
             return false;
         }
@@ -35,7 +35,7 @@ public final class CalculateService {
      * @param currentValue   current value
      * @return boolean value for equal check
      */
-    public static boolean equal(final Pattern patternValue, final String referenceValue, final String currentValue) {
+    public static boolean equal(Pattern patternValue, String referenceValue, String currentValue) {
         if (currentValue == null) {
             return false;
         }
@@ -54,14 +54,14 @@ public final class CalculateService {
      * @return boolean value for startsWith check
      */
 
-    public static boolean startsWith(final Pattern patternValue, final String referenceValue, final String currentValue) {
+    public static boolean startsWith(Pattern patternValue, String referenceValue, String currentValue) {
         if (currentValue == null) {
             return false;
         }
         if (patternValue == null) {
             return currentValue.startsWith(referenceValue);
         }
-        final java.util.regex.Matcher matcher = patternValue.matcher(currentValue);
+        java.util.regex.Matcher matcher = patternValue.matcher(currentValue);
         return matcher.find() && 0 == matcher.start();
     }
 
@@ -74,14 +74,14 @@ public final class CalculateService {
      * @return boolean value for endsWith check
      */
 
-    public static boolean endsWith(final Pattern patternValue, final String referenceValue, final String currentValue) {
+    public static boolean endsWith(Pattern patternValue, String referenceValue, String currentValue) {
         if (currentValue == null) {
             return false;
         }
         if (patternValue == null) {
             return currentValue.endsWith(referenceValue);
         }
-        final java.util.regex.Matcher matcher = patternValue.matcher(currentValue);
+        java.util.regex.Matcher matcher = patternValue.matcher(currentValue);
         int end = 0;
         while (matcher.find()) {
             end = matcher.end();

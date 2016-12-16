@@ -29,10 +29,10 @@ public enum BrowserType {
 
     protected abstract DesiredCapabilities getBrowserCapabilities();
 
-    public WebDriver getRemoteWebDriver(final String hubLocation) {
+    public WebDriver getRemoteWebDriver(String hubLocation) {
         try {
             return new Augmenter().augment(new RemoteWebDriver(new URL(hubLocation), getBrowserCapabilities()));
-        } catch (final MalformedURLException e) {
+        } catch (MalformedURLException e) {
             throw new ConfigException("Invalid hub location: " + hubLocation, e);
         }
     }

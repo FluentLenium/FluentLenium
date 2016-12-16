@@ -19,7 +19,7 @@ public class ClassAnnotations extends AbstractAnnotations {
      *
      * @param containerClass container class on witch to read annotations
      */
-    public ClassAnnotations(final Class<?> containerClass) {
+    public ClassAnnotations(Class<?> containerClass) {
         this.containerClass = containerClass;
     }
 
@@ -43,17 +43,17 @@ public class ClassAnnotations extends AbstractAnnotations {
 
         By ans = null;
 
-        final FindBys findBys = containerClass.getAnnotation(FindBys.class);
+        FindBys findBys = containerClass.getAnnotation(FindBys.class);
         if (findBys != null) {
             ans = buildByFromFindBys(findBys);
         }
 
-        final FindAll findAll = containerClass.getAnnotation(FindAll.class);
+        FindAll findAll = containerClass.getAnnotation(FindAll.class);
         if (ans == null && findAll != null) {
             ans = buildBysFromFindByOneOf(findAll);
         }
 
-        final FindBy findBy = containerClass.getAnnotation(FindBy.class);
+        FindBy findBy = containerClass.getAnnotation(FindBy.class);
         if (ans == null && findBy != null) {
             ans = buildByFromFindBy(findBy);
         }
@@ -74,9 +74,9 @@ public class ClassAnnotations extends AbstractAnnotations {
      * Assert that defined annotations are valid.
      */
     protected void assertValidAnnotations() {
-        final FindBys findBys = containerClass.getAnnotation(FindBys.class);
-        final FindAll findAll = containerClass.getAnnotation(FindAll.class); // NOPMD PrematureDeclaration
-        final FindBy findBy = containerClass.getAnnotation(FindBy.class);
+        FindBys findBys = containerClass.getAnnotation(FindBys.class);
+        FindAll findAll = containerClass.getAnnotation(FindAll.class); // NOPMD PrematureDeclaration
+        FindBy findBy = containerClass.getAnnotation(FindBy.class);
         if (findBys != null && findBy != null) {
             throw new IllegalArgumentException(
                     "If you use a '@FindBys' annotation, " + "you must not also use a '@FindBy' annotation");

@@ -15,7 +15,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      *
      * @param actual actual element list
      */
-    public FluentListAssert(final FluentList<?> actual) {
+    public FluentListAssert(FluentList<?> actual) {
         super(actual, FluentListAssert.class);
     }
 
@@ -25,9 +25,9 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @param textToFind text to find
      * @return assertion object
      */
-    public FluentListAssert hasText(final String textToFind) {
-        final List<String> actualTexts = actual.texts();
-        for (final String text : actualTexts) {
+    public FluentListAssert hasText(String textToFind) {
+        List<String> actualTexts = actual.texts();
+        for (String text : actualTexts) {
             if (text.contains(textToFind)) {
                 return this;
             }
@@ -42,9 +42,9 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @param textToFind text to find
      * @return assertion object
      */
-    public FluentListAssert hasNotText(final String textToFind) {
-        final List<String> actualTexts = actual.texts();
-        for (final String text : actualTexts) {
+    public FluentListAssert hasNotText(String textToFind) {
+        List<String> actualTexts = actual.texts();
+        for (String text : actualTexts) {
             if (text.contains(textToFind)) {
                 super.failWithMessage(
                         "At least one selected elements contains text: " + textToFind + " . Actual texts found : " + actualTexts);
@@ -59,8 +59,8 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @param expectedSize expected size
      * @return assertion object
      */
-    public FluentListAssert hasSize(final int expectedSize) {
-        final int actualSize = actual.size();
+    public FluentListAssert hasSize(int expectedSize) {
+        int actualSize = actual.size();
         if (actualSize != expectedSize) {
             super.failWithMessage("Expected size: " + expectedSize + ". Actual size: " + actualSize + ".");
         }
@@ -82,8 +82,8 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @param idToFind id to find
      * @return assertion object
      */
-    public FluentListAssert hasId(final String idToFind) {
-        final List actualIds = actual.ids();
+    public FluentListAssert hasId(String idToFind) {
+        List actualIds = actual.ids();
         if (!actualIds.contains(idToFind)) {
             super.failWithMessage("No selected elements has id: " + idToFind + " . Actual texts found : " + actualIds);
         }
@@ -96,18 +96,18 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      * @param classToFind class to find
      * @return assertion object
      */
-    public FluentListAssert hasClass(final String classToFind) {
-        final List<String> classes = (List<String>) actual.attributes("class");
+    public FluentListAssert hasClass(String classToFind) {
+        List<String> classes = (List<String>) actual.attributes("class");
 
-        for (final String classesStr : classes) {
-            final List<String> classesLst = Arrays.asList(classesStr.split(" "));
+        for (String classesStr : classes) {
+            List<String> classesLst = Arrays.asList(classesStr.split(" "));
             if (classesLst.contains(classToFind)) {
                 return this;
             }
         }
 
-        final StringBuilder builder = new StringBuilder();
-        for (final String classFromElement : classes) {
+        StringBuilder builder = new StringBuilder();
+        for (String classFromElement : classes) {
             if (builder.length() > 0) {
                 builder.append(", ");
             }
@@ -120,7 +120,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     }
 
     @Override
-    protected void failWithMessage(final String errorMessage, final Object... arguments) {
+    protected void failWithMessage(String errorMessage, Object... arguments) {
         super.failWithMessage(errorMessage);
     }
 

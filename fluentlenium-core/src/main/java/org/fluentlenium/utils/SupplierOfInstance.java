@@ -18,7 +18,7 @@ public class SupplierOfInstance<T> implements Supplier<T> {
      *
      * @param instance instance ot wrap
      */
-    public SupplierOfInstance(final T instance) {
+    public SupplierOfInstance(T instance) {
         this.instance = instance;
     }
 
@@ -28,9 +28,9 @@ public class SupplierOfInstance<T> implements Supplier<T> {
     }
 
     @Override
-    public boolean equals(final Object obj) {
+    public boolean equals(Object obj) {
         if (obj instanceof SupplierOfInstance) {
-            final SupplierOfInstance that = (SupplierOfInstance) obj;
+            SupplierOfInstance that = (SupplierOfInstance) obj;
             return Objects.equals(instance, that.instance);
         }
         return false;

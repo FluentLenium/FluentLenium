@@ -41,9 +41,9 @@ public class AxesTest {
 
     @Test
     public void testAncestors() {
-        final Axes axes = new Axes(element, instantiator);
+        Axes axes = new Axes(element, instantiator);
 
-        final List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
+        List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("ancestor::*"))).thenReturn(elements);
 
         assertThat(axes.ancestors().toElements()).isEqualTo(elements);
@@ -51,9 +51,9 @@ public class AxesTest {
 
     @Test
     public void testDescendants() {
-        final Axes axes = new Axes(element, instantiator);
+        Axes axes = new Axes(element, instantiator);
 
-        final List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
+        List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("descendant::*"))).thenReturn(elements);
 
         assertThat(axes.descendants().toElements()).isEqualTo(elements);
@@ -61,9 +61,9 @@ public class AxesTest {
 
     @Test
     public void testFollowings() {
-        final Axes axes = new Axes(element, instantiator);
+        Axes axes = new Axes(element, instantiator);
 
-        final List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
+        List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("following::*"))).thenReturn(elements);
 
         assertThat(axes.followings().toElements()).isEqualTo(elements);
@@ -71,9 +71,9 @@ public class AxesTest {
 
     @Test
     public void testFollowingSiblings() {
-        final Axes axes = new Axes(element, instantiator);
+        Axes axes = new Axes(element, instantiator);
 
-        final List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
+        List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("following-sibling::*"))).thenReturn(elements);
 
         assertThat(axes.followingSiblings().toElements()).isEqualTo(elements);
@@ -81,9 +81,9 @@ public class AxesTest {
 
     @Test
     public void testPrecedings() {
-        final Axes axes = new Axes(element, instantiator);
+        Axes axes = new Axes(element, instantiator);
 
-        final List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
+        List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("preceding::*"))).thenReturn(elements);
 
         assertThat(axes.precedings().toElements()).isEqualTo(elements);
@@ -91,9 +91,9 @@ public class AxesTest {
 
     @Test
     public void testPrecedingSiblings() {
-        final Axes axes = new Axes(element, instantiator);
+        Axes axes = new Axes(element, instantiator);
 
-        final List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
+        List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("preceding-sibling::*"))).thenReturn(elements);
 
         assertThat(axes.precedingSiblings().toElements()).isEqualTo(elements);
@@ -101,9 +101,9 @@ public class AxesTest {
 
     @Test
     public void testParent() {
-        final Axes axes = new Axes(element, instantiator);
+        Axes axes = new Axes(element, instantiator);
 
-        final WebElement parent = mock(WebElement.class);
+        WebElement parent = mock(WebElement.class);
         when(element.findElement(By.xpath("parent::*"))).thenReturn(parent);
 
         assertThat(axes.parent().getElement()).isEqualTo(parent);

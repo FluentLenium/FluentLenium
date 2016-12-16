@@ -1,10 +1,10 @@
 package org.fluentlenium.core.conditions;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * Conditions for list of integers.
@@ -18,9 +18,8 @@ public class IntegerListConditionsImpl extends BaseObjectListConditions<Integer,
      * @param objectGetter     getter of the underlying object
      * @param conditionsGetter getter of the underlying conditions
      */
-    public IntegerListConditionsImpl(final Conditions<FluentWebElement> conditions,
-            final Function<FluentWebElement, Integer> objectGetter,
-            final Function<FluentWebElement, IntegerConditions> conditionsGetter) {
+    public IntegerListConditionsImpl(Conditions<FluentWebElement> conditions, Function<FluentWebElement, Integer> objectGetter,
+            Function<FluentWebElement, IntegerConditions> conditionsGetter) {
         super(conditions, objectGetter, conditionsGetter);
     }
 
@@ -30,13 +29,12 @@ public class IntegerListConditionsImpl extends BaseObjectListConditions<Integer,
      * @param conditions   list conditions
      * @param objectGetter getter of the underlying object
      */
-    public IntegerListConditionsImpl(final Conditions<FluentWebElement> conditions,
-            final Function<FluentWebElement, Integer> objectGetter) {
+    public IntegerListConditionsImpl(Conditions<FluentWebElement> conditions, Function<FluentWebElement, Integer> objectGetter) {
         this(conditions, objectGetter, input -> new IntegerConditionsImpl(objectGetter.apply(input)));
     }
 
     @Override
-    public boolean verify(final Predicate<Integer> predicate) {
+    public boolean verify(Predicate<Integer> predicate) {
         return conditions.verify(input -> predicate.test(objectGetter.apply(input)));
     }
 
@@ -46,27 +44,27 @@ public class IntegerListConditionsImpl extends BaseObjectListConditions<Integer,
     }
 
     @Override
-    public boolean equalTo(final int value) {
-        return this.conditions.verify(input -> conditionsGetter.apply(input).equalTo(value));
+    public boolean equalTo(int value) {
+        return conditions.verify(input -> conditionsGetter.apply(input).equalTo(value));
     }
 
     @Override
-    public boolean lessThan(final int value) {
-        return this.conditions.verify(input -> conditionsGetter.apply(input).lessThan(value));
+    public boolean lessThan(int value) {
+        return conditions.verify(input -> conditionsGetter.apply(input).lessThan(value));
     }
 
     @Override
-    public boolean lessThanOrEqualTo(final int value) {
-        return this.conditions.verify(input -> conditionsGetter.apply(input).lessThanOrEqualTo(value));
+    public boolean lessThanOrEqualTo(int value) {
+        return conditions.verify(input -> conditionsGetter.apply(input).lessThanOrEqualTo(value));
     }
 
     @Override
-    public boolean greaterThan(final int value) {
-        return this.conditions.verify(input -> conditionsGetter.apply(input).greaterThan(value));
+    public boolean greaterThan(int value) {
+        return conditions.verify(input -> conditionsGetter.apply(input).greaterThan(value));
     }
 
     @Override
-    public boolean greaterThanOrEqualTo(final int value) {
-        return this.conditions.verify(input -> conditionsGetter.apply(input).greaterThanOrEqualTo(value));
+    public boolean greaterThanOrEqualTo(int value) {
+        return conditions.verify(input -> conditionsGetter.apply(input).greaterThanOrEqualTo(value));
     }
 }

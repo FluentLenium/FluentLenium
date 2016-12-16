@@ -1,12 +1,13 @@
 package org.fluentlenium.core.hook;
 
-import java.util.function.Supplier;
 import lombok.experimental.Delegate;
 import org.fluentlenium.core.DefaultFluentContainer;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+
+import java.util.function.Supplier;
 
 /**
  * Base hook implementation.
@@ -63,9 +64,8 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
      * @param toStringSupplier element toString supplier
      * @param options          hook options
      */
-    public BaseHook(final FluentControl control, final ComponentInstantiator instantiator,
-            final Supplier<WebElement> elementSupplier, final Supplier<ElementLocator> locatorSupplier,
-            final Supplier<String> toStringSupplier, final T options) {
+    public BaseHook(FluentControl control, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
+            Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, T options) {
         super(control);
         this.instantiator = instantiator;
         this.elementSupplier = elementSupplier;

@@ -34,8 +34,8 @@ public class SeleniumFindBy extends IntegrationFluentTest {
         page.isAt();
         assertThat(page.smalls).hasSize(3);
 
-        final List<String> texts = new ArrayList<>();
-        for (final WebElement e : page.smalls) {
+        List<String> texts = new ArrayList<>();
+        for (WebElement e : page.smalls) {
             texts.add(e.getText());
         }
 
@@ -48,8 +48,8 @@ public class SeleniumFindBy extends IntegrationFluentTest {
         page.isAt();
         assertThat(page.findAllElements).hasSize(4);
 
-        final List<String> texts = new ArrayList<>();
-        for (final WebElement e : page.findAllElements) {
+        List<String> texts = new ArrayList<>();
+        for (WebElement e : page.findAllElements) {
             texts.add(e.getText());
         }
 

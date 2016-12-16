@@ -1,6 +1,5 @@
 package org.fluentlenium.core.proxy;
 
-import java.util.function.Supplier;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +14,7 @@ public class ElementSupplierLocatorTest {
 
     @Test
     public void testWithMockElement() {
-        final ElementSupplierLocator locator = new ElementSupplierLocator(() -> element);
+        ElementSupplierLocator locator = new ElementSupplierLocator(() -> element);
 
         Assertions.assertThat(locator.findElement()).isSameAs(element);
         Assertions.assertThat(locator.findElements()).containsExactly(element);
@@ -23,7 +22,7 @@ public class ElementSupplierLocatorTest {
 
     @Test
     public void testWithNullElement() {
-        final ElementSupplierLocator locator = new ElementSupplierLocator(() -> null);
+        ElementSupplierLocator locator = new ElementSupplierLocator(() -> null);
 
         Assertions.assertThat(locator.findElement()).isNull();
         Assertions.assertThat(locator.findElements()).isEmpty();

@@ -19,7 +19,7 @@ public class MouseActions {
      *
      * @param driver driver
      */
-    public MouseActions(final WebDriver driver) {
+    public MouseActions(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -29,7 +29,7 @@ public class MouseActions {
      * @param keyboard the selenium keyboard interface
      * @param mouse    the selenium mouse interface
      */
-    public MouseActions(final Keyboard keyboard, final Mouse mouse) {
+    public MouseActions(Keyboard keyboard, Mouse mouse) {
         this.keyboard = keyboard;
         this.mouse = mouse;
     }

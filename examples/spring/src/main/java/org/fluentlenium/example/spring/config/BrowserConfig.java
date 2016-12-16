@@ -18,7 +18,7 @@ public class BrowserConfig {
      * @param useHub      use hub
      * @param hubLocation hub url
      */
-    public BrowserConfig(final BrowserType browserType, final boolean useHub, final String hubLocation) {
+    public BrowserConfig(BrowserType browserType, boolean useHub, String hubLocation) {
         this.browserType = browserType;
         this.useHub = useHub;
         this.hubLocation = hubLocation;
@@ -32,7 +32,7 @@ public class BrowserConfig {
         return hubLocation;
     }
 
-    public WebDriver resolveDriver(final BrowserConfig browserConfig) {
+    public WebDriver resolveDriver(BrowserConfig browserConfig) {
         return browserConfig.usesHub()
                 ? browserType.getRemoteWebDriver(browserConfig.getHubLocation())
                 : browserType.getWebDriver();

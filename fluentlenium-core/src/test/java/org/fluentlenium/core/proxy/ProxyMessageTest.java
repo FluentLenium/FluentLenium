@@ -31,10 +31,10 @@ public class ProxyMessageTest {
     public void testNoSuchElementMessage() {
         Mockito.when(locator.findElement()).thenReturn(element1);
 
-        final WebElement proxy = LocatorProxies.createWebElement(locator);
+        WebElement proxy = LocatorProxies.createWebElement(locator);
         LocatorProxies.now(proxy);
 
-        final NoSuchElementException noSuchElementException = LocatorProxies.noSuchElement(proxy);
+        NoSuchElementException noSuchElementException = LocatorProxies.noSuchElement(proxy);
 
         Assertions.assertThat(noSuchElementException).hasMessageStartingWith("Element locator (Lazy Element) is not present");
     }
@@ -43,10 +43,10 @@ public class ProxyMessageTest {
     public void testNoSuchElementListMessage() {
         Mockito.when(locator.findElements()).thenReturn(Arrays.asList(element1, element2, element3));
 
-        final List<WebElement> proxy = LocatorProxies.createWebElementList(locator);
+        List<WebElement> proxy = LocatorProxies.createWebElementList(locator);
         LocatorProxies.now(proxy);
 
-        final NoSuchElementException noSuchElementException = LocatorProxies.noSuchElement(proxy);
+        NoSuchElementException noSuchElementException = LocatorProxies.noSuchElement(proxy);
 
         Assertions.assertThat(noSuchElementException)
                 .hasMessageStartingWith("Elements locator (Lazy Element List) is not present");
