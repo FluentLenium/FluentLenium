@@ -26,7 +26,7 @@ public class AlertAssert extends AbstractAssert<AlertAssert, AlertImpl> {
      */
     public AlertAssert hasText(final String text) {
         try {
-            String actualText = actual.getText();
+            final String actualText = actual.getText();
             if (!actualText.contains(text)) {
                 super.failWithMessage(
                         "The alert box does not contain the text: " + text + " . Actual text found : " + actualText);

@@ -126,7 +126,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @return {@code this} assertion object.
      */
     public FluentWebElementAssert hasText(final String textToFind) {
-        String actualText = actual.text();
+        final String actualText = actual.text();
         if (!actualText.contains(textToFind)) {
             failWithMessage("The element does not contain the text: " + textToFind + " . Actual text found : " + actualText);
         }
@@ -141,7 +141,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @return {@code this} assertion object.
      */
     public FluentWebElementAssert hasTextMatching(final String regexToBeMatched) {
-        String actualText = actual.text();
+        final String actualText = actual.text();
         if (!actualText.matches(regexToBeMatched)) {
             failWithMessage(
                     "The element does not match the regex: " + regexToBeMatched + " . Actual text found : " + actualText);
@@ -180,7 +180,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @return {@code this} assertion object.
      */
     public FluentWebElementAssert hasId(final String idToFind) {
-        String actualId = actual.id();
+        final String actualId = actual.id();
         if (!actualId.equals(idToFind)) {
             failWithMessage("The element does not have the id: " + idToFind + " . Actual id found : " + actualId);
         }
@@ -194,7 +194,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @return {@code this} assertion object.
      */
     public FluentWebElementAssert hasClass(final String classToFind) {
-        String actualClasses =  actual.attribute("class");
+        final String actualClasses =  actual.attribute("class");
 
         if (!getClasses(actualClasses).contains(classToFind)) {
             failWithMessage("The element does not have the class: " + classToFind + " . Actual class found : " +
@@ -203,7 +203,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
-    private List<String> getClasses(String classes) {
+    private List<String> getClasses(final String classes) {
         final String[] primitiveList = classes.split(" ");
         return Arrays.asList(primitiveList);
     }
