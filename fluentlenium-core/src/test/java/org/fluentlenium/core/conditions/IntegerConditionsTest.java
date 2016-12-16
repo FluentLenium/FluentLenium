@@ -1,6 +1,6 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,12 +15,7 @@ public class IntegerConditionsTest {
     }
 
     static void assertConditions(final IntegerConditions conditions, final int value) { // NOPMD CommentDefaultAccessModifier
-        assertThat(conditions.verify(new Predicate<Integer>() {
-            @Override
-            public boolean apply(final Integer input) {
-                return input == value;
-            }
-        })).isTrue();
+        assertThat(conditions.verify(input -> input == value)).isTrue();
 
         assertThat(conditions.equalTo(value - 1)).isFalse();
         assertThat(conditions.equalTo(value)).isTrue();
@@ -44,12 +39,7 @@ public class IntegerConditionsTest {
     }
 
     static void assertNotConditions(final IntegerConditions conditions, final int value) { // NOPMD CommentDefaultAccessModifier
-        assertThat(conditions.verify(new Predicate<Integer>() {
-            @Override
-            public boolean apply(final Integer input) {
-                return input == value;
-            }
-        })).isFalse();
+        assertThat(conditions.verify(input -> input == value)).isFalse();
 
         assertThat(conditions.equalTo(value - 1)).isTrue();
         assertThat(conditions.equalTo(value)).isFalse();

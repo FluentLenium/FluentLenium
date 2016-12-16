@@ -1,7 +1,7 @@
 package org.fluentlenium.core.conditions.wait;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Supplier;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;

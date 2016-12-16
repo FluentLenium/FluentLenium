@@ -1,6 +1,6 @@
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.JavascriptExecutor;
@@ -47,12 +47,10 @@ public class FluentWaitPageConditions extends BaseWaitConditions {
      */
     public boolean isLoaded() {
         if (webDriver instanceof JavascriptExecutor) {
-            final Predicate<FluentControl> isLoaded = new Predicate<FluentControl>() {
-                public boolean apply(final FluentControl fluent) {
-                    final Object result = fluent.executeScript("if (document.readyState) return document.readyState;")
-                            .getStringResult();
-                    return result != null && "complete".equals(result);
-                }
+            final Predicate<FluentControl> isLoaded = fluent -> {
+                final Object result = fluent.executeScript("if (document.readyState) return document.readyState;")
+                        .getStringResult();
+                return result != null && "complete".equals(result);
             };
             until(wait, isLoaded, String.format("Page %s should be loaded.", webDriver.getCurrentUrl()));
         } else {
@@ -72,15 +70,13 @@ public class FluentWaitPageConditions extends BaseWaitConditions {
                     "You should use a page argument when you call the untilPage method to specify the page you want to be. "
                             + "Example : await().untilPage(myPage).isAt();");
         }
-        final Predicate<FluentControl> isLoaded = new Predicate<FluentControl>() {
-            public boolean apply(final FluentControl fluent) {
-                try {
-                    page.isAt();
-                } catch (final Error e) {
-                    return false;
-                }
-                return true;
+        final Predicate<FluentControl> isLoaded = fluent -> {
+            try {
+                page.isAt();
+            } catch (final Error e) {
+                return false;
             }
+            return true;
         };
         until(wait, isLoaded, "");
         return true;

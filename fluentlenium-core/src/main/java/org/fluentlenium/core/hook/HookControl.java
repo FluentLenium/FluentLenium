@@ -1,6 +1,6 @@
 package org.fluentlenium.core.hook;
 
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 /**
  * Control interface for hooks.

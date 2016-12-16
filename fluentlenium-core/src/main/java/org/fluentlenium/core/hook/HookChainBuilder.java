@@ -1,6 +1,6 @@
 package org.fluentlenium.core.hook;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 

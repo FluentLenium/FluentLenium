@@ -1,6 +1,6 @@
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.conditions.RectangleConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
@@ -56,12 +56,7 @@ public class FluentWaitIntegerMatcherTest {
 
         final RectangleConditions rectangleConditions = wait.until(fluentWebElement).rectangle();
 
-        rectangleConditions.verify(new Predicate<Rectangle>() {
-            @Override
-            public boolean apply(final Rectangle input) {
-                return true;
-            }
-        });
+        rectangleConditions.verify(input -> true);
 
         rectangleConditions.x().equalTo(1);
         rectangleConditions.x().not().equalTo(2);
@@ -78,26 +73,11 @@ public class FluentWaitIntegerMatcherTest {
         rectangleConditions.x().lessThan(2);
         rectangleConditions.x().not().lessThan(1);
 
-        rectangleConditions.x().verify(new Predicate<Integer>() {
-            @Override
-            public boolean apply(final Integer input) {
-                return input == 1;
-            }
-        });
+        rectangleConditions.x().verify(input -> input == 1);
 
-        rectangleConditions.x().not().verify(new Predicate<Integer>() {
-            @Override
-            public boolean apply(final Integer input) {
-                return input != 1;
-            }
-        });
+        rectangleConditions.x().not().verify(input -> input != 1);
 
-        rectangleConditions.not().x().not().verify(new Predicate<Integer>() {
-            @Override
-            public boolean apply(final Integer input) {
-                return input == 1;
-            }
-        });
+        rectangleConditions.not().x().not().verify(input -> input == 1);
 
     }
 }

@@ -1,7 +1,7 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 import java.util.List;
@@ -32,22 +32,12 @@ public class IntegerListConditionsImpl extends BaseObjectListConditions<Integer,
      */
     public IntegerListConditionsImpl(final Conditions<FluentWebElement> conditions,
             final Function<FluentWebElement, Integer> objectGetter) {
-        this(conditions, objectGetter, new Function<FluentWebElement, IntegerConditions>() {
-            @Override
-            public IntegerConditions apply(final FluentWebElement input) {
-                return new IntegerConditionsImpl(objectGetter.apply(input));
-            }
-        });
+        this(conditions, objectGetter, input -> new IntegerConditionsImpl(objectGetter.apply(input)));
     }
 
     @Override
     public boolean verify(final Predicate<Integer> predicate) {
-        return conditions.verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return predicate.apply(objectGetter.apply(input));
-            }
-        });
+        return conditions.verify(input -> predicate.test(objectGetter.apply(input)));
     }
 
     @Override
@@ -57,51 +47,26 @@ public class IntegerListConditionsImpl extends BaseObjectListConditions<Integer,
 
     @Override
     public boolean equalTo(final int value) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return conditionsGetter.apply(input).equalTo(value);
-            }
-        });
+        return this.conditions.verify(input -> conditionsGetter.apply(input).equalTo(value));
     }
 
     @Override
     public boolean lessThan(final int value) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return conditionsGetter.apply(input).lessThan(value);
-            }
-        });
+        return this.conditions.verify(input -> conditionsGetter.apply(input).lessThan(value));
     }
 
     @Override
     public boolean lessThanOrEqualTo(final int value) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return conditionsGetter.apply(input).lessThanOrEqualTo(value);
-            }
-        });
+        return this.conditions.verify(input -> conditionsGetter.apply(input).lessThanOrEqualTo(value));
     }
 
     @Override
     public boolean greaterThan(final int value) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return conditionsGetter.apply(input).greaterThan(value);
-            }
-        });
+        return this.conditions.verify(input -> conditionsGetter.apply(input).greaterThan(value));
     }
 
     @Override
     public boolean greaterThanOrEqualTo(final int value) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return conditionsGetter.apply(input).greaterThanOrEqualTo(value);
-            }
-        });
+        return this.conditions.verify(input -> conditionsGetter.apply(input).greaterThanOrEqualTo(value));
     }
 }

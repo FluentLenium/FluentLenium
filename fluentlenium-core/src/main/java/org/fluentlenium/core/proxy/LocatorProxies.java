@@ -1,6 +1,6 @@
 package org.fluentlenium.core.proxy;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 import org.fluentlenium.core.domain.WrapsElements;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;

@@ -1,6 +1,6 @@
 package org.fluentlenium.integration;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 import net.jcip.annotations.NotThreadSafe;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentList;
@@ -34,32 +34,17 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitIsPresent() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el(".small");
-            }
-        }).present();
+        await().atMost(1, NANOSECONDS).untilElement(() -> el(".small")).present();
     }
 
     @Test
     public void checkAwaitIsClickable() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el(".small");
-            }
-        }).clickable();
+        await().atMost(1, NANOSECONDS).untilElement(() -> el(".small")).clickable();
     }
 
     @Test(expected = TimeoutException.class)
     public void checkAwaitDisabledIsClickableThrowTimeoutException() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el("input[disabled]");
-            }
-        }).clickable();
+        await().atMost(1, NANOSECONDS).untilElement(() -> el("input[disabled]")).clickable();
     }
 
     @Test
@@ -74,73 +59,38 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitHasTextWithText() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el(".small", withText("Small 1"));
-            }
-        }).text().equalTo("Small 1");
+        await().atMost(1, NANOSECONDS).untilElement(() -> el(".small", withText("Small 1"))).text().equalTo("Small 1");
     }
 
     @Test
     public void checkAwaitContainsNameWithName() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el(".small", withName("name"));
-            }
-        }).name("name");
+        await().atMost(1, NANOSECONDS).untilElement(() -> el(".small", withName("name"))).name("name");
     }
 
     @Test
     public void checkAwaitContainsNameWithClass() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el("span", withClass("small"));
-            }
-        }).name("name");
+        await().atMost(1, NANOSECONDS).untilElement(() -> el("span", withClass("small"))).name("name");
     }
 
     @Test
     public void checkAwaitContainsNameWithClassRegex() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el("span", withClass().contains(regex("smal?")));
-            }
-        }).name("name");
+        await().atMost(1, NANOSECONDS).untilElement(() -> el("span", withClass().contains(regex("smal?")))).name("name");
     }
 
     @Test
     public void checkAwaitContainsNameWithClassAndContainsWord() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el("span", withClass().containsWord("small"));
-            }
-        }).name("name");
+        await().atMost(1, NANOSECONDS).untilElement(() -> el("span", withClass().containsWord("small"))).name("name");
     }
 
     @Test
     public void checkAwaitContainsTextWithText() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el(".small", withText("Small 1"), containingText("Small 1"));
-            }
-        });
+        await().atMost(1, NANOSECONDS).untilElement(() -> el(".small", withText("Small 1"), containingText("Small 1")));
     }
 
     @Test
     public void checkUseCustomMessage() {
         try {
-            await().withMessage("toto").atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-                @Override
-                public FluentWebElement get() {
-                    return el(".small", withText("Small 1"));
-                }
-            }).text().contains("Small 21");
+            await().withMessage("toto").atMost(1, NANOSECONDS).untilElement(() -> el(".small", withText("Small 1"))).text().contains("Small 21");
             fail();
         } catch (final TimeoutException e) {
             assertThat(e.getMessage()).contains("toto");
@@ -149,22 +99,12 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitContainsText() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el(".small");
-            }
-        }).text().contains("Small 1");
+        await().atMost(1, NANOSECONDS).untilElement(() -> el(".small")).text().contains("Small 1");
     }
 
     @Test
     public void checkAwaitContainsIdWithId() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el(".small", withId("id2"));
-            }
-        }).id("id2");
+        await().atMost(1, NANOSECONDS).untilElement(() -> el(".small", withId("id2"))).id("id2");
     }
 
     @Test
@@ -189,22 +129,12 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitHasText() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el(".small");
-            }
-        }).text("Small 1");
+        await().atMost(1, NANOSECONDS).untilElement(() -> el(".small")).text("Small 1");
     }
 
     @Test
     public void checkAwaitContainsName() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el(".small");
-            }
-        }).name("name");
+        await().atMost(1, NANOSECONDS).untilElement(() -> el(".small")).name("name");
     }
 
     @Test
@@ -219,22 +149,12 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitContainsTextWithTextMatcher() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el(".small", withText().contains("Small 1"));
-            }
-        }).present();
+        await().atMost(1, NANOSECONDS).untilElement(() -> el(".small", withText().contains("Small 1"))).present();
     }
 
     @Test
     public void checkAwaitContainsTextWithTextContentMatcher() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el(".small", withTextContent().contains("Small 1"));
-            }
-        }).present();
+        await().atMost(1, NANOSECONDS).untilElement(() -> el(".small", withTextContent().contains("Small 1"))).present();
     }
 
     @Test
@@ -249,12 +169,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
 
     @Test(expected = TimeoutException.class)
     public void whenAElementIsPresentThenIsNotPresentThrowAnException() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el(".small", withText().contains("Small 1"));
-            }
-        }).not().present();
+        await().atMost(1, NANOSECONDS).untilElement(() -> el(".small", withText().contains("Small 1"))).not().present();
     }
 
     @Test
@@ -309,22 +224,12 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkAwaitNotEndsWith() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el(".small", with("id").notEndsWith("2"));
-            }
-        }).id("id");
+        await().atMost(1, NANOSECONDS).untilElement(() -> el(".small", with("id").notEndsWith("2"))).id("id");
     }
 
     @Test
     public void checkAwaitNotEndsWithRegex() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el(".small", with("id").notEndsWith(regex("2")));
-            }
-        }).id("id");
+        await().atMost(1, NANOSECONDS).untilElement(() -> el(".small", with("id").notEndsWith(regex("2")))).id("id");
     }
 
     @Test
@@ -429,22 +334,12 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
 
     @Test
     public void checkHasAttribute() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el("input");
-            }
-        }).attribute("value", "John");
+        await().atMost(1, NANOSECONDS).untilElement(() -> el("input")).attribute("value", "John");
     }
 
     @Test
     public void checkHasAttributeWithOthersFilters() {
-        await().atMost(1, NANOSECONDS).untilElement(new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return el("input", with("value").equalTo("John"));
-            }
-        }).attribute("value", "John");
+        await().atMost(1, NANOSECONDS).untilElement(() -> el("input", with("value").equalTo("John"))).attribute("value", "John");
     }
 
     @Test

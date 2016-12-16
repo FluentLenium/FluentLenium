@@ -1,6 +1,6 @@
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 import org.fluentlenium.core.FluentControl;
 
 /**
@@ -28,12 +28,7 @@ public class FluentWaitWindowConditions extends BaseWaitConditions {
      * @return true
      */
     public boolean displayed() {
-        final Predicate<FluentControl> displayed = new Predicate<FluentControl>() {
-            @Override
-            public boolean apply(final FluentControl fluent) {
-                return fluent.getDriver().getWindowHandles().contains(windowName);
-            }
-        };
+        final Predicate<FluentControl> displayed = fluent -> fluent.getDriver().getWindowHandles().contains(windowName);
 
         until(wait, displayed, String.format("Window %s should be displayed.", windowName));
         return true;
@@ -45,12 +40,7 @@ public class FluentWaitWindowConditions extends BaseWaitConditions {
      * @return true
      */
     public boolean notDisplayed() {
-        final Predicate<FluentControl> notDisplayed = new Predicate<FluentControl>() {
-            @Override
-            public boolean apply(final FluentControl fluent) {
-                return !fluent.getDriver().getWindowHandles().contains(windowName);
-            }
-        };
+        final Predicate<FluentControl> notDisplayed = fluent -> !fluent.getDriver().getWindowHandles().contains(windowName);
 
         until(wait, notDisplayed, String.format("Window %s should not be displayed.", windowName));
         return true;

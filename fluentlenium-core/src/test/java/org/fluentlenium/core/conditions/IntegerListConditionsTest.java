@@ -1,7 +1,7 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
@@ -67,23 +67,13 @@ public class IntegerListConditionsTest {
                 Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
         final IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions,
-                new Function<FluentWebElement, Integer>() {
-                    @Override
-                    public Integer apply(final FluentWebElement input) {
-                        return Integer.valueOf(input.id());
-                    }
-                });
+                input -> Integer.valueOf(input.id()));
 
         when(webElement1.getAttribute("id")).thenReturn("1");
         when(webElement2.getAttribute("id")).thenReturn("1");
         when(webElement3.getAttribute("id")).thenReturn("1");
 
-        assertThat(integerConditions.verify(new Predicate<Integer>() {
-            @Override
-            public boolean apply(final Integer input) {
-                return input == 1;
-            }
-        }));
+        assertThat(integerConditions.verify(input -> input == 1));
 
         IntegerConditionsTest.assertConditions(integerConditions, 1);
         IntegerConditionsTest.assertNotConditions(integerConditions.not(), 1);
@@ -92,19 +82,9 @@ public class IntegerListConditionsTest {
         when(webElement2.getAttribute("id")).thenReturn("2");
         when(webElement3.getAttribute("id")).thenReturn("1");
 
-        assertThat(integerConditions.verify(new Predicate<Integer>() {
-            @Override
-            public boolean apply(final Integer input) {
-                return input == 1 || input == 2;
-            }
-        }));
+        assertThat(integerConditions.verify(input -> input == 1 || input == 2));
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                IntegerConditionsTest.assertConditions(integerConditions, 1);
-            }
-        });
+        assertThatThrownBy(() -> IntegerConditionsTest.assertConditions(integerConditions, 1));
 
     }
 
@@ -114,12 +94,7 @@ public class IntegerListConditionsTest {
                 Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
         final IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions,
-                new Function<FluentWebElement, Integer>() {
-                    @Override
-                    public Integer apply(final FluentWebElement input) {
-                        return Integer.valueOf(input.id());
-                    }
-                });
+                input -> Integer.valueOf(input.id()));
 
         when(webElement1.getAttribute("id")).thenReturn("1");
         when(webElement2.getAttribute("id")).thenReturn("1");
@@ -156,12 +131,7 @@ public class IntegerListConditionsTest {
         when(webElement2.getAttribute("id")).thenReturn("3");
         when(webElement3.getAttribute("id")).thenReturn("4");
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                IntegerConditionsTest.assertConditions(integerConditions, 1);
-            }
-        });
+        assertThatThrownBy(() -> IntegerConditionsTest.assertConditions(integerConditions, 1));
     }
 
 }

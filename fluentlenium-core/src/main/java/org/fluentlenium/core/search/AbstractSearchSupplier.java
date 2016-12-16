@@ -1,6 +1,6 @@
 package org.fluentlenium.core.search;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;

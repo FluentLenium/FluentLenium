@@ -1,6 +1,6 @@
 package org.fluentlenium.core.hook;
 
-import com.google.common.base.Function;
+import java.util.function.Function;
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;

@@ -1,9 +1,8 @@
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -122,7 +121,7 @@ public class FluentWaitElementListTest {
 
     @Test
     public void withMessageSupplier() {
-        final Supplier<String> message = Suppliers.ofInstance("test");
+        final Supplier<String> message = () -> "test";
 
         wait.withMessage(message);
         Mockito.verify(fluentControlWait).withMessage(message);

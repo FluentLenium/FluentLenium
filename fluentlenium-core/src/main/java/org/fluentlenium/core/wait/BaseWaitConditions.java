@@ -1,9 +1,8 @@
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Function;
-import com.google.common.base.Functions;
-import com.google.common.base.Predicate;
-import com.google.common.base.Supplier;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.conditions.Conditions;
 import org.fluentlenium.core.conditions.message.MessageProxy;
@@ -18,7 +17,7 @@ public class BaseWaitConditions {
      * @return final message
      */
     protected Function<String, String> messageCustomizer() {
-        return Functions.identity();
+        return Function.identity();
     }
 
     /**
@@ -69,18 +68,10 @@ public class BaseWaitConditions {
      */
     protected <T extends Conditions<?>> void until(final FluentWait wait, final T condition, final T messageBuilder,
             final Function<T, Boolean> conditionFunction) {
-        final Predicate<FluentControl> predicate = new Predicate<FluentControl>() {
-            @Override
-            public boolean apply(final FluentControl input) {
-                return conditionFunction.apply(condition);
-            }
-        };
-        final Supplier<String> messageSupplier = new Supplier<String>() {
-            @Override
-            public String get() {
-                conditionFunction.apply(messageBuilder);
-                return MessageProxy.message(messageBuilder);
-            }
+        final Predicate<FluentControl> predicate = input -> conditionFunction.apply(condition);
+        final Supplier<String> messageSupplier = () -> {
+            conditionFunction.apply(messageBuilder);
+            return MessageProxy.message(messageBuilder);
         };
 
         until(wait, predicate, messageSupplier);

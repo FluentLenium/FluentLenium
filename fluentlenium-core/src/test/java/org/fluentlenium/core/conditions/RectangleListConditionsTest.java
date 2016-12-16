@@ -1,6 +1,6 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -70,19 +70,9 @@ public class RectangleListConditionsTest {
         when(webElement2.getRect()).thenReturn(new Rectangle(1, 2, 3, 4));
         when(webElement3.getRect()).thenReturn(new Rectangle(1, 2, 3, 4));
 
-        assertThat(rectConditions.verify(new Predicate<Rectangle>() {
-            @Override
-            public boolean apply(final Rectangle input) {
-                return input.equals(new Rectangle(1, 2, 3, 4));
-            }
-        })).isTrue();
+        assertThat(rectConditions.verify(input -> input.equals(new Rectangle(1, 2, 3, 4)))).isTrue();
 
-        assertThat(rectConditions.not().verify(new Predicate<Rectangle>() {
-            @Override
-            public boolean apply(final Rectangle input) {
-                return input.equals(new Rectangle(1, 2, 3, 4));
-            }
-        })).isFalse();
+        assertThat(rectConditions.not().verify(input -> input.equals(new Rectangle(1, 2, 3, 4)))).isFalse();
 
         assertThat(rectConditions.x(1)).isTrue();
         assertThat(rectConditions.x(2)).isFalse();
@@ -175,19 +165,9 @@ public class RectangleListConditionsTest {
         when(webElement2.getRect()).thenReturn(new Rectangle(1, 2, 3, 4));
         when(webElement3.getRect()).thenReturn(new Rectangle(10, 20, 30, 40));
 
-        assertThat(rectConditions.verify(new Predicate<Rectangle>() {
-            @Override
-            public boolean apply(final Rectangle input) {
-                return input.equals(new Rectangle(1, 2, 3, 4));
-            }
-        })).isTrue();
+        assertThat(rectConditions.verify(input -> input.equals(new Rectangle(1, 2, 3, 4)))).isTrue();
 
-        assertThat(rectConditions.not().verify(new Predicate<Rectangle>() {
-            @Override
-            public boolean apply(final Rectangle input) {
-                return input.equals(new Rectangle(1, 2, 3, 4));
-            }
-        })).isTrue();
+        assertThat(rectConditions.not().verify(input -> input.equals(new Rectangle(1, 2, 3, 4)))).isTrue();
 
         assertThat(rectConditions.x(1)).isTrue();
         assertThat(rectConditions.x(2)).isFalse();

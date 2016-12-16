@@ -1,6 +1,5 @@
 package org.fluentlenium.core.hook;
 
-import com.google.common.base.Suppliers;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -42,8 +41,8 @@ public class BaseFluentHookTest {
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
         instantiator = spy(new DefaultComponentInstantiator(fluentAdapter));
-        hook = new BaseFluentHook<>(fluentAdapter, instantiator, Suppliers.ofInstance(element), Suppliers.ofInstance(locator),
-                Suppliers.ofInstance("toString"), options);
+        hook = new BaseFluentHook<>(fluentAdapter, instantiator, () -> element, () -> locator,
+                () -> "toString", options);
     }
 
     @Test

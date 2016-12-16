@@ -1,6 +1,6 @@
 package org.fluentlenium.core.events;
 
-import com.google.common.base.Function;
+import java.util.function.Function;
 import org.fluentlenium.core.components.ComponentsAccessor;
 import org.fluentlenium.core.events.annotations.AfterChangeValueOf;
 import org.fluentlenium.core.events.annotations.AfterClickOn;

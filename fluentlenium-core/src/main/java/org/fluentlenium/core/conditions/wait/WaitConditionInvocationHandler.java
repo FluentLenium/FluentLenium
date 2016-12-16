@@ -1,10 +1,8 @@
 package org.fluentlenium.core.conditions.wait;
 
-import com.google.common.base.Function;
-import com.google.common.base.Functions;
-import com.google.common.base.Predicate;
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.conditions.Conditions;
 import org.fluentlenium.core.conditions.ConditionsObject;
@@ -109,7 +107,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      * @return final message
      */
     protected Function<String, String> messageCustomizer() {
-        return Functions.identity();
+        return Function.identity();
     }
 
     /**
@@ -155,31 +153,23 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      * @param conditionFunction condition fonction
      */
     protected void until(final C condition, final C messageBuilder, final Function<C, Boolean> conditionFunction) {
-        final Predicate<FluentControl> predicate = new Predicate<FluentControl>() {
-            @Override
-            public boolean apply(final FluentControl input) {
-                return conditionFunction.apply(condition);
-            }
-        };
-        final Supplier<String> messageSupplier = new Supplier<String>() {
-            @Override
-            public String get() {
-                conditionFunction.apply(messageBuilder);
-                final StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append(MessageProxy.message(messageBuilder));
+        final Predicate<FluentControl> predicate = input -> conditionFunction.apply(condition);
+        final Supplier<String> messageSupplier = () -> {
+            conditionFunction.apply(messageBuilder);
+            final StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(MessageProxy.message(messageBuilder));
 
-                if (condition instanceof ConditionsObject) {
-                    final Object actualObject = ((ConditionsObject) condition).getActualObject();
+            if (condition instanceof ConditionsObject) {
+                final Object actualObject = ((ConditionsObject) condition).getActualObject();
 
-                    if (!(actualObject instanceof WrapsElement)) {
-                        stringBuilder.append(" (actual: ");
-                        stringBuilder.append(actualObject);
-                        stringBuilder.append(')');
-                    }
+                if (!(actualObject instanceof WrapsElement)) {
+                    stringBuilder.append(" (actual: ");
+                    stringBuilder.append(actualObject);
+                    stringBuilder.append(')');
                 }
-
-                return stringBuilder.toString();
             }
+
+            return stringBuilder.toString();
         };
 
         until(predicate, messageSupplier);
@@ -211,7 +201,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
         final Conditions<?> childConditions = (Conditions<?>) conditionGetter.invoke(conditions(true), args);
 
         final Conditions<?> childProxy = WaitConditionProxy.custom((Class<Conditions<?>>) method.getReturnType(), wait, context,
-                Suppliers.<Conditions<?>>ofInstance(childConditions));
+                () -> childConditions);
         final WaitConditionInvocationHandler childHandler = (WaitConditionInvocationHandler) Proxy
                 .getInvocationHandler(childProxy);
         childHandler.negation = negation;

@@ -1,12 +1,11 @@
 package org.fluentlenium.integration;
 
-import com.google.common.base.Stopwatch;
-import com.google.common.collect.Lists;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -98,16 +97,19 @@ public class JavascriptTest extends IntegrationFluentTest {
 
         assertThat((Object) fluentJavascript.getListResult()).isEqualTo(fluentJavascript.getResult());
         assertThat(fluentJavascript.getListResult())
-                .containsExactly("string 1", "string 2", 5L, 12.12D, true, Lists.newArrayList("test 1", "test 2"));
+                .containsExactly("string 1", "string 2", 5L, 12.12D, true, Arrays.asList("test 1", "test 2"));
+        assertThat(fluentJavascript.getListResult())
+                .containsExactly("string 1", "string 2", 5L, 12.12D, true, Arrays.asList("test 1", "test 2"));
     }
 
     @Test
     public void shouldExecuteAsyncScriptReturnString() {
         getDriver().manage().timeouts().setScriptTimeout(200, TimeUnit.MILLISECONDS);
 
-        final Stopwatch stopwatch = Stopwatch.createStarted();
+        long start = System.nanoTime();
+
         final FluentJavascript fluentJavascript = executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 100);");
-        assertThat(stopwatch.elapsed(TimeUnit.MILLISECONDS)).isGreaterThanOrEqualTo(100);
+        assertThat(System.nanoTime() - start).isGreaterThanOrEqualTo(100000000);
         assertThat(fluentJavascript.getResult()).isNull();
     }
 }

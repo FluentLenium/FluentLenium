@@ -1,6 +1,6 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 /**
  * Abstract implementation supported negation and instantiation.
@@ -33,7 +33,7 @@ public abstract class AbstractObjectConditions<T> implements Conditions<T>, Cond
 
     @Override
     public boolean verify(final Predicate<T> predicate) {
-        boolean predicateResult = predicate.apply(object);
+        boolean predicateResult = predicate.test(object);
         if (negation) {
             predicateResult = !predicateResult;
         }

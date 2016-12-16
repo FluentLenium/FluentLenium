@@ -1,6 +1,6 @@
 package org.fluentlenium.integration;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
@@ -108,12 +108,7 @@ public class FluentSelectorTest extends IntegrationFluentTest {
     @Test
     public void checkPredicate() {
         goTo(DEFAULT_URL);
-        assertThat($("span", withPredicate(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.id() != null && !input.id().startsWith("na");
-            }
-        })).ids().contains("oneline"));
+        assertThat($("span", withPredicate(input -> input.id() != null && !input.id().startsWith("na"))).ids().contains("oneline"));
     }
 
     @Test

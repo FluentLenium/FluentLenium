@@ -25,12 +25,7 @@ public class WaitHookAnnotationTest extends IntegrationFluentTest {
     @Test
     public void testWaitingNotFound() {
         goTo(JAVASCRIPT_URL);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                find("#anotherField").click();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class)
+        assertThatThrownBy(() -> find("#anotherField").click()).isExactlyInstanceOf(TimeoutException.class)
                 .hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector: #anotherField");
 
     }

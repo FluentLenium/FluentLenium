@@ -1,9 +1,7 @@
 package org.fluentlenium.core.domain;
 
-import com.google.common.base.Function;
-import com.google.common.base.Optional;
-import com.google.common.base.Supplier;
-import com.google.common.collect.Lists;
+import java.util.Optional;
+import java.util.function.Supplier;
 import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
@@ -32,6 +30,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
@@ -57,21 +56,13 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     public FluentListImpl(final Class<E> componentClass, final List<E> list, final FluentControl control,
             final ComponentInstantiator instantiator) {
         super(componentClass, list, control, instantiator);
-        this.hookControl = new HookControlImpl<>(this, proxy, control, instantiator, new Supplier<FluentList<E>>() {
-            @Override
-            public FluentList<E> get() {
-                final LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(proxy);
-                final ElementLocator locator = locatorHandler.getLocator();
-                final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
-                return instantiator.asComponentList(FluentListImpl.this.getClass(), componentClass, webElementList);
-            }
+        this.hookControl = new HookControlImpl<>(this, proxy, control, instantiator, (Supplier<FluentList<E>>) () -> {
+            final LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(proxy);
+            final ElementLocator locator = locatorHandler.getLocator();
+            final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
+            return instantiator.asComponentList(this.getClass(), componentClass, webElementList);
         });
-        this.label = new FluentLabelImpl<>(this, new Supplier<String>() {
-            @Override
-            public String get() {
-                return list.toString();
-            }
-        });
+        this.label = new FluentLabelImpl<>(this, list::toString);
         this.javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
@@ -398,65 +389,37 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public List<String> values() {
-        return Lists.transform(this, new Function<E, String>() {
-            public String apply(final E webElement) {
-                return webElement.value();
-            }
-        });
+        return this.stream().map(FluentWebElement::value).collect(Collectors.toList());
     }
 
     @Override
     public List<String> ids() {
-        return Lists.transform(this, new Function<E, String>() {
-            public String apply(final E webElement) {
-                return webElement.id();
-            }
-        });
+        return this.stream().map(FluentWebElement::id).collect(Collectors.toList());
     }
 
     @Override
     public List<String> attributes(final String attribute) {
-        return Lists.transform(this, new Function<E, String>() {
-            public String apply(final E webElement) {
-                return webElement.attribute(attribute);
-            }
-        });
+        return this.stream().map(webElement -> webElement.attribute(attribute)).collect(Collectors.toList());
     }
 
     @Override
     public List<String> names() {
-        return Lists.transform(this, new Function<E, String>() {
-            public String apply(final E webElement) {
-                return webElement.name();
-            }
-        });
+        return this.stream().map(FluentWebElement::name).collect(Collectors.toList());
     }
 
     @Override
     public List<String> tagNames() {
-        return Lists.transform(this, new Function<E, String>() {
-            public String apply(final E webElement) {
-                return webElement.tagName();
-            }
-        });
+        return this.stream().map(FluentWebElement::tagName).collect(Collectors.toList());
     }
 
     @Override
     public List<String> textContents() {
-        return Lists.transform(this, new Function<E, String>() {
-            public String apply(final E webElement) {
-                return webElement.textContent();
-            }
-        });
+        return this.stream().map(FluentWebElement::textContent).collect(Collectors.toList());
     }
 
     @Override
     public List<String> texts() {
-        return Lists.transform(this, new Function<E, String>() {
-            public String apply(final E webElement) {
-                return webElement.text();
-            }
-        });
+        return this.stream().map(FluentWebElement::text).collect(Collectors.toList());
     }
 
     @Override
@@ -593,7 +556,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         if (present()) {
             return Optional.of((FluentList<E>) this);
         } else {
-            return Optional.absent();
+            return Optional.empty();
         }
     }
 

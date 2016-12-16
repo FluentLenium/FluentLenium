@@ -1,6 +1,6 @@
 package org.fluentlenium.integration;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
@@ -19,23 +19,17 @@ public class AwaitWithStaleElementReferenceException extends IntegrationFluentTe
 
     @Test(expected = TimeoutException.class)
     public void givenDefaultWhenStateElementReferenceExceptionIsThrownThenItIsIgnored() {
-        await().atMost(3, SECONDS).untilPredicate(new Predicate<FluentControl>() {
-            @Override
-            public boolean apply(final FluentControl fluent) {
-                find(".small").clear();
-                throw new StaleElementReferenceException("test");
-            }
+        await().atMost(3, SECONDS).untilPredicate(fluent -> {
+            find(".small").clear();
+            throw new StaleElementReferenceException("test");
         });
     }
 
     @Test(expected = StaleElementReferenceException.class)
     public void givenNoDefaultsWhenStateElementReferenceExceptionIsThrownThenItIsNotIgnored() {
-        await().atMost(3, SECONDS).withNoDefaultsException().untilPredicate(new Predicate<FluentControl>() {
-            @Override
-            public boolean apply(final FluentControl fluent) {
-                find(".small").clear();
-                throw new StaleElementReferenceException("test");
-            }
+        await().atMost(3, SECONDS).withNoDefaultsException().untilPredicate(fluent -> {
+            find(".small").clear();
+            throw new StaleElementReferenceException("test");
         });
     }
 

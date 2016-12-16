@@ -1,6 +1,6 @@
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.conditions.FluentListConditions;
@@ -91,20 +91,10 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void isVerified() {
-        final Predicate<FluentWebElement> predicate = new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.enabled();
-            }
-        };
+        final Predicate<FluentWebElement> predicate = FluentWebElement::enabled;
 
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.verify(predicate);
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.verify(predicate)).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).enabled();
         verify(fluentWebElement2, never()).enabled();
@@ -127,47 +117,22 @@ public class FluentWaitEachElementMatcherTest {
 
     @Test
     public void isVerifiedEmpty() {
-        final Predicate<FluentWebElement> predicate = new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.enabled();
-            }
-        };
+        final Predicate<FluentWebElement> predicate = FluentWebElement::enabled;
 
         final FluentListConditions matcher = wait.untilEach(new ArrayList<>());
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.verify(predicate, false);
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.verify(predicate, false)).isExactlyInstanceOf(TimeoutException.class);
 
         matcher.verify(predicate, true);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().verify(predicate, true);
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().verify(predicate, true)).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void isNotVerified() {
-        final Predicate<FluentWebElement> predicate = new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return !input.enabled();
-            }
-        };
+        final Predicate<FluentWebElement> predicate = input -> !input.enabled();
 
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().verify(predicate);
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().verify(predicate)).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).enabled();
         verify(fluentWebElement2, never()).enabled();
@@ -191,12 +156,7 @@ public class FluentWaitEachElementMatcherTest {
     @Test
     public void hasAttribute() {
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.attribute("test", "value");
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.attribute("test", "value")).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).attribute("test");
         verify(fluentWebElement2, never()).attribute("test");
@@ -211,23 +171,13 @@ public class FluentWaitEachElementMatcherTest {
         verify(fluentWebElement2, atLeastOnce()).attribute("test");
         verify(fluentWebElement3, atLeastOnce()).attribute("test");
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().attribute("test", "value");
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().attribute("test", "value")).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void hasId() {
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.id("value");
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.id("value")).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).id();
         verify(fluentWebElement2, never()).id();
@@ -242,23 +192,13 @@ public class FluentWaitEachElementMatcherTest {
         verify(fluentWebElement2, atLeastOnce()).id();
         verify(fluentWebElement3, atLeastOnce()).id();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().id("value");
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().id("value")).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void hasName() {
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.name("name");
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.name("name")).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).name();
         verify(fluentWebElement2, never()).name();
@@ -273,23 +213,13 @@ public class FluentWaitEachElementMatcherTest {
         verify(fluentWebElement2, atLeastOnce()).name();
         verify(fluentWebElement3, atLeastOnce()).name();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().name("name");
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().name("name")).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void hasText() {
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.text().equalTo("text");
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.text().equalTo("text")).isExactlyInstanceOf(TimeoutException.class);
 
         when(fluentWebElement1.text()).thenReturn("text");
         when(fluentWebElement2.text()).thenReturn("text");
@@ -300,23 +230,13 @@ public class FluentWaitEachElementMatcherTest {
         verify(fluentWebElement2, atLeastOnce()).text();
         verify(fluentWebElement3, atLeastOnce()).text();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().text().equalTo("text");
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().text().equalTo("text")).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void containsText() {
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.text().contains("ex");
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.text().contains("ex")).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).text();
         verify(fluentWebElement2, atLeastOnce()).text();
@@ -331,23 +251,13 @@ public class FluentWaitEachElementMatcherTest {
         verify(fluentWebElement2, atLeastOnce()).text();
         verify(fluentWebElement3, atLeastOnce()).text();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().text().contains("ex");
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().text().contains("ex")).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void isPresent() {
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.present();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(matcher::present).isExactlyInstanceOf(TimeoutException.class);
 
         when(fluentWebElement1.present()).thenReturn(true);
         when(fluentWebElement2.present()).thenReturn(true);
@@ -358,23 +268,13 @@ public class FluentWaitEachElementMatcherTest {
         verify(fluentWebElement2, atLeastOnce()).present();
         verify(fluentWebElement3, atLeastOnce()).present();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().present();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().present()).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void isEnabled() {
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.enabled();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(matcher::enabled).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).enabled();
         verify(fluentWebElement2, never()).enabled();
@@ -389,12 +289,7 @@ public class FluentWaitEachElementMatcherTest {
         verify(fluentWebElement2, atLeastOnce()).enabled();
         verify(fluentWebElement3, atLeastOnce()).enabled();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().enabled();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().enabled()).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -404,23 +299,13 @@ public class FluentWaitEachElementMatcherTest {
         when(fluentWebElement3.tagName()).thenThrow(NoSuchElementException.class);
 
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.enabled();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(matcher::enabled).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void isSelected() {
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.selected();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(matcher::selected).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).selected();
         verify(fluentWebElement2, never()).selected();
@@ -435,23 +320,13 @@ public class FluentWaitEachElementMatcherTest {
         verify(fluentWebElement2, atLeastOnce()).selected();
         verify(fluentWebElement3, atLeastOnce()).selected();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().selected();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().selected()).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void isDisplayed() {
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.displayed();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(matcher::displayed).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).displayed();
         verify(fluentWebElement2, never()).displayed();
@@ -466,23 +341,13 @@ public class FluentWaitEachElementMatcherTest {
         verify(fluentWebElement2, atLeastOnce()).displayed();
         verify(fluentWebElement3, atLeastOnce()).displayed();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().displayed();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().displayed()).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void isClickable() {
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.clickable();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(matcher::clickable).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).clickable();
         verify(fluentWebElement2, never()).clickable();
@@ -497,23 +362,13 @@ public class FluentWaitEachElementMatcherTest {
         verify(fluentWebElement2, atLeastOnce()).clickable();
         verify(fluentWebElement3, atLeastOnce()).clickable();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().clickable();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().clickable()).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void isStale() {
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.stale();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(matcher::stale).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).stale();
         verify(fluentWebElement2, never()).stale();
@@ -528,52 +383,27 @@ public class FluentWaitEachElementMatcherTest {
         verify(fluentWebElement2, atLeastOnce()).stale();
         verify(fluentWebElement3, atLeastOnce()).stale();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().stale();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().stale()).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void hasSize() {
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.size(2);
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.size(2)).isExactlyInstanceOf(TimeoutException.class);
 
         matcher.size(3);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().size(3);
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().size(3)).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void hasSizeBuilder() {
         final FluentListConditions matcher = wait.untilEach(fluentWebElements);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.size().equalTo(2);
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.size().equalTo(2)).isExactlyInstanceOf(TimeoutException.class);
 
         matcher.size().equalTo(3);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().size().equalTo(3);
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().size().equalTo(3)).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -584,12 +414,7 @@ public class FluentWaitEachElementMatcherTest {
         when(element2.getRect()).thenReturn(new Rectangle(1, 2, 100, 200));
         when(element3.getRect()).thenReturn(new Rectangle(1, 2, 100, 200));
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.rectangle().x(5);
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.rectangle().x(5)).isExactlyInstanceOf(TimeoutException.class);
 
         verify(element1, atLeastOnce()).getRect();
         verify(element2, atLeastOnce()).getRect();
@@ -601,12 +426,7 @@ public class FluentWaitEachElementMatcherTest {
         verify(element2, atLeastOnce()).getRect();
         verify(element3, atLeastOnce()).getRect();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().rectangle().x(1);
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().rectangle().x(1)).isExactlyInstanceOf(TimeoutException.class);
     }
 
 }

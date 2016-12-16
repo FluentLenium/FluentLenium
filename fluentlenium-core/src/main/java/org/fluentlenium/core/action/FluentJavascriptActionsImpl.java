@@ -1,6 +1,7 @@
 package org.fluentlenium.core.action;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
+
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.script.JavascriptControl;
 

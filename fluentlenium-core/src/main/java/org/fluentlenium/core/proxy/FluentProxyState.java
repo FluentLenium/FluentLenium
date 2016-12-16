@@ -1,6 +1,6 @@
 package org.fluentlenium.core.proxy;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 
 /**
  * State of the element locator proxy.

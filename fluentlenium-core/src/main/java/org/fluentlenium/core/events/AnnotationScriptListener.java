@@ -1,6 +1,6 @@
 package org.fluentlenium.core.events;
 
-import com.google.common.base.Function;
+import java.util.function.Function;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.WebDriver;
 
@@ -44,17 +44,14 @@ class AnnotationScriptListener implements ScriptListener, ListenerPriority {
      * @return function returning argument value from argument class
      */
     protected Function<Class<?>, Object> getArgsFunction(final String script, final WebDriver driver) {
-        return new Function<Class<?>, Object>() {
-            @Override
-            public Object apply(final Class<?> input) {
-                if (input.isAssignableFrom(String.class)) {
-                    return script;
-                }
-                if (input.isAssignableFrom(WebDriver.class)) {
-                    return driver;
-                }
-                return null;
+        return input -> {
+            if (input.isAssignableFrom(String.class)) {
+                return script;
             }
+            if (input.isAssignableFrom(WebDriver.class)) {
+                return driver;
+            }
+            return null;
         };
     }
 

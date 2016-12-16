@@ -1,6 +1,6 @@
 package org.fluentlenium.core.label;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 
 import java.util.ArrayList;
 import java.util.Arrays;

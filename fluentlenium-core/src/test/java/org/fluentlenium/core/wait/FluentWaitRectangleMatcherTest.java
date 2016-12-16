@@ -1,6 +1,6 @@
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.conditions.RectangleConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
@@ -56,12 +56,7 @@ public class FluentWaitRectangleMatcherTest {
 
         final RectangleConditions rectangleConditions = wait.until(fluentWebElement).rectangle();
 
-        rectangleConditions.verify(new Predicate<Rectangle>() {
-            @Override
-            public boolean apply(final Rectangle input) {
-                return true;
-            }
-        });
+        rectangleConditions.verify(input -> true);
 
         rectangleConditions.x(1);
         rectangleConditions.y(2);
@@ -79,12 +74,7 @@ public class FluentWaitRectangleMatcherTest {
         rectangleConditions.dimension(200, 100);
         rectangleConditions.positionAndDimension(1, 2, 200, 100);
 
-        rectangleConditions.not().verify(new Predicate<Rectangle>() {
-            @Override
-            public boolean apply(final Rectangle input) {
-                return false;
-            }
-        });
+        rectangleConditions.not().verify(input -> false);
 
         rectangleConditions.not().x(3);
         rectangleConditions.not().y(4);

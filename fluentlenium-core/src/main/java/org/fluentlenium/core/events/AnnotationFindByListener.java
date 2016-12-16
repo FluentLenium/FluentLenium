@@ -1,6 +1,6 @@
 package org.fluentlenium.core.events;
 
-import com.google.common.base.Function;
+import java.util.function.Function;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.By;
@@ -39,20 +39,17 @@ class AnnotationFindByListener extends AbstractAnnotationListener implements Fin
      * @return function returning argument value from argument class
      */
     protected Function<Class<?>, Object> getArgsFunction(final By by, final FluentWebElement element, final WebDriver driver) {
-        return new Function<Class<?>, Object>() {
-            @Override
-            public Object apply(final Class<?> input) {
-                if (input.isAssignableFrom(FluentWebElement.class)) {
-                    return element;
-                }
-                if (input.isAssignableFrom(By.class)) {
-                    return by;
-                }
-                if (input.isAssignableFrom(WebDriver.class)) {
-                    return driver;
-                }
-                return null;
+        return input -> {
+            if (input.isAssignableFrom(FluentWebElement.class)) {
+                return element;
             }
+            if (input.isAssignableFrom(By.class)) {
+                return by;
+            }
+            if (input.isAssignableFrom(WebDriver.class)) {
+                return driver;
+            }
+            return null;
         };
     }
 

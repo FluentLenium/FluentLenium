@@ -1,6 +1,5 @@
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Suppliers;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.conditions.FluentConditions;
@@ -56,13 +55,8 @@ public class FluentWaitSupplierMatcherTest {
 
     @Test
     public void isEnabled() {
-        final FluentConditions matcher = wait.untilElement(Suppliers.ofInstance(fluentWebElement));
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.enabled();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        final FluentConditions matcher = wait.untilElement(() -> fluentWebElement);
+        assertThatThrownBy(() -> matcher.enabled()).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement, atLeastOnce()).enabled();
 
@@ -71,11 +65,6 @@ public class FluentWaitSupplierMatcherTest {
 
         verify(fluentWebElement, atLeastOnce()).enabled();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.not().enabled();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> matcher.not().enabled()).isExactlyInstanceOf(TimeoutException.class);
     }
 }

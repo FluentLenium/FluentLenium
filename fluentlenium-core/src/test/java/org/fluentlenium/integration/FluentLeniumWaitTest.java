@@ -1,8 +1,8 @@
 package org.fluentlenium.integration;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Supplier;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import net.jcip.annotations.NotThreadSafe;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentControl;
@@ -474,23 +474,13 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test
     public void checkPredicate() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(LESS_THAN_SECOND_TIMEOUT, TimeUnit.MILLISECONDS).untilPredicate(new Predicate<FluentControl>() {
-            @Override
-            public boolean apply(final FluentControl input) {
-                return true;
-            }
-        });
+        await().pollingEvery(LESS_THAN_SECOND_TIMEOUT, TimeUnit.MILLISECONDS).untilPredicate(predicate -> true);
     }
 
     @Test(expected = TimeoutException.class)
     public void checkPredicateFail() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(SECOND_TIMEOUT).untilPredicate(new Predicate<FluentControl>() {
-            @Override
-            public boolean apply(final FluentControl input) {
-                return false;
-            }
-        });
+        await().atMost(SECOND_TIMEOUT).untilPredicate(input -> false);
     }
 
     @Test
@@ -518,23 +508,13 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test
     public void checkSupplier() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(SECOND_TIMEOUT, TimeUnit.MILLISECONDS).until(new Supplier<Boolean>() {
-            @Override
-            public Boolean get() {
-                return true;
-            }
-        });
+        await().pollingEvery(SECOND_TIMEOUT, TimeUnit.MILLISECONDS).until(() -> true);
     }
 
     @Test(expected = TimeoutException.class)
     public void checkSupplierFail() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(SECOND_TIMEOUT).until(new Supplier<Boolean>() {
-            @Override
-            public Boolean get() {
-                return false;
-            }
-        });
+        await().atMost(SECOND_TIMEOUT).until(() -> false);
     }
 
     @Test

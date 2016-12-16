@@ -1,7 +1,6 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
+import java.util.function.Function;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 import java.util.regex.Pattern;
@@ -30,77 +29,36 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
 
     @Override
     public boolean contains(final CharSequence charSequence) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return conditionsGetter.apply(input).contains(charSequence);
-            }
-        });
+        return this.conditions.verify(input -> conditionsGetter.apply(input).contains(charSequence));
     }
 
     @Override
     public boolean startsWith(final String prefix) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
-
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return conditionsGetter.apply(input).startsWith(prefix);
-            }
-        });
+        return this.conditions.verify(input -> conditionsGetter.apply(input).startsWith(prefix));
     }
 
     @Override
     public boolean endsWith(final String suffix) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
-
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return conditionsGetter.apply(input).endsWith(suffix);
-            }
-        });
+        return this.conditions.verify(input -> conditionsGetter.apply(input).endsWith(suffix));
     }
 
     @Override
     public boolean equalTo(final String anotherString) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
-
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return conditionsGetter.apply(input).equalTo(anotherString);
-            }
-        });
+        return this.conditions.verify(input -> conditionsGetter.apply(input).equalTo(anotherString));
     }
 
     @Override
     public boolean equalToIgnoreCase(final String anotherString) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
-
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return conditionsGetter.apply(input).equalToIgnoreCase(anotherString);
-            }
-        });
+        return this.conditions.verify(input -> conditionsGetter.apply(input).equalToIgnoreCase(anotherString));
     }
 
     @Override
     public boolean matches(final String regex) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
-
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return conditionsGetter.apply(input).matches(regex);
-            }
-        });
+        return this.conditions.verify(input -> conditionsGetter.apply(input).matches(regex));
     }
 
     @Override
     public boolean matches(final Pattern pattern) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
-
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return conditionsGetter.apply(input).matches(pattern);
-            }
-        });
+        return this.conditions.verify(input -> conditionsGetter.apply(input).matches(pattern));
     }
 }

@@ -1,6 +1,6 @@
 package org.fluentlenium.core.hook;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.utils.ReflectionUtils;
@@ -48,12 +48,7 @@ public class DefaultHookChainBuilder implements HookChainBuilder {
             }
             final FluentHook<?> hookInstance = newObject;
 
-            currentSupplier = new Supplier<WebElement>() {
-                @Override
-                public WebElement get() {
-                    return hookInstance;
-                }
-            };
+            currentSupplier = () -> hookInstance;
 
             chain.add(hookInstance);
         }

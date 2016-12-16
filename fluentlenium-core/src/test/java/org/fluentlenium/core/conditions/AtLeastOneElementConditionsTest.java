@@ -1,6 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Predicates;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
@@ -32,11 +31,11 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
 
     @Test
     public void verify() {
-        assertThat(conditions.verify(Predicates.<FluentWebElement>alwaysTrue())).isTrue();
-        assertThat(conditions.verify(Predicates.<FluentWebElement>alwaysFalse())).isFalse();
+        assertThat(conditions.verify(predicate -> true)).isTrue();
+        assertThat(conditions.verify(predicate -> false)).isFalse();
 
-        assertThat(conditions.not().verify(Predicates.<FluentWebElement>alwaysTrue())).isFalse();
-        assertThat(conditions.not().verify(Predicates.<FluentWebElement>alwaysFalse())).isTrue();
+        assertThat(conditions.not().verify(predicate -> true)).isFalse();
+        assertThat(conditions.not().verify(predicate -> false)).isTrue();
     }
 
     @Test

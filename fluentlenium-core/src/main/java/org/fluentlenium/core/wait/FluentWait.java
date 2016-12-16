@@ -1,9 +1,12 @@
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.conditions.FluentConditions;
@@ -14,9 +17,6 @@ import org.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * A wait object wrapping default selenium {@link org.openqa.selenium.support.ui.FluentWait} object into a more
@@ -71,20 +71,20 @@ public class FluentWait
     }
 
     @Override
-    public FluentWait ignoreAll(final java.util.Collection<java.lang.Class<? extends Throwable>> types) {
+    public FluentWait ignoreAll(final Collection<Class<? extends Throwable>> types) {
         wait.ignoreAll(types);
         return this;
     }
 
     @Override
-    public FluentWait ignoring(final java.lang.Class<? extends java.lang.RuntimeException> exceptionType) {
+    public FluentWait ignoring(final Class<? extends RuntimeException> exceptionType) {
         wait.ignoring(exceptionType);
         return this;
     }
 
     @Override
-    public FluentWait ignoring(final java.lang.Class<? extends java.lang.RuntimeException> firstType,
-            final java.lang.Class<? extends java.lang.RuntimeException> secondType) {
+    public FluentWait ignoring(final Class<? extends RuntimeException> firstType,
+            final Class<? extends RuntimeException> secondType) {
         wait.ignoring(firstType, secondType);
         return this;
     }
@@ -98,7 +98,7 @@ public class FluentWait
 
     @Override
     public FluentWait withMessage(final Supplier<String> message) {
-        wait.withMessage(message);
+        wait.withMessage(message::get);
         messageDefined = true;
         return this;
     }
@@ -129,13 +129,14 @@ public class FluentWait
     @Override
     public void untilPredicate(final Predicate<FluentControl> predicate) {
         updateWaitWithDefaultExceptions();
-        wait.until(predicate);
+        wait.<com.google.common.base.Predicate>until(predicate::test);
     }
 
     @Override
     public void until(final Supplier<Boolean> booleanSupplier) {
         updateWaitWithDefaultExceptions();
-        wait.until(new Function<Object, Boolean>() {
+
+        wait.until(new com.google.common.base.Function<Object, Boolean>() {
             public Boolean apply(final Object input) {
                 return booleanSupplier.get();
             }
@@ -149,7 +150,17 @@ public class FluentWait
     @Override
     public <T> T until(final Function<? super FluentControl, T> function) {
         updateWaitWithDefaultExceptions();
-        return wait.until(function);
+        return wait.until(new com.google.common.base.Function<Object, T>() {
+            @Override
+            public T apply(final Object input) {
+                return function.apply((FluentControl) input);
+            }
+
+            @Override
+            public String toString() {
+                return function.toString();
+            }
+        });
     }
 
     @Override
@@ -162,14 +173,14 @@ public class FluentWait
     public FluentListConditions until(final List<? extends FluentWebElement> elements) {
         updateWaitWithDefaultExceptions();
         return WaitConditionProxy
-                .one(this, "Elements " + elements.toString(), Suppliers.<List<? extends FluentWebElement>>ofInstance(elements));
+                .one(this, "Elements " + elements.toString(), () -> elements);
     }
 
     @Override
     public FluentListConditions untilEach(final List<? extends FluentWebElement> elements) {
         updateWaitWithDefaultExceptions();
         return WaitConditionProxy
-                .each(this, "Elements " + elements.toString(), Suppliers.<List<? extends FluentWebElement>>ofInstance(elements));
+                .each(this, "Elements " + elements.toString(), () -> elements);
     }
 
     @Override
@@ -224,4 +235,15 @@ public class FluentWait
         return explicitlyFor(amount, TimeUnit.MILLISECONDS);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @deprecated This method will be replaced to make function parameter to use {@link Function} for java.util.function package.
+     */
+    @Override
+    @Deprecated
+    public <T> T until(final com.google.common.base.Function<? super FluentControl, T> function) {
+        updateWaitWithDefaultExceptions();
+        return wait.until(function);
+    }
 }

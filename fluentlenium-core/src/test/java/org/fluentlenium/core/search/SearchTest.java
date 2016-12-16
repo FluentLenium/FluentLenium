@@ -1,6 +1,5 @@
 package org.fluentlenium.core.search;
 
-import com.google.common.collect.Lists;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
@@ -22,6 +21,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -70,7 +70,7 @@ public class SearchTest {
     public void findCheckCssIsWellFormed() {
         final WebElement webElement = mock(WebElement.class);
         final WebElement webElement2 = mock(WebElement.class);
-        final List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
+        final List<WebElement> webElements = new ArrayList<>(Arrays.asList(webElement, webElement2));
 
         when(searchContext.findElements(By.cssSelector("cssStyle[generated=true][checked=ok]"))).thenReturn(webElements);
 
@@ -89,7 +89,7 @@ public class SearchTest {
     public void canLoopIntoFluentWebElementAfterASearch() {
         final WebElement webElement = mock(WebElement.class);
         final WebElement webElement2 = mock(WebElement.class);
-        final List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
+        final List<WebElement> webElements = new ArrayList<>(Arrays.asList(webElement, webElement2));
 
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(webElements);
         for (final FluentWebElement fluentWebElement : search.find("cssStyle")) {
@@ -103,7 +103,7 @@ public class SearchTest {
     public void findCheckCssIsWellFormedWithPostSelector() {
         final WebElement webElement = mock(WebElement.class);
         final WebElement webElement2 = mock(WebElement.class);
-        final List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
+        final List<WebElement> webElements = new ArrayList<>(Arrays.asList(webElement, webElement2));
 
         when(searchContext.findElements(By.cssSelector("cssStyle[generated=true]"))).thenReturn(webElements);
 
@@ -127,7 +127,7 @@ public class SearchTest {
     public void findCheckCssIsWellFormedWithPostSelectorAndByLocator() {
         final WebElement webElement = mock(WebElement.class);
         final WebElement webElement2 = mock(WebElement.class);
-        final List<WebElement> webElements = Lists.newArrayList(webElement, webElement2);
+        final List<WebElement> webElements = new ArrayList<>(Arrays.asList(webElement, webElement2));
 
         when(searchContext.findElements(By.cssSelector("cssStyle[generated=true]"))).thenReturn(webElements);
 

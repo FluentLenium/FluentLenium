@@ -1,6 +1,5 @@
 package org.fluentlenium.core.hook;
 
-import com.google.common.base.Suppliers;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.junit.Before;
@@ -43,8 +42,8 @@ public class BaseHookTest {
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
         instantiator = new DefaultComponentInstantiator(fluentAdapter);
-        hook = new BaseHook<>(fluentAdapter, instantiator, Suppliers.ofInstance(element), Suppliers.ofInstance(locator),
-                Suppliers.ofInstance("toString"), options);
+
+        hook = new BaseHook<>(fluentAdapter, instantiator, ()->element, ()->locator, () -> "toString", options);
     }
 
     @Test
@@ -74,8 +73,8 @@ public class BaseHookTest {
     public void testNoOptionHook() {
         final Object defaultOptions = new Object();
 
-        final BaseHook noOptionHook = new BaseHook<Object>(fluentAdapter, instantiator, Suppliers.ofInstance(element),
-                Suppliers.ofInstance(locator), Suppliers.ofInstance("hook"), null) {
+        final BaseHook noOptionHook = new BaseHook<Object>(fluentAdapter, instantiator, () -> element,
+                () -> locator, () -> "hook", null) {
             @Override
             protected Object newOptions() {
                 return defaultOptions;
@@ -88,8 +87,8 @@ public class BaseHookTest {
     @Test
     public void testNoOptionHookWithoutDefault() {
 
-        final BaseHook noOptionHook = new BaseHook<>(fluentAdapter, instantiator, Suppliers.ofInstance(element),
-                Suppliers.ofInstance(locator), Suppliers.ofInstance("hook"), null);
+        final BaseHook noOptionHook = new BaseHook<>(fluentAdapter, instantiator, () -> element, () -> locator,
+                () -> "hook", null);
 
         assertThat(noOptionHook.getOptions()).isNull();
     }
