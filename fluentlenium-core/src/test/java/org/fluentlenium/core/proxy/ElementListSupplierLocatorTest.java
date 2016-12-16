@@ -1,6 +1,5 @@
 package org.fluentlenium.core.proxy;
 
-import com.google.common.base.Supplier;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +8,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
-import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ElementListSupplierLocatorTest {
@@ -36,12 +34,7 @@ public class ElementListSupplierLocatorTest {
 
     @Test
     public void testWithNoElement() {
-        final ElementListSupplierLocator locator = new ElementListSupplierLocator(new Supplier<List<WebElement>>() {
-            @Override
-            public List<WebElement> get() {
-                return Arrays.asList();
-            }
-        });
+        final ElementListSupplierLocator locator = new ElementListSupplierLocator(() -> Arrays.asList());
 
         Assertions.assertThat(locator.findElement()).isNull();
         Assertions.assertThat(locator.findElements()).isEmpty();

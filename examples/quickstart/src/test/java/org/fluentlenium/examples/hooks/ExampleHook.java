@@ -1,11 +1,12 @@
 package org.fluentlenium.examples.hooks;
 
-import com.google.common.base.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.hook.BaseHook;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+
+import java.util.function.Supplier;
 
 public class ExampleHook extends BaseHook<ExampleHookOptions> {
     public ExampleHook(final FluentControl control, final ComponentInstantiator instantiator,

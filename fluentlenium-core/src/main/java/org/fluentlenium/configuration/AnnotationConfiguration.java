@@ -1,7 +1,7 @@
 package org.fluentlenium.configuration;
 
-import com.google.common.base.Strings;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.JsonException;
@@ -57,7 +57,7 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
     }
 
     private String getStringValue(final String property) {
-        if (Strings.isNullOrEmpty(property)) {
+        if (StringUtils.isEmpty(property)) {
             return null;
         }
         return property;
@@ -80,7 +80,7 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
     }
 
     private Capabilities getCapabilitiesValue(String property) {
-        if (Strings.isNullOrEmpty(property)) {
+        if (StringUtils.isEmpty(property)) {
             return null;
         }
         try {

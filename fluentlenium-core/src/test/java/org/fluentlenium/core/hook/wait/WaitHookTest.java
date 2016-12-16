@@ -1,6 +1,5 @@
 package org.fluentlenium.core.hook.wait;
 
-import com.google.common.base.Suppliers;
 import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
@@ -57,28 +56,18 @@ public class WaitHookTest {
         waitHookOptions.setTimeUnit(TimeUnit.MILLISECONDS);
         waitHookOptions.setPollingEvery(10L);
 
-        waitHook = new WaitHook(fluentControl, instantiator, Suppliers.ofInstance(element), Suppliers.ofInstance(locator),
-                Suppliers.ofInstance("toString"), waitHookOptions);
+        waitHook = new WaitHook(fluentControl, instantiator, () -> element, () -> locator, () -> "toString",
+                waitHookOptions);
     }
 
     @Test
     public void testElementNotFound() {
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                waitHook.findElement();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> waitHook.findElement()).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
     public void testElementListNotFound() {
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                waitHook.findElements();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> waitHook.findElements()).isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -137,8 +126,8 @@ public class WaitHookTest {
 
     @Test
     public void testDefaultOptions() {
-        final WaitHook defaultWaitHook = new WaitHook(fluentControl, instantiator, Suppliers.ofInstance(element),
-                Suppliers.ofInstance(locator), Suppliers.ofInstance("toString"), null);
+        final WaitHook defaultWaitHook = new WaitHook(fluentControl, instantiator, () -> element,
+                () -> locator, () -> "toString", null);
 
         assertThat(defaultWaitHook.getOptions()).isEqualToComparingFieldByField(new WaitHookOptions());
     }

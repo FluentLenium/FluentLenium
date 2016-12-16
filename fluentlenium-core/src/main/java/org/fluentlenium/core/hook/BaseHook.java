@@ -1,6 +1,6 @@
 package org.fluentlenium.core.hook;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 import lombok.experimental.Delegate;
 import org.fluentlenium.core.DefaultFluentContainer;
 import org.fluentlenium.core.FluentControl;

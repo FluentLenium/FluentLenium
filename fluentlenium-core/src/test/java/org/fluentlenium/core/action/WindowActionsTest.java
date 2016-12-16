@@ -1,6 +1,5 @@
 package org.fluentlenium.core.action;
 
-import com.google.common.collect.ImmutableSet;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentDriver;
@@ -19,6 +18,9 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -118,7 +120,7 @@ public class WindowActionsTest {
 
         final WindowAction windowAction = new WindowAction(this.fluentDriver, this.instantiator, this.driver);
 
-        when(this.driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2));
+        when(this.driver.getWindowHandles()).thenReturn(new HashSet<>(Arrays.asList(windowHandle, windowHandle2)));
 
         windowAction.switchToLast();
 
@@ -143,8 +145,8 @@ public class WindowActionsTest {
         final FluentDriver currentFluentDriver = new FluentDriver(this.driver, configuration, this.fluentControl);
         final FluentDriver fluentDriverSpied = spy(currentFluentDriver);
 
-        when(jsDriver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),
-                ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
+        when(jsDriver.getWindowHandles()).thenReturn(new HashSet<>(Arrays.asList(windowHandle, windowHandle1)),
+                new HashSet<>(Arrays.asList(windowHandle, windowHandle1, windowHandle2)));
         when(jsDriver.getWindowHandle()).thenReturn(windowHandle1, windowHandle2);
 
         final WindowAction windowAction = new WindowAction(fluentDriverSpied, this.instantiator, jsDriver);
@@ -184,7 +186,7 @@ public class WindowActionsTest {
         final FluentWait fluentWait = mock(FluentWait.class);
         final FluentWaitWindowConditions fluentWaitWindowMatcher = mock(FluentWaitWindowConditions.class);
 
-        when(this.driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2));
+        when(this.driver.getWindowHandles()).thenReturn(new HashSet<>(Arrays.asList(windowHandle, windowHandle2)));
         when(fluentWaitWindowMatcher.notDisplayed()).thenReturn(true);
         when(fluentWebElement.click()).thenReturn(fluentWebElement);
         when(fluentWait.untilWindow(any())).thenReturn(fluentWaitWindowMatcher);
@@ -212,8 +214,8 @@ public class WindowActionsTest {
         final FluentDriver currentFluentDriver = new FluentDriver(this.driver, configuration, this.fluentControl);
         final FluentDriver fluentDriverSpy = spy(currentFluentDriver);
 
-        when(this.driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),
-                ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
+        when(this.driver.getWindowHandles()).thenReturn(new HashSet<>(Arrays.asList(windowHandle, windowHandle1)),
+                new HashSet<>(Arrays.asList(windowHandle, windowHandle1, windowHandle2)));
         when(this.driver.getWindowHandle()).thenReturn(windowHandle1, windowHandle2);
 
         when(fluentWebElement.click()).thenReturn(fluentWebElement);

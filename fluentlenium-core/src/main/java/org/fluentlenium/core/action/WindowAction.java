@@ -1,6 +1,5 @@
 package org.fluentlenium.core.action;
 
-import com.google.common.base.Predicate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -11,13 +10,12 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
-
-import static com.google.common.collect.Iterables.getLast;
-import static com.google.common.collect.Iterables.getOnlyElement;
-import static com.google.common.collect.Sets.difference;
+import java.util.function.Predicate;
 
 /**
  * Execute actions on active window.
@@ -125,8 +123,10 @@ public class WindowAction {
 
         waitForNewWindowToOpen(oldWindowHandles);
 
-        final Set<String> newWindowHandles = this.driver.getWindowHandles();
-        final String newWindowHandle = getOnlyElement(difference(newWindowHandles, oldWindowHandles));
+        final Set<String> newWindowHandles = new HashSet<>(this.driver.getWindowHandles());
+        newWindowHandles.removeAll(oldWindowHandles);
+
+        final String newWindowHandle = newWindowHandles.iterator().next();
         switchTo(newWindowHandle);
 
         return oldWindowHandle;
@@ -190,8 +190,8 @@ public class WindowAction {
      * @return the WindowAction object itself
      */
     public WindowAction switchToLast() {
-        final Set<String> windowHandles = new TreeSet<>(this.driver.getWindowHandles());
-        this.driver.switchTo().window(getLast(windowHandles));
+        final List<String> windowHandles = new ArrayList<>(this.driver.getWindowHandles());
+        this.driver.switchTo().window(windowHandles.get(windowHandles.size() - 1));
         return this;
     }
 
@@ -202,13 +202,13 @@ public class WindowAction {
      * @return the WindowAction object itself
      */
     public WindowAction switchToLast(final String nameOrHandleToExclude) {
-        final Set<String> windowHandles = new TreeSet<>(this.driver.getWindowHandles());
+        final List<String> windowHandles = new ArrayList<>(this.driver.getWindowHandles());
 
         if (windowHandles.size() > 1) {
             windowHandles.remove(nameOrHandleToExclude);
         }
 
-        this.driver.switchTo().window(getLast(windowHandles));
+        this.driver.switchTo().window(windowHandles.get(windowHandles.size() - 1));
         return this;
     }
 
@@ -239,7 +239,7 @@ public class WindowAction {
         }
 
         @Override
-        public boolean apply(final FluentControl input) {
+        public boolean test(final FluentControl fluentControl) {
             return WindowAction.this.driver.getWindowHandles().size() == this.expectedValue;
         }
     }

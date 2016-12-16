@@ -1,6 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 import java.util.Arrays;
@@ -41,62 +40,32 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
 
     @Override
     public boolean present() {
-        return verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.present();
-            }
-        });
+        return verify(FluentWebElement::present);
     }
 
     @Override
     public boolean clickable() {
-        return verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.clickable();
-            }
-        });
+        return verify(FluentWebElement::clickable);
     }
 
     @Override
     public boolean stale() {
-        return verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.stale();
-            }
-        });
+        return verify(FluentWebElement::stale);
     }
 
     @Override
     public boolean displayed() {
-        return verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.displayed();
-            }
-        });
+        return verify(FluentWebElement::displayed);
     }
 
     @Override
     public boolean enabled() {
-        return verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.enabled();
-            }
-        });
+        return verify(FluentWebElement::enabled);
     }
 
     @Override
     public boolean selected() {
-        return verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.selected();
-            }
-        });
+        return verify(FluentWebElement::selected);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Predicate;
 import org.openqa.selenium.Rectangle;
 
 /**
@@ -39,13 +38,7 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
 
     @Override
     public boolean x(final int x) {
-        return verify(new Predicate<Rectangle>() {
-
-            @Override
-            public boolean apply(final Rectangle input) {
-                return input.getX() == x;
-            }
-        });
+        return verify(input -> input.getX() == x);
     }
 
     @Override
@@ -55,13 +48,7 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
 
     @Override
     public boolean y(final int y) {
-        return verify(new Predicate<Rectangle>() {
-
-            @Override
-            public boolean apply(final Rectangle input) {
-                return input.getY() == y;
-            }
-        });
+        return verify(input -> input.getY() == y);
     }
 
     @Override
@@ -71,24 +58,12 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
 
     @Override
     public boolean position(final int x, final int y) {
-        return verify(new Predicate<Rectangle>() {
-
-            @Override
-            public boolean apply(final Rectangle input) {
-                return input.getX() == x && input.getY() == y;
-            }
-        });
+        return verify(input -> input.getX() == x && input.getY() == y);
     }
 
     @Override
     public boolean width(final int width) {
-        return verify(new Predicate<Rectangle>() {
-
-            @Override
-            public boolean apply(final Rectangle input) {
-                return input.getWidth() == width;
-            }
-        });
+        return verify(input -> input.getWidth() == width);
     }
 
     @Override
@@ -98,13 +73,7 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
 
     @Override
     public boolean height(final int height) {
-        return verify(new Predicate<Rectangle>() {
-
-            @Override
-            public boolean apply(final Rectangle input) {
-                return object.getHeight() == height;
-            }
-        });
+        return verify(input -> object.getHeight() == height);
     }
 
     @Override
@@ -114,23 +83,11 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
 
     @Override
     public boolean dimension(final int width, final int height) {
-        return verify(new Predicate<Rectangle>() {
-
-            @Override
-            public boolean apply(final Rectangle input) {
-                return input.getWidth() == width && input.getHeight() == height;
-            }
-        });
+        return verify(input -> input.getWidth() == width && input.getHeight() == height);
     }
 
     @Override
     public boolean positionAndDimension(final int x, final int y, final int width, final int height) {
-        return verify(new Predicate<Rectangle>() {
-
-            @Override
-            public boolean apply(final Rectangle input) {
-                return input.getX() == x && input.getY() == y && input.getWidth() == width && input.getHeight() == height;
-            }
-        });
+        return verify(input -> input.getX() == x && input.getY() == y && input.getWidth() == width && input.getHeight() == height);
     }
 }

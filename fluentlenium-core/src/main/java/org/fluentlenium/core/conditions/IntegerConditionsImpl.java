@@ -1,7 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Predicate;
-
 /**
  * Conditions for integer
  */
@@ -38,51 +36,26 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
 
     @Override
     public boolean equalTo(final int value) {
-        return verify(new Predicate<Integer>() {
-            @Override
-            public boolean apply(final Integer input) {
-                return input.equals(value);
-            }
-        });
+        return verify(input -> input.equals(value));
     }
 
     @Override
     public boolean lessThan(final int value) {
-        return verify(new Predicate<Integer>() {
-            @Override
-            public boolean apply(final Integer input) {
-                return input < value;
-            }
-        });
+        return verify(input -> input < value);
     }
 
     @Override
     public boolean lessThanOrEqualTo(final int value) {
-        return verify(new Predicate<Integer>() {
-            @Override
-            public boolean apply(final Integer input) {
-                return input <= value;
-            }
-        });
+        return verify(input -> input <= value);
     }
 
     @Override
     public boolean greaterThan(final int value) {
-        return verify(new Predicate<Integer>() {
-            @Override
-            public boolean apply(final Integer input) {
-                return input > value;
-            }
-        });
+        return verify(input -> input > value);
     }
 
     @Override
     public boolean greaterThanOrEqualTo(final int value) {
-        return verify(new Predicate<Integer>() {
-            @Override
-            public boolean apply(final Integer input) {
-                return input >= value;
-            }
-        });
+        return verify(input -> input >= value);
     }
 }

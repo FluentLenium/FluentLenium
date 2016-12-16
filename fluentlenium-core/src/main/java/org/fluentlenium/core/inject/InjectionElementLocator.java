@@ -1,6 +1,6 @@
 package org.fluentlenium.core.inject;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 import lombok.experimental.Delegate;
 import org.fluentlenium.core.label.FluentLabelImpl;
 import org.fluentlenium.core.label.FluentLabelProvider;

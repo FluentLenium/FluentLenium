@@ -1,8 +1,9 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
+import static java.util.stream.Collectors.toList;
+
+import java.util.function.Function;
+import java.util.function.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class BaseObjectListConditions<T, C extends Conditions<T>> implements Con
     public List<T> getActualObject() {
         if (conditions instanceof ListConditionsElements) {
             final List<? extends FluentWebElement> elements = ((ListConditionsElements) conditions).getActualElements();
-            return new ArrayList<>(Collections2.transform(elements, objectGetter));
+            return elements.stream().map(objectGetter).collect(toList());
         }
         return new ArrayList<>();
     }
@@ -49,11 +50,6 @@ public class BaseObjectListConditions<T, C extends Conditions<T>> implements Con
      * @return true if the predicate is verified
      */
     public boolean verify(final Predicate<T> predicate) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return predicate.apply(objectGetter.apply(input));
-            }
-        });
+        return this.conditions.verify(input -> predicate.test(objectGetter.apply(input)));
     }
 }

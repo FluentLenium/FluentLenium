@@ -1,6 +1,5 @@
 package org.fluentlenium.adapter;
 
-import com.google.common.base.Supplier;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Delegate;
@@ -13,6 +12,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * A singleton container for all running {@link SharedWebDriver} in the JVM.
@@ -65,7 +65,7 @@ public enum SharedWebDriverContainer {
          * @return shared web driver
          */
         public <T> SharedWebDriver getOrCreateDriver(final Supplier<WebDriver> webDriverFactory, final Class<T> testClass,
-                final String testName, final DriverLifecycle driverLifecycle) {
+                                                     final String testName, final DriverLifecycle driverLifecycle) {
             synchronized (this) {
                 SharedWebDriver driver = getDriver(testClass, testName, driverLifecycle);
                 if (driver == null) {

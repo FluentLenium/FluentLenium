@@ -1,8 +1,8 @@
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Supplier;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.conditions.FluentConditions;
@@ -197,5 +197,11 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
     public FluentWaitElementList explicitlyFor(final long amount) {
         controlWait.explicitlyFor(amount);
         return this;
+    }
+
+    @Override
+    @Deprecated
+    public <T> T until(final com.google.common.base.Function<? super FluentControl, T> function) {
+        return controlWait.until(function);
     }
 }

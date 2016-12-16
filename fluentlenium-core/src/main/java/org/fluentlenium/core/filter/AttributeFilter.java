@@ -1,6 +1,5 @@
 package org.fluentlenium.core.filter;
 
-import com.google.common.collect.Collections2;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.filter.matcher.AbstractMatcher;
 import org.fluentlenium.core.filter.matcher.EqualMatcher;
@@ -8,6 +7,7 @@ import org.fluentlenium.core.search.SearchFilter;
 
 import java.util.Collection;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  * Search filter based on attribute value.
@@ -88,6 +88,6 @@ public class AttributeFilter implements SearchFilter {
 
     @Override
     public Collection<FluentWebElement> applyFilter(final Collection<FluentWebElement> elements) {
-        return Collections2.filter(elements, new AttributeFilterPredicate(this));
+        return elements.stream().filter(new AttributeFilterPredicate(this)).collect(Collectors.toList());
     }
 }

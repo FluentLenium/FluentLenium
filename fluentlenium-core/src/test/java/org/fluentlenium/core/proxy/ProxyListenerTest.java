@@ -1,6 +1,6 @@
 package org.fluentlenium.core.proxy;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;

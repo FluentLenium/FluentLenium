@@ -1,6 +1,6 @@
 package org.fluentlenium.core.proxy;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 import org.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;

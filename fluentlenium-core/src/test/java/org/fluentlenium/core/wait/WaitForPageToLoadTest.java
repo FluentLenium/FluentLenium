@@ -1,6 +1,6 @@
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

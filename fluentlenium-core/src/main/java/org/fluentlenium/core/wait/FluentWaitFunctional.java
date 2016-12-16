@@ -1,8 +1,8 @@
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Supplier;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.openqa.selenium.support.ui.Wait;
 
@@ -36,4 +36,6 @@ public interface FluentWaitFunctional<F> extends Wait<F> {
      * @return object returned by function
      */
     <T> T until(Function<? super F, T> function);
+
+
 }

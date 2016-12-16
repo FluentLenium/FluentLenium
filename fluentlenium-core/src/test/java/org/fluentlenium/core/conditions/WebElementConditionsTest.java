@@ -1,6 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Predicates;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -48,11 +47,11 @@ public class WebElementConditionsTest {
 
     @Test
     public void isVerified() {
-        assertThat(conditions.verify(Predicates.<FluentWebElement>alwaysTrue())).isTrue();
-        assertThat(conditions.verify(Predicates.<FluentWebElement>alwaysFalse())).isFalse();
+        assertThat(conditions.verify(predicate -> true)).isTrue();
+        assertThat(conditions.verify(predicate -> false)).isFalse();
 
-        assertThat(conditions.not().verify(Predicates.<FluentWebElement>alwaysTrue())).isFalse();
-        assertThat(conditions.not().verify(Predicates.<FluentWebElement>alwaysFalse())).isTrue();
+        assertThat(conditions.not().verify(predicate -> true)).isFalse();
+        assertThat(conditions.not().verify(predicate -> false)).isTrue();
     }
 
     @Test

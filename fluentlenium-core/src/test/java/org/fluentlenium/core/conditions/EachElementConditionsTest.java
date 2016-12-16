@@ -1,6 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Predicates;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
@@ -9,6 +8,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.function.Predicate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.reset;
@@ -33,11 +33,11 @@ public class EachElementConditionsTest extends AbstractFluentListConditionsTest 
 
     @Test
     public void verify() {
-        assertThat(conditions.verify(Predicates.<FluentWebElement>alwaysTrue())).isTrue();
-        assertThat(conditions.verify(Predicates.<FluentWebElement>alwaysFalse())).isFalse();
+        assertThat(conditions.verify(predicate -> true)).isTrue();
+        assertThat(conditions.verify(predicate -> false)).isFalse();
 
-        assertThat(conditions.not().verify(Predicates.<FluentWebElement>alwaysTrue())).isFalse();
-        assertThat(conditions.not().verify(Predicates.<FluentWebElement>alwaysFalse())).isTrue();
+        assertThat(conditions.not().verify(predicate -> true)).isFalse();
+        assertThat(conditions.not().verify(predicate -> false)).isTrue();
     }
 
     @Test

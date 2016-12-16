@@ -1,6 +1,6 @@
 package org.fluentlenium.core.filter;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 /**

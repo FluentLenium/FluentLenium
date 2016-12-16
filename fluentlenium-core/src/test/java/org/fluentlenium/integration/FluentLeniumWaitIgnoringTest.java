@@ -1,6 +1,6 @@
 package org.fluentlenium.integration;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,11 +37,8 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             exceptions.add(CustomException.class);
             exceptions.add(CustomException2.class);
 
-            await().atMost(1, TimeUnit.NANOSECONDS).ignoreAll(exceptions).until(new Supplier<Boolean>() {
-                @Override
-                public Boolean get() {
-                    throw new CustomException();
-                }
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoreAll(exceptions).until(() -> {
+                throw new CustomException();
             });
 
             throw new AssertionError();
@@ -58,11 +55,8 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             exceptions.add(CustomException.class);
             exceptions.add(CustomException2.class);
 
-            await().atMost(1, TimeUnit.NANOSECONDS).ignoreAll(exceptions).until(new Supplier<Boolean>() {
-                @Override
-                public Boolean get() {
-                    throw new CustomException3();
-                }
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoreAll(exceptions).until(() -> {
+                throw new CustomException3();
             });
 
             throw new AssertionError();
@@ -94,11 +88,8 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
 
         try {
             await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class).ignoring(CustomException2.class)
-                    .until(new Supplier<Boolean>() {
-                        @Override
-                        public Boolean get() {
-                            throw new CustomException3();
-                        }
+                    .until(() -> {
+                        throw new CustomException3();
                     });
 
             throw new AssertionError();
@@ -112,11 +103,8 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
 
         try {
             await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class, CustomException2.class)
-                    .until(new Supplier<Boolean>() {
-                        @Override
-                        public Boolean get() {
-                            throw new CustomException();
-                        }
+                    .until(() -> {
+                        throw new CustomException();
                     });
 
             throw new AssertionError();
@@ -130,11 +118,8 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
 
         try {
             await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class, CustomException2.class)
-                    .until(new Supplier<Boolean>() {
-                        @Override
-                        public Boolean get() {
-                            throw new CustomException3();
-                        }
+                    .until(() -> {
+                        throw new CustomException3();
                     });
 
             throw new AssertionError();

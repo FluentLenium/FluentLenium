@@ -1,7 +1,6 @@
 package org.fluentlenium.core.conditions;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 import java.util.List;
@@ -77,62 +76,32 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean present() {
-        return verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.conditions().present();
-            }
-        }, false);
+        return verify(input -> input.conditions().present(), false);
     }
 
     @Override
     public boolean clickable() {
-        return verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.conditions().clickable();
-            }
-        }, false);
+        return verify(input -> input.conditions().clickable(), false);
     }
 
     @Override
     public boolean stale() {
-        return verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.conditions().stale();
-            }
-        }, false);
+        return verify(input -> input.conditions().stale(), false);
     }
 
     @Override
     public boolean displayed() {
-        return verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.conditions().displayed();
-            }
-        }, false);
+        return verify(input -> input.conditions().displayed(), false);
     }
 
     @Override
     public boolean enabled() {
-        return verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.conditions().enabled();
-            }
-        }, false);
+        return verify(input -> input.conditions().enabled(), false);
     }
 
     @Override
     public boolean selected() {
-        return verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.conditions().selected();
-            }
-        }, false);
+        return verify(input -> input.conditions().selected(), false);
     }
 
     @Override
@@ -142,17 +111,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public StringConditions attribute(final String name) {
-        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
-            @Override
-            public String apply(final FluentWebElement input) {
-                return input.attribute(name);
-            }
-        }, new Function<FluentWebElement, StringConditions>() {
-            @Override
-            public StringConditions apply(final FluentWebElement input) {
-                return input.conditions().attribute(name);
-            }
-        });
+        return new StringListConditionsImpl(this, input -> input.attribute(name), input -> input.conditions().attribute(name));
     }
 
     @Override
@@ -162,32 +121,12 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public StringConditions id() {
-        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
-            @Override
-            public String apply(final FluentWebElement input) {
-                return input.id();
-            }
-        }, new Function<FluentWebElement, StringConditions>() {
-            @Override
-            public StringConditions apply(final FluentWebElement input) {
-                return input.conditions().id();
-            }
-        });
+        return new StringListConditionsImpl(this, FluentWebElement::id, input -> input.conditions().id());
     }
 
     @Override
     public StringConditions name() {
-        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
-            @Override
-            public String apply(final FluentWebElement input) {
-                return input.name();
-            }
-        }, new Function<FluentWebElement, StringConditions>() {
-            @Override
-            public StringConditions apply(final FluentWebElement input) {
-                return input.conditions().name();
-            }
-        });
+        return new StringListConditionsImpl(this, FluentWebElement::name, input -> input.conditions().name());
     }
 
     @Override
@@ -197,17 +136,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public StringConditions tagName() {
-        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
-            @Override
-            public String apply(final FluentWebElement input) {
-                return input.tagName();
-            }
-        }, new Function<FluentWebElement, StringConditions>() {
-            @Override
-            public StringConditions apply(final FluentWebElement input) {
-                return input.conditions().tagName();
-            }
-        });
+        return new StringListConditionsImpl(this, FluentWebElement::tagName, input -> input.conditions().tagName());
     }
 
     @Override
@@ -217,17 +146,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public StringConditions value() {
-        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
-            @Override
-            public String apply(final FluentWebElement input) {
-                return input.value();
-            }
-        }, new Function<FluentWebElement, StringConditions>() {
-            @Override
-            public StringConditions apply(final FluentWebElement input) {
-                return input.conditions().value();
-            }
-        });
+        return new StringListConditionsImpl(this, FluentWebElement::value, input -> input.conditions().value());
     }
 
     @Override
@@ -237,17 +156,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public StringConditions text() {
-        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
-            @Override
-            public String apply(final FluentWebElement input) {
-                return input.text();
-            }
-        }, new Function<FluentWebElement, StringConditions>() {
-            @Override
-            public StringConditions apply(final FluentWebElement input) {
-                return input.conditions().text();
-            }
-        });
+        return new StringListConditionsImpl(this, FluentWebElement::text, input -> input.conditions().text());
     }
 
     @Override
@@ -257,17 +166,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public StringConditions textContent() {
-        return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
-            @Override
-            public String apply(final FluentWebElement input) {
-                return input.textContent();
-            }
-        }, new Function<FluentWebElement, StringConditions>() {
-            @Override
-            public StringConditions apply(final FluentWebElement input) {
-                return input.conditions().textContent();
-            }
-        });
+        return new StringListConditionsImpl(this, FluentWebElement::textContent, input -> input.conditions().textContent());
     }
 
     @Override
@@ -282,11 +181,6 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean className(final String className) {
-        return verify(new Predicate<FluentWebElement>() {
-            @Override
-            public boolean apply(final FluentWebElement input) {
-                return input.conditions().className(className);
-            }
-        }, false);
+        return verify(input -> input.conditions().className(className), false);
     }
 }

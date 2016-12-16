@@ -1,6 +1,6 @@
 package org.fluentlenium.core.inject;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;

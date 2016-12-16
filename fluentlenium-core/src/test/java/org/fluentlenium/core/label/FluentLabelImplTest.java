@@ -1,6 +1,5 @@
 package org.fluentlenium.core.label;
 
-import com.google.common.base.Suppliers;
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Test;
@@ -15,7 +14,7 @@ public class FluentLabelImplTest {
 
     @Test
     public void testFluentLabel() {
-        final FluentLabel<FluentWebElement> fluentLabel = new FluentLabelImpl<>(element, Suppliers.ofInstance("default"));
+        final FluentLabel<FluentWebElement> fluentLabel = new FluentLabelImpl<>(element, () -> "default");
 
         Assertions.assertThat(fluentLabel.toString()).isEqualTo("default");
 

@@ -1,7 +1,7 @@
 package org.fluentlenium.configuration;
 
-import com.google.common.base.Strings;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.JsonException;
@@ -90,7 +90,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
     }
 
     private boolean isValidProperty(final String property) {
-        return !Strings.isNullOrEmpty(property) && !"null".equalsIgnoreCase(property);
+        return !StringUtils.isEmpty(property) && !"null".equalsIgnoreCase(property);
     }
 
     private String getStringProperty(final String propertyName) {

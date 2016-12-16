@@ -1,6 +1,6 @@
 package org.fluentlenium.core.wait;
 
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;

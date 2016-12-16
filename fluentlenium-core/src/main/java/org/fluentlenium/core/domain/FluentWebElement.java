@@ -1,7 +1,7 @@
 package org.fluentlenium.core.domain;
 
-import com.google.common.base.Optional;
-import com.google.common.base.Supplier;
+import java.util.Optional;
+import java.util.function.Supplier;
 import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
@@ -482,7 +482,7 @@ public class FluentWebElement extends Component
         if (present()) {
             return Optional.of(this);
         } else {
-            return Optional.absent();
+            return Optional.empty();
         }
     }
 

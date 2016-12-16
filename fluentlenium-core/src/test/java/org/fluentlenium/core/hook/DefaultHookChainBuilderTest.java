@@ -1,9 +1,7 @@
 package org.fluentlenium.core.hook;
 
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
+import java.util.function.Supplier;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
@@ -70,8 +68,7 @@ public class DefaultHookChainBuilderTest {
         hookDefinitions.add(new HookDefinition<>(NanoHook.class));
 
         final List<FluentHook> fluentHooks = hookChainBuilder
-                .build(Suppliers.ofInstance(element), Suppliers.ofInstance(locator), Suppliers.ofInstance("toString"),
-                        hookDefinitions);
+                .build(() -> element, () -> locator, () -> "toString", hookDefinitions);
 
         Assertions.assertThat(fluentHooks).hasSize(hookDefinitions.size());
 
@@ -122,14 +119,9 @@ public class DefaultHookChainBuilderTest {
 
         hookDefinitions.add(new HookDefinition<>(InvalidConstructorHook.class));
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                hookChainBuilder
-                        .build(Suppliers.ofInstance(element), Suppliers.ofInstance(locator), Suppliers.ofInstance("toString"),
-                                hookDefinitions);
-            }
-        }).isExactlyInstanceOf(HookException.class).hasMessage("An error has occurred with a defined hook.");
+        Assertions.assertThatThrownBy(() -> hookChainBuilder.build(() -> element, () -> locator, () -> "toString",
+                hookDefinitions)).isExactlyInstanceOf(HookException.class)
+                    .hasMessage("An error has occurred with a defined hook.");
 
     }
 
@@ -148,14 +140,9 @@ public class DefaultHookChainBuilderTest {
 
         hookDefinitions.add(new HookDefinition<>(FailingConstructorHook.class));
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                hookChainBuilder
-                        .build(Suppliers.ofInstance(element), Suppliers.ofInstance(locator), Suppliers.ofInstance("toString"),
-                                hookDefinitions);
-            }
-        }).isExactlyInstanceOf(HookException.class).hasMessage("An error has occurred with a defined hook.");
+        Assertions.assertThatThrownBy(() -> hookChainBuilder.build(() -> element, () -> locator, () -> "toString",
+                hookDefinitions)).isExactlyInstanceOf(HookException.class)
+                    .hasMessage("An error has occurred with a defined hook.");
 
     }
 }

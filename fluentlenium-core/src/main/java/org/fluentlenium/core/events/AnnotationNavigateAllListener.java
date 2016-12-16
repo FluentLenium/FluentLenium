@@ -1,6 +1,6 @@
 package org.fluentlenium.core.events;
 
-import com.google.common.base.Function;
+import java.util.function.Function;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.WebDriver;
 
@@ -37,20 +37,17 @@ class AnnotationNavigateAllListener extends AbstractAnnotationListener implement
      * @return function returning argument value from argument class
      */
     protected Function<Class<?>, Object> getArgsFunction(final String url, final WebDriver driver, final Direction direction) {
-        return new Function<Class<?>, Object>() {
-            @Override
-            public Object apply(final Class<?> input) {
-                if (input.isAssignableFrom(String.class)) {
-                    return url;
-                }
-                if (input.isAssignableFrom(WebDriver.class)) {
-                    return driver;
-                }
-                if (input.isAssignableFrom(Direction.class)) {
-                    return direction;
-                }
-                return null;
+        return input -> {
+            if (input.isAssignableFrom(String.class)) {
+                return url;
             }
+            if (input.isAssignableFrom(WebDriver.class)) {
+                return driver;
+            }
+            if (input.isAssignableFrom(Direction.class)) {
+                return direction;
+            }
+            return null;
         };
     }
 

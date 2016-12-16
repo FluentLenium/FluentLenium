@@ -1,6 +1,6 @@
 package org.fluentlenium.utils;
 
-import com.google.common.base.Function;
+import java.util.function.Function;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

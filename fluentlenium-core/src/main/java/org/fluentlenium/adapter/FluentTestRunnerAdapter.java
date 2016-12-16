@@ -1,10 +1,10 @@
 package org.fluentlenium.adapter;
 
-import com.google.common.base.Supplier;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * FluentLenium Test Runner Adapter.

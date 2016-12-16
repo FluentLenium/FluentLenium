@@ -1,7 +1,7 @@
 package org.fluentlenium.core.hook;
 
-import com.google.common.base.Function;
-import com.google.common.base.Supplier;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.proxy.LocatorProxies;

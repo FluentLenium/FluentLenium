@@ -1,6 +1,5 @@
 package org.fluentlenium.adapter;
 
-import com.google.common.base.Supplier;
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
@@ -20,14 +19,11 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.function.Supplier;
+
 @RunWith(MockitoJUnitRunner.class)
 public class IsolatedTestTest {
-    private final Supplier<WebDriver> webDriverFactory = new Supplier<WebDriver>() {
-        @Override
-        public WebDriver get() {
-            return mock(WebDriver.class);
-        }
-    };
+    private final Supplier<WebDriver> webDriverFactory = () -> mock(WebDriver.class);
 
     @Mock
     private WebElement element;
