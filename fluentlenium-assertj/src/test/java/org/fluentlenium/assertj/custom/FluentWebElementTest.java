@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
 public class FluentWebElementTest {
@@ -133,6 +135,21 @@ public class FluentWebElementTest {
         final String textWithStringFormatError = "%A";
         when(element.text()).thenReturn(textWithStringFormatError);
         elementAssert.hasText(textWithStringFormatError);
+    }
+
+    @Test
+    public void testHasNoRaceConditionInHasText() throws Exception {
+        final String textToFind = "someText";
+        final String firstActualText = "someOtherText";
+
+        when(element.text()).thenReturn(firstActualText, textToFind);
+
+        try {
+            elementAssert.hasText(textToFind);
+            fail("Expected assertion error");
+        } catch (AssertionError assertionError) {
+            assertThat(assertionError.getMessage()).contains("Actual text found : " + firstActualText);
+        }
     }
 
     @Test(expected = AssertionError.class)
