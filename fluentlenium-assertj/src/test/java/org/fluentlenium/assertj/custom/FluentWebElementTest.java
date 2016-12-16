@@ -2,14 +2,13 @@ package org.fluentlenium.assertj.custom;
 
 import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.hamcrest.CoreMatchers.containsString;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
 public class FluentWebElementTest {
@@ -149,13 +148,14 @@ public class FluentWebElementTest {
     public void testHasNoRaceConditioninHasText() throws Exception {
         final String textToFind = "someText";
         final String firstActualText = "someOtherText";
-        final String secondActualText = textToFind;
-        when(element.text()).thenReturn(firstActualText, secondActualText);
+
+        when(element.text()).thenReturn(firstActualText, textToFind);
+
         try {
             elementAssert.hasText(textToFind);
-            Assert.fail("Expected assertion error");
+            fail("Expected assertion error");
         } catch (AssertionError assertionError) {
-            Assert.assertThat(assertionError.getMessage(), containsString("Actual text found : " + firstActualText ));
+            assertThat(assertionError.getMessage()).contains("Actual text found : " + firstActualText );
         }
     }
 
