@@ -126,8 +126,9 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @return {@code this} assertion object.
      */
     public FluentWebElementAssert hasText(final String textToFind) {
-        if (!actual.text().contains(textToFind)) {
-            failWithMessage("The element does not contain the text: " + textToFind + " . Actual text found : " + actual.text());
+        String actualText = actual.text();
+        if (!actualText.contains(textToFind)) {
+            failWithMessage("The element does not contain the text: " + textToFind + " . Actual text found : " + actualText);
         }
 
         return this;
@@ -140,9 +141,10 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @return {@code this} assertion object.
      */
     public FluentWebElementAssert hasTextMatching(final String regexToBeMatched) {
-        if (!actual.text().matches(regexToBeMatched)) {
+        String actualText = actual.text();
+        if (!actualText.matches(regexToBeMatched)) {
             failWithMessage(
-                    "The element does not match the regex: " + regexToBeMatched + " . Actual text found : " + actual.text());
+                    "The element does not match the regex: " + regexToBeMatched + " . Actual text found : " + actualText);
 
         }
 
@@ -156,7 +158,8 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @return {@code this} assertion object.
      */
     public FluentWebElementAssert hasNotText(final String textToFind) {
-        if (actual.text().contains(textToFind)) {
+        String actualText = actual.text();
+        if (actualText.contains(textToFind)) {
             failWithMessage("The element contain the text: " + textToFind);
         }
 
@@ -178,8 +181,9 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @return {@code this} assertion object.
      */
     public FluentWebElementAssert hasId(final String idToFind) {
-        if (!actual.id().equals(idToFind)) {
-            failWithMessage("The element does not have the id: " + idToFind + " . Actual id found : " + actual.id());
+        String actualId = actual.id();
+        if (!actualId.equals(idToFind)) {
+            failWithMessage("The element does not have the id: " + idToFind + " . Actual id found : " + actualId);
         }
         return this;
     }
@@ -191,15 +195,15 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @return {@code this} assertion object.
      */
     public FluentWebElementAssert hasClass(final String classToFind) {
-        if (!getClasses().contains(classToFind)) {
-            failWithMessage("The element does not have the class: " + classToFind + " . Actual class found : " + actual
-                    .attribute("class"));
+        String actualClasses = actual.attribute("class");
+        if (!getClasses(actualClasses).contains(classToFind)) {
+            failWithMessage("The element does not have the class: " + classToFind + " . Actual class found : " + actualClasses);
         }
         return this;
     }
 
-    private List<String> getClasses() {
-        final String[] primitiveList = actual.attribute("class").split(" ");
+    private List<String> getClasses(String classString) {
+        final String[] primitiveList = classString.split(" ");
         return Arrays.asList(primitiveList);
     }
 }
