@@ -22,12 +22,12 @@ public class FluentJavascript {
      * @param script   script source to execute
      * @param args     script arguments
      */
-    public FluentJavascript(final JavascriptExecutor executor, final boolean async, final String script, final Object... args) {
+    public FluentJavascript(JavascriptExecutor executor, boolean async, String script, Object... args) {
         loadElements(args);
         if (async) {
-            this.result = executor.executeAsyncScript(script, args);
+            result = executor.executeAsyncScript(script, args);
         } else {
-            this.result = executor.executeScript(script, args);
+            result = executor.executeScript(script, args);
         }
     }
 
@@ -37,9 +37,9 @@ public class FluentJavascript {
      * @param args
      * @return
      */
-    private void loadElements(final Object[] args) {
-        for (final Object arg : args) {
-            final LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(arg);
+    private void loadElements(Object[] args) {
+        for (Object arg : args) {
+            LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(arg);
             if (locatorHandler != null) {
                 locatorHandler.now();
             }
@@ -164,7 +164,7 @@ public class FluentJavascript {
      * @return the result of javascript execution cast as a a typed {@link List}
      * @see org.openqa.selenium.JavascriptExecutor#executeScript(java.lang.String, java.lang.Object...)
      */
-    public <T> List<T> getListResult(final Class<T> listType) {
+    public <T> List<T> getListResult(Class<T> listType) {
         return (List<T>) result;
     }
 }

@@ -27,9 +27,9 @@ public class ComposedConfigurationTest {
 
     @Before
     public void before() {
-        final Answer configurationReadAnswer = new Answer() {
+        Answer configurationReadAnswer = new Answer() {
             @Override
-            public Object answer(final InvocationOnMock invocation) throws Throwable {
+            public Object answer(InvocationOnMock invocation) throws Throwable {
                 if (invocation.getMethod().getReturnType().isPrimitive()) {
                     return RETURNS_DEFAULTS.answer(invocation);
                 }
@@ -55,7 +55,7 @@ public class ComposedConfigurationTest {
 
         when(configurationProperties2.getConfigurationFactory()).thenAnswer(new Answer<Object>() {
             @Override
-            public Object answer(final InvocationOnMock invocation) throws Throwable {
+            public Object answer(InvocationOnMock invocation) throws Throwable {
                 return DummyConfigurationFactory.class;
             }
         });
@@ -68,7 +68,7 @@ public class ComposedConfigurationTest {
 
         when(configurationProperties3.getConfigurationFactory()).thenAnswer(new Answer<Object>() {
             @Override
-            public Object answer(final InvocationOnMock invocation) throws Throwable {
+            public Object answer(InvocationOnMock invocation) throws Throwable {
                 return DefaultConfigurationFactory.class;
             }
         });
@@ -76,8 +76,8 @@ public class ComposedConfigurationTest {
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DummyConfigurationFactory.class);
     }
 
-    private <T> void testImpl(final Function<ConfigurationProperties, T> getter, final Function<T, Void> setter,
-            final T defaultValue, final T value1, final T value2) {
+    private <T> void testImpl(Function<ConfigurationProperties, T> getter, Function<T, Void> setter,
+            T defaultValue, T value1, T value2) {
         if (defaultValue == null) {
             Assertions.assertThat(getter.apply(composed)).isNull();
         } else {
@@ -101,12 +101,12 @@ public class ComposedConfigurationTest {
     public void webDriver() {
         testImpl(new Function<ConfigurationProperties, String>() {
             @Override
-            public String apply(final ConfigurationProperties input) {
+            public String apply(ConfigurationProperties input) {
                 return input.getWebDriver();
             }
         }, new Function<String, Void>() {
             @Override
-            public Void apply(final String input) {
+            public Void apply(String input) {
                 composed.setWebDriver(input);
                 return null;
             }
@@ -117,12 +117,12 @@ public class ComposedConfigurationTest {
     public void baseUrl() {
         testImpl(new Function<ConfigurationProperties, String>() {
             @Override
-            public String apply(final ConfigurationProperties input) {
+            public String apply(ConfigurationProperties input) {
                 return input.getBaseUrl();
             }
         }, new Function<String, Void>() {
             @Override
-            public Void apply(final String input) {
+            public Void apply(String input) {
                 composed.setBaseUrl(input);
                 return null;
             }
@@ -133,12 +133,12 @@ public class ComposedConfigurationTest {
     public void pageLoadTimeout() {
         testImpl(new Function<ConfigurationProperties, Long>() {
             @Override
-            public Long apply(final ConfigurationProperties input) {
+            public Long apply(ConfigurationProperties input) {
                 return input.getPageLoadTimeout();
             }
         }, new Function<Long, Void>() {
             @Override
-            public Void apply(final Long input) {
+            public Void apply(Long input) {
                 composed.setPageLoadTimeout(input);
                 return null;
             }
@@ -149,12 +149,12 @@ public class ComposedConfigurationTest {
     public void implicitlyWait() {
         testImpl(new Function<ConfigurationProperties, Long>() {
             @Override
-            public Long apply(final ConfigurationProperties input) {
+            public Long apply(ConfigurationProperties input) {
                 return input.getImplicitlyWait();
             }
         }, new Function<Long, Void>() {
             @Override
-            public Void apply(final Long input) {
+            public Void apply(Long input) {
                 composed.setImplicitlyWait(input);
                 return null;
             }
@@ -165,12 +165,12 @@ public class ComposedConfigurationTest {
     public void scriptTimeout() {
         testImpl(new Function<ConfigurationProperties, Long>() {
             @Override
-            public Long apply(final ConfigurationProperties input) {
+            public Long apply(ConfigurationProperties input) {
                 return input.getScriptTimeout();
             }
         }, new Function<Long, Void>() {
             @Override
-            public Void apply(final Long input) {
+            public Void apply(Long input) {
                 composed.setScriptTimeout(input);
                 return null;
             }
@@ -181,12 +181,12 @@ public class ComposedConfigurationTest {
     public void screenshotPath() {
         testImpl(new Function<ConfigurationProperties, String>() {
             @Override
-            public String apply(final ConfigurationProperties input) {
+            public String apply(ConfigurationProperties input) {
                 return input.getScreenshotPath();
             }
         }, new Function<String, Void>() {
             @Override
-            public Void apply(final String input) {
+            public Void apply(String input) {
                 composed.setScreenshotPath(input);
                 return null;
             }
@@ -197,12 +197,12 @@ public class ComposedConfigurationTest {
     public void htmlDumpPath() {
         testImpl(new Function<ConfigurationProperties, String>() {
             @Override
-            public String apply(final ConfigurationProperties input) {
+            public String apply(ConfigurationProperties input) {
                 return input.getHtmlDumpPath();
             }
         }, new Function<String, Void>() {
             @Override
-            public Void apply(final String input) {
+            public Void apply(String input) {
                 composed.setHtmlDumpPath(input);
                 return null;
             }
@@ -213,12 +213,12 @@ public class ComposedConfigurationTest {
     public void screenshotMode() {
         testImpl(new Function<ConfigurationProperties, ConfigurationProperties.TriggerMode>() {
             @Override
-            public ConfigurationProperties.TriggerMode apply(final ConfigurationProperties input) {
+            public ConfigurationProperties.TriggerMode apply(ConfigurationProperties input) {
                 return input.getScreenshotMode();
             }
         }, new Function<ConfigurationProperties.TriggerMode, Void>() {
             @Override
-            public Void apply(final ConfigurationProperties.TriggerMode input) {
+            public Void apply(ConfigurationProperties.TriggerMode input) {
                 composed.setScreenshotMode(input);
                 return null;
             }
@@ -229,12 +229,12 @@ public class ComposedConfigurationTest {
     public void htmlDumpMode() {
         testImpl(new Function<ConfigurationProperties, ConfigurationProperties.TriggerMode>() {
             @Override
-            public ConfigurationProperties.TriggerMode apply(final ConfigurationProperties input) {
+            public ConfigurationProperties.TriggerMode apply(ConfigurationProperties input) {
                 return input.getHtmlDumpMode();
             }
         }, new Function<ConfigurationProperties.TriggerMode, Void>() {
             @Override
-            public Void apply(final ConfigurationProperties.TriggerMode input) {
+            public Void apply(ConfigurationProperties.TriggerMode input) {
                 composed.setHtmlDumpMode(input);
                 return null;
             }
@@ -243,20 +243,20 @@ public class ComposedConfigurationTest {
 
     @Test
     public void capabilities() {
-        final DesiredCapabilities cap1 = new DesiredCapabilities();
+        DesiredCapabilities cap1 = new DesiredCapabilities();
         cap1.setJavascriptEnabled(true);
 
-        final DesiredCapabilities cap2 = new DesiredCapabilities();
+        DesiredCapabilities cap2 = new DesiredCapabilities();
         cap2.setJavascriptEnabled(false);
 
         testImpl(new Function<ConfigurationProperties, Capabilities>() {
             @Override
-            public Capabilities apply(final ConfigurationProperties input) {
+            public Capabilities apply(ConfigurationProperties input) {
                 return input.getCapabilities();
             }
         }, new Function<Capabilities, Void>() {
             @Override
-            public Void apply(final Capabilities input) {
+            public Void apply(Capabilities input) {
                 composed.setCapabilities(input);
                 return null;
             }
@@ -267,12 +267,12 @@ public class ComposedConfigurationTest {
     public void eventsEnabled() {
         testImpl(new Function<ConfigurationProperties, Boolean>() {
             @Override
-            public Boolean apply(final ConfigurationProperties input) {
+            public Boolean apply(ConfigurationProperties input) {
                 return input.getEventsEnabled();
             }
         }, new Function<Boolean, Void>() {
             @Override
-            public Void apply(final Boolean input) {
+            public Void apply(Boolean input) {
                 composed.setEventsEnabled(input);
                 return null;
             }

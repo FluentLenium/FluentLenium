@@ -20,16 +20,16 @@ public abstract class AbstractSearchSupplier implements Supplier<List<WebElement
      * @param searchFilters filters to display in toString()
      * @param proxy         proxy to use for toString()
      */
-    public AbstractSearchSupplier(final List<SearchFilter> searchFilters, final Object proxy) {
+    public AbstractSearchSupplier(List<SearchFilter> searchFilters, Object proxy) {
         this.searchFilters = searchFilters;
         this.proxy = proxy;
     }
 
     @Override
     public String toString() {
-        final ElementLocator locator = LocatorProxies.getLocatorHandler(proxy).getLocator();
+        ElementLocator locator = LocatorProxies.getLocatorHandler(proxy).getLocator();
 
-        final StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(locator);
 
         for (int i = 0; i < searchFilters.size(); i++) {

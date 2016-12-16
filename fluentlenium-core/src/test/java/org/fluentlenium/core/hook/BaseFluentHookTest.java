@@ -48,7 +48,7 @@ public class BaseFluentHookTest {
 
     @Test
     public void testFluentWebElement() {
-        final FluentWebElement fluentWebElement = hook.getFluentWebElement();
+        FluentWebElement fluentWebElement = hook.getFluentWebElement();
         verify(instantiator).newComponent(FluentWebElement.class, element);
 
         assertThat(fluentWebElement).isInstanceOf(FluentWebElement.class);

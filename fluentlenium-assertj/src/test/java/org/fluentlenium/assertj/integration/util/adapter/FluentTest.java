@@ -20,19 +20,19 @@ public class FluentTest extends FluentTestRunnerAdapter {
     public TestRule watchman = new FluentTestRule(this) {
 
         @Override
-        public void starting(final Description description) {
+        public void starting(Description description) {
             super.starting(description);
             FluentTest.this.starting(description.getTestClass(), description.getDisplayName());
         }
 
         @Override
-        public void finished(final Description description) {
+        public void finished(Description description) {
             super.finished(description);
             FluentTest.this.finished(description.getTestClass(), description.getDisplayName());
         }
 
         @Override
-        public void failed(final Throwable e, final Description description) {
+        public void failed(Throwable e, Description description) {
             super.failed(e, description);
             FluentTest.this.failed(e, description.getTestClass(), description.getDisplayName());
         }

@@ -33,7 +33,7 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
      *
      * @param containerClass container class on which to read annotation
      */
-    public AnnotationConfiguration(final Class<?> containerClass) {
+    public AnnotationConfiguration(Class<?> containerClass) {
         this(containerClass == null ? null : containerClass.getAnnotation(FluentConfiguration.class));
     }
 
@@ -42,21 +42,21 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
      *
      * @param configuration annotation to read values from
      */
-    public AnnotationConfiguration(final FluentConfiguration configuration) {
+    public AnnotationConfiguration(FluentConfiguration configuration) {
         super();
         this.configuration = configuration;
 
         if (this.configuration != null) {
-            final CustomProperty[] custom = this.configuration.custom();
+            CustomProperty[] custom = this.configuration.custom();
             if (custom != null) {
-                for (final CustomProperty customProperty : custom) {
+                for (CustomProperty customProperty : custom) {
                     customProperties.put(customProperty.name(), customProperty.value());
                 }
             }
         }
     }
 
-    private String getStringValue(final String property) {
+    private String getStringValue(String property) {
         if (Strings.isNullOrEmpty(property)) {
             return null;
         }
@@ -64,7 +64,7 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
     }
 
     private <T extends ConfigurationFactory> Class<T> getConfigurationFactoryClassValue(
-            final Class<T> configurationFactoryClass) {
+            Class<T> configurationFactoryClass) {
         if (configurationFactoryClass == DefaultConfigurationFactory.class) {
             return null;
         }
@@ -72,7 +72,7 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
     }
 
     private Class<? extends ConfigurationProperties> getConfigurationDefaultsClassValue(
-            final Class<? extends ConfigurationProperties> configurationDefaultsClass) {
+            Class<? extends ConfigurationProperties> configurationDefaultsClass) {
         if (configurationDefaultsClass == ConfigurationDefaults.class) {
             return null;
         }
@@ -84,27 +84,27 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
             return null;
         }
         try {
-            final URL url = new URL(property);
+            URL url = new URL(property);
             InputStream stream = null;
             try {
                 stream = url.openStream();
                 property = IOUtils.toString(stream, Charset.defaultCharset());
-            } catch (final IOException e) {
+            } catch (IOException e) {
                 throw new ConfigurationException("Can't read Capabilities defined at " + url, e);
             } finally {
                 IOUtils.closeQuietly(stream);
             }
-        } catch (final MalformedURLException e) { // NOPMD EmptyCatchBlock
+        } catch (MalformedURLException e) { // NOPMD EmptyCatchBlock
             // This is not an URL. Consider property as JSON.
         }
-        final CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
+        CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
         if (factory != null) {
             return factory.newCapabilities(getGlobalConfiguration());
         }
 
         try {
             return jsonConverter.convert(DesiredCapabilities.class, property);
-        } catch (final JsonException e) {
+        } catch (JsonException e) {
             throw new ConfigurationException("Can't convert JSON Capabilities to Object.", e);
         }
     }
@@ -117,21 +117,21 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
         return getConfigurationDefaultsClassValue(configuration.configurationDefaults());
     }
 
-    private Long getLongValue(final Long property) {
+    private Long getLongValue(Long property) {
         if (property < 0) {
             return null;
         }
         return property;
     }
 
-    private TriggerMode getTriggerModeValue(final TriggerMode triggerMode) {
+    private TriggerMode getTriggerModeValue(TriggerMode triggerMode) {
         if (triggerMode == TriggerMode.DEFAULT) {
             return null;
         }
         return triggerMode;
     }
 
-    private DriverLifecycle getDriverLifecycleValue(final DriverLifecycle driverLifecycle) {
+    private DriverLifecycle getDriverLifecycleValue(DriverLifecycle driverLifecycle) {
         if (driverLifecycle == DriverLifecycle.DEFAULT) {
             return null;
         }
@@ -275,7 +275,7 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
     }
 
     @Override
-    public String getCustomProperty(final String propertyName) {
+    public String getCustomProperty(String propertyName) {
         return customProperties.get(propertyName);
     }
 }

@@ -20,7 +20,7 @@ public class KeyboardActions {
      *
      * @param driver selenium driver
      */
-    public KeyboardActions(final WebDriver driver) {
+    public KeyboardActions(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -30,7 +30,7 @@ public class KeyboardActions {
      * @param keyboard keyboard interface
      * @param mouse    mouse interface
      */
-    public KeyboardActions(final Keyboard keyboard, final Mouse mouse) {
+    public KeyboardActions(Keyboard keyboard, Mouse mouse) {
         this.keyboard = keyboard;
         this.mouse = mouse;
     }
@@ -71,7 +71,7 @@ public class KeyboardActions {
      * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#keyDown(Keys)
      */
-    public KeyboardActions keyDown(final Keys theKey) {
+    public KeyboardActions keyDown(Keys theKey) {
         actions().keyDown(theKey).perform();
         return this;
     }
@@ -84,7 +84,7 @@ public class KeyboardActions {
      * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#keyUp(Keys)
      */
-    public KeyboardActions keyUp(final Keys theKey) {
+    public KeyboardActions keyUp(Keys theKey) {
         actions().keyUp(theKey).perform();
         return this;
     }
@@ -102,7 +102,7 @@ public class KeyboardActions {
      * @return A self reference.
      * @see org.openqa.selenium.interactions.Actions#sendKeys(CharSequence...)
      */
-    public KeyboardActions sendKeys(final CharSequence... keysToSend) {
+    public KeyboardActions sendKeys(CharSequence... keysToSend) {
         actions().sendKeys(keysToSend).perform();
         return this;
     }

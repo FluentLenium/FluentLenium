@@ -26,7 +26,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      *
      * @param driverContainer driver container
      */
-    public FluentTestRunnerAdapter(final FluentControlContainer driverContainer) {
+    public FluentTestRunnerAdapter(FluentControlContainer driverContainer) {
         this(driverContainer, new DefaultSharedMutator());
     }
 
@@ -35,7 +35,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      *
      * @param sharedMutator shared mutator.
      */
-    public FluentTestRunnerAdapter(final SharedMutator sharedMutator) {
+    public FluentTestRunnerAdapter(SharedMutator sharedMutator) {
         this(new DefaultFluentControlContainer(), sharedMutator);
     }
 
@@ -45,7 +45,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param driverContainer driver container
      * @param sharedMutator   shared mutator
      */
-    public FluentTestRunnerAdapter(final FluentControlContainer driverContainer, final SharedMutator sharedMutator) {
+    public FluentTestRunnerAdapter(FluentControlContainer driverContainer, SharedMutator sharedMutator) {
         super(driverContainer);
         this.sharedMutator = sharedMutator;
     }
@@ -62,7 +62,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      *
      * @param testName Test name
      */
-    protected void starting(final String testName) {
+    protected void starting(String testName) {
         starting(getClass(), testName);
     }
 
@@ -71,7 +71,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      *
      * @param testClass Test class
      */
-    protected void starting(final Class<?> testClass) {
+    protected void starting(Class<?> testClass) {
         starting(testClass, testClass.getName());
     }
 
@@ -81,14 +81,14 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testClass Test class
      * @param testName  Test name
      */
-    protected void starting(final Class<?> testClass, final String testName) {
-        final EffectiveParameters<?> parameters = this.sharedMutator
+    protected void starting(Class<?> testClass, String testName) {
+        EffectiveParameters<?> parameters = sharedMutator
                 .getEffectiveParameters(testClass, testName, getDriverLifecycle());
 
-        final SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getOrCreateDriver(new Supplier<WebDriver>() {
+        SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getOrCreateDriver(new Supplier<WebDriver>() {
             @Override
             public WebDriver get() {
-                return FluentTestRunnerAdapter.this.newWebDriver();
+                return newWebDriver();
             }
         }, parameters.getTestClass(), parameters.getTestName(), parameters.getDriverLifecycle());
 
@@ -107,7 +107,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      *
      * @param testName Test name
      */
-    protected void finished(final String testName) {
+    protected void finished(String testName) {
         finished(getClass(), testName);
     }
 
@@ -116,7 +116,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      *
      * @param testClass Test class
      */
-    protected void finished(final Class<?> testClass) {
+    protected void finished(Class<?> testClass) {
         finished(testClass, testClass.getName());
     }
 
@@ -126,24 +126,24 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testClass Test class
      * @param testName  Test name
      */
-    protected void finished(final Class<?> testClass, final String testName) {
-        final DriverLifecycle driverLifecycle = getDriverLifecycle();
+    protected void finished(Class<?> testClass, String testName) {
+        DriverLifecycle driverLifecycle = getDriverLifecycle();
 
         if (driverLifecycle == DriverLifecycle.METHOD) {
-            final EffectiveParameters<?> parameters = this.sharedMutator
+            EffectiveParameters<?> parameters = sharedMutator
                     .getEffectiveParameters(testClass, testName, driverLifecycle);
 
-            final SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE
+            SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE
                     .getDriver(parameters.getTestClass(), parameters.getTestName(), parameters.getDriverLifecycle());
 
             if (sharedWebDriver != null) {
                 SharedWebDriverContainer.INSTANCE.quit(sharedWebDriver);
             }
         } else if (getDeleteCookies() != null && getDeleteCookies()) {
-            final EffectiveParameters<?> sharedParameters = this.sharedMutator
+            EffectiveParameters<?> sharedParameters = sharedMutator
                     .getEffectiveParameters(testClass, testName, driverLifecycle);
 
-            final SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE
+            SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE
                     .getDriver(sharedParameters.getTestClass(), sharedParameters.getTestName(),
                             sharedParameters.getDriverLifecycle());
 
@@ -161,9 +161,9 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      *
      * @param testClass test class to terminate
      */
-    public static void afterClass(final Class<?> testClass) {
-        final List<SharedWebDriver> sharedWebDrivers = SharedWebDriverContainer.INSTANCE.getTestClassDrivers(testClass);
-        for (final SharedWebDriver sharedWebDriver : sharedWebDrivers) {
+    public static void afterClass(Class<?> testClass) {
+        List<SharedWebDriver> sharedWebDrivers = SharedWebDriverContainer.INSTANCE.getTestClassDrivers(testClass);
+        for (SharedWebDriver sharedWebDriver : sharedWebDrivers) {
             SharedWebDriverContainer.INSTANCE.quit(sharedWebDriver);
         }
     }
@@ -180,7 +180,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      *
      * @param testName Test name
      */
-    protected void failed(final String testName) {
+    protected void failed(String testName) {
         failed(getClass(), testName);
     }
 
@@ -189,7 +189,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      *
      * @param testClass Test class
      */
-    protected void failed(final Class<?> testClass) {
+    protected void failed(Class<?> testClass) {
         failed(testClass, testClass.getName());
     }
 
@@ -199,7 +199,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testClass Test class
      * @param testName  Test name
      */
-    protected void failed(final Class<?> testClass, final String testName) {
+    protected void failed(Class<?> testClass, String testName) {
         failed(null, testClass, testName);
     }
 
@@ -210,13 +210,13 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testClass Test class
      * @param testName  Test name
      */
-    protected void failed(final Throwable e, final Class<?> testClass, final String testName) {
+    protected void failed(Throwable e, Class<?> testClass, String testName) {
         if (isFluentControlAvailable()) {
             try {
                 if (getScreenshotMode() == TriggerMode.AUTOMATIC_ON_FAIL && canTakeScreenShot()) {
                     takeScreenShot(testClass.getSimpleName() + "_" + testName + ".png");
                 }
-            } catch (final Exception exception) { // NOPMD EmptyCatchBlock
+            } catch (Exception exception) { // NOPMD EmptyCatchBlock
                 // Can't write screenshot, for some reason.
             }
 
@@ -224,7 +224,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
                 if (getHtmlDumpMode() == TriggerMode.AUTOMATIC_ON_FAIL && getDriver() != null) {
                     takeHtmlDump(testClass.getSimpleName() + "_" + testName + ".html");
                 }
-            } catch (final Exception exception) { // NOPMD EmptyCatchBlock
+            } catch (Exception exception) { // NOPMD EmptyCatchBlock
                 // Can't write htmldump, for some reason.
             }
 

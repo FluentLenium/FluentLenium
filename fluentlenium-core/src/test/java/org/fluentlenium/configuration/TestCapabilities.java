@@ -32,12 +32,12 @@ public class TestCapabilities implements Capabilities {
     }
 
     @Override
-    public Object getCapability(final String capabilityName) {
+    public Object getCapability(String capabilityName) {
         return null;
     }
 
     @Override
-    public boolean is(final String capabilityName) {
+    public boolean is(String capabilityName) {
         return false;
     }
 }

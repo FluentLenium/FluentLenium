@@ -33,7 +33,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
      *
      * @param propertiesReader properties reader
      */
-    protected PropertiesBackendConfiguration(final PropertiesBackend propertiesReader) {
+    protected PropertiesBackendConfiguration(PropertiesBackend propertiesReader) {
         this(propertiesReader, PROPERTIES_PREFIX);
     }
 
@@ -43,11 +43,11 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
      * @param propertiesReader properties reader
      * @param prefixes         array of allowed prefixes
      */
-    protected PropertiesBackendConfiguration(final PropertiesBackend propertiesReader, final String... prefixes) {
+    protected PropertiesBackendConfiguration(PropertiesBackend propertiesReader, String... prefixes) {
         if (prefixes.length == 0) {
             throw new IllegalArgumentException("Prefixes should be defined");
         }
-        this.propertiesBackend = propertiesReader;
+        propertiesBackend = propertiesReader;
         this.prefixes = prefixes;
     }
 
@@ -65,7 +65,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
      *
      * @param propertiesBackend properties backend
      */
-    void setPropertiesBackend(final PropertiesBackend propertiesBackend) {
+    void setPropertiesBackend(PropertiesBackend propertiesBackend) {
         this.propertiesBackend = propertiesBackend;
     }
 
@@ -75,13 +75,13 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
      * @param propertyName property key
      * @return property value
      */
-    protected String getPropertyImpl(final String propertyName) {
+    protected String getPropertyImpl(String propertyName) {
         return propertiesBackend.getProperty(propertyName);
     }
 
-    private String getProperty(final String propertyName) {
-        for (final String prefix : prefixes) {
-            final String property = getPropertyImpl(prefix + propertyName);
+    private String getProperty(String propertyName) {
+        for (String prefix : prefixes) {
+            String property = getPropertyImpl(prefix + propertyName);
             if (property != null) {
                 return property;
             }
@@ -89,40 +89,40 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
         return null;
     }
 
-    private boolean isValidProperty(final String property) {
+    private boolean isValidProperty(String property) {
         return !Strings.isNullOrEmpty(property) && !"null".equalsIgnoreCase(property);
     }
 
-    private String getStringProperty(final String propertyName) {
-        final String property = getProperty(propertyName);
+    private String getStringProperty(String propertyName) {
+        String property = getProperty(propertyName);
         if (!isValidProperty(property)) {
             return null;
         }
         return property;
     }
 
-    private Long getLongProperty(final String propertyName) {
-        final String property = getProperty(propertyName);
+    private Long getLongProperty(String propertyName) {
+        String property = getProperty(propertyName);
         if (!isValidProperty(property)) {
             return null;
         }
         try {
             return Long.parseLong(property);
-        } catch (final NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return null;
         }
     }
 
-    private Boolean getBooleanProperty(final String propertyName) {
-        final String property = getProperty(propertyName);
+    private Boolean getBooleanProperty(String propertyName) {
+        String property = getProperty(propertyName);
         if (!isValidProperty(property)) {
             return null;
         }
         return Boolean.parseBoolean(property);
     }
 
-    private <T extends Enum<T>> T getEnumProperty(final Class<T> enumClass, final String propertyName) {
-        final String property = getProperty(propertyName);
+    private <T extends Enum<T>> T getEnumProperty(Class<T> enumClass, String propertyName) {
+        String property = getProperty(propertyName);
         if (!isValidProperty(property)) {
             return null;
         }
@@ -132,17 +132,17 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
         return (T) Enum.valueOf(enumClass, property);
     }
 
-    private <T> Class<T> getClassProperty(final Class<T> clazz, final String propertyName) {
-        final String property = getProperty(propertyName);
+    private <T> Class<T> getClassProperty(Class<T> clazz, String propertyName) {
+        String property = getProperty(propertyName);
         if (!isValidProperty(property)) {
             return null;
         }
         try {
-            final Class<?> propertyClass = Class.forName(property);
+            Class<?> propertyClass = Class.forName(property);
             if (clazz.isAssignableFrom(propertyClass)) {
                 return (Class<T>) propertyClass;
             }
-        } catch (final ClassNotFoundException e) { // NOPMD EmptyCatchBlock
+        } catch (ClassNotFoundException e) { // NOPMD EmptyCatchBlock
         }
         return null;
     }
@@ -154,32 +154,32 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
      * @return URL object
      * @throws MalformedURLException if given url is not valid
      */
-    protected URL newURL(final String url) throws MalformedURLException {
+    protected URL newURL(String url) throws MalformedURLException {
         return new URL(url);
     }
 
-    private Capabilities getCapabilitiesProperty(final String propertyName) {
+    private Capabilities getCapabilitiesProperty(String propertyName) {
         String property = getProperty(propertyName);
         if (!isValidProperty(property)) {
             return null;
         }
         try {
-            final URL url = newURL(property);
+            URL url = newURL(property);
             try {
                 property = IOUtils.toString(url, Charset.defaultCharset());
-            } catch (final IOException e) {
+            } catch (IOException e) {
                 throw new ConfigurationException("Can't read Capabilities defined at " + url, e);
             }
-        } catch (final MalformedURLException e) { // NOPMD EmptyCatchBlock PreserveStackTrace
+        } catch (MalformedURLException e) { // NOPMD EmptyCatchBlock PreserveStackTrace
             // This is not an URL. Consider property as JSON.
         }
-        final CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
+        CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
         if (factory != null) {
             return factory.newCapabilities(getGlobalConfiguration());
         }
         try {
             return jsonConverter.convert(DesiredCapabilities.class, property);
-        } catch (final JsonException e) {
+        } catch (JsonException e) {
             throw new ConfigurationException("Can't convert JSON Capabilities to Object.", e);
         }
     }
@@ -275,7 +275,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
     }
 
     @Override
-    public String getCustomProperty(final String propertyName) {
+    public String getCustomProperty(String propertyName) {
         return getStringProperty(propertyName);
     }
 }

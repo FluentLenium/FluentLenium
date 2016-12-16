@@ -23,16 +23,16 @@ public final class ResourceUtils {
      * @return File matching the classpath resource, or null if not found
      * @throws IOException when an exception occurs while reading the resource
      */
-    public static File getResourceAsFile(final String resourcePath) throws IOException {
-        final InputStream resourceStream = ClassLoader.getSystemClassLoader().getResourceAsStream(resourcePath);
+    public static File getResourceAsFile(String resourcePath) throws IOException {
+        InputStream resourceStream = ClassLoader.getSystemClassLoader().getResourceAsStream(resourcePath);
         if (resourceStream == null) {
             return null;
         }
 
-        final File tempFile = File.createTempFile(String.valueOf(resourceStream.hashCode()), ".tmp");
+        File tempFile = File.createTempFile(String.valueOf(resourceStream.hashCode()), ".tmp");
         tempFile.deleteOnExit();
 
-        final FileOutputStream out = new FileOutputStream(tempFile);
+        FileOutputStream out = new FileOutputStream(tempFile);
         try {
             IOUtils.copy(resourceStream, out);
         } finally {
@@ -49,8 +49,8 @@ public final class ResourceUtils {
      * @return File matching the classpath resource, or null if not found
      * @throws IOException when an exception occurs while reading the resource
      */
-    public static URL getResourceAsURL(final String resourcePath) throws IOException {
-        final File resourceAsFile = getResourceAsFile(resourcePath);
+    public static URL getResourceAsURL(String resourcePath) throws IOException {
+        File resourceAsFile = getResourceAsFile(resourcePath);
         if (resourceAsFile == null) {
             return null;
         }

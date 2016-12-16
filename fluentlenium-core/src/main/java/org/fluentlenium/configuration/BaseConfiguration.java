@@ -11,8 +11,8 @@ public class BaseConfiguration {
      *
      * @param configuration global configuration to retrieve values defined in other configuration sources
      */
-    /* default */ void setGlobalConfiguration(final ConfigurationProperties configuration) {
-        this.globalConfiguration = configuration;
+    /* default */ void setGlobalConfiguration(ConfigurationProperties configuration) {
+        globalConfiguration = configuration;
     }
 
     /**

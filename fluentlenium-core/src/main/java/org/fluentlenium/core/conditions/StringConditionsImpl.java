@@ -14,7 +14,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
      *
      * @param string underlying string
      */
-    public StringConditionsImpl(final String string) {
+    public StringConditionsImpl(String string) {
         super(string);
     }
 
@@ -24,12 +24,12 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
      * @param string   underlying string
      * @param negation negation value
      */
-    public StringConditionsImpl(final String string, final boolean negation) {
+    public StringConditionsImpl(String string, boolean negation) {
         super(string, negation);
     }
 
     @Override
-    protected StringConditionsImpl newInstance(final boolean negationValue) {
+    protected StringConditionsImpl newInstance(boolean negationValue) {
         return new StringConditionsImpl(object, negationValue);
     }
 
@@ -44,7 +44,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
         return verify(new Predicate<String>() {
 
             @Override
-            public boolean apply(final String input) {
+            public boolean apply(String input) {
                 if (input == null) {
                     return false;
                 }
@@ -58,7 +58,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
         return verify(new Predicate<String>() {
 
             @Override
-            public boolean apply(final String input) {
+            public boolean apply(String input) {
                 if (input == null) {
                     return false;
                 }
@@ -72,7 +72,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
         return verify(new Predicate<String>() {
 
             @Override
-            public boolean apply(final String input) {
+            public boolean apply(String input) {
                 if (input == null) {
                     return false;
                 }
@@ -86,7 +86,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
         return verify(new Predicate<String>() {
 
             @Override
-            public boolean apply(final String input) {
+            public boolean apply(String input) {
                 if (input == null) {
                     return false;
                 }
@@ -100,7 +100,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
         return verify(new Predicate<String>() {
 
             @Override
-            public boolean apply(final String input) {
+            public boolean apply(String input) {
                 if (input == null) {
                     return false;
                 }
@@ -114,7 +114,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
         return verify(new Predicate<String>() {
 
             @Override
-            public boolean apply(final String input) {
+            public boolean apply(String input) {
                 if (input == null) {
                     return false;
                 }
@@ -128,11 +128,11 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
         return verify(new Predicate<String>() {
 
             @Override
-            public boolean apply(final String input) {
+            public boolean apply(String input) {
                 if (input == null) {
                     return false;
                 }
-                final Matcher matcher = pattern.matcher(input);
+                Matcher matcher = pattern.matcher(input);
                 return matcher.matches();
             }
         });

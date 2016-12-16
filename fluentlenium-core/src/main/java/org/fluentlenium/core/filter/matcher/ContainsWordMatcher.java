@@ -10,7 +10,7 @@ public class ContainsWordMatcher extends AbstractMatcher {
      *
      * @param value input value
      */
-    public ContainsWordMatcher(final String value) {
+    public ContainsWordMatcher(String value) {
         super(value);
     }
 
@@ -20,7 +20,7 @@ public class ContainsWordMatcher extends AbstractMatcher {
     }
 
     @Override
-    public boolean isSatisfiedBy(final String obj) {
+    public boolean isSatisfiedBy(String obj) {
         return CalculateService.contains(getPattern(), getValue(), obj);
     }
 

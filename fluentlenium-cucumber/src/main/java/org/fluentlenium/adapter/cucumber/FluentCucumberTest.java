@@ -23,7 +23,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      *
      * @param scenario Cucumber scenario to initialize
      */
-    public void before(final Scenario scenario) {
+    public void before(Scenario scenario) {
         starting(scenario.getId());
     }
 
@@ -34,7 +34,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      *
      * @param scenario Cucumber scenario to release
      */
-    public void after(final Scenario scenario) {
+    public void after(Scenario scenario) {
         if (scenario.isFailed()) {
             failed(scenario.getId());
         }

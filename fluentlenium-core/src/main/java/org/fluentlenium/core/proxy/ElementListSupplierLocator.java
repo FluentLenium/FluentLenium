@@ -18,8 +18,8 @@ public class ElementListSupplierLocator implements ElementLocator {
      *
      * @param elements element list instance
      */
-    public ElementListSupplierLocator(final List<WebElement> elements) {
-        this.elementsSupplier = new SupplierOfInstance<>(elements);
+    public ElementListSupplierLocator(List<WebElement> elements) {
+        elementsSupplier = new SupplierOfInstance<>(elements);
     }
 
     /**
@@ -27,13 +27,13 @@ public class ElementListSupplierLocator implements ElementLocator {
      *
      * @param elementsSupplier element list supplier
      */
-    public ElementListSupplierLocator(final Supplier<List<WebElement>> elementsSupplier) {
+    public ElementListSupplierLocator(Supplier<List<WebElement>> elementsSupplier) {
         this.elementsSupplier = elementsSupplier;
     }
 
     @Override
     public WebElement findElement() {
-        final List<WebElement> webElements = elementsSupplier.get();
+        List<WebElement> webElements = elementsSupplier.get();
         if (webElements != null && !webElements.isEmpty()) {
             return webElements.iterator().next();
         }

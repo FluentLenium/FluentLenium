@@ -24,7 +24,7 @@ public final class FluentLeniumAssertions {
      * @param actual actual alert
      * @return Alert assertion object
      */
-    public static AlertAssert assertThat(final AlertImpl actual) {
+    public static AlertAssert assertThat(AlertImpl actual) {
         return new AlertAssert(actual);
     }
 
@@ -34,7 +34,7 @@ public final class FluentLeniumAssertions {
      * @param actual actual page
      * @return Page assertion object
      */
-    public static PageAssert assertThat(final FluentPage actual) {
+    public static PageAssert assertThat(FluentPage actual) {
         return new PageAssert(actual);
     }
 
@@ -44,7 +44,7 @@ public final class FluentLeniumAssertions {
      * @param actual actual element
      * @return Element assertion object
      */
-    public static FluentWebElementAssert assertThat(final FluentWebElement actual) {
+    public static FluentWebElementAssert assertThat(FluentWebElement actual) {
         return new FluentWebElementAssert(actual);
     }
 
@@ -54,7 +54,7 @@ public final class FluentLeniumAssertions {
      * @param actual actual element list
      * @return Element list assertion object
      */
-    public static FluentListAssert assertThat(final FluentList<?> actual) {
+    public static FluentListAssert assertThat(FluentList<?> actual) {
         return new FluentListAssert(actual);
     }
 

@@ -22,9 +22,9 @@ public class AttributeFilter implements SearchFilter {
      * @param attributeName attribute name
      * @param value         value to filter
      */
-    public AttributeFilter(final String attributeName, final String value) {
+    public AttributeFilter(String attributeName, String value) {
         this.attributeName = attributeName;
-        this.matcher = new EqualMatcher(value);
+        matcher = new EqualMatcher(value);
     }
 
     /**
@@ -33,8 +33,8 @@ public class AttributeFilter implements SearchFilter {
      * @param customAttribute custom attribute name
      * @param matcher         matcher
      */
-    public AttributeFilter(final String customAttribute, final AbstractMatcher matcher) {
-        this.attributeName = customAttribute;
+    public AttributeFilter(String customAttribute, AbstractMatcher matcher) {
+        attributeName = customAttribute;
         this.matcher = matcher;
     }
 
@@ -58,10 +58,10 @@ public class AttributeFilter implements SearchFilter {
 
     @Override
     public String toString() {
-        final StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("with ").append(getAttribut());
 
-        final String matcherRepr = matcher == null ? null : matcher.toString();
+        String matcherRepr = matcher == null ? null : matcher.toString();
         if (matcherRepr != null) {
             stringBuilder.append(' ').append(matcherRepr).append(' ');
         }
@@ -87,7 +87,7 @@ public class AttributeFilter implements SearchFilter {
     }
 
     @Override
-    public Collection<FluentWebElement> applyFilter(final Collection<FluentWebElement> elements) {
+    public Collection<FluentWebElement> applyFilter(Collection<FluentWebElement> elements) {
         return Collections2.filter(elements, new AttributeFilterPredicate(this));
     }
 }

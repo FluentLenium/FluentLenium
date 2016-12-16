@@ -16,7 +16,7 @@ public class ElementListInstanceLocator extends ElementListSupplierLocator imple
      *
      * @param elements element list instance
      */
-    public ElementListInstanceLocator(final List<WebElement> elements) {
+    public ElementListInstanceLocator(List<WebElement> elements) {
         super(new SupplierOfInstance<>(elements));
     }
 

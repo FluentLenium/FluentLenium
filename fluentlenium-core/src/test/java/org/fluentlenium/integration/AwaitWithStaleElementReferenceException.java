@@ -21,7 +21,7 @@ public class AwaitWithStaleElementReferenceException extends IntegrationFluentTe
     public void givenDefaultWhenStateElementReferenceExceptionIsThrownThenItIsIgnored() {
         await().atMost(3, SECONDS).untilPredicate(new Predicate<FluentControl>() {
             @Override
-            public boolean apply(final FluentControl fluent) {
+            public boolean apply(FluentControl fluent) {
                 find(".small").clear();
                 throw new StaleElementReferenceException("test");
             }
@@ -32,7 +32,7 @@ public class AwaitWithStaleElementReferenceException extends IntegrationFluentTe
     public void givenNoDefaultsWhenStateElementReferenceExceptionIsThrownThenItIsNotIgnored() {
         await().atMost(3, SECONDS).withNoDefaultsException().untilPredicate(new Predicate<FluentControl>() {
             @Override
-            public boolean apply(final FluentControl fluent) {
+            public boolean apply(FluentControl fluent) {
                 find(".small").clear();
                 throw new StaleElementReferenceException("test");
             }

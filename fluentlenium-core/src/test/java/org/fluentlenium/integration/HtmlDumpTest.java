@@ -25,12 +25,12 @@ public class HtmlDumpTest extends IntegrationFluentTest {
     public void checkHtmlIsDumped() throws IOException {
         goTo(DEFAULT_URL);
 
-        final File file = new File(tempDir.toFile(), "test.html");
+        File file = new File(tempDir.toFile(), "test.html");
         try {
             takeHtmlDump(file.getAbsolutePath());
-            final FileInputStream fis = new FileInputStream(file);
-            final String html = IOUtils.toString(fis, "UTF-8");
-            assertThat(html).isEqualTo(this.el("html").html());
+            FileInputStream fis = new FileInputStream(file);
+            String html = IOUtils.toString(fis, "UTF-8");
+            assertThat(html).isEqualTo(el("html").html());
             assertThat(html).isNotEmpty();
         } finally {
             file.delete();

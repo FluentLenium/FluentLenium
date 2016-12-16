@@ -20,10 +20,10 @@ public final class ConfigurationFactoryProvider {
      * @param container container class
      * @return configuration factory
      */
-    public static ConfigurationFactory getConfigurationFactory(final Class<?> container) {
-        final ConfigurationProperties configuration = BOOTSTRAP_FACTORY.newConfiguration(container, new ConfigurationDefaults());
+    public static ConfigurationFactory getConfigurationFactory(Class<?> container) {
+        ConfigurationProperties configuration = BOOTSTRAP_FACTORY.newConfiguration(container, new ConfigurationDefaults());
 
-        final Class<? extends ConfigurationFactory> configurationFactoryClass = configuration.getConfigurationFactory();
+        Class<? extends ConfigurationFactory> configurationFactoryClass = configuration.getConfigurationFactory();
 
         if (configurationFactoryClass != null) {
             try {
@@ -42,14 +42,14 @@ public final class ConfigurationFactoryProvider {
      * @param container container class
      * @return configuration
      */
-    public static Configuration newConfiguration(final Class<?> container) {
-        final ConfigurationFactory configurationFactory = getConfigurationFactory(container);
+    public static Configuration newConfiguration(Class<?> container) {
+        ConfigurationFactory configurationFactory = getConfigurationFactory(container);
         Configuration configuration = configurationFactory.newConfiguration(container, new ConfigurationDefaults());
 
         if (configuration.getConfigurationDefaults() != null
                 && configuration.getConfigurationDefaults() != ConfigurationDefaults.class) {
 
-            final ConfigurationProperties configurationDefaults;
+            ConfigurationProperties configurationDefaults;
 
             try {
                 configurationDefaults = ReflectionUtils.newInstance(configuration.getConfigurationDefaults());

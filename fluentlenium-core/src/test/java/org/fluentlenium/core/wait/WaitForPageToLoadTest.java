@@ -35,13 +35,13 @@ public class WaitForPageToLoadTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void whenBrowserDoNotImplementsJavascriptExecutorThrowsException() {
-        final FluentWaitPageConditions fluentWaitPageBuilder = new FluentWaitPageConditions(wait, webDriver);
+        FluentWaitPageConditions fluentWaitPageBuilder = new FluentWaitPageConditions(wait, webDriver);
         fluentWaitPageBuilder.isLoaded();
     }
 
     @Test
     public void whenBrowserImplementsJavascriptExecutorThenGoToPredicate() {
-        final FluentWaitPageConditions fluentWaitPageBuilder = new FluentWaitPageConditions(wait,
+        FluentWaitPageConditions fluentWaitPageBuilder = new FluentWaitPageConditions(wait,
                 new WebDriverWithJavascriptExecutor());
         fluentWaitPageBuilder.isLoaded();
         verify(wait).untilPredicate(any(Predicate.class));
@@ -49,15 +49,15 @@ public class WaitForPageToLoadTest {
 
     private static class WebDriverWithJavascriptExecutor implements WebDriver, JavascriptExecutor {
 
-        public Object executeScript(final String script, final Object... args) {
+        public Object executeScript(String script, Object... args) {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        public Object executeAsyncScript(final String script, final Object... args) {
+        public Object executeAsyncScript(String script, Object... args) {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        public void get(final String url) {
+        public void get(String url) {
             //To change body of implemented methods use File | Settings | File Templates.
         }
 
@@ -69,11 +69,11 @@ public class WaitForPageToLoadTest {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        public List<WebElement> findElements(final By by) {
+        public List<WebElement> findElements(By by) {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
-        public WebElement findElement(final By by) {
+        public WebElement findElement(By by) {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
 

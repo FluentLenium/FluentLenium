@@ -43,9 +43,9 @@ public class RectangleListConditionsTest {
 
     @Before
     public void before() {
-        final FluentAdapter fluentAdapter = new FluentAdapter();
+        FluentAdapter fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
-        final DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
+        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
 
         fluentWebElement1 = new FluentWebElement(webElement1, fluentAdapter, instantiator);
         fluentWebElement2 = new FluentWebElement(webElement2, fluentAdapter, instantiator);
@@ -61,10 +61,10 @@ public class RectangleListConditionsTest {
 
     @Test
     public void fromEachElementConditions() { // NOPMD ExcessiveMethodLength
-        final EachElementConditions conditions = new EachElementConditions(
+        EachElementConditions conditions = new EachElementConditions(
                 Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
-        final RectangleConditions rectConditions = conditions.rectangle();
+        RectangleConditions rectConditions = conditions.rectangle();
 
         when(webElement1.getRect()).thenReturn(new Rectangle(1, 2, 3, 4));
         when(webElement2.getRect()).thenReturn(new Rectangle(1, 2, 3, 4));
@@ -72,14 +72,14 @@ public class RectangleListConditionsTest {
 
         assertThat(rectConditions.verify(new Predicate<Rectangle>() {
             @Override
-            public boolean apply(final Rectangle input) {
+            public boolean apply(Rectangle input) {
                 return input.equals(new Rectangle(1, 2, 3, 4));
             }
         })).isTrue();
 
         assertThat(rectConditions.not().verify(new Predicate<Rectangle>() {
             @Override
-            public boolean apply(final Rectangle input) {
+            public boolean apply(Rectangle input) {
                 return input.equals(new Rectangle(1, 2, 3, 4));
             }
         })).isFalse();
@@ -166,10 +166,10 @@ public class RectangleListConditionsTest {
 
     @Test
     public void fromAtLeastOneElementConditions() { // NOPMD ExcessiveMethodLength
-        final AtLeastOneElementConditions conditions = new AtLeastOneElementConditions(
+        AtLeastOneElementConditions conditions = new AtLeastOneElementConditions(
                 Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
-        final RectangleConditions rectConditions = conditions.rectangle();
+        RectangleConditions rectConditions = conditions.rectangle();
 
         when(webElement1.getRect()).thenReturn(new Rectangle(1, 2, 3, 4));
         when(webElement2.getRect()).thenReturn(new Rectangle(1, 2, 3, 4));
@@ -177,14 +177,14 @@ public class RectangleListConditionsTest {
 
         assertThat(rectConditions.verify(new Predicate<Rectangle>() {
             @Override
-            public boolean apply(final Rectangle input) {
+            public boolean apply(Rectangle input) {
                 return input.equals(new Rectangle(1, 2, 3, 4));
             }
         })).isTrue();
 
         assertThat(rectConditions.not().verify(new Predicate<Rectangle>() {
             @Override
-            public boolean apply(final Rectangle input) {
+            public boolean apply(Rectangle input) {
                 return input.equals(new Rectangle(1, 2, 3, 4));
             }
         })).isTrue();

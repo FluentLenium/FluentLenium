@@ -16,13 +16,13 @@ public class EachElementConditions extends AbstractFluentListConditions {
      *
      * @param elements underlying elements
      */
-    public EachElementConditions(final List<? extends FluentWebElement> elements) {
+    public EachElementConditions(List<? extends FluentWebElement> elements) {
         super(elements);
     }
 
     @Override
     public EachElementConditions not() {
-        final EachElementConditions negatedConditions = new EachElementConditions(getElements());
+        EachElementConditions negatedConditions = new EachElementConditions(getElements());
         negatedConditions.setNegation(!isNegation());
         return negatedConditions;
     }
@@ -45,11 +45,11 @@ public class EachElementConditions extends AbstractFluentListConditions {
      */
     protected Predicate<FluentDriver> buildEachElementPredicate(final Predicate<FluentWebElement> predicate,
             final boolean defaultValue) {
-        final Predicate<FluentDriver> untilPredicate = new Predicate<FluentDriver>() {
+        Predicate<FluentDriver> untilPredicate = new Predicate<FluentDriver>() {
             @Override
-            public boolean apply(final FluentDriver fluent) {
+            public boolean apply(FluentDriver fluent) {
                 if (getElements().size() > 0) {
-                    for (final FluentWebElement element : getElements()) {
+                    for (FluentWebElement element : getElements()) {
                         if (!predicate.apply(element)) {
                             return false;
                         }

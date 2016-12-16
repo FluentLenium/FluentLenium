@@ -23,8 +23,8 @@ public class FilterBuilder {
      *
      * @param customAttribute custom attributes to use for filters created by this builder
      */
-    public FilterBuilder(final String customAttribute) {
-        this.attribute = customAttribute;
+    public FilterBuilder(String customAttribute) {
+        attribute = customAttribute;
     }
 
     /**
@@ -33,7 +33,7 @@ public class FilterBuilder {
      * @param value value to search
      * @return new filter
      */
-    public AttributeFilter equalTo(final String value) {
+    public AttributeFilter equalTo(String value) {
         return new AttributeFilter(attribute, new EqualMatcher(value));
     }
 
@@ -43,7 +43,7 @@ public class FilterBuilder {
      * @param value value to search
      * @return new filter
      */
-    public AttributeFilter contains(final String value) {
+    public AttributeFilter contains(String value) {
         return new AttributeFilter(attribute, new ContainsMatcher(value));
     }
 
@@ -53,7 +53,7 @@ public class FilterBuilder {
      * @param word value to search
      * @return new filter
      */
-    public AttributeFilter containsWord(final String word) {
+    public AttributeFilter containsWord(String word) {
         return new AttributeFilter(attribute, new ContainsWordMatcher(word));
     }
 
@@ -63,7 +63,7 @@ public class FilterBuilder {
      * @param pattern pattern to match
      * @return new filter
      */
-    public AttributeFilter contains(final Pattern pattern) {
+    public AttributeFilter contains(Pattern pattern) {
         return new AttributeFilter(attribute, new ContainsMatcher(pattern));
     }
 
@@ -73,7 +73,7 @@ public class FilterBuilder {
      * @param value value to search
      * @return new filter
      */
-    public AttributeFilter startsWith(final String value) {
+    public AttributeFilter startsWith(String value) {
         return new AttributeFilter(attribute, new StartsWithMatcher(value));
     }
 
@@ -83,7 +83,7 @@ public class FilterBuilder {
      * @param pattern pattern to match
      * @return new filter
      */
-    public AttributeFilter startsWith(final Pattern pattern) {
+    public AttributeFilter startsWith(Pattern pattern) {
         return new AttributeFilter(attribute, new StartsWithMatcher(pattern));
     }
 
@@ -93,7 +93,7 @@ public class FilterBuilder {
      * @param value value to search
      * @return new filter
      */
-    public AttributeFilter endsWith(final String value) {
+    public AttributeFilter endsWith(String value) {
         return new AttributeFilter(attribute, new EndsWithMatcher(value));
     }
 
@@ -103,7 +103,7 @@ public class FilterBuilder {
      * @param pattern pattern to match
      * @return new filter
      */
-    public AttributeFilter endsWith(final Pattern pattern) {
+    public AttributeFilter endsWith(Pattern pattern) {
         return new AttributeFilter(attribute, new EndsWithMatcher(pattern));
     }
 
@@ -113,7 +113,7 @@ public class FilterBuilder {
      * @param value value to search
      * @return new filter
      */
-    public AttributeFilter notContains(final String value) {
+    public AttributeFilter notContains(String value) {
         return new AttributeFilter(attribute, new NotContainsMatcher(value));
     }
 
@@ -123,7 +123,7 @@ public class FilterBuilder {
      * @param pattern pattern to match
      * @return new filter
      */
-    public AttributeFilter notContains(final Pattern pattern) {
+    public AttributeFilter notContains(Pattern pattern) {
         return new AttributeFilter(attribute, new NotContainsMatcher(pattern));
     }
 
@@ -133,7 +133,7 @@ public class FilterBuilder {
      * @param value value to search
      * @return new filter
      */
-    public AttributeFilter notStartsWith(final String value) {
+    public AttributeFilter notStartsWith(String value) {
         return new AttributeFilter(attribute, new NotStartsWithMatcher(value));
     }
 
@@ -143,7 +143,7 @@ public class FilterBuilder {
      * @param pattern pattern to match
      * @return new filter
      */
-    public AttributeFilter notStartsWith(final Pattern pattern) {
+    public AttributeFilter notStartsWith(Pattern pattern) {
         return new AttributeFilter(attribute, new NotStartsWithMatcher(pattern));
     }
 
@@ -153,7 +153,7 @@ public class FilterBuilder {
      * @param value value to search
      * @return new filter
      */
-    public AttributeFilter notEndsWith(final String value) {
+    public AttributeFilter notEndsWith(String value) {
         return new AttributeFilter(attribute, new NotEndsWithMatcher(value));
     }
 
@@ -163,7 +163,7 @@ public class FilterBuilder {
      * @param pattern pattern to match
      * @return new filter
      */
-    public AttributeFilter notEndsWith(final Pattern pattern) {
+    public AttributeFilter notEndsWith(Pattern pattern) {
         return new AttributeFilter(attribute, new NotEndsWithMatcher(pattern));
     }
 

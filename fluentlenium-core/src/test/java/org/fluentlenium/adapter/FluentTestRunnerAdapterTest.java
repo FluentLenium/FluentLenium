@@ -32,7 +32,7 @@ public class FluentTestRunnerAdapterTest {
 
     @Test
     public void testStartingFinish() {
-        final FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
+        FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
 
         adapter.starting();
 
@@ -41,7 +41,7 @@ public class FluentTestRunnerAdapterTest {
 
     @Test
     public void testStartingFinishWithName() {
-        final FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter(new DefaultSharedMutator()));
+        FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter(new DefaultSharedMutator()));
 
         adapter.starting("test");
 
@@ -50,10 +50,10 @@ public class FluentTestRunnerAdapterTest {
 
     @Test
     public void testFailedWhenNoDriverAvailable() throws IOException {
-        final FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
+        FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
         adapter.initFluent(driver);
 
-        final Path tmpDirectory = Files.createTempDirectory("testFailedWhenNoDriverAvailable");
+        Path tmpDirectory = Files.createTempDirectory("testFailedWhenNoDriverAvailable");
         adapter.getConfiguration().setScreenshotPath(tmpDirectory.toFile().getPath());
         adapter.getConfiguration().setHtmlDumpPath(tmpDirectory.toFile().getPath());
 
@@ -78,14 +78,14 @@ public class FluentTestRunnerAdapterTest {
 
     @Test
     public void testFailedWhenDriverAvailable() throws IOException {
-        final FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
+        FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
         adapter.initFluent(driver);
 
-        final Path tmpDirectory = Files.createTempDirectory("testFailedWhenDriverAvailable");
+        Path tmpDirectory = Files.createTempDirectory("testFailedWhenDriverAvailable");
         adapter.getConfiguration().setScreenshotPath(tmpDirectory.toFile().getPath());
         adapter.getConfiguration().setHtmlDumpPath(tmpDirectory.toFile().getPath());
 
-        final Path tempFile = Files.createTempFile("testFailedWhenDriverAvailable", "");
+        Path tempFile = Files.createTempFile("testFailedWhenDriverAvailable", "");
         when(driver.getScreenshotAs(OutputType.FILE)).thenReturn(tempFile.toFile());
         tempFile.toFile().deleteOnExit();
 

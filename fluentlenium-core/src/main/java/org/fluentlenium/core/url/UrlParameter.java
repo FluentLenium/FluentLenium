@@ -25,7 +25,7 @@ public class UrlParameter {
      * @param match    parameter matche
      * @param optional optional parameter
      */
-    public UrlParameter(final String name, final String group, final String path, final String match, final boolean optional) {
+    public UrlParameter(String name, String group, String path, String match, boolean optional) {
         this.name = name;
         this.group = group;
         this.path = path;

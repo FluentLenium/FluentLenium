@@ -13,7 +13,7 @@ public class PageAssert extends AbstractAssert<PageAssert, FluentPage> {
      *
      * @param actual page to assert
      */
-    public PageAssert(final FluentPage actual) {
+    public PageAssert(FluentPage actual) {
         super(actual, PageAssert.class);
     }
 

@@ -14,18 +14,18 @@ public class AttributeFilterPredicate implements Predicate<FluentWebElement> {
      *
      * @param filter attribute filter
      */
-    public AttributeFilterPredicate(final AttributeFilter filter) {
+    public AttributeFilterPredicate(AttributeFilter filter) {
         this.filter = filter;
     }
 
     @Override
-    public boolean apply(final FluentWebElement element) {
+    public boolean apply(FluentWebElement element) {
 
-        final String attribute = getAttributeValue(element);
+        String attribute = getAttributeValue(element);
         return filter != null && filter.getMatcher().isSatisfiedBy(attribute);
     }
 
-    private String getAttributeValue(final FluentWebElement element) {
+    private String getAttributeValue(FluentWebElement element) {
         return "text".equalsIgnoreCase(filter.getAttribut()) ? element.text() : element.attribute(filter.getAttribut());
     }
 

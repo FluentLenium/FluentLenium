@@ -26,10 +26,10 @@ class FluentTestRule implements TestRule {
      *
      * @param target target of the rule.
      */
-    FluentTestRule(final Object target) {
+    FluentTestRule(Object target) {
         this.target = target;
-        this.testClass = new TestClass(target.getClass());
-        this.afters = testClass.getAnnotatedMethods(After.class);
+        testClass = new TestClass(target.getClass());
+        afters = testClass.getAnnotatedMethods(After.class);
     }
 
     @Override
@@ -38,29 +38,29 @@ class FluentTestRule implements TestRule {
 
             @Override
             public void evaluate() throws Throwable {
-                final List<Throwable> errors = new ArrayList<>();
+                List<Throwable> errors = new ArrayList<>();
                 try {
                     starting(description);
                     base.evaluate();
                     succeeded(description);
-                } catch (final Throwable e) {
+                } catch (Throwable e) {
                     errors.add(e);
                     try {
                         failed(e, description);
-                    } catch (final Throwable failedException) {
+                    } catch (Throwable failedException) {
                         errors.add(failedException);
                     }
-                    for (final FrameworkMethod each : afters) {
+                    for (FrameworkMethod each : afters) {
                         try {
                             each.invokeExplosively(target);
-                        } catch (final Throwable afterException) {
+                        } catch (Throwable afterException) {
                             errors.add(afterException);
                         }
                     }
                 } finally {
                     try {
                         finished(description);
-                    } catch (final Throwable failedException) {
+                    } catch (Throwable failedException) {
                         errors.add(failedException);
                     }
                 }
@@ -74,7 +74,7 @@ class FluentTestRule implements TestRule {
      *
      * @param description test description
      */
-    protected void succeeded(final Description description) {
+    protected void succeeded(Description description) {
         //Do nothing.
     }
 
@@ -84,7 +84,7 @@ class FluentTestRule implements TestRule {
      * @param e           exception
      * @param description test description
      */
-    protected void failed(final Throwable e, final Description description) {
+    protected void failed(Throwable e, Description description) {
         //Do nothing.
     }
 
@@ -93,7 +93,7 @@ class FluentTestRule implements TestRule {
      *
      * @param description test description
      */
-    protected void starting(final Description description) {
+    protected void starting(Description description) {
         //Do nothing.
     }
 
@@ -102,7 +102,7 @@ class FluentTestRule implements TestRule {
      *
      * @param description test description
      */
-    protected void finished(final Description description) {
+    protected void finished(Description description) {
         //Do nothing.
     }
 }

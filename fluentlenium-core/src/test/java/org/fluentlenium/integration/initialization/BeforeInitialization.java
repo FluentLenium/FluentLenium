@@ -28,13 +28,13 @@ public class BeforeInitialization extends FluentTest {
 
     @Test
     public void testInternalFluentWebElementInstantiate() {
-        final TestPrivatePageWithElement privatePage = newInstance(TestPrivatePageWithElement.class);
+        TestPrivatePageWithElement privatePage = newInstance(TestPrivatePageWithElement.class);
         assertThat(privatePage.myElement).isNotNull();
     }
 
     @Test
     public void testSuperclassFluentWebElementInstantiate() {
-        final TestPrivatePageWithElementSubclass privatePage = newInstance(TestPrivatePageWithElementSubclass.class);
+        TestPrivatePageWithElementSubclass privatePage = newInstance(TestPrivatePageWithElementSubclass.class);
         assertThat(privatePage.myElement).isNotNull();
     }
 

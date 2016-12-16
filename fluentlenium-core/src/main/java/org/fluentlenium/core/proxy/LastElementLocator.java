@@ -19,12 +19,12 @@ public class LastElementLocator implements ElementLocator {
      *
      * @param listLocator element list locator
      */
-    public LastElementLocator(final ElementLocator listLocator) {
+    public LastElementLocator(ElementLocator listLocator) {
         this.listLocator = listLocator;
     }
 
     private WebElement findElementImpl() {
-        final List<WebElement> elements = this.listLocator.findElements();
+        List<WebElement> elements = listLocator.findElements();
         if (elements.isEmpty()) {
             return null;
         }
@@ -33,7 +33,7 @@ public class LastElementLocator implements ElementLocator {
 
     @Override
     public WebElement findElement() {
-        final WebElement element = findElementImpl();
+        WebElement element = findElementImpl();
         if (element == null) {
             throw ElementUtils.noSuchElementException(String.valueOf("Element " + this));
         }
@@ -42,7 +42,7 @@ public class LastElementLocator implements ElementLocator {
 
     @Override
     public List<WebElement> findElements() {
-        final WebElement element = findElementImpl();
+        WebElement element = findElementImpl();
         if (element == null) {
             return Collections.emptyList();
         }

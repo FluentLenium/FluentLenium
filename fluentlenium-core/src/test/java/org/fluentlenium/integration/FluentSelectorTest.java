@@ -110,7 +110,7 @@ public class FluentSelectorTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         assertThat($("span", withPredicate(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return input.id() != null && !input.id().startsWith("na");
             }
         })).ids().contains("oneline"));

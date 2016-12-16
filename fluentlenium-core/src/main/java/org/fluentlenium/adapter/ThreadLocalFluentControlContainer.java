@@ -16,11 +16,11 @@ public class ThreadLocalFluentControlContainer implements FluentControlContainer
     }
 
     @Override
-    public void setFluentControl(final FluentControl fluentControl) {
+    public void setFluentControl(FluentControl fluentControl) {
         if (fluentControl == null) {
-            this.fluentControls.remove();
+            fluentControls.remove();
         } else {
-            this.fluentControls.set(fluentControl);
+            fluentControls.set(fluentControl);
         }
     }
 }

@@ -16,7 +16,7 @@ public class AlertImpl implements Alert {
      *
      * @param driver selenium driver
      */
-    public AlertImpl(final WebDriver driver) {
+    public AlertImpl(WebDriver driver) {
         alert = driver.switchTo().alert();
     }
 
@@ -25,12 +25,12 @@ public class AlertImpl implements Alert {
      *
      * @param alert selenium alert
      */
-    public AlertImpl(final org.openqa.selenium.Alert alert) {
+    public AlertImpl(org.openqa.selenium.Alert alert) {
         this.alert = alert;
     }
 
     @Override
-    public void prompt(final String text) {
+    public void prompt(String text) {
         sendKeys(text);
         accept();
     }

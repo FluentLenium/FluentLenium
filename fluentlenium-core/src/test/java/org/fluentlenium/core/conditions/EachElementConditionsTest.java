@@ -45,7 +45,7 @@ public class EachElementConditionsTest extends AbstractFluentListConditionsTest 
         assertThat(conditions.present()).isTrue();
         assertThat(conditions.not().present()).isFalse();
 
-        final EachElementConditions emptyConditions = new EachElementConditions(Collections.<FluentWebElement>emptyList());
+        EachElementConditions emptyConditions = new EachElementConditions(Collections.<FluentWebElement>emptyList());
 
         assertThat(emptyConditions.present()).isFalse();
         assertThat(emptyConditions.not().present()).isTrue();
@@ -259,7 +259,7 @@ public class EachElementConditionsTest extends AbstractFluentListConditionsTest 
         assertThat(conditions.not().size(2)).isTrue();
         assertThat(conditions.not().size().equalTo(2)).isTrue();
 
-        final EachElementConditions conditions2 = new EachElementConditions(Arrays.asList(fluentWebElement1, fluentWebElement3));
+        EachElementConditions conditions2 = new EachElementConditions(Arrays.asList(fluentWebElement1, fluentWebElement3));
 
         assertThat(conditions2.size(3)).isFalse();
         assertThat(conditions2.size().equalTo(3)).isFalse();
@@ -280,7 +280,7 @@ public class EachElementConditionsTest extends AbstractFluentListConditionsTest 
 
     @Test
     public void defaultValueWhenEmpty() {
-        final EachElementConditions defaultConditions = new EachElementConditions(Arrays.<FluentWebElement>asList());
+        EachElementConditions defaultConditions = new EachElementConditions(Arrays.<FluentWebElement>asList());
 
         assertThat(defaultConditions.enabled()).isFalse();
     }

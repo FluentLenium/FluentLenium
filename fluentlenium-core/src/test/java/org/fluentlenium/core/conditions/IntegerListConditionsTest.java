@@ -45,9 +45,9 @@ public class IntegerListConditionsTest {
 
     @Before
     public void before() {
-        final FluentAdapter fluentAdapter = new FluentAdapter();
+        FluentAdapter fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(driver);
-        final DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
+        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
 
         fluentWebElement1 = new FluentWebElement(webElement1, fluentAdapter, instantiator);
         fluentWebElement2 = new FluentWebElement(webElement2, fluentAdapter, instantiator);
@@ -63,13 +63,13 @@ public class IntegerListConditionsTest {
 
     @Test
     public void fromEachElementConditions() {
-        final EachElementConditions conditions = new EachElementConditions(
+        EachElementConditions conditions = new EachElementConditions(
                 Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
         final IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions,
                 new Function<FluentWebElement, Integer>() {
                     @Override
-                    public Integer apply(final FluentWebElement input) {
+                    public Integer apply(FluentWebElement input) {
                         return Integer.valueOf(input.id());
                     }
                 });
@@ -80,7 +80,7 @@ public class IntegerListConditionsTest {
 
         assertThat(integerConditions.verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(final Integer input) {
+            public boolean apply(Integer input) {
                 return input == 1;
             }
         }));
@@ -94,7 +94,7 @@ public class IntegerListConditionsTest {
 
         assertThat(integerConditions.verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(final Integer input) {
+            public boolean apply(Integer input) {
                 return input == 1 || input == 2;
             }
         }));
@@ -110,13 +110,13 @@ public class IntegerListConditionsTest {
 
     @Test
     public void fromAtLeastOneElementConditions() {
-        final AtLeastOneElementConditions conditions = new AtLeastOneElementConditions(
+        AtLeastOneElementConditions conditions = new AtLeastOneElementConditions(
                 Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
         final IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions,
                 new Function<FluentWebElement, Integer>() {
                     @Override
-                    public Integer apply(final FluentWebElement input) {
+                    public Integer apply(FluentWebElement input) {
                         return Integer.valueOf(input.id());
                     }
                 });

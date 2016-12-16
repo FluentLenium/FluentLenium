@@ -13,12 +13,12 @@ public class DefaultPropertiesBackend implements PropertiesBackend {
      *
      * @param properties properties object
      */
-    public DefaultPropertiesBackend(final Properties properties) {
+    public DefaultPropertiesBackend(Properties properties) {
         this.properties = properties;
     }
 
     @Override
-    public String getProperty(final String propertyName) {
+    public String getProperty(String propertyName) {
         return properties.getProperty(propertyName);
     }
 }

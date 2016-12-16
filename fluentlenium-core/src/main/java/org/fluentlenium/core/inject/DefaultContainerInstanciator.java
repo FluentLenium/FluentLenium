@@ -16,21 +16,21 @@ public class DefaultContainerInstanciator implements ContainerInstanciator {
      *
      * @param control FluentLenium control
      */
-    public DefaultContainerInstanciator(final FluentControl control) {
+    public DefaultContainerInstanciator(FluentControl control) {
         this.control = control;
     }
 
     @Override
-    public <T> T newInstance(final Class<T> cls, final ContainerContext context) {
+    public <T> T newInstance(Class<T> cls, ContainerContext context) {
         try {
             return ReflectionUtils.newInstanceOptionalArgs(cls, new ContainerFluentControl(control, context));
-        } catch (final NoSuchMethodException e) {
+        } catch (NoSuchMethodException e) {
             throw new FluentInjectException(cls.getName() + " is not a valid component class.", e);
-        } catch (final IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             throw new FluentInjectException(cls.getName() + " can't be instantiated.", e);
-        } catch (final InvocationTargetException e) {
+        } catch (InvocationTargetException e) {
             throw new FluentInjectException(cls.getName() + " can't be instantiated.", e);
-        } catch (final InstantiationException e) {
+        } catch (InstantiationException e) {
             throw new FluentInjectException(cls.getName() + " can't be instantiated.", e);
         }
     }

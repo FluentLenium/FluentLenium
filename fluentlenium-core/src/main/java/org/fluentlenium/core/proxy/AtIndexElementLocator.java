@@ -21,13 +21,13 @@ public class AtIndexElementLocator implements ElementLocator {
      * @param listLocator element list locator
      * @param index       index to retrieve
      */
-    public AtIndexElementLocator(final ElementLocator listLocator, final int index) {
+    public AtIndexElementLocator(ElementLocator listLocator, int index) {
         this.listLocator = listLocator;
         this.index = index;
     }
 
     private WebElement findElementImpl() {
-        final List<WebElement> elements = this.listLocator.findElements();
+        List<WebElement> elements = listLocator.findElements();
         if (index >= elements.size()) {
             return null;
         }
@@ -36,7 +36,7 @@ public class AtIndexElementLocator implements ElementLocator {
 
     @Override
     public WebElement findElement() {
-        final WebElement element = findElementImpl();
+        WebElement element = findElementImpl();
         if (element == null) {
             throw ElementUtils.noSuchElementException(String.valueOf("Element " + this));
         }
@@ -45,7 +45,7 @@ public class AtIndexElementLocator implements ElementLocator {
 
     @Override
     public List<WebElement> findElements() {
-        final WebElement element = findElementImpl();
+        WebElement element = findElementImpl();
         if (element == null) {
             return Collections.emptyList();
         }

@@ -67,22 +67,22 @@ public class EventsTest {
 
     @Test
     public void testFindBy() {
-        final EventsRegistry eventsRegistry = new EventsRegistry(fluentAdapter);
+        EventsRegistry eventsRegistry = new EventsRegistry(fluentAdapter);
 
-        final FindByListener beforeListener = mock(FindByListener.class);
-        final FindByListener afterListener = mock(FindByListener.class);
+        FindByListener beforeListener = mock(FindByListener.class);
+        FindByListener afterListener = mock(FindByListener.class);
 
         eventsRegistry.beforeFindBy(beforeListener);
         eventsRegistry.afterFindBy(afterListener);
 
-        final WebElement element = mock(WebElement.class);
+        WebElement element = mock(WebElement.class);
         when(driver.findElement(By.cssSelector(".test"))).thenReturn(element);
-        final WebElement eventElement = eventDriver.findElement(By.cssSelector(".test"));
+        WebElement eventElement = eventDriver.findElement(By.cssSelector(".test"));
 
         verify(beforeListener).on(eq(By.cssSelector(".test")), isNull(FluentWebElement.class), notNull(WebDriver.class));
         verify(afterListener).on(eq(By.cssSelector(".test")), isNull(FluentWebElement.class), (WebDriver) notNull());
 
-        final WebElement childElement = mock(WebElement.class);
+        WebElement childElement = mock(WebElement.class);
         when(element.findElement(By.cssSelector(".test2"))).thenReturn(childElement);
 
         reset(beforeListener, afterListener);
@@ -94,19 +94,19 @@ public class EventsTest {
 
     @Test
     public void testClickOn() {
-        final EventsRegistry eventsRegistry = new EventsRegistry(fluentAdapter);
+        EventsRegistry eventsRegistry = new EventsRegistry(fluentAdapter);
 
-        final ElementListener beforeListener = mock(ElementListener.class);
-        final ElementListener afterListener = mock(ElementListener.class);
+        ElementListener beforeListener = mock(ElementListener.class);
+        ElementListener afterListener = mock(ElementListener.class);
 
         eventsRegistry.beforeClickOn(beforeListener);
         eventsRegistry.afterClickOn(afterListener);
 
-        final WebElement element = mock(WebElement.class);
+        WebElement element = mock(WebElement.class);
         when(driver.findElement(By.cssSelector(".test"))).thenReturn(element);
-        final WebElement eventElement = eventDriver.findElement(By.cssSelector(".test"));
+        WebElement eventElement = eventDriver.findElement(By.cssSelector(".test"));
 
-        final WebElement childElement = mock(WebElement.class);
+        WebElement childElement = mock(WebElement.class);
 
         reset(beforeListener, afterListener);
         eventElement.click();
@@ -117,19 +117,19 @@ public class EventsTest {
 
     @Test
     public void testChangeValueOf() {
-        final EventsRegistry eventsRegistry = new EventsRegistry(fluentAdapter);
+        EventsRegistry eventsRegistry = new EventsRegistry(fluentAdapter);
 
-        final ElementListener beforeListener = mock(ElementListener.class);
-        final ElementListener afterListener = mock(ElementListener.class);
+        ElementListener beforeListener = mock(ElementListener.class);
+        ElementListener afterListener = mock(ElementListener.class);
 
         eventsRegistry.beforeChangeValueOf(beforeListener);
         eventsRegistry.afterChangeValueOf(afterListener);
 
-        final WebElement element = mock(WebElement.class);
+        WebElement element = mock(WebElement.class);
         when(driver.findElement(By.cssSelector(".test"))).thenReturn(element);
-        final WebElement eventElement = eventDriver.findElement(By.cssSelector(".test"));
+        WebElement eventElement = eventDriver.findElement(By.cssSelector(".test"));
 
-        final WebElement childElement = mock(WebElement.class);
+        WebElement childElement = mock(WebElement.class);
 
         reset(beforeListener, afterListener);
         eventElement.sendKeys("changeValue");
@@ -140,19 +140,19 @@ public class EventsTest {
 
     @Test
     public void testNavigate() { // NOPMD ExcessiveMethodLength
-        final EventsRegistry eventsRegistry = new EventsRegistry(fluentAdapter);
+        EventsRegistry eventsRegistry = new EventsRegistry(fluentAdapter);
 
         assertThat(eventsRegistry.getWrappedDriver()).isSameAs(driver);
 
-        final NavigateAllListener beforeAllListener = mock(NavigateAllListener.class);
-        final NavigateAllListener afterAllListener = mock(NavigateAllListener.class);
-        final NavigateToListener beforeToListener = mock(NavigateToListener.class);
-        final NavigateToListener afterToListener = mock(NavigateToListener.class);
-        final NavigateListener beforeListener = mock(NavigateListener.class);
-        final NavigateListener afterListener = mock(NavigateListener.class);
-        final ScriptListener beforeScriptListener = mock(ScriptListener.class);
-        final ScriptListener afterScriptListener = mock(ScriptListener.class);
-        final ExceptionListener exceptionListener = mock(ExceptionListener.class);
+        NavigateAllListener beforeAllListener = mock(NavigateAllListener.class);
+        NavigateAllListener afterAllListener = mock(NavigateAllListener.class);
+        NavigateToListener beforeToListener = mock(NavigateToListener.class);
+        NavigateToListener afterToListener = mock(NavigateToListener.class);
+        NavigateListener beforeListener = mock(NavigateListener.class);
+        NavigateListener afterListener = mock(NavigateListener.class);
+        ScriptListener beforeScriptListener = mock(ScriptListener.class);
+        ScriptListener afterScriptListener = mock(ScriptListener.class);
+        ExceptionListener exceptionListener = mock(ExceptionListener.class);
 
         eventsRegistry.beforeNavigate(beforeAllListener);
         eventsRegistry.afterNavigate(afterAllListener);
@@ -249,8 +249,8 @@ public class EventsTest {
 
     @Test
     public void testAdapterHashcodeEquals() {
-        final EventListener listener = mock(EventListener.class);
-        final EventListener otherListener = mock(EventListener.class);
+        EventListener listener = mock(EventListener.class);
+        EventListener otherListener = mock(EventListener.class);
 
         assertThat(new EventAdapter(listener, instantiator)).isEqualTo(new EventAdapter(listener, instantiator));
         assertThat(new EventAdapter(listener, instantiator).hashCode())
@@ -259,30 +259,30 @@ public class EventsTest {
         assertThat(new EventAdapter(listener, instantiator)).isNotEqualTo(new EventAdapter(otherListener, instantiator));
         assertThat(new EventAdapter(listener, instantiator)).isNotEqualTo("OtherType");
 
-        final EventAdapter instance = new EventAdapter(mock(EventListener.class), instantiator);
+        EventAdapter instance = new EventAdapter(mock(EventListener.class), instantiator);
         assertThat(instance).isEqualTo(instance);
     }
 
     private static final class ElementMatcher implements ArgumentMatcher<FluentWebElement> {
         private final WebElement element;
 
-        ElementMatcher(final WebElement element) {
+        ElementMatcher(WebElement element) {
             this.element = element;
         }
 
         @Override
-        public boolean matches(final FluentWebElement argument) {
-            if (argument == null && this.element == null) {
+        public boolean matches(FluentWebElement argument) {
+            if (argument == null && element == null) {
                 return true;
             }
-            if (argument == null && this.element != null) {
+            if (argument == null && element != null) {
                 return false;
             }
             WebElement argElement = argument.getElement();
             while (argElement instanceof WrapsElement) {
                 argElement = ((WrapsElement) argElement).getWrappedElement();
             }
-            return argElement == this.element;
+            return argElement == element;
         }
     }
 

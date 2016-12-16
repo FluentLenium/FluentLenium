@@ -15,7 +15,7 @@ public class ElementSupplierLocatorTest {
 
     @Test
     public void testWithMockElement() {
-        final ElementSupplierLocator locator = new ElementSupplierLocator(new Supplier<WebElement>() {
+        ElementSupplierLocator locator = new ElementSupplierLocator(new Supplier<WebElement>() {
             @Override
             public WebElement get() {
                 return element;
@@ -28,7 +28,7 @@ public class ElementSupplierLocatorTest {
 
     @Test
     public void testWithNullElement() {
-        final ElementSupplierLocator locator = new ElementSupplierLocator(new Supplier<WebElement>() {
+        ElementSupplierLocator locator = new ElementSupplierLocator(new Supplier<WebElement>() {
             @Override
             public WebElement get() {
                 return null;

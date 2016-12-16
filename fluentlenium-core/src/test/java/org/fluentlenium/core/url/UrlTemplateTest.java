@@ -12,8 +12,8 @@ public class UrlTemplateTest {
 
     @Test
     public void testRender() {
-        final UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def/{param2}/{param3}");
-        final String url = urlParametersTemplate.add("test1").add("test2").add("test3").render();
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def/{param2}/{param3}");
+        String url = urlParametersTemplate.add("test1").add("test2").add("test3").render();
         assertThat(Collections2.transform(urlParametersTemplate.getParameters(), new Function<UrlParameter, String>() {
             @Override
             public String apply(UrlParameter input) {
@@ -32,7 +32,7 @@ public class UrlTemplateTest {
     @Test
     public void testRenderOptionalParameter() {
         final UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def{?/param2}/ghi{?/param3}");
-        final String url = urlParametersTemplate.add("test1").add("test2").render();
+        String url = urlParametersTemplate.add("test1").add("test2").render();
         assertThat(Collections2.transform(urlParametersTemplate.getParameters(), new Function<UrlParameter, String>() {
             @Override
             public String apply(UrlParameter input) {
@@ -59,8 +59,8 @@ public class UrlTemplateTest {
 
     @Test
     public void testRenderNullOptionalParameter() {
-        final UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def{?/param2}/ghi{?/param3}");
-        final String url = urlParametersTemplate.add("test1").add(null).add("test3").render();
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def{?/param2}/ghi{?/param3}");
+        String url = urlParametersTemplate.add("test1").add(null).add("test3").render();
         assertThat(Collections2.transform(urlParametersTemplate.getParameters(), new Function<UrlParameter, String>() {
             @Override
             public String apply(UrlParameter input) {
@@ -78,8 +78,8 @@ public class UrlTemplateTest {
 
     @Test
     public void testRenderNullOptionalPathParameter() {
-        final UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}{?/def/param2}{?/ghi/param3}");
-        final String url = urlParametersTemplate.add("test1").add(null).add("test3").render();
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}{?/def/param2}{?/ghi/param3}");
+        String url = urlParametersTemplate.add("test1").add(null).add("test3").render();
         assertThat(Collections2.transform(urlParametersTemplate.getParameters(), new Function<UrlParameter, String>() {
             @Override
             public String apply(UrlParameter input) {
@@ -97,7 +97,7 @@ public class UrlTemplateTest {
 
     @Test
     public void testParse() {
-        final UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def/{param2}/{param3}");
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def/{param2}/{param3}");
         assertThat(Collections2.transform(urlParametersTemplate.getParameters(), new Function<UrlParameter, String>() {
             @Override
             public String apply(UrlParameter input) {
@@ -111,7 +111,7 @@ public class UrlTemplateTest {
             }
         })).containsExactly(false, false, false);
 
-        final ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/def/v2/v3");
+        ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/def/v2/v3");
         assertThat(parsed.matches()).isTrue();
         assertThat(parsed.parameters()).hasSize(3);
         assertThat(parsed.parameters().keySet()).containsExactly("param1", "param2", "param3");
@@ -120,7 +120,7 @@ public class UrlTemplateTest {
 
     @Test
     public void testParseOptionalParameter() {
-        final UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def/{param2}{?/param3}");
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def/{param2}{?/param3}");
         assertThat(Collections2.transform(urlParametersTemplate.getParameters(), new Function<UrlParameter, String>() {
             @Override
             public String apply(UrlParameter input) {
@@ -134,7 +134,7 @@ public class UrlTemplateTest {
             }
         })).containsExactly(false, false, true);
 
-        final ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/def/v2");
+        ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/def/v2");
         assertThat(parsed.matches()).isTrue();
         assertThat(parsed.parameters()).hasSize(2);
         assertThat(parsed.parameters().keySet()).containsExactly("param1", "param2");
@@ -143,7 +143,7 @@ public class UrlTemplateTest {
 
     @Test
     public void testParseOptionalPathParameter() {
-        final UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}{?/def/param2}{?/param3}");
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}{?/def/param2}{?/param3}");
         assertThat(Collections2.transform(urlParametersTemplate.getParameters(), new Function<UrlParameter, String>() {
             @Override
             public String apply(UrlParameter input) {
@@ -157,7 +157,7 @@ public class UrlTemplateTest {
             }
         })).containsExactly(false, true, true);
 
-        final ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/def/v2");
+        ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/def/v2");
         assertThat(parsed.matches()).isTrue();
         assertThat(parsed.parameters()).hasSize(2);
         assertThat(parsed.parameters().keySet()).containsExactly("param1", "param2");
@@ -166,7 +166,7 @@ public class UrlTemplateTest {
 
     @Test
     public void testParseOptionalMiddleParameter() {
-        final UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def{?/param2}/ghi/{param3}");
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def{?/param2}/ghi/{param3}");
         assertThat(Collections2.transform(urlParametersTemplate.getParameters(), new Function<UrlParameter, String>() {
             @Override
             public String apply(UrlParameter input) {
@@ -180,7 +180,7 @@ public class UrlTemplateTest {
             }
         })).containsExactly(false, true, false);
 
-        final ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/def/ghi/v3");
+        ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/def/ghi/v3");
         assertThat(parsed.matches()).isTrue();
         assertThat(parsed.parameters()).hasSize(2);
         assertThat(parsed.parameters().keySet()).containsExactly("param1", "param3");
@@ -189,7 +189,7 @@ public class UrlTemplateTest {
 
     @Test
     public void testParseOptionalPathMiddleParameter() {
-        final UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}{?/def/param2}{/ghi/param3}");
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}{?/def/param2}{/ghi/param3}");
         assertThat(Collections2.transform(urlParametersTemplate.getParameters(), new Function<UrlParameter, String>() {
             @Override
             public String apply(UrlParameter input) {
@@ -203,7 +203,7 @@ public class UrlTemplateTest {
             }
         })).containsExactly(false, true, false);
 
-        final ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/ghi/v3");
+        ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/ghi/v3");
         assertThat(parsed.matches()).isTrue();
         assertThat(parsed.parameters()).hasSize(2);
         assertThat(parsed.parameters().keySet()).containsExactly("param1", "param3");
@@ -212,7 +212,7 @@ public class UrlTemplateTest {
 
     @Test
     public void testParseNotMatchingOptionalMiddleParameter() {
-        final UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def{?/param2}/ghi/{param3}");
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def{?/param2}/ghi/{param3}");
         assertThat(Collections2.transform(urlParametersTemplate.getParameters(), new Function<UrlParameter, String>() {
             @Override
             public String apply(UrlParameter input) {
@@ -226,14 +226,14 @@ public class UrlTemplateTest {
             }
         })).containsExactly(false, true, false);
 
-        final ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/def/ghi");
+        ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/def/ghi");
         assertThat(parsed.matches()).isFalse();
         assertThat(parsed.parameters()).hasSize(0);
     }
 
     @Test
     public void testParseNotMatchingUrl() {
-        final UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def/{param2}{?/param3}");
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def/{param2}{?/param3}");
         assertThat(Collections2.transform(urlParametersTemplate.getParameters(), new Function<UrlParameter, String>() {
             @Override
             public String apply(UrlParameter input) {
@@ -247,14 +247,14 @@ public class UrlTemplateTest {
             }
         })).containsExactly(false, false, true);
 
-        final ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/abc/v2");
+        ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/abc/v2");
         assertThat(parsed.matches()).isFalse();
         assertThat(parsed.parameters()).hasSize(0);
     }
 
     @Test
     public void testParseNotMatchingStartingUrl() {
-        final UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def/{param2}{?/param3}");
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def/{param2}{?/param3}");
         assertThat(Collections2.transform(urlParametersTemplate.getParameters(), new Function<UrlParameter, String>() {
             @Override
             public String apply(UrlParameter input) {
@@ -268,14 +268,14 @@ public class UrlTemplateTest {
             }
         })).containsExactly(false, false, true);
 
-        final ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/def/v2/v3/ghi");
+        ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/def/v2/v3/ghi");
         assertThat(parsed.matches()).isFalse();
         assertThat(parsed.parameters()).hasSize(0);
     }
 
     @Test
     public void testParseMatchingWithTrailingSlash() {
-        final UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def/{param2}{?/param3}");
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def/{param2}{?/param3}");
         assertThat(Collections2.transform(urlParametersTemplate.getParameters(), new Function<UrlParameter, String>() {
             @Override
             public String apply(UrlParameter input) {
@@ -289,7 +289,7 @@ public class UrlTemplateTest {
             }
         })).containsExactly(false, false, true);
 
-        final ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/def/v2/v3/");
+        ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1/def/v2/v3/");
         assertThat(parsed.matches()).isTrue();
         assertThat(parsed.parameters()).hasSize(3);
         assertThat(parsed.parameters().keySet()).containsExactly("param1", "param2", "param3");

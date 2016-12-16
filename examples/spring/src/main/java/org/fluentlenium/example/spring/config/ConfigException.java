@@ -11,7 +11,7 @@ public class ConfigException extends RuntimeException {
      * @param message message
      * @param cause cause
      */
-    public ConfigException(final String message, final Exception cause) {
+    public ConfigException(String message, Exception cause) {
         super(message, cause);
     }
 

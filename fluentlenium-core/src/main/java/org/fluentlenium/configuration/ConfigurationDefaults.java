@@ -105,7 +105,7 @@ public class ConfigurationDefaults extends BaseConfiguration implements Configur
     }
 
     @Override
-    public String getCustomProperty(final String propertyName) {
+    public String getCustomProperty(String propertyName) {
         return null;
     }
 }

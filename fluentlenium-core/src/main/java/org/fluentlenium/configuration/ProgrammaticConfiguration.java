@@ -55,7 +55,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
      *
      * @param configurationDefaults configuration defaults
      */
-    public void setConfigurationDefaults(final Class<? extends ConfigurationProperties> configurationDefaults) {
+    public void setConfigurationDefaults(Class<? extends ConfigurationProperties> configurationDefaults) {
         this.configurationDefaults = configurationDefaults;
     }
 
@@ -65,7 +65,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setWebDriver(final String webDriverName) {
+    public void setWebDriver(String webDriverName) {
         this.webDriverName = webDriverName;
     }
 
@@ -75,7 +75,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setRemoteUrl(final String remoteUrl) {
+    public void setRemoteUrl(String remoteUrl) {
         this.remoteUrl = remoteUrl;
     }
 
@@ -85,7 +85,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setCapabilities(final Capabilities capabilities) {
+    public void setCapabilities(Capabilities capabilities) {
         this.capabilities = capabilities;
     }
 
@@ -95,7 +95,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setDriverLifecycle(final DriverLifecycle driverLifecycle) {
+    public void setDriverLifecycle(DriverLifecycle driverLifecycle) {
         this.driverLifecycle = driverLifecycle;
     }
 
@@ -105,7 +105,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setDeleteCookies(final Boolean deleteCookies) {
+    public void setDeleteCookies(Boolean deleteCookies) {
         this.deleteCookies = deleteCookies;
     }
 
@@ -115,7 +115,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setConfigurationFactory(final Class<? extends ConfigurationFactory> configurationFactory) {
+    public void setConfigurationFactory(Class<? extends ConfigurationFactory> configurationFactory) {
         this.configurationFactory = configurationFactory;
     }
 
@@ -130,7 +130,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setBaseUrl(final String baseUrl) {
+    public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
     }
 
@@ -140,7 +140,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setPageLoadTimeout(final Long pageLoadTimeout) {
+    public void setPageLoadTimeout(Long pageLoadTimeout) {
         this.pageLoadTimeout = pageLoadTimeout;
     }
 
@@ -150,7 +150,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setImplicitlyWait(final Long implicitlyWait) {
+    public void setImplicitlyWait(Long implicitlyWait) {
         this.implicitlyWait = implicitlyWait;
     }
 
@@ -160,7 +160,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setScriptTimeout(final Long scriptTimeout) {
+    public void setScriptTimeout(Long scriptTimeout) {
         this.scriptTimeout = scriptTimeout;
     }
 
@@ -170,7 +170,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setAwaitAtMost(final Long awaitAtMost) {
+    public void setAwaitAtMost(Long awaitAtMost) {
         this.awaitAtMost = awaitAtMost;
     }
 
@@ -180,7 +180,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setAwaitPollingEvery(final Long awaitPollingEvery) {
+    public void setAwaitPollingEvery(Long awaitPollingEvery) {
         this.awaitPollingEvery = awaitPollingEvery;
     }
 
@@ -190,23 +190,23 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setEventsEnabled(final Boolean eventsEnabled) {
+    public void setEventsEnabled(Boolean eventsEnabled) {
         this.eventsEnabled = eventsEnabled;
     }
 
     @Override
-    public void setScreenshotPath(final String path) {
-        this.screenshotPath = path;
+    public void setScreenshotPath(String path) {
+        screenshotPath = path;
     }
 
     @Override
-    public void setHtmlDumpPath(final String htmlDumpPath) {
+    public void setHtmlDumpPath(String htmlDumpPath) {
         this.htmlDumpPath = htmlDumpPath;
     }
 
     @Override
-    public void setScreenshotMode(final TriggerMode mode) {
-        this.screenshotMode = mode;
+    public void setScreenshotMode(TriggerMode mode) {
+        screenshotMode = mode;
     }
 
     @Override
@@ -225,7 +225,7 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public void setHtmlDumpMode(final TriggerMode htmlDumpMode) {
+    public void setHtmlDumpMode(TriggerMode htmlDumpMode) {
         this.htmlDumpMode = htmlDumpMode;
     }
 
@@ -235,12 +235,12 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     }
 
     @Override
-    public String getCustomProperty(final String propertyName) {
+    public String getCustomProperty(String propertyName) {
         return custom.get(propertyName);
     }
 
     @Override
-    public void setCustomProperty(final String key, final String value) {
+    public void setCustomProperty(String key, String value) {
         if (value == null) {
             custom.remove(key);
         } else {

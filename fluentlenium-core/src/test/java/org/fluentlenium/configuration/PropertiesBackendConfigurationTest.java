@@ -13,8 +13,8 @@ public class PropertiesBackendConfigurationTest {
 
     public static class DummyConfigurationFactory implements ConfigurationFactory {
         @Override
-        public Configuration newConfiguration(final Class<?> containerClass,
-                final ConfigurationProperties configurationDefaults) {
+        public Configuration newConfiguration(Class<?> containerClass,
+                ConfigurationProperties configurationDefaults) {
             return null;
         }
     }
@@ -36,7 +36,7 @@ public class PropertiesBackendConfigurationTest {
         return configuration;
     }
 
-    protected void mockProperty(final String propertyName, final Object propertyValue) {
+    protected void mockProperty(String propertyName, Object propertyValue) {
         if (propertyValue == null) {
             properties.remove(propertyName);
         } else {
@@ -44,7 +44,7 @@ public class PropertiesBackendConfigurationTest {
         }
     }
 
-    protected String valueToString(final Object propertyValue) {
+    protected String valueToString(Object propertyValue) {
         if (propertyValue == null) {
             return null;
         }
@@ -108,7 +108,7 @@ public class PropertiesBackendConfigurationTest {
 
         mockProperty("capabilities", "{\"javascriptEnabled\": true}");
 
-        final DesiredCapabilities capabilities = new DesiredCapabilities();
+        DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setJavascriptEnabled(true);
         Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilities);
 
@@ -122,7 +122,7 @@ public class PropertiesBackendConfigurationTest {
 
         mockProperty("capabilities", "firefox");
 
-        final DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilities);
 
         mockProperty("capabilities", "chrome");
@@ -151,15 +151,15 @@ public class PropertiesBackendConfigurationTest {
     public void capabilitiesURL() throws IOException {
         Assertions.assertThat(getConfiguration().getCapabilities()).isNull();
 
-        final URL capabilitiesURL = getClass().getResource("/org/fluentlenium/configuration/capabilities.json");
+        URL capabilitiesURL = getClass().getResource("/org/fluentlenium/configuration/capabilities.json");
 
         mockProperty("capabilities", capabilitiesURL.toString());
 
-        final DesiredCapabilities capabilities = new DesiredCapabilities();
+        DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setJavascriptEnabled(true);
         Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilities);
 
-        final URL capabilitiesFalseURL = getClass().getResource("/org/fluentlenium/configuration/capabilities-false.json");
+        URL capabilitiesFalseURL = getClass().getResource("/org/fluentlenium/configuration/capabilities-false.json");
 
         mockProperty("capabilities", capabilitiesFalseURL.toString());
         Assertions.assertThat(getConfiguration().getCapabilities()).isNotEqualTo(capabilities);

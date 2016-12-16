@@ -52,7 +52,7 @@ public class ProxiesTest {
 
     @Test
     public void testElementIsLazy() {
-        final WebElement elementProxy1 = LocatorProxies.createWebElement(new ElementLocator() {
+        WebElement elementProxy1 = LocatorProxies.createWebElement(new ElementLocator() {
             @Override
             public WebElement findElement() {
                 return driver.findElement(By.cssSelector("#element1"));
@@ -97,7 +97,7 @@ public class ProxiesTest {
             }
         });
 
-        final WebElement element3Proxy = LocatorProxies.createWebElement(new ElementLocator() {
+        WebElement element3Proxy = LocatorProxies.createWebElement(new ElementLocator() {
             @Override
             public WebElement findElement() {
                 return element2Proxy.findElement(By.cssSelector("#element3"));
@@ -122,7 +122,7 @@ public class ProxiesTest {
 
     @Test
     public void testAlreadyLoadedElementsShouldBeLoaded() {
-        final WebElement webElement = LocatorProxies.createWebElement(element1);
+        WebElement webElement = LocatorProxies.createWebElement(element1);
 
         assertThat(LocatorProxies.loaded(webElement)).isTrue();
         assertThat(((WrapsElement) webElement).getWrappedElement()).isSameAs(element1);
@@ -130,7 +130,7 @@ public class ProxiesTest {
 
     @Test
     public void testAlreadyLoadedElementListShouldBeLoaded() {
-        final List<WebElement> webElementList = LocatorProxies.createWebElementList(Arrays.asList(element1, element2, element3));
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(Arrays.asList(element1, element2, element3));
 
         assertThat(LocatorProxies.loaded(webElementList)).isTrue();
         assertThat(((WrapsElements) webElementList).getWrappedElements()).containsExactly(element1, element2, element3);
@@ -167,10 +167,10 @@ public class ProxiesTest {
 
     @Test
     public void testNullElementListShouldNotThrowException() {
-        final List<WebElement> webElementList = LocatorProxies.createWebElementList((List<WebElement>) null);
+        List<WebElement> webElementList = LocatorProxies.createWebElementList((List<WebElement>) null);
         assertThat(webElementList).isEmpty();
 
-        final List<WebElement> webElementList2 = LocatorProxies.createWebElementList(new ElementLocator() {
+        List<WebElement> webElementList2 = LocatorProxies.createWebElementList(new ElementLocator() {
             @Override
             public WebElement findElement() {
                 return null;
@@ -186,10 +186,10 @@ public class ProxiesTest {
 
     @Test
     public void testEmptyElementListShouldNotThrowException() {
-        final List<WebElement> webElementList = LocatorProxies.createWebElementList(Collections.<WebElement>emptyList());
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(Collections.<WebElement>emptyList());
         assertThat(webElementList).isEmpty();
 
-        final List<WebElement> webElementList2 = LocatorProxies.createWebElementList(new ElementLocator() {
+        List<WebElement> webElementList2 = LocatorProxies.createWebElementList(new ElementLocator() {
             @Override
             public WebElement findElement() {
                 return null;
@@ -207,11 +207,11 @@ public class ProxiesTest {
     public void testToString() {
         when(element1.toString()).thenReturn("element1");
 
-        final ElementLocator locator = mock(ElementLocator.class);
+        ElementLocator locator = mock(ElementLocator.class);
         when(locator.findElement()).thenReturn(element1);
         when(locator.toString()).thenReturn("element1-locator");
 
-        final WebElement webElement = LocatorProxies.createWebElement(locator);
+        WebElement webElement = LocatorProxies.createWebElement(locator);
         assertThat(webElement.toString()).isEqualTo("element1-locator (Lazy Element)");
 
         assertThat(LocatorProxies.loaded(webElement)).isFalse();
@@ -223,10 +223,10 @@ public class ProxiesTest {
 
     @Test
     public void testHashcode() {
-        final ElementLocator locator = mock(ElementLocator.class);
+        ElementLocator locator = mock(ElementLocator.class);
         when(locator.findElement()).thenReturn(element1);
 
-        final WebElement webElement = LocatorProxies.createWebElement(locator);
+        WebElement webElement = LocatorProxies.createWebElement(locator);
         assertThat(webElement.hashCode()).isEqualTo(2048 + locator.hashCode());
 
         assertThat(LocatorProxies.loaded(webElement)).isFalse();
@@ -238,17 +238,17 @@ public class ProxiesTest {
 
     @Test
     public void testEquals() {
-        final ElementLocator locator = mock(ElementLocator.class);
+        ElementLocator locator = mock(ElementLocator.class);
         when(locator.findElement()).thenReturn(element1);
 
-        final WebElement webElement = LocatorProxies.createWebElement(locator);
-        final WebElement sameWebElement = LocatorProxies.createWebElement(locator);
+        WebElement webElement = LocatorProxies.createWebElement(locator);
+        WebElement sameWebElement = LocatorProxies.createWebElement(locator);
 
         assertThat(webElement).isEqualTo(sameWebElement);
 
-        final ElementLocator otherLocator = mock(ElementLocator.class);
+        ElementLocator otherLocator = mock(ElementLocator.class);
         when(otherLocator.findElement()).thenReturn(element2);
-        final WebElement otherWebElement = LocatorProxies.createWebElement(otherLocator);
+        WebElement otherWebElement = LocatorProxies.createWebElement(otherLocator);
 
         assertThat(webElement).isNotEqualTo(otherWebElement);
 
@@ -287,14 +287,14 @@ public class ProxiesTest {
 
     @Test
     public void testIsPresent() {
-        final ElementLocator locator = mock(ElementLocator.class);
+        ElementLocator locator = mock(ElementLocator.class);
         when(locator.findElement()).thenReturn(element1);
         when(locator.findElements()).thenReturn(Arrays.asList(element1, element2, element3));
 
-        final WebElement webElement = LocatorProxies.createWebElement(locator);
+        WebElement webElement = LocatorProxies.createWebElement(locator);
 
-        final ElementLocator otherLocator = mock(ElementLocator.class);
-        final WebElement otherWebElement = LocatorProxies.createWebElement(otherLocator);
+        ElementLocator otherLocator = mock(ElementLocator.class);
+        WebElement otherWebElement = LocatorProxies.createWebElement(otherLocator);
 
         assertThat(LocatorProxies.loaded(webElement)).isFalse();
         assertThat(LocatorProxies.present(webElement)).isTrue();
@@ -304,7 +304,7 @@ public class ProxiesTest {
         assertThat(LocatorProxies.present(otherWebElement)).isFalse();
         assertThat(LocatorProxies.loaded(otherWebElement)).isFalse();
 
-        final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
 
         assertThat(LocatorProxies.loaded(webElementList)).isFalse();
         assertThat(LocatorProxies.present(webElementList)).isTrue();
@@ -321,20 +321,20 @@ public class ProxiesTest {
 
     @Test
     public void testLocatorGetter() {
-        final ElementLocator locator = mock(ElementLocator.class);
-        final WebElement webElement = LocatorProxies.createWebElement(locator);
+        ElementLocator locator = mock(ElementLocator.class);
+        WebElement webElement = LocatorProxies.createWebElement(locator);
 
-        final LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(webElement);
+        LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(webElement);
         assertThat(locatorHandler.getLocator()).isSameAs(locator);
     }
 
     @Test
     public void testFirst() {
-        final ElementLocator locator = mock(ElementLocator.class);
+        ElementLocator locator = mock(ElementLocator.class);
         when(locator.findElements()).thenReturn(Arrays.asList(element1, element2, element3));
 
-        final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
-        final WebElement first = LocatorProxies.first(webElementList);
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
+        WebElement first = LocatorProxies.first(webElementList);
 
         assertThat(LocatorProxies.loaded(first)).isFalse();
         assertThat(first).isEqualTo(element1);
@@ -342,11 +342,11 @@ public class ProxiesTest {
 
     @Test
     public void testLast() {
-        final ElementLocator locator = mock(ElementLocator.class);
+        ElementLocator locator = mock(ElementLocator.class);
         when(locator.findElements()).thenReturn(Arrays.asList(element1, element2, element3));
 
-        final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
-        final WebElement last = LocatorProxies.last(webElementList);
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
+        WebElement last = LocatorProxies.last(webElementList);
 
         assertThat(LocatorProxies.loaded(last)).isFalse();
         assertThat(last).isEqualTo(element3);
@@ -354,11 +354,11 @@ public class ProxiesTest {
 
     @Test
     public void testIndex() {
-        final ElementLocator locator = mock(ElementLocator.class);
+        ElementLocator locator = mock(ElementLocator.class);
         when(locator.findElements()).thenReturn(Arrays.asList(element1, element2, element3));
 
-        final List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
-        final WebElement atIndex = LocatorProxies.index(webElementList, 1);
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
+        WebElement atIndex = LocatorProxies.index(webElementList, 1);
 
         assertThat(LocatorProxies.loaded(atIndex)).isFalse();
         assertThat(atIndex).isEqualTo(element2);
@@ -366,7 +366,7 @@ public class ProxiesTest {
 
     @Test
     public void testStateElement() {
-        final ElementLocator locator = mock(ElementLocator.class);
+        ElementLocator locator = mock(ElementLocator.class);
         when(locator.findElement()).thenReturn(element1);
 
         final WebElement webElement = LocatorProxies.createWebElement(locator);

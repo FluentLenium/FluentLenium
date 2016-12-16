@@ -21,7 +21,7 @@ public class ExampleHookOptions {
      *
      * @param annotation example annotation
      */
-    public ExampleHookOptions(final Example annotation) {
+    public ExampleHookOptions(Example annotation) {
         message = annotation.message();
 
     }
@@ -40,7 +40,7 @@ public class ExampleHookOptions {
      *
      * @param message message to set
      */
-    public void setMessage(final String message) {
+    public void setMessage(String message) {
         this.message = message;
     }
 }

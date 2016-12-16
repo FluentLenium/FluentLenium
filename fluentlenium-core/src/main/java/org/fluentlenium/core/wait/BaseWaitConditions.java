@@ -28,7 +28,7 @@ public class BaseWaitConditions {
      * @param present predicate to wait for.
      * @param message message to use.
      */
-    protected void until(final FluentWait wait, final Predicate<FluentControl> present, String message) {
+    protected void until(FluentWait wait, Predicate<FluentControl> present, String message) {
         if (wait.hasMessageDefined()) {
             wait.untilPredicate(present);
         } else {
@@ -44,11 +44,11 @@ public class BaseWaitConditions {
      * @param present         predicate to wait for.
      * @param messageSupplier default message to use.
      */
-    protected void until(final FluentWait wait, final Predicate<FluentControl> present, final Supplier<String> messageSupplier) {
+    protected void until(FluentWait wait, Predicate<FluentControl> present, final Supplier<String> messageSupplier) {
         if (wait.hasMessageDefined()) {
             wait.untilPredicate(present);
         } else {
-            final Supplier<String> customMessageSupplier = new Supplier<String>() {
+            Supplier<String> customMessageSupplier = new Supplier<String>() {
                 @Override
                 public String get() {
                     return messageCustomizer().apply(messageSupplier.get());
@@ -67,15 +67,15 @@ public class BaseWaitConditions {
      * @param conditionFunction condition fonction
      * @param <T>               type of the condition.
      */
-    protected <T extends Conditions<?>> void until(final FluentWait wait, final T condition, final T messageBuilder,
+    protected <T extends Conditions<?>> void until(FluentWait wait, final T condition, final T messageBuilder,
             final Function<T, Boolean> conditionFunction) {
-        final Predicate<FluentControl> predicate = new Predicate<FluentControl>() {
+        Predicate<FluentControl> predicate = new Predicate<FluentControl>() {
             @Override
-            public boolean apply(final FluentControl input) {
+            public boolean apply(FluentControl input) {
                 return conditionFunction.apply(condition);
             }
         };
-        final Supplier<String> messageSupplier = new Supplier<String>() {
+        Supplier<String> messageSupplier = new Supplier<String>() {
             @Override
             public String get() {
                 conditionFunction.apply(messageBuilder);

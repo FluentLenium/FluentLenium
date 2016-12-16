@@ -17,7 +17,7 @@ public class FluentWaitWindowConditions extends BaseWaitConditions {
      * @param wait       underlying wait
      * @param windowName window name
      */
-    protected FluentWaitWindowConditions(final FluentWait wait, final String windowName) {
+    protected FluentWaitWindowConditions(FluentWait wait, String windowName) {
         this.wait = wait;
         this.windowName = windowName;
     }
@@ -28,9 +28,9 @@ public class FluentWaitWindowConditions extends BaseWaitConditions {
      * @return true
      */
     public boolean displayed() {
-        final Predicate<FluentControl> displayed = new Predicate<FluentControl>() {
+        Predicate<FluentControl> displayed = new Predicate<FluentControl>() {
             @Override
-            public boolean apply(final FluentControl fluent) {
+            public boolean apply(FluentControl fluent) {
                 return fluent.getDriver().getWindowHandles().contains(windowName);
             }
         };
@@ -45,9 +45,9 @@ public class FluentWaitWindowConditions extends BaseWaitConditions {
      * @return true
      */
     public boolean notDisplayed() {
-        final Predicate<FluentControl> notDisplayed = new Predicate<FluentControl>() {
+        Predicate<FluentControl> notDisplayed = new Predicate<FluentControl>() {
             @Override
-            public boolean apply(final FluentControl fluent) {
+            public boolean apply(FluentControl fluent) {
                 return !fluent.getDriver().getWindowHandles().contains(windowName);
             }
         };

@@ -36,7 +36,7 @@ public class FluentIntegTest extends FluentTest {
     }
 
     @Override
-    public void initFluent(final WebDriver webDriver) {
+    public void initFluent(WebDriver webDriver) {
         System.out.println(
                 "Init WebDriver " + webDriver + " for test " + getClass().getName() + "." + name.getMethodName() + " [" + System
                         .identityHashCode(this) + "]");

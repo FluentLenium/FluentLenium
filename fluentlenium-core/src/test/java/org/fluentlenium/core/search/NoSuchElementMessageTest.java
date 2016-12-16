@@ -36,10 +36,10 @@ public class NoSuchElementMessageTest {
 
     @Before
     public void before() {
-        final FluentAdapter fluentAdapter = new FluentAdapter();
+        FluentAdapter fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(driver);
 
-        final DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
+        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
         search = new Search(searchContext, instantiator);
     }
 

@@ -43,7 +43,7 @@ public class IndexSupplierLocatorTest {
 
     @Test
     public void testFirstElementLocator() {
-        final ElementLocator locator = new FirstElementLocator(elementLocator);
+        ElementLocator locator = new FirstElementLocator(elementLocator);
 
         Assertions.assertThat(locator.findElement()).isSameAs(element1);
         Assertions.assertThat(locator.findElements()).containsExactly(element1);
@@ -64,7 +64,7 @@ public class IndexSupplierLocatorTest {
 
     @Test
     public void testLastElementLocator() {
-        final ElementLocator locator = new LastElementLocator(elementLocator);
+        ElementLocator locator = new LastElementLocator(elementLocator);
 
         Assertions.assertThat(locator.findElement()).isSameAs(element4);
         Assertions.assertThat(locator.findElements()).containsExactly(element4);
@@ -85,7 +85,7 @@ public class IndexSupplierLocatorTest {
 
     @Test
     public void testAtIndexElementLocator() {
-        final ElementLocator locator = new AtIndexElementLocator(elementLocator, 2);
+        ElementLocator locator = new AtIndexElementLocator(elementLocator, 2);
 
         Assertions.assertThat(locator.findElement()).isSameAs(element3);
         Assertions.assertThat(locator.findElements()).containsExactly(element3);

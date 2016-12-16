@@ -17,22 +17,22 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
      * @param objectGetter     getter of the underlying string
      * @param conditionsGetter getter of the underlying string conditions
      */
-    public StringListConditionsImpl(final Conditions<FluentWebElement> conditions,
-            final Function<FluentWebElement, String> objectGetter,
-            final Function<FluentWebElement, StringConditions> conditionsGetter) {
+    public StringListConditionsImpl(Conditions<FluentWebElement> conditions,
+            Function<FluentWebElement, String> objectGetter,
+            Function<FluentWebElement, StringConditions> conditionsGetter) {
         super(conditions, objectGetter, conditionsGetter);
     }
 
     @Override
     public StringListConditionsImpl not() {
-        return new StringListConditionsImpl(this.conditions.not(), objectGetter, conditionsGetter);
+        return new StringListConditionsImpl(conditions.not(), objectGetter, conditionsGetter);
     }
 
     @Override
     public boolean contains(final CharSequence charSequence) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).contains(charSequence);
             }
         });
@@ -40,10 +40,10 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
 
     @Override
     public boolean startsWith(final String prefix) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
 
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).startsWith(prefix);
             }
         });
@@ -51,10 +51,10 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
 
     @Override
     public boolean endsWith(final String suffix) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
 
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).endsWith(suffix);
             }
         });
@@ -62,10 +62,10 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
 
     @Override
     public boolean equalTo(final String anotherString) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
 
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).equalTo(anotherString);
             }
         });
@@ -73,10 +73,10 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
 
     @Override
     public boolean equalToIgnoreCase(final String anotherString) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
 
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).equalToIgnoreCase(anotherString);
             }
         });
@@ -84,10 +84,10 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
 
     @Override
     public boolean matches(final String regex) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
 
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).matches(regex);
             }
         });
@@ -95,10 +95,10 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
 
     @Override
     public boolean matches(final Pattern pattern) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
 
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).matches(pattern);
             }
         });

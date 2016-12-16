@@ -32,8 +32,8 @@ public class JavascriptTest extends IntegrationFluentTest {
 
     @Test
     public void shouldExecuteScriptReturnString() {
-        final String script = "return 'string';";
-        final FluentJavascript fluentJavascript = executeScript(script);
+        String script = "return 'string';";
+        FluentJavascript fluentJavascript = executeScript(script);
         assertThat(fluentJavascript.isBooleanResult()).isFalse();
         assertThat(fluentJavascript.isDoubleResult()).isFalse();
         assertThat(fluentJavascript.isLongResult()).isFalse();
@@ -46,8 +46,8 @@ public class JavascriptTest extends IntegrationFluentTest {
 
     @Test
     public void shouldExecuteScriptReturnBoolean() {
-        final String script = "return true;";
-        final FluentJavascript fluentJavascript = executeScript(script);
+        String script = "return true;";
+        FluentJavascript fluentJavascript = executeScript(script);
         assertThat(fluentJavascript.isBooleanResult()).isTrue();
         assertThat(fluentJavascript.isDoubleResult()).isFalse();
         assertThat(fluentJavascript.isLongResult()).isFalse();
@@ -60,8 +60,8 @@ public class JavascriptTest extends IntegrationFluentTest {
 
     @Test
     public void shouldExecuteScriptReturnDouble() {
-        final String script = "return 12.12;";
-        final FluentJavascript fluentJavascript = executeScript(script);
+        String script = "return 12.12;";
+        FluentJavascript fluentJavascript = executeScript(script);
         assertThat(fluentJavascript.isBooleanResult()).isFalse();
         assertThat(fluentJavascript.isDoubleResult()).isTrue();
         assertThat(fluentJavascript.isLongResult()).isFalse();
@@ -74,8 +74,8 @@ public class JavascriptTest extends IntegrationFluentTest {
 
     @Test
     public void shouldExecuteScriptReturnLong() {
-        final String script = "return 5;";
-        final FluentJavascript fluentJavascript = executeScript(script);
+        String script = "return 5;";
+        FluentJavascript fluentJavascript = executeScript(script);
         assertThat(fluentJavascript.isBooleanResult()).isFalse();
         assertThat(fluentJavascript.isDoubleResult()).isFalse();
         assertThat(fluentJavascript.isLongResult()).isTrue();
@@ -88,8 +88,8 @@ public class JavascriptTest extends IntegrationFluentTest {
 
     @Test
     public void shouldExecuteScriptReturnList() {
-        final String script = "return Array('string 1', 'string 2', 5, 12.12, true, Array('test 1', 'test 2'));";
-        final FluentJavascript fluentJavascript = executeScript(script);
+        String script = "return Array('string 1', 'string 2', 5, 12.12, true, Array('test 1', 'test 2'));";
+        FluentJavascript fluentJavascript = executeScript(script);
         assertThat(fluentJavascript.isBooleanResult()).isFalse();
         assertThat(fluentJavascript.isDoubleResult()).isFalse();
         assertThat(fluentJavascript.isLongResult()).isFalse();
@@ -105,8 +105,8 @@ public class JavascriptTest extends IntegrationFluentTest {
     public void shouldExecuteAsyncScriptReturnString() {
         getDriver().manage().timeouts().setScriptTimeout(200, TimeUnit.MILLISECONDS);
 
-        final Stopwatch stopwatch = Stopwatch.createStarted();
-        final FluentJavascript fluentJavascript = executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 100);");
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        FluentJavascript fluentJavascript = executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 100);");
         assertThat(stopwatch.elapsed(TimeUnit.MILLISECONDS)).isGreaterThanOrEqualTo(100);
         assertThat(fluentJavascript.getResult()).isNull();
     }

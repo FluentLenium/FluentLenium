@@ -18,9 +18,9 @@ public class IntegerListConditionsImpl extends BaseObjectListConditions<Integer,
      * @param objectGetter     getter of the underlying object
      * @param conditionsGetter getter of the underlying conditions
      */
-    public IntegerListConditionsImpl(final Conditions<FluentWebElement> conditions,
-            final Function<FluentWebElement, Integer> objectGetter,
-            final Function<FluentWebElement, IntegerConditions> conditionsGetter) {
+    public IntegerListConditionsImpl(Conditions<FluentWebElement> conditions,
+            Function<FluentWebElement, Integer> objectGetter,
+            Function<FluentWebElement, IntegerConditions> conditionsGetter) {
         super(conditions, objectGetter, conditionsGetter);
     }
 
@@ -30,11 +30,11 @@ public class IntegerListConditionsImpl extends BaseObjectListConditions<Integer,
      * @param conditions   list conditions
      * @param objectGetter getter of the underlying object
      */
-    public IntegerListConditionsImpl(final Conditions<FluentWebElement> conditions,
+    public IntegerListConditionsImpl(Conditions<FluentWebElement> conditions,
             final Function<FluentWebElement, Integer> objectGetter) {
         this(conditions, objectGetter, new Function<FluentWebElement, IntegerConditions>() {
             @Override
-            public IntegerConditions apply(final FluentWebElement input) {
+            public IntegerConditions apply(FluentWebElement input) {
                 return new IntegerConditionsImpl(objectGetter.apply(input));
             }
         });
@@ -44,7 +44,7 @@ public class IntegerListConditionsImpl extends BaseObjectListConditions<Integer,
     public boolean verify(final Predicate<Integer> predicate) {
         return conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return predicate.apply(objectGetter.apply(input));
             }
         });
@@ -57,9 +57,9 @@ public class IntegerListConditionsImpl extends BaseObjectListConditions<Integer,
 
     @Override
     public boolean equalTo(final int value) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).equalTo(value);
             }
         });
@@ -67,9 +67,9 @@ public class IntegerListConditionsImpl extends BaseObjectListConditions<Integer,
 
     @Override
     public boolean lessThan(final int value) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).lessThan(value);
             }
         });
@@ -77,9 +77,9 @@ public class IntegerListConditionsImpl extends BaseObjectListConditions<Integer,
 
     @Override
     public boolean lessThanOrEqualTo(final int value) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).lessThanOrEqualTo(value);
             }
         });
@@ -87,9 +87,9 @@ public class IntegerListConditionsImpl extends BaseObjectListConditions<Integer,
 
     @Override
     public boolean greaterThan(final int value) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).greaterThan(value);
             }
         });
@@ -97,9 +97,9 @@ public class IntegerListConditionsImpl extends BaseObjectListConditions<Integer,
 
     @Override
     public boolean greaterThanOrEqualTo(final int value) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).greaterThanOrEqualTo(value);
             }
         });

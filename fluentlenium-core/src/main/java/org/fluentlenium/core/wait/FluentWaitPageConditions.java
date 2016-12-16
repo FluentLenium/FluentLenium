@@ -20,9 +20,9 @@ public class FluentWaitPageConditions extends BaseWaitConditions {
      * @param wait   underlying wait
      * @param driver driver
      */
-    protected FluentWaitPageConditions(final FluentWait wait, final WebDriver driver) {
+    protected FluentWaitPageConditions(FluentWait wait, WebDriver driver) {
         this.wait = wait;
-        this.webDriver = driver;
+        webDriver = driver;
     }
 
     /**
@@ -32,9 +32,9 @@ public class FluentWaitPageConditions extends BaseWaitConditions {
      * @param driver driver
      * @param page   page to wait for
      */
-    protected FluentWaitPageConditions(final FluentWait wait, final WebDriver driver, final FluentPage page) {
+    protected FluentWaitPageConditions(FluentWait wait, WebDriver driver, FluentPage page) {
         this.wait = wait;
-        this.webDriver = driver;
+        webDriver = driver;
         this.page = page;
     }
 
@@ -47,9 +47,9 @@ public class FluentWaitPageConditions extends BaseWaitConditions {
      */
     public boolean isLoaded() {
         if (webDriver instanceof JavascriptExecutor) {
-            final Predicate<FluentControl> isLoaded = new Predicate<FluentControl>() {
-                public boolean apply(final FluentControl fluent) {
-                    final Object result = fluent.executeScript("if (document.readyState) return document.readyState;")
+            Predicate<FluentControl> isLoaded = new Predicate<FluentControl>() {
+                public boolean apply(FluentControl fluent) {
+                    Object result = fluent.executeScript("if (document.readyState) return document.readyState;")
                             .getStringResult();
                     return result != null && "complete".equals(result);
                 }
@@ -72,11 +72,11 @@ public class FluentWaitPageConditions extends BaseWaitConditions {
                     "You should use a page argument when you call the untilPage method to specify the page you want to be. "
                             + "Example : await().untilPage(myPage).isAt();");
         }
-        final Predicate<FluentControl> isLoaded = new Predicate<FluentControl>() {
-            public boolean apply(final FluentControl fluent) {
+        Predicate<FluentControl> isLoaded = new Predicate<FluentControl>() {
+            public boolean apply(FluentControl fluent) {
                 try {
                     page.isAt();
-                } catch (final Error e) {
+                } catch (Error e) {
                     return false;
                 }
                 return true;

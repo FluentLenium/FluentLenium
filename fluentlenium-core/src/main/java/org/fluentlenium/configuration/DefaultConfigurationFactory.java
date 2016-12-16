@@ -19,24 +19,24 @@ public class DefaultConfigurationFactory implements ConfigurationFactory {
     }
 
     @Override
-    public Configuration newConfiguration(final Class<?> containerClass, ConfigurationProperties configurationDefaults) {
-        final Properties properties = new Properties();
+    public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
+        Properties properties = new Properties();
 
         if (configurationDefaults == null) {
             configurationDefaults = new ConfigurationDefaults();
         }
 
-        final InputStream configurationFile = getPropertiesInputStream();
+        InputStream configurationFile = getPropertiesInputStream();
         if (configurationFile != null) {
             try {
                 properties.load(configurationFile);
-            } catch (final IOException e) {
+            } catch (IOException e) {
                 throw new ConfigurationException("Can't read fluentlenium.properties. " + e);
             }
         }
 
-        final ProgrammaticConfiguration programmaticConfiguration = new ProgrammaticConfiguration();
-        final Configuration configuration = new ComposedConfiguration(programmaticConfiguration, programmaticConfiguration,
+        ProgrammaticConfiguration programmaticConfiguration = new ProgrammaticConfiguration();
+        Configuration configuration = new ComposedConfiguration(programmaticConfiguration, programmaticConfiguration,
                 new PropertiesBackendConfiguration(new SystemPropertiesBackend()),
                 new PropertiesBackendConfiguration(new EnvironmentVariablesBackend()),
                 new AnnotationConfiguration(containerClass),

@@ -20,12 +20,12 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
      *
      * @param elements underlying elements
      */
-    protected AbstractFluentListConditions(final List<? extends FluentWebElement> elements) {
+    protected AbstractFluentListConditions(List<? extends FluentWebElement> elements) {
         this.elements = elements;
     }
 
     @Override
-    public boolean size(final int size) {
+    public boolean size(int size) {
         if (negation) {
             return elements.size() != size;
         }
@@ -46,7 +46,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
      *
      * @param negation negation value
      */
-    public void setNegation(final boolean negation) {
+    public void setNegation(boolean negation) {
         this.negation = negation;
     }
 
@@ -71,7 +71,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean verify(final Predicate<FluentWebElement> predicate) {
+    public boolean verify(Predicate<FluentWebElement> predicate) {
         return verify(predicate, false);
     }
 
@@ -79,7 +79,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     public boolean present() {
         return verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return input.conditions().present();
             }
         }, false);
@@ -89,7 +89,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     public boolean clickable() {
         return verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return input.conditions().clickable();
             }
         }, false);
@@ -99,7 +99,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     public boolean stale() {
         return verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return input.conditions().stale();
             }
         }, false);
@@ -109,7 +109,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     public boolean displayed() {
         return verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return input.conditions().displayed();
             }
         }, false);
@@ -119,7 +119,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     public boolean enabled() {
         return verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return input.conditions().enabled();
             }
         }, false);
@@ -129,14 +129,14 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     public boolean selected() {
         return verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return input.conditions().selected();
             }
         }, false);
     }
 
     @Override
-    public boolean attribute(final String name, final String value) {
+    public boolean attribute(String name, String value) {
         return attribute(name).equalTo(value);
     }
 
@@ -144,19 +144,19 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     public StringConditions attribute(final String name) {
         return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
             @Override
-            public String apply(final FluentWebElement input) {
+            public String apply(FluentWebElement input) {
                 return input.attribute(name);
             }
         }, new Function<FluentWebElement, StringConditions>() {
             @Override
-            public StringConditions apply(final FluentWebElement input) {
+            public StringConditions apply(FluentWebElement input) {
                 return input.conditions().attribute(name);
             }
         });
     }
 
     @Override
-    public boolean id(final String id) {
+    public boolean id(String id) {
         return id().equalTo(id);
     }
 
@@ -164,12 +164,12 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     public StringConditions id() {
         return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
             @Override
-            public String apply(final FluentWebElement input) {
+            public String apply(FluentWebElement input) {
                 return input.id();
             }
         }, new Function<FluentWebElement, StringConditions>() {
             @Override
-            public StringConditions apply(final FluentWebElement input) {
+            public StringConditions apply(FluentWebElement input) {
                 return input.conditions().id();
             }
         });
@@ -179,19 +179,19 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     public StringConditions name() {
         return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
             @Override
-            public String apply(final FluentWebElement input) {
+            public String apply(FluentWebElement input) {
                 return input.name();
             }
         }, new Function<FluentWebElement, StringConditions>() {
             @Override
-            public StringConditions apply(final FluentWebElement input) {
+            public StringConditions apply(FluentWebElement input) {
                 return input.conditions().name();
             }
         });
     }
 
     @Override
-    public boolean name(final String name) {
+    public boolean name(String name) {
         return name().equalTo(name);
     }
 
@@ -199,19 +199,19 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     public StringConditions tagName() {
         return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
             @Override
-            public String apply(final FluentWebElement input) {
+            public String apply(FluentWebElement input) {
                 return input.tagName();
             }
         }, new Function<FluentWebElement, StringConditions>() {
             @Override
-            public StringConditions apply(final FluentWebElement input) {
+            public StringConditions apply(FluentWebElement input) {
                 return input.conditions().tagName();
             }
         });
     }
 
     @Override
-    public boolean tagName(final String tagName) {
+    public boolean tagName(String tagName) {
         return tagName().equalTo(tagName);
     }
 
@@ -219,19 +219,19 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     public StringConditions value() {
         return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
             @Override
-            public String apply(final FluentWebElement input) {
+            public String apply(FluentWebElement input) {
                 return input.value();
             }
         }, new Function<FluentWebElement, StringConditions>() {
             @Override
-            public StringConditions apply(final FluentWebElement input) {
+            public StringConditions apply(FluentWebElement input) {
                 return input.conditions().value();
             }
         });
     }
 
     @Override
-    public boolean value(final String value) {
+    public boolean value(String value) {
         return value().equalTo(value);
     }
 
@@ -239,19 +239,19 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     public StringConditions text() {
         return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
             @Override
-            public String apply(final FluentWebElement input) {
+            public String apply(FluentWebElement input) {
                 return input.text();
             }
         }, new Function<FluentWebElement, StringConditions>() {
             @Override
-            public StringConditions apply(final FluentWebElement input) {
+            public StringConditions apply(FluentWebElement input) {
                 return input.conditions().text();
             }
         });
     }
 
     @Override
-    public boolean text(final String text) {
+    public boolean text(String text) {
         return text().equalTo(text);
     }
 
@@ -259,19 +259,19 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     public StringConditions textContent() {
         return new StringListConditionsImpl(this, new Function<FluentWebElement, String>() {
             @Override
-            public String apply(final FluentWebElement input) {
+            public String apply(FluentWebElement input) {
                 return input.textContent();
             }
         }, new Function<FluentWebElement, StringConditions>() {
             @Override
-            public StringConditions apply(final FluentWebElement input) {
+            public StringConditions apply(FluentWebElement input) {
                 return input.conditions().textContent();
             }
         });
     }
 
     @Override
-    public boolean textContent(final String anotherString) {
+    public boolean textContent(String anotherString) {
         return textContent().equalTo(anotherString);
     }
 
@@ -284,7 +284,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     public boolean className(final String className) {
         return verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return input.conditions().className(className);
             }
         }, false);

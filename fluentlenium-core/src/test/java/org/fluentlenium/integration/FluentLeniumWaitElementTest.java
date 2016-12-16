@@ -113,7 +113,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
         try {
             await().withMessage("toto").atMost(1, NANOSECONDS).until(notFoundElement).present();
             fail();
-        } catch (final TimeoutException e) {
+        } catch (TimeoutException e) {
             assertThat(e.getMessage()).contains("toto");
         }
     }
@@ -286,7 +286,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().pollingEvery(800, TimeUnit.MILLISECONDS).untilPredicate(new Predicate<FluentControl>() {
             @Override
-            public boolean apply(final FluentControl input) {
+            public boolean apply(FluentControl input) {
                 return true;
             }
         });
@@ -297,7 +297,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().atMost(1000).untilPredicate(new Predicate<FluentControl>() {
             @Override
-            public boolean apply(final FluentControl input) {
+            public boolean apply(FluentControl input) {
                 return false;
             }
         });
@@ -308,7 +308,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().pollingEvery(1000, TimeUnit.MILLISECONDS).until(new Function<FluentControl, Boolean>() {
             @Override
-            public Boolean apply(final FluentControl fluent) {
+            public Boolean apply(FluentControl fluent) {
                 return true;
             }
         });
@@ -319,7 +319,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
         goTo(JAVASCRIPT_URL);
         await().atMost(1000).until(new Function<FluentControl, Boolean>() {
             @Override
-            public Boolean apply(final FluentControl fluent) {
+            public Boolean apply(FluentControl fluent) {
                 return false;
             }
         });

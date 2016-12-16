@@ -11,7 +11,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
      *
      * @param integer underlying integer
      */
-    public IntegerConditionsImpl(final Integer integer) {
+    public IntegerConditionsImpl(Integer integer) {
         super(integer);
     }
 
@@ -21,12 +21,12 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
      * @param integer  underlying integer
      * @param negation negation value
      */
-    public IntegerConditionsImpl(final Integer integer, final boolean negation) {
+    public IntegerConditionsImpl(Integer integer, boolean negation) {
         super(integer, negation);
     }
 
     @Override
-    protected AbstractObjectConditions<Integer> newInstance(final boolean negationValue) {
+    protected AbstractObjectConditions<Integer> newInstance(boolean negationValue) {
         return new IntegerConditionsImpl(object, negationValue);
     }
 
@@ -40,7 +40,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
     public boolean equalTo(final int value) {
         return verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(final Integer input) {
+            public boolean apply(Integer input) {
                 return input.equals(value);
             }
         });
@@ -50,7 +50,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
     public boolean lessThan(final int value) {
         return verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(final Integer input) {
+            public boolean apply(Integer input) {
                 return input < value;
             }
         });
@@ -60,7 +60,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
     public boolean lessThanOrEqualTo(final int value) {
         return verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(final Integer input) {
+            public boolean apply(Integer input) {
                 return input <= value;
             }
         });
@@ -70,7 +70,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
     public boolean greaterThan(final int value) {
         return verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(final Integer input) {
+            public boolean apply(Integer input) {
                 return input > value;
             }
         });
@@ -80,7 +80,7 @@ public class IntegerConditionsImpl extends AbstractObjectConditions<Integer> imp
     public boolean greaterThanOrEqualTo(final int value) {
         return verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(final Integer input) {
+            public boolean apply(Integer input) {
                 return input >= value;
             }
         });

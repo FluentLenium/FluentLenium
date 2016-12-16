@@ -32,8 +32,8 @@ public class ComponentList<T> extends DelegatingList<T> implements WrapsElements
      * @param control        control interface
      * @param instantiator   component instantiator
      */
-    public ComponentList(final Class<T> componentClass, final List<T> list, final FluentControl control,
-            final ComponentInstantiator instantiator) {
+    public ComponentList(Class<T> componentClass, List<T> list, FluentControl control,
+            ComponentInstantiator instantiator) {
         super(list);
         if (list instanceof LazyComponents) {
             lazyComponents = (LazyComponents) list;
@@ -43,12 +43,12 @@ public class ComponentList<T> extends DelegatingList<T> implements WrapsElements
         this.instantiator = instantiator;
 
         if (this.list instanceof WrapsElements) {
-            this.proxy = ((WrapsElements) this.list).getWrappedElements(); // NOPMD ConstructorCallsOverridableMethod
+            proxy = ((WrapsElements) this.list).getWrappedElements(); // NOPMD ConstructorCallsOverridableMethod
         }
     }
 
     @Override
     public List<WebElement> getWrappedElements() {
-        return this.proxy;
+        return proxy;
     }
 }

@@ -18,7 +18,7 @@ public class ReflectiveWebDriverFactoryTest {
     }
 
     public static class CustomConstructorDriver extends HtmlUnitDriver {
-        public CustomConstructorDriver(final boolean javascript) {
+        public CustomConstructorDriver(boolean javascript) {
             super(javascript);
         }
     }
@@ -75,11 +75,11 @@ public class ReflectiveWebDriverFactoryTest {
 
     @Test
     public void testNoConstructorClass() {
-        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("no-constructor",
+        ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("no-constructor",
                 NoConstructorDriver.class);
         assertThat(webDriverFactory.isAvailable()).isTrue();
 
-        final WebDriver webDriver = webDriverFactory.newWebDriver(null, null);
+        WebDriver webDriver = webDriverFactory.newWebDriver(null, null);
         try {
             assertThat(webDriver).isExactlyInstanceOf(NoConstructorDriver.class);
         } finally {
@@ -116,11 +116,11 @@ public class ReflectiveWebDriverFactoryTest {
 
     @Test
     public void testCustomConstructorClass() {
-        final ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("custom_constructor",
+        ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("custom_constructor",
                 CustomConstructorDriver.class, true);
         assertThat(webDriverFactory.isAvailable()).isTrue();
 
-        final WebDriver webDriver = webDriverFactory.newWebDriver(null, null);
+        WebDriver webDriver = webDriverFactory.newWebDriver(null, null);
         try {
             assertThat(webDriver).isExactlyInstanceOf(CustomConstructorDriver.class);
         } finally {
@@ -130,14 +130,14 @@ public class ReflectiveWebDriverFactoryTest {
 
     @Test
     public void testHtmlUnitWebDriver() {
-        final ReflectiveWebDriverFactory webDriverFactory = new DefaultWebDriverFactories.HtmlUnitWebDriverFactory();
+        ReflectiveWebDriverFactory webDriverFactory = new DefaultWebDriverFactories.HtmlUnitWebDriverFactory();
         assertThat(webDriverFactory.isAvailable()).isTrue();
         assertThat(webDriverFactory.getWebDriverClass()).isSameAs(HtmlUnitDriver.class);
 
         assertThat(webDriverFactory.getNames())
                 .containsExactly("htmlunit", HtmlUnitDriver.class.getName(), HtmlUnitDriver.class.getSimpleName());
 
-        final WebDriver webDriver = webDriverFactory.newWebDriver(null, null);
+        WebDriver webDriver = webDriverFactory.newWebDriver(null, null);
         try {
             assertThat(webDriver).isExactlyInstanceOf(HtmlUnitDriver.class);
             assertThat(((HasCapabilities) webDriver).getCapabilities().isJavascriptEnabled()).isTrue();
@@ -148,17 +148,17 @@ public class ReflectiveWebDriverFactoryTest {
 
     @Test
     public void testHtmlUnitWebDriverCapabilities() {
-        final ReflectiveWebDriverFactory webDriverFactory = new DefaultWebDriverFactories.HtmlUnitWebDriverFactory();
+        ReflectiveWebDriverFactory webDriverFactory = new DefaultWebDriverFactories.HtmlUnitWebDriverFactory();
         assertThat(webDriverFactory.isAvailable()).isTrue();
         assertThat(webDriverFactory.getWebDriverClass()).isSameAs(HtmlUnitDriver.class);
 
         assertThat(webDriverFactory.getNames())
                 .containsExactly("htmlunit", HtmlUnitDriver.class.getName(), HtmlUnitDriver.class.getSimpleName());
 
-        final DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setJavascriptEnabled(false);
 
-        final WebDriver webDriver = webDriverFactory.newWebDriver(desiredCapabilities, null);
+        WebDriver webDriver = webDriverFactory.newWebDriver(desiredCapabilities, null);
         try {
             assertThat(webDriver).isExactlyInstanceOf(HtmlUnitDriver.class);
             assertThat(((HasCapabilities) webDriver).getCapabilities().isJavascriptEnabled()).isFalse();

@@ -15,7 +15,7 @@ public class GoToTest extends IntegrationFluentTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void goToWithNullString() {
-        final String url = null;
+        String url = null;
         goTo(url);
     }
 
@@ -53,7 +53,7 @@ public class GoToTest extends IntegrationFluentTest {
 
     @Test
     public void checkGoToPage() {
-        final FluentPage page = newInstance(MyPage.class);
+        FluentPage page = newInstance(MyPage.class);
         goTo(page);
         verify(webDriver).get(DEFAULT_URL);
     }

@@ -29,14 +29,14 @@ public class FluentTestNg extends FluentTestRunnerAdapter {
         super(new ThreadLocalFluentControlContainer());
     }
 
-    private Map<Method, ITestNGMethod> getMethods(final ITestContext context) {
+    private Map<Method, ITestNGMethod> getMethods(ITestContext context) {
         synchronized (this) {
             Map<Method, ITestNGMethod> testMethods = methods.get(context);
 
             if (testMethods == null) {
                 testMethods = new HashMap<>();
 
-                for (final ITestNGMethod method : context.getAllTestMethods()) {
+                for (ITestNGMethod method : context.getAllTestMethods()) {
                     testMethods.put(method.getConstructorOrMethod().getMethod(), method);
                 }
 
@@ -52,7 +52,7 @@ public class FluentTestNg extends FluentTestRunnerAdapter {
      * @param context test context
      */
     @AfterTest(alwaysRun = true)
-    public void afterTest(final ITestContext context) {
+    public void afterTest(ITestContext context) {
         synchronized (this) {
             methods.remove(context);
         }
@@ -65,8 +65,8 @@ public class FluentTestNg extends FluentTestRunnerAdapter {
      * @param context test context
      */
     @BeforeMethod(alwaysRun = true)
-    public void beforeMethod(final Method method, final ITestContext context) {
-        final ITestNGMethod testNGMethod = getMethods(context).get(method);
+    public void beforeMethod(Method method, ITestContext context) {
+        ITestNGMethod testNGMethod = getMethods(context).get(method);
         starting(testNGMethod.getRealClass(), testNGMethod.getMethodName());
     }
 
@@ -76,7 +76,7 @@ public class FluentTestNg extends FluentTestRunnerAdapter {
      * @param result test result
      */
     @AfterMethod(alwaysRun = true)
-    public void afterMethod(final ITestResult result) {
+    public void afterMethod(ITestResult result) {
         if (!result.isSuccess()) {
             failed(result.getThrowable(), result.getTestClass().getRealClass(), result.getName());
         }

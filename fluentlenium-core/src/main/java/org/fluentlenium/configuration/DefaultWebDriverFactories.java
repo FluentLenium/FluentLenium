@@ -127,7 +127,7 @@ public class DefaultWebDriverFactories {
 
         @Override
         protected DesiredCapabilities newDefaultCapabilities() {
-            final DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+            DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
             desiredCapabilities.setJavascriptEnabled(true);
             return desiredCapabilities;
         }
@@ -146,17 +146,17 @@ public class DefaultWebDriverFactories {
         }
 
         @Override
-        protected WebDriver newInstance(final Class<? extends WebDriver> webDriverClass,
-                final ConfigurationProperties configuration, final Object... args)
+        protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass,
+                ConfigurationProperties configuration, Object... args)
                 throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
             URL url = null;
             if (configuration != null) {
-                final String remoteUrl = configuration.getRemoteUrl();
+                String remoteUrl = configuration.getRemoteUrl();
 
                 if (remoteUrl != null) {
                     try {
                         url = new URL(remoteUrl);
-                    } catch (final MalformedURLException e) {
+                    } catch (MalformedURLException e) {
                         throw new ConfigurationException("remoteUrl configuration property is not a valid URL.", e);
                     }
                 }
@@ -179,9 +179,9 @@ public class DefaultWebDriverFactories {
          * @throws InvocationTargetException if the underlying constructor
          *                                   throws an exception.
          */
-        protected WebDriver newRemoteWebDriver(final Object... args)
+        protected WebDriver newRemoteWebDriver(Object... args)
                 throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-            final WebDriver webDriver = ReflectionUtils.getConstructor(webDriverClass, URL.class, Capabilities.class)
+            WebDriver webDriver = ReflectionUtils.getConstructor(webDriverClass, URL.class, Capabilities.class)
                     .newInstance(args);
             return new Augmenter().augment(webDriver);
         }

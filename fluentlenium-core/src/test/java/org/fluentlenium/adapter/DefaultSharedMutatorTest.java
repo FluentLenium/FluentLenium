@@ -8,13 +8,13 @@ public class DefaultSharedMutatorTest {
 
     @Test
     public void testDefaultMutator() {
-        final DefaultSharedMutator sharedMutator = new DefaultSharedMutator();
+        DefaultSharedMutator sharedMutator = new DefaultSharedMutator();
 
-        final Class<?> testClass = Object.class;
-        final String testName = "test";
-        final DriverLifecycle driverLifecycle = DriverLifecycle.METHOD;
+        Class<?> testClass = Object.class;
+        String testName = "test";
+        DriverLifecycle driverLifecycle = DriverLifecycle.METHOD;
 
-        final SharedMutator.EffectiveParameters<?> parameters = sharedMutator
+        SharedMutator.EffectiveParameters<?> parameters = sharedMutator
                 .getEffectiveParameters(testClass, testName, driverLifecycle);
 
         Assertions.assertThat(parameters.getTestClass()).isSameAs(testClass);

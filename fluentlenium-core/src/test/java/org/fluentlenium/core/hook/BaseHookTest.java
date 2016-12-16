@@ -74,7 +74,7 @@ public class BaseHookTest {
     public void testNoOptionHook() {
         final Object defaultOptions = new Object();
 
-        final BaseHook noOptionHook = new BaseHook<Object>(fluentAdapter, instantiator, Suppliers.ofInstance(element),
+        BaseHook noOptionHook = new BaseHook<Object>(fluentAdapter, instantiator, Suppliers.ofInstance(element),
                 Suppliers.ofInstance(locator), Suppliers.ofInstance("hook"), null) {
             @Override
             protected Object newOptions() {
@@ -88,7 +88,7 @@ public class BaseHookTest {
     @Test
     public void testNoOptionHookWithoutDefault() {
 
-        final BaseHook noOptionHook = new BaseHook<>(fluentAdapter, instantiator, Suppliers.ofInstance(element),
+        BaseHook noOptionHook = new BaseHook<>(fluentAdapter, instantiator, Suppliers.ofInstance(element),
                 Suppliers.ofInstance(locator), Suppliers.ofInstance("hook"), null);
 
         assertThat(noOptionHook.getOptions()).isNull();

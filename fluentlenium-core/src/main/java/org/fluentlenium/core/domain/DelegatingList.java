@@ -18,7 +18,7 @@ public class DelegatingList<T> implements List<T> {
      *
      * @param list underlying list
      */
-    public DelegatingList(final List<T> list) {
+    public DelegatingList(List<T> list) {
         super();
         this.list = list;
     }

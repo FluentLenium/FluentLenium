@@ -19,7 +19,7 @@ public class ElementSupplierLocator implements ElementLocator {
      *
      * @param elementSupplier element supplier
      */
-    public ElementSupplierLocator(final Supplier<WebElement> elementSupplier) {
+    public ElementSupplierLocator(Supplier<WebElement> elementSupplier) {
         this.elementSupplier = elementSupplier;
     }
 
@@ -30,7 +30,7 @@ public class ElementSupplierLocator implements ElementLocator {
 
     @Override
     public List<WebElement> findElements() {
-        final WebElement webElement = elementSupplier.get();
+        WebElement webElement = elementSupplier.get();
         if (webElement == null) {
             return Collections.emptyList();
         }

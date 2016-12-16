@@ -27,15 +27,15 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
      * @param webDriverClassName web driver class name
      * @param args               web driver class constructor arguments
      */
-    public ReflectiveWebDriverFactory(final String name, final String webDriverClassName, final Object... args) {
+    public ReflectiveWebDriverFactory(String name, String webDriverClassName, Object... args) {
         this.name = name;
         this.webDriverClassName = webDriverClassName;
         this.args = args;
         try {
-            this.webDriverClass = (Class<? extends WebDriver>) Class.forName(webDriverClassName);
-            this.available = WebDriver.class.isAssignableFrom(this.webDriverClass);
-        } catch (final ClassNotFoundException e) {
-            this.available = false;
+            webDriverClass = (Class<? extends WebDriver>) Class.forName(webDriverClassName);
+            available = WebDriver.class.isAssignableFrom(webDriverClass);
+        } catch (ClassNotFoundException e) {
+            available = false;
         }
     }
 
@@ -46,12 +46,12 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
      * @param webDriverClass web driver class
      * @param args           web driver class constructor arguments
      */
-    public ReflectiveWebDriverFactory(final String name, final Class<? extends WebDriver> webDriverClass, final Object... args) {
+    public ReflectiveWebDriverFactory(String name, Class<? extends WebDriver> webDriverClass, Object... args) {
         this.name = name;
         this.webDriverClass = webDriverClass;
         this.args = args;
-        this.webDriverClassName = webDriverClass.getName();
-        this.available = WebDriver.class.isAssignableFrom(this.webDriverClass);
+        webDriverClassName = webDriverClass.getName();
+        available = WebDriver.class.isAssignableFrom(this.webDriverClass);
     }
 
     /**
@@ -78,24 +78,24 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
     }
 
     @Override
-    public WebDriver newWebDriver(Capabilities capabilities, final ConfigurationProperties configuration) {
+    public WebDriver newWebDriver(Capabilities capabilities, ConfigurationProperties configuration) {
         if (!available) {
             throw new ConfigurationException("WebDriver " + webDriverClassName + " is not available.");
         }
 
         try {
-            final DesiredCapabilities defaultCapabilities = newDefaultCapabilities();
+            DesiredCapabilities defaultCapabilities = newDefaultCapabilities();
             if (defaultCapabilities != null) {
                 defaultCapabilities.merge(capabilities);
                 capabilities = defaultCapabilities;
             }
 
             if (capabilities != null && !capabilities.asMap().isEmpty()) {
-                final ArrayList<Object> argsList = new ArrayList<>(Arrays.asList(args));
+                ArrayList<Object> argsList = new ArrayList<>(Arrays.asList(args));
                 argsList.add(0, capabilities);
                 try {
                     return newInstance(webDriverClass, configuration, argsList.toArray());
-                } catch (final NoSuchMethodException e) { // NOPMD EmptyCatchBlock
+                } catch (NoSuchMethodException e) { // NOPMD EmptyCatchBlock
                     // Ignore capabilities.
                 }
             }
@@ -121,15 +121,15 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
      * @throws InvocationTargetException if the underlying constructor
      *                                   throws an exception.
      */
-    protected WebDriver newInstance(final Class<? extends WebDriver> webDriverClass, final ConfigurationProperties configuration,
-            final Object... args)
+    protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration,
+            Object... args)
             throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return ReflectionUtils.newInstance(webDriverClass, args);
     }
 
     @Override
     public String[] getNames() {
-        final List<String> names = new ArrayList<>(Arrays.asList(name));
+        List<String> names = new ArrayList<>(Arrays.asList(name));
         if (webDriverClass != null) {
             names.add(webDriverClass.getName());
             names.add(webDriverClass.getSimpleName());

@@ -25,48 +25,48 @@ public class CssSupportImpl implements CssSupport {
      * @param javascriptControl javascript control
      * @param awaitControl      await control
      */
-    public CssSupportImpl(final JavascriptControl javascriptControl, final AwaitControl awaitControl) {
+    public CssSupportImpl(JavascriptControl javascriptControl, AwaitControl awaitControl) {
         this.javascriptControl = javascriptControl;
         this.awaitControl = awaitControl;
     }
 
     @Override
     public void inject(String cssText) {
-        final InputStream injectorScript = this.getClass().getResourceAsStream("/org/fluentlenium/core/css/injector.js");
+        InputStream injectorScript = getClass().getResourceAsStream("/org/fluentlenium/core/css/injector.js");
         String injectorJs;
         try {
             injectorJs = IOUtils.toString(injectorScript, Charset.forName("UTF-8"));
-        } catch (final IOException e) {
+        } catch (IOException e) {
             throw new IOError(e);
         } finally {
             IOUtils.closeQuietly(injectorScript);
         }
         cssText = cssText.replace("\r\n", "").replace("\n", "");
         cssText = StringEscapeUtils.escapeEcmaScript(cssText);
-        this.executeScriptRetry("cssText = \"" + cssText + "\"" + ";\n" + injectorJs);
+        executeScriptRetry("cssText = \"" + cssText + "\"" + ";\n" + injectorJs);
     }
 
     @Override
-    public void injectResource(final String cssResourceName) {
-        final InputStream cssStream = this.getClass().getResourceAsStream(cssResourceName);
+    public void injectResource(String cssResourceName) {
+        InputStream cssStream = getClass().getResourceAsStream(cssResourceName);
         String cssText;
         try {
             cssText = IOUtils.toString(cssStream, Charset.forName("UTF-8"));
-        } catch (final IOException e) {
+        } catch (IOException e) {
             throw new IOError(e);
         } finally {
             IOUtils.closeQuietly(cssStream);
         }
-        this.inject(cssText);
+        inject(cssText);
     }
 
-    private void executeScriptRetry(final String script) {
+    private void executeScriptRetry(String script) {
         int retries = 0;
         while (true) {
             try {
                 javascriptControl.executeScript(script);
                 break;
-            } catch (final WebDriverException e) {
+            } catch (WebDriverException e) {
                 retries += 1;
                 if (retries >= 10) {
                     throw e;

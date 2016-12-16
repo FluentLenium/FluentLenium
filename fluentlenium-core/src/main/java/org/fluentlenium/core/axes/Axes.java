@@ -24,8 +24,8 @@ public class Axes {
      * @param element      reference element
      * @param instantiator component instantiator used to build found elements.
      */
-    public Axes(final WebElement element, final ComponentInstantiator instantiator) {
-        this.webElement = element;
+    public Axes(WebElement element, ComponentInstantiator instantiator) {
+        webElement = element;
         this.instantiator = instantiator;
     }
 
@@ -35,10 +35,10 @@ public class Axes {
      * @return fluent web element
      */
     public FluentWebElement parent() {
-        final WebElement parentElement = LocatorProxies.createWebElement(new Supplier<WebElement>() {
+        WebElement parentElement = LocatorProxies.createWebElement(new Supplier<WebElement>() {
             @Override
             public WebElement get() {
-                return Axes.this.webElement.findElement(By.xpath("parent::*"));
+                return webElement.findElement(By.xpath("parent::*"));
             }
         });
 
@@ -52,10 +52,10 @@ public class Axes {
      * @return list of found elements
      */
     protected FluentList<FluentWebElement> handleAxe(final String axe) {
-        final List<WebElement> webElementList = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(new Supplier<List<WebElement>>() {
             @Override
             public List<WebElement> get() {
-                return Axes.this.webElement.findElements(By.xpath(axe + "::*"));
+                return webElement.findElements(By.xpath(axe + "::*"));
             }
         });
 

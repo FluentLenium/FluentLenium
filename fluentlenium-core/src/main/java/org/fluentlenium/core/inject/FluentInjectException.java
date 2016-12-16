@@ -9,7 +9,7 @@ public class FluentInjectException extends RuntimeException {
      *
      * @param message exception message
      */
-    public FluentInjectException(final String message) {
+    public FluentInjectException(String message) {
         super(message);
     }
 
@@ -19,7 +19,7 @@ public class FluentInjectException extends RuntimeException {
      * @param message exception message
      * @param cause   exception cause
      */
-    public FluentInjectException(final String message, final Throwable cause) {
+    public FluentInjectException(String message, Throwable cause) {
         super(message, cause);
     }
 }

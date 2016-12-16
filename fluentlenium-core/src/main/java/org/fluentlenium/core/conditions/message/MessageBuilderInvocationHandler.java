@@ -22,9 +22,9 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
      *
      * @param context base context of the generated message
      */
-    public MessageBuilderInvocationHandler(final String context) {
+    public MessageBuilderInvocationHandler(String context) {
         this(new ArrayList<MessageBuilderCall>());
-        final MessageBuilderCall messageBuilderCall = new MessageBuilderCall();
+        MessageBuilderCall messageBuilderCall = new MessageBuilderCall();
         messageBuilderCall.setContext(context);
         calls.add(messageBuilderCall);
     }
@@ -35,7 +35,7 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
      * @param context  base context of the generated message
      * @param instance underlying wrapped instance. If not null, calls will also be performed on this instance.
      */
-    public MessageBuilderInvocationHandler(final String context, final Object instance) {
+    public MessageBuilderInvocationHandler(String context, Object instance) {
         this(context);
         this.instance = instance;
     }
@@ -45,17 +45,17 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
      *
      * @param calls initial calls.
      */
-    public MessageBuilderInvocationHandler(final List<MessageBuilderCall> calls) {
+    public MessageBuilderInvocationHandler(List<MessageBuilderCall> calls) {
         this.calls = calls;
     }
 
     @Override
-    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Object instanceReturn = null;
         if (instance != null) {
             instanceReturn = method.invoke(instance, args);
         }
-        final MessageBuilderCall callItem = new MessageBuilderCall();
+        MessageBuilderCall callItem = new MessageBuilderCall();
 
         if (method.isAnnotationPresent(Message.class)) {
             callItem.setMessage(method.getAnnotation(Message.class).value());
@@ -90,8 +90,8 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
      * @throws IllegalStateException if one of the recorded call has no @Message/@NotMessage annotation.
      */
     public String buildMessage() {
-        final StringBuilder messageBuilder = new StringBuilder();
-        for (final MessageBuilderCall call : calls) {
+        StringBuilder messageBuilder = new StringBuilder();
+        for (MessageBuilderCall call : calls) {
             if (call.getContext() != null) {
                 if (messageBuilder.length() > 0) {
                     messageBuilder.append(' ');
@@ -101,16 +101,16 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
         }
 
         boolean negation = false;
-        for (final MessageBuilderCall call : calls) {
+        for (MessageBuilderCall call : calls) {
             if (call.isNegation()) {
                 negation = !negation;
             }
         }
 
-        final List<MessageBuilderCall> reversedCalls = new ArrayList<>(calls);
+        List<MessageBuilderCall> reversedCalls = new ArrayList<>(calls);
         Collections.reverse(reversedCalls);
 
-        for (final MessageBuilderCall call : reversedCalls) {
+        for (MessageBuilderCall call : reversedCalls) {
             String validationMessage = negation ? call.getMessage() : call.getNotMessage();
 
             if (validationMessage == null) {

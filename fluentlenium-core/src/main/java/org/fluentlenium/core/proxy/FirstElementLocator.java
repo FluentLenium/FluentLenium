@@ -11,7 +11,7 @@ public class FirstElementLocator extends AtIndexElementLocator {
      *
      * @param listLocator element list locator
      */
-    public FirstElementLocator(final ElementLocator listLocator) {
+    public FirstElementLocator(ElementLocator listLocator) {
         super(listLocator, 0);
     }
 

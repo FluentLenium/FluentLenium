@@ -26,8 +26,8 @@ public class BaseObjectListConditions<T, C extends Conditions<T>> implements Con
      * @param objectGetter     getter of the underlying object
      * @param conditionsGetter getter of the underlying object conditions
      */
-    public BaseObjectListConditions(final Conditions<FluentWebElement> conditions,
-            final Function<FluentWebElement, T> objectGetter, final Function<FluentWebElement, C> conditionsGetter) {
+    public BaseObjectListConditions(Conditions<FluentWebElement> conditions,
+            Function<FluentWebElement, T> objectGetter, Function<FluentWebElement, C> conditionsGetter) {
         this.conditions = conditions;
         this.objectGetter = objectGetter;
         this.conditionsGetter = conditionsGetter;
@@ -36,7 +36,7 @@ public class BaseObjectListConditions<T, C extends Conditions<T>> implements Con
     @Override
     public List<T> getActualObject() {
         if (conditions instanceof ListConditionsElements) {
-            final List<? extends FluentWebElement> elements = ((ListConditionsElements) conditions).getActualElements();
+            List<? extends FluentWebElement> elements = ((ListConditionsElements) conditions).getActualElements();
             return new ArrayList<>(Collections2.transform(elements, objectGetter));
         }
         return new ArrayList<>();
@@ -49,9 +49,9 @@ public class BaseObjectListConditions<T, C extends Conditions<T>> implements Con
      * @return true if the predicate is verified
      */
     public boolean verify(final Predicate<T> predicate) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return predicate.apply(objectGetter.apply(input));
             }
         });

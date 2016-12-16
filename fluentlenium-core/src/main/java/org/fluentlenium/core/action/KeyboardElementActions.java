@@ -22,7 +22,7 @@ public class KeyboardElementActions {
      * @param driver  selenium driver
      * @param element element on which to execute actions
      */
-    public KeyboardElementActions(final WebDriver driver, final WebElement element) {
+    public KeyboardElementActions(WebDriver driver, WebElement element) {
         this.driver = driver;
         this.element = element;
     }
@@ -34,7 +34,7 @@ public class KeyboardElementActions {
      * @param mouse    mouse interface
      * @param element  element on which to execute actions
      */
-    public KeyboardElementActions(final Keyboard keyboard, final Mouse mouse, final WebElement element) {
+    public KeyboardElementActions(Keyboard keyboard, Mouse mouse, WebElement element) {
         this.keyboard = keyboard;
         this.mouse = mouse;
         this.element = element;
@@ -74,7 +74,7 @@ public class KeyboardElementActions {
      * @see #keyDown(org.openqa.selenium.Keys)
      * @see org.openqa.selenium.interactions.Actions#keyDown(WebElement, Keys)
      */
-    public KeyboardElementActions keyDown(final Keys theKey) {
+    public KeyboardElementActions keyDown(Keys theKey) {
         actions().keyDown(element, theKey).perform();
         return this;
     }
@@ -87,7 +87,7 @@ public class KeyboardElementActions {
      * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#keyUp(WebElement, Keys)
      */
-    public KeyboardElementActions keyUp(final Keys theKey) {
+    public KeyboardElementActions keyUp(Keys theKey) {
         actions().keyUp(element, theKey).perform();
         return this;
     }
@@ -105,7 +105,7 @@ public class KeyboardElementActions {
      * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#sendKeys(WebElement, CharSequence...)
      */
-    public KeyboardElementActions sendKeys(final CharSequence... keysToSend) {
+    public KeyboardElementActions sendKeys(CharSequence... keysToSend) {
         actions().sendKeys(element, keysToSend).perform();
         return this;
     }

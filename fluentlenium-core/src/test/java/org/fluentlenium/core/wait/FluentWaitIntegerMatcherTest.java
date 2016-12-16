@@ -54,11 +54,11 @@ public class FluentWaitIntegerMatcherTest {
     public void testInteger() {
         when(element.getRect()).thenReturn(new Rectangle(1, 2, 100, 200));
 
-        final RectangleConditions rectangleConditions = wait.until(fluentWebElement).rectangle();
+        RectangleConditions rectangleConditions = wait.until(fluentWebElement).rectangle();
 
         rectangleConditions.verify(new Predicate<Rectangle>() {
             @Override
-            public boolean apply(final Rectangle input) {
+            public boolean apply(Rectangle input) {
                 return true;
             }
         });
@@ -80,21 +80,21 @@ public class FluentWaitIntegerMatcherTest {
 
         rectangleConditions.x().verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(final Integer input) {
+            public boolean apply(Integer input) {
                 return input == 1;
             }
         });
 
         rectangleConditions.x().not().verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(final Integer input) {
+            public boolean apply(Integer input) {
                 return input != 1;
             }
         });
 
         rectangleConditions.not().x().not().verify(new Predicate<Integer>() {
             @Override
-            public boolean apply(final Integer input) {
+            public boolean apply(Integer input) {
                 return input == 1;
             }
         });

@@ -23,7 +23,7 @@ public class FluentAdapterTest {
 
     @Test
     public void isDriverAvailableBehavesAsExpected() {
-        final FluentAdapter adapter = new FluentAdapter();
+        FluentAdapter adapter = new FluentAdapter();
         adapter.initFluent(webDriver);
         assertThat(adapter.isFluentControlAvailable()).isTrue();
 
@@ -33,7 +33,7 @@ public class FluentAdapterTest {
 
     @Test
     public void deletagesToWebDriverWhenInitialized() {
-        final FluentAdapter adapter = new FluentAdapter();
+        FluentAdapter adapter = new FluentAdapter();
         adapter.initFluent(webDriver);
 
         adapter.goTo("url");
@@ -42,7 +42,7 @@ public class FluentAdapterTest {
 
     @Test
     public void registeringSameDriverMultipleTimeDoesntThrowException() {
-        final FluentAdapter adapter = new FluentAdapter();
+        FluentAdapter adapter = new FluentAdapter();
         adapter.initFluent(webDriver);
 
         adapter.goTo("url");
@@ -51,21 +51,21 @@ public class FluentAdapterTest {
 
     @Test(expected = IllegalStateException.class)
     public void registeringAnotherDriverThrowException() {
-        final FluentAdapter adapter = new FluentAdapter();
+        FluentAdapter adapter = new FluentAdapter();
         adapter.initFluent(webDriver);
         adapter.initFluent(webDriver2);
     }
 
     @Test
     public void registeringSameDriverDoesntThrowException() {
-        final FluentAdapter adapter = new FluentAdapter();
+        FluentAdapter adapter = new FluentAdapter();
         adapter.initFluent(webDriver);
         adapter.initFluent(webDriver);
     }
 
     @Test
     public void shouldConfigureProperly() {
-        final FluentAdapter adapter = new FluentAdapter();
+        FluentAdapter adapter = new FluentAdapter();
 
         adapter.getConfiguration().setScreenshotMode(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
         assertThat(adapter.getScreenshotMode()).isSameAs(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
@@ -86,14 +86,14 @@ public class FluentAdapterTest {
 
     @Test
     public void shouldNewWebDriverCreateNewInstances() {
-        final FluentAdapter adapter = new FluentAdapter() {
+        FluentAdapter adapter = new FluentAdapter() {
             @Override
             public String getWebDriver() {
                 return "htmlunit";
             }
         };
 
-        adapter.initFluent(this.webDriver);
+        adapter.initFluent(webDriver);
 
         WebDriver newWebDriver = null;
         WebDriver newWebDriver2 = null;

@@ -21,7 +21,7 @@ public class DontRunTestsWhenInitFailTest {
 
         @Override
         public WebDriver newWebDriver() {
-            final HtmlUnitDriver driver = new HtmlUnitDriver(false);
+            HtmlUnitDriver driver = new HtmlUnitDriver(false);
             driver.get("invalid:url"); // Simulate a driver initialization failure.
             return driver;
         }
@@ -35,10 +35,10 @@ public class DontRunTestsWhenInitFailTest {
     @Test
     public void testRun() {
 
-        final TestNG testNG = new TestNG(false);
+        TestNG testNG = new TestNG(false);
         testNG.setTestClasses(new Class[] {TestClass.class});
 
-        final TestListenerAdapter listenerAdapter = Mockito.mock(TestListenerAdapter.class);
+        TestListenerAdapter listenerAdapter = Mockito.mock(TestListenerAdapter.class);
         testNG.addListener(listenerAdapter);
 
         testNG.run();

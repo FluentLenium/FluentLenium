@@ -19,17 +19,17 @@ public class ElementLocatorSearchContext implements SearchContext {
      *
      * @param locator element locator
      */
-    public ElementLocatorSearchContext(final ElementLocator locator) {
+    public ElementLocatorSearchContext(ElementLocator locator) {
         this.locator = locator;
     }
 
     @Override
-    public List<WebElement> findElements(final By by) {
-        final List<WebElement> elements = new ArrayList<>();
+    public List<WebElement> findElements(By by) {
+        List<WebElement> elements = new ArrayList<>();
 
-        final List<WebElement> baseElements = locator.findElements();
+        List<WebElement> baseElements = locator.findElements();
 
-        for (final WebElement element : baseElements) {
+        for (WebElement element : baseElements) {
             elements.addAll(element.findElements(by));
         }
 
@@ -37,7 +37,7 @@ public class ElementLocatorSearchContext implements SearchContext {
     }
 
     @Override
-    public WebElement findElement(final By by) {
+    public WebElement findElement(By by) {
         return locator.findElement().findElement(by);
     }
 }

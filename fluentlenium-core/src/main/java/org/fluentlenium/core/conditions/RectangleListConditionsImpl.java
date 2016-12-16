@@ -18,9 +18,9 @@ public class RectangleListConditionsImpl extends BaseObjectListConditions<Rectan
      * @param objectGetter     getter of the underlying rectangle
      * @param conditionsGetter getter of the underlying rectangle conditions
      */
-    public RectangleListConditionsImpl(final Conditions<FluentWebElement> conditions,
-            final Function<FluentWebElement, Rectangle> objectGetter,
-            final Function<FluentWebElement, RectangleConditions> conditionsGetter) {
+    public RectangleListConditionsImpl(Conditions<FluentWebElement> conditions,
+            Function<FluentWebElement, Rectangle> objectGetter,
+            Function<FluentWebElement, RectangleConditions> conditionsGetter) {
         super(conditions, objectGetter, conditionsGetter);
     }
 
@@ -29,17 +29,17 @@ public class RectangleListConditionsImpl extends BaseObjectListConditions<Rectan
      *
      * @param conditions rectangles conditions
      */
-    public RectangleListConditionsImpl(final Conditions<FluentWebElement> conditions) {
+    public RectangleListConditionsImpl(Conditions<FluentWebElement> conditions) {
         this(conditions, new Function<FluentWebElement, Rectangle>() {
 
             @Override
-            public Rectangle apply(final FluentWebElement input) {
+            public Rectangle apply(FluentWebElement input) {
                 return input.getElement().getRect();
             }
         }, new Function<FluentWebElement, RectangleConditions>() {
 
             @Override
-            public RectangleConditions apply(final FluentWebElement input) {
+            public RectangleConditions apply(FluentWebElement input) {
                 return input.conditions().rectangle();
             }
         });
@@ -47,15 +47,15 @@ public class RectangleListConditionsImpl extends BaseObjectListConditions<Rectan
 
     @Override
     public RectangleListConditionsImpl not() {
-        return new RectangleListConditionsImpl(this.conditions.not(), objectGetter, conditionsGetter);
+        return new RectangleListConditionsImpl(conditions.not(), objectGetter, conditionsGetter);
     }
 
     @Override
     public boolean x(final int x) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
 
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).x(x);
             }
         });
@@ -63,10 +63,10 @@ public class RectangleListConditionsImpl extends BaseObjectListConditions<Rectan
 
     @Override
     public boolean y(final int y) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
 
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).y(y);
             }
         });
@@ -74,10 +74,10 @@ public class RectangleListConditionsImpl extends BaseObjectListConditions<Rectan
 
     @Override
     public IntegerConditions x() {
-        return new IntegerListConditionsImpl(this.conditions, new Function<FluentWebElement, Integer>() {
+        return new IntegerListConditionsImpl(conditions, new Function<FluentWebElement, Integer>() {
 
             @Override
-            public Integer apply(final FluentWebElement input) {
+            public Integer apply(FluentWebElement input) {
                 return input.getElement().getRect().getX();
             }
         });
@@ -85,10 +85,10 @@ public class RectangleListConditionsImpl extends BaseObjectListConditions<Rectan
 
     @Override
     public IntegerConditions y() {
-        return new IntegerListConditionsImpl(this.conditions, new Function<FluentWebElement, Integer>() {
+        return new IntegerListConditionsImpl(conditions, new Function<FluentWebElement, Integer>() {
 
             @Override
-            public Integer apply(final FluentWebElement input) {
+            public Integer apply(FluentWebElement input) {
                 return input.getElement().getRect().getY();
             }
         });
@@ -96,10 +96,10 @@ public class RectangleListConditionsImpl extends BaseObjectListConditions<Rectan
 
     @Override
     public boolean position(final int x, final int y) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
 
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).position(x, y);
             }
         });
@@ -107,10 +107,10 @@ public class RectangleListConditionsImpl extends BaseObjectListConditions<Rectan
 
     @Override
     public boolean width(final int width) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
 
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).width(width);
             }
         });
@@ -118,10 +118,10 @@ public class RectangleListConditionsImpl extends BaseObjectListConditions<Rectan
 
     @Override
     public IntegerConditions width() {
-        return new IntegerListConditionsImpl(this.conditions, new Function<FluentWebElement, Integer>() {
+        return new IntegerListConditionsImpl(conditions, new Function<FluentWebElement, Integer>() {
 
             @Override
-            public Integer apply(final FluentWebElement input) {
+            public Integer apply(FluentWebElement input) {
                 return input.getElement().getRect().getWidth();
             }
         });
@@ -129,10 +129,10 @@ public class RectangleListConditionsImpl extends BaseObjectListConditions<Rectan
 
     @Override
     public boolean height(final int height) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
 
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).height(height);
             }
         });
@@ -140,10 +140,10 @@ public class RectangleListConditionsImpl extends BaseObjectListConditions<Rectan
 
     @Override
     public IntegerConditions height() {
-        return new IntegerListConditionsImpl(this.conditions, new Function<FluentWebElement, Integer>() {
+        return new IntegerListConditionsImpl(conditions, new Function<FluentWebElement, Integer>() {
 
             @Override
-            public Integer apply(final FluentWebElement input) {
+            public Integer apply(FluentWebElement input) {
                 return input.getElement().getRect().getHeight();
             }
         });
@@ -151,10 +151,10 @@ public class RectangleListConditionsImpl extends BaseObjectListConditions<Rectan
 
     @Override
     public boolean dimension(final int width, final int height) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
 
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).dimension(width, height);
             }
         });
@@ -162,10 +162,10 @@ public class RectangleListConditionsImpl extends BaseObjectListConditions<Rectan
 
     @Override
     public boolean positionAndDimension(final int x, final int y, final int width, final int height) {
-        return this.conditions.verify(new Predicate<FluentWebElement>() {
+        return conditions.verify(new Predicate<FluentWebElement>() {
 
             @Override
-            public boolean apply(final FluentWebElement input) {
+            public boolean apply(FluentWebElement input) {
                 return conditionsGetter.apply(input).positionAndDimension(x, y, width, height);
             }
         });

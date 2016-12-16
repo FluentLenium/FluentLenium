@@ -32,25 +32,25 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
      * @param annotations   InjectionAnnotations class implementation
      * @param isFirst       Is this locator used to retrieve list or single element.
      */
-    public InjectionElementLocator(final SearchContext searchContext, final InjectionAnnotations annotations,
-            final boolean isFirst) {
+    public InjectionElementLocator(SearchContext searchContext, InjectionAnnotations annotations,
+            boolean isFirst) {
         this.searchContext = searchContext;
-        this.shouldCache = annotations.isLookupCached();
-        this.by = annotations.buildBy();
+        shouldCache = annotations.isLookupCached();
+        by = annotations.buildBy();
         this.isFirst = isFirst;
-        this.label = new FluentLabelImpl<>(this, new Supplier<String>() {
+        label = new FluentLabelImpl<>(this, new Supplier<String>() {
             @Override
             public String get() {
                 return by.toString() + (InjectionElementLocator.this.isFirst ? " (first)" : "");
             }
         });
-        this.label.withLabel(annotations.getLabel());
-        this.label.withLabelHint(annotations.getLabelHints());
+        label.withLabel(annotations.getLabel());
+        label.withLabelHint(annotations.getLabelHints());
     }
 
     @Delegate
     private FluentLabelProvider getLabelProvider() { // NOPMD UnusedPrivateMethod
-        return this.label;
+        return label;
     }
 
     /**
@@ -63,7 +63,7 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
             return cachedElement;
         }
 
-        final WebElement element = searchContext.findElement(by);
+        WebElement element = searchContext.findElement(by);
         if (shouldCache) {
             cachedElement = element;
         }
@@ -81,7 +81,7 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
             return cachedElementList;
         }
 
-        final List<WebElement> elements = searchContext.findElements(by);
+        List<WebElement> elements = searchContext.findElements(by);
         if (shouldCache) {
             cachedElementList = elements;
         }
