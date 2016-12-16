@@ -201,7 +201,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
-    private List<String> getClasses(String classString) {
+    private List<String> getClasses(final String classString) {
         final String[] primitiveList = classString.split(" ");
         return Arrays.asList(primitiveList);
     }
