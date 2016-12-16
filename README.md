@@ -31,13 +31,13 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <scope>test</scope>
 </dependency>
 <dependency>
