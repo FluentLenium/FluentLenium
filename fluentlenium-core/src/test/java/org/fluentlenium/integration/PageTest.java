@@ -72,7 +72,7 @@ public class PageTest extends IntegrationFluentTest {
 
     @Test
     public void checkManuallyCreatedSupportInjection() {
-        final Page4 page4 = newInstance(Page4.class);
+        Page4 page4 = newInstance(Page4.class);
         assertThat(page4.getPageAccueil()).isNotNull();
         assertThat(page4.getPage5()).isNotNull();
         assertThat(page4.getPage5().getPageAccueil()).isNotNull();
@@ -133,7 +133,7 @@ class Page4 extends FluentPage {
     private Page5 page5;
 
     @Override
-    public void initFluent(final FluentControl control) {
+    public void initFluent(FluentControl control) {
         super.initFluent(control);
         page5 = newInstance(Page5.class);
     }

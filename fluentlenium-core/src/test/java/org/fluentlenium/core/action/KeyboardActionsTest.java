@@ -44,7 +44,7 @@ public class KeyboardActionsTest {
 
     @Test
     public void testKeyDown() {
-        final KeyboardActions actions = new KeyboardActions(driver);
+        KeyboardActions actions = new KeyboardActions(driver);
         actions.keyDown(Keys.SHIFT);
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
@@ -53,7 +53,7 @@ public class KeyboardActionsTest {
 
     @Test
     public void testKeyDownKeyboardMouse() {
-        final KeyboardActions actions = new KeyboardActions(keyboard, mouse);
+        KeyboardActions actions = new KeyboardActions(keyboard, mouse);
         actions.keyDown(Keys.SHIFT);
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
@@ -62,7 +62,7 @@ public class KeyboardActionsTest {
 
     @Test
     public void testKeyUp() {
-        final KeyboardActions actions = new KeyboardActions(driver);
+        KeyboardActions actions = new KeyboardActions(driver);
         actions.keyUp(Keys.SHIFT);
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
@@ -71,7 +71,7 @@ public class KeyboardActionsTest {
 
     @Test
     public void testSendKeys() {
-        final KeyboardActions actions = new KeyboardActions(driver);
+        KeyboardActions actions = new KeyboardActions(driver);
         actions.sendKeys(Keys.ENTER, Keys.SPACE);
 
         verify(mouse, never()).mouseMove(any(Coordinates.class));
@@ -80,10 +80,10 @@ public class KeyboardActionsTest {
 
     @Test
     public void testBasic() {
-        final KeyboardActions actions = new KeyboardActions(driver);
+        KeyboardActions actions = new KeyboardActions(driver);
         Assertions.assertThat(actions.basic()).isSameAs(keyboard);
 
-        final KeyboardActions actionsAlt = new KeyboardActions(keyboard, mouse);
+        KeyboardActions actionsAlt = new KeyboardActions(keyboard, mouse);
         Assertions.assertThat(actionsAlt.basic()).isSameAs(keyboard);
     }
 

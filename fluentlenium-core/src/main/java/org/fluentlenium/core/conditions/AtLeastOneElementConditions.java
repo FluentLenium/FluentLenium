@@ -1,10 +1,10 @@
 package org.fluentlenium.core.conditions;
 
-import java.util.function.Predicate;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Conditions for list of elements, matching when at least one element of the list matches.
@@ -15,13 +15,13 @@ public class AtLeastOneElementConditions extends AbstractFluentListConditions {
      *
      * @param elements underlying elements
      */
-    public AtLeastOneElementConditions(final List<? extends FluentWebElement> elements) {
+    public AtLeastOneElementConditions(List<? extends FluentWebElement> elements) {
         super(elements);
     }
 
     @Override
     public AtLeastOneElementConditions not() {
-        final AtLeastOneElementConditions negatedConditions = new AtLeastOneElementConditions(getElements());
+        AtLeastOneElementConditions negatedConditions = new AtLeastOneElementConditions(getElements());
         negatedConditions.setNegation(!isNegation());
         return negatedConditions;
     }
@@ -42,11 +42,10 @@ public class AtLeastOneElementConditions extends AbstractFluentListConditions {
      * @param defaultValue default value if elements list is empty.
      * @return predicate
      */
-    protected Predicate<FluentDriver> buildAtLeastOnePredicate(final Predicate<FluentWebElement> predicate,
-            final boolean defaultValue) {
-        final Predicate<FluentDriver> untilPredicate = fluent -> {
+    protected Predicate<FluentDriver> buildAtLeastOnePredicate(Predicate<FluentWebElement> predicate, boolean defaultValue) {
+        Predicate<FluentDriver> untilPredicate = fluent -> {
             if (!getElements().isEmpty()) {
-                for (final FluentWebElement element : getElements()) {
+                for (FluentWebElement element : getElements()) {
                     if (predicate.test(element)) {
                         return true;
                     }

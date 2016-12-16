@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-import java.util.function.Supplier;
 import net.jcip.annotations.NotThreadSafe;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentList;
@@ -11,6 +10,7 @@ import org.junit.Test;
 import org.openqa.selenium.TimeoutException;
 
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -90,9 +90,10 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     @Test
     public void checkUseCustomMessage() {
         try {
-            await().withMessage("toto").atMost(1, NANOSECONDS).untilElement(() -> el(".small", withText("Small 1"))).text().contains("Small 21");
+            await().withMessage("toto").atMost(1, NANOSECONDS).untilElement(() -> el(".small", withText("Small 1"))).text()
+                    .contains("Small 21");
             fail();
-        } catch (final TimeoutException e) {
+        } catch (TimeoutException e) {
             assertThat(e.getMessage()).contains("toto");
         }
     }

@@ -1,8 +1,8 @@
 package org.fluentlenium.core.conditions;
 
-import java.util.function.Function;
 import org.fluentlenium.core.domain.FluentWebElement;
 
+import java.util.function.Function;
 import java.util.regex.Pattern;
 
 /**
@@ -16,49 +16,48 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
      * @param objectGetter     getter of the underlying string
      * @param conditionsGetter getter of the underlying string conditions
      */
-    public StringListConditionsImpl(final Conditions<FluentWebElement> conditions,
-            final Function<FluentWebElement, String> objectGetter,
-            final Function<FluentWebElement, StringConditions> conditionsGetter) {
+    public StringListConditionsImpl(Conditions<FluentWebElement> conditions, Function<FluentWebElement, String> objectGetter,
+            Function<FluentWebElement, StringConditions> conditionsGetter) {
         super(conditions, objectGetter, conditionsGetter);
     }
 
     @Override
     public StringListConditionsImpl not() {
-        return new StringListConditionsImpl(this.conditions.not(), objectGetter, conditionsGetter);
+        return new StringListConditionsImpl(conditions.not(), objectGetter, conditionsGetter);
     }
 
     @Override
-    public boolean contains(final CharSequence charSequence) {
-        return this.conditions.verify(input -> conditionsGetter.apply(input).contains(charSequence));
+    public boolean contains(CharSequence charSequence) {
+        return conditions.verify(input -> conditionsGetter.apply(input).contains(charSequence));
     }
 
     @Override
-    public boolean startsWith(final String prefix) {
-        return this.conditions.verify(input -> conditionsGetter.apply(input).startsWith(prefix));
+    public boolean startsWith(String prefix) {
+        return conditions.verify(input -> conditionsGetter.apply(input).startsWith(prefix));
     }
 
     @Override
-    public boolean endsWith(final String suffix) {
-        return this.conditions.verify(input -> conditionsGetter.apply(input).endsWith(suffix));
+    public boolean endsWith(String suffix) {
+        return conditions.verify(input -> conditionsGetter.apply(input).endsWith(suffix));
     }
 
     @Override
-    public boolean equalTo(final String anotherString) {
-        return this.conditions.verify(input -> conditionsGetter.apply(input).equalTo(anotherString));
+    public boolean equalTo(String anotherString) {
+        return conditions.verify(input -> conditionsGetter.apply(input).equalTo(anotherString));
     }
 
     @Override
-    public boolean equalToIgnoreCase(final String anotherString) {
-        return this.conditions.verify(input -> conditionsGetter.apply(input).equalToIgnoreCase(anotherString));
+    public boolean equalToIgnoreCase(String anotherString) {
+        return conditions.verify(input -> conditionsGetter.apply(input).equalToIgnoreCase(anotherString));
     }
 
     @Override
-    public boolean matches(final String regex) {
-        return this.conditions.verify(input -> conditionsGetter.apply(input).matches(regex));
+    public boolean matches(String regex) {
+        return conditions.verify(input -> conditionsGetter.apply(input).matches(regex));
     }
 
     @Override
-    public boolean matches(final Pattern pattern) {
-        return this.conditions.verify(input -> conditionsGetter.apply(input).matches(pattern));
+    public boolean matches(Pattern pattern) {
+        return conditions.verify(input -> conditionsGetter.apply(input).matches(pattern));
     }
 }

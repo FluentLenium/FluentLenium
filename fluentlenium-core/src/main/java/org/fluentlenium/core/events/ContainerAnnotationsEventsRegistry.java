@@ -35,12 +35,12 @@ public class ContainerAnnotationsEventsRegistry {
      * @param container container to register
      */
     @SuppressWarnings({"PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity"})
-    public ContainerAnnotationsEventsRegistry(final EventsRegistry registry, final Object container) {
+    public ContainerAnnotationsEventsRegistry(EventsRegistry registry, Object container) {
         this.registry = registry;
         this.container = container;
 
         for (Class<?> current = this.container.getClass(); current != null; current = current.getSuperclass()) {
-            for (final Method method : current.getDeclaredMethods()) {
+            for (Method method : current.getDeclaredMethods()) {
                 if (method.getAnnotation(BeforeClickOn.class) != null) {
                     registry.beforeClickOn(new AnnotationElementListener(method, container, BeforeClickOn.class.getSimpleName(),
                             method.getAnnotation(BeforeClickOn.class).value()));

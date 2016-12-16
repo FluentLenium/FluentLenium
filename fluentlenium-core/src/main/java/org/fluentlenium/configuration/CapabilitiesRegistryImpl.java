@@ -31,36 +31,36 @@ public class CapabilitiesRegistryImpl extends AbstractFactoryRegistryImpl<Capabi
          *
          * @param method method to invoke that returns a {@link Capabilities} instance
          */
-        public DesiredCapabilitiesFactory(final Method method) {
+        public DesiredCapabilitiesFactory(Method method) {
             super(method, null);
         }
     }
 
     private void registerDesiredCapabilities() {
-        final Method[] declaredMethods = DesiredCapabilities.class.getDeclaredMethods();
+        Method[] declaredMethods = DesiredCapabilities.class.getDeclaredMethods();
 
-        for (final Method method : declaredMethods) {
+        for (Method method : declaredMethods) {
             if (Modifier.isStatic(method.getModifiers()) && Capabilities.class.isAssignableFrom(method.getReturnType())) {
-                final DesiredCapabilitiesFactory factory = new DesiredCapabilitiesFactory(method);
+                DesiredCapabilitiesFactory factory = new DesiredCapabilitiesFactory(method);
                 register(factory);
             }
         }
     }
 
     @Override
-    protected ReflectiveCapabilitiesFactory newReflectiveInstance(final String name) {
+    protected ReflectiveCapabilitiesFactory newReflectiveInstance(String name) {
         return new ReflectiveCapabilitiesFactory(name, name);
     }
 
     @Override
-    protected CapabilitiesFactory getDefault(final List<CapabilitiesFactory> filteredFactories) {
-        final List<CapabilitiesFactory> defaultFactories = new ArrayList<>();
+    protected CapabilitiesFactory getDefault(List<CapabilitiesFactory> filteredFactories) {
+        List<CapabilitiesFactory> defaultFactories = new ArrayList<>();
         L:
-        for (final CapabilitiesFactory factory : filteredFactories) {
+        for (CapabilitiesFactory factory : filteredFactories) {
             if (factory.getClass().isAnnotationPresent(IndexIgnore.class)) {
                 continue;
             }
-            for (final Class<?> iface : factory.getClass().getInterfaces()) {
+            for (Class<?> iface : factory.getClass().getInterfaces()) {
                 if (iface.isAnnotationPresent(IndexIgnore.class)) {
                     continue L;
                 }
@@ -75,7 +75,7 @@ public class CapabilitiesRegistryImpl extends AbstractFactoryRegistryImpl<Capabi
     }
 
     @Override
-    protected void handleNoFactoryAvailable(final String name) {
+    protected void handleNoFactoryAvailable(String name) {
         // Do nothing.
     }
 
@@ -86,7 +86,7 @@ public class CapabilitiesRegistryImpl extends AbstractFactoryRegistryImpl<Capabi
      * @param configuration configuration
      * @return a new Capabilities instance
      */
-    public Capabilities newCapabilities(final String name, final ConfigurationProperties configuration) {
+    public Capabilities newCapabilities(String name, ConfigurationProperties configuration) {
         synchronized (this) {
             return get(name).newCapabilities(configuration);
         }

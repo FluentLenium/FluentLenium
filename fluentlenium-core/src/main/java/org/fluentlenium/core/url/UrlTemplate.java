@@ -27,18 +27,18 @@ public class UrlTemplate {
      *
      * @param template template string
      */
-    public UrlTemplate(final String template) {
+    public UrlTemplate(String template) {
         this.template = template;
-        final Matcher matcher = PARAM_REGEX.matcher(template);
+        Matcher matcher = PARAM_REGEX.matcher(template);
         while (matcher.find()) {
-            final String match = matcher.group(0);
-            final String group = matcher.group(1);
+            String match = matcher.group(0);
+            String group = matcher.group(1);
 
-            final boolean optional = group.startsWith("?");
-            final int lastIndex = group.lastIndexOf('/');
+            boolean optional = group.startsWith("?");
+            int lastIndex = group.lastIndexOf('/');
 
-            final String parameterName;
-            final String path;
+            String parameterName;
+            String path;
             if (lastIndex > -1 && lastIndex < group.length()) {
                 path = group.substring(optional ? 1 : 0, lastIndex + 1);
                 parameterName = group.substring(lastIndex + 1);
@@ -50,7 +50,7 @@ public class UrlTemplate {
                 parameterName = group;
             }
 
-            final UrlParameter parameter = new UrlParameter(parameterName, group, path, match, optional);
+            UrlParameter parameter = new UrlParameter(parameterName, group, path, match, optional);
 
             if (parameters.containsKey(parameter.getName())) {
                 throw new IllegalStateException(
@@ -84,7 +84,7 @@ public class UrlTemplate {
      * @param value property value
      * @return {@code this} reference to chain calls
      */
-    public UrlTemplate add(final String value) {
+    public UrlTemplate add(String value) {
         properties.put(parameters.get(parameterNames.get(properties.size())), value);
         return this;
     }
@@ -96,8 +96,8 @@ public class UrlTemplate {
      * @param value value
      * @return {@code this} reference to chain calls
      */
-    public UrlTemplate put(final String name, final String value) {
-        final UrlParameter parameter = parameters.get(name);
+    public UrlTemplate put(String name, String value) {
+        UrlParameter parameter = parameters.get(name);
         if (parameter == null) {
             throw new IllegalArgumentException("Invalid parameter name: " + name);
         }
@@ -111,8 +111,8 @@ public class UrlTemplate {
      * @param values property properties
      * @return {@code this} reference to chain calls
      */
-    public UrlTemplate addAll(final List<String> values) {
-        for (final String value : values) {
+    public UrlTemplate addAll(List<String> values) {
+        for (String value : values) {
             add(value);
         }
         return this;
@@ -124,7 +124,7 @@ public class UrlTemplate {
      * @param values properties
      * @return {@code this} reference to chain calls
      */
-    public UrlTemplate put(final Map<String, String> values) {
+    public UrlTemplate put(Map<String, String> values) {
         values.putAll(values);
         return this;
     }
@@ -136,9 +136,9 @@ public class UrlTemplate {
      */
     public String render() {
         String rendered = template;
-        for (final UrlParameter parameter : parameters.values()) {
-            final Object value = properties.get(parameter);
-            final String group = parameter.getGroup();
+        for (UrlParameter parameter : parameters.values()) {
+            Object value = properties.get(parameter);
+            String group = parameter.getGroup();
             if (value == null && !parameter.isOptional()) {
                 throw new IllegalArgumentException(String.format("Value for parameter %s is missing.", parameter));
             } else {
@@ -150,11 +150,11 @@ public class UrlTemplate {
         return rendered;
     }
 
-    private String buildRenderReplacement(final UrlParameter parameter, final String value) {
+    private String buildRenderReplacement(UrlParameter parameter, String value) {
         if (value == null || value.isEmpty()) {
             return "";
         }
-        final String path = parameter.getPath();
+        String path = parameter.getPath();
         if (path != null) {
             return path + value;
         }
@@ -175,7 +175,7 @@ public class UrlTemplate {
             fixedTemplate = fixedTemplate + "/?";
         }
 
-        for (final UrlParameter parameter : parameters.values()) {
+        for (UrlParameter parameter : parameters.values()) {
             String replacementPattern = "%s([^/]+)";
             if (parameter.isOptional()) {
                 replacementPattern = "(?:" + replacementPattern + ")?";
@@ -193,28 +193,28 @@ public class UrlTemplate {
      * @param input string
      * @return properties
      */
-    public ParsedUrlTemplate parse(final String input) {
+    public ParsedUrlTemplate parse(String input) {
         String noQueryInput = input;
         List<NameValuePair> queryParameters = new ArrayList<>();
 
         try {
-            final URIBuilder uriBuilder = new URIBuilder(input);
+            URIBuilder uriBuilder = new URIBuilder(input);
             queryParameters = uriBuilder.getQueryParams();
             uriBuilder.setCustomQuery(null);
             noQueryInput = uriBuilder.toString();
-        } catch (final URISyntaxException e) {
+        } catch (URISyntaxException e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         }
 
-        final Pattern pathRegex = Pattern.compile(buildParsePattern());
+        Pattern pathRegex = Pattern.compile(buildParsePattern());
 
-        final Matcher matcher = pathRegex.matcher(noQueryInput);
-        final boolean matches = matcher.matches();
+        Matcher matcher = pathRegex.matcher(noQueryInput);
+        boolean matches = matcher.matches();
 
-        final LinkedHashMap<String, String> parsedValues = new LinkedHashMap<>();
+        LinkedHashMap<String, String> parsedValues = new LinkedHashMap<>();
         if (matches) {
             for (int i = 0; i < parameterNames.size() && i < matcher.groupCount(); i++) {
-                final String value = matcher.group(i + 1);
+                String value = matcher.group(i + 1);
                 if (value != null) {
                     parsedValues.put(parameterNames.get(i), value);
                 }

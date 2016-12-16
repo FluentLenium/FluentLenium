@@ -17,149 +17,149 @@ public class EventsSupport implements EventListener {
      *
      * @param eventsRegistry events registry
      */
-    public EventsSupport(final EventsRegistry eventsRegistry) {
+    public EventsSupport(EventsRegistry eventsRegistry) {
         this.eventsRegistry = eventsRegistry;
     }
 
     @Override
-    public void beforeNavigateTo(final String url, final WebDriver driver) {
-        for (final NavigateToListener listener : this.eventsRegistry.beforeNavigateTo) {
+    public void beforeNavigateTo(String url, WebDriver driver) {
+        for (NavigateToListener listener : eventsRegistry.beforeNavigateTo) {
             listener.on(url, driver);
         }
-        for (final NavigateAllListener listener : this.eventsRegistry.beforeNavigate) {
+        for (NavigateAllListener listener : eventsRegistry.beforeNavigate) {
             listener.on(url, driver, null);
         }
     }
 
     @Override
-    public void afterNavigateTo(final String url, final WebDriver driver) {
-        for (final NavigateToListener listener : this.eventsRegistry.afterNavigateTo) {
+    public void afterNavigateTo(String url, WebDriver driver) {
+        for (NavigateToListener listener : eventsRegistry.afterNavigateTo) {
             listener.on(url, driver);
         }
-        for (final NavigateAllListener listener : this.eventsRegistry.afterNavigate) {
+        for (NavigateAllListener listener : eventsRegistry.afterNavigate) {
             listener.on(url, driver, null);
         }
     }
 
     @Override
-    public void beforeNavigateBack(final WebDriver driver) {
-        for (final NavigateListener listener : this.eventsRegistry.beforeNavigateBack) {
+    public void beforeNavigateBack(WebDriver driver) {
+        for (NavigateListener listener : eventsRegistry.beforeNavigateBack) {
             listener.on(driver);
         }
-        for (final NavigateAllListener listener : this.eventsRegistry.beforeNavigate) {
+        for (NavigateAllListener listener : eventsRegistry.beforeNavigate) {
             listener.on(null, driver, NavigateAllListener.Direction.BACK);
         }
     }
 
     @Override
-    public void afterNavigateBack(final WebDriver driver) {
-        for (final NavigateListener listener : this.eventsRegistry.afterNavigateBack) {
+    public void afterNavigateBack(WebDriver driver) {
+        for (NavigateListener listener : eventsRegistry.afterNavigateBack) {
             listener.on(driver);
         }
-        for (final NavigateAllListener listener : this.eventsRegistry.afterNavigate) {
+        for (NavigateAllListener listener : eventsRegistry.afterNavigate) {
             listener.on(null, driver, NavigateAllListener.Direction.BACK);
         }
     }
 
     @Override
-    public void beforeNavigateForward(final WebDriver driver) {
-        for (final NavigateListener listener : this.eventsRegistry.beforeNavigateForward) {
+    public void beforeNavigateForward(WebDriver driver) {
+        for (NavigateListener listener : eventsRegistry.beforeNavigateForward) {
             listener.on(driver);
         }
-        for (final NavigateAllListener listener : this.eventsRegistry.beforeNavigate) {
+        for (NavigateAllListener listener : eventsRegistry.beforeNavigate) {
             listener.on(null, driver, NavigateAllListener.Direction.FORWARD);
         }
     }
 
     @Override
-    public void afterNavigateForward(final WebDriver driver) {
-        for (final NavigateListener listener : this.eventsRegistry.afterNavigateForward) {
+    public void afterNavigateForward(WebDriver driver) {
+        for (NavigateListener listener : eventsRegistry.afterNavigateForward) {
             listener.on(driver);
         }
-        for (final NavigateAllListener listener : this.eventsRegistry.afterNavigate) {
+        for (NavigateAllListener listener : eventsRegistry.afterNavigate) {
             listener.on(null, driver, NavigateAllListener.Direction.FORWARD);
         }
     }
 
     @Override
-    public void beforeNavigateRefresh(final WebDriver driver) {
-        for (final NavigateListener listener : this.eventsRegistry.beforeNavigateRefresh) {
+    public void beforeNavigateRefresh(WebDriver driver) {
+        for (NavigateListener listener : eventsRegistry.beforeNavigateRefresh) {
             listener.on(driver);
         }
-        for (final NavigateAllListener listener : this.eventsRegistry.beforeNavigate) {
+        for (NavigateAllListener listener : eventsRegistry.beforeNavigate) {
             listener.on(null, driver, NavigateAllListener.Direction.REFRESH);
         }
     }
 
     @Override
-    public void afterNavigateRefresh(final WebDriver driver) {
-        for (final NavigateListener listener : this.eventsRegistry.afterNavigateRefresh) {
+    public void afterNavigateRefresh(WebDriver driver) {
+        for (NavigateListener listener : eventsRegistry.afterNavigateRefresh) {
             listener.on(driver);
         }
-        for (final NavigateAllListener listener : this.eventsRegistry.afterNavigate) {
+        for (NavigateAllListener listener : eventsRegistry.afterNavigate) {
             listener.on(null, driver, NavigateAllListener.Direction.REFRESH);
         }
     }
 
     @Override
-    public void beforeFindBy(final By by, final FluentWebElement element, final WebDriver driver) {
-        for (final FindByListener listener : this.eventsRegistry.beforeFindBy) {
+    public void beforeFindBy(By by, FluentWebElement element, WebDriver driver) {
+        for (FindByListener listener : eventsRegistry.beforeFindBy) {
             listener.on(by, element, driver);
         }
     }
 
     @Override
-    public void afterFindBy(final By by, final FluentWebElement element, final WebDriver driver) {
-        for (final FindByListener listener : this.eventsRegistry.afterFindBy) {
+    public void afterFindBy(By by, FluentWebElement element, WebDriver driver) {
+        for (FindByListener listener : eventsRegistry.afterFindBy) {
             listener.on(by, element, driver);
         }
     }
 
     @Override
-    public void beforeClickOn(final FluentWebElement element, final WebDriver driver) {
-        for (final ElementListener listener : this.eventsRegistry.beforeClickOn) {
+    public void beforeClickOn(FluentWebElement element, WebDriver driver) {
+        for (ElementListener listener : eventsRegistry.beforeClickOn) {
             listener.on(element, driver);
         }
     }
 
     @Override
-    public void afterClickOn(final FluentWebElement element, final WebDriver driver) {
-        for (final ElementListener listener : this.eventsRegistry.afterClickOn) {
+    public void afterClickOn(FluentWebElement element, WebDriver driver) {
+        for (ElementListener listener : eventsRegistry.afterClickOn) {
             listener.on(element, driver);
         }
     }
 
     @Override
-    public void beforeChangeValueOf(final FluentWebElement element, final WebDriver driver, final CharSequence[] charSequence) {
-        for (final ElementListener listener : this.eventsRegistry.beforeChangeValueOf) {
+    public void beforeChangeValueOf(FluentWebElement element, WebDriver driver, CharSequence[] charSequence) {
+        for (ElementListener listener : eventsRegistry.beforeChangeValueOf) {
             listener.on(element, driver);
         }
     }
 
     @Override
-    public void afterChangeValueOf(final FluentWebElement element, final WebDriver driver, final CharSequence[] charSequence) {
-        for (final ElementListener listener : this.eventsRegistry.afterChangeValueOf) {
+    public void afterChangeValueOf(FluentWebElement element, WebDriver driver, CharSequence[] charSequence) {
+        for (ElementListener listener : eventsRegistry.afterChangeValueOf) {
             listener.on(element, driver);
         }
     }
 
     @Override
-    public void beforeScript(final String script, final WebDriver driver) {
-        for (final ScriptListener listener : this.eventsRegistry.beforeScript) {
+    public void beforeScript(String script, WebDriver driver) {
+        for (ScriptListener listener : eventsRegistry.beforeScript) {
             listener.on(script, driver);
         }
     }
 
     @Override
-    public void afterScript(final String script, final WebDriver driver) {
-        for (final ScriptListener listener : this.eventsRegistry.afterScript) {
+    public void afterScript(String script, WebDriver driver) {
+        for (ScriptListener listener : eventsRegistry.afterScript) {
             listener.on(script, driver);
         }
     }
 
     @Override
-    public void onException(final Throwable throwable, final WebDriver driver) {
-        for (final ExceptionListener listener : this.eventsRegistry.onException) {
+    public void onException(Throwable throwable, WebDriver driver) {
+        for (ExceptionListener listener : eventsRegistry.onException) {
             listener.on(throwable, driver);
         }
     }

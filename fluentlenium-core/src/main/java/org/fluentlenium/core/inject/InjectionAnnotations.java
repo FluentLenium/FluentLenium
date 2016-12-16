@@ -20,13 +20,13 @@ public class InjectionAnnotations extends AbstractAnnotations implements FluentL
     private final Annotations fieldAnnotations;
     private final LabelAnnotations labelFieldAnnotations;
 
-    private static boolean isList(final Field field) {
+    private static boolean isList(Field field) {
         return List.class.isAssignableFrom(field.getType());
     }
 
-    private static Class<?> getEffectiveClass(final Field field) {
+    private static Class<?> getEffectiveClass(Field field) {
         if (isList(field)) {
-            final Class<?> effectiveClass = ReflectionUtils.getFirstGenericType(field);
+            Class<?> effectiveClass = ReflectionUtils.getFirstGenericType(field);
             if (effectiveClass != null) {
                 return effectiveClass;
             }
@@ -39,7 +39,7 @@ public class InjectionAnnotations extends AbstractAnnotations implements FluentL
      *
      * @param field field to analyze
      */
-    public InjectionAnnotations(final Field field) {
+    public InjectionAnnotations(Field field) {
         classAnnotations = new ClassAnnotations(getEffectiveClass(field));
         fieldAnnotations = new Annotations(field);
         labelFieldAnnotations = new LabelAnnotations(field);
@@ -47,8 +47,8 @@ public class InjectionAnnotations extends AbstractAnnotations implements FluentL
 
     @Override
     public By buildBy() {
-        final By fieldBy = fieldAnnotations.buildBy();
-        final By classBy = classAnnotations.buildBy();
+        By fieldBy = fieldAnnotations.buildBy();
+        By classBy = classAnnotations.buildBy();
         if (classBy != null && fieldBy instanceof ByIdOrName) {
             return classBy;
         }

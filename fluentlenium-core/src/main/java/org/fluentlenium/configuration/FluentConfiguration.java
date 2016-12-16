@@ -28,7 +28,7 @@ public @interface FluentConfiguration {
          *
          * @param value boolean value
          */
-        BooleanValue(final Boolean value) {
+        BooleanValue(Boolean value) {
             this.value = value;
         }
 
@@ -38,7 +38,7 @@ public @interface FluentConfiguration {
          * @return boolean value
          */
         Boolean asBoolean() {
-            return this.value;
+            return value;
         }
 
     }

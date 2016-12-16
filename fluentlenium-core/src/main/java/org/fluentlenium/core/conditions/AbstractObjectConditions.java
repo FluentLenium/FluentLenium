@@ -16,7 +16,7 @@ public abstract class AbstractObjectConditions<T> implements Conditions<T>, Cond
      *
      * @param object underlying object
      */
-    public AbstractObjectConditions(final T object) {
+    public AbstractObjectConditions(T object) {
         this.object = object;
     }
 
@@ -26,13 +26,13 @@ public abstract class AbstractObjectConditions<T> implements Conditions<T>, Cond
      * @param object   underlying object
      * @param negation negation value
      */
-    public AbstractObjectConditions(final T object, final boolean negation) {
+    public AbstractObjectConditions(T object, boolean negation) {
         this.object = object;
         this.negation = negation;
     }
 
     @Override
-    public boolean verify(final Predicate<T> predicate) {
+    public boolean verify(Predicate<T> predicate) {
         boolean predicateResult = predicate.test(object);
         if (negation) {
             predicateResult = !predicateResult;

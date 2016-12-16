@@ -16,21 +16,21 @@ public class FluentIntegTestNg extends FluentTestNg {
     }
 
     @BeforeMethod
-    public void printBefore(final Method method) {
+    public void printBefore(Method method) {
         System.out.println("Starting test " + method.getDeclaringClass().getName() + "." + method.getName() + " [" + System
                 .identityHashCode(this) + "]" + " @ " + new Date() + ". forkNumber=" + System.getProperty("surefire.forkNumber")
                 + ", thread=" + Thread.currentThread().getName());
     }
 
     @AfterMethod
-    public void printAfter(final Method method) {
+    public void printAfter(Method method) {
         System.out.println("Terminating test " + method.getDeclaringClass().getName() + "." + method.getName() + " [" + System
                 .identityHashCode(this) + "]" + " @ " + new Date() + ". forkNumber=" + System.getProperty("surefire.forkNumber")
                 + ", thread=" + Thread.currentThread().getName());
     }
 
     @Override
-    public void initFluent(final WebDriver webDriver) {
+    public void initFluent(WebDriver webDriver) {
         System.out.println(
                 "Init WebDriver " + webDriver + " for test " + getClass().getName() + " [" + System.identityHashCode(this) + "]");
         super.initFluent(webDriver);

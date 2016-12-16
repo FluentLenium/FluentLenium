@@ -39,7 +39,7 @@ public class WaitHookOptions {
      *
      * @param annotation wait annotation
      */
-    public WaitHookOptions(final Wait annotation) {
+    public WaitHookOptions(Wait annotation) {
         timeUnit = annotation.timeUnit();
         pollingTimeUnit = annotation.pollingTimeUnit();
         atMost = annotation.timeout() == -1L ? null : annotation.timeout();
@@ -54,7 +54,7 @@ public class WaitHookOptions {
      * @param await fluent wait object to configure
      * @return configured fluent wait object
      */
-    protected FluentWait configureAwait(final FluentWait await) {
+    protected FluentWait configureAwait(FluentWait await) {
         if (atMost != null) {
             await.atMost(atMost, timeUnit);
         }

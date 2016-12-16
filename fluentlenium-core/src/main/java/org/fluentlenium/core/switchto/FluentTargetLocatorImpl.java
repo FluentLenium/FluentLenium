@@ -24,33 +24,32 @@ public class FluentTargetLocatorImpl<T> implements FluentTargetLocator<T> {
      * @param componentInstantiator component instantiator
      * @param targetLocator         underlying target locator
      */
-    public FluentTargetLocatorImpl(final T self, final ComponentInstantiator componentInstantiator,
-            final WebDriver.TargetLocator targetLocator) {
+    public FluentTargetLocatorImpl(T self, ComponentInstantiator componentInstantiator, WebDriver.TargetLocator targetLocator) {
         this.self = self;
         this.componentInstantiator = componentInstantiator;
         this.targetLocator = targetLocator;
     }
 
     @Override
-    public T frame(final int index) {
+    public T frame(int index) {
         targetLocator.frame(index);
         return self;
     }
 
     @Override
-    public T frame(final String nameOrId) {
+    public T frame(String nameOrId) {
         targetLocator.frame(nameOrId);
         return self;
     }
 
     @Override
-    public T frame(final WebElement frameElement) {
+    public T frame(WebElement frameElement) {
         targetLocator.frame(frameElement);
         return self;
     }
 
     @Override
-    public T frame(final FluentWebElement frameElement) {
+    public T frame(FluentWebElement frameElement) {
         return frame(frameElement.getElement());
     }
 
@@ -61,7 +60,7 @@ public class FluentTargetLocatorImpl<T> implements FluentTargetLocator<T> {
     }
 
     @Override
-    public T window(final String nameOrHandle) {
+    public T window(String nameOrHandle) {
         targetLocator.window(nameOrHandle);
         return self;
     }
@@ -74,13 +73,13 @@ public class FluentTargetLocatorImpl<T> implements FluentTargetLocator<T> {
 
     @Override
     public FluentWebElement activeElement() {
-        final WebElement webElement = targetLocator.activeElement();
+        WebElement webElement = targetLocator.activeElement();
         return componentInstantiator.newFluent(webElement);
     }
 
     @Override
     public AlertImpl alert() {
-        final org.openqa.selenium.Alert alert = targetLocator.alert();
+        org.openqa.selenium.Alert alert = targetLocator.alert();
         return new AlertImpl(alert);
     }
 }

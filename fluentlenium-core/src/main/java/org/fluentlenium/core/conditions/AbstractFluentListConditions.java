@@ -1,9 +1,9 @@
 package org.fluentlenium.core.conditions;
 
-import java.util.function.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Abstract class conditions on list of elements.
@@ -19,12 +19,12 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
      *
      * @param elements underlying elements
      */
-    protected AbstractFluentListConditions(final List<? extends FluentWebElement> elements) {
+    protected AbstractFluentListConditions(List<? extends FluentWebElement> elements) {
         this.elements = elements;
     }
 
     @Override
-    public boolean size(final int size) {
+    public boolean size(int size) {
         if (negation) {
             return elements.size() != size;
         }
@@ -45,7 +45,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
      *
      * @param negation negation value
      */
-    public void setNegation(final boolean negation) {
+    public void setNegation(boolean negation) {
         this.negation = negation;
     }
 
@@ -70,7 +70,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean verify(final Predicate<FluentWebElement> predicate) {
+    public boolean verify(Predicate<FluentWebElement> predicate) {
         return verify(predicate, false);
     }
 
@@ -105,17 +105,17 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean attribute(final String name, final String value) {
+    public boolean attribute(String name, String value) {
         return attribute(name).equalTo(value);
     }
 
     @Override
-    public StringConditions attribute(final String name) {
+    public StringConditions attribute(String name) {
         return new StringListConditionsImpl(this, input -> input.attribute(name), input -> input.conditions().attribute(name));
     }
 
     @Override
-    public boolean id(final String id) {
+    public boolean id(String id) {
         return id().equalTo(id);
     }
 
@@ -130,7 +130,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean name(final String name) {
+    public boolean name(String name) {
         return name().equalTo(name);
     }
 
@@ -140,7 +140,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean tagName(final String tagName) {
+    public boolean tagName(String tagName) {
         return tagName().equalTo(tagName);
     }
 
@@ -150,7 +150,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean value(final String value) {
+    public boolean value(String value) {
         return value().equalTo(value);
     }
 
@@ -160,7 +160,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean text(final String text) {
+    public boolean text(String text) {
         return text().equalTo(text);
     }
 
@@ -170,7 +170,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean textContent(final String anotherString) {
+    public boolean textContent(String anotherString) {
         return textContent().equalTo(anotherString);
     }
 
@@ -180,7 +180,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public boolean className(final String className) {
+    public boolean className(String className) {
         return verify(input -> input.conditions().className(className), false);
     }
 }

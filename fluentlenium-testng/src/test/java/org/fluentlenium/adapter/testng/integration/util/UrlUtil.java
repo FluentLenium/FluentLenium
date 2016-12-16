@@ -18,12 +18,12 @@ public final class UrlUtil {
      * @param file the file String
      * @return the URL String
      */
-    public static String getAbsoluteUrlFromFile(final String file) {
+    public static String getAbsoluteUrlFromFile(String file) {
         if (file == null) {
             throw new IllegalArgumentException("file must not be null");
         }
 
-        final URL url = ClassLoader.getSystemResource(file);
+        URL url = ClassLoader.getSystemResource(file);
         if (url == null) {
             throw new NullPointerException("url from file=" + file + " is null");
         }

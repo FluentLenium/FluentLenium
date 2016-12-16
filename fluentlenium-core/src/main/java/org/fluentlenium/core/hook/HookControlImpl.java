@@ -1,7 +1,5 @@
 package org.fluentlenium.core.hook;
 
-import java.util.function.Function;
-import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.proxy.LocatorProxies;
@@ -12,6 +10,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * Control implementation for hooks.
@@ -36,8 +36,8 @@ public class HookControlImpl<T> implements HookControl<T> {
      * @param instantiator           components instantiator
      * @param noHookInstanceSupplier supplier of new instance without any hook.
      */
-    public HookControlImpl(final T self, final Object proxy, final FluentControl control,
-            final ComponentInstantiator instantiator, final Supplier<T> noHookInstanceSupplier) {
+    public HookControlImpl(T self, Object proxy, FluentControl control, ComponentInstantiator instantiator,
+            Supplier<T> noHookInstanceSupplier) {
         this.self = self;
         this.proxy = proxy;
         this.noHookInstanceSupplier = noHookInstanceSupplier;
@@ -67,7 +67,7 @@ public class HookControlImpl<T> implements HookControl<T> {
      *
      * @param hookRestoreStack hook restore stack
      */
-    public void setHookRestoreStack(final Stack<List<HookDefinition<?>>> hookRestoreStack) {
+    public void setHookRestoreStack(Stack<List<HookDefinition<?>>> hookRestoreStack) {
         this.hookRestoreStack = hookRestoreStack;
     }
 
@@ -77,12 +77,12 @@ public class HookControlImpl<T> implements HookControl<T> {
      * @param definitions   hook definitions
      * @param hooksToRemove hooks to remove
      */
-    public static void removeHooksFromDefinitions(final Collection<HookDefinition<?>> definitions,
-            final Class<? extends FluentHook>... hooksToRemove) {
-        final Iterator<HookDefinition<?>> hookDefinitionsIterator = definitions.iterator();
-        final List<Class<? extends FluentHook>> toRemoveHooks = Arrays.asList(hooksToRemove);
+    public static void removeHooksFromDefinitions(Collection<HookDefinition<?>> definitions,
+            Class<? extends FluentHook>... hooksToRemove) {
+        Iterator<HookDefinition<?>> hookDefinitionsIterator = definitions.iterator();
+        List<Class<? extends FluentHook>> toRemoveHooks = Arrays.asList(hooksToRemove);
         while (hookDefinitionsIterator.hasNext()) {
-            final HookDefinition<?> next = hookDefinitionsIterator.next();
+            HookDefinition<?> next = hookDefinitionsIterator.next();
             if (toRemoveHooks.contains(next.getHookClass())) {
                 hookDefinitionsIterator.remove();
             }
@@ -95,7 +95,7 @@ public class HookControlImpl<T> implements HookControl<T> {
 
     private void restoreHookDefinitions() {
         if (!hookRestoreStack.isEmpty()) {
-            final List<HookDefinition<?>> pop = hookRestoreStack.pop();
+            List<HookDefinition<?>> pop = hookRestoreStack.pop();
             hookDefinitions.clear();
             hookDefinitions.addAll(pop);
         }
@@ -109,7 +109,7 @@ public class HookControlImpl<T> implements HookControl<T> {
     }
 
     @Override
-    public <O, H extends FluentHook<O>> T withHook(final Class<H> hook) {
+    public <O, H extends FluentHook<O>> T withHook(Class<H> hook) {
         hookDefinitions.add(new HookDefinition<>(hook));
         backupHookDefinitions();
         applyHooks(proxy, hookChainBuilder, hookDefinitions);
@@ -117,7 +117,7 @@ public class HookControlImpl<T> implements HookControl<T> {
     }
 
     @Override
-    public <O, H extends FluentHook<O>> T withHook(final Class<H> hook, final O options) {
+    public <O, H extends FluentHook<O>> T withHook(Class<H> hook, O options) {
         hookDefinitions.add(new HookDefinition<>(hook, options));
         backupHookDefinitions();
         applyHooks(proxy, hookChainBuilder, hookDefinitions);
@@ -133,7 +133,7 @@ public class HookControlImpl<T> implements HookControl<T> {
     }
 
     @Override
-    public T noHook(final Class<? extends FluentHook>... hooks) {
+    public T noHook(Class<? extends FluentHook>... hooks) {
         backupHookDefinitions();
         removeHooksFromDefinitions(hookDefinitions, hooks);
         applyHooks(proxy, hookChainBuilder, hookDefinitions);
@@ -147,23 +147,22 @@ public class HookControlImpl<T> implements HookControl<T> {
      * @param hookChainBuilder hook chain builder
      * @param hookDefinitions  hook definitions
      */
-    protected void applyHooks(final Object proxy, final HookChainBuilder hookChainBuilder,
-            final List<HookDefinition<?>> hookDefinitions) {
+    protected void applyHooks(Object proxy, HookChainBuilder hookChainBuilder, List<HookDefinition<?>> hookDefinitions) {
         LocatorProxies.setHooks(proxy, hookChainBuilder, hookDefinitions);
     }
 
     @Override
-    public <R> R noHook(final Function<T, R> function) {
+    public <R> R noHook(Function<T, R> function) {
         noHook();
-        final R functionReturn = function.apply(self);
+        R functionReturn = function.apply(self);
         restoreHooks();
         return functionReturn;
     }
 
     @Override
-    public <R> R noHook(final Class<? extends FluentHook> hook, final Function<T, R> function) {
+    public <R> R noHook(Class<? extends FluentHook> hook, Function<T, R> function) {
         noHook(hook);
-        final R functionReturn = function.apply(self);
+        R functionReturn = function.apply(self);
         restoreHooks();
         return functionReturn;
     }
@@ -174,10 +173,10 @@ public class HookControlImpl<T> implements HookControl<T> {
     }
 
     @Override
-    public T noHookInstance(final Class<? extends FluentHook>... hooks) {
-        final HookControl<T> hookControl = (HookControl<T>) noHookInstanceSupplier.get();
+    public T noHookInstance(Class<? extends FluentHook>... hooks) {
+        HookControl<T> hookControl = (HookControl<T>) noHookInstanceSupplier.get();
 
-        for (final HookDefinition definition : hookDefinitions) {
+        for (HookDefinition definition : hookDefinitions) {
             hookControl.withHook(definition.getHookClass(), definition.getOptions());
         }
 

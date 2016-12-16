@@ -62,6 +62,8 @@ and (not (@Image='y'))]
         <exclude name="AvoidInstantiatingObjectsInLoops"/>
         <exclude name="SimplifyStartsWith"/>
         <exclude name="UseStringBufferForStringAppends"/>
+        <exclude name="LocalVariableCouldBeFinal"/>
+        <exclude name="MethodArgumentCouldBeFinal"/>
     </rule>
     <rule ref="rulesets/java/strings.xml">
         <exclude name="AvoidDuplicateLiterals"/>

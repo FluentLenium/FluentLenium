@@ -30,12 +30,12 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
 
     @Test
     public void getOrCreateDriverWithSameTestNamesCreatesOneInstance() {
-        final SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.METHOD);
+        SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.METHOD);
 
         assertThat(container.getAllDrivers()).containsOnly(driver);
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
 
-        final SharedWebDriver driver2 = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.METHOD);
+        SharedWebDriver driver2 = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.METHOD);
 
         assertThat(driver).isEqualTo(driver2);
         assertThat(container.getAllDrivers()).containsOnly(driver);
@@ -49,12 +49,12 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
 
     @Test
     public void getOrCreateDriverWithDifferentTestNamesCreatesDistinctInstances() {
-        final SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.METHOD);
+        SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.METHOD);
 
         assertThat(container.getAllDrivers()).containsOnly(driver);
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
 
-        final SharedWebDriver driver2 = container.getOrCreateDriver(this, Object.class, "otherTest", DriverLifecycle.METHOD);
+        SharedWebDriver driver2 = container.getOrCreateDriver(this, Object.class, "otherTest", DriverLifecycle.METHOD);
 
         assertThat(driver).isNotEqualTo(driver2);
         assertThat(container.getAllDrivers()).containsOnly(driver, driver2);
@@ -72,13 +72,13 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
 
     @Test
     public void getOrCreateDriverWithDifferentTestClassesCreatesDistinctInstances() {
-        final SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.METHOD);
+        SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.METHOD);
 
         assertThat(container.getAllDrivers()).containsOnly(driver);
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
         assertThat(container.getTestClassDrivers(String.class)).isEmpty();
 
-        final SharedWebDriver driver2 = container.getOrCreateDriver(this, String.class, "test", DriverLifecycle.METHOD);
+        SharedWebDriver driver2 = container.getOrCreateDriver(this, String.class, "test", DriverLifecycle.METHOD);
 
         assertThat(driver).isNotEqualTo(driver2);
         assertThat(container.getAllDrivers()).containsOnly(driver, driver2);
@@ -98,12 +98,12 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
 
     @Test
     public void getOrCreateDriverWithDifferentTestNamesAndStrategyPerClassCreatesOneInstance() {
-        final SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.CLASS);
+        SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.CLASS);
 
         assertThat(container.getAllDrivers()).containsOnly(driver);
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
 
-        final SharedWebDriver driver2 = container.getOrCreateDriver(this, Object.class, "otherTest", DriverLifecycle.CLASS);
+        SharedWebDriver driver2 = container.getOrCreateDriver(this, Object.class, "otherTest", DriverLifecycle.CLASS);
 
         assertThat(driver).isEqualTo(driver2);
         assertThat(container.getAllDrivers()).containsOnly(driver);
@@ -117,13 +117,13 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
 
     @Test
     public void getOrCreateDriverWithDifferentTestNamesAndDifferentTestClassAndStrategyPerClassCreatesDistinctInstance() {
-        final SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.CLASS);
+        SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.CLASS);
 
         assertThat(container.getAllDrivers()).containsOnly(driver);
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
         assertThat(container.getTestClassDrivers(String.class)).isEmpty();
 
-        final SharedWebDriver driver2 = container.getOrCreateDriver(this, String.class, "otherTest", DriverLifecycle.CLASS);
+        SharedWebDriver driver2 = container.getOrCreateDriver(this, String.class, "otherTest", DriverLifecycle.CLASS);
 
         assertThat(driver).isNotEqualTo(driver2);
         assertThat(container.getAllDrivers()).containsOnly(driver, driver2);
@@ -143,13 +143,13 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
 
     @Test
     public void getOrCreateDriverWithDifferentTestNamesAndDifferentTestClassAndStrategyOnceCreatesOneInstance() {
-        final SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.JVM);
+        SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.JVM);
 
         assertThat(container.getAllDrivers()).containsOnly(driver);
         assertThat(container.getTestClassDrivers(Object.class)).isEmpty();
         assertThat(container.getTestClassDrivers(String.class)).isEmpty();
 
-        final SharedWebDriver driver2 = container.getOrCreateDriver(this, String.class, "otherTest", DriverLifecycle.JVM);
+        SharedWebDriver driver2 = container.getOrCreateDriver(this, String.class, "otherTest", DriverLifecycle.JVM);
 
         assertThat(driver).isEqualTo(driver2);
         assertThat(container.getAllDrivers()).containsOnly(driver);
@@ -165,16 +165,16 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
 
     @Test
     public void quitAllShouldQuitAllDrivers() {
-        final SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.METHOD);
-        final SharedWebDriver driver2 = container.getOrCreateDriver(this, String.class, "test", DriverLifecycle.METHOD);
+        SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.METHOD);
+        SharedWebDriver driver2 = container.getOrCreateDriver(this, String.class, "test", DriverLifecycle.METHOD);
 
-        final SharedWebDriver driver3 = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.CLASS);
-        final SharedWebDriver driver4 = container.getOrCreateDriver(this, String.class, "otherTest", DriverLifecycle.CLASS);
+        SharedWebDriver driver3 = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.CLASS);
+        SharedWebDriver driver4 = container.getOrCreateDriver(this, String.class, "otherTest", DriverLifecycle.CLASS);
 
-        final SharedWebDriver driver5 = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.JVM);
-        final SharedWebDriver driver6 = container.getOrCreateDriver(this, String.class, "otherTest", DriverLifecycle.JVM);
+        SharedWebDriver driver5 = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.JVM);
+        SharedWebDriver driver6 = container.getOrCreateDriver(this, String.class, "otherTest", DriverLifecycle.JVM);
 
-        final Set<SharedWebDriver> drivers = new LinkedHashSet<>();
+        Set<SharedWebDriver> drivers = new LinkedHashSet<>();
         drivers.add(driver);
         drivers.add(driver2);
         drivers.add(driver3);
@@ -195,12 +195,12 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
 
     @Test
     public void testSharedDriverBean() {
-        final WebDriver webDriver = get();
-        final Class<Object> testClass = Object.class;
-        final String testName = "test";
-        final DriverLifecycle driverLifecycle = DriverLifecycle.METHOD;
+        WebDriver webDriver = get();
+        Class<Object> testClass = Object.class;
+        String testName = "test";
+        DriverLifecycle driverLifecycle = DriverLifecycle.METHOD;
 
-        final SharedWebDriver sharedWebDriver = new SharedWebDriver(webDriver, testClass, testName, driverLifecycle);
+        SharedWebDriver sharedWebDriver = new SharedWebDriver(webDriver, testClass, testName, driverLifecycle);
 
         assertThat(sharedWebDriver.getDriver()).isSameAs(webDriver);
         assertThat(sharedWebDriver.getWrappedDriver()).isSameAs(webDriver);

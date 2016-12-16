@@ -1,10 +1,9 @@
 package org.fluentlenium.core.label;
 
-import java.util.function.Supplier;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Apply label and label hints to element.
@@ -25,13 +24,13 @@ public class FluentLabelImpl<T> implements FluentLabel<T>, FluentLabelProvider {
      * @param reference            object reference to chain methods calls.
      * @param defaultLabelSupplier supplier for default label to display when no label is defined.
      */
-    public FluentLabelImpl(final T reference, final Supplier<String> defaultLabelSupplier) {
+    public FluentLabelImpl(T reference, Supplier<String> defaultLabelSupplier) {
         this.reference = reference;
         this.defaultLabelSupplier = defaultLabelSupplier;
     }
 
     @Override
-    public T withLabel(final String label) {
+    public T withLabel(String label) {
         this.label = label;
         return reference;
     }
@@ -46,9 +45,9 @@ public class FluentLabelImpl<T> implements FluentLabel<T>, FluentLabelProvider {
     }
 
     @Override
-    public T withLabelHint(final String... labelHint) {
+    public T withLabelHint(String... labelHint) {
         if (labelHint != null) {
-            this.labelHints.addAll(Arrays.asList(labelHint));
+            labelHints.addAll(Arrays.asList(labelHint));
         }
         return reference;
     }
@@ -64,17 +63,17 @@ public class FluentLabelImpl<T> implements FluentLabel<T>, FluentLabelProvider {
 
     @Override
     public String toString() {
-        final StringBuilder toStringBuilder = new StringBuilder();
-        if (this.label == null) {
+        StringBuilder toStringBuilder = new StringBuilder();
+        if (label == null) {
             toStringBuilder.append(defaultLabelSupplier.get());
         } else {
-            toStringBuilder.append(this.label);
+            toStringBuilder.append(label);
         }
 
         if (!labelHints.isEmpty()) {
             toStringBuilder.append(" [");
             boolean notFirst = false;
-            for (final String labelHint : labelHints) {
+            for (String labelHint : labelHints) {
                 if (notFirst) {
                     toStringBuilder.append(", ");
                 }

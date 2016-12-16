@@ -12,7 +12,7 @@ public class EqualMatcher extends AbstractMatcher {
      *
      * @param value input value
      */
-    public EqualMatcher(final String value) {
+    public EqualMatcher(String value) {
         super(value);
     }
 
@@ -21,7 +21,7 @@ public class EqualMatcher extends AbstractMatcher {
      *
      * @param value input value
      */
-    public EqualMatcher(final Pattern value) {
+    public EqualMatcher(Pattern value) {
         super(value);
     }
 
@@ -31,7 +31,7 @@ public class EqualMatcher extends AbstractMatcher {
     }
 
     @Override
-    public boolean isSatisfiedBy(final String obj) {
+    public boolean isSatisfiedBy(String obj) {
         return CalculateService.equal(getPattern(), getValue(), obj);
     }
 

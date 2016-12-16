@@ -1,8 +1,5 @@
 package org.fluentlenium.core.wait;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -17,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -74,7 +74,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void ignoreAll() {
-        final Collection<Class<? extends Throwable>> classes = new ArrayList<>();
+        Collection<Class<? extends Throwable>> classes = new ArrayList<>();
 
         assertThat(wait.ignoreAll(classes)).isSameAs(wait);
         Mockito.verify(fluentControlWait).ignoreAll(classes);
@@ -82,7 +82,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void ignoring() {
-        final Class<? extends RuntimeException> exceptionType = RuntimeException.class;
+        Class<? extends RuntimeException> exceptionType = RuntimeException.class;
 
         assertThat(wait.ignoring(exceptionType)).isSameAs(wait);
         Mockito.verify(fluentControlWait).ignoring(exceptionType);
@@ -90,8 +90,8 @@ public class FluentWaitElementTest {
 
     @Test
     public void ignoringTwoTypes() {
-        final Class<? extends RuntimeException> firstType = RuntimeException.class;
-        final Class<? extends RuntimeException> secondType = RuntimeException.class;
+        Class<? extends RuntimeException> firstType = RuntimeException.class;
+        Class<? extends RuntimeException> secondType = RuntimeException.class;
 
         assertThat(wait.ignoring(firstType, secondType)).isSameAs(wait);
         Mockito.verify(fluentControlWait).ignoring(firstType, secondType);
@@ -99,7 +99,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void untilPredicate() {
-        final Predicate<FluentControl> predicate = mock(Predicate.class);
+        Predicate<FluentControl> predicate = mock(Predicate.class);
 
         wait.untilPredicate(predicate);
         Mockito.verify(fluentControlWait).untilPredicate(predicate);
@@ -107,7 +107,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void withMessage() {
-        final String message = "test";
+        String message = "test";
 
         wait.withMessage(message);
         Mockito.verify(fluentControlWait).withMessage(message);
@@ -115,7 +115,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void withMessageSupplier() {
-        final Supplier<String> message = () -> "test";
+        Supplier<String> message = () -> "test";
 
         wait.withMessage(message);
         Mockito.verify(fluentControlWait).withMessage(message);
@@ -129,7 +129,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void untilElement() {
-        final FluentWebElement element = mock(FluentWebElement.class);
+        FluentWebElement element = mock(FluentWebElement.class);
 
         wait.until(element);
         Mockito.verify(fluentControlWait).until(element);
@@ -137,7 +137,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void untilElements() {
-        final List<? extends FluentWebElement> elements = mock(List.class);
+        List<? extends FluentWebElement> elements = mock(List.class);
 
         wait.until(elements);
         Mockito.verify(fluentControlWait).until(elements);
@@ -145,7 +145,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void untilEach() {
-        final List<? extends FluentWebElement> elements = mock(List.class);
+        List<? extends FluentWebElement> elements = mock(List.class);
 
         wait.untilEach(elements);
         Mockito.verify(fluentControlWait).untilEach(elements);
@@ -153,7 +153,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void untilElementSupplier() {
-        final Supplier<? extends FluentWebElement> selector = mock(Supplier.class);
+        Supplier<? extends FluentWebElement> selector = mock(Supplier.class);
 
         wait.untilElement(selector);
         Mockito.verify(fluentControlWait).untilElement(selector);
@@ -161,7 +161,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void untilElementsSupplier() {
-        final Supplier<? extends List<? extends FluentWebElement>> selector = mock(Supplier.class);
+        Supplier<? extends List<? extends FluentWebElement>> selector = mock(Supplier.class);
 
         wait.untilElements(selector);
         Mockito.verify(fluentControlWait).untilElements(selector);
@@ -169,7 +169,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void untilEachElements() {
-        final Supplier<? extends List<? extends FluentWebElement>> selector = mock(Supplier.class);
+        Supplier<? extends List<? extends FluentWebElement>> selector = mock(Supplier.class);
 
         wait.untilEachElements(selector);
         Mockito.verify(fluentControlWait).untilEachElements(selector);
@@ -177,7 +177,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void untilWindow() {
-        final String windowName = "test";
+        String windowName = "test";
 
         wait.untilWindow(windowName);
         Mockito.verify(fluentControlWait).untilWindow(windowName);
@@ -191,7 +191,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void untilPagePage() {
-        final FluentPage page = mock(FluentPage.class);
+        FluentPage page = mock(FluentPage.class);
 
         wait.untilPage(page);
         Mockito.verify(fluentControlWait).untilPage(page);
@@ -199,8 +199,8 @@ public class FluentWaitElementTest {
 
     @Test
     public void explicitlyFor() {
-        final long amount = 10;
-        final TimeUnit timeUnit = TimeUnit.MILLISECONDS;
+        long amount = 10;
+        TimeUnit timeUnit = TimeUnit.MILLISECONDS;
 
         wait.explicitlyFor(amount, timeUnit);
         Mockito.verify(fluentControlWait).explicitlyFor(amount, timeUnit);
@@ -208,7 +208,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void explicitlyForMillis() {
-        final long amount = 10;
+        long amount = 10;
 
         wait.explicitlyFor(amount);
         Mockito.verify(fluentControlWait).explicitlyFor(amount);
@@ -216,7 +216,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void untilBooleanSupplier() {
-        final Supplier<Boolean> isTrue = mock(Supplier.class);
+        Supplier<Boolean> isTrue = mock(Supplier.class);
 
         wait.until(isTrue);
         Mockito.verify(fluentControlWait).until(isTrue);
@@ -224,7 +224,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void untilFunction() {
-        final Function<? super FluentControl, ?> isTrue = mock(Function.class);
+        Function<? super FluentControl, ?> isTrue = mock(Function.class);
 
         wait.until(isTrue);
         Mockito.verify(fluentControlWait).until(isTrue);

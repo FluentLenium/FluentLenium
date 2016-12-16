@@ -21,27 +21,27 @@ public class AnnotationsPriorityEventsTest extends IntegrationFluentTest {
     }
 
     @BeforeClickOn
-    private void beforeClickOn(final FluentWebElement element) { // NOPMD UnusedPrivateMethod
+    private void beforeClickOn(FluentWebElement element) { // NOPMD UnusedPrivateMethod
         beforeClick.add(0);
     }
 
     @BeforeClickOn(2)
-    private void beforeClickOn2(final FluentWebElement element) { // NOPMD UnusedPrivateMethod
+    private void beforeClickOn2(FluentWebElement element) { // NOPMD UnusedPrivateMethod
         beforeClick.add(2);
     }
 
     @BeforeClickOn(1)
-    private void beforeClickOn1(final FluentWebElement element) { // NOPMD UnusedPrivateMethod
+    private void beforeClickOn1(FluentWebElement element) { // NOPMD UnusedPrivateMethod
         beforeClick.add(1);
     }
 
     @BeforeClickOn(5)
-    private void beforeClickOn5(final FluentWebElement element) { // NOPMD UnusedPrivateMethod
+    private void beforeClickOn5(FluentWebElement element) { // NOPMD UnusedPrivateMethod
         beforeClick.add(5);
     }
 
     @BeforeClickOn(-2)
-    private void beforeClickOnNeg2(final FluentWebElement element) { // NOPMD UnusedPrivateMethod
+    private void beforeClickOnNeg2(FluentWebElement element) { // NOPMD UnusedPrivateMethod
         beforeClick.add(-2);
     }
 

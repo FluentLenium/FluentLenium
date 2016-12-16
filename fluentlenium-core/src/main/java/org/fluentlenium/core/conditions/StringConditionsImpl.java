@@ -12,7 +12,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
      *
      * @param string underlying string
      */
-    public StringConditionsImpl(final String string) {
+    public StringConditionsImpl(String string) {
         super(string);
     }
 
@@ -22,12 +22,12 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
      * @param string   underlying string
      * @param negation negation value
      */
-    public StringConditionsImpl(final String string, final boolean negation) {
+    public StringConditionsImpl(String string, boolean negation) {
         super(string, negation);
     }
 
     @Override
-    protected StringConditionsImpl newInstance(final boolean negationValue) {
+    protected StringConditionsImpl newInstance(boolean negationValue) {
         return new StringConditionsImpl(object, negationValue);
     }
 
@@ -38,7 +38,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     }
 
     @Override
-    public boolean contains(final CharSequence charSequence) {
+    public boolean contains(CharSequence charSequence) {
         return verify(input -> {
             if (input == null) {
                 return false;
@@ -48,7 +48,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     }
 
     @Override
-    public boolean startsWith(final String prefix) {
+    public boolean startsWith(String prefix) {
         return verify(input -> {
             if (input == null) {
                 return false;
@@ -58,7 +58,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     }
 
     @Override
-    public boolean endsWith(final String suffix) {
+    public boolean endsWith(String suffix) {
         return verify(input -> {
             if (input == null) {
                 return false;
@@ -68,7 +68,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     }
 
     @Override
-    public boolean equalTo(final String anotherString) {
+    public boolean equalTo(String anotherString) {
         return verify(input -> {
             if (input == null) {
                 return false;
@@ -78,7 +78,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     }
 
     @Override
-    public boolean equalToIgnoreCase(final String anotherString) {
+    public boolean equalToIgnoreCase(String anotherString) {
         return verify(input -> {
             if (input == null) {
                 return false;
@@ -88,7 +88,7 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     }
 
     @Override
-    public boolean matches(final String regex) {
+    public boolean matches(String regex) {
         return verify(input -> {
             if (input == null) {
                 return false;
@@ -98,12 +98,12 @@ public class StringConditionsImpl extends AbstractObjectConditions<String> imple
     }
 
     @Override
-    public boolean matches(final Pattern pattern) {
+    public boolean matches(Pattern pattern) {
         return verify(input -> {
             if (input == null) {
                 return false;
             }
-            final Matcher matcher = pattern.matcher(input);
+            Matcher matcher = pattern.matcher(input);
             return matcher.matches();
         });
     }

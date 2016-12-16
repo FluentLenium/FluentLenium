@@ -45,7 +45,7 @@ public class ScreenshotTest {
 
 class CustomWebDriverNoScreenshot implements WebDriver {
 
-    public void get(final String url) {
+    public void get(String url) {
         //Do nothing.
     }
 
@@ -57,11 +57,11 @@ class CustomWebDriverNoScreenshot implements WebDriver {
         return null;
     }
 
-    public List<WebElement> findElements(final By by) {
+    public List<WebElement> findElements(By by) {
         return null;
     }
 
-    public WebElement findElement(final By by) {
+    public WebElement findElement(By by) {
         return null;
     }
 
@@ -100,7 +100,7 @@ class CustomWebDriverNoScreenshot implements WebDriver {
 
 class CustomWebDriverScreenshot implements WebDriver, TakesScreenshot {
 
-    public void get(final String url) {
+    public void get(String url) {
         // Do nothing.
     }
 
@@ -112,11 +112,11 @@ class CustomWebDriverScreenshot implements WebDriver, TakesScreenshot {
         return null;
     }
 
-    public List<WebElement> findElements(final By by) {
+    public List<WebElement> findElements(By by) {
         return null;
     }
 
-    public WebElement findElement(final By by) {
+    public WebElement findElement(By by) {
         return null;
     }
 
@@ -152,7 +152,7 @@ class CustomWebDriverScreenshot implements WebDriver, TakesScreenshot {
         return null;
     }
 
-    public <X> X getScreenshotAs(final OutputType<X> xOutputType) throws WebDriverException {
+    public <X> X getScreenshotAs(OutputType<X> xOutputType) throws WebDriverException {
         return xOutputType.convertFromBase64Png("test");
     }
 }

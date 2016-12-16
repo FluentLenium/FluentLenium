@@ -42,13 +42,13 @@ public class FluentPageUrlTemplateTest {
 
     @Test
     public void testGetUrlParams() {
-        final String url = fluentPage.getUrl("test1", "test2");
+        String url = fluentPage.getUrl("test1", "test2");
         assertThat(url).isEqualTo("/abc/test1/def/test2");
     }
 
     @Test
     public void testGetUrlParams2() {
-        final String url = fluentPage2.getUrl("test1", "test2");
+        String url = fluentPage2.getUrl("test1", "test2");
         assertThat(url).isEqualTo("abc/test1/def/test2/");
     }
 
@@ -91,7 +91,7 @@ public class FluentPageUrlTemplateTest {
     @Test
     public void testGetParameters() {
         Mockito.when(control.url()).thenReturn("/abc/test1/def/test2");
-        final ParsedUrlTemplate parsedUrl = fluentPage.parseUrl();
+        ParsedUrlTemplate parsedUrl = fluentPage.parseUrl();
 
         assertThat(parsedUrl.matches()).isTrue();
         assertThat(parsedUrl.parameters().size()).isEqualTo(2);
@@ -102,7 +102,7 @@ public class FluentPageUrlTemplateTest {
     @Test
     public void testGetParameters2() {
         Mockito.when(control.url()).thenReturn("/abc/test1/def/test2");
-        final ParsedUrlTemplate parsedUrl = fluentPage2.parseUrl();
+        ParsedUrlTemplate parsedUrl = fluentPage2.parseUrl();
 
         assertThat(parsedUrl.matches()).isTrue();
         assertThat(parsedUrl.parameters().size()).isEqualTo(2);
@@ -113,7 +113,7 @@ public class FluentPageUrlTemplateTest {
     @Test
     public void testGetParametersQueryString() {
         Mockito.when(control.url()).thenReturn("/abc/test1/def/test2?param1=qp1&param2=qp2");
-        final ParsedUrlTemplate parsedUrl = fluentPage.parseUrl();
+        ParsedUrlTemplate parsedUrl = fluentPage.parseUrl();
 
         assertThat(parsedUrl.matches()).isTrue();
         assertThat(parsedUrl.parameters().size()).isEqualTo(2);

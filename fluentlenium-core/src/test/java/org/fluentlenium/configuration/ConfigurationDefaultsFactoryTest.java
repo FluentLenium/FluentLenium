@@ -27,24 +27,24 @@ public class ConfigurationDefaultsFactoryTest {
         systemProperties.clear();
     }
 
-    public void mockEnvironmentVariable(final String property, final String value) {
+    public void mockEnvironmentVariable(String property, String value) {
         environmentVariables.put(property, value);
     }
 
-    public void mockSystemProperty(final String property, final String value) {
+    public void mockSystemProperty(String property, String value) {
         systemProperties.put(property, value);
     }
 
     @Test
     public void testFactoryWithAnnotation() {
-        final DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
+        DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
             @Override
             protected InputStream getPropertiesInputStream() {
                 return IOUtils.toInputStream("pageLoadTimeout=5000", Charset.forName("UTF-8"));
             }
         };
 
-        final Configuration configuration = factory.newConfiguration(AnnotatedContainer.class, new ConfigurationDefaults());
+        Configuration configuration = factory.newConfiguration(AnnotatedContainer.class, new ConfigurationDefaults());
         setupConfiguration((ComposedConfiguration) configuration);
 
         // Annotation has higher priority than configuration file, so it should be 2000L and not 5000L.
@@ -63,10 +63,10 @@ public class ConfigurationDefaultsFactoryTest {
         assertThat(configuration.getPageLoadTimeout()).isEqualTo(250L);
     }
 
-    private void setupConfiguration(final ComposedConfiguration composedConfiguration) {
-        for (final ConfigurationProperties configuration : composedConfiguration.getConfigurations()) {
+    private void setupConfiguration(ComposedConfiguration composedConfiguration) {
+        for (ConfigurationProperties configuration : composedConfiguration.getConfigurations()) {
             if (configuration instanceof PropertiesBackendConfiguration) {
-                final PropertiesBackendConfiguration readerConfiguration = (PropertiesBackendConfiguration) configuration;
+                PropertiesBackendConfiguration readerConfiguration = (PropertiesBackendConfiguration) configuration;
                 if (readerConfiguration.getPropertiesBackend() instanceof EnvironmentVariablesBackend) {
                     readerConfiguration.setPropertiesBackend(new DefaultPropertiesBackend(environmentVariables));
                 } else if (readerConfiguration.getPropertiesBackend() instanceof SystemPropertiesBackend) {
@@ -78,14 +78,14 @@ public class ConfigurationDefaultsFactoryTest {
 
     @Test
     public void testFactoryNoAnnotation() {
-        final DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
+        DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
             @Override
             protected InputStream getPropertiesInputStream() {
                 return IOUtils.toInputStream("fluentlenium.pageLoadTimeout=5000\nscriptTimeout=1000", Charset.forName("UTF-8"));
             }
         };
 
-        final Configuration configuration = factory.newConfiguration(null, null);
+        Configuration configuration = factory.newConfiguration(null, null);
         setupConfiguration((ComposedConfiguration) configuration);
 
         assertThat(configuration.getPageLoadTimeout()).isEqualTo(5000L);
@@ -106,7 +106,7 @@ public class ConfigurationDefaultsFactoryTest {
 
     @Test(expected = ConfigurationException.class)
     public void testFactoryInvalidPropertyFile() {
-        final DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
+        DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
             @Override
             protected InputStream getPropertiesInputStream() {
                 return new InputStream() {
@@ -121,21 +121,21 @@ public class ConfigurationDefaultsFactoryTest {
     }
 
     public void testCustomConfigurationDefaults() {
-        final DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
+        DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
             @Override
             protected InputStream getPropertiesInputStream() {
                 return IOUtils.toInputStream("pageLoadTimeout=5000", Charset.forName("UTF-8"));
             }
         };
 
-        final ConfigurationDefaults configurationDefaults = new ConfigurationDefaults() {
+        ConfigurationDefaults configurationDefaults = new ConfigurationDefaults() {
             @Override
             public String getBaseUrl() {
                 return "custom-default-value";
             }
         };
 
-        final Configuration configuration = factory.newConfiguration(AnnotatedContainer.class, configurationDefaults);
+        Configuration configuration = factory.newConfiguration(AnnotatedContainer.class, configurationDefaults);
         setupConfiguration((ComposedConfiguration) configuration);
 
         // Annotation has higher priority than configuration file, so it should be 2000L and not 5000L.

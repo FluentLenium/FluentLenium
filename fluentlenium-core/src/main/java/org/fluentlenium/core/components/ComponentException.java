@@ -9,7 +9,7 @@ public class ComponentException extends RuntimeException {
      *
      * @param message exception message
      */
-    public ComponentException(final String message) {
+    public ComponentException(String message) {
         super(message);
     }
 
@@ -19,7 +19,7 @@ public class ComponentException extends RuntimeException {
      * @param message exception message
      * @param cause   exception cause
      */
-    public ComponentException(final String message, final Throwable cause) {
+    public ComponentException(String message, Throwable cause) {
         super(message, cause);
     }
 }

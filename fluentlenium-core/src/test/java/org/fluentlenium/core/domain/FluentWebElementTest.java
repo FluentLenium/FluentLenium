@@ -116,7 +116,7 @@ public class FluentWebElementTest {
 
     @Test
     public void testAs() {
-        final Component as = fluentElement.as(Component.class);
+        Component as = fluentElement.as(Component.class);
         assertThat(as.getElement()).isSameAs(element);
         assertThat(componentsManager.getComponents(element)).containsExactly(as);
     }
@@ -285,7 +285,7 @@ public class FluentWebElementTest {
 
     @Test
     public void testEl() {
-        final WebElement findElement = mock(WebElement.class);
+        WebElement findElement = mock(WebElement.class);
 
         when(element.findElements(By.cssSelector(".test"))).thenReturn(Arrays.asList(findElement));
 
@@ -348,7 +348,7 @@ public class FluentWebElementTest {
     @Test
     public void testFillSelect() {
         when(element.getTagName()).thenReturn("select");
-        final WebElement valueElement = mock(WebElement.class);
+        WebElement valueElement = mock(WebElement.class);
         when(element.findElements(any(By.class))).thenReturn(Arrays.asList(valueElement));
 
         fluentElement.fillSelect().withValue("value");
@@ -358,7 +358,7 @@ public class FluentWebElementTest {
     @Test(expected = NoSuchElementException.class)
     public void testFillSelectInvalidElement() {
         when(element.getTagName()).thenReturn("span");
-        final WebElement valueElement = mock(WebElement.class);
+        WebElement valueElement = mock(WebElement.class);
         when(element.findElements(any(By.class))).thenReturn(Arrays.asList(valueElement));
 
         when(element.isDisplayed()).thenReturn(true);
@@ -375,7 +375,7 @@ public class FluentWebElementTest {
     private static final class Component {
         private final WebElement element;
 
-        Component(final WebElement element) {
+        Component(WebElement element) {
             this.element = element;
         }
 

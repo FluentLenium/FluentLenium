@@ -50,7 +50,7 @@ public class FluentTestTest {
     public static class InternalTest extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
-            final WebDriver webDriver = Mockito.mock(WebDriver.class);
+            WebDriver webDriver = Mockito.mock(WebDriver.class);
             drivers.add(webDriver);
             return webDriver;
         }
@@ -75,7 +75,7 @@ public class FluentTestTest {
     public static class InternalTestSharedClass extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
-            final WebDriver webDriver = Mockito.mock(WebDriver.class);
+            WebDriver webDriver = Mockito.mock(WebDriver.class);
             sharedClassDrivers.add(webDriver);
             return webDriver;
         }
@@ -100,7 +100,7 @@ public class FluentTestTest {
     public static class InternalTestSharedOnce extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
-            final WebDriver webDriver = Mockito.mock(WebDriver.class);
+            WebDriver webDriver = Mockito.mock(WebDriver.class);
             sharedOnceDrivers.add(webDriver);
             return webDriver;
         }
@@ -125,9 +125,9 @@ public class FluentTestTest {
     public static class ShouldDeleteCookiesTest extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
-            final WebDriver webDriver = Mockito.mock(WebDriver.class);
+            WebDriver webDriver = Mockito.mock(WebDriver.class);
 
-            final WebDriver.Options options = Mockito.mock(WebDriver.Options.class);
+            WebDriver.Options options = Mockito.mock(WebDriver.Options.class);
             sharedClassDriversOptions.add(options);
             Mockito.when(webDriver.manage()).thenReturn(options);
 
@@ -166,14 +166,14 @@ public class FluentTestTest {
                 screenshotFile = File.createTempFile("FluentTestTest.java", "");
                 FileUtils.writeByteArrayToFile(screenshotFile, screenshotData);
                 screenshotFile.deleteOnExit();
-            } catch (final IOException e) {
+            } catch (IOException e) {
                 throw new IOError(e);
             }
 
-            final ScreenshotWebDriver webDriver = Mockito.mock(ScreenshotWebDriver.class);
+            ScreenshotWebDriver webDriver = Mockito.mock(ScreenshotWebDriver.class);
             Mockito.when(webDriver.getScreenshotAs(OutputType.FILE)).thenReturn(screenshotFile);
 
-            final WebElement htmlElement = Mockito.mock(WebElement.class);
+            WebElement htmlElement = Mockito.mock(WebElement.class);
             Mockito.when(htmlElement.getAttribute("innerHTML")).thenReturn(html);
 
             Mockito.when(webDriver.findElements(By.cssSelector("html"))).thenReturn(Arrays.asList(htmlElement));
@@ -198,13 +198,13 @@ public class FluentTestTest {
 
     @Test
     public void testFluentTest() {
-        final Result result = JUnitCore.runClasses(InternalTest.class);
+        Result result = JUnitCore.runClasses(InternalTest.class);
         assertThat(result.getFailures()).hasSize(1);
         assertThat(result.getFailures().get(0).getMessage()).isEqualTo("Failing Test");
 
         assertThat(drivers).hasSize(3);
 
-        for (final WebDriver driver : drivers) {
+        for (WebDriver driver : drivers) {
             Mockito.verify(driver).quit();
         }
 
@@ -213,13 +213,13 @@ public class FluentTestTest {
 
     @Test
     public void testInternalTestSharedClass() {
-        final Result result = JUnitCore.runClasses(InternalTestSharedClass.class);
+        Result result = JUnitCore.runClasses(InternalTestSharedClass.class);
         assertThat(result.getFailures()).hasSize(1);
         assertThat(result.getFailures().get(0).getMessage()).isEqualTo("Failing Test");
 
         assertThat(sharedClassDrivers).hasSize(1);
 
-        for (final WebDriver driver : sharedClassDrivers) {
+        for (WebDriver driver : sharedClassDrivers) {
             Mockito.verify(driver).quit();
         }
 
@@ -228,13 +228,13 @@ public class FluentTestTest {
 
     @Test
     public void testInternalTestSharedOnce() {
-        final Result result = JUnitCore.runClasses(InternalTestSharedOnce.class);
+        Result result = JUnitCore.runClasses(InternalTestSharedOnce.class);
         assertThat(result.getFailures()).hasSize(1);
         assertThat(result.getFailures().get(0).getMessage()).isEqualTo("Failing Test");
 
         assertThat(sharedOnceDrivers).hasSize(1);
 
-        for (final WebDriver driver : sharedOnceDrivers) {
+        for (WebDriver driver : sharedOnceDrivers) {
             Mockito.verify(driver, Mockito.never()).quit();
         }
 
@@ -243,17 +243,17 @@ public class FluentTestTest {
 
     @Test
     public void testShouldDeleteCookiesTest() {
-        final Result result = JUnitCore.runClasses(ShouldDeleteCookiesTest.class);
+        Result result = JUnitCore.runClasses(ShouldDeleteCookiesTest.class);
         assertThat(result.getFailures()).hasSize(1);
         assertThat(result.getFailures().get(0).getMessage()).isEqualTo("Failing Test");
 
         assertThat(sharedClassDrivers).hasSize(1);
 
-        for (final WebDriver driver : sharedClassDrivers) {
+        for (WebDriver driver : sharedClassDrivers) {
             Mockito.verify(driver).quit();
         }
 
-        for (final WebDriver.Options options : sharedClassDriversOptions) {
+        for (WebDriver.Options options : sharedClassDriversOptions) {
             Mockito.verify(options, Mockito.times(3)).deleteAllCookies();
         }
 
@@ -262,13 +262,13 @@ public class FluentTestTest {
 
     @Test
     public void testAutomaticScreenShotTest() throws IOException {
-        final Result result = JUnitCore.runClasses(AutomaticScreenShotTest.class);
+        Result result = JUnitCore.runClasses(AutomaticScreenShotTest.class);
         assertThat(result.getFailures()).hasSize(1);
         assertThat(result.getFailures().get(0).getMessage()).isEqualTo("Failing Test");
 
         assertThat(screenshotWebDrivers).hasSize(1);
 
-        final ScreenshotWebDriver driver = screenshotWebDrivers.get(0);
+        ScreenshotWebDriver driver = screenshotWebDrivers.get(0);
 
         Mockito.verify(driver).getScreenshotAs(OutputType.FILE);
         Mockito.verify(driver).findElements(By.cssSelector("html"));
@@ -278,12 +278,11 @@ public class FluentTestTest {
         assertThat(tmpPath.list()).contains("AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
                 + ".FluentTestTest$AutomaticScreenShotTest).png");
 
-        final File screenshotGeneratedFile = new File(tmpPath,
+        File screenshotGeneratedFile = new File(tmpPath,
                 "AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
                         + ".FluentTestTest$AutomaticScreenShotTest).png");
-        final File htmlDumpFile = new File(tmpPath,
-                "AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
-                        + ".FluentTestTest$AutomaticScreenShotTest).html");
+        File htmlDumpFile = new File(tmpPath, "AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
+                + ".FluentTestTest$AutomaticScreenShotTest).html");
 
         try {
             assertThat(FileUtils.readFileToByteArray(screenshotGeneratedFile)).isEqualTo(screenshotData);

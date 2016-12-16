@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-import java.util.function.Supplier;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +8,7 @@ import org.openqa.selenium.TimeoutException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 
 public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
 
@@ -33,7 +33,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     public void testIgnoreAllPositive() {
 
         try {
-            final Collection<Class<? extends Throwable>> exceptions = new ArrayList<>();
+            Collection<Class<? extends Throwable>> exceptions = new ArrayList<>();
             exceptions.add(CustomException.class);
             exceptions.add(CustomException2.class);
 
@@ -42,7 +42,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             });
 
             throw new AssertionError();
-        } catch (final TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
         }
 
     }
@@ -51,7 +51,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     public void testIgnoreAllNegative() {
 
         try {
-            final Collection<Class<? extends Throwable>> exceptions = new ArrayList<>();
+            Collection<Class<? extends Throwable>> exceptions = new ArrayList<>();
             exceptions.add(CustomException.class);
             exceptions.add(CustomException2.class);
 
@@ -60,7 +60,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             });
 
             throw new AssertionError();
-        } catch (final TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
         }
 
     }
@@ -78,7 +78,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
                     });
 
             throw new AssertionError();
-        } catch (final TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
         }
 
     }
@@ -87,13 +87,12 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     public void testIgnoring1Negative() {
 
         try {
-            await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class).ignoring(CustomException2.class)
-                    .until(() -> {
-                        throw new CustomException3();
-                    });
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class).ignoring(CustomException2.class).until(() -> {
+                throw new CustomException3();
+            });
 
             throw new AssertionError();
-        } catch (final TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
         }
 
     }
@@ -102,13 +101,12 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     public void testIgnoring2Positive() {
 
         try {
-            await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class, CustomException2.class)
-                    .until(() -> {
-                        throw new CustomException();
-                    });
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class, CustomException2.class).until(() -> {
+                throw new CustomException();
+            });
 
             throw new AssertionError();
-        } catch (final TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
         }
 
     }
@@ -117,13 +115,12 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
     public void testIgnoring2Negative() {
 
         try {
-            await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class, CustomException2.class)
-                    .until(() -> {
-                        throw new CustomException3();
-                    });
+            await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class, CustomException2.class).until(() -> {
+                throw new CustomException3();
+            });
 
             throw new AssertionError();
-        } catch (final TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
         }
 
     }

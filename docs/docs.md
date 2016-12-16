@@ -742,7 +742,7 @@ public class SomeComponent {
     }
     
     public SomeComponent click() {
-        this.element.click();
+        element.click();
         return this;
     }
     

@@ -1,11 +1,12 @@
 package org.fluentlenium.core.wait;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.conditions.Conditions;
 import org.fluentlenium.core.conditions.message.MessageProxy;
+
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * Common class for all wait conditions instances.
@@ -27,7 +28,7 @@ public class BaseWaitConditions {
      * @param present predicate to wait for.
      * @param message message to use.
      */
-    protected void until(final FluentWait wait, final Predicate<FluentControl> present, String message) {
+    protected void until(FluentWait wait, Predicate<FluentControl> present, String message) {
         if (wait.hasMessageDefined()) {
             wait.untilPredicate(present);
         } else {
@@ -43,11 +44,11 @@ public class BaseWaitConditions {
      * @param present         predicate to wait for.
      * @param messageSupplier default message to use.
      */
-    protected void until(final FluentWait wait, final Predicate<FluentControl> present, final Supplier<String> messageSupplier) {
+    protected void until(FluentWait wait, Predicate<FluentControl> present, Supplier<String> messageSupplier) {
         if (wait.hasMessageDefined()) {
             wait.untilPredicate(present);
         } else {
-            final Supplier<String> customMessageSupplier = new Supplier<String>() {
+            Supplier<String> customMessageSupplier = new Supplier<String>() {
                 @Override
                 public String get() {
                     return messageCustomizer().apply(messageSupplier.get());
@@ -66,10 +67,10 @@ public class BaseWaitConditions {
      * @param conditionFunction condition fonction
      * @param <T>               type of the condition.
      */
-    protected <T extends Conditions<?>> void until(final FluentWait wait, final T condition, final T messageBuilder,
-            final Function<T, Boolean> conditionFunction) {
-        final Predicate<FluentControl> predicate = input -> conditionFunction.apply(condition);
-        final Supplier<String> messageSupplier = () -> {
+    protected <T extends Conditions<?>> void until(FluentWait wait, T condition, T messageBuilder,
+            Function<T, Boolean> conditionFunction) {
+        Predicate<FluentControl> predicate = input -> conditionFunction.apply(condition);
+        Supplier<String> messageSupplier = () -> {
             conditionFunction.apply(messageBuilder);
             return MessageProxy.message(messageBuilder);
         };

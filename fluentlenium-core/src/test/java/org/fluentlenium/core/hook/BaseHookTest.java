@@ -43,7 +43,7 @@ public class BaseHookTest {
         fluentAdapter.initFluent(webDriver);
         instantiator = new DefaultComponentInstantiator(fluentAdapter);
 
-        hook = new BaseHook<>(fluentAdapter, instantiator, ()->element, ()->locator, () -> "toString", options);
+        hook = new BaseHook<>(fluentAdapter, instantiator, () -> element, () -> locator, () -> "toString", options);
     }
 
     @Test
@@ -71,10 +71,10 @@ public class BaseHookTest {
 
     @Test
     public void testNoOptionHook() {
-        final Object defaultOptions = new Object();
+        Object defaultOptions = new Object();
 
-        final BaseHook noOptionHook = new BaseHook<Object>(fluentAdapter, instantiator, () -> element,
-                () -> locator, () -> "hook", null) {
+        BaseHook noOptionHook = new BaseHook<Object>(fluentAdapter, instantiator, () -> element, () -> locator, () -> "hook",
+                null) {
             @Override
             protected Object newOptions() {
                 return defaultOptions;
@@ -87,8 +87,7 @@ public class BaseHookTest {
     @Test
     public void testNoOptionHookWithoutDefault() {
 
-        final BaseHook noOptionHook = new BaseHook<>(fluentAdapter, instantiator, () -> element, () -> locator,
-                () -> "hook", null);
+        BaseHook noOptionHook = new BaseHook<>(fluentAdapter, instantiator, () -> element, () -> locator, () -> "hook", null);
 
         assertThat(noOptionHook.getOptions()).isNull();
     }

@@ -43,7 +43,7 @@ public class IndexSupplierLocatorTest {
 
     @Test
     public void testFirstElementLocator() {
-        final ElementLocator locator = new FirstElementLocator(elementLocator);
+        ElementLocator locator = new FirstElementLocator(elementLocator);
 
         Assertions.assertThat(locator.findElement()).isSameAs(element1);
         Assertions.assertThat(locator.findElements()).containsExactly(element1);
@@ -51,7 +51,7 @@ public class IndexSupplierLocatorTest {
 
     @Test
     public void testFirstElementLocatorEmpty() {
-        final ElementLocator locator = new FirstElementLocator(emptyLocator);
+        ElementLocator locator = new FirstElementLocator(emptyLocator);
 
         Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -64,7 +64,7 @@ public class IndexSupplierLocatorTest {
 
     @Test
     public void testLastElementLocator() {
-        final ElementLocator locator = new LastElementLocator(elementLocator);
+        ElementLocator locator = new LastElementLocator(elementLocator);
 
         Assertions.assertThat(locator.findElement()).isSameAs(element4);
         Assertions.assertThat(locator.findElements()).containsExactly(element4);
@@ -72,7 +72,7 @@ public class IndexSupplierLocatorTest {
 
     @Test
     public void testLastElementLocatorEmpty() {
-        final ElementLocator locator = new LastElementLocator(emptyLocator);
+        ElementLocator locator = new LastElementLocator(emptyLocator);
 
         Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -85,7 +85,7 @@ public class IndexSupplierLocatorTest {
 
     @Test
     public void testAtIndexElementLocator() {
-        final ElementLocator locator = new AtIndexElementLocator(elementLocator, 2);
+        ElementLocator locator = new AtIndexElementLocator(elementLocator, 2);
 
         Assertions.assertThat(locator.findElement()).isSameAs(element3);
         Assertions.assertThat(locator.findElements()).containsExactly(element3);
@@ -93,7 +93,7 @@ public class IndexSupplierLocatorTest {
 
     @Test
     public void testAtIndexElementLocatorEmpty() {
-        final ElementLocator locator = new AtIndexElementLocator(emptyLocator, 2);
+        ElementLocator locator = new AtIndexElementLocator(emptyLocator, 2);
 
         Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override

@@ -10,7 +10,7 @@ public class EventAnnotationsException extends RuntimeException {
      * @param message exception message
      * @param cause   exception cause
      */
-    public EventAnnotationsException(final String message, final Throwable cause) {
+    public EventAnnotationsException(String message, Throwable cause) {
         super(message, cause);
     }
 }

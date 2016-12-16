@@ -10,7 +10,7 @@ import org.mockito.Mockito;
 public class EventsInvalidDriverTest extends IntegrationFluentTest {
     @Test(expected = IllegalStateException.class)
     public void checkInvalidDriver() {
-        final ElementListener beforeListener = Mockito.mock(ElementListener.class);
+        ElementListener beforeListener = Mockito.mock(ElementListener.class);
         events().beforeClickOn(beforeListener);
     }
 }

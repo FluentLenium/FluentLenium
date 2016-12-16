@@ -25,7 +25,7 @@ public class WebDriversTest {
     @FactoryName("another")
     public static class AnotherFactory implements WebDriverFactory {
         @Override
-        public WebDriver newWebDriver(final Capabilities capabilities, final ConfigurationProperties configuration) {
+        public WebDriver newWebDriver(Capabilities capabilities, ConfigurationProperties configuration) {
             return new CustomWebDriver();
         }
     }
@@ -34,7 +34,7 @@ public class WebDriversTest {
     @DefaultFactory
     public static class AnotherDefaultFactory implements WebDriverFactory {
         @Override
-        public WebDriver newWebDriver(final Capabilities capabilities, final ConfigurationProperties configuration) {
+        public WebDriver newWebDriver(Capabilities capabilities, ConfigurationProperties configuration) {
             return new CustomWebDriver();
         }
     }
@@ -46,16 +46,16 @@ public class WebDriversTest {
 
     @Test
     public void testFirefox() {
-        final WebDriverFactory firefox = webDrivers.get("firefox");
+        WebDriverFactory firefox = webDrivers.get("firefox");
         assertThat(firefox).isExactlyInstanceOf(DefaultWebDriverFactories.FirefoxWebDriverFactory.class);
 
-        final Class<? extends WebDriver> webDriverClass = ((ReflectiveWebDriverFactory) firefox).getWebDriverClass();
+        Class<? extends WebDriver> webDriverClass = ((ReflectiveWebDriverFactory) firefox).getWebDriverClass();
         assertThat(webDriverClass).isSameAs(FirefoxDriver.class);
     }
 
     @Test
     public void testDefault() {
-        final WebDriverFactory webDriverFactory = webDrivers.get(null);
+        WebDriverFactory webDriverFactory = webDrivers.get(null);
         assertThat(webDriverFactory).isExactlyInstanceOf(AnotherFactory.class);
     }
 
@@ -85,8 +85,8 @@ public class WebDriversTest {
 
     @Test
     public void testCustomClassName() {
-        final WebDriverFactory customWebFactory = webDrivers.get(CustomWebDriver.class.getName());
-        final WebDriver webDriver = customWebFactory.newWebDriver(null, null);
+        WebDriverFactory customWebFactory = webDrivers.get(CustomWebDriver.class.getName());
+        WebDriver webDriver = customWebFactory.newWebDriver(null, null);
 
         try {
             assertThat(webDriver).isExactlyInstanceOf(CustomWebDriver.class);
@@ -98,7 +98,7 @@ public class WebDriversTest {
 
     @Test
     public void testCustomClassNameNewWebDriver() {
-        final WebDriver webDriver = webDrivers.newWebDriver(CustomWebDriver.class.getName(), null, null);
+        WebDriver webDriver = webDrivers.newWebDriver(CustomWebDriver.class.getName(), null, null);
 
         try {
             assertThat(webDriver).isExactlyInstanceOf(CustomWebDriver.class);

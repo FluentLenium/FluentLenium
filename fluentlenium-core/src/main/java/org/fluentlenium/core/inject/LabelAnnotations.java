@@ -18,18 +18,18 @@ public class LabelAnnotations implements FluentLabelProvider {
      *
      * @param field field to parse
      */
-    public LabelAnnotations(final Field field) {
-        final Label labelAnno = field.getAnnotation(Label.class);
+    public LabelAnnotations(Field field) {
+        Label labelAnno = field.getAnnotation(Label.class);
         if (labelAnno != null) {
-            this.label = labelAnno.value();
-            if (this.label.isEmpty()) {
-                this.label = field.getDeclaringClass().getSimpleName() + "." + field.getName();
+            label = labelAnno.value();
+            if (label.isEmpty()) {
+                label = field.getDeclaringClass().getSimpleName() + "." + field.getName();
             }
         }
 
-        final LabelHint labelHint = field.getAnnotation(LabelHint.class);
+        LabelHint labelHint = field.getAnnotation(LabelHint.class);
         if (labelHint != null) {
-            this.labelHints = labelHint.value();
+            labelHints = labelHint.value();
         }
     }
 

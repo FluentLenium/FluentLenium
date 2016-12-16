@@ -43,7 +43,7 @@ public class FluentInjectorContainerTest {
 
     @Test
     public void testInjectChildContainer() {
-        final ParentContainer parentContainer = new ParentContainer();
+        ParentContainer parentContainer = new ParentContainer();
 
         Assertions.assertThat(parentContainer.childContainer).isNull();
 
@@ -64,7 +64,7 @@ public class FluentInjectorContainerTest {
 
     @Test
     public void testInjectRecursiveContainers() {
-        final ParentContainerRecurse parentContainer = new ParentContainerRecurse();
+        ParentContainerRecurse parentContainer = new ParentContainerRecurse();
 
         Assertions.assertThat(parentContainer.childContainer).isNull();
 
@@ -81,7 +81,7 @@ public class FluentInjectorContainerTest {
         private FluentControl control;
 
         @Override
-        public void initFluent(final FluentControl control) {
+        public void initFluent(FluentControl control) {
             this.control = control;
         }
     }
@@ -93,14 +93,14 @@ public class FluentInjectorContainerTest {
         private ChildContainerInit childContainer;
 
         @Override
-        public void initFluent(final FluentControl control) {
+        public void initFluent(FluentControl control) {
             this.control = control;
         }
     }
 
     @Test
     public void testInjectInitialise() {
-        final ParentContainerInit parentContainer = new ParentContainerInit();
+        ParentContainerInit parentContainer = new ParentContainerInit();
 
         Assertions.assertThat(parentContainer.childContainer).isNull();
 
@@ -121,7 +121,7 @@ public class FluentInjectorContainerTest {
 
         private final FluentControl control;
 
-        public ChildContainerConstructorInit(final FluentControl control) {
+        public ChildContainerConstructorInit(FluentControl control) {
             this.control = control;
         }
     }
@@ -132,14 +132,14 @@ public class FluentInjectorContainerTest {
         @Page
         private ChildContainerConstructorInit childContainer;
 
-        public ParentContainerConstructorInit(final FluentControl control) {
+        public ParentContainerConstructorInit(FluentControl control) {
             this.control = control;
         }
     }
 
     @Test
     public void testInjectConstructorInitialise() {
-        final ParentContainerConstructorInit parentContainer = new ParentContainerConstructorInit(fluentAdapter);
+        ParentContainerConstructorInit parentContainer = new ParentContainerConstructorInit(fluentAdapter);
 
         Assertions.assertThat(parentContainer.childContainer).isNull();
 

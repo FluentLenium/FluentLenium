@@ -10,7 +10,7 @@ public class SharedWebDriverContainerShutdownHook extends Thread {
      *
      * @param name thread name
      */
-    public SharedWebDriverContainerShutdownHook(final String name) {
+    public SharedWebDriverContainerShutdownHook(String name) {
         super(name);
     }
 

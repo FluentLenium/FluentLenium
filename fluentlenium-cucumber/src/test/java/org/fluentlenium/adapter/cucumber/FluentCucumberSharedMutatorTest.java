@@ -18,11 +18,11 @@ public class FluentCucumberSharedMutatorTest {
 
     @Test
     public void testCucumberMutator() {
-        final Class<?> testClass = Object.class;
-        final String testName = "test";
-        final DriverLifecycle driverLifecycle = DriverLifecycle.JVM;
+        Class<?> testClass = Object.class;
+        String testName = "test";
+        DriverLifecycle driverLifecycle = DriverLifecycle.JVM;
 
-        final SharedMutator.EffectiveParameters<?> parameters = sharedMutator
+        SharedMutator.EffectiveParameters<?> parameters = sharedMutator
                 .getEffectiveParameters(testClass, testName, driverLifecycle);
 
         Assertions.assertThat(parameters.getTestClass()).isNull();
@@ -32,9 +32,9 @@ public class FluentCucumberSharedMutatorTest {
 
     @Test
     public void testCucumberMutatorWithClassLifecycle() {
-        final Class<?> testClass = Object.class;
-        final String testName = "test";
-        final DriverLifecycle driverLifecycle = DriverLifecycle.CLASS;
+        Class<?> testClass = Object.class;
+        String testName = "test";
+        DriverLifecycle driverLifecycle = DriverLifecycle.CLASS;
 
         Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override

@@ -47,13 +47,13 @@ public class AfterOrderTest {
         }
 
         @Override
-        protected void finished(final Class<?> testClass, final String testName) {
+        protected void finished(Class<?> testClass, String testName) {
             Assertions.assertThat(after).isTrue();
             Assertions.assertThat(junitAfter).isTrue();
         }
 
         @Override
-        protected void failed(final Throwable e, final Class<?> testClass, final String testName) {
+        protected void failed(Throwable e, Class<?> testClass, String testName) {
             Assertions.assertThat(after).isFalse();
             Assertions.assertThat(junitAfter).isTrue();
         }
@@ -61,7 +61,7 @@ public class AfterOrderTest {
 
     @Test
     public void testFluentTest() {
-        final Result result = JUnitCore.runClasses(AfterOrderTestInternal.class);
+        Result result = JUnitCore.runClasses(AfterOrderTestInternal.class);
         assertThat(result.getFailures()).hasSize(1);
         assertThat(result.getFailures().get(0).getException()).isInstanceOf(NoSuchElementException.class);
     }

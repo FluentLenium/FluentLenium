@@ -13,7 +13,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
      *
      * @param element underlying element
      */
-    public WebElementConditions(final FluentWebElement element) {
+    public WebElementConditions(FluentWebElement element) {
         super(element);
     }
 
@@ -23,12 +23,12 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
      * @param element  underlying element
      * @param negation negation value
      */
-    public WebElementConditions(final FluentWebElement element, final boolean negation) {
+    public WebElementConditions(FluentWebElement element, boolean negation) {
         super(element, negation);
     }
 
     @Override
-    protected AbstractObjectConditions<FluentWebElement> newInstance(final boolean negationValue) {
+    protected AbstractObjectConditions<FluentWebElement> newInstance(boolean negationValue) {
         return new WebElementConditions(object, negationValue);
     }
 
@@ -69,17 +69,17 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public boolean attribute(final String name, final String value) {
+    public boolean attribute(String name, String value) {
         return attribute(name).equalTo(value);
     }
 
     @Override
-    public StringConditions attribute(final String name) {
+    public StringConditions attribute(String name) {
         return new StringConditionsImpl(object.attribute(name), negation);
     }
 
     @Override
-    public boolean id(final String id) {
+    public boolean id(String id) {
         return id().equalTo(id);
     }
 
@@ -89,7 +89,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public boolean name(final String name) {
+    public boolean name(String name) {
         return name().equalTo(name);
     }
 
@@ -99,7 +99,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public boolean tagName(final String tagName) {
+    public boolean tagName(String tagName) {
         return tagName().equalTo(tagName);
     }
 
@@ -109,7 +109,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public boolean value(final String value) {
+    public boolean value(String value) {
         return value().equalTo(value);
     }
 
@@ -119,7 +119,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public boolean text(final String text) {
+    public boolean text(String text) {
         return text().equalTo(text);
     }
 
@@ -129,7 +129,7 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public boolean textContent(final String anotherString) {
+    public boolean textContent(String anotherString) {
         return textContent().equalTo(anotherString);
     }
 
@@ -144,16 +144,16 @@ public class WebElementConditions extends AbstractObjectConditions<FluentWebElem
     }
 
     @Override
-    public boolean className(final String className) {
+    public boolean className(String className) {
 
-        final FluentWebElement element = getActualObject();
-        final String classAttribute = element.attribute("class");
+        FluentWebElement element = getActualObject();
+        String classAttribute = element.attribute("class");
 
         if (classAttribute == null) {
             return false;
         }
 
-        final String[] classes = classAttribute.split(" ");
+        String[] classes = classAttribute.split(" ");
         return Arrays.asList(classes).contains(className);
     }
 }

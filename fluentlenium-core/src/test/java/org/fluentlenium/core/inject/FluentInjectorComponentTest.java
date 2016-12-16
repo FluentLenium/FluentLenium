@@ -57,8 +57,7 @@ public class FluentInjectorComponentTest {
         @NoInject
         private WebElement noInject;
 
-        public SomeChildComponent(final WebElement webElement, final FluentControl fluentControl,
-                final ComponentInstantiator instantiator) {
+        public SomeChildComponent(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
     }
@@ -69,8 +68,7 @@ public class FluentInjectorComponentTest {
 
         private SomeChildComponent childComponent;
 
-        public SomeComponent(final WebElement webElement, final FluentControl fluentControl,
-                final ComponentInstantiator instantiator) {
+        public SomeComponent(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
     }
@@ -81,11 +79,11 @@ public class FluentInjectorComponentTest {
 
     @Test
     public void testHierarchy() {
-        final Container container = new Container();
+        Container container = new Container();
 
-        final WebElement component = Mockito.mock(WebElement.class);
-        final WebElement childComponent = Mockito.mock(WebElement.class);
-        final WebElement childWebElement = Mockito.mock(WebElement.class);
+        WebElement component = Mockito.mock(WebElement.class);
+        WebElement childComponent = Mockito.mock(WebElement.class);
+        WebElement childWebElement = Mockito.mock(WebElement.class);
 
         when(webDriver.findElement(new ByIdOrName("component"))).thenReturn(component);
         when(component.findElement(new ByIdOrName("childComponent"))).thenReturn(childComponent);
@@ -113,11 +111,11 @@ public class FluentInjectorComponentTest {
 
     @Test
     public void testLazyness() {
-        final Container container = new Container();
+        Container container = new Container();
 
-        final WebElement component = Mockito.mock(WebElement.class);
-        final WebElement childComponent = Mockito.mock(WebElement.class);
-        final WebElement childWebElement = Mockito.mock(WebElement.class);
+        WebElement component = Mockito.mock(WebElement.class);
+        WebElement childComponent = Mockito.mock(WebElement.class);
+        WebElement childWebElement = Mockito.mock(WebElement.class);
 
         when(webDriver.findElement(new ByIdOrName("component"))).thenReturn(component);
         when(component.findElement(new ByIdOrName("childComponent"))).thenReturn(childComponent);

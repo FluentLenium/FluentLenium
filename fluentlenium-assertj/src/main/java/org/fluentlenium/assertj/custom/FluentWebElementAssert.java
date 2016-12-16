@@ -16,7 +16,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      *
      * @param actual actual element
      */
-    public FluentWebElementAssert(final FluentWebElement actual) {
+    public FluentWebElementAssert(FluentWebElement actual) {
         super(actual, FluentWebElementAssert.class);
     }
 
@@ -116,7 +116,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @param errorMessage error message
      * @see #failWithMessage(String, Object...)
      */
-    protected void failWithMessage(final String errorMessage) {
+    protected void failWithMessage(String errorMessage) {
         super.failWithMessage(errorMessage.replaceAll("(?:[^%]|\\A)%(?:[^%]|\\z)", "%%"));
     }
 
@@ -126,8 +126,8 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @param textToFind text to find
      * @return {@code this} assertion object.
      */
-    public FluentWebElementAssert hasText(final String textToFind) {
-        final String actualText = actual.text();
+    public FluentWebElementAssert hasText(String textToFind) {
+        String actualText = actual.text();
         if (!actualText.contains(textToFind)) {
             failWithMessage("The element does not contain the text: " + textToFind + " . Actual text found : " + actualText);
         }
@@ -141,11 +141,10 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @param regexToBeMatched regex to be matched
      * @return {@code this} assertion object.
      */
-    public FluentWebElementAssert hasTextMatching(final String regexToBeMatched) {
-        final String actualText = actual.text();
+    public FluentWebElementAssert hasTextMatching(String regexToBeMatched) {
+        String actualText = actual.text();
         if (!actualText.matches(regexToBeMatched)) {
-            failWithMessage(
-                    "The element does not match the regex: " + regexToBeMatched + " . Actual text found : " + actualText);
+            failWithMessage("The element does not match the regex: " + regexToBeMatched + " . Actual text found : " + actualText);
         }
 
         return this;
@@ -157,7 +156,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @param textToFind text to find
      * @return {@code this} assertion object.
      */
-    public FluentWebElementAssert hasNotText(final String textToFind) {
+    public FluentWebElementAssert hasNotText(String textToFind) {
         if (actual.text().contains(textToFind)) {
             failWithMessage("The element contain the text: " + textToFind);
         }
@@ -179,8 +178,8 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @param idToFind id to find
      * @return {@code this} assertion object.
      */
-    public FluentWebElementAssert hasId(final String idToFind) {
-        final String actualId = actual.id();
+    public FluentWebElementAssert hasId(String idToFind) {
+        String actualId = actual.id();
         if (!actualId.equals(idToFind)) {
             failWithMessage("The element does not have the id: " + idToFind + " . Actual id found : " + actualId);
         }
@@ -193,16 +192,16 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @param classToFind class to find
      * @return {@code this} assertion object.
      */
-    public FluentWebElementAssert hasClass(final String classToFind) {
-        final String actualClasses = actual.attribute("class");
+    public FluentWebElementAssert hasClass(String classToFind) {
+        String actualClasses = actual.attribute("class");
         if (!getClasses(actualClasses).contains(classToFind)) {
             failWithMessage("The element does not have the class: " + classToFind + " . Actual class found : " + actualClasses);
         }
         return this;
     }
 
-    private List<String> getClasses(final String classString) {
-        final String[] primitiveList = classString.split(" ");
+    private List<String> getClasses(String classString) {
+        String[] primitiveList = classString.split(" ");
         return Arrays.asList(primitiveList);
     }
 }

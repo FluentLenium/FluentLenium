@@ -16,8 +16,8 @@ public class FluentListSizeBuilder {
      * @param size       size of the list
      * @param listAssert assertion
      */
-    public FluentListSizeBuilder(final int size, final FluentListAssert listAssert) {
-        this.actualSize = size;
+    public FluentListSizeBuilder(int size, FluentListAssert listAssert) {
+        actualSize = size;
         this.listAssert = listAssert;
     }
 
@@ -27,11 +27,11 @@ public class FluentListSizeBuilder {
      * @param size expected size
      * @return ${code this} assertion object.
      */
-    public FluentListAssert lessThan(final int size) {
-        if (this.actualSize >= size) {
-            this.listAssert.failWithMessage(ACTUAL_SIZE + actualSize + " is not less than: " + size);
+    public FluentListAssert lessThan(int size) {
+        if (actualSize >= size) {
+            listAssert.failWithMessage(ACTUAL_SIZE + actualSize + " is not less than: " + size);
         }
-        return this.listAssert;
+        return listAssert;
     }
 
     /**
@@ -40,11 +40,11 @@ public class FluentListSizeBuilder {
      * @param size expected size
      * @return ${code this} assertion object.
      */
-    public Object lessThanOrEqualTo(final int size) {
-        if (this.actualSize > size) {
-            this.listAssert.failWithMessage(ACTUAL_SIZE + actualSize + " is not less than or equal to: " + size);
+    public Object lessThanOrEqualTo(int size) {
+        if (actualSize > size) {
+            listAssert.failWithMessage(ACTUAL_SIZE + actualSize + " is not less than or equal to: " + size);
         }
-        return this.listAssert;
+        return listAssert;
     }
 
     /**
@@ -53,11 +53,11 @@ public class FluentListSizeBuilder {
      * @param size expected size
      * @return ${code this} assertion object.
      */
-    public FluentListAssert greaterThan(final int size) {
-        if (this.actualSize <= size) {
-            this.listAssert.failWithMessage(ACTUAL_SIZE + actualSize + " is not greater than: " + size);
+    public FluentListAssert greaterThan(int size) {
+        if (actualSize <= size) {
+            listAssert.failWithMessage(ACTUAL_SIZE + actualSize + " is not greater than: " + size);
         }
-        return this.listAssert;
+        return listAssert;
     }
 
     /**
@@ -66,11 +66,11 @@ public class FluentListSizeBuilder {
      * @param size expected size
      * @return ${code this} assertion object.
      */
-    public Object greaterThanOrEqualTo(final int size) {
-        if (this.actualSize < size) {
-            this.listAssert.failWithMessage(ACTUAL_SIZE + actualSize + " is not greater than or equal to: " + size);
+    public Object greaterThanOrEqualTo(int size) {
+        if (actualSize < size) {
+            listAssert.failWithMessage(ACTUAL_SIZE + actualSize + " is not greater than or equal to: " + size);
         }
-        return this.listAssert;
+        return listAssert;
     }
 
 }

@@ -1,13 +1,13 @@
 package org.fluentlenium.core.conditions;
 
-import static java.util.stream.Collectors.toList;
-
-import java.util.function.Function;
-import java.util.function.Predicate;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Base condition for list of objects
@@ -27,8 +27,8 @@ public class BaseObjectListConditions<T, C extends Conditions<T>> implements Con
      * @param objectGetter     getter of the underlying object
      * @param conditionsGetter getter of the underlying object conditions
      */
-    public BaseObjectListConditions(final Conditions<FluentWebElement> conditions,
-            final Function<FluentWebElement, T> objectGetter, final Function<FluentWebElement, C> conditionsGetter) {
+    public BaseObjectListConditions(Conditions<FluentWebElement> conditions, Function<FluentWebElement, T> objectGetter,
+            Function<FluentWebElement, C> conditionsGetter) {
         this.conditions = conditions;
         this.objectGetter = objectGetter;
         this.conditionsGetter = conditionsGetter;
@@ -37,7 +37,7 @@ public class BaseObjectListConditions<T, C extends Conditions<T>> implements Con
     @Override
     public List<T> getActualObject() {
         if (conditions instanceof ListConditionsElements) {
-            final List<? extends FluentWebElement> elements = ((ListConditionsElements) conditions).getActualElements();
+            List<? extends FluentWebElement> elements = ((ListConditionsElements) conditions).getActualElements();
             return elements.stream().map(objectGetter).collect(toList());
         }
         return new ArrayList<>();
@@ -49,7 +49,7 @@ public class BaseObjectListConditions<T, C extends Conditions<T>> implements Con
      * @param predicate predicate
      * @return true if the predicate is verified
      */
-    public boolean verify(final Predicate<T> predicate) {
-        return this.conditions.verify(input -> predicate.test(objectGetter.apply(input)));
+    public boolean verify(Predicate<T> predicate) {
+        return conditions.verify(input -> predicate.test(objectGetter.apply(input)));
     }
 }

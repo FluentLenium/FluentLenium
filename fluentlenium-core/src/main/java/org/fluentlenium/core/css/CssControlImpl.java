@@ -16,8 +16,8 @@ public class CssControlImpl implements CssControl {
      * @param javascriptControl javascript control
      * @param awaitControl      await control
      */
-    public CssControlImpl(final JavascriptControl javascriptControl, final AwaitControl awaitControl) {
-        this.support = new CssSupportImpl(javascriptControl, awaitControl);
+    public CssControlImpl(JavascriptControl javascriptControl, AwaitControl awaitControl) {
+        support = new CssSupportImpl(javascriptControl, awaitControl);
     }
 
     @Override

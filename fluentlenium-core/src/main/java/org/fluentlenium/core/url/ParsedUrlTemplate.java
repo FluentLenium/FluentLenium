@@ -21,7 +21,7 @@ public class ParsedUrlTemplate {
      * @param parameters      parameter values
      * @param queryParameters query parameter values
      */
-    ParsedUrlTemplate(final boolean matches, final Map<String, String> parameters, final List<NameValuePair> queryParameters) {
+    ParsedUrlTemplate(boolean matches, Map<String, String> parameters, List<NameValuePair> queryParameters) {
         this.matches = matches;
         this.parameters = Collections.unmodifiableMap(parameters);
         this.queryParameters = queryParameters;

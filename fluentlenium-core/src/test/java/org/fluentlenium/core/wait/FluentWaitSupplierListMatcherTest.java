@@ -87,8 +87,7 @@ public class FluentWaitSupplierListMatcherTest {
 
     @Test
     public void isEnabled() {
-        final FluentListConditions matcher = wait
-                .untilElements(() -> instantiator.newFluentList(fluentWebElements));
+        FluentListConditions matcher = wait.untilElements(() -> instantiator.newFluentList(fluentWebElements));
         assertThatThrownBy(() -> matcher.enabled()).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement1, atLeastOnce()).enabled();

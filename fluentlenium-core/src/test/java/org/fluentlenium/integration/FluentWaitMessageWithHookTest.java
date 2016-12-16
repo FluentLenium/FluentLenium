@@ -50,7 +50,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     @Test
     public void testDisabled() {
         goTo(DEFAULT_URL);
-        final FluentWebElement first = $("#disabled").first();
+        FluentWebElement first = $("#disabled").first();
         assertThat(first.toString()).isEqualTo("By.cssSelector: #disabled (first) (Lazy Element)");
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -79,7 +79,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     @Test
     public void testDisabledInjection() {
         goTo(DEFAULT_URL);
-        final FluentWebElement first = disabled;
+        FluentWebElement first = disabled;
         assertThat(first.toString()).isEqualTo("By.cssSelector: #disabled (first) (Lazy Element)");
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -108,7 +108,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     @Test
     public void testDisabledDefaultLabelInjection() {
         goTo(DEFAULT_URL);
-        final FluentWebElement first = disabledDefaultLabel;
+        FluentWebElement first = disabledDefaultLabel;
         assertThat(first.toString()).isEqualTo("FluentWaitMessageWithHookTest.disabledDefaultLabel (Lazy Element)");
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -138,7 +138,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     @Test
     public void testDisabledCustomLabelInjection() {
         goTo(DEFAULT_URL);
-        final FluentWebElement first = disabledCustomLabel;
+        FluentWebElement first = disabledCustomLabel;
         assertThat(first.toString()).isEqualTo("custom [hint] (Lazy Element)");
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -165,7 +165,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     @Test
     public void testDisabledList() {
         goTo(DEFAULT_URL);
-        final FluentList<FluentWebElement> list = $("#disabled");
+        FluentList<FluentWebElement> list = $("#disabled");
         assertThat(list.toString()).isEqualTo("By.cssSelector: #disabled (Lazy Element List)");
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -194,7 +194,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     @Test
     public void testDisabledListInjection() {
         goTo(DEFAULT_URL);
-        final FluentList<FluentWebElement> list = disabledList;
+        FluentList<FluentWebElement> list = disabledList;
         assertThat(list.toString()).isEqualTo("By.cssSelector: #disabled (Lazy Element List)");
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -223,7 +223,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     @Test
     public void testDisabledDefaultLabelListInjection() {
         goTo(DEFAULT_URL);
-        final FluentList<FluentWebElement> list = disabledDefaultLabelList;
+        FluentList<FluentWebElement> list = disabledDefaultLabelList;
         assertThat(list.toString()).isEqualTo("FluentWaitMessageWithHookTest.disabledDefaultLabelList (Lazy Element List)");
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -254,7 +254,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     @Test
     public void testDisabledCustomLabelListInjection() {
         goTo(DEFAULT_URL);
-        final FluentList<FluentWebElement> list = disabledCustomLabelList;
+        FluentList<FluentWebElement> list = disabledCustomLabelList;
         assertThat(list.toString()).isEqualTo("custom [hint] (Lazy Element List)");
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -282,7 +282,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     @Test
     public void testMessageContext() {
         goTo(DEFAULT_URL);
-        final FluentWebElement select = $("#select").first();
+        FluentWebElement select = $("#select").first();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -297,7 +297,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     @Test
     public void testMessageContextWithLabel() {
         goTo(DEFAULT_URL);
-        final FluentWebElement select = $("#select").first().withLabel("My Value Select").withLabelHint("hint1", "hint2");
+        FluentWebElement select = $("#select").first().withLabel("My Value Select").withLabelHint("hint1", "hint2");
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -312,7 +312,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     @Test
     public void testMessageContextWithLabelBefore() {
         goTo(DEFAULT_URL);
-        final FluentWebElement select = $("#select").withLabel("My Value Select").withLabelHint("hint1", "hint2").first();
+        FluentWebElement select = $("#select").withLabel("My Value Select").withLabelHint("hint1", "hint2").first();
 
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -327,7 +327,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     @Test
     public void testNotFound() {
         goTo(DEFAULT_URL);
-        final FluentWebElement first = $("#not-found").first();
+        FluentWebElement first = $("#not-found").first();
         assertThat(first.toString()).isEqualTo("By.cssSelector: #not-found (first) (Lazy Element)");
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override
@@ -341,7 +341,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     @Test
     public void testNotFoundList() {
         goTo(DEFAULT_URL);
-        final FluentList<FluentWebElement> list = $("#not-found");
+        FluentList<FluentWebElement> list = $("#not-found");
         assertThat(list.toString()).isEqualTo("By.cssSelector: #not-found (Lazy Element List)");
         assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
             @Override

@@ -1,20 +1,19 @@
 package org.fluentlenium.core.conditions;
 
-import java.util.function.Predicate;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class IntegerConditionsTest {
 
-    private void numberImpl(final int value) {
-        final IntegerConditions condition = new IntegerConditionsImpl(value);
+    private void numberImpl(int value) {
+        IntegerConditions condition = new IntegerConditionsImpl(value);
 
         assertConditions(condition, value);
         assertNotConditions(condition.not(), value);
     }
 
-    static void assertConditions(final IntegerConditions conditions, final int value) { // NOPMD CommentDefaultAccessModifier
+    static void assertConditions(IntegerConditions conditions, int value) { // NOPMD CommentDefaultAccessModifier
         assertThat(conditions.verify(input -> input == value)).isTrue();
 
         assertThat(conditions.equalTo(value - 1)).isFalse();
@@ -38,7 +37,7 @@ public class IntegerConditionsTest {
         assertThat(conditions.lessThan(value + 1)).isTrue();
     }
 
-    static void assertNotConditions(final IntegerConditions conditions, final int value) { // NOPMD CommentDefaultAccessModifier
+    static void assertNotConditions(IntegerConditions conditions, int value) { // NOPMD CommentDefaultAccessModifier
         assertThat(conditions.verify(input -> input == value)).isFalse();
 
         assertThat(conditions.equalTo(value - 1)).isTrue();

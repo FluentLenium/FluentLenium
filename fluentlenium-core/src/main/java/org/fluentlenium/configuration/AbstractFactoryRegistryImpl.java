@@ -28,16 +28,16 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
      * @param factoryType           type of factories
      * @param reflectiveFactoryType type of reflective factories
      */
-    public AbstractFactoryRegistryImpl(final Class<T> factoryType, final Class<R> reflectiveFactoryType) {
+    public AbstractFactoryRegistryImpl(Class<T> factoryType, Class<R> reflectiveFactoryType) {
         this.factoryType = factoryType;
         this.reflectiveFactoryType = reflectiveFactoryType;
-        final Iterable<Class<? extends T>> factoryClasses = ClassIndex.getSubclasses(factoryType);
+        Iterable<Class<? extends T>> factoryClasses = ClassIndex.getSubclasses(factoryType);
         L:
-        for (final Class<? extends T> factoryClass : factoryClasses) {
+        for (Class<? extends T> factoryClass : factoryClasses) {
             if (factoryClass.isAnnotationPresent(IndexIgnore.class)) {
                 continue;
             }
-            for (final Class<?> iface : factoryClass.getInterfaces()) {
+            for (Class<?> iface : factoryClass.getInterfaces()) {
                 if (iface.isAnnotationPresent(IndexIgnore.class)) {
                     continue L;
                 }
@@ -48,12 +48,12 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
             if (!Modifier.isPublic(factoryClass.getModifiers())) {
                 continue;
             }
-            final T factory;
+            T factory;
             try {
                 factory = factoryClass.getConstructor().newInstance();
-            } catch (final NoSuchMethodException e) {
+            } catch (NoSuchMethodException e) {
                 throw new ConfigurationException(factoryClass + " should have a public default constructor.", e);
-            } catch (final Exception e) {
+            } catch (Exception e) {
                 throw new ConfigurationException(factoryClass + " can't be instantiated.", e);
             }
             register(factory);
@@ -66,24 +66,24 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
      * @return default factory
      */
     public T getDefault() {
-        final List<T> factoriesList;
+        List<T> factoriesList;
         synchronized (this) {
-            factoriesList = new ArrayList<>(this.factories.values());
+            factoriesList = new ArrayList<>(factories.values());
         }
         Collections.sort(factoriesList, new Comparator<T>() {
             @Override
-            public int compare(final T o1, final T o2) {
-                final FactoryPriority annotation1 = o1.getClass().getAnnotation(FactoryPriority.class);
-                final int p1 = annotation1 == null ? 0 : annotation1.value();
+            public int compare(T o1, T o2) {
+                FactoryPriority annotation1 = o1.getClass().getAnnotation(FactoryPriority.class);
+                int p1 = annotation1 == null ? 0 : annotation1.value();
 
-                final FactoryPriority annotation2 = o2.getClass().getAnnotation(FactoryPriority.class);
-                final int p2 = annotation2 == null ? 0 : annotation2.value();
+                FactoryPriority annotation2 = o2.getClass().getAnnotation(FactoryPriority.class);
+                int p2 = annotation2 == null ? 0 : annotation2.value();
 
                 return Integer.compare(p2, p1);
             }
         });
-        final List<T> filteredFactories = new ArrayList<>();
-        for (final T factory : factoriesList) {
+        List<T> filteredFactories = new ArrayList<>();
+        for (T factory : factoriesList) {
             if (factory instanceof ReflectiveFactory) {
                 if (((ReflectiveFactory) factory).isAvailable()) {
                     filteredFactories.add(factory);
@@ -109,14 +109,14 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
      * @param name name of the factory
      * @return factory
      */
-    public T get(final String name) {
+    public T get(String name) {
         if (name == null) {
             return getDefault();
         }
         synchronized (this) {
             T factory = factories.get(name);
             if (factory == null) {
-                final R reflectiveFactory = newReflectiveInstance(name);
+                R reflectiveFactory = newReflectiveInstance(name);
                 if (reflectiveFactory.isAvailable()) {
                     factories.put(name, (T) reflectiveFactory);
                     factory = (T) reflectiveFactory;
@@ -153,11 +153,11 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
      *
      * @param factory factory to register
      */
-    public final void register(final T factory) {
-        final FactoryName annotation = factory.getClass().getAnnotation(FactoryName.class);
-        final String annotationName = annotation == null ? null : annotation.value();
+    public final void register(T factory) {
+        FactoryName annotation = factory.getClass().getAnnotation(FactoryName.class);
+        String annotationName = annotation == null ? null : annotation.value();
 
-        final List<String> names = new ArrayList<>();
+        List<String> names = new ArrayList<>();
         if (annotationName != null) {
             names.add(annotationName);
         }
@@ -175,12 +175,12 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
         }
     }
 
-    private void registerImpl(final List<String> names, final T factory) {
+    private void registerImpl(List<String> names, T factory) {
         boolean registered = false;
-        for (final String name : names) {
+        for (String name : names) {
             if (!registered) {
                 if (factories.containsKey(name)) {
-                    final T exitingFactory = factories.get(name);
+                    T exitingFactory = factories.get(name);
                     if (!exitingFactory.getClass().isAnnotationPresent(DefaultFactory.class)) {
                         throw new ConfigurationException(
                                 "A factory is already registered with this name: " + name + " (" + factories.get(name) + ")");

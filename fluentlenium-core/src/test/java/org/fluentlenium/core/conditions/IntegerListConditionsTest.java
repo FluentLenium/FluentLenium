@@ -1,8 +1,5 @@
 package org.fluentlenium.core.conditions;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
-import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -45,9 +42,9 @@ public class IntegerListConditionsTest {
 
     @Before
     public void before() {
-        final FluentAdapter fluentAdapter = new FluentAdapter();
+        FluentAdapter fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(driver);
-        final DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
+        DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
 
         fluentWebElement1 = new FluentWebElement(webElement1, fluentAdapter, instantiator);
         fluentWebElement2 = new FluentWebElement(webElement2, fluentAdapter, instantiator);
@@ -63,11 +60,11 @@ public class IntegerListConditionsTest {
 
     @Test
     public void fromEachElementConditions() {
-        final EachElementConditions conditions = new EachElementConditions(
+        EachElementConditions conditions = new EachElementConditions(
                 Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
-        final IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions,
-                input -> Integer.valueOf(input.id()));
+        IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions,
+                    input -> Integer.valueOf(input.id()));
 
         when(webElement1.getAttribute("id")).thenReturn("1");
         when(webElement2.getAttribute("id")).thenReturn("1");
@@ -90,11 +87,11 @@ public class IntegerListConditionsTest {
 
     @Test
     public void fromAtLeastOneElementConditions() {
-        final AtLeastOneElementConditions conditions = new AtLeastOneElementConditions(
+        AtLeastOneElementConditions conditions = new AtLeastOneElementConditions(
                 Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
-        final IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions,
-                input -> Integer.valueOf(input.id()));
+        IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions,
+                    input -> Integer.valueOf(input.id()));
 
         when(webElement1.getAttribute("id")).thenReturn("1");
         when(webElement2.getAttribute("id")).thenReturn("1");

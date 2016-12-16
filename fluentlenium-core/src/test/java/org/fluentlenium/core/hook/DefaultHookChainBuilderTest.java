@@ -1,6 +1,5 @@
 package org.fluentlenium.core.hook;
 
-import java.util.function.Supplier;
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentControl;
@@ -18,6 +17,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
@@ -49,9 +49,9 @@ public class DefaultHookChainBuilderTest {
         instantiator = new DefaultComponentInstantiator(fluentAdapter);
         hookChainBuilder = new DefaultHookChainBuilder(fluentAdapter, instantiator) {
             @Override
-            protected FluentHook<?> newInstance(final Class<? extends FluentHook<?>> hookClass, final FluentControl fluentControl,
-                    final ComponentInstantiator instantiator, final Supplier<WebElement> elementSupplier,
-                    final Supplier<ElementLocator> locatorSupplier, final Supplier<String> toStringSupplier, final Object options)
+            protected FluentHook<?> newInstance(Class<? extends FluentHook<?>> hookClass, FluentControl fluentControl,
+                    ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
+                    Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, Object options)
                     throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
                 return spy(super.newInstance(hookClass, fluentControl, instantiator, elementSupplier, locatorSupplier,
                         toStringSupplier, options));
@@ -61,14 +61,13 @@ public class DefaultHookChainBuilderTest {
 
     @Test
     public void testBuildHook() {
-        final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
+        List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
 
         hookDefinitions.add(new HookDefinition<>(NanoHook.class));
         hookDefinitions.add(new HookDefinition<>(NanoHook.class, new NanoHookOptions("option")));
         hookDefinitions.add(new HookDefinition<>(NanoHook.class));
 
-        final List<FluentHook> fluentHooks = hookChainBuilder
-                .build(() -> element, () -> locator, () -> "toString", hookDefinitions);
+        List<FluentHook> fluentHooks = hookChainBuilder.build(() -> element, () -> locator, () -> "toString", hookDefinitions);
 
         Assertions.assertThat(fluentHooks).hasSize(hookDefinitions.size());
 
@@ -115,20 +114,20 @@ public class DefaultHookChainBuilderTest {
 
     @Test
     public void testInvalidConstructorHook() {
-        final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
+        List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
 
         hookDefinitions.add(new HookDefinition<>(InvalidConstructorHook.class));
 
-        Assertions.assertThatThrownBy(() -> hookChainBuilder.build(() -> element, () -> locator, () -> "toString",
-                hookDefinitions)).isExactlyInstanceOf(HookException.class)
-                    .hasMessage("An error has occurred with a defined hook.");
+        Assertions
+                .assertThatThrownBy(() -> hookChainBuilder.build(() -> element, () -> locator, () -> "toString", hookDefinitions))
+                .isExactlyInstanceOf(HookException.class).hasMessage("An error has occurred with a defined hook.");
 
     }
 
     private static class FailingConstructorHook extends BaseHook<Object> {
-        FailingConstructorHook(final FluentControl fluentControl, final ComponentInstantiator instantiator,
-                final Supplier<WebElement> elementSupplier, final Supplier<ElementLocator> locatorSupplier,
-                final Supplier<String> toStringSupplier, final Object options) {
+        FailingConstructorHook(FluentControl fluentControl, ComponentInstantiator instantiator,
+                Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier,
+                Object options) {
             super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
             throw new IllegalStateException();
         }
@@ -136,13 +135,13 @@ public class DefaultHookChainBuilderTest {
 
     @Test
     public void testFailingConstructorHook() {
-        final List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
+        List<HookDefinition<?>> hookDefinitions = new ArrayList<>();
 
         hookDefinitions.add(new HookDefinition<>(FailingConstructorHook.class));
 
-        Assertions.assertThatThrownBy(() -> hookChainBuilder.build(() -> element, () -> locator, () -> "toString",
-                hookDefinitions)).isExactlyInstanceOf(HookException.class)
-                    .hasMessage("An error has occurred with a defined hook.");
+        Assertions
+                .assertThatThrownBy(() -> hookChainBuilder.build(() -> element, () -> locator, () -> "toString", hookDefinitions))
+                .isExactlyInstanceOf(HookException.class).hasMessage("An error has occurred with a defined hook.");
 
     }
 }

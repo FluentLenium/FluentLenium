@@ -1,6 +1,5 @@
 package org.fluentlenium.core.wait;
 
-import java.util.function.Predicate;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.conditions.RectangleConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
@@ -54,7 +53,7 @@ public class FluentWaitRectangleMatcherTest {
     public void testRectangle() {
         when(element.getRect()).thenReturn(new Rectangle(1, 2, 100, 200));
 
-        final RectangleConditions rectangleConditions = wait.until(fluentWebElement).rectangle();
+        RectangleConditions rectangleConditions = wait.until(fluentWebElement).rectangle();
 
         rectangleConditions.verify(input -> true);
 

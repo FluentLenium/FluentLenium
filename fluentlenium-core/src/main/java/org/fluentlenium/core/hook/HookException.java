@@ -9,7 +9,7 @@ public class HookException extends RuntimeException {
      *
      * @param cause exception cause
      */
-    public HookException(final Throwable cause) {
+    public HookException(Throwable cause) {
         super("An error has occurred with a defined hook.", cause);
     }
 }

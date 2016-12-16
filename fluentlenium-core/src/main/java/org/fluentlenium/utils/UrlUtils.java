@@ -58,7 +58,7 @@ public final class UrlUtils { // NOPMD CyclomaticComplexity
      * @param uriSpec     current URI
      * @return Sanitized base url
      */
-    public static String sanitizeBaseUrl(final String baseUriSpec, final String uriSpec) {
+    public static String sanitizeBaseUrl(String baseUriSpec, String uriSpec) {
         if (baseUriSpec == null) {
             return null;
         }
@@ -68,14 +68,14 @@ public final class UrlUtils { // NOPMD CyclomaticComplexity
         try {
             baseUri = ensureScheme(baseUri, "http");
 
-            final URI uri = uriSpec == null ? null : URI.create(uriSpec);
-            final String scheme = uri == null || !Objects.equals(baseUri.getAuthority(), uri.getAuthority()) || !Arrays
+            URI uri = uriSpec == null ? null : URI.create(uriSpec);
+            String scheme = uri == null || !Objects.equals(baseUri.getAuthority(), uri.getAuthority()) || !Arrays
                     .asList(new String[] {"http", "https"}).contains(uri.getScheme()) ? baseUri.getScheme() : uri.getScheme();
 
             if (!scheme.equals(baseUri.getScheme())) {
                 return new URIBuilder(baseUri).setScheme(scheme).build().toString();
             }
-        } catch (final URISyntaxException e) {
+        } catch (URISyntaxException e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         }
 
@@ -90,7 +90,7 @@ public final class UrlUtils { // NOPMD CyclomaticComplexity
      * @return uri with scheme defined
      * @throws URISyntaxException
      */
-    private static URI ensureScheme(final URI uri, final String defaultScheme) throws URISyntaxException {
+    private static URI ensureScheme(URI uri, String defaultScheme) throws URISyntaxException {
         String fixedBaseUriSpec = uri.toString();
         if (uri.getScheme() == null) {
             while (!fixedBaseUriSpec.startsWith("//")) {

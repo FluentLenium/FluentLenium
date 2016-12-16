@@ -15,8 +15,8 @@ public class WindowActionsTest extends IntegrationFluentTest {
     public void openNewAndSwitchIT() {
         goTo(DEFAULT_URL);
 
-        final String hWnd = getDriver().getWindowHandle();
-        final String wndTitle = getDriver().getTitle();
+        String hWnd = getDriver().getWindowHandle();
+        String wndTitle = getDriver().getTitle();
 
         assertThat(getDriver().getWindowHandles().size()).isEqualTo(1);
 
@@ -30,7 +30,7 @@ public class WindowActionsTest extends IntegrationFluentTest {
     @Test
     public void clickAndOpenNewAndCloseCurrentIT() {
         goTo(DEFAULT_URL);
-        final String hWnd = getDriver().getWindowHandle();
+        String hWnd = getDriver().getWindowHandle();
         assertThat(getDriver().getWindowHandles().size()).isEqualTo(1);
 
         window().clickAndOpenNew(el("#linkToAlertPage"));

@@ -1,7 +1,5 @@
 package org.fluentlenium.integration;
 
-import java.util.function.Predicate;
-import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
 import org.junit.Test;

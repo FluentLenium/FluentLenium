@@ -26,15 +26,15 @@ public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, Facto
      * @param capabilitiesClassName capabilities class name
      * @param args                  capabilities class constructor arguments
      */
-    public ReflectiveCapabilitiesFactory(final String name, final String capabilitiesClassName, final Object... args) {
+    public ReflectiveCapabilitiesFactory(String name, String capabilitiesClassName, Object... args) {
         this.name = name;
         this.capabilitiesClassName = capabilitiesClassName;
         this.args = args;
         try {
-            this.capabilitiesClass = (Class<? extends Capabilities>) Class.forName(capabilitiesClassName);
-            this.available = Capabilities.class.isAssignableFrom(this.capabilitiesClass);
-        } catch (final ClassNotFoundException e) {
-            this.available = false;
+            capabilitiesClass = (Class<? extends Capabilities>) Class.forName(capabilitiesClassName);
+            available = Capabilities.class.isAssignableFrom(capabilitiesClass);
+        } catch (ClassNotFoundException e) {
+            available = false;
         }
     }
 
@@ -45,13 +45,12 @@ public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, Facto
      * @param capabilitiesClass capabilities class
      * @param args              capabilities class constructor arguments
      */
-    public ReflectiveCapabilitiesFactory(final String name, final Class<? extends Capabilities> capabilitiesClass,
-            final Object... args) {
+    public ReflectiveCapabilitiesFactory(String name, Class<? extends Capabilities> capabilitiesClass, Object... args) {
         this.name = name;
         this.capabilitiesClass = capabilitiesClass;
         this.args = args;
-        this.capabilitiesClassName = capabilitiesClass.getName();
-        this.available = Capabilities.class.isAssignableFrom(this.capabilitiesClass);
+        capabilitiesClassName = capabilitiesClass.getName();
+        available = Capabilities.class.isAssignableFrom(this.capabilitiesClass);
     }
 
     /**
@@ -78,7 +77,7 @@ public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, Facto
     }
 
     @Override
-    public Capabilities newCapabilities(final ConfigurationProperties configuration) {
+    public Capabilities newCapabilities(ConfigurationProperties configuration) {
         if (!available) {
             throw new ConfigurationException("Capabilities " + capabilitiesClassName + " is not available.");
         }
@@ -92,7 +91,7 @@ public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, Facto
 
     @Override
     public String[] getNames() {
-        final List<String> names = new ArrayList<>(Arrays.asList(name));
+        List<String> names = new ArrayList<>(Arrays.asList(name));
         if (capabilitiesClass != null) {
             names.add(capabilitiesClass.getName());
             names.add(capabilitiesClass.getSimpleName());

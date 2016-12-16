@@ -13,7 +13,7 @@ public abstract class AbstractAnnotationListener implements ListenerPriority, Li
      * @param container container where annotation has been found
      * @param priority  priority of this listener
      */
-    public AbstractAnnotationListener(final Object container, final int priority) {
+    public AbstractAnnotationListener(Object container, int priority) {
         this.container = container;
         this.priority = priority;
     }

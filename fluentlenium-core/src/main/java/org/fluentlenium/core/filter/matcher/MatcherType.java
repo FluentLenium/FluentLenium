@@ -39,7 +39,7 @@ public enum MatcherType {
      * @param label             label used in error message
      * @param cssRepresentation css representation.
      */
-    MatcherType(final String label, final String cssRepresentation) {
+    MatcherType(String label, String cssRepresentation) {
         this.label = label;
         this.cssRepresentation = cssRepresentation;
     }

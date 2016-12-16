@@ -20,7 +20,7 @@ public class DefaultContainerContext implements ContainerContext {
      *
      * @param container container
      */
-    public DefaultContainerContext(final Object container) {
+    public DefaultContainerContext(Object container) {
         this(container, null, null);
     }
 
@@ -31,8 +31,7 @@ public class DefaultContainerContext implements ContainerContext {
      * @param parentContext parent context
      * @param searchContext search context
      */
-    public DefaultContainerContext(final Object container, final ContainerContext parentContext,
-            final SearchContext searchContext) {
+    public DefaultContainerContext(Object container, ContainerContext parentContext, SearchContext searchContext) {
         this.container = container;
         this.parentContext = parentContext;
         this.searchContext = searchContext;

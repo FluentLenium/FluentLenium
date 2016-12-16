@@ -20,13 +20,13 @@ public class SharedDriverDeleteCookies extends IntegrationFluentTest {
     public void cookieFirstMethod() {
         goTo(IntegrationFluentTest.DEFAULT_URL);
         assertThat($(".small", withName("name"))).hasSize(1);
-        this.getDriver().manage().addCookie(new Cookie("cookie", "fluent"));
+        getDriver().manage().addCookie(new Cookie("cookie", "fluent"));
     }
 
     @Test
     public void cookieSecondMethod() {
         assertThat($(".small", withName("name"))).hasSize(1);
-        assertThat(this.getCookie("cookie")).isNull();
+        assertThat(getCookie("cookie")).isNull();
     }
 
 }

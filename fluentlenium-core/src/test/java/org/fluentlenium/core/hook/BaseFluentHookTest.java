@@ -41,13 +41,12 @@ public class BaseFluentHookTest {
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(webDriver);
         instantiator = spy(new DefaultComponentInstantiator(fluentAdapter));
-        hook = new BaseFluentHook<>(fluentAdapter, instantiator, () -> element, () -> locator,
-                () -> "toString", options);
+        hook = new BaseFluentHook<>(fluentAdapter, instantiator, () -> element, () -> locator, () -> "toString", options);
     }
 
     @Test
     public void testFluentWebElement() {
-        final FluentWebElement fluentWebElement = hook.getFluentWebElement();
+        FluentWebElement fluentWebElement = hook.getFluentWebElement();
         verify(instantiator).newComponent(FluentWebElement.class, element);
 
         assertThat(fluentWebElement).isInstanceOf(FluentWebElement.class);

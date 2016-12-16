@@ -1,6 +1,5 @@
 package org.fluentlenium.core.proxy;
 
-import java.util.function.Supplier;
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
@@ -21,6 +20,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProxyHookTest {
@@ -50,9 +50,8 @@ public class ProxyHookTest {
     }
 
     public static class TestHook extends BaseHook<Object> {
-        public TestHook(final FluentControl fluentControl, final ComponentInstantiator instantiator,
-                final Supplier<WebElement> elementSupplier, final Supplier<ElementLocator> locatorSupplier,
-                final Supplier<String> toStringSupplier, final Object options) {
+        public TestHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
+                Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, Object options) {
             super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
         }
     }
@@ -61,11 +60,11 @@ public class ProxyHookTest {
     public void testHooksOnElement() {
         Mockito.when(locator.findElement()).thenReturn(element1);
 
-        final WebElement proxy = LocatorProxies.createWebElement(locator);
+        WebElement proxy = LocatorProxies.createWebElement(locator);
         LocatorProxies.now(proxy);
 
-        final List<HookDefinition<?>> hooks = new ArrayList<>();
-        final HookDefinition hookDefinition = new HookDefinition<>(TestHook.class);
+        List<HookDefinition<?>> hooks = new ArrayList<>();
+        HookDefinition hookDefinition = new HookDefinition<>(TestHook.class);
         hooks.add(hookDefinition);
 
         ElementLocator hookLocator = LocatorProxies.getLocatorHandler(proxy).getHookLocator();
@@ -87,11 +86,11 @@ public class ProxyHookTest {
     public void testHooksOnElementList() {
         Mockito.when(locator.findElements()).thenReturn(Arrays.asList(element1, element2, element3));
 
-        final List<WebElement> proxy = LocatorProxies.createWebElementList(locator);
+        List<WebElement> proxy = LocatorProxies.createWebElementList(locator);
         LocatorProxies.now(proxy);
 
-        final List<HookDefinition<?>> hooks = new ArrayList<>();
-        final HookDefinition hookDefinition = new HookDefinition<>(TestHook.class);
+        List<HookDefinition<?>> hooks = new ArrayList<>();
+        HookDefinition hookDefinition = new HookDefinition<>(TestHook.class);
         hooks.add(hookDefinition);
 
         ElementLocator hookLocator = LocatorProxies.getLocatorHandler(proxy).getHookLocator();

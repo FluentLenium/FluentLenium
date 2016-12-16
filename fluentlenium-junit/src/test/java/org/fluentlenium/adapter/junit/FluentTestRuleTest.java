@@ -42,7 +42,7 @@ public class FluentTestRuleTest {
     //CHECKSTYLE.OFF: IllegalThrows
     @Test
     public void whenNoErrorEverythingIsCalled() throws Throwable {
-        final FluentTestRule testRule = spy(new FluentTestRule(this));
+        FluentTestRule testRule = spy(new FluentTestRule(this));
 
         testRule.apply(base, description).evaluate();
 
@@ -55,7 +55,7 @@ public class FluentTestRuleTest {
 
     @Test
     public void whenInitFailsTestIsNotCalled() throws Throwable {
-        final FluentTestRule testRule = spy(new FluentTestRule(this));
+        FluentTestRule testRule = spy(new FluentTestRule(this));
 
         doThrow(TestException.class).when(testRule).starting(description);
 

@@ -32,12 +32,12 @@ public class SimpleFeatureMultiStep2 extends FluentCucumberTest {
     }
 
     @Before
-    public void before(final Scenario scenario) {
+    public void before(Scenario scenario) {
         super.before(scenario);
     }
 
     @After
-    public void after(final Scenario scenario) {
+    public void after(Scenario scenario) {
         super.after(scenario);
     }
 
