@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
- * Equivalent to {@link java.util.function.Suppliers#ofInstance(Object)}, but with toString() implementation calling
+ * Supplier returning a defined instance, with toString() implementation calling
  * toString() on the instance without wrapping it.
  *
  * @param <T> type of instance
