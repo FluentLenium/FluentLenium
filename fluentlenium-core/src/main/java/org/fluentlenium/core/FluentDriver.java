@@ -43,6 +43,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -374,6 +375,21 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
     @Override
     public FluentList<FluentWebElement> find(SearchFilter... filters) {
         return getSearch().find(filters);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> find(List<WebElement> rawElements) {
+        return getSearch().find(rawElements);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> $(List<WebElement> rawElements) {
+        return getSearch().$(rawElements);
+    }
+
+    @Override
+    public FluentWebElement el(WebElement rawElement) {
+        return getSearch().el(rawElement);
     }
 
     @Override

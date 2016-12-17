@@ -3,6 +3,9 @@ package org.fluentlenium.core.search;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * Control interface to search for elements.
@@ -11,6 +14,22 @@ import org.openqa.selenium.By;
  */
 public interface SearchControl<E extends FluentWebElement> {
     //CHECKSTYLE.OFF: MethodName
+
+    /**
+     * Wrap raw selenium elements into a list of elements.
+     *
+     * @param rawElements raw selenium elements
+     * @return list of element
+     */
+    FluentList<E> find(List<WebElement> rawElements);
+
+    /**
+     * Wrap raw selenium elements into a list of elements.
+     *
+     * @param rawElements raw selenium elements
+     * @return list of element
+     */
+    FluentList<E> $(List<WebElement> rawElements);
 
     /**
      * Find list of elements with CSS selector and filters.
@@ -29,6 +48,14 @@ public interface SearchControl<E extends FluentWebElement> {
      * @return list of element
      */
     FluentList<E> $(String selector, SearchFilter... filters);
+
+    /**
+     * Wrap existing raw selenium element into an element.
+     *
+     * @param rawElement raw selenium element
+     * @return element
+     */
+    E el(WebElement rawElement);
 
     /**
      * Find first element with CSS selector and filters.

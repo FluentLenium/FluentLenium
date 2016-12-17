@@ -454,6 +454,21 @@ public class FluentWebElement extends Component
         return search.find(filters);
     }
 
+    @Override
+    public FluentList<FluentWebElement> find(List<WebElement> rawElements) {
+        return search.find(rawElements);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> $(List<WebElement> rawElements) {
+        return search.$(rawElements);
+    }
+
+    @Override
+    public FluentWebElement el(WebElement rawElement) {
+        return search.el(rawElement);
+    }
+
     /**
      * Get the HTML of a the element
      *

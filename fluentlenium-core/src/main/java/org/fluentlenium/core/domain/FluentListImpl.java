@@ -547,6 +547,21 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
+    public FluentList<E> find(List<WebElement> rawElements) {
+        return (FluentList<E>) control.find(rawElements);
+    }
+
+    @Override
+    public FluentList<E> $(List<WebElement> rawElements) {
+        return (FluentList<E>) control.$(rawElements);
+    }
+
+    @Override
+    public E el(WebElement rawElement) {
+        return (E) control.el(rawElement);
+    }
+
+    @Override
     public FluentList<E> find(String selector, SearchFilter... filters) {
         List<E> finds = new ArrayList<>();
         for (FluentWebElement e : this) {
