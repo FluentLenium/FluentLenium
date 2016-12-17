@@ -132,14 +132,6 @@ public class Search implements SearchControl<FluentWebElement> {
         return find("*", filters);
     }
 
-    /**
-     * Central methods to find elements on the page. Can provide some filters. Able to use css1, css2, css3, see WebDriver
-     * restrictions
-     *
-     * @param locator elements locator
-     * @param filters filters set
-     * @return fluent list of fluent web elements
-     */
     @Override
     public FluentList<FluentWebElement> find(By locator, SearchFilter... filters) {
         List<WebElement> select = selectList(locator);
@@ -168,6 +160,13 @@ public class Search implements SearchControl<FluentWebElement> {
                 });
 
         return instantiator.asFluentList(postFilteredElements);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> find(List<WebElement> rawElements) {
+        FluentList<FluentWebElement> postFilteredList = instantiator.asFluentList(rawElements);
+        injectControl.injectComponent(postFilteredList, container, searchContext);
+        return postFilteredList;
     }
 
     @Override
@@ -200,4 +199,13 @@ public class Search implements SearchControl<FluentWebElement> {
         return find(locator, filters).first();
     }
 
+    @Override
+    public FluentWebElement el(WebElement rawElement) {
+        return find(Arrays.asList(rawElement)).first();
+    }
+
+    @Override
+    public FluentList<FluentWebElement> $(List<WebElement> rawElements) {
+        return find(rawElements);
+    }
 }

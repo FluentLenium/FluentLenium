@@ -9,6 +9,9 @@ import org.fluentlenium.core.hook.HookDefinition;
 import org.fluentlenium.core.search.SearchControl;
 import org.fluentlenium.core.search.SearchFilter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * Container global FluentLenium control interface.
@@ -104,6 +107,21 @@ public class ContainerFluentControl implements FluentControl {
     @Override
     public FluentList<FluentWebElement> $(By locator, SearchFilter... filters) {
         return applyHooks(adapterControl.$(locator, filters));
+    }
+
+    @Override
+    public FluentList<FluentWebElement> find(List<WebElement> rawElements) {
+        return applyHooks(adapterControl.find(rawElements));
+    }
+
+    @Override
+    public FluentList<FluentWebElement> $(List<WebElement> rawElements) {
+        return applyHooks(adapterControl.$(rawElements));
+    }
+
+    @Override
+    public FluentWebElement el(WebElement rawElement) {
+        return applyHooks(adapterControl.el(rawElement));
     }
 
     @Override
