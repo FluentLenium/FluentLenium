@@ -93,18 +93,18 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     @Override
-    public ContainerContext[] inject(Object... containers) {
-        ContainerContext[] context = new ContainerContext[containers.length];
-        for (int i = 0; i < containers.length; i++) {
-            context[i] = inject(containers[i]);
-        }
-        return context;
-    }
-
-    @Override
     public ContainerContext inject(Object container) {
         inject(container, null, fluentControl.getDriver());
         return containerContexts.get(container);
+    }
+
+    @Override
+    public ContainerContext injectComponent(Object componentContainer, Object parentContainer, SearchContext searchContext) {
+        initContainerContext(componentContainer, parentContainer, searchContext);
+        initParentContainer(componentContainer, parentContainer);
+        initFluentElements(componentContainer, searchContext);
+        initChildrenContainers(componentContainer, searchContext);
+        return containerContexts.get(componentContainer);
     }
 
     private void inject(Object container, Object parentContainer, SearchContext searchContext) {
@@ -112,13 +112,6 @@ public class FluentInjector implements FluentInjectControl {
         initParentContainer(container, parentContainer);
         initFluentElements(container, searchContext);
         initChildrenContainers(container, searchContext);
-    }
-
-    private void injectComponent(Object componentContainer, Object parentContainer, SearchContext searchContext) {
-        initContainerContext(componentContainer, parentContainer, searchContext);
-        initParentContainer(componentContainer, parentContainer);
-        initFluentElements(componentContainer, searchContext);
-        initChildrenContainers(componentContainer, searchContext);
     }
 
     private void initParentContainer(Object container, Object parentContainer) {
