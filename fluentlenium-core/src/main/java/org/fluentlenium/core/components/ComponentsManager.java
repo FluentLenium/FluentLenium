@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -28,6 +29,7 @@ public class ComponentsManager extends AbstractComponentInstantiator
     private final DefaultComponentInstantiator instantiator;
 
     private final Map<WebElement, Set<Object>> components = new IdentityHashMap<>();
+    private final List<ComponentsListener> listeners = new ArrayList<>();
 
     /**
      * Creates a new components manager.
@@ -70,6 +72,48 @@ public class ComponentsManager extends AbstractComponentInstantiator
         return component;
     }
 
+    @Override
+    public boolean addComponentsListener(ComponentsListener listener) {
+        synchronized (this) {
+            return listeners.add(listener);
+        }
+    }
+
+    @Override
+    public boolean removeComponentsListener(ComponentsListener listener) {
+        synchronized (this) {
+            return listeners.remove(listener);
+        }
+    }
+
+    /**
+     * Fire component registered event.
+     *
+     * @param element underlying element
+     * @param component registered component
+     */
+    protected void fireComponentRegistered(WebElement element, Object component) {
+        synchronized (this) {
+            for (ComponentsListener listener : listeners) {
+                listener.componentRegistered(element, component);
+            }
+        }
+    }
+
+    /**
+     * Fire component released event.
+     *
+     * @param element underlying element
+     * @param component released component
+     */
+    protected void fireComponentReleased(WebElement element, Object component) {
+        synchronized (this) {
+            for (ComponentsListener listener : listeners) {
+                listener.componentReleased(element, component);
+            }
+        }
+    }
+
     private <T> void register(WebElement element, T component) {
         WebElement webElement = unwrapElement(element);
         LocatorProxies.addProxyListener(webElement, this);
@@ -80,6 +124,7 @@ public class ComponentsManager extends AbstractComponentInstantiator
                 components.put(webElement, elementComponents);
             }
             elementComponents.add(component);
+            fireComponentRegistered(element, component);
         }
     }
 
@@ -133,8 +178,11 @@ public class ComponentsManager extends AbstractComponentInstantiator
      * Release this manager.
      */
     public void release() {
-        for (WebElement element : components.keySet()) {
-            LocatorProxies.removeProxyListener(element, this);
+        for (Map.Entry<WebElement, Set<Object>> elementEntry : components.entrySet()) {
+            LocatorProxies.removeProxyListener(elementEntry.getKey(), this);
+            for (Object component : elementEntry.getValue()) {
+                fireComponentRegistered(elementEntry.getKey(), component);
+            }
         }
         components.clear();
     }
