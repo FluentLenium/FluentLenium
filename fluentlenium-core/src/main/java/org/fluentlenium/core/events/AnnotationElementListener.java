@@ -3,6 +3,7 @@ package org.fluentlenium.core.events;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -14,6 +15,7 @@ import java.util.function.Function;
 class AnnotationElementListener extends AbstractAnnotationListener implements ElementListener {
     private final Method method;
     private final String annotationName;
+    private final WebElement targetElement;
 
     /**
      * Creates a new element annotation listener
@@ -22,11 +24,13 @@ class AnnotationElementListener extends AbstractAnnotationListener implements El
      * @param container      container to call when the event occurs
      * @param annotationName name of the annotation
      * @param priority       priority of this listener
+     * @param targetElement  target element
      */
-    AnnotationElementListener(Method method, Object container, String annotationName, int priority) {
+    AnnotationElementListener(Method method, Object container, String annotationName, int priority, WebElement targetElement) {
         super(container, priority);
         this.method = method;
         this.annotationName = annotationName;
+        this.targetElement = targetElement;
     }
 
     /**
@@ -50,6 +54,10 @@ class AnnotationElementListener extends AbstractAnnotationListener implements El
 
     @Override
     public void on(FluentWebElement element, WebDriver driver) {
+        if (targetElement != null && (element == null || !targetElement.equals(element.getElement()))) {
+            return;
+        }
+
         Class<?>[] parameterTypes = method.getParameterTypes();
 
         Object[] args = ReflectionUtils.toArgs(getArgsFunction(element, driver), parameterTypes);
