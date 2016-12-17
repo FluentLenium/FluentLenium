@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
@@ -245,4 +246,11 @@ public class SearchTest {
         assertThat(fluentWebElement.tagName()).isEqualTo("span");
     }
 
+    public void findWithRawSelemenium() {
+        WebElement mock = Mockito.mock(WebElement.class);
+
+        FluentWebElement el = search.el(mock);
+
+        assertThat(el.getElement()).isSameAs(mock);
+    }
 }
