@@ -156,7 +156,7 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private void initEventAnnotations(Object container) {
-        if (eventsRegistry != null) {
+        if (eventsRegistry != null && !eventsContainerSupport.containsKey(container)) {
             eventsContainerSupport.put(container, new ContainerAnnotationsEventsRegistry(eventsRegistry, container));
         }
     }
