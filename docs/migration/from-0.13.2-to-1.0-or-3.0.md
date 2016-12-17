@@ -27,6 +27,10 @@ and can still be overriden.
 
 Keep in mind that events related features requires to wrap the `WebDriver` instance into `EventFiringWebDriver`.
 
+- Use `@FluentConfiguration(driverLifecycle=...)` instead of `@SharedDriver(...)`.
+
+- Rename `TriggerMode` enumeration values (ie: `ON_FAIL` => `AUTOMATIC_ON_FAIL`).
+
 Search method names
 -------------------
 Some methods have been renamed and others have been removed to improve consistency and reduce codebase.
@@ -53,6 +57,9 @@ Conditions and await()
 
 `await().until()` match the condition when at least one element match the condition.
 
+`isNotPresent()` has been removed, in favor of `not().present()`. `not()` method on condition builder
+ allows to negate any condition.
+
 You can also check the exact same conditions on elements or list of elements, using
 `FluentWebElement#conditions()`, `FluentList#one()` and `FluentList#each()`
 
@@ -66,6 +73,7 @@ Pages and Components
 implementation of any logic into Pages and Components.
 - Ensure your Page Objects extends `FluentPage` and have a public empty constructor.
 - Ensure your Components extends `FluentWebElement` and have a constructor matching `FluentWebElement` constructor.
+- `createPage` method has been removed in favor of `newInstance`.
 
 A Component is roughly the same thing as a Page Object. A Page Object is global, but a Component is local and attached
 to an element so it can appear many time in a single page. A component can be created with
