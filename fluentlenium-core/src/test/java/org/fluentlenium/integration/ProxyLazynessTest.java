@@ -33,4 +33,32 @@ public class ProxyLazynessTest extends IntegrationFluentTest {
             }
         }).isExactlyInstanceOf(NoSuchElementException.class);
     }
+
+    @Test
+    public void testChainElements() {
+        goTo(DEFAULT_URL);
+
+        final FluentWebElement fluentWebElement = el("#oneline").el("#missing2").el("missing3");
+
+        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                fluentWebElement.now();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class);
+    }
+
+    @Test
+    public void testChainList() {
+        goTo(DEFAULT_URL);
+
+        final FluentList<FluentWebElement> fluentWebElements = $("#oneline").$("#missing2").$("missing3");
+
+        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
+            @Override
+            public void call() throws Throwable {
+                fluentWebElements.now();
+            }
+        }).isExactlyInstanceOf(NoSuchElementException.class);
+    }
 }
