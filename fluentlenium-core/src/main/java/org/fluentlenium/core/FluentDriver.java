@@ -88,7 +88,7 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
         this.configuration = configuration;
         componentsManager = new ComponentsManager(adapter);
         this.driver = driver;
-        search = new Search(driver, componentsManager);
+        search = new Search(driver, this, componentsManager, adapter);
         if (driver instanceof EventFiringWebDriver) {
             events = new EventsRegistry(this);
             eventsComponentsAnnotations = new AnnotationsComponentListener(componentsManager);

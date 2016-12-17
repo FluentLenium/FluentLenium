@@ -58,7 +58,7 @@ public class SearchTest {
         fluentAdapter.initFluent(driver);
 
         DefaultComponentInstantiator instantiator = new DefaultComponentInstantiator(fluentAdapter);
-        search = new Search(searchContext, instantiator);
+        search = new Search(searchContext, this, instantiator, fluentAdapter);
     }
 
     @After

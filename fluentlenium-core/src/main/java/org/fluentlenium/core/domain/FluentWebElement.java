@@ -80,7 +80,7 @@ public class FluentWebElement extends Component
                         return newComponent(FluentWebElement.this.getClass(), noHookElement);
                     }
                 });
-        search = new Search(element, this.instantiator);
+        search = new Search(element, this, this.instantiator, this.control);
         axes = new Axes(element, this.instantiator);
         mouseActions = new MouseElementActions(this.control.getDriver(), element);
         keyboardActions = new KeyboardElementActions(this.control.getDriver(), element);
@@ -210,7 +210,9 @@ public class FluentWebElement extends Component
      * @return element as component.
      */
     public <T> T as(Class<T> componentClass) {
-        return instantiator.newComponent(componentClass, getElement());
+        T component = instantiator.newComponent(componentClass, getElement());
+        injectComponent(component, this, getElement());
+        return component;
     }
 
     /**

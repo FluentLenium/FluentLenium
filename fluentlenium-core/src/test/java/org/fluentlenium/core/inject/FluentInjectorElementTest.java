@@ -398,21 +398,4 @@ public class FluentInjectorElementTest {
         assertThat(container.element.get(1).getFluentControl()).isSameAs(fluentAdapter);
     }
 
-    @Test
-    public void testInjectArray() {
-        Object container1 = new Object();
-        Object container2 = new Object();
-        Object container3 = new Object();
-
-        FluentInjector injectorSpy = spy(injector);
-
-        injectorSpy.inject(container1, container2, container3);
-
-        verify(injectorSpy).inject(container1);
-        verify(injectorSpy).inject(container2);
-        verify(injectorSpy).inject(container3);
-
-        injectorSpy.release();
-    }
-
 }

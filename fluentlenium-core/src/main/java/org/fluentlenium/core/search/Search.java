@@ -3,6 +3,7 @@ package org.fluentlenium.core.search;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.inject.FluentInjectControl;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -19,17 +20,24 @@ import java.util.List;
  */
 public class Search implements SearchControl<FluentWebElement> {
     private final SearchContext searchContext;
+    private final Object container;
     private final ComponentInstantiator instantiator;
+    private final FluentInjectControl injectControl;
 
     /**
      * Creates a new search object.
      *
-     * @param context      search context
-     * @param instantiator component instantiator
+     * @param context       search context
+     * @param container     container
+     * @param instantiator  component instantiator
+     * @param injectControl inject control
      */
-    public Search(SearchContext context, ComponentInstantiator instantiator) {
+    public Search(SearchContext context, Object container, ComponentInstantiator instantiator,
+            FluentInjectControl injectControl) {
         searchContext = context;
+        this.container = container;
         this.instantiator = instantiator;
+        this.injectControl = injectControl;
     }
 
     /**
@@ -55,6 +63,7 @@ public class Search implements SearchControl<FluentWebElement> {
         }
         List<WebElement> select = selectList(stringBuilder.toString());
         final FluentList fluentList = instantiator.asFluentList(select);
+        injectControl.injectComponent(fluentList, container, searchContext);
         if (postFilterSelector.isEmpty()) {
             return fluentList;
         }
@@ -77,7 +86,9 @@ public class Search implements SearchControl<FluentWebElement> {
                     }
                 });
 
-        return instantiator.asFluentList(postFilteredElements);
+        FluentList<FluentWebElement> postFilteredList = instantiator.asFluentList(postFilteredElements);
+        injectControl.injectComponent(postFilteredList, container, searchContext);
+        return postFilteredList;
     }
 
     private ElementLocator locator(final By by) {
