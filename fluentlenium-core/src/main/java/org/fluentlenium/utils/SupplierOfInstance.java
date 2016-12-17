@@ -4,7 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Supplier;
 
 /**
- * Equivalent to {@link com.google.common.base.Suppliers#ofInstance(Object)}, but with toString() implementation calling
+ * Supplier returning a defined instance, with toString() implementation calling
  * toString() on the instance without wrapping it.
  *
  * @param <T> type of instance
