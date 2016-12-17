@@ -67,31 +67,31 @@ public class FluentWebElement extends Component
      * @param control      controle interface
      * @param instantiator component instantiator
      */
-    public FluentWebElement(final WebElement element, final FluentControl control, final ComponentInstantiator instantiator) {
+    public FluentWebElement(WebElement element, FluentControl control, ComponentInstantiator instantiator) {
         super(element, control, instantiator);
 
-        this.hookControl = new HookControlImpl<>(this, this.webElement, this.control, this.instantiator,
+        hookControl = new HookControlImpl<>(this, webElement, this.control, this.instantiator,
                 new Supplier<FluentWebElement>() {
                     @Override
                     public FluentWebElement get() {
-                        final LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
-                        final ElementLocator locator = locatorHandler.getLocator();
-                        final WebElement noHookElement = LocatorProxies.createWebElement(locator);
+                        LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
+                        ElementLocator locator = locatorHandler.getLocator();
+                        WebElement noHookElement = LocatorProxies.createWebElement(locator);
                         return newComponent(FluentWebElement.this.getClass(), noHookElement);
                     }
                 });
-        this.search = new Search(element, this.instantiator);
-        this.axes = new Axes(element, this.instantiator);
-        this.mouseActions = new MouseElementActions(this.control.getDriver(), element);
-        this.keyboardActions = new KeyboardElementActions(this.control.getDriver(), element);
-        this.conditions = new WebElementConditions(this);
-        this.label = new FluentLabelImpl<>(this, new Supplier<String>() {
+        search = new Search(element, this, this.instantiator, this.control);
+        axes = new Axes(element, this.instantiator);
+        mouseActions = new MouseElementActions(this.control.getDriver(), element);
+        keyboardActions = new KeyboardElementActions(this.control.getDriver(), element);
+        conditions = new WebElementConditions(this);
+        label = new FluentLabelImpl<>(this, new Supplier<String>() {
             @Override
             public String get() {
                 return getElement().toString();
             }
         });
-        this.javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new SupplierOfInstance<>(this));
+        javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new SupplierOfInstance<>(this));
     }
 
     @Delegate(excludes = {InputControl.class, AwaitControl.class, SearchControl.class})
@@ -139,7 +139,7 @@ public class FluentWebElement extends Component
     }
 
     @Override
-    public FluentWebElement now(final boolean force) {
+    public FluentWebElement now(boolean force) {
         if (force) {
             reset();
         }
@@ -209,8 +209,10 @@ public class FluentWebElement extends Component
      * @param <T>            type of component
      * @return element as component.
      */
-    public <T> T as(final Class<T> componentClass) {
-        return instantiator.newComponent(componentClass, getElement());
+    public <T> T as(Class<T> componentClass) {
+        T component = instantiator.newComponent(componentClass, getElement());
+        injectComponent(component, this, getElement());
+        return component;
     }
 
     /**
@@ -241,7 +243,7 @@ public class FluentWebElement extends Component
      * @param text value to set
      * @return fluent web element
      */
-    public FluentWebElement write(final String... text) {
+    public FluentWebElement write(String... text) {
         clear();
         if (text.length != 0) {
             webElement.sendKeys(text[0]);
@@ -265,7 +267,7 @@ public class FluentWebElement extends Component
      * @return name value
      * @see WebElement#getAttribute(String)
      */
-    public String attribute(final String name) {
+    public String attribute(String name) {
         return webElement.getAttribute(name);
     }
 
@@ -276,7 +278,7 @@ public class FluentWebElement extends Component
      * @return The current, computed value of the property.
      * @see WebElement#getCssValue(String)
      */
-    public String cssValue(final String propertyName) {
+    public String cssValue(String propertyName) {
         return webElement.getCssValue(propertyName);
     }
 
@@ -408,47 +410,47 @@ public class FluentWebElement extends Component
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final String selector, final SearchFilter... filters) {
+    public FluentList<FluentWebElement> $(String selector, SearchFilter... filters) {
         return find(selector, filters);
     }
 
     @Override
-    public FluentWebElement el(final String selector, final SearchFilter... filters) {
+    public FluentWebElement el(String selector, SearchFilter... filters) {
         return find(selector, filters).first();
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final SearchFilter... filters) {
+    public FluentList<FluentWebElement> $(SearchFilter... filters) {
         return find(filters);
     }
 
     @Override
-    public FluentWebElement el(final SearchFilter... filters) {
+    public FluentWebElement el(SearchFilter... filters) {
         return find(filters).first();
     }
 
     @Override
-    public FluentList<FluentWebElement> $(final By locator, final SearchFilter... filters) {
+    public FluentList<FluentWebElement> $(By locator, SearchFilter... filters) {
         return find(locator, filters);
     }
 
     @Override
-    public FluentWebElement el(final By locator, final SearchFilter... filters) {
+    public FluentWebElement el(By locator, SearchFilter... filters) {
         return find(locator, filters).first();
     }
 
     @Override
-    public FluentList<FluentWebElement> find(final By locator, final SearchFilter... filters) {
+    public FluentList<FluentWebElement> find(By locator, SearchFilter... filters) {
         return search.find(locator, filters);
     }
 
     @Override
-    public FluentList<FluentWebElement> find(final String selector, final SearchFilter... filters) {
+    public FluentList<FluentWebElement> find(String selector, SearchFilter... filters) {
         return search.find(selector, filters);
     }
 
     @Override
-    public FluentList<FluentWebElement> find(final SearchFilter... filters) {
+    public FluentList<FluentWebElement> find(SearchFilter... filters) {
         return search.find(filters);
     }
 
@@ -492,7 +494,7 @@ public class FluentWebElement extends Component
      * @return boolean value for is input file type
      */
     private boolean isInputOfTypeFile() {
-        return "input".equalsIgnoreCase(this.tagName()) && "file".equalsIgnoreCase(this.attribute("type"));
+        return "input".equalsIgnoreCase(tagName()) && "file".equalsIgnoreCase(attribute("type"));
     }
 
     /**
@@ -500,8 +502,8 @@ public class FluentWebElement extends Component
      *
      * @param hookRestoreStack restore stack
      */
-    /* default */ void setHookRestoreStack(final Stack<List<HookDefinition<?>>> hookRestoreStack) {
-        this.hookControl.setHookRestoreStack(hookRestoreStack);
+    /* default */ void setHookRestoreStack(Stack<List<HookDefinition<?>>> hookRestoreStack) {
+        hookControl.setHookRestoreStack(hookRestoreStack);
     }
 
     @Override
