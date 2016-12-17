@@ -15,7 +15,7 @@ import org.fluentlenium.core.css.CssControl;
 import org.fluentlenium.core.css.CssControlImpl;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.core.events.AnnotationsComponentListener;
+import org.fluentlenium.core.events.ComponentsEventsRegistry;
 import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.inject.DefaultContainerInstanciator;
 import org.fluentlenium.core.inject.FluentInjector;
@@ -60,7 +60,7 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
 
     private final EventsRegistry events;
 
-    private AnnotationsComponentListener eventsComponentsAnnotations;
+    private final ComponentsEventsRegistry componentsEventsRegistry;
 
     @Delegate
     private final FluentInjector fluentInjector;
@@ -92,10 +92,10 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
         search = new Search(driver, this, componentsManager, adapter);
         if (driver instanceof EventFiringWebDriver) {
             events = new EventsRegistry(this);
-            eventsComponentsAnnotations = new AnnotationsComponentListener(componentsManager);
-            events.register(eventsComponentsAnnotations);
+            componentsEventsRegistry = new ComponentsEventsRegistry(events, componentsManager);
         } else {
             events = null;
+            componentsEventsRegistry = null;
         }
         mouseActions = new MouseActions(driver);
         keyboardActions = new KeyboardActions(driver);
@@ -440,8 +440,8 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
      */
     public void releaseFluent() {
         fluentInjector.release();
-        if (events != null) {
-            events.unregister(eventsComponentsAnnotations);
+        if (componentsEventsRegistry != null) {
+            componentsEventsRegistry.close();
         }
     }
 }

@@ -5,6 +5,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -15,6 +16,7 @@ import java.lang.reflect.Method;
 class AnnotationFindByListener extends AbstractAnnotationListener implements FindByListener {
     private final Method method;
     private final String annotationName;
+    private final WebElement targetElement;
 
     /**
      * Creates a new find by annotation listener
@@ -23,11 +25,13 @@ class AnnotationFindByListener extends AbstractAnnotationListener implements Fin
      * @param container      container to call when the event occurs
      * @param annotationName name of the annotation
      * @param priority       priority of this listener
+     * @param targetElement  target element
      */
-    AnnotationFindByListener(Method method, Object container, String annotationName, int priority) {
+    AnnotationFindByListener(Method method, Object container, String annotationName, int priority, WebElement targetElement) {
         super(container, priority);
         this.method = method;
         this.annotationName = annotationName;
+        this.targetElement = targetElement;
     }
 
     /**
@@ -58,6 +62,10 @@ class AnnotationFindByListener extends AbstractAnnotationListener implements Fin
 
     @Override
     public void on(By by, FluentWebElement element, WebDriver driver) {
+        if (targetElement != null && (element == null || !targetElement.equals(element.getElement()))) {
+            return;
+        }
+
         Class<?>[] parameterTypes = method.getParameterTypes();
 
         Object[] args = ReflectionUtils.toArgs(getArgsFunction(by, element, driver), parameterTypes);
