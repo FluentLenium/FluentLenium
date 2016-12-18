@@ -18,10 +18,10 @@ public final class ElementUtils {
      * @param messageContext message context.
      * @return no such element exception
      */
-    public static NoSuchElementException noSuchElementException(final String messageContext) {
-        final FluentConditions messageBuilder = MessageProxy.builder(FluentConditions.class, messageContext);
+    public static NoSuchElementException noSuchElementException(String messageContext) {
+        FluentConditions messageBuilder = MessageProxy.builder(FluentConditions.class, messageContext);
         messageBuilder.present();
-        final String message = MessageProxy.message(messageBuilder);
+        String message = MessageProxy.message(messageBuilder);
         return new NoSuchElementException(message);
     }
 }

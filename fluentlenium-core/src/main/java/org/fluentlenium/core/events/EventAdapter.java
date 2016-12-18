@@ -23,111 +23,111 @@ class EventAdapter implements WebDriverEventListener {
      * @param listener     underlysing listener
      * @param instantiator component instantiator
      */
-    EventAdapter(final EventListener listener, final ComponentInstantiator instantiator) {
+    EventAdapter(EventListener listener, ComponentInstantiator instantiator) {
         this.listener = listener;
         this.instantiator = instantiator;
     }
 
     @Override
-    public void beforeNavigateTo(final String url, final WebDriver driver) {
-        this.listener.beforeNavigateTo(url, driver);
+    public void beforeNavigateTo(String url, WebDriver driver) {
+        listener.beforeNavigateTo(url, driver);
     }
 
     @Override
-    public void afterNavigateTo(final String url, final WebDriver driver) {
-        this.listener.afterNavigateTo(url, driver);
+    public void afterNavigateTo(String url, WebDriver driver) {
+        listener.afterNavigateTo(url, driver);
     }
 
     @Override
-    public void beforeNavigateBack(final WebDriver driver) {
-        this.listener.beforeNavigateBack(driver);
+    public void beforeNavigateBack(WebDriver driver) {
+        listener.beforeNavigateBack(driver);
     }
 
     @Override
-    public void afterNavigateBack(final WebDriver driver) {
-        this.listener.afterNavigateBack(driver);
+    public void afterNavigateBack(WebDriver driver) {
+        listener.afterNavigateBack(driver);
     }
 
     @Override
-    public void beforeNavigateForward(final WebDriver driver) {
-        this.listener.beforeNavigateForward(driver);
+    public void beforeNavigateForward(WebDriver driver) {
+        listener.beforeNavigateForward(driver);
     }
 
     @Override
-    public void afterNavigateForward(final WebDriver driver) {
-        this.listener.afterNavigateForward(driver);
+    public void afterNavigateForward(WebDriver driver) {
+        listener.afterNavigateForward(driver);
     }
 
     @Override
-    public void beforeNavigateRefresh(final WebDriver driver) {
-        this.listener.beforeNavigateRefresh(driver);
+    public void beforeNavigateRefresh(WebDriver driver) {
+        listener.beforeNavigateRefresh(driver);
     }
 
     @Override
-    public void afterNavigateRefresh(final WebDriver driver) {
-        this.listener.afterNavigateRefresh(driver);
+    public void afterNavigateRefresh(WebDriver driver) {
+        listener.afterNavigateRefresh(driver);
     }
 
     @Override
-    public void beforeFindBy(final By by, final WebElement element, final WebDriver driver) {
-        this.listener
+    public void beforeFindBy(By by, WebElement element, WebDriver driver) {
+        listener
                 .beforeFindBy(by, element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
     }
 
     @Override
-    public void afterFindBy(final By by, final WebElement element, final WebDriver driver) {
-        this.listener
+    public void afterFindBy(By by, WebElement element, WebDriver driver) {
+        listener
                 .afterFindBy(by, element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
     }
 
     @Override
-    public void beforeClickOn(final WebElement element, final WebDriver driver) {
-        this.listener.beforeClickOn(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
+    public void beforeClickOn(WebElement element, WebDriver driver) {
+        listener.beforeClickOn(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
     }
 
     @Override
-    public void afterClickOn(final WebElement element, final WebDriver driver) {
-        this.listener.afterClickOn(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
+    public void afterClickOn(WebElement element, WebDriver driver) {
+        listener.afterClickOn(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver);
     }
 
     @Override
-    public void beforeChangeValueOf(final WebElement element, final WebDriver driver, final CharSequence[] charSequence) {
-        this.listener
+    public void beforeChangeValueOf(WebElement element, WebDriver driver, CharSequence[] charSequence) {
+        listener
                 .beforeChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver,
                         charSequence);
     }
 
     @Override
-    public void afterChangeValueOf(final WebElement element, final WebDriver driver, final CharSequence[] charSequence) {
-        this.listener
+    public void afterChangeValueOf(WebElement element, WebDriver driver, CharSequence[] charSequence) {
+        listener
                 .afterChangeValueOf(element == null ? null : instantiator.newComponent(FluentWebElement.class, element), driver,
                         charSequence);
     }
 
     @Override
-    public void beforeScript(final String script, final WebDriver driver) {
-        this.listener.beforeScript(script, driver);
+    public void beforeScript(String script, WebDriver driver) {
+        listener.beforeScript(script, driver);
     }
 
     @Override
-    public void afterScript(final String script, final WebDriver driver) {
-        this.listener.afterScript(script, driver);
+    public void afterScript(String script, WebDriver driver) {
+        listener.afterScript(script, driver);
     }
 
     @Override
-    public void onException(final Throwable throwable, final WebDriver driver) {
-        this.listener.onException(throwable, driver);
+    public void onException(Throwable throwable, WebDriver driver) {
+        listener.onException(throwable, driver);
     }
 
     @Override
-    public boolean equals(final Object obj) {
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        final EventAdapter that = (EventAdapter) obj;
+        EventAdapter that = (EventAdapter) obj;
         return Objects.equals(listener, that.listener);
     }
 

@@ -21,7 +21,7 @@ public class Component {
      * @param control      FluentLenium control interface
      * @param instantiator FluentLenium instantiator
      */
-    public Component(final WebElement webElement, final FluentControl control, final ComponentInstantiator instantiator) {
+    public Component(WebElement webElement, FluentControl control, ComponentInstantiator instantiator) {
         this.webElement = webElement;
         this.control = control;
         this.instantiator = instantiator;
