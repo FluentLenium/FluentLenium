@@ -76,7 +76,7 @@ public class DuckDuckGoTest extends FluentTest {
         goTo("https://duckduckgo.com");
         $("#search_form_input_homepage").fill().with("FluentLenium");
         $("#search_button_homepage").submit();
-        assertThat(windows().title()).contains("FluentLenium");
+        assertThat(window().title()).contains("FluentLenium");
     }
 }
 ```
