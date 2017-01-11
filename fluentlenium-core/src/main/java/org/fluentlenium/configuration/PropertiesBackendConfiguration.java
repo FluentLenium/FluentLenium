@@ -211,7 +211,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
 
     @Override
     public DriverLifecycle getDriverLifecycle() {
-        return getEnumProperty(DriverLifecycle.class, getStringProperty("driverLifecycle"));
+        return getEnumProperty(DriverLifecycle.class, "driverLifecycle");
     }
 
     @Override
