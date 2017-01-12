@@ -11,6 +11,8 @@ import java.util.Properties;
 
 public class PropertiesBackendConfigurationTest {
 
+    private static final String DRIVER_LIFECYCLE = "driverLifecycle";
+
     public static class DummyConfigurationFactory implements ConfigurationFactory {
         @Override
         public Configuration newConfiguration(Class<?> containerClass,
@@ -252,6 +254,41 @@ public class PropertiesBackendConfigurationTest {
 
         mockProperty("screenshotPath", "/path/");
         Assertions.assertThat(getConfiguration().getScreenshotPath()).isEqualTo("/path/");
+    }
+
+    @Test
+    public void driverLifecycleClass() {
+        Assertions.assertThat(getConfiguration().getDriverLifecycle()).isNull();
+
+        mockProperty(DRIVER_LIFECYCLE, "cLaSS");
+        Assertions.assertThat(getConfiguration().getDriverLifecycle()).isEqualTo(ConfigurationProperties.DriverLifecycle.CLASS);
+    }
+
+    @Test
+    public void driverLifecycleMethod() {
+        Assertions.assertThat(getConfiguration().getDriverLifecycle()).isNull();
+
+        mockProperty(DRIVER_LIFECYCLE, "mEthOd");
+        Assertions.assertThat(getConfiguration().getDriverLifecycle())
+                .isEqualTo(ConfigurationProperties.DriverLifecycle.METHOD);
+    }
+
+    @Test
+    public void driverLifecycleJvm() {
+        Assertions.assertThat(getConfiguration().getDriverLifecycle()).isNull();
+
+        mockProperty(DRIVER_LIFECYCLE, "jvm");
+        Assertions.assertThat(getConfiguration().getDriverLifecycle())
+                .isEqualTo(ConfigurationProperties.DriverLifecycle.JVM);
+    }
+
+    @Test
+    public void driverLifecycleDefault() {
+        Assertions.assertThat(getConfiguration().getDriverLifecycle()).isNull();
+
+        mockProperty(DRIVER_LIFECYCLE, "deFaUlT");
+        Assertions.assertThat(getConfiguration().getDriverLifecycle())
+                .isEqualTo(ConfigurationProperties.DriverLifecycle.DEFAULT);
     }
 
     @Test
