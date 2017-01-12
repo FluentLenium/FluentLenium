@@ -23,7 +23,7 @@ the assertion framework you want.
 FluentLenium 3.x is still in development and includes latest enhancements and features, but Selenium 3 and Java 8 are 
 required to run it.
 
-Starting from FluentLenium 3.1.0 you can use all sparks of Java 8, including lambdas. It is a nice extension in 
+Starting from FluentLenium 3.1.1 you can use all sparks of Java 8, including lambdas. It is a nice extension in 
 comparison to Selenium 3 which is still basing on Guava objects. Please take a look on documentation to find `await` 
 lambda usage example. 
 
@@ -38,13 +38,13 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.1.0</version>
+    <version>3.1.1</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.1.0</version>
+    <version>3.1.1</version>
     <scope>test</scope>
 </dependency>
 <dependency>
