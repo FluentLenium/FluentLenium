@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.Locale;
 
 /**
  * Abstract properties configuration.
@@ -129,7 +130,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
         if ("DEFAULT".equalsIgnoreCase(propertyName)) {
             return null;
         }
-        return Enum.valueOf(enumClass, property.toUpperCase());
+        return Enum.valueOf(enumClass, property.toUpperCase(Locale.ENGLISH));
     }
 
     private <T> Class<T> getClassProperty(Class<T> clazz, String propertyName) {
