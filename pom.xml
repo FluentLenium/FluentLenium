@@ -93,7 +93,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <selenium.version>3.0.0</selenium.version>
+        <selenium.version>3.0.1</selenium.version>
     </properties>
 
     <dependencyManagement>

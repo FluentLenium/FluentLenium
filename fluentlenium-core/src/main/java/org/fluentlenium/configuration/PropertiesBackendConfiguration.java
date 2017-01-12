@@ -20,7 +20,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
     /**
      * Default properties prefix.
      */
-    public static final String PROPERTIES_PREFIX = "fluentlenium.";
+    static final String PROPERTIES_PREFIX = "fluentlenium.";
 
     private final String[] prefixes;
 
@@ -33,7 +33,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
      *
      * @param propertiesReader properties reader
      */
-    protected PropertiesBackendConfiguration(PropertiesBackend propertiesReader) {
+    PropertiesBackendConfiguration(PropertiesBackend propertiesReader) {
         this(propertiesReader, PROPERTIES_PREFIX);
     }
 
@@ -43,7 +43,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
      * @param propertiesReader properties reader
      * @param prefixes         array of allowed prefixes
      */
-    protected PropertiesBackendConfiguration(PropertiesBackend propertiesReader, String... prefixes) {
+    PropertiesBackendConfiguration(PropertiesBackend propertiesReader, String... prefixes) {
         if (prefixes.length == 0) {
             throw new IllegalArgumentException("Prefixes should be defined");
         }
@@ -75,7 +75,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
      * @param propertyName property key
      * @return property value
      */
-    protected String getPropertyImpl(String propertyName) {
+    private String getPropertyImpl(String propertyName) {
         return propertiesBackend.getProperty(propertyName);
     }
 
@@ -103,7 +103,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
 
     private Long getLongProperty(String propertyName) {
         String property = getProperty(propertyName);
-        if (!isValidProperty(property)) {
+        if (!isValidProperty(property) || property == null) {
             return null;
         }
         try {
@@ -115,7 +115,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
 
     private Boolean getBooleanProperty(String propertyName) {
         String property = getProperty(propertyName);
-        if (!isValidProperty(property)) {
+        if (!isValidProperty(property) || property == null) {
             return null;
         }
         return Boolean.parseBoolean(property);
@@ -123,18 +123,18 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
 
     private <T extends Enum<T>> T getEnumProperty(Class<T> enumClass, String propertyName) {
         String property = getProperty(propertyName);
-        if (!isValidProperty(property)) {
+        if (!isValidProperty(property) || property == null) {
             return null;
         }
         if ("DEFAULT".equalsIgnoreCase(propertyName)) {
             return null;
         }
-        return (T) Enum.valueOf(enumClass, property);
+        return Enum.valueOf(enumClass, property.toUpperCase());
     }
 
     private <T> Class<T> getClassProperty(Class<T> clazz, String propertyName) {
         String property = getProperty(propertyName);
-        if (!isValidProperty(property)) {
+        if (!isValidProperty(property) || property == null) {
             return null;
         }
         try {
@@ -154,12 +154,12 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
      * @return URL object
      * @throws MalformedURLException if given url is not valid
      */
-    protected URL newURL(String url) throws MalformedURLException {
+    private URL newURL(String url) throws MalformedURLException {
         return new URL(url);
     }
 
-    private Capabilities getCapabilitiesProperty(String propertyName) {
-        String property = getProperty(propertyName);
+    private Capabilities getCapabilitiesProperty() {
+        String property = getProperty("capabilities");
         if (!isValidProperty(property)) {
             return null;
         }
@@ -206,7 +206,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
 
     @Override
     public Capabilities getCapabilities() {
-        return getCapabilitiesProperty("capabilities");
+        return getCapabilitiesProperty();
     }
 
     @Override
