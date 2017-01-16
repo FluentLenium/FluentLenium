@@ -62,7 +62,7 @@ public class Search implements SearchControl<FluentWebElement> {
             }
         }
         List<WebElement> select = selectList(stringBuilder.toString());
-        FluentList fluentList = instantiator.asFluentList(select);
+        final FluentList fluentList = instantiator.asFluentList(select);
         injectControl.injectComponent(fluentList, container, searchContext);
         if (postFilterSelector.isEmpty()) {
             return fluentList;

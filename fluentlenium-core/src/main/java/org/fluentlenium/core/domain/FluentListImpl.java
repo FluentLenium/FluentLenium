@@ -54,17 +54,10 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
      * @param control        control interface
      * @param instantiator   component instantiator
      */
-    public FluentListImpl(Class<E> componentClass, List<E> list, FluentControl control,
-            ComponentInstantiator instantiator) {
+    public FluentListImpl(final Class<E> componentClass, final List<E> list, FluentControl control,
+            final ComponentInstantiator instantiator) {
         super(componentClass, list, control, instantiator);
-        hookControl = new HookControlImpl<>(this, proxy, control, instantiator, (Supplier<FluentList<E>>) () -> {
-            LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(proxy);
-            ElementLocator locator = locatorHandler.getLocator();
-            List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
-            return instantiator.asComponentList(this.getClass(), componentClass, webElementList);
-        });
-        label = new FluentLabelImpl<>(this, list::toString);
-        javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new Supplier<FluentWebElement>() {
+        hookControl = new HookControlImpl<>(this, proxy, control, instantiator, new Supplier<FluentList<E>>() {
             @Override
             public FluentList<E> get() {
                 LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(proxy);
@@ -406,37 +399,65 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public List<String> values() {
-        return stream().map(FluentWebElement::value).collect(Collectors.toList());
+        return Lists.transform(this, new Function<E, String>() {
+            public String apply(E webElement) {
+                return webElement.value();
+            }
+        });
     }
 
     @Override
     public List<String> ids() {
-        return stream().map(FluentWebElement::id).collect(Collectors.toList());
+        return Lists.transform(this, new Function<E, String>() {
+            public String apply(E webElement) {
+                return webElement.id();
+            }
+        });
     }
 
     @Override
     public List<String> attributes(final String attribute) {
-        return stream().map(webElement -> webElement.attribute(attribute)).collect(Collectors.toList());
+        return Lists.transform(this, new Function<E, String>() {
+            public String apply(E webElement) {
+                return webElement.attribute(attribute);
+            }
+        });
     }
 
     @Override
     public List<String> names() {
-        return stream().map(FluentWebElement::name).collect(Collectors.toList());
+        return Lists.transform(this, new Function<E, String>() {
+            public String apply(E webElement) {
+                return webElement.name();
+            }
+        });
     }
 
     @Override
     public List<String> tagNames() {
-        return stream().map(FluentWebElement::tagName).collect(Collectors.toList());
+        return Lists.transform(this, new Function<E, String>() {
+            public String apply(E webElement) {
+                return webElement.tagName();
+            }
+        });
     }
 
     @Override
     public List<String> textContents() {
-        return stream().map(FluentWebElement::textContent).collect(Collectors.toList());
+        return Lists.transform(this, new Function<E, String>() {
+            public String apply(E webElement) {
+                return webElement.textContent();
+            }
+        });
     }
 
     @Override
     public List<String> texts() {
-        return stream().map(FluentWebElement::text).collect(Collectors.toList());
+        return Lists.transform(this, new Function<E, String>() {
+            public String apply(E webElement) {
+                return webElement.text();
+            }
+        });
     }
 
     @Override
