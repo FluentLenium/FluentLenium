@@ -16,7 +16,7 @@ import java.util.List;
  * <p>
  * It also supports {@link After} annotations.
  */
-class FluentTestRule implements TestRule {
+public class FluentTestRule implements TestRule {
     private final Object target;
     private final TestClass testClass;
     private final List<FrameworkMethod> afters;
@@ -26,7 +26,7 @@ class FluentTestRule implements TestRule {
      *
      * @param target target of the rule.
      */
-    FluentTestRule(Object target) {
+    public FluentTestRule(Object target) {
         this.target = target;
         testClass = new TestClass(target.getClass());
         afters = testClass.getAnnotatedMethods(After.class);
