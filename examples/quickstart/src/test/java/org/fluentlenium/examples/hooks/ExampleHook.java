@@ -15,7 +15,7 @@ public class ExampleHook extends BaseHook<ExampleHookOptions> {
     }
 
     @Override
-    public void click() {
+    public void submit() {
         System.out.println(getOptions().getMessage() + ": before click!");
         super.click();
         System.out.println(getOptions().getMessage() + "ExampleHook: after click!");
