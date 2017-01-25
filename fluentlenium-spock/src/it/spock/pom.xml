@@ -16,10 +16,6 @@
         <module>spock-default</module>
     </modules>
 
-    <properties>
-        <it.project.version>3.1.2-SNAPSHOT</it.project.version>
-    </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>

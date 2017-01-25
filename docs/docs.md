@@ -1601,6 +1601,22 @@ public void after(Scenario scenario) {
 }
 ```
 
+### Spock
+
+- Import this maven dependency.
+
+```xml
+<dependency>
+    <groupId>org.fluentlenium</groupId>
+    <artifactId>fluentlenium-spock</artifactId>
+    <version>3.1.1</version>
+    <scope>test</scope>
+</dependency>
+```
+
+- Extends FluentSpecification instead of FluentTest.
+
+
 ## Supported Assertions Libraries
 
 ### JUnit
