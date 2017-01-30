@@ -13,7 +13,7 @@
     <description>AssertJ Extension for FluentLenium</description>
 
     <properties>
-        <assertj.version>2.5.0</assertj.version>
+        <assertj.version>3.6.2</assertj.version>
     </properties>
 
 
