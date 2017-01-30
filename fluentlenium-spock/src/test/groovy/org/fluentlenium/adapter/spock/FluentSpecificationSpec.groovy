@@ -1,11 +1,10 @@
-package org.fluentlenium.it
+package org.fluentlenium.adapter.spock
 
-import org.fluentlenium.adapter.spock.FluentSpecification
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
 
-class DefaultSpec extends FluentSpecification {
-    private String inputsHtmlFile
+class FluentSpecificationSpec extends FluentSpecification {
+    private String page1
 
     @Override
     WebDriver newWebDriver() {
@@ -13,10 +12,10 @@ class DefaultSpec extends FluentSpecification {
     }
 
     void setup() {
-        inputsHtmlFile = ClassLoader.getSystemResource("inputs.html").toString()
+        page1 = ClassLoader.getSystemResource("page1.html").toString()
     }
 
-    def "test basic spock setup"() {
+    def "Run basic test without exception"() {
         when:
         '' // Need a when to compile the specification
 
@@ -24,9 +23,9 @@ class DefaultSpec extends FluentSpecification {
         true
     }
 
-    def "test with html file"() {
+    def "Open html file and fill value into input tag"() {
         given:
-        goTo(inputsHtmlFile)
+        goTo(page1)
 
         when:
         el("input").fill().with("1")
@@ -35,4 +34,6 @@ class DefaultSpec extends FluentSpecification {
         then:
         el("input").value() == "1"
     }
+
+
 }
