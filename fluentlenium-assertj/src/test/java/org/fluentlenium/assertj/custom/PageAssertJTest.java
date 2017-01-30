@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class PageAssertJTest {
     @Mock
@@ -26,4 +27,9 @@ public class PageAssertJTest {
         verify(fluentPage).isAt();
     }
 
+    @Test
+    public void testAssertMethodInherited() {
+        when(fluentPage.getUrl()).thenReturn("http://lOcAlHOST/");
+        FluentLeniumAssertions.assertThat(fluentPage.getUrl()).containsIgnoringCase("localhost");
+    }
 }
