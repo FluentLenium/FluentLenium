@@ -1,5 +1,6 @@
 package org.fluentlenium.assertj;
 
+import org.assertj.core.api.Assertions;
 import org.fluentlenium.assertj.custom.AlertAssert;
 import org.fluentlenium.assertj.custom.FluentListAssert;
 import org.fluentlenium.assertj.custom.FluentWebElementAssert;
@@ -12,7 +13,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
 /**
  * FluentLenium assertions entry point.
  */
-public final class FluentLeniumAssertions {
+public final class FluentLeniumAssertions extends Assertions {
 
     private FluentLeniumAssertions() {
         //only static
