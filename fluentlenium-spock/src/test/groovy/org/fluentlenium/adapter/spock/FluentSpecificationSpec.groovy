@@ -1,9 +1,11 @@
 package org.fluentlenium.adapter.spock
 
+import org.fluentlenium.core.domain.FluentWebElement
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
 
 class FluentSpecificationSpec extends FluentSpecification {
+    public static final String INPUT_VALUE = "1"
     private String page1
 
     @Override
@@ -28,12 +30,12 @@ class FluentSpecificationSpec extends FluentSpecification {
         goTo(page1)
 
         when:
-        el("input").fill().with("1")
-        await().explicitlyFor(5000L)
+        FluentWebElement inputElement = el("input")
+        inputElement.fill().with(INPUT_VALUE)
+        await().until(inputElement).value(INPUT_VALUE)
 
         then:
-        el("input").value() == "1"
+        el("input").value() == INPUT_VALUE
     }
-
 
 }

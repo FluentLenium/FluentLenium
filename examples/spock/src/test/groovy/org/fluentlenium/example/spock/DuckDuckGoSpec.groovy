@@ -6,6 +6,7 @@ import org.fluentlenium.core.hook.wait.Wait
 
 @Wait
 class DuckDuckGoSpec extends FluentSpecification {
+    public static final String SEARCH_TEXT = "FluentLenium"
 
     void setupSpec() {
         FirefoxDriverManager.getInstance().setup()
@@ -16,12 +17,12 @@ class DuckDuckGoSpec extends FluentSpecification {
         goTo("https://duckduckgo.com")
 
         when:
-        $("#search_form_input_homepage").fill().with("FluentLenium")
-        $("#search_button_homepage").submit()
-        await().explicitlyFor(5000L)
+        el("#search_form_input_homepage").fill().with(SEARCH_TEXT)
+        el("#search_button_homepage").submit()
+        await().untilWindow(SEARCH_TEXT)
 
         then:
-        window().title().contains("FluentLenium")
+        window().title().contains(SEARCH_TEXT)
     }
 
 }
