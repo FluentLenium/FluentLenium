@@ -704,7 +704,7 @@ It's not mandatory to extend `FluentWebElement`, but a constructor with at least
 public class SelectComponent {
     private WebElement element;
     
-    private FluentWebElement(WebElement element) { // This constructor MUST exist ! But can be private.
+    private SelectComponent(WebElement element) { // This constructor MUST exist ! But can be private.
         this.element = element;
     }
 }
