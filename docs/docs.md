@@ -433,7 +433,7 @@ For example, if I choose that the title will be sufficient to know if I'm on the
 ```java
 public class MyPage extends FluentPage {
     @Override
-    public void getUrl() {
+    public String getUrl() {
         return "/app/my-page";
     }
     
