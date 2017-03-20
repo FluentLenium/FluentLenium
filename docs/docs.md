@@ -796,7 +796,7 @@ FluentLenium provides a rich and fluent API in order to help you to handle AJAX 
 If you want to wait for at most 5 seconds until the number of elements corresponding to the until criteria (here the class fluent) has the requested size:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until(".fluent").size(3);
+await().atMost(5, TimeUnit.SECONDS).until($(".fluent")).size(3);
 ```
 The default wait is 500 ms.
 
