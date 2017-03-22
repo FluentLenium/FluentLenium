@@ -60,6 +60,15 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
 
     /* default */ final List<ScriptListener> afterScript = new ArrayList<>();
 
+    /* default */ final List<AlertListener> beforeAlertAccept = new ArrayList<>();
+
+    /* default */ final List<AlertListener> afterAlertAccept = new ArrayList<>();
+
+    /* default */ final List<AlertListener> beforeAlertDismiss = new ArrayList<>();
+
+    /* default */ final List<AlertListener> afterAlertDismiss = new ArrayList<>();
+
+
     /* default */ final List<ExceptionListener> onException = new ArrayList<>();
 
     /**
@@ -325,6 +334,50 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      */
     public EventsRegistry afterScript(ScriptListener listener) {
         afterScript.add(listener);
+        return this;
+    }
+
+    /**
+     * Add a listener that will be invoked before an alert is accepted.
+     *
+     * @param listener listener invoked before an alert is accepted.
+     * @return {@code this} to chain method calls
+     */
+    public EventsRegistry beforeAlertAccept(AlertListener listener) {
+        beforeAlertAccept.add(listener);
+        return this;
+    }
+
+    /**
+     * Add a listener that will be invoked after an alert is accepted.
+     *
+     * @param listener listener invoked after an alert is accepted.
+     * @return {@code this} to chain method calls
+     */
+    public EventsRegistry afterAlertAccept(AlertListener listener) {
+        afterAlertAccept.add(listener);
+        return this;
+    }
+
+    /**
+     * Add a listener that will be invoked before an alert is dismissed.
+     *
+     * @param listener listener invoked before an alert is dismissed.
+     * @return {@code this} to chain method calls
+     */
+    public EventsRegistry beforeAlertDismiss(AlertListener listener) {
+        beforeAlertDismiss.add(listener);
+        return this;
+    }
+
+    /**
+     * Add a listener that will be invoked after an alert is dismissed.
+     *
+     * @param listener listener invoked after an alert is dismissed.
+     * @return {@code this} to chain method calls
+     */
+    public EventsRegistry afterAlertDismiss(AlertListener listener) {
+        afterAlertDismiss.add(listener);
         return this;
     }
 

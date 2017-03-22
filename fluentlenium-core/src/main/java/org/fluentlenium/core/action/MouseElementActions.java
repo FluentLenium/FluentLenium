@@ -3,16 +3,13 @@ package org.fluentlenium.core.action;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
 
 /**
  * Element specific mouse control interface.
  */
 public class MouseElementActions {
-    private WebDriver driver;
-    private Keyboard keyboard;
-    private Mouse mouse;
+    private final WebDriver driver;
     private final WebElement element;
 
     /**
@@ -26,23 +23,7 @@ public class MouseElementActions {
         this.element = element;
     }
 
-    /**
-     * Creates a new mouse element actions.
-     *
-     * @param keyboard selenium keyboard interface
-     * @param mouse    selenium mouse interface
-     * @param element  selenium element
-     */
-    public MouseElementActions(Keyboard keyboard, Mouse mouse, WebElement element) {
-        this.keyboard = keyboard;
-        this.mouse = mouse;
-        this.element = element;
-    }
-
     private org.openqa.selenium.interactions.Actions actions() {
-        if (driver == null) {
-            return new org.openqa.selenium.interactions.Actions(keyboard, mouse);
-        }
         return new org.openqa.selenium.interactions.Actions(driver);
     }
 
@@ -52,10 +33,7 @@ public class MouseElementActions {
      * @return low level interface to control the mouse
      */
     public Mouse basic() {
-        if (mouse == null) {
-            return ((HasInputDevices) driver).getMouse();
-        }
-        return mouse;
+        return ((HasInputDevices) driver).getMouse();
     }
 
     /**

@@ -60,15 +60,6 @@ public class MouseActionsTest {
     }
 
     @Test
-    public void testClickKeyboardMouse() {
-        MouseActions actions = new MouseActions(keyboard, mouse);
-        actions.click();
-
-        verify(mouse, never()).mouseMove(any(Coordinates.class));
-        verify(mouse).click(any());
-    }
-
-    @Test
     public void testContextClick() {
         MouseActions actions = new MouseActions(driver);
         actions.contextClick();
@@ -99,9 +90,6 @@ public class MouseActionsTest {
     public void testBasic() {
         MouseActions actions = new MouseActions(driver);
         Assertions.assertThat(actions.basic()).isSameAs(mouse);
-
-        MouseActions actionsAlt = new MouseActions(keyboard, mouse);
-        Assertions.assertThat(actionsAlt.basic()).isSameAs(mouse);
     }
 
     private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices { // NOPMD AbstractNaming

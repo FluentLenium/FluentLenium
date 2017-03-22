@@ -1,5 +1,7 @@
 package org.fluentlenium.core.events;
 
+import org.fluentlenium.core.events.annotations.AfterAlertAccept;
+import org.fluentlenium.core.events.annotations.AfterAlertDismiss;
 import org.fluentlenium.core.events.annotations.AfterChangeValueOf;
 import org.fluentlenium.core.events.annotations.AfterClickOn;
 import org.fluentlenium.core.events.annotations.AfterFindBy;
@@ -9,6 +11,8 @@ import org.fluentlenium.core.events.annotations.AfterNavigateForward;
 import org.fluentlenium.core.events.annotations.AfterNavigateRefresh;
 import org.fluentlenium.core.events.annotations.AfterNavigateTo;
 import org.fluentlenium.core.events.annotations.AfterScript;
+import org.fluentlenium.core.events.annotations.BeforeAlertAccept;
+import org.fluentlenium.core.events.annotations.BeforeAlertDismiss;
 import org.fluentlenium.core.events.annotations.BeforeChangeValueOf;
 import org.fluentlenium.core.events.annotations.BeforeClickOn;
 import org.fluentlenium.core.events.annotations.BeforeFindBy;
@@ -155,6 +159,30 @@ public class ContainerAnnotationsEventsRegistry {
                 if (method.getAnnotation(AfterScript.class) != null) {
                     registry.afterScript(new AnnotationScriptListener(method, container, AfterScript.class.getSimpleName(),
                             method.getAnnotation(AfterScript.class).value()));
+                    listenerCount++;
+                }
+                if (method.getAnnotation(BeforeAlertAccept.class) != null) {
+                    registry.beforeAlertAccept(
+                            new AnnotationAlertListener(method, container, BeforeAlertAccept.class.getSimpleName(),
+                                    method.getAnnotation(BeforeAlertAccept.class).value()));
+                    listenerCount++;
+                }
+                if (method.getAnnotation(AfterAlertAccept.class) != null) {
+                    registry.afterAlertAccept(
+                            new AnnotationAlertListener(method, container, AfterAlertAccept.class.getSimpleName(),
+                                    method.getAnnotation(AfterAlertAccept.class).value()));
+                    listenerCount++;
+                }
+                if (method.getAnnotation(BeforeAlertDismiss.class) != null) {
+                    registry.beforeAlertDismiss(
+                            new AnnotationAlertListener(method, container, BeforeAlertDismiss.class.getSimpleName(),
+                                    method.getAnnotation(BeforeAlertDismiss.class).value()));
+                    listenerCount++;
+                }
+                if (method.getAnnotation(AfterAlertDismiss.class) != null) {
+                    registry.afterAlertDismiss(
+                            new AnnotationAlertListener(method, container, AfterAlertDismiss.class.getSimpleName(),
+                                    method.getAnnotation(AfterAlertDismiss.class).value()));
                     listenerCount++;
                 }
             }

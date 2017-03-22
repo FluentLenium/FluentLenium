@@ -185,7 +185,6 @@ public class FluentWaitElement implements FluentWaitFunctional<FluentControl>, F
         return this;
     }
 
-    @Override
     @Deprecated
     public <T> T until(com.google.common.base.Function<? super FluentControl, T> function) {
         return controlWait.until(function);
