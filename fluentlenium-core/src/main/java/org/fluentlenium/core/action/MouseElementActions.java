@@ -3,14 +3,13 @@ package org.fluentlenium.core.action;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
 
 /**
  * Element specific mouse control interface.
  */
 public class MouseElementActions {
-    private WebDriver driver;
+    private final WebDriver driver;
     private final WebElement element;
 
     /**

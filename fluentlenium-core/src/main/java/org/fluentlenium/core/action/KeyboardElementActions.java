@@ -5,15 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
-import org.openqa.selenium.interactions.Mouse;
 
 /**
  * Execute actions with the keyboard on a defined element.
  */
 public class KeyboardElementActions {
-    private WebDriver driver;
-    private Keyboard keyboard;
-    private Mouse mouse;
+    private final WebDriver driver;
     private final WebElement element;
 
     /**
@@ -42,10 +39,7 @@ public class KeyboardElementActions {
      * @return low level interface to control the keyboard
      */
     public Keyboard basic() {
-        if (keyboard == null) {
-            return ((HasInputDevices) driver).getKeyboard();
-        }
-        return keyboard;
+        return ((HasInputDevices) driver).getKeyboard();
     }
 
     /**

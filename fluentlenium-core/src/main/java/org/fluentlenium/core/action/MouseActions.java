@@ -2,14 +2,13 @@ package org.fluentlenium.core.action;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
 
 /**
  * Execute actions with the mouse.
  */
 public class MouseActions {
-    private WebDriver driver;
+    private final WebDriver driver;
 
     /**
      * Creates a new mouse actions.

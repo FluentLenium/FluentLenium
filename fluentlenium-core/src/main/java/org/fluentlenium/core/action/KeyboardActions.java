@@ -5,13 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
-import org.openqa.selenium.interactions.Mouse;
 
 /**
  * Execute actions with the keyboard.
  */
 public class KeyboardActions {
-    private WebDriver driver;
+    private final WebDriver driver;
 
     /**
      * Creates a new object to execute actions with the keyboard, using given selenium driver.

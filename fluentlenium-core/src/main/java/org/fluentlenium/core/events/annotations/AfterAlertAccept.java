@@ -1,7 +1,5 @@
 package org.fluentlenium.core.events.annotations;
 
-import org.fluentlenium.core.events.AlertListener;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -12,9 +10,9 @@ import java.lang.annotation.Target;
  * <p>
  * Can be used in test adapter and component.
  * <p>
- * Parameters from {@link AlertListener} will be injected in the method based on parameters types.
+ * Parameters from {@link org.fluentlenium.core.events.AlertListener} will be injected in the method based on parameters types.
  *
- * @see org.fluentlenium.core.events.EventsRegistry#afterAlertAccept(AlertListener)
+ * @see org.fluentlenium.core.events.EventsRegistry#afterAlertAccept(org.fluentlenium.core.events.AlertListener)
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
