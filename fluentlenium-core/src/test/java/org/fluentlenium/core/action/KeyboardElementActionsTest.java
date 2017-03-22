@@ -60,15 +60,6 @@ public class KeyboardElementActionsTest {
     }
 
     @Test
-    public void testKeyDownKeyboardMouse() {
-        KeyboardElementActions actions = new KeyboardElementActions(keyboard, mouse, element);
-        actions.keyDown(Keys.SHIFT);
-
-        verify(mouse).click(coordinates);
-        verify(keyboard).pressKey(Keys.SHIFT);
-    }
-
-    @Test
     public void testKeyUp() {
         KeyboardElementActions actions = new KeyboardElementActions(driver, element);
         actions.keyUp(Keys.SHIFT);
@@ -90,9 +81,6 @@ public class KeyboardElementActionsTest {
     public void testBasic() {
         KeyboardElementActions actions = new KeyboardElementActions(driver, element);
         Assertions.assertThat(actions.basic()).isSameAs(keyboard);
-
-        KeyboardElementActions actionsAlt = new KeyboardElementActions(keyboard, mouse, element);
-        Assertions.assertThat(actionsAlt.basic()).isSameAs(keyboard);
     }
 
     private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices { // NOPMD AbstractNaming

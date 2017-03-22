@@ -12,8 +12,6 @@ import org.openqa.selenium.interactions.Mouse;
  */
 public class KeyboardActions {
     private WebDriver driver;
-    private Keyboard keyboard;
-    private Mouse mouse;
 
     /**
      * Creates a new object to execute actions with the keyboard, using given selenium driver.
@@ -25,25 +23,11 @@ public class KeyboardActions {
     }
 
     /**
-     * Creates a new object to execute actions with the keyboard, using given selenium Keyboard and Mouse interfaces.
-     *
-     * @param keyboard keyboard interface
-     * @param mouse    mouse interface
-     */
-    public KeyboardActions(Keyboard keyboard, Mouse mouse) {
-        this.keyboard = keyboard;
-        this.mouse = mouse;
-    }
-
-    /**
      * Get selenium interactions actions.
      *
      * @return selenium actions
      */
     protected org.openqa.selenium.interactions.Actions actions() {
-        if (driver == null) {
-            return new org.openqa.selenium.interactions.Actions(keyboard, mouse);
-        }
         return new org.openqa.selenium.interactions.Actions(driver);
     }
 
@@ -53,10 +37,7 @@ public class KeyboardActions {
      * @return low level interface to control the keyboard
      */
     public Keyboard basic() {
-        if (keyboard == null) {
-            return ((HasInputDevices) driver).getKeyboard();
-        }
-        return keyboard;
+        return ((HasInputDevices) driver).getKeyboard();
     }
 
     /**

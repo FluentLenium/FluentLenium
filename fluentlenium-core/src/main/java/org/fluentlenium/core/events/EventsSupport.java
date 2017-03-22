@@ -164,4 +164,31 @@ public class EventsSupport implements EventListener {
         }
     }
 
+    @Override
+    public void beforeAlertAccept(WebDriver driver) {
+        for (AlertListener listener : eventsRegistry.beforeAlertAccept) {
+            listener.on(driver);
+        }
+    }
+
+    @Override
+    public void afterAlertAccept(WebDriver driver) {
+        for (AlertListener listener : eventsRegistry.afterAlertAccept) {
+            listener.on(driver);
+        }
+    }
+
+    @Override
+    public void beforeAlertDismiss(WebDriver driver) {
+        for (AlertListener listener : eventsRegistry.beforeAlertDismiss) {
+            listener.on(driver);
+        }
+    }
+
+    @Override
+    public void afterAlertDismiss(WebDriver driver) {
+        for (AlertListener listener : eventsRegistry.afterAlertDismiss) {
+            listener.on(driver);
+        }
+    }
 }

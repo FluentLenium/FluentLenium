@@ -28,27 +28,11 @@ public class KeyboardElementActions {
     }
 
     /**
-     * Creates a new object to execute actions with the keyboard, using selenium Keyboard and Mouse interfaces and element.
-     *
-     * @param keyboard keyboard interface
-     * @param mouse    mouse interface
-     * @param element  element on which to execute actions
-     */
-    public KeyboardElementActions(Keyboard keyboard, Mouse mouse, WebElement element) {
-        this.keyboard = keyboard;
-        this.mouse = mouse;
-        this.element = element;
-    }
-
-    /**
      * Get selenium interactions actions.
      *
      * @return selenium actions
      */
     protected org.openqa.selenium.interactions.Actions actions() {
-        if (driver == null) {
-            return new org.openqa.selenium.interactions.Actions(keyboard, mouse);
-        }
         return new org.openqa.selenium.interactions.Actions(driver);
     }
 

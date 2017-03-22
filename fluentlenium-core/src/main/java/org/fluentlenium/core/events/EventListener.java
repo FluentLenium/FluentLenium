@@ -1,6 +1,7 @@
 package org.fluentlenium.core.events;
 
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -164,4 +165,33 @@ public interface EventListener {
      * @param driver WebDriver
      */
     void afterNavigateRefresh(WebDriver driver);
+
+    /**
+     * Called  before {@link Alert#accept()}
+     *
+     * @param driver WebDriver
+     */
+    void beforeAlertAccept(WebDriver driver);
+
+    /**
+     * Called  after {@link Alert#accept()}
+     *
+     * @param driver WebDriver
+     */
+    void afterAlertAccept(WebDriver driver);
+
+    /**
+     * Called  before {@link Alert#dismiss()}
+     *
+     * @param driver WebDriver
+     */
+    void beforeAlertDismiss(WebDriver driver);
+
+    /**
+     * Called  after {@link Alert#dismiss()}
+     *
+     * @param driver WebDriver
+     */
+    void afterAlertDismiss(WebDriver driver);
+
 }
