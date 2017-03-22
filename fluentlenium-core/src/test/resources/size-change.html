@@ -1,0 +1,21 @@
+<html>
+<body>
+
+<script lang="javascript">
+  function addRow3() {
+    var row3 = document.createElement('div');
+    row3.setAttribute('class', 'row');
+    row3.innerHTML = 'row3';
+
+    document.getElementsByClassName('container')[0].appendChild(row3);
+  }
+  window.setTimeout(addRow3, 1000)
+</script>
+
+<div class="container">
+    <div class="row">row1</div>
+    <div class="row">row2</div>
+</div>
+
+</body>
+</html>
