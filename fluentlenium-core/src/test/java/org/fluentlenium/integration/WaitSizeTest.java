@@ -15,6 +15,7 @@ public class WaitSizeTest extends IntegrationFluentTest {
     @Test
     public void checkWithNameCssSelector() {
         goTo(getAbsoluteUrlFromFile("size-change.html"));
+        assert($(".row").size() == 2);
         await().until($(".row")).size().greaterThan(2);
     }
 
@@ -22,6 +23,7 @@ public class WaitSizeTest extends IntegrationFluentTest {
     @Test
     public void checkWithFindByNameCssSelector() {
         goTo(getAbsoluteUrlFromFile("size-change.html"));
+        assert($(".row").size() == 2);
         await().until(row).size().greaterThan(2);
     }
 }
