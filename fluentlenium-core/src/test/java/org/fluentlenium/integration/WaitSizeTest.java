@@ -10,7 +10,7 @@ import static org.fluentlenium.integration.util.UrlUtil.getAbsoluteUrlFromFile;
 public class WaitSizeTest extends IntegrationFluentTest {
 
     @FindBy(css = ".row")
-    private FluentList<FluentWebElement> row;
+    private FluentList<FluentWebElement> rows;
 
     @Test
     public void checkWithNameCssSelector() {
@@ -23,8 +23,8 @@ public class WaitSizeTest extends IntegrationFluentTest {
     @Test
     public void checkWithFindByNameCssSelector() {
         goTo(getAbsoluteUrlFromFile("size-change.html"));
-        assert($(".row").size() == 2);
-        await().until(row).size().greaterThan(2);
+        assert(rows.size() == 2);
+        await().until(rows).size().greaterThan(2);
     }
 }
 
