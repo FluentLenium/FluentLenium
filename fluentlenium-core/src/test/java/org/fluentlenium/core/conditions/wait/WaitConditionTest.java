@@ -48,14 +48,11 @@ public class WaitConditionTest {
 
     @Test
     public void testWaitEnabled() {
-        FluentConditions conditions = WaitConditionProxy.one(wait, "context", new Supplier<List<? extends FluentWebElement>>() {
-            @Override
-            public List<? extends FluentWebElement> get() {
-                FluentList<FluentWebElement> list = instantiator.newFluentList();
-                FluentWebElement fluentWebElement = instantiator.newFluent(element);
-                list.add(fluentWebElement);
-                return list;
-            }
+        FluentConditions conditions = WaitConditionProxy.one(wait, "context", () -> {
+            FluentList<FluentWebElement> list = instantiator.newFluentList();
+            FluentWebElement fluentWebElement = instantiator.newFluent(element);
+            list.add(fluentWebElement);
+            return list;
         });
 
         new Timer().schedule(new TimerTask() {
@@ -73,14 +70,11 @@ public class WaitConditionTest {
     public void testWaitNotEnabled() {
         when(element.isEnabled()).thenReturn(true);
 
-        FluentConditions conditions = WaitConditionProxy.one(wait, "context", new Supplier<List<? extends FluentWebElement>>() {
-            @Override
-            public List<? extends FluentWebElement> get() {
-                FluentList<FluentWebElement> list = instantiator.newFluentList();
-                FluentWebElement fluentWebElement = instantiator.newFluent(element);
-                list.add(fluentWebElement);
-                return list;
-            }
+        FluentConditions conditions = WaitConditionProxy.one(wait, "context", () -> {
+            FluentList<FluentWebElement> list = instantiator.newFluentList();
+            FluentWebElement fluentWebElement = instantiator.newFluent(element);
+            list.add(fluentWebElement);
+            return list;
         });
 
         new Timer().schedule(new TimerTask() {
@@ -111,14 +105,11 @@ public class WaitConditionTest {
 
     @Test
     public void testId() {
-        FluentConditions conditions = WaitConditionProxy.one(wait, "context", new Supplier<List<? extends FluentWebElement>>() {
-            @Override
-            public List<? extends FluentWebElement> get() {
-                FluentList<FluentWebElement> list = instantiator.newFluentList();
-                FluentWebElement fluentWebElement = instantiator.newFluent(element);
-                list.add(fluentWebElement);
-                return list;
-            }
+        FluentConditions conditions = WaitConditionProxy.one(wait, "context", () -> {
+            FluentList<FluentWebElement> list = instantiator.newFluentList();
+            FluentWebElement fluentWebElement = instantiator.newFluent(element);
+            list.add(fluentWebElement);
+            return list;
         });
 
         new Timer().schedule(new TimerTask() {
@@ -134,14 +125,11 @@ public class WaitConditionTest {
 
     @Test(expected = TimeoutException.class)
     public void testIdTimeout() {
-        FluentConditions conditions = WaitConditionProxy.one(wait, "context", new Supplier<List<? extends FluentWebElement>>() {
-            @Override
-            public List<? extends FluentWebElement> get() {
-                FluentList<FluentWebElement> list = instantiator.newFluentList();
-                FluentWebElement fluentWebElement = instantiator.newFluent(element);
-                list.add(fluentWebElement);
-                return list;
-            }
+        FluentConditions conditions = WaitConditionProxy.one(wait, "context", () -> {
+            FluentList<FluentWebElement> list = instantiator.newFluentList();
+            FluentWebElement fluentWebElement = instantiator.newFluent(element);
+            list.add(fluentWebElement);
+            return list;
         });
 
         new Timer().schedule(new TimerTask() {
@@ -158,14 +146,11 @@ public class WaitConditionTest {
     public void testRectangleSize() {
         when(element.getRect()).thenReturn(new Rectangle(10, 20, 30, 30));
 
-        FluentConditions conditions = WaitConditionProxy.one(wait, "context", new Supplier<List<? extends FluentWebElement>>() {
-            @Override
-            public List<? extends FluentWebElement> get() {
-                FluentList<FluentWebElement> list = instantiator.newFluentList();
-                FluentWebElement fluentWebElement = instantiator.newFluent(element);
-                list.add(fluentWebElement);
-                return list;
-            }
+        FluentConditions conditions = WaitConditionProxy.one(wait, "context", () -> {
+            FluentList<FluentWebElement> list = instantiator.newFluentList();
+            FluentWebElement fluentWebElement = instantiator.newFluent(element);
+            list.add(fluentWebElement);
+            return list;
         });
 
         new Timer().schedule(new TimerTask() {
@@ -182,14 +167,11 @@ public class WaitConditionTest {
     public void testRectangleSizeTimeout() {
         when(element.getRect()).thenReturn(new Rectangle(10, 20, 30, 30));
 
-        FluentConditions conditions = WaitConditionProxy.one(wait, "context", new Supplier<List<? extends FluentWebElement>>() {
-            @Override
-            public List<? extends FluentWebElement> get() {
-                FluentList<FluentWebElement> list = instantiator.newFluentList();
-                FluentWebElement fluentWebElement = instantiator.newFluent(element);
-                list.add(fluentWebElement);
-                return list;
-            }
+        FluentConditions conditions = WaitConditionProxy.one(wait, "context", () -> {
+            FluentList<FluentWebElement> list = instantiator.newFluentList();
+            FluentWebElement fluentWebElement = instantiator.newFluent(element);
+            list.add(fluentWebElement);
+            return list;
         });
 
         conditions.rectangle().width().greaterThan(30);
