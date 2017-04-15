@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -156,6 +157,7 @@ public class ReflectiveWebDriverFactoryTest {
 
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setJavascriptEnabled(false);
+        desiredCapabilities.setBrowserName(BrowserType.HTMLUNIT);
 
         WebDriver webDriver = webDriverFactory.newWebDriver(desiredCapabilities, null);
         try {
