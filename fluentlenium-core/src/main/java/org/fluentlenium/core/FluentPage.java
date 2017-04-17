@@ -75,6 +75,14 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
         }
     }
 
+    @Override
+    public void isAt(Object... parameters) {
+        String url = getUrl(parameters);
+        if (url != null) {
+            isAtUsingUrl(url);
+        }
+    }
+
     /**
      * URL matching implementation for isAt().
      *

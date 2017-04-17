@@ -32,6 +32,11 @@ public interface FluentPageControl extends FluentControl {
     void isAt();
 
     /**
+     * Check if the browser is on this page, after replacing parameters with given values.
+     */
+    void isAt(Object... parameters);
+
+    /**
      * Go to the url defined in the page
      */
     void go(); // NOPMD ShortMethodName
