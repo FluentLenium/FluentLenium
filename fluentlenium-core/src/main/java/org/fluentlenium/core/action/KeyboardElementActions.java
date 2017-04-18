@@ -50,7 +50,7 @@ public class KeyboardElementActions {
      *               provided key is none of those, {@link IllegalArgumentException} is thrown.
      * @return this object reference to chain calls
      * @see #keyDown(org.openqa.selenium.Keys)
-     * @see org.openqa.selenium.interactions.Actions#keyDown(WebElement, Keys)
+     * @see org.openqa.selenium.interactions.Actions#keyDown(WebElement, CharSequence)
      */
     public KeyboardElementActions keyDown(Keys theKey) {
         actions().keyDown(element, theKey).perform();
@@ -63,7 +63,7 @@ public class KeyboardElementActions {
      *
      * @param theKey Either {@link Keys#SHIFT}, {@link Keys#ALT} or {@link Keys#CONTROL}.
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#keyUp(WebElement, Keys)
+     * @see org.openqa.selenium.interactions.Actions#keyUp(WebElement, CharSequence)
      */
     public KeyboardElementActions keyUp(Keys theKey) {
         actions().keyUp(element, theKey).perform();
