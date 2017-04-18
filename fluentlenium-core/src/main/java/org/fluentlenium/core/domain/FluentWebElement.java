@@ -71,26 +71,18 @@ public class FluentWebElement extends Component
         super(element, control, instantiator);
 
         hookControl = new HookControlImpl<>(this, webElement, this.control, this.instantiator,
-                new Supplier<FluentWebElement>() {
-                    @Override
-                    public FluentWebElement get() {
-                        LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
-                        ElementLocator locator = locatorHandler.getLocator();
-                        WebElement noHookElement = LocatorProxies.createWebElement(locator);
-                        return newComponent(FluentWebElement.this.getClass(), noHookElement);
-                    }
+                () -> {
+                    LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
+                    ElementLocator locator = locatorHandler.getLocator();
+                    WebElement noHookElement = LocatorProxies.createWebElement(locator);
+                    return newComponent(FluentWebElement.this.getClass(), noHookElement);
                 });
         search = new Search(element, this, this.instantiator, this.control);
         axes = new Axes(element, this.instantiator);
         mouseActions = new MouseElementActions(this.control.getDriver(), element);
         keyboardActions = new KeyboardElementActions(this.control.getDriver(), element);
         conditions = new WebElementConditions(this);
-        label = new FluentLabelImpl<>(this, new Supplier<String>() {
-            @Override
-            public String get() {
-                return getElement().toString();
-            }
-        });
+        label = new FluentLabelImpl<>(this, () -> getElement().toString());
         javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new SupplierOfInstance<>(this));
     }
 

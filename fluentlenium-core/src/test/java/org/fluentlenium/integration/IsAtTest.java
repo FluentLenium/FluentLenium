@@ -14,6 +14,9 @@ public class IsAtTest extends IntegrationFluentTest {
     private PageIsAt pageOk;
 
     @Page
+    private PageIsAtParameter pageOkParameter;
+
+    @Page
     private PageIsNotAt pageFail;
 
     @Test
@@ -35,11 +38,25 @@ public class IsAtTest extends IntegrationFluentTest {
         pageOk.isAt();
     }
 
+    @Test
+    public void testIsAtParameters() {
+        pageOkParameter.go("html");
+        pageOkParameter.isAt("html");
+    }
+
     @FindBy(css = "#oneline")
     public static class PageIsAt extends FluentPage {
         @Override
         public String getUrl() {
             return IntegrationFluentTest.DEFAULT_URL;
+        }
+    }
+
+    @FindBy(css = "#oneline")
+    public static class PageIsAtParameter extends FluentPage {
+        @Override
+        public String getUrl() {
+            return IntegrationFluentTest.DEFAULT_URL.replace(".html", ".{extension}");
         }
     }
 

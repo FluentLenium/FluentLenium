@@ -84,12 +84,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     protected void starting(Class<?> testClass, String testName) {
         EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName, getDriverLifecycle());
 
-        SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getOrCreateDriver(new Supplier<WebDriver>() {
-            @Override
-            public WebDriver get() {
-                return newWebDriver();
-            }
-        }, parameters.getTestClass(), parameters.getTestName(), parameters.getDriverLifecycle());
+        SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getOrCreateDriver(() -> newWebDriver(), parameters.getTestClass(), parameters.getTestName(), parameters.getDriverLifecycle());
 
         initFluent(sharedWebDriver.getDriver());
     }

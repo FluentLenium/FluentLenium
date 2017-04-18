@@ -1,8 +1,10 @@
 package org.fluentlenium.adapter.spock.page
 
 import org.fluentlenium.adapter.spock.FluentSpecification
+import org.openqa.selenium.Capabilities
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
+import org.openqa.selenium.remote.DesiredCapabilities
 
 class FluentSpecificationPageSpec extends FluentSpecification {
 
@@ -11,7 +13,17 @@ class FluentSpecificationPageSpec extends FluentSpecification {
 
     @Override
     WebDriver newWebDriver() {
-        return new HtmlUnitDriver(true)
+        return new HtmlUnitDriver()
+    }
+
+    @Override
+    String getWebDriver() {
+        return "htmlunit"
+    }
+
+    @Override
+    Capabilities getCapabilities() {
+        return DesiredCapabilities.htmlUnit()
     }
 
     void setup() {

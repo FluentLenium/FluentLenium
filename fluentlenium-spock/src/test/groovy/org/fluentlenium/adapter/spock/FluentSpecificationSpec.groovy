@@ -1,17 +1,23 @@
 package org.fluentlenium.adapter.spock
 
 import org.fluentlenium.core.domain.FluentWebElement
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.htmlunit.HtmlUnitDriver
+import org.openqa.selenium.Capabilities
+import org.openqa.selenium.remote.DesiredCapabilities
 
 class FluentSpecificationSpec extends FluentSpecification {
     public static final String INPUT_VALUE = "1"
     private String page1
 
     @Override
-    WebDriver newWebDriver() {
-        return new HtmlUnitDriver(true)
+    String getWebDriver() {
+        return "htmlunit"
     }
+
+    @Override
+    Capabilities getCapabilities() {
+        return DesiredCapabilities.htmlUnit()
+    }
+
 
     void setup() {
         page1 = ClassLoader.getSystemResource("page1.html").toString()

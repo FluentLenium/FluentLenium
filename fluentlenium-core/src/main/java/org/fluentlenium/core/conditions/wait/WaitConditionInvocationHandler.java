@@ -208,13 +208,13 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
             try {
                 return (Boolean) method.invoke(input, args);
             } catch (IllegalAccessException e) {
-                throw new IllegalStateException("An internal error has occurred while waiting", e);
+                throw new IllegalStateException("An internal error has occured while waiting", e);
             } catch (InvocationTargetException e) {
                 Throwable targetException = e.getTargetException();
                 if (targetException instanceof RuntimeException) {
                     throw (RuntimeException) targetException;
                 }
-                throw new IllegalStateException("An internal error has occurred while waiting", e);
+                throw new IllegalStateException("An internal error has occured while waiting", e);
             }
         });
         return true;

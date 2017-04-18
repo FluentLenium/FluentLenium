@@ -31,7 +31,7 @@ public final class WaitConditionProxy {
      * @return a proxy generating message from annotations.
      */
     public static FluentListConditions each(FluentWait wait, String context,
-                                            Supplier<? extends List<? extends FluentWebElement>> elementsSupplier) {
+            Supplier<? extends List<? extends FluentWebElement>> elementsSupplier) {
         return list(wait, context, () -> new EachElementConditions(elementsSupplier.get()));
     }
 
@@ -44,7 +44,7 @@ public final class WaitConditionProxy {
      * @return a proxy generating message from annotations.
      */
     public static FluentListConditions one(FluentWait wait, String context,
-                                           Supplier<? extends List<? extends FluentWebElement>> elementsSupplier) {
+            Supplier<? extends List<? extends FluentWebElement>> elementsSupplier) {
         return list(wait, context, () -> new AtLeastOneElementConditions(elementsSupplier.get()));
     }
 

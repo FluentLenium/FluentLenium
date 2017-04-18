@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -136,10 +137,10 @@ public class ReflectiveWebDriverFactoryTest {
         assertThat(webDriverFactory.getNames())
                 .containsExactly("htmlunit", HtmlUnitDriver.class.getName(), HtmlUnitDriver.class.getSimpleName());
 
-        WebDriver webDriver = webDriverFactory.newWebDriver(null, null);
+        WebDriver webDriver = webDriverFactory.newWebDriver(DesiredCapabilities.htmlUnit(), null);
         try {
             assertThat(webDriver).isExactlyInstanceOf(HtmlUnitDriver.class);
-            assertThat(((HasCapabilities) webDriver).getCapabilities().isJavascriptEnabled()).isTrue();
+            assertThat(((HasCapabilities) webDriver).getCapabilities().is("javascriptEnabled")).isTrue();
         } finally {
             webDriver.quit();
         }
@@ -154,13 +155,14 @@ public class ReflectiveWebDriverFactoryTest {
         assertThat(webDriverFactory.getNames())
                 .containsExactly("htmlunit", HtmlUnitDriver.class.getName(), HtmlUnitDriver.class.getSimpleName());
 
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+        DesiredCapabilities desiredCapabilities = DesiredCapabilities.htmlUnit();
         desiredCapabilities.setJavascriptEnabled(false);
+        desiredCapabilities.setBrowserName(BrowserType.HTMLUNIT);
 
         WebDriver webDriver = webDriverFactory.newWebDriver(desiredCapabilities, null);
         try {
             assertThat(webDriver).isExactlyInstanceOf(HtmlUnitDriver.class);
-            assertThat(((HasCapabilities) webDriver).getCapabilities().isJavascriptEnabled()).isFalse();
+            assertThat(((HasCapabilities) webDriver).getCapabilities().is("javascriptEnabled")).isFalse();
         } finally {
             webDriver.quit();
         }
