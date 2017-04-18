@@ -135,12 +135,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
         if (wait.hasMessageDefined()) {
             wait.untilPredicate(present);
         } else {
-            Supplier<String> customMessageSupplier = new Supplier<String>() {
-                @Override
-                public String get() {
-                    return messageCustomizer().apply(messageSupplier.get());
-                }
-            };
+            Supplier<String> customMessageSupplier = () -> messageCustomizer().apply(messageSupplier.get());
             wait.withMessage(customMessageSupplier).untilPredicate(present);
         }
     }
@@ -209,20 +204,17 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
 
     private boolean waitForCondition(Method method, Object[] args) {
         C messageBuilder = messageBuilder();
-        until(conditions(), messageBuilder, new Function<C, Boolean>() {
-            @Override
-            public Boolean apply(C input) {
-                try {
-                    return (Boolean) method.invoke(input, args);
-                } catch (IllegalAccessException e) {
-                    throw new IllegalStateException("An internal error has occured while waiting", e);
-                } catch (InvocationTargetException e) {
-                    Throwable targetException = e.getTargetException();
-                    if (targetException instanceof RuntimeException) {
-                        throw (RuntimeException) targetException;
-                    }
-                    throw new IllegalStateException("An internal error has occured while waiting", e);
+        until(conditions(), messageBuilder, input -> {
+            try {
+                return (Boolean) method.invoke(input, args);
+            } catch (IllegalAccessException e) {
+                throw new IllegalStateException("An internal error has occured while waiting", e);
+            } catch (InvocationTargetException e) {
+                Throwable targetException = e.getTargetException();
+                if (targetException instanceof RuntimeException) {
+                    throw (RuntimeException) targetException;
                 }
+                throw new IllegalStateException("An internal error has occured while waiting", e);
             }
         });
         return true;

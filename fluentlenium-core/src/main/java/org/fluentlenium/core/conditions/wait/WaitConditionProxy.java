@@ -32,12 +32,7 @@ public final class WaitConditionProxy {
      */
     public static FluentListConditions each(FluentWait wait, String context,
             Supplier<? extends List<? extends FluentWebElement>> elementsSupplier) {
-        return list(wait, context, new Supplier<FluentListConditions>() {
-            @Override
-            public FluentListConditions get() {
-                return new EachElementConditions(elementsSupplier.get());
-            }
-        });
+        return list(wait, context, () -> new EachElementConditions(elementsSupplier.get()));
     }
 
     /**
@@ -50,12 +45,7 @@ public final class WaitConditionProxy {
      */
     public static FluentListConditions one(FluentWait wait, String context,
             Supplier<? extends List<? extends FluentWebElement>> elementsSupplier) {
-        return list(wait, context, new Supplier<FluentListConditions>() {
-            @Override
-            public FluentListConditions get() {
-                return new AtLeastOneElementConditions(elementsSupplier.get());
-            }
-        });
+        return list(wait, context, () -> new AtLeastOneElementConditions(elementsSupplier.get()));
     }
 
     /**
@@ -86,12 +76,7 @@ public final class WaitConditionProxy {
         return (FluentConditions) Proxy
                 .newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {FluentConditions.class},
                         new WaitConditionInvocationHandler(FluentConditions.class, wait, context,
-                                new Supplier<FluentConditions>() {
-                                    @Override
-                                    public FluentConditions get() {
-                                        return new WebElementConditions(elementSupplier.get());
-                                    }
-                                }));
+                                () -> new WebElementConditions(elementSupplier.get())));
     }
 
     /**
