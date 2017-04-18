@@ -4,6 +4,7 @@ import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.NoSuchElementException;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -55,6 +56,12 @@ public class JavascriptTest extends IntegrationFluentTest {
 
         assertThat((Object) fluentJavascript.getBooleanResult()).isEqualTo(fluentJavascript.getResult());
         assertThat(fluentJavascript.getBooleanResult()).isTrue();
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void shouldFailFastForNonExistingArguments() {
+        String script = "arguments[0].click()";
+        executeScript(script, find(".notExistingOne").first().getElement());
     }
 
     @Test

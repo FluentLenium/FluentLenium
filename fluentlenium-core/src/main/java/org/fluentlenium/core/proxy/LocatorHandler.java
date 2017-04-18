@@ -65,7 +65,7 @@ public interface LocatorHandler<T> {
     void reset();
 
     /**
-     * If result is not loaded, load result immediatly. If it's already loaded, it has no effect.
+     * If result is not loaded, load result immediately. If it's already loaded, it has no effect.
      */
     void now();
 

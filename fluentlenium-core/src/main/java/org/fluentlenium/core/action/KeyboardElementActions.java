@@ -5,15 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
-import org.openqa.selenium.interactions.Mouse;
 
 /**
  * Execute actions with the keyboard on a defined element.
  */
 public class KeyboardElementActions {
-    private WebDriver driver;
-    private Keyboard keyboard;
-    private Mouse mouse;
+    private final WebDriver driver;
     private final WebElement element;
 
     /**
@@ -28,27 +25,11 @@ public class KeyboardElementActions {
     }
 
     /**
-     * Creates a new object to execute actions with the keyboard, using selenium Keyboard and Mouse interfaces and element.
-     *
-     * @param keyboard keyboard interface
-     * @param mouse    mouse interface
-     * @param element  element on which to execute actions
-     */
-    public KeyboardElementActions(Keyboard keyboard, Mouse mouse, WebElement element) {
-        this.keyboard = keyboard;
-        this.mouse = mouse;
-        this.element = element;
-    }
-
-    /**
      * Get selenium interactions actions.
      *
      * @return selenium actions
      */
     protected org.openqa.selenium.interactions.Actions actions() {
-        if (driver == null) {
-            return new org.openqa.selenium.interactions.Actions(keyboard, mouse);
-        }
         return new org.openqa.selenium.interactions.Actions(driver);
     }
 
@@ -58,10 +39,7 @@ public class KeyboardElementActions {
      * @return low level interface to control the keyboard
      */
     public Keyboard basic() {
-        if (keyboard == null) {
-            return ((HasInputDevices) driver).getKeyboard();
-        }
-        return keyboard;
+        return ((HasInputDevices) driver).getKeyboard();
     }
 
     /**
@@ -72,7 +50,7 @@ public class KeyboardElementActions {
      *               provided key is none of those, {@link IllegalArgumentException} is thrown.
      * @return this object reference to chain calls
      * @see #keyDown(org.openqa.selenium.Keys)
-     * @see org.openqa.selenium.interactions.Actions#keyDown(WebElement, Keys)
+     * @see org.openqa.selenium.interactions.Actions#keyDown(WebElement, CharSequence)
      */
     public KeyboardElementActions keyDown(Keys theKey) {
         actions().keyDown(element, theKey).perform();
@@ -85,7 +63,7 @@ public class KeyboardElementActions {
      *
      * @param theKey Either {@link Keys#SHIFT}, {@link Keys#ALT} or {@link Keys#CONTROL}.
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#keyUp(WebElement, Keys)
+     * @see org.openqa.selenium.interactions.Actions#keyUp(WebElement, CharSequence)
      */
     public KeyboardElementActions keyUp(Keys theKey) {
         actions().keyUp(element, theKey).perform();

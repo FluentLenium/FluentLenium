@@ -51,20 +51,7 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>htmlunit-driver</artifactId>
-    <version>2.23</version>
-    <scope>test</scope>
-</dependency>
-<!-- jetty websocket is currently required by htmlunit-driver -->
-<dependency>
-    <groupId>org.eclipse.jetty.websocket</groupId>
-    <artifactId>websocket-api</artifactId>
-    <version>9.3.5.v20151012</version>
-    <scope>test</scope>
-</dependency>
-<dependency>
-    <groupId>org.eclipse.jetty.websocket</groupId>
-    <artifactId>websocket-client</artifactId>
-    <version>9.3.5.v20151012</version>
+    <version>2.25</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -433,7 +420,7 @@ For example, if I choose that the title will be sufficient to know if I'm on the
 ```java
 public class MyPage extends FluentPage {
     @Override
-    public void getUrl() {
+    public String getUrl() {
         return "/app/my-page";
     }
     
@@ -704,7 +691,7 @@ It's not mandatory to extend `FluentWebElement`, but a constructor with at least
 public class SelectComponent {
     private WebElement element;
     
-    private FluentWebElement(WebElement element) { // This constructor MUST exist ! But can be private.
+    private SelectComponent(WebElement element) { // This constructor MUST exist ! But can be private.
         this.element = element;
     }
 }
@@ -796,7 +783,7 @@ FluentLenium provides a rich and fluent API in order to help you to handle AJAX 
 If you want to wait for at most 5 seconds until the number of elements corresponding to the until criteria (here the class fluent) has the requested size:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until(".fluent").size(3);
+await().atMost(5, TimeUnit.SECONDS).until($(".fluent")).size(3);
 ```
 The default wait is 500 ms.
 
@@ -1600,6 +1587,22 @@ public void after(Scenario scenario) {
     super.after(scenario);
 }
 ```
+
+### Spock
+
+- Import this maven dependency.
+
+```xml
+<dependency>
+    <groupId>org.fluentlenium</groupId>
+    <artifactId>fluentlenium-spock</artifactId>
+    <version>3.1.1</version>
+    <scope>test</scope>
+</dependency>
+```
+
+- Extends FluentSpecification instead of FluentTest.
+
 
 ## Supported Assertions Libraries
 

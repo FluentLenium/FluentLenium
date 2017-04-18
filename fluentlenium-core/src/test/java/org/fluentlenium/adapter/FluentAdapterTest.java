@@ -1,17 +1,19 @@
 package org.fluentlenium.adapter;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+
 import org.fluentlenium.configuration.ConfigurationProperties;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.internal.WrapsDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FluentAdapterTest {
@@ -90,6 +92,11 @@ public class FluentAdapterTest {
             @Override
             public String getWebDriver() {
                 return "htmlunit";
+            }
+
+            @Override
+            public Capabilities getCapabilities() {
+                return DesiredCapabilities.htmlUnit();
             }
         };
 

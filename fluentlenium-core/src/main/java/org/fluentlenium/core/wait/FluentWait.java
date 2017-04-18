@@ -128,14 +128,14 @@ public class FluentWait
     @Override
     public void untilPredicate(Predicate<FluentControl> predicate) {
         updateWaitWithDefaultExceptions();
-        wait.<com.google.common.base.Predicate>until(predicate::test);
+        wait.until(predicate::test);
     }
 
     @Override
     public void until(Supplier<Boolean> booleanSupplier) {
         updateWaitWithDefaultExceptions();
 
-        wait.until(new com.google.common.base.Function<Object, Boolean>() {
+        wait.until(new Function<Object, Boolean>() {
             public Boolean apply(Object input) {
                 return booleanSupplier.get();
             }
@@ -149,7 +149,7 @@ public class FluentWait
     @Override
     public <T> T until(Function<? super FluentControl, T> function) {
         updateWaitWithDefaultExceptions();
-        return wait.until(new com.google.common.base.Function<Object, T>() {
+        return wait.until(new Function<Object, T>() {
             @Override
             public T apply(Object input) {
                 return function.apply((FluentControl) input);
@@ -230,17 +230,5 @@ public class FluentWait
     @Override
     public FluentWait explicitlyFor(long amount) {
         return explicitlyFor(amount, TimeUnit.MILLISECONDS);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @deprecated This method will be replaced to make function parameter to use {@link Function} for java.util.function package.
-     */
-    @Override
-    @Deprecated
-    public <T> T until(com.google.common.base.Function<? super FluentControl, T> function) {
-        updateWaitWithDefaultExceptions();
-        return wait.until(function);
     }
 }

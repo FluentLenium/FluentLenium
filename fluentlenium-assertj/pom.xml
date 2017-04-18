@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>3.1.2-SNAPSHOT</version>
+        <version>3.2.1-SNAPSHOT</version>
     </parent>
     <artifactId>fluentlenium-assertj</artifactId>
     <packaging>jar</packaging>
@@ -13,7 +13,7 @@
     <description>AssertJ Extension for FluentLenium</description>
 
     <properties>
-        <assertj.version>2.5.0</assertj.version>
+        <assertj.version>3.6.2</assertj.version>
     </properties>
 
 
@@ -32,17 +32,6 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>htmlunit-driver</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!-- jetty websocket is currently required by htmlunit-driver -->
-        <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-client</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

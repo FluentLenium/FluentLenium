@@ -38,13 +38,13 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.1.1</version>
+    <version>3.2.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.1.1</version>
+    <version>3.2.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -56,20 +56,7 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>htmlunit-driver</artifactId>
-    <version>2.23</version>
-    <scope>test</scope>
-</dependency>
-<!-- jetty websocket is currently required by htmlunit-driver -->
-<dependency>
-    <groupId>org.eclipse.jetty.websocket</groupId>
-    <artifactId>websocket-api</artifactId>
-    <version>9.3.5.v20151012</version>
-    <scope>test</scope>
-</dependency>
-<dependency>
-    <groupId>org.eclipse.jetty.websocket</groupId>
-    <artifactId>websocket-client</artifactId>
-    <version>9.3.5.v20151012</version>
+    <version>2.25</version>
     <scope>test</scope>
 </dependency>
 <dependency>

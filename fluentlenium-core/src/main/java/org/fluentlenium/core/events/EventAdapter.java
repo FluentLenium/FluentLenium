@@ -120,6 +120,26 @@ class EventAdapter implements WebDriverEventListener {
     }
 
     @Override
+    public void beforeAlertAccept(WebDriver driver) {
+        listener.beforeAlertAccept(driver);
+    }
+
+    @Override
+    public void afterAlertAccept(WebDriver driver) {
+        listener.afterAlertAccept(driver);
+    }
+
+    @Override
+    public void beforeAlertDismiss(WebDriver driver) {
+        listener.beforeAlertDismiss(driver);
+    }
+
+    @Override
+    public void afterAlertDismiss(WebDriver driver) {
+        listener.afterAlertDismiss(driver);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
