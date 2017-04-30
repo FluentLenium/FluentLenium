@@ -14,7 +14,7 @@ public class E2ETest extends FluentTest {
     @Override
     public WebDriver newWebDriver() {
         try {
-            return new Augmenter().augment(new RemoteWebDriver(new URL(System.getProperty("browserstackurl")), chrome()));
+            return new Augmenter().augment(new RemoteWebDriver(new URL(System.getenv("browserstackurl")), chrome()));
         } catch (MalformedURLException e) {
             return null;
         }
