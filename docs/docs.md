@@ -204,7 +204,7 @@ el(".fluent", withName("foo")).index(2).$("input", withName("bar"))
 ### XPath Axes
 
 If you need to build another Fluent Locator from the position in the DOM of an existing one, you 
-can use [XPath axes](http://www.w3schools.com/xsl/xpath_axes.asp).
+can use [XPath axes](https://www.w3schools.com/xml/xpath_axes.asp).
 
 ```java
 $(".fluent"()).axes().parent()
