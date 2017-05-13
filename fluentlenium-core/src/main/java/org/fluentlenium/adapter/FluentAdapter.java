@@ -69,7 +69,7 @@ public class FluentAdapter implements FluentControl {
 
     @Override
     public final WebDriver getDriver() {
-        return getFluentControl().getDriver();
+        return getFluentControl() != null ? getFluentControl().getDriver() : null;
     }
 
     /**
