@@ -33,13 +33,13 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.1.1</version>
+    <version>3.2.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.1.1</version>
+    <version>3.2.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -204,7 +204,7 @@ el(".fluent", withName("foo")).index(2).$("input", withName("bar"))
 ### XPath Axes
 
 If you need to build another Fluent Locator from the position in the DOM of an existing one, you 
-can use [XPath axes](http://www.w3schools.com/xsl/xpath_axes.asp).
+can use [XPath axes](https://www.w3schools.com/xml/xpath_axes.asp).
 
 ```java
 $(".fluent"()).axes().parent()
@@ -1522,7 +1522,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-core</artifactId>
-    <version>3.1.1-SNAPSHOT</version>
+    <version>3.2.1-SNAPSHOT</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1537,7 +1537,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.1.1</version>
+    <version>3.2.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1552,7 +1552,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>3.1.1</version>
+    <version>3.2.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1567,7 +1567,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-cucumber</artifactId>
-    <version>3.1.1</version>
+    <version>3.2.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1596,7 +1596,7 @@ public void after(Scenario scenario) {
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-spock</artifactId>
-    <version>3.1.1</version>
+    <version>3.2.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1624,7 +1624,7 @@ assertEqual("Hello toto",window().title());
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.1.1</version>
+    <version>3.2.0</version>
     <scope>test</scope>
 </dependency>
 ```

@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>3.2.0-SNAPSHOT</version>
+    <version>3.2.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -17,6 +17,7 @@
         <module>fluentlenium-testng</module>
         <module>fluentlenium-cucumber</module>
         <module>fluentlenium-spock</module>
+        <module>fluentlenium-e2e</module>
     </modules>
 
     <prerequisites>
@@ -94,7 +95,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <selenium.version>3.3.1</selenium.version>
+        <selenium.version>3.4.0</selenium.version>
         <java.version>1.8</java.version>
     </properties>
 
