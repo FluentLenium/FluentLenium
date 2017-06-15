@@ -38,7 +38,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Stack;
-import java.util.function.Supplier;
 
 /**
  * Wraps a Selenium {@link WebElement}. It provides an enhanced API to control selenium element.
@@ -72,11 +71,12 @@ public class FluentWebElement extends Component
 
         hookControl = new HookControlImpl<>(this, webElement, this.control, this.instantiator,
                 () -> {
-                    LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
+                    LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(this.getElement());
                     ElementLocator locator = locatorHandler.getLocator();
                     WebElement noHookElement = LocatorProxies.createWebElement(locator);
-                    return newComponent(FluentWebElement.this.getClass(), noHookElement);
+                    return newComponent(this.getClass(), noHookElement);
                 });
+
         search = new Search(element, this, this.instantiator, this.control);
         axes = new Axes(element, this.instantiator);
         mouseActions = new MouseElementActions(this.control.getDriver(), element);
