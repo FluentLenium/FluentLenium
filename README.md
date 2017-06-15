@@ -92,7 +92,7 @@ public class DuckDuckGoTest extends FluentTest {
 
 [More FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/examples).
 
-# Documentation
+## Documentation
 
 Full documentation is available on [fluentlenium.org](http://fluentlenium.org/docs), or in the 
 [docs sources directory](https://github.com/FluentLenium/FluentLenium/tree/develop/docs).
