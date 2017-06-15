@@ -713,9 +713,9 @@ Annotations can be used in a test class.
 
 ```java
 @AfterClickOn
-public void afterClickOn(FluentWebElement element);
+public void afterClickOn(FluentWebElement element) {
     System.out.println("Element Clicked: " + element);
-});
+}
 ```
 
 Annotations related to a WebElement can also be used in a component class.
@@ -1322,7 +1322,7 @@ factory.
 @FactoryName("browserstack-os-x") // Name to use in capabilities configuration property
 public class BrowserStackOsXCapabilitiesFactory implements CapabilitiesFactory {
     @Override
-    public Capabilities newCapabilities(ConfigurationProperties configuration);    
+    public Capabilities newCapabilities(ConfigurationProperties configuration) {    
         DesiredCapabilities caps = new DesiredCapabilities();
         
         caps.setCapability("os", "OS X");
@@ -1360,7 +1360,7 @@ enabled in the Java Compiler configuration.
 @FactoryName("custom") // Name to use in webDriver configuration property
 public class CustomWebDriverFactory implements WebDriverFactory {
     @Override
-    public WebDriver newWebDriver(Capabilities desiredCapabilities, ConfigurationProperties configuration)
+    public WebDriver newWebDriver(Capabilities desiredCapabilities, ConfigurationProperties configuration) {
         return new CustomWebDriver(desiredCapabilities);
     }
 }
