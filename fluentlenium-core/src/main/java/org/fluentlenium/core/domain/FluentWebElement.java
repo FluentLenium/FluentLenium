@@ -71,7 +71,7 @@ public class FluentWebElement extends Component
 
         hookControl = new HookControlImpl<>(this, webElement, this.control, this.instantiator,
                 () -> {
-                    LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(this.getElement());
+                    LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
                     ElementLocator locator = locatorHandler.getLocator();
                     WebElement noHookElement = LocatorProxies.createWebElement(locator);
                     return newComponent(this.getClass(), noHookElement);
@@ -374,7 +374,7 @@ public class FluentWebElement extends Component
      *
      * @return web element
      */
-    public WebElement getElement() {
+    public final WebElement getElement() {
         return webElement;
     }
 
