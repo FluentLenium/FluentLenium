@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * A singleton container for all running {@link SharedWebDriver} in the JVM.
@@ -43,6 +44,14 @@ public enum SharedWebDriverContainer {
         private String testName;
     }
 
+    @EqualsAndHashCode
+    @AllArgsConstructor
+    private static class ClassAndTestNameWithThreadId {
+        private Class<?> testClass;
+        private String testName;
+        private Long ThreadId;
+    }
+
     /**
      * Shared web driver container singleton implementation.
      */
@@ -52,6 +61,9 @@ public enum SharedWebDriverContainer {
         private final Map<Class<?>, SharedWebDriver> classDrivers = new HashMap<>();
 
         private final Map<ClassAndTestName, SharedWebDriver> methodDrivers = new HashMap<>();
+
+        private final Map<ClassAndTestNameWithThreadId, SharedWebDriver> threadDrivers = new HashMap<>();
+
 
         /**
          * Get an existing or create a new shared driver for the given test, with the given shared driver
@@ -91,8 +103,8 @@ public enum SharedWebDriverContainer {
                 classDrivers.put(driver.getTestClass(), driver);
                 break;
             case THREAD:
-                methodDrivers.put(new ClassAndTestName(driver.getTestClass(),
-                        driver.getTestName() + Thread.currentThread().getId()), driver);
+                threadDrivers.put(new ClassAndTestNameWithThreadId(driver.getTestClass(), driver.getTestName(),
+                        Thread.currentThread().getId()), driver);
                 break;
             case METHOD:
             default:
@@ -118,7 +130,8 @@ public enum SharedWebDriverContainer {
                 case CLASS:
                     return classDrivers.get(testClass);
                 case THREAD:
-                    return methodDrivers.get(new ClassAndTestName(testClass, testName + Thread.currentThread().getId()));
+                    return threadDrivers.get(new ClassAndTestNameWithThreadId(testClass, testName,
+                            Thread.currentThread().getId()));
                 case METHOD:
                 default:
                     return methodDrivers.get(new ClassAndTestName(testClass, testName));
@@ -149,12 +162,18 @@ public enum SharedWebDriverContainer {
                     }
                     break;
                 case THREAD:
-                    SharedWebDriver testThreadDriver = methodDrivers
-                            .remove(new ClassAndTestName(driver.getTestClass(), driver.getTestName() + Thread
-                                    .currentThread().getId()));
-                    if (testThreadDriver == driver && testThreadDriver.getDriver() != null) { // NOPMD CompareObjectsWithEquals
-                        testThreadDriver.getDriver().quit();
-                    }
+                    List<Map.Entry<ClassAndTestNameWithThreadId, SharedWebDriver>> threadDriversToClose = threadDrivers.entrySet()
+                            .stream()
+                            .filter(entry -> entry.getKey().testClass.equals(driver.getTestClass()) &&
+                                    entry.getKey().testName.equals(driver.getTestName())).collect(Collectors.toList());
+
+                    threadDriversToClose.forEach(item -> {
+                        SharedWebDriver testThreadDriver = threadDrivers.remove(item.getKey());
+                        if (testThreadDriver == driver && testThreadDriver.getDriver() != null) { // NOPMD CompareObjectsWithEquals
+                            testThreadDriver.getDriver().quit();
+                        }
+                    });
+
                     break;
                 case METHOD:
                 default:
@@ -181,6 +200,10 @@ public enum SharedWebDriverContainer {
                 }
                 for (SharedWebDriver classDriver : classDrivers.values()) {
                     drivers.add(classDriver);
+                }
+
+                for (SharedWebDriver testDriver : threadDrivers.values()) {
+                    drivers.add(testDriver);
                 }
 
                 for (SharedWebDriver testDriver : methodDrivers.values()) {
@@ -211,6 +234,12 @@ public enum SharedWebDriverContainer {
                     }
                 }
 
+                for (SharedWebDriver testDriver : threadDrivers.values()) {
+                    if (testDriver.getTestClass() == testClass) {
+                        drivers.add(testDriver);
+                    }
+                }
+
                 return Collections.unmodifiableList(drivers);
             }
         }
@@ -235,6 +264,12 @@ public enum SharedWebDriverContainer {
                 while (testDriversIterator.hasNext()) {
                     testDriversIterator.next().getDriver().quit();
                     testDriversIterator.remove();
+                }
+
+                Iterator<SharedWebDriver> testThreadDriversIterator = threadDrivers.values().iterator();
+                while (testThreadDriversIterator.hasNext()) {
+                    testThreadDriversIterator.next().getDriver().quit();
+                    testThreadDriversIterator.remove();
                 }
             }
         }
