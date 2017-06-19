@@ -90,6 +90,10 @@ public enum SharedWebDriverContainer {
             case CLASS:
                 classDrivers.put(driver.getTestClass(), driver);
                 break;
+            case THREAD:
+                methodDrivers.put(new ClassAndTestName(driver.getTestClass(),
+                        driver.getTestName() + Thread.currentThread().getId()), driver);
+                break;
             case METHOD:
             default:
                 methodDrivers.put(new ClassAndTestName(driver.getTestClass(), driver.getTestName()), driver);
@@ -113,6 +117,8 @@ public enum SharedWebDriverContainer {
                     return jvmDriver;
                 case CLASS:
                     return classDrivers.get(testClass);
+                case THREAD:
+                    return methodDrivers.get(new ClassAndTestName(testClass, testName + Thread.currentThread().getId()));
                 case METHOD:
                 default:
                     return methodDrivers.get(new ClassAndTestName(testClass, testName));
@@ -140,6 +146,14 @@ public enum SharedWebDriverContainer {
                     SharedWebDriver classDriver = classDrivers.remove(driver.getTestClass());
                     if (classDriver == driver && classDriver.getDriver() != null) { // NOPMD CompareObjectsWithEquals
                         classDriver.getDriver().quit();
+                    }
+                    break;
+                case THREAD:
+                    SharedWebDriver testThreadDriver = methodDrivers
+                            .remove(new ClassAndTestName(driver.getTestClass(), driver.getTestName() + Thread
+                                    .currentThread().getId()));
+                    if (testThreadDriver == driver && testThreadDriver.getDriver() != null) { // NOPMD CompareObjectsWithEquals
+                        testThreadDriver.getDriver().quit();
                     }
                     break;
                 case METHOD:

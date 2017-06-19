@@ -101,7 +101,10 @@ public interface ConfigurationProperties {
         CLASS, /**
          * WebDriver is created for each test method, and this instance is used only for one test method.
          */
-        METHOD, /**
+        METHOD,/**
+         * WebDriver is created for each test thread, and this instance is used only for one test method.
+         */
+        THREAD,/**
          * Default value.
          */
         DEFAULT
