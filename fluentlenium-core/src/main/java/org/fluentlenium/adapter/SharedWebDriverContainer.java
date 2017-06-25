@@ -185,17 +185,12 @@ public enum SharedWebDriverContainer {
                 if (jvmDriver != null) {
                     drivers.add(jvmDriver);
                 }
-                for (SharedWebDriver classDriver : classDrivers.values()) {
-                    drivers.add(classDriver);
-                }
 
-                for (SharedWebDriver testDriver : threadDrivers.values()) {
-                    drivers.add(testDriver);
-                }
+                drivers.addAll(classDrivers.values());
 
-                for (SharedWebDriver testDriver : methodDrivers.values()) {
-                    drivers.add(testDriver);
-                }
+                drivers.addAll(threadDrivers.values());
+
+                drivers.addAll(methodDrivers.values());
             }
             return Collections.unmodifiableList(drivers);
         }
