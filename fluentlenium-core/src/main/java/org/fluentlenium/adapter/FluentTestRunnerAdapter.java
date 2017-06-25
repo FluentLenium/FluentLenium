@@ -1,7 +1,8 @@
 package org.fluentlenium.adapter;
 
-import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import java.util.List;
+
+import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 
 /**
  * FluentLenium Test Runner Adapter.
@@ -45,6 +46,18 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     public FluentTestRunnerAdapter(FluentControlContainer driverContainer, SharedMutator sharedMutator) {
         super(driverContainer);
         this.sharedMutator = sharedMutator;
+    }
+
+    /**
+     * Invoked when a test class has finished (whatever the success of failing status)
+     *
+     * @param testClass test class to terminate
+     */
+    public static void afterClass(Class<?> testClass) {
+        List<SharedWebDriver> sharedWebDrivers = SharedWebDriverContainer.INSTANCE.getTestClassDrivers(testClass);
+        for (SharedWebDriver sharedWebDriver : sharedWebDrivers) {
+            SharedWebDriverContainer.INSTANCE.quit(sharedWebDriver);
+        }
     }
 
     /**
@@ -120,7 +133,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     protected void finished(Class<?> testClass, String testName) {
         DriverLifecycle driverLifecycle = getDriverLifecycle();
 
-        if (driverLifecycle == DriverLifecycle.METHOD) {
+        if (driverLifecycle == DriverLifecycle.METHOD || driverLifecycle == DriverLifecycle.THREAD) {
             EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle);
 
             SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE
@@ -142,19 +155,6 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         }
 
         releaseFluent();
-
-    }
-
-    /**
-     * Invoked when a test class has finished (whatever the success of failing status)
-     *
-     * @param testClass test class to terminate
-     */
-    public static void afterClass(Class<?> testClass) {
-        List<SharedWebDriver> sharedWebDrivers = SharedWebDriverContainer.INSTANCE.getTestClassDrivers(testClass);
-        for (SharedWebDriver sharedWebDriver : sharedWebDrivers) {
-            SharedWebDriverContainer.INSTANCE.quit(sharedWebDriver);
-        }
     }
 
     /**
