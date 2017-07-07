@@ -374,7 +374,7 @@ public class FluentWebElement extends Component
      *
      * @return web element
      */
-    public WebElement getElement() {
+    public WebElement getElement() { // NOPMD ConstructorCallsOverridableMethod
         return webElement;
     }
 

@@ -56,6 +56,8 @@ public enum SharedWebDriverContainer {
     /**
      * Shared web driver container singleton implementation.
      */
+
+    @SuppressWarnings("PMD.CyclomaticComplexity")
     static class Impl {
         private final Map<Class<?>, SharedWebDriver> classDrivers = new HashMap<>();
         private final Map<ClassAndTestName, SharedWebDriver> methodDrivers = new HashMap<>();
