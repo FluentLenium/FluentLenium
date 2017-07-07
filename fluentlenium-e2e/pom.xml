@@ -10,7 +10,7 @@
         <version>3.2.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>fluentLenium-e2e</artifactId>
+    <artifactId>fluentlenium-e2e</artifactId>
     <version>3.2.1-SNAPSHOT</version>
 
     <dependencies>

@@ -1,10 +1,8 @@
 package org.fluentlenium.adapter;
 
-import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
-import org.openqa.selenium.WebDriver;
-
 import java.util.List;
-import java.util.function.Supplier;
+
+import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 
 /**
  * FluentLenium Test Runner Adapter.
@@ -51,6 +49,18 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     }
 
     /**
+     * Invoked when a test class has finished (whatever the success of failing status)
+     *
+     * @param testClass test class to terminate
+     */
+    public static void afterClass(Class<?> testClass) {
+        List<SharedWebDriver> sharedWebDrivers = SharedWebDriverContainer.INSTANCE.getTestClassDrivers(testClass);
+        for (SharedWebDriver sharedWebDriver : sharedWebDrivers) {
+            SharedWebDriverContainer.INSTANCE.quit(sharedWebDriver);
+        }
+    }
+
+    /**
      * Invoked when a test method is starting.
      */
     protected void starting() {
@@ -84,12 +94,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     protected void starting(Class<?> testClass, String testName) {
         EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName, getDriverLifecycle());
 
-        SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getOrCreateDriver(new Supplier<WebDriver>() {
-            @Override
-            public WebDriver get() {
-                return newWebDriver();
-            }
-        }, parameters.getTestClass(), parameters.getTestName(), parameters.getDriverLifecycle());
+        SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getOrCreateDriver(() -> newWebDriver(), parameters.getTestClass(), parameters.getTestName(), parameters.getDriverLifecycle());
 
         initFluent(sharedWebDriver.getDriver());
     }
@@ -128,7 +133,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     protected void finished(Class<?> testClass, String testName) {
         DriverLifecycle driverLifecycle = getDriverLifecycle();
 
-        if (driverLifecycle == DriverLifecycle.METHOD) {
+        if (driverLifecycle == DriverLifecycle.METHOD || driverLifecycle == DriverLifecycle.THREAD) {
             EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle);
 
             SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE
@@ -150,19 +155,6 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         }
 
         releaseFluent();
-
-    }
-
-    /**
-     * Invoked when a test class has finished (whatever the success of failing status)
-     *
-     * @param testClass test class to terminate
-     */
-    public static void afterClass(Class<?> testClass) {
-        List<SharedWebDriver> sharedWebDrivers = SharedWebDriverContainer.INSTANCE.getTestClassDrivers(testClass);
-        for (SharedWebDriver sharedWebDriver : sharedWebDrivers) {
-            SharedWebDriverContainer.INSTANCE.quit(sharedWebDriver);
-        }
     }
 
     /**

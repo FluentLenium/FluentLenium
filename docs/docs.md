@@ -713,9 +713,9 @@ Annotations can be used in a test class.
 
 ```java
 @AfterClickOn
-public void afterClickOn(FluentWebElement element);
+public void afterClickOn(FluentWebElement element) {
     System.out.println("Element Clicked: " + element);
-});
+}
 ```
 
 Annotations related to a WebElement can also be used in a component class.
@@ -1145,7 +1145,36 @@ FluentLenium can be configured in many ways through configuration properties.
       - `JVM`: WebDriver is created once, and same instance is used for each test class and method.
       - `CLASS`: WebDriver is created for each test class, and same instance is used for each test method in the class.
       - `METHOD`: WebDriver is created for each test method, and this instance is used only for one test method.
-    
+      - `THREAD`: WebDriver is created for each test thread. The instance is used only for one thread of test 
+      method. It was introduced to support annotation driven concurrent test execution mode (you can skip it if you 
+      are using surefire from maven), please take a look on example below:
+      
+      ```java
+      @FluentConfiguration(driverLifecycle = ConfigurationProperties.DriverLifecycle.THREAD)
+      public class DriverPerThreadTest extends FluentTestNg {
+          private List<String> cookiesList = new ArrayList<>();
+      
+          @Override
+          public WebDriver newWebDriver() {
+              DesiredCapabilities caps = new DesiredCapabilities();
+              WebDriver driver = new ChromeDriver(caps);
+              return driver;
+          }
+      
+          @Test(invocationCount = 2, threadPoolSize = 2)
+          public void firstMethod() {
+              goTo("http://google.com");
+              await().until($(".gsfi")).present();
+              cookiesList.add(getDriver().manage().getCookies().toString());
+          }
+      
+          @AfterClass()
+          public void checkCookies() {
+              assertThat(cookiesList.stream().distinct().count()).isEqualTo(2);
+          }
+      }
+      ```
+
     Please keep in mind that this configures when drivers are created and exited at runtime, but it does not deal with
     concurrency of your tests.
     
@@ -1322,7 +1351,7 @@ factory.
 @FactoryName("browserstack-os-x") // Name to use in capabilities configuration property
 public class BrowserStackOsXCapabilitiesFactory implements CapabilitiesFactory {
     @Override
-    public Capabilities newCapabilities(ConfigurationProperties configuration);    
+    public Capabilities newCapabilities(ConfigurationProperties configuration) {    
         DesiredCapabilities caps = new DesiredCapabilities();
         
         caps.setCapability("os", "OS X");
@@ -1360,7 +1389,7 @@ enabled in the Java Compiler configuration.
 @FactoryName("custom") // Name to use in webDriver configuration property
 public class CustomWebDriverFactory implements WebDriverFactory {
     @Override
-    public WebDriver newWebDriver(Capabilities desiredCapabilities, ConfigurationProperties configuration)
+    public WebDriver newWebDriver(Capabilities desiredCapabilities, ConfigurationProperties configuration) {
         return new CustomWebDriver(desiredCapabilities);
     }
 }

@@ -104,7 +104,7 @@ public interface FluentList<E extends FluentWebElement>
      * Return a custom attribute of elements on the list
      *
      * @param attribute attribute name
-     * @return list of string values
+     * @return list of string valuess
      */
     List<String> attributes(String attribute);
 

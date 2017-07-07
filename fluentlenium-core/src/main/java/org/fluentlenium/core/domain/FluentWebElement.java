@@ -71,6 +71,9 @@ public class FluentWebElement extends Component
         super(element, control, instantiator);
 
         hookControl = new HookControlImpl<>(this, webElement, this.control, this.instantiator,
+                /*do not change it to lambda - change will affect w/ PMD warning
+                Overridable method 'getElement' called during object construction*/
+
                 new Supplier<FluentWebElement>() {
                     @Override
                     public FluentWebElement get() {
@@ -80,17 +83,13 @@ public class FluentWebElement extends Component
                         return newComponent(FluentWebElement.this.getClass(), noHookElement);
                     }
                 });
+
         search = new Search(element, this, this.instantiator, this.control);
         axes = new Axes(element, this.instantiator);
         mouseActions = new MouseElementActions(this.control.getDriver(), element);
         keyboardActions = new KeyboardElementActions(this.control.getDriver(), element);
         conditions = new WebElementConditions(this);
-        label = new FluentLabelImpl<>(this, new Supplier<String>() {
-            @Override
-            public String get() {
-                return getElement().toString();
-            }
-        });
+        label = new FluentLabelImpl<>(this, () -> getElement().toString());
         javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new SupplierOfInstance<>(this));
     }
 
