@@ -374,7 +374,7 @@ public class FluentWebElement extends Component
      *
      * @return web element
      */
-    public final WebElement getElement() {
+    public WebElement getElement() {
         return webElement;
     }
 
