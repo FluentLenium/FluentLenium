@@ -38,6 +38,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Stack;
+import java.util.function.Supplier;
 
 /**
  * Wraps a Selenium {@link WebElement}. It provides an enhanced API to control selenium element.
@@ -70,11 +71,17 @@ public class FluentWebElement extends Component
         super(element, control, instantiator);
 
         hookControl = new HookControlImpl<>(this, webElement, this.control, this.instantiator,
-                () -> {
-                    LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
-                    ElementLocator locator = locatorHandler.getLocator();
-                    WebElement noHookElement = LocatorProxies.createWebElement(locator);
-                    return newComponent(FluentWebElement.this.getClass(), noHookElement);
+                /*do not change it to lambda - change will affect w/ PMD warning
+                Overridable method 'getElement' called during object construction*/
+
+                new Supplier<FluentWebElement>() {
+                    @Override
+                    public FluentWebElement get() {
+                        LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
+                        ElementLocator locator = locatorHandler.getLocator();
+                        WebElement noHookElement = LocatorProxies.createWebElement(locator);
+                        return newComponent(FluentWebElement.this.getClass(), noHookElement);
+                    }
                 });
 
         search = new Search(element, this, this.instantiator, this.control);
