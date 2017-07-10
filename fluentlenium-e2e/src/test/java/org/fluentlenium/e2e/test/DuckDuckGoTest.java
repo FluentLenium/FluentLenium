@@ -3,7 +3,7 @@ package org.fluentlenium.e2e.test;
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
 import org.fluentlenium.core.hook.wait.Wait;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 @Wait
 public class DuckDuckGoTest extends E2ETest {
