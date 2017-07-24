@@ -59,7 +59,6 @@ public class FluentTestRunnerAdapterRetriesTest {
             assertThat(ex.getMessage()).contains("Browser failed to start");
         }
 
-        verify(adapter, times(1)).getSharedWebDriver(eq(null), eq(null));
         verify(adapter, times(1)).starting(testName);
         verify(adapter, times(1)).starting(any(), eq(testName));
         verify(adapter, times(1)).failed(adapter.getClass(), testName);
