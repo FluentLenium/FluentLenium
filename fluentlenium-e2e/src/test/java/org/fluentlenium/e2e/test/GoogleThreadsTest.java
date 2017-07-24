@@ -8,13 +8,13 @@ import org.fluentlenium.configuration.FluentConfiguration;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-@FluentConfiguration(driverLifecycle = ConfigurationProperties.DriverLifecycle.THREAD)
+@FluentConfiguration(driverLifecycle = ConfigurationProperties.DriverLifecycle.THREAD, browserTimeout = 5000L)
 public class GoogleThreadsTest extends E2ETest {
 
     @Test(invocationCount = 5, threadPoolSize = 5)
     public void firstMethod() {
         goTo("http://www.google.com");
-        await().atMost(1, TimeUnit.SECONDS).until($(".gsfi")).present();
+        await().atMost(2, TimeUnit.SECONDS).until($(".gsfi")).present();
     }
 
     @AfterMethod
