@@ -1,8 +1,14 @@
 package org.fluentlenium.adapter;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
+import org.openqa.selenium.WebDriverException;
 
 /**
  * FluentLenium Test Runner Adapter.
@@ -94,9 +100,44 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     protected void starting(Class<?> testClass, String testName) {
         EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName, getDriverLifecycle());
 
-        SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getOrCreateDriver(() -> newWebDriver(), parameters.getTestClass(), parameters.getTestName(), parameters.getDriverLifecycle());
+        SharedWebDriver sharedWebDriver = getSharedWebDriver(parameters);
+
+        if (sharedWebDriver == null) {
+            this.failed(testClass, testName);
+            throw new WebDriverException("Browser failed to start, test [ " + testName + " ] interrupted");
+        }
 
         initFluent(sharedWebDriver.getDriver());
+    }
+
+    private SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters) {
+        return getSharedWebDriver(parameters, null);
+    }
+
+    protected SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters, ExecutorService webDriverExecutor) {
+        SharedWebDriver sharedWebDriver = null;
+
+        if (webDriverExecutor == null) {
+            webDriverExecutor = Executors.newSingleThreadExecutor();
+        }
+
+        for (int browserTimeoutRetryNo = 0; browserTimeoutRetryNo < getBrowserTimeoutRetries() && sharedWebDriver == null; browserTimeoutRetryNo++) {
+            Future<SharedWebDriver> futureWebDriver = webDriverExecutor.submit(() -> SharedWebDriverContainer.INSTANCE
+                    .getOrCreateDriver(this::newWebDriver, parameters.getTestClass(),
+                            parameters.getTestName(), parameters.getDriverLifecycle()));
+
+            try {
+                if (!webDriverExecutor.awaitTermination(getBrowserTimeout(), TimeUnit.MILLISECONDS)) {
+                    webDriverExecutor.shutdownNow();
+                }
+
+                sharedWebDriver = futureWebDriver.get();
+            } catch (InterruptedException | ExecutionException e) {
+                webDriverExecutor.shutdownNow();
+            }
+        }
+
+        return sharedWebDriver;
     }
 
     /**

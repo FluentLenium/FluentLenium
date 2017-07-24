@@ -92,6 +92,22 @@ public @interface FluentConfiguration {
     ConfigurationProperties.DriverLifecycle driverLifecycle() default ConfigurationProperties.DriverLifecycle.DEFAULT;
 
     /**
+     * <i>browserTimeout</i> property.
+     *
+     * @return long
+     * @see ConfigurationProperties#getBrowserTimeout()
+     */
+    long browserTimeout() default 2000L;
+
+    /**
+     * <i>browserTimeoutRetries</i> property.
+     *
+     * @return int
+     * @see ConfigurationProperties#getBrowserTimeoutRetries()
+     */
+    int browserTimeoutRetries() default 2;
+
+    /**
      * <i>deleteCookies</i> property.
      *
      * @return deleteCookies

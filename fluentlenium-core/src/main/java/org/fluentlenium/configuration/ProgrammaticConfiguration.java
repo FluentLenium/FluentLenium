@@ -48,6 +48,10 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
 
     private Long awaitPollingEvery;
 
+    private Long browserTimeout;
+
+    private Integer browserTimeoutRetries;
+
     private final Map<String, String> custom = new HashMap<>();
 
     /**
@@ -92,6 +96,26 @@ public class ProgrammaticConfiguration implements Configuration { // NOPMD TooMa
     @Override
     public DriverLifecycle getDriverLifecycle() {
         return driverLifecycle;
+    }
+
+    @Override
+    public Long getBrowserTimeout() {
+        return browserTimeout;
+    }
+
+    @Override
+    public Integer getBrowserTimeoutRetries() {
+        return browserTimeoutRetries;
+    }
+
+    @Override
+    public void setBrowserTimeout(Long timeout) {
+        this.browserTimeout = timeout;
+    }
+
+    @Override
+    public void setBrowserTimeoutRetries(Integer retriesNumber) {
+        this.browserTimeoutRetries = retriesNumber;
     }
 
     @Override
