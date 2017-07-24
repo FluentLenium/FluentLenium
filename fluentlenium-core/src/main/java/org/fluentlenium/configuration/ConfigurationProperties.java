@@ -180,6 +180,28 @@ public interface ConfigurationProperties {
     DriverLifecycle getDriverLifecycle();
 
     /**
+     * <pre>browserTimeout</pre> property.
+     *
+     * Sets the maximum amount of time when the browser should start responding to the WebDriver.
+     *
+     * Default value is 5 seconds.
+     *
+     * @return long
+     */
+    Long getBrowserTimeout();
+
+    /**
+     * <pre>browserTimeoutRetries</pre> property.
+     *
+     * Sets the maximum number of retries for failed WebDriver because of browserTimeout issues.
+     *
+     * Default value is 2 times.
+     *
+     * @return Integer
+     */
+    Integer getBrowserTimeoutRetries();
+
+    /**
      * <pre>deleteCookies</pre> property.
      *
      * When using CLASS or JVM <pre>driverLifecycle</pre> configuration property, allow to delete cookies between

@@ -17,6 +17,22 @@ public interface ConfigurationMutator {
     void setWebDriver(String webDriver);
 
     /**
+     * Sets the value of <pre>browserTimeout</pre> property.
+     *
+     * @param timeout property value
+     * @see ConfigurationProperties#getBrowserTimeout()
+     */
+    void setBrowserTimeout(Long timeout);
+
+    /**
+     * Sets the value of <pre>browserTimeoutRetries</pre> property.
+     *
+     * @param retriesNumber property value
+     * @see ConfigurationProperties#getBrowserTimeoutRetries()
+     */
+    void setBrowserTimeoutRetries(Integer retriesNumber);
+
+    /**
      * Sets the value of <pre>remoteUrl</pre> property.
      *
      * @param remoteUrl property value

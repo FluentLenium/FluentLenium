@@ -1,8 +1,16 @@
 package org.fluentlenium.adapter;
 
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
+import org.openqa.selenium.WebDriverException;
 
 /**
  * FluentLenium Test Runner Adapter.
@@ -94,9 +102,66 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     protected void starting(Class<?> testClass, String testName) {
         EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName, getDriverLifecycle());
 
-        SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getOrCreateDriver(() -> newWebDriver(), parameters.getTestClass(), parameters.getTestName(), parameters.getDriverLifecycle());
+        SharedWebDriver sharedWebDriver = null;
+        Exception exception = null;
+
+        try {
+            sharedWebDriver = getSharedWebDriver(parameters);
+        } catch (ExecutionException | InterruptedException e) {
+            exception = e;
+        }
+
+        if (sharedWebDriver == null) {
+            this.failed(testClass, testName);
+            String exceptionMessage = null;
+
+            if (exception != null) {
+                exceptionMessage = exception.getMessage();
+            }
+
+            throw new WebDriverException("Browser failed to start, test [ " + testName + " ] execution interrupted." +
+                    (isEmpty(exceptionMessage) ? "" : "\nCaused by: [ " + exceptionMessage + "]"));
+        }
 
         initFluent(sharedWebDriver.getDriver());
+    }
+
+    private SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters) throws ExecutionException, InterruptedException {
+        return getSharedWebDriver(parameters, null);
+    }
+
+    protected SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters, ExecutorService webDriverExecutor) throws ExecutionException, InterruptedException {
+        SharedWebDriver sharedWebDriver = null;
+        ExecutorService setExecutorService = null;
+
+        if (webDriverExecutor != null) {
+            setExecutorService = webDriverExecutor;
+        }
+
+        for (int browserTimeoutRetryNo = 0; browserTimeoutRetryNo < getBrowserTimeoutRetries() && sharedWebDriver == null; browserTimeoutRetryNo++) {
+            if (setExecutorService == null) {
+                webDriverExecutor = Executors.newSingleThreadExecutor();
+            } else {
+                webDriverExecutor = setExecutorService;
+            }
+
+            Future<SharedWebDriver> futureWebDriver = webDriverExecutor.submit(() -> SharedWebDriverContainer.INSTANCE
+                    .getOrCreateDriver(this::newWebDriver, parameters.getTestClass(),
+                            parameters.getTestName(), parameters.getDriverLifecycle()));
+
+            try {
+                if (!webDriverExecutor.awaitTermination(getBrowserTimeout(), TimeUnit.MILLISECONDS)) {
+                    webDriverExecutor.shutdownNow();
+                }
+
+                sharedWebDriver = futureWebDriver.get();
+            } catch (InterruptedException | ExecutionException e) {
+                webDriverExecutor.shutdownNow();
+                throw e;
+            }
+        }
+
+        return sharedWebDriver;
     }
 
     /**

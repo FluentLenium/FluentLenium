@@ -33,13 +33,13 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.2.0</version>
+    <version>3.3.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.2.0</version>
+    <version>3.3.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -1118,6 +1118,19 @@ FluentLenium can be configured in many ways through configuration properties.
     
     If not defined, FluentLenium will use the first value for which WebDriver is available in classpath.
 
+  - **browserTimeout**
+  
+    Sets the timeout for webdriver when it should be responsive if not interrupts the obtain driver thread and tries
+    maximum amoun of times specified by **browserTimeoutRetries** value
+    
+    Default value: ```2000```
+  
+  - **browserTimeoutRetries**
+  
+    Maximum number of retries to wait for WebDriver to be responsive.
+    
+    Default value: ```2```
+
   - **remoteUrl**
   
     Sets the remote URL for ```remote``` *webDriver*. This should be the URL to access Selenium-Grid server.
@@ -1566,7 +1579,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.2.0</version>
+    <version>3.3.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1581,7 +1594,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>3.2.0</version>
+    <version>3.3.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1596,7 +1609,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-cucumber</artifactId>
-    <version>3.2.0</version>
+    <version>3.3.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1653,7 +1666,7 @@ assertEqual("Hello toto",window().title());
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.2.0</version>
+    <version>3.3.0</version>
     <scope>test</scope>
 </dependency>
 ```
