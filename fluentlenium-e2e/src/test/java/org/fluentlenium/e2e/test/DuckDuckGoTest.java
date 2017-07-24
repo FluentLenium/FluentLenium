@@ -14,7 +14,7 @@ public class DuckDuckGoTest extends E2ETest {
         goTo("https://duckduckgo.com");
         $("#search_form_input_homepage").fill().with("FluentLenium");
         $("#search_button_homepage").submit();
-        await().atMost(5, TimeUnit.SECONDS).until($("#search_form_homepage")).not().present();
+        await().atMost(5, TimeUnit.SECONDS).until(el("#search_form_homepage")).not().present();
         assertThat(window().title()).contains("FluentLenium");
     }
 }
