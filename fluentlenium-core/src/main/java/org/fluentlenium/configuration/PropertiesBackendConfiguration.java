@@ -223,7 +223,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
     @Override
     public Integer getBrowserTimeoutRetries() {
         Long browserTimeout = getLongProperty("browserTimeout");
-        return (browserTimeout != null) ? browserTimeout.intValue() : null;
+        return (browserTimeout == null) ? null : browserTimeout.intValue();
     }
 
     @Override
