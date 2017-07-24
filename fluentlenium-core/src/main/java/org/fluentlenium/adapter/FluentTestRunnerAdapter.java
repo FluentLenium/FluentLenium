@@ -115,10 +115,12 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
             this.failed(testClass, testName);
             String exceptionMessage = null;
 
-            if (exception != null) exceptionMessage = exception.getMessage();
+            if (exception != null) {
+                exceptionMessage = exception.getMessage();
+            }
 
             throw new WebDriverException("Browser failed to start, test [ " + testName + " ] execution interrupted." +
-                    ((!isEmpty(exceptionMessage)) ? "\nCaused by: [ " + exceptionMessage + "]" : ""));
+                    (isEmpty(exceptionMessage) ? "" : "\nCaused by: [ " + exceptionMessage + "]"));
         }
 
         initFluent(sharedWebDriver.getDriver());
