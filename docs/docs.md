@@ -8,18 +8,18 @@ subtitle: FluentLenium
 
 FluentLenium helps you writing readable, reusable, reliable and resilient UI functional tests for the browser.
 
-FluentLenium provides a Java [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to 
+FluentLenium provides a Java [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to
 [Selenium](http://www.seleniumhq.org/), and brings some magic to avoid common issues faced by Selenium users.
 
-FluentLenium is shipped with adapters for [JUnit](junit.org/), [TestNG](http://testng.org/doc/index.html) and 
+FluentLenium is shipped with adapters for [JUnit](junit.org/), [TestNG](http://testng.org/doc/index.html) and
 [Cucumber](https://cucumber.io), but it can also be used standalone.
 
-FluentLenium best integrates with [AssertJ](http://joel-costigliola.github.io/assertj/), but you can also choose to use 
+FluentLenium best integrates with [AssertJ](http://joel-costigliola.github.io/assertj/), but you can also choose to use
 the assertion framework you want.
 
 # Choose the right version
 
-FluentLenium 3.x is still in development and includes latest enhancements and features, but Selenium 3 and Java 8 are 
+FluentLenium 3.x is still in development and includes latest enhancements and features, but Selenium 3 and Java 8 are
 required to run it.
 
 FluentLenium 1.x is in maintenance state, and no new feature will be added anymore. It requires Selenium 2 and
@@ -69,6 +69,8 @@ import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.core.hook.wait.Wait;
 import org.junit.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Wait
@@ -78,6 +80,7 @@ public class DuckDuckGoTest extends FluentTest {
         goTo("https://duckduckgo.com");
         $("#search_form_input_homepage").fill().with("FluentLenium");
         $("#search_button_homepage").submit();
+        await().atMost(5, TimeUnit.SECONDS).until($("#search_form_homepage")).not().present();
         assertThat(window().title()).contains("FluentLenium");
     }
 }
@@ -111,8 +114,8 @@ FluentLenium provides `$` and `el` methods to build **Fluent Locators**.
   - **Filter**: Add an additional filter to the Fluent Locator.
   - **First/Last/Index**: Get a single element from the Fluent Locator.
   - **XPath Axes**: Get another Fluent Locator from its relative position in the DOM.
-  
-Fluent Locators are implemented by ```FluentWebElement``` (`el`) and ```FluentList<FluentWebElement>``` (`$`). 
+
+Fluent Locators are implemented by ```FluentWebElement``` (`el`) and ```FluentList<FluentWebElement>``` (`$`).
 Those classes are wrappers of Selenium ```WebElement``` and ```List<WebElement>```.
 
 ### CSS Selector
@@ -190,11 +193,11 @@ $(".fluent", withName("foo")).index(2) // Third element named "foo"
 You can also chain the Fluent Locators.
 
 ```java
-// All the "input" tag name elements 
+// All the "input" tag name elements
 // inside "fluent" class element subtree.
 $(".fluent").$("input")
 
-// The first "input" element named "bar" 
+// The first "input" element named "bar"
 // inside the third "fluent" class named "foo" element.
 $(".fluent", withName("foo")).index(2).$("input", withName("bar")).first()
 // or using el
@@ -203,7 +206,7 @@ el(".fluent", withName("foo")).index(2).$("input", withName("bar"))
 
 ### XPath Axes
 
-If you need to build another Fluent Locator from the position in the DOM of an existing one, you 
+If you need to build another Fluent Locator from the position in the DOM of an existing one, you
 can use [XPath axes](https://www.w3schools.com/xml/xpath_axes.asp).
 
 ```java
@@ -305,8 +308,8 @@ el(".fluent").conditions().rectangle().size().width().greaterThan(50);
 
 ### Lazy Fluent Locators
 
-`$` always returns Lazy Fluent Locators. Building a Locator doesn't perform the search immediately. 
-It will be searched later, just before it's really needed to interact with the located elements. 
+`$` always returns Lazy Fluent Locators. Building a Locator doesn't perform the search immediately.
+It will be searched later, just before it's really needed to interact with the located elements.
 (ie: clicking, retrieving text value, send user input).
 
 ```java
@@ -341,7 +344,7 @@ $(".fluent").loaded();
 
 Window actions are available on ```window()``` method.
 
-Few additional methods are available from ones inherited from Selenium, like ```clickAndOpenNew```, 
+Few additional methods are available from ones inherited from Selenium, like ```clickAndOpenNew```,
 ```openNewAndSwitch```, ```clickAndCloseCurrent``` and ```switchToLast```
 
   - **clickAndOpenNew**
@@ -380,7 +383,7 @@ Previous statement will fill all the input elements with bar.
 ```java
 $("input").fill().with("myLogin","myPassword")
 ```
- 
+
 Previous statement will fill the first element of the input selection with `myLogin`, the second with `myPassword`.
 If there are more input elements found, the last value `myPassword` will be repeated for each subsequent element.
 
@@ -409,7 +412,7 @@ A Page Object can model the whole page or just a part of it.
 
 To construct a Page, extend `FluentPage`.
 
-You can define the URL of the page by overriding the `getUrl` method. Then, it's possible tu use the `goTo()` method in 
+You can define the URL of the page by overriding the `getUrl` method. Then, it's possible tu use the `goTo()` method in
 your test code to set the current URL to the URL of the page.
 
 You can also override isAt method, to run all the assertions necessary in order to ensure that you are on the right
@@ -423,7 +426,7 @@ public class MyPage extends FluentPage {
     public String getUrl() {
         return "/app/my-page";
     }
-    
+
     @Override
     public void isAt() {
         assertThat(window().title()).contains("Selenium");
@@ -431,8 +434,8 @@ public class MyPage extends FluentPage {
 }
 ```
 
-Instead of manually implementing `isAt` and `getUrl` method, you can use Selenium `@FindBy` annotation on the page 
-class, to define an Element Locator that should identify this page, and `@PageUrl` to define the URL 
+Instead of manually implementing `isAt` and `getUrl` method, you can use Selenium `@FindBy` annotation on the page
+class, to define an Element Locator that should identify this page, and `@PageUrl` to define the URL
 used by `goTo()` method.
 
 ```java
@@ -444,7 +447,7 @@ public class MyPage extends FluentPage {
 ```
 
 It's possible to define parameters in FluentPage url using `{[?][/path/]parameter}` syntax.
-If it starts with `?`, it means that the parameter is optional. Path can be included in the braces so it 
+If it starts with `?`, it means that the parameter is optional. Path can be included in the braces so it
 is removed when parameter value is not defined.
 
 ```java
@@ -529,12 +532,12 @@ You can also use the factory method `newInstance`:
 ```java
 public class BeforeInitialization extends FluentTest {
     private MyPage page;
-    
+
     @Before
     public void beforeTest() {
         page = newInstance(MyPage.class);
     }
-    
+
     @Test
     public void test_no_exception() {
         page.go();
@@ -544,8 +547,8 @@ public class BeforeInitialization extends FluentTest {
 
 Anyway, Page Objects constructors should never be called directly.
 
-All `FluentWebElement` fields are automatically searched for by name or id. For example, if you declare a 
-`FluentWebElement` named `createButton`, it will search the page for an element where `id` is `createButton` or 
+All `FluentWebElement` fields are automatically searched for by name or id. For example, if you declare a
+`FluentWebElement` named `createButton`, it will search the page for an element where `id` is `createButton` or
 name is `createButton`.
 
 Keep in mind that all elements are Lazy Proxy Locators, they behave exactly like if they where found with `$` method.
@@ -553,15 +556,15 @@ Keep in mind that all elements are Lazy Proxy Locators, they behave exactly like
 ```java
 public class LoginPage extends FluentPage {
     private FluentWebElement createButton;
-    
+
     public String getUrl() {
        return "myCustomUrl";
     }
-    
+
     public void isAt() {
        assertThat(window().title()).isEqualTo("MyTitle");
     }
-    
+
     public void fillAndSubmitForm(String... paramsOrdered) {
         $("input").fill().with(paramsOrdered);
         createButton.click();
@@ -576,19 +579,19 @@ that `FluentWebElement` exposes.
 ```java
 public class LoginPage extends FluentPage {
    private MyButton createButton;
-   
+
    public void fillAndSubmitForm(String... paramsOrdered) {
        $("input").fill().with(paramsOrdered);
        createButton.clickTwice();
    }
-   
+
    public static class MyButton {
        private WebElement webElement;
-       
+
        public MyButton(WebElement webElement) {
            this.webElement = webElement;
        }
-       
+
        public void clickTwice() {
            webElement.click();
            webElement.click();
@@ -606,15 +609,15 @@ Selenium `@FindBy` (or `@FindBys`) annotation. The following example shows how t
 public class LoginPage extends FluentPage {
     @FindBy(css = "button.create-button")
     private FluentWebElement createButton;
-    
+
     public String getUrl() {
        return "myCustomUrl";
     }
-    
+
     public void isAt() {
        assertThat(window().title()).isEqualTo("MyTitle");
     }
-    
+
     public void fillAndSubmitForm(String... paramsOrdered) {
         $("input").fill().with(paramsOrdered);
         createButton.click();
@@ -629,16 +632,16 @@ or `java.util.List`.
 public class LoginPage extends FluentPage {
     @FindBy(css = "button.create-button")
     private FluentList<FluentWebElement> createButtons;
-    
+
     public String getUrl() {
         return "myCustomUrl";
     }
-    
+
     public void isAt() {
         assertThat(window().title()).isEqualTo("MyTitle");
         assertThat(buttons).hasSize(2);
     }
-    
+
     public void fillAndSubmitForm(String... paramsOrdered) {
         $("input").fill().with(paramsOrdered);
         createButtons.get(1).click();
@@ -656,7 +659,7 @@ A ```Component``` supports Injection like a Page Object, but all searchs are per
 
 Using components improves readability of both Page Objects and Tests.
 
-`FluentWebElement` is the default component class in FluentLenium, so you can implement you own custom component 
+`FluentWebElement` is the default component class in FluentLenium, so you can implement you own custom component
 by extending `FluentWebElement` to add custom logic.
 
 ```java
@@ -664,18 +667,18 @@ public class SelectComponent extends FluentWebElement {
     public SelectComponent(WebElement webElement, WebDriver driver, ComponentInstantiator instantiator) {
         super(webElement, driver, instantiator);
     }
-    
+
     public void doSelect(String selection) {
         // Implement selection provided by this component.
     }
-    
+
     public String getSelection() {
         // Return the selected value as text.
     }
 }
 ```
 
-Components are created automatically by injection, 
+Components are created automatically by injection,
 or programmatically by calling `as(Class<?> componentClass)` method of ```FluentWebElement``` or ```FluentList```.
 
 ```java
@@ -690,7 +693,7 @@ It's not mandatory to extend `FluentWebElement`, but a constructor with at least
 ```java
 public class SelectComponent {
     private WebElement element;
-    
+
     private SelectComponent(WebElement element) { // This constructor MUST exist ! But can be private.
         this.element = element;
     }
@@ -706,7 +709,7 @@ FluentLenium brings Events Annotations and a Listener API to register those list
 
 ### Annotations
 
-You can use annotations from `core.events.annotations` package to register any method as an event 
+You can use annotations from `core.events.annotations` package to register any method as an event
 listener.
 
 Annotations can be used in a test class.
@@ -723,16 +726,16 @@ Annotations related to a WebElement can also be used in a component class.
 ```java
 public class SomeComponent {
     private WebElement element;
-    
+
     public SomeComponent(WebElement element) {
         this.element = element;
     }
-    
+
     public SomeComponent click() {
         element.click();
         return this;
     }
-    
+
     @AfterClickOn
     private void afterClickOn() {
         System.out.println("Element Clicked: " + this);
@@ -740,10 +743,10 @@ public class SomeComponent {
 }
 
 public class SomeTest extends FluentTest {
-    
+
     private SomeComponent clickComponent;
     private SomeComponent otherComponent;
-    
+
     @Test
     public void test() {
         clickComponent.click();
@@ -799,7 +802,7 @@ If you need to be more precise, you can also use filters and matchers in the sea
 await().atMost(5, TimeUnit.SECONDS).until($(".fluent", withText("myText"))).size(3);
 await().atMost(5, TimeUnit.SECONDS).until($(".fluent", withText().startsWith("start"))).present();
 ```
-     
+
 Just use `startsWith`, `notStartsWith`, `endsWith`, `notEndsWith`, `contains`, `notContains`, `equalTo`, `containsWord`.
 
 If you need to filter on a custom attribute name, this syntax will help:
@@ -865,7 +868,7 @@ await().atMost(5, TimeUnit.SECONDS).until($(".fluent", with("myAttribute").start
 
 ## Hooks
 
-It's possible to add some behavior for any element without changing its code by using hooks. 
+It's possible to add some behavior for any element without changing its code by using hooks.
 
 FluentLenium is shipped with the ```Wait``` hook.
 
@@ -888,7 +891,7 @@ Hooks can also be mapped to annotation, like ```@Wait``` for the ```WaitHook``` 
 
 You can place a hook annotation on injected Field, Fluent Test class or Page.
 
-The hook will be effective for a field if annotation is present on it. All fields from a Fluent Test class if 
+The hook will be effective for a field if annotation is present on it. All fields from a Fluent Test class if
 it's present on a Fluent Test class and all fields from a Page if it's present on a Page.
 
 Page build through Injection recursively inherits hooks from parent pages and fluent test.
@@ -903,26 +906,26 @@ It's also possible to use the generic ```@Hook``` annotation to enable a hook cl
 @Wait
 public class MyTest extends FluentTest {
     FluentWebElement waitElement;
-    
+
     @Hook(AnotherHook.class)
     FluentWebElement waitAndAnotherHookElement;
-    
+
     @NoHook
     FluentWebElement noHookElement;
-    
+
     @Page
     MyPage page;
 }
 
 @Hook(PageHook.class)
 public class MyPage extends FluentPage {
-    
+
 }
 ```
 
 ### @Wait Hook
 
-```Wait``` hook automatically waits for conditions to be applied before interacting with Elements, avoiding the need 
+```Wait``` hook automatically waits for conditions to be applied before interacting with Elements, avoiding the need
 of writing technical waiting and condition code in tests and page objects.
 
 ### Custom hook
@@ -947,7 +950,7 @@ public class ExampleHookOptions {
 }
 ```
 
-- Create the hook by extending ```BaseHook``` or ```BaseFluentHook```. It should at least have a public 
+- Create the hook by extending ```BaseHook``` or ```BaseFluentHook```. It should at least have a public
 constructor matching parent class, and generic type should be a hook option class.
 
 ```java
@@ -985,7 +988,7 @@ public class ExampleHookOptions {
     }
 ```
 
-- Override methods from ```WebElement``` or ```ElementLocator``` in the hook implementation class to add desired 
+- Override methods from ```WebElement``` or ```ElementLocator``` in the hook implementation class to add desired
 behavior.
 
 ```java
@@ -1031,7 +1034,7 @@ executeScript("change();", 12L).getStringResult();
 
 ## Underlying WebDriver and Capabilities
 
-It's possible to retrieve the underlying WebDriver with `getDriver()` method. Effective Capabilities can be retrieved 
+It's possible to retrieve the underlying WebDriver with `getDriver()` method. Effective Capabilities can be retrieved
 with `capabilities()` method.
 
 ## Taking ScreenShots and HTML Dumps
@@ -1051,19 +1054,19 @@ takeHtmlDump(pathAndfileName);
 
 Screenshot and HTML Dump can be automatically performed on test fail using configuration properties.
 
-When using `AUTOMATIC_ON_FAIL` with JUnit, you should use custom `@After` annotation from 
-`org.fluentlenium.adapter.junit` package for screenshot and HTML dump to be performed 
+When using `AUTOMATIC_ON_FAIL` with JUnit, you should use custom `@After` annotation from
+`org.fluentlenium.adapter.junit` package for screenshot and HTML dump to be performed
 just after an exception occurs, before methods annotated with `@After` invocation.
 
 ## Standalone mode
 
 If you want to use FluentLenium as a pure automation Framework, without any testing framework adapter,
-you can create an instance of `FluentStandalone` and use it directly, or extend `FluentStandaloneRunnable` and 
+you can create an instance of `FluentStandalone` and use it directly, or extend `FluentStandaloneRunnable` and
 implement `doRun()` method.
 
 ### FluentStandalone
 
-Create an instanceof `FluentStandalone` and use it directly. You have to manually invoke `init()` to initialize the 
+Create an instanceof `FluentStandalone` and use it directly. You have to manually invoke `init()` to initialize the
 WebDriver, and `quit()` to close it.
 
 ```java
@@ -1077,12 +1080,12 @@ standalone.el("input").enabled();
 standalone.quit();
 ```
 
-Using a `FluentStandalone` instance is quite verbose because of the need to repeat the instance name before each 
+Using a `FluentStandalone` instance is quite verbose because of the need to repeat the instance name before each
 instruction. If it's a probleme for your, you should consider extending `FluentStandaloneRunnable`.
- 
+
 ### FluentStandaloneRunnable
 
-Another option is to extend `FluentStandaloneRunnable`, implement `doRun()` method and invoke `run()` method on an 
+Another option is to extend `FluentStandaloneRunnable`, implement `doRun()` method and invoke `run()` method on an
 instance of this class. Fluent WebDriver is initialized before and released after `run()` method invocation.
 
 ```java
@@ -1108,14 +1111,14 @@ FluentLenium can be configured in many ways through configuration properties.
 ### Configuration properties
 
   - **webDriver**
-  
+
     Sets the WebDriver type to use.
 
-    Default value: ```null```. 
-        
-    Possible values are ```remote```, ```firefox```, ```chrome```, ```ie```, ```safari```, 
+    Default value: ```null```.
+
+    Possible values are ```remote```, ```firefox```, ```chrome```, ```ie```, ```safari```,
     ```phantomjs```, ```htmlunit```, or any class name implementing ```WebDriver```.
-    
+
     If not defined, FluentLenium will use the first value for which WebDriver is available in classpath.
 
   - **browserTimeout**
@@ -1132,13 +1135,13 @@ FluentLenium can be configured in many ways through configuration properties.
     Default value: ```2```
 
   - **remoteUrl**
-  
+
     Sets the remote URL for ```remote``` *webDriver*. This should be the URL to access Selenium-Grid server.
 
   - **capabilities**
 
      Sets the [Capabilities](https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities) to use with the WebDriver.
-     
+
      Can be:
        - a `Capabilities` JSON Object string.
        - an URL pointing to a `Capabilities` JSON Object string.
@@ -1147,40 +1150,40 @@ FluentLenium can be configured in many ways through configuration properties.
        - a reference to a `CapabilitiesFactory`.
 
      Default value: ```null```.
-     
+
   - **driverLifecycle**
-  
-    Sets the lifecycle of the WebDriver. WebDriver is fully managed by FluentLenium, so you should never 
+
+    Sets the lifecycle of the WebDriver. WebDriver is fully managed by FluentLenium, so you should never
     create or quit a WebDriver by yourself.
-    
+
     Possible values are:
-    
+
       - `JVM`: WebDriver is created once, and same instance is used for each test class and method.
       - `CLASS`: WebDriver is created for each test class, and same instance is used for each test method in the class.
       - `METHOD`: WebDriver is created for each test method, and this instance is used only for one test method.
-      - `THREAD`: WebDriver is created for each test thread. The instance is used only for one thread of test 
-      method. It was introduced to support annotation driven concurrent test execution mode (you can skip it if you 
+      - `THREAD`: WebDriver is created for each test thread. The instance is used only for one thread of test
+      method. It was introduced to support annotation driven concurrent test execution mode (you can skip it if you
       are using surefire from maven), please take a look on example below:
-      
+
       ```java
       @FluentConfiguration(driverLifecycle = ConfigurationProperties.DriverLifecycle.THREAD)
       public class DriverPerThreadTest extends FluentTestNg {
           private List<String> cookiesList = new ArrayList<>();
-      
+
           @Override
           public WebDriver newWebDriver() {
               DesiredCapabilities caps = new DesiredCapabilities();
               WebDriver driver = new ChromeDriver(caps);
               return driver;
           }
-      
+
           @Test(invocationCount = 2, threadPoolSize = 2)
           public void firstMethod() {
               goTo("http://google.com");
               await().until($(".gsfi")).present();
               cookiesList.add(getDriver().manage().getCookies().toString());
           }
-      
+
           @AfterClass()
           public void checkCookies() {
               assertThat(cookiesList.stream().distinct().count()).isEqualTo(2);
@@ -1190,97 +1193,97 @@ FluentLenium can be configured in many ways through configuration properties.
 
     Please keep in mind that this configures when drivers are created and exited at runtime, but it does not deal with
     concurrency of your tests.
-    
+
     Default value: ```METHOD```
-    
+
   - **deleteCookies**
 
-    When using CLASS or JVM *driverLifecycle* configuration property, allow to delete cookies between each 
+    When using CLASS or JVM *driverLifecycle* configuration property, allow to delete cookies between each
     test.
 
     Default value: ```false```.
 
   - **baseUrl**
-  
+
      Sets the base URL used to build absolute URL when relative URL is given to {@link FluentAdapter#goTo(String)}.
-     
+
      Default value: ```null```.
 
   - **pageLoadTimeout**
-     
+
      Sets the amount of time in millisecond to wait for a page load to complete before throwing an error.
      If the timeout is negative, page loads can be indefinite.
-     
+
      Default value: ```null```.
 
   - **implicitlyWait**
-     
+
      Specifies the amount of time in millisecond the driver should wait when searching for an element if it is
      not immediately present.
-     
+
      Default value: ```null```.
 
 
   - **scriptTimeout**
-  
+
      Sets the amount of time in millisecond to wait for an asynchronous script to finish execution before
      throwing an error. If the timeout is negative, then the script will be allowed to run
      indefinitely.
-     
+
      Default value: ```null```.
-     
+
   - **eventsEnabled**
-  
+
      Enables ```events()``` by wrapping the ```WebDriver``` in ```EventFiringWebDriver```.
-     
+
      Default value: ```true```.
-     
+
   - **screenshotPath**
 
      Sets the filesystem path where screenshot will be saved.
-     
+
      Default value: ```null```.
 
 
   - **screenshotMode**
 
-     Sets the trigger mode of screenshots. Can be ```AUTOMATIC_ON_FAIL``` to take screenshot when the test fail 
+     Sets the trigger mode of screenshots. Can be ```AUTOMATIC_ON_FAIL``` to take screenshot when the test fail
      or ```MANUAL```.
-     
+
      Default value: ```null```.
 
 
   - **htmlDumpPath**
-     
+
      Sets the filesystem path where screenshot will be saved.
-     
+
      Default value: ```null```.
 
 
   - **htmlDumpMode**
-     
-     Sets the trigger mode of html dump. Can be ```ON_AUTOMATIC_ON_FAIL``` to take html dump when the test fail 
+
+     Sets the trigger mode of html dump. Can be ```ON_AUTOMATIC_ON_FAIL``` to take html dump when the test fail
      or ```MANUAL```.
-     
+
      Default value: ```null```.
-     
-     
+
+
   - **configurationDefaults**
-   
+
     Set this to a class implementing ```ConfigurationProperties``` to provide the default values
     of the configuration properties.
 
     Default value: ```ConfigurationDefaults```.
-      
-      
+
+
   - **configurationFactory**
-  
+
      Set this to a class implementing ```ConfigurationFactory``` to customize the ways properties are read.
      This allow to configure properties from sources that are not supported by default FluentLenium.
-     
+
      Default value: ```DefaultConfigurationFactory```.
-     
-     
+
+
  Keep in mind that when those properties are defined through System Properties or Environment Variables, they need to
  be prefixed with ```fluentlenium.``` (ie. ```fluentlenium.webDriver=chrome```).
 
@@ -1289,31 +1292,31 @@ FluentLenium can be configured in many ways through configuration properties.
 It's possible to define those properties using:
 
   - **Overrides** of JavaBean **property getters** of the test class.
-  
+
         public class SomeFluentTest extends FluentTest {
             @Override
             public String getWebDriver() {
                 return "chrome";
             }
         }
-  
+
   - **Calls** of JavaBean **property setters** of the test class.
-  
+
         public class SomeFluentTest extends FluentTest {
             public SomeFluentTest() {
                 setWebDriver("chrome");
             }
         }
-  
-  - **System properties** of the Java Environment, passed using ```-D``` on the command line. Property names must be **prefixed with fluentlenium.**. 
-  
+
+  - **System properties** of the Java Environment, passed using ```-D``` on the command line. Property names must be **prefixed with fluentlenium.**.
+
         mvn clean test -Dfluentlenium.webDriver=chrome        
-  
+
   - **Environment Variable** of the Operating System. Property names **must be prefixed with fluentlenium.**.
-  
+
         $ EXPORT fluentlenium.webDriver=chrome; mvn clean test;
-  
-  
+
+
   - **@FluentConfiguration Annotation** on test class to configure.
 
          @FluentConfiguration(webDriver="chrome")
@@ -1329,18 +1332,18 @@ It's possible to define those properties using:
         ...
 
   - **ConfigurationProperties** custom implementation specified by ```configurationDefaults``` property.
-  
+
         public class CustomConfigurationDefaults extends ConfigurationDefaults {
             @Override
             public String getWebDriver() {
                 return "chrome";
             }
         }
-        
+
         $ cat fluentlenium.properties
         configurationDefaults=org.your.package.CustomConfigurationDefaults
- 
-This list of way to configure fluentlenium is ordered by priority. If a value is defined for a property in an element, 
+
+This list of way to configure fluentlenium is ordered by priority. If a value is defined for a property in an element,
 lower ways will just be ignored.
 
 You may implement additionnal ways to read configuration property by implementing another
@@ -1349,15 +1352,15 @@ You may implement additionnal ways to read configuration property by implementin
 ### Custom Capabilities (BrowserStack example)
 You can register custom Capabilities by providing your own implementation of ```CapabilitiesFactory```.
 
-A ```CapabilitiesFactory``` is responsible for creating new instances of ```Capabilities``` that will be 
+A ```CapabilitiesFactory``` is responsible for creating new instances of ```Capabilities``` that will be
 available through ```capabilities``` configuration property
 
-This implementation will be discovered with [classindex](https://github.com/atteo/classindex), a 
-compile-time alternative to run-time classpath scanning. It requires your IDE to have Annotation Processing 
+This implementation will be discovered with [classindex](https://github.com/atteo/classindex), a
+compile-time alternative to run-time classpath scanning. It requires your IDE to have Annotation Processing
 enabled in the Java Compiler configuration.
 
 
-For instance, to run your tests on [BrowserStack Automate](https://www.browserstack.com/automate), your first need to create a Capabilities 
+For instance, to run your tests on [BrowserStack Automate](https://www.browserstack.com/automate), your first need to create a Capabilities
 factory.
 
 ```java
@@ -1366,14 +1369,14 @@ public class BrowserStackOsXCapabilitiesFactory implements CapabilitiesFactory {
     @Override
     public Capabilities newCapabilities(ConfigurationProperties configuration) {    
         DesiredCapabilities caps = new DesiredCapabilities();
-        
+
         caps.setCapability("os", "OS X");
         caps.setCapability("os_version", "El Capitan");
         caps.setCapability("browser", "firefox");
         caps.setCapability("browser_version", "44");
         caps.setCapability("build", "Sample FluentLenium Tests");
         caps.setCapability("browserstack.debug", "true");
-        
+
         return caps;
     }
 }
@@ -1394,8 +1397,8 @@ You can register custom WebDriver by providing your own implementation of ```Web
 A ```WebDriverFactory``` is responsible for creating new instances of ```WebDriver``` that will be available
 through ```webDriver``` configuration property
 
-This implementation will be discovered with [classindex](https://github.com/atteo/classindex), a 
-compile-time alternative to run-time classpath scanning. It requires your IDE to have Annotation Processing 
+This implementation will be discovered with [classindex](https://github.com/atteo/classindex), a
+compile-time alternative to run-time classpath scanning. It requires your IDE to have Annotation Processing
 enabled in the Java Compiler configuration.
 
 ```java
@@ -1408,12 +1411,12 @@ public class CustomWebDriverFactory implements WebDriverFactory {
 }
 ```
 
-Instead of implementing a new ```WebDriverFactory``` class, you may also override ```newWebDriver()``` in the Test 
+Instead of implementing a new ```WebDriverFactory``` class, you may also override ```newWebDriver()``` in the Test
 class, but doing so will ignore any value defined in ```webDriver``` configuration property.
 
 ### Run test concurrently
 
-If you need to make your tests run concurrently to speed them up, you should use dedicated libraries/extensions. 
+If you need to make your tests run concurrently to speed them up, you should use dedicated libraries/extensions.
 You can use the Surefire maven plugin for example.
 
 **Surefire JUnit example**
@@ -1484,7 +1487,7 @@ You can use the Surefire maven plugin for example.
 TestNG gives you more flexibility in order to the concurrency level, test suites and having better control on executed
  scenarios.
 
-Both test frameworks are giving possibility to define the parallelism level of tests. 
+Both test frameworks are giving possibility to define the parallelism level of tests.
 
 It is possible when you have multiple execution/concurrency levels set in your tests to face driver sharing issues,
 so please use ```METHOD``` ```driverLifecycle``` configuration property when your execution methods are mixed up.
@@ -1720,6 +1723,5 @@ assertThat(window().title(),equalTo("Hello toto"));
 ```
 
 ## Contact Us
-If you have any comment, remark or issue, please open an issue on 
+If you have any comment, remark or issue, please open an issue on
 [FluentLenium Issue Tracker](https://github.com/FluentLenium/FluentLenium/issues)
-

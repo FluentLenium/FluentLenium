@@ -9,23 +9,23 @@
 
 FluentLenium helps you writing readable, reusable, reliable and resilient UI functional tests for the browser.
 
-FluentLenium provides a Java [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to 
+FluentLenium provides a Java [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to
 [Selenium](http://www.seleniumhq.org/), and brings some magic to avoid common issues faced by Selenium users.
 
-FluentLenium is shipped with adapters for [JUnit](junit.org/), [TestNG](http://testng.org/doc/index.html) and 
+FluentLenium is shipped with adapters for [JUnit](junit.org/), [TestNG](http://testng.org/doc/index.html) and
 [Cucumber](https://cucumber.io), but it can also be used standalone.
 
-FluentLenium best integrates with [AssertJ](http://joel-costigliola.github.io/assertj/), but you can also choose to use 
+FluentLenium best integrates with [AssertJ](http://joel-costigliola.github.io/assertj/), but you can also choose to use
 the assertion framework you want.
 
 # Choose the right version
 
-FluentLenium 3.x is still in development and includes latest enhancements and features, but Selenium 3 and Java 8 are 
+FluentLenium 3.x is still in development and includes latest enhancements and features, but Selenium 3 and Java 8 are
 required to run it.
 
-Starting from FluentLenium 3.1.0 you can use all sparks of Java 8, including lambdas. It is a nice extension in 
-comparison to Selenium 3 which is still basing on Guava objects. Please take a look on documentation to find `await` 
-lambda usage example. 
+Starting from FluentLenium 3.1.0 you can use all sparks of Java 8, including lambdas. It is a nice extension in
+comparison to Selenium 3 which is still basing on Guava objects. Please take a look on documentation to find `await`
+lambda usage example.
 
 FluentLenium 1.x is in maintenance state, and no new feature will be added anymore. It requires Selenium 2 and
 Java 7, but can also be used with Java 8. Selenium 3 is not supported in this version though.
@@ -74,6 +74,8 @@ import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.core.hook.wait.Wait;
 import org.junit.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Wait
@@ -83,6 +85,7 @@ public class DuckDuckGoTest extends FluentTest {
         goTo("https://duckduckgo.com");
         $("#search_form_input_homepage").fill().with("FluentLenium");
         $("#search_button_homepage").submit();
+        await().atMost(5, TimeUnit.SECONDS).until(el("#search_form_homepage")).not().present();
         assertThat(window().title()).contains("FluentLenium");
     }
 }
@@ -94,9 +97,9 @@ public class DuckDuckGoTest extends FluentTest {
 
 ## Documentation
 
-Full documentation is available on [fluentlenium.org](http://fluentlenium.org/docs), or in the 
+Full documentation is available on [fluentlenium.org](http://fluentlenium.org/docs), or in the
 [docs sources directory](https://github.com/FluentLenium/FluentLenium/tree/develop/docs).
 
 ## Contact Us
-If you have any comment, remark or issue, please open an issue on 
+If you have any comment, remark or issue, please open an issue on
 [FluentLenium Issue Tracker](https://github.com/FluentLenium/FluentLenium/issues)
