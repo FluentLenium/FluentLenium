@@ -46,12 +46,12 @@ public class ConfigurationDefaults extends BaseConfiguration implements Configur
 
     @Override
     public Long getBrowserTimeout() {
-        return null;
+        return 2000L;
     }
 
     @Override
     public Integer getBrowserTimeoutRetries() {
-        return null;
+        return 2;
     }
 
     @Override
