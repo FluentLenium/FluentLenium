@@ -17,7 +17,6 @@
         <module>fluentlenium-testng</module>
         <module>fluentlenium-cucumber</module>
         <module>fluentlenium-spock</module>
-        <module>fluentlenium-e2e</module>
     </modules>
 
     <prerequisites>
@@ -336,6 +335,12 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>e2e-tests</id>
+            <modules>
+                <module>fluentlenium-e2e</module>
+            </modules>
+        </profile>
         <profile>
             <id>examples</id>
             <modules>
