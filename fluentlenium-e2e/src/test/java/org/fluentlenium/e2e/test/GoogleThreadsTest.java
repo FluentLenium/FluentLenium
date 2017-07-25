@@ -5,14 +5,12 @@ import java.util.concurrent.TimeUnit;
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.configuration.FluentConfiguration;
-import org.junit.Ignore;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-@FluentConfiguration(driverLifecycle = ConfigurationProperties.DriverLifecycle.THREAD, browserTimeout = 5000L)
+@FluentConfiguration(driverLifecycle = ConfigurationProperties.DriverLifecycle.THREAD)
 public class GoogleThreadsTest extends E2ETest {
 
-    @Ignore
     @Test(invocationCount = 5, threadPoolSize = 5)
     public void firstMethod() {
         goTo("http://www.google.com");

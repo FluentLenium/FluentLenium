@@ -27,7 +27,7 @@ public class ConfigurationDefaultsTest {
                 Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(DriverLifecycle.METHOD);
                 break;
             case "browserTimeout":
-                Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(2000L);
+                Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(60000L);
                 break;
             case "browserTimeoutRetries":
                 Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(2);

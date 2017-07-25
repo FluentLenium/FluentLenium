@@ -1126,7 +1126,7 @@ FluentLenium can be configured in many ways through configuration properties.
     Sets the timeout for webdriver when it should be responsive if not interrupts the obtain driver thread and tries
     maximum amoun of times specified by **browserTimeoutRetries** value
     
-    Default value: ```2000```
+    Default value: ```60000```
   
   - **browserTimeoutRetries**
   

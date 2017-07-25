@@ -149,6 +149,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
                     .getOrCreateDriver(this::newWebDriver, parameters.getTestClass(),
                             parameters.getTestName(), parameters.getDriverLifecycle()));
 
+            webDriverExecutor.shutdown();
             try {
                 if (!webDriverExecutor.awaitTermination(getBrowserTimeout(), TimeUnit.MILLISECONDS)) {
                     webDriverExecutor.shutdownNow();

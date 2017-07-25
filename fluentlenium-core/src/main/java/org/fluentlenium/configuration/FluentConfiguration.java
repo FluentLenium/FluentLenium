@@ -97,7 +97,7 @@ public @interface FluentConfiguration {
      * @return long
      * @see ConfigurationProperties#getBrowserTimeout()
      */
-    long browserTimeout() default 2000L;
+    long browserTimeout() default 60000L;
 
     /**
      * <i>browserTimeoutRetries</i> property.

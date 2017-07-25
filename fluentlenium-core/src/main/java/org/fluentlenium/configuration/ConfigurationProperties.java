@@ -184,7 +184,7 @@ public interface ConfigurationProperties {
      *
      * Sets the maximum amount of time when the browser should start responding to the WebDriver.
      *
-     * Default value is 5 seconds.
+     * Default value is 60 seconds.
      *
      * @return long
      */
