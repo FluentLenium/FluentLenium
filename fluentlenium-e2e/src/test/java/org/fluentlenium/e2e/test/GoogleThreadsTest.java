@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 @FluentConfiguration(driverLifecycle = ConfigurationProperties.DriverLifecycle.THREAD)
 public class GoogleThreadsTest extends E2ETest {
 
-    @Test(invocationCount = 5, threadPoolSize = 2)
+    @Test(invocationCount = 2, threadPoolSize = 2)
     public void firstMethod() {
         goTo("http://www.google.com");
         await().atMost(2, TimeUnit.SECONDS).until($(".gsfi")).present();
