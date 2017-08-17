@@ -94,7 +94,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <selenium.version>3.4.0</selenium.version>
+        <selenium.version>3.5.1</selenium.version>
         <java.version>1.8</java.version>
     </properties>
 
