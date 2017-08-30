@@ -14,7 +14,7 @@
     <description>Cucumber JVM Extension for FluentLenium</description>
 
     <properties>
-        <cucumber.version>1.2.4</cucumber.version>
+        <cucumber.version>1.2.5</cucumber.version>
     </properties>
 
     <dependencies>
