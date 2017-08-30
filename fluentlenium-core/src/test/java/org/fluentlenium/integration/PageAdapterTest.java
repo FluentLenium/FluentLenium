@@ -28,9 +28,9 @@ public class PageAdapterTest extends FluentAdapter {
     private final WebDriver driver = new HtmlUnitDriver(true);
 
     @Page
-    private InjectedPageAccueil page;
+    private InjectedIndexPage page;
 
-    private InjectedPageAccueil reference;
+    private InjectedIndexPage reference;
 
     /**
      * simulate page injection before init
@@ -39,7 +39,7 @@ public class PageAdapterTest extends FluentAdapter {
     public void before() {
         initFluent(driver);
 
-        page = newInstance(InjectedPageAccueil.class);
+        page = newInstance(InjectedIndexPage.class);
         page.testVariable = "test";
         reference = page;
     }
@@ -66,7 +66,7 @@ public class PageAdapterTest extends FluentAdapter {
     }
 }
 
-class InjectedPageAccueil extends PageAccueil {
+class InjectedIndexPage extends IndexPage {
 
     /* default */ String testVariable;
 }

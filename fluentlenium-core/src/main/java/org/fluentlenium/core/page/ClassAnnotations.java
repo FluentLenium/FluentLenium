@@ -45,17 +45,17 @@ public class ClassAnnotations extends AbstractAnnotations {
 
         FindBys findBys = containerClass.getAnnotation(FindBys.class);
         if (findBys != null) {
-            ans = buildByFromFindBys(findBys);
+            ans = new FindBys.FindByBuilder().buildIt(findBys, null);
         }
 
         FindAll findAll = containerClass.getAnnotation(FindAll.class);
         if (ans == null && findAll != null) {
-            ans = buildBysFromFindByOneOf(findAll);
+            ans = new FindAll.FindByBuilder().buildIt(findAll, null);
         }
 
         FindBy findBy = containerClass.getAnnotation(FindBy.class);
         if (ans == null && findBy != null) {
-            ans = buildByFromFindBy(findBy);
+            ans = new FindBy.FindByBuilder().buildIt(findBy, null);
         }
 
         return ans;
