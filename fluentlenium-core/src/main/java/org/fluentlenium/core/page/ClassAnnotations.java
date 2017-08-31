@@ -62,32 +62,23 @@ public class ClassAnnotations extends AbstractAnnotations {
     }
 
     /**
-     * Get the underlying container class
-     *
-     * @return container class
-     */
-    protected Class<?> getContainerClass() {
-        return containerClass;
-    }
-
-    /**
      * Assert that defined annotations are valid.
      */
-    protected void assertValidAnnotations() {
+    private void assertValidAnnotations() {
         FindBys findBys = containerClass.getAnnotation(FindBys.class);
         FindAll findAll = containerClass.getAnnotation(FindAll.class); // NOPMD PrematureDeclaration
         FindBy findBy = containerClass.getAnnotation(FindBy.class);
         if (findBys != null && findBy != null) {
             throw new IllegalArgumentException(
-                    "If you use a '@FindBys' annotation, " + "you must not also use a '@FindBy' annotation");
+                    "If you use a '@FindBys' annotation, you must not also use a '@FindBy' annotation");
         }
         if (findAll != null && findBy != null) {
             throw new IllegalArgumentException(
-                    "If you use a '@FindAll' annotation, " + "you must not also use a '@FindBy' annotation");
+                    "If you use a '@FindAll' annotation, you must not also use a '@FindBy' annotation");
         }
         if (findAll != null && findBys != null) {
             throw new IllegalArgumentException(
-                    "If you use a '@FindAll' annotation, " + "you must not also use a '@FindBys' annotation");
+                    "If you use a '@FindAll' annotation, you must not also use a '@FindBys' annotation");
         }
     }
 }
