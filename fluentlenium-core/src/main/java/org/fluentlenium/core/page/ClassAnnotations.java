@@ -45,49 +45,40 @@ public class ClassAnnotations extends AbstractAnnotations {
 
         FindBys findBys = containerClass.getAnnotation(FindBys.class);
         if (findBys != null) {
-            ans = buildByFromFindBys(findBys);
+            ans = new FindBys.FindByBuilder().buildIt(findBys, null);
         }
 
         FindAll findAll = containerClass.getAnnotation(FindAll.class);
         if (ans == null && findAll != null) {
-            ans = buildBysFromFindByOneOf(findAll);
+            ans = new FindAll.FindByBuilder().buildIt(findAll, null);
         }
 
         FindBy findBy = containerClass.getAnnotation(FindBy.class);
         if (ans == null && findBy != null) {
-            ans = buildByFromFindBy(findBy);
+            ans = new FindBy.FindByBuilder().buildIt(findBy, null);
         }
 
         return ans;
     }
 
     /**
-     * Get the underlying container class
-     *
-     * @return container class
-     */
-    protected Class<?> getContainerClass() {
-        return containerClass;
-    }
-
-    /**
      * Assert that defined annotations are valid.
      */
-    protected void assertValidAnnotations() {
+    private void assertValidAnnotations() {
         FindBys findBys = containerClass.getAnnotation(FindBys.class);
         FindAll findAll = containerClass.getAnnotation(FindAll.class); // NOPMD PrematureDeclaration
         FindBy findBy = containerClass.getAnnotation(FindBy.class);
         if (findBys != null && findBy != null) {
             throw new IllegalArgumentException(
-                    "If you use a '@FindBys' annotation, " + "you must not also use a '@FindBy' annotation");
+                    "If you use a '@FindBys' annotation, you must not also use a '@FindBy' annotation");
         }
         if (findAll != null && findBy != null) {
             throw new IllegalArgumentException(
-                    "If you use a '@FindAll' annotation, " + "you must not also use a '@FindBy' annotation");
+                    "If you use a '@FindAll' annotation, you must not also use a '@FindBy' annotation");
         }
         if (findAll != null && findBys != null) {
             throw new IllegalArgumentException(
-                    "If you use a '@FindAll' annotation, " + "you must not also use a '@FindBys' annotation");
+                    "If you use a '@FindAll' annotation, you must not also use a '@FindBys' annotation");
         }
     }
 }
