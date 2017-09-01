@@ -113,23 +113,25 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
     }
 
     @Override
-    public final void go() {
+    public final FluentPage go() {
         String url = getUrl();
         if (url == null) {
             throw new IllegalStateException(
                     "An URL should be defined on the page. Use @PageUrl annotation or override getUrl() method.");
         }
         goTo(url);
+        return this;
     }
-
+    
     @Override
-    public void go(Object... params) {
+    public FluentPage go(Object... params) {
         String url = getUrl(params);
         if (url == null) {
             throw new IllegalStateException(
                     "An URL should be defined on the page. Use @PageUrl annotation or override getUrl() method.");
         }
         goTo(url);
+        return this;
     }
 
     @Override

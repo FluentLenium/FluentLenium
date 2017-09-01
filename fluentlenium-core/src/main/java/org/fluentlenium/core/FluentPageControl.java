@@ -39,7 +39,7 @@ public interface FluentPageControl extends FluentControl {
     /**
      * Go to the url defined in the page
      */
-    void go(); // NOPMD ShortMethodName
+    FluentPage go(); // NOPMD ShortMethodName
 
     /**
      * Got to the url defined in the page, using given parameters.
@@ -47,7 +47,7 @@ public interface FluentPageControl extends FluentControl {
      * @param params page url parameter values
      * @throws IllegalArgumentException if some required parameters are missing
      */
-    void go(Object... params);
+    FluentPage go(Object... params);
 
     /**
      * Get the parameter values of page URL extracted from current URL.
