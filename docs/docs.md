@@ -519,7 +519,7 @@ is removed when parameter value is not defined.
 
 ```java
 @PageUrl("/document/{document}{?/page/page}{?/format}")
-public class DocumentPage extends FluentPage {
+public class DocumentPage extends FluentPage<DocumentPage> {
     ...
 }
 ```

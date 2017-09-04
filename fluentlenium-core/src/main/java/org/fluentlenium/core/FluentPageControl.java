@@ -7,7 +7,7 @@ import org.fluentlenium.core.url.ParsedUrlTemplate;
  *
  * @see FluentPage
  */
-public interface FluentPageControl extends FluentControl {
+public interface FluentPageControl<P extends FluentPage> extends FluentControl {
 
     /**
      * URL of the page
@@ -39,7 +39,7 @@ public interface FluentPageControl extends FluentControl {
     /**
      * Go to the url defined in the page
      */
-    FluentPage go(); // NOPMD ShortMethodName
+    P go(); // NOPMD ShortMethodName
 
     /**
      * Got to the url defined in the page, using given parameters.
@@ -47,7 +47,7 @@ public interface FluentPageControl extends FluentControl {
      * @param params page url parameter values
      * @throws IllegalArgumentException if some required parameters are missing
      */
-    FluentPage go(Object... params);
+    P go(Object... params);
 
     /**
      * Get the parameter values of page URL extracted from current URL.
