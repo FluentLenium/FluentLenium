@@ -519,7 +519,7 @@ is removed when parameter value is not defined.
 
 ```java
 @PageUrl("/document/{document}{?/page/page}{?/format}")
-public class DocumentPage extends FluentPage<DocumentPage> {
+public class DocumentPage extends FluentPage {
     ...
 }
 ```
@@ -532,13 +532,45 @@ private DocumentPage page;
 
 @Test
 public void test() {
-    page.go(267) // go to "/document/267"
-    page.go(174, 3) // go to "/document/174/page/3"
-    page.go(124, 1, "pdf") // go to "/document/124/page/1/pdf"
-    page.go(124, null, "html") // go to "/document/124/html"
-    page.isAt(174, 3) // Assert that current url is "/document/174/page/3"
+    page.go(267); // go to "/document/267"
+    page.go(174, 3); // go to "/document/174/page/3"
+    page.go(124, 1, "pdf"); // go to "/document/124/page/1/pdf"
+    page.go(124, null, "html"); // go to "/document/124/html"
+    page.isAt(174, 3); // Assert that current url is "/document/174/page/3"
 }
 ```
+
+In order to be able to chain `go()` methods you need to provide your `FluentPage` class name for 
+the master `FluentPage` class which is extended by your page class.
+
+The example above can be implemented as follows:
+
+```java
+@Page
+private DocumentPage page;
+
+@Test
+public void test() {
+    page.go(267) // go to "/document/267"
+        .go(174, 3) // go to "/document/174/page/3"
+        .go(124, 1, "pdf") // go to "/document/124/page/1/pdf"
+        .go(124, null, "html") // go to "/document/124/html"
+        .isAt(174, 3) // Assert that current url is "/document/174/page/3"
+        ...
+}
+```
+
+To achieve that you need to provide `Class` type parameter for `FluentPage` generic class, 
+in this example it is `FluentPage<DocumentPage>`
+
+```java
+@PageUrl("/document/{document}{?/page/page}{?/format}")
+public class DocumentPage extends FluentPage<DocumentPage> {
+    ...
+}
+```
+
+As a result the `go` method will return `DocumentPage` type instead of generic `FluentPage`
 
 Create your own methods to easily fill out forms, go to another or whatever else may be needed in your test.
 
