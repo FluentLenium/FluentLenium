@@ -66,8 +66,7 @@ public class PageTest extends IntegrationFluentTest {
 
     @Test
     public void checkFollowLink() {
-        page.go();
-        page.goToNextPage();
+        page.go().goToNextPage();
         page2.isAt();
     }
 
@@ -81,8 +80,7 @@ public class PageTest extends IntegrationFluentTest {
 
     @Test
     public void checkFollowLinkFoundWithFindBy() {
-        page.go();
-        page.goToNextPageWithFindByClassLink();
+        page.go().goToNextPageWithFindByClassLink();
         page2.isAt();
     }
 
@@ -104,8 +102,7 @@ public class PageTest extends IntegrationFluentTest {
 
     @Test
     public void checkPageIsAtWithFindByAnnotation() {
-        indexPageWithFindByAnnotation.go();
-        indexPageWithFindByAnnotation.isAt();
+        indexPageWithFindByAnnotation.go().isAt();
     }
 
     @Test
@@ -163,7 +160,7 @@ public class PageTest extends IntegrationFluentTest {
     }
 }
 
-class IndexPage extends FluentPage {
+class IndexPage extends FluentPage<IndexPage> {
 
     private FluentWebElement linkToPage2;
 
