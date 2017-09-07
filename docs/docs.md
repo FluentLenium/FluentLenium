@@ -520,7 +520,11 @@ is removed when parameter value is not defined.
 ```java
 @PageUrl("/document/{document}{?/page/page}{?/format}")
 public class DocumentPage extends FluentPage {
-    ...
+    public DocumentPage customPageMethod(){
+            ...
+            return this;
+        }
+        ...
 }
 ```
 
@@ -540,7 +544,7 @@ public void test() {
 }
 ```
 
-In order to be able to chain `go()` methods you need to provide your `FluentPage` class name for 
+In order to be able to chain `go()` methods with your page methods you need to provide your `FluentPage` class name for 
 the master `FluentPage` class which is extended by your page class.
 
 The example above can be implemented as follows:
@@ -555,7 +559,8 @@ public void test() {
         .go(174, 3) // go to "/document/174/page/3"
         .go(124, 1, "pdf") // go to "/document/124/page/1/pdf"
         .go(124, null, "html") // go to "/document/124/html"
-        .isAt(174, 3) // Assert that current url is "/document/174/page/3"
+        .customPageMethod() //do the custom actions
+        .go(267); // go to "document/267"
         ...
 }
 ```
@@ -566,6 +571,10 @@ in this example it is `FluentPage<DocumentPage>`
 ```java
 @PageUrl("/document/{document}{?/page/page}{?/format}")
 public class DocumentPage extends FluentPage<DocumentPage> {
+    public DocumentPage customPageMethod(){
+        ...
+        return this;
+    }
     ...
 }
 ```
