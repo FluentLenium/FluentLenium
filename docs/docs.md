@@ -1423,37 +1423,37 @@ To run Chrome in the headless mode you can use following FluentLenium configurat
 
   1. **Override** JavaBean **property getters** of the test class:
         ```java
-             public class SomeFluentTest extends FluentTest {
-                 @Override
-                 public String getWebDriver(){
-                     return "chrome";
-                 }
-                 
-                 @Override
-                 public Capabilities getCapabilities()
-                     ChromeOptions options = new ChromeOptions();
-                     options.addArguments("--headless");
-                     options.addArguments("--disable-gpu");
-                     DesiredCapabilities capabilities = new DesiredCapabilities();
-                     capabilities.setCapability("chromeOptions", options);
-                     return capabilities;
-                 }
+        public class SomeFluentTest extends FluentTest {
+             @Override
+             public String getWebDriver(){
+                 return "chrome";
              }
+                 
+             @Override
+             public Capabilities getCapabilities(){
+                 ChromeOptions options = new ChromeOptions();
+                 options.addArguments("--headless");
+                 options.addArguments("--disable-gpu");
+                 DesiredCapabilities capabilities = new DesiredCapabilities();
+                 capabilities.setCapability("chromeOptions", options);
+                 return capabilities;
+             }
+        }
         ```
    
   1. **Call** JavaBean **property setters** of the test class:
         ```java
-             public class SomeFluentTest extends FluentTest {
-                 public SomeFluentTest() {
-                        ChromeOptions options = new ChromeOptions();
-                        options.addArguments("--headless");
-                        options.addArguments("--disable-gpu");
-                        DesiredCapabilities capabilities = new DesiredCapabilities();
-                        capabilities.setCapability("chromeOptions", options);
-                        setCapabilities(capabilities);
-                        setWebDriver("chrome");
-                 }
+        public class SomeFluentTest extends FluentTest {
+             public SomeFluentTest() {
+                 ChromeOptions options = new ChromeOptions();
+                 options.addArguments("--headless");
+                 options.addArguments("--disable-gpu");
+                 DesiredCapabilities capabilities = new DesiredCapabilities();
+                 capabilities.setCapability("chromeOptions", options);
+                 setCapabilities(capabilities);
+                 setWebDriver("chrome");
              }
+        }
         ```
         
   1. Pass **system properties** using ```-D``` on the command line:
@@ -1463,10 +1463,10 @@ To run Chrome in the headless mode you can use following FluentLenium configurat
         
   1. Annotate the test class with **@FluentConfugration**:
         ```java
-             @FluentConfiguration(webDriver="chrome", capabilities = "{chromeOptions: {args:[--headless, --disable-gpu]}}")
-             public class SomeFluentTest extends FluentTest {
-                 ....
-             }
+        @FluentConfiguration(webDriver="chrome", capabilities = "{chromeOptions: {args:[--headless, --disable-gpu]}}")
+        public class SomeFluentTest extends FluentTest {
+             ....
+        }
         ```
   1. Create **Java Properties** file ```fluentlenium.properties``` in the project classpath.
         ```
@@ -1477,24 +1477,24 @@ To run Chrome in the headless mode you can use following FluentLenium configurat
         ```
   1. Implement custom configuration properties by extending **ConfigurationDefaults**
         ```java
-             public class CustomConfigurationDefaults extends ConfigurationDefaults {
-                 @Override
-                 public String getWebDriver() {
-                     return "chrome";
-                 }
-                    
-                 @Override
-                 public Capabilities getCapabilities(){
-                     ChromeOptions options = new ChromeOptions();
-                     options.addArguments("--headless");
-                     options.addArguments("--disable-gpu");
-                     DesiredCapabilities capabilities = new DesiredCapabilities();
-                     capabilities.setCapability("chromeOptions", options);
-                     return capabilities;
-                 }
+        public class CustomConfigurationDefaults extends ConfigurationDefaults {
+             @Override
+             public String getWebDriver() {
+                 return "chrome";
              }
-             $ cat fluentlenium.properties
-             configurationDefaults=org.your.package.CustomConfigurationDefaults
+                    
+             @Override
+             public Capabilities getCapabilities(){
+                 ChromeOptions options = new ChromeOptions();
+                 options.addArguments("--headless");
+                 options.addArguments("--disable-gpu");
+                 DesiredCapabilities capabilities = new DesiredCapabilities();
+                 capabilities.setCapability("chromeOptions", options);
+                 return capabilities;
+             }
+        }
+        $ cat fluentlenium.properties
+        configurationDefaults=org.your.package.CustomConfigurationDefaults
         ```
 
 ### Custom Capabilities (BrowserStack example)
