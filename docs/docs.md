@@ -1417,86 +1417,85 @@ You may implement additionnal ways to read configuration property by implementin
 ```ConfigurationFactory``` and set the new configuration factory class name in the ```configurationFactory``` property.
 
 ### Headless Chrome
-
 You can run your tests using Chrome [headless](https://developers.google.com/web/updates/2017/04/headless-chrome) feature. Just simply add ```{chromeOptions: {args:[--headless, --disable-gpu]}}``` to capabilities.
-To do that you can use any Fluentlenium configuration way.
 
-In example:
+To run Chrome in the headless mode you can use following FluentLenium configuration ways:
 
-  - **Overrides** of JavaBean **property getters** of the test class.
-
-        public class SomeFluentTest extends FluentTest {
-            @Override
-            public String getWebDriver(){
-                return "chrome";
-            }
-            
-            @Override
-            public Capabilities getCapabilities()
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--headless");
-                options.addArguments("--disable-gpu");
-                DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setCapability("chromeOptions", options);
-                return capabilities;
-            }
-        }
+  1. **Override**JavaBean**property getters**of the test class:
+        ```java
+             public class SomeFluentTest extends FluentTest {
+                 @Override
+                 public String getWebDriver(){
+                     return "chrome";
+                 }
+                 
+                 @Override
+                 public Capabilities getCapabilities()
+                     ChromeOptions options = new ChromeOptions();
+                     options.addArguments("--headless");
+                     options.addArguments("--disable-gpu");
+                     DesiredCapabilities capabilities = new DesiredCapabilities();
+                     capabilities.setCapability("chromeOptions", options);
+                     return capabilities;
+                 }
+             }
+        ```
+   
+  1. **Call**JavaBean**property setters** of the test class:
+        ```java
+             public class SomeFluentTest extends FluentTest {
+                 public SomeFluentTest() {
+                        ChromeOptions options = new ChromeOptions();
+                        options.addArguments("--headless");
+                        options.addArguments("--disable-gpu");
+                        DesiredCapabilities capabilities = new DesiredCapabilities();
+                        capabilities.setCapability("chromeOptions", options);
+                        setCapabilities(capabilities);
+                        setWebDriver("chrome");
+                 }
+             }
+        ```
         
-  - **Calls** of JavaBean **property setters** of the test class.
-
-        public class SomeFluentTest extends FluentTest {
-            public SomeFluentTest() {
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--headless");
-                options.addArguments("--disable-gpu");
-                DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setCapability("chromeOptions", options);
-                setCapabilities(capabilities);
-                setWebDriver("chrome");
-            }
-        }
-
-  - **System properties** of the Java Environment, passed using ```-D``` on the command line. Property names must be **prefixed with fluentlenium.**.
-
+  1. Pass**system properties**using ```-D``` on the command line:
+        ```
         mvn clean test -Dfluentlenium.webDriver=chrome -Dfluentlenium.capabilities="{chromeOptions: {args:[--headless, --disable-gpu]}}"
-     
-  - **@FluentConfiguration Annotation** on test class to configure.
-
-         @FluentConfiguration(webDriver="chrome", capabilities = "{chromeOptions: {args:[--headless, --disable-gpu]}}")
-         public class SomeFluentTest extends FluentTest {
-             ....
-         }
-
-
-  - **Java Properties file** located at ```/fluentlenium.properties``` in the classpath.
-
+        ```  
+        
+  1. Annotate the test class with **@FluentConfugration**:
+        ```java
+             @FluentConfiguration(webDriver="chrome", capabilities = "{chromeOptions: {args:[--headless, --disable-gpu]}}")
+             public class SomeFluentTest extends FluentTest {
+                 ....
+             }
+        ```
+  1. Create**Java Properties** file ```fluentlenium.properties``` in the project classpath.
+        ```
         $ cat fluentlenium.properties
         webDriver=chrome
         capabilities={chromeOptions: {args:[--headless, --disable-gpu]}}
         ...
-
-  - **ConfigurationProperties** custom implementation specified by ```configurationDefaults``` property.
-
-        public class CustomConfigurationDefaults extends ConfigurationDefaults {
-            @Override
-            public String getWebDriver() {
-                return "chrome";
-            }
-            
-            @Override
-            public Capabilities getCapabilities()
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--headless");
-                options.addArguments("--disable-gpu");
-                DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setCapability("chromeOptions", options);
-                return capabilities;
-            }
-        }
-
-        $ cat fluentlenium.properties
-        configurationDefaults=org.your.package.CustomConfigurationDefaults
-
+        ```
+  1. Implement custom configuration properties by extending**ConfigurationDefaults**
+        ```java
+             public class CustomConfigurationDefaults extends ConfigurationDefaults {
+                 @Override
+                 public String getWebDriver() {
+                     return "chrome";
+                 }
+                    
+                 @Override
+                 public Capabilities getCapabilities(){
+                     ChromeOptions options = new ChromeOptions();
+                     options.addArguments("--headless");
+                     options.addArguments("--disable-gpu");
+                     DesiredCapabilities capabilities = new DesiredCapabilities();
+                     capabilities.setCapability("chromeOptions", options);
+                     return capabilities;
+                 }
+             }
+             $ cat fluentlenium.properties
+             configurationDefaults=org.your.package.CustomConfigurationDefaults
+        ```
 
 ### Custom Capabilities (BrowserStack example)
 You can register custom Capabilities by providing your own implementation of ```CapabilitiesFactory```.
