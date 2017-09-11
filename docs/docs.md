@@ -1421,7 +1421,7 @@ You can run your tests using Chrome [headless](https://developers.google.com/web
 
 To run Chrome in the headless mode you can use following FluentLenium configuration ways:
 
-  1. **Override**JavaBean**property getters**of the test class:
+  1. **Override** JavaBean **property getters** of the test class:
         ```java
              public class SomeFluentTest extends FluentTest {
                  @Override
@@ -1441,7 +1441,7 @@ To run Chrome in the headless mode you can use following FluentLenium configurat
              }
         ```
    
-  1. **Call**JavaBean**property setters** of the test class:
+  1. **Call** JavaBean **property setters** of the test class:
         ```java
              public class SomeFluentTest extends FluentTest {
                  public SomeFluentTest() {
@@ -1456,7 +1456,7 @@ To run Chrome in the headless mode you can use following FluentLenium configurat
              }
         ```
         
-  1. Pass**system properties**using ```-D``` on the command line:
+  1. Pass **system properties** using ```-D``` on the command line:
         ```
         mvn clean test -Dfluentlenium.webDriver=chrome -Dfluentlenium.capabilities="{chromeOptions: {args:[--headless, --disable-gpu]}}"
         ```  
@@ -1468,14 +1468,14 @@ To run Chrome in the headless mode you can use following FluentLenium configurat
                  ....
              }
         ```
-  1. Create**Java Properties** file ```fluentlenium.properties``` in the project classpath.
+  1. Create **Java Properties** file ```fluentlenium.properties``` in the project classpath.
         ```
         $ cat fluentlenium.properties
         webDriver=chrome
         capabilities={chromeOptions: {args:[--headless, --disable-gpu]}}
         ...
         ```
-  1. Implement custom configuration properties by extending**ConfigurationDefaults**
+  1. Implement custom configuration properties by extending **ConfigurationDefaults**
         ```java
              public class CustomConfigurationDefaults extends ConfigurationDefaults {
                  @Override
