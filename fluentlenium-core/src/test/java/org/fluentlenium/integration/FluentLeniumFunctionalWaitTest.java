@@ -159,6 +159,11 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     }
 
     @Test
+    public void checkAwaitContainsTextWithTextContentMatcherWhenElementIsNotDisplayed() {
+        await().atMost(1, NANOSECONDS).untilElement(() -> el(".smallNone", withTextContent().contains("Small not displayed"))).present();
+    }
+
+    @Test
     public void whenAElementIsNotPresentThenIsNotPresentReturnTrue() {
         await().atMost(1, NANOSECONDS).untilElements(new Supplier<FluentList<FluentWebElement>>() {
             @Override
