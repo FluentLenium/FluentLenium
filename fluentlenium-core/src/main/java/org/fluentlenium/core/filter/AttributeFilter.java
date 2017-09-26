@@ -43,7 +43,7 @@ public class AttributeFilter implements SearchFilter {
      *
      * @return attribute name (lower case)
      */
-    public String getAttribut() {
+    public String getAttribute() {
         return attributeName.toLowerCase(Locale.ENGLISH);
     }
 
@@ -59,7 +59,7 @@ public class AttributeFilter implements SearchFilter {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("with ").append(getAttribut());
+        stringBuilder.append("with ").append(getAttribute());
 
         String matcherRepr = matcher == null ? null : matcher.toString();
         if (matcherRepr != null) {
@@ -77,13 +77,13 @@ public class AttributeFilter implements SearchFilter {
         if (matcherAttribute == null) {
             matcherAttribute = "";
         }
-        return "[" + getAttribut() + matcherAttribute + "=\"" + matcher.getValue() + "\"]";
+        return "[" + getAttribute() + matcherAttribute + "=\"" + matcher.getValue() + "\"]";
     }
 
     @Override
     public boolean isCssFilterSupported() {
-        return matcher != null && matcher.isCssFilterSupported() && !"text".equalsIgnoreCase(getAttribut()) && !"textContent"
-                .equalsIgnoreCase(getAttribut());
+        return matcher != null && matcher.isCssFilterSupported() && !"text".equalsIgnoreCase(getAttribute()) && !"textContent"
+                .equalsIgnoreCase(getAttribute());
     }
 
     @Override

@@ -21,13 +21,12 @@ public class AttributeFilterPredicate implements Predicate<FluentWebElement> {
 
     @Override
     public boolean test(FluentWebElement element) {
-
         String attribute = getAttributeValue(element);
         return filter != null && filter.getMatcher().isSatisfiedBy(attribute);
     }
 
     private String getAttributeValue(FluentWebElement element) {
-        return "text".equalsIgnoreCase(filter.getAttribut()) ? element.text() : element.attribute(filter.getAttribut());
+        return "text".equalsIgnoreCase(filter.getAttribute()) ? element.text() : element.attribute(filter.getAttribute());
     }
 
 }
