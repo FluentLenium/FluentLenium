@@ -15,7 +15,7 @@ import org.openqa.selenium.TimeoutException;
  * Extend this class and use @{@link PageUrl} and @{@link org.openqa.selenium.support.FindBy} annotations to provide
  * injectable Page Objects to FluentLenium.
  */
-public class FluentPage extends DefaultFluentContainer implements FluentPageControl {
+public class FluentPage<P extends FluentPage> extends DefaultFluentContainer implements FluentPageControl<P> {
 
     private final ClassAnnotations classAnnotations = new ClassAnnotations(getClass());
 
@@ -113,23 +113,25 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
     }
 
     @Override
-    public final void go() {
+    public final P go() {
         String url = getUrl();
         if (url == null) {
             throw new IllegalStateException(
                     "An URL should be defined on the page. Use @PageUrl annotation or override getUrl() method.");
         }
         goTo(url);
+        return (P)this;
     }
 
     @Override
-    public void go(Object... params) {
+    public P go(Object... params) {
         String url = getUrl(params);
         if (url == null) {
             throw new IllegalStateException(
                     "An URL should be defined on the page. Use @PageUrl annotation or override getUrl() method.");
         }
         goTo(url);
+        return (P)this;
     }
 
     @Override

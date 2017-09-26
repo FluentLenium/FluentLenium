@@ -27,14 +27,11 @@ public class ComposedConfigurationTest {
 
     @Before
     public void before() {
-        Answer configurationReadAnswer = new Answer() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                if (invocation.getMethod().getReturnType().isPrimitive()) {
-                    return RETURNS_DEFAULTS.answer(invocation);
-                }
-                return null;
+        Answer configurationReadAnswer = invocation -> {
+            if (invocation.getMethod().getReturnType().isPrimitive()) {
+                return RETURNS_DEFAULTS.answer(invocation);
             }
+            return null;
         };
 
         configurationProperties1 = mock(ConfigurationProperties.class, configurationReadAnswer);
@@ -99,18 +96,26 @@ public class ComposedConfigurationTest {
 
     @Test
     public void webDriver() {
-        testImpl(new Function<ConfigurationProperties, String>() {
-            @Override
-            public String apply(ConfigurationProperties input) {
-                return input.getWebDriver();
-            }
-        }, new Function<String, Void>() {
-            @Override
-            public Void apply(String input) {
-                composed.setWebDriver(input);
-                return null;
-            }
+        testImpl(input -> input.getWebDriver(), input -> {
+            composed.setWebDriver(input);
+            return null;
         }, null, "firefox", "chrome");
+    }
+
+    @Test
+    public void browserTimeout() {
+        testImpl(input -> input.getBrowserTimeout(), input -> {
+            composed.setBrowserTimeout(input);
+            return null;
+        }, null, 10L, 0L);
+    }
+
+    @Test
+    public void browserTimeoutRetries() {
+        testImpl(input -> input.getBrowserTimeoutRetries(), input -> {
+            composed.setBrowserTimeoutRetries(input);
+            return null;
+        }, null, 1, 100);
     }
 
     @Test

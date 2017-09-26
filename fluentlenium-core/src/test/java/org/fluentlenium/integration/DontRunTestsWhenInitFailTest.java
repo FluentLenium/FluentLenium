@@ -37,7 +37,7 @@ public class DontRunTestsWhenInitFailTest {
         Result run = junit.run(IgnoreTestClass.class);
 
         Assertions.assertThat(run.getFailures()).hasSize(1);
-        Assertions.assertThat(run.getFailures().get(0).getMessage()).startsWith("java.net.MalformedURLException");
+        Assertions.assertThat(run.getFailures().get(0).getMessage()).contains("java.net.MalformedURLException");
     }
 
 }

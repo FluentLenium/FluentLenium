@@ -45,6 +45,16 @@ public class ConfigurationDefaults extends BaseConfiguration implements Configur
     }
 
     @Override
+    public Long getBrowserTimeout() {
+        return 60000L;
+    }
+
+    @Override
+    public Integer getBrowserTimeoutRetries() {
+        return 2;
+    }
+
+    @Override
     public Boolean getDeleteCookies() {
         return false;
     }

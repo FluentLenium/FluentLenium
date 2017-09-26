@@ -26,6 +26,14 @@ Releases
 
 - Update references of FluentLenium version number to next release version number in docs and examples projects.
 
+- You need do setup global variable called: browserstackurl
+
+```bash
+export browserstackurl="https://USERNAME:PASSWORD@hub-cloud.browserstack.com/wd/hub"
+```
+
+Please replace `USERNAME` and `PASSWORD` with valid values
+
 - Prepare the release.
 
 ```bash

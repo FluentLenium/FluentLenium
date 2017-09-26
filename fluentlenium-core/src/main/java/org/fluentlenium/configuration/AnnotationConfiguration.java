@@ -178,6 +178,22 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
     }
 
     @Override
+    public Long getBrowserTimeout() {
+        if (configuration == null) {
+            return null;
+        }
+        return configuration.browserTimeout();
+    }
+
+    @Override
+    public Integer getBrowserTimeoutRetries() {
+        if (configuration == null) {
+            return null;
+        }
+        return configuration.browserTimeoutRetries();
+    }
+
+    @Override
     public Boolean getDeleteCookies() {
         if (configuration == null) {
             return null;

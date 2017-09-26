@@ -119,6 +119,28 @@ public class ComposedConfiguration implements Configuration {
     }
 
     @Override
+    public Long getBrowserTimeout() {
+        for (ConfigurationProperties configuration : configurations) {
+            Long browserTimeout = configuration.getBrowserTimeout();
+            if (browserTimeout != null) {
+                return browserTimeout;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Integer getBrowserTimeoutRetries() {
+        for (ConfigurationProperties configuration : configurations) {
+            Integer browserTimeoutRetries = configuration.getBrowserTimeoutRetries();
+            if (browserTimeoutRetries != null) {
+                return browserTimeoutRetries;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public Boolean getDeleteCookies() {
         for (ConfigurationProperties configuration : configurations) {
             Boolean deleteCookies = configuration.getDeleteCookies();

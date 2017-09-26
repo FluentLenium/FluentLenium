@@ -1,17 +1,17 @@
 package org.fluentlenium.configuration;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.Locale;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.JsonException;
 import org.openqa.selenium.remote.JsonToBeanConverter;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.Locale;
 
 /**
  * Abstract properties configuration.
@@ -213,6 +213,17 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
     @Override
     public DriverLifecycle getDriverLifecycle() {
         return getEnumProperty(DriverLifecycle.class, "driverLifecycle");
+    }
+
+    @Override
+    public Long getBrowserTimeout() {
+        return getLongProperty("browserTimeout");
+    }
+
+    @Override
+    public Integer getBrowserTimeoutRetries() {
+        Long browserTimeout = getLongProperty("browserTimeout");
+        return (browserTimeout == null) ? null : browserTimeout.intValue();
     }
 
     @Override
