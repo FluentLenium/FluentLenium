@@ -55,5 +55,5 @@ public interface FluentListConditions extends FluentConditions {
      * @return an object to configure advanced conditions on size
      */
     @MessageContext("size")
-    IntegerConditions size();
+    DynamicIntegerConditions size();
 }

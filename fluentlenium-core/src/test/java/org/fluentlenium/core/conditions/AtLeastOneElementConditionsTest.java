@@ -1,17 +1,18 @@
 package org.fluentlenium.core.conditions;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.StaleElementReferenceException;
-
-import java.util.Arrays;
-import java.util.Collections;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.when;
 
 public class AtLeastOneElementConditionsTest extends AbstractFluentListConditionsTest {
     private AtLeastOneElementConditions conditions;
@@ -43,8 +44,7 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
         assertThat(conditions.present()).isTrue();
         assertThat(conditions.not().present()).isFalse();
 
-        AtLeastOneElementConditions emptyConditions = new AtLeastOneElementConditions(
-                Collections.<FluentWebElement>emptyList());
+        AtLeastOneElementConditions emptyConditions = new AtLeastOneElementConditions(Collections.emptyList());
 
         assertThat(emptyConditions.present()).isFalse();
         assertThat(emptyConditions.not().present()).isTrue();
@@ -237,7 +237,7 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
 
     @Test
     public void defaultValueWhenEmpty() {
-        AtLeastOneElementConditions emptyConditions = new AtLeastOneElementConditions(Arrays.<FluentWebElement>asList());
+        AtLeastOneElementConditions emptyConditions = new AtLeastOneElementConditions(Arrays.asList());
 
         assertThat(emptyConditions.enabled()).isFalse();
     }

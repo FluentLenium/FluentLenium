@@ -1,18 +1,18 @@
 package org.fluentlenium.core.conditions;
 
+import java.util.List;
+
 import org.fluentlenium.core.conditions.message.Message;
 import org.fluentlenium.core.conditions.message.NotMessage;
+import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
  * Conditions API for Integer.
  */
-
-
-//todo consider removal of this class and replacing by DynamicIntegerConditions
-public interface IntegerConditions extends Conditions<Integer> {
+public interface DynamicIntegerConditions extends Conditions<List<? extends FluentWebElement>> {
     @Override
     @Negation
-    IntegerConditions not();
+    DynamicIntegerConditions not();
 
     /**
      * Check that this is equal to given value

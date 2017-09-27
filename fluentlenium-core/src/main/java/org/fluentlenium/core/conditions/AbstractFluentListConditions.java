@@ -1,18 +1,18 @@
 package org.fluentlenium.core.conditions;
 
-import org.fluentlenium.core.domain.FluentWebElement;
-
 import java.util.List;
 import java.util.function.Predicate;
+
+import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
  * Abstract class conditions on list of elements.
  */
 @SuppressWarnings("PMD.ExcessivePublicCount")
 public abstract class AbstractFluentListConditions implements FluentListConditions, ListConditionsElements {
+    private final FluentList<? extends FluentWebElement> elements;
     private boolean negation;
-
-    private final List<? extends FluentWebElement> elements;
 
     /**
      * Creates a new conditions on list of elements.
@@ -20,7 +20,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
      * @param elements underlying elements
      */
     protected AbstractFluentListConditions(List<? extends FluentWebElement> elements) {
-        this.elements = elements;
+        this.elements = (FluentList<? extends FluentWebElement>) elements;
     }
 
     @Override
@@ -64,9 +64,8 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-
-    public IntegerConditions size() {
-        return new IntegerConditionsImpl(elements.size(), negation);
+    public DynamicIntegerConditions size() {
+        return new DynamicIntegerConditionsImpl(() -> elements, negation);
     }
 
     @Override

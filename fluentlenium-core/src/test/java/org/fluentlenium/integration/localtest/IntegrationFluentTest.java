@@ -13,15 +13,17 @@ import static org.fluentlenium.integration.util.UrlUtil.getAbsoluteUrlPathFromFi
 
 public class IntegrationFluentTest extends FluentTest {
 
-    public static final String DEFAULT_URL =  getAbsoluteUrlFromFile("index.html");
-    public static final String DEFAULT_URL_PATH = getAbsoluteUrlPathFromFile("index.html");
-    public static final String JAVASCRIPT_URL = getAbsoluteUrlFromFile("javascript.html");
-    public static final String PAGE_2_URL = getAbsoluteUrlFromFile("page2.html");
-    public static final String PAGE_2_URL_TEST = getAbsoluteUrlFromFile("page2url.html");
-    public static final String IFRAME_URL = getAbsoluteUrlFromFile("iframe.html");
     public static final String ANOTHERPAGE_URL = getAbsoluteUrlFromFile("anotherpage.html");
     public static final String COMPONENTS_URL = getAbsoluteUrlFromFile("components.html");
     public static final String COUNT_URL = getAbsoluteUrlFromFile("count.html");
+    public static final String DEFAULT_URL =  getAbsoluteUrlFromFile("index.html");
+    public static final String DEFAULT_URL_PATH = getAbsoluteUrlPathFromFile("index.html");
+    public static final String IFRAME_URL = getAbsoluteUrlFromFile("iframe.html");
+    public static final String JAVASCRIPT_URL = getAbsoluteUrlFromFile("javascript.html");
+    public static final String PAGE_2_URL = getAbsoluteUrlFromFile("page2.html");
+    public static final String PAGE_2_URL_TEST = getAbsoluteUrlFromFile("page2url.html");
+    public static final String SIZE_CHANGE_URL = getAbsoluteUrlFromFile("size-change.html");
+
 
     @Override
     public String getWebDriver() {
