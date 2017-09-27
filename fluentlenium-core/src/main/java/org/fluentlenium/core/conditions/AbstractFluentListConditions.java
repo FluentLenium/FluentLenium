@@ -11,7 +11,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
  */
 @SuppressWarnings("PMD.ExcessivePublicCount")
 public abstract class AbstractFluentListConditions implements FluentListConditions, ListConditionsElements {
-    private final FluentList<? extends FluentWebElement> elements;
+    private final List<? extends FluentWebElement> elements;
     private boolean negation;
 
     /**
@@ -20,7 +20,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
      * @param elements underlying elements
      */
     protected AbstractFluentListConditions(List<? extends FluentWebElement> elements) {
-        this.elements = (FluentList<? extends FluentWebElement>) elements;
+        this.elements = elements;
     }
 
     @Override
