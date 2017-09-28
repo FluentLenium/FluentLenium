@@ -34,7 +34,7 @@ public class DynamicIntegerConditionsImpl extends AbstractObjectConditions<List<
 
     @Override
     public boolean equalTo(int value) {
-        return verify(input -> input.equals(value));
+        return verify(input -> input.size() == value);
     }
 
     @Override
