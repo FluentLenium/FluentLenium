@@ -27,7 +27,13 @@ public class AttributeFilterPredicate implements Predicate<FluentWebElement> {
     }
 
     private String getAttributeValue(FluentWebElement element) {
-        return "text".equalsIgnoreCase(filter.getAttribut()) ? element.text() : element.attribute(filter.getAttribut());
+        if("text".equalsIgnoreCase(filter.getAttribute())) {
+            return element.text();
+        } else if("textContent".equalsIgnoreCase(filter.getAttribute())) {
+            return element.textContent();
+        } else {
+            return element.attribute(filter.getAttribute());
+        }
     }
 
 }
