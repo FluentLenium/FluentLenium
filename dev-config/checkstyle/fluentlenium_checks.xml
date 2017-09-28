@@ -30,7 +30,11 @@
         //CHECKSTYLE.ON: IllegalCatch
     -->
 
-    <module name="SuppressionCommentFilter">
+    <module name="SuppressionFilter">
+        <property name="file" value="${checkstyle.suppressions.file}"
+                  default="fluentlenium_checks_suppressions.xml"/>
+
+        <module name="SuppressionCommentFilter">
         <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([^\s]+)"/>
         <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([^\s]+)"/>
         <property name="checkFormat" value="$1"/>
