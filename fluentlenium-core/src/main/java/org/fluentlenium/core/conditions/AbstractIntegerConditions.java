@@ -1,18 +1,12 @@
 package org.fluentlenium.core.conditions;
 
-import java.util.List;
-
 import org.fluentlenium.core.conditions.message.Message;
 import org.fluentlenium.core.conditions.message.NotMessage;
-import org.fluentlenium.core.domain.FluentWebElement;
 
-/**
- * Conditions API for Integer.
- */
-public interface DynamicIntegerConditions extends Conditions<List<? extends FluentWebElement>> {
+public interface AbstractIntegerConditions<T, C extends AbstractIntegerConditions> extends Conditions<T> {
     @Override
     @Negation
-    DynamicIntegerConditions not();
+    C not();
 
     /**
      * Check that this is equal to given value
@@ -63,5 +57,4 @@ public interface DynamicIntegerConditions extends Conditions<List<? extends Flue
     @Message("is greater than or equal to {0}")
     @NotMessage("is not greater than or equal to {0}")
     boolean greaterThanOrEqualTo(int value);
-
 }

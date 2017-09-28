@@ -10,24 +10,14 @@ import org.fluentlenium.core.domain.FluentWebElement;
  * Conditions for integer
  */
 public class DynamicIntegerConditionsImpl extends AbstractObjectConditions<List<? extends FluentWebElement>>
-        implements DynamicIntegerConditions {
-    /**
-     * Creates a new conditions object on integer.
-     *
-     * @param supplier underlying integer
-     */
-    public DynamicIntegerConditionsImpl(Supplier<List<? extends FluentWebElement>> supplier) {
-        super(supplier.get());
-    }
-
+        implements ListIntegerConditions {
     /**
      * Creates a new conditions object on integer.
      *
      * @param supplier  underlying list
      * @param negation negation value
      */
-    public DynamicIntegerConditionsImpl(Supplier<List<? extends FluentWebElement>> supplier, boolean
-            negation) {
+    public DynamicIntegerConditionsImpl(Supplier<List<? extends FluentWebElement>> supplier, boolean negation) {
         super(supplier.get(), negation);
     }
 

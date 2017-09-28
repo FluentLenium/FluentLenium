@@ -3,7 +3,6 @@ package org.fluentlenium.core.conditions;
 import java.util.List;
 import java.util.function.Predicate;
 
-import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
@@ -64,7 +63,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
-    public DynamicIntegerConditions size() {
+    public AbstractIntegerConditions size() {
         return new DynamicIntegerConditionsImpl(() -> elements, negation);
     }
 
