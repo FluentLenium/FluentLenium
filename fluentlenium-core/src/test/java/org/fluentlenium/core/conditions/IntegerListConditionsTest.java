@@ -1,5 +1,12 @@
 package org.fluentlenium.core.conditions;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -11,13 +18,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.util.Arrays;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class IntegerListConditionsTest {
@@ -63,8 +63,8 @@ public class IntegerListConditionsTest {
         EachElementConditions conditions = new EachElementConditions(
                 Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
-        IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions,
-                    input -> Integer.valueOf(input.id()));
+        IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(
+                conditions, input -> Integer.valueOf(input.id()));
 
         when(webElement1.getAttribute("id")).thenReturn("1");
         when(webElement2.getAttribute("id")).thenReturn("1");
@@ -90,8 +90,8 @@ public class IntegerListConditionsTest {
         AtLeastOneElementConditions conditions = new AtLeastOneElementConditions(
                 Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
-        IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions,
-                    input -> Integer.valueOf(input.id()));
+        IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(
+                conditions, input -> Integer.valueOf(input.id()));
 
         when(webElement1.getAttribute("id")).thenReturn("1");
         when(webElement2.getAttribute("id")).thenReturn("1");

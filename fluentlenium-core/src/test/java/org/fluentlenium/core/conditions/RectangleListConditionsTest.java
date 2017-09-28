@@ -1,5 +1,11 @@
 package org.fluentlenium.core.conditions;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -12,12 +18,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.util.Arrays;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RectangleListConditionsTest {

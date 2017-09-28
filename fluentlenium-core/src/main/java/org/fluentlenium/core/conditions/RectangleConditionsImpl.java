@@ -88,7 +88,7 @@ public class RectangleConditionsImpl extends AbstractObjectConditions<Rectangle>
 
     @Override
     public boolean positionAndDimension(int x, int y, int width, int height) {
-        return verify(
-                input -> input.getX() == x && input.getY() == y && input.getWidth() == width && input.getHeight() == height);
+        return verify(input -> input.getX() == x && input.getY() == y && input.getWidth() == width
+                && input.getHeight() == height);
     }
 }

@@ -1,10 +1,10 @@
 package org.fluentlenium.core.conditions;
 
-import org.fluentlenium.core.FluentDriver;
-import org.fluentlenium.core.domain.FluentWebElement;
-
 import java.util.List;
 import java.util.function.Predicate;
+
+import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
  * Conditions for list of elements, matching when each element matches.
