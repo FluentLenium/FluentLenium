@@ -2,8 +2,7 @@
 
 [![Travis](https://img.shields.io/travis/FluentLenium/FluentLenium.svg)](https://travis-ci.org/FluentLenium/FluentLenium)
 [![Coveralls](https://img.shields.io/coveralls/FluentLenium/FluentLenium.svg)](https://coveralls.io/github/FluentLenium/FluentLenium)
-[![Code Climate](https://img.shields.io/codeclimate/github/FluentLenium/FluentLenium.svg)](https://codeclimate.com/github/FluentLenium/FluentLenium)
-[![Code Climate Issues](https://img.shields.io/codeclimate/issues/github/FluentLenium/FluentLenium.svg)](https://codeclimate.com/github/FluentLenium/FluentLenium/issues)
+[![codebeat badge](https://codebeat.co/badges/51ecc826-c8e6-407d-a090-12330b2bbe44)](https://codebeat.co/projects/github-com-fluentlenium-fluentlenium-develop)
 [![Maven Central](https://img.shields.io/maven-central/v/org.fluentlenium/fluentlenium-parent.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.fluentlenium%22%20AND%20a%3A%22fluentlenium-parent%22)
 [![Website](https://img.shields.io/website-up-down-green-red/http/fluentlenium.org.svg)](http://fluentlenium.org)
 
