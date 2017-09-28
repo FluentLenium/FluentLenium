@@ -31,7 +31,7 @@
     -->
 
     <module name="SuppressionFilter">
-        <property name="file" value="${checkstyle.suppressions.file}" default="fluentlenium_checks_suppressions.xml"/>
+        <property name="file" value="${checkstyle.suppressions.file}" default="dev-config/checkstyle/fluentlenium_checks_suppressions.xml"/>
     </module>
 
     <module name="SuppressionCommentFilter">
