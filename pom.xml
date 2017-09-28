@@ -374,13 +374,13 @@
                                     <configLocation>dev-config/checkstyle/fluentlenium_checks.xml</configLocation>
                                     <consoleOutput>true</consoleOutput>
                                     <encoding>${project.build.sourceEncoding}</encoding>
+                                    <suppressionsLocation>dev-config/checkstyle/fluentlenium_checks_suppressions.xml</suppressionsLocation>
+                                    <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
                                     <failOnViolation>true</failOnViolation>
                                     <failsOnError>true</failsOnError>
                                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                                     <logViolationsToConsole>true</logViolationsToConsole>
                                     <violationSeverity>error</violationSeverity>
-                                    <suppressionsLocation>dev-config/checkstyle/fluentlenium_checks_suppressions.xml</suppressionsLocation>
-                                    <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
                                 </configuration>
                             </execution>
                         </executions>
@@ -388,7 +388,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-pmd-plugin</artifactId>
-                        <version>3.6</version>
+                        <version>3.8</version>
                         <executions>
                             <execution>
                                 <id>pmd-validate</id>
@@ -397,11 +397,9 @@
                                     <goal>check</goal>
                                 </goals>
                                 <configuration>
-                                    <configuration>
-                                        <rulesets>
-                                            <ruleset>dev-config/pmd/fluentlenium_pmd.xml</ruleset>
-                                        </rulesets>
-                                    </configuration>
+                                    <rulesets>
+                                        <ruleset>dev-config/pmd/fluentlenium_pmd.xml</ruleset>
+                                    </rulesets>
                                 </configuration>
                             </execution>
                         </executions>
