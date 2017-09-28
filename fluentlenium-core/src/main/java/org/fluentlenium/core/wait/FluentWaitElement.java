@@ -185,6 +185,13 @@ public class FluentWaitElement implements FluentWaitFunctional<FluentControl>, F
         return this;
     }
 
+    /**
+     * Wait until function returns true
+     *
+     * @param function function to be performed
+     * @param <T> FluentWaitElement
+     * @return FluentWaitElement
+     */
     @Deprecated
     public <T> T until(com.google.common.base.Function<? super FluentControl, T> function) {
         return controlWait.until(function);

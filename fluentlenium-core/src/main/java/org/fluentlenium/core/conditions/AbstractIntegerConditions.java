@@ -3,7 +3,18 @@ package org.fluentlenium.core.conditions;
 import org.fluentlenium.core.conditions.message.Message;
 import org.fluentlenium.core.conditions.message.NotMessage;
 
+/**
+ * Common interface for Integer conditions.
+ *
+ * @param <T> type of condition
+ * @param <C> type of interface extended by this common interface
+ */
 public interface AbstractIntegerConditions<T, C extends AbstractIntegerConditions> extends Conditions<T> {
+    /**
+     * Negates this condition object.
+     *
+     * @return a negated condition object
+     */
     @Override
     @Negation
     C not();

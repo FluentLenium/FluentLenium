@@ -6,6 +6,8 @@ import org.fluentlenium.core.url.ParsedUrlTemplate;
  * Control a Page Object.
  *
  * @see FluentPage
+ *
+ * @param <P> FluentPage object
  */
 public interface FluentPageControl<P extends FluentPage> extends FluentControl {
 
@@ -33,11 +35,15 @@ public interface FluentPageControl<P extends FluentPage> extends FluentControl {
 
     /**
      * Check if the browser is on this page, after replacing parameters with given values.
+     *
+     * @param parameters list of parameters
      */
     void isAt(Object... parameters);
 
     /**
      * Go to the url defined in the page
+     *
+     * @return <P> FluentPage object
      */
     P go(); // NOPMD ShortMethodName
 
@@ -46,6 +52,8 @@ public interface FluentPageControl<P extends FluentPage> extends FluentControl {
      *
      * @param params page url parameter values
      * @throws IllegalArgumentException if some required parameters are missing
+     *
+     * @return <P> FluentPage object
      */
     P go(Object... params);
 

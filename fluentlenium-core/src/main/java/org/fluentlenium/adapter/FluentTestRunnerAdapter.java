@@ -100,7 +100,8 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testName  Test name
      */
     protected void starting(Class<?> testClass, String testName) {
-        EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName, getDriverLifecycle());
+        EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName,
+                getDriverLifecycle());
 
         SharedWebDriver sharedWebDriver = null;
         Exception exception = null;
@@ -119,18 +120,20 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
                 exceptionMessage = exception.getMessage();
             }
 
-            throw new WebDriverException("Browser failed to start, test [ " + testName + " ] execution interrupted." +
-                    (isEmpty(exceptionMessage) ? "" : "\nCaused by: [ " + exceptionMessage + "]"));
+            throw new WebDriverException("Browser failed to start, test [ " + testName + " ] execution interrupted."
+                    + (isEmpty(exceptionMessage) ? "" : "\nCaused by: [ " + exceptionMessage + "]"));
         }
 
         initFluent(sharedWebDriver.getDriver());
     }
 
-    private SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters) throws ExecutionException, InterruptedException {
+    private SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters)
+            throws ExecutionException, InterruptedException {
         return getSharedWebDriver(parameters, null);
     }
 
-    protected SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters, ExecutorService webDriverExecutor) throws ExecutionException, InterruptedException {
+    private SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters, ExecutorService webDriverExecutor)
+            throws ExecutionException, InterruptedException {
         SharedWebDriver sharedWebDriver = null;
         ExecutorService setExecutorService = null;
 
@@ -138,7 +141,8 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
             setExecutorService = webDriverExecutor;
         }
 
-        for (int browserTimeoutRetryNo = 0; browserTimeoutRetryNo < getBrowserTimeoutRetries() && sharedWebDriver == null; browserTimeoutRetryNo++) {
+        for (int browserTimeoutRetryNo = 0; browserTimeoutRetryNo < getBrowserTimeoutRetries()
+                && sharedWebDriver == null; browserTimeoutRetryNo++) {
             if (setExecutorService == null) {
                 webDriverExecutor = Executors.newSingleThreadExecutor();
             } else {
@@ -200,7 +204,8 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         DriverLifecycle driverLifecycle = getDriverLifecycle();
 
         if (driverLifecycle == DriverLifecycle.METHOD || driverLifecycle == DriverLifecycle.THREAD) {
-            EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle);
+            EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName,
+                    driverLifecycle);
 
             SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE
                     .getDriver(parameters.getTestClass(), parameters.getTestName(), parameters.getDriverLifecycle());
@@ -209,7 +214,8 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
                 SharedWebDriverContainer.INSTANCE.quit(sharedWebDriver);
             }
         } else if (getDeleteCookies() != null && getDeleteCookies()) {
-            EffectiveParameters<?> sharedParameters = sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle);
+            EffectiveParameters<?> sharedParameters = sharedMutator.getEffectiveParameters(testClass, testName,
+                    driverLifecycle);
 
             SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE
                     .getDriver(sharedParameters.getTestClass(), sharedParameters.getTestName(),

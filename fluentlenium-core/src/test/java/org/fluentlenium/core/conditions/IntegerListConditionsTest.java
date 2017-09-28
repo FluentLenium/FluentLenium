@@ -63,8 +63,8 @@ public class IntegerListConditionsTest {
         EachElementConditions conditions = new EachElementConditions(
                 Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
-        IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions,
-                    input -> Integer.valueOf(input.id()));
+        IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(
+                conditions, input -> Integer.valueOf(input.id()));
 
         when(webElement1.getAttribute("id")).thenReturn("1");
         when(webElement2.getAttribute("id")).thenReturn("1");
@@ -90,8 +90,8 @@ public class IntegerListConditionsTest {
         AtLeastOneElementConditions conditions = new AtLeastOneElementConditions(
                 Arrays.asList(fluentWebElement1, fluentWebElement2, fluentWebElement3));
 
-        IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(conditions,
-                    input -> Integer.valueOf(input.id()));
+        IntegerListConditionsImpl integerConditions = new IntegerListConditionsImpl(
+                conditions, input -> Integer.valueOf(input.id()));
 
         when(webElement1.getAttribute("id")).thenReturn("1");
         when(webElement2.getAttribute("id")).thenReturn("1");

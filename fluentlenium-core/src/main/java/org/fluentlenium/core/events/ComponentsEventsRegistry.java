@@ -17,6 +17,9 @@ public class ComponentsEventsRegistry implements ComponentsListener {
     private final ComponentsAccessor componentsAccessor;
     private final Map<RegistryKey, ContainerAnnotationsEventsRegistry> allRegistries = new IdentityHashMap<>();
 
+    /**
+     * Constructor
+     */
     @AllArgsConstructor
     public static class RegistryKey {
         WebElement element;
