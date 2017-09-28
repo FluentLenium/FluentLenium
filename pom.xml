@@ -368,14 +368,12 @@
                                 <id>checkstyle-validate</id>
                                 <phase>validate</phase>
                                 <goals>
-                                    <goal>checkstyle-aggregate</goal>
+                                    <goal>check</goal>
                                 </goals>
                                 <configuration>
                                     <configLocation>dev-config/checkstyle/fluentlenium_checks.xml</configLocation>
                                     <consoleOutput>true</consoleOutput>
                                     <encoding>${project.build.sourceEncoding}</encoding>
-                                    <suppressionsLocation>dev-config/checkstyle/fluentlenium_checks_suppressions.xml</suppressionsLocation>
-                                    <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
                                     <failOnViolation>true</failOnViolation>
                                     <failsOnError>true</failsOnError>
                                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
