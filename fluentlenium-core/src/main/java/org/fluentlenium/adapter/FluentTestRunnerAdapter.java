@@ -132,6 +132,15 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         return getSharedWebDriver(parameters, null);
     }
 
+    /**
+     * Returns SharedDriver instance
+     * @param parameters driver parameters
+     * @param webDriverExecutor executor service
+     * @return SharedDriver
+     *
+     * @throws ExecutionException execution exception
+     * @throws InterruptedException interrupted exception
+     */
     protected SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters, ExecutorService webDriverExecutor)
             throws ExecutionException, InterruptedException {
         SharedWebDriver sharedWebDriver = null;

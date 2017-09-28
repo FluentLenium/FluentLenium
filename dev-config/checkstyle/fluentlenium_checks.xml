@@ -30,11 +30,11 @@
         //CHECKSTYLE.ON: IllegalCatch
     -->
 
-    <module name="SuppressionCommentFilter">
-        <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([^\s]+)"/>
-        <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([^\s]+)"/>
-        <property name="checkFormat" value="$1"/>
+    <module name="SuppressionFilter">
+        <property name="file" value="dev-config/checkstyle/fluentlenium_checks_suppressions.xml"/>
+        <property name="optional" value="false"/>
     </module>
+
     <!--
         If you set the basedir property below, then all reported file
         names will be relative to the specified directory. See
@@ -84,13 +84,17 @@
     <!-- </module> -->
 
     <module name="TreeWalker">
+        <module name="SuppressionCommentFilter">
+            <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([^\s]+)"/>
+            <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([^\s]+)"/>
+            <property name="checkFormat" value="$1"/>
+        </module>
+
         <module name="AnnotationLocation">
             <property name="allowSamelineMultipleAnnotations" value="false"/>
             <property name="allowSamelineSingleParameterlessAnnotation" value="false"/>
             <property name="allowSamelineParameterizedAnnotation" value="false"/>
         </module>
-
-        <module name="FileContentsHolder"/> <!-- to make checking comments possible -->
 
         <!-- Check this. qualifier -->
         <!-- See http://checkstyle.sourceforge.net/config_coding.html#RequireThis -->
