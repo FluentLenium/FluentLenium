@@ -379,6 +379,8 @@
                                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                                     <logViolationsToConsole>true</logViolationsToConsole>
                                     <violationSeverity>error</violationSeverity>
+                                    <suppressionsLocation>dev-config/checkstyle/fluentlenium_checks_suppressions.xml</suppressionsLocation>
+                                    <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
                                 </configuration>
                             </execution>
                         </executions>
