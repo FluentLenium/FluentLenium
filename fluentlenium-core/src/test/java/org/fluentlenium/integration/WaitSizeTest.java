@@ -25,6 +25,12 @@ public class WaitSizeTest extends IntegrationFluentTest {
     }
 
     @Test
+    public void newListRowDisplayed() {
+        goTo(SIZE_CHANGE_URL);
+        await().until($(".newrow")).displayed();
+    }
+
+    @Test
     public void waitForListChangeUsingListVariable() {
         FluentList<FluentWebElement> myList = $(".row");
         goTo(SIZE_CHANGE_URL);

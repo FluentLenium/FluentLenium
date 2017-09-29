@@ -10,7 +10,15 @@
 
         document.getElementsByClassName('container')[0].appendChild(row3);
     }
+    function addNewRow() {
+        var row4 = document.createElement('div');
+        row4.setAttribute('class', 'newrow');
+        row4.innerHTML = 'row4';
+
+        document.getElementsByClassName('container')[0].appendChild(row4);
+    }
     window.setTimeout(addRow3, 1000)
+    window.setTimeout(addNewRow, 2000)
 </script>
 
 <div class="container">
