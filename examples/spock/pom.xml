@@ -6,13 +6,13 @@
 
     <artifactId>fluentlenium-examples-spock</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>3.3.0-SNAPSHOT</version>
+    <version>3.4.0</version>
 
     <name>FluentLenium Examples Spock</name>
 
     <properties>
         <!-- Configure this property to latest available version -->
-        <fluentlenium.version>3.3.0-SNAPSHOT</fluentlenium.version>
+        <fluentlenium.version>3.4.0</fluentlenium.version>
         <selenium.version>3.5.3</selenium.version>
         <spock.version>1.0-groovy-2.4</spock.version>
     </properties>
