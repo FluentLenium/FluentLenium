@@ -1,14 +1,7 @@
 package org.fluentlenium.core.wait;
 
-import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.domain.FluentWebElement;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,8 +11,15 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
+import org.fluentlenium.core.FluentControl;
+import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.domain.FluentWebElement;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FluentWaitElementTest {

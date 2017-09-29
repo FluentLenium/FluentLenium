@@ -1,5 +1,9 @@
 package org.fluentlenium.core.conditions.wait;
 
+import java.lang.reflect.Proxy;
+import java.util.List;
+import java.util.function.Supplier;
+
 import org.fluentlenium.core.conditions.AtLeastOneElementConditions;
 import org.fluentlenium.core.conditions.Conditions;
 import org.fluentlenium.core.conditions.EachElementConditions;
@@ -9,10 +13,6 @@ import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.conditions.message.MessageProxy;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.wait.FluentWait;
-
-import java.lang.reflect.Proxy;
-import java.util.List;
-import java.util.function.Supplier;
 
 /**
  * Provides proxy implementations of conditions that performs wait from those conditions.
@@ -31,7 +31,7 @@ public final class WaitConditionProxy {
      * @return a proxy generating message from annotations.
      */
     public static FluentListConditions each(FluentWait wait, String context,
-            Supplier<? extends List<? extends FluentWebElement>> elementsSupplier) {
+                                            Supplier<? extends List<? extends FluentWebElement>> elementsSupplier) {
         return list(wait, context, () -> new EachElementConditions(elementsSupplier.get()));
     }
 
@@ -44,7 +44,7 @@ public final class WaitConditionProxy {
      * @return a proxy generating message from annotations.
      */
     public static FluentListConditions one(FluentWait wait, String context,
-            Supplier<? extends List<? extends FluentWebElement>> elementsSupplier) {
+                                           Supplier<? extends List<? extends FluentWebElement>> elementsSupplier) {
         return list(wait, context, () -> new AtLeastOneElementConditions(elementsSupplier.get()));
     }
 
@@ -75,8 +75,8 @@ public final class WaitConditionProxy {
                                            Supplier<? extends FluentWebElement> elementSupplier) {
         return (FluentConditions) Proxy
                 .newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[]{FluentConditions.class},
-                        new WaitConditionInvocationHandler(FluentConditions.class, wait, context,
-                                () -> new WebElementConditions(elementSupplier.get())));
+                        new WaitConditionInvocationHandler(FluentConditions.class, wait,
+                                context, () -> new WebElementConditions(elementSupplier.get())));
     }
 
     /**

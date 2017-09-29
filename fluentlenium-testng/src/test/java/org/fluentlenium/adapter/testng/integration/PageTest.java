@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PageTest extends IntegrationFluentTestNg {
     @Page
-    /* default */ PageAccueil page;
+    /* default */ IndexPage page;
 
     @Page
     /* default */ Page2 page2;
@@ -59,7 +59,7 @@ public class PageTest extends IntegrationFluentTestNg {
     }
 }
 
-class PageAccueil extends FluentPage {
+class IndexPage extends FluentPage {
 
     /* default */ FluentWebElement linkToPage2;
 

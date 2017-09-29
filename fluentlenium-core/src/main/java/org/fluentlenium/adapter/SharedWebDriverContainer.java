@@ -50,7 +50,7 @@ public enum SharedWebDriverContainer {
     private static class ClassAndTestNameWithThreadId {
         private Class<?> testClass;
         private String testName;
-        private Long ThreadId;
+        private Long threadId;
     }
 
     /**
@@ -156,13 +156,15 @@ public enum SharedWebDriverContainer {
                 } else if (driver.getDriverLifecycle() == DriverLifecycle.THREAD) {
                     List<Map.Entry<ClassAndTestNameWithThreadId, SharedWebDriver>> threadDriversToClose = threadDrivers.entrySet()
                             .stream()
-                            .filter(entry -> entry.getKey().testClass.equals(driver.getTestClass()) &&
-                                    entry.getKey().testName.equals(driver.getTestName()) && entry.getValue()
-                                    .getDriver().equals(driver.getDriver())).collect(Collectors.toList());
+                            .filter(entry -> entry.getKey().testClass.equals(driver.getTestClass())
+                                    && entry.getKey().testName.equals(driver.getTestName())
+                                    && entry.getValue().getDriver().equals(driver.getDriver()))
+                                            .collect(Collectors.toList());
 
                     threadDriversToClose.forEach(item -> {
                         SharedWebDriver testThreadDriver = threadDrivers.remove(item.getKey());
-                        if (testThreadDriver == driver && testThreadDriver.getDriver() != null) { // NOPMD CompareObjectsWithEquals
+                        if (testThreadDriver == driver
+                                && testThreadDriver.getDriver() != null) { // NOPMD CompareObjectsWithEquals
                             testThreadDriver.getDriver().quit();
                         }
                     });

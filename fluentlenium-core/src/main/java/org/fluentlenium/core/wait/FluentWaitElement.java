@@ -1,17 +1,17 @@
 package org.fluentlenium.core.wait;
 
-import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.conditions.FluentConditions;
-import org.fluentlenium.core.conditions.FluentListConditions;
-import org.fluentlenium.core.domain.FluentWebElement;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import org.fluentlenium.core.FluentControl;
+import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.conditions.FluentConditions;
+import org.fluentlenium.core.conditions.FluentListConditions;
+import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
  * A wait object wrapping default selenium {@link org.openqa.selenium.support.ui.FluentWait} object into a more
@@ -185,6 +185,13 @@ public class FluentWaitElement implements FluentWaitFunctional<FluentControl>, F
         return this;
     }
 
+    /**
+     * Wait until function returns true
+     *
+     * @param function function to be performed
+     * @param <T> FluentWaitElement
+     * @return FluentWaitElement
+     */
     @Deprecated
     public <T> T until(com.google.common.base.Function<? super FluentControl, T> function) {
         return controlWait.until(function);

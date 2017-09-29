@@ -1,8 +1,12 @@
 package org.fluentlenium.core.domain;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
-import lombok.experimental.Delegate;
+import java.util.stream.Collectors;
+
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
@@ -27,10 +31,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.experimental.Delegate;
 
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
@@ -54,7 +55,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
      * @param instantiator   component instantiator
      */
     public FluentListImpl(Class<E> componentClass, List<E> list, FluentControl control,
-            ComponentInstantiator instantiator) {
+                          ComponentInstantiator instantiator) {
         super(componentClass, list, control, instantiator);
         hookControl = new HookControlImpl<>(this, proxy, control, instantiator, (Supplier<FluentList<E>>) () -> {
             LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(proxy);

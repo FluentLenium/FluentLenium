@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>3.3.0</version>
+    <version>3.4.0</version>
     <packaging>pom</packaging>
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -94,7 +94,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <selenium.version>3.4.0</selenium.version>
+        <selenium.version>3.5.3</selenium.version>
         <java.version>1.8</java.version>
     </properties>
 
@@ -360,7 +360,7 @@
                             <dependency>
                                 <groupId>com.puppycrawl.tools</groupId>
                                 <artifactId>checkstyle</artifactId>
-                                <version>7.1.2</version>
+                                <version>8.2</version>
                             </dependency>
                         </dependencies>
                         <executions>
@@ -368,7 +368,7 @@
                                 <id>checkstyle-validate</id>
                                 <phase>validate</phase>
                                 <goals>
-                                    <goal>checkstyle-aggregate</goal>
+                                    <goal>check</goal>
                                 </goals>
                                 <configuration>
                                     <configLocation>dev-config/checkstyle/fluentlenium_checks.xml</configLocation>
@@ -386,7 +386,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-pmd-plugin</artifactId>
-                        <version>3.6</version>
+                        <version>3.8</version>
                         <executions>
                             <execution>
                                 <id>pmd-validate</id>
@@ -395,11 +395,9 @@
                                     <goal>check</goal>
                                 </goals>
                                 <configuration>
-                                    <configuration>
-                                        <rulesets>
-                                            <ruleset>dev-config/pmd/fluentlenium_pmd.xml</ruleset>
-                                        </rulesets>
-                                    </configuration>
+                                    <rulesets>
+                                        <ruleset>dev-config/pmd/fluentlenium_pmd.xml</ruleset>
+                                    </rulesets>
                                 </configuration>
                             </execution>
                         </executions>

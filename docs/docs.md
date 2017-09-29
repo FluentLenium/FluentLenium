@@ -33,13 +33,13 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.3.0</version>
+    <version>3.4.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.3.0</version>
+    <version>3.4.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -520,7 +520,11 @@ is removed when parameter value is not defined.
 ```java
 @PageUrl("/document/{document}{?/page/page}{?/format}")
 public class DocumentPage extends FluentPage {
-    ...
+    public DocumentPage customPageMethod(){
+            ...
+            return this;
+        }
+        ...
 }
 ```
 
@@ -532,13 +536,50 @@ private DocumentPage page;
 
 @Test
 public void test() {
-    page.go(267) // go to "/document/267"
-    page.go(174, 3) // go to "/document/174/page/3"
-    page.go(124, 1, "pdf") // go to "/document/124/page/1/pdf"
-    page.go(124, null, "html") // go to "/document/124/html"
-    page.isAt(174, 3) // Assert that current url is "/document/174/page/3"
+    page.go(267); // go to "/document/267"
+    page.go(174, 3); // go to "/document/174/page/3"
+    page.go(124, 1, "pdf"); // go to "/document/124/page/1/pdf"
+    page.go(124, null, "html"); // go to "/document/124/html"
+    page.isAt(174, 3); // Assert that current url is "/document/174/page/3"
 }
 ```
+
+In order to be able to chain `go()` methods with your page methods you need to provide your `FluentPage` class name for 
+the master `FluentPage` class which is extended by your page class.
+
+The example above can be implemented as follows:
+
+```java
+@Page
+private DocumentPage page;
+
+@Test
+public void test() {
+    page.go(267) // go to "/document/267"
+        .go(174, 3) // go to "/document/174/page/3"
+        .go(124, 1, "pdf") // go to "/document/124/page/1/pdf"
+        .go(124, null, "html") // go to "/document/124/html"
+        .customPageMethod() //do the custom actions
+        .go(267); // go to "document/267"
+        ...
+}
+```
+
+To achieve that you need to provide `Class` type parameter for `FluentPage` generic class, 
+in this example it is `FluentPage<DocumentPage>`
+
+```java
+@PageUrl("/document/{document}{?/page/page}{?/format}")
+public class DocumentPage extends FluentPage<DocumentPage> {
+    public DocumentPage customPageMethod(){
+        ...
+        return this;
+    }
+    ...
+}
+```
+
+As a result the `go` method will return `DocumentPage` type instead of generic `FluentPage`
 
 Create your own methods to easily fill out forms, go to another or whatever else may be needed in your test.
 
@@ -1416,6 +1457,87 @@ lower ways will just be ignored.
 You may implement additionnal ways to read configuration property by implementing another
 ```ConfigurationFactory``` and set the new configuration factory class name in the ```configurationFactory``` property.
 
+### Headless Chrome
+You can run your tests using Chrome [headless](https://developers.google.com/web/updates/2017/04/headless-chrome) feature. Just simply add ```{chromeOptions: {args:[--headless, --disable-gpu]}}``` to capabilities.
+
+To run Chrome in the headless mode you can use following FluentLenium configuration ways:
+
+  1. **Override** JavaBean **property getters** of the test class:
+        ```java
+        public class SomeFluentTest extends FluentTest {
+             @Override
+             public String getWebDriver(){
+                 return "chrome";
+             }
+                 
+             @Override
+             public Capabilities getCapabilities(){
+                 ChromeOptions options = new ChromeOptions();
+                 options.addArguments("--headless");
+                 options.addArguments("--disable-gpu");
+                 DesiredCapabilities capabilities = new DesiredCapabilities();
+                 capabilities.setCapability("chromeOptions", options);
+                 return capabilities;
+             }
+        }
+        ```
+   
+  1. **Call** JavaBean **property setters** of the test class:
+        ```java
+        public class SomeFluentTest extends FluentTest {
+             public SomeFluentTest() {
+                 ChromeOptions options = new ChromeOptions();
+                 options.addArguments("--headless");
+                 options.addArguments("--disable-gpu");
+                 DesiredCapabilities capabilities = new DesiredCapabilities();
+                 capabilities.setCapability("chromeOptions", options);
+                 setCapabilities(capabilities);
+                 setWebDriver("chrome");
+             }
+        }
+        ```
+        
+  1. Pass **system properties** using ```-D``` on the command line:
+        ```
+        mvn clean test -Dfluentlenium.webDriver=chrome -Dfluentlenium.capabilities="{chromeOptions: {args:[--headless, --disable-gpu]}}"
+        ```  
+        
+  1. Annotate the test class with **@FluentConfugration**:
+        ```java
+        @FluentConfiguration(webDriver="chrome", capabilities = "{chromeOptions: {args:[--headless, --disable-gpu]}}")
+        public class SomeFluentTest extends FluentTest {
+             ....
+        }
+        ```
+  1. Create **Java Properties** file ```fluentlenium.properties``` in the project classpath.
+        ```
+        $ cat fluentlenium.properties
+        webDriver=chrome
+        capabilities={chromeOptions: {args:[--headless, --disable-gpu]}}
+        ...
+        ```
+  1. Implement custom configuration properties by extending **ConfigurationDefaults**
+        ```java
+        public class CustomConfigurationDefaults extends ConfigurationDefaults {
+             @Override
+             public String getWebDriver() {
+                 return "chrome";
+             }
+                    
+             @Override
+             public Capabilities getCapabilities(){
+                 ChromeOptions options = new ChromeOptions();
+                 options.addArguments("--headless");
+                 options.addArguments("--disable-gpu");
+                 DesiredCapabilities capabilities = new DesiredCapabilities();
+                 capabilities.setCapability("chromeOptions", options);
+                 return capabilities;
+             }
+        }
+        $ cat fluentlenium.properties
+        configurationDefaults=org.your.package.CustomConfigurationDefaults
+        ```
+
 ### Custom Capabilities (BrowserStack example)
 You can register custom Capabilities by providing your own implementation of ```CapabilitiesFactory```.
 
@@ -1649,7 +1771,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.3.0</version>
+    <version>3.4.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1664,7 +1786,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>3.3.0</version>
+    <version>3.4.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1679,7 +1801,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-cucumber</artifactId>
-    <version>3.3.0</version>
+    <version>3.4.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1736,7 +1858,7 @@ assertEqual("Hello toto",window().title());
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.3.0</version>
+    <version>3.4.0</version>
     <scope>test</scope>
 </dependency>
 ```
