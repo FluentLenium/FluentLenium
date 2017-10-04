@@ -2,7 +2,7 @@ package org.fluentlenium.core.conditions;
 
 import java.util.List;
 import java.util.function.Predicate;
-
+import java.util.function.Supplier;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
@@ -10,7 +10,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
  */
 @SuppressWarnings("PMD.ExcessivePublicCount")
 public abstract class AbstractFluentListConditions implements FluentListConditions, ListConditionsElements {
-    private final List<? extends FluentWebElement> elements;
+    private final Supplier<List<? extends FluentWebElement>> elements;
     private boolean negation;
 
     /**
@@ -19,15 +19,15 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
      * @param elements underlying elements
      */
     protected AbstractFluentListConditions(List<? extends FluentWebElement> elements) {
-        this.elements = elements;
+        this.elements = () -> elements;
     }
 
     @Override
     public boolean size(int size) {
         if (negation) {
-            return elements.size() != size;
+            return elements.get().size() != size;
         }
-        return elements.size() == size;
+        return elements.get().size() == size;
     }
 
     /**
@@ -54,17 +54,17 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
      * @return underlying list of elements
      */
     protected List<? extends FluentWebElement> getElements() {
-        return elements;
+        return elements.get();
     }
 
     @Override
     public List<? extends FluentWebElement> getActualElements() {
-        return elements;
+        return elements.get();
     }
 
     @Override
     public AbstractIntegerConditions size() {
-        return new DynamicIntegerConditionsImpl(() -> elements, negation);
+        return new DynamicIntegerConditionsImpl(elements, negation);
     }
 
     @Override
@@ -89,7 +89,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean displayed() {
-        return verify(input -> input.conditions().displayed(), false);
+        return new DynamicListConditionsImpl(elements, false).displayed();
     }
 
     @Override
