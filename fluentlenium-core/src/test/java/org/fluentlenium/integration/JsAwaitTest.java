@@ -14,20 +14,55 @@ import org.junit.Test;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.FindBy;
 
-public class WaitSizeTest extends IntegrationFluentTest {
+public class JsAwaitTest extends IntegrationFluentTest {
+    public static final String INPUT_NAME_LNAME_CSS_SELECTOR = "input[name=\"lname\"]";
+    public static final String NEWROW_CSS_SELECTOR = ".newrow";
+    public static final String NEWROW1_CSS_SELECTOR = ".newrow1";
     @Page
     SizeChangePage sizeChangePage;
 
     @Test
     public void waitForListChangeUsingCssSelectorDirectly() {
         goTo(SIZE_CHANGE_URL);
-        await().until($(".row")).size().greaterThan(2);
+        await().atMost(7, TimeUnit.SECONDS).until($(NEWROW1_CSS_SELECTOR)).size().greaterThan(2);
     }
 
     @Test
     public void newListRowDisplayed() {
         goTo(SIZE_CHANGE_URL);
-        await().until($(".newrow")).displayed();
+        await().until($(NEWROW_CSS_SELECTOR)).displayed();
+    }
+
+    @Test
+    public void newListRowPresent() {
+        goTo(SIZE_CHANGE_URL);
+        await().until($(NEWROW_CSS_SELECTOR)).present();
+    }
+
+    @Test
+    public void newListRowElementStaleReference() {
+        goTo(SIZE_CHANGE_URL);
+        await().until($(NEWROW_CSS_SELECTOR)).displayed();
+        FluentWebElement myrow = $(NEWROW_CSS_SELECTOR).get(0);
+        await().atMost(8, TimeUnit.SECONDS).until(myrow).stale();
+    }
+
+    @Test
+    public void selectedAwaitTest() {
+        goTo(SIZE_CHANGE_URL);
+        await().until($("#mySelect option[value=\"mercedes\"]")).selected();
+    }
+
+    @Test
+    public void inputEnabled() {
+        goTo(SIZE_CHANGE_URL);
+        await().until($(INPUT_NAME_LNAME_CSS_SELECTOR)).enabled();
+    }
+
+    @Test
+    public void inputClickable() {
+        goTo(SIZE_CHANGE_URL);
+        await().until($(INPUT_NAME_LNAME_CSS_SELECTOR)).clickable();
     }
 
     @Test
@@ -54,6 +89,9 @@ public class WaitSizeTest extends IntegrationFluentTest {
 class SizeChangePage extends FluentPage {
     @FindBy(css = ".row")
     FluentList<FluentWebElement> rows;
+
+    @FindBy(css = "input[name=\"lname\"]")
+    FluentWebElement lname;
 
     @Override
     public String getUrl() {

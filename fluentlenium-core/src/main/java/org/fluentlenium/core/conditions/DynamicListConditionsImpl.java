@@ -60,4 +60,8 @@ public class DynamicListConditionsImpl extends AbstractObjectConditions<List<? e
     public boolean greaterThanOrEqualTo(int value) {
         return verify(input -> ((FluentList<FluentWebElement>) input).count() >= value);
     }
+
+    public boolean present() {
+        return verify(input -> ((FluentList<? extends FluentWebElement>) input).first().present());
+    }
 }

@@ -74,7 +74,7 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean present() {
-        return verify(input -> input.conditions().present(), false);
+        return new DynamicListConditionsImpl(elements, false).present();
     }
 
     @Override
