@@ -174,6 +174,11 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
+    public E get(int index) {
+       return this.index(index);
+    }
+
+    @Override
     public int count() {
         if (loaded()) {
             return super.size();
