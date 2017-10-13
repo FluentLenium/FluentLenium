@@ -43,8 +43,7 @@ public class JsAwaitTest extends IntegrationFluentTest {
     public void newListRowElementStaleReference() {
         goTo(SIZE_CHANGE_URL);
         await().until($(NEWROW_CSS_SELECTOR)).displayed();
-        FluentWebElement myrow = $(NEWROW_CSS_SELECTOR).get(0);
-        await().atMost(8, TimeUnit.SECONDS).until(myrow).stale();
+        await().atMost(8, TimeUnit.SECONDS).until($(NEWROW_CSS_SELECTOR)).stale();
     }
 
     @Test
