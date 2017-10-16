@@ -15,9 +15,10 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.FindBy;
 
 public class JsAwaitTest extends IntegrationFluentTest {
-    public static final String INPUT_NAME_LNAME_CSS_SELECTOR = "input[name=\"lname\"]";
-    public static final String NEWROW_CSS_SELECTOR = ".newrow";
-    public static final String NEWROW1_CSS_SELECTOR = ".newrow1";
+    private static final String INPUT_NAME_LNAME_CSS_SELECTOR = "input[name=\"lname\"]";
+    private static final String NEWROW_CSS_SELECTOR = ".newrow";
+    private static final String NEWROW1_CSS_SELECTOR = ".newrow1";
+
     @Page
     SizeChangePage sizeChangePage;
 
@@ -40,10 +41,11 @@ public class JsAwaitTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void newListRowElementStaleReference() {
-        goTo(SIZE_CHANGE_URL);
-        await().until($(NEWROW_CSS_SELECTOR)).displayed();
-        await().atMost(8, TimeUnit.SECONDS).until($(NEWROW_CSS_SELECTOR)).stale();
+    public void newListRowElementElementReferenceChangeIsAbleToWaitAfterDomParentChange() {
+        goTo(sizeChangePage);
+        FluentList<FluentWebElement> fluentWebElements = sizeChangePage.getNewRows();
+        await().until(fluentWebElements).displayed();
+        await().until(fluentWebElements).not().present();
     }
 
     @Test
@@ -87,10 +89,10 @@ public class JsAwaitTest extends IntegrationFluentTest {
 
 class SizeChangePage extends FluentPage {
     @FindBy(css = ".row")
-    FluentList<FluentWebElement> rows;
+    private FluentList<FluentWebElement> rows;
 
-    @FindBy(css = "input[name=\"lname\"]")
-    FluentWebElement lname;
+    @FindBy(css = ".newrow")
+    private FluentList<FluentWebElement> nerows;
 
     @Override
     public String getUrl() {
@@ -102,7 +104,11 @@ class SizeChangePage extends FluentPage {
         assertThat(getDriver().getTitle()).isEqualTo("size change page");
     }
 
-    public FluentList<FluentWebElement> getRows() {
+    FluentList<FluentWebElement> getRows() {
         return rows;
+    }
+
+    FluentList<FluentWebElement> getNewRows() {
+        return nerows;
     }
 }

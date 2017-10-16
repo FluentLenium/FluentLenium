@@ -17,7 +17,7 @@ public class DynamicListConditionsImpl extends AbstractObjectConditions<List<? e
      * @param supplier  underlying list
      * @param negation negation value
      */
-    public DynamicListConditionsImpl(Supplier<List<? extends FluentWebElement>> supplier, boolean negation) {
+    DynamicListConditionsImpl(Supplier<List<? extends FluentWebElement>> supplier, boolean negation) {
         super(supplier.get(), negation);
     }
 
@@ -42,23 +42,23 @@ public class DynamicListConditionsImpl extends AbstractObjectConditions<List<? e
         return false;
     }
 
-    public boolean displayed() {
-        return verify(input -> ((FluentList<? extends FluentWebElement>) input).first().displayed());
-    }
-
     @Override
     public boolean lessThanOrEqualTo(int value) {
-        return verify(input -> ((FluentList<FluentWebElement>) input).count() <= value);
+        return verify(input -> input.size() <= value);
     }
 
     @Override
     public boolean greaterThan(int value) {
-        return verify(input -> ((FluentList<FluentWebElement>) input).count() > value);
+        return verify(input -> input.size() > value);
     }
 
     @Override
     public boolean greaterThanOrEqualTo(int value) {
-        return verify(input -> ((FluentList<FluentWebElement>) input).count() >= value);
+        return verify(input -> input.size() >= value);
+    }
+
+    public boolean displayed() {
+        return verify(input -> ((FluentList<? extends FluentWebElement>) input).first().displayed());
     }
 
     public boolean present() {
