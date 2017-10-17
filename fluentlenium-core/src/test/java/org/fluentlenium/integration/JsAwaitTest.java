@@ -14,14 +14,56 @@ import org.junit.Test;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.FindBy;
 
-public class WaitSizeTest extends IntegrationFluentTest {
+public class JsAwaitTest extends IntegrationFluentTest {
+    private static final String INPUT_NAME_LNAME_CSS_SELECTOR = "input[name=\"lname\"]";
+    private static final String NEWROW_CSS_SELECTOR = ".newrow";
+    private static final String NEWROW1_CSS_SELECTOR = ".newrow1";
+
     @Page
     SizeChangePage sizeChangePage;
 
     @Test
     public void waitForListChangeUsingCssSelectorDirectly() {
         goTo(SIZE_CHANGE_URL);
-        await().until($(".row")).size().greaterThan(2);
+        await().atMost(7, TimeUnit.SECONDS).until($(NEWROW1_CSS_SELECTOR)).size().greaterThan(2);
+    }
+
+    @Test
+    public void newListRowDisplayed() {
+        goTo(SIZE_CHANGE_URL);
+        await().until($(NEWROW_CSS_SELECTOR)).displayed();
+    }
+
+    @Test
+    public void newListRowPresent() {
+        goTo(SIZE_CHANGE_URL);
+        await().until($(NEWROW_CSS_SELECTOR)).present();
+    }
+
+    @Test
+    public void newListRowElementElementReferenceChangeIsAbleToWaitAfterDomParentChange() {
+        goTo(sizeChangePage);
+        FluentList<FluentWebElement> fluentWebElements = sizeChangePage.getNewRows();
+        await().until(fluentWebElements).displayed();
+        await().until(fluentWebElements).not().present();
+    }
+
+    @Test
+    public void selectedAwaitTest() {
+        goTo(SIZE_CHANGE_URL);
+        await().until($("#mySelect option[value=\"mercedes\"]")).selected();
+    }
+
+    @Test
+    public void inputEnabled() {
+        goTo(SIZE_CHANGE_URL);
+        await().until($(INPUT_NAME_LNAME_CSS_SELECTOR)).enabled();
+    }
+
+    @Test
+    public void inputClickable() {
+        goTo(SIZE_CHANGE_URL);
+        await().until($(INPUT_NAME_LNAME_CSS_SELECTOR)).clickable();
     }
 
     @Test
@@ -47,7 +89,10 @@ public class WaitSizeTest extends IntegrationFluentTest {
 
 class SizeChangePage extends FluentPage {
     @FindBy(css = ".row")
-    FluentList<FluentWebElement> rows;
+    private FluentList<FluentWebElement> rows;
+
+    @FindBy(css = ".newrow")
+    private FluentList<FluentWebElement> nerows;
 
     @Override
     public String getUrl() {
@@ -59,7 +104,11 @@ class SizeChangePage extends FluentPage {
         assertThat(getDriver().getTitle()).isEqualTo("size change page");
     }
 
-    public FluentList<FluentWebElement> getRows() {
+    FluentList<FluentWebElement> getRows() {
         return rows;
+    }
+
+    FluentList<FluentWebElement> getNewRows() {
+        return nerows;
     }
 }
