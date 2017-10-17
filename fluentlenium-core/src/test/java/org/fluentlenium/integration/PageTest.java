@@ -29,6 +29,9 @@ public class PageTest extends IntegrationFluentTest {
     private Page3 page3;
 
     @Page
+    IndexPage2 page4;
+
+    @Page
     IndexPageWithFindByAnnotation indexPageWithFindByAnnotation;
 
     @Page
@@ -67,6 +70,12 @@ public class PageTest extends IntegrationFluentTest {
     @Test
     public void checkFollowLink() {
         page.<IndexPage>go().goToNextPage();
+        page2.isAt();
+    }
+
+    @Test
+    public void checkFollowLink2() {
+        page4.go().goToNextPage();
         page2.isAt();
     }
 
@@ -183,6 +192,13 @@ class IndexPage extends FluentPage {
 
     public void goToNextPageWithFindByClassLink() {
         linkToPage2FoundWithFindBy.click();
+    }
+}
+
+class IndexPage2 extends IndexPage {
+    @Override
+    public IndexPage2 go() {
+        return super.go();
     }
 }
 

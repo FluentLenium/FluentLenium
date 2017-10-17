@@ -544,8 +544,8 @@ public void test() {
 }
 ```
 
-In order to be able to chain `go()` methods with your page methods you need to provide your `FluentPage` class name for 
-the master `FluentPage` class which is extended by your page class.
+In order to be able to chain or return `Page` class which extends `FluentPage` as a result of `go()` method you need to 
+provide your `FluentPage` extending class name as follows.
 
 The example above can be implemented as follows:
 
@@ -555,22 +555,30 @@ private DocumentPage page;
 
 @Test
 public void test() {
-    page.go(267) // go to "/document/267"
-        .go(174, 3) // go to "/document/174/page/3"
-        .go(124, 1, "pdf") // go to "/document/124/page/1/pdf"
-        .go(124, null, "html") // go to "/document/124/html"
+    page.<DocumentPage>go(267) // go to "/document/267"
+        .<DocumentPage>go(174, 3) // go to "/document/174/page/3"
+        .<DocumentPage>go(124, 1, "pdf") // go to "/document/124/page/1/pdf"
+        .<DocumentPage>go(124, null, "html") // go to "/document/124/html"
         .customPageMethod() //do the custom actions
-        .go(267); // go to "document/267"
+        .<DocumentPage>go(267); // go to "document/267"
         ...
 }
 ```
 
-To achieve that you need to provide `Class` type parameter for `FluentPage` generic class, 
-in this example it is `FluentPage<DocumentPage>`
+As a result the `go` method will return `DocumentPage` type instead of generic `FluentPage`
+
+You can always override default `go` method in your `DocumentPage` class instead of typing `<DocumentPage>` for every 
+single method call
 
 ```java
 @PageUrl("/document/{document}{?/page/page}{?/format}")
-public class DocumentPage extends FluentPage<DocumentPage> {
+public class DocumentPage extends FluentPage {
+    @Override
+    DocumentPage go() {
+        return super.go();
+    }
+    
+    
     public DocumentPage customPageMethod(){
         ...
         return this;
@@ -578,8 +586,6 @@ public class DocumentPage extends FluentPage<DocumentPage> {
     ...
 }
 ```
-
-As a result the `go` method will return `DocumentPage` type instead of generic `FluentPage`
 
 Create your own methods to easily fill out forms, go to another or whatever else may be needed in your test.
 
