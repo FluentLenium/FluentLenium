@@ -45,7 +45,7 @@ public class BaseUrlDynamicTest extends IntegrationFluentTest {
 }
 
 @PageUrl("/page2url.html")
-class Page2Dynamic extends FluentPage<Page2Dynamic> {
+class Page2Dynamic extends FluentPage {
     @Override
     public String getUrl() {
         return IntegrationFluentTest.PAGE_2_URL_TEST;
@@ -53,7 +53,7 @@ class Page2Dynamic extends FluentPage<Page2Dynamic> {
 }
 
 @PageUrl("?param1={param1}")
-class Page2DynamicP1 extends FluentPage<Page2DynamicP1> {
+class Page2DynamicP1 extends FluentPage {
     @Override
     public String getUrl() {
         return IntegrationFluentTest.PAGE_2_URL_TEST + super.getUrl();
@@ -66,7 +66,7 @@ class Page2DynamicP1 extends FluentPage<Page2DynamicP1> {
 }
 
 @PageUrl("?param1={param1}&param2={param2}")
-class Page2DynamicP2P1 extends FluentPage<Page2DynamicP2P1> {
+class Page2DynamicP2P1 extends FluentPage {
     @Override
     public String getUrl() {
         return IntegrationFluentTest.PAGE_2_URL_TEST + super.getUrl();
