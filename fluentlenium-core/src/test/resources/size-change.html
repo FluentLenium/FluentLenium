@@ -1,22 +1,103 @@
 <html>
+<head>
+    <title>size change page</title>
+    <script lang="javascript">
+        function addRow3() {
+            var row3 = document.createElement('div');
+            row3.setAttribute('class', 'row');
+            row3.innerHTML = 'row3';
+
+            document.getElementsByClassName('container')[0].appendChild(row3);
+        }
+        function addNewRow1() {
+            var row4 = document.createElement('div');
+            row4.setAttribute('class', 'newrow1');
+            row4.innerHTML = 'row4';
+
+            document.getElementsByClassName('container')[0].appendChild(row4);
+        }
+        function addNewRow() {
+            var row4 = document.createElement('div');
+            row4.setAttribute('class', 'newrow');
+            row4.innerHTML = 'row4';
+
+            document.getElementsByClassName('container')[0].appendChild(row4);
+        }
+        function addNewRow2() {
+            var row4 = document.createElement('div');
+            row4.setAttribute('class', 'newrow2');
+            row4.innerHTML = 'row4';
+
+            document.getElementsByClassName('container')[0].appendChild(row4);
+        }
+        function addNewRowAgainToContainer2() {
+            var row4 = document.createElement('div');
+            row4.setAttribute('class', 'newrow');
+            row4.innerHTML = 'row4';
+
+            document.getElementsByClassName('container2')[0].appendChild(row4);
+        }
+        function enableLabel() {
+            var input = document.getElementsByName("lname");
+            input[0].removeAttribute('disabled');
+        }
+        function removeNewRowFromContainer() {
+            document.getElementsByClassName("newrow")[0].remove();
+        }
+
+        function setMercedesSelected() {
+            document.getElementById("mySelect").value = 'mercedes';
+        }
+
+        function addNewRow() {
+            var row4 = document.createElement('div');
+            row4.setAttribute('class', 'newrow');
+            row4.innerHTML = 'row4';
+
+            document.getElementsByClassName('container')[0].appendChild(row4);
+        }
+        function newRow3Displayed() {
+            var row3 = document.createElement('div');
+            row3.setAttribute('class', 'newrow3');
+            row3.innerHTML = 'row3';
+
+            document.getElementsByClassName('container')[0].appendChild(row3);
+        }
+    </script>
+</head>
 <body>
-<title>size change page</title>
-
 <script lang="javascript">
-    function addRow3() {
-        var row3 = document.createElement('div');
-        row3.setAttribute('class', 'row');
-        row3.innerHTML = 'row3';
-
-        document.getElementsByClassName('container')[0].appendChild(row3);
-    }
-    window.setTimeout(addRow3, 1000)
+    window.setTimeout(addRow3, 1000);
+    window.setTimeout(addNewRow, 2000);
+    window.setTimeout(addNewRow2, 2000);
+    window.setTimeout(addNewRow1, 1000);
+    window.setTimeout(addNewRow1, 2000);
+    window.setTimeout(newRow3Displayed, 3000);
+    window.setTimeout(enableLabel, 2000)
+    window.setTimeout(setMercedesSelected, 2000)
+    window.setTimeout(removeNewRowFromContainer, 5000)
+    window.setTimeout(addNewRowAgainToContainer2, 6000);
+    window.setTimeout(addNewRow1, 6000);
 </script>
+
+<div class="newrow2" style="display: none">row not displayed</div>
 
 <div class="container">
     <div class="row">row1</div>
     <div class="row">row2</div>
 </div>
 
+<input id="lname" type="text" name="lname" disabled/>
+
+<select id="mySelect">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+</select>
+
+<div class="container2">
+    <div class="rowAAA">row1</div>
+</div>
 </body>
 </html>
