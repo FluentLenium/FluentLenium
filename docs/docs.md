@@ -937,12 +937,18 @@ await().atMost(5, TimeUnit.SECONDS).until(element).enabled();
 When running Java 8, you can use lambdas with `until`, `untilPredicate`, `untilElement` or `untilElements`.
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).untilElement(() -> el(".button").enabled();
-await().atMost(5, TimeUnit.SECONDS).untilElements(() -> $(".button").each().enabled();
-await().atMost(5, TimeUnit.SECONDS).untilElements(() -> $(".button").one().enabled();
+await().atMost(5, TimeUnit.SECONDS).untilElement(() -> el(".button").enabled());
+await().atMost(5, TimeUnit.SECONDS).untilElements(() -> $(".button").each().enabled());
+await().atMost(5, TimeUnit.SECONDS).untilElements(() -> $(".button").one().enabled());
 
 await().atMost(5, TimeUnit.SECONDS).untilPredicate((f) -> el(".button").enabled());
+```
+
+Using `Supplier` as `until` argument will help you to write `awaits` which can work with dynamic pages.
+
+```java
 await().atMost(5, TimeUnit.SECONDS).until(() -> el(".button").enabled());
+await().until(() -> $(".listItem").first().displayed());
 ```
 
 You can also check if the page is loaded.
