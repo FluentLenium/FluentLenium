@@ -31,21 +31,21 @@ public class JsAwaitTest extends IntegrationFluentTest {
     @Test
     public void newListRowDisplayed() {
         goTo(SIZE_CHANGE_URL);
-        await().until($(NEWROW_CSS_SELECTOR)).displayed();
+        await().until(() -> $(NEWROW_CSS_SELECTOR).first().displayed());
     }
 
     @Test
     public void newListRowPresent() {
         goTo(SIZE_CHANGE_URL);
-        await().until($(NEWROW_CSS_SELECTOR)).present();
+        await().until(() -> $(NEWROW_CSS_SELECTOR).present());
     }
 
     @Test
     public void newListRowElementElementReferenceChangeIsAbleToWaitAfterDomParentChange() {
         goTo(sizeChangePage);
         FluentList<FluentWebElement> fluentWebElements = sizeChangePage.getNewRows();
-        await().until(fluentWebElements).displayed();
-        await().until(fluentWebElements).not().present();
+        await().until(() -> fluentWebElements.first().displayed());
+        await().until(() -> !fluentWebElements.present());
     }
 
     @Test
