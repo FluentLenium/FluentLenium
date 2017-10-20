@@ -1,4 +1,4 @@
-###Quick example:
+### Quick example:
 
 ```java
 @Wait
@@ -14,9 +14,9 @@ public class DuckDuckGoTest extends FluentTest {
 }
 ```
 
-###Well written FluentLenium code:
+### Well written FluentLenium code:
 
-####Page component
+#### Page component
 
 ```java
 @PageUrl("https://duckduckgo.com")
@@ -58,7 +58,7 @@ public class First extends FluentTest {
 }
 ```
 
-####pom.xml
+#### pom.xml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
