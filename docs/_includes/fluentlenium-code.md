@@ -90,22 +90,22 @@ public class First extends FluentTest {
         <dependency>
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-core</artifactId>
-            <version>{{ fluentlenium.version }}</version>
+            <version>3.4.1</version>
         </dependency>
         <dependency>
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-junit</artifactId>
-            <version>{{ fluentlenium.version }}</version>
+            <version>3.4.1</version>
         </dependency>
         <dependency>
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-assertj</artifactId>
-            <version>{{ fluentlenium.version }}</version>
+            <version>3.4.1</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>{{ selenium.version }}</version>
+            <version>3.6.0</version>
         </dependency>
     </dependencies>
 </project>
