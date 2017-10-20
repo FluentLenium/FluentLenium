@@ -17,14 +17,13 @@ baseurl: ""
 title: FluentLenium
 
 # Short description of your site
-description: Functional testing automation framework
+description: FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests.
 
 # --- Navigation bar options --- #
 
 # List of links in the navigation bar
 navbar-links:
   Home: ""
-  News: "news"
   Docs: "docs"
   Migration: "migration/from-0.13.2-to-1.0-or-3.0"
   About: "about"
@@ -46,7 +45,7 @@ author:
   #email: "fluentlenium@gmail.com"
   #facebook: yourname  # eg. daattali
   github: FluentLenium    # eg. daattali
-  #twitter: yourname   # eg. daattali
+  twitter: FluentLenium   # eg. daattali
   #google-plus: +yourname   # eg. +DeanAttali or 109424658772469020925
   #linkedin: yourname  # eg. daattali
   #xing: yourname      # eg. daattali
@@ -61,7 +60,7 @@ footer-links-active:
   rss: false
   facebook: false
   email: false
-  twitter: false
+  twitter: true
   google-plus: false
   github: true
   linkedin: false
