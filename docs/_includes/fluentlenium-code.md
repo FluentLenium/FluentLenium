@@ -52,11 +52,6 @@ public class First extends FluentTest {
         await().atMost(5, TimeUnit.SECONDS).until(el("#search_form_homepage")).not().present();
         assertThat(window().title()).contains(SEARCH_QUERY_NAME);
     }
-    
-    @Override
-    public WebDriver newWebDriver() {
-        return new ChromeDriver();
-    }
 }
 ```
 
