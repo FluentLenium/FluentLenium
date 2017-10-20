@@ -13,6 +13,7 @@ Current active contributors:
 
 {% include icon-github.html username="Toilal" displayname="Rémi Alvergnat" %}
 {% include icon-github.html username="filipcynarski" displayname="Filip Cynarski" %}
+{% include icon-github.html username="gkiszczak" displayname="Grzegorz Kiszczak" %}
 
 FluentLenium was initially written by Mathilde Lemée:
 
