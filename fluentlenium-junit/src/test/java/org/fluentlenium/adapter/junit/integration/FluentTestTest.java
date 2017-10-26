@@ -4,12 +4,21 @@ import net.jcip.annotations.NotThreadSafe;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.util.Files;
 import org.fluentlenium.adapter.SharedWebDriverContainer;
+import org.fluentlenium.adapter.junit.FluentJUnit5;
 import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.configuration.FluentConfiguration.BooleanValue;
 import org.junit.After;
 import org.junit.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.engine.TestExecutionResult;
+import org.junit.platform.launcher.Launcher;
+import org.junit.platform.launcher.LauncherDiscoveryRequest;
+import org.junit.platform.launcher.TestExecutionListener;
+import org.junit.platform.launcher.TestIdentifier;
+import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
+import org.junit.platform.launcher.core.LauncherFactory;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.mockito.Mockito;
@@ -22,12 +31,14 @@ import org.openqa.selenium.WebElement;
 import java.io.File;
 import java.io.IOError;
 import java.io.IOException;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
+import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
 
 @NotThreadSafe
 public class FluentTestTest {
@@ -66,6 +77,31 @@ public class FluentTestTest {
         }
 
         @Test
+        public void failingTest() {
+            fail("Failing Test");
+        }
+    }
+
+    @ExtendWith(FluentJUnit5.class)
+    public static class InternalJUnit5Test extends FluentTest {
+        @Override
+        public WebDriver newWebDriver() {
+            WebDriver webDriver = Mockito.mock(WebDriver.class);
+            drivers.add(webDriver);
+            return webDriver;
+        }
+
+        @org.junit.jupiter.api.Test
+        public void okTest() {
+            goTo("url");
+        }
+
+        @org.junit.jupiter.api.Test
+        public void okTest2() {
+            goTo("url2");
+        }
+
+        @org.junit.jupiter.api.Test
         public void failingTest() {
             fail("Failing Test");
         }
@@ -201,6 +237,38 @@ public class FluentTestTest {
         Result result = JUnitCore.runClasses(InternalTest.class);
         assertThat(result.getFailures()).hasSize(1);
         assertThat(result.getFailures().get(0).getMessage()).isEqualTo("Failing Test");
+
+        assertThat(drivers).hasSize(3);
+
+        for (WebDriver driver : drivers) {
+            Mockito.verify(driver).quit();
+        }
+
+        assertThat(SharedWebDriverContainer.INSTANCE.getTestClassDrivers(InternalTest.class)).isEmpty();
+    }
+
+    @Test
+    public void testFluentJUnit5Test() {
+        LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder.request()
+                .selectors(selectClass(InternalJUnit5Test.class)).build();
+
+        class Listener implements TestExecutionListener {
+            public List<Throwable> failures = new ArrayList<>();
+
+            @Override
+            public void executionFinished(TestIdentifier identifier, TestExecutionResult result) {
+                result.getThrowable().ifPresent(throwable -> failures.add(throwable));
+            }
+        }
+
+        final Listener listener = new Listener();
+
+        Launcher launcher = LauncherFactory.create();
+        launcher.registerTestExecutionListeners(listener);
+        launcher.execute(request);
+
+        assertThat(listener.failures).hasSize(1);
+        assertThat(listener.failures.get(0).getMessage()).isEqualTo("Failing Test");
 
         assertThat(drivers).hasSize(3);
 
