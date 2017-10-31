@@ -424,62 +424,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public String value() {
-        if (size() > 0) {
-            return get(0).value();
-        }
-        return null;
-    }
-
-    @Override
-    public String id() {
-        if (size() > 0) {
-            return get(0).id();
-        }
-        return null;
-    }
-
-    @Override
-    public String attribute(String attribute) {
-        if (size() > 0) {
-            return get(0).attribute(attribute);
-        }
-        return null;
-    }
-
-    @Override
-    public String name() {
-        if (size() > 0) {
-            return get(0).name();
-        }
-        return null;
-    }
-
-    @Override
-    public String tagName() {
-        if (size() > 0) {
-            return get(0).tagName();
-        }
-        return null;
-    }
-
-    @Override
-    public String text() {
-        if (size() > 0) {
-            return get(0).text();
-        }
-        return null;
-    }
-
-    @Override
-    public String textContent() {
-        if (size() > 0) {
-            return get(0).textContent();
-        }
-        return null;
-    }
-
-    @Override
     public FluentList<E> $(String selector, SearchFilter... filters) {
         return find(selector, filters);
     }

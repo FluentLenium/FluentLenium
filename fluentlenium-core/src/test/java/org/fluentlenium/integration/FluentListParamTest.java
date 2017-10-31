@@ -47,34 +47,34 @@ public class FluentListParamTest extends IntegrationFluentTest {
     public void checkTextParam() {
         goTo(DEFAULT_URL);
         FluentList list = find(".small");
-        assertThat(list.text()).isEqualTo("Small 1");
+        assertThat(list.first().text()).isEqualTo("Small 1");
     }
 
     @Test
     public void checkValueAction() {
         goTo(DEFAULT_URL);
         FluentList list = find("input");
-        assertThat(list.value()).isEqualTo("John");
+        assertThat(list.first().value()).isEqualTo("John");
     }
 
     @Test
     public void checkAttributeAction() {
         goTo(DEFAULT_URL);
         FluentList list = find("input");
-        assertThat(list.attribute("value")).isEqualTo("John");
+        assertThat(list.first().attribute("value")).isEqualTo("John");
     }
 
     @Test
     public void checkIdAction() {
         goTo(DEFAULT_URL);
         FluentList list = find(".small");
-        assertThat(list.id()).isEqualTo("id");
+        assertThat(list.first().id()).isEqualTo("id");
     }
 
     @Test
     public void checkNameAction() {
         goTo(DEFAULT_URL);
         FluentList list = find(".small");
-        assertThat(list.name()).isEqualTo("name");
+        assertThat(list.first().name()).isEqualTo("name");
     }
 }

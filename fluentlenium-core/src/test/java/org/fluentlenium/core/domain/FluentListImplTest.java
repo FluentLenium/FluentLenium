@@ -67,24 +67,14 @@ public class FluentListImplTest {
     public void testFirst() {
         assertThat(list.first()).isSameAs(element1);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                emptyList.first();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> emptyList.first()).isExactlyInstanceOf(NoSuchElementException.class);
     }
 
     @Test
     public void testLast() {
         assertThat(list.last()).isSameAs(element3);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                emptyList.last();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> emptyList.last()).isExactlyInstanceOf(NoSuchElementException.class);
     }
 
     @Test
@@ -123,22 +113,12 @@ public class FluentListImplTest {
         verify(element2).click();
         verify(element3).click();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                emptyList.click();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> emptyList.click()).isExactlyInstanceOf(NoSuchElementException.class);
 
         when(element2.conditions().clickable()).thenReturn(false);
         when(element3.conditions().clickable()).thenReturn(false);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                list.contextClick();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element clickable");
+        assertThatThrownBy(() -> list.contextClick()).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element clickable");
     }
 
     @Test
@@ -152,22 +132,12 @@ public class FluentListImplTest {
         verify(element2).doubleClick();
         verify(element3).doubleClick();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                emptyList.doubleClick();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> emptyList.doubleClick()).isExactlyInstanceOf(NoSuchElementException.class);
 
         when(element2.conditions().clickable()).thenReturn(false);
         when(element3.conditions().clickable()).thenReturn(false);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                list.contextClick();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element clickable");
+        assertThatThrownBy(() -> list.contextClick()).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element clickable");
     }
 
     @Test
@@ -181,22 +151,12 @@ public class FluentListImplTest {
         verify(element2).contextClick();
         verify(element3).contextClick();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                emptyList.contextClick();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> emptyList.contextClick()).isExactlyInstanceOf(NoSuchElementException.class);
 
         when(element2.conditions().clickable()).thenReturn(false);
         when(element3.conditions().clickable()).thenReturn(false);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                list.contextClick();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element clickable");
+        assertThatThrownBy(() -> list.contextClick()).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element clickable");
     }
 
     @Test
@@ -212,21 +172,11 @@ public class FluentListImplTest {
         verify(element2).write("abc");
         verify(element3).write("abc");
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                emptyList.write("abc");
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> emptyList.write("abc")).isExactlyInstanceOf(NoSuchElementException.class);
 
         reset(element1, element2, element3);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                list.write("abc");
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> list.write("abc")).isExactlyInstanceOf(NoSuchElementException.class);
     }
 
     @Test
@@ -240,22 +190,12 @@ public class FluentListImplTest {
         verify(element2).submit();
         verify(element3).submit();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                emptyList.submit();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> emptyList.submit()).isExactlyInstanceOf(NoSuchElementException.class);
 
         when(element2.enabled()).thenReturn(false);
         when(element3.enabled()).thenReturn(false);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                list.submit();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element enabled");
+        assertThatThrownBy(() -> list.submit()).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element enabled");
 
     }
 
@@ -270,22 +210,12 @@ public class FluentListImplTest {
         verify(element2).clear();
         verify(element3).clear();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                emptyList.clearAll();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> emptyList.clearAll()).isExactlyInstanceOf(NoSuchElementException.class);
 
         when(element2.enabled()).thenReturn(false);
         when(element3.enabled()).thenReturn(false);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                list.submit();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element enabled");
+        assertThatThrownBy(() -> list.submit()).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element enabled");
     }
 
     @Test
@@ -295,9 +225,10 @@ public class FluentListImplTest {
         when(element3.value()).thenReturn("3");
 
         assertThat(list.values()).containsExactly("1", "2", "3");
-        assertThat(list.value()).isEqualTo("1");
+        assertThat(list.first().value()).isEqualTo("1");
         assertThat(emptyList.values()).isEmpty();
-        assertThat(emptyList.value()).isNull();
+
+        assertThatThrownBy(() -> emptyList.first().value()).isExactlyInstanceOf(NoSuchElementException.class);
         reset(element1, element2, element3);
 
         when(element1.id()).thenReturn("1");
@@ -305,9 +236,9 @@ public class FluentListImplTest {
         when(element3.id()).thenReturn("3");
 
         assertThat(list.ids()).containsExactly("1", "2", "3");
-        assertThat(list.id()).isEqualTo("1");
+        assertThat(list.first().id()).isEqualTo("1");
         assertThat(emptyList.ids()).isEmpty();
-        assertThat(emptyList.id()).isNull();
+        assertThatThrownBy(() -> emptyList.first().id()).isExactlyInstanceOf(NoSuchElementException.class);
         reset(element1, element2, element3);
 
         when(element1.attribute("attr")).thenReturn("1");
@@ -315,9 +246,10 @@ public class FluentListImplTest {
         when(element3.attribute("attr")).thenReturn("3");
 
         assertThat(list.attributes("attr")).containsExactly("1", "2", "3");
-        assertThat(list.attribute("attr")).isEqualTo("1");
+        assertThat(list.first().attribute("attr")).isEqualTo("1");
         assertThat(emptyList.attributes("attr")).isEmpty();
-        assertThat(emptyList.attribute("attr")).isNull();
+        assertThatThrownBy(() -> emptyList.frame().first().attribute("attr"))
+                .isExactlyInstanceOf(NoSuchElementException.class);
         reset(element1, element2, element3);
 
         when(element1.name()).thenReturn("1");
@@ -325,9 +257,9 @@ public class FluentListImplTest {
         when(element3.name()).thenReturn("3");
 
         assertThat(list.names()).containsExactly("1", "2", "3");
-        assertThat(list.name()).isEqualTo("1");
+        assertThat(list.first().name()).isEqualTo("1");
         assertThat(emptyList.names()).isEmpty();
-        assertThat(emptyList.name()).isNull();
+        assertThatThrownBy(() -> emptyList.first().name()).isExactlyInstanceOf(NoSuchElementException.class);
         reset(element1, element2, element3);
 
         when(element1.tagName()).thenReturn("1");
@@ -335,9 +267,9 @@ public class FluentListImplTest {
         when(element3.tagName()).thenReturn("3");
 
         assertThat(list.tagNames()).containsExactly("1", "2", "3");
-        assertThat(list.tagName()).isEqualTo("1");
+        assertThat(list.first().tagName()).isEqualTo("1");
         assertThat(emptyList.tagNames()).isEmpty();
-        assertThat(emptyList.tagName()).isNull();
+        assertThatThrownBy(() -> emptyList.first().tagName()).isExactlyInstanceOf(NoSuchElementException.class);
         reset(element1, element2, element3);
 
         when(element1.text()).thenReturn("1");
@@ -345,9 +277,9 @@ public class FluentListImplTest {
         when(element3.text()).thenReturn("3");
 
         assertThat(list.texts()).containsExactly("1", "2", "3");
-        assertThat(list.text()).isEqualTo("1");
+        assertThat(list.first().text()).isEqualTo("1");
         assertThat(emptyList.texts()).isEmpty();
-        assertThat(emptyList.text()).isNull();
+        assertThatThrownBy(() -> emptyList.first().text()).isExactlyInstanceOf(NoSuchElementException.class);
         reset(element1, element2, element3);
 
         when(element1.textContent()).thenReturn("1");
@@ -355,9 +287,9 @@ public class FluentListImplTest {
         when(element3.textContent()).thenReturn("3");
 
         assertThat(list.textContents()).containsExactly("1", "2", "3");
-        assertThat(list.textContent()).isEqualTo("1");
+        assertThat(list.first().textContent()).isEqualTo("1");
         assertThat(emptyList.textContents()).isEmpty();
-        assertThat(emptyList.textContent()).isNull();
+        assertThatThrownBy(() -> emptyList.first().textContent()).isExactlyInstanceOf(NoSuchElementException.class);
         reset(element1, element2, element3);
 
         when(element1.value()).thenReturn("1");
@@ -365,9 +297,9 @@ public class FluentListImplTest {
         when(element3.value()).thenReturn("3");
 
         assertThat(list.values()).containsExactly("1", "2", "3");
-        assertThat(list.value()).isEqualTo("1");
+        assertThat(list.first().value()).isEqualTo("1");
         assertThat(emptyList.values()).isEmpty();
-        assertThat(emptyList.value()).isNull();
+        assertThatThrownBy(() -> emptyList.first().value()).isExactlyInstanceOf(NoSuchElementException.class);
 
         reset(element1, element2, element3);
     }
@@ -388,12 +320,7 @@ public class FluentListImplTest {
         assertThat(list.$()).containsExactly(ret1, ret2, ret3);
         assertThat(list.$().index(1)).isSameAs(ret2);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                list.find().index(3);
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> list.find().index(3)).isExactlyInstanceOf(NoSuchElementException.class);
 
         reset(element1, element2, element3);
 
@@ -407,12 +334,7 @@ public class FluentListImplTest {
         assertThat(list.$(".test")).containsExactly(ret1, ret2, ret3);
         assertThat(list.$(".test").index(1)).isSameAs(ret2);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                list.find(".test").index(3);
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> list.find(".test").index(3)).isExactlyInstanceOf(NoSuchElementException.class);
 
         reset(element1, element2, element3);
 
@@ -426,12 +348,7 @@ public class FluentListImplTest {
         assertThat(list.$(By.cssSelector(".test"))).containsExactly(ret1, ret2, ret3);
         assertThat(list.$(By.cssSelector(".test")).index(1)).isSameAs(ret2);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                list.find(By.cssSelector(".test")).index(3);
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> list.find(By.cssSelector(".test")).index(3)).isExactlyInstanceOf(NoSuchElementException.class);
 
         reset(element1, element2, element3);
     }

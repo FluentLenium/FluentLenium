@@ -1,7 +1,6 @@
 package org.fluentlenium.integration;
 
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
@@ -62,12 +61,7 @@ public class ActionOnSelectorTest extends IntegrationFluentTest {
     public void checkClickActionWrongSelector() {
         goTo(DEFAULT_URL);
         assertThat(window().title()).contains("Selenium");
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                $("#BLUB").click();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        Assertions.assertThatThrownBy(() -> $("#BLUB").click()).isExactlyInstanceOf(NoSuchElementException.class);
     }
 
     @Test
@@ -82,9 +76,9 @@ public class ActionOnSelectorTest extends IntegrationFluentTest {
     public void checkMouseOverAction() {
         goTo(DEFAULT_URL);
         assertThat(window().title()).contains("Selenium");
-        assertThat($("#id3").text()).isEqualTo("This text should change on MouseOver");
+        assertThat($("#id3").first().text()).isEqualTo("This text should change on MouseOver");
         $("#mouseover").first().mouse().moveToElement();
-        assertThat($("#id3").text()).isEqualTo("abc");
+        assertThat($("#id3").first().text()).isEqualTo("abc");
     }
 
     @Test
