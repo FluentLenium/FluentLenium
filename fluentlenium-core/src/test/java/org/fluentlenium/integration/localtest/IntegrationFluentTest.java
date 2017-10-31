@@ -8,8 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOError;
 import java.io.IOException;
 
-import static org.fluentlenium.integration.util.UrlUtil.getAbsoluteUrlFromFile;
-import static org.fluentlenium.integration.util.UrlUtil.getAbsoluteUrlPathFromFile;
+import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
+import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlPathFromFile;
 
 public class IntegrationFluentTest extends FluentTest {
 

@@ -65,13 +65,8 @@ class Page2DynamicP1 extends FluentPage {
     }
 }
 
-@PageUrl("?param1={param1}&param2={param2}")
+@PageUrl(file = "page2url.html", value = "?param1={param1}&param2={param2}", isLocalFile = true)
 class Page2DynamicP2P1 extends FluentPage {
-    @Override
-    public String getUrl() {
-        return IntegrationFluentTest.PAGE_2_URL_TEST + super.getUrl();
-    }
-
     @Override
     protected void isAtUsingUrl(String urlTemplate) {
         //overridden to skip URL check because PageUrl is not able to get local file path relatively
