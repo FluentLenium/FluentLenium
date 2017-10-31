@@ -1,4 +1,4 @@
-package org.fluentlenium.core.axes;
+package org.fluentlenium.core.dom;
 
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 /**
  * Handles XPath axes for an element (http://www.w3schools.com/xsl/xpath_axes.asp)
  */
-public class Axes {
+public class Dom {
     private final WebElement webElement;
     private final ComponentInstantiator instantiator;
 
@@ -24,7 +24,7 @@ public class Axes {
      * @param element      reference element
      * @param instantiator component instantiator used to build found elements.
      */
-    public Axes(WebElement element, ComponentInstantiator instantiator) {
+    public Dom(WebElement element, ComponentInstantiator instantiator) {
         webElement = element;
         this.instantiator = instantiator;
     }

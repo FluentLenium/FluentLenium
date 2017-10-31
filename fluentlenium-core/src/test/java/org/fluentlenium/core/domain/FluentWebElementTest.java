@@ -93,7 +93,7 @@ public class FluentWebElementTest {
 
     @Test
     public void testAxes() {
-        fluentElement.axes().parent();
+        fluentElement.dom().parent();
     }
 
     @Test
