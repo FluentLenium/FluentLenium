@@ -29,6 +29,13 @@ public interface FluentList<E extends FluentWebElement>
     E first();
 
     /**
+     * Retrieve the first element and checks is it exactly one element in the list
+     *
+     * @return first element
+     */
+    E single();
+
+    /**
      * Retrieve the last element.
      *
      * @return last element
