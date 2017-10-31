@@ -137,56 +137,6 @@ public interface FluentList<E extends FluentWebElement>
     List<String> textContents();
 
     /**
-     * Return the value of the first element in the list
-     *
-     * @return string value
-     */
-    String value();
-
-    /**
-     * Return the id of the first element on the list
-     *
-     * @return id of first element as string
-     */
-    String id();
-
-    /**
-     * Return a custom attribute of the first element on the list
-     *
-     * @param attribute attribute name
-     * @return custom attribute name for the first element
-     */
-    String attribute(String attribute);
-
-    /**
-     * Return the name of the first element on the list
-     *
-     * @return name of the first element
-     */
-    String name();
-
-    /**
-     * Return the tag name of the first element on the list
-     *
-     * @return tag name of the first element
-     */
-    String tagName();
-
-    /**
-     * Return the text of the first element on the list
-     *
-     * @return text of the first element on the list
-     */
-    String text();
-
-    /**
-     * Return the text content of the first element on the list
-     *
-     * @return text content of the first element on the list
-     */
-    String textContent();
-
-    /**
      * find elements into the children with the corresponding filters
      *
      * @param selector element name
