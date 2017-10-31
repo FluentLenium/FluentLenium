@@ -55,7 +55,7 @@ public class ActionOnListTest extends IntegrationFluentTest {
     public void checkFillFileInput() {
         goTo(DEFAULT_URL);
         $("#fileUpload").fill().with("/data/fileName");
-        assertThat($("#fileUpload").value()).endsWith("fileName");
+        assertThat($("#fileUpload").first().value()).endsWith("fileName");
     }
 
     @Test
@@ -63,6 +63,6 @@ public class ActionOnListTest extends IntegrationFluentTest {
     public void checkFillFileInputUpperCase() {
         goTo(DEFAULT_URL);
         $("#fileUpload2").fill().with("/data/fileName");
-        assertThat($("#fileUpload2").value()).endsWith("fileName");
+        assertThat($("#fileUpload2").first().value()).endsWith("fileName");
     }
 }

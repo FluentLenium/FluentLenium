@@ -82,7 +82,7 @@ public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     public void checkFillWorks() {
         goTo(DEFAULT_URL);
         $(withId("name")).fill().with("FillTest");
-        assertThat($("#name").value()).isEqualTo("FillTest");
+        assertThat($("#name").first().value()).isEqualTo("FillTest");
     }
 
     @Test
@@ -105,9 +105,9 @@ public class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     @Test
     public void checkClearWorks() {
         goTo(DEFAULT_URL);
-        assertThat($("#name").value()).isEqualTo("John");
+        assertThat($("#name").first().value()).isEqualTo("John");
         $(withId("name")).clear();
-        assertThat($("#name").value()).isEqualTo("");
+        assertThat($("#name").first().value()).isEqualTo("");
     }
 
     @Test
