@@ -277,13 +277,13 @@ If you need to build another Fluent Locator from the position in the DOM of an e
 can use [XPath axes](https://www.w3schools.com/xml/xpath_axes.asp).
 
 ```java
-$(".fluent"()).axes().parent()
-$(".fluent"()).axes().descendants()
-$(".fluent"()).axes().ancestors()
-$(".fluent"()).axes().followings()
-$(".fluent"()).axes().followingSiblings()
-$(".fluent"()).axes().precedings()
-$(".fluent"()).axes().precedingSiblings()
+$(".fluent"()).dom().parent()
+$(".fluent"()).dom().descendants()
+$(".fluent"()).dom().ancestors()
+$(".fluent"()).dom().followings()
+$(".fluent"()).dom().followingSiblings()
+$(".fluent"()).dom().precedings()
+$(".fluent"()).dom().precedingSiblings()
 ```
 
 ## Located Elements

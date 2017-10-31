@@ -15,14 +15,14 @@ public class AxesTest extends IntegrationFluentTest {
     public void checkSearchParentWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement element = el(".parent > .child");
-        assertThat(element.axes().parent().attribute("class")).isEqualTo("parent");
+        assertThat(element.dom().parent().attribute("class")).isEqualTo("parent");
     }
 
     @Test
     public void checkSearchAncestorsWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement element = el("html > body > .parent > .child");
-        FluentList<FluentWebElement> ancestors = element.axes().ancestors();
+        FluentList<FluentWebElement> ancestors = element.dom().ancestors();
         assertThat(ancestors).hasSize(3);
 
         assertThat(ancestors.get(0).tagName()).isEqualTo("html");
@@ -35,7 +35,7 @@ public class AxesTest extends IntegrationFluentTest {
     public void checkSearchDescendantsWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement element = el("html");
-        FluentList<FluentWebElement> descendants = element.axes().descendants();
+        FluentList<FluentWebElement> descendants = element.dom().descendants();
         assertThat(descendants.size()).isGreaterThan(10);
     }
 
@@ -43,7 +43,7 @@ public class AxesTest extends IntegrationFluentTest {
     public void checkSearchPrecedingWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement element = el("#select > option[value='value-2']");
-        FluentList<FluentWebElement> precedings = element.axes().precedings();
+        FluentList<FluentWebElement> precedings = element.dom().precedings();
         assertThat(precedings.size()).isGreaterThan(2);
 
         Collections.reverse(precedings);
@@ -56,7 +56,7 @@ public class AxesTest extends IntegrationFluentTest {
     public void checkSearchPrecedingSiblingWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement element = el("#select > option[value='value-2']");
-        FluentList<FluentWebElement> precedings = element.axes().precedingSiblings();
+        FluentList<FluentWebElement> precedings = element.dom().precedingSiblings();
         assertThat(precedings).hasSize(1);
 
         assertThat(precedings.get(0).tagName()).isEqualTo("option");
@@ -67,7 +67,7 @@ public class AxesTest extends IntegrationFluentTest {
     public void checkSearchFollowingWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement element = el("#select > option[value='value-2']");
-        FluentList<FluentWebElement> followings = element.axes().followings();
+        FluentList<FluentWebElement> followings = element.dom().followings();
         assertThat(followings.size()).isGreaterThan(2);
 
         assertThat(followings.get(0).tagName()).isEqualTo("option");
@@ -78,7 +78,7 @@ public class AxesTest extends IntegrationFluentTest {
     public void checkSearchFollowingSiblingWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement element = el("#select > option[value='value-2']");
-        FluentList<FluentWebElement> followings = element.axes().followingSiblings();
+        FluentList<FluentWebElement> followings = element.dom().followingSiblings();
         assertThat(followings).hasSize(1);
 
         assertThat(followings.get(0).tagName()).isEqualTo("option");

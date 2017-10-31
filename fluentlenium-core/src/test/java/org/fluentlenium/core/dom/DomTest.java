@@ -1,4 +1,4 @@
-package org.fluentlenium.core.axes;
+package org.fluentlenium.core.dom;
 
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.ComponentInstantiator;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AxesTest {
+public class DomTest {
     @Mock
     private WebElement element;
 
@@ -41,72 +41,72 @@ public class AxesTest {
 
     @Test
     public void testAncestors() {
-        Axes axes = new Axes(element, instantiator);
+        Dom dom = new Dom(element, instantiator);
 
         List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("ancestor::*"))).thenReturn(elements);
 
-        assertThat(axes.ancestors().toElements()).isEqualTo(elements);
+        assertThat(dom.ancestors().toElements()).isEqualTo(elements);
     }
 
     @Test
     public void testDescendants() {
-        Axes axes = new Axes(element, instantiator);
+        Dom dom = new Dom(element, instantiator);
 
         List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("descendant::*"))).thenReturn(elements);
 
-        assertThat(axes.descendants().toElements()).isEqualTo(elements);
+        assertThat(dom.descendants().toElements()).isEqualTo(elements);
     }
 
     @Test
     public void testFollowings() {
-        Axes axes = new Axes(element, instantiator);
+        Dom dom = new Dom(element, instantiator);
 
         List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("following::*"))).thenReturn(elements);
 
-        assertThat(axes.followings().toElements()).isEqualTo(elements);
+        assertThat(dom.followings().toElements()).isEqualTo(elements);
     }
 
     @Test
     public void testFollowingSiblings() {
-        Axes axes = new Axes(element, instantiator);
+        Dom dom = new Dom(element, instantiator);
 
         List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("following-sibling::*"))).thenReturn(elements);
 
-        assertThat(axes.followingSiblings().toElements()).isEqualTo(elements);
+        assertThat(dom.followingSiblings().toElements()).isEqualTo(elements);
     }
 
     @Test
     public void testPrecedings() {
-        Axes axes = new Axes(element, instantiator);
+        Dom dom = new Dom(element, instantiator);
 
         List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("preceding::*"))).thenReturn(elements);
 
-        assertThat(axes.precedings().toElements()).isEqualTo(elements);
+        assertThat(dom.precedings().toElements()).isEqualTo(elements);
     }
 
     @Test
     public void testPrecedingSiblings() {
-        Axes axes = new Axes(element, instantiator);
+        Dom dom = new Dom(element, instantiator);
 
         List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));
         when(element.findElements(By.xpath("preceding-sibling::*"))).thenReturn(elements);
 
-        assertThat(axes.precedingSiblings().toElements()).isEqualTo(elements);
+        assertThat(dom.precedingSiblings().toElements()).isEqualTo(elements);
     }
 
     @Test
     public void testParent() {
-        Axes axes = new Axes(element, instantiator);
+        Dom dom = new Dom(element, instantiator);
 
         WebElement parent = mock(WebElement.class);
         when(element.findElement(By.xpath("parent::*"))).thenReturn(parent);
 
-        assertThat(axes.parent().getElement()).isEqualTo(parent);
+        assertThat(dom.parent().getElement()).isEqualTo(parent);
     }
 
 }

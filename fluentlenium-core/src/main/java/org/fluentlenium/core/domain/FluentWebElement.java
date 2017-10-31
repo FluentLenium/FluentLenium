@@ -9,7 +9,7 @@ import org.fluentlenium.core.action.FluentJavascriptActionsImpl;
 import org.fluentlenium.core.action.InputControl;
 import org.fluentlenium.core.action.KeyboardElementActions;
 import org.fluentlenium.core.action.MouseElementActions;
-import org.fluentlenium.core.axes.Axes;
+import org.fluentlenium.core.dom.Dom;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
@@ -48,7 +48,7 @@ public class FluentWebElement extends Component
         implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>, FluentProxyState<FluentWebElement>,
         SearchControl<FluentWebElement>, HookControl<FluentWebElement>, FluentLabel<FluentWebElement> {
     private final Search search;
-    private final Axes axes;
+    private final Dom dom;
     private final MouseElementActions mouseActions;
     private final KeyboardElementActions keyboardActions;
     private final WebElementConditions conditions;
@@ -85,7 +85,7 @@ public class FluentWebElement extends Component
                 });
 
         search = new Search(element, this, this.instantiator, this.control);
-        axes = new Axes(element, this.instantiator);
+        dom = new Dom(element, this.instantiator);
         mouseActions = new MouseElementActions(this.control.getDriver(), element);
         keyboardActions = new KeyboardElementActions(this.control.getDriver(), element);
         conditions = new WebElementConditions(this);
@@ -161,8 +161,18 @@ public class FluentWebElement extends Component
      *
      * @return object to perform XPath Axes transformations.
      */
-    public Axes axes() {
-        return axes;
+    @Deprecated
+    public Dom axes() {
+        return dom;
+    }
+
+    /**
+     * XPath Axes accessor (parent, ancestors, preceding, following, ...).
+     *
+     * @return object to perform XPath Axes transformations.
+     */
+    public Dom dom() {
+        return dom;
     }
 
     /**
