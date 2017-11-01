@@ -7,7 +7,7 @@ engines:
   checkstyle:
     enabled: true
     config: dev-config/checkstyle/fluentlenium_checks.xml
-    channel: "stable"
+    channel: "beta"
 
 ratings:
   paths:
