@@ -5,6 +5,7 @@ import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class FluentListParamTest extends IntegrationFluentTest {
 
@@ -51,10 +52,14 @@ public class FluentListParamTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void checkValueAction() {
+    public void checkSingleAction() {
         goTo(DEFAULT_URL);
         FluentList list = find("input");
-        assertThat(list.first().value()).isEqualTo("John");
+        assertThatThrownBy(() -> list.single().value())
+                .hasMessageContaining("Elements By.cssSelector: input")
+                .hasMessageContaining("there are [ 10 ] elements instead");
+
+        assertThat($("#id2").single().text()).contains("Small 2");
     }
 
     @Test
