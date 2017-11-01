@@ -129,6 +129,17 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
+    public E single() {
+        if (size() > 1) {
+            throw new AssertionError(String.format("%s list should contain one " +
+                    "element only but there are [ %s ] elements instead",
+                    LocatorProxies.getMessageContext(proxy), size()));
+        }
+
+        return first();
+    }
+
+    @Override
     public E last() {
         if (!LocatorProxies.loaded(proxy)) {
             E component = instantiator.newComponent(componentClass, LocatorProxies.last(proxy));

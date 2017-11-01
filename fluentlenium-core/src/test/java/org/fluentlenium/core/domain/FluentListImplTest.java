@@ -1,6 +1,5 @@
 package org.fluentlenium.core.domain;
 
-import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
@@ -40,6 +39,7 @@ public class FluentListImplTest {
     private WebDriver driver;
 
     private FluentList<FluentWebElement> list;
+    private FluentList<FluentWebElement> singleList;
     private FluentList<FluentWebElement> emptyList;
 
     private FluentAdapter fluentAdapter;
@@ -56,6 +56,7 @@ public class FluentListImplTest {
         when(element3.conditions()).thenReturn(new WebElementConditions(element3));
 
         list = spy(fluentAdapter.newFluentList(element1, element2, element3));
+        singleList = spy(fluentAdapter.newFluentList(element2));
     }
 
     @After
@@ -75,6 +76,14 @@ public class FluentListImplTest {
         assertThat(list.last()).isSameAs(element3);
 
         assertThatThrownBy(() -> emptyList.last()).isExactlyInstanceOf(NoSuchElementException.class);
+    }
+
+    @Test
+    public void testSingle() {
+        assertThat(singleList.single()).isSameAs(element2);
+
+        assertThatThrownBy(() -> list.single()).isExactlyInstanceOf(AssertionError.class)
+                .hasMessageContaining("list should contain one element only but there are");
     }
 
     @Test
