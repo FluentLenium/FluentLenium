@@ -41,19 +41,17 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
     @Override
     public String getUrl() {
         if (getClass().isAnnotationPresent(PageUrl.class)) {
-            String url = StringUtils.EMPTY;
-
-            if (getClass().getAnnotation(PageUrl.class).isLocalFile()) {
-               url = getAbsoluteUrlFromFile(getClass().getAnnotation(PageUrl.class).file());
-            }
-
-            url += getClass().getAnnotation(PageUrl.class).value();
+            String url = getPageUrlValue(getClass().getAnnotation(PageUrl.class));
 
             if (!url.isEmpty()) {
                 return url;
             }
         }
         return null;
+    }
+
+    private String getPageUrlValue(PageUrl pageUrl) {
+        return  ((pageUrl.isLocalFile()) ? getAbsoluteUrlFromFile(pageUrl.file()) : StringUtils.EMPTY) + pageUrl.value();
     }
 
     @Override
