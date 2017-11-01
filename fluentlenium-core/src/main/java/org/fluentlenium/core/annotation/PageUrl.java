@@ -17,8 +17,8 @@ public @interface PageUrl {
      * For example :
      * <code>@PageUrl("/index.html")</code>        should redirect to baseUrl + "/index.html"
      * <code>@PageUrl("http://example.com")</code> should redirect to "http://example.com"
-     * <code>@PageUrl(file = "index.html", value = "?param1={param1}&param2={param2}",
-     * isLocalFile = true)</code> should redirect to local file in current workspace
+     * <code>@PageUrl(file = "index.html" isLocalFile = true)</code> should redirect to
+     * "file://{resourcesDirectory}/index.html"
      *
      * @return page url
      */
