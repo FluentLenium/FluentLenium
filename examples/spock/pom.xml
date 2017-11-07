@@ -13,8 +13,9 @@
     <properties>
         <!-- Configure this property to latest available version -->
         <fluentlenium.version>3.4.1</fluentlenium.version>
-        <selenium.version>3.5.3</selenium.version>
         <spock.version>1.0-groovy-2.4</spock.version>
+        <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
+        <selenium.version>3.5.3</selenium.version>
     </properties>
 
     <dependencies>

@@ -30,6 +30,13 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 - Add dependencies to your `pom.xml`.
 
 ```xml
+<properties>
+    <!-- Configure this property to latest available version -->
+    <fluentlenium.version>3.4.1</fluentlenium.version>
+    <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
+    <selenium.version>3.5.3</selenium.version>
+</properties>
+
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
@@ -51,13 +58,7 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>htmlunit-driver</artifactId>
-    <version>2.25</version>
-    <scope>test</scope>
-</dependency>
-<dependency>
-    <groupId>xml-apis</groupId>
-    <artifactId>xml-apis</artifactId>
-    <version>1.4.01</version>
+    <version>2.27</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -80,7 +81,6 @@ public class DuckDuckGoTest extends FluentTest {
         goTo("https://duckduckgo.com");
         $("#search_form_input_homepage").fill().with("FluentLenium");
         $("#search_button_homepage").submit();
-        await().atMost(5, TimeUnit.SECONDS).until(el("#search_form_homepage")).not().present();
         assertThat(window().title()).contains("FluentLenium");
     }
 }
