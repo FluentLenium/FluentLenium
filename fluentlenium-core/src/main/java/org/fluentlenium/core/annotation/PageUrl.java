@@ -17,8 +17,12 @@ public @interface PageUrl {
      * For example :
      * <code>@PageUrl("/index.html")</code>        should redirect to baseUrl + "/index.html"
      * <code>@PageUrl("http://example.com")</code> should redirect to "http://example.com"
+     * <code>@PageUrl(file = "index.html" isLocalFile = true)</code> should redirect to
+     * "file://{resourcesDirectory}/index.html"
      *
      * @return page url
      */
     String value();
+    String file() default "";
+    boolean isLocalFile() default false;
 }
