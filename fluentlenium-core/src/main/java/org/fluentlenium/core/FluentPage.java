@@ -1,5 +1,8 @@
 package org.fluentlenium.core;
 
+import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
+
+import org.apache.commons.lang3.StringUtils;
 import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.core.page.ClassAnnotations;
 import org.fluentlenium.core.url.ParsedUrlTemplate;
@@ -38,12 +41,17 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
     @Override
     public String getUrl() {
         if (getClass().isAnnotationPresent(PageUrl.class)) {
-            String url = getClass().getAnnotation(PageUrl.class).value();
+            String url = getPageUrlValue(getClass().getAnnotation(PageUrl.class));
+
             if (!url.isEmpty()) {
                 return url;
             }
         }
         return null;
+    }
+
+    private String getPageUrlValue(PageUrl pageUrl) {
+        return ((pageUrl.isLocalFile()) ? getAbsoluteUrlFromFile(pageUrl.file()) : StringUtils.EMPTY) + pageUrl.value();
     }
 
     @Override

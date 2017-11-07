@@ -277,13 +277,13 @@ If you need to build another Fluent Locator from the position in the DOM of an e
 can use [XPath axes](https://www.w3schools.com/xml/xpath_axes.asp).
 
 ```java
-$(".fluent"()).dom().parent()
-$(".fluent"()).dom().descendants()
-$(".fluent"()).dom().ancestors()
-$(".fluent"()).dom().followings()
-$(".fluent"()).dom().followingSiblings()
-$(".fluent"()).dom().precedings()
-$(".fluent"()).dom().precedingSiblings()
+$(".fluent"()).axes().parent()
+$(".fluent"()).axes().descendants()
+$(".fluent"()).axes().ancestors()
+$(".fluent"()).axes().followings()
+$(".fluent"()).axes().followingSiblings()
+$(".fluent"()).axes().precedings()
+$(".fluent"()).axes().precedingSiblings()
 ```
 
 ## Located Elements
@@ -515,7 +515,7 @@ public class MyPage extends FluentPage {
 
 It's possible to define parameters in FluentPage url using `{[?][/path/]parameter}` syntax.
 If it starts with `?`, it means that the parameter is optional. Path can be included in the braces so it
-is removed when parameter value is not defined.
+is removed when parameter value is not defined.
 
 ```java
 @PageUrl("/document/{document}{?/page/page}{?/format}")
@@ -525,6 +525,18 @@ public class DocumentPage extends FluentPage {
             return this;
         }
         ...
+}
+```
+
+You can also refer to files in your `resorurces` directory by adding `isLocalFile` parameter
+
+```java
+@PageUrl(file = "page2url.html", value = "?param1={param1}&param2={param2}", isLocalFile = true)
+class Page2DynamicP2P1 extends FluentPage {
+    @Override
+    protected void isAtUsingUrl(String urlTemplate) {
+        //overridden to skip URL check because PageUrl is not able to get local file path relatively
+    }
 }
 ```
 

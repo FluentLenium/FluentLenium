@@ -22,6 +22,7 @@
 -->
 
 <module name="Checker">
+    <property name="severity" value="warning"/>
     <property name="fileExtensions" value="java, js, json, xml, yml"/>
 
     <!--    Ability to turn off checkstyle using comments. Example :
