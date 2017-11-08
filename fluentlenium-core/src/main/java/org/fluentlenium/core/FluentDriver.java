@@ -23,6 +23,7 @@ import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWait;
+import org.fluentlenium.utils.ImageUtils;
 import org.fluentlenium.utils.UrlUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
@@ -31,6 +32,7 @@ import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -172,7 +174,14 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
         if (!canTakeScreenShot()) {
             throw new WebDriverException("Current browser doesn't allow taking screenshot.");
         }
-        File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+
+        byte[] screenshot;
+        try{
+            screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        }catch (UnhandledAlertException uae){
+            ImageUtils imageUtils = new ImageUtils(getDriver());
+            screenshot = imageUtils.handleAlertAndTakeScreenshot();
+        }
         try {
             File destFile;
             if (configuration.getScreenshotPath() == null) {
@@ -180,12 +189,11 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
             } else {
                 destFile = Paths.get(configuration.getScreenshotPath(), fileName).toFile();
             }
-            FileUtils.copyFile(scrFile, destFile);
+            FileUtils.writeByteArrayToFile(destFile, screenshot);
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("error when taking the snapshot", e);
         }
-        FileUtils.deleteQuietly(scrFile);
     }
 
     @Override

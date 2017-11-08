@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
@@ -171,7 +172,9 @@ public class FluentTestTest {
             }
 
             ScreenshotWebDriver webDriver = Mockito.mock(ScreenshotWebDriver.class);
-            Mockito.when(webDriver.getScreenshotAs(OutputType.FILE)).thenReturn(screenshotFile);
+            byte[] screenshot = new byte[20];
+            new Random().nextBytes(screenshot);
+            Mockito.when(webDriver.getScreenshotAs(OutputType.BYTES)).thenReturn(screenshotData);
 
             WebElement htmlElement = Mockito.mock(WebElement.class);
             Mockito.when(htmlElement.getAttribute("innerHTML")).thenReturn(html);
@@ -270,7 +273,7 @@ public class FluentTestTest {
 
         ScreenshotWebDriver driver = screenshotWebDrivers.get(0);
 
-        Mockito.verify(driver).getScreenshotAs(OutputType.FILE);
+        Mockito.verify(driver).getScreenshotAs(OutputType.BYTES);
         Mockito.verify(driver).findElements(By.cssSelector("html"));
 
         assertThat(tmpPath.list()).contains("AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"

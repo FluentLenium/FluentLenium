@@ -2,10 +2,12 @@ package org.fluentlenium.adapter;
 
 import org.apache.commons.io.FileUtils;
 import org.fluentlenium.configuration.ConfigurationProperties;
+import org.fluentlenium.utils.ImageUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +15,10 @@ import org.openqa.selenium.WebDriver;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Random;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyByte;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isNull;
@@ -26,6 +31,9 @@ import static org.mockito.Mockito.when;
 public class FluentTestRunnerAdapterTest {
     @Mock
     private TestWebDriver driver;
+
+    @Mock
+    private ImageUtils imageUtils;
 
     private interface TestWebDriver extends WebDriver, TakesScreenshot {
     }
@@ -85,9 +93,9 @@ public class FluentTestRunnerAdapterTest {
         adapter.getConfiguration().setScreenshotPath(tmpDirectory.toFile().getPath());
         adapter.getConfiguration().setHtmlDumpPath(tmpDirectory.toFile().getPath());
 
-        Path tempFile = Files.createTempFile("testFailedWhenDriverAvailable", "");
-        when(driver.getScreenshotAs(OutputType.FILE)).thenReturn(tempFile.toFile());
-        tempFile.toFile().deleteOnExit();
+        byte[] screenshot = new byte[20];
+        new Random().nextBytes(screenshot);
+        when(driver.getScreenshotAs(OutputType.BYTES)).thenReturn(screenshot);
 
         adapter.getConfiguration().setScreenshotMode(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
         adapter.getConfiguration().setHtmlDumpMode(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
