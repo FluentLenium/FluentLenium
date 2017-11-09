@@ -99,28 +99,25 @@ public class ImageUtils {
         graphics.fillRect(0, 0, width, height);
         graphics.setColor(Color.BLACK);
         graphics.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
-        drawStringMultiLine(graphics, text, (width - 200) - 10, 10, 25);
+        drawStringMultiLine(graphics, text, (width - 200) - 10);
         return alertImage;
     }
 
-    private void drawStringMultiLine(Graphics g, String text, int lineWidth, int x, int y) {
+    private void drawStringMultiLine(Graphics g, String text, int lineWidth) {
         FontMetrics m = g.getFontMetrics();
-        if (m.stringWidth(text) < lineWidth) {
-            g.drawString(text, x, y);
-        } else {
-            String[] words = text.trim().split(" ");
-            StringBuilder cache = new StringBuilder(words[0]);
-            for (int i = 1; i < words.length; i++) {
-                if (m.stringWidth(cache + words[i]) < lineWidth) {
-                    cache.append(" ").append(words[i]);
-                } else {
-                    g.drawString(cache.toString(), x, y);
-                    y += m.getHeight();
-                    cache = new StringBuilder(words[i]);
-                }
-            }
-            if (cache.toString().trim().length() > 0) {
-                g.drawString(cache.toString(), x, y);
+        int xPosition = 10;
+        int yPosition=25;
+        String[] words = text.trim().split("\\b");
+
+        for(int i=0; i<words.length; i++) {
+            if (xPosition + m.stringWidth(words[i]) < lineWidth) {
+                g.drawString(words[i], xPosition, yPosition);
+                xPosition += m.stringWidth(words[i]);
+            } else {
+                xPosition = 10;
+                yPosition += m.getHeight();
+                g.drawString(words[i], xPosition, yPosition);
+                xPosition += m.stringWidth(words[i]);
             }
         }
     }
