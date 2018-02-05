@@ -75,7 +75,7 @@ public final class CalculateService {
      */
 
     public static boolean endsWith(Pattern patternValue, String referenceValue, String currentValue) {
-        if (currentValue == null) {
+        if (currentValue == null || currentValue.isEmpty()) {
             return false;
         }
         if (patternValue == null) {
