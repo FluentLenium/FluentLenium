@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.junit;
+package org.fluentlenium.adapter.junit5;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,16 +1,16 @@
-package org.fluentlenium.adapter.junit.integration;
+package org.fluentlenium.adapter.junit5.integration;
 
 import net.jcip.annotations.NotThreadSafe;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.util.Files;
 import org.fluentlenium.adapter.SharedWebDriverContainer;
-import org.fluentlenium.adapter.junit.FluentJUnit5;
-import org.fluentlenium.adapter.junit.FluentTest;
+import org.fluentlenium.adapter.junit5.FluentJUnit5;
+import org.fluentlenium.adapter.junit5.FluentTest;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.configuration.FluentConfiguration.BooleanValue;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.engine.TestExecutionResult;
 import org.junit.platform.launcher.Launcher;
@@ -19,8 +19,7 @@ import org.junit.platform.launcher.TestExecutionListener;
 import org.junit.platform.launcher.TestIdentifier;
 import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
 import org.junit.platform.launcher.core.LauncherFactory;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
+import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 import org.mockito.Mockito;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -31,7 +30,6 @@ import org.openqa.selenium.WebElement;
 import java.io.File;
 import java.io.IOError;
 import java.io.IOException;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -91,17 +89,17 @@ public class FluentTestTest {
             return webDriver;
         }
 
-        @org.junit.jupiter.api.Test
+        @Test
         public void okTest() {
             goTo("url");
         }
 
-        @org.junit.jupiter.api.Test
+        @Test
         public void okTest2() {
             goTo("url2");
         }
 
-        @org.junit.jupiter.api.Test
+        @Test
         public void failingTest() {
             fail("Failing Test");
         }
@@ -223,7 +221,7 @@ public class FluentTestTest {
         }
     }
 
-    @After
+    @AfterEach
     public void after() {
         drivers.clear();
         sharedClassDrivers.clear();
@@ -234,9 +232,8 @@ public class FluentTestTest {
 
     @Test
     public void testFluentTest() {
-        Result result = JUnitCore.runClasses(InternalTest.class);
-        assertThat(result.getFailures()).hasSize(1);
-        assertThat(result.getFailures().get(0).getMessage()).isEqualTo("Failing Test");
+        SummaryGeneratingListener summaryGeneratingListener = getSummaryGeneratingListener(InternalTestSharedClass.class);
+        assertThat(summaryGeneratingListener.getSummary().getFailures().get(0).getException().getMessage()).isEqualTo("Failing Test");
 
         assertThat(drivers).hasSize(3);
 
@@ -281,9 +278,11 @@ public class FluentTestTest {
 
     @Test
     public void testInternalTestSharedClass() {
-        Result result = JUnitCore.runClasses(InternalTestSharedClass.class);
-        assertThat(result.getFailures()).hasSize(1);
-        assertThat(result.getFailures().get(0).getMessage()).isEqualTo("Failing Test");
+        SummaryGeneratingListener summaryGeneratingListener = getSummaryGeneratingListener(InternalTestSharedClass.class);
+
+        assertThat(summaryGeneratingListener.getSummary().getFailures()).hasSize(1);
+        assertThat(summaryGeneratingListener.getSummary().getFailures().get(0).getException().getMessage())
+                .isEqualTo("Failing Test");
 
         assertThat(sharedClassDrivers).hasSize(1);
 
@@ -294,11 +293,23 @@ public class FluentTestTest {
         assertThat(SharedWebDriverContainer.INSTANCE.getTestClassDrivers(InternalTest.class)).isEmpty();
     }
 
+    private SummaryGeneratingListener getSummaryGeneratingListener(Class<? extends FluentTest> testClass) {
+        LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder.request()
+                .selectors(selectClass(testClass)).build();
+
+        Launcher launcher = LauncherFactory.create();
+        SummaryGeneratingListener summaryGeneratingListener
+                = new SummaryGeneratingListener();
+
+        launcher.execute(request, new TestExecutionListener[] { summaryGeneratingListener });
+        return summaryGeneratingListener;
+    }
+
     @Test
     public void testInternalTestSharedOnce() {
-        Result result = JUnitCore.runClasses(InternalTestSharedOnce.class);
-        assertThat(result.getFailures()).hasSize(1);
-        assertThat(result.getFailures().get(0).getMessage()).isEqualTo("Failing Test");
+        SummaryGeneratingListener summaryGeneratingListener = getSummaryGeneratingListener(InternalTestSharedOnce.class);
+        assertThat(summaryGeneratingListener.getSummary().getFailures()).hasSize(1);
+        assertThat(summaryGeneratingListener.getSummary().getFailures().get(0).getException().getMessage()).isEqualTo("Failing Test");
 
         assertThat(sharedOnceDrivers).hasSize(1);
 
@@ -311,9 +322,9 @@ public class FluentTestTest {
 
     @Test
     public void testShouldDeleteCookiesTest() {
-        Result result = JUnitCore.runClasses(ShouldDeleteCookiesTest.class);
-        assertThat(result.getFailures()).hasSize(1);
-        assertThat(result.getFailures().get(0).getMessage()).isEqualTo("Failing Test");
+        SummaryGeneratingListener summaryGeneratingListener = getSummaryGeneratingListener(ShouldDeleteCookiesTest.class);
+        assertThat(summaryGeneratingListener.getSummary().getFailures()).hasSize(1);
+        assertThat(summaryGeneratingListener.getSummary().getFailures().get(0).getException().getMessage()).isEqualTo("Failing Test");
 
         assertThat(sharedClassDrivers).hasSize(1);
 
@@ -330,9 +341,9 @@ public class FluentTestTest {
 
     @Test
     public void testAutomaticScreenShotTest() throws IOException {
-        Result result = JUnitCore.runClasses(AutomaticScreenShotTest.class);
-        assertThat(result.getFailures()).hasSize(1);
-        assertThat(result.getFailures().get(0).getMessage()).isEqualTo("Failing Test");
+        SummaryGeneratingListener summaryGeneratingListener = getSummaryGeneratingListener(AutomaticScreenShotTest.class);
+        assertThat(summaryGeneratingListener.getSummary().getFailures()).hasSize(1);
+        assertThat(summaryGeneratingListener.getSummary().getFailures().get(0).getException().getMessage()).isEqualTo("Failing Test");
 
         assertThat(screenshotWebDrivers).hasSize(1);
 

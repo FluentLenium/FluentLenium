@@ -1,7 +1,7 @@
 package org.fluentlenium.adapter.spock
 
 import org.fluentlenium.adapter.FluentTestRunnerAdapter
-import org.fluentlenium.adapter.junit.FluentTestRule
+import org.fluentlenium.adapter.junit5.FluentTestRule
 import org.fluentlenium.core.domain.FluentList
 import org.fluentlenium.core.domain.FluentWebElement
 import org.fluentlenium.core.search.SearchFilter

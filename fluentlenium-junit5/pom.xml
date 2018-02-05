@@ -8,9 +8,9 @@
         <version>3.4.1</version>
     </parent>
 
-    <artifactId>fluentlenium-junit</artifactId>
-    <name>FluentLenium JUnit</name>
-    <description>JUnit 4.x Adapter for FluentLenium</description>
+    <artifactId>fluentlenium-junit5</artifactId>
+    <name>FluentLenium JUnit5</name>
+    <description>JUnit 5.x Adapter for FluentLenium</description>
 
     <dependencies>
         <dependency>
@@ -19,9 +19,19 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.github.stephenc.jcip</groupId>

@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.junit;
+package org.fluentlenium.adapter.junit5;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;

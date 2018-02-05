@@ -14,6 +14,7 @@
         <module>fluentlenium-core</module>
         <module>fluentlenium-assertj</module>
         <module>fluentlenium-junit</module>
+        <module>fluentlenium-junit5</module>
         <module>fluentlenium-testng</module>
         <module>fluentlenium-cucumber</module>
         <module>fluentlenium-spock</module>
@@ -149,6 +150,7 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>4.12</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.github.stephenc.jcip</groupId>
@@ -184,21 +186,6 @@
                 <groupId>org.spockframework</groupId>
                 <artifactId>spock-core</artifactId>
                 <version>1.0-groovy-2.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
-                <version>5.0.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.0.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.platform</groupId>
-                <artifactId>junit-platform-launcher</artifactId>
-                <version>1.0.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

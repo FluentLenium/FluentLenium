@@ -1,6 +1,6 @@
 package org.fluentlenium.example.spring;
 
-import org.fluentlenium.adapter.junit.FluentTest;
+import org.fluentlenium.adapter.junit5.FluentTest;
 import org.fluentlenium.example.spring.config.BrowserConfig;
 import org.fluentlenium.example.spring.config.Config;
 import org.fluentlenium.example.spring.config.SeleniumBrowserConfigProperties;

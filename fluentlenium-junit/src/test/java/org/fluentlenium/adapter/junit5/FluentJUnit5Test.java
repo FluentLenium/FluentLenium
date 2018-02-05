@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.junit;
+package org.fluentlenium.adapter.junit5;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
