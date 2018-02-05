@@ -9,8 +9,8 @@ import java.util.Locale;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.json.JsonException;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.JsonException;
 import org.openqa.selenium.remote.JsonToBeanConverter;
 
 /**
