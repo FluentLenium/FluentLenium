@@ -6,7 +6,6 @@ import org.fluentlenium.core.filter.matcher.EqualMatcher;
 import org.fluentlenium.core.search.SearchFilter;
 
 import java.util.Collection;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -44,7 +43,7 @@ public class AttributeFilter implements SearchFilter {
      * @return attribute name (lower case)
      */
     public String getAttribut() {
-        return attributeName.toLowerCase(Locale.ENGLISH);
+        return attributeName;
     }
 
     /**

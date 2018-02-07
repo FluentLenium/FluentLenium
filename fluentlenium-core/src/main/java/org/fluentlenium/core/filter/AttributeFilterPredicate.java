@@ -1,7 +1,6 @@
 package org.fluentlenium.core.filter;
 
 import org.fluentlenium.core.domain.FluentWebElement;
-
 import java.util.function.Predicate;
 
 /**
@@ -15,15 +14,14 @@ public class AttributeFilterPredicate implements Predicate<FluentWebElement> {
      *
      * @param filter attribute filter
      */
-    public AttributeFilterPredicate(AttributeFilter filter) {
+    AttributeFilterPredicate(AttributeFilter filter) {
         this.filter = filter;
     }
 
     @Override
     public boolean test(FluentWebElement element) {
-
         String attribute = getAttributeValue(element);
-        return filter != null && filter.getMatcher().isSatisfiedBy(attribute);
+        return filter.getMatcher().isSatisfiedBy(attribute);
     }
 
     private String getAttributeValue(FluentWebElement element) {
