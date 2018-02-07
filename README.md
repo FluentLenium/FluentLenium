@@ -39,7 +39,7 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
     <!-- Configure this property to latest available version -->
     <fluentlenium.version>3.5.0</fluentlenium.version>
     <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-    <selenium.version>3.8.1</selenium.version>
+    <selenium.version>3.9.0</selenium.version>
 </properties>
 
 <dependency>
