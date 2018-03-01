@@ -9,5 +9,4 @@ import org.junit.runner.RunWith;
         format = {"pretty", "html:target/cucumber", "json:target/cucumber.json"})
 public class BasicTest {
 
-
 }
