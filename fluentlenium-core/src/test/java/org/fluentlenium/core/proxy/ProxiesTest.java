@@ -1,6 +1,5 @@
 package org.fluentlenium.core.proxy;
 
-import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.domain.WrapsElements;
 import org.junit.Before;
 import org.junit.Test;
@@ -139,7 +138,8 @@ public class ProxiesTest {
 
     @Test
     public void testNullElementShouldThrowNoSuchElementException() {
-        assertThatThrownBy(() -> LocatorProxies.createWebElement((WebElement) null)).isExactlyInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> LocatorProxies.createWebElement((WebElement) null))
+                .isExactlyInstanceOf(NoSuchElementException.class);
 
         WebElement proxy = LocatorProxies.createWebElement(new ElementLocator() {
             @Override
