@@ -3,18 +3,18 @@
     <parent>
         <artifactId>fluentlenium-parent</artifactId>
         <groupId>org.fluentlenium</groupId>
-        <version>3.5.3-SNAPSHOT</version>
+        <version>3.6.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>fluentlenium-cucumber</artifactId>
     <packaging>jar</packaging>
 
-    <name>FluentLenium Cucumber JVM extension</name>
-    <description>Cucumber JVM Extension for FluentLenium</description>
+    <name>FluentLenium Cucumber</name>
+    <description>Cucumber Extension for FluentLenium</description>
 
     <properties>
-        <cucumber.version>1.2.5</cucumber.version>
+        <cucumber.version>2.3.1</cucumber.version>
     </properties>
 
     <dependencies>
@@ -36,11 +36,6 @@
             <artifactId>junit</artifactId>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-core</artifactId>
-            <version>${cucumber.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>htmlunit-driver</artifactId>
             <scope>test</scope>
@@ -51,22 +46,24 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-java</artifactId>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java8</artifactId>
             <version>${cucumber.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-picocontainer</artifactId>
             <version>${cucumber.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.github.stephenc.jcip</groupId>
@@ -82,5 +79,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
