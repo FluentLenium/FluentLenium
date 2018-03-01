@@ -36,11 +36,8 @@ public class FluentCucumberSharedMutatorTest {
         String testName = "test";
         DriverLifecycle driverLifecycle = DriverLifecycle.CLASS;
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle);
-            }
-        }).isExactlyInstanceOf(ConfigurationException.class).hasMessage("Cucumber doesn't support CLASS driverLifecycle.");
+        Assertions.assertThatThrownBy(() -> sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle))
+                .isExactlyInstanceOf(ConfigurationException.class)
+                .hasMessage("Cucumber doesn't support CLASS driverLifecycle.");
     }
 }
