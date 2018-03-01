@@ -1,5 +1,8 @@
 package org.fluentlenium.adapter.testng.integration;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import org.fluentlenium.adapter.testng.FluentTestNg;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
@@ -43,9 +46,10 @@ public class DontRunTestsWhenInitFailTest {
 
         testNG.run();
 
-        Mockito.verify(listenerAdapter).onConfigurationFailure(Mockito.any(ITestResult.class));
-        Mockito.verify(listenerAdapter).onTestSkipped(Mockito.any(ITestResult.class));
-        Mockito.verify(listenerAdapter, Mockito.never()).onTestSuccess(Mockito.any(ITestResult.class));
+        verify(listenerAdapter, times(2))
+                .onConfigurationFailure(Mockito.any(ITestResult.class));
+        verify(listenerAdapter).onTestSkipped(Mockito.any(ITestResult.class));
+        verify(listenerAdapter, Mockito.never()).onTestSuccess(Mockito.any(ITestResult.class));
     }
 
 }
