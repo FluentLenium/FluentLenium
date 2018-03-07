@@ -9,7 +9,7 @@
 
     <properties>
         <!-- Configure this property to latest available version -->
-        <fluentlenium.version>3.6.0-SNAPSHOT</fluentlenium.version>
+        <fluentlenium.version>${project.version}</fluentlenium.version>
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
         <selenium.version>3.9.1</selenium.version>
     </properties>
