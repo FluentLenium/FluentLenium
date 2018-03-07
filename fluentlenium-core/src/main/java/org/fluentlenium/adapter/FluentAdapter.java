@@ -1,6 +1,5 @@
 package org.fluentlenium.adapter;
 
-import lombok.experimental.Delegate;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.configuration.ConfigurationFactoryProvider;
 import org.fluentlenium.configuration.ConfigurationProperties;
@@ -12,6 +11,8 @@ import org.fluentlenium.core.inject.ContainerContext;
 import org.fluentlenium.core.inject.ContainerFluentControl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+
+import lombok.experimental.Delegate;
 
 /**
  * Generic adapter to {@link FluentDriver}.
@@ -51,7 +52,13 @@ public class FluentAdapter implements FluentControl {
     @Delegate(types = FluentControl.class, excludes = {SeleniumDriverControl.class, Configuration.class})
     // We want getDriver to be final.
     private ContainerFluentControl getFluentControl() {
-        return (ContainerFluentControl) getControlContainer().getFluentControl();
+        ContainerFluentControl containerFluentControl = (ContainerFluentControl) getControlContainer().getFluentControl();
+
+        if (containerFluentControl != null) {
+            return containerFluentControl;
+        } else {
+            throw new IllegalStateException("FluentControl is not initialized, WebDriver or Configuration issue");
+        }
     }
 
     /**
