@@ -6,47 +6,48 @@
 
     <artifactId>fluentlenium-examples-spock</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>3.4.1</version>
+    <version>3.6.0-SNAPSHOT</version>
 
     <name>FluentLenium Examples Spock</name>
 
     <properties>
         <!-- Configure this property to latest available version -->
-        <fluentlenium.version>3.4.1</fluentlenium.version>
-        <spock.version>1.0-groovy-2.4</spock.version>
+        <fluentlenium.version>3.6.0-SNAPSHOT</fluentlenium.version>
+        <spock.version>1.1-groovy-2.4</spock.version>
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-        <selenium.version>3.5.3</selenium.version>
+        <selenium.version>3.9.1</selenium.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.fluentlenium</groupId>
+            <artifactId>fluentlenium-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-spock</artifactId>
-            <version>${fluentlenium.version}</version>
-            <scope>test</scope>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.fluentlenium</groupId>
+            <artifactId>fluentlenium-junit</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
+            <artifactId>selenium-api</artifactId>
             <version>${selenium.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>1.6.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.21</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.spockframework</groupId>
             <artifactId>spock-core</artifactId>
             <version>${spock.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
