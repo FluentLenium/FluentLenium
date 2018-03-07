@@ -54,10 +54,10 @@ public class FluentAdapter implements FluentControl {
     private ContainerFluentControl getFluentControl() {
         FluentControlContainer fluentControlContainer = getControlContainer();
 
-        if (fluentControlContainer != null) {
-            return (ContainerFluentControl)fluentControlContainer.getFluentControl();
-        } else {
+        if (fluentControlContainer == null) {
             throw new IllegalStateException("FluentControl is not initialized, WebDriver or Configuration issue");
+        } else {
+            return (ContainerFluentControl) fluentControlContainer.getFluentControl();
         }
     }
 
