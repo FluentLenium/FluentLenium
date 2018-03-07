@@ -7,6 +7,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -113,16 +114,17 @@ public class FluentTestRunnerAdapterTest {
     @Test(expected = IllegalStateException.class)
     public void webDriverNotAvailable() {
         FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
-        adapter.initFluent(driver);
         when(adapter.getControlContainer().getFluentControl()).thenReturn(null);
 
         try {
             adapter.takeHtmlDump();
         } catch (IllegalStateException ex) {
+            verify(adapter, times(1)).takeHtmlDump();
+            verify(adapter, times(1)).getDriver();
             assertEquals("FluentControl is not initialized, WebDriver or Configuration issue", ex.getMessage());
             throw ex;
         }
 
-        fail("FluentControl is not initialized did not throw!");
+        fail("FluentControl is not initialized exception, did not throw!");
     }
 }

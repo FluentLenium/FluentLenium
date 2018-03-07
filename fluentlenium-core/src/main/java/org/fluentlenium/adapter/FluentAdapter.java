@@ -52,10 +52,10 @@ public class FluentAdapter implements FluentControl {
     @Delegate(types = FluentControl.class, excludes = {SeleniumDriverControl.class, Configuration.class})
     // We want getDriver to be final.
     private ContainerFluentControl getFluentControl() {
-        ContainerFluentControl containerFluentControl = (ContainerFluentControl) getControlContainer().getFluentControl();
+        FluentControlContainer fluentControlContainer = getControlContainer();
 
-        if (containerFluentControl != null) {
-            return containerFluentControl;
+        if (fluentControlContainer != null) {
+            return (ContainerFluentControl)fluentControlContainer.getFluentControl();
         } else {
             throw new IllegalStateException("FluentControl is not initialized, WebDriver or Configuration issue");
         }
