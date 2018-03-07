@@ -1,15 +1,5 @@
 package org.fluentlenium.adapter.junit5;
 
-import org.assertj.core.api.Assertions;
-import org.assertj.core.api.ThrowableAssert;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.Description;
-import org.junit.runners.model.Statement;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doThrow;
@@ -18,6 +8,18 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import org.assertj.core.api.Assertions;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.Description;
+import org.junit.runner.RunWith;
+import org.junit.runners.model.Statement;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
+
+@RunWith(MockitoJUnitRunner.class)
 public class FluentTestRuleTest {
     @Mock
     private Statement base;
@@ -33,10 +35,6 @@ public class FluentTestRuleTest {
     @After
     public void after() {
         reset(base, description);
-    }
-
-    private static class TestException extends Exception {
-
     }
 
     //CHECKSTYLE.OFF: IllegalThrows
@@ -57,18 +55,14 @@ public class FluentTestRuleTest {
     public void whenInitFailsTestIsNotCalled() throws Throwable {
         FluentTestRule testRule = spy(new FluentTestRule(this));
 
-        doThrow(TestException.class).when(testRule).starting(description);
+        doThrow(RuntimeException.class).when(testRule).starting(description);
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                testRule.apply(base, description).evaluate();
-            }
-        }).isExactlyInstanceOf(TestException.class);
+        Assertions.assertThatThrownBy(() -> testRule.apply(base, description).evaluate())
+                .isExactlyInstanceOf(RuntimeException.class);
 
         verify(base, never()).evaluate();
         verify(testRule, never()).succeeded(description);
-        verify(testRule).failed(any(TestException.class), eq(description));
+        verify(testRule).failed(any(RuntimeException.class), eq(description));
         verify(testRule).finished(description);
     }
     //CHECKSTYLE.ON: IllegalThrows

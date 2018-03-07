@@ -2,7 +2,8 @@
 
 [![Travis](https://img.shields.io/travis/FluentLenium/FluentLenium.svg)](https://travis-ci.org/FluentLenium/FluentLenium)
 [![Coveralls](https://img.shields.io/coveralls/FluentLenium/FluentLenium.svg)](https://coveralls.io/github/FluentLenium/FluentLenium)
-[![codebeat badge](https://codebeat.co/badges/51ecc826-c8e6-407d-a090-12330b2bbe44)](https://codebeat.co/projects/github-com-fluentlenium-fluentlenium-develop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/27aabb596e9d9eee7182/maintainability)](https://codeclimate.com/github/FluentLenium/FluentLenium/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/27aabb596e9d9eee7182/test_coverage)](https://codeclimate.com/github/FluentLenium/FluentLenium/test_coverage)
 [![Maven Central](https://img.shields.io/maven-central/v/org.fluentlenium/fluentlenium-parent.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.fluentlenium%22%20AND%20a%3A%22fluentlenium-parent%22)
 [![Website](https://img.shields.io/website-up-down-green-red/http/fluentlenium.org.svg)](http://fluentlenium.org)
 
@@ -34,16 +35,23 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 - Add dependencies to your `pom.xml`.
 
 ```xml
+<properties>
+    <!-- Configure this property to latest available version -->
+    <fluentlenium.version>3.5.0</fluentlenium.version>
+    <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
+    <selenium.version>3.9.1</selenium.version>
+</properties>
+
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.4.1</version>
+    <version>3.5.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.4.1</version>
+    <version>3.5.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -55,13 +63,7 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>htmlunit-driver</artifactId>
-    <version>2.25</version>
-    <scope>test</scope>
-</dependency>
-<dependency>
-    <groupId>xml-apis</groupId>
-    <artifactId>xml-apis</artifactId>
-    <version>1.4.01</version>
+    <version>2.29.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -84,7 +86,6 @@ public class DuckDuckGoTest extends FluentTest {
         goTo("https://duckduckgo.com");
         $("#search_form_input_homepage").fill().with("FluentLenium");
         $("#search_button_homepage").submit();
-        await().atMost(5, TimeUnit.SECONDS).until(el("#search_form_homepage")).not().present();
         assertThat(window().title()).contains("FluentLenium");
     }
 }
@@ -96,8 +97,6 @@ public class DuckDuckGoTest extends FluentTest {
 import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.core.annotation.Page;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DuckDuckGoTest extends FluentTest {
     @Page

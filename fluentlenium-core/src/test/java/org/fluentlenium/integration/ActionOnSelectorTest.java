@@ -65,23 +65,6 @@ public class ActionOnSelectorTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void checkDoubleClickAction() {
-        goTo(DEFAULT_URL);
-        assertThat(window().title()).contains("Selenium");
-        $("#linkToPage2").first().mouse().doubleClick();
-        assertThat(window().title()).isEqualTo("Page 2");
-    }
-
-    @Test
-    public void checkMouseOverAction() {
-        goTo(DEFAULT_URL);
-        assertThat(window().title()).contains("Selenium");
-        assertThat($("#id3").first().text()).isEqualTo("This text should change on MouseOver");
-        $("#mouseover").first().mouse().moveToElement();
-        assertThat($("#id3").first().text()).isEqualTo("abc");
-    }
-
-    @Test
     public void checkTextAction() {
         goTo(DEFAULT_URL);
         assertThat($("#name").values()).contains("John");

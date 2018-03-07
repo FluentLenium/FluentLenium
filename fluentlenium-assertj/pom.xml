@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>3.4.1</version>
+        <version>3.6.0-SNAPSHOT</version>
     </parent>
     <artifactId>fluentlenium-assertj</artifactId>
     <packaging>jar</packaging>
@@ -13,7 +13,7 @@
     <description>AssertJ Extension for FluentLenium</description>
 
     <properties>
-        <assertj.version>3.6.2</assertj.version>
+        <assertj.version>3.9.1</assertj.version>
     </properties>
 
 
