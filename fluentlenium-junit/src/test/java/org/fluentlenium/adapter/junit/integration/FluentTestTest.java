@@ -1,10 +1,10 @@
-package org.fluentlenium.adapter.junit5.integration;
+package org.fluentlenium.adapter.junit.integration;
 
 import net.jcip.annotations.NotThreadSafe;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.util.Files;
 import org.fluentlenium.adapter.SharedWebDriverContainer;
-import org.fluentlenium.adapter.junit5.FluentTest;
+import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.configuration.FluentConfiguration.BooleanValue;

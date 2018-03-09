@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.junit5;
+package org.fluentlenium.adapter.junit;
 
 import org.fluentlenium.adapter.FluentTestRunnerAdapter;
 import org.junit.jupiter.api.extension.ExtendWith;

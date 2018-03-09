@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.junit5;
+package org.fluentlenium.adapter.junit;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;

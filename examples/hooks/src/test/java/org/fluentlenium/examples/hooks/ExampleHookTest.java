@@ -2,7 +2,7 @@ package org.fluentlenium.examples.hooks;
 
 import java.util.concurrent.TimeUnit;
 
-import org.fluentlenium.adapter.junit5.FluentTest;
+import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.core.hook.wait.Wait;
 import org.junit.Test;
 

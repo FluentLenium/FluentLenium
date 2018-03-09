@@ -1,6 +1,6 @@
 package org.fluentlenium.it;
 
-import org.fluentlenium.adapter.junit5.FluentTest;
+import org.fluentlenium.adapter.junit.FluentTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
