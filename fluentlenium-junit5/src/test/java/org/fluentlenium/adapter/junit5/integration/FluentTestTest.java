@@ -4,8 +4,8 @@ import net.jcip.annotations.NotThreadSafe;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.util.Files;
 import org.fluentlenium.adapter.SharedWebDriverContainer;
-import org.fluentlenium.adapter.junit5.FluentJUnit5;
 import org.fluentlenium.adapter.junit5.FluentTest;
+import org.fluentlenium.adapter.junit5.MockitoExtension;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.configuration.FluentConfiguration.BooleanValue;
@@ -56,6 +56,7 @@ public class FluentTestTest {
     private interface ScreenshotWebDriver extends WebDriver, TakesScreenshot {
     }
 
+    @ExtendWith(MockitoExtension.class)
     public static class InternalTest extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
@@ -80,7 +81,7 @@ public class FluentTestTest {
         }
     }
 
-    @ExtendWith(FluentJUnit5.class)
+    @ExtendWith(MockitoExtension.class)
     public static class InternalJUnit5Test extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
@@ -106,6 +107,7 @@ public class FluentTestTest {
     }
 
     @FluentConfiguration(driverLifecycle = DriverLifecycle.CLASS)
+    @ExtendWith(MockitoExtension.class)
     public static class InternalTestSharedClass extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
@@ -131,6 +133,7 @@ public class FluentTestTest {
     }
 
     @FluentConfiguration(driverLifecycle = DriverLifecycle.JVM)
+    @ExtendWith(MockitoExtension.class)
     public static class InternalTestSharedOnce extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
@@ -156,6 +159,7 @@ public class FluentTestTest {
     }
 
     @FluentConfiguration(driverLifecycle = DriverLifecycle.CLASS, deleteCookies = BooleanValue.TRUE)
+    @ExtendWith(MockitoExtension.class)
     public static class ShouldDeleteCookiesTest extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
