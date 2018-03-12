@@ -58,7 +58,7 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>htmlunit-driver</artifactId>
-    <version>2.29.2</version>
+    <version>2.29.0</version>
     <scope>test</scope>
 </dependency>
 ```
