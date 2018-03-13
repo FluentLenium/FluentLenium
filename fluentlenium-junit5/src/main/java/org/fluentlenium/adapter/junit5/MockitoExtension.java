@@ -1,3 +1,13 @@
+/*
+ * Copyright 2015-2018 the original author or authors.
+ *
+ * All rights reserved. This program and the accompanying materials are
+ * made available under the terms of the Eclipse Public License v2.0 which
+ * accompanies this distribution and is available at
+ *
+ * http://www.eclipse.org/legal/epl-v20.html
+ */
+
 package org.fluentlenium.adapter.junit5;
 
 import static org.mockito.Mockito.mock;
@@ -5,13 +15,24 @@ import static org.mockito.Mockito.mock;
 import java.lang.reflect.Parameter;
 
 import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
+import org.junit.jupiter.api.extension.ExtensionContext.Store;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolver;
 import org.junit.jupiter.api.extension.TestInstancePostProcessor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+/**
+ * {@code MockitoExtension} showcases the {@link TestInstancePostProcessor}
+ * and {@link ParameterResolver} extension APIs of JUnit 5 by providing
+ * dependency injection support at the field level and at the method parameter
+ * level via Mockito 2.x's {@link Mock @Mock} annotation.
+ *
+ * @since 5.0
+ */
 public class MockitoExtension implements TestInstancePostProcessor, ParameterResolver {
+
     @Override
     public void postProcessTestInstance(Object testInstance, ExtensionContext context) {
         MockitoAnnotations.initMocks(testInstance);
@@ -29,13 +50,12 @@ public class MockitoExtension implements TestInstancePostProcessor, ParameterRes
 
     private Object getMock(Parameter parameter, ExtensionContext extensionContext) {
         Class<?> mockType = parameter.getType();
-        ExtensionContext.Store mocks = extensionContext.getStore(ExtensionContext.Namespace.create(MockitoExtension.class, mockType));
+        Store mocks = extensionContext.getStore(Namespace.create(MockitoExtension.class, mockType));
         String mockName = getMockName(parameter);
 
         if (mockName != null) {
             return mocks.getOrComputeIfAbsent(mockName, key -> mock(mockType, mockName));
-        }
-        else {
+        } else {
             return mocks.getOrComputeIfAbsent(mockType.getCanonicalName(), key -> mock(mockType));
         }
     }
@@ -44,10 +64,10 @@ public class MockitoExtension implements TestInstancePostProcessor, ParameterRes
         String explicitMockName = parameter.getAnnotation(Mock.class).name().trim();
         if (!explicitMockName.isEmpty()) {
             return explicitMockName;
-        }
-        else if (parameter.isNamePresent()) {
+        } else if (parameter.isNamePresent()) {
             return parameter.getName();
         }
         return null;
     }
+
 }

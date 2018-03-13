@@ -56,7 +56,6 @@ public class FluentTestTest {
     private interface ScreenshotWebDriver extends WebDriver, TakesScreenshot {
     }
 
-    @ExtendWith(MockitoExtension.class)
     public static class InternalTest extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
@@ -81,7 +80,6 @@ public class FluentTestTest {
         }
     }
 
-    @ExtendWith(MockitoExtension.class)
     public static class InternalJUnit5Test extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
@@ -107,7 +105,6 @@ public class FluentTestTest {
     }
 
     @FluentConfiguration(driverLifecycle = DriverLifecycle.CLASS)
-    @ExtendWith(MockitoExtension.class)
     public static class InternalTestSharedClass extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
@@ -133,7 +130,6 @@ public class FluentTestTest {
     }
 
     @FluentConfiguration(driverLifecycle = DriverLifecycle.JVM)
-    @ExtendWith(MockitoExtension.class)
     public static class InternalTestSharedOnce extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
@@ -159,7 +155,6 @@ public class FluentTestTest {
     }
 
     @FluentConfiguration(driverLifecycle = DriverLifecycle.CLASS, deleteCookies = BooleanValue.TRUE)
-    @ExtendWith(MockitoExtension.class)
     public static class ShouldDeleteCookiesTest extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
