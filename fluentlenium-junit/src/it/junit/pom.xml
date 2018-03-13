@@ -112,7 +112,7 @@
         <profile>
             <id>integration-tests-dev</id>
             <properties>
-                <it.project.version>3.0.0-SNAPSHOT</it.project.version>
+                <it.project.version>3.6.0-SNAPSHOT</it.project.version>
             </properties>
         </profile>
     </profiles>
