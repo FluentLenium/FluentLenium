@@ -18,6 +18,7 @@
         <module>fluentlenium-testng</module>
         <module>fluentlenium-cucumber</module>
         <module>fluentlenium-spock</module>
+        <module>fluentlenium-e2e</module>
     </modules>
 
     <prerequisites>
