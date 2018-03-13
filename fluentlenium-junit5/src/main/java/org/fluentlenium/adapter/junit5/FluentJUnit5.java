@@ -15,13 +15,13 @@ import java.util.Optional;
  */
 public class FluentJUnit5 implements BeforeEachCallback, AfterEachCallback, AfterAllCallback {
     @Override
-    public void beforeEach(ExtensionContext context) throws Exception {
+    public void beforeEach(ExtensionContext context) {
         FluentTest instance = testInstanceOf(context);
         instance._starting(testClassOf(context), testNameOf(context));
     }
 
     @Override
-    public void afterEach(ExtensionContext context) throws Exception {
+    public void afterEach(ExtensionContext context) {
         FluentTest instance = testInstanceOf(context);
         Optional<Throwable> throwable = context.getExecutionException();
 
@@ -33,7 +33,7 @@ public class FluentJUnit5 implements BeforeEachCallback, AfterEachCallback, Afte
     }
 
     @Override
-    public void afterAll(ExtensionContext context) throws Exception {
+    public void afterAll(ExtensionContext context) {
         FluentTest.afterClass(context.getTestClass().orElse(null));
     }
 
