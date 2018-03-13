@@ -22,5 +22,6 @@ public class FluentTest extends FluentTestRunnerAdapter {
 
     /*package*/ void _failed(Throwable e, Class<?> testClass, String testName) {
         failed(e, testClass, testName);
+        finished(testClass, testName);
     }
 }

@@ -35,6 +35,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
 
@@ -80,31 +81,8 @@ public class FluentTestTest {
         }
     }
 
-    public static class InternalJUnit5Test extends FluentTest {
-        @Override
-        public WebDriver newWebDriver() {
-            WebDriver webDriver = Mockito.mock(WebDriver.class);
-            drivers.add(webDriver);
-            return webDriver;
-        }
-
-        @Test
-        public void okTest() {
-            goTo("url");
-        }
-
-        @Test
-        public void okTest2() {
-            goTo("url2");
-        }
-
-        @Test
-        public void failingTest() {
-            fail("Failing Test");
-        }
-    }
-
     @FluentConfiguration(driverLifecycle = DriverLifecycle.CLASS)
+    @ExtendWith(MockitoExtension.class)
     public static class InternalTestSharedClass extends FluentTest {
         @Override
         public WebDriver newWebDriver() {
@@ -231,22 +209,8 @@ public class FluentTestTest {
 
     @Test
     public void testFluentTest() {
-        SummaryGeneratingListener summaryGeneratingListener = getSummaryGeneratingListener(InternalTestSharedClass.class);
-        assertThat(summaryGeneratingListener.getSummary().getFailures().get(0).getException().getMessage()).isEqualTo("Failing Test");
-
-        assertThat(drivers).hasSize(3);
-
-        for (WebDriver driver : drivers) {
-            Mockito.verify(driver).quit();
-        }
-
-        assertThat(SharedWebDriverContainer.INSTANCE.getTestClassDrivers(InternalTest.class)).isEmpty();
-    }
-
-    @Test
-    public void testFluentJUnit5Test() {
         LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder.request()
-                .selectors(selectClass(InternalJUnit5Test.class)).build();
+                .selectors(selectClass(InternalTest.class)).build();
 
         class Listener implements TestExecutionListener {
             public List<Throwable> failures = new ArrayList<>();
@@ -341,8 +305,10 @@ public class FluentTestTest {
     @Test
     public void testAutomaticScreenShotTest() throws IOException {
         SummaryGeneratingListener summaryGeneratingListener = getSummaryGeneratingListener(AutomaticScreenShotTest.class);
-        assertThat(summaryGeneratingListener.getSummary().getFailures()).hasSize(1);
-        assertThat(summaryGeneratingListener.getSummary().getFailures().get(0).getException().getMessage()).isEqualTo("Failing Test");
+        assertAll("summary",
+                () -> assertThat(summaryGeneratingListener.getSummary().getFailures()).hasSize(1),
+                () -> assertThat(summaryGeneratingListener.getSummary().getFailures().get(0).getException()
+                        .getMessage()).isEqualTo("Failing Test"));
 
         assertThat(screenshotWebDrivers).hasSize(1);
 
@@ -351,16 +317,11 @@ public class FluentTestTest {
         Mockito.verify(driver).getScreenshotAs(OutputType.FILE);
         Mockito.verify(driver).findElements(By.cssSelector("html"));
 
-        assertThat(tmpPath.list()).contains("AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
-                + ".FluentTestTest$AutomaticScreenShotTest).html");
-        assertThat(tmpPath.list()).contains("AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
-                + ".FluentTestTest$AutomaticScreenShotTest).png");
+        assertThat(tmpPath.list()).contains("AutomaticScreenShotTest_failingTest.html");
+        assertThat(tmpPath.list()).contains("AutomaticScreenShotTest_failingTest.png");
 
-        File screenshotGeneratedFile = new File(tmpPath,
-                "AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
-                        + ".FluentTestTest$AutomaticScreenShotTest).png");
-        File htmlDumpFile = new File(tmpPath, "AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
-                + ".FluentTestTest$AutomaticScreenShotTest).html");
+        File screenshotGeneratedFile = new File(tmpPath, "AutomaticScreenShotTest_failingTest.png");
+        File htmlDumpFile = new File(tmpPath, "AutomaticScreenShotTest_failingTest.html");
 
         try {
             assertThat(FileUtils.readFileToByteArray(screenshotGeneratedFile)).isEqualTo(screenshotData);
