@@ -57,7 +57,7 @@
                     <parallel>methods</parallel>
                     <threadCount>4</threadCount>
                     <systemPropertyVariables>
-                        <surefire.forkNumber>0${surefire.forkNumber}</surefire.forkNumber>
+                        <surefire.forkNumber>4</surefire.forkNumber>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

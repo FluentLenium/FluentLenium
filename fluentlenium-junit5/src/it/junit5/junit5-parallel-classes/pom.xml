@@ -47,19 +47,30 @@
             <artifactId>junit5-common</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <parallel>classes</parallel>
-                    <threadCount>4</threadCount>
-                    <systemPropertyVariables>
-                        <surefire.forkNumber>0${surefire.forkNumber}</surefire.forkNumber>
-                    </systemPropertyVariables>
-                </configuration>
+                <version>2.19</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <version>1.0.2</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter-engine</artifactId>
+                        <version>5.0.2</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

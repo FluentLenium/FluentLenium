@@ -11,10 +11,6 @@
 
     <artifactId>junit5-parallel-all</artifactId>
 
-    <properties>
-        <it.project.version>3.6.0-SNAPSHOT</it.project.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.fluentlenium</groupId>
@@ -56,14 +52,21 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <parallel>all</parallel>
-                    <threadCount>4</threadCount>
-                    <systemPropertyVariables>
-                        <surefire.forkNumber>0${surefire.forkNumber}</surefire.forkNumber>
-                    </systemPropertyVariables>
-                </configuration>
+                <version>2.19</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <version>1.0.2</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter-engine</artifactId>
+                        <version>5.0.2</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
