@@ -13,18 +13,22 @@
     </prerequisites>
 
     <modules>
-        <module>junit-default</module>
-        <module>junit-common</module>
-        <module>junit-parallel-classes</module>
-        <module>junit-parallel-methods</module>
-        <module>junit-parallel-all</module>
+        <module>junit5-default</module>
+        <module>junit5-common</module>
+        <module>junit5-parallel-classes</module>
+        <module>junit5-parallel-methods</module>
+        <module>junit5-parallel-all</module>
     </modules>
+
+    <properties>
+        <it.project.version>3.6.0-SNAPSHOT</it.project.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.fluentlenium</groupId>
-                <artifactId>fluentlenium-junit</artifactId>
+                <artifactId>fluentlenium-junit5</artifactId>
                 <version>${it.project.version}</version>
             </dependency>
             <dependency>
@@ -34,7 +38,7 @@
             </dependency>
             <dependency>
                 <groupId>org.fluentlenium.it</groupId>
-                <artifactId>junit-common</artifactId>
+                <artifactId>junit5-common</artifactId>
                 <version>testing</version>
             </dependency>
             <dependency>
@@ -48,9 +52,19 @@
                 <version>1.4.01</version>
             </dependency>
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>5.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>5.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-launcher</artifactId>
+                <version>1.0.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
