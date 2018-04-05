@@ -264,7 +264,7 @@ public class FluentTestTest {
         SummaryGeneratingListener summaryGeneratingListener
                 = new SummaryGeneratingListener();
 
-        launcher.execute(request, new TestExecutionListener[] { summaryGeneratingListener });
+        launcher.execute(request, summaryGeneratingListener);
         return summaryGeneratingListener;
     }
 
@@ -272,7 +272,8 @@ public class FluentTestTest {
     public void testInternalTestSharedOnce() {
         SummaryGeneratingListener summaryGeneratingListener = getSummaryGeneratingListener(InternalTestSharedOnce.class);
         assertThat(summaryGeneratingListener.getSummary().getFailures()).hasSize(1);
-        assertThat(summaryGeneratingListener.getSummary().getFailures().get(0).getException().getMessage()).isEqualTo("Failing Test");
+        assertThat(summaryGeneratingListener.getSummary().getFailures().get(0).getException().getMessage())
+                .isEqualTo("Failing Test");
 
         assertThat(sharedOnceDrivers).hasSize(1);
 
@@ -285,9 +286,11 @@ public class FluentTestTest {
 
     @Test
     public void testShouldDeleteCookiesTest() {
-        SummaryGeneratingListener summaryGeneratingListener = getSummaryGeneratingListener(ShouldDeleteCookiesTest.class);
+        SummaryGeneratingListener summaryGeneratingListener =
+                getSummaryGeneratingListener(ShouldDeleteCookiesTest.class);
         assertThat(summaryGeneratingListener.getSummary().getFailures()).hasSize(1);
-        assertThat(summaryGeneratingListener.getSummary().getFailures().get(0).getException().getMessage()).isEqualTo("Failing Test");
+        assertThat(summaryGeneratingListener.getSummary().getFailures().get(0).getException().getMessage())
+                .isEqualTo("Failing Test");
 
         assertThat(sharedClassDrivers).hasSize(1);
 
@@ -304,11 +307,13 @@ public class FluentTestTest {
 
     @Test
     public void testAutomaticScreenShotTest() throws IOException {
-        SummaryGeneratingListener summaryGeneratingListener = getSummaryGeneratingListener(AutomaticScreenShotTest.class);
+        SummaryGeneratingListener summaryGeneratingListener =
+                getSummaryGeneratingListener(AutomaticScreenShotTest.class);
+
         assertAll("summary",
                 () -> assertThat(summaryGeneratingListener.getSummary().getFailures()).hasSize(1),
-                () -> assertThat(summaryGeneratingListener.getSummary().getFailures().get(0).getException()
-                        .getMessage()).isEqualTo("Failing Test"));
+                () -> assertThat(summaryGeneratingListener.getSummary().getFailures().get(0)
+                        .getException().getMessage()).isEqualTo("Failing Test"));
 
         assertThat(screenshotWebDrivers).hasSize(1);
 

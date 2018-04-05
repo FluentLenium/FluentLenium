@@ -9,18 +9,22 @@ import org.mockito.MockitoAnnotations;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.same;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class FluentJUnit5Test {
     @Mock
-    ExtensionContext context;
-
-    FluentJUnit5 sut;
+    private ExtensionContext context;
+    private FluentJUnit5 sut;
 
     static class Test1 extends FluentTest {
-        public void test1() {
+        void test1() {
+
         }
     }
 
@@ -31,7 +35,6 @@ public class FluentJUnit5Test {
         MockitoAnnotations.initMocks(this);
 
         sut = new FluentJUnit5();
-
         test = spy(new Test1());
 
         when(context.getTestInstance()).thenReturn(Optional.of(test));
@@ -40,14 +43,13 @@ public class FluentJUnit5Test {
     }
 
     @Test
-    void testBeforeEach() throws Exception {
+    void testBeforeEach() {
         sut.beforeEach(context);
-
         verify(test)._starting(eq(Test1.class), eq("test1"));
     }
 
     @Test
-    void testAfterEachSuccessful() throws Exception {
+    void testAfterEachSuccessful() {
         when(context.getExecutionException()).thenReturn(Optional.ofNullable(null));
         
         sut.afterEach(context);
@@ -57,7 +59,7 @@ public class FluentJUnit5Test {
     }
 
     @Test
-    void testAfterEachFailure() throws Exception {
+    void testAfterEachFailure() {
         final AssertionError error = new AssertionError("error");
         when(context.getExecutionException()).thenReturn(Optional.of(error));
 
@@ -68,7 +70,7 @@ public class FluentJUnit5Test {
     }
 
     @Test
-    void badInstance() throws Exception {
+    void badInstance() {
         when(context.getTestInstance()).thenReturn(Optional.of(this)); // not FluentTest
 
         assertThrows(IllegalStateException.class, () -> sut.beforeEach(context));
