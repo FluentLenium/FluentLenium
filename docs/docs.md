@@ -305,11 +305,6 @@ $("#create-button").mouseOver()
 
 // Scroll the viewport to make the first found element visible
 $("#create-button").scrollIntoView();
-
-// Scroll the element to make the first found element visible
-// FluentLenium will scroll to element centrally
-$("#create-button").scrollToElement();
-
 ```
 
 ### Information
