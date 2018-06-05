@@ -1,13 +1,16 @@
 package org.fluentlenium.core.events;
 
+import java.util.Objects;
+
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
-import java.util.Objects;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * FluentLenium adapter for Selenium events listener.
@@ -115,8 +118,28 @@ class EventAdapter implements WebDriverEventListener {
     }
 
     @Override
+    public void beforeSwitchToWindow(String s, WebDriver webDriver) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void afterSwitchToWindow(String s, WebDriver webDriver) {
+        throw new NotImplementedException();
+    }
+
+    @Override
     public void onException(Throwable throwable, WebDriver driver) {
         listener.onException(throwable, driver);
+    }
+
+    @Override
+    public <X> void beforeGetScreenshotAs(OutputType<X> outputType) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public <X> void afterGetScreenshotAs(OutputType<X> outputType, X x) {
+        throw new NotImplementedException();
     }
 
     @Override
