@@ -2,6 +2,8 @@ package org.fluentlenium.it;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.fluentlenium.configuration.ConfigurationProperties;
+import org.fluentlenium.configuration.FluentConfiguration;
 import org.junit.jupiter.api.Test;
 
 public class Test1 extends FluentIntegTest {

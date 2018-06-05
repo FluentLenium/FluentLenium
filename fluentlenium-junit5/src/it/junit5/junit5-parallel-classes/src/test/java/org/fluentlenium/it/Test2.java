@@ -2,8 +2,11 @@ package org.fluentlenium.it;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.fluentlenium.configuration.ConfigurationProperties;
+import org.fluentlenium.configuration.FluentConfiguration;
 import org.junit.jupiter.api.Test;
 
+@FluentConfiguration(driverLifecycle = ConfigurationProperties.DriverLifecycle.CLASS)
 public class Test2 extends FluentIntegTest {
     @Test
     void test5() {
