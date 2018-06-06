@@ -1,10 +1,5 @@
 package org.fluentlenium.utils;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -14,10 +9,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+
 import javax.imageio.ImageIO;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
 public class ImageUtils {
 
+    public static final String ERROR_WHILE_CONVERTING_IMAGE = "Error while converting image";
     private final WebDriver driver;
 
     public ImageUtils(WebDriver driver) {
@@ -31,15 +33,16 @@ public class ImageUtils {
     public byte[] handleAlertAndTakeScreenshot() {
         String alertText = getDriver().switchTo().alert().getText();
         getDriver().switchTo().alert().accept();
+
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
         try {
             BufferedImage screenshotImage = ImageIO.read(scrFile);
             BufferedImage alertImage = generateAlertImageWithLogo(alertText, screenshotImage.getWidth());
             FileUtils.deleteQuietly(scrFile);
             return toByteArray(stitchImages(screenshotImage, alertImage, false));
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("error while reading screenshot file.", e);
+            throw new RuntimeException("Error while reading screenshot file.", e);
         }
     }
 
@@ -50,19 +53,17 @@ public class ImageUtils {
             is.close();
             return image;
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("error while converting image", e);
+            throw new RuntimeException(ERROR_WHILE_CONVERTING_IMAGE, e);
         }
     }
 
     private byte[] toByteArray(BufferedImage image) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
-            ImageIO.write(image, "png", baos);
-            return baos.toByteArray();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-            throw new RuntimeException("error when converting image", ioe);
+            ImageIO.write(image, "png", byteArrayOutputStream);
+            return byteArrayOutputStream.toByteArray();
+        } catch (IOException e) {
+            throw new RuntimeException(ERROR_WHILE_CONVERTING_IMAGE, e);
         }
     }
 
@@ -76,19 +77,19 @@ public class ImageUtils {
             g.drawImage(image2, image1.getWidth() - image2.getWidth(), image1.getHeight() - image2.getHeight(), null);
             return stitchedImage;
         } else {
-            BufferedImage stichedImage = new BufferedImage(image1.getWidth(), image1.getHeight() + image2.getHeight(), BufferedImage.TYPE_INT_RGB);
-            Graphics graphics = stichedImage.getGraphics();
+            BufferedImage stitchedImage = new BufferedImage(image1.getWidth(), image1.getHeight() + image2.getHeight(), BufferedImage.TYPE_INT_RGB);
+            Graphics graphics = stitchedImage.getGraphics();
             graphics.drawImage(image1, 0, 0, null);
             graphics.drawImage(image2, 0, image1.getHeight(), null);
             graphics.setColor(Color.BLACK);
             graphics.drawLine(0, image1.getHeight(), image1.getWidth(), image1.getHeight());
-            return stichedImage;
+            return stitchedImage;
         }
     }
 
     private BufferedImage generateAlertImageWithLogo(String alertText, int screenshotWidth) {
         BufferedImage alertImage = generateImageWithText(alertText, screenshotWidth, 200);
-        BufferedImage logo = toBufferedImage("/fl_logo.png");
+        BufferedImage logo = toBufferedImage(new File("fl_logo.png").getAbsolutePath());
         return stitchImages(alertImage, logo, true);
     }
 
@@ -106,18 +107,18 @@ public class ImageUtils {
     private void drawStringMultiLine(Graphics g, String text, int lineWidth) {
         FontMetrics m = g.getFontMetrics();
         int xPosition = 10;
-        int yPosition=25;
+        int yPosition = 25;
         String[] words = text.trim().split("\\b");
 
-        for(int i=0; i<words.length; i++) {
-            if (xPosition + m.stringWidth(words[i]) < lineWidth) {
-                g.drawString(words[i], xPosition, yPosition);
-                xPosition += m.stringWidth(words[i]);
+        for (String word : words) {
+            if (xPosition + m.stringWidth(word) < lineWidth) {
+                g.drawString(word, xPosition, yPosition);
+                xPosition += m.stringWidth(word);
             } else {
                 xPosition = 10;
                 yPosition += m.getHeight();
-                g.drawString(words[i], xPosition, yPosition);
-                xPosition += m.stringWidth(words[i]);
+                g.drawString(word, xPosition, yPosition);
+                xPosition += m.stringWidth(word);
             }
         }
     }

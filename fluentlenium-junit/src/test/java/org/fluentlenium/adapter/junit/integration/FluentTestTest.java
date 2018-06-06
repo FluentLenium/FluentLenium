@@ -37,7 +37,6 @@ public class FluentTestTest {
     private static List<WebDriver> sharedOnceDrivers = new ArrayList<>();
 
     private static List<ScreenshotWebDriver> screenshotWebDrivers = new ArrayList<>();
-    private static File screenshotFile;
     private static String html = "<html>FluentLenium</html>";
     private static byte[] screenshotData = {1, 4, 7, 9, 2, 4, 2, 4, 3};
 
@@ -164,7 +163,7 @@ public class FluentTestTest {
         @Override
         public WebDriver newWebDriver() {
             try {
-                screenshotFile = File.createTempFile("FluentTestTest.java", "");
+                File screenshotFile = File.createTempFile("FluentTestTest.java", "");
                 FileUtils.writeByteArrayToFile(screenshotFile, screenshotData);
                 screenshotFile.deleteOnExit();
             } catch (IOException e) {

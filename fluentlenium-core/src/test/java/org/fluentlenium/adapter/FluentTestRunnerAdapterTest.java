@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -17,8 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Random;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyByte;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isNull;
@@ -78,8 +75,8 @@ public class FluentTestRunnerAdapterTest {
 
         verify(adapter).failed(isNull(Throwable.class), eq(adapter.getClass()), anyString());
 
-        verify(adapter, never()).takeScreenShot();
-        verify(adapter, never()).takeScreenShot(anyString());
+        verify(adapter, never()).takeScreenshot();
+        verify(adapter, never()).takeScreenshot(anyString());
         verify(adapter, never()).takeHtmlDump();
         verify(adapter, never()).takeHtmlDump(anyString());
     }
@@ -110,8 +107,8 @@ public class FluentTestRunnerAdapterTest {
         }
         verify(adapter).failed(isNull(Throwable.class), eq(adapter.getClass()), anyString());
 
-        verify(adapter, never()).takeScreenShot();
-        verify(adapter).takeScreenShot(anyString());
+        verify(adapter, never()).takeScreenshot();
+        verify(adapter).takeScreenshot(anyString());
         verify(adapter, never()).takeHtmlDump();
         verify(adapter).takeHtmlDump(anyString());
     }

@@ -1,6 +1,14 @@
 package org.fluentlenium.core;
 
-import lombok.experimental.Delegate;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Paths;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.fluentlenium.configuration.Configuration;
@@ -40,14 +48,7 @@ import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Paths;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
+import lombok.experimental.Delegate;
 
 /**
  * Util Class which offers some shortcut to webdriver methods
@@ -165,23 +166,21 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
     }
 
     @Override
-    public void takeScreenShot() {
-        takeScreenShot(new Date().getTime() + ".png");
+    public void takeScreenshot() {
+        takeScreenshot(new Date().getTime() + ".png");
     }
 
     @Override
-    public void takeScreenShot(String fileName) {
+    public void takeScreenshot(String fileName) {
         if (!canTakeScreenShot()) {
             throw new WebDriverException("Current browser doesn't allow taking screenshot.");
         }
 
-        byte[] screenshot;
-        try{
-            screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        }catch (UnhandledAlertException uae){
-            ImageUtils imageUtils = new ImageUtils(getDriver());
-            screenshot = imageUtils.handleAlertAndTakeScreenshot();
-        }
+        byte[] screenshot = prepareScreenshot();
+        persistScreenshot(fileName, screenshot);
+    }
+
+    private void persistScreenshot(String fileName, byte[] screenshot) {
         try {
             File destFile;
             if (configuration.getScreenshotPath() == null) {
@@ -191,9 +190,19 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
             }
             FileUtils.writeByteArrayToFile(destFile, screenshot);
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("error when taking the snapshot", e);
+            throw new RuntimeException("Error when taking the screenshot", e);
         }
+    }
+
+    private byte[] prepareScreenshot() {
+        byte[] screenshot;
+        try {
+            screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        } catch (UnhandledAlertException uae) {
+            ImageUtils imageUtils = new ImageUtils(getDriver());
+            screenshot = imageUtils.handleAlertAndTakeScreenshot();
+        }
+        return screenshot;
     }
 
     @Override
