@@ -319,7 +319,7 @@ public class FluentTestTest {
 
         ScreenshotWebDriver driver = screenshotWebDrivers.get(0);
 
-        Mockito.verify(driver).getScreenshotAs(OutputType.FILE);
+        Mockito.verify(driver).getScreenshotAs(OutputType.BYTES);
         Mockito.verify(driver).findElements(By.cssSelector("html"));
 
         assertThat(tmpPath.list()).contains("AutomaticScreenShotTest_failingTest.html");
