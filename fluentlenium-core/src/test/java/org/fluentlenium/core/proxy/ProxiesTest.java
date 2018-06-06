@@ -1,12 +1,11 @@
 package org.fluentlenium.core.proxy;
 
-import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.domain.WrapsElements;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -133,17 +132,14 @@ public class ProxiesTest {
         List<WebElement> webElementList = LocatorProxies.createWebElementList(Arrays.asList(element1, element2, element3));
 
         assertThat(LocatorProxies.loaded(webElementList)).isTrue();
-        assertThat(((WrapsElements) webElementList).getWrappedElements()).containsExactly(element1, element2, element3);
+        assertThat(((WrapsElements) webElementList).getWrappedElements())
+                .containsExactlyInAnyOrder(element1, element2, element3);
     }
 
     @Test
     public void testNullElementShouldThrowNoSuchElementException() {
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                LocatorProxies.createWebElement((WebElement) null);
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> LocatorProxies.createWebElement((WebElement) null))
+                .isExactlyInstanceOf(NoSuchElementException.class);
 
         WebElement proxy = LocatorProxies.createWebElement(new ElementLocator() {
             @Override
@@ -157,12 +153,7 @@ public class ProxiesTest {
             }
         });
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                LocatorProxies.now(proxy);
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> LocatorProxies.now(proxy)).isExactlyInstanceOf(NoSuchElementException.class);
     }
 
     @Test
@@ -381,12 +372,7 @@ public class ProxiesTest {
         reset(element1);
         when(element1.isEnabled()).thenThrow(StaleElementReferenceException.class);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                webElement.isEnabled();
-            }
-        }).isExactlyInstanceOf(StaleElementReferenceException.class);
+        assertThatThrownBy(() -> webElement.isEnabled()).isExactlyInstanceOf(StaleElementReferenceException.class);
 
         verify(element1, times(6)).isEnabled();
     }

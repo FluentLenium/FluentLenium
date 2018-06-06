@@ -1,12 +1,5 @@
 package org.fluentlenium.configuration;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.JsonException;
-import org.openqa.selenium.remote.JsonToBeanConverter;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -14,6 +7,13 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.json.Json;
+import org.openqa.selenium.json.JsonException;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
  * {@link ConfigurationProperties} based on {@link FluentConfiguration} annotation.
@@ -26,7 +26,7 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
 
     private final Map<String, String> customProperties = new HashMap<>();
 
-    private final JsonToBeanConverter jsonConverter = new JsonToBeanConverter();
+    private final Json jsonConverter = new Json();
 
     /**
      * Creates a new annotation based configuration.
@@ -102,7 +102,7 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
         }
 
         try {
-            return jsonConverter.convert(DesiredCapabilities.class, property);
+            return jsonConverter.toType(property, DesiredCapabilities.class);
         } catch (JsonException e) {
             throw new ConfigurationException("Can't convert JSON Capabilities to Object.", e);
         }

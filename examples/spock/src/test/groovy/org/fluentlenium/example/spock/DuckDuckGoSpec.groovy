@@ -1,15 +1,23 @@
 package org.fluentlenium.example.spock
 
-import io.github.bonigarcia.wdm.FirefoxDriverManager
 import org.fluentlenium.adapter.spock.FluentSpecification
 import org.fluentlenium.core.hook.wait.Wait
+import org.openqa.selenium.Capabilities
+import org.openqa.selenium.chrome.ChromeDriver
+import org.openqa.selenium.remote.DesiredCapabilities
 
 @Wait
 class DuckDuckGoSpec extends FluentSpecification {
     public static final String SEARCH_TEXT = "FluentLenium"
 
-    void setupSpec() {
-        FirefoxDriverManager.getInstance().setup()
+    @Override
+    String getWebDriver() {
+        return new ChromeDriver()
+    }
+
+    @Override
+    Capabilities getCapabilities() {
+        return DesiredCapabilities.chrome()
     }
 
     def "Title of duck duck go"() {

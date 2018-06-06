@@ -9,9 +9,9 @@ import java.util.Locale;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.json.Json;
+import org.openqa.selenium.json.JsonException;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.JsonException;
-import org.openqa.selenium.remote.JsonToBeanConverter;
 
 /**
  * Abstract properties configuration.
@@ -25,7 +25,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
 
     private final String[] prefixes;
 
-    private final JsonToBeanConverter jsonConverter = new JsonToBeanConverter();
+    private final Json jsonConverter = new Json();
 
     private PropertiesBackend propertiesBackend;
 
@@ -179,7 +179,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
             return factory.newCapabilities(getGlobalConfiguration());
         }
         try {
-            return jsonConverter.convert(DesiredCapabilities.class, property);
+            return jsonConverter.toType(property, DesiredCapabilities.class);
         } catch (JsonException e) {
             throw new ConfigurationException("Can't convert JSON Capabilities to Object.", e);
         }

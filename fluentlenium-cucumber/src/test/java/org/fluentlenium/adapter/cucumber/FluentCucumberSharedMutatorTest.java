@@ -1,7 +1,6 @@
 package org.fluentlenium.adapter.cucumber;
 
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.configuration.ConfigurationException;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
@@ -36,11 +35,8 @@ public class FluentCucumberSharedMutatorTest {
         String testName = "test";
         DriverLifecycle driverLifecycle = DriverLifecycle.CLASS;
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle);
-            }
-        }).isExactlyInstanceOf(ConfigurationException.class).hasMessage("Cucumber doesn't support CLASS driverLifecycle.");
+        Assertions.assertThatThrownBy(() -> sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle))
+                .isExactlyInstanceOf(ConfigurationException.class)
+                .hasMessage("Cucumber doesn't support CLASS driverLifecycle.");
     }
 }

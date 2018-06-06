@@ -6,7 +6,7 @@ import org.fluentlenium.utils.ImageUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -111,5 +111,22 @@ public class FluentTestRunnerAdapterTest {
         verify(adapter).takeScreenshot(anyString());
         verify(adapter, never()).takeHtmlDump();
         verify(adapter).takeHtmlDump(anyString());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void webDriverNotAvailable() {
+        FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
+        when(adapter.getControlContainer().getFluentControl()).thenReturn(null);
+
+        try {
+            adapter.takeHtmlDump();
+        } catch (IllegalStateException ex) {
+            verify(adapter, times(1)).takeHtmlDump();
+            verify(adapter, times(1)).getDriver();
+            assertEquals("FluentControl is not initialized, WebDriver or Configuration issue", ex.getMessage());
+            throw ex;
+        }
+
+        fail("FluentControl is not initialized exception, did not throw!");
     }
 }

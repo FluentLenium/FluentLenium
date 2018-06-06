@@ -104,27 +104,37 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
                 getDriverLifecycle());
 
         SharedWebDriver sharedWebDriver = null;
-        Exception exception = null;
 
         try {
             sharedWebDriver = getSharedWebDriver(parameters);
         } catch (ExecutionException | InterruptedException e) {
-            exception = e;
-        }
-
-        if (sharedWebDriver == null) {
             this.failed(testClass, testName);
-            String exceptionMessage = null;
 
-            if (exception != null) {
-                exceptionMessage = exception.getMessage();
-            }
+            String causeMessage = this.getCauseMessage(e);
 
             throw new WebDriverException("Browser failed to start, test [ " + testName + " ] execution interrupted."
-                    + (isEmpty(exceptionMessage) ? "" : "\nCaused by: [ " + exceptionMessage + "]"));
+                    + (isEmpty(causeMessage) ? "" : "\nCaused by: [ " + causeMessage + "]"), e);
         }
 
+
+
         initFluent(sharedWebDriver.getDriver());
+    }
+
+    private String getCauseMessage(Exception e) {
+        String causeMessage = null;
+        Throwable cause = e;
+        while (true) {
+            if (cause.getCause() == null || cause.getCause() == cause) {
+                break;
+            } else {
+                cause = cause.getCause();
+                if (cause.getLocalizedMessage() != null) {
+                    causeMessage = cause.getLocalizedMessage();
+                }
+            }
+        }
+        return causeMessage;
     }
 
     private SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters)
@@ -134,11 +144,11 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
 
     /**
      * Returns SharedDriver instance
-     * @param parameters driver parameters
+     *
+     * @param parameters        driver parameters
      * @param webDriverExecutor executor service
      * @return SharedDriver
-     *
-     * @throws ExecutionException execution exception
+     * @throws ExecutionException   execution exception
      * @throws InterruptedException interrupted exception
      */
     protected SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters, ExecutorService webDriverExecutor)

@@ -6,15 +6,16 @@
 
     <artifactId>fluentlenium-examples-spring</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>3.4.1</version>
+    <version>3.6.0-SNAPSHOT</version>
 
     <name>FluentLenium Examples Spring</name>
 
     <properties>
         <!-- Configure this property to latest available version -->
-        <fluentlenium.version>3.4.1</fluentlenium.version>
-        <selenium.version>3.3.1</selenium.version>
-        <spring.version>4.2.4.RELEASE</spring.version>
+        <fluentlenium.version>${project.version}</fluentlenium.version>
+        <spring.version>5.0.4.RELEASE</spring.version>
+        <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
+        <selenium.version>3.12.0</selenium.version>
     </properties>
 
     <build>

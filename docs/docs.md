@@ -30,6 +30,13 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 - Add dependencies to your `pom.xml`.
 
 ```xml
+<properties>
+    <!-- Configure this property to latest available version -->
+    <fluentlenium.version>3.4.1</fluentlenium.version>
+    <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
+    <selenium.version>3.5.3</selenium.version>
+</properties>
+
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
@@ -51,13 +58,7 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>htmlunit-driver</artifactId>
-    <version>2.25</version>
-    <scope>test</scope>
-</dependency>
-<dependency>
-    <groupId>xml-apis</groupId>
-    <artifactId>xml-apis</artifactId>
-    <version>1.4.01</version>
+    <version>2.31.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -80,7 +81,6 @@ public class DuckDuckGoTest extends FluentTest {
         goTo("https://duckduckgo.com");
         $("#search_form_input_homepage").fill().with("FluentLenium");
         $("#search_button_homepage").submit();
-        await().atMost(5, TimeUnit.SECONDS).until(el("#search_form_homepage")).not().present();
         assertThat(window().title()).contains("FluentLenium");
     }
 }
@@ -92,8 +92,6 @@ public class DuckDuckGoTest extends FluentTest {
 import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.core.annotation.Page;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DuckDuckGoTest extends FluentTest {
     @Page
@@ -277,13 +275,13 @@ If you need to build another Fluent Locator from the position in the DOM of an e
 can use [XPath axes](https://www.w3schools.com/xml/xpath_axes.asp).
 
 ```java
-$(".fluent"()).dom().parent()
-$(".fluent"()).dom().descendants()
-$(".fluent"()).dom().ancestors()
-$(".fluent"()).dom().followings()
-$(".fluent"()).dom().followingSiblings()
-$(".fluent"()).dom().precedings()
-$(".fluent"()).dom().precedingSiblings()
+$(".fluent"()).axes().parent()
+$(".fluent"()).axes().descendants()
+$(".fluent"()).axes().ancestors()
+$(".fluent"()).axes().followings()
+$(".fluent"()).axes().followingSiblings()
+$(".fluent"()).axes().precedings()
+$(".fluent"()).axes().precedingSiblings()
 ```
 
 ## Located Elements
@@ -307,11 +305,6 @@ $("#create-button").mouseOver()
 
 // Scroll the viewport to make the first found element visible
 $("#create-button").scrollIntoView();
-
-// Scroll the element to make the first found element visible
-// FluentLenium will scroll to element centrally
-$("#create-button").scrollToElement();
-
 ```
 
 ### Information
@@ -515,7 +508,7 @@ public class MyPage extends FluentPage {
 
 It's possible to define parameters in FluentPage url using `{[?][/path/]parameter}` syntax.
 If it starts with `?`, it means that the parameter is optional. Path can be included in the braces so it
-is removed when parameter value is not defined.
+is removed when parameter value is not defined.
 
 ```java
 @PageUrl("/document/{document}{?/page/page}{?/format}")
@@ -525,6 +518,18 @@ public class DocumentPage extends FluentPage {
             return this;
         }
         ...
+}
+```
+
+You can also refer to files in your `resorurces` directory by adding `isLocalFile` parameter
+
+```java
+@PageUrl(file = "page2url.html", value = "?param1={param1}&param2={param2}", isLocalFile = true)
+class Page2DynamicP2P1 extends FluentPage {
+    @Override
+    protected void isAtUsingUrl(String urlTemplate) {
+        //overridden to skip URL check because PageUrl is not able to get local file path relatively
+    }
 }
 ```
 
