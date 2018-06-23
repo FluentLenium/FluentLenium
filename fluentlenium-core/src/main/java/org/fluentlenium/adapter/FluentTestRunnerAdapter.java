@@ -2,7 +2,9 @@ package org.fluentlenium.adapter;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -291,7 +293,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testName  Test name
      */
     protected void failed(Throwable e, Class<?> testClass, String testName) {
-        if (isFluentControlAvailable()) {
+        if (isFluentControlAvailable() && !isIgnoredException(e)) {
             try {
                 if (getScreenshotMode() == TriggerMode.AUTOMATIC_ON_FAIL && canTakeScreenShot()) {
                     takeScreenShot(testClass.getSimpleName() + "_" + testName + ".png");
@@ -309,5 +311,28 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
             }
 
         }
+    }
+
+    private static final Set<String> IGNORED_EXCEPTIONS = new HashSet<String>() {
+        {
+            add("org.junit.internal.AssumptionViolatedException");
+            add("org.testng.SkipException");
+        }
+    };
+
+    private boolean isIgnoredException(Throwable e) {
+        if (e == null) {
+            return false;
+        }
+
+        Class clazz = e.getClass();
+        do {
+            if (IGNORED_EXCEPTIONS.contains(clazz.getName())) {
+                return true;
+            }
+            clazz = clazz.getSuperclass();
+        } while (clazz != Object.class);
+
+        return false;
     }
 }
