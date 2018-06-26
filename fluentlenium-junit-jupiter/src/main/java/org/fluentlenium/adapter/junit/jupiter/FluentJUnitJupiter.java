@@ -9,11 +9,11 @@ import java.lang.reflect.Method;
 import java.util.Optional;
 
 /**
- * FluentTest extension for JUnit 5.
+ * FluentTest extension for JUnit Jupiter.
  * <p>
- * To use this, annotate FluentTest class with @ExtendWith(FluentJUnit5.class).
+ * To use this, annotate FluentTest class with @ExtendWith(FluentJUnitJupiter.class).
  */
-public class FluentJUnit5 implements BeforeEachCallback, AfterEachCallback, AfterAllCallback {
+public class FluentJUnitJupiter implements BeforeEachCallback, AfterEachCallback, AfterAllCallback {
     @Override
     public void beforeEach(ExtensionContext context) {
         FluentTest instance = testInstanceOf(context);
@@ -41,7 +41,7 @@ public class FluentJUnit5 implements BeforeEachCallback, AfterEachCallback, Afte
         try {
             return (FluentTest) context.getTestInstance().orElse(null);
         } catch (ClassCastException e) {
-            throw new IllegalStateException("FluentJUnit5 can not be used other than FluentTest class.", e);
+            throw new IllegalStateException("FluentJUnitJupiter can not be used other than FluentTest class.", e);
         }
     }
 

@@ -5,16 +5,16 @@
 
     <parent>
         <groupId>org.fluentlenium.it</groupId>
-        <artifactId>junit5</artifactId>
+        <artifactId>junit-jupiter</artifactId>
         <version>testing</version>
     </parent>
 
-    <artifactId>junit5-parallel-methods</artifactId>
+    <artifactId>junit-jupiter-parallel-methods</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>org.fluentlenium</groupId>
-            <artifactId>fluentlenium-junit5</artifactId>
+            <artifactId>fluentlenium-junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -41,7 +41,7 @@
         </dependency>
         <dependency>
             <groupId>org.fluentlenium.it</groupId>
-            <artifactId>junit5-common</artifactId>
+            <artifactId>junit-jupiter-common</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

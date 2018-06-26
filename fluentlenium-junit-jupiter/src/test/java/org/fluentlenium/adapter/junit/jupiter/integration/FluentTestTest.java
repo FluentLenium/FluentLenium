@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -46,7 +47,6 @@ public class FluentTestTest {
     private static List<WebDriver> sharedOnceDrivers = new ArrayList<>();
 
     private static List<ScreenshotWebDriver> screenshotWebDrivers = new ArrayList<>();
-    private static File screenshotFile;
     private static String html = "<html>FluentLenium</html>";
     private static byte[] screenshotData = {1, 4, 7, 9, 2, 4, 2, 4, 3};
 
@@ -174,7 +174,7 @@ public class FluentTestTest {
         @Override
         public WebDriver newWebDriver() {
             try {
-                screenshotFile = File.createTempFile("FluentTestTest.java", "");
+                File screenshotFile = File.createTempFile("FluentTestTest.java", "");
                 FileUtils.writeByteArrayToFile(screenshotFile, screenshotData);
                 screenshotFile.deleteOnExit();
             } catch (IOException e) {
@@ -182,7 +182,9 @@ public class FluentTestTest {
             }
 
             ScreenshotWebDriver webDriver = Mockito.mock(ScreenshotWebDriver.class);
-            Mockito.when(webDriver.getScreenshotAs(OutputType.FILE)).thenReturn(screenshotFile);
+            byte[] screenshot = new byte[20];
+            new Random().nextBytes(screenshot);
+            Mockito.when(webDriver.getScreenshotAs(OutputType.BYTES)).thenReturn(screenshotData);
 
             WebElement htmlElement = Mockito.mock(WebElement.class);
             Mockito.when(htmlElement.getAttribute("innerHTML")).thenReturn(html);

@@ -17,10 +17,10 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class FluentJUnit5Test {
+public class FluentJUnitJupiterTest {
     @Mock
     private ExtensionContext context;
-    private FluentJUnit5 sut;
+    private FluentJUnitJupiter sut;
 
     static class Test1 extends FluentTest {
         void test1() {
@@ -34,7 +34,7 @@ public class FluentJUnit5Test {
     void beforeEach() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        sut = new FluentJUnit5();
+        sut = new FluentJUnitJupiter();
         test = spy(new Test1());
 
         when(context.getTestInstance()).thenReturn(Optional.of(test));
