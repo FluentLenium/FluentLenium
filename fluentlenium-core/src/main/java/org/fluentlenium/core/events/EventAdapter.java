@@ -143,16 +143,6 @@ class EventAdapter implements WebDriverEventListener {
     }
 
     @Override
-    public void beforeGetText(WebElement webElement, WebDriver webDriver) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void afterGetText(WebElement webElement, WebDriver webDriver, String s) {
-        throw new NotImplementedException();
-    }
-
-    @Override
     public void beforeAlertAccept(WebDriver driver) {
         listener.beforeAlertAccept(driver);
     }
