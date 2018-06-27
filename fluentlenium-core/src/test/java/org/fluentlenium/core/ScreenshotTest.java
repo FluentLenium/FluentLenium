@@ -27,14 +27,14 @@ public class ScreenshotTest {
     public void whenBrowserDoesntAcceptScreenshotThenCustomError() {
         adapter = new FluentAdapter();
         adapter.initFluent(new CustomWebDriverNoScreenshot());
-        adapter.takeScreenShot();
+        adapter.takeScreenshot();
     }
 
     @Test
     public void whenBrowserDoesAcceptScreenshotThenNoException() throws IOException {
         adapter = new FluentAdapter();
         adapter.initFluent(new CustomWebDriverScreenshot());
-        adapter.takeScreenShot(folder.newFile("test.jpg").getAbsolutePath());
+        adapter.takeScreenshot(folder.newFile("test.jpg").getAbsolutePath());
     }
 
     @After

@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>3.5.1</version>
+        <version>3.6.0</version>
     </parent>
 
     <artifactId>fluentlenium-testng</artifactId>
@@ -16,7 +16,6 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>3.9.0</version>
         </dependency>
         <dependency>
             <groupId>org.fluentlenium</groupId>
@@ -81,7 +80,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-invoker-plugin</artifactId>
-                        <version>2.0.0</version>
+                        <version>3.0.1</version>
                         <configuration>
                             <skipInstallation>${skipTests}</skipInstallation>
                             <skipInvocation>${skipTests}</skipInvocation>

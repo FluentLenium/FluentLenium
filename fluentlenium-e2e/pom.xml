@@ -5,11 +5,11 @@
     <parent>
         <artifactId>fluentlenium-parent</artifactId>
         <groupId>org.fluentlenium</groupId>
-        <version>3.5.0</version>
+        <version>3.6.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>fluentlenium-e2e</artifactId>
-    <version>3.4.2-SNAPSHOT</version>
+    <version>3.6.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -25,7 +25,6 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.9.10</version>
         </dependency>
         <dependency>
             <groupId>org.fluentlenium</groupId>

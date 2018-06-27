@@ -61,5 +61,4 @@ public class FluentTest extends FluentTestRunnerAdapter {
         }
     };
     //CHECKSTYLE.ON: VisibilityModifier
-
 }

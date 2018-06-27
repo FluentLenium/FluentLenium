@@ -37,21 +37,21 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 ```xml
 <properties>
     <!-- Configure this property to latest available version -->
-    <fluentlenium.version>3.5.0</fluentlenium.version>
+    <fluentlenium.version>3.6.0</fluentlenium.version>
     <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-    <selenium.version>3.9.0</selenium.version>
+    <selenium.version>3.12.0</selenium.version>
 </properties>
 
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.5.0</version>
+    <version>3.6.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.5.0</version>
+    <version>3.6.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -63,7 +63,7 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>htmlunit-driver</artifactId>
-    <version>2.29.0</version>
+    <version>2.31.0</version>
     <scope>test</scope>
 </dependency>
 ```
