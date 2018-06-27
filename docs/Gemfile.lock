@@ -96,7 +96,7 @@ GEM
     minitest (5.9.0)
     multipart-post (2.0.0)
     net-dns (0.8.0)
-    nokogiri (1.6.8)
+    nokogiri (1.8.2)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     octokit (4.3.0)
