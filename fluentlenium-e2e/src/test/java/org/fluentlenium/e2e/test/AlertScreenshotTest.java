@@ -11,6 +11,7 @@ import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class AlertScreenshotTest extends E2ETest {
@@ -18,7 +19,8 @@ public class AlertScreenshotTest extends E2ETest {
     public static final String MY_TEST_SCREENSHOT_PNG = "myTestScreenshot.png";
 
     @Test
-    public void checkPolling() throws IOException {
+    @Ignore
+    public void testAlertBoxIsPresent() throws IOException {
         goTo(getAbsoluteUrlFromFile("alert.html"));
         await().until(el("#alertBox")).displayed();
         el("#alertBox").click();
