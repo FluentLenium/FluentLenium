@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -46,8 +48,8 @@ public class ImageUtils {
         }
     }
 
-    private BufferedImage toBufferedImage(String fileName) {
-        InputStream is = this.getClass().getResourceAsStream(fileName);
+    public static BufferedImage toBufferedImage(String fileName) throws FileNotFoundException {
+        InputStream is = new FileInputStream(new File(fileName));
         try {
             BufferedImage image = ImageIO.read(is);
             is.close();
@@ -87,9 +89,9 @@ public class ImageUtils {
         }
     }
 
-    private BufferedImage generateAlertImageWithLogo(String alertText, int screenshotWidth) {
+    private BufferedImage generateAlertImageWithLogo(String alertText, int screenshotWidth) throws FileNotFoundException {
         BufferedImage alertImage = generateImageWithText(alertText, screenshotWidth, 200);
-        BufferedImage logo = toBufferedImage(new File("fl_logo.png").getAbsolutePath());
+        BufferedImage logo = toBufferedImage(ImageUtils.class.getResource("/fl_logo.png").getPath());
         return stitchImages(alertImage, logo, true);
     }
 
