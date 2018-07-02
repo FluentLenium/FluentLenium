@@ -197,9 +197,9 @@ public class ContainerAnnotationsEventsRegistry {
                     listenerCount++;
                 }
                 if (method.getAnnotation(AfterSwitchToWindow.class) != null) {
-                    registry.afterAlertDismiss(
-                            new AnnotationAlertListener(method, container, AfterAlertDismiss.class.getSimpleName(),
-                                    method.getAnnotation(AfterAlertDismiss.class).value()));
+                    registry.afterSwitchToWindow(
+                            new AnnotationSwitchToWindowListener(method, container, AfterSwitchToWindow.class.getSimpleName(),
+                                    method.getAnnotation(AfterSwitchToWindow.class).value()));
                     listenerCount++;
                 }
 
