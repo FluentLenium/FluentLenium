@@ -5,11 +5,11 @@
     <parent>
         <artifactId>fluentlenium-parent</artifactId>
         <groupId>org.fluentlenium</groupId>
-        <version>3.6.0</version>
+        <version>3.6.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>fluentlenium-e2e</artifactId>
-    <version>3.6.0</version>
+    <version>3.6.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>

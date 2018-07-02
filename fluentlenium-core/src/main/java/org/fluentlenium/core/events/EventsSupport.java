@@ -2,6 +2,7 @@ package org.fluentlenium.core.events;
 
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -190,6 +191,34 @@ public class EventsSupport implements EventListener {
     public void afterAlertDismiss(WebDriver driver) {
         for (AlertListener listener : eventsRegistry.afterAlertDismiss) {
             listener.on(driver);
+        }
+    }
+
+    @Override
+    public void beforeSwitchToWindow(String s, WebDriver webDriver) {
+        for (SwitchToWindowListener listener : eventsRegistry.beforeSwitchToWindow) {
+            listener.on(s, webDriver);
+        }
+    }
+
+    @Override
+    public void afterSwitchToWindow(String s, WebDriver webDriver) {
+        for (SwitchToWindowListener listener : eventsRegistry.afterSwitchToWindow) {
+            listener.on(s, webDriver);
+        }
+    }
+
+    @Override
+    public <X> void beforeGetScreenshotAs(OutputType<X> outputType) {
+        for (GetScreenshotAsListener<X> listener : eventsRegistry.beforeGetScreenshotAs) {
+            listener.on(outputType);
+        }
+    }
+
+    @Override
+    public <X> void afterGetScreenshotAs(OutputType<X> outputType, X x) {
+        for (GetScreenshotAsListener<X> listener : eventsRegistry.beforeGetScreenshotAs) {
+            listener.on(outputType, x);
         }
     }
 }
