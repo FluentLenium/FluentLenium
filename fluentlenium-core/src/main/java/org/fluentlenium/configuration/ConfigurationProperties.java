@@ -292,8 +292,8 @@ public interface ConfigurationProperties {
     /**
      * <pre>screenshotPath</pre> property.
      *
-     * Sets the filesystem path where screenshot will be saved when calling {@link FluentAdapter#takeScreenShot()} or
-     * {@link FluentAdapter#takeScreenShot(String)}.
+     * Sets the filesystem path where screenshot will be saved when calling {@link FluentAdapter#takeScreenshot()} or
+     * {@link FluentAdapter#takeScreenshot(String)}.
      *
      * Default value is null.
      *

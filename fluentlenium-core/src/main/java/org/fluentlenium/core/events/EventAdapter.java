@@ -10,8 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * FluentLenium adapter for Selenium events listener.
  */
@@ -119,12 +117,12 @@ class EventAdapter implements WebDriverEventListener {
 
     @Override
     public void beforeSwitchToWindow(String s, WebDriver webDriver) {
-        throw new NotImplementedException();
+        listener.beforeSwitchToWindow(s, webDriver);
     }
 
     @Override
     public void afterSwitchToWindow(String s, WebDriver webDriver) {
-        throw new NotImplementedException();
+        listener.afterSwitchToWindow(s, webDriver);
     }
 
     @Override
@@ -134,12 +132,12 @@ class EventAdapter implements WebDriverEventListener {
 
     @Override
     public <X> void beforeGetScreenshotAs(OutputType<X> outputType) {
-        throw new NotImplementedException();
+        listener.beforeGetScreenshotAs(outputType);
     }
 
     @Override
     public <X> void afterGetScreenshotAs(OutputType<X> outputType, X x) {
-        throw new NotImplementedException();
+        listener.afterGetScreenshotAs(outputType, x);
     }
 
     @Override

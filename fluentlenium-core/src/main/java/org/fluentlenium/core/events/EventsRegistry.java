@@ -68,6 +68,13 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
 
     /* default */ final List<AlertListener> afterAlertDismiss = new ArrayList<>();
 
+    /* default */ final List<SwitchToWindowListener> beforeSwitchToWindow = new ArrayList<>();
+
+    /* default */ final List<SwitchToWindowListener> afterSwitchToWindow = new ArrayList<>();
+
+    /* default */ final List<GetScreenshotAsListener> beforeGetScreenshotAs = new ArrayList<>();
+
+    /* default */ final List<GetScreenshotAsListener> afterGetScreenshotAs = new ArrayList<>();
 
     /* default */ final List<ExceptionListener> onException = new ArrayList<>();
 
@@ -393,6 +400,50 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
     }
 
     /**
+     * Add a listener that will be invoked after window switch.
+     *
+     * @param listener listener invoked after window switch.
+     * @return {@code this} to chain method calls
+     */
+    public EventsRegistry afterSwitchToWindow(SwitchToWindowListener listener) {
+        afterSwitchToWindow.add(listener);
+        return this;
+    }
+
+    /**
+     * Add a listener that will be invoked before window switch.
+     *
+     * @param listener listener invoked before window switch.
+     * @return {@code this} to chain method calls
+     */
+    public EventsRegistry beforeSwitchToWindow(SwitchToWindowListener listener) {
+        beforeSwitchToWindow.add(listener);
+        return this;
+    }
+
+    /**
+     * Add a listener that will be invoked after getScreenshotAs.
+     *
+     * @param listener listener invoked after getScreenshotAs.
+     * @return {@code this} to chain method calls
+     */
+    public EventsRegistry afterGetScreenshotAs(GetScreenshotAsListener listener) {
+        afterGetScreenshotAs.add(listener);
+        return this;
+    }
+
+    /**
+     * Add a listener that will be invoked before getScreenshotAs.
+     *
+     * @param listener listener invoked before getScreenshotAs.
+     * @return {@code this} to chain method calls
+     */
+    public EventsRegistry beforeGetScreenshotAs(GetScreenshotAsListener listener) {
+        beforeGetScreenshotAs.add(listener);
+        return this;
+    }
+
+    /**
      * Sort listeners based on priority.
      *
      * @see ListenerPriorityComparator
@@ -426,6 +477,12 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
 
         Collections.sort(beforeScript, comparator);
         Collections.sort(afterScript, comparator);
+
+        Collections.sort(beforeGetScreenshotAs, comparator);
+        Collections.sort(afterGetScreenshotAs, comparator);
+
+        Collections.sort(beforeSwitchToWindow, comparator);
+        Collections.sort(afterSwitchToWindow, comparator);
 
         Collections.sort(onException, comparator);
     }
@@ -462,6 +519,12 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
 
         unregisterContainer(beforeScript, container);
         unregisterContainer(afterScript, container);
+
+        unregisterContainer(beforeGetScreenshotAs, container);
+        unregisterContainer(afterGetScreenshotAs, container);
+
+        unregisterContainer(beforeSwitchToWindow, container);
+        unregisterContainer(afterSwitchToWindow, container);
 
         unregisterContainer(onException, container);
     }

@@ -296,7 +296,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         if (isFluentControlAvailable() && !isIgnoredException(e)) {
             try {
                 if (getScreenshotMode() == TriggerMode.AUTOMATIC_ON_FAIL && canTakeScreenShot()) {
-                    takeScreenShot(testClass.getSimpleName() + "_" + testName + ".png");
+                    this.takeScreenshot(testClass.getSimpleName() + "_" + testName + ".png");
                 }
             } catch (Exception exception) { // NOPMD EmptyCatchBlock
                 // Can't write screenshot, for some reason.

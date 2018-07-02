@@ -3,6 +3,7 @@ package org.fluentlenium.core.events;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -194,4 +195,34 @@ public interface EventListener {
      */
     void afterAlertDismiss(WebDriver driver);
 
+    /**
+     * Called  before {@link WebDriver.Window#switchTo()} ()}
+     *
+     * @param s String
+     * @param driver WebDriver
+     */
+    void beforeSwitchToWindow(String s, WebDriver driver);
+
+    /**
+     * Called  after {@link WebDriver.Window#switchTo()} ()}
+     *
+     * @param s String
+     * @param driver WebDriver
+     */
+    void afterSwitchToWindow(String s, WebDriver driver);
+
+    /**
+     * Called  before {@link org.openqa.selenium.TakesScreenshot#getScreenshotAs(OutputType)} ()}
+     *
+     * @param outputType OutputType
+     */
+    <X> void beforeGetScreenshotAs(OutputType<X> outputType);
+
+    /**
+     * Called  after {@link org.openqa.selenium.TakesScreenshot#getScreenshotAs(OutputType)} ()}
+     *
+     * @param outputType OutputType
+     * @param x X
+     */
+    <X> void afterGetScreenshotAs(OutputType<X> outputType, X x);
 }

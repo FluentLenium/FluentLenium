@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>3.6.0-SNAPSHOT</version>
+    <version>3.6.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -14,7 +14,7 @@
         <module>fluentlenium-core</module>
         <module>fluentlenium-assertj</module>
         <module>fluentlenium-junit</module>
-        <module>fluentlenium-junit5</module>
+        <module>fluentlenium-junit-jupiter</module>
         <module>fluentlenium-testng</module>
         <module>fluentlenium-cucumber</module>
         <module>fluentlenium-spock</module>

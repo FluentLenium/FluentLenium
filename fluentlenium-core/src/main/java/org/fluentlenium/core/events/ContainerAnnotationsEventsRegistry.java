@@ -5,23 +5,27 @@ import org.fluentlenium.core.events.annotations.AfterAlertDismiss;
 import org.fluentlenium.core.events.annotations.AfterChangeValueOf;
 import org.fluentlenium.core.events.annotations.AfterClickOn;
 import org.fluentlenium.core.events.annotations.AfterFindBy;
+import org.fluentlenium.core.events.annotations.AfterGetScreenshotAs;
 import org.fluentlenium.core.events.annotations.AfterNavigate;
 import org.fluentlenium.core.events.annotations.AfterNavigateBack;
 import org.fluentlenium.core.events.annotations.AfterNavigateForward;
 import org.fluentlenium.core.events.annotations.AfterNavigateRefresh;
 import org.fluentlenium.core.events.annotations.AfterNavigateTo;
 import org.fluentlenium.core.events.annotations.AfterScript;
+import org.fluentlenium.core.events.annotations.AfterSwitchToWindow;
 import org.fluentlenium.core.events.annotations.BeforeAlertAccept;
 import org.fluentlenium.core.events.annotations.BeforeAlertDismiss;
 import org.fluentlenium.core.events.annotations.BeforeChangeValueOf;
 import org.fluentlenium.core.events.annotations.BeforeClickOn;
 import org.fluentlenium.core.events.annotations.BeforeFindBy;
+import org.fluentlenium.core.events.annotations.BeforeGetScreenshotAs;
 import org.fluentlenium.core.events.annotations.BeforeNavigate;
 import org.fluentlenium.core.events.annotations.BeforeNavigateBack;
 import org.fluentlenium.core.events.annotations.BeforeNavigateForward;
 import org.fluentlenium.core.events.annotations.BeforeNavigateRefresh;
 import org.fluentlenium.core.events.annotations.BeforeNavigateTo;
 import org.fluentlenium.core.events.annotations.BeforeScript;
+import org.fluentlenium.core.events.annotations.BeforeSwitchToWindow;
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Method;
@@ -183,6 +187,33 @@ public class ContainerAnnotationsEventsRegistry {
                     registry.afterAlertDismiss(
                             new AnnotationAlertListener(method, container, AfterAlertDismiss.class.getSimpleName(),
                                     method.getAnnotation(AfterAlertDismiss.class).value()));
+                    listenerCount++;
+                }
+
+                if (method.getAnnotation(BeforeSwitchToWindow.class) != null) {
+                    registry.beforeSwitchToWindow(
+                            new AnnotationSwitchToWindowListener(method, container, BeforeSwitchToWindow.class.getSimpleName(),
+                                    method.getAnnotation(BeforeSwitchToWindow.class).value()));
+                    listenerCount++;
+                }
+                if (method.getAnnotation(AfterSwitchToWindow.class) != null) {
+                    registry.afterSwitchToWindow(
+                            new AnnotationSwitchToWindowListener(method, container, AfterSwitchToWindow.class.getSimpleName(),
+                                    method.getAnnotation(AfterSwitchToWindow.class).value()));
+                    listenerCount++;
+                }
+
+
+                if (method.getAnnotation(BeforeGetScreenshotAs.class) != null) {
+                    registry.beforeGetScreenshotAs(
+                            new AnnotationGetScreenshotAsListener(method, container, BeforeGetScreenshotAs.class.getSimpleName(),
+                                    method.getAnnotation(BeforeGetScreenshotAs.class).value()));
+                    listenerCount++;
+                }
+                if (method.getAnnotation(AfterGetScreenshotAs.class) != null) {
+                    registry.afterGetScreenshotAs(
+                            new AnnotationGetScreenshotAsListener(method, container, AfterGetScreenshotAs.class.getSimpleName(),
+                                    method.getAnnotation(AfterGetScreenshotAs.class).value()));
                     listenerCount++;
                 }
             }
