@@ -32,7 +32,7 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 ```xml
 <properties>
     <!-- Configure this property to latest available version -->
-    <fluentlenium.version>3.6.1-SNAPSHOT</fluentlenium.version>
+    <fluentlenium.version>3.6.1</fluentlenium.version>
     <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
     <selenium.version>3.12.0</selenium.version>
 </properties>
@@ -40,13 +40,13 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.6.1-SNAPSHOT</version>
+    <version>3.6.1</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.6.1-SNAPSHOT</version>
+    <version>3.6.1</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -1788,7 +1788,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.6.1-SNAPSHOT</version>
+    <version>3.6.1</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1803,7 +1803,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit-jupiter</artifactId>
-    <version>3.6.1-SNAPSHOT</version>
+    <version>3.6.1</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1833,7 +1833,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-cucumber</artifactId>
-    <version>3.6.1-SNAPSHOT</version>
+    <version>3.6.1</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1862,7 +1862,7 @@ public void after(Scenario scenario) {
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-spock</artifactId>
-    <version>3.6.1-SNAPSHOT</version>
+    <version>3.6.1</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1890,7 +1890,7 @@ assertEqual("Hello toto",window().title());
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.6.1-SNAPSHOT</version>
+    <version>3.6.1</version>
     <scope>test</scope>
 </dependency>
 ```
