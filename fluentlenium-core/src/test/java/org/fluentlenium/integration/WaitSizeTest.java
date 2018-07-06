@@ -43,6 +43,20 @@ public class WaitSizeTest extends IntegrationFluentTest {
         goTo(SIZE_CHANGE_URL);
         await().atMost(2, TimeUnit.SECONDS).until(myList).size().greaterThan(3);
     }
+
+    @Test
+    public void waitForListChangeUsingListVariableAndEqualMethod() {
+        FluentList<FluentWebElement> myList = $(".row");
+        goTo(SIZE_CHANGE_URL);
+        await().until(myList).size().equalTo(3);
+    }
+
+    @Test
+    public void waitForListChangeToValueDefinedInSizeMethod() {
+        FluentList<FluentWebElement> myList = $(".row");
+        goTo(SIZE_CHANGE_URL);
+        await().until(myList).size(3);
+    }
 }
 
 class SizeChangePage extends FluentPage {

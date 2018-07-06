@@ -14,7 +14,7 @@ public class DynamicIntegerConditionsImpl extends AbstractObjectConditions<List<
     /**
      * Creates a new conditions object on integer.
      *
-     * @param supplier  underlying list
+     * @param supplier underlying list
      * @param negation negation value
      */
     public DynamicIntegerConditionsImpl(Supplier<List<? extends FluentWebElement>> supplier, boolean negation) {
@@ -34,7 +34,7 @@ public class DynamicIntegerConditionsImpl extends AbstractObjectConditions<List<
 
     @Override
     public boolean equalTo(int value) {
-        return verify(input -> input.size() == value);
+        return verify(input -> ((FluentList<FluentWebElement>) input).count() == value);
     }
 
     @Override
