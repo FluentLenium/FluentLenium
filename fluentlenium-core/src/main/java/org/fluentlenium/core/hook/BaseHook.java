@@ -4,7 +4,6 @@ import lombok.experimental.Delegate;
 import org.fluentlenium.core.DefaultFluentContainer;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
-import org.fluentlenium.core.hook.wait.WaitHook;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.interactions.internal.Locatable;
