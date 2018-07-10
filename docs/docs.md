@@ -145,7 +145,7 @@ public class DuckDuckMainPage extends FluentPage {
     }
 
     private DuckDuckMainPage awaitUntilSearchFormDisappear() {
-        await().atMost(5, TimeUnit.SECONDS).until(el(SEARCH_FORM_HOMEPAGE)).not().present();
+        await().atMost(2, TimeUnit.SECONDS).until(el(SEARCH_FORM_HOMEPAGE)).not().present();
         return this;
     }
 }
@@ -902,12 +902,12 @@ el("button").click(); // This will call the listener.
 
 There are multiple ways to make your driver wait for the result of an asynchronous call.
 FluentLenium provides a rich and fluent API in order to help you to handle AJAX calls.
-If you want to wait for at most 5 seconds until the number of elements corresponding to the until criteria (here the class fluent) has the requested size:
+If you want to wait for at most 2 seconds until the number of elements corresponding to the until criteria (here the class fluent) has the requested size:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until($(".fluent")).size(3);
+await().atMost(2, TimeUnit.SECONDS).until($(".fluent")).size(3);
 ```
-The default wait is 500 ms.
+The default wait is 5 seconds.
 
 You can also use after `size()` : `greaterThan(int)`, `lessThan(int)`, `lessThanOrEqualTo(int)`, `greaterThanOrEqualTo(int)` , `equalTo(int)`, `notEqualTo(int)`
 
@@ -918,8 +918,8 @@ You can use `not()` function to negate any condition.
 If you need to be more precise, you can also use filters and matchers in the search:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until($(".fluent", withText("myText"))).size(3);
-await().atMost(5, TimeUnit.SECONDS).until($(".fluent", withText().startsWith("start"))).present();
+await().atMost(2, TimeUnit.SECONDS).until($(".fluent", withText("myText"))).size(3);
+await().atMost(2, TimeUnit.SECONDS).until($(".fluent", withText().startsWith("start"))).present();
 ```
 
 Just use `startsWith`, `notStartsWith`, `endsWith`, `notEndsWith`, `contains`, `notContains`, `equalTo`, `containsWord`.
@@ -927,7 +927,7 @@ Just use `startsWith`, `notStartsWith`, `endsWith`, `notEndsWith`, `contains`, `
 If you need to filter on a custom attribute name, this syntax will help:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until($(".fluent", with("myAttribute").startsWith("myValue"))).present();
+await().atMost(2, TimeUnit.SECONDS).until($(".fluent", with("myAttribute").startsWith("myValue"))).present();
 ```
 
 You can also give instance of elements or list of elements if required.
@@ -936,23 +936,23 @@ You can also give instance of elements or list of elements if required.
 @FindBy(css = ".button")
 private FluentWebElement button;
 
-await().atMost(5, TimeUnit.SECONDS).until(element).enabled();
+await().atMost(2, TimeUnit.SECONDS).until(element).enabled();
 ```
 
 When running Java 8, you can use lambdas with `until`, `untilPredicate`, `untilElement` or `untilElements`.
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).untilElement(() -> el(".button").enabled());
-await().atMost(5, TimeUnit.SECONDS).untilElements(() -> $(".button").each().enabled());
-await().atMost(5, TimeUnit.SECONDS).untilElements(() -> $(".button").one().enabled());
+await().atMost(2, TimeUnit.SECONDS).untilElement(() -> el(".button").enabled());
+await().atMost(2, TimeUnit.SECONDS).untilElements(() -> $(".button").each().enabled());
+await().atMost(2, TimeUnit.SECONDS).untilElements(() -> $(".button").one().enabled());
 
-await().atMost(5, TimeUnit.SECONDS).untilPredicate((f) -> el(".button").enabled());
+await().atMost(2, TimeUnit.SECONDS).untilPredicate((f) -> el(".button").enabled());
 ```
 
 Using `Supplier` as `until` argument will help you to write `awaits` which can work with dynamic pages.
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until(() -> el(".button").enabled());
+await().atMost(2, TimeUnit.SECONDS).until(() -> el(".button").enabled());
 await().until(() -> $(".listItem").first().displayed());
 ```
 
@@ -965,7 +965,7 @@ await().atMost(1, NANOSECONDS).untilPage().loaded();
 If you want to wait until the page you want is the page that you are at, you can use:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).untilPage(myPage).isAt();
+await().atMost(2, TimeUnit.SECONDS).untilPage(myPage).isAt();
 ```
 
 You can override `await()` method in your own test class to define default settings for wait objects:
@@ -973,7 +973,7 @@ You can override `await()` method in your own test class to define default setti
 ```java
 @Override
 public FluentWait await() {
-    return super.await().atMost(5, TimeUnit.SECONDS).ignoring(NoSuchElementException.class, ElementNotVisibleException.class);
+    return super.await().atMost(2, TimeUnit.SECONDS).ignoring(NoSuchElementException.class, ElementNotVisibleException.class);
 }
 ```
 
@@ -988,7 +988,7 @@ The default value is 500ms.
 You can also chain filter in the asynchronous API:
 
 ```java
-await().atMost(5, TimeUnit.SECONDS).until($(".fluent", with("myAttribute").startsWith("myValue"), with("a second attribute").equalTo("my@ndValue"))).present();
+await().atMost(2, TimeUnit.SECONDS).until($(".fluent", with("myAttribute").startsWith("myValue"), with("a second attribute").equalTo("my@ndValue"))).present();
 ```
 
 ## Hooks
@@ -1125,7 +1125,7 @@ public void click() {
 }
 ```
 
-[Example sources are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/examples/quickstart/src/test/java/org/fluentlenium/examples/hooks).
+[Example sources are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/examples/hooks/src/test/java/org/fluentlenium/examples/hooks).
 
 You may also read [sources for @Wait hook](https://github.com/FluentLenium/FluentLenium/tree/master/fluentlenium-core/src/main/java/org/fluentlenium/core/hook/wait) to read how it's implemented.
 
