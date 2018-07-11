@@ -6,7 +6,7 @@
 
     <artifactId>fluentlenium-examples-spock</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>3.6.1-SNAPSHOT</version>
+    <version>3.6.1</version>
 
     <name>FluentLenium Examples Spock</name>
 

@@ -1,8 +1,10 @@
 package org.fluentlenium.integration;
 
+import org.fluentlenium.core.hook.wait.Wait;
 import org.junit.Test;
 
-public class ActionOnSelectorAdvancedUserIntegrationTest extends AbstractActionOnSelectorAdvancedUserIntegrationTest {
+@Wait
+public class ActionOnSelectorAdvancedUserIntegrationWaitHookTest extends AbstractActionOnSelectorAdvancedUserIntegrationTest {
     @Test
     public void checkDoubleClickAction() {
         checkDoubleClick();
