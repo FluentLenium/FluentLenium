@@ -312,27 +312,4 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
 
         }
     }
-
-    private static final Set<String> IGNORED_EXCEPTIONS = new HashSet<String>() {
-        {
-            add("org.junit.internal.AssumptionViolatedException");
-            add("org.testng.SkipException");
-        }
-    };
-
-    private boolean isIgnoredException(Throwable e) {
-        if (e == null) {
-            return false;
-        }
-
-        Class clazz = e.getClass();
-        do {
-            if (IGNORED_EXCEPTIONS.contains(clazz.getName())) {
-                return true;
-            }
-            clazz = clazz.getSuperclass();
-        } while (clazz != Object.class);
-
-        return false;
-    }
 }
