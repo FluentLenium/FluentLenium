@@ -18,6 +18,7 @@ import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 import org.fluentlenium.configuration.ConfigurationProperties;
+import org.junit.AssumptionViolatedException;
 import org.fluentlenium.utils.ImageUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -131,5 +132,49 @@ public class FluentTestRunnerAdapterTest {
         }
 
         fail("FluentControl is not initialized exception, did not throw!");
+    }
+
+    @Test
+    public void takesScreenshotWhenTestFails() throws IOException {
+        FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
+        adapter.initFluent(driver);
+
+        Path tmpDirectory = Files.createTempDirectory("takesScreenshotWhenTestFails");
+        adapter.getConfiguration().setScreenshotPath(tmpDirectory.toFile().getPath());
+        adapter.getConfiguration().setHtmlDumpPath(tmpDirectory.toFile().getPath());
+
+        adapter.getConfiguration().setScreenshotMode(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
+
+        when(adapter.isFluentControlAvailable()).thenReturn(true);
+
+        try {
+            adapter.failed(new AssertionError("for test"), FluentTestRunnerAdapterTest.class, "testName");
+        } finally {
+            FileUtils.deleteDirectory(tmpDirectory.toFile());
+        }
+
+        verify(adapter).takeScreenShot("FluentTestRunnerAdapterTest_testName.png");
+    }
+
+    @Test
+    public void noScreenShotOnAssumptionException() throws IOException {
+        FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
+        adapter.initFluent(driver);
+
+        Path tmpDirectory = Files.createTempDirectory("takesScreenshotWhenTestFails");
+        adapter.getConfiguration().setScreenshotPath(tmpDirectory.toFile().getPath());
+        adapter.getConfiguration().setHtmlDumpPath(tmpDirectory.toFile().getPath());
+
+        adapter.getConfiguration().setScreenshotMode(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
+
+        when(adapter.isFluentControlAvailable()).thenReturn(true);
+
+        try {
+            adapter.failed(new AssumptionViolatedException("for test"), FluentTestRunnerAdapterTest.class, "testName");
+        } finally {
+            FileUtils.deleteDirectory(tmpDirectory.toFile());
+        }
+
+        verify(adapter, never()).takeScreenShot(anyString());
     }
 }
