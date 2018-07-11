@@ -159,6 +159,12 @@ public class FluentAdapter implements FluentControl {
         return webDriver;
     }
 
+    /**
+     * Checks if the exception should be ignored and not reported as a test case fail
+     *
+     * @param e - the exception to check is it defined in ignored exceptions set
+     * @return boolean
+     */
     boolean isIgnoredException(Throwable e) {
         if (e == null) {
             return false;

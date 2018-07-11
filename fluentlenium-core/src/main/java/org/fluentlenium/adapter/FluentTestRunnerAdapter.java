@@ -2,9 +2,7 @@ package org.fluentlenium.adapter;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -117,8 +115,6 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
             throw new WebDriverException("Browser failed to start, test [ " + testName + " ] execution interrupted."
                     + (isEmpty(causeMessage) ? "" : "\nCaused by: [ " + causeMessage + "]"), e);
         }
-
-
 
         initFluent(sharedWebDriver.getDriver());
     }
