@@ -153,7 +153,7 @@ public class FluentTestRunnerAdapterTest {
             FileUtils.deleteDirectory(tmpDirectory.toFile());
         }
 
-        verify(adapter).takeScreenShot("FluentTestRunnerAdapterTest_testName.png");
+        verify(adapter).takeScreenshot("FluentTestRunnerAdapterTest_testName.png");
     }
 
     @Test
@@ -175,6 +175,6 @@ public class FluentTestRunnerAdapterTest {
             FileUtils.deleteDirectory(tmpDirectory.toFile());
         }
 
-        verify(adapter, never()).takeScreenShot(anyString());
+        verify(adapter, never()).takeScreenshot(anyString());
     }
 }
