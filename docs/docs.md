@@ -223,6 +223,18 @@ $(By.cssSelector(".header")) // Native Selium `By` locator
 $(".fluent", withName("foo"), withId("id1")) // Filter chaining
 ```
 
+Available filter methods with descriptions are shown in the table below:
+
+| Method | Description |
+| ------ | ----------- |
+| withName(String text) | Filers elements with 'name' attribute equals to value passed as an method argument |
+| withId(String id) | Filers elements with 'id' attribute equals to value passed as an method argument |
+| withClass(String klass) | Filers elements with 'class' attribute equals to value passed as an method argument |
+| withText(String text) | Filers elements with inner text that has to be displayed and equals to value passed as an method argument |
+| containingText(String text) | Filers elements with inner text that has to be displayed and contains the value passed as an method argument |
+| withTextContent(String text) | Filers elements with inner text that can be displayed or hidden and equals to value passed as an method argument |
+| containingTextContent(String text) | Filers elements with inner text that can be displayed or hidden and contains the value passed as an method argument |
+
 You can do more complex string matching on the above filters using the following methods:
 
   - `contains`
