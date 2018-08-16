@@ -41,4 +41,12 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
 
         finished(scenario.getId());
     }
+
+    public void before() {
+        starting();
+    }
+
+    public void after() {
+        finished();
+    }
 }

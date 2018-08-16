@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.cucumber.integration.step;
+package org.fluentlenium.adapter.cucumber.integration.standard.step;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
