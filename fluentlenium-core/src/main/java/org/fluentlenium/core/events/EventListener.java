@@ -5,6 +5,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * Listener interface for events.
@@ -226,7 +227,20 @@ public interface EventListener {
      */
     <X> void afterGetScreenshotAs(OutputType<X> outputType, X x);
 
+    /**
+     * Called  before {@link WebElement#getText()} ()}
+     *
+     * @param webElement WebElement
+     * @param webDriver WebDriver
+     */
     void beforeGetText(FluentWebElement webElement, WebDriver webDriver);
 
+    /**
+     * Called  after {@link WebElement#getText()} ()}
+     *
+     * @param webElement WebElement
+     * @param webDriver WebDriver
+     * @param s String
+     */
     void afterGetText(FluentWebElement webElement, WebDriver webDriver, String s);
 }

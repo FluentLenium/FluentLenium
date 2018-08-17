@@ -1,5 +1,10 @@
 package org.fluentlenium.integration;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.NavigateAllListener;
 import org.fluentlenium.core.events.annotations.AfterClickOn;
@@ -15,11 +20,6 @@ import org.fluentlenium.core.events.annotations.BeforeNavigateRefresh;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnnotationsEventsTest extends IntegrationFluentTest {
 
@@ -113,7 +113,7 @@ public class AnnotationsEventsTest extends IntegrationFluentTest {
         assertThat(beforeGetText).isEqualTo(0);
         assertThat(afterGetText).isEqualTo(0);
 
-       el("#linkToPage2").text();
+        el("#linkToPage2").text();
 
         assertThat(beforeGetText).isEqualTo(1);
         assertThat(afterGetText).isEqualTo(1);

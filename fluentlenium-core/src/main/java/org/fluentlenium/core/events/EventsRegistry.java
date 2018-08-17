@@ -13,6 +13,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
+
 /**
  * Registry of event listeners.
  */
@@ -81,6 +83,22 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
     /* default */ final List<GetScreenshotAsListener> afterGetScreenshotAs = new ArrayList<>();
 
     /* default */ final List<ExceptionListener> onException = new ArrayList<>();
+
+    final List<List> eventLists = ImmutableList.of(
+            beforeNavigateTo, afterNavigateTo,
+            beforeNavigateBack, afterNavigateBack,
+            beforeNavigateForward, afterNavigateForward,
+            beforeNavigate, afterNavigate,
+            beforeNavigateRefresh, afterNavigateRefresh,
+            beforeFindBy, afterFindBy,
+            beforeClickOn, afterClickOn,
+            beforeChangeValueOf, afterChangeValueOf,
+            beforeScript, afterScript,
+            beforeGetText, afterGetText,
+            beforeGetScreenshotAs, afterGetScreenshotAs,
+            beforeSwitchToWindow, afterSwitchToWindow,
+            onException
+    );
 
     /**
      * Creates a new registry of event listeners.
@@ -466,43 +484,9 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
     protected void sortListeners() {
         ListenerPriorityComparator comparator = new ListenerPriorityComparator();
 
-        Collections.sort(beforeNavigateTo, comparator);
-        Collections.sort(afterNavigateTo, comparator);
-
-        Collections.sort(beforeNavigateBack, comparator);
-        Collections.sort(afterNavigateBack, comparator);
-
-        Collections.sort(beforeNavigateForward, comparator);
-        Collections.sort(afterNavigateForward, comparator);
-
-        Collections.sort(beforeNavigate, comparator);
-        Collections.sort(afterNavigate, comparator);
-
-        Collections.sort(beforeNavigateRefresh, comparator);
-        Collections.sort(afterNavigateRefresh, comparator);
-
-        Collections.sort(beforeFindBy, comparator);
-        Collections.sort(afterFindBy, comparator);
-
-        Collections.sort(beforeClickOn, comparator);
-        Collections.sort(afterClickOn, comparator);
-
-        Collections.sort(beforeChangeValueOf, comparator);
-        Collections.sort(afterChangeValueOf, comparator);
-
-        Collections.sort(beforeScript, comparator);
-        Collections.sort(afterScript, comparator);
-
-        Collections.sort(beforeGetText, comparator);
-        Collections.sort(afterGetText, comparator);
-
-        Collections.sort(beforeGetScreenshotAs, comparator);
-        Collections.sort(afterGetScreenshotAs, comparator);
-
-        Collections.sort(beforeSwitchToWindow, comparator);
-        Collections.sort(afterSwitchToWindow, comparator);
-
-        Collections.sort(onException, comparator);
+        for (List eventList : eventLists) {
+            Collections.sort(eventList, comparator);
+        }
     }
 
     /**
@@ -511,43 +495,9 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      * @param container container
      */
     public void unregisterContainer(Object container) {
-        unregisterContainer(beforeNavigateTo, container);
-        unregisterContainer(afterNavigateTo, container);
-
-        unregisterContainer(beforeNavigateBack, container);
-        unregisterContainer(afterNavigateBack, container);
-
-        unregisterContainer(beforeNavigateForward, container);
-        unregisterContainer(afterNavigateForward, container);
-
-        unregisterContainer(beforeNavigate, container);
-        unregisterContainer(afterNavigate, container);
-
-        unregisterContainer(beforeNavigateRefresh, container);
-        unregisterContainer(afterNavigateRefresh, container);
-
-        unregisterContainer(beforeFindBy, container);
-        unregisterContainer(afterFindBy, container);
-
-        unregisterContainer(beforeClickOn, container);
-        unregisterContainer(afterClickOn, container);
-
-        unregisterContainer(beforeChangeValueOf, container);
-        unregisterContainer(afterChangeValueOf, container);
-
-        unregisterContainer(beforeScript, container);
-        unregisterContainer(afterScript, container);
-
-        unregisterContainer(beforeGetText, container);
-        unregisterContainer(afterGetText, container);
-
-        unregisterContainer(beforeGetScreenshotAs, container);
-        unregisterContainer(afterGetScreenshotAs, container);
-
-        unregisterContainer(beforeSwitchToWindow, container);
-        unregisterContainer(afterSwitchToWindow, container);
-
-        unregisterContainer(onException, container);
+        for (List eventList : eventLists) {
+            unregisterContainer(eventList, container);
+        }
     }
 
     private void unregisterContainer(Iterable iterable, Object container) {
