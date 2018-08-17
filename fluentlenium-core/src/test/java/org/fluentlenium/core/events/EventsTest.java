@@ -15,7 +15,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -80,7 +80,7 @@ public class EventsTest {
         WebElement eventElement = eventDriver.findElement(By.cssSelector(".test"));
 
         verify(beforeListener).on(eq(By.cssSelector(".test")), isNull(FluentWebElement.class), notNull(WebDriver.class));
-        verify(afterListener).on(eq(By.cssSelector(".test")), isNull(FluentWebElement.class), (WebDriver) notNull());
+        verify(afterListener).on(eq(By.cssSelector(".test")), argThat(new ElementMatcher(element)), notNull());
 
         WebElement childElement = mock(WebElement.class);
         when(element.findElement(By.cssSelector(".test2"))).thenReturn(childElement);

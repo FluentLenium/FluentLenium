@@ -4,10 +4,12 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.NavigateAllListener;
 import org.fluentlenium.core.events.annotations.AfterClickOn;
 import org.fluentlenium.core.events.annotations.AfterFindBy;
+import org.fluentlenium.core.events.annotations.AfterGetText;
 import org.fluentlenium.core.events.annotations.AfterNavigate;
 import org.fluentlenium.core.events.annotations.AfterNavigateRefresh;
 import org.fluentlenium.core.events.annotations.BeforeClickOn;
 import org.fluentlenium.core.events.annotations.BeforeFindBy;
+import org.fluentlenium.core.events.annotations.BeforeGetText;
 import org.fluentlenium.core.events.annotations.BeforeNavigate;
 import org.fluentlenium.core.events.annotations.BeforeNavigateRefresh;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
@@ -26,6 +28,9 @@ public class AnnotationsEventsTest extends IntegrationFluentTest {
 
     private int beforeFindBy;
     private int afterFindBy;
+
+    private int beforeGetText;
+    private int afterGetText;
 
     private int beforeNavigate;
     private int afterNavigate;
@@ -99,6 +104,31 @@ public class AnnotationsEventsTest extends IntegrationFluentTest {
     public void afterFindBy(FluentWebElement element) {
         assertThat(element).isNull();
         afterFindBy++;
+    }
+
+    @Test
+    public void getText() {
+        goTo(DEFAULT_URL);
+
+        assertThat(beforeGetText).isEqualTo(0);
+        assertThat(afterGetText).isEqualTo(0);
+
+       el("#linkToPage2").text();
+
+        assertThat(beforeGetText).isEqualTo(1);
+        assertThat(afterGetText).isEqualTo(1);
+    }
+
+    @BeforeGetText
+    public void beforeGetText(FluentWebElement element) {
+        assertThat(element).isNotNull();
+        beforeGetText++;
+    }
+
+    @AfterGetText
+    public void afterGetText(FluentWebElement element) {
+        assertThat(element).isNotNull();
+        afterGetText++;
     }
 
     @Test

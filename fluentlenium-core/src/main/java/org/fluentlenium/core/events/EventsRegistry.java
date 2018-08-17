@@ -3,7 +3,7 @@ package org.fluentlenium.core.events;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.internal.WrapsDriver;
+import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
@@ -52,6 +52,10 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
 
     /* default */ final List<ElementListener> afterClickOn = new ArrayList<>();
 
+    /* default */ final List<ElementListener> beforeGetText = new ArrayList<>();
+
+    /* default */ final List<ElementListener> afterGetText = new ArrayList<>();
+
     /* default */ final List<ElementListener> beforeChangeValueOf = new ArrayList<>();
 
     /* default */ final List<ElementListener> afterChangeValueOf = new ArrayList<>();
@@ -98,17 +102,6 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
      */
     public EventsRegistry register(WebDriverEventListener eventListener) {
         eventDriver.register(eventListener);
-        return this;
-    }
-
-    /**
-     * Unregister an existing event listener.
-     *
-     * @param eventListener existing event listener to unregister
-     * @return {@code this} to chain method calls
-     */
-    public EventsRegistry unregister(WebDriverEventListener eventListener) {
-        eventDriver.unregister(eventListener);
         return this;
     }
 
@@ -301,6 +294,28 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
     }
 
     /**
+     * Add a listener that will be invoked before get text of an element.
+     *
+     * @param listener listener invoked before get text of an element.
+     * @return {@code this} to chain method calls
+     */
+    public EventsRegistry beforeGetText(ElementListener listener) {
+        beforeGetText.add(listener);
+        return this;
+    }
+
+    /**
+     * Add a listener that will be invoked after get text of an element.
+     *
+     * @param listener listener invoked after get text of an element.
+     * @return {@code this} to chain method calls
+     */
+    public EventsRegistry afterGetText(ElementListener listener) {
+        afterGetText.add(listener);
+        return this;
+    }
+
+    /**
      * Add a listener that will be invoked before changing value of an element.
      *
      * @param listener listener invoked before changing value of an element.
@@ -478,6 +493,9 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
         Collections.sort(beforeScript, comparator);
         Collections.sort(afterScript, comparator);
 
+        Collections.sort(beforeGetText, comparator);
+        Collections.sort(afterGetText, comparator);
+
         Collections.sort(beforeGetScreenshotAs, comparator);
         Collections.sort(afterGetScreenshotAs, comparator);
 
@@ -519,6 +537,9 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
 
         unregisterContainer(beforeScript, container);
         unregisterContainer(afterScript, container);
+
+        unregisterContainer(beforeGetText, container);
+        unregisterContainer(afterGetText, container);
 
         unregisterContainer(beforeGetScreenshotAs, container);
         unregisterContainer(afterGetScreenshotAs, container);

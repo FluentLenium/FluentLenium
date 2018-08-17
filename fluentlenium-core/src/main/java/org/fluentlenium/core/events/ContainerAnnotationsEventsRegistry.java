@@ -6,6 +6,7 @@ import org.fluentlenium.core.events.annotations.AfterChangeValueOf;
 import org.fluentlenium.core.events.annotations.AfterClickOn;
 import org.fluentlenium.core.events.annotations.AfterFindBy;
 import org.fluentlenium.core.events.annotations.AfterGetScreenshotAs;
+import org.fluentlenium.core.events.annotations.AfterGetText;
 import org.fluentlenium.core.events.annotations.AfterNavigate;
 import org.fluentlenium.core.events.annotations.AfterNavigateBack;
 import org.fluentlenium.core.events.annotations.AfterNavigateForward;
@@ -19,6 +20,7 @@ import org.fluentlenium.core.events.annotations.BeforeChangeValueOf;
 import org.fluentlenium.core.events.annotations.BeforeClickOn;
 import org.fluentlenium.core.events.annotations.BeforeFindBy;
 import org.fluentlenium.core.events.annotations.BeforeGetScreenshotAs;
+import org.fluentlenium.core.events.annotations.BeforeGetText;
 import org.fluentlenium.core.events.annotations.BeforeNavigate;
 import org.fluentlenium.core.events.annotations.BeforeNavigateBack;
 import org.fluentlenium.core.events.annotations.BeforeNavigateForward;
@@ -71,6 +73,16 @@ public class ContainerAnnotationsEventsRegistry {
                 if (method.getAnnotation(AfterClickOn.class) != null) {
                     registry.afterClickOn(new AnnotationElementListener(method, container, AfterClickOn.class.getSimpleName(),
                             method.getAnnotation(AfterClickOn.class).value(), targetElement));
+                    listenerCount++;
+                }
+                if (method.getAnnotation(BeforeGetText.class) != null) {
+                    registry.beforeGetText(new AnnotationElementListener(method, container, BeforeGetText.class.getSimpleName(),
+                            method.getAnnotation(BeforeGetText.class).value(), targetElement));
+                    listenerCount++;
+                }
+                if (method.getAnnotation(AfterGetText.class) != null) {
+                    registry.afterGetText(new AnnotationElementListener(method, container, AfterGetText.class.getSimpleName(),
+                            method.getAnnotation(AfterGetText.class).value(), targetElement));
                     listenerCount++;
                 }
                 if (method.getAnnotation(BeforeChangeValueOf.class) != null) {

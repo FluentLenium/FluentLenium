@@ -225,4 +225,8 @@ public interface EventListener {
      * @param x X
      */
     <X> void afterGetScreenshotAs(OutputType<X> outputType, X x);
+
+    void beforeGetText(FluentWebElement webElement, WebDriver webDriver);
+
+    void afterGetText(FluentWebElement webElement, WebDriver webDriver, String s);
 }
