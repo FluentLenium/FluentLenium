@@ -12,8 +12,8 @@ public class FluentObjectFactory implements ObjectFactory {
 
     private final Collection<Class<?>> stepClasses = new HashSet<>();
 
-    public FluentObjectFactory() {
-        this.fluentTest = new FluentCucumberTest();
+    public FluentObjectFactory(FluentCucumberTest fluentTest) {
+        this.fluentTest = fluentTest;
     }
 
     @Override
