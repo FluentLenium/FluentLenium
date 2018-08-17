@@ -14,7 +14,7 @@
 
   <properties>
     <fluentlenium.version>${project.version}</fluentlenium.version>
-    <cucumber.version>2.3.1</cucumber.version>
+    <cucumber.version>3.0.2</cucumber.version>
   </properties>
 
   <dependencies>
