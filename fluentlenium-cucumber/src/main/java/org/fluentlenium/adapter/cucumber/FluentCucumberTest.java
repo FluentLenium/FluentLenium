@@ -1,7 +1,11 @@
 package org.fluentlenium.adapter.cucumber;
 
 import cucumber.api.Scenario;
+import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.FluentTestRunnerAdapter;
+import org.fluentlenium.adapter.SharedMutator;
+
+import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.*;
 
 /**
  * Cucumber FluentLenium Test Runner Adapter.
@@ -9,11 +13,22 @@ import org.fluentlenium.adapter.FluentTestRunnerAdapter;
  * Extends this class to provide FluentLenium support to your Cucumber Test class.
  */
 public class FluentCucumberTest extends FluentTestRunnerAdapter {
+
+    private FluentCucumberTest instance;
+
+    public FluentCucumberTest() {
+        instance = FLUENT_TEST.instance();
+    }
+
     /**
      * Creates a new FluentLenium cucumber test.
      */
-    public FluentCucumberTest() {
-        super(new FluentCucumberSharedMutator());
+    public FluentCucumberTest(FluentControlContainer container, Class clazz, SharedMutator sharedMutator) {
+        super(container, clazz, sharedMutator);
+    }
+
+    public FluentCucumberTest(FluentControlContainer container, SharedMutator sharedMutator) {
+        super(container, sharedMutator);
     }
 
     // It's not allowed by Cucumber JVM to add @Before in the base class.
@@ -24,7 +39,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * @param scenario Cucumber scenario to initialize
      */
     public void before(Scenario scenario) {
-        starting(scenario.getId());
+        instance.starting(scenario.getId());
     }
 
     // It's not allowed by Cucumber JVM to add @After in the base class.
@@ -36,17 +51,21 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      */
     public void after(Scenario scenario) {
         if (scenario.isFailed()) {
-            failed(scenario.getId());
+            instance.failed(scenario.getId());
         }
-
-        finished(scenario.getId());
+        instance.finished(scenario.getId());
     }
 
     public void before() {
-        starting();
+        FLUENT_TEST.instance().starting();
     }
 
     public void after() {
-        finished();
+        FLUENT_TEST.instance().finished();
+    }
+
+    @Override
+    protected FluentControlContainer getControlContainer() {
+        return FLUENT_TEST.getControlContainer();
     }
 }

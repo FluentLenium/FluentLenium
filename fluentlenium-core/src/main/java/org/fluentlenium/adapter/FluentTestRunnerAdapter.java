@@ -56,6 +56,12 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         this.sharedMutator = sharedMutator;
     }
 
+    public FluentTestRunnerAdapter(FluentControlContainer driverContainer, Class clazz, SharedMutator sharedMutator) {
+        super(driverContainer, clazz);
+        this.sharedMutator = sharedMutator;
+    }
+
+
     /**
      * Invoked when a test class has finished (whatever the success of failing status)
      *

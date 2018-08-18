@@ -21,7 +21,7 @@ public class FluentAdapter implements FluentControl {
 
     private final FluentControlContainer controlContainer;
 
-    private final Configuration configuration = ConfigurationFactoryProvider.newConfiguration(getClass());
+    private final Configuration configuration;
 
     /**
      * Creates a new fluent adapter.
@@ -37,6 +37,12 @@ public class FluentAdapter implements FluentControl {
      */
     public FluentAdapter(FluentControlContainer controlContainer) {
         this.controlContainer = controlContainer;
+        configuration = ConfigurationFactoryProvider.newConfiguration(getClass());
+    }
+
+    public FluentAdapter(FluentControlContainer controlContainer, Class clazz) {
+        this.controlContainer = controlContainer;
+        configuration = ConfigurationFactoryProvider.newConfiguration(clazz);
     }
 
     /**

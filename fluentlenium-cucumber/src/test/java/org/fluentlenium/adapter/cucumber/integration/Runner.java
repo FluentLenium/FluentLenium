@@ -1,14 +1,16 @@
-package org.fluentlenium.adapter.cucumber.integration.standard;
+package org.fluentlenium.adapter.cucumber.integration;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
 import net.jcip.annotations.NotThreadSafe;
+import org.fluentlenium.adapter.cucumber.FluentCucumber;
+import org.fluentlenium.configuration.FluentConfiguration;
 import org.junit.runner.RunWith;
 
-@RunWith(Cucumber.class)
+@RunWith(FluentCucumber.class)
 @CucumberOptions(features = "classpath:org/fluentlenium/adapter/cucumber/integration",
         plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"})
+@FluentConfiguration(webDriver = "htmlunit")
 @NotThreadSafe
-public class BasicRunner {
+public class Runner {
 
 }

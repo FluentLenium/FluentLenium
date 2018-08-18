@@ -1,11 +1,8 @@
-package org.fluentlenium.adapter.cucumber.integration.factory.steps;
+package org.fluentlenium.adapter.cucumber.integration.steps;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.fluentlenium.configuration.ConfigurationProperties;
-import org.fluentlenium.configuration.FluentConfiguration;
 
-@FluentConfiguration(driverLifecycle = ConfigurationProperties.DriverLifecycle.JVM)
 public class SimpleScenarioMultiStep2 extends BaseTest {
 
 
