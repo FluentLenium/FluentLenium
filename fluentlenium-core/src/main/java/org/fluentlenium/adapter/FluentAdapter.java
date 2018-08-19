@@ -40,6 +40,12 @@ public class FluentAdapter implements FluentControl {
         configuration = ConfigurationFactoryProvider.newConfiguration(getClass());
     }
 
+    /**
+     * Creates a new fluent adapter, using given control interface container.
+     *
+     * @param controlContainer control interface container
+     * @param clazz class from which annotation configuration will be looked up
+     */
     public FluentAdapter(FluentControlContainer controlContainer, Class clazz) {
         this.controlContainer = controlContainer;
         configuration = ConfigurationFactoryProvider.newConfiguration(clazz);

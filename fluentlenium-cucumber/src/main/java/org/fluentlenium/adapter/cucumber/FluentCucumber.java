@@ -23,9 +23,12 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-import static java.util.Optional.*;
+import static java.util.Collections.*;
+import static java.util.Optional.ofNullable;
 import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
 
 public class FluentCucumber extends ParentRunner<FeatureRunner> {
@@ -46,7 +49,7 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
         classFinder = new ResourceLoaderClassFinder(resourceLoader, classLoader);
 
         getFluentConfiguration(clazz);
-        this.runtime = new Runtime(resourceLoader, classLoader, Collections.singletonList(getBackend()), runtimeOptions);
+        this.runtime = new Runtime(resourceLoader, classLoader, singletonList(getBackend()), runtimeOptions);
         this.formatter = runtimeOptions.formatter(classLoader);
 
         JUnitOptions junitOptions = new JUnitOptions(runtimeOptions.getJunitOptions());

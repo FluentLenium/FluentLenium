@@ -7,6 +7,9 @@ import java.util.*;
 
 import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
 
+/**
+ * It is an object factory for creating Cucumber steps objects in FluentLenium injection container
+ */
 public class FluentObjectFactory implements ObjectFactory {
 
     private FluentCucumberTest fluentTest;

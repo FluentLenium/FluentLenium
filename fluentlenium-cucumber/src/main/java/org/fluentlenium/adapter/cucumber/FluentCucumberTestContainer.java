@@ -29,7 +29,7 @@ public enum FluentCucumberTestContainer {
         return controlContainer;
     }
 
-    protected void setRunnerClass(Class clazz) {
+    void setRunnerClass(Class clazz) {
         this.loaderClass = clazz;
     }
 }
