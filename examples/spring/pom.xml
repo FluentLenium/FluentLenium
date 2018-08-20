@@ -6,7 +6,7 @@
 
     <artifactId>fluentlenium-examples-spring</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>3.7.0</version>
+    <version>3.7.0-SNAPSHOT</version>
 
     <name>FluentLenium Examples Spring</name>
 
@@ -15,7 +15,7 @@
         <fluentlenium.version>${project.version}</fluentlenium.version>
         <spring.version>5.0.4.RELEASE</spring.version>
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-        <selenium.version>3.12.0</selenium.version>
+        <selenium.version>3.14.0</selenium.version>
     </properties>
 
     <build>
@@ -42,12 +42,12 @@
         <dependency>
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-core</artifactId>
-            <version>${fluentlenium.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-junit</artifactId>
-            <version>${fluentlenium.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>

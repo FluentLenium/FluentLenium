@@ -161,6 +161,16 @@ class EventAdapter implements WebDriverEventListener {
     }
 
     @Override
+    public void beforeGetText(WebElement webElement, WebDriver webDriver) {
+        listener.beforeGetText(instantiator.newComponent(FluentWebElement.class, webElement), webDriver);
+    }
+
+    @Override
+    public void afterGetText(WebElement webElement, WebDriver webDriver, String s) {
+        listener.afterGetText(instantiator.newComponent(FluentWebElement.class, webElement), webDriver, s);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;

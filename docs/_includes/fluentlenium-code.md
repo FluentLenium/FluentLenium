@@ -100,7 +100,7 @@ public class First extends FluentTest {
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>3.12.0</version>
+            <version>3.14.0</version>
         </dependency>
     </dependencies>
 </project>

@@ -146,6 +146,20 @@ public class EventsSupport implements EventListener {
     }
 
     @Override
+    public void beforeGetText(FluentWebElement webElement, WebDriver webDriver) {
+        for (ElementListener listener : eventsRegistry.beforeGetText) {
+            listener.on(webElement, webDriver);
+        }
+    }
+
+    @Override
+    public void afterGetText(FluentWebElement webElement, WebDriver webDriver, String s) {
+        for (ElementListener listener : eventsRegistry.afterGetText) {
+            listener.on(webElement, webDriver);
+        }
+    }
+
+    @Override
     public void beforeScript(String script, WebDriver driver) {
         for (ScriptListener listener : eventsRegistry.beforeScript) {
             listener.on(script, driver);
