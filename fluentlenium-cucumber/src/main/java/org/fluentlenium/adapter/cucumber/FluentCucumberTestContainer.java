@@ -4,6 +4,11 @@ import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.adapter.ThreadLocalFluentControlContainer;
 
+/**
+ * Container class for {@link FluentCucumberTest}.
+ *
+ * It uses Sinlgeton pattern based on enum to makes sure that all Cucumber steps
+ */
 public enum FluentCucumberTestContainer {
 
     FLUENT_TEST;

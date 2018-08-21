@@ -31,6 +31,12 @@ import static java.util.Collections.*;
 import static java.util.Optional.ofNullable;
 import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
 
+/**
+ * Main point for integrating FluentLenium with Cucumber. Pass this class to JUnit @RunWith() annotation to enable
+ * FluentLenium dependency injection for Cucumber steps.
+ * To use annotation configuration annotate class with @RunWith(FluentCucumber.class) and not on BaseTest or any other
+ * class containing Cucumber steps.
+ */
 public class FluentCucumber extends ParentRunner<FeatureRunner> {
     private final JUnitReporter jUnitReporter;
     private final List<FeatureRunner> children = new ArrayList<>();
@@ -58,7 +64,7 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
         this.addChildren(cucumberFeatures);
     }
 
-    private JavaBackend getBackend(){
+    private JavaBackend getBackend() {
         Reflections reflections = new Reflections(classFinder);
         TypeRegistryConfigurer typeRegistryConfigurer = reflections.instantiateExactlyOneSubclass(TypeRegistryConfigurer.class,
                 MultiLoader.packageName(runtimeOptions.getGlue()),
@@ -100,8 +106,8 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
     private void addChildren(List<CucumberFeature> cucumberFeatures) throws InitializationError {
         Iterator var2 = cucumberFeatures.iterator();
 
-        while(var2.hasNext()) {
-            CucumberFeature cucumberFeature = (CucumberFeature)var2.next();
+        while (var2.hasNext()) {
+            CucumberFeature cucumberFeature = (CucumberFeature) var2.next();
             FeatureRunner featureRunner = new FeatureRunner(cucumberFeature, this.runtime, this.jUnitReporter);
             if (!featureRunner.isEmpty()) {
                 this.children.add(featureRunner);

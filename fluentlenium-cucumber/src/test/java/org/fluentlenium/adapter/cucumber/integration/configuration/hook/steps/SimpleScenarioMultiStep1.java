@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.cucumber.integration.steps;
+package org.fluentlenium.adapter.cucumber.integration.configuration.hook.steps;
 
 import cucumber.api.java.en.Given;
 
