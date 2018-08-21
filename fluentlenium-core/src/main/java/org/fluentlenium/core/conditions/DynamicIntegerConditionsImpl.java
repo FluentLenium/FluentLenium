@@ -14,7 +14,7 @@ public class DynamicIntegerConditionsImpl extends AbstractObjectConditions<List<
     /**
      * Creates a new conditions object on integer.
      *
-     * @param supplier  underlying list
+     * @param supplier underlying list
      * @param negation negation value
      */
     public DynamicIntegerConditionsImpl(Supplier<List<? extends FluentWebElement>> supplier, boolean negation) {
@@ -34,26 +34,34 @@ public class DynamicIntegerConditionsImpl extends AbstractObjectConditions<List<
 
     @Override
     public boolean equalTo(int value) {
-        return verify(input -> input.size() == value);
+        return verify(input -> getListSize(input) == value);
     }
 
     @Override
     public boolean lessThan(int value) {
-        return verify(input -> ((FluentList<FluentWebElement>) input).count() < value);
+        return verify(input -> getListSize(input) < value);
     }
 
     @Override
     public boolean lessThanOrEqualTo(int value) {
-        return verify(input -> ((FluentList<FluentWebElement>) input).count() <= value);
+        return verify(input -> getListSize(input) <= value);
     }
 
     @Override
     public boolean greaterThan(int value) {
-        return verify(input -> ((FluentList<FluentWebElement>) input).count() > value);
+        return verify(input -> getListSize(input) > value);
     }
 
     @Override
     public boolean greaterThanOrEqualTo(int value) {
-        return verify(input -> ((FluentList<FluentWebElement>) input).count() >= value);
+        return verify(input -> getListSize(input) >= value);
+    }
+
+    private <T extends List> int getListSize(T input) {
+        if (input instanceof FluentList) {
+            return ((FluentList<FluentWebElement>) input).count();
+        } else {
+            return input.size();
+        }
     }
 }
