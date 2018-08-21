@@ -45,7 +45,7 @@ import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUE
 public class FluentCucumber extends ParentRunner<FeatureRunner> {
     private final JUnitReporter jUnitReporter;
     private final List<FeatureRunner> children = new ArrayList<>();
-    private final Runtime runtime;
+    final Runtime runtime;
     private final Formatter formatter;
     private final ClassFinder classFinder;
     private final RuntimeOptions runtimeOptions;
@@ -146,7 +146,7 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
                 features.evaluate();
                 FluentCucumber.this.runtime.getEventBus()
                         .send(new TestRunFinished(
-                                runtime.getEventBus()
+                                FluentCucumber.this.runtime.getEventBus()
                                         .getTime()));
             }
         };

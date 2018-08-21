@@ -46,7 +46,8 @@ public class FluentObjectFactory implements ObjectFactory {
         try {
             T instance = type.cast(instances.get(type));
             if (isNull(instance)) {
-                instance = cacheNewInstance(type);
+                instance = fluentTest.newInstance(type);
+                cacheNewInstance(type, instance);
             }
             return instance;
 
@@ -55,11 +56,9 @@ public class FluentObjectFactory implements ObjectFactory {
         }
     }
 
-    private <T> T cacheNewInstance(Class<T> type) {
+    private <T> void cacheNewInstance(Class<T> type, T instance) {
         try {
-            T instance = fluentTest.newInstance(type);
             instances.put(type, instance);
-            return instance;
         } catch (Exception e) {
             throw new CucumberException(String.format("Failed to instantiate %s", type), e);
         }
