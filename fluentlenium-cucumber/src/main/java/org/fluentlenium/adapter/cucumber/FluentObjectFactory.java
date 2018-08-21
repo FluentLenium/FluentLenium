@@ -3,7 +3,9 @@ package org.fluentlenium.adapter.cucumber;
 import cucumber.api.java.ObjectFactory;
 import cucumber.runtime.CucumberException;
 
-import java.util.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
 
@@ -12,7 +14,7 @@ import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUE
  */
 public class FluentObjectFactory implements ObjectFactory {
 
-    private FluentCucumberTest fluentTest;
+    private final FluentCucumberTest fluentTest;
 
     private final Map<Class<?>, Object> instances = new HashMap<>();
 

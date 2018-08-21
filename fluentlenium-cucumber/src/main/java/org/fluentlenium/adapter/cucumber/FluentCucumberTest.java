@@ -4,11 +4,11 @@ import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.FluentTestRunnerAdapter;
 import org.fluentlenium.adapter.SharedMutator;
 
-import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.*;
+import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
 
 /**
  * Cucumber FluentLenium Test Runner Adapter.
- *
+ * <p>
  * Extends this class to provide FluentLenium support to your Cucumber Test class.
  */
 public class FluentCucumberTest extends FluentTestRunnerAdapter {
@@ -44,10 +44,16 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
         super(container, sharedMutator);
     }
 
+    /**
+     * Initialization of FluentCucumberTestAdapter
+     */
     void before() {
         FLUENT_TEST.instance().starting();
     }
 
+    /**
+     * Stopping of FluentCucumberTestAdapter
+     */
     void after() {
         FLUENT_TEST.instance().finished();
     }

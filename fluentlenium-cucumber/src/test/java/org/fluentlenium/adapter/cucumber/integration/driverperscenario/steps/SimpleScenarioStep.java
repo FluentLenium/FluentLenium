@@ -7,7 +7,6 @@ import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.adapter.cucumber.integration.page.LocalPage;
 import org.fluentlenium.core.annotation.Page;
 
-
 public class SimpleScenarioStep extends FluentCucumberTest {
 
     @Page

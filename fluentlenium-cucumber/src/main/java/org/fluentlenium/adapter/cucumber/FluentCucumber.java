@@ -3,8 +3,12 @@ package org.fluentlenium.adapter.cucumber;
 import cucumber.api.TypeRegistryConfigurer;
 import cucumber.api.event.TestRunFinished;
 import cucumber.api.formatter.Formatter;
-import cucumber.runtime.*;
+import cucumber.runtime.ClassFinder;
 import cucumber.runtime.Runtime;
+import cucumber.runtime.RuntimeOptions;
+import cucumber.runtime.RuntimeOptionsFactory;
+import cucumber.runtime.Reflections;
+import cucumber.runtime.DefaultTypeRegistryConfiguration;
 import cucumber.runtime.io.MultiLoader;
 import cucumber.runtime.io.ResourceLoader;
 import cucumber.runtime.io.ResourceLoaderClassFinder;
@@ -27,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Collections.*;
+import static java.util.Collections.singletonList;
 import static java.util.Optional.ofNullable;
 import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
 
@@ -37,6 +41,7 @@ import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUE
  * To use annotation configuration annotate class with @RunWith(FluentCucumber.class) and not on BaseTest or any other
  * class containing Cucumber steps.
  */
+@SuppressWarnings("unused")
 public class FluentCucumber extends ParentRunner<FeatureRunner> {
     private final JUnitReporter jUnitReporter;
     private final List<FeatureRunner> children = new ArrayList<>();
@@ -59,11 +64,18 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
         this.formatter = runtimeOptions.formatter(classLoader);
 
         JUnitOptions junitOptions = new JUnitOptions(runtimeOptions.getJunitOptions());
-        List<CucumberFeature> cucumberFeatures = runtimeOptions.cucumberFeatures(resourceLoader, this.runtime.getEventBus());
+        List<CucumberFeature> cucumberFeatures =
+                runtimeOptions.cucumberFeatures(resourceLoader, this.runtime.getEventBus());
+
         this.jUnitReporter = new JUnitReporter(this.runtime.getEventBus(), runtimeOptions.isStrict(), junitOptions);
         this.addChildren(cucumberFeatures);
     }
 
+    /**
+     * Initialization of JavaBackend with {@link FluentObjectFactory} for FluentCucumber tests.
+     *
+     * @return backend with {@link FluentObjectFactory}
+     */
     private JavaBackend getBackend() {
         Reflections reflections = new Reflections(classFinder);
         TypeRegistryConfigurer typeRegistryConfigurer = reflections.instantiateExactlyOneSubclass(TypeRegistryConfigurer.class,
@@ -76,23 +88,43 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
                 classFinder, new TypeRegistry(typeRegistryConfigurer.locale()));
     }
 
+    /**
+     * Check for {@link FluentConfiguration} and pass runner class to {@link FluentCucumberTest}
+     *
+     * @param clazz runner class
+     */
     private void getFluentConfiguration(Class clazz) {
         ofNullable(clazz.getAnnotation(FluentConfiguration.class))
-                .ifPresent(a -> FLUENT_TEST.setRunnerClass(clazz));
+                .ifPresent(annotation -> FLUENT_TEST.setRunnerClass(clazz));
     }
 
+    /**
+     * @return list of children
+     */
     public List<FeatureRunner> getChildren() {
         return this.children;
     }
 
+    /**
+     * @param child FeatureRunner child
+     * @return description of a FeatureRunner child
+     */
     protected Description describeChild(FeatureRunner child) {
         return child.getDescription();
     }
 
+    /**
+     * Run feature.
+     */
     protected void runChild(FeatureRunner child, RunNotifier notifier) {
         child.run(notifier);
     }
 
+    /**
+     * Invoke feature
+     * @param notifier notifier
+     * @return evaluated Statement
+     */
     protected Statement childrenInvoker(RunNotifier notifier) {
         final Statement features = super.childrenInvoker(notifier);
         return new Statement() {
@@ -103,6 +135,12 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
         };
     }
 
+    /**
+     * Add features.
+     *
+     * @param cucumberFeatures list of Cucumber features
+     * @throws InitializationError problem with initializing features.
+     */
     private void addChildren(List<CucumberFeature> cucumberFeatures) throws InitializationError {
         Iterator var2 = cucumberFeatures.iterator();
 
