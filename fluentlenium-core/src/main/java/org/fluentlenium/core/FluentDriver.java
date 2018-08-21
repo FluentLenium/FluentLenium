@@ -44,8 +44,8 @@ import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsDriver;
-import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.WrapsDriver;
+import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import lombok.experimental.Delegate;

@@ -34,7 +34,7 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
     <!-- Configure this property to latest available version -->
     <fluentlenium.version>3.7.0</fluentlenium.version>
     <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-    <selenium.version>3.12.0</selenium.version>
+    <selenium.version>3.14.0</selenium.version>
 </properties>
 
 <dependency>
@@ -58,7 +58,7 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>htmlunit-driver</artifactId>
-    <version>2.31.0</version>
+    <version>2.32.1</version>
     <scope>test</scope>
 </dependency>
 ```

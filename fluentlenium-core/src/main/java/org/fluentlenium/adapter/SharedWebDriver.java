@@ -2,7 +2,7 @@ package org.fluentlenium.adapter;
 
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.internal.WrapsDriver;
+import org.openqa.selenium.WrapsDriver;
 
 /**
  * A reference to a shared {@link WebDriver} used by a test.
