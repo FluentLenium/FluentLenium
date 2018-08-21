@@ -3,6 +3,7 @@ package org.fluentlenium.core.wait;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -55,6 +56,12 @@ public class FluentWaitElementTest {
     }
 
     @Test
+    public void atMostDuration() {
+        assertThat(wait.atMost(Duration.ofMillis(10))).isSameAs(wait);
+        Mockito.verify(fluentControlWait).atMost(Duration.ofMillis(10));
+    }
+
+    @Test
     public void atMostMillis() {
         assertThat(wait.atMost(10)).isSameAs(wait);
         Mockito.verify(fluentControlWait).atMost(10);
@@ -64,6 +71,12 @@ public class FluentWaitElementTest {
     public void pollingEvery() {
         assertThat(wait.pollingEvery(10, TimeUnit.MILLISECONDS)).isSameAs(wait);
         Mockito.verify(fluentControlWait).pollingEvery(10, TimeUnit.MILLISECONDS);
+    }
+
+    @Test
+    public void pollingEveryDuration() {
+        assertThat(wait.pollingEvery(Duration.ofMillis(10))).isSameAs(wait);
+        Mockito.verify(fluentControlWait).pollingEvery(Duration.ofMillis(10));
     }
 
     @Test
