@@ -1,10 +1,10 @@
-package org.fluentlenium.adapter.cucumber.integration.configuration.noinheritance.steps;
+package org.fluentlenium.adapter.cucumber.integration.noinheritance.steps;
 
 import cucumber.api.java.en.Given;
 import org.fluentlenium.adapter.cucumber.integration.page.LocalPage;
 import org.fluentlenium.core.annotation.Page;
 
-public class SimpleScenarioMultiStep1 {
+public class SimpleScenarioMultiNoInheritanceStep1 {
 
     @Page
     protected LocalPage page;

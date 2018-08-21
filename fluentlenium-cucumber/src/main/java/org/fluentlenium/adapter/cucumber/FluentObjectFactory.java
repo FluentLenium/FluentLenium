@@ -3,10 +3,10 @@ package org.fluentlenium.adapter.cucumber;
 import cucumber.api.java.ObjectFactory;
 import cucumber.runtime.CucumberException;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.util.Objects.isNull;
 import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
 
 /**
@@ -18,7 +18,10 @@ public class FluentObjectFactory implements ObjectFactory {
 
     private final Map<Class<?>, Object> instances = new HashMap<>();
 
-    public FluentObjectFactory() {
+    /**
+     * Creating instance of FluentObhectFactory and sets FluentCucumberTest instance.
+     */
+    FluentObjectFactory() {
         this.fluentTest = FLUENT_TEST.instance();
     }
 
@@ -38,12 +41,11 @@ public class FluentObjectFactory implements ObjectFactory {
         return true;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public <T> T getInstance(Class<T> type) {
         try {
             T instance = type.cast(instances.get(type));
-            if (instance == null) {
+            if (isNull(instance)) {
                 instance = cacheNewInstance(type);
             }
             return instance;

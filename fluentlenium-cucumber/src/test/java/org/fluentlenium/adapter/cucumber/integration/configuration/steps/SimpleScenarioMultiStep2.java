@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.cucumber.integration.configuration.hook.steps;
+package org.fluentlenium.adapter.cucumber.integration.configuration.steps;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

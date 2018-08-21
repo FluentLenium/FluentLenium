@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.cucumber.integration.configuration.factory.steps;
+package org.fluentlenium.adapter.cucumber.integration.configuration.steps;
 
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.adapter.cucumber.integration.page.LocalPage;

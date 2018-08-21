@@ -50,6 +50,13 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
     private final ClassFinder classFinder;
     private final RuntimeOptions runtimeOptions;
 
+    /**
+     * Constructor for FluentCucumber.
+     *
+     * @param clazz runner class
+     * @throws InitializationError problem with initialization
+     * @throws IOException         problem with reading feature files
+     */
     public FluentCucumber(Class clazz) throws InitializationError, IOException {
         super(clazz);
         ClassLoader classLoader = clazz.getClassLoader();
@@ -78,9 +85,12 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
      */
     private JavaBackend getBackend() {
         Reflections reflections = new Reflections(classFinder);
-        TypeRegistryConfigurer typeRegistryConfigurer = reflections.instantiateExactlyOneSubclass(TypeRegistryConfigurer.class,
-                MultiLoader.packageName(runtimeOptions.getGlue()),
-                new Class[0], new Object[0], new DefaultTypeRegistryConfiguration());
+        TypeRegistryConfigurer typeRegistryConfigurer =
+                reflections.instantiateExactlyOneSubclass(TypeRegistryConfigurer.class,
+                        MultiLoader.packageName(runtimeOptions.getGlue()),
+                        new Class[0],
+                        new Object[0],
+                        new DefaultTypeRegistryConfiguration());
 
         FLUENT_TEST.instance();
 
@@ -115,6 +125,9 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
 
     /**
      * Run feature.
+     *
+     * @param child    FeatureRunner child
+     * @param notifier notifier used by Cucumber
      */
     protected void runChild(FeatureRunner child, RunNotifier notifier) {
         child.run(notifier);
@@ -122,6 +135,7 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
 
     /**
      * Invoke feature
+     *
      * @param notifier notifier
      * @return evaluated Statement
      */
@@ -130,7 +144,10 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
         return new Statement() {
             public void evaluate() throws Throwable {
                 features.evaluate();
-                FluentCucumber.this.runtime.getEventBus().send(new TestRunFinished(FluentCucumber.this.runtime.getEventBus().getTime()));
+                runtime.getEventBus()
+                        .send(new TestRunFinished
+                                (runtime.getEventBus()
+                                        .getTime()));
             }
         };
     }
