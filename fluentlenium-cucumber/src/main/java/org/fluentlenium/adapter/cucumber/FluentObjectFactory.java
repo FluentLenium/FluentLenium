@@ -4,9 +4,10 @@ import cucumber.api.java.ObjectFactory;
 import cucumber.runtime.CucumberException;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
-import static java.util.Objects.isNull;
 import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
 
 /**
@@ -17,9 +18,10 @@ public class FluentObjectFactory implements ObjectFactory {
     private final FluentCucumberTest fluentTest;
 
     private final Map<Class<?>, Object> instances = new HashMap<>();
+    private final Set<Class<?>> classes = new HashSet<>();
 
     /**
-     * Creating instance of FluentObhectFactory and sets FluentCucumberTest instance.
+     * Creating instance of FluentObjectFactory and sets FluentCucumberTest instance.
      */
     FluentObjectFactory() {
         this.fluentTest = FLUENT_TEST.instance();
@@ -28,6 +30,9 @@ public class FluentObjectFactory implements ObjectFactory {
     @Override
     public void start() {
         fluentTest.before();
+        for (Class<?> clazz : classes) {
+            cacheNewInstance(clazz);
+        }
     }
 
     @Override
@@ -38,27 +43,25 @@ public class FluentObjectFactory implements ObjectFactory {
 
     @Override
     public boolean addClass(Class<?> aClass) {
+        classes.add(aClass);
         return true;
     }
 
     @Override
     public <T> T getInstance(Class<T> type) {
         try {
-            T instance = type.cast(instances.get(type));
-            if (isNull(instance)) {
-                instance = fluentTest.newInstance(type);
-                cacheNewInstance(type, instance);
-            }
-            return instance;
+            return type.cast(instances.get(type));
 
         } catch (Exception e) {
             throw new CucumberException(String.format("Failed to instantiate %s", type), e);
         }
     }
 
-    private <T> void cacheNewInstance(Class<T> type, T instance) {
+    private <T> void cacheNewInstance(Class<T> type) {
         try {
+            T instance = fluentTest.newInstance(type);
             instances.put(type, instance);
+
         } catch (Exception e) {
             throw new CucumberException(String.format("Failed to instantiate %s", type), e);
         }

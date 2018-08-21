@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.cucumber.integration.driverperfeature;
+package org.fluentlenium.adapter.cucumber.integration.noinheritance;
 
 import cucumber.api.CucumberOptions;
 import net.jcip.annotations.NotThreadSafe;
@@ -6,13 +6,11 @@ import org.fluentlenium.adapter.cucumber.FluentCucumber;
 import org.fluentlenium.configuration.FluentConfiguration;
 import org.junit.runner.RunWith;
 
-import static org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle.JVM;
-
 @RunWith(FluentCucumber.class)
-@CucumberOptions(features = "classpath:org/fluentlenium/adapter/cucumber/integration/feature",
+@CucumberOptions(features = "classpath:org/fluentlenium/adapter/cucumber/integration/scenario",
+        glue = "org.fluentlenium.adapter.cucumber.integration.noinheritance.steps",
         plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"})
-@FluentConfiguration(webDriver = "htmlunit", driverLifecycle = JVM)
 @NotThreadSafe
-public class Runner {
-
+@FluentConfiguration(webDriver = "htmlunit")
+public class NoInheritanceRunner {
 }

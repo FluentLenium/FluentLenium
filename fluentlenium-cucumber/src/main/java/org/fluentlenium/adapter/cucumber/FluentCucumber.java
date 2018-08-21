@@ -140,10 +140,14 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
      * @return evaluated Statement
      */
     protected Statement childrenInvoker(RunNotifier notifier) {
-        final Statement features = super.childrenInvoker(notifier);
+        final Statement features = super.childrenInvoker(notifier); //NOPMD
         return new Statement() {
-            public void evaluate() throws Throwable {
-                features.evaluate();
+            public void evaluate() {
+                try {
+                    features.evaluate();
+                } catch (Throwable throwable) {
+                    throw new RuntimeException("Cannot evaluate statement", throwable);
+                }
                 FluentCucumber.this.runtime.getEventBus()
                         .send(new TestRunFinished(
                                 FluentCucumber.this.runtime.getEventBus()

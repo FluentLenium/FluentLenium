@@ -11,6 +11,6 @@ import org.junit.runner.RunWith;
         plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"})
 @FluentConfiguration(webDriver = "htmlunit")
 @NotThreadSafe
-public class Runner {
+public class PerScenarioRunner {
 
 }
