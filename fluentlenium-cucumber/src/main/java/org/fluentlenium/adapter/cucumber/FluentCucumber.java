@@ -144,9 +144,9 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
         return new Statement() {
             public void evaluate() throws Throwable {
                 features.evaluate();
-                runtime.getEventBus()
-                        .send(new TestRunFinished
-                                (runtime.getEventBus()
+                FluentCucumber.this.runtime.getEventBus()
+                        .send(new TestRunFinished(
+                                runtime.getEventBus()
                                         .getTime()));
             }
         };
@@ -168,6 +168,5 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
                 this.children.add(featureRunner);
             }
         }
-
     }
 }

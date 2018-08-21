@@ -17,12 +17,12 @@ public class SimpleScenarioStep extends FluentCucumberTest {
 
     @Given(value = "scenario I am on the first page")
     public void step1() {
-        page.go();
+        goTo(page);
     }
 
     @When(value = "scenario I click on next page")
     public void step2() {
-        page.$("a#linkToPage2").click();
+        $("a#linkToPage2").click();
     }
 
     @Then(value = "scenario I am on the second page")
