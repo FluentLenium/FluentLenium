@@ -15,8 +15,6 @@ import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUE
  */
 public class FluentObjectFactory implements ObjectFactory {
 
-    private final FluentCucumberTest fluentTest;
-
     private final Map<Class<?>, Object> instances = new HashMap<>();
     private final Set<Class<?>> classes = new HashSet<>();
 
@@ -24,12 +22,12 @@ public class FluentObjectFactory implements ObjectFactory {
      * Creating instance of FluentObjectFactory and sets FluentCucumberTest instance.
      */
     FluentObjectFactory() {
-        this.fluentTest = FLUENT_TEST.instance();
+        FLUENT_TEST.instance();
     }
 
     @Override
     public void start() {
-        fluentTest.before();
+        FLUENT_TEST.instance().before();
         for (Class<?> clazz : classes) {
             cacheNewInstance(clazz);
         }
@@ -37,7 +35,7 @@ public class FluentObjectFactory implements ObjectFactory {
 
     @Override
     public void stop() {
-        fluentTest.after();
+        FLUENT_TEST.instance().after();
         this.instances.clear();
     }
 
@@ -59,7 +57,7 @@ public class FluentObjectFactory implements ObjectFactory {
 
     private <T> void cacheNewInstance(Class<T> type) {
         try {
-            T instance = fluentTest.newInstance(type);
+            T instance = FLUENT_TEST.instance().newInstance(type);
             instances.put(type, instance);
 
         } catch (Exception e) {

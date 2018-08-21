@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.cucumber.integration.configuration.factory;
+package org.fluentlenium.adapter.cucumber.integration.configuration.hook;
 
 import cucumber.api.CucumberOptions;
 import net.jcip.annotations.NotThreadSafe;
@@ -7,11 +7,11 @@ import org.fluentlenium.configuration.FluentConfiguration;
 import org.junit.runner.RunWith;
 
 @RunWith(FluentCucumber.class)
-@CucumberOptions(features = "classpath:org/fluentlenium/adapter/cucumber/integration/scenario",
-        glue = "org.fluentlenium.adapter.cucumber.integration.configuration.steps",
+@CucumberOptions(features = "classpath:org/fluentlenium/adapter/cucumber/integration/configuration/hook",
+        glue = "org.fluentlenium.adapter.cucumber.integration.configuration.hook.steps",
         plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"})
-@FluentConfiguration(configurationDefaults = TestConfiguration.class)
+@FluentConfiguration(webDriver = "htmlunit")
 @NotThreadSafe
-public class Runner {
+public class HookRunner {
 
 }

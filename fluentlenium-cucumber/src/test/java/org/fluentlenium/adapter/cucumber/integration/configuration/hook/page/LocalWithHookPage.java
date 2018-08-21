@@ -16,4 +16,8 @@ public class LocalWithHookPage extends FluentPage {
     protected void isAtUsingUrl(String urlTemplate) {
         // Skip because it doesn't work with file:// urls ...
     }
+
+    public void clickLink() {
+        $("a#linkToPage2").click();
+    }
 }
