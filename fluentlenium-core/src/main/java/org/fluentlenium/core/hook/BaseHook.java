@@ -5,6 +5,8 @@ import org.fluentlenium.core.DefaultFluentContainer;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.internal.Coordinates;
+import org.openqa.selenium.interactions.internal.Locatable;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.function.Supplier;
@@ -104,5 +106,10 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
     @Override
     public String toString() {
         return toStringSupplier.get();
+    }
+
+    @Override
+    public Coordinates getCoordinates() {
+        return ((Locatable) getElement()).getCoordinates();
     }
 }

@@ -1,6 +1,7 @@
 package org.fluentlenium.core.hook;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.internal.Locatable;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
@@ -9,7 +10,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
  *
  * @param <T> type of hook options
  */
-public interface FluentHook<T> extends WebElement, ElementLocator, WrapsElement {
+public interface FluentHook<T> extends WebElement, ElementLocator, WrapsElement, Locatable {
     /**
      * Get the options of the hook.
      *
