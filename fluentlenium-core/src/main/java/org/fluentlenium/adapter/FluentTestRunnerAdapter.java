@@ -57,6 +57,20 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     }
 
     /**
+     * Creates a test runner adapter, with a customer driver container and a customer shared mutator.
+     * It is possible to pass class from which the FluentConfiguration annotation will be loaded.
+     *
+     * @param driverContainer driver container
+     * @param clazz class from which FluentConfiguration annotation will be loaded
+     * @param sharedMutator   shared mutator
+     */
+    public FluentTestRunnerAdapter(FluentControlContainer driverContainer, Class clazz, SharedMutator sharedMutator) {
+        super(driverContainer, clazz);
+        this.sharedMutator = sharedMutator;
+    }
+
+
+    /**
      * Invoked when a test class has finished (whatever the success of failing status)
      *
      * @param testClass test class to terminate

@@ -1,7 +1,8 @@
-package org.fluentlenium.adapter.cucumber;
+package org.fluentlenium.adapter.cucumber.unit;
 
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.adapter.SharedMutator;
+import org.fluentlenium.adapter.cucumber.FluentCucumberSharedMutator;
 import org.fluentlenium.configuration.ConfigurationException;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.junit.Before;
