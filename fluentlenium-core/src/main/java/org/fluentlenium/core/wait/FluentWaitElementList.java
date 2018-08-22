@@ -1,5 +1,6 @@
 package org.fluentlenium.core.wait;
 
+import java.time.Duration;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -62,6 +63,12 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
     }
 
     @Override
+    public FluentWaitElementList atMost(Duration duration) {
+        controlWait.atMost(duration);
+        return this;
+    }
+
+    @Override
     public FluentWaitElementList atMost(long duration, TimeUnit unit) {
         controlWait.atMost(duration, unit);
         return this;
@@ -70,6 +77,12 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
     @Override
     public FluentWaitElementList atMost(long timeInMillis) {
         controlWait.atMost(timeInMillis);
+        return this;
+    }
+
+    @Override
+    public FluentWaitElementList pollingEvery(Duration duration) {
+        controlWait.pollingEvery(duration);
         return this;
     }
 

@@ -1,5 +1,6 @@
 package org.fluentlenium.core.wait;
 
+import java.time.Duration;
 import java.util.function.Supplier;
 
 import java.util.concurrent.TimeUnit;
@@ -22,6 +23,14 @@ public interface FluentWaitConfiguration<T> {
      * Configure timeout for this wait object.
      *
      * @param duration duration
+     * @return {@code this} object to chain method calls
+     */
+    T atMost(Duration duration);
+
+    /**
+     * Configure timeout for this wait object.
+     *
+     * @param duration duration
      * @param unit     time unit
      * @return {@code this} object to chain method calls
      */
@@ -34,6 +43,14 @@ public interface FluentWaitConfiguration<T> {
      * @return {@code this} object to chain method calls
      */
     T atMost(long duration);
+
+    /**
+     * Configure polling time for this wait object.
+     *
+     * @param duration duration between each condition invocation
+     * @return {@code this} object to chain method calls
+     */
+    T pollingEvery(Duration duration);
 
     /**
      * Configure polling time for this wait object.
