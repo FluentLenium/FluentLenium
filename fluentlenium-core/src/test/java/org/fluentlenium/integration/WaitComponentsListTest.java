@@ -18,7 +18,7 @@ public class WaitComponentsListTest extends IntegrationFluentTest {
     private final static int POSITION_OF_REPLACED_ROW = 1;
     private final static String VALUE_OF_REPLACED_ROW = "replaced row2";
     @Page
-    RowsListPage rowsListPage;
+    private RowsListPage rowsListPage;
 
     @Test
     public void shouldReturnActualValueFromTheChangedList() {
@@ -87,7 +87,7 @@ class RowComponent extends FluentWebElement {
     @FindBy(css = ".inner-row")
     private FluentWebElement innerTag;
 
-    public RowComponent(WebElement element, FluentControl control, ComponentInstantiator instantiator) {
+    RowComponent(WebElement element, FluentControl control, ComponentInstantiator instantiator) {
         super(element, control, instantiator);
     }
 
