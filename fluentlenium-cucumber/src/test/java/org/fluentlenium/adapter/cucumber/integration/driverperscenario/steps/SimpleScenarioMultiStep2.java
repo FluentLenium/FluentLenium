@@ -18,7 +18,7 @@ public class SimpleScenarioMultiStep2 extends FluentCucumberTest {
 
     @When(value = "scenario multi2 I click on next page")
     public void step2() {
-        $("a#linkToPage2").click();
+        el("a#linkToPage2").click();
     }
 
     @Then(value = "scenario multi2 I am on the second page")

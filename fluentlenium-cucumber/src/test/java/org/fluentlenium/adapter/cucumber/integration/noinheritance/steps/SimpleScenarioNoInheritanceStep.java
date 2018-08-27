@@ -22,7 +22,7 @@ public class SimpleScenarioNoInheritanceStep {
 
     @When(value = "scenario I click on next page")
     public void step2() {
-        page.$("a#linkToPage2").click();
+        page.el("a#linkToPage2").click();
     }
 
     @Then(value = "scenario I am on the second page")

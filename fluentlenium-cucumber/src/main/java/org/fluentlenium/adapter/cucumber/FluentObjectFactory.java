@@ -28,9 +28,6 @@ public class FluentObjectFactory implements ObjectFactory {
     @Override
     public void start() {
         FLUENT_TEST.instance().before();
-        for (Class<?> clazz : classes) {
-            cacheNewInstance(clazz);
-        }
     }
 
     @Override
@@ -41,25 +38,27 @@ public class FluentObjectFactory implements ObjectFactory {
 
     @Override
     public boolean addClass(Class<?> aClass) {
-        classes.add(aClass);
         return true;
     }
 
     @Override
     public <T> T getInstance(Class<T> type) {
         try {
-            return type.cast(instances.get(type));
-
+            T instance = type.cast(instances.get(type));
+            if (instance == null) {
+                instance = cacheNewInstance(type);
+            }
+            return instance;
         } catch (Exception e) {
             throw new CucumberException(String.format("Failed to instantiate %s", type), e);
         }
     }
 
-    private <T> void cacheNewInstance(Class<T> type) {
+    private <T> T cacheNewInstance(Class<T> type) {
         try {
             T instance = FLUENT_TEST.instance().newInstance(type);
             instances.put(type, instance);
-
+            return instance;
         } catch (Exception e) {
             throw new CucumberException(String.format("Failed to instantiate %s", type), e);
         }
