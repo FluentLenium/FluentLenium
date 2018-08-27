@@ -25,6 +25,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * {@link FluentCucumberTestContainer} to share state across Cucumber steps.
      */
     public FluentCucumberTest() {
+        this(fluentTest.getControlContainer(), fluentTest.getSharedMutator());
     }
 
     /**
