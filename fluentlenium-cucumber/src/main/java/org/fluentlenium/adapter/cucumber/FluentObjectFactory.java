@@ -3,11 +3,10 @@ package org.fluentlenium.adapter.cucumber;
 import cucumber.api.java.ObjectFactory;
 import cucumber.runtime.CucumberException;
 import org.fluentlenium.configuration.FluentConfiguration;
+import org.fluentlenium.core.inject.ContainerContext;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -20,7 +19,6 @@ public class FluentObjectFactory implements ObjectFactory {
     private FluentCucumberTestContainer testContainer;
 
     private final Map<Class<?>, Object> instances = new HashMap<>();
-    private final Set<Class<?>> classes = new HashSet<>();
     private Class<?> configClass;
 
     /**
@@ -34,18 +32,16 @@ public class FluentObjectFactory implements ObjectFactory {
 
     @Override
     public void start() {
-        testContainer.instance().before();
+        testContainer.instance().initFluent();
     }
 
     @Override
     public void stop() {
-        testContainer.instance().after();
         this.instances.clear();
     }
 
     @Override
     public boolean addClass(Class<?> aClass) {
-        classes.add(aClass);
         if(isNull(configClass)) {
             configClass = checkClassForConfiguration(aClass);
             if (nonNull(configClass)) {
@@ -62,17 +58,19 @@ public class FluentObjectFactory implements ObjectFactory {
             if (instance == null) {
                 instance = cacheNewInstance(type);
             }
-            return (T) testContainer.instance().inject(instance).getContainer();
+            return instance;
         } catch (Exception e) {
             throw new CucumberException(String.format("Failed to instantiate %s", type), e);
         }
     }
 
+    @SuppressWarnings("unchecked")
     private <T> T cacheNewInstance(Class<T> type) {
         try {
             T instance = testContainer.instance().newInstance(type);
             instances.put(type, instance);
-            return instance;
+            ContainerContext context = testContainer.instance().inject(instance);
+            return (T)context.getContainer();
         } catch (Exception e) {
             throw new CucumberException(String.format("Failed to instantiate %s", type), e);
         }

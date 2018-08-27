@@ -3,6 +3,7 @@ package org.fluentlenium.adapter.cucumber;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.adapter.ThreadLocalFluentControlContainer;
+import org.fluentlenium.core.inject.ContainerContext;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -12,7 +13,7 @@ import static java.util.Objects.nonNull;
  * <p>
  * It uses Sinlgeton pattern based on enum to makes sure that all Cucumber steps
  */
-public enum FluentCucumberTestContainer {
+public enum FluentCucumberTestContainer  {
 
     /**
      * Instance of FluentCucumberTestContainer.
@@ -34,7 +35,7 @@ public enum FluentCucumberTestContainer {
             setControlContainer(new ThreadLocalFluentControlContainer());
             setSharedMutator(new FluentCucumberSharedMutator());
             if (nonNull(configClass)) {
-                fluentCucumberTest = new FluentCucumberTest(controlContainer, configClass, sharedMutator);
+                fluentCucumberTest = new FluentCucumberTest(getControlContainer(), getConfigClass(), getSharedMutator());
             } else {
                 fluentCucumberTest = new FluentCucumberTest(controlContainer, sharedMutator);
             }
