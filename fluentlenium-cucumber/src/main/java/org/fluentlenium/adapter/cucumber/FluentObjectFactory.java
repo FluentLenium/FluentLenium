@@ -3,7 +3,6 @@ package org.fluentlenium.adapter.cucumber;
 import cucumber.api.java.ObjectFactory;
 import cucumber.runtime.CucumberException;
 import org.fluentlenium.configuration.FluentConfiguration;
-import org.fluentlenium.core.inject.ContainerContext;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +15,7 @@ import static java.util.Objects.nonNull;
  */
 public class FluentObjectFactory implements ObjectFactory {
 
-    private FluentCucumberTestContainer testContainer;
+    private final FluentCucumberTestContainer testContainer;
 
     private final Map<Class<?>, Object> instances = new HashMap<>();
     private Class<?> configClass;
@@ -42,7 +41,7 @@ public class FluentObjectFactory implements ObjectFactory {
 
     @Override
     public boolean addClass(Class<?> aClass) {
-        if(isNull(configClass)) {
+        if (isNull(configClass)) {
             configClass = checkClassForConfiguration(aClass);
             if (nonNull(configClass)) {
                 testContainer.setConfigClass(configClass);
@@ -52,7 +51,7 @@ public class FluentObjectFactory implements ObjectFactory {
     }
 
     @Override
-    public <T> T getInstance(Class<T> type) {
+    public <T> T getInstance(Class<T> type) { // NOPMD
         try {
             T instance = type.cast(instances.get(type));
             if (instance == null) {
@@ -69,8 +68,7 @@ public class FluentObjectFactory implements ObjectFactory {
         try {
             T instance = testContainer.instance().newInstance(type);
             instances.put(type, instance);
-            ContainerContext context = testContainer.instance().inject(instance);
-            return (T)context.getContainer();
+            return instance;
         } catch (Exception e) {
             throw new CucumberException(String.format("Failed to instantiate %s", type), e);
         }

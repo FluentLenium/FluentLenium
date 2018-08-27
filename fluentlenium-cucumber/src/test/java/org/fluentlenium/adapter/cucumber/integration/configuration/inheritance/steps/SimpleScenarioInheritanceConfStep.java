@@ -3,11 +3,12 @@ package org.fluentlenium.adapter.cucumber.integration.configuration.inheritance.
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.fluentlenium.adapter.cucumber.integration.configuration.inheritance.BaseTest;
 import org.fluentlenium.adapter.cucumber.integration.page.LocalPage;
 import org.fluentlenium.adapter.cucumber.integration.page.LocalPage2;
 import org.fluentlenium.core.annotation.Page;
 
-public class SimpleScenarioInheritanceConfStep {
+public class SimpleScenarioInheritanceConfStep extends BaseTest {
 
     @Page
     private LocalPage page;

@@ -3,7 +3,6 @@ package org.fluentlenium.adapter.cucumber;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.adapter.ThreadLocalFluentControlContainer;
-import org.fluentlenium.core.inject.ContainerContext;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -32,10 +31,10 @@ public enum FluentCucumberTestContainer  {
      */
     public FluentCucumberTest instance() {
         if (isNull(fluentCucumberTest)) {
-            setControlContainer(new ThreadLocalFluentControlContainer());
-            setSharedMutator(new FluentCucumberSharedMutator());
+            controlContainer = new ThreadLocalFluentControlContainer();
+            sharedMutator = new FluentCucumberSharedMutator();
             if (nonNull(configClass)) {
-                fluentCucumberTest = new FluentCucumberTest(getControlContainer(), getConfigClass(), getSharedMutator());
+                fluentCucumberTest = new FluentCucumberTest(controlContainer, configClass, sharedMutator);
             } else {
                 fluentCucumberTest = new FluentCucumberTest(controlContainer, sharedMutator);
             }
@@ -52,10 +51,6 @@ public enum FluentCucumberTestContainer  {
         return controlContainer;
     }
 
-    protected void setControlContainer(FluentControlContainer controlContainer){
-        this.controlContainer = controlContainer;
-    }
-
     /**
      * Sets config class - needed to enable annotation configuration.
      *
@@ -65,15 +60,12 @@ public enum FluentCucumberTestContainer  {
         this.configClass = clazz;
     }
 
-    protected Class<?> getConfigClass() {
-        return this.configClass;
-    }
-
+    /**
+     * Returns used inside container SharedMutator
+     *
+     * @return SharedMutator instance
+     */
     protected SharedMutator getSharedMutator() {
         return sharedMutator;
-    }
-
-    protected void setSharedMutator(SharedMutator sharedMutator) {
-        this.sharedMutator = sharedMutator;
     }
 }

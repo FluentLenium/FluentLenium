@@ -1,6 +1,5 @@
 package org.fluentlenium.adapter.cucumber.integration.configuration.nodriver;
 
-
 import cucumber.api.CucumberOptions;
 import net.jcip.annotations.NotThreadSafe;
 import org.fluentlenium.adapter.cucumber.FluentCucumber;

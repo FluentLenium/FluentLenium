@@ -7,7 +7,6 @@ import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.inject.ContainerContext;
 import org.fluentlenium.core.inject.ContainerFluentControl;
-import org.openqa.selenium.WebDriver;
 
 import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
 
@@ -18,14 +17,12 @@ import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUE
  */
 public class FluentCucumberTest extends FluentTestRunnerAdapter {
 
-    private final static FluentCucumberTestContainer fluentTest = FluentCucumberTestContainer.FLUENT_TEST;
-
     /**
      * Initializes context for {@link FluentCucumberTest} and store it in container at
      * {@link FluentCucumberTestContainer} to share state across Cucumber steps.
      */
     public FluentCucumberTest() {
-        this(fluentTest.getControlContainer(), fluentTest.getSharedMutator());
+        this(FLUENT_TEST.getControlContainer(), FLUENT_TEST.getSharedMutator());
     }
 
     /**
@@ -57,7 +54,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * @param scenario Cucumber scenario
      */
     public void before(Scenario scenario) {
-        fluentTest.instance().starting(scenario.getName());
+        FLUENT_TEST.instance().starting(scenario.getName());
     }
 
     /**
@@ -66,7 +63,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * @param scenario Cucumber scenario
      */
     public void after(Scenario scenario) {
-        fluentTest.instance().finished(scenario.getName());
+        FLUENT_TEST.instance().finished(scenario.getName());
     }
 
     /**
@@ -76,40 +73,17 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      */
     @Override
     protected FluentControlContainer getControlContainer() {
-        return fluentTest.getControlContainer();
-    }
-
-    @Override
-    public void initFluent(WebDriver webDriver) {
-        if (webDriver == null) {
-            releaseFluent();
-            return;
-        }
-
-        if (getControlContainer().getFluentControl() != null) {
-            if (getControlContainer().getFluentControl().getDriver() == webDriver) {
-                return;
-            }
-            if (getControlContainer().getFluentControl().getDriver() != null) {
-                throw new IllegalStateException("Trying to init a WebDriver, but another one is still running");
-            }
-        }
-
-        ContainerFluentControl adapterFluentControl = new ContainerFluentControl(new FluentDriver(webDriver, fluentTest.instance(), fluentTest.instance()));
-        getControlContainer().setFluentControl(adapterFluentControl);
-        ContainerContext context = adapterFluentControl.inject(fluentTest.instance());
-        adapterFluentControl.setContext(context);
+        return FLUENT_TEST.getControlContainer();
     }
 
     /**
-     * Initialization of ContainerFluentContext without driver to enable injection of FluentCucumberSteps
+     * Initialization of ContainerFluentContext without driver to enable injection of FluentCucumber steps
      */
     void initFluent() {
-        ContainerFluentControl adapterFluentControl = new ContainerFluentControl(new FluentDriver(null, fluentTest.instance(), fluentTest.instance()));
+        ContainerFluentControl adapterFluentControl = new ContainerFluentControl(
+                new FluentDriver(null, FLUENT_TEST.instance(), FLUENT_TEST.instance()));
         getControlContainer().setFluentControl(adapterFluentControl);
-        ContainerContext context = adapterFluentControl.inject(fluentTest.instance());
+        ContainerContext context = adapterFluentControl.inject(FLUENT_TEST.instance());
         adapterFluentControl.setContext(context);
     }
-
-
 }

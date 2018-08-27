@@ -3,8 +3,6 @@ package org.fluentlenium.adapter.cucumber.unit;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer;
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.annotation.Page;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
