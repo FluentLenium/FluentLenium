@@ -46,9 +46,6 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
     private final JUnitReporter jUnitReporter;
     private final List<FeatureRunner> children = new ArrayList<>();
     final Runtime runtime;
-    private final Formatter formatter;
-    private final ClassFinder classFinder;
-    private final RuntimeOptions runtimeOptions;
 
     /**
      * Constructor for FluentCucumber.
@@ -62,13 +59,14 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
         ClassLoader classLoader = clazz.getClassLoader();
         Assertions.assertNoCucumberAnnotatedMethods(clazz);
         RuntimeOptionsFactory runtimeOptionsFactory = new RuntimeOptionsFactory(clazz);
-        runtimeOptions = runtimeOptionsFactory.create();
+        RuntimeOptions runtimeOptions = runtimeOptionsFactory.create();
         ResourceLoader resourceLoader = new MultiLoader(classLoader);
-        classFinder = new ResourceLoaderClassFinder(resourceLoader, classLoader);
+        ClassFinder classFinder = new ResourceLoaderClassFinder(resourceLoader, classLoader);
 
         getFluentConfiguration(clazz);
-        this.runtime = new Runtime(resourceLoader, classLoader, singletonList(getBackend()), runtimeOptions);
-        this.formatter = runtimeOptions.formatter(classLoader);
+        this.runtime = new Runtime(resourceLoader, classLoader,
+                singletonList(getBackend(classFinder, runtimeOptions)), runtimeOptions);
+        Formatter formatter = runtimeOptions.formatter(classLoader);
 
         JUnitOptions junitOptions = new JUnitOptions(runtimeOptions.getJunitOptions());
         List<CucumberFeature> cucumberFeatures =
@@ -83,7 +81,7 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
      *
      * @return backend with {@link FluentObjectFactory}
      */
-    private JavaBackend getBackend() {
+    private JavaBackend getBackend(ClassFinder classFinder, RuntimeOptions runtimeOptions) {
         Reflections reflections = new Reflections(classFinder);
         TypeRegistryConfigurer typeRegistryConfigurer =
                 reflections.instantiateExactlyOneSubclass(TypeRegistryConfigurer.class,
@@ -92,9 +90,7 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
                         new Object[0],
                         new DefaultTypeRegistryConfiguration());
 
-        FLUENT_TEST.instance();
-
-        return new JavaBackend(new FluentObjectFactory(),
+        return new JavaBackend(new FluentObjectFactory(FLUENT_TEST),
                 classFinder, new TypeRegistry(typeRegistryConfigurer.locale()));
     }
 
@@ -105,7 +101,7 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
      */
     private void getFluentConfiguration(Class clazz) {
         ofNullable(clazz.getAnnotation(FluentConfiguration.class))
-                .ifPresent(annotation -> FLUENT_TEST.setRunnerClass(clazz));
+                .ifPresent(annotation -> FLUENT_TEST.setConfigClass(clazz));
     }
 
     /**

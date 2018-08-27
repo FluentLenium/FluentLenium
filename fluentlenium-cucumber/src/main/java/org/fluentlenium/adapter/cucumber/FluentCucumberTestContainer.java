@@ -21,7 +21,8 @@ public enum FluentCucumberTestContainer {
 
     private FluentCucumberTest fluentCucumberTest;
     private FluentControlContainer controlContainer;
-    private Class loaderClass;
+    private SharedMutator sharedMutator;
+    private Class<?> configClass;
 
     /**
      * Returns single instance of {@link FluentCucumberTest} across all Cucumber steps.
@@ -30,10 +31,10 @@ public enum FluentCucumberTestContainer {
      */
     public FluentCucumberTest instance() {
         if (isNull(fluentCucumberTest)) {
-            controlContainer = new ThreadLocalFluentControlContainer();
-            SharedMutator sharedMutator = new FluentCucumberSharedMutator();
-            if (nonNull(loaderClass)) {
-                fluentCucumberTest = new FluentCucumberTest(controlContainer, loaderClass, sharedMutator);
+            setControlContainer(new ThreadLocalFluentControlContainer());
+            setSharedMutator(new FluentCucumberSharedMutator());
+            if (nonNull(configClass)) {
+                fluentCucumberTest = new FluentCucumberTest(controlContainer, configClass, sharedMutator);
             } else {
                 fluentCucumberTest = new FluentCucumberTest(controlContainer, sharedMutator);
             }
@@ -50,12 +51,28 @@ public enum FluentCucumberTestContainer {
         return controlContainer;
     }
 
+    protected void setControlContainer(FluentControlContainer controlContainer){
+        this.controlContainer = controlContainer;
+    }
+
     /**
-     * Sets runner class - needed to enable annotation configuration.
+     * Sets config class - needed to enable annotation configuration.
      *
      * @param clazz class annotated with @RunWith(FluentCucumber.class)
      */
-    void setRunnerClass(Class clazz) {
-        this.loaderClass = clazz;
+    protected void setConfigClass(Class clazz) {
+        this.configClass = clazz;
+    }
+
+    protected Class<?> getConfigClass() {
+        return this.configClass;
+    }
+
+    protected SharedMutator getSharedMutator() {
+        return sharedMutator;
+    }
+
+    protected void setSharedMutator(SharedMutator sharedMutator) {
+        this.sharedMutator = sharedMutator;
     }
 }
