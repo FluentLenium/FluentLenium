@@ -1,5 +1,6 @@
 package org.fluentlenium.core.wait;
 
+import java.time.Duration;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -38,7 +39,7 @@ public class FluentWait
      */
     public FluentWait(FluentControl control) {
         wait = new org.openqa.selenium.support.ui.FluentWait<>(control);
-        wait.withTimeout(5, TimeUnit.SECONDS);
+        wait.withTimeout(Duration.ofSeconds(5));
         driver = control.getDriver();
         useDefaultException = true;
     }
@@ -46,6 +47,12 @@ public class FluentWait
     @Override
     public org.openqa.selenium.support.ui.FluentWait getWait() {
         return wait;
+    }
+
+    @Override
+    public FluentWait atMost(Duration duration) {
+        wait.withTimeout(duration);
+        return this;
     }
 
     @Override
@@ -57,6 +64,12 @@ public class FluentWait
     @Override
     public FluentWait atMost(long duration) {
         return atMost(duration, TimeUnit.MILLISECONDS);
+    }
+
+    @Override
+    public FluentWait pollingEvery(Duration duration) {
+        wait.pollingEvery(duration);
+        return this;
     }
 
     @Override
@@ -97,7 +110,7 @@ public class FluentWait
 
     @Override
     public FluentWait withMessage(Supplier<String> message) {
-        wait.withMessage(message::get);
+        wait.withMessage(message);
         messageDefined = true;
         return this;
     }
