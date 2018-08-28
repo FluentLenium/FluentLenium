@@ -8,12 +8,12 @@ import org.fluentlenium.examples.cucumber.page.HomePage;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
 
-public class Java8Step implements En {
+public class ExampleStep implements En {
 
     @Page
     private HomePage page;
 
-    public Java8Step() {
+    public ExampleStep() {
 
         Given("Visit duckduckgo", () -> page.go());
 

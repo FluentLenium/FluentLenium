@@ -8,7 +8,6 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.configuration.FluentConfiguration;
-import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.examples.cucumber.page.HomePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,11 +15,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @FluentConfiguration(webDriver = "chrome")
 public class BasicStep extends FluentCucumberTest {
 
-    @Page
     private HomePage page;
 
     @Given(value = "Visit duckduckgo")
     public void step1() {
+        page = newInstance(HomePage.class);
         goTo(page);
     }
 
