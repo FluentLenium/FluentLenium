@@ -8,13 +8,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(FluentCucumber.class)
 @CucumberOptions(features = "classpath:org/fluentlenium/adapter/cucumber/integration/configuration/inheritance",
-        glue = "org.fluentlenium.adapter.cucumber.integration.configuration.inheritance.steps",
         plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"})
 @NotThreadSafe
 public class InheritanceRunner {
 
-    @BeforeClass
-    public static void shouldInheritFluentConfigurationFromBaseTest() {
-        // ignore
-    }
 }

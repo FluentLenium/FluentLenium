@@ -2,9 +2,7 @@ package org.fluentlenium.adapter.cucumber.integration.java8;
 
 import cucumber.api.Scenario;
 import cucumber.api.java8.En;
-import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.adapter.cucumber.integration.page.LocalPage;
-import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.core.annotation.Page;
 
 import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
