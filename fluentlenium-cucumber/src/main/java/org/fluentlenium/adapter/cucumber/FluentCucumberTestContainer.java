@@ -12,7 +12,7 @@ import static java.util.Objects.nonNull;
  * <p>
  * It uses Sinlgeton pattern based on enum to makes sure that all Cucumber steps
  */
-public enum FluentCucumberTestContainer {
+public enum FluentCucumberTestContainer  {
 
     /**
      * Instance of FluentCucumberTestContainer.
@@ -21,7 +21,8 @@ public enum FluentCucumberTestContainer {
 
     private FluentCucumberTest fluentCucumberTest;
     private FluentControlContainer controlContainer;
-    private Class loaderClass;
+    private SharedMutator sharedMutator;
+    private Class<?> configClass;
 
     /**
      * Returns single instance of {@link FluentCucumberTest} across all Cucumber steps.
@@ -31,9 +32,9 @@ public enum FluentCucumberTestContainer {
     public FluentCucumberTest instance() {
         if (isNull(fluentCucumberTest)) {
             controlContainer = new ThreadLocalFluentControlContainer();
-            SharedMutator sharedMutator = new FluentCucumberSharedMutator();
-            if (nonNull(loaderClass)) {
-                fluentCucumberTest = new FluentCucumberTest(controlContainer, loaderClass, sharedMutator);
+            sharedMutator = new FluentCucumberSharedMutator();
+            if (nonNull(configClass)) {
+                fluentCucumberTest = new FluentCucumberTest(controlContainer, configClass, sharedMutator);
             } else {
                 fluentCucumberTest = new FluentCucumberTest(controlContainer, sharedMutator);
             }
@@ -51,11 +52,20 @@ public enum FluentCucumberTestContainer {
     }
 
     /**
-     * Sets runner class - needed to enable annotation configuration.
+     * Sets config class - needed to enable annotation configuration.
      *
      * @param clazz class annotated with @RunWith(FluentCucumber.class)
      */
-    void setRunnerClass(Class clazz) {
-        this.loaderClass = clazz;
+    protected void setConfigClass(Class clazz) {
+        this.configClass = clazz;
+    }
+
+    /**
+     * Returns used inside container SharedMutator
+     *
+     * @return SharedMutator instance
+     */
+    protected SharedMutator getSharedMutator() {
+        return sharedMutator;
     }
 }

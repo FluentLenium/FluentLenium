@@ -18,6 +18,6 @@ public class LocalWithHookPage extends FluentPage {
     }
 
     public void clickLink() {
-        $("a#linkToPage2").click();
+        el("a#linkToPage2").click();
     }
 }

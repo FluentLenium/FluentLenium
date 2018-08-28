@@ -14,7 +14,7 @@ public class SimpleFeatureStep extends BaseTest {
 
     @When(value = "feature I click on next page")
     public void step2() {
-        $("a#linkToPage2").click();
+        el("a#linkToPage2").click();
     }
 
     @Then(value = "feature I am on the second page")

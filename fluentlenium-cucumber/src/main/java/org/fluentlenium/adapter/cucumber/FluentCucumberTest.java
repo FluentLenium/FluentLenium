@@ -1,8 +1,12 @@
 package org.fluentlenium.adapter.cucumber;
 
+import cucumber.api.Scenario;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.FluentTestRunnerAdapter;
 import org.fluentlenium.adapter.SharedMutator;
+import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.inject.ContainerContext;
+import org.fluentlenium.core.inject.ContainerFluentControl;
 
 import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
 
@@ -18,7 +22,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * {@link FluentCucumberTestContainer} to share state across Cucumber steps.
      */
     public FluentCucumberTest() {
-        FLUENT_TEST.instance();
+        this(FLUENT_TEST.instance().getControlContainer(), FLUENT_TEST.getSharedMutator());
     }
 
     /**
@@ -46,16 +50,20 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
 
     /**
      * Initialization of FluentCucumberTestAdapter
+     *
+     * @param scenario Cucumber scenario
      */
-    void before() {
-        FLUENT_TEST.instance().starting();
+    public void before(Scenario scenario) {
+        this.starting(scenario.getName());
     }
 
     /**
      * Stopping of FluentCucumberTestAdapter
+     *
+     * @param scenario Cucumber scenario
      */
-    void after() {
-        FLUENT_TEST.instance().finished();
+    public void after(Scenario scenario) {
+        this.finished(scenario.getName());
     }
 
     /**
@@ -66,5 +74,16 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
     @Override
     protected FluentControlContainer getControlContainer() {
         return FLUENT_TEST.getControlContainer();
+    }
+
+    /**
+     * Initialization of ContainerFluentContext without driver to enable injection of FluentCucumber steps
+     */
+    void initFluent() {
+        ContainerFluentControl adapterFluentControl = new ContainerFluentControl(
+                new FluentDriver(null, FLUENT_TEST.instance(), FLUENT_TEST.instance()));
+        getControlContainer().setFluentControl(adapterFluentControl);
+        ContainerContext context = adapterFluentControl.inject(FLUENT_TEST.instance());
+        adapterFluentControl.setContext(context);
     }
 }
