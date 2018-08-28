@@ -1,14 +1,9 @@
-package org.fluentlenium.adapter.cucumber.custom.steps;
+package org.fluentlenium.examples.cucumber.update.steps;
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import org.fluentlenium.adapter.cucumber.custom.page.HomePage;
-import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
+import cucumber.api.java8.En;
 import org.fluentlenium.core.annotation.Page;
+import org.fluentlenium.examples.cucumber.page.HomePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
@@ -16,11 +11,11 @@ import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUE
 public class Java8Step implements En {
 
     @Page
-    HomePage page;
+    private HomePage page;
 
     public Java8Step() {
 
-        Given("Visit duckduckgo"), () -> goTo(page));
+        Given("Visit duckduckgo", () -> page.go());
 
         When("I search FluentLenium", () -> {
             page.el("#search_form_input_homepage").fill().with("FluentLenium");
@@ -29,9 +24,8 @@ public class Java8Step implements En {
 
         Then("Title contains FluentLenium", () -> assertThat(page.window().title()).contains("FluentLenium"));
 
+        Before((Scenario scenario) -> FLUENT_TEST.instance().before(scenario));
 
-        Before(Scenario scenario) -> FLUENT_TEST.instance().before(scenario));
-
-        After(Scenario scenario) -> FLUENT_TEST.instance().after(scenario));
+        After((Scenario scenario) -> FLUENT_TEST.instance().after(scenario));
     }
 }

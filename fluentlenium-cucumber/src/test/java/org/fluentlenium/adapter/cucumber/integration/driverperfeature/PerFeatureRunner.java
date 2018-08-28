@@ -11,7 +11,6 @@ import static org.fluentlenium.configuration.ConfigurationProperties.DriverLifec
 @RunWith(FluentCucumber.class)
 @CucumberOptions(features = "classpath:org/fluentlenium/adapter/cucumber/integration/feature",
         plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"})
-@FluentConfiguration(webDriver = "htmlunit", driverLifecycle = JVM)
 @NotThreadSafe
 public class PerFeatureRunner {
 

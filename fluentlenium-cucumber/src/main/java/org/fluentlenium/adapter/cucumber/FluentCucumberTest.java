@@ -22,7 +22,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * {@link FluentCucumberTestContainer} to share state across Cucumber steps.
      */
     public FluentCucumberTest() {
-        this(FLUENT_TEST.getControlContainer(), FLUENT_TEST.getSharedMutator());
+        this(FLUENT_TEST.instance().getControlContainer(), FLUENT_TEST.getSharedMutator());
     }
 
     /**
@@ -54,7 +54,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * @param scenario Cucumber scenario
      */
     public void before(Scenario scenario) {
-        FLUENT_TEST.instance().starting(scenario.getName());
+        this.starting(scenario.getName());
     }
 
     /**
@@ -63,7 +63,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * @param scenario Cucumber scenario
      */
     public void after(Scenario scenario) {
-        FLUENT_TEST.instance().finished(scenario.getName());
+        this.finished(scenario.getName());
     }
 
     /**

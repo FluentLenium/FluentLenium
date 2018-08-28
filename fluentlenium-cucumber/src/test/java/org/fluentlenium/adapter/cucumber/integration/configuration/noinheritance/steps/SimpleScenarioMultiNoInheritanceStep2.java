@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.cucumber.integration.noinheritance.steps;
+package org.fluentlenium.adapter.cucumber.integration.configuration.noinheritance.steps;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

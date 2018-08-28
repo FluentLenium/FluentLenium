@@ -1,11 +1,15 @@
 package org.fluentlenium.adapter.cucumber.integration.java8;
 
+import cucumber.api.Scenario;
 import cucumber.api.java8.En;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.adapter.cucumber.integration.page.LocalPage;
+import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.core.annotation.Page;
 
-public class Java8Steps extends FluentCucumberTest implements En {
+import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
+
+public class Java8Steps implements En {
 
     @Page
     protected LocalPage page;
@@ -26,8 +30,8 @@ public class Java8Steps extends FluentCucumberTest implements En {
         Then("scenario I am on the second page", () ->
                 page2.isAt());
 
-        Before(this::before);
+        Before((Scenario scenario) -> FLUENT_TEST.instance().before(scenario));
 
-        After(this::after);
+        After((Scenario scenario) -> FLUENT_TEST.instance().after(scenario));
     }
 }

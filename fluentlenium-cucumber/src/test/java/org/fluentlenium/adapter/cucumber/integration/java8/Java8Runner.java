@@ -10,8 +10,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(features = "classpath:org/fluentlenium/adapter/cucumber/integration/java8",
         glue = "org.fluentlenium.adapter.cucumber.integration.java8",
         plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"})
-@FluentConfiguration(webDriver = "htmlunit")
 @NotThreadSafe
+@FluentConfiguration(webDriver = "htmlunit")
 public class Java8Runner {
 
 }

@@ -1,12 +1,12 @@
-package org.fluentlenium.adapter.cucumber.custom;
+package org.fluentlenium.examples.cucumber.update;
 
 import cucumber.api.CucumberOptions;
 import org.fluentlenium.adapter.cucumber.FluentCucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(FluentCucumber.class)
-@CucumberOptions(features = "classpath:org/fluentlenium/examples/quickstart",
+@CucumberOptions(features = "classpath:org/fluentlenium/examples/cucumber",
         plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"})
-public class BasicRunner {
+public class FluentCucumberRunner {
 
 }

@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.cucumber.custom.steps;
+package org.fluentlenium.examples.cucumber.classic.steps;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -6,9 +6,10 @@ import cucumber.api.java.en.When;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import org.fluentlenium.adapter.cucumber.custom.page.HomePage;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
+import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.core.annotation.Page;
+import org.fluentlenium.examples.cucumber.page.HomePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BasicStep extends FluentCucumberTest {
 
     @Page
-    HomePage page;
+    private HomePage page;
 
     @Given(value = "Visit duckduckgo")
     public void step1() {
