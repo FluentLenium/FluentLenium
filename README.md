@@ -6,6 +6,8 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/27aabb596e9d9eee7182/test_coverage)](https://codeclimate.com/github/FluentLenium/FluentLenium/test_coverage)
 [![Maven Central](https://img.shields.io/maven-central/v/org.fluentlenium/fluentlenium-parent.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.fluentlenium%22%20AND%20a%3A%22fluentlenium-parent%22)
 [![Website](https://img.shields.io/website-up-down-green-red/http/fluentlenium.org.svg)](http://fluentlenium.org)
+[![Code Quality: Java](https://img.shields.io/lgtm/grade/java/g/FluentLenium/FluentLenium.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/FluentLenium/FluentLenium/context:java)
+[![Total Alerts](https://img.shields.io/lgtm/alerts/g/FluentLenium/FluentLenium.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/FluentLenium/FluentLenium/alerts)
 
 FluentLenium helps you writing readable, reusable, reliable and resilient UI functional tests for the browser.
 
