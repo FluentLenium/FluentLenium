@@ -3,8 +3,6 @@ package org.fluentlenium.adapter.cucumber.integration.inheritance.java8;
 import cucumber.api.CucumberOptions;
 import net.jcip.annotations.NotThreadSafe;
 import org.fluentlenium.adapter.cucumber.FluentCucumber;
-import org.fluentlenium.configuration.ConfigurationProperties;
-import org.fluentlenium.configuration.FluentConfiguration;
 import org.junit.runner.RunWith;
 
 @RunWith(FluentCucumber.class)

@@ -13,7 +13,7 @@ public class FluentTestContainerTest {
 
     @After
     public void reset() {
-       FLUENT_TEST.reset();
+        FLUENT_TEST.reset();
     }
 
     @Test

@@ -19,6 +19,7 @@ public class FluentObjectFactoryTest {
         objectFactory = new FluentObjectFactory(null);
         objectFactory.start();
     }
+
     @After
     public void after() {
         objectFactory.stop();
@@ -76,7 +77,6 @@ public class FluentObjectFactoryTest {
         assertThat(container.childContainer.element)
                 .isInstanceOf(FluentWebElement.class);
     }
-
 
     public static class ChildContainer {
         @FindBy

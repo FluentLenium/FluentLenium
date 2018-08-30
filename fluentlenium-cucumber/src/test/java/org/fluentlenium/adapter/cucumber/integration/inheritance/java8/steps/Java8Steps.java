@@ -3,7 +3,6 @@ package org.fluentlenium.adapter.cucumber.integration.inheritance.java8.steps;
 import cucumber.api.java8.En;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.adapter.cucumber.integration.page.LocalPage;
-import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.core.annotation.Page;
 
 public class Java8Steps extends FluentCucumberTest implements En {

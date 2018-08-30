@@ -107,10 +107,18 @@ public enum FluentTestContainer {
         return injector;
     }
 
+    /**
+     * Initialization of FluentControl and WebDriver. Using as substitute of
+     * alternatives.
+     */
     public void before() {
         ((FluentCucumberTest) fluentAdapter).start();
     }
 
+    /**
+     * Releasing of FluentControl and WebDriver. Using as substitute of
+     * alternatives.
+     */
     public void after() {
         ((FluentCucumberTest) fluentAdapter).finish();
     }
