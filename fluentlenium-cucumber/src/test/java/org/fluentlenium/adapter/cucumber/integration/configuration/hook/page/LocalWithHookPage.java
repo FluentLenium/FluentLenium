@@ -2,10 +2,15 @@ package org.fluentlenium.adapter.cucumber.integration.configuration.hook.page;
 
 import org.fluentlenium.adapter.cucumber.integration.utils.UrlUtil;
 import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.hook.wait.Wait;
+import org.openqa.selenium.support.FindBy;
 
 @Wait
 public class LocalWithHookPage extends FluentPage {
+
+    @FindBy(css = "a#linkToPage2")
+    private FluentWebElement link;
 
     @Override
     public String getUrl() {
@@ -18,6 +23,6 @@ public class LocalWithHookPage extends FluentPage {
     }
 
     public void clickLink() {
-        el("a#linkToPage2").click();
+        link.click();
     }
 }

@@ -1,18 +1,19 @@
 package org.fluentlenium.adapter.cucumber.unit;
 
+import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
-import org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.fluentlenium.adapter.cucumber.FluentTestContainer.FLUENT_TEST;
 
-public class FluentCucumberTestContainerTest {
+public class FluentTestContainerTest {
 
     @Test
     public void shouldGetFluentCucumberTestInstance() {
 
-        FluentCucumberTest test = FluentCucumberTestContainer.FLUENT_TEST.instance();
+        FluentAdapter test = FLUENT_TEST.instance();
 
         assertThat(test)
                 .isInstanceOf(FluentCucumberTest.class)
@@ -22,8 +23,8 @@ public class FluentCucumberTestContainerTest {
     @Test
     public void shouldAlwaysReturnTheSameFluentTestInstance() {
 
-        FluentCucumberTest test = FluentCucumberTestContainer.FLUENT_TEST.instance();
-        FluentCucumberTest test2 = FluentCucumberTestContainer.FLUENT_TEST.instance();
+        FluentAdapter test = FLUENT_TEST.instance();
+        FluentAdapter test2 = FLUENT_TEST.instance();
 
         assertThat(test)
                 .isNotNull()
@@ -33,7 +34,7 @@ public class FluentCucumberTestContainerTest {
     @Test
     public void childClassShouldProvideSameControlContainer() {
 
-        FluentCucumberTestContainer.FLUENT_TEST.instance();
+        FLUENT_TEST.instance();
         ExampleTest1 test1 = new ExampleTest1();
         ExampleTest2 test2 = new ExampleTest2();
 

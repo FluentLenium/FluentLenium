@@ -3,12 +3,8 @@ package org.fluentlenium.adapter.cucumber;
 import cucumber.api.TypeRegistryConfigurer;
 import cucumber.api.event.TestRunFinished;
 import cucumber.api.formatter.Formatter;
-import cucumber.runtime.ClassFinder;
+import cucumber.runtime.*;
 import cucumber.runtime.Runtime;
-import cucumber.runtime.RuntimeOptions;
-import cucumber.runtime.RuntimeOptionsFactory;
-import cucumber.runtime.Reflections;
-import cucumber.runtime.DefaultTypeRegistryConfiguration;
 import cucumber.runtime.io.MultiLoader;
 import cucumber.runtime.io.ResourceLoader;
 import cucumber.runtime.io.ResourceLoaderClassFinder;
@@ -33,7 +29,6 @@ import java.util.List;
 
 import static java.util.Collections.singletonList;
 import static java.util.Optional.ofNullable;
-import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
 
 /**
  * Main point for integrating FluentLenium with Cucumber. Pass this class to JUnit @RunWith() annotation to enable
@@ -90,7 +85,7 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
                         new Object[0],
                         new DefaultTypeRegistryConfiguration());
 
-        return new JavaBackend(new FluentObjectFactory(FLUENT_TEST),
+        return new JavaBackend(new FluentObjectFactory(),
                 classFinder, new TypeRegistry(typeRegistryConfigurer.locale()));
     }
 
@@ -101,7 +96,7 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
      */
     private void getFluentConfiguration(Class clazz) {
         ofNullable(clazz.getAnnotation(FluentConfiguration.class))
-                .ifPresent(annotation -> FLUENT_TEST.setConfigClass(clazz));
+                .ifPresent(annotation -> FluentTestContainer.setConfigWithInjection(clazz));
     }
 
     /**

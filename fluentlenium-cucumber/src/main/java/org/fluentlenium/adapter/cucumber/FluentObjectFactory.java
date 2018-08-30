@@ -7,44 +7,50 @@ import org.fluentlenium.configuration.FluentConfiguration;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
+import static org.fluentlenium.adapter.cucumber.FluentTestContainer.*;
+import static org.fluentlenium.adapter.cucumber.FluentTestContainer.shouldInitialized;
 
 /**
  * It is an object factory for creating Cucumber steps objects in FluentLenium injection container
  */
 public class FluentObjectFactory implements ObjectFactory {
 
-    private final FluentCucumberTestContainer testContainer;
-
     private final Map<Class<?>, Object> instances = new HashMap<>();
     private Class<?> configClass;
 
     /**
      * Creating instance of FluentObjectFactory and sets FluentCucumberTest instance.
-     *
-     * @param testContainer testContainer
      */
-    public FluentObjectFactory(FluentCucumberTestContainer testContainer) {
-        this.testContainer = testContainer;
+    public FluentObjectFactory() {
     }
 
     @Override
     public void start() {
-        testContainer.instance().initFluent();
+        FLUENT_TEST.instance();
+        if (shouldInitialized()) {
+            FLUENT_TEST.before();
+        }
     }
 
     @Override
     public void stop() {
+        if (shouldInitialized()) {
+            FLUENT_TEST.after();
+        }
+//        FLUENT_TEST.injector().release();
         this.instances.clear();
     }
 
     @Override
     public boolean addClass(Class<?> aClass) {
-        if (isNull(configClass)) {
+        if (shouldInitialized()) {
+            FLUENT_TEST.instance();
+        } else if (configClass == null) {
             configClass = checkClassForConfiguration(aClass);
             if (nonNull(configClass)) {
-                testContainer.setConfigClass(configClass);
+                setConfigClass(configClass);
+                FLUENT_TEST.instance();
             }
         }
         return true;
@@ -66,7 +72,8 @@ public class FluentObjectFactory implements ObjectFactory {
     @SuppressWarnings("unchecked")
     private <T> T cacheNewInstance(Class<T> type) {
         try {
-            T instance = testContainer.instance().newInstance(type);
+            T instance = FLUENT_TEST.instance().newInstance(type);
+            FLUENT_TEST.instance().inject(instance);
             instances.put(type, instance);
             return instance;
         } catch (Exception e) {

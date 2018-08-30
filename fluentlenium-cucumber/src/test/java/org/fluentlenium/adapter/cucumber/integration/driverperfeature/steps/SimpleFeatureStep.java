@@ -4,8 +4,18 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.fluentlenium.adapter.cucumber.integration.driverperfeature.BaseTest;
+import org.fluentlenium.adapter.cucumber.integration.page.LocalPage;
+import org.fluentlenium.core.annotation.Page;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SimpleFeatureStep extends BaseTest {
+
+    @Page
+    protected LocalPage page;
+
+    @Page
+    protected LocalPage page2;
 
     @Given(value = "feature I am on the first page")
     public void step1() {
@@ -14,7 +24,7 @@ public class SimpleFeatureStep extends BaseTest {
 
     @When(value = "feature I click on next page")
     public void step2() {
-        el("a#linkToPage2").click();
+        page.clickLink();
     }
 
     @Then(value = "feature I am on the second page")

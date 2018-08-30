@@ -6,13 +6,14 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.adapter.cucumber.integration.configuration.hook.page.LocalWithHookPage;
 import org.fluentlenium.adapter.cucumber.integration.configuration.hook.page.LocalWithHookPage2;
+import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.core.annotation.Page;
 
-import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
-
-public class SimpleScenarioForHookStep {
+@FluentConfiguration(webDriver = "htmlunit")
+public class SimpleScenarioForHookStep extends FluentCucumberTest {
 
     @Page
     private LocalWithHookPage page;
@@ -37,11 +38,11 @@ public class SimpleScenarioForHookStep {
 
     @Before
     public void beforeScenario(Scenario scenario) {
-        FLUENT_TEST.instance().before(scenario);
+        before(scenario);
     }
 
     @After
     public void afterScenario(Scenario scenario) {
-        FLUENT_TEST.instance().after(scenario);
+        after(scenario);
     }
 }

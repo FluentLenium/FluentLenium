@@ -1,6 +1,7 @@
 package org.fluentlenium.adapter.cucumber.integration.configuration.noinheritance.steps;
 
 import cucumber.api.java.en.Given;
+import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.adapter.cucumber.integration.page.LocalPage;
 import org.fluentlenium.core.annotation.Page;
 

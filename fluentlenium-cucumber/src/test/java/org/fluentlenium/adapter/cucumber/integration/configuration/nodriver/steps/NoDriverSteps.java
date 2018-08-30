@@ -7,37 +7,35 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.openqa.selenium.WebDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
 
 @FluentConfiguration(webDriver = "htmlunit")
-public class NoDriverSteps {
+public class NoDriverSteps extends FluentCucumberTest {
 
     @Page
     private TestPage testPage;
-
-    private WebDriver driver;
 
     private String state;
 
     @When("I get WebDriver current state")
     public void checkWebDriver() {
-        driver = FLUENT_TEST.instance().getDriver();
+        testPage.getDriver();
     }
 
     @Then("it should be null")
     public void driverShouldBeNull() {
-        assertThat(driver).isNull();
+        assertThat(getDriver()).isNull();
     }
 
     @Then("it should not be null with tag")
     public void driverShouldNotBeNull() {
-        assertThat(driver).isNotNull();
+        assertThat(getDriver()).isNotNull();
     }
 
     @And("it should be created instance of @Page")
@@ -66,12 +64,12 @@ public class NoDriverSteps {
 
     @Before({"@fluent"})
     public void beforeScenario(Scenario scenario) {
-        FLUENT_TEST.instance().before(scenario);
+        before(scenario);
     }
 
     @After({"@fluent"})
     public void afterScenario(Scenario scenario) {
-        FLUENT_TEST.instance().after(scenario);
+        after(scenario);
     }
 }
 
