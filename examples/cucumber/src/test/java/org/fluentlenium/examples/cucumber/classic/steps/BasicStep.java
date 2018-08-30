@@ -8,19 +8,15 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.configuration.FluentConfiguration;
-import org.fluentlenium.examples.cucumber.page.HomePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @FluentConfiguration(webDriver = "chrome")
 public class BasicStep extends FluentCucumberTest {
 
-    private HomePage page;
-
     @Given(value = "Visit duckduckgo")
     public void step1() {
-        page = newInstance(HomePage.class);
-        goTo(page);
+        goTo("https://duckduckgo.com");
     }
 
     @When(value = "I search FluentLenium")
@@ -31,7 +27,7 @@ public class BasicStep extends FluentCucumberTest {
 
     @Then(value = "Title contains FluentLenium")
     public void step3() {
-        assertThat(page.window().title()).contains("FluentLenium");
+        assertThat(window().title()).contains("FluentLenium");
     }
 
     @Before
