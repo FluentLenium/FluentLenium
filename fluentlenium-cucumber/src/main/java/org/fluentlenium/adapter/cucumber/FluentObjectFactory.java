@@ -9,7 +9,6 @@ import java.util.Map;
 
 import static java.util.Objects.nonNull;
 import static org.fluentlenium.adapter.cucumber.FluentTestContainer.*;
-import static org.fluentlenium.adapter.cucumber.FluentTestContainer.shouldInitialized;
 
 /**
  * It is an object factory for creating Cucumber steps objects in FluentLenium injection container
@@ -17,40 +16,49 @@ import static org.fluentlenium.adapter.cucumber.FluentTestContainer.shouldInitia
 public class FluentObjectFactory implements ObjectFactory {
 
     private final Map<Class<?>, Object> instances = new HashMap<>();
+
+    private Class<?> initClass;
     private Class<?> configClass;
 
     /**
      * Creating instance of FluentObjectFactory and sets FluentCucumberTest instance.
+     *
+     * @param initClass class annotated with {@link FluentConfiguration} annotation
      */
-    public FluentObjectFactory() {
+    public FluentObjectFactory(Class<?> initClass) {
+        this.initClass = initClass;
     }
 
     @Override
     public void start() {
-        FLUENT_TEST.instance();
-        if (shouldInitialized()) {
+        if (initClass != null) {
+            setConfigClass(initClass);
+            FLUENT_TEST.instance();
             FLUENT_TEST.before();
+        } else if (configClass != null) {
+            setConfigClass(configClass);
+            FLUENT_TEST.instance();
+        } else {
+            setConfigClass(null);
+            FLUENT_TEST.instance();
         }
     }
 
     @Override
     public void stop() {
-        if (shouldInitialized()) {
+        if (initClass != null) {
             FLUENT_TEST.after();
         }
-//        FLUENT_TEST.injector().release();
+        FLUENT_TEST.reset();
         this.instances.clear();
     }
 
     @Override
     public boolean addClass(Class<?> aClass) {
-        if (shouldInitialized()) {
-            FLUENT_TEST.instance();
-        } else if (configClass == null) {
+        if (initClass == null && configClass == null) {
             configClass = checkClassForConfiguration(aClass);
             if (nonNull(configClass)) {
                 setConfigClass(configClass);
-                FLUENT_TEST.instance();
             }
         }
         return true;
@@ -72,8 +80,8 @@ public class FluentObjectFactory implements ObjectFactory {
     @SuppressWarnings("unchecked")
     private <T> T cacheNewInstance(Class<T> type) {
         try {
-            T instance = FLUENT_TEST.instance().newInstance(type);
-            FLUENT_TEST.instance().inject(instance);
+            T instance = FLUENT_TEST.injector().newInstance(type);
+            FLUENT_TEST.injector().inject(instance);
             instances.put(type, instance);
             return instance;
         } catch (Exception e) {

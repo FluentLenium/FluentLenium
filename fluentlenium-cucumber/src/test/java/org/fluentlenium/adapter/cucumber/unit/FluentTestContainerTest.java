@@ -3,12 +3,18 @@ package org.fluentlenium.adapter.cucumber.unit;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
+import org.junit.After;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.adapter.cucumber.FluentTestContainer.FLUENT_TEST;
 
 public class FluentTestContainerTest {
+
+    @After
+    public void reset() {
+       FLUENT_TEST.reset();
+    }
 
     @Test
     public void shouldGetFluentCucumberTestInstance() {

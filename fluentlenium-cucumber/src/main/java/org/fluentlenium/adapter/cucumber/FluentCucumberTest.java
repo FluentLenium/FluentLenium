@@ -57,7 +57,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
     /**
      * Initialization of FluentCucumberTest adapter
      */
-    public void before() {
+    void start() {
         starting();
     }
 
@@ -75,9 +75,8 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
 
     /**
      * Stopping of FluentCucumberTest adapter
-     *
      */
-    public void after() {
+    void finish() {
 //        TODO find way to pass Scenario or just status of test( if it fails)
 //        if (isFailed()) {
 //            failed();

@@ -1,6 +1,5 @@
 package org.fluentlenium.adapter.cucumber;
 
-import cucumber.api.Scenario;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.SharedMutator;
@@ -24,12 +23,12 @@ public enum FluentTestContainer {
      */
     FLUENT_TEST;
 
-    private static FluentAdapter fluentAdapter;
+    private FluentAdapter fluentAdapter;
     private FluentControlContainer controlContainer;
     private SharedMutator sharedMutator;
-    private static Class<?> configClass;
     private FluentInjector injector;
-    private static boolean shouldInitialized = false;
+
+    private static Class<?> configClass;
 
     /**
      * Returns single instance of adapter across all Cucumber steps.
@@ -46,10 +45,21 @@ public enum FluentTestContainer {
             } else {
                 fluentAdapter = new FluentCucumberTest(controlContainer, sharedMutator);
             }
-//            injector = new FluentInjector(fluentAdapter, null,
-//                    new ComponentsManager(fluentAdapter), new DefaultContainerInstanciator(fluentAdapter));
+            injector = new FluentInjector(fluentAdapter, null,
+                    new ComponentsManager(fluentAdapter), new DefaultContainerInstanciator(fluentAdapter));
         }
         return fluentAdapter;
+    }
+
+    /**
+     * Reset instance of FluentAdapter stored in container.
+     */
+    public void reset() {
+        sharedMutator = null;
+        controlContainer = null;
+        injector = null;
+        fluentAdapter = null;
+        configClass = null;
     }
 
     /**
@@ -58,7 +68,7 @@ public enum FluentTestContainer {
      * @return control container instance.
      */
     protected FluentControlContainer getControlContainer() {
-        if(fluentAdapter == null) {
+        if (fluentAdapter == null) {
             instance();
         }
         return controlContainer;
@@ -70,19 +80,7 @@ public enum FluentTestContainer {
      * @param clazz class annotated with @RunWith(FluentCucumber.class)
      */
     protected static void setConfigClass(Class clazz) {
-        if(configClass != null) {
-            configClass = clazz;
-        }
-    }
-
-    /**
-     * Sets config class - needed to enable annotation configuration.
-     *
-     * @param clazz class annotated with @RunWith(FluentCucumber.class)
-     */
-    protected static void setConfigWithInjection(Class clazz) {
         configClass = clazz;
-        shouldInitialized = true;
     }
 
     /**
@@ -91,39 +89,29 @@ public enum FluentTestContainer {
      * @return SharedMutator instance
      */
     protected SharedMutator getSharedMutator() {
-        if(sharedMutator == null) {
+        if (sharedMutator == null) {
             instance();
         }
         return sharedMutator;
     }
 
+    /**
+     * Injector used in {@link FluentObjectFactory} for creating instances
+     *
+     * @return fluent injector without loaded full FluentControl context
+     */
     protected FluentInjector injector() {
-        if(injector == null){
+        if (injector == null) {
             instance();
         }
         return injector;
     }
 
-    public static boolean shouldInitialized() {
-        return shouldInitialized;
-    }
-
-    public static void before(Scenario scenario, Object container) {
-        ((FluentCucumberTest) fluentAdapter).before(scenario);
-        fluentAdapter.inject(container);
-    }
-
-    public static void after(Scenario scenario) {
-        ((FluentCucumberTest) fluentAdapter).after(scenario);
-        fluentAdapter.releaseFluent();
-    }
-
     public void before() {
-        ((FluentCucumberTest) fluentAdapter).before();
+        ((FluentCucumberTest) fluentAdapter).start();
     }
 
     public void after() {
-        ((FluentCucumberTest) fluentAdapter).after();
-        fluentAdapter.releaseFluent();
+        ((FluentCucumberTest) fluentAdapter).finish();
     }
 }
