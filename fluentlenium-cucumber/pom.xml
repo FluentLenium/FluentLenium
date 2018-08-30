@@ -75,7 +75,19 @@
     <build>
         <plugins>
             <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <parallel>suites</parallel>
+                </configuration>
+            </plugin>
+            <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <parallel>suites</parallel>
+                    <includes>
+                        <include>**/IntegrationSuite.java</include>
+                    </includes>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -7,44 +7,62 @@ import org.fluentlenium.configuration.FluentConfiguration;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
+import static org.fluentlenium.adapter.cucumber.FluentTestContainer.setConfigClass;
+import static org.fluentlenium.adapter.cucumber.FluentTestContainer.FLUENT_TEST;
 
 /**
  * It is an object factory for creating Cucumber steps objects in FluentLenium injection container
  */
 public class FluentObjectFactory implements ObjectFactory {
 
-    private final FluentCucumberTestContainer testContainer;
-
     private final Map<Class<?>, Object> instances = new HashMap<>();
+
+    private final Class<?> initClass;
     private Class<?> configClass;
 
     /**
      * Creating instance of FluentObjectFactory and sets FluentCucumberTest instance.
      *
-     * @param testContainer testContainer
+     * @param initClass class annotated with {@link FluentConfiguration} annotation
      */
-    public FluentObjectFactory(FluentCucumberTestContainer testContainer) {
-        this.testContainer = testContainer;
+    public FluentObjectFactory(Class<?> initClass) {
+        this.initClass = initClass;
     }
 
     @Override
     public void start() {
-        testContainer.instance().initFluent();
+        if (nonNull(initClass)) {
+            setConfigClass(initClass);
+            FLUENT_TEST.instance();
+            FLUENT_TEST.before();
+
+        } else if (nonNull(configClass)) {
+            setConfigClass(configClass);
+            FLUENT_TEST.instance();
+
+        } else {
+            setConfigClass(null);
+            FLUENT_TEST.instance();
+        }
     }
 
     @Override
     public void stop() {
+        if (initClass != null) {
+            FLUENT_TEST.after();
+        }
+
+        FLUENT_TEST.reset();
         this.instances.clear();
     }
 
     @Override
     public boolean addClass(Class<?> aClass) {
-        if (isNull(configClass)) {
+        if (initClass == null && configClass == null) {
             configClass = checkClassForConfiguration(aClass);
             if (nonNull(configClass)) {
-                testContainer.setConfigClass(configClass);
+                setConfigClass(configClass);
             }
         }
         return true;
@@ -58,6 +76,7 @@ public class FluentObjectFactory implements ObjectFactory {
                 instance = cacheNewInstance(type);
             }
             return instance;
+
         } catch (Exception e) {
             throw new CucumberException(String.format("Failed to instantiate %s", type), e);
         }
@@ -66,9 +85,11 @@ public class FluentObjectFactory implements ObjectFactory {
     @SuppressWarnings("unchecked")
     private <T> T cacheNewInstance(Class<T> type) {
         try {
-            T instance = testContainer.instance().newInstance(type);
+            T instance = FLUENT_TEST.injector().newInstance(type);
+            FLUENT_TEST.injector().inject(instance);
             instances.put(type, instance);
             return instance;
+
         } catch (Exception e) {
             throw new CucumberException(String.format("Failed to instantiate %s", type), e);
         }
@@ -78,8 +99,10 @@ public class FluentObjectFactory implements ObjectFactory {
         Class superClass = cls.getSuperclass();
         if (superClass != null && superClass.isAnnotationPresent(FluentConfiguration.class)) {
             return superClass;
+
         } else if (cls.isAnnotationPresent(FluentConfiguration.class)) {
             return cls;
+
         } else {
             return null;
         }

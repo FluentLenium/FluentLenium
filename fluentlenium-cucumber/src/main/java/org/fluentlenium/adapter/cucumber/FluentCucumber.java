@@ -4,11 +4,11 @@ import cucumber.api.TypeRegistryConfigurer;
 import cucumber.api.event.TestRunFinished;
 import cucumber.api.formatter.Formatter;
 import cucumber.runtime.ClassFinder;
+import cucumber.runtime.Reflections;
 import cucumber.runtime.Runtime;
 import cucumber.runtime.RuntimeOptions;
-import cucumber.runtime.RuntimeOptionsFactory;
-import cucumber.runtime.Reflections;
 import cucumber.runtime.DefaultTypeRegistryConfiguration;
+import cucumber.runtime.RuntimeOptionsFactory;
 import cucumber.runtime.io.MultiLoader;
 import cucumber.runtime.io.ResourceLoader;
 import cucumber.runtime.io.ResourceLoaderClassFinder;
@@ -33,7 +33,6 @@ import java.util.List;
 
 import static java.util.Collections.singletonList;
 import static java.util.Optional.ofNullable;
-import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
 
 /**
  * Main point for integrating FluentLenium with Cucumber. Pass this class to JUnit @RunWith() annotation to enable
@@ -63,9 +62,9 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
         ResourceLoader resourceLoader = new MultiLoader(classLoader);
         ClassFinder classFinder = new ResourceLoaderClassFinder(resourceLoader, classLoader);
 
-        getFluentConfiguration(clazz);
+        FluentObjectFactory objectFactory = getFluentObjectFactory(clazz);
         this.runtime = new Runtime(resourceLoader, classLoader,
-                singletonList(getBackend(classFinder, runtimeOptions)), runtimeOptions);
+                singletonList(getBackend(classFinder, runtimeOptions, objectFactory)), runtimeOptions);
         Formatter formatter = runtimeOptions.formatter(classLoader);
 
         JUnitOptions junitOptions = new JUnitOptions(runtimeOptions.getJunitOptions());
@@ -81,7 +80,8 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
      *
      * @return backend with {@link FluentObjectFactory}
      */
-    private JavaBackend getBackend(ClassFinder classFinder, RuntimeOptions runtimeOptions) {
+    private JavaBackend getBackend(ClassFinder classFinder, RuntimeOptions runtimeOptions,
+                                   FluentObjectFactory objectFactory) {
         Reflections reflections = new Reflections(classFinder);
         TypeRegistryConfigurer typeRegistryConfigurer =
                 reflections.instantiateExactlyOneSubclass(TypeRegistryConfigurer.class,
@@ -90,8 +90,7 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
                         new Object[0],
                         new DefaultTypeRegistryConfiguration());
 
-        return new JavaBackend(new FluentObjectFactory(FLUENT_TEST),
-                classFinder, new TypeRegistry(typeRegistryConfigurer.locale()));
+        return new JavaBackend(objectFactory, classFinder, new TypeRegistry(typeRegistryConfigurer.locale()));
     }
 
     /**
@@ -99,9 +98,13 @@ public class FluentCucumber extends ParentRunner<FeatureRunner> {
      *
      * @param clazz runner class
      */
-    private void getFluentConfiguration(Class clazz) {
-        ofNullable(clazz.getAnnotation(FluentConfiguration.class))
-                .ifPresent(annotation -> FLUENT_TEST.setConfigClass(clazz));
+    private FluentObjectFactory getFluentObjectFactory(Class clazz) {
+        boolean initConfiguration = ofNullable(clazz.getAnnotation(FluentConfiguration.class)).isPresent();
+        if (initConfiguration) {
+            return new FluentObjectFactory(clazz);
+        } else {
+            return new FluentObjectFactory(null);
+        }
     }
 
     /**
