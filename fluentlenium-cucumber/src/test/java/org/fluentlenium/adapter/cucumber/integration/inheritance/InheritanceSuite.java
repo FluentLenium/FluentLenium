@@ -1,7 +1,8 @@
 package org.fluentlenium.adapter.cucumber.integration.inheritance;
 
 import net.jcip.annotations.NotThreadSafe;
-import org.fluentlenium.adapter.cucumber.integration.inheritance.classic.ClassicRunner;
+import org.fluentlenium.adapter.cucumber.integration.inheritance.multiinheritance.MultiInheritanceRunner;
+import org.fluentlenium.adapter.cucumber.integration.inheritance.oldway.ClassicRunner;
 import org.fluentlenium.adapter.cucumber.integration.inheritance.driverperfeature.PerFeatureRunner;
 import org.fluentlenium.adapter.cucumber.integration.inheritance.getbean.GetBeanRunner;
 import org.fluentlenium.adapter.cucumber.integration.inheritance.java8.Java8Runner;
@@ -16,6 +17,7 @@ import org.junit.runners.Suite;
         PerFeatureRunner.class,
         GetBeanRunner.class,
         SetBeanRunner.class,
+        MultiInheritanceRunner.class,
         Java8Runner.class,
         NoWebDriverRunner.class,
         ClassicRunner.class,

@@ -1,23 +1,17 @@
-package org.fluentlenium.adapter.cucumber.integration.inheritance.classic.steps;
+package org.fluentlenium.adapter.cucumber.integration.inheritance.multiinheritance.steps;
 
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.adapter.cucumber.integration.page.LocalPage;
 import org.fluentlenium.adapter.cucumber.integration.page.LocalPage2;
-import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.core.annotation.Page;
 
-@FluentConfiguration(webDriver = "htmlunit")
-public class SimpleScenarioInheritanceConfStep extends FluentCucumberTest {
+public class SingleGetBeanStep extends FluentCucumberTest {
 
     @Page
     protected LocalPage page;
-
     @Page
     protected LocalPage2 page2;
 
@@ -34,15 +28,5 @@ public class SimpleScenarioInheritanceConfStep extends FluentCucumberTest {
     @Then(value = "scenario I am on the second page")
     public void step3() {
         page2.isAt();
-    }
-
-    @Before
-    public void beforeScenario(Scenario scenario) {
-        before(scenario);
-    }
-
-    @After
-    public void afterScenario(Scenario scenario) {
-        after(scenario);
     }
 }
