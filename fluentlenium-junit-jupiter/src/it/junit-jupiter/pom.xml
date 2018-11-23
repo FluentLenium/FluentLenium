@@ -21,7 +21,7 @@
     </modules>
 
     <properties>
-        <it.project.version>3.7.0-SNAPSHOT</it.project.version>
+        <it.project.version>3.7.1</it.project.version>
     </properties>
 
     <dependencyManagement>
@@ -44,7 +44,7 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>htmlunit-driver</artifactId>
-                <version>2.31.0</version>
+                <version>2.33.3</version>
             </dependency>
             <dependency>
                 <groupId>xml-apis</groupId>
