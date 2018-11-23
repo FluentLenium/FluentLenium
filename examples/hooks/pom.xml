@@ -11,7 +11,7 @@
         <!-- Configure this property to latest available version -->
         <fluentlenium.version>${project.version}</fluentlenium.version>
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-        <selenium.version>3.14.0</selenium.version>
+        <selenium.version>3.141.59</selenium.version>
     </properties>
 
     <name>FluentLenium Examples Quickstart</name>
@@ -58,7 +58,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>htmlunit-driver</artifactId>
-            <version>2.31.0</version>
+            <version>2.33.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
