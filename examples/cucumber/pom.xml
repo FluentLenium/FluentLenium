@@ -6,7 +6,7 @@
 
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-cucumber-example</artifactId>
-    <version>3.7.0-SNAPSHOT</version>
+    <version>4.0.0</version>
 
     <name>FluentLenium Cucumber example</name>
     <description>FluentLenium cucumber example</description>
