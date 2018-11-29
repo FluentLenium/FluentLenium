@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>4.0.1-SNAPSHOT</version>
+    <version>4.0.0</version>
     <packaging>pom</packaging>
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -39,7 +39,7 @@
         <url>https://github.com/FluentLenium/FluentLenium</url>
         <connection>scm:git:https://github.com/FluentLenium/FluentLenium.git</connection>
         <developerConnection>scm:git:https://github.com/FluentLenium/FluentLenium.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v4.0.0</tag>
     </scm>
 
     <licenses>
