@@ -31,7 +31,7 @@ Starting from FluentLenium 3.1.0 you can use all sparks of Java 8, including lam
 comparison to Selenium 3 which is still basing on Guava objects. Please take a look on documentation to find `await`
 lambda usage example.
 
-If you want to keep up to date please upgrade you testing framework to FluentLenium 4.x
+If you want to keep up to date please upgrade your testing framework to FluentLenium 4.x
 
 # Quickstart with JUnit and AssertJ
 
