@@ -42,7 +42,7 @@ If you want to keep up to date please upgrade your testing framework to FluentLe
     <!-- Configure this property to latest available version -->
     <fluentlenium.version>4.0.0</fluentlenium.version>
     <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-    <selenium.version>3.11.59</selenium.version>
+    <selenium.version>3.141.59</selenium.version>
 </properties>
 
 <dependency>
