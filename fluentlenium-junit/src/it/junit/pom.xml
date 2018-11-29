@@ -12,6 +12,10 @@
         <maven>3.0</maven>
     </prerequisites>
 
+    <properties>
+        <it.project.version>4.0.0-SNAPSHOT</it.project.version>
+    </properties>
+
     <modules>
         <module>junit-default</module>
         <module>junit-common</module>
@@ -114,7 +118,7 @@
         <profile>
             <id>integration-tests-dev</id>
             <properties>
-                <it.project.version>3.7.1</it.project.version>
+                <it.project.version>4.0.0-SNAPSHOT</it.project.version>
             </properties>
         </profile>
     </profiles>
