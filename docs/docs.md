@@ -328,37 +328,6 @@ $("#create-button").scrollIntoView();
 
 ### Information
 
-You can also retrieve information of located elements:
-
-```java
-// Name of the first element
-$(".fluent").name()
-
-// Id of the first element
-$(By.cssSelector(".fluent")).id()
-
-// Value of the first element
-$(".fluent").value()
-
-// Tag name of the first element
-$(".fluent").tagName()
-
-// Text of the first element
-$(".fluent").text()
-
-// Text content of the first element (includes hidden parts)
-$(".fluent").textContent()
-
-// Value of attribute "data-custom" of the first element
-$(".fluent").attribute("data-custom")
-
-// HTML content of the element
-el(".fluent").html()
-
-// Size of the element (width/height)
-el(".fluent").size()
-```
-
 You can also access a list of all the names, visible text, and ids of a list of elements:
 
 ```java
