@@ -1,7 +1,6 @@
 package org.fluentlenium.core.action;
 
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -19,7 +18,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
@@ -89,12 +88,8 @@ public class FillSelectTest {
         verify(option3).click();
         verify(option4, never()).click();
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fillConstructor.withIndex(5);
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class).withFailMessage("No select element found with option index=5");
+        Assertions.assertThatThrownBy(() -> fillConstructor.withIndex(5)).isExactlyInstanceOf(NoSuchElementException.class)
+                .withFailMessage("No select element found with option index=5");
     }
 
     @Test
@@ -119,12 +114,8 @@ public class FillSelectTest {
         verify(option3).click();
         verify(option4).click();
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                new FillSelect(fluentAdapter.newFluentList()).withText("text");
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class).withFailMessage("No select element found");
+        Assertions.assertThatThrownBy(() -> new FillSelect(fluentAdapter.newFluentList()).withText("text"))
+                .isExactlyInstanceOf(NoSuchElementException.class).withFailMessage("No select element found");
     }
 
     @Test
@@ -139,11 +130,7 @@ public class FillSelectTest {
 
         verify(option1).click();
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                new FillSelect(fluentAdapter.newFluentList()).withValue("1");
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class).withFailMessage("No select element found");
+        Assertions.assertThatThrownBy(() -> new FillSelect(fluentAdapter.newFluentList()).withValue("1"))
+                .isExactlyInstanceOf(NoSuchElementException.class).withFailMessage("No select element found");
     }
 }

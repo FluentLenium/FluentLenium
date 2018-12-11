@@ -26,11 +26,7 @@ public class DefaultContainerInstanciator implements ContainerInstanciator {
             return ReflectionUtils.newInstanceOptionalArgs(cls, new ContainerFluentControl(control, context));
         } catch (NoSuchMethodException e) {
             throw new FluentInjectException(cls.getName() + " is not a valid component class.", e);
-        } catch (IllegalAccessException e) {
-            throw new FluentInjectException(cls.getName() + " can't be instantiated.", e);
-        } catch (InvocationTargetException e) {
-            throw new FluentInjectException(cls.getName() + " can't be instantiated.", e);
-        } catch (InstantiationException e) {
+        } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
             throw new FluentInjectException(cls.getName() + " can't be instantiated.", e);
         }
     }

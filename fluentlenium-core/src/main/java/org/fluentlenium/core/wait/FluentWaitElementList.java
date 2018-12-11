@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.conditions.FluentConditions;
@@ -128,11 +127,6 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
     }
 
     @Override
-    public <T> T until(Function<? super FluentControl, T> function) {
-        return controlWait.until(function);
-    }
-
-    @Override
     public FluentWaitElementList withMessage(String message) {
         controlWait.withMessage(message);
         return this;
@@ -220,7 +214,7 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
      * @return FluentWaitElementList
      */
     @Deprecated
-    public <T> T until(com.google.common.base.Function<? super FluentControl, T> function) {
+    public <T> T until(Function<? super FluentControl, T> function) {
         return controlWait.until(function);
     }
 }

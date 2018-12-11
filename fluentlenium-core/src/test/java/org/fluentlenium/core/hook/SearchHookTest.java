@@ -20,7 +20,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 
 import static org.mockito.Mockito.when;
 
@@ -128,12 +127,7 @@ public class SearchHookTest {
     @Test
     public void testHookSearchNoHookFunction() {
         FluentWebElement hookedElement = search.$(".selector").withHook(NanoHook.class).first()
-                .noHook(new Function<FluentWebElement, FluentWebElement>() {
-                    @Override
-                    public FluentWebElement apply(FluentWebElement input) {
-                        return input.click();
-                    }
-                });
+                .noHook(FluentWebElement::click);
 
         Mockito.verify(element).click();
 
@@ -147,12 +141,7 @@ public class SearchHookTest {
     @Test
     public void testHookSearchFirstNoHookFunction() {
         FluentWebElement hookedElement = search.$(".selector").first().withHook(NanoHook.class)
-                .noHook(new Function<FluentWebElement, FluentWebElement>() {
-                    @Override
-                    public FluentWebElement apply(FluentWebElement input) {
-                        return input.click();
-                    }
-                });
+                .noHook(FluentWebElement::click);
 
         Mockito.verify(element).click();
 

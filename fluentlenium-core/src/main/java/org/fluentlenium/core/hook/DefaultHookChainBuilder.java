@@ -41,9 +41,7 @@ public class DefaultHookChainBuilder implements HookChainBuilder {
             try {
                 newObject = newInstance(hook.getHookClass(), control, instantiator, currentSupplier, locator, toStringSupplier,
                         hook.getOptions());
-            } catch (NoSuchMethodException e) {
-                throw new HookException(e);
-            } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
                 throw new HookException(e);
             }
             FluentHook<?> hookInstance = newObject;

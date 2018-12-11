@@ -74,14 +74,11 @@ public class FluentWebElement extends Component
                 /*do not change it to lambda - change will affect w/ PMD warning
                 Overridable method 'getElement' called during object construction*/
 
-                new Supplier<FluentWebElement>() {
-                    @Override
-                    public FluentWebElement get() {
-                        LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
-                        ElementLocator locator = locatorHandler.getLocator();
-                        WebElement noHookElement = LocatorProxies.createWebElement(locator);
-                        return newComponent(FluentWebElement.this.getClass(), noHookElement);
-                    }
+                () -> {
+                    LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
+                    ElementLocator locator = locatorHandler.getLocator();
+                    WebElement noHookElement = LocatorProxies.createWebElement(locator);
+                    return newComponent(FluentWebElement.this.getClass(), noHookElement);
                 });
 
         search = new Search(element, this, this.instantiator, this.control);

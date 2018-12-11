@@ -1,6 +1,6 @@
 package org.fluentlenium.core.domain;
 
-import org.assertj.core.api.ThrowableAssert;
+import java.util.Collections;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.ComponentException;
 import org.fluentlenium.core.components.ComponentsManager;
@@ -25,7 +25,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
@@ -104,13 +104,13 @@ public class FluentWebElementTest {
 
     @Test
     public void testMouse() {
-        assertThat(fluentElement.mouse().click());
+        fluentElement.mouse().click();
         verify(mouse).click(any());
     }
 
     @Test
     public void testKeyboard() {
-        assertThat(fluentElement.keyboard().sendKeys("ABC"));
+        fluentElement.keyboard().sendKeys("ABC");
         verify(keyboard).sendKeys("ABC");
     }
 
@@ -257,64 +257,29 @@ public class FluentWebElementTest {
         fluentElement.find(".test").index(1);
         fluentElement.find(By.cssSelector(".test")).index(1);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fluentElement.$();
-            }
-        }).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fluentElement.$().index(1);
-            }
-        }).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fluentElement.find();
-            }
-        }).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fluentElement.find().index(1);
-            }
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> fluentElement.$()).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> fluentElement.$().index(1)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> fluentElement.find()).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> fluentElement.find().index(1)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     public void testEl() {
         WebElement findElement = mock(WebElement.class);
 
-        when(element.findElements(By.cssSelector(".test"))).thenReturn(Arrays.asList(findElement));
+        when(element.findElements(By.cssSelector(".test"))).thenReturn(Collections.singletonList(findElement));
 
         assertThat(fluentElement.el(".test").now().getElement()).isEqualTo(findElement);
         assertThat(fluentElement.el(By.cssSelector(".test")).now().getElement()).isEqualTo(findElement);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fluentElement.el(".other").now();
-            }
-        }).isInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> fluentElement.el(".other").now()).isInstanceOf(NoSuchElementException.class);
 
         assertThat(fluentElement.el(By.cssSelector(".other")).present()).isFalse();
         assertThat(fluentElement.el(By.cssSelector(".other")).optional().isPresent()).isFalse();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fluentElement.el(By.cssSelector(".other")).now();
-            }
-        }).isInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(() -> fluentElement.el(By.cssSelector(".other")).now()).isInstanceOf(NoSuchElementException.class);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fluentElement.el().now();
-            }
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> fluentElement.el().now()).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -349,7 +314,7 @@ public class FluentWebElementTest {
     public void testFillSelect() {
         when(element.getTagName()).thenReturn("select");
         WebElement valueElement = mock(WebElement.class);
-        when(element.findElements(any(By.class))).thenReturn(Arrays.asList(valueElement));
+        when(element.findElements(any(By.class))).thenReturn(Collections.singletonList(valueElement));
 
         fluentElement.fillSelect().withValue("value");
         verify(valueElement).click();
@@ -359,7 +324,7 @@ public class FluentWebElementTest {
     public void testFillSelectInvalidElement() {
         when(element.getTagName()).thenReturn("span");
         WebElement valueElement = mock(WebElement.class);
-        when(element.findElements(any(By.class))).thenReturn(Arrays.asList(valueElement));
+        when(element.findElements(any(By.class))).thenReturn(Collections.singletonList(valueElement));
 
         when(element.isDisplayed()).thenReturn(true);
         when(element.isEnabled()).thenReturn(true);

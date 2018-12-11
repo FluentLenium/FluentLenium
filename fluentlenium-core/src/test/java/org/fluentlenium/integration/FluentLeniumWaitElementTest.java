@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -11,7 +10,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -306,23 +304,13 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @Test
     public void checkFunction() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(1000, TimeUnit.MILLISECONDS).until(new Function<FluentControl, Boolean>() {
-            @Override
-            public Boolean apply(FluentControl fluent) {
-                return true;
-            }
-        });
+        await().pollingEvery(1000, TimeUnit.MILLISECONDS).until(fluent -> true);
     }
 
     @Test(expected = TimeoutException.class)
     public void checkFunctionFail() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1000).until(new Function<FluentControl, Boolean>() {
-            @Override
-            public Boolean apply(FluentControl fluent) {
-                return false;
-            }
-        });
+        await().atMost(1000).until(fluent -> false);
     }
 
     @Test

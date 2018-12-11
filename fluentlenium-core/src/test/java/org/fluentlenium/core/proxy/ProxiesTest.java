@@ -177,7 +177,7 @@ public class ProxiesTest {
 
     @Test
     public void testEmptyElementListShouldNotThrowException() {
-        List<WebElement> webElementList = LocatorProxies.createWebElementList(Collections.<WebElement>emptyList());
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(Collections.emptyList());
         assertThat(webElementList).isEmpty();
 
         List<WebElement> webElementList2 = LocatorProxies.createWebElementList(new ElementLocator() {
@@ -301,7 +301,7 @@ public class ProxiesTest {
         assertThat(LocatorProxies.present(webElementList)).isTrue();
         assertThat(LocatorProxies.loaded(webElementList)).isTrue();
 
-        when(locator.findElements()).thenReturn(Collections.<WebElement>emptyList());
+        when(locator.findElements()).thenReturn(Collections.emptyList());
 
         LocatorProxies.reset(webElementList);
 
@@ -372,7 +372,7 @@ public class ProxiesTest {
         reset(element1);
         when(element1.isEnabled()).thenThrow(StaleElementReferenceException.class);
 
-        assertThatThrownBy(() -> webElement.isEnabled()).isExactlyInstanceOf(StaleElementReferenceException.class);
+        assertThatThrownBy(webElement::isEnabled).isExactlyInstanceOf(StaleElementReferenceException.class);
 
         verify(element1, times(6)).isEnabled();
     }

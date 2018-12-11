@@ -70,11 +70,8 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
 
         try {
             await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class).ignoring(CustomException2.class)
-                    .until(new Supplier<Boolean>() {
-                        @Override
-                        public Boolean get() {
-                            throw new CustomException();
-                        }
+                    .until(() -> {
+                        throw new CustomException();
                     });
 
             throw new AssertionError();

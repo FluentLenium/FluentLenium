@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 /**
  * The injection element locator, which will lazily locate an element or an element list on a page. This class is
@@ -37,12 +36,7 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
         shouldCache = annotations.isLookupCached();
         by = annotations.buildBy();
         this.isFirst = isFirst;
-        label = new FluentLabelImpl<>(this, new Supplier<String>() {
-            @Override
-            public String get() {
-                return by.toString() + (InjectionElementLocator.this.isFirst ? " (first)" : "");
-            }
-        });
+        label = new FluentLabelImpl<>(this, () -> by.toString() + (InjectionElementLocator.this.isFirst ? " (first)" : ""));
         label.withLabel(annotations.getLabel());
         label.withLabelHint(annotations.getLabelHints());
     }
