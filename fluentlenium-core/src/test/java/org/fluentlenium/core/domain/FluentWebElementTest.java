@@ -69,7 +69,7 @@ public class FluentWebElementTest {
     }
 
     @After
-    public void adter() {
+    public void cleanUp() {
         reset(element, driver, keyboard, mouse);
     }
 
@@ -357,10 +357,10 @@ public class FluentWebElementTest {
     private static class InvalidComponent {
     }
 
-    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices { // NOPMD AbstractNaming
+    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices {
     }
 
-    private abstract static class LocatableElement implements WebElement, Locatable { // NOPMD AbstractNaming
+    private abstract static class LocatableElement implements WebElement, Locatable {
     }
 
 }

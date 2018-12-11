@@ -44,8 +44,8 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @FindBy(id = "default")
     private FluentList<FluentWebElement> defaultElements;
 
-    @FindBy(id = "unvisible")
-    private FluentList<FluentWebElement> unvisibleElements;
+    @FindBy(id = "invisible")
+    private FluentList<FluentWebElement> invisibleElements;
 
     @FindBy(id = "nonexistent")
     private FluentWebElement nonexistentElement;
@@ -154,13 +154,13 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @Test(expected = TimeoutException.class)
     public void whenElementIsNotDisplayedThenAreDisplayedThrowsException() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilEach(unvisibleElements).displayed();
+        await().atMost(1, NANOSECONDS).untilEach(invisibleElements).displayed();
     }
 
     @Test(expected = TimeoutException.class)
     public void whenElementIsNotDisplayedThenIsDisplayedThrowsException() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(unvisibleElements).displayed();
+        await().atMost(1, NANOSECONDS).until(invisibleElements).displayed();
     }
 
     @Test
@@ -178,13 +178,13 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @Test
     public void whenElementIsNotDisplayedThenAreNotDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilEach(unvisibleElements).not().displayed();
+        await().atMost(1, NANOSECONDS).untilEach(invisibleElements).not().displayed();
     }
 
     @Test
     public void whenElementIsNotDisplayedThenIsNotDisplayedReturnTrue() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(unvisibleElements).not().displayed();
+        await().atMost(1, NANOSECONDS).until(invisibleElements).not().displayed();
     }
 
     @Test(expected = TimeoutException.class)
@@ -268,7 +268,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
     @Test
     public void whenElementIsNotDisplayedThenIsPresentReturnTrue() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).until(unvisibleElements).present();
+        await().atMost(1, NANOSECONDS).until(invisibleElements).present();
     }
 
     @Test(expected = TimeoutException.class)

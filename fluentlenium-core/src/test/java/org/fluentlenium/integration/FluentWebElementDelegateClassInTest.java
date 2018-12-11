@@ -24,7 +24,7 @@ public class FluentWebElementDelegateClassInTest extends IntegrationFluentTest {
     }
 
     @Test
-    public void whenWebElementInTestThenTheyAreInstanciated() {
+    public void whenWebElementInTestThenTheyAreInstantiated() {
         goTo(IntegrationFluentTest.DEFAULT_URL);
         linkToPage2.clickIfDisplayed();
         assertThat(url()).isEqualTo(IntegrationFluentTest.PAGE_2_URL);

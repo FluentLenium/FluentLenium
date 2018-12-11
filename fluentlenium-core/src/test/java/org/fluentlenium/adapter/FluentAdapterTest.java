@@ -34,7 +34,7 @@ public class FluentAdapterTest {
     }
 
     @Test
-    public void deletagesToWebDriverWhenInitialized() {
+    public void delegateToWebDriverWhenInitialized() {
         FluentAdapter adapter = new FluentAdapter();
         adapter.initFluent(webDriver);
 

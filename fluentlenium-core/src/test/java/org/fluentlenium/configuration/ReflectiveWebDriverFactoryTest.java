@@ -30,7 +30,7 @@ public class ReflectiveWebDriverFactoryTest {
     }
 
     @Test
-    public void testInexistantClass() {
+    public void testNonexstingClass() {
         ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("doesnt-exists",
                 "org.fluentlenium.ThisClassDoesntExists");
         assertThat(webDriverFactory.isAvailable()).isFalse();

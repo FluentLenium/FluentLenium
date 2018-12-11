@@ -70,7 +70,7 @@ public class IntegerListConditionsTest {
         when(webElement2.getAttribute("id")).thenReturn("1");
         when(webElement3.getAttribute("id")).thenReturn("1");
 
-        assertThat(integerConditions.verify(input -> input == 1));
+        assertThat(integerConditions.verify(input -> input == 1)).isTrue();
 
         IntegerConditionsTest.assertConditions(integerConditions, 1);
         IntegerConditionsTest.assertNotConditions(integerConditions.not(), 1);
@@ -79,7 +79,7 @@ public class IntegerListConditionsTest {
         when(webElement2.getAttribute("id")).thenReturn("2");
         when(webElement3.getAttribute("id")).thenReturn("1");
 
-        assertThat(integerConditions.verify(input -> input == 1 || input == 2));
+        assertThat(integerConditions.verify(input -> input == 1 || input == 2)).isTrue();
 
         assertThatThrownBy(() -> IntegerConditionsTest.assertConditions(integerConditions, 1));
 

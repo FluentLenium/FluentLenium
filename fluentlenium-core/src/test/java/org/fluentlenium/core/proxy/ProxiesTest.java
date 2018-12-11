@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
@@ -59,7 +60,7 @@ public class ProxiesTest {
 
             @Override
             public List<WebElement> findElements() {
-                return Arrays.asList(findElement());
+                return singletonList(findElement());
             }
         });
 
@@ -80,7 +81,7 @@ public class ProxiesTest {
 
             @Override
             public List<WebElement> findElements() {
-                return Arrays.asList(findElement());
+                return singletonList(findElement());
             }
         });
 
@@ -92,7 +93,7 @@ public class ProxiesTest {
 
             @Override
             public List<WebElement> findElements() {
-                return Arrays.asList(findElement());
+                return singletonList(findElement());
             }
         });
 
@@ -104,7 +105,7 @@ public class ProxiesTest {
 
             @Override
             public List<WebElement> findElements() {
-                return Arrays.asList(findElement());
+                return singletonList(findElement());
             }
         });
 

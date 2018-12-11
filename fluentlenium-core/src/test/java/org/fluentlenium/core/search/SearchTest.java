@@ -223,7 +223,7 @@ public class SearchTest {
         assertThat(fluentWebElement.tagName()).isEqualTo("span");
     }
 
-    public void findWithRawSelemenium() {
+    public void findWithRawSelenium() {
         WebElement mock = Mockito.mock(WebElement.class);
 
         FluentWebElement el = search.el(mock);

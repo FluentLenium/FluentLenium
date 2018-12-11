@@ -8,7 +8,6 @@ import org.openqa.selenium.TimeoutException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Supplier;
 
 public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
 
@@ -42,7 +41,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException ignored) {
         }
 
     }
@@ -60,7 +59,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException ignored) {
         }
 
     }
@@ -75,7 +74,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
                     });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException ignored) {
         }
 
     }
@@ -89,7 +88,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException ignored) {
         }
 
     }
@@ -103,7 +102,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException ignored) {
         }
 
     }
@@ -117,7 +116,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException ignored) {
         }
 
     }

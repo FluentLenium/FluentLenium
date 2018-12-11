@@ -16,8 +16,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.Arrays;
 
+import static java.util.Collections.singletonList;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -73,10 +73,10 @@ public class FillSelectTest {
         WebElement option3 = mock(WebElement.class);
         WebElement option4 = mock(WebElement.class);
 
-        when(element1.findElements(any(By.class))).thenReturn(Arrays.asList(option1));
-        when(element2.findElements(any(By.class))).thenReturn(Arrays.asList(option2));
-        when(element3.findElements(any(By.class))).thenReturn(Arrays.asList(option3));
-        when(element4.findElements(any(By.class))).thenReturn(Arrays.asList(option4));
+        when(element1.findElements(any(By.class))).thenReturn(singletonList(option1));
+        when(element2.findElements(any(By.class))).thenReturn(singletonList(option2));
+        when(element3.findElements(any(By.class))).thenReturn(singletonList(option3));
+        when(element4.findElements(any(By.class))).thenReturn(singletonList(option4));
 
         when(option1.getAttribute("index")).thenReturn("1");
         when(option3.getAttribute("index")).thenReturn("1");
@@ -88,8 +88,7 @@ public class FillSelectTest {
         verify(option3).click();
         verify(option4, never()).click();
 
-        Assertions.assertThatThrownBy(() -> fillConstructor.withIndex(5)).isExactlyInstanceOf(NoSuchElementException.class)
-                .withFailMessage("No select element found with option index=5");
+        Assertions.assertThatThrownBy(() -> fillConstructor.withIndex(5)).isExactlyInstanceOf(NoSuchElementException.class);
     }
 
     @Test
@@ -102,10 +101,10 @@ public class FillSelectTest {
         WebElement option3 = mock(WebElement.class);
         WebElement option4 = mock(WebElement.class);
 
-        when(element1.findElements(any(By.class))).thenReturn(Arrays.asList(option1));
-        when(element2.findElements(any(By.class))).thenReturn(Arrays.asList(option2));
-        when(element3.findElements(any(By.class))).thenReturn(Arrays.asList(option3));
-        when(element4.findElements(any(By.class))).thenReturn(Arrays.asList(option4));
+        when(element1.findElements(any(By.class))).thenReturn(singletonList(option1));
+        when(element2.findElements(any(By.class))).thenReturn(singletonList(option2));
+        when(element3.findElements(any(By.class))).thenReturn(singletonList(option3));
+        when(element4.findElements(any(By.class))).thenReturn(singletonList(option4));
 
         fillConstructor.withText("text");
 
@@ -114,8 +113,7 @@ public class FillSelectTest {
         verify(option3).click();
         verify(option4).click();
 
-        Assertions.assertThatThrownBy(() -> new FillSelect(fluentAdapter.newFluentList()).withText("text"))
-                .isExactlyInstanceOf(NoSuchElementException.class).withFailMessage("No select element found");
+        Assertions.assertThatThrownBy(() -> new FillSelect(fluentAdapter.newFluentList()).withText("text"));
     }
 
     @Test
@@ -124,13 +122,13 @@ public class FillSelectTest {
 
         WebElement option1 = mock(WebElement.class);
 
-        when(element1.findElements(any(By.class))).thenReturn(Arrays.asList(option1));
+        when(element1.findElements(any(By.class))).thenReturn(singletonList(option1));
 
         fillConstructor.withValue("1");
 
         verify(option1).click();
 
         Assertions.assertThatThrownBy(() -> new FillSelect(fluentAdapter.newFluentList()).withValue("1"))
-                .isExactlyInstanceOf(NoSuchElementException.class).withFailMessage("No select element found");
+                .isExactlyInstanceOf(NoSuchElementException.class);
     }
 }
