@@ -371,7 +371,10 @@
         <profile>
             <id>examples</id>
             <modules>
-                <module>examples/quickstart</module>
+                <module>examples/hooks</module>
+                <module>examples/cucumber</module>
+                <module>examples/quickstart-chrome</module>
+                <module>examples/spock</module>
                 <module>examples/spring</module>
             </modules>
         </profile>
@@ -414,6 +417,11 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-pmd-plugin</artifactId>
                         <version>3.11.0</version>
+                        <configuration>
+                            <rulesets>
+                                <ruleset>dev-config/pmd/fluentlenium_pmd.xml</ruleset>
+                            </rulesets>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>pmd-validate</id>
@@ -421,11 +429,6 @@
                                 <goals>
                                     <goal>check</goal>
                                 </goals>
-                                <configuration>
-                                    <rulesets>
-                                        <ruleset>dev-config/pmd/fluentlenium_pmd.xml</ruleset>
-                                    </rulesets>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>

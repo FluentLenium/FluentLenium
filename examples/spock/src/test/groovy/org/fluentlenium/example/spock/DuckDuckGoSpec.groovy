@@ -4,7 +4,7 @@ import org.fluentlenium.adapter.spock.FluentSpecification
 import org.fluentlenium.core.hook.wait.Wait
 import org.openqa.selenium.Capabilities
 import org.openqa.selenium.chrome.ChromeDriver
-import org.openqa.selenium.remote.DesiredCapabilities
+import org.openqa.selenium.chrome.ChromeOptions
 
 @Wait
 class DuckDuckGoSpec extends FluentSpecification {
@@ -17,7 +17,7 @@ class DuckDuckGoSpec extends FluentSpecification {
 
     @Override
     Capabilities getCapabilities() {
-        return DesiredCapabilities.chrome()
+        return new ChromeOptions()
     }
 
     def "Title of duck duck go"() {
