@@ -29,123 +29,135 @@ public class FluentWebElementTest {
     }
 
     @Test(expected = AssertionError.class)
-    public void testIsEnabledKo() throws Exception {
+    public void testIsEnabledKo() {
         when(element.enabled()).thenReturn(false);
         elementAssert.isEnabled();
     }
 
     @Test
-    public void testIsNotEnabledOk() throws Exception {
+    public void testIsNotEnabledOk() {
         when(element.enabled()).thenReturn(false);
         elementAssert.isNotEnabled();
     }
 
     @Test(expected = AssertionError.class)
-    public void testIsNotEnabledKo() throws Exception {
+    public void testIsNotEnabledKo() {
         when(element.enabled()).thenReturn(true);
         elementAssert.isNotEnabled();
     }
 
     @Test
-    public void testIsDisplayedOk() throws Exception {
+    public void testIsDisplayedOk() {
         when(element.displayed()).thenReturn(true);
         elementAssert.isDisplayed();
     }
 
     @Test(expected = AssertionError.class)
-    public void testIsDisplayedKo() throws Exception {
+    public void testIsDisplayedKo() {
         when(element.displayed()).thenReturn(false);
         elementAssert.isDisplayed();
     }
 
     @Test
-    public void testIsNotDisplayed() throws Exception {
+    public void testIsNotDisplayed() {
         when(element.displayed()).thenReturn(false);
         elementAssert.isNotDisplayed();
     }
 
     @Test(expected = AssertionError.class)
-    public void testIsSelected() throws Exception {
+    public void testIsSelected() {
         when(element.displayed()).thenReturn(true);
         elementAssert.isNotDisplayed();
     }
 
     @Test
-    public void testIsNotSelectedOk() throws Exception {
+    public void testIsNotSelectedOk() {
         when(element.selected()).thenReturn(false);
         elementAssert.isNotSelected();
     }
 
     @Test(expected = AssertionError.class)
-    public void testIsNotSelectedKo() throws Exception {
+    public void testIsNotSelectedKo() {
         when(element.selected()).thenReturn(true);
         elementAssert.isNotSelected();
     }
 
     @Test
-    public void testIsSelectedOk() throws Exception {
+    public void testIsSelectedOk() {
         when(element.selected()).thenReturn(true);
         elementAssert.isSelected();
     }
 
     @Test(expected = AssertionError.class)
-    public void testIsSelectedKo() throws Exception {
+    public void testIsSelectedKo() {
         when(element.selected()).thenReturn(false);
         elementAssert.isSelected();
     }
 
     @Test
-    public void testHasIdOk() throws Exception {
+    public void testHasIdOk() {
         when(element.id()).thenReturn("some id");
         elementAssert.hasId("some id");
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasIdKo() throws Exception {
+    public void testHasIdKo() {
         when(element.id()).thenReturn("other id");
         elementAssert.hasId("some id");
     }
 
     @Test
-    public void testHasClassOk() throws Exception {
+    public void testHasClassOk() {
         when(element.attribute("class")).thenReturn("some-class");
         elementAssert.hasClass("some-class");
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasClassKo() throws Exception {
+    public void testHasClassKo() {
         when(element.attribute("class")).thenReturn("other-class");
         elementAssert.hasClass("some-class");
     }
 
     @Test(expected = AssertionError.class)
-    public void testSubstringKo() throws Exception {
+    public void testSubstringKo() {
         when(element.attribute("class")).thenReturn("yolokitten");
         elementAssert.hasClass("yolo");
     }
 
     @Test
-    public void testHasTextOk() throws Exception {
+    public void testHasTextOk() {
         when(element.text()).thenReturn("There is a 5% increase");
         elementAssert.hasText("There is a 5% increase");
     }
 
     @Test
-    public void testHasTextWithSpecialCharactersInElement() throws Exception {
+    public void testHasNotTextPositive() {
+        when(element.text()).thenReturn("Something");
+        elementAssert.hasNotText("Text which isn't above");
+    }
+
+    @Test (expected = AssertionError.class)
+    public void testHasNotTextNegative() {
+        when(element.text()).thenReturn("Something written here");
+        elementAssert.hasNotText("Something");
+    }
+
+    @Test
+    public void testHasTextWithSpecialCharactersInElement() {
         String textWithStringFormatError = "%A";
         when(element.text()).thenReturn(textWithStringFormatError);
         elementAssert.hasText(textWithStringFormatError);
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasTextWithSpecialCharactersInAssertion() throws Exception {
+    public void testHasTextWithSpecialCharactersInAssertion() {
         String textWithStringFormatError = "%A";
         when(element.text()).thenReturn("someText");
         elementAssert.hasText(textWithStringFormatError);
     }
 
     @Test
-    public void testHasNoRaceConditioninHasText() throws Exception {
+    public void testHasNoRaceConditioninHasText() {
         String textToFind = "someText";
         String firstActualText = "someOtherText";
 
@@ -160,7 +172,7 @@ public class FluentWebElementTest {
     }
 
     @Test
-    public void testHasMultipleClassesOk() throws Exception {
+    public void testHasMultipleClassesOk() {
         when(element.attribute("class")).thenReturn("yolokitten mark");
         elementAssert.hasClass("mark");
     }
