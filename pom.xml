@@ -329,6 +329,13 @@
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
+                <configuration>
+                    <sourceEncoding>UTF-8</sourceEncoding>
+                    <sourceDirectories>
+                        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/src/main/groovy</sourceDirectory>
+                    </sourceDirectories>
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>javax.xml.bind</groupId>
