@@ -380,15 +380,10 @@
         </profile>
 
         <profile>
-            <id>junit-integration-tests</id>
+            <id>dev-integration-tests</id>
             <modules>
                 <module>fluentlenium-junit/src/it/junit</module>
-            </modules>
-        </profile>
-
-        <profile>
-            <id>testng-integration-tests</id>
-            <modules>
+                <module>fluentlenium-junit-jupiter/src/it/junit-jupiter</module>
                 <module>fluentlenium-testng/src/it/testng</module>
             </modules>
         </profile>
