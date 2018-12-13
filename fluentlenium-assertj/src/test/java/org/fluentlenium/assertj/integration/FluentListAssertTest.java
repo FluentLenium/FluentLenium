@@ -8,85 +8,85 @@ import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 public class FluentListAssertTest extends IntegrationFluentTest {
 
     @Test
-    public void testHasTextOk() throws Exception {
+    public void testHasTextOk() {
         goTo(DEFAULT_URL);
         assertThat(find("span")).hasText("Paul");
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasTextKo() throws Exception {
+    public void testHasTextKo() {
         goTo(DEFAULT_URL);
         assertThat(find("span")).hasText("John");
     }
 
     @Test
-    public void testHasNotTextOk() throws Exception {
+    public void testHasNotTextOk() {
         goTo(DEFAULT_URL);
         assertThat(find("span")).hasNotText("John");
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasNotTextKo() throws Exception {
+    public void testHasNotTextKo() {
         goTo(DEFAULT_URL);
         assertThat(find("span")).hasNotText("Paul");
     }
 
     @Test
-    public void testHasSizeOk() throws Exception {
+    public void testHasSizeOk() {
         goTo(DEFAULT_URL);
         assertThat(find("span")).hasSize(9);
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasSizeKo() throws Exception {
+    public void testHasSizeKo() {
         goTo(DEFAULT_URL);
         assertThat(find("span")).hasSize(10);
     }
 
     @Test
-    public void testHasSizeLessThanOk() throws Exception {
+    public void testHasSizeLessThanOk() {
         goTo(DEFAULT_URL);
         assertThat(find("span")).hasSize().lessThan(10);
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasSizeLessThanKo() throws Exception {
+    public void testHasSizeLessThanKo() {
         goTo(DEFAULT_URL);
         assertThat(find("span")).hasSize().lessThan(9);
     }
 
     @Test
-    public void testHasSizeLessThanOrEqualToOk() throws Exception {
+    public void testHasSizeLessThanOrEqualToOk() {
         goTo(DEFAULT_URL);
         assertThat(find("span")).hasSize().lessThanOrEqualTo(9);
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasSizeLessThanOrEqualToKo() throws Exception {
+    public void testHasSizeLessThanOrEqualToKo() {
         goTo(DEFAULT_URL);
         assertThat(find("span")).hasSize().lessThanOrEqualTo(8);
     }
 
     @Test
-    public void testHasSizeGreaterThanOk() throws Exception {
+    public void testHasSizeGreaterThanOk() {
         goTo(DEFAULT_URL);
         assertThat(find("span")).hasSize().greaterThan(8);
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasSizeGreaterThanKo() throws Exception {
+    public void testHasSizeGreaterThanKo() {
         goTo(DEFAULT_URL);
         assertThat(find("span")).hasSize().greaterThan(10);
     }
 
     @Test
-    public void testHasSizeGreaterThanOrEqualToOk() throws Exception {
+    public void testHasSizeGreaterThanOrEqualToOk() {
         goTo(DEFAULT_URL);
         assertThat(find("span")).hasSize().greaterThanOrEqualTo(8);
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasSizeGreaterThanOrEqualToKo() throws Exception {
+    public void testHasSizeGreaterThanOrEqualToKo() {
         goTo(DEFAULT_URL);
         assertThat(find("span")).hasSize().greaterThanOrEqualTo(10);
     }

@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.hook.wait.Wait;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
@@ -43,11 +42,6 @@ public class WaitHookAnnotationTest extends IntegrationFluentTest {
     public void testWaitingInjectNotFound() {
         goTo(JAVASCRIPT_URL);
         assertThat(anotherField.loaded()).isFalse();
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                anotherField.click();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(() -> anotherField.click()).isExactlyInstanceOf(TimeoutException.class);
     }
 }

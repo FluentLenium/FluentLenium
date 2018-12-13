@@ -35,7 +35,7 @@ public class InjectionFindTest extends IntegrationFluentTest {
         ParentElement elt = el(".parent").as(ParentElement.class);
 
         assertThat(elt.child).isNotNull();
-        assertThat(elt.child.present());
+        assertThat(elt.child.present()).isTrue();
     }
 
     @Test
@@ -45,7 +45,7 @@ public class InjectionFindTest extends IntegrationFluentTest {
         ParentElement elt = el("#select").as(ParentElement.class);
 
         assertThat(elt.child).isNotNull();
-        assertThat(!elt.child.present());
+        assertThat(elt.child.present()).isFalse();
     }
 
     @Test
@@ -55,7 +55,7 @@ public class InjectionFindTest extends IntegrationFluentTest {
         ParentElement elt = $(".parent").as(ParentElement.class).first();
 
         assertThat(elt.child).isNotNull();
-        assertThat(elt.child.present());
+        assertThat(elt.child.present()).isTrue();
     }
 
     @Test
@@ -65,6 +65,6 @@ public class InjectionFindTest extends IntegrationFluentTest {
         ParentElement elt = $("#select").as(ParentElement.class).first();
 
         assertThat(elt.child).isNotNull();
-        assertThat(!elt.child.present());
+        assertThat(elt.child.present()).isFalse();
     }
 }

@@ -48,12 +48,7 @@ public class BaseWaitConditions {
         if (wait.hasMessageDefined()) {
             wait.untilPredicate(present);
         } else {
-            Supplier<String> customMessageSupplier = new Supplier<String>() {
-                @Override
-                public String get() {
-                    return messageCustomizer().apply(messageSupplier.get());
-                }
-            };
+            Supplier<String> customMessageSupplier = () -> messageCustomizer().apply(messageSupplier.get());
             wait.withMessage(customMessageSupplier).untilPredicate(present);
         }
     }

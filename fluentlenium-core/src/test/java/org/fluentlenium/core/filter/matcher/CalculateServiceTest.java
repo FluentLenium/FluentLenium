@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CaculateServiceTest {
+public class CalculateServiceTest {
 
     @Test
     public void checkSimpleEqualOk() {

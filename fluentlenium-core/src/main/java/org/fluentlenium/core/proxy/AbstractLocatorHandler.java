@@ -17,7 +17,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Supplier;
 
 /**
  * Abstract proxy handler supporting lazy loading and hooks on {@link WebElement}.
@@ -178,22 +177,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
             this.hookChainBuilder = hookChainBuilder;
             this.hookDefinitions = hookDefinitions;
 
-            hooks = hookChainBuilder.build(new Supplier<WebElement>() {
-                @Override
-                public WebElement get() {
-                    return getElement();
-                }
-            }, new Supplier<ElementLocator>() {
-                @Override
-                public ElementLocator get() {
-                    return locator;
-                }
-            }, new Supplier<String>() {
-                @Override
-                public String get() {
-                    return proxy.toString();
-                }
-            }, hookDefinitions);
+            hooks = hookChainBuilder.build(this::getElement, () -> locator, () -> proxy.toString(), hookDefinitions);
         }
     }
 

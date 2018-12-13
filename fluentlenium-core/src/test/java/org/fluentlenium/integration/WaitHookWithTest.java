@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.hook.wait.WaitHook;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
@@ -18,12 +17,8 @@ public class WaitHookWithTest extends IntegrationFluentTest {
     @Test
     public void testWaitingNotFound() {
         goTo(JAVASCRIPT_URL);
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                find("#anotherField").withHook(WaitHook.class).click();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class)
+        assertThatThrownBy(() -> find("#anotherField").withHook(WaitHook.class).click())
+                .isExactlyInstanceOf(TimeoutException.class)
                 .hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector: #anotherField");
 
     }

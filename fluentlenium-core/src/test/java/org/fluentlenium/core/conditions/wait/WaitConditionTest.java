@@ -1,15 +1,13 @@
 package org.fluentlenium.core.conditions.wait;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
@@ -90,14 +88,11 @@ public class WaitConditionTest {
 
     @Test(expected = TimeoutException.class)
     public void testWaitEnabledTimeout() {
-        FluentConditions conditions = WaitConditionProxy.one(wait, "context", new Supplier<List<? extends FluentWebElement>>() {
-            @Override
-            public List<? extends FluentWebElement> get() {
-                FluentList<FluentWebElement> list = instantiator.newFluentList();
-                FluentWebElement fluentWebElement = instantiator.newFluent(element);
-                list.add(fluentWebElement);
-                return list;
-            }
+        FluentConditions conditions = WaitConditionProxy.one(wait, "context", () -> {
+            FluentList<FluentWebElement> list = instantiator.newFluentList();
+            FluentWebElement fluentWebElement = instantiator.newFluent(element);
+            list.add(fluentWebElement);
+            return list;
         });
 
         conditions.enabled();

@@ -508,7 +508,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public Fill fill() {
-        return new Fill((FluentList<E>) this);
+        return new Fill(this);
     }
 
     @Override
@@ -525,7 +525,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Override
     public Optional<FluentList<E>> optional() {
         if (present()) {
-            return Optional.of((FluentList<E>) this);
+            return Optional.of(this);
         } else {
             return Optional.empty();
         }

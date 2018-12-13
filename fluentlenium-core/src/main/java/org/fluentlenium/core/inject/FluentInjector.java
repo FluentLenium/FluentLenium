@@ -232,12 +232,9 @@ public class FluentInjector implements FluentInjectControl {
                 if (isLazyComponentsAndNotInitialized(fieldValue.getComponent())) {
                     LazyComponents lazyComponents = (LazyComponents) fieldValue.getComponent();
 
-                    lazyComponents.addLazyComponentsListener(new LazyComponentsListener<Object>() {
-                        @Override
-                        public void lazyComponentsInitialized(Map<WebElement, Object> componentMap) {
-                            for (Entry<WebElement, Object> componentEntry : componentMap.entrySet()) {
-                                injectComponent(componentEntry.getValue(), container, componentEntry.getKey());
-                            }
+                    lazyComponents.addLazyComponentsListener((LazyComponentsListener<Object>) componentMap -> {
+                        for (Entry<WebElement, Object> componentEntry : componentMap.entrySet()) {
+                            injectComponent(componentEntry.getValue(), container, componentEntry.getKey());
                         }
                     });
                 }

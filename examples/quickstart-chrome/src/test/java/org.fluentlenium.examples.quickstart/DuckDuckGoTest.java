@@ -1,4 +1,4 @@
-package org.fluentlenium.examples.cucumber;
+package org.fluentlenium.examples.quickstart;
 
 import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.core.hook.wait.Wait;

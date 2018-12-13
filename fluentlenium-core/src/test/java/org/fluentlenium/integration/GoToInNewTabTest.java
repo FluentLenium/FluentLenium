@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import java.util.Arrays;
 import java.util.HashSet;
 
+import static java.util.Collections.singletonList;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -24,7 +25,7 @@ public class GoToInNewTabTest extends IntegrationFluentTest {
 
     @Test
     public void checkGoToInNewTab() {
-        when(webDriver.getWindowHandles()).thenReturn(new HashSet<>(Arrays.asList("a")), new HashSet<>(Arrays.asList("a", "b")));
+        when(webDriver.getWindowHandles()).thenReturn(new HashSet<>(singletonList("a")), new HashSet<>(Arrays.asList("a", "b")));
         when(webDriver.switchTo()).thenReturn(locator);
         goToInNewTab(DEFAULT_URL);
         verify(locator).window("b");

@@ -375,7 +375,7 @@ public class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
     @Test
     public void whenElementIsNotDisplayedThenIsPresentReturnTrue() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(1, NANOSECONDS).untilElements(() -> find("#unvisible")).present();
+        await().atMost(1, NANOSECONDS).untilElements(() -> find("#invisible")).present();
     }
 
     @Test(expected = TimeoutException.class)
