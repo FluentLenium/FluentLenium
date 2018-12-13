@@ -19,11 +19,18 @@ the assertion framework you want.
 
 # Choose the right version
 
-FluentLenium 3.x is still in development and includes latest enhancements and features, but Selenium 3 and Java 8 are
-required to run it.
+FluentLenium 4.x is the newest version of FluentLenium it is based on JDK 11 it includes latest enhancements and features, but Selenium 3 is required to run it.
+
+FluentLenium 3.x is based on JDK 1.8 - we are not going to add new features to this version but still planning work on bugfixes.
 
 FluentLenium 1.x is in maintenance state, and no new feature will be added anymore. It requires Selenium 2 and
 Java 7, but can also be used with Java 8. Selenium 3 is not supported in this version though.
+
+Starting from FluentLenium 3.1.0 you can use all sparks of Java 8, including lambdas. It is a nice extension in
+comparison to Selenium 3 which is still basing on Guava objects. Please take a look on documentation to find `await`
+lambda usage example.
+
+If you want to keep up to date please upgrade your testing framework to FluentLenium 4.x
 
 # Quickstart with JUnit and AssertJ
 
@@ -32,21 +39,21 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 ```xml
 <properties>
     <!-- Configure this property to latest available version -->
-    <fluentlenium.version>3.7.0</fluentlenium.version>
+    <fluentlenium.version>4.0.0</fluentlenium.version>
     <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-    <selenium.version>3.14.0</selenium.version>
+    <selenium.version>3.141.59</selenium.version>
 </properties>
 
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.7.0</version>
+    <version>4.0.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.7.0</version>
+    <version>4.0.0</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -58,7 +65,7 @@ Java 7, but can also be used with Java 8. Selenium 3 is not supported in this ve
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>htmlunit-driver</artifactId>
-    <version>2.32.1</version>
+    <version>2.33.3</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1800,7 +1807,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>3.7.0</version>
+    <version>4.0.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1815,7 +1822,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit-jupiter</artifactId>
-    <version>3.7.0</version>
+    <version>4.0.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1830,7 +1837,7 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>3.4.1</version>
+    <version>4.0.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1845,26 +1852,81 @@ Then use ```SNAPSHOT``` version when declaring the dependencies.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-cucumber</artifactId>
-    <version>3.7.0</version>
-    <scope>test</scope>
+    <version>4.0.0</version>
 </dependency>
 ```
 
-- Extend each Step with `FluentCucumberTest` instead of `FluentTest`.
+FluentLenium can be integrated with Cucumber in few ways. You can use classic inheritance from FluentCucumberTest class, 
+but it is not necessary - now FluentLenium can take care of injecting Cucumber steps by itself!
 
-- Add this piece of code for each Cucumber Step.
+#### Classic with inheritance
+- Create runner class annotated with FluentCucumber.class
+
+```java
+@RunWith(FluentCucumber.class)
+@CucumberOptions
+public class Runner {
+}
+```
+
+- Extend BaseTest or each Step with `FluentCucumberTest` and configure in any way you want.
+
+- Add this piece of code for to ONE of your Cucumber Step - the best practice is to create separate class for Cucumber 
+After and Before hooks:
 
 ```java
 @Before
-public void before(Scenario scenario) {
-    super.before(scenario);
+public void beforeScenario(Scenario scenario) {
+    before(scenario);
 }
 
 @After
-public void after(Scenario scenario) {
-    super.after(scenario);
+public void afterScenario(Scenario scenario) {
+    after(scenario);
 }
 ```
+
+Or in Java 8 inside Step constructor:
+
+```java
+Before(this::before);
+
+After(this::after);
+```
+
+#### Auto-Injecting Cucumber steps
+- Create runner class annotated with FluentCucumber.class and use on it @FluentConfiguration:
+
+```java
+@RunWith(FluentCucumber.class)
+@CucumberOptions
+@FluentConfiguration(webDriver = "chrome")
+public class Runner {
+}
+```
+- If you want to use auto-injecting with initialization FluentLenium context you MUST use @FluentConfiguration on a runner
+class, but configuration still can be passed through fluentlenium.properties or as system properties 
+(-Dfluentlenium.webDriver=chrome). 
+
+- You do not need to use FluentCucumberTest at all!
+
+- It is possible to access current FluentCucumberTest using syntax:
+
+```java
+FluentAdapterContainer.FLUENT_TEST.instance()
+```
+
+It can be handy if you want have access to current WebDriver instance etc.
+
+- Due to fact that you do not use inheritance you cannot use configuration throughJava beans or use FluentLenium API 
+directly in Cucumber steps. Use Page Object pattern instead (@Page annotation is your friend).
+
+- Remember, that page objects still need to inherit FluentPage to run correctly.
+
+#### Using Cucumber.class as runner
+
+- It is still possible to use Cucumber.class instead FluentCucumber.class as runner but it is necessary to 
+add Before and After hooks to every Cucumber Step for correct injecting FluentLenium context.
 
 ### Spock
 
@@ -1874,7 +1936,7 @@ public void after(Scenario scenario) {
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-spock</artifactId>
-    <version>3.7.0</version>
+    <version>4.0.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -1902,7 +1964,7 @@ assertEqual("Hello toto",window().title());
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>3.7.0</version>
+    <version>4.0.0</version>
     <scope>test</scope>
 </dependency>
 ```

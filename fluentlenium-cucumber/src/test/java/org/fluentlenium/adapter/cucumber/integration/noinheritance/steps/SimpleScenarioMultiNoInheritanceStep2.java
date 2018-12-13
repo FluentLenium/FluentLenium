@@ -17,7 +17,7 @@ public class SimpleScenarioMultiNoInheritanceStep2 {
 
     @When(value = "scenario multi2 I click on next page")
     public void step2() {
-        page.$("a#linkToPage2").click();
+        page.clickLinkWithSearch();
     }
 
     @Then(value = "scenario multi2 I am on the second page")

@@ -1,5 +1,6 @@
 package org.fluentlenium.integration;
 
+import org.assertj.core.api.Assertions;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
@@ -103,9 +104,9 @@ public class JavascriptTest extends IntegrationFluentTest {
         assertThat(fluentJavascript.isStringResult()).isFalse();
 
         assertThat((Object) fluentJavascript.getListResult()).isEqualTo(fluentJavascript.getResult());
-        assertThat(fluentJavascript.getListResult())
+        Assertions.<Object>assertThat(fluentJavascript.getListResult())
                 .containsExactly("string 1", "string 2", 5L, 12.12D, true, Arrays.asList("test 1", "test 2"));
-        assertThat(fluentJavascript.getListResult())
+        Assertions.<Object>assertThat(fluentJavascript.getListResult())
                 .containsExactly("string 1", "string 2", 5L, 12.12D, true, Arrays.asList("test 1", "test 2"));
     }
 

@@ -1,10 +1,11 @@
 package org.fluentlenium.adapter.cucumber;
 
+import cucumber.api.Scenario;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.FluentTestRunnerAdapter;
 import org.fluentlenium.adapter.SharedMutator;
 
-import static org.fluentlenium.adapter.cucumber.FluentCucumberTestContainer.FLUENT_TEST;
+import static org.fluentlenium.adapter.cucumber.FluentTestContainer.FLUENT_TEST;
 
 /**
  * Cucumber FluentLenium Test Runner Adapter.
@@ -15,56 +16,71 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
 
     /**
      * Initializes context for {@link FluentCucumberTest} and store it in container at
-     * {@link FluentCucumberTestContainer} to share state across Cucumber steps.
+     * {@link FluentTestContainer} to share state across Cucumber steps.
      */
     public FluentCucumberTest() {
-        FLUENT_TEST.instance();
+        this(FLUENT_TEST.getControlContainer(), FLUENT_TEST.getSharedMutator());
     }
 
     /**
      * Constructor used within module. Creates a new FluentLenium cucumber test and points within
-     * {@link FluentCucumberTestContainer}.
+     * {@link FluentTestContainer}.
      *
      * @param container     driver container
      * @param clazz         class from which FluentConfiguration annotation will be loaded
      * @param sharedMutator shared mutator
      */
-    FluentCucumberTest(FluentControlContainer container, Class clazz, SharedMutator sharedMutator) {
+    protected FluentCucumberTest(FluentControlContainer container, Class clazz, SharedMutator sharedMutator) {
         super(container, clazz, sharedMutator);
     }
 
     /**
      * Constructor used within module. Creates a new FluentLenium cucumber test and points within
-     * {@link FluentCucumberTestContainer}.
+     * {@link FluentTestContainer}.
      *
      * @param container     driver container
      * @param sharedMutator shared mutator
      */
-    FluentCucumberTest(FluentControlContainer container, SharedMutator sharedMutator) {
+    protected FluentCucumberTest(FluentControlContainer container, SharedMutator sharedMutator) {
         super(container, sharedMutator);
     }
 
     /**
      * Initialization of FluentCucumberTestAdapter
-     */
-    void before() {
-        FLUENT_TEST.instance().starting();
-    }
-
-    /**
-     * Stopping of FluentCucumberTestAdapter
-     */
-    void after() {
-        FLUENT_TEST.instance().finished();
-    }
-
-    /**
-     * Get control container stored in {@link FluentCucumberTestContainer} to avoid problem with state across steps.
      *
-     * @return instance of control container
+     * @param scenario Cucumber scenario
      */
-    @Override
-    protected FluentControlContainer getControlContainer() {
-        return FLUENT_TEST.getControlContainer();
+    public void before(Scenario scenario) {
+        starting(scenario.getName());
+    }
+
+    /**
+     * Initialization of FluentCucumberTest adapter
+     */
+    void start() {
+        starting();
+    }
+
+    /**
+     * Stopping of FluentCucumberTest adapter
+     *
+     * @param scenario Cucumber scenario
+     */
+    public void after(Scenario scenario) {
+        if (scenario.isFailed()) {
+            failed(scenario.getName());
+        }
+        finished(scenario.getName());
+    }
+
+    /**
+     * Stopping of FluentCucumberTest adapter
+     */
+    void finish() {
+//        TODO find way to pass Scenario or just status of test( if it fails)
+//        if (isFailed()) {
+//            failed();
+//        }
+        finished();
     }
 }
