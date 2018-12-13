@@ -378,6 +378,21 @@
                 <module>examples/spring</module>
             </modules>
         </profile>
+
+        <profile>
+            <id>junit-integration-tests</id>
+            <modules>
+                <module>fluentlenium-junit/src/it/junit</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>testng-integration-tests</id>
+            <modules>
+                <module>fluentlenium-testng/src/it/testng</module>
+            </modules>
+        </profile>
+
         <profile>
             <id>check</id>
             <build>
