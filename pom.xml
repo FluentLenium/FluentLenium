@@ -380,7 +380,7 @@
         </profile>
 
         <profile>
-            <id>dev-integration-tests</id>
+            <id>framework-integration-tests</id>
             <modules>
                 <module>fluentlenium-junit/src/it/junit</module>
                 <module>fluentlenium-junit-jupiter/src/it/junit-jupiter</module>

@@ -114,13 +114,5 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>integration-tests-dev</id>
-            <properties>
-                <it.project.version>4.0.1-SNAPSHOT</it.project.version>
-            </properties>
-        </profile>
-    </profiles>
 
 </project>
