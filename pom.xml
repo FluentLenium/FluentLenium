@@ -332,8 +332,13 @@
                 <configuration>
                     <sourceEncoding>UTF-8</sourceEncoding>
                     <sourceDirectories>
-                        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
-                        <sourceDirectory>${basedir}/src/main/groovy</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-core/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-assertj/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-cucumber/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-junit/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-junit-jupiter/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-testng/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-spock/src/main/groovy</sourceDirectory>
                     </sourceDirectories>
                 </configuration>
                 <dependencies>

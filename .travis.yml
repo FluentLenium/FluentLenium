@@ -3,7 +3,7 @@ jdk:
   - oraclejdk11
 script:
   - mvn -Pexamples clean compile # Ensure examples compiles properly
-  - mvn -Pframework-integration-tests clean test
+  #- mvn -Pframework-integration-tests clean test
   - mvn clean verify jacoco:report
 after_success:
   - mvn coveralls:report
