@@ -72,10 +72,9 @@ public class First extends FluentTest {
     <plugins>
     <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.0</version>
+        <version>3.8.0</version>
         <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
+            <release>11</release>
         </configuration>
     </plugin>
     </plugins>
@@ -100,7 +99,7 @@ public class First extends FluentTest {
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>3.14.0</version>
+            <version>3.141.59</version>
         </dependency>
     </dependencies>
 </project>

@@ -18,10 +18,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 
+import static java.util.Collections.singletonList;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -44,7 +43,7 @@ public class SearchHookTest {
         instantiator = new DefaultComponentInstantiator(fluentAdapter);
         search = new Search(driver, this, instantiator, fluentAdapter);
 
-        when(driver.findElements(By.cssSelector(".selector"))).thenReturn(Arrays.asList(element));
+        when(driver.findElements(By.cssSelector(".selector"))).thenReturn(singletonList(element));
         when(element.isDisplayed()).thenReturn(true);
         when(element.isEnabled()).thenReturn(true);
     }
@@ -128,12 +127,7 @@ public class SearchHookTest {
     @Test
     public void testHookSearchNoHookFunction() {
         FluentWebElement hookedElement = search.$(".selector").withHook(NanoHook.class).first()
-                .noHook(new Function<FluentWebElement, FluentWebElement>() {
-                    @Override
-                    public FluentWebElement apply(FluentWebElement input) {
-                        return input.click();
-                    }
-                });
+                .noHook(FluentWebElement::click);
 
         Mockito.verify(element).click();
 
@@ -147,12 +141,7 @@ public class SearchHookTest {
     @Test
     public void testHookSearchFirstNoHookFunction() {
         FluentWebElement hookedElement = search.$(".selector").first().withHook(NanoHook.class)
-                .noHook(new Function<FluentWebElement, FluentWebElement>() {
-                    @Override
-                    public FluentWebElement apply(FluentWebElement input) {
-                        return input.click();
-                    }
-                });
+                .noHook(FluentWebElement::click);
 
         Mockito.verify(element).click();
 

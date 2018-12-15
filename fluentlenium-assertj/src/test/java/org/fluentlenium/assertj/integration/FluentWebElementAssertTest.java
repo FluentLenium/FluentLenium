@@ -8,45 +8,45 @@ import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 public class FluentWebElementAssertTest extends IntegrationFluentTest {
 
     @Test
-    public void testIsEnabledOk() throws Exception {
+    public void testIsEnabledOk() {
         goTo(DEFAULT_URL);
         assertThat(el("#name")).isEnabled();
     }
 
     @Test(expected = AssertionError.class)
-    public void testIsEnabledKo() throws Exception {
+    public void testIsEnabledKo() {
         goTo(DEFAULT_URL);
         assertThat(el("#disabled")).isEnabled();
     }
 
     @Test
-    public void testIsNotEnabledOk() throws Exception {
+    public void testIsNotEnabledOk() {
         goTo(DEFAULT_URL);
         assertThat(el("#disabled")).isNotEnabled();
     }
 
     @Test(expected = AssertionError.class)
-    public void testIsNotEnabledKo() throws Exception {
+    public void testIsNotEnabledKo() {
         goTo(DEFAULT_URL);
         assertThat(el("#name")).isNotEnabled();
 
     }
 
     @Test
-    public void testIsDisplayedOk() throws Exception {
+    public void testIsDisplayedOk() {
         goTo(DEFAULT_URL);
         assertThat(el("#disabled")).isDisplayed();
     }
 
     @Test(expected = AssertionError.class)
-    public void testIsDisplayedKo() throws Exception {
+    public void testIsDisplayedKo() {
         goTo(DEFAULT_URL);
         executeScript("document.getElementById(\"disabled\").style.display=\"none\";");
         assertThat(el("#disabled")).isDisplayed();
     }
 
     @Test
-    public void testIsNotDisplayed() throws Exception {
+    public void testIsNotDisplayed() {
         goTo(DEFAULT_URL);
         executeScript("document.getElementById(\"disabled\").style.display=\"none\";");
         assertThat(el("#disabled")).isNotDisplayed();
@@ -54,55 +54,55 @@ public class FluentWebElementAssertTest extends IntegrationFluentTest {
     }
 
     @Test(expected = AssertionError.class)
-    public void testIsSelected() throws Exception {
+    public void testIsSelected() {
         goTo(DEFAULT_URL);
         assertThat(el("#disabled")).isNotDisplayed();
     }
 
     @Test
-    public void testIsNotSelectedOk() throws Exception {
+    public void testIsNotSelectedOk() {
         goTo(DEFAULT_URL);
         assertThat(el("#disabled")).isNotSelected();
     }
 
     @Test(expected = AssertionError.class)
-    public void testIsNotSelectedKo() throws Exception {
+    public void testIsNotSelectedKo() {
         goTo(DEFAULT_URL);
         assertThat(el("#selected")).isNotSelected();
     }
 
     @Test
-    public void testIsSelectedOk() throws Exception {
+    public void testIsSelectedOk() {
         goTo(DEFAULT_URL);
         assertThat(el("#selected")).isSelected();
     }
 
     @Test(expected = AssertionError.class)
-    public void testIsSelectedKo() throws Exception {
+    public void testIsSelectedKo() {
         goTo(DEFAULT_URL);
         assertThat(el("#disabled")).isSelected();
     }
 
     @Test
-    public void testHasTestOk() throws Exception {
+    public void testHasTestOk() {
         goTo(DEFAULT_URL);
         assertThat(el("#location")).hasText("Pharmacy");
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasTestKo() throws Exception {
+    public void testHasTestKo() {
         goTo(DEFAULT_URL);
         assertThat(el("#location")).hasText("Drugstore");
     }
 
     @Test
-    public void testHasTestMatchingOk() throws Exception {
+    public void testHasTestMatchingOk() {
         goTo(DEFAULT_URL);
         assertThat(el("#location")).hasTextMatching("Pha\\w+cy");
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasTestMatchingKo() throws Exception {
+    public void testHasTestMatchingKo() {
         goTo(DEFAULT_URL);
         executeScript("document.getElementById(\"location\").innerHTML=\"Pha rmacy\";");
         assertThat(el("#location")).hasTextMatching("Pha\\w+cy");

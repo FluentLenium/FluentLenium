@@ -63,11 +63,7 @@ public class DefaultComponentInstantiator extends AbstractComponentInstantiator 
             return ReflectionUtils.newInstanceOptionalArgs(1, componentClass, element, control, instantiator);
         } catch (NoSuchMethodException e) {
             throw new ComponentException(componentClass.getName() + " is not a valid component class.", e);
-        } catch (IllegalAccessException e) {
-            throw new ComponentException(componentClass.getName() + " can't be instantiated.", e);
-        } catch (InvocationTargetException e) {
-            throw new ComponentException(componentClass.getName() + " can't be instantiated.", e);
-        } catch (InstantiationException e) {
+        } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
             throw new ComponentException(componentClass.getName() + " can't be instantiated.", e);
         }
     }
@@ -78,11 +74,7 @@ public class DefaultComponentInstantiator extends AbstractComponentInstantiator 
             return ReflectionUtils.newInstanceOptionalArgs(1, listClass, componentClass, componentsList, control, instantiator);
         } catch (NoSuchMethodException e) {
             throw new ComponentException(listClass.getName() + " is not a valid component list class.", e);
-        } catch (IllegalAccessException e) {
-            throw new ComponentException(listClass.getName() + " can't be instantiated.", e);
-        } catch (InvocationTargetException e) {
-            throw new ComponentException(listClass.getName() + " can't be instantiated.", e);
-        } catch (InstantiationException e) {
+        } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
             throw new ComponentException(listClass.getName() + " can't be instantiated.", e);
         }
     }

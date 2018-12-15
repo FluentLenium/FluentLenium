@@ -9,21 +9,19 @@ import org.openqa.selenium.support.FindBy;
 
 @PageUrl("/")
 public class MainPage extends FluentPage {
-    @FindBy(css = ".sbibod ")
-    private FluentWebElement searchInputBorder;
-    @FindBy(css = ".gsfi ")
+
+    @FindBy(css = "input.gsfi")
     private FluentWebElement searchInput;
-    @FindBy(css = "input[name=\"btnK\"]")
+
+    @FindBy(css = ".FPdoLc input[name='btnK']")
     private FluentWebElement searchButton;
+
     @Page
     private ResultsPage resultsPage;
 
     public MainPage typeTextIn() {
-        searchInputBorder.click();
-        searchInput.write("Something");
-
+        searchInput.fill().with("Something");
         keyboard().basic().sendKeys(Keys.TAB);
-
         return this;
     }
 

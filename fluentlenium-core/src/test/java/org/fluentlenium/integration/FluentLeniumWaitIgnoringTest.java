@@ -8,7 +8,6 @@ import org.openqa.selenium.TimeoutException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Supplier;
 
 public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
 
@@ -42,7 +41,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException ignored) {
         }
 
     }
@@ -60,7 +59,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException ignored) {
         }
 
     }
@@ -70,15 +69,12 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
 
         try {
             await().atMost(1, TimeUnit.NANOSECONDS).ignoring(CustomException.class).ignoring(CustomException2.class)
-                    .until(new Supplier<Boolean>() {
-                        @Override
-                        public Boolean get() {
-                            throw new CustomException();
-                        }
+                    .until(() -> {
+                        throw new CustomException();
                     });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException ignored) {
         }
 
     }
@@ -92,7 +88,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException ignored) {
         }
 
     }
@@ -106,7 +102,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException ignored) {
         }
 
     }
@@ -120,7 +116,7 @@ public class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
             });
 
             throw new AssertionError();
-        } catch (TimeoutException e) { // NOPMD EmptyCatchBlock
+        } catch (TimeoutException ignored) {
         }
 
     }

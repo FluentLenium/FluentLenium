@@ -1,6 +1,9 @@
 package org.fluentlenium.configuration;
 
-import org.assertj.core.api.ThrowableAssert;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.util.LinkedHashMap;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,11 +11,6 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-
-import java.util.LinkedHashMap;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WebDriversTest {
     private WebDriversRegistryImpl webDrivers;
@@ -63,13 +61,7 @@ public class WebDriversTest {
     public void testNoDefault() throws NoSuchFieldException, IllegalAccessException {
         ReflectionUtils.set(AbstractFactoryRegistryImpl.class.getDeclaredField("factories"), webDrivers, new LinkedHashMap<>());
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                webDrivers.get(null);
-
-            }
-        }).isExactlyInstanceOf(ConfigurationException.class).hasMessage(
+        assertThatThrownBy(() -> webDrivers.get(null)).isExactlyInstanceOf(ConfigurationException.class).hasMessage(
                 "No WebDriverFactory is available. You need add least one supported " + "WebDriver in your classpath.");
     }
 

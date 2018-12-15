@@ -1,9 +1,9 @@
 package org.fluentlenium.example.spring.config;
 
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
@@ -20,14 +20,14 @@ public enum BrowserType {
         }
 
         @Override
-        protected DesiredCapabilities getBrowserCapabilities() {
+        protected MutableCapabilities getBrowserCapabilities() {
             return chrome();
         }
     };
 
     protected abstract WebDriver getWebDriver();
 
-    protected abstract DesiredCapabilities getBrowserCapabilities();
+    protected abstract MutableCapabilities getBrowserCapabilities();
 
     public WebDriver getRemoteWebDriver(String hubLocation) {
         try {

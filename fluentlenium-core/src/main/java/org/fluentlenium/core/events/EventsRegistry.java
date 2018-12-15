@@ -9,7 +9,6 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 
 import java.awt.event.ContainerListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -485,7 +484,7 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
         ListenerPriorityComparator comparator = new ListenerPriorityComparator();
 
         for (List eventList : eventLists) {
-            Collections.sort(eventList, comparator);
+            eventList.sort(comparator);
         }
     }
 

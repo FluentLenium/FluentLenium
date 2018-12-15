@@ -5,10 +5,10 @@
 
 # If you are building a simple GitHub user page (http://username.github.io) then use these settings:
 fluentlenium:
-  version: "3.4.1"
+  version: "4.0.0"
 
 selenium:
-  version: "3.5.1"
+  version: "3.141.59"
 
 url: "http://fluentlenium.org"
 baseurl: ""
@@ -31,7 +31,9 @@ description: FluentLenium is a website automation framework which extends Seleni
 navbar-links:
   Home: ""
   Docs: "docs"
-  Migration: "migration/from-0.13.2-to-1.0-or-3.0"
+  Migration:
+    - to 3.0: "migration/from-0.13.2-to-1.0-or-3.0"
+    - from 3.0 to 4.0: "migration/3.0-to-4.0"
   About: "about"
   Github:
     - Sources: "https://github.com/FluentLenium/FluentLenium"

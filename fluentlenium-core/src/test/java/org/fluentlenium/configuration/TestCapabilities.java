@@ -27,7 +27,7 @@ public class TestCapabilities implements Capabilities {
     }
 
     @Override
-    public Map<String, ?> asMap() {
+    public Map<String, Object> asMap() {
         return null;
     }
 

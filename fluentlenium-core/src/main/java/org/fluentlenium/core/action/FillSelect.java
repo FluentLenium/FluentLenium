@@ -5,8 +5,6 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.Iterator;
-
 /**
  * Select form filling features.
  *
@@ -35,13 +33,7 @@ public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
     @Override
     protected FluentList<E> getElements() {
         FluentList<E> elements = super.getElements();
-        Iterator<E> iterator = elements.iterator();
-        while (iterator.hasNext()) {
-            FluentWebElement next = iterator.next();
-            if (next.tagName() == null || !next.tagName().equalsIgnoreCase("select")) {
-                iterator.remove();
-            }
-        }
+        elements.removeIf(next -> next.tagName() == null || !next.tagName().equalsIgnoreCase("select"));
         return elements;
     }
 

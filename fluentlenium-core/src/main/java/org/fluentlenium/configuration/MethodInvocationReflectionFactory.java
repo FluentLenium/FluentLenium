@@ -31,9 +31,7 @@ public class MethodInvocationReflectionFactory implements CapabilitiesFactory, F
     public Capabilities newCapabilities(ConfigurationProperties configuration) {
         try {
             return (Capabilities) method.invoke(instance, args);
-        } catch (IllegalAccessException e) {
-            throw new ConfigurationException("Can't create capabilities instance", e);
-        } catch (InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             throw new ConfigurationException("Can't create capabilities instance", e);
         }
     }

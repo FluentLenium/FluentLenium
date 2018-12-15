@@ -6,7 +6,7 @@ import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Locatable;
-import org.openqa.selenium.interactions.internal.Coordinates;
+import org.openqa.selenium.interactions.Coordinates;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.function.Supplier;
