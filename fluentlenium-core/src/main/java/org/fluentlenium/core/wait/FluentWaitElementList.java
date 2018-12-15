@@ -1,12 +1,12 @@
 package org.fluentlenium.core.wait;
 
+import java.time.Duration;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.conditions.FluentConditions;
@@ -62,6 +62,12 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
     }
 
     @Override
+    public FluentWaitElementList atMost(Duration duration) {
+        controlWait.atMost(duration);
+        return this;
+    }
+
+    @Override
     public FluentWaitElementList atMost(long duration, TimeUnit unit) {
         controlWait.atMost(duration, unit);
         return this;
@@ -70,6 +76,12 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
     @Override
     public FluentWaitElementList atMost(long timeInMillis) {
         controlWait.atMost(timeInMillis);
+        return this;
+    }
+
+    @Override
+    public FluentWaitElementList pollingEvery(Duration duration) {
+        controlWait.pollingEvery(duration);
         return this;
     }
 
@@ -112,11 +124,6 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
     @Override
     public void until(Supplier<Boolean> supplier) {
         controlWait.until(supplier);
-    }
-
-    @Override
-    public <T> T until(Function<? super FluentControl, T> function) {
-        return controlWait.until(function);
     }
 
     @Override
@@ -207,7 +214,7 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
      * @return FluentWaitElementList
      */
     @Deprecated
-    public <T> T until(com.google.common.base.Function<? super FluentControl, T> function) {
+    public <T> T until(Function<? super FluentControl, T> function) {
         return controlWait.until(function);
     }
 }

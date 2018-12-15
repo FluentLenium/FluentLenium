@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>3.7.0-SNAPSHOT</version>
+    <version>4.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -18,7 +18,6 @@
         <module>fluentlenium-testng</module>
         <module>fluentlenium-cucumber</module>
         <module>fluentlenium-spock</module>
-        <module>fluentlenium-e2e</module>
     </modules>
 
     <prerequisites>
@@ -91,13 +90,24 @@
                 <role>developer</role>
             </roles>
         </developer>
+        <developer>
+            <id>Adrian</id>
+            <name>Adrian Koryl</name>
+            <email>adrian.koryl@gmail.com</email>
+            <url>https://github.com/koryl</url>
+            <organization>Billennium</organization>
+            <organizationUrl>http://www.billennium.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <selenium.version>3.12.0</selenium.version>
-        <java.version>1.8</java.version>
+        <selenium.version>3.141.59</selenium.version>
+        <java.version>11</java.version>
     </properties>
 
     <dependencyManagement>
@@ -130,7 +140,7 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>htmlunit-driver</artifactId>
-                <version>2.31.0</version>
+                <version>2.33.3</version>
             </dependency>
             <dependency>
                 <groupId>xml-apis</groupId>
@@ -170,12 +180,12 @@
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
-                <version>3.9.1</version>
+                <version>3.11.1</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>2.15.0</version>
+                <version>2.23.4</version>
             </dependency>
             <dependency>
                 <groupId>com.github.hazendaz</groupId>
@@ -199,15 +209,15 @@
             <plugins>
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>3.1.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>3.0.0-M1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
-                    <version>2.4</version>
+                    <version>3.0.0-M1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-gpg-plugin</artifactId>
@@ -215,27 +225,30 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.4</version>
+                    <version>3.1.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.10.4</version>
+                    <version>3.0.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.6</version>
+                    <version>3.1.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.1</version>
+                    <version>3.8.0</version>
+                    <configuration>
+                        <release>11</release>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.3</version>
+                    <version>3.7.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.19.1</version>
+                    <version>3.0.0-M1</version>
                     <configuration>
                         <useUnlimitedThreads>true</useUnlimitedThreads>
                         <parallel>methods</parallel>
@@ -251,7 +264,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>2.19.1</version>
+                    <version>3.0.0-M1</version>
                     <executions>
                         <execution>
                             <goals>
@@ -292,9 +305,9 @@
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <release>11</release>
                 </configuration>
             </plugin>
             <plugin>
@@ -307,15 +320,34 @@
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.6</version>
+                <version>3.1.0</version>
                 <configuration>
-                    <descriptor>src/main/assembly/dep.xml</descriptor>
+                    <descriptors>src/main/assembly/dep.xml</descriptors>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
-                <version>4.1.0</version>
+                <version>4.3.0</version>
+                <configuration>
+                    <sourceEncoding>UTF-8</sourceEncoding>
+                    <sourceDirectories>
+                        <sourceDirectory>${basedir}/fluentlenium-core/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-assertj/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-cucumber/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-junit/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-junit-jupiter/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-testng/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-spock/src/main/groovy</sourceDirectory>
+                    </sourceDirectories>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>javax.xml.bind</groupId>
+                        <artifactId>jaxb-api</artifactId>
+                        <version>2.2.3</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <plugin>
@@ -334,10 +366,11 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.5.201505241946</version>
+                <version>0.8.2</version>
                 <configuration>
                     <excludes>
                         <exclude>**com.steadystate*</exclude>
+                        <exclude>**com/gargoylesoftware*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -355,18 +388,25 @@
 
     <profiles>
         <profile>
-            <id>e2e-tests</id>
-            <modules>
-                <module>fluentlenium-e2e</module>
-            </modules>
-        </profile>
-        <profile>
             <id>examples</id>
             <modules>
-                <module>examples/quickstart</module>
+                <module>examples/hooks</module>
+                <module>examples/cucumber</module>
+                <module>examples/quickstart-chrome</module>
+                <module>examples/spock</module>
                 <module>examples/spring</module>
             </modules>
         </profile>
+
+        <profile>
+            <id>framework-integration-tests</id>
+            <modules>
+                <module>fluentlenium-junit/src/it/junit</module>
+                <module>fluentlenium-junit-jupiter/src/it/junit-jupiter</module>
+                <module>fluentlenium-testng/src/it/testng</module>
+            </modules>
+        </profile>
+
         <profile>
             <id>check</id>
             <build>
@@ -374,12 +414,12 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-checkstyle-plugin</artifactId>
-                        <version>2.17</version>
+                        <version>3.0.0</version>
                         <dependencies>
                             <dependency>
                                 <groupId>com.puppycrawl.tools</groupId>
                                 <artifactId>checkstyle</artifactId>
-                                <version>8.2</version>
+                                <version>8.15</version>
                             </dependency>
                         </dependencies>
                         <executions>
@@ -405,7 +445,12 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-pmd-plugin</artifactId>
-                        <version>3.8</version>
+                        <version>3.11.0</version>
+                        <configuration>
+                            <rulesets>
+                                <ruleset>dev-config/pmd/fluentlenium_pmd.xml</ruleset>
+                            </rulesets>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>pmd-validate</id>
@@ -413,11 +458,6 @@
                                 <goals>
                                     <goal>check</goal>
                                 </goals>
-                                <configuration>
-                                    <rulesets>
-                                        <ruleset>dev-config/pmd/fluentlenium_pmd.xml</ruleset>
-                                    </rulesets>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>

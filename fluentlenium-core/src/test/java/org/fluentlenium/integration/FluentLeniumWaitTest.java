@@ -2,7 +2,6 @@ package org.fluentlenium.integration;
 
 import net.jcip.annotations.NotThreadSafe;
 import org.fluentlenium.adapter.FluentAdapter;
-import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Before;
@@ -12,7 +11,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -484,23 +482,13 @@ public class FluentLeniumWaitTest extends IntegrationFluentTest {
     @Test
     public void checkFunction() {
         goTo(JAVASCRIPT_URL);
-        await().pollingEvery(SECOND_TIMEOUT, TimeUnit.MILLISECONDS).until(new Function<FluentControl, Boolean>() {
-            @Override
-            public Boolean apply(FluentControl fluent) {
-                return true;
-            }
-        });
+        await().pollingEvery(SECOND_TIMEOUT, TimeUnit.MILLISECONDS).until(fluent -> true);
     }
 
     @Test(expected = TimeoutException.class)
     public void checkFunctionFail() {
         goTo(JAVASCRIPT_URL);
-        await().atMost(SECOND_TIMEOUT).until(new Function<FluentControl, Boolean>() {
-            @Override
-            public Boolean apply(FluentControl fluent) {
-                return false;
-            }
-        });
+        await().atMost(SECOND_TIMEOUT).until(fluent -> false);
     }
 
     @Test

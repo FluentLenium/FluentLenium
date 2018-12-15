@@ -1,12 +1,12 @@
 package org.fluentlenium.core.wait;
 
+import java.time.Duration;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.conditions.FluentConditions;
@@ -49,6 +49,12 @@ public class FluentWaitElement implements FluentWaitFunctional<FluentControl>, F
     }
 
     @Override
+    public FluentWaitElement atMost(Duration duration) {
+        controlWait.atMost(duration);
+        return this;
+    }
+
+    @Override
     public FluentWaitElement atMost(long duration, TimeUnit unit) {
         controlWait.atMost(duration, unit);
         return this;
@@ -57,6 +63,12 @@ public class FluentWaitElement implements FluentWaitFunctional<FluentControl>, F
     @Override
     public FluentWaitElement atMost(long timeInMillis) {
         controlWait.atMost(timeInMillis);
+        return this;
+    }
+
+    @Override
+    public FluentWaitElement pollingEvery(Duration duration) {
+        controlWait.pollingEvery(duration);
         return this;
     }
 
@@ -123,10 +135,6 @@ public class FluentWaitElement implements FluentWaitFunctional<FluentControl>, F
         controlWait.until(isTrue);
     }
 
-    @Override
-    public <T> T until(Function<? super FluentControl, T> isTrue) {
-        return controlWait.until(isTrue);
-    }
 
     @Override
     public FluentConditions until(FluentWebElement element) {
@@ -193,7 +201,7 @@ public class FluentWaitElement implements FluentWaitFunctional<FluentControl>, F
      * @return FluentWaitElement
      */
     @Deprecated
-    public <T> T until(com.google.common.base.Function<? super FluentControl, T> function) {
+    public <T> T until(Function<? super FluentControl, T> function) {
         return controlWait.until(function);
     }
 }

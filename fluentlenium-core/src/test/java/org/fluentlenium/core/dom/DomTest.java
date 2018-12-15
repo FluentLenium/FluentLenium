@@ -80,7 +80,7 @@ public class DomTest {
     }
 
     @Test
-    public void testPrecedings() {
+    public void testPrecedingElementsInList() {
         Dom dom = new Dom(element, instantiator);
 
         List<WebElement> elements = Arrays.asList(mock(WebElement.class), mock(WebElement.class), mock(WebElement.class));

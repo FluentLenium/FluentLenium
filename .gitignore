@@ -192,3 +192,5 @@ build.log
 *.exec
 
 /myTestScreenshot.png
+
+settings.xml

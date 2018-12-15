@@ -43,21 +43,15 @@ public class FluentTest extends FluentTestRunnerAdapter {
      * Fluent test adapter JUnit class rule.
      */
     @ClassRule
-    public static TestRule classWatchman = new TestRule() {
+    public static TestRule classWatchman = (base, description) -> new Statement() {
 
         @Override
-        public Statement apply(Statement base, Description description) {
-            return new Statement() {
-
-                @Override
-                public void evaluate() throws Throwable {
-                    try {
-                        base.evaluate();
-                    } finally {
-                        afterClass(description.getTestClass());
-                    }
-                }
-            };
+        public void evaluate() throws Throwable {
+            try {
+                base.evaluate();
+            } finally {
+                afterClass(description.getTestClass());
+            }
         }
     };
     //CHECKSTYLE.ON: VisibilityModifier

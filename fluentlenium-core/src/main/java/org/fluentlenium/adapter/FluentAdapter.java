@@ -25,7 +25,7 @@ public class FluentAdapter implements FluentControl {
 
     private final FluentControlContainer controlContainer;
 
-    private final Configuration configuration = ConfigurationFactoryProvider.newConfiguration(getClass());
+    private final Configuration configuration;
 
     private static final Set<String> IGNORED_EXCEPTIONS = Stream.of(
                 "org.junit.internal.AssumptionViolatedException",
@@ -46,6 +46,18 @@ public class FluentAdapter implements FluentControl {
      */
     public FluentAdapter(FluentControlContainer controlContainer) {
         this.controlContainer = controlContainer;
+        configuration = ConfigurationFactoryProvider.newConfiguration(getClass());
+    }
+
+    /**
+     * Creates a new fluent adapter, using given control interface container.
+     *
+     * @param controlContainer control interface container
+     * @param clazz class from which annotation configuration will be looked up
+     */
+    public FluentAdapter(FluentControlContainer controlContainer, Class clazz) {
+        this.controlContainer = controlContainer;
+        configuration = ConfigurationFactoryProvider.newConfiguration(clazz);
     }
 
     /**

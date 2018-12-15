@@ -1,1 +1,0 @@
-#SETUP `browserstackurl` SYSTEM PROPERTY

@@ -235,7 +235,7 @@ public class AtLeastOneElementConditionsTest extends AbstractFluentListCondition
 
     @Test
     public void defaultValueWhenEmpty() {
-        AtLeastOneElementConditions emptyConditions = new AtLeastOneElementConditions(Arrays.asList());
+        AtLeastOneElementConditions emptyConditions = new AtLeastOneElementConditions(Collections.emptyList());
 
         assertThat(emptyConditions.enabled()).isFalse();
     }

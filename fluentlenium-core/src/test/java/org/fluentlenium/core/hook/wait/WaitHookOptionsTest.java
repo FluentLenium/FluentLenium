@@ -11,7 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -29,9 +29,9 @@ public class WaitHookOptionsTest {
 
     @Test
     public void testDefaultValues() {
-        assertThat(waitHookOptions.getAtMost()).isNull();
+        assertThat(waitHookOptions.getAtMost()).isEqualTo(5000L);
         assertThat(waitHookOptions.getTimeUnit()).isEqualTo(TimeUnit.MILLISECONDS);
-        assertThat(waitHookOptions.getPollingEvery()).isNull();
+        assertThat(waitHookOptions.getPollingEvery()).isEqualTo(500L);
         assertThat(waitHookOptions.getPollingTimeUnit()).isEqualTo(TimeUnit.MILLISECONDS);
         assertThat(waitHookOptions.getIgnoreAll()).isEmpty();
         assertThat(waitHookOptions.isWithNoDefaultsException()).isFalse();

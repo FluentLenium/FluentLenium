@@ -2,9 +2,9 @@ package org.fluentlenium.adapter;
 
 import static org.assertj.core.api.Fail.fail;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isNull;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -77,7 +77,7 @@ public class FluentTestRunnerAdapterTest {
             FileUtils.deleteDirectory(tmpDirectory.toFile());
         }
 
-        verify(adapter).failed(isNull(Throwable.class), eq(adapter.getClass()), anyString());
+        verify(adapter).failed(isNull(), eq(adapter.getClass()), anyString());
 
         verify(adapter, never()).takeScreenshot();
         verify(adapter, never()).takeScreenshot(anyString());
@@ -109,7 +109,7 @@ public class FluentTestRunnerAdapterTest {
         } finally {
             FileUtils.deleteDirectory(tmpDirectory.toFile());
         }
-        verify(adapter).failed(isNull(Throwable.class), eq(adapter.getClass()), anyString());
+        verify(adapter).failed(isNull(), eq(adapter.getClass()), anyString());
 
         verify(adapter, never()).takeScreenshot();
         verify(adapter).takeScreenshot(anyString());

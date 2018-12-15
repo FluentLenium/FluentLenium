@@ -33,7 +33,7 @@ public class UrlTemplateTest {
 
         urlParametersTemplate.clear();
 
-        assertThatThrownBy(() -> urlParametersTemplate.render()).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(urlParametersTemplate::render).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Value for parameter param1 is missing");
     }
 

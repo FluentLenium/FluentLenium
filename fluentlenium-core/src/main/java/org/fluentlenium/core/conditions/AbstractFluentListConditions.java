@@ -1,9 +1,10 @@
 package org.fluentlenium.core.conditions;
 
+import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentWebElement;
+
 import java.util.List;
 import java.util.function.Predicate;
-
-import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
  * Abstract class conditions on list of elements.
@@ -24,10 +25,17 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean size(int size) {
-        if (negation) {
-            return elements.size() != size;
+        int elementsSize;
+        if (elements instanceof FluentList) {
+            elementsSize = ((FluentList) elements).count();
+        } else {
+            elementsSize = elements.size();
         }
-        return elements.size() == size;
+
+        if (negation) {
+            return elementsSize != size;
+        }
+        return elementsSize == size;
     }
 
     /**
