@@ -435,36 +435,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public FluentList<E> $(String selector, SearchFilter... filters) {
-        return find(selector, filters);
-    }
-
-    @Override
-    public E el(String selector, SearchFilter... filters) {
-        return find(selector, filters).first();
-    }
-
-    @Override
-    public FluentList<E> $(SearchFilter... filters) {
-        return find(filters);
-    }
-
-    @Override
-    public E el(SearchFilter... filters) {
-        return find(filters).first();
-    }
-
-    @Override
-    public FluentList<E> $(By locator, SearchFilter... filters) {
-        return find(locator, filters);
-    }
-
-    @Override
-    public E el(By locator, SearchFilter... filters) {
-        return find(locator, filters).first();
-    }
-
-    @Override
     public FluentList<E> find(List<WebElement> rawElements) {
         return (FluentList<E>) control.find(rawElements);
     }

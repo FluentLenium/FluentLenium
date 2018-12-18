@@ -9,10 +9,10 @@ import org.fluentlenium.core.action.FluentJavascriptActionsImpl;
 import org.fluentlenium.core.action.InputControl;
 import org.fluentlenium.core.action.KeyboardElementActions;
 import org.fluentlenium.core.action.MouseElementActions;
-import org.fluentlenium.core.dom.Dom;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
+import org.fluentlenium.core.dom.Dom;
 import org.fluentlenium.core.hook.HookControl;
 import org.fluentlenium.core.hook.HookControlImpl;
 import org.fluentlenium.core.hook.HookDefinition;
@@ -38,7 +38,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Stack;
-import java.util.function.Supplier;
 
 /**
  * Wraps a Selenium {@link WebElement}. It provides an enhanced API to control selenium element.
@@ -413,36 +412,6 @@ public class FluentWebElement extends Component
      */
     public FluentList<FluentWebElement> asList() {
         return instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, Arrays.asList(webElement));
-    }
-
-    @Override
-    public FluentList<FluentWebElement> $(String selector, SearchFilter... filters) {
-        return find(selector, filters);
-    }
-
-    @Override
-    public FluentWebElement el(String selector, SearchFilter... filters) {
-        return find(selector, filters).first();
-    }
-
-    @Override
-    public FluentList<FluentWebElement> $(SearchFilter... filters) {
-        return find(filters);
-    }
-
-    @Override
-    public FluentWebElement el(SearchFilter... filters) {
-        return find(filters).first();
-    }
-
-    @Override
-    public FluentList<FluentWebElement> $(By locator, SearchFilter... filters) {
-        return find(locator, filters);
-    }
-
-    @Override
-    public FluentWebElement el(By locator, SearchFilter... filters) {
-        return find(locator, filters).first();
     }
 
     @Override
