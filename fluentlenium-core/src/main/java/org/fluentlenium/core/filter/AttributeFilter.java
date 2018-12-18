@@ -6,6 +6,7 @@ import org.fluentlenium.core.filter.matcher.EqualMatcher;
 import org.fluentlenium.core.search.SearchFilter;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -60,29 +61,25 @@ public class AttributeFilter implements SearchFilter {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("with ").append(getAttribute());
 
-        String matcherRepr = matcher == null ? null : matcher.toString();
-        if (matcherRepr != null) {
-            stringBuilder.append(' ').append(matcherRepr).append(' ');
-        }
+        Optional.ofNullable(matcher)
+            .map(AbstractMatcher::toString)
+            .ifPresent(matcherRepr -> stringBuilder.append(' ').append(matcherRepr));
 
-        stringBuilder.append('"').append(matcher.getValue()).append('"');
-
-        return stringBuilder.toString();
+        return stringBuilder.append(' ').append('"').append(matcher.getValue()).append('"').toString();
     }
 
     @Override
     public String getCssFilter() {
-        String matcherAttribute = matcher == null ? null : matcher.getMatcherSymbol();
-        if (matcherAttribute == null) {
-            matcherAttribute = "";
-        }
+        String matcherAttribute = Optional.ofNullable(matcher).map(AbstractMatcher::getMatcherSymbol).orElse("");
         return "[" + getAttribute() + matcherAttribute + "=\"" + matcher.getValue() + "\"]";
     }
 
     @Override
     public boolean isCssFilterSupported() {
-        return matcher != null && matcher.isCssFilterSupported() && !"text".equalsIgnoreCase(getAttribute()) && !"textContent"
-                .equalsIgnoreCase(getAttribute());
+        return matcher != null
+            && matcher.isCssFilterSupported()
+            && !"text".equalsIgnoreCase(getAttribute())
+            && !"textContent".equalsIgnoreCase(getAttribute());
     }
 
     @Override
