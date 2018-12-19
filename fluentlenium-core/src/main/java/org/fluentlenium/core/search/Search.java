@@ -170,42 +170,7 @@ public class Search implements SearchControl<FluentWebElement> {
     }
 
     @Override
-    public FluentList<FluentWebElement> $(String selector, SearchFilter... filters) {
-        return find(selector, filters);
-    }
-
-    @Override
-    public FluentWebElement el(String selector, SearchFilter... filters) {
-        return find(selector, filters).first();
-    }
-
-    @Override
-    public FluentList<FluentWebElement> $(SearchFilter... filters) {
-        return find(filters);
-    }
-
-    @Override
-    public FluentWebElement el(SearchFilter... filters) {
-        return find(filters).first();
-    }
-
-    @Override
-    public FluentList<FluentWebElement> $(By locator, SearchFilter... filters) {
-        return find(locator, filters);
-    }
-
-    @Override
-    public FluentWebElement el(By locator, SearchFilter... filters) {
-        return find(locator, filters).first();
-    }
-
-    @Override
     public FluentWebElement el(WebElement rawElement) {
         return find(Arrays.asList(rawElement)).first();
-    }
-
-    @Override
-    public FluentList<FluentWebElement> $(List<WebElement> rawElements) {
-        return find(rawElements);
     }
 }

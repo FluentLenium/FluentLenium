@@ -347,36 +347,6 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
     }
 
     @Override
-    public FluentList<FluentWebElement> $(String selector, SearchFilter... filters) {
-        return find(selector, filters);
-    }
-
-    @Override
-    public FluentWebElement el(String selector, SearchFilter... filters) {
-        return find(selector, filters).first();
-    }
-
-    @Override
-    public FluentList<FluentWebElement> $(SearchFilter... filters) {
-        return find(filters);
-    }
-
-    @Override
-    public FluentWebElement el(SearchFilter... filters) {
-        return find(filters).first();
-    }
-
-    @Override
-    public FluentList<FluentWebElement> $(By locator, SearchFilter... filters) {
-        return find(locator, filters);
-    }
-
-    @Override
-    public FluentWebElement el(By locator, SearchFilter... filters) {
-        return find(locator, filters).first();
-    }
-
-    @Override
     public FluentList<FluentWebElement> find(String selector, SearchFilter... filters) {
         return getSearch().find(selector, filters);
     }

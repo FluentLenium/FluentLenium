@@ -15,6 +15,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
@@ -380,6 +382,21 @@ public class FluentListImplTest {
     public void testAs() {
         FluentList<Component> as = list.as(Component.class);
         assertThat(as).hasSameSizeAs(list);
+    }
+
+    @Test
+    public void testToElements() {
+        WebElement webElement1 = mock(WebElement.class);
+        WebElement webElement2 = mock(WebElement.class);
+        WebElement webElement3 = mock(WebElement.class);
+
+        when(element1.getElement()).thenReturn(webElement1);
+        when(element2.getElement()).thenReturn(webElement2);
+        when(element3.getElement()).thenReturn(webElement3);
+
+        List<WebElement> expectedElements = List.of(webElement1, webElement2, webElement3);
+
+        assertThat(list.toElements()).containsExactlyInAnyOrderElementsOf(expectedElements);
     }
 
     private static class Component extends FluentWebElement {
