@@ -94,12 +94,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public List<WebElement> toElements() {
-        ArrayList<WebElement> elements = new ArrayList<>();
-
-        for (FluentWebElement fluentElement : this) {
-            elements.add(fluentElement.getElement());
-        }
-        return elements;
+        return this.stream().map(FluentWebElement::getElement).collect(toList());
     }
 
     @Override
