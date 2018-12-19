@@ -446,27 +446,23 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> find(String selector, SearchFilter... filters) {
-        List<E> finds = new ArrayList<>();
-        for (FluentWebElement e : this) {
-            finds.addAll((Collection<E>) e.find(selector, filters));
-        }
-        return instantiator.newComponentList(getClass(), componentClass, finds);
+        return findBy(e -> (Collection<E>) e.find(selector, filters));
     }
 
     @Override
     public FluentList<E> find(By locator, SearchFilter... filters) {
-        List<E> finds = new ArrayList<>();
-        for (FluentWebElement e : this) {
-            finds.addAll((Collection<E>) e.find(locator, filters));
-        }
-        return instantiator.newComponentList(getClass(), componentClass, finds);
+        return findBy(e -> (Collection<E>) e.find(locator, filters));
     }
 
     @Override
     public FluentList<E> find(SearchFilter... filters) {
+        return findBy(e -> (Collection<E>) e.find(filters));
+    }
+
+    private FluentList<E> findBy(Function<FluentWebElement, Collection<E>> filteredElementsFinder) {
         List<E> finds = new ArrayList<>();
         for (FluentWebElement e : this) {
-            finds.addAll((Collection<E>) e.find(filters));
+            finds.addAll(filteredElementsFinder.apply(e));
         }
         return instantiator.newComponentList(getClass(), componentClass, finds);
     }
