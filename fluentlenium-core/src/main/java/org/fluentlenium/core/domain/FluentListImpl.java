@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
@@ -33,6 +32,8 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import lombok.experimental.Delegate;
 
+import static java.util.stream.Collectors.toList;
+
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
  *
@@ -54,8 +55,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
      * @param control        control interface
      * @param instantiator   component instantiator
      */
-    public FluentListImpl(Class<E> componentClass, List<E> list, FluentControl control,
-                          ComponentInstantiator instantiator) {
+    public FluentListImpl(Class<E> componentClass, List<E> list, FluentControl control, ComponentInstantiator instantiator) {
         super(componentClass, list, control, instantiator);
         hookControl = new HookControlImpl<>(this, proxy, control, instantiator, (Supplier<FluentList<E>>) () -> {
             LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(proxy);
@@ -64,7 +64,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             return instantiator.asComponentList(getClass(), componentClass, webElementList);
         });
         label = new FluentLabelImpl<>(this, list::toString);
-        javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new Supplier<FluentWebElement>() {
+        javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new Supplier<>() {
             @Override
             public FluentWebElement get() {
                 return first();
@@ -396,37 +396,37 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public List<String> values() {
-        return stream().map(FluentWebElement::value).collect(Collectors.toList());
+        return stream().map(FluentWebElement::value).collect(toList());
     }
 
     @Override
     public List<String> ids() {
-        return stream().map(FluentWebElement::id).collect(Collectors.toList());
+        return stream().map(FluentWebElement::id).collect(toList());
     }
 
     @Override
     public List<String> attributes(String attribute) {
-        return stream().map(webElement -> webElement.attribute(attribute)).collect(Collectors.toList());
+        return stream().map(webElement -> webElement.attribute(attribute)).collect(toList());
     }
 
     @Override
     public List<String> names() {
-        return stream().map(FluentWebElement::name).collect(Collectors.toList());
+        return stream().map(FluentWebElement::name).collect(toList());
     }
 
     @Override
     public List<String> tagNames() {
-        return stream().map(FluentWebElement::tagName).collect(Collectors.toList());
+        return stream().map(FluentWebElement::tagName).collect(toList());
     }
 
     @Override
     public List<String> textContents() {
-        return stream().map(FluentWebElement::textContent).collect(Collectors.toList());
+        return stream().map(FluentWebElement::textContent).collect(toList());
     }
 
     @Override
     public List<String> texts() {
-        return stream().map(FluentWebElement::text).collect(Collectors.toList());
+        return stream().map(FluentWebElement::text).collect(toList());
     }
 
     @Override
@@ -498,13 +498,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public <T extends FluentWebElement> FluentList<T> as(Class<T> componentClass) {
-        List<T> elements = new ArrayList<>();
-
-        for (E e : this) {
-            elements.add(e.as(componentClass));
-        }
-
-        return instantiator.newComponentList(getClass(), componentClass, elements);
+        return instantiator
+                .newComponentList(getClass(), componentClass, this.stream().map(e -> e.as(componentClass)).collect(toList()));
     }
 
     @Override
