@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import org.fluentlenium.core.FluentControl;
@@ -25,12 +27,12 @@ import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWaitElementList;
 import org.fluentlenium.utils.SupplierOfInstance;
+
+import lombok.experimental.Delegate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
-
-import lombok.experimental.Delegate;
 
 import static java.util.stream.Collectors.toList;
 
@@ -106,29 +108,20 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     public E first() {
         if (!LocatorProxies.loaded(proxy)) {
             E component = instantiator.newComponent(componentClass, LocatorProxies.first(proxy));
-            if (component instanceof FluentLabel) {
-                component.withLabel(label.getLabel());
-                component.withLabelHint(label.getLabelHints());
-            }
-            if (component instanceof HookControl) {
-                for (HookDefinition definition : hookControl.getHookDefinitions()) {
-                    component.withHook(definition.getHookClass(), definition.getOptions());
-                }
-            }
+            configureComponentWithLabel(component);
+            configureComponentWithHooks(component);
             return component;
         }
-        if (size() == 0) {
-            throw LocatorProxies.noSuchElement(proxy);
-        }
+        validateListIsNotEmpty();
         return get(0);
     }
 
     @Override
     public E single() {
         if (size() > 1) {
-            throw new AssertionError(String.format("%s list should contain one " +
-                    "element only but there are [ %s ] elements instead",
-                    LocatorProxies.getMessageContext(proxy), size()));
+            throw new AssertionError(
+                    String.format("%s list should contain one element only but there are [ %s ] elements instead",
+                            LocatorProxies.getMessageContext(proxy), size()));
         }
 
         return first();
@@ -138,20 +131,11 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     public E last() {
         if (!LocatorProxies.loaded(proxy)) {
             E component = instantiator.newComponent(componentClass, LocatorProxies.last(proxy));
-            if (component instanceof FluentLabel) {
-                component.withLabel(label.getLabel());
-                component.withLabelHint(label.getLabelHints());
-            }
-            if (component instanceof HookControl) {
-                for (HookDefinition definition : hookControl.getHookDefinitions()) {
-                    component.withHook(definition.getHookClass(), definition.getOptions());
-                }
-            }
+            configureComponentWithLabel(component);
+            configureComponentWithHooks(component);
             return component;
         }
-        if (size() == 0) {
-            throw LocatorProxies.noSuchElement(proxy);
-        }
+        validateListIsNotEmpty();
         return get(size() - 1);
     }
 
@@ -159,15 +143,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     public E index(int index) {
         if (!LocatorProxies.loaded(proxy)) {
             E component = instantiator.newComponent(componentClass, LocatorProxies.index(proxy, index));
-            if (component instanceof FluentLabel) {
-                component.withLabel(label.getLabel());
-                component.withLabelHint(label.getLabelHints());
-            }
-            if (component instanceof HookControl) {
-                for (HookDefinition definition : hookControl.getHookDefinitions()) {
-                    component.withHook(definition.getHookClass(), definition.getOptions());
-                }
-            }
+            configureComponentWithLabel(component);
+            configureComponentWithHooks(component);
             if (component instanceof FluentWebElement) {
                 component.setHookRestoreStack(hookControl.getHookRestoreStack());
             }
@@ -199,9 +176,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Override
     public FluentList<E> now() {
         LocatorProxies.now(this);
-        if (size() == 0) {
-            throw LocatorProxies.noSuchElement(proxy);
-        }
+        validateListIsNotEmpty();
         return this;
     }
 
@@ -260,9 +235,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList write(String... with) {
-        if (size() == 0) {
-            throw LocatorProxies.noSuchElement(proxy);
-        }
+        validateListIsNotEmpty();
 
         boolean atLeastOne = false;
         if (with.length > 0) {
@@ -294,9 +267,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> clearAll() {
-        if (size() == 0) {
-            throw LocatorProxies.noSuchElement(proxy);
-        }
+        validateListIsNotEmpty();
 
         boolean atLeastOne = false;
         for (E fluentWebElement : this) {
@@ -343,9 +314,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> submit() {
-        if (size() == 0) {
-            throw LocatorProxies.noSuchElement(proxy);
-        }
+        validateListIsNotEmpty();
 
         boolean atLeastOne = false;
         for (E fluentWebElement : this) {
@@ -474,6 +443,26 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Override
     public String toString() {
         return label.toString();
+    }
+
+    private void configureComponentWithHooks(E component) {
+        if (component instanceof HookControl) {
+            for (HookDefinition definition : hookControl.getHookDefinitions()) {
+                component.withHook(definition.getHookClass(), definition.getOptions());
+            }
+        }
+    }
+
+    private void configureComponentWithLabel(E component) {
+        if (component instanceof FluentLabel) {
+            component.withLabel(label.getLabel());
+            component.withLabelHint(label.getLabelHints());
+        }
+    }
+    private void validateListIsNotEmpty() {
+        if (size() == 0) {
+            throw LocatorProxies.noSuchElement(proxy);
+        }
     }
 }
 
