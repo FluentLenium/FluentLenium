@@ -225,66 +225,34 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public FluentList click() {
-        if (size() == 0) {
-            throw LocatorProxies.noSuchElement(proxy);
-        }
-
-        boolean atLeastOne = false;
-        for (E fluentWebElement : this) {
-            if (fluentWebElement.conditions().clickable()) {
-                atLeastOne = true;
-                fluentWebElement.click();
-            }
-        }
-
-        if (!atLeastOne) {
-            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element clickable."
-                    + " At least one element should be clickable to perform a click.");
-        }
-
-        return this;
+    public FluentList<E> click() {
+        return doClick(FluentWebElement::click, "click");
     }
 
     @Override
-    public FluentList doubleClick() {
-        if (size() == 0) {
-            throw LocatorProxies.noSuchElement(proxy);
-        }
-
-        boolean atLeastOne = false;
-        for (E fluentWebElement : this) {
-            if (fluentWebElement.conditions().clickable()) {
-                atLeastOne = true;
-                fluentWebElement.doubleClick();
-            }
-        }
-
-        if (!atLeastOne) {
-            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element clickable."
-                    + " At least one element should be clickable to perform a double click.");
-        }
-
-        return this;
+    public FluentList<E> doubleClick() {
+        return doClick(FluentWebElement::doubleClick, "double click");
     }
 
     @Override
     public FluentList<E> contextClick() {
-        if (size() == 0) {
-            throw LocatorProxies.noSuchElement(proxy);
-        }
+        return doClick(FluentWebElement::contextClick, "context click");
+    }
+
+    private FluentList<E> doClick(Consumer<FluentWebElement> clickAction, String clickType) {
+        validateListIsNotEmpty();
 
         boolean atLeastOne = false;
         for (E fluentWebElement : this) {
             if (fluentWebElement.conditions().clickable()) {
                 atLeastOne = true;
-                fluentWebElement.contextClick();
+                clickAction.accept(fluentWebElement);
             }
         }
 
         if (!atLeastOne) {
-            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element clickable."
-                    + " At least one element should be clickable to perform a context click.");
+            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy)
+                    + " has no element clickable. At least one element should be clickable to perform a " + clickType + ".");
         }
 
         return this;
