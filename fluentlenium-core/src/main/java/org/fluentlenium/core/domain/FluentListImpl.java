@@ -214,25 +214,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         return doClick(FluentWebElement::contextClick, "context click");
     }
 
-    private FluentList<E> doClick(Consumer<FluentWebElement> clickAction, String clickType) {
-        validateListIsNotEmpty();
-
-        boolean atLeastOne = false;
-        for (E fluentWebElement : this) {
-            if (fluentWebElement.conditions().clickable()) {
-                atLeastOne = true;
-                clickAction.accept(fluentWebElement);
-            }
-        }
-
-        if (!atLeastOne) {
-            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy)
-                    + " has no element clickable. At least one element should be clickable to perform a " + clickType + ".");
-        }
-
-        return this;
-    }
-
     @Override
     public FluentList write(String... with) {
         validateListIsNotEmpty();
@@ -396,14 +377,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         return findBy(e -> (Collection<E>) e.find(filters));
     }
 
-    private FluentList<E> findBy(Function<FluentWebElement, Collection<E>> filteredElementsFinder) {
-        List<E> finds = new ArrayList<>();
-        for (FluentWebElement e : this) {
-            finds.addAll(filteredElementsFinder.apply(e));
-        }
-        return instantiator.newComponentList(getClass(), componentClass, finds);
-    }
-
     @Override
     public Fill fill() {
         return new Fill(this);
@@ -459,10 +432,38 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             component.withLabelHint(label.getLabelHints());
         }
     }
+
+    private FluentList<E> doClick(Consumer<FluentWebElement> clickAction, String clickType) {
+        validateListIsNotEmpty();
+
+        boolean atLeastOne = false;
+        for (E fluentWebElement : this) {
+            if (fluentWebElement.conditions().clickable()) {
+                atLeastOne = true;
+                clickAction.accept(fluentWebElement);
+            }
+        }
+
+        if (!atLeastOne) {
+            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy)
+                    + " has no element clickable. At least one element should be clickable to perform a " + clickType + ".");
+        }
+
+        return this;
+    }
+
     private void validateListIsNotEmpty() {
         if (size() == 0) {
             throw LocatorProxies.noSuchElement(proxy);
         }
+    }
+
+    private FluentList<E> findBy(Function<FluentWebElement, Collection<E>> filteredElementsFinder) {
+        List<E> finds = new ArrayList<>();
+        for (FluentWebElement e : this) {
+            finds.addAll(filteredElementsFinder.apply(e));
+        }
+        return instantiator.newComponentList(getClass(), componentClass, finds);
     }
 }
 
