@@ -1,9 +1,12 @@
 package org.fluentlenium.core.action;
 
-import org.fluentlenium.core.domain.FluentList;
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.Select;
+
+import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentWebElement;
+
+import java.util.function.Consumer;
 
 /**
  * Select form filling features.
@@ -38,26 +41,6 @@ public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
     }
 
     /**
-     * Select all options that have a value matching the argument for the Select element.
-     *
-     * @param value the select matching string
-     * @return fill select constructor
-     */
-    public FillSelect withValue(String value) {
-        FluentList<E> elements = getElements();
-
-        if (elements.size() == 0) {
-            throw new NoSuchElementException("No select element found");
-        }
-
-        for (FluentWebElement element : elements) {
-            Select select = new Select(element.getElement());
-            select.selectByValue(value);
-        }
-        return this;
-    }
-
-    /**
      * Select the option by its index for the Select element.
      *
      * @param index the select index value
@@ -82,12 +65,26 @@ public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
     }
 
     /**
+     * Select all options that have a value matching the argument for the Select element.
+     *
+     * @param value the select matching string
+     * @return fill select constructor
+     */
+    public FillSelect withValue(String value) {
+        return doSelect(select -> select.selectByValue(value));
+    }
+
+    /**
      * Select all options that display text matching the argument for the Select element.
      *
      * @param text the select string part
      * @return fill select constructor
      */
     public FillSelect withText(String text) {
+        return doSelect(select -> select.selectByVisibleText(text));
+    }
+
+    private FillSelect doSelect(Consumer<Select> elementSelector) {
         FluentList<E> elements = getElements();
 
         if (elements.size() == 0) {
@@ -96,7 +93,7 @@ public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
 
         for (FluentWebElement element : elements) {
             Select select = new Select(element.getElement());
-            select.selectByVisibleText(text);
+            elementSelector.accept(select);
         }
 
         return this;
