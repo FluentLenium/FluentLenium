@@ -42,7 +42,7 @@ public class FluentInjectorElementTest {
         fluentAdapter.initFluent(webDriver);
 
         injector = new FluentInjector(fluentAdapter, null, new ComponentsManager(fluentAdapter),
-                new DefaultContainerInstanciator(fluentAdapter));
+                new DefaultContainerInstantiator(fluentAdapter));
     }
 
     @After

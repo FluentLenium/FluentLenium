@@ -25,7 +25,7 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.ComponentsEventsRegistry;
 import org.fluentlenium.core.events.EventsRegistry;
-import org.fluentlenium.core.inject.DefaultContainerInstanciator;
+import org.fluentlenium.core.inject.DefaultContainerInstantiator;
 import org.fluentlenium.core.inject.FluentInjector;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
@@ -102,7 +102,7 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
         }
         mouseActions = new MouseActions(driver);
         keyboardActions = new KeyboardActions(driver);
-        fluentInjector = new FluentInjector(adapter, events, componentsManager, new DefaultContainerInstanciator(this));
+        fluentInjector = new FluentInjector(adapter, events, componentsManager, new DefaultContainerInstantiator(this));
         cssControl = new CssControlImpl(adapter, adapter);
         windowAction = new WindowAction(adapter, componentsManager.getInstantiator(), driver);
 
