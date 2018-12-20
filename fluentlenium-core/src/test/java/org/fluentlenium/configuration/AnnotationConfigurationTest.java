@@ -1,11 +1,12 @@
 package org.fluentlenium.configuration;
 
 import org.assertj.core.api.Assertions;
-import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationDefaults;
-import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationDefaults;
+import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
 
 public class AnnotationConfigurationTest {
     private static AnnotationConfiguration configuration;
@@ -21,7 +22,8 @@ public class AnnotationConfigurationTest {
             ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL, htmlDumpPath = "/html-path", implicitlyWait = 1000,
             pageLoadTimeout = 2000, awaitPollingEvery = 10, awaitAtMost = 100, screenshotMode = ConfigurationProperties
             .TriggerMode.MANUAL, screenshotPath = "/screenshot-path", scriptTimeout = 3000, webDriver = "firefox", custom =
-            @CustomProperty(name = "key", value = "value"))
+            @CustomProperty(name = "key", value = "value"), driverLifecycle = ConfigurationProperties.DriverLifecycle.METHOD,
+            browserTimeout = 5000L, browserTimeoutRetries = 3, deleteCookies = FluentConfiguration.BooleanValue.TRUE)
     public static class ConfiguredClass {
     }
 
@@ -57,8 +59,18 @@ public class AnnotationConfigurationTest {
     }
 
     @Test
+    public void defaultConfigurationFactory() {
+        Assertions.assertThat(defaultConfiguration.getConfigurationFactory()).isNull();
+    }
+
+    @Test
     public void configurationDefaults() {
         Assertions.assertThat(configuration.getConfigurationDefaults()).isEqualTo(DummyConfigurationDefaults.class);
+    }
+
+    @Test
+    public void defaultConfigurationDefaults() {
+        Assertions.assertThat(defaultConfiguration.getConfigurationDefaults()).isNull();
     }
 
     @Test
@@ -105,6 +117,38 @@ public class AnnotationConfigurationTest {
     @Test
     public void capabilitiesFactory() {
         Assertions.assertThat(capabilitiesFactoryConfiguration.getCapabilities()).isExactlyInstanceOf(TestCapabilities.class);
+    }
+
+    @Test
+    public void driverLifecycle() {
+        Assertions.assertThat(noConfiguration.getDriverLifecycle()).isNull();
+        Assertions.assertThat(defaultConfiguration.getDriverLifecycle()).isNull();
+
+        Assertions.assertThat(configuration.getDriverLifecycle()).isEqualTo(ConfigurationProperties.DriverLifecycle.METHOD);
+    }
+
+    @Test
+    public void browserTimeout() {
+        Assertions.assertThat(noConfiguration.getBrowserTimeout()).isNull();
+        Assertions.assertThat(defaultConfiguration.getBrowserTimeout()).isEqualTo(60000L);
+
+        Assertions.assertThat(configuration.getBrowserTimeout()).isEqualTo(5000L);
+    }
+
+    @Test
+    public void browserTimeoutRetries() {
+        Assertions.assertThat(noConfiguration.getBrowserTimeoutRetries()).isNull();
+        Assertions.assertThat(defaultConfiguration.getBrowserTimeoutRetries()).isEqualTo(2);
+
+        Assertions.assertThat(configuration.getBrowserTimeoutRetries()).isEqualTo(3);
+    }
+
+    @Test
+    public void deleteCookies() {
+        Assertions.assertThat(noConfiguration.getDeleteCookies()).isNull();
+        Assertions.assertThat(defaultConfiguration.getDeleteCookies()).isNull();
+
+        Assertions.assertThat(configuration.getDeleteCookies()).isTrue();
     }
 
     @Test
