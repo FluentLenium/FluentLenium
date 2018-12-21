@@ -3,6 +3,10 @@ package org.fluentlenium.core.inject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.apache.commons.lang3.ArrayUtils;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.pagefactory.ElementLocator;
+
 import org.fluentlenium.core.FluentContainer;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.annotation.Page;
@@ -23,9 +27,6 @@ import org.fluentlenium.core.hook.HookOptions;
 import org.fluentlenium.core.hook.NoHook;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.utils.ReflectionUtils;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -51,7 +52,7 @@ public class FluentInjector implements FluentInjectControl {
 
     private final FluentControl fluentControl;
     private final ComponentsManager componentsManager;
-    private final ContainerInstanciator containerInstanciator;
+    private final ContainerInstantiator containerInstantiator;
     private final DefaultHookChainBuilder hookChainBuilder;
     private final EventsRegistry eventsRegistry;
 
@@ -61,14 +62,14 @@ public class FluentInjector implements FluentInjectControl {
      * @param control           control interface
      * @param eventsRegistry    events registry
      * @param componentsManager components manager
-     * @param instanciator      container instantiator
+     * @param instantiator      container instantiator
      */
     public FluentInjector(FluentControl control, EventsRegistry eventsRegistry, ComponentsManager componentsManager,
-            ContainerInstanciator instanciator) {
+            ContainerInstantiator instantiator) {
         fluentControl = control;
         this.eventsRegistry = eventsRegistry;
         this.componentsManager = componentsManager;
-        containerInstanciator = instanciator;
+        containerInstantiator = instantiator;
         hookChainBuilder = new DefaultHookChainBuilder(control, componentsManager.getInstantiator());
     }
 
@@ -87,7 +88,7 @@ public class FluentInjector implements FluentInjectControl {
 
     @Override
     public <T> T newInstance(Class<T> cls) {
-        T container = containerInstanciator.newInstance(cls, null);
+        T container = containerInstantiator.newInstance(cls, null);
         inject(container);
         return container;
     }
@@ -176,7 +177,7 @@ public class FluentInjector implements FluentInjectControl {
                     Class fieldClass = field.getType();
                     Object existingChildContainer = containerInstances.get(fieldClass);
                     if (existingChildContainer == null) {
-                        Object childContainer = containerInstanciator.newInstance(fieldClass, containerContexts.get(container));
+                        Object childContainer = containerInstantiator.newInstance(fieldClass, containerContexts.get(container));
                         initContainer(childContainer, container, searchContext);
                         try {
                             ReflectionUtils.set(field, container, childContainer);

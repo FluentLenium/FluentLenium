@@ -5,6 +5,8 @@ import org.openqa.selenium.Capabilities;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
 
 /**
  * A configuration composed with a writable configuration and list of read configurations.
@@ -54,232 +56,114 @@ public class ComposedConfiguration implements Configuration {
 
     @Override
     public Class<? extends ConfigurationFactory> getConfigurationFactory() {
-        for (ConfigurationProperties configuration : configurations) {
-            Class<? extends ConfigurationFactory> configurationFactory = configuration.getConfigurationFactory();
-            if (configurationFactory != null) {
-                return configurationFactory;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getConfigurationFactory);
     }
 
     @Override
     public Class<? extends ConfigurationProperties> getConfigurationDefaults() {
-        for (ConfigurationProperties configuration : configurations) {
-            Class<? extends ConfigurationProperties> configurationDefaults = configuration.getConfigurationDefaults();
-            if (configurationDefaults != null) {
-                return configurationDefaults;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getConfigurationDefaults);
     }
 
     @Override
     public String getWebDriver() {
-        for (ConfigurationProperties configuration : configurations) {
-            String webDriver = configuration.getWebDriver();
-            if (webDriver != null) {
-                return webDriver;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getWebDriver);
     }
 
     @Override
     public String getRemoteUrl() {
-        for (ConfigurationProperties configuration : configurations) {
-            String remoteUrl = configuration.getRemoteUrl();
-            if (remoteUrl != null) {
-                return remoteUrl;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getRemoteUrl);
     }
 
     @Override
     public Capabilities getCapabilities() {
-        for (ConfigurationProperties configuration : configurations) {
-            Capabilities capabilities = configuration.getCapabilities();
-            if (capabilities != null) {
-                return capabilities;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getCapabilities);
     }
 
     @Override
     public DriverLifecycle getDriverLifecycle() {
-        for (ConfigurationProperties configuration : configurations) {
-            DriverLifecycle driverLifecycle = configuration.getDriverLifecycle();
-            if (driverLifecycle != null) {
-                return driverLifecycle;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getDriverLifecycle);
     }
 
     @Override
     public Long getBrowserTimeout() {
-        for (ConfigurationProperties configuration : configurations) {
-            Long browserTimeout = configuration.getBrowserTimeout();
-            if (browserTimeout != null) {
-                return browserTimeout;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getBrowserTimeout);
     }
 
     @Override
     public Integer getBrowserTimeoutRetries() {
-        for (ConfigurationProperties configuration : configurations) {
-            Integer browserTimeoutRetries = configuration.getBrowserTimeoutRetries();
-            if (browserTimeoutRetries != null) {
-                return browserTimeoutRetries;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getBrowserTimeoutRetries);
     }
 
     @Override
     public Boolean getDeleteCookies() {
-        for (ConfigurationProperties configuration : configurations) {
-            Boolean deleteCookies = configuration.getDeleteCookies();
-            if (deleteCookies != null) {
-                return deleteCookies;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getDeleteCookies);
     }
 
     @Override
     public String getBaseUrl() {
-        for (ConfigurationProperties configuration : configurations) {
-            String baseUrl = configuration.getBaseUrl();
-            if (baseUrl != null) {
-                return baseUrl;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getBaseUrl);
     }
 
     @Override
     public Long getPageLoadTimeout() {
-        for (ConfigurationProperties configuration : configurations) {
-            Long pageLoadTimeout = configuration.getPageLoadTimeout();
-            if (pageLoadTimeout != null) {
-                return pageLoadTimeout;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getPageLoadTimeout);
     }
 
     @Override
     public Long getImplicitlyWait() {
-        for (ConfigurationProperties configuration : configurations) {
-            Long implicitlyWait = configuration.getImplicitlyWait();
-            if (implicitlyWait != null) {
-                return implicitlyWait;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getImplicitlyWait);
     }
 
     @Override
     public Long getScriptTimeout() {
-        for (ConfigurationProperties configuration : configurations) {
-            Long scriptTimeout = configuration.getScriptTimeout();
-            if (scriptTimeout != null) {
-                return scriptTimeout;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getScriptTimeout);
     }
 
     @Override
     public Long getAwaitAtMost() {
-        for (ConfigurationProperties configuration : configurations) {
-            Long awaitAtMost = configuration.getAwaitAtMost();
-            if (awaitAtMost != null) {
-                return awaitAtMost;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getAwaitAtMost);
     }
 
     @Override
     public Long getAwaitPollingEvery() {
-        for (ConfigurationProperties configuration : configurations) {
-            Long awaitPollingEvery = configuration.getAwaitPollingEvery();
-            if (awaitPollingEvery != null) {
-                return awaitPollingEvery;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getAwaitPollingEvery);
     }
 
     @Override
     public Boolean getEventsEnabled() {
-        for (ConfigurationProperties configuration : configurations) {
-            Boolean eventsEnabled = configuration.getEventsEnabled();
-            if (eventsEnabled != null) {
-                return eventsEnabled;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getEventsEnabled);
     }
 
     @Override
     public String getScreenshotPath() {
-        for (ConfigurationProperties configuration : configurations) {
-            String screenshotPath = configuration.getScreenshotPath();
-            if (screenshotPath != null) {
-                return screenshotPath;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getScreenshotPath);
     }
 
     @Override
     public String getHtmlDumpPath() {
-        for (ConfigurationProperties configuration : configurations) {
-            String htmlDumpPath = configuration.getHtmlDumpPath();
-            if (htmlDumpPath != null) {
-                return htmlDumpPath;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getHtmlDumpPath);
     }
 
     @Override
     public TriggerMode getScreenshotMode() {
-        for (ConfigurationProperties configuration : configurations) {
-            TriggerMode screenshotMode = configuration.getScreenshotMode();
-            if (screenshotMode != null) {
-                return screenshotMode;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getScreenshotMode);
     }
 
     @Override
     public TriggerMode getHtmlDumpMode() {
-        for (ConfigurationProperties configuration : configurations) {
-            TriggerMode htmlDumpMode = configuration.getHtmlDumpMode();
-            if (htmlDumpMode != null) {
-                return htmlDumpMode;
-            }
-        }
-        return null;
+        return getConfig(ConfigurationProperties::getHtmlDumpMode);
     }
 
     @Override
     public String getCustomProperty(String propertyName) {
-        for (ConfigurationProperties configuration : configurations) {
-            String value = configuration.getCustomProperty(propertyName);
-            if (value != null) {
-                return value;
-            }
-        }
-        return null;
+        return getConfig(configuration -> configuration.getCustomProperty(propertyName));
+    }
+
+    private <T> T getConfig(Function<ConfigurationProperties, T> configProvider) {
+        return Arrays.stream(configurations)
+                .map(configProvider)
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
     }
 }

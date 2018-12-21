@@ -8,15 +8,15 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Creates container instances
  */
-public class DefaultContainerInstanciator implements ContainerInstanciator {
+public class DefaultContainerInstantiator implements ContainerInstantiator {
     private final FluentControl control;
 
     /**
-     * Creates a new container instanciator
+     * Creates a new container instantiator
      *
      * @param control FluentLenium control
      */
-    public DefaultContainerInstanciator(FluentControl control) {
+    public DefaultContainerInstantiator(FluentControl control) {
         this.control = control;
     }
 

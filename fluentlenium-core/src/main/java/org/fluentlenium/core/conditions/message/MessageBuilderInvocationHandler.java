@@ -119,10 +119,7 @@ public class MessageBuilderInvocationHandler implements InvocationHandler {
 
             validationMessage = MessageFormat.format(validationMessage, call.getArgs());
 
-            messageBuilder.append(' ');
-            messageBuilder.append(validationMessage);
-
-            return messageBuilder.toString(); // NOPMD AvoidBranchingStatementAsLastInLoop
+            return messageBuilder.append(' ').append(validationMessage).toString(); // NOPMD AvoidBranchingStatementAsLastInLoop
         }
 
         throw new IllegalStateException("No @Message/@NotMessage annotation found in the calls.");

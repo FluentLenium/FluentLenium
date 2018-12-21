@@ -5,7 +5,7 @@ import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.adapter.ThreadLocalFluentControlContainer;
 import org.fluentlenium.core.components.ComponentsManager;
-import org.fluentlenium.core.inject.DefaultContainerInstanciator;
+import org.fluentlenium.core.inject.DefaultContainerInstantiator;
 import org.fluentlenium.core.inject.FluentInjector;
 
 import static java.util.Objects.isNull;
@@ -46,7 +46,7 @@ public enum FluentTestContainer {
                 fluentAdapter = new FluentCucumberTest(controlContainer, sharedMutator);
             }
             injector = new FluentInjector(fluentAdapter, null,
-                    new ComponentsManager(fluentAdapter), new DefaultContainerInstanciator(fluentAdapter));
+                    new ComponentsManager(fluentAdapter), new DefaultContainerInstantiator(fluentAdapter));
         }
         return fluentAdapter;
     }

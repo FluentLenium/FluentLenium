@@ -71,16 +71,7 @@ public class FluentLabelImpl<T> implements FluentLabel<T>, FluentLabelProvider {
         }
 
         if (!labelHints.isEmpty()) {
-            toStringBuilder.append(" [");
-            boolean notFirst = false;
-            for (String labelHint : labelHints) {
-                if (notFirst) {
-                    toStringBuilder.append(", ");
-                }
-                toStringBuilder.append(labelHint);
-                notFirst = true;
-            }
-            toStringBuilder.append(']');
+            toStringBuilder.append(" [").append(String.join(", ", labelHints)).append(']');
         }
 
         return toStringBuilder.toString();

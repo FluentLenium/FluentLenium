@@ -1,6 +1,7 @@
 package org.fluentlenium.assertj.custom;
 
 import org.assertj.core.api.AbstractAssert;
+
 import org.fluentlenium.core.domain.FluentList;
 
 import java.util.Arrays;
@@ -37,7 +38,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     }
 
     /**
-     * check if at no element of the FluentList contains the text
+     * check if no element of the FluentList contains the text
      *
      * @param textToFind text to find
      * @return assertion object
@@ -106,16 +107,9 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
             }
         }
 
-        StringBuilder builder = new StringBuilder();
-        for (String classFromElement : classes) {
-            if (builder.length() > 0) {
-                builder.append(", ");
-            }
-            builder.append(classFromElement);
-        }
-
+        String classesFromElement = String.join(", ", classes);
         super.failWithMessage(
-                "No selected elements has class: " + classToFind + " . Actual classes found : " + builder.toString());
+                "No selected elements has class: " + classToFind + " . Actual classes found : " + classesFromElement);
         return this;
     }
 
