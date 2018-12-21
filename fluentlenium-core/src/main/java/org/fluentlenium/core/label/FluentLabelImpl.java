@@ -71,7 +71,7 @@ public class FluentLabelImpl<T> implements FluentLabel<T>, FluentLabelProvider {
         }
 
         if (!labelHints.isEmpty()) {
-            toStringBuilder.append(" [").append(String.join( ", ", labelHints)).append(']');
+            toStringBuilder.append(" [").append(String.join(", ", labelHints)).append(']');
         }
 
         return toStringBuilder.toString();
