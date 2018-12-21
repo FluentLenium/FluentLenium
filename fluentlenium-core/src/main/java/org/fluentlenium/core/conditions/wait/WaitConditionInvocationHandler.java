@@ -1,5 +1,7 @@
 package org.fluentlenium.core.conditions.wait;
 
+import org.openqa.selenium.internal.WrapsElement;
+
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.conditions.Conditions;
 import org.fluentlenium.core.conditions.ConditionsObject;
@@ -7,7 +9,6 @@ import org.fluentlenium.core.conditions.Negation;
 import org.fluentlenium.core.conditions.message.MessageContext;
 import org.fluentlenium.core.conditions.message.MessageProxy;
 import org.fluentlenium.core.wait.FluentWait;
-import org.openqa.selenium.internal.WrapsElement;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -145,7 +146,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      *
      * @param condition         condition object to wait for
      * @param messageBuilder    message builder matching the condition object
-     * @param conditionFunction condition fonction
+     * @param conditionFunction condition function
      */
     protected void until(C condition, C messageBuilder, Function<C, Boolean> conditionFunction) {
         Predicate<FluentControl> predicate = input -> conditionFunction.apply(condition);
@@ -158,9 +159,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
                 Object actualObject = ((ConditionsObject) condition).getActualObject();
 
                 if (!(actualObject instanceof WrapsElement)) {
-                    stringBuilder.append(" (actual: ");
-                    stringBuilder.append(actualObject);
-                    stringBuilder.append(')');
+                    stringBuilder.append(" (actual: ").append(actualObject).append(')');
                 }
             }
 
