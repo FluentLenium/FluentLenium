@@ -14,7 +14,7 @@
         <selenium.version>3.141.59</selenium.version>
     </properties>
 
-    <name>FluentLenium Examples Quickstart</name>
+    <name>FluentLenium Examples Safari</name>
 
     <build>
         <plugins>

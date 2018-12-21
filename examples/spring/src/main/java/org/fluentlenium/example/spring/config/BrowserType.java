@@ -5,15 +5,22 @@ import java.net.URL;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 
 public enum BrowserType {
 
-    CHROME {
+    @SuppressWarnings("unused")
+    CHROME() {
         @Override
         public WebDriver getWebDriver() {
             return new ChromeDriver();
@@ -21,10 +28,15 @@ public enum BrowserType {
 
         @Override
         protected MutableCapabilities getBrowserCapabilities() {
-            return DesiredCapabilities.chrome();
+            return new ChromeOptions();
+        }
+
+        @Override
+        public String getDriverSystemPropertyName() {
+            return "webdriver.chrome.driver";
         }
     },
-    SAFARI {
+    SAFARI() {
         @Override
         public WebDriver getWebDriver() {
             return new SafariDriver();
@@ -32,10 +44,15 @@ public enum BrowserType {
 
         @Override
         protected MutableCapabilities getBrowserCapabilities() {
-            return DesiredCapabilities.safari();
+            return new SafariOptions();
+        }
+
+        @Override
+        public String getDriverSystemPropertyName() {
+            return "webdriver.safari.driver";
         }
     },
-    FIREFOX {
+    FIREFOX() {
         @Override
         public WebDriver getWebDriver() {
             return new FirefoxDriver();
@@ -43,13 +60,52 @@ public enum BrowserType {
 
         @Override
         protected MutableCapabilities getBrowserCapabilities() {
-            return DesiredCapabilities.firefox();
+            return new FirefoxOptions();
+        }
+
+        @Override
+        public String getDriverSystemPropertyName() {
+            return "webdriver.gecko.driver";
+        }
+    },
+    IE() {
+        @Override
+        public WebDriver getWebDriver() {
+            return new InternetExplorerDriver();
+        }
+
+        @Override
+        protected MutableCapabilities getBrowserCapabilities() {
+            return new InternetExplorerOptions();
+        }
+
+        @Override
+        public String getDriverSystemPropertyName() {
+            return "webdriver.ie.driver";
+        }
+    },
+    EDGE() {
+        @Override
+        public WebDriver getWebDriver() {
+            return new EdgeDriver();
+        }
+
+        @Override
+        protected MutableCapabilities getBrowserCapabilities() {
+            return new EdgeOptions();
+        }
+
+        @Override
+        public String getDriverSystemPropertyName() {
+            return "webdriver.edge.driver";
         }
     };
 
     protected abstract WebDriver getWebDriver();
 
     protected abstract MutableCapabilities getBrowserCapabilities();
+
+    public abstract String getDriverSystemPropertyName();
 
     public WebDriver getRemoteWebDriver(String hubLocation) {
         try {
