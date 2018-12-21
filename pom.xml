@@ -395,6 +395,8 @@
                 <module>examples/quickstart-chrome</module>
                 <module>examples/spock</module>
                 <module>examples/spring</module>
+                <module>examples/quickstart-safari</module>
+                <module>examples/quickstart-firefox</module>
             </modules>
         </profile>
 

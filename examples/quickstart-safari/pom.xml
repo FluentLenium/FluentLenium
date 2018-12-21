@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>fluentlenium-examples-quickstart-chrome</artifactId>
+    <artifactId>fluentlenium-examples-quickstart-safari</artifactId>
     <groupId>org.fluentlenium</groupId>
     <version>4.0.0</version>
 
@@ -54,7 +54,7 @@
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
+            <artifactId>selenium-safari-driver</artifactId>
             <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>

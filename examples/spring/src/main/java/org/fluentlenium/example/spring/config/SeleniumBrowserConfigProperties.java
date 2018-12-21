@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SeleniumBrowserConfigProperties {
-    @Value("${selenium.browser.type ?: CHROME}")
+    @Value("${selenium.browser.type}")
     private BrowserType browserType;
     @Value("${selenium.hub.enabled}")
     private Boolean useHub;
