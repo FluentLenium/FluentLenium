@@ -159,7 +159,7 @@ public class DuckDuckMainPage extends FluentPage {
 
 - Run as a JUnit test.
 
-[More FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/examples).
+[More FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/develop/examples).
 
 ## Documentation
 
