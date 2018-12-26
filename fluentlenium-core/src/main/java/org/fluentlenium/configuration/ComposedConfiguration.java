@@ -1,6 +1,5 @@
 package org.fluentlenium.configuration;
 
-import lombok.experimental.Delegate;
 import org.openqa.selenium.Capabilities;
 
 import java.util.Arrays;
@@ -19,7 +18,6 @@ import java.util.function.Function;
 public class ComposedConfiguration implements Configuration {
     private final ConfigurationProperties[] configurations;
 
-    @Delegate
     private final ConfigurationMutator writableConfiguration; // NOPMD SingularField
 
     /**
@@ -165,5 +163,85 @@ public class ComposedConfiguration implements Configuration {
                 .filter(Objects::nonNull)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public void setConfigurationFactory(Class<? extends ConfigurationFactory> configurationFactory) {
+        getWritableConfiguration().setConfigurationFactory(configurationFactory);
+    }
+
+    public void setDeleteCookies(Boolean deleteCookies) {
+        getWritableConfiguration().setDeleteCookies(deleteCookies);
+    }
+
+    public void setCustomProperty(String key, String value) {
+        getWritableConfiguration().setCustomProperty(key, value);
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        getWritableConfiguration().setBaseUrl(baseUrl);
+    }
+
+    public void setWebDriver(String webDriver) {
+        getWritableConfiguration().setWebDriver(webDriver);
+    }
+
+    public void setPageLoadTimeout(Long pageLoadTimeout) {
+        getWritableConfiguration().setPageLoadTimeout(pageLoadTimeout);
+    }
+
+    public void setHtmlDumpMode(TriggerMode htmlDumpMode) {
+        getWritableConfiguration().setHtmlDumpMode(htmlDumpMode);
+    }
+
+    public void setScreenshotPath(String screenshotPath) {
+        getWritableConfiguration().setScreenshotPath(screenshotPath);
+    }
+
+    public void setBrowserTimeoutRetries(Integer retriesNumber) {
+        getWritableConfiguration().setBrowserTimeoutRetries(retriesNumber);
+    }
+
+    public void setRemoteUrl(String remoteUrl) {
+        getWritableConfiguration().setRemoteUrl(remoteUrl);
+    }
+
+    public void setImplicitlyWait(Long implicitlyWait) {
+        getWritableConfiguration().setImplicitlyWait(implicitlyWait);
+    }
+
+    public void setDriverLifecycle(DriverLifecycle driverLifecycle) {
+        getWritableConfiguration().setDriverLifecycle(driverLifecycle);
+    }
+
+    public void setAwaitPollingEvery(Long awaitPollingEvery) {
+        getWritableConfiguration().setAwaitPollingEvery(awaitPollingEvery);
+    }
+
+    public void setCapabilities(Capabilities capabilities) {
+        getWritableConfiguration().setCapabilities(capabilities);
+    }
+
+    public void setScreenshotMode(TriggerMode screenshotMode) {
+        getWritableConfiguration().setScreenshotMode(screenshotMode);
+    }
+
+    public void setHtmlDumpPath(String htmlDumpPath) {
+        getWritableConfiguration().setHtmlDumpPath(htmlDumpPath);
+    }
+
+    public void setAwaitAtMost(Long awaitAtMost) {
+        getWritableConfiguration().setAwaitAtMost(awaitAtMost);
+    }
+
+    public void setBrowserTimeout(Long timeout) {
+        getWritableConfiguration().setBrowserTimeout(timeout);
+    }
+
+    public void setScriptTimeout(Long scriptTimeout) {
+        getWritableConfiguration().setScriptTimeout(scriptTimeout);
+    }
+
+    public void setEventsEnabled(Boolean eventsEnabled) {
+        getWritableConfiguration().setEventsEnabled(eventsEnabled);
     }
 }

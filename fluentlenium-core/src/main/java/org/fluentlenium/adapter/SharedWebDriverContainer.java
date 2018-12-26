@@ -1,20 +1,17 @@
 package org.fluentlenium.adapter;
 
+import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
+import org.openqa.selenium.WebDriver;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-
-import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
-import org.openqa.selenium.WebDriver;
-
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Delegate;
 
 /**
  * A singleton container for all running {@link SharedWebDriver} in the JVM.
@@ -25,7 +22,6 @@ public enum SharedWebDriverContainer {
      */
     INSTANCE;
 
-    @Delegate
     private final Impl impl = new Impl();
 
     private final SharedWebDriverContainerShutdownHook shutdownHook; // NOPMD SingularField
@@ -38,19 +34,116 @@ public enum SharedWebDriverContainer {
         Runtime.getRuntime().addShutdownHook(shutdownHook);
     }
 
-    @EqualsAndHashCode
-    @AllArgsConstructor
+    public Impl getImpl() {
+        return impl;
+    }
+
+    public <T> SharedWebDriver getDriver(Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
+        return getImpl().getDriver(testClass, testName, driverLifecycle);
+    }
+
+    public <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
+        return getImpl().getOrCreateDriver(webDriverFactory, testClass, testName, driverLifecycle);
+    }
+
+    public List<SharedWebDriver> getAllDrivers() {
+        return getImpl().getAllDrivers();
+    }
+
+    public void quit(SharedWebDriver driver) {
+        getImpl().quit(driver);
+    }
+
+    public void quitAll() {
+        getImpl().quitAll();
+    }
+
+    public List<SharedWebDriver> getTestClassDrivers(Class<?> testClass) {
+        return getImpl().getTestClassDrivers(testClass);
+    }
+
     private static class ClassAndTestName {
         private Class<?> testClass;
         private String testName;
+
+        public ClassAndTestName(Class<?> testClass, String testName) {
+            this.testClass = testClass;
+            this.testName = testName;
+        }
+
+        public boolean equals(final Object o) {
+            if (o == this) return true;
+            if (!(o instanceof ClassAndTestName)) return false;
+            final ClassAndTestName other = (ClassAndTestName) o;
+            if (!other.canEqual(this)) return false;
+            final Object this$testClass = this.testClass;
+            final Object other$testClass = other.testClass;
+            if (!Objects.equals(this$testClass, other$testClass))
+                return false;
+            final Object this$testName = this.testName;
+            final Object other$testName = other.testName;
+            return Objects.equals(this$testName, other$testName);
+        }
+
+        boolean canEqual(final Object other) {
+            return other instanceof ClassAndTestName;
+        }
+
+        public int hashCode() {
+            final int PRIME = 59;
+            int result = 1;
+            final Object $testClass = this.testClass;
+            result = result * PRIME + ($testClass == null ? 43 : $testClass.hashCode());
+            final Object $testName = this.testName;
+            result = result * PRIME + ($testName == null ? 43 : $testName.hashCode());
+            return result;
+        }
     }
 
-    @EqualsAndHashCode
-    @AllArgsConstructor
     private static class ClassAndTestNameWithThreadId {
         private Class<?> testClass;
         private String testName;
         private Long threadId;
+
+        public ClassAndTestNameWithThreadId(Class<?> testClass, String testName, Long threadId) {
+            this.testClass = testClass;
+            this.testName = testName;
+            this.threadId = threadId;
+        }
+
+        public boolean equals(final Object o) {
+            if (o == this) return true;
+            if (!(o instanceof ClassAndTestNameWithThreadId))
+                return false;
+            final ClassAndTestNameWithThreadId other = (ClassAndTestNameWithThreadId) o;
+            if (!other.canEqual(this)) return false;
+            final Object this$testClass = this.testClass;
+            final Object other$testClass = other.testClass;
+            if (!Objects.equals(this$testClass, other$testClass))
+                return false;
+            final Object this$testName = this.testName;
+            final Object other$testName = other.testName;
+            if (!Objects.equals(this$testName, other$testName)) return false;
+            final Object this$threadId = this.threadId;
+            final Object other$threadId = other.threadId;
+            return Objects.equals(this$threadId, other$threadId);
+        }
+
+        boolean canEqual(final Object other) {
+            return other instanceof ClassAndTestNameWithThreadId;
+        }
+
+        public int hashCode() {
+            final int PRIME = 59;
+            int result = 1;
+            final Object $testClass = this.testClass;
+            result = result * PRIME + ($testClass == null ? 43 : $testClass.hashCode());
+            final Object $testName = this.testName;
+            result = result * PRIME + ($testName == null ? 43 : $testName.hashCode());
+            final Object $threadId = this.threadId;
+            result = result * PRIME + ($threadId == null ? 43 : $threadId.hashCode());
+            return result;
+        }
     }
 
     /**

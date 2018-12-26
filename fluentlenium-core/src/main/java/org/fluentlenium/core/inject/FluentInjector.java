@@ -1,12 +1,6 @@
 package org.fluentlenium.core.inject;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.apache.commons.lang3.ArrayUtils;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.pagefactory.ElementLocator;
-
 import org.fluentlenium.core.FluentContainer;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.annotation.Page;
@@ -27,6 +21,9 @@ import org.fluentlenium.core.hook.HookOptions;
 import org.fluentlenium.core.hook.NoHook;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.utils.ReflectionUtils;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -406,11 +403,22 @@ public class FluentInjector implements FluentInjectControl {
         return false;
     }
 
-    @AllArgsConstructor
-    @Getter
     private static class ComponentAndProxy<T, P> {
         private T component;
         private P proxy;
+
+        public ComponentAndProxy(T component, P proxy) {
+            this.component = component;
+            this.proxy = proxy;
+        }
+
+        public T getComponent() {
+            return component;
+        }
+
+        public P getProxy() {
+            return proxy;
+        }
     }
 
     private ComponentAndProxy<?, ?> initFieldElements(ElementLocator locator, Field field) {

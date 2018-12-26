@@ -1,10 +1,5 @@
 package org.fluentlenium.utils;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -71,13 +66,31 @@ public final class ReflectionUtils {
         DEFAULTS.put(double.class, 0d);
     }
 
-    @Getter
-    @Setter
-    @EqualsAndHashCode
-    @AllArgsConstructor
     private static class ClassAnnotationKey {
         private Class<?> clazz;
         private Class<? extends Annotation> annotation;
+
+        public ClassAnnotationKey(Class<?> clazz, Class<? extends Annotation> annotation) {
+            this.clazz = clazz;
+            this.annotation = annotation;
+        }
+
+        public Class<?> getClazz() {
+            return clazz;
+        }
+
+        public Class<? extends Annotation> getAnnotation() {
+            return annotation;
+        }
+
+        public void setClazz(Class<?> clazz) {
+            this.clazz = clazz;
+        }
+
+        public void setAnnotation(Class<? extends Annotation> annotation) {
+            this.annotation = annotation;
+        }
+
     }
 
     /**

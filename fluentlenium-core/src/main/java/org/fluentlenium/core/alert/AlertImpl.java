@@ -1,6 +1,5 @@
 package org.fluentlenium.core.alert;
 
-import lombok.experimental.Delegate;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -8,7 +7,6 @@ import org.openqa.selenium.WebDriver;
  */
 public class AlertImpl implements Alert {
 
-    @Delegate
     private final org.openqa.selenium.Alert alert;  // NOPMD UnusedPrivateMethod
 
     /**
@@ -29,6 +27,10 @@ public class AlertImpl implements Alert {
         this.alert = alert;
     }
 
+    public org.openqa.selenium.Alert getAlert() {
+        return alert;
+    }
+
     @Override
     public void prompt(String text) {
         sendKeys(text);
@@ -38,5 +40,21 @@ public class AlertImpl implements Alert {
     @Override
     public boolean present() {
         return true;
+    }
+
+    public String getText() {
+        return getAlert().getText();
+    }
+
+    public void accept() {
+        getAlert().accept();
+    }
+
+    public void sendKeys(String s) {
+        getAlert().sendKeys(s);
+    }
+
+    public void dismiss() {
+        getAlert().dismiss();
     }
 }

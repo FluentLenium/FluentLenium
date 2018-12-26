@@ -1,9 +1,9 @@
 package org.fluentlenium.core.domain;
 
-import lombok.experimental.Delegate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.LazyComponents;
+import org.fluentlenium.core.components.LazyComponentsListener;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -21,8 +21,11 @@ public class ComponentList<T> extends DelegatingList<T> implements WrapsElements
     protected final FluentControl control;
     protected List<WebElement> proxy;
 
-    @Delegate
     private LazyComponents lazyComponents = new NotLazyComponents(); // NOPMD UnusedPrivateField
+
+    public LazyComponents getLazyComponents() {
+        return lazyComponents;
+    }
 
     /**
      * Creates a new list of components
@@ -50,5 +53,21 @@ public class ComponentList<T> extends DelegatingList<T> implements WrapsElements
     @Override
     public List<WebElement> getWrappedElements() {
         return proxy;
+    }
+
+    public boolean isLazy() {
+        return getLazyComponents().isLazy();
+    }
+
+    public boolean addLazyComponentsListener(LazyComponentsListener listener) {
+        return getLazyComponents().addLazyComponentsListener(listener);
+    }
+
+    public boolean isLazyInitialized() {
+        return getLazyComponents().isLazyInitialized();
+    }
+
+    public boolean removeLazyComponentsListener(LazyComponentsListener listener) {
+        return getLazyComponents().removeLazyComponentsListener(listener);
     }
 }
