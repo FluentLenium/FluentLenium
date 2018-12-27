@@ -19,6 +19,7 @@ public class ExampleFluentTest extends FluentTest {
 
     @Override
     public WebDriver newWebDriver() {
+        setDriverExecutableSystemProperty();
         BrowserConfig browserConfig = getBrowserConfig();
         return browserConfig.resolveDriver(browserConfig);
     }
@@ -30,5 +31,13 @@ public class ExampleFluentTest extends FluentTest {
 
     private BrowserConfig getBrowserConfig() {
         return config.getBrowserConfig();
+    }
+
+    private void setDriverExecutableSystemProperty() {
+        String propertyName = getBrowserConfig().getDriverSystemPropertyName();
+        String driverExecutablePath = config.getDriverExecutablePath();
+        if (System.getProperty(propertyName) == null) {
+            System.setProperty(propertyName, driverExecutablePath);
+        }
     }
 }
