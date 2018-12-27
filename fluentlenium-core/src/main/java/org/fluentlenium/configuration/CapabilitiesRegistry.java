@@ -31,4 +31,5 @@ public enum CapabilitiesRegistry {
 
     public CapabilitiesFactory get(String name) {
         return getImpl().get(name);
-    }}
+    }
+}

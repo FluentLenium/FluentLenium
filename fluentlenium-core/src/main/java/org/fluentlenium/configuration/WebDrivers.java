@@ -34,4 +34,5 @@ public enum WebDrivers {
 
     public WebDriver newWebDriver(String name, Capabilities capabilities, ConfigurationProperties configuration) {
         return this.impl.newWebDriver(name, capabilities, configuration);
-    }}
+    }
+}

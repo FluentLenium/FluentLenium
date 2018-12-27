@@ -24,13 +24,12 @@ public enum SharedWebDriverContainer {
 
     private final Impl impl = new Impl();
 
-    private final SharedWebDriverContainerShutdownHook shutdownHook; // NOPMD SingularField
-
     /**
      * Creates a new Shared WebDriver Container.
      */
     SharedWebDriverContainer() {
-        shutdownHook = new SharedWebDriverContainerShutdownHook("SharedWebDriverContainerShutdownHook");
+        // NOPMD SingularField
+        SharedWebDriverContainerShutdownHook shutdownHook = new SharedWebDriverContainerShutdownHook("SharedWebDriverContainerShutdownHook");
         Runtime.getRuntime().addShutdownHook(shutdownHook);
     }
 
@@ -63,26 +62,34 @@ public enum SharedWebDriverContainer {
     }
 
     private static class ClassAndTestName {
-        private Class<?> testClass;
-        private String testName;
+        private final Class<?> testClass;
+        private final String testName;
 
-        public ClassAndTestName(Class<?> testClass, String testName) {
+        ClassAndTestName(Class<?> testClass, String testName) {
             this.testClass = testClass;
             this.testName = testName;
         }
 
         public boolean equals(final Object o) {
-            if (o == this) return true;
-            if (!(o instanceof ClassAndTestName)) return false;
-            final ClassAndTestName other = (ClassAndTestName) o;
-            if (!other.canEqual(this)) return false;
-            final Object this$testClass = this.testClass;
-            final Object other$testClass = other.testClass;
-            if (!Objects.equals(this$testClass, other$testClass))
+            if (o == this) {
+                return true;
+            }
+
+            if (!(o instanceof ClassAndTestName)) {
                 return false;
-            final Object this$testName = this.testName;
-            final Object other$testName = other.testName;
-            return Objects.equals(this$testName, other$testName);
+            }
+
+            final ClassAndTestName other = (ClassAndTestName) o;
+
+            if (!other.canEqual(this)) {
+                return false;
+            }
+
+            if (!Objects.equals(this.testClass, other.testClass)) {
+                return false;
+            }
+
+            return Objects.equals(this.testName, other.testName);
         }
 
         boolean canEqual(final Object other) {
@@ -101,32 +108,40 @@ public enum SharedWebDriverContainer {
     }
 
     private static class ClassAndTestNameWithThreadId {
-        private Class<?> testClass;
-        private String testName;
-        private Long threadId;
+        private final Class<?> testClass;
+        private final String testName;
+        private final Long threadId;
 
-        public ClassAndTestNameWithThreadId(Class<?> testClass, String testName, Long threadId) {
+        ClassAndTestNameWithThreadId(Class<?> testClass, String testName, Long threadId) {
             this.testClass = testClass;
             this.testName = testName;
             this.threadId = threadId;
         }
 
         public boolean equals(final Object o) {
-            if (o == this) return true;
-            if (!(o instanceof ClassAndTestNameWithThreadId))
+            if (o == this) {
+                return true;
+            }
+
+            if (!(o instanceof ClassAndTestNameWithThreadId)) {
                 return false;
+            }
+
             final ClassAndTestNameWithThreadId other = (ClassAndTestNameWithThreadId) o;
-            if (!other.canEqual(this)) return false;
-            final Object this$testClass = this.testClass;
-            final Object other$testClass = other.testClass;
-            if (!Objects.equals(this$testClass, other$testClass))
+
+            if (!other.canEqual(this)) {
                 return false;
-            final Object this$testName = this.testName;
-            final Object other$testName = other.testName;
-            if (!Objects.equals(this$testName, other$testName)) return false;
-            final Object this$threadId = this.threadId;
-            final Object other$threadId = other.threadId;
-            return Objects.equals(this$threadId, other$threadId);
+            }
+
+            if (!Objects.equals(this.testClass, other.testClass)) {
+                return false;
+            }
+
+            if (!Objects.equals(this.testName, other.testName)) {
+                return false;
+            }
+
+            return Objects.equals(this.threadId, other.threadId);
         }
 
         boolean canEqual(final Object other) {
@@ -168,8 +183,8 @@ public enum SharedWebDriverContainer {
          * @param <T>              type of test
          * @return shared web driver
          */
-        public <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass, String testName,
-                                                     DriverLifecycle driverLifecycle) {
+        <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass, String testName,
+                                              DriverLifecycle driverLifecycle) {
             synchronized (this) {
                 SharedWebDriver driver = getDriver(testClass, testName, driverLifecycle);
                 if (driver == null) {
@@ -276,7 +291,7 @@ public enum SharedWebDriverContainer {
          *
          * @return List of {@link SharedWebDriver}
          */
-        public List<SharedWebDriver> getAllDrivers() {
+        List<SharedWebDriver> getAllDrivers() {
             List<SharedWebDriver> drivers = new ArrayList<>();
             synchronized (this) {
                 if (jvmDriver != null) {
@@ -298,7 +313,7 @@ public enum SharedWebDriverContainer {
          * @param testClass test class
          * @return list of shared WebDriver
          */
-        public List<SharedWebDriver> getTestClassDrivers(Class<?> testClass) {
+        List<SharedWebDriver> getTestClassDrivers(Class<?> testClass) {
             List<SharedWebDriver> drivers = new ArrayList<>();
 
             synchronized (this) {
@@ -326,7 +341,7 @@ public enum SharedWebDriverContainer {
         /**
          * Quit all shared web driver.
          */
-        public void quitAll() {
+        void quitAll() {
             synchronized (this) {
                 if (jvmDriver != null) {
                     jvmDriver.getDriver().quit();
