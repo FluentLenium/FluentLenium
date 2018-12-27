@@ -4,28 +4,36 @@ package org.fluentlenium.core.filter.matcher;
  * Matcher types actually actually supported by the framework.
  */
 public enum MatcherType {
+
     /**
      * Contains.
      */
-    CONTAINS("contains", "*"), /**
+    CONTAINS("contains", "*"),
+    /**
      * Starts with.
      */
-    STARTS_WITH("starts with", "^"), /**
+    STARTS_WITH("starts with", "^"),
+    /**
      * Ends with.
      */
-    ENDS_WITH("ends with", "$"), /**
+    ENDS_WITH("ends with", "$"),
+    /**
      * Contains word.
      */
-    CONTAINS_WORD("contains", "~"), /**
+    CONTAINS_WORD("contains", "~"),
+    /**
      * Equal.
      */
-    EQUALS("equals to", ""), /**
+    EQUALS("equals to", ""),
+    /**
      * Not contains.
      */
-    NOT_CONTAINS("doesn't contain", null), /**
+    NOT_CONTAINS("doesn't contain", null),
+    /**
      * Not starts with.
      */
-    NOT_STARTS_WITH("doesn't start with", null), /**
+    NOT_STARTS_WITH("doesn't start with", null),
+    /**
      * Not ends with.
      */
     NOT_ENDS_WITH("doesn't end with", null);

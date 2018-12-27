@@ -30,8 +30,7 @@ public class StartsWithMatcher extends AbstractMatcher {
     }
 
     @Override
-    public boolean isSatisfiedBy(String obj) {
-        return CalculateService.startsWith(getPattern(), getValue(), obj);
+    public boolean isSatisfiedBy(String currentValue) {
+        return CalculateService.startsWith(getPattern(), getValue(), currentValue);
     }
-
 }
