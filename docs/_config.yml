@@ -30,7 +30,14 @@ description: FluentLenium is a website automation framework which extends Seleni
 # List of links in the navigation bar
 navbar-links:
   Home: ""
-  Docs: "docs"
+  Quickstart: "quickstart"
+  Docs:
+    - Supported Test runners: "docs/test-runners"
+    - Finding elements: "docs/locators"
+    - Key features: "docs/key_features"
+    - Configuration: "docs/configuration"
+    - Test methods: "docs/test-methods"
+    - Assertion libraries: "docs/assertion-libraries"
   Migration:
     - to 3.0: "migration/from-0.13.2-to-1.0-or-3.0"
     - from 3.0 to 4.0: "migration/3.0-to-4.0"

@@ -11,10 +11,14 @@ reliable and resilient UI functional tests.
 
 Current active contributors:
 
-{% include icon-github.html username="Toilal" displayname="Rémi Alvergnat" %}
 {% include icon-github.html username="filipcynarski" displayname="Filip Cynarski" %}
 {% include icon-github.html username="gkiszczak" displayname="Grzegorz Kiszczak" %}
+{% include icon-github.html username="slawekradzyminski" displayname="Sławomir Radzymiński" %}
 
 FluentLenium was initially written by Mathilde Lemée:
 
 {% include icon-github.html username="MathildeLemee" displayname="Mathilde Lemée" %}
+
+And then extended by:
+
+{% include icon-github.html username="Toilal" displayname="Rémi Alvergnat" %}
