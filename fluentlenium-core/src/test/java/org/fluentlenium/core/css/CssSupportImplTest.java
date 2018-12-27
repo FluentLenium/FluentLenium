@@ -10,6 +10,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -61,8 +62,8 @@ public class CssSupportImplTest {
     }
 
     @Test
+    @Ignore("Find a way to mock IOUtils.toString() to throw exception")
     public void shouldThrowIOErrorDuringInjectingCss() {
-        //TODO
     }
 
     @Test
@@ -76,8 +77,8 @@ public class CssSupportImplTest {
     }
 
     @Test
+    @Ignore("Find a way to mock IOUtils.toString() to throw exception")
     public void shouldThrowIOErrorDuringInjectingResource() {
-        //TODO
     }
 
     @Test
