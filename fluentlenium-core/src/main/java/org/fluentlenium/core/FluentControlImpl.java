@@ -262,10 +262,6 @@ public abstract class FluentControlImpl implements FluentControl {
         return getFluentControl().asComponentList(listClass, componentClass, elements);
     }
 
-    public FluentWebElement el(String selector, SearchFilter... filters) {
-        return getFluentControl().el(selector, filters);
-    }
-
     public void switchToDefault() {
         getFluentControl().switchToDefault();
     }
@@ -276,10 +272,6 @@ public abstract class FluentControlImpl implements FluentControl {
 
     public FluentList<FluentWebElement> find(By locator, SearchFilter... filters) {
         return getFluentControl().find(locator, filters);
-    }
-
-    public FluentList<FluentWebElement> $(String selector, SearchFilter... filters) {
-        return getFluentControl().$(selector, filters);
     }
 
     public void goTo(String url) {
@@ -326,10 +318,6 @@ public abstract class FluentControlImpl implements FluentControl {
         return getFluentControl().newFluentList(componentClass);
     }
 
-    public FluentList<FluentWebElement> $(SearchFilter... filters) {
-        return getFluentControl().$(filters);
-    }
-
     public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, T... componentsList) {
         return getFluentControl().newComponentList(listClass, componentClass, componentsList);
     }
@@ -374,10 +362,6 @@ public abstract class FluentControlImpl implements FluentControl {
         return getFluentControl().asComponentList(componentClass, elements);
     }
 
-    public FluentList<FluentWebElement> $(List<WebElement> rawElements) {
-        return getFluentControl().$(rawElements);
-    }
-
     public void goToInNewTab(String url) {
         getFluentControl().goToInNewTab(url);
     }
@@ -388,10 +372,6 @@ public abstract class FluentControlImpl implements FluentControl {
 
     public <T> ComponentList<T> newComponentList(Class<T> componentClass) {
         return getFluentControl().newComponentList(componentClass);
-    }
-
-    public FluentWebElement el(SearchFilter... filters) {
-        return getFluentControl().el(filters);
     }
 
     public FluentWebElement newFluent(WebElement element) {
@@ -474,10 +454,6 @@ public abstract class FluentControlImpl implements FluentControl {
         return getFluentControl().pageSource();
     }
 
-    public FluentWebElement el(By locator, SearchFilter... filters) {
-        return getFluentControl().el(locator, filters);
-    }
-
     public boolean isComponentListClass(Class<? extends List<?>> componentListClass) {
         return getFluentControl().isComponentListClass(componentListClass);
     }
@@ -504,10 +480,6 @@ public abstract class FluentControlImpl implements FluentControl {
 
     public FluentList<FluentWebElement> asFluentList(List<WebElement> elements) {
         return getFluentControl().asFluentList(elements);
-    }
-
-    public FluentList<FluentWebElement> $(By locator, SearchFilter... filters) {
-        return getFluentControl().$(locator, filters);
     }
 
     public FluentWebElement el(WebElement rawElement) {
