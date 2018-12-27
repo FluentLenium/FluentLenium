@@ -57,7 +57,7 @@ import java.util.concurrent.TimeUnit;
  * Util Class which offers some shortcut to webdriver methods
  */
 @SuppressWarnings("PMD.GodClass")
-public class FluentDriver implements FluentControl { // NOPMD GodClass
+public class FluentDriver extends FluentControlImpl implements FluentControl { // NOPMD GodClass
     private final Configuration configuration;
 
     private final ComponentsManager componentsManager;
@@ -88,6 +88,7 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
      * @param adapter       adapter fluent control interface
      */
     public FluentDriver(WebDriver driver, Configuration configuration, FluentControl adapter) {
+        super(adapter);
         this.configuration = configuration;
         componentsManager = new ComponentsManager(adapter);
         this.driver = driver;
@@ -112,16 +113,9 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
         return configuration;
     }
 
-    public ComponentsManager getComponentsManager() {
-        return componentsManager;
-    }
-
-    public FluentInjector getFluentInjector() {
-        return fluentInjector;
-    }
-
-    public CssControl getCssControl() {
-        return cssControl;
+    @Override
+    public WebDriver getDriver() {
+        return driver;
     }
 
     private void configureDriver() {
@@ -218,11 +212,6 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
             screenshot = imageUtils.handleAlertAndTakeScreenshot();
         }
         return screenshot;
-    }
-
-    @Override
-    public WebDriver getDriver() {
-        return driver;
     }
 
     private Search getSearch() {
@@ -444,299 +433,4 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
         }
     }
 
-    public String getHtmlDumpPath() {
-        return getConfiguration().getHtmlDumpPath();
-    }
-
-    public Long getAwaitAtMost() {
-        return getConfiguration().getAwaitAtMost();
-    }
-
-    public TriggerMode getHtmlDumpMode() {
-        return getConfiguration().getHtmlDumpMode();
-    }
-
-    public Long getAwaitPollingEvery() {
-        return getConfiguration().getAwaitPollingEvery();
-    }
-
-    public void setPageLoadTimeout(Long pageLoadTimeout) {
-        getConfiguration().setPageLoadTimeout(pageLoadTimeout);
-    }
-
-    public Class<? extends ConfigurationFactory> getConfigurationFactory() {
-        return getConfiguration().getConfigurationFactory();
-    }
-
-    public void setHtmlDumpMode(TriggerMode htmlDumpMode) {
-        getConfiguration().setHtmlDumpMode(htmlDumpMode);
-    }
-
-    public void setScreenshotPath(String screenshotPath) {
-        getConfiguration().setScreenshotPath(screenshotPath);
-    }
-
-    public Long getImplicitlyWait() {
-        return getConfiguration().getImplicitlyWait();
-    }
-
-    public Long getScriptTimeout() {
-        return getConfiguration().getScriptTimeout();
-    }
-
-    public void setBrowserTimeoutRetries(Integer retriesNumber) {
-        getConfiguration().setBrowserTimeoutRetries(retriesNumber);
-    }
-
-    public Capabilities getCapabilities() {
-        return getConfiguration().getCapabilities();
-    }
-
-    public void setRemoteUrl(String remoteUrl) {
-        getConfiguration().setRemoteUrl(remoteUrl);
-    }
-
-    public void setImplicitlyWait(Long implicitlyWait) {
-        getConfiguration().setImplicitlyWait(implicitlyWait);
-    }
-
-    public void setCapabilities(Capabilities capabilities) {
-        getConfiguration().setCapabilities(capabilities);
-    }
-
-    public void setAwaitAtMost(Long awaitAtMost) {
-        getConfiguration().setAwaitAtMost(awaitAtMost);
-    }
-
-    public void setBrowserTimeout(Long timeout) {
-        getConfiguration().setBrowserTimeout(timeout);
-    }
-
-    public void setEventsEnabled(Boolean eventsEnabled) {
-        getConfiguration().setEventsEnabled(eventsEnabled);
-    }
-
-    public String getCustomProperty(String propertyName) {
-        return getConfiguration().getCustomProperty(propertyName);
-    }
-
-    public void setConfigurationFactory(Class<? extends ConfigurationFactory> configurationFactory) {
-        getConfiguration().setConfigurationFactory(configurationFactory);
-    }
-
-    public DriverLifecycle getDriverLifecycle() {
-        return getConfiguration().getDriverLifecycle();
-    }
-
-    public void setDeleteCookies(Boolean deleteCookies) {
-        getConfiguration().setDeleteCookies(deleteCookies);
-    }
-
-    public void setCustomProperty(String key, String value) {
-        getConfiguration().setCustomProperty(key, value);
-    }
-
-    public void setBaseUrl(String baseUrl) {
-        getConfiguration().setBaseUrl(baseUrl);
-    }
-
-    public Class<? extends ConfigurationProperties> getConfigurationDefaults() {
-        return getConfiguration().getConfigurationDefaults();
-    }
-
-    public void setWebDriver(String webDriver) {
-        getConfiguration().setWebDriver(webDriver);
-    }
-
-    public Boolean getDeleteCookies() {
-        return getConfiguration().getDeleteCookies();
-    }
-
-    public Integer getBrowserTimeoutRetries() {
-        return getConfiguration().getBrowserTimeoutRetries();
-    }
-
-    public TriggerMode getScreenshotMode() {
-        return getConfiguration().getScreenshotMode();
-    }
-
-    public String getWebDriver() {
-        return getConfiguration().getWebDriver();
-    }
-
-    public String getScreenshotPath() {
-        return getConfiguration().getScreenshotPath();
-    }
-
-    public Long getBrowserTimeout() {
-        return getConfiguration().getBrowserTimeout();
-    }
-
-    public String getRemoteUrl() {
-        return getConfiguration().getRemoteUrl();
-    }
-
-    public void setDriverLifecycle(DriverLifecycle driverLifecycle) {
-        getConfiguration().setDriverLifecycle(driverLifecycle);
-    }
-
-    public void setAwaitPollingEvery(Long awaitPollingEvery) {
-        getConfiguration().setAwaitPollingEvery(awaitPollingEvery);
-    }
-
-    public String getBaseUrl() {
-        return getConfiguration().getBaseUrl();
-    }
-
-    public void setScreenshotMode(TriggerMode screenshotMode) {
-        getConfiguration().setScreenshotMode(screenshotMode);
-    }
-
-    public void setHtmlDumpPath(String htmlDumpPath) {
-        getConfiguration().setHtmlDumpPath(htmlDumpPath);
-    }
-
-    public void setScriptTimeout(Long scriptTimeout) {
-        getConfiguration().setScriptTimeout(scriptTimeout);
-    }
-
-    public Long getPageLoadTimeout() {
-        return getConfiguration().getPageLoadTimeout();
-    }
-
-    public Boolean getEventsEnabled() {
-        return getConfiguration().getEventsEnabled();
-    }
-
-    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass) {
-        return getComponentsManager().newComponentList(listClass, componentClass);
-    }
-
-    public <T> ComponentList asComponentList(Class<T> componentClass, Iterable<WebElement> elements) {
-        return getComponentsManager().asComponentList(componentClass, elements);
-    }
-
-    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, T... componentsList) {
-        return getComponentsManager().newComponentList(listClass, componentClass, componentsList);
-    }
-
-    public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, Iterable<WebElement> elements) {
-        return getComponentsManager().asFluentList(componentClass, elements);
-    }
-
-    public boolean isComponentClass(Class<?> componentClass) {
-        return getComponentsManager().isComponentClass(componentClass);
-    }
-
-    public <T> ComponentList<T> asComponentList(Class<T> componentClass, List<WebElement> elements) {
-        return getComponentsManager().asComponentList(componentClass, elements);
-    }
-
-    public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, WebElement... elements) {
-        return getComponentsManager().asFluentList(componentClass, elements);
-    }
-
-    public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass) {
-        return getComponentsManager().newFluentList(componentClass);
-    }
-
-    public FluentWebElement newFluent(WebElement element) {
-        return getComponentsManager().newFluent(element);
-    }
-
-    public boolean isComponentListClass(Class<? extends List<?>> componentListClass) {
-        return getComponentsManager().isComponentListClass(componentListClass);
-    }
-
-    public FluentList<FluentWebElement> asFluentList(WebElement... elements) {
-        return getComponentsManager().asFluentList(elements);
-    }
-
-    public FluentList<FluentWebElement> asFluentList(Iterable<WebElement> elements) {
-        return getComponentsManager().asFluentList(elements);
-    }
-
-    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, WebElement... elements) {
-        return getComponentsManager().asComponentList(listClass, componentClass, elements);
-    }
-
-    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, Iterable<WebElement> elements) {
-        return getComponentsManager().asComponentList(listClass, componentClass, elements);
-    }
-
-    public FluentList<FluentWebElement> asFluentList(List<WebElement> elements) {
-        return getComponentsManager().asFluentList(elements);
-    }
-
-    public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, List<WebElement> elements) {
-        return getComponentsManager().asFluentList(componentClass, elements);
-    }
-
-    public <T> ComponentList<T> asComponentList(Class<T> componentClass, WebElement... elements) {
-        return getComponentsManager().asComponentList(componentClass, elements);
-    }
-
-    public <T> T newComponent(Class<T> componentClass, WebElement element) {
-        return getComponentsManager().newComponent(componentClass, element);
-    }
-
-    public <T> ComponentList<T> newComponentList(Class<T> componentClass, T... componentsList) {
-        return getComponentsManager().newComponentList(componentClass, componentsList);
-    }
-
-    public <T> ComponentList<T> newComponentList(Class<T> componentClass, List<T> componentsList) {
-        return getComponentsManager().newComponentList(componentClass, componentsList);
-    }
-
-    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, List<T> componentsList) {
-        return getComponentsManager().newComponentList(listClass, componentClass, componentsList);
-    }
-
-    public FluentList<FluentWebElement> newFluentList() {
-        return getComponentsManager().newFluentList();
-    }
-
-    public FluentList<FluentWebElement> newFluentList(List<FluentWebElement> elements) {
-        return getComponentsManager().newFluentList(elements);
-    }
-
-    public <T> ComponentList<T> newComponentList(Class<T> componentClass) {
-        return getComponentsManager().newComponentList(componentClass);
-    }
-
-    public FluentList<FluentWebElement> newFluentList(FluentWebElement... elements) {
-        return getComponentsManager().newFluentList(elements);
-    }
-
-    public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass, List<T> elements) {
-        return getComponentsManager().newFluentList(componentClass, elements);
-    }
-
-    public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass, T... elements) {
-        return getComponentsManager().newFluentList(componentClass, elements);
-    }
-
-    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, List<WebElement> elements) {
-        return getComponentsManager().asComponentList(listClass, componentClass, elements);
-    }
-
-    public ContainerContext inject(Object container) {
-        return getFluentInjector().inject(container);
-    }
-
-    public void release() {
-        getFluentInjector().release();
-    }
-
-    public <T> T newInstance(Class<T> cls) {
-        return getFluentInjector().newInstance(cls);
-    }
-
-    public ContainerContext injectComponent(Object componentContainer, Object parentContainer, SearchContext searchContext) {
-        return getFluentInjector().injectComponent(componentContainer, parentContainer, searchContext);
-    }
-
-    public CssSupport css() {
-        return getCssControl().css();
-    }
 }
