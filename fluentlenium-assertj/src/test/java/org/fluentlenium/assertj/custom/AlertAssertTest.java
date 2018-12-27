@@ -31,13 +31,13 @@ public class AlertAssertTest {
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasTextKo() throws Exception {
+    public void testHasTextKo() {
         when(alert.getText()).thenReturn("other text");
         alertAssert.hasText("some text");
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasTextKoNoAlert() throws Exception {
+    public void testHasTextKoNoAlert() {
         doThrow(new NoAlertPresentException()).when(alert).getText();
         alertAssert.hasText("some text");
     }

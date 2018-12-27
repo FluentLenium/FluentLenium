@@ -55,7 +55,7 @@ public class FluentWaitSupplierMatcherTest {
     @Test
     public void isEnabled() {
         FluentConditions matcher = wait.untilElement(() -> fluentWebElement);
-        assertThatThrownBy(() -> matcher.enabled()).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(matcher::enabled).isExactlyInstanceOf(TimeoutException.class);
 
         verify(fluentWebElement, atLeastOnce()).enabled();
 

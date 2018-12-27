@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
@@ -73,7 +73,7 @@ public class BaseHookTest {
     public void testNoOptionHook() {
         Object defaultOptions = new Object();
 
-        BaseHook noOptionHook = new BaseHook<Object>(fluentAdapter, instantiator, () -> element, () -> locator, () -> "hook",
+        BaseHook noOptionHook = new BaseHook<>(fluentAdapter, instantiator, () -> element, () -> locator, () -> "hook",
                 null) {
             @Override
             protected Object newOptions() {

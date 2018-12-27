@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -34,7 +34,7 @@ public class FluentAdapterTest {
     }
 
     @Test
-    public void deletagesToWebDriverWhenInitialized() {
+    public void delegateToWebDriverWhenInitialized() {
         FluentAdapter adapter = new FluentAdapter();
         adapter.initFluent(webDriver);
 
@@ -95,7 +95,7 @@ public class FluentAdapterTest {
             }
 
             @Override
-            public Capabilities getCapabilities() {
+            public MutableCapabilities getCapabilities() {
                 return DesiredCapabilities.htmlUnit();
             }
         };

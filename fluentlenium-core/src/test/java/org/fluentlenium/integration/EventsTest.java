@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.ElementListener;
 import org.fluentlenium.core.events.FindByListener;
 import org.fluentlenium.core.events.NavigateAllListener;
@@ -8,8 +7,6 @@ import org.fluentlenium.core.events.NavigateListener;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class EventsTest extends IntegrationFluentTest {
 
@@ -24,8 +21,8 @@ public class EventsTest extends IntegrationFluentTest {
 
         $("button").click();
 
-        Mockito.verify(beforeListener).on(Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
-        Mockito.verify(afterListener).on(Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
+        Mockito.verify(beforeListener).on(Mockito.any(), Mockito.any());
+        Mockito.verify(afterListener).on(Mockito.any(), Mockito.any());
     }
 
     @Test
@@ -40,9 +37,9 @@ public class EventsTest extends IntegrationFluentTest {
         el("button").now();
 
         Mockito.verify(beforeListener)
-                .on(Mockito.<By>anyObject(), Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
+                .on(Mockito.any(), Mockito.any(), Mockito.any());
         Mockito.verify(afterListener)
-                .on(Mockito.<By>anyObject(), Mockito.<FluentWebElement>anyObject(), Mockito.<WebDriver>anyObject());
+                .on(Mockito.any(), Mockito.any(), Mockito.any());
     }
 
     @Test
@@ -55,16 +52,16 @@ public class EventsTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
 
         Mockito.verify(beforeListener, Mockito.times(1))
-                .on(Mockito.eq(DEFAULT_URL), Mockito.<WebDriver>anyObject(), Mockito.<NavigateAllListener.Direction>anyObject());
+                .on(Mockito.eq(DEFAULT_URL), Mockito.any(), Mockito.any());
         Mockito.verify(afterListener, Mockito.times(1))
-                .on(Mockito.eq(DEFAULT_URL), Mockito.<WebDriver>anyObject(), Mockito.<NavigateAllListener.Direction>anyObject());
+                .on(Mockito.eq(DEFAULT_URL), Mockito.any(), Mockito.any());
 
         getDriver().navigate().refresh();
 
         Mockito.verify(beforeListener, Mockito.times(1))
-                .on((String) Mockito.isNull(), Mockito.<WebDriver>anyObject(), Mockito.eq(NavigateAllListener.Direction.REFRESH));
+                .on(Mockito.isNull(), Mockito.any(), Mockito.eq(NavigateAllListener.Direction.REFRESH));
         Mockito.verify(afterListener, Mockito.times(1))
-                .on((String) Mockito.isNull(), Mockito.<WebDriver>anyObject(), Mockito.eq(NavigateAllListener.Direction.REFRESH));
+                .on(Mockito.isNull(), Mockito.any(), Mockito.eq(NavigateAllListener.Direction.REFRESH));
 
     }
 
@@ -77,12 +74,12 @@ public class EventsTest extends IntegrationFluentTest {
         events().afterNavigateRefresh(afterListener);
         goTo(DEFAULT_URL);
 
-        Mockito.verify(beforeListener, Mockito.times(0)).on(Mockito.<WebDriver>anyObject());
-        Mockito.verify(afterListener, Mockito.times(0)).on(Mockito.<WebDriver>anyObject());
+        Mockito.verify(beforeListener, Mockito.times(0)).on(Mockito.any());
+        Mockito.verify(afterListener, Mockito.times(0)).on(Mockito.any());
 
         getDriver().navigate().refresh();
-        Mockito.verify(beforeListener, Mockito.times(1)).on(Mockito.<WebDriver>anyObject());
-        Mockito.verify(afterListener, Mockito.times(1)).on(Mockito.<WebDriver>anyObject());
+        Mockito.verify(beforeListener, Mockito.times(1)).on(Mockito.any());
+        Mockito.verify(afterListener, Mockito.times(1)).on(Mockito.any());
     }
 
 }

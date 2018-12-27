@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
@@ -18,10 +17,10 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyList;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
@@ -99,14 +98,11 @@ public class HookControlTest {
     public void before() throws NoSuchFieldException, IllegalAccessException {
         hookControl = spy(new HookControlImpl<>(null, proxy, control, instantiator, supplier));
         ReflectionUtils.set(HookControlImpl.class.getDeclaredField("self"), hookControl, hookControl);
-        when(supplier.get()).thenAnswer(new Answer<HookControlImpl>() {
-            @Override
-            public HookControlImpl answer(InvocationOnMock invocation) throws Throwable {
-                HookControlImpl<HookControl> answer = spy(new HookControlImpl<>(null, proxy, control, instantiator, supplier));
-                ReflectionUtils.set(HookControlImpl.class.getDeclaredField("self"), answer, answer);
-                resetAndMock(answer);
-                return answer;
-            }
+        when(supplier.get()).thenAnswer((Answer<HookControlImpl>) invocation -> {
+            HookControlImpl<HookControl> answer = spy(new HookControlImpl<>(null, proxy, control, instantiator, supplier));
+            ReflectionUtils.set(HookControlImpl.class.getDeclaredField("self"), answer, answer);
+            resetAndMock(answer);
+            return answer;
         });
         resetAndMock(hookControl);
     }
@@ -204,15 +200,12 @@ public class HookControlTest {
         hookControl.withHook(Hook2.class);
         resetAndMock(hookControl);
 
-        assertThat(hookControl.noHook(new Function<HookControl, String>() {
-            @Override
-            public String apply(HookControl input) {
-                assertThat(input).isSameAs(hookControl);
-                assertThat(hookControl.getHookDefinitions()).isEmpty();
-                verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition());
-                resetAndMock(hookControl);
-                return "test";
-            }
+        assertThat(hookControl.noHook((Function<HookControl, String>) input -> {
+            assertThat(input).isSameAs(hookControl);
+            assertThat(hookControl.getHookDefinitions()).isEmpty();
+            verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition());
+            resetAndMock(hookControl);
+            return "test";
         })).isEqualTo("test");
 
         verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class, Hook2.class));
@@ -230,16 +223,13 @@ public class HookControlTest {
         hookControl.withHook(Hook2.class);
         resetAndMock(hookControl);
 
-        assertThat(hookControl.noHook(Hook1.class, new Function<HookControl, String>() {
-            @Override
-            public String apply(HookControl input) {
-                assertThat(input).isSameAs(hookControl);
-                assertThat(hookControl.getHookDefinitions()).hasSize(1);
-                assertThat(hookControl.getHookDefinitions().get(0).getHookClass()).isEqualTo(Hook2.class);
-                verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook2.class));
-                resetAndMock(hookControl);
-                return "test";
-            }
+        assertThat(hookControl.noHook(Hook1.class, (Function<HookControl, String>) input -> {
+            assertThat(input).isSameAs(hookControl);
+            assertThat(hookControl.getHookDefinitions()).hasSize(1);
+            assertThat(hookControl.getHookDefinitions().get(0).getHookClass()).isEqualTo(Hook2.class);
+            verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook2.class));
+            resetAndMock(hookControl);
+            return "test";
         })).isEqualTo("test");
 
         verify(hookControl).applyHooks(eq(proxy), any(), hookDefinition(Hook1.class, Hook2.class));

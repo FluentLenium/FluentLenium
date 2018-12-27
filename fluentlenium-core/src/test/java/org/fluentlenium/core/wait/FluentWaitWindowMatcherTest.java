@@ -1,6 +1,5 @@
 package org.fluentlenium.core.wait;
 
-import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentDriver;
 import org.junit.After;
 import org.junit.Before;
@@ -48,12 +47,7 @@ public class FluentWaitWindowMatcherTest {
         when(fluent.getDriver()).thenReturn(webDriver);
 
         FluentWaitWindowConditions matcher = new FluentWaitWindowConditions(wait, "testWindow");
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.displayed();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(matcher::displayed).isExactlyInstanceOf(TimeoutException.class);
 
         verify(webDriver, atLeastOnce()).getWindowHandles();
         reset(webDriver);
@@ -65,12 +59,7 @@ public class FluentWaitWindowMatcherTest {
 
         verify(webDriver, atLeastOnce()).getWindowHandles();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                matcher.notDisplayed();
-            }
-        }).isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(matcher::notDisplayed).isExactlyInstanceOf(TimeoutException.class);
 
         verify(webDriver, atLeastOnce()).getWindowHandles();
     }

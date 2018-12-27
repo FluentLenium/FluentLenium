@@ -130,8 +130,6 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
                     + (isEmpty(causeMessage) ? "" : "\nCaused by: [ " + causeMessage + "]"), e);
         }
 
-
-
         initFluent(sharedWebDriver.getDriver());
     }
 
@@ -305,7 +303,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testName  Test name
      */
     protected void failed(Throwable e, Class<?> testClass, String testName) {
-        if (isFluentControlAvailable()) {
+        if (isFluentControlAvailable() && !isIgnoredException(e)) {
             try {
                 if (getScreenshotMode() == TriggerMode.AUTOMATIC_ON_FAIL && canTakeScreenShot()) {
                     this.takeScreenshot(testClass.getSimpleName() + "_" + testName + ".png");

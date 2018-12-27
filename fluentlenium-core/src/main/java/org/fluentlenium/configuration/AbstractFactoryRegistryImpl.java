@@ -5,8 +5,6 @@ import org.atteo.classindex.ClassIndex;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,17 +68,14 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
         synchronized (this) {
             factoriesList = new ArrayList<>(factories.values());
         }
-        Collections.sort(factoriesList, new Comparator<T>() {
-            @Override
-            public int compare(T o1, T o2) {
-                FactoryPriority annotation1 = o1.getClass().getAnnotation(FactoryPriority.class);
-                int p1 = annotation1 == null ? 0 : annotation1.value();
+        factoriesList.sort((o1, o2) -> {
+            FactoryPriority annotation1 = o1.getClass().getAnnotation(FactoryPriority.class);
+            int p1 = annotation1 == null ? 0 : annotation1.value();
 
-                FactoryPriority annotation2 = o2.getClass().getAnnotation(FactoryPriority.class);
-                int p2 = annotation2 == null ? 0 : annotation2.value();
+            FactoryPriority annotation2 = o2.getClass().getAnnotation(FactoryPriority.class);
+            int p2 = annotation2 == null ? 0 : annotation2.value();
 
-                return Integer.compare(p2, p1);
-            }
+            return Integer.compare(p2, p1);
         });
         List<T> filteredFactories = new ArrayList<>();
         for (T factory : factoriesList) {

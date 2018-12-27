@@ -118,11 +118,7 @@ public class ComponentsManager extends AbstractComponentInstantiator
         WebElement webElement = unwrapElement(element);
         LocatorProxies.addProxyListener(webElement, this);
         synchronized (this) {
-            Set<Object> elementComponents = components.get(webElement);
-            if (elementComponents == null) {
-                elementComponents = new HashSet<>();
-                components.put(webElement, elementComponents);
-            }
+            Set<Object> elementComponents = components.computeIfAbsent(webElement, k -> new HashSet<>());
             elementComponents.add(component);
             fireComponentRegistered(element, component);
         }

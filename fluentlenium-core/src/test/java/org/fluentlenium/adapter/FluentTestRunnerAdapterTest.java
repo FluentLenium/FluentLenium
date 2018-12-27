@@ -2,9 +2,9 @@ package org.fluentlenium.adapter;
 
 import static org.assertj.core.api.Fail.fail;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isNull;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -18,6 +18,7 @@ import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 import org.fluentlenium.configuration.ConfigurationProperties;
+import org.junit.AssumptionViolatedException;
 import org.fluentlenium.utils.ImageUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -76,7 +77,7 @@ public class FluentTestRunnerAdapterTest {
             FileUtils.deleteDirectory(tmpDirectory.toFile());
         }
 
-        verify(adapter).failed(isNull(Throwable.class), eq(adapter.getClass()), anyString());
+        verify(adapter).failed(isNull(), eq(adapter.getClass()), anyString());
 
         verify(adapter, never()).takeScreenshot();
         verify(adapter, never()).takeScreenshot(anyString());
@@ -108,7 +109,7 @@ public class FluentTestRunnerAdapterTest {
         } finally {
             FileUtils.deleteDirectory(tmpDirectory.toFile());
         }
-        verify(adapter).failed(isNull(Throwable.class), eq(adapter.getClass()), anyString());
+        verify(adapter).failed(isNull(), eq(adapter.getClass()), anyString());
 
         verify(adapter, never()).takeScreenshot();
         verify(adapter).takeScreenshot(anyString());
@@ -131,5 +132,49 @@ public class FluentTestRunnerAdapterTest {
         }
 
         fail("FluentControl is not initialized exception, did not throw!");
+    }
+
+    @Test
+    public void takesScreenshotWhenTestFails() throws IOException {
+        FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
+        adapter.initFluent(driver);
+
+        Path tmpDirectory = Files.createTempDirectory("takesScreenshotWhenTestFails");
+        adapter.getConfiguration().setScreenshotPath(tmpDirectory.toFile().getPath());
+        adapter.getConfiguration().setHtmlDumpPath(tmpDirectory.toFile().getPath());
+
+        adapter.getConfiguration().setScreenshotMode(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
+
+        when(adapter.isFluentControlAvailable()).thenReturn(true);
+
+        try {
+            adapter.failed(new AssertionError("for test"), FluentTestRunnerAdapterTest.class, "testName");
+        } finally {
+            FileUtils.deleteDirectory(tmpDirectory.toFile());
+        }
+
+        verify(adapter).takeScreenshot("FluentTestRunnerAdapterTest_testName.png");
+    }
+
+    @Test
+    public void noScreenShotOnAssumptionException() throws IOException {
+        FluentTestRunnerAdapter adapter = spy(new FluentTestRunnerAdapter());
+        adapter.initFluent(driver);
+
+        Path tmpDirectory = Files.createTempDirectory("takesScreenshotWhenTestFails");
+        adapter.getConfiguration().setScreenshotPath(tmpDirectory.toFile().getPath());
+        adapter.getConfiguration().setHtmlDumpPath(tmpDirectory.toFile().getPath());
+
+        adapter.getConfiguration().setScreenshotMode(ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
+
+        when(adapter.isFluentControlAvailable()).thenReturn(true);
+
+        try {
+            adapter.failed(new AssumptionViolatedException("for test"), FluentTestRunnerAdapterTest.class, "testName");
+        } finally {
+            FileUtils.deleteDirectory(tmpDirectory.toFile());
+        }
+
+        verify(adapter, never()).takeScreenshot(anyString());
     }
 }

@@ -34,7 +34,7 @@ public class ElementListSupplierLocatorTest {
 
     @Test
     public void testWithNoElement() {
-        ElementListSupplierLocator locator = new ElementListSupplierLocator(() -> Arrays.asList());
+        ElementListSupplierLocator locator = new ElementListSupplierLocator(Arrays::asList);
 
         Assertions.assertThat(locator.findElement()).isNull();
         Assertions.assertThat(locator.findElements()).isEmpty();

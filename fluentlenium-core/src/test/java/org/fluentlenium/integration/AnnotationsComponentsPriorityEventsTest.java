@@ -45,7 +45,7 @@ public class AnnotationsComponentsPriorityEventsTest extends IntegrationFluentTe
          * Creates a new fluent web element.
          *
          * @param element      underlying element
-         * @param control      controle interface
+         * @param control      control interface
          * @param instantiator component instantiator
          */
         public TestComponent(WebElement element, FluentControl control, ComponentInstantiator instantiator) {
@@ -69,7 +69,7 @@ public class AnnotationsComponentsPriorityEventsTest extends IntegrationFluentTe
          * Creates a new fluent web element.
          *
          * @param element      underlying element
-         * @param control      controle interface
+         * @param control      control interface
          * @param instantiator component instantiator
          */
         public TestComponent2(WebElement element, FluentControl control, ComponentInstantiator instantiator) {

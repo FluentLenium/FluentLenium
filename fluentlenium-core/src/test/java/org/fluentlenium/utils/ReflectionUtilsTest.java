@@ -1,6 +1,5 @@
 package org.fluentlenium.utils;
 
-import org.assertj.core.api.ThrowableAssert;
 import org.junit.Test;
 
 import java.lang.reflect.Constructor;
@@ -50,12 +49,7 @@ public class ReflectionUtilsTest {
         Constructor<TestClass> testClassConstructor = ReflectionUtils.getConstructor(TestClass.class);
         assertThat(testClassConstructor.getParameterTypes()).isEmpty();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                ReflectionUtils.getConstructor(TestClass.class, "1", 2, true, "object");
-            }
-        }).isExactlyInstanceOf(NoSuchMethodException.class);
+        assertThatThrownBy(() -> ReflectionUtils.getConstructor(TestClass.class, "1", 2, true, "object")).isExactlyInstanceOf(NoSuchMethodException.class);
 
         Constructor<SuperClass> superClassConstructor = ReflectionUtils.getConstructor(SuperClass.class, "1", 2, true, "object");
         assertThat(superClassConstructor.getParameterTypes())
@@ -67,19 +61,9 @@ public class ReflectionUtilsTest {
         assertThat(object.param3).isTrue();
         assertThat(object.param4).isEqualTo("object");
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                ReflectionUtils.newInstance(SuperClass.class, "1", 2);
-            }
-        }).isExactlyInstanceOf(NoSuchMethodException.class);
+        assertThatThrownBy(() -> ReflectionUtils.newInstance(SuperClass.class, "1", 2)).isExactlyInstanceOf(NoSuchMethodException.class);
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                ReflectionUtils.newInstance(SuperClass.class, "1", 2, "true", "object");
-            }
-        }).isExactlyInstanceOf(NoSuchMethodException.class);
+        assertThatThrownBy(() -> ReflectionUtils.newInstance(SuperClass.class, "1", 2, "true", "object")).isExactlyInstanceOf(NoSuchMethodException.class);
 
     }
 

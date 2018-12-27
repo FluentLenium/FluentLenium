@@ -3,7 +3,6 @@
 [![Travis](https://img.shields.io/travis/FluentLenium/FluentLenium.svg)](https://travis-ci.org/FluentLenium/FluentLenium)
 [![Coveralls](https://img.shields.io/coveralls/FluentLenium/FluentLenium.svg)](https://coveralls.io/github/FluentLenium/FluentLenium)
 [![Maintainability](https://api.codeclimate.com/v1/badges/27aabb596e9d9eee7182/maintainability)](https://codeclimate.com/github/FluentLenium/FluentLenium/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/27aabb596e9d9eee7182/test_coverage)](https://codeclimate.com/github/FluentLenium/FluentLenium/test_coverage)
 [![Maven Central](https://img.shields.io/maven-central/v/org.fluentlenium/fluentlenium-parent.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.fluentlenium%22%20AND%20a%3A%22fluentlenium-parent%22)
 [![Website](https://img.shields.io/website-up-down-green-red/http/fluentlenium.org.svg)](http://fluentlenium.org)
 
@@ -12,8 +11,7 @@ FluentLenium helps you writing readable, reusable, reliable and resilient UI fun
 FluentLenium provides a Java [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to
 [Selenium](http://www.seleniumhq.org/), and brings some magic to avoid common issues faced by Selenium users.
 
-FluentLenium is shipped with adapters for [JUnit](junit.org/), [TestNG](http://testng.org/doc/index.html) and
-[Cucumber](https://cucumber.io), but it can also be used standalone.
+FluentLenium is shipped with adapters for [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/), [TestNG](http://testng.org/doc/index.html), [Spock](http://spockframework.org/) and [Cucumber](https://cucumber.io), but it can also be used standalone.
 
 FluentLenium best integrates with [AssertJ](http://joel-costigliola.github.io/assertj/), but you can also choose to use
 the assertion framework you want.
@@ -42,7 +40,7 @@ If you want to keep up to date please upgrade your testing framework to FluentLe
     <!-- Configure this property to latest available version -->
     <fluentlenium.version>4.0.0</fluentlenium.version>
     <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-    <selenium.version>3.11.59</selenium.version>
+    <selenium.version>3.141.59</selenium.version>
 </properties>
 
 <dependency>
@@ -161,7 +159,7 @@ public class DuckDuckMainPage extends FluentPage {
 
 - Run as a JUnit test.
 
-[More FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/examples).
+[More FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/develop/examples).
 
 ## Documentation
 
