@@ -180,4 +180,4 @@ If you want to use BDD please take a look into [Cucumber example](https://github
 
 If you want to writ in Groovy please take a look into [Spock example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spock)
 
-[Hook example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/hook) show this feature in action.
+[Hook example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/hooks) show this feature in action.
