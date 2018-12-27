@@ -194,3 +194,5 @@ build.log
 /myTestScreenshot.png
 
 settings.xml
+
+Gemfile.lock
