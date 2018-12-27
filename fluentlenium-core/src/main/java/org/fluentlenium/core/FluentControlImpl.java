@@ -67,16 +67,7 @@ public abstract class FluentControlImpl implements FluentControl {
         return controlContainer;
     }
 
-    // We want getDriver to be final.
-    public FluentControl getFluentControl() {
-        FluentControlContainer fluentControlContainer = getControlContainer();
-
-        if (fluentControlContainer == null) {
-            throw new IllegalStateException("FluentControl is not initialized, WebDriver or Configuration issue");
-        } else {
-            return fluentControlContainer.getFluentControl();
-        }
-    }
+    public abstract FluentControl getFluentControl();
 
     /**
      * Get the test adapter configuration.
