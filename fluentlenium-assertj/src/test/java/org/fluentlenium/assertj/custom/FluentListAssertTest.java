@@ -2,17 +2,21 @@ package org.fluentlenium.assertj.custom;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
-import java.util.Arrays;
-import org.fluentlenium.assertj.FluentLeniumAssertions;
-import org.fluentlenium.core.domain.FluentList;
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import org.fluentlenium.assertj.FluentLeniumAssertions;
+import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentWebElement;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class FluentListAssertTest<E extends FluentWebElement> {
 
@@ -34,9 +38,28 @@ public class FluentListAssertTest<E extends FluentWebElement> {
     }
 
     @Test
+    public void testHasTextWithMissingText() {
+        when(fluentList.texts()).thenReturn(List.of("some text", "other text"));
+
+        assertThatThrownBy(() -> listAssert.hasText("absent text"))
+                .isInstanceOf(AssertionError.class)
+                .hasMessage("No selected elements contains text: absent text . Actual texts found: [some text, other text]");
+    }
+
+    @Test
     public void testHasNotText() {
         when(fluentList.texts()).thenReturn(singletonList("other text"));
         assertNotNull(listAssert.hasNotText("some text"));
+    }
+
+    @Test
+    public void testHasNotTextWithTextPresent() {
+        when(fluentList.texts()).thenReturn(List.of("some text", "other text"));
+
+        assertThatThrownBy(() -> listAssert.hasNotText("other text"))
+                .isInstanceOf(AssertionError.class)
+                .hasMessage("At least one selected elements contains text: other text ."
+                        + " Actual texts found: [some text, other text]");
     }
 
     @Test

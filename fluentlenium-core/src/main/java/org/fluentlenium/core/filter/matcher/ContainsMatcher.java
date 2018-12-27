@@ -31,8 +31,8 @@ public class ContainsMatcher extends AbstractMatcher {
     }
 
     @Override
-    public boolean isSatisfiedBy(String obj) {
-        return CalculateService.contains(getPattern(), getValue(), obj);
+    public boolean isSatisfiedBy(String currentValue) {
+        return CalculateService.contains(getPattern(), getValue(), currentValue);
     }
 
 }
