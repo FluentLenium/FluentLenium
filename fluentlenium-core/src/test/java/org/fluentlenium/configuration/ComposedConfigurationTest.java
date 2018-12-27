@@ -1,17 +1,18 @@
 package org.fluentlenium.configuration;
 
+import static org.mockito.Mockito.RETURNS_DEFAULTS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import org.assertj.core.api.Assertions;
-import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.stubbing.Answer;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.util.function.Function;
+import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
 
-import static org.mockito.Mockito.RETURNS_DEFAULTS;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import java.util.function.Function;
 
 public class ComposedConfigurationTest {
     private ProgrammaticConfiguration configuration;
@@ -39,6 +40,14 @@ public class ComposedConfigurationTest {
         configuration = new ProgrammaticConfiguration();
         composed = new ComposedConfiguration(configuration, configuration, configurationProperties1, configurationProperties2,
                 configurationProperties3);
+    }
+
+    @Test
+    public void instantiationWithBaseConfigurationAsMutator() {
+        DummyBaseConfiguration writableConfiguration = new DummyBaseConfiguration();
+        composed = new ComposedConfiguration(writableConfiguration, configuration);
+
+        Assertions.assertThat(writableConfiguration.getGlobalConfiguration()).isEqualTo(composed);
     }
 
     @Test
@@ -81,6 +90,14 @@ public class ComposedConfigurationTest {
 
         when(getter.apply(configurationProperties3)).thenReturn(value1);
         Assertions.assertThat(getter.apply(composed)).isEqualTo(value2);
+    }
+
+    @Test
+    public void remoteUrl() {
+        testImpl(ConfigurationProperties::getRemoteUrl, input -> {
+            composed.setRemoteUrl(input);
+            return null;
+        }, null, "http://localhost:4444", "http://localhost:7777");
     }
 
     @Test

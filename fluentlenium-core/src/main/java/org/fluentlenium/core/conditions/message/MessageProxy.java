@@ -36,6 +36,7 @@ public final class MessageProxy {
      * @return a proxy generating message from annotations.
      */
     public static <T> T wrap(Class<T> messageClass, Object instance, List<MessageBuilderCall> calls) {
+        //TODO: instance parameter is not used. Intentional or not?
         return (T) Proxy.newProxyInstance(MessageProxy.class.getClassLoader(), new Class<?>[] {messageClass},
                 new MessageBuilderInvocationHandler(calls));
     }
