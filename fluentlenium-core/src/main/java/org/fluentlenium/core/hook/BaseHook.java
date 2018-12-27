@@ -197,20 +197,4 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
     public List<WebElement> findElements() {
         return this.getElementLocator().findElements();
     }
-
-    public Point onScreen() {
-        return getCoordinates().onScreen();
-    }
-
-    public Point onPage() {
-        return getCoordinates().onPage();
-    }
-
-    public Object getAuxiliary() {
-        return getCoordinates().getAuxiliary();
-    }
-
-    public Point inViewPort() {
-        return getCoordinates().inViewPort();
-    }
 }
