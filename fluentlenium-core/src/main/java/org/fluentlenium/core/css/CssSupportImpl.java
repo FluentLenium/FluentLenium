@@ -1,10 +1,13 @@
 package org.fluentlenium.core.css;
 
+import static java.util.Objects.requireNonNull;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.openqa.selenium.WebDriverException;
+
 import org.fluentlenium.core.script.JavascriptControl;
 import org.fluentlenium.core.wait.AwaitControl;
-import org.openqa.selenium.WebDriverException;
 
 import java.io.IOError;
 import java.io.IOException;
@@ -16,6 +19,10 @@ import java.nio.charset.Charset;
  */
 public class CssSupportImpl implements CssSupport {
 
+    private static final String INJECTOR_JS_PATH = "/org/fluentlenium/core/css/injector.js";
+    private static final int MAX_SCRIPT_EXECUTION_RETRY_COUNT = 10;
+    private static final long EXPLICIT_WAIT_PERIOD = 250L;
+
     private final JavascriptControl javascriptControl;
     private final AwaitControl awaitControl;
 
@@ -26,38 +33,30 @@ public class CssSupportImpl implements CssSupport {
      * @param awaitControl      await control
      */
     public CssSupportImpl(JavascriptControl javascriptControl, AwaitControl awaitControl) {
-        this.javascriptControl = javascriptControl;
-        this.awaitControl = awaitControl;
+        this.javascriptControl = requireNonNull(javascriptControl);
+        this.awaitControl = requireNonNull(awaitControl);
     }
 
     @Override
     public void inject(String cssText) {
-        InputStream injectorScript = getClass().getResourceAsStream("/org/fluentlenium/core/css/injector.js");
-        String injectorJs;
-        try {
-            injectorJs = IOUtils.toString(injectorScript, Charset.forName("UTF-8"));
-        } catch (IOException e) {
-            throw new IOError(e);
-        } finally {
-            IOUtils.closeQuietly(injectorScript);
-        }
         cssText = cssText.replace("\r\n", "").replace("\n", "");
         cssText = StringEscapeUtils.escapeEcmaScript(cssText);
-        executeScriptRetry("cssText = \"" + cssText + "\"" + ";\n" + injectorJs);
+        executeScriptRetry("cssText = \"" + cssText + "\";\n" + getContentOf(INJECTOR_JS_PATH));
     }
 
     @Override
     public void injectResource(String cssResourceName) {
-        InputStream cssStream = getClass().getResourceAsStream(cssResourceName);
-        String cssText;
-        try {
-            cssText = IOUtils.toString(cssStream, Charset.forName("UTF-8"));
+        inject(getContentOf(cssResourceName));
+    }
+
+    private String getContentOf(String resource) {
+        String content;
+        try (InputStream inputStream = getClass().getResourceAsStream(resource)) {
+            content = IOUtils.toString(inputStream, Charset.forName("UTF-8"));
         } catch (IOException e) {
             throw new IOError(e);
-        } finally {
-            IOUtils.closeQuietly(cssStream);
         }
-        inject(cssText);
+        return content;
     }
 
     private void executeScriptRetry(String script) {
@@ -67,11 +66,10 @@ public class CssSupportImpl implements CssSupport {
                 javascriptControl.executeScript(script);
                 break;
             } catch (WebDriverException e) {
-                retries += 1;
-                if (retries >= 10) {
+                if (++retries >= MAX_SCRIPT_EXECUTION_RETRY_COUNT) {
                     throw e;
                 }
-                awaitControl.await().explicitlyFor(250L);
+                awaitControl.await().explicitlyFor(EXPLICIT_WAIT_PERIOD);
             }
         }
     }
