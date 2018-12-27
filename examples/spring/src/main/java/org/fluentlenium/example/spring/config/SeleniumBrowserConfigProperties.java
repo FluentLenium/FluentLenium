@@ -24,6 +24,8 @@ public class SeleniumBrowserConfigProperties {
     private String ieDriverPath;
     @Value("${edgedriver.path}")
     private String edgeDriverPath;
+    @Value("${operadriver.path}")
+    private String operaDriverPath;
 
     public BrowserConfig getBrowserConfig() {
         return new BrowserConfig(browserType, useHub, hubLocation);
@@ -43,6 +45,8 @@ public class SeleniumBrowserConfigProperties {
                 return ieDriverPath;
             case EDGE:
                 return edgeDriverPath;
+            case OPERA:
+                return operaDriverPath;
             default:
                 return chromeDriverPath;
         }

@@ -12,6 +12,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -98,6 +100,22 @@ public enum BrowserType {
         @Override
         public String getDriverSystemPropertyName() {
             return "webdriver.edge.driver";
+        }
+    },
+    OPERA() {
+        @Override
+        public WebDriver getWebDriver() {
+            return new OperaDriver();
+        }
+
+        @Override
+        protected MutableCapabilities getBrowserCapabilities() {
+            return new OperaOptions();
+        }
+
+        @Override
+        public String getDriverSystemPropertyName() {
+            return "webdriver.opera.driver";
         }
     };
 
