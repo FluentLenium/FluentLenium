@@ -593,17 +593,22 @@ public class FluentDriver extends FluentControlImpl implements FluentControl { /
         return getComponentsManager().asComponentList(listClass, componentClass, elements);
     }
 
+    @Override
     public ContainerContext inject(Object container) {
         return getFluentInjector().inject(container);
     }
+
+    @Override
     public <T> T newInstance(Class<T> cls) {
         return getFluentInjector().newInstance(cls);
     }
 
+    @Override
     public ContainerContext injectComponent(Object componentContainer, Object parentContainer, SearchContext searchContext) {
         return getFluentInjector().injectComponent(componentContainer, parentContainer, searchContext);
     }
 
+    @Override
     public CssSupport css() {
         return getCssControl().css();
     }
