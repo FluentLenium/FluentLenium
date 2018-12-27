@@ -1,6 +1,10 @@
 package org.fluentlenium.adapter;
 
-import org.fluentlenium.configuration.*;
+import org.fluentlenium.configuration.Configuration;
+import org.fluentlenium.configuration.ConfigurationFactory;
+import org.fluentlenium.configuration.ConfigurationFactoryProvider;
+import org.fluentlenium.configuration.ConfigurationProperties;
+import org.fluentlenium.configuration.WebDrivers;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.action.KeyboardActions;
