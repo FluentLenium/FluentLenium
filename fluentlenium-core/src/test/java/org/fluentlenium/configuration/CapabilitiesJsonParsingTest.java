@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.Capabilities;
+
 public class CapabilitiesJsonParsingTest {
 
     private static final String CAPABILITIES = "{\"chromeOptions\": {\"args\": [\"headless\",\"disable-gpu\"]}}";
@@ -29,5 +30,4 @@ public class CapabilitiesJsonParsingTest {
                 (LinkedHashMap<String, ArrayList<String>>) capabilities.getCapability("chromeOptions");
         assertThat(chromeOptions.get("args")).contains("headless", "disable-gpu");
     }
-
-} 
+}
