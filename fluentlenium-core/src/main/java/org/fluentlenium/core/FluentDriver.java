@@ -3,8 +3,6 @@ package org.fluentlenium.core;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.fluentlenium.configuration.Configuration;
-import org.fluentlenium.configuration.ConfigurationFactory;
-import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.action.WindowAction;

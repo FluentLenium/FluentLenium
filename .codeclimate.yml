@@ -11,6 +11,8 @@ engines:
     checks:
       com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck:
         enabled: false
+      com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck:
+        enabled: false
 
 ratings:
   paths:

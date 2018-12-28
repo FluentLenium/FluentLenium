@@ -478,7 +478,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         return getHookControl().noHook();
     }
 
-    public <O, H extends org.fluentlenium.core.hook.FluentHook<O>> FluentList<E> withHook(Class<H> hook) {
+    public <O, H extends FluentHook<O>> FluentList<E> withHook(Class<H> hook) {
         return getHookControl().withHook(hook);
     }
 

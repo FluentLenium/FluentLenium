@@ -25,20 +25,20 @@ public abstract class ListImpl<T> implements List<T> {
         return getList().set(index, element);
     }
 
-    public boolean containsAll(Collection<?> c) {
-        return getList().containsAll(c);
+    public boolean containsAll(Collection<?> collection) {
+        return getList().containsAll(collection);
     }
 
     public List<T> subList(int fromIndex, int toIndex) {
         return getList().subList(fromIndex, toIndex);
     }
 
-    public boolean add(T e) {
-        return getList().add(e);
+    public boolean add(T element) {
+        return getList().add(element);
     }
 
-    public boolean remove(Object o) {
-        return getList().remove(o);
+    public boolean remove(Object obj) {
+        return getList().remove(obj);
     }
 
     public int size() {
@@ -49,40 +49,40 @@ public abstract class ListImpl<T> implements List<T> {
         return getList().listIterator();
     }
 
-    public boolean contains(Object o) {
-        return getList().contains(o);
+    public boolean contains(Object obj) {
+        return getList().contains(obj);
     }
 
     public Object[] toArray() {
         return getList().toArray();
     }
 
-    public boolean retainAll(Collection<?> c) {
-        return getList().retainAll(c);
+    public boolean retainAll(Collection<?> collection) {
+        return getList().retainAll(collection);
     }
 
-    public int lastIndexOf(Object o) {
-        return getList().lastIndexOf(o);
+    public int lastIndexOf(Object obj) {
+        return getList().lastIndexOf(obj);
     }
 
-    public <T> T[] toArray(T[] a) {
-        return getList().toArray(a);
+    public <T> T[] toArray(T[] elements) {
+        return getList().toArray(elements);
     }
 
-    public boolean removeAll(Collection<?> c) {
-        return getList().removeAll(c);
+    public boolean removeAll(Collection<?> collection) {
+        return getList().removeAll(collection);
     }
 
     public T remove(int index) {
         return getList().remove(index);
     }
 
-    public boolean addAll(Collection<? extends T> c) {
-        return getList().addAll(c);
+    public boolean addAll(Collection<? extends T> collection) {
+        return getList().addAll(collection);
     }
 
-    public int indexOf(Object o) {
-        return getList().indexOf(o);
+    public int indexOf(Object obj) {
+        return getList().indexOf(obj);
     }
 
     public void add(int index, T element) {
@@ -97,8 +97,8 @@ public abstract class ListImpl<T> implements List<T> {
         return getList().listIterator(index);
     }
 
-    public boolean addAll(int index, Collection<? extends T> c) {
-        return getList().addAll(index, c);
+    public boolean addAll(int index, Collection<? extends T> collection) {
+        return getList().addAll(index, collection);
     }
 
     public Iterator<T> iterator() {

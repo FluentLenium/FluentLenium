@@ -75,7 +75,7 @@ public class FluentWebElement extends Component
                     LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
                     ElementLocator locator = locatorHandler.getLocator();
                     WebElement noHookElement = LocatorProxies.createWebElement(locator);
-                    return getFluentControl().newComponent(FluentWebElement.this.getClass(), noHookElement);
+                    return getFluentControl().newComponent(this.getClass(), noHookElement);
                 });
 
         search = new Search(element, this, this.instantiator, this.control);

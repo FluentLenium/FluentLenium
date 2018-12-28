@@ -258,7 +258,7 @@ public abstract class FluentControlImpl implements FluentControl {
         return getFluentControl().executeScript(script, args);
     }
 
-    public <L extends java.util.List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, Iterable<WebElement> elements) {
+    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, Iterable<WebElement> elements) {
         return getFluentControl().asComponentList(listClass, componentClass, elements);
     }
 
@@ -298,7 +298,7 @@ public abstract class FluentControlImpl implements FluentControl {
         return getFluentControl().canTakeScreenShot();
     }
 
-    public <L extends java.util.List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass) {
+    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass) {
         return getFluentControl().newComponentList(listClass, componentClass);
     }
 

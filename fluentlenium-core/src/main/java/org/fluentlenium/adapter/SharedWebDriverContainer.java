@@ -29,7 +29,8 @@ public enum SharedWebDriverContainer {
      */
     SharedWebDriverContainer() {
         // NOPMD SingularField
-        SharedWebDriverContainerShutdownHook shutdownHook = new SharedWebDriverContainerShutdownHook("SharedWebDriverContainerShutdownHook");
+        SharedWebDriverContainerShutdownHook shutdownHook =
+                new SharedWebDriverContainerShutdownHook("SharedWebDriverContainerShutdownHook");
         Runtime.getRuntime().addShutdownHook(shutdownHook);
     }
 
@@ -70,16 +71,16 @@ public enum SharedWebDriverContainer {
             this.testName = testName;
         }
 
-        public boolean equals(final Object o) {
-            if (o == this) {
+        public boolean equals(final Object obj) {
+            if (obj == this) {
                 return true;
             }
 
-            if (!(o instanceof ClassAndTestName)) {
+            if (!(obj instanceof ClassAndTestName)) {
                 return false;
             }
 
-            final ClassAndTestName other = (ClassAndTestName) o;
+            final ClassAndTestName other = (ClassAndTestName) obj;
 
             if (!other.canEqual(this)) {
                 return false;
@@ -97,12 +98,12 @@ public enum SharedWebDriverContainer {
         }
 
         public int hashCode() {
-            final int PRIME = 59;
+            final int prime = 59;
             int result = 1;
-            final Object $testClass = this.testClass;
-            result = result * PRIME + ($testClass == null ? 43 : $testClass.hashCode());
-            final Object $testName = this.testName;
-            result = result * PRIME + ($testName == null ? 43 : $testName.hashCode());
+            final Object testClazz = this.testClass;
+            result = result * prime + (testClazz == null ? 43 : testClazz.hashCode());
+            final Object testName = this.testName;
+            result = result * prime + (testName == null ? 43 : testName.hashCode());
             return result;
         }
     }
@@ -118,16 +119,16 @@ public enum SharedWebDriverContainer {
             this.threadId = threadId;
         }
 
-        public boolean equals(final Object o) {
-            if (o == this) {
+        public boolean equals(final Object obj) {
+            if (obj == this) {
                 return true;
             }
 
-            if (!(o instanceof ClassAndTestNameWithThreadId)) {
+            if (!(obj instanceof ClassAndTestNameWithThreadId)) {
                 return false;
             }
 
-            final ClassAndTestNameWithThreadId other = (ClassAndTestNameWithThreadId) o;
+            final ClassAndTestNameWithThreadId other = (ClassAndTestNameWithThreadId) obj;
 
             if (!other.canEqual(this)) {
                 return false;
@@ -149,14 +150,14 @@ public enum SharedWebDriverContainer {
         }
 
         public int hashCode() {
-            final int PRIME = 59;
+            final int prime = 59;
             int result = 1;
-            final Object $testClass = this.testClass;
-            result = result * PRIME + ($testClass == null ? 43 : $testClass.hashCode());
-            final Object $testName = this.testName;
-            result = result * PRIME + ($testName == null ? 43 : $testName.hashCode());
-            final Object $threadId = this.threadId;
-            result = result * PRIME + ($threadId == null ? 43 : $threadId.hashCode());
+            final Object testClazz = this.testClass;
+            result = result * prime + (testClazz == null ? 43 : testClazz.hashCode());
+            final Object testName = this.testName;
+            result = result * prime + (testName == null ? 43 : testName.hashCode());
+            final Object threadId = this.threadId;
+            result = result * prime + (threadId == null ? 43 : threadId.hashCode());
             return result;
         }
     }

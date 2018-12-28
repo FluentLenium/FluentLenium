@@ -404,10 +404,10 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private static class ComponentAndProxy<T, P> {
-        private T component;
-        private P proxy;
+        private final T component;
+        private final P proxy;
 
-        public ComponentAndProxy(T component, P proxy) {
+        ComponentAndProxy(T component, P proxy) {
             this.component = component;
             this.proxy = proxy;
         }

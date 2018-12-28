@@ -50,8 +50,8 @@ public class AlertImpl implements Alert {
         getAlert().accept();
     }
 
-    public void sendKeys(String s) {
-        getAlert().sendKeys(s);
+    public void sendKeys(String keysToSend) {
+        getAlert().sendKeys(keysToSend);
     }
 
     public void dismiss() {

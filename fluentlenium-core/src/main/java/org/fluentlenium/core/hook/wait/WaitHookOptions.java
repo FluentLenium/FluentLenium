@@ -13,11 +13,11 @@ import java.util.concurrent.TimeUnit;
 @Wait
 public class WaitHookOptions {
 
-    private TimeUnit timeUnit = TimeUnit.MILLISECONDS;
+    private TimeUnit timeUnit;
     private Long atMost;
-    private TimeUnit pollingTimeUnit = TimeUnit.MILLISECONDS;
+    private TimeUnit pollingTimeUnit;
     private Long pollingEvery;
-    private java.util.Collection<Class<? extends Throwable>> ignoreAll;
+    private Collection<Class<? extends Throwable>> ignoreAll;
     private boolean withNoDefaultsException;
 
     /**
@@ -41,7 +41,8 @@ public class WaitHookOptions {
         withNoDefaultsException = annotation.withNoDefaultsException();
     }
 
-    public WaitHookOptions(TimeUnit timeUnit, Long atMost, TimeUnit pollingTimeUnit, Long pollingEvery, Collection<Class<? extends Throwable>> ignoreAll, boolean withNoDefaultsException) {
+    public WaitHookOptions(TimeUnit timeUnit, Long atMost, TimeUnit pollingTimeUnit, Long pollingEvery,
+                           Collection<Class<? extends Throwable>> ignoreAll, boolean withNoDefaultsException) {
         this.timeUnit = timeUnit;
         this.atMost = atMost;
         this.pollingTimeUnit = pollingTimeUnit;
@@ -174,7 +175,20 @@ public class WaitHookOptions {
         }
 
         public String toString() {
-            return "WaitHookOptions.WaitHookOptionsBuilder(timeUnit=" + this.timeUnit + ", atMost=" + this.atMost + ", pollingTimeUnit=" + this.pollingTimeUnit + ", pollingEvery=" + this.pollingEvery + ", ignoreAll=" + this.ignoreAll + ", withNoDefaultsException=" + this.withNoDefaultsException + ")";
+            return "WaitHookOptions.WaitHookOptionsBuilder(" +
+                    "timeUnit=" +
+                    this.timeUnit +
+                    ", atMost=" +
+                    this.atMost +
+                    ", pollingTimeUnit=" +
+                    this.pollingTimeUnit +
+                    ", pollingEvery=" +
+                    this.pollingEvery +
+                    ", ignoreAll=" +
+                    this.ignoreAll +
+                    ", withNoDefaultsException=" +
+                    this.withNoDefaultsException +
+                    ")";
         }
     }
 }
