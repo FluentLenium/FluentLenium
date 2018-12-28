@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 
 /**
@@ -32,11 +33,8 @@ public final class ResourceUtils {
         File tempFile = File.createTempFile(String.valueOf(resourceStream.hashCode()), ".tmp");
         tempFile.deleteOnExit();
 
-        FileOutputStream out = new FileOutputStream(tempFile);
-        try {
+        try (OutputStream out = new FileOutputStream(tempFile)) {
             IOUtils.copy(resourceStream, out);
-        } finally {
-            IOUtils.closeQuietly(out);
         }
 
         return tempFile;
@@ -46,7 +44,7 @@ public final class ResourceUtils {
      * Get a classpath resource as File URL.
      *
      * @param resourcePath resource classpath
-     * @return File matching the classpath resource, or null if not found
+     * @return URL matching the classpath resource, or null if not found
      * @throws IOException when an exception occurs while reading the resource
      */
     public static URL getResourceAsURL(String resourcePath) throws IOException {

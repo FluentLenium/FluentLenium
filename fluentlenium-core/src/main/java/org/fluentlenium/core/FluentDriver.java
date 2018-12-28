@@ -1,16 +1,5 @@
 package org.fluentlenium.core;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Paths;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
@@ -33,6 +22,8 @@ import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.utils.ImageUtils;
 import org.fluentlenium.utils.UrlUtils;
+import lombok.experimental.Delegate;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
@@ -48,7 +39,14 @@ import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import lombok.experimental.Delegate;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Paths;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Util Class which offers some shortcut to webdriver methods
@@ -148,12 +146,10 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
             if (destFile == null) {
                 destFile = new File(fileName);
             }
-            try {
-                PrintWriter printWriter = new PrintWriter(destFile, "UTF-8");
+            try (PrintWriter printWriter = new PrintWriter(destFile, "UTF-8")) {
                 printWriter.write("Can't dump HTML");
                 printWriter.println();
                 e.printStackTrace(printWriter);
-                IOUtils.closeQuietly(printWriter);
             } catch (IOException e1) {
                 throw new RuntimeException("error when dumping HTML", e); //NOPMD PreserveStackTrace
             }
