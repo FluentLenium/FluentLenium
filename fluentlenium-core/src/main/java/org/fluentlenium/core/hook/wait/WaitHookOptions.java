@@ -175,20 +175,20 @@ public class WaitHookOptions {
         }
 
         public String toString() {
-            return "WaitHookOptions.WaitHookOptionsBuilder(" +
-                    "timeUnit=" +
-                    this.timeUnit +
-                    ", atMost=" +
-                    this.atMost +
-                    ", pollingTimeUnit=" +
-                    this.pollingTimeUnit +
-                    ", pollingEvery=" +
-                    this.pollingEvery +
-                    ", ignoreAll=" +
-                    this.ignoreAll +
-                    ", withNoDefaultsException=" +
-                    this.withNoDefaultsException +
-                    ")";
+            return "WaitHookOptions.WaitHookOptionsBuilder("
+                    + "timeUnit="
+                    + this.timeUnit
+                    + ", atMost="
+                    + this.atMost
+                    + ", pollingTimeUnit="
+                    + this.pollingTimeUnit
+                    + ", pollingEvery="
+                    + this.pollingEvery
+                    + ", ignoreAll="
+                    + this.ignoreAll
+                    + ", withNoDefaultsException="
+                    + this.withNoDefaultsException
+                    + ")";
         }
     }
 }

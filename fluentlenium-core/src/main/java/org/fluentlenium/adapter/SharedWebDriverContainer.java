@@ -42,7 +42,8 @@ public enum SharedWebDriverContainer {
         return getImpl().getDriver(testClass, testName, driverLifecycle);
     }
 
-    public <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
+    public <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass,
+                                                 String testName, DriverLifecycle driverLifecycle) {
         return getImpl().getOrCreateDriver(webDriverFactory, testClass, testName, driverLifecycle);
     }
 
@@ -102,8 +103,8 @@ public enum SharedWebDriverContainer {
             int result = 1;
             final Object testClazz = this.testClass;
             result = result * prime + (testClazz == null ? 43 : testClazz.hashCode());
-            final Object testName = this.testName;
-            result = result * prime + (testName == null ? 43 : testName.hashCode());
+            final Object nameOfTest = this.testName;
+            result = result * prime + (nameOfTest == null ? 43 : nameOfTest.hashCode());
             return result;
         }
     }
@@ -154,10 +155,10 @@ public enum SharedWebDriverContainer {
             int result = 1;
             final Object testClazz = this.testClass;
             result = result * prime + (testClazz == null ? 43 : testClazz.hashCode());
-            final Object testName = this.testName;
-            result = result * prime + (testName == null ? 43 : testName.hashCode());
-            final Object threadId = this.threadId;
-            result = result * prime + (threadId == null ? 43 : threadId.hashCode());
+            final Object nameOfTest = this.testName;
+            result = result * prime + (nameOfTest == null ? 43 : nameOfTest.hashCode());
+            final Object idOfThread = this.threadId;
+            result = result * prime + (idOfThread == null ? 43 : idOfThread.hashCode());
             return result;
         }
     }
@@ -184,8 +185,8 @@ public enum SharedWebDriverContainer {
          * @param <T>              type of test
          * @return shared web driver
          */
-        <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass, String testName,
-                                              DriverLifecycle driverLifecycle) {
+        <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass,
+                                              String testName, DriverLifecycle driverLifecycle) {
             synchronized (this) {
                 SharedWebDriver driver = getDriver(testClass, testName, driverLifecycle);
                 if (driver == null) {

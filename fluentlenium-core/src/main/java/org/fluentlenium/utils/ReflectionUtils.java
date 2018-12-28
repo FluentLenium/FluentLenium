@@ -7,7 +7,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -213,19 +212,6 @@ public final class ReflectionUtils {
     }
 
     /**
-     * Retrieve the constructor of a class for given optional argument types.
-     *
-     * @param cls       class to retrieve the constructor from
-     * @param argsTypes argument types
-     * @param <T>       type to retrieve the constructor from
-     * @return matching constructor for given optional argument values
-     * @throws NoSuchMethodException if a matching method is not found.
-     */
-    public static <T> Constructor<T> getConstructorOptional(Class<T> cls, Class<?>... argsTypes) throws NoSuchMethodException {
-        return getConstructorOptional(0, cls, argsTypes);
-    }
-
-    /**
      * Retrieve the constructor of a class for given optional argument types, considering mandatory values at the
      * beginning of the given types.
      *
@@ -334,50 +320,6 @@ public final class ReflectionUtils {
             }
         }
         throw new NoSuchMethodException("Can't find any valid constructor.");
-    }
-
-    /**
-     * Get declared methods that have the given annotation defined.
-     *
-     * @param object     object instance
-     * @param annotation annotation to look for
-     * @return list of methods
-     */
-    public static List<Method> getDeclaredMethodsWithAnnotation(Object object, Class<? extends Annotation> annotation) {
-        if (object == null) {
-            return getDeclaredMethodsWithAnnotation(null, annotation);
-        }
-        return getDeclaredMethodsWithAnnotation(object.getClass(), annotation);
-    }
-
-    /**
-     * Retrieve declared methods marked with given annotation.
-     *
-     * @param objectClass class to analyze
-     * @param annotation  marker annotation
-     * @return Lise of methods that are marked with given annotation
-     */
-    public static List<Method> getDeclaredMethodsWithAnnotation(Class<?> objectClass, Class<? extends Annotation> annotation) {
-        List<Method> methods = new ArrayList<>();
-
-        if (objectClass == null) {
-            return methods;
-        }
-
-        ClassAnnotationKey cacheKey = new ClassAnnotationKey(objectClass, annotation);
-        if (DECLARED_METHODS_CACHE.containsKey(cacheKey)) {
-            return DECLARED_METHODS_CACHE.get(cacheKey);
-        }
-
-        Method[] declaredMethods = objectClass.getDeclaredMethods();
-        for (Method method : declaredMethods) {
-            if (method.isAnnotationPresent(annotation)) {
-                methods.add(method);
-            }
-        }
-
-        DECLARED_METHODS_CACHE.put(cacheKey, methods);
-        return methods;
     }
 
     /**

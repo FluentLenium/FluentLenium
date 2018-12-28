@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
  */
 public class HookDefinition<T> {
     @Nonnull
-    private Class<? extends FluentHook<T>> hookClass;
+    private final Class<? extends FluentHook<T>> hookClass;
     private T options;
 
     public HookDefinition(@Nonnull Class<? extends FluentHook<T>> hookClass) {

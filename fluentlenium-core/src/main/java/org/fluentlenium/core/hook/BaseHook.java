@@ -158,8 +158,8 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
         getElement().submit();
     }
 
-    public String getCssValue(String s) {
-        return getElement().getCssValue(s);
+    public String getCssValue(String propertyName) {
+        return getElement().getCssValue(propertyName);
     }
 
     public String getTagName() {
@@ -182,8 +182,8 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
         getElement().click();
     }
 
-    public String getAttribute(String s) {
-        return getElement().getAttribute(s);
+    public String getAttribute(String name) {
+        return getElement().getAttribute(name);
     }
 
     public void clear() {
