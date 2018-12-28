@@ -12,7 +12,7 @@ FluentLenium provides a Java [fluent interface](http://en.wikipedia.org/wiki/Flu
 [Selenium](http://www.seleniumhq.org/), and brings some [extra features](http://fluentlenium.org/docs/key_features/)
  to avoid common issues faced by Selenium users.
 
-FluentLenium is shipped with adapters for [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/), [TestNG](http://testng.org/doc/index.html), [Spock](http://spockframework.org/) and [Cucumber](https://cucumber.io), but it can also be used (standalone)[http://fluentlenium.org/docs/test-runners/#standalone-mode].
+FluentLenium is shipped with adapters for [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/), [TestNG](http://testng.org/doc/index.html), [Spock](http://spockframework.org/) and [Cucumber](https://cucumber.io), but it can also be used [standalone](http://fluentlenium.org/docs/test-runners/#standalone-mode).
 
 FluentLenium best integrates with [AssertJ](http://joel-costigliola.github.io/assertj/), but you can also choose to use
 the [assertion framework](http://fluentlenium.org/docs/assertion-libraries/) you want.
