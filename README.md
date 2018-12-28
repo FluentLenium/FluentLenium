@@ -9,18 +9,19 @@
 FluentLenium helps you writing readable, reusable, reliable and resilient UI functional tests for the browser.
 
 FluentLenium provides a Java [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to
-[Selenium](http://www.seleniumhq.org/), and brings some [features](http://fluentlenium.org/docs/key_features/)
+[Selenium](http://www.seleniumhq.org/), and brings some [extra features](http://fluentlenium.org/docs/key_features/)
  to avoid common issues faced by Selenium users.
 
-FluentLenium is shipped with adapters for [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/), [TestNG](http://testng.org/doc/index.html), [Spock](http://spockframework.org/) and [Cucumber](https://cucumber.io), but it can also be used standalone.
+FluentLenium is shipped with adapters for [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/), [TestNG](http://testng.org/doc/index.html), [Spock](http://spockframework.org/) and [Cucumber](https://cucumber.io), but it can also be used (standalone)[http://fluentlenium.org/docs/test-runners/#standalone-mode].
 
 FluentLenium best integrates with [AssertJ](http://joel-costigliola.github.io/assertj/), but you can also choose to use
-the assertion framework you want.
+the [assertion framework](http://fluentlenium.org/docs/assertion-libraries/) you want.
+
+FluentLenium gives you [multiple methods](http://fluentlenium.org/docs/test-methods/) which help you write tests quicker. All those methods are tested daily by commercial regression test suites maintaned by project developers.
 
 ## Documentation
 
-Detailed documentation is available on [fluentlenium.org](http://fluentlenium.org), or in the
-[docs sources directory](https://github.com/FluentLenium/FluentLenium/tree/develop/docs).
+Detailed documentation is available on [fluentlenium.org](http://fluentlenium.org).
 
 
 # Quickstart with JUnit and AssertJ
@@ -91,6 +92,7 @@ public class DuckDuckGoTest extends FluentTest {
 - Run as a JUnit test.
 
 [More detailed FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/develop/examples).
+Examples include `headless` Chrome and Firefox, Spring-based framework supporting multiple browsers and [much more](http://fluentlenium.org/quickstart/#more-examples).
 
 ## Contact Us
 If you have any comment, remark or issue, please open an issue on
