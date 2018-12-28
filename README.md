@@ -91,7 +91,7 @@ public class DuckDuckGoTest extends FluentTest {
 
 - Run as a JUnit test.
 
-More detailed FluentLenium examples are available in [examples section(https://github.com/FluentLenium/FluentLenium/tree/develop/examples).
+More detailed FluentLenium examples are available in [examples section](https://github.com/FluentLenium/FluentLenium/tree/develop/examples).
 Examples include `headless` Chrome and Firefox, [Spring](https://spring.io/)-based framework supporting multiple browsers and [much more](http://fluentlenium.org/quickstart/#more-examples).
 
 ## Contact Us
