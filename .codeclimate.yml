@@ -8,9 +8,9 @@ engines:
     enabled: true
     config: dev-config/checkstyle/fluentlenium_checks.xml
     channel: "beta"
-  checks:
-    com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck:
-      enabled: false
+    checks:
+      com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck:
+        enabled: false
 
 ratings:
   paths:
