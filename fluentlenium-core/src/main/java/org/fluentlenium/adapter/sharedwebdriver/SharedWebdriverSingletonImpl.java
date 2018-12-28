@@ -216,10 +216,11 @@ class SharedWebdriverSingletonImpl {
 
     private List<SharedWebDriver> getDrivers(Class<?> testClass, Map<?, SharedWebDriver> webDrivers) {
         List<SharedWebDriver> drivers = new ArrayList<>();
-        for (SharedWebDriver testDriver : webDrivers.values())
+        for (SharedWebDriver testDriver : webDrivers.values()) {
             if (testDriver.getTestClass() == testClass) {
                 drivers.add(testDriver);
             }
+        }
         return drivers;
     }
 
