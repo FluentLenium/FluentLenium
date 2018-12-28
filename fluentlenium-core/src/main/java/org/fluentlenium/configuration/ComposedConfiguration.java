@@ -165,50 +165,62 @@ public class ComposedConfiguration implements Configuration {
                 .orElse(null);
     }
 
+    @Override
     public void setConfigurationFactory(Class<? extends ConfigurationFactory> configurationFactory) {
         getWritableConfiguration().setConfigurationFactory(configurationFactory);
     }
 
+    @Override
     public void setDeleteCookies(Boolean deleteCookies) {
         getWritableConfiguration().setDeleteCookies(deleteCookies);
     }
 
+    @Override
     public void setCustomProperty(String key, String value) {
         getWritableConfiguration().setCustomProperty(key, value);
     }
 
+    @Override
     public void setBaseUrl(String baseUrl) {
         getWritableConfiguration().setBaseUrl(baseUrl);
     }
 
+    @Override
     public void setWebDriver(String webDriver) {
         getWritableConfiguration().setWebDriver(webDriver);
     }
 
+    @Override
     public void setPageLoadTimeout(Long pageLoadTimeout) {
         getWritableConfiguration().setPageLoadTimeout(pageLoadTimeout);
     }
 
+    @Override
     public void setHtmlDumpMode(TriggerMode htmlDumpMode) {
         getWritableConfiguration().setHtmlDumpMode(htmlDumpMode);
     }
 
+    @Override
     public void setScreenshotPath(String screenshotPath) {
         getWritableConfiguration().setScreenshotPath(screenshotPath);
     }
 
+    @Override
     public void setBrowserTimeoutRetries(Integer retriesNumber) {
         getWritableConfiguration().setBrowserTimeoutRetries(retriesNumber);
     }
 
+    @Override
     public void setRemoteUrl(String remoteUrl) {
         getWritableConfiguration().setRemoteUrl(remoteUrl);
     }
 
+    @Override
     public void setImplicitlyWait(Long implicitlyWait) {
         getWritableConfiguration().setImplicitlyWait(implicitlyWait);
     }
 
+    @Override
     public void setDriverLifecycle(DriverLifecycle driverLifecycle) {
         getWritableConfiguration().setDriverLifecycle(driverLifecycle);
     }
@@ -217,30 +229,37 @@ public class ComposedConfiguration implements Configuration {
         getWritableConfiguration().setAwaitPollingEvery(awaitPollingEvery);
     }
 
+    @Override
     public void setCapabilities(Capabilities capabilities) {
         getWritableConfiguration().setCapabilities(capabilities);
     }
 
+    @Override
     public void setScreenshotMode(TriggerMode screenshotMode) {
         getWritableConfiguration().setScreenshotMode(screenshotMode);
     }
 
+    @Override
     public void setHtmlDumpPath(String htmlDumpPath) {
         getWritableConfiguration().setHtmlDumpPath(htmlDumpPath);
     }
 
+    @Override
     public void setAwaitAtMost(Long awaitAtMost) {
         getWritableConfiguration().setAwaitAtMost(awaitAtMost);
     }
 
+    @Override
     public void setBrowserTimeout(Long timeout) {
         getWritableConfiguration().setBrowserTimeout(timeout);
     }
 
+    @Override
     public void setScriptTimeout(Long scriptTimeout) {
         getWritableConfiguration().setScriptTimeout(scriptTimeout);
     }
 
+    @Override
     public void setEventsEnabled(Boolean eventsEnabled) {
         getWritableConfiguration().setEventsEnabled(eventsEnabled);
     }
