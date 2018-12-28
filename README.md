@@ -26,7 +26,7 @@ Detailed documentation is available on [fluentlenium.org](http://fluentlenium.or
 
 # Quickstart with JUnit and AssertJ
 
-Quickstart steps are described in details in our [separate documentation section](http://fluentlenium.org/quickstart/).
+Quickstart steps are described in detail in our [separate documentation section](http://fluentlenium.org/quickstart/).
 
 Short summary:
 
@@ -92,7 +92,7 @@ public class DuckDuckGoTest extends FluentTest {
 - Run as a JUnit test.
 
 [More detailed FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/develop/examples).
-Examples include `headless` Chrome and Firefox, Spring-based framework supporting multiple browsers and [much more](http://fluentlenium.org/quickstart/#more-examples).
+Examples include `headless` Chrome and Firefox, [Spring](https://spring.io/)-based framework supporting multiple browsers and [much more](http://fluentlenium.org/quickstart/#more-examples).
 
 ## Contact Us
 If you have any comment, remark or issue, please open an issue on
