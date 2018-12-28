@@ -163,7 +163,7 @@ public class DuckDuckMainPage extends FluentPage {
 
 ## Documentation
 
-Full documentation is available on [fluentlenium.org](http://fluentlenium.org/docs), or in the
+Full documentation is available on [fluentlenium.org](http://fluentlenium.org), or in the
 [docs sources directory](https://github.com/FluentLenium/FluentLenium/tree/develop/docs).
 
 ## Contact Us
