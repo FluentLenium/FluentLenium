@@ -20,6 +20,7 @@ public class DuckDuckGoChromeTest extends FluentTest {
             System.setProperty(CHROME_DRIVER_PROPERTY, PATH_TO_CHROME_DRIVER);
         }
     }
+
     @Test
     public void titleOfDuckDuckGoShouldContainSearchQueryName() {
         String searchPhrase = "searchPhrase";

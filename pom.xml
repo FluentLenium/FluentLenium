@@ -101,6 +101,17 @@
                 <role>developer</role>
             </roles>
         </developer>
+        <developer>
+            <id>Slawek</id>
+            <name>Slawomir Radzyminski</name>
+            <email>slawomir.radzyminski@gmail.com</email>
+            <url>https://github.com/slawekradzyminski</url>
+            <organization>Ocado Technology</organization>
+            <organizationUrl>http://www.ocadotechnology.com/</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <properties>

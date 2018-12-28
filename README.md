@@ -9,29 +9,25 @@
 FluentLenium helps you writing readable, reusable, reliable and resilient UI functional tests for the browser.
 
 FluentLenium provides a Java [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to
-[Selenium](http://www.seleniumhq.org/), and brings some magic to avoid common issues faced by Selenium users.
+[Selenium](http://www.seleniumhq.org/), and brings some [features](http://fluentlenium.org/docs/key_features/)
+ to avoid common issues faced by Selenium users.
 
 FluentLenium is shipped with adapters for [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/), [TestNG](http://testng.org/doc/index.html), [Spock](http://spockframework.org/) and [Cucumber](https://cucumber.io), but it can also be used standalone.
 
 FluentLenium best integrates with [AssertJ](http://joel-costigliola.github.io/assertj/), but you can also choose to use
 the assertion framework you want.
 
-# Choose the right version
+## Documentation
 
-FluentLenium 4.x is the newest version of FluentLenium it is based on JDK 11 it includes latest enhancements and features, but Selenium 3 is required to run it.
+Detailed documentation is available on [fluentlenium.org](http://fluentlenium.org), or in the
+[docs sources directory](https://github.com/FluentLenium/FluentLenium/tree/develop/docs).
 
-FluentLenium 3.x is based on JDK 1.8 - we are not going to add new features to this version but still planning work on bugfixes.
-
-FluentLenium 1.x is in maintenance state, and no new feature will be added anymore. It requires Selenium 2 and
-Java 7, but can also be used with Java 8. Selenium 3 is not supported in this version though.
-
-Starting from FluentLenium 3.1.0 you can use all sparks of Java 8, including lambdas. It is a nice extension in
-comparison to Selenium 3 which is still basing on Guava objects. Please take a look on documentation to find `await`
-lambda usage example.
-
-If you want to keep up to date please upgrade your testing framework to FluentLenium 4.x
 
 # Quickstart with JUnit and AssertJ
+
+Quickstart steps are described in details in our [separate documentation section](http://fluentlenium.org/quickstart/).
+
+Short summary:
 
 - Add dependencies to your `pom.xml`.
 
@@ -69,7 +65,7 @@ If you want to keep up to date please upgrade your testing framework to FluentLe
 </dependency>
 ```
 
-- Basic FluentLenium test
+- Add basic FluentLenium test
 
 ```java
 import org.fluentlenium.adapter.junit.FluentTest;
@@ -92,79 +88,9 @@ public class DuckDuckGoTest extends FluentTest {
 }
 ```
 
-- A little bit more advanced version of the same FluentLenium test
-
-```java
-import org.fluentlenium.adapter.junit.FluentTest;
-import org.fluentlenium.core.annotation.Page;
-import org.junit.Test;
-
-public class DuckDuckGoTest extends FluentTest {
-    @Page
-    DuckDuckMainPage duckDuckMainPage;
-
-    @Test
-    public void titleOfDuckDuckGoShouldContainSearchQueryName() {
-        String searchPhrase = "searchPhrase";
-
-        goTo(duckDuckMainPage)
-                .typeSearchPhraseIn(searchPhrase)
-                .submitSearchForm()
-                .assertIsPhrasePresentInTheResults(searchPhrase);
-    }
-}
-```
-
-```java
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.concurrent.TimeUnit;
-
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.annotation.PageUrl;
-import org.fluentlenium.core.domain.FluentWebElement;
-import org.openqa.selenium.support.FindBy;
-
-@PageUrl("https://duckduckgo.com")
-public class DuckDuckMainPage extends FluentPage {
-    private static final String SEARCH_FORM_HOMEPAGE = "#search_form_homepage";
-
-    @FindBy(css = "#search_form_input_homepage")
-    private FluentWebElement searchInput;
-
-    @FindBy(css = "#search_button_homepage")
-    private FluentWebElement searchButton;
-
-    public DuckDuckMainPage typeSearchPhraseIn(String searchPhrase) {
-        searchInput.write(searchPhrase);
-        return this;
-    }
-
-    public DuckDuckMainPage submitSearchForm() {
-        searchButton.submit();
-        awaitUntilSearchFormDisappear();
-        return this;
-    }
-
-    public void assertIsPhrasePresentInTheResults(String searchPhrase) {
-        assertThat(window().title()).contains(searchPhrase);
-    }
-
-    private DuckDuckMainPage awaitUntilSearchFormDisappear() {
-        await().atMost(5, TimeUnit.SECONDS).until(el(SEARCH_FORM_HOMEPAGE)).not().present();
-        return this;
-    }
-}
-```
-
 - Run as a JUnit test.
 
-[More FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/develop/examples).
-
-## Documentation
-
-Full documentation is available on [fluentlenium.org](http://fluentlenium.org), or in the
-[docs sources directory](https://github.com/FluentLenium/FluentLenium/tree/develop/docs).
+[More detailed FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/develop/examples).
 
 ## Contact Us
 If you have any comment, remark or issue, please open an issue on
