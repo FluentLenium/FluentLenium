@@ -1,6 +1,5 @@
 package org.fluentlenium.utils;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -9,9 +8,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.WeakHashMap;
 import java.util.function.Function;
 
 /**
@@ -23,7 +20,6 @@ public final class ReflectionUtils {
     private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
     private static final Map<Class<?>, Class<?>> PRIMITIVES_TO_WRAPPERS = new HashMap<>();
     private static final Map<Class<?>, Object> DEFAULTS = new HashMap<>();
-    private static final Map<ClassAnnotationKey, List<Method>> DECLARED_METHODS_CACHE = new WeakHashMap<>();
 
     private ReflectionUtils() {
         // Utility class
@@ -63,33 +59,6 @@ public final class ReflectionUtils {
         DEFAULTS.put(long.class, 0L);
         DEFAULTS.put(float.class, 0f);
         DEFAULTS.put(double.class, 0d);
-    }
-
-    private static class ClassAnnotationKey {
-        private Class<?> clazz;
-        private Class<? extends Annotation> annotation;
-
-        public ClassAnnotationKey(Class<?> clazz, Class<? extends Annotation> annotation) {
-            this.clazz = clazz;
-            this.annotation = annotation;
-        }
-
-        public Class<?> getClazz() {
-            return clazz;
-        }
-
-        public Class<? extends Annotation> getAnnotation() {
-            return annotation;
-        }
-
-        public void setClazz(Class<?> clazz) {
-            this.clazz = clazz;
-        }
-
-        public void setAnnotation(Class<? extends Annotation> annotation) {
-            this.annotation = annotation;
-        }
-
     }
 
     /**
@@ -158,7 +127,7 @@ public final class ReflectionUtils {
      * @return matching constructor for given argument values
      * @throws NoSuchMethodException if a matching method is not found.
      */
-    public static <T> Constructor<T> getConstructor(Class<T> cls, Object... args) throws NoSuchMethodException {
+    static <T> Constructor<T> getConstructor(Class<T> cls, Object... args) throws NoSuchMethodException {
         Class<?>[] argsTypes = toClass(args);
         return getConstructor(cls, argsTypes);
     }
