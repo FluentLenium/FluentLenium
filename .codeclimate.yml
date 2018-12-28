@@ -13,6 +13,8 @@ engines:
         enabled: false
       com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck:
         enabled: false
+      com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck:
+        enabled: false
 
 ratings:
   paths:
