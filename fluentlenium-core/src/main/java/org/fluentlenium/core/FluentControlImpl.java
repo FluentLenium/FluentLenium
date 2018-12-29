@@ -67,7 +67,9 @@ public abstract class FluentControlImpl implements FluentControl {
         return controlContainer;
     }
 
-    public abstract FluentControl getFluentControl();
+    public FluentControl getFluentControl() {
+        return controlContainer.getFluentControl();
+    }
 
     /**
      * Get the test adapter configuration.

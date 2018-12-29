@@ -462,58 +462,72 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         return instantiator.newComponentList(getClass(), componentClass, finds);
     }
 
+    @Override
     public FluentList<E> withLabel(String label) {
         return getLabel().withLabel(label);
     }
 
+    @Override
     public FluentList<E> withLabelHint(String... labelHint) {
         return getLabel().withLabelHint(labelHint);
     }
 
+    @Override
     public FluentList<E> noHookInstance() {
         return getHookControl().noHookInstance();
     }
 
+    @Override
     public FluentList<E> noHook() {
         return getHookControl().noHook();
     }
 
+    @Override
     public <O, H extends FluentHook<O>> FluentList<E> withHook(Class<H> hook) {
         return getHookControl().withHook(hook);
     }
 
+    @Override
     public <R> R noHook(Class<? extends FluentHook> hook, Function<FluentList<E>, R> function) {
         return getHookControl().noHook(hook, function);
     }
 
+    @Override
     public FluentList<E> restoreHooks() {
         return getHookControl().restoreHooks();
     }
 
+    @Override
     public <O, H extends FluentHook<O>> FluentList<E> withHook(Class<H> hook, O options) {
         return getHookControl().withHook(hook, options);
     }
 
+    @Override
     public FluentList<E> noHook(Class<? extends FluentHook>... hooks) {
         return getHookControl().noHook(hooks);
     }
 
+    @Override
     public FluentList<E> noHookInstance(Class<? extends FluentHook>... hooks) {
         return getHookControl().noHookInstance(hooks);
     }
 
+    @Override
     public <R> R noHook(Function<FluentList<E>, R> function) {
         return getHookControl().noHook(function);
     }
 
+    @Override
     public FluentList<E> scrollToCenter() {
         return getJavascriptActions().scrollToCenter();
     }
 
+    @Override
     public FluentList<E> scrollIntoView(boolean alignWithTop) {
         return getJavascriptActions().scrollIntoView(alignWithTop);
     }
 
+    @Override
     public FluentList<E> scrollIntoView() {
         return getJavascriptActions().scrollIntoView();
     }

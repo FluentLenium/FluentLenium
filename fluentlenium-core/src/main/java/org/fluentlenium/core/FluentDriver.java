@@ -78,8 +78,6 @@ public class FluentDriver extends FluentControlImpl implements FluentControl { /
 
     private final WindowAction windowAction;
 
-    private final FluentControl adapter;
-
     /**
      * Wrap the driver into a Fluent driver.
      *
@@ -89,7 +87,6 @@ public class FluentDriver extends FluentControlImpl implements FluentControl { /
      */
     public FluentDriver(WebDriver driver, Configuration configuration, FluentControl adapter) {
         super(adapter);
-        this.adapter = adapter;
         this.configuration = configuration;
         componentsManager = new ComponentsManager(adapter);
         this.driver = driver;
@@ -110,24 +107,19 @@ public class FluentDriver extends FluentControlImpl implements FluentControl { /
         configureDriver(); // NOPMD ConstructorCallsOverridableMethod
     }
 
-    @Override
-    public FluentControl getFluentControl() {
-        return adapter;
-    }
-
     public Configuration getConfiguration() {
         return configuration;
     }
 
-    public ComponentsManager getComponentsManager() {
+    private ComponentsManager getComponentsManager() {
         return componentsManager;
     }
 
-    public FluentInjector getFluentInjector() {
+    private FluentInjector getFluentInjector() {
         return fluentInjector;
     }
 
-    public CssControl getCssControl() {
+    private CssControl getCssControl() {
         return cssControl;
     }
 

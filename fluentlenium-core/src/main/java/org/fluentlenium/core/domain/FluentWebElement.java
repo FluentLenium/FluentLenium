@@ -503,62 +503,72 @@ public class FluentWebElement extends Component
         return label.toString();
     }
 
-    public EventsRegistry events() {
-        return getFluentControl().events();
-    }
-
+    @Override
     public <R> R noHook(Class<? extends FluentHook> hook, Function<FluentWebElement, R> function) {
         return getHookControl().noHook(hook, function);
     }
 
+    @Override
     public <O, H extends FluentHook<O>> FluentWebElement withHook(Class<H> hook, O options) {
         return getHookControl().withHook(hook, options);
     }
 
+    @Override
     public <O, H extends FluentHook<O>> FluentWebElement withHook(Class<H> hook) {
         return getHookControl().withHook(hook);
     }
 
+    @Override
     public FluentWebElement noHook(Class<? extends FluentHook>... hooks) {
         return getHookControl().noHook(hooks);
     }
 
+    @Override
     public <R> R noHook(Function<FluentWebElement, R> function) {
         return getHookControl().noHook(function);
     }
 
+    @Override
     public FluentWebElement noHookInstance(Class<? extends FluentHook>... hooks) {
         return getHookControl().noHookInstance(hooks);
     }
 
+    @Override
     public FluentWebElement restoreHooks() {
         return getHookControl().restoreHooks();
     }
 
+    @Override
     public FluentWebElement noHookInstance() {
         return getHookControl().noHookInstance();
     }
 
+    @Override
     public FluentWebElement noHook() {
         return getHookControl().noHook();
     }
 
+    @Override
     public FluentWebElement scrollToCenter() {
         return getJavascriptActions().scrollToCenter();
     }
 
+    @Override
     public FluentWebElement scrollIntoView() {
         return getJavascriptActions().scrollIntoView();
     }
 
+    @Override
     public FluentWebElement scrollIntoView(boolean alignWithTop) {
         return getJavascriptActions().scrollIntoView(alignWithTop);
     }
 
+    @Override
     public FluentWebElement withLabelHint(String... labelHint) {
         return getLabel().withLabelHint(labelHint);
     }
 
+    @Override
     public FluentWebElement withLabel(String label) {
         return getLabel().withLabel(label);
     }
