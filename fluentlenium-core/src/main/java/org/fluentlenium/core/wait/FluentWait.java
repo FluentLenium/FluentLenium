@@ -1,13 +1,5 @@
 package org.fluentlenium.core.wait;
 
-import java.time.Duration;
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.conditions.FluentConditions;
@@ -18,6 +10,14 @@ import org.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+
+import java.time.Duration;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * A wait object wrapping default selenium {@link org.openqa.selenium.support.ui.FluentWait} object into a more
@@ -56,31 +56,9 @@ public class FluentWait
     }
 
     @Override
-    public FluentWait atMost(long duration, TimeUnit unit) {
-        wait.withTimeout(duration, unit);
-        return this;
-    }
-
-    @Override
-    public FluentWait atMost(long duration) {
-        return atMost(duration, TimeUnit.MILLISECONDS);
-    }
-
-    @Override
     public FluentWait pollingEvery(Duration duration) {
         wait.pollingEvery(duration);
         return this;
-    }
-
-    @Override
-    public FluentWait pollingEvery(long duration, TimeUnit unit) {
-        wait.pollingEvery(duration, unit);
-        return this;
-    }
-
-    @Override
-    public FluentWait pollingEvery(long duration) {
-        return pollingEvery(duration, TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -98,13 +76,6 @@ public class FluentWait
     @Override
     public FluentWait ignoring(Class<? extends RuntimeException> firstType, Class<? extends RuntimeException> secondType) {
         wait.ignoring(firstType, secondType);
-        return this;
-    }
-
-    @Override
-    public FluentWait withMessage(String message) {
-        wait.withMessage(message);
-        messageDefined = true;
         return this;
     }
 
@@ -238,10 +209,5 @@ public class FluentWait
         }
 
         return this;
-    }
-
-    @Override
-    public FluentWait explicitlyFor(long amount) {
-        return explicitlyFor(amount, TimeUnit.MILLISECONDS);
     }
 }

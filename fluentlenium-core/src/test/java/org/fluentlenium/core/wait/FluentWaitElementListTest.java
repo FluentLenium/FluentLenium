@@ -3,6 +3,18 @@ package org.fluentlenium.core.wait;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
+import org.fluentlenium.core.FluentControl;
+import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentWebElement;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,17 +23,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-
-import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.domain.FluentList;
-import org.fluentlenium.core.domain.FluentWebElement;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FluentWaitElementListTest {
@@ -59,7 +60,7 @@ public class FluentWaitElementListTest {
     @Test
     public void atMost() {
         assertThat(wait.atMost(10, TimeUnit.MILLISECONDS)).isSameAs(wait);
-        Mockito.verify(fluentControlWait).atMost(10, TimeUnit.MILLISECONDS);
+        Mockito.verify(fluentControlWait).atMost(Duration.ofMillis(10));
     }
 
     @Test
@@ -71,13 +72,13 @@ public class FluentWaitElementListTest {
     @Test
     public void atMostMillis() {
         assertThat(wait.atMost(10)).isSameAs(wait);
-        Mockito.verify(fluentControlWait).atMost(10);
+        Mockito.verify(fluentControlWait).atMost(Duration.ofMillis(10));
     }
 
     @Test
     public void pollingEvery() {
         assertThat(wait.pollingEvery(10, TimeUnit.MILLISECONDS)).isSameAs(wait);
-        Mockito.verify(fluentControlWait).pollingEvery(10, TimeUnit.MILLISECONDS);
+        Mockito.verify(fluentControlWait).pollingEvery(Duration.ofMillis(10));
     }
 
     @Test
@@ -89,7 +90,7 @@ public class FluentWaitElementListTest {
     @Test
     public void pollingEveryMillis() {
         assertThat(wait.pollingEvery(10)).isSameAs(wait);
-        Mockito.verify(fluentControlWait).pollingEvery(10);
+        Mockito.verify(fluentControlWait).pollingEvery(Duration.ofMillis(10));
     }
 
     @Test
@@ -128,9 +129,11 @@ public class FluentWaitElementListTest {
     @Test
     public void withMessage() {
         String message = "test";
+        ArgumentCaptor<Supplier<String>> argument = ArgumentCaptor.forClass(Supplier.class);
 
         wait.withMessage(message);
-        Mockito.verify(fluentControlWait).withMessage(message);
+        Mockito.verify(fluentControlWait).withMessage(argument.capture());
+        assertThat(argument.getValue().get()).isEqualTo("test");
     }
 
     @Test
@@ -231,7 +234,7 @@ public class FluentWaitElementListTest {
         long amount = 10;
 
         wait.explicitlyFor(amount);
-        Mockito.verify(fluentControlWait).explicitlyFor(amount);
+        Mockito.verify(fluentControlWait).explicitlyFor(amount, TimeUnit.MILLISECONDS);
     }
 
     @Test

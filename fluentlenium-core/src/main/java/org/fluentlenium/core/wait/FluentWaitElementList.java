@@ -1,5 +1,11 @@
 package org.fluentlenium.core.wait;
 
+import org.fluentlenium.core.FluentControl;
+import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.conditions.FluentConditions;
+import org.fluentlenium.core.conditions.FluentListConditions;
+import org.fluentlenium.core.domain.FluentWebElement;
+
 import java.time.Duration;
 import java.util.Collection;
 import java.util.List;
@@ -7,11 +13,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.conditions.FluentConditions;
-import org.fluentlenium.core.conditions.FluentListConditions;
-import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
  * A wait object wrapping default selenium {@link org.openqa.selenium.support.ui.FluentWait} object into a more
@@ -68,31 +69,7 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
     }
 
     @Override
-    public FluentWaitElementList atMost(long duration, TimeUnit unit) {
-        controlWait.atMost(duration, unit);
-        return this;
-    }
-
-    @Override
-    public FluentWaitElementList atMost(long timeInMillis) {
-        controlWait.atMost(timeInMillis);
-        return this;
-    }
-
-    @Override
     public FluentWaitElementList pollingEvery(Duration duration) {
-        controlWait.pollingEvery(duration);
-        return this;
-    }
-
-    @Override
-    public FluentWaitElementList pollingEvery(long duration, TimeUnit unit) {
-        controlWait.pollingEvery(duration, unit);
-        return this;
-    }
-
-    @Override
-    public FluentWaitElementList pollingEvery(long duration) {
         controlWait.pollingEvery(duration);
         return this;
     }
@@ -124,12 +101,6 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
     @Override
     public void until(Supplier<Boolean> supplier) {
         controlWait.until(supplier);
-    }
-
-    @Override
-    public FluentWaitElementList withMessage(String message) {
-        controlWait.withMessage(message);
-        return this;
     }
 
     @Override
@@ -200,17 +171,11 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
         return this;
     }
 
-    @Override
-    public FluentWaitElementList explicitlyFor(long amount) {
-        controlWait.explicitlyFor(amount);
-        return this;
-    }
-
     /**
      * Wait until function returns true
      *
      * @param function function to be performed
-     * @param <T> FluentWaitElementList
+     * @param <T>      FluentWaitElementList
      * @return FluentWaitElementList
      */
     @Deprecated

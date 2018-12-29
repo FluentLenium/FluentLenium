@@ -1,5 +1,11 @@
 package org.fluentlenium.core.wait;
 
+import org.fluentlenium.core.FluentControl;
+import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.conditions.FluentConditions;
+import org.fluentlenium.core.conditions.FluentListConditions;
+import org.fluentlenium.core.domain.FluentWebElement;
+
 import java.time.Duration;
 import java.util.Collection;
 import java.util.List;
@@ -7,11 +13,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.conditions.FluentConditions;
-import org.fluentlenium.core.conditions.FluentListConditions;
-import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
  * A wait object wrapping default selenium {@link org.openqa.selenium.support.ui.FluentWait} object into a more
@@ -55,31 +56,7 @@ public class FluentWaitElement implements FluentWaitFunctional<FluentControl>, F
     }
 
     @Override
-    public FluentWaitElement atMost(long duration, TimeUnit unit) {
-        controlWait.atMost(duration, unit);
-        return this;
-    }
-
-    @Override
-    public FluentWaitElement atMost(long timeInMillis) {
-        controlWait.atMost(timeInMillis);
-        return this;
-    }
-
-    @Override
     public FluentWaitElement pollingEvery(Duration duration) {
-        controlWait.pollingEvery(duration);
-        return this;
-    }
-
-    @Override
-    public FluentWaitElement pollingEvery(long duration, TimeUnit unit) {
-        controlWait.pollingEvery(duration, unit);
-        return this;
-    }
-
-    @Override
-    public FluentWaitElement pollingEvery(long duration) {
         controlWait.pollingEvery(duration);
         return this;
     }
@@ -99,12 +76,6 @@ public class FluentWaitElement implements FluentWaitFunctional<FluentControl>, F
     @Override
     public FluentWaitElement ignoring(Class<? extends RuntimeException> firstType, Class<? extends RuntimeException> secondType) {
         controlWait.ignoring(firstType, secondType);
-        return this;
-    }
-
-    @Override
-    public FluentWaitElement withMessage(String message) {
-        controlWait.withMessage(message);
         return this;
     }
 
@@ -134,7 +105,6 @@ public class FluentWaitElement implements FluentWaitFunctional<FluentControl>, F
     public void until(Supplier<Boolean> isTrue) {
         controlWait.until(isTrue);
     }
-
 
     @Override
     public FluentConditions until(FluentWebElement element) {
@@ -182,12 +152,6 @@ public class FluentWaitElement implements FluentWaitFunctional<FluentControl>, F
     }
 
     @Override
-    public FluentWaitElement explicitlyFor(long amount) {
-        controlWait.explicitlyFor(amount);
-        return this;
-    }
-
-    @Override
     public FluentWaitElement explicitlyFor(long amount, TimeUnit timeUnit) {
         controlWait.explicitlyFor(amount, timeUnit);
         return this;
@@ -197,7 +161,7 @@ public class FluentWaitElement implements FluentWaitFunctional<FluentControl>, F
      * Wait until function returns true
      *
      * @param function function to be performed
-     * @param <T> FluentWaitElement
+     * @param <T>      FluentWaitElement
      * @return FluentWaitElement
      */
     @Deprecated
