@@ -16,7 +16,6 @@ import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.dom.Dom;
-import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookControl;
 import org.fluentlenium.core.hook.HookControlImpl;
