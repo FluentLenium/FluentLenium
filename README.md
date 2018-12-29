@@ -17,7 +17,7 @@ FluentLenium is shipped with adapters for [JUnit4](https://junit.org/junit4/), [
 FluentLenium best integrates with [AssertJ](http://joel-costigliola.github.io/assertj/), but you can also choose to use
 the [assertion framework](http://fluentlenium.org/docs/assertion-libraries/) you want.
 
-FluentLenium gives you [multiple methods](http://fluentlenium.org/docs/test-methods/) which help you write tests quicker. All those methods are tested daily by commercial regression test suites maintaned by project developers.
+FluentLenium gives you [multiple methods](http://fluentlenium.org/docs/test-methods/) which help you write tests quicker. All those methods are tested daily by commercial regression test suites maintained by project developers.
 
 ## Documentation
 
