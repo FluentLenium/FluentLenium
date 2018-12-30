@@ -141,7 +141,7 @@ public class MouseElementActions {
      * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement, int, int)
      */
-    public MouseElementActions moveToElement(WebElement target,int xOffset, int yOffset) {
+    public MouseElementActions moveToElement(WebElement target, int xOffset, int yOffset) {
         actions().moveToElement(target, xOffset, yOffset).perform();
         return this;
     }
