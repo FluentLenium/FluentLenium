@@ -105,35 +105,11 @@ public class MouseElementActionsTest {
     }
 
     @Test
-    public void moveToTargetElement() {
-        LocatableElement target = mock(LocatableElement.class);
-        Coordinates targetCoordinates = mock(Coordinates.class);
-        when(target.getCoordinates()).thenReturn(targetCoordinates);
-
-        MouseElementActions actions = new MouseElementActions(driver, element);
-        actions.moveToElement(target);
-
-        verify(mouse).mouseMove(targetCoordinates);
-    }
-
-    @Test
     public void moveToElementOffset() {
         MouseElementActions actions = new MouseElementActions(driver, element);
         actions.moveToElement(10, 20);
 
         verify(mouse).mouseMove(coordinates, 10, 20);
-    }
-
-    @Test
-    public void moveToTargetElementOffset() {
-        LocatableElement target = mock(LocatableElement.class);
-        Coordinates targetCoordinates = mock(Coordinates.class);
-        when(target.getCoordinates()).thenReturn(targetCoordinates);
-
-        MouseElementActions actions = new MouseElementActions(driver, element);
-        actions.moveToElement(target, 10, 20);
-
-        verify(mouse).mouseMove(targetCoordinates, 10, 20);
     }
 
     @Test
@@ -176,21 +152,6 @@ public class MouseElementActionsTest {
         verify(mouse).mouseMove(coordinates);
         verify(mouse).mouseDown(coordinates);
         verify(mouse).mouseMove(null, 10, 20);
-        verify(mouse).mouseUp(null);
-    }
-
-    @Test
-    public void dragAndDropByWithTargetOffset() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
-
-        LocatableElement target = mock(LocatableElement.class);
-        Coordinates targetCoordinates = mock(Coordinates.class);
-        when(target.getCoordinates()).thenReturn(targetCoordinates);
-
-        actions.dragAndDropByWithTargetOffset(target, 10, 20);
-
-        verify(mouse).mouseDown(coordinates);
-        verify(mouse).mouseMove(targetCoordinates, 10, 20);
         verify(mouse).mouseUp(null);
     }
 
