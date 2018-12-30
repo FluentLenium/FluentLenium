@@ -150,6 +150,11 @@
             </dependency>
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-firefox-driver</artifactId>
+                <version>${selenium.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>htmlunit-driver</artifactId>
                 <version>2.33.3</version>
             </dependency>
@@ -157,11 +162,6 @@
                 <groupId>xml-apis</groupId>
                 <artifactId>xml-apis</artifactId>
                 <version>2.0.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-firefox-driver</artifactId>
-                <version>${selenium.version}</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
@@ -212,6 +212,11 @@
                 <groupId>org.spockframework</groupId>
                 <artifactId>spock-core</artifactId>
                 <version>1.1-groovy-2.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.5.6</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,6 +1,5 @@
 package org.fluentlenium.core.inject;
 
-import lombok.experimental.Delegate;
 import org.fluentlenium.core.label.FluentLabelImpl;
 import org.fluentlenium.core.label.FluentLabelProvider;
 import org.openqa.selenium.By;
@@ -41,7 +40,6 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
         label.withLabelHint(annotations.getLabelHints());
     }
 
-    @Delegate
     private FluentLabelProvider getLabelProvider() { // NOPMD UnusedPrivateMethod
         return label;
     }
@@ -85,6 +83,14 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
     @Override
     public String toString() {
         return label.toString();
+    }
+
+    public String getLabel() {
+        return getLabelProvider().getLabel();
+    }
+
+    public String[] getLabelHints() {
+        return getLabelProvider().getLabelHints();
     }
 }
 

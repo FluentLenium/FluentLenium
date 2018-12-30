@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter;
 
+import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 
 /**

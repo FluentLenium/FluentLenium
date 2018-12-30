@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter;
+package org.fluentlenium.adapter.sharedwebdriver;
 
 /**
  * Shutdown hook closing the Shared WebDriver container when JVM is closing.

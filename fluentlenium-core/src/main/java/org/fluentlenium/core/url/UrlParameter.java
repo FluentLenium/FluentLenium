@@ -1,13 +1,8 @@
 package org.fluentlenium.core.url;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-
 /**
  * URL Parameter.
  */
-@EqualsAndHashCode(exclude = "repr")
-@Getter
 public class UrlParameter {
 
     private final String name;
@@ -36,5 +31,25 @@ public class UrlParameter {
     @Override
     public String toString() {
         return (isOptional() ? "?" : "") + getName();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public String getMatch() {
+        return match;
+    }
+
+    public boolean isOptional() {
+        return optional;
     }
 }

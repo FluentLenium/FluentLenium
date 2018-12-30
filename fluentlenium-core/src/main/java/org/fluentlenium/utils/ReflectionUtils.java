@@ -1,23 +1,14 @@
 package org.fluentlenium.utils;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.WeakHashMap;
 import java.util.function.Function;
 
 /**
@@ -29,7 +20,6 @@ public final class ReflectionUtils {
     private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
     private static final Map<Class<?>, Class<?>> PRIMITIVES_TO_WRAPPERS = new HashMap<>();
     private static final Map<Class<?>, Object> DEFAULTS = new HashMap<>();
-    private static final Map<ClassAnnotationKey, List<Method>> DECLARED_METHODS_CACHE = new WeakHashMap<>();
 
     private ReflectionUtils() {
         // Utility class
@@ -69,15 +59,6 @@ public final class ReflectionUtils {
         DEFAULTS.put(long.class, 0L);
         DEFAULTS.put(float.class, 0f);
         DEFAULTS.put(double.class, 0d);
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode
-    @AllArgsConstructor
-    private static class ClassAnnotationKey {
-        private Class<?> clazz;
-        private Class<? extends Annotation> annotation;
     }
 
     /**
@@ -146,7 +127,7 @@ public final class ReflectionUtils {
      * @return matching constructor for given argument values
      * @throws NoSuchMethodException if a matching method is not found.
      */
-    public static <T> Constructor<T> getConstructor(Class<T> cls, Object... args) throws NoSuchMethodException {
+    static <T> Constructor<T> getConstructor(Class<T> cls, Object... args) throws NoSuchMethodException {
         Class<?>[] argsTypes = toClass(args);
         return getConstructor(cls, argsTypes);
     }
@@ -197,19 +178,6 @@ public final class ReflectionUtils {
             }
         }
         return match;
-    }
-
-    /**
-     * Retrieve the constructor of a class for given optional argument types.
-     *
-     * @param cls       class to retrieve the constructor from
-     * @param argsTypes argument types
-     * @param <T>       type to retrieve the constructor from
-     * @return matching constructor for given optional argument values
-     * @throws NoSuchMethodException if a matching method is not found.
-     */
-    public static <T> Constructor<T> getConstructorOptional(Class<T> cls, Class<?>... argsTypes) throws NoSuchMethodException {
-        return getConstructorOptional(0, cls, argsTypes);
     }
 
     /**
@@ -321,50 +289,6 @@ public final class ReflectionUtils {
             }
         }
         throw new NoSuchMethodException("Can't find any valid constructor.");
-    }
-
-    /**
-     * Get declared methods that have the given annotation defined.
-     *
-     * @param object     object instance
-     * @param annotation annotation to look for
-     * @return list of methods
-     */
-    public static List<Method> getDeclaredMethodsWithAnnotation(Object object, Class<? extends Annotation> annotation) {
-        if (object == null) {
-            return getDeclaredMethodsWithAnnotation(null, annotation);
-        }
-        return getDeclaredMethodsWithAnnotation(object.getClass(), annotation);
-    }
-
-    /**
-     * Retrieve declared methods marked with given annotation.
-     *
-     * @param objectClass class to analyze
-     * @param annotation  marker annotation
-     * @return Lise of methods that are marked with given annotation
-     */
-    public static List<Method> getDeclaredMethodsWithAnnotation(Class<?> objectClass, Class<? extends Annotation> annotation) {
-        List<Method> methods = new ArrayList<>();
-
-        if (objectClass == null) {
-            return methods;
-        }
-
-        ClassAnnotationKey cacheKey = new ClassAnnotationKey(objectClass, annotation);
-        if (DECLARED_METHODS_CACHE.containsKey(cacheKey)) {
-            return DECLARED_METHODS_CACHE.get(cacheKey);
-        }
-
-        Method[] declaredMethods = objectClass.getDeclaredMethods();
-        for (Method method : declaredMethods) {
-            if (method.isAnnotationPresent(annotation)) {
-                methods.add(method);
-            }
-        }
-
-        DECLARED_METHODS_CACHE.put(cacheKey, methods);
-        return methods;
     }
 
     /**
