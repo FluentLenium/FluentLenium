@@ -25,7 +25,6 @@ public class IntegrationFluentTest extends FluentTest {
     public static final String SIZE_CHANGE_URL = getAbsoluteUrlFromFile("size-change.html");
     public static final String ELEMENT_REPLACE_URL = getAbsoluteUrlFromFile("element-replace.html");
 
-
     @Override
     public String getWebDriver() {
         return "htmlunit";

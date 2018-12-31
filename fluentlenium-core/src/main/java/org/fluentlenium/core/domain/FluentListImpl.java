@@ -166,6 +166,11 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
+    public int size() {
+        return count();
+    }
+
+    @Override
     public boolean present() {
         if (LocatorProxies.getLocatorHandler(proxy) != null) {
             return LocatorProxies.present(this);
