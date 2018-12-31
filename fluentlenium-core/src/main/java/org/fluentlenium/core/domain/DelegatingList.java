@@ -1,7 +1,5 @@
 package org.fluentlenium.core.domain;
 
-import lombok.experimental.Delegate;
-
 import java.util.List;
 
 /**
@@ -9,8 +7,7 @@ import java.util.List;
  *
  * @param <T> the type of elements in this list
  */
-public class DelegatingList<T> implements List<T> {
-    @Delegate
+public class DelegatingList<T> extends ListImpl<T> implements List<T> {
     protected final List<T> list;
 
     /**
@@ -21,6 +18,10 @@ public class DelegatingList<T> implements List<T> {
     public DelegatingList(List<T> list) {
         super();
         this.list = list;
+    }
+
+    public List<T> getList() {
+        return list;
     }
 
 }

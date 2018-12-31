@@ -10,6 +10,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
+import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
+import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import org.openqa.selenium.WebDriverException;
 
 /**

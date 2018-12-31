@@ -1,25 +1,22 @@
 package org.fluentlenium.core.domain;
 
-import lombok.experimental.Delegate;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsElement;
-import org.openqa.selenium.support.pagefactory.ElementLocator;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.Stack;
+import java.util.function.Function;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
 import org.fluentlenium.core.action.FluentActions;
 import org.fluentlenium.core.action.FluentJavascriptActionsImpl;
-import org.fluentlenium.core.action.InputControl;
 import org.fluentlenium.core.action.KeyboardElementActions;
 import org.fluentlenium.core.action.MouseElementActions;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
 import org.fluentlenium.core.dom.Dom;
+import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookControl;
 import org.fluentlenium.core.hook.HookControlImpl;
 import org.fluentlenium.core.hook.HookDefinition;
@@ -31,14 +28,14 @@ import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchControl;
 import org.fluentlenium.core.search.SearchFilter;
-import org.fluentlenium.core.wait.AwaitControl;
 import org.fluentlenium.core.wait.FluentWaitElement;
 import org.fluentlenium.utils.SupplierOfInstance;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Stack;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.support.pagefactory.ElementLocator;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * Wraps a Selenium {@link WebElement}. It provides an enhanced API to control selenium element.
@@ -55,7 +52,6 @@ public class FluentWebElement extends Component
 
     private final HookControlImpl<FluentWebElement> hookControl;
 
-    @Delegate
     private final FluentLabel<FluentWebElement> label;
 
     private final FluentJavascriptActionsImpl<FluentWebElement> javascriptActions;
@@ -78,7 +74,7 @@ public class FluentWebElement extends Component
                     LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
                     ElementLocator locator = locatorHandler.getLocator();
                     WebElement noHookElement = LocatorProxies.createWebElement(locator);
-                    return newComponent(FluentWebElement.this.getClass(), noHookElement);
+                    return getFluentControl().newComponent(this.getClass(), noHookElement);
                 });
 
         search = new Search(element, this, this.instantiator, this.control);
@@ -90,19 +86,20 @@ public class FluentWebElement extends Component
         javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new SupplierOfInstance<>(this));
     }
 
-    @Delegate(excludes = {InputControl.class, AwaitControl.class, SearchControl.class})
     private FluentControl getFluentControl() { // NOPMD UnusedPrivateMethod
         return control;
     }
 
-    @Delegate
     private HookControl<FluentWebElement> getHookControl() { // NOPMD UnusedPrivateMethod
         return hookControl;
     }
 
-    @Delegate
     private FluentJavascriptActionsImpl<FluentWebElement> getJavascriptActions() { //NOPMD UnusedPrivateMethod
         return javascriptActions;
+    }
+
+    public FluentLabel<FluentWebElement> getLabel() {
+        return label;
     }
 
     @Override
@@ -218,7 +215,7 @@ public class FluentWebElement extends Component
      */
     public <T> T as(Class<T> componentClass) {
         T component = instantiator.newComponent(componentClass, getElement());
-        injectComponent(component, this, getElement());
+        getFluentControl().injectComponent(component, this, getElement());
         return component;
     }
 
@@ -469,7 +466,7 @@ public class FluentWebElement extends Component
 
     @Override
     public FluentWebElement frame() {
-        window().switchTo().frame(this);
+        getFluentControl().window().switchTo().frame(this);
         return this;
     }
 
@@ -503,5 +500,75 @@ public class FluentWebElement extends Component
     @Override
     public String toString() {
         return label.toString();
+    }
+
+    @Override
+    public <R> R noHook(Class<? extends FluentHook> hook, Function<FluentWebElement, R> function) {
+        return getHookControl().noHook(hook, function);
+    }
+
+    @Override
+    public <O, H extends FluentHook<O>> FluentWebElement withHook(Class<H> hook, O options) {
+        return getHookControl().withHook(hook, options);
+    }
+
+    @Override
+    public <O, H extends FluentHook<O>> FluentWebElement withHook(Class<H> hook) {
+        return getHookControl().withHook(hook);
+    }
+
+    @Override
+    public FluentWebElement noHook(Class<? extends FluentHook>... hooks) {
+        return getHookControl().noHook(hooks);
+    }
+
+    @Override
+    public <R> R noHook(Function<FluentWebElement, R> function) {
+        return getHookControl().noHook(function);
+    }
+
+    @Override
+    public FluentWebElement noHookInstance(Class<? extends FluentHook>... hooks) {
+        return getHookControl().noHookInstance(hooks);
+    }
+
+    @Override
+    public FluentWebElement restoreHooks() {
+        return getHookControl().restoreHooks();
+    }
+
+    @Override
+    public FluentWebElement noHookInstance() {
+        return getHookControl().noHookInstance();
+    }
+
+    @Override
+    public FluentWebElement noHook() {
+        return getHookControl().noHook();
+    }
+
+    @Override
+    public FluentWebElement scrollToCenter() {
+        return getJavascriptActions().scrollToCenter();
+    }
+
+    @Override
+    public FluentWebElement scrollIntoView() {
+        return getJavascriptActions().scrollIntoView();
+    }
+
+    @Override
+    public FluentWebElement scrollIntoView(boolean alignWithTop) {
+        return getJavascriptActions().scrollIntoView(alignWithTop);
+    }
+
+    @Override
+    public FluentWebElement withLabelHint(String... labelHint) {
+        return getLabel().withLabelHint(labelHint);
+    }
+
+    @Override
+    public FluentWebElement withLabel(String label) {
+        return getLabel().withLabel(label);
     }
 }

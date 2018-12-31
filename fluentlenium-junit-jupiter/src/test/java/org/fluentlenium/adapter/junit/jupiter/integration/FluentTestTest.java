@@ -3,7 +3,7 @@ package org.fluentlenium.adapter.junit.jupiter.integration;
 import net.jcip.annotations.NotThreadSafe;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.util.Files;
-import org.fluentlenium.adapter.SharedWebDriverContainer;
+import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import org.fluentlenium.adapter.junit.jupiter.FluentTest;
 import org.fluentlenium.adapter.junit.jupiter.MockitoExtension;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
