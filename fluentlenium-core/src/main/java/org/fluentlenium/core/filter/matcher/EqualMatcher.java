@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class EqualMatcher extends AbstractMatcher {
 
     /**
-     * Creates a equal matcher.
+     * Creates an equal matcher.
      *
      * @param value input value
      */
@@ -17,7 +17,7 @@ public class EqualMatcher extends AbstractMatcher {
     }
 
     /**
-     * Creates a equal matcher.
+     * Creates an equal matcher.
      *
      * @param value input value
      */
@@ -31,8 +31,8 @@ public class EqualMatcher extends AbstractMatcher {
     }
 
     @Override
-    public boolean isSatisfiedBy(String obj) {
-        return CalculateService.equal(getPattern(), getValue(), obj);
+    public boolean isSatisfiedBy(String currentValue) {
+        return CalculateService.equal(getPattern(), getValue(), currentValue);
     }
 
 }

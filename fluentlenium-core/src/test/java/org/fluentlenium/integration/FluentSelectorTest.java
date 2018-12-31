@@ -107,7 +107,7 @@ public class FluentSelectorTest extends IntegrationFluentTest {
     public void checkPredicate() {
         goTo(DEFAULT_URL);
         assertThat($("span",
-                withPredicate(input -> input.id() != null && !input.id().startsWith("na"))).ids().contains("oneline"));
+                withPredicate(input -> input.id() != null && !input.id().startsWith("na"))).ids()).contains("oneline");
     }
 
     @Test

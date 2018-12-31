@@ -13,8 +13,6 @@ import org.openqa.selenium.WebElement;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.function.Supplier;
-
 @RunWith(MockitoJUnitRunner.class)
 public class FluentJavascriptActionsTest {
 
@@ -35,12 +33,7 @@ public class FluentJavascriptActionsTest {
     public void before() {
         when(fluentWebElement.getElement()).thenReturn(element);
         when(fluentWebElement.getElement().getLocation()).thenReturn(new Point(1024, 768));
-        actions = new FluentJavascriptActionsImpl(self, javascript, new Supplier<FluentWebElement>() {
-            @Override
-            public FluentWebElement get() {
-                return fluentWebElement;
-            }
-        });
+        actions = new FluentJavascriptActionsImpl(self, javascript, () -> fluentWebElement);
     }
 
     @Test

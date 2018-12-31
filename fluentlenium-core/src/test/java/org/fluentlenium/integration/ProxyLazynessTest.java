@@ -1,7 +1,6 @@
 package org.fluentlenium.integration;
 
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
@@ -14,24 +13,14 @@ public class ProxyLazynessTest extends IntegrationFluentTest {
     public void testMissingElementList() {
         FluentList<FluentWebElement> fluentWebElements = find("#missing");
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fluentWebElements.now();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        Assertions.assertThatThrownBy(fluentWebElements::now).isExactlyInstanceOf(NoSuchElementException.class);
     }
 
     @Test
     public void testMissingElement() {
         FluentWebElement fluentWebElement = el("#missing");
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fluentWebElement.now();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        Assertions.assertThatThrownBy(fluentWebElement::now).isExactlyInstanceOf(NoSuchElementException.class);
     }
 
     @Test
@@ -40,12 +29,7 @@ public class ProxyLazynessTest extends IntegrationFluentTest {
 
         FluentWebElement fluentWebElement = el("#oneline").el("#missing2").el("missing3");
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fluentWebElement.now();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        Assertions.assertThatThrownBy(fluentWebElement::now).isExactlyInstanceOf(NoSuchElementException.class);
     }
 
     @Test
@@ -54,11 +38,6 @@ public class ProxyLazynessTest extends IntegrationFluentTest {
 
         FluentList<FluentWebElement> fluentWebElements = $("#oneline").$("#missing2").$("missing3");
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                fluentWebElements.now();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        Assertions.assertThatThrownBy(fluentWebElements::now).isExactlyInstanceOf(NoSuchElementException.class);
     }
 }

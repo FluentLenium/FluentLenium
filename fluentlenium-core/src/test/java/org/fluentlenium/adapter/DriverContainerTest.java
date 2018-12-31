@@ -54,18 +54,15 @@ public class DriverContainerTest {
         assertThat(defaultContainer.getFluentControl()).isSameAs(driver2);
         assertThat(threadLocalContainer.getFluentControl()).isSameAs(driver2);
 
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                assertThat(defaultContainer.getFluentControl()).isSameAs(driver2);
-                assertThat(threadLocalContainer.getFluentControl()).isNull();
+        executor.execute(() -> {
+            assertThat(defaultContainer.getFluentControl()).isSameAs(driver2);
+            assertThat(threadLocalContainer.getFluentControl()).isNull();
 
-                defaultContainer.setFluentControl(driver1);
-                threadLocalContainer.setFluentControl(driver1);
+            defaultContainer.setFluentControl(driver1);
+            threadLocalContainer.setFluentControl(driver1);
 
-                assertThat(defaultContainer.getFluentControl()).isSameAs(driver1);
-                assertThat(threadLocalContainer.getFluentControl()).isSameAs(driver1);
-            }
+            assertThat(defaultContainer.getFluentControl()).isSameAs(driver1);
+            assertThat(threadLocalContainer.getFluentControl()).isSameAs(driver1);
         });
         executor.shutdown();
         executor.awaitTermination(1L, TimeUnit.MINUTES);

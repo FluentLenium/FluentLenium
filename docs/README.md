@@ -4,15 +4,21 @@ This directory contains the code for the FluentLenium Site, [http://fluentlenium
 
 ## Running locally
 
-Follow the instructions: [https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/)
+Install Ruby 2.1.0 or higher: [https://www.ruby-lang.org/en/downloads/](https://www.ruby-lang.org/en/downloads/)
+
+Install bundler `gem install bundler`
 
 You can preview your contributions before opening a pull request by running from within the directory:
 
 1. `bundle install`
+
+If `bundle install` fails to resolve dependencies conflict please try again after `bundle update`
+
 2. `bundle exec jekyll serve`
+
+If you have any problems please refer to official docs
+[https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/#requirements](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/#requirements)
 
 ### Windows
 
-Under windows, Ruby [Development kit](http://rubyinstaller.org/downloads/) is required.
-
-You also need to comment out `therubyracer` gem from `Gemfile`.
+You need to comment out `therubyracer` gem from `Gemfile`.

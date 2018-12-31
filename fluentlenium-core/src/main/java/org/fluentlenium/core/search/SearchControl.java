@@ -29,7 +29,9 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param rawElements raw selenium elements
      * @return list of element
      */
-    FluentList<E> $(List<WebElement> rawElements);
+    default FluentList<E> $(List<WebElement> rawElements) {
+        return find(rawElements);
+    }
 
     /**
      * Find list of elements with CSS selector and filters.
@@ -47,7 +49,9 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param filters  set of filters
      * @return list of element
      */
-    FluentList<E> $(String selector, SearchFilter... filters);
+    default FluentList<E> $(String selector, SearchFilter... filters) {
+        return find(selector, filters);
+    }
 
     /**
      * Wrap existing raw selenium element into an element.
@@ -64,7 +68,9 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param filters  set of filters
      * @return element
      */
-    E el(String selector, SearchFilter... filters);
+    default E el(String selector, SearchFilter... filters) {
+        return find(selector, filters).first();
+    }
 
     /**
      * Find list of elements with filters.
@@ -80,7 +86,9 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param filters set of filters in the current context
      * @return list of elements
      */
-    FluentList<E> $(SearchFilter... filters);
+    default FluentList<E> $(SearchFilter... filters) {
+        return find(filters);
+    }
 
     /**
      * Find first element with filters.
@@ -88,7 +96,9 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param filters set of filters in the current context
      * @return element
      */
-    E el(SearchFilter... filters);
+    default E el(SearchFilter... filters) {
+        return find(filters).first();
+    }
 
     /**
      * Find list of elements with Selenium locator and filters.
@@ -106,7 +116,9 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param filters filters set
      * @return list of elements
      */
-    FluentList<E> $(By locator, SearchFilter... filters);
+    default FluentList<E> $(By locator, SearchFilter... filters) {
+        return find(locator, filters);
+    }
 
     /**
      * Find first element with Selenium locator and filters.
@@ -115,6 +127,8 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param filters filters set
      * @return element
      */
-    E el(By locator, SearchFilter... filters);
+    default E el(By locator, SearchFilter... filters) {
+        return find(locator, filters).first();
+    }
     //CHECKSTYLE.ON: MethodName
 }

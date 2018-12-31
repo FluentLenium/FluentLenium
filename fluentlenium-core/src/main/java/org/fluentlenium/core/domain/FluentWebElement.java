@@ -1,6 +1,13 @@
 package org.fluentlenium.core.domain;
 
 import lombok.experimental.Delegate;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.support.pagefactory.ElementLocator;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
@@ -9,10 +16,10 @@ import org.fluentlenium.core.action.FluentJavascriptActionsImpl;
 import org.fluentlenium.core.action.InputControl;
 import org.fluentlenium.core.action.KeyboardElementActions;
 import org.fluentlenium.core.action.MouseElementActions;
-import org.fluentlenium.core.dom.Dom;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
+import org.fluentlenium.core.dom.Dom;
 import org.fluentlenium.core.hook.HookControl;
 import org.fluentlenium.core.hook.HookControlImpl;
 import org.fluentlenium.core.hook.HookDefinition;
@@ -27,18 +34,11 @@ import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.AwaitControl;
 import org.fluentlenium.core.wait.FluentWaitElement;
 import org.fluentlenium.utils.SupplierOfInstance;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsElement;
-import org.openqa.selenium.support.pagefactory.ElementLocator;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Stack;
-import java.util.function.Supplier;
 
 /**
  * Wraps a Selenium {@link WebElement}. It provides an enhanced API to control selenium element.
@@ -64,7 +64,7 @@ public class FluentWebElement extends Component
      * Creates a new fluent web element.
      *
      * @param element      underlying element
-     * @param control      controle interface
+     * @param control      control interface
      * @param instantiator component instantiator
      */
     public FluentWebElement(WebElement element, FluentControl control, ComponentInstantiator instantiator) {
@@ -74,14 +74,11 @@ public class FluentWebElement extends Component
                 /*do not change it to lambda - change will affect w/ PMD warning
                 Overridable method 'getElement' called during object construction*/
 
-                new Supplier<FluentWebElement>() {
-                    @Override
-                    public FluentWebElement get() {
-                        LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
-                        ElementLocator locator = locatorHandler.getLocator();
-                        WebElement noHookElement = LocatorProxies.createWebElement(locator);
-                        return newComponent(FluentWebElement.this.getClass(), noHookElement);
-                    }
+                () -> {
+                    LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
+                    ElementLocator locator = locatorHandler.getLocator();
+                    WebElement noHookElement = LocatorProxies.createWebElement(locator);
+                    return newComponent(FluentWebElement.this.getClass(), noHookElement);
                 });
 
         search = new Search(element, this, this.instantiator, this.control);
@@ -122,7 +119,7 @@ public class FluentWebElement extends Component
 
     @Override
     public FluentWebElement contextClick() {
-        mouseActions.contextClick();
+        mouse().contextClick();
         return this;
     }
 
@@ -160,6 +157,7 @@ public class FluentWebElement extends Component
      * XPath Axes accessor (parent, ancestors, preceding, following, ...).
      *
      * @return object to perform XPath Axes transformations.
+     * @deprecated Use {@link #dom()} instead.
      */
     @Deprecated
     public Dom axes() {
@@ -212,7 +210,7 @@ public class FluentWebElement extends Component
     }
 
     /**
-     * Wrap all underlying elements in a componen..
+     * Wrap all underlying elements in a component.
      *
      * @param componentClass component class
      * @param <T>            type of component
@@ -332,6 +330,7 @@ public class FluentWebElement extends Component
      * return true if the element is displayed, other way return false
      *
      * @return boolean value of displayed check
+     * @see WebElement#isDisplayed()
      */
     public boolean displayed() {
         return webElement.isDisplayed();
@@ -404,6 +403,7 @@ public class FluentWebElement extends Component
      * return the size of the element
      *
      * @return dimension/size of element
+     * @see WebElement#getSize()
      */
     public Dimension size() {
         return webElement.getSize();
@@ -416,36 +416,6 @@ public class FluentWebElement extends Component
      */
     public FluentList<FluentWebElement> asList() {
         return instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, Arrays.asList(webElement));
-    }
-
-    @Override
-    public FluentList<FluentWebElement> $(String selector, SearchFilter... filters) {
-        return find(selector, filters);
-    }
-
-    @Override
-    public FluentWebElement el(String selector, SearchFilter... filters) {
-        return find(selector, filters).first();
-    }
-
-    @Override
-    public FluentList<FluentWebElement> $(SearchFilter... filters) {
-        return find(filters);
-    }
-
-    @Override
-    public FluentWebElement el(SearchFilter... filters) {
-        return find(filters).first();
-    }
-
-    @Override
-    public FluentList<FluentWebElement> $(By locator, SearchFilter... filters) {
-        return find(locator, filters);
-    }
-
-    @Override
-    public FluentWebElement el(By locator, SearchFilter... filters) {
-        return find(locator, filters).first();
     }
 
     @Override

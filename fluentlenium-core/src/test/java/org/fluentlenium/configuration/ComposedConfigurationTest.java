@@ -1,18 +1,18 @@
 package org.fluentlenium.configuration;
 
-import org.assertj.core.api.Assertions;
-import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.util.function.Function;
-
 import static org.mockito.Mockito.RETURNS_DEFAULTS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import org.assertj.core.api.Assertions;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.stubbing.Answer;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
+
+import java.util.function.Function;
 
 public class ComposedConfigurationTest {
     private ProgrammaticConfiguration configuration;
@@ -43,6 +43,14 @@ public class ComposedConfigurationTest {
     }
 
     @Test
+    public void instantiationWithBaseConfigurationAsMutator() {
+        DummyBaseConfiguration writableConfiguration = new DummyBaseConfiguration();
+        composed = new ComposedConfiguration(writableConfiguration, configuration);
+
+        Assertions.assertThat(writableConfiguration.getGlobalConfiguration()).isEqualTo(composed);
+    }
+
+    @Test
     public void configurationFactory() {
         Assertions.assertThat(composed.getConfigurationFactory()).isNull();
 
@@ -50,12 +58,7 @@ public class ComposedConfigurationTest {
 
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DefaultConfigurationFactory.class);
 
-        when(configurationProperties2.getConfigurationFactory()).thenAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                return DummyConfigurationFactory.class;
-            }
-        });
+        when(configurationProperties2.getConfigurationFactory()).thenAnswer((Answer<Object>) invocation -> DummyConfigurationFactory.class);
 
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DefaultConfigurationFactory.class);
 
@@ -63,12 +66,7 @@ public class ComposedConfigurationTest {
 
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DummyConfigurationFactory.class);
 
-        when(configurationProperties3.getConfigurationFactory()).thenAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                return DefaultConfigurationFactory.class;
-            }
-        });
+        when(configurationProperties3.getConfigurationFactory()).thenAnswer((Answer<Object>) invocation -> DefaultConfigurationFactory.class);
 
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DummyConfigurationFactory.class);
     }
@@ -95,8 +93,16 @@ public class ComposedConfigurationTest {
     }
 
     @Test
+    public void remoteUrl() {
+        testImpl(ConfigurationProperties::getRemoteUrl, input -> {
+            composed.setRemoteUrl(input);
+            return null;
+        }, null, "http://localhost:4444", "http://localhost:7777");
+    }
+
+    @Test
     public void webDriver() {
-        testImpl(input -> input.getWebDriver(), input -> {
+        testImpl(ConfigurationProperties::getWebDriver, input -> {
             composed.setWebDriver(input);
             return null;
         }, null, "firefox", "chrome");
@@ -104,7 +110,7 @@ public class ComposedConfigurationTest {
 
     @Test
     public void browserTimeout() {
-        testImpl(input -> input.getBrowserTimeout(), input -> {
+        testImpl(ConfigurationProperties::getBrowserTimeout, input -> {
             composed.setBrowserTimeout(input);
             return null;
         }, null, 10L, 0L);
@@ -112,7 +118,7 @@ public class ComposedConfigurationTest {
 
     @Test
     public void browserTimeoutRetries() {
-        testImpl(input -> input.getBrowserTimeoutRetries(), input -> {
+        testImpl(ConfigurationProperties::getBrowserTimeoutRetries, input -> {
             composed.setBrowserTimeoutRetries(input);
             return null;
         }, null, 1, 100);
@@ -120,7 +126,7 @@ public class ComposedConfigurationTest {
 
     @Test
     public void baseUrl() {
-        testImpl(input -> input.getBaseUrl(), input -> {
+        testImpl(ConfigurationProperties::getBaseUrl, input -> {
             composed.setBaseUrl(input);
             return null;
         }, null, "firefox", "chrome");
@@ -128,7 +134,7 @@ public class ComposedConfigurationTest {
 
     @Test
     public void pageLoadTimeout() {
-        testImpl(input -> input.getPageLoadTimeout(), input -> {
+        testImpl(ConfigurationProperties::getPageLoadTimeout, input -> {
             composed.setPageLoadTimeout(input);
             return null;
         }, null, 1000L, 2000L);
@@ -136,7 +142,7 @@ public class ComposedConfigurationTest {
 
     @Test
     public void implicitlyWait() {
-        testImpl(input -> input.getImplicitlyWait(), input -> {
+        testImpl(ConfigurationProperties::getImplicitlyWait, input -> {
             composed.setImplicitlyWait(input);
             return null;
         }, null, 1000L, 2000L);
@@ -144,7 +150,7 @@ public class ComposedConfigurationTest {
 
     @Test
     public void scriptTimeout() {
-        testImpl(input -> input.getScriptTimeout(), input -> {
+        testImpl(ConfigurationProperties::getScriptTimeout, input -> {
             composed.setScriptTimeout(input);
             return null;
         }, null, 1000L, 2000L);
@@ -152,7 +158,7 @@ public class ComposedConfigurationTest {
 
     @Test
     public void screenshotPath() {
-        testImpl(input -> input.getScreenshotPath(), input -> {
+        testImpl(ConfigurationProperties::getScreenshotPath, input -> {
             composed.setScreenshotPath(input);
             return null;
         }, null, "firefox", "chrome");
@@ -160,7 +166,7 @@ public class ComposedConfigurationTest {
 
     @Test
     public void htmlDumpPath() {
-        testImpl(input -> input.getHtmlDumpPath(), input -> {
+        testImpl(ConfigurationProperties::getHtmlDumpPath, input -> {
             composed.setHtmlDumpPath(input);
             return null;
         }, null, "firefox", "chrome");
@@ -168,7 +174,7 @@ public class ComposedConfigurationTest {
 
     @Test
     public void screenshotMode() {
-        testImpl(input -> input.getScreenshotMode(), input -> {
+        testImpl(ConfigurationProperties::getScreenshotMode, input -> {
             composed.setScreenshotMode(input);
             return null;
         }, null, ConfigurationProperties.TriggerMode.MANUAL, ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
@@ -176,7 +182,7 @@ public class ComposedConfigurationTest {
 
     @Test
     public void htmlDumpMode() {
-        testImpl(input -> input.getHtmlDumpMode(), input -> {
+        testImpl(ConfigurationProperties::getHtmlDumpMode, input -> {
             composed.setHtmlDumpMode(input);
             return null;
         }, null, ConfigurationProperties.TriggerMode.MANUAL, ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
@@ -190,7 +196,7 @@ public class ComposedConfigurationTest {
         DesiredCapabilities cap2 = new DesiredCapabilities();
         cap2.setJavascriptEnabled(false);
 
-        testImpl(input -> input.getCapabilities(), input -> {
+        testImpl(ConfigurationProperties::getCapabilities, input -> {
             composed.setCapabilities(input);
             return null;
         }, null, cap1, cap2);
@@ -198,7 +204,7 @@ public class ComposedConfigurationTest {
 
     @Test
     public void eventsEnabled() {
-        testImpl(input -> input.getEventsEnabled(), input -> {
+        testImpl(ConfigurationProperties::getEventsEnabled, input -> {
             composed.setEventsEnabled(input);
             return null;
         }, null, true, false);

@@ -37,7 +37,7 @@ public class ElementListInstanceLocatorTest {
 
     @Test
     public void testWithNoElement() {
-        ElementListInstanceLocator locator = new ElementListInstanceLocator(Collections.<WebElement>emptyList());
+        ElementListInstanceLocator locator = new ElementListInstanceLocator(Collections.emptyList());
 
         Assertions.assertThat(locator.findElement()).isNull();
         Assertions.assertThat(locator.findElements()).isEmpty();

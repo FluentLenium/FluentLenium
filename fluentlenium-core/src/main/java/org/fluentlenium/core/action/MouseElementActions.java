@@ -101,6 +101,19 @@ public class MouseElementActions {
     }
 
     /**
+     * Moves the mouse to the middle of the target element. The element is scrolled into view and its
+     * location is calculated using getBoundingClientRect.
+     *
+     * @param target element to move to and release the mouse at.
+     * @return this object reference to chain calls
+     * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement)
+     */
+    public MouseElementActions moveToElement(WebElement target) {
+        actions().moveToElement(target).perform();
+        return this;
+    }
+
+    /**
      * Moves the mouse to an offset from the top-left corner of the element.
      * The element is scrolled into view and its location is calculated using getBoundingClientRect.
      *
@@ -113,6 +126,23 @@ public class MouseElementActions {
      */
     public MouseElementActions moveToElement(int xOffset, int yOffset) {
         actions().moveToElement(element, xOffset, yOffset).perform();
+        return this;
+    }
+
+    /**
+     * Moves the mouse to an offset from the top-left corner of the target element.
+     * The element is scrolled into view and its location is calculated using getBoundingClientRect.
+     *
+     * @param target element to move to and release the mouse at.
+     * @param xOffset Offset from the top-left corner. A negative value means coordinates left from
+     *                the element
+     * @param yOffset Offset from the top-left corner. A negative value means coordinates above
+     *                the element
+     * @return this object reference to chain calls
+     * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement, int, int)
+     */
+    public MouseElementActions moveToElement(WebElement target, int xOffset, int yOffset) {
+        actions().moveToElement(target, xOffset, yOffset).perform();
         return this;
     }
 
@@ -167,4 +197,22 @@ public class MouseElementActions {
         actions().dragAndDropBy(element, xOffset, yOffset).perform();
         return this;
     }
+
+    /**
+     * A convenience method that performs click-and-hold at the location of this element,
+     * moves by a given offset of target element, then releases the mouse.
+     *
+     * This Method is not available in pure Selenium
+     *
+     * @param target element to move to and release the mouse at.
+     * @param xOffset horizontal move offset.
+     * @param yOffset vertical move offset.
+     * @return this object reference to chain calls
+     * @see org.openqa.selenium.interactions.Actions#dragAndDropBy(WebElement, int, int)
+     */
+    public MouseElementActions dragAndDropByWithTargetOffset(WebElement target, int xOffset, int yOffset) {
+        actions().clickAndHold(element).moveToElement(target, xOffset, yOffset).release().perform();
+        return this;
+    }
+
 }

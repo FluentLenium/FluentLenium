@@ -92,7 +92,7 @@ class SizeChangePage1 extends FluentPage {
     private FluentList<FluentWebElement> rows;
 
     @FindBy(css = ".newrow")
-    private FluentList<FluentWebElement> nerows;
+    private FluentList<FluentWebElement> newRows;
 
     @Override
     public String getUrl() {
@@ -109,6 +109,6 @@ class SizeChangePage1 extends FluentPage {
     }
 
     FluentList<FluentWebElement> getNewRows() {
-        return nerows;
+        return newRows;
     }
 }

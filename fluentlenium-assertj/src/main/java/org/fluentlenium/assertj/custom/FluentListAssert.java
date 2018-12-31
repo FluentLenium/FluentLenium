@@ -1,6 +1,7 @@
 package org.fluentlenium.assertj.custom;
 
 import org.assertj.core.api.AbstractAssert;
+
 import org.fluentlenium.core.domain.FluentList;
 
 import java.util.Arrays;
@@ -27,17 +28,14 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      */
     public FluentListAssert hasText(String textToFind) {
         List<String> actualTexts = actual.texts();
-        for (String text : actualTexts) {
-            if (text.contains(textToFind)) {
-                return this;
-            }
+        if (actualTexts.stream().noneMatch(text -> text.contains(textToFind))) {
+            super.failWithMessage("No selected elements contains text: " + textToFind + " . Actual texts found: " + actualTexts);
         }
-        super.failWithMessage("No selected elements contains text: " + textToFind + " . Actual texts found : " + actualTexts);
         return this;
     }
 
     /**
-     * check if at no element of the FluentList contains the text
+     * check if no element of the FluentList contains the text
      *
      * @param textToFind text to find
      * @return assertion object
@@ -47,7 +45,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         for (String text : actualTexts) {
             if (text.contains(textToFind)) {
                 super.failWithMessage(
-                        "At least one selected elements contains text: " + textToFind + " . Actual texts found : " + actualTexts);
+                        "At least one selected elements contains text: " + textToFind + " . Actual texts found: " + actualTexts);
             }
         }
         return this;
@@ -106,16 +104,9 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
             }
         }
 
-        StringBuilder builder = new StringBuilder();
-        for (String classFromElement : classes) {
-            if (builder.length() > 0) {
-                builder.append(", ");
-            }
-            builder.append(classFromElement);
-        }
-
+        String classesFromElement = String.join(", ", classes);
         super.failWithMessage(
-                "No selected elements has class: " + classToFind + " . Actual classes found : " + builder.toString());
+                "No selected elements has class: " + classToFind + " . Actual classes found : " + classesFromElement);
         return this;
     }
 

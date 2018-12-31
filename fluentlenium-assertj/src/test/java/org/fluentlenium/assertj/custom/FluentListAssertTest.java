@@ -1,18 +1,22 @@
 package org.fluentlenium.assertj.custom;
 
-import org.fluentlenium.assertj.FluentLeniumAssertions;
-import org.fluentlenium.core.domain.FluentList;
-import org.fluentlenium.core.domain.FluentWebElement;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.when;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Arrays;
-import java.util.Collections;
+import org.fluentlenium.assertj.FluentLeniumAssertions;
+import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentWebElement;
 
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.when;
+import java.util.Arrays;
+import java.util.List;
 
 public class FluentListAssertTest<E extends FluentWebElement> {
 
@@ -29,14 +33,33 @@ public class FluentListAssertTest<E extends FluentWebElement> {
 
     @Test
     public void testHasText() {
-        when(fluentList.texts()).thenReturn(Arrays.asList("some text"));
+        when(fluentList.texts()).thenReturn(singletonList("some text"));
         assertNotNull(listAssert.hasText("some text"));
     }
 
     @Test
+    public void testHasTextWithMissingText() {
+        when(fluentList.texts()).thenReturn(List.of("some text", "other text"));
+
+        assertThatThrownBy(() -> listAssert.hasText("absent text"))
+                .isInstanceOf(AssertionError.class)
+                .hasMessage("No selected elements contains text: absent text . Actual texts found: [some text, other text]");
+    }
+
+    @Test
     public void testHasNotText() {
-        when(fluentList.texts()).thenReturn(Arrays.asList("other text"));
+        when(fluentList.texts()).thenReturn(singletonList("other text"));
         assertNotNull(listAssert.hasNotText("some text"));
+    }
+
+    @Test
+    public void testHasNotTextWithTextPresent() {
+        when(fluentList.texts()).thenReturn(List.of("some text", "other text"));
+
+        assertThatThrownBy(() -> listAssert.hasNotText("other text"))
+                .isInstanceOf(AssertionError.class)
+                .hasMessage("At least one selected elements contains text: other text ."
+                        + " Actual texts found: [some text, other text]");
     }
 
     @Test
@@ -105,54 +128,54 @@ public class FluentListAssertTest<E extends FluentWebElement> {
 
     @Test
     public void testHasIdOk() {
-        when(fluentList.ids()).thenReturn(Arrays.asList("some-id"));
+        when(fluentList.ids()).thenReturn(singletonList("some-id"));
         listAssert.hasId("some-id");
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasIdKo() throws Exception {
-        when(fluentList.ids()).thenReturn(Arrays.asList("other-id"));
+    public void testHasIdKo() {
+        when(fluentList.ids()).thenReturn(singletonList("other-id"));
         listAssert.hasId("some-id");
     }
 
     @Test(expected = AssertionError.class)
-    public void testHasIdEmptyKo() throws Exception {
-        when(fluentList.ids()).thenReturn(Collections.<String>emptyList());
+    public void testHasIdEmptyKo() {
+        when(fluentList.ids()).thenReturn(emptyList());
         listAssert.hasId("some-id");
     }
 
     @Test
     public void testHasClassOk() {
-        when(fluentList.attributes("class")).thenReturn(Arrays.asList("some-class"));
+        when(fluentList.attributes("class")).thenReturn(singletonList("some-class"));
         listAssert.hasClass("some-class");
     }
 
     @Test(expected = AssertionError.class)
     public void testHasClassKo() {
-        when(fluentList.attributes("class")).thenReturn(Arrays.asList("other-class"));
+        when(fluentList.attributes("class")).thenReturn(singletonList("other-class"));
         listAssert.hasClass("some-class");
     }
 
     @Test(expected = AssertionError.class)
     public void testHasClassEmptyKo() {
-        when(fluentList.attributes("class")).thenReturn(Collections.<String>emptyList());
+        when(fluentList.attributes("class")).thenReturn(emptyList());
         listAssert.hasClass("some-class");
     }
 
     @Test(expected = AssertionError.class)
-    public void testSubstringKo() throws Exception {
-        when(fluentList.attributes("class")).thenReturn(Arrays.asList("yolokitten"));
+    public void testSubstringKo() {
+        when(fluentList.attributes("class")).thenReturn(singletonList("yolokitten"));
         listAssert.hasClass("yolo");
     }
 
     @Test
-    public void testHasMultipleClassesOk() throws Exception {
-        when(fluentList.attributes("class")).thenReturn(Arrays.asList("yolokitten mark"));
+    public void testHasMultipleClassesOk() {
+        when(fluentList.attributes("class")).thenReturn(singletonList("yolokitten mark"));
         listAssert.hasClass("mark");
     }
 
     @Test
-    public void testHasMultipleClassesOkBanana() throws Exception {
+    public void testHasMultipleClassesOkBanana() {
         when(fluentList.attributes("class")).thenReturn(Arrays.asList("beta product", "alpha male"));
         listAssert.hasClass("male");
     }

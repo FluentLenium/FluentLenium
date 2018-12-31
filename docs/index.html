@@ -3,11 +3,6 @@ layout: page
 title: FluentLenium
 ---
 <div class="whats-fluentlenium">
-    {% capture whatsFluentlenium %}{% include_relative _includes/whats-fluentlenium.md %}{% endcapture %}
+    {% capture whatsFluentlenium %}{% include_relative html_included_pages/whats-fluentlenium.md %}{% endcapture %}
     {{ whatsFluentlenium | markdownify }}
-</div>
-
-<div class="fluentlenium-code">
-    {% capture fluentleniumCode %}{% include_relative _includes/fluentlenium-code.md %}{% endcapture %}
-    {{ fluentleniumCode | markdownify }}
 </div>

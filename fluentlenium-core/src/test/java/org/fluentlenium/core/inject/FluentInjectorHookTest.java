@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
@@ -54,7 +55,7 @@ public class FluentInjectorHookTest {
         fluentAdapter.initFluent(webDriver);
 
         injector = new FluentInjector(fluentAdapter, null, new ComponentsManager(fluentAdapter),
-                new DefaultContainerInstanciator(fluentAdapter));
+                new DefaultContainerInstantiator(fluentAdapter));
     }
 
     @After
@@ -337,7 +338,7 @@ public class FluentInjectorHookTest {
         when(webDriver.findElement(new ByIdOrName("subInjected3"))).thenReturn(subElement3);
 
         WebElement subElementMethod = mock(WebElement.class);
-        when(webDriver.findElements(By.cssSelector("#subInjectedMethod"))).thenReturn(Arrays.asList(subElementMethod));
+        when(webDriver.findElements(By.cssSelector("#subInjectedMethod"))).thenReturn(singletonList(subElementMethod));
 
         injector.inject(container);
 

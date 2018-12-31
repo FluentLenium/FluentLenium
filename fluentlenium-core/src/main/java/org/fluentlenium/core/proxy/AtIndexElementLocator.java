@@ -1,8 +1,9 @@
 package org.fluentlenium.core.proxy;
 
-import org.fluentlenium.core.domain.ElementUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+
+import org.fluentlenium.core.domain.ElementUtils;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,26 +27,18 @@ public class AtIndexElementLocator implements ElementLocator {
         this.index = index;
     }
 
-    private WebElement findElementImpl() {
-        List<WebElement> elements = listLocator.findElements();
-        if (index >= elements.size()) {
-            return null;
-        }
-        return elements.get(index);
-    }
-
     @Override
     public WebElement findElement() {
-        WebElement element = findElementImpl();
+        WebElement element = getWebElementAtIndex();
         if (element == null) {
-            throw ElementUtils.noSuchElementException(String.valueOf("Element " + this));
+            throw ElementUtils.noSuchElementException("Element " + this);
         }
         return element;
     }
 
     @Override
     public List<WebElement> findElements() {
-        WebElement element = findElementImpl();
+        WebElement element = getWebElementAtIndex();
         if (element == null) {
             return Collections.emptyList();
         }
@@ -55,5 +48,13 @@ public class AtIndexElementLocator implements ElementLocator {
     @Override
     public String toString() {
         return listLocator.toString() + " (index=" + index + ")";
+    }
+
+    private WebElement getWebElementAtIndex() {
+        List<WebElement> elements = listLocator.findElements();
+        if (index >= elements.size()) {
+            return null;
+        }
+        return elements.get(index);
     }
 }

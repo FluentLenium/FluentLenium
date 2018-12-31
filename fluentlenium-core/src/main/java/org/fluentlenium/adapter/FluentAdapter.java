@@ -1,5 +1,9 @@
 package org.fluentlenium.adapter;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.configuration.ConfigurationFactoryProvider;
 import org.fluentlenium.configuration.ConfigurationProperties;
@@ -22,6 +26,11 @@ public class FluentAdapter implements FluentControl {
     private final FluentControlContainer controlContainer;
 
     private final Configuration configuration;
+
+    private static final Set<String> IGNORED_EXCEPTIONS = Stream.of(
+                "org.junit.internal.AssumptionViolatedException",
+                "org.testng.SkipException")
+            .collect(Collectors.toSet());
 
     /**
      * Creates a new fluent adapter.
@@ -160,5 +169,27 @@ public class FluentAdapter implements FluentControl {
             webDriver = new EventFiringWebDriver(webDriver);
         }
         return webDriver;
+    }
+
+    /**
+     * Checks if the exception should be ignored and not reported as a test case fail
+     *
+     * @param e - the exception to check is it defined in ignored exceptions set
+     * @return boolean
+     */
+    boolean isIgnoredException(Throwable e) {
+        if (e == null) {
+            return false;
+        }
+
+        Class clazz = e.getClass();
+        do {
+            if (IGNORED_EXCEPTIONS.contains(clazz.getName())) {
+                return true;
+            }
+            clazz = clazz.getSuperclass();
+        } while (clazz != Object.class);
+
+        return false;
     }
 }

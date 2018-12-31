@@ -1,6 +1,5 @@
 package org.fluentlenium.integration;
 
-import org.assertj.core.api.ThrowableAssert;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.integration.localtest.IntegrationFluentTest;
@@ -23,13 +22,7 @@ public class IsAtTest extends IntegrationFluentTest {
     public void testIsNotAt() {
         pageFail.go();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                pageFail.isAt();
-            }
-        }).isInstanceOf(AssertionError.class);
-
+        assertThatThrownBy(() -> pageFail.isAt()).isInstanceOf(AssertionError.class);
     }
 
     @Test

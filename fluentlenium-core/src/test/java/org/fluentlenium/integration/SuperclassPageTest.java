@@ -33,7 +33,7 @@ class AnotherPage extends FluentPage {
 
     @Override
     public String getUrl() {
-        return IntegrationFluentTest.ANOTHERPAGE_URL;
+        return IntegrationFluentTest.ANOTHER_PAGE_URL;
     }
 
     @Override

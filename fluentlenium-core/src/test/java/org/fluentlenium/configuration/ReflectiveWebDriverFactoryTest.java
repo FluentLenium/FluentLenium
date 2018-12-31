@@ -1,6 +1,5 @@
 package org.fluentlenium.configuration;
 
-import org.assertj.core.api.ThrowableAssert;
 import org.junit.Test;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.WebDriver;
@@ -31,17 +30,13 @@ public class ReflectiveWebDriverFactoryTest {
     }
 
     @Test
-    public void testInexistantClass() {
+    public void testNonexstingClass() {
         ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("doesnt-exists",
                 "org.fluentlenium.ThisClassDoesntExists");
         assertThat(webDriverFactory.isAvailable()).isFalse();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                webDriverFactory.newWebDriver(null, null);
-            }
-        }).isExactlyInstanceOf(ConfigurationException.class);
+        assertThatThrownBy(() -> webDriverFactory.newWebDriver(null, null))
+                .isExactlyInstanceOf(ConfigurationException.class);
 
         assertThat(webDriverFactory.getWebDriverClass()).isNull();
     }
@@ -51,12 +46,8 @@ public class ReflectiveWebDriverFactoryTest {
         ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("test-class", getClass().getName());
         assertThat(webDriverFactory.isAvailable()).isFalse();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                webDriverFactory.newWebDriver(null, null);
-            }
-        }).isExactlyInstanceOf(ConfigurationException.class);
+        assertThatThrownBy(() -> webDriverFactory.newWebDriver(null, null))
+                .isExactlyInstanceOf(ConfigurationException.class);
 
         assertThat(webDriverFactory.getWebDriverClass()).isSameAs(getClass());
     }
@@ -66,12 +57,8 @@ public class ReflectiveWebDriverFactoryTest {
         ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("abstract", AbstractDriver.class);
         assertThat(webDriverFactory.isAvailable()).isTrue();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                webDriverFactory.newWebDriver(null, null);
-            }
-        }).isExactlyInstanceOf(ConfigurationException.class);
+        assertThatThrownBy(() -> webDriverFactory.newWebDriver(null, null))
+                .isExactlyInstanceOf(ConfigurationException.class);
     }
 
     @Test
@@ -92,12 +79,8 @@ public class ReflectiveWebDriverFactoryTest {
         ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("failing", FailingDriver.class);
         assertThat(webDriverFactory.isAvailable()).isTrue();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                webDriverFactory.newWebDriver(null, null);
-            }
-        }).isExactlyInstanceOf(ConfigurationException.class);
+        assertThatThrownBy(() -> webDriverFactory.newWebDriver(null, null))
+                .isExactlyInstanceOf(ConfigurationException.class);
     }
 
     @Test
@@ -106,12 +89,8 @@ public class ReflectiveWebDriverFactoryTest {
                 CustomConstructorDriver.class);
         assertThat(webDriverFactory.isAvailable()).isTrue();
 
-        assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                webDriverFactory.newWebDriver(null, null);
-            }
-        }).isExactlyInstanceOf(ConfigurationException.class);
+        assertThatThrownBy(() -> webDriverFactory.newWebDriver(null, null))
+                .isExactlyInstanceOf(ConfigurationException.class);
     }
 
     @Test

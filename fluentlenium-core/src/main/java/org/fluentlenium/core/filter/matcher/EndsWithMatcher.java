@@ -31,8 +31,7 @@ public class EndsWithMatcher extends AbstractMatcher {
     }
 
     @Override
-    public boolean isSatisfiedBy(String obj) {
-        return CalculateService.endsWith(getPattern(), getValue(), obj);
+    public boolean isSatisfiedBy(String currentValue) {
+        return CalculateService.endsWith(getPattern(), getValue(), currentValue);
     }
-
 }

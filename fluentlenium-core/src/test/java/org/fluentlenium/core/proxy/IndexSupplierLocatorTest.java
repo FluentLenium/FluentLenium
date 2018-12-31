@@ -1,7 +1,6 @@
 package org.fluentlenium.core.proxy;
 
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.ThrowableAssert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +37,7 @@ public class IndexSupplierLocatorTest {
     @Before
     public void before() {
         Mockito.when(elementLocator.findElements()).thenReturn(Arrays.asList(element1, element2, element3, element4));
-        Mockito.when(emptyLocator.findElements()).thenReturn(Collections.<WebElement>emptyList());
+        Mockito.when(emptyLocator.findElements()).thenReturn(Collections.emptyList());
     }
 
     @Test
@@ -53,12 +52,7 @@ public class IndexSupplierLocatorTest {
     public void testFirstElementLocatorEmpty() {
         ElementLocator locator = new FirstElementLocator(emptyLocator);
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                locator.findElement();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        Assertions.assertThatThrownBy(locator::findElement).isExactlyInstanceOf(NoSuchElementException.class);
         Assertions.assertThat(locator.findElements()).isEmpty();
     }
 
@@ -74,12 +68,7 @@ public class IndexSupplierLocatorTest {
     public void testLastElementLocatorEmpty() {
         ElementLocator locator = new LastElementLocator(emptyLocator);
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                locator.findElement();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        Assertions.assertThatThrownBy(locator::findElement).isExactlyInstanceOf(NoSuchElementException.class);
         Assertions.assertThat(locator.findElements()).isEmpty();
     }
 
@@ -95,12 +84,7 @@ public class IndexSupplierLocatorTest {
     public void testAtIndexElementLocatorEmpty() {
         ElementLocator locator = new AtIndexElementLocator(emptyLocator, 2);
 
-        Assertions.assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-            @Override
-            public void call() throws Throwable {
-                locator.findElement();
-            }
-        }).isExactlyInstanceOf(NoSuchElementException.class);
+        Assertions.assertThatThrownBy(locator::findElement).isExactlyInstanceOf(NoSuchElementException.class);
         Assertions.assertThat(locator.findElements()).isEmpty();
     }
 
