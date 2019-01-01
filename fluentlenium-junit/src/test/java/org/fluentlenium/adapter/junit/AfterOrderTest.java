@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Test for <a href="https://github.com/FluentLenium/FluentLenium/issues/390">Issue #390</a>.
  */
-public class AfterFailureOrderTest {
+public class AfterOrderTest {
     public static class AfterOrderTestInternal extends FluentTest {
 
         private boolean after;
