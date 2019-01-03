@@ -1,14 +1,13 @@
 package org.fluentlenium.adapter.junit;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.MultipleFailureException;
 import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Equivalent of {@link org.junit.rules.TestWatcher}, but stop process if exception occurs on
@@ -20,6 +19,8 @@ public class FluentTestRule implements TestRule {
     private final Object target;
     private final TestClass testClass;
     private final List<FrameworkMethod> afters;
+
+    private boolean customAftersTriggered = false;
 
     /**
      * Creates a new fluent test rule.
@@ -50,15 +51,12 @@ public class FluentTestRule implements TestRule {
                     } catch (Throwable failedException) {
                         errors.add(failedException);
                     }
-                    for (FrameworkMethod each : afters) {
-                        try {
-                            each.invokeExplosively(target);
-                        } catch (Throwable afterException) {
-                            errors.add(afterException);
-                        }
-                    }
+                    triggerCustomAfters(errors);
                 } finally {
                     try {
+                        if (!customAftersTriggered) {
+                            triggerCustomAfters(errors);
+                        }
                         finished(description);
                     } catch (Throwable failedException) {
                         errors.add(failedException);
@@ -67,6 +65,17 @@ public class FluentTestRule implements TestRule {
                 MultipleFailureException.assertEmpty(errors);
             }
         };
+    }
+
+    private void triggerCustomAfters(List<Throwable> errors) {
+        for (FrameworkMethod each : afters) {
+            try {
+                each.invokeExplosively(target);
+            } catch (Throwable afterException) {
+                errors.add(afterException);
+            }
+        }
+        customAftersTriggered = true;
     }
 
     /**
