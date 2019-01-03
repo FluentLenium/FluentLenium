@@ -20,7 +20,7 @@ public class FluentTestRule implements TestRule {
     private final TestClass testClass;
     private final List<FrameworkMethod> afters;
 
-    private boolean customAftersTriggered = false;
+    boolean customAftersTriggered;
 
     /**
      * Creates a new fluent test rule.
@@ -67,7 +67,7 @@ public class FluentTestRule implements TestRule {
         };
     }
 
-    private void triggerCustomAfters(List<Throwable> errors) {
+    void triggerCustomAfters(List<Throwable> errors) {
         for (FrameworkMethod each : afters) {
             try {
                 each.invokeExplosively(target);

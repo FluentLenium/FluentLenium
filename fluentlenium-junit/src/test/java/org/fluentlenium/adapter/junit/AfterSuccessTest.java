@@ -41,6 +41,7 @@ public class AfterSuccessTest {
         }
 
     }
+
     @Test
     public void testFluentTest() {
         Result result = JUnitCore.runClasses(AfterOrderTestInternal.class);
