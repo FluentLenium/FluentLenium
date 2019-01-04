@@ -1,11 +1,11 @@
 package org.fluentlenium.examples.test;
 
-import org.fluentlenium.adapter.junit.FluentTest;
 
+import org.fluentlenium.adapter.junit.jupiter.FluentTest;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.examples.pages.DuckDuckMainPage;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -18,8 +18,8 @@ public class DuckDuckGoHeadlessFirefoxTest extends FluentTest {
     @Page
     private DuckDuckMainPage duckDuckMainPage;
 
-    @BeforeClass
-    public static void setup() {
+    @BeforeAll
+    static void setup() {
         if (System.getProperty(GECKO_DRIVER_PROPERTY) == null) {
             System.setProperty(GECKO_DRIVER_PROPERTY, PATH_TO_GECKO_DRIVER);
         }
@@ -33,7 +33,7 @@ public class DuckDuckGoHeadlessFirefoxTest extends FluentTest {
     }
 
     @Test
-    public void titleOfDuckDuckGoShouldContainSearchQueryName() {
+    void titleOfDuckDuckGoShouldContainSearchQueryName() {
         String searchPhrase = "searchPhrase";
 
         goTo(duckDuckMainPage)
