@@ -1,21 +1,20 @@
 package org.fluentlenium.core.components;
 
-import lombok.Getter;
-import lombok.experimental.Delegate;
-import org.fluentlenium.core.domain.WrapsElements;
-import org.openqa.selenium.WebElement;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
+import org.fluentlenium.core.domain.ListImpl;
+import org.fluentlenium.core.domain.WrapsElements;
+import org.openqa.selenium.WebElement;
 
 /**
  * A list of component that lazy initialize from it's related list of elements.
  *
  * @param <T> type of component.
  */
-public class LazyComponentList<T> implements List<T>, WrapsElements, LazyComponents<T> {
+public class LazyComponentList<T> extends ListImpl<T> implements List<T>, WrapsElements, LazyComponents<T> {
     private final ComponentInstantiator instantiator;
     private final Class<T> componentClass;
 
@@ -23,9 +22,7 @@ public class LazyComponentList<T> implements List<T>, WrapsElements, LazyCompone
 
     private final List<LazyComponentsListener<T>> lazyComponentsListeners = new ArrayList<>();
 
-    @Delegate
-    @Getter(lazy = true)
-    private final List<T> list = transformList();
+    private final AtomicReference<java.lang.Object> list = new AtomicReference<>();
 
     /**
      * Creates a new lazy component list.
@@ -38,6 +35,21 @@ public class LazyComponentList<T> implements List<T>, WrapsElements, LazyCompone
         this.componentClass = componentClass;
         this.instantiator = instantiator;
         this.elements = elements;
+    }
+
+    public List<T> getList() {
+        Object value = this.list.get();
+        if (value == null) {
+            synchronized (this.list) {
+                value = this.list.get();
+                if (value == null) {
+                    final List<T> actualValue = transformList();
+                    value = actualValue == null ? this.list : actualValue;
+                    this.list.set(value);
+                }
+            }
+        }
+        return (List<T>) (value == this.list ? null : value);
     }
 
     /**
@@ -95,6 +107,7 @@ public class LazyComponentList<T> implements List<T>, WrapsElements, LazyCompone
 
     @Override
     public String toString() {
-        return isLazyInitialized() ? list.toString() : elements.toString();
+        return isLazyInitialized() ? getList().toString() : elements.toString();
     }
+
 }

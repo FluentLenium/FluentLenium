@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
 
-import org.fluentlenium.adapter.SharedWebDriverContainer;
+import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import org.fluentlenium.adapter.junit.jupiter.FluentTest;
 import org.fluentlenium.adapter.junit.jupiter.MockitoExtension;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;

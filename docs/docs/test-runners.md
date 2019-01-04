@@ -2,6 +2,12 @@
 layout: page
 title: Test runners
 subtitle: FluentLenium
+sidebar:
+  Junit4: "#junit-4"
+  Junit 5 Jupiter: "#junit-5-jupiter"
+  TestNG: "#testng"
+  Cucumber: "#cucumber"
+  Spock: "#spock"
 ---
 
 ## Supported Test Runners

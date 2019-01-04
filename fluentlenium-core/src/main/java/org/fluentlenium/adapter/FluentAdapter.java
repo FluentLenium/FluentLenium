@@ -3,40 +3,31 @@ package org.fluentlenium.adapter;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import org.fluentlenium.configuration.Configuration;
-import org.fluentlenium.configuration.ConfigurationFactoryProvider;
 import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.configuration.WebDrivers;
 import org.fluentlenium.core.FluentControl;
+import org.fluentlenium.core.FluentControlImpl;
 import org.fluentlenium.core.FluentDriver;
-import org.fluentlenium.core.SeleniumDriverControl;
 import org.fluentlenium.core.inject.ContainerContext;
 import org.fluentlenium.core.inject.ContainerFluentControl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import lombok.experimental.Delegate;
-
 /**
  * Generic adapter to {@link FluentDriver}.
  */
-public class FluentAdapter implements FluentControl {
-
-    private final FluentControlContainer controlContainer;
-
-    private final Configuration configuration;
+public class FluentAdapter extends FluentControlImpl implements FluentControl {
 
     private static final Set<String> IGNORED_EXCEPTIONS = Stream.of(
-                "org.junit.internal.AssumptionViolatedException",
-                "org.testng.SkipException")
+            "org.junit.internal.AssumptionViolatedException",
+            "org.testng.SkipException")
             .collect(Collectors.toSet());
 
     /**
      * Creates a new fluent adapter.
      */
     public FluentAdapter() {
-        this(new DefaultFluentControlContainer());
+        super();
     }
 
     /**
@@ -45,34 +36,21 @@ public class FluentAdapter implements FluentControl {
      * @param controlContainer control interface container
      */
     public FluentAdapter(FluentControlContainer controlContainer) {
-        this.controlContainer = controlContainer;
-        configuration = ConfigurationFactoryProvider.newConfiguration(getClass());
+        super(controlContainer);
     }
 
     /**
      * Creates a new fluent adapter, using given control interface container.
      *
      * @param controlContainer control interface container
-     * @param clazz class from which annotation configuration will be looked up
+     * @param clazz            class from which annotation configuration will be looked up
      */
     public FluentAdapter(FluentControlContainer controlContainer, Class clazz) {
-        this.controlContainer = controlContainer;
-        configuration = ConfigurationFactoryProvider.newConfiguration(clazz);
+        super(controlContainer, clazz);
     }
 
-    /**
-     * Get the test adapter configuration.
-     *
-     * @return configuration
-     */
-    @Delegate
-    public Configuration getConfiguration() {
-        return configuration;
-    }
-
-    @Delegate(types = FluentControl.class, excludes = {SeleniumDriverControl.class, Configuration.class})
     // We want getDriver to be final.
-    private ContainerFluentControl getFluentControl() {
+    public ContainerFluentControl getFluentControl() {
         FluentControlContainer fluentControlContainer = getControlContainer();
 
         if (fluentControlContainer == null) {
@@ -98,15 +76,6 @@ public class FluentAdapter implements FluentControl {
     @Override
     public final WebDriver getDriver() {
         return getFluentControl() == null ? null : getFluentControl().getDriver();
-    }
-
-    /**
-     * Get the control interface container
-     *
-     * @return control interface container
-     */
-    protected FluentControlContainer getControlContainer() {
-        return controlContainer;
     }
 
     /**

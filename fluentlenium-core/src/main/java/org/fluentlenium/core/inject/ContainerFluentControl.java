@@ -1,23 +1,21 @@
 package org.fluentlenium.core.inject;
 
-import lombok.experimental.Delegate;
+import java.util.List;
 import org.fluentlenium.core.FluentControl;
+import org.fluentlenium.core.FluentControlImpl;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.hook.HookControl;
 import org.fluentlenium.core.hook.HookDefinition;
-import org.fluentlenium.core.search.SearchControl;
 import org.fluentlenium.core.search.SearchFilter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 /**
  * Container global FluentLenium control interface.
  */
-public class ContainerFluentControl implements FluentControl {
-    @Delegate(excludes = SearchControl.class)
+public class ContainerFluentControl extends FluentControlImpl implements FluentControl {
     private final FluentControl adapterControl;
 
     private ContainerContext context;
@@ -31,13 +29,24 @@ public class ContainerFluentControl implements FluentControl {
         return adapterControl;
     }
 
+    @Override
+    public final WebDriver getDriver() {
+        return getFluentControl() == null ? null : getFluentControl().getDriver();
+    }
+
     /**
      * Creates a new container fluent control.
      *
      * @param adapterControl test adapter control interface
      */
     public ContainerFluentControl(FluentControl adapterControl) {
-        this(adapterControl, null);
+        super(adapterControl);
+        this.adapterControl = adapterControl;
+    }
+
+    @Override
+    public FluentControl getFluentControl() {
+        return adapterControl;
     }
 
     /**
@@ -128,5 +137,4 @@ public class ContainerFluentControl implements FluentControl {
     public FluentWebElement el(By locator, SearchFilter... filters) {
         return applyHooks(adapterControl.el(locator, filters));
     }
-
 }

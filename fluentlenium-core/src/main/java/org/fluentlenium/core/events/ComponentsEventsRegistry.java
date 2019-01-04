@@ -1,6 +1,5 @@
 package org.fluentlenium.core.events;
 
-import lombok.AllArgsConstructor;
 import org.fluentlenium.core.components.ComponentsAccessor;
 import org.fluentlenium.core.components.ComponentsListener;
 import org.openqa.selenium.WebElement;
@@ -20,10 +19,14 @@ public class ComponentsEventsRegistry implements ComponentsListener {
     /**
      * Constructor
      */
-    @AllArgsConstructor
     public static class RegistryKey {
         WebElement element;
         Object component;
+
+        public RegistryKey(WebElement element, Object component) {
+            this.element = element;
+            this.component = component;
+        }
     }
 
     /**

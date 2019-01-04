@@ -6,14 +6,16 @@ import org.fluentlenium.core.action.MouseActions;
 import org.fluentlenium.core.action.WindowAction;
 import org.fluentlenium.core.alert.Alert;
 import org.fluentlenium.core.alert.AlertImpl;
-import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.css.CssControl;
 import org.fluentlenium.core.css.CssControlImpl;
+import org.fluentlenium.core.css.CssSupport;
+import org.fluentlenium.core.domain.ComponentList;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.ComponentsEventsRegistry;
 import org.fluentlenium.core.events.EventsRegistry;
+import org.fluentlenium.core.inject.ContainerContext;
 import org.fluentlenium.core.inject.DefaultContainerInstantiator;
 import org.fluentlenium.core.inject.FluentInjector;
 import org.fluentlenium.core.script.FluentJavascript;
@@ -22,7 +24,6 @@ import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.utils.ImageUtils;
 import org.fluentlenium.utils.UrlUtils;
-import lombok.experimental.Delegate;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
@@ -30,6 +31,7 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
@@ -52,21 +54,17 @@ import java.util.concurrent.TimeUnit;
  * Util Class which offers some shortcut to webdriver methods
  */
 @SuppressWarnings("PMD.GodClass")
-public class FluentDriver implements FluentControl { // NOPMD GodClass
-    @Delegate
+public class FluentDriver extends FluentControlImpl implements FluentControl { // NOPMD GodClass
     private final Configuration configuration;
 
-    @Delegate(types = ComponentInstantiator.class)
     private final ComponentsManager componentsManager;
 
     private final EventsRegistry events;
 
     private final ComponentsEventsRegistry componentsEventsRegistry;
 
-    @Delegate
     private final FluentInjector fluentInjector;
 
-    @Delegate
     private final CssControl cssControl; // NOPMD UnusedPrivateField
 
     private final Search search;
@@ -87,6 +85,7 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
      * @param adapter       adapter fluent control interface
      */
     public FluentDriver(WebDriver driver, Configuration configuration, FluentControl adapter) {
+        super(adapter);
         this.configuration = configuration;
         componentsManager = new ComponentsManager(adapter);
         this.driver = driver;
@@ -105,6 +104,22 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
         windowAction = new WindowAction(adapter, componentsManager.getInstantiator(), driver);
 
         configureDriver(); // NOPMD ConstructorCallsOverridableMethod
+    }
+
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+
+    private ComponentsManager getComponentsManager() {
+        return componentsManager;
+    }
+
+    private FluentInjector getFluentInjector() {
+        return fluentInjector;
+    }
+
+    private CssControl getCssControl() {
+        return cssControl;
     }
 
     private void configureDriver() {
@@ -423,5 +438,165 @@ public class FluentDriver implements FluentControl { // NOPMD GodClass
         if (componentsEventsRegistry != null) {
             componentsEventsRegistry.close();
         }
+    }
+
+    @Override
+    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass) {
+        return getComponentsManager().newComponentList(listClass, componentClass);
+    }
+
+    @Override
+    public <T> ComponentList asComponentList(Class<T> componentClass, Iterable<WebElement> elements) {
+        return getComponentsManager().asComponentList(componentClass, elements);
+    }
+
+    @Override
+    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, T... componentsList) {
+        return getComponentsManager().newComponentList(listClass, componentClass, componentsList);
+    }
+
+    @Override
+    public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, Iterable<WebElement> elements) {
+        return getComponentsManager().asFluentList(componentClass, elements);
+    }
+
+    @Override
+    public boolean isComponentClass(Class<?> componentClass) {
+        return getComponentsManager().isComponentClass(componentClass);
+    }
+
+    @Override
+    public <T> ComponentList<T> asComponentList(Class<T> componentClass, List<WebElement> elements) {
+        return getComponentsManager().asComponentList(componentClass, elements);
+    }
+
+    @Override
+    public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, WebElement... elements) {
+        return getComponentsManager().asFluentList(componentClass, elements);
+    }
+
+    @Override
+    public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass) {
+        return getComponentsManager().newFluentList(componentClass);
+    }
+
+    @Override
+    public FluentWebElement newFluent(WebElement element) {
+        return getComponentsManager().newFluent(element);
+    }
+
+    @Override
+    public boolean isComponentListClass(Class<? extends List<?>> componentListClass) {
+        return getComponentsManager().isComponentListClass(componentListClass);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> asFluentList(WebElement... elements) {
+        return getComponentsManager().asFluentList(elements);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> asFluentList(Iterable<WebElement> elements) {
+        return getComponentsManager().asFluentList(elements);
+    }
+
+    @Override
+    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, WebElement... elements) {
+        return getComponentsManager().asComponentList(listClass, componentClass, elements);
+    }
+
+    @Override
+    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, Iterable<WebElement> elements) {
+        return getComponentsManager().asComponentList(listClass, componentClass, elements);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> asFluentList(List<WebElement> elements) {
+        return getComponentsManager().asFluentList(elements);
+    }
+
+    @Override
+    public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, List<WebElement> elements) {
+        return getComponentsManager().asFluentList(componentClass, elements);
+    }
+
+    @Override
+    public <T> ComponentList<T> asComponentList(Class<T> componentClass, WebElement... elements) {
+        return getComponentsManager().asComponentList(componentClass, elements);
+    }
+
+    @Override
+    public <T> T newComponent(Class<T> componentClass, WebElement element) {
+        return getComponentsManager().newComponent(componentClass, element);
+    }
+
+    @Override
+    public <T> ComponentList<T> newComponentList(Class<T> componentClass, T... componentsList) {
+        return getComponentsManager().newComponentList(componentClass, componentsList);
+    }
+
+    @Override
+    public <T> ComponentList<T> newComponentList(Class<T> componentClass, List<T> componentsList) {
+        return getComponentsManager().newComponentList(componentClass, componentsList);
+    }
+
+    @Override
+    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, List<T> componentsList) {
+        return getComponentsManager().newComponentList(listClass, componentClass, componentsList);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> newFluentList() {
+        return getComponentsManager().newFluentList();
+    }
+
+    @Override
+    public FluentList<FluentWebElement> newFluentList(List<FluentWebElement> elements) {
+        return getComponentsManager().newFluentList(elements);
+    }
+
+    @Override
+    public <T> ComponentList<T> newComponentList(Class<T> componentClass) {
+        return getComponentsManager().newComponentList(componentClass);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> newFluentList(FluentWebElement... elements) {
+        return getComponentsManager().newFluentList(elements);
+    }
+
+    @Override
+    public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass, List<T> elements) {
+        return getComponentsManager().newFluentList(componentClass, elements);
+    }
+
+    @Override
+    public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass, T... elements) {
+        return getComponentsManager().newFluentList(componentClass, elements);
+    }
+
+    @Override
+    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, List<WebElement> elements) {
+        return getComponentsManager().asComponentList(listClass, componentClass, elements);
+    }
+
+    @Override
+    public ContainerContext inject(Object container) {
+        return getFluentInjector().inject(container);
+    }
+
+    @Override
+    public <T> T newInstance(Class<T> cls) {
+        return getFluentInjector().newInstance(cls);
+    }
+
+    @Override
+    public ContainerContext injectComponent(Object componentContainer, Object parentContainer, SearchContext searchContext) {
+        return getFluentInjector().injectComponent(componentContainer, parentContainer, searchContext);
+    }
+
+    @Override
+    public CssSupport css() {
+        return getCssControl().css();
     }
 }

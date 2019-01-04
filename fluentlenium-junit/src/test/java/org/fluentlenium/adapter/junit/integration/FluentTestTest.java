@@ -3,7 +3,7 @@ package org.fluentlenium.adapter.junit.integration;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
-import org.fluentlenium.adapter.SharedWebDriverContainer;
+import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.configuration.FluentConfiguration;

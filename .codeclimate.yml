@@ -8,6 +8,13 @@ engines:
     enabled: true
     config: dev-config/checkstyle/fluentlenium_checks.xml
     channel: "beta"
+    checks:
+      com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck:
+        enabled: false
+      com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck:
+        enabled: false
+      com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck:
+        enabled: false
 
 ratings:
   paths:

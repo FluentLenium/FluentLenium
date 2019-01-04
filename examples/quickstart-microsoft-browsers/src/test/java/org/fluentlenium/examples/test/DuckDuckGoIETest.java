@@ -1,14 +1,14 @@
 package org.fluentlenium.examples.test;
 
-import org.fluentlenium.adapter.junit.FluentTest;
+import org.fluentlenium.adapter.testng.FluentTestNg;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.examples.pages.DuckDuckMainPage;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
-public class DuckDuckGoIETest extends FluentTest {
+public class DuckDuckGoIETest extends FluentTestNg {
 
     private static final String PATH_TO_IE_DRIVER = "C:\\drivers\\IEDriverServer.exe";
     private static final String IE_DRIVER_PROPERTY = "webdriver.ie.driver";

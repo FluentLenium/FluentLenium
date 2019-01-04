@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter;
+package org.fluentlenium.adapter.sharedwebdriver;
 
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.junit.After;
@@ -15,11 +15,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
 
-    private SharedWebDriverContainer.Impl container;
+    private SharedWebdriverSingletonImpl container;
 
     @Before
     public void before() {
-        container = new SharedWebDriverContainer.Impl();
+        container = new SharedWebdriverSingletonImpl();
     }
 
     @After
