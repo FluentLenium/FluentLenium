@@ -1,5 +1,13 @@
 package org.fluentlenium.core.wait;
 
+import java.time.Duration;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.conditions.FluentConditions;
@@ -10,14 +18,6 @@ import org.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
-
-import java.time.Duration;
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 /**
  * A wait object wrapping default selenium {@link org.openqa.selenium.support.ui.FluentWait} object into a more

@@ -5,15 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
 
+import net.jcip.annotations.NotThreadSafe;
+import org.apache.commons.io.FileUtils;
+import org.assertj.core.util.Files;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import org.fluentlenium.adapter.junit.jupiter.FluentTest;
 import org.fluentlenium.adapter.junit.jupiter.MockitoExtension;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.configuration.FluentConfiguration.BooleanValue;
-import net.jcip.annotations.NotThreadSafe;
-import org.apache.commons.io.FileUtils;
-import org.assertj.core.util.Files;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

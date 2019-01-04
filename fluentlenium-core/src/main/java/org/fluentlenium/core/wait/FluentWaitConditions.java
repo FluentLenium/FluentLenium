@@ -1,13 +1,13 @@
 package org.fluentlenium.core.wait;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
+
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Supplier;
 
 /**
  * Conditions API for Fluent wait objects.

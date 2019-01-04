@@ -1,5 +1,6 @@
 package org.fluentlenium.core;
 
+import org.apache.commons.io.FileUtils;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
@@ -24,7 +25,6 @@ import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.utils.ImageUtils;
 import org.fluentlenium.utils.UrlUtils;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;

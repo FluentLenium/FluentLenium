@@ -3,14 +3,14 @@ package org.fluentlenium.adapter.junit.integration;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
+import net.jcip.annotations.NotThreadSafe;
+import org.apache.commons.io.FileUtils;
+import org.assertj.core.util.Files;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.configuration.FluentConfiguration.BooleanValue;
-import net.jcip.annotations.NotThreadSafe;
-import org.apache.commons.io.FileUtils;
-import org.assertj.core.util.Files;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
