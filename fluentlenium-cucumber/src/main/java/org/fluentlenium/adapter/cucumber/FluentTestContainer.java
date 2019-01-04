@@ -4,9 +4,12 @@ import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.adapter.ThreadLocalFluentControlContainer;
+import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.inject.DefaultContainerInstantiator;
 import org.fluentlenium.core.inject.FluentInjector;
+
+import java.util.Arrays;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -105,6 +108,27 @@ public enum FluentTestContainer {
             instance();
         }
         return injector;
+    }
+
+    /**
+     * Creating new instances of pages.
+     *
+     * @param obj container obj which contains pages to initialize
+     */
+    public void instantiatePages(Object obj) {
+
+        Arrays.stream(obj.getClass().getDeclaredFields())
+                .filter(field -> field.isAnnotationPresent(Page.class))
+                .forEach(field -> {
+                    try {
+                        Object o = injector.newInstance(field.getType());
+                        field.setAccessible(true);
+                        field.set(obj, o);
+                        field.setAccessible(false);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
     /**

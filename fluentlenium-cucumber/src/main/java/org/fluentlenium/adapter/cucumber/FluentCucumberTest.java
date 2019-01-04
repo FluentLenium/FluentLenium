@@ -20,6 +20,8 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      */
     public FluentCucumberTest() {
         this(FLUENT_TEST.getControlContainer(), FLUENT_TEST.getSharedMutator());
+
+        FLUENT_TEST.instantiatePages(this);
     }
 
     /**
