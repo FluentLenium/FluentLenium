@@ -121,9 +121,9 @@ public enum FluentTestContainer {
                 .filter(field -> field.isAnnotationPresent(Page.class))
                 .forEach(field -> {
                     try {
-                        Object o = injector.newInstance(field.getType());
+                        Object instance = injector.newInstance(field.getType());
                         field.setAccessible(true);
-                        field.set(obj, o);
+                        field.set(obj, instance);
                         field.setAccessible(false);
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
