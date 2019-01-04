@@ -10,7 +10,7 @@ fluentlenium:
 selenium:
   version: "3.141.59"
 
-url: "http://fluentlenium.org"
+url: "http://fluentlenium.com"
 baseurl: ""
 
 # If you are building a GitHub project page then use these settings:
@@ -95,7 +95,7 @@ share-links-active:
 
 # How to display the link to the website in the footer
 # Remove this if you don't want a link in the footer
-url-pretty: "fluentlenium.org"  # eg. "deanattali.com/beautiful-jekyll"
+url-pretty: "fluentlenium.com"  # eg. "deanattali.com/beautiful-jekyll"
 
 # --- Misc --- #
 
