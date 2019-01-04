@@ -1,6 +1,6 @@
 # FluentLenium Site
 
-This directory contains the code for the FluentLenium Site, [http://fluentlenium.org/](http://fluentlenium.org/).
+This directory contains the code for the FluentLenium Site, [http://fluentlenium.com/](http://fluentlenium.com/).
 
 ## Running locally
 
