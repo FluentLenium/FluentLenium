@@ -2,6 +2,7 @@ package org.fluentlenium.assertj.custom;
 
 import org.assertj.core.api.AbstractAssert;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.openqa.selenium.Dimension;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,14 +21,6 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         super(actual, FluentWebElementAssert.class);
     }
 
-    private void failIsEnabled() {
-        failWithMessage("Object not enabled");
-    }
-
-    private void failIsNotEnabled() {
-        failWithMessage("Object is enabled");
-    }
-
     /**
      * check if the element is enabled
      *
@@ -35,7 +28,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      */
     public FluentWebElementAssert isEnabled() {
         if (!actual.enabled()) {
-            failIsEnabled();
+            failWithMessage("Element in assertion is present but not enabled");
         }
         return this;
     }
@@ -47,7 +40,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      */
     public FluentWebElementAssert isNotEnabled() {
         if (actual.enabled()) {
-            failIsNotEnabled();
+            failWithMessage("Element in assertion is present but enabled");
         }
 
         return this;
@@ -60,7 +53,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      */
     public FluentWebElementAssert isDisplayed() {
         if (!actual.displayed()) {
-            failIsNotDisplayed();
+            failWithMessage("Element in assertion is present but not displayed");
         }
 
         return this;
@@ -73,17 +66,9 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      */
     public FluentWebElementAssert isNotDisplayed() {
         if (actual.displayed()) {
-            failIsDisplayed();
+            failWithMessage("Element in assertion is present but displayed");
         }
         return this;
-    }
-
-    private void failIsDisplayed() {
-        failWithMessage("Object not displayed");
-    }
-
-    private void failIsNotDisplayed() {
-        failWithMessage("Object is displayed");
     }
 
     /**
@@ -93,7 +78,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      */
     public FluentWebElementAssert isSelected() {
         if (!actual.selected()) {
-            failIsSelected();
+            failWithMessage("Element in assertion is present but not selected");
         }
         return this;
     }
@@ -105,7 +90,31 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      */
     public FluentWebElementAssert isNotSelected() {
         if (actual.selected()) {
-            failIsNotSelected();
+            failWithMessage("Element in assertion is present but selected");
+        }
+        return this;
+    }
+
+    /**
+     * check if the element is clickable
+     *
+     * @return {@code this} assertion object.
+     */
+    public FluentWebElementAssert isClickable() {
+        if (!actual.clickable()) {
+            failWithMessage("Element in assertion is present but not clickable");
+        }
+        return this;
+    }
+
+    /**
+     * check if the element is not clickable
+     *
+     * @return {@code this} assertion object.
+     */
+    public FluentWebElementAssert isNotClickable() {
+        if (actual.clickable()) {
+            failWithMessage("Element in assertion is present but clickable");
         }
         return this;
     }
@@ -116,7 +125,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * @param errorMessage error message
      * @see #failWithMessage(String, Object...)
      */
-    protected void failWithMessage(String errorMessage) {
+    private void failWithMessage(String errorMessage) {
         super.failWithMessage(errorMessage.replaceAll("(?:[^%]|\\A)%(?:[^%]|\\z)", "%%"));
     }
 
@@ -129,7 +138,8 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     public FluentWebElementAssert hasText(String textToFind) {
         String actualText = actual.text();
         if (!actualText.contains(textToFind)) {
-            failWithMessage("The element does not contain the text: " + textToFind + " . Actual text found : " + actualText);
+            failWithMessage("The element does not contain the text: " + textToFind
+                    + ". Actual text found : " + actualText);
         }
 
         return this;
@@ -144,7 +154,8 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     public FluentWebElementAssert hasTextMatching(String regexToBeMatched) {
         String actualText = actual.text();
         if (!actualText.matches(regexToBeMatched)) {
-            failWithMessage("The element does not match the regex: " + regexToBeMatched + " . Actual text found : " + actualText);
+            failWithMessage("The element does not match the regex: " + regexToBeMatched
+                    + ". Actual text found : " + actualText);
         }
 
         return this;
@@ -164,14 +175,6 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
-    private void failIsSelected() {
-        failWithMessage("Object not selected");
-    }
-
-    private void failIsNotSelected() {
-        failWithMessage("Object is selected");
-    }
-
     /**
      * check if the element has the given id
      *
@@ -181,7 +184,8 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     public FluentWebElementAssert hasId(String idToFind) {
         String actualId = actual.id();
         if (!actualId.equals(idToFind)) {
-            failWithMessage("The element does not have the id: " + idToFind + " . Actual id found : " + actualId);
+            failWithMessage("The element does not have the id: " + idToFind
+                    + ". Actual id found : " + actualId);
         }
         return this;
     }
@@ -195,7 +199,77 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     public FluentWebElementAssert hasClass(String classToFind) {
         String actualClasses = actual.attribute("class");
         if (!getClasses(actualClasses).contains(classToFind)) {
-            failWithMessage("The element does not have the class: " + classToFind + " . Actual class found : " + actualClasses);
+            failWithMessage("The element does not have the class: " + classToFind
+                    + ". Actual class found : " + actualClasses);
+        }
+        return this;
+    }
+
+    /**
+     * check if the element has given value
+     *
+     * @param value value to find
+     * @return {@code this} assertion object.
+     */
+    public FluentWebElementAssert hasValue(String value) {
+        String actualValue = actual.value();
+        if (!actualValue.equals(value)) {
+            failWithMessage("The element does not have the value: " + value
+                    + ". Actual value found : " + actualValue);
+        }
+        return this;
+    }
+
+    /**
+     * check if the element has given name
+     *
+     * @param name name to find
+     * @return {@code this} assertion object.
+     */
+    public FluentWebElementAssert hasName(String name) {
+        String actualName = actual.name();
+        if (!actualName.equals(name)) {
+            failWithMessage("The element does not have the name: " + name
+                    + ". Actual name found : " + actualName);
+        }
+        return this;
+    }
+
+    /**
+     * check if the element has given name
+     *
+     * @param dimension name to find
+     * @return {@code this} assertion object.
+     */
+    public FluentWebElementAssert hasSize(Dimension dimension) {
+        Dimension actualSize = actual.size();
+        if (!actualSize.equals(dimension)) {
+            failWithMessage("The element does not have the same size: " + dimension.toString()
+                    + ". Actual size found : " + actualSize.toString());
+        }
+        return this;
+    }
+
+    /**
+     * check if the element has property with given value
+     *
+     * @param attribute name to find
+     * @param value    property value to match with actual
+     * @return {@code this} assertion object.
+     */
+    public FluentWebElementAssert hasAttributeValue(String attribute, String value) {
+        String actualValue;
+
+        actualValue = actual.attribute(attribute);
+
+        if (actualValue == null) {
+            failWithMessage("The element does not have attribute " + attribute);
+        }
+
+        if (!actualValue.equals(value)) {
+            failWithMessage("The " + attribute + " attribute " +
+                    "does not have the value: " + value
+                    + ". Actual value : " + actualValue);
         }
         return this;
     }
