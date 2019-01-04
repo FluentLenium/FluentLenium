@@ -3,7 +3,7 @@ package org.fluentlenium.core.css;
 import static java.util.Objects.requireNonNull;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.openqa.selenium.WebDriverException;
 
 import org.fluentlenium.core.script.JavascriptControl;

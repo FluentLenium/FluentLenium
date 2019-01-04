@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.testng.Assert;
+import org.testng.ITestNGListener;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
@@ -37,19 +38,16 @@ public class DontRunTestsWhenInitFailTest {
 
     @Test
     public void testRun() {
-
         TestNG testNG = new TestNG(false);
         testNG.setTestClasses(new Class[] {TestClass.class});
 
         TestListenerAdapter listenerAdapter = Mockito.mock(TestListenerAdapter.class);
-        testNG.addListener(listenerAdapter);
+        testNG.addListener((ITestNGListener) listenerAdapter);
 
         testNG.run();
 
-        verify(listenerAdapter, times(2))
-                .onConfigurationFailure(Mockito.any(ITestResult.class));
+        verify(listenerAdapter, times(2)).onConfigurationFailure(Mockito.any(ITestResult.class));
         verify(listenerAdapter).onTestSkipped(Mockito.any(ITestResult.class));
         verify(listenerAdapter, Mockito.never()).onTestSuccess(Mockito.any(ITestResult.class));
     }
-
 }

@@ -1,5 +1,8 @@
 package org.fluentlenium.adapter.junit.integration;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
+
 import net.jcip.annotations.NotThreadSafe;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.util.Files;
@@ -22,13 +25,11 @@ import org.openqa.selenium.WebElement;
 import java.io.File;
 import java.io.IOError;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
 
 @NotThreadSafe
 public class FluentTestTest {
@@ -288,7 +289,7 @@ public class FluentTestTest {
 
         try {
             assertThat(FileUtils.readFileToByteArray(screenshotGeneratedFile)).isEqualTo(screenshotData);
-            assertThat(FileUtils.readFileToString(htmlDumpFile)).isEqualTo(html);
+            assertThat(FileUtils.readFileToString(htmlDumpFile, Charset.defaultCharset())).isEqualTo(html);
         } finally {
             FileUtils.deleteQuietly(screenshotGeneratedFile);
             FileUtils.deleteQuietly(htmlDumpFile);

@@ -69,7 +69,7 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
     }
 
     private Class<? extends ConfigurationProperties> getConfigurationDefaultsClassValue(
-            Class<? extends ConfigurationProperties> configurationDefaultsClass) {
+        Class<? extends ConfigurationProperties> configurationDefaultsClass) {
         if (configurationDefaultsClass == ConfigurationDefaults.class) {
             return null;
         }
@@ -82,17 +82,13 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
         }
         try {
             URL url = new URL(property);
-            InputStream stream = null;
-            try {
-                stream = url.openStream();
+            try (InputStream stream = url.openStream()) {
                 property = IOUtils.toString(stream, Charset.defaultCharset());
             } catch (IOException e) {
                 throw new ConfigurationException("Can't read Capabilities defined at " + url, e);
-            } finally {
-                IOUtils.closeQuietly(stream);
             }
         } catch (MalformedURLException e) { // NOPMD EmptyCatchBlock
-            // This is not an URL. Consider property as JSON.
+            // This is not a URL. Consider property as JSON.
         }
         CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
         if (factory != null) {

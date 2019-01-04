@@ -56,31 +56,9 @@ public class FluentWait
     }
 
     @Override
-    public FluentWait atMost(long duration, TimeUnit unit) {
-        wait.withTimeout(duration, unit);
-        return this;
-    }
-
-    @Override
-    public FluentWait atMost(long duration) {
-        return atMost(duration, TimeUnit.MILLISECONDS);
-    }
-
-    @Override
     public FluentWait pollingEvery(Duration duration) {
         wait.pollingEvery(duration);
         return this;
-    }
-
-    @Override
-    public FluentWait pollingEvery(long duration, TimeUnit unit) {
-        wait.pollingEvery(duration, unit);
-        return this;
-    }
-
-    @Override
-    public FluentWait pollingEvery(long duration) {
-        return pollingEvery(duration, TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -98,13 +76,6 @@ public class FluentWait
     @Override
     public FluentWait ignoring(Class<? extends RuntimeException> firstType, Class<? extends RuntimeException> secondType) {
         wait.ignoring(firstType, secondType);
-        return this;
-    }
-
-    @Override
-    public FluentWait withMessage(String message) {
-        wait.withMessage(message);
-        messageDefined = true;
         return this;
     }
 
@@ -238,10 +209,5 @@ public class FluentWait
         }
 
         return this;
-    }
-
-    @Override
-    public FluentWait explicitlyFor(long amount) {
-        return explicitlyFor(amount, TimeUnit.MILLISECONDS);
     }
 }
