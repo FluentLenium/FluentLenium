@@ -9,24 +9,24 @@
 FluentLenium helps you writing readable, reusable, reliable and resilient UI functional tests for the browser.
 
 FluentLenium provides a Java [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface) to
-[Selenium](http://www.seleniumhq.org/), and brings some [extra features](http://fluentlenium.org/docs/key_features/)
+[Selenium](http://www.seleniumhq.org/), and brings some [extra features](http://fluentlenium.com/docs/key_features/)
  to avoid common issues faced by Selenium users.
 
-FluentLenium is shipped with adapters for [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/), [TestNG](http://testng.org/doc/index.html), [Spock](http://spockframework.org/) and [Cucumber](https://cucumber.io), but it can also be used [standalone](http://fluentlenium.org/docs/test-runners/#standalone-mode).
+FluentLenium is shipped with adapters for [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/), [TestNG](http://testng.org/doc/index.html), [Spock](http://spockframework.org/) and [Cucumber](https://cucumber.io), but it can also be used [standalone](http://fluentlenium.com/docs/test-runners/#standalone-mode).
 
 FluentLenium best integrates with [AssertJ](http://joel-costigliola.github.io/assertj/), but you can also choose to use
-the [assertion framework](http://fluentlenium.org/docs/assertion-libraries/) you want.
+the [assertion framework](http://fluentlenium.com/docs/assertion-libraries/) you want.
 
-FluentLenium gives you [multiple methods](http://fluentlenium.org/docs/test-methods/) which help you write tests quicker. All those methods are tested daily by commercial regression test suites maintained by project developers.
+FluentLenium gives you [multiple methods](http://fluentlenium.com/docs/test-methods/) which help you write tests quicker. All those methods are tested daily by commercial regression test suites maintained by project developers.
 
 ## Documentation
 
-Detailed documentation is available on [fluentlenium.org](http://fluentlenium.org).
+Detailed documentation is available on [fluentlenium.com](http://fluentlenium.com).
 
 
 # Quickstart with JUnit and AssertJ
 
-Quickstart steps are described in detail in our [separate documentation section](http://fluentlenium.org/quickstart/).
+Quickstart steps are described in detail in our [separate documentation section](http://fluentlenium.com/quickstart/).
 
 Short summary:
 
@@ -92,7 +92,7 @@ public class DuckDuckGoTest extends FluentTest {
 - Run as a JUnit test.
 
 More detailed FluentLenium examples are available in [examples section](https://github.com/FluentLenium/FluentLenium/tree/develop/examples).
-Examples include `headless` Chrome and Firefox, [Spring](https://spring.io/)-based framework supporting multiple browsers and [much more](http://fluentlenium.org/quickstart/#more-examples).
+Examples include `headless` Chrome and Firefox, [Spring](https://spring.io/)-based framework supporting multiple browsers and [much more](http://fluentlenium.com/quickstart/#more-examples).
 
 ## Contact Us
 If you have any comment, remark or issue, please open an issue on
