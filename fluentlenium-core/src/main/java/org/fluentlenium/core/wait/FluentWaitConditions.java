@@ -118,5 +118,7 @@ public interface FluentWaitConditions<T> {
      * @param amount amount of time to wait in milliseconds
      * @return {@code this} object to chain method calls
      */
-    T explicitlyFor(long amount);
+    default T explicitlyFor(long amount) {
+        return explicitlyFor(amount, TimeUnit.MILLISECONDS);
+    }
 }

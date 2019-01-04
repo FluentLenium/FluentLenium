@@ -68,31 +68,7 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
     }
 
     @Override
-    public FluentWaitElementList atMost(long duration, TimeUnit unit) {
-        controlWait.atMost(duration, unit);
-        return this;
-    }
-
-    @Override
-    public FluentWaitElementList atMost(long timeInMillis) {
-        controlWait.atMost(timeInMillis);
-        return this;
-    }
-
-    @Override
     public FluentWaitElementList pollingEvery(Duration duration) {
-        controlWait.pollingEvery(duration);
-        return this;
-    }
-
-    @Override
-    public FluentWaitElementList pollingEvery(long duration, TimeUnit unit) {
-        controlWait.pollingEvery(duration, unit);
-        return this;
-    }
-
-    @Override
-    public FluentWaitElementList pollingEvery(long duration) {
         controlWait.pollingEvery(duration);
         return this;
     }
@@ -124,12 +100,6 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
     @Override
     public void until(Supplier<Boolean> supplier) {
         controlWait.until(supplier);
-    }
-
-    @Override
-    public FluentWaitElementList withMessage(String message) {
-        controlWait.withMessage(message);
-        return this;
     }
 
     @Override
@@ -200,17 +170,11 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
         return this;
     }
 
-    @Override
-    public FluentWaitElementList explicitlyFor(long amount) {
-        controlWait.explicitlyFor(amount);
-        return this;
-    }
-
     /**
      * Wait until function returns true
      *
      * @param function function to be performed
-     * @param <T> FluentWaitElementList
+     * @param <T>      FluentWaitElementList
      * @return FluentWaitElementList
      */
     @Deprecated
