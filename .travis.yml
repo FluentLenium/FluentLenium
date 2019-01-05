@@ -1,22 +1,18 @@
 matrix:
   include:
-    - language: java
+    - stage: test
+      name: "Run Java tests"
+      language: java
       jdk:
         - oraclejdk11
       script:
         - mvn -Pexamples clean compile # Ensure examples compiles properly
         - mvn -Pframework-integration-tests clean test
         - mvn clean verify jacoco:report
-      after_success:
-        - mvn coveralls:report
-        - "[[ ${TRAVIS_JDK_VERSION} == 'oraclejdk11' ]] && [[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_BRANCH} == 'develop' ]] && [[ ${TRAVIS_TAG} == '' ]] && mvn deploy -DskipTests --settings deploy-settings.xml"
-      env:
-        global:
-          # env.CI_DEPLOY_USERNAME
-          - secure: XhWeOh6PhDFEH/DTPhAbH04rysTdKWUoQxfYI7YjlrRznX0YKBRLVHIXn68TdzC/ucX0t+XzO2vOVoR53lSBYr45P5ZnO5+rFjVLhfhUDQWv3BibtaH6oCYM0lwvtA6mWKA6thWfvqOAvYgTUhdgEwaoVK/oHidW0KHNxNC0Ty8=
-          # env.CI_DEPLOY_PASSWORD
-          - secure: Pw6Aik2ws5z/VVKZ7J7+BtTJ79IMYwYde/C9LocyQtEeGxET7il57WZ2T2TyIxu9/tFtzX8N6fpf5j1Q64dUrL8Ki6R7phNvcFRl537AXINBSVuGz6rA/h8Vqx31wsHoTnl8tY6J6fUIHBF2KxvY38NzXl2g5v1n0eCmhyYxor8=
-    - language: ruby
+
+    - stage: test
+      name: "Docs build"
+      language: ruby
       rvm:
         - 2.6
       before_script:
@@ -27,3 +23,18 @@ matrix:
         global:
           - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
       sudo: false
+
+    - stage: CI closing steps
+      name: "Coveralls & Deploy"
+      language: java
+      jdk:
+          - oraclejdk11
+      script:
+          - mvn coveralls:report
+        - "[[ ${TRAVIS_JDK_VERSION} == 'oraclejdk11' ]] && [[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_BRANCH} == 'develop' ]] && [[ ${TRAVIS_TAG} == '' ]] && mvn deploy -DskipTests --settings deploy-settings.xml"
+      env:
+        global:
+          # env.CI_DEPLOY_USERNAME
+          - secure: XhWeOh6PhDFEH/DTPhAbH04rysTdKWUoQxfYI7YjlrRznX0YKBRLVHIXn68TdzC/ucX0t+XzO2vOVoR53lSBYr45P5ZnO5+rFjVLhfhUDQWv3BibtaH6oCYM0lwvtA6mWKA6thWfvqOAvYgTUhdgEwaoVK/oHidW0KHNxNC0Ty8=
+          # env.CI_DEPLOY_PASSWORD
+          - secure: Pw6Aik2ws5z/VVKZ7J7+BtTJ79IMYwYde/C9LocyQtEeGxET7il57WZ2T2TyIxu9/tFtzX8N6fpf5j1Q64dUrL8Ki6R7phNvcFRl537AXINBSVuGz6rA/h8Vqx31wsHoTnl8tY6J6fUIHBF2KxvY38NzXl2g5v1n0eCmhyYxor8=
