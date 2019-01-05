@@ -3,10 +3,9 @@ jobs:
     - stage: test
       name: "Run Java tests"
       language: java
-      jdk:
-        - oraclejdk11
+      jdk: oraclejdk11
       script:
-        - mvn -Pexamples clean compile # Ensure examples compiles properly
+        - mvn -Pexamples clean compile
         - mvn -Pframework-integration-tests clean test
         - mvn clean verify jacoco:report
 
@@ -27,8 +26,7 @@ jobs:
     - stage: CI closing steps
       name: "Coveralls & Deploy"
       language: java
-      jdk:
-        - oraclejdk11
+      jdk: oraclejdk11
       script:
         - mvn coveralls:report
         - "[[ ${TRAVIS_JDK_VERSION} == 'oraclejdk11' ]] && [[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_BRANCH} == 'develop' ]] && [[ ${TRAVIS_TAG} == '' ]] && mvn deploy -DskipTests --settings deploy-settings.xml"
