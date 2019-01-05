@@ -19,9 +19,12 @@ jobs:
       language: java
       jdk: oraclejdk11
       script:
+        - echo "${TRAVIS_PULL_REQUEST}"
+        - echo "${TRAVIS_BRANCH}"
+        - echo "${TRAVIS_TAG}"
+        - if [ "${TRAVIS_PULL_REQUEST}" == "false" -a "${TRAVIS_BRANCH}" == "develop" -a "${TRAVIS_TAG}" == "" ]; mvn deploy -DskipTests --settings deploy-settings.xml; fi
         - mvn clean verify jacoco:report
         - mvn coveralls:report
-        - "[[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_BRANCH} == 'develop' ]] && [[ ${TRAVIS_TAG} == '' ]] && mvn deploy -DskipTests --settings deploy-settings.xml"
       env:
         global:
           # env.CI_DEPLOY_USERNAME
