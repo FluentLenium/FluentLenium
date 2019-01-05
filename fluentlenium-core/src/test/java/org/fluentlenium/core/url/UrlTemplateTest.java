@@ -2,9 +2,13 @@ package org.fluentlenium.core.url;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class UrlTemplateTest {
@@ -193,5 +197,52 @@ public class UrlTemplateTest {
         assertThatThrownBy(() -> new UrlTemplate("/abc/{param1}{?/def/param1}{?/ghi/param3}"))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("Multiple parameters are defined with the same name (param1).");
+    }
+
+    @Test
+    public void testSetSingleParameter() {
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def{?/param2}/ghi{?/param3}");
+
+        urlParametersTemplate.put("param1", "test1");
+
+        assertThat(urlParametersTemplate.render()).isEqualTo("/abc/test1/def/ghi");
+    }
+
+    @Test
+    public void testThrowsExceptionForInvalidParameterName() {
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def{?/param2}/ghi{?/param3}");
+
+        assertThatIllegalArgumentException().isThrownBy(() -> urlParametersTemplate.put("param4", "test4"))
+                                            .withMessage("Invalid parameter name: param4");
+    }
+
+    @Test
+    public void testSetParametersFromMap() {
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def{?/param2}/ghi{?/param3}");
+        Map<String, String> parameters = Map.of("param1", "test1", "param3", "test3");
+
+        urlParametersTemplate.put(parameters);
+
+        assertThat(urlParametersTemplate.render()).isEqualTo("/abc/test1/def/ghi/test3");
+    }
+
+    @Test
+    public void testAddParametersFromList() {
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def{?/param2}/ghi{?/param3}");
+        List<String> parameters = List.of("test1", "test2");
+
+        urlParametersTemplate.addAll(parameters);
+
+        assertThat(urlParametersTemplate.render()).isEqualTo("/abc/test1/def/test2/ghi");
+    }
+
+    @Test
+    public void testAddParametersFromListContainingNull() {
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def{?/param2}/ghi{?/param3}");
+        List<String> parameters = Arrays.asList("test1", null, "test3");
+
+        urlParametersTemplate.addAll(parameters);
+
+        assertThat(urlParametersTemplate.render()).isEqualTo("/abc/test1/def/ghi/test3");
     }
 }
