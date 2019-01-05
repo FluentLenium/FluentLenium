@@ -15,11 +15,13 @@ jobs:
         - mvn -Pframework-integration-tests clean test
 
     - stage: test
-      name: "Java - unit * integration tests"
+      name: "Java - unit & integration code coverage"
       language: java
       jdk: oraclejdk11
       script:
         - mvn clean verify jacoco:report
+        - mvn coveralls:report
+        - "[[ ${TRAVIS_JDK_VERSION} == 'oraclejdk11' ]] && [[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_BRANCH} == 'develop' ]] && [[ ${TRAVIS_TAG} == '' ]] && mvn deploy -DskipTests --settings deploy-settings.xml"
 
     - stage: test
       name: "Ruby - Docs build"
@@ -34,14 +36,6 @@ jobs:
         global:
           - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
       sudo: false
-
-    - stage: Closing steps
-      name: "Coveralls & Deploy"
-      language: java
-      jdk: oraclejdk11
-      script:
-        - mvn coveralls:report
-        - "[[ ${TRAVIS_JDK_VERSION} == 'oraclejdk11' ]] && [[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_BRANCH} == 'develop' ]] && [[ ${TRAVIS_TAG} == '' ]] && mvn deploy -DskipTests --settings deploy-settings.xml"
 
 env:
   global:
