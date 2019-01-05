@@ -2,6 +2,17 @@
 layout: page
 title: Test methods
 subtitle: FluentLenium
+sidebar:
+  Window actions: "#window-actions"
+  Keyboard and mouse: "#keyboard-and-mouse-actions"
+  Drag and Drop: "#drag-and-drop"
+  Events: "#events"
+  Annotations: "#annotations"
+  Listener API: "#listener-api"
+  Hooks: "#hooks"
+  Javascript execution: "#javascript-execution"
+  Screenshots and HTML dump: "#taking-screenshots-and-html-dumps"
+  Alerts: "#alerts"
 ---
 
 This section contains description of FluentLenium features which may be useful during writing tests.
@@ -9,6 +20,7 @@ This section contains description of FluentLenium features which may be useful d
 ## Table of Contents
 - [Window actions](#window-actions)
 - [Keyboard and Mouse actions](#keyboard-and-mouse-actions)
+- [Drag and Drop](#drag-and-drop)
 - [Events](#events)
 - [Annotations](#annotations)
 - [Listener API](#listener-api)
@@ -16,7 +28,7 @@ This section contains description of FluentLenium features which may be useful d
 - [Javascript execution](#javascript-execution)
 - [Taking ScreenShots and HTML Dumps](#taking-screenshots-and-html-dumps)
 - [Iframe](#iframe)
-- [Alert](#alert)
+- [Alerts](#alerts)
 
 
 ## Window actions
@@ -54,6 +66,20 @@ maximizeWindow();
 ## Keyboard and Mouse actions
 
 Advanced keyboard and mouse actions are available using keyboard() and mouse() in FluentTest class or element.
+
+## Drag and drop
+
+Drag and drop can be done using `MouseElementActions`
+
+```java
+@Test
+    public void dragAndDrop() {
+        FluentWebElement source = el("#source");
+        FluentWebElement target = el("target");
+        MouseElementActions actions = new MouseElementActions(getDriver(), source.getElement());
+        actions.dragAndDropTo(target.getElement());
+    }
+```
 
 ## Events
 
@@ -318,7 +344,7 @@ To switch to the iframe selected:
 switchTo($("iframe#frameid"));
 ```
 
-## Alert
+## Alerts
 If you want manage alert (see this [Selenium FAQ](http://code.google.com/p/selenium/wiki/FrequentlyAskedQuestions#Q:_Does_WebDriver_support_Javascript_alerts_and_prompts?)),
 
 When an alert box pops up, click on "OK":
