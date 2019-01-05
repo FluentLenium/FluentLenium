@@ -19,10 +19,10 @@ jobs:
       language: java
       jdk: oraclejdk11
       script:
-        - mvn deploy -DskipTests --settings deploy-settings.xml
+        - if [ "$TRAVIS_BRANCH" = "develop" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_TAG" = "" ]; then mvn deploy -DskipTests --settings deploy-settings.xml; fi
         - mvn clean verify jacoco:report
         - mvn coveralls:report
-#        - "[[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_BRANCH} == 'develop' ]] && [[ ${TRAVIS_TAG} == '' ]] && mvn deploy -DskipTests --settings deploy-settings.xml"
+        - "[[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_BRANCH} == 'develop' ]] && [[ ${TRAVIS_TAG} == '' ]] && mvn deploy -DskipTests --settings deploy-settings.xml"
 
     - stage: test
       name: "Ruby - Docs build"
