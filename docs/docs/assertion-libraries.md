@@ -2,6 +2,10 @@
 layout: page
 title: Assertions
 subtitle: FluentLenium
+sidebar:
+  AssertJ: "#assertj"
+  Junit: "#junit"
+  Hamcrest: "#hamcrest"
 ---
 
 ## Supported Assertions Libraries
