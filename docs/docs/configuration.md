@@ -310,7 +310,7 @@ To run Chrome in the headless mode you can use following FluentLenium configurat
 
   1. Annotate the test class with **@FluentConfugration**:
         ```java
-        @FluentConfiguration(webDriver="chrome", capabilities = capabilities = "{\"chromeOptions\": {\"args\": [\"headless\",\"disable-gpu\"]}}")
+        @FluentConfiguration(webDriver="chrome", capabilities = "{\"chromeOptions\": {\"args\": [\"headless\",\"disable-gpu\"]}}")
         public class SomeFluentTest extends FluentTest {
              ....
         }
