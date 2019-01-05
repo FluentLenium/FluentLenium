@@ -1,16 +1,28 @@
 jobs:
   include:
     - stage: test
-      name: "Run Java tests"
+      name: "Java - compile examples"
       language: java
       jdk: oraclejdk11
       script:
         - mvn -Pexamples clean compile
+
+    - stage: test
+      name: "Java - unit & framework integration tests"
+      language: java
+      jdk: oraclejdk11
+      script:
         - mvn -Pframework-integration-tests clean test
+
+    - stage: test
+      name: "Java - unit * integration tests"
+      language: java
+      jdk: oraclejdk11
+      script:
         - mvn clean verify jacoco:report
 
     - stage: test
-      name: "Docs build"
+      name: "Ruby - Docs build"
       language: ruby
       rvm:
         - 2.6
@@ -23,7 +35,7 @@ jobs:
           - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
       sudo: false
 
-    - stage: CI closing steps
+    - stage: Closing steps
       name: "Coveralls & Deploy"
       language: java
       jdk: oraclejdk11
