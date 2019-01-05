@@ -1,4 +1,4 @@
-matrix:
+jobs:
   include:
     - stage: test
       name: "Run Java tests"
