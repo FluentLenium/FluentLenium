@@ -305,7 +305,7 @@ To run Chrome in the headless mode you can use following FluentLenium configurat
 
   1. Pass **system properties** using ```-D``` on the command line:
         ```
-        mvn clean test -Dfluentlenium.webDriver=chrome -Dfluentlenium.capabilities=capabilities = "{chromeOptions: {args: [headless,disable-gpu]}}"
+        mvn clean test -Dfluentlenium.webDriver=chrome -Dfluentlenium.capabilities= "{chromeOptions: {args: [headless,disable-gpu]}}"
         ```
 
   1. Annotate the test class with **@FluentConfugration**:
