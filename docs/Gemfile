@@ -5,4 +5,3 @@ gem 'therubyracer'
 gem 'sass'
 gem 'github-pages'
 gem 'jekyll-paginate'
-gem "html-proofer"
