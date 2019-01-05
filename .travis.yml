@@ -4,9 +4,9 @@ matrix:
       rvm:
         - 2.6
       before_script:
-        - chmod +x ./docs/_site/cibuild
+        - chmod +x ./docs/cibuild
       script:
-        - ./docs/_site/cibuild
+        - ./docs/cibuild
       env:
         global:
           - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
