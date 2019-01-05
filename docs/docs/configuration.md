@@ -2,6 +2,11 @@
 layout: page
 title: Configuration
 subtitle: FluentLenium
+sidebar:
+  Properties description: "#configuration-properties"
+  Config ways: "#configuration-ways"
+  Config examples: "#configuration-examples"
+  Accessing config in tests: "#accessing-webdriver-and-capabilities-in-tests"
 ---
 
 FluentLenium can be configured in many ways through configuration properties.
@@ -259,7 +264,7 @@ You may implement additionnal ways to read configuration property by implementin
 ## Configuration examples
 
 ### Headless Chrome
-You can run your tests using Chrome [headless](https://developers.google.com/web/updates/2017/04/headless-chrome) feature. Just simply add ```{chromeOptions: {args:[--headless, --disable-gpu]}}``` to capabilities.
+You can run your tests using Chrome [headless](https://developers.google.com/web/updates/2017/04/headless-chrome) feature. Just simply add ```{chromeOptions: {args:[headless, disable-gpu]}}``` to capabilities.
 
 To run Chrome in the headless mode you can use following FluentLenium configuration ways:
 
@@ -300,12 +305,12 @@ To run Chrome in the headless mode you can use following FluentLenium configurat
 
   1. Pass **system properties** using ```-D``` on the command line:
         ```
-        mvn clean test -Dfluentlenium.webDriver=chrome -Dfluentlenium.capabilities="{chromeOptions: {args:[--headless, --disable-gpu]}}"
+        mvn clean test -Dfluentlenium.webDriver=chrome -Dfluentlenium.capabilities=capabilities = "{chromeOptions: {args: [headless,disable-gpu]}}"
         ```
 
   1. Annotate the test class with **@FluentConfugration**:
         ```java
-        @FluentConfiguration(webDriver="chrome", capabilities = "{chromeOptions: {args:[--headless, --disable-gpu]}}")
+        @FluentConfiguration(webDriver="chrome", capabilities = capabilities = "{\"chromeOptions\": {\"args\": [\"headless\",\"disable-gpu\"]}}")
         public class SomeFluentTest extends FluentTest {
              ....
         }
@@ -314,8 +319,7 @@ To run Chrome in the headless mode you can use following FluentLenium configurat
         ```
         $ cat fluentlenium.properties
         webDriver=chrome
-        capabilities={chromeOptions: {args:[--headless, --disable-gpu]}}
-        ...
+        capabilities = "{\"chromeOptions\": {\"args\": [\"headless\",\"disable-gpu\"]}}        ...
         ```
   1. Implement custom configuration properties by extending **ConfigurationDefaults**
         ```java
