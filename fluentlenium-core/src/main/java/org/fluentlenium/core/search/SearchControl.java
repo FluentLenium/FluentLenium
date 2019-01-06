@@ -1,5 +1,7 @@
 package org.fluentlenium.core.search;
 
+import static java.util.stream.Collectors.toList;
+
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;
@@ -17,6 +19,8 @@ public interface SearchControl<E extends FluentWebElement> {
 
     /**
      * Wrap raw selenium elements into a list of elements.
+     * <p>
+     * Synonym for {@link #$(List)}.
      *
      * @param rawElements raw selenium elements
      * @return list of element
@@ -34,7 +38,21 @@ public interface SearchControl<E extends FluentWebElement> {
     }
 
     /**
+     * Wrap the underlying raw selenium elements of {@link FluentWebElement}s into a list of elements.
+     * <p>
+     * Note: the method name is {@code $$} to avoid signature collision with {@link #$(List)}.
+     *
+     * @param fluentWebElements fluent web elements
+     * @return list of element
+     */
+    default <W extends FluentWebElement> FluentList<E> $$(List<W> fluentWebElements) {
+        return find(fluentWebElements.stream().map(FluentWebElement::getWrappedElement).collect(toList()));
+    }
+
+    /**
      * Find list of elements with CSS selector and filters.
+     * <p>
+     * Synonym for {@link #$(String, SearchFilter...)}.
      *
      * @param selector CSS selector
      * @param filters  set of filters
@@ -62,6 +80,16 @@ public interface SearchControl<E extends FluentWebElement> {
     E el(WebElement rawElement);
 
     /**
+     * Wrap the underlying raw selenium element of an existing {@link FluentWebElement} into an element.
+     *
+     * @param fluentWebElement a fluent web element
+     * @return element
+     */
+    default <W extends FluentWebElement> E el(W fluentWebElement) {
+        return el(fluentWebElement.getWrappedElement());
+    }
+
+    /**
      * Find first element with CSS selector and filters.
      *
      * @param selector CSS selector
@@ -74,6 +102,8 @@ public interface SearchControl<E extends FluentWebElement> {
 
     /**
      * Find list of elements with filters.
+     * <p>
+     * Synonym for {@link #$(SearchFilter...)}.
      *
      * @param filters set of filters in the current context
      * @return list of elements
@@ -102,6 +132,8 @@ public interface SearchControl<E extends FluentWebElement> {
 
     /**
      * Find list of elements with Selenium locator and filters.
+     * <p>
+     * Synonym for {@link #$(By, SearchFilter...)}.
      *
      * @param locator elements locator
      * @param filters filters set
