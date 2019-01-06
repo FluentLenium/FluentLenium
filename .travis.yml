@@ -8,7 +8,7 @@ jobs:
         - mvn -Pexamples clean compile
 
     - stage: test
-      name: "Java - unit & framework integration tests"
+      name: "Java - unit & framework integration tests "
       language: java
       jdk: oraclejdk11
       script:
