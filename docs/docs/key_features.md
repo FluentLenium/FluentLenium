@@ -2,6 +2,10 @@
 layout: page
 title: Key features
 subtitle: FluentLenium
+sidebar:
+  Page Object Pattern: "#page-object-pattern-support"
+  Lazy Fluent Locators: "#lazy-fluent-locators"
+  Extended awaits: "#extended-awaits"
 ---
 
 This section contains information about key FluentLenium features. If you wonder about advantages over pure Selenium this section is for you.

@@ -47,11 +47,11 @@
 </nav>
 
 <nav class="sidebar">
-  {% if page.sidebar %}
+    {% if page.sidebar %}
     <ul>
-      {% for sidebarLink in page.sidebar %}
+        {% for sidebarLink in page.sidebar %}
         <li><a href="{{ sidebarLink[1] }}">{{ sidebarLink[0] }}</a></li>
-      {% endfor %}
+        {% endfor %}
     </ul>
-  {% endif %}
+    {% endif %}
 </nav>

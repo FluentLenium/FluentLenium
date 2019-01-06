@@ -1,6 +1,12 @@
 ---
 layout: page
 title: Quick Start
+sidebar:
+  Choosing version: "#choose-the-right-version"
+  pom.xml config: "#maven-pom-configuration"
+  Basic example: "#basic-fluentlenium-test"
+  POP example: "#page-object-pattern-example"
+  More examples: "#more-examples"
 ---
 
 ## Table of Contents
@@ -165,19 +171,19 @@ public class DuckDuckMainPage extends FluentPage {
 [More FluentLenium examples are available on github](https://github.com/FluentLenium/FluentLenium/tree/develop/examples).
 Enable them by activating ```examples``` Maven profile.
 
-Assuming you want to use only one browser please choose
+Assuming you want to use only one browser please choose:
 
-- **Chrome**: [quickstart-chrome](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-chrome)
+- **Chrome**: [quickstart-chrome](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-chrome) - include `headless` example
 - **Safari**: [quickstart-safari](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-safari)
-- **Firefox**: [quickstart-firefox](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-firefox)
+- **Firefox**: [quickstart-firefox](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-firefox) - include `headless` example
 - **IE**: [quickstart-microsoft-browsers](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-microsoft-browsers)
 - **Edge**: [quickstart-microsoft-browsers](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-microsoft-browsers)
 
 If you are more experienced user please choose [Spring based example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spring)
-which has ready use framework supporting every browser.
+which has ready to use framework supporting every browser.
 
 If you want to use BDD please take a look into [Cucumber example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/cucumber)
 
-If you want to writ in Groovy please take a look into [Spock example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spock)
+If you want to write in Groovy please take a look into [Spock example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spock)
 
 [Hook example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/hooks) show this feature in action.
