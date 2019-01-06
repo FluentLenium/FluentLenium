@@ -244,6 +244,20 @@ img {
   }
 }
 
+/* sidebar */
+
+.sidebar {
+  position: fixed;
+  top: 100px;
+  padding-top: 200px;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    .sidebar {
+    display: none;
+  }
+}
+
 /* --- Footer --- */
 
 footer {

@@ -2,6 +2,15 @@
 layout: page
 title: Element locators
 subtitle: FluentLenium
+sidebar:
+  CSS Selector: "#css-selector"
+  By Locator: "#selenium-by-locator"
+  Filters: "#filters"
+  Index: "#first-last-and-index"
+  XPath Axes: "#xpath-axes"
+  JQuery: "#jquery-syntax"
+  Element Actions: "#actions"
+  Element information: "#information"
 ---
 
 ##  Fluent Locators

@@ -1,6 +1,6 @@
 # FluentLenium Site
 
-This directory contains the code for the FluentLenium Site, [http://fluentlenium.org/](http://fluentlenium.org/).
+This directory contains the code for the FluentLenium Site, [http://fluentlenium.com/](http://fluentlenium.com/).
 
 ## Running locally
 
@@ -15,6 +15,8 @@ You can preview your contributions before opening a pull request by running from
 If `bundle install` fails to resolve dependencies conflict please try again after `bundle update`
 
 2. `bundle exec jekyll serve`
+
+3. Go to [http://127.0.0.1:4000/](http://127.0.0.1:4000/)
 
 If you have any problems please refer to official docs
 [https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/#requirements](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/#requirements)

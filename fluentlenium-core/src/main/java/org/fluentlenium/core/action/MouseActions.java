@@ -1,6 +1,7 @@
 package org.fluentlenium.core.action;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Coordinates;
 import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Mouse;
 
@@ -32,7 +33,24 @@ public class MouseActions {
      * Basic mouse operations
      *
      * @return low level interface to control the mouse
+     * @deprecated Use the following mapping for updating your code:
+     * <p>
+     * {@link Mouse#click(Coordinates)} to {@link MouseElementActions#click()}
+     * <p>
+     * {@link Mouse#doubleClick(Coordinates)} to {@link MouseElementActions#doubleClick()}
+     * <p>
+     * {@link Mouse#mouseDown(Coordinates)} to {@link MouseElementActions#moveToElement()}
+     * then {@link MouseElementActions#clickAndHold()}
+     * <p>
+     * {@link Mouse#mouseUp(Coordinates)} to {@link MouseElementActions#release()}
+     * <p>
+     * {@link Mouse#mouseMove(Coordinates)} to {@link MouseElementActions#moveToElement()}
+     * <p>
+     * {@link Mouse#mouseMove(Coordinates, long, long)} to {@link MouseElementActions#moveToElement(int, int)}
+     * <p>
+     * {@link Mouse#contextClick(Coordinates)} to {@link MouseElementActions#contextClick()}
      */
+    @Deprecated
     public Mouse basic() {
         return ((HasInputDevices) driver).getMouse();
     }

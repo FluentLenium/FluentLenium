@@ -37,7 +37,10 @@ public class KeyboardElementActions {
      * Basic keyboard operations
      *
      * @return low level interface to control the keyboard
+     * @deprecated Use {@link KeyboardActions#keyDown(Keys)} and {@link KeyboardActions#keyUp(Keys)}
+     * and {@link KeyboardActions#sendKeys(CharSequence...)} instead
      */
+    @Deprecated
     public Keyboard basic() {
         return ((HasInputDevices) driver).getKeyboard();
     }

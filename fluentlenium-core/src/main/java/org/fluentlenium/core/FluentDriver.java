@@ -1,7 +1,6 @@
 package org.fluentlenium.core;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
@@ -162,12 +161,10 @@ public class FluentDriver extends FluentControlImpl implements FluentControl { /
             if (destFile == null) {
                 destFile = new File(fileName);
             }
-            try {
-                PrintWriter printWriter = new PrintWriter(destFile, "UTF-8");
+            try (PrintWriter printWriter = new PrintWriter(destFile, "UTF-8")) {
                 printWriter.write("Can't dump HTML");
                 printWriter.println();
                 e.printStackTrace(printWriter);
-                IOUtils.closeQuietly(printWriter);
             } catch (IOException e1) {
                 throw new RuntimeException("error when dumping HTML", e); //NOPMD PreserveStackTrace
             }
