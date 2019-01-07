@@ -125,7 +125,7 @@ public class UrlTemplate {
      * @return {@code this} reference to chain calls
      */
     public UrlTemplate put(Map<String, String> values) {
-        values.putAll(values);
+        values.forEach(this::put);
         return this;
     }
 
