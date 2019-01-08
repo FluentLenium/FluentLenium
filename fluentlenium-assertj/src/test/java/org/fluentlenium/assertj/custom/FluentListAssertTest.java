@@ -18,10 +18,10 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import java.util.Arrays;
 import java.util.List;
 
-public class FluentListAssertTest<E extends FluentWebElement> {
+public class FluentListAssertTest {
 
     @Mock
-    private FluentList<E> fluentList;
+    private FluentList<FluentWebElement> fluentList;
 
     private FluentListAssert listAssert;
 
@@ -34,7 +34,7 @@ public class FluentListAssertTest<E extends FluentWebElement> {
     @Test
     public void testHasText() {
         when(fluentList.texts()).thenReturn(singletonList("some text"));
-        assertNotNull(listAssert.hasText("some text"));
+        listAssert.hasText("some text");
     }
 
     @Test
@@ -43,13 +43,25 @@ public class FluentListAssertTest<E extends FluentWebElement> {
 
         assertThatThrownBy(() -> listAssert.hasText("absent text"))
                 .isInstanceOf(AssertionError.class)
-                .hasMessage("No selected elements contains text: absent text . Actual texts found: [some text, other text]");
+                .hasMessage("No selected elements contains text: absent text. Actual texts found: [some text, other text]");
+    }
+
+    @Test
+    public void hasTextMatchingOk() {
+        when(fluentList.texts()).thenReturn(List.of("Pharmacy", "Hospital"));
+        listAssert.hasTextMatching("Pha\\w+cy");
+    }
+
+    @Test (expected = AssertionError.class)
+    public void hasTextMatchingKo() {
+        when(fluentList.texts()).thenReturn(List.of("Pharmacy", "Hospital"));
+        listAssert.hasTextMatching("Pha\\w+cy\\8");
     }
 
     @Test
     public void testHasNotText() {
         when(fluentList.texts()).thenReturn(singletonList("other text"));
-        assertNotNull(listAssert.hasNotText("some text"));
+        listAssert.hasNotText("some text");
     }
 
     @Test
@@ -58,14 +70,14 @@ public class FluentListAssertTest<E extends FluentWebElement> {
 
         assertThatThrownBy(() -> listAssert.hasNotText("other text"))
                 .isInstanceOf(AssertionError.class)
-                .hasMessage("At least one selected elements contains text: other text ."
+                .hasMessage("At least one selected elements contains text: other text."
                         + " Actual texts found: [some text, other text]");
     }
 
     @Test
     public void testHasSizeOk() {
         when(fluentList.size()).thenReturn(7);
-        assertNotNull(listAssert.hasSize(7));
+        listAssert.hasSize(7);
     }
 
     @Test(expected = AssertionError.class)
@@ -77,7 +89,7 @@ public class FluentListAssertTest<E extends FluentWebElement> {
     @Test
     public void testHasSizeLessThanOk() {
         when(fluentList.size()).thenReturn(7);
-        assertNotNull(listAssert.hasSize().lessThan(9));
+        listAssert.hasSize().lessThan(9);
     }
 
     @Test(expected = AssertionError.class)
@@ -90,8 +102,8 @@ public class FluentListAssertTest<E extends FluentWebElement> {
     @Test
     public void testHasSizeLessThanOrEqualToOk() {
         when(fluentList.size()).thenReturn(7);
-        assertNotNull(listAssert.hasSize().lessThanOrEqualTo(7));
-        assertNotNull(listAssert.hasSize().lessThanOrEqualTo(8));
+        listAssert.hasSize().lessThanOrEqualTo(7);
+        listAssert.hasSize().lessThanOrEqualTo(8);
     }
 
     @Test(expected = AssertionError.class)
@@ -103,7 +115,7 @@ public class FluentListAssertTest<E extends FluentWebElement> {
     @Test
     public void testHasSizeGreaterThanOk() {
         when(fluentList.size()).thenReturn(7);
-        assertNotNull(listAssert.hasSize().greaterThan(6));
+        listAssert.hasSize().greaterThan(6);
     }
 
     @Test(expected = AssertionError.class)
@@ -116,8 +128,8 @@ public class FluentListAssertTest<E extends FluentWebElement> {
     @Test
     public void testHasSizeGreaterThanOrEqualToOk() {
         when(fluentList.size()).thenReturn(7);
-        assertNotNull(listAssert.hasSize().greaterThanOrEqualTo(7));
-        assertNotNull(listAssert.hasSize().greaterThanOrEqualTo(6));
+        listAssert.hasSize().greaterThanOrEqualTo(7);
+        listAssert.hasSize().greaterThanOrEqualTo(6);
     }
 
     @Test(expected = AssertionError.class)

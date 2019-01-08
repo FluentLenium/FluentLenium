@@ -144,6 +144,18 @@ public class FluentWebElementTest {
     }
 
     @Test
+    public void testHasTagNameOk() {
+        when(element.tagName()).thenReturn("some tag");
+        elementAssert.hasTagName("some tag");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasTagNameKo() {
+        when(element.tagName()).thenReturn("other tag");
+        elementAssert.hasTagName("some tag");
+    }
+
+    @Test
     public void testHasPropertyValueOk() {
         when(element.attribute("attribute")).thenReturn("some value");
         elementAssert.hasAttributeValue("attribute", "some value");
@@ -219,13 +231,6 @@ public class FluentWebElementTest {
     public void testHasTextWithSpecialCharactersInElement() {
         String textWithStringFormatError = "%A";
         when(element.text()).thenReturn(textWithStringFormatError);
-        elementAssert.hasText(textWithStringFormatError);
-    }
-
-    @Test(expected = AssertionError.class)
-    public void testHasTextWithSpecialCharactersInAssertion() {
-        String textWithStringFormatError = "%A";
-        when(element.text()).thenReturn("someText");
         elementAssert.hasText(textWithStringFormatError);
     }
 

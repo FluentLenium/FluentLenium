@@ -10,7 +10,8 @@ import java.util.List;
 /**
  * Element assertions.
  */
-public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAssert, FluentWebElement> {
+public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAssert, FluentWebElement>
+        implements ElementStateAssert, FluentAssert {
 
     /**
      * Creates a new element assertions object.
@@ -120,16 +121,6 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     }
 
     /**
-     * Secure failWithMessage by escaping String.format tokens when called without arguments.
-     *
-     * @param errorMessage error message
-     * @see #failWithMessage(String, Object...)
-     */
-    private void failWithMessage(String errorMessage) {
-        super.failWithMessage(errorMessage.replaceAll("(?:[^%]|\\A)%(?:[^%]|\\z)", "%%"));
-    }
-
-    /**
      * check if the element contains the text
      *
      * @param textToFind text to find
@@ -236,6 +227,21 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     }
 
     /**
+     * check if the element has given tag
+     *
+     * @param tagName name to find
+     * @return {@code this} assertion object.
+     */
+    public FluentWebElementAssert hasTagName(String tagName) {
+        String actualTag = actual.tagName();
+        if (!actualTag.equals(tagName)) {
+            failWithMessage("The element does not have tag: " + tagName
+                    + ". Actual tag found : " + actualTag);
+        }
+        return this;
+    }
+
+    /**
      * check if the element has given name
      *
      * @param dimension name to find
@@ -254,7 +260,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
      * check if the element has property with given value
      *
      * @param attribute name to find
-     * @param value    property value to match with actual
+     * @param value     property value to match with actual
      * @return {@code this} assertion object.
      */
     public FluentWebElementAssert hasAttributeValue(String attribute, String value) {
@@ -267,8 +273,8 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         }
 
         if (!actualValue.equals(value)) {
-            failWithMessage("The " + attribute + " attribute " +
-                    "does not have the value: " + value
+            failWithMessage("The " + attribute + " attribute "
+                    + "does not have the value: " + value
                     + ". Actual value : " + actualValue);
         }
         return this;

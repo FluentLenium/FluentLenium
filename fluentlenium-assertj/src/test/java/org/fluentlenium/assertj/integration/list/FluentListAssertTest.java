@@ -1,5 +1,6 @@
-package org.fluentlenium.assertj.integration;
+package org.fluentlenium.assertj.integration.list;
 
+import org.fluentlenium.assertj.integration.IntegrationTest;
 import org.junit.Test;
 
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;

@@ -21,6 +21,7 @@ import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWaitElementList;
 import org.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
@@ -211,7 +212,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public FluentList write(String... with) {
+    public FluentList<E> write(String... with) {
         validateListIsNotEmpty();
 
         boolean atLeastOne = false;
@@ -326,6 +327,11 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Override
     public List<String> names() {
         return stream().map(FluentWebElement::name).collect(toList());
+    }
+
+    @Override
+    public List<Dimension> dimensions() {
+        return stream().map(FluentWebElement::size).collect(toList());
     }
 
     @Override

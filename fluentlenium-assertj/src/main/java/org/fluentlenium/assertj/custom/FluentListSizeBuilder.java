@@ -16,7 +16,7 @@ public class FluentListSizeBuilder {
      * @param size       size of the list
      * @param listAssert assertion
      */
-    public FluentListSizeBuilder(int size, FluentListAssert listAssert) {
+    FluentListSizeBuilder(int size, FluentListAssert listAssert) {
         actualSize = size;
         this.listAssert = listAssert;
     }

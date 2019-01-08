@@ -1,4 +1,4 @@
-package org.fluentlenium.assertj.integration.fluentwebelement;
+package org.fluentlenium.assertj.integration.element;
 
 import org.fluentlenium.assertj.integration.IntegrationTest;
 import org.junit.Test;
