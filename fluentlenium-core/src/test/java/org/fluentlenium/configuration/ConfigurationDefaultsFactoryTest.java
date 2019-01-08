@@ -120,6 +120,7 @@ public class ConfigurationDefaultsFactoryTest {
         factory.newConfiguration(null, null);
     }
 
+    @Test
     public void testCustomConfigurationDefaults() {
         DefaultConfigurationFactory factory = new DefaultConfigurationFactory() {
             @Override

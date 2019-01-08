@@ -35,11 +35,6 @@
             <artifactId>junit-platform-launcher</artifactId>
         </dependency>
         <dependency>
-            <groupId>xml-apis</groupId>
-            <artifactId>xml-apis</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.fluentlenium.it</groupId>
             <artifactId>junit-jupiter-common</artifactId>
             <scope>test</scope>

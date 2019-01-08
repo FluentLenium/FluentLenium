@@ -159,11 +159,6 @@
                 <version>2.33.3</version>
             </dependency>
             <dependency>
-                <groupId>xml-apis</groupId>
-                <artifactId>xml-apis</artifactId>
-                <version>2.0.2</version>
-            </dependency>
-            <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>2.6</version>
@@ -171,7 +166,7 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.7</version>
+                <version>3.8.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -203,6 +198,7 @@
                 <artifactId>mockito-core</artifactId>
                 <version>2.23.4</version>
             </dependency>
+            <!--Upgrading to 2.X.X leads to 0 tests being executed in fluentlenium-core for unknown reason-->
             <dependency>
                 <groupId>com.github.hazendaz</groupId>
                 <artifactId>javabean-tester</artifactId>
@@ -211,7 +207,7 @@
             <dependency>
                 <groupId>org.atteo.classindex</groupId>
                 <artifactId>classindex</artifactId>
-                <version>3.4</version>
+                <version>3.5</version>
             </dependency>
             <dependency>
                 <groupId>org.spockframework</groupId>
