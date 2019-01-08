@@ -83,8 +83,8 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         for (String text : actualTexts) {
             if (text.contains(textToFind)) {
                 failWithMessage(
-                        "At least one selected elements contains text: " + textToFind +
-                                ". Actual texts found: " + actualTexts);
+                        "At least one selected elements contains text: " + textToFind
+                                + ". Actual texts found: " + actualTexts);
             }
         }
         return this;
