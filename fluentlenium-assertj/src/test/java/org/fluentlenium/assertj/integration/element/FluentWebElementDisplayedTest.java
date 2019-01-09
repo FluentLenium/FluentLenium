@@ -21,7 +21,7 @@ public class FluentWebElementDisplayedTest extends IntegrationTest {
         standalone.executeScript("document.getElementById(\"disabled\").style.display=\"none\";");
         assertThatThrownBy(() -> assertThat(standalone.el("#disabled")).isDisplayed())
                 .isInstanceOf(AssertionError.class)
-                .hasMessageContaining("Element in assertion is present but not displayed");
+                .hasMessage("Element in assertion is present but not displayed");
     }
 
     @Test
@@ -44,7 +44,7 @@ public class FluentWebElementDisplayedTest extends IntegrationTest {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el("#disabled")).isNotDisplayed())
                 .isInstanceOf(AssertionError.class)
-                .hasMessageContaining("Element in assertion is present but displayed");
+                .hasMessage("Element in assertion is present but displayed");
     }
 
     @Test

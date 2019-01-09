@@ -19,8 +19,7 @@ public class FluentWebElementHasIdTest extends IntegrationTest {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el(".textclass")).hasId("wrongid"))
                 .isInstanceOf(AssertionError.class)
-                .hasMessageContaining(
-                        "The element does not have the id: wrongid. Actual id found : oneline");
+                .hasMessage("The element does not have the id: wrongid. Actual id found : oneline");
     }
 
 }

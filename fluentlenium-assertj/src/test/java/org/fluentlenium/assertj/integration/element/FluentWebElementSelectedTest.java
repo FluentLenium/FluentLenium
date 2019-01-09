@@ -20,7 +20,7 @@ public class FluentWebElementSelectedTest extends IntegrationTest {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el("#disabled")).isSelected())
                 .isInstanceOf(AssertionError.class)
-                .hasMessageContaining("Element in assertion is present but not selected");
+                .hasMessage("Element in assertion is present but not selected");
     }
 
     @Test
@@ -42,7 +42,7 @@ public class FluentWebElementSelectedTest extends IntegrationTest {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el("#selected")).isNotSelected())
                 .isInstanceOf(AssertionError.class)
-                .hasMessageContaining("Element in assertion is present but selected");
+                .hasMessage("Element in assertion is present but selected");
     }
 
     @Test

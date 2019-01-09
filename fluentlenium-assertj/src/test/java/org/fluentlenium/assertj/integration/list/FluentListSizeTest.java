@@ -5,31 +5,7 @@ import org.junit.Test;
 
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
-public class FluentListAssertTest extends IntegrationTest {
-
-    @Test
-    public void testHasTextOk() {
-        standalone.goTo(DEFAULT_URL);
-        assertThat(standalone.$("span")).hasText("A single line of text");
-    }
-
-    @Test(expected = AssertionError.class)
-    public void testHasTextKo() {
-        standalone.goTo(DEFAULT_URL);
-        assertThat(standalone.$("span")).hasText("John");
-    }
-
-    @Test
-    public void testHasNotTextOk() {
-        standalone.goTo(DEFAULT_URL);
-        assertThat(standalone.$("span")).hasNotText("John");
-    }
-
-    @Test(expected = AssertionError.class)
-    public void testHasNotTextKo() {
-        standalone.goTo(DEFAULT_URL);
-        assertThat(standalone.$("span")).hasNotText("Paul");
-    }
+public class FluentListSizeTest extends IntegrationTest {
 
     @Test
     public void testHasSizeOk() {
@@ -91,15 +67,4 @@ public class FluentListAssertTest extends IntegrationTest {
         assertThat(standalone.$("span")).hasSize().greaterThanOrEqualTo(10);
     }
 
-    @Test
-    public void testAssertOnOneOfManyClasses() {
-        standalone.goTo(DEFAULT_URL);
-        assertThat(standalone.$("#multiple-css-class")).hasClass("class1");
-    }
-
-    @Test(expected = AssertionError.class)
-    public void testAssertOnSubstringOfAClass() {
-        standalone.goTo(DEFAULT_URL);
-        assertThat(standalone.$("#multiple-css-class")).hasClass("cla");
-    }
 }

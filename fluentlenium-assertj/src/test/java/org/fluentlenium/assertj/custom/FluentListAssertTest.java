@@ -31,18 +31,15 @@ public class FluentListAssertTest {
     }
 
     @Test
-    public void testHasText() {
+    public void testHasTextOk() {
         when(fluentList.texts()).thenReturn(singletonList("some text"));
         listAssert.hasText("some text");
     }
 
-    @Test
-    public void testHasTextWithMissingText() {
+    @Test(expected = AssertionError.class)
+    public void testHasTextKo() {
         when(fluentList.texts()).thenReturn(List.of("some text", "other text"));
-
-        assertThatThrownBy(() -> listAssert.hasText("absent text"))
-                .isInstanceOf(AssertionError.class)
-                .hasMessage("No selected elements contains text: absent text. Actual texts found: [some text, other text]");
+        listAssert.hasText("absent text");
     }
 
     @Test
@@ -51,32 +48,72 @@ public class FluentListAssertTest {
         listAssert.hasTextMatching("Pha\\w+cy");
     }
 
-    @Test (expected = AssertionError.class)
+    @Test(expected = AssertionError.class)
     public void hasTextMatchingKo() {
         when(fluentList.texts()).thenReturn(List.of("Pharmacy", "Hospital"));
         listAssert.hasTextMatching("Pha\\w+cy\\8");
     }
 
     @Test
-    public void testHasNotText() {
+    public void testHasNotTextOk() {
         when(fluentList.texts()).thenReturn(singletonList("other text"));
         listAssert.hasNotText("some text");
     }
 
-    @Test
-    public void testHasNotTextWithTextPresent() {
+    @Test(expected = AssertionError.class)
+    public void testHasNotTextKo() {
         when(fluentList.texts()).thenReturn(List.of("some text", "other text"));
-
-        assertThatThrownBy(() -> listAssert.hasNotText("other text"))
-                .isInstanceOf(AssertionError.class)
-                .hasMessage("At least one selected elements contains text: other text."
-                        + " Actual texts found: [some text, other text]");
+        listAssert.hasNotText("other text");
     }
 
     @Test
     public void testHasSizeOk() {
         when(fluentList.size()).thenReturn(7);
+        listAssert.isNotEmpty();
         listAssert.hasSize(7);
+    }
+
+    @Test
+    public void testHasSizeZeroOk() {
+        when(fluentList.size()).thenReturn(0);
+        listAssert.hasSize(0);
+        listAssert.isEmpty();
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasSizeZeroKo() {
+        when(fluentList.size()).thenReturn(0);
+        listAssert.hasSize(1);
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasSizeEmptyKo() {
+        when(fluentList.size()).thenReturn(1);
+        listAssert.isEmpty();
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasSizeNotEmptyKo() {
+        when(fluentList.size()).thenReturn(0);
+        listAssert.isNotEmpty();
+    }
+
+    @Test
+    public void testHasSizeZeroInBuilder() {
+        when(fluentList.size()).thenReturn(0);
+        listAssert.hasSize().equalTo(0);
+    }
+
+    @Test
+    public void testHasSizeNotEqualOk() {
+        when(fluentList.size()).thenReturn(0);
+        listAssert.hasSize().notEqualTo(1);
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasSizeNotEqualKo() {
+        when(fluentList.size()).thenReturn(0);
+        listAssert.hasSize().notEqualTo(0);
     }
 
     @Test(expected = AssertionError.class)
@@ -190,4 +227,14 @@ public class FluentListAssertTest {
         when(fluentList.attributes("class")).thenReturn(Arrays.asList("beta product", "alpha male"));
         listAssert.hasClass("male");
     }
+
+    @Test
+    public void emptyListErrorMessage() {
+        when(fluentList.texts()).thenReturn(emptyList());
+
+        assertThatThrownBy(() -> listAssert.hasText("John"))
+                .isInstanceOf(AssertionError.class)
+                .hasMessageContaining("List is empty. Please make sure you use correct selector.");
+    }
+
 }

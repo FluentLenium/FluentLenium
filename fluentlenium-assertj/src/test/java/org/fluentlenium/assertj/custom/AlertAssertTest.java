@@ -35,7 +35,7 @@ public class AlertAssertTest {
     @Test
     public void testHasTextNegative() {
         when(alert.getText()).thenReturn("other text");
-        assertThatThrownBy(() -> assertThat(alertAssert.hasText("some text")))
+        assertThatThrownBy(() -> alertAssert.hasText("some text"))
                 .isInstanceOf(AssertionError.class)
                 .hasMessage("The alert box does not contain the text: some text. Actual text found : other text");
     }
@@ -43,7 +43,7 @@ public class AlertAssertTest {
     @Test
     public void testHasTextNotPresent() {
         doThrow(new NoAlertPresentException()).when(alert).getText();
-        assertThatThrownBy(() -> assertThat(alertAssert.hasText("some text")))
+        assertThatThrownBy(() -> alertAssert.hasText("some text"))
                 .isInstanceOf(AssertionError.class)
                 .hasMessage("There is no alert box");
     }
@@ -57,7 +57,7 @@ public class AlertAssertTest {
 
     @Test
     public void testIsPresentNegative() {
-        assertThatThrownBy(() -> assertThat(alertAssert.isPresent()))
+        assertThatThrownBy(() -> alertAssert.isPresent())
                 .isInstanceOf(AssertionError.class)
                 .hasMessage("There is no alert box");
     }

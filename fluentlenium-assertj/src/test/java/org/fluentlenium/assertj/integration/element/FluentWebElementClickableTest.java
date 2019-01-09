@@ -20,7 +20,7 @@ public class FluentWebElementClickableTest extends IntegrationTest {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el("#disabled")).isClickable())
                 .isInstanceOf(AssertionError.class)
-                .hasMessageContaining("Element in assertion is present but not clickable");
+                .hasMessage("Element in assertion is present but not clickable");
     }
 
     @Test
@@ -42,7 +42,7 @@ public class FluentWebElementClickableTest extends IntegrationTest {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el("select")).isNotClickable())
                 .isInstanceOf(AssertionError.class)
-                .hasMessageContaining("Element in assertion is present but clickable");
+                .hasMessage("Element in assertion is present but clickable");
     }
 
     @Test

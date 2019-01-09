@@ -40,7 +40,7 @@ public class FluentListSizeBuilder {
      * @param size expected size
      * @return ${code this} assertion object.
      */
-    public Object lessThanOrEqualTo(int size) {
+    public FluentListAssert lessThanOrEqualTo(int size) {
         if (actualSize > size) {
             listAssert.failWithMessage(ACTUAL_SIZE + actualSize + " is not less than or equal to: " + size);
         }
@@ -66,11 +66,34 @@ public class FluentListSizeBuilder {
      * @param size expected size
      * @return ${code this} assertion object.
      */
-    public Object greaterThanOrEqualTo(int size) {
+    public FluentListAssert greaterThanOrEqualTo(int size) {
         if (actualSize < size) {
             listAssert.failWithMessage(ACTUAL_SIZE + actualSize + " is not greater than or equal to: " + size);
         }
         return listAssert;
+    }
+
+    /**
+     * Assert that actual list size is different to given size.
+     *
+     * @param size expected size
+     * @return ${code this} assertion object.
+     */
+    public FluentListAssert notEqualTo(int size) {
+        if (actualSize == size) {
+            listAssert.failWithMessage(ACTUAL_SIZE + actualSize + " is equal to: " + size);
+        }
+        return listAssert;
+    }
+
+    /**
+     * Assert that actual list size is equal to given size.
+     *
+     * @param size expected size
+     * @return ${code this} assertion object.
+     */
+    public FluentListAssert equalTo(int size) {
+        return listAssert.hasSize(size);
     }
 
 }

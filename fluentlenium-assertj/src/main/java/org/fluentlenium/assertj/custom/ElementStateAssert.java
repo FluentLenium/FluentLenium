@@ -1,19 +1,17 @@
 package org.fluentlenium.assertj.custom;
 
-import org.assertj.core.api.AbstractAssert;
-
 public interface ElementStateAssert {
 
-    AbstractAssert isClickable();
-    AbstractAssert isNotClickable();
+    FluentWebElementAssert isClickable();
+    FluentWebElementAssert isNotClickable();
 
-    AbstractAssert isDisplayed();
-    AbstractAssert isNotDisplayed();
+    FluentWebElementAssert isDisplayed();
+    FluentWebElementAssert isNotDisplayed();
 
-    AbstractAssert isEnabled();
-    AbstractAssert isNotEnabled();
+    FluentWebElementAssert isEnabled();
+    FluentWebElementAssert isNotEnabled();
 
-    AbstractAssert isSelected();
-    AbstractAssert isNotSelected();
+    FluentWebElementAssert isSelected();
+    FluentWebElementAssert isNotSelected();
 
 }

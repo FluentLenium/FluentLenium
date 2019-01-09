@@ -13,7 +13,8 @@ import java.util.List;
  * Element list assertions.
  */
 public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentList>
-    implements FluentAssert {
+    implements FluentAssert, ListStateAssert {
+
     /**
      * Creates a new element list assertion object.
      *
@@ -39,6 +40,24 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     }
 
     /**
+     * Check is list is empty
+     *
+     * @return assertion object
+     */
+    public FluentListAssert isEmpty() {
+        return hasSize(0);
+    }
+
+    /**
+     * Check is list is not empty
+     *
+     * @return assertion object
+     */
+    public FluentListAssert isNotEmpty() {
+        return hasSize().notEqualTo(0);
+    }
+
+    /**
      * Check the list size
      *
      * @return List size builder
@@ -55,6 +74,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      */
     public FluentListAssert hasText(String textToFind) {
         List<String> actualTexts = actual.texts();
+        checkListEmptiness(actualTexts);
         if (actualTexts.stream().noneMatch(text -> text.contains(textToFind))) {
             failWithMessage("No selected elements contains text: " + textToFind
                     + ". Actual texts found: " + actualTexts);
@@ -62,9 +82,16 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
+    /**
+     * check if at least one element of the FluentList contains the text matching
+     *
+     * @param regexToBeMatched text to find
+     * @return assertion object
+     */
     @Override
     public FluentListAssert hasTextMatching(String regexToBeMatched) {
         List<String> actualTexts = actual.texts();
+        checkListEmptiness(actualTexts);
         if (actualTexts.stream().noneMatch(text -> text.matches(regexToBeMatched))) {
             failWithMessage("No selected elements contains text matching: " + regexToBeMatched
                     + ". Actual texts found: " + actualTexts);
@@ -80,6 +107,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      */
     public FluentListAssert hasNotText(String textToFind) {
         List<String> actualTexts = actual.texts();
+        checkListEmptiness(actualTexts);
         for (String text : actualTexts) {
             if (text.contains(textToFind)) {
                 failWithMessage(
@@ -98,6 +126,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      */
     public FluentListAssert hasId(String idToFind) {
         List<String> actualIds = actual.ids();
+        checkListEmptiness(actualIds);
         if (!actualIds.contains(idToFind)) {
             failWithMessage("No selected elements has id: " + idToFind
                     + ". Actual texts found : " + actualIds);
@@ -113,6 +142,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
      */
     public FluentListAssert hasClass(String classToFind) {
         List<String> classes = actual.attributes("class");
+        checkListEmptiness(classes);
 
         for (String classesStr : classes) {
             List<String> classesLst = Arrays.asList(classesStr.split(" "));
@@ -155,5 +185,11 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
 
     void failWithMessage(String errorMessage) {
         super.failWithMessage(errorMessage);
+    }
+
+    private void checkListEmptiness(List<?> elements) {
+        if (elements.size() == 0) {
+            throw new AssertionError("List is empty. Please make sure you use correct selector.");
+        }
     }
 }

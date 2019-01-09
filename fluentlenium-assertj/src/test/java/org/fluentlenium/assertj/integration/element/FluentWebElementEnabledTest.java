@@ -42,7 +42,7 @@ public class FluentWebElementEnabledTest extends IntegrationTest {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el("#name")).isNotEnabled())
                 .isInstanceOf(AssertionError.class)
-                .hasMessageContaining("Element in assertion is present but enabled");
+                .hasMessage("Element in assertion is present but enabled");
     }
 
     @Test

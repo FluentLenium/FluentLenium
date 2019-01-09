@@ -19,7 +19,7 @@ public class FluentWebElementHasTextTest extends IntegrationTest {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el("#location")).hasText("Drugstore"))
                 .isInstanceOf(AssertionError.class)
-                .hasMessageContaining(
+                .hasMessage(
                         "The element does not contain the text: Drugstore. Actual text found : Pharmacy");
     }
 
@@ -34,7 +34,7 @@ public class FluentWebElementHasTextTest extends IntegrationTest {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el("#location")).hasNotText("Pharmacy"))
                 .isInstanceOf(AssertionError.class)
-                .hasMessageContaining(
+                .hasMessage(
                         "The element contain the text: Pharmacy");
     }
 
@@ -50,7 +50,7 @@ public class FluentWebElementHasTextTest extends IntegrationTest {
         standalone.executeScript("document.getElementById(\"location\").innerHTML=\"Pha rmacy\";");
         assertThatThrownBy(() -> assertThat(standalone.el("#location")).hasTextMatching("Pha\\w+cy"))
                 .isInstanceOf(AssertionError.class)
-                .hasMessageContaining(
+                .hasMessage(
                         "The element does not match the regex: Pha\\w+cy. Actual text found : Pha rmacy");
     }
 
