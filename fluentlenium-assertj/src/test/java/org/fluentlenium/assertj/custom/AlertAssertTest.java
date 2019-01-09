@@ -9,7 +9,6 @@ import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.NoAlertPresentException;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

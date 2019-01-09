@@ -188,7 +188,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     }
 
     private void checkListEmptiness(List<?> elements) {
-        if (elements.size() == 0) {
+        if (elements.isEmpty()) {
             throw new AssertionError("List is empty. Please make sure you use correct selector.");
         }
     }
