@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.openqa.selenium.Dimension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
@@ -44,6 +45,30 @@ public class FluentWebElementTest {
     public void testIsNotEnabledKo() {
         when(element.enabled()).thenReturn(true);
         elementAssert.isNotEnabled();
+    }
+
+    @Test
+    public void testIsClickableOk() {
+        when(element.clickable()).thenReturn(true);
+        elementAssert.isClickable();
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testIsClickabledKo() {
+        when(element.clickable()).thenReturn(false);
+        elementAssert.isClickable();
+    }
+
+    @Test
+    public void testIsNotClickabledOk() {
+        when(element.clickable()).thenReturn(false);
+        elementAssert.isNotClickable();
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testIsNotClickabledKo() {
+        when(element.clickable()).thenReturn(true);
+        elementAssert.isNotClickable();
     }
 
     @Test
@@ -95,6 +120,54 @@ public class FluentWebElementTest {
     }
 
     @Test
+    public void testHasNameOk() {
+        when(element.name()).thenReturn("some name");
+        elementAssert.hasName("some name");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasNameKo() {
+        when(element.name()).thenReturn("other name");
+        elementAssert.hasName("some name");
+    }
+
+    @Test
+    public void testHasValueOk() {
+        when(element.value()).thenReturn("some value");
+        elementAssert.hasValue("some value");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasValueKo() {
+        when(element.value()).thenReturn("other value");
+        elementAssert.hasValue("some value");
+    }
+
+    @Test
+    public void testHasTagNameOk() {
+        when(element.tagName()).thenReturn("some tag");
+        elementAssert.hasTagName("some tag");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasTagNameKo() {
+        when(element.tagName()).thenReturn("other tag");
+        elementAssert.hasTagName("some tag");
+    }
+
+    @Test
+    public void testHasPropertyValueOk() {
+        when(element.attribute("attribute")).thenReturn("some value");
+        elementAssert.hasAttributeValue("attribute", "some value");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasPropertyValueKo() {
+        when(element.attribute("attribute")).thenReturn("other value");
+        elementAssert.hasAttributeValue("attribute", "some value");
+    }
+
+    @Test
     public void testHasIdOk() {
         when(element.id()).thenReturn("some id");
         elementAssert.hasId("some id");
@@ -104,6 +177,18 @@ public class FluentWebElementTest {
     public void testHasIdKo() {
         when(element.id()).thenReturn("other id");
         elementAssert.hasId("some id");
+    }
+
+    @Test
+    public void testHasDimensionOk() {
+        when(element.size()).thenReturn(new Dimension(1, 2));
+        elementAssert.hasDimension(new Dimension(1, 2));
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasDimensionKo() {
+        when(element.size()).thenReturn(new Dimension(2, 1));
+        elementAssert.hasDimension(new Dimension(1, 2));
     }
 
     @Test
@@ -146,13 +231,6 @@ public class FluentWebElementTest {
     public void testHasTextWithSpecialCharactersInElement() {
         String textWithStringFormatError = "%A";
         when(element.text()).thenReturn(textWithStringFormatError);
-        elementAssert.hasText(textWithStringFormatError);
-    }
-
-    @Test(expected = AssertionError.class)
-    public void testHasTextWithSpecialCharactersInAssertion() {
-        String textWithStringFormatError = "%A";
-        when(element.text()).thenReturn("someText");
         elementAssert.hasText(textWithStringFormatError);
     }
 

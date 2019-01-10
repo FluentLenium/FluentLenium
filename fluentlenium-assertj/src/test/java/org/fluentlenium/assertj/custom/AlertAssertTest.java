@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.NoAlertPresentException;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,33 +26,39 @@ public class AlertAssertTest {
     }
 
     @Test
-    public void testHasTextOk() {
+    public void testHasTextPositive() {
         when(alert.getText()).thenReturn("some text");
         alertAssert.hasText("some text");
     }
 
-    @Test(expected = AssertionError.class)
-    public void testHasTextKo() {
+    @Test
+    public void testHasTextNegative() {
         when(alert.getText()).thenReturn("other text");
-        alertAssert.hasText("some text");
-    }
-
-    @Test(expected = AssertionError.class)
-    public void testHasTextKoNoAlert() {
-        doThrow(new NoAlertPresentException()).when(alert).getText();
-        alertAssert.hasText("some text");
+        assertThatThrownBy(() -> alertAssert.hasText("some text"))
+                .isInstanceOf(AssertionError.class)
+                .hasMessage("The alert box does not contain the text: some text. Actual text found : other text");
     }
 
     @Test
-    public void testIsPresentOk() {
+    public void testHasTextNotPresent() {
+        doThrow(new NoAlertPresentException()).when(alert).getText();
+        assertThatThrownBy(() -> alertAssert.hasText("some text"))
+                .isInstanceOf(AssertionError.class)
+                .hasMessage("There is no alert box");
+    }
+
+    @Test
+    public void testIsPresentPositive() {
         when(alert.present()).thenReturn(true);
         alertAssert.isPresent();
         verify(alert).present();
     }
 
-    @Test(expected = AssertionError.class)
-    public void testIsPresentKo() {
-        alertAssert.isPresent();
+    @Test
+    public void testIsPresentNegative() {
+        assertThatThrownBy(() -> alertAssert.isPresent())
+                .isInstanceOf(AssertionError.class)
+                .hasMessage("There is no alert box");
     }
 
 }

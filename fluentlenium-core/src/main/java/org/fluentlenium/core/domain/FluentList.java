@@ -8,6 +8,7 @@ import org.fluentlenium.core.proxy.FluentProxyState;
 import org.fluentlenium.core.search.SearchControl;
 import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWaitElementList;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -84,7 +85,7 @@ public interface FluentList<E extends FluentWebElement>
      * If there is more elements on the list than in the with table, the last element of the table is repeated
      */
     @Override
-    FluentList write(String... with);
+    FluentList<E> write(String... with);
 
     /**
      * submit on all elements on the list
@@ -121,6 +122,13 @@ public interface FluentList<E extends FluentWebElement>
      * @return list of string values
      */
     List<String> names();
+
+    /**
+     * Return the Dimension of elements on the list
+     *
+     * @return list of Dimensions
+     */
+    List<Dimension> dimensions();
 
     /**
      * Return the tag name of elements on the list
