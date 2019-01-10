@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
-public class FluentWebElementHasPropertyTest extends IntegrationTest {
+public class FluentWebElementHasAttributeValueTest extends IntegrationTest {
 
     @Test
     public void testHasAttributeValuePositive() {
@@ -15,7 +15,7 @@ public class FluentWebElementHasPropertyTest extends IntegrationTest {
     }
 
     @Test
-    public void testHasAttributeValuePropertyNotPresent() {
+    public void testHasAttributeValueNotPresent() {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el(".textclass"))
                 .hasAttributeValue("lorem", "ipsum"))

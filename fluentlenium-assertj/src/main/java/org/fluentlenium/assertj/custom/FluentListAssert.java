@@ -16,14 +16,17 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         super(actual, FluentListAssert.class);
     }
 
+    @Override
     public FluentListAssert isEmpty() {
         return hasSize(0);
     }
 
+    @Override
     public FluentListAssert isNotEmpty() {
         return hasSize().notEqualTo(0);
     }
 
+    @Override
     public FluentListAssert hasSize(int expectedSize) {
         int actualSize = actual.size();
         if (actualSize != expectedSize) {
@@ -33,10 +36,12 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
+    @Override
     public FluentListSizeBuilder hasSize() {
         return new FluentListSizeBuilder(actual.size(), this);
     }
 
+    @Override
     public FluentListAssert hasText(String textToFind) {
         List<String> actualTexts = actual.texts();
         checkListEmptiness(actualTexts);
@@ -47,6 +52,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
+    @Override
     public FluentListAssert hasTextMatching(String regexToBeMatched) {
         List<String> actualTexts = actual.texts();
         checkListEmptiness(actualTexts);
@@ -57,6 +63,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
+    @Override
     public FluentListAssert hasNotText(String textToFind) {
         List<String> actualTexts = actual.texts();
         checkListEmptiness(actualTexts);
@@ -70,16 +77,18 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
+    @Override
     public FluentListAssert hasId(String idToFind) {
         List<String> actualIds = actual.ids();
         checkListEmptiness(actualIds);
         if (!actualIds.contains(idToFind)) {
-            failWithMessage("No selected elements has id: " + idToFind
-                    + ". Actual texts found : " + actualIds);
+            failWithMessage("No selected elements have id: " + idToFind
+                    + ". Actual ids found : " + actualIds);
         }
         return this;
     }
 
+    @Override
     public FluentListAssert hasClass(String classToFind) {
         List<String> classes = actual.attributes("class");
         checkListEmptiness(classes);
@@ -93,34 +102,64 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
 
         String classesFromElement = String.join(", ", classes);
         failWithMessage(
-                "No selected elements has class: " + classToFind
+                "No selected elements have class: " + classToFind
                         + ". Actual classes found : " + classesFromElement);
         return this;
     }
 
     @Override
     public FluentListAssert hasValue(String value) {
-        return null;
+        List<String> actualValues = actual.values();
+        checkListEmptiness(actualValues);
+        if (!actualValues.contains(value)) {
+            failWithMessage("No selected elements have value: " + value
+                    + ". Actual values found : " + actualValues);
+        }
+        return this;
     }
 
     @Override
     public FluentListAssert hasName(String name) {
-        return null;
+        List<String> actualNames = actual.names();
+        checkListEmptiness(actualNames);
+        if (!actualNames.contains(name)) {
+            failWithMessage("No selected elements have name: " + name
+                    + ". Actual names found : " + actualNames);
+        }
+        return this;
     }
 
     @Override
     public FluentListAssert hasTagName(String tagName) {
-        return null;
+        List<String> actualTags = actual.tagNames();
+        checkListEmptiness(actualTags);
+        if (!actualTags.contains(tagName)) {
+            failWithMessage("No selected elements have tag: " + tagName
+                    + ". Actual tags found : " + actualTags);
+        }
+        return this;
     }
 
     @Override
     public FluentListAssert hasDimension(Dimension dimension) {
-        return null;
+        List<Dimension> actualDimensions = actual.dimensions();
+        checkListEmptiness(actualDimensions);
+        if (!actualDimensions.contains(dimension)) {
+            failWithMessage("No selected elements have dimension: " + dimension.toString()
+                    + ". Actual dimensions found : " + actualDimensions.toString());
+        }
+        return this;
     }
 
     @Override
     public FluentListAssert hasAttributeValue(String attribute, String value) {
-        return null;
+        List<String> actualValues = actual.attributes(attribute);
+        checkListEmptiness(actualValues);
+        if (!actualValues.contains(value)) {
+            failWithMessage("No selected elements have attribute " + attribute
+                    + " with value: " + value + ". Actual values found: " + actualValues);
+        }
+        return this;
     }
 
     void failWithMessage(String errorMessage) {

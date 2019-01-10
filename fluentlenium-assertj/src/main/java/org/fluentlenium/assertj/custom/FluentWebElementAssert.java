@@ -7,9 +7,6 @@ import org.openqa.selenium.Dimension;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Element assertions.
- */
 public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAssert, FluentWebElement>
         implements ElementStateAssert, FluentAssert {
 
@@ -17,6 +14,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         super(actual, FluentWebElementAssert.class);
     }
 
+    @Override
     public FluentWebElementAssert isEnabled() {
         if (!actual.enabled()) {
             failWithMessage("Element in assertion is present but not enabled");
@@ -24,6 +22,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert isNotEnabled() {
         if (actual.enabled()) {
             failWithMessage("Element in assertion is present but enabled");
@@ -31,6 +30,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert isDisplayed() {
         if (!actual.displayed()) {
             failWithMessage("Element in assertion is present but not displayed");
@@ -39,6 +39,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert isNotDisplayed() {
         if (actual.displayed()) {
             failWithMessage("Element in assertion is present but displayed");
@@ -46,6 +47,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert isSelected() {
         if (!actual.selected()) {
             failWithMessage("Element in assertion is present but not selected");
@@ -53,6 +55,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert isNotSelected() {
         if (actual.selected()) {
             failWithMessage("Element in assertion is present but selected");
@@ -60,6 +63,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert isClickable() {
         if (!actual.clickable()) {
             failWithMessage("Element in assertion is present but not clickable");
@@ -67,6 +71,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert isNotClickable() {
         if (actual.clickable()) {
             failWithMessage("Element in assertion is present but clickable");
@@ -74,6 +79,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert hasText(String textToFind) {
         String actualText = actual.text();
         if (!actualText.contains(textToFind)) {
@@ -83,6 +89,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert hasTextMatching(String regexToBeMatched) {
         String actualText = actual.text();
         if (!actualText.matches(regexToBeMatched)) {
@@ -92,6 +99,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert hasNotText(String textToFind) {
         if (actual.text().contains(textToFind)) {
             failWithMessage("The element contain the text: " + textToFind);
@@ -99,6 +107,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert hasId(String idToFind) {
         String actualId = actual.id();
         if (!actualId.equals(idToFind)) {
@@ -108,6 +117,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert hasClass(String classToFind) {
         String actualClasses = actual.attribute("class");
         if (!getClasses(actualClasses).contains(classToFind)) {
@@ -117,6 +127,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert hasValue(String value) {
         String actualValue = actual.value();
         if (!actualValue.equals(value)) {
@@ -126,6 +137,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert hasName(String name) {
         String actualName = actual.name();
         if (!actualName.equals(name)) {
@@ -135,6 +147,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert hasTagName(String tagName) {
         String actualTag = actual.tagName();
         if (!actualTag.equals(tagName)) {
@@ -144,6 +157,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert hasDimension(Dimension dimension) {
         Dimension actualSize = actual.size();
         if (!actualSize.equals(dimension)) {
@@ -153,6 +167,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
     public FluentWebElementAssert hasAttributeValue(String attribute, String value) {
         String actualValue;
 

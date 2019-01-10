@@ -22,6 +22,7 @@ public class FluentListSizeTest extends IntegrationTest {
     @Test
     public void testHasSizeLessThanOk() {
         standalone.goTo(DEFAULT_URL);
+        assertThat(standalone.$("span")).isNotEmpty();
         assertThat(standalone.$("span")).hasSize().lessThan(10);
     }
 

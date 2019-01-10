@@ -1,24 +1,24 @@
 package org.fluentlenium.assertj.integration.list;
 
-import org.fluentlenium.assertj.integration.IntegrationTest;
-import org.junit.Test;
-
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
-public class FluentListHasClassTest extends IntegrationTest {
+import org.fluentlenium.assertj.integration.IntegrationTest;
+import org.junit.Test;
+
+public class FluentListHasValueTest extends IntegrationTest {
 
     @Test
     public void testHasIdPositive() {
         standalone.goTo(DEFAULT_URL);
-        assertThat(standalone.$("#multiple-css-class")).hasClass("class1");
+        assertThat(standalone.$("[type=checkbox]")).hasValue("John");
     }
 
     @Test
     public void testHasIdNegative() {
         standalone.goTo(DEFAULT_URL);
-        assertThatThrownBy(() -> assertThat(standalone.$("#multiple-css-class")).hasClass("cla"))
+        assertThatThrownBy(() -> assertThat(standalone.$("[type=checkbox]")).hasValue("Johnny"))
                 .isInstanceOf(AssertionError.class)
-                .hasMessageContaining("No selected elements have class: cla");
+                .hasMessageContaining("No selected elements have value: Johnny");
     }
 }

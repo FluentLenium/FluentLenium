@@ -5,17 +5,16 @@ import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
+import java.util.List;
+import org.fluentlenium.assertj.FluentLeniumAssertions;
+import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import org.fluentlenium.assertj.FluentLeniumAssertions;
-import org.fluentlenium.core.domain.FluentList;
-import org.fluentlenium.core.domain.FluentWebElement;
-
-import java.util.Arrays;
-import java.util.List;
+import org.openqa.selenium.Dimension;
 
 public class FluentListAssertTest {
 
@@ -186,6 +185,42 @@ public class FluentListAssertTest {
         listAssert.hasId("some-id");
     }
 
+    @Test
+    public void testHasValueOk() {
+        when(fluentList.values()).thenReturn(List.of("1", "2", "3"));
+        listAssert.hasValue("1");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasValueKo() {
+        when(fluentList.values()).thenReturn(List.of("1", "2", "3"));
+        listAssert.hasValue("4");
+    }
+
+    @Test
+    public void testHasNameOk() {
+        when(fluentList.names()).thenReturn(List.of("name-one", "name-two"));
+        listAssert.hasName("name-one");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasNameKo() {
+        when(fluentList.names()).thenReturn(List.of("name-one", "name-two"));
+        listAssert.hasName("name-three");
+    }
+
+    @Test
+    public void testHasTagNameOk() {
+        when(fluentList.tagNames()).thenReturn(List.of("span", "div"));
+        listAssert.hasTagName("span");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasTagNamedKo() {
+        when(fluentList.tagNames()).thenReturn(List.of("span", "div"));
+        listAssert.hasTagName("p");
+    }
+
     @Test(expected = AssertionError.class)
     public void testHasIdEmptyKo() {
         when(fluentList.ids()).thenReturn(emptyList());
@@ -194,13 +229,13 @@ public class FluentListAssertTest {
 
     @Test
     public void testHasClassOk() {
-        when(fluentList.attributes("class")).thenReturn(singletonList("some-class"));
+        when(fluentList.attributes("class")).thenReturn(List.of("some-class", "unknown-class"));
         listAssert.hasClass("some-class");
     }
 
     @Test(expected = AssertionError.class)
     public void testHasClassKo() {
-        when(fluentList.attributes("class")).thenReturn(singletonList("other-class"));
+        when(fluentList.attributes("class")).thenReturn(List.of("other-class", "unknown-class"));
         listAssert.hasClass("some-class");
     }
 
@@ -226,6 +261,34 @@ public class FluentListAssertTest {
     public void testHasMultipleClassesOkBanana() {
         when(fluentList.attributes("class")).thenReturn(Arrays.asList("beta product", "alpha male"));
         listAssert.hasClass("male");
+    }
+
+    @Test
+    public void testHasDimensionOk() {
+        Dimension dimensionOne = new Dimension(1, 2);
+        Dimension dimensionTwo = new Dimension(3, 4);
+        when(fluentList.dimensions()).thenReturn(List.of(dimensionOne, dimensionTwo));
+        listAssert.hasDimension(new Dimension(1, 2));
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasDimensionKo() {
+        Dimension dimensionOne = new Dimension(1, 2);
+        Dimension dimensionTwo = new Dimension(3, 4);
+        when(fluentList.dimensions()).thenReturn(List.of(dimensionOne, dimensionTwo));
+        listAssert.hasDimension(new Dimension(5, 6));
+    }
+
+    @Test
+    public void testHasAttributeValueOk() {
+        when(fluentList.attributes("name")).thenReturn(List.of("name-one", "name-two"));
+        listAssert.hasAttributeValue("name", "name-one");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testHasAttributeValueKo() {
+        when(fluentList.attributes("name")).thenReturn(List.of("name-one", "name-two"));
+        listAssert.hasAttributeValue("name", "name-three");
     }
 
     @Test
