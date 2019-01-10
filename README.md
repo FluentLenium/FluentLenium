@@ -58,12 +58,6 @@ Short summary:
     <version>4.12</version>
     <scope>test</scope>
 </dependency>
-<dependency>
-    <groupId>org.seleniumhq.selenium</groupId>
-    <artifactId>htmlunit-driver</artifactId>
-    <version>2.33.3</version>
-    <scope>test</scope>
-</dependency>
 ```
 
 - Add basic FluentLenium test
