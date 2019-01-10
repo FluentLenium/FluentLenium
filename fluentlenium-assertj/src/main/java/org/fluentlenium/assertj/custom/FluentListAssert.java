@@ -9,27 +9,21 @@ import org.openqa.selenium.Dimension;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Element list assertions.
- */
 public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentList>
     implements FluentAssert, ListStateAssert {
 
-    /**
-     * Creates a new element list assertion object.
-     *
-     * @param actual actual element list
-     */
     public FluentListAssert(FluentList<FluentWebElement> actual) {
         super(actual, FluentListAssert.class);
     }
 
-    /**
-     * Check the list size
-     *
-     * @param expectedSize expected size
-     * @return assertion object
-     */
+    public FluentListAssert isEmpty() {
+        return hasSize(0);
+    }
+
+    public FluentListAssert isNotEmpty() {
+        return hasSize().notEqualTo(0);
+    }
+
     public FluentListAssert hasSize(int expectedSize) {
         int actualSize = actual.size();
         if (actualSize != expectedSize) {
@@ -39,39 +33,10 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
-    /**
-     * Check is list is empty
-     *
-     * @return assertion object
-     */
-    public FluentListAssert isEmpty() {
-        return hasSize(0);
-    }
-
-    /**
-     * Check is list is not empty
-     *
-     * @return assertion object
-     */
-    public FluentListAssert isNotEmpty() {
-        return hasSize().notEqualTo(0);
-    }
-
-    /**
-     * Check the list size
-     *
-     * @return List size builder
-     */
     public FluentListSizeBuilder hasSize() {
         return new FluentListSizeBuilder(actual.size(), this);
     }
 
-    /**
-     * check if at least one element of the FluentList contains the text
-     *
-     * @param textToFind text to find
-     * @return assertion object
-     */
     public FluentListAssert hasText(String textToFind) {
         List<String> actualTexts = actual.texts();
         checkListEmptiness(actualTexts);
@@ -82,13 +47,6 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
-    /**
-     * check if at least one element of the FluentList contains the text matching
-     *
-     * @param regexToBeMatched text to find
-     * @return assertion object
-     */
-    @Override
     public FluentListAssert hasTextMatching(String regexToBeMatched) {
         List<String> actualTexts = actual.texts();
         checkListEmptiness(actualTexts);
@@ -99,12 +57,6 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
-    /**
-     * check if no element of the FluentList contains the text
-     *
-     * @param textToFind text to find
-     * @return assertion object
-     */
     public FluentListAssert hasNotText(String textToFind) {
         List<String> actualTexts = actual.texts();
         checkListEmptiness(actualTexts);
@@ -118,12 +70,6 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
-    /**
-     * check if an element of the FluentList has the id
-     *
-     * @param idToFind id to find
-     * @return assertion object
-     */
     public FluentListAssert hasId(String idToFind) {
         List<String> actualIds = actual.ids();
         checkListEmptiness(actualIds);
@@ -134,12 +80,6 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
-    /**
-     * check if at least one element of the FluentList contains the text
-     *
-     * @param classToFind class to find
-     * @return assertion object
-     */
     public FluentListAssert hasClass(String classToFind) {
         List<String> classes = actual.attributes("class");
         checkListEmptiness(classes);
@@ -174,7 +114,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     }
 
     @Override
-    public FluentListAssert hasSize(Dimension dimension) {
+    public FluentListAssert hasDimension(Dimension dimension) {
         return null;
     }
 

@@ -182,13 +182,13 @@ public class FluentWebElementTest {
     @Test
     public void testHasDimensionOk() {
         when(element.size()).thenReturn(new Dimension(1, 2));
-        elementAssert.hasSize(new Dimension(1, 2));
+        elementAssert.hasDimension(new Dimension(1, 2));
     }
 
     @Test(expected = AssertionError.class)
     public void testHasDimensionKo() {
         when(element.size()).thenReturn(new Dimension(2, 1));
-        elementAssert.hasSize(new Dimension(1, 2));
+        elementAssert.hasDimension(new Dimension(1, 2));
     }
 
     @Test
