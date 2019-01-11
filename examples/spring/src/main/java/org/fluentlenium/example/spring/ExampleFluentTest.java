@@ -6,6 +6,7 @@ import org.fluentlenium.example.spring.config.Config;
 import org.fluentlenium.example.spring.config.SeleniumBrowserConfigProperties;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.os.ExecutableFinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -14,12 +15,13 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = Config.class)
 public class ExampleFluentTest extends FluentTest {
+
     @Autowired
     private SeleniumBrowserConfigProperties config;
 
     @Override
     public WebDriver newWebDriver() {
-        setDriverExecutableSystemProperty();
+        setupDriver();
         BrowserConfig browserConfig = getBrowserConfig();
         return browserConfig.resolveDriver(browserConfig);
     }
@@ -33,11 +35,24 @@ public class ExampleFluentTest extends FluentTest {
         return config.getBrowserConfig();
     }
 
-    private void setDriverExecutableSystemProperty() {
+    private void setupDriver() {
         String propertyName = getBrowserConfig().getDriverSystemPropertyName();
         String driverExecutablePath = config.getDriverExecutablePath();
-        if (System.getProperty(propertyName) == null) {
-            System.setProperty(propertyName, driverExecutablePath);
+        if (systemPropertyNotSet(propertyName) && executableNotPresentInPath()) {
+            setSystemProperty(propertyName, driverExecutablePath);
         }
+    }
+
+    private void setSystemProperty(String propertyName, String driverExecutablePath) {
+        System.setProperty(propertyName, driverExecutablePath);
+    }
+
+    private boolean systemPropertyNotSet(String propertyName) {
+        return System.getProperty(propertyName) == null;
+    }
+
+    private boolean executableNotPresentInPath() {
+        String driverExecutableName = getBrowserConfig().getDriverExecutableName();
+        return new ExecutableFinder().find(driverExecutableName) == null;
     }
 }

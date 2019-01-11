@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SeleniumBrowserConfigProperties {
+
     @Value("${selenium.browser.type}")
     private BrowserType browserType;
     @Value("${selenium.hub.enabled}")
@@ -47,6 +48,8 @@ public class SeleniumBrowserConfigProperties {
                 return edgeDriverPath;
             case OPERA:
                 return operaDriverPath;
+            case CHROME:
+                return chromeDriverPath;
             default:
                 return chromeDriverPath;
         }
