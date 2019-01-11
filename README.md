@@ -1,6 +1,6 @@
 # What is FluentLenium ?
 
-[![Travis](https://travis-ci.com/FluentLenium/FluentLenium.svg?branch=develop)](https://travis-ci.org/FluentLenium/FluentLenium)
+[![Travis](https://travis-ci.com/FluentLenium/FluentLenium.svg?branch=develop)](https://travis-ci.com/FluentLenium/FluentLenium)
 [![Coveralls](https://coveralls.io/repos/github/FluentLenium/FluentLenium/badge.svg?branch=develop)](https://coveralls.io/github/FluentLenium/FluentLenium?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/27aabb596e9d9eee7182/maintainability)](https://codeclimate.com/github/FluentLenium/FluentLenium/maintainability)
 [![Maven Central](https://img.shields.io/maven-central/v/org.fluentlenium/fluentlenium-parent.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.fluentlenium%22%20AND%20a%3A%22fluentlenium-parent%22)
@@ -56,12 +56,6 @@ Short summary:
     <groupId>junit</groupId>
     <artifactId>junit</artifactId>
     <version>4.12</version>
-    <scope>test</scope>
-</dependency>
-<dependency>
-    <groupId>org.seleniumhq.selenium</groupId>
-    <artifactId>htmlunit-driver</artifactId>
-    <version>2.33.3</version>
     <scope>test</scope>
 </dependency>
 ```
