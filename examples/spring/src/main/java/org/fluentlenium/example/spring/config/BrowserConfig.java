@@ -38,6 +38,10 @@ public class BrowserConfig {
                 : browserType.getWebDriver();
     }
 
+    public String getDriverExecutableName() {
+        return browserType.getDriverExecutableName();
+    }
+
     public String getDriverSystemPropertyName() {
         return browserType.getDriverSystemPropertyName();
     }
