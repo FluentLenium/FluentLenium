@@ -12,7 +12,7 @@ import java.util.List;
 public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentList>
     implements FluentAssert, ListStateAssert {
 
-    public FluentListAssert(FluentList<FluentWebElement> actual) {
+    public FluentListAssert(FluentList<? extends FluentWebElement> actual) {
         super(actual, FluentListAssert.class);
     }
 
