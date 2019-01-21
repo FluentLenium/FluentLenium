@@ -12,6 +12,7 @@
     </parent>
     <modules>
         <module>fluentlenium-core</module>
+        <module>fluentlenium-integration-tests</module>
         <module>fluentlenium-assertj</module>
         <module>fluentlenium-junit</module>
         <module>fluentlenium-junit-jupiter</module>
@@ -179,6 +180,31 @@
                 <version>4.12</version>
             </dependency>
             <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-params</artifactId>
+                <version>5.4.0-M1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>5.4.0-M1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>5.4.0-M1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-runner</artifactId>
+                <version>1.4.0-M1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-launcher</artifactId>
+                <version>1.4.0-M1</version>
+            </dependency>
+            <dependency>
                 <groupId>com.github.stephenc.jcip</groupId>
                 <artifactId>jcip-annotations</artifactId>
                 <version>1.0-1</version>
@@ -196,6 +222,11 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
+                <version>2.23.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-junit-jupiter</artifactId>
                 <version>2.23.4</version>
             </dependency>
             <!--Upgrading to 2.X.X leads to 0 tests being executed in fluentlenium-core for unknown reason-->
@@ -298,6 +329,7 @@
                         </includes>
                         <excludes>
                             <exclude>**/ignore/**/*</exclude>
+                            <!--<exclude>**/shareddriver/ignore/**/*</exclude>-->
                             <exclude>**/*$*</exclude>
                             <exclude>**/IgnoreTest*.java</exclude>
                             <exclude>**/*IgnoreTest.java</exclude>
