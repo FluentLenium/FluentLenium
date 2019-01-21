@@ -387,6 +387,7 @@
                         <sourceDirectory>${basedir}/fluentlenium-junit/src/main/java</sourceDirectory>
                         <sourceDirectory>${basedir}/fluentlenium-junit-jupiter/src/main/java</sourceDirectory>
                         <sourceDirectory>${basedir}/fluentlenium-testng/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-integration-tests/src/main/java</sourceDirectory>
                         <sourceDirectory>${basedir}/fluentlenium-spock/src/main/groovy</sourceDirectory>
                     </sourceDirectories>
                 </configuration>
