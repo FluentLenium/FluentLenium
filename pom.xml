@@ -380,7 +380,6 @@
                 <version>4.3.0</version>
                 <configuration>
                     <jacocoReports>${project.basedir}/target/jacoco.exec</jacocoReports>
-                    <sourceEncoding>UTF-8</sourceEncoding>
                     <sourceDirectories>
                         <sourceDirectory>${basedir}/fluentlenium-core/src/main/java</sourceDirectory>
                         <sourceDirectory>${basedir}/fluentlenium-assertj/src/main/java</sourceDirectory>
