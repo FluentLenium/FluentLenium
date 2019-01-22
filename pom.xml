@@ -379,7 +379,17 @@
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
                 <configuration>
-                    <jacocoReports>${project.basedir}/target/jacoco.exec</jacocoReports>
+                    <jacocoReports>
+                        <jacocoReport>${basedir}/fluentlenium-core/target/jacoco.exec</jacocoReport>
+                        <jacocoReport>${basedir}/fluentlenium-assertj/target/jacoco.exec</jacocoReport>
+                        <jacocoReport>${basedir}/fluentlenium-integration-tests/target/jacoco.exec</jacocoReport>
+                        <jacocoReport>${basedir}/fluentlenium-cucumber/target/jacoco.exec</jacocoReport>
+                        <jacocoReport>${basedir}/fluentlenium-junit/target/jacoco.exec</jacocoReport>
+                        <jacocoReport>${basedir}/fluentlenium-junit-jupiter/target/jacoco.exec</jacocoReport>
+                        <jacocoReport>${basedir}/fluentlenium-testng/target/jacoco.exec</jacocoReport>
+                        <jacocoReport>${basedir}/fluentlenium-spock/target/jacoco.exec</jacocoReport>
+                    </jacocoReports>
+                    <sourceEncoding>UTF-8</sourceEncoding>
                     <sourceDirectories>
                         <sourceDirectory>${basedir}/fluentlenium-core/src/main/java</sourceDirectory>
                         <sourceDirectory>${basedir}/fluentlenium-assertj/src/main/java</sourceDirectory>
@@ -421,8 +431,6 @@
                         <exclude>**com.steadystate*</exclude>
                         <exclude>**com/gargoylesoftware*</exclude>
                     </excludes>
-                    <destFile>${project.basedir}/../target/jacoco.exec</destFile>
-                    <append>true</append>
                 </configuration>
                 <executions>
                     <execution>
