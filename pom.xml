@@ -379,6 +379,9 @@
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
                 <configuration>
+                    <jacocoReports>
+                        <jacocoReport>${basedir}/fluentlenium-integration-tests/target/jacoco.exec</jacocoReport>
+                    </jacocoReports>
                     <sourceEncoding>UTF-8</sourceEncoding>
                     <sourceDirectories>
                         <sourceDirectory>${basedir}/fluentlenium-core/src/main/java</sourceDirectory>
