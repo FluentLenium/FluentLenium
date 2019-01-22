@@ -421,9 +421,9 @@
                     <excludes>
                         <exclude>**com.steadystate*</exclude>
                         <exclude>**com/gargoylesoftware*</exclude>
-                        <destFile>${project.basedir}/../target/jacoco.exec</destFile>
-                        <append>true</append>
                     </excludes>
+                    <destFile>${project.basedir}/../target/jacoco.exec</destFile>
+                    <append>true</append>
                 </configuration>
                 <executions>
                     <execution>
