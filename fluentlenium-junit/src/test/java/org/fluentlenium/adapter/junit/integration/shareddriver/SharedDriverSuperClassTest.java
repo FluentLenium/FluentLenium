@@ -1,28 +1,35 @@
-package org.fluentlenium.integration.shareddriver;
+package org.fluentlenium.adapter.junit.integration.shareddriver;
 
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.configuration.FluentConfiguration;
-import org.fluentlenium.integration.IntegrationFluentTest;
+import org.fluentlenium.configuration.FluentConfiguration.BooleanValue;
+import org.fluentlenium.adapter.junit.integration.IntegrationFluentTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.Cookie;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
-@FluentConfiguration(driverLifecycle = DriverLifecycle.JVM)
+@FluentConfiguration(driverLifecycle = DriverLifecycle.JVM, deleteCookies = BooleanValue.TRUE)
+class SharedDriverSuperClass extends IntegrationFluentTest {
+}
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class SharedDriverOnce1 extends IntegrationFluentTest {
+public class SharedDriverSuperClassTest extends SharedDriverSuperClass {
 
     @Test
     public void firstMethod() {
         goTo(IntegrationFluentTest.DEFAULT_URL);
+        getDriver().manage().addCookie(new Cookie("cookie", "fluent"));
         assertThat($(".small", withName("name"))).hasSize(1);
     }
 
     @Test
     public void secondMethod() {
         assertThat($(".small", withName("name"))).hasSize(1);
+        assertThat(getCookie("cookie")).isNull();
     }
 
 }

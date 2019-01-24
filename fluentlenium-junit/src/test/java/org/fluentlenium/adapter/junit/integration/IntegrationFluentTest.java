@@ -1,8 +1,8 @@
-package org.fluentlenium.integration;
-
-import org.fluentlenium.integration.adapter.FluentTest;
+package org.fluentlenium.adapter.junit.integration;
 
 import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
+
+import org.fluentlenium.adapter.junit.FluentTest;
 
 public class IntegrationFluentTest extends FluentTest {
 

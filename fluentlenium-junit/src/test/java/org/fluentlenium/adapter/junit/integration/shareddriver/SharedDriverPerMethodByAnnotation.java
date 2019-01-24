@@ -1,8 +1,8 @@
-package org.fluentlenium.integration.shareddriver;
+package org.fluentlenium.adapter.junit.integration.shareddriver;
 
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.configuration.FluentConfiguration;
-import org.fluentlenium.integration.IntegrationFluentTest;
+import org.fluentlenium.adapter.junit.integration.IntegrationFluentTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
