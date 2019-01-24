@@ -26,6 +26,7 @@
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-integration-tests</artifactId>
             <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.fluentlenium</groupId>

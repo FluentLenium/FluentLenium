@@ -330,7 +330,7 @@
                         </includes>
                         <excludes>
                             <exclude>**/ignore/**/*</exclude>
-                            <!--<exclude>**/shareddriver/ignore/**/*</exclude>-->
+                            <exclude>**/shareddriver/**/*</exclude>
                             <exclude>**/*$*</exclude>
                             <exclude>**/IgnoreTest*.java</exclude>
                             <exclude>**/*IgnoreTest.java</exclude>

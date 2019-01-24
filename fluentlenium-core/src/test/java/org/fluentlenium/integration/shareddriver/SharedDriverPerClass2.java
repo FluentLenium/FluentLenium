@@ -1,18 +1,18 @@
-package org.fluentlenium.integration.shareddriver.ignore;
+package org.fluentlenium.integration.shareddriver;
 
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.configuration.FluentConfiguration;
-import org.fluentlenium.integration.localtest.IntegrationFluentTest;
-import org.junit.jupiter.api.Test;
+import org.fluentlenium.integration.IntegrationFluentTest;
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
 
 @FluentConfiguration(driverLifecycle = DriverLifecycle.CLASS)
-class SharedDriverPerClass2Test extends IntegrationFluentTest {
+public class SharedDriverPerClass2 extends IntegrationFluentTest {
 
     @Test
-    void secondMethod() {
+    public void secondMethod() {
         assertThat($(".small", withName("name"))).hasSize(0);
     }
 
