@@ -32,6 +32,7 @@ import org.fluentlenium.core.wait.FluentWaitElement;
 import org.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
@@ -227,6 +228,18 @@ public class FluentWebElement extends Component
     public FluentWebElement clear() {
         if (!isInputOfTypeFile()) {
             webElement.clear();
+        }
+        return this;
+    }
+
+    /**
+     * Clear React input using Backspace only
+     *
+     * @return fluent web element
+     */
+    public FluentWebElement clearReactInput() {
+        while (this.attribute("value").length() > 0) {
+            this.keyboard().sendKeys(Keys.BACK_SPACE);
         }
         return this;
     }

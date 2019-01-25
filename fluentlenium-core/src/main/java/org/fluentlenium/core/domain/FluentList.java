@@ -189,6 +189,15 @@ public interface FluentList<E extends FluentWebElement>
     FluentList<E> clearAll();
 
     /**
+     * Clear all React elements on the list
+     * <p>
+     * Only the visible elements are cleared.
+     *
+     * @return extended by FluentWebElement object
+     */
+    FluentList<E> clearAllReactInputs();
+
+    /**
      * Clear visible elements on the list
      */
     @Override

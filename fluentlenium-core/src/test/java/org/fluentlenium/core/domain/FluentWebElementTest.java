@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -30,6 +31,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -130,6 +132,14 @@ public class FluentWebElementTest {
     public void testClear() {
         fluentElement.clear();
         verify(element).clear();
+    }
+
+    @Test
+    public void testClearReactInput() {
+        when(fluentElement.attribute("value")).thenReturn("");
+        fluentElement.clearReactInput();
+        verify(fluentElement, times(2)).attribute("value");
+        verify(keyboard, times(0)).sendKeys(Keys.BACK_SPACE);
     }
 
     @Test

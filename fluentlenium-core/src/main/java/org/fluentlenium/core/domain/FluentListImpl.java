@@ -264,6 +264,26 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
+    public FluentList<E> clearAllReactInputs() {
+        validateListIsNotEmpty();
+
+        boolean atLeastOne = false;
+        for (E fluentWebElement : this) {
+            if (fluentWebElement.enabled()) {
+                atLeastOne = true;
+                fluentWebElement.clearReactInput();
+            }
+        }
+
+        if (!atLeastOne) {
+            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element enabled."
+                    + " At least one element should be enabled to clear values.");
+        }
+
+        return this;
+    }
+
+    @Override
     public void clearList() {
         list.clear();
     }

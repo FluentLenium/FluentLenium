@@ -5,7 +5,7 @@
 
     <artifactId>fluentlenium-examples-quickstart-firefox</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.0.0</version>
+    <version>4.0.1-SNAPSHOT</version>
 
     <properties>
         <!-- Configure this property to latest available version -->
