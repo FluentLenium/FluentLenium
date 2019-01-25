@@ -122,4 +122,15 @@ public final class UrlUtils { // NOPMD CyclomaticComplexity
         return url.toString();
     }
 
+    /**
+     * Removes file name from URL string
+     *
+     * @param file the file String
+     * @return the URL String
+     */
+    public static String getAbsoluteUrlPathFromFile(String file) {
+        String url = getAbsoluteUrlFromFile(file);
+        return url.substring(0, url.lastIndexOf('/'));
+    }
+
 }

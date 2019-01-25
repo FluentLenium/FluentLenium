@@ -19,5 +19,6 @@ engines:
 ratings:
   paths:
   - "**.java"
+  - "**.groovy"
 
 exclude_paths: []
