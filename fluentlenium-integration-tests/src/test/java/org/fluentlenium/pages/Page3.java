@@ -6,5 +6,5 @@ import org.openqa.selenium.support.FindBy;
 public class Page3 extends IndexPage {
 
     @FindBy(css = "a.go-next")
-    public /* default */ FluentWebElement linkToPage2FoundWithFindByOnPage3;
+    public FluentWebElement linkToPage2FoundWithFindByOnPage3;
 }

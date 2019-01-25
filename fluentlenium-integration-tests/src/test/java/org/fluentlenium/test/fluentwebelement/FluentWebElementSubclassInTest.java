@@ -13,7 +13,7 @@ class FluentWebElementSubclassInTest extends IntegrationFluentTest {
     private ALink linkToPage2;
 
     public static class ALink extends FluentWebElement {
-        public ALink(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        ALink(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
 

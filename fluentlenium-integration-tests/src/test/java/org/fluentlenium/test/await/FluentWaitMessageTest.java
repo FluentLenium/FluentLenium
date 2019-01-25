@@ -112,7 +112,8 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
         FluentWebElement first = disabledCustomLabel;
         assertThat(first.toString()).isEqualTo("custom [hint] (Lazy Element)");
         ThrowableAssert.ThrowingCallable throwingCallable = () -> first.await().until().enabled();
-        assertThatThrownBy(throwingCallable).hasMessageStartingWith("Expected condition failed: Element custom [hint] (Lazy Element) is not enabled")
+        assertThatThrownBy(throwingCallable)
+                .hasMessageStartingWith("Expected condition failed: Element custom [hint] (Lazy Element) is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
 
         first.now();
@@ -192,7 +193,8 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
         FluentList<FluentWebElement> list = disabledCustomLabelList;
         assertThat(list.toString()).isEqualTo("custom [hint] (Lazy Element List)");
         ThrowableAssert.ThrowingCallable throwingCallable = () -> list.await().until().enabled();
-        assertThatThrownBy(throwingCallable).hasMessageStartingWith("Expected condition failed: Elements custom [hint] (Lazy Element List) is not enabled")
+        assertThatThrownBy(throwingCallable)
+                .hasMessageStartingWith("Expected condition failed: Elements custom [hint] (Lazy Element List) is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
 
         list.now();

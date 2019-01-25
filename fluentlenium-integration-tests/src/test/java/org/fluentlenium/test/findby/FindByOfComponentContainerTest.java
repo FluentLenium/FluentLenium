@@ -21,7 +21,7 @@ class FindByOfComponentContainerTest extends IntegrationFluentTest {
     private ContainerIndex page;
 
     public static class SomeFluentWebElement extends FluentWebElement {
-        public SomeFluentWebElement(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
+        SomeFluentWebElement(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
     }
@@ -30,12 +30,12 @@ class FindByOfComponentContainerTest extends IntegrationFluentTest {
         private final WebElement element;
         private final WebDriver driver;
 
-        public SomeWebElementWrapper(WebElement webElement) {
+        SomeWebElementWrapper(WebElement webElement) {
             element = webElement;
             driver = null;
         }
 
-        public SomeWebElementWrapper(WebElement webElement, WebDriver driver) {
+        SomeWebElementWrapper(WebElement webElement, WebDriver driver) {
             element = webElement;
             this.driver = driver;
         }

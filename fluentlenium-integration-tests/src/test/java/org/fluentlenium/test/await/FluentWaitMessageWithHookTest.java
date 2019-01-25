@@ -114,7 +114,8 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
         FluentWebElement first = disabledCustomLabel;
         assertThat(first.toString()).isEqualTo("custom [hint] (Lazy Element)");
         ThrowableAssert.ThrowingCallable throwingCallable = () -> first.await().until().enabled();
-        assertThatThrownBy(throwingCallable).hasMessageStartingWith("Expected condition failed: Element custom [hint] (Lazy Element) is not enabled")
+        assertThatThrownBy(throwingCallable)
+                .hasMessageStartingWith("Expected condition failed: Element custom [hint] (Lazy Element) is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
 
         first.now();
@@ -194,7 +195,8 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
         FluentList<FluentWebElement> list = disabledCustomLabelList;
         assertThat(list.toString()).isEqualTo("custom [hint] (Lazy Element List)");
         ThrowableAssert.ThrowingCallable throwingCallable = () -> list.await().until().enabled();
-        assertThatThrownBy(throwingCallable).hasMessageStartingWith("Expected condition failed: Elements custom [hint] (Lazy Element List) is not enabled")
+        assertThatThrownBy(throwingCallable)
+                .hasMessageStartingWith("Expected condition failed: Elements custom [hint] (Lazy Element List) is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
 
         list.now();
@@ -242,7 +244,8 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         FluentWebElement first = $("#not-found").first();
         assertThat(first.toString()).isEqualTo("By.cssSelector: #not-found (first) (Lazy Element)");
-        assertThatThrownBy(() -> first.await().until().enabled()).hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector: #not-found (first) (Lazy Element)")
+        assertThatThrownBy(() -> first.await().until().enabled())
+                .hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector: #not-found (first) (Lazy Element)")
                 .isExactlyInstanceOf(TimeoutException.class).hasCauseExactlyInstanceOf(NoSuchElementException.class);
     }
 
@@ -251,7 +254,8 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         FluentList<FluentWebElement> list = $("#not-found");
         assertThat(list.toString()).isEqualTo("By.cssSelector: #not-found (Lazy Element List)");
-        assertThatThrownBy(() -> list.await().until().enabled()).hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector: #not-found (Lazy Element List)")
+        assertThatThrownBy(() -> list.await().until().enabled())
+                .hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector: #not-found (Lazy Element List)")
                 .isExactlyInstanceOf(TimeoutException.class);
     }
 }

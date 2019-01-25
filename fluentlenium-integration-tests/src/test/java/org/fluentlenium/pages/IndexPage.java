@@ -12,7 +12,7 @@ public class IndexPage extends FluentPage {
     private FluentWebElement linkToPage2;
 
     @FindBy(css = "a.go-next")
-    public /* default */ FluentWebElement linkToPage2FoundWithFindBy;
+    public FluentWebElement linkToPage2FoundWithFindBy;
 
     @Override
     public String getUrl() {

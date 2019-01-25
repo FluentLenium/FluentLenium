@@ -35,25 +35,25 @@ public class PageTest extends IntegrationFluentTest {
     private Page3 page3;
 
     @Page
-    IndexPage2 page4;
+    private IndexPage2 page4;
 
     @Page
-    IndexPageWithFindByAnnotation indexPageWithFindByAnnotation;
+    private IndexPageWithFindByAnnotation indexPageWithFindByAnnotation;
 
     @Page
-    IndexPageWithFindBysAnnotation indexPageWithFindBysAnnotation;
+    private IndexPageWithFindBysAnnotation indexPageWithFindBysAnnotation;
 
     @Page
-    IndexPageWithFindAllAnnotation indexPageWithFindAllAnnotation;
+    private IndexPageWithFindAllAnnotation indexPageWithFindAllAnnotation;
 
     @Page
-    FailingIndexPageWithFindByAnnotation failingIndexPageWithFindByAnnotation;
+    private FailingIndexPageWithFindByAnnotation failingIndexPageWithFindByAnnotation;
 
     @Page
-    FailingIndexPageWithFindBysAnnotation failingIndexPageWithFindBysAnnotation;
+    private FailingIndexPageWithFindBysAnnotation failingIndexPageWithFindBysAnnotation;
 
     @Page
-    FailingIndexPageWithFindAllAnnotation failingIndexPageWithFindAllAnnotation;
+    private FailingIndexPageWithFindAllAnnotation failingIndexPageWithFindAllAnnotation;
 
     @Test
     void checkGoTo() {
@@ -112,10 +112,10 @@ public class PageTest extends IntegrationFluentTest {
 
     @Test
     void checkManuallyCreatedSupportInjection() {
-        Page4 page4 = newInstance(Page4.class);
-        assertThat(page4.getIndexPage()).isNotNull();
-        assertThat(page4.getPage5()).isNotNull();
-        assertThat(page4.getPage5().getIndexPage()).isNotNull();
+        Page4 page = newInstance(Page4.class);
+        assertThat(page.getIndexPage()).isNotNull();
+        assertThat(page.getPage5()).isNotNull();
+        assertThat(page.getPage5().getIndexPage()).isNotNull();
     }
 
     @Test

@@ -1,13 +1,13 @@
 package org.fluentlenium.test.await;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AwaitWithStaleElementReferenceException extends IntegrationFluentTest {
 
@@ -16,10 +16,11 @@ class AwaitWithStaleElementReferenceException extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
 
     }
+
     @Test
     void givenDefaultWhenStateElementReferenceExceptionIsThrownThenItIsIgnored() {
         assertThrows(TimeoutException.class,
-                ()-> await().atMost(3, SECONDS)
+                () -> await().atMost(3, SECONDS)
                         .untilPredicate(fluent -> {
                             find(".small").clear();
                             throw new StaleElementReferenceException("test");
@@ -29,12 +30,12 @@ class AwaitWithStaleElementReferenceException extends IntegrationFluentTest {
     @Test
     void givenNoDefaultsWhenStateElementReferenceExceptionIsThrownThenItIsNotIgnored() {
         assertThrows(StaleElementReferenceException.class,
-                ()-> await().atMost(3, SECONDS)
+                () -> await().atMost(3, SECONDS)
                         .withNoDefaultsException()
                         .untilPredicate(fluent -> {
-                    find(".small").clear();
-                    throw new StaleElementReferenceException("test");
-                }));
+                            find(".small").clear();
+                            throw new StaleElementReferenceException("test");
+                        }));
     }
 
 }
