@@ -264,6 +264,26 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
+    public FluentList<E> clearAllReactInputs() {
+        validateListIsNotEmpty();
+
+        boolean atLeastOne = false;
+        for (E fluentWebElement : this) {
+            if (fluentWebElement.enabled()) {
+                atLeastOne = true;
+                fluentWebElement.clearReactInput();
+            }
+        }
+
+        if (!atLeastOne) {
+            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element enabled."
+                    + " At least one element should be enabled to clear values.");
+        }
+
+        return this;
+    }
+
+    @Override
     public void clearList() {
         list.clear();
     }
@@ -523,16 +543,37 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         return getHookControl().noHook(function);
     }
 
+    /**
+     * Scrolls to first element of list
+     * @return this object reference to chain methods calls
+     */
     @Override
     public FluentList<E> scrollToCenter() {
         return getJavascriptActions().scrollToCenter();
     }
 
+    /**
+     * Scrolls to first element of list
+     * @return this object reference to chain methods calls
+     */
     @Override
     public FluentList<E> scrollIntoView(boolean alignWithTop) {
         return getJavascriptActions().scrollIntoView(alignWithTop);
     }
 
+    /**
+     * Modifies attributes of first element only
+     * @return this object reference to chain methods calls
+     */
+    @Override
+    public FluentList<E> modifyAttribute(String attributeName, String attributeValue) {
+        return getJavascriptActions().modifyAttribute(attributeName, attributeValue);
+    }
+
+    /**
+     * Scrolls to first element of list
+     * @return this object reference to chain methods calls
+     */
     @Override
     public FluentList<E> scrollIntoView() {
         return getJavascriptActions().scrollIntoView();

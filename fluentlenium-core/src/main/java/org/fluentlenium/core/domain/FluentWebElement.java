@@ -232,6 +232,18 @@ public class FluentWebElement extends Component
     }
 
     /**
+     * Clear React input using Backspace only
+     *
+     * @return fluent web element
+     */
+    public FluentWebElement clearReactInput() {
+        if (this.attribute("value").length() != 0) {
+            javascriptActions.modifyAttribute("value", "");
+        }
+        return this;
+    }
+
+    /**
      * Submit the element
      *
      * @return fluent web element
@@ -560,6 +572,11 @@ public class FluentWebElement extends Component
     @Override
     public FluentWebElement scrollIntoView(boolean alignWithTop) {
         return getJavascriptActions().scrollIntoView(alignWithTop);
+    }
+
+    @Override
+    public FluentWebElement modifyAttribute(String attributeName, String attributeValue) {
+        return getJavascriptActions().modifyAttribute(attributeName, attributeValue);
     }
 
     @Override

@@ -226,7 +226,26 @@ public class FluentListImplTest {
         when(element2.enabled()).thenReturn(false);
         when(element3.enabled()).thenReturn(false);
 
-        assertThatThrownBy(() -> list.submit()).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element enabled");
+        assertThatThrownBy(() -> list.clearAll()).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element enabled");
+    }
+
+    @Test
+    public void testClearAllReactInputs() {
+        when(element2.enabled()).thenReturn(true);
+        when(element3.enabled()).thenReturn(true);
+
+        list.clearAllReactInputs();
+
+        verify(element1, never()).clearReactInput();
+        verify(element2).clearReactInput();
+        verify(element3).clearReactInput();
+
+        assertThatThrownBy(() -> emptyList.clearAllReactInputs()).isExactlyInstanceOf(NoSuchElementException.class);
+
+        when(element2.enabled()).thenReturn(false);
+        when(element3.enabled()).thenReturn(false);
+
+        assertThatThrownBy(() -> list.clearAllReactInputs()).isExactlyInstanceOf(NoSuchElementException.class).hasMessageContaining("has no element enabled");
     }
 
     @Test

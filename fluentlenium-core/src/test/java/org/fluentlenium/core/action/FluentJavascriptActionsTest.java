@@ -27,7 +27,7 @@ public class FluentJavascriptActionsTest {
     @Mock
     private WebElement element;
 
-    FluentJavascriptActions actions;
+    private FluentJavascriptActions actions;
 
     @Before
     public void before() {
@@ -52,5 +52,11 @@ public class FluentJavascriptActionsTest {
     public void testToCenter() {
         actions.scrollToCenter();
         verify(javascript).executeScript("window.scrollTo(0,768 - window.innerHeight / 2)");
+    }
+
+    @Test
+    public void testModifyAttribute() {
+        actions.modifyAttribute("parameter", "value");
+        verify(javascript).executeScript("arguments[0].parameter = arguments[1]", element, "value");
     }
 }
