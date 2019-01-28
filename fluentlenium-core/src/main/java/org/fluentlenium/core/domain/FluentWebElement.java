@@ -32,7 +32,6 @@ import org.fluentlenium.core.wait.FluentWaitElement;
 import org.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
@@ -238,8 +237,8 @@ public class FluentWebElement extends Component
      * @return fluent web element
      */
     public FluentWebElement clearReactInput() {
-        while (this.attribute("value").length() > 0) {
-            this.keyboard().sendKeys(Keys.BACK_SPACE);
+        if (this.attribute("value").length() != 0) {
+            javascriptActions.modifyAttribute("value", "");
         }
         return this;
     }
@@ -573,6 +572,11 @@ public class FluentWebElement extends Component
     @Override
     public FluentWebElement scrollIntoView(boolean alignWithTop) {
         return getJavascriptActions().scrollIntoView(alignWithTop);
+    }
+
+    @Override
+    public FluentWebElement modifyAttribute(String attributeName, String attributeValue) {
+        return getJavascriptActions().modifyAttribute(attributeName, attributeValue);
     }
 
     @Override

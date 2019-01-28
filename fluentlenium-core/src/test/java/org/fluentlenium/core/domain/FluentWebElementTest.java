@@ -12,7 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -64,6 +64,7 @@ public class FluentWebElementTest {
 
         when(driver.getMouse()).thenReturn(mouse);
         when(driver.getKeyboard()).thenReturn(keyboard);
+        when(driver.executeScript("script", "arg1", "arg2")).thenReturn(null);
 
         componentsManager = new ComponentsManager(fluentAdapter);
 
@@ -135,11 +136,23 @@ public class FluentWebElementTest {
     }
 
     @Test
-    public void testClearReactInput() {
+    public void testClearReactInputEmpty() {
         when(fluentElement.attribute("value")).thenReturn("");
         fluentElement.clearReactInput();
         verify(fluentElement, times(2)).attribute("value");
-        verify(keyboard, times(0)).sendKeys(Keys.BACK_SPACE);
+        verify(driver, times(0)).executeScript(
+                "arguments[0].value = arguments[1]",
+                element, "");
+    }
+
+    @Test
+    public void testClearReactInputNonEmpty() {
+        when(fluentElement.attribute("value")).thenReturn("nonEmpty");
+        fluentElement.clearReactInput();
+        verify(fluentElement, times(2)).attribute("value");
+        verify(driver, times(1)).executeScript(
+                "arguments[0].value = arguments[1]",
+                element, "");
     }
 
     @Test
@@ -367,7 +380,7 @@ public class FluentWebElementTest {
     private static class InvalidComponent {
     }
 
-    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices {
+    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices, JavascriptExecutor {
     }
 
     private abstract static class LocatableElement implements WebElement, Locatable {
