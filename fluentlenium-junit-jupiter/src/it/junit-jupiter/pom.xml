@@ -21,7 +21,7 @@
     </modules>
 
     <properties>
-        <it.project.version>4.0.1-SNAPSHOT</it.project.version>
+        <it.project.version>4.1.1-SNAPSHOT</it.project.version>
         <junit.jupiter.version>5.3.2</junit.jupiter.version>
     </properties>
 
