@@ -1,6 +1,7 @@
 package org.fluentlenium.core.action;
 
 import org.assertj.core.api.Assertions;
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +37,9 @@ public class MouseElementActionsTest {
     private LocatableElement element;
 
     @Mock
+    private FluentWebElement fluentWebElement;
+
+    @Mock
     private Coordinates coordinates;
 
     @Before
@@ -61,13 +65,25 @@ public class MouseElementActionsTest {
     }
 
     @Test
-    public void testClick() {
+    public void testClickWebElement() {
         MouseElementActions actions = new MouseElementActions(driver, element);
         actions.click();
 
         verify(mouse).mouseMove(coordinates);
         verify(mouse).click(coordinates);
     }
+
+    @Test
+    public void testClickFluentWebElement() {
+        when(fluentWebElement.getElement()).thenReturn(element);
+
+        MouseElementActions actions = new MouseElementActions(driver, fluentWebElement);
+        actions.click();
+
+        verify(mouse).mouseMove(coordinates);
+        verify(mouse).click(coordinates);
+    }
+
 
     @Test
     public void testContextClick() {
