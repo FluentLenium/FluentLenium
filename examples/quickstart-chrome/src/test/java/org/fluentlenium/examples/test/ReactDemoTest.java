@@ -2,13 +2,12 @@ package org.fluentlenium.examples.test;
 
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
-import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.examples.pages.ReactDemoPage;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ReactDemoTest extends FluentTest {
+public class ReactDemoTest extends AbstractChromeTest {
 
     @Page
     private ReactDemoPage reactDemoPage;
