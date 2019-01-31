@@ -92,6 +92,13 @@ public class MouseActionsTest {
         Assertions.assertThat(actions.basic()).isSameAs(mouse);
     }
 
+    @Test
+    public void moveByOffset() {
+        MouseActions actions = new MouseActions(driver);
+        actions.moveByOffset(1, 1);
+        verify(mouse).mouseMove(null, 1, 1);
+    }
+
     private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices { // NOPMD AbstractNaming
     }
 }
