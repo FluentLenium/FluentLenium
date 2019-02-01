@@ -1,9 +1,10 @@
-package org.fluentlenium.examples.test;
+package org.fluentlenium.examples.test.react;
 
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
 import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.examples.pages.ReactDemoPage;
+import org.fluentlenium.examples.pages.react.ReactDemoPage;
+import org.fluentlenium.examples.test.AbstractChromeTest;
 import org.junit.Before;
 import org.junit.Test;
 

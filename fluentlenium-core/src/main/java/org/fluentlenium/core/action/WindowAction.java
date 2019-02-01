@@ -253,7 +253,8 @@ public class WindowAction {
     }
 
     private void waitForNewWindowToOpen(Set<String> oldWindowHandles) {
-        fluentControl.await().atMost(10, TimeUnit.SECONDS).withMessage("Timed out waiting for new window to open.")
+        fluentControl.await().atMost(10, TimeUnit.SECONDS)
+                .withMessage("Timed out waiting for new window to open.")
                 .untilPredicate(new WindowHandlesCountIs(oldWindowHandles.size() + 1));
     }
 }

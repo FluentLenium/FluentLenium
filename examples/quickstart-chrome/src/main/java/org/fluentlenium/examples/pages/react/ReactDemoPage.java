@@ -1,4 +1,4 @@
-package org.fluentlenium.examples.pages;
+package org.fluentlenium.examples.pages.react;
 
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.PageUrl;
