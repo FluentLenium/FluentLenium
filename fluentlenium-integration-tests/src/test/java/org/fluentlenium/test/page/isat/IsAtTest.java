@@ -33,8 +33,16 @@ class IsAtTest extends IntegrationFluentTest {
 
     @Test
     void testIsAtParameters() {
-        pageOkParameter.go("html");
-        pageOkParameter.isAt("html");
+        String parameter = "html";
+        pageOkParameter.go(parameter);
+        pageOkParameter.isAt(parameter);
+    }
+
+    @Test
+    void testIsAtParametersSpecialSigns() {
+        String parameter = "?X2H2KPV_1a=FX2U-8GJL-RSVA-VRIT-EA1U#";
+        pageOkParameter.go(parameter);
+        pageOkParameter.isAt(parameter);
     }
 
     @FindBy(css = "#oneline")
