@@ -174,8 +174,9 @@ public class UrlTemplate {
     }
 
     private String escapeQuestionMarkQuanitifiers(String fixedTemplate) {
-        if (fixedTemplate.contains("?") && !fixedTemplate.contains("?/"))
+        if (fixedTemplate.contains("?") && !fixedTemplate.contains("?/")) {
             fixedTemplate = fixedTemplate.replace("?", "\\?");
+        }
         return fixedTemplate;
     }
 
