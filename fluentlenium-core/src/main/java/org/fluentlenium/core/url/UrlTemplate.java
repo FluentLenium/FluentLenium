@@ -1,5 +1,6 @@
 package org.fluentlenium.core.url;
 
+import com.google.common.collect.ImmutableList;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
 
@@ -163,28 +164,55 @@ public class UrlTemplate {
 
     private String buildParsePattern() {
         String fixedTemplate = template;
-        if (fixedTemplate.startsWith("/")) {
-            fixedTemplate = fixedTemplate.replaceFirst("/", "/?");
-        } else {
-            fixedTemplate = "/?" + fixedTemplate;
-        }
+        fixedTemplate = escapeQuestionMarkQuanitifiers(fixedTemplate);
+        fixedTemplate = escapeQuantifiers(fixedTemplate);
+        fixedTemplate = ignoreLeadingSlash(fixedTemplate);
+        fixedTemplate = ignoreEndingSlash(fixedTemplate);
+        fixedTemplate = replaceParameters(fixedTemplate);
 
-        if (fixedTemplate.endsWith("/")) {
-            fixedTemplate = fixedTemplate + "?";
-        } else {
-            fixedTemplate = fixedTemplate + "/?";
-        }
+        return fixedTemplate;
+    }
 
+    private String escapeQuestionMarkQuanitifiers(String fixedTemplate) {
+        if (fixedTemplate.contains("?") && !fixedTemplate.contains("?/"))
+            fixedTemplate = fixedTemplate.replace("?", "\\?");
+        return fixedTemplate;
+    }
+
+    private String escapeQuantifiers(String fixedTemplate) {
+        List<String> quantifiers = ImmutableList.of("+", "*");
+        for (String quant : quantifiers) {
+            fixedTemplate = fixedTemplate.replace(quant, "\\" + quant);
+        }
+        return fixedTemplate;
+    }
+
+    private String replaceParameters(String fixedTemplate) {
         for (UrlParameter parameter : parameters.values()) {
             String replacementPattern = "%s([^/]+)";
             if (parameter.isOptional()) {
-                replacementPattern = "(?:" + replacementPattern + ")?";
+                replacementPattern = String.format("(?:%s)?", replacementPattern);
             }
             fixedTemplate = fixedTemplate.replaceAll(Pattern.quote(parameter.getMatch()),
                     String.format(replacementPattern, parameter.getPath() == null ? "" : parameter.getPath()));
         }
-
         return fixedTemplate;
+    }
+
+    private String ignoreEndingSlash(String fixedTemplate) {
+        if (fixedTemplate.endsWith("/")) {
+            return fixedTemplate + "?";
+        }
+
+        return fixedTemplate + "/?";
+    }
+
+    private String ignoreLeadingSlash(String fixedTemplate) {
+        if (fixedTemplate.startsWith("/")) {
+            return fixedTemplate.replaceFirst("/", "/?");
+        }
+
+        return "/?" + fixedTemplate;
     }
 
     /**
@@ -194,8 +222,8 @@ public class UrlTemplate {
      * @return properties
      */
     public ParsedUrlTemplate parse(String input) {
-        String noQueryInput = input;
-        List<NameValuePair> queryParameters = new ArrayList<>();
+        String noQueryInput;
+        List<NameValuePair> queryParameters;
 
         try {
             URIBuilder uriBuilder = new URIBuilder(input);
@@ -208,13 +236,15 @@ public class UrlTemplate {
 
         Pattern pathRegex = Pattern.compile(buildParsePattern());
 
-        Matcher matcher = pathRegex.matcher(noQueryInput);
-        boolean matches = matcher.matches();
+        Matcher matcherFullInput = pathRegex.matcher(input);
+        Matcher matcherNoQueryInput = pathRegex.matcher(noQueryInput);
+
+        boolean matches = matcherNoQueryInput.matches() || matcherFullInput.matches();
 
         LinkedHashMap<String, String> parsedValues = new LinkedHashMap<>();
         if (matches) {
-            for (int i = 0; i < parameterNames.size() && i < matcher.groupCount(); i++) {
-                String value = matcher.group(i + 1);
+            for (int i = 0; i < parameterNames.size() && i < matcherNoQueryInput.groupCount(); i++) {
+                String value = matcherNoQueryInput.group(i + 1);
                 if (value != null) {
                     parsedValues.put(parameterNames.get(i), value);
                 }
