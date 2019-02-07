@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.cucumber;
+package cucumber.runtime.java.fluentlenium;
 
 import cucumber.api.java.ObjectFactory;
 import cucumber.runtime.CucumberException;
@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static java.util.Objects.nonNull;
-import static org.fluentlenium.adapter.cucumber.FluentTestContainer.setConfigClass;
 import static org.fluentlenium.adapter.cucumber.FluentTestContainer.FLUENT_TEST;
+import static org.fluentlenium.adapter.cucumber.FluentTestContainer.setConfigClass;
 
 /**
  * It is an object factory for creating Cucumber steps objects in FluentLenium injection container
@@ -18,17 +18,9 @@ public class FluentObjectFactory implements ObjectFactory {
 
     private final Map<Class<?>, Object> instances = new HashMap<>();
 
-    private final Class<?> initClass;
+    private static Class<?> initClass;
     private Class<?> configClass;
 
-    /**
-     * Creating instance of FluentObjectFactory and sets FluentCucumberTest instance.
-     *
-     * @param initClass class annotated with {@link FluentConfiguration} annotation
-     */
-    public FluentObjectFactory(Class<?> initClass) {
-        this.initClass = initClass;
-    }
 
     @Override
     public void start() {
@@ -82,7 +74,6 @@ public class FluentObjectFactory implements ObjectFactory {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private <T> T cacheNewInstance(Class<T> type) {
         try {
             T instance = FLUENT_TEST.injector().newInstance(type);
@@ -106,5 +97,9 @@ public class FluentObjectFactory implements ObjectFactory {
         } else {
             return null;
         }
+    }
+
+    public static void setInitClass(Class clazz) {
+        initClass = clazz;
     }
 }
