@@ -20,12 +20,19 @@ public class FluentObjectFactory implements ObjectFactory {
 
     private static Class<?> initClass;
     private Class<?> configClass;
+    private Class<?> initConfigClass;
 
+    public FluentObjectFactory() {
+        if(initClass != null) {
+            initConfigClass = initClass;
+            initClass = null;
+        }
+    }
 
     @Override
     public void start() {
-        if (nonNull(initClass)) {
-            setConfigClass(initClass);
+        if (nonNull(initConfigClass)) {
+            setConfigClass(initConfigClass);
             FLUENT_TEST.instance();
             FLUENT_TEST.before();
 
@@ -41,7 +48,7 @@ public class FluentObjectFactory implements ObjectFactory {
 
     @Override
     public void stop() {
-        if (initClass != null) {
+        if (initConfigClass != null) {
             FLUENT_TEST.after();
         }
 
@@ -51,7 +58,7 @@ public class FluentObjectFactory implements ObjectFactory {
 
     @Override
     public boolean addClass(Class<?> aClass) {
-        if (initClass == null && configClass == null) {
+        if (initConfigClass == null && configClass == null) {
             configClass = checkClassForConfiguration(aClass);
             if (nonNull(configClass)) {
                 setConfigClass(configClass);
