@@ -80,6 +80,22 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     }
 
     @Override
+    public FluentWebElementAssert isPresent() {
+        if (!actual.present()) {
+            failWithMessage("Element in assertion is not present");
+        }
+        return this;
+    }
+
+    @Override
+    public FluentWebElementAssert isNotPresent() {
+        if (actual.present()) {
+            failWithMessage("Element in assertion is present");
+        }
+        return this;
+    }
+
+    @Override
     public FluentWebElementAssert hasText(String textToFind) {
         String actualText = actual.text();
         if (!actualText.contains(textToFind)) {

@@ -72,6 +72,30 @@ public class FluentWebElementTest {
     }
 
     @Test
+    public void testIsPresentOk() {
+        when(element.present()).thenReturn(true);
+        elementAssert.isPresent();
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testIsPresentKo() {
+        when(element.present()).thenReturn(false);
+        elementAssert.isPresent();
+    }
+
+    @Test
+    public void testIsNotPresentOk() {
+        when(element.present()).thenReturn(false);
+        elementAssert.isNotPresent();
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testIsNotPresentdKo() {
+        when(element.present()).thenReturn(true);
+        elementAssert.isNotPresent();
+    }
+
+    @Test
     public void testIsDisplayedOk() {
         when(element.displayed()).thenReturn(true);
         elementAssert.isDisplayed();
