@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.cucumber.unit;
 
-import org.fluentlenium.adapter.cucumber.FluentObjectFactory;
+import cucumber.runtime.java.fluentlenium.FluentObjectFactory;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
@@ -16,7 +16,7 @@ public class FluentObjectFactoryTest {
 
     @Before
     public void before() {
-        objectFactory = new FluentObjectFactory(null);
+        objectFactory = new FluentObjectFactory();
         objectFactory.start();
     }
 

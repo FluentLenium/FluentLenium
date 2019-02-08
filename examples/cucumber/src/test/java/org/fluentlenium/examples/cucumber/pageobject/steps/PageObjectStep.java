@@ -21,7 +21,7 @@ public class PageObjectStep extends FluentCucumberTest {
 
     @Given(value = "Visit duckduckgo")
     public void step1() {
-        page.go();
+        goTo(page);
     }
 
     @When(value = "I search FluentLenium")

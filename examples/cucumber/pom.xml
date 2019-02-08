@@ -14,7 +14,6 @@
     <properties>
         <java.version>11</java.version>
         <fluentlenium.version>${project.version}</fluentlenium.version>
-        <cucumber.version>3.0.2</cucumber.version>
     </properties>
 
     <dependencies>
@@ -70,7 +69,7 @@
                 </executions>
                 <configuration>
                     <includes>
-                        <include>**/BasicTest.java</include>
+                        <include>**/BasicRunner.java</include>
                     </includes>
                 </configuration>
             </plugin>

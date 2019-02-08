@@ -6,8 +6,12 @@ import org.fluentlenium.adapter.cucumber.integration.noinheritance.NoInheritance
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import static org.junit.runners.Suite.SuiteClasses;
+
 @RunWith(Suite.class)
-@Suite.SuiteClasses({NoInheritanceSuite.class, InheritanceSuite.class, })
+@SuiteClasses({
+        NoInheritanceSuite.class,
+        InheritanceSuite.class})
 @NotThreadSafe
 public class IntegrationSuite {
 }
