@@ -14,7 +14,7 @@
     <description>Cucumber Extension for FluentLenium</description>
 
     <properties>
-        <cucumber.version>3.0.2</cucumber.version>
+        <cucumber.version>4.2.2</cucumber.version>
     </properties>
 
     <dependencies>
@@ -32,27 +32,18 @@
             <artifactId>mockito-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>htmlunit-driver</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-core</artifactId>
+            <artifactId>cucumber-java8</artifactId>
             <version>${cucumber.version}</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>${cucumber.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java8</artifactId>
             <version>${cucumber.version}</version>
         </dependency>
         <dependency>
