@@ -18,12 +18,12 @@ public class FluentObjectFactory implements ObjectFactory {
 
     private final Map<Class<?>, Object> instances = new HashMap<>();
 
-    private static Class<?> initClass;
+    private static Class<?> initClass;  // NOPMD
     private Class<?> configClass;
     private Class<?> initConfigClass;
 
     public FluentObjectFactory() {
-        if(initClass != null) {
+        if (initClass != null) {
             initConfigClass = initClass;
             initClass = null;
         }

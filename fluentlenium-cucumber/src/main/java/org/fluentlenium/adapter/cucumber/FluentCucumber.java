@@ -22,7 +22,7 @@ public class FluentCucumber extends Cucumber {
         this(clazz, shouldInitConfiguration(clazz));
     }
 
-    public FluentCucumber(Class clazz, Object obj) throws InitializationError, IOException {
+    public FluentCucumber(Class clazz, Object obj) throws InitializationError, IOException { // NOPMD
         super(clazz);
     }
 
