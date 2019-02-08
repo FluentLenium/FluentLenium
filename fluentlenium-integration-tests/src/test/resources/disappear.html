@@ -1,0 +1,19 @@
+<html>
+<head>
+    <title>size change page</title>
+    <script lang="javascript">
+        function removeNewRowFromContainer() {
+            document.getElementsByClassName("row")[0].remove();
+        }
+    </script>
+</head>
+<body>
+<script lang="javascript">
+    window.setTimeout(removeNewRowFromContainer, 2000)
+</script>
+
+<div class="container2">
+    <div class="row">row</div>
+</div>
+</body>
+</html>
