@@ -29,7 +29,7 @@ public class FluentWebElementPresentTest extends IntegrationTest {
     }
 
     @Test
-    public void testIsNotDisplayedNegative() {
+    public void testIsNotPresentNegative() {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el("#disabled")).isNotPresent())
                 .isInstanceOf(AssertionError.class)
