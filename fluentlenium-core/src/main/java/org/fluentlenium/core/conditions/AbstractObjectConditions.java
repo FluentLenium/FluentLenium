@@ -33,6 +33,8 @@ public abstract class AbstractObjectConditions<T> implements Conditions<T>, Cond
 
     @Override
     public boolean verify(Predicate<T> predicate) {
+        // Set debug below
+        // You'll see true for present() and NoSuchElementException for displayed()
         boolean predicateResult = predicate.test(object);
         if (negation) {
             predicateResult = !predicateResult;
