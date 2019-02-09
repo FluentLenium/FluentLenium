@@ -9,7 +9,6 @@
     <artifactId>fluentlenium-core</artifactId>
     <packaging>jar</packaging>
 
-
     <name>FluentLenium Core</name>
     <description>Core of FluentLenium</description>
 
