@@ -8,7 +8,6 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.FindBy;
 

@@ -2,7 +2,6 @@ package org.fluentlenium.assertj.integration.element;
 
 import org.fluentlenium.assertj.integration.IntegrationTest;
 import org.junit.Test;
-import org.openqa.selenium.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
