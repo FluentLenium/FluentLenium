@@ -1,4 +1,4 @@
-package org.fluentlenium.test.await.not;
+package org.fluentlenium.test.await.negate;
 
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.test.IntegrationFluentTest;
