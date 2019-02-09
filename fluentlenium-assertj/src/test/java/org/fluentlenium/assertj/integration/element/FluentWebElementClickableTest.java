@@ -2,7 +2,6 @@ package org.fluentlenium.assertj.integration.element;
 
 import org.fluentlenium.assertj.integration.IntegrationTest;
 import org.junit.Test;
-import org.openqa.selenium.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
@@ -27,8 +26,8 @@ public class FluentWebElementClickableTest extends IntegrationTest {
     public void testIsClickableNotPresent() {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el("#nonexisting")).isClickable())
-                .isInstanceOf(NoSuchElementException.class)
-                .hasMessageContaining("is not present");
+                .isInstanceOf(AssertionError.class)
+                .hasMessage("Element in assertion is not present");
     }
 
     @Test
@@ -49,8 +48,8 @@ public class FluentWebElementClickableTest extends IntegrationTest {
     public void testIsNotClickableNotPresent() {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el("#nonexisting")).isNotClickable())
-                .isInstanceOf(NoSuchElementException.class)
-                .hasMessageContaining("is not present");
+                .isInstanceOf(AssertionError.class)
+                .hasMessage("Element in assertion is not present");
     }
 
 }

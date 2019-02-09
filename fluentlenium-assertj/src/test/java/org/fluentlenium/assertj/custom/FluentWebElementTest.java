@@ -25,6 +25,7 @@ public class FluentWebElementTest {
 
     @Test
     public void testIsEnabledOk() {
+        when(element.present()).thenReturn(true);
         when(element.enabled()).thenReturn(true);
         elementAssert.isEnabled();
     }
@@ -37,6 +38,7 @@ public class FluentWebElementTest {
 
     @Test
     public void testIsNotEnabledOk() {
+        when(element.present()).thenReturn(true);
         when(element.enabled()).thenReturn(false);
         elementAssert.isNotEnabled();
     }
@@ -49,6 +51,7 @@ public class FluentWebElementTest {
 
     @Test
     public void testIsClickableOk() {
+        when(element.present()).thenReturn(true);
         when(element.clickable()).thenReturn(true);
         elementAssert.isClickable();
     }
@@ -61,6 +64,7 @@ public class FluentWebElementTest {
 
     @Test
     public void testIsNotClickabledOk() {
+        when(element.present()).thenReturn(true);
         when(element.clickable()).thenReturn(false);
         elementAssert.isNotClickable();
     }
@@ -97,6 +101,7 @@ public class FluentWebElementTest {
 
     @Test
     public void testIsDisplayedOk() {
+        when(element.present()).thenReturn(true);
         when(element.displayed()).thenReturn(true);
         elementAssert.isDisplayed();
     }
@@ -109,6 +114,7 @@ public class FluentWebElementTest {
 
     @Test
     public void testIsNotDisplayed() {
+        when(element.present()).thenReturn(true);
         when(element.displayed()).thenReturn(false);
         elementAssert.isNotDisplayed();
     }
@@ -121,6 +127,7 @@ public class FluentWebElementTest {
 
     @Test
     public void testIsNotSelectedOk() {
+        when(element.present()).thenReturn(true);
         when(element.selected()).thenReturn(false);
         elementAssert.isNotSelected();
     }
@@ -133,6 +140,7 @@ public class FluentWebElementTest {
 
     @Test
     public void testIsSelectedOk() {
+        when(element.present()).thenReturn(true);
         when(element.selected()).thenReturn(true);
         elementAssert.isSelected();
     }

@@ -8,7 +8,6 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.FindBy;
 
@@ -254,7 +253,7 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
         assertThat(first.toString()).isEqualTo("By.cssSelector: #not-found (first) (Lazy Element)");
         assertThatThrownBy(() -> first.await().until().enabled()).hasMessageStartingWith(
                 "Expected condition failed: Element By.cssSelector: #not-found (first) (Lazy Element) is not enabled")
-                .isExactlyInstanceOf(TimeoutException.class).hasCauseExactlyInstanceOf(NoSuchElementException.class);
+                .isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
