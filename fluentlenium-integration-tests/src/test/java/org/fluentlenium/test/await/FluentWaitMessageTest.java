@@ -254,7 +254,7 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
         assertThat(first.toString()).isEqualTo("By.cssSelector: #not-found (first) (Lazy Element)");
         assertThatThrownBy(() -> first.await().until().enabled()).hasMessageStartingWith(
                 "Expected condition failed: Element By.cssSelector: #not-found (first) (Lazy Element) is not enabled")
-                .isExactlyInstanceOf(TimeoutException.class).hasCauseExactlyInstanceOf(NoSuchElementException.class);
+                .isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test

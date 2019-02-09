@@ -28,8 +28,8 @@ public class FluentWebElementDisplayedTest extends IntegrationTest {
     public void testIsDisplayedNotPresent() {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el("#nonexisting")).isDisplayed())
-                .isInstanceOf(NoSuchElementException.class)
-                .hasMessageContaining("is not present");
+                .isInstanceOf(AssertionError.class)
+                .hasMessage("Element in assertion is not present");
     }
 
     @Test
@@ -51,7 +51,7 @@ public class FluentWebElementDisplayedTest extends IntegrationTest {
     public void testIsNotDisplayedNotPresent() {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el("#nonexisting")).isNotDisplayed())
-                .isInstanceOf(NoSuchElementException.class)
-                .hasMessageContaining("is not present");
+                .isInstanceOf(AssertionError.class)
+                .hasMessage("Element in assertion is not present");
     }
 }

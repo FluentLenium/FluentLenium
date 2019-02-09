@@ -2,18 +2,33 @@
 <head>
     <title>size change page</title>
     <script lang="javascript">
-        function removeNewRowFromContainer() {
+        function removeRow() {
             document.getElementsByClassName("row")[0].remove();
         }
+        function makeRowNotDisplayed() {
+            document.getElementsByClassName("row")[0].style.display="none";
+        }
+        function makeRowDisabled() {
+            document.getElementsByClassName("row")[0].setAttribute("disabled", "");
+        }
+        function setVolvoSelected() {
+            document.getElementById("mySelect").value = 'volvo';
+        }
+
     </script>
 </head>
 <body>
 <script lang="javascript">
-    window.setTimeout(removeNewRowFromContainer, 2000)
+    window.setTimeout(removeRow, 1000);
 </script>
 
 <div class="container2">
     <div class="row">row</div>
+
+    <select id="mySelect">
+        <option value="volvo">Volvo</option>
+        <option value="saab" selected>Saab</option>
+    </select>
 </div>
 </body>
 </html>

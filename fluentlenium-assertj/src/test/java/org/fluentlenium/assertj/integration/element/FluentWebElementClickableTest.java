@@ -27,8 +27,8 @@ public class FluentWebElementClickableTest extends IntegrationTest {
     public void testIsClickableNotPresent() {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el("#nonexisting")).isClickable())
-                .isInstanceOf(NoSuchElementException.class)
-                .hasMessageContaining("is not present");
+                .isInstanceOf(AssertionError.class)
+                .hasMessage("Element in assertion is not present");
     }
 
     @Test
@@ -49,8 +49,8 @@ public class FluentWebElementClickableTest extends IntegrationTest {
     public void testIsNotClickableNotPresent() {
         standalone.goTo(DEFAULT_URL);
         assertThatThrownBy(() -> assertThat(standalone.el("#nonexisting")).isNotClickable())
-                .isInstanceOf(NoSuchElementException.class)
-                .hasMessageContaining("is not present");
+                .isInstanceOf(AssertionError.class)
+                .hasMessage("Element in assertion is not present");
     }
 
 }

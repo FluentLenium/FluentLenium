@@ -45,6 +45,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -739,7 +740,13 @@ public class FluentWebElement extends Component
      * @see WebElement#isDisplayed()
      */
     public boolean displayed() {
-        return webElement.isDisplayed();
+        boolean displayed;
+        try {
+            displayed = webElement.isDisplayed();
+        } catch (NoSuchElementException e) {
+            displayed = false;
+        }
+        return displayed;
     }
 
     /**
@@ -749,7 +756,13 @@ public class FluentWebElement extends Component
      * @see WebElement#isEnabled()
      */
     public boolean enabled() {
-        return webElement.isEnabled();
+        boolean enabled;
+        try {
+            enabled = webElement.isEnabled();
+        } catch (NoSuchElementException e) {
+            enabled = false;
+        }
+        return enabled;
     }
 
     /**
@@ -759,7 +772,13 @@ public class FluentWebElement extends Component
      * @see WebElement#isSelected()
      */
     public boolean selected() {
-        return webElement.isSelected();
+        boolean selected;
+        try {
+            selected = webElement.isSelected();
+        } catch (NoSuchElementException e) {
+            selected = false;
+        }
+        return selected;
     }
 
     /**
@@ -769,7 +788,14 @@ public class FluentWebElement extends Component
      */
 
     public boolean clickable() {
-        return ExpectedConditions.elementToBeClickable(getElement()).apply(control.getDriver()) != null;
+        boolean clickable;
+        try {
+            clickable = ExpectedConditions.elementToBeClickable(getElement())
+                    .apply(control.getDriver()) != null;
+        } catch (NoSuchElementException e) {
+            clickable = false;
+        }
+        return clickable;
     }
 
     /**
