@@ -1,16 +1,8 @@
 package org.fluentlenium.core.domain;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.Stack;
-import java.util.function.Function;
-
-import org.fluentlenium.configuration.ConfigurationFactory;
-import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.SeleniumDriverControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
 import org.fluentlenium.core.action.FluentActions;
@@ -18,29 +10,37 @@ import org.fluentlenium.core.action.FluentJavascriptActionsImpl;
 import org.fluentlenium.core.action.KeyboardElementActions;
 import org.fluentlenium.core.action.MouseElementActions;
 import org.fluentlenium.core.action.WindowAction;
+import org.fluentlenium.core.alert.Alert;
+import org.fluentlenium.core.alert.AlertControl;
+import org.fluentlenium.core.capabilities.CapabilitiesControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.WebElementConditions;
+import org.fluentlenium.core.css.CssControl;
 import org.fluentlenium.core.css.CssSupport;
 import org.fluentlenium.core.dom.Dom;
+import org.fluentlenium.core.events.EventsControl;
 import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookControl;
 import org.fluentlenium.core.hook.HookControlImpl;
 import org.fluentlenium.core.hook.HookDefinition;
 import org.fluentlenium.core.inject.ContainerContext;
+import org.fluentlenium.core.inject.FluentInjectControl;
 import org.fluentlenium.core.label.FluentLabel;
 import org.fluentlenium.core.label.FluentLabelImpl;
+import org.fluentlenium.core.navigation.NavigationControl;
 import org.fluentlenium.core.proxy.FluentProxyState;
 import org.fluentlenium.core.proxy.LocatorHandler;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.script.FluentJavascript;
+import org.fluentlenium.core.script.JavascriptControl;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchControl;
 import org.fluentlenium.core.search.SearchFilter;
+import org.fluentlenium.core.snapshot.SnapshotControl;
 import org.fluentlenium.core.wait.FluentWaitElement;
 import org.fluentlenium.utils.SupplierOfInstance;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
@@ -53,13 +53,22 @@ import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.Stack;
+import java.util.function.Function;
+
 /**
  * Wraps a Selenium {@link WebElement}. It provides an enhanced API to control selenium element.
  */
 @SuppressWarnings({"PMD.GodClass", "PMD.ExcessivePublicCount"})
 public class FluentWebElement extends Component
         implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>, FluentProxyState<FluentWebElement>,
-        SearchControl<FluentWebElement>, HookControl<FluentWebElement>, FluentLabel<FluentWebElement> {
+        SearchControl<FluentWebElement>, HookControl<FluentWebElement>, FluentLabel<FluentWebElement>,
+        NavigationControl, JavascriptControl, AlertControl, SnapshotControl, EventsControl, SeleniumDriverControl,
+        CssControl, FluentInjectControl, CapabilitiesControl {
     private final Search search;
     private final Dom dom;
     private final MouseElementActions mouseActions;
@@ -114,390 +123,139 @@ public class FluentWebElement extends Component
         return label;
     }
 
-
+    @Override
     public FluentJavascript executeScript(String script, Object... args) {
         return control.executeScript(script, args);
     }
 
+    @Override
     public FluentJavascript executeAsyncScript(String script, Object... args) {
         return control.executeAsyncScript(script, args);
     }
 
+    @Override
     public Alert alert() {
         return control.alert();
     }
 
+    @Override
     public void takeHtmlDump() {
         control.takeHtmlDump();
     }
 
+    @Override
     public void takeHtmlDump(String fileName) {
         control.takeHtmlDump(fileName);
     }
 
+    @Override
     public boolean canTakeScreenShot() {
         return control.canTakeScreenShot();
     }
 
+    @Override
     public void takeScreenshot() {
         control.takeScreenshot();
     }
 
+    @Override
     public void takeScreenshot(String fileName) {
         control.takeScreenshot(fileName);
     }
 
+    @Override
     public EventsRegistry events() {
         return control.events();
     }
 
+    @Override
     public <P extends FluentPage> P goTo(P page) {
         return control.goTo(page);
     }
 
+    @Override
     public void goTo(String url) {
         control.goTo(url);
     }
 
+    @Override
     public void goToInNewTab(String url) {
         control.goToInNewTab(url);
     }
 
+    @Override
     public void switchTo(FluentList<? extends FluentWebElement> elements) {
         control.switchTo(elements);
     }
 
+    @Override
     public void switchTo(FluentWebElement element) {
         control.switchTo(element);
     }
 
+    @Override
     public void switchTo() {
         control.switchTo();
     }
 
+    @Override
     public void switchToDefault() {
         control.switchToDefault();
     }
 
+    @Override
     public String pageSource() {
         return control.pageSource();
     }
 
+    @Override
     public WindowAction window() {
         return control.window();
     }
 
+    @Override
     public Set<Cookie> getCookies() {
         return control.getCookies();
     }
 
+    @Override
     public Cookie getCookie(String name) {
         return control.getCookie(name);
     }
 
+    @Override
     public String url() {
         return control.url();
     }
 
+    @Override
     public WebDriver getDriver() {
         return control.getDriver();
     }
 
+    @Override
     public CssSupport css() {
         return control.css();
     }
 
+    @Override
     public ContainerContext inject(Object container) {
         return control.inject(container);
     }
 
+    @Override
     public ContainerContext injectComponent(Object componentContainer, Object parentContainer, SearchContext context) {
         return control.injectComponent(componentContainer, parentContainer, context);
     }
 
+    @Override
     public <T> T newInstance(Class<T> cls) {
         return control.newInstance(cls);
     }
 
-
-    public FluentWebElement newFluent(WebElement element) {
-        return control.newFluent(element);
-    }
-
-    public <T> T newComponent(Class<T> componentClass, WebElement element) {
-        return control.newComponent(componentClass, element);
-    }
-
-    public FluentList<FluentWebElement> newFluentList() {
-        return control.newFluentList();
-    }
-
-    public FluentList<FluentWebElement> newFluentList(FluentWebElement... elements) {
-        return control.newFluentList(elements);
-    }
-
-    public FluentList<FluentWebElement> newFluentList(List<FluentWebElement> elements) {
-        return control.newFluentList(elements);
-    }
-
-    public FluentList<FluentWebElement> asFluentList(WebElement... elements) {
-        return control.asFluentList(elements);
-    }
-
-    public FluentList<FluentWebElement> asFluentList(Iterable<WebElement> elements) {
-        return control.asFluentList(elements);
-    }
-
-    public FluentList<FluentWebElement> asFluentList(List<WebElement> elements) {
-        return control.asFluentList(elements);
-    }
-
-    public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass) {
-        return control.newFluentList(componentClass);
-    }
-
-    public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass, T... elements) {
-        return control.newFluentList(componentClass, elements);
-    }
-
-    public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass, List<T> elements) {
-        return control.newFluentList(componentClass, elements);
-    }
-
-    public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, WebElement... elements) {
-        return control.asFluentList(componentClass, elements);
-    }
-
-    public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, Iterable<WebElement> elements) {
-        return control.asFluentList(componentClass, elements);
-    }
-
-    public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, List<WebElement> elements) {
-        return control.asFluentList(componentClass, elements);
-    }
-
-    public <T> ComponentList<T> newComponentList(Class<T> componentClass) {
-        return control.newComponentList(componentClass);
-    }
-
-    public <T> ComponentList<T> asComponentList(Class<T> componentClass, WebElement... elements) {
-        return control.asComponentList(componentClass, elements);
-    }
-
-    public <T> ComponentList asComponentList(Class<T> componentClass, Iterable<WebElement> elements) {
-        return control.asComponentList(componentClass, elements);
-    }
-
-    public <T> ComponentList<T> asComponentList(Class<T> componentClass, List<WebElement> elements) {
-        return control.asComponentList(componentClass, elements);
-    }
-
-    public <T> ComponentList<T> newComponentList(Class<T> componentClass, T... componentsList) {
-        return control.newComponentList(componentClass, componentsList);
-    }
-
-    public <T> ComponentList<T> newComponentList(Class<T> componentClass, List<T> componentsList) {
-        return control.newComponentList(componentClass, componentsList);
-    }
-
-    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass) {
-        return control.newComponentList(listClass, componentClass);
-    }
-
-    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, WebElement... elements) {
-        return control.asComponentList(listClass, componentClass, elements);
-    }
-
-    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, Iterable<WebElement> elements) {
-        return control.asComponentList(listClass, componentClass, elements);
-    }
-
-    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, List<WebElement> elements) {
-        return control.asComponentList(listClass, componentClass, elements);
-    }
-
-    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, T... componentsList) {
-        return control.newComponentList(listClass, componentClass, componentsList);
-    }
-
-    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, List<T> componentsList) {
-        return control.newComponentList(listClass, componentClass, componentsList);
-    }
-
-    public boolean isComponentClass(Class<?> componentClass) {
-        return control.isComponentClass(componentClass);
-    }
-
+    @Override
     public Capabilities capabilities() {
         return control.capabilities();
-    }
-
-    public boolean isComponentListClass(Class<? extends List<?>> componentListClass) {
-        return control.isComponentClass(componentListClass);
-    }
-
-    public String getWebDriver() {
-        return control.getWebDriver();
-    }
-
-    public String getRemoteUrl() {
-        return control.getRemoteUrl();
-    }
-
-    public Capabilities getCapabilities() {
-        return control.getCapabilities();
-    }
-
-    public String getBaseUrl() {
-        return control.getBaseUrl();
-    }
-
-    public ConfigurationProperties.DriverLifecycle getDriverLifecycle() {
-        return control.getDriverLifecycle();
-    }
-
-    public Long getBrowserTimeout() {
-        return control.getBrowserTimeout();
-    }
-
-    public Integer getBrowserTimeoutRetries() {
-        return control.getBrowserTimeoutRetries();
-    }
-
-    public Boolean getDeleteCookies() {
-        return control.getDeleteCookies();
-    }
-
-    public Long getPageLoadTimeout() {
-        return control.getPageLoadTimeout();
-    }
-
-    public Long getImplicitlyWait() {
-        return control.getImplicitlyWait();
-    }
-
-    public Long getScriptTimeout() {
-        return control.getScriptTimeout();
-    }
-
-    public Long getAwaitAtMost() {
-        return control.getAwaitAtMost();
-    }
-
-    public Long getAwaitPollingEvery() {
-        return control.getAwaitPollingEvery();
-    }
-
-    public Boolean getEventsEnabled() {
-        return control.getEventsEnabled();
-    }
-
-    public String getScreenshotPath() {
-        return control.getScreenshotPath();
-    }
-
-    public ConfigurationProperties.TriggerMode getScreenshotMode() {
-        return control.getScreenshotMode();
-    }
-
-    public String getHtmlDumpPath() {
-        return control.getHtmlDumpPath();
-    }
-
-    public ConfigurationProperties.TriggerMode getHtmlDumpMode() {
-        return control.getHtmlDumpMode();
-    }
-
-    public Class<? extends ConfigurationProperties> getConfigurationDefaults() {
-        return control.getConfigurationDefaults();
-    }
-
-    public Class<? extends ConfigurationFactory> getConfigurationFactory() {
-        return control.getConfigurationFactory();
-    }
-
-    public String getCustomProperty(String propertyName) {
-        return control.getCustomProperty(propertyName);
-    }
-
-    public void setWebDriver(String webDriver) {
-        control.setWebDriver(webDriver);
-    }
-
-    public void setBrowserTimeout(Long timeout) {
-        control.setBrowserTimeout(timeout);
-    }
-
-    public void setBrowserTimeoutRetries(Integer retriesNumber) {
-        control.setBrowserTimeoutRetries(retriesNumber);
-    }
-
-    public void setRemoteUrl(String remoteUrl) {
-        control.setRemoteUrl(remoteUrl);
-    }
-
-    public void setCapabilities(Capabilities capabilities) {
-        control.setCapabilities(capabilities);
-    }
-
-    public void setConfigurationFactory(Class<? extends ConfigurationFactory> configurationFactory) {
-        control.setConfigurationFactory(configurationFactory);
-    }
-
-    public void setDriverLifecycle(ConfigurationProperties.DriverLifecycle driverLifecycle) {
-        control.setDriverLifecycle(driverLifecycle);
-    }
-
-    public void setDeleteCookies(Boolean deleteCookies) {
-        control.setDeleteCookies(deleteCookies);
-    }
-
-    public void setBaseUrl(String baseUrl) {
-        control.setBaseUrl(baseUrl);
-    }
-
-    public void setPageLoadTimeout(Long pageLoadTimeout) {
-        control.setPageLoadTimeout(pageLoadTimeout);
-    }
-
-    public void setImplicitlyWait(Long implicitlyWait) {
-        control.setImplicitlyWait(implicitlyWait);
-    }
-
-    public void setAwaitAtMost(Long awaitAtMost) {
-        control.setAwaitAtMost(awaitAtMost);
-    }
-
-    public void setAwaitPollingEvery(Long awaitPollingEvery) {
-        control.setAwaitPollingEvery(awaitPollingEvery);
-    }
-
-    public void setScriptTimeout(Long scriptTimeout) {
-        control.setScriptTimeout(scriptTimeout);
-    }
-
-    public void setEventsEnabled(Boolean eventsEnabled) {
-        control.setEventsEnabled(eventsEnabled);
-    }
-
-    public void setScreenshotPath(String screenshotPath) {
-        control.setScreenshotPath(screenshotPath);
-    }
-
-    public void setScreenshotMode(ConfigurationProperties.TriggerMode screenshotMode) {
-        control.setScreenshotMode(screenshotMode);
-    }
-
-    public void setHtmlDumpPath(String htmlDumpPath) {
-        control.setHtmlDumpPath(htmlDumpPath);
-    }
-
-    public void setHtmlDumpMode(ConfigurationProperties.TriggerMode htmlDumpMode) {
-        control.setHtmlDumpMode(htmlDumpMode);
-    }
-
-    public void setCustomProperty(String key, String value) {
-        control.setCustomProperty(key, value);
     }
 
     @Override
@@ -871,11 +629,6 @@ public class FluentWebElement extends Component
     }
 
     @Override
-    public FluentList<FluentWebElement> $(List<WebElement> rawElements) {
-        return search.$(rawElements);
-    }
-
-    @Override
     public FluentWebElement el(WebElement rawElement) {
         return search.el(rawElement);
     }
@@ -890,13 +643,13 @@ public class FluentWebElement extends Component
     }
 
     @Override
-    public Fill fill() {
-        return new Fill(this);
+    public Fill<FluentWebElement> fill() {
+        return new Fill<>(this);
     }
 
     @Override
-    public FillSelect fillSelect() {
-        return new FillSelect(this);
+    public FillSelect<FluentWebElement> fillSelect() {
+        return new FillSelect<>(this);
     }
 
     @Override
