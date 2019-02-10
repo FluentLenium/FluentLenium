@@ -5,8 +5,6 @@ import cucumber.runtime.java.fluentlenium.FluentObjectFactory;
 import org.fluentlenium.configuration.FluentConfiguration;
 import org.junit.runners.model.InitializationError;
 
-import java.io.IOException;
-
 import static java.util.Objects.nonNull;
 
 /**
@@ -18,11 +16,11 @@ import static java.util.Objects.nonNull;
  */
 public class FluentCucumber extends Cucumber {
 
-    public FluentCucumber(Class clazz) throws InitializationError, IOException {
+    public FluentCucumber(Class clazz) throws InitializationError {
         this(clazz, shouldInitConfiguration(clazz));
     }
 
-    public FluentCucumber(Class clazz, Object obj) throws InitializationError, IOException { // NOPMD
+    public FluentCucumber(Class clazz, Object obj) throws InitializationError { // NOPMD
         super(clazz);
     }
 
