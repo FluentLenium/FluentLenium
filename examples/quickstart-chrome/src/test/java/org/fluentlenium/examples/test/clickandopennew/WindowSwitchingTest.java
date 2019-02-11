@@ -1,11 +1,11 @@
 package org.fluentlenium.examples.test.clickandopennew;
 
-import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.examples.pages.clickandopennew.AwesomeTestingBlogPage;
+import org.fluentlenium.examples.test.AbstractChromeTest;
 import org.junit.Test;
 
-public class WindowSwitchingTest extends FluentTest {
+public class WindowSwitchingTest extends AbstractChromeTest {
 
     @Page
     private AwesomeTestingBlogPage testingBlogPage;

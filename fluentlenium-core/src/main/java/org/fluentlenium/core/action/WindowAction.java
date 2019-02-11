@@ -126,14 +126,6 @@ public class WindowAction {
         Set<String> newWindowHandles = new HashSet<>(driver.getWindowHandles());
         newWindowHandles.removeAll(oldWindowHandles);
 
-        //In chrome we need to wait a while because the behaviour was changed since 70.0.* release and
-        //newly opened windows lose redirects and remains blank
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         String newWindowHandle = newWindowHandles.iterator().next();
         switchTo(newWindowHandle);
 
