@@ -7,6 +7,7 @@ import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.hook.wait.Wait;
 import org.fluentlenium.core.inject.Parent;
+import org.fluentlenium.pages.Page2;
 import org.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
@@ -71,12 +72,28 @@ public class ComponentsTest extends IntegrationFluentTest {
 
     }
 
+    @Test
+    void shouldInstantiatePage() {
+        goTo(COMPONENTS_URL);
+        assertThat(footer.createPageInstance()).isInstanceOf(Page2.class);
+    }
+
+    @Test
+    void shouldBeAbleToAccessDriver() {
+        goTo(COMPONENTS_URL);
+        assertThat(header.getUrl()).isEqualTo(COMPONENTS_URL);
+    }
+
     public static class Header extends FluentWebElement {
         @FindBy(css = ".title")
         private FluentWebElement title;
 
         public Header(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
+        }
+
+        String getUrl() {
+            return getDriver().getCurrentUrl();
         }
     }
 
@@ -87,6 +104,11 @@ public class ComponentsTest extends IntegrationFluentTest {
         public Footer(WebElement webElement, FluentControl fluentControl, ComponentInstantiator instantiator) {
             super(webElement, fluentControl, instantiator);
         }
+
+        Page2 createPageInstance() {
+            return newInstance(Page2.class);
+        }
+
     }
 
     @FindBy(css = ".component")
