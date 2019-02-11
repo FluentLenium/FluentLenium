@@ -64,9 +64,10 @@
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
-                    <parallel>suites</parallel>
+                    <forkCount>3</forkCount>
+                    <reuseForks>true</reuseForks>
                     <includes>
-                        <include>**/IntegrationSuite.java</include>
+                        <include>**/IntegrationTestSuite.java</include>
                     </includes>
                 </configuration>
             </plugin>

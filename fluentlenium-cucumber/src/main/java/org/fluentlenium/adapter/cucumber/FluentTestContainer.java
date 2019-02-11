@@ -133,20 +133,4 @@ public enum FluentTestContainer {
                     }
                 });
     }
-
-    /**
-     * Initialization of FluentControl and WebDriver. Using as substitute of
-     * alternatives.
-     */
-    public void before() {
-        ((FluentCucumberTest) fluentAdapter.get()).start();
-    }
-
-    /**
-     * Releasing of FluentControl and WebDriver. Using as substitute of
-     * alternatives.
-     */
-    public void after() {
-        ((FluentCucumberTest) fluentAdapter.get()).finish();
-    }
 }

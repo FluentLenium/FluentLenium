@@ -57,13 +57,6 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
     }
 
     /**
-     * Initialization of FluentCucumberTest adapter
-     */
-    void start() {
-        starting();
-    }
-
-    /**
      * Stopping of FluentCucumberTest adapter
      *
      * @param scenario Cucumber scenario
@@ -73,16 +66,5 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
             failed(scenario.getName());
         }
         finished(scenario.getName());
-    }
-
-    /**
-     * Stopping of FluentCucumberTest adapter
-     */
-    void finish() {
-//        TODO find way to pass Scenario or just status of test( if it fails)
-//        if (isFailed()) {
-//            failed();
-//        }
-        finished();
     }
 }
