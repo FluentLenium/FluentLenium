@@ -117,7 +117,7 @@ public enum FluentTestContainer {
      *
      * @param obj container obj which contains pages to initialize
      */
-    public synchronized void instantiatePages(Object obj) {
+    public void instantiatePages(Object obj) {
 
         Arrays.stream(obj.getClass().getDeclaredFields())
                 .filter(field -> field.isAnnotationPresent(Page.class))

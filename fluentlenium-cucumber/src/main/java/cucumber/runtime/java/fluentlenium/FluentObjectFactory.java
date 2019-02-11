@@ -21,7 +21,7 @@ public class FluentObjectFactory implements ObjectFactory {
     private Class<?> configClass;
 
     @Override
-    public synchronized void start() {
+    public void start() {
         if (nonNull(configClass)) {
             setConfigClass(configClass);
             FLUENT_TEST.instance();
@@ -33,13 +33,13 @@ public class FluentObjectFactory implements ObjectFactory {
     }
 
     @Override
-    public synchronized void stop() {
+    public void stop() {
         FLUENT_TEST.reset();
         this.instances.clear();
     }
 
     @Override
-    public synchronized boolean addClass(Class<?> aClass) {
+    public boolean addClass(Class<?> aClass) {
         if (configClass == null) {
             configClass = checkClassForConfiguration(aClass);
             if (nonNull(configClass)) {
@@ -50,7 +50,7 @@ public class FluentObjectFactory implements ObjectFactory {
     }
 
     @Override
-    public synchronized  <T> T getInstance(Class<T> type) { // NOPMD
+    public <T> T getInstance(Class<T> type) { // NOPMD
         try {
             T instance = type.cast(instances.get(type));
             if (instance == null) {
@@ -63,7 +63,7 @@ public class FluentObjectFactory implements ObjectFactory {
         }
     }
 
-    private synchronized <T> T cacheNewInstance(Class<T> type) {
+    private <T> T cacheNewInstance(Class<T> type) {
         try {
             T instance = FLUENT_TEST.injector().newInstance(type);
             FLUENT_TEST.injector().inject(instance);
@@ -75,7 +75,7 @@ public class FluentObjectFactory implements ObjectFactory {
         }
     }
 
-    private synchronized Class<?> checkClassForConfiguration(Class<?> cls) {
+    private Class<?> checkClassForConfiguration(Class<?> cls) {
         Class superClass = cls.getSuperclass();
         if (superClass != null && superClass.isAnnotationPresent(FluentConfiguration.class)) {
             return superClass;
