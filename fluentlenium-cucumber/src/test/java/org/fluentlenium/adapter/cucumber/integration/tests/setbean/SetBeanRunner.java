@@ -1,11 +1,12 @@
-package org.fluentlenium.examples.cucumber.pageobject;
+package org.fluentlenium.adapter.cucumber.integration.tests.setbean;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:org/fluentlenium/examples/cucumber",
+@CucumberOptions(features = "classpath:org/fluentlenium/adapter/cucumber/integration/tests/scenario",
         plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"})
-public class PageObjectRunner {
+public class SetBeanRunner {
+
 }

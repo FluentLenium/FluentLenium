@@ -18,25 +18,11 @@ public class FluentObjectFactory implements ObjectFactory {
 
     private final Map<Class<?>, Object> instances = new HashMap<>();
 
-    private static Class<?> initClass;  // NOPMD
     private Class<?> configClass;
-    private Class<?> initConfigClass;
-
-    public FluentObjectFactory() {
-        if (initClass != null) {
-            initConfigClass = initClass;
-            initClass = null;
-        }
-    }
 
     @Override
     public void start() {
-        if (nonNull(initConfigClass)) {
-            setConfigClass(initConfigClass);
-            FLUENT_TEST.instance();
-            FLUENT_TEST.before();
-
-        } else if (nonNull(configClass)) {
+        if (nonNull(configClass)) {
             setConfigClass(configClass);
             FLUENT_TEST.instance();
 
@@ -48,17 +34,13 @@ public class FluentObjectFactory implements ObjectFactory {
 
     @Override
     public void stop() {
-        if (initConfigClass != null) {
-            FLUENT_TEST.after();
-        }
-
         FLUENT_TEST.reset();
         this.instances.clear();
     }
 
     @Override
     public boolean addClass(Class<?> aClass) {
-        if (initConfigClass == null && configClass == null) {
+        if (configClass == null) {
             configClass = checkClassForConfiguration(aClass);
             if (nonNull(configClass)) {
                 setConfigClass(configClass);
@@ -104,9 +86,5 @@ public class FluentObjectFactory implements ObjectFactory {
         } else {
             return null;
         }
-    }
-
-    public static void setInitClass(Class clazz) {
-        initClass = clazz;
     }
 }

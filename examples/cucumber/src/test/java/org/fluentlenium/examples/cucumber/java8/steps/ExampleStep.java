@@ -25,5 +25,9 @@ public class ExampleStep extends FluentCucumberTest implements En {
 
         Then("Title contains FluentLenium", () ->
                 assertThat(window().title()).contains("FluentLenium"));
+
+        Before(this::before);
+
+        After(this::after);
     }
 }
