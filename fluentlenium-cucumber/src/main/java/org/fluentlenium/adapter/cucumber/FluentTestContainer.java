@@ -45,7 +45,7 @@ public enum FluentTestContainer {
      *
      * @return instance of fluent adapter
      */
-    public synchronized FluentAdapter instance() {
+    public FluentAdapter instance() {
         if (isNull(fluentAdapter.get())) {
             controlContainer.set(new DefaultFluentControlContainer());
             sharedMutator.set(new FluentCucumberSharedMutator());
