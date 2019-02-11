@@ -45,7 +45,7 @@ public enum FluentTestContainer {
      *
      * @return instance of fluent adapter
      */
-    public FluentAdapter instance() {
+    public synchronized FluentAdapter instance() {
         if (isNull(fluentAdapter.get())) {
             controlContainer.set(new DefaultFluentControlContainer());
             sharedMutator.set(new FluentCucumberSharedMutator());
@@ -109,7 +109,6 @@ public enum FluentTestContainer {
      * @return fluent injector without loaded full FluentControl context
      */
     public FluentInjector injector() {
-
         return injector.get();
     }
 
@@ -118,7 +117,7 @@ public enum FluentTestContainer {
      *
      * @param obj container obj which contains pages to initialize
      */
-    public void instantiatePages(Object obj) {
+    public synchronized void instantiatePages(Object obj) {
 
         Arrays.stream(obj.getClass().getDeclaredFields())
                 .filter(field -> field.isAnnotationPresent(Page.class))

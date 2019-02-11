@@ -1,6 +1,5 @@
 package org.fluentlenium.adapter.cucumber.integration.tests;
 
-import net.jcip.annotations.NotThreadSafe;
 import org.fluentlenium.adapter.cucumber.integration.tests.driverperfeature.PerFeatureRunner;
 import org.fluentlenium.adapter.cucumber.integration.tests.getbean.GetBeanRunner;
 import org.fluentlenium.adapter.cucumber.integration.tests.java8.Java8Runner;
@@ -10,9 +9,10 @@ import org.fluentlenium.adapter.cucumber.integration.tests.setbean.SetBeanRunner
 import org.fluentlenium.adapter.cucumber.integration.tests.waithook.HookRunner;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({
+@SuiteClasses({
         PerFeatureRunner.class,
         GetBeanRunner.class,
         SetBeanRunner.class,
@@ -21,6 +21,5 @@ import org.junit.runners.Suite;
         NoWebDriverRunner.class,
         HookRunner.class
 })
-@NotThreadSafe
 public class IntegrationTestSuite {
 }

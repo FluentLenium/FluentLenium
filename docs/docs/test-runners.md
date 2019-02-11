@@ -177,79 +177,163 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 </dependency>
 ```
 
-FluentLenium can be integrated with Cucumber in few ways. You can use classic inheritance from FluentCucumberTest class,
-but it is not necessary - now FluentLenium can take care of injecting Cucumber steps by itself!
-
-#### Classic with inheritance
-- Create runner class annotated with FluentCucumber.class
+- Create runner class annotated with Cucumber.class
 
 ```java
-@RunWith(FluentCucumber.class)
+@RunWith(Cucumber.class)
 @CucumberOptions
 public class Runner {
 }
 ```
 
-- Extend BaseTest or each Step with `FluentCucumberTest` and configure in any way you want.
-
-- Add this piece of code for to ONE of your Cucumber Step - the best practice is to create separate class for Cucumber
-After and Before hooks:
-
+- Extends `FluentCucumberTest` class in all of your steps classes:
 ```java
-@Before
+public class ExampleSteps1 extends FluentCucumberTest {
+}
+```
+```java
+public class ExampleSteps2 extends FluentCucumberTest {
+}
+```
+
+or only in your `BaseTest` class:
+```java
+public class BaseTest extends FluentCucumberTest {
+}
+```
+```java
+public class ExampleSteps1 extends BaseTest {
+}
+```
+
+- Add `Before` and `After` hooks: 
+```java
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+
+public class FluentHooks extends FluentCucumberTest {
+
+    @Before
+    public void beforeScenario(Scenario scenario) {
+        before(scenario);
+    }
+
+    @After
+    public void afterScenario(Scenario scenario) {
+        after(scenario);
+    }
+}
+```
+
+When using Cucumber with Java 8 (package `cucumber-java8`), hooks can be added like this:
+```java
+public class FluentHooks extends FluentCucumberTest {
+    
+    public FluentHooks(){
+        Before(this::before);
+        
+        After(this::after);
+    }
+}
+```
+
+**Notes related to Cumber hooks:**
+1) Hooks should be added **ONCE** for your tests. Do not add these these hooks in all your steps classes. 
+2) Adding these hooks starts FluentLenium context during execution of scenario. It means that driver will start 
+automatically. If you want to start WebDriver only for some scenarios, you can simply add tag:
+```
+@fluent
+Scenario: Driver should start when tag is present above scenario
+    Then WebDriver starts as expected
+```
+and add tags to your hooks:
+```java
+@Before({"@fluent"})
 public void beforeScenario(Scenario scenario) {
     before(scenario);
 }
 
-@After
+@After({"@fluent"})
 public void afterScenario(Scenario scenario) {
     after(scenario);
 }
 ```
-
-Or in Java 8 inside Step constructor:
-
+3) Hooks in `Cucumber` cannot be extended. So do not add `Before` and `After` hooks in `BaseTest` (if you use such
+pattern) but add them in any other class:
 ```java
-Before(this::before);
-
-After(this::after);
-```
-
-#### Auto-Injecting Cucumber steps
-- Create runner class annotated with FluentCucumber.class and use on it @FluentConfiguration:
-
-```java
-@RunWith(FluentCucumber.class)
-@CucumberOptions
-@FluentConfiguration(webDriver = "chrome")
-public class Runner {
+public class FluentHooks extends BaseTest {
+    
+    @Before
+    public void beforeScenario(Scenario scenario) {
+        before(scenario);
+    }
+    
+    @After
+     public void afterScenario(Scenario scenario) {
+        after(scenario);
+    }
 }
 ```
-- If you want to use auto-injecting with initialization FluentLenium context you MUST use @FluentConfiguration on a runner
-class, but configuration still can be passed through fluentlenium.properties or as system properties
-(-Dfluentlenium.webDriver=chrome).
 
-- You do not need to use FluentCucumberTest at all!
-
-- It is possible to access current FluentCucumberTest using syntax:
-
-```java
-FluentAdapterContainer.FLUENT_TEST.instance()
+- It is possible to access current `FluentCucumberTest` context using syntax:
+```
+FluentTestContainer.FLUENT_TEST.instance()
 ```
 
-It can be handy if you want have access to current WebDriver instance etc.
+It can be handy if you want have to access current WebDriver instance. The purpose of `FluentTestContainer` is to share
+state between many steps classes.
 
-- Due to fact that you do not use inheritance you cannot use configuration throughJava beans or use FluentLenium API
-directly in Cucumber steps. Use Page Object pattern instead (@Page annotation is your friend).
+- Keep your configuration in `BaseTest`:
+ ```java
+ // example configuration
+ @FluentConfiguration(webDriver = "chrome")
+ public class BaseTest extends FluentCucumberTest {
+    
+    @Override
+    public Capabilities getCapabilities() {
+        return new ChromeOptions();
+    }
+ }
+ ```
+ or class with Cucumber hooks:
+  ```java
+  // example configuration
+  @FluentConfiguration(webDriver = "chrome")
+  public class FluentHooks extends FluentCucumberTest {
+     
+     @Override
+     public Capabilities getCapabilities() {
+         return new ChromeOptions();
+     }
+     
+     @Before
+     public void beforeScenario(Scenario scenario) {
+         before(scenario);
+     }
+     
+     @After
+     public void afterScenario(Scenario scenario) {
+         after(scenario);
+     }
+  }
+ ```
+ 
+- At default, new instance of WebDriver is created for each scenario. If you want to run single WebDriver for all 
+scenarios in feature, change DriverLifecycle to JVM level:
+```java
+import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
+import org.fluentlenium.configuration.ConfigurationProperties;
+import org.fluentlenium.configuration.FluentConfiguration;
 
-- Remember, that page objects still need to inherit FluentPage to run correctly.
+@FluentConfiguration(webDriver = "chrome", driverLifecycle = ConfigurationProperties.DriverLifecycle.JVM)
+public class BaseTest extends FluentCucumberTest {
+}
+```
 
-#### Using Cucumber.class as runner
+- Remember, that page objects still need to inherit `FluentPage` to run correctly.
 
-- It is still possible to use Cucumber.class instead FluentCucumber.class as runner but it is necessary to
-add Before and After hooks to every Cucumber Step for correct injecting FluentLenium context.
-
-E2E Cucumber test are present in [Cucumber example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/cucumber).
+E2E Cucumber tests are present in [Cucumber example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/cucumber).
 Enable it by activating ```examples``` Maven profile.
 
 ## Spock

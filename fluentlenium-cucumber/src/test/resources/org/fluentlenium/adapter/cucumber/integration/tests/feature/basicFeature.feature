@@ -1,12 +1,11 @@
-@inheritance
-Feature: basic test with only one driver per feature with inheritance
+Feature: Basic test steps in single class with only one driver per Feature
 
-  Scenario: scenario 1 per feature with inheritance
+  Scenario: Scenario 1 per Feature with single-class step definition
     Given feature I am on the first page
     When feature I click on next page
     Then feature I am on the second page
 
-  Scenario: scenario 2 per feature with inheritance
+  Scenario: Scenario 2 per Feature with single-class step definition
     Given feature I am on the first page
     When feature I click on next page
     Then feature I am on the second page
