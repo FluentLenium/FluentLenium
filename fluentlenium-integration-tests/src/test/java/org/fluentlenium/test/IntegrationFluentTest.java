@@ -25,6 +25,7 @@ public abstract class IntegrationFluentTest extends FluentTest {
     public static final String PAGE_2_URL_TEST = getAbsoluteUrlFromFile("page2url.html");
     public static final String SIZE_CHANGE_URL = getAbsoluteUrlFromFile("size-change.html");
     public static final String DISAPPEARING_EL_URL = getAbsoluteUrlFromFile("disappear.html");
+    public static final String CLICK_URL = getAbsoluteUrlFromFile("click.html");
 
     @Override
     public String getWebDriver() {

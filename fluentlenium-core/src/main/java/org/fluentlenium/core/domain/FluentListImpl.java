@@ -1,5 +1,15 @@
 package org.fluentlenium.core.domain;
 
+import static java.util.stream.Collectors.toList;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
@@ -25,16 +35,6 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
@@ -209,6 +209,20 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Override
     public FluentList<E> contextClick() {
         return doClick(FluentWebElement::contextClick, "context click");
+    }
+
+    @Override
+    public FluentList<E> waitAndClick() {
+        return waitAndClick(Duration.ofSeconds(5));
+    }
+
+    @Override
+    public FluentList<E> waitAndClick(Duration duration) {
+        validateListIsNotEmpty();
+        await().atMost(duration).until(this).clickable();
+        this.scrollToCenter();
+        this.click();
+        return this;
     }
 
     @Override
