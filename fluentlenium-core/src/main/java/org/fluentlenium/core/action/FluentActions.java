@@ -1,5 +1,6 @@
 package org.fluentlenium.core.action;
 
+import java.time.Duration;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.WebElement;
 
@@ -31,6 +32,27 @@ public interface FluentActions<T, E extends FluentWebElement> extends FluentJava
      * @return this object reference to chain methods calls
      */
     T contextClick();
+
+    /**
+     * Helper method that:
+     * a) waits at most 5 seconds for element
+     * b) scrolls centrally into it
+     * c) clicks on it
+     *
+     * @return this object reference to chain methods calls
+     */
+    T waitAndClick();
+
+    /**
+     * Helper method that:
+     * a) waits for element
+     * b) scrolls centrally into it
+     * c) clicks on it
+     *
+     * @param duration - enabled to override default 5 seconds of waiting
+     * @return this object reference to chain methods calls
+     */
+    T waitAndClick(Duration duration);
 
     /**
      * Perform a form submission.

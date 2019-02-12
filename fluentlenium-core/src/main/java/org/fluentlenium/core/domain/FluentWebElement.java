@@ -1,5 +1,12 @@
 package org.fluentlenium.core.domain;
 
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.Stack;
+import java.util.function.Function;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.SeleniumDriverControl;
@@ -47,18 +54,12 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.Stack;
-import java.util.function.Function;
 
 /**
  * Wraps a Selenium {@link WebElement}. It provides an enhanced API to control selenium element.
@@ -273,6 +274,19 @@ public class FluentWebElement extends Component
     @Override
     public FluentWebElement contextClick() {
         mouse().contextClick();
+        return this;
+    }
+
+    @Override
+    public FluentWebElement waitAndClick() {
+        return waitAndClick(Duration.ofSeconds(5));
+    }
+
+    @Override
+    public FluentWebElement waitAndClick(Duration duration) {
+        await().atMost(duration).until(this).clickable();
+        this.scrollToCenter();
+        this.click();
         return this;
     }
 
@@ -550,7 +564,7 @@ public class FluentWebElement extends Component
         try {
             clickable = ExpectedConditions.elementToBeClickable(getElement())
                     .apply(control.getDriver()) != null;
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
             clickable = false;
         }
         return clickable;
