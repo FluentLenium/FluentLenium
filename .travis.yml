@@ -10,6 +10,13 @@ jobs:
         - if [ "$TRAVIS_BRANCH" = "develop" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_TAG" = "" ]; then mvn deploy -DskipTests --settings deploy-settings.xml; fi
 
     - stage: test
+      name: "Java - unit & framework integration tests"
+      language: java
+      jdk: oraclejdk11
+      script:
+        - mvn -Pframework-integration-tests clean test
+
+    - stage: test
       name: "Java - OWASP Dependency Check"
       language: java
       jdk: oraclejdk11
@@ -22,13 +29,6 @@ jobs:
       jdk: oraclejdk11
       script:
         - mvn -Pexamples clean compile
-
-    - stage: test
-      name: "Java - unit & framework integration tests"
-      language: java
-      jdk: oraclejdk11
-      script:
-        - mvn -Pframework-integration-tests clean test
 
     - stage: test
       name: "Ruby - Docs build"
