@@ -33,5 +33,11 @@ public interface FluentJavascriptActions<T> {
      * @return this object reference to chain methods calls
      */
     T scrollToCenter();
+
+    /**
+     * Modifies element attributes
+     * @return this object reference to chain methods calls
+     */
+    T modifyAttribute(String attributeName, String attributeValue);
 }
 

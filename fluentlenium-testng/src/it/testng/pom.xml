@@ -13,7 +13,7 @@
     </prerequisites>
 
     <properties>
-        <it.project.version>4.0.1-SNAPSHOT</it.project.version>
+        <it.project.version>4.1.2-SNAPSHOT</it.project.version>
     </properties>
 
     <modules>
@@ -45,11 +45,6 @@
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>htmlunit-driver</artifactId>
                 <version>2.33.3</version>
-            </dependency>
-            <dependency>
-                <groupId>xml-apis</groupId>
-                <artifactId>xml-apis</artifactId>
-                <version>2.0.2</version>
             </dependency>
             <dependency>
                 <groupId>org.testng</groupId>

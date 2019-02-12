@@ -1,27 +1,15 @@
 package org.fluentlenium.examples.test;
 
-import org.fluentlenium.adapter.junit.jupiter.FluentTest;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.examples.pages.DuckDuckMainPage;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class DuckDuckGoFirefoxTest extends FluentTest {
-
-    private static final String PATH_TO_GECKO_DRIVER = "C:\\drivers\\geckodriver.exe";
-    private static final String GECKO_DRIVER_PROPERTY = "webdriver.gecko.driver";
+public class DuckDuckGoFirefoxTest extends AbstractFirefoxTest {
 
     @Page
     private DuckDuckMainPage duckDuckMainPage;
-
-    @BeforeAll
-    static void setup() {
-        if (System.getProperty(GECKO_DRIVER_PROPERTY) == null) {
-            System.setProperty(GECKO_DRIVER_PROPERTY, PATH_TO_GECKO_DRIVER);
-        }
-    }
 
     @Override
     public WebDriver newWebDriver() {

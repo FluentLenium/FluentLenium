@@ -132,4 +132,5 @@ public final class UrlUtils { // NOPMD CyclomaticComplexity
         String url = getAbsoluteUrlFromFile(file);
         return url.substring(0, url.lastIndexOf('/'));
     }
+
 }

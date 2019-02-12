@@ -1,12 +1,14 @@
 package org.fluentlenium.adapter.cucumber.unit;
 
-import org.assertj.core.api.Assertions;
 import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.adapter.cucumber.FluentCucumberSharedMutator;
 import org.fluentlenium.configuration.ConfigurationException;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class FluentCucumberSharedMutatorTest {
     private FluentCucumberSharedMutator sharedMutator;
@@ -25,9 +27,9 @@ public class FluentCucumberSharedMutatorTest {
         SharedMutator.EffectiveParameters<?> parameters = sharedMutator
                 .getEffectiveParameters(testClass, testName, driverLifecycle);
 
-        Assertions.assertThat(parameters.getTestClass()).isNull();
-        Assertions.assertThat(parameters.getTestName()).isEqualTo(testName);
-        Assertions.assertThat(parameters.getDriverLifecycle()).isEqualTo(DriverLifecycle.JVM);
+        assertThat(parameters.getTestClass()).isNull();
+        assertThat(parameters.getTestName()).isEqualTo(testName);
+        assertThat(parameters.getDriverLifecycle()).isEqualTo(DriverLifecycle.JVM);
     }
 
     @Test
@@ -36,7 +38,7 @@ public class FluentCucumberSharedMutatorTest {
         String testName = "test";
         DriverLifecycle driverLifecycle = DriverLifecycle.CLASS;
 
-        Assertions.assertThatThrownBy(() -> sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle))
+        assertThatThrownBy(() -> sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle))
                 .isExactlyInstanceOf(ConfigurationException.class)
                 .hasMessage("Cucumber doesn't support CLASS driverLifecycle.");
     }

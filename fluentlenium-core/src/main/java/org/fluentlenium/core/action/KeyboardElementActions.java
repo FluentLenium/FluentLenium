@@ -1,5 +1,6 @@
 package org.fluentlenium.core.action;
 
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,11 +26,22 @@ public class KeyboardElementActions {
     }
 
     /**
+     * Creates a new object to execute actions with the keyboard, using given selenium driver and element.
+     *
+     * @param driver  selenium driver
+     * @param fluentWebElement FluentWebElement on which to execute actions
+     */
+    public KeyboardElementActions(WebDriver driver, FluentWebElement fluentWebElement) {
+        this.driver = driver;
+        this.element = fluentWebElement.getElement();
+    }
+
+    /**
      * Get selenium interactions actions.
      *
      * @return selenium actions
      */
-    protected org.openqa.selenium.interactions.Actions actions() {
+    private org.openqa.selenium.interactions.Actions actions() {
         return new org.openqa.selenium.interactions.Actions(driver);
     }
 

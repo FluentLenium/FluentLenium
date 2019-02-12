@@ -4,7 +4,7 @@ import org.fluentlenium.adapter.testng.FluentTestNg;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import static org.fluentlenium.adapter.testng.integration.util.UrlUtil.getAbsoluteUrlFromFile;
+import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 
 public class IntegrationFluentTestNg extends FluentTestNg {
 

@@ -6,7 +6,7 @@
 
     <artifactId>fluentlenium-examples-spock</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.0.0</version>
+    <version>4.1.2-SNAPSHOT</version>
 
     <name>FluentLenium Examples Spock</name>
 
@@ -71,12 +71,12 @@
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>1.5</version>
+                <version>1.6.2</version>
                 <executions>
                     <execution>
                         <goals>
                             <goal>addTestSources</goal>
-                            <goal>testCompile</goal>
+                            <goal>compileTests</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -92,7 +92,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.12</version>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <id>add-groovy-test-sources</id>

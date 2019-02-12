@@ -34,6 +34,11 @@ public enum BrowserType {
         }
 
         @Override
+        protected String getDriverExecutableName() {
+            return "chromedriver";
+        }
+
+        @Override
         public String getDriverSystemPropertyName() {
             return "webdriver.chrome.driver";
         }
@@ -47,6 +52,11 @@ public enum BrowserType {
         @Override
         protected MutableCapabilities getBrowserCapabilities() {
             return new SafariOptions();
+        }
+
+        @Override
+        protected String getDriverExecutableName() {
+            return "safaridriver";
         }
 
         @Override
@@ -66,6 +76,11 @@ public enum BrowserType {
         }
 
         @Override
+        protected String getDriverExecutableName() {
+            return "geckodriver";
+        }
+
+        @Override
         public String getDriverSystemPropertyName() {
             return "webdriver.gecko.driver";
         }
@@ -79,6 +94,11 @@ public enum BrowserType {
         @Override
         protected MutableCapabilities getBrowserCapabilities() {
             return new InternetExplorerOptions();
+        }
+
+        @Override
+        protected String getDriverExecutableName() {
+            return "IEDriverServer";
         }
 
         @Override
@@ -98,6 +118,11 @@ public enum BrowserType {
         }
 
         @Override
+        protected String getDriverExecutableName() {
+            return "MicrosoftWebDriver";
+        }
+
+        @Override
         public String getDriverSystemPropertyName() {
             return "webdriver.edge.driver";
         }
@@ -114,6 +139,11 @@ public enum BrowserType {
         }
 
         @Override
+        protected String getDriverExecutableName() {
+            return "operadriver";
+        }
+
+        @Override
         public String getDriverSystemPropertyName() {
             return "webdriver.opera.driver";
         }
@@ -122,6 +152,8 @@ public enum BrowserType {
     protected abstract WebDriver getWebDriver();
 
     protected abstract MutableCapabilities getBrowserCapabilities();
+
+    protected abstract String getDriverExecutableName();
 
     public abstract String getDriverSystemPropertyName();
 

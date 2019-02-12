@@ -1,5 +1,15 @@
 package org.fluentlenium.core.domain;
 
+import static java.util.stream.Collectors.toList;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
@@ -21,19 +31,10 @@ import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWaitElementList;
 import org.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
@@ -216,7 +217,21 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
-    public FluentList write(String... with) {
+    public FluentList<E> waitAndClick() {
+        return waitAndClick(Duration.ofSeconds(5));
+    }
+
+    @Override
+    public FluentList<E> waitAndClick(Duration duration) {
+        validateListIsNotEmpty();
+        await().atMost(duration).until(this).clickable();
+        this.scrollToCenter();
+        this.click();
+        return this;
+    }
+
+    @Override
+    public FluentList<E> write(String... with) {
         validateListIsNotEmpty();
 
         boolean atLeastOne = false;
@@ -256,6 +271,26 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             if (fluentWebElement.enabled()) {
                 atLeastOne = true;
                 fluentWebElement.clear();
+            }
+        }
+
+        if (!atLeastOne) {
+            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element enabled."
+                    + " At least one element should be enabled to clear values.");
+        }
+
+        return this;
+    }
+
+    @Override
+    public FluentList<E> clearAllReactInputs() {
+        validateListIsNotEmpty();
+
+        boolean atLeastOne = false;
+        for (E fluentWebElement : this) {
+            if (fluentWebElement.enabled()) {
+                atLeastOne = true;
+                fluentWebElement.clearReactInput();
             }
         }
 
@@ -331,6 +366,11 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Override
     public List<String> names() {
         return stream().map(FluentWebElement::name).collect(toList());
+    }
+
+    @Override
+    public List<Dimension> dimensions() {
+        return stream().map(FluentWebElement::size).collect(toList());
     }
 
     @Override
@@ -522,16 +562,37 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         return getHookControl().noHook(function);
     }
 
+    /**
+     * Scrolls to first element of list
+     * @return this object reference to chain methods calls
+     */
     @Override
     public FluentList<E> scrollToCenter() {
         return getJavascriptActions().scrollToCenter();
     }
 
+    /**
+     * Scrolls to first element of list
+     * @return this object reference to chain methods calls
+     */
     @Override
     public FluentList<E> scrollIntoView(boolean alignWithTop) {
         return getJavascriptActions().scrollIntoView(alignWithTop);
     }
 
+    /**
+     * Modifies attributes of first element only
+     * @return this object reference to chain methods calls
+     */
+    @Override
+    public FluentList<E> modifyAttribute(String attributeName, String attributeValue) {
+        return getJavascriptActions().modifyAttribute(attributeName, attributeValue);
+    }
+
+    /**
+     * Scrolls to first element of list
+     * @return this object reference to chain methods calls
+     */
     @Override
     public FluentList<E> scrollIntoView() {
         return getJavascriptActions().scrollIntoView();

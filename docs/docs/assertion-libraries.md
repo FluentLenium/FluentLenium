@@ -23,7 +23,7 @@ We recommend to use AssertJ because we extend it with FluentWebElement and Fluen
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>4.0.0</version>
+    <version>4.1.1</version>
     <scope>test</scope>
 </dependency>
 ```

@@ -55,7 +55,7 @@ public final class FluentLeniumAssertions extends Assertions {
      * @param actual actual element list
      * @return Element list assertion object
      */
-    public static FluentListAssert assertThat(FluentList<?> actual) {
+    public static FluentListAssert assertThat(FluentList<? extends FluentWebElement> actual) {
         return new FluentListAssert(actual);
     }
 

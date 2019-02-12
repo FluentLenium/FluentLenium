@@ -10,6 +10,9 @@ public class GoogleSearchTest extends ExampleFluentTest {
 
     @Test
     public void visitGoogle() {
-        goTo(mainPage).typeTextIn().startSearch();
+        goTo(mainPage)
+                .typeTextIn()
+                .startSearch()
+                .waitForResults();
     }
 }

@@ -1,5 +1,6 @@
 package org.fluentlenium.core.action;
 
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Coordinates;
@@ -22,6 +23,17 @@ public class MouseElementActions {
     public MouseElementActions(WebDriver driver, WebElement element) {
         this.driver = driver;
         this.element = element;
+    }
+
+    /**
+     * Creates a new mouse element actions.
+     *
+     * @param driver  selenium driver
+     * @param fluentWebElement FluentWebElement
+     */
+    public MouseElementActions(WebDriver driver, FluentWebElement fluentWebElement) {
+        this.driver = driver;
+        this.element = fluentWebElement.getElement();
     }
 
     private org.openqa.selenium.interactions.Actions actions() {
