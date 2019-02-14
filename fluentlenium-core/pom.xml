@@ -63,9 +63,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.hazendaz</groupId>
-            <artifactId>javabean-tester</artifactId>
-            <scope>test</scope>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
