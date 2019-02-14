@@ -211,6 +211,12 @@
                 <artifactId>mockito-junit-jupiter</artifactId>
                 <version>2.24.0</version>
             </dependency>
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>1.9.7</version>
+                <scope>compile</scope>
+            </dependency>
             <!--Upgrading to 2.X.X leads to 0 tests being executed in fluentlenium-core for unknown reason-->
             <dependency>
                 <groupId>com.github.hazendaz</groupId>
