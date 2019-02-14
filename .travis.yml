@@ -17,13 +17,6 @@ jobs:
         - mvn -Pframework-integration-tests clean test
 
     - stage: test
-      name: "Java - OWASP Dependency Check"
-      language: java
-      jdk: oraclejdk11
-      script:
-        - mvn -Psecurity dependency-check:check
-
-    - stage: test
       name: "Java - compile examples"
       language: java
       jdk: oraclejdk11
