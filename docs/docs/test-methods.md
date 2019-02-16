@@ -310,14 +310,14 @@ executeScript("change();", 12L).getStringResult();
 You can take a ScreenShot and a HTML Dump of the browser.
 
 ```java
-takeScreenShot();
+takeScreenshot();
 takeHtmlDump();
 ```
 The file will be named using the current timestamp.
 You can of course specify a path and a name using:
 
 ```java
-takeScreenShot(pathAndfileName);
+takeScreenshot(pathAndfileName);
 takeHtmlDump(pathAndfileName);
 ```
 
