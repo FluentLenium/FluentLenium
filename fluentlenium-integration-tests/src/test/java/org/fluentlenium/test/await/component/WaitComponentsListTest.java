@@ -16,7 +16,7 @@ import org.openqa.selenium.support.FindBy;
 
 class WaitComponentsListTest extends IntegrationFluentTest {
 
-    private static int POSITION_OF_REPLACED_ROW = 1;
+    private static final int POSITION_OF_REPLACED_ROW = 1;
     private static final String INITIAL_VALUE_OF_REPLACED_ROW = "row2";
     private static final String VALUE_OF_REPLACED_ROW = "replaced row2";
 
