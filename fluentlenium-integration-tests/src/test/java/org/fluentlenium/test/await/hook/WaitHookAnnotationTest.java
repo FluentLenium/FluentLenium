@@ -16,7 +16,13 @@ class WaitHookAnnotationTest extends IntegrationFluentTest {
     private FluentWebElement anotherField;
 
     @Test
-    void testWaiting() {
+    void testWaitingEl() {
+        goTo(JAVASCRIPT_URL);
+        el("#newField").click();
+    }
+
+    @Test
+    void testWaitingFind() {
         goTo(JAVASCRIPT_URL);
         find("#newField").click();
     }
@@ -24,7 +30,7 @@ class WaitHookAnnotationTest extends IntegrationFluentTest {
     @Test
     void testWaitingNotFound() {
         goTo(JAVASCRIPT_URL);
-        assertThatThrownBy(() -> find("#anotherField").click()).isExactlyInstanceOf(TimeoutException.class)
+        assertThatThrownBy(() -> el("#anotherField").click()).isExactlyInstanceOf(TimeoutException.class)
                 .hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector: #anotherField");
 
     }

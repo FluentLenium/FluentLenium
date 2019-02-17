@@ -65,7 +65,7 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
 
     @Override
     public List<WebElement> findElements() {
-        return buildAwait().until(new Function<FluentControl, List<WebElement>>() {
+        return buildAwait().until(new Function<>() {
 
             @Override
             public List<WebElement> apply(FluentControl input) {
@@ -85,7 +85,7 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
 
     @Override
     public WebElement findElement() {
-        return buildAwait().until(new Function<FluentControl, WebElement>() {
+        return buildAwait().until(new Function<>() {
 
             @Override
             public WebElement apply(FluentControl input) {
