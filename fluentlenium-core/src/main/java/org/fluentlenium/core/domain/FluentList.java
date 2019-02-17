@@ -180,12 +180,6 @@ public interface FluentList<E extends FluentWebElement>
     int count();
 
     /**
-     * Get FluentList size
-     */
-    @Override
-    int size();
-
-    /**
      * Clear all elements on the list
      * <p>
      * Only the visible elements are cleared.

@@ -67,109 +67,109 @@ public class FluentListAssertTest {
 
     @Test
     public void testHasSizeOk() {
-        when(fluentList.size()).thenReturn(7);
+        when(fluentList.count()).thenReturn(7);
         listAssert.isNotEmpty();
         listAssert.hasSize(7);
     }
 
     @Test
     public void testHasSizeZeroOk() {
-        when(fluentList.size()).thenReturn(0);
+        when(fluentList.count()).thenReturn(0);
         listAssert.hasSize(0);
         listAssert.isEmpty();
     }
 
     @Test(expected = AssertionError.class)
     public void testHasSizeZeroKo() {
-        when(fluentList.size()).thenReturn(0);
+        when(fluentList.count()).thenReturn(0);
         listAssert.hasSize(1);
     }
 
     @Test(expected = AssertionError.class)
     public void testHasSizeEmptyKo() {
-        when(fluentList.size()).thenReturn(1);
+        when(fluentList.count()).thenReturn(1);
         listAssert.isEmpty();
     }
 
     @Test(expected = AssertionError.class)
     public void testHasSizeNotEmptyKo() {
-        when(fluentList.size()).thenReturn(0);
+        when(fluentList.count()).thenReturn(0);
         listAssert.isNotEmpty();
     }
 
     @Test
     public void testHasSizeZeroInBuilder() {
-        when(fluentList.size()).thenReturn(0);
+        when(fluentList.count()).thenReturn(0);
         listAssert.hasSize().equalTo(0);
     }
 
     @Test
     public void testHasSizeNotEqualOk() {
-        when(fluentList.size()).thenReturn(0);
+        when(fluentList.count()).thenReturn(0);
         listAssert.hasSize().notEqualTo(1);
     }
 
     @Test(expected = AssertionError.class)
     public void testHasSizeNotEqualKo() {
-        when(fluentList.size()).thenReturn(0);
+        when(fluentList.count()).thenReturn(0);
         listAssert.hasSize().notEqualTo(0);
     }
 
     @Test(expected = AssertionError.class)
     public void testHasSizeKo() {
-        when(fluentList.size()).thenReturn(7);
+        when(fluentList.count()).thenReturn(7);
         listAssert.hasSize(5);
     }
 
     @Test
     public void testHasSizeLessThanOk() {
-        when(fluentList.size()).thenReturn(7);
+        when(fluentList.count()).thenReturn(7);
         listAssert.hasSize().lessThan(9);
     }
 
     @Test(expected = AssertionError.class)
     public void testHasSizeLessThanKo() {
-        when(fluentList.size()).thenReturn(7);
+        when(fluentList.count()).thenReturn(7);
         listAssert.hasSize().lessThan(7);
         listAssert.hasSize().lessThan(6);
     }
 
     @Test
     public void testHasSizeLessThanOrEqualToOk() {
-        when(fluentList.size()).thenReturn(7);
+        when(fluentList.count()).thenReturn(7);
         listAssert.hasSize().lessThanOrEqualTo(7);
         listAssert.hasSize().lessThanOrEqualTo(8);
     }
 
     @Test(expected = AssertionError.class)
     public void testHasSizeLessThanOrEqualToKo() {
-        when(fluentList.size()).thenReturn(7);
+        when(fluentList.count()).thenReturn(7);
         listAssert.hasSize().lessThanOrEqualTo(6);
     }
 
     @Test
     public void testHasSizeGreaterThanOk() {
-        when(fluentList.size()).thenReturn(7);
+        when(fluentList.count()).thenReturn(7);
         listAssert.hasSize().greaterThan(6);
     }
 
     @Test(expected = AssertionError.class)
     public void testHasSizeGreaterThanKo() {
-        when(fluentList.size()).thenReturn(7);
+        when(fluentList.count()).thenReturn(7);
         listAssert.hasSize().greaterThan(7);
         listAssert.hasSize().greaterThan(8);
     }
 
     @Test
     public void testHasSizeGreaterThanOrEqualToOk() {
-        when(fluentList.size()).thenReturn(7);
+        when(fluentList.count()).thenReturn(7);
         listAssert.hasSize().greaterThanOrEqualTo(7);
         listAssert.hasSize().greaterThanOrEqualTo(6);
     }
 
     @Test(expected = AssertionError.class)
     public void testHasSizeGreaterThanOrEqualToKo() {
-        when(fluentList.size()).thenReturn(7);
+        when(fluentList.count()).thenReturn(7);
         listAssert.hasSize().greaterThanOrEqualTo(8);
     }
 

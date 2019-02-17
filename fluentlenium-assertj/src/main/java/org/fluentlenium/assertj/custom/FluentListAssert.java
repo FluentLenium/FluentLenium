@@ -28,7 +28,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
 
     @Override
     public FluentListAssert hasSize(int expectedSize) {
-        int actualSize = actual.size();
+        int actualSize = actual.count();
         if (actualSize != expectedSize) {
             failWithMessage("Expected size: " + expectedSize
                     + ". Actual size: " + actualSize + ".");
@@ -38,7 +38,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
 
     @Override
     public FluentListSizeBuilder hasSize() {
-        return new FluentListSizeBuilder(actual.size(), this);
+        return new FluentListSizeBuilder(actual.count(), this);
     }
 
     @Override

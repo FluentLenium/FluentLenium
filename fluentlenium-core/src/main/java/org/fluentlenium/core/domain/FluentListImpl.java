@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
@@ -137,34 +138,36 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
+    public E get(int index) {
+        return index(index);
+    }
+
+    @Override
     public E index(int index) {
-        if (!LocatorProxies.loaded(proxy)) {
+        if (!LocatorProxies.loaded(proxy) && !componentClass.equals(FluentWebElement.class)) {
             E component = instantiator.newComponent(componentClass, LocatorProxies.index(proxy, index));
             configureComponentWithLabel(component);
             configureComponentWithHooks(component);
             if (component instanceof FluentWebElement) {
                 component.setHookRestoreStack(hookControl.getHookRestoreStack());
             }
-            return component;
+            return component.reset().as(componentClass);
         }
         if (size() <= index) {
             throw LocatorProxies.noSuchElement(proxy);
         }
-        return get(index);
+        return super.get(index);
     }
 
     @Override
     public int count() {
-        if (loaded()) {
-            return super.size();
-        } else {
-            return LocatorProxies.getLocatorHandler(proxy).getLocator().findElements().size();
+        if (proxy != null) {
+            LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(proxy);
+            if (locatorHandler != null) {
+                return locatorHandler.getLocator().findElements().size();
+            }
         }
-    }
-
-    @Override
-    public int size() {
-        return count();
+        return super.size();
     }
 
     @Override
@@ -446,7 +449,11 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Override
     public <T extends FluentWebElement> FluentList<T> as(Class<T> componentClass) {
         return instantiator
-                .newComponentList(getClass(), componentClass, this.stream().map(e -> e.as(componentClass)).collect(toList()));
+                .newComponentList(getClass(), componentClass,
+                        this
+                                .stream()
+                                .map(e -> e.as(componentClass))
+                                .collect(toList()));
     }
 
     @Override
@@ -564,6 +571,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     /**
      * Scrolls to first element of list
+     *
      * @return this object reference to chain methods calls
      */
     @Override
@@ -573,6 +581,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     /**
      * Scrolls to first element of list
+     *
      * @return this object reference to chain methods calls
      */
     @Override
@@ -582,6 +591,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     /**
      * Modifies attributes of first element only
+     *
      * @return this object reference to chain methods calls
      */
     @Override
@@ -591,6 +601,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     /**
      * Scrolls to first element of list
+     *
      * @return this object reference to chain methods calls
      */
     @Override
