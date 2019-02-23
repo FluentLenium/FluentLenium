@@ -28,8 +28,8 @@ public class TitleTest extends IntegrationTest {
     public void verifyHasTitleNegative() {
         assertThatThrownBy(() -> assertThat(indexPage).hasTitle("Wrong title"))
                 .isInstanceOf(AssertionError.class)
-                .hasMessage("Current page title is Fluent Selenium Documentation." +
-                        " Expected Wrong title");
+                .hasMessage("Current page title is Fluent Selenium Documentation."
+                        + " Expected Wrong title");
     }
 
 }

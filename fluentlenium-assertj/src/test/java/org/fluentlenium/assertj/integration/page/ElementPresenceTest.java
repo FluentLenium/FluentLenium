@@ -44,15 +44,15 @@ public class ElementPresenceTest extends IntegrationTest {
     public void verifyElementNegative() {
         assertThatThrownBy(() -> assertThat(indexPage).hasElement(el("#nonexisting")))
                 .isInstanceOf(AssertionError.class)
-                .hasMessage("Element By.cssSelector: #nonexisting (first) (Lazy Element)" +
-                        " is not present on current page");
+                .hasMessage("Element By.cssSelector: #nonexisting (first) (Lazy Element)"
+                        + " is not present on current page");
     }
 
     @Test
     public void verifyElementsNegative() {
         assertThatThrownBy(() -> assertThat(indexPage).hasElements($("#nonexisting")))
                 .isInstanceOf(AssertionError.class)
-                .hasMessage("ListBy.cssSelector: #nonexisting ([]) is empty");
+                .hasMessage("List By.cssSelector: #nonexisting ([]) is empty");
     }
 
 }

@@ -24,8 +24,8 @@ public class PageAssert extends AbstractAssert<PageAssert, FluentPage> implement
     @Override
     public PageAssert hasElements(FluentList<? extends FluentWebElement> fluentList) {
         if (fluentList.isEmpty()) {
-            failWithMessage("List" +
-                    fluentList.toString() + " is empty");
+            failWithMessage("List "
+                    + fluentList.toString() + " is empty");
         }
         return this;
     }
@@ -49,8 +49,8 @@ public class PageAssert extends AbstractAssert<PageAssert, FluentPage> implement
 
         String pageTitle = actual.getDriver().getTitle();
         if (!pageTitle.equals(title)) {
-            failWithMessage("Current page title is " + pageTitle +
-                    ". Expected " + title);
+            failWithMessage("Current page title is " + pageTitle
+                    + ". Expected " + title);
         }
         return this;
     }
@@ -59,8 +59,8 @@ public class PageAssert extends AbstractAssert<PageAssert, FluentPage> implement
     public PageAssert hasUrl(String url) {
         String pageUrl = actual.getDriver().getCurrentUrl();
         if (!pageUrl.equals(url)) {
-            failWithMessage("Current page url is " + pageUrl +
-                    ". Expected " + url);
+            failWithMessage("Current page url is " + pageUrl
+                    + ". Expected " + url);
         }
         return this;
     }
