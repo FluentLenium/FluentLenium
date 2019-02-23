@@ -4,27 +4,14 @@ import org.assertj.core.api.AbstractAssert;
 import org.fluentlenium.core.alert.AlertImpl;
 import org.openqa.selenium.NoAlertPresentException;
 
-/**
- * Alert assertions.
- */
-public class AlertAssert extends AbstractAssert<AlertAssert, AlertImpl> {
+public class AlertAssert extends AbstractAssert<AlertAssert, AlertImpl> implements AlertStateAssert {
 
-    /**
-     * Creates a new assertion object for alert.
-     *
-     * @param actual actual alert
-     */
     public AlertAssert(AlertImpl actual) {
         super(actual, AlertAssert.class);
     }
 
-    /**
-     * Check that the alert box contains the given text
-     *
-     * @param text text to search for
-     * @return self
-     */
-    public AlertAssert hasText(String text) {
+    @Override
+    public AlertStateAssert hasText(String text) {
         try {
             String actualText = actual.getText();
             if (!actualText.contains(text)) {
@@ -38,12 +25,8 @@ public class AlertAssert extends AbstractAssert<AlertAssert, AlertImpl> {
         return this;
     }
 
-    /**
-     * Check that an alert box is present
-     *
-     * @return self
-     */
-    public AlertAssert isPresent() {
+    @Override
+    public AlertStateAssert isPresent() {
         if (!actual.present()) {
             failWithMessage("There is no alert box");
         }

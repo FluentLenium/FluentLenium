@@ -69,7 +69,6 @@ public interface FluentAssert {
      */
     AbstractAssert hasTagName(String tagName);
 
-
     /**
      * check if the element or list of elements has property with given value
      *

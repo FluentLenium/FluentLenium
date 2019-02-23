@@ -1,7 +1,7 @@
 package org.fluentlenium.assertj.integration.element;
 
 import org.fluentlenium.assertj.integration.IntegrationTest;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
@@ -10,14 +10,14 @@ public class FluentWebElementHasClassTest extends IntegrationTest {
 
     @Test
     public void testAssertOnOneOfManyClasses() {
-        standalone.goTo(DEFAULT_URL);
-        assertThat(standalone.el("#multiple-css-class")).hasClass("class1");
+        goTo(DEFAULT_URL);
+        assertThat(el("#multiple-css-class")).hasClass("class1");
     }
 
     @Test
     public void testAssertOnSubstringOfAClass() {
-        standalone.goTo(DEFAULT_URL);
-        assertThatThrownBy(() -> assertThat(standalone.el("#multiple-css-class")).hasClass("wrongclass"))
+        goTo(DEFAULT_URL);
+        assertThatThrownBy(() -> assertThat(el("#multiple-css-class")).hasClass("wrongclass"))
                 .isInstanceOf(AssertionError.class)
                 .hasMessage(
                         "The element does not have the class: wrongclass. Actual class found"

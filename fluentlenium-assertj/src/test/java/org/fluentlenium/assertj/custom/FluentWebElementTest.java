@@ -2,11 +2,11 @@ package org.fluentlenium.assertj.custom;
 
 import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.junit.Before;
-import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.Dimension;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
@@ -17,7 +17,7 @@ public class FluentWebElementTest {
     private FluentWebElement element;
     private FluentWebElementAssert elementAssert;
 
-    @Before
+    @BeforeMethod
     public void before() {
         MockitoAnnotations.initMocks(this);
         elementAssert = FluentLeniumAssertions.assertThat(element);
@@ -30,7 +30,7 @@ public class FluentWebElementTest {
         elementAssert.isEnabled();
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testIsEnabledKo() {
         when(element.enabled()).thenReturn(false);
         elementAssert.isEnabled();
@@ -43,7 +43,7 @@ public class FluentWebElementTest {
         elementAssert.isNotEnabled();
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testIsNotEnabledKo() {
         when(element.enabled()).thenReturn(true);
         elementAssert.isNotEnabled();
@@ -56,7 +56,7 @@ public class FluentWebElementTest {
         elementAssert.isClickable();
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testIsClickabledKo() {
         when(element.clickable()).thenReturn(false);
         elementAssert.isClickable();
@@ -69,7 +69,7 @@ public class FluentWebElementTest {
         elementAssert.isNotClickable();
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testIsNotClickabledKo() {
         when(element.clickable()).thenReturn(true);
         elementAssert.isNotClickable();
@@ -81,7 +81,7 @@ public class FluentWebElementTest {
         elementAssert.isPresent();
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testIsPresentKo() {
         when(element.present()).thenReturn(false);
         elementAssert.isPresent();
@@ -93,7 +93,7 @@ public class FluentWebElementTest {
         elementAssert.isNotPresent();
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testIsNotPresentdKo() {
         when(element.present()).thenReturn(true);
         elementAssert.isNotPresent();
@@ -106,7 +106,7 @@ public class FluentWebElementTest {
         elementAssert.isDisplayed();
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testIsDisplayedKo() {
         when(element.displayed()).thenReturn(false);
         elementAssert.isDisplayed();
@@ -119,7 +119,7 @@ public class FluentWebElementTest {
         elementAssert.isNotDisplayed();
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testIsSelected() {
         when(element.displayed()).thenReturn(true);
         elementAssert.isNotDisplayed();
@@ -132,7 +132,7 @@ public class FluentWebElementTest {
         elementAssert.isNotSelected();
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testIsNotSelectedKo() {
         when(element.selected()).thenReturn(true);
         elementAssert.isNotSelected();
@@ -145,7 +145,7 @@ public class FluentWebElementTest {
         elementAssert.isSelected();
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testIsSelectedKo() {
         when(element.selected()).thenReturn(false);
         elementAssert.isSelected();
@@ -157,7 +157,7 @@ public class FluentWebElementTest {
         elementAssert.hasName("some name");
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testHasNameKo() {
         when(element.name()).thenReturn("other name");
         elementAssert.hasName("some name");
@@ -169,7 +169,7 @@ public class FluentWebElementTest {
         elementAssert.hasValue("some value");
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testHasValueKo() {
         when(element.value()).thenReturn("other value");
         elementAssert.hasValue("some value");
@@ -181,7 +181,7 @@ public class FluentWebElementTest {
         elementAssert.hasTagName("some tag");
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testHasTagNameKo() {
         when(element.tagName()).thenReturn("other tag");
         elementAssert.hasTagName("some tag");
@@ -193,7 +193,7 @@ public class FluentWebElementTest {
         elementAssert.hasAttributeValue("attribute", "some value");
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testHasPropertyValueKo() {
         when(element.attribute("attribute")).thenReturn("other value");
         elementAssert.hasAttributeValue("attribute", "some value");
@@ -205,7 +205,7 @@ public class FluentWebElementTest {
         elementAssert.hasId("some id");
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testHasIdKo() {
         when(element.id()).thenReturn("other id");
         elementAssert.hasId("some id");
@@ -217,7 +217,7 @@ public class FluentWebElementTest {
         elementAssert.hasDimension(new Dimension(1, 2));
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testHasDimensionKo() {
         when(element.size()).thenReturn(new Dimension(2, 1));
         elementAssert.hasDimension(new Dimension(1, 2));
@@ -229,13 +229,13 @@ public class FluentWebElementTest {
         elementAssert.hasClass("some-class");
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testHasClassKo() {
         when(element.attribute("class")).thenReturn("other-class");
         elementAssert.hasClass("some-class");
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expectedExceptions = AssertionError.class)
     public void testSubstringKo() {
         when(element.attribute("class")).thenReturn("yolokitten");
         elementAssert.hasClass("yolo");
@@ -253,7 +253,7 @@ public class FluentWebElementTest {
         elementAssert.hasNotText("Text which isn't above");
     }
 
-    @Test (expected = AssertionError.class)
+    @Test (expectedExceptions = AssertionError.class)
     public void testHasNotTextNegative() {
         when(element.text()).thenReturn("Something written here");
         elementAssert.hasNotText("Something");
