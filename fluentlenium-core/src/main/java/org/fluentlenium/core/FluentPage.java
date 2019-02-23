@@ -38,6 +38,10 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
         super(control);
     }
 
+    public ClassAnnotations getClassAnnotations() {
+        return classAnnotations;
+    }
+
     @Override
     public String getUrl() {
         if (getClass().isAnnotationPresent(PageUrl.class)) {
@@ -96,7 +100,7 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
      *
      * @param urlTemplate URL Template
      */
-    protected void isAtUsingUrl(String urlTemplate) {
+    public void isAtUsingUrl(String urlTemplate) {
         UrlTemplate template = new UrlTemplate(urlTemplate);
 
         String url = url();
@@ -112,7 +116,7 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
      *
      * @param by by selector
      */
-    protected void isAtUsingSelector(By by) {
+    public void isAtUsingSelector(By by) {
         try {
             $(by).first().now();
         } catch (TimeoutException | NoSuchElementException | StaleElementReferenceException e) {

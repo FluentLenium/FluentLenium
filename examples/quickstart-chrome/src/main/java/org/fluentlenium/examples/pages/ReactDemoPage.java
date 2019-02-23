@@ -6,6 +6,7 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;
 
+@FindBy(id = "app")
 @PageUrl("https://foxhound87.github.io/mobx-react-form-demo/demo")
 public class ReactDemoPage extends FluentPage {
 

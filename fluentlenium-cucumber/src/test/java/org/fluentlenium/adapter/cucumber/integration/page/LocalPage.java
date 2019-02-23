@@ -26,7 +26,7 @@ public class LocalPage extends FluentPage {
     }
 
     @Override
-    protected void isAtUsingUrl(String urlTemplate) {
+    public void isAtUsingUrl(String urlTemplate) {
         // Skip because it doesn't work with file:// urls ...
     }
 }
