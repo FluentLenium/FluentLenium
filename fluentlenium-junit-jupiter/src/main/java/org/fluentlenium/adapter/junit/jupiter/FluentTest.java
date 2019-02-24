@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.junit.jupiter;
 
+import org.fluentlenium.utils.SeleniumVersionChecker;
 import org.fluentlenium.adapter.FluentTestRunnerAdapter;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -13,6 +14,7 @@ public class FluentTest extends FluentTestRunnerAdapter {
     // JUnitJupiter support, called from FluentJUnitJupiter
     
     /*package*/ void _starting(Class<?> testClass, String testName) {
+        SeleniumVersionChecker.checkSeleniumVersion();
         starting(testClass, testName);
     }
 

@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.junit;
 
+import org.fluentlenium.utils.SeleniumVersionChecker;
 import org.fluentlenium.adapter.FluentTestRunnerAdapter;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -21,6 +22,7 @@ public class FluentTest extends FluentTestRunnerAdapter {
 
         @Override
         public void starting(Description description) {
+            SeleniumVersionChecker.checkSeleniumVersion();
             super.starting(description);
             FluentTest.this.starting(description.getTestClass(), description.getDisplayName());
         }

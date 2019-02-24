@@ -28,6 +28,10 @@ public class BrowserConfig {
         return useHub;
     }
 
+    public String getBrowserType() {
+        return browserType.toString();
+    }
+
     public String getHubLocation() {
         return hubLocation;
     }

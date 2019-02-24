@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.fluentlenium.utils.SeleniumVersionChecker;
 import org.fluentlenium.adapter.FluentTestRunnerAdapter;
 import org.fluentlenium.adapter.ThreadLocalFluentControlContainer;
 import org.testng.ITestContext;
@@ -66,6 +67,7 @@ public class FluentTestNg extends FluentTestRunnerAdapter {
      */
     @BeforeMethod(alwaysRun = true)
     public void beforeMethod(Method method, ITestContext context) {
+        SeleniumVersionChecker.checkSeleniumVersion();
         ITestNGMethod testNGMethod = getMethods(context).get(method);
         starting(testNGMethod.getRealClass(), testNGMethod.getMethodName());
     }

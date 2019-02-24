@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.spock
 
+import org.fluentlenium.utils.SeleniumVersionChecker
 import org.fluentlenium.adapter.FluentTestRunnerAdapter
 import org.fluentlenium.adapter.junit.FluentTestRule
 import org.fluentlenium.core.domain.FluentList
@@ -39,6 +40,7 @@ class FluentSpecification extends Specification {
     public TestRule watchman = new FluentTestRule(this) {
         @Override
         void starting(Description description) {
+            SeleniumVersionChecker.checkSeleniumVersion()
             super.starting(description)
             specStarting(description.getTestClass(), description.getDisplayName())
         }
