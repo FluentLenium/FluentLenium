@@ -41,26 +41,35 @@ public final class SeleniumVersionChecker {
             MavenXpp3Reader reader = new MavenXpp3Reader();
             Model model;
             if (new File(POM).exists()) {
-                try {
-                    model = reader.read(new FileReader(POM));
-                } catch (IOException | XmlPullParserException e) {
-                    logger.warn(FAILED_TO_READ_MESSAGE, EXPECTED_VERSION);
-                    model = null;
-                }
-
-                if (model != null) {
-                    String seleniumVersion = (String) model.getProperties().get(SELENIUM_PROPERTY);
-
-                    if (seleniumVersion == null) {
-                        logger.warn(NOT_SET_MESSAGE, SELENIUM_PROPERTY, EXPECTED_VERSION, FL_URL);
-                    }
-
-                    if (seleniumVersion != null && !seleniumVersion.equals(EXPECTED_VERSION)) {
-                        logger.warn(WRONG_VERSION_MESSAGE, EXPECTED_VERSION);
-                    }
-                }
+                model = readPom(reader);
+                logWarningsWhenSeleniumVersionIsWrong(model);
             }
         }
         notifiedAlready = true;
+    }
+
+    private static void logWarningsWhenSeleniumVersionIsWrong(Model model) {
+        if (model != null) {
+            String seleniumVersion = (String) model.getProperties().get(SELENIUM_PROPERTY);
+
+            if (seleniumVersion == null) {
+                logger.warn(NOT_SET_MESSAGE, SELENIUM_PROPERTY, EXPECTED_VERSION, FL_URL);
+            }
+
+            if (seleniumVersion != null && !seleniumVersion.equals(EXPECTED_VERSION)) {
+                logger.warn(WRONG_VERSION_MESSAGE, EXPECTED_VERSION);
+            }
+        }
+    }
+
+    private static Model readPom(MavenXpp3Reader reader) {
+        Model model;
+        try {
+            model = reader.read(new FileReader(POM));
+        } catch (IOException | XmlPullParserException e) {
+            logger.warn(FAILED_TO_READ_MESSAGE, EXPECTED_VERSION);
+            model = null;
+        }
+        return model;
     }
 }
