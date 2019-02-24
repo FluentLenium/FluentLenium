@@ -1,7 +1,7 @@
 package org.fluentlenium.adapter.cucumber;
 
 import cucumber.api.Scenario;
-import org.fluentlenium.SeleniumVersionChecker;
+import org.fluentlenium.utils.SeleniumVersionChecker;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.FluentTestRunnerAdapter;
 import org.fluentlenium.adapter.SharedMutator;

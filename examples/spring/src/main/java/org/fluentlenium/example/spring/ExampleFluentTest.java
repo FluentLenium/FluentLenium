@@ -7,6 +7,8 @@ import org.fluentlenium.example.spring.config.SeleniumBrowserConfigProperties;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.os.ExecutableFinder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -16,12 +18,16 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = Config.class)
 public class ExampleFluentTest extends FluentTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(ExampleFluentTest.class);
+
     @Autowired
     private SeleniumBrowserConfigProperties config;
 
     @Override
     public WebDriver newWebDriver() {
         setupDriver();
+        logger.info("Using {} browser as specified in config.properties",
+                getBrowserConfig().getBrowserType());
         BrowserConfig browserConfig = getBrowserConfig();
         return browserConfig.resolveDriver(browserConfig);
     }

@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.spock
 
-import org.fluentlenium.SeleniumVersionChecker
+import org.fluentlenium.utils.SeleniumVersionChecker
 import org.fluentlenium.adapter.FluentTestRunnerAdapter
 import org.fluentlenium.adapter.junit.FluentTestRule
 import org.fluentlenium.core.domain.FluentList
