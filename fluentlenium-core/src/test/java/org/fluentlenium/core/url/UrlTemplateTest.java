@@ -1,8 +1,10 @@
 package org.fluentlenium.core.url;
 
+import org.assertj.core.util.Lists;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -219,7 +221,9 @@ public class UrlTemplateTest {
     @Test
     public void testSetParametersFromMap() {
         UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def{?/param2}/ghi{?/param3}");
-        Map<String, String> parameters = Map.of("param1", "test1", "param3", "test3");
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("param1", "test1");
+        parameters.put("param3", "test3");
 
         urlParametersTemplate.put(parameters);
 
@@ -229,7 +233,7 @@ public class UrlTemplateTest {
     @Test
     public void testAddParametersFromList() {
         UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def{?/param2}/ghi{?/param3}");
-        List<String> parameters = List.of("test1", "test2");
+        List<String> parameters = Lists.newArrayList("test1", "test2");
 
         urlParametersTemplate.addAll(parameters);
 

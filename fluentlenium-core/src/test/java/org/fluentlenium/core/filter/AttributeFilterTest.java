@@ -1,5 +1,6 @@
 package org.fluentlenium.core.filter;
 
+import com.google.common.collect.Lists;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -151,8 +152,8 @@ public class AttributeFilterTest {
         FluentWebElement fluentWebElem3 = new FluentWebElement(webElement3, control, instantiator);
         FluentWebElement fluentWebElem4 = new FluentWebElement(mock(WebElement.class), control, instantiator);
 
-        List<FluentWebElement> elementsToFilter = List.of(fluentWebElem1, fluentWebElem2, fluentWebElem3, fluentWebElem4);
-        List<FluentWebElement> filteredElements = List.of(fluentWebElem1, fluentWebElem3);
+        List<FluentWebElement> elementsToFilter = Lists.newArrayList(fluentWebElem1, fluentWebElem2, fluentWebElem3, fluentWebElem4);
+        List<FluentWebElement> filteredElements = Lists.newArrayList(fluentWebElem1, fluentWebElem3);
 
         AbstractMatcher matcher = new EqualMatcher(A_VALUE);
         AttributeFilter attributeFilter = new AttributeFilter("id", matcher);
