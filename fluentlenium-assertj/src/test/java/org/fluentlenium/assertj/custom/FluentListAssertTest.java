@@ -51,7 +51,7 @@ public class FluentListAssertTest {
 
     @Test(expectedExceptions = AssertionError.class)
     public void hasTextMatchingKo() {
-        when(fluentList.texts()).thenReturn(Lists.newArrayList(("Pharmacy", "Hospital"));
+        when(fluentList.texts()).thenReturn(Lists.newArrayList("Pharmacy", "Hospital"));
         listAssert.hasTextMatching("Pha\\w+cy\\8");
     }
 
@@ -63,7 +63,7 @@ public class FluentListAssertTest {
 
     @Test(expectedExceptions = AssertionError.class)
     public void testHasNotTextKo() {
-        when(fluentList.texts()).thenReturn(Lists.newArrayList(("some text", "other text"));
+        when(fluentList.texts()).thenReturn(Lists.newArrayList("some text", "other text"));
         listAssert.hasNotText("other text");
     }
 
@@ -189,19 +189,19 @@ public class FluentListAssertTest {
 
     @Test
     public void testHasValueOk() {
-        when(fluentList.values()).thenReturn(Lists.newArrayList(("1", "2", "3"));
+        when(fluentList.values()).thenReturn(Lists.newArrayList("1", "2", "3"));
         listAssert.hasValue("1");
     }
 
     @Test(expectedExceptions = AssertionError.class)
     public void testHasValueKo() {
-        when(fluentList.values()).thenReturn(Lists.newArrayList(("1", "2", "3"));
+        when(fluentList.values()).thenReturn(Lists.newArrayList("1", "2", "3"));
         listAssert.hasValue("4");
     }
 
     @Test
     public void testHasNameOk() {
-        when(fluentList.names()).thenReturn(Lists.newArrayList(("name-one", "name-two"));
+        when(fluentList.names()).thenReturn(Lists.newArrayList("name-one", "name-two"));
         listAssert.hasName("name-one");
     }
 
