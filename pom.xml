@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>${fluentlenium.project.version}</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -444,7 +444,7 @@
                 <jdk>11</jdk>
             </activation>
             <properties>
-                <fluentlenium.project.version>4.1.2-SNAPSHOT</fluentlenium.project.version>
+                <revision>4.1.2-SNAPSHOT</revision>
                 <java.version>11</java.version>
             </properties>
             <build>
@@ -468,7 +468,7 @@
                 <jdk>1.8</jdk>
             </activation>
             <properties>
-                <fluentlenium.project.version>3.8.0-SNAPSHOT</fluentlenium.project.version>
+                <revision>3.8.0-SNAPSHOT</revision>
                 <java.version>1.8</java.version>
             </properties>
             <build>
