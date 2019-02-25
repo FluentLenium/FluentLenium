@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>4.1.2-SNAPSHOT</version>
+    <version>${fluentlenium.project.version}</version>
     <packaging>pom</packaging>
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -97,8 +97,8 @@
             <name>Adrian Koryl</name>
             <email>adrian.koryl@gmail.com</email>
             <url>https://github.com/koryl</url>
-            <organization>Billennium</organization>
-            <organizationUrl>http://www.billennium.com/</organizationUrl>
+            <organization>Edge One Solutions</organization>
+            <organizationUrl>http://www.edge1s.com/</organizationUrl>
             <roles>
                 <role>developer</role>
             </roles>
@@ -120,7 +120,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <selenium.version>3.141.59</selenium.version>
-        <java.version>11</java.version>
         <junit.jupiter.version>5.3.2</junit.jupiter.version>
     </properties>
 
@@ -367,13 +366,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <release>11</release>
-                </configuration>
-            </plugin>
-            <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.3</version>
                 <configuration>
@@ -453,6 +445,53 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>java11</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <fluentlenium.project.version>4.1.2-SNAPSHOT</fluentlenium.project.version>
+                <java.version>11</java.version>
+            </properties>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <artifactId>maven-compiler-plugin</artifactId>
+                            <version>3.8.0</version>
+                            <configuration>
+                                <release>${java.version}</release>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+
+        <profile>
+            <id>java8</id>
+            <properties>
+                <fluentlenium.project.version>3.8.0-SNAPSHOT</fluentlenium.project.version>
+                <java.version>1.8</java.version>
+            </properties>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <artifactId>maven-compiler-plugin</artifactId>
+                            <version>3.8.0</version>
+                            <configuration>
+                                <source>${java.version}</source>
+                                <target>${java.version}</target>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+
+
         <profile>
             <id>examples</id>
             <modules>
