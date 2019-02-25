@@ -3,7 +3,7 @@ jobs:
     - stage: test
       name: "Java - unit & integration tests code coverage + snapshot upload"
       language: java
-      jdk: oraclejdk11
+      jdk: ${jdk.version}
       script:
         - mvn clean verify jacoco:report
         - mvn coveralls:report
@@ -19,7 +19,7 @@ jobs:
     - stage: test
       name: "Java - compile examples"
       language: java
-      jdk: oraclejdk11
+      jdk: ${jdk.version}
       script:
         - mvn -Pexamples clean compile
 
