@@ -448,12 +448,11 @@
         <profile>
             <id>java11</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <jdk>11</jdk>
             </activation>
             <properties>
                 <fluentlenium.project.version>4.1.2-SNAPSHOT</fluentlenium.project.version>
                 <java.version>11</java.version>
-                <jdk.version>oraclejdk11</jdk.version>
             </properties>
             <build>
                 <pluginManagement>
@@ -473,13 +472,11 @@
         <profile>
             <id>java8</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <jdk>1.8</jdk>
             </activation>
             <properties>
                 <fluentlenium.project.version>3.8.0-SNAPSHOT</fluentlenium.project.version>
                 <java.version>1.8</java.version>
-                <jdk.version>oraclejdk8</jdk.version>
-
             </properties>
             <build>
                 <pluginManagement>
