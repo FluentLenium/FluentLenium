@@ -1,5 +1,6 @@
 package org.fluentlenium.core.domain;
 
+import com.google.common.collect.Lists;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
@@ -413,7 +414,7 @@ public class FluentListImplTest {
         when(element2.getElement()).thenReturn(webElement2);
         when(element3.getElement()).thenReturn(webElement3);
 
-        List<WebElement> expectedElements = List.of(webElement1, webElement2, webElement3);
+        List<WebElement> expectedElements = Lists.newArrayList(webElement1, webElement2, webElement3);
 
         assertThat(list.toElements()).containsExactlyInAnyOrderElementsOf(expectedElements);
     }

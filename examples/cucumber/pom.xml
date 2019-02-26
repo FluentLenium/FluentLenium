@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.fluentlenium</groupId>
-    <artifactId>fluentlenium-cucumber-example</artifactId>
+    <artifactId>fluentlenium-examples-cucumber</artifactId>
     <version>4.1.2-SNAPSHOT</version>
 
     <name>FluentLenium Cucumber example</name>
@@ -54,6 +54,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.0.0-M3</version>
                 <executions>
                     <execution>
                         <goals>

@@ -34,7 +34,7 @@ public interface FluentWaitConfiguration<T> {
      * @return {@code this} object to chain method calls
      */
     default T atMost(long duration, TimeUnit unit) {
-        return atMost(Duration.of(duration, unit.toChronoUnit()));
+        return atMost(Duration.of(duration, TimeToChronoUnitConverter.of(unit)));
     }
 
     /**
@@ -63,7 +63,7 @@ public interface FluentWaitConfiguration<T> {
      * @return {@code this} object to chain method calls
      */
     default T pollingEvery(long duration, TimeUnit unit) {
-        return pollingEvery(Duration.of(duration, unit.toChronoUnit()));
+        return pollingEvery(Duration.of(duration, TimeToChronoUnitConverter.of(unit)));
     }
 
     /**
