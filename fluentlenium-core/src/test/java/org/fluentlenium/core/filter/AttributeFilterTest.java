@@ -152,7 +152,8 @@ public class AttributeFilterTest {
         FluentWebElement fluentWebElem3 = new FluentWebElement(webElement3, control, instantiator);
         FluentWebElement fluentWebElem4 = new FluentWebElement(mock(WebElement.class), control, instantiator);
 
-        List<FluentWebElement> elementsToFilter = Lists.newArrayList(fluentWebElem1, fluentWebElem2, fluentWebElem3, fluentWebElem4);
+        List<FluentWebElement> elementsToFilter =
+                Lists.newArrayList(fluentWebElem1, fluentWebElem2, fluentWebElem3, fluentWebElem4);
         List<FluentWebElement> filteredElements = Lists.newArrayList(fluentWebElem1, fluentWebElem3);
 
         AbstractMatcher matcher = new EqualMatcher(A_VALUE);

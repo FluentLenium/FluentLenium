@@ -1,7 +1,6 @@
 package org.fluentlenium.core.wait;
 
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 

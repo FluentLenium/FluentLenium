@@ -1,13 +1,5 @@
 package org.fluentlenium.assertj.custom;
 
-import static java.util.Collections.emptyList;
-import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.core.domain.FluentList;
@@ -17,6 +9,13 @@ import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
+
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.when;
 
 public class FluentListAssertTest {
 

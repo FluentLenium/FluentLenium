@@ -3,7 +3,7 @@ package org.fluentlenium.core.wait;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
 
-public class TimeToChronoUnitConverter {
+public final class TimeToChronoUnitConverter {
 
     private TimeToChronoUnitConverter() {
         // helper class
