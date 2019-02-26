@@ -28,7 +28,7 @@ jobs:
       language: java
       jdk: oraclejdk8
       script:
-        - mvn clean verify
+        - mvn clean verify -Drevision=3.8.0-SNAPSHOT
 
     - stage: test
       name: "Ruby - Docs build"
