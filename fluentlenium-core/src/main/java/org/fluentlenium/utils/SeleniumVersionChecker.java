@@ -16,6 +16,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.Objects.nonNull;
+
 /**
  * Responsible for retrieving information about Selenium version from pom.xml (if present). It logs warning when wrong
  * version is used.
@@ -115,24 +117,28 @@ public final class SeleniumVersionChecker {
         if (seleniumVersion == null || model == null) {
             return null;
         }
-        String version = seleniumVersion.substring(2, seleniumVersion.length() - 1);
+        String version = getNamePropertyName(seleniumVersion);
         String versionProp = null;
 
-        if (model.getProperties() != null) {
+        if (nonNull(model.getProperties())) {
             versionProp = model.getProperties().getProperty(version);
 
-        } else if (System.getProperty(version) != null) {
+        } else if (nonNull(System.getProperty(version))) {
             versionProp = System.getProperty(version);
 
-        } else if (model.getProfiles() != null && model.getProfiles().size() > 0) {
+        } else if (nonNull(model.getProfiles()) && model.getProfiles().size() > 0) {
             versionProp = model.getProfiles().stream()
                     .filter(prof ->
-                            prof.getProperties() != null && prof.getProperties().getProperty(version) != null)
+                            nonNull(prof.getProperties()) && nonNull(prof.getProperties().getProperty(version)))
                     .findAny()
                     .map(prof -> prof.getProperties().getProperty(version))
                     .orElse(null);
         }
         return versionProp;
+    }
+
+    private static String getNamePropertyName(String propertyVersion) {
+        return propertyVersion.substring(2, propertyVersion.length() - 1);
     }
 
     private static Model readPom(MavenXpp3Reader reader, String pathToPom) {
