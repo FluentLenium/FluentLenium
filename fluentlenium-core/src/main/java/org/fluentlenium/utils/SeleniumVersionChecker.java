@@ -93,7 +93,7 @@ public final class SeleniumVersionChecker {
     static String retrieveVersionFromPom(Model model) {
         List<Dependency> dependencies;
 
-        if (model.getDependencyManagement() != null) {
+        if (nonNull(model.getDependencyManagement())) {
             dependencies = Stream.of(model.getDependencies(), model.getDependencyManagement().getDependencies())
                     .flatMap(Collection::stream)
                     .collect(Collectors.toList());

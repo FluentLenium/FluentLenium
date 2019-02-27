@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.utils.SeleniumVersionChecker.checkVersionFromMaven;
 
-public class SeleniumVersionCheckerLoggerTest extends SeleniumVersionCheckerRetrieveVersionTest {
+public class SeleniumVersionCheckerLoggerTest implements SeleniumVersionCheckerTestConstants {
 
     private ListAppender<ILoggingEvent> listAppender;
 

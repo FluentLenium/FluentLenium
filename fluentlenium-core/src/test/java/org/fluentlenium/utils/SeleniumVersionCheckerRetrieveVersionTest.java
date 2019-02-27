@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.utils.SeleniumVersionChecker.checkModelForParametrizedValue;
 import static org.fluentlenium.utils.SeleniumVersionChecker.retrieveVersionFromPom;
 
-public class SeleniumVersionCheckerRetrieveVersionTest extends SeleniumVersionCheckerTestConstants {
+public class SeleniumVersionCheckerRetrieveVersionTest implements SeleniumVersionCheckerTestConstants {
 
     private MavenXpp3Reader reader;
 
