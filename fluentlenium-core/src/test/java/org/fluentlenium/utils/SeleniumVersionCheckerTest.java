@@ -13,9 +13,12 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.fluentlenium.utils.SeleniumVersionChecker.retrieveVersionFromPom;
+import static org.fluentlenium.utils.SeleniumVersionChecker.*;
 
 public class SeleniumVersionCheckerTest {
 
@@ -50,7 +53,20 @@ public class SeleniumVersionCheckerTest {
     }
 
     @Test
-    public void retrieveBadVersionShouldReturnNullTest() throws IOException, XmlPullParserException {
+    public void retrieveGoodVersionFromPomPropertiesShouldReturnTrueTest() throws IOException, XmlPullParserException {
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        File file = new File(PATH_TO_POM + "parametrized/" + POM);
+
+        Model model = reader.read(new FileReader(file));
+
+        String parametrizedVersion = retrieveVersionFromPom(model);
+        String actualVersion = checkModelForParametrizedValue(parametrizedVersion, model);
+
+        assertThat(actualVersion).isEqualTo(EXPECTED_VERSION);
+    }
+
+    @Test
+    public void retrieveBadVersionShouldReturnFalseTest() throws IOException, XmlPullParserException {
         MavenXpp3Reader reader = new MavenXpp3Reader();
         File file = new File(PATH_TO_POM + "wrong/" + POM);
 
@@ -83,10 +99,9 @@ public class SeleniumVersionCheckerTest {
 
         fooLogger.addAppender(listAppender);
 
-        SeleniumVersionChecker.checkVersionFromMaven(PATH_TO_POM + "wrong/" + POM);
+        checkVersionFromMaven(PATH_TO_POM + "wrong/" + POM);
 
-        assertThat(listAppender.list)
-                .extracting(ILoggingEvent::getMessage)
+        assertThat(getLogsForThread(listAppender))
                 .hasSize(1)
                 .element(0)
                 .isEqualTo(WRONG_VERSION_MESSAGE);
@@ -98,15 +113,15 @@ public class SeleniumVersionCheckerTest {
         Logger fooLogger = (Logger) LoggerFactory.getLogger(SeleniumVersionChecker.class);
 
         ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
+        listAppender.setName("Test1");
         listAppender.start();
 
         fooLogger.addAppender(listAppender);
 
-        SeleniumVersionChecker.checkVersionFromMaven(PATH_TO_POM + "wrong/" + POM);
-        SeleniumVersionChecker.checkVersionFromMaven(PATH_TO_POM + "wrong/" + POM);
+        checkVersionFromMaven(PATH_TO_POM + "wrong/" + POM);
+        checkVersionFromMaven(PATH_TO_POM + "wrong/" + POM);
 
-        assertThat(listAppender.list)
-                .extracting(ILoggingEvent::getMessage)
+        assertThat(getLogsForThread(listAppender))
                 .hasSize(1)
                 .element(0)
                 .isEqualTo(WRONG_VERSION_MESSAGE);
@@ -122,15 +137,14 @@ public class SeleniumVersionCheckerTest {
 
         fooLogger.addAppender(listAppender);
 
-        SeleniumVersionChecker.checkVersionFromMaven(PATH_TO_POM + "wrong/not_exisitng.xml");
+        checkVersionFromMaven(PATH_TO_POM + "wrong/not_exisitng.xml");
 
-        assertThat(listAppender.list)
-                .extracting(ILoggingEvent::getMessage)
+        assertThat(getLogsForThread(listAppender))
                 .hasSize(0);
     }
 
     @Test
-    public void shouldLogMessageWhenWrongFileWasPassedTest() {
+    public void shouldNotLogAnythingWhenVersionParametrizedInPomPropertiesIsCorrectTest() {
 
         Logger fooLogger = (Logger) LoggerFactory.getLogger(SeleniumVersionChecker.class);
 
@@ -139,12 +153,66 @@ public class SeleniumVersionCheckerTest {
 
         fooLogger.addAppender(listAppender);
 
+        checkVersionFromMaven(PATH_TO_POM + "parametrized/" + POM);
+
+        assertThat(getLogsForThread(listAppender))
+                .hasSize(0);
+    }
+
+    @Test
+    public void shouldNotLogAnythingWhenVersionParametrizedInParentPomPropertiesIsCorrectTest() {
+
+        Logger fooLogger = (Logger) LoggerFactory.getLogger(SeleniumVersionChecker.class);
+
+        ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
+        listAppender.start();
+
+        fooLogger.addAppender(listAppender);
+
+        checkVersionFromMaven(PATH_TO_POM + "parametrized/child" + POM);
+
+        assertThat(getLogsForThread(listAppender)).hasSize(0);
+    }
+
+    @Test
+    public void shouldLogWrongParametrizedVersionOfLibraryTest() {
+
+        Logger fooLogger = (Logger) LoggerFactory.getLogger(SeleniumVersionChecker.class);
+
+        ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
+        listAppender.start();
+
+        fooLogger.addAppender(listAppender);
+
+        checkVersionFromMaven(PATH_TO_POM + "parametrized/wrong/" + POM);
+
+        assertThat(getLogsForThread(listAppender))
+                .hasSize(1)
+                .element(0)
+                .isEqualTo(WRONG_VERSION_MESSAGE);
+    }
+
+    @Test
+    public void shouldLogMessageWhenWrongFileWasPassedTest() {
+
+        Logger fooLogger = (Logger) LoggerFactory.getLogger(SeleniumVersionChecker.class);
+        ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
+        listAppender.start();
+
+        fooLogger.addAppender(listAppender);
+
         SeleniumVersionChecker.checkVersionFromMaven(PATH_TO_POM + "dummy_resource.json");
 
-        assertThat(listAppender.list)
-                .extracting(ILoggingEvent::getMessage)
+        assertThat(getLogsForThread(listAppender))
                 .hasSize(1)
                 .element(0)
                 .isEqualTo(FAILED_TO_READ_MESSAGE);
+    }
+
+    private List<String> getLogsForThread(ListAppender<ILoggingEvent> listAppender) {
+        return listAppender.list.stream()
+                .filter(event -> Objects.equals(event.getThreadName(), Thread.currentThread().getName()))
+                .map(ILoggingEvent::getMessage)
+                .collect(Collectors.toList());
     }
 }

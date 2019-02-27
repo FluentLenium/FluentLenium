@@ -16,7 +16,13 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Responsible for retrieving information about Selenium version from pom.xml (if present). It logs warning when wrong
+ * version is used.
+ */
 public final class SeleniumVersionChecker {
+
+    private static final Logger logger = LoggerFactory.getLogger(SeleniumVersionChecker.class);
 
     private static final String FAILED_TO_READ_MESSAGE =
             "Failed to read Selenium version from your pom.xml."
@@ -32,8 +38,6 @@ public final class SeleniumVersionChecker {
     private static final String POM = "pom.xml";
     private static final String VERSION_REGEX = "^\\$\\{.*}$";
 
-    private static final Logger logger = LoggerFactory.getLogger(SeleniumVersionChecker.class);
-
     static boolean notifiedAlready;
     static boolean isSeleniumVersionFound;
 
@@ -41,6 +45,9 @@ public final class SeleniumVersionChecker {
         // utility class
     }
 
+    /**
+     * Checks Selenium version during runtime.
+     */
     public static void checkSeleniumVersion() {
         checkVersionFromMaven(POM);
     }
@@ -72,8 +79,7 @@ public final class SeleniumVersionChecker {
             }
             isSeleniumVersionFound = true;
             if (checkForParametrizedVersion(seleniumVersion)) {
-                String seleniumVersionTemp = seleniumVersion.substring(2, seleniumVersion.length() - 1);
-                seleniumVersion = checkModelForParametrizedValue(seleniumVersionTemp, model);
+                seleniumVersion = checkModelForParametrizedValue(seleniumVersion, model);
             }
 
             if (!Objects.equals(seleniumVersion, EXPECTED_VERSION)) {
@@ -105,7 +111,11 @@ public final class SeleniumVersionChecker {
         return version.matches(VERSION_REGEX);
     }
 
-    private static String checkModelForParametrizedValue(String version, Model model) {
+    static String checkModelForParametrizedValue(String seleniumVersion, Model model) {
+        if (seleniumVersion == null || model == null) {
+            return null;
+        }
+        String version = seleniumVersion.substring(2, seleniumVersion.length() - 1);
         String versionProp = null;
 
         if (model.getProperties() != null) {
