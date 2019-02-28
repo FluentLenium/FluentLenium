@@ -3,7 +3,6 @@ package org.fluentlenium.utils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -16,19 +15,10 @@ import static org.fluentlenium.utils.SeleniumVersionChecker.retrieveVersionFromP
 
 public class SeleniumVersionCheckerRetrieveVersionTest extends SeleniumVersionCheckerTestConstants {
 
-    private MavenXpp3Reader reader;
-
-    @Before
-    public void init() {
-        reader = new MavenXpp3Reader();
-    }
-
     @Test
     public void retrieveGoodVersionShouldReturnTrueTest() throws IOException, XmlPullParserException {
 
-        File file = new File(PARENT_POM);
-
-        Model model = reader.read(new FileReader(file));
+        Model model = getModel(PARENT_POM);
 
         String actualVersion = retrieveVersionFromPom(model);
 
@@ -38,9 +28,7 @@ public class SeleniumVersionCheckerRetrieveVersionTest extends SeleniumVersionCh
     @Test
     public void retrieveGoodVersionFromPomPropertiesShouldReturnTrueTest() throws IOException, XmlPullParserException {
 
-        File file = new File(PARAMETRIZED_POM);
-
-        Model model = reader.read(new FileReader(file));
+        Model model = getModel(PARAMETRIZED_POM);
 
         String parametrizedVersion = retrieveVersionFromPom(model);
         String actualVersion = checkModelForParametrizedValue(parametrizedVersion, model);
@@ -51,9 +39,7 @@ public class SeleniumVersionCheckerRetrieveVersionTest extends SeleniumVersionCh
     @Test
     public void retrieveBadVersionShouldReturnFalseTest() throws IOException, XmlPullParserException {
 
-        File file = new File(WRONG_VERSION_POM);
-
-        Model model = reader.read(new FileReader(file));
+        Model model = getModel(WRONG_VERSION_POM);
 
         String actualVersion = retrieveVersionFromPom(model);
 
@@ -63,13 +49,18 @@ public class SeleniumVersionCheckerRetrieveVersionTest extends SeleniumVersionCh
     @Test
     public void retrieveVersionShouldReturnNullWhenVersionNotPresentTest() throws IOException, XmlPullParserException {
 
-        File file = new File(CHILD_POM);
-
-        Model model = reader.read(new FileReader(file));
+        Model model = getModel(CHILD_POM);
 
         String actualVersion = retrieveVersionFromPom(model);
 
         assertThat(actualVersion).isNull();
+    }
+
+    private Model getModel(String pom) throws IOException, XmlPullParserException {
+
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        File file = new File(pom);
+        return reader.read(new FileReader(file));
     }
 
 }

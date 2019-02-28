@@ -120,39 +120,40 @@ public final class SeleniumVersionChecker {
 
     static String checkModelForParametrizedValue(String seleniumVersion, Model model) {
         String version = getNamePropertyName(seleniumVersion);
-        String versionProp = null;
 
-        if (nonNull(seleniumVersion) && nonNull(model.getProperties())) {
-            versionProp = model.getProperties().getProperty(version);
+        if (nonNull(model.getProperties())) {
+            return model.getProperties().getProperty(version);
 
-        } else if (nonNull(seleniumVersion) && nonNull(System.getProperty(version))) {
-            versionProp = System.getProperty(version);
+        } else if (nonNull(System.getProperty(version))) {
+            return System.getProperty(version);
 
-        } else if (nonNull(seleniumVersion) && nonNull(model.getProfiles()) && model.getProfiles().size() > 0) {
-            versionProp = model.getProfiles().stream()
-                    .filter(prof ->
-                            nonNull(prof.getProperties()) && nonNull(prof.getProperties().getProperty(version)))
-                    .findAny()
-                    .map(prof -> prof.getProperties().getProperty(version))
-                    .orElse(null);
+        } else if (nonNull(model.getProfiles()) && model.getProfiles().size() > 0) {
+            return getVersionNameFromProfiles(version, model);
+
+        } else {
+            return null;
         }
-        return versionProp;
+    }
+
+    private static String getVersionNameFromProfiles(String version, Model model) {
+        return model.getProfiles().stream()
+                .filter(prof ->
+                        nonNull(prof.getProperties()) && nonNull(prof.getProperties().getProperty(version)))
+                .findAny()
+                .map(prof -> prof.getProperties().getProperty(version))
+                .orElse(null);
     }
 
     private static String getNamePropertyName(String propertyVersion) {
-        if (nonNull(propertyVersion))
-            return propertyVersion.substring(2, propertyVersion.length() - 1);
-        else return null;
+        return nonNull(propertyVersion) ? propertyVersion.substring(2, propertyVersion.length() - 1) : "";
     }
 
     private static Model readPom(MavenXpp3Reader reader, String pathToPom) {
-        Model model;
         try {
-            model = reader.read(new FileReader(pathToPom));
+            return reader.read(new FileReader(pathToPom));
         } catch (IOException | XmlPullParserException e) {
             logger.warn(FAILED_TO_READ_MESSAGE, EXPECTED_VERSION);
-            model = null;
+            return null;
         }
-        return model;
     }
 }

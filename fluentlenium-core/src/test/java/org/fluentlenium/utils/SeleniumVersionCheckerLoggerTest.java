@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
-import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -18,8 +17,10 @@ import static org.fluentlenium.utils.SeleniumVersionChecker.checkVersionFromMave
 
 public class SeleniumVersionCheckerLoggerTest extends SeleniumVersionCheckerTestConstants {
 
-    private final static ThreadLocal<String> loggerName = new ThreadLocal<>();
-    private ListAppender<ILoggingEvent> listAppender;
+    private ThreadLocal<Logger> fooLogger = new ThreadLocal<>();
+
+    private static final ThreadLocal<String> loggerName = new ThreadLocal<>();
+    private static final ThreadLocal<ListAppender<ILoggingEvent>> listAppender = new ThreadLocal<>();
 
     private static final String FAILED_TO_READ_MESSAGE =
             "Failed to read Selenium version from your pom.xml."
@@ -32,14 +33,15 @@ public class SeleniumVersionCheckerLoggerTest extends SeleniumVersionCheckerTest
     @Before
     public void reset() {
 
-        Logger fooLogger = (Logger) LoggerFactory.getLogger(SeleniumVersionChecker.class);
-        listAppender = new ListAppender<>();
-
         loggerName.set(getRandomString());
-        listAppender.setName(loggerName.get());
-        listAppender.start();
+        fooLogger.set((Logger) LoggerFactory.getLogger(SeleniumVersionChecker.class));
 
-        fooLogger.addAppender(listAppender);
+        listAppender.set(new ListAppender<>());
+
+        listAppender.get().setName(loggerName.get());
+        listAppender.get().start();
+
+        fooLogger.get().addAppender(listAppender.get());
 
         SeleniumVersionChecker.isSeleniumVersionFound.set(false);
         SeleniumVersionChecker.notifiedAlready.set(false);
@@ -50,7 +52,7 @@ public class SeleniumVersionCheckerLoggerTest extends SeleniumVersionCheckerTest
 
         checkVersionFromMaven(WRONG_VERSION_POM);
 
-        assertThat(getLogsForThread(listAppender))
+        assertThat(getLogsForThread(listAppender.get()))
                 .hasSize(1)
                 .element(0)
                 .isEqualTo(WRONG_VERSION_MESSAGE);
@@ -61,7 +63,7 @@ public class SeleniumVersionCheckerLoggerTest extends SeleniumVersionCheckerTest
 
         checkVersionFromMaven(PATH_TO_TEST_FOLDER + "/not_exisitng.xml");
 
-        assertThat(getLogsForThread(listAppender))
+        assertThat(getLogsForThread(listAppender.get()))
                 .hasSize(0);
     }
 
@@ -70,7 +72,7 @@ public class SeleniumVersionCheckerLoggerTest extends SeleniumVersionCheckerTest
 
         checkVersionFromMaven(PARAMETRIZED_POM);
 
-        assertThat(getLogsForThread(listAppender))
+        assertThat(getLogsForThread(listAppender.get()))
                 .hasSize(0);
     }
 
@@ -79,7 +81,7 @@ public class SeleniumVersionCheckerLoggerTest extends SeleniumVersionCheckerTest
 
         checkVersionFromMaven(PARAMETRIZED_CHILD_POM);
 
-        assertThat(getLogsForThread(listAppender)).hasSize(0);
+        assertThat(getLogsForThread(listAppender.get())).hasSize(0);
     }
 
     @Test
@@ -87,7 +89,7 @@ public class SeleniumVersionCheckerLoggerTest extends SeleniumVersionCheckerTest
 
         checkVersionFromMaven(PARAMETRIZED_WRONG_VERSION_POM);
 
-        assertThat(getLogsForThread(listAppender))
+        assertThat(getLogsForThread(listAppender.get()))
                 .hasSize(1)
                 .element(0)
                 .isEqualTo(WRONG_VERSION_MESSAGE);
@@ -98,23 +100,21 @@ public class SeleniumVersionCheckerLoggerTest extends SeleniumVersionCheckerTest
 
         checkVersionFromMaven(PATH_TO_TEST_FOLDER + "dummy_resource.json");
 
-        assertThat(getLogsForThread(listAppender))
+        assertThat(getLogsForThread(listAppender.get()))
                 .hasSize(1)
                 .element(0)
                 .isEqualTo(FAILED_TO_READ_MESSAGE);
     }
 
     private List<String> getLogsForThread(ListAppender<ILoggingEvent> listAppender) {
-
         return listAppender.list.stream()
+                .filter(event -> Objects.equals(event.getThreadName(), Thread.currentThread().getName()))
                 .filter(event -> Objects.equals(listAppender.getName(), loggerName.get()))
                 .map(ILoggingEvent::getMessage)
                 .collect(Collectors.toList());
     }
 
     private String getRandomString() {
-        byte[] array = new byte[7];
-        new Random().nextBytes(array);
-        return new String(array, Charset.forName("UTF-8"));
+        return String.valueOf(new Random().nextInt());
     }
 }
