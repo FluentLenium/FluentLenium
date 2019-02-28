@@ -40,8 +40,13 @@ public final class SeleniumVersionChecker {
     private static final String POM = "pom.xml";
     private static final String VERSION_REGEX = "^\\$\\{.*}$";
 
-    static boolean notifiedAlready;
-    static boolean isSeleniumVersionFound;
+    static ThreadLocal<Boolean> notifiedAlready = new ThreadLocal<>();
+    static ThreadLocal<Boolean> isSeleniumVersionFound = new ThreadLocal<>();
+
+    static {
+        notifiedAlready.set(false);
+        isSeleniumVersionFound.set(false);
+    }
 
     private SeleniumVersionChecker() {
         // utility class
@@ -51,25 +56,25 @@ public final class SeleniumVersionChecker {
      * Checks Selenium version during runtime.
      */
     public static void checkSeleniumVersion() {
-        checkVersionFromMaven(POM);
+        if (!notifiedAlready.get()) {
+            checkVersionFromMaven(POM);
+        }
+        notifiedAlready.set(true);
     }
 
     static void checkVersionFromMaven(String pomFile) {
-        if (!notifiedAlready) {
-            MavenXpp3Reader reader = new MavenXpp3Reader();
-            Model model;
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        Model model;
 
-            if (new File(pomFile).exists()) {
-                model = readPom(reader, pomFile);
-                logWarningsWhenSeleniumVersionIsWrong(model);
-            }
-
-            if (!isSeleniumVersionFound && new File("../" + pomFile).exists()) {
-                model = readPom(reader, "../" + pomFile);
-                logWarningsWhenSeleniumVersionIsWrong(model);
-            }
+        if (new File(pomFile).exists()) {
+            model = readPom(reader, pomFile);
+            logWarningsWhenSeleniumVersionIsWrong(model);
         }
-        notifiedAlready = true;
+
+        if (!isSeleniumVersionFound.get() && new File("../" + pomFile).exists()) {
+            model = readPom(reader, "../" + pomFile);
+            logWarningsWhenSeleniumVersionIsWrong(model);
+        }
     }
 
     private static void logWarningsWhenSeleniumVersionIsWrong(Model model) {
@@ -79,7 +84,7 @@ public final class SeleniumVersionChecker {
             if (seleniumVersion == null) {
                 return;
             }
-            isSeleniumVersionFound = true;
+            isSeleniumVersionFound.set(true);
             if (checkForParametrizedVersion(seleniumVersion)) {
                 seleniumVersion = checkModelForParametrizedValue(seleniumVersion, model);
             }
@@ -114,19 +119,16 @@ public final class SeleniumVersionChecker {
     }
 
     static String checkModelForParametrizedValue(String seleniumVersion, Model model) {
-        if (seleniumVersion == null || model == null) {
-            return null;
-        }
         String version = getNamePropertyName(seleniumVersion);
         String versionProp = null;
 
-        if (nonNull(model.getProperties())) {
+        if (nonNull(seleniumVersion) && nonNull(model.getProperties())) {
             versionProp = model.getProperties().getProperty(version);
 
-        } else if (nonNull(System.getProperty(version))) {
+        } else if (nonNull(seleniumVersion) && nonNull(System.getProperty(version))) {
             versionProp = System.getProperty(version);
 
-        } else if (nonNull(model.getProfiles()) && model.getProfiles().size() > 0) {
+        } else if (nonNull(seleniumVersion) && nonNull(model.getProfiles()) && model.getProfiles().size() > 0) {
             versionProp = model.getProfiles().stream()
                     .filter(prof ->
                             nonNull(prof.getProperties()) && nonNull(prof.getProperties().getProperty(version)))
@@ -138,7 +140,9 @@ public final class SeleniumVersionChecker {
     }
 
     private static String getNamePropertyName(String propertyVersion) {
-        return propertyVersion.substring(2, propertyVersion.length() - 1);
+        if (nonNull(propertyVersion))
+            return propertyVersion.substring(2, propertyVersion.length() - 1);
+        else return null;
     }
 
     private static Model readPom(MavenXpp3Reader reader, String pathToPom) {
