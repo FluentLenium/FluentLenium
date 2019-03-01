@@ -40,13 +40,9 @@ public final class SeleniumVersionChecker {
     private static final String POM = "pom.xml";
     private static final String VERSION_REGEX = "^\\$\\{.*}$";
 
-    static ThreadLocal<Boolean> notifiedAlready = new ThreadLocal<>();
-    static ThreadLocal<Boolean> isSeleniumVersionFound = new ThreadLocal<>();
+    private static boolean notifiedAlready = false;
+    private static boolean isSeleniumVersionFound = false;
 
-    static {
-        notifiedAlready.set(false);
-        isSeleniumVersionFound.set(false);
-    }
 
     private SeleniumVersionChecker() {
         // utility class
@@ -56,10 +52,10 @@ public final class SeleniumVersionChecker {
      * Checks Selenium version during runtime.
      */
     public static void checkSeleniumVersion() {
-        if (!notifiedAlready.get()) {
+        if (!notifiedAlready) {
             checkVersionFromMaven(POM);
         }
-        notifiedAlready.set(true);
+        notifiedAlready = true;
     }
 
     static void checkVersionFromMaven(String pomFile) {
@@ -71,7 +67,7 @@ public final class SeleniumVersionChecker {
             logWarningsWhenSeleniumVersionIsWrong(model);
         }
 
-        if (!isSeleniumVersionFound.get() && new File("../" + pomFile).exists()) {
+        if (!isSeleniumVersionFound && new File("../" + pomFile).exists()) {
             model = readPom(reader, "../" + pomFile);
             logWarningsWhenSeleniumVersionIsWrong(model);
         }
@@ -84,7 +80,7 @@ public final class SeleniumVersionChecker {
             if (seleniumVersion == null) {
                 return;
             }
-            isSeleniumVersionFound.set(true);
+            isSeleniumVersionFound =true;
             if (checkForParametrizedVersion(seleniumVersion)) {
                 seleniumVersion = checkModelForParametrizedValue(seleniumVersion, model);
             }
