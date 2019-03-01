@@ -40,8 +40,8 @@ public final class SeleniumVersionChecker {
     private static final String POM = "pom.xml";
     private static final String VERSION_REGEX = "^\\$\\{.*}$";
 
-    private static boolean notifiedAlready = false;
-    private static boolean isSeleniumVersionFound = false;
+    private static boolean notifiedAlready;
+    private static boolean isSeleniumVersionFound;
 
 
     private SeleniumVersionChecker() {
@@ -80,7 +80,7 @@ public final class SeleniumVersionChecker {
             if (seleniumVersion == null) {
                 return;
             }
-            isSeleniumVersionFound =true;
+            isSeleniumVersionFound = true;
             if (checkForParametrizedVersion(seleniumVersion)) {
                 seleniumVersion = checkModelForParametrizedValue(seleniumVersion, model);
             }
