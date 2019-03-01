@@ -1,6 +1,6 @@
 package org.fluentlenium.utils;
 
-class SeleniumVersionCheckerTestConstants {
+final class SeleniumVersionCheckerTestConstants {
 
     private static final String POM_NAME = "dummy_pom.xml";
     private static final String PATH_TO_TEST_FOLDER = "src/test/resources/org/fluentlenium/utils/";
