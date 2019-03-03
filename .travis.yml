@@ -10,6 +10,13 @@ jobs:
         - if [ "$TRAVIS_BRANCH" = "develop" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_TAG" = "" ]; then mvn -Pjava11 deploy -DskipTests --settings deploy-settings.xml; fi
 
     - stage: test
+      name: "Java 8 - unit & integration tests"
+      language: java
+      jdk: oraclejdk8
+      script:
+        - mvn -Pjava8 clean verify
+
+    - stage: test
       name: "Java 11 - unit & framework integration tests"
       language: java
       jdk: oraclejdk11
@@ -22,13 +29,6 @@ jobs:
       jdk: oraclejdk11
       script:
         - mvn -Pexamples,java11 clean compile
-
-    - stage: test
-      name: "Java 8 - unit & integration tests"
-      language: java
-      jdk: oraclejdk8
-      script:
-        - mvn -Pjava8 clean verify
 
     - stage: test
       name: "Ruby - Docs build"

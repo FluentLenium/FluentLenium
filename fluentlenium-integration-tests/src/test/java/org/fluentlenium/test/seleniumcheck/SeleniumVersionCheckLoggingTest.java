@@ -9,23 +9,19 @@ import ch.qos.logback.core.read.ListAppender;
 
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
-class SeleniumVersionCheckIntegrationTest {
+class SeleniumVersionCheckLoggingTest {
 
     @Test
-    void shouldWarnNotMoreThanOnce() {
+    void shouldNotLogAnythingWhenCorrectVersionIsDeclared() {
         Logger fooLogger = (Logger) LoggerFactory.getLogger(SeleniumVersionChecker.class);
-
         ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
         listAppender.start();
-
         fooLogger.addAppender(listAppender);
 
         SeleniumVersionChecker.checkSeleniumVersion();
-        SeleniumVersionChecker.checkSeleniumVersion();
 
         assertThat(listAppender.list)
-                .extracting(ILoggingEvent::getMessage, ILoggingEvent::getLevel)
-                .size().isLessThanOrEqualTo(1);
+                .size().isEqualTo(0);
     }
 
 }

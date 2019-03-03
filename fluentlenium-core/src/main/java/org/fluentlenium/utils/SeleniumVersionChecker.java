@@ -26,11 +26,11 @@ public final class SeleniumVersionChecker {
 
     private static final Logger logger = LoggerFactory.getLogger(SeleniumVersionChecker.class);
 
-    private static final String FAILED_TO_READ_MESSAGE =
-            "Failed to read Selenium version from your pom.xml."
+    static final String FAILED_TO_READ_MESSAGE =
+            "FluentLenium wasn't able to read Selenium version from your pom.xml."
                     + " Skipped compatibility check."
                     + " Please make sure you are using correct Selenium version - {}";
-    private static final String WRONG_VERSION_MESSAGE =
+    static final String WRONG_VERSION_MESSAGE =
             "You are using incompatible Selenium version. Please change it to {}. "
                     + "You can find example on project main page {}";
 
@@ -38,6 +38,7 @@ public final class SeleniumVersionChecker {
     private static final String SELENIUM_GROUP_ID = "org.seleniumhq.selenium";
     private static final String FL_URL = "https://github.com/FluentLenium/FluentLenium";
     private static final String POM = "pom.xml";
+    private static final String PARENT_MODULE_POM = "../pom.xml";
     private static final String VERSION_REGEX = "^\\$\\{.*}$";
 
     private static boolean notifiedAlready;
@@ -53,27 +54,27 @@ public final class SeleniumVersionChecker {
      */
     public static void checkSeleniumVersion() {
         if (!notifiedAlready) {
-            checkVersionFromMaven(POM);
+            checkVersionFromMaven();
         }
         notifiedAlready = true;
     }
 
-    static void checkVersionFromMaven(String pomFile) {
+    private static void checkVersionFromMaven() {
         MavenXpp3Reader reader = new MavenXpp3Reader();
         Model model;
 
-        if (new File(pomFile).exists()) {
-            model = readPom(reader, pomFile);
+        if (new File(POM).exists()) {
+            model = readPom(reader, POM);
             logWarningsWhenSeleniumVersionIsWrong(model);
         }
 
-        if (!isSeleniumVersionFound && new File("../" + pomFile).exists()) {
-            model = readPom(reader, "../" + pomFile);
+        if (!isSeleniumVersionFound && new File(PARENT_MODULE_POM).exists()) {
+            model = readPom(reader, PARENT_MODULE_POM);
             logWarningsWhenSeleniumVersionIsWrong(model);
         }
     }
 
-    private static void logWarningsWhenSeleniumVersionIsWrong(Model model) {
+    static void logWarningsWhenSeleniumVersionIsWrong(Model model) {
         if (model != null) {
             String seleniumVersion = retrieveVersionFromPom(model);
 
@@ -144,11 +145,11 @@ public final class SeleniumVersionChecker {
         return nonNull(propertyVersion) ? propertyVersion.substring(2, propertyVersion.length() - 1) : "";
     }
 
-    private static Model readPom(MavenXpp3Reader reader, String pathToPom) {
+    static Model readPom(MavenXpp3Reader reader, String pathToPom) {
         try {
             return reader.read(new FileReader(pathToPom));
         } catch (IOException | XmlPullParserException e) {
-            logger.warn(FAILED_TO_READ_MESSAGE, EXPECTED_VERSION);
+            logger.info(FAILED_TO_READ_MESSAGE, EXPECTED_VERSION);
             return null;
         }
     }
