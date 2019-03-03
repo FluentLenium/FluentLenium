@@ -5,30 +5,30 @@ jobs:
       language: java
       jdk: oraclejdk11
       script:
-        - mvn clean verify jacoco:report
-        - mvn coveralls:report
-        - if [ "$TRAVIS_BRANCH" = "develop" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_TAG" = "" ]; then mvn deploy -DskipTests --settings deploy-settings.xml; fi
+        - mvn -Pjava11 clean verify jacoco:report
+        - mvn -Pjava11 coveralls:report
+        - if [ "$TRAVIS_BRANCH" = "develop" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_TAG" = "" ]; then mvn -Pjava11 deploy -DskipTests --settings deploy-settings.xml; fi
 
     - stage: test
       name: "Java 11 - unit & framework integration tests"
       language: java
       jdk: oraclejdk11
       script:
-        - mvn -Pframework-integration-tests clean test
+        - mvn -Pframework-integration-tests,java11 clean test
 
     - stage: test
       name: "Java 11 - compile examples"
       language: java
       jdk: oraclejdk11
       script:
-        - mvn -Pexamples clean compile
+        - mvn -Pexamples,java11 clean compile
 
     - stage: test
       name: "Java 8 - unit & integration tests"
       language: java
       jdk: oraclejdk8
       script:
-        - mvn clean verify -Drevision=3.8.0-SNAPSHOT
+        - mvn -Pjava8 clean verify
 
     - stage: test
       name: "Ruby - Docs build"
