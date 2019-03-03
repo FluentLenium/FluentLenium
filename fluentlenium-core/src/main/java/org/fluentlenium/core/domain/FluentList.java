@@ -211,7 +211,7 @@ public interface FluentList<E extends FluentWebElement>
     void clearList();
 
     /**
-     * Wrap all underlying elements in a componen..
+     * Wrap all underlying elements in a component.
      *
      * @param componentClass component class
      * @param <T>            type of component

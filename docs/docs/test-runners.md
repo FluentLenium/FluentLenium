@@ -362,7 +362,7 @@ implement `doRun()` method.
 
 ### FluentStandalone
 
-Create an instanceof `FluentStandalone` and use it directly. You have to manually invoke `init()` to initialize the
+Create an instance of `FluentStandalone` and use it directly. You have to manually invoke `init()` to initialize the
 WebDriver, and `quit()` to close it.
 
 ```java
@@ -377,7 +377,7 @@ standalone.quit();
 ```
 
 Using a `FluentStandalone` instance is quite verbose because of the need to repeat the instance name before each
-instruction. If it's a probleme for your, you should consider extending `FluentStandaloneRunnable`.
+instruction. If it's a problem for you, you should consider extending `FluentStandaloneRunnable`.
 
 ### FluentStandaloneRunnable
 
