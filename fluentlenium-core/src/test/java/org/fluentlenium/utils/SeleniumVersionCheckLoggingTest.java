@@ -43,8 +43,8 @@ public class SeleniumVersionCheckLoggingTest {
         listAppender.start();
         logger.addAppender(listAppender);
 
-        String REAL_POM = "pom.xml";
-        Model model = getMavenModel(REAL_POM);
+        String realPom = "pom.xml";
+        Model model = getMavenModel(realPom);
 
         SeleniumVersionChecker.logWarningsWhenSeleniumVersionIsWrong(model);
 
