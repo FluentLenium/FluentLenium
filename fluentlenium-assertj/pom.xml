@@ -4,17 +4,13 @@
     <parent>
         <artifactId>fluentlenium-parent</artifactId>
         <groupId>org.fluentlenium</groupId>
-        <version>${revision}</version>
+        <version>4.1.2-SNAPSHOT</version>
     </parent>
     <artifactId>fluentlenium-assertj</artifactId>
     <packaging>jar</packaging>
 
     <name>FluentLenium AssertJ</name>
     <description>AssertJ Extension for FluentLenium</description>
-
-    <properties>
-        <assertj.version>3.12.1</assertj.version>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -25,7 +21,6 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>${assertj.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
