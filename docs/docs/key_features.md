@@ -64,6 +64,16 @@ public class MyPage extends FluentPage {
 }
 ```
 
+If you are creating a page object class for something that doesn't have URL, e.g. a component of a page, the class won't have the `@PageUrl` annotation applied,
+thus also doesn't need to extend `FluentPage`, but the `@Find...` annotated fields in it will be initialized regardless when injecting them using `@Page`. The following construct is also valid:
+
+```java
+public class HeroImage {
+    @FindBy(css = ".hero .img")
+    public FluentWebElement heroImage; 
+}
+```
+
 It's possible to define parameters in FluentPage url using `{[?][/path/]parameter}` syntax.
 If it starts with `?`, it means that the parameter is optional. Path can be included in the braces so it
 is removed when parameter value is not defined.
