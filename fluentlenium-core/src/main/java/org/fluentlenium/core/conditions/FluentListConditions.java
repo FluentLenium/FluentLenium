@@ -31,7 +31,7 @@ public interface FluentListConditions extends FluentConditions {
     boolean verify(Predicate<FluentWebElement> predicate, boolean defaultValue);
 
     /**
-     * Check that this element is present.
+     * Check that the currently validated element of this list is present.
      *
      * @return true if the element is present, false otherwise
      */
