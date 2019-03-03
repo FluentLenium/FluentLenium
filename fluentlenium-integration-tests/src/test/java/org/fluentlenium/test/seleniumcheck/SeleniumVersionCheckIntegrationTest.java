@@ -9,7 +9,7 @@ import ch.qos.logback.core.read.ListAppender;
 
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
-class SeleniumVersionCheckTest {
+class SeleniumVersionCheckIntegrationTest {
 
     @Test
     void shouldWarnNotMoreThanOnce() {
