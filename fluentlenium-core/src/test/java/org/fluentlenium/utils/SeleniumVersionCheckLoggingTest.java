@@ -4,19 +4,21 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
+import net.jcip.annotations.NotThreadSafe;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.assertj.core.api.Assertions;
 import org.assertj.core.groups.Tuple;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.utils.SeleniumVersionChecker.FAILED_TO_READ_MESSAGE;
 import static org.fluentlenium.utils.SeleniumVersionChecker.WRONG_VERSION_MESSAGE;
 import static org.fluentlenium.utils.SeleniumVersionChecker.readPom;
 import static org.fluentlenium.utils.SeleniumVersionCheckerTestConstants.MISSING_SELENIUM_POM;
 import static org.fluentlenium.utils.SeleniumVersionCheckerTestConstants.WRONG_VERSION_POM;
 
+@NotThreadSafe
 public class SeleniumVersionCheckLoggingTest {
 
     @Test
@@ -30,7 +32,7 @@ public class SeleniumVersionCheckLoggingTest {
 
         SeleniumVersionChecker.logWarningsWhenSeleniumVersionIsWrong(model);
 
-        Assertions.assertThat(listAppender.list)
+        assertThat(listAppender.list)
                 .extracting(ILoggingEvent::getMessage, ILoggingEvent::getLevel)
                 .containsExactly(Tuple.tuple(WRONG_VERSION_MESSAGE, Level.WARN))
                 .size().isEqualTo(1);
@@ -48,7 +50,7 @@ public class SeleniumVersionCheckLoggingTest {
 
         SeleniumVersionChecker.logWarningsWhenSeleniumVersionIsWrong(model);
 
-        Assertions.assertThat(listAppender.list)
+        assertThat(listAppender.list)
                 .size().isZero();
     }
 
@@ -63,7 +65,7 @@ public class SeleniumVersionCheckLoggingTest {
 
         SeleniumVersionChecker.logWarningsWhenSeleniumVersionIsWrong(model);
 
-        Assertions.assertThat(listAppender.list)
+        assertThat(listAppender.list)
                 .extracting(ILoggingEvent::getMessage, ILoggingEvent::getLevel)
                 .containsExactly(Tuple.tuple(FAILED_TO_READ_MESSAGE, Level.INFO))
                 .size().isEqualTo(1);
