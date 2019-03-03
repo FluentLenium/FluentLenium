@@ -22,8 +22,8 @@ the `WebDriver` to use. FluentLenium now provides configuration features includi
 `webDriver` and `capabilities` properties that should be enough for most use case.
 
 If you still need to instantiate the WebDriver manually, or if configuration
-features doesn't seem to integrates well in your environnment, `getDefaultDriver()` has been renamed to `newWebDriver()`
-and can still be overriden.
+features doesn't seem to integrates well in your environment, `getDefaultDriver()` has been renamed to `newWebDriver()`
+and can still be overridden.
 
 Keep in mind that events related features requires to wrap the `WebDriver` instance into `EventFiringWebDriver`.
 
@@ -35,8 +35,8 @@ Search method names
 -------------------
 Some methods have been renamed and others have been removed to improve consistency and reduce codebase.
 
-- Replace `findFirst()` occurences with `el()`, `$(...).first()` or `find(...).first()`.
-- Replace `$(..., index)` or `find(..., index)` occurences with `$(...).index(index)` or `find(...).index(index)`.
+- Replace `findFirst()` occurrences with `el()`, `$(...).first()` or `find(...).first()`.
+- Replace `$(..., index)` or `find(..., index)` occurrences with `$(...).index(index)` or `find(...).index(index)`.
 
 Element method names
 --------------------
@@ -96,7 +96,7 @@ It's a major change in FluentLenium 1.0. Those methods now returns a **Lazy Loca
 Those locators looks like elements from previous versions, but the search will be performed lazily, when invoking the
 first action or check on the element.
 
-So beware if you used to rely on catching `NoSuchElementException`: Thoses exceptions will now be
+So beware if you used to rely on catching `NoSuchElementException`: Those exceptions will now be
 raised later in the test, or even not raised at all the element is not actively used.
 
 You may use `FluentWebElement#now()` / `FluentList#now()` to force the search at any time.

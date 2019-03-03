@@ -24,7 +24,7 @@ public interface FluentListConditions extends FluentConditions {
      *
      * @param predicate    predicate to check
      * @param defaultValue default value if input is not present
-     * @return true if the predicated is verified, false otherwise
+     * @return true if the predicate is verified, false otherwise
      */
     @Message("verifies predicate {0}")
     @NotMessage("does not verify predicate {0}")

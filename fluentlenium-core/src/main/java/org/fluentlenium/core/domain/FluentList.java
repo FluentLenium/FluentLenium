@@ -80,9 +80,9 @@ public interface FluentList<E extends FluentWebElement>
     FluentList<E> contextClick();
 
     /**
-     * Fill  all elements on the list with the corresponding cell in the with table.
+     * Fill all elements on the list with the corresponding cell in the with array.
      * Only the visible elements are filled
-     * If there is more elements on the list than in the with table, the last element of the table is repeated
+     * If there is more elements on the list than in the with array, the last element of the table is repeated
      */
     @Override
     FluentList<E> write(String... with);
@@ -112,7 +112,7 @@ public interface FluentList<E extends FluentWebElement>
      * Return a custom attribute of elements on the list
      *
      * @param attribute attribute name
-     * @return list of string valuess
+     * @return list of string values
      */
     List<String> attributes(String attribute);
 

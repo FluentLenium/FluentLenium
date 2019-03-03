@@ -38,7 +38,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
     /**
      * Check that this element is no longer attached to the DOM.
      *
-     * @return false is the element is still attached to the DOM, true otherwise.
+     * @return false if the element is still attached to the DOM, true otherwise.
      */
     @Message("is stale")
     @NotMessage("is not stale")

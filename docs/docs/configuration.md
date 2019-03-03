@@ -36,7 +36,7 @@ FluentLenium can be configured in many ways through configuration properties.
   - **browserTimeout**
 
     Sets the timeout for webdriver when it should be responsive if not interrupts the obtain driver thread and tries
-    maximum amoun of times specified by **browserTimeoutRetries** value
+    maximum amount of times specified by **browserTimeoutRetries** value.
 
     Default value: ```60000```
 
@@ -117,7 +117,7 @@ FluentLenium can be configured in many ways through configuration properties.
 
   - **baseUrl**
 
-     Sets the base URL used to build absolute URL when relative URL is given to {@link FluentAdapter#goTo(String)}.
+     Sets the base URL used to build absolute URL when relative URL is given to `FluentAdapter#goTo(String)`.
 
      Default value: ```null```.
 
@@ -258,7 +258,7 @@ It's possible to define those properties using:
 This list of way to configure fluentlenium is ordered by priority. If a value is defined for a property in an element,
 lower ways will just be ignored.
 
-You may implement additionnal ways to read configuration property by implementing another
+You may implement additional ways to read configuration property by implementing another
 ```ConfigurationFactory``` and set the new configuration factory class name in the ```configurationFactory``` property.
 
 ## Configuration examples
@@ -308,11 +308,11 @@ To run Chrome in the headless mode you can use following FluentLenium configurat
         mvn clean test -Dfluentlenium.webDriver=chrome -Dfluentlenium.capabilities= "{chromeOptions: {args: [headless,disable-gpu]}}"
         ```
 
-  1. Annotate the test class with **@FluentConfugration**:
+  1. Annotate the test class with **@FluentConfiguration**:
         ```java
         @FluentConfiguration(webDriver="chrome", capabilities = "{\"chromeOptions\": {\"args\": [\"headless\",\"disable-gpu\"]}}")
         public class SomeFluentTest extends FluentTest {
-             ....
+             ...
         }
         ```
   1. Create **Java Properties** file ```fluentlenium.properties``` in the project classpath.
@@ -376,7 +376,7 @@ public class BrowserStackOsXCapabilitiesFactory implements CapabilitiesFactory {
 }
 ```
 
-And then, configure the following properties.
+And then, configure the following properties:
 
 ```
 webDriver=remote

@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Define a label on a injected {@link org.fluentlenium.core.domain.FluentWebElement} or
+ * Define a label on an injected {@link org.fluentlenium.core.domain.FluentWebElement} or
  * {@link org.fluentlenium.core.domain.FluentList}
  *
  * @see org.fluentlenium.core.label.FluentLabel#withLabel(String)

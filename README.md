@@ -36,7 +36,7 @@ Short summary:
 <properties>
     <!-- Configure this property to latest available version -->
     <fluentlenium.version>4.1.1</fluentlenium.version>
-    <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
+    <!-- Make sure the selenium.version won't be overridden by another pom.xml -->
     <selenium.version>3.141.59</selenium.version>
 </properties>
 

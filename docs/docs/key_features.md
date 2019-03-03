@@ -79,7 +79,7 @@ public class DocumentPage extends FluentPage {
 }
 ```
 
-You can also refer to files in your `resorurces` directory by adding `isLocalFile` parameter
+You can also refer to files in your `resources` directory by adding `isLocalFile` parameter
 
 ```java
 @PageUrl(file = "page2url.html", value = "?param1={param1}&param2={param2}", isLocalFile = true)
@@ -182,7 +182,7 @@ Or using [AssertJ](https://github.com/joel-costigliola/assertj-core).
 ```java
 public void checkLoginFailed() {
     goTo(loginPage);
-    loginPage.fillAndSubmitLoginForm("login","wrongPass");
+    loginPage.fillAndSubmitLoginForm("login", "wrongPass");
     assertThat($(".error")).hasSize(1);
     assertThat(loginPage).isAt();
 }
@@ -427,7 +427,7 @@ The default wait is 5 seconds.
 
 You can also use after `size()` : `greaterThan(int)`, `lessThan(int)`, `lessThanOrEqualTo(int)`, `greaterThanOrEqualTo(int)` , `equalTo(int)`, `notEqualTo(int)`
 
-Many others conditions like `size(3)` are availables, like `present()`, `displayed()`, `enabled()`, `text()`, `id()`, `name()`.
+Many others conditions like `size(3)` are available, like `present()`, `displayed()`, `enabled()`, `text()`, `id()`, `name()`.
 
 You can use `not()` function to negate any condition.
 
