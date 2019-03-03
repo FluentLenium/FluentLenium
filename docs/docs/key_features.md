@@ -338,6 +338,14 @@ public class LoginPage extends FluentPage {
 
 Injection is recursive, and it's possible to retrieve the parent container using ```@Parent``` annotation.
 
+### Labeling
+
+Using the `@Label` and `@LabelHint` annotations you can define a custom `toString()` representation for `FluentWebElement`s and `FluentList`s.
+
+`@Label` can be added with or without a custom value. If a value is not defined, it defaults to empty value.
+
+The purpose of `@LabelHint` is to provide additional information (kind of tags) to the `toString()` representation of the object that is annotated with it. It may be used with or without the `@Label` annotation, they don't depend on each other.
+
 ### Components
 
 A ```Component``` is an object wrapping a ```WebElement``` instance.
