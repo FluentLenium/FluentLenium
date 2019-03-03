@@ -112,20 +112,23 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>webDriver</pre> property.
-     *
+     * <p>
      * Sets the WebDriver type to use.
-     *
+     * <p>
      * When FluentLenium needs to create a new {@link WebDriver} instance, it calls {@link FluentAdapter#newWebDriver()}
      * which delegates to
      * {@link org.fluentlenium.configuration.WebDriversRegistryImpl#newWebDriver(String, Capabilities, ConfigurationProperties)}
      * registry using the value stored in webDriver and capabilities property.
-     *
-     * Possible values are "firefox", "chrome", "ie", "htmlunit", or any class name implementing {@link WebDriver}.
-     *
+     * <p>
+     * Possible values are "firefox", "chrome", "ie", "edge", "htmlunit", "safari", "phantomjs", "remote"
+     * or any class name implementing {@link WebDriver}
+     * or any name that is defined in the `@FactoryName` annotation of a `WebDriverFactory` implementation.
+     * <p>
      * Default value is "firefox".
      *
      * @return webDriver property value
      * @see FluentAdapter#newWebDriver()
+     * @see DefaultWebDriverFactories
      */
     String getWebDriver();
 

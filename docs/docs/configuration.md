@@ -29,7 +29,8 @@ FluentLenium can be configured in many ways through configuration properties.
     Default value: ```null```.
 
     Possible values are ```remote```, ```firefox```, ```chrome```, ```ie```, ```safari```,
-    ```phantomjs```, ```htmlunit```, or any class name implementing ```WebDriver```.
+    ```phantomjs```, ```htmlunit```, any class name implementing ```WebDriver```,
+    or any name that is defined in the `@FactoryName` annotation of a `WebDriverFactory` implementation.
 
     If not defined, FluentLenium will use the first value for which WebDriver is available in classpath.
 
@@ -49,6 +50,7 @@ FluentLenium can be configured in many ways through configuration properties.
   - **remoteUrl**
 
     Sets the remote URL for ```remote``` *webDriver*. This should be the URL to access Selenium-Grid server.
+    It can also be used to point to cloud based testing endpoints like SauceLabs and BrowserStack, with custom webDriverFactory implementations.
 
   - **capabilities**
 
@@ -383,6 +385,17 @@ webDriver=remote
 capabilities=browserstack-os-x
 remoteUrl=http://USERNAME:AUTOMATE_KEY@hub-cloud.browserstack.com/wd/hub
 ```
+
+or use them in the `@FluentConfiguration` annotation of your test:
+
+```java
+@FluentConfiguration(webDriver = "remote", capabilities = "browserstack-os-x", remoteUrl = "http://USERNAME:AUTOMATE_KEY@hub-cloud.browserstack.com/wd/hub")
+public class BrowserStackTest extends FluentTest {
+    ...
+}
+```
+
+but this latter one may not be a good practice in case of cloud based solutions, considering that your version control system would store the username and key/id of your account.
 
 ### Custom WebDriver
 
