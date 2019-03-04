@@ -64,6 +64,16 @@ public class MyPage extends FluentPage {
 }
 ```
 
+If you are creating a page object class for something that doesn't have URL, e.g. a component of a page, the class won't have the `@PageUrl` annotation applied,
+thus also doesn't need to extend `FluentPage`, but the `@Find...` annotated fields in it will be initialized regardless when injecting them using `@Page`. The following construct is also valid:
+
+```java
+public class HeroImage {
+    @FindBy(css = ".hero .img")
+    public FluentWebElement heroImage; 
+}
+```
+
 It's possible to define parameters in FluentPage url using `{[?][/path/]parameter}` syntax.
 If it starts with `?`, it means that the parameter is optional. Path can be included in the braces so it
 is removed when parameter value is not defined.
@@ -79,7 +89,7 @@ public class DocumentPage extends FluentPage {
 }
 ```
 
-You can also refer to files in your `resorurces` directory by adding `isLocalFile` parameter
+You can also refer to files in your `resources` directory by adding `isLocalFile` parameter
 
 ```java
 @PageUrl(file = "page2url.html", value = "?param1={param1}&param2={param2}", isLocalFile = true)
@@ -182,7 +192,7 @@ Or using [AssertJ](https://github.com/joel-costigliola/assertj-core).
 ```java
 public void checkLoginFailed() {
     goTo(loginPage);
-    loginPage.fillAndSubmitLoginForm("login","wrongPass");
+    loginPage.fillAndSubmitLoginForm("login", "wrongPass");
     assertThat($(".error")).hasSize(1);
     assertThat(loginPage).isAt();
 }
@@ -328,6 +338,14 @@ public class LoginPage extends FluentPage {
 
 Injection is recursive, and it's possible to retrieve the parent container using ```@Parent``` annotation.
 
+### Labeling
+
+Using the `@Label` and `@LabelHint` annotations you can define a custom `toString()` representation for `FluentWebElement`s and `FluentList`s.
+
+`@Label` can be added with or without a custom value. If a value is not defined, it defaults to empty value.
+
+The purpose of `@LabelHint` is to provide additional information (kind of tags) to the `toString()` representation of the object that is annotated with it. It may be used with or without the `@Label` annotation, they don't depend on each other.
+
 ### Components
 
 A ```Component``` is an object wrapping a ```WebElement``` instance.
@@ -427,7 +445,7 @@ The default wait is 5 seconds.
 
 You can also use after `size()` : `greaterThan(int)`, `lessThan(int)`, `lessThanOrEqualTo(int)`, `greaterThanOrEqualTo(int)` , `equalTo(int)`, `notEqualTo(int)`
 
-Many others conditions like `size(3)` are availables, like `present()`, `displayed()`, `enabled()`, `text()`, `id()`, `name()`.
+Many others conditions like `size(3)` are available, like `present()`, `displayed()`, `enabled()`, `text()`, `id()`, `name()`.
 
 You can use `not()` function to negate any condition.
 

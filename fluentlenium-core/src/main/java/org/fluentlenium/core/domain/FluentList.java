@@ -61,6 +61,8 @@ public interface FluentList<E extends FluentWebElement>
     /**
      * Click on all elements on the list
      * Only the clickable elements are clicked
+     *
+     * @return the current instance of FluentList to provide capability for chaining calls
      */
     @Override
     FluentList<E> click();
@@ -68,6 +70,8 @@ public interface FluentList<E extends FluentWebElement>
     /**
      * double click on all elements on the list
      * Only the clickable elements are clicked
+     *
+     * @return the current instance of FluentList to provide capability for chaining calls
      */
     @Override
     FluentList<E> doubleClick();
@@ -75,14 +79,18 @@ public interface FluentList<E extends FluentWebElement>
     /**
      * context click on all elements on the list
      * Only the clickable elements are clicked
+     *
+     * @return the current instance of FluentList to provide capability for chaining calls
      */
     @Override
     FluentList<E> contextClick();
 
     /**
-     * Fill  all elements on the list with the corresponding cell in the with table.
+     * Fill all elements on the list with the corresponding cell in the with array.
      * Only the visible elements are filled
-     * If there is more elements on the list than in the with table, the last element of the table is repeated
+     * If there is more elements on the list than in the with array, the last element of the table is repeated
+     *
+     * @return the current instance of FluentList to provide capability for chaining calls
      */
     @Override
     FluentList<E> write(String... with);
@@ -90,6 +98,8 @@ public interface FluentList<E extends FluentWebElement>
     /**
      * submit on all elements on the list
      * Only the visible elements are submitted
+     *
+     * @return the current instance of FluentList to provide capability for chaining calls
      */
     @Override
     FluentList<E> submit();
@@ -112,7 +122,7 @@ public interface FluentList<E extends FluentWebElement>
      * Return a custom attribute of elements on the list
      *
      * @param attribute attribute name
-     * @return list of string valuess
+     * @return list of string values
      */
     List<String> attributes(String attribute);
 
@@ -211,7 +221,7 @@ public interface FluentList<E extends FluentWebElement>
     void clearList();
 
     /**
-     * Wrap all underlying elements in a componen..
+     * Wrap all underlying elements in a component.
      *
      * @param componentClass component class
      * @param <T>            type of component

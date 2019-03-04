@@ -317,8 +317,8 @@ The file will be named using the current timestamp.
 You can of course specify a path and a name using:
 
 ```java
-takeScreenshot(pathAndfileName);
-takeHtmlDump(pathAndfileName);
+takeScreenshot(pathAndFileName);
+takeHtmlDump(pathAndFileName);
 ```
 
 Screenshot and HTML Dump can be automatically performed on test fail using configuration properties.

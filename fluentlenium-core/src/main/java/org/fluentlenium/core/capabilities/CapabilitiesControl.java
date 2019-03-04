@@ -4,7 +4,7 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.HasCapabilities;
 
 /**
- * Control capabilities  of the underlying Selenium WebDriver.
+ * Control capabilities of the underlying Selenium WebDriver.
  */
 public interface CapabilitiesControl {
 
