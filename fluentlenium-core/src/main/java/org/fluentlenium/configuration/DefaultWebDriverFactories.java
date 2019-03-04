@@ -123,6 +123,21 @@ public class DefaultWebDriverFactories {
     }
 
     /**
+     * Opera WebDriver factory.
+     */
+    @FactoryPriority(2)
+    @DefaultFactory
+    public static class OperaWebDriverFactory extends ReflectiveWebDriverFactory {
+        /**
+         * Creates a new phantomJs WebDriver factory.
+         */
+        public OperaWebDriverFactory() {
+            super("opera", "org.openqa.selenium.opera.OperaDriver");
+        }
+    }
+
+
+    /**
      * Remote WebDriver factory.
      */
     @DefaultFactory
