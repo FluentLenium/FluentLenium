@@ -79,7 +79,7 @@ public class DefaultWebDriverFactories {
     @DefaultFactory
     public static class SafariWebDriverFactory extends ReflectiveWebDriverFactory {
         /**
-         * Creates a new safary WebDriver factory.
+         * Creates a new safari WebDriver factory.
          */
         public SafariWebDriverFactory() {
             super("safari", "org.openqa.selenium.safari.SafariDriver");
@@ -93,7 +93,7 @@ public class DefaultWebDriverFactories {
     @DefaultFactory
     public static class PhantomJSWebDriverFactory extends ReflectiveWebDriverFactory {
         /**
-         * Creates a new phantomJs WebDriver factory.
+         * Creates a new PhantomS WebDriver factory.
          */
         public PhantomJSWebDriverFactory() {
             super("phantomjs", "org.openqa.selenium.phantomjs.PhantomJSDriver");
@@ -129,13 +129,12 @@ public class DefaultWebDriverFactories {
     @DefaultFactory
     public static class OperaWebDriverFactory extends ReflectiveWebDriverFactory {
         /**
-         * Creates a new phantomJs WebDriver factory.
+         * Creates a new Opera WebDriver factory.
          */
         public OperaWebDriverFactory() {
             super("opera", "org.openqa.selenium.opera.OperaDriver");
         }
     }
-
 
     /**
      * Remote WebDriver factory.
