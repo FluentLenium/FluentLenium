@@ -9,8 +9,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.safari.SafariDriver;
 
 public class WebDriversTest {
     private WebDriversRegistryImpl webDrivers;
@@ -49,6 +55,60 @@ public class WebDriversTest {
 
         Class<? extends WebDriver> webDriverClass = ((ReflectiveWebDriverFactory) firefox).getWebDriverClass();
         assertThat(webDriverClass).isSameAs(FirefoxDriver.class);
+    }
+
+    @Test
+    public void testChrome() {
+        WebDriverFactory chrome = webDrivers.get("chrome");
+        assertThat(chrome).isExactlyInstanceOf(DefaultWebDriverFactories.ChromeWebDriverFactory.class);
+
+        Class<? extends WebDriver> webDriverClass = ((ReflectiveWebDriverFactory) chrome).getWebDriverClass();
+        assertThat(webDriverClass).isSameAs(ChromeDriver.class);
+    }
+
+    @Test
+    public void testInternetExplorer() {
+        WebDriverFactory ie = webDrivers.get("ie");
+        assertThat(ie).isExactlyInstanceOf(DefaultWebDriverFactories.InternetExplorerWebDriverFactory.class);
+
+        Class<? extends WebDriver> webDriverClass = ((ReflectiveWebDriverFactory) ie).getWebDriverClass();
+        assertThat(webDriverClass).isSameAs(InternetExplorerDriver.class);
+    }
+
+    @Test
+    public void testEdge() {
+        WebDriverFactory edge = webDrivers.get("edge");
+        assertThat(edge).isExactlyInstanceOf(DefaultWebDriverFactories.EdgeWebDriverFactory.class);
+
+        Class<? extends WebDriver> webDriverClass = ((ReflectiveWebDriverFactory) edge).getWebDriverClass();
+        assertThat(webDriverClass).isSameAs(EdgeDriver.class);
+    }
+
+    @Test
+    public void testOpera() {
+        WebDriverFactory opera = webDrivers.get("opera");
+        assertThat(opera).isExactlyInstanceOf(DefaultWebDriverFactories.OperaWebDriverFactory.class);
+
+        Class<? extends WebDriver> webDriverClass = ((ReflectiveWebDriverFactory) opera).getWebDriverClass();
+        assertThat(webDriverClass).isSameAs(OperaDriver.class);
+    }
+
+    @Test
+    public void testSafari() {
+        WebDriverFactory safari = webDrivers.get("safari");
+        assertThat(safari).isExactlyInstanceOf(DefaultWebDriverFactories.SafariWebDriverFactory.class);
+
+        Class<? extends WebDriver> webDriverClass = ((ReflectiveWebDriverFactory) safari).getWebDriverClass();
+        assertThat(webDriverClass).isSameAs(SafariDriver.class);
+    }
+
+    @Test
+    public void testPhantomJs() {
+        WebDriverFactory phantomjs = webDrivers.get("phantomjs");
+        assertThat(phantomjs).isExactlyInstanceOf(DefaultWebDriverFactories.PhantomJSWebDriverFactory.class);
+
+        Class<? extends WebDriver> webDriverClass = ((ReflectiveWebDriverFactory) phantomjs).getWebDriverClass();
+        assertThat(webDriverClass).isSameAs(PhantomJSDriver.class);
     }
 
     @Test
