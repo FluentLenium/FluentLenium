@@ -69,7 +69,7 @@ public class FluentWebElement extends Component
         implements WrapsElement, FluentActions<FluentWebElement, FluentWebElement>, FluentProxyState<FluentWebElement>,
         SearchControl<FluentWebElement>, HookControl<FluentWebElement>, FluentLabel<FluentWebElement>,
         NavigationControl, JavascriptControl, AlertControl, SnapshotControl, EventsControl, SeleniumDriverControl,
-        CssControl, FluentInjectControl, CapabilitiesControl {
+        CssControl, FluentInjectControl, CapabilitiesControl, ComponentInstantiator {
     private final Search search;
     private final Dom dom;
     private final MouseElementActions mouseActions;
@@ -252,6 +252,147 @@ public class FluentWebElement extends Component
     @Override
     public <T> T newInstance(Class<T> cls) {
         return control.newInstance(cls);
+    }
+
+
+    @Override
+    public FluentWebElement newFluent(WebElement element) {
+        return control.newFluent(element);
+    }
+
+    @Override
+    public <T> T newComponent(Class<T> componentClass, WebElement element) {
+        return control.newComponent(componentClass, element);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> newFluentList() {
+        return control.newFluentList();
+    }
+
+    @Override
+    public FluentList<FluentWebElement> newFluentList(FluentWebElement... elements) {
+        return control.newFluentList(elements);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> newFluentList(List<FluentWebElement> elements) {
+        return control.newFluentList(elements);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> asFluentList(WebElement... elements) {
+        return control.asFluentList(elements);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> asFluentList(Iterable<WebElement> elements) {
+        return control.asFluentList(elements);
+    }
+
+    @Override
+    public FluentList<FluentWebElement> asFluentList(List<WebElement> elements) {
+        return control.asFluentList(elements);
+    }
+
+    @Override
+    public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass) {
+        return control.newFluentList(componentClass);
+    }
+
+    @Override
+    public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass, T... elements) {
+        return control.newFluentList(componentClass, elements);
+    }
+
+    @Override
+    public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass, List<T> elements) {
+        return control.newFluentList(componentClass, elements);
+    }
+
+    @Override
+    public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, WebElement... elements) {
+        return control.asFluentList(componentClass, elements);
+    }
+
+    @Override
+    public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, Iterable<WebElement> elements) {
+        return control.asFluentList(componentClass, elements);
+    }
+
+    @Override
+    public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, List<WebElement> elements) {
+        return control.asFluentList(componentClass, elements);
+    }
+
+    @Override
+    public <T> ComponentList<T> newComponentList(Class<T> componentClass) {
+        return control.newComponentList(componentClass);
+    }
+
+    @Override
+    public <T> ComponentList<T> asComponentList(Class<T> componentClass, WebElement... elements) {
+        return control.asComponentList(componentClass, elements);
+    }
+
+    @Override
+    public <T> ComponentList asComponentList(Class<T> componentClass, Iterable<WebElement> elements) {
+        return control.asComponentList(componentClass, elements);
+    }
+
+    @Override
+    public <T> ComponentList<T> asComponentList(Class<T> componentClass, List<WebElement> elements) {
+        return control.asComponentList(componentClass, elements);
+    }
+
+    @Override
+    public <T> ComponentList<T> newComponentList(Class<T> componentClass, T... componentsList) {
+        return control.newComponentList(componentClass, componentsList);
+    }
+
+    @Override
+    public <T> ComponentList<T> newComponentList(Class<T> componentClass, List<T> componentsList) {
+        return control.newComponentList(componentClass, componentsList);
+    }
+
+    @Override
+    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass) {
+        return control.newComponentList(listClass, componentClass);
+    }
+
+    @Override
+    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, WebElement... elements) {
+        return control.asComponentList(listClass, componentClass, elements);
+    }
+
+    @Override
+    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, Iterable<WebElement> elements) {
+        return control.asComponentList(listClass, componentClass, elements);
+    }
+
+    @Override
+    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, List<WebElement> elements) {
+        return control.asComponentList(listClass, componentClass, elements);
+    }
+
+    @Override
+    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, T... componentsList) {
+        return control.newComponentList(listClass, componentClass, componentsList);
+    }
+
+    @Override
+    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, List<T> componentsList) {
+        return control.newComponentList(listClass, componentClass, componentsList);
+    }
+
+    @Override
+    public boolean isComponentClass(Class<?> componentClass) {
+        return control.isComponentClass(componentClass);
+    }
+
+    @Override
+    public boolean isComponentListClass(Class<? extends List<?>> componentListClass) {
+        return false;
     }
 
     @Override
