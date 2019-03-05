@@ -120,7 +120,7 @@ public interface ConfigurationProperties {
      * {@link org.fluentlenium.configuration.WebDriversRegistryImpl#newWebDriver(String, Capabilities, ConfigurationProperties)}
      * registry using the value stored in webDriver and capabilities property.
      * <p>
-     * Possible values are "firefox", "chrome", "ie", "edge", "htmlunit", "safari", "phantomjs", "remote"
+     * Possible values are "firefox", "chrome", "ie", "edge", "htmlunit", "safari", "phantomjs", "opera", "remote"
      * or any class name implementing {@link WebDriver}
      * or any name that is defined in the `@FactoryName` annotation of a `WebDriverFactory` implementation.
      * <p>
