@@ -1,9 +1,14 @@
 package org.fluentlenium.core.inject;
 
+import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isAnnotationTypeHook;
+import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isAnnotationTypeHookOptions;
+import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isNoInject;
+import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isContainer;
+import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isParent;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.fluentlenium.core.FluentContainer;
 import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.components.LazyComponents;
 import org.fluentlenium.core.components.LazyComponentsListener;
@@ -124,10 +129,6 @@ public class FluentInjector implements FluentInjectControl {
         }
     }
 
-    private boolean isParent(Field field) {
-        return field.isAnnotationPresent(Parent.class);
-    }
-
     private void initContainer(Object container, Object parentContainer, SearchContext searchContext) {
         initContainerContext(container, parentContainer, searchContext);
         if (container instanceof FluentContainer) {
@@ -155,10 +156,6 @@ public class FluentInjector implements FluentInjectControl {
         if (eventsRegistry != null && !eventsContainerSupport.containsKey(container)) {
             eventsContainerSupport.put(container, new ContainerAnnotationsEventsRegistry(eventsRegistry, container));
         }
-    }
-
-    private static boolean isContainer(Field field) {
-        return field.isAnnotationPresent(Page.class);
     }
 
     private static boolean isClassSupported(Class<?> cls) {
@@ -252,7 +249,7 @@ public class FluentInjector implements FluentInjectControl {
     private Hook getHookAnnotation(Annotation annotation) {
         if (annotation instanceof Hook) {
             return (Hook) annotation;
-        } else if (annotation.annotationType().isAnnotationPresent(Hook.class)) {
+        } else if (isAnnotationTypeHook(annotation)) {
             return annotation.annotationType().getAnnotation(Hook.class);
         }
         return null;
@@ -261,7 +258,7 @@ public class FluentInjector implements FluentInjectControl {
     private HookOptions getHookOptionsAnnotation(Annotation annotation) {
         if (annotation instanceof HookOptions) {
             return (HookOptions) annotation;
-        } else if (annotation.annotationType().isAnnotationPresent(HookOptions.class)) {
+        } else if (isAnnotationTypeHookOptions(annotation)) {
             return annotation.annotationType().getAnnotation(HookOptions.class);
         }
         return null;
@@ -337,7 +334,7 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private boolean isSupported(Object container, Field field) {
-        return isValueNull(container, field) && !field.isAnnotationPresent(NoInject.class) && !Modifier
+        return isValueNull(container, field) && !isNoInject(field) && !Modifier
                 .isFinal(field.getModifiers()) && (isListOfFluentWebElement(field) || isListOfComponent(field) || isComponent(
                 field) || isComponentList(field) || isElement(field) || isListOfElement(field));
     }
