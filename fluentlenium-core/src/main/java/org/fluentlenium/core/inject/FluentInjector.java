@@ -305,9 +305,8 @@ public class FluentInjector implements FluentInjectControl {
             if (ArrayUtils.isEmpty(value)) {
                 hookDefinitions.clear();
             } else {
-                List<? extends Class<? extends FluentHook<?>>> toRemove = Arrays.stream(value).map(Hook::value)
-                        .collect(Collectors.toList());
-                HookControlImpl.removeHooksFromDefinitions(hookDefinitions, toRemove.toArray(new Class[toRemove.size()]));
+                HookControlImpl
+                        .removeHooksFromDefinitions(hookDefinitions, Arrays.stream(value).map(Hook::value).toArray(Class[]::new));
             }
         }
     }
