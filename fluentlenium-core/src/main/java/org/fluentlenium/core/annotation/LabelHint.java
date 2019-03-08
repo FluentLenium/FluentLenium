@@ -6,8 +6,18 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Add a label hint on a injected {@link org.fluentlenium.core.domain.FluentWebElement} or
- * {@link org.fluentlenium.core.domain.FluentList}
+ * Using this annotation the value of {@code toString()} method of the injected object will be extended with the list of hints
+ * provided to the annotation. For example in case of:
+ * <pre>
+ * &#064;FindBy(css = ".teaser img")
+ * &#064;LabelHint({"img", "teaser"})
+ * private FluentWebElement teaserImage;
+ * </pre>
+ * <p>
+ * {@code [img, teaser]} will be attached to the toString.
+ * <p>
+ * A label hint can be added on an injected {@link org.fluentlenium.core.domain.FluentWebElement} or
+ * {@link org.fluentlenium.core.domain.FluentList}.
  *
  * @see org.fluentlenium.core.label.FluentLabel#withLabelHint(String...)
  */
