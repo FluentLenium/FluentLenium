@@ -223,16 +223,13 @@ public class FluentInjector implements FluentInjectControl {
                         "Unable to find an accessible constructor with an argument of type WebElement in " + field.getType(), e);
             }
 
-            if (fieldValue.getComponent() instanceof Iterable) {
-                if (isLazyComponentsAndNotInitialized(fieldValue.getComponent())) {
-                    LazyComponents lazyComponents = (LazyComponents) fieldValue.getComponent();
-
-                    lazyComponents.addLazyComponentsListener((LazyComponentsListener<Object>) componentMap -> {
-                        for (Entry<WebElement, Object> componentEntry : componentMap.entrySet()) {
-                            injectComponent(componentEntry.getValue(), container, componentEntry.getKey());
-                        }
-                    });
-                }
+            if (fieldValue.getComponent() instanceof Iterable && isLazyComponentsAndNotInitialized(fieldValue.getComponent())) {
+                LazyComponents lazyComponents = (LazyComponents) fieldValue.getComponent();
+                lazyComponents.addLazyComponentsListener((LazyComponentsListener<Object>) componentMap -> {
+                    for (Entry<WebElement, Object> componentEntry : componentMap.entrySet()) {
+                        injectComponent(componentEntry.getValue(), container, componentEntry.getKey());
+                    }
+                });
             } else {
                 ElementLocatorSearchContext componentSearchContext = new ElementLocatorSearchContext(locator);
                 injectComponent(fieldValue.getComponent(), container, componentSearchContext);
@@ -277,14 +274,10 @@ public class FluentInjector implements FluentInjectControl {
             Hook hookAnnotation = getHookAnnotation(annotation);
             if (hookAnnotation != null) {
                 currentAnnotation = annotation;
-            }
-            if (hookAnnotation != null && currentHookAnnotation != null) {
-                hookDefinitions.add(buildHookDefinition(currentHookAnnotation, currentHookOptionAnnotation, currentAnnotation));
-                currentHookAnnotation = null;
-                currentHookOptionAnnotation = null;
-
-            }
-            if (hookAnnotation != null) {
+                if (currentHookAnnotation != null) {
+                    hookDefinitions.add(buildHookDefinition(currentHookAnnotation, currentHookOptionAnnotation, currentAnnotation));
+                    currentHookOptionAnnotation = null;
+                }
                 currentHookAnnotation = hookAnnotation;
             }
             HookOptions hookOptionsAnnotation = getHookOptionsAnnotation(annotation);
@@ -328,10 +321,7 @@ public class FluentInjector implements FluentInjectControl {
             }
         }
         Class<? extends FluentHook<T>> hookClass = (Class<? extends FluentHook<T>>) hookAnnotation.value();
-        if (fluentHookOptions == null) {
-            return new HookDefinition<>(hookClass);
-        }
-        return new HookDefinition<>(hookClass, fluentHookOptions);
+        return fluentHookOptions == null ? new HookDefinition<>(hookClass) : new HookDefinition<>(hookClass, fluentHookOptions);
     }
 
     private boolean isSupported(Object container, Field field) {
@@ -357,11 +347,7 @@ public class FluentInjector implements FluentInjectControl {
             boolean componentListClass = componentsManager.isComponentListClass((Class<? extends List<?>>) field.getType());
             if (componentListClass) {
                 Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
-                boolean componentClass = componentsManager.isComponentClass(genericType);
-
-                if (componentClass) {
-                    return true;
-                }
+                return componentsManager.isComponentClass(genericType);
             }
         }
         return false;
