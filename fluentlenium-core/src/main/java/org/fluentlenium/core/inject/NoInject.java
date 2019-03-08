@@ -11,7 +11,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * Disable FluentLenium injection for this field.
  */
-@Target({METHOD, CONSTRUCTOR, FIELD})
+@Target(FIELD)
 @Retention(RUNTIME)
 public @interface NoInject {
 }

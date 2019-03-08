@@ -11,7 +11,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * Mark a field with this annotation to inject the parent container.
  */
-@Target({METHOD, CONSTRUCTOR, FIELD})
+@Target(FIELD)
 @Retention(RUNTIME)
 public @interface Parent {
 }
