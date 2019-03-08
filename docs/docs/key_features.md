@@ -346,6 +346,49 @@ Using the `@Label` and `@LabelHint` annotations you can define a custom `toStrin
 
 The purpose of `@LabelHint` is to provide additional information (kind of tags) to the `toString()` representation of the object that is annotated with it. It may be used with or without the `@Label` annotation, they don't depend on each other.
 
+Below you can find some examples of what labeling combinations will result in what toString() values.
+
+##### Label
+
+If no label value is provided it will use the class name and field name as the label.
+
+**FluentWebElement + Label without value** 
+```java
+@FindBy(css = ".hero img")
+@Label
+private FluentWebElement heroImage;
+```
+will give the following toString: *FluentWaitMessageTest.heroImage (Lazy Element)*
+
+**FluentList + Label without value**
+```java
+@FindBy(css = "img")
+@Label("pictures")
+private FluentList<FluentWebElement> images;
+```
+will give the following toString: *pictures ([])*
+
+##### LabelHint
+If the label value is defined the toString value will being with the value, and by specifying label hints, they will be list after the label value enclosed with [ and ]. 
+
+**Label + single label hint** 
+```java
+@FindBy(css = ".teaser img")
+@Label("teaser")
+@LabelHint("img")
+private FluentWebElement teaserImage;
+```
+will give the following toString: *teaser [img] (Lazy Element)*
+
+**Label + multiple label hints**
+```java
+@FindBy(css = ".banner img")
+@Label("banner")
+@LabelHint({"ad", "img"})
+private FluentList<FluentWebElement> bannerImages;
+```
+will give the following toString: *banner [ad, img] ([])*
+
 ### Components
 
 A ```Component``` is an object wrapping a ```WebElement``` instance.
