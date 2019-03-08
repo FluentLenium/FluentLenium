@@ -92,6 +92,7 @@ public class FluentInjector implements FluentInjectControl {
 
     @Override
     public ContainerContext inject(Object container) {
+        initContainer(container, null, fluentControl.getDriver());
         inject(container, null, fluentControl.getDriver());
         return containerContexts.get(container);
     }
@@ -99,14 +100,11 @@ public class FluentInjector implements FluentInjectControl {
     @Override
     public ContainerContext injectComponent(Object componentContainer, Object parentContainer, SearchContext searchContext) {
         initContainerContext(componentContainer, parentContainer, searchContext);
-        initParentContainer(componentContainer, parentContainer);
-        initFluentElements(componentContainer, searchContext);
-        initChildrenContainers(componentContainer, searchContext);
+        inject(componentContainer, parentContainer, searchContext);
         return containerContexts.get(componentContainer);
     }
 
     private void inject(Object container, Object parentContainer, SearchContext searchContext) {
-        initContainer(container, parentContainer, searchContext);
         initParentContainer(container, parentContainer);
         initFluentElements(container, searchContext);
         initChildrenContainers(container, searchContext);
