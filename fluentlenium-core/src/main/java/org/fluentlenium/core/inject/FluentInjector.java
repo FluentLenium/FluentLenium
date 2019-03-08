@@ -5,6 +5,7 @@ import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isAnnotati
 import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isNoInject;
 import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isContainer;
 import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isParent;
+import static org.fluentlenium.utils.CollectionUtils.isList;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.fluentlenium.core.FluentContainer;
@@ -380,10 +381,6 @@ public class FluentInjector implements FluentInjectControl {
             return componentsManager.isComponentClass(genericType);
         }
         return false;
-    }
-
-    private static boolean isList(Field field) {
-        return List.class.isAssignableFrom(field.getType());
     }
 
     private static boolean isElement(Field field) {
