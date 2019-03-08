@@ -40,7 +40,7 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
+import java.util.function.Consumer;
 
 /**
  * Handle injection of element proxies, @Page objects and @FindBy.
@@ -116,15 +116,21 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private void initParentContainer(Object container, Object parentContainer) {
+        forAllDeclaredFieldsInHierarchyOf(container, field -> {
+            if (isParent(field)) {
+                try {
+                    ReflectionUtils.set(field, container, parentContainer);
+                } catch (IllegalAccessException | IllegalArgumentException e) {
+                    throw new FluentInjectException("Can't set field " + field + " with value " + parentContainer, e);
+                }
+            }
+        });
+    }
+
+    private void forAllDeclaredFieldsInHierarchyOf(Object container, Consumer<Field> fieldConsumer) {
         for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
             for (Field field : cls.getDeclaredFields()) {
-                if (isParent(field)) {
-                    try {
-                        ReflectionUtils.set(field, container, parentContainer);
-                    } catch (IllegalAccessException | IllegalArgumentException e) {
-                        throw new FluentInjectException("Can't set field " + field + " with value " + parentContainer, e);
-                    }
-                }
+                fieldConsumer.accept(field);
             }
         }
     }
@@ -163,51 +169,46 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private void initChildrenContainers(Object container, SearchContext searchContext) {
-        for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
-            for (Field field : cls.getDeclaredFields()) {
-                if (isContainer(field)) {
-                    Class fieldClass = field.getType();
-                    Object existingChildContainer = containerInstances.get(fieldClass);
-                    if (existingChildContainer == null) {
-                        Object childContainer = containerInstantiator.newInstance(fieldClass, containerContexts.get(container));
-                        initContainer(childContainer, container, searchContext);
-                        try {
-                            ReflectionUtils.set(field, container, childContainer);
-                        } catch (IllegalAccessException e) {
-                            throw new FluentInjectException("Can't set field " + field + " with value " + childContainer, e);
-                        }
-                        containerInstances.put(fieldClass, childContainer);
-                        inject(childContainer, container, searchContext);
-                    } else {
-                        try {
-                            ReflectionUtils.set(field, container, existingChildContainer);
-                        } catch (IllegalAccessException e) {
-                            throw new FluentInjectException("Can't set field " + field + " with value " + existingChildContainer,
-                                    e);
-                        }
+        forAllDeclaredFieldsInHierarchyOf(container, field -> {
+            if (isContainer(field)) {
+                Class fieldClass = field.getType();
+                Object existingChildContainer = containerInstances.get(fieldClass);
+                if (existingChildContainer == null) {
+                    Object childContainer = containerInstantiator.newInstance(fieldClass, containerContexts.get(container));
+                    initContainer(childContainer, container, searchContext);
+                    try {
+                        ReflectionUtils.set(field, container, childContainer);
+                    } catch (IllegalAccessException e) {
+                        throw new FluentInjectException("Can't set field " + field + " with value " + childContainer, e);
+                    }
+                    containerInstances.put(fieldClass, childContainer);
+                    inject(childContainer, container, searchContext);
+                } else {
+                    try {
+                        ReflectionUtils.set(field, container, existingChildContainer);
+                    } catch (IllegalAccessException e) {
+                        throw new FluentInjectException("Can't set field " + field + " with value " + existingChildContainer, e);
                     }
                 }
             }
-        }
+        });
     }
 
     private void initFluentElements(Object container, SearchContext searchContext) {
         ContainerContext containerContext = containerContexts.get(container);
 
-        for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
-            for (Field field : cls.getDeclaredFields()) {
-                if (isSupported(container, field)) {
-                    ArrayList<HookDefinition<?>> fieldHookDefinitions = new ArrayList<>(containerContext.getHookDefinitions());
-                    addHookDefinitions(field.getAnnotations(), fieldHookDefinitions);
-                    InjectionElementLocatorFactory locatorFactory = new InjectionElementLocatorFactory(searchContext);
-                    InjectionElementLocator locator = locatorFactory.createLocator(field);
-                    if (locator != null) {
-                        ComponentAndProxy fieldValue = initFieldElements(locator, field);
-                        injectComponent(fieldValue, locator, container, field, fieldHookDefinitions);
-                    }
+        forAllDeclaredFieldsInHierarchyOf(container, field -> {
+            if (isSupported(container, field)) {
+                ArrayList<HookDefinition<?>> fieldHookDefinitions = new ArrayList<>(containerContext.getHookDefinitions());
+                addHookDefinitions(field.getAnnotations(), fieldHookDefinitions);
+                InjectionElementLocatorFactory locatorFactory = new InjectionElementLocatorFactory(searchContext);
+                InjectionElementLocator locator = locatorFactory.createLocator(field);
+                if (locator != null) {
+                    ComponentAndProxy fieldValue = initFieldElements(locator, field);
+                    injectComponent(fieldValue, locator, container, field, fieldHookDefinitions);
                 }
             }
-        }
+        });
     }
 
     private void injectComponent(ComponentAndProxy fieldValue, ElementLocator locator, Object container, Field field,
@@ -333,9 +334,9 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private boolean isSupported(Object container, Field field) {
-        return isValueNull(container, field) && !isNoInject(field) && !Modifier
-                .isFinal(field.getModifiers()) && (isListOfFluentWebElement(field) || isListOfComponent(field) || isComponent(
-                field) || isComponentList(field) || isElement(field) || isListOfElement(field));
+        return isValueNull(container, field) && !isNoInject(field) && !Modifier.isFinal(field.getModifiers()) && (
+                isListOfFluentWebElement(field) || isListOfComponent(field) || isComponent(field) || isComponentList(field)
+                        || isElement(field) || isListOfElement(field));
     }
 
     private static boolean isValueNull(Object container, Field field) {
