@@ -2,14 +2,17 @@ package org.fluentlenium.adapter;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
+import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-
+import org.apache.commons.lang3.StringUtils;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
+import org.fluentlenium.adapter.exception.AnnotationNotFoundException;
+import org.fluentlenium.adapter.exception.MethodNotFoundException;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import org.openqa.selenium.WebDriverException;
@@ -20,7 +23,12 @@ import org.openqa.selenium.WebDriverException;
  * Extends this class to provide FluentLenium support to your Test class.
  */
 public class FluentTestRunnerAdapter extends FluentAdapter {
-    private final SharedMutator sharedMutator;
+
+    private SharedMutator sharedMutator;
+
+    private ThreadLocal<EffectiveParameters<?>> parametersThreadLocal = new ThreadLocal<>();
+    private ThreadLocal<String> testMethodName = new ThreadLocal<>();
+    private ThreadLocal<Class<?>> testClass = new ThreadLocal<>();
 
     /**
      * Creates a new test runner adapter.
@@ -63,7 +71,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * It is possible to pass class from which the FluentConfiguration annotation will be loaded.
      *
      * @param driverContainer driver container
-     * @param clazz class from which FluentConfiguration annotation will be loaded
+     * @param clazz           class from which FluentConfiguration annotation will be loaded
      * @param sharedMutator   shared mutator
      */
     public FluentTestRunnerAdapter(FluentControlContainer driverContainer, Class clazz, SharedMutator sharedMutator) {
@@ -82,6 +90,39 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         for (SharedWebDriver sharedWebDriver : sharedWebDrivers) {
             SharedWebDriverContainer.INSTANCE.quit(sharedWebDriver);
         }
+    }
+
+    protected Class<?> getTestClass() {
+        return testClass.get();
+    }
+
+    protected String getTestMethodName() {
+        return testMethodName.get();
+    }
+
+    protected <T extends Annotation> T getClassAnnotation(Class<T> annotation) {
+        T definedAnnotation = getTestClass().getAnnotation(annotation);
+
+        if (definedAnnotation == null) {
+            throw new AnnotationNotFoundException();
+        }
+
+        return definedAnnotation;
+    }
+
+    protected <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
+        T definedAnnotation;
+        try {
+            definedAnnotation = getTestClass().getDeclaredMethod(getTestMethodName()).getAnnotation(annotation);
+        } catch (NoSuchMethodException e) {
+            throw new MethodNotFoundException();
+        }
+
+        if (definedAnnotation == null) {
+            throw new AnnotationNotFoundException();
+        }
+
+        return definedAnnotation;
     }
 
     /**
@@ -116,13 +157,13 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testName  Test name
      */
     protected void starting(Class<?> testClass, String testName) {
-        EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName,
-                getDriverLifecycle());
+        parametersThreadLocal.set(sharedMutator.getEffectiveParameters(testClass, testName,
+                getDriverLifecycle()));
 
-        SharedWebDriver sharedWebDriver = null;
+        SharedWebDriver sharedWebDriver;
 
         try {
-            sharedWebDriver = getSharedWebDriver(parameters);
+            sharedWebDriver = getSharedWebDriver(parametersThreadLocal.get());
         } catch (ExecutionException | InterruptedException e) {
             this.failed(testClass, testName);
 
@@ -133,6 +174,28 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         }
 
         initFluent(sharedWebDriver.getDriver());
+    }
+
+    private void setTestClassAndMethodValues() {
+        if (parametersThreadLocal.get() != null) {
+            if (parametersThreadLocal.get().getTestClass() != null) {
+                setClass();
+            }
+            if (parametersThreadLocal.get().getTestClass() != null) {
+                setMethodName();
+            }
+        }
+    }
+
+    private void setMethodName() {
+        String localTestName = parametersThreadLocal.get().getTestName();
+        String className = StringUtils.substringBefore(localTestName, "(");
+        testMethodName.set(className);
+    }
+
+    private void setClass() {
+        Class<?> localTestClass = parametersThreadLocal.get().getTestClass();
+        testClass.set(localTestClass);
     }
 
     private String getCauseMessage(Exception e) {
@@ -182,9 +245,12 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
                 webDriverExecutor = setExecutorService;
             }
 
-            Future<SharedWebDriver> futureWebDriver = webDriverExecutor.submit(() -> SharedWebDriverContainer.INSTANCE
-                    .getOrCreateDriver(this::newWebDriver, parameters.getTestClass(),
-                            parameters.getTestName(), parameters.getDriverLifecycle()));
+            Future<SharedWebDriver> futureWebDriver = webDriverExecutor.submit
+                    (() -> SharedWebDriverContainer.INSTANCE
+                            .getOrCreateDriver(this::newWebDriver, parameters.getTestClass(),
+                                    parameters.getTestName(), parameters.getDriverLifecycle()));
+
+            setTestClassAndMethodValues();
 
             webDriverExecutor.shutdown();
             try {
