@@ -113,6 +113,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      *
      * @param annotation @interface you want to access
      * @return Annotation instance
+     * @throws AnnotationNotFoundException when annotation you want to access couldn't be find
      */
     protected <T extends Annotation> T getClassAnnotation(Class<T> annotation) {
         T definedAnnotation = getTestClass().getAnnotation(annotation);
@@ -129,6 +130,9 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      *
      * @param annotation @interface you want to access
      * @return Annotation instance
+     * @throws AnnotationNotFoundException of annotation you want to access couldn't be found
+     * @throws MethodNotFoundException if test method couldn't be found - if it occurs that's most likely FL bug
+     *
      */
     protected <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
         T definedAnnotation;
