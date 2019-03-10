@@ -26,9 +26,9 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
 
     private SharedMutator sharedMutator;
 
-    private ThreadLocal<EffectiveParameters<?>> parametersThreadLocal = new ThreadLocal<>();
-    private ThreadLocal<String> testMethodName = new ThreadLocal<>();
-    private ThreadLocal<Class<?>> testClass = new ThreadLocal<>();
+    private static final ThreadLocal<EffectiveParameters<?>> parametersThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<String> testMethodName = new ThreadLocal<>();
+    private static final ThreadLocal<Class<?>> testClass = new ThreadLocal<>();
 
     /**
      * Creates a new test runner adapter.
@@ -92,14 +92,28 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         }
     }
 
+    /**
+     *
+     * @return Class of currently running test
+     */
     protected Class<?> getTestClass() {
         return testClass.get();
     }
 
+    /**
+     *
+     * @return method name (as String) of currently running test
+     */
     protected String getTestMethodName() {
         return testMethodName.get();
     }
 
+    /**
+     * Allows to access Class level annotation of currently running test
+     *
+     * @param annotation @interface you want to access
+     * @return Annotation instance
+     */
     protected <T extends Annotation> T getClassAnnotation(Class<T> annotation) {
         T definedAnnotation = getTestClass().getAnnotation(annotation);
 
@@ -110,6 +124,12 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         return definedAnnotation;
     }
 
+    /**
+     * Allows to access method level annotation of currently running test
+     *
+     * @param annotation @interface you want to access
+     * @return Annotation instance
+     */
     protected <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
         T definedAnnotation;
         try {
@@ -268,6 +288,12 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         return sharedWebDriver;
     }
 
+    private void clearThreadLocals() {
+        parametersThreadLocal.remove();
+        testClass.remove();
+        testMethodName.remove();
+    }
+
     /**
      * Invoked when a test method has finished (whatever the success of failing status)
      */
@@ -325,6 +351,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
             }
         }
 
+        clearThreadLocals();
         releaseFluent();
     }
 
