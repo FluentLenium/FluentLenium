@@ -53,6 +53,13 @@ public class FluentElementInjectionSupportValidatorTest {
     }
 
     @Test
+    public void shouldReturnFalseWhenFieldHasNoGenericTypeForListOfComponent() throws NoSuchFieldException {
+        Field listWithoutGenericTypeField = getField("listWithoutGenericType");
+
+        assertThat(validator.isListOfComponent(listWithoutGenericTypeField)).isFalse();
+    }
+
+    @Test
     public void shouldReturnTrueWhenFieldIsListOfComponent() throws NoSuchFieldException {
         when(componentsManager.isComponentClass(TestComponent.class)).thenReturn(true);
         Field listOfComponentsField = getField("listOfComponents");
@@ -99,6 +106,15 @@ public class FluentElementInjectionSupportValidatorTest {
     }
 
     @Test
+    public void shouldReturnFalseIfFieldHasNoGenericTypeForComponentList() throws NoSuchFieldException {
+        Field componentListWithoutGenericTypeField = getField("componentListWithoutGenericType");
+        when(componentsManager.isComponentListClass((Class<? extends List<?>>) componentListWithoutGenericTypeField.getType()))
+                .thenReturn(true);
+
+        assertThat(validator.isComponentList(componentListWithoutGenericTypeField)).isFalse();
+    }
+
+    @Test
     public void shouldReturnTrueIfFieldIsComponentList() throws NoSuchFieldException {
         Field componentListField = getField("componentList");
         when(componentsManager.isComponentListClass((Class<? extends List<?>>) componentListField.getType())).thenReturn(true);
@@ -121,6 +137,13 @@ public class FluentElementInjectionSupportValidatorTest {
         Field listOfNotFluentWebElementField = getField("listOfWebElements");
 
         assertThat(FluentElementInjectionSupportValidator.isListOfFluentWebElement(listOfNotFluentWebElementField)).isFalse();
+    }
+
+    @Test
+    public void shouldReturnFalseIfFieldHasNoGenericTypeForListOfFluentWebElement() throws NoSuchFieldException {
+        Field listWithoutGenericTypeField = getField("listWithoutGenericType");
+
+        assertThat(FluentElementInjectionSupportValidator.isListOfFluentWebElement(listWithoutGenericTypeField)).isFalse();
     }
 
     @Test
@@ -163,6 +186,13 @@ public class FluentElementInjectionSupportValidatorTest {
     }
 
     @Test
+    public void shouldReturnFalseIfFieldHasNoGenericTypeForListOfElement() throws NoSuchFieldException {
+        Field listWithoutGenericTypeField = getField("listWithoutGenericType");
+
+        assertThat(FluentElementInjectionSupportValidator.isListOfElement(listWithoutGenericTypeField)).isFalse();
+    }
+
+    @Test
     public void shouldReturnTrueIfFieldIsListOfElement() throws NoSuchFieldException {
         Field listOfFluentWebElementField = getField("listOfWebElements");
 
@@ -178,6 +208,8 @@ public class FluentElementInjectionSupportValidatorTest {
     private static final class TestPage {
         List<TestComponent> listOfComponents;
 
+        List listWithoutGenericType;
+
         TestComponent component;
 
         WebElement webElement;
@@ -191,6 +223,8 @@ public class FluentElementInjectionSupportValidatorTest {
         ComponentList<FluentWebElement> componentFluentWebElementList;
 
         ComponentList<TestComponent> componentList;
+
+        ComponentList componentListWithoutGenericType;
     }
 
     private static final class TestComponent extends FluentWebElement {

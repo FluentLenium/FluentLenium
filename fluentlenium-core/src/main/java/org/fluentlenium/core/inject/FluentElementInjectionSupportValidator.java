@@ -64,7 +64,7 @@ final class FluentElementInjectionSupportValidator {
     boolean isListOfComponent(Field field) {
         if (isList(field)) {
             Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
-            return componentsManager.isComponentClass(genericType);
+            return genericType != null && componentsManager.isComponentClass(genericType);
         }
         return false;
     }
@@ -91,7 +91,7 @@ final class FluentElementInjectionSupportValidator {
             boolean componentListClass = componentsManager.isComponentListClass((Class<? extends List<?>>) field.getType());
             if (componentListClass) {
                 Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
-                return componentsManager.isComponentClass(genericType);
+                return genericType != null && componentsManager.isComponentClass(genericType);
             }
         }
         return false;
@@ -106,7 +106,7 @@ final class FluentElementInjectionSupportValidator {
     static boolean isListOfFluentWebElement(Field field) {
         if (isList(field)) {
             Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
-            return FluentWebElement.class.isAssignableFrom(genericType);
+            return genericType != null && FluentWebElement.class.isAssignableFrom(genericType);
         }
         return false;
     }
@@ -130,7 +130,7 @@ final class FluentElementInjectionSupportValidator {
     static boolean isListOfElement(Field field) {
         if (isList(field)) {
             Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
-            return WebElement.class.isAssignableFrom(genericType);
+            return genericType != null && WebElement.class.isAssignableFrom(genericType);
         }
         return false;
     }
