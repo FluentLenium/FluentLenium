@@ -1,11 +1,12 @@
 package org.fluentlenium.core.inject;
 
+import static org.fluentlenium.core.inject.FluentElementInjectionSupportValidator.isElement;
+import static org.fluentlenium.core.inject.FluentElementInjectionSupportValidator.isListOfElement;
+import static org.fluentlenium.core.inject.FluentElementInjectionSupportValidator.isListOfFluentWebElement;
 import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isAnnotationTypeHook;
 import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isAnnotationTypeHookOptions;
-import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isNoInject;
 import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isContainer;
 import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isParent;
-import static org.fluentlenium.utils.CollectionUtils.isList;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.fluentlenium.core.FluentContainer;
@@ -34,7 +35,6 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.IdentityHashMap;
@@ -59,6 +59,8 @@ public class FluentInjector implements FluentInjectControl {
     private final DefaultHookChainBuilder hookChainBuilder;
     private final EventsRegistry eventsRegistry;
 
+    private final FluentElementInjectionSupportValidator injectionSupportValidator;
+
     /**
      * Creates a new injector.
      *
@@ -74,6 +76,7 @@ public class FluentInjector implements FluentInjectControl {
         this.componentsManager = componentsManager;
         containerInstantiator = instantiator;
         hookChainBuilder = new DefaultHookChainBuilder(control, componentsManager.getInstantiator());
+        injectionSupportValidator = new FluentElementInjectionSupportValidator(componentsManager);
     }
 
     /**
@@ -199,7 +202,7 @@ public class FluentInjector implements FluentInjectControl {
         ContainerContext containerContext = containerContexts.get(container);
 
         forAllDeclaredFieldsInHierarchyOf(container, field -> {
-            if (isSupported(container, field)) {
+            if (injectionSupportValidator.isSupported(container, field)) {
                 ArrayList<HookDefinition<?>> fieldHookDefinitions = new ArrayList<>(containerContext.getHookDefinitions());
                 addHookDefinitions(field.getAnnotations(), fieldHookDefinitions);
                 InjectionElementLocatorFactory locatorFactory = new InjectionElementLocatorFactory(searchContext);
@@ -324,63 +327,6 @@ public class FluentInjector implements FluentInjectControl {
         return fluentHookOptions == null ? new HookDefinition<>(hookClass) : new HookDefinition<>(hookClass, fluentHookOptions);
     }
 
-    private boolean isSupported(Object container, Field field) {
-        return isValueNull(container, field) && !isNoInject(field) && !Modifier.isFinal(field.getModifiers()) && (
-                isListOfFluentWebElement(field) || isListOfComponent(field) || isComponent(field) || isComponentList(field)
-                        || isElement(field) || isListOfElement(field));
-    }
-
-    private static boolean isValueNull(Object container, Field field) {
-        try {
-            return ReflectionUtils.get(field, container) == null;
-        } catch (IllegalAccessException e) {
-            throw new FluentInjectException("Can't retrieve default value of field", e);
-        }
-    }
-
-    private boolean isComponent(Field field) {
-        return componentsManager.isComponentClass(field.getType());
-    }
-
-    private boolean isComponentList(Field field) {
-        if (isList(field)) {
-            boolean componentListClass = componentsManager.isComponentListClass((Class<? extends List<?>>) field.getType());
-            if (componentListClass) {
-                Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
-                return componentsManager.isComponentClass(genericType);
-            }
-        }
-        return false;
-    }
-
-    private static boolean isListOfFluentWebElement(Field field) {
-        if (isList(field)) {
-            Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
-            return FluentWebElement.class.isAssignableFrom(genericType);
-        }
-        return false;
-    }
-
-    private boolean isListOfComponent(Field field) {
-        if (isList(field)) {
-            Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
-            return componentsManager.isComponentClass(genericType);
-        }
-        return false;
-    }
-
-    private static boolean isElement(Field field) {
-        return WebElement.class.isAssignableFrom(field.getType());
-    }
-
-    private static boolean isListOfElement(Field field) {
-        if (isList(field)) {
-            Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
-            return WebElement.class.isAssignableFrom(genericType);
-        }
-        return false;
-    }
-
     private static class ComponentAndProxy<T, P> {
         private final T component;
         private final P proxy;
@@ -400,13 +346,13 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private ComponentAndProxy<?, ?> initFieldElements(ElementLocator locator, Field field) {
-        if (isComponent(field)) {
+        if (injectionSupportValidator.isComponent(field)) {
             return initFieldAsComponent(locator, field);
-        } else if (isComponentList(field)) {
+        } else if (injectionSupportValidator.isComponentList(field)) {
             return initFieldAsComponentList(locator, field);
         } else if (isListOfFluentWebElement(field)) {
             return initFieldAsListOfFluentWebElement(locator, field);
-        } else if (isListOfComponent(field)) {
+        } else if (injectionSupportValidator.isListOfComponent(field)) {
             return initFieldAsListOfComponent(locator, field);
         } else if (isElement(field)) {
             return initFieldAsElement(locator);
