@@ -153,50 +153,50 @@ public class FluentElementInjectionSupportValidatorTest {
         assertThat(FluentElementInjectionSupportValidator.isListOfFluentWebElement(listOfFluentWebElementField)).isTrue();
     }
 
-    //isElement
+    //isWebElement
 
     @Test
     public void shouldReturnTrueIfFieldIsWebElement() throws NoSuchFieldException {
         Field webElementField = getField("webElement");
 
-        assertThat(FluentElementInjectionSupportValidator.isElement(webElementField)).isTrue();
+        assertThat(FluentElementInjectionSupportValidator.isWebElement(webElementField)).isTrue();
     }
 
     @Test
     public void shouldReturnFalseIfFieldIsNotWebElement() throws NoSuchFieldException {
         Field fluentWebElementField = getField("fluentWebElement");
 
-        assertThat(FluentElementInjectionSupportValidator.isElement(fluentWebElementField)).isFalse();
+        assertThat(FluentElementInjectionSupportValidator.isWebElement(fluentWebElementField)).isFalse();
     }
 
-    //isListOfElement
+    //isListOfWebElement
 
     @Test
     public void shouldReturnFalseIfFieldIsNotListForListOfElement() throws NoSuchFieldException {
         Field notListField = getField("webElement");
 
-        assertThat(FluentElementInjectionSupportValidator.isListOfElement(notListField)).isFalse();
+        assertThat(FluentElementInjectionSupportValidator.isListOfWebElement(notListField)).isFalse();
     }
 
     @Test
     public void shouldReturnFalseIfFieldIsNotListOfElement() throws NoSuchFieldException {
         Field listOfNotFluentWebElementField = getField("listOfFluentWebElements");
 
-        assertThat(FluentElementInjectionSupportValidator.isListOfElement(listOfNotFluentWebElementField)).isFalse();
+        assertThat(FluentElementInjectionSupportValidator.isListOfWebElement(listOfNotFluentWebElementField)).isFalse();
     }
 
     @Test
     public void shouldReturnFalseIfFieldHasNoGenericTypeForListOfElement() throws NoSuchFieldException {
         Field listWithoutGenericTypeField = getField("listWithoutGenericType");
 
-        assertThat(FluentElementInjectionSupportValidator.isListOfElement(listWithoutGenericTypeField)).isFalse();
+        assertThat(FluentElementInjectionSupportValidator.isListOfWebElement(listWithoutGenericTypeField)).isFalse();
     }
 
     @Test
     public void shouldReturnTrueIfFieldIsListOfElement() throws NoSuchFieldException {
         Field listOfFluentWebElementField = getField("listOfWebElements");
 
-        assertThat(FluentElementInjectionSupportValidator.isListOfElement(listOfFluentWebElementField)).isTrue();
+        assertThat(FluentElementInjectionSupportValidator.isListOfWebElement(listOfFluentWebElementField)).isTrue();
     }
 
     //Support methods and classes

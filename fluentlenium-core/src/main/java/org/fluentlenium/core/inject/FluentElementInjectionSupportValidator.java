@@ -41,8 +41,8 @@ final class FluentElementInjectionSupportValidator {
                 || isListOfComponent(field)
                 || isComponent(field)
                 || isComponentList(field)
-                || isElement(field)
-                || isListOfElement(field));
+                || isWebElement(field)
+                || isListOfWebElement(field));
     }
 
     private static boolean isFieldExist(Object container, Field field) {
@@ -117,7 +117,7 @@ final class FluentElementInjectionSupportValidator {
      * @param field the field to check the type of
      * @return true if field is WebElement, false otherwise
      */
-    static boolean isElement(Field field) {
+    static boolean isWebElement(Field field) {
         return WebElement.class.isAssignableFrom(field.getType());
     }
 
@@ -127,7 +127,7 @@ final class FluentElementInjectionSupportValidator {
      * @param field the field to check the type of
      * @return true if field is a list of WebElements, false otherwise
      */
-    static boolean isListOfElement(Field field) {
+    static boolean isListOfWebElement(Field field) {
         if (isList(field)) {
             Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
             return genericType != null && WebElement.class.isAssignableFrom(genericType);
