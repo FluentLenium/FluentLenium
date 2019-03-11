@@ -70,7 +70,7 @@ public class FluentElementInjectionSupportValidatorTest {
     //isComponent
 
     @Test
-    public void isComponent() throws NoSuchFieldException {
+    public void shouldReturnTrueIfFieldIsComponent() throws NoSuchFieldException {
         when(componentsManager.isComponentClass(TestComponent.class)).thenReturn(true);
         Field componentField = getField("component");
 

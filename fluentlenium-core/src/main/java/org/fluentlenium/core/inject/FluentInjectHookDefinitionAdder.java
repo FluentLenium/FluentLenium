@@ -25,7 +25,7 @@ final class FluentInjectHookDefinitionAdder {
     /**
      * Collects hook definitions in the argument {@code hookDefinitions} based on annotations applied on a class or field.
      *
-     * @param annotations the annotations on a candidate field or class for injection
+     * @param annotations     the annotations on a candidate field or class for injection
      * @param hookDefinitions container list for hook definitions to add them to
      */
     void addHookDefinitions(Annotation[] annotations, List<HookDefinition<?>> hookDefinitions) {
@@ -40,23 +40,29 @@ final class FluentInjectHookDefinitionAdder {
             if (hookAnnotation != null) {
                 currentAnnotation = annotation;
                 if (currentHookAnnotation != null) {
-                    hookDefinitions.add(buildHookDefinition(currentHookAnnotation, currentHookOptionAnnotation, currentAnnotation));
+                    hookDefinitions
+                            .add(buildHookDefinition(currentHookAnnotation, currentHookOptionAnnotation, currentAnnotation));
                     currentHookOptionAnnotation = null;
                 }
                 currentHookAnnotation = hookAnnotation;
             }
-            HookOptions hookOptionsAnnotation = getHookOptionsAnnotation(annotation);
-            if (hookOptionsAnnotation != null) {
-                if (currentHookOptionAnnotation != null) {
-                    throw new FluentInjectException("Unexpected @HookOptions annotation. @Hook is missing.");
-                }
-                currentHookOptionAnnotation = hookOptionsAnnotation;
-            }
+            currentHookOptionAnnotation = validateHookOptionsAnnotation(currentHookOptionAnnotation, annotation);
         }
 
         if (currentHookAnnotation != null) {
             hookDefinitions.add(buildHookDefinition(currentHookAnnotation, currentHookOptionAnnotation, currentAnnotation));
         }
+    }
+
+    private HookOptions validateHookOptionsAnnotation(HookOptions currentHookOptionAnnotation, Annotation annotation) {
+        HookOptions hookOptionsAnnotation = getHookOptionsAnnotation(annotation);
+        if (hookOptionsAnnotation != null) {
+            if (currentHookOptionAnnotation != null) {
+                throw new FluentInjectException("Unexpected @HookOptions annotation. @Hook is missing.");
+            }
+            currentHookOptionAnnotation = hookOptionsAnnotation;
+        }
+        return currentHookOptionAnnotation;
     }
 
     private Hook getHookAnnotation(Annotation annotation) {

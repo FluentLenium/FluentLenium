@@ -39,20 +39,21 @@ final class FluentInjectFieldInitializer {
      * @return a {@link ComponentAndProxy} and proxy object storing initialized component and proxy object for that
      */
     ComponentAndProxy<?, ?> initFieldElements(ElementLocator locator, Field field) {
+        ComponentAndProxy<?, ?> fieldValue = null;
         if (injectionSupportValidator.isComponent(field)) {
-            return initFieldAsComponent(locator, field);
+            fieldValue = initFieldAsComponent(locator, field);
         } else if (injectionSupportValidator.isComponentList(field)) {
-            return initFieldAsComponentList(locator, field);
+            fieldValue = initFieldAsComponentList(locator, field);
         } else if (isListOfFluentWebElement(field)) {
-            return initFieldAsListOfFluentWebElement(locator, field);
+            fieldValue = initFieldAsListOfFluentWebElement(locator, field);
         } else if (injectionSupportValidator.isListOfComponent(field)) {
-            return initFieldAsListOfComponent(locator, field);
+            fieldValue = initFieldAsListOfComponent(locator, field);
         } else if (isWebElement(field)) {
-            return initFieldAsWebElement(locator);
+            fieldValue = initFieldAsWebElement(locator);
         } else if (isListOfWebElement(field)) {
-            return initFieldAsListOfWebElement(locator);
+            fieldValue = initFieldAsListOfWebElement(locator);
         }
-        return null;
+        return fieldValue;
     }
 
     private <L extends List<T>, T> ComponentAndProxy<L, List<WebElement>> initFieldAsComponentList(ElementLocator locator,

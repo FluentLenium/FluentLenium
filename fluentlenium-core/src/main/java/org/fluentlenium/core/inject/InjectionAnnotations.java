@@ -11,7 +11,6 @@ import org.openqa.selenium.support.pagefactory.AbstractAnnotations;
 import org.openqa.selenium.support.pagefactory.Annotations;
 
 import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * Inspired by {@link org.openqa.selenium.support.pagefactory.Annotations}, but also supports annotations defined on
