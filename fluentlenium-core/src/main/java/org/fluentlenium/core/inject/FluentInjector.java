@@ -26,7 +26,7 @@ import java.util.Map.Entry;
 import java.util.function.Consumer;
 
 /**
- * Handle injection of element proxies, {@link Page} objects, {@link Parent} objects and
+ * Handle injection of element proxies, {@link org.fluentlenium.core.annotation.Page} objects, {@link Parent} objects and
  * {@link org.openqa.selenium.support.FindBy}.
  * <p>
  * Excludes fields from injection that are marked as {@link NoInject}.
