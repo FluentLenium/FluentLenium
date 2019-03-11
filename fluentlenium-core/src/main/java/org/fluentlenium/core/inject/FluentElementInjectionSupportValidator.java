@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Provides method for validating whether the injection of a field into a container is supported,
@@ -62,11 +63,8 @@ final class FluentElementInjectionSupportValidator {
      * @return true if field is a list of components, false otherwise
      */
     boolean isListOfComponent(Field field) {
-        if (isList(field)) {
-            Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
-            return genericType != null && componentsManager.isComponentClass(genericType);
-        }
-        return false;
+        //Don't replace the predicate with a method reference
+        return isFieldListOf(field, genericType -> componentsManager.isComponentClass(genericType));
     }
 
     /**
@@ -104,11 +102,7 @@ final class FluentElementInjectionSupportValidator {
      * @return true if field is a list of FluentWebElements, false otherwise
      */
     static boolean isListOfFluentWebElement(Field field) {
-        if (isList(field)) {
-            Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
-            return genericType != null && FluentWebElement.class.isAssignableFrom(genericType);
-        }
-        return false;
+        return isFieldListOf(field, FluentWebElement.class::isAssignableFrom);
     }
 
     /**
@@ -128,9 +122,13 @@ final class FluentElementInjectionSupportValidator {
      * @return true if field is a list of WebElements, false otherwise
      */
     static boolean isListOfWebElement(Field field) {
+        return isFieldListOf(field, WebElement.class::isAssignableFrom);
+    }
+
+    private static boolean isFieldListOf(Field field, Predicate<Class<?>> typePredicate) {
         if (isList(field)) {
             Class<?> genericType = ReflectionUtils.getFirstGenericType(field);
-            return genericType != null && WebElement.class.isAssignableFrom(genericType);
+            return genericType != null && typePredicate.test(genericType);
         }
         return false;
     }
