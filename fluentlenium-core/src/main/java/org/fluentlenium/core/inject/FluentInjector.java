@@ -1,8 +1,5 @@
 package org.fluentlenium.core.inject;
 
-import static org.fluentlenium.core.inject.FluentElementInjectionSupportValidator.isElement;
-import static org.fluentlenium.core.inject.FluentElementInjectionSupportValidator.isListOfElement;
-import static org.fluentlenium.core.inject.FluentElementInjectionSupportValidator.isListOfFluentWebElement;
 import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isAnnotationTypeHook;
 import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isAnnotationTypeHookOptions;
 import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isContainer;
@@ -14,9 +11,6 @@ import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.components.LazyComponents;
 import org.fluentlenium.core.components.LazyComponentsListener;
-import org.fluentlenium.core.domain.ComponentList;
-import org.fluentlenium.core.domain.FluentList;
-import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.ContainerAnnotationsEventsRegistry;
 import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.hook.DefaultHookChainBuilder;
@@ -60,6 +54,7 @@ public class FluentInjector implements FluentInjectControl {
     private final EventsRegistry eventsRegistry;
 
     private final FluentElementInjectionSupportValidator injectionSupportValidator;
+    private final FluentInjectFieldInitializer fieldInitializer;
 
     /**
      * Creates a new injector.
@@ -77,6 +72,7 @@ public class FluentInjector implements FluentInjectControl {
         containerInstantiator = instantiator;
         hookChainBuilder = new DefaultHookChainBuilder(control, componentsManager.getInstantiator());
         injectionSupportValidator = new FluentElementInjectionSupportValidator(componentsManager);
+        fieldInitializer = new FluentInjectFieldInitializer(componentsManager, injectionSupportValidator);
     }
 
     /**
@@ -208,7 +204,7 @@ public class FluentInjector implements FluentInjectControl {
                 InjectionElementLocatorFactory locatorFactory = new InjectionElementLocatorFactory(searchContext);
                 InjectionElementLocator locator = locatorFactory.createLocator(field);
                 if (locator != null) {
-                    ComponentAndProxy fieldValue = initFieldElements(locator, field);
+                    ComponentAndProxy fieldValue = fieldInitializer.initFieldElements(locator, field);
                     injectComponent(fieldValue, locator, container, field, fieldHookDefinitions);
                 }
             }
@@ -325,81 +321,5 @@ public class FluentInjector implements FluentInjectControl {
         }
         Class<? extends FluentHook<T>> hookClass = (Class<? extends FluentHook<T>>) hookAnnotation.value();
         return fluentHookOptions == null ? new HookDefinition<>(hookClass) : new HookDefinition<>(hookClass, fluentHookOptions);
-    }
-
-    private static class ComponentAndProxy<T, P> {
-        private final T component;
-        private final P proxy;
-
-        ComponentAndProxy(T component, P proxy) {
-            this.component = component;
-            this.proxy = proxy;
-        }
-
-        public T getComponent() {
-            return component;
-        }
-
-        public P getProxy() {
-            return proxy;
-        }
-    }
-
-    private ComponentAndProxy<?, ?> initFieldElements(ElementLocator locator, Field field) {
-        if (injectionSupportValidator.isComponent(field)) {
-            return initFieldAsComponent(locator, field);
-        } else if (injectionSupportValidator.isComponentList(field)) {
-            return initFieldAsComponentList(locator, field);
-        } else if (isListOfFluentWebElement(field)) {
-            return initFieldAsListOfFluentWebElement(locator, field);
-        } else if (injectionSupportValidator.isListOfComponent(field)) {
-            return initFieldAsListOfComponent(locator, field);
-        } else if (isElement(field)) {
-            return initFieldAsElement(locator);
-        } else if (isListOfElement(field)) {
-            return initFieldAsListOfElement(locator);
-        }
-        return null;
-    }
-
-    private <L extends List<T>, T> ComponentAndProxy<L, List<WebElement>> initFieldAsComponentList(ElementLocator locator,
-            Field field) {
-        List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
-        L componentList = componentsManager
-                .asComponentList((Class<L>) field.getType(), (Class<T>) ReflectionUtils.getFirstGenericType(field),
-                        webElementList);
-        return new ComponentAndProxy<>(componentList, webElementList);
-    }
-
-    private ComponentAndProxy<Object, WebElement> initFieldAsComponent(ElementLocator locator, Field field) {
-        WebElement element = LocatorProxies.createWebElement(locator);
-        Object component = componentsManager.newComponent(field.getType(), element);
-        return new ComponentAndProxy(component, element);
-    }
-
-    private ComponentAndProxy<ComponentList<?>, List<WebElement>> initFieldAsListOfComponent(ElementLocator locator,
-            Field field) {
-        List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
-        ComponentList<?> componentList = componentsManager
-                .asComponentList(ReflectionUtils.getFirstGenericType(field), webElementList);
-        return new ComponentAndProxy(componentList, webElementList);
-    }
-
-    private ComponentAndProxy<FluentList<? extends FluentWebElement>, List<WebElement>> initFieldAsListOfFluentWebElement(
-            ElementLocator locator, Field field) {
-        List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
-        FluentList<? extends FluentWebElement> fluentList = componentsManager
-                .asFluentList((Class<? extends FluentWebElement>) ReflectionUtils.getFirstGenericType(field), webElementList);
-        return new ComponentAndProxy(fluentList, webElementList);
-    }
-
-    private ComponentAndProxy<WebElement, WebElement> initFieldAsElement(ElementLocator locator) {
-        WebElement element = LocatorProxies.createWebElement(locator);
-        return new ComponentAndProxy<>(element, element);
-    }
-
-    private ComponentAndProxy<List<WebElement>, List<WebElement>> initFieldAsListOfElement(ElementLocator locator) {
-        List<WebElement> elements = LocatorProxies.createWebElementList(locator);
-        return new ComponentAndProxy(elements, elements);
     }
 }
