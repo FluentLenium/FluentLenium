@@ -103,26 +103,6 @@ public class FluentInjector implements FluentInjectControl {
         initChildrenContainers(container, searchContext);
     }
 
-    private void initParentContainer(Object container, Object parentContainer) {
-        forAllDeclaredFieldsInHierarchyOf(container, field -> {
-            if (isParent(field)) {
-                try {
-                    ReflectionUtils.set(field, container, parentContainer);
-                } catch (IllegalAccessException | IllegalArgumentException e) {
-                    throw new FluentInjectException("Can't set field " + field + " with value " + parentContainer, e);
-                }
-            }
-        });
-    }
-
-    private void forAllDeclaredFieldsInHierarchyOf(Object container, Consumer<Field> fieldConsumer) {
-        for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
-            for (Field field : cls.getDeclaredFields()) {
-                fieldConsumer.accept(field);
-            }
-        }
-    }
-
     private void initContainer(Object container, Object parentContainer, SearchContext searchContext) {
         initContainerContext(container, parentContainer, searchContext);
         if (container instanceof FluentContainer) {
@@ -130,6 +110,8 @@ public class FluentInjector implements FluentInjectControl {
         }
         initEventAnnotations(container);
     }
+
+    //-------- initContainerContext --------
 
     private void initContainerContext(Object container, Object parentContainer, SearchContext searchContext) {
         ContainerContext parentContainerContext = parentContainer == null ? null : containerContexts.get(parentContainer);
@@ -156,6 +138,22 @@ public class FluentInjector implements FluentInjectControl {
         return cls != Object.class && cls != null;
     }
 
+    //-------- initParentContainer --------
+
+    private void initParentContainer(Object container, Object parentContainer) {
+        forAllDeclaredFieldsInHierarchyOf(container, field -> {
+            if (isParent(field)) {
+                try {
+                    ReflectionUtils.set(field, container, parentContainer);
+                } catch (IllegalAccessException | IllegalArgumentException e) {
+                    throw new FluentInjectException("Can't set field " + field + " with value " + parentContainer, e);
+                }
+            }
+        });
+    }
+
+    //-------- initChildrenContainers --------
+
     private void initChildrenContainers(Object container, SearchContext searchContext) {
         forAllDeclaredFieldsInHierarchyOf(container, field -> {
             if (isContainer(field)) {
@@ -164,23 +162,25 @@ public class FluentInjector implements FluentInjectControl {
                 if (existingChildContainer == null) {
                     Object childContainer = containerInstantiator.newInstance(fieldClass, containerContexts.get(container));
                     initContainer(childContainer, container, searchContext);
-                    try {
-                        ReflectionUtils.set(field, container, childContainer);
-                    } catch (IllegalAccessException e) {
-                        throw new FluentInjectException("Can't set field " + field + " with value " + childContainer, e);
-                    }
+                    setFieldInContainer(field, container, childContainer);
                     containerInstances.put(fieldClass, childContainer);
                     inject(childContainer, container, searchContext);
                 } else {
-                    try {
-                        ReflectionUtils.set(field, container, existingChildContainer);
-                    } catch (IllegalAccessException e) {
-                        throw new FluentInjectException("Can't set field " + field + " with value " + existingChildContainer, e);
-                    }
+                    setFieldInContainer(field, container, existingChildContainer);
                 }
             }
         });
     }
+
+    private void setFieldInContainer(Field field, Object container, Object value) {
+        try {
+            ReflectionUtils.set(field, container, value);
+        } catch (IllegalAccessException e) {
+            throw new FluentInjectException("Can't set field " + field + " with value " + value, e);
+        }
+    }
+
+    //-------- initFluentElements --------
 
     private void initFluentElements(Object container, SearchContext searchContext) {
         ContainerContext containerContext = containerContexts.get(container);
@@ -230,5 +230,13 @@ public class FluentInjector implements FluentInjectControl {
             return lazyComponents.isLazy() && !lazyComponents.isLazyInitialized();
         }
         return false;
+    }
+
+    private void forAllDeclaredFieldsInHierarchyOf(Object container, Consumer<Field> fieldConsumer) {
+        for (Class cls = container.getClass(); isClassSupported(cls); cls = cls.getSuperclass()) {
+            for (Field field : cls.getDeclaredFields()) {
+                fieldConsumer.accept(field);
+            }
+        }
     }
 }
