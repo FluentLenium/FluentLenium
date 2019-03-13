@@ -89,14 +89,30 @@ public class DocumentPage extends FluentPage {
 }
 ```
 
-You can also refer to files in your `resources` directory by adding `isLocalFile` parameter
+You can also refer to files in your test resources directory by specifying the `file` attribute with a file name: 
 
 ```java
-@PageUrl(file = "page2url.html", value = "?param1={param1}&param2={param2}", isLocalFile = true)
+@PageUrl(file = "page2url.html", value = "?param1={param1}&param2={param2}")
 class Page2DynamicP2P1 extends FluentPage {
     @Override
     protected void isAtUsingUrl(String urlTemplate) {
         //overridden to skip URL check because PageUrl is not able to get local file path relatively
+    }
+}
+```
+
+In case you don't specify the `file` attribute but you override either `FluentPage#getUrl()` or `FluentPage#getUrl(Object...)` in a way that it retrieves a local test resource,
+you need to also override `FluentPage#isAtUsingUrl(String)` and leave its body empty to skip URL check because PageUrl is not able to get local file path relatively.
+```java
+@PageUrl(value = "?param1={param1}&param2={param2}")
+class Page2DynamicP2P1 extends FluentPage {
+    @Override
+    protected String getUrl() {
+         return someLocalResource;
+    }
+
+    @Override
+    public void isAtUsingUrl(String urlTemplate) {
     }
 }
 ```

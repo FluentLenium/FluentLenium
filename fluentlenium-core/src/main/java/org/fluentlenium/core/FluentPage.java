@@ -55,7 +55,19 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
     }
 
     private String getPageUrlValue(PageUrl pageUrl) {
-        return ((pageUrl.isLocalFile()) ? getAbsoluteUrlFromFile(pageUrl.file()) : StringUtils.EMPTY) + pageUrl.value();
+        return ((isLocalFile(pageUrl)) ? getAbsoluteUrlFromFile(pageUrl.file()) : StringUtils.EMPTY) + pageUrl.value();
+    }
+
+    private boolean isLocalFile(PageUrl pageUrl) {
+        return pageUrl != null && !pageUrl.file().isEmpty();
+    }
+
+    private PageUrl getPageUrlAnnotation() {
+        PageUrl annotation = null;
+        if (getClass().isAnnotationPresent(PageUrl.class)) {
+            annotation = getClass().getAnnotation(PageUrl.class);
+        }
+        return annotation;
     }
 
     @Override
@@ -97,17 +109,24 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
 
     /**
      * URL matching implementation for isAt().
+     * <p>
+     * If there is a {@link PageUrl} annotation applied on the class and it has the {@code file} attribute defined this method
+     * will skip the url parsing to skip URL check because it is not able to get local file path relatively.
      *
      * @param urlTemplate URL Template
+     * @throws AssertionError when the current URL doesn't match the expected page URL
      */
     public void isAtUsingUrl(String urlTemplate) {
-        UrlTemplate template = new UrlTemplate(urlTemplate);
+        if (!isLocalFile(getPageUrlAnnotation())) {
+            UrlTemplate template = new UrlTemplate(urlTemplate);
 
-        String url = url();
-        ParsedUrlTemplate parse = template.parse(url);
+            String url = url();
+            ParsedUrlTemplate parse = template.parse(url);
 
-        if (!parse.matches()) {
-            throw new AssertionError(String.format("Current URL [%s] doesn't match expected Page URL [%s]", url, urlTemplate));
+            if (!parse.matches()) {
+                throw new AssertionError(
+                        String.format("Current URL [%s] doesn't match expected Page URL [%s]", url, urlTemplate));
+            }
         }
     }
 
@@ -115,6 +134,7 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
      * Selector matching implementation for isAt().
      *
      * @param by by selector
+     * @throws AssertionError if the element using the argument By is not found for the current page
      */
     public void isAtUsingSelector(By by) {
         try {
