@@ -55,7 +55,7 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
     }
 
     private String getPageUrlValue(PageUrl pageUrl) {
-        return ((isLocalFile(pageUrl)) ? getAbsoluteUrlFromFile(pageUrl.file()) : StringUtils.EMPTY) + pageUrl.value();
+        return (isLocalFile(pageUrl) ? getAbsoluteUrlFromFile(pageUrl.file()) : StringUtils.EMPTY) + pageUrl.value();
     }
 
     private boolean isLocalFile(PageUrl pageUrl) {
