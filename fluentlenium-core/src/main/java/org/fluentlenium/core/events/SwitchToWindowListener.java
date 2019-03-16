@@ -9,7 +9,8 @@ public interface SwitchToWindowListener {
     /**
      * Called before or after window switch event.
      *
-     * @param driver    selenium driver
+     * @param s      script
+     * @param driver selenium driver
      */
     void on(String s, WebDriver driver); // NOPMD ShortMethodName
 }

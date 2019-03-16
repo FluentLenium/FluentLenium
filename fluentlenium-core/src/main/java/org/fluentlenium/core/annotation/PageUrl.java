@@ -24,7 +24,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * Referencing local files in the test resources directory can be achieved by defining the file name of the resource in the
  * annotation's {@code file} attribute:
  * <pre>
- * &#064;PageUrl(file = "page2url.html", value = "?param1={param1}&param2={param2}")
+ * &#064;PageUrl(file = "page2url.html", value = "?param1={param1}&amp;param2={param2}")
  * class Page2DynamicP2P1 extends FluentPage {
  * }
  * </pre>
@@ -33,7 +33,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * also override {@link org.fluentlenium.core.FluentPage#isAtUsingUrl(String)} and leave its body empty to skip URL check
  * because PageUrl is not able to get local file path relatively.
  * <pre>
- * &#064;PageUrl(value = "?param1={param1}&param2={param2}")
+ * &#064;PageUrl(value = "?param1={param1}&amp;param2={param2}")
  * class Page2DynamicP2P1 extends FluentPage {
  *     &#064;Override
  *     protected String getUrl() {
@@ -63,7 +63,7 @@ public @interface PageUrl {
      * <li><code>@PageUrl(file = "index.html" value="")</code> should redirect to
      * * "file://{testResourcesDirectory}/index.html"</li>
      * <li><code>@PageUrl(file = "index.html" value="?param={param}")</code> should
-     * redirect to "file://{testResourcesDirectory}/index.html?param=&lt;value of param>"</li>
+     * redirect to "file://{testResourcesDirectory}/index.html?param=&lt;value of param&gt;"</li>
      * </ul>
      *
      * @return page url

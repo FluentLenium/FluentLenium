@@ -9,20 +9,20 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * Mark a field whose class declaration is annotated with one of Selenium's {@code Find...} annotation,
  * with this annotation to inject the parent container. Parent container in this case means parent in the HTML DOM.
- * <p>
+ *
  * It doesn't matter if the parent is a direct parent or is any element that is upper in the DOM relative to the current element.
  * What element the parent represents depends on the {@code Find...} annotation applied on the parent component or page class.
- * <p>
+ *
  * <h3>Examples</h3>
  * For an HTML snippet like
  * <pre>
- * &lt;div id="homepage">
- *      &lt;div class="component">
- *          &lt;div class="sub-component">
+ *  &lt;div id="homepage"&gt;
+ *      &lt;div class="component"&gt;
+ *          &lt;div class="sub-component"&gt;
  *              ...
- *          &lt;/div>
- *      &lt;/div>
- * &lt;/div>
+ *          &lt;/div&gt;
+ *      &lt;/div&gt;
+ * &lt;/div&gt;
  * </pre>
  * there can be a custom component for the {@code div.component} element:
  * <pre>
