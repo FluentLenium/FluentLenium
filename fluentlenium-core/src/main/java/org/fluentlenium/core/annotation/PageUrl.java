@@ -21,18 +21,30 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *         ...
  * }
  * </pre>
- * <p>
- * In case of referencing local files in the resources directory you need to override the {@code isAtUsingUrl} method
- * to skip URL check because PageUrl is not able to get local file path relatively.
+ * Referencing local files in the test resources directory can be achieved by defining the file name of the resource in the
+ * annotation's {@code file} attribute:
  * <pre>
- * &#064;PageUrl(file = "page2url.html", value = "?param1={param1}&param2={param2}", isLocalFile = true)
+ * &#064;PageUrl(file = "page2url.html", value = "?param1={param1}&param2={param2}")
+ * class Page2DynamicP2P1 extends FluentPage {
+ * }
+ * </pre>
+ * In case you don't specify the {@code file} attribute but you override either {@link org.fluentlenium.core.FluentPage#getUrl()}
+ * or {@link org.fluentlenium.core.FluentPage#getUrl(Object...)} in a way that it retrieves a local test resource you need to
+ * also override {@link org.fluentlenium.core.FluentPage#isAtUsingUrl(String)} and leave its body empty to skip URL check
+ * because PageUrl is not able to get local file path relatively.
+ * <pre>
+ * &#064;PageUrl(value = "?param1={param1}&param2={param2}")
  * class Page2DynamicP2P1 extends FluentPage {
  *     &#064;Override
- *     protected void isAtUsingUrl(String urlTemplate) {
+ *     protected String getUrl() {
+ *          return someLocalResource;
+ *     }
+ *
+ *     &#064;Override
+ *     public void isAtUsingUrl(String urlTemplate) {
  *     }
  * }
  * </pre>
- * <p>
  * In case local files depending on the value of the {@code value} attribute you can use additional URL query parameters
  * attached to the path. If no query parameters are used the value attribute can be left empty.
  * <p>
@@ -48,10 +60,10 @@ public @interface PageUrl {
      * <li><code>@PageUrl("/")</code>                  should redirect to the homepage of the website (baseUrl + "/")</li>
      * <li><code>@PageUrl("/index.html")</code>        should redirect to baseUrl + "/index.html"</li>
      * <li><code>@PageUrl("http://example.com")</code> should redirect to "http://example.com"</li>
-     * <li><code>@PageUrl(file = "index.html" value="", isLocalFile = true)</code> should redirect to
-     * * "file://{resourcesDirectory}/index.html"</li>
-     * <li><code>@PageUrl(file = "index.html" value="?param={param}", isLocalFile = true)</code> should
-     * redirect to "file://{resourcesDirectory}/index.html?param=&lt;value of param>"</li>
+     * <li><code>@PageUrl(file = "index.html" value="")</code> should redirect to
+     * * "file://{testResourcesDirectory}/index.html"</li>
+     * <li><code>@PageUrl(file = "index.html" value="?param={param}")</code> should
+     * redirect to "file://{testResourcesDirectory}/index.html?param=&lt;value of param>"</li>
      * </ul>
      *
      * @return page url
@@ -59,22 +71,13 @@ public @interface PageUrl {
     String value();
 
     /**
-     * Defines the file name without a path located in the resources directory on the local file system, e.g.
+     * Defines the file name without a path located in the test resources directory on the local file system, e.g.
      * <p>
-     * {@code @PageUrl(file = "index.html", value = "", isLocalFile = true)}
+     * {@code @PageUrl(file = "index.html", value = "")}
      * <p>
      * Default value is empty.
      *
      * @return the file name
      */
     String file() default "";
-
-    /**
-     * Defines whether during page URL generation FluentLenium should look for a local file system resource.
-     * <p>
-     * Default value is false.
-     *
-     * @return true if the file is local, false otherwise
-     */
-    boolean isLocalFile() default false;
 }
