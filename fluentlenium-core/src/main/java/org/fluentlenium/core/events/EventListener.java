@@ -199,7 +199,7 @@ public interface EventListener {
     /**
      * Called  before {@link WebDriver.Window#switchTo()} ()}
      *
-     * @param s String
+     * @param s      String
      * @param driver WebDriver
      */
     void beforeSwitchToWindow(String s, WebDriver driver);
@@ -207,7 +207,7 @@ public interface EventListener {
     /**
      * Called  after {@link WebDriver.Window#switchTo()} ()}
      *
-     * @param s String
+     * @param s      String
      * @param driver WebDriver
      */
     void afterSwitchToWindow(String s, WebDriver driver);
@@ -215,6 +215,7 @@ public interface EventListener {
     /**
      * Called  before {@link org.openqa.selenium.TakesScreenshot#getScreenshotAs(OutputType)} ()}
      *
+     * @param <X>        object
      * @param outputType OutputType
      */
     <X> void beforeGetScreenshotAs(OutputType<X> outputType);
@@ -222,8 +223,9 @@ public interface EventListener {
     /**
      * Called  after {@link org.openqa.selenium.TakesScreenshot#getScreenshotAs(OutputType)} ()}
      *
+     * @param <X>        object
      * @param outputType OutputType
-     * @param x X
+     * @param x          object
      */
     <X> void afterGetScreenshotAs(OutputType<X> outputType, X x);
 
@@ -231,7 +233,7 @@ public interface EventListener {
      * Called  before {@link WebElement#getText()} ()}
      *
      * @param webElement WebElement
-     * @param webDriver WebDriver
+     * @param webDriver  WebDriver
      */
     void beforeGetText(FluentWebElement webElement, WebDriver webDriver);
 
@@ -239,8 +241,8 @@ public interface EventListener {
      * Called  after {@link WebElement#getText()} ()}
      *
      * @param webElement WebElement
-     * @param webDriver WebDriver
-     * @param s String
+     * @param webDriver  WebDriver
+     * @param s          String
      */
     void afterGetText(FluentWebElement webElement, WebDriver webDriver, String s);
 }
