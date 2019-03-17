@@ -34,7 +34,7 @@ Short summary:
 ```xml
 <properties>
     <!-- Configure this property to latest available version -->
-    <fluentlenium.version>4.1.1</fluentlenium.version>
+    <fluentlenium.version>4.2.2</fluentlenium.version>
     <!-- Make sure the selenium.version won't be overridden by another pom.xml -->
     <selenium.version>3.141.59</selenium.version>
 </properties>
@@ -42,13 +42,13 @@ Short summary:
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>4.1.1</version>
+    <version>4.2.2</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>4.1.1</version>
+    <version>4.2.2</version>
     <scope>test</scope>
 </dependency>
 <dependency>

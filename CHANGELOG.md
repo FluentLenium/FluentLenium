@@ -1,9 +1,24 @@
 # Changelog
 
-## Version 4.x
+## Version 4.x - Java 11 support
 
-### 4.1.2-SNAPSHOT
-TBD
+### 4.2.2 (Mar 17 2019)
+- [#345](https://github.com/FluentLenium/FluentLenium/issues/345) - Added FluentPage assertions to fluentlenium-assertj module
+- [#336](https://github.com/FluentLenium/FluentLenium/issues/336) - Added warning log when user is using wrong version of Selenium
+- [#456](https://github.com/FluentLenium/FluentLenium/issues/456) - Added .waitAndClick() helper method for FluentWebElement
+- [#696](https://github.com/FluentLenium/FluentLenium/issues/696) - Add constructor accepting FluentWebElement to ElementActions and add missing moveByOffset method
+- [#704](https://github.com/FluentLenium/FluentLenium/issues/704) - Add isPresent() and isNotPresent() assertions into Fluent AssertJ module
+- [#757](https://github.com/FluentLenium/FluentLenium/issues/757) - Add Opera to DefaultWebDriverFactories
+- [#707](https://github.com/FluentLenium/FluentLenium/issues/707) - Junit 5 bump to 5.4.0
+- [#723](https://github.com/FluentLenium/FluentLenium/pull/723) - Major Spock and Groovy upgrade
+- [#686](https://github.com/FluentLenium/FluentLenium/issues/686) - Major Cucumber upgrade  
+* Multiple small dependencies bumps
+* Multiple documentation upgrades
+* Added slf4j-api to each module
+- [#767](https://github.com/FluentLenium/FluentLenium/issues/767) - Remove isLocalFile attribute of PageUrl (API improvement)
+- [#595](https://github.com/FluentLenium/FluentLenium/issues/595) - Bugfix: Awaits() with not() method does not work as expected
+- [#602](https://github.com/FluentLenium/FluentLenium/issues/602) - Bugfix: Multiple await() fixes - reseting components list does not work as expected, enforced element refresh when called by .get()
+- [#698](https://github.com/FluentLenium/FluentLenium/issues/698) - Bugfix: isAt() assertion throw exception even url matches
 
 ### 4.1.1 (Jan 30 2019)
 - [#690](https://github.com/FluentLenium/FluentLenium/issues/690) - Add method clearing React input
@@ -18,7 +33,32 @@ TBD
 - [#631](https://github.com/FluentLenium/FluentLenium/issues/) - Introduce Java 11
 - Fix for Chrome bug - redirects to 3rd party page stop working when user opens it in the new window or popup
 
-## Version 3.x
+## Version 3.x - Java 8 support
+### 3.8.1 ((Mar 17 2019))
+- Backported 4.0.0, 4.1.1 and 4.2.2 into Java 8
+- Fix for Chrome bug - redirects to 3rd party page stop working when user opens it in the new window or popup
+- [#690](https://github.com/FluentLenium/FluentLenium/issues/690) - Add method clearing React input
+- [#654](https://github.com/FluentLenium/FluentLenium/issues/654) - Add more assertions to AssertJ module
+- [#664](https://github.com/FluentLenium/FluentLenium/issues/664) - UrlTemplate#put(Map) doesn't set properties
+- [#655](https://github.com/FluentLenium/FluentLenium/issues/655) - Bug: @org.fluentlenium.adapter.junit.After is not executed on test success (JUnit)
+- [#626](https://github.com/FluentLenium/FluentLenium/issues/626) - Delombok
+- [#628](https://github.com/FluentLenium/FluentLenium/issues/628) - Improvement: Allow DragAndDropBy to accept a target element as a parameter
+- [#345](https://github.com/FluentLenium/FluentLenium/issues/345) - Added FluentPage assertions to fluentlenium-assertj module
+- [#336](https://github.com/FluentLenium/FluentLenium/issues/336) - Added warning log when user is using wrong version of Selenium
+- [#456](https://github.com/FluentLenium/FluentLenium/issues/456) - Added .waitAndClick() helper method for FluentWebElement
+- [#696](https://github.com/FluentLenium/FluentLenium/issues/696) - Add constructor accepting FluentWebElement to ElementActions and add missing moveByOffset method
+- [#704](https://github.com/FluentLenium/FluentLenium/issues/704) - Add isPresent() and isNotPresent() assertions into Fluent AssertJ module
+- [#757](https://github.com/FluentLenium/FluentLenium/issues/757) - Add Opera to DefaultWebDriverFactories
+- [#707](https://github.com/FluentLenium/FluentLenium/issues/707) - Junit 5 bump to 5.4.0
+- [#723](https://github.com/FluentLenium/FluentLenium/pull/723) - Major Spock and Groovy upgrade
+- [#686](https://github.com/FluentLenium/FluentLenium/issues/686) - Major Cucumber upgrade  
+* Multiple small dependencies bumps
+* Multiple documentation upgrades
+* Added slf4j-api to each module
+- [#767](https://github.com/FluentLenium/FluentLenium/issues/767) - Remove isLocalFile attribute of PageUrl (API improvement)
+- [#595](https://github.com/FluentLenium/FluentLenium/issues/595) - Bugfix: Awaits() with not() method does not work as expected
+- [#602](https://github.com/FluentLenium/FluentLenium/issues/602) - Bugfix: Multiple await() fixes - reseting components list does not work as expected, enforced element refresh when called by .get()
+- [#698](https://github.com/FluentLenium/FluentLenium/issues/698) - Bugfix: isAt() assertion throw exception even url matches
 
 ### 3.7.1 (Nov 23 2018)
 - [#632](https://github.com/FluentLenium/FluentLenium/issues/632) - Selenium bumpup 3.141.59
