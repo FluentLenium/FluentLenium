@@ -34,7 +34,7 @@
 - Fix for Chrome bug - redirects to 3rd party page stop working when user opens it in the new window or popup
 
 ## Version 3.x - Java 8 support
-### 3.8.1 ((Mar 17 2019))
+### 3.8.1 (Mar 17 2019)
 - Backported 4.0.0, 4.1.1 and 4.2.2 into Java 8
 - Fix for Chrome bug - redirects to 3rd party page stop working when user opens it in the new window or popup
 - [#690](https://github.com/FluentLenium/FluentLenium/issues/690) - Add method clearing React input
