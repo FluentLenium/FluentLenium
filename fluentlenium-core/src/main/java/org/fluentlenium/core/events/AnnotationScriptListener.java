@@ -19,16 +19,13 @@ class AnnotationScriptListener implements ScriptListener, ListenerPriority {
     /**
      * Creates a new Script annotation listener.
      *
-     * @param method         method
-     * @param container      container
-     * @param annotationName annotation name
-     * @param priority       listener priority
+     * @param listenerContext the listener context
      */
-    AnnotationScriptListener(Method method, Object container, String annotationName, int priority) {
-        this.method = method;
-        this.container = container;
-        this.annotationName = annotationName;
-        this.priority = priority;
+    AnnotationScriptListener(ListenerContext listenerContext) {
+        this.method = listenerContext.getMethod();
+        this.container = listenerContext.getContainer();
+        this.annotationName = listenerContext.getAnnotationName();
+        this.priority = listenerContext.getPriority();
     }
 
     @Override

@@ -30,15 +30,99 @@ import org.fluentlenium.core.events.annotations.BeforeScript;
 import org.fluentlenium.core.events.annotations.BeforeSwitchToWindow;
 import org.openqa.selenium.WebElement;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  * Register event annotations from a container in the events registry.
  */
 public class ContainerAnnotationsEventsRegistry {
+
+    private static final Map<Class<? extends Annotation>, PriorityRetriever> ANNOTATION_TO_PRIORITY;
+    private static final Map<Class<? extends Annotation>, ListenerRegister> ANNOTATION_TO_REGISTER;
+
     private final EventsRegistry registry;
     private final Object container;
     private int listenerCount;
+
+    static {
+        final Map<Class<? extends Annotation>, PriorityRetriever> priorities = new HashMap<>();
+        final Map<Class<? extends Annotation>, ListenerRegister> registers = new HashMap<>();
+
+        //------------ Priorities ------------
+
+        priorities.put(BeforeClickOn.class, method -> method.getAnnotation(BeforeClickOn.class).value());
+        priorities.put(AfterClickOn.class, method -> method.getAnnotation(AfterClickOn.class).value());
+        priorities.put(BeforeGetText.class, method -> method.getAnnotation(BeforeGetText.class).value());
+        priorities.put(AfterGetText.class, method -> method.getAnnotation(AfterGetText.class).value());
+        priorities.put(BeforeChangeValueOf.class, method -> method.getAnnotation(BeforeChangeValueOf.class).value());
+        priorities.put(AfterChangeValueOf.class, method -> method.getAnnotation(AfterChangeValueOf.class).value());
+        priorities.put(BeforeFindBy.class, method -> method.getAnnotation(BeforeFindBy.class).value());
+        priorities.put(AfterFindBy.class, method -> method.getAnnotation(AfterFindBy.class).value());
+        priorities.put(BeforeNavigateBack.class, method -> method.getAnnotation(BeforeNavigateBack.class).value());
+        priorities.put(AfterNavigateBack.class, method -> method.getAnnotation(AfterNavigateBack.class).value());
+        priorities.put(BeforeNavigateForward.class, method -> method.getAnnotation(BeforeNavigateForward.class).value());
+        priorities.put(AfterNavigateForward.class, method -> method.getAnnotation(AfterNavigateForward.class).value());
+        priorities.put(BeforeNavigateTo.class, method -> method.getAnnotation(BeforeNavigateTo.class).value());
+        priorities.put(AfterNavigateTo.class, method -> method.getAnnotation(AfterNavigateTo.class).value());
+        priorities.put(BeforeNavigate.class, method -> method.getAnnotation(BeforeNavigate.class).value());
+        priorities.put(AfterNavigate.class, method -> method.getAnnotation(AfterNavigate.class).value());
+        priorities.put(BeforeNavigateRefresh.class, method -> method.getAnnotation(BeforeNavigateRefresh.class).value());
+        priorities.put(AfterNavigateRefresh.class, method -> method.getAnnotation(AfterNavigateRefresh.class).value());
+        priorities.put(BeforeScript.class, method -> method.getAnnotation(BeforeScript.class).value());
+        priorities.put(AfterScript.class, method -> method.getAnnotation(AfterScript.class).value());
+        priorities.put(BeforeAlertAccept.class, method -> method.getAnnotation(BeforeAlertAccept.class).value());
+        priorities.put(AfterAlertAccept.class, method -> method.getAnnotation(AfterAlertAccept.class).value());
+        priorities.put(BeforeAlertDismiss.class, method -> method.getAnnotation(BeforeAlertDismiss.class).value());
+        priorities.put(AfterAlertDismiss.class, method -> method.getAnnotation(AfterAlertDismiss.class).value());
+        priorities.put(BeforeSwitchToWindow.class, method -> method.getAnnotation(BeforeSwitchToWindow.class).value());
+        priorities.put(AfterSwitchToWindow.class, method -> method.getAnnotation(AfterSwitchToWindow.class).value());
+        priorities.put(BeforeGetScreenshotAs.class, method -> method.getAnnotation(BeforeGetScreenshotAs.class).value());
+        priorities.put(AfterGetScreenshotAs.class, method -> method.getAnnotation(AfterGetScreenshotAs.class).value());
+
+        //------------ Registers ------------
+
+        registers.put(BeforeClickOn.class, (reg, ctx) -> reg.beforeClickOn(new AnnotationElementListener(ctx)));
+        registers.put(AfterClickOn.class, (reg, ctx) -> reg.afterClickOn(new AnnotationElementListener(ctx)));
+        registers.put(BeforeGetText.class, (reg, ctx) -> reg.beforeGetText(new AnnotationElementListener(ctx)));
+        registers.put(AfterGetText.class, (reg, ctx) -> reg.afterGetText(new AnnotationElementListener(ctx)));
+        registers.put(BeforeChangeValueOf.class, (reg, ctx) -> reg.beforeChangeValueOf(new AnnotationElementListener(ctx)));
+        registers.put(AfterChangeValueOf.class, (reg, ctx) -> reg.afterChangeValueOf(new AnnotationElementListener(ctx)));
+        registers.put(BeforeFindBy.class, (reg, ctx) -> reg.beforeFindBy(new AnnotationFindByListener(ctx)));
+        registers.put(AfterFindBy.class, (reg, ctx) -> reg.afterFindBy(new AnnotationFindByListener(ctx)));
+        registers.put(BeforeNavigateBack.class, (reg, ctx) -> reg.beforeNavigateBack(new AnnotationNavigateListener(ctx)));
+        registers.put(AfterNavigateBack.class, (reg, ctx) -> reg.afterNavigateBack(new AnnotationNavigateListener(ctx)));
+        registers.put(BeforeNavigateForward.class, (reg, ctx) -> reg.beforeNavigateForward(new AnnotationNavigateListener(ctx)));
+        registers.put(AfterNavigateForward.class, (reg, ctx) -> reg.afterNavigateForward(new AnnotationNavigateListener(ctx)));
+        registers.put(BeforeNavigateTo.class, (reg, ctx) -> reg.beforeNavigateTo(new AnnotationNavigateToListener(ctx)));
+        registers.put(AfterNavigateTo.class, (reg, ctx) -> reg.afterNavigateTo(new AnnotationNavigateToListener(ctx)));
+        registers.put(BeforeNavigate.class, (reg, ctx) -> reg.beforeNavigate(new AnnotationNavigateAllListener(ctx)));
+        registers.put(AfterNavigate.class, (reg, ctx) -> reg.afterNavigate(new AnnotationNavigateAllListener(ctx)));
+        registers.put(BeforeNavigateRefresh.class, (reg, ctx) -> reg.beforeNavigateRefresh(new AnnotationNavigateListener(ctx)));
+        registers.put(AfterNavigateRefresh.class, (reg, ctx) -> reg.afterNavigateRefresh(new AnnotationNavigateListener(ctx)));
+        registers.put(BeforeScript.class, (reg, ctx) -> reg.beforeScript(new AnnotationScriptListener(ctx)));
+        registers.put(AfterScript.class, (reg, ctx) -> reg.afterScript(new AnnotationScriptListener(ctx)));
+        registers.put(BeforeAlertAccept.class, (reg, ctx) -> reg.beforeAlertAccept(new AnnotationAlertListener(ctx)));
+        registers.put(AfterAlertAccept.class, (reg, ctx) -> reg.afterAlertAccept(new AnnotationAlertListener(ctx)));
+        registers.put(BeforeAlertDismiss.class, (reg, ctx) -> reg.beforeAlertDismiss(new AnnotationAlertListener(ctx)));
+        registers.put(AfterAlertDismiss.class, (reg, ctx) -> reg.afterAlertDismiss(new AnnotationAlertListener(ctx)));
+        registers.put(BeforeSwitchToWindow.class,
+                (reg, ctx) -> reg.beforeSwitchToWindow(new AnnotationSwitchToWindowListener(ctx)));
+        registers
+                .put(AfterSwitchToWindow.class, (reg, ctx) -> reg.afterSwitchToWindow(new AnnotationSwitchToWindowListener(ctx)));
+        registers.put(BeforeGetScreenshotAs.class,
+                (reg, ctx) -> reg.beforeGetScreenshotAs(new AnnotationGetScreenshotAsListener(ctx)));
+        registers.put(AfterGetScreenshotAs.class,
+                (reg, ctx) -> reg.afterGetScreenshotAs(new AnnotationGetScreenshotAsListener(ctx)));
+
+        ANNOTATION_TO_PRIORITY = Collections.unmodifiableMap(priorities);
+        ANNOTATION_TO_REGISTER = Collections.unmodifiableMap(registers);
+    }
 
     /**
      * Creates a new container annotations events registry.
@@ -57,180 +141,27 @@ public class ContainerAnnotationsEventsRegistry {
      * @param container     container to register
      * @param targetElement target element
      */
-    @SuppressWarnings({"PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity"})
     public ContainerAnnotationsEventsRegistry(EventsRegistry registry, Object container, WebElement targetElement) {
         this.registry = registry;
         this.container = container;
+        setupListenersInEventsRegistry(targetElement);
+    }
 
+    private void setupListenersInEventsRegistry(WebElement targetElement) {
         listenerCount = 0;
-        for (Class<?> current = this.container.getClass(); current != null; current = current.getSuperclass()) {
+        for (Class<?> current = container.getClass(); current != null; current = current.getSuperclass()) {
             for (Method method : current.getDeclaredMethods()) {
-                if (method.getAnnotation(BeforeClickOn.class) != null) {
-                    registry.beforeClickOn(new AnnotationElementListener(method, container, BeforeClickOn.class.getSimpleName(),
-                            method.getAnnotation(BeforeClickOn.class).value(), targetElement));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(AfterClickOn.class) != null) {
-                    registry.afterClickOn(new AnnotationElementListener(method, container, AfterClickOn.class.getSimpleName(),
-                            method.getAnnotation(AfterClickOn.class).value(), targetElement));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(BeforeGetText.class) != null) {
-                    registry.beforeGetText(new AnnotationElementListener(method, container, BeforeGetText.class.getSimpleName(),
-                            method.getAnnotation(BeforeGetText.class).value(), targetElement));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(AfterGetText.class) != null) {
-                    registry.afterGetText(new AnnotationElementListener(method, container, AfterGetText.class.getSimpleName(),
-                            method.getAnnotation(AfterGetText.class).value(), targetElement));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(BeforeChangeValueOf.class) != null) {
-                    registry.beforeChangeValueOf(
-                            new AnnotationElementListener(method, container, BeforeChangeValueOf.class.getSimpleName(),
-                                    method.getAnnotation(BeforeChangeValueOf.class).value(), targetElement));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(AfterChangeValueOf.class) != null) {
-                    registry.afterChangeValueOf(
-                            new AnnotationElementListener(method, container, AfterChangeValueOf.class.getSimpleName(),
-                                    method.getAnnotation(AfterChangeValueOf.class).value(), targetElement));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(BeforeFindBy.class) != null) {
-                    registry.beforeFindBy(new AnnotationFindByListener(method, container, BeforeFindBy.class.getSimpleName(),
-                            method.getAnnotation(BeforeFindBy.class).value(), targetElement));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(AfterFindBy.class) != null) {
-                    registry.afterFindBy(new AnnotationFindByListener(method, container, AfterFindBy.class.getSimpleName(),
-                            method.getAnnotation(AfterFindBy.class).value(), targetElement));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(BeforeNavigateBack.class) != null) {
-                    registry.beforeNavigateBack(
-                            new AnnotationNavigateListener(method, container, BeforeNavigateBack.class.getSimpleName(),
-                                    method.getAnnotation(BeforeNavigateBack.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(AfterNavigateBack.class) != null) {
-                    registry.afterNavigateBack(
-                            new AnnotationNavigateListener(method, container, AfterNavigateBack.class.getSimpleName(),
-                                    method.getAnnotation(AfterNavigateBack.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(BeforeNavigateForward.class) != null) {
-                    registry.beforeNavigateForward(
-                            new AnnotationNavigateListener(method, container, BeforeNavigateForward.class.getSimpleName(),
-                                    method.getAnnotation(BeforeNavigateForward.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(AfterNavigateForward.class) != null) {
-                    registry.afterNavigateForward(
-                            new AnnotationNavigateListener(method, container, AfterNavigateForward.class.getSimpleName(),
-                                    method.getAnnotation(AfterNavigateForward.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(BeforeNavigateTo.class) != null) {
-                    registry.beforeNavigateTo(
-                            new AnnotationNavigateToListener(method, container, BeforeNavigateTo.class.getSimpleName(),
-                                    method.getAnnotation(BeforeNavigateTo.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(AfterNavigateTo.class) != null) {
-                    registry.afterNavigateTo(
-                            new AnnotationNavigateToListener(method, container, AfterNavigateTo.class.getSimpleName(),
-                                    method.getAnnotation(AfterNavigateTo.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(BeforeNavigate.class) != null) {
-                    registry.beforeNavigate(
-                            new AnnotationNavigateAllListener(method, container, BeforeNavigate.class.getSimpleName(),
-                                    method.getAnnotation(BeforeNavigate.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(AfterNavigate.class) != null) {
-                    registry.afterNavigate(
-                            new AnnotationNavigateAllListener(method, container, AfterNavigate.class.getSimpleName(),
-                                    method.getAnnotation(AfterNavigate.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(BeforeNavigateRefresh.class) != null) {
-                    registry.beforeNavigateRefresh(
-                            new AnnotationNavigateListener(method, container, BeforeNavigateRefresh.class.getSimpleName(),
-                                    method.getAnnotation(BeforeNavigateRefresh.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(AfterNavigateRefresh.class) != null) {
-                    registry.afterNavigateRefresh(
-                            new AnnotationNavigateListener(method, container, AfterNavigateRefresh.class.getSimpleName(),
-                                    method.getAnnotation(AfterNavigateRefresh.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(BeforeScript.class) != null) {
-                    registry.beforeScript(new AnnotationScriptListener(method, container, BeforeScript.class.getSimpleName(),
-                            method.getAnnotation(BeforeScript.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(AfterScript.class) != null) {
-                    registry.afterScript(new AnnotationScriptListener(method, container, AfterScript.class.getSimpleName(),
-                            method.getAnnotation(AfterScript.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(BeforeAlertAccept.class) != null) {
-                    registry.beforeAlertAccept(
-                            new AnnotationAlertListener(method, container, BeforeAlertAccept.class.getSimpleName(),
-                                    method.getAnnotation(BeforeAlertAccept.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(AfterAlertAccept.class) != null) {
-                    registry.afterAlertAccept(
-                            new AnnotationAlertListener(method, container, AfterAlertAccept.class.getSimpleName(),
-                                    method.getAnnotation(AfterAlertAccept.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(BeforeAlertDismiss.class) != null) {
-                    registry.beforeAlertDismiss(
-                            new AnnotationAlertListener(method, container, BeforeAlertDismiss.class.getSimpleName(),
-                                    method.getAnnotation(BeforeAlertDismiss.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(AfterAlertDismiss.class) != null) {
-                    registry.afterAlertDismiss(
-                            new AnnotationAlertListener(method, container, AfterAlertDismiss.class.getSimpleName(),
-                                    method.getAnnotation(AfterAlertDismiss.class).value()));
-                    listenerCount++;
-                }
-
-                if (method.getAnnotation(BeforeSwitchToWindow.class) != null) {
-                    registry.beforeSwitchToWindow(
-                            new AnnotationSwitchToWindowListener(method, container, BeforeSwitchToWindow.class.getSimpleName(),
-                                    method.getAnnotation(BeforeSwitchToWindow.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(AfterSwitchToWindow.class) != null) {
-                    registry.afterSwitchToWindow(
-                            new AnnotationSwitchToWindowListener(method, container, AfterSwitchToWindow.class.getSimpleName(),
-                                    method.getAnnotation(AfterSwitchToWindow.class).value()));
-                    listenerCount++;
-                }
-
-
-                if (method.getAnnotation(BeforeGetScreenshotAs.class) != null) {
-                    registry.beforeGetScreenshotAs(
-                            new AnnotationGetScreenshotAsListener(method, container, BeforeGetScreenshotAs.class.getSimpleName(),
-                                    method.getAnnotation(BeforeGetScreenshotAs.class).value()));
-                    listenerCount++;
-                }
-                if (method.getAnnotation(AfterGetScreenshotAs.class) != null) {
-                    registry.afterGetScreenshotAs(
-                            new AnnotationGetScreenshotAsListener(method, container, AfterGetScreenshotAs.class.getSimpleName(),
-                                    method.getAnnotation(AfterGetScreenshotAs.class).value()));
-                    listenerCount++;
-                }
+                ListenerContext listenerContext = new ListenerContext(method, container, targetElement);
+                ANNOTATION_TO_REGISTER.forEach((annotation, listenerRegister) -> {
+                    if (method.getAnnotation(annotation) != null) {
+                        listenerContext.setAnnotationName(annotation.getSimpleName());
+                        listenerContext.setPriority(ANNOTATION_TO_PRIORITY.get(annotation).apply(method));
+                        listenerRegister.apply(registry, listenerContext);
+                        listenerCount++;
+                    }
+                });
             }
         }
-
         registry.sortListeners();
     }
 
@@ -248,5 +179,11 @@ public class ContainerAnnotationsEventsRegistry {
      */
     public void close() {
         registry.unregisterContainer(container);
+    }
+
+    private interface ListenerRegister extends BiFunction<EventsRegistry, ListenerContext, EventsRegistry> {
+    }
+
+    private interface PriorityRetriever extends Function<Method, Integer> {
     }
 }
