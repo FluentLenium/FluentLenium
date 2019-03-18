@@ -160,7 +160,7 @@ public class EventsSupport implements EventListener {
 
     @Override
     public <X> void beforeGetScreenshotAs(OutputType<X> outputType) {
-        eventsRegistry.beforeGetScreenshotAs.forEach( listener -> ((GetScreenshotAsListener<X>) listener).on(outputType));
+        eventsRegistry.beforeGetScreenshotAs.forEach(listener -> ((GetScreenshotAsListener<X>) listener).on(outputType));
     }
 
     @Override
