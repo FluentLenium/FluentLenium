@@ -16,6 +16,8 @@ import org.fluentlenium.adapter.exception.MethodNotFoundException;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import org.openqa.selenium.WebDriverException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * FluentLenium Test Runner Adapter.
@@ -24,11 +26,13 @@ import org.openqa.selenium.WebDriverException;
  */
 public class FluentTestRunnerAdapter extends FluentAdapter {
 
-    private SharedMutator sharedMutator;
+    private static final Logger logger = LoggerFactory.getLogger(FluentTestRunnerAdapter.class);
 
-    private static final ThreadLocal<EffectiveParameters<?>> parametersThreadLocal = new ThreadLocal<>();
-    private static final ThreadLocal<String> testMethodName = new ThreadLocal<>();
-    private static final ThreadLocal<Class<?>> testClass = new ThreadLocal<>();
+    private final SharedMutator sharedMutator;
+
+    private static final ThreadLocal<EffectiveParameters<?>> PARAMETERS_THREAD_LOCAL = new ThreadLocal<>();
+    private static final ThreadLocal<String> TEST_METHOD_NAME = new ThreadLocal<>();
+    private static final ThreadLocal<Class<?>> TEST_CLASS = new ThreadLocal<>();
 
     /**
      * Creates a new test runner adapter.
@@ -97,7 +101,11 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @return Class of currently running test
      */
     protected Class<?> getTestClass() {
-        return testClass.get();
+        Class<?> currentTestClass = FluentTestRunnerAdapter.TEST_CLASS.get();
+        if (currentTestClass == null) {
+            logger.warn("Current test class is null. Are you in test context?");
+        }
+        return currentTestClass;
     }
 
     /**
@@ -105,13 +113,17 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @return method name (as String) of currently running test
      */
     protected String getTestMethodName() {
-        return testMethodName.get();
+        String currentTestMethodName = FluentTestRunnerAdapter.TEST_METHOD_NAME.get();
+        if (currentTestMethodName == null) {
+            logger.warn("Current test method name is null. Are you in text context?");
+        }
+        return currentTestMethodName;
     }
 
     /**
      * Allows to access Class level annotation of currently running test
      *
-     * @param annotation @interface you want to access
+     * @param annotation interface you want to access
      * @return Annotation instance
      * @throws AnnotationNotFoundException when annotation you want to access couldn't be find
      */
@@ -128,7 +140,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     /**
      * Allows to access method level annotation of currently running test
      *
-     * @param annotation @interface you want to access
+     * @param annotation interface you want to access
      * @return Annotation instance
      * @throws AnnotationNotFoundException of annotation you want to access couldn't be found
      * @throws MethodNotFoundException if test method couldn't be found - if it occurs that's most likely FL bug
@@ -181,13 +193,13 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param testName  Test name
      */
     protected void starting(Class<?> testClass, String testName) {
-        parametersThreadLocal.set(sharedMutator.getEffectiveParameters(testClass, testName,
+        PARAMETERS_THREAD_LOCAL.set(sharedMutator.getEffectiveParameters(testClass, testName,
                 getDriverLifecycle()));
 
         SharedWebDriver sharedWebDriver;
 
         try {
-            sharedWebDriver = getSharedWebDriver(parametersThreadLocal.get());
+            sharedWebDriver = getSharedWebDriver(PARAMETERS_THREAD_LOCAL.get());
         } catch (ExecutionException | InterruptedException e) {
             this.failed(testClass, testName);
 
@@ -201,25 +213,25 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     }
 
     private void setTestClassAndMethodValues() {
-        if (parametersThreadLocal.get() != null) {
-            if (parametersThreadLocal.get().getTestClass() != null) {
+        if (PARAMETERS_THREAD_LOCAL.get() != null) {
+            if (PARAMETERS_THREAD_LOCAL.get().getTestClass() != null) {
                 setClass();
             }
-            if (parametersThreadLocal.get().getTestClass() != null) {
+            if (PARAMETERS_THREAD_LOCAL.get().getTestClass() != null) {
                 setMethodName();
             }
         }
     }
 
     private void setMethodName() {
-        String localTestName = parametersThreadLocal.get().getTestName();
+        String localTestName = PARAMETERS_THREAD_LOCAL.get().getTestName();
         String className = StringUtils.substringBefore(localTestName, "(");
-        testMethodName.set(className);
+        TEST_METHOD_NAME.set(className);
     }
 
     private void setClass() {
-        Class<?> localTestClass = parametersThreadLocal.get().getTestClass();
-        testClass.set(localTestClass);
+        Class<?> localTestClass = PARAMETERS_THREAD_LOCAL.get().getTestClass();
+        TEST_CLASS.set(localTestClass);
     }
 
     private String getCauseMessage(Exception e) {
@@ -269,8 +281,8 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
                 webDriverExecutor = setExecutorService;
             }
 
-            Future<SharedWebDriver> futureWebDriver = webDriverExecutor.submit
-                    (() -> SharedWebDriverContainer.INSTANCE
+            Future<SharedWebDriver> futureWebDriver = webDriverExecutor.submit(
+                    () -> SharedWebDriverContainer.INSTANCE
                             .getOrCreateDriver(this::newWebDriver, parameters.getTestClass(),
                                     parameters.getTestName(), parameters.getDriverLifecycle()));
 
@@ -293,9 +305,9 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     }
 
     private void clearThreadLocals() {
-        parametersThreadLocal.remove();
-        testClass.remove();
-        testMethodName.remove();
+        PARAMETERS_THREAD_LOCAL.remove();
+        TEST_CLASS.remove();
+        TEST_METHOD_NAME.remove();
     }
 
     /**

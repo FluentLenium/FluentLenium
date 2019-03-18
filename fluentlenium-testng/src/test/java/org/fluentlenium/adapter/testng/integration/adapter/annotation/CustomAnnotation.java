@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.testng.integration.adapter;
+package org.fluentlenium.adapter.testng.integration.adapter.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

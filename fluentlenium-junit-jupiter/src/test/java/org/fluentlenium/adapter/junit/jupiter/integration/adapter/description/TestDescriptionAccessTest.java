@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.junit.jupiter.integration.adapter;
+package org.fluentlenium.adapter.junit.jupiter.integration.adapter.description;
 
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 

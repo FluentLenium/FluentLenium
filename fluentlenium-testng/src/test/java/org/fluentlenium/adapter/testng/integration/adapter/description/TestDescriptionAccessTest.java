@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.testng.integration.adapter;
+package org.fluentlenium.adapter.testng.integration.adapter.description;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

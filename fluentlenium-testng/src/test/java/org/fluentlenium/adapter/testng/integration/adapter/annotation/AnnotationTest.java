@@ -1,12 +1,12 @@
-package org.fluentlenium.adapter.junit.integration.adapter;
+package org.fluentlenium.adapter.testng.integration.adapter.annotation;
 
-import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import org.fluentlenium.adapter.junit.integration.IntegrationFluentTest;
-import org.junit.Test;
+import org.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
+import org.testng.annotations.Test;
 
 @CustomAnnotation("AwesomeTestClass")
-public class AnnotationTest extends IntegrationFluentTest {
+public class AnnotationTest extends IntegrationFluentTestNg {
 
     @Test
     public void shouldBeAbleToAccesClassAnnotationViaFluentAdapter() {
