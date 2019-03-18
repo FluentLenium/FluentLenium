@@ -21,7 +21,7 @@ jobs:
       language: java
       jdk: oraclejdk11
       script:
-        - mvn -Pframework-integration-tests,java11 clean test
+        - mvn -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report' clean test
 
     - stage: test
       name: "Java 11 - compile examples"

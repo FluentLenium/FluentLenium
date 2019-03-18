@@ -15,7 +15,7 @@ import org.openqa.selenium.WebElement;
 /**
  * Container global FluentLenium control interface.
  */
-public class ContainerFluentControl extends FluentControlImpl implements FluentControl {
+public class ContainerFluentControl extends FluentControlImpl {
     private final FluentControl adapterControl;
 
     private ContainerContext context;

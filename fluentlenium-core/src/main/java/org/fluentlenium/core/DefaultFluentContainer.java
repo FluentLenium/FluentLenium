@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * Default minimal implementation for {@link FluentContainer}.
  */
-public class DefaultFluentContainer extends FluentControlImpl implements FluentControl, FluentContainer {
+public class DefaultFluentContainer extends FluentControlImpl implements FluentContainer {
 
     protected FluentControl control;
 
