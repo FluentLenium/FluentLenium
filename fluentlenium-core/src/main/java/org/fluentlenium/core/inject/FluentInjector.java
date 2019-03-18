@@ -38,7 +38,10 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 /**
- * Handle injection of element proxies, @Page objects and @FindBy.
+ * Handle injection of element proxies, {@link Page} objects, {@link Parent} objects and
+ * {@link org.openqa.selenium.support.FindBy}.
+ * <p>
+ * Excludes fields from injection that are marked as {@link NoInject}.
  */
 @SuppressWarnings("PMD.GodClass")
 public class FluentInjector implements FluentInjectControl {

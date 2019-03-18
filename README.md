@@ -23,7 +23,6 @@ FluentLenium gives you [multiple methods](https://fluentlenium.com/docs/test-met
 
 Detailed documentation is available on [fluentlenium.com](https://fluentlenium.com).
 
-
 # Quickstart with JUnit and AssertJ
 
 Quickstart steps are described in detail in our [separate documentation section](https://fluentlenium.com/quickstart/).
@@ -35,7 +34,7 @@ Short summary:
 ```xml
 <properties>
     <!-- Configure this property to latest available version -->
-    <fluentlenium.version>4.1.1</fluentlenium.version>
+    <fluentlenium.version>4.2.2</fluentlenium.version>
     <!-- Make sure the selenium.version won't be overridden by another pom.xml -->
     <selenium.version>3.141.59</selenium.version>
 </properties>
@@ -43,13 +42,13 @@ Short summary:
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>4.1.1</version>
+    <version>4.2.2</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>4.1.1</version>
+    <version>4.2.2</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -88,6 +87,20 @@ public class DuckDuckGoTest extends FluentTest {
 More detailed FluentLenium examples are available in [examples section](https://github.com/FluentLenium/FluentLenium/tree/develop/examples).
 Examples include `headless` Chrome and Firefox, [Spring](https://spring.io/)-based framework supporting multiple browsers and [much more](https://fluentlenium.com/quickstart/#more-examples).
 
-## Contact Us
+# Modules summary
+
+To help you navigate through FluentLenium, here's a short summary about its modules and what support they provide.
+
+- **fluentlenium-core**: Contains core functionality of FluentLenium, including webdriver configuration, page object support and injection logic.
+- **fluentlenium-junit**: Provides support for integration with [JUnit 4](https://junit.org/junit4/).
+- **fluentlenium-junit-jupiter**: Provides support for integration with [JUnit 5](https://junit.org/junit5/).
+- **fluentlenium-testng**: Provides support for integration with [TestNG](https://testng.org/doc/index.html).
+- **fluentlenium-spock**: Provides support for integration with [Spock](http://spockframework.org).
+- **fluentlenium-cucumber**: Provides support for integration with [Cucumber](https://cucumber.io). This may be combined with any of the modules above that are also supported by Cucumber.
+- **fluentlenium-assertj**: Provides [AssertJ](http://joel-costigliola.github.io/assertj/) assertions for FluentLenium specific objects like `FluentWebElement`, `FluentList` and `FluentPage`.
+- **fluentlenium-integration-tests**: Integration tests for validating the correctness of FluentLenium features internally.
+- **fluentlenium-coverage-report**: Creates jacoco test coverage report.
+
+# Contact Us
 If you have any comment, remark or issue, please open an issue on
 [FluentLenium Issue Tracker](https://github.com/FluentLenium/FluentLenium/issues)

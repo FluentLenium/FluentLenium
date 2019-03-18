@@ -9,14 +9,15 @@ public interface GetScreenshotAsListener<X> {
     /**
      * Called before or after ScreenshotAs event.
      *
-     * @param outputType    output type
+     * @param outputType output type
      */
     void on(OutputType<X> outputType); // NOPMD ShortMethodName
 
     /**
      * Called before or after ScreenshotAs event.
      *
-     * @param outputType    output type
+     * @param x          object
+     * @param outputType output type
      */
     void on(OutputType<X> outputType, X x); // NOPMD ShortMethodName
 }

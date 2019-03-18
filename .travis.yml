@@ -31,6 +31,13 @@ jobs:
         - mvn -Pexamples,java11 clean compile
 
     - stage: test
+      name: "Java 11 - javadoc"
+      language: java
+      jdk: oraclejdk11
+      script:
+        - mvn -Pjava11 javadoc:javadoc
+
+    - stage: test
       name: "Ruby - Docs build"
       language: ruby
       rvm:
