@@ -44,10 +44,9 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
  */
 @SuppressWarnings({"PMD.GodClass", "PMD.ExcessivePublicCount"})
 public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E> implements FluentList<E> {
+
     private final FluentLabelImpl<FluentList<E>> label;
-
     private final HookControlImpl<FluentList<E>> hookControl;
-
     private final FluentJavascriptActionsImpl<FluentList<E>> javascriptActions;
 
     /**
@@ -90,11 +89,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     private FluentJavascriptActionsImpl<FluentList<E>> getJavascriptActions() { //NOPMD UnusedPrivateMethod
         return javascriptActions;
-    }
-
-    @Override
-    public List<WebElement> toElements() {
-        return this.stream().map(FluentWebElement::getElement).collect(toList());
     }
 
     @Override
@@ -349,46 +343,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
                     + " At least one element should be enabled to perform a submit.");
         }
         return this;
-    }
-
-    @Override
-    public List<String> values() {
-        return stream().map(FluentWebElement::value).collect(toList());
-    }
-
-    @Override
-    public List<String> ids() {
-        return stream().map(FluentWebElement::id).collect(toList());
-    }
-
-    @Override
-    public List<String> attributes(String attribute) {
-        return stream().map(webElement -> webElement.attribute(attribute)).collect(toList());
-    }
-
-    @Override
-    public List<String> names() {
-        return stream().map(FluentWebElement::name).collect(toList());
-    }
-
-    @Override
-    public List<Dimension> dimensions() {
-        return stream().map(FluentWebElement::size).collect(toList());
-    }
-
-    @Override
-    public List<String> tagNames() {
-        return stream().map(FluentWebElement::tagName).collect(toList());
-    }
-
-    @Override
-    public List<String> textContents() {
-        return stream().map(FluentWebElement::textContent).collect(toList());
-    }
-
-    @Override
-    public List<String> texts() {
-        return stream().map(FluentWebElement::text).collect(toList());
     }
 
     @Override
