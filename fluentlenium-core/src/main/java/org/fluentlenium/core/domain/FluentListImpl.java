@@ -87,10 +87,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         return hookControl;
     }
 
-    private FluentJavascriptActionsImpl<FluentList<E>> getJavascriptActions() { //NOPMD UnusedPrivateMethod
-        return javascriptActions;
-    }
-
     @Override
     public FluentWaitElementList await() {
         return new FluentWaitElementList(control.await(), this);
@@ -530,7 +526,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
      */
     @Override
     public FluentList<E> scrollToCenter() {
-        return getJavascriptActions().scrollToCenter();
+        return javascriptActions.scrollToCenter();
     }
 
     /**
@@ -540,7 +536,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
      */
     @Override
     public FluentList<E> scrollIntoView(boolean alignWithTop) {
-        return getJavascriptActions().scrollIntoView(alignWithTop);
+        return javascriptActions.scrollIntoView(alignWithTop);
     }
 
     /**
@@ -550,7 +546,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
      */
     @Override
     public FluentList<E> modifyAttribute(String attributeName, String attributeValue) {
-        return getJavascriptActions().modifyAttribute(attributeName, attributeValue);
+        return javascriptActions.modifyAttribute(attributeName, attributeValue);
     }
 
     /**
@@ -560,7 +556,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
      */
     @Override
     public FluentList<E> scrollIntoView() {
-        return getJavascriptActions().scrollIntoView();
+        return javascriptActions.scrollIntoView();
     }
 }
 
