@@ -374,10 +374,12 @@ public final class ReflectionUtils {
      * @return first generic type, or null if no generic type is found
      */
     public static Class<?> getFirstGenericType(Field field) {
-        Type[] actualTypeArguments = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
+        if (field.getGenericType() instanceof ParameterizedType) {
+            Type[] actualTypeArguments = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
 
-        if (actualTypeArguments.length > 0) {
-            return (Class<?>) actualTypeArguments[0];
+            if (actualTypeArguments.length > 0) {
+                return (Class<?>) actualTypeArguments[0];
+            }
         }
 
         return null;
