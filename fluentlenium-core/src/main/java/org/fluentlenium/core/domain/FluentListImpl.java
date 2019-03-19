@@ -257,33 +257,22 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> clearAll() {
-        validateListIsNotEmpty();
-
-        boolean atLeastOne = false;
-        for (E fluentWebElement : this) {
-            if (fluentWebElement.enabled()) {
-                atLeastOne = true;
-                fluentWebElement.clear();
-            }
-        }
-
-        if (!atLeastOne) {
-            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element enabled."
-                    + " At least one element should be enabled to clear values.");
-        }
-
-        return this;
+        return clearAllInputs(FluentWebElement::clear);
     }
 
     @Override
     public FluentList<E> clearAllReactInputs() {
+        return clearAllInputs(FluentWebElement::clearReactInput);
+    }
+
+    private FluentList<E> clearAllInputs(Consumer<E> clearInputAction) {
         validateListIsNotEmpty();
 
         boolean atLeastOne = false;
         for (E fluentWebElement : this) {
             if (fluentWebElement.enabled()) {
                 atLeastOne = true;
-                fluentWebElement.clearReactInput();
+                clearInputAction.accept(fluentWebElement);
             }
         }
 
