@@ -257,31 +257,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> clearAll() {
-        return clearAllInputs(FluentWebElement::clear);
+        return perform(FluentWebElement::clear, "clear values");
     }
 
     @Override
     public FluentList<E> clearAllReactInputs() {
-        return clearAllInputs(FluentWebElement::clearReactInput);
-    }
-
-    private FluentList<E> clearAllInputs(Consumer<E> clearInputAction) {
-        validateListIsNotEmpty();
-
-        boolean atLeastOne = false;
-        for (E fluentWebElement : this) {
-            if (fluentWebElement.enabled()) {
-                atLeastOne = true;
-                clearInputAction.accept(fluentWebElement);
-            }
-        }
-
-        if (!atLeastOne) {
-            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element enabled."
-                    + " At least one element should be enabled to clear values.");
-        }
-
-        return this;
+        return perform(FluentWebElement::clearReactInput, "clear values by using backspace");
     }
 
     @Override
@@ -313,21 +294,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> submit() {
-        validateListIsNotEmpty();
-
-        boolean atLeastOne = false;
-        for (E fluentWebElement : this) {
-            if (fluentWebElement.enabled()) {
-                atLeastOne = true;
-                fluentWebElement.submit();
-            }
-        }
-
-        if (!atLeastOne) {
-            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element enabled."
-                    + " At least one element should be enabled to perform a submit.");
-        }
-        return this;
+        return perform(FluentWebElement::submit, "perform a submit");
     }
 
     @Override
@@ -451,6 +418,25 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             finds.addAll(filteredElementsFinder.apply(e));
         }
         return instantiator.newComponentList(getClass(), componentClass, finds);
+    }
+
+    private FluentList<E> perform(Consumer<E> action, String actionMessage) {
+        validateListIsNotEmpty();
+
+        boolean atLeastOne = false;
+        for (E fluentWebElement : this) {
+            if (fluentWebElement.enabled()) {
+                atLeastOne = true;
+                action.accept(fluentWebElement);
+            }
+        }
+
+        if (!atLeastOne) {
+            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element enabled."
+                    + " At least one element should be enabled to " + actionMessage + ".");
+        }
+
+        return this;
     }
 
     @Override
