@@ -387,7 +387,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         }
     }
 
-    private FluentList<E> doClick(Consumer<FluentWebElement> clickAction, String clickType) {
+    private FluentList<E> doClick(Consumer<E> clickAction, String clickType) {
         validateListIsNotEmpty();
 
         boolean atLeastOne = false;
