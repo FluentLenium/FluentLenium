@@ -45,6 +45,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 @SuppressWarnings({"PMD.GodClass", "PMD.ExcessivePublicCount"})
 public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E> implements FluentList<E> {
 
+    private static final Duration DEFAULT_WAIT_AND_CLICK_DURATION = Duration.ofSeconds(5);
     private final FluentLabelImpl<FluentList<E>> label;
     private final HookControlImpl<FluentList<E>> hookControl;
     private final FluentJavascriptActionsImpl<FluentList<E>> javascriptActions;
@@ -211,7 +212,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> waitAndClick() {
-        return waitAndClick(Duration.ofSeconds(5));
+        return waitAndClick(DEFAULT_WAIT_AND_CLICK_DURATION);
     }
 
     @Override
