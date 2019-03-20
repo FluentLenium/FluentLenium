@@ -27,8 +27,9 @@ class ContainerAnnotationsEventsRegistrySetupTest extends IntegrationFluentTest 
         assertThat(events().beforeClickOn).first().hasFieldOrPropertyWithValue("priority", 0);
 
         for (List<List> events : events().eventLists) {
-            if (!excludedLists.contains(events))
+            if (!excludedLists.contains(events)) {
                 assertThat(events).hasSize(0);
+            }
         }
     }
 }

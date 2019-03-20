@@ -19,8 +19,9 @@ class ContainerAnnotationsEventsRegistrySuperClassSetupTest extends EventBasedIn
         assertThat(events().beforeClickOn).hasSize(1);
 
         for (List<List> events : events().eventLists) {
-            if (!excludedLists.contains(events))
+            if (!excludedLists.contains(events)) {
                 assertThat(events).hasSize(0);
+            }
         }
     }
 }
