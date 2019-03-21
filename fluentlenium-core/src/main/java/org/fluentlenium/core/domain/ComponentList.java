@@ -1,12 +1,11 @@
 package org.fluentlenium.core.domain;
 
+import java.util.List;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.components.LazyComponents;
 import org.fluentlenium.core.components.LazyComponentsListener;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 /**
  * List of Component.
@@ -14,11 +13,12 @@ import java.util.List;
  * @param <T> type of component
  * @see Component
  */
-public class ComponentList<T> extends DelegatingList<T> implements WrapsElements, LazyComponents {
+public class ComponentList<T> extends ListImpl<T> implements WrapsElements, LazyComponents {
     protected final Class<T> componentClass;
 
     protected final ComponentInstantiator instantiator;
     protected final FluentControl control;
+    protected final List<T> list;
     protected List<WebElement> proxy;
 
     private LazyComponents lazyComponents = new NotLazyComponents(); // NOPMD UnusedPrivateField
@@ -36,8 +36,8 @@ public class ComponentList<T> extends DelegatingList<T> implements WrapsElements
      * @param instantiator   component instantiator
      */
     public ComponentList(Class<T> componentClass, List<T> list, FluentControl control,
-            ComponentInstantiator instantiator) {
-        super(list);
+                         ComponentInstantiator instantiator) {
+        this.list = list;
         if (list instanceof LazyComponents) {
             lazyComponents = (LazyComponents) list;
         }
@@ -69,5 +69,9 @@ public class ComponentList<T> extends DelegatingList<T> implements WrapsElements
 
     public boolean removeLazyComponentsListener(LazyComponentsListener listener) {
         return getLazyComponents().removeLazyComponentsListener(listener);
+    }
+
+    public List<T> getList() {
+        return list;
     }
 }

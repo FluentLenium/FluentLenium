@@ -7,10 +7,6 @@ import java.util.ListIterator;
 
 public abstract class ListImpl<T> implements List<T> {
 
-    public ListImpl() {
-        super();
-    }
-
     public abstract List<T> getList();
 
     @Override

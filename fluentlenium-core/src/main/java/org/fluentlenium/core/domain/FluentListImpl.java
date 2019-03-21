@@ -6,11 +6,12 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
-
+import java.util.stream.Stream;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
@@ -36,6 +37,8 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
@@ -138,6 +141,17 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
+    public Stream<E> stream() {
+        for (int i = 0; i < this.count(); i++) {
+            if (!componentClass.equals(FluentWebElement.class)) {
+                E component = reloadComponent(i);
+                refreshList(i, component);
+            }
+        }
+        return super.stream();
+    }
+
+    @Override
     public E get(int index) {
         return index(index);
     }
@@ -145,18 +159,31 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     @Override
     public E index(int index) {
         if (!LocatorProxies.loaded(proxy) && !componentClass.equals(FluentWebElement.class)) {
-            E component = instantiator.newComponent(componentClass, LocatorProxies.index(proxy, index));
-            configureComponentWithLabel(component);
-            configureComponentWithHooks(component);
-            if (component instanceof FluentWebElement) {
-                component.setHookRestoreStack(hookControl.getHookRestoreStack());
-            }
-            return component.reset().as(componentClass);
+            E component = reloadComponent(index);
+            return Objects.requireNonNull(component).reset().as(componentClass);
         }
         if (size() <= index) {
             throw LocatorProxies.noSuchElement(proxy);
         }
         return super.get(index);
+    }
+
+    private void refreshList(int index, E component) {
+        if (index < list.size()) {
+            list.set(index, component);
+        } else {
+            list.add(index, component);
+        }
+    }
+
+    private E reloadComponent(int i) {
+        E component = instantiator.newComponent(componentClass, LocatorProxies.index(proxy, i));
+        configureComponentWithLabel(component);
+        configureComponentWithHooks(component);
+        if (component != null) {
+            component.setHookRestoreStack(hookControl.getHookRestoreStack());
+        }
+        return component;
     }
 
     @Override

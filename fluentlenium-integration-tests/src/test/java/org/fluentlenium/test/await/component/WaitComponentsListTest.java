@@ -35,13 +35,13 @@ class WaitComponentsListTest extends IntegrationFluentTest {
 
     private boolean isSubscribersListContaining(String text) {
         return componentsList.stream()
-                .anyMatch(subscriber -> subscriber.text().contains(text));
+                .anyMatch(subscriber -> subscriber.text().equals(text));
     }
 
     @Test
     void streamListChangeTest() {
         goTo(ELEMENT_REPLACE_URL);
-        await().until(subscribersListContains("replaced"));
+        await().until(subscribersListContains(VALUE_OF_REPLACED_ROW));
     }
 
     @Test
@@ -53,14 +53,15 @@ class WaitComponentsListTest extends IntegrationFluentTest {
                 .isEqualTo(INITIAL_VALUE_OF_REPLACED_ROW);
         await().until(rowsListPage.getComponentsList()).size(4);
         assertThat(rowsListPage.getComponentsList()).hasSize(4);
-        assertThat(rowsListPage.getComponentsList().reset().get(POSITION_OF_REPLACED_ROW).getText())
+        assertThat(rowsListPage.getComponentsList().get(POSITION_OF_REPLACED_ROW).getText())
                 .isEqualTo(VALUE_OF_REPLACED_ROW);
     }
 
     @Test
     void shouldReturnActualElementWithGetFromTheChangedListWhenUsedPreviously() {
         goTo(ELEMENT_REPLACE_URL);
-        rowsListPage.getComponentsList().get(1).getText();
+        assertThat(rowsListPage.getComponentsList().get(POSITION_OF_REPLACED_ROW).getText())
+                .isEqualTo(INITIAL_VALUE_OF_REPLACED_ROW);
         await().until(rowsListPage.getComponentsList()).size().greaterThan(3);
         assertThat(rowsListPage.getComponentsList().get(POSITION_OF_REPLACED_ROW).getText())
                 .isEqualTo(VALUE_OF_REPLACED_ROW);
@@ -69,7 +70,8 @@ class WaitComponentsListTest extends IntegrationFluentTest {
     @Test
     void shouldReturnActualElementWithGetFromTheChangedListAfterListReset() {
         goTo(ELEMENT_REPLACE_URL);
-        rowsListPage.getComponentsList().get(1).getText();
+        assertThat(rowsListPage.getComponentsList().get(POSITION_OF_REPLACED_ROW).getText())
+                .isEqualTo(INITIAL_VALUE_OF_REPLACED_ROW);
         FluentList<RowComponent> rowsList = rowsListPage.getComponentsList().reset();
         await().until(rowsList).size().greaterThan(3);
         assertThat(rowsList.get(POSITION_OF_REPLACED_ROW).getText())
@@ -79,7 +81,8 @@ class WaitComponentsListTest extends IntegrationFluentTest {
     @Test
     void shouldReturnActualValueFromResetElementWithGetFromTheChangedListAfterListReset() {
         goTo(ELEMENT_REPLACE_URL);
-        rowsListPage.getComponentsList().get(1).getText();
+        assertThat(rowsListPage.getComponentsList().get(POSITION_OF_REPLACED_ROW).getText())
+                .isEqualTo(INITIAL_VALUE_OF_REPLACED_ROW);
         FluentList<RowComponent> rowsList = rowsListPage.getComponentsList().reset();
         await().until(rowsList).size().greaterThan(3);
         assertThat(rowsList.get(POSITION_OF_REPLACED_ROW).reset().as(RowComponent.class).getText())
@@ -89,7 +92,8 @@ class WaitComponentsListTest extends IntegrationFluentTest {
     @Test
     void shouldReturnActualElementWithIndexFromTheChangedListAfterListReset() {
         goTo(ELEMENT_REPLACE_URL);
-        rowsListPage.getComponentsList().get(1).getText();
+        assertThat(rowsListPage.getComponentsList().get(POSITION_OF_REPLACED_ROW).getText())
+                .isEqualTo(INITIAL_VALUE_OF_REPLACED_ROW);
         FluentList<RowComponent> rowsList = rowsListPage.getComponentsList().reset();
         await().until(rowsList).size().greaterThan(3);
         assertThat(rowsList.index(POSITION_OF_REPLACED_ROW).getText())
@@ -100,7 +104,8 @@ class WaitComponentsListTest extends IntegrationFluentTest {
     void shouldReturnActualValueFromResetElementWithIndexFromTheChangedListAfterListReset() {
         goTo(ELEMENT_REPLACE_URL);
         RowsListPage rowsPage = newInstance(RowsListPage.class);
-        rowsPage.getComponentsList().get(1).getText();
+        assertThat(rowsListPage.getComponentsList().get(POSITION_OF_REPLACED_ROW).getText())
+                .isEqualTo(INITIAL_VALUE_OF_REPLACED_ROW);
         FluentList<RowComponent> rowsList = rowsPage.getComponentsList().reset();
         await().until(rowsList).size().greaterThan(3);
         assertThat(rowsList.index(1).reset().as(RowComponent.class).getText())
