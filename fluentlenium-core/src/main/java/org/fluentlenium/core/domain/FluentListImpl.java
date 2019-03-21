@@ -39,9 +39,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 /**
- * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
+ * Default implementation of {@link FluentList} and {@link ComponentList}.
+ * <p>
+ * It offers convenience methods to work with a collection of elements, like click(), submit(), value() ...
+ * <p>
+ * It also offers capability to add labels and hooks to an object having this type.
  *
- * @param <E> type of fluent element
+ * @param <E> type of fluent element the list contains
  */
 @SuppressWarnings({"PMD.GodClass", "PMD.ExcessivePublicCount"})
 public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E> implements FluentList<E> {
@@ -88,7 +92,6 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     private HookControlImpl<FluentList<E>> getHookControlImpl() {
         return (HookControlImpl<FluentList<E>>) hookControl;
     }
-
 
     @Override
     public FluentWaitElementList await() {
