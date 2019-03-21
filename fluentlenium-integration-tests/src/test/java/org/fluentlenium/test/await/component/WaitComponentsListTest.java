@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.function.Supplier;
+
 class WaitComponentsListTest extends IntegrationFluentTest {
 
     private static final int POSITION_OF_REPLACED_ROW = 1;
@@ -22,6 +24,25 @@ class WaitComponentsListTest extends IntegrationFluentTest {
 
     @Page
     private RowsListPage rowsListPage;
+
+
+    @FindBy(css = ".row")
+    private FluentList<RowComponent> componentsList;
+
+    private Supplier<Boolean> subscribersListContains(String text) {
+        return () -> isSubscribersListContaining(text);
+    }
+
+    private boolean isSubscribersListContaining(String text) {
+        return componentsList.stream()
+                .anyMatch(subscriber -> subscriber.text().contains(text));
+    }
+
+    @Test
+    void streamListChangeTest() {
+        goTo(ELEMENT_REPLACE_URL);
+        await().until(subscribersListContains("replaced"));
+    }
 
     @Test
     void shouldReturnActualValueFromTheChangedList() {
