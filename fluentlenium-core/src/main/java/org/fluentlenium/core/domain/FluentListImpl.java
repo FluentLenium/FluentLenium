@@ -15,6 +15,7 @@ import java.util.function.Supplier;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
+import org.fluentlenium.core.action.FluentJavascriptActions;
 import org.fluentlenium.core.action.FluentJavascriptActionsImpl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.AtLeastOneElementConditions;
@@ -46,9 +47,9 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E> implements FluentList<E> {
 
     private static final Duration DEFAULT_WAIT_AND_CLICK_DURATION = Duration.ofSeconds(5);
-    private final FluentLabelImpl<FluentList<E>> label;
-    private final HookControlImpl<FluentList<E>> hookControl;
-    private final FluentJavascriptActionsImpl<FluentList<E>> javascriptActions;
+    private final FluentLabel<FluentList<E>> label;
+    private final HookControl<FluentList<E>> hookControl;
+    private final FluentJavascriptActions<FluentList<E>> javascriptActions;
 
     /**
      * Creates a new fluent list.
@@ -80,13 +81,14 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         });
     }
 
-    private FluentLabel<FluentList<E>> getLabel() {
-        return label;
+    private FluentLabelImpl<FluentList<E>> getLabelImpl() {
+        return (FluentLabelImpl<FluentList<E>>) label;
     }
 
-    private HookControl<FluentList<E>> getHookControl() { //NOPMD UnusedPrivateMethod
-        return hookControl;
+    private HookControlImpl<FluentList<E>> getHookControlImpl() {
+        return (HookControlImpl<FluentList<E>>) hookControl;
     }
+
 
     @Override
     public FluentWaitElementList await() {
@@ -140,7 +142,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             configureComponentWithLabel(component);
             configureComponentWithHooks(component);
             if (component instanceof FluentWebElement) {
-                component.setHookRestoreStack(hookControl.getHookRestoreStack());
+                component.setHookRestoreStack(getHookControlImpl().getHookRestoreStack());
             }
             return component.reset().as(componentClass);
         }
@@ -372,7 +374,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     private void configureComponentWithHooks(E component) {
         if (component instanceof HookControl) {
-            for (HookDefinition definition : hookControl.getHookDefinitions()) {
+            for (HookDefinition definition : getHookControlImpl().getHookDefinitions()) {
                 component.withHook(definition.getHookClass(), definition.getOptions());
             }
         }
@@ -380,8 +382,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     private void configureComponentWithLabel(E component) {
         if (component instanceof FluentLabel) {
-            component.withLabel(label.getLabel());
-            component.withLabelHint(label.getLabelHints());
+            component.withLabel(getLabelImpl().getLabel());
+            component.withLabelHint(getLabelImpl().getLabelHints());
         }
     }
 
@@ -429,57 +431,57 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> withLabel(String label) {
-        return getLabel().withLabel(label);
+        return this.label.withLabel(label);
     }
 
     @Override
     public FluentList<E> withLabelHint(String... labelHint) {
-        return getLabel().withLabelHint(labelHint);
+        return this.label.withLabelHint(labelHint);
     }
 
     @Override
     public FluentList<E> noHookInstance() {
-        return getHookControl().noHookInstance();
+        return hookControl.noHookInstance();
     }
 
     @Override
     public FluentList<E> noHook() {
-        return getHookControl().noHook();
+        return hookControl.noHook();
     }
 
     @Override
     public <O, H extends FluentHook<O>> FluentList<E> withHook(Class<H> hook) {
-        return getHookControl().withHook(hook);
+        return hookControl.withHook(hook);
     }
 
     @Override
     public <R> R noHook(Class<? extends FluentHook> hook, Function<FluentList<E>, R> function) {
-        return getHookControl().noHook(hook, function);
+        return hookControl.noHook(hook, function);
     }
 
     @Override
     public FluentList<E> restoreHooks() {
-        return getHookControl().restoreHooks();
+        return hookControl.restoreHooks();
     }
 
     @Override
     public <O, H extends FluentHook<O>> FluentList<E> withHook(Class<H> hook, O options) {
-        return getHookControl().withHook(hook, options);
+        return hookControl.withHook(hook, options);
     }
 
     @Override
     public FluentList<E> noHook(Class<? extends FluentHook>... hooks) {
-        return getHookControl().noHook(hooks);
+        return hookControl.noHook(hooks);
     }
 
     @Override
     public FluentList<E> noHookInstance(Class<? extends FluentHook>... hooks) {
-        return getHookControl().noHookInstance(hooks);
+        return hookControl.noHookInstance(hooks);
     }
 
     @Override
     public <R> R noHook(Function<FluentList<E>, R> function) {
-        return getHookControl().noHook(function);
+        return hookControl.noHook(function);
     }
 
     /**
