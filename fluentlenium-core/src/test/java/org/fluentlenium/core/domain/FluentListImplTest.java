@@ -32,6 +32,7 @@ import static org.mockito.Mockito.when;
  * Unit test for {@link FluentListImpl}.
  */
 @RunWith(MockitoJUnitRunner.class)
+@SuppressWarnings({"PMD.TooManyMethods", "PMD.ExcessivePublicCount"})
 public class FluentListImplTest {
     @Mock
     private FluentWebElement element1;
@@ -315,12 +316,12 @@ public class FluentListImplTest {
     }
 
     @Test
-    public void shouldReturnOptionalIsListIsPresent() {
+    public void shouldReturnOptionalIfListIsPresent() {
         assertThat(list.optional()).hasValue(list);
     }
 
     @Test
-    public void shouldReturnEmptyOptionalIsListIsNotPresent() {
+    public void shouldReturnEmptyOptionalIfListIsNotPresent() {
         assertThat(emptyList.optional()).isEmpty();
     }
 
