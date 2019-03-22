@@ -140,11 +140,9 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public Stream<E> stream() {
-        for (int i = 0; i < this.count(); i++) {
-            if (!componentClass.equals(FluentWebElement.class)) {
-                E component = reloadComponent(i);
-                refreshList(i, component);
-            }
+        for (int index = 0; index < this.count(); index++) {
+            E component = reloadComponent(index);
+            updateList(index, component);
         }
         return super.stream();
     }
@@ -166,7 +164,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         return super.get(index);
     }
 
-    private void refreshList(int index, E component) {
+    private void updateList(int index, E component) {
         if (index < list.size()) {
             list.set(index, component);
         } else {
@@ -174,8 +172,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         }
     }
 
-    private E reloadComponent(int i) {
-        E component = instantiator.newComponent(componentClass, LocatorProxies.index(proxy, i));
+    private E reloadComponent(int index) {
+        E component = instantiator.newComponent(componentClass, LocatorProxies.index(proxy, index));
         configureComponentWithLabel(component);
         configureComponentWithHooks(component);
         if (component != null) {

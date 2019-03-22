@@ -41,7 +41,7 @@ class WaitComponentsListTest extends IntegrationFluentTest {
     }
 
     @Test
-    void streamListChangTest() {
+    void streamListChangeTest() {
         goTo(ELEMENT_REPLACE_URL);
         await().until(() ->
                 fluentList
@@ -53,6 +53,17 @@ class WaitComponentsListTest extends IntegrationFluentTest {
     void streamListComponentsChangeTest() {
         goTo(ELEMENT_REPLACE_URL);
         await().until(subscribersListContains(VALUE_OF_REPLACED_ROW));
+    }
+
+    @Test
+    void shouldUpdateList() {
+        goTo(ELEMENT_REPLACE_URL);
+        await().until(fluentList).size(2);
+        assertThat(fluentList).hasSize(2);
+        assertThat(fluentList.get(POSITION_OF_REPLACED_ROW).text()).isEqualTo(INITIAL_VALUE_OF_REPLACED_ROW);
+        await().until(fluentList).size(4);
+        assertThat(fluentList).hasSize(4);
+        assertThat(fluentList.get(POSITION_OF_REPLACED_ROW).text()).isEqualTo(VALUE_OF_REPLACED_ROW);
     }
 
     @Test
