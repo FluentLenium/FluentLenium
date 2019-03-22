@@ -25,6 +25,8 @@ class WaitComponentsListTest extends IntegrationFluentTest {
     @Page
     private RowsListPage rowsListPage;
 
+    @FindBy(css = ".row")
+    private FluentList<FluentWebElement> fluentList;
 
     @FindBy(css = ".row")
     private FluentList<RowComponent> componentsList;
@@ -39,7 +41,16 @@ class WaitComponentsListTest extends IntegrationFluentTest {
     }
 
     @Test
-    void streamListChangeTest() {
+    void streamListChangTest() {
+        goTo(ELEMENT_REPLACE_URL);
+        await().until(() ->
+                fluentList
+                        .stream()
+                        .anyMatch(el -> el.text().equals(VALUE_OF_REPLACED_ROW)));
+    }
+
+    @Test
+    void streamListComponentsChangeTest() {
         goTo(ELEMENT_REPLACE_URL);
         await().until(subscribersListContains(VALUE_OF_REPLACED_ROW));
     }
