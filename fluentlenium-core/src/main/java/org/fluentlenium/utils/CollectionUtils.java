@@ -1,6 +1,7 @@
 package org.fluentlenium.utils;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -20,5 +21,15 @@ public final class CollectionUtils {
      */
     public static boolean isList(Field field) {
         return List.class.isAssignableFrom(field.getType());
+    }
+
+    /**
+     * Returns whether a collection is null or empty.
+     *
+     * @param collection the collection to check
+     * @return true if the collection is either null or empty, false otherwise
+     */
+    public static boolean isEmpty(Collection<?> collection) {
+        return collection == null || collection.isEmpty();
     }
 }

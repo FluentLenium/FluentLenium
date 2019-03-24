@@ -1,5 +1,7 @@
 package org.fluentlenium.core.proxy;
 
+import static org.fluentlenium.utils.CollectionUtils.isEmpty;
+
 import org.fluentlenium.core.domain.ElementUtils;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
@@ -44,15 +46,14 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     protected T proxy;
     protected T result;
 
-    protected List<FluentHook> hooks;
-
     /**
-     * Get declared method.
+     * Get public by name from the declaring class method.
      *
      * @param declaringClass declaring class
      * @param name           method name
      * @param types          argument types
-     * @return method
+     * @return the public method by the specified name
+     * @throws IllegalArgumentException when there is no method found with the specified name
      */
     protected static Method getMethod(Class<?> declaringClass, String name, Class... types) {
         try {
@@ -76,9 +77,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
      * Fire proxy element search event.
      */
     protected void fireProxyElementSearch() {
-        for (ProxyElementListener listener : listeners) {
-            listener.proxyElementSearch(proxy, locator);
-        }
+        listeners.forEach(listener -> listener.proxyElementSearch(proxy, locator));
     }
 
     /**
@@ -87,9 +86,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
      * @param result found element
      */
     protected void fireProxyElementFound(T result) {
-        for (ProxyElementListener listener : listeners) {
-            listener.proxyElementFound(proxy, locator, resultToList(result));
-        }
+        listeners.forEach(listener -> listener.proxyElementFound(proxy, locator, resultToList(result)));
     }
 
     /**
@@ -134,7 +131,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
      */
     public T getLocatorResult() {
         synchronized (this) {
-            if (result != null && isStale()) {
+            if (loaded() && isStale()) {
                 result = null;
             }
             if (result == null) {
@@ -171,7 +168,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     @Override
     public void setHooks(HookChainBuilder hookChainBuilder, List<HookDefinition<?>> hookDefinitions) {
-        if (hookDefinitions == null || hookDefinitions.isEmpty()) {
+        if (isEmpty(hookDefinitions)) {
             this.hookChainBuilder = null;
             this.hookDefinitions = null;
 
@@ -191,10 +188,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     @Override
     public ElementLocator getHookLocator() {
-        if (hooks != null && !hooks.isEmpty()) {
-            return hooks.get(hooks.size() - 1);
-        }
-        return locator;
+        return !isEmpty(hooks) ? hooks.get(hooks.size() - 1) : locator;
     }
 
     @Override
@@ -209,7 +203,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
         } catch (TimeoutException | NoSuchElementException | StaleElementReferenceException e) {
             return false;
         }
-        return result != null && !isStale();
+        return loaded() && !isStale();
     }
 
     @Override
@@ -274,11 +268,11 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
         throw lastThrowable;
     }
+    //CHECKSTYLE.ON: IllegalThrows
 
     private Object invoke(Method method, Object[] args) throws Throwable {
-        Object returnValue;
         try {
-            returnValue = method.invoke(getInvocationTarget(method), args);
+            return method.invoke(getInvocationTarget(method), args);
         } catch (InvocationTargetException e) {
             // Unwrap the underlying exception
             throw e.getCause();
@@ -293,7 +287,20 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     protected String getLazyToString() {
         return DEFAULT_LAZY_ELEMENT_TO_STRING;
     }
-    //CHECKSTYLE.ON: IllegalThrows
+
+    /**
+     * Get string representation of the proxy
+     *
+     * @param elementToString string representation of the underlying element
+     * @return string representation of the proxy
+     */
+    public String proxyToString(String elementToString) {
+        if (elementToString == null) {
+            elementToString = getLazyToString();
+        }
+
+        return locator instanceof WrapsElement ? elementToString : locator + " (" + elementToString + ")";
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -310,33 +317,6 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     @Override
     public int hashCode() {
         return Objects.hash(locator);
-    }
-
-    /**
-     * Get string representation of not already found element.
-     *
-     * @return string representation of not already found element
-     */
-    protected String getLazyToString() {
-        return "Lazy Element";
-    }
-
-    /**
-     * Get string representation of the proxy
-     *
-     * @param elementToString string representation of the underlying element
-     * @return string representation of the proxy
-     */
-    public String proxyToString(String elementToString) {
-        if (elementToString == null) {
-            elementToString = getLazyToString();
-        }
-
-        if (locator instanceof WrapsElement) {
-            return elementToString;
-        }
-
-        return locator + " (" + elementToString + ")";
     }
 
     @Override
