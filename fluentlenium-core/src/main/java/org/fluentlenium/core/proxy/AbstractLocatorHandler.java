@@ -28,17 +28,20 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     private static final Method TO_STRING = getMethod(Object.class, "toString");
     private static final Method EQUALS = getMethod(Object.class, "equals", Object.class);
     private static final Method HASH_CODE = getMethod(Object.class, "hashCode");
+    private static final String DEFAULT_LAZY_ELEMENT_TO_STRING = "Lazy Element";
 
     private static final int MAX_RETRY = 5;
     private static final int HASH_CODE_SEED = 2048;
 
-    protected HookChainBuilder hookChainBuilder;
-    protected List<HookDefinition<?>> hookDefinitions;
-
     private final List<ProxyElementListener> listeners = new ArrayList<>();
 
-    protected T proxy;
     protected final ElementLocator locator;
+
+    protected HookChainBuilder hookChainBuilder;
+    protected List<HookDefinition<?>> hookDefinitions;
+    protected List<FluentHook> hooks;
+
+    protected T proxy;
     protected T result;
 
     protected List<FluentHook> hooks;
@@ -280,7 +283,15 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
             // Unwrap the underlying exception
             throw e.getCause();
         }
-        return returnValue;
+    }
+
+    /**
+     * Get string representation of not already found element.
+     *
+     * @return string representation of not already found element
+     */
+    protected String getLazyToString() {
+        return DEFAULT_LAZY_ELEMENT_TO_STRING;
     }
     //CHECKSTYLE.ON: IllegalThrows
 
