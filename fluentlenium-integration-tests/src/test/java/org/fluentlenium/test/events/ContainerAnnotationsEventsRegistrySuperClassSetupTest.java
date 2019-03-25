@@ -2,9 +2,15 @@ package org.fluentlenium.test.events;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.read.ListAppender;
 import com.google.common.collect.ImmutableList;
 import org.fluentlenium.core.events.EventsRegistry;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -14,11 +20,29 @@ import java.util.List;
  */
 class ContainerAnnotationsEventsRegistrySuperClassSetupTest extends EventBasedIntegrationFluentTest {
 
+    private ListAppender<ILoggingEvent> listAppender;
+
+    @BeforeEach
+    void setUp() {
+        Logger fooLogger = (Logger) LoggerFactory.getLogger(EventBasedIntegrationFluentTest.class);
+        listAppender = new ListAppender<>();
+        listAppender.start();
+        fooLogger.addAppender(listAppender);
+    }
+
     @Test
     void shouldRegisterAnnotationBasedListenersFromSuperClass() {
         assertInitialEventsState();
         goTo(DEFAULT_URL);
         el("button").click();
+        assertEventAnnotationExecution();
+    }
+
+    private void assertEventAnnotationExecution() {
+        assertThat(listAppender.list)
+                .extracting(ILoggingEvent::getLevel)
+                .containsOnly(Level.INFO)
+                .size().isEqualTo(2);
     }
 
     private void assertInitialEventsState() {
