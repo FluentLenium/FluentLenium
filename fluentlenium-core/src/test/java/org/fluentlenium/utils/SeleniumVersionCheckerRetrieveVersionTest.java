@@ -10,11 +10,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.fluentlenium.utils.SeleniumVersionChecker.checkModelForParametrizedValue;
+import static org.fluentlenium.utils.SeleniumVersionChecker.resolveParametrisedVersionFromPom;
 import static org.fluentlenium.utils.SeleniumVersionChecker.retrieveVersionFromPom;
 import static org.fluentlenium.utils.SeleniumVersionCheckerTestConstants.CHILD_POM;
 import static org.fluentlenium.utils.SeleniumVersionCheckerTestConstants.EXPECTED_VERSION;
-import static org.fluentlenium.utils.SeleniumVersionCheckerTestConstants.PARAMETRIZED_PARENT_POM;
 import static org.fluentlenium.utils.SeleniumVersionCheckerTestConstants.PARAMETRIZED_POM;
 import static org.fluentlenium.utils.SeleniumVersionCheckerTestConstants.PARENT_POM;
 import static org.fluentlenium.utils.SeleniumVersionCheckerTestConstants.WRONG_VERSION_POM;
@@ -37,17 +36,7 @@ public class SeleniumVersionCheckerRetrieveVersionTest {
         Model model = getModel(PARAMETRIZED_POM);
 
         String parametrizedVersion = retrieveVersionFromPom(model);
-        String actualVersion = checkModelForParametrizedValue(parametrizedVersion, model);
-
-        assertThat(actualVersion).isEqualTo(EXPECTED_VERSION);
-    }
-
-    @Test
-    public void retrieveGoodVersionFromParentPomPropertiesShouldReturnTrueTest() throws IOException, XmlPullParserException {
-        Model model = getModel(PARAMETRIZED_PARENT_POM);
-
-        String parametrizedVersion = retrieveVersionFromPom(model);
-        String actualVersion = checkModelForParametrizedValue(parametrizedVersion, model);
+        String actualVersion = resolveParametrisedVersionFromPom(parametrizedVersion, model);
 
         assertThat(actualVersion).isEqualTo(EXPECTED_VERSION);
     }

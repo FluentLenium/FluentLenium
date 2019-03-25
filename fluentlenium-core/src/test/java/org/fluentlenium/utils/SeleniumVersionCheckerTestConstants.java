@@ -10,7 +10,8 @@ final class SeleniumVersionCheckerTestConstants {
     static final String CHILD_POM = PATH_TO_TEST_FOLDER + "dummy/" + POM_NAME;
     static final String WRONG_VERSION_POM = PATH_TO_TEST_FOLDER + "wrong/" + POM_NAME;
     static final String PARAMETRIZED_POM = PATH_TO_TEST_FOLDER + "parametrized/" + POM_NAME;
-    static final String PARAMETRIZED_PARENT_POM = PATH_TO_TEST_FOLDER + "parametrizedinparent/" + POM_NAME;
+    static final String PARAMETRIZED_PARENT_CHILD_POM = PATH_TO_TEST_FOLDER + "parametrizedinparent/child/" + POM_NAME;
 
-    private SeleniumVersionCheckerTestConstants() { }
+    private SeleniumVersionCheckerTestConstants() {
+    }
 }
