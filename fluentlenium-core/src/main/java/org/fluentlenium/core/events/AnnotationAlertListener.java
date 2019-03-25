@@ -17,18 +17,15 @@ class AnnotationAlertListener implements AlertListener, ListenerPriority {
     private final int priority;
 
     /**
-     * Creates a new Script annotation listener.
+     * Creates a new alert annotation listener.
      *
-     * @param method         method
-     * @param container      container
-     * @param annotationName annotation name
-     * @param priority       listener priority
+     * @param listenerContext the listener context
      */
-    AnnotationAlertListener(Method method, Object container, String annotationName, int priority) {
-        this.method = method;
-        this.container = container;
-        this.annotationName = annotationName;
-        this.priority = priority;
+    AnnotationAlertListener(ListenerContext listenerContext) {
+        this.method = listenerContext.getMethod();
+        this.container = listenerContext.getContainer();
+        this.annotationName = listenerContext.getAnnotationName();
+        this.priority = listenerContext.getPriority();
     }
 
     @Override

@@ -20,17 +20,13 @@ class AnnotationElementListener extends AbstractAnnotationListener implements El
     /**
      * Creates a new element annotation listener
      *
-     * @param method         method to call when the event occurs
-     * @param container      container to call when the event occurs
-     * @param annotationName name of the annotation
-     * @param priority       priority of this listener
-     * @param targetElement  target element
+     * @param listenerContext the listener context
      */
-    AnnotationElementListener(Method method, Object container, String annotationName, int priority, WebElement targetElement) {
-        super(container, priority);
-        this.method = method;
-        this.annotationName = annotationName;
-        this.targetElement = targetElement;
+    AnnotationElementListener(ListenerContext listenerContext) {
+        super(listenerContext.getContainer(), listenerContext.getPriority());
+        this.method = listenerContext.getMethod();
+        this.annotationName = listenerContext.getAnnotationName();
+        this.targetElement = listenerContext.getTargetElement();
     }
 
     /**
