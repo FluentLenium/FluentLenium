@@ -1,8 +1,9 @@
-package org.fluentlenium.core.events;
+package org.fluentlenium.test.events;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.google.common.collect.ImmutableList;
+import org.fluentlenium.core.events.EventsRegistry;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -15,8 +16,15 @@ class ContainerAnnotationsEventsRegistrySuperClassSetupTest extends EventBasedIn
 
     @Test
     void shouldRegisterAnnotationBasedListenersFromSuperClass() {
-        List<List> excludedLists = ImmutableList.of(events().beforeClickOn);
+        assertInitialEventsState();
+        goTo(DEFAULT_URL);
+        el("button").click();
+    }
+
+    private void assertInitialEventsState() {
+        List<List> excludedLists = ImmutableList.of(events().beforeClickOn, events().afterClickOn);
         assertThat(events().beforeClickOn).hasSize(1);
+        assertThat(events().afterClickOn).hasSize(1);
 
         for (List<List> events : events().eventLists) {
             if (!excludedLists.contains(events)) {
