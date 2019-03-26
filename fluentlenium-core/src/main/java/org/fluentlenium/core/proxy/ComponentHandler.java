@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
@@ -16,8 +15,7 @@ import java.util.List;
 /**
  * Proxy handler for {@link WebElement}.
  */
-public class ComponentHandler extends AbstractLocatorHandler<WebElement>
-        implements InvocationHandler, LocatorHandler<WebElement> {
+public class ComponentHandler extends AbstractLocatorHandler<WebElement> {
     private static final Method GET_WRAPPED_ELEMENT = getMethod(WrapsElement.class, "getWrappedElement");
 
     /**
