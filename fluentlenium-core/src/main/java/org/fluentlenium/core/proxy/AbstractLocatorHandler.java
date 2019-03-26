@@ -46,23 +46,6 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     protected T proxy;
     protected T result;
 
-    /**
-     * Get public by name from the declaring class method.
-     *
-     * @param declaringClass declaring class
-     * @param name           method name
-     * @param types          argument types
-     * @return the public method by the specified name
-     * @throws IllegalArgumentException when there is no method found with the specified name
-     */
-    protected static Method getMethod(Class<?> declaringClass, String name, Class... types) {
-        try {
-            return declaringClass.getMethod(name, types);
-        } catch (NoSuchMethodException e) {
-            throw new IllegalArgumentException(e);
-        }
-    }
-
     @Override
     public boolean addListener(ProxyElementListener listener) {
         return listeners.add(listener);
