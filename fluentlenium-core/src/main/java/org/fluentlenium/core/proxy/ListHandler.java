@@ -31,8 +31,8 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
             if (foundElements == null) {
                 foundElements = Collections.emptyList();
             }
-            result = wrapElements(foundElements);
-            fireProxyElementFound(result);
+            proxyResultHolder.setResult(wrapElements(foundElements));
+            fireProxyElementFound(proxyResultHolder.getResult());
         }
     }
 
@@ -53,19 +53,19 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
 
     @Override
     public List<WebElement> getInvocationTarget(Method method) {
-        return result;
+        return proxyResultHolder.getResult();
     }
 
     @Override
     public boolean present() {
-        return super.present() && result.size() > 0;
+        return super.present() && proxyResultHolder.getResult().size() > 0;
     }
 
     @Override
     protected boolean isStale() {
-        if (result.size() > 0) {
+        if (proxyResultHolder.getResult().size() > 0) {
             try {
-                result.get(0).isEnabled();
+                proxyResultHolder.getResult().get(0).isEnabled();
             } catch (StaleElementReferenceException e) {
                 return true;
             }
@@ -95,7 +95,7 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (GET_WRAPPED_ELEMENTS.equals(method)) {
-            return result == null ? proxy : getLocatorResult();
+            return !proxyResultHolder.isResultLoaded() ? proxy : getLocatorResult();
         }
         return super.invoke(proxy, method, args);
     }

@@ -31,8 +31,8 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement> {
             if (result == null) {
                 throw noSuchElement();
             }
-            this.result = result;
-            fireProxyElementFound(this.result);
+            proxyResultHolder.setResult(result);
+            fireProxyElementFound(proxyResultHolder.getResult());
         }
     }
 
@@ -49,7 +49,7 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement> {
     @Override
     protected boolean isStale() {
         try {
-            result.isEnabled();
+            proxyResultHolder.getResult().isEnabled();
             return false;
         } catch (StaleElementReferenceException e) {
             return true;
@@ -58,7 +58,7 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement> {
 
     @Override
     public WebElement getElement() {
-        return result;
+        return proxyResultHolder.getResult();
     }
 
     @Override
@@ -78,7 +78,7 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement> {
     @Override
     public WebElement getInvocationTarget(Method method) {
         if (method != null && method.getDeclaringClass().equals(Object.class)) {
-            return result;
+            return proxyResultHolder.getResult();
         }
         if (getElement() == null) {
             return null;

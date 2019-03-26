@@ -38,13 +38,12 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     private final List<ProxyElementListener> listeners = new ArrayList<>();
 
     protected final ElementLocator locator;
+    protected final ProxyResultHolder<T> proxyResultHolder;
 
     protected HookChainBuilder hookChainBuilder;
     protected List<HookDefinition<?>> hookDefinitions;
     protected List<FluentHook> hooks;
 
-    protected T proxy;
-    protected T result;
 
     @Override
     public boolean addListener(ProxyElementListener listener) {
@@ -60,7 +59,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
      * Fire proxy element search event.
      */
     protected void fireProxyElementSearch() {
-        listeners.forEach(listener -> listener.proxyElementSearch(proxy, locator));
+        listeners.forEach(listener -> listener.proxyElementSearch(proxyResultHolder.getProxy(), locator));
     }
 
     /**
@@ -69,7 +68,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
      * @param result found element
      */
     protected void fireProxyElementFound(T result) {
-        listeners.forEach(listener -> listener.proxyElementFound(proxy, locator, resultToList(result)));
+        listeners.forEach(listener -> listener.proxyElementFound(proxyResultHolder.getProxy(), locator, resultToList(result)));
     }
 
     /**
@@ -87,6 +86,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
      */
     public AbstractLocatorHandler(ElementLocator locator) {
         this.locator = locator;
+        proxyResultHolder = new ProxyResultHolder<>();
     }
 
     /**
@@ -95,7 +95,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
      * @param proxy proxy using this handler
      */
     public void setProxy(T proxy) {
-        this.proxy = proxy;
+        proxyResultHolder.setProxy(proxy);
     }
 
     /**
@@ -116,14 +116,14 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     public T getLocatorResult() {
         synchronized (this) {
             if (loaded() && isStale()) {
-                result = null;
+                proxyResultHolder.setResult(null);
             }
-            if (result == null) {
+            if (!loaded()) {
                 fireProxyElementSearch();
-                result = getLocatorResultImpl();
-                fireProxyElementFound(result);
+                proxyResultHolder.setResult(getLocatorResultImpl());
+                fireProxyElementFound(proxyResultHolder.getResult());
             }
-            return result;
+            return proxyResultHolder.getResult();
         }
     }
 
@@ -152,7 +152,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
             this.hookChainBuilder = hookChainBuilder;
             this.hookDefinitions = hookDefinitions;
 
-            hooks = hookChainBuilder.build(this::getElement, () -> locator, () -> proxy.toString(), hookDefinitions);
+            hooks = hookChainBuilder.build(this::getElement, () -> locator, () -> proxyResultHolder.getProxy().toString(), hookDefinitions);
         }
     }
 
@@ -168,7 +168,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     @Override
     public boolean loaded() {
-        return result != null;
+        return proxyResultHolder.isResultLoaded();
     }
 
     @Override
@@ -183,7 +183,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
 
     @Override
     public void reset() {
-        result = null;
+        proxyResultHolder.setResult(null);
     }
 
     @Override
@@ -191,9 +191,9 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
             "PMD.NPathComplexity"})
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (TO_STRING.equals(method)) {
-            return proxyToString(result == null ? null : (String) invoke(method, args));
+            return proxyToString(!loaded() ? null : (String) invoke(method, args));
         }
-        if (result == null) {
+        if (!loaded()) {
             if (EQUALS.equals(method)) {
                 LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
                 if (otherLocatorHandler != null) {
