@@ -1,5 +1,7 @@
 package org.fluentlenium.core.proxy;
 
+import static org.fluentlenium.utils.ReflectionUtils.getMethod;
+
 import org.fluentlenium.core.domain.WrapsElements;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
