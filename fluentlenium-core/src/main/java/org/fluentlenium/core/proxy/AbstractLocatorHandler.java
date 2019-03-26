@@ -1,8 +1,8 @@
 package org.fluentlenium.core.proxy;
 
 import static org.fluentlenium.utils.CollectionUtils.isEmpty;
+import static org.fluentlenium.utils.ReflectionUtils.getMethod;
 
-import org.fluentlenium.core.domain.ElementUtils;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
@@ -112,6 +112,7 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
      *
      * @return result of the locator
      */
+    @Override
     public T getLocatorResult() {
         synchronized (this) {
             if (loaded() && isStale()) {
@@ -139,15 +140,6 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
      * @return underlying element
      */
     protected abstract WebElement getElement();
-
-    /**
-     * Builds a {@link NoSuchElementException} with a message matching this locator handler.
-     *
-     * @return no such element exception
-     */
-    public NoSuchElementException noSuchElement() {
-        return ElementUtils.noSuchElementException(getMessageContext());
-    }
 
     @Override
     public void setHooks(HookChainBuilder hookChainBuilder, List<HookDefinition<?>> hookDefinitions) {
@@ -192,11 +184,6 @@ public abstract class AbstractLocatorHandler<T> implements InvocationHandler, Lo
     @Override
     public void reset() {
         result = null;
-    }
-
-    @Override
-    public void now() {
-        getLocatorResult();
     }
 
     @Override
