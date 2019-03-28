@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @param <T> type of the result retrieved by the element locator
  */
-public interface LocatorHandler<T> {
+public interface LocatorHandler<T> extends LocatorStatusHandler {
     /**
      * Retrieve the element locator used by this proxy, without any hook applied.
      *
@@ -54,30 +54,12 @@ public interface LocatorHandler<T> {
     void setHooks(HookChainBuilder hookChainBuilder, List<HookDefinition<?>> hookDefinitions);
 
     /**
-     * Check if this handler has loaded it's result.
-     *
-     * @return true if the result is loaded, false otherwise
+     * {@inheritDoc}
      */
-    boolean loaded();
-
-    /**
-     * Reset the loaded data.
-     */
-    void reset();
-
-    /**
-     * If result is not loaded, load result immediately. If it's already loaded, it has no effect.
-     */
+    @Override
     default void now() {
         getLocatorResult();
     }
-
-    /**
-     * Check if the result is present.
-     *
-     * @return true if result is present, false otherwise
-     */
-    boolean present();
 
     /**
      * Add a listener for this locator handler.
