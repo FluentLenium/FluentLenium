@@ -5,8 +5,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.fluentlenium.core.events.SwitchToWindowListener;
-
 /**
  * Add this annotation on a method to register it in {@link org.fluentlenium.core.events.EventsRegistry}.
  * <p>
@@ -14,7 +12,7 @@ import org.fluentlenium.core.events.SwitchToWindowListener;
  * <p>
  * Parameters from {@link org.fluentlenium.core.events.AlertListener} will be injected in the method based on parameters types.
  *
- * @see org.fluentlenium.core.events.EventsRegistry#beforeSwitchToWindow(SwitchToWindowListener)
+ * @see org.fluentlenium.core.events.EventsRegistry#beforeSwitchToWindow(org.fluentlenium.core.events.SwitchToWindowListener)
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

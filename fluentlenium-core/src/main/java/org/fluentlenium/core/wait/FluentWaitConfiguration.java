@@ -1,6 +1,7 @@
 package org.fluentlenium.core.wait;
 
 import java.time.Duration;
+import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
@@ -82,7 +83,7 @@ public interface FluentWaitConfiguration<T> {
      * @param types collection of exception type to ignore
      * @return {@code this} object to chain method calls
      */
-    T ignoreAll(java.util.Collection<java.lang.Class<? extends Throwable>> types);
+    T ignoreAll(Collection<Class<? extends Throwable>> types);
 
     /**
      * Add given exception to ignore list to avoid breaking the wait when they occurs in the underlying condition evaluation.
@@ -90,7 +91,7 @@ public interface FluentWaitConfiguration<T> {
      * @param exceptionType exception type to ignore
      * @return {@code this} object to chain method calls
      */
-    T ignoring(java.lang.Class<? extends java.lang.RuntimeException> exceptionType);
+    T ignoring(Class<? extends RuntimeException> exceptionType);
 
     /**
      * Add given exceptions to ignore list to avoid breaking the wait when they occurs in the underlying condition evaluation.
@@ -99,8 +100,7 @@ public interface FluentWaitConfiguration<T> {
      * @param secondType exception type to ignore
      * @return {@code this} object to chain method calls
      */
-    T ignoring(java.lang.Class<? extends java.lang.RuntimeException> firstType,
-               java.lang.Class<? extends java.lang.RuntimeException> secondType);
+    T ignoring(Class<? extends RuntimeException> firstType, Class<? extends RuntimeException> secondType);
 
     /**
      * Configures a custom message to be used if the condition fails during the timeout duration.

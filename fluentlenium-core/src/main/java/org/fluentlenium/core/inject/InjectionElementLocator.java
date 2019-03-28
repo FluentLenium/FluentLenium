@@ -35,7 +35,7 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
         shouldCache = annotations.isLookupCached();
         by = annotations.buildBy();
         this.isFirst = isFirst;
-        label = new FluentLabelImpl<>(this, () -> by.toString() + (InjectionElementLocator.this.isFirst ? " (first)" : ""));
+        label = new FluentLabelImpl<>(this, () -> by.toString() + (this.isFirst ? " (first)" : ""));
         label.withLabel(annotations.getLabel());
         label.withLabelHint(annotations.getLabelHints());
     }
