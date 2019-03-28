@@ -1,4 +1,4 @@
-package org.fluentlenium.examples.pages;
+package org.fluentlenium.examples.pages.basic;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
