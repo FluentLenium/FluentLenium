@@ -41,15 +41,17 @@ public abstract class AbstractLocatorAndInvocationHandler<T> extends AbstractLoc
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Object invocationResult = null;
         if (TO_STRING.equals(method)) {
-            return proxyToString(!loaded() ? null : (String) invoke(method, args));
-        } else if (!loaded()) {
+            return proxyToString(loaded() ? (String) invoke(method, args) : null);
+        } else if (loaded()) {
+            if (EQUALS.equals(method)) {
+                invocationResult = invokeEqualsWhenResultIsPresent(args[0]);
+            }
+        } else {
             if (EQUALS.equals(method)) {
                 invocationResult = invokeEqualsWhenResultIsAbsent(proxy, args);
             } else if (HASH_CODE.equals(method)) {
                 invocationResult = HASH_CODE_SEED + locator.hashCode();
             }
-        } else if (EQUALS.equals(method)) {
-            invocationResult = invokeEqualsWhenResultIsPresent(args[0]);
         }
 
         if (invocationResult == null) {

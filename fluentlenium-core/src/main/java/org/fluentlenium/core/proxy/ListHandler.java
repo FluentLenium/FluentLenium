@@ -95,7 +95,7 @@ public class ListHandler extends AbstractLocatorAndInvocationHandler<List<WebEle
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (GET_WRAPPED_ELEMENTS.equals(method)) {
-            return !loaded() ? proxy : getLocatorResult();
+            return loaded() ? getLocatorResult() : proxy;
         }
         return super.invoke(proxy, method, args);
     }

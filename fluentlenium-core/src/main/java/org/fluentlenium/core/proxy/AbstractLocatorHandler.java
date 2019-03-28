@@ -94,7 +94,7 @@ public abstract class AbstractLocatorHandler<T> implements LocatorHandler<T> {
 
     @Override
     public ElementLocator getHookLocator() {
-        return !isEmpty(hooks) ? hooks.get(hooks.size() - 1) : locator;
+        return isEmpty(hooks) ? locator : hooks.get(hooks.size() - 1);
     }
 
     @Override
