@@ -38,40 +38,49 @@ public abstract class AbstractLocatorAndInvocationHandler<T> extends AbstractLoc
     }
 
     @Override
-    @SuppressWarnings({"PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity",
-            "PMD.NPathComplexity"})
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        Object invocationResult = null;
         if (TO_STRING.equals(method)) {
             return proxyToString(!loaded() ? null : (String) invoke(method, args));
-        }
-        if (!loaded()) {
+        } else if (!loaded()) {
             if (EQUALS.equals(method)) {
-                LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
-                if (otherLocatorHandler != null) {
-                    if (!otherLocatorHandler.loaded() || args[0] == null) {
-                        return equals(otherLocatorHandler);
-                    } else {
-                        return args[0].equals(proxy);
-                    }
-                }
+                invocationResult = invokeEqualsWhenResultIsAbsent(proxy, args);
+            } else if (HASH_CODE.equals(method)) {
+                invocationResult = HASH_CODE_SEED + locator.hashCode();
             }
-
-            if (HASH_CODE.equals(method)) {
-                return HASH_CODE_SEED + locator.hashCode();
-            }
+        } else if (EQUALS.equals(method)) {
+            invocationResult = invokeEqualsWhenResultIsPresent(args[0]);
         }
 
-        if (EQUALS.equals(method)) {
-            LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
-            if (otherLocatorHandler != null && !otherLocatorHandler.loaded()) {
-                otherLocatorHandler.now();
-                return otherLocatorHandler.equals(this);
-            }
+        if (invocationResult == null) {
+            getLocatorResult();
+            invocationResult = invokeWithRetry(method, args);
         }
 
-        getLocatorResult();
+        return invocationResult;
+    }
 
-        return invokeWithRetry(method, args);
+    private Object invokeEqualsWhenResultIsAbsent(Object proxy, Object[] args) {
+        Object invocationResult = null;
+        LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
+        if (otherLocatorHandler != null) {
+            if (!otherLocatorHandler.loaded() || args[0] == null) {
+                invocationResult = equals(otherLocatorHandler);
+            } else {
+                invocationResult = args[0].equals(proxy);
+            }
+        }
+        return invocationResult;
+    }
+
+    private Object invokeEqualsWhenResultIsPresent(Object arg) {
+        Object invocationResult = null;
+        LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(arg);
+        if (otherLocatorHandler != null && !otherLocatorHandler.loaded()) {
+            otherLocatorHandler.now();
+            invocationResult = otherLocatorHandler.equals(this);
+        }
+        return invocationResult;
     }
 
     //CHECKSTYLE.OFF: IllegalThrows
