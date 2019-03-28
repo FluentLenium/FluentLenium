@@ -1,0 +1,124 @@
+package org.fluentlenium.core.proxy;
+
+import static org.fluentlenium.utils.ReflectionUtils.getMethod;
+
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.pagefactory.ElementLocator;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Objects;
+
+/**
+ * Abstract proxy handler supporting lazy loading and hooks on {@link WebElement}.
+ * <p>
+ * This class handles the actual method invocation on the proxy.
+ * <p>
+ * If you want to create your own custom component handler, this is the class that must be extended.
+ *
+ * @param <T> type of underlying element or component
+ */
+public abstract class AbstractLocatorAndInvocationHandler<T> extends AbstractLocatorHandler<T> implements InvocationHandler {
+    private static final Method TO_STRING = getMethod(Object.class, "toString");
+    private static final Method EQUALS = getMethod(Object.class, "equals", Object.class);
+    private static final Method HASH_CODE = getMethod(Object.class, "hashCode");
+
+    private static final int MAX_RETRY = 5;
+    private static final int HASH_CODE_SEED = 2048;
+
+    /**
+     * Creates a new locator handler.
+     *
+     * @param locator selenium element locator
+     */
+    public AbstractLocatorAndInvocationHandler(ElementLocator locator) {
+        super(locator);
+    }
+
+    @Override
+    @SuppressWarnings({"PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity",
+            "PMD.NPathComplexity"})
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        if (TO_STRING.equals(method)) {
+            return proxyToString(!loaded() ? null : (String) invoke(method, args));
+        }
+        if (!loaded()) {
+            if (EQUALS.equals(method)) {
+                LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
+                if (otherLocatorHandler != null) {
+                    if (!otherLocatorHandler.loaded() || args[0] == null) {
+                        return equals(otherLocatorHandler);
+                    } else {
+                        return args[0].equals(proxy);
+                    }
+                }
+            }
+
+            if (HASH_CODE.equals(method)) {
+                return HASH_CODE_SEED + locator.hashCode();
+            }
+        }
+
+        if (EQUALS.equals(method)) {
+            LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(args[0]);
+            if (otherLocatorHandler != null && !otherLocatorHandler.loaded()) {
+                otherLocatorHandler.now();
+                return otherLocatorHandler.equals(this);
+            }
+        }
+
+        getLocatorResult();
+
+        return invokeWithRetry(method, args);
+    }
+
+    //CHECKSTYLE.OFF: IllegalThrows
+    private Object invokeWithRetry(Method method, Object[] args) throws Throwable {
+        Throwable lastThrowable = null;
+        for (int i = 0; i < MAX_RETRY; i++) {
+            try {
+                return invoke(method, args);
+            } catch (StaleElementReferenceException e) {
+                lastThrowable = e;
+                reset();
+                getLocatorResult(); // Reload the stale element
+            }
+        }
+
+        throw lastThrowable;
+    }
+    //CHECKSTYLE.ON: IllegalThrows
+
+    private Object invoke(Method method, Object[] args) throws Throwable {
+        try {
+            return method.invoke(getInvocationTarget(method), args);
+        } catch (InvocationTargetException e) {
+            // Unwrap the underlying exception
+            throw e.getCause();
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        AbstractLocatorHandler<?> that = (AbstractLocatorHandler<?>) obj;
+        return Objects.equals(locator, that.locator);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(locator);
+    }
+
+    @Override
+    public String toString() {
+        return proxyToString(null);
+    }
+}

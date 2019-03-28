@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Proxy handler for list of {@link WebElement}.
  */
-public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
+public class ListHandler extends AbstractLocatorAndInvocationHandler<List<WebElement>> {
     private static final Method GET_WRAPPED_ELEMENTS = getMethod(WrapsElements.class, "getWrappedElements");
 
     /**
@@ -31,8 +31,8 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
             if (foundElements == null) {
                 foundElements = Collections.emptyList();
             }
-            proxyResultHolder.setResult(wrapElements(foundElements));
-            fireProxyElementFound(proxyResultHolder.getResult());
+            result = wrapElements(foundElements);
+            fireProxyElementFound(result);
         }
     }
 
@@ -53,19 +53,19 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
 
     @Override
     public List<WebElement> getInvocationTarget(Method method) {
-        return proxyResultHolder.getResult();
+        return result;
     }
 
     @Override
     public boolean present() {
-        return super.present() && proxyResultHolder.getResult().size() > 0;
+        return super.present() && result.size() > 0;
     }
 
     @Override
     protected boolean isStale() {
-        if (proxyResultHolder.getResult().size() > 0) {
+        if (result.size() > 0) {
             try {
-                proxyResultHolder.getResult().get(0).isEnabled();
+                result.get(0).isEnabled();
             } catch (StaleElementReferenceException e) {
                 return true;
             }
@@ -95,7 +95,7 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (GET_WRAPPED_ELEMENTS.equals(method)) {
-            return !proxyResultHolder.isResultLoaded() ? proxy : getLocatorResult();
+            return !loaded() ? proxy : getLocatorResult();
         }
         return super.invoke(proxy, method, args);
     }

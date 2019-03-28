@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Proxy handler for {@link WebElement}.
  */
-public class ComponentHandler extends AbstractLocatorHandler<WebElement> {
+public class ComponentHandler extends AbstractLocatorAndInvocationHandler<WebElement> {
     private static final Method GET_WRAPPED_ELEMENT = getMethod(WrapsElement.class, "getWrappedElement");
 
     /**
@@ -31,8 +31,8 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement> {
             if (result == null) {
                 throw noSuchElement();
             }
-            proxyResultHolder.setResult(result);
-            fireProxyElementFound(proxyResultHolder.getResult());
+            this.result = result;
+            fireProxyElementFound(result);
         }
     }
 
@@ -49,7 +49,7 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement> {
     @Override
     protected boolean isStale() {
         try {
-            proxyResultHolder.getResult().isEnabled();
+            result.isEnabled();
             return false;
         } catch (StaleElementReferenceException e) {
             return true;
@@ -58,7 +58,7 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement> {
 
     @Override
     public WebElement getElement() {
-        return proxyResultHolder.getResult();
+        return result;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement> {
     @Override
     public WebElement getInvocationTarget(Method method) {
         if (method != null && method.getDeclaringClass().equals(Object.class)) {
-            return proxyResultHolder.getResult();
+            return result;
         }
         if (getElement() == null) {
             return null;
