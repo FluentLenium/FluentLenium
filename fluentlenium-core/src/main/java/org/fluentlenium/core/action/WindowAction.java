@@ -1,5 +1,11 @@
 package org.fluentlenium.core.action;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -9,13 +15,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Predicate;
+import org.openqa.selenium.WebDriverException;
 
 /**
  * Execute actions on active window.
@@ -129,6 +129,8 @@ public class WindowAction {
         String newWindowHandle = newWindowHandles.iterator().next();
         switchTo(newWindowHandle);
 
+        waitForNewWindowStartLoading();
+
         return oldWindowHandle;
     }
 
@@ -144,10 +146,17 @@ public class WindowAction {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.open('someUrl', '_blank')");
         waitForNewWindowToOpen(oldWindowHandles);
+        waitForNewWindowStartLoading();
 
         switchToLast(oldWindowHandle);
 
         return oldWindowHandle;
+    }
+
+    private void waitForNewWindowStartLoading() {
+        fluentControl.await().atMost(3, TimeUnit.SECONDS)
+                .ignoring(WebDriverException.class)
+                .until(() -> fluentControl.getDriver().getCurrentUrl() != null);
     }
 
     /**
