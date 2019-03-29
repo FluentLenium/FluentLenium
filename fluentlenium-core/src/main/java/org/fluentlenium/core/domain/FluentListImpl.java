@@ -1,8 +1,21 @@
 package org.fluentlenium.core.domain;
 
+import static java.util.stream.Collectors.toList;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.action.Fill;
 import org.fluentlenium.core.action.FillSelect;
+import org.fluentlenium.core.action.FluentJavascriptActions;
 import org.fluentlenium.core.action.FluentJavascriptActionsImpl;
 import org.fluentlenium.core.components.ComponentInstantiator;
 import org.fluentlenium.core.conditions.AtLeastOneElementConditions;
@@ -21,33 +34,26 @@ import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWaitElementList;
 import org.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
-import static java.util.stream.Collectors.toList;
-
 /**
- * Map the list to a FluentList in order to offers some events like click(), submit(), value() ...
+ * Default implementation of {@link FluentList} and {@link ComponentList}.
+ * <p>
+ * It offers convenience methods to work with a collection of elements, like click(), submit(), value() ...
+ * <p>
+ * It also offers capability to add labels and hooks to an object having this type.
  *
- * @param <E> type of fluent element
+ * @param <E> type of fluent element the list contains
  */
 @SuppressWarnings({"PMD.GodClass", "PMD.ExcessivePublicCount"})
 public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E> implements FluentList<E> {
-    private final FluentLabelImpl<FluentList<E>> label;
 
-    private final HookControlImpl<FluentList<E>> hookControl;
-
-    private final FluentJavascriptActionsImpl<FluentList<E>> javascriptActions;
+    private static final Duration DEFAULT_WAIT_AND_CLICK_DURATION = Duration.ofSeconds(5);
+    private final FluentLabel<FluentList<E>> label;
+    private final HookControl<FluentList<E>> hookControl;
+    private final FluentJavascriptActions<FluentList<E>> javascriptActions;
 
     /**
      * Creates a new fluent list.
@@ -66,7 +72,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             return instantiator.asComponentList(getClass(), componentClass, webElementList);
         });
         label = new FluentLabelImpl<>(this, list::toString);
-        javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new Supplier<>() {
+        javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new Supplier<FluentWebElement>() {
             @Override
             public FluentWebElement get() {
                 return first();
@@ -79,21 +85,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
         });
     }
 
-    private FluentLabel<FluentList<E>> getLabel() {
-        return label;
+    private FluentLabelImpl<FluentList<E>> getLabelImpl() {
+        return (FluentLabelImpl<FluentList<E>>) label;
     }
 
-    private HookControl<FluentList<E>> getHookControl() { //NOPMD UnusedPrivateMethod
-        return hookControl;
-    }
-
-    private FluentJavascriptActionsImpl<FluentList<E>> getJavascriptActions() { //NOPMD UnusedPrivateMethod
-        return javascriptActions;
-    }
-
-    @Override
-    public List<WebElement> toElements() {
-        return this.stream().map(FluentWebElement::getElement).collect(toList());
+    private HookControlImpl<FluentList<E>> getHookControlImpl() {
+        return (HookControlImpl<FluentList<E>>) hookControl;
     }
 
     @Override
@@ -137,29 +134,36 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
+    public E get(int index) {
+        return index(index);
+    }
+
+    @Override
     public E index(int index) {
-        if (!LocatorProxies.loaded(proxy)) {
+        if (!LocatorProxies.loaded(proxy) && !componentClass.equals(FluentWebElement.class)) {
             E component = instantiator.newComponent(componentClass, LocatorProxies.index(proxy, index));
             configureComponentWithLabel(component);
             configureComponentWithHooks(component);
             if (component instanceof FluentWebElement) {
-                component.setHookRestoreStack(hookControl.getHookRestoreStack());
+                component.setHookRestoreStack(getHookControlImpl().getHookRestoreStack());
             }
-            return component;
+            return component.reset().as(componentClass);
         }
         if (size() <= index) {
             throw LocatorProxies.noSuchElement(proxy);
         }
-        return get(index);
+        return super.get(index);
     }
 
     @Override
     public int count() {
-        if (loaded()) {
-            return super.size();
-        } else {
-            return LocatorProxies.getLocatorHandler(proxy).getLocator().findElements().size();
+        if (proxy != null) {
+            LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(proxy);
+            if (locatorHandler != null) {
+                return locatorHandler.getLocator().findElements().size();
+            }
         }
+        return super.size();
     }
 
     @Override
@@ -212,6 +216,20 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
     }
 
     @Override
+    public FluentList<E> waitAndClick() {
+        return waitAndClick(DEFAULT_WAIT_AND_CLICK_DURATION);
+    }
+
+    @Override
+    public FluentList<E> waitAndClick(Duration duration) {
+        validateListIsNotEmpty();
+        await().atMost(duration).until(this).clickable();
+        this.scrollToCenter();
+        this.click();
+        return this;
+    }
+
+    @Override
     public FluentList<E> write(String... with) {
         validateListIsNotEmpty();
 
@@ -245,42 +263,12 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> clearAll() {
-        validateListIsNotEmpty();
-
-        boolean atLeastOne = false;
-        for (E fluentWebElement : this) {
-            if (fluentWebElement.enabled()) {
-                atLeastOne = true;
-                fluentWebElement.clear();
-            }
-        }
-
-        if (!atLeastOne) {
-            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element enabled."
-                    + " At least one element should be enabled to clear values.");
-        }
-
-        return this;
+        return clearAllInputs(FluentWebElement::clear, "clear values");
     }
 
     @Override
     public FluentList<E> clearAllReactInputs() {
-        validateListIsNotEmpty();
-
-        boolean atLeastOne = false;
-        for (E fluentWebElement : this) {
-            if (fluentWebElement.enabled()) {
-                atLeastOne = true;
-                fluentWebElement.clearReactInput();
-            }
-        }
-
-        if (!atLeastOne) {
-            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element enabled."
-                    + " At least one element should be enabled to clear values.");
-        }
-
-        return this;
+        return clearAllInputs(FluentWebElement::clearReactInput, "clear values by using backspace");
     }
 
     @Override
@@ -312,61 +300,8 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> submit() {
-        validateListIsNotEmpty();
-
-        boolean atLeastOne = false;
-        for (E fluentWebElement : this) {
-            if (fluentWebElement.enabled()) {
-                atLeastOne = true;
-                fluentWebElement.submit();
-            }
-        }
-
-        if (!atLeastOne) {
-            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + " has no element enabled."
-                    + " At least one element should be enabled to perform a submit.");
-        }
-        return this;
-    }
-
-    @Override
-    public List<String> values() {
-        return stream().map(FluentWebElement::value).collect(toList());
-    }
-
-    @Override
-    public List<String> ids() {
-        return stream().map(FluentWebElement::id).collect(toList());
-    }
-
-    @Override
-    public List<String> attributes(String attribute) {
-        return stream().map(webElement -> webElement.attribute(attribute)).collect(toList());
-    }
-
-    @Override
-    public List<String> names() {
-        return stream().map(FluentWebElement::name).collect(toList());
-    }
-
-    @Override
-    public List<Dimension> dimensions() {
-        return stream().map(FluentWebElement::size).collect(toList());
-    }
-
-    @Override
-    public List<String> tagNames() {
-        return stream().map(FluentWebElement::tagName).collect(toList());
-    }
-
-    @Override
-    public List<String> textContents() {
-        return stream().map(FluentWebElement::textContent).collect(toList());
-    }
-
-    @Override
-    public List<String> texts() {
-        return stream().map(FluentWebElement::text).collect(toList());
+        return perform(FluentWebElement::submit, FluentWebElement::enabled,
+                " has no element enabled. At least one element should be enabled to perform a submit.");
     }
 
     @Override
@@ -442,7 +377,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     private void configureComponentWithHooks(E component) {
         if (component instanceof HookControl) {
-            for (HookDefinition definition : hookControl.getHookDefinitions()) {
+            for (HookDefinition definition : getHookControlImpl().getHookDefinitions()) {
                 component.withHook(definition.getHookClass(), definition.getOptions());
             }
         }
@@ -450,25 +385,34 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     private void configureComponentWithLabel(E component) {
         if (component instanceof FluentLabel) {
-            component.withLabel(label.getLabel());
-            component.withLabelHint(label.getLabelHints());
+            component.withLabel(getLabelImpl().getLabel());
+            component.withLabelHint(getLabelImpl().getLabelHints());
         }
     }
 
-    private FluentList<E> doClick(Consumer<FluentWebElement> clickAction, String clickType) {
+    private FluentList<E> doClick(Consumer<E> clickAction, String clickType) {
+        return perform(clickAction, fluentWebElement -> fluentWebElement.conditions().clickable(),
+                " has no element clickable. At least one element should be clickable to perform a " + clickType + ".");
+    }
+
+    private FluentList<E> clearAllInputs(Consumer<E> action, String actionMessage) {
+        return perform(action, FluentWebElement::enabled,
+                " has no element enabled. At least one element should be enabled to " + actionMessage + ".");
+    }
+
+    private FluentList<E> perform(Consumer<E> action, Predicate<E> condition, String message) {
         validateListIsNotEmpty();
 
         boolean atLeastOne = false;
         for (E fluentWebElement : this) {
-            if (fluentWebElement.conditions().clickable()) {
+            if (condition.test(fluentWebElement)) {
                 atLeastOne = true;
-                clickAction.accept(fluentWebElement);
+                action.accept(fluentWebElement);
             }
         }
 
         if (!atLeastOne) {
-            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy)
-                    + " has no element clickable. At least one element should be clickable to perform a " + clickType + ".");
+            throw new NoSuchElementException(LocatorProxies.getMessageContext(proxy) + message);
         }
 
         return this;
@@ -490,93 +434,97 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
 
     @Override
     public FluentList<E> withLabel(String label) {
-        return getLabel().withLabel(label);
+        return this.label.withLabel(label);
     }
 
     @Override
     public FluentList<E> withLabelHint(String... labelHint) {
-        return getLabel().withLabelHint(labelHint);
+        return this.label.withLabelHint(labelHint);
     }
 
     @Override
     public FluentList<E> noHookInstance() {
-        return getHookControl().noHookInstance();
+        return hookControl.noHookInstance();
     }
 
     @Override
     public FluentList<E> noHook() {
-        return getHookControl().noHook();
+        return hookControl.noHook();
     }
 
     @Override
     public <O, H extends FluentHook<O>> FluentList<E> withHook(Class<H> hook) {
-        return getHookControl().withHook(hook);
+        return hookControl.withHook(hook);
     }
 
     @Override
     public <R> R noHook(Class<? extends FluentHook> hook, Function<FluentList<E>, R> function) {
-        return getHookControl().noHook(hook, function);
+        return hookControl.noHook(hook, function);
     }
 
     @Override
     public FluentList<E> restoreHooks() {
-        return getHookControl().restoreHooks();
+        return hookControl.restoreHooks();
     }
 
     @Override
     public <O, H extends FluentHook<O>> FluentList<E> withHook(Class<H> hook, O options) {
-        return getHookControl().withHook(hook, options);
+        return hookControl.withHook(hook, options);
     }
 
     @Override
     public FluentList<E> noHook(Class<? extends FluentHook>... hooks) {
-        return getHookControl().noHook(hooks);
+        return hookControl.noHook(hooks);
     }
 
     @Override
     public FluentList<E> noHookInstance(Class<? extends FluentHook>... hooks) {
-        return getHookControl().noHookInstance(hooks);
+        return hookControl.noHookInstance(hooks);
     }
 
     @Override
     public <R> R noHook(Function<FluentList<E>, R> function) {
-        return getHookControl().noHook(function);
+        return hookControl.noHook(function);
     }
 
     /**
      * Scrolls to first element of list
+     *
      * @return this object reference to chain methods calls
      */
     @Override
     public FluentList<E> scrollToCenter() {
-        return getJavascriptActions().scrollToCenter();
+        return javascriptActions.scrollToCenter();
     }
 
     /**
      * Scrolls to first element of list
+     *
      * @return this object reference to chain methods calls
      */
     @Override
     public FluentList<E> scrollIntoView(boolean alignWithTop) {
-        return getJavascriptActions().scrollIntoView(alignWithTop);
+        return javascriptActions.scrollIntoView(alignWithTop);
     }
 
     /**
      * Modifies attributes of first element only
+     *
      * @return this object reference to chain methods calls
      */
     @Override
     public FluentList<E> modifyAttribute(String attributeName, String attributeValue) {
-        return getJavascriptActions().modifyAttribute(attributeName, attributeValue);
+        return javascriptActions.modifyAttribute(attributeName, attributeValue);
     }
 
     /**
      * Scrolls to first element of list
+     *
      * @return this object reference to chain methods calls
      */
     @Override
     public FluentList<E> scrollIntoView() {
-        return getJavascriptActions().scrollIntoView();
+        return javascriptActions.scrollIntoView();
     }
 }
 

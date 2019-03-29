@@ -1,5 +1,7 @@
 package org.fluentlenium.core.domain;
 
+import static java.util.stream.Collectors.toList;
+
 import org.fluentlenium.core.action.FluentActions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.hook.HookControl;
@@ -56,11 +58,15 @@ public interface FluentList<E extends FluentWebElement>
      *
      * @return list of selenium elements
      */
-    List<WebElement> toElements();
+    default List<WebElement> toElements() {
+        return stream().map(FluentWebElement::getElement).collect(toList());
+    }
 
     /**
      * Click on all elements on the list
      * Only the clickable elements are clicked
+     *
+     * @return the current instance of FluentList to provide capability for chaining calls
      */
     @Override
     FluentList<E> click();
@@ -68,6 +74,8 @@ public interface FluentList<E extends FluentWebElement>
     /**
      * double click on all elements on the list
      * Only the clickable elements are clicked
+     *
+     * @return the current instance of FluentList to provide capability for chaining calls
      */
     @Override
     FluentList<E> doubleClick();
@@ -75,14 +83,18 @@ public interface FluentList<E extends FluentWebElement>
     /**
      * context click on all elements on the list
      * Only the clickable elements are clicked
+     *
+     * @return the current instance of FluentList to provide capability for chaining calls
      */
     @Override
     FluentList<E> contextClick();
 
     /**
-     * Fill  all elements on the list with the corresponding cell in the with table.
+     * Fill all elements on the list with the corresponding cell in the with array.
      * Only the visible elements are filled
-     * If there is more elements on the list than in the with table, the last element of the table is repeated
+     * If there is more elements on the list than in the with array, the last element of the table is repeated
+     *
+     * @return the current instance of FluentList to provide capability for chaining calls
      */
     @Override
     FluentList<E> write(String... with);
@@ -90,6 +102,8 @@ public interface FluentList<E extends FluentWebElement>
     /**
      * submit on all elements on the list
      * Only the visible elements are submitted
+     *
+     * @return the current instance of FluentList to provide capability for chaining calls
      */
     @Override
     FluentList<E> submit();
@@ -99,57 +113,73 @@ public interface FluentList<E extends FluentWebElement>
      *
      * @return list of string values
      */
-    List<String> values();
+    default List<String> values() {
+        return stream().map(FluentWebElement::value).collect(toList());
+    }
 
     /**
      * Return the id of elements on the list
      *
      * @return list of string values
      */
-    List<String> ids();
+    default List<String> ids() {
+        return stream().map(FluentWebElement::id).collect(toList());
+    }
 
     /**
      * Return a custom attribute of elements on the list
      *
      * @param attribute attribute name
-     * @return list of string valuess
+     * @return list of string values
      */
-    List<String> attributes(String attribute);
+    default List<String> attributes(String attribute) {
+        return stream().map(webElement -> webElement.attribute(attribute)).collect(toList());
+    }
 
     /**
      * Return the name of elements on the list
      *
      * @return list of string values
      */
-    List<String> names();
+    default List<String> names() {
+        return stream().map(FluentWebElement::name).collect(toList());
+    }
 
     /**
      * Return the Dimension of elements on the list
      *
      * @return list of Dimensions
      */
-    List<Dimension> dimensions();
+    default List<Dimension> dimensions() {
+        return stream().map(FluentWebElement::size).collect(toList());
+    }
 
     /**
      * Return the tag name of elements on the list
      *
      * @return list of string values
      */
-    List<String> tagNames();
+    default List<String> tagNames() {
+        return stream().map(FluentWebElement::tagName).collect(toList());
+    }
 
     /**
      * Return the texts of list elements
      *
      * @return list of string values
      */
-    List<String> texts();
+    default List<String> texts() {
+        return stream().map(FluentWebElement::text).collect(toList());
+    }
 
     /**
      * Return the text contents of list elements
      *
      * @return list of string values
      */
-    List<String> textContents();
+    default List<String> textContents() {
+        return stream().map(FluentWebElement::textContent).collect(toList());
+    }
 
     /**
      * find elements into the children with the corresponding filters
@@ -211,7 +241,7 @@ public interface FluentList<E extends FluentWebElement>
     void clearList();
 
     /**
-     * Wrap all underlying elements in a componen..
+     * Wrap all underlying elements in a component.
      *
      * @param componentClass component class
      * @param <T>            type of component

@@ -5,7 +5,7 @@
 
     <artifactId>fluentlenium-examples-quickstart-microsoft-browsers</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.1.2-SNAPSHOT</version>
+    <version>4.2.3-SNAPSHOT</version>
 
     <properties>
         <!-- Configure this property to latest available version -->
@@ -45,6 +45,12 @@
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-assertj</artifactId>
             <version>${fluentlenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>

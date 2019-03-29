@@ -188,6 +188,7 @@ interpolated-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 build.log
+.flattened-pom.xml
 
 *.exec
 

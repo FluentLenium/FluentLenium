@@ -16,6 +16,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
 
     @Override
     public FluentWebElementAssert isEnabled() {
+        isPresent();
         if (!actual.enabled()) {
             failWithMessage("Element in assertion is present but not enabled");
         }
@@ -24,6 +25,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
 
     @Override
     public FluentWebElementAssert isNotEnabled() {
+        isPresent();
         if (actual.enabled()) {
             failWithMessage("Element in assertion is present but enabled");
         }
@@ -32,6 +34,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
 
     @Override
     public FluentWebElementAssert isDisplayed() {
+        isPresent();
         if (!actual.displayed()) {
             failWithMessage("Element in assertion is present but not displayed");
         }
@@ -41,6 +44,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
 
     @Override
     public FluentWebElementAssert isNotDisplayed() {
+        isPresent();
         if (actual.displayed()) {
             failWithMessage("Element in assertion is present but displayed");
         }
@@ -49,6 +53,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
 
     @Override
     public FluentWebElementAssert isSelected() {
+        isPresent();
         if (!actual.selected()) {
             failWithMessage("Element in assertion is present but not selected");
         }
@@ -57,6 +62,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
 
     @Override
     public FluentWebElementAssert isNotSelected() {
+        isPresent();
         if (actual.selected()) {
             failWithMessage("Element in assertion is present but selected");
         }
@@ -65,6 +71,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
 
     @Override
     public FluentWebElementAssert isClickable() {
+        isPresent();
         if (!actual.clickable()) {
             failWithMessage("Element in assertion is present but not clickable");
         }
@@ -73,8 +80,25 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
 
     @Override
     public FluentWebElementAssert isNotClickable() {
+        isPresent();
         if (actual.clickable()) {
             failWithMessage("Element in assertion is present but clickable");
+        }
+        return this;
+    }
+
+    @Override
+    public FluentWebElementAssert isPresent() {
+        if (!actual.present()) {
+            failWithMessage("Element in assertion is not present");
+        }
+        return this;
+    }
+
+    @Override
+    public FluentWebElementAssert isNotPresent() {
+        if (actual.present()) {
+            failWithMessage("Element in assertion is present");
         }
         return this;
     }

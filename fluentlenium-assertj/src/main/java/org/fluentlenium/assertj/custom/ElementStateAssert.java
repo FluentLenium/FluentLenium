@@ -59,4 +59,18 @@ public interface ElementStateAssert {
      */
     FluentWebElementAssert isNotSelected();
 
+    /**
+     * check if the element is present
+     *
+     * @return {@code this} assertion object.
+     */
+    FluentWebElementAssert isPresent();
+
+    /**
+     * check if the element is not present
+     *
+     * @return {@code this} assertion object.
+     */
+    FluentWebElementAssert isNotPresent();
+
 }

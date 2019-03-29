@@ -6,7 +6,7 @@
 
     <artifactId>fluentlenium-examples-spring</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.1.2-SNAPSHOT</version>
+    <version>4.2.3-SNAPSHOT</version>
 
     <name>FluentLenium Examples Spring</name>
 
@@ -97,6 +97,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

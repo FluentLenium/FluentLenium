@@ -47,7 +47,7 @@ class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
     void checkIndexWorks() {
         goTo(DEFAULT_URL);
         FluentWebElement element = find(withClass("small")).index(1);
-        assertThat(element.loaded()).isFalse();
+        assertThat(element.loaded()).isTrue();
         assertThat(element.id()).isEqualTo("id2");
     }
 

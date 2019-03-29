@@ -16,6 +16,9 @@ class IsAtTest extends IntegrationFluentTest {
     private PageIsAtParameter pageOkParameter;
 
     @Page
+    private PageIsAtMultipleParameters pageIsAtMultipleParameters;
+
+    @Page
     private PageIsNotAt pageFail;
 
     @Test
@@ -32,9 +35,42 @@ class IsAtTest extends IntegrationFluentTest {
     }
 
     @Test
-    void testIsAtParameters() {
-        pageOkParameter.go("html");
-        pageOkParameter.isAt("html");
+    void testIsAtParametersPositive() {
+        String parameter = "html";
+        pageOkParameter.go(parameter);
+        pageOkParameter.isAt(parameter);
+    }
+
+    @Test
+    void testIsAtParametersNegative() {
+        String parameter = "html";
+        pageOkParameter.go(parameter);
+        pageOk.go();
+        assertThatThrownBy(() -> pageOkParameter.isAt(parameter))
+                .isInstanceOf(AssertionError.class);
+    }
+
+    @Test
+    void testIsAtParametersQuantifiersPositive() {
+        String parameter = "+X2H2KPV_1a=FX2?U-8GJL-RSVA-VRIT*-EA1U#";
+        pageOkParameter.go(parameter);
+        pageOkParameter.isAt(parameter);
+    }
+
+    @Test
+    void testIsAtParametersQuantifiersNegative() {
+        String parameter = "?X2H2KPV_1a=FX2U-8GJL-RSVA-VRIT-EA1U#";
+        pageOkParameter.go(parameter);
+        pageOk.go();
+
+        assertThatThrownBy(() -> pageOkParameter.isAt(parameter))
+                .isInstanceOf(AssertionError.class);
+    }
+
+    @Test
+    void testIsAtMultipleParametersPositive() {
+        pageIsAtMultipleParameters.go("?X2H2KPV_1a=FX2U-8GJL-RSVA-VRIT-EA1U#", "String", "2");
+        pageIsAtMultipleParameters.isAt("?X2H2KPV_1a=FX2U-8GJL-RSVA-VRIT-EA1U#", "String", "2");
     }
 
     @FindBy(css = "#oneline")
@@ -49,7 +85,18 @@ class IsAtTest extends IntegrationFluentTest {
     public static class PageIsAtParameter extends FluentPage {
         @Override
         public String getUrl() {
-            return IntegrationFluentTest.DEFAULT_URL.replace(".html", ".{extension}");
+            return IntegrationFluentTest.DEFAULT_URL.replace("-tests", "{extension}");
+        }
+    }
+
+    @FindBy(css = "#oneline")
+    public static class PageIsAtMultipleParameters extends FluentPage {
+        @Override
+        public String getUrl() {
+            return IntegrationFluentTest.DEFAULT_URL
+                    .replace("-tests", "{?/extension1}")
+                    .replace("target", "{extension2}")
+                    .replace("index", "{extension3}");
         }
     }
 

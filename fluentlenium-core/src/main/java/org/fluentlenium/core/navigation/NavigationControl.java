@@ -33,23 +33,22 @@ public interface NavigationControl {
     /**
      * Open the url page in a new tab
      *
-     * @param url the url of the page to
+     * @param url the url of the page
      */
     void goToInNewTab(String url);
 
     /**
-     * Switch to the first selected Element (if element is null or not an iframe, or haven't an id then
+     * Switch to the first selected Element (if element is null or not an iframe, or doesn't have an id then
      * switch to the default)
      *
-     * @param elements fluent web element
+     * @param elements fluent list of fluent web elements
      */
     void switchTo(FluentList<? extends FluentWebElement> elements);
 
     /**
-     * Switch to the selected Element (if element is null or not an iframe, or haven't an id then
-     * switch to the default)
+     * Switch to the selected Element (if element is null or not an iframe, or doesn't have an id then switch to the default)
      *
-     * @param element fluent web element
+     * @param element fluent web element to switch to
      */
     void switchTo(FluentWebElement element);
 

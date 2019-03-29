@@ -6,7 +6,9 @@ import org.openqa.selenium.WebDriver;
 /**
  * A registry of {@link WebDriverFactory}.
  * <p>
- * Supported drivers are "firefox", "chrome", "ie", "htmlunit", or any class name implementing {@link WebDriver}.
+ * For supported webdrivers, see {@link ConfigurationProperties#getWebDriver()}.
+ *
+ * @see DefaultWebDriverFactories
  */
 public enum WebDrivers {
     /**

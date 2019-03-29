@@ -60,15 +60,11 @@ class Page2DynamicP1 extends FluentPage {
     }
 
     @Override
-    protected void isAtUsingUrl(String urlTemplate) {
+    public void isAtUsingUrl(String urlTemplate) {
         //overridden to skip URL check because PageUrl is not able to get local file path relatively
     }
 }
 
-@PageUrl(file = "page2url.html", value = "?param1={param1}&param2={param2}", isLocalFile = true)
+@PageUrl(file = "page2url.html", value = "?param1={param1}&param2={param2}")
 class Page2DynamicP2P1 extends FluentPage {
-    @Override
-    protected void isAtUsingUrl(String urlTemplate) {
-        //overridden to skip URL check because PageUrl is not able to get local file path relatively
-    }
 }

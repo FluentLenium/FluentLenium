@@ -1,6 +1,7 @@
 package org.fluentlenium.adapter.cucumber;
 
 import cucumber.api.Scenario;
+import org.fluentlenium.utils.SeleniumVersionChecker;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.FluentTestRunnerAdapter;
 import org.fluentlenium.adapter.SharedMutator;
@@ -53,14 +54,8 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * @param scenario Cucumber scenario
      */
     public void before(Scenario scenario) {
+        SeleniumVersionChecker.checkSeleniumVersion();
         starting(scenario.getName());
-    }
-
-    /**
-     * Initialization of FluentCucumberTest adapter
-     */
-    void start() {
-        starting();
     }
 
     /**
@@ -73,16 +68,5 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
             failed(scenario.getName());
         }
         finished(scenario.getName());
-    }
-
-    /**
-     * Stopping of FluentCucumberTest adapter
-     */
-    void finish() {
-//        TODO find way to pass Scenario or just status of test( if it fails)
-//        if (isFailed()) {
-//            failed();
-//        }
-        finished();
     }
 }

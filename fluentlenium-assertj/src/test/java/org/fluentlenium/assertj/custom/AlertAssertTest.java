@@ -2,11 +2,11 @@ package org.fluentlenium.assertj.custom;
 
 import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.core.alert.AlertImpl;
-import org.junit.Before;
-import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.NoAlertPresentException;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.doThrow;
@@ -19,7 +19,7 @@ public class AlertAssertTest {
     private AlertImpl alert;
     private AlertAssert alertAssert;
 
-    @Before
+    @BeforeMethod
     public void before() {
         MockitoAnnotations.initMocks(this);
         alertAssert = FluentLeniumAssertions.assertThat(alert);

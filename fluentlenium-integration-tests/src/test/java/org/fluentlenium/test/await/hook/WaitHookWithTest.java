@@ -10,7 +10,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class WaitHookWithTest extends IntegrationFluentTest {
 
     @Test
-    void testWaiting() {
+    void testWaitingEl() {
+        goTo(JAVASCRIPT_URL);
+        el("#newField").withHook(WaitHook.class).click();
+    }
+
+    @Test
+    void testWaitingFind() {
         goTo(JAVASCRIPT_URL);
         find("#newField").withHook(WaitHook.class).click();
     }
@@ -18,7 +24,7 @@ class WaitHookWithTest extends IntegrationFluentTest {
     @Test
     void testWaitingNotFound() {
         goTo(JAVASCRIPT_URL);
-        assertThatThrownBy(() -> find("#anotherField").withHook(WaitHook.class).click())
+        assertThatThrownBy(() -> el("#anotherField").withHook(WaitHook.class).click())
                 .isExactlyInstanceOf(TimeoutException.class)
                 .hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector: #anotherField");
 

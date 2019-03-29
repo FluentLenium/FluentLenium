@@ -19,16 +19,13 @@ class AnnotationGetScreenshotAsListener implements GetScreenshotAsListener, List
     /**
      * Creates a new GetScreenshotAs annotation listener.
      *
-     * @param method         method
-     * @param container      container
-     * @param annotationName annotation name
-     * @param priority       listener priority
+     * @param listenerContext the listener context
      */
-    AnnotationGetScreenshotAsListener(Method method, Object container, String annotationName, int priority) {
-        this.method = method;
-        this.container = container;
-        this.annotationName = annotationName;
-        this.priority = priority;
+    AnnotationGetScreenshotAsListener(ListenerContext listenerContext) {
+        this.method = listenerContext.getMethod();
+        this.container = listenerContext.getContainer();
+        this.annotationName = listenerContext.getAnnotationName();
+        this.priority = listenerContext.getPriority();
     }
 
     @Override
@@ -55,7 +52,7 @@ class AnnotationGetScreenshotAsListener implements GetScreenshotAsListener, List
      * Get a function that retrieves argument value based on argument class.
      *
      * @param outputType output type
-     * @param o object
+     * @param o          object
      * @return function returning argument value from argument class
      */
     protected Function<Class<?>, Object> getArgsFunction(OutputType outputType, Object o) {

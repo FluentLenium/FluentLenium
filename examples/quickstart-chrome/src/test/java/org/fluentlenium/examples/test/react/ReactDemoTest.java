@@ -39,4 +39,16 @@ public class ReactDemoTest extends AbstractChromeTest {
         assertThat(reactDemoPage.getConfirmEmailInput()).hasValue("");
     }
 
+    @Test
+    public void verifyPageAssertions() {
+        assertThat(reactDemoPage).hasTitle("MobX React Form");
+        assertThat(reactDemoPage).hasPageSourceContaining("light-red");
+        assertThat(reactDemoPage).hasElements($("button"));
+        assertThat(reactDemoPage).hasElement(el("[name=email]"));
+        assertThat(reactDemoPage).hasElementDisplayed(el("[name=email]"));
+        assertThat(reactDemoPage).hasExpectedElements();
+        assertThat(reactDemoPage).hasExpectedUrl();
+        assertThat(reactDemoPage).hasUrl("https://foxhound87.github.io/mobx-react-form-demo/demo");
+    }
+
 }

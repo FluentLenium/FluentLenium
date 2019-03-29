@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>size change page</title>
+    <script lang="javascript">
+        function enableButton() {
+            document.getElementById("first").removeAttribute("disabled");
+        }
+    </script>
+</head>
+<body>
+<script lang="javascript">
+    window.setTimeout(enableButton, 1000);
+</script>
+
+<div class="container2">
+    <button onclick="location.href='click.html'"
+            type="button" id="first" disabled="disabled">Click Me!</button>
+</div>
+<div class="container2">
+    <button onclick="location.href='click.html'"
+            type="button" id="second" disabled="disabled">Click Me!</button>
+</div>
+</body>
+</html>

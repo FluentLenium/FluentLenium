@@ -5,7 +5,7 @@
 
     <artifactId>fluentlenium-examples-quickstart-firefox</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.1.2-SNAPSHOT</version>
+    <version>4.2.3-SNAPSHOT</version>
 
     <properties>
         <!-- Configure this property to latest available version -->
@@ -47,9 +47,15 @@
             <version>${fluentlenium.version}</version>
         </dependency>
         <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.3.2</version>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.4.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>

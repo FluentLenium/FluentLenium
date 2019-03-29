@@ -64,6 +64,16 @@ public class MyPage extends FluentPage {
 }
 ```
 
+If you are creating a page object class for something that doesn't have URL, e.g. a component of a page, the class won't have the `@PageUrl` annotation applied,
+thus also doesn't need to extend `FluentPage`, but the `@Find...` annotated fields in it will be initialized regardless when injecting them using `@Page`. The following construct is also valid:
+
+```java
+public class HeroImage {
+    @FindBy(css = ".hero .img")
+    public FluentWebElement heroImage; 
+}
+```
+
 It's possible to define parameters in FluentPage url using `{[?][/path/]parameter}` syntax.
 If it starts with `?`, it means that the parameter is optional. Path can be included in the braces so it
 is removed when parameter value is not defined.
@@ -79,14 +89,30 @@ public class DocumentPage extends FluentPage {
 }
 ```
 
-You can also refer to files in your `resorurces` directory by adding `isLocalFile` parameter
+You can also refer to files in your test resources directory by specifying the `file` attribute with a file name: 
 
 ```java
-@PageUrl(file = "page2url.html", value = "?param1={param1}&param2={param2}", isLocalFile = true)
+@PageUrl(file = "page2url.html", value = "?param1={param1}&param2={param2}")
 class Page2DynamicP2P1 extends FluentPage {
     @Override
     protected void isAtUsingUrl(String urlTemplate) {
         //overridden to skip URL check because PageUrl is not able to get local file path relatively
+    }
+}
+```
+
+In case you don't specify the `file` attribute but you override either `FluentPage#getUrl()` or `FluentPage#getUrl(Object...)` in a way that it retrieves a local test resource,
+you need to also override `FluentPage#isAtUsingUrl(String)` and leave its body empty to skip URL check because PageUrl is not able to get local file path relatively.
+```java
+@PageUrl(value = "?param1={param1}&param2={param2}")
+class Page2DynamicP2P1 extends FluentPage {
+    @Override
+    protected String getUrl() {
+         return someLocalResource;
+    }
+
+    @Override
+    public void isAtUsingUrl(String urlTemplate) {
     }
 }
 ```
@@ -182,7 +208,7 @@ Or using [AssertJ](https://github.com/joel-costigliola/assertj-core).
 ```java
 public void checkLoginFailed() {
     goTo(loginPage);
-    loginPage.fillAndSubmitLoginForm("login","wrongPass");
+    loginPage.fillAndSubmitLoginForm("login", "wrongPass");
     assertThat($(".error")).hasSize(1);
     assertThat(loginPage).isAt();
 }
@@ -328,6 +354,57 @@ public class LoginPage extends FluentPage {
 
 Injection is recursive, and it's possible to retrieve the parent container using ```@Parent``` annotation.
 
+### Labeling
+
+Using the `@Label` and `@LabelHint` annotations you can define a custom `toString()` representation for `FluentWebElement`s and `FluentList`s.
+
+`@Label` can be added with or without a custom value. If a value is not defined, it defaults to empty value.
+
+The purpose of `@LabelHint` is to provide additional information (kind of tags) to the `toString()` representation of the object that is annotated with it. It may be used with or without the `@Label` annotation, they don't depend on each other.
+
+Below you can find some examples of what labeling combinations will result in what toString() values.
+
+##### Label
+
+If no label value is provided it will use the class name and field name as the label.
+
+**FluentWebElement + Label without value** 
+```java
+@FindBy(css = ".hero img")
+@Label
+private FluentWebElement heroImage;
+```
+will give the following toString: *FluentWaitMessageTest.heroImage (Lazy Element)*
+
+**FluentList + Label without value**
+```java
+@FindBy(css = "img")
+@Label("pictures")
+private FluentList<FluentWebElement> images;
+```
+will give the following toString: *pictures ([])*
+
+##### LabelHint
+If the label value is defined the toString value will being with the value, and by specifying label hints, they will be list after the label value enclosed with [ and ]. 
+
+**Label + single label hint** 
+```java
+@FindBy(css = ".teaser img")
+@Label("teaser")
+@LabelHint("img")
+private FluentWebElement teaserImage;
+```
+will give the following toString: *teaser [img] (Lazy Element)*
+
+**Label + multiple label hints**
+```java
+@FindBy(css = ".banner img")
+@Label("banner")
+@LabelHint({"ad", "img"})
+private FluentList<FluentWebElement> bannerImages;
+```
+will give the following toString: *banner [ad, img] ([])*
+
 ### Components
 
 A ```Component``` is an object wrapping a ```WebElement``` instance.
@@ -377,6 +454,7 @@ public class SelectComponent {
 }
 ```
 
+Simple & working Component example can be found in our dedicated [GitHub section](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-firefox/src/test/java/org/fluentlenium/examples/test/componentexample).
 
 ## Lazy Fluent Locators
 
@@ -427,7 +505,7 @@ The default wait is 5 seconds.
 
 You can also use after `size()` : `greaterThan(int)`, `lessThan(int)`, `lessThanOrEqualTo(int)`, `greaterThanOrEqualTo(int)` , `equalTo(int)`, `notEqualTo(int)`
 
-Many others conditions like `size(3)` are availables, like `present()`, `displayed()`, `enabled()`, `text()`, `id()`, `name()`.
+Many others conditions like `size(3)` are available, like `present()`, `displayed()`, `enabled()`, `text()`, `id()`, `name()`.
 
 You can use `not()` function to negate any condition.
 

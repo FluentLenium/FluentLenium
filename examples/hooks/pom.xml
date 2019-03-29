@@ -5,7 +5,7 @@
 
     <artifactId>fluentlenium-examples-hooks</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.1.2-SNAPSHOT</version>
+    <version>4.2.3-SNAPSHOT</version>
 
     <properties>
         <!-- Configure this property to latest available version -->
@@ -57,7 +57,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>htmlunit-driver</artifactId>
-            <version>2.33.3</version>
+            <version>2.34.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

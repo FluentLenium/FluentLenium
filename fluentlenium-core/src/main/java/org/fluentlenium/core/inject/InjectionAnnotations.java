@@ -1,5 +1,7 @@
 package org.fluentlenium.core.inject;
 
+import static org.fluentlenium.utils.CollectionUtils.isList;
+
 import org.fluentlenium.core.label.FluentLabelProvider;
 import org.fluentlenium.core.page.ClassAnnotations;
 import org.fluentlenium.utils.ReflectionUtils;
@@ -9,7 +11,6 @@ import org.openqa.selenium.support.pagefactory.AbstractAnnotations;
 import org.openqa.selenium.support.pagefactory.Annotations;
 
 import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * Inspired by {@link org.openqa.selenium.support.pagefactory.Annotations}, but also supports annotations defined on
@@ -19,10 +20,6 @@ public class InjectionAnnotations extends AbstractAnnotations implements FluentL
     private final ClassAnnotations classAnnotations;
     private final Annotations fieldAnnotations;
     private final LabelAnnotations labelFieldAnnotations;
-
-    private static boolean isList(Field field) {
-        return List.class.isAssignableFrom(field.getType());
-    }
 
     private static Class<?> getEffectiveClass(Field field) {
         if (isList(field)) {

@@ -23,7 +23,7 @@ We recommend to use AssertJ because we extend it with FluentWebElement and Fluen
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>4.1.1</version>
+    <version>4.2.2</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -58,7 +58,7 @@ We assume you would like to use Junit assertions together with Junit test runner
 goTo("http://mywebpage/");
 $("#firstName").fill().with("toto");
 $("#create-button").click();
-assertEqual("Hello toto",window().title());
+assertEqual("Hello toto", window().title());
 ```
 
 ## Hamcrest
@@ -85,6 +85,6 @@ import static org.junit.Assert.assertThat;
 goTo("http://mywebpage/");
 $("#firstName").fill().with("toto");
 $("#create-button").click();
-assertThat(window().title(),equalTo("Hello toto"));
+assertThat(window().title(), equalTo("Hello toto"));
 ```
 

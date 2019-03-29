@@ -13,7 +13,7 @@ import java.util.function.Supplier;
  * <p>
  * You should extends this class to implements your own hook.
  *
- * @param <T>
+ * @param <T> object
  * @see #getFluentWebElement()
  */
 public class BaseFluentHook<T> extends BaseHook<T> {

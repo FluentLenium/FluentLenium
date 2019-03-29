@@ -1,9 +1,9 @@
 package org.fluentlenium.adapter.cucumber;
 
+import org.fluentlenium.adapter.DefaultFluentControlContainer;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.SharedMutator;
-import org.fluentlenium.adapter.ThreadLocalFluentControlContainer;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.inject.DefaultContainerInstantiator;
@@ -26,12 +26,19 @@ public enum FluentTestContainer {
      */
     FLUENT_TEST;
 
-    private FluentAdapter fluentAdapter;
-    private FluentControlContainer controlContainer;
-    private SharedMutator sharedMutator;
-    private FluentInjector injector;
+    private ThreadLocal<FluentAdapter> fluentAdapter;
+    private ThreadLocal<FluentControlContainer> controlContainer;
+    private ThreadLocal<SharedMutator> sharedMutator;
+    private ThreadLocal<FluentInjector> injector;
 
     private static Class<?> configClass;
+
+    FluentTestContainer() {
+        fluentAdapter = new ThreadLocal<>();
+        controlContainer = new ThreadLocal<>();
+        sharedMutator = new ThreadLocal<>();
+        injector = new ThreadLocal<>();
+    }
 
     /**
      * Returns single instance of adapter across all Cucumber steps.
@@ -39,30 +46,31 @@ public enum FluentTestContainer {
      * @return instance of fluent adapter
      */
     public FluentAdapter instance() {
-        if (isNull(fluentAdapter)) {
-            controlContainer = new ThreadLocalFluentControlContainer();
-            sharedMutator = new FluentCucumberSharedMutator();
+        if (isNull(fluentAdapter.get())) {
+            controlContainer.set(new DefaultFluentControlContainer());
+            sharedMutator.set(new FluentCucumberSharedMutator());
 
             if (nonNull(configClass)) {
-                fluentAdapter = new FluentCucumberTest(controlContainer, configClass, sharedMutator);
+                fluentAdapter.set(new FluentCucumberTest(controlContainer.get(), configClass, sharedMutator.get()));
             } else {
-                fluentAdapter = new FluentCucumberTest(controlContainer, sharedMutator);
+                fluentAdapter.set(new FluentCucumberTest(controlContainer.get(), sharedMutator.get()));
             }
-            injector = new FluentInjector(fluentAdapter, null,
-                    new ComponentsManager(fluentAdapter), new DefaultContainerInstantiator(fluentAdapter));
+            injector.set(new FluentInjector(fluentAdapter.get(), null,
+                    new ComponentsManager(fluentAdapter.get()),
+                    new DefaultContainerInstantiator(fluentAdapter.get())));
         }
-        return fluentAdapter;
+        return fluentAdapter.get();
     }
 
     /**
      * Reset instance of FluentAdapter stored in container.
      */
     public void reset() {
-        sharedMutator = null;
-        controlContainer = null;
-        injector = null;
-        fluentAdapter = null;
+        sharedMutator.remove();
+        controlContainer.remove();
+        injector.remove();
         configClass = null;
+        fluentAdapter.remove();
     }
 
     /**
@@ -71,10 +79,10 @@ public enum FluentTestContainer {
      * @return control container instance.
      */
     protected FluentControlContainer getControlContainer() {
-        if (fluentAdapter == null) {
+        if (fluentAdapter.get() == null) {
             instance();
         }
-        return controlContainer;
+        return controlContainer.get();
     }
 
     /**
@@ -82,7 +90,7 @@ public enum FluentTestContainer {
      *
      * @param clazz class annotated with @RunWith(FluentCucumber.class)
      */
-    protected static void setConfigClass(Class clazz) {
+    public static void setConfigClass(Class clazz) {
         configClass = clazz;
     }
 
@@ -92,22 +100,16 @@ public enum FluentTestContainer {
      * @return SharedMutator instance
      */
     protected SharedMutator getSharedMutator() {
-        if (sharedMutator == null) {
-            instance();
-        }
-        return sharedMutator;
+        return sharedMutator.get();
     }
 
     /**
-     * Injector used in {@link FluentObjectFactory} for creating instances
+     * Injector used in FluentObjectFactory for creating instances
      *
      * @return fluent injector without loaded full FluentControl context
      */
-    protected FluentInjector injector() {
-        if (injector == null) {
-            instance();
-        }
-        return injector;
+    public FluentInjector injector() {
+        return injector.get();
     }
 
     /**
@@ -121,7 +123,7 @@ public enum FluentTestContainer {
                 .filter(field -> field.isAnnotationPresent(Page.class))
                 .forEach(field -> {
                     try {
-                        Object instance = injector.newInstance(field.getType());
+                        Object instance = injector.get().newInstance(field.getType());
                         field.setAccessible(true);
                         field.set(obj, instance);
                         field.setAccessible(false);
@@ -129,21 +131,5 @@ public enum FluentTestContainer {
                         e.printStackTrace();
                     }
                 });
-    }
-
-    /**
-     * Initialization of FluentControl and WebDriver. Using as substitute of
-     * alternatives.
-     */
-    public void before() {
-        ((FluentCucumberTest) fluentAdapter).start();
-    }
-
-    /**
-     * Releasing of FluentControl and WebDriver. Using as substitute of
-     * alternatives.
-     */
-    public void after() {
-        ((FluentCucumberTest) fluentAdapter).finish();
     }
 }

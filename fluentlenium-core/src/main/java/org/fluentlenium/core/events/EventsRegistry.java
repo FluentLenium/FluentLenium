@@ -25,65 +25,65 @@ public class EventsRegistry implements WrapsDriver { // NOPMD TooManyFields
 
     private final DefaultComponentInstantiator instantiator;
 
-    /* default */ final List<NavigateToListener> beforeNavigateTo = new ArrayList<>();
+    public final List<NavigateToListener> beforeNavigateTo = new ArrayList<>();
 
-    /* default */ final List<NavigateToListener> afterNavigateTo = new ArrayList<>();
+    public final List<NavigateToListener> afterNavigateTo = new ArrayList<>();
 
-    /* default */ final List<NavigateListener> beforeNavigateBack = new ArrayList<>();
+    public final List<NavigateListener> beforeNavigateBack = new ArrayList<>();
 
-    /* default */ final List<NavigateListener> afterNavigateBack = new ArrayList<>();
+    public final List<NavigateListener> afterNavigateBack = new ArrayList<>();
 
-    /* default */ final List<NavigateListener> beforeNavigateForward = new ArrayList<>();
+    public final List<NavigateListener> beforeNavigateForward = new ArrayList<>();
 
-    /* default */ final List<NavigateListener> afterNavigateForward = new ArrayList<>();
+    public final List<NavigateListener> afterNavigateForward = new ArrayList<>();
 
-    /* default */ final List<NavigateAllListener> beforeNavigate = new ArrayList<>();
+    public final List<NavigateAllListener> beforeNavigate = new ArrayList<>();
 
-    /* default */ final List<NavigateAllListener> afterNavigate = new ArrayList<>();
+    public final List<NavigateAllListener> afterNavigate = new ArrayList<>();
 
-    /* default */ final List<NavigateListener> beforeNavigateRefresh = new ArrayList<>();
+    public final List<NavigateListener> beforeNavigateRefresh = new ArrayList<>();
 
-    /* default */ final List<NavigateListener> afterNavigateRefresh = new ArrayList<>();
+    public final List<NavigateListener> afterNavigateRefresh = new ArrayList<>();
 
-    /* default */ final List<FindByListener> beforeFindBy = new ArrayList<>();
+    public final List<FindByListener> beforeFindBy = new ArrayList<>();
 
-    /* default */ final List<FindByListener> afterFindBy = new ArrayList<>();
+    public final List<FindByListener> afterFindBy = new ArrayList<>();
 
-    /* default */ final List<ElementListener> beforeClickOn = new ArrayList<>();
+    public final List<ElementListener> beforeClickOn = new ArrayList<>();
 
-    /* default */ final List<ElementListener> afterClickOn = new ArrayList<>();
+    public final List<ElementListener> afterClickOn = new ArrayList<>();
 
-    /* default */ final List<ElementListener> beforeGetText = new ArrayList<>();
+    public final List<ElementListener> beforeGetText = new ArrayList<>();
 
-    /* default */ final List<ElementListener> afterGetText = new ArrayList<>();
+    public final List<ElementListener> afterGetText = new ArrayList<>();
 
-    /* default */ final List<ElementListener> beforeChangeValueOf = new ArrayList<>();
+    public final List<ElementListener> beforeChangeValueOf = new ArrayList<>();
 
-    /* default */ final List<ElementListener> afterChangeValueOf = new ArrayList<>();
+    public final List<ElementListener> afterChangeValueOf = new ArrayList<>();
 
-    /* default */ final List<ScriptListener> beforeScript = new ArrayList<>();
+    public final List<ScriptListener> beforeScript = new ArrayList<>();
 
-    /* default */ final List<ScriptListener> afterScript = new ArrayList<>();
+    public final List<ScriptListener> afterScript = new ArrayList<>();
 
-    /* default */ final List<AlertListener> beforeAlertAccept = new ArrayList<>();
+    public final List<AlertListener> beforeAlertAccept = new ArrayList<>();
 
-    /* default */ final List<AlertListener> afterAlertAccept = new ArrayList<>();
+    public final List<AlertListener> afterAlertAccept = new ArrayList<>();
 
-    /* default */ final List<AlertListener> beforeAlertDismiss = new ArrayList<>();
+    public final List<AlertListener> beforeAlertDismiss = new ArrayList<>();
 
-    /* default */ final List<AlertListener> afterAlertDismiss = new ArrayList<>();
+    public final List<AlertListener> afterAlertDismiss = new ArrayList<>();
 
-    /* default */ final List<SwitchToWindowListener> beforeSwitchToWindow = new ArrayList<>();
+    public final List<SwitchToWindowListener> beforeSwitchToWindow = new ArrayList<>();
 
-    /* default */ final List<SwitchToWindowListener> afterSwitchToWindow = new ArrayList<>();
+    public final List<SwitchToWindowListener> afterSwitchToWindow = new ArrayList<>();
 
-    /* default */ final List<GetScreenshotAsListener> beforeGetScreenshotAs = new ArrayList<>();
+    public final List<GetScreenshotAsListener> beforeGetScreenshotAs = new ArrayList<>();
 
-    /* default */ final List<GetScreenshotAsListener> afterGetScreenshotAs = new ArrayList<>();
+    public final List<GetScreenshotAsListener> afterGetScreenshotAs = new ArrayList<>();
 
-    /* default */ final List<ExceptionListener> onException = new ArrayList<>();
+    public final List<ExceptionListener> onException = new ArrayList<>();
 
-    final List<List> eventLists = ImmutableList.of(
+    public final List<List> eventLists = ImmutableList.of(
             beforeNavigateTo, afterNavigateTo,
             beforeNavigateBack, afterNavigateBack,
             beforeNavigateForward, afterNavigateForward,

@@ -23,7 +23,7 @@ public class ComponentList<T> extends DelegatingList<T> implements WrapsElements
 
     private LazyComponents lazyComponents = new NotLazyComponents(); // NOPMD UnusedPrivateField
 
-    public LazyComponents getLazyComponents() {
+    private LazyComponents getLazyComponents() {
         return lazyComponents;
     }
 

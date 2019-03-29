@@ -24,14 +24,14 @@ public interface FluentListConditions extends FluentConditions {
      *
      * @param predicate    predicate to check
      * @param defaultValue default value if input is not present
-     * @return true if the predicated is verified, false otherwise
+     * @return true if the predicate is verified, false otherwise
      */
     @Message("verifies predicate {0}")
     @NotMessage("does not verify predicate {0}")
     boolean verify(Predicate<FluentWebElement> predicate, boolean defaultValue);
 
     /**
-     * Check that this element is present.
+     * Check that the currently validated element of this list is present.
      *
      * @return true if the element is present, false otherwise
      */

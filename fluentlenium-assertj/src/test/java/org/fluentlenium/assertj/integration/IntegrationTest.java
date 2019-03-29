@@ -1,25 +1,21 @@
 package org.fluentlenium.assertj.integration;
 
-import org.fluentlenium.adapter.FluentStandalone;
-import org.junit.After;
-import org.junit.Before;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import org.fluentlenium.adapter.testng.FluentTestNg;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 
-public abstract class IntegrationTest {
+public abstract class IntegrationTest extends FluentTestNg {
 
     protected static final String DEFAULT_URL = getAbsoluteUrlFromFile("index.html");
 
-    protected FluentStandalone standalone = new FluentStandalone();
-
-    @Before
-    public void before() {
-        standalone.init();
-    }
-
-    @After
-    public void quit() {
-        standalone.quit();
+    @Override
+    public WebDriver newWebDriver() {
+        HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.CHROME);
+        htmlUnitDriver.setJavascriptEnabled(true);
+        return htmlUnitDriver;
     }
 
 }

@@ -39,21 +39,21 @@ Assuming you want to use Java 11, Junit and AssertJ please add the following dep
 ```xml
 <properties>
     <!-- Configure this property with desired version version -->
-    <fluentlenium.version>4.1.1</fluentlenium.version>
-    <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
+    <fluentlenium.version>4.2.2</fluentlenium.version>
+    <!-- Make sure the selenium.version won't be overridden by another pom.xml -->
     <selenium.version>3.141.59</selenium.version>
 </properties>
 
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>4.1.1</version>
+    <version>4.2.2</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>4.1.1</version>
+    <version>4.2.2</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -65,7 +65,7 @@ Assuming you want to use Java 11, Junit and AssertJ please add the following dep
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>htmlunit-driver</artifactId>
-    <version>2.33.3</version>
+    <version>2.34.0</version>
     <scope>test</scope>
 </dependency>
 ```

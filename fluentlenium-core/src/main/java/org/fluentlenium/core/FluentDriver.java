@@ -54,7 +54,7 @@ import java.util.concurrent.TimeUnit;
  * Util Class which offers some shortcut to webdriver methods
  */
 @SuppressWarnings("PMD.GodClass")
-public class FluentDriver extends FluentControlImpl implements FluentControl { // NOPMD GodClass
+public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
     private final Configuration configuration;
 
     private final ComponentsManager componentsManager;

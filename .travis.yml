@@ -1,27 +1,41 @@
 jobs:
   include:
     - stage: test
-      name: "Java - unit & integration tests code coverage + snapshot upload"
+      name: "Java 11 - unit & integration tests code coverage + snapshot upload"
       language: java
       jdk: oraclejdk11
       script:
-        - mvn clean verify jacoco:report
-        - mvn coveralls:report
-        - if [ "$TRAVIS_BRANCH" = "develop" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_TAG" = "" ]; then mvn deploy -DskipTests --settings deploy-settings.xml; fi
+        - mvn -Pjava11 clean verify jacoco:report
+        - mvn -Pjava11 coveralls:report
+        - if [ "$TRAVIS_BRANCH" = "develop" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_TAG" = "" ]; then mvn -Pjava11 deploy -DskipTests --settings deploy-settings.xml; fi
 
     - stage: test
-      name: "Java - compile examples"
+      name: "Java 8 - unit & integration tests"
       language: java
-      jdk: oraclejdk11
+      jdk: oraclejdk8
       script:
-        - mvn -Pexamples clean compile
+        - mvn -Pjava8 clean verify
 
     - stage: test
-      name: "Java - unit & framework integration tests"
+      name: "Java 11 - unit & framework integration tests"
       language: java
       jdk: oraclejdk11
       script:
-        - mvn -Pframework-integration-tests clean test
+        - mvn -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report' clean test
+
+    - stage: test
+      name: "Java 11 - compile examples"
+      language: java
+      jdk: oraclejdk11
+      script:
+        - mvn -Pexamples,java11 clean compile
+
+    - stage: test
+      name: "Java 11 - javadoc"
+      language: java
+      jdk: oraclejdk11
+      script:
+        - mvn -Pjava11 javadoc:javadoc
 
     - stage: test
       name: "Ruby - Docs build"

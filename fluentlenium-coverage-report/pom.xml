@@ -3,11 +3,12 @@
     <parent>
         <artifactId>fluentlenium-parent</artifactId>
         <groupId>org.fluentlenium</groupId>
-        <version>4.1.2-SNAPSHOT</version>
+        <version>4.2.3-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>fluentlenium-coverage-report</artifactId>
+    <name>FluentLenium Coverage Report</name>
 
     <dependencies>
         <dependency>
@@ -58,7 +59,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.2</version>
+                <version>0.8.3</version>
                 <configuration>
                     <excludes>
                         <exclude>**com.steadystate*</exclude>

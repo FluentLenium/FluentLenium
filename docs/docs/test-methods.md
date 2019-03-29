@@ -310,15 +310,15 @@ executeScript("change();", 12L).getStringResult();
 You can take a ScreenShot and a HTML Dump of the browser.
 
 ```java
-takeScreenShot();
+takeScreenshot();
 takeHtmlDump();
 ```
 The file will be named using the current timestamp.
 You can of course specify a path and a name using:
 
 ```java
-takeScreenShot(pathAndfileName);
-takeHtmlDump(pathAndfileName);
+takeScreenshot(pathAndFileName);
+takeHtmlDump(pathAndFileName);
 ```
 
 Screenshot and HTML Dump can be automatically performed on test fail using configuration properties.

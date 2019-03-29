@@ -8,12 +8,8 @@
     <version>testing</version>
     <packaging>pom</packaging>
 
-    <prerequisites>
-        <maven>3.0</maven>
-    </prerequisites>
-
     <properties>
-        <it.project.version>4.1.2-SNAPSHOT</it.project.version>
+        <it.project.version>4.2.3-SNAPSHOT</it.project.version>
     </properties>
 
     <modules>
@@ -44,7 +40,7 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>htmlunit-driver</artifactId>
-                <version>2.33.3</version>
+                <version>2.34.0</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
@@ -99,6 +95,26 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.0.0-M2</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.5</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>

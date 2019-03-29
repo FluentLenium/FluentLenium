@@ -14,7 +14,7 @@ public class LabelAnnotations implements FluentLabelProvider {
     private String[] labelHints;
 
     /**
-     * Creates a  new label annotations object.
+     * Creates a new label annotations object.
      *
      * @param field field to parse
      */
