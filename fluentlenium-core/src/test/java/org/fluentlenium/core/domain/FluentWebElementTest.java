@@ -218,6 +218,12 @@ public class FluentWebElementTest {
     }
 
     @Test
+    public void shouldReturnFalseForDisplayedIfNoSuchElement() {
+        when(element.isDisplayed()).thenThrow(NoSuchElementException.class);
+        assertThat(fluentElement.displayed()).isFalse();
+    }
+
+    @Test
     public void testIsEnabled() {
         assertThat(fluentElement.enabled()).isFalse();
         when(element.isEnabled()).thenReturn(true);
@@ -225,10 +231,22 @@ public class FluentWebElementTest {
     }
 
     @Test
+    public void shouldReturnFalseForEnabledIfNoSuchElement() {
+        when(element.isEnabled()).thenThrow(NoSuchElementException.class);
+        assertThat(fluentElement.enabled()).isFalse();
+    }
+
+    @Test
     public void testIsSelected() {
         assertThat(fluentElement.selected()).isFalse();
         when(element.isSelected()).thenReturn(true);
         assertThat(fluentElement.selected()).isTrue();
+    }
+
+    @Test
+    public void shouldReturnFalseForSelectedIfNoSuchElement() {
+        when(element.isSelected()).thenThrow(NoSuchElementException.class);
+        assertThat(fluentElement.selected()).isFalse();
     }
 
     @Test
@@ -303,6 +321,11 @@ public class FluentWebElementTest {
         assertThatThrownBy(() -> fluentElement.el(By.cssSelector(".other")).now()).isInstanceOf(NoSuchElementException.class);
 
         assertThatThrownBy(() -> fluentElement.el().now()).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void shouldReturnOptionalIfElementIsPresent() {
+        assertThat(fluentElement.optional()).hasValue(fluentElement);
     }
 
     @Test

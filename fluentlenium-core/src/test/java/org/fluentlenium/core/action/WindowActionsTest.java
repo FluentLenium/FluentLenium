@@ -1,5 +1,6 @@
 package org.fluentlenium.core.action;
 
+import com.google.common.collect.ImmutableSet;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentDriver;
@@ -18,9 +19,6 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-
-import java.util.Arrays;
-import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -120,7 +118,7 @@ public class WindowActionsTest {
 
         WindowAction windowAction = new WindowAction(fluentDriver, instantiator, driver);
 
-        when(driver.getWindowHandles()).thenReturn(new HashSet<>(Arrays.asList(windowHandle, windowHandle2)));
+        when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2));
 
         windowAction.switchToLast();
 
@@ -135,6 +133,7 @@ public class WindowActionsTest {
         when(fluentDriver.getDriver()).thenReturn(jsDriver);
         when(jsDriver.switchTo()).thenReturn(targetLocator);
         when(jsDriver.switchTo().window(any())).thenReturn(driver);
+        when(driver.getCurrentUrl()).thenReturn("https://fluentlenium.com");
 
         String windowHandle = "WndH1";
         String windowHandle1 = "WndH2";
@@ -145,8 +144,8 @@ public class WindowActionsTest {
         FluentDriver currentFluentDriver = new FluentDriver(driver, configuration, fluentControl);
         FluentDriver fluentDriverSpied = spy(currentFluentDriver);
 
-        when(jsDriver.getWindowHandles()).thenReturn(new HashSet<>(Arrays.asList(windowHandle, windowHandle1)),
-                new HashSet<>(Arrays.asList(windowHandle, windowHandle1, windowHandle2)));
+        when(jsDriver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),
+                ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
         when(jsDriver.getWindowHandle()).thenReturn(windowHandle1, windowHandle2);
 
         WindowAction windowAction = new WindowAction(fluentDriverSpied, instantiator, jsDriver);
@@ -155,7 +154,6 @@ public class WindowActionsTest {
         verify(jsDriver, times(1)).getWindowHandle();
         verify(jsDriver, times(3)).getWindowHandles();
         verify(jsDriver, times(2)).switchTo();
-
     }
 
     @Test
@@ -178,7 +176,7 @@ public class WindowActionsTest {
     }
 
     @Test
-    public void clickAndCloseCurrentTest() throws InterruptedException {
+    public void clickAndCloseCurrentTest() {
         String windowHandle = "WndH1";
         String windowHandle2 = "WndH2";
 
@@ -186,7 +184,7 @@ public class WindowActionsTest {
         FluentWait fluentWait = mock(FluentWait.class);
         FluentWaitWindowConditions fluentWaitWindowMatcher = mock(FluentWaitWindowConditions.class);
 
-        when(driver.getWindowHandles()).thenReturn(new HashSet<>(Arrays.asList(windowHandle, windowHandle2)));
+        when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle2));
         when(fluentWaitWindowMatcher.notDisplayed()).thenReturn(true);
         when(fluentWebElement.click()).thenReturn(fluentWebElement);
         when(fluentWait.untilWindow(any())).thenReturn(fluentWaitWindowMatcher);
@@ -197,28 +195,26 @@ public class WindowActionsTest {
 
         verify(driver, times(1)).manage();
         verify(driver, times(1)).getWindowHandle();
-
     }
 
     @Test
-    public void clickAndOpenNewTest() throws InterruptedException {
+    public void clickAndOpenNewTest() {
         String windowHandle = "WndH1";
         String windowHandle1 = "WndH2";
         String windowHandle2 = "WndH3";
 
         FluentWebElement fluentWebElement = mock(FluentWebElement.class);
-        FluentWait fluentWait = mock(FluentWait.class);
-        FluentWaitWindowConditions fluentWaitWindowMatcher = mock(FluentWaitWindowConditions.class);
         Configuration configuration = mock(Configuration.class);
 
         FluentDriver currentFluentDriver = new FluentDriver(driver, configuration, fluentControl);
         FluentDriver fluentDriverSpy = spy(currentFluentDriver);
 
-        when(driver.getWindowHandles()).thenReturn(new HashSet<>(Arrays.asList(windowHandle, windowHandle1)),
-                new HashSet<>(Arrays.asList(windowHandle, windowHandle1, windowHandle2)));
+        when(driver.getWindowHandles()).thenReturn(ImmutableSet.of(windowHandle, windowHandle1),
+                ImmutableSet.of(windowHandle, windowHandle1, windowHandle2));
         when(driver.getWindowHandle()).thenReturn(windowHandle1, windowHandle2);
 
         when(fluentWebElement.click()).thenReturn(fluentWebElement);
+        when(driver.getCurrentUrl()).thenReturn("https://fluentlenium.com");
 
         WindowAction windowAction = new WindowAction(fluentDriverSpy, instantiator, driver);
         windowAction.clickAndOpenNew(fluentWebElement);

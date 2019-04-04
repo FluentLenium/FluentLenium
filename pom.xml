@@ -239,7 +239,7 @@
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.9.10</version>
+                <version>1.9.12</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -260,7 +260,7 @@
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
-                <version>4.5.7</version>
+                <version>4.5.8</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
@@ -586,7 +586,7 @@
                             <dependency>
                                 <groupId>com.puppycrawl.tools</groupId>
                                 <artifactId>checkstyle</artifactId>
-                                <version>8.18</version>
+                                <version>8.19</version>
                             </dependency>
                         </dependencies>
                         <executions>

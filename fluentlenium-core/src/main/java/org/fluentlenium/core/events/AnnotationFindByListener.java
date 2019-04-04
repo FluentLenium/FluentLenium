@@ -21,17 +21,13 @@ class AnnotationFindByListener extends AbstractAnnotationListener implements Fin
     /**
      * Creates a new find by annotation listener
      *
-     * @param method         method to call when the event occurs
-     * @param container      container to call when the event occurs
-     * @param annotationName name of the annotation
-     * @param priority       priority of this listener
-     * @param targetElement  target element
+     * @param listenerContext the listener context
      */
-    AnnotationFindByListener(Method method, Object container, String annotationName, int priority, WebElement targetElement) {
-        super(container, priority);
-        this.method = method;
-        this.annotationName = annotationName;
-        this.targetElement = targetElement;
+    AnnotationFindByListener(ListenerContext listenerContext) {
+        super(listenerContext.getContainer(), listenerContext.getPriority());
+        this.method = listenerContext.getMethod();
+        this.annotationName = listenerContext.getAnnotationName();
+        this.targetElement = listenerContext.getTargetElement();
     }
 
     /**
