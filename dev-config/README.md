@@ -1,7 +1,8 @@
 Releasing Guide
 ===============
 
-##Before release
+Before release
+---------
 
 **1. Request Sonatype access**
 
@@ -44,7 +45,8 @@ Releasing Guide
 
    `export GPG_TTY`
 
-##Release
+Release
+---------
 
 **1. Configure `settings.xml` from maven profile.**
 
@@ -98,7 +100,8 @@ Tests are ignored in second step because we don't want them to run twice
 
 - Click Close, then Refresh, then Release.
 
-##After release
+After release
+---------
 
 **1. Update FluentLenium version number in docs and examples projects**
 
