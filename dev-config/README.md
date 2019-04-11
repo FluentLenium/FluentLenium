@@ -17,23 +17,32 @@ Before release
 **2. Generate gpg key and upload to public gpg servers**
 
 - Generate new gpg key (RSA 2048)
-  [GitHub guide](https://help.github.com/en/articles/generating-a-new-gpg-key)
-  
-  `gpg --full-generate-key`
+
+  [GitHub full guide](https://help.github.com/en/articles/generating-a-new-gpg-key)
+
+```
+gpg --full-generate-key
+```
   
 - Verify keys
 
-  `gpg --list-secret-keys`
+```
+gpg --list-secret-keys
+```
   
-- Upload your key to public keyserver (ubuntu one worked for me)
+- Upload your key to public keyserver (ubuntu one works)
 
-  `gpg --keyserver keyserver.ubuntu.com --send-keys ${LONG_KEY_NUMBER_FROM_STEP_ABOVE}`
+```
+gpg --keyserver keyserver.ubuntu.com --send-keys ${LONG_KEY_NUMBER_FROM_STEP_ABOVE}
+```
 
 **3. Make sure your gpg password is correct because when not it won't be detected until `release:perform`**
 
-  [StackOverflow](https://stackoverflow.com/questions/11381123/how-to-use-gpg-command-line-to-check-passphrase-is-correct)
+  [Solution from StackOverflow](https://stackoverflow.com/questions/11381123/how-to-use-gpg-command-line-to-check-passphrase-is-correct)
 
-   `gpg --list-secret-keys echo “dummy_text” | gpg -o /dev/null --local-user ${LONG_KEY_NUMBER_FROM_STEP_ABOVE} -as - && echo "The correct passphrase was entered for this key"`
+```
+gpg --list-secret-keys echo “dummy_text” | gpg -o /dev/null --local-user ${LONG_KEY_NUMBER_FROM_STEP_ABOVE} -as - && echo "The correct passphrase was entered for this key"
+```
 
 **4. Preventing _Inappropriate ioctl for device_ issue**
 
@@ -41,9 +50,10 @@ Before release
   
   [Issue details 2](https://github.com/keybase/keybase-issues/issues/2798)
   
-   `GPG_TTY=$(tty)`
-
-   `export GPG_TTY`
+```
+GPG_TTY=$(tty)
+export GPG_TTY
+```
 
 Release
 ---------
@@ -70,25 +80,23 @@ Release
 
 **2. Java 11 release**
 
-   `git checkout develop`
-
-   `export JAVA_HOME=/usr/libexec/java_home -v 11`
-   
-   `mvn -Pjava11 release:prepare -Dresume=false`
-
-   `mvn -Pjava11 release:perform -s settings.xml -Darguments="-DskipTests=true"`
+```
+git checkout develop
+export JAVA_HOME=/usr/libexec/java_home -v 11
+mvn -Pjava11 release:prepare -Dresume=false
+mvn -Pjava11 release:perform -s settings.xml -Darguments="-DskipTests=true"
+```
 
 Tests are ignored in second step because we don't want them to run twice
 
 **3. Java 8 release**
 
-   `git checkout -v java8/v3.8.1`
-   
-   `export JAVA_HOME=/usr/libexec/java_home -v 1.8`
-   
-   `mvn -Pjava8 release:prepare -Dresume=false`
-   
-   `mvn -Pjava8 release:perform -s settings.xml -Darguments="-DskipTests=true"`
+```
+git checkout -v java8/v3.8.1`
+export JAVA_HOME=/usr/libexec/java_home -v 1.8
+mvn -Pjava8 release:prepare -Dresume=false
+mvn -Pjava8 release:perform -s settings.xml -Darguments="-DskipTests=true"
+```
 
 Tests are ignored in second step because we don't want them to run twice
 
