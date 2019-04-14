@@ -87,7 +87,7 @@ Selenium has a driver wrapper named `EventFiringWebDriver` that is able to gener
 
 FluentLenium brings Events Annotations and a Listener API to register those listeners easily.
 
-## Annotations
+### Annotations
 
 You can use annotations from `core.events.annotations` package to register any method as an event
 listener.
@@ -136,9 +136,40 @@ public class SomeTest extends FluentTest {
 
 ```
 
-## Listener API
+Annotations may be also be configured with a priority, so that annotations with higher priority value will be executed first.
 
-You can also register events through API using `events` method.
+```java
+public class SomeComponent {
+    private WebElement element;
+
+    public SomeComponent(WebElement element) {
+        this.element = element;
+    }
+
+    public SomeComponent click() {
+        element.click();
+        return this;
+    }
+
+    @AfterClickOn(10)
+    private void afterClickOnHigher() {
+        System.out.println("Element Clicked, with higher priority: " + this);
+    }
+    
+    @AfterClickOn(5)
+    private void afterClickOnLower() {
+        System.out.println("Element Clicked, with lower priority: " + this);
+    }
+}
+```
+
+The default priority value of all event annotations are 0.
+
+Using event annotations events will be registered with a default annotation based listener implementation which cannot be overridden.
+
+### Listener API
+
+You can also register events through API using `events()` method.
 
 ```java
 events().afterClickOn(new ElementListener() {
@@ -151,13 +182,37 @@ events().afterClickOn(new ElementListener() {
 el("button").click(); // This will call the listener.
 ```
 
-This integrates nicely with Java 8 lambdas
+This integrates nicely with Java 8 lambdas:
 
 ```java
 events().afterClickOn((element, driver) -> System.out.println("Element Clicked: " + element));
 
 el("button").click(); // This will call the listener.
 ```
+
+The `events()` method provides a more flexible way of registering listeners as it allows one to register their custom listener implementations, and the examples above demonstrate it well.
+
+To also be able to handle the priority of these custom listeners one must also implement the `ListenerPriority` interface, so that listeners get sorted by their priority.
+
+```java
+private final class AfterClick implements ListenerPriority, ElementListener {
+
+    @Override
+    public void on(FluentWebElement element, WebDriver driver) {
+        System.out.println("A really awesome click happened!");
+    }
+
+    @Override
+    public int getPriority() {
+        return 1;
+    }
+}
+```
+
+### Combining the two solutions
+
+Annotation and Listener API based listeners can be used along with each other. If you define priorities for the event annotations, and you don't implement `ListenerPriority` in case of custom listeners,
+the custom listeners will be executed last among the registered listeners.
 
 ## Hooks
 
@@ -364,6 +419,3 @@ Entering an input value in prompt:
 ```java
 alert().prompt("FluentLenium")
 ```
-
-
-
