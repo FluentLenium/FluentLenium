@@ -100,6 +100,7 @@ To help you navigate through FluentLenium, here's a short summary about its modu
 - **fluentlenium-assertj**: Provides [AssertJ](http://joel-costigliola.github.io/assertj/) assertions for FluentLenium specific objects like `FluentWebElement`, `FluentList` and `FluentPage`.
 - **fluentlenium-integration-tests**: Integration tests for validating the correctness of FluentLenium features internally.
 - **fluentlenium-coverage-report**: Creates jacoco test coverage report.
+- **fluentlenium-ide-support**: Though not an actual Maven module, it contains resources to make working with FluentLenium in the IDE easier.
 
 # Contact Us
 If you have any comment, remark or issue, please open an issue on
