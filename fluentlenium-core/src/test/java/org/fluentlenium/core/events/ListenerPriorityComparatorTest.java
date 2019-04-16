@@ -10,13 +10,33 @@ import org.junit.Test;
 public class ListenerPriorityComparatorTest {
 
     @Test
-    public void shouldCompareCustomAndDefaultPriorities() {
+    public void shouldReturnPositiveNumberWhenSecondArgumentPriorityIsGreaterThanFirst() {
         String aString = "a_string";
         TestListener testListener = new TestListener();
 
         ListenerPriorityComparator comparator = new ListenerPriorityComparator();
 
         assertThat(comparator.compare(aString, testListener)).isEqualTo(1);
+    }
+
+    @Test
+    public void shouldReturnNegativeNumberWhenFirstArgumentPriorityIsGreaterThanSecond() {
+        String aString = "a_string";
+        TestListener testListener = new TestListener();
+
+        ListenerPriorityComparator comparator = new ListenerPriorityComparator();
+
+        assertThat(comparator.compare(testListener, aString)).isEqualTo(-1);
+    }
+
+    @Test
+    public void shouldReturnZeroArgumentsPriorityEqual() {
+        String aString = "a_string";
+        String anotherString = "another_string";
+
+        ListenerPriorityComparator comparator = new ListenerPriorityComparator();
+
+        assertThat(comparator.compare(aString, anotherString)).isEqualTo(0);
     }
 
     private static final class TestListener implements ListenerPriority {
