@@ -6,19 +6,17 @@ import java.util.Comparator;
  * Compare listeners implementing {@link ListenerPriority}.
  */
 public class ListenerPriorityComparator implements Comparator<Object> {
+
     @Override
     public int compare(Object o1, Object o2) {
-        int priority1 = getPriority(o1);
-        int priority2 = getPriority(o2);
-
-        return Integer.compare(priority2, priority1);
+        return Integer.compare(getPriority(o2), getPriority(o1));
     }
 
     /**
      * Get the priority of the object.
      *
-     * @param obj object to get the priority
-     * @return priority value
+     * @param obj object to get the priority of
+     * @return priority value if the argument implements {@link ListenerPriority}, otherwise 0
      */
     protected int getPriority(Object obj) {
         if (obj instanceof ListenerPriority) {
