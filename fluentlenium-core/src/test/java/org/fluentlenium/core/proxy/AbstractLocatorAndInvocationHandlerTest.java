@@ -33,6 +33,8 @@ public class AbstractLocatorAndInvocationHandlerTest {
         invocationHandler = spy(new TestLocatorAndInvocationHandler(locator));
     }
 
+    //toString
+
     @Test
     public void testLoadedToString() throws Throwable {
         WebElement proxy = mock(WebElement.class);
@@ -52,6 +54,8 @@ public class AbstractLocatorAndInvocationHandlerTest {
 
         assertThat(invocationHandler.invoke(proxy, toString, new Object[0])).asString().isEqualTo("locator (Lazy Element)");
     }
+
+    //loaded equals
 
     @Test
     @Ignore("Needs a way to mock LocatorProxies.getLocatorHandler().")
@@ -90,10 +94,14 @@ public class AbstractLocatorAndInvocationHandlerTest {
         assertThat(invocationHandler.invoke(proxy, hashCode, new Object[0])).isEqualTo(proxy.hashCode());
     }
 
+    //loaded other than equals
+
     @Test
     @Ignore("Needs a way to mock LocatorProxies.getLocatorHandler().")
     public void testLoadedOtherThanEqualsWithoutRetry() {
     }
+
+    //unloaded equals
 
     @Test
     @Ignore("Needs a way to mock LocatorProxies.getLocatorHandler().")
@@ -123,6 +131,8 @@ public class AbstractLocatorAndInvocationHandlerTest {
         assertThat(invocationHandler.invoke(proxy, equals, args)).isEqualTo(true);
     }
 
+    //unloaded hashcode
+
     @Test
     public void testNotLoadedHashCode() throws Throwable {
         WebElement proxy = mock(WebElement.class);
@@ -132,6 +142,8 @@ public class AbstractLocatorAndInvocationHandlerTest {
 
         assertThat(invocationHandler.invoke(proxy, hashCode, new Object[0])).isEqualTo(expectedHashCode);
     }
+
+    //unloaded other than hashcode
 
     @Test
     public void testNotLoadedOtherThanHashCodeWithRetry() throws Throwable {

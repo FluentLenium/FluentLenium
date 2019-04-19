@@ -171,8 +171,7 @@ public class AbstractLocatorHandlerTest {
 
     @Test
     public void shouldReturnFalseInCaseOfTimeoutException() {
-        ElementLocator elementLocator = mock(ElementLocator.class);
-        TestLocatorHandler handler = spy(new TestLocatorHandler(elementLocator));
+        TestLocatorHandler handler = spy(new TestLocatorHandler(mock(ElementLocator.class)));
 
         doThrow(TimeoutException.class).when(handler).now();
 
@@ -181,8 +180,7 @@ public class AbstractLocatorHandlerTest {
 
     @Test
     public void shouldReturnFalseInCaseOfNoSuchElementException() {
-        ElementLocator elementLocator = mock(ElementLocator.class);
-        TestLocatorHandler handler = spy(new TestLocatorHandler(elementLocator));
+        TestLocatorHandler handler = spy(new TestLocatorHandler(mock(ElementLocator.class)));
 
         doThrow(NoSuchElementException.class).when(handler).now();
 
@@ -191,8 +189,7 @@ public class AbstractLocatorHandlerTest {
 
     @Test
     public void shouldReturnFalseInCaseOfStaleElementReferenceException() {
-        ElementLocator elementLocator = mock(ElementLocator.class);
-        TestLocatorHandler handler = spy(new TestLocatorHandler(elementLocator));
+        TestLocatorHandler handler = spy(new TestLocatorHandler(mock(ElementLocator.class)));
 
         doThrow(StaleElementReferenceException.class).when(handler).now();
 
@@ -201,8 +198,7 @@ public class AbstractLocatorHandlerTest {
 
     @Test
     public void shouldReturnAsPresentIfElementIsLoadedAndNotStale() {
-        ElementLocator elementLocator = mock(ElementLocator.class);
-        TestLocatorHandler handler = spy(new TestLocatorHandler(elementLocator));
+        TestLocatorHandler handler = spy(new TestLocatorHandler(mock(ElementLocator.class)));
 
         when(handler.loaded()).thenReturn(true);
         when(handler.isStale()).thenReturn(false);
@@ -239,7 +235,7 @@ public class AbstractLocatorHandlerTest {
     }
 
     private class TestLocatorHandler extends AbstractLocatorHandler<FluentWebElement> {
-        public TestLocatorHandler(ElementLocator locator) {
+        TestLocatorHandler(ElementLocator locator) {
             super(locator);
         }
 
