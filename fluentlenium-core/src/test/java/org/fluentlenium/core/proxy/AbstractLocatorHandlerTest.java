@@ -1,5 +1,6 @@
 package org.fluentlenium.core.proxy;
 
+import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -14,6 +15,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.hook.FluentHook;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
+import com.google.common.collect.ImmutableList;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,7 +53,7 @@ public class AbstractLocatorHandlerTest {
         HookChainBuilder hookChainBuilder = mock(HookChainBuilder.class);
         HookDefinition<?> hookDefinition1 = mock(HookDefinition.class);
         HookDefinition<?> hookDefinition2 = mock(HookDefinition.class);
-        List<HookDefinition<?>> hookDefinitions = List.of(hookDefinition1, hookDefinition2);
+        List<HookDefinition<?>> hookDefinitions = ImmutableList.of(hookDefinition1, hookDefinition2);
 
         locatorHandler.setHooks(hookChainBuilder, hookDefinitions);
 
@@ -65,7 +67,7 @@ public class AbstractLocatorHandlerTest {
     public void shouldSetHooksToNullWhenHookDefinitionsAreEmpty() {
         HookChainBuilder hookChainBuilder = mock(HookChainBuilder.class);
 
-        locatorHandler.setHooks(hookChainBuilder, List.of());
+        locatorHandler.setHooks(hookChainBuilder, emptyList());
 
         assertThat(locatorHandler.hookChainBuilder).isNull();
         assertThat(locatorHandler.hookDefinitions).isNull();
@@ -88,7 +90,7 @@ public class AbstractLocatorHandlerTest {
     @Test
     public void shouldReturnLocatorIfHooksAreEmpty() {
         HookChainBuilder hookChainBuilder = mock(HookChainBuilder.class);
-        locatorHandler.setHooks(hookChainBuilder, List.of());
+        locatorHandler.setHooks(hookChainBuilder, emptyList());
 
         assertThat(locatorHandler.getHookLocator()).isSameAs(locator);
     }
@@ -96,7 +98,7 @@ public class AbstractLocatorHandlerTest {
     @Test
     public void shouldReturnLocatorIfHooksAreNull() {
         HookChainBuilder hookChainBuilder = mock(HookChainBuilder.class);
-        locatorHandler.setHooks(hookChainBuilder, List.of());
+        locatorHandler.setHooks(hookChainBuilder, emptyList());
 
         assertThat(locatorHandler.getHookLocator()).isSameAs(locator);
     }
@@ -105,13 +107,13 @@ public class AbstractLocatorHandlerTest {
     public void shouldReturnLastHookIfHooksArePresent() {
         FluentHook fluentHook1 = mock(FluentHook.class);
         FluentHook fluentHook2 = mock(FluentHook.class);
-        List<FluentHook> hooks = List.of(fluentHook1, fluentHook2);
+        List<FluentHook> hooks = ImmutableList.of(fluentHook1, fluentHook2);
         HookChainBuilder hookChainBuilder = mock(HookChainBuilder.class);
         when(hookChainBuilder.build(any(), any(), any(), any())).thenReturn(hooks);
         HookDefinition<?> hookDefinition1 = mock(HookDefinition.class);
         HookDefinition<?> hookDefinition2 = mock(HookDefinition.class);
 
-        locatorHandler.setHooks(hookChainBuilder, List.of(hookDefinition1, hookDefinition2));
+        locatorHandler.setHooks(hookChainBuilder, ImmutableList.of(hookDefinition1, hookDefinition2));
 
         assertThat(locatorHandler.getHookLocator()).isSameAs(fluentHook2);
     }
@@ -246,7 +248,7 @@ public class AbstractLocatorHandlerTest {
 
         @Override
         protected List<WebElement> resultToList(FluentWebElement result) {
-            return List.of();
+            return emptyList();
         }
 
         @Override
