@@ -1,5 +1,8 @@
 package org.fluentlenium.core;
 
+import static org.fluentlenium.utils.Preconditions.checkArgument;
+import static org.fluentlenium.utils.Preconditions.checkState;
+
 import org.apache.commons.io.FileUtils;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.core.action.KeyboardActions;
@@ -199,12 +202,9 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
 
     @Override
     public EventsRegistry events() {
-        if (events == null) {
-            throw new IllegalStateException("An EventFiringWebDriver instance is required to use events. "
-                    + "You should set 'eventsEnabled' configuration property to 'true' "
-                    + "or override newWebDriver() to build an EventFiringWebDriver.");
-        }
-        return events;
+        return checkState(events, "An EventFiringWebDriver instance is required to use events. "
+                + "You should set 'eventsEnabled' configuration property to 'true' "
+                + "or override newWebDriver() to build an EventFiringWebDriver.");
     }
 
     @Override
@@ -272,28 +272,20 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
 
     @Override
     public <P extends FluentPage> P goTo(P page) {
-        if (page == null) {
-            throw new IllegalArgumentException("Page is mandatory");
-        }
+        checkArgument(page, "It is required to specify an instance of FluentPage for navigation.");
         page.go();
         return page;
     }
 
     @Override
     public void goTo(String url) {
-        if (url == null) {
-            throw new IllegalArgumentException("Url is mandatory");
-        }
-
+        checkArgument(url, "It is required to specify a URL to navigate to.");
         getDriver().get(buildUrl(url));
     }
 
     @Override
     public void goToInNewTab(String url) {
-        if (url == null) {
-            throw new IllegalArgumentException("Url is mandatory");
-        }
-
+        checkArgument(url, "It is required to specify a URL to navigate to (in a new tab).");
         String newTab;
         synchronized (getClass()) {
             Set<String> initialTabs = getDriver().getWindowHandles();
