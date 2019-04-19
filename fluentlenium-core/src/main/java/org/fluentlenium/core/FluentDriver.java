@@ -165,8 +165,18 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
             throw new WebDriverException("Current browser doesn't allow taking screenshot.");
         }
 
-        byte[] screenshot = prepareScreenshot();
-        persistScreenshot(fileName, screenshot);
+        persistScreenshot(fileName, prepareScreenshot());
+    }
+
+    private byte[] prepareScreenshot() {
+        byte[] screenshot;
+        try {
+            screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        } catch (UnhandledAlertException uae) {
+            ImageUtils imageUtils = new ImageUtils(getDriver());
+            screenshot = imageUtils.handleAlertAndTakeScreenshot();
+        }
+        return screenshot;
     }
 
     private void persistScreenshot(String fileName, byte[] screenshot) {
@@ -181,17 +191,6 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
         } catch (IOException e) {
             throw new RuntimeException("Error when taking the screenshot", e);
         }
-    }
-
-    private byte[] prepareScreenshot() {
-        byte[] screenshot;
-        try {
-            screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        } catch (UnhandledAlertException uae) {
-            ImageUtils imageUtils = new ImageUtils(getDriver());
-            screenshot = imageUtils.handleAlertAndTakeScreenshot();
-        }
-        return screenshot;
     }
 
     @Override
