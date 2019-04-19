@@ -173,8 +173,7 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
         try {
             screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         } catch (UnhandledAlertException uae) {
-            ImageUtils imageUtils = new ImageUtils(getDriver());
-            screenshot = imageUtils.handleAlertAndTakeScreenshot();
+            screenshot = new ImageUtils(getDriver()).handleAlertAndTakeScreenshot();
         }
         return screenshot;
     }
@@ -196,10 +195,6 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
     @Override
     public WebDriver getDriver() {
         return driver;
-    }
-
-    private Search getSearch() {
-        return search;
     }
 
     @Override
@@ -336,32 +331,32 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
 
     @Override
     public FluentList<FluentWebElement> find(String selector, SearchFilter... filters) {
-        return getSearch().find(selector, filters);
+        return search.find(selector, filters);
     }
 
     @Override
     public FluentList<FluentWebElement> find(By locator, SearchFilter... filters) {
-        return getSearch().find(locator, filters);
+        return search.find(locator, filters);
     }
 
     @Override
     public FluentList<FluentWebElement> find(SearchFilter... filters) {
-        return getSearch().find(filters);
+        return search.find(filters);
     }
 
     @Override
     public FluentList<FluentWebElement> find(List<WebElement> rawElements) {
-        return getSearch().find(rawElements);
+        return search.find(rawElements);
     }
 
     @Override
     public FluentList<FluentWebElement> $(List<WebElement> rawElements) {
-        return getSearch().$(rawElements);
+        return search.$(rawElements);
     }
 
     @Override
     public FluentWebElement el(WebElement rawElement) {
-        return getSearch().el(rawElement);
+        return search.el(rawElement);
     }
 
     @Override
