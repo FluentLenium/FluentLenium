@@ -384,4 +384,21 @@ public final class ReflectionUtils {
 
         return null;
     }
+
+    /**
+     * Get public method by name from the declaring class.
+     *
+     * @param declaringClass declaring class
+     * @param name           method name
+     * @param types          argument types
+     * @return the public method by the specified name
+     * @throws IllegalArgumentException when there is no method found with the specified name
+     */
+    public static Method getMethod(Class<?> declaringClass, String name, Class... types) {
+        try {
+            return declaringClass.getMethod(name, types);
+        } catch (NoSuchMethodException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
 }

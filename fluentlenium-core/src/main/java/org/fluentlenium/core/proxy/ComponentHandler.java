@@ -1,12 +1,13 @@
 package org.fluentlenium.core.proxy;
 
+import static org.fluentlenium.utils.ReflectionUtils.getMethod;
+
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
@@ -14,8 +15,7 @@ import java.util.List;
 /**
  * Proxy handler for {@link WebElement}.
  */
-public class ComponentHandler extends AbstractLocatorHandler<WebElement>
-        implements InvocationHandler, LocatorHandler<WebElement> {
+public class ComponentHandler extends AbstractLocatorAndInvocationHandler<WebElement> {
     private static final Method GET_WRAPPED_ELEMENT = getMethod(WrapsElement.class, "getWrappedElement");
 
     /**
@@ -32,7 +32,7 @@ public class ComponentHandler extends AbstractLocatorHandler<WebElement>
                 throw noSuchElement();
             }
             this.result = result;
-            fireProxyElementFound(this.result);
+            fireProxyElementFound(result);
         }
     }
 

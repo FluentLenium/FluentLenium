@@ -1,5 +1,7 @@
 package org.fluentlenium.core.proxy;
 
+import static org.fluentlenium.utils.ReflectionUtils.getMethod;
+
 import org.fluentlenium.core.domain.WrapsElements;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -13,7 +15,7 @@ import java.util.List;
 /**
  * Proxy handler for list of {@link WebElement}.
  */
-public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
+public class ListHandler extends AbstractLocatorAndInvocationHandler<List<WebElement>> {
     private static final Method GET_WRAPPED_ELEMENTS = getMethod(WrapsElements.class, "getWrappedElements");
 
     /**
@@ -93,7 +95,7 @@ public class ListHandler extends AbstractLocatorHandler<List<WebElement>> {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (GET_WRAPPED_ELEMENTS.equals(method)) {
-            return result == null ? proxy : getLocatorResult();
+            return loaded() ? getLocatorResult() : proxy;
         }
         return super.invoke(proxy, method, args);
     }

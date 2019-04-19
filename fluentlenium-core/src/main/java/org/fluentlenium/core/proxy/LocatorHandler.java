@@ -1,5 +1,6 @@
 package org.fluentlenium.core.proxy;
 
+import org.fluentlenium.core.domain.ElementUtils;
 import org.fluentlenium.core.hook.HookChainBuilder;
 import org.fluentlenium.core.hook.HookDefinition;
 import org.openqa.selenium.NoSuchElementException;
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @param <T> type of the result retrieved by the element locator
  */
-public interface LocatorHandler<T> {
+public interface LocatorHandler<T> extends LocatorStatusHandler {
     /**
      * Retrieve the element locator used by this proxy, without any hook applied.
      *
@@ -53,28 +54,12 @@ public interface LocatorHandler<T> {
     void setHooks(HookChainBuilder hookChainBuilder, List<HookDefinition<?>> hookDefinitions);
 
     /**
-     * Check if this handler has loaded it's result.
-     *
-     * @return true if the result is loaded, false otherwise
+     * {@inheritDoc}
      */
-    boolean loaded();
-
-    /**
-     * Reset the loaded data.
-     */
-    void reset();
-
-    /**
-     * If result is not loaded, load result immediately. If it's already loaded, it has no effect.
-     */
-    void now();
-
-    /**
-     * Check if the result is present.
-     *
-     * @return true if result is present, false otherwise
-     */
-    boolean present();
+    @Override
+    default void now() {
+        getLocatorResult();
+    }
 
     /**
      * Add a listener for this locator handler.
@@ -97,7 +82,9 @@ public interface LocatorHandler<T> {
      *
      * @return Exception with not present message
      */
-    NoSuchElementException noSuchElement();
+    default NoSuchElementException noSuchElement() {
+        return ElementUtils.noSuchElementException(getMessageContext());
+    }
 
     /**
      * Retrieve the message context from this proxy locator.
