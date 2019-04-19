@@ -43,15 +43,9 @@ public abstract class AbstractLocatorAndInvocationHandler<T> extends AbstractLoc
         if (TO_STRING.equals(method)) {
             invocationResult = proxyToString(loaded() ? (String) invoke(method, args) : null);
         } else if (loaded()) {
-            if (EQUALS.equals(method)) {
-                invocationResult = invokeEqualsWhenResultIsPresent(args[0]);
-            }
+            invocationResult = invokeEqualsOnLoadedProxy(method, args, invocationResult);
         } else {
-            if (EQUALS.equals(method)) {
-                invocationResult = invokeEqualsWhenResultIsAbsent(proxy, args);
-            } else if (HASH_CODE.equals(method)) {
-                invocationResult = HASH_CODE_SEED + locator.hashCode();
-            }
+            invocationResult = invokeMethodOnUnloadedProxy(proxy, method, args, invocationResult);
         }
 
         if (invocationResult == null) {
@@ -60,6 +54,34 @@ public abstract class AbstractLocatorAndInvocationHandler<T> extends AbstractLoc
         }
 
         return invocationResult;
+    }
+
+    private Object invokeEqualsOnLoadedProxy(Method method, Object[] args, Object invocationResult) {
+        Object result = invocationResult;
+        if (EQUALS.equals(method)) {
+            result = invokeEqualsWhenResultIsPresent(args[0]);
+        }
+        return result;
+    }
+
+    private Object invokeEqualsWhenResultIsPresent(Object arg) {
+        Object invocationResult = null;
+        LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(arg);
+        if (otherLocatorHandler != null && !otherLocatorHandler.loaded()) {
+            otherLocatorHandler.now();
+            invocationResult = otherLocatorHandler.equals(this);
+        }
+        return invocationResult;
+    }
+
+    private Object invokeMethodOnUnloadedProxy(Object proxy, Method method, Object[] args, Object invocationResult) {
+        Object result = invocationResult;
+        if (EQUALS.equals(method)) {
+            result = invokeEqualsWhenResultIsAbsent(proxy, args);
+        } else if (HASH_CODE.equals(method)) {
+            result = HASH_CODE_SEED + locator.hashCode();
+        }
+        return result;
     }
 
     private Object invokeEqualsWhenResultIsAbsent(Object proxy, Object[] args) {
@@ -71,16 +93,6 @@ public abstract class AbstractLocatorAndInvocationHandler<T> extends AbstractLoc
             } else {
                 invocationResult = args[0].equals(proxy);
             }
-        }
-        return invocationResult;
-    }
-
-    private Object invokeEqualsWhenResultIsPresent(Object arg) {
-        Object invocationResult = null;
-        LocatorHandler otherLocatorHandler = LocatorProxies.getLocatorHandler(arg);
-        if (otherLocatorHandler != null && !otherLocatorHandler.loaded()) {
-            otherLocatorHandler.now();
-            invocationResult = otherLocatorHandler.equals(this);
         }
         return invocationResult;
     }
