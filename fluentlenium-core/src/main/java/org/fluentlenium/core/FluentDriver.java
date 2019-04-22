@@ -54,7 +54,9 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Util Class which offers some shortcut to webdriver methods
+ * Offers some shortcut to WebDriver methods using a wrapped {@link WebDriver} instance.
+ *
+ * It provides methods to work with mouse, keyboard and windows.
  */
 @SuppressWarnings("PMD.GodClass")
 public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
@@ -69,6 +71,7 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
     private final MouseActions mouseActions;
     private final KeyboardActions keyboardActions;
     private final WindowAction windowAction;
+    private final FluentDriverWait driverWait;
 
     /**
      * Wrap the driver into a Fluent driver.
@@ -81,6 +84,7 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
         super(adapter);
         this.configuration = configuration;
         componentsManager = new ComponentsManager(adapter);
+        driverWait = new FluentDriverWait(configuration);
         this.driver = driver;
         search = new Search(driver, this, componentsManager, adapter);
         if (driver instanceof EventFiringWebDriver) {
@@ -224,16 +228,7 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
 
     @Override
     public FluentWait await() {
-        FluentWait fluentWait = new FluentWait(this);
-        Long atMost = configuration.getAwaitAtMost();
-        if (atMost != null) {
-            fluentWait.atMost(atMost);
-        }
-        Long pollingEvery = configuration.getAwaitPollingEvery();
-        if (pollingEvery != null) {
-            fluentWait.pollingEvery(pollingEvery);
-        }
-        return fluentWait;
+        return driverWait.await(this);
     }
 
     @Override
