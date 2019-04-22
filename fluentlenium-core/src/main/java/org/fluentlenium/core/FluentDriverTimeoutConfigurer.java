@@ -1,6 +1,7 @@
 package org.fluentlenium.core;
 
 import static java.util.Objects.requireNonNull;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 import org.fluentlenium.configuration.Configuration;
 import org.openqa.selenium.WebDriver;
@@ -32,17 +33,27 @@ public class FluentDriverTimeoutConfigurer {
      */
     public void configureDriver() {
         if (driver != null && driver.manage() != null && driver.manage().timeouts() != null) {
-            if (configuration.getPageLoadTimeout() != null) {
-                driver.manage().timeouts().pageLoadTimeout(configuration.getPageLoadTimeout(), TimeUnit.MILLISECONDS);
-            }
+            configurePageLoadTimeout();
+            configureImplicitlyWait();
+            configureScriptTimeout();
+        }
+    }
 
-            if (configuration.getImplicitlyWait() != null) {
-                driver.manage().timeouts().implicitlyWait(configuration.getImplicitlyWait(), TimeUnit.MILLISECONDS);
-            }
+    private void configurePageLoadTimeout() {
+        if (configuration.getPageLoadTimeout() != null) {
+            driver.manage().timeouts().pageLoadTimeout(configuration.getPageLoadTimeout(), MILLISECONDS);
+        }
+    }
 
-            if (configuration.getScriptTimeout() != null) {
-                driver.manage().timeouts().setScriptTimeout(configuration.getScriptTimeout(), TimeUnit.MILLISECONDS);
-            }
+    private void configureImplicitlyWait() {
+        if (configuration.getImplicitlyWait() != null) {
+            driver.manage().timeouts().implicitlyWait(configuration.getImplicitlyWait(), MILLISECONDS);
+        }
+    }
+
+    private void configureScriptTimeout() {
+        if (configuration.getScriptTimeout() != null) {
+            driver.manage().timeouts().setScriptTimeout(configuration.getScriptTimeout(), MILLISECONDS);
         }
     }
 }

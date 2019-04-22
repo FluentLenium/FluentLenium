@@ -9,7 +9,6 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.function.Supplier;
 
@@ -39,11 +38,7 @@ public class FluentDriverHtmlDumper {
     public void takeHtmlDump(String fileName, Supplier<String> htmlSupplier) {
         File destFile = null;
         try {
-            if (configuration.getHtmlDumpPath() == null) {
-                destFile = new File(fileName);
-            } else {
-                destFile = Paths.get(configuration.getHtmlDumpPath(), fileName).toFile();
-            }
+            destFile = getDestinationFile(fileName);
             FileUtils.write(destFile, htmlSupplier.get(), UTF_8);
         } catch (Exception e) {
             if (destFile == null) {
@@ -57,5 +52,15 @@ public class FluentDriverHtmlDumper {
                 throw new RuntimeException("Error when dumping HTML", e); //NOPMD PreserveStackTrace
             }
         }
+    }
+
+    private File getDestinationFile(String fileName) {
+        File destFile;
+        if (configuration.getHtmlDumpPath() == null) {
+            destFile = new File(fileName);
+        } else {
+            destFile = Paths.get(configuration.getHtmlDumpPath(), fileName).toFile();
+        }
+        return destFile;
     }
 }
