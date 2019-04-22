@@ -1,5 +1,6 @@
 package org.fluentlenium.core;
 
+import static org.fluentlenium.core.domain.ElementUtils.getWrappedElement;
 import static org.fluentlenium.utils.Preconditions.checkArgument;
 import static org.fluentlenium.utils.Preconditions.checkState;
 
@@ -306,10 +307,6 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
             }
             getDriver().switchTo().frame(target);
         }
-    }
-
-    private WebElement getWrappedElement(WebElement element) {
-        return ((WrapsElement) element).getWrappedElement();
     }
 
     @Override
