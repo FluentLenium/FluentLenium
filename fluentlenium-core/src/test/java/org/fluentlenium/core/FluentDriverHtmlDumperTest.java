@@ -38,7 +38,7 @@ public class FluentDriverHtmlDumperTest {
 
     @Test
     public void shouldTakeHtmlDumpWithNoConfiguration() {
-        String fileName = getSystemTempPath() + "htmldump.txt";
+        String fileName = getSystemTempPath() + "htmldump.html";
         destinationFile = new File(fileName);
 
         htmlDumper.takeHtmlDump(fileName, () -> HTML_DUMP_CONTENT);
@@ -48,7 +48,7 @@ public class FluentDriverHtmlDumperTest {
 
     @Test
     public void shouldTakeHtmlDumpWithConfiguration() {
-        String fileName = "screenshot.png";
+        String fileName = "htmldump.html";
         destinationFile = new File(getSystemTempPath() + fileName);
         when(configuration.getHtmlDumpPath()).thenReturn(getSystemTempPath());
 
