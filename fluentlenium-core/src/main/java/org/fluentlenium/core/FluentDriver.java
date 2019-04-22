@@ -96,7 +96,7 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
         cssControl = new CssControlImpl(adapter, adapter);
         windowAction = new WindowAction(adapter, componentsManager.getInstantiator(), driver);
 
-        configureDriver(); // NOPMD ConstructorCallsOverridableMethod
+        configureDriver();
     }
 
     public Configuration getConfiguration() {
