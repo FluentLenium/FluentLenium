@@ -1,7 +1,5 @@
 package org.fluentlenium.utils;
 
-import static java.util.Objects.requireNonNull;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -22,7 +20,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Provides logic fofr screenshot and image manipulation and conversion.
+ * Provides logic for screenshot and image manipulation and conversion.
  */
 public class ImageUtils {
 
@@ -30,7 +28,7 @@ public class ImageUtils {
     private final WebDriver driver;
 
     public ImageUtils(WebDriver driver) {
-        this.driver = requireNonNull(driver);
+        this.driver = driver;
     }
 
     public WebDriver getDriver() {
