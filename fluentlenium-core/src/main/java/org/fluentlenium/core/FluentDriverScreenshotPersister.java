@@ -24,7 +24,7 @@ public class FluentDriverScreenshotPersister {
 
     public FluentDriverScreenshotPersister(Configuration configuration, WebDriver driver) {
         this.configuration = requireNonNull(configuration);
-        this.driver = requireNonNull(driver);
+        this.driver = driver;
     }
 
     /**
