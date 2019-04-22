@@ -6,8 +6,6 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import org.fluentlenium.configuration.Configuration;
 import org.openqa.selenium.WebDriver;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Configures a {@link WebDriver} instance with timeouts from a {@link Configuration}.
  */
