@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.function.Supplier;
 
 /**
- * Takes HTML dump. Implemented specifically for {@link FluentDriver}.
+ * Takes HTML dump..
  */
 public class FluentDriverHtmlDumper {
 

@@ -8,7 +8,7 @@ import org.openqa.selenium.WrapsDriver;
 /**
  * Provides wrapped WebDriver capabilities for {@link FluentDriver}.
  */
-public class FluentDriverCapabilitiesProvider {
+public class FluentDriverWrappedCapabilitiesProvider {
 
     /**
      * Goes through all the underlying wrapped drivers ({@link WrapsDriver}) in the argument {@link WebDriver},

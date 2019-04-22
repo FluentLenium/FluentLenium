@@ -13,12 +13,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WrapsDriver;
 
 /**
- * Unit test for {@link FluentDriverCapabilitiesProvider}.
+ * Unit test for {@link FluentDriverWrappedCapabilitiesProvider}.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class FluentDriverCapabilitiesProviderTest {
+public class FluentDriverWrappedCapabilitiesProviderTest {
 
-    private final FluentDriverCapabilitiesProvider capabilitiesProvider = new FluentDriverCapabilitiesProvider();
+    private final FluentDriverWrappedCapabilitiesProvider capabilitiesProvider = new FluentDriverWrappedCapabilitiesProvider();
 
     @Mock(extraInterfaces = WrapsDriver.class)
     private WebDriver webDriverNotHaveCapabilities; //initial

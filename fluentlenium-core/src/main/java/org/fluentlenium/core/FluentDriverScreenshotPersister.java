@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 /**
- * Persist a screenshot to a target file.
+ * Persists a screenshot to a target file.
  */
 public class FluentDriverScreenshotPersister {
 

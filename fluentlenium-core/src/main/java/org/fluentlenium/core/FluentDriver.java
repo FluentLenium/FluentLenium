@@ -62,7 +62,7 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
     private final KeyboardActions keyboardActions;
     private final WindowAction windowAction;
     private final FluentDriverScreenshotPersister screenshotPersister;
-    private final FluentDriverCapabilitiesProvider capabilitiesProvider;
+    private final FluentDriverWrappedCapabilitiesProvider capabilitiesProvider;
     private final FluentDriverHtmlDumper htmlDumper;
     private final FluentDriverWait driverWait;
 
@@ -77,7 +77,7 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
         super(adapter);
         this.configuration = configuration;
         screenshotPersister = new FluentDriverScreenshotPersister(configuration, driver);
-        capabilitiesProvider = new FluentDriverCapabilitiesProvider();
+        capabilitiesProvider = new FluentDriverWrappedCapabilitiesProvider();
         htmlDumper = new FluentDriverHtmlDumper(configuration);
         componentsManager = new ComponentsManager(adapter);
         driverWait = new FluentDriverWait(configuration);
