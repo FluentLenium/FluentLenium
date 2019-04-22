@@ -6,7 +6,7 @@ import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.core.wait.FluentWait;
 
 /**
- * Creates and a configures a {@link FluentWait} from a {@link Configuration} to be used via {@link FluentDriver}.
+ * Creates and configures a {@link FluentWait} from a {@link Configuration} to be used via {@link FluentDriver}.
  */
 public class FluentDriverWait {
 

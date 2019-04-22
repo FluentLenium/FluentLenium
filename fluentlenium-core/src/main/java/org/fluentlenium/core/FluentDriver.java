@@ -31,7 +31,6 @@ import org.fluentlenium.utils.UrlUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
-import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.SearchContext;
@@ -40,7 +39,6 @@ import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
@@ -71,6 +69,7 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
     private final MouseActions mouseActions;
     private final KeyboardActions keyboardActions;
     private final WindowAction windowAction;
+    private final FluentDriverCapabilitiesProvider capabilitiesProvider;
     private final FluentDriverWait driverWait;
 
     /**
@@ -83,6 +82,7 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
     public FluentDriver(WebDriver driver, Configuration configuration, FluentControl adapter) {
         super(adapter);
         this.configuration = configuration;
+        capabilitiesProvider = new FluentDriverCapabilitiesProvider();
         componentsManager = new ComponentsManager(adapter);
         driverWait = new FluentDriverWait(configuration);
         this.driver = driver;
@@ -295,15 +295,7 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
 
     @Override
     public Capabilities capabilities() {
-        WebDriver currentDriver = getDriver();
-        Capabilities capabilities = currentDriver instanceof HasCapabilities
-                ? ((HasCapabilities) currentDriver).getCapabilities()
-                : null;
-        while (currentDriver instanceof WrapsDriver && capabilities == null) {
-            currentDriver = ((WrapsDriver) currentDriver).getWrappedDriver();
-            capabilities = currentDriver instanceof HasCapabilities ? ((HasCapabilities) currentDriver).getCapabilities() : null;
-        }
-        return capabilities;
+        return capabilitiesProvider.getCapabilities(getDriver());
     }
 
     @Override
