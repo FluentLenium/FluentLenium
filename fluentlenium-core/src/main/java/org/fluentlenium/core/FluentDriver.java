@@ -42,7 +42,6 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Offers some shortcut to WebDriver methods using a wrapped {@link WebDriver} instance.
@@ -97,27 +96,11 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
         cssControl = new CssControlImpl(adapter, adapter);
         windowAction = new WindowAction(adapter, componentsManager.getInstantiator(), driver);
 
-        configureDriver();
+        new FluentDriverTimeoutConfigurer(configuration, driver).configureDriver();
     }
 
     public Configuration getConfiguration() {
         return configuration;
-    }
-
-    private void configureDriver() {
-        if (getDriver() != null && getDriver().manage() != null && getDriver().manage().timeouts() != null) {
-            if (configuration.getPageLoadTimeout() != null) {
-                getDriver().manage().timeouts().pageLoadTimeout(configuration.getPageLoadTimeout(), TimeUnit.MILLISECONDS);
-            }
-
-            if (configuration.getImplicitlyWait() != null) {
-                getDriver().manage().timeouts().implicitlyWait(configuration.getImplicitlyWait(), TimeUnit.MILLISECONDS);
-            }
-
-            if (configuration.getScriptTimeout() != null) {
-                getDriver().manage().timeouts().setScriptTimeout(configuration.getScriptTimeout(), TimeUnit.MILLISECONDS);
-            }
-        }
     }
 
     @Override
