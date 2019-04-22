@@ -26,16 +26,13 @@ import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWait;
-import org.fluentlenium.utils.ImageUtils;
 import org.fluentlenium.utils.UrlUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -69,6 +66,7 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
     private final MouseActions mouseActions;
     private final KeyboardActions keyboardActions;
     private final WindowAction windowAction;
+    private final FluentDriverScreenshotPersister screenshotPersister;
     private final FluentDriverCapabilitiesProvider capabilitiesProvider;
     private final FluentDriverWait driverWait;
 
@@ -82,6 +80,7 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
     public FluentDriver(WebDriver driver, Configuration configuration, FluentControl adapter) {
         super(adapter);
         this.configuration = configuration;
+        screenshotPersister = new FluentDriverScreenshotPersister(configuration, driver);
         capabilitiesProvider = new FluentDriverCapabilitiesProvider();
         componentsManager = new ComponentsManager(adapter);
         driverWait = new FluentDriverWait(configuration);
@@ -171,32 +170,7 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
         if (!canTakeScreenShot()) {
             throw new WebDriverException("Current browser doesn't allow taking screenshot.");
         }
-
-        persistScreenshot(fileName, prepareScreenshot());
-    }
-
-    private byte[] prepareScreenshot() {
-        byte[] screenshot;
-        try {
-            screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        } catch (UnhandledAlertException uae) {
-            screenshot = new ImageUtils(getDriver()).handleAlertAndTakeScreenshot();
-        }
-        return screenshot;
-    }
-
-    private void persistScreenshot(String fileName, byte[] screenshot) {
-        try {
-            File destFile;
-            if (configuration.getScreenshotPath() == null) {
-                destFile = new File(fileName);
-            } else {
-                destFile = Paths.get(configuration.getScreenshotPath(), fileName).toFile();
-            }
-            FileUtils.writeByteArrayToFile(destFile, screenshot);
-        } catch (IOException e) {
-            throw new RuntimeException("Error when taking the screenshot", e);
-        }
+        screenshotPersister.persistScreenshot(fileName);
     }
 
     @Override
