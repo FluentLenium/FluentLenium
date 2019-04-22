@@ -301,11 +301,15 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
             getDriver().switchTo().defaultContent();
         } else {
             WebElement target = element.getElement();
-            while (target instanceof WrapsElement && target != ((WrapsElement) target).getWrappedElement()) {
-                target = ((WrapsElement) target).getWrappedElement();
+            while (target instanceof WrapsElement && target != getWrappedElement(target)) {
+                target = getWrappedElement(target);
             }
             getDriver().switchTo().frame(target);
         }
+    }
+
+    private WebElement getWrappedElement(WebElement element) {
+        return ((WrapsElement) element).getWrappedElement();
     }
 
     @Override
