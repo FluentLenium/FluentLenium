@@ -3,7 +3,6 @@ package org.fluentlenium.core;
 import static org.fluentlenium.utils.Preconditions.checkArgument;
 import static org.fluentlenium.utils.Preconditions.checkState;
 
-import org.apache.commons.io.FileUtils;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
@@ -39,10 +38,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -68,6 +63,7 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
     private final WindowAction windowAction;
     private final FluentDriverScreenshotPersister screenshotPersister;
     private final FluentDriverCapabilitiesProvider capabilitiesProvider;
+    private final FluentDriverHtmlDumper htmlDumper;
     private final FluentDriverWait driverWait;
 
     /**
@@ -82,6 +78,7 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
         this.configuration = configuration;
         screenshotPersister = new FluentDriverScreenshotPersister(configuration, driver);
         capabilitiesProvider = new FluentDriverCapabilitiesProvider();
+        htmlDumper = new FluentDriverHtmlDumper(configuration);
         componentsManager = new ComponentsManager(adapter);
         driverWait = new FluentDriverWait(configuration);
         this.driver = driver;
@@ -129,30 +126,11 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
 
     @Override
     public void takeHtmlDump(String fileName) {
-        File destFile = null;
-        try {
-            if (configuration.getHtmlDumpPath() == null) {
-                destFile = new File(fileName);
-            } else {
-                destFile = Paths.get(configuration.getHtmlDumpPath(), fileName).toFile();
-            }
-            String html;
+        htmlDumper.takeHtmlDump(fileName, () -> {
             synchronized (FluentDriver.class) {
-                html = $("html").first().html();
+                return $("html").first().html();
             }
-            FileUtils.write(destFile, html, "UTF-8");
-        } catch (Exception e) {
-            if (destFile == null) {
-                destFile = new File(fileName);
-            }
-            try (PrintWriter printWriter = new PrintWriter(destFile, "UTF-8")) {
-                printWriter.write("Can't dump HTML");
-                printWriter.println();
-                e.printStackTrace(printWriter);
-            } catch (IOException e1) {
-                throw new RuntimeException("error when dumping HTML", e); //NOPMD PreserveStackTrace
-            }
-        }
+        });
     }
 
     @Override
