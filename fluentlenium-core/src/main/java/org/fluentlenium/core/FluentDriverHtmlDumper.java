@@ -1,6 +1,5 @@
 package org.fluentlenium.core;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Objects.requireNonNull;
 
 import org.fluentlenium.configuration.Configuration;
@@ -39,12 +38,12 @@ public class FluentDriverHtmlDumper {
         File destFile = null;
         try {
             destFile = getDestinationFile(fileName);
-            FileUtils.write(destFile, htmlSupplier.get(), UTF_8);
+            FileUtils.write(destFile, htmlSupplier.get(), "UTF-8");
         } catch (Exception e) {
             if (destFile == null) {
                 destFile = new File(fileName);
             }
-            try (PrintWriter printWriter = new PrintWriter(destFile, UTF_8)) {
+            try (PrintWriter printWriter = new PrintWriter(destFile, "UTF-8")) {
                 printWriter.write("Can't dump HTML");
                 printWriter.println();
                 e.printStackTrace(printWriter);
