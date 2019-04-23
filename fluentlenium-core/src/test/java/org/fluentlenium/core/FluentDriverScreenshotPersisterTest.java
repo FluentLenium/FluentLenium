@@ -15,6 +15,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Unit test for {@link FluentDriverScreenshotPersister}.
@@ -41,34 +42,33 @@ public class FluentDriverScreenshotPersisterTest {
     }
 
     @Test
-    public void shouldCreateScreenshotFromDriverWithNoConfiguration() {
-        String fileName = getSystemTempPath() + "screenshot.png";
-        destinationFile = new File(fileName);
+    public void shouldCreateScreenshotFromDriverWithNoConfiguration() throws IOException {
         mockScreenshotFromWebDriver();
+        initializeDestinationFile();
 
-        screenshotPersister.persistScreenshot(fileName);
+        screenshotPersister.persistScreenshot(destinationFile.getAbsolutePath());
 
         assertThat(destinationFile).exists();
     }
 
     @Test
-    public void shouldCreateScreenshotFromDriverWithConfiguration() {
-        String fileName = "screenshot.png";
-        destinationFile = new File(getSystemTempPath() + fileName);
+    public void shouldCreateScreenshotFromDriverWithConfiguration() throws IOException {
         mockScreenshotFromWebDriver();
-        when(configuration.getScreenshotPath()).thenReturn(getSystemTempPath());
+        initializeDestinationFile();
+        when(configuration.getScreenshotPath()).thenReturn(destinationFile.getParent());
 
-        screenshotPersister.persistScreenshot(fileName);
+        screenshotPersister.persistScreenshot(destinationFile.getName());
 
         assertThat(destinationFile).exists();
-    }
-
-    private String getSystemTempPath() {
-        return System.getProperty("java.io.tmpdir");
     }
 
     private void mockScreenshotFromWebDriver() {
         byte[] screenshot = {1, 2};
         when(((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES)).thenReturn(screenshot);
+    }
+
+    private void initializeDestinationFile() throws IOException {
+        destinationFile = File.createTempFile("screenshot.png", "");
+        destinationFile.delete();
     }
 }

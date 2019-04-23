@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Unit test for {@link FluentDriverHtmlDumper}.
@@ -37,27 +38,26 @@ public class FluentDriverHtmlDumperTest {
     }
 
     @Test
-    public void shouldTakeHtmlDumpWithNoConfiguration() {
-        String fileName = getSystemTempPath() + "htmldump.html";
-        destinationFile = new File(fileName);
+    public void shouldTakeHtmlDumpWithNoConfiguration() throws IOException {
+        initializeDestinationFile();
 
-        htmlDumper.takeHtmlDump(fileName, () -> HTML_DUMP_CONTENT);
+        htmlDumper.takeHtmlDump(destinationFile.getAbsolutePath(), () -> HTML_DUMP_CONTENT);
 
         assertThat(destinationFile).exists().hasContent(HTML_DUMP_CONTENT);
     }
 
     @Test
-    public void shouldTakeHtmlDumpWithConfiguration() {
-        String fileName = "htmldump.html";
-        destinationFile = new File(getSystemTempPath() + fileName);
-        when(configuration.getHtmlDumpPath()).thenReturn(getSystemTempPath());
+    public void shouldTakeHtmlDumpWithConfiguration() throws IOException {
+        initializeDestinationFile();
+        when(configuration.getHtmlDumpPath()).thenReturn(destinationFile.getParent());
 
-        htmlDumper.takeHtmlDump(fileName, () -> HTML_DUMP_CONTENT);
+        htmlDumper.takeHtmlDump(destinationFile.getName(), () -> HTML_DUMP_CONTENT);
 
         assertThat(destinationFile).exists().hasContent(HTML_DUMP_CONTENT);
     }
 
-    private String getSystemTempPath() {
-        return System.getProperty("java.io.tmpdir");
+    private void initializeDestinationFile() throws IOException {
+        destinationFile = File.createTempFile("htmldump.html", "");
+        destinationFile.delete();
     }
 }
