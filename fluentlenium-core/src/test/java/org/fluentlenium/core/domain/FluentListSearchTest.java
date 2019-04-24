@@ -13,7 +13,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.beans.IntrospectionException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
