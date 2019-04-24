@@ -1,5 +1,7 @@
 package org.fluentlenium.core.components;
 
+import static org.fluentlenium.core.domain.ElementUtils.getWrappedElement;
+
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.proxy.ProxyElementListener;
@@ -160,7 +162,7 @@ public class ComponentsManager extends AbstractComponentInstantiator
 
     private WebElement unwrapElement(WebElement element) {
         if (element instanceof WrapsElement) {
-            WebElement wrappedElement = ((WrapsElement) element).getWrappedElement();
+            WebElement wrappedElement = getWrappedElement(element);
             if (wrappedElement != element && wrappedElement != null) { // NOPMD CompareObjectsWithEquals
                 return unwrapElement(wrappedElement);
             }
