@@ -403,7 +403,7 @@ public class MyStandaloneRunnable extends FluentStandaloneRunnable {
         await().atMost(1, SECONDS).until(test.$(".fluent", with("name").equalTo("name"))).present();
         el("input").enabled();
     }
-};
+}
 ```
 
 ```java
