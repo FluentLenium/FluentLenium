@@ -72,7 +72,7 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             return instantiator.asComponentList(getClass(), componentClass, webElementList);
         });
         label = new FluentLabelImpl<>(this, list::toString);
-        javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new Supplier<FluentWebElement>() {
+        javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new Supplier<>() {
             @Override
             public FluentWebElement get() {
                 return first();

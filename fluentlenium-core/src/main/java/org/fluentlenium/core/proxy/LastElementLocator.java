@@ -35,7 +35,7 @@ public class LastElementLocator implements ElementLocator {
     public WebElement findElement() {
         WebElement element = findElementImpl();
         if (element == null) {
-            throw ElementUtils.noSuchElementException(String.valueOf("Element " + this));
+            throw ElementUtils.noSuchElementException("Element " + this);
         }
         return element;
     }

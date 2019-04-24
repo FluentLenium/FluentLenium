@@ -47,7 +47,7 @@ public class FluentTestRunnerAdapterRetriesTest {
     }
 
     @Test()
-    public void testFailedWhenBrowserCrashed() throws IOException, ExecutionException, InterruptedException {
+    public void testFailedWhenBrowserCrashed() {
         String testName = "test1";
 
         when(adapter.getBrowserTimeout()).thenReturn(1L);
@@ -66,7 +66,7 @@ public class FluentTestRunnerAdapterRetriesTest {
 
 
     @Test()
-    public void testGetSharedWebDriverRetry() throws IOException, ExecutionException, InterruptedException {
+    public void testGetSharedWebDriverRetry() throws ExecutionException, InterruptedException {
         when(adapter.getBrowserTimeoutRetries()).thenReturn(2);
         when(adapter.getBrowserTimeout()).thenReturn(1L);
 

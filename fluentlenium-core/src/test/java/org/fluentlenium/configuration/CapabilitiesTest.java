@@ -34,7 +34,7 @@ public class CapabilitiesTest {
     }
 
     @Test
-    public void testDefault() throws NoSuchFieldException, IllegalAccessException {
+    public void testDefault() {
         CapabilitiesFactory webDriverFactory = capabilities.get(null);
         assertThat(webDriverFactory).isExactlyInstanceOf(TestCapabilitiesFactory.class);
     }

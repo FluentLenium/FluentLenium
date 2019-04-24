@@ -182,7 +182,6 @@ public class FluentWait
         return WaitConditionProxy.each(this, "Elements " + elements, elements);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public FluentWaitWindowConditions untilWindow(String windowName) {
         return new FluentWaitWindowConditions(this, windowName);

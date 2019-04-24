@@ -41,7 +41,7 @@ public class FluentListSearchTest {
     private FluentAdapter fluentAdapter;
 
     @Before
-    public void before() throws IntrospectionException, NoSuchFieldException, IllegalAccessException {
+    public void before() throws NoSuchFieldException, IllegalAccessException {
         webElements = new ArrayList<>();
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(driver);
