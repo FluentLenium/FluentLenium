@@ -52,6 +52,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -705,7 +706,7 @@ public class FluentWebElement extends Component
         try {
             clickable = ExpectedConditions.elementToBeClickable(getElement())
                     .apply(control.getDriver()) != null;
-        } catch (NoSuchElementException | StaleElementReferenceException e) {
+        } catch (NoSuchElementException | StaleElementReferenceException | ElementNotVisibleException e) {
             clickable = false;
         }
         return clickable;
