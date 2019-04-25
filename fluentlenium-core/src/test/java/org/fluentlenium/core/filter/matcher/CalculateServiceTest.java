@@ -6,6 +6,9 @@ import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Unit test for {@link CalculateService}.
+ */
 public class CalculateServiceTest {
 
     @Test
@@ -35,6 +38,11 @@ public class CalculateServiceTest {
     }
 
     @Test
+    public void checkSimpleContainsReturnsFalseIfCurrentValueIsNull() {
+        assertThat(CalculateService.contains(Pattern.compile(".*"), "to", null)).isFalse();
+    }
+
+    @Test
     public void checkSimpleContainsNok() {
         assertThat(CalculateService.contains(null, "toto", "ecole")).isFalse();
     }
@@ -56,6 +64,11 @@ public class CalculateServiceTest {
     }
 
     @Test
+    public void checkSimpleStartsWithReturnsFalseIfCurrentValueIsNull() {
+        assertThat(CalculateService.startsWith(Pattern.compile(".*"), "to", null)).isFalse();
+    }
+
+    @Test
     public void checkSimpleStartsWithNok() {
         assertThat(CalculateService.startsWith(null, "to", "la to to")).isFalse();
     }
@@ -74,6 +87,16 @@ public class CalculateServiceTest {
     @Test
     public void checkSimpleEndsWithOk() {
         assertThat(CalculateService.endsWith(null, "to", "toto")).isTrue();
+    }
+
+    @Test
+    public void checkSimpleEndsWithReturnsFalseIfCurrentValueIsNull() {
+        assertThat(CalculateService.endsWith(Pattern.compile(".*"), "to", null)).isFalse();
+    }
+
+    @Test
+    public void checkSimpleEndsWithReturnsFalseIfCurrentValueIsEmpty() {
+        assertThat(CalculateService.endsWith(Pattern.compile(".*"), "to", "")).isFalse();
     }
 
     @Test
