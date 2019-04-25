@@ -80,7 +80,7 @@ public class BaseHookTest {
     public void testNoOptionHook() {
         Object defaultOptions = new Object();
 
-        BaseHook noOptionHook = new BaseHook<>(fluentAdapter, instantiator, () -> element, () -> locator, () -> "hook",
+        BaseHook noOptionHook = new BaseHook<Object>(fluentAdapter, instantiator, () -> element, () -> locator, () -> "hook",
                 null) {
             @Override
             protected Object newOptions() {
