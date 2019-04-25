@@ -187,6 +187,7 @@ public class Runner {
 ```
 
 - Extends `FluentCucumberTest` class in all of your steps classes:
+
 ```java
 public class ExampleSteps1 extends FluentCucumberTest {
 }
@@ -195,8 +196,8 @@ public class ExampleSteps1 extends FluentCucumberTest {
 public class ExampleSteps2 extends FluentCucumberTest {
 }
 ```
-
 or only in your `BaseTest` class:
+
 ```java
 public class BaseTest extends FluentCucumberTest {
 }
@@ -207,13 +208,13 @@ public class ExampleSteps1 extends BaseTest {
 ```
 
 - Add `Before` and `After` hooks: 
+
 ```java
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
 public class FluentHooks extends FluentCucumberTest {
-
     @Before
     public void beforeScenario(Scenario scenario) {
         before(scenario);
@@ -227,6 +228,7 @@ public class FluentHooks extends FluentCucumberTest {
 ```
 
 When using Cucumber with Java 8 (package `cucumber-java8`), hooks can be added like this:
+
 ```java
 public class FluentHooks extends FluentCucumberTest {
     
@@ -239,15 +241,19 @@ public class FluentHooks extends FluentCucumberTest {
 ```
 
 **Notes related to Cumber hooks:**
-1) Hooks should be added **ONCE** for your tests. Do not add these these hooks in all your steps classes. 
+
+1) Hooks should be added **ONCE** for your tests. Do not add these these hooks in all your steps classes.
+ 
 2) Adding these hooks starts FluentLenium context during execution of scenario. It means that driver will start 
 automatically. If you want to start WebDriver only for some scenarios, you can simply add tag:
+
 ```
 @fluent
 Scenario: Driver should start when tag is present above scenario
     Then WebDriver starts as expected
 ```
 and add tags to your hooks:
+
 ```java
 @Before({"@fluent"})
 public void beforeScenario(Scenario scenario) {
@@ -261,6 +267,7 @@ public void afterScenario(Scenario scenario) {
 ```
 3) Hooks in `Cucumber` cannot be extended. So do not add `Before` and `After` hooks in `BaseTest` (if you use such
 pattern) but add them in any other class:
+
 ```java
 public class FluentHooks extends BaseTest {
     
@@ -277,6 +284,7 @@ public class FluentHooks extends BaseTest {
 ```
 
 - It is possible to access current `FluentCucumberTest` context using syntax:
+
 ```
 FluentTestContainer.FLUENT_TEST.instance()
 ```
@@ -285,6 +293,7 @@ It can be handy if you want have to access current WebDriver instance. The purpo
 state between many steps classes.
 
 - Keep your configuration in `BaseTest`:
+
  ```java
  // example configuration
  @FluentConfiguration(webDriver = "chrome")
@@ -297,6 +306,7 @@ state between many steps classes.
  }
  ```
  or class with Cucumber hooks:
+ 
   ```java
   // example configuration
   @FluentConfiguration(webDriver = "chrome")
@@ -321,6 +331,7 @@ state between many steps classes.
  
 - At default, new instance of WebDriver is created for each scenario. If you want to run single WebDriver for all 
 scenarios in feature, change DriverLifecycle to JVM level:
+
 ```java
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.configuration.ConfigurationProperties;
