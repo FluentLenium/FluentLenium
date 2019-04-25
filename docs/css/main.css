@@ -124,6 +124,19 @@ img {
   color: #404040;
 }
 
+@media only screen and (min-width: 901px) and (max-width: 1399px) {
+    .navbar-custom .navbar-brand {
+        position: relative;
+        left: 70px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 900px) {
+  .navbar-custom .navbar-brand {
+    display: none;
+  }
+}
+
 .navbar-custom .navbar-brand:hover,
 .navbar-custom .navbar-brand:focus ,
 .navbar-custom .nav li a:hover,
@@ -154,6 +167,7 @@ img {
   width: 50px;
   margin-top: -25px;
 }
+
 .navbar-custom .avatar-container  .avatar-img-border {
   width: 100%;
   border-radius: 50%;
@@ -163,6 +177,7 @@ img {
   -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .8);
   -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 }
+
 .navbar-custom .avatar-container  .avatar-img {
   width: 100%;
   border-radius: 50%;
@@ -182,16 +197,24 @@ img {
     width: 100px;
     margin-top: -50px;
   }
-  
+
   .navbar-custom .avatar-container  .avatar-img-border {
     width: 100%;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
     -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
     -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
   }
-  
+
   .navbar-custom .avatar-container  .avatar-img {
     width: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1400px) {
+  .navbar-custom .avatar-container {
+    left: 50px;
+    position: absolute;
+    width: 50px;
   }
 }
 
@@ -227,7 +250,7 @@ img {
 @media only screen and (min-width: 768px) {
   .navbar-custom .nav .navlinks-container {
     text-align: center;
-  }  
+  }
   .navbar-custom .nav .navlinks-container:hover {
     background: #eee;
   }
@@ -297,7 +320,7 @@ footer .theme-by {
     font-size: 16px;
   }
 }
- 
+
 /* --- Post preview --- */
 
 .post-preview {
@@ -367,7 +390,7 @@ footer .theme-by {
 .blog-tags a {
   color: #008AFF;
   text-decoration: none;
-  padding: 0px 5px;
+  padding: 0 5px;
 }
 
 .blog-tags a:hover {
@@ -474,11 +497,11 @@ footer .theme-by {
   }
   .intro-header.big-img {
     margin-top: 91px;  /* Full navbar is small navbar + 20px padding on each side when expanded */
-  }	
+  }
   .intro-header.big-img .page-heading,
   .intro-header.big-img .post-heading  {
     padding: 150px 0;
-  }  
+  }
   .intro-header .page-heading h1 {
     font-size: 80px;
   }
@@ -515,9 +538,9 @@ footer .theme-by {
   }
   .header-section.has-img .big-img {
     margin-bottom: 0;
-  }  
-} 
-@media only screen and (max-width: 325px) { 
+  }
+}
+@media only screen and (max-width: 325px) {
   .intro-header.big-img {
     height: 200px;
   }
@@ -623,7 +646,7 @@ pre.highlight, .highlight > pre, td.code pre {
   background-image: linear-gradient(#F9F9F9 50%, #FDFDFD 50%);
   background-repeat: repeat;
   background-size: 3em 3em;
-  background-position: 0px 10px;
+  background-position: 0 10px;
   border-left: 7px solid #444;
 }
 code table, code table td, code table th, code table tbody, code table tr,
