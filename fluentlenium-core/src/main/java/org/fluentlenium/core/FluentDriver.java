@@ -14,7 +14,6 @@ import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.css.CssControl;
 import org.fluentlenium.core.css.CssControlImpl;
 import org.fluentlenium.core.css.CssSupport;
-import org.fluentlenium.core.domain.ComponentList;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.ComponentsEventsRegistry;
@@ -24,10 +23,8 @@ import org.fluentlenium.core.inject.DefaultContainerInstantiator;
 import org.fluentlenium.core.inject.FluentInjector;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
-import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.utils.UrlUtils;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
@@ -40,7 +37,6 @@ import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -49,7 +45,7 @@ import java.util.Set;
  * It provides methods to work with mouse, keyboard and windows.
  */
 @SuppressWarnings("PMD.GodClass")
-public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
+public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD GodClass
     private final Configuration configuration;
     private final ComponentsManager componentsManager;
     private final EventsRegistry events;
@@ -245,36 +241,6 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
     }
 
     @Override
-    public FluentList<FluentWebElement> find(String selector, SearchFilter... filters) {
-        return search.find(selector, filters);
-    }
-
-    @Override
-    public FluentList<FluentWebElement> find(By locator, SearchFilter... filters) {
-        return search.find(locator, filters);
-    }
-
-    @Override
-    public FluentList<FluentWebElement> find(SearchFilter... filters) {
-        return search.find(filters);
-    }
-
-    @Override
-    public FluentList<FluentWebElement> find(List<WebElement> rawElements) {
-        return search.find(rawElements);
-    }
-
-    @Override
-    public FluentList<FluentWebElement> $(List<WebElement> rawElements) {
-        return search.$(rawElements);
-    }
-
-    @Override
-    public FluentWebElement el(WebElement rawElement) {
-        return search.el(rawElement);
-    }
-
-    @Override
     public void switchTo(FluentList<? extends FluentWebElement> elements) {
         switchTo(elements.first());
     }
@@ -328,143 +294,13 @@ public class FluentDriver extends FluentControlImpl { // NOPMD GodClass
     }
 
     @Override
-    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass) {
-        return componentsManager.newComponentList(listClass, componentClass);
+    protected ComponentsManager getComponentsManager() {
+        return componentsManager;
     }
 
     @Override
-    public <T> ComponentList asComponentList(Class<T> componentClass, Iterable<WebElement> elements) {
-        return componentsManager.asComponentList(componentClass, elements);
-    }
-
-    @Override
-    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, T... componentsList) {
-        return componentsManager.newComponentList(listClass, componentClass, componentsList);
-    }
-
-    @Override
-    public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, Iterable<WebElement> elements) {
-        return componentsManager.asFluentList(componentClass, elements);
-    }
-
-    @Override
-    public boolean isComponentClass(Class<?> componentClass) {
-        return componentsManager.isComponentClass(componentClass);
-    }
-
-    @Override
-    public <T> ComponentList<T> asComponentList(Class<T> componentClass, List<WebElement> elements) {
-        return componentsManager.asComponentList(componentClass, elements);
-    }
-
-    @Override
-    public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, WebElement... elements) {
-        return componentsManager.asFluentList(componentClass, elements);
-    }
-
-    @Override
-    public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass) {
-        return componentsManager.newFluentList(componentClass);
-    }
-
-    @Override
-    public FluentWebElement newFluent(WebElement element) {
-        return componentsManager.newFluent(element);
-    }
-
-    @Override
-    public boolean isComponentListClass(Class<? extends List<?>> componentListClass) {
-        return componentsManager.isComponentListClass(componentListClass);
-    }
-
-    @Override
-    public FluentList<FluentWebElement> asFluentList(WebElement... elements) {
-        return componentsManager.asFluentList(elements);
-    }
-
-    @Override
-    public FluentList<FluentWebElement> asFluentList(Iterable<WebElement> elements) {
-        return componentsManager.asFluentList(elements);
-    }
-
-    @Override
-    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, WebElement... elements) {
-        return componentsManager.asComponentList(listClass, componentClass, elements);
-    }
-
-    @Override
-    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, Iterable<WebElement> elements) {
-        return componentsManager.asComponentList(listClass, componentClass, elements);
-    }
-
-    @Override
-    public FluentList<FluentWebElement> asFluentList(List<WebElement> elements) {
-        return componentsManager.asFluentList(elements);
-    }
-
-    @Override
-    public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, List<WebElement> elements) {
-        return componentsManager.asFluentList(componentClass, elements);
-    }
-
-    @Override
-    public <T> ComponentList<T> asComponentList(Class<T> componentClass, WebElement... elements) {
-        return componentsManager.asComponentList(componentClass, elements);
-    }
-
-    @Override
-    public <T> T newComponent(Class<T> componentClass, WebElement element) {
-        return componentsManager.newComponent(componentClass, element);
-    }
-
-    @Override
-    public <T> ComponentList<T> newComponentList(Class<T> componentClass, T... componentsList) {
-        return componentsManager.newComponentList(componentClass, componentsList);
-    }
-
-    @Override
-    public <T> ComponentList<T> newComponentList(Class<T> componentClass, List<T> componentsList) {
-        return componentsManager.newComponentList(componentClass, componentsList);
-    }
-
-    @Override
-    public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, List<T> componentsList) {
-        return componentsManager.newComponentList(listClass, componentClass, componentsList);
-    }
-
-    @Override
-    public FluentList<FluentWebElement> newFluentList() {
-        return componentsManager.newFluentList();
-    }
-
-    @Override
-    public FluentList<FluentWebElement> newFluentList(List<FluentWebElement> elements) {
-        return componentsManager.newFluentList(elements);
-    }
-
-    @Override
-    public <T> ComponentList<T> newComponentList(Class<T> componentClass) {
-        return componentsManager.newComponentList(componentClass);
-    }
-
-    @Override
-    public FluentList<FluentWebElement> newFluentList(FluentWebElement... elements) {
-        return componentsManager.newFluentList(elements);
-    }
-
-    @Override
-    public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass, List<T> elements) {
-        return componentsManager.newFluentList(componentClass, elements);
-    }
-
-    @Override
-    public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass, T... elements) {
-        return componentsManager.newFluentList(componentClass, elements);
-    }
-
-    @Override
-    public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, List<WebElement> elements) {
-        return componentsManager.asComponentList(listClass, componentClass, elements);
+    protected Search getSearch() {
+        return search;
     }
 
     @Override
