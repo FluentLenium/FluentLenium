@@ -13,7 +13,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.beans.IntrospectionException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +40,7 @@ public class FluentListSearchTest {
     private FluentAdapter fluentAdapter;
 
     @Before
-    public void before() throws IntrospectionException, NoSuchFieldException, IllegalAccessException {
+    public void before() throws NoSuchFieldException, IllegalAccessException {
         webElements = new ArrayList<>();
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(driver);

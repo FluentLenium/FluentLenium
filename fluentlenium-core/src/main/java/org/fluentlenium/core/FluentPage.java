@@ -179,9 +179,6 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
                     "An URL should be defined on the page. Use @PageUrl annotation or override getUrl() method.");
         }
 
-        UrlTemplate template = new UrlTemplate(templateUrl);
-        ParsedUrlTemplate parse = template.parse(url);
-
-        return parse;
+        return new UrlTemplate(templateUrl).parse(url);
     }
 }

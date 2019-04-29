@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 
@@ -149,7 +148,7 @@ public class PropertiesBackendConfigurationTest {
     }
 
     @Test
-    public void capabilitiesURL() throws IOException {
+    public void capabilitiesURL() {
         Assertions.assertThat(getConfiguration().getCapabilities()).isNull();
 
         URL capabilitiesURL = getClass().getResource("/org/fluentlenium/configuration/capabilities.json");

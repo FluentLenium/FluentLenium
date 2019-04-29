@@ -89,7 +89,7 @@ public final class UrlUtils { // NOPMD CyclomaticComplexity
      * @param uri           uri
      * @param defaultScheme scheme to use when no scheme is defined on uri
      * @return uri with scheme defined
-     * @throws URISyntaxException
+     * @throws URISyntaxException if the URI string to build is not a valid URI
      */
     private static URI ensureScheme(URI uri, String defaultScheme) throws URISyntaxException {
         String fixedBaseUriSpec = uri.toString();

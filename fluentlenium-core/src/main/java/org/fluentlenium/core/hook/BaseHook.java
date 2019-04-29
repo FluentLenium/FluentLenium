@@ -64,7 +64,7 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
     /**
      * Get coordinates of the underlying element.
      *
-     * @return cooridnates of underlying element
+     * @return coordinates of underlying element
      */
     public Coordinates getCoordinates() {
         return ((Locatable) getElement()).getCoordinates();

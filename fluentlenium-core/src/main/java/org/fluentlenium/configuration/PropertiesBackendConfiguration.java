@@ -174,7 +174,7 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
         } catch (MalformedURLException e) { // NOPMD EmptyCatchBlock PreserveStackTrace
             // This is not an URL. Consider property as JSON.
         }
-        CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
+        CapabilitiesFactory factory = CapabilitiesRegistry.INSTANCE.get(property);
         if (factory != null) {
             return factory.newCapabilities(getGlobalConfiguration());
         }

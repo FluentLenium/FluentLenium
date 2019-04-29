@@ -1,6 +1,5 @@
 package org.fluentlenium.test.await.component;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
 import org.fluentlenium.core.FluentControl;

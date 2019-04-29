@@ -90,7 +90,7 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
         } catch (MalformedURLException e) { // NOPMD EmptyCatchBlock
             // This is not a URL. Consider property as JSON.
         }
-        CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
+        CapabilitiesFactory factory = CapabilitiesRegistry.INSTANCE.get(property);
         if (factory != null) {
             return factory.newCapabilities(getGlobalConfiguration());
         }
