@@ -15,7 +15,7 @@
         <fluentlenium.version>${project.version}</fluentlenium.version>
         <spock.version>1.2-groovy-2.5</spock.version>
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-        <selenium.version>3.141.59</selenium.version>
+        <selenium.version>4.0.0-alpha-1</selenium.version>
     </properties>
 
     <dependencies>

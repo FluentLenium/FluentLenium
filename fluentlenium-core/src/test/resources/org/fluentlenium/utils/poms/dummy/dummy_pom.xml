@@ -40,7 +40,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>htmlunit-driver</artifactId>
-            <version>3.141.59</version>
+            <version>4.0.0-alpha-1</version>
             <scope>test</scope>
         </dependency>
         <dependency>

@@ -7,7 +7,7 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.ArrayList;

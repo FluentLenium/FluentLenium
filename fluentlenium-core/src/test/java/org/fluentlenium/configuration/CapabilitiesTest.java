@@ -18,7 +18,7 @@ public class CapabilitiesTest {
 
     @Test
     public void testDesiredCapabilities() {
-        CapabilitiesFactory firefox = capabilities.get("DesiredCapabilities.firefox");
+        CapabilitiesFactory firefox = capabilities.get("PredefinedDesiredCapabilities.chrome");
         assertThat(firefox).isInstanceOf(MethodInvocationReflectionFactory.class);
     }
 
@@ -34,14 +34,14 @@ public class CapabilitiesTest {
     }
 
     @Test
-    public void testDefault() throws NoSuchFieldException, IllegalAccessException {
+    public void testDefault() {
         CapabilitiesFactory webDriverFactory = capabilities.get(null);
         assertThat(webDriverFactory).isExactlyInstanceOf(TestCapabilitiesFactory.class);
     }
 
     @Test
     public void testSingleton() {
-        assertThat(CapabilitiesRegistry.INSTANCE.get("DesiredCapabilities.firefox")).isNotNull();
+        assertThat(CapabilitiesRegistry.INSTANCE.get("PredefinedDesiredCapabilities.firefox")).isNotNull();
     }
 
 }

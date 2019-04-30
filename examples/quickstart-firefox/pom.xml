@@ -11,7 +11,7 @@
         <!-- Configure this property to latest available version -->
         <fluentlenium.version>${project.version}</fluentlenium.version>
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-        <selenium.version>3.141.59</selenium.version>
+        <selenium.version>4.0.0-alpha-1</selenium.version>
     </properties>
 
     <name>FluentLenium Examples Firefox</name>

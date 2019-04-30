@@ -123,7 +123,7 @@ public class PropertiesBackendConfigurationTest {
 
         mockProperty("capabilities", "firefox");
 
-        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        DesiredCapabilities capabilities = PredefinedDesiredCapabilities.firefox();
         Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilities);
 
         mockProperty("capabilities", "chrome");
@@ -149,7 +149,7 @@ public class PropertiesBackendConfigurationTest {
     }
 
     @Test
-    public void capabilitiesURL() throws IOException {
+    public void capabilitiesURL() {
         Assertions.assertThat(getConfiguration().getCapabilities()).isNull();
 
         URL capabilitiesURL = getClass().getResource("/org/fluentlenium/configuration/capabilities.json");
