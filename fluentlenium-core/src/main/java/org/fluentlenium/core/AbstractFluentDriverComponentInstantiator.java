@@ -11,9 +11,9 @@ import java.util.List;
 /**
  * Abstract {@link org.fluentlenium.core.components.ComponentInstantiator} implementation for {@link FluentDriver}.
  */
-public abstract class AbstractFluentDriverComponentInstantiator extends FluentControlImpl {
+abstract class AbstractFluentDriverComponentInstantiator extends FluentControlImpl {
 
-    public AbstractFluentDriverComponentInstantiator(FluentControl adapter) {
+    protected AbstractFluentDriverComponentInstantiator(FluentControl adapter) {
         super(adapter);
     }
 

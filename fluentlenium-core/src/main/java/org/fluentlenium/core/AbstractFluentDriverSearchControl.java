@@ -12,9 +12,9 @@ import java.util.List;
 /**
  * Abstract {@link org.fluentlenium.core.search.SearchControl} implemetation for {@link FluentDriver}.
  */
-public abstract class AbstractFluentDriverSearchControl extends AbstractFluentDriverComponentInstantiator {
+abstract class AbstractFluentDriverSearchControl extends AbstractFluentDriverComponentInstantiator {
 
-    public AbstractFluentDriverSearchControl(FluentControl adapter) {
+    protected AbstractFluentDriverSearchControl(FluentControl adapter) {
         super(adapter);
     }
 
