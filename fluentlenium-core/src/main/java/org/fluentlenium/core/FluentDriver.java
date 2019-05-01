@@ -173,13 +173,6 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
         return getDriver().manage().getCookieNamed(name);
     }
 
-    private String buildUrl(String url) {
-        String currentUrl = getDriver().getCurrentUrl();
-        String baseUrl = UrlUtils.sanitizeBaseUrl(getBaseUrl(), currentUrl);
-
-        return UrlUtils.concat(baseUrl, url);
-    }
-
     @Override
     public String url() {
         String baseUrl = buildUrl(null);
@@ -190,6 +183,13 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
         }
 
         return currentUrl;
+    }
+
+    private String buildUrl(String url) {
+        String currentUrl = getDriver().getCurrentUrl();
+        String baseUrl = UrlUtils.sanitizeBaseUrl(getBaseUrl(), currentUrl);
+
+        return UrlUtils.concat(baseUrl, url);
     }
 
     @Override
