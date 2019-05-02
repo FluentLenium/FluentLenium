@@ -7,6 +7,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class PredefinedDesiredCapabilities {
 
+    private PredefinedDesiredCapabilities() {
+        // intentionally blank
+    }
+
     public static DesiredCapabilities android() {
         return new DesiredCapabilities(BrowserType.ANDROID, "", Platform.ANDROID);
     }
@@ -16,12 +20,8 @@ public class PredefinedDesiredCapabilities {
     }
 
     public static DesiredCapabilities firefox() {
-        DesiredCapabilities capabilities = new DesiredCapabilities(
-                BrowserType.FIREFOX,
-                "",
-                Platform.ANY);
+        DesiredCapabilities capabilities = new DesiredCapabilities(BrowserType.FIREFOX, "", Platform.ANY);
         capabilities.setCapability("acceptInsecureCerts", true);
-
         return capabilities;
     }
 
@@ -32,9 +32,9 @@ public class PredefinedDesiredCapabilities {
     public static DesiredCapabilities edge() {
         return new DesiredCapabilities(BrowserType.EDGE, "", Platform.WINDOWS);
     }
+
     public static DesiredCapabilities internetExplorer() {
-        DesiredCapabilities capabilities = new DesiredCapabilities(
-                BrowserType.IE, "", Platform.WINDOWS);
+        DesiredCapabilities capabilities = new DesiredCapabilities(BrowserType.IE, "", Platform.WINDOWS);
         capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
         return capabilities;
     }

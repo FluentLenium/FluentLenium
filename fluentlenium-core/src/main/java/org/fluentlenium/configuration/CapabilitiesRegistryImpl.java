@@ -1,12 +1,10 @@
 package org.fluentlenium.configuration;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -38,17 +36,8 @@ public class CapabilitiesRegistryImpl extends AbstractFactoryRegistryImpl<Capabi
     }
 
     private void registerDesiredCapabilities() {
-        Method[] methodsDeclaredInSelenium = DesiredCapabilities.class.getDeclaredMethods();
-        Method[] predefinedDeclaredMethods = PredefinedDesiredCapabilities.class.getDeclaredMethods();
-
-        Method[] declaredMethods = ArrayUtils.addAll(methodsDeclaredInSelenium, predefinedDeclaredMethods);
-
-        for (Method method : declaredMethods) {
-            if (Modifier.isStatic(method.getModifiers()) && Capabilities.class.isAssignableFrom(method.getReturnType())) {
-                DesiredCapabilitiesFactory factory = new DesiredCapabilitiesFactory(method);
-                register(factory);
-            }
-        }
+        Arrays.stream(PredefinedDesiredCapabilities.class.getMethods())
+                .forEach(method -> register(new DesiredCapabilitiesFactory(method)));
     }
 
     @Override
