@@ -3,26 +3,25 @@ package org.fluentlenium.configuration;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
 import java.util.Properties;
 
+import static org.mockito.Mockito.when;
+
+/**
+ * Unit test for {@link PropertiesBackendConfiguration}.
+ */
+@RunWith(MockitoJUnitRunner.class)
 public class PropertiesBackendConfigurationTest {
 
     private static final String DRIVER_LIFECYCLE = "driverLifecycle";
-
-    public static class DummyConfigurationFactory implements ConfigurationFactory {
-        @Override
-        public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
-            return null;
-        }
-    }
-
-    public static class DummyConfigurationDefaults extends ConfigurationDefaults {
-
-    }
-
+    @Mock
+    private CapabilitiesConfigurationPropertyRetriever retriever;
     private PropertiesBackendConfiguration configuration;
     private Properties properties;
 
@@ -30,28 +29,11 @@ public class PropertiesBackendConfigurationTest {
     public void before() {
         properties = new Properties();
         configuration = new PropertiesBackendConfiguration(new DefaultPropertiesBackend(properties), "");
+        configuration.setCapabilitiesRetriever(retriever);
     }
 
     public PropertiesBackendConfiguration getConfiguration() {
         return configuration;
-    }
-
-    protected void mockProperty(String propertyName, Object propertyValue) {
-        if (propertyValue == null) {
-            properties.remove(propertyName);
-        } else {
-            properties.setProperty(propertyName, valueToString(propertyValue));
-        }
-    }
-
-    protected String valueToString(Object propertyValue) {
-        if (propertyValue == null) {
-            return null;
-        }
-        if (propertyValue instanceof Class) {
-            return ((Class) propertyValue).getName();
-        }
-        return String.valueOf(propertyValue);
     }
 
     @Test
@@ -104,66 +86,75 @@ public class PropertiesBackendConfigurationTest {
 
     @Test
     public void capabilities() {
+        DesiredCapabilities capabilitiesJSEnabled = new DesiredCapabilities();
+        capabilitiesJSEnabled.setJavascriptEnabled(true);
+        when(retriever.getCapabilitiesProperty("{\"javascriptEnabled\": true}", null)).thenReturn(capabilitiesJSEnabled);
+        DesiredCapabilities capabilitiesJSDisabled = new DesiredCapabilities();
+        when(retriever.getCapabilitiesProperty("{\"javascriptEnabled\": false}", null)).thenReturn(capabilitiesJSDisabled);
+
         Assertions.assertThat(getConfiguration().getWebDriver()).isNull();
 
         mockProperty("capabilities", "{\"javascriptEnabled\": true}");
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setJavascriptEnabled(true);
-        Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilities);
+        Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilitiesJSEnabled);
 
         mockProperty("capabilities", "{\"javascriptEnabled\": false}");
-        Assertions.assertThat(getConfiguration().getCapabilities()).isNotEqualTo(capabilities);
+        Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilitiesJSDisabled);
     }
 
     @Test
     public void desiredCapabilities() {
+        DesiredCapabilities capabilitiesFirefox = DesiredCapabilities.firefox();
+        when(retriever.getCapabilitiesProperty("firefox", null)).thenReturn(capabilitiesFirefox);
+        DesiredCapabilities capabilitiesChrome = DesiredCapabilities.chrome();
+        when(retriever.getCapabilitiesProperty("chrome", null)).thenReturn(capabilitiesChrome);
+
         Assertions.assertThat(getConfiguration().getWebDriver()).isNull();
 
         mockProperty("capabilities", "firefox");
-
-        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-        Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilities);
+        Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilitiesFirefox);
 
         mockProperty("capabilities", "chrome");
-        Assertions.assertThat(getConfiguration().getCapabilities()).isNotEqualTo(capabilities);
+        Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilitiesChrome);
     }
 
     @Test
     public void capabilitiesClassName() {
+        TestCapabilities testCapabilities = new TestCapabilities();
+        when(retriever.getCapabilitiesProperty(TestCapabilities.class.getName(), null)).thenReturn(testCapabilities);
+
         Assertions.assertThat(getConfiguration().getWebDriver()).isNull();
 
         mockProperty("capabilities", TestCapabilities.class.getName());
-
-        Assertions.assertThat(getConfiguration().getCapabilities()).isExactlyInstanceOf(TestCapabilities.class);
+        Assertions.assertThat(getConfiguration().getCapabilities()).isSameAs(testCapabilities);
     }
 
     @Test
     public void capabilitiesFactory() {
+        TestCapabilities testCapabilities = new TestCapabilities();
+        when(retriever.getCapabilitiesProperty("test-capabilities-factory", null)).thenReturn(testCapabilities);
         Assertions.assertThat(getConfiguration().getWebDriver()).isNull();
 
         mockProperty("capabilities", "test-capabilities-factory");
-
-        Assertions.assertThat(getConfiguration().getCapabilities()).isExactlyInstanceOf(TestCapabilities.class);
+        Assertions.assertThat(getConfiguration().getCapabilities()).isSameAs(testCapabilities);
     }
 
     @Test
     public void capabilitiesURL() {
+        URL capabilitiesURL = getClass().getResource("/org/fluentlenium/configuration/capabilities.json");
+        DesiredCapabilities capabilitiesJSEnabled = new DesiredCapabilities();
+        capabilitiesJSEnabled.setJavascriptEnabled(true);
+        when(retriever.getCapabilitiesProperty(capabilitiesURL.toString(), null)).thenReturn(capabilitiesJSEnabled);
+        URL capabilitiesFalseURL = getClass().getResource("/org/fluentlenium/configuration/capabilities-false.json");
+        DesiredCapabilities capabilitiesJSDisabled = new DesiredCapabilities();
+        when(retriever.getCapabilitiesProperty(capabilitiesFalseURL.toString(), null)).thenReturn(capabilitiesJSDisabled);
+
         Assertions.assertThat(getConfiguration().getCapabilities()).isNull();
 
-        URL capabilitiesURL = getClass().getResource("/org/fluentlenium/configuration/capabilities.json");
-
         mockProperty("capabilities", capabilitiesURL.toString());
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setJavascriptEnabled(true);
-        Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilities);
-
-        URL capabilitiesFalseURL = getClass().getResource("/org/fluentlenium/configuration/capabilities-false.json");
+        Assertions.assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilitiesJSEnabled);
 
         mockProperty("capabilities", capabilitiesFalseURL.toString());
-        Assertions.assertThat(getConfiguration().getCapabilities()).isNotEqualTo(capabilities);
-
+        Assertions.assertThat(getConfiguration().getCapabilities()).isSameAs(capabilitiesJSDisabled);
     }
 
     @Test
@@ -321,5 +312,34 @@ public class PropertiesBackendConfigurationTest {
 
         mockProperty("key", "value");
         Assertions.assertThat(getConfiguration().getCustomProperty("key")).isEqualTo("value");
+    }
+
+    protected void mockProperty(String propertyName, Object propertyValue) {
+        if (propertyValue == null) {
+            properties.remove(propertyName);
+        } else {
+            properties.setProperty(propertyName, valueToString(propertyValue));
+        }
+    }
+
+    protected String valueToString(Object propertyValue) {
+        if (propertyValue == null) {
+            return null;
+        }
+        if (propertyValue instanceof Class) {
+            return ((Class) propertyValue).getName();
+        }
+        return String.valueOf(propertyValue);
+    }
+
+    public static class DummyConfigurationFactory implements ConfigurationFactory {
+        @Override
+        public Configuration newConfiguration(Class<?> containerClass, ConfigurationProperties configurationDefaults) {
+            return null;
+        }
+    }
+
+    public static class DummyConfigurationDefaults extends ConfigurationDefaults {
+
     }
 }
