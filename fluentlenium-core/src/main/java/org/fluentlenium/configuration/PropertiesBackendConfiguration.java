@@ -9,6 +9,7 @@ import java.util.Locale;
 /**
  * Abstract properties configuration.
  */
+@SuppressWarnings("PMD.GodClass")
 public class PropertiesBackendConfiguration extends BaseConfiguration implements ConfigurationProperties {
     /**
      * Default properties prefix.
