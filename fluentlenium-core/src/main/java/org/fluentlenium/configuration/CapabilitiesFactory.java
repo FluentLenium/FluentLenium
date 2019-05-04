@@ -8,7 +8,7 @@ import org.atteo.classindex.IndexSubclasses;
 @IndexSubclasses
 public interface CapabilitiesFactory extends Factory {
     /**
-     * Creates a new instance of {@link CapabilitiesRegistry}.
+     * Creates a new instance of {@link org.openqa.selenium.Capabilities}.
      *
      * @param configuration configuration
      * @return new instance of capabilities
