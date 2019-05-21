@@ -3,7 +3,7 @@ jobs:
     - stage: test
       name: "Java 11 - unit & integration tests code coverage + snapshot upload"
       language: java
-      jdk: oraclejdk11
+      jdk: openjdk11
       script:
         - mvn -Pjava11 clean verify jacoco:report
         - mvn -Pjava11 coveralls:report
@@ -12,28 +12,28 @@ jobs:
     - stage: test
       name: "Java 8 - unit & integration tests"
       language: java
-      jdk: oraclejdk8
+      jdk: openjdk8
       script:
         - mvn -Pjava8 clean verify
 
     - stage: test
       name: "Java 11 - unit & framework integration tests"
       language: java
-      jdk: oraclejdk11
+      jdk: openjdk11
       script:
         - mvn -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report' clean test
 
     - stage: test
       name: "Java 11 - compile examples"
       language: java
-      jdk: oraclejdk11
+      jdk: openjdk11
       script:
         - mvn -Pexamples,java11 clean compile
 
     - stage: test
       name: "Java 11 - javadoc"
       language: java
-      jdk: oraclejdk11
+      jdk: openjdk11
       script:
         - mvn -Pjava11 javadoc:javadoc
 
