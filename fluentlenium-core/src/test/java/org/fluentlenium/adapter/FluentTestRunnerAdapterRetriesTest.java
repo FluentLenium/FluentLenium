@@ -45,7 +45,7 @@ public class FluentTestRunnerAdapterRetriesTest {
         initMocks(this);
     }
 
-    @Test()
+    @Test
     public void testFailedWhenBrowserCrashed() {
         String testName = "test1";
 
@@ -64,7 +64,7 @@ public class FluentTestRunnerAdapterRetriesTest {
     }
 
 
-    @Test()
+    @Test
     public void testGetSharedWebDriverRetry() throws ExecutionException, InterruptedException {
         when(adapter.getBrowserTimeoutRetries()).thenReturn(2);
         when(adapter.getBrowserTimeout()).thenReturn(1L);

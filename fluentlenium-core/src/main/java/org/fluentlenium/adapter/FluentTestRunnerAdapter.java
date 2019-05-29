@@ -4,6 +4,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -264,44 +265,53 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @throws ExecutionException   execution exception
      * @throws InterruptedException interrupted exception
      */
-    protected SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters, ExecutorService webDriverExecutor)
+    protected SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters,
+                                                 ExecutorService webDriverExecutor)
             throws ExecutionException, InterruptedException {
         SharedWebDriver sharedWebDriver = null;
-        ExecutorService setExecutorService = null;
+        ExecutorService executorService = getExecutor(webDriverExecutor);
 
-        if (webDriverExecutor != null) {
-            setExecutorService = webDriverExecutor;
-        }
+        for (int retryCount = 0; retryCount < getBrowserTimeoutRetries(); retryCount++) {
 
-        for (int browserTimeoutRetryNo = 0; browserTimeoutRetryNo < getBrowserTimeoutRetries()
-                && sharedWebDriver == null; browserTimeoutRetryNo++) {
-            if (setExecutorService == null) {
-                webDriverExecutor = Executors.newSingleThreadExecutor();
-            } else {
-                webDriverExecutor = setExecutorService;
-            }
+            Future<SharedWebDriver> futureWebDriver = createDriver(parameters, executorService);
+            shutDownExecutor(executorService);
 
-            Future<SharedWebDriver> futureWebDriver = webDriverExecutor.submit(
-                    () -> SharedWebDriverContainer.INSTANCE
-                            .getOrCreateDriver(this::newWebDriver, parameters.getTestClass(),
-                                    parameters.getTestName(), parameters.getDriverLifecycle()));
-
-            setTestClassAndMethodValues();
-
-            webDriverExecutor.shutdown();
             try {
-                if (!webDriverExecutor.awaitTermination(getBrowserTimeout(), TimeUnit.MILLISECONDS)) {
-                    webDriverExecutor.shutdownNow();
-                }
-
                 sharedWebDriver = futureWebDriver.get();
             } catch (InterruptedException | ExecutionException e) {
-                webDriverExecutor.shutdownNow();
+                executorService.shutdownNow();
                 throw e;
+            }
+
+            if (sharedWebDriver != null) {
+                break;
             }
         }
 
+        setTestClassAndMethodValues();
         return sharedWebDriver;
+    }
+
+    private void shutDownExecutor(ExecutorService executorService) throws InterruptedException {
+        executorService.shutdown();
+        if (didNotExitGracefully(executorService)) {
+            executorService.shutdownNow();
+        }
+    }
+
+    private boolean didNotExitGracefully(ExecutorService executorService) throws InterruptedException {
+        return !executorService.awaitTermination(getBrowserTimeout(), TimeUnit.MILLISECONDS);
+    }
+
+    private Future<SharedWebDriver> createDriver(EffectiveParameters<?> parameters, ExecutorService executorService) {
+        return executorService.submit(
+                () -> SharedWebDriverContainer.INSTANCE
+                        .getOrCreateDriver(this::newWebDriver, parameters.getTestClass(),
+                                parameters.getTestName(), parameters.getDriverLifecycle()));
+    }
+
+    private ExecutorService getExecutor(ExecutorService webDriverExecutor) {
+        return Objects.requireNonNullElseGet(webDriverExecutor, Executors::newSingleThreadExecutor);
     }
 
     private void clearThreadLocals() {
