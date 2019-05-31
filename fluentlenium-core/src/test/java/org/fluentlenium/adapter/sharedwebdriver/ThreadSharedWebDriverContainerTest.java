@@ -7,7 +7,10 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
