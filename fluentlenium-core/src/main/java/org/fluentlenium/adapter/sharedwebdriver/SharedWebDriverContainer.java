@@ -27,33 +27,29 @@ public enum SharedWebDriverContainer {
         Runtime.getRuntime().addShutdownHook(shutdownHook);
     }
 
-    public SharedWebdriverSingletonImpl getImpl() {
-        return impl;
-    }
-
     public <T> SharedWebDriver getDriver(Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
-        return getImpl().getDriver(testClass, testName, driverLifecycle);
+        return impl.getDriver(testClass, testName, driverLifecycle);
     }
 
     public <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass,
                                                  String testName, DriverLifecycle driverLifecycle) {
-        return getImpl().getOrCreateDriver(webDriverFactory, testClass, testName, driverLifecycle);
+        return impl.getOrCreateDriver(webDriverFactory, testClass, testName, driverLifecycle);
     }
 
     public List<SharedWebDriver> getAllDrivers() {
-        return getImpl().getAllDrivers();
+        return impl.getAllDrivers();
     }
 
     public void quit(SharedWebDriver driver) {
-        getImpl().quit(driver);
+        impl.quit(driver);
     }
 
     public void quitAll() {
-        getImpl().quitAll();
+        impl.quitAll();
     }
 
     public List<SharedWebDriver> getTestClassDrivers(Class<?> testClass) {
-        return getImpl().getTestClassDrivers(testClass);
+        return impl.getTestClassDrivers(testClass);
     }
 
 }
