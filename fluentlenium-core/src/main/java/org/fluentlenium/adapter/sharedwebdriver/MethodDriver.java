@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class MethodDriver implements FluentLeniumWebDriver {
+public class MethodDriver implements FluentLeniumDriver {
 
     private final Map<ClassAndTestName, SharedWebDriver> methodDrivers = new HashMap<>();
 
@@ -28,7 +28,7 @@ public class MethodDriver implements FluentLeniumWebDriver {
         return methodDrivers.get(new ClassAndTestName(testClass, testName));
     }
 
-    class ClassAndTestName {
+    private class ClassAndTestName {
         private final Class<?> testClass;
         private final String testName;
 

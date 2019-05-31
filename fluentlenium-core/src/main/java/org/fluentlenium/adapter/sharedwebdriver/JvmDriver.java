@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.sharedwebdriver;
 
-public class JvmDriver implements FluentLeniumWebDriver {
+public class JvmDriver implements FluentLeniumDriver {
 
     private SharedWebDriver jvmDriver;
 

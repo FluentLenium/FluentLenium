@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.sharedwebdriver;
 
-public interface FluentLeniumWebDriver {
+public interface FluentLeniumDriver {
 
     default void quitDriver(SharedWebDriver sharedWebDriver, SharedWebDriver testDriver) {
         if (testDriver == sharedWebDriver && testDriver.getDriver() != null) { // NOPMD CompareObjectsWithEquals

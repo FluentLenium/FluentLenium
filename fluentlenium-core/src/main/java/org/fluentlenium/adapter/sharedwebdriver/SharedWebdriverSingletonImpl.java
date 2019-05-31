@@ -17,10 +17,10 @@ import org.openqa.selenium.WebDriver;
 @SuppressWarnings("PMD.CyclomaticComplexity")
 class SharedWebdriverSingletonImpl {
 
-    private ClassDriver classDriverImpl = new ClassDriver();
-    private JvmDriver jvmDriverImpl = new JvmDriver();
-    private ThreadDriver threadDriverImpl = new ThreadDriver();
-    private MethodDriver methodDriverImpl = new MethodDriver();
+    private final ClassDriver classDriverImpl = new ClassDriver();
+    private final JvmDriver jvmDriverImpl = new JvmDriver();
+    private final ThreadDriver threadDriverImpl = new ThreadDriver();
+    private final MethodDriver methodDriverImpl = new MethodDriver();
 
     /**
      * Get an existing or create a new shared driver for the given test, with the given shared driver
@@ -52,7 +52,6 @@ class SharedWebdriverSingletonImpl {
     }
 
     private void registerDriver(SharedWebDriver driver) {
-
         synchronized (this) {
             switch (driver.getDriverLifecycle()) {
                 case JVM:

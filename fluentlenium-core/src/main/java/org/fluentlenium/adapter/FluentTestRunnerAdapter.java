@@ -4,12 +4,12 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.lang3.StringUtils;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.fluentlenium.adapter.exception.AnnotationNotFoundException;
@@ -311,7 +311,10 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     }
 
     private ExecutorService getExecutor(ExecutorService webDriverExecutor) {
-        return Objects.requireNonNullElseGet(webDriverExecutor, Executors::newSingleThreadExecutor);
+        if (webDriverExecutor == null) {
+            return Executors.newSingleThreadExecutor();
+        }
+        return webDriverExecutor;
     }
 
     private void clearThreadLocals() {

@@ -3,7 +3,7 @@ package org.fluentlenium.adapter.sharedwebdriver;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ClassDriver implements FluentLeniumWebDriver {
+public class ClassDriver implements FluentLeniumDriver {
 
     private final Map<Class<?>, SharedWebDriver> classDrivers = new HashMap<>();
 

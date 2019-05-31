@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class ThreadDriver implements FluentLeniumWebDriver {
+public class ThreadDriver implements FluentLeniumDriver {
 
     private final Map<ClassAndTestNameWithThreadId, SharedWebDriver> threadDrivers = new HashMap<>();
 
