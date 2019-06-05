@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.sharedwebdriver;
 
+import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.junit.After;
 import org.junit.Before;
@@ -28,8 +29,11 @@ public class ClassSharedWebDriverContainerTest implements Supplier<WebDriver> {
 
     @Test
     public void getOrCreateDriverWithDifferentTestNamesAndStrategyPerClassCreatesOneInstance() {
-        SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.CLASS);
-        SharedWebDriver driver2 = container.getOrCreateDriver(this, Object.class, "otherTest", DriverLifecycle.CLASS);
+        EffectiveParameters<?> parameters1 = new EffectiveParameters<>(Object.class, "test", DriverLifecycle.CLASS);
+        EffectiveParameters<?> parameters2 = new EffectiveParameters<>(Object.class, "otherTest", DriverLifecycle.CLASS);
+
+        SharedWebDriver driver = container.getOrCreateDriver(this, parameters1);
+        SharedWebDriver driver2 = container.getOrCreateDriver(this, parameters2);
         assertThat(driver).isEqualTo(driver2);
         assertThat(container.getAllDrivers()).containsOnly(driver);
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
@@ -41,12 +45,14 @@ public class ClassSharedWebDriverContainerTest implements Supplier<WebDriver> {
 
     @Test
     public void getOrCreateDriverWithDifferentTestNamesAndDifferentTestClassAndStrategyPerClassCreatesDistinctInstance() {
-        SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.CLASS);
+        EffectiveParameters<?> parameters1 = new EffectiveParameters<>(Object.class, "test", DriverLifecycle.CLASS);
+        EffectiveParameters<?> parameters2 = new EffectiveParameters<>(String.class, "otherTest", DriverLifecycle.CLASS);
+        SharedWebDriver driver = container.getOrCreateDriver(this, parameters1);
         assertThat(container.getAllDrivers()).containsOnly(driver);
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
         assertThat(container.getTestClassDrivers(String.class)).isEmpty();
 
-        SharedWebDriver driver2 = container.getOrCreateDriver(this, String.class, "otherTest", DriverLifecycle.CLASS);
+        SharedWebDriver driver2 = container.getOrCreateDriver(this, parameters2);
         assertThat(driver).isNotEqualTo(driver2);
         assertThat(container.getAllDrivers()).containsOnly(driver, driver2);
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);

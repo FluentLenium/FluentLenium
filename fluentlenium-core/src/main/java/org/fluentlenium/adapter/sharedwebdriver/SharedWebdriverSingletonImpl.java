@@ -1,14 +1,15 @@
 package org.fluentlenium.adapter.sharedwebdriver;
 
+import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
+import org.openqa.selenium.WebDriver;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Supplier;
-
-import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
-import org.openqa.selenium.WebDriver;
 
 /**
  * Shared web driver container singleton implementation.
@@ -27,28 +28,26 @@ class SharedWebdriverSingletonImpl {
      * lifecycle strategy.
      *
      * @param webDriverFactory Supplier supplying new WebDriver instances
-     * @param testClass        Test class
-     * @param testName         Test name
-     * @param driverLifecycle  shared driver lifecycle
-     * @param <T>              type of test
+     * @param parameters test parameters
      * @return shared web driver
      */
-    <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass,
-                                          String testName, DriverLifecycle driverLifecycle) {
+    SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, EffectiveParameters<?> parameters) {
         synchronized (this) {
-            SharedWebDriver driver = getDriver(testClass, testName, driverLifecycle);
-            if (driver == null) {
-                driver = createDriver(webDriverFactory, testClass, testName, driverLifecycle);
-                registerDriver(driver);
-            }
-            return driver;
+            return Optional.ofNullable(getDriver(parameters))
+                    .orElseGet(() -> createNewDriver(webDriverFactory, parameters));
         }
     }
 
-    private <T> SharedWebDriver createDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass, String testName,
-                                             DriverLifecycle driverLifecycle) {
+    private SharedWebDriver createNewDriver(Supplier<WebDriver> webDriverFactory, EffectiveParameters<?> parameters) {
+        SharedWebDriver driver = createDriver(webDriverFactory, parameters);
+        registerDriver(driver);
+        return driver;
+    }
+
+    private SharedWebDriver createDriver(Supplier<WebDriver> webDriverFactory, EffectiveParameters<?> parameters) {
         WebDriver webDriver = webDriverFactory.get();
-        return new SharedWebDriver(webDriver, testClass, testName, driverLifecycle);
+        return new SharedWebDriver(webDriver,
+                parameters.getTestClass(), parameters.getTestName(), parameters.getDriverLifecycle());
     }
 
     private void registerDriver(SharedWebDriver driver) {
@@ -74,23 +73,22 @@ class SharedWebdriverSingletonImpl {
     /**
      * Get the current driver for given test class.
      *
-     * @param driverLifecycle driver lifecycle
-     * @param <T>             type of test class
+     * @param parameters test parameters
      * @return shared WebDriver
      */
-    public <T> SharedWebDriver getDriver(Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
+    public SharedWebDriver getDriver(EffectiveParameters<?> parameters) {
         synchronized (this) {
-            switch (driverLifecycle) {
+            switch (parameters.getDriverLifecycle()) {
                 case JVM:
                     return jvmDriverImpl.getDriver();
                 case CLASS:
-                    return classDriverImpl.getDriver(testClass);
+                    return classDriverImpl.getDriver(parameters.getTestClass());
                 case THREAD:
-                    return threadDriverImpl.getDriver(testClass, testName,
+                    return threadDriverImpl.getDriver(parameters.getTestClass(), parameters.getTestName(),
                             Thread.currentThread().getId());
 
                 default:
-                    return methodDriverImpl.getDriver(testClass, testName);
+                    return methodDriverImpl.getDriver(parameters.getTestClass(), parameters.getTestName());
             }
         }
     }
@@ -127,10 +125,7 @@ class SharedWebdriverSingletonImpl {
     List<SharedWebDriver> getAllDrivers() {
         List<SharedWebDriver> drivers = new ArrayList<>();
         synchronized (this) {
-            if (jvmDriverImpl.getDriver() != null) {
-                drivers.add(jvmDriverImpl.getDriver());
-            }
-
+            Optional.ofNullable(jvmDriverImpl.getDriver()).ifPresent(drivers::add);
             drivers.addAll(classDriverImpl.getClassDrivers().values());
             drivers.addAll(threadDriverImpl.getThreadDrivers().values());
             drivers.addAll(methodDriverImpl.getMethodDrivers().values());
@@ -148,11 +143,7 @@ class SharedWebdriverSingletonImpl {
         List<SharedWebDriver> drivers = new ArrayList<>();
 
         synchronized (this) {
-            SharedWebDriver classDriver = classDriverImpl.getClassDrivers().get(testClass);
-            if (classDriver != null) {
-                drivers.add(classDriver);
-            }
-
+            Optional.ofNullable(classDriverImpl.getClassDrivers().get(testClass)).ifPresent(drivers::add);
             drivers.addAll(getDrivers(testClass, methodDriverImpl.getMethodDrivers()));
             drivers.addAll(getDrivers(testClass, threadDriverImpl.getThreadDrivers()));
             return Collections.unmodifiableList(drivers);
@@ -174,11 +165,7 @@ class SharedWebdriverSingletonImpl {
      */
     void quitAll() {
         synchronized (this) {
-            if (jvmDriverImpl.getDriver() != null) {
-                jvmDriverImpl.getDriver().getDriver().quit();
-                jvmDriverImpl.addDriver(null);
-            }
-
+            Optional.ofNullable(jvmDriverImpl.getDriver()).ifPresent(jvmDriverImpl::quitDriver);
             quitAllDrivers(classDriverImpl.getClassDrivers());
             quitAllDrivers(methodDriverImpl.getMethodDrivers());
             quitAllDrivers(threadDriverImpl.getThreadDrivers());
