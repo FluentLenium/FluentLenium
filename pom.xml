@@ -394,12 +394,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <additionalJOption>--no-module-directories</additionalJOption>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>attach-javadocs</id>
+                        <id>aggregate</id>
                         <goals>
-                            <goal>test-jar</goal>
+                            <goal>aggregate</goal>
                         </goals>
+                        <phase>site</phase>
+                        <configuration>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
