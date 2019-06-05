@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.sharedwebdriver;
 
-import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
+import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
@@ -27,13 +27,12 @@ public enum SharedWebDriverContainer {
         Runtime.getRuntime().addShutdownHook(shutdownHook);
     }
 
-    public <T> SharedWebDriver getDriver(Class<T> testClass, String testName, DriverLifecycle driverLifecycle) {
-        return impl.getDriver(testClass, testName, driverLifecycle);
+    public SharedWebDriver getDriver(EffectiveParameters<?> parameters) {
+        return impl.getDriver(parameters);
     }
 
-    public <T> SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, Class<T> testClass,
-                                                 String testName, DriverLifecycle driverLifecycle) {
-        return impl.getOrCreateDriver(webDriverFactory, testClass, testName, driverLifecycle);
+    public SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, EffectiveParameters<?> parameters) {
+        return impl.getOrCreateDriver(webDriverFactory, parameters);
     }
 
     public List<SharedWebDriver> getAllDrivers() {

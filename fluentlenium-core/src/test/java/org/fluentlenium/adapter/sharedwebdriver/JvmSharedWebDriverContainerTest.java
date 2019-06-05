@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.sharedwebdriver;
 
+import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.junit.After;
 import org.junit.Before;
@@ -28,8 +29,10 @@ public class JvmSharedWebDriverContainerTest implements Supplier<WebDriver> {
 
     @Test
     public void getOrCreateDriverWithDifferentTestNamesAndDifferentTestClassAndStrategyOnceCreatesOneInstance() {
-        SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.JVM);
-        SharedWebDriver driver2 = container.getOrCreateDriver(this, String.class, "otherTest", DriverLifecycle.JVM);
+        EffectiveParameters<?> parameters1 = new EffectiveParameters<>(Object.class, "test", DriverLifecycle.JVM);
+        EffectiveParameters<?> parameters2 = new EffectiveParameters<>(String.class, "otherTest", DriverLifecycle.JVM);
+        SharedWebDriver driver = container.getOrCreateDriver(this, parameters1);
+        SharedWebDriver driver2 = container.getOrCreateDriver(this, parameters2);
         assertThat(driver).isEqualTo(driver2);
         assertThat(container.getAllDrivers()).containsOnly(driver);
         assertThat(container.getTestClassDrivers(Object.class)).isEmpty();

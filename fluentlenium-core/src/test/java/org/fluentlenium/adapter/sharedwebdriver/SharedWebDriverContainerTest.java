@@ -1,6 +1,7 @@
 package org.fluentlenium.adapter.sharedwebdriver;
 
 import com.google.common.collect.ImmutableSet;
+import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.junit.After;
 import org.junit.Before;
@@ -21,6 +22,16 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
 
     private SharedWebdriverSingletonImpl container;
 
+    private EffectiveParameters<?> parameters1 = new EffectiveParameters<>(Object.class, "test", DriverLifecycle.METHOD);
+    private EffectiveParameters<?> parameters2 = new EffectiveParameters<>(String.class, "test", DriverLifecycle.METHOD);
+    private EffectiveParameters<?> parameters3 = new EffectiveParameters<>(Object.class, "test", DriverLifecycle.CLASS);
+    private EffectiveParameters<?> parameters4 = new EffectiveParameters<>(String.class, "otherTest", DriverLifecycle.CLASS);
+    private EffectiveParameters<?> parameters5 = new EffectiveParameters<>(Object.class, "test", DriverLifecycle.JVM);
+    private EffectiveParameters<?> parameters6 = new EffectiveParameters<>(String.class, "otherTest", DriverLifecycle.JVM);
+    private EffectiveParameters<?> parameters7 = new EffectiveParameters<>(Object.class, "test", DriverLifecycle.THREAD);
+    private EffectiveParameters<?> parameters8 = new EffectiveParameters<>(Object.class, "test", DriverLifecycle.THREAD);
+
+
     @Before
     public void before() {
         container = new SharedWebdriverSingletonImpl();
@@ -34,22 +45,22 @@ public class SharedWebDriverContainerTest implements Supplier<WebDriver> {
 
     @Test
     public void quitAllShouldQuitAllDrivers() throws ExecutionException, InterruptedException {
-        SharedWebDriver driver = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.METHOD);
-        SharedWebDriver driver2 = container.getOrCreateDriver(this, String.class, "test", DriverLifecycle.METHOD);
+        SharedWebDriver driver = container.getOrCreateDriver(this, parameters1);
+        SharedWebDriver driver2 = container.getOrCreateDriver(this, parameters2);
 
-        SharedWebDriver driver3 = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.CLASS);
-        SharedWebDriver driver4 = container.getOrCreateDriver(this, String.class, "otherTest", DriverLifecycle.CLASS);
+        SharedWebDriver driver3 = container.getOrCreateDriver(this, parameters3);
+        SharedWebDriver driver4 = container.getOrCreateDriver(this, parameters4);
 
-        SharedWebDriver driver5 = container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.JVM);
-        SharedWebDriver driver6 = container.getOrCreateDriver(this, String.class, "otherTest", DriverLifecycle.JVM);
+        SharedWebDriver driver5 = container.getOrCreateDriver(this, parameters5);
+        SharedWebDriver driver6 = container.getOrCreateDriver(this, parameters6);
 
         ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(2);
 
         CompletableFuture<SharedWebDriver> futureDriver7 = CompletableFuture.supplyAsync(
-                () -> container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.THREAD), threadPoolExecutor);
+                () -> container.getOrCreateDriver(this, parameters7), threadPoolExecutor);
 
         CompletableFuture<SharedWebDriver> futureDriver8 = CompletableFuture.supplyAsync(
-                () -> container.getOrCreateDriver(this, Object.class, "test", DriverLifecycle.THREAD), threadPoolExecutor);
+                () -> container.getOrCreateDriver(this, parameters8), threadPoolExecutor);
 
         SharedWebDriver driver7 = futureDriver7.get();
         SharedWebDriver driver8 = futureDriver8.get();
