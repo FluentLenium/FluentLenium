@@ -21,4 +21,8 @@ ratings:
   - "**.java"
   - "**.groovy"
 
-exclude_paths: []
+exclude_paths: [
+  - "**/*.js"
+  - "**/*.html"
+  - "docs/*"
+]
