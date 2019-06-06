@@ -38,6 +38,7 @@ navbar-links:
     - Configuration: "docs/configuration"
     - Test methods: "docs/test-methods"
     - Assertion libraries: "docs/assertion-libraries"
+    - Javadoc: "https://fluentlenium.com/javadoc"
   Migration:
     - to 3.0: "migration/from-0.13.2-to-1.0-or-3.0"
     - from 3.0 to 4.0: "migration/3.0-to-4.0"

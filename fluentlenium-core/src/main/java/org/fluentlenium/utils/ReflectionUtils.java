@@ -374,12 +374,31 @@ public final class ReflectionUtils {
      * @return first generic type, or null if no generic type is found
      */
     public static Class<?> getFirstGenericType(Field field) {
-        Type[] actualTypeArguments = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
+        if (field.getGenericType() instanceof ParameterizedType) {
+            Type[] actualTypeArguments = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
 
-        if (actualTypeArguments.length > 0) {
-            return (Class<?>) actualTypeArguments[0];
+            if (actualTypeArguments.length > 0) {
+                return (Class<?>) actualTypeArguments[0];
+            }
         }
 
         return null;
+    }
+
+    /**
+     * Get public method by name from the declaring class.
+     *
+     * @param declaringClass declaring class
+     * @param name           method name
+     * @param types          argument types
+     * @return the public method by the specified name
+     * @throws IllegalArgumentException when there is no method found with the specified name
+     */
+    public static Method getMethod(Class<?> declaringClass, String name, Class... types) {
+        try {
+            return declaringClass.getMethod(name, types);
+        } catch (NoSuchMethodException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 }

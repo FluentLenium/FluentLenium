@@ -22,7 +22,7 @@ public class LazyComponentList<T> extends ListImpl<T> implements List<T>, WrapsE
 
     private final List<LazyComponentsListener<T>> lazyComponentsListeners = new ArrayList<>();
 
-    private final AtomicReference<java.lang.Object> list = new AtomicReference<>();
+    private final AtomicReference<Object> list = new AtomicReference<>();
 
     /**
      * Creates a new lazy component list.

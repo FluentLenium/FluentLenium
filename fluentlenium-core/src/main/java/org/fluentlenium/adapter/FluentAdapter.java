@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.configuration.WebDrivers;
-import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentControlImpl;
 import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.inject.ContainerContext;
@@ -16,7 +15,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 /**
  * Generic adapter to {@link FluentDriver}.
  */
-public class FluentAdapter extends FluentControlImpl implements FluentControl {
+public class FluentAdapter extends FluentControlImpl {
 
     private static final Set<String> IGNORED_EXCEPTIONS = Stream.of(
             "org.junit.internal.AssumptionViolatedException",

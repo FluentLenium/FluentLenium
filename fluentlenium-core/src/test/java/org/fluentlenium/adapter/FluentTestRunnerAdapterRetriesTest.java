@@ -8,7 +8,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-import java.io.IOException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -46,8 +45,8 @@ public class FluentTestRunnerAdapterRetriesTest {
         initMocks(this);
     }
 
-    @Test()
-    public void testFailedWhenBrowserCrashed() throws IOException, ExecutionException, InterruptedException {
+    @Test
+    public void testFailedWhenBrowserCrashed() {
         String testName = "test1";
 
         when(adapter.getBrowserTimeout()).thenReturn(1L);
@@ -65,8 +64,8 @@ public class FluentTestRunnerAdapterRetriesTest {
     }
 
 
-    @Test()
-    public void testGetSharedWebDriverRetry() throws IOException, ExecutionException, InterruptedException {
+    @Test
+    public void testGetSharedWebDriverRetry() throws ExecutionException, InterruptedException {
         when(adapter.getBrowserTimeoutRetries()).thenReturn(2);
         when(adapter.getBrowserTimeout()).thenReturn(1L);
 

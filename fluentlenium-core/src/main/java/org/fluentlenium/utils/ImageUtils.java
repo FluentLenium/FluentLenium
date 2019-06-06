@@ -19,9 +19,12 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
+/**
+ * Provides logic for screenshot and image manipulation and conversion.
+ */
 public class ImageUtils {
 
-    public static final String ERROR_WHILE_CONVERTING_IMAGE = "Error while converting image";
+    private static final String ERROR_WHILE_CONVERTING_IMAGE = "Error while converting image";
     private final WebDriver driver;
 
     public ImageUtils(WebDriver driver) {
@@ -32,6 +35,14 @@ public class ImageUtils {
         return driver;
     }
 
+    /**
+     * Accepts the current alert window and takes a screenshot.
+     * <p>
+     * The FluentLenium logo is also added on to the screenshot.
+     *
+     * @return the screenshot as a byte array
+     * @throws RuntimeException if a problem occurred during reading the screenshot file
+     */
     public byte[] handleAlertAndTakeScreenshot() {
         String alertText = getDriver().switchTo().alert().getText();
         getDriver().switchTo().alert().accept();
@@ -48,6 +59,14 @@ public class ImageUtils {
         }
     }
 
+    /**
+     * Converts the file referenced by the argument file name to a {@link BufferedImage}.
+     *
+     * @param fileName the name of the file to convert
+     * @return the converted BufferedImage
+     * @throws FileNotFoundException if the argument file cannot be found
+     * @throws RuntimeException      if a problem occurred during image conversion
+     */
     public static BufferedImage toBufferedImage(String fileName) throws FileNotFoundException {
         InputStream is = new FileInputStream(new File(fileName));
         try {
@@ -79,7 +98,8 @@ public class ImageUtils {
             g.drawImage(image2, image1.getWidth() - image2.getWidth(), image1.getHeight() - image2.getHeight(), null);
             return stitchedImage;
         } else {
-            BufferedImage stitchedImage = new BufferedImage(image1.getWidth(), image1.getHeight() + image2.getHeight(), BufferedImage.TYPE_INT_RGB);
+            BufferedImage stitchedImage = new BufferedImage(image1.getWidth(), image1.getHeight() + image2.getHeight(),
+                    BufferedImage.TYPE_INT_RGB);
             Graphics graphics = stitchedImage.getGraphics();
             graphics.drawImage(image1, 0, 0, null);
             graphics.drawImage(image2, 0, image1.getHeight(), null);

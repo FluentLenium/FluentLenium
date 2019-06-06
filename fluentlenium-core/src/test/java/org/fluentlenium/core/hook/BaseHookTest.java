@@ -10,19 +10,26 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Coordinates;
+import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+/**
+ * Unit test for {@link BaseHook}.
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class BaseHookTest {
     @Mock
     private WebDriver webDriver;
 
-    @Mock
+    @Mock(extraInterfaces = Locatable.class)
     private WebElement element;
 
     @Mock
@@ -86,9 +93,16 @@ public class BaseHookTest {
 
     @Test
     public void testNoOptionHookWithoutDefault() {
-
         BaseHook noOptionHook = new BaseHook<>(fluentAdapter, instantiator, () -> element, () -> locator, () -> "hook", null);
 
         assertThat(noOptionHook.getOptions()).isNull();
+    }
+
+    @Test
+    public void shouldReturnUnderlyingElementCoordinates() {
+        Coordinates coordinates = mock(Coordinates.class);
+        when(((Locatable) element).getCoordinates()).thenReturn(coordinates);
+
+        assertThat(hook.getCoordinates()).isSameAs(coordinates);
     }
 }

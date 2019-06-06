@@ -18,7 +18,7 @@ public class FluentJavascript {
      * Creates a new fluent javascript.
      *
      * @param executor underlying javascript executor
-     * @param async    if true, scripts will be executed aynschronously, else it will be executed synchronously
+     * @param async    if true, scripts will be executed asynchronously, else it will be executed synchronously
      * @param script   script source to execute
      * @param args     script arguments
      */
@@ -32,10 +32,9 @@ public class FluentJavascript {
     }
 
     /**
-     * Load lazy elements
+     * Load lazy the argument elements.
      *
-     * @param args
-     * @return
+     * @param args the element proxies
      */
     private void loadElements(Object[] args) {
         for (Object arg : args) {

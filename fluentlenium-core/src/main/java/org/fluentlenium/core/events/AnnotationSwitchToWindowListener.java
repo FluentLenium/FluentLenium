@@ -19,16 +19,13 @@ class AnnotationSwitchToWindowListener implements SwitchToWindowListener, Listen
     /**
      * Creates a new SwitchToWindow annotation listener.
      *
-     * @param method         method
-     * @param container      container
-     * @param annotationName annotation name
-     * @param priority       listener priority
+     * @param listenerContext the listener context
      */
-    AnnotationSwitchToWindowListener(Method method, Object container, String annotationName, int priority) {
-        this.method = method;
-        this.container = container;
-        this.annotationName = annotationName;
-        this.priority = priority;
+    AnnotationSwitchToWindowListener(ListenerContext listenerContext) {
+        this.method = listenerContext.getMethod();
+        this.container = listenerContext.getContainer();
+        this.annotationName = listenerContext.getAnnotationName();
+        this.priority = listenerContext.getPriority();
     }
 
     @Override
@@ -39,7 +36,7 @@ class AnnotationSwitchToWindowListener implements SwitchToWindowListener, Listen
     /**
      * Get a function that retrieves argument value based on argument class.
      *
-     * @param s script
+     * @param s      script
      * @param driver driver
      * @return function returning argument value from argument class
      */

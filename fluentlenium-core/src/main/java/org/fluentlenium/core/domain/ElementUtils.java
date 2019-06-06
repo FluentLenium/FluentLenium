@@ -3,6 +3,8 @@ package org.fluentlenium.core.domain;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.message.MessageProxy;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WrapsElement;
 
 /**
  * Utility class for elements.
@@ -23,5 +25,15 @@ public final class ElementUtils {
         messageBuilder.present();
         String message = MessageProxy.message(messageBuilder);
         return new NoSuchElementException(message);
+    }
+
+    /**
+     * Returns the wrapped {@link WebElement} from the argument element.
+     *
+     * @param element the element to get the wrapped element of
+     * @return the wrapped webelement
+     */
+    public static WebElement getWrappedElement(WebElement element) {
+        return ((WrapsElement) element).getWrappedElement();
     }
 }

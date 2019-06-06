@@ -17,15 +17,12 @@ class AnnotationNavigateAllListener extends AbstractAnnotationListener implement
     /**
      * Creates a new navigate all annotation listener
      *
-     * @param method         method to call when the event occurs
-     * @param container      container to call when the event occurs
-     * @param annotationName name of the annotation
-     * @param priority       priority of this listener
+     * @param listenerContext the listener context
      */
-    AnnotationNavigateAllListener(Method method, Object container, String annotationName, int priority) {
-        super(container, priority);
-        this.method = method;
-        this.annotationName = annotationName;
+    AnnotationNavigateAllListener(ListenerContext listenerContext) {
+        super(listenerContext.getContainer(), listenerContext.getPriority());
+        this.method = listenerContext.getMethod();
+        this.annotationName = listenerContext.getAnnotationName();
     }
 
     /**

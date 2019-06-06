@@ -62,5 +62,5 @@ public @interface Wait {
      *
      * @return array of ignored throwable
      */
-    java.lang.Class<? extends Throwable>[] ignoreAll() default {};
+    Class<? extends Throwable>[] ignoreAll() default {};
 }

@@ -1,5 +1,7 @@
 package org.fluentlenium.core.components;
 
+import static org.fluentlenium.core.domain.ElementUtils.getWrappedElement;
+
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.proxy.ProxyElementListener;
@@ -25,7 +27,6 @@ import java.util.Set;
 public class ComponentsManager extends AbstractComponentInstantiator
         implements ComponentInstantiator, ComponentsAccessor, ProxyElementListener {
 
-    private final FluentControl control;
     private final DefaultComponentInstantiator instantiator;
 
     private final Map<WebElement, Set<Object>> components = new IdentityHashMap<>();
@@ -37,8 +38,7 @@ public class ComponentsManager extends AbstractComponentInstantiator
      * @param control control interface
      */
     public ComponentsManager(FluentControl control) {
-        this.control = control;
-        instantiator = new DefaultComponentInstantiator(this.control, this);
+        instantiator = new DefaultComponentInstantiator(control, this);
     }
 
     /**
@@ -162,7 +162,7 @@ public class ComponentsManager extends AbstractComponentInstantiator
 
     private WebElement unwrapElement(WebElement element) {
         if (element instanceof WrapsElement) {
-            WebElement wrappedElement = ((WrapsElement) element).getWrappedElement();
+            WebElement wrappedElement = getWrappedElement(element);
             if (wrappedElement != element && wrappedElement != null) { // NOPMD CompareObjectsWithEquals
                 return unwrapElement(wrappedElement);
             }

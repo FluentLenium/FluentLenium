@@ -1,11 +1,6 @@
 package org.fluentlenium.utils;
 
-import org.apache.maven.model.Dependency;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static java.util.Objects.nonNull;
 
 import java.io.File;
 import java.io.FileReader;
@@ -15,8 +10,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static java.util.Objects.nonNull;
+import org.apache.maven.model.Dependency;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Responsible for retrieving information about Selenium version from pom.xml (if present). It logs warning when wrong
@@ -77,19 +76,37 @@ public final class SeleniumVersionChecker {
     static void logWarningsWhenSeleniumVersionIsWrong(Model model) {
         if (model != null) {
             String seleniumVersion = retrieveVersionFromPom(model);
-
             if (seleniumVersion == null) {
                 return;
             }
+
             isSeleniumVersionFound = true;
-            if (checkForParametrizedVersion(seleniumVersion)) {
-                seleniumVersion = checkModelForParametrizedValue(seleniumVersion, model);
+            boolean isParametrised = checkForParametrizedVersion(seleniumVersion);
+
+            String resolvedSeleniumVersion;
+            if (isParametrised) {
+                resolvedSeleniumVersion = resolveParametrisedVersion(model, seleniumVersion);
+            } else {
+                resolvedSeleniumVersion = seleniumVersion;
             }
 
-            if (!Objects.equals(seleniumVersion, EXPECTED_VERSION)) {
+            if (!Objects.equals(resolvedSeleniumVersion, EXPECTED_VERSION)) {
                 logger.warn(WRONG_VERSION_MESSAGE, EXPECTED_VERSION, FL_URL);
             }
         }
+    }
+
+    private static String resolveParametrisedVersion(Model model, String seleniumVersion) {
+        String resolvedSeleniumVersion = resolveParametrisedVersionFromPom(seleniumVersion, model);
+
+        if (resolvedSeleniumVersion == null) {
+            MavenXpp3Reader reader = new MavenXpp3Reader();
+            model = readPom(reader, PARENT_MODULE_POM);
+            if (model != null) {
+                resolvedSeleniumVersion = resolveParametrisedVersionFromPom(seleniumVersion, model);
+            }
+        }
+        return resolvedSeleniumVersion;
     }
 
     static String retrieveVersionFromPom(Model model) {
@@ -115,7 +132,7 @@ public final class SeleniumVersionChecker {
         return version.matches(VERSION_REGEX);
     }
 
-    static String checkModelForParametrizedValue(String seleniumVersion, Model model) {
+    static String resolveParametrisedVersionFromPom(String seleniumVersion, Model model) {
         String version = getNamePropertyName(seleniumVersion);
 
         if (nonNull(model.getProperties())) {

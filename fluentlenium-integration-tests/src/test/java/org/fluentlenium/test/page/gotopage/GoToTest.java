@@ -32,7 +32,7 @@ public class GoToTest extends IntegrationFluentTest {
     void goToWithNullPage() {
         FluentPage page = null;
         Assertions.assertThatThrownBy(() -> goTo(page)).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Page is mandatory");
+                .hasMessage("It is required to specify an instance of FluentPage for navigation.");
     }
 
     @Test

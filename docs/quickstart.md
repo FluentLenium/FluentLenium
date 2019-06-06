@@ -65,7 +65,7 @@ Assuming you want to use Java 11, Junit and AssertJ please add the following dep
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>htmlunit-driver</artifactId>
-    <version>2.33.3</version>
+    <version>2.34.0</version>
     <scope>test</scope>
 </dependency>
 ```
