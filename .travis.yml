@@ -35,7 +35,7 @@ jobs:
       language: java
       jdk: oraclejdk11
       script:
-        - mvn -Pjava11 javadoc:javadoc
+        - mvn -Pjava11 javadoc:aggregate
 
     - stage: test
       name: "Ruby - Docs build"
