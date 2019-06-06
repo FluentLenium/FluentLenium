@@ -8,6 +8,9 @@ FluentLenium is shipped with adapters for [JUnit4](https://junit.org/junit4/), [
 FluentLenium best integrates with [AssertJ](http://joel-costigliola.github.io/assertj/), but you can also choose to use
 the assertion framework you want.
 
+### Javadoc
+Complete FluentLenium Javadoc is available on [fluentlenium.com/javadoc](https://fluentlenium.com/javadoc)
+
 ### Contact us
 If you have any comment, remark or issue, please open an issue on
 [FluentLenium Issue Tracker](https://github.com/FluentLenium/FluentLenium/issues)
