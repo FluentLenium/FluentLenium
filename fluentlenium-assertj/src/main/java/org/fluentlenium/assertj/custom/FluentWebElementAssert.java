@@ -7,7 +7,6 @@ import org.openqa.selenium.Dimension;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Default implementation for {@link FluentWebElement} assertions;

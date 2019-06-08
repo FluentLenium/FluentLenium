@@ -19,7 +19,8 @@ public final class AssertionTestSupport {
      * @param shouldRaiseThrowable the callable
      * @return a throwable assert
      */
-    public static AbstractThrowableAssert<?, ? extends Throwable> assertThatAssertionErrorIsThrownBy(ThrowingCallable shouldRaiseThrowable) {
+    public static AbstractThrowableAssert<?, ? extends Throwable> assertThatAssertionErrorIsThrownBy(
+            ThrowingCallable shouldRaiseThrowable) {
         return Assertions.assertThatThrownBy(shouldRaiseThrowable).isInstanceOf(AssertionError.class);
     }
 }

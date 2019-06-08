@@ -1,7 +1,5 @@
 package org.fluentlenium.assertj.integration.list;
 
-import org.fluentlenium.assertj.AssertionTestSupport;
-import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.assertj.integration.IntegrationTest;
 import org.testng.annotations.Test;
 

@@ -1,12 +1,8 @@
 package org.fluentlenium.assertj.integration.element;
 
-import org.assertj.core.api.Assertions;
-import org.fluentlenium.assertj.AssertionTestSupport;
-import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.assertj.integration.IntegrationTest;
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.fluentlenium.assertj.AssertionTestSupport.assertThatAssertionErrorIsThrownBy;
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
