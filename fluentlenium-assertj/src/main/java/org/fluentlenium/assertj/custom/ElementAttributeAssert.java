@@ -5,7 +5,7 @@ import org.assertj.core.api.AbstractStringAssert;
 /**
  * Assertion interface for element attribute validation.
  */
-public interface ElementAttributeAssert {
+public interface ElementAttributeAssert extends AttributeAssert<AbstractStringAssert> {
 
     /**
      * Checks if the element has the given property.
@@ -25,7 +25,7 @@ public interface ElementAttributeAssert {
      * assertThat(element).hasAttribute("href").isEqualTo("https://duckduckgo.com");
      * </pre>
      *
-     * @param attribute attribute to find
+     * @param attribute the attribute to find
      * @return a new {@code AbstractStringAssert} object with the actual attribute value
      */
     AbstractStringAssert hasAttribute(String attribute);

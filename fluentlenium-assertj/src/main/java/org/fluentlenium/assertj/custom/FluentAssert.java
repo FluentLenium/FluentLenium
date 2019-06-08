@@ -83,14 +83,6 @@ public interface FluentAssert {
     AbstractAssert hasAttributeValue(String attribute, String value);
 
     /**
-     * Checks if the element or list of elements doesn't have the given property.
-     *
-     * @param attribute attribute to find the absence of
-     * @return {@code this} assertion object.
-     */
-    AbstractAssert hasNotAttribute(String attribute);
-
-    /**
      * check if the element or list of elements has given dimension
      *
      * @param dimension dimension to find

@@ -1,5 +1,7 @@
 package org.fluentlenium.assertj.custom;
 
+import org.assertj.core.api.Assertions;
+import org.fluentlenium.assertj.AssertionTestSupport;
 import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.mockito.Mock;
@@ -8,7 +10,10 @@ import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.fail;
+import static org.fluentlenium.assertj.AssertionTestSupport.assertThatAssertionErrorIsThrownBy;
 import static org.mockito.Mockito.when;
 
 /**
@@ -210,7 +215,7 @@ public class FluentWebElementTest {
     @Test
     public void testHasAttributeKo() {
         when(element.attribute("attribute")).thenReturn(null);
-        assertThatExceptionOfType(AssertionError.class).isThrownBy(() -> elementAssert.hasAttribute("attribute"));
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasAttribute("attribute"));
     }
 
     @Test
@@ -222,7 +227,7 @@ public class FluentWebElementTest {
     @Test
     public void testHasNotAttributeKo() {
         when(element.attribute("attribute")).thenReturn("some value");
-        assertThatExceptionOfType(AssertionError.class).isThrownBy(() -> elementAssert.hasNotAttribute("attribute"));
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasNotAttribute("attribute"));
     }
 
     @Test
@@ -293,7 +298,7 @@ public class FluentWebElementTest {
     }
 
     @Test
-    public void testHasNoRaceConditioninHasText() {
+    public void testHasNoRaceConditionInHasText() {
         String textToFind = "someText";
         String firstActualText = "someOtherText";
 

@@ -1,8 +1,6 @@
 package org.fluentlenium.assertj.custom;
 
 import com.google.common.collect.Lists;
-import org.assertj.core.api.Assertions;
-import org.fluentlenium.assertj.AssertionTestSupport;
 import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
