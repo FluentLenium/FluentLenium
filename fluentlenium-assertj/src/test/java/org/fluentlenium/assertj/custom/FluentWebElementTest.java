@@ -8,10 +8,12 @@ import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
+import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+/**
+ * Unit test for {@link FluentWebElementAssert}.
+ */
 public class FluentWebElementTest {
     @Mock
     private FluentWebElement element;
@@ -57,20 +59,20 @@ public class FluentWebElementTest {
     }
 
     @Test(expectedExceptions = AssertionError.class)
-    public void testIsClickabledKo() {
+    public void testIsClickableKo() {
         when(element.clickable()).thenReturn(false);
         elementAssert.isClickable();
     }
 
     @Test
-    public void testIsNotClickabledOk() {
+    public void testIsNotClickableOk() {
         when(element.present()).thenReturn(true);
         when(element.clickable()).thenReturn(false);
         elementAssert.isNotClickable();
     }
 
     @Test(expectedExceptions = AssertionError.class)
-    public void testIsNotClickabledKo() {
+    public void testIsNotClickableKo() {
         when(element.clickable()).thenReturn(true);
         elementAssert.isNotClickable();
     }
@@ -94,7 +96,7 @@ public class FluentWebElementTest {
     }
 
     @Test(expectedExceptions = AssertionError.class)
-    public void testIsNotPresentdKo() {
+    public void testIsNotPresentKo() {
         when(element.present()).thenReturn(true);
         elementAssert.isNotPresent();
     }
@@ -188,15 +190,39 @@ public class FluentWebElementTest {
     }
 
     @Test
-    public void testHasPropertyValueOk() {
+    public void testHasAttributeValueOk() {
         when(element.attribute("attribute")).thenReturn("some value");
         elementAssert.hasAttributeValue("attribute", "some value");
     }
 
     @Test(expectedExceptions = AssertionError.class)
-    public void testHasPropertyValueKo() {
+    public void testHasAttributeValueKo() {
         when(element.attribute("attribute")).thenReturn("other value");
         elementAssert.hasAttributeValue("attribute", "some value");
+    }
+
+    @Test
+    public void testHasAttributeOk() {
+        when(element.attribute("attribute")).thenReturn("some value");
+        elementAssert.hasAttribute("attribute");
+    }
+
+    @Test
+    public void testHasAttributeKo() {
+        when(element.attribute("attribute")).thenReturn(null);
+        assertThatExceptionOfType(AssertionError.class).isThrownBy(() -> elementAssert.hasAttribute("attribute"));
+    }
+
+    @Test
+    public void testHasNotAttributeOk() {
+        when(element.attribute("attribute")).thenReturn(null);
+        elementAssert.hasNotAttribute("attribute");
+    }
+
+    @Test
+    public void testHasNotAttributeKo() {
+        when(element.attribute("attribute")).thenReturn("some value");
+        assertThatExceptionOfType(AssertionError.class).isThrownBy(() -> elementAssert.hasNotAttribute("attribute"));
     }
 
     @Test

@@ -1,8 +1,12 @@
 package org.fluentlenium.assertj.custom;
 
 import org.assertj.core.api.AbstractAssert;
+import org.assertj.core.api.AbstractStringAssert;
 import org.openqa.selenium.Dimension;
 
+/**
+ * Base assertion interface.
+ */
 public interface FluentAssert {
 
     /**
@@ -64,7 +68,7 @@ public interface FluentAssert {
     /**
      * check if the element or list of elements has given tag
      *
-     * @param tagName name to find
+     * @param tagName tag name to find
      * @return {@code this} assertion object.
      */
     AbstractAssert hasTagName(String tagName);
@@ -72,16 +76,24 @@ public interface FluentAssert {
     /**
      * check if the element or list of elements has property with given value
      *
-     * @param attribute name to find
+     * @param attribute attribute to find
      * @param value     property value to match with actual
      * @return {@code this} assertion object.
      */
     AbstractAssert hasAttributeValue(String attribute, String value);
 
     /**
+     * Checks if the element or list of elements doesn't have the given property.
+     *
+     * @param attribute attribute to find the absence of
+     * @return {@code this} assertion object.
+     */
+    AbstractAssert hasNotAttribute(String attribute);
+
+    /**
      * check if the element or list of elements has given dimension
      *
-     * @param dimension name to find
+     * @param dimension dimension to find
      * @return {@code this} assertion object.
      */
     AbstractAssert hasDimension(Dimension dimension);

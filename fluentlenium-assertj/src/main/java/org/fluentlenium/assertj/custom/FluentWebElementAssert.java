@@ -1,14 +1,21 @@
 package org.fluentlenium.assertj.custom;
 
 import org.assertj.core.api.AbstractAssert;
+import org.assertj.core.api.AbstractStringAssert;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.Dimension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
+/**
+ * Default implementation for {@link FluentWebElement} assertions;
+ */
 public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAssert, FluentWebElement>
-        implements ElementStateAssert, FluentAssert {
+        implements ElementStateAssert, FluentAssert, ElementAttributeAssert {
+
+    private static final String CLASS_DELIMITER = " ";
 
     public FluentWebElementAssert(FluentWebElement actual) {
         super(actual, FluentWebElementAssert.class);
@@ -193,9 +200,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
 
     @Override
     public FluentWebElementAssert hasAttributeValue(String attribute, String value) {
-        String actualValue;
-
-        actualValue = actual.attribute(attribute);
+        String actualValue = actual.attribute(attribute);
 
         if (actualValue == null) {
             failWithMessage("The element does not have attribute " + attribute);
@@ -209,8 +214,28 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
+    @Override
+    public AbstractStringAssert hasAttribute(String attribute) {
+        String actualValue = actual.attribute(attribute);
+
+        if (actualValue == null) {
+            failWithMessage("The element does not have attribute " + attribute);
+        }
+
+        return new AbstractStringAssert<>(actualValue, AbstractStringAssert.class);
+    }
+
+    @Override
+    public FluentWebElementAssert hasNotAttribute(String attribute) {
+        if (actual.attribute(attribute) != null) {
+            failWithMessage("The element has attribute " + attribute);
+        }
+
+        return this;
+    }
+
     private List<String> getClasses(String classString) {
-        String[] primitiveList = classString.split(" ");
+        String[] primitiveList = classString.split(CLASS_DELIMITER);
         return Arrays.asList(primitiveList);
     }
 }

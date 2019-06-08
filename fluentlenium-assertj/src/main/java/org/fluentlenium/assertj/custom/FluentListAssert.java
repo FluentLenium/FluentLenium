@@ -1,16 +1,20 @@
 package org.fluentlenium.assertj.custom;
 
 import org.assertj.core.api.AbstractAssert;
-
+import org.assertj.core.api.ListAssert;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.Dimension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * Default implementation for {@link FluentList} assertions.
+ */
 public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentList>
-    implements FluentAssert, ListStateAssert {
+        implements FluentAssert, ListStateAssert, ListAttributeAssert {
 
     public FluentListAssert(FluentList<? extends FluentWebElement> actual) {
         super(actual, FluentListAssert.class);
@@ -30,8 +34,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     public FluentListAssert hasSize(int expectedSize) {
         int actualSize = actual.count();
         if (actualSize != expectedSize) {
-            failWithMessage("Expected size: " + expectedSize
-                    + ". Actual size: " + actualSize + ".");
+            failWithMessage("Expected size: " + expectedSize + ". Actual size: " + actualSize + ".");
         }
         return this;
     }
@@ -158,6 +161,24 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         if (!actualValues.contains(value)) {
             failWithMessage("No selected elements have attribute " + attribute
                     + " with value: " + value + ". Actual values found: " + actualValues);
+        }
+        return this;
+    }
+
+    @Override
+    public ListAssert<String> hasAttribute(String attribute) {
+        List<String> actualValues = actual.attributes(attribute);
+        if (actualValues.isEmpty() || actualValues.stream().anyMatch(Objects::isNull)) {
+            failWithMessage("Not all selected elements have attribute " + attribute);
+        }
+        return new ListAssert<>(actualValues);
+    }
+
+    @Override
+    public FluentListAssert hasNotAttribute(String attribute) {
+        List<String> actualValues = actual.attributes(attribute);
+        if (!actualValues.isEmpty() && actualValues.stream().anyMatch(Objects::nonNull)) {
+            failWithMessage("At least one selected element has attribute " + attribute);
         }
         return this;
     }

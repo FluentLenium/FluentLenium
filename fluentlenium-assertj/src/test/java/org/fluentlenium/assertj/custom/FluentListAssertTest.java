@@ -1,6 +1,8 @@
 package org.fluentlenium.assertj.custom;
 
 import com.google.common.collect.Lists;
+import org.assertj.core.api.Assertions;
+import org.fluentlenium.assertj.AssertionTestSupport;
 import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -14,7 +16,9 @@ import java.util.Arrays;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.fluentlenium.assertj.AssertionTestSupport.assertThatAssertionErrorIsThrownBy;
 import static org.mockito.Mockito.when;
 
 public class FluentListAssertTest {
@@ -293,6 +297,28 @@ public class FluentListAssertTest {
     }
 
     @Test
+    public void shouldHaveAttribute() {
+        when(fluentList.attributes("name")).thenReturn(Lists.newArrayList("name-one", "name-two"));
+        assertThatCode(() -> listAssert.hasAttribute("name")).doesNotThrowAnyException();
+    }
+
+    @Test
+    public void shouldFailWhenDoesNotHaveAttribute() {
+        assertThatAssertionErrorIsThrownBy(() -> listAssert.hasAttribute("name"));
+    }
+
+    @Test
+    public void shouldNotHaveAttribute() {
+        assertThatCode(() -> listAssert.hasNotAttribute("name")).doesNotThrowAnyException();
+    }
+
+    @Test
+    public void shouldFailWhenHasAttribute() {
+        when(fluentList.attributes("name")).thenReturn(Lists.newArrayList("name-one", "name-two"));
+        assertThatAssertionErrorIsThrownBy(() -> listAssert.hasNotAttribute("name"));
+    }
+
+    @Test
     public void emptyListErrorMessage() {
         when(fluentList.texts()).thenReturn(emptyList());
 
@@ -300,5 +326,4 @@ public class FluentListAssertTest {
                 .isInstanceOf(AssertionError.class)
                 .hasMessageContaining("List is empty. Please make sure you use correct selector.");
     }
-
 }
