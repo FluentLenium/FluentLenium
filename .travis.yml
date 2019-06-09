@@ -112,14 +112,13 @@ jobs:
 #      except:
 #        - master
 
-matrix:
+env:
+  fast_finish: true
+  matrix:
+    - BROWSER_NAME=opera
+    - BROWSER_NAME=chrome
   allow_failures:
     - env: BROWSER_NAME=opera
-  fast_finish: true
-
-env:
-  - BROWSER_NAME=opera
-  - BROWSER_NAME=chrome
   global:
     # env.CI_DEPLOY_USERNAME
     - secure: XhWeOh6PhDFEH/DTPhAbH04rysTdKWUoQxfYI7YjlrRznX0YKBRLVHIXn68TdzC/ucX0t+XzO2vOVoR53lSBYr45P5ZnO5+rFjVLhfhUDQWv3BibtaH6oCYM0lwvtA6mWKA6thWfvqOAvYgTUhdgEwaoVK/oHidW0KHNxNC0Ty8=
