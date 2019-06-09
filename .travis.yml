@@ -117,6 +117,9 @@ jobs:
         except:
           - master
 
+matrix:
+  fast_finish: true
+
 env:
   global:
     # env.CI_DEPLOY_USERNAME
