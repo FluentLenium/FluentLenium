@@ -1,4 +1,6 @@
 jobs:
+  allow_failures:
+    - script: cd examples/spring && mvn clean test -DbrowserName=opera -DgridUrl=$BROWSERSTACK_GRID_URL
   include:
 #    - stage: test
 #      name: "Java 11 - unit & integration tests code coverage + snapshot upload"
@@ -55,15 +57,11 @@ jobs:
     name: "E2E tests"
     language: java
     jdk: openjdk11
-    env:
-      - BROWSER_NAME=opera
     script:
-      - cd examples/spring && mvn clean test -DbrowserName=$BROWSER_NAME -DgridUrl=$BROWSERSTACK_GRID_URL
+      - cd examples/spring && mvn clean test -DbrowserName=opera -DgridUrl=$BROWSERSTACK_GRID_URL
     branches:
       except:
         - master
-    allow_failures:
-      env: BROWSER_NAME=opera
 
 #  - stage: e2e
 #    name: "Edge"
