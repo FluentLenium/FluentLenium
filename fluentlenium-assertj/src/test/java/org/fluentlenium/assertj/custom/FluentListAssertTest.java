@@ -15,8 +15,12 @@ import java.util.Arrays;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.fluentlenium.assertj.AssertionTestSupport.assertThatAssertionErrorIsThrownBy;
 import static org.mockito.Mockito.when;
 
+/**
+ * Unit test for {@link FluentListAssert}.
+ */
 public class FluentListAssertTest {
 
     @Mock
@@ -293,6 +297,32 @@ public class FluentListAssertTest {
     }
 
     @Test
+    public void shouldHaveAttribute() {
+        when(fluentList.attributes("name")).thenReturn(Lists.newArrayList("name-one", "name-two"));
+        listAssert.hasAttribute("name");
+    }
+
+    @Test
+    public void shouldFailWhenNoElementHasAttribute() {
+        when(fluentList.attributes("name")).thenReturn(Lists.newArrayList(null, null));
+        assertThatAssertionErrorIsThrownBy(() -> listAssert.hasAttribute("name"))
+                .hasMessage("No selected element has attribute name");
+    }
+
+    @Test
+    public void shouldNotHaveAttribute() {
+        when(fluentList.attributes("name")).thenReturn(Lists.newArrayList(null, null));
+        listAssert.hasNotAttribute("name");
+    }
+
+    @Test
+    public void shouldFailWhenHasAttribute() {
+        when(fluentList.attributes("name")).thenReturn(Lists.newArrayList("name-one", "name-two"));
+        assertThatAssertionErrorIsThrownBy(() -> listAssert.hasNotAttribute("name"))
+                .hasMessage("At least one selected element has attribute name");
+    }
+
+    @Test
     public void emptyListErrorMessage() {
         when(fluentList.texts()).thenReturn(emptyList());
 
@@ -300,5 +330,4 @@ public class FluentListAssertTest {
                 .isInstanceOf(AssertionError.class)
                 .hasMessageContaining("List is empty. Please make sure you use correct selector.");
     }
-
 }
