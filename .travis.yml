@@ -55,6 +55,12 @@ jobs:
     name: "E2E tests"
     language: java
     jdk: openjdk11
+    env:
+      matrix:
+        - BROWSER_NAME=opera
+        - BROWSER_NAME=chrome
+      allow_failures:
+        - env: BROWSER_NAME=opera
     script:
       - cd examples/spring && mvn clean test -DbrowserName=$BROWSER_NAME -DgridUrl=$BROWSERSTACK_GRID_URL
     branches:
@@ -113,12 +119,6 @@ jobs:
 #        - master
 
 env:
-  fast_finish: true
-  matrix:
-    - BROWSER_NAME=opera
-    - BROWSER_NAME=chrome
-  allow_failures:
-    - env: BROWSER_NAME=opera
   global:
     # env.CI_DEPLOY_USERNAME
     - secure: XhWeOh6PhDFEH/DTPhAbH04rysTdKWUoQxfYI7YjlrRznX0YKBRLVHIXn68TdzC/ucX0t+XzO2vOVoR53lSBYr45P5ZnO5+rFjVLhfhUDQWv3BibtaH6oCYM0lwvtA6mWKA6thWfvqOAvYgTUhdgEwaoVK/oHidW0KHNxNC0Ty8=
