@@ -168,8 +168,9 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     @Override
     public ListAssert<String> hasAttribute(String attribute) {
         List<String> actualValues = actual.attributes(attribute);
-        if (actualValues.isEmpty() || actualValues.stream().anyMatch(Objects::isNull)) {
-            failWithMessage("Not all selected elements have attribute " + attribute);
+        checkListEmptiness(actualValues);
+        if (actualValues.stream().allMatch(Objects::isNull)) {
+            failWithMessage("No selected element has attribute " + attribute);
         }
         return new ListAssert<>(actualValues);
     }
@@ -177,7 +178,8 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     @Override
     public FluentListAssert hasNotAttribute(String attribute) {
         List<String> actualValues = actual.attributes(attribute);
-        if (!actualValues.isEmpty() && actualValues.stream().anyMatch(Objects::nonNull)) {
+        checkListEmptiness(actualValues);
+        if (actualValues.stream().anyMatch(Objects::nonNull)) {
             failWithMessage("At least one selected element has attribute " + attribute);
         }
         return this;

@@ -10,7 +10,7 @@ import org.assertj.core.api.AbstractAssert;
 public interface AttributeAssert<T> {
 
     /**
-     * Checks if the list of elements all have the given property.
+     * Checks if at least one element in a list of elements has the given property.
      *
      * @param attribute the attribute to find
      * @return a new assert object with the actual attribute value
@@ -18,7 +18,7 @@ public interface AttributeAssert<T> {
     T hasAttribute(String attribute);
 
     /**
-     * Checks if the element or among a list of elements none has the given property.
+     * Checks if the element doesn't have, or no element in a list of elements has, the given property.
      *
      * @param attribute attribute to find the absence of
      * @return {@code this} assertion object.

@@ -18,10 +18,10 @@ public class FluentListHasAttributeTest extends IntegrationTest {
     }
 
     @Test
-    public void shouldFailWhenDoesNotHaveAttribute() {
+    public void shouldFailWhenNoElementHasAttribute() {
         goTo(DEFAULT_URL);
-        assertThatAssertionErrorIsThrownBy(() -> assertThat($("input")).hasAttribute("style"))
-                .hasMessage("Not all selected elements have attribute style");
+        assertThatAssertionErrorIsThrownBy(() -> assertThat($("input")).hasAttribute("data-type"))
+                .hasMessage("No selected element has attribute data-type");
     }
 
     @Test
@@ -31,7 +31,7 @@ public class FluentListHasAttributeTest extends IntegrationTest {
     }
 
     @Test
-    public void shouldFailWhenHasAttribute() {
+    public void shouldFailWhenAtLeastOneElementHasAttribute() {
         goTo(DEFAULT_URL);
         assertThatAssertionErrorIsThrownBy(() -> assertThat($("input")).hasNotAttribute("style"))
                 .hasMessage("At least one selected element has attribute style");

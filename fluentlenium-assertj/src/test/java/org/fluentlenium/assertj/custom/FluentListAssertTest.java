@@ -14,11 +14,13 @@ import java.util.Arrays;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.fluentlenium.assertj.AssertionTestSupport.assertThatAssertionErrorIsThrownBy;
 import static org.mockito.Mockito.when;
 
+/**
+ * Unit test for {@link FluentListAssert}.
+ */
 public class FluentListAssertTest {
 
     @Mock
@@ -297,23 +299,27 @@ public class FluentListAssertTest {
     @Test
     public void shouldHaveAttribute() {
         when(fluentList.attributes("name")).thenReturn(Lists.newArrayList("name-one", "name-two"));
-        assertThatCode(() -> listAssert.hasAttribute("name")).doesNotThrowAnyException();
+        listAssert.hasAttribute("name");
     }
 
     @Test
-    public void shouldFailWhenDoesNotHaveAttribute() {
-        assertThatAssertionErrorIsThrownBy(() -> listAssert.hasAttribute("name"));
+    public void shouldFailWhenNoElementHasAttribute() {
+        when(fluentList.attributes("name")).thenReturn(Lists.newArrayList(null, null));
+        assertThatAssertionErrorIsThrownBy(() -> listAssert.hasAttribute("name"))
+                .hasMessage("No selected element has attribute name");
     }
 
     @Test
     public void shouldNotHaveAttribute() {
-        assertThatCode(() -> listAssert.hasNotAttribute("name")).doesNotThrowAnyException();
+        when(fluentList.attributes("name")).thenReturn(Lists.newArrayList(null, null));
+        listAssert.hasNotAttribute("name");
     }
 
     @Test
     public void shouldFailWhenHasAttribute() {
         when(fluentList.attributes("name")).thenReturn(Lists.newArrayList("name-one", "name-two"));
-        assertThatAssertionErrorIsThrownBy(() -> listAssert.hasNotAttribute("name"));
+        assertThatAssertionErrorIsThrownBy(() -> listAssert.hasNotAttribute("name"))
+                .hasMessage("At least one selected element has attribute name");
     }
 
     @Test

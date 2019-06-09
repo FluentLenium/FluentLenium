@@ -9,7 +9,7 @@ import org.openqa.selenium.Dimension;
 public interface FluentAssert {
 
     /**
-     * check if the element or list of elements contains the text
+     * Checks if the element, or at least one element in a list of elements, contain the text.
      *
      * @param textToFind text to find
      * @return {@code this} assertion object.
@@ -17,7 +17,7 @@ public interface FluentAssert {
     AbstractAssert hasText(String textToFind);
 
     /**
-     * check if the element or list of elements matches the given regex
+     * Checks if the element, or at least one element in a list of elements, matches the given regex
      *
      * @param regexToBeMatched regex to be matched
      * @return {@code this} assertion object.
@@ -25,7 +25,7 @@ public interface FluentAssert {
     AbstractAssert hasTextMatching(String regexToBeMatched);
 
     /**
-     * check if the element or list of elements does not contain the text
+     * Checks if the element does not contain, or none of the elements in a list of elements contain the text
      *
      * @param textToFind text to find
      * @return {@code this} assertion object.
@@ -33,7 +33,7 @@ public interface FluentAssert {
     AbstractAssert hasNotText(String textToFind);
 
     /**
-     * check if the element or list of elements has the given id
+     * Checks if the element, or at least one element in a list of elements, has the given id
      *
      * @param idToFind id to find
      * @return {@code this} assertion object.
@@ -41,7 +41,9 @@ public interface FluentAssert {
     AbstractAssert hasId(String idToFind);
 
     /**
-     * check if the element or list of elements has the class
+     * Checks if the element, or at least one element in a list of elements, has the class.
+     * <p>
+     * This is not an exact match validation of the value of the class attribute.
      *
      * @param classToFind class to find
      * @return {@code this} assertion object.
@@ -49,7 +51,7 @@ public interface FluentAssert {
     AbstractAssert hasClass(String classToFind);
 
     /**
-     * check if the element or list of elements has given value
+     * Check if the element, or at least one element in a list of elements, has given value
      *
      * @param value value to find
      * @return {@code this} assertion object.
@@ -57,7 +59,7 @@ public interface FluentAssert {
     AbstractAssert hasValue(String value);
 
     /**
-     * check if the element or list of elements has given name
+     * Checks if the element, or at least one element in a list of elements, has given name
      *
      * @param name name to find
      * @return {@code this} assertion object.
@@ -65,7 +67,7 @@ public interface FluentAssert {
     AbstractAssert hasName(String name);
 
     /**
-     * check if the element or list of elements has given tag
+     * Checks if the element, or at least one element in a list of elements, has given tag
      *
      * @param tagName tag name to find
      * @return {@code this} assertion object.
@@ -73,7 +75,7 @@ public interface FluentAssert {
     AbstractAssert hasTagName(String tagName);
 
     /**
-     * check if the element or list of elements has property with given value
+     * Checks if the element, or at least one element in a list of elements, has property with the exact given value
      *
      * @param attribute attribute to find
      * @param value     property value to match with actual
@@ -82,7 +84,7 @@ public interface FluentAssert {
     AbstractAssert hasAttributeValue(String attribute, String value);
 
     /**
-     * check if the element or list of elements has given dimension
+     * Checks if the element, or at least one element in a list of elements, has given dimension
      *
      * @param dimension dimension to find
      * @return {@code this} assertion object.
