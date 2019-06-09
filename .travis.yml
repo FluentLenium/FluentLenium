@@ -1,70 +1,59 @@
 jobs:
-  fast_finish: true
   allow_failures:
     - stage: e2e
     - name: "E2E tests"
   include:
 
-    #    - stage: test
-    #      name: "Java 11 - unit & integration tests code coverage + snapshot upload"
-    #      language: java
-    #      jdk: openjdk11
-    #      script:
-    #        - mvn -Pjava11 clean verify jacoco:report
-    #        - mvn -Pjava11 coveralls:report
-    #        - if [ "$TRAVIS_BRANCH" = "develop" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_TAG" = "" ]; then mvn -Pjava11 deploy -DskipTests --settings deploy-settings.xml; fi
-    #
-    #    - stage: test
-    #      name: "Java 8 - unit & integration tests"
-    #      language: java
-    #      jdk: openjdk8
-    #      script:
-    #        - mvn -Pjava8 clean verify
-    #
-    #    - stage: test
-    #      name: "Java 11 - unit & framework integration tests"
-    #      language: java
-    #      jdk: openjdk11
-    #      script:
-    #        - mvn -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report' clean test
-    #
-    #    - stage: test
-    #      name: "Java 11 - compile examples"
-    #      language: java
-    #      jdk: openjdk11
-    #      script:
-    #        - mvn -Pexamples,java11 clean compile
-    #
-    #    - stage: test
-    #      name: "Java 11 - javadoc"
-    #      language: java
-    #      jdk: openjdk11
-    #      script:
-    #        - mvn -Pjava11 javadoc:aggregate
-    #
-    #    - stage: test
-    #      name: "Ruby - Docs build"
-    #      language: ruby
-    #      rvm:
-    #        - 2.6
-    #      before_script:
-    #        - chmod +x ./docs/cibuild
-    #      script:
-    #        - ( cd docs && ./cibuild )
-    #      env:
-    #        global:
-    #          - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-    #      sudo: false
-
-    - stage: e2e
-      name: "E2E tests"
+    - stage: test
+      name: "Java 11 - unit & integration tests code coverage + snapshot upload"
       language: java
       jdk: openjdk11
       script:
-        - cd examples/spring && mvn clean test -DbrowserName=opera -DgridUrl=$BROWSERSTACK_GRID_URL
-      branches:
-        except:
-          - master
+        - mvn -Pjava11 clean verify jacoco:report
+        - mvn -Pjava11 coveralls:report
+        - if [ "$TRAVIS_BRANCH" = "develop" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_TAG" = "" ]; then mvn -Pjava11 deploy -DskipTests --settings deploy-settings.xml; fi
+
+    - stage: test
+      name: "Java 8 - unit & integration tests"
+      language: java
+      jdk: openjdk8
+      script:
+        - mvn -Pjava8 clean verify
+
+    - stage: test
+      name: "Java 11 - unit & framework integration tests"
+      language: java
+      jdk: openjdk11
+      script:
+        - mvn -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report' clean test
+
+    - stage: test
+      name: "Java 11 - compile examples"
+      language: java
+      jdk: openjdk11
+      script:
+        - mvn -Pexamples,java11 clean compile
+
+    - stage: test
+      name: "Java 11 - javadoc"
+      language: java
+      jdk: openjdk11
+      script:
+        - mvn -Pjava11 javadoc:aggregate
+
+    - stage: test
+      name: "Ruby - Docs build"
+      language: ruby
+      rvm:
+        - 2.6
+      before_script:
+        - chmod +x ./docs/cibuild
+      script:
+        - ( cd docs && ./cibuild )
+      env:
+        global:
+          - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+      sudo: false
 
     - stage: e2e
       name: "Edge"
