@@ -1,7 +1,4 @@
 jobs:
-  fast_finish: true
-  allow_failures:
-    - env: ALLOWED_TO_FAIL=true
   include:
 #    - stage: test
 #      name: "Java 11 - unit & integration tests code coverage + snapshot upload"
@@ -119,8 +116,8 @@ jobs:
 
 matrix:
   allow_failures:
-    - env: gridUrl=$BROWSERSTACK_GRID_URL
-  fast_finish: true
+    - env: ALLOWED_TO_FAIL=true
+    fast_finish: true
 
 env:
   global:
