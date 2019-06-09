@@ -1,7 +1,17 @@
 jobs:
   allow_failures:
-    - script: cd examples/spring && mvn clean test -DbrowserName=opera -DgridUrl=$BROWSERSTACK_GRID_URL
+    - stage: e2e
+    - name: "E2E tests"
   include:
+    - stage: e2e
+      name: "E2E tests"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=opera -DgridUrl=$BROWSERSTACK_GRID_URL
+      branches:
+        except:
+          - master
 #    - stage: test
 #      name: "Java 11 - unit & integration tests code coverage + snapshot upload"
 #      language: java
@@ -53,15 +63,7 @@ jobs:
 #          - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 #      sudo: false
 
-  - stage: e2e
-    name: "E2E tests"
-    language: java
-    jdk: openjdk11
-    script:
-      - cd examples/spring && mvn clean test -DbrowserName=opera -DgridUrl=$BROWSERSTACK_GRID_URL
-    branches:
-      except:
-        - master
+
 
 #  - stage: e2e
 #    name: "Edge"
