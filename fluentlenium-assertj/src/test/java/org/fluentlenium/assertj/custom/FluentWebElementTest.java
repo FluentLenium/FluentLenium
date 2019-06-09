@@ -296,6 +296,64 @@ public class FluentWebElementTest {
     }
 
     @Test
+    public void shouldNotHaveClass() {
+        when(element.attribute("class")).thenReturn("clazz other-clazz");
+        elementAssert.hasNotClass("not-class");
+    }
+
+    @Test
+    public void shouldNotHaveClassWhenClassAttributeIsNotPresent() {
+        elementAssert.hasNotClass("clazz");
+    }
+
+    @Test
+    public void shouldFailWhenHasClass() {
+        when(element.attribute("class")).thenReturn("clazz other-clazz");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasNotClass("clazz"))
+                .hasMessage("The element has class: clazz");
+    }
+
+    @Test
+    public void shouldHaveClasses() {
+        when(element.attribute("class")).thenReturn("clazz clazz2 clazz3 clazz4");
+        elementAssert.hasClasses("clazz", "clazz2", "clazz4");
+    }
+
+    @Test
+    public void shouldFailWhenNoClassAttributeIsPresent() {
+        when(element.attribute("class")).thenReturn(null);
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasClasses("clazz", "clazz2", "clazz4"))
+                .hasMessage("The element has no class attribute.");
+    }
+
+    @Test
+    public void shouldFailWhenDoesntHaveAllClasses() {
+        when(element.attribute("class")).thenReturn("clazz clazz2 clazz3");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasClasses("clazz", "clazz5"))
+                .hasMessage("The element does not have all classes: [clazz, clazz5]. "
+                        + "Actual classes found : clazz clazz2 clazz3");
+    }
+
+    @Test
+    public void shouldNotHaveClasses() {
+        when(element.attribute("class")).thenReturn("clazz clazz2 clazz3");
+        elementAssert.hasNotClasses("clazz2", "clazz4");
+    }
+
+    @Test
+    public void shouldPassHasNotClassWhenNoClassAttributeIsPresent() {
+        elementAssert.hasNotClasses("clazz2", "clazz4");
+    }
+
+    @Test
+    public void shouldFailWhenContainsClasses() {
+        when(element.attribute("class")).thenReturn("clazz clazz2 clazz3");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasNotClasses("clazz2", "clazz3"))
+                .hasMessage("The element has the classes: [clazz2, clazz3]. "
+                        + "Actual classes found : clazz clazz2 clazz3");
+    }
+
+    @Test
     public void testSubstringKo() {
         when(element.attribute("class")).thenReturn("yolokitten");
         assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasClass("yolo"))

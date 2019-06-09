@@ -250,6 +250,58 @@ public class FluentListAssertTest {
         listAssert.hasClass("some-class");
     }
 
+    @Test
+    public void shouldNotHaveClass() {
+        when(fluentList.attributes("class")).thenReturn(Lists.newArrayList("some-class", "unknown-class"));
+        listAssert.hasNotClass("clazz");
+    }
+
+    @Test
+    public void shouldNotHaveClassWhenNoElementHasClass() {
+        when(fluentList.attributes("class")).thenReturn(Lists.newArrayList(null, null));
+        listAssert.hasNotClass("clazz");
+    }
+
+    @Test
+    public void shouldFailWhenAtLeastOneElementHasClass() {
+        when(fluentList.attributes("class")).thenReturn(Lists.newArrayList("some-class", "unknown-class"));
+        assertThatAssertionErrorIsThrownBy(() -> listAssert.hasNotClass("some-class"))
+                .hasMessage("At least one selected element has class: some-class");
+    }
+
+    @Test
+    public void shouldHaveClasses() {
+        when(fluentList.attributes("class")).thenReturn(Lists.newArrayList("class1 class2", "class1 class2 class3", "class4"));
+        listAssert.hasClasses("class1", "class2");
+    }
+
+    @Test
+    public void shouldFailHasClassesWhenNoElementHasClass() {
+        when(fluentList.attributes("class")).thenReturn(Lists.newArrayList("class1 class2", "class1 class2 class3", "class4"));
+        assertThatAssertionErrorIsThrownBy(() -> listAssert.hasClasses("class2", "class4"))
+                .hasMessage("No selected element have classes: class2, class4. "
+                        + "Actual classes found : class1 class2, class1 class2 class3, class4");
+    }
+
+    @Test
+    public void shouldNotHaveClasses() {
+        when(fluentList.attributes("class")).thenReturn(Lists.newArrayList("class1 class2", "class1 class2 class3", "class4"));
+        listAssert.hasNotClasses("class2", "class4");
+    }
+
+    @Test
+    public void shouldNotHaveClassesWhenNoElementHasClass() {
+        when(fluentList.attributes("class")).thenReturn(Lists.newArrayList(null, null));
+        listAssert.hasNotClasses("class2", "class4");
+    }
+
+    @Test
+    public void shouldFailWhenHasClasses() {
+        when(fluentList.attributes("class")).thenReturn(Lists.newArrayList("class1 class2", "class1 class2 class3", "class4"));
+        assertThatAssertionErrorIsThrownBy(() -> listAssert.hasNotClasses("class2", "class3"))
+                .hasMessage("At least one selected element has classes: [class2, class3]");
+    }
+
     @Test(expectedExceptions = AssertionError.class)
     public void testSubstringKo() {
         when(fluentList.attributes("class")).thenReturn(singletonList("yolokitten"));

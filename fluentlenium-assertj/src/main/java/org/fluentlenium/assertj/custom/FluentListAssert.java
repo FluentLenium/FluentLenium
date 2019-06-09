@@ -16,6 +16,8 @@ import java.util.Objects;
 public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentList>
         implements FluentAssert, ListStateAssert, ListAttributeAssert {
 
+    private static final String CLASS_DELIMITER = " ";
+
     public FluentListAssert(FluentList<? extends FluentWebElement> actual) {
         super(actual, FluentListAssert.class);
     }
@@ -97,7 +99,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         checkListEmptiness(classes);
 
         for (String classesStr : classes) {
-            List<String> classesLst = Arrays.asList(classesStr.split(" "));
+            List<String> classesLst = Arrays.asList(classesStr.split(CLASS_DELIMITER));
             if (classesLst.contains(classToFind)) {
                 return this;
             }
@@ -107,6 +109,58 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         failWithMessage(
                 "No selected elements have class: " + classToFind
                         + ". Actual classes found : " + classesFromElement);
+        return this;
+    }
+
+    @Override
+    public FluentListAssert hasNotClass(String htmlClass) {
+        List<String> elementsClasses = actual.attributes("class");
+        checkListEmptiness(elementsClasses);
+
+        for (String elementClass : elementsClasses) {
+            if (elementClass != null) {
+                List<String> classes = Arrays.asList(elementClass.split(CLASS_DELIMITER));
+                if (classes.contains(htmlClass)) {
+                    failWithMessage("At least one selected element has class: " + htmlClass);
+                }
+            }
+        }
+
+        return this;
+    }
+
+    @Override
+    public FluentListAssert hasClasses(String... classesToFind) {
+        List<String> elementsClasses = actual.attributes("class");
+        checkListEmptiness(elementsClasses);
+
+        for (String elementClass : elementsClasses) {
+            List<String> classesLst = Arrays.asList(elementClass.split(CLASS_DELIMITER));
+            if (classesLst.containsAll(Arrays.asList(classesToFind))) {
+                return this;
+            }
+        }
+
+        String classesFromElement = String.join(", ", elementsClasses);
+        failWithMessage(
+                "No selected element have classes: " + String.join(", ", classesToFind)
+                        + ". Actual classes found : " + classesFromElement);
+        return this;
+    }
+
+    @Override
+    public FluentListAssert hasNotClasses(String... htmlClasses) {
+        List<String> elementsClasses = actual.attributes("class");
+        checkListEmptiness(elementsClasses);
+
+        for (String elementClass : elementsClasses) {
+            if (elementClass != null) {
+                List<String> classes = Arrays.asList(elementClass.split(CLASS_DELIMITER));
+                if (classes.containsAll(Arrays.asList(htmlClasses))) {
+                    failWithMessage("At least one selected element has classes: " + Arrays.asList(htmlClasses));
+                }
+            }
+        }
         return this;
     }
 
