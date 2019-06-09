@@ -117,7 +117,7 @@ jobs:
 matrix:
   allow_failures:
     - env: ALLOWED_TO_FAIL=true
-    fast_finish: true
+  fast_finish: true
 
 env:
   global:
