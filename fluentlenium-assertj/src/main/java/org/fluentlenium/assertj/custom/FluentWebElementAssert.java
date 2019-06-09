@@ -158,6 +158,43 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     }
 
     @Override
+    public FluentWebElementAssert hasNotClass(String htmlClass) {
+        String actualClasses = actual.attribute("class");
+        if (actualClasses != null && getClasses(actualClasses).contains(htmlClass)) {
+            failWithMessage("The element has class: " + htmlClass);
+        }
+        return this;
+    }
+
+    @Override
+    public FluentWebElementAssert hasClasses(String... classesToFind) {
+        String actualClasses = actual.attribute("class");
+
+        if (actualClasses == null) {
+            failWithMessage("The element has no class attribute.");
+        }
+
+        if (!getClasses(actualClasses).containsAll(Arrays.asList(classesToFind))) {
+            failWithMessage("The element does not have all classes: " + Arrays.toString(classesToFind)
+                    + ". Actual classes found : " + actualClasses);
+        }
+        return this;
+    }
+
+    @Override
+    public FluentWebElementAssert hasNotClasses(String... classesToFind) {
+        String actualClasses = actual.attribute("class");
+        if (actualClasses != null) {
+            List<String> actualClassesAsList = getClasses(actualClasses);
+            if (actualClassesAsList.containsAll(Arrays.asList(classesToFind))) {
+                failWithMessage("The element has the classes: " + Arrays.toString(classesToFind)
+                        + ". Actual classes found : " + actualClasses);
+            }
+        }
+        return this;
+    }
+
+    @Override
     public FluentWebElementAssert hasValue(String value) {
         String actualValue = actual.value();
         if (!actualValue.equals(value)) {

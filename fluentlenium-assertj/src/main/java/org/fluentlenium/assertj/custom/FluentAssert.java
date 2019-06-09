@@ -51,7 +51,34 @@ public interface FluentAssert {
     AbstractAssert hasClass(String classToFind);
 
     /**
-     * Check if the element, or at least one element in a list of elements, has given value
+     * Checks if the element does not contain, or none of the elements in a list of elements contain the class
+     * <p>
+     * It passes assertion both when the class attribute is present but doesn't contain
+     * the argument class, and when the class attribute is not present.
+     *
+     * @param htmlClass class to find the absence of
+     * @return {@code this} assertion object.
+     */
+    AbstractAssert hasNotClass(String htmlClass);
+
+    /**
+     * Checks if the element, or at least one element in a list of elements, has the classes.
+     *
+     * @param classesToFind classes to find
+     * @return {@code this} assertion object.
+     */
+    AbstractAssert hasClasses(String... classesToFind);
+
+    /**
+     * Checks if the element does not contain, or none of the elements in a list of elements contain the classes
+     *
+     * @param classesToFind classes to find the absence of
+     * @return {@code this} assertion object.
+     */
+    AbstractAssert hasNotClasses(String... classesToFind);
+
+    /**
+     * Checks if the element, or at least one element in a list of elements has given value
      *
      * @param value value to find
      * @return {@code this} assertion object.

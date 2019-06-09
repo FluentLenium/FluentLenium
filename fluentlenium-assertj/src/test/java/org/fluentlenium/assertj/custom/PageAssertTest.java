@@ -17,7 +17,10 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class PageAssertJTest {
+/**
+ * Unit test for {@link PageAssert}.
+ */
+public class PageAssertTest {
     @Mock
     private FluentWebElement element;
 
