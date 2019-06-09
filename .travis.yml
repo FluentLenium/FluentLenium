@@ -58,9 +58,8 @@ jobs:
     env:
       matrix:
         - BROWSER_NAME=opera
-        - BROWSER_NAME=chrome
-      allow_failures:
-        - env: BROWSER_NAME=opera
+        allow_failures:
+          - env: BROWSER_NAME=opera
     script:
       - cd examples/spring && mvn clean test -DbrowserName=$BROWSER_NAME -DgridUrl=$BROWSERSTACK_GRID_URL
     branches:
