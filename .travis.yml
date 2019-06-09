@@ -1,7 +1,7 @@
 jobs:
   fast_finish: true
   allow_failures:
-    - env: gridUrl=$BROWSERSTACK_GRID_URL
+    - env: ALLOWED_TO_FAIL=true
   include:
 #    - stage: test
 #      name: "Java 11 - unit & integration tests code coverage + snapshot upload"
@@ -60,6 +60,8 @@ jobs:
     jdk: openjdk11
     script:
       - cd examples/spring && mvn clean test -DbrowserName=opera -DgridUrl=$BROWSERSTACK_GRID_URL
+    env:
+      - ALLOWED_TO_FAIL=true
     branches:
       except:
         - master
