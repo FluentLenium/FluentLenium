@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static org.fluentlenium.assertj.AssertionTestSupport.assertThatAssertionErrorIsThrownBy;
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
@@ -90,6 +91,12 @@ public class PageAssertJTest {
     public void hasTitleKo() {
         doReturn("title").when(driver).getTitle();
         pageAssert.hasTitle("wrong");
+    }
+
+    @Test
+    public void hasTitleShouldFailDueToNullPointerException() {
+        doReturn(null).when(fluentPage).getDriver();
+        assertThatAssertionErrorIsThrownBy(() -> pageAssert.hasTitle("non-existent")).hasMessage("Current page has no title");
     }
 
     @Test
