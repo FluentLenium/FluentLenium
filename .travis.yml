@@ -52,55 +52,66 @@ jobs:
 #      sudo: false
 
   - stage: e2e
-    name: "Edge"
+    name: "Opera"
     language: java
     jdk: openjdk11
     script:
-      - cd examples/spring && mvn clean test -DbrowserName=edge -DgridUrl=$BROWSERSTACK_GRID_URL
+      - cd examples/spring && mvn clean test -DbrowserName=opera -DgridUrl=$BROWSERSTACK_GRID_URL
     allow_failures:
     branches:
       except:
         - master
 
-  - stage: e2e
-    name: "IE"
-    language: java
-    jdk: openjdk11
-    script:
-      - cd examples/spring && mvn clean test -DbrowserName=ie -DgridUrl=$BROWSERSTACK_GRID_URL
-    branches:
-      except:
-        - master
+#  - stage: e2e
+#    name: "Edge"
+#    language: java
+#    jdk: openjdk11
+#    script:
+#      - cd examples/spring && mvn clean test -DbrowserName=edge -DgridUrl=$BROWSERSTACK_GRID_URL
+#    allow_failures:
+#    branches:
+#      except:
+#        - master
 
-  - stage: e2e
-    name: "Chrome"
-    language: java
-    jdk: openjdk11
-    script:
-      - cd examples/spring && mvn clean test -DbrowserName=chrome -DgridUrl=$BROWSERSTACK_GRID_URL
-    branches:
-      except:
-        - master
-
-  - stage: e2e
-    name: "Firefox"
-    language: java
-    jdk: openjdk11
-    script:
-      - cd examples/spring && mvn clean test -DbrowserName=firefox -DgridUrl=$BROWSERSTACK_GRID_URL
-    branches:
-      except:
-        - master
-
-  - stage: e2e
-    name: "Safari"
-    language: java
-    jdk: openjdk11
-    script:
-      - cd examples/spring && mvn clean test -DbrowserName=safari -DgridUrl=$BROWSERSTACK_GRID_URL
-    branches:
-      except:
-        - master
+#  - stage: e2e
+#    name: "IE"
+#    language: java
+#    jdk: openjdk11
+#    script:
+#      - cd examples/spring && mvn clean test -DbrowserName=ie -DgridUrl=$BROWSERSTACK_GRID_URL
+#    branches:
+#      except:
+#        - master
+#
+#  - stage: e2e
+#    name: "Chrome"
+#    language: java
+#    jdk: openjdk11
+#    script:
+#      - cd examples/spring && mvn clean test -DbrowserName=chrome -DgridUrl=$BROWSERSTACK_GRID_URL
+#    branches:
+#      except:
+#        - master
+#
+#  - stage: e2e
+#    name: "Firefox"
+#    language: java
+#    jdk: openjdk11
+#    script:
+#      - cd examples/spring && mvn clean test -DbrowserName=firefox -DgridUrl=$BROWSERSTACK_GRID_URL
+#    branches:
+#      except:
+#        - master
+#
+#  - stage: e2e
+#    name: "Safari"
+#    language: java
+#    jdk: openjdk11
+#    script:
+#      - cd examples/spring && mvn clean test -DbrowserName=safari -DgridUrl=$BROWSERSTACK_GRID_URL
+#    branches:
+#      except:
+#        - master
 
 matrix:
   allow_failures:
