@@ -15,4 +15,13 @@ public class ConfigException extends RuntimeException {
         super(message, cause);
     }
 
+    /**
+     * Creates configuration exception
+     *
+     * @param message message
+     */
+    public ConfigException(String message) {
+        super(message);
+    }
+
 }

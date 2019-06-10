@@ -7,10 +7,10 @@ import org.openqa.selenium.support.FindBy;
 
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
-@PageUrl("/")
-public class MainPage extends FluentPage {
+@PageUrl("/javadoc")
+public class JavadocPage extends FluentPage {
 
-    @FindBy(className = "whats-fluentlenium")
+    @FindBy(className = "contentContainer")
     private FluentWebElement content;
 
    public void verifyIfIsLoaded() {
