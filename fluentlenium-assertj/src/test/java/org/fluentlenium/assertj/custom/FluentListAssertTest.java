@@ -266,7 +266,7 @@ public class FluentListAssertTest {
     public void shouldFailWhenAtLeastOneElementHasClass() {
         when(fluentList.attributes("class")).thenReturn(Lists.newArrayList("some-class", "unknown-class"));
         assertThatAssertionErrorIsThrownBy(() -> listAssert.hasNotClass("some-class"))
-                .hasMessage("At least one selected element has class: some-class");
+                .hasMessage("At least one selected element has class: [some-class]");
     }
 
     @Test
