@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import org.fluentlenium.configuration.Configuration;
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,9 +14,11 @@ import java.nio.file.Paths;
 import java.util.function.Supplier;
 
 /**
- * Takes HTML dump..
+ * Takes HTML dump.
  */
 public class FluentDriverHtmlDumper {
+
+    private static final Logger LOGGER  = LoggerFactory.getLogger(FluentDriverHtmlDumper.class);
 
     private final Configuration configuration;
 
@@ -39,6 +43,7 @@ public class FluentDriverHtmlDumper {
         try {
             destFile = getDestinationFile(fileName);
             FileUtils.write(destFile, htmlSupplier.get(), "UTF-8");
+            LOGGER.info("Created HTML dump at: " + destFile.getAbsolutePath());
         } catch (Exception e) {
             if (destFile == null) {
                 destFile = new File(fileName);
