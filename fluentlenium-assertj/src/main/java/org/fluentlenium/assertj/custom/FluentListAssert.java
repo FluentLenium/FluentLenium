@@ -93,12 +93,12 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
 
     @Override
     public FluentListAssert hasClass(String classToFind) {
-        return doHaveClasses("No selected elements have class: ", classToFind);
+        return validateHasClasses("No selected elements have class: ", classToFind);
     }
 
     @Override
     public FluentListAssert hasClasses(String... classesToFind) {
-        return doHaveClasses("No selected element have classes: ", classesToFind);
+        return validateHasClasses("No selected element have classes: ", classesToFind);
     }
 
     @Override
@@ -181,7 +181,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
-    private FluentListAssert doHaveClasses(String message, String... classesToFind) {
+    private FluentListAssert validateHasClasses(String message, String... classesToFind) {
         List<String> elementsClasses = requiresNonEmpty(actual.attributes(CLASS_ATTRIBUTE));
         for (String elementClass : elementsClasses) {
             List<String> classesLst = Arrays.asList(elementClass.split(CLASS_DELIMITER));
