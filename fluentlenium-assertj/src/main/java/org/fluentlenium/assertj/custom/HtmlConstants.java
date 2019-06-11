@@ -9,6 +9,6 @@ final class HtmlConstants {
     static final String CLASS_ATTRIBUTE = "class";
 
     private HtmlConstants() {
-        //Utilitz class
+        //Utility class
     }
 }
