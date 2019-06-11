@@ -106,6 +106,26 @@ jobs:
         except:
           - master
 
+    - stage: e2e
+      name: "Iphone"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=iphone -DgridUrl=$BROWSERSTACK_GRID_URL
+      branches:
+        except:
+          - master
+
+    - stage: e2e
+      name: "Android"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=android -DgridUrl=$BROWSERSTACK_GRID_URL
+      branches:
+        except:
+          - master
+
 matrix:
   fast_finish: true
 

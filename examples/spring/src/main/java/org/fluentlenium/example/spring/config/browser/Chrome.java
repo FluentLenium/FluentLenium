@@ -3,7 +3,7 @@ package org.fluentlenium.example.spring.config.browser;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class Chrome implements IBrowser {
+class Chrome implements IBrowser {
 
     @Override
     public Capabilities getBrowserCapabilities() {

@@ -14,6 +14,6 @@ public class MainPage extends FluentPage {
     private FluentWebElement content;
 
    public void verifyIfIsLoaded() {
-        assertThat(content).isDisplayed();
+        assertThat(content).isPresent();
    }
 }

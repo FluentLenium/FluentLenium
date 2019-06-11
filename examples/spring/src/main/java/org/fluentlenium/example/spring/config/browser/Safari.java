@@ -3,7 +3,7 @@ package org.fluentlenium.example.spring.config.browser;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.safari.SafariOptions;
 
-public class Safari implements IBrowser {
+class Safari implements IBrowser {
 
     @Override
     public Capabilities getBrowserCapabilities() {

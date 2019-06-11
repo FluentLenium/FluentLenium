@@ -1,10 +1,9 @@
 package org.fluentlenium.example.spring.config.browser;
 
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-public class Opera implements IBrowser {
+class Opera implements IBrowser {
 
     @Override
     public Capabilities getBrowserCapabilities() {

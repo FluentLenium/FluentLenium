@@ -1,7 +1,6 @@
 package org.fluentlenium.example.spring.config.browser;
 
-import org.fluentlenium.example.spring.config.browser.mobile.Iphone;
-import org.fluentlenium.example.spring.config.browser.mobile.IphoneSimulator;
+import org.fluentlenium.example.spring.config.ConfigException;
 import org.openqa.selenium.Capabilities;
 
 import java.util.Map;
@@ -14,8 +13,11 @@ public interface IBrowser {
     Edge edge = new Edge();
     Opera opera = new Opera();
     Safari safari = new Safari();
-    IphoneSimulator iphone_simulator = new IphoneSimulator();
     Iphone iphone = new Iphone();
+    Android android = new Android();
+
+    IphoneSimulator iphone_simulator = new IphoneSimulator();
+    AndroidSimulator android_simulator = new AndroidSimulator();
 
     Map<String, IBrowser> browsers = Map.of(
             "chrome", chrome,
@@ -25,14 +27,20 @@ public interface IBrowser {
             "opera", opera,
             "safari", safari,
             "iphone_simulator", iphone_simulator,
-            "iphone", iphone
+            "iphone", iphone,
+            "android_simulator", android_simulator,
+            "android", android
     );
 
     Capabilities getBrowserCapabilities();
 
-    String getDriverExecutableName();
+    default String getDriverExecutableName() {
+        throw new ConfigException("Not supported");
+    }
 
-    String getDriverSystemPropertyName();
+    default String getDriverSystemPropertyName()  {
+        throw new ConfigException("Not supported");
+    }
 
     static IBrowser getBrowser(String browserName) {
         return browsers.getOrDefault(browserName, chrome);
