@@ -24,8 +24,7 @@ public class PageAssert extends AbstractAssert<PageAssert, FluentPage> implement
     @Override
     public PageAssert hasElements(FluentList<? extends FluentWebElement> fluentList) {
         if (fluentList.isEmpty()) {
-            failWithMessage("List "
-                    + fluentList.toString() + " is empty");
+            failWithMessage("No elements selected by '" + fluentList.toString() + "' are present on the page.");
         }
         return this;
     }

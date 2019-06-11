@@ -9,6 +9,9 @@ import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
+/**
+ * Integration test for {@link org.fluentlenium.assertj.custom.PageAssert}.
+ */
 public class ElementPresenceTest extends IntegrationTest {
 
     @Page
@@ -52,7 +55,7 @@ public class ElementPresenceTest extends IntegrationTest {
     public void verifyElementsNegative() {
         assertThatThrownBy(() -> assertThat(indexPage).hasElements($("#nonexisting")))
                 .isInstanceOf(AssertionError.class)
-                .hasMessage("List By.cssSelector: #nonexisting ([]) is empty");
+                .hasMessage("No elements selected by 'By.cssSelector: #nonexisting ([])' are present on the page.");
     }
 
 }

@@ -83,7 +83,7 @@ public class PageAssertTest {
     public void hasElementsKo() {
         when(list.isEmpty()).thenReturn(true);
         assertThatAssertionErrorIsThrownBy(() -> pageAssert.hasElements(list))
-                .hasMessage("List list is empty");
+                .hasMessage("No elements selected by 'list' are present on the page.");
     }
 
     @Test
