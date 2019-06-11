@@ -55,7 +55,7 @@ public class ElementPresenceTest extends IntegrationTest {
     public void verifyElementsNegative() {
         assertThatThrownBy(() -> assertThat(indexPage).hasElements($("#nonexisting")))
                 .isInstanceOf(AssertionError.class)
-                .hasMessage("No elements selected by 'By.cssSelector: #nonexisting ([])' are present on the page.");
+                .hasMessage("No element selected by 'By.cssSelector: #nonexisting ([])' is present on the page.");
     }
 
 }

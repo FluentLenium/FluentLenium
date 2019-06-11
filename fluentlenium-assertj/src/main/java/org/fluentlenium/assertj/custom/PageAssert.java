@@ -6,6 +6,9 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;
 
+/**
+ * Default implementation for asserting {@link FluentPage} objects.
+ */
 public class PageAssert extends AbstractAssert<PageAssert, FluentPage> implements PageStateAssert {
 
     public PageAssert(FluentPage actual) {
@@ -15,8 +18,7 @@ public class PageAssert extends AbstractAssert<PageAssert, FluentPage> implement
     @Override
     public PageAssert hasElement(FluentWebElement element) {
         if (!element.present()) {
-            failWithMessage("Element "
-                    + element.toString() + " is not present on current page");
+            failWithMessage("Element " + element.toString() + " is not present on current page");
         }
         return this;
     }
@@ -24,7 +26,8 @@ public class PageAssert extends AbstractAssert<PageAssert, FluentPage> implement
     @Override
     public PageAssert hasElements(FluentList<? extends FluentWebElement> fluentList) {
         if (fluentList.isEmpty()) {
-            failWithMessage("No elements selected by '" + fluentList.toString() + "' are present on the page.");
+            failWithMessage("No element selected by '"
+                    + fluentList.toString() + "' is present on the page.");
         }
         return this;
     }
@@ -32,8 +35,7 @@ public class PageAssert extends AbstractAssert<PageAssert, FluentPage> implement
     @Override
     public PageAssert hasElementDisplayed(FluentWebElement element) {
         if (!element.displayed()) {
-            failWithMessage("Element "
-                    + element.toString() + " is not displayed on current page");
+            failWithMessage("Element " + element.toString() + " is not displayed on current page");
         }
         return this;
     }
@@ -41,15 +43,12 @@ public class PageAssert extends AbstractAssert<PageAssert, FluentPage> implement
     @Override
     public PageAssert hasTitle(String title) {
         try {
-            actual.getDriver().getTitle();
+            String pageTitle = actual.getDriver().getTitle();
+            if (!pageTitle.equals(title)) {
+                failWithMessage("Current page title is " + pageTitle + ". Expected " + title);
+            }
         } catch (NullPointerException e) {
             failWithMessage("Current page has no title");
-        }
-
-        String pageTitle = actual.getDriver().getTitle();
-        if (!pageTitle.equals(title)) {
-            failWithMessage("Current page title is " + pageTitle
-                    + ". Expected " + title);
         }
         return this;
     }
@@ -58,17 +57,16 @@ public class PageAssert extends AbstractAssert<PageAssert, FluentPage> implement
     public PageAssert hasUrl(String url) {
         String pageUrl = actual.getDriver().getCurrentUrl();
         if (!pageUrl.equals(url)) {
-            failWithMessage("Current page url is " + pageUrl
-                    + ". Expected " + url);
+            failWithMessage("Current page url is " + pageUrl + ". Expected " + url);
         }
         return this;
     }
 
     @Override
-    public PageAssert hasPageSourceContaining(String expected) {
+    public PageAssert hasPageSourceContaining(String value) {
         String pageSource = actual.getDriver().getPageSource();
-        if (!pageSource.contains(expected)) {
-            failWithMessage("Current page source does not contain: " + expected);
+        if (!pageSource.contains(value)) {
+            failWithMessage("Current page source does not contain: " + value);
         }
         return this;
     }
@@ -81,9 +79,7 @@ public class PageAssert extends AbstractAssert<PageAssert, FluentPage> implement
             failWithMessage("Page has not defined @PageUrl");
         }
 
-        if (url != null) {
-            actual.isAtUsingUrl(url);
-        }
+        actual.isAtUsingUrl(url);
 
         return this;
     }
@@ -96,9 +92,7 @@ public class PageAssert extends AbstractAssert<PageAssert, FluentPage> implement
             failWithMessage("Page has not defined @FindBy class level annotation");
         }
 
-        if (by != null) {
-            actual.isAtUsingSelector(by);
-        }
+        actual.isAtUsingSelector(by);
 
         return this;
     }
@@ -109,5 +103,4 @@ public class PageAssert extends AbstractAssert<PageAssert, FluentPage> implement
         actual.isAt();
         return this;
     }
-
 }

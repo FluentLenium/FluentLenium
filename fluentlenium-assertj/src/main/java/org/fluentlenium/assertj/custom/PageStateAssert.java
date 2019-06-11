@@ -3,73 +3,78 @@ package org.fluentlenium.assertj.custom;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 
+/**
+ * Interface for asserting the state of {@link org.fluentlenium.core.FluentPage} objects.
+ */
 public interface PageStateAssert {
 
     /**
-     * Check if current page has given FluentWebElement present
+     * Check if current page has given FluentWebElement present.
      *
-     * @param element FluentWebElement
+     * @param element the element
      * @return page assertion object
      */
     PageAssert hasElement(FluentWebElement element);
 
     /**
-     * Check if current page has at list one element of given FluentList present
+     * Check if current page has at least one element of given FluentList present.
      *
-     * @param fluentList FluentList
+     * @param fluentList the element list
      * @return page assertion object
      */
     PageAssert hasElements(FluentList<? extends FluentWebElement> fluentList);
 
     /**
-     * Check if current page has given FluentWebElement displayed
+     * Check if current page has given FluentWebElement displayed.
      *
-     * @param element FluentWebElement
+     * @param element the element
      * @return page assertion object
      */
     PageAssert hasElementDisplayed(FluentWebElement element);
 
     /**
-     * Check if current page has given title
+     * Check if current page has given title.
      *
-     * @param title String
+     * @param title the expected title
      * @return page assertion object
      */
     PageAssert hasTitle(String title);
 
     /**
-     * Check if current page has given url (String)
+     * Check if current page has given url string.
      *
-     * @param url String
+     * @param url the expected URL string
      * @return page assertion object
      */
     PageAssert hasUrl(String url);
 
     /**
-     * Check if current page has page source containing given String
+     * Check if current page has page source containing given String.
      *
-     * @param expected String
+     * @param value the expected string value
      * @return page assertion object
      */
-    PageAssert hasPageSourceContaining(String expected);
+    PageAssert hasPageSourceContaining(String value);
 
     /**
-     * Check if current page has url defined by @PageUrl annotation
+     * Check if current page has url defined by its {@link org.fluentlenium.core.annotation.PageUrl} annotation.
      *
      * @return page assertion object
      */
     PageAssert hasExpectedUrl();
 
     /**
-     * Check if current page has element defined by @FindBy class level annotation
+     * Check if current page has element defined by its {@link org.openqa.selenium.support.FindBy},
+     * {@link org.openqa.selenium.support.FindBys} or
+     * {@link org.openqa.selenium.support.FindAll} class level annotation.
      *
      * @return page assertion object
      */
     PageAssert hasExpectedElements();
 
     /**
-     * check if it is at the current page. Call the page.isAt() methods
-     * Will be removed in future releases. Please use new {@link PageAssert}
+     * Check if it is at the current page. Call the page.isAt() methods
+     * Will be removed in future releases. Please use new {@link PageAssert}.
      *
      * @return page assertion object
      */
