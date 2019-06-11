@@ -1,6 +1,5 @@
 package org.fluentlenium.assertj.custom;
 
-import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.AbstractStringAssert;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.Dimension;
@@ -10,13 +9,12 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import static org.fluentlenium.assertj.custom.HtmlConstants.CLASS_ATTRIBUTE;
-import static org.fluentlenium.assertj.custom.HtmlConstants.CLASS_DELIMITER;
 
 /**
  * Default implementation for {@link FluentWebElement} assertions;
  */
-public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAssert, FluentWebElement>
-        implements ElementStateAssert, FluentAssert, ElementAttributeAssert {
+public class FluentWebElementAssert extends AbstractFluentAssert<FluentWebElementAssert, FluentWebElement>
+        implements ElementStateAssert, ElementAttributeAssert {
 
     public FluentWebElementAssert(FluentWebElement actual) {
         super(actual, FluentWebElementAssert.class);
@@ -251,10 +249,5 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         if (elementCondition.get()) {
             failWithMessage(message);
         }
-    }
-
-    private List<String> getClasses(String classString) {
-        String[] primitiveList = classString.split(CLASS_DELIMITER);
-        return Arrays.asList(primitiveList);
     }
 }

@@ -1,6 +1,5 @@
 package org.fluentlenium.assertj.custom;
 
-import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.ListAssert;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -11,14 +10,13 @@ import java.util.List;
 import java.util.Objects;
 
 import static org.fluentlenium.assertj.custom.HtmlConstants.CLASS_ATTRIBUTE;
-import static org.fluentlenium.assertj.custom.HtmlConstants.CLASS_DELIMITER;
 
 /**
  * Default implementation for {@link FluentList} assertions.
  */
 @SuppressWarnings("unchecked")
-public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentList>
-        implements FluentAssert, ListStateAssert, ListAttributeAssert {
+public class FluentListAssert extends AbstractFluentAssert<FluentListAssert, FluentList>
+        implements ListStateAssert, ListAttributeAssert {
 
     public FluentListAssert(FluentList<? extends FluentWebElement> actual) {
         super(actual, FluentListAssert.class);
@@ -184,7 +182,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     private FluentListAssert validateHasClasses(String message, String... classesToFind) {
         List<String> elementsClasses = requiresNonEmpty(actual.attributes(CLASS_ATTRIBUTE));
         for (String elementClass : elementsClasses) {
-            List<String> classesLst = Arrays.asList(elementClass.split(CLASS_DELIMITER));
+            List<String> classesLst = getClasses(elementClass);
             if (classesLst.containsAll(Arrays.asList(classesToFind))) {
                 return this;
             }
@@ -200,11 +198,8 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     private void notHasClasses(String message, String... htmlClasses) {
         List<String> elementsClasses = requiresNonEmpty(actual.attributes(CLASS_ATTRIBUTE));
         for (String elementClass : elementsClasses) {
-            if (elementClass != null) {
-                List<String> classes = Arrays.asList(elementClass.split(CLASS_DELIMITER));
-                if (classes.containsAll(Arrays.asList(htmlClasses))) {
-                    failWithMessage(message + Arrays.asList(htmlClasses));
-                }
+            if (elementClass != null && getClasses(elementClass).containsAll(Arrays.asList(htmlClasses))) {
+                failWithMessage(message + Arrays.asList(htmlClasses));
             }
         }
     }

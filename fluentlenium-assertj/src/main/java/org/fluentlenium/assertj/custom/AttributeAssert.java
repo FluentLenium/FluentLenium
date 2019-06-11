@@ -10,7 +10,10 @@ import org.assertj.core.api.AbstractAssert;
 public interface AttributeAssert<T> {
 
     /**
-     * Checks if at least one element in a list of elements has the given property.
+     * Checks if the element, or at least one element in a list of elements, has the given property.
+     * <p>
+     * It allows users to do not just presence validation but apply chained List assertions
+     * to further validate the attribute values.
      *
      * @param attribute the attribute to find
      * @return a new assert object with the actual attribute value
