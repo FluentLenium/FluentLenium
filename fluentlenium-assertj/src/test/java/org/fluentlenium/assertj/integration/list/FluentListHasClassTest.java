@@ -42,7 +42,7 @@ public class FluentListHasClassTest extends IntegrationTest {
     public void shouldFailWhenAtLeastOneElementHasClass() {
         goTo(DEFAULT_URL);
         assertThatAssertionErrorIsThrownBy(() -> assertThat($("span")).hasNotClass("small"))
-                .hasMessage("At least one selected element has class: small");
+                .hasMessage("At least one selected element has class: [small]");
     }
 
     @Test

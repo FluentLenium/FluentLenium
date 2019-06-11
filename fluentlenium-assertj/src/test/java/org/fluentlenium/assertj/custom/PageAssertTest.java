@@ -52,10 +52,11 @@ public class PageAssertTest {
     }
 
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void hasElementKo() {
         when(element.present()).thenReturn(false);
-        pageAssert.hasElement(element);
+        assertThatAssertionErrorIsThrownBy(() -> pageAssert.hasElement(element))
+                .hasMessage("Element element is not present on current page");
     }
 
     @Test
@@ -65,10 +66,11 @@ public class PageAssertTest {
     }
 
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void hasElementDisplayedKo() {
         when(element.displayed()).thenReturn(false);
-        pageAssert.hasElementDisplayed(element);
+        assertThatAssertionErrorIsThrownBy(() -> pageAssert.hasElementDisplayed(element))
+                .hasMessage("Element element is not displayed on current page");
     }
 
     @Test
@@ -77,10 +79,11 @@ public class PageAssertTest {
         pageAssert.hasElements(list);
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void hasElementsKo() {
         when(list.isEmpty()).thenReturn(true);
-        pageAssert.hasElements(list);
+        assertThatAssertionErrorIsThrownBy(() -> pageAssert.hasElements(list))
+                .hasMessage("List list is empty");
     }
 
     @Test
@@ -90,16 +93,18 @@ public class PageAssertTest {
         pageAssert.hasTitle(title);
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void hasTitleKo() {
         doReturn("title").when(driver).getTitle();
-        pageAssert.hasTitle("wrong");
+        assertThatAssertionErrorIsThrownBy(() -> pageAssert.hasTitle("wrong"))
+                .hasMessage("Current page title is title. Expected wrong");
     }
 
     @Test
     public void hasTitleShouldFailDueToNullPointerException() {
         doReturn(null).when(fluentPage).getDriver();
-        assertThatAssertionErrorIsThrownBy(() -> pageAssert.hasTitle("non-existent")).hasMessage("Current page has no title");
+        assertThatAssertionErrorIsThrownBy(() -> pageAssert.hasTitle("non-existent"))
+                .hasMessage("Current page has no title");
     }
 
     @Test
@@ -109,10 +114,11 @@ public class PageAssertTest {
         pageAssert.hasUrl(url);
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void hasUrlKo() {
         doReturn("https://fluentlenium.com").when(driver).getCurrentUrl();
-        pageAssert.hasUrl("https://awesome-testing.com");
+        assertThatAssertionErrorIsThrownBy(() -> pageAssert.hasUrl("https://awesome-testing.com"))
+                .hasMessage("Current page url is https://fluentlenium.com. Expected https://awesome-testing.com");
     }
 
     @Test
@@ -122,10 +128,11 @@ public class PageAssertTest {
         pageAssert.hasPageSourceContaining(source);
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void hasPageSourceContainingKo() {
         doReturn("<html></html>").when(driver).getPageSource();
-        pageAssert.hasPageSourceContaining("<body>");
+        assertThatAssertionErrorIsThrownBy(() -> pageAssert.hasPageSourceContaining("<body>"))
+                .hasMessage("Current page source does not contain: <body>");
     }
 
     @Test
