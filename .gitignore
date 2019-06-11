@@ -197,3 +197,5 @@ build.log
 settings.xml
 
 Gemfile.lock
+
+examples/spring/gridurl.txt

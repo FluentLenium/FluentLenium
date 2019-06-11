@@ -13,8 +13,13 @@ public class SeleniumBrowserConfigProperties {
     @Value("${page.url}")
     private String pageUrl;
 
+    @Value("${mobile.simulator}")
+    private Boolean mobileSimulator;
+
     @Value("${selenium.hub.enabled}")
     private Boolean useHub;
+    @Value("${selenium.hub.url}")
+    private String hubUrl;
 
     @Value("${safaridriver.path}")
     private String safariDriverPath;
@@ -31,6 +36,11 @@ public class SeleniumBrowserConfigProperties {
 
     public Boolean useHub() {
         return useHub;
+    }
+
+    public Boolean isMobileSimulator() {
+        return Optional.of(Boolean.valueOf(System.getProperty("mobile.simulator")))
+                .orElse(mobileSimulator);
     }
 
     public String getBrowserName() {
@@ -57,5 +67,9 @@ public class SeleniumBrowserConfigProperties {
             default:
                 return chromeDriverPath;
         }
+    }
+
+    public String getGridUrl() {
+        return hubUrl;
     }
 }

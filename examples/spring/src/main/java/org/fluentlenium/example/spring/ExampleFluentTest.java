@@ -1,5 +1,6 @@
 package org.fluentlenium.example.spring;
 
+import io.appium.java_client.AppiumDriver;
 import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.example.spring.config.Config;
 import org.fluentlenium.example.spring.config.ConfigException;
@@ -30,13 +31,23 @@ public class ExampleFluentTest extends FluentTest {
 
     @Before
     public void setUp() {
-        setupDriver();
+        if (!config.useHub()) {
+            setupDriver();
+        }
     }
 
     @Override
     public WebDriver newWebDriver() {
         if (config.useHub()) {
-            return runRemoteWebdriver();
+            if (config.isMobileSimulator()) {
+                try {
+                    return new AppiumDriver(new URL(getRemoteUrl()), getBrowser().getBrowserCapabilities());
+                } catch (MalformedURLException e) {
+                    throw new ConfigException(e.getMessage());
+                }
+            } else {
+                return runRemoteWebdriver();
+            }
         } else {
             return super.newWebDriver();
         }
@@ -59,7 +70,7 @@ public class ExampleFluentTest extends FluentTest {
     @Override
     public String getRemoteUrl() {
         return Optional.ofNullable(System.getProperty("gridUrl"))
-                .orElseThrow(() -> new ConfigException("You need to set gridUrl system property"));
+                .orElse(config.getGridUrl());
     }
 
     @Override
