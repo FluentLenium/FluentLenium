@@ -35,21 +35,23 @@ public class SeleniumBrowserConfigProperties {
     private String firefoxDriverPath;
 
     public Boolean useHub() {
-        return useHub;
+        return getBooleanProperty("useHub", useHub);
     }
 
     public Boolean isMobileSimulator() {
-        return Optional.of(Boolean.valueOf(System.getProperty("mobile.simulator")))
-                .orElse(mobileSimulator);
+        return getBooleanProperty("mobileSimulator", mobileSimulator);
     }
 
     public String getBrowserName() {
-        return Optional.ofNullable(System.getProperty("browserName"))
-                .orElse(browserName);
+        return getStringProperty("browserName", browserName);
+    }
+
+    public String getGridUrl() {
+        return getStringProperty("gridUrl", hubUrl);
     }
 
     public String getPageUrl() {
-        return pageUrl;
+        return getStringProperty("pageUrl", pageUrl);
     }
 
     public String getDriverExecutablePath() {
@@ -69,7 +71,15 @@ public class SeleniumBrowserConfigProperties {
         }
     }
 
-    public String getGridUrl() {
-        return hubUrl;
+    private String getStringProperty(String propertyName, String propertyValue) {
+        return Optional.ofNullable(System.getProperty(propertyName))
+                .orElse(propertyValue);
+    }
+
+    private Boolean getBooleanProperty(String propertyName, Boolean configuredValue) {
+        if (System.getProperty(propertyName) == null) {
+            return configuredValue;
+        }
+        return Boolean.valueOf(System.getProperty(propertyName));
     }
 }

@@ -22,4 +22,9 @@ class Safari implements IBrowser {
     public String getDriverSystemPropertyName() {
         return "webdriver.safari.driver";
     }
+
+    @Override
+    public String toString() {
+        return "Safari";
+    }
 }

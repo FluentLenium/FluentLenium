@@ -4,6 +4,9 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+/**
+ * Represents iPhone simulator running locally via Xcode
+ */
 class IphoneSimulator implements IBrowser {
 
     @Override
@@ -14,5 +17,10 @@ class IphoneSimulator implements IBrowser {
         capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Safari");
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 8");
         return capabilities;
+    }
+
+    @Override
+    public String toString() {
+        return "Iphone Simulator";
     }
 }

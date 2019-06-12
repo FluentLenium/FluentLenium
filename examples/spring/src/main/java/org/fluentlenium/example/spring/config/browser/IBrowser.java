@@ -18,18 +18,23 @@ public interface IBrowser {
 
     IphoneSimulator iphone_simulator = new IphoneSimulator();
     AndroidSimulator android_simulator = new AndroidSimulator();
+    AndroidCalculatorSimulator android_calculator_simulator = new AndroidCalculatorSimulator();
 
-    Map<String, IBrowser> browsers = Map.of(
-            "chrome", chrome,
-            "firefox", firefox,
-            "ie", ie,
-            "edge", edge,
-            "opera", opera,
-            "safari", safari,
-            "iphone_simulator", iphone_simulator,
-            "iphone", iphone,
-            "android_simulator", android_simulator,
-            "android", android
+    Map<String, IBrowser> browsers = Map.ofEntries(
+            Map.entry("chrome", chrome),
+            Map.entry("firefox", firefox),
+            Map.entry("ie", ie),
+            Map.entry("edge", edge),
+            Map.entry("opera", opera),
+            Map.entry("safari", safari),
+
+            Map.entry("iphone", iphone),
+            Map.entry("android", android),
+
+            Map.entry("iphone_simulator", iphone_simulator),
+            Map.entry("android_simulator", android_simulator),
+
+            Map.entry("android_calculator_simulator", android_calculator_simulator)
     );
 
     Capabilities getBrowserCapabilities();
@@ -38,7 +43,7 @@ public interface IBrowser {
         throw new ConfigException("Not supported");
     }
 
-    default String getDriverSystemPropertyName()  {
+    default String getDriverSystemPropertyName() {
         throw new ConfigException("Not supported");
     }
 

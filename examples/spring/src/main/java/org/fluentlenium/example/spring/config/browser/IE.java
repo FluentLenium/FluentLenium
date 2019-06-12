@@ -23,4 +23,9 @@ class IE implements IBrowser {
     public String getDriverSystemPropertyName() {
         return "webdriver.ie.driver";
     }
+
+    @Override
+    public String toString() {
+        return "IE11";
+    }
 }

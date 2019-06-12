@@ -3,6 +3,9 @@ package org.fluentlenium.example.spring.config.browser;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+/**
+ * Represents real iPhone connected to Grid
+ */
 class Iphone implements IBrowser {
 
     @Override
@@ -13,6 +16,11 @@ class Iphone implements IBrowser {
         caps.setCapability("realMobile", "true");
         caps.setCapability("os_version", "12");
         return caps;
+    }
+
+    @Override
+    public String toString() {
+        return "Iphone";
     }
 
 }

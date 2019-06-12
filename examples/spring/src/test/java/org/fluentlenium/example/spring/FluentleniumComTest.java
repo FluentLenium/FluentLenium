@@ -16,7 +16,8 @@ public class FluentleniumComTest extends ExampleFluentTest {
     @Test
     public void visitFluentleniumCom() {
         goTo(mainPage)
-                .verifyIfIsLoaded();
+                .verifyIfIsLoaded()
+                .clickOnSeleniumLink();
     }
 
     @Test

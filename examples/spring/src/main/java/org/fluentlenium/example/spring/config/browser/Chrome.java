@@ -22,4 +22,9 @@ class Chrome implements IBrowser {
     public String getDriverSystemPropertyName() {
         return "webdriver.chrome.driver";
     }
+
+    @Override
+    public String toString() {
+        return "Chrome";
+    }
 }

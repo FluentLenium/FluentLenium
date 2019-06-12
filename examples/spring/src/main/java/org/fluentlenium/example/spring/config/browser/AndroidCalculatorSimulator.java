@@ -4,10 +4,7 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-/**
- * Represents Android simulator running locally via Android Studio
- */
-class AndroidSimulator implements IBrowser {
+public class AndroidCalculatorSimulator implements IBrowser {
 
     @Override
     public Capabilities getBrowserCapabilities() {
@@ -15,12 +12,13 @@ class AndroidSimulator implements IBrowser {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator");
-        capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
+        capabilities.setCapability("appPackage", "com.android.calculator2");
+        capabilities.setCapability("appActivity", "com.android.calculator2.Calculator");
         return capabilities;
     }
 
     @Override
     public String toString() {
-        return "Android Simulator";
+        return "Android Calculator Simulator";
     }
 }

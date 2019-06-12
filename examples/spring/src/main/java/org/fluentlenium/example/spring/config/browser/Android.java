@@ -3,6 +3,9 @@ package org.fluentlenium.example.spring.config.browser;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+/**
+ * Represents real Android device connected to Grid
+ */
 class Android implements IBrowser {
 
     @Override
@@ -15,4 +18,8 @@ class Android implements IBrowser {
         return caps;
     }
 
+    @Override
+    public String toString() {
+        return "Android";
+    }
 }

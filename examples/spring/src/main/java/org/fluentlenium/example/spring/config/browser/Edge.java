@@ -19,4 +19,9 @@ class Edge implements IBrowser {
     public String getDriverSystemPropertyName() {
         return "webdriver.edge.driver";
     }
+
+    @Override
+    public String toString() {
+        return "Edge";
+    }
 }

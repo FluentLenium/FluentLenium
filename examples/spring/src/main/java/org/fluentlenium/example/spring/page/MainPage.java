@@ -10,10 +10,18 @@ import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 @PageUrl("/")
 public class MainPage extends FluentPage {
 
+    @FindBy(linkText = "Selenium")
+    private FluentWebElement seleniumLink;
+
     @FindBy(className = "whats-fluentlenium")
     private FluentWebElement content;
 
-   public void verifyIfIsLoaded() {
+    public MainPage verifyIfIsLoaded() {
         assertThat(content).isPresent();
-   }
+        return this;
+    }
+
+    public void clickOnSeleniumLink() {
+        seleniumLink.click();
+    }
 }

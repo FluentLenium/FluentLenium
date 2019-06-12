@@ -21,4 +21,9 @@ class Firefox implements IBrowser {
     public String getDriverSystemPropertyName() {
         return "webdriver.gecko.driver";
     }
+
+    @Override
+    public String toString() {
+        return "Firefox";
+    }
 }

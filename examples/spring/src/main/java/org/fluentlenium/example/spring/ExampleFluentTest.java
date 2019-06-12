@@ -13,6 +13,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.os.ExecutableFinder;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -20,11 +22,12 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Optional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = Config.class)
 public class ExampleFluentTest extends FluentTest {
+
+    private static final Logger log  = LoggerFactory.getLogger(ExampleFluentTest.class);
 
     @Autowired
     private SeleniumBrowserConfigProperties config;
@@ -40,20 +43,28 @@ public class ExampleFluentTest extends FluentTest {
     public WebDriver newWebDriver() {
         if (config.useHub()) {
             if (config.isMobileSimulator()) {
-                try {
-                    return new AppiumDriver(new URL(getRemoteUrl()), getBrowser().getBrowserCapabilities());
-                } catch (MalformedURLException e) {
-                    throw new ConfigException(e.getMessage());
-                }
+                return runTestOnAppiumServer();
             } else {
-                return runRemoteWebdriver();
+                return runRemoteWebDriver();
             }
         } else {
+            log.info("Running test locally using {}", getBrowser());
             return super.newWebDriver();
         }
     }
 
-    private WebDriver runRemoteWebdriver() {
+    private WebDriver runTestOnAppiumServer() {
+        try {
+            log.info("Running test on Appium server {} using {}", getRemoteUrl(), getBrowser());
+            return new AppiumDriver(
+                    new URL(getRemoteUrl()), getBrowser().getBrowserCapabilities());
+        } catch (MalformedURLException e) {
+            throw new ConfigException(e.getMessage());
+        }
+    }
+
+    private WebDriver runRemoteWebDriver() {
+        log.info("Running test on Grid using {}", getBrowser());
         try {
             return new Augmenter().augment(
                     new RemoteWebDriver(new URL(getRemoteUrl()), getBrowser().getBrowserCapabilities()));
@@ -69,8 +80,7 @@ public class ExampleFluentTest extends FluentTest {
 
     @Override
     public String getRemoteUrl() {
-        return Optional.ofNullable(System.getProperty("gridUrl"))
-                .orElse(config.getGridUrl());
+        return config.getGridUrl();
     }
 
     @Override
