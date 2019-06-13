@@ -9,11 +9,6 @@ public class Calculator extends ExampleFluentTest {
     @Page
     private AndroidCalculator calculator;
 
-    @Override
-    public String toString() {
-        return "Android Calculator Simulator";
-    }
-
     @Test
     public void shouldCorrectlyAdd() {
         calculator.addTwoPlusFour().verifyResult(6);
