@@ -1,6 +1,7 @@
 package org.fluentlenium.assertj.custom;
 
 import org.assertj.core.api.AbstractStringAssert;
+import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.Dimension;
 
@@ -11,7 +12,7 @@ import java.util.function.Supplier;
 import static org.fluentlenium.assertj.custom.HtmlConstants.CLASS_ATTRIBUTE;
 
 /**
- * Default implementation for {@link FluentWebElement} assertions;
+ * Default implementation for {@link FluentWebElement} assertions.
  */
 public class FluentWebElementAssert extends AbstractFluentAssert<FluentWebElementAssert, FluentWebElement>
         implements ElementStateAssert, ElementAttributeAssert {

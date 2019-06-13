@@ -5,15 +5,15 @@ package org.fluentlenium.assertj.custom;
  */
 public class FluentListSizeBuilder {
 
+    private static final String ACTUAL_SIZE = "Actual size: ";
+
     private final int actualSize;
     private final FluentListAssert listAssert;
-
-    private static final String ACTUAL_SIZE = "Actual size: ";
 
     /**
      * Creates a new fluent list size builder.
      *
-     * @param size       size of the list
+     * @param size       the actual size of the list
      * @param listAssert assertion
      */
     FluentListSizeBuilder(int size, FluentListAssert listAssert) {
@@ -88,6 +88,11 @@ public class FluentListSizeBuilder {
 
     /**
      * Assert that actual list size is equal to given size.
+     * <p>
+     * As an alternate solution you can call the following assertion directly:
+     * <pre>
+     * assertThat(elementList).hasSize(5);
+     * </pre>
      *
      * @param size expected size
      * @return ${code this} assertion object.
