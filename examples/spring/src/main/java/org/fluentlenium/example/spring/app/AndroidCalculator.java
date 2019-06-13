@@ -14,7 +14,7 @@ public class AndroidCalculator extends FluentPage {
     @FindBy(id = "com.android.calculator2:id/op_add")
     private FluentWebElement add;
 
-    @FindBy(id = "com.android.calculator2:id/op_add")
+    @FindBy(id = "com.android.calculator2:id/digit_4")
     private FluentWebElement digit4;
 
     @FindBy(id = "com.android.calculator2:id/eq")
