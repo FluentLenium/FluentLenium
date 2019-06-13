@@ -17,6 +17,7 @@ public interface IBrowser {
     Android android = new Android();
 
     IphoneSimulator iphone_simulator = new IphoneSimulator();
+    IphoneAppiumAppSimulator iphone_appium_simulator = new IphoneAppiumAppSimulator();
     AndroidSimulator android_simulator = new AndroidSimulator();
     AndroidCalculatorSimulator android_calculator_simulator = new AndroidCalculatorSimulator();
 
@@ -34,7 +35,8 @@ public interface IBrowser {
             Map.entry("iphone_simulator", iphone_simulator),
             Map.entry("android_simulator", android_simulator),
 
-            Map.entry("android_calculator_simulator", android_calculator_simulator)
+            Map.entry("android_calculator_simulator", android_calculator_simulator),
+            Map.entry("iphone_appium_simulator", iphone_appium_simulator)
     );
 
     Capabilities getBrowserCapabilities();
