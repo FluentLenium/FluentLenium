@@ -1,7 +1,6 @@
 package org.fluentlenium.assertj.custom;
 
 import org.assertj.core.api.AbstractStringAssert;
-import org.fluentlenium.assertj.FluentLeniumAssertions;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.Dimension;
 
