@@ -12,7 +12,7 @@ public interface AttributeAssert<T> {
     /**
      * Checks if the element, or at least one element in a list of elements, has the given property.
      * <p>
-     * It allows users to do not just presence validation but apply chained List assertions
+     * It allows users to do not just presence validation but to apply chained assertions
      * to further validate the attribute values.
      *
      * @param attribute the attribute to find

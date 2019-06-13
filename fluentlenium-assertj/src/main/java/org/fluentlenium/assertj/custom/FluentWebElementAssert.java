@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 import static org.fluentlenium.assertj.custom.HtmlConstants.CLASS_ATTRIBUTE;
 
 /**
- * Default implementation for {@link FluentWebElement} assertions;
+ * Default implementation for {@link FluentWebElement} assertions.
  */
 public class FluentWebElementAssert extends AbstractFluentAssert<FluentWebElementAssert, FluentWebElement>
         implements ElementStateAssert, ElementAttributeAssert {
