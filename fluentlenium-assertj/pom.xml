@@ -33,6 +33,12 @@
         </dependency>
 
         <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-testng</artifactId>
             <version>${project.version}</version>
