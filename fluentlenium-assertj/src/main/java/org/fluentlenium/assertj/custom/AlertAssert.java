@@ -4,6 +4,9 @@ import org.assertj.core.api.AbstractAssert;
 import org.fluentlenium.core.alert.AlertImpl;
 import org.openqa.selenium.NoAlertPresentException;
 
+/**
+ * Default implementation for alert assertions.
+ */
 public class AlertAssert extends AbstractAssert<AlertAssert, AlertImpl> implements AlertStateAssert {
 
     public AlertAssert(AlertImpl actual) {
