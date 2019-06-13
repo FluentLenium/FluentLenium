@@ -1,14 +1,20 @@
 package org.fluentlenium.assertj.custom;
 
-import org.assertj.core.api.AbstractAssert;
+import org.assertj.core.api.AbstractStringAssert;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.Dimension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
-public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAssert, FluentWebElement>
-        implements ElementStateAssert, FluentAssert {
+import static org.fluentlenium.assertj.custom.HtmlConstants.CLASS_ATTRIBUTE;
+
+/**
+ * Default implementation for {@link FluentWebElement} assertions.
+ */
+public class FluentWebElementAssert extends AbstractFluentAssert<FluentWebElementAssert, FluentWebElement>
+        implements ElementStateAssert, ElementAttributeAssert {
 
     public FluentWebElementAssert(FluentWebElement actual) {
         super(actual, FluentWebElementAssert.class);
@@ -16,74 +22,49 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
 
     @Override
     public FluentWebElementAssert isEnabled() {
-        isPresent();
-        if (!actual.enabled()) {
-            failWithMessage("Element in assertion is present but not enabled");
-        }
+        isPresentAndIs(() -> !actual.enabled(), "Element in assertion is present but not enabled");
         return this;
     }
 
     @Override
     public FluentWebElementAssert isNotEnabled() {
-        isPresent();
-        if (actual.enabled()) {
-            failWithMessage("Element in assertion is present but enabled");
-        }
+        isPresentAndIs(() -> actual.enabled(), "Element in assertion is present but enabled");
         return this;
     }
 
     @Override
     public FluentWebElementAssert isDisplayed() {
-        isPresent();
-        if (!actual.displayed()) {
-            failWithMessage("Element in assertion is present but not displayed");
-        }
-
+        isPresentAndIs(() -> !actual.displayed(), "Element in assertion is present but not displayed");
         return this;
     }
 
     @Override
     public FluentWebElementAssert isNotDisplayed() {
-        isPresent();
-        if (actual.displayed()) {
-            failWithMessage("Element in assertion is present but displayed");
-        }
+        isPresentAndIs(() -> actual.displayed(), "Element in assertion is present but displayed");
         return this;
     }
 
     @Override
     public FluentWebElementAssert isSelected() {
-        isPresent();
-        if (!actual.selected()) {
-            failWithMessage("Element in assertion is present but not selected");
-        }
+        isPresentAndIs(() -> !actual.selected(), "Element in assertion is present but not selected");
         return this;
     }
 
     @Override
     public FluentWebElementAssert isNotSelected() {
-        isPresent();
-        if (actual.selected()) {
-            failWithMessage("Element in assertion is present but selected");
-        }
+        isPresentAndIs(() -> actual.selected(), "Element in assertion is present but selected");
         return this;
     }
 
     @Override
     public FluentWebElementAssert isClickable() {
-        isPresent();
-        if (!actual.clickable()) {
-            failWithMessage("Element in assertion is present but not clickable");
-        }
+        isPresentAndIs(() -> !actual.clickable(), "Element in assertion is present but not clickable");
         return this;
     }
 
     @Override
     public FluentWebElementAssert isNotClickable() {
-        isPresent();
-        if (actual.clickable()) {
-            failWithMessage("Element in assertion is present but clickable");
-        }
+        isPresentAndIs(() -> actual.clickable(), "Element in assertion is present but clickable");
         return this;
     }
 
@@ -126,7 +107,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
     @Override
     public FluentWebElementAssert hasNotText(String textToFind) {
         if (actual.text().contains(textToFind)) {
-            failWithMessage("The element contain the text: " + textToFind);
+            failWithMessage("The element contains the text: " + textToFind);
         }
         return this;
     }
@@ -143,10 +124,47 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
 
     @Override
     public FluentWebElementAssert hasClass(String classToFind) {
-        String actualClasses = actual.attribute("class");
+        String actualClasses = actual.attribute(CLASS_ATTRIBUTE);
         if (!getClasses(actualClasses).contains(classToFind)) {
             failWithMessage("The element does not have the class: " + classToFind
                     + ". Actual class found : " + actualClasses);
+        }
+        return this;
+    }
+
+    @Override
+    public FluentWebElementAssert hasNotClass(String htmlClass) {
+        String actualClasses = actual.attribute(CLASS_ATTRIBUTE);
+        if (actualClasses != null && getClasses(actualClasses).contains(htmlClass)) {
+            failWithMessage("The element has class: " + htmlClass);
+        }
+        return this;
+    }
+
+    @Override
+    public FluentWebElementAssert hasClasses(String... classesToFind) {
+        String actualClasses = actual.attribute(CLASS_ATTRIBUTE);
+
+        if (actualClasses == null) {
+            failWithMessage("The element has no class attribute.");
+        }
+
+        if (!getClasses(actualClasses).containsAll(Arrays.asList(classesToFind))) {
+            failWithMessage("The element does not have all classes: " + Arrays.toString(classesToFind)
+                    + ". Actual classes found : " + actualClasses);
+        }
+        return this;
+    }
+
+    @Override
+    public FluentWebElementAssert hasNotClasses(String... classesToFind) {
+        String actualClasses = actual.attribute(CLASS_ATTRIBUTE);
+        if (actualClasses != null) {
+            List<String> actualClassesAsList = getClasses(actualClasses);
+            if (actualClassesAsList.containsAll(Arrays.asList(classesToFind))) {
+                failWithMessage("The element has the classes: " + Arrays.toString(classesToFind)
+                        + ". Actual classes found : " + actualClasses);
+            }
         }
         return this;
     }
@@ -193,9 +211,7 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
 
     @Override
     public FluentWebElementAssert hasAttributeValue(String attribute, String value) {
-        String actualValue;
-
-        actualValue = actual.attribute(attribute);
+        String actualValue = actual.attribute(attribute);
 
         if (actualValue == null) {
             failWithMessage("The element does not have attribute " + attribute);
@@ -209,8 +225,29 @@ public class FluentWebElementAssert extends AbstractAssert<FluentWebElementAsser
         return this;
     }
 
-    private List<String> getClasses(String classString) {
-        String[] primitiveList = classString.split(" ");
-        return Arrays.asList(primitiveList);
+    @Override
+    public AbstractStringAssert hasAttribute(String attribute) {
+        String actualValue = actual.attribute(attribute);
+
+        if (actualValue == null) {
+            failWithMessage("The element does not have attribute " + attribute);
+        }
+
+        return new AbstractStringAssert<>(actualValue, AbstractStringAssert.class);
+    }
+
+    @Override
+    public FluentWebElementAssert hasNotAttribute(String attribute) {
+        if (actual.attribute(attribute) != null) {
+            failWithMessage("The element has attribute " + attribute);
+        }
+        return this;
+    }
+
+    private void isPresentAndIs(Supplier<Boolean> elementCondition, String message) {
+        isPresent();
+        if (elementCondition.get()) {
+            failWithMessage(message);
+        }
     }
 }

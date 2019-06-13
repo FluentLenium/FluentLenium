@@ -1,16 +1,22 @@
 package org.fluentlenium.assertj.custom;
 
-import org.assertj.core.api.AbstractAssert;
-
+import org.assertj.core.api.ListAssert;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.Dimension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
-public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentList>
-    implements FluentAssert, ListStateAssert {
+import static org.fluentlenium.assertj.custom.HtmlConstants.CLASS_ATTRIBUTE;
+
+/**
+ * Default implementation for {@link FluentList} assertions.
+ */
+@SuppressWarnings("unchecked")
+public class FluentListAssert extends AbstractFluentAssert<FluentListAssert, FluentList>
+        implements ListStateAssert, ListAttributeAssert {
 
     public FluentListAssert(FluentList<? extends FluentWebElement> actual) {
         super(actual, FluentListAssert.class);
@@ -30,8 +36,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
     public FluentListAssert hasSize(int expectedSize) {
         int actualSize = actual.count();
         if (actualSize != expectedSize) {
-            failWithMessage("Expected size: " + expectedSize
-                    + ". Actual size: " + actualSize + ".");
+            failWithMessage("Expected size: " + expectedSize + ". Actual size: " + actualSize + ".");
         }
         return this;
     }
@@ -43,8 +48,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
 
     @Override
     public FluentListAssert hasText(String textToFind) {
-        List<String> actualTexts = actual.texts();
-        checkListEmptiness(actualTexts);
+        List<String> actualTexts = requiresNonEmpty(actual.texts());
         if (actualTexts.stream().noneMatch(text -> text.contains(textToFind))) {
             failWithMessage("No selected elements contains text: " + textToFind
                     + ". Actual texts found: " + actualTexts);
@@ -54,8 +58,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
 
     @Override
     public FluentListAssert hasTextMatching(String regexToBeMatched) {
-        List<String> actualTexts = actual.texts();
-        checkListEmptiness(actualTexts);
+        List<String> actualTexts = requiresNonEmpty(actual.texts());
         if (actualTexts.stream().noneMatch(text -> text.matches(regexToBeMatched))) {
             failWithMessage("No selected elements contains text matching: " + regexToBeMatched
                     + ". Actual texts found: " + actualTexts);
@@ -65,8 +68,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
 
     @Override
     public FluentListAssert hasNotText(String textToFind) {
-        List<String> actualTexts = actual.texts();
-        checkListEmptiness(actualTexts);
+        List<String> actualTexts = requiresNonEmpty(actual.texts());
         for (String text : actualTexts) {
             if (text.contains(textToFind)) {
                 failWithMessage(
@@ -79,8 +81,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
 
     @Override
     public FluentListAssert hasId(String idToFind) {
-        List<String> actualIds = actual.ids();
-        checkListEmptiness(actualIds);
+        List<String> actualIds = requiresNonEmpty(actual.ids());
         if (!actualIds.contains(idToFind)) {
             failWithMessage("No selected elements have id: " + idToFind
                     + ". Actual ids found : " + actualIds);
@@ -90,27 +91,29 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
 
     @Override
     public FluentListAssert hasClass(String classToFind) {
-        List<String> classes = actual.attributes("class");
-        checkListEmptiness(classes);
+        return validateHasClasses("No selected elements have class: ", classToFind);
+    }
 
-        for (String classesStr : classes) {
-            List<String> classesLst = Arrays.asList(classesStr.split(" "));
-            if (classesLst.contains(classToFind)) {
-                return this;
-            }
-        }
+    @Override
+    public FluentListAssert hasClasses(String... classesToFind) {
+        return validateHasClasses("No selected element have classes: ", classesToFind);
+    }
 
-        String classesFromElement = String.join(", ", classes);
-        failWithMessage(
-                "No selected elements have class: " + classToFind
-                        + ". Actual classes found : " + classesFromElement);
+    @Override
+    public FluentListAssert hasNotClass(String htmlClass) {
+        notHasClasses("At least one selected element has class: ", htmlClass);
+        return this;
+    }
+
+    @Override
+    public FluentListAssert hasNotClasses(String... htmlClasses) {
+        notHasClasses("At least one selected element has classes: ", htmlClasses);
         return this;
     }
 
     @Override
     public FluentListAssert hasValue(String value) {
-        List<String> actualValues = actual.values();
-        checkListEmptiness(actualValues);
+        List<String> actualValues = requiresNonEmpty(actual.values());
         if (!actualValues.contains(value)) {
             failWithMessage("No selected elements have value: " + value
                     + ". Actual values found : " + actualValues);
@@ -120,8 +123,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
 
     @Override
     public FluentListAssert hasName(String name) {
-        List<String> actualNames = actual.names();
-        checkListEmptiness(actualNames);
+        List<String> actualNames = requiresNonEmpty(actual.names());
         if (!actualNames.contains(name)) {
             failWithMessage("No selected elements have name: " + name
                     + ". Actual names found : " + actualNames);
@@ -131,8 +133,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
 
     @Override
     public FluentListAssert hasTagName(String tagName) {
-        List<String> actualTags = actual.tagNames();
-        checkListEmptiness(actualTags);
+        List<String> actualTags = requiresNonEmpty(actual.tagNames());
         if (!actualTags.contains(tagName)) {
             failWithMessage("No selected elements have tag: " + tagName
                     + ". Actual tags found : " + actualTags);
@@ -142,8 +143,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
 
     @Override
     public FluentListAssert hasDimension(Dimension dimension) {
-        List<Dimension> actualDimensions = actual.dimensions();
-        checkListEmptiness(actualDimensions);
+        List<Dimension> actualDimensions = requiresNonEmpty(actual.dimensions());
         if (!actualDimensions.contains(dimension)) {
             failWithMessage("No selected elements have dimension: " + dimension.toString()
                     + ". Actual dimensions found : " + actualDimensions.toString());
@@ -153,8 +153,7 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
 
     @Override
     public FluentListAssert hasAttributeValue(String attribute, String value) {
-        List<String> actualValues = actual.attributes(attribute);
-        checkListEmptiness(actualValues);
+        List<String> actualValues = requiresNonEmpty(actual.attributes(attribute));
         if (!actualValues.contains(value)) {
             failWithMessage("No selected elements have attribute " + attribute
                     + " with value: " + value + ". Actual values found: " + actualValues);
@@ -162,13 +161,57 @@ public class FluentListAssert extends AbstractAssert<FluentListAssert, FluentLis
         return this;
     }
 
+    @Override
+    public ListAssert<String> hasAttribute(String attribute) {
+        List<String> actualValues = requiresNonEmpty(actual.attributes(attribute));
+        if (actualValues.stream().allMatch(Objects::isNull)) {
+            failWithMessage("No selected element has attribute " + attribute);
+        }
+        return new ListAssert<>(actualValues);
+    }
+
+    @Override
+    public FluentListAssert hasNotAttribute(String attribute) {
+        List<String> actualValues = requiresNonEmpty(actual.attributes(attribute));
+        if (actualValues.stream().anyMatch(Objects::nonNull)) {
+            failWithMessage("At least one selected element has attribute " + attribute);
+        }
+        return this;
+    }
+
+    private FluentListAssert validateHasClasses(String message, String... classesToFind) {
+        List<String> elementsClasses = requiresNonEmpty(actual.attributes(CLASS_ATTRIBUTE));
+        for (String elementClass : elementsClasses) {
+            List<String> classesLst = getClasses(elementClass);
+            if (classesLst.containsAll(Arrays.asList(classesToFind))) {
+                return this;
+            }
+        }
+
+        String classesFromElement = String.join(", ", elementsClasses);
+        failWithMessage(
+                message + String.join(", ", classesToFind)
+                        + ". Actual classes found : " + classesFromElement);
+        return this;
+    }
+
+    private void notHasClasses(String message, String... htmlClasses) {
+        List<String> elementsClasses = requiresNonEmpty(actual.attributes(CLASS_ATTRIBUTE));
+        for (String elementClass : elementsClasses) {
+            if (elementClass != null && getClasses(elementClass).containsAll(Arrays.asList(htmlClasses))) {
+                failWithMessage(message + Arrays.asList(htmlClasses));
+            }
+        }
+    }
+
     void failWithMessage(String errorMessage) {
         super.failWithMessage(errorMessage);
     }
 
-    private void checkListEmptiness(List<?> elements) {
+    private <T> List<T> requiresNonEmpty(List<T> elements) {
         if (elements.isEmpty()) {
             throw new AssertionError("List is empty. Please make sure you use correct selector.");
         }
+        return elements;
     }
 }

@@ -35,7 +35,7 @@ public class FluentWebElementHasTextTest extends IntegrationTest {
         assertThatThrownBy(() -> assertThat(el("#location")).hasNotText("Pharmacy"))
                 .isInstanceOf(AssertionError.class)
                 .hasMessage(
-                        "The element contain the text: Pharmacy");
+                        "The element contains the text: Pharmacy");
     }
 
     @Test

@@ -9,6 +9,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +20,8 @@ import java.nio.file.Paths;
  * Persists a screenshot to a target file.
  */
 public class FluentDriverScreenshotPersister {
+
+    private static final Logger LOGGER  = LoggerFactory.getLogger(FluentDriverScreenshotPersister.class);
 
     private final Configuration configuration;
     private final WebDriver driver;
@@ -45,6 +49,7 @@ public class FluentDriverScreenshotPersister {
                 destFile = Paths.get(configuration.getScreenshotPath(), fileName).toFile();
             }
             FileUtils.writeByteArrayToFile(destFile, prepareScreenshot());
+            LOGGER.info("Created screenshot at: " + destFile.getAbsolutePath());
         } catch (IOException e) {
             throw new RuntimeException("Error when taking the screenshot", e);
         }

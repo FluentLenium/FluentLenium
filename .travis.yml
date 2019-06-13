@@ -1,5 +1,9 @@
 jobs:
+  allow_failures:
+    - stage: e2e
+    - name: "E2E tests"
   include:
+
     - stage: test
       name: "Java 11 - unit & integration tests code coverage + snapshot upload"
       language: java
@@ -35,7 +39,7 @@ jobs:
       language: java
       jdk: openjdk11
       script:
-        - mvn -Pjava11 javadoc:javadoc
+        - mvn -Pjava11 javadoc:aggregate
 
     - stage: test
       name: "Ruby - Docs build"
@@ -50,6 +54,60 @@ jobs:
         global:
           - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
       sudo: false
+
+    - stage: e2e
+      name: "Edge"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=edge -DgridUrl=$BROWSERSTACK_GRID_URL
+      allow_failures:
+      branches:
+        except:
+          - master
+
+    - stage: e2e
+      name: "IE"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=ie -DgridUrl=$BROWSERSTACK_GRID_URL
+      branches:
+        except:
+          - master
+
+    - stage: e2e
+      name: "Chrome"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=chrome -DgridUrl=$BROWSERSTACK_GRID_URL
+      branches:
+        except:
+          - master
+
+    - stage: e2e
+      name: "Firefox"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=firefox -DgridUrl=$BROWSERSTACK_GRID_URL
+      branches:
+        except:
+          - master
+
+    - stage: e2e
+      name: "Safari"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=safari -DgridUrl=$BROWSERSTACK_GRID_URL
+      branches:
+        except:
+          - master
+
+matrix:
+  fast_finish: true
 
 env:
   global:

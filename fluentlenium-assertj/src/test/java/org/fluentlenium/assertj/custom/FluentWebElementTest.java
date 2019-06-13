@@ -6,12 +6,17 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
+import static org.fluentlenium.assertj.AssertionTestSupport.assertThatAssertionErrorIsThrownBy;
 import static org.mockito.Mockito.when;
 
+/**
+ * Unit test for {@link FluentWebElementAssert}.
+ */
 public class FluentWebElementTest {
     @Mock
     private FluentWebElement element;
@@ -30,10 +35,12 @@ public class FluentWebElementTest {
         elementAssert.isEnabled();
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void testIsEnabledKo() {
+        when(element.present()).thenReturn(true);
         when(element.enabled()).thenReturn(false);
-        elementAssert.isEnabled();
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.isEnabled())
+                .hasMessage("Element in assertion is present but not enabled");
     }
 
     @Test
@@ -43,10 +50,12 @@ public class FluentWebElementTest {
         elementAssert.isNotEnabled();
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void testIsNotEnabledKo() {
+        when(element.present()).thenReturn(true);
         when(element.enabled()).thenReturn(true);
-        elementAssert.isNotEnabled();
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.isNotEnabled())
+                .hasMessage("Element in assertion is present but enabled");
     }
 
     @Test
@@ -56,23 +65,27 @@ public class FluentWebElementTest {
         elementAssert.isClickable();
     }
 
-    @Test(expectedExceptions = AssertionError.class)
-    public void testIsClickabledKo() {
+    @Test
+    public void testIsClickableKo() {
+        when(element.present()).thenReturn(true);
         when(element.clickable()).thenReturn(false);
-        elementAssert.isClickable();
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.isClickable())
+                .hasMessage("Element in assertion is present but not clickable");
     }
 
     @Test
-    public void testIsNotClickabledOk() {
+    public void testIsNotClickableOk() {
         when(element.present()).thenReturn(true);
         when(element.clickable()).thenReturn(false);
         elementAssert.isNotClickable();
     }
 
-    @Test(expectedExceptions = AssertionError.class)
-    public void testIsNotClickabledKo() {
+    @Test
+    public void testIsNotClickableKo() {
+        when(element.present()).thenReturn(true);
         when(element.clickable()).thenReturn(true);
-        elementAssert.isNotClickable();
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.isNotClickable())
+                .hasMessage("Element in assertion is present but clickable");
     }
 
     @Test
@@ -81,10 +94,11 @@ public class FluentWebElementTest {
         elementAssert.isPresent();
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void testIsPresentKo() {
         when(element.present()).thenReturn(false);
-        elementAssert.isPresent();
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.isPresent())
+                .hasMessage("Element in assertion is not present");
     }
 
     @Test
@@ -93,10 +107,11 @@ public class FluentWebElementTest {
         elementAssert.isNotPresent();
     }
 
-    @Test(expectedExceptions = AssertionError.class)
-    public void testIsNotPresentdKo() {
+    @Test
+    public void testIsNotPresentKo() {
         when(element.present()).thenReturn(true);
-        elementAssert.isNotPresent();
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.isNotPresent())
+                .hasMessage("Element in assertion is present");
     }
 
     @Test
@@ -106,10 +121,12 @@ public class FluentWebElementTest {
         elementAssert.isDisplayed();
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void testIsDisplayedKo() {
+        when(element.present()).thenReturn(true);
         when(element.displayed()).thenReturn(false);
-        elementAssert.isDisplayed();
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.isDisplayed())
+                .hasMessage("Element in assertion is present but not displayed");
     }
 
     @Test
@@ -119,10 +136,12 @@ public class FluentWebElementTest {
         elementAssert.isNotDisplayed();
     }
 
-    @Test(expectedExceptions = AssertionError.class)
-    public void testIsSelected() {
+    @Test
+    public void testIsNotDisplayedKo() {
+        when(element.present()).thenReturn(true);
         when(element.displayed()).thenReturn(true);
-        elementAssert.isNotDisplayed();
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.isNotDisplayed())
+                .hasMessage("Element in assertion is present but displayed");
     }
 
     @Test
@@ -132,10 +151,12 @@ public class FluentWebElementTest {
         elementAssert.isNotSelected();
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void testIsNotSelectedKo() {
+        when(element.present()).thenReturn(true);
         when(element.selected()).thenReturn(true);
-        elementAssert.isNotSelected();
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.isNotSelected())
+                .hasMessage("Element in assertion is present but selected");
     }
 
     @Test
@@ -145,10 +166,12 @@ public class FluentWebElementTest {
         elementAssert.isSelected();
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void testIsSelectedKo() {
+        when(element.present()).thenReturn(true);
         when(element.selected()).thenReturn(false);
-        elementAssert.isSelected();
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.isSelected())
+                .hasMessage("Element in assertion is present but not selected");
     }
 
     @Test
@@ -157,10 +180,11 @@ public class FluentWebElementTest {
         elementAssert.hasName("some name");
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void testHasNameKo() {
         when(element.name()).thenReturn("other name");
-        elementAssert.hasName("some name");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasName("some name"))
+                .hasMessage("The element does not have the name: some name. Actual name found : other name");
     }
 
     @Test
@@ -169,10 +193,11 @@ public class FluentWebElementTest {
         elementAssert.hasValue("some value");
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void testHasValueKo() {
         when(element.value()).thenReturn("other value");
-        elementAssert.hasValue("some value");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasValue("some value"))
+                .hasMessage("The element does not have the value: some value. Actual value found : other value");
     }
 
     @Test
@@ -181,22 +206,54 @@ public class FluentWebElementTest {
         elementAssert.hasTagName("some tag");
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void testHasTagNameKo() {
         when(element.tagName()).thenReturn("other tag");
-        elementAssert.hasTagName("some tag");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasTagName("some tag"))
+                .hasMessage("The element does not have tag: some tag. Actual tag found : other tag");
     }
 
     @Test
-    public void testHasPropertyValueOk() {
+    public void testHasAttributeValueOk() {
         when(element.attribute("attribute")).thenReturn("some value");
         elementAssert.hasAttributeValue("attribute", "some value");
     }
 
-    @Test(expectedExceptions = AssertionError.class)
-    public void testHasPropertyValueKo() {
+    @Test
+    public void testHasAttributeValueKo() {
         when(element.attribute("attribute")).thenReturn("other value");
-        elementAssert.hasAttributeValue("attribute", "some value");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasAttributeValue("attribute", "some value"))
+                .hasMessage("The attribute attribute does not have the value: some value. Actual value : other value");
+    }
+
+    @Test
+    public void testHasAttributeValueKoWhenAttributeIsMissing() {
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasAttributeValue("attribute", "some value"))
+                .hasMessage("The element does not have attribute attribute");
+    }
+
+    @Test
+    public void testHasAttributeOk() {
+        when(element.attribute("attribute")).thenReturn("some value");
+        elementAssert.hasAttribute("attribute");
+    }
+
+    @Test
+    public void testHasAttributeKo() {
+        when(element.attribute("attribute")).thenReturn(null);
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasAttribute("attribute"));
+    }
+
+    @Test
+    public void testHasNotAttributeOk() {
+        when(element.attribute("attribute")).thenReturn(null);
+        elementAssert.hasNotAttribute("attribute");
+    }
+
+    @Test
+    public void testHasNotAttributeKo() {
+        when(element.attribute("attribute")).thenReturn("some value");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasNotAttribute("attribute"));
     }
 
     @Test
@@ -205,10 +262,11 @@ public class FluentWebElementTest {
         elementAssert.hasId("some id");
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void testHasIdKo() {
         when(element.id()).thenReturn("other id");
-        elementAssert.hasId("some id");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasId("some id"))
+                .hasMessage("The element does not have the id: some id. Actual id found : other id");
     }
 
     @Test
@@ -217,10 +275,11 @@ public class FluentWebElementTest {
         elementAssert.hasDimension(new Dimension(1, 2));
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void testHasDimensionKo() {
         when(element.size()).thenReturn(new Dimension(2, 1));
-        elementAssert.hasDimension(new Dimension(1, 2));
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasDimension(new Dimension(1, 2)))
+                .hasMessage("The element does not have the same size: (1, 2). Actual size found : (2, 1)");
     }
 
     @Test
@@ -229,16 +288,76 @@ public class FluentWebElementTest {
         elementAssert.hasClass("some-class");
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
     public void testHasClassKo() {
         when(element.attribute("class")).thenReturn("other-class");
-        elementAssert.hasClass("some-class");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasClass("some-class"))
+                .hasMessage("The element does not have the class: some-class. Actual class found : other-class");
     }
 
-    @Test(expectedExceptions = AssertionError.class)
+    @Test
+    public void shouldNotHaveClass() {
+        when(element.attribute("class")).thenReturn("clazz other-clazz");
+        elementAssert.hasNotClass("not-class");
+    }
+
+    @Test
+    public void shouldNotHaveClassWhenClassAttributeIsNotPresent() {
+        elementAssert.hasNotClass("clazz");
+    }
+
+    @Test
+    public void shouldFailWhenHasClass() {
+        when(element.attribute("class")).thenReturn("clazz other-clazz");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasNotClass("clazz"))
+                .hasMessage("The element has class: clazz");
+    }
+
+    @Test
+    public void shouldHaveClasses() {
+        when(element.attribute("class")).thenReturn("clazz clazz2 clazz3 clazz4");
+        elementAssert.hasClasses("clazz", "clazz2", "clazz4");
+    }
+
+    @Test
+    public void shouldFailWhenNoClassAttributeIsPresent() {
+        when(element.attribute("class")).thenReturn(null);
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasClasses("clazz", "clazz2", "clazz4"))
+                .hasMessage("The element has no class attribute.");
+    }
+
+    @Test
+    public void shouldFailWhenDoesntHaveAllClasses() {
+        when(element.attribute("class")).thenReturn("clazz clazz2 clazz3");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasClasses("clazz", "clazz5"))
+                .hasMessage("The element does not have all classes: [clazz, clazz5]. "
+                        + "Actual classes found : clazz clazz2 clazz3");
+    }
+
+    @Test
+    public void shouldNotHaveClasses() {
+        when(element.attribute("class")).thenReturn("clazz clazz2 clazz3");
+        elementAssert.hasNotClasses("clazz2", "clazz4");
+    }
+
+    @Test
+    public void shouldPassHasNotClassWhenNoClassAttributeIsPresent() {
+        elementAssert.hasNotClasses("clazz2", "clazz4");
+    }
+
+    @Test
+    public void shouldFailWhenContainsClasses() {
+        when(element.attribute("class")).thenReturn("clazz clazz2 clazz3");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasNotClasses("clazz2", "clazz3"))
+                .hasMessage("The element has the classes: [clazz2, clazz3]. "
+                        + "Actual classes found : clazz clazz2 clazz3");
+    }
+
+    @Test
     public void testSubstringKo() {
         when(element.attribute("class")).thenReturn("yolokitten");
-        elementAssert.hasClass("yolo");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasClass("yolo"))
+                .hasMessage("The element does not have the class: yolo. Actual class found : yolokitten");
     }
 
     @Test
@@ -248,15 +367,30 @@ public class FluentWebElementTest {
     }
 
     @Test
+    public void shouldHaveTextMatching() {
+        when(element.text()).thenReturn("There is a 5% increase");
+        elementAssert.hasTextMatching(".*\\d%.*");
+    }
+
+    @Test
+    @Ignore("https://github.com/FluentLenium/FluentLenium/issues/857")
+    public void shouldFailWhenHasTextNotMatching() {
+        when(element.text()).thenReturn("There is a 5% increase");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasTextMatching("There s a"))
+                .hasMessage("");
+    }
+
+    @Test
     public void testHasNotTextPositive() {
         when(element.text()).thenReturn("Something");
         elementAssert.hasNotText("Text which isn't above");
     }
 
-    @Test (expectedExceptions = AssertionError.class)
+    @Test
     public void testHasNotTextNegative() {
         when(element.text()).thenReturn("Something written here");
-        elementAssert.hasNotText("Something");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasNotText("Something"))
+                .hasMessage("The element contains the text: Something");
     }
 
     @Test
@@ -267,7 +401,7 @@ public class FluentWebElementTest {
     }
 
     @Test
-    public void testHasNoRaceConditioninHasText() {
+    public void testHasNoRaceConditionInHasText() {
         String textToFind = "someText";
         String firstActualText = "someOtherText";
 

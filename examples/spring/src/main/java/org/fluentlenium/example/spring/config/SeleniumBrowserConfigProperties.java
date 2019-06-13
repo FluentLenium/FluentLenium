@@ -3,22 +3,19 @@ package org.fluentlenium.example.spring.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class SeleniumBrowserConfigProperties {
 
-    @Value("${selenium.browser.type}")
-    private BrowserType browserType;
-    @Value("${selenium.hub.enabled}")
-    private Boolean useHub;
-    @Value("${selenium.hub.location}")
-    private String hubLocation;
-    @Value("${selenium.get.url}")
+    @Value("${browser.name}")
+    private String browserName;
+    @Value("${page.url}")
     private String pageUrl;
 
-    @Value("${firefoxdriver.path}")
-    private String firefoxDriverPath;
-    @Value("${chromedriver.path}")
-    private String chromeDriverPath;
+    @Value("${selenium.hub.enabled}")
+    private Boolean useHub;
+
     @Value("${safaridriver.path}")
     private String safariDriverPath;
     @Value("${iedriver.path}")
@@ -27,9 +24,18 @@ public class SeleniumBrowserConfigProperties {
     private String edgeDriverPath;
     @Value("${operadriver.path}")
     private String operaDriverPath;
+    @Value("${chromedriver.path}")
+    private String chromeDriverPath;
+    @Value("${firefoxdriver.path}")
+    private String firefoxDriverPath;
 
-    public BrowserConfig getBrowserConfig() {
-        return new BrowserConfig(browserType, useHub, hubLocation);
+    public Boolean useHub() {
+        return useHub;
+    }
+
+    public String getBrowserName() {
+        return Optional.ofNullable(System.getProperty("browserName"))
+                .orElse(browserName);
     }
 
     public String getPageUrl() {
@@ -37,19 +43,17 @@ public class SeleniumBrowserConfigProperties {
     }
 
     public String getDriverExecutablePath() {
-        switch (browserType) {
-            case SAFARI:
+        switch (browserName.toLowerCase()) {
+            case "safari":
                 return safariDriverPath;
-            case FIREFOX:
+            case "firefox":
                 return firefoxDriverPath;
-            case IE:
+            case "ie":
                 return ieDriverPath;
-            case EDGE:
+            case "edge":
                 return edgeDriverPath;
-            case OPERA:
+            case "opera":
                 return operaDriverPath;
-            case CHROME:
-                return chromeDriverPath;
             default:
                 return chromeDriverPath;
         }
