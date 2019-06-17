@@ -20,6 +20,6 @@ class Android implements IBrowser {
 
     @Override
     public String toString() {
-        return "Android";
+        return "Real Android Google Nexus 6 device";
     }
 }

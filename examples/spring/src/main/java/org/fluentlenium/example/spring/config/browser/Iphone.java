@@ -20,7 +20,7 @@ class Iphone implements IBrowser {
 
     @Override
     public String toString() {
-        return "Iphone";
+        return "Real iOS iPhone 8 device";
     }
 
 }

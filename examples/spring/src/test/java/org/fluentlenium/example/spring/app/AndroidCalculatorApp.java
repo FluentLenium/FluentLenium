@@ -1,10 +1,10 @@
-package org.fluentlenium.example.spring;
+package org.fluentlenium.example.spring.app;
 
 import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.example.spring.app.AndroidCalculator;
+import org.fluentlenium.example.spring.ExampleFluentTest;
 import org.junit.Test;
 
-public class Calculator extends ExampleFluentTest {
+public class AndroidCalculatorApp extends ExampleFluentTest {
 
     @Page
     private AndroidCalculator calculator;

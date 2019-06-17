@@ -15,6 +15,8 @@ public class SeleniumBrowserConfigProperties {
 
     @Value("${mobile.simulator}")
     private Boolean mobileSimulator;
+    @Value("${appium.server.url}")
+    private String appiumServerUrl;
 
     @Value("${selenium.hub.enabled}")
     private Boolean useHub;
@@ -48,6 +50,10 @@ public class SeleniumBrowserConfigProperties {
 
     public String getGridUrl() {
         return getStringProperty("gridUrl", hubUrl);
+    }
+
+    public String getAppiumServerUrl() {
+        return getStringProperty("appiumServerUrl", appiumServerUrl);
     }
 
     public String getPageUrl() {

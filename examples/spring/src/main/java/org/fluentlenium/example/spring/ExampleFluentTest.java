@@ -27,26 +27,27 @@ import java.net.URL;
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = Config.class)
 public class ExampleFluentTest extends FluentTest {
 
-    private static final Logger log  = LoggerFactory.getLogger(ExampleFluentTest.class);
+    private static final Logger log = LoggerFactory.getLogger(ExampleFluentTest.class);
 
     @Autowired
     private SeleniumBrowserConfigProperties config;
 
     @Before
     public void setUp() {
-        if (!config.useHub()) {
-            setupDriver();
+        if (!config.useHub() && !config.isMobileSimulator()) {
+            setupDriverExecutables();
         }
     }
 
     @Override
     public WebDriver newWebDriver() {
         if (config.useHub()) {
-            if (config.isMobileSimulator()) {
-                return runTestOnAppiumServer();
-            } else {
-                return runRemoteWebDriver();
-            }
+            // Don't log your Grid url because you may expose your SauceLabs/BrowserStack API key :)
+            log.info("Running test on Grid using {}", getBrowser());
+            return runRemoteWebDriver();
+        } else if (config.isMobileSimulator()) {
+            log.info("Running test on Appium server {} using {}", getAppiumServerUrl(), getBrowser());
+            return runTestOnAppiumServer();
         } else {
             log.info("Running test locally using {}", getBrowser());
             return super.newWebDriver();
@@ -55,16 +56,14 @@ public class ExampleFluentTest extends FluentTest {
 
     private WebDriver runTestOnAppiumServer() {
         try {
-            log.info("Running test on Appium server {} using {}", getRemoteUrl(), getBrowser());
             return new AppiumDriver(
-                    new URL(getRemoteUrl()), getBrowser().getBrowserCapabilities());
+                    new URL(getAppiumServerUrl()), getBrowser().getBrowserCapabilities());
         } catch (MalformedURLException e) {
-            throw new ConfigException(e.getMessage());
+            throw new ConfigException("Invalid hub location: " + getAppiumServerUrl(), e);
         }
     }
 
     private WebDriver runRemoteWebDriver() {
-        log.info("Running test on Grid using {}", getBrowser());
         try {
             return new Augmenter().augment(
                     new RemoteWebDriver(new URL(getRemoteUrl()), getBrowser().getBrowserCapabilities()));
@@ -76,6 +75,10 @@ public class ExampleFluentTest extends FluentTest {
     @Override
     public String getWebDriver() {
         return config.getBrowserName();
+    }
+
+    private String getAppiumServerUrl() {
+        return config.getAppiumServerUrl();
     }
 
     @Override
@@ -93,7 +96,7 @@ public class ExampleFluentTest extends FluentTest {
         return config.getPageUrl();
     }
 
-    private void setupDriver() {
+    private void setupDriverExecutables() {
         String propertyName = getBrowser().getDriverSystemPropertyName();
         String driverExecutablePath = config.getDriverExecutablePath();
         if (systemPropertyNotSet(propertyName) && executableNotPresentInPath(getBrowser())) {

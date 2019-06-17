@@ -7,7 +7,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 /**
  * Capabilities to run https://github.com/appium/ios-test-app automation
  */
-public class IphoneAppiumAppSimulator implements IBrowser {
+class IphoneAppiumAppSimulator implements IBrowser {
 
     @Override
     public Capabilities getBrowserCapabilities() {

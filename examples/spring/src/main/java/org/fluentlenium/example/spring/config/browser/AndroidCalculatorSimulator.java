@@ -4,7 +4,7 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-public class AndroidCalculatorSimulator implements IBrowser {
+class AndroidCalculatorSimulator implements IBrowser {
 
     @Override
     public Capabilities getBrowserCapabilities() {
