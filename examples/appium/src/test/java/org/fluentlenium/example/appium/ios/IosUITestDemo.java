@@ -11,7 +11,7 @@ public class IosUITestDemo extends ExampleFluentTest {
     private UITestDemoAppHomePage UITestDemoAppHomePage;
 
     @Test
-    public void shouldCorrectlyAdd() {
+    public void shouldCorrectlySwitchView() {
         UITestDemoAppHomePage.clickAboutLink().verifyIfIsLoaded();
     }
 

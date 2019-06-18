@@ -11,7 +11,7 @@ public class AndroidSwiftNotesApp extends ExampleFluentTest {
     private SwiftNoteHomePage noteApp;
 
     @Test
-    public void shouldCorrectlyAdd() {
+    public void shouldCorrectlyAddNote() {
         noteApp
                 .addNote("SampleTitle", "SampleBody")
                 .verifyNote("SampleTitle", "SampleBody");
