@@ -9,7 +9,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 class Iphone implements IBrowser {
 
     @Override
-    public Capabilities getBrowserCapabilities() {
+    public Capabilities getCapabilities() {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("browserName", "iPhone");
         caps.setCapability("device", "iPhone 8");

@@ -7,10 +7,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 /**
  * Represents Android simulator running locally via Android Studio
  */
-class AndroidSimulator implements IBrowser {
+class AndroidEmulator implements IBrowser {
 
     @Override
-    public Capabilities getBrowserCapabilities() {
+    public Capabilities getCapabilities() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
@@ -21,6 +21,6 @@ class AndroidSimulator implements IBrowser {
 
     @Override
     public String toString() {
-        return "Android Simulator";
+        return "Android Emulator";
     }
 }

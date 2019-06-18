@@ -6,7 +6,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 class Edge implements IBrowser {
 
     @Override
-    public Capabilities getBrowserCapabilities() {
+    public Capabilities getCapabilities() {
         return new EdgeOptions();
     }
 

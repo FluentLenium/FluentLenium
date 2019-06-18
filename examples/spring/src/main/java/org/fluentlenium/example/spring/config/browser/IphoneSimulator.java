@@ -10,7 +10,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 class IphoneSimulator implements IBrowser {
 
     @Override
-    public Capabilities getBrowserCapabilities() {
+    public Capabilities getCapabilities() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.0");

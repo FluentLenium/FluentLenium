@@ -6,7 +6,7 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 class IE implements IBrowser {
 
     @Override
-    public Capabilities getBrowserCapabilities() {
+    public Capabilities getCapabilities() {
         InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
         internetExplorerOptions.destructivelyEnsureCleanSession();
         internetExplorerOptions.setCapability("browser_version", "11.0");

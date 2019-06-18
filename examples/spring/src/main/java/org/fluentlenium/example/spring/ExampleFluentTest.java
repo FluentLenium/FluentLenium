@@ -57,7 +57,7 @@ public class ExampleFluentTest extends FluentTest {
     private WebDriver runTestOnAppiumServer() {
         try {
             return new AppiumDriver(
-                    new URL(getAppiumServerUrl()), getBrowser().getBrowserCapabilities());
+                    new URL(getAppiumServerUrl()), getBrowser().getCapabilities());
         } catch (MalformedURLException e) {
             throw new ConfigException("Invalid hub location: " + getAppiumServerUrl(), e);
         }
@@ -66,7 +66,7 @@ public class ExampleFluentTest extends FluentTest {
     private WebDriver runRemoteWebDriver() {
         try {
             return new Augmenter().augment(
-                    new RemoteWebDriver(new URL(getRemoteUrl()), getBrowser().getBrowserCapabilities()));
+                    new RemoteWebDriver(new URL(getRemoteUrl()), getBrowser().getCapabilities()));
         } catch (MalformedURLException e) {
             throw new ConfigException("Invalid hub location: " + getRemoteUrl(), e);
         }
@@ -88,7 +88,7 @@ public class ExampleFluentTest extends FluentTest {
 
     @Override
     public Capabilities getCapabilities() {
-        return getBrowser().getBrowserCapabilities();
+        return getBrowser().getCapabilities();
     }
 
     @Override

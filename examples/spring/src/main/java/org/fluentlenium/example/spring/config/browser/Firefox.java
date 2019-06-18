@@ -6,7 +6,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 class Firefox implements IBrowser {
 
     @Override
-    public Capabilities getBrowserCapabilities() {
+    public Capabilities getCapabilities() {
         FirefoxOptions options = new FirefoxOptions();
         options.setCapability("os", "Windows");
         return options;

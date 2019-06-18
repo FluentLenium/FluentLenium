@@ -6,7 +6,7 @@ import org.openqa.selenium.safari.SafariOptions;
 class Safari implements IBrowser {
 
     @Override
-    public Capabilities getBrowserCapabilities() {
+    public Capabilities getCapabilities() {
         SafariOptions safariOptions = new SafariOptions();
         safariOptions.setCapability("browser_version", "12.0");
         safariOptions.setCapability("os_version", "Mojave");

@@ -9,7 +9,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 class Android implements IBrowser {
 
     @Override
-    public Capabilities getBrowserCapabilities() {
+    public Capabilities getCapabilities() {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("browserName", "android");
         caps.setCapability("device", "Google Nexus 6");

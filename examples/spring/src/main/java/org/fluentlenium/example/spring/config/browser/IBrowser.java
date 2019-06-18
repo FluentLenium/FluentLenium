@@ -17,9 +17,7 @@ public interface IBrowser {
     Android android = new Android();
 
     IphoneSimulator iphone_simulator = new IphoneSimulator();
-    IphoneAppiumAppSimulator iphone_appium_simulator = new IphoneAppiumAppSimulator();
-    AndroidSimulator android_simulator = new AndroidSimulator();
-    AndroidCalculatorSimulator android_calculator_simulator = new AndroidCalculatorSimulator();
+    AndroidEmulator android_emulator = new AndroidEmulator();
 
     Map<String, IBrowser> browsers = Map.ofEntries(
             Map.entry("chrome", chrome),
@@ -33,13 +31,10 @@ public interface IBrowser {
             Map.entry("android", android),
 
             Map.entry("iphone_simulator", iphone_simulator),
-            Map.entry("android_simulator", android_simulator),
-
-            Map.entry("android_calculator_simulator", android_calculator_simulator),
-            Map.entry("iphone_appium_simulator", iphone_appium_simulator)
+            Map.entry("android_emulator", android_emulator)
     );
 
-    Capabilities getBrowserCapabilities();
+    Capabilities getCapabilities();
 
     default String getDriverExecutableName() {
         throw new ConfigException("Not supported");

@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 class Chrome implements IBrowser {
 
     @Override
-    public Capabilities getBrowserCapabilities() {
+    public Capabilities getCapabilities() {
         ChromeOptions options = new ChromeOptions();
         options.setCapability("os", "OS X");
         options.setCapability("os_version", "Mojave");
