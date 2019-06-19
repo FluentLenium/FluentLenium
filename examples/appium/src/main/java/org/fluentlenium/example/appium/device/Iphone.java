@@ -3,8 +3,16 @@ package org.fluentlenium.example.appium.device;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
-class Iphone implements Device {
+@Component
+@Profile("iphone")
+public class Iphone implements Device {
+
+    @Value("${iphone.app.path}")
+    private String appPath;
 
     @Override
     public Capabilities getCapabilities() {
@@ -21,10 +29,9 @@ class Iphone implements Device {
         return capabilities;
     }
 
-    // get it from https://github.com/King-of-Spades/AppCenter-Samples/tree/master/Appium
     @Override
     public String getTestAppPath() {
-        return "/Applications/appium/UITestDemo.iOS.app";
+        return appPath;
     }
 
     @Override

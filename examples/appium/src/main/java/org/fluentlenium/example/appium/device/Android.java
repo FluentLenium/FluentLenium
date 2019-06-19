@@ -3,8 +3,16 @@ package org.fluentlenium.example.appium.device;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
-class Android implements Device {
+@Profile("android")
+@Component
+public class Android implements Device {
+
+    @Value("${android.app.path}")
+    private String androidAppPath;
 
     @Override
     public Capabilities getCapabilities() {
@@ -16,10 +24,9 @@ class Android implements Device {
         return capabilities;
     }
 
-    // get it from https://github.com/King-of-Spades/AppCenter-Samples/tree/master/Appium
     @Override
     public String getTestAppPath() {
-        return "/Applications/appium/swiftnotes.apk";
+        return androidAppPath;
     }
 
     @Override

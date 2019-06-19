@@ -7,14 +7,17 @@ import org.junit.Test;
 
 public class AndroidSwiftNotesApp extends ExampleFluentTest {
 
+    private static final String SAMPLE_TITLE = "SampleTitle";
+    private static final String SAMPLE_BODY = "SampleBody";
+
     @Page
     private SwiftNoteHomePage noteApp;
 
     @Test
     public void shouldCorrectlyAddNote() {
         noteApp
-                .addNote("SampleTitle", "SampleBody")
-                .verifyNote("SampleTitle", "SampleBody");
+                .addNote(SAMPLE_TITLE, SAMPLE_BODY)
+                .verifyNote(SAMPLE_TITLE, SAMPLE_BODY);
     }
 
 }

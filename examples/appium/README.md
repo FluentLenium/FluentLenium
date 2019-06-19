@@ -9,10 +9,10 @@ b) Get sample apps:
 - [iOS](https://github.com/King-of-Spades/AppCenter-Samples/tree/master/Appium/iOS)
 - [Android](https://github.com/King-of-Spades/AppCenter-Samples/tree/master/Appium/Android)
 
-c) Change getTestAppPath() methods in Iphone and Android classes
+c) Change app paths in config
 
 d) Run test
 
-`mvn clean test -DdeviceName=android -Dtest=AndroidSwiftNotesApp`
+`mvn clean test -Dspring.profiles.active=android -Dtest=AndroidSwiftNotesApp`
 
-`mvn clean test -DdeviceName=iphone -Dtest=IosUITestDemo`
+`mvn clean test -Dspring.profiles.active=iphone -Dtest=IosUITestDemo`

@@ -6,17 +6,10 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class SeleniumBrowserConfigProperties {
-
-    @Value("${device.name}")
-    private String deviceName;
+public class AppiumConfigProperties {
 
     @Value("${appium.server.url}")
     private String appiumServerUrl;
-
-    public String getDeviceName() {
-        return getStringProperty("deviceName", deviceName);
-    }
 
     public String getAppiumServerUrl() {
         return getStringProperty("appiumServerUrl", appiumServerUrl);

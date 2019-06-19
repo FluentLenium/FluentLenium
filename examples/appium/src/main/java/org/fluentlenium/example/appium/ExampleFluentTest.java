@@ -2,7 +2,7 @@ package org.fluentlenium.example.appium;
 
 import io.appium.java_client.AppiumDriver;
 import org.fluentlenium.adapter.junit.FluentTest;
-import org.fluentlenium.example.appium.config.SeleniumBrowserConfigProperties;
+import org.fluentlenium.example.appium.config.AppiumConfigProperties;
 import org.fluentlenium.example.appium.config.Config;
 import org.fluentlenium.example.appium.config.ConfigException;
 import org.fluentlenium.example.appium.device.Device;
@@ -26,7 +26,10 @@ public class ExampleFluentTest extends FluentTest {
     private static final Logger log = LoggerFactory.getLogger(ExampleFluentTest.class);
 
     @Autowired
-    private SeleniumBrowserConfigProperties config;
+    private Device device;
+
+    @Autowired
+    private AppiumConfigProperties config;
 
     @Override
     public WebDriver newWebDriver() {
@@ -53,7 +56,7 @@ public class ExampleFluentTest extends FluentTest {
     }
 
     private Device getDevice() {
-        return Device.getBrowser(config.getDeviceName());
+        return device;
     }
 
 }

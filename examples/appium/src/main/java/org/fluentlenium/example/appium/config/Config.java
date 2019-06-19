@@ -1,10 +1,8 @@
 package org.fluentlenium.example.appium.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
+import org.fluentlenium.example.appium.device.Android;
+import org.fluentlenium.example.appium.device.Iphone;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 //CHECKSTYLE.OFF: HideUtilityClassConstructor
@@ -17,5 +15,18 @@ public class Config {
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
     }
+
+    @Profile("iphone")
+    @Bean
+    public Iphone iphone() {
+        return new Iphone();
+    }
+
+    @Profile("android")
+    @Bean
+    public Android android() {
+        return new Android();
+    }
+
 }
 //CHECKSTYLE.ON: HideUtilityClassConstructor
