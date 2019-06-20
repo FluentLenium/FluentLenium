@@ -1,20 +1,20 @@
 package org.fluentlenium.example.appium.app.android;
 
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.openqa.selenium.support.FindBy;
 
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
 public class SwiftNoteHomePage extends FluentPage {
 
-    @FindBy(id = "com.moonpi.swiftnotes:id/newNote")
+    @AndroidFindBy(id = "com.moonpi.swiftnotes:id/newNote")
     private FluentWebElement plusButton;
 
-    @FindBy(id = "com.moonpi.swiftnotes:id/titleEdit")
+    @AndroidFindBy(id = "com.moonpi.swiftnotes:id/titleEdit")
     private FluentWebElement titleElement;
 
-    @FindBy(id = "com.moonpi.swiftnotes:id/bodyEdit")
+    @AndroidFindBy(id = "com.moonpi.swiftnotes:id/bodyEdit")
     private FluentWebElement noteElement;
 
     public SwiftNoteHomePage addNote(String noteTitle, String noteBody) {

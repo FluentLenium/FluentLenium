@@ -4,12 +4,6 @@ import static java.util.Optional.ofNullable;
 import static org.fluentlenium.utils.CollectionUtils.isList;
 
 import io.appium.java_client.pagefactory.DefaultElementByBuilder;
-import io.appium.java_client.pagefactory.iOSXCUITFindAll;
-import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import io.appium.java_client.pagefactory.iOSXCUITFindByAllSet;
-import io.appium.java_client.pagefactory.iOSXCUITFindByChainSet;
-import io.appium.java_client.pagefactory.iOSXCUITFindBySet;
-import io.appium.java_client.pagefactory.iOSXCUITFindBys;
 import org.fluentlenium.core.label.FluentLabelProvider;
 import org.fluentlenium.core.page.ClassAnnotations;
 import org.fluentlenium.utils.ReflectionUtils;
@@ -87,16 +81,7 @@ public class InjectionAnnotations extends AbstractAnnotations implements FluentL
     private boolean isAnnotatedWithSupportedMobileBy(Field field) {
         Annotation[] annotations = field.getAnnotations();
         return Arrays.stream(annotations)
-                .anyMatch(this::isSupported);
-    }
-
-    private boolean isSupported(Annotation annotation) {
-        return annotation instanceof iOSXCUITFindBy ||
-                annotation instanceof iOSXCUITFindBys ||
-                annotation instanceof iOSXCUITFindAll ||
-                annotation instanceof iOSXCUITFindByAllSet ||
-                annotation instanceof iOSXCUITFindByChainSet ||
-                annotation instanceof iOSXCUITFindBySet;
+                .anyMatch(SupportedAppiumAnnotations::isSupported);
     }
 
     @Override
