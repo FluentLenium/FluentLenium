@@ -1,12 +1,12 @@
 package org.fluentlenium.example.appium.app.ios;
 
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class UITestDemoAppHomePage extends FluentPage {
 
-    @FindBy(xpath = "//XCUIElementTypeButton[@name='About']")
+    @iOSXCUITFindBy(accessibility = "About")
     private FluentWebElement about;
 
     public UITestDemoAppAboutPage clickAboutLink() {
