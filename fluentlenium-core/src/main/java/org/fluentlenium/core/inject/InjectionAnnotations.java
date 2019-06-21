@@ -1,9 +1,14 @@
 package org.fluentlenium.core.inject;
 
+import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
+import static io.appium.java_client.remote.MobilePlatform.ANDROID;
+import static io.appium.java_client.remote.MobilePlatform.IOS;
+import static io.appium.java_client.remote.MobilePlatform.WINDOWS;
 import static java.util.Optional.ofNullable;
 import static org.fluentlenium.utils.CollectionUtils.isList;
 
 import io.appium.java_client.pagefactory.DefaultElementByBuilder;
+import org.fluentlenium.configuration.ConfigurationException;
 import org.fluentlenium.core.label.FluentLabelProvider;
 import org.fluentlenium.core.page.ClassAnnotations;
 import org.fluentlenium.utils.ReflectionUtils;
@@ -28,21 +33,11 @@ public class InjectionAnnotations extends AbstractAnnotations implements FluentL
     private final DefaultElementByBuilder defaultElementByBuilder;
     private final boolean mobileElement;
 
-    private static Class<?> getEffectiveClass(Field field) {
-        if (isList(field)) {
-            Class<?> effectiveClass = ReflectionUtils.getFirstGenericType(field);
-            if (effectiveClass != null) {
-                return effectiveClass;
-            }
-        }
-        return field.getType();
-    }
-
     /**
      * Creates a new injection annotations object
      *
      * @param field        field to analyze
-     * @param capabilities
+     * @param capabilities Selenium capabilities
      */
     public InjectionAnnotations(Field field, Capabilities capabilities) {
         classAnnotations = new ClassAnnotations(getEffectiveClass(field));
@@ -52,6 +47,7 @@ public class InjectionAnnotations extends AbstractAnnotations implements FluentL
         String automation = getAutomation(capabilities);
         defaultElementByBuilder = new DefaultElementByBuilder(platform, automation);
         if (isAnnotatedWithSupportedMobileBy(field)) {
+            checkCapabilities(platform, automation);
             defaultElementByBuilder.setAnnotated(field);
             mobileElement = true;
         } else {
@@ -59,13 +55,34 @@ public class InjectionAnnotations extends AbstractAnnotations implements FluentL
         }
     }
 
-    private String getAutomation(Capabilities capabilities) {
-        if (capabilities == null) {
-            return null;
+    private void checkCapabilities(String platform, String automation) {
+        boolean correctConfiguration = isAndroid(platform) || isIos(platform, automation) || isWindows(platform);
+        if (!correctConfiguration) {
+            throw new ConfigurationException("You have annotated elements with Appium @FindBys" +
+                    " but capabilities are incomplete. Please use one of these configurations:\n" +
+                    "platformName:Windows\n" +
+                    "plaformName:Android\n" +
+                    "plaformName:iOS, automationName:XCuiTest");
         }
+    }
 
-        return ofNullable(capabilities.getCapability("automationName"))
-                .map(String::valueOf).orElse(null);
+    private boolean isWindows(String platform) {
+        return WINDOWS.equalsIgnoreCase(platform);
+    }
+
+    private boolean isIos(String platform, String automation) {
+        return IOS.equalsIgnoreCase(platform) && IOS_XCUI_TEST.equalsIgnoreCase(automation);
+    }
+
+    private boolean isAndroid(String platform) {
+        return ANDROID.equalsIgnoreCase(platform);
+    }
+
+    private String getAutomation(Capabilities capabilities) {
+        return ofNullable(capabilities)
+                .map(capability -> capability.getCapability("automationName"))
+                .map(String::valueOf)
+                .orElse(null);
     }
 
     private String getPlatform(Capabilities capabilities) {
@@ -111,5 +128,15 @@ public class InjectionAnnotations extends AbstractAnnotations implements FluentL
     @Override
     public String[] getLabelHints() {
         return labelFieldAnnotations.getLabelHints();
+    }
+
+    private static Class<?> getEffectiveClass(Field field) {
+        if (isList(field)) {
+            Class<?> effectiveClass = ReflectionUtils.getFirstGenericType(field);
+            if (effectiveClass != null) {
+                return effectiveClass;
+            }
+        }
+        return field.getType();
     }
 }

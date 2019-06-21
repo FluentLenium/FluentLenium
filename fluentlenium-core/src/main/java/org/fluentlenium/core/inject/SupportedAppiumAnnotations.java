@@ -23,6 +23,9 @@ import java.lang.annotation.Annotation;
 
 class SupportedAppiumAnnotations {
 
+    private SupportedAppiumAnnotations() {
+    }
+
     static boolean isSupported(Annotation annotation) {
         return annotation instanceof iOSXCUITFindBy ||
                 annotation instanceof iOSXCUITFindBys ||
