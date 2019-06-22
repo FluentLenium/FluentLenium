@@ -21,7 +21,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBys;
 
 import java.lang.annotation.Annotation;
 
-class SupportedAppiumAnnotations {
+final class SupportedAppiumAnnotations {
 
     private SupportedAppiumAnnotations() {
     }

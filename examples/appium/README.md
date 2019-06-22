@@ -11,7 +11,9 @@ b) Get sample apps:
 
 c) Change app paths in config
 
-d) Run test
+d) Run Android Emulator and iPhone Simulator locally
+
+e) Run test
 
 `mvn clean test -Dspring.profiles.active=android -Dtest=AndroidSwiftNotesApp`
 

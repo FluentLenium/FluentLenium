@@ -4,7 +4,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentWebElement;
 
-public class UITestDemoAppAboutPage extends FluentPage {
+public class AboutPage extends FluentPage {
 
     @iOSXCUITFindBy(accessibility = "Learn more")
     private FluentWebElement learnMoreButton;

@@ -1,8 +1,12 @@
 package org.fluentlenium.core.inject;
 
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.pagefactory.*;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.WindowsFindBy;
 import io.appium.java_client.pagefactory.bys.ContentMappedBy;
+import io.appium.java_client.pagefactory.iOSXCUITBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBys;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.fluentlenium.configuration.ConfigurationException;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -36,8 +40,12 @@ public class InjectionAnnotationsTest {
     @AndroidFindBy(uiAutomator = "androidUiAutomator")
     private FluentWebElement androidUiAutomator;
 
-    @WindowsFindBy(windowsAutomation = "windowsAutomation")
+    @WindowsFindBy(windowsAutomation = "windows")
     private FluentWebElement windowsAutomation;
+
+    @AndroidFindBy(accessibility = "android")
+    @iOSXCUITFindBy(tagName = "ios")
+    private FluentWebElement multiPlatformElement;
 
     @Test
     public void shouldInjectCssField() throws NoSuchFieldException {
@@ -59,8 +67,8 @@ public class InjectionAnnotationsTest {
 
     @Test
     public void shouldInjectIosAccessibilityIdField() throws NoSuchFieldException {
-        Field iosAccessibilityField = this.getClass().getDeclaredField("iosAccessibilityId");
-        InjectionAnnotations annotations = new InjectionAnnotations(iosAccessibilityField, getIosCapablities());
+        Field accessibilityField = this.getClass().getDeclaredField("iosAccessibilityId");
+        InjectionAnnotations annotations = new InjectionAnnotations(accessibilityField, getIosCapablities());
         By by = annotations.buildBy();
         assertThat(by).isInstanceOf(ContentMappedBy.class);
         assertThat(by).isEqualTo(new ByChained(MobileBy.AccessibilityId("iosAccessibilityId")));
@@ -78,8 +86,8 @@ public class InjectionAnnotationsTest {
 
     @Test
     public void shouldInjectAndroidAccessibilityIdField() throws NoSuchFieldException {
-        Field androidUiAutomator = this.getClass().getDeclaredField("androidUiAutomator");
-        InjectionAnnotations annotations = new InjectionAnnotations(androidUiAutomator, getAndroidCapablities());
+        Field uiAutomator = this.getClass().getDeclaredField("androidUiAutomator");
+        InjectionAnnotations annotations = new InjectionAnnotations(uiAutomator, getAndroidCapablities());
         By by = annotations.buildBy();
         assertThat(by).isInstanceOf(ContentMappedBy.class);
         assertThat(by).isEqualTo(new ByChained(MobileBy.AndroidUIAutomator("androidUiAutomator")));
@@ -87,8 +95,8 @@ public class InjectionAnnotationsTest {
 
     @Test
     public void shouldInjectWindowsAutomationField() throws NoSuchFieldException {
-        Field windowsAutomation = this.getClass().getDeclaredField("windowsAutomation");
-        InjectionAnnotations annotations = new InjectionAnnotations(windowsAutomation, getWindowsCapabilities());
+        Field windowsField = this.getClass().getDeclaredField("windowsAutomation");
+        InjectionAnnotations annotations = new InjectionAnnotations(windowsField, getWindowsCapabilities());
         By by = annotations.buildBy();
         assertThat(by).isInstanceOf(ContentMappedBy.class);
         assertThat(by).isEqualTo(new ByChained(MobileBy.ByWindowsAutomation.windowsAutomation("windowsAutomation")));
@@ -100,6 +108,16 @@ public class InjectionAnnotationsTest {
         assertThatThrownBy(() -> new InjectionAnnotations(androidUiAutomator, getIncompleteAndroidCapabilties()))
                 .isInstanceOf(ConfigurationException.class)
                 .hasMessageContaining("You have annotated elements with Appium @FindBys but capabilities are incomplete");
+    }
+
+    @Test
+    public void voidShouldPickCorrectSelectorWhenOnMultiplePlatform() throws NoSuchFieldException {
+        Field field = this.getClass().getDeclaredField("multiPlatformElement");
+        By androidBy = new InjectionAnnotations(field, getAndroidCapablities()).buildBy();
+        assertThat(androidBy).isEqualTo(new ByChained(MobileBy.AccessibilityId("android")));
+
+        By iosBy = new InjectionAnnotations(field, getIosCapablities()).buildBy();
+        assertThat(iosBy).isEqualTo(new ByChained(MobileBy.tagName("ios")));
     }
 
     private Capabilities getIncompleteAndroidCapabilties() {
