@@ -144,6 +144,36 @@ public class UrlTemplateTest {
     }
 
     @Test
+    public void testParseParametersFromQueryParameters() {
+        UrlTemplate urlParametersTemplate = new UrlTemplate("?param1={param1}&param2={param2}");
+        assertThat(urlParametersTemplate.getParameters().stream().map(UrlParameter::getName).collect(Collectors.toList()))
+                .containsExactly("param1", "param2");
+        assertThat(urlParametersTemplate.getParameters().stream().map(UrlParameter::isOptional).collect(Collectors.toList()))
+                .containsExactly(false, false);
+
+        ParsedUrlTemplate parsed = urlParametersTemplate.parse("?param1=v1&param2=v2");
+        assertThat(parsed.matches()).isTrue();
+        assertThat(parsed.parameters()).hasSize(2);
+        assertThat(parsed.parameters().keySet()).containsExactly("param1", "param2");
+        assertThat(parsed.parameters().values()).containsExactly("v1", "v2");
+    }
+
+    @Test
+    public void testParseParametersFromPathAndQueryParameters() {
+        UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}?param2={param2}&param3={param3}");
+        assertThat(urlParametersTemplate.getParameters().stream().map(UrlParameter::getName).collect(Collectors.toList()))
+                .containsExactly("param1", "param2", "param3");
+        assertThat(urlParametersTemplate.getParameters().stream().map(UrlParameter::isOptional).collect(Collectors.toList()))
+                .containsExactly(false, false, false);
+
+        ParsedUrlTemplate parsed = urlParametersTemplate.parse("/abc/v1?param2=v2&param3=v3");
+        assertThat(parsed.matches()).isTrue();
+        assertThat(parsed.parameters()).hasSize(3);
+        assertThat(parsed.parameters().keySet()).containsExactly("param1", "param2", "param3");
+        assertThat(parsed.parameters().values()).containsExactly("v1", "v2", "v3");
+    }
+
+    @Test
     public void testParseNotMatchingOptionalMiddleParameter() {
         UrlTemplate urlParametersTemplate = new UrlTemplate("/abc/{param1}/def{?/param2}/ghi/{param3}");
         assertThat(urlParametersTemplate.getParameters().stream().map(UrlParameter::getName).collect(Collectors.toList()))
