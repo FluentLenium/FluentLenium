@@ -74,9 +74,10 @@ public class HeroImage {
 }
 ```
 
+#### PageUrl parameters
+
 It's possible to define parameters in FluentPage url using `{[?][/path/]parameter}` syntax.
-If it starts with `?`, it means that the parameter is optional. Path can be included in the braces so it
-is removed when parameter value is not defined.
+If it starts with `?`, it means that the parameter is optional. Path can be included in the braces so it is removed when parameter value is not defined.
 
 ```java
 @PageUrl("/document/{document}{?/page/page}{?/format}")
@@ -88,6 +89,21 @@ public class DocumentPage extends FluentPage {
         ...
 }
 ```
+
+Also when a page is open, one might want to extract certain parameter values from the url template defined in the `@PageUrl` annotation.
+One can do that by calling `getParam(String)` on a FluentPage object. It works only when the FluentPage object is annotated as `@PageUrl'.
+
+So for a template like `/document/{document}{?/page/page}{?/format}` with an actual URL value `/document/345/json` one can query parameters like:
+
+```java
+String document = documentPage.getParam("document");
+```
+
+The queried value will be 345 in this case.
+
+If the provided parameter name is not defined in the template or it has no value in the actual URL, the returned value is `null`.
+
+#### Local files
 
 You can also refer to files in your test resources directory by specifying the `file` attribute with a file name: 
 
@@ -116,6 +132,8 @@ class Page2DynamicP2P1 extends FluentPage {
     }
 }
 ```
+
+#### Navigation and interaction on pages using parameters
 
 Parameter values are given in order to `isAt` and `go` methods.
 

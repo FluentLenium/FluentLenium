@@ -1,7 +1,5 @@
 package org.fluentlenium.core;
 
-import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
-
 import org.apache.commons.lang3.StringUtils;
 import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.core.page.ClassAnnotations;
@@ -12,6 +10,9 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 
+import static org.fluentlenium.utils.Preconditions.checkArgumentBlank;
+import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
+
 /**
  * Use the Page Object Pattern to have more resilient tests.
  * <p>
@@ -21,6 +22,8 @@ import org.openqa.selenium.TimeoutException;
 public class FluentPage extends DefaultFluentContainer implements FluentPageControl {
 
     private final ClassAnnotations classAnnotations = new ClassAnnotations(getClass());
+
+    private final PageUrlCache pageUrlCache = new PageUrlCache();
 
     /**
      * Creates a new fluent page.
@@ -44,14 +47,48 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
 
     @Override
     public String getUrl() {
+        String pageUrl = null;
         if (getClass().isAnnotationPresent(PageUrl.class)) {
             String url = getPageUrlValue(getClass().getAnnotation(PageUrl.class));
 
             if (!url.isEmpty()) {
-                return url;
+                pageUrl = url;
             }
         }
-        return null;
+        return pageUrl;
+    }
+
+    /**
+     * Parses the current URL and returns the parameter value for the argument parameter name.
+     * <p>
+     * In case the parameter is not defined in the {@link PageUrl} annotation,
+     * or the parameter (mandatory or optional) has no value in the actual URL, this method returns {@code null}.
+     * <p>
+     * There is also caching in place to improve performance.
+     * It compares the current URL with the cached URL, and if they are the same,
+     * the parameter is returned from the cached values, otherwise the URL is parsed again and the parameters
+     * are returned from the new URL.
+     * <p>
+     * Examples (for template + URL + paramName combinations):
+     * <pre>
+     * "/abc/{param1}/def/{param2}"  + "/abc/param1val/def/param2val" + "param1" -&gt; "param1val"
+     * "/abc/{param1}/def/{param2}"  + "/abc/param1val/def/param2val" + "param4" -&gt; null
+     * "/abc{?/param1}/def/{param2}" + "/abc/param1val/def/param2val" + "param1" -&gt; "param1val"
+     * "/abc{?/param1}/def/{param2}" + "/abc/def/param2val"           + "param1" -&gt; ull
+     * </pre>
+     *
+     * @param parameterName the parameter to get the value of
+     * @return the desired parameter value or null if a value for the given parameter name is not present
+     * @throws IllegalArgumentException when the argument param is null or empty
+     */
+    public String getParam(String parameterName) {
+        checkArgumentBlank(parameterName, "The parameter name to query should not be blank.");
+        String url = url();
+
+        if (!url.equals(pageUrlCache.getUrl())) {
+            pageUrlCache.cache(url, parseUrl(url).parameters());
+        }
+        return pageUrlCache.getParameter(parameterName);
     }
 
     private String getPageUrlValue(PageUrl pageUrl) {
