@@ -71,10 +71,10 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
      * <p>
      * Examples (for template + URL + paramName combinations):
      * <pre>
-     * "/abc/{param1}/def/{param2}"  + "/abc/param1val/def/param2val" + "param1" -> "param1val"
-     * "/abc/{param1}/def/{param2}"  + "/abc/param1val/def/param2val" + "param4" -> null
-     * "/abc{?/param1}/def/{param2}" + "/abc/param1val/def/param2val" + "param1" -> "param1val"
-     * "/abc{?/param1}/def/{param2}" + "/abc/def/param2val"           + "param1" -> null
+     * "/abc/{param1}/def/{param2}"  + "/abc/param1val/def/param2val" + "param1" -&gt; "param1val"
+     * "/abc/{param1}/def/{param2}"  + "/abc/param1val/def/param2val" + "param4" -&gt; null
+     * "/abc{?/param1}/def/{param2}" + "/abc/param1val/def/param2val" + "param1" -&gt; "param1val"
+     * "/abc{?/param1}/def/{param2}" + "/abc/def/param2val"           + "param1" -&gt; ull
      * </pre>
      *
      * @param parameterName the parameter to get the value of
