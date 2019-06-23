@@ -77,6 +77,7 @@ public class FluentPageUrlTemplateTest {
     }
 
     @Test
+    //TODO: this logic might not be the one that should be tested here
     public void testGoMissingParams() {
         assertThatThrownBy(() -> fluentPage.go("test1")).isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Value for parameter param2 is missing.");
