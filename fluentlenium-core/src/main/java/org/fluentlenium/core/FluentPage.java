@@ -10,7 +10,10 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 
+import java.util.Optional;
+
 import static org.fluentlenium.utils.Preconditions.checkArgumentBlank;
+import static org.fluentlenium.utils.Preconditions.checkState;
 import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 
 /**
@@ -22,7 +25,6 @@ import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 public class FluentPage extends DefaultFluentContainer implements FluentPageControl {
 
     private final ClassAnnotations classAnnotations = new ClassAnnotations(getClass());
-
     private final PageUrlCache pageUrlCache = new PageUrlCache();
 
     /**
@@ -47,15 +49,10 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
 
     @Override
     public String getUrl() {
-        String pageUrl = null;
-        if (getClass().isAnnotationPresent(PageUrl.class)) {
-            String url = getPageUrlValue(getClass().getAnnotation(PageUrl.class));
-
-            if (!url.isEmpty()) {
-                pageUrl = url;
-            }
-        }
-        return pageUrl;
+        return Optional.ofNullable(getPageUrlAnnotation())
+                .map(pageUrl -> getPageUrlValue(pageUrl))
+                .filter(url -> !url.isEmpty())
+                .orElse(null);
     }
 
     /**
@@ -91,36 +88,11 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
         return pageUrlCache.getParameter(parameterName);
     }
 
-    private String getPageUrlValue(PageUrl pageUrl) {
-        return (isLocalFile(pageUrl) ? getAbsoluteUrlFromFile(pageUrl.file()) : StringUtils.EMPTY) + pageUrl.value();
-    }
-
-    private boolean isLocalFile(PageUrl pageUrl) {
-        return pageUrl != null && !pageUrl.file().isEmpty();
-    }
-
-    private PageUrl getPageUrlAnnotation() {
-        PageUrl annotation = null;
-        if (getClass().isAnnotationPresent(PageUrl.class)) {
-            annotation = getClass().getAnnotation(PageUrl.class);
-        }
-        return annotation;
-    }
-
     @Override
     public String getUrl(Object... parameters) {
-        String url = getUrl();
-        if (url == null) {
-            return null;
-        }
-
-        UrlTemplate template = new UrlTemplate(url);
-
-        for (Object parameter : parameters) {
-            template.add(parameter == null ? null : String.valueOf(parameter));
-        }
-
-        return template.render();
+        return Optional.ofNullable(getUrl())
+                .map(url -> toRenderedUrlTemplate(url, parameters))
+                .orElse(null);
     }
 
     @Override
@@ -129,19 +101,12 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
         if (by != null) {
             isAtUsingSelector(by);
         }
-
-        String url = getUrl();
-        if (url != null) {
-            isAtUsingUrl(url);
-        }
+        isAtUrl(getUrl());
     }
 
     @Override
     public void isAt(Object... parameters) {
-        String url = getUrl(parameters);
-        if (url != null) {
-            isAtUsingUrl(url);
-        }
+        isAtUrl(getUrl(parameters));
     }
 
     /**
@@ -183,24 +148,12 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
 
     @Override
     public <P extends FluentPage> P go() {
-        String url = getUrl();
-        if (url == null) {
-            throw new IllegalStateException(
-                    "An URL should be defined on the page. Use @PageUrl annotation or override getUrl() method.");
-        }
-        goTo(url);
-        return (P) this;
+        return navigateTo(getUrl());
     }
 
     @Override
     public <P extends FluentPage> P go(Object... params) {
-        String url = getUrl(params);
-        if (url == null) {
-            throw new IllegalStateException(
-                    "An URL should be defined on the page. Use @PageUrl annotation or override getUrl() method.");
-        }
-        goTo(url);
-        return (P) this;
+        return navigateTo(getUrl(params));
     }
 
     @Override
@@ -210,12 +163,43 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
 
     @Override
     public ParsedUrlTemplate parseUrl(String url) {
-        String templateUrl = getUrl();
-        if (templateUrl == null) {
-            throw new IllegalStateException(
-                    "An URL should be defined on the page. Use @PageUrl annotation or override getUrl() method.");
+        return Optional.ofNullable(getUrl())
+                .map(templateUrl -> new UrlTemplate(templateUrl).parse(url))
+                .orElseThrow(() -> new IllegalStateException(
+                        "An URL should be defined on the page. Use @PageUrl annotation or override getUrl() method."));
+    }
+
+    private String toRenderedUrlTemplate(String url, Object[] parameters) {
+        UrlTemplate template = new UrlTemplate(url);
+
+        for (Object parameter : parameters) {
+            template.add(parameter == null ? null : String.valueOf(parameter));
         }
 
-        return new UrlTemplate(templateUrl).parse(url);
+        return template.render();
+    }
+
+    private void isAtUrl(String url) {
+        if (url != null) {
+            isAtUsingUrl(url);
+        }
+    }
+
+    private String getPageUrlValue(PageUrl pageUrl) {
+        return (isLocalFile(pageUrl) ? getAbsoluteUrlFromFile(pageUrl.file()) : StringUtils.EMPTY) + pageUrl.value();
+    }
+
+    private boolean isLocalFile(PageUrl pageUrl) {
+        return pageUrl != null && !pageUrl.file().isEmpty();
+    }
+
+    private PageUrl getPageUrlAnnotation() {
+        return getClass().isAnnotationPresent(PageUrl.class) ? getClass().getAnnotation(PageUrl.class) : null;
+    }
+
+    private <P extends FluentPage> P navigateTo(String url) {
+        checkState(url, "An URL should be defined on the page. Use @PageUrl annotation or override getUrl() method.");
+        goTo(url);
+        return (P) this;
     }
 }
