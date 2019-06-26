@@ -141,7 +141,8 @@ public interface PerformanceTiming {
      * Returns the value that corresponds to the {@code secureConnectionStart} event.
      * <p>
      * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-secureconnectstart">secureConnectionStart</a>
+     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-secureconnectstart">
+     *     secureConnectionStart</a>
      * attribute.
      *
      * @return the epoch time for the {@code secureConnectionStart} event
@@ -219,7 +220,8 @@ public interface PerformanceTiming {
      * Returns the value that corresponds to the {@code domContentLoadedEventStart} event.
      * <p>
      * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domcontenteventstart">domContentLoadedEventStart</a>
+     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domcontenteventstart">
+     *     domContentLoadedEventStart</a>
      * attribute.
      *
      * @return the epoch time for the {@code domContentLoadedEventStart} event
@@ -232,7 +234,8 @@ public interface PerformanceTiming {
      * Returns the value that corresponds to the {@code domContentLoadedEventEnd} event.
      * <p>
      * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domcontenteventend">domContentLoadedEventEnd</a>
+     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domcontenteventend">
+     *     domContentLoadedEventEnd</a>
      * attribute.
      *
      * @return the epoch time for the {@code domContentLoadedEventEnd} event
