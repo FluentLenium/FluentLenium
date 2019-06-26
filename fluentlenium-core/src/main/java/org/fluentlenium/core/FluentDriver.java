@@ -21,6 +21,8 @@ import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.inject.ContainerContext;
 import org.fluentlenium.core.inject.DefaultContainerInstantiator;
 import org.fluentlenium.core.inject.FluentInjector;
+import org.fluentlenium.core.performance.PerformanceTiming;
+import org.fluentlenium.core.performance.DefaultPerformanceTiming;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.wait.FluentWait;
@@ -61,6 +63,7 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
     private final FluentDriverWrappedCapabilitiesProvider capabilitiesProvider;
     private final FluentDriverHtmlDumper htmlDumper;
     private final FluentDriverWait driverWait;
+    private final PerformanceTiming performanceTiming;
 
     /**
      * Wrap the driver into a Fluent driver.
@@ -91,6 +94,7 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
         fluentInjector = new FluentInjector(adapter, events, componentsManager, new DefaultContainerInstantiator(this));
         cssControl = new CssControlImpl(adapter, adapter);
         windowAction = new WindowAction(adapter, componentsManager.getInstantiator(), driver);
+        performanceTiming = new DefaultPerformanceTiming(driver);
 
         new FluentDriverTimeoutConfigurer(configuration, driver).configureDriver();
     }
@@ -321,5 +325,9 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
     @Override
     public CssSupport css() {
         return cssControl.css();
+    }
+
+    public PerformanceTiming performanceTiming() {
+        return performanceTiming;
     }
 }
