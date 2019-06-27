@@ -419,3 +419,54 @@ Entering an input value in prompt:
 ```java
 alert().prompt("FluentLenium")
 ```
+
+## Performance Timing API
+
+FluentLenium provides a simple API for retrieving the performance timing metrics based on the [PerformanceTiming interface defined by W3C](https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface).
+
+The main interface for this API is `PerformanceTiming` from which you can query individual metric values. They return `long` type values querying the `window.performance.timing.<metric>`
+Javascript attribute. 
+
+```java
+public class SomeTest extends FluentTest {
+
+    @Page
+    private Homepage homepage;
+
+    @Test
+    public void test() {
+        //Get metric via parameterized method
+        long loadEventEnd = performanceTiming().getEventValue(PerformanceTimingEvent.LOAD_EVENT_END);
+        
+        //This is a convenience method for calling performanceTiming().getEventValue(PerformanceTimingEvent.DOM_COMPLETE);
+        long domComplete = performanceTiming().domComplete();
+    }
+}
+
+public class Homepage extends FluentPage {
+    
+    public long getDomComplete() {
+        return performanceTiming().domComplete();
+    }
+    
+    public long getLoadEventEnd() {
+        return performanceTiming().getEventValue(PerformanceTimingEvent.LOAD_EVENT_END);
+    }
+}
+```
+Each of the methods returning a specific metric execute a separate Javascript command.
+
+There is another way to get metrics, specifically to get all metrics in a single object called `PerformanceTimingMetrics`. This returns the object returned by the `window.performance.timing`
+Javascript attribute.
+
+```java
+@Test
+public void test() {
+    PerformanceTimingMetrics metrics = performanceTiming().getMetrics();
+    
+    long domComplete = metrics.getDomComplete();
+}
+```
+
+In this case only a single Javascript command is executed for `performanceTiming().getMetrics()`, `getDomComplete()` (actually any method) on this object returns the saved value,
+and none of the getter methods execute any additional Javascript command.
