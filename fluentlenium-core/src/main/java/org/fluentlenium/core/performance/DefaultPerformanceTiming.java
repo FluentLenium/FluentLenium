@@ -10,7 +10,7 @@ import static org.fluentlenium.utils.Preconditions.checkArgument;
 /**
  * Default implementation of {@link PerformanceTiming}.
  * <p>
- * Via this implementation you can retrieve the W3c Performance Timing event values from the browser,
+ * Via this implementation you can retrieve the W3C Performance Timing event values from the browser,
  * querying the {@code window.performance.timing.} property from the page.
  * <p>
  * This implementation executes the query with a simple {@link JavascriptExecutor} in a synchronous way.

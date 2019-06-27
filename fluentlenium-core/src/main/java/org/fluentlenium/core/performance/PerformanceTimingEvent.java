@@ -1,7 +1,7 @@
 package org.fluentlenium.core.performance;
 
 /**
- * Provides event types according for the
+ * Provides event types according to the
  * <a href="https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">
  * W3C Performance Timing interface.</a> documentation.
  */
