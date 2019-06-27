@@ -106,7 +106,7 @@ public class PerformanceTimingMetrics {
     public long getLoadEventEnd() {
         return getEvent(PerformanceTimingEvent.LOAD_EVENT_END);
     }
-    
+
     private long getEvent(PerformanceTimingEvent event) {
         return (Long) timingMetrics.get(event.getEvent());
     }
