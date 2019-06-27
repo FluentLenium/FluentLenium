@@ -3,6 +3,8 @@ package org.fluentlenium.core.performance;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Map;
+
 import static org.fluentlenium.utils.Preconditions.checkArgument;
 
 /**
@@ -16,6 +18,7 @@ import static org.fluentlenium.utils.Preconditions.checkArgument;
 public class DefaultPerformanceTiming implements PerformanceTiming {
 
     private static final String PERFORMANCE_TIMING_EVENTS_SCRIPT = "return window.performance.timing.%s;";
+    private static final String PERFORMANCE_TIMING_SCRIPT = "return window.performance.timing;";
 
     private final WebDriver driver;
 
@@ -26,6 +29,16 @@ public class DefaultPerformanceTiming implements PerformanceTiming {
     @Override
     public long getEventValue(PerformanceTimingEvent event) {
         checkArgument(event, "The event should not be null.");
-        return (Long) ((JavascriptExecutor) driver).executeScript(String.format(PERFORMANCE_TIMING_EVENTS_SCRIPT, event));
+        return (Long) execute(String.format(PERFORMANCE_TIMING_EVENTS_SCRIPT, event));
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public PerformanceTimingMetrics getMetrics() {
+        return new PerformanceTimingMetrics((Map<String, Object>) execute(PERFORMANCE_TIMING_SCRIPT));
+    }
+
+    private Object execute(String command) {
+        return ((JavascriptExecutor) driver).executeScript(command);
     }
 }

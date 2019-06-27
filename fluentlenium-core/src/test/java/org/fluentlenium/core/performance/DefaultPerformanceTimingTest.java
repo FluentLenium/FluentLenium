@@ -7,6 +7,9 @@ import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.mockito.Mockito.verify;
@@ -53,5 +56,17 @@ public class DefaultPerformanceTimingTest {
     public void shouldThrowExceptionForNullEvent() {
         assertThatIllegalArgumentException().isThrownBy(() -> performanceTiming.getEventValue(null))
                 .withMessage("The event should not be null.");
+    }
+
+    @Test
+    public void shouldGetMetricsModelObject() {
+        Map<String, Object> metrics = new HashMap<>();
+        metrics.put("domComplete", 1234L);
+        metrics.put("unloadEventStart", 5678L);
+        when(((JavascriptExecutor) driver).executeScript("return window.performance.timing;"))
+                .thenReturn(metrics);
+
+        assertThat(performanceTiming.getMetrics().getDomComplete()).isEqualTo(1234L);
+        assertThat(performanceTiming.getMetrics().getUnloadEventStart()).isEqualTo(5678L);
     }
 }

@@ -5,7 +5,12 @@ package org.fluentlenium.core.performance;
  * <a href="https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">Performance Timing interface.</a>
  * <p>
  * From the browser they can be retrieved by querying the value of the following JavaScript attribute:
- * {@code window.performance.timing.}.
+ * {@code window.performance.timing.<attribute>}.
+ * <p>
+ * To query the entire timing object in one Javascript query, you can call {@link #getMetrics()} which returns
+ * a {@link PerformanceTimingMetrics} object wrapping the timing metrics.
+ * <p>
+ * All other methods in this interface each execute a separate Javascript command to retrieve the desired value.
  */
 public interface PerformanceTiming {
 
@@ -142,7 +147,7 @@ public interface PerformanceTiming {
      * <p>
      * For details see the official documentation of the
      * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-secureconnectstart">
-     *     secureConnectionStart</a>
+     * secureConnectionStart</a>
      * attribute.
      *
      * @return the epoch time for the {@code secureConnectionStart} event
@@ -221,7 +226,7 @@ public interface PerformanceTiming {
      * <p>
      * For details see the official documentation of the
      * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domcontenteventstart">
-     *     domContentLoadedEventStart</a>
+     * domContentLoadedEventStart</a>
      * attribute.
      *
      * @return the epoch time for the {@code domContentLoadedEventStart} event
@@ -235,7 +240,7 @@ public interface PerformanceTiming {
      * <p>
      * For details see the official documentation of the
      * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domcontenteventend">
-     *     domContentLoadedEventEnd</a>
+     * domContentLoadedEventEnd</a>
      * attribute.
      *
      * @return the epoch time for the {@code domContentLoadedEventEnd} event
@@ -283,5 +288,19 @@ public interface PerformanceTiming {
         return getEventValue(PerformanceTimingEvent.LOAD_EVENT_END);
     }
 
+    /**
+     * Returns the value for the argument event type.
+     *
+     * @param event the event, never null
+     * @return the event value
+     */
     long getEventValue(PerformanceTimingEvent event);
+
+    /**
+     * Return all timing metrics, in particular the {@code window.performance.timing} object wrapped in a
+     * {@link PerformanceTimingMetrics} object.
+     *
+     * @return the performance timing metrics
+     */
+    PerformanceTimingMetrics getMetrics();
 }

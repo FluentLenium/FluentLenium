@@ -1,9 +1,9 @@
 package org.fluentlenium.core.performance;
 
 /**
- * Provides event types according to the
- * <a href="https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">W3C Performance Timing interface.</a>
- * documentation.
+ * Provides event types according for the
+ * <a href="https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">
+ * W3C Performance Timing interface.</a> documentation.
  */
 public enum PerformanceTimingEvent {
 
@@ -33,6 +33,10 @@ public enum PerformanceTimingEvent {
 
     PerformanceTimingEvent(String event) {
         this.event = event;
+    }
+
+    public String getEvent() {
+        return event;
     }
 
     @Override
