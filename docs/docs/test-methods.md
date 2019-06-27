@@ -29,6 +29,7 @@ This section contains description of FluentLenium features which may be useful d
 - [Taking ScreenShots and HTML Dumps](#taking-screenshots-and-html-dumps)
 - [Iframe](#iframe)
 - [Alerts](#alerts)
+- [Performance Timing API](#performance-timing-api)
 
 
 ## Window actions
