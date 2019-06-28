@@ -439,8 +439,15 @@ public class SomeTest extends FluentTest {
         //Get metric via parameterized method
         long loadEventEnd = performanceTiming().getEventValue(PerformanceTimingEvent.LOAD_EVENT_END);
         
+        //The same as the previous call but the value is converted to the given time unit
+        long loadEventEndInSeconds = performanceTiming().getEventValue(PerformanceTimingEvent.LOAD_EVENT_END, TimeUnit.SECONDS);
+        
         //This is a convenience method for calling performanceTiming().getEventValue(PerformanceTimingEvent.DOM_COMPLETE);
         long domComplete = performanceTiming().domComplete();
+        
+        //The same as the previous call but the value is converted to the given time unit
+        long domCompleteInSeconds = performanceTiming().domComplete(TimeUnit.SECONDS);
+        
     }
 }
 
@@ -463,9 +470,12 @@ Javascript attribute.
 ```java
 @Test
 public void test() {
+    //This returns the metrics by default in default milliseconds
     PerformanceTimingMetrics metrics = performanceTiming().getMetrics();
-    
     long domComplete = metrics.getDomComplete();
+    
+    //This will convert the metrics to the given time unit an return the value according to that
+    long domCompleteInSeconds = metrics.in(TimeUnit.SECONDS).getDomComplete();
 }
 ```
 

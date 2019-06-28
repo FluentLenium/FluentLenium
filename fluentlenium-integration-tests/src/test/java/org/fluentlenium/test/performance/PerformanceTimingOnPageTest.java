@@ -20,7 +20,8 @@ class PerformanceTimingOnPageTest extends IntegrationFluentTest {
     void shouldReturnEventValue() {
         goTo(DEFAULT_URL);
 
-        assertThat(performanceTiming().getEventValue(PerformanceTimingEvent.DOM_COMPLETE)).isGreaterThan(0);
+        assertThat(performanceTiming().getEventValue(PerformanceTimingEvent.UNLOAD_EVENT_START))
+                .isGreaterThanOrEqualTo(0);
     }
 
     @Test
