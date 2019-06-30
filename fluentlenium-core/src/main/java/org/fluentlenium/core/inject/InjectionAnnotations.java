@@ -62,7 +62,7 @@ public class InjectionAnnotations extends AbstractAnnotations implements FluentL
                     " but capabilities are incomplete. Please use one of these configurations:\n" +
                     "platformName:Windows\n" +
                     "plaformName:Android\n" +
-                    "plaformName:iOS, automationName:XCuiTest");
+                    "plaformName:iOS, automationName:XCUITest");
         }
     }
 
