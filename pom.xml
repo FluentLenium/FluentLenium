@@ -194,7 +194,7 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-text</artifactId>
-                <version>1.6</version>
+                <version>1.7</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
@@ -204,12 +204,12 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>5.4.2</version>
+                <version>5.5.0</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-launcher</artifactId>
-                <version>1.4.2</version>
+                <version>1.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.github.stephenc.jcip</groupId>
@@ -592,7 +592,7 @@
                             <dependency>
                                 <groupId>com.puppycrawl.tools</groupId>
                                 <artifactId>checkstyle</artifactId>
-                                <version>8.21</version>
+                                <version>8.22</version>
                             </dependency>
                         </dependencies>
                         <executions>
@@ -644,7 +644,7 @@
                     <plugin>
                         <groupId>org.owasp</groupId>
                         <artifactId>dependency-check-maven</artifactId>
-                        <version>5.0.0</version>
+                        <version>5.1.0</version>
                         <configuration>
                             <cveValidForHours>12</cveValidForHours>
                             <failBuildOnCVSS>1</failBuildOnCVSS>
