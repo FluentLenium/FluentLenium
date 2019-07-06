@@ -3,10 +3,10 @@ package org.fluentlenium.example.spring.config.browser;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 
-public class IE implements IBrowser {
+class IE implements IBrowser {
 
     @Override
-    public Capabilities getBrowserCapabilities() {
+    public Capabilities getCapabilities() {
         InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
         internetExplorerOptions.destructivelyEnsureCleanSession();
         internetExplorerOptions.setCapability("browser_version", "11.0");
@@ -22,5 +22,10 @@ public class IE implements IBrowser {
     @Override
     public String getDriverSystemPropertyName() {
         return "webdriver.ie.driver";
+    }
+
+    @Override
+    public String toString() {
+        return "IE11";
     }
 }
