@@ -29,7 +29,7 @@ sidebar:
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>4.2.2</version>
+    <version>4.3.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -83,7 +83,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit-jupiter</artifactId>
-    <version>4.2.2</version>
+    <version>4.3.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -101,7 +101,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>4.2.2</version>
+    <version>4.3.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -173,7 +173,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-cucumber</artifactId>
-    <version>4.2.2</version>
+    <version>4.3.0</version>
 </dependency>
 ```
 
@@ -355,7 +355,7 @@ Enable it by activating ```examples``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-spock</artifactId>
-    <version>4.2.2</version>
+    <version>4.3.0</version>
     <scope>test</scope>
 </dependency>
 ```
