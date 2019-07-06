@@ -97,7 +97,7 @@ This commit has to be done before:
 [Link to example](https://github.com/FluentLenium/FluentLenium/commit/d798e250aca231bf8d5a92d0e3ae670fbee48ebc)
 
 ```
-git checkout -v java8/v3.8.1
+git checkout -b java8/v3.8.1
 export JAVA_HOME='/usr/libexec/java_home -v 1.8'
 mvn -Pjava8 release:prepare -Dresume=false
 mvn -Pjava8 release:perform -s settings.xml -Darguments="-DskipTests=true"
