@@ -1,6 +1,7 @@
 cucumber.runtime.java.fluentlenium
 org.fluentlenium.adapter
 org.fluentlenium.adapter.cucumber
+org.fluentlenium.adapter.exception
 org.fluentlenium.adapter.junit
 org.fluentlenium.adapter.junit.jupiter
 org.fluentlenium.adapter.sharedwebdriver
