@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class DuckDuckGoSafariTest extends FluentTest {
 
     @Page
@@ -21,10 +23,16 @@ public class DuckDuckGoSafariTest extends FluentTest {
     public void titleOfDuckDuckGoShouldContainSearchQueryName() {
         String searchPhrase = "searchPhrase";
 
-        goTo(duckDuckMainPage)
+        DuckDuckMainPage duckDuckMainPage = goTo(this.duckDuckMainPage);
+
+        System.out.println(performanceTiming().loadEventStart(TimeUnit.SECONDS));
+
+        duckDuckMainPage
                 .typeSearchPhraseIn(searchPhrase)
                 .submitSearchForm()
                 .assertIsPhrasePresentInTheResults(searchPhrase);
+
+        System.out.println(performanceTiming().loadEventEnd(TimeUnit.SECONDS));
     }
 
 }
