@@ -48,16 +48,6 @@ public class DefaultPerformanceTimingTest {
     }
 
     @Test
-    public void shouldGetSpecificEventValue() {
-        when(((JavascriptExecutor) driver).executeScript(LOAD_EVENT_END_SCRIPT)).thenReturn(5L);
-
-        assertThat(performanceTiming.loadEventEnd()).isEqualTo(5L);
-
-        verify(((JavascriptExecutor) driver)).executeScript(LOAD_EVENT_END_SCRIPT);
-        verifyNoMoreInteractions(driver);
-    }
-
-    @Test
     public void shouldGetEventValueInTimeUnit() {
         when(((JavascriptExecutor) driver).executeScript(LOAD_EVENT_END_SCRIPT)).thenReturn(60000L);
 
@@ -65,17 +55,6 @@ public class DefaultPerformanceTimingTest {
                 .isEqualTo(60000L);
         assertThat(performanceTiming.getEventValue(PerformanceTimingEvent.LOAD_EVENT_END, TimeUnit.SECONDS))
                 .isEqualTo(60L);
-
-        verify((JavascriptExecutor) driver, times(2)).executeScript(LOAD_EVENT_END_SCRIPT);
-        verifyNoMoreInteractions(driver);
-    }
-
-    @Test
-    public void shouldGetSpecificEventValueInTimeUnit() {
-        when(((JavascriptExecutor) driver).executeScript(LOAD_EVENT_END_SCRIPT)).thenReturn(60000L);
-
-        assertThat(performanceTiming.loadEventEnd(TimeUnit.MILLISECONDS)).isEqualTo(60000L);
-        assertThat(performanceTiming.loadEventEnd(TimeUnit.SECONDS)).isEqualTo(60L);
 
         verify((JavascriptExecutor) driver, times(2)).executeScript(LOAD_EVENT_END_SCRIPT);
         verifyNoMoreInteractions(driver);
