@@ -17,7 +17,7 @@
     </modules>
 
     <properties>
-        <it.project.version>4.2.3-SNAPSHOT</it.project.version>
+        <it.project.version>4.3.1-SNAPSHOT</it.project.version>
     </properties>
 
     <dependencyManagement>
