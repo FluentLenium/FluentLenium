@@ -15,29 +15,29 @@ import java.util.function.Function;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Parameterized.class)
-public class PerformanceTimingMetricsIndividualEventsTest {
+public class DefaultPerformanceTimingMetricsIndividualEventsTest {
 
-    private static final Map<String, Function<PerformanceTimingMetrics, Long>> EVENT_CALLS = new ImmutableMap.Builder<String, Function<PerformanceTimingMetrics, Long>>()
-            .put("navigationStart", PerformanceTimingMetrics::getNavigationStart)
-            .put("unloadEventStart", PerformanceTimingMetrics::getUnloadEventStart)
-            .put("unloadEventEnd", PerformanceTimingMetrics::getUnloadEventEnd)
-            .put("redirectStart", PerformanceTimingMetrics::getRedirectStart)
-            .put("redirectEnd", PerformanceTimingMetrics::getRedirectEnd)
-            .put("fetchStart", PerformanceTimingMetrics::getFetchStart)
-            .put("domainLookupStart", PerformanceTimingMetrics::getDomainLookupStart)
-            .put("domainLookupEnd", PerformanceTimingMetrics::getDomainLookupEnd)
-            .put("connectStart", PerformanceTimingMetrics::getConnectStart)
-            .put("connectEnd", PerformanceTimingMetrics::getConnectEnd)
-            .put("requestStart", PerformanceTimingMetrics::getRequestStart)
-            .put("responseStart", PerformanceTimingMetrics::getResponseStart)
-            .put("responseEnd", PerformanceTimingMetrics::getResponseEnd)
-            .put("domLoading", PerformanceTimingMetrics::getDomLoading)
-            .put("domInteractive", PerformanceTimingMetrics::getDomInteractive)
-            .put("domContentLoadedEventStart", PerformanceTimingMetrics::getDomContentLoadedEventStart)
-            .put("domContentLoadedEventEnd", PerformanceTimingMetrics::getDomContentLoadedEventEnd)
-            .put("domComplete", PerformanceTimingMetrics::getDomComplete)
-            .put("loadEventStart", PerformanceTimingMetrics::getLoadEventStart)
-            .put("loadEventEnd", PerformanceTimingMetrics::getLoadEventEnd)
+    private static final Map<String, Function<DefaultPerformanceTimingMetrics, Long>> EVENT_CALLS = new ImmutableMap.Builder<String, Function<DefaultPerformanceTimingMetrics, Long>>()
+            .put("navigationStart", DefaultPerformanceTimingMetrics::getNavigationStart)
+            .put("unloadEventStart", DefaultPerformanceTimingMetrics::getUnloadEventStart)
+            .put("unloadEventEnd", DefaultPerformanceTimingMetrics::getUnloadEventEnd)
+            .put("redirectStart", DefaultPerformanceTimingMetrics::getRedirectStart)
+            .put("redirectEnd", DefaultPerformanceTimingMetrics::getRedirectEnd)
+            .put("fetchStart", DefaultPerformanceTimingMetrics::getFetchStart)
+            .put("domainLookupStart", DefaultPerformanceTimingMetrics::getDomainLookupStart)
+            .put("domainLookupEnd", DefaultPerformanceTimingMetrics::getDomainLookupEnd)
+            .put("connectStart", DefaultPerformanceTimingMetrics::getConnectStart)
+            .put("connectEnd", DefaultPerformanceTimingMetrics::getConnectEnd)
+            .put("requestStart", DefaultPerformanceTimingMetrics::getRequestStart)
+            .put("responseStart", DefaultPerformanceTimingMetrics::getResponseStart)
+            .put("responseEnd", DefaultPerformanceTimingMetrics::getResponseEnd)
+            .put("domLoading", DefaultPerformanceTimingMetrics::getDomLoading)
+            .put("domInteractive", DefaultPerformanceTimingMetrics::getDomInteractive)
+            .put("domContentLoadedEventStart", DefaultPerformanceTimingMetrics::getDomContentLoadedEventStart)
+            .put("domContentLoadedEventEnd", DefaultPerformanceTimingMetrics::getDomContentLoadedEventEnd)
+            .put("domComplete", DefaultPerformanceTimingMetrics::getDomComplete)
+            .put("loadEventStart", DefaultPerformanceTimingMetrics::getLoadEventStart)
+            .put("loadEventEnd", DefaultPerformanceTimingMetrics::getLoadEventEnd)
             .build();
 
     private static final Map<String, Object> METRICS = new ImmutableMap.Builder<String, Object>()
@@ -94,7 +94,7 @@ public class PerformanceTimingMetricsIndividualEventsTest {
 
     @Test
     public void shouldReturnSpecificPerformanceTimingMetrics() {
-        PerformanceTimingMetrics metrics = new PerformanceTimingMetrics(METRICS);
+        DefaultPerformanceTimingMetrics metrics = new DefaultPerformanceTimingMetrics(METRICS);
 
         assertThat(EVENT_CALLS.get(eventType).apply(metrics)).isEqualTo((Long) METRICS.get(eventType));
     }

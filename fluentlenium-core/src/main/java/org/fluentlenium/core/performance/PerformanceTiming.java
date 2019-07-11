@@ -12,9 +12,6 @@ import java.util.concurrent.TimeUnit;
  * To query the entire timing object in one Javascript query, you can call {@link #getMetrics()} which returns
  * a {@link PerformanceTimingMetrics} object wrapping the timing metrics.
  * <p>
- * This method has an overloaded version, {@link #getMetrics(TimeUnit)} that returns all metrics values
- * in the given time unit.
- * <p>
  * All other methods in this interface each execute a separate Javascript command to retrieve the desired value.
  */
 public interface PerformanceTiming {
@@ -620,15 +617,4 @@ public interface PerformanceTiming {
      * @return the performance timing metrics
      */
     PerformanceTimingMetrics getMetrics();
-
-    /**
-     * Return all timing metrics, in particular the {@code window.performance.timing} object wrapped in a
-     * {@link PerformanceTimingMetrics} object.
-     *
-     * @param timeUnit the time unit to convert the metrics values to
-     * @return the performance timing metrics
-     */
-    default PerformanceTimingMetrics getMetrics(TimeUnit timeUnit) {
-        return getMetrics().in(timeUnit);
-    }
 }

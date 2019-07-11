@@ -20,6 +20,7 @@ public class DefaultPerformanceTiming implements PerformanceTiming {
     private static final String PERFORMANCE_TIMING_EVENTS_SCRIPT = "return window.performance.timing.%s;";
     private static final String PERFORMANCE_TIMING_SCRIPT = "return window.performance.timing;";
 
+    private final PerformanceTimingMetricsFactory metricsFactory = new PerformanceTimingMetricsFactory();
     private final WebDriver driver;
 
     public DefaultPerformanceTiming(WebDriver driver) {
@@ -33,9 +34,8 @@ public class DefaultPerformanceTiming implements PerformanceTiming {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public PerformanceTimingMetrics getMetrics() {
-        return new PerformanceTimingMetrics((Map<String, Object>) execute(PERFORMANCE_TIMING_SCRIPT));
+        return metricsFactory.createFor(execute(PERFORMANCE_TIMING_SCRIPT));
     }
 
     private Object execute(String command) {

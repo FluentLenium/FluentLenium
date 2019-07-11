@@ -474,10 +474,16 @@ public void test() {
     PerformanceTimingMetrics metrics = performanceTiming().getMetrics();
     long domComplete = metrics.getDomComplete();
     
-    //This will convert the metrics to the given time unit an return the value according to that
-    long domCompleteInSeconds = metrics.in(TimeUnit.SECONDS).getDomComplete();
+    //This returns a new metrics object that will return the values in the set time unit
+    PerformanceTimingMetrics metricsInSeconds = metrics.in(TimeUnit.SECONDS);
+    long domCompleteInSeconds = metricsInSeconds.getDomComplete();
 }
 ```
 
 In this case only a single Javascript command is executed for `performanceTiming().getMetrics()`, `getDomComplete()` (actually any method) on this object returns the saved value,
 and none of the getter methods execute any additional Javascript command.
+
+Before retrieving a performance timing metrics value make sure that the page where you query it loaded completely.
+In case when navigation happens to a specific URL, Selenium makes sure to wait until the page is loaded but when a navigation happens after an interaction on the page
+(clicking on something, submitting a form, etc.) you need to make sure in your test that the page where it navigates to loads completely.
+Otherwise certain metrics might not have been registered at that moment.

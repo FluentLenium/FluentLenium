@@ -77,16 +77,4 @@ public class DefaultPerformanceTimingTest {
         assertThat(performanceTiming.getMetrics().getDomComplete()).isEqualTo(1234L);
         assertThat(performanceTiming.getMetrics().getUnloadEventStart()).isEqualTo(5678L);
     }
-
-    @Test
-    public void shouldGetMetricsObjectInTimeUnit() {
-        Map<String, Object> metrics = new HashMap<>();
-        metrics.put("domComplete", 60000L);
-        metrics.put("unloadEventStart", 100000L);
-        when(((JavascriptExecutor) driver).executeScript(TIMING_OBJECT_SCRIPT))
-                .thenReturn(metrics);
-
-        assertThat(performanceTiming.getMetrics(TimeUnit.MILLISECONDS).getDomComplete()).isEqualTo(60000L);
-        assertThat(performanceTiming.getMetrics(TimeUnit.SECONDS).getUnloadEventStart()).isEqualTo(100L);
-    }
 }
