@@ -29,29 +29,30 @@ import static org.mockito.Mockito.when;
 public class PerformanceTimingSpecificEventValuesTest {
 
     private static final String EVENT_SCRIPT = "return window.performance.timing.%s;";
-    private static final Map<String, Function<DefaultPerformanceTiming, Long>> EVENT_CALLS = new ImmutableMap.Builder<String, Function<DefaultPerformanceTiming, Long>>()
-            .put("navigationStart", PerformanceTiming::navigationStart)
-            .put("unloadEventStart", PerformanceTiming::unloadEventStart)
-            .put("unloadEventEnd", PerformanceTiming::unloadEventEnd)
-            .put("redirectStart", PerformanceTiming::redirectStart)
-            .put("redirectEnd", PerformanceTiming::redirectEnd)
-            .put("fetchStart", PerformanceTiming::fetchStart)
-            .put("domainLookupStart", PerformanceTiming::domainLookupStart)
-            .put("domainLookupEnd", PerformanceTiming::domainLookupEnd)
-            .put("connectStart", PerformanceTiming::connectStart)
-            .put("connectEnd", PerformanceTiming::connectEnd)
-            .put("secureConnectionStart", PerformanceTiming::secureConnectionStart)
-            .put("requestStart", PerformanceTiming::requestStart)
-            .put("responseStart", PerformanceTiming::responseStart)
-            .put("responseEnd", PerformanceTiming::responseEnd)
-            .put("domLoading", PerformanceTiming::domLoading)
-            .put("domInteractive", PerformanceTiming::domInteractive)
-            .put("domContentLoadedEventStart", PerformanceTiming::domContentLoadedEventStart)
-            .put("domContentLoadedEventEnd", PerformanceTiming::domContentLoadedEventEnd)
-            .put("domComplete", PerformanceTiming::domComplete)
-            .put("loadEventStart", PerformanceTiming::loadEventStart)
-            .put("loadEventEnd", PerformanceTiming::loadEventEnd)
-            .build();
+    private static final Map<String, Function<DefaultPerformanceTiming, Long>> EVENT_CALLS =
+            new ImmutableMap.Builder<String, Function<DefaultPerformanceTiming, Long>>()
+                    .put("navigationStart", PerformanceTiming::navigationStart)
+                    .put("unloadEventStart", PerformanceTiming::unloadEventStart)
+                    .put("unloadEventEnd", PerformanceTiming::unloadEventEnd)
+                    .put("redirectStart", PerformanceTiming::redirectStart)
+                    .put("redirectEnd", PerformanceTiming::redirectEnd)
+                    .put("fetchStart", PerformanceTiming::fetchStart)
+                    .put("domainLookupStart", PerformanceTiming::domainLookupStart)
+                    .put("domainLookupEnd", PerformanceTiming::domainLookupEnd)
+                    .put("connectStart", PerformanceTiming::connectStart)
+                    .put("connectEnd", PerformanceTiming::connectEnd)
+                    .put("secureConnectionStart", PerformanceTiming::secureConnectionStart)
+                    .put("requestStart", PerformanceTiming::requestStart)
+                    .put("responseStart", PerformanceTiming::responseStart)
+                    .put("responseEnd", PerformanceTiming::responseEnd)
+                    .put("domLoading", PerformanceTiming::domLoading)
+                    .put("domInteractive", PerformanceTiming::domInteractive)
+                    .put("domContentLoadedEventStart", PerformanceTiming::domContentLoadedEventStart)
+                    .put("domContentLoadedEventEnd", PerformanceTiming::domContentLoadedEventEnd)
+                    .put("domComplete", PerformanceTiming::domComplete)
+                    .put("loadEventStart", PerformanceTiming::loadEventStart)
+                    .put("loadEventEnd", PerformanceTiming::loadEventEnd)
+                    .build();
 
     @Parameter
     public String eventType;

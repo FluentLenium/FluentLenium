@@ -1,6 +1,5 @@
 package org.fluentlenium.core.performance;
 
-import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 

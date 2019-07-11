@@ -3,8 +3,6 @@ package org.fluentlenium.core.performance;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import java.util.Map;
-
 import static org.fluentlenium.utils.Preconditions.checkArgument;
 
 /**

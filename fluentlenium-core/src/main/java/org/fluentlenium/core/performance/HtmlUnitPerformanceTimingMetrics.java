@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * HtmlUnit specific implementation for {@link PerformanceTimingMetrics}.
  * <p>
- * Though the {@link com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceTiming} is a mock
+ * Though the {@link PerformanceTiming} is a mock
  * implementation for the PerformanceTiming API, the lack of this adapter might cause issues.
  * <p>
  * And before retrieving performance timing metrics from HtmlUnit, please check the aforementioned class whether it
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class HtmlUnitPerformanceTimingMetrics implements PerformanceTimingMetrics<HtmlUnitPerformanceTimingMetrics> {
 
-    private final com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceTiming timing;
+    private final PerformanceTiming timing;
     private final TimeUnit targetTimeUnit;
 
     public HtmlUnitPerformanceTimingMetrics(PerformanceTiming timing) {
