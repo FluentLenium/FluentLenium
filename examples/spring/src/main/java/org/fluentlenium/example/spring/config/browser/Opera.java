@@ -1,13 +1,12 @@
 package org.fluentlenium.example.spring.config.browser;
 
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-public class Opera implements IBrowser {
+class Opera implements IBrowser {
 
     @Override
-    public Capabilities getBrowserCapabilities() {
+    public Capabilities getCapabilities() {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("browser", "Opera");
         caps.setCapability("browser_version", "12.15");
@@ -25,5 +24,10 @@ public class Opera implements IBrowser {
     @Override
     public String getDriverSystemPropertyName() {
         return "webdriver.opera.driver";
+    }
+
+    @Override
+    public String toString() {
+        return "Opera";
     }
 }

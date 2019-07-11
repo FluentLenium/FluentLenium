@@ -13,8 +13,15 @@ public class SeleniumBrowserConfigProperties {
     @Value("${page.url}")
     private String pageUrl;
 
+    @Value("${mobile.simulator}")
+    private Boolean mobileSimulator;
+    @Value("${appium.server.url}")
+    private String appiumServerUrl;
+
     @Value("${selenium.hub.enabled}")
     private Boolean useHub;
+    @Value("${selenium.hub.url}")
+    private String hubUrl;
 
     @Value("${safaridriver.path}")
     private String safariDriverPath;
@@ -30,16 +37,27 @@ public class SeleniumBrowserConfigProperties {
     private String firefoxDriverPath;
 
     public Boolean useHub() {
-        return useHub;
+        return getBooleanProperty("useHub", useHub);
+    }
+
+    public Boolean isMobileSimulator() {
+        return getBooleanProperty("mobileSimulator", mobileSimulator);
     }
 
     public String getBrowserName() {
-        return Optional.ofNullable(System.getProperty("browserName"))
-                .orElse(browserName);
+        return getStringProperty("browserName", browserName);
+    }
+
+    public String getGridUrl() {
+        return getStringProperty("gridUrl", hubUrl);
+    }
+
+    public String getAppiumServerUrl() {
+        return getStringProperty("appiumServerUrl", appiumServerUrl);
     }
 
     public String getPageUrl() {
-        return pageUrl;
+        return getStringProperty("pageUrl", pageUrl);
     }
 
     public String getDriverExecutablePath() {
@@ -57,5 +75,17 @@ public class SeleniumBrowserConfigProperties {
             default:
                 return chromeDriverPath;
         }
+    }
+
+    private String getStringProperty(String propertyName, String propertyValue) {
+        return Optional.ofNullable(System.getProperty(propertyName))
+                .orElse(propertyValue);
+    }
+
+    private Boolean getBooleanProperty(String propertyName, Boolean configuredValue) {
+        if (System.getProperty(propertyName) == null) {
+            return configuredValue;
+        }
+        return Boolean.valueOf(System.getProperty(propertyName));
     }
 }

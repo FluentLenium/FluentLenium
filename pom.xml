@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>4.2.3-SNAPSHOT</version>
+    <version>4.3.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -187,6 +187,11 @@
                 <version>2.35.0</version>
             </dependency>
             <dependency>
+                <groupId>io.appium</groupId>
+                <artifactId>java-client</artifactId>
+                <version>7.1.0</version>
+            </dependency>
+            <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>2.6</version>
@@ -234,23 +239,23 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>2.28.2</version>
+                <version>3.0.0</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
-                <version>2.28.2</version>
+                <version>3.0.0</version>
             </dependency>
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.9.13</version>
+                <version>1.9.14</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.atteo.classindex</groupId>
                 <artifactId>classindex</artifactId>
-                <version>3.6</version>
+                <version>3.7</version>
             </dependency>
             <dependency>
                 <groupId>org.spockframework</groupId>
@@ -320,7 +325,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.1.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
@@ -566,6 +571,7 @@
             <id>examples</id>
             <modules>
                 <module>examples/hooks</module>
+                <module>examples/performance</module>
                 <module>examples/cucumber</module>
                 <module>examples/quickstart-chrome</module>
                 <module>examples/spock</module>
@@ -573,6 +579,7 @@
                 <module>examples/quickstart-safari</module>
                 <module>examples/quickstart-firefox</module>
                 <module>examples/quickstart-microsoft-browsers</module>
+                <module>examples/appium</module>
             </modules>
         </profile>
 

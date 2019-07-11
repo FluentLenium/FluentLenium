@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>4.2.3-SNAPSHOT</version>
+        <version>4.3.1-SNAPSHOT</version>
     </parent>
     <artifactId>fluentlenium-core</artifactId>
     <packaging>jar</packaging>
@@ -57,6 +57,16 @@
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

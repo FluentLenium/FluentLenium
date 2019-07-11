@@ -60,7 +60,7 @@ jobs:
       language: java
       jdk: openjdk11
       script:
-        - cd examples/spring && mvn clean test -DbrowserName=edge -DgridUrl=$BROWSERSTACK_GRID_URL
+        - cd examples/spring && mvn clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
       allow_failures:
       branches:
         except:
@@ -71,7 +71,7 @@ jobs:
       language: java
       jdk: openjdk11
       script:
-        - cd examples/spring && mvn clean test -DbrowserName=ie -DgridUrl=$BROWSERSTACK_GRID_URL
+        - cd examples/spring && mvn clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
       branches:
         except:
           - master
@@ -81,7 +81,7 @@ jobs:
       language: java
       jdk: openjdk11
       script:
-        - cd examples/spring && mvn clean test -DbrowserName=chrome -DgridUrl=$BROWSERSTACK_GRID_URL
+        - cd examples/spring && mvn clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
       branches:
         except:
           - master
@@ -91,7 +91,7 @@ jobs:
       language: java
       jdk: openjdk11
       script:
-        - cd examples/spring && mvn clean test -DbrowserName=firefox -DgridUrl=$BROWSERSTACK_GRID_URL
+        - cd examples/spring && mvn clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
       branches:
         except:
           - master
@@ -101,7 +101,27 @@ jobs:
       language: java
       jdk: openjdk11
       script:
-        - cd examples/spring && mvn clean test -DbrowserName=safari -DgridUrl=$BROWSERSTACK_GRID_URL
+        - cd examples/spring && mvn clean test -DbrowserName=safari -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      branches:
+        except:
+          - master
+
+    - stage: e2e
+      name: "Iphone Web test (Safari on Iphone)"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      branches:
+        except:
+          - master
+
+    - stage: e2e
+      name: "Android Web test (Chrome on Android device)"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
       branches:
         except:
           - master

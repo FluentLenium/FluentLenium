@@ -2,6 +2,18 @@
 
 ## Version 4.x - Java 11 support
 
+### 4.3.0 (Jul 6 2019)
+- [#695](https://github.com/FluentLenium/FluentLenium/issues/695) - Added Appium support for Mobile automation
+- [#803](https://github.com/FluentLenium/FluentLenium/issues/803) - Added getParam() method to FluentPage (parametrised URL in @PageUrl)
+- [#764](https://github.com/FluentLenium/FluentLenium/issues/764) - Add getTestClass() and getTestMethod() methods to FluentTestRunnerAdapter
+- [#837](https://github.com/FluentLenium/FluentLenium/issues/837) - More assertions added to FluentLenium AssertJ module
+- [#711](https://github.com/FluentLenium/FluentLenium/issues/711) - Added IntelliJ inspections (helpful during tests development)
+- [#869](https://github.com/FluentLenium/FluentLenium/issues/869) - Bugfix - UrlTemplate.parse(String) fails with "No match found"
+- [#820](https://github.com/FluentLenium/FluentLenium/issues/820) - Bugfix - Handle ElementNotVisibleException | ElementClickInterceptedException in clickable() method
+- [#699](https://github.com/FluentLenium/FluentLenium/issues/699) - Bugfix - Fix for Chrome issue related to new window open event
+- [#785](https://github.com/FluentLenium/FluentLenium/issues/785) - Bugfix - Wrong incompatible Selenium version warn
+- [#737](https://github.com/FluentLenium/FluentLenium/issues/737) - Docs - Annotations and Event API described
+
 ### 4.2.2 (Mar 17 2019)
 - [#345](https://github.com/FluentLenium/FluentLenium/issues/345) - Added FluentPage assertions to fluentlenium-assertj module
 - [#336](https://github.com/FluentLenium/FluentLenium/issues/336) - Added warning log when user is using wrong version of Selenium
@@ -34,6 +46,19 @@
 - Fix for Chrome bug - redirects to 3rd party page stop working when user opens it in the new window or popup
 
 ## Version 3.x - Java 8 support
+
+### 3.9.0 (Jul 6 2019)
+- [#695](https://github.com/FluentLenium/FluentLenium/issues/695) - Added Appium support for Mobile automation
+- [#803](https://github.com/FluentLenium/FluentLenium/issues/803) - Added getParam() method to FluentPage (parametrised URL in @PageUrl)
+- [#764](https://github.com/FluentLenium/FluentLenium/issues/764) - Add getTestClass() and getTestMethod() methods to FluentTestRunnerAdapter
+- [#837](https://github.com/FluentLenium/FluentLenium/issues/837) - More assertions added to FluentLenium AssertJ module
+- [#711](https://github.com/FluentLenium/FluentLenium/issues/711) - Added IntelliJ inspections (helpful during tests development)
+- [#869](https://github.com/FluentLenium/FluentLenium/issues/869) - Bugfix - UrlTemplate.parse(String) fails with "No match found"
+- [#820](https://github.com/FluentLenium/FluentLenium/issues/820) - Bugfix - Handle ElementNotVisibleException | ElementClickInterceptedException in clickable() method
+- [#699](https://github.com/FluentLenium/FluentLenium/issues/699) - Bugfix - Fix for Chrome issue related to new window open event
+- [#785](https://github.com/FluentLenium/FluentLenium/issues/785) - Bugfix - Wrong incompatible Selenium version warn
+- [#737](https://github.com/FluentLenium/FluentLenium/issues/737) - Docs - Annotations and Event API described
+
 ### 3.8.1 (Mar 17 2019)
 - Backported 4.0.0, 4.1.1 and 4.2.2 into Java 8
 - Fix for Chrome bug - redirects to 3rd party page stop working when user opens it in the new window or popup
