@@ -23,16 +23,10 @@ public class DuckDuckGoSafariTest extends FluentTest {
     public void titleOfDuckDuckGoShouldContainSearchQueryName() {
         String searchPhrase = "searchPhrase";
 
-        DuckDuckMainPage duckDuckMainPage = goTo(this.duckDuckMainPage);
-
-        System.out.println(performanceTiming().loadEventStart(TimeUnit.SECONDS));
-
-        duckDuckMainPage
+        goTo(duckDuckMainPage)
                 .typeSearchPhraseIn(searchPhrase)
                 .submitSearchForm()
                 .assertIsPhrasePresentInTheResults(searchPhrase);
-
-        System.out.println(performanceTiming().loadEventEnd(TimeUnit.SECONDS));
     }
 
 }
