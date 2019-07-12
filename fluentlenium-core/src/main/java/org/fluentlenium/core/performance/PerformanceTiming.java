@@ -18,10 +18,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code navigationStart} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart">navigationStart</a>
-     * attribute.
      *
      * @return the epoch time for the {@code navigationStart} event
      */
@@ -31,10 +27,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code navigationStart} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart">navigationStart</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code navigationStart} event
@@ -45,10 +37,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code unloadEventStart} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-unloadeventstart">unloadEventStart</a>
-     * attribute.
      *
      * @return the epoch time for the {@code unloadEventStart} event
      */
@@ -58,10 +46,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code unloadEventStart} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-unloadeventstart">unloadEventStart</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code unloadEventStart} event
@@ -72,10 +56,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code unloadEventEnd} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-unloadeventend">unloadEventEnd</a>
-     * attribute.
      *
      * @return the epoch time for the {@code unloadEventEnd} event
      */
@@ -85,10 +65,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code unloadEventEnd} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-unloadeventend">unloadEventEnd</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code unloadEventEnd} event
@@ -99,10 +75,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code redirectStart} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-redirectstart">redirectStart</a>
-     * attribute.
      *
      * @return the epoch time for the {@code redirectStart} event
      */
@@ -112,10 +84,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code redirectStart} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-redirectstart">redirectStart</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code redirectStart} event
@@ -126,10 +94,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code redirectEnd} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-redirectend">redirectEnd</a>
-     * attribute.
      *
      * @return the epoch time for the {@code redirectEnd} event
      */
@@ -139,10 +103,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code redirectEnd} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-redirectend">redirectEnd</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code redirectEnd} event
@@ -153,10 +113,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code fetchStart} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-fetchstart">fetchStart</a>
-     * attribute.
      *
      * @return the epoch time for the {@code fetchStart} event
      */
@@ -166,10 +122,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code fetchStart} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-fetchstart">fetchStart</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code fetchStart} event
@@ -180,10 +132,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code domainLookupStart} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domainlookupstart">domainLookupStart</a>
-     * attribute.
      *
      * @return the epoch time for the {@code domainLookupStart} event
      */
@@ -193,10 +141,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code domainLookupStart} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domainlookupstart">domainLookupStart</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code domainLookupStart} event
@@ -207,10 +151,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code domainLookupEnd} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domainlookupend">domainLookupEnd</a>
-     * attribute.
      *
      * @return the epoch time for the {@code domainLookupEnd} event
      */
@@ -220,10 +160,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code domainLookupEnd} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domainlookupend">domainLookupEnd</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code domainLookupEnd} event
@@ -234,10 +170,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code connectStart} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-connectstart">connectStart</a>
-     * attribute.
      *
      * @return the epoch time for the {@code connectStart} event
      */
@@ -247,10 +179,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code connectStart} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-connectstart">connectStart</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code connectStart} event
@@ -261,10 +189,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code connectEnd} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-connectend">connectEnd</a>
-     * attribute.
      *
      * @return the epoch time for the {@code connectEnd} event
      */
@@ -274,10 +198,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code connectEnd} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-connectend">connectEnd</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code connectEnd} event
@@ -288,11 +208,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code secureConnectionStart} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-secureconnectstart">
-     * secureConnectionStart</a>
-     * attribute.
      *
      * @return the epoch time for the {@code secureConnectionStart} event
      */
@@ -302,11 +217,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code secureConnectionStart} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-secureconnectstart">
-     * secureConnectionStart</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code secureConnectionStart} event
@@ -317,10 +227,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code requestStart} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-requeststart">requestStart</a>
-     * attribute.
      *
      * @return the epoch time for the {@code requestStart} event
      */
@@ -330,10 +236,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code requestStart} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-requeststart">requestStart</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code requestStart} event
@@ -344,10 +246,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code responseStart} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-responsestart">responseStart</a>
-     * attribute.
      *
      * @return the epoch time for the {@code responseStart} event
      */
@@ -357,10 +255,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code responseStart} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-responsestart">responseStart</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code responseStart} event
@@ -371,10 +265,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code responseEnd} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-responseend">responseEnd</a>
-     * attribute.
      *
      * @return the epoch time for the {@code responseEnd} event
      */
@@ -384,10 +274,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code responseEnd} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-responseend">responseEnd</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code responseEnd} event
@@ -398,10 +284,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code domLoading} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domloading">domLoading</a>
-     * attribute.
      *
      * @return the epoch time for the {@code domLoading} event
      */
@@ -411,10 +293,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code domLoading} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domloading">domLoading</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code domLoading} event
@@ -425,10 +303,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code domInteractive} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-dominteractive">domInteractive</a>
-     * attribute.
      *
      * @return the epoch time for the {@code domInteractive} event
      */
@@ -438,10 +312,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code domInteractive} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-dominteractive">domInteractive</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code domInteractive} event
@@ -452,11 +322,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code domContentLoadedEventStart} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domcontenteventstart">
-     * domContentLoadedEventStart</a>
-     * attribute.
      *
      * @return the epoch time for the {@code domContentLoadedEventStart} event
      */
@@ -467,11 +332,6 @@ public interface PerformanceTiming {
     /**
      * Returns the value that corresponds to the {@code domContentLoadedEventStart} event,
      * converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domcontenteventstart">
-     * domContentLoadedEventStart</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code domContentLoadedEventStart} event
@@ -482,11 +342,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code domContentLoadedEventEnd} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domcontenteventend">
-     * domContentLoadedEventEnd</a>
-     * attribute.
      *
      * @return the epoch time for the {@code domContentLoadedEventEnd} event
      */
@@ -497,11 +352,6 @@ public interface PerformanceTiming {
     /**
      * Returns the value that corresponds to the {@code domContentLoadedEventEnd} event,
      * converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domcontenteventend">
-     * domContentLoadedEventEnd</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code domContentLoadedEventEnd} event
@@ -512,10 +362,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code domComplete} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domcomplete">domComplete</a>
-     * attribute.
      *
      * @return the epoch time for the {@code domComplete} event
      */
@@ -525,10 +371,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code domComplete} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-domcomplete">domComplete</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code domComplete} event
@@ -539,10 +381,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code loadEventStart} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-loadstart">loadEventStart</a>
-     * attribute.
      *
      * @return the epoch time for the {@code loadEventStart} event
      */
@@ -552,10 +390,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code loadEventStart} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-loadstart">loadEventStart</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code loadEventStart} event
@@ -566,10 +400,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code loadEventEnd} event.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-loadend">loadEventEnd</a>
-     * attribute.
      *
      * @return the epoch time for the {@code loadEventEnd} event
      */
@@ -579,10 +409,6 @@ public interface PerformanceTiming {
 
     /**
      * Returns the value that corresponds to the {@code loadEventEnd} event, converted to the given time unit.
-     * <p>
-     * For details see the official documentation of the
-     * <a href="https://www.w3.org/TR/navigation-timing/#dom-performancetiming-loadend">loadEventEnd</a>
-     * attribute.
      *
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code loadEventEnd} event
