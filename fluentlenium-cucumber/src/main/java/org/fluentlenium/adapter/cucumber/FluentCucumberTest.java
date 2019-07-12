@@ -52,8 +52,20 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * Initialization of FluentCucumberTestAdapter
      *
      * @param scenario Cucumber scenario
+     * @deprecated when migrating to new Cucumber package structure, use {@link #before(io.cucumber.core.api.Scenario)}
      */
+    @Deprecated
     public void before(Scenario scenario) {
+        SeleniumVersionChecker.checkSeleniumVersion();
+        starting(scenario.getName());
+    }
+
+    /**
+     * Initialization of FluentCucumberTestAdapter
+     *
+     * @param scenario Cucumber scenario
+     */
+    public void before(io.cucumber.core.api.Scenario scenario) {
         SeleniumVersionChecker.checkSeleniumVersion();
         starting(scenario.getName());
     }
@@ -62,8 +74,22 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * Stopping of FluentCucumberTest adapter
      *
      * @param scenario Cucumber scenario
+     * @deprecated when migrating to new Cucumber package structure, use {@link #after(io.cucumber.core.api.Scenario)}
      */
+    @Deprecated
     public void after(Scenario scenario) {
+        if (scenario.isFailed()) {
+            failed(scenario.getName());
+        }
+        finished(scenario.getName());
+    }
+
+    /**
+     * Stopping of FluentCucumberTest adapter
+     *
+     * @param scenario Cucumber scenario
+     */
+    public void after(io.cucumber.core.api.Scenario scenario) {
         if (scenario.isFailed()) {
             failed(scenario.getName());
         }
