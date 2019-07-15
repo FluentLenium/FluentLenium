@@ -1,12 +1,12 @@
 package org.fluentlenium.adapter.cucumber.integration.tests;
 
-import org.fluentlenium.adapter.cucumber.integration.tests.driverperfeature.PerFeatureRunner;
-import org.fluentlenium.adapter.cucumber.integration.tests.getbean.GetBeanRunner;
-import org.fluentlenium.adapter.cucumber.integration.tests.java8.Java8Runner;
-import org.fluentlenium.adapter.cucumber.integration.tests.multiinheritance.MultiInheritanceRunner;
-import org.fluentlenium.adapter.cucumber.integration.tests.nodriver.NoWebDriverRunner;
-import org.fluentlenium.adapter.cucumber.integration.tests.setbean.SetBeanRunner;
-import org.fluentlenium.adapter.cucumber.integration.tests.waithook.HookRunner;
+import org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.driverperfeature.PerFeatureRunner;
+import org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.getbean.GetBeanRunner;
+import org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.java8.Java8Runner;
+import org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.multiinheritance.MultiInheritanceRunner;
+import org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.nodriver.NoWebDriverRunner;
+import org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.setbean.SetBeanRunner;
+import org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.waithook.HookRunner;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -19,7 +19,14 @@ import org.junit.runners.Suite.SuiteClasses;
         MultiInheritanceRunner.class,
         Java8Runner.class,
         NoWebDriverRunner.class,
-        HookRunner.class
+        HookRunner.class,
+        org.fluentlenium.adapter.cucumber.integration.tests.io.cucumber.driverperfeature.PerFeatureRunner.class,
+        org.fluentlenium.adapter.cucumber.integration.tests.io.cucumber.getbean.GetBeanRunner.class,
+        org.fluentlenium.adapter.cucumber.integration.tests.io.cucumber.setbean.SetBeanRunner.class,
+        org.fluentlenium.adapter.cucumber.integration.tests.io.cucumber.multiinheritance.MultiInheritanceRunner.class,
+        org.fluentlenium.adapter.cucumber.integration.tests.io.cucumber.java8.Java8Runner.class,
+        org.fluentlenium.adapter.cucumber.integration.tests.io.cucumber.nodriver.NoWebDriverRunner.class,
+        org.fluentlenium.adapter.cucumber.integration.tests.io.cucumber.waithook.HookRunner.class
 })
 public class IntegrationTestSuite {
 }
