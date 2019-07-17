@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.function.Supplier;
 
@@ -43,10 +42,10 @@ public class FluentDriverHtmlDumper {
         File destFile = null;
         try {
             destFile = getDestinationFile(fileName);
-            FileUtils.write(destFile, htmlSupplier.get(), StandardCharsets.UTF_8);
+            FileUtils.write(destFile, htmlSupplier.get(), "UTF-8");
             LOGGER.info("Created HTML dump at: " + destFile.getAbsolutePath());
         } catch (IOException e) {
-            try (PrintWriter printWriter = new PrintWriter(destFile, StandardCharsets.UTF_8)) {
+            try (PrintWriter printWriter = new PrintWriter(destFile, "UTF-8")) {
                 printWriter.write("Can't dump HTML");
                 printWriter.println();
                 e.printStackTrace(printWriter);
