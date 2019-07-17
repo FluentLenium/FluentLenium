@@ -26,7 +26,7 @@ public final class TimeToChronoUnitConverter {
             case MICROSECONDS:
                 return ChronoUnit.MICROS;
             default:
-                throw new RuntimeException("Unsupported TimeUnit.");
+                throw new IllegalArgumentException("Unsupported TimeUnit.");
         }
     }
 }
