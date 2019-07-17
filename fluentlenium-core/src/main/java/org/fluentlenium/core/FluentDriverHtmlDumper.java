@@ -18,7 +18,7 @@ import java.util.function.Supplier;
  */
 public class FluentDriverHtmlDumper {
 
-    private static final Logger LOGGER  = LoggerFactory.getLogger(FluentDriverHtmlDumper.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FluentDriverHtmlDumper.class);
 
     private final Configuration configuration;
 
@@ -44,10 +44,7 @@ public class FluentDriverHtmlDumper {
             destFile = getDestinationFile(fileName);
             FileUtils.write(destFile, htmlSupplier.get(), "UTF-8");
             LOGGER.info("Created HTML dump at: " + destFile.getAbsolutePath());
-        } catch (Exception e) {
-            if (destFile == null) {
-                destFile = new File(fileName);
-            }
+        } catch (IOException e) {
             try (PrintWriter printWriter = new PrintWriter(destFile, "UTF-8")) {
                 printWriter.write("Can't dump HTML");
                 printWriter.println();

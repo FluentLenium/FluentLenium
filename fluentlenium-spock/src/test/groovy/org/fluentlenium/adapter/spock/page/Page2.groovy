@@ -1,11 +1,11 @@
 package org.fluentlenium.adapter.spock.page
 
-import org.fluentlenium.adapter.spock.utils.UrlUtil
 import org.fluentlenium.core.FluentPage
+import org.fluentlenium.utils.UrlUtils
 
 class Page2 extends FluentPage {
     @Override
     String getUrl() {
-        return UrlUtil.getAbsoluteUrlFromFile("page2.html")
+        return UrlUtils.getAbsoluteUrlFromFile("page2.html")
     }
 }

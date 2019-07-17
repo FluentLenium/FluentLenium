@@ -18,7 +18,6 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
     private final SearchContext searchContext;
     private final boolean shouldCache;
     private final By by;
-    private final boolean isFirst;
     private WebElement cachedElement;
     private List<WebElement> cachedElementList;
     private final FluentLabelImpl<InjectionElementLocator> label;
@@ -34,8 +33,7 @@ public class InjectionElementLocator implements ElementLocator, FluentLabelProvi
         this.searchContext = searchContext;
         shouldCache = annotations.isLookupCached();
         by = annotations.buildBy();
-        this.isFirst = isFirst;
-        label = new FluentLabelImpl<>(this, () -> by.toString() + (this.isFirst ? " (first)" : ""));
+        label = new FluentLabelImpl<>(this, () -> by.toString() + (isFirst ? " (first)" : ""));
         label.withLabel(annotations.getLabel());
         label.withLabelHint(annotations.getLabelHints());
     }

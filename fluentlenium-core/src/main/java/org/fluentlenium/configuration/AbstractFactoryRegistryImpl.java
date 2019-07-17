@@ -2,6 +2,7 @@ package org.fluentlenium.configuration;
 
 import org.atteo.classindex.ClassIndex;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,7 +52,7 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
                 factory = factoryClass.getConstructor().newInstance();
             } catch (NoSuchMethodException e) {
                 throw new ConfigurationException(factoryClass + " should have a public default constructor.", e);
-            } catch (Exception e) {
+            } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
                 throw new ConfigurationException(factoryClass + " can't be instantiated.", e);
             }
             register(factory);

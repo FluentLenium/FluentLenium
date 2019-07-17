@@ -116,7 +116,7 @@ public final class UrlUtils { // NOPMD CyclomaticComplexity
 
         URL url = ClassLoader.getSystemResource(file);
         if (url == null) {
-            throw new NullPointerException("url from file=" + file + " is null");
+            throw new IllegalArgumentException("url from file=" + file + " is null");
         }
 
         return url.toString();
