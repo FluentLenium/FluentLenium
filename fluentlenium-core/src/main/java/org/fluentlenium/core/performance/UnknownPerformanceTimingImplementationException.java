@@ -2,10 +2,12 @@ package org.fluentlenium.core.performance;
 
 /**
  * Exception for when the browser specific PerformanceTiming API implementation is not (yet) supported by FluentLenium.
+ *
+ * @see PerformanceTimingMetricsFactory
  */
-public class UnknownPerformanceTimingImplementationException extends RuntimeException {
+class UnknownPerformanceTimingImplementationException extends RuntimeException {
 
-    public UnknownPerformanceTimingImplementationException(String message) {
+    UnknownPerformanceTimingImplementationException(String message) {
         super(message);
     }
 }

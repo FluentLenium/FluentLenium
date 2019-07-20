@@ -2,9 +2,11 @@ package org.fluentlenium.core.performance;
 
 import java.util.concurrent.TimeUnit;
 
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
 /**
- * Interface representing the PerformanceTiming interface defined by W3C under the
- * <a href="https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">Performance Timing interface.</a>
+ * Interface representing the PerformanceTiming API defined by W3C under
+ * <a href="https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">Performance Timing interface</a>.
  * <p>
  * From the browser they can be retrieved by querying the value of the following JavaScript attribute:
  * {@code window.performance.timing.<attribute>}.
@@ -12,7 +14,8 @@ import java.util.concurrent.TimeUnit;
  * To query the entire timing object in one Javascript query, you can call {@link #getMetrics()} which returns
  * a {@link PerformanceTimingMetrics} object wrapping the timing metrics.
  * <p>
- * All other methods in this interface each execute a separate Javascript command to retrieve the desired value.
+ * Though the default implementation in FluentLenium returns relative values, this interface is flexible enough
+ * so that custom implementations may be created.
  */
 public interface PerformanceTiming {
 
@@ -22,7 +25,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code navigationStart} event
      */
     default long navigationStart() {
-        return getEventValue(PerformanceTimingEvent.NAVIGATION_START);
+        return navigationStart(MILLISECONDS);
     }
 
     /**
@@ -41,7 +44,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code unloadEventStart} event
      */
     default long unloadEventStart() {
-        return getEventValue(PerformanceTimingEvent.UNLOAD_EVENT_START);
+        return unloadEventStart(MILLISECONDS);
     }
 
     /**
@@ -60,7 +63,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code unloadEventEnd} event
      */
     default long unloadEventEnd() {
-        return getEventValue(PerformanceTimingEvent.UNLOAD_EVENT_END);
+        return unloadEventEnd(MILLISECONDS);
     }
 
     /**
@@ -79,7 +82,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code redirectStart} event
      */
     default long redirectStart() {
-        return getEventValue(PerformanceTimingEvent.REDIRECT_START);
+        return redirectStart(MILLISECONDS);
     }
 
     /**
@@ -98,7 +101,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code redirectEnd} event
      */
     default long redirectEnd() {
-        return getEventValue(PerformanceTimingEvent.REDIRECT_END);
+        return redirectEnd(MILLISECONDS);
     }
 
     /**
@@ -117,7 +120,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code fetchStart} event
      */
     default long fetchStart() {
-        return getEventValue(PerformanceTimingEvent.FETCH_START);
+        return fetchStart(MILLISECONDS);
     }
 
     /**
@@ -136,7 +139,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code domainLookupStart} event
      */
     default long domainLookupStart() {
-        return getEventValue(PerformanceTimingEvent.DOMAIN_LOOKUP_START);
+        return domainLookupStart(MILLISECONDS);
     }
 
     /**
@@ -155,7 +158,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code domainLookupEnd} event
      */
     default long domainLookupEnd() {
-        return getEventValue(PerformanceTimingEvent.DOMAIN_LOOKUP_END);
+        return domainLookupEnd(MILLISECONDS);
     }
 
     /**
@@ -174,7 +177,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code connectStart} event
      */
     default long connectStart() {
-        return getEventValue(PerformanceTimingEvent.CONNECT_START);
+        return connectStart(MILLISECONDS);
     }
 
     /**
@@ -193,7 +196,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code connectEnd} event
      */
     default long connectEnd() {
-        return getEventValue(PerformanceTimingEvent.CONNECT_END);
+        return connectEnd(MILLISECONDS);
     }
 
     /**
@@ -211,8 +214,8 @@ public interface PerformanceTiming {
      *
      * @return the epoch time for the {@code secureConnectionStart} event
      */
-    default long secureConnectionStart() {
-        return getEventValue(PerformanceTimingEvent.SECURE_CONNECTION_START);
+    default Object secureConnectionStart() {
+        return secureConnectionStart(MILLISECONDS);
     }
 
     /**
@@ -221,7 +224,7 @@ public interface PerformanceTiming {
      * @param timeUnit the time unit to convert the metrics values to
      * @return the converted time for the {@code secureConnectionStart} event
      */
-    default long secureConnectionStart(TimeUnit timeUnit) {
+    default Object secureConnectionStart(TimeUnit timeUnit) {
         return getEventValue(PerformanceTimingEvent.SECURE_CONNECTION_START, timeUnit);
     }
 
@@ -231,7 +234,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code requestStart} event
      */
     default long requestStart() {
-        return getEventValue(PerformanceTimingEvent.REQUEST_START);
+        return requestStart(MILLISECONDS);
     }
 
     /**
@@ -250,7 +253,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code responseStart} event
      */
     default long responseStart() {
-        return getEventValue(PerformanceTimingEvent.RESPONSE_START);
+        return responseStart(MILLISECONDS);
     }
 
     /**
@@ -269,7 +272,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code responseEnd} event
      */
     default long responseEnd() {
-        return getEventValue(PerformanceTimingEvent.RESPONSE_END);
+        return responseEnd(MILLISECONDS);
     }
 
     /**
@@ -288,7 +291,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code domLoading} event
      */
     default long domLoading() {
-        return getEventValue(PerformanceTimingEvent.DOM_LOADING);
+        return domLoading(MILLISECONDS);
     }
 
     /**
@@ -307,7 +310,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code domInteractive} event
      */
     default long domInteractive() {
-        return getEventValue(PerformanceTimingEvent.DOM_INTERACTIVE);
+        return domInteractive(MILLISECONDS);
     }
 
     /**
@@ -326,7 +329,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code domContentLoadedEventStart} event
      */
     default long domContentLoadedEventStart() {
-        return getEventValue(PerformanceTimingEvent.DOM_CONTENT_LOADED_EVENT_START);
+        return domContentLoadedEventStart(MILLISECONDS);
     }
 
     /**
@@ -346,7 +349,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code domContentLoadedEventEnd} event
      */
     default long domContentLoadedEventEnd() {
-        return getEventValue(PerformanceTimingEvent.DOM_CONTENT_LOADED_EVENT_END);
+        return domContentLoadedEventEnd(MILLISECONDS);
     }
 
     /**
@@ -366,7 +369,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code domComplete} event
      */
     default long domComplete() {
-        return getEventValue(PerformanceTimingEvent.DOM_COMPLETE);
+        return domComplete(MILLISECONDS);
     }
 
     /**
@@ -385,7 +388,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code loadEventStart} event
      */
     default long loadEventStart() {
-        return getEventValue(PerformanceTimingEvent.LOAD_EVENT_START);
+        return loadEventStart(MILLISECONDS);
     }
 
     /**
@@ -404,7 +407,7 @@ public interface PerformanceTiming {
      * @return the epoch time for the {@code loadEventEnd} event
      */
     default long loadEventEnd() {
-        return getEventValue(PerformanceTimingEvent.LOAD_EVENT_END);
+        return loadEventEnd(MILLISECONDS);
     }
 
     /**
@@ -433,7 +436,7 @@ public interface PerformanceTiming {
      * @return the event value in the given time unit
      */
     default long getEventValue(PerformanceTimingEvent event, TimeUnit timeUnit) {
-        return timeUnit.convert(getEventValue(event), TimeUnit.MILLISECONDS);
+        return timeUnit.convert(getEventValue(event), MILLISECONDS);
     }
 
     /**

@@ -3,28 +3,60 @@ package org.fluentlenium.core.performance;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceTiming;
 
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
+
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
- * HtmlUnit specific implementation for {@link PerformanceTimingMetrics}.
+ * HtmlUnit specific implementation of {@link PerformanceTimingMetrics}.
  * <p>
- * Though the {@link PerformanceTiming} is a mock
- * implementation for the PerformanceTiming API, the lack of this adapter might cause issues.
+ * The values returned from this object are not epoch values as querying the corresponding Javascript attribute
+ * directly would return, but it rather handles {@code navigationStart} as zero and returns time values passed
+ * since that point in time.
  * <p>
- * And before retrieving performance timing metrics from HtmlUnit, please check the aforementioned class whether it
- * is still a mock object or it returns real values.
+ * If a query for a certain metric returns 0 it means it happened at the same moment (at least in epoch)
+ * than {@code navigationStart}.
+ * <p>
+ * A query for a certain metrics returns a negative value if the event has not been registered on the page,
+ * or it is not feasible/valid for the given page/page load/redirect.
+ * <p>
+ * Though the HtmlUnit {@link PerformanceTiming} class is a mock implementation of the PerformanceTiming API,
+ * the lack of this adapter might cause issues.
+ * <p>
+ * Before retrieving performance timing metrics from HtmlUnit, please check the aforementioned class whether it
+ * is still a mock object or meanwhile it has been implemented properly to return real values.
  */
 public class HtmlUnitPerformanceTimingMetrics implements PerformanceTimingMetrics<HtmlUnitPerformanceTimingMetrics> {
 
     private final PerformanceTiming timing;
     private final TimeUnit targetTimeUnit;
+    private final long navigationStart;
 
+    /**
+     * Creates a new {@link HtmlUnitPerformanceTimingMetrics} object delegating calls to the argument
+     * {@link PerformanceTiming}.
+     * <p>
+     * Sets the time unit of these metrics to {@link TimeUnit#MILLISECONDS}.
+     *
+     * @param timing the HtmlUnit performance timing object
+     */
     public HtmlUnitPerformanceTimingMetrics(PerformanceTiming timing) {
-        this(timing, TimeUnit.MILLISECONDS);
+        this(timing, MILLISECONDS);
     }
 
+    /**
+     * Creates a new {@link HtmlUnitPerformanceTimingMetrics} object delegating calls to the argument
+     * {@link PerformanceTiming}.
+     * <p>
+     * Sets the time unit of these metrics to the given time unit.
+     *
+     * @param timing   the HtmlUnit performance timing object
+     * @param timeUnit the time unit to convert the metrics to
+     */
     public HtmlUnitPerformanceTimingMetrics(PerformanceTiming timing, TimeUnit timeUnit) {
         this.timing = timing;
         this.targetTimeUnit = timeUnit;
+        this.navigationStart = targetTimeUnit.convert(timing.getNavigationStart(), MILLISECONDS);
     }
 
     @Override
@@ -34,57 +66,57 @@ public class HtmlUnitPerformanceTimingMetrics implements PerformanceTimingMetric
 
     @Override
     public long getUnloadEventStart() {
-        return targetTimeUnit.convert(timing.getUnloadEventStart(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getUnloadEventStart);
     }
 
     @Override
     public long getUnloadEventEnd() {
-        return targetTimeUnit.convert(timing.getUnloadEventEnd(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getUnloadEventEnd);
     }
 
     @Override
     public long getRedirectStart() {
-        return targetTimeUnit.convert(timing.getRedirectStart(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getRedirectStart);
     }
 
     @Override
     public long getRedirectEnd() {
-        return targetTimeUnit.convert(timing.getRedirectEnd(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getRedirectEnd);
     }
 
     @Override
     public long getNavigationStart() {
-        return targetTimeUnit.convert(timing.getNavigationStart(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getNavigationStart);
     }
 
     @Override
     public long getFetchStart() {
-        return targetTimeUnit.convert(timing.getFetchStart(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getFetchStart);
     }
 
     @Override
     public long getDomainLookupStart() {
-        return targetTimeUnit.convert(timing.getDomainLookupStart(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getDomainLookupStart);
     }
 
     @Override
     public long getDomainLookupEnd() {
-        return targetTimeUnit.convert(timing.getDomainLookupEnd(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getDomainLookupEnd);
     }
 
     @Override
     public long getConnectStart() {
-        return targetTimeUnit.convert(timing.getConnectStart(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getConnectStart);
     }
 
     @Override
     public long getConnectEnd() {
-        return targetTimeUnit.convert(timing.getConnectEnd(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getConnectEnd);
     }
 
     @Override
     public Object getSecureConnectionStart() {
-        return targetTimeUnit.convert(timing.getSecureConnectionStart(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getSecureConnectionStart);
     }
 
     @Override
@@ -94,46 +126,50 @@ public class HtmlUnitPerformanceTimingMetrics implements PerformanceTimingMetric
 
     @Override
     public long getResponseStart() {
-        return targetTimeUnit.convert(timing.getResponseStart(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getResponseStart);
     }
 
     @Override
     public long getResponseEnd() {
-        return targetTimeUnit.convert(timing.getResponseEnd(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getResponseEnd);
     }
 
     @Override
     public long getDomLoading() {
-        return targetTimeUnit.convert(timing.getDomLoading(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getDomLoading);
     }
 
     @Override
     public long getDomInteractive() {
-        return targetTimeUnit.convert(timing.getDomInteractive(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getDomInteractive);
     }
 
     @Override
     public long getDomContentLoadedEventStart() {
-        return targetTimeUnit.convert(timing.getDomContentLoadedEventStart(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getDomContentLoadedEventStart);
     }
 
     @Override
     public long getDomContentLoadedEventEnd() {
-        return targetTimeUnit.convert(timing.getDomContentLoadedEventEnd(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getDomContentLoadedEventEnd);
     }
 
     @Override
     public long getDomComplete() {
-        return targetTimeUnit.convert(timing.getDomComplete(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getDomComplete);
     }
 
     @Override
     public long getLoadEventStart() {
-        return targetTimeUnit.convert(timing.getLoadEventStart(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getLoadEventStart);
     }
 
     @Override
     public long getLoadEventEnd() {
-        return targetTimeUnit.convert(timing.getLoadEventEnd(), TimeUnit.MILLISECONDS);
+        return getEventValue(timing::getLoadEventEnd);
+    }
+
+    private long getEventValue(Supplier<Long> eventValueSupplier) {
+        return targetTimeUnit.convert(eventValueSupplier.get(), MILLISECONDS) - navigationStart;
     }
 }

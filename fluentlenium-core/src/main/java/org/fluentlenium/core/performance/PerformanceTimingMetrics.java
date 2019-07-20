@@ -4,7 +4,10 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Wraps the performance timing metrics returned by the {@code window.performance.timing} Javascript attribute
- * from the browser, and provides convenience methods to access each metric.
+ * from the browser, and provides methods to access each value in it.
+ * <p>
+ * Though the default implementation in FluentLenium returns relative values, this interface is flexible enough
+ * so that custom implementations may be created.
  *
  * @param <T> an actual implementation of this interface
  */

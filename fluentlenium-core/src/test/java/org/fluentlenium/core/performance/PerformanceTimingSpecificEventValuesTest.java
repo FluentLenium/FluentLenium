@@ -29,9 +29,9 @@ import static org.mockito.Mockito.when;
 public class PerformanceTimingSpecificEventValuesTest {
 
     private static final String EVENT_SCRIPT = "return window.performance.timing.%s;";
+    private static final String NAVIGATION_START_SCRIPT = "return window.performance.timing.navigationStart;";
     private static final Map<String, Function<DefaultPerformanceTiming, Long>> EVENT_CALLS =
             new ImmutableMap.Builder<String, Function<DefaultPerformanceTiming, Long>>()
-                    .put("navigationStart", PerformanceTiming::navigationStart)
                     .put("unloadEventStart", PerformanceTiming::unloadEventStart)
                     .put("unloadEventEnd", PerformanceTiming::unloadEventEnd)
                     .put("redirectStart", PerformanceTiming::redirectStart)
@@ -41,7 +41,7 @@ public class PerformanceTimingSpecificEventValuesTest {
                     .put("domainLookupEnd", PerformanceTiming::domainLookupEnd)
                     .put("connectStart", PerformanceTiming::connectStart)
                     .put("connectEnd", PerformanceTiming::connectEnd)
-                    .put("secureConnectionStart", PerformanceTiming::secureConnectionStart)
+                    .put("secureConnectionStart", timing -> (Long) timing.secureConnectionStart())
                     .put("requestStart", PerformanceTiming::requestStart)
                     .put("responseStart", PerformanceTiming::responseStart)
                     .put("responseEnd", PerformanceTiming::responseEnd)
@@ -60,7 +60,6 @@ public class PerformanceTimingSpecificEventValuesTest {
     @Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {"navigationStart"},
                 {"unloadEventStart"},
                 {"unloadEventEnd"},
                 {"redirectStart"},
@@ -98,11 +97,13 @@ public class PerformanceTimingSpecificEventValuesTest {
     @Test
     public void shouldGetSpecificEventValue() {
         String script = String.format(EVENT_SCRIPT, eventType);
-        when(((JavascriptExecutor) driver).executeScript(script)).thenReturn(5L);
+        when(((JavascriptExecutor) driver).executeScript(script)).thenReturn(15000L);
+        when(((JavascriptExecutor) driver).executeScript(NAVIGATION_START_SCRIPT)).thenReturn(7800L);
 
-        assertThat(EVENT_CALLS.get(eventType).apply(performanceTiming)).isEqualTo(5L);
+        assertThat(EVENT_CALLS.get(eventType).apply(performanceTiming)).isEqualTo(7200L);
 
         verify(((JavascriptExecutor) driver)).executeScript(script);
+        verify(((JavascriptExecutor) driver)).executeScript(NAVIGATION_START_SCRIPT);
         verifyNoMoreInteractions(driver);
     }
 }

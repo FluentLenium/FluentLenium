@@ -9,6 +9,8 @@ import org.mockito.MockitoAnnotations;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -26,32 +28,45 @@ public class HtmlUnitPerformanceTimingMetricsTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        when(htmlUnitPerformanceTiming.getNavigationStart()).thenReturn(16500L);
+        when(htmlUnitPerformanceTiming.getUnloadEventStart()).thenReturn(60000L);
+        when(htmlUnitPerformanceTiming.getUnloadEventEnd()).thenReturn(0L);
         metrics = new HtmlUnitPerformanceTimingMetrics(htmlUnitPerformanceTiming);
     }
 
     @Test
     public void shouldDelegateCallToHtmlUnitImplementation() {
-        when(htmlUnitPerformanceTiming.getUnloadEventStart()).thenReturn(60000L);
-
-        assertThat(metrics.getUnloadEventStart()).isEqualTo(60000L);
+        assertThat(metrics.getUnloadEventStart()).isEqualTo(43500L);
         verify(htmlUnitPerformanceTiming, times(1)).getUnloadEventStart();
     }
 
     @Test
     public void shouldReturnMetricsValueInTimeUnit() {
-        when(htmlUnitPerformanceTiming.getUnloadEventStart()).thenReturn(60000L);
-
-        assertThat(metrics.in(TimeUnit.SECONDS).getUnloadEventStart()).isEqualTo(60L);
+        assertThat(metrics.in(TimeUnit.SECONDS).getUnloadEventStart()).isEqualTo(44L);
         assertThat(metrics.in(TimeUnit.SECONDS).in(TimeUnit.MINUTES).getUnloadEventStart()).isEqualTo(1L);
         verify(htmlUnitPerformanceTiming, times(2)).getUnloadEventStart();
     }
 
     @Test
     public void timeUnitConversionCreatesNewInstance() {
-        when(htmlUnitPerformanceTiming.getUnloadEventStart()).thenReturn(60000L);
         HtmlUnitPerformanceTimingMetrics convertedMetrics = metrics.in(TimeUnit.SECONDS);
 
-        assertThat(metrics.getUnloadEventStart()).isEqualTo(60000L);
-        assertThat(convertedMetrics.getUnloadEventStart()).isEqualTo(60L);
+        assertThat(metrics.getUnloadEventStart()).isEqualTo(43500L);
+        assertThat(convertedMetrics.getUnloadEventStart()).isEqualTo(44L);
+    }
+
+    @Test
+    public void shouldReturnRelativeValues() {
+        assertThat(metrics.getUnloadEventStart()).isEqualTo(43500L);
+    }
+
+    @Test
+    public void shouldReturnNegativeValueIfEventHasNotBeenRegistered() {
+        assertThat(metrics.getUnloadEventEnd()).isEqualTo(-16500L);
+    }
+
+    @Test
+    public void shouldThrowUnsupportedOperationExceptionForRequestStart() {
+        assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() -> metrics.getRequestStart());
     }
 }

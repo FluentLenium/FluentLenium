@@ -19,18 +19,22 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.fluentlenium.core.performance.PerformanceTimingEvent.NAVIGATION_START;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+/**
+ * Unit test for {@link PerformanceTiming}.
+ */
 @RunWith(Parameterized.class)
 public class PerformanceTimingSpecificEventValueInTimeUnitTest {
 
     private static final String EVENT_SCRIPT = "return window.performance.timing.%s;";
+    private static final String NAVIGATION_START_SCRIPT = "return window.performance.timing.navigationStart;";
     private static final Map<String, BiFunction<DefaultPerformanceTiming, TimeUnit, Long>> EVENT_CALLS =
             new ImmutableMap.Builder<String, BiFunction<DefaultPerformanceTiming, TimeUnit, Long>>()
-                    .put("navigationStart", PerformanceTiming::navigationStart)
                     .put("unloadEventStart", PerformanceTiming::unloadEventStart)
                     .put("unloadEventEnd", PerformanceTiming::unloadEventEnd)
                     .put("redirectStart", PerformanceTiming::redirectStart)
@@ -40,7 +44,7 @@ public class PerformanceTimingSpecificEventValueInTimeUnitTest {
                     .put("domainLookupEnd", PerformanceTiming::domainLookupEnd)
                     .put("connectStart", PerformanceTiming::connectStart)
                     .put("connectEnd", PerformanceTiming::connectEnd)
-                    .put("secureConnectionStart", PerformanceTiming::secureConnectionStart)
+                    .put("secureConnectionStart", (timing, timeUnit) -> (Long) timing.secureConnectionStart(timeUnit))
                     .put("requestStart", PerformanceTiming::requestStart)
                     .put("responseStart", PerformanceTiming::responseStart)
                     .put("responseEnd", PerformanceTiming::responseEnd)
@@ -59,7 +63,6 @@ public class PerformanceTimingSpecificEventValueInTimeUnitTest {
     @Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {"navigationStart"},
                 {"unloadEventStart"},
                 {"unloadEventEnd"},
                 {"redirectStart"},
@@ -97,12 +100,14 @@ public class PerformanceTimingSpecificEventValueInTimeUnitTest {
     @Test
     public void shouldGetSpecificEventValueInTimeUnit() {
         String script = String.format(EVENT_SCRIPT, eventType);
+        when(((JavascriptExecutor) driver).executeScript(NAVIGATION_START_SCRIPT)).thenReturn(15600L);
         when(((JavascriptExecutor) driver).executeScript(script)).thenReturn(60000L);
 
-        assertThat(EVENT_CALLS.get(eventType).apply(performanceTiming, TimeUnit.MILLISECONDS)).isEqualTo(60000L);
-        assertThat(EVENT_CALLS.get(eventType).apply(performanceTiming, TimeUnit.SECONDS)).isEqualTo(60L);
+        assertThat(EVENT_CALLS.get(eventType).apply(performanceTiming, TimeUnit.MILLISECONDS)).isEqualTo(44400L);
+        assertThat(EVENT_CALLS.get(eventType).apply(performanceTiming, TimeUnit.SECONDS)).isEqualTo(44L);
 
         verify((JavascriptExecutor) driver, times(2)).executeScript(script);
+        verify((JavascriptExecutor) driver, times(2)).executeScript(NAVIGATION_START_SCRIPT);
         verifyNoMoreInteractions(driver);
     }
 }

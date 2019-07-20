@@ -14,6 +14,9 @@ import java.util.function.Function;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Unit test for {@link DefaultPerformanceTimingMetrics}.
+ */
 @RunWith(Parameterized.class)
 public class DefaultPerformanceTimingMetricsIndividualEventsTest {
 
@@ -40,8 +43,10 @@ public class DefaultPerformanceTimingMetricsIndividualEventsTest {
             .put("loadEventEnd", DefaultPerformanceTimingMetrics::getLoadEventEnd)
             .build();
 
+    private static final long NAVIGATION_START = 100000L;
+
     private static final Map<String, Object> METRICS = new ImmutableMap.Builder<String, Object>()
-            .put("navigationStart", 100000L)
+            .put("navigationStart", NAVIGATION_START)
             .put("unloadEventStart", 200000L)
             .put("unloadEventEnd", 300000L)
             .put("redirectStart", 400000L)
@@ -96,6 +101,7 @@ public class DefaultPerformanceTimingMetricsIndividualEventsTest {
     public void shouldReturnSpecificPerformanceTimingMetrics() {
         DefaultPerformanceTimingMetrics metrics = new DefaultPerformanceTimingMetrics(METRICS);
 
-        assertThat(EVENT_CALLS.get(eventType).apply(metrics)).isEqualTo((Long) METRICS.get(eventType));
+        Long expectedMetricValue = (Long) METRICS.get(eventType) - NAVIGATION_START;
+        assertThat(EVENT_CALLS.get(eventType).apply(metrics)).isEqualTo(expectedMetricValue);
     }
 }
