@@ -423,10 +423,13 @@ alert().prompt("FluentLenium")
 
 ## Performance Timing API
 
-FluentLenium provides a simple API for retrieving the performance timing metrics based on the [PerformanceTiming interface defined by W3C](https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface).
+FluentLenium provides an API for retrieving the performance timing metrics based on the [PerformanceTiming interface defined by W3C](https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface).
 
-The main interface for this API is `PerformanceTiming` from which you can query individual metric values. They return `long` type values querying the `window.performance.timing.<metric>`
-Javascript attribute. 
+The main interface for this API is `PerformanceTiming` from which you can query individual metric values and metrics in bulk as well.
+Most methods return `long` values querying the `window.performance.timing.<metric>` Javascript attribute, except the ones that are explicitly stated in the W3C documentation that they
+may have other type of values as well.
+
+They can be retrieved via `FluentTest` and its other framework specific variants:
 
 ```java
 public class SomeTest extends FluentTest {
@@ -451,6 +454,8 @@ public class SomeTest extends FluentTest {
     }
 }
 
+and via `FluentPage` as well:
+
 public class Homepage extends FluentPage {
     
     public long getDomComplete() {
@@ -462,7 +467,8 @@ public class Homepage extends FluentPage {
     }
 }
 ```
-Each of the methods returning a specific metric execute a separate Javascript command.
+
+Each method returning a specific metric execute a separate Javascript command.
 
 There is another way to get metrics, specifically to get all metrics in a single object called `PerformanceTimingMetrics`. This returns the object returned by the `window.performance.timing`
 Javascript attribute.
@@ -483,7 +489,11 @@ public void test() {
 In this case only a single Javascript command is executed for `performanceTiming().getMetrics()`, `getDomComplete()` (actually any method) on this object returns the saved value,
 and none of the getter methods execute any additional Javascript command.
 
+It is important to note the the implementations of both the `PerformanceTiming` and `PerformanceTimingMetrics` interfaces provided by FluentLenium return handle the `navigationStart`
+attribute as zero and every other metric is calculated and returned relative to `navigationStart`.
+
 Before retrieving a performance timing metrics value make sure that the page where you query it loaded completely.
-In case when navigation happens to a specific URL, Selenium makes sure to wait until the page is loaded but when a navigation happens after an interaction on the page
-(clicking on something, submitting a form, etc.) you need to make sure in your test that the page where it navigates to loads completely.
-Otherwise certain metrics might not have been registered at that moment.
+In case when navigation happens to a specific URL, or bz some action performed on the page make sure in your test that the page where it navigates to loads completely.
+Otherwise certain metrics might not have been registered until that moment.
+
+You can find some examples in the [FluentLenium project](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/performance) for how you can use these features.
