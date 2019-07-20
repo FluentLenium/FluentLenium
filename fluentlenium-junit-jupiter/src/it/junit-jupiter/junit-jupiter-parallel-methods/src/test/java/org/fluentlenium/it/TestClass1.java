@@ -1,6 +1,7 @@
 package org.fluentlenium.it;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ class TestClass1 extends FluentIntegTest {
 
     @Test
     void testMethod1() {
-        goTo(UrlUtil.getAbsoluteUrlFromFile(LOCAL_FILE_PATH));
+        goTo(getAbsoluteUrlFromFile(LOCAL_FILE_PATH));
         el(SELECTOR).fill().with("1");
         await().until(el(SELECTOR)).value().equalTo("1");
         assertThat(el(SELECTOR).value()).isEqualTo("1");
@@ -21,7 +22,7 @@ class TestClass1 extends FluentIntegTest {
 
     @Test
     void testMethod2() {
-        goTo(UrlUtil.getAbsoluteUrlFromFile(LOCAL_FILE_PATH));
+        goTo(getAbsoluteUrlFromFile(LOCAL_FILE_PATH));
         el(SELECTOR).fill().with("2");
         await().until(el(SELECTOR)).value().equalTo("2");
         assertThat(el(SELECTOR).value()).isEqualTo("2");
@@ -31,7 +32,7 @@ class TestClass1 extends FluentIntegTest {
 
     @Test
     void testMethod3() {
-        goTo(UrlUtil.getAbsoluteUrlFromFile(LOCAL_FILE_PATH));
+        goTo(getAbsoluteUrlFromFile(LOCAL_FILE_PATH));
         el(SELECTOR).fill().with("3");
         await().until(el(SELECTOR)).value().equalTo("3");
         assertThat(el(SELECTOR).value()).isEqualTo("3");
@@ -41,7 +42,7 @@ class TestClass1 extends FluentIntegTest {
 
     @Test
     void testMethod4() {
-        goTo(UrlUtil.getAbsoluteUrlFromFile(LOCAL_FILE_PATH));
+        goTo(getAbsoluteUrlFromFile(LOCAL_FILE_PATH));
         el(SELECTOR).fill().with("4");
         await().until(el(SELECTOR)).value().equalTo("4");
         assertThat(el(SELECTOR).value()).isEqualTo("4");

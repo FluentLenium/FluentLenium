@@ -38,7 +38,7 @@ public class FluentDriverScreenshotPersister {
      * otherwise the argument file name will be concatenated to the screenshot path to create the destination file.
      *
      * @param fileName the target file to save the screenshot to
-     * @throws RuntimeException when an error occurs during taking the screenshot
+     * @throws ScreenshotNotCreatedException when an error occurs during taking the screenshot
      */
     public void persistScreenshot(String fileName) {
         try {
@@ -51,7 +51,7 @@ public class FluentDriverScreenshotPersister {
             FileUtils.writeByteArrayToFile(destFile, prepareScreenshot());
             LOGGER.info("Created screenshot at: " + destFile.getAbsolutePath());
         } catch (IOException e) {
-            throw new RuntimeException("Error when taking the screenshot", e);
+            throw new ScreenshotNotCreatedException("Error when taking the screenshot", e);
         }
     }
 

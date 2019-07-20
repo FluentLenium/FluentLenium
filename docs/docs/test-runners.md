@@ -186,7 +186,7 @@ public class Runner {
 }
 ```
 
-- Extends `FluentCucumberTest` class in all of your steps classes:
+- Extend `FluentCucumberTest` class in all of your steps classes:
 
 ```java
 public class ExampleSteps1 extends FluentCucumberTest {
@@ -346,6 +346,11 @@ public class BaseTest extends FluentCucumberTest {
 
 E2E Cucumber tests are present in [Cucumber example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/cucumber).
 Enable it by activating ```examples``` Maven profile.
+
+- After having Cucumber-jvm upgraded to 4.5.0+ support is added for both `cucumber.api` and `io.cucumber`
+based classes like (`@Given`, `@When`, `@CucumberOptions`, etc.), however the `FluentCucumberTest` based tests will still
+use the old Cucumber `ObjectFactory` due to the Cucumber limitation of allowing only one instance of `ObjectFactory` to be used,
+and also to provide backward compatibility for projects where Cucumber version cannot be upgraded.
 
 ## Spock
 
