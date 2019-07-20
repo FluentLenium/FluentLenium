@@ -126,6 +126,16 @@ jobs:
         except:
           - master
 
+    - stage: e2e
+      name: "Performance Timing (Chrome)"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/performance && mvn clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      branches:
+        except:
+          - master
+
 matrix:
   fast_finish: true
 
