@@ -25,7 +25,7 @@ Element can be located by
   - [Filters](#filters): Add an additional filter to the Fluent Locator.
   - [First/Last/Index](#first-last-and-index): Get a single element from the Fluent Locator.
   - [XPath Axes](#xpath-axes): Get another Fluent Locator from its relative position in the DOM.
-  - [JQuery syntax](#jquery-syntax): Sse find() method instead of el() and $()
+  - [JQuery syntax](#jquery-syntax): See find() method instead of el() and $()
 
 Whenever element is find you can:
   - [Perform an action](#actions) (click, fill form etc)

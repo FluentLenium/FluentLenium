@@ -29,6 +29,7 @@ This section contains description of FluentLenium features which may be useful d
 - [Taking ScreenShots and HTML Dumps](#taking-screenshots-and-html-dumps)
 - [Iframe](#iframe)
 - [Alerts](#alerts)
+- [Performance Timing API](#performance-timing-api)
 
 
 ## Window actions
@@ -419,3 +420,80 @@ Entering an input value in prompt:
 ```java
 alert().prompt("FluentLenium")
 ```
+
+## Performance Timing API
+
+FluentLenium provides an API for retrieving the performance timing metrics based on the [PerformanceTiming interface defined by W3C](https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface).
+
+The main interface for this API is `PerformanceTiming` from which you can query individual metric values and metrics in bulk as well.
+Most methods return `long` values querying the `window.performance.timing.<metric>` Javascript attribute, except the ones that are explicitly stated in the W3C documentation that they
+may have other type of values as well.
+
+They can be retrieved via `FluentTest` and its other framework specific variants:
+
+```java
+public class SomeTest extends FluentTest {
+
+    @Page
+    private Homepage homepage;
+
+    @Test
+    public void test() {
+        //Get metric via parameterized method
+        long loadEventEnd = performanceTiming().getEventValue(PerformanceTimingEvent.LOAD_EVENT_END);
+        
+        //The same as the previous call but the value is converted to the given time unit
+        long loadEventEndInSeconds = performanceTiming().getEventValue(PerformanceTimingEvent.LOAD_EVENT_END, TimeUnit.SECONDS);
+        
+        //This is a convenience method for calling performanceTiming().getEventValue(PerformanceTimingEvent.DOM_COMPLETE);
+        long domComplete = performanceTiming().domComplete();
+        
+        //The same as the previous call but the value is converted to the given time unit
+        long domCompleteInSeconds = performanceTiming().domComplete(TimeUnit.SECONDS);
+        
+    }
+}
+
+and via `FluentPage` as well:
+
+public class Homepage extends FluentPage {
+    
+    public long getDomComplete() {
+        return performanceTiming().domComplete();
+    }
+    
+    public long getLoadEventEnd() {
+        return performanceTiming().getEventValue(PerformanceTimingEvent.LOAD_EVENT_END);
+    }
+}
+```
+
+Each method returning a specific metric execute a separate Javascript command.
+
+There is another way to get metrics, specifically to get all metrics in a single object called `PerformanceTimingMetrics`. This returns the object returned by the `window.performance.timing`
+Javascript attribute.
+
+```java
+@Test
+public void test() {
+    //This returns the metrics by default in default milliseconds
+    PerformanceTimingMetrics metrics = performanceTiming().getMetrics();
+    long domComplete = metrics.getDomComplete();
+    
+    //This returns a new metrics object that will return the values in the set time unit
+    PerformanceTimingMetrics metricsInSeconds = metrics.in(TimeUnit.SECONDS);
+    long domCompleteInSeconds = metricsInSeconds.getDomComplete();
+}
+```
+
+In this case only a single Javascript command is executed for `performanceTiming().getMetrics()`, `getDomComplete()` (actually any method) on this object returns the saved value,
+and none of the getter methods execute any additional Javascript command.
+
+It is important to note the the implementations of both the `PerformanceTiming` and `PerformanceTimingMetrics` interfaces provided by FluentLenium return handle the `navigationStart`
+attribute as zero and every other metric is calculated and returned relative to `navigationStart`.
+
+Before retrieving a performance timing metrics value make sure that the page where you query it loaded completely.
+In case when navigation happens to a specific URL, or bz some action performed on the page make sure in your test that the page where it navigates to loads completely.
+Otherwise certain metrics might not have been registered until that moment.
+
+You can find some examples in the [FluentLenium project](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/performance) for how you can use these features.

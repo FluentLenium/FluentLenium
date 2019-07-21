@@ -18,6 +18,7 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.inject.ContainerContext;
+import org.fluentlenium.core.performance.PerformanceTiming;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWait;
@@ -492,4 +493,7 @@ public abstract class FluentControlImpl implements FluentControl {
         return getFluentControl().events();
     }
 
+    public PerformanceTiming performanceTiming() {
+        return getFluentControl().performanceTiming();
+    }
 }
