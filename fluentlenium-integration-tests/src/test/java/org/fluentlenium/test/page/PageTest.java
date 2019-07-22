@@ -112,10 +112,10 @@ public class PageTest extends IntegrationFluentTest {
 
     @Test
     void checkManuallyCreatedSupportInjection() {
-        Page4 page = newInstance(Page4.class);
-        assertThat(page.getIndexPage()).isNotNull();
-        assertThat(page.getPage5()).isNotNull();
-        assertThat(page.getPage5().getIndexPage()).isNotNull();
+        Page4 aPage = newInstance(Page4.class);
+        assertThat(aPage.getIndexPage()).isNotNull();
+        assertThat(aPage.getPage5()).isNotNull();
+        assertThat(aPage.getPage5().getIndexPage()).isNotNull();
     }
 
     @Test

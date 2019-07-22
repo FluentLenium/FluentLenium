@@ -245,7 +245,8 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
         FluentWebElement first = $("#not-found").first();
         assertThat(first.toString()).isEqualTo("By.cssSelector: #not-found (first) (Lazy Element)");
         assertThatThrownBy(() -> first.await().until().enabled())
-                .hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector: #not-found (first) (Lazy Element)")
+                .hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector:"
+                        + " #not-found (first) (Lazy Element)")
                 .isExactlyInstanceOf(TimeoutException.class).hasCauseExactlyInstanceOf(NoSuchElementException.class);
     }
 

@@ -310,7 +310,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
                     await().pollingEvery(1500, TimeUnit.MILLISECONDS).until(defaultElements)
                             .text().equalTo("wait");
                 });
-         }
+    }
 
     @Test
     void checkIsAt() {

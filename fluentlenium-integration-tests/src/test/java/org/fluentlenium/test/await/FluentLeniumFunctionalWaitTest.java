@@ -391,7 +391,7 @@ class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
                     await().atMost(1, NANOSECONDS).untilEachElements(() -> find("#disabled"))
                             .enabled();
                 });
-        }
+    }
 
     @Test
     void whenElementIsNotEnabledThenIsEnabledThrowsException() {
@@ -401,7 +401,7 @@ class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
                     await().atMost(1, NANOSECONDS).untilElements(() -> find("#disabled"))
                             .enabled();
                 });
-        }
+    }
 
     @Test
     void whenElementIsNotDisplayedThenIsPresentReturnTrue() {
@@ -419,7 +419,7 @@ class FluentLeniumFunctionalWaitTest extends IntegrationFluentTest {
                             .text().equalTo("wait");
                 });
 
-         }
+    }
 }
 
 

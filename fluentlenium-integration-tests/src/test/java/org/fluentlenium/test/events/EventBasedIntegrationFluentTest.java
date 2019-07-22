@@ -13,15 +13,15 @@ import org.slf4j.LoggerFactory;
  */
 class EventBasedIntegrationFluentTest extends IntegrationFluentTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(EventBasedIntegrationFluentTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EventBasedIntegrationFluentTest.class);
 
     @BeforeClickOn
     void beforeClickOnListenerMethod() {
-        logger.info("About to click on something...");
+        LOGGER.info("About to click on something...");
     }
 
     @AfterClickOn(5)
     void afterClickOnListenerMethod() {
-        logger.info("Clicked successfully. FluentLenium is awesome! :)");
+        LOGGER.info("Clicked successfully. FluentLenium is awesome! :)");
     }
 }
