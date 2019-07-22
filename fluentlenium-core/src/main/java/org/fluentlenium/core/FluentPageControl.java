@@ -49,6 +49,7 @@ public interface FluentPageControl extends FluentControl {
      * Got to the url defined in the page, using given parameters.
      *
      * @param params page url parameter values
+     * @para
      * @throws IllegalArgumentException if some required parameters are missing
      *
      * @return <P> FluentPage object

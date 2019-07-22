@@ -69,7 +69,7 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
     }
 
     private Class<? extends ConfigurationProperties> getConfigurationDefaultsClassValue(
-        Class<? extends ConfigurationProperties> configurationDefaultsClass) {
+            Class<? extends ConfigurationProperties> configurationDefaultsClass) {
         if (configurationDefaultsClass == ConfigurationDefaults.class) {
             return null;
         }

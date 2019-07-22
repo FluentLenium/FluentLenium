@@ -21,6 +21,7 @@ public class FluentDriverWait {
      * and configures the FluentWait with the {@code awaitAtMost} and {@code pollingEvery} values from
      * a {@link Configuration} if they are set in that configuration.
      *
+     * @param control the fluent control
      * @return the configured FluentWait
      */
     public FluentWait await(FluentControl control) {

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith({FluentJUnitJupiter.class, MockitoExtension.class})
 public class FluentTest extends FluentTestRunnerAdapter {
     // JUnitJupiter support, called from FluentJUnitJupiter
-    
+
     /*package*/ void _starting(Class<?> testClass, String testName) {
         SeleniumVersionChecker.checkSeleniumVersion();
         starting(testClass, testName);

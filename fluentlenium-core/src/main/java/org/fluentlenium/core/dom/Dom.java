@@ -46,7 +46,8 @@ public class Dom {
      * @return list of found elements
      */
     protected FluentList<FluentWebElement> handleAxe(String axe) {
-        List<WebElement> webElementList = LocatorProxies.createWebElementList(() -> webElement.findElements(By.xpath(axe + "::*")));
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(
+                () -> webElement.findElements(By.xpath(axe + "::*")));
 
         return instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, webElementList);
     }

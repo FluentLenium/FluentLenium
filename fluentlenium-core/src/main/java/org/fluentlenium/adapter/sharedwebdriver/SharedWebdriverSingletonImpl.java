@@ -28,7 +28,7 @@ class SharedWebdriverSingletonImpl {
      * lifecycle strategy.
      *
      * @param webDriverFactory Supplier supplying new WebDriver instances
-     * @param parameters test parameters
+     * @param parameters       test parameters
      * @return shared web driver
      */
     SharedWebDriver getOrCreateDriver(Supplier<WebDriver> webDriverFactory, EffectiveParameters<?> parameters) {

@@ -27,26 +27,26 @@ final class SupportedAppiumAnnotations {
     }
 
     static boolean isSupported(Annotation annotation) {
-        return annotation instanceof iOSXCUITFindBy ||
-                annotation instanceof iOSXCUITFindBys ||
-                annotation instanceof iOSXCUITFindAll ||
-                annotation instanceof iOSXCUITFindByAllSet ||
-                annotation instanceof iOSXCUITFindByChainSet ||
-                annotation instanceof iOSXCUITFindBySet ||
+        return annotation instanceof iOSXCUITFindBy
+                || annotation instanceof iOSXCUITFindBys
+                || annotation instanceof iOSXCUITFindAll
+                || annotation instanceof iOSXCUITFindByAllSet
+                || annotation instanceof iOSXCUITFindByChainSet
+                || annotation instanceof iOSXCUITFindBySet
 
-                annotation instanceof AndroidFindBy ||
-                annotation instanceof AndroidFindBys ||
-                annotation instanceof AndroidFindAll ||
-                annotation instanceof AndroidFindByAllSet ||
-                annotation instanceof AndroidFindByChainSet ||
-                annotation instanceof AndroidFindBySet ||
+                || annotation instanceof AndroidFindBy
+                || annotation instanceof AndroidFindBys
+                || annotation instanceof AndroidFindAll
+                || annotation instanceof AndroidFindByAllSet
+                || annotation instanceof AndroidFindByChainSet
+                || annotation instanceof AndroidFindBySet
 
-                annotation instanceof WindowsFindBy ||
-                annotation instanceof WindowsFindBys ||
-                annotation instanceof WindowsFindAll ||
-                annotation instanceof WindowsFindByAllSet ||
-                annotation instanceof WindowsFindByChainSet ||
-                annotation instanceof WindowsFindBySet;
+                || annotation instanceof WindowsFindBy
+                || annotation instanceof WindowsFindBys
+                || annotation instanceof WindowsFindAll
+                || annotation instanceof WindowsFindByAllSet
+                || annotation instanceof WindowsFindByChainSet
+                || annotation instanceof WindowsFindBySet;
     }
 
 }

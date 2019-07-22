@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class SeleniumVersionChecker {
 
-    private static final Logger logger = LoggerFactory.getLogger(SeleniumVersionChecker.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SeleniumVersionChecker.class);
 
     static final String FAILED_TO_READ_MESSAGE =
             "FluentLenium wasn't able to read Selenium version from your pom.xml."
@@ -91,7 +91,7 @@ public final class SeleniumVersionChecker {
             }
 
             if (!Objects.equals(resolvedSeleniumVersion, EXPECTED_VERSION)) {
-                logger.warn(WRONG_VERSION_MESSAGE, EXPECTED_VERSION, FL_URL);
+                LOGGER.warn(WRONG_VERSION_MESSAGE, EXPECTED_VERSION, FL_URL);
             }
         }
     }
@@ -166,7 +166,7 @@ public final class SeleniumVersionChecker {
         try {
             return reader.read(new FileReader(pathToPom));
         } catch (IOException | XmlPullParserException e) {
-            logger.info(FAILED_TO_READ_MESSAGE, EXPECTED_VERSION);
+            LOGGER.info(FAILED_TO_READ_MESSAGE, EXPECTED_VERSION);
             return null;
         }
     }

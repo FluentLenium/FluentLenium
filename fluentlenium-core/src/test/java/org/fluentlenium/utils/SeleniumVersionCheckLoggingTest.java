@@ -8,6 +8,7 @@ import net.jcip.annotations.NotThreadSafe;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.assertj.core.groups.Tuple;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
@@ -22,13 +23,19 @@ import static org.fluentlenium.utils.SeleniumVersionCheckerTestConstants.WRONG_V
 @NotThreadSafe
 public class SeleniumVersionCheckLoggingTest {
 
-    @Test
-    public void shouldWarnAboutWrongSeleniumVersion() {
-        Logger logger = (Logger) LoggerFactory.getLogger(SeleniumVersionChecker.class);
-        ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
+    private Logger logger;
+    private ListAppender<ILoggingEvent> listAppender;
+
+    @Before
+    public void setup() {
+        logger = (Logger) LoggerFactory.getLogger(SeleniumVersionChecker.class);
+        listAppender = new ListAppender<>();
         listAppender.start();
         logger.addAppender(listAppender);
+    }
 
+    @Test
+    public void shouldWarnAboutWrongSeleniumVersion() {
         Model model = getMavenModel(WRONG_VERSION_POM);
 
         SeleniumVersionChecker.logWarningsWhenSeleniumVersionIsWrong(model);
@@ -41,27 +48,16 @@ public class SeleniumVersionCheckLoggingTest {
 
     @Test
     public void shouldNotWarnWhenVersionIsCorrect() {
-        Logger logger = (Logger) LoggerFactory.getLogger(SeleniumVersionChecker.class);
-        ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
-        listAppender.start();
-        logger.addAppender(listAppender);
-
         String realPom = "pom.xml";
         Model model = getMavenModel(realPom);
 
         SeleniumVersionChecker.logWarningsWhenSeleniumVersionIsWrong(model);
 
-        assertThat(listAppender.list)
-                .size().isZero();
+        assertThat(listAppender.list).size().isZero();
     }
 
     @Test
     public void shouldNotifyWhenSeleniumVersionNotDeclared() {
-        Logger logger = (Logger) LoggerFactory.getLogger(SeleniumVersionChecker.class);
-        ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
-        listAppender.start();
-        logger.addAppender(listAppender);
-
         Model model = getMavenModel(MISSING_SELENIUM_POM);
 
         SeleniumVersionChecker.logWarningsWhenSeleniumVersionIsWrong(model);
@@ -74,22 +70,15 @@ public class SeleniumVersionCheckLoggingTest {
 
     @Test
     public void shouldNotLogWarningWhenParameterSetInParentPom() {
-        Logger logger = (Logger) LoggerFactory.getLogger(SeleniumVersionChecker.class);
-        ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
-        listAppender.start();
-        logger.addAppender(listAppender);
-
         Model parentModel = getMavenModel(PARAMETRIZED_PARENT_CHILD_POM);
+
         SeleniumVersionChecker.logWarningsWhenSeleniumVersionIsWrong(parentModel);
 
-        assertThat(listAppender.list)
-                .size().isZero();
+        assertThat(listAppender.list).size().isZero();
     }
-
 
     private Model getMavenModel(String pom) {
         MavenXpp3Reader reader = new MavenXpp3Reader();
         return readPom(reader, pom);
     }
-
 }

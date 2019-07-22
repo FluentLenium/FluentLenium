@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  */
 public class FluentTestRunnerAdapter extends FluentAdapter {
 
-    private static final Logger logger = LoggerFactory.getLogger(FluentTestRunnerAdapter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FluentTestRunnerAdapter.class);
 
     private final SharedMutator sharedMutator;
 
@@ -99,25 +99,23 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     }
 
     /**
-     *
      * @return Class of currently running test
      */
     protected Class<?> getTestClass() {
         Class<?> currentTestClass = FluentTestRunnerAdapter.TEST_CLASS.get();
         if (currentTestClass == null) {
-            logger.warn("Current test class is null. Are you in test context?");
+            LOGGER.warn("Current test class is null. Are you in test context?");
         }
         return currentTestClass;
     }
 
     /**
-     *
      * @return method name (as String) of currently running test
      */
     protected String getTestMethodName() {
         String currentTestMethodName = FluentTestRunnerAdapter.TEST_METHOD_NAME.get();
         if (currentTestMethodName == null) {
-            logger.warn("Current test method name is null. Are you in text context?");
+            LOGGER.warn("Current test method name is null. Are you in text context?");
         }
         return currentTestMethodName;
     }
@@ -145,8 +143,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param annotation interface you want to access
      * @return Annotation instance
      * @throws AnnotationNotFoundException of annotation you want to access couldn't be found
-     * @throws MethodNotFoundException if test method couldn't be found - if it occurs that's most likely FL bug
-     *
+     * @throws MethodNotFoundException     if test method couldn't be found - if it occurs that's most likely FL bug
      */
     protected <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
         T definedAnnotation;
