@@ -124,6 +124,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * Allows to access Class level annotation of currently running test
      *
      * @param annotation interface you want to access
+     * @param <T>        the class annotation
      * @return Annotation instance
      * @throws AnnotationNotFoundException when annotation you want to access couldn't be find
      */
@@ -141,6 +142,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * Allows to access method level annotation of currently running test
      *
      * @param annotation interface you want to access
+     * @param <T>        the method annotation
      * @return Annotation instance
      * @throws AnnotationNotFoundException of annotation you want to access couldn't be found
      * @throws MethodNotFoundException     if test method couldn't be found - if it occurs that's most likely FL bug
