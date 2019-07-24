@@ -32,14 +32,14 @@
     -->
 
     <module name="SuppressionFilter">
-        <property name="file" value="dev-config/checkstyle/fluentlenium_checks_suppressions.xml"/>
+        <property name="file" value="${checkstyle.suppressions.file}"/>
         <property name="optional" value="false"/>
     </module>
 
     <!--
         If you set the basedir property below, then all reported file
         names will be relative to the specified directory. See
-        http://checkstyle.sourceforge.net/5.x/config.html#Checker
+        https://checkstyle.sourceforge.io/config.html#Checker
 
         <property name="basedir" value="${basedir}"/>
     -->
