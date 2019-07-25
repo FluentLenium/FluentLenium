@@ -9,8 +9,8 @@ jobs:
       language: java
       jdk: openjdk11
       script:
-        - mvn -Pjava11 clean verify jacoco:report
-        - mvn -Pjava11 coveralls:report
+        - mvn -Pjava11 clean verify org.jacoco:jacoco-maven-plugin:report
+        - mvn -Pjava11 org.eluder.coveralls:coveralls-maven-plugin:report
         - if [ "$TRAVIS_BRANCH" = "develop" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_TAG" = "" ]; then mvn -Pjava11 deploy -DskipTests --settings deploy-settings.xml; fi
 
     - stage: test
