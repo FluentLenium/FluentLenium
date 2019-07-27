@@ -204,7 +204,7 @@ public class FluentWait
         try {
             timeUnit.sleep(amount);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            throw new WaitInterruptedException("Explicit wait was interrupted.", e);
         }
 
         return this;

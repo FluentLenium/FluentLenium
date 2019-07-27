@@ -152,7 +152,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         try {
             definedAnnotation = getTestClass().getDeclaredMethod(getTestMethodName()).getAnnotation(annotation);
         } catch (NoSuchMethodException e) {
-            throw new MethodNotFoundException();
+            throw new MethodNotFoundException(e);
         }
 
         if (definedAnnotation == null) {
@@ -353,7 +353,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         }
 
         if (getDeleteCookies()) {
-            Optional.ofNullable(sharedWebDriver).ifPresent(sh -> sh.getDriver().manage().deleteAllCookies());
+            Optional.ofNullable(sharedWebDriver).ifPresent(shared -> shared.getDriver().manage().deleteAllCookies());
         }
 
         clearThreadLocals();

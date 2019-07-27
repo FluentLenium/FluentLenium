@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * <p>
  * Extends this class to provide FluentLenium support to your JUnit Test class.
  */
+@SuppressWarnings("PMD.MethodNamingConventions")
 @ExtendWith({FluentJUnitJupiter.class, MockitoExtension.class})
 public class FluentTest extends FluentTestRunnerAdapter {
     // JUnitJupiter support, called from FluentJUnitJupiter

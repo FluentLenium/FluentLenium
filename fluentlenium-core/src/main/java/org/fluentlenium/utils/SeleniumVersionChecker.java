@@ -3,8 +3,9 @@ package org.fluentlenium.utils;
 import static java.util.Objects.nonNull;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -164,7 +165,7 @@ public final class SeleniumVersionChecker {
 
     static Model readPom(MavenXpp3Reader reader, String pathToPom) {
         try {
-            return reader.read(new FileReader(pathToPom));
+            return reader.read(Files.newBufferedReader(Paths.get(pathToPom)));
         } catch (IOException | XmlPullParserException e) {
             LOGGER.info(FAILED_TO_READ_MESSAGE, EXPECTED_VERSION);
             return null;
