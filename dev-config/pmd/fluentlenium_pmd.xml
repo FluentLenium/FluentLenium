@@ -9,28 +9,58 @@
 
     <exclude-pattern>.*/examples/.*</exclude-pattern>
     <exclude-pattern>.*/src/test/.*</exclude-pattern>
-    <rule ref="rulesets/java/basic.xml"/>
-    <rule ref="rulesets/java/braces.xml"/>
-    <rule ref="rulesets/java/clone.xml"/>
-    <rule ref="rulesets/java/codesize.xml">
-        <exclude name="TooManyMethods"/>
-    </rule>
-    <rule ref="rulesets/java/design.xml">
-        <exclude name="AvoidReassigningParameters"/>
-        <exclude name="SingularField"/>
-        <exclude name="UseVarargs"/>
-    </rule>
-    <rule ref="rulesets/java/empty.xml"/>
-    <rule ref="rulesets/java/imports.xml">
-        <exclude name="TooManyStaticImports"/>
-    </rule>
-    <rule ref="rulesets/java/junit.xml">
+
+    <rule ref="category/java/errorprone.xml">
         <exclude name="TestClassWithoutTestCases"/>
+        <exclude name="AvoidDuplicateLiterals"/>
+    </rule>
+    <rule ref="category/java/multithreading.xml"/>
+    <rule ref="category/java/bestpractices.xml">
+        <exclude name="AvoidReassigningParameters"/>
+        <exclude name="UseVarargs"/>
         <exclude name="JUnitTestsShouldIncludeAssert"/>
         <exclude name="JUnitAssertionsShouldIncludeMessage"/>
         <exclude name="JUnitTestContainsTooManyAsserts"/>
     </rule>
-    <rule ref="rulesets/java/naming.xml/ShortVariable">
+    <rule ref="category/java/bestpractices.xml/GuardLogStatement">
+        <properties>
+            <property name="logLevels" value="trace,debug" />
+            <property name="guardsMethods" value="isTraceEnabled,isDebugEnabled" />
+        </properties>
+    </rule>
+    <rule ref="category/java/codestyle.xml">
+        <exclude name="TooManyStaticImports"/>
+        <exclude name="LocalVariableCouldBeFinal"/>
+        <exclude name="MethodArgumentCouldBeFinal"/>
+        <exclude name="AtLeastOneConstructor" />
+    </rule>
+    <rule ref="category/java/codestyle.xml/ClassNamingConventions">
+        <properties>
+            <property name="utilityClassPattern" value="[A-Z][a-zA-Z0-9]*" />
+        </properties>
+    </rule>
+    <rule ref="category/java/codestyle.xml/MethodNamingConventions">
+        <properties>
+            <property name="methodPattern" value="([a-z][a-zA-Z0-9]*)|\$" />
+        </properties>
+    </rule>
+    <rule ref="category/java/performance.xml">
+        <exclude name="AvoidInstantiatingObjectsInLoops"/>
+        <exclude name="SimplifyStartsWith"/>
+        <exclude name="UseStringBufferForStringAppends"/>
+    </rule>
+    <rule ref="category/java/design.xml">
+        <exclude name="TooManyMethods"/>
+        <exclude name="SingularField"/>
+    </rule>
+    <rule ref="category/java/documentation.xml"/>
+    <rule ref="category/java/documentation.xml/CommentSize">
+        <properties>
+            <property name="maxLines" value="200" />
+            <property name="maxLineLength" value="130" />
+        </properties>
+    </rule>
+    <rule ref="category/java/codestyle.xml/ShortVariable">
         <properties>
             <property name="xpath">
                 <value><![CDATA[
@@ -53,23 +83,10 @@ and (not (@Image='y'))]
             </property>
         </properties>
     </rule>
-    <rule ref="rulesets/java/naming.xml/ShortClassName">
+    <rule ref="category/java/codestyle.xml/ShortClassName">
         <properties>
-            <property name="minimum" value="4"></property>
+            <property name="minimum" value="4" />
         </properties>
     </rule>
-    <rule ref="rulesets/java/optimizations.xml">
-        <exclude name="AvoidInstantiatingObjectsInLoops"/>
-        <exclude name="SimplifyStartsWith"/>
-        <exclude name="UseStringBufferForStringAppends"/>
-        <exclude name="LocalVariableCouldBeFinal"/>
-        <exclude name="MethodArgumentCouldBeFinal"/>
-    </rule>
-    <rule ref="rulesets/java/strings.xml">
-        <exclude name="AvoidDuplicateLiterals"/>
-    </rule>
-    <rule ref="rulesets/java/sunsecure.xml"/>
-    <rule ref="rulesets/java/unnecessary.xml"/>
-    <rule ref="rulesets/java/unusedcode.xml"/>
 
 </ruleset>
