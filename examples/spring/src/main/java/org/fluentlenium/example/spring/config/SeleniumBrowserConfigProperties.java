@@ -23,19 +23,6 @@ public class SeleniumBrowserConfigProperties {
     @Value("${selenium.hub.url}")
     private String hubUrl;
 
-    @Value("${safaridriver.path}")
-    private String safariDriverPath;
-    @Value("${iedriver.path}")
-    private String ieDriverPath;
-    @Value("${edgedriver.path}")
-    private String edgeDriverPath;
-    @Value("${operadriver.path}")
-    private String operaDriverPath;
-    @Value("${chromedriver.path}")
-    private String chromeDriverPath;
-    @Value("${firefoxdriver.path}")
-    private String firefoxDriverPath;
-
     public Boolean useHub() {
         return getBooleanProperty("useHub", useHub);
     }
@@ -58,23 +45,6 @@ public class SeleniumBrowserConfigProperties {
 
     public String getPageUrl() {
         return getStringProperty("pageUrl", pageUrl);
-    }
-
-    public String getDriverExecutablePath() {
-        switch (browserName.toLowerCase()) {
-            case "safari":
-                return safariDriverPath;
-            case "firefox":
-                return firefoxDriverPath;
-            case "ie":
-                return ieDriverPath;
-            case "edge":
-                return edgeDriverPath;
-            case "opera":
-                return operaDriverPath;
-            default:
-                return chromeDriverPath;
-        }
     }
 
     private String getStringProperty(String propertyName, String propertyValue) {

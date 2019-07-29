@@ -6,11 +6,9 @@ import org.fluentlenium.example.spring.config.Config;
 import org.fluentlenium.example.spring.config.ConfigException;
 import org.fluentlenium.example.spring.config.SeleniumBrowserConfigProperties;
 import org.fluentlenium.example.spring.config.browser.IBrowser;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.os.ExecutableFinder;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
@@ -31,13 +29,6 @@ public class ExampleFluentTest extends FluentTest {
 
     @Autowired
     private SeleniumBrowserConfigProperties config;
-
-    @Before
-    public void setUp() {
-        if (!config.useHub() && !config.isMobileSimulator()) {
-            setupDriverExecutables();
-        }
-    }
 
     @Override
     public WebDriver newWebDriver() {
@@ -96,24 +87,8 @@ public class ExampleFluentTest extends FluentTest {
         return config.getPageUrl();
     }
 
-    private void setupDriverExecutables() {
-        String propertyName = getBrowser().getDriverSystemPropertyName();
-        String driverExecutablePath = config.getDriverExecutablePath();
-        if (systemPropertyNotSet(propertyName) && executableNotPresentInPath(getBrowser())) {
-            System.setProperty(propertyName, driverExecutablePath);
-        }
-    }
-
     private IBrowser getBrowser() {
         return IBrowser.getBrowser(config.getBrowserName());
     }
 
-    private boolean systemPropertyNotSet(String propertyName) {
-        return System.getProperty(propertyName) == null;
-    }
-
-    private boolean executableNotPresentInPath(IBrowser browser) {
-        String driverExecutableName = browser.getDriverExecutableName();
-        return new ExecutableFinder().find(driverExecutableName) == null;
-    }
 }
