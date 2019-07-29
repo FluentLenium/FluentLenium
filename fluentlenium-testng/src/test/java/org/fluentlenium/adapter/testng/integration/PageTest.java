@@ -4,8 +4,8 @@ import org.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTe
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.junit.ComparisonFailure;
 import org.openqa.selenium.support.FindBy;
+import org.opentest4j.AssertionFailedError;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -33,7 +33,7 @@ public class PageTest extends IntegrationFluentTestNg {
         page.isAt();
     }
 
-    @Test(expectedExceptions = ComparisonFailure.class)
+    @Test(expectedExceptions = AssertionFailedError.class)
     public void checkIsAtFailed() {
         page2.isAt();
     }

@@ -24,6 +24,11 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>org.opentest4j</groupId>
+            <artifactId>opentest4j</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
         </dependency>
