@@ -63,8 +63,8 @@ jobs:
         - cd examples/spring && mvn clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
       allow_failures:
       branches:
-        except:
-          - master
+        only:
+          - develop
 
     - stage: e2e
       name: "IE"
@@ -73,8 +73,8 @@ jobs:
       script:
         - cd examples/spring && mvn clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
       branches:
-        except:
-          - master
+        only:
+          - develop
 
     - stage: e2e
       name: "Chrome"
@@ -83,8 +83,8 @@ jobs:
       script:
         - cd examples/spring && mvn clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
       branches:
-        except:
-          - master
+        only:
+          - develop
 
     - stage: e2e
       name: "Firefox"
@@ -93,8 +93,8 @@ jobs:
       script:
         - cd examples/spring && mvn clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
       branches:
-        except:
-          - master
+        only:
+          - develop
 
     - stage: e2e
       name: "Safari"
@@ -103,8 +103,8 @@ jobs:
       script:
         - cd examples/spring && mvn clean test -DbrowserName=safari -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
       branches:
-        except:
-          - master
+        only:
+          - develop
 
     - stage: e2e
       name: "Iphone Web test (Safari on Iphone)"
@@ -113,8 +113,8 @@ jobs:
       script:
         - cd examples/spring && mvn clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
       branches:
-        except:
-          - master
+        only:
+          - develop
 
     - stage: e2e
       name: "Android Web test (Chrome on Android device)"
@@ -123,18 +123,8 @@ jobs:
       script:
         - cd examples/spring && mvn clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
       branches:
-        except:
-          - master
-
-    - stage: e2e
-      name: "Performance Timing (Chrome)"
-      language: java
-      jdk: openjdk11
-      script:
-        - cd examples/performance && mvn clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
-      branches:
-        except:
-          - master
+        only:
+          - develop
 
 matrix:
   fast_finish: true
