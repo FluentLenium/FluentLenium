@@ -18,7 +18,10 @@ import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
-public class WebDriversTest {
+/**
+ * Unit test for {@link WebDriversRegistryImpl}.
+ */
+public class WebDriversRegistryImplTest {
     private WebDriversRegistryImpl webDrivers;
 
     public static class CustomWebDriver extends HtmlUnitDriver {
