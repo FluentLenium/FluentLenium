@@ -24,7 +24,7 @@ class SharedWebdriverSingletonImpl {
     private final MethodDriver methodDriverImpl = new MethodDriver();
     private final Map<DriverLifecycle, FluentLeniumDriver> drivers;
 
-    public SharedWebdriverSingletonImpl() {
+    SharedWebdriverSingletonImpl() {
         this.drivers = initDrivers();
     }
 
