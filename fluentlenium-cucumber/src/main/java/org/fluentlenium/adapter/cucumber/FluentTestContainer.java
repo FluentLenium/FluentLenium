@@ -4,7 +4,6 @@ import org.fluentlenium.adapter.DefaultFluentControlContainer;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.SharedMutator;
-import org.fluentlenium.core.FluentDriverHtmlDumper;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.inject.DefaultContainerInstantiator;
