@@ -3,8 +3,9 @@ package org.fluentlenium.utils;
 import static java.util.Objects.nonNull;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +24,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class SeleniumVersionChecker {
 
-    private static final Logger logger = LoggerFactory.getLogger(SeleniumVersionChecker.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SeleniumVersionChecker.class);
 
     static final String FAILED_TO_READ_MESSAGE =
             "FluentLenium wasn't able to read Selenium version from your pom.xml."
@@ -91,7 +92,7 @@ public final class SeleniumVersionChecker {
             }
 
             if (!Objects.equals(resolvedSeleniumVersion, EXPECTED_VERSION)) {
-                logger.warn(WRONG_VERSION_MESSAGE, EXPECTED_VERSION, FL_URL);
+                LOGGER.warn(WRONG_VERSION_MESSAGE, EXPECTED_VERSION, FL_URL);
             }
         }
     }
