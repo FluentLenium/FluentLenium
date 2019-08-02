@@ -92,14 +92,15 @@ public final class UrlUtils { // NOPMD CyclomaticComplexity
      * @throws URISyntaxException if the URI string to build is not a valid URI
      */
     private static URI ensureScheme(URI uri, String defaultScheme) throws URISyntaxException {
+        URI uriWithScheme = uri;
         String fixedBaseUriSpec = uri.toString();
         if (uri.getScheme() == null) {
             while (!fixedBaseUriSpec.startsWith("//")) {
-                fixedBaseUriSpec = "/" + fixedBaseUriSpec;
+                fixedBaseUriSpec = PATH_SEPARATOR + fixedBaseUriSpec;
             }
-            return new URIBuilder(fixedBaseUriSpec).setScheme(defaultScheme).build();
+            uriWithScheme = new URIBuilder(fixedBaseUriSpec).setScheme(defaultScheme).build();
         }
-        return uri;
+        return uriWithScheme;
     }
 
     /**

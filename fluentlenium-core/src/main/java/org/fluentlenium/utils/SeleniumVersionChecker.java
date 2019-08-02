@@ -163,11 +163,12 @@ public final class SeleniumVersionChecker {
     }
 
     static Model readPom(MavenXpp3Reader reader, String pathToPom) {
+        Model result = null;
         try {
-            return reader.read(new FileReader(pathToPom));
+            result = reader.read(Files.newBufferedReader(Paths.get(pathToPom)));
         } catch (IOException | XmlPullParserException e) {
-            logger.info(FAILED_TO_READ_MESSAGE, EXPECTED_VERSION);
-            return null;
+            LOGGER.info(FAILED_TO_READ_MESSAGE, EXPECTED_VERSION);
         }
+        return result;
     }
 }
