@@ -14,6 +14,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 /**
@@ -47,14 +48,13 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
         super();
         this.configuration = configuration;
 
-        if (this.configuration != null) {
-            CustomProperty[] custom = this.configuration.custom();
-            if (custom != null) {
-                for (CustomProperty customProperty : custom) {
-                    customProperties.put(customProperty.name(), customProperty.value());
-                }
-            }
-        }
+        Optional.ofNullable(this.configuration)
+                .map(FluentConfiguration::custom)
+                .ifPresent(custom -> {
+                    for (CustomProperty customProperty : custom) {
+                        customProperties.put(customProperty.name(), customProperty.value());
+                    }
+                });
     }
 
     private String getStringValue(String property) {
