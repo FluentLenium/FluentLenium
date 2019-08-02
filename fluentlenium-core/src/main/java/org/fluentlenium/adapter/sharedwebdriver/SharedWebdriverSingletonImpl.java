@@ -111,14 +111,14 @@ class SharedWebdriverSingletonImpl {
      * @return List of {@link SharedWebDriver}
      */
     List<SharedWebDriver> getAllDrivers() {
-        List<SharedWebDriver> drivers = new ArrayList<>();
+        List<SharedWebDriver> allDrivers = new ArrayList<>();
         synchronized (this) {
-            Optional.ofNullable(jvmDriverImpl.getDriver()).ifPresent(drivers::add);
-            drivers.addAll(classDriverImpl.getClassDrivers().values());
-            drivers.addAll(threadDriverImpl.getThreadDrivers().values());
-            drivers.addAll(methodDriverImpl.getMethodDrivers().values());
+            Optional.ofNullable(jvmDriverImpl.getDriver()).ifPresent(allDrivers::add);
+            allDrivers.addAll(classDriverImpl.getClassDrivers().values());
+            allDrivers.addAll(threadDriverImpl.getThreadDrivers().values());
+            allDrivers.addAll(methodDriverImpl.getMethodDrivers().values());
         }
-        return Collections.unmodifiableList(drivers);
+        return Collections.unmodifiableList(allDrivers);
     }
 
     /**
@@ -128,17 +128,17 @@ class SharedWebdriverSingletonImpl {
      * @return list of shared WebDriver
      */
     List<SharedWebDriver> getTestClassDrivers(Class<?> testClass) {
-        List<SharedWebDriver> drivers = new ArrayList<>();
+        List<SharedWebDriver> testClassDrivers = new ArrayList<>();
 
         synchronized (this) {
-            Optional.ofNullable(classDriverImpl.getClassDrivers().get(testClass)).ifPresent(drivers::add);
-            drivers.addAll(getDrivers(testClass, methodDriverImpl.getMethodDrivers()));
-            drivers.addAll(getDrivers(testClass, threadDriverImpl.getThreadDrivers()));
-            return Collections.unmodifiableList(drivers);
+            Optional.ofNullable(classDriverImpl.getClassDrivers().get(testClass)).ifPresent(testClassDrivers::add);
+            testClassDrivers.addAll(getSharedDrivers(testClass, methodDriverImpl.getMethodDrivers()));
+            testClassDrivers.addAll(getSharedDrivers(testClass, threadDriverImpl.getThreadDrivers()));
+            return Collections.unmodifiableList(testClassDrivers);
         }
     }
 
-    private List<SharedWebDriver> getDrivers(Class<?> testClass, Map<?, SharedWebDriver> webDrivers) {
+    private List<SharedWebDriver> getSharedDrivers(Class<?> testClass, Map<?, SharedWebDriver> webDrivers) {
         List<SharedWebDriver> drivers = new ArrayList<>();
         for (SharedWebDriver testDriver : webDrivers.values()) {
             if (testDriver.getTestClass() == testClass) {
