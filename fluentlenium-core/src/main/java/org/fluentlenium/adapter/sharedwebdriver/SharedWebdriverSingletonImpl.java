@@ -132,20 +132,20 @@ class SharedWebdriverSingletonImpl {
 
         synchronized (this) {
             Optional.ofNullable(classDriverImpl.getClassDrivers().get(testClass)).ifPresent(testClassDrivers::add);
-            testClassDrivers.addAll(getSharedDrivers(testClass, methodDriverImpl.getMethodDrivers()));
-            testClassDrivers.addAll(getSharedDrivers(testClass, threadDriverImpl.getThreadDrivers()));
+            testClassDrivers.addAll(getDrivers(testClass, methodDriverImpl.getMethodDrivers()));
+            testClassDrivers.addAll(getDrivers(testClass, threadDriverImpl.getThreadDrivers()));
             return Collections.unmodifiableList(testClassDrivers);
         }
     }
 
-    private List<SharedWebDriver> getSharedDrivers(Class<?> testClass, Map<?, SharedWebDriver> webDrivers) {
-        List<SharedWebDriver> drivers = new ArrayList<>();
+    private List<SharedWebDriver> getDrivers(Class<?> testClass, Map<?, SharedWebDriver> webDrivers) {
+        List<SharedWebDriver> sharedDrivers = new ArrayList<>();
         for (SharedWebDriver testDriver : webDrivers.values()) {
             if (testDriver.getTestClass() == testClass) {
-                drivers.add(testDriver);
+                sharedDrivers.add(testDriver);
             }
         }
-        return drivers;
+        return sharedDrivers;
     }
 
     /**
