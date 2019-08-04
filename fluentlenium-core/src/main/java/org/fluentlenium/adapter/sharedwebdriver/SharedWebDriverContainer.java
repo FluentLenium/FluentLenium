@@ -8,6 +8,8 @@ import java.util.function.Supplier;
 
 /**
  * A singleton container for all running {@link SharedWebDriver} in the JVM.
+ * <p>
+ * It delegates all calls to a {@link SharedWebdriverSingletonImpl} instance.
  */
 public enum SharedWebDriverContainer {
     /**

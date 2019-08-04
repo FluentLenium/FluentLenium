@@ -33,6 +33,12 @@
                 <version>${it.project.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.opentest4j</groupId>
+                <artifactId>opentest4j</artifactId>
+                <version>1.2.0</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.fluentlenium.it</groupId>
                 <artifactId>testng-common</artifactId>
                 <version>testing</version>
@@ -82,7 +88,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.7.1</version>
+                    <version>3.8.2</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>

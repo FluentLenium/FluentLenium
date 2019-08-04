@@ -15,7 +15,7 @@
     <description>Cucumber Extension for FluentLenium</description>
 
     <properties>
-        <cucumber.version>4.7.0</cucumber.version>
+        <cucumber.version>4.7.1</cucumber.version>
     </properties>
 
     <dependencies>
@@ -42,6 +42,11 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.opentest4j</groupId>
+            <artifactId>opentest4j</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

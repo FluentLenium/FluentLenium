@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -164,11 +165,12 @@ public final class SeleniumVersionChecker {
     }
 
     static Model readPom(MavenXpp3Reader reader, String pathToPom) {
+        Model result = null;
         try {
-            return reader.read(Files.newBufferedReader(Paths.get(pathToPom)));
+            result = reader.read(Files.newBufferedReader(Paths.get(pathToPom)));
         } catch (IOException | XmlPullParserException e) {
             LOGGER.info(FAILED_TO_READ_MESSAGE, EXPECTED_VERSION);
-            return null;
         }
+        return result;
     }
 }

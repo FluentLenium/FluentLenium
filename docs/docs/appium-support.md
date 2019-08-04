@@ -22,7 +22,7 @@ Just add additional dependency into your pom.xml.
  <dependency>
        <groupId>io.appium</groupId>
        <artifactId>java-client</artifactId>
-       <version>7.0.0</version>
+       <version>LATEST</version>
  </dependency>
 ```
 

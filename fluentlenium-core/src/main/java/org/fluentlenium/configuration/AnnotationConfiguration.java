@@ -14,6 +14,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 /**
@@ -47,14 +48,13 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
         super();
         this.configuration = configuration;
 
-        if (this.configuration != null) {
-            CustomProperty[] custom = this.configuration.custom();
-            if (custom != null) {
-                for (CustomProperty customProperty : custom) {
-                    customProperties.put(customProperty.name(), customProperty.value());
-                }
-            }
-        }
+        Optional.ofNullable(this.configuration)
+                .map(FluentConfiguration::custom)
+                .ifPresent(custom -> {
+                    for (CustomProperty customProperty : custom) {
+                        customProperties.put(customProperty.name(), customProperty.value());
+                    }
+                });
     }
 
     private String getStringValue(String property) {
@@ -62,39 +62,44 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
     }
 
     private <T extends ConfigurationFactory> Class<T> getConfigurationFactoryClassValue(Class<T> configurationFactoryClass) {
-        if (configurationFactoryClass == DefaultConfigurationFactory.class) {
-            return null;
-        }
-        return configurationFactoryClass;
+        return configurationFactoryClass == DefaultConfigurationFactory.class ? null : configurationFactoryClass;
     }
 
     private Class<? extends ConfigurationProperties> getConfigurationDefaultsClassValue(
             Class<? extends ConfigurationProperties> configurationDefaultsClass) {
-        if (configurationDefaultsClass == ConfigurationDefaults.class) {
-            return null;
-        }
-        return configurationDefaultsClass;
+        return configurationDefaultsClass == ConfigurationDefaults.class ? null : configurationDefaultsClass;
     }
 
     private Capabilities getCapabilitiesValue(String property) {
-        if (StringUtils.isEmpty(property)) {
-            return null;
-        }
-        try {
-            URL url = new URL(property);
-            try (InputStream stream = url.openStream()) {
-                property = IOUtils.toString(stream, Charset.defaultCharset());
-            } catch (IOException e) {
-                throw new ConfigurationException("Can't read Capabilities defined at " + url, e);
+        Capabilities capabilities = null;
+        if (!StringUtils.isEmpty(property)) {
+            try {
+                URL url = new URL(property);
+                try (InputStream stream = url.openStream()) {
+                    property = IOUtils.toString(stream, Charset.defaultCharset());
+                } catch (IOException e) {
+                    throw new ConfigurationException("Can't read Capabilities defined at " + url, e);
+                }
+            } catch (MalformedURLException e) { // NOPMD EmptyCatchBlock
+                // This is not a URL. Consider property as JSON.
             }
-        } catch (MalformedURLException e) { // NOPMD EmptyCatchBlock
-            // This is not a URL. Consider property as JSON.
+
+            final String prop = property;
+            capabilities = Optional.ofNullable(createNewCapabilitiesFromRegistry(property))
+                    .orElseGet(() -> convertJsonPropertyToCapabilities(prop));
         }
+        return capabilities;
+    }
+
+    private Capabilities createNewCapabilitiesFromRegistry(String property) {
         CapabilitiesFactory factory = CapabilitiesRegistry.INSTANCE.get(property);
         if (factory != null) {
             return factory.newCapabilities(getGlobalConfiguration());
         }
+        return null;
+    }
 
+    private Capabilities convertJsonPropertyToCapabilities(String property) {
         try {
             return jsonConverter.toType(property, DesiredCapabilities.class);
         } catch (JsonException e) {

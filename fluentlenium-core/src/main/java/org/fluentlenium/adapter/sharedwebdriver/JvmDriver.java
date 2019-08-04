@@ -1,5 +1,11 @@
 package org.fluentlenium.adapter.sharedwebdriver;
 
+/**
+ * Stores and handles a {@link SharedWebDriver} instance for the whole JVM.
+ *
+ * @see org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle#JVM
+ * @see SharedWebdriverSingletonImpl
+ */
 public class JvmDriver implements FluentLeniumDriver {
 
     private SharedWebDriver jvmDriver;
