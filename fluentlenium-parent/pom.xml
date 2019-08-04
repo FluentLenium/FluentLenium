@@ -142,7 +142,12 @@
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
-                <version>3.12.2</version>
+                <version>3.13.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opentest4j</groupId>
+                <artifactId>opentest4j</artifactId>
+                <version>1.2.0</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
@@ -157,7 +162,7 @@
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.9.15</version>
+                <version>1.9.16</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -512,7 +517,7 @@
                             <dependency>
                                 <groupId>com.puppycrawl.tools</groupId>
                                 <artifactId>checkstyle</artifactId>
-                                <version>8.22</version>
+                                <version>8.23</version>
                             </dependency>
                         </dependencies>
                         <executions>
