@@ -7,6 +7,9 @@ import java.util.concurrent.TimeUnit;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 @PageUrl("https://duckduckgo.com")
@@ -16,8 +19,12 @@ public class DuckDuckMainPage extends FluentPage {
     @FindBy(css = "#search_form_input_homepage")
     private FluentWebElement searchInput;
 
-    @FindBy(css = "#search_button_homepage")
+    @FindBy(css = "#search_button_homepagex")
     private FluentWebElement searchButton;
+
+    // This doesn't work as well
+    @FindBy(css = "#search_button_homepage")
+    private WebElement searchButtonWebElement;
 
     public DuckDuckMainPage typeSearchPhraseIn(String searchPhrase) {
         searchInput.write(searchPhrase);
@@ -32,6 +39,23 @@ public class DuckDuckMainPage extends FluentPage {
 
     public void assertIsPhrasePresentInTheResults(String searchPhrase) {
         assertThat(window().title()).contains(searchPhrase);
+    }
+
+    public void testActions() {
+        searchInput.fill().with("FluentLenium");
+
+        el(By.cssSelector("#search_button_homepage")).mouse().click();
+
+//        workingSeleniumActionForReference();
+
+        await().explicitlyFor(1, TimeUnit.SECONDS);
+    }
+
+    private void workingSeleniumActionForReference() {
+        new Actions(getDriver())
+                .moveToElement(getDriver().findElement(By.cssSelector("#search_button_homepage")))
+                .click()
+                .perform();
     }
 
     private DuckDuckMainPage awaitUntilSearchFormDisappear() {
