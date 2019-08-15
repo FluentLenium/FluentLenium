@@ -19,7 +19,7 @@ public class DuckDuckMainPage extends FluentPage {
     @FindBy(css = "#search_form_input_homepage")
     private FluentWebElement searchInput;
 
-    @FindBy(css = "#search_button_homepagex")
+    @FindBy(css = "#search_button_homepage")
     private FluentWebElement searchButton;
 
     // This doesn't work as well
@@ -44,14 +44,19 @@ public class DuckDuckMainPage extends FluentPage {
     public void testActions() {
         searchInput.fill().with("FluentLenium");
 
-        el(By.cssSelector("#search_button_homepage")).mouse().click();
+        // Not working 1
+        searchButton.mouse().moveToElement().click();
 
-//        workingSeleniumActionForReference();
+        // Not working 2
+        el(By.cssSelector("#search_button_homepage")).mouse().moveToElement().click();
 
-        await().explicitlyFor(1, TimeUnit.SECONDS);
-    }
+        // Not working 3
+        new Actions(getDriver())
+                .moveToElement(searchButtonWebElement)
+                .click()
+                .perform();
 
-    private void workingSeleniumActionForReference() {
+        // working
         new Actions(getDriver())
                 .moveToElement(getDriver().findElement(By.cssSelector("#search_button_homepage")))
                 .click()
