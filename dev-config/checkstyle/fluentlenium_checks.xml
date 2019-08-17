@@ -32,7 +32,7 @@
     -->
 
     <module name="SuppressionFilter">
-        <property name="file" value="${checkstyle.suppressions.file}"/>
+        <property name="file" value="dev-config/checkstyle/fluentlenium_checks_suppressions.xml"/>
         <property name="optional" value="false"/>
     </module>
 
