@@ -51,7 +51,7 @@ class FluentJUnitJupiterTest {
     @Test
     void testAfterEachSuccessful() {
         when(context.getExecutionException()).thenReturn(Optional.empty());
-        
+
         sut.afterEach(context);
 
         verify(test)._finished(eq(Test1.class), eq("test1"));

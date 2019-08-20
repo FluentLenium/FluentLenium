@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import static org.fluentlenium.assertj.AssertionTestSupport.assertThatAssertionErrorIsThrownBy;
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
-
 /**
  * Integration test for {@link org.fluentlenium.assertj.custom.FluentWebElementAssert}.
  */

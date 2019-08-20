@@ -14,6 +14,7 @@ public class FluentDriverWrappedCapabilitiesProvider {
      * Goes through all the underlying wrapped drivers ({@link WrapsDriver}) in the argument {@link WebDriver},
      * and returns the {@link Capabilities} of the innermost wrapped driver.
      *
+     * @param driver the webdriver to get the capabilities from
      * @return capabilities of the innermost wrapped driver.
      */
     public Capabilities getCapabilities(WebDriver driver) {

@@ -35,7 +35,8 @@ public class FluentDriverHtmlDumper {
      * If an error occurs during taking the HTML dump, the dump file is still created, but it will contain a message
      * that HTML dump could not be taken.
      *
-     * @param fileName the file name to dump the HTML to
+     * @param fileName     the file name to dump the HTML to
+     * @param htmlSupplier provides the HTML snippet that should be dumped
      * @throws RuntimeException when an error occurs during dumping HTML
      */
     public void takeHtmlDump(String fileName, Supplier<String> htmlSupplier) {

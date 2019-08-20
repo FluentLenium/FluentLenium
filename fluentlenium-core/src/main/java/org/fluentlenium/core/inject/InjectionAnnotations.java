@@ -58,11 +58,11 @@ public class InjectionAnnotations extends AbstractAnnotations implements FluentL
     private void checkCapabilities(String platform, String automation) {
         boolean correctConfiguration = isAndroid(platform) || isIos(platform, automation) || isWindows(platform);
         if (!correctConfiguration) {
-            throw new ConfigurationException("You have annotated elements with Appium @FindBys" +
-                    " but capabilities are incomplete. Please use one of these configurations:\n" +
-                    "platformName:Windows\n" +
-                    "plaformName:Android\n" +
-                    "plaformName:iOS, automationName:XCUITest");
+            throw new ConfigurationException("You have annotated elements with Appium @FindBys"
+                    + " but capabilities are incomplete. Please use one of these configurations:\n"
+                    + "platformName:Windows\n"
+                    + "plaformName:Android\n"
+                    + "plaformName:iOS, automationName:XCUITest");
         }
     }
 

@@ -32,7 +32,8 @@ public class ThreadSharedWebDriverContainerTest implements Supplier<WebDriver> {
     }
 
     @Test
-    public void getOrCreateDriverWithSameClassSameTestNamesDifferentThreadCreatesDistinctInstances() throws ExecutionException, InterruptedException {
+    public void getOrCreateDriverWithSameClassSameTestNamesDifferentThreadCreatesDistinctInstances()
+            throws ExecutionException, InterruptedException {
         EffectiveParameters<?> parameters = new EffectiveParameters<>(Object.class, "test", DriverLifecycle.THREAD);
         ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(2);
 
@@ -60,7 +61,8 @@ public class ThreadSharedWebDriverContainerTest implements Supplier<WebDriver> {
     }
 
     @Test
-    public void getOrCreateDriverWithSameClassSameTestNamesSameThreadCreatesOneInstances() throws ExecutionException, InterruptedException {
+    public void getOrCreateDriverWithSameClassSameTestNamesSameThreadCreatesOneInstances()
+            throws ExecutionException, InterruptedException {
         EffectiveParameters<?> parameters = new EffectiveParameters<>(Object.class, "test", DriverLifecycle.THREAD);
         ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(1);
 
@@ -88,7 +90,8 @@ public class ThreadSharedWebDriverContainerTest implements Supplier<WebDriver> {
     }
 
     @Test
-    public void getOrCreateDriverWithSameThreadDifferentTestClassCreatesDistinctInstances() throws ExecutionException, InterruptedException {
+    public void getOrCreateDriverWithSameThreadDifferentTestClassCreatesDistinctInstances()
+            throws ExecutionException, InterruptedException {
         EffectiveParameters<?> parameters1 = new EffectiveParameters<>(Object.class, "test", DriverLifecycle.THREAD);
         EffectiveParameters<?> parameters2 = new EffectiveParameters<>(String.class, "test", DriverLifecycle.THREAD);
 
@@ -119,7 +122,8 @@ public class ThreadSharedWebDriverContainerTest implements Supplier<WebDriver> {
     }
 
     @Test
-    public void getOrCreateDriverWithSameThreadDifferentTestNameCreatesDistinctInstances() throws ExecutionException, InterruptedException {
+    public void getOrCreateDriverWithSameThreadDifferentTestNameCreatesDistinctInstances()
+            throws ExecutionException, InterruptedException {
         EffectiveParameters<?> parameters1 = new EffectiveParameters<>(Object.class, "test", DriverLifecycle.THREAD);
         EffectiveParameters<?> parameters2 = new EffectiveParameters<>(Object.class, "test2", DriverLifecycle.THREAD);
 

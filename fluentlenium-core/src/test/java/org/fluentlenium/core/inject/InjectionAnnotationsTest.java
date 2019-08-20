@@ -104,8 +104,8 @@ public class InjectionAnnotationsTest {
 
     @Test
     public void shouldThrowExceptionWhenCapabilitiesAreIncomplete() throws NoSuchFieldException {
-        Field androidUiAutomator = this.getClass().getDeclaredField("androidUiAutomator");
-        assertThatThrownBy(() -> new InjectionAnnotations(androidUiAutomator, getIncompleteAndroidCapabilties()))
+        Field androidUiAutomatorField = this.getClass().getDeclaredField("androidUiAutomator");
+        assertThatThrownBy(() -> new InjectionAnnotations(androidUiAutomatorField, getIncompleteAndroidCapabilties()))
                 .isInstanceOf(ConfigurationException.class)
                 .hasMessageContaining("You have annotated elements with Appium @FindBys but capabilities are incomplete");
     }

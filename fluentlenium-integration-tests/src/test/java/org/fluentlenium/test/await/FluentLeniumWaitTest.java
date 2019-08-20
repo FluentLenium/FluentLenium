@@ -92,7 +92,7 @@ class FluentLeniumWaitTest extends IntegrationFluentTest {
         assertThrows(TimeoutException.class,
                 () -> await().atMost(MINIMAL_TIMEOUT, NANOSECONDS)
                         .until($("input[disabled]")).clickable());
-        }
+    }
 
     @Test
     void explicitWait() {
@@ -170,7 +170,7 @@ class FluentLeniumWaitTest extends IntegrationFluentTest {
                     adapter.initFluent(new HtmlUnitDriver(false));
                     adapter.await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilPage().isLoaded();
                 });
-         }
+    }
 
     @Test
     void checkAwaitContainsText() {
@@ -235,7 +235,7 @@ class FluentLeniumWaitTest extends IntegrationFluentTest {
                 () -> await().atMost(MINIMAL_TIMEOUT, NANOSECONDS)
                         .until($(".small", withText().contains("Small 1")))
                         .not().present());
-         }
+    }
 
     @Test
     void checkAwaitStartWithRegex() {
@@ -362,7 +362,7 @@ class FluentLeniumWaitTest extends IntegrationFluentTest {
                     await().atMost(MINIMAL_TIMEOUT, NANOSECONDS)
                             .untilEach($("#unvisible")).displayed();
                 });
-          }
+    }
 
     @Test
     void whenElementIsNotDisplayedThenIsDisplayedThrowsException() {
@@ -371,7 +371,7 @@ class FluentLeniumWaitTest extends IntegrationFluentTest {
                     goTo(JAVASCRIPT_URL);
                     await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).until($("#unvisible")).displayed();
                 });
-          }
+    }
 
     @Test
     void whenElementIsNotPresentThenAreNotDisplayedReturnTrue() {
@@ -387,7 +387,7 @@ class FluentLeniumWaitTest extends IntegrationFluentTest {
                     await().atMost(MINIMAL_TIMEOUT, NANOSECONDS)
                             .untilEach($("#nonexistent")).displayed();
                 });
-        }
+    }
 
     @Test
     void whenElementIsNotPresentThenAreEnabledThrowsException() {
@@ -397,7 +397,7 @@ class FluentLeniumWaitTest extends IntegrationFluentTest {
                     await().atMost(MINIMAL_TIMEOUT, NANOSECONDS)
                             .untilEach($("#nonexistent")).enabled();
                 });
-         }
+    }
 
     @Test
     void whenElementIsNotDisplayedThenAreNotDisplayedReturnTrue() {
