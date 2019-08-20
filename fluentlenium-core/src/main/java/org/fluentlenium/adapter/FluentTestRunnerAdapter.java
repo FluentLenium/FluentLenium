@@ -26,6 +26,7 @@ import org.slf4j.LoggerFactory;
  * <p>
  * Extends this class to provide FluentLenium support to your Test class.
  */
+@SuppressWarnings("PMD.GodClass")
 public class FluentTestRunnerAdapter extends FluentAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FluentTestRunnerAdapter.class);
