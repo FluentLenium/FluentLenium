@@ -98,7 +98,7 @@
             <dependency>
                 <groupId>io.appium</groupId>
                 <artifactId>java-client</artifactId>
-                <version>7.1.0</version>
+                <version>7.2.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
