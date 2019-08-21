@@ -1,18 +1,19 @@
 package org.fluentlenium.adapter.testng.integration;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
 import org.fluentlenium.adapter.testng.FluentTestNg;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.testng.Assert;
-import org.testng.ITestNGListener;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
+
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class DontRunTestsWhenInitFailTest {
 
@@ -30,8 +31,19 @@ public class DontRunTestsWhenInitFailTest {
             return driver;
         }
 
+        @Ignore
+        @Test
+        public void testShouldBeIgnored() {
+            Assert.fail("Should not be called");
+        }
+
         @Test
         public void testDriverFailShouldNotCallTestMethod() {
+            Assert.fail("Should not be called");
+        }
+
+        @Test
+        public void testDriverFailShouldNotCallTestMethod2() {
             Assert.fail("Should not be called");
         }
     }
@@ -42,12 +54,13 @@ public class DontRunTestsWhenInitFailTest {
         testNG.setTestClasses(new Class[] {TestClass.class});
 
         TestListenerAdapter listenerAdapter = Mockito.mock(TestListenerAdapter.class);
-        testNG.addListener((ITestNGListener) listenerAdapter);
+        testNG.addListener(listenerAdapter);
 
         testNG.run();
 
         verify(listenerAdapter, times(2)).onConfigurationFailure(Mockito.any(ITestResult.class));
-        verify(listenerAdapter).onTestSkipped(Mockito.any(ITestResult.class));
-        verify(listenerAdapter, Mockito.never()).onTestSuccess(Mockito.any(ITestResult.class));
+        verify(listenerAdapter, times(2)).onTestSkipped(Mockito.any(ITestResult.class));
+        verify(listenerAdapter, times(2)).onTestStart(Mockito.any(ITestResult.class));
+        verify(listenerAdapter, never()).onTestSuccess(Mockito.any(ITestResult.class));
     }
 }
