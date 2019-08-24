@@ -49,9 +49,11 @@ public class ReflectionUtilsTest {
         Constructor<TestClass> testClassConstructor = ReflectionUtils.getConstructor(TestClass.class);
         assertThat(testClassConstructor.getParameterTypes()).isEmpty();
 
-        assertThatThrownBy(() -> ReflectionUtils.getConstructor(TestClass.class, "1", 2, true, "object")).isExactlyInstanceOf(NoSuchMethodException.class);
+        assertThatThrownBy(() -> ReflectionUtils.getConstructor(TestClass.class, "1", 2, true, "object"))
+                .isExactlyInstanceOf(NoSuchMethodException.class);
 
-        Constructor<SuperClass> superClassConstructor = ReflectionUtils.getConstructor(SuperClass.class, "1", 2, true, "object");
+        Constructor<SuperClass> superClassConstructor =
+                ReflectionUtils.getConstructor(SuperClass.class, "1", 2, true, "object");
         assertThat(superClassConstructor.getParameterTypes())
                 .isEqualTo(new Class<?>[] {String.class, Integer.class, boolean.class, Object.class});
 
@@ -61,9 +63,11 @@ public class ReflectionUtilsTest {
         assertThat(object.param3).isTrue();
         assertThat(object.param4).isEqualTo("object");
 
-        assertThatThrownBy(() -> ReflectionUtils.newInstance(SuperClass.class, "1", 2)).isExactlyInstanceOf(NoSuchMethodException.class);
+        assertThatThrownBy(() -> ReflectionUtils.newInstance(SuperClass.class, "1", 2))
+                .isExactlyInstanceOf(NoSuchMethodException.class);
 
-        assertThatThrownBy(() -> ReflectionUtils.newInstance(SuperClass.class, "1", 2, "true", "object")).isExactlyInstanceOf(NoSuchMethodException.class);
+        assertThatThrownBy(() -> ReflectionUtils.newInstance(SuperClass.class, "1", 2, "true", "object"))
+                .isExactlyInstanceOf(NoSuchMethodException.class);
 
     }
 

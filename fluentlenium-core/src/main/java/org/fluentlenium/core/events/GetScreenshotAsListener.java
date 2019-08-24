@@ -3,7 +3,9 @@ package org.fluentlenium.core.events;
 import org.openqa.selenium.OutputType;
 
 /**
- * Listen to ScreenshotAs
+ * Listen to ScreenshotAs.
+ *
+ * @param <X> the type of the screenshot output
  */
 public interface GetScreenshotAsListener<X> {
     /**

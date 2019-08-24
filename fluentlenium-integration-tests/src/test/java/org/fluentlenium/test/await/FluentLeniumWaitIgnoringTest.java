@@ -59,8 +59,9 @@ class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
 
                         await().atMost(1, TimeUnit.NANOSECONDS)
                                 .ignoreAll(exceptions).until(() -> {
-                            throw new CustomException3();
-                        });
+                                    throw new CustomException3();
+                                }
+                        );
 
                         throw new AssertionError();
                     } catch (TimeoutException ignored) {
@@ -93,8 +94,8 @@ class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
                         await().atMost(1, TimeUnit.NANOSECONDS)
                                 .ignoring(CustomException.class).ignoring(CustomException2.class)
                                 .until(() -> {
-                            throw new CustomException3();
-                        });
+                                    throw new CustomException3();
+                                });
 
                         throw new AssertionError();
                     } catch (TimeoutException ignored) {
@@ -108,8 +109,9 @@ class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
         try {
             await().atMost(1, TimeUnit.NANOSECONDS)
                     .ignoring(CustomException.class, CustomException2.class).until(() -> {
-                throw new CustomException();
-            });
+                        throw new CustomException();
+                    }
+            );
 
             throw new AssertionError();
         } catch (TimeoutException ignored) {
@@ -125,8 +127,8 @@ class FluentLeniumWaitIgnoringTest extends IntegrationFluentTest {
                         await().atMost(1, TimeUnit.NANOSECONDS)
                                 .ignoring(CustomException.class, CustomException2.class)
                                 .until(() -> {
-                            throw new CustomException3();
-                        });
+                                    throw new CustomException3();
+                                });
 
                         throw new AssertionError();
                     } catch (TimeoutException ignored) {

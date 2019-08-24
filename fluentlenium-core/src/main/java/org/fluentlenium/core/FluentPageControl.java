@@ -41,6 +41,7 @@ public interface FluentPageControl extends FluentControl {
     /**
      * Go to the url defined in the page
      *
+     * @param <P> the fluent page
      * @return <P> FluentPage object
      */
     <P extends FluentPage> P go(); // NOPMD ShortMethodName
@@ -49,9 +50,8 @@ public interface FluentPageControl extends FluentControl {
      * Got to the url defined in the page, using given parameters.
      *
      * @param params page url parameter values
-     * @throws IllegalArgumentException if some required parameters are missing
-     *
      * @return <P> FluentPage object
+     * @throws IllegalArgumentException if some required parameters are missing
      */
     <P extends FluentPage> P go(Object... params);
 

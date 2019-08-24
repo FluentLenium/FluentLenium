@@ -9,6 +9,9 @@ import static org.fluentlenium.assertj.custom.HtmlConstants.CLASS_DELIMITER;
 
 /**
  * Abstract base class for FluentLenium assertion implementations.
+ *
+ * @param <SELF>   the "self" type of this assertion class
+ * @param <ACTUAL> an actual implementation of this interface
  */
 abstract class AbstractFluentAssert<SELF extends AbstractAssert<SELF, ACTUAL>, ACTUAL> extends AbstractAssert<SELF, ACTUAL>
         implements FluentAssert {

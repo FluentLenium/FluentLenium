@@ -228,7 +228,7 @@ public class FluentElementInjectionSupportValidatorTest {
     }
 
     private static final class TestComponent extends FluentWebElement {
-        public TestComponent(WebElement element, FluentControl control, ComponentInstantiator instantiator) {
+        TestComponent(WebElement element, FluentControl control, ComponentInstantiator instantiator) {
             super(element, control, instantiator);
         }
     }

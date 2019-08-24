@@ -1,18 +1,17 @@
 package org.fluentlenium.configuration;
 
-import static org.mockito.Mockito.RETURNS_DEFAULTS;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import org.assertj.core.api.Assertions;
+import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.stubbing.Answer;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
-
 import java.util.function.Function;
+
+import static org.mockito.Mockito.RETURNS_DEFAULTS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class ComposedConfigurationTest {
     private ProgrammaticConfiguration configuration;
@@ -38,8 +37,8 @@ public class ComposedConfigurationTest {
         configurationProperties2 = mock(ConfigurationProperties.class, configurationReadAnswer);
         configurationProperties3 = mock(ConfigurationProperties.class, configurationReadAnswer);
         configuration = new ProgrammaticConfiguration();
-        composed = new ComposedConfiguration(configuration, configuration, configurationProperties1, configurationProperties2,
-                configurationProperties3);
+        composed = new ComposedConfiguration(configuration, configuration, configurationProperties1,
+                configurationProperties2, configurationProperties3);
     }
 
     @Test
@@ -58,7 +57,8 @@ public class ComposedConfigurationTest {
 
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DefaultConfigurationFactory.class);
 
-        when(configurationProperties2.getConfigurationFactory()).thenAnswer((Answer<Object>) invocation -> DummyConfigurationFactory.class);
+        when(configurationProperties2.getConfigurationFactory())
+                .thenAnswer((Answer<Object>) invocation -> DummyConfigurationFactory.class);
 
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DefaultConfigurationFactory.class);
 
@@ -66,13 +66,14 @@ public class ComposedConfigurationTest {
 
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DummyConfigurationFactory.class);
 
-        when(configurationProperties3.getConfigurationFactory()).thenAnswer((Answer<Object>) invocation -> DefaultConfigurationFactory.class);
+        when(configurationProperties3.getConfigurationFactory())
+                .thenAnswer((Answer<Object>) invocation -> DefaultConfigurationFactory.class);
 
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DummyConfigurationFactory.class);
     }
 
-    private <T> void testImpl(Function<ConfigurationProperties, T> getter, Function<T, Void> setter, T defaultValue, T value1,
-            T value2) {
+    private <T> void testImpl(Function<ConfigurationProperties, T> getter, Function<T, Void> setter, T defaultValue,
+                              T value1, T value2) {
         if (defaultValue == null) {
             Assertions.assertThat(getter.apply(composed)).isNull();
         } else {

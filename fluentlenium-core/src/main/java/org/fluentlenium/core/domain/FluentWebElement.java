@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 import java.util.function.Function;
+
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.SeleniumDriverControl;
@@ -707,8 +708,8 @@ public class FluentWebElement extends Component
         try {
             clickable = ExpectedConditions.elementToBeClickable(getElement())
                     .apply(control.getDriver()) != null;
-        } catch (NoSuchElementException | StaleElementReferenceException |
-                ElementNotVisibleException | ElementClickInterceptedException e) {
+        } catch (NoSuchElementException | StaleElementReferenceException
+                | ElementNotVisibleException | ElementClickInterceptedException e) {
             clickable = false;
         }
         return clickable;

@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +24,7 @@ import org.slf4j.LoggerFactory;
 @NotThreadSafe
 class ContainerAnnotationsEventsRegistrySetupTest extends IntegrationFluentTest {
 
-    private static final Logger logger =
+    private static final Logger LOGGER =
             LoggerFactory.getLogger(ContainerAnnotationsEventsRegistrySetupTest.class);
 
     private static final String BEFORE = "Before";
@@ -39,19 +40,19 @@ class ContainerAnnotationsEventsRegistrySetupTest extends IntegrationFluentTest 
 
     @BeforeClickOn
     void beforeClickOnListenerMethod() {
-        logger.info("About to click on something...");
+        LOGGER.info("About to click on something...");
         executed.add(BEFORE);
     }
 
     @AfterClickOn(10)
     void afterClickOnListenerMethodWithLowerPriority() {
-        logger.info("Clicked successfully. FluentLenium is awesome! :)");
+        LOGGER.info("Clicked successfully. FluentLenium is awesome! :)");
         executed.add(FIRST_AFTER);
     }
 
     @AfterClickOn(5)
     void afterClickOnListenerMethod() {
-        logger.info("Isn't it?");
+        LOGGER.info("Isn't it?");
         executed.add(SECOND_AFTER);
     }
 
