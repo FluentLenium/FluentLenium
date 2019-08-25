@@ -1,6 +1,7 @@
 package org.fluentlenium.core.action;
 
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,7 +9,7 @@ import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
 
 /**
- * Execute actions with the keyboard on a defined element.
+ * Execute actions with the keyboard on a defined element. Triggers element search before performing an action.
  */
 public class KeyboardElementActions {
     private final WebDriver driver;
@@ -68,6 +69,7 @@ public class KeyboardElementActions {
      * @see org.openqa.selenium.interactions.Actions#keyDown(WebElement, CharSequence)
      */
     public KeyboardElementActions keyDown(Keys theKey) {
+        loadElement();
         actions().keyDown(element, theKey).perform();
         return this;
     }
@@ -81,6 +83,7 @@ public class KeyboardElementActions {
      * @see org.openqa.selenium.interactions.Actions#keyUp(WebElement, CharSequence)
      */
     public KeyboardElementActions keyUp(Keys theKey) {
+        loadElement();
         actions().keyUp(element, theKey).perform();
         return this;
     }
@@ -99,7 +102,14 @@ public class KeyboardElementActions {
      * @see org.openqa.selenium.interactions.Actions#sendKeys(WebElement, CharSequence...)
      */
     public KeyboardElementActions sendKeys(CharSequence... keysToSend) {
+        loadElement();
         actions().sendKeys(element, keysToSend).perform();
         return this;
+    }
+
+    private void loadElement() {
+        if (!LocatorProxies.loaded(element)) {
+            LocatorProxies.now(element);
+        }
     }
 }

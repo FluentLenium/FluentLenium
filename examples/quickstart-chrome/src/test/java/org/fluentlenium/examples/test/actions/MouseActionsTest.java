@@ -7,12 +7,24 @@ import org.junit.Test;
 
 public class MouseActionsTest extends AbstractChromeTest {
 
+    private static final String SEARCH_PHRASE = "FluentLenium";
+
     @Page
     private DuckDuckMainPage duckDuckMainPage;
 
     @Test
-    public void move() {
-        goTo(duckDuckMainPage).testActions();
+    public void testFindByFluentWebElementActions() {
+        goTo(duckDuckMainPage)
+                .testFindByFluentWebElementActions(SEARCH_PHRASE)
+                .assertIsPhrasePresentInTheResults(SEARCH_PHRASE);
     }
+
+    @Test
+    public void testFluentWebElementActions() {
+        goTo(duckDuckMainPage)
+                .testFluentWebElementActions(SEARCH_PHRASE)
+                .assertIsPhrasePresentInTheResults(SEARCH_PHRASE);
+    }
+
 
 }

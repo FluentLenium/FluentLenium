@@ -1,6 +1,7 @@
 package org.fluentlenium.core.action;
 
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Coordinates;
@@ -8,7 +9,7 @@ import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Mouse;
 
 /**
- * Element specific mouse control interface.
+ * Element specific mouse control interface. Triggers element search before performing an action.
  */
 public class MouseElementActions {
     private final WebDriver driver;
@@ -74,6 +75,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#clickAndHold(WebElement)
      */
     public MouseElementActions clickAndHold() {
+        loadElement();
         actions().clickAndHold(element).perform();
         return this;
     }
@@ -90,6 +92,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#release(WebElement)
      */
     public MouseElementActions release() {
+        loadElement();
         actions().release(element).perform();
         return this;
     }
@@ -102,6 +105,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#click(WebElement)
      */
     public MouseElementActions click() {
+        loadElement();
         actions().click(element).perform();
         return this;
     }
@@ -114,6 +118,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#doubleClick(WebElement)
      */
     public MouseElementActions doubleClick() {
+        loadElement();
         actions().doubleClick(element).perform();
         return this;
     }
@@ -126,6 +131,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement)
      */
     public MouseElementActions moveToElement() {
+        loadElement();
         actions().moveToElement(element).perform();
         return this;
     }
@@ -139,6 +145,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement)
      */
     public MouseElementActions moveToElement(WebElement target) {
+        loadElement();
         actions().moveToElement(target).perform();
         return this;
     }
@@ -155,6 +162,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement, int, int)
      */
     public MouseElementActions moveToElement(int xOffset, int yOffset) {
+        loadElement();
         actions().moveToElement(element, xOffset, yOffset).perform();
         return this;
     }
@@ -172,6 +180,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement, int, int)
      */
     public MouseElementActions moveToElement(WebElement target, int xOffset, int yOffset) {
+        loadElement();
         actions().moveToElement(target, xOffset, yOffset).perform();
         return this;
     }
@@ -184,6 +193,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#contextClick(WebElement)
      */
     public MouseElementActions contextClick() {
+        loadElement();
         actions().contextClick(element).perform();
         return this;
     }
@@ -197,6 +207,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#dragAndDrop(WebElement, WebElement)
      */
     public MouseElementActions dragAndDropFrom(WebElement source) {
+        loadElement();
         actions().dragAndDrop(source, element).perform();
         return this;
     }
@@ -210,6 +221,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#dragAndDrop(WebElement, WebElement)
      */
     public MouseElementActions dragAndDropTo(WebElement target) {
+        loadElement();
         actions().dragAndDrop(element, target).perform();
         return this;
     }
@@ -224,6 +236,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#dragAndDropBy(WebElement, int, int)
      */
     public MouseElementActions dragAndDropBy(int xOffset, int yOffset) {
+        loadElement();
         actions().dragAndDropBy(element, xOffset, yOffset).perform();
         return this;
     }
@@ -241,8 +254,15 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#dragAndDropBy(WebElement, int, int)
      */
     public MouseElementActions dragAndDropByWithTargetOffset(WebElement target, int xOffset, int yOffset) {
+        loadElement();
         actions().clickAndHold(element).moveToElement(target, xOffset, yOffset).release().perform();
         return this;
+    }
+
+    private void loadElement() {
+        if (!LocatorProxies.loaded(element)) {
+            LocatorProxies.now(element);
+        }
     }
 
 }

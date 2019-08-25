@@ -5,11 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.concurrent.TimeUnit;
 
 import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.action.MouseElementActions;
 import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 @PageUrl("https://duckduckgo.com")
@@ -41,30 +40,27 @@ public class DuckDuckMainPage extends FluentPage {
         assertThat(window().title()).contains(searchPhrase);
     }
 
-    public void testActions() {
-        searchInput.fill().with("FluentLenium");
-
-        // Not working 1
+    public DuckDuckMainPage testFindByFluentWebElementActions(String searchPhrase) {
+        inputSearchPhrase(searchPhrase);
         searchButton.mouse().moveToElement().click();
 
-        // Not working 2
-        el(By.cssSelector("#search_button_homepage")).mouse().moveToElement().click();
+        return this;
+    }
 
-        // Not working 3
-        new Actions(getDriver())
-                .moveToElement(searchButtonWebElement)
-                .click()
-                .perform();
+    public DuckDuckMainPage testFluentWebElementActions(String searchPhrase) {
+        inputSearchPhrase(searchPhrase);
+        new MouseElementActions(getDriver(), searchButton).moveToElement().click();
 
-        // working
-        new Actions(getDriver())
-                .moveToElement(getDriver().findElement(By.cssSelector("#search_button_homepage")))
-                .click()
-                .perform();
+        return this;
     }
 
     private DuckDuckMainPage awaitUntilSearchFormDisappear() {
         await().atMost(5, TimeUnit.SECONDS).until(el(SEARCH_FORM_HOMEPAGE)).not().present();
         return this;
+    }
+
+    private void inputSearchPhrase(String searchPhrase) {
+        await().until(searchInput).clickable();
+        searchInput.fill().with(searchPhrase);
     }
 }
