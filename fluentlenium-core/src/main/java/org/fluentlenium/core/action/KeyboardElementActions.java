@@ -5,6 +5,7 @@ import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
 
@@ -29,12 +30,11 @@ public class KeyboardElementActions {
     /**
      * Creates a new object to execute actions with the keyboard, using given selenium driver and element.
      *
-     * @param driver  selenium driver
+     * @param driver           selenium driver
      * @param fluentWebElement FluentWebElement on which to execute actions
      */
     public KeyboardElementActions(WebDriver driver, FluentWebElement fluentWebElement) {
-        this.driver = driver;
-        this.element = fluentWebElement.getElement();
+        this(driver, fluentWebElement.getElement());
     }
 
     /**
@@ -69,8 +69,7 @@ public class KeyboardElementActions {
      * @see org.openqa.selenium.interactions.Actions#keyDown(WebElement, CharSequence)
      */
     public KeyboardElementActions keyDown(Keys theKey) {
-        loadElement();
-        actions().keyDown(element, theKey).perform();
+        loadElementAndPerform(actions().keyDown(element, theKey));
         return this;
     }
 
@@ -83,8 +82,7 @@ public class KeyboardElementActions {
      * @see org.openqa.selenium.interactions.Actions#keyUp(WebElement, CharSequence)
      */
     public KeyboardElementActions keyUp(Keys theKey) {
-        loadElement();
-        actions().keyUp(element, theKey).perform();
+        loadElementAndPerform(actions().keyUp(element, theKey));
         return this;
     }
 
@@ -102,14 +100,16 @@ public class KeyboardElementActions {
      * @see org.openqa.selenium.interactions.Actions#sendKeys(WebElement, CharSequence...)
      */
     public KeyboardElementActions sendKeys(CharSequence... keysToSend) {
-        loadElement();
-        actions().sendKeys(element, keysToSend).perform();
+        loadElementAndPerform(actions().sendKeys(element, keysToSend));
         return this;
     }
 
+    private void loadElementAndPerform(Actions action) {
+        loadElement();
+        action.perform();
+    }
+
     private void loadElement() {
-        if (!LocatorProxies.loaded(element)) {
-            LocatorProxies.now(element);
-        }
+        LocatorProxies.now(element);
     }
 }

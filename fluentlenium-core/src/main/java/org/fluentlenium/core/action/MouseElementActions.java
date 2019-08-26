@@ -4,6 +4,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.Coordinates;
 import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Mouse;
@@ -29,12 +30,11 @@ public class MouseElementActions {
     /**
      * Creates a new mouse element actions.
      *
-     * @param driver  selenium driver
+     * @param driver           selenium driver
      * @param fluentWebElement FluentWebElement
      */
     public MouseElementActions(WebDriver driver, FluentWebElement fluentWebElement) {
-        this.driver = driver;
-        this.element = fluentWebElement.getElement();
+        this(driver, fluentWebElement.getElement());
     }
 
     private org.openqa.selenium.interactions.Actions actions() {
@@ -75,8 +75,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#clickAndHold(WebElement)
      */
     public MouseElementActions clickAndHold() {
-        loadElement();
-        actions().clickAndHold(element).perform();
+        loadElementAndPerform(actions().clickAndHold(element));
         return this;
     }
 
@@ -92,8 +91,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#release(WebElement)
      */
     public MouseElementActions release() {
-        loadElement();
-        actions().release(element).perform();
+        loadElementAndPerform(actions().release(element));
         return this;
     }
 
@@ -105,8 +103,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#click(WebElement)
      */
     public MouseElementActions click() {
-        loadElement();
-        actions().click(element).perform();
+        loadElementAndPerform(actions().click(element));
         return this;
     }
 
@@ -118,8 +115,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#doubleClick(WebElement)
      */
     public MouseElementActions doubleClick() {
-        loadElement();
-        actions().doubleClick(element).perform();
+        loadElementAndPerform(actions().doubleClick(element));
         return this;
     }
 
@@ -131,8 +127,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement)
      */
     public MouseElementActions moveToElement() {
-        loadElement();
-        actions().moveToElement(element).perform();
+        loadElementAndPerform(actions().moveToElement(element));
         return this;
     }
 
@@ -145,8 +140,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement)
      */
     public MouseElementActions moveToElement(WebElement target) {
-        loadElement();
-        actions().moveToElement(target).perform();
+        loadElementAndPerform(actions().moveToElement(target));
         return this;
     }
 
@@ -162,8 +156,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement, int, int)
      */
     public MouseElementActions moveToElement(int xOffset, int yOffset) {
-        loadElement();
-        actions().moveToElement(element, xOffset, yOffset).perform();
+        loadElementAndPerform(actions().moveToElement(element, xOffset, yOffset));
         return this;
     }
 
@@ -171,7 +164,7 @@ public class MouseElementActions {
      * Moves the mouse to an offset from the top-left corner of the target element.
      * The element is scrolled into view and its location is calculated using getBoundingClientRect.
      *
-     * @param target element to move to and release the mouse at.
+     * @param target  element to move to and release the mouse at.
      * @param xOffset Offset from the top-left corner. A negative value means coordinates left from
      *                the element
      * @param yOffset Offset from the top-left corner. A negative value means coordinates above
@@ -180,8 +173,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement, int, int)
      */
     public MouseElementActions moveToElement(WebElement target, int xOffset, int yOffset) {
-        loadElement();
-        actions().moveToElement(target, xOffset, yOffset).perform();
+        loadElementAndPerform(actions().moveToElement(target, xOffset, yOffset));
         return this;
     }
 
@@ -193,8 +185,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#contextClick(WebElement)
      */
     public MouseElementActions contextClick() {
-        loadElement();
-        actions().contextClick(element).perform();
+        loadElementAndPerform(actions().contextClick(element));
         return this;
     }
 
@@ -207,8 +198,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#dragAndDrop(WebElement, WebElement)
      */
     public MouseElementActions dragAndDropFrom(WebElement source) {
-        loadElement();
-        actions().dragAndDrop(source, element).perform();
+        loadElementAndPerform(actions().dragAndDrop(source, element));
         return this;
     }
 
@@ -221,8 +211,7 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#dragAndDrop(WebElement, WebElement)
      */
     public MouseElementActions dragAndDropTo(WebElement target) {
-        loadElement();
-        actions().dragAndDrop(element, target).perform();
+        loadElementAndPerform(actions().dragAndDrop(element, target));
         return this;
     }
 
@@ -236,33 +225,34 @@ public class MouseElementActions {
      * @see org.openqa.selenium.interactions.Actions#dragAndDropBy(WebElement, int, int)
      */
     public MouseElementActions dragAndDropBy(int xOffset, int yOffset) {
-        loadElement();
-        actions().dragAndDropBy(element, xOffset, yOffset).perform();
+        loadElementAndPerform(actions().dragAndDropBy(element, xOffset, yOffset));
         return this;
     }
 
     /**
      * A convenience method that performs click-and-hold at the location of this element,
      * moves by a given offset of target element, then releases the mouse.
-     *
+     * <p>
      * This Method is not available in pure Selenium
      *
-     * @param target element to move to and release the mouse at.
+     * @param target  element to move to and release the mouse at.
      * @param xOffset horizontal move offset.
      * @param yOffset vertical move offset.
      * @return this object reference to chain calls
      * @see org.openqa.selenium.interactions.Actions#dragAndDropBy(WebElement, int, int)
      */
     public MouseElementActions dragAndDropByWithTargetOffset(WebElement target, int xOffset, int yOffset) {
-        loadElement();
-        actions().clickAndHold(element).moveToElement(target, xOffset, yOffset).release().perform();
+        loadElementAndPerform(actions().clickAndHold(element).moveToElement(target, xOffset, yOffset).release());
         return this;
     }
 
+    private void loadElementAndPerform(Actions action) {
+        loadElement();
+        action.perform();
+    }
+
     private void loadElement() {
-        if (!LocatorProxies.loaded(element)) {
-            LocatorProxies.now(element);
-        }
+        LocatorProxies.now(element);
     }
 
 }
