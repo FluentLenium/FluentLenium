@@ -37,8 +37,8 @@ public class MouseElementActions {
         this(driver, fluentWebElement.getElement());
     }
 
-    private org.openqa.selenium.interactions.Actions actions() {
-        return new org.openqa.selenium.interactions.Actions(driver);
+    private Actions actions() {
+        return new Actions(driver);
     }
 
     /**
@@ -72,7 +72,7 @@ public class MouseElementActions {
      * <i>Actions.moveToElement(onElement).clickAndHold()</i>
      *
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#clickAndHold(WebElement)
+     * @see Actions#clickAndHold(WebElement)
      */
     public MouseElementActions clickAndHold() {
         loadElementAndPerform(actions().clickAndHold(element));
@@ -88,7 +88,7 @@ public class MouseElementActions {
      * undefined behaviour.
      *
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#release(WebElement)
+     * @see Actions#release(WebElement)
      */
     public MouseElementActions release() {
         loadElementAndPerform(actions().release(element));
@@ -100,7 +100,7 @@ public class MouseElementActions {
      * <i>Actions.moveToElement(onElement).click()</i>
      *
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#click(WebElement)
+     * @see Actions#click(WebElement)
      */
     public MouseElementActions click() {
         loadElementAndPerform(actions().click(element));
@@ -112,7 +112,7 @@ public class MouseElementActions {
      * <i>Actions.moveToElement(element).doubleClick()</i>
      *
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#doubleClick(WebElement)
+     * @see Actions#doubleClick(WebElement)
      */
     public MouseElementActions doubleClick() {
         loadElementAndPerform(actions().doubleClick(element));
@@ -124,7 +124,7 @@ public class MouseElementActions {
      * location is calculated using getBoundingClientRect.
      *
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement)
+     * @see Actions#moveToElement(WebElement)
      */
     public MouseElementActions moveToElement() {
         loadElementAndPerform(actions().moveToElement(element));
@@ -137,7 +137,7 @@ public class MouseElementActions {
      *
      * @param target element to move to and release the mouse at.
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement)
+     * @see Actions#moveToElement(WebElement)
      */
     public MouseElementActions moveToElement(WebElement target) {
         loadElementAndPerform(actions().moveToElement(target));
@@ -153,7 +153,7 @@ public class MouseElementActions {
      * @param yOffset Offset from the top-left corner. A negative value means coordinates above
      *                the element
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement, int, int)
+     * @see Actions#moveToElement(WebElement, int, int)
      */
     public MouseElementActions moveToElement(int xOffset, int yOffset) {
         loadElementAndPerform(actions().moveToElement(element, xOffset, yOffset));
@@ -170,7 +170,7 @@ public class MouseElementActions {
      * @param yOffset Offset from the top-left corner. A negative value means coordinates above
      *                the element
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#moveToElement(WebElement, int, int)
+     * @see Actions#moveToElement(WebElement, int, int)
      */
     public MouseElementActions moveToElement(WebElement target, int xOffset, int yOffset) {
         loadElementAndPerform(actions().moveToElement(target, xOffset, yOffset));
@@ -182,7 +182,7 @@ public class MouseElementActions {
      * to the location of the element.
      *
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#contextClick(WebElement)
+     * @see Actions#contextClick(WebElement)
      */
     public MouseElementActions contextClick() {
         loadElementAndPerform(actions().contextClick(element));
@@ -195,7 +195,7 @@ public class MouseElementActions {
      *
      * @param source element to emulate button down at
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#dragAndDrop(WebElement, WebElement)
+     * @see Actions#dragAndDrop(WebElement, WebElement)
      */
     public MouseElementActions dragAndDropFrom(WebElement source) {
         loadElementAndPerform(actions().dragAndDrop(source, element));
@@ -208,7 +208,7 @@ public class MouseElementActions {
      *
      * @param target element to move to and release the mouse at.
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#dragAndDrop(WebElement, WebElement)
+     * @see Actions#dragAndDrop(WebElement, WebElement)
      */
     public MouseElementActions dragAndDropTo(WebElement target) {
         loadElementAndPerform(actions().dragAndDrop(element, target));
@@ -222,7 +222,7 @@ public class MouseElementActions {
      * @param xOffset horizontal move offset.
      * @param yOffset vertical move offset.
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#dragAndDropBy(WebElement, int, int)
+     * @see Actions#dragAndDropBy(WebElement, int, int)
      */
     public MouseElementActions dragAndDropBy(int xOffset, int yOffset) {
         loadElementAndPerform(actions().dragAndDropBy(element, xOffset, yOffset));
@@ -239,7 +239,7 @@ public class MouseElementActions {
      * @param xOffset horizontal move offset.
      * @param yOffset vertical move offset.
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#dragAndDropBy(WebElement, int, int)
+     * @see Actions#dragAndDropBy(WebElement, int, int)
      */
     public MouseElementActions dragAndDropByWithTargetOffset(WebElement target, int xOffset, int yOffset) {
         loadElementAndPerform(actions().clickAndHold(element).moveToElement(target, xOffset, yOffset).release());

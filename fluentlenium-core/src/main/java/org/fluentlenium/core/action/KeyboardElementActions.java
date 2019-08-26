@@ -42,8 +42,8 @@ public class KeyboardElementActions {
      *
      * @return selenium actions
      */
-    private org.openqa.selenium.interactions.Actions actions() {
-        return new org.openqa.selenium.interactions.Actions(driver);
+    private Actions actions() {
+        return new Actions(driver);
     }
 
     /**
@@ -66,7 +66,7 @@ public class KeyboardElementActions {
      *               provided key is none of those, {@link IllegalArgumentException} is thrown.
      * @return this object reference to chain calls
      * @see #keyDown(org.openqa.selenium.Keys)
-     * @see org.openqa.selenium.interactions.Actions#keyDown(WebElement, CharSequence)
+     * @see Actions#keyDown(WebElement, CharSequence)
      */
     public KeyboardElementActions keyDown(Keys theKey) {
         loadElementAndPerform(actions().keyDown(element, theKey));
@@ -79,7 +79,7 @@ public class KeyboardElementActions {
      *
      * @param theKey Either {@link Keys#SHIFT}, {@link Keys#ALT} or {@link Keys#CONTROL}.
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#keyUp(WebElement, CharSequence)
+     * @see Actions#keyUp(WebElement, CharSequence)
      */
     public KeyboardElementActions keyUp(Keys theKey) {
         loadElementAndPerform(actions().keyUp(element, theKey));
@@ -97,7 +97,7 @@ public class KeyboardElementActions {
      *
      * @param keysToSend The keys.
      * @return this object reference to chain calls
-     * @see org.openqa.selenium.interactions.Actions#sendKeys(WebElement, CharSequence...)
+     * @see Actions#sendKeys(WebElement, CharSequence...)
      */
     public KeyboardElementActions sendKeys(CharSequence... keysToSend) {
         loadElementAndPerform(actions().sendKeys(element, keysToSend));
