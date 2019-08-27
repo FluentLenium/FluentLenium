@@ -2,6 +2,12 @@
 
 ## Version 4.x - Java 11 support
 
+### 4.3.1 (Aug 27 2019)
+- [#715](https://github.com/FluentLenium/FluentLenium/issues/715) - Wrap browser performance API with easy to use FL methods
+- [#928](https://github.com/FluentLenium/FluentLenium/issues/928) - Bump TestNG to 7.0.0
+- [#925](https://github.com/FluentLenium/FluentLenium/issues/925) - [BUG] Code get stuck after calling mouse().moveToElement()
+- [#891](https://github.com/FluentLenium/FluentLenium/issues/891) - Update Cucumber references to the new io.cucumber packaging
+
 ### 4.3.0 (Jul 6 2019)
 - [#695](https://github.com/FluentLenium/FluentLenium/issues/695) - Added Appium support for Mobile automation
 - [#803](https://github.com/FluentLenium/FluentLenium/issues/803) - Added getParam() method to FluentPage (parametrised URL in @PageUrl)
@@ -46,6 +52,13 @@
 - Fix for Chrome bug - redirects to 3rd party page stop working when user opens it in the new window or popup
 
 ## Version 3.x - Java 8 support
+
+### 3.9.1 (Aug 27 2019)
+- [#715](https://github.com/FluentLenium/FluentLenium/issues/715) - Wrap browser performance API with easy to use FL methods
+- [#928](https://github.com/FluentLenium/FluentLenium/issues/928) - Bump TestNG to 7.0.0
+- [#925](https://github.com/FluentLenium/FluentLenium/issues/925) - [BUG] Code get stuck after calling mouse().moveToElement()
+- [#891](https://github.com/FluentLenium/FluentLenium/issues/891) - Update Cucumber references to the new io.cucumber packaging
+
 
 ### 3.9.0 (Jul 6 2019)
 - [#695](https://github.com/FluentLenium/FluentLenium/issues/695) - Added Appium support for Mobile automation
