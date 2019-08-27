@@ -29,21 +29,27 @@ public class FluentObjectFactoryTest {
     public void testParentContainerGetInstanceFactory() {
         ParentContainer parentContainer = objectFactory.getInstance(ParentContainer.class);
 
-        assertThat(parentContainer).isInstanceOf(ParentContainer.class);
+        assertThat(parentContainer)
+                .isNotNull()
+                .isInstanceOf(ParentContainer.class);
     }
 
     @Test
     public void testChildContainerGetInstanceFactory() {
         ParentContainer parentContainer = objectFactory.getInstance(ParentContainer.class);
 
-        assertThat(parentContainer.childContainer).isExactlyInstanceOf(ChildContainer.class);
+        assertThat(parentContainer.childContainer)
+                .isNotNull()
+                .isExactlyInstanceOf(ChildContainer.class);
     }
 
     @Test
     public void testElementInjectionInChildContainer() {
         ParentContainer parentContainer = objectFactory.getInstance(ParentContainer.class);
 
-        assertThat(parentContainer.childContainer.element).isExactlyInstanceOf(FluentWebElement.class);
+        assertThat(parentContainer.childContainer.element)
+                .isNotNull()
+                .isExactlyInstanceOf(FluentWebElement.class);
     }
 
     @Test
@@ -60,14 +66,16 @@ public class FluentObjectFactoryTest {
     public void testRecursiveInjection() {
         ParentContainer parentContainer = objectFactory.getInstance(ParentContainer.class);
 
-        assertThat(parentContainer.childContainer.parentContainer).isInstanceOf(ParentContainer.class);
+        assertThat(parentContainer.childContainer.parentContainer)
+                .isInstanceOf(ParentContainer.class);
     }
 
     @Test
     public void testInheritedChildContainer() {
         ParentContainerInherited container = objectFactory.getInstance(ParentContainerInherited.class);
 
-        assertThat(container.childContainer.element).isInstanceOf(FluentWebElement.class);
+        assertThat(container.childContainer.element)
+                .isInstanceOf(FluentWebElement.class);
     }
 
     public static class ChildContainer {

@@ -6,12 +6,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/**
- * Stores and handles {@link SharedWebDriver} instances for test methods and thred ids.
- *
- * @see org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle#THREAD
- * @see SharedWebdriverSingletonImpl
- */
 public class ThreadDriver implements FluentLeniumDriver {
 
     private final Map<ClassAndTestNameWithThreadId, SharedWebDriver> threadDrivers = new HashMap<>();

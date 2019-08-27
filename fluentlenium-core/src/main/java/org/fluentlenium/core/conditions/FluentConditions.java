@@ -87,9 +87,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      */
     @Message("has id=\"{0}\"")
     @NotMessage("does not have id=\"{0}\"")
-    default boolean id(String id) {
-        return id().equalTo(id);
-    }
+    boolean id(String id);
 
     /**
      * Check conditions on this element name.
@@ -107,9 +105,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      */
     @Message("has name=\"{0}\"")
     @NotMessage("does not have name=\"{0}\"")
-    default boolean name(String name) {
-        return name().equalTo(name);
-    }
+    boolean name(String name);
 
     /**
      * Check conditions on this element tagName.
@@ -127,9 +123,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      */
     @Message("has tagName=\"{0}\"")
     @NotMessage("does not have tagName=\"{0}\"")
-    default boolean tagName(String tagName) {
-        return tagName().equalTo(tagName);
-    }
+    boolean tagName(String tagName);
 
     /**
      * Check conditions on this element value.
@@ -147,9 +141,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      */
     @Message("has value=\"{0}\"")
     @NotMessage("does not have value=\"{0}\"")
-    default boolean value(String value) {
-        return value().equalTo(value);
-    }
+    boolean value(String value);
 
     /**
      * Check that this element has the given text.
@@ -160,9 +152,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      */
     @Message("has text=\"{0}\"")
     @NotMessage("does not have text=\"{0}\"")
-    default boolean text(String text) {
-        return text().equalTo(text);
-    }
+    boolean text(String text);
 
     /**
      * Check conditions on this element text.
@@ -181,9 +171,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      */
     @Message("has textContent=\"{0}\"")
     @NotMessage("does not have textContent=\"{0}\"")
-    default boolean textContent(String anotherString) {
-        return textContent().equalTo(anotherString);
-    }
+    boolean textContent(String anotherString);
 
     /**
      * Check conditions on this element text content.
@@ -202,9 +190,7 @@ public interface FluentConditions extends Conditions<FluentWebElement> {
      */
     @Message("has attribute \"{0}\"=\"{1}\"")
     @NotMessage("does not have attribute \"{0}\"=\"{1}\"")
-    default boolean attribute(String name, String value) {
-        return attribute(name).equalTo(value);
-    }
+    boolean attribute(String name, String value);
 
     /**
      * Check conditions on the given attribute the attribute has the given value.
