@@ -3,9 +3,8 @@ package org.fluentlenium.utils;
 import static java.util.Objects.nonNull;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -25,7 +24,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class SeleniumVersionChecker {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SeleniumVersionChecker.class);
+    private static final Logger logger = LoggerFactory.getLogger(SeleniumVersionChecker.class);
 
     static final String FAILED_TO_READ_MESSAGE =
             "FluentLenium wasn't able to read Selenium version from your pom.xml."
@@ -93,7 +92,7 @@ public final class SeleniumVersionChecker {
             }
 
             if (!Objects.equals(resolvedSeleniumVersion, EXPECTED_VERSION)) {
-                LOGGER.warn(WRONG_VERSION_MESSAGE, EXPECTED_VERSION, FL_URL);
+                logger.warn(WRONG_VERSION_MESSAGE, EXPECTED_VERSION, FL_URL);
             }
         }
     }
@@ -165,12 +164,11 @@ public final class SeleniumVersionChecker {
     }
 
     static Model readPom(MavenXpp3Reader reader, String pathToPom) {
-        Model result = null;
         try {
-            result = reader.read(Files.newBufferedReader(Paths.get(pathToPom)));
+            return reader.read(new FileReader(pathToPom));
         } catch (IOException | XmlPullParserException e) {
-            LOGGER.info(FAILED_TO_READ_MESSAGE, EXPECTED_VERSION);
+            logger.info(FAILED_TO_READ_MESSAGE, EXPECTED_VERSION);
+            return null;
         }
-        return result;
     }
 }

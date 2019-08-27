@@ -76,13 +76,15 @@ public class FluentObjectFactory implements ObjectFactory {
     }
 
     private Class<?> checkClassForConfiguration(Class<?> cls) {
-        Class<?> result = null;
         Class superClass = cls.getSuperclass();
         if (superClass != null && superClass.isAnnotationPresent(FluentConfiguration.class)) {
-            result = superClass;
+            return superClass;
+
         } else if (cls.isAnnotationPresent(FluentConfiguration.class)) {
-            result = cls;
+            return cls;
+
+        } else {
+            return null;
         }
-        return result;
     }
 }

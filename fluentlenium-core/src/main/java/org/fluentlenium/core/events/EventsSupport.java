@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
  * EventsSupport can be registered in Selenium {@link org.openqa.selenium.support.events.EventFiringWebDriver} to provide an
  * easier to use events interface.
  */
-@SuppressWarnings("PMD.GodClass")
+@SuppressWarnings({"PMD.GodClass"})
 public class EventsSupport implements EventListener {
 
     private final EventsRegistry eventsRegistry;

@@ -8,17 +8,10 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static org.fluentlenium.utils.Preconditions.checkArgument;
-
 /**
  * Utils class for Url manipulation.
  */
-public final class UrlUtils {
-
-    private static final String PATH_SEPARATOR = "/";
-    private static final String HTTP = "http";
-    private static final String HTTPS = "https";
-
+public final class UrlUtils { // NOPMD CyclomaticComplexity
     private UrlUtils() {
         // Utility class
     }
@@ -31,28 +24,32 @@ public final class UrlUtils {
      * @return Concat URL
      */
     public static String concat(String baseUriSpec, String uriSpec) { // NOPMD CyclomaticComplexity NPathComplexity
-        if (baseUriSpec != null && !baseUriSpec.endsWith(PATH_SEPARATOR)) {
-            baseUriSpec = baseUriSpec + PATH_SEPARATOR;
+        if (baseUriSpec != null && !baseUriSpec.endsWith("/")) {
+            baseUriSpec = baseUriSpec + "/";
         }
-        URI baseUri = uriFromSpec(baseUriSpec);
+        URI baseUri = null;
+        if (baseUriSpec != null) {
+            baseUri = URI.create(baseUriSpec);
+        }
 
-        if (baseUri != null && uriSpec != null && uriSpec.startsWith(PATH_SEPARATOR)) {
+        if (baseUri != null && uriSpec != null && uriSpec.startsWith("/")) {
             uriSpec = uriSpec.substring(1);
         }
 
-        URI uri = uriFromSpec(uriSpec);
+        URI uri = null;
+        if (uriSpec != null) {
+            uri = URI.create(uriSpec);
+        }
 
-        if (baseUri != null) {
-            return uri == null ? baseUri.toString() : baseUri.resolve(uri).toString();
-        } else if (uri != null) {
+        if (baseUri != null && uri != null) { // NOPMD ConfusingTernary
+            return baseUri.resolve(uri).toString();
+        } else if (baseUri != null) { // NOPMD ConfusingTernary
+            return baseUri.toString();
+        } else if (uri != null) { // NOPMD ConfusingTernary
             return uri.toString();
         } else {
             return null;
         }
-    }
-
-    private static URI uriFromSpec(String uriSpec) {
-        return uriSpec == null ? null : URI.create(uriSpec);
     }
 
     /**
@@ -63,29 +60,27 @@ public final class UrlUtils {
      * @return Sanitized base url
      */
     public static String sanitizeBaseUrl(String baseUriSpec, String uriSpec) {
-        if (baseUriSpec != null) {
-            URI baseUri = URI.create(baseUriSpec);
-
-            try {
-                baseUri = ensureScheme(baseUri, HTTP);
-
-                URI uri = uriFromSpec(uriSpec);
-                String scheme = uri == null
-                        || !Objects.equals(baseUri.getAuthority(), uri.getAuthority())
-                        || !Arrays.asList(new String[]{HTTP, HTTPS}).contains(uri.getScheme())
-                        ? baseUri.getScheme()
-                        : uri.getScheme();
-
-                if (!scheme.equals(baseUri.getScheme())) {
-                    return new URIBuilder(baseUri).setScheme(scheme).build().toString();
-                }
-            } catch (URISyntaxException e) {
-                throw new IllegalArgumentException(e.getMessage(), e);
-            }
-
-            return baseUri.toString();
+        if (baseUriSpec == null) {
+            return null;
         }
-        return null;
+
+        URI baseUri = URI.create(baseUriSpec);
+
+        try {
+            baseUri = ensureScheme(baseUri, "http");
+
+            URI uri = uriSpec == null ? null : URI.create(uriSpec);
+            String scheme = uri == null || !Objects.equals(baseUri.getAuthority(), uri.getAuthority()) || !Arrays
+                    .asList(new String[] {"http", "https"}).contains(uri.getScheme()) ? baseUri.getScheme() : uri.getScheme();
+
+            if (!scheme.equals(baseUri.getScheme())) {
+                return new URIBuilder(baseUri).setScheme(scheme).build().toString();
+            }
+        } catch (URISyntaxException e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
+        }
+
+        return baseUri.toString();
     }
 
     /**
@@ -97,15 +92,14 @@ public final class UrlUtils {
      * @throws URISyntaxException if the URI string to build is not a valid URI
      */
     private static URI ensureScheme(URI uri, String defaultScheme) throws URISyntaxException {
-        URI uriWithScheme = uri;
         String fixedBaseUriSpec = uri.toString();
         if (uri.getScheme() == null) {
             while (!fixedBaseUriSpec.startsWith("//")) {
-                fixedBaseUriSpec = PATH_SEPARATOR + fixedBaseUriSpec;
+                fixedBaseUriSpec = "/" + fixedBaseUriSpec;
             }
-            uriWithScheme = new URIBuilder(fixedBaseUriSpec).setScheme(defaultScheme).build();
+            return new URIBuilder(fixedBaseUriSpec).setScheme(defaultScheme).build();
         }
-        return uriWithScheme;
+        return uri;
     }
 
     /**
@@ -116,9 +110,15 @@ public final class UrlUtils {
      * @return the URL String
      */
     public static String getAbsoluteUrlFromFile(String file) {
-        checkArgument(file, "file must not be null");
+        if (file == null) {
+            throw new IllegalArgumentException("file must not be null");
+        }
+
         URL url = ClassLoader.getSystemResource(file);
-        checkArgument(url, "url from file=" + file + " is null");
+        if (url == null) {
+            throw new IllegalArgumentException("url from file=" + file + " is null");
+        }
+
         return url.toString();
     }
 

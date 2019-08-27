@@ -29,12 +29,11 @@ public class SupplierOfInstance<T> implements Supplier<T> {
 
     @Override
     public boolean equals(Object obj) {
-        boolean result = false;
         if (obj instanceof SupplierOfInstance) {
             SupplierOfInstance that = (SupplierOfInstance) obj;
-            result = Objects.equals(instance, that.instance);
+            return Objects.equals(instance, that.instance);
         }
-        return result;
+        return false;
     }
 
     @Override

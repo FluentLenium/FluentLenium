@@ -3,9 +3,6 @@ package org.fluentlenium.utils;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-/**
- * Unit test for {@link UrlUtils}.
- */
 public class UrlUtilsTest {
     @Test
     public void testBaseUrlWithoutTrailingSlash() {

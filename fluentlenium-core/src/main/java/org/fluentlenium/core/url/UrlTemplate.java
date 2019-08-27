@@ -39,13 +39,15 @@ public class UrlTemplate {
             int lastIndex = group.lastIndexOf('/');
 
             String parameterName;
-            String path = null;
+            String path;
             if (lastIndex > -1 && lastIndex < group.length()) {
                 path = group.substring(optional ? 1 : 0, lastIndex + 1);
                 parameterName = group.substring(lastIndex + 1);
             } else if (group.startsWith("?")) {
+                path = null;
                 parameterName = group.substring(1);
             } else {
+                path = null;
                 parameterName = group;
             }
 

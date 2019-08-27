@@ -29,11 +29,11 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class FluentInjectorElementTest {
 
-    private static final FluentWebElement EXISTING_ELEMENT = mock(FluentWebElement.class);
-
     @Mock
     private WebDriver webDriver;
+
     private FluentAdapter fluentAdapter;
+
     private FluentInjector injector;
 
     @Before
@@ -89,6 +89,9 @@ public class FluentInjectorElementTest {
     public static class FluentWebElementContainer {
         private FluentWebElement element;
     }
+
+    @SuppressWarnings("PMD.FieldDeclarationsShouldBeAtStartOfClass")
+    private static final FluentWebElement EXISTING_ELEMENT = mock(FluentWebElement.class);
 
     public static class ExistingFluentWebElementContainer {
         private final FluentWebElement element = EXISTING_ELEMENT;

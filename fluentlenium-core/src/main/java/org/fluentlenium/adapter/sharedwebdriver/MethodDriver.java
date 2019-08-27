@@ -4,12 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/**
- * Stores and handles {@link SharedWebDriver} instances for test methods.
- *
- * @see org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle#METHOD
- * @see SharedWebdriverSingletonImpl
- */
 public class MethodDriver implements FluentLeniumDriver {
 
     private final Map<ClassAndTestName, SharedWebDriver> methodDrivers = new HashMap<>();

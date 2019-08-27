@@ -25,17 +25,17 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean size(int size) {
-        int elementsSize = getElementsSize();
+        int elementsSize;
+        if (elements instanceof FluentList) {
+            elementsSize = ((FluentList) elements).count();
+        } else {
+            elementsSize = elements.size();
+        }
+
         if (negation) {
             return elementsSize != size;
         }
         return elementsSize == size;
-    }
-
-    private int getElementsSize() {
-        return elements instanceof FluentList
-                ? ((FluentList) elements).count()
-                : elements.size();
     }
 
     /**
@@ -82,37 +82,47 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean present() {
-        return verify(input -> input.conditions().present());
+        return verify(input -> input.conditions().present(), false);
     }
 
     @Override
     public boolean clickable() {
-        return verify(input -> input.conditions().clickable());
+        return verify(input -> input.conditions().clickable(), false);
     }
 
     @Override
     public boolean stale() {
-        return verify(input -> input.conditions().stale());
+        return verify(input -> input.conditions().stale(), false);
     }
 
     @Override
     public boolean displayed() {
-        return verify(input -> input.conditions().displayed());
+        return verify(input -> input.conditions().displayed(), false);
     }
 
     @Override
     public boolean enabled() {
-        return verify(input -> input.conditions().enabled());
+        return verify(input -> input.conditions().enabled(), false);
     }
 
     @Override
     public boolean selected() {
-        return verify(input -> input.conditions().selected());
+        return verify(input -> input.conditions().selected(), false);
+    }
+
+    @Override
+    public boolean attribute(String name, String value) {
+        return attribute(name).equalTo(value);
     }
 
     @Override
     public StringConditions attribute(String name) {
         return new StringListConditionsImpl(this, input -> input.attribute(name), input -> input.conditions().attribute(name));
+    }
+
+    @Override
+    public boolean id(String id) {
+        return id().equalTo(id);
     }
 
     @Override
@@ -126,8 +136,18 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
+    public boolean name(String name) {
+        return name().equalTo(name);
+    }
+
+    @Override
     public StringConditions tagName() {
         return new StringListConditionsImpl(this, FluentWebElement::tagName, input -> input.conditions().tagName());
+    }
+
+    @Override
+    public boolean tagName(String tagName) {
+        return tagName().equalTo(tagName);
     }
 
     @Override
@@ -136,13 +156,28 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
     }
 
     @Override
+    public boolean value(String value) {
+        return value().equalTo(value);
+    }
+
+    @Override
     public StringConditions text() {
         return new StringListConditionsImpl(this, FluentWebElement::text, input -> input.conditions().text());
     }
 
     @Override
+    public boolean text(String text) {
+        return text().equalTo(text);
+    }
+
+    @Override
     public StringConditions textContent() {
         return new StringListConditionsImpl(this, FluentWebElement::textContent, input -> input.conditions().textContent());
+    }
+
+    @Override
+    public boolean textContent(String anotherString) {
+        return textContent().equalTo(anotherString);
     }
 
     @Override
@@ -152,6 +187,6 @@ public abstract class AbstractFluentListConditions implements FluentListConditio
 
     @Override
     public boolean className(String className) {
-        return verify(input -> input.conditions().className(className));
+        return verify(input -> input.conditions().className(className), false);
     }
 }
