@@ -31,6 +31,7 @@ org.fluentlenium.core.inject
 org.fluentlenium.core.label
 org.fluentlenium.core.navigation
 org.fluentlenium.core.page
+org.fluentlenium.core.performance
 org.fluentlenium.core.proxy
 org.fluentlenium.core.script
 org.fluentlenium.core.search
