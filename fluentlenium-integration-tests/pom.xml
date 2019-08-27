@@ -5,7 +5,6 @@
         <artifactId>fluentlenium-parent</artifactId>
         <groupId>org.fluentlenium</groupId>
         <version>4.3.1-SNAPSHOT</version>
-        <relativePath>../fluentlenium-parent/pom.xml</relativePath>
     </parent>
     <artifactId>fluentlenium-integration-tests</artifactId>
     <packaging>jar</packaging>
