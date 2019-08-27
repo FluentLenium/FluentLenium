@@ -146,18 +146,18 @@ public class FluentAdapter extends FluentControlImpl {
      * @return boolean
      */
     boolean isIgnoredException(Throwable e) {
-        if (e == null) {
-            return false;
+        boolean isIgnored = false;
+        if (e != null) {
+            Class clazz = e.getClass();
+            do {
+                if (IGNORED_EXCEPTIONS.contains(clazz.getName())) {
+                    isIgnored = true;
+                    break;
+                }
+                clazz = clazz.getSuperclass();
+            } while (clazz != Object.class);
         }
 
-        Class clazz = e.getClass();
-        do {
-            if (IGNORED_EXCEPTIONS.contains(clazz.getName())) {
-                return true;
-            }
-            clazz = clazz.getSuperclass();
-        } while (clazz != Object.class);
-
-        return false;
+        return isIgnored;
     }
 }

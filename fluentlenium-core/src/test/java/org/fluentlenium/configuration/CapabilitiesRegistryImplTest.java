@@ -8,7 +8,10 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CapabilitiesTest {
+/**
+ * Unit test for {@link CapabilitiesRegistryImpl}.
+ */
+public class CapabilitiesRegistryImplTest {
     private CapabilitiesRegistryImpl capabilities;
 
     @Before

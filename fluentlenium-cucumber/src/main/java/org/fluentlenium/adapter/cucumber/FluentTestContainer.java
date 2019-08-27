@@ -8,6 +8,8 @@ import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.inject.DefaultContainerInstantiator;
 import org.fluentlenium.core.inject.FluentInjector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 
@@ -25,6 +27,8 @@ public enum FluentTestContainer {
      * Instance of FluentTestContainer.
      */
     FLUENT_TEST;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FluentTestContainer.class);
 
     private ThreadLocal<FluentAdapter> fluentAdapter;
     private ThreadLocal<FluentControlContainer> controlContainer;
@@ -128,7 +132,7 @@ public enum FluentTestContainer {
                         field.set(obj, instance);
                         field.setAccessible(false);
                     } catch (IllegalAccessException e) {
-                        e.printStackTrace();
+                        LOGGER.warn(Arrays.toString(e.getStackTrace()));
                     }
                 });
     }

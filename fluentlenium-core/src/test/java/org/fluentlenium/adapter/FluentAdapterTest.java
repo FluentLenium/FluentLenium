@@ -5,10 +5,12 @@ import static org.mockito.Mockito.verify;
 
 import org.fluentlenium.configuration.ConfigurationProperties;
 import org.junit.Test;
+import org.junit.internal.AssumptionViolatedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -108,8 +110,7 @@ public class FluentAdapterTest {
             newWebDriver = adapter.newWebDriver();
             newWebDriver2 = adapter.newWebDriver();
 
-            assertThat(newWebDriver).isNotSameAs(newWebDriver2);
-            assertThat(newWebDriver).isInstanceOf(EventFiringWebDriver.class);
+            assertThat(newWebDriver).isNotSameAs(newWebDriver2).isInstanceOf(EventFiringWebDriver.class);
             assertThat(newWebDriver2).isInstanceOf(EventFiringWebDriver.class);
 
             assertThat(((WrapsDriver) newWebDriver).getWrappedDriver()).isInstanceOf(HtmlUnitDriver.class);
@@ -122,6 +123,29 @@ public class FluentAdapterTest {
                 newWebDriver2.quit();
             }
         }
+    }
 
+    @Test
+    public void shouldReturnFalseForIsIgnoredIfThrowableIsNull() {
+        FluentAdapter adapter = new FluentAdapter();
+        adapter.initFluent(webDriver);
+
+        assertThat(adapter.isIgnoredException(null)).isFalse();
+    }
+
+    @Test
+    public void shouldReturnTrueForIsIgnoredIfThrowableIsMarkedForIgnoring() {
+        FluentAdapter adapter = new FluentAdapter();
+        adapter.initFluent(webDriver);
+
+        assertThat(adapter.isIgnoredException(new AssumptionViolatedException("assumption"))).isTrue();
+    }
+
+    @Test
+    public void shouldReturnFalseForIsIgnoredIfThrowableIsThrowable() {
+        FluentAdapter adapter = new FluentAdapter();
+        adapter.initFluent(webDriver);
+
+        assertThat(adapter.isIgnoredException(new NoSuchElementException("reason"))).isFalse();
     }
 }
