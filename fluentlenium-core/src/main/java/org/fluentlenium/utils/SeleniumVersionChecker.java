@@ -39,7 +39,7 @@ public final class SeleniumVersionChecker {
     private static final String SELENIUM_GROUP_ID = "org.seleniumhq.selenium";
     private static final String FL_URL = "https://github.com/FluentLenium/FluentLenium";
     private static final String POM = "pom.xml";
-    private static final String PARENT_MODULE_POM = "../fluentlenium-parent/pom.xml";
+    private static final String PARENT_MODULE_POM = "../pom.xml";
     private static final String VERSION_REGEX = "^\\$\\{.*}$";
 
     private static boolean notifiedAlready;
