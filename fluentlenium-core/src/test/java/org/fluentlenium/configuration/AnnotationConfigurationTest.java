@@ -45,7 +45,7 @@ public class AnnotationConfigurationTest {
     public static class CapabilitiesFactoryClass {
     }
 
-    @FluentConfiguration(capabilities = "https://fluentlenium.com")
+    @FluentConfiguration(capabilities = "vivaldi")
     public static class CapabilitiesInvalidJsonClass {
     }
 
@@ -149,7 +149,6 @@ public class AnnotationConfigurationTest {
 
     @Test
     public void capabilitiesCannotBeConvertedFromJson() {
-        //URL can be read but it is not a valid json
         Assertions.assertThatThrownBy(() -> capabilitiesInvalidJsonConfiguration.getCapabilities())
                 .isInstanceOf(ConfigurationException.class)
                 .hasMessage("Can't convert JSON Capabilities to Object.");
