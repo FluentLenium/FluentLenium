@@ -1,9 +1,7 @@
-package org.fluentlenium.examples.test;
+package org.fluentlenium.examples.test.chromium;
 
 import com.google.common.collect.ImmutableMap;
 import org.fluentlenium.adapter.junit.FluentTest;
-import org.fluentlenium.utils.ChromiumApi;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,14 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class DuckDuckGoChromiumApiTest extends FluentTest {
 
-    private ChromiumApi chromium;
     private Response response;
-
-    @Before
-    public void setUp() {
-        ChromeDriver driver = (ChromeDriver) getDriver();
-        chromium = new ChromiumApi(driver);
-    }
 
     @Override
     public WebDriver newWebDriver() {
@@ -34,10 +25,10 @@ public class DuckDuckGoChromiumApiTest extends FluentTest {
         String searchPhrase = "searchPhrase";
         String duckDuckUrl = "https://duckduckgo.com";
 
-        chromium.sendCommand("Page.navigate", ImmutableMap.of("url", duckDuckUrl));
-        chromium.sendCommand("Input.insertText", ImmutableMap.of("text", searchPhrase));
-        chromium.sendCommand("Input.dispatchKeyEvent", sendEnterKeyEventParams());
-        response = chromium.sendCommandAndGetResponse("Page.getNavigationHistory", ImmutableMap.of());
+        getChromiumApi().sendCommand("Page.navigate", ImmutableMap.of("url", duckDuckUrl));
+        getChromiumApi().sendCommand("Input.insertText", ImmutableMap.of("text", searchPhrase));
+        getChromiumApi().sendCommand("Input.dispatchKeyEvent", sendEnterKeyEventParams());
+        response = getChromiumApi().sendCommandAndGetResponse("Page.getNavigationHistory", ImmutableMap.of());
 
         assertIsPhrasePresentInTheResultsPageUrl(searchPhrase);
     }
@@ -46,7 +37,7 @@ public class DuckDuckGoChromiumApiTest extends FluentTest {
         return ImmutableMap.of("type", "char", "text", "\r");
     }
 
-    public void assertIsPhrasePresentInTheResultsPageUrl(String searchPhrase) {
+    private void assertIsPhrasePresentInTheResultsPageUrl(String searchPhrase) {
         assertThat(response.getValue().toString()).contains(searchPhrase);
     }
 }

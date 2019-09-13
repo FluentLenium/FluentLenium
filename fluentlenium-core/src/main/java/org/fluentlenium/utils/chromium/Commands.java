@@ -1,24 +1,21 @@
-package org.fluentlenium.utils;
-
-import org.openqa.selenium.remote.CommandInfo;
-import org.openqa.selenium.remote.http.HttpMethod;
+package org.fluentlenium.utils.chromium;
 
 public enum Commands {
     /**
      * Send a command to the DevTools API.
      */
     SEND_COMMAND("SEND_COMMAND",
-            new CommandInfo("/session/:sessionId/chromium/send_command", HttpMethod.POST)),
+            "/session/:sessionId/chromium/send_command"),
     /**
      * Send a command to the DevTools API and wait for the response.
      */
     SEND_COMMAND_AND_GET_RESULT("SEND_COMMAND_AND_GET_RESULT",
-            new CommandInfo("/session/:sessionId/chromium/send_command_and_get_result", HttpMethod.POST));
+            "/session/:sessionId/chromium/send_command_and_get_result");
 
     private String cmdName;
-    private CommandInfo cmdInfo;
+    private String cmdInfo;
 
-    Commands(String command, CommandInfo commandInfo) {
+    Commands(String command, String commandInfo) {
         this.cmdName = command;
         this.cmdInfo = commandInfo;
     }
@@ -27,7 +24,7 @@ public enum Commands {
         return cmdName;
     }
 
-    public CommandInfo getCmdInfo() {
+    public String getCmdInfo() {
         return cmdInfo;
     }
 }

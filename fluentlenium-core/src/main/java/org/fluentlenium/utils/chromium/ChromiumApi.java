@@ -1,7 +1,6 @@
-package org.fluentlenium.utils;
+package org.fluentlenium.utils.chromium;
 
 import com.google.common.collect.ImmutableMap;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.Command;
 import org.openqa.selenium.remote.CommandExecutor;
 import org.openqa.selenium.remote.CommandInfo;
@@ -9,6 +8,7 @@ import org.openqa.selenium.remote.HttpCommandExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
 import org.openqa.selenium.remote.Response;
+import org.openqa.selenium.remote.http.HttpMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,8 +16,8 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import static java.util.Objects.requireNonNull;
-import static org.fluentlenium.utils.Commands.SEND_COMMAND;
-import static org.fluentlenium.utils.Commands.SEND_COMMAND_AND_GET_RESULT;
+import static org.fluentlenium.utils.chromium.Commands.SEND_COMMAND;
+import static org.fluentlenium.utils.chromium.Commands.SEND_COMMAND_AND_GET_RESULT;
 
 public class ChromiumApi {
 
@@ -26,23 +26,28 @@ public class ChromiumApi {
 
     public ChromiumApi(RemoteWebDriver remoteWebDriver) {
         requireNonNull(remoteWebDriver, "WebDriver instance must not be null");
-        if (!(remoteWebDriver instanceof ChromeDriver)) {
-            LOGGER.warn("API currently supports only Chrome browser");
+        String browserName = remoteWebDriver.getCapabilities().getBrowserName();
+        if (!"chrome".equalsIgnoreCase(browserName)) {
+            throw new ChromiumApiNotSupportedException("API currently supports only Chrome browser");
         }
         this.remoteWebDriver = remoteWebDriver;
         defineCommandViaReflection();
     }
 
-    public void sendCommand(String commandName, Map<String, ?> params) {
-        Command command = createCommand(commandName, params, SEND_COMMAND.getCmdName());
+    public void sendCommand(String methodName, Map<String, ?> params) {
+        Command command = createCommand(methodName, params, SEND_COMMAND.getCmdName());
         CommandExecutor cmdExecutor = remoteWebDriver.getCommandExecutor();
-        executeCommand(cmdExecutor, command, commandName);
+        executeCommand(cmdExecutor, command, methodName);
     }
 
-    public Response sendCommandAndGetResponse(String commandName, Map<String, ?> params) {
-        Command command = createCommand(commandName, params, SEND_COMMAND_AND_GET_RESULT.getCmdName());
+    public Response sendCommandAndGetResponse(String methodName, Map<String, ?> params) {
+        Command command = createCommand(methodName, params, SEND_COMMAND_AND_GET_RESULT.getCmdName());
         CommandExecutor cmdExecutor = remoteWebDriver.getCommandExecutor();
-        return executeCommand(cmdExecutor, command, commandName);
+        return executeCommand(cmdExecutor, command, methodName);
+    }
+
+    public void deleteAllCookies() {
+        sendCommand("Network.clearBrowserCookies", ImmutableMap.of());
     }
 
     private void defineCommandViaReflection() {
@@ -50,19 +55,20 @@ public class ChromiumApi {
         try {
             defineCmd = HttpCommandExecutor.class.getDeclaredMethod("defineCommand", String.class, CommandInfo.class);
             defineCmd.setAccessible(true);
-            defineCmd.invoke(remoteWebDriver.getCommandExecutor(),
-                    SEND_COMMAND_AND_GET_RESULT.getCmdName(), SEND_COMMAND_AND_GET_RESULT.getCmdInfo());
-            defineCmd.invoke(remoteWebDriver.getCommandExecutor(), SEND_COMMAND.getCmdName(), SEND_COMMAND.getCmdInfo());
+            defineCmd.invoke(remoteWebDriver.getCommandExecutor(), SEND_COMMAND_AND_GET_RESULT.getCmdName(),
+                new CommandInfo(SEND_COMMAND_AND_GET_RESULT.getCmdInfo(), HttpMethod.POST));
+            defineCmd.invoke(remoteWebDriver.getCommandExecutor(), SEND_COMMAND.getCmdName(),
+                new CommandInfo(SEND_COMMAND.getCmdInfo(), HttpMethod.POST));
         } catch (Exception e) {
             LOGGER.error("Failed to define command via reflection");
         }
     }
 
-    private Response executeCommand(CommandExecutor cmdExecutor, Command command, String commandName) {
+    private Response executeCommand(CommandExecutor cmdExecutor, Command command, String methodName) {
         Response response;
         try {
             response = cmdExecutor.execute(command);
-            LOGGER.info("Command {} executed with {} state", commandName, response.getState());
+            LOGGER.info("Command \"{}\" executed with {} state", methodName, response.getState());
             return response;
         } catch (Exception e) {
             LOGGER.error("Failed to execute {} via Chrome API", command.getName());
@@ -70,9 +76,9 @@ public class ChromiumApi {
         }
     }
 
-    private Command createCommand(String commandName, Map<String, ?> commandParams, String endpointName) {
+    private Command createCommand(String methodName, Map<String, ?> commandParams, String endpointName) {
         SessionId sessionId = remoteWebDriver.getSessionId();
-        Map<String, ?> param = ImmutableMap.of("cmd", commandName, "params", commandParams);
+        Map<String, ?> param = ImmutableMap.of("cmd", methodName, "params", commandParams);
         return new Command(sessionId, endpointName, param);
     }
 }
