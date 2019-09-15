@@ -18,6 +18,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 public class FluentAdapter extends FluentControlImpl {
 
     private static final Set<String> IGNORED_EXCEPTIONS = Stream.of(
+            "org.junit.AssumptionViolatedException",
             "org.junit.internal.AssumptionViolatedException",
             "org.testng.SkipException")
             .collect(Collectors.toSet());
