@@ -22,11 +22,13 @@ import org.fluentlenium.core.performance.PerformanceTiming;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWait;
+import org.fluentlenium.utils.chromium.ChromiumApi;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public abstract class FluentControlImpl implements FluentControl {
 
@@ -249,11 +251,15 @@ public abstract class FluentControlImpl implements FluentControl {
         getFluentControl().takeScreenshot(fileName);
     }
 
+    public final ChromiumApi getChromiumApi() {
+        return new ChromiumApi((RemoteWebDriver) getFluentControl().getDriver());
+    }
+
     public FluentList<FluentWebElement> asFluentList(WebElement... elements) {
         return getFluentControl().asFluentList(elements);
     }
 
-    public <P extends org.fluentlenium.core.FluentPage> P goTo(P page) {
+    public <P extends FluentPage> P goTo(P page) {
         return getFluentControl().goTo(page);
     }
 
