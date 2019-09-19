@@ -13,6 +13,7 @@ sidebar:
   Javascript execution: "#javascript-execution"
   Screenshots and HTML dump: "#taking-screenshots-and-html-dumps"
   Alerts: "#alerts"
+  Chromium API: "#chromium-api"
 ---
 
 This section contains description of FluentLenium features which may be useful during writing tests.
@@ -30,6 +31,7 @@ This section contains description of FluentLenium features which may be useful d
 - [Iframe](#iframe)
 - [Alerts](#alerts)
 - [Performance Timing API](#performance-timing-api)
+- [Chromium API](#chromium-api)
 
 
 ## Window actions
@@ -419,6 +421,61 @@ Entering an input value in prompt:
 
 ```java
 alert().prompt("FluentLenium")
+```
+
+## Chromium API
+
+FluentLenium gives you an opportunity to run Chrome DevTools commands in your tests using simple Chromium API.
+
+
+What is Chromium API? 
+
+Chromium API gives you an easy access to the [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/). This was possible by extending commands supported by Selenium with two new endpoints to directly call the DevTools API:
+
+- /session/:sessionId/chromium/send_command_and_get_result
+- /session/:sessionId/chromium/send_comman
+
+It will allow you to easily automate Chrome browser beyond the standard [WebDriver protocol](https://www.w3.org/TR/webdriver/).
+
+
+Why you may want to use it? 
+
+With the DevTool protocol will be able to achieve more powerful interactions with the browser compare to WebDriver. Taking full page screenshot or clearing cookies for every domain are just two examples how you could use it.
+
+
+How to use it?
+
+```java
+  public class DuckDuckGoChromiumApiTest extends FluentTest {
+  
+      private Response response;
+  
+      @Override
+      public WebDriver newWebDriver() {
+          return new ChromeDriver();
+      }
+  
+      @Test
+      public void resultPageUrlShouldContainSearchQueryName() {
+          String searchPhrase = "searchPhrase";
+          String duckDuckUrl = "https://duckduckgo.com";
+  
+          getChromiumApi().sendCommand("Page.navigate", ImmutableMap.of("url", duckDuckUrl));
+          getChromiumApi().sendCommand("Input.insertText", ImmutableMap.of("text", searchPhrase));
+          getChromiumApi().sendCommand("Input.dispatchKeyEvent", sendEnterKeyEventParams());
+          response = getChromiumApi().sendCommandAndGetResponse("Page.getNavigationHistory", ImmutableMap.of());
+  
+          assertIsPhrasePresentInTheResultsPageUrl(searchPhrase);
+      }
+  
+      private Map<String, String> sendEnterKeyEventParams() {
+          return ImmutableMap.of("type", "char", "text", "\r");
+      }
+  
+      private void assertIsPhrasePresentInTheResultsPageUrl(String searchPhrase) {
+          assertThat(response.getValue().toString()).contains(searchPhrase);
+      }
+  }
 ```
 
 ## Performance Timing API
