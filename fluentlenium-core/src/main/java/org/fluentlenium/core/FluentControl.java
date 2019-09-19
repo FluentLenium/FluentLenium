@@ -15,6 +15,7 @@ import org.fluentlenium.core.script.JavascriptControl;
 import org.fluentlenium.core.search.SearchControl;
 import org.fluentlenium.core.snapshot.SnapshotControl;
 import org.fluentlenium.core.wait.AwaitControl;
+import org.fluentlenium.utils.chromium.ChromiumControl;
 
 /**
  * Global control interface for FluentLenium.
@@ -24,6 +25,6 @@ import org.fluentlenium.core.wait.AwaitControl;
 public interface FluentControl
         extends SearchControl<FluentWebElement>, AwaitControl, InputControl, JavascriptControl, AlertControl, SnapshotControl,
         EventsControl, NavigationControl, SeleniumDriverControl, CssControl, FluentInjectControl, ComponentInstantiator,
-        CapabilitiesControl, PerformanceTimingControl, Configuration {
+        CapabilitiesControl, PerformanceTimingControl, Configuration, ChromiumControl {
 
 }
