@@ -15,7 +15,7 @@
     <properties>
         <!-- Configure this property to latest available version -->
         <fluentlenium.version>${project.version}</fluentlenium.version>
-        <spring.version>5.1.9.RELEASE</spring.version>
+        <spring.version>5.2.0.RELEASE</spring.version>
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
         <selenium.version>3.141.59</selenium.version>
     </properties>
