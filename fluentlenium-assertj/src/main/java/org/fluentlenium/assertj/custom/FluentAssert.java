@@ -18,11 +18,35 @@ public interface FluentAssert {
      * assertThat(element).hasText("magnificent");
      * </pre>
      * which passes when the element contains (but is not necessarily exactly equal to) the argument text.
+     * <p>
+     * NOTE: currently both this method and {@link #hasTextContaining(String)} validate text containment.
+     * If you want to validate containment please use {@link #hasTextContaining(String)}, as this method will be updated
+     * in a future release to validate equality of text(s).
      *
      * @param textToFind text to find
      * @return {@code this} assertion object.
      */
     AbstractAssert hasText(String textToFind);
+
+    /**
+     * Checks if the element, or at least one element in a list of elements, contain the text.
+     * <p>
+     * Example:
+     * <p>
+     * For a {@link org.fluentlenium.core.domain.FluentWebElement} it can be:
+     * <pre>
+     * assertThat(element).hasTextContaining("magnificent");
+     * </pre>
+     * which passes when the element contains (but is not necessarily exactly equal to) the argument text.
+     * <p>
+     * NOTE: currently both {@link #hasText(String)} and this method validate text containment. If you want to validate
+     * containment please use this method, as {@link #hasText(String)} will be updated in a future release to validate
+     * equality of text(s).
+     *
+     * @param text text to find
+     * @return {@code this} assertion object.
+     */
+    AbstractAssert hasTextContaining(String text);
 
     /**
      * Checks if the element, or at least one element in a list of elements, matches the given regex.
@@ -49,11 +73,35 @@ public interface FluentAssert {
      * assertThat(element).hasNotText("magnificent");
      * </pre>
      * which passes when the element text doesn't contains (and not when it is not equal to) to the argument text.
+     * <p>
+     * NOTE: currently both this method and {@link #hasNotTextContaining(String)} validate text containment.
+     * If you want to validate containment please use {@link #hasNotTextContaining(String)}, as this method will be updated
+     * in a future release to validate equality of text(s).
      *
      * @param textToFind text to find
      * @return {@code this} assertion object.
      */
     AbstractAssert hasNotText(String textToFind);
+
+    /**
+     * Checks if the element does not contain, or none of the elements in a list of elements contain the text.
+     * <p>
+     * Example:
+     * <p>
+     * For a {@link org.fluentlenium.core.domain.FluentWebElement} it can be:
+     * <pre>
+     * assertThat(element).hasNotText("magnificent");
+     * </pre>
+     * which passes when the element text doesn't contains (and not when it is not equal to) to the argument text.
+     * <p>
+     * NOTE: currently both {@link #hasNotText(String)} and this method validate text containment. If you want to validate
+     * containment please use this method, as {@link #hasNotText(String)} will be updated in a future release to validate
+     * equality of text(s).
+     *
+     * @param textToFind text to find
+     * @return {@code this} assertion object.
+     */
+    AbstractAssert hasNotTextContaining(String textToFind);
 
     /**
      * Checks if the element, or at least one element in a list of elements, has the given id

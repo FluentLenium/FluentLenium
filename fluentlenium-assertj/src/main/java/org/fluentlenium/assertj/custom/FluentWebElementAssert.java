@@ -95,6 +95,16 @@ public class FluentWebElementAssert extends AbstractFluentAssert<FluentWebElemen
     }
 
     @Override
+    public FluentWebElementAssert hasTextContaining(String text) {
+        String actualText = actual.text();
+        if (!actualText.contains(text)) {
+            failWithMessage("The element does not contain the text: " + text
+                + ". Actual text found : " + actualText);
+        }
+        return this;
+    }
+
+    @Override
     public FluentWebElementAssert hasTextMatching(String regexToBeMatched) {
         String actualText = actual.text();
         if (!actualText.matches(regexToBeMatched)) {
@@ -106,6 +116,14 @@ public class FluentWebElementAssert extends AbstractFluentAssert<FluentWebElemen
 
     @Override
     public FluentWebElementAssert hasNotText(String textToFind) {
+        if (actual.text().contains(textToFind)) {
+            failWithMessage("The element contains the text: " + textToFind);
+        }
+        return this;
+    }
+
+    @Override
+    public FluentWebElementAssert hasNotTextContaining(String textToFind) {
         if (actual.text().contains(textToFind)) {
             failWithMessage("The element contains the text: " + textToFind);
         }
