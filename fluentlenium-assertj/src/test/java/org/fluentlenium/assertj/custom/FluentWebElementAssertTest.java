@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 /**
  * Unit test for {@link FluentWebElementAssert}.
  */
-public class FluentWebElementTest {
+public class FluentWebElementAssertTest {
     @Mock
     private FluentWebElement element;
     private FluentWebElementAssert elementAssert;
@@ -354,7 +354,7 @@ public class FluentWebElementTest {
     }
 
     @Test
-    public void testSubstringKo() {
+    public void testHasClassSubstringKo() {
         when(element.attribute("class")).thenReturn("yolokitten");
         assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasClass("yolo"))
                 .hasMessage("The element does not have the class: yolo. Actual class found : yolokitten");
@@ -364,6 +364,12 @@ public class FluentWebElementTest {
     public void testHasTextOk() {
         when(element.text()).thenReturn("There is a 5% increase");
         elementAssert.hasText("There is a 5% increase");
+    }
+
+    @Test
+    public void testHasTextContainingOk() {
+        when(element.text()).thenReturn("There is a 5% increase");
+        elementAssert.hasTextContaining("There is a 5%");
     }
 
     @Test
@@ -394,6 +400,26 @@ public class FluentWebElementTest {
     }
 
     @Test
+    public void testHasNotTextContainingPositive() {
+        when(element.text()).thenReturn("Something");
+        elementAssert.hasNotTextContaining("Text which isn't above");
+    }
+
+    @Test
+    public void testHasNotTextContainingNegative() {
+        when(element.text()).thenReturn("Something written here");
+        assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasNotTextContaining("Something"))
+            .hasMessage("The element contains the text: Something");
+    }
+
+    @Test
+    public void testHasTextContainingWithSpecialCharactersInElement() {
+        String textWithStringFormatError = "%A";
+        when(element.text()).thenReturn(textWithStringFormatError);
+        elementAssert.hasTextContaining(textWithStringFormatError);
+    }
+
+    @Test
     public void testHasTextWithSpecialCharactersInElement() {
         String textWithStringFormatError = "%A";
         when(element.text()).thenReturn(textWithStringFormatError);
@@ -409,6 +435,21 @@ public class FluentWebElementTest {
 
         try {
             elementAssert.hasText(textToFind);
+            fail("Expected assertion error");
+        } catch (AssertionError assertionError) {
+            assertThat(assertionError.getMessage()).contains("Actual text found : " + firstActualText);
+        }
+    }
+
+    @Test
+    public void testHasNoRaceConditionInHasTextContaining() {
+        String textToFind = "someText";
+        String firstActualText = "someOtherText";
+
+        when(element.text()).thenReturn(firstActualText, textToFind);
+
+        try {
+            elementAssert.hasTextContaining(textToFind);
             fail("Expected assertion error");
         } catch (AssertionError assertionError) {
             assertThat(assertionError.getMessage()).contains("Actual text found : " + firstActualText);
