@@ -1,7 +1,7 @@
 package org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.driverperfeature;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
 import net.jcip.annotations.NotThreadSafe;
 import org.junit.runner.RunWith;
 

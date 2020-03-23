@@ -1,11 +1,12 @@
 package org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.getbean.steps;
 
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
+
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
+
 
 public class Hooks extends BaseTest {
-
     @Before
     public void beforeScenario(Scenario scenario) {
         before(scenario);

@@ -1,7 +1,7 @@
 package cucumber.runtime.java.fluentlenium;
 
-import cucumber.api.java.ObjectFactory;
-import cucumber.runtime.CucumberException;
+import io.cucumber.core.backend.ObjectFactory;
+import io.cucumber.core.exception.CucumberException;
 import org.fluentlenium.configuration.FluentConfiguration;
 
 import java.util.HashMap;

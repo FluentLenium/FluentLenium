@@ -1,7 +1,7 @@
 package org.fluentlenium.adapter.cucumber.integration.tests.io.cucumber.multiinheritance.steps;
 
-import cucumber.api.java.en.Then;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.adapter.cucumber.integration.page.LocalPage;

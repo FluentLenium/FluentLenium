@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.java8.steps;
 
-import cucumber.api.java8.En;
+import io.cucumber.java8.En;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.fluentlenium.adapter.cucumber.integration.page.LocalPage;
 import org.fluentlenium.core.annotation.Page;

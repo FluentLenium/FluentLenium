@@ -1,8 +1,8 @@
 package org.fluentlenium.adapter.cucumber.integration.tests.io.cucumber.getbean.steps;
 
-import io.cucumber.core.api.Scenario;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 
 public class Hooks extends BaseTest {
 
