@@ -8,7 +8,7 @@
     </parent>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>4.3.2-SNAPSHOT</version>
+    <version>4.4.0</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -38,7 +38,7 @@
         <url>https://github.com/FluentLenium/FluentLenium</url>
         <connection>scm:git:https://github.com/FluentLenium/FluentLenium.git</connection>
         <developerConnection>scm:git:https://github.com/FluentLenium/FluentLenium.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v4.4.0</tag>
     </scm>
 
     <licenses>
@@ -331,7 +331,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
@@ -410,9 +410,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <additionalJOption>--no-module-directories</additionalJOption>
-                </configuration>
                 <executions>
                     <execution>
                         <id>aggregate</id>

@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>4.3.2-SNAPSHOT</version>
+        <version>4.4.0</version>
     </parent>
     <artifactId>fluentlenium-core</artifactId>
     <packaging>jar</packaging>
