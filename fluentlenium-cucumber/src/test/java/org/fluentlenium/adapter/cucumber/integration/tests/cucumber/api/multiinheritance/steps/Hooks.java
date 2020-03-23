@@ -1,8 +1,8 @@
 package org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.multiinheritance.steps;
 
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 
 public class Hooks extends FluentCucumberTest {

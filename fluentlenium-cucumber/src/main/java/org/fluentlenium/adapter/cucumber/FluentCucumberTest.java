@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.cucumber;
 
-import cucumber.api.Scenario;
+import io.cucumber.java8.Scenario;
 import org.fluentlenium.utils.SeleniumVersionChecker;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.FluentTestRunnerAdapter;
@@ -52,20 +52,9 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * Initialization of FluentCucumberTestAdapter
      *
      * @param scenario Cucumber scenario
-     * @deprecated when migrating to new Cucumber package structure, use {@link #before(io.cucumber.core.api.Scenario)}
+     * @deprecated when migrating to new Cucumber package structure, use {@link #before(io.cucumber.java8.Scenario)}
      */
-    @Deprecated
     public void before(Scenario scenario) {
-        SeleniumVersionChecker.checkSeleniumVersion();
-        starting(scenario.getName());
-    }
-
-    /**
-     * Initialization of FluentCucumberTestAdapter
-     *
-     * @param scenario Cucumber scenario
-     */
-    public void before(io.cucumber.core.api.Scenario scenario) {
         SeleniumVersionChecker.checkSeleniumVersion();
         starting(scenario.getName());
     }
@@ -74,9 +63,8 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * Stopping of FluentCucumberTest adapter
      *
      * @param scenario Cucumber scenario
-     * @deprecated when migrating to new Cucumber package structure, use {@link #after(io.cucumber.core.api.Scenario)}
+     * @deprecated when migrating to new Cucumber package structure, use {@link #after(io.cucumber.java8.Scenario)}
      */
-    @Deprecated
     public void after(Scenario scenario) {
         if (scenario.isFailed()) {
             failed(scenario.getName());
@@ -85,11 +73,25 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
     }
 
     /**
+     * Initialization of FluentCucumberTestAdapter
+     *
+     * @param scenario Cucumber scenario
+     * @deprecated when migrating to new Cucumber package structure, use {@link #before(io.cucumber.java.Scenario)}
+     */
+    @Deprecated
+    public void before(io.cucumber.java.Scenario scenario) {
+        SeleniumVersionChecker.checkSeleniumVersion();
+        starting(scenario.getName());
+    }
+
+    /**
      * Stopping of FluentCucumberTest adapter
      *
      * @param scenario Cucumber scenario
+     * @deprecated when migrating to new Cucumber package structure, use {@link #after(io.cucumber.java.Scenario)}
      */
-    public void after(io.cucumber.core.api.Scenario scenario) {
+    @Deprecated
+    public void after(io.cucumber.java.Scenario scenario) {
         if (scenario.isFailed()) {
             failed(scenario.getName());
         }

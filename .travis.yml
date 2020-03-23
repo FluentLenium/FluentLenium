@@ -1,3 +1,5 @@
+language: java
+
 jobs:
   allow_failures:
     - stage: e2e
