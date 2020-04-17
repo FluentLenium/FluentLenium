@@ -95,6 +95,12 @@ public class FluentWebElementTest {
     }
 
     @Test
+    public void testHoverOver() {
+        fluentElement.hoverOver();
+        verify(mouse).mouseMove(any());
+    }
+
+    @Test
     public void testAxes() {
         fluentElement.dom().parent();
     }

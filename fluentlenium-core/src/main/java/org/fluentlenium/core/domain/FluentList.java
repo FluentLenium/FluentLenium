@@ -108,6 +108,12 @@ public interface FluentList<E extends FluentWebElement>
     @Override
     FluentList<E> submit();
 
+    @Override
+    default FluentList<E> hoverOver() {
+        throw new UnsupportedOperationException("Hovering over a list of elements is not supported."
+                + "It is supported only for single elements.");
+    }
+
     /**
      * Return the value of elements on the list
      *
