@@ -58,8 +58,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * <p>
      * It also performs a Selenium version check to make sure a compatible version is used in the user's project.
      *
-     * @param scenario Cucumber scenario
-     * @deprecated when migrating to new Cucumber package structure, use {@link #before(io.cucumber.java8.Scenario)}
+     * @param scenario the Java8 Cucumber scenario
      */
     public void before(Scenario scenario) {
         SeleniumVersionChecker.checkSeleniumVersion();
@@ -70,8 +69,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * Stops this adapter, and marks the provided scenario as finished, and also as failed, if necessary,
      * according to its status.
      *
-     * @param scenario Cucumber scenario
-     * @deprecated when migrating to new Cucumber package structure, use {@link #after(io.cucumber.java8.Scenario)}
+     * @param scenario the Java8 Cucumber scenario
      */
     public void after(Scenario scenario) {
         if (scenario.isFailed()) {
@@ -86,9 +84,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * It also performs a Selenium version check to make sure a compatible version is used in the user's project.
      *
      * @param scenario Cucumber scenario
-     * @deprecated when migrating to new Cucumber package structure, use {@link #before(io.cucumber.java.Scenario)}
      */
-    @Deprecated
     public void before(io.cucumber.java.Scenario scenario) {
         SeleniumVersionChecker.checkSeleniumVersion();
         starting(scenario.getName());
@@ -99,9 +95,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      * according to its status.
      *
      * @param scenario Cucumber scenario
-     * @deprecated when migrating to new Cucumber package structure, use {@link #after(io.cucumber.java.Scenario)}
      */
-    @Deprecated
     public void after(io.cucumber.java.Scenario scenario) {
         if (scenario.isFailed()) {
             failed(scenario.getName());
