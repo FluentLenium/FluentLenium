@@ -6,8 +6,6 @@ import org.fluentlenium.configuration.FluentConfiguration;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 import static java.util.Objects.nonNull;
 import static org.fluentlenium.adapter.cucumber.FluentTestContainer.FLUENT_TEST;
