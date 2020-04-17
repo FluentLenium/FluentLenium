@@ -244,8 +244,7 @@ public class EventsTest {
         EventListener otherListener = mock(EventListener.class);
 
         assertThat(new EventAdapter(listener, instantiator)).isEqualTo(new EventAdapter(listener, instantiator));
-        assertThat(new EventAdapter(listener, instantiator).hashCode())
-                .isEqualTo(new EventAdapter(listener, instantiator).hashCode());
+        assertThat(new EventAdapter(listener, instantiator)).hasSameHashCodeAs(new EventAdapter(listener, instantiator));
 
         assertThat(new EventAdapter(listener, instantiator))
                 .isNotEqualTo(new EventAdapter(otherListener, instantiator));

@@ -312,7 +312,7 @@ public class FluentListImplTest {
     public void shouldClearList() {
         list.clearList();
 
-        assertThat(((FluentListImpl<FluentWebElement>) list).getList()).hasSize(0);
+        assertThat(((FluentListImpl<FluentWebElement>) list).getList()).isEmpty();
     }
 
     @Test

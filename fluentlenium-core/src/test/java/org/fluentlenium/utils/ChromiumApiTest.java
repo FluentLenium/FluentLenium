@@ -46,7 +46,7 @@ public class ChromiumApiTest {
     @Test
     public void shouldReturnSessionIdWhenSendCommandAndGetResponseIsCalled() {
         Response response = chromiumApi.sendCommandAndGetResponse("", ImmutableMap.of());
-        assertThat(sessionId.toString()).isEqualTo(response.getSessionId());
+        assertThat(sessionId).hasToString(response.getSessionId());
     }
 
     @Test

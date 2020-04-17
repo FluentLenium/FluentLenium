@@ -94,7 +94,7 @@ public class FluentPageUrlTemplateTest {
         ParsedUrlTemplate parsedUrl = fluentPage.parseUrl();
 
         assertThat(parsedUrl.matches()).isTrue();
-        assertThat(parsedUrl.parameters().size()).isEqualTo(2);
+        assertThat(parsedUrl.parameters()).hasSize(2);
         assertThat(parsedUrl.parameters().keySet()).containsExactly("param1", "param2");
         assertThat(parsedUrl.parameters().values()).containsExactly("test1", "test2");
     }
@@ -105,7 +105,7 @@ public class FluentPageUrlTemplateTest {
         ParsedUrlTemplate parsedUrl = fluentPage2.parseUrl();
 
         assertThat(parsedUrl.matches()).isTrue();
-        assertThat(parsedUrl.parameters().size()).isEqualTo(2);
+        assertThat(parsedUrl.parameters()).hasSize(2);
         assertThat(parsedUrl.parameters().keySet()).containsExactly("param1", "param2");
         assertThat(parsedUrl.parameters().values()).containsExactly("test1", "test2");
     }
@@ -116,7 +116,7 @@ public class FluentPageUrlTemplateTest {
         ParsedUrlTemplate parsedUrl = fluentPage.parseUrl();
 
         assertThat(parsedUrl.matches()).isTrue();
-        assertThat(parsedUrl.parameters().size()).isEqualTo(2);
+        assertThat(parsedUrl.parameters()).hasSize(2);
         assertThat(parsedUrl.parameters().keySet()).containsExactly("param1", "param2");
         assertThat(parsedUrl.parameters().values()).containsExactly("test1", "test2");
 

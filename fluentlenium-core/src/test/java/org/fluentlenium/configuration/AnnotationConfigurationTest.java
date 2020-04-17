@@ -239,7 +239,7 @@ public class AnnotationConfigurationTest {
         Assertions.assertThat(noConfiguration.getEventsEnabled()).isNull();
         Assertions.assertThat(defaultConfiguration.getEventsEnabled()).isNull();
 
-        Assertions.assertThat(configuration.getEventsEnabled()).isEqualTo(false);
+        Assertions.assertThat(configuration.getEventsEnabled()).isFalse();
     }
 
     @Test
