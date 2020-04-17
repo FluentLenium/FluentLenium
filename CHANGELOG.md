@@ -2,6 +2,15 @@
 
 ## Version 4.x - Java 11 support
 
+### 4.4.1 (Mar 23 2020)
+
+Dependencies update and changes to update Cucumber to the 5.5 version
+
+- Cucumber 5.5
+- Selenium 3.141.59
+- Spring 5.2.4.RELEASE
+- And others smaller libs embedded in the project
+
 ### 4.3.1 (Aug 27 2019)
 - [#715](https://github.com/FluentLenium/FluentLenium/issues/715) - Wrap browser performance API with easy to use FL methods
 - [#928](https://github.com/FluentLenium/FluentLenium/issues/928) - Bump TestNG to 7.0.0
