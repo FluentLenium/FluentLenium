@@ -34,12 +34,10 @@ public class FluentObjectFactory implements ObjectFactory {
     public void start() {
         if (nonNull(configClass)) {
             setConfigClass(configClass);
-            FLUENT_TEST.instance();
-
         } else {
             setConfigClass(null);
-            FLUENT_TEST.instance();
         }
+        FLUENT_TEST.instance();
     }
 
     @Override
