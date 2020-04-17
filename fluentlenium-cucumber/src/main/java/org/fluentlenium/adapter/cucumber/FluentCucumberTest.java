@@ -11,17 +11,22 @@ import static org.fluentlenium.adapter.cucumber.FluentTestContainer.FLUENT_TEST;
 /**
  * Cucumber FluentLenium Test Runner Adapter.
  * <p>
- * Extends this class to provide FluentLenium support to your Cucumber Test class.
+ * Extend this class to provide FluentLenium support to your Cucumber Test class. It can be each individual step
+ * definitions class, or a base step defs class which is then further extended.
+ * <p>
+ * This class should also be extended by the the class that is for defining the Cucumber Before and After hooks.
+ * <p>
+ * See <a href="https://fluentlenium.com/docs/test-runners/#cucumber">Cucumber Test Runner</a> documentation for
+ * additional examples.
  */
 public class FluentCucumberTest extends FluentTestRunnerAdapter {
 
     /**
-     * Initializes context for {@link FluentCucumberTest} and store it in container at
+     * Initializes context for {@link FluentCucumberTest} and stores it in a
      * {@link FluentTestContainer} to share state across Cucumber steps.
      */
     public FluentCucumberTest() {
         this(FLUENT_TEST.getControlContainer(), FLUENT_TEST.getSharedMutator());
-
         FLUENT_TEST.instantiatePages(this);
     }
 
@@ -49,7 +54,9 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
     }
 
     /**
-     * Initialization of FluentCucumberTestAdapter
+     * Initializes this adapter with the provided Scenario.
+     * <p>
+     * It also performs a Selenium version check to make sure a compatible version is used in the user's project.
      *
      * @param scenario Cucumber scenario
      * @deprecated when migrating to new Cucumber package structure, use {@link #before(io.cucumber.java8.Scenario)}
@@ -60,7 +67,8 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
     }
 
     /**
-     * Stopping of FluentCucumberTest adapter
+     * Stops this adapter, and marks the provided scenario as finished, and also as failed, if necessary,
+     * according to its status.
      *
      * @param scenario Cucumber scenario
      * @deprecated when migrating to new Cucumber package structure, use {@link #after(io.cucumber.java8.Scenario)}
@@ -73,7 +81,9 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
     }
 
     /**
-     * Initialization of FluentCucumberTestAdapter
+     * Initializes this adapter with the provided Scenario.
+     * <p>
+     * It also performs a Selenium version check to make sure a compatible version is used in the user's project.
      *
      * @param scenario Cucumber scenario
      * @deprecated when migrating to new Cucumber package structure, use {@link #before(io.cucumber.java.Scenario)}
@@ -85,7 +95,8 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
     }
 
     /**
-     * Stopping of FluentCucumberTest adapter
+     * Stops this adapter, and marks the provided scenario as finished, and also as failed, if necessary,
+     * according to its status.
      *
      * @param scenario Cucumber scenario
      * @deprecated when migrating to new Cucumber package structure, use {@link #after(io.cucumber.java.Scenario)}
