@@ -55,9 +55,9 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
                 .isExactlyInstanceOf(TimeoutException.class);
 
         first.now();
-        assertThat(first)
-                .hasToString("By.cssSelector: #disabled (first) (<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
-                + "disabled=\"disabled\" />)");
+        assertThat(first).hasToString(
+                "By.cssSelector: #disabled (first) (<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
+                        + "disabled=\"disabled\" />)");
 
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Element By.cssSelector: #disabled (first) (<input id=\"disabled\" type=\"checkbox\""
@@ -75,9 +75,9 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
                 .isExactlyInstanceOf(TimeoutException.class);
 
         first.now();
-        assertThat(first)
-                .hasToString("By.cssSelector: #disabled (first) (<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
-                + "disabled=\"disabled\" />)");
+        assertThat(first).hasToString(
+                "By.cssSelector: #disabled (first) (<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
+                        + "disabled=\"disabled\" />)");
 
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Element By.cssSelector: #disabled (first) (<input id=\"disabled\" type=\"checkbox\""
@@ -95,9 +95,9 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
                 .isExactlyInstanceOf(TimeoutException.class);
 
         first.now();
-        assertThat(first)
-                .hasToString("FluentWaitMessageTest.disabledDefaultLabel (<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
-                + "disabled=\"disabled\" />)");
+        assertThat(first).hasToString(
+                "FluentWaitMessageTest.disabledDefaultLabel (<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
+                        + "disabled=\"disabled\" />)");
 
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Element FluentWaitMessageTest.disabledDefaultLabel (<input id=\"disabled\" "
@@ -135,8 +135,9 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
                 .isExactlyInstanceOf(TimeoutException.class);
 
         list.now();
-        assertThat(list)
-                .hasToString("By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />])");
+        assertThat(list).hasToString(
+                "By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
+                        + "disabled=\"disabled\" />])");
 
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Elements By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" "
@@ -155,8 +156,9 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
                 .isExactlyInstanceOf(TimeoutException.class);
 
         list.now();
-        assertThat(list)
-                .hasToString("By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />])");
+        assertThat(list).hasToString(
+                "By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" " +
+                        "disabled=\"disabled\" />])");
 
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Elements By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" "
@@ -175,9 +177,9 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
                         + "enabled").isExactlyInstanceOf(TimeoutException.class);
 
         list.now();
-        assertThat(list)
-                .hasToString("FluentWaitMessageTest.disabledDefaultLabelList ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
-                + "disabled=\"disabled\" />])");
+        assertThat(list).hasToString(
+                "FluentWaitMessageTest.disabledDefaultLabelList ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
+                        + "disabled=\"disabled\" />])");
 
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Elements FluentWaitMessageTest.disabledDefaultLabelList ([<input id=\"disabled\" "
@@ -197,8 +199,8 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
                 .isExactlyInstanceOf(TimeoutException.class);
 
         list.now();
-        assertThat(list)
-                .hasToString("custom [hint] ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />])");
+        assertThat(list).hasToString(
+                "custom [hint] ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />])");
 
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Elements custom [hint] ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
