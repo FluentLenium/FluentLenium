@@ -157,8 +157,8 @@ public class FluentWaitMessageTest extends IntegrationFluentTest {
 
         list.now();
         assertThat(list).hasToString(
-                "By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" " +
-                        "disabled=\"disabled\" />])");
+                "By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
+                        + "disabled=\"disabled\" />])");
 
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Elements By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" "
