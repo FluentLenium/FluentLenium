@@ -145,7 +145,7 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
         try {
             $(by).first().now();
         } catch (TimeoutException | NoSuchElementException | StaleElementReferenceException e) {
-            throw new AssertionError("Element [" + by + "] not found for page " + getClass().getName(), e);
+            throw new AssertionError("@FindBy element not found for page " + getClass().getName(), e);
         }
     }
 
