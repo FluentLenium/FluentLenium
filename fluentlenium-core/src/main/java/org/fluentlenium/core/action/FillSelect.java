@@ -9,23 +9,26 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import java.util.function.Consumer;
 
 /**
- * Select form filling features.
+ * Provides functionality to select values in {@code <select>} elements.
+ * <p>
+ * Documentation can also be found at the FluentLenium website at
+ * <a href="https://fluentlenium.com/docs/locators/#filling-forms">Locators / Filling Forms</a>.
  *
  * @param <E> type of element to fill
  */
 public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
 
     /**
-     * Creates a new fill, from a list of element.
+     * Creates a new fill from a list of elements.
      *
-     * @param list list of element to fill
+     * @param list list of elements to fill
      */
     public FillSelect(FluentList<E> list) {
         super(list);
     }
 
     /**
-     * Creates a new fill, from a single element.
+     * Creates a new fill from a single element.
      *
      * @param element element to fill
      */
@@ -33,6 +36,10 @@ public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
         super(element);
     }
 
+    /**
+     * Excludes elements that don't have a tag name or their tag name is not {@code select},
+     * so that elements with only {@code select} tags are tried to be filled.
+     */
     @Override
     protected FluentList<E> getElements() {
         FluentList<E> elements = super.getElements();
@@ -41,10 +48,11 @@ public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
     }
 
     /**
-     * Select the option by its index for the Select element.
+     * Select an option by its index for the Select element.
      *
      * @param index the select index value
-     * @return fill select constructor
+     * @return this FillSelect instance
+     * @throws NoSuchElementException if no select element is found
      */
     public FillSelect withIndex(int index) {
         boolean noSuchElement = true;
@@ -67,8 +75,9 @@ public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
     /**
      * Select all options that have a value matching the argument for the Select element.
      *
-     * @param value the select matching string
-     * @return fill select constructor
+     * @param value the value to select by
+     * @return this FillSelect instance
+     * @throws NoSuchElementException if no select element is found
      */
     public FillSelect withValue(String value) {
         return doSelect(select -> select.selectByValue(value));
@@ -77,8 +86,9 @@ public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
     /**
      * Select all options that display text matching the argument for the Select element.
      *
-     * @param text the select string part
-     * @return fill select constructor
+     * @param text the visible text to select by
+     * @return this FillSelect instance
+     * @throws NoSuchElementException if no select element is found
      */
     public FillSelect withText(String text) {
         return doSelect(select -> select.selectByVisibleText(text));
@@ -87,7 +97,7 @@ public class FillSelect<E extends FluentWebElement> extends BaseFill<E> {
     private FillSelect doSelect(Consumer<Select> elementSelector) {
         FluentList<E> elements = getElements();
 
-        if (elements.size() == 0) {
+        if (elements.isEmpty()) {
             throw new NoSuchElementException("No select element found");
         }
 
