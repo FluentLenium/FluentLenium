@@ -3,15 +3,15 @@ package org.fluentlenium.core;
 import org.fluentlenium.core.url.ParsedUrlTemplate;
 
 /**
- * Control a Page Object.
+ * Provides controls for a Page Object.
  *
  * @see FluentPage
  */
 public interface FluentPageControl extends FluentControl {
 
     /**
-     * URL of the page
-     * It can contains mandatory parameters <code>{param}</code> and optional parameters <code>{param1}</code>
+     * Gets the URL of the page.
+     * It can contain mandatory parameters <code>{param}</code> and optional parameters <code>{?param1}</code>.
      *
      * @return page URL
      */

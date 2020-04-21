@@ -12,8 +12,7 @@ import org.openqa.selenium.TimeoutException;
 
 import java.util.Optional;
 
-import static org.fluentlenium.utils.Preconditions.checkArgumentBlank;
-import static org.fluentlenium.utils.Preconditions.checkState;
+import static org.fluentlenium.utils.Preconditions.*;
 import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 
 /**
@@ -21,6 +20,11 @@ import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
  * <p>
  * Extend this class and use @{@link PageUrl} and @{@link org.openqa.selenium.support.FindBy} annotations to provide
  * injectable Page Objects to FluentLenium.
+ * <p>
+ * Your page object class has to extend this class only when you use the {@code @PageUrl} annotation as well.
+ * <p>
+ * A subclass of {@code FluentPage} may also be annotated with one of Selenium's {@code @Find...} annotation to give an
+ * identifier for this page. See {@link #isAt()} and {@link #isAtUsingSelector(By)}.
  */
 public class FluentPage extends DefaultFluentContainer implements FluentPageControl {
 
@@ -110,22 +114,19 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
     }
 
     /**
-     * URL matching implementation for isAt().
+     * URL-matching implementation for isAt().
+     * Validates whether the page, determined by the argument URL template, is loaded.
      * <p>
-     * If there is a {@link PageUrl} annotation applied on the class and it has the {@code file} attribute defined this method
-     * will skip the url parsing to skip URL check because it is not able to get local file path relatively.
+     * If there is a {@link PageUrl} annotation applied on the class and it has the {@code file} attribute defined,
+     * this method will skip the url parsing to skip URL check because it is not able to get local file path relatively.
      *
-     * @param urlTemplate URL Template
+     * @param urlTemplate URL Template, must be non-null
      * @throws AssertionError when the current URL doesn't match the expected page URL
      */
     public void isAtUsingUrl(String urlTemplate) {
         if (!isLocalFile(getPageUrlAnnotation())) {
-            UrlTemplate template = new UrlTemplate(urlTemplate);
-
             String url = url();
-            ParsedUrlTemplate parse = template.parse(url);
-
-            if (!parse.matches()) {
+            if (new UrlTemplate(urlTemplate).parse(url).matches()) {
                 throw new AssertionError(
                         String.format("Current URL [%s] doesn't match expected Page URL [%s]", url, urlTemplate));
             }
@@ -133,16 +134,16 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
     }
 
     /**
-     * Selector matching implementation for isAt().
+     * Validates whether the page, determined by the argument {@link By} object, is loaded.
      *
-     * @param by by selector
+     * @param by by selector, must be non-null
      * @throws AssertionError if the element using the argument By is not found for the current page
      */
     public void isAtUsingSelector(By by) {
         try {
             $(by).first().now();
         } catch (TimeoutException | NoSuchElementException | StaleElementReferenceException e) {
-            throw new AssertionError("@FindBy element not found for page " + getClass().getName(), e);
+            throw new AssertionError("Element [" + by + "] not found for page " + getClass().getName(), e);
         }
     }
 
