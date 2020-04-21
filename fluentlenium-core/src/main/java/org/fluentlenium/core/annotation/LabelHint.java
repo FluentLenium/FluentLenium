@@ -6,8 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Using this annotation, the value of {@code toString()} method of the injected object will be extended with the list of hints
- * provided to the annotation.
+ * Using this annotation, the value of {@code toString()} method of the injected object will be
+ * extended with the list of hints provided to the annotation.
  * <p>
  * Examples:
  * <pre>
@@ -41,8 +41,8 @@ import java.lang.annotation.Target;
  * <p>
  * This annotation is independent from the {@link Label} annotation. Each one can be used without the other.
  * <p>
- * Defining a label hint can also be done inline on an a {@code FluentWebElement} or {@code FluentList} by calling the {@code withLabelHint()}
- * method on it.
+ * Defining a label hint can also be done inline on an a {@code FluentWebElement} or {@code FluentList}
+ * by calling the {@code withLabelHint()} method on it.
  *
  * @see org.fluentlenium.core.inject.LabelAnnotations
  * @see org.fluentlenium.core.label.FluentLabelImpl

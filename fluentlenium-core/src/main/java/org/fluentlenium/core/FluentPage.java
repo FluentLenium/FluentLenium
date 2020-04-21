@@ -12,7 +12,8 @@ import org.openqa.selenium.TimeoutException;
 
 import java.util.Optional;
 
-import static org.fluentlenium.utils.Preconditions.*;
+import static org.fluentlenium.utils.Preconditions.checkArgumentBlank;
+import static org.fluentlenium.utils.Preconditions.checkState;
 import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 
 /**

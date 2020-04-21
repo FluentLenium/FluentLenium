@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * <p>
  * By default the injected element's original {@code toString()} value is returned but with
  * having the {@code @Label} annotation with different configurations that toString value can
- * be overridden. Using it can provide more meaningful error messages during test executuon and debugging.
+ * be overridden. Using it can provide more meaningful error messages during test execution and debugging.
  * <p>
  * {@code FluentWebElement} Examples:
  * <pre>
@@ -54,8 +54,8 @@ import java.lang.annotation.Target;
  * <p>
  * This annotation is independent from the {@link LabelHint} annotation. Each one can be used without the other.
  * <p>
- * Defining a label can also be done inline on an a {@code FluentWebElement} or {@code FluentList} by calling the {@code withLabel()}
- * method on it.
+ * Defining a label can also be done inline on an a {@code FluentWebElement} or {@code FluentList}
+ * by calling the {@code withLabel()} method on it.
  *
  * @see org.fluentlenium.core.inject.LabelAnnotations
  * @see org.fluentlenium.core.label.FluentLabelImpl
