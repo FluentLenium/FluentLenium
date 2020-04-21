@@ -125,8 +125,10 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
      */
     public void isAtUsingUrl(String urlTemplate) {
         if (!isLocalFile(getPageUrlAnnotation())) {
+            UrlTemplate template = new UrlTemplate(urlTemplate);
             String url = url();
-            if (new UrlTemplate(urlTemplate).parse(url).matches()) {
+            ParsedUrlTemplate parse = template.parse(url);
+            if (!parse.matches()) {
                 throw new AssertionError(
                         String.format("Current URL [%s] doesn't match expected Page URL [%s]", url, urlTemplate));
             }
