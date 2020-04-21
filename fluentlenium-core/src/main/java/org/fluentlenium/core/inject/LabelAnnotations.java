@@ -35,17 +35,15 @@ public class LabelAnnotations implements FluentLabelProvider {
      * @param field field to parse
      */
     public LabelAnnotations(Field field) {
-        Label labelAnno = field.getAnnotation(Label.class);
-        if (labelAnno != null) {
-            label = labelAnno.value();
+        if (field.isAnnotationPresent(Label.class)) {
+            label = field.getAnnotation(Label.class).value();
             if (label.isEmpty()) {
                 label = field.getDeclaringClass().getSimpleName() + "." + field.getName();
             }
         }
 
-        LabelHint labelHint = field.getAnnotation(LabelHint.class);
-        if (labelHint != null) {
-            labelHints = labelHint.value();
+        if (field.isAnnotationPresent(LabelHint.class)) {
+            labelHints = field.getAnnotation(LabelHint.class).value();
         }
     }
 
