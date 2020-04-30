@@ -255,7 +255,7 @@
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.10.8</version>
+                <version>1.10.10</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
