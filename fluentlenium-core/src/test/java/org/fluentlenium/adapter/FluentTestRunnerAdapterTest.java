@@ -1,7 +1,7 @@
 package org.fluentlenium.adapter;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
-import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
@@ -19,7 +19,6 @@ import java.util.Random;
 import org.apache.commons.io.FileUtils;
 import org.fluentlenium.configuration.ConfigurationProperties;
 import org.junit.AssumptionViolatedException;
-import org.fluentlenium.utils.ImageUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -32,9 +31,6 @@ import org.openqa.selenium.WebDriver;
 public class FluentTestRunnerAdapterTest {
     @Mock
     private TestWebDriver driver;
-
-    @Mock
-    private ImageUtils imageUtils;
 
     private interface TestWebDriver extends WebDriver, TakesScreenshot {
     }
@@ -127,7 +123,7 @@ public class FluentTestRunnerAdapterTest {
         } catch (IllegalStateException ex) {
             verify(adapter, times(1)).takeHtmlDump();
             verify(adapter, times(1)).getDriver();
-            assertEquals("FluentControl is not initialized, WebDriver or Configuration issue", ex.getMessage());
+            assertThat(ex.getMessage()).isEqualTo("FluentControl is not initialized, WebDriver or Configuration issue");
             throw ex;
         }
 

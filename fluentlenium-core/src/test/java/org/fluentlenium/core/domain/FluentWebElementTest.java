@@ -316,7 +316,7 @@ public class FluentWebElementTest {
         assertThatThrownBy(() -> fluentElement.el(".other").now()).isInstanceOf(NoSuchElementException.class);
 
         assertThat(fluentElement.el(By.cssSelector(".other")).present()).isFalse();
-        assertThat(fluentElement.el(By.cssSelector(".other")).optional().isPresent()).isFalse();
+        assertThat(fluentElement.el(By.cssSelector(".other")).optional()).isNotPresent();
 
         assertThatThrownBy(() -> fluentElement.el(By.cssSelector(".other")).now()).isInstanceOf(NoSuchElementException.class);
 
@@ -380,7 +380,7 @@ public class FluentWebElementTest {
 
     @Test
     public void testToString() {
-        assertThat(fluentElement.toString()).isEqualTo(element.toString());
+        assertThat(fluentElement).hasToString(element.toString());
     }
 
     private static final class Component {

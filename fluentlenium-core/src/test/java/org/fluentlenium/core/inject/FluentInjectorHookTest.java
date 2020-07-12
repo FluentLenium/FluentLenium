@@ -87,7 +87,7 @@ public class FluentInjectorHookTest {
 
         assertThat(elementWrapperHook.getBeforeClickNano()).isNotEqualTo(0L);
         assertThat(elementWrapperHook.getAfterClickNano()).isNotEqualTo(0L);
-        assertThat(elementWrapperHook.getOptionValue()).isEqualTo(null);
+        assertThat(elementWrapperHook.getOptionValue()).isNull();
 
         assertThat(elementWrapperHook.getBeforeFindElementNano()).isNotEqualTo(0L);
         assertThat(elementWrapperHook.getAfterFindElementNano()).isNotEqualTo(0L);
@@ -352,7 +352,7 @@ public class FluentInjectorHookTest {
 
         assertThat(elementWrapperHook.getBeforeClickNano()).isNotEqualTo(0L);
         assertThat(elementWrapperHook.getAfterClickNano()).isNotEqualTo(0L);
-        assertThat(elementWrapperHook.getOptionValue()).isEqualTo(null);
+        assertThat(elementWrapperHook.getOptionValue()).isNull();
 
         assertThat(elementWrapperHook.getBeforeFindElementNano()).isNotEqualTo(0L);
         assertThat(elementWrapperHook.getAfterFindElementNano()).isNotEqualTo(0L);
@@ -370,7 +370,7 @@ public class FluentInjectorHookTest {
 
         assertThat(subElementWrapperHook.getBeforeClickNano()).isNotEqualTo(0L);
         assertThat(subElementWrapperHook.getAfterClickNano()).isNotEqualTo(0L);
-        assertThat(subElementWrapperHook.getOptionValue()).isEqualTo(null);
+        assertThat(subElementWrapperHook.getOptionValue()).isNull();
 
         assertThat(subElementWrapperHook.getBeforeFindElementNano()).isNotEqualTo(0L);
         assertThat(subElementWrapperHook.getAfterFindElementNano()).isNotEqualTo(0L);

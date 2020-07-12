@@ -69,7 +69,7 @@ public class DefaultHookChainBuilderTest {
 
         List<FluentHook> fluentHooks = hookChainBuilder.build(() -> element, () -> locator, () -> "toString", hookDefinitions);
 
-        Assertions.assertThat(fluentHooks).hasSize(hookDefinitions.size());
+        Assertions.assertThat(fluentHooks).hasSameSizeAs(hookDefinitions);
 
         Assertions.assertThat(fluentHooks.get(0)).isInstanceOf(NanoHook.class);
         Assertions.assertThat(fluentHooks.get(1)).isInstanceOf(NanoHook.class);

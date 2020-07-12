@@ -14,7 +14,7 @@ public class DriverPerClass2Test extends IntegrationFluentTestNg {
 
     @Test
     public void firstMethod() {
-        assertThat($(".small", withName("name"))).hasSize(0);
+        assertThat($(".small", withName("name"))).isEmpty();
     }
 
 }
