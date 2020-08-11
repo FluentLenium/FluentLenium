@@ -100,9 +100,7 @@ public class FluentInjectorComponentTest {
         Assertions.assertThat(container.component.parentContainer).isSameAs(container);
         Assertions.assertThat(container.component.childComponent.parentComponent).isSameAs(container.component);
 
-        Assertions.assertThat(container.component.childComponent.webElement).isNotNull();
-        Assertions.assertThat(container.component.childComponent.webElement).isEqualTo(childWebElement);
-        Assertions.assertThat(container.component.childComponent.webElements).isNotNull();
+        Assertions.assertThat(container.component.childComponent.webElement).isNotNull().isEqualTo(childWebElement);
         Assertions.assertThat(container.component.childComponent.webElements).isNotInstanceOf(FluentList.class);
         Assertions.assertThat(container.component.childComponent.fluentWebElement).isNotNull();
         Assertions.assertThat(container.component.childComponent.fluentList).isInstanceOf(FluentList.class);

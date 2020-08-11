@@ -51,7 +51,7 @@ public class BaseFluentHookTest {
 
         assertThat(fluentWebElement).isInstanceOf(FluentWebElement.class);
         assertThat(fluentWebElement.getElement()).isSameAs(element);
-        assertThat(hook.toString()).isEqualTo("toString");
+        assertThat(hook).hasToString("toString");
     }
 
 }

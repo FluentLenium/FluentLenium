@@ -52,8 +52,7 @@ public class InjectionAnnotationsTest {
         Field cssField = this.getClass().getDeclaredField("css");
         InjectionAnnotations annotations = new InjectionAnnotations(cssField, null);
         By by = annotations.buildBy();
-        assertThat(by).isInstanceOf(By.ByCssSelector.class);
-        assertThat(by).isEqualTo(By.cssSelector("css"));
+        assertThat(by).isInstanceOf(By.ByCssSelector.class).isEqualTo(By.cssSelector("css"));
     }
 
     @Test
@@ -61,8 +60,7 @@ public class InjectionAnnotationsTest {
         Field xpathField = this.getClass().getDeclaredField("xpath");
         InjectionAnnotations annotations = new InjectionAnnotations(xpathField, null);
         By by = annotations.buildBy();
-        assertThat(by).isInstanceOf(By.ByXPath.class);
-        assertThat(by).isEqualTo(By.xpath("xpath"));
+        assertThat(by).isInstanceOf(By.ByXPath.class).isEqualTo(By.xpath("xpath"));
     }
 
     @Test
@@ -70,8 +68,8 @@ public class InjectionAnnotationsTest {
         Field accessibilityField = this.getClass().getDeclaredField("iosAccessibilityId");
         InjectionAnnotations annotations = new InjectionAnnotations(accessibilityField, getIosCapablities());
         By by = annotations.buildBy();
-        assertThat(by).isInstanceOf(ContentMappedBy.class);
-        assertThat(by).isEqualTo(new ByChained(MobileBy.AccessibilityId("iosAccessibilityId")));
+        assertThat(by).isInstanceOf(ContentMappedBy.class)
+                .isEqualTo(new ByChained(MobileBy.AccessibilityId("iosAccessibilityId")));
     }
 
     @Test
@@ -89,8 +87,8 @@ public class InjectionAnnotationsTest {
         Field uiAutomator = this.getClass().getDeclaredField("androidUiAutomator");
         InjectionAnnotations annotations = new InjectionAnnotations(uiAutomator, getAndroidCapablities());
         By by = annotations.buildBy();
-        assertThat(by).isInstanceOf(ContentMappedBy.class);
-        assertThat(by).isEqualTo(new ByChained(MobileBy.AndroidUIAutomator("androidUiAutomator")));
+        assertThat(by).isInstanceOf(ContentMappedBy.class)
+                .isEqualTo(new ByChained(MobileBy.AndroidUIAutomator("androidUiAutomator")));
     }
 
     @Test
@@ -98,8 +96,8 @@ public class InjectionAnnotationsTest {
         Field windowsField = this.getClass().getDeclaredField("windowsAutomation");
         InjectionAnnotations annotations = new InjectionAnnotations(windowsField, getWindowsCapabilities());
         By by = annotations.buildBy();
-        assertThat(by).isInstanceOf(ContentMappedBy.class);
-        assertThat(by).isEqualTo(new ByChained(MobileBy.ByWindowsAutomation.windowsAutomation("windowsAutomation")));
+        assertThat(by).isInstanceOf(ContentMappedBy.class)
+                .isEqualTo(new ByChained(MobileBy.ByWindowsAutomation.windowsAutomation("windowsAutomation")));
     }
 
     @Test

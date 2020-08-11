@@ -204,13 +204,13 @@ public class ProxiesTest {
         when(locator.toString()).thenReturn("element1-locator");
 
         WebElement webElement = LocatorProxies.createWebElement(locator);
-        assertThat(webElement.toString()).isEqualTo("element1-locator (Lazy Element)");
+        assertThat(webElement).hasToString("element1-locator (Lazy Element)");
 
         assertThat(LocatorProxies.loaded(webElement)).isFalse();
 
         LocatorProxies.now(webElement);
 
-        assertThat(webElement.toString()).isEqualTo("element1-locator (" + element1.toString() + ")");
+        assertThat(webElement).hasToString("element1-locator (" + element1.toString() + ")");
     }
 
     @Test
@@ -225,7 +225,7 @@ public class ProxiesTest {
 
         LocatorProxies.now(webElement);
 
-        assertThat(webElement.hashCode()).isEqualTo(element1.hashCode());
+        assertThat(webElement).hasSameHashCodeAs(element1);
     }
 
     @Test

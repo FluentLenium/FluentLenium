@@ -12,12 +12,17 @@ import java.io.OutputStream;
 import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlPathFromFile;
 
+/**
+ * Base class for integration tests.
+ * <p>
+ * Uses {@code htmlunit} as the underlying driver and provides local HTML files that you can use as test pages.
+ */
 public abstract class IntegrationFluentTest extends FluentTest {
 
     public static final String ANOTHER_PAGE_URL = getAbsoluteUrlFromFile("anotherpage.html");
     public static final String COMPONENTS_URL = getAbsoluteUrlFromFile("components.html");
     public static final String COUNT_URL = getAbsoluteUrlFromFile("count.html");
-    public static final String DEFAULT_URL =  getAbsoluteUrlFromFile("index.html");
+    public static final String DEFAULT_URL = getAbsoluteUrlFromFile("index.html");
     public static final String DEFAULT_URL_PATH = getAbsoluteUrlPathFromFile("index.html");
     public static final String IFRAME_URL = getAbsoluteUrlFromFile("iframe.html");
     public static final String JAVASCRIPT_URL = getAbsoluteUrlFromFile("javascript.html");
