@@ -37,18 +37,18 @@ import java.lang.annotation.Target;
  * <pre>
  * public class HomepageHeader {
  *      &#064;FindBy(css = ".footer-link")
- *      private FluentList&lt;FluentWebElement> footerLinks;
- *      //toString(): By.cssSelector: .footer-link (&lt;toString() of the underlying list of FluentWebElements>)
+ *      private FluentList&lt;FluentWebElement footerLinks;
+ *      //toString(): By.cssSelector: .footer-link (&lt;toString() of the underlying list of FluentWebElements)
  *
  *      &#064;FindBy(css = ".footer-link")
  *      &#064;Label
- *      private FluentList&lt;FluentWebElement> footerLinksDefaultLabel;
- *      //toString(): HomepageHeader.footerLinksDefaultLabel (&lt;toString() of the underlying list of FluentWebElements>)
+ *      private FluentList&lt;FluentWebElement footerLinksDefaultLabel;
+ *      //toString(): HomepageHeader.footerLinksDefaultLabel (&lt;toString() of the underlying list of FluentWebElements)
  *
  *      &#064;FindBy(css = ".footer-link")
  *      &#064;Label("customLabel")
- *      private FluentList&lt;FluentWebElement> footerLinksCustomLabel;
- *      //toString(): customLabel (&lt;toString() of the underlying list of FluentWebElements>)
+ *      private FluentList&lt;FluentWebElement footerLinksCustomLabel;
+ *      //toString(): customLabel (&lt;toString() of the underlying list of FluentWebElements)
  * }
  * </pre>
  * <p>
