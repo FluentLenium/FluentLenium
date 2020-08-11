@@ -384,15 +384,17 @@ Below you can find some examples of what labeling combinations will result in wh
 
 ##### Label
 
-If no label value is provided it will use the class name and field name as the label.
+If no label value is provided, it will use the class name and field name as the label.
 
 **FluentWebElement + Label without value** 
 ```java
-@FindBy(css = ".hero img")
-@Label
-private FluentWebElement heroImage;
+public class Homepage extends FluentPage {
+    @FindBy(css = ".hero img")
+    @Label
+    private FluentWebElement heroImage;
+}
 ```
-will give the following toString: *FluentWaitMessageTest.heroImage (Lazy Element)*
+will give the following toString: *Homepage.heroImage (Lazy Element)*
 
 **FluentList + Label without value**
 ```java
@@ -403,7 +405,7 @@ private FluentList<FluentWebElement> images;
 will give the following toString: *pictures ([])*
 
 ##### LabelHint
-If the label value is defined the toString value will being with the value, and by specifying label hints, they will be list after the label value enclosed with [ and ]. 
+If the label value is defined, the toString value will being with the value, and by specifying label hints, they will be list after the label value enclosed with [ and ]. 
 
 **Label + single label hint** 
 ```java
@@ -427,12 +429,11 @@ will give the following toString: *banner [ad, img] ([])*
 
 A ```Component``` is an object wrapping a ```WebElement``` instance.
 
-A ```Component``` supports Injection like a Page Object, but all searchs are performed in the local context of the wrapped element.
+A ```Component``` supports injection like a Page Object, but all searches are performed in the local context of the wrapped element.
 
 Using components improves readability of both Page Objects and Tests.
 
-`FluentWebElement` is the default component class in FluentLenium, so you can implement you own custom component
-by extending `FluentWebElement` to add custom logic.
+`FluentWebElement` is the default component class in FluentLenium, so you can implement your own custom component by extending `FluentWebElement` to add custom logic.
 
 ```java
 public class SelectComponent extends FluentWebElement {

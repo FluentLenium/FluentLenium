@@ -4,9 +4,11 @@ import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
- * Common form filling features.
+ * Common class form filling features storing the potential elements to fill.
  *
  * @param <E> type of element to fill
+ * @see Fill
+ * @see FillSelect
  */
 public class BaseFill<E extends FluentWebElement> {
     private final FluentList<E> fluentList;

@@ -1,5 +1,14 @@
 package org.fluentlenium.utils.chromium;
 
+/**
+ * Commands for the Chromium DevTools API.
+ * <p>
+ * Additional resources are available at:
+ * <ul>
+ *     <li>https://github.com/WICG/devtools-protocol</li>
+ *     <li>https://chromedevtools.github.io/devtools-protocol/</li>
+ * </ul>
+ */
 public enum Commands {
     /**
      * Send a command to the DevTools API.
@@ -12,8 +21,8 @@ public enum Commands {
     SEND_COMMAND_AND_GET_RESULT("SEND_COMMAND_AND_GET_RESULT",
             "/session/:sessionId/chromium/send_command_and_get_result");
 
-    private String cmdName;
-    private String cmdInfo;
+    private final String cmdName;
+    private final String cmdInfo;
 
     Commands(String command, String commandInfo) {
         this.cmdName = command;

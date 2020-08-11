@@ -7,7 +7,7 @@ import org.fluentlenium.core.label.FluentLabelProvider;
 import java.lang.reflect.Field;
 
 /**
- * Parse {@link Label} and {@link LabelHint} annotation from field.
+ * Parses and stores the values of the {@link Label} and {@link LabelHint} annotations of a given field.
  */
 public class LabelAnnotations implements FluentLabelProvider {
     private String label;
@@ -15,21 +15,35 @@ public class LabelAnnotations implements FluentLabelProvider {
 
     /**
      * Creates a new label annotations object.
+     * <p>
+     * If the {@code @Label} annotation is present than it either uses that value as the label,
+     * of if it's the default empty string value, then sets the label as the concatenation of the field's declaring
+     * class and the field's name, for example for:
+     * <pre>
+     * public class Homepage {
+     *
+     *      &#064;FindBy(css = ".teaser img")
+     *      &#064;Label
+     *      private FluentWebElement teaserImage;
+     * }
+     * </pre>
+     * <p>
+     * the label is set to {@code Homepage.teaserImage}.
+     * <p>
+     * If the {@code @LabelHint} annotation is present then it simply sets its value in this object.
      *
      * @param field field to parse
      */
     public LabelAnnotations(Field field) {
-        Label labelAnno = field.getAnnotation(Label.class);
-        if (labelAnno != null) {
-            label = labelAnno.value();
+        if (field.isAnnotationPresent(Label.class)) {
+            label = field.getAnnotation(Label.class).value();
             if (label.isEmpty()) {
                 label = field.getDeclaringClass().getSimpleName() + "." + field.getName();
             }
         }
 
-        LabelHint labelHint = field.getAnnotation(LabelHint.class);
-        if (labelHint != null) {
-            labelHints = labelHint.value();
+        if (field.isAnnotationPresent(LabelHint.class)) {
+            labelHints = field.getAnnotation(LabelHint.class).value();
         }
     }
 
