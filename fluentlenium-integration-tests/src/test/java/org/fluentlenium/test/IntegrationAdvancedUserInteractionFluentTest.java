@@ -8,6 +8,9 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 
+/**
+ * Base class for integration tests providing a JavaScript enabled htmlunit driver.
+ */
 public abstract class IntegrationAdvancedUserInteractionFluentTest extends FluentTest {
 
     protected static final String DEFAULT_URL = getAbsoluteUrlFromFile("index.html");

@@ -42,7 +42,7 @@ public class AttributeFilterTest {
         AbstractMatcher matcher = new EqualMatcher(A_VALUE);
         AttributeFilter attributeFilter = new AttributeFilter("id", matcher);
 
-        assertThat(attributeFilter.toString()).isEqualTo("with id equals to \"value\"");
+        assertThat(attributeFilter).hasToString("with id equals to \"value\"");
     }
 
     @Test
@@ -50,7 +50,7 @@ public class AttributeFilterTest {
         AbstractMatcher matcher = new NoOpMatcher(A_VALUE);
         AttributeFilter attributeFilter = new AttributeFilter("id", matcher);
 
-        assertThat(attributeFilter.toString()).isEqualTo("with id \"value\"");
+        assertThat(attributeFilter).hasToString("with id \"value\"");
     }
 
     //getCssFilter()

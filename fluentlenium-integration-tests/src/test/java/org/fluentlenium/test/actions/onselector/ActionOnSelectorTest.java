@@ -22,7 +22,7 @@ class ActionOnSelectorTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         assertThat($("#name").first().value()).isEqualTo("John");
         $("#name").first().clear();
-        assertThat($("#name").first().value()).isEqualTo("");
+        assertThat($("#name").first().value()).isEmpty();
     }
 
     @Test

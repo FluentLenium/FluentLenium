@@ -435,6 +435,12 @@ public class FluentWebElement extends Component
     }
 
     @Override
+    public FluentWebElement hoverOver() {
+        mouse().moveToElement();
+        return this;
+    }
+
+    @Override
     public boolean present() {
         return LocatorProxies.present(webElement);
     }

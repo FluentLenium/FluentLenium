@@ -168,8 +168,8 @@ public abstract class AbstractFactoryRegistryImpl<T extends Factory, R extends R
         for (String name : names) {
             if (!registered) {
                 if (factories.containsKey(name)) {
-                    T exitingFactory = factories.get(name);
-                    if (!exitingFactory.getClass().isAnnotationPresent(DefaultFactory.class)) {
+                    T existingFactory = factories.get(name);
+                    if (!existingFactory.getClass().isAnnotationPresent(DefaultFactory.class)) {
                         throw new ConfigurationException(
                                 "A factory is already registered with this name: " + name + " (" + factories.get(name) + ")");
                     }

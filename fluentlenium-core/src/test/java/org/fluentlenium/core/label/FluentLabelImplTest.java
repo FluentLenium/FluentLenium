@@ -16,18 +16,18 @@ public class FluentLabelImplTest {
     public void testFluentLabel() {
         FluentLabel<FluentWebElement> fluentLabel = new FluentLabelImpl<>(element, () -> "default");
 
-        Assertions.assertThat(fluentLabel.toString()).isEqualTo("default");
+        Assertions.assertThat(fluentLabel).hasToString("default");
 
         fluentLabel.withLabel("another");
-        Assertions.assertThat(fluentLabel.toString()).isEqualTo("another");
+        Assertions.assertThat(fluentLabel).hasToString("another");
 
         fluentLabel.withLabel(null);
-        Assertions.assertThat(fluentLabel.toString()).isEqualTo("default");
+        Assertions.assertThat(fluentLabel).hasToString("default");
 
         fluentLabel.withLabelHint("hint1");
-        Assertions.assertThat(fluentLabel.toString()).isEqualTo("default [hint1]");
+        Assertions.assertThat(fluentLabel).hasToString("default [hint1]");
 
         fluentLabel.withLabelHint("hint2", "hint3");
-        Assertions.assertThat(fluentLabel.toString()).isEqualTo("default [hint1, hint2, hint3]");
+        Assertions.assertThat(fluentLabel).hasToString("default [hint1, hint2, hint3]");
     }
 }

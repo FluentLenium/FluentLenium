@@ -82,7 +82,7 @@ class FluentSelectorTest extends IntegrationFluentTest {
     @Test
     void checkStartAttributeMatcherNotFind() {
         goTo(DEFAULT_URL);
-        assertThat($("span", withName().startsWith(regex("am")))).hasSize(0);
+        assertThat($("span", withName().startsWith(regex("am")))).isEmpty();
     }
 
     @Test
@@ -94,7 +94,7 @@ class FluentSelectorTest extends IntegrationFluentTest {
     @Test
     void checkEndAttributeMatcherNotFind() {
         goTo(DEFAULT_URL);
-        assertThat($("span", withName().endsWith(regex("am?")))).hasSize(0);
+        assertThat($("span", withName().endsWith(regex("am?")))).isEmpty();
     }
 
     @Test
@@ -167,7 +167,7 @@ class FluentSelectorTest extends IntegrationFluentTest {
     @Test
     void checkClassContainsWordSelector() {
         goTo(DEFAULT_URL);
-        assertThat($("button", withClass().containsWord("class"))).hasSize(0);
+        assertThat($("button", withClass().containsWord("class"))).isEmpty();
     }
 }
 

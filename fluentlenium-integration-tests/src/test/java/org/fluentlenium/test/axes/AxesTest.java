@@ -36,7 +36,7 @@ class AxesTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         FluentWebElement element = el("html");
         FluentList<FluentWebElement> descendants = element.dom().descendants();
-        assertThat(descendants.size()).isGreaterThan(10);
+        assertThat(descendants).hasSizeGreaterThan(10);
     }
 
     @Test
@@ -44,7 +44,7 @@ class AxesTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         FluentWebElement element = el("#select > option[value='value-2']");
         FluentList<FluentWebElement> precedings = element.dom().precedings();
-        assertThat(precedings.size()).isGreaterThan(2);
+        assertThat(precedings).hasSizeGreaterThan(2);
 
         Collections.reverse(precedings);
 
@@ -68,7 +68,7 @@ class AxesTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         FluentWebElement element = el("#select > option[value='value-2']");
         FluentList<FluentWebElement> followings = element.dom().followings();
-        assertThat(followings.size()).isGreaterThan(2);
+        assertThat(followings).hasSizeGreaterThan(2);
 
         assertThat(followings.get(0).tagName()).isEqualTo("option");
         assertThat(followings.get(1).tagName()).isEqualTo("input");

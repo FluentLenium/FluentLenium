@@ -108,7 +108,7 @@ class SearchOnlyWithFiltersTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         assertThat($("#name").first().value()).isEqualTo("John");
         $(withId("name")).clear();
-        assertThat($("#name").first().value()).isEqualTo("");
+        assertThat($("#name").first().value()).isEmpty();
     }
 
     @Test

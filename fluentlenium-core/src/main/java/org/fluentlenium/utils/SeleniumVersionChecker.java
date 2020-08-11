@@ -1,6 +1,7 @@
 package org.fluentlenium.utils;
 
 import static java.util.Objects.nonNull;
+import static java.util.stream.Collectors.toList;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.maven.model.Dependency;
@@ -45,7 +45,6 @@ public final class SeleniumVersionChecker {
     private static boolean notifiedAlready;
     private static boolean isSeleniumVersionFound;
 
-
     private SeleniumVersionChecker() {
         // utility class
     }
@@ -60,6 +59,12 @@ public final class SeleniumVersionChecker {
         notifiedAlready = true;
     }
 
+    /**
+     * First, if the pom.xml exists, validates the Selenium version in it.
+     * <p>
+     * If the pom.xml doesn't exist or it doesn't contain a Selenium version, then it proceed to validate the parent
+     * module's pom.xml.
+     */
     private static void checkVersionFromMaven() {
         MavenXpp3Reader reader = new MavenXpp3Reader();
         Model model;
@@ -75,6 +80,15 @@ public final class SeleniumVersionChecker {
         }
     }
 
+    /**
+     * Validates the Selenium version in the provided POM Model.
+     * <p>
+     * It can resolve both explicit and parametrised version numbers as well.
+     * <p>
+     * If the resolved version doesn't equal to the {@link #EXPECTED_VERSION}, it logs an error message.
+     *
+     * @param model the pom.xml model
+     */
     static void logWarningsWhenSeleniumVersionIsWrong(Model model) {
         if (model != null) {
             String seleniumVersion = retrieveVersionFromPom(model);
@@ -83,10 +97,9 @@ public final class SeleniumVersionChecker {
             }
 
             isSeleniumVersionFound = true;
-            boolean isParametrised = checkForParametrizedVersion(seleniumVersion);
 
             String resolvedSeleniumVersion;
-            if (isParametrised) {
+            if (isParametrised(seleniumVersion)) {
                 resolvedSeleniumVersion = resolveParametrisedVersion(model, seleniumVersion);
             } else {
                 resolvedSeleniumVersion = seleniumVersion;
@@ -111,13 +124,25 @@ public final class SeleniumVersionChecker {
         return resolvedSeleniumVersion;
     }
 
+    /**
+     * Tries to retrieve the Selenium version from the provided POM Model.
+     * <p>
+     * It looks for the dependency (groupId: org.seleniumhq.selenium) in both the {@code <dependencies>} and
+     * {@code <dependencyManagement>} (if exists) sections.
+     * <p>
+     * Any artifactId that is not {@code htmlunit-driver} is collected, and the first one's version is returned,
+     * or null if there was no matching dependency.
+     *
+     * @param model the POM model
+     * @return the actual Selenium version, or null if none is present
+     */
     static String retrieveVersionFromPom(Model model) {
         List<Dependency> dependencies;
 
         if (nonNull(model.getDependencyManagement())) {
             dependencies = Stream.of(model.getDependencies(), model.getDependencyManagement().getDependencies())
                     .flatMap(Collection::stream)
-                    .collect(Collectors.toList());
+                    .collect(toList());
         } else {
             dependencies = model.getDependencies();
         }
@@ -130,10 +155,23 @@ public final class SeleniumVersionChecker {
                 .orElse(null);
     }
 
-    private static boolean checkForParametrizedVersion(String version) {
+    private static boolean isParametrised(String version) {
         return version.matches(VERSION_REGEX);
     }
 
+    /**
+     * If the Selenium version happens to be parametrised, this method tries to retrieve it from various sources,
+     * in the following order:
+     * <ul>
+     *     <li>from Maven properties from the provided Model</li>
+     *     <li>from Java system properties</li>
+     *     <li>if there are Maven profiles, then from the properties sections of those profiles</li>
+     * </ul>
+     *
+     * @param seleniumVersion the name of the Selenium version property
+     * @param model           the POM model
+     * @return the actual version number, or null if none found
+     */
     static String resolveParametrisedVersionFromPom(String seleniumVersion, Model model) {
         String version = getNamePropertyName(seleniumVersion);
 
@@ -164,6 +202,13 @@ public final class SeleniumVersionChecker {
         return nonNull(propertyVersion) ? propertyVersion.substring(2, propertyVersion.length() - 1) : "";
     }
 
+    /**
+     * Reads the POM from the provided path and creates a Maven Model object from that.
+     *
+     * @param reader    the maven reader
+     * @param pathToPom the path to the POM file
+     * @return the Maven Model, or null if a problem occurred during reading the file
+     */
     static Model readPom(MavenXpp3Reader reader, String pathToPom) {
         Model result = null;
         try {

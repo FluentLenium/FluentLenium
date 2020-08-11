@@ -163,7 +163,7 @@ public class SearchTest {
         assertThatThrownBy(() -> search.find(name, filters).now()).isExactlyInstanceOf(NoSuchElementException.class);
 
         assertThat(search.find(name, filters).present()).isFalse();
-        assertThat(search.find(name, filters).optional().isPresent()).isFalse();
+        assertThat(search.find(name, filters).optional()).isNotPresent();
     }
 
     @Test
@@ -175,7 +175,7 @@ public class SearchTest {
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(Collections.singletonList(webElement));
 
         assertThat(search.find(name, filters).present()).isFalse();
-        assertThat(search.find(name, filters).optional().isPresent()).isFalse();
+        assertThat(search.find(name, filters).optional()).isNotPresent();
 
         verify(filter1, times(2)).applyFilter(any(Collection.class));
     }

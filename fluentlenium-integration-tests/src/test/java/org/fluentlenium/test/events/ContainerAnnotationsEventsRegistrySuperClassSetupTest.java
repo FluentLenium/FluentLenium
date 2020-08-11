@@ -52,7 +52,7 @@ class ContainerAnnotationsEventsRegistrySuperClassSetupTest extends EventBasedIn
 
         for (List<List> events : events().eventLists) {
             if (!excludedLists.contains(events)) {
-                assertThat(events).hasSize(0);
+                assertThat(events).isEmpty();
             }
         }
     }
