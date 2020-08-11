@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- * Handles XPath axes for an element (http://www.w3schools.com/xsl/xpath_axes.asp)
+ * Handles XPath axes for an element (<a href="http://www.w3schools.com/xsl/xpath_axes.asp">W3Schools XPath Axes</a>).
  */
 public class Dom {
     private final WebElement webElement;
