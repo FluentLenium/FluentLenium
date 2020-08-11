@@ -1,7 +1,7 @@
 package org.fluentlenium.core.alert;
 
 /**
- * Manage browser alert.
+ * Extension of Selenium's own Alert interface to manage browser alert.
  */
 public interface Alert extends org.openqa.selenium.Alert {
     /**

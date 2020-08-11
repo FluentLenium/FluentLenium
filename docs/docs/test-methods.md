@@ -11,6 +11,7 @@ sidebar:
   Listener API: "#listener-api"
   Hooks: "#hooks"
   Javascript execution: "#javascript-execution"
+  CSS injection: "#css-injection"
   Screenshots and HTML dump: "#taking-screenshots-and-html-dumps"
   Alerts: "#alerts"
   Chromium API: "#chromium-api"
@@ -27,6 +28,7 @@ This section contains description of FluentLenium features which may be useful d
 - [Listener API](#listener-api)
 - [Hooks](#hooks)
 - [Javascript execution](#javascript-execution)
+- [CSS injection](#css-injection)
 - [Taking ScreenShots and HTML Dumps](#taking-screenshots-and-html-dumps)
 - [Iframe](#iframe)
 - [Alerts](#alerts)
@@ -364,8 +366,26 @@ You can either execute javascript with arguments, with async `executeAsyncScript
 executeScript("change();", 12L).getStringResult();
 ```
 
+## CSS injection
+
+It is possible to manipulate the CSS styling of pages via calling `css()`.
+
+It can be called from a `FluentWebElement`, `FluentDriver` and any of the test adapter implementations.
+
+You can either inject an explicitly defined CSS styling:
+
+```java
+css().inject("#location {\ndisplay: none\n}");
+``` 
+
+or you can inject the content of a CSS resource from the project classpath:
+
+```java
+css().injectResource("/path/to/css/resource.css");
+```
+
 ## Taking ScreenShots and HTML Dumps
-You can take a ScreenShot and a HTML Dump of the browser.
+You can take a ScreenShot and an HTML Dump of the browser.
 
 ```java
 takeScreenshot();

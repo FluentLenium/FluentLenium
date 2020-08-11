@@ -5,7 +5,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.script.JavascriptControl;
 
 /**
- * Javascript actions that can be used on the list or on a web element.
+ * Javascript actions that can be used on a list or on a web element.
  * <p>
  * Underlying webDriver must support javascript to support those actions.
  *

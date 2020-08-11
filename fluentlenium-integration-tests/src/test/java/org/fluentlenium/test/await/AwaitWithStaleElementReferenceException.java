@@ -14,7 +14,6 @@ class AwaitWithStaleElementReferenceException extends IntegrationFluentTest {
     @BeforeEach
     void before() {
         goTo(DEFAULT_URL);
-
     }
 
     @Test

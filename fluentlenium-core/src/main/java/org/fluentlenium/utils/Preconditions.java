@@ -12,7 +12,7 @@ public final class Preconditions {
     }
 
     /**
-     * Validates if the argument object is null, and throws a {@link IllegalArgumentException} if it is.
+     * Validates if the argument object is null, and throws an {@link IllegalArgumentException} if it is.
      *
      * @param object  the object to validate
      * @param message the error message to throw the exception with
@@ -27,7 +27,7 @@ public final class Preconditions {
     }
 
     /**
-     * Validates if the argument String is blank, and throws a {@link IllegalArgumentException} if it is.
+     * Validates if the argument String is blank, and throws an {@link IllegalArgumentException} if it is.
      *
      * @param object  the object to validate
      * @param message the error message to throw the exception with
@@ -42,7 +42,7 @@ public final class Preconditions {
     }
 
     /**
-     * Validates if the argument object is null, and throws a {@link IllegalStateException} if it is.
+     * Validates if the argument object is null, and throws an {@link IllegalStateException} if it is.
      *
      * @param object  the object to validate
      * @param message the error message to throw the exception with
