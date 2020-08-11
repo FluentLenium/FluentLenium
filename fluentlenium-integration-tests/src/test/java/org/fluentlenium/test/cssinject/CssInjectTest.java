@@ -17,4 +17,12 @@ class CssInjectTest extends IntegrationFluentTest {
         css().inject("#location {display: none}");
         assertThat(location.displayed()).isFalse();
     }
+
+    @Test
+    void injectDisplayNoneNonEscapedShouldMakeElementNotPresent() {
+        goTo(DEFAULT_URL);
+        assertThat(location.displayed()).isTrue();
+        css().inject("#location {\ndisplay: none\n}");
+        assertThat(location.displayed()).isFalse();
+    }
 }

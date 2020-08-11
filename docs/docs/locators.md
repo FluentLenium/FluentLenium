@@ -135,14 +135,16 @@ If you need to build another Fluent Locator from the position in the DOM of an e
 can use [XPath axes](https://www.w3schools.com/xml/xpath_axes.asp).
 
 ```java
-$(".fluent"()).axes().parent()
-$(".fluent"()).axes().descendants()
-$(".fluent"()).axes().ancestors()
-$(".fluent"()).axes().followings()
-$(".fluent"()).axes().followingSiblings()
-$(".fluent"()).axes().precedings()
-$(".fluent"()).axes().precedingSiblings()
+el(".fluent").dom().parent()
+el(".fluent").dom().descendants()
+el(".fluent").dom().ancestors()
+el(".fluent").dom().followings()
+el(".fluent").dom().followingSiblings()
+el(".fluent").dom().precedings()
+el(".fluent").dom().precedingSiblings()
 ```
+
+You can also call `axes()` on a FluentWebElement but that is deprecated and may be removed in any future version.
 
 ## JQuery syntax
 

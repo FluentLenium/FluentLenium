@@ -11,8 +11,9 @@ import java.util.List;
  * Factory building new components.
  */
 public interface ComponentInstantiator {
+
     /**
-     * Create and register a new fluent element from the given element.
+     * Create and register a new {@code FluentWebElement} from the given {@code WebElement}.
      *
      * @param element wrapped element
      * @return new instance of the component
@@ -20,7 +21,7 @@ public interface ComponentInstantiator {
     FluentWebElement newFluent(WebElement element);
 
     /**
-     * Create and register a new component from the given element.
+     * Create and register a new component of the provided type from the given {@code WebElement}.
      *
      * @param componentClass type of the component
      * @param element        wrapped element
@@ -30,14 +31,14 @@ public interface ComponentInstantiator {
     <T> T newComponent(Class<T> componentClass, WebElement element);
 
     /**
-     * create and register an empty fluent list.
+     * Create and register an empty fluent list.
      *
      * @return new list of fluent web element
      */
     FluentList<FluentWebElement> newFluentList();
 
     /**
-     * create and register a new fluent list.
+     * Create and register a new fluent list from the argument FluentWebElements.
      *
      * @param elements list of elements
      * @return new list of fluent web element
@@ -45,7 +46,7 @@ public interface ComponentInstantiator {
     FluentList<FluentWebElement> newFluentList(FluentWebElement... elements);
 
     /**
-     * create and register a new fluent list.
+     * Create and register a new fluent list from the argument list of FluentWebElements.
      *
      * @param elements list of elements
      * @return new list of fluent web element
@@ -53,7 +54,7 @@ public interface ComponentInstantiator {
     FluentList<FluentWebElement> newFluentList(List<FluentWebElement> elements);
 
     /**
-     * create and register a new fluent list.
+     * Create and register a new fluent list from the argument WebElements.
      *
      * @param elements list of elements
      * @return new list of fluent web element
@@ -61,7 +62,7 @@ public interface ComponentInstantiator {
     FluentList<FluentWebElement> asFluentList(WebElement... elements);
 
     /**
-     * create and register a new fluent list.
+     * Create and register a new fluent list from the argument collection of WebElements.
      *
      * @param elements list of elements
      * @return new list of fluent web element
@@ -69,7 +70,7 @@ public interface ComponentInstantiator {
     FluentList<FluentWebElement> asFluentList(Iterable<WebElement> elements);
 
     /**
-     * create and register a new fluent list.
+     * Create and register a new fluent list from the argument list of WebElements.
      *
      * @param elements list of elements
      * @return new list of fluent web element
@@ -77,7 +78,7 @@ public interface ComponentInstantiator {
     FluentList<FluentWebElement> asFluentList(List<WebElement> elements);
 
     /**
-     * create and register an empty fluent list.
+     * Create and register an empty fluent list of the provided type.
      *
      * @param componentClass class of the component
      * @param <T>            type of the component
@@ -86,7 +87,7 @@ public interface ComponentInstantiator {
     <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass);
 
     /**
-     * create and register a new fluent list.
+     * Create and register a new fluent list.
      *
      * @param componentClass class of the component
      * @param elements       list of elements
@@ -96,7 +97,7 @@ public interface ComponentInstantiator {
     <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass, T... elements);
 
     /**
-     * create and register a new fluent list.
+     * Create and register a new fluent list.
      *
      * @param componentClass class of the component
      * @param elements       list of elements
@@ -106,7 +107,7 @@ public interface ComponentInstantiator {
     <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass, List<T> elements);
 
     /**
-     * create and register a new fluent list.
+     * Create and register a new fluent list.
      *
      * @param componentClass class of the component
      * @param elements       list of elements
@@ -116,7 +117,7 @@ public interface ComponentInstantiator {
     <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, WebElement... elements);
 
     /**
-     * create and register a new fluent list.
+     * Create and register a new fluent list.
      *
      * @param componentClass class of the component
      * @param elements       list of elements
@@ -126,7 +127,7 @@ public interface ComponentInstantiator {
     <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, Iterable<WebElement> elements);
 
     /**
-     * create and register a new fluent list.
+     * Create and register a new fluent list.
      *
      * @param componentClass class of the component
      * @param elements       list of elements
