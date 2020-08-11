@@ -1,13 +1,13 @@
 package org.fluentlenium.core.css;
 
 /**
- * Control interface for css related features.
+ * Control interface for CSS related features.
  */
 public interface CssControl {
     /**
      * Features related to CSS loaded in the active page.
      *
-     * @return Css support
+     * @return a CssSupport instance
      */
     CssSupport css();
 }

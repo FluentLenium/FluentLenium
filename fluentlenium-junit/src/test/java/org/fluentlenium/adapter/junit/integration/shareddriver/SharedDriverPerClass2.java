@@ -13,7 +13,7 @@ public class SharedDriverPerClass2 extends IntegrationFluentTest {
 
     @Test
     public void secondMethod() {
-        assertThat($(".small", withName("name"))).hasSize(0);
+        assertThat($(".small", withName("name"))).isEmpty();
     }
 
 }

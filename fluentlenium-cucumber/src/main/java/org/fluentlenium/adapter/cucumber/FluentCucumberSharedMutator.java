@@ -5,9 +5,10 @@ import org.fluentlenium.configuration.ConfigurationException;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 
 /**
- * Cucumber implementation of {@link SharedMutator}, replacing testClass with a null reference as it doesn't make sense
- * and raising a {@link org.fluentlenium.configuration.ConfigurationException} when {@link DriverLifecycle#CLASS} is given.
- * to link {@link org.openqa.selenium.WebDriver} instances with classes defining Step.
+ * Cucumber implementation of {@link SharedMutator}, replacing {@code testClass} with a null reference
+ * as it doesn't make sense in case of Cucumber tests, and raising a
+ * {@link org.fluentlenium.configuration.ConfigurationException} when {@link DriverLifecycle#CLASS} is given
+ * to link {@link org.openqa.selenium.WebDriver} instances with classes defining step definitions.
  */
 public class FluentCucumberSharedMutator implements SharedMutator {
     @Override

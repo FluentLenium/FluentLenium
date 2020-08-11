@@ -150,7 +150,7 @@ public class AnnotationsEventsTest extends IntegrationFluentTest {
 
         if (beforeNavigate == 1) {
             assertThat(url).isEqualTo(DEFAULT_URL);
-            assertThat(direction).isEqualTo(null);
+            assertThat(direction).isNull();
         }
 
         if (beforeNavigate == 2) {
@@ -166,7 +166,7 @@ public class AnnotationsEventsTest extends IntegrationFluentTest {
 
         if (afterNavigate == 1) {
             assertThat(url).isEqualTo(DEFAULT_URL);
-            assertThat(direction).isEqualTo(null);
+            assertThat(direction).isNull();
         }
 
         if (afterNavigate == 2) {

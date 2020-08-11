@@ -173,7 +173,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-cucumber</artifactId>
-    <version>4.3.1</version>
+    <version>4.4.1</version>
 </dependency>
 ```
 
@@ -210,9 +210,9 @@ public class ExampleSteps1 extends BaseTest {
 - Add `Before` and `After` hooks: 
 
 ```java
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
+import io.cucumber.java.Scenario;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 
 public class FluentHooks extends FluentCucumberTest {
     @Before
@@ -240,12 +240,12 @@ public class FluentHooks extends FluentCucumberTest {
 }
 ```
 
-**Notes related to Cumber hooks:**
+**Notes related to Cucumber hooks:**
 
-1) Hooks should be added **ONCE** for your tests. Do not add these these hooks in all your steps classes.
+1) Hooks should be added **ONCE** for your tests. Do not add these hooks in all your steps classes.
  
 2) Adding these hooks starts FluentLenium context during execution of scenario. It means that driver will start 
-automatically. If you want to start WebDriver only for some scenarios, you can simply add tag:
+automatically. If you want to start WebDriver only for some scenarios, you can use tagged Cucumber hooks, for example:
 
 ```
 @fluent
@@ -289,47 +289,48 @@ public class FluentHooks extends BaseTest {
 FluentTestContainer.FLUENT_TEST.instance()
 ```
 
-It can be handy if you want have to access current WebDriver instance. The purpose of `FluentTestContainer` is to share
+It can be handy if you want to have access to the current WebDriver instance. The purpose of `FluentTestContainer` is to share
 state between many steps classes.
 
 - Keep your configuration in `BaseTest`:
 
- ```java
- // example configuration
- @FluentConfiguration(webDriver = "chrome")
- public class BaseTest extends FluentCucumberTest {
-    
+```java
+// example configuration
+@FluentConfiguration(webDriver = "chrome")
+public class BaseTest extends FluentCucumberTest {
+
     @Override
     public Capabilities getCapabilities() {
         return new ChromeOptions();
     }
- }
- ```
- or class with Cucumber hooks:
+}
+```
+
+or class with Cucumber hooks:
  
-  ```java
-  // example configuration
-  @FluentConfiguration(webDriver = "chrome")
-  public class FluentHooks extends FluentCucumberTest {
-     
-     @Override
-     public Capabilities getCapabilities() {
-         return new ChromeOptions();
-     }
-     
-     @Before
-     public void beforeScenario(Scenario scenario) {
-         before(scenario);
-     }
-     
-     @After
-     public void afterScenario(Scenario scenario) {
-         after(scenario);
-     }
-  }
- ```
+```java
+// example configuration
+@FluentConfiguration(webDriver = "chrome")
+public class FluentHooks extends FluentCucumberTest {
  
-- At default, new instance of WebDriver is created for each scenario. If you want to run single WebDriver for all 
+    @Override
+    public Capabilities getCapabilities() {
+        return new ChromeOptions();
+    }
+    
+    @Before
+    public void beforeScenario(Scenario scenario) {
+        before(scenario);
+    }
+    
+    @After
+    public void afterScenario(Scenario scenario) {
+        after(scenario);
+    }
+}
+```
+ 
+- By default, a new instance of WebDriver is created for each scenario. If you want to run single WebDriver for all 
 scenarios in feature, change DriverLifecycle to JVM level:
 
 ```java
@@ -347,10 +348,10 @@ public class BaseTest extends FluentCucumberTest {
 E2E Cucumber tests are present in [Cucumber example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/cucumber).
 Enable it by activating ```examples``` Maven profile.
 
-- After having Cucumber-jvm upgraded to 4.5.0+ support is added for both `cucumber.api` and `io.cucumber`
-based classes like (`@Given`, `@When`, `@CucumberOptions`, etc.), however the `FluentCucumberTest` based tests will still
-use the old Cucumber `ObjectFactory` due to the Cucumber limitation of allowing only one instance of `ObjectFactory` to be used,
-and also to provide backward compatibility for projects where Cucumber version cannot be upgraded.
+- Until FLuentLenium 4.3.1, both `cucumber.api` and `io.cucumber` based classes (`@Given`, `@When`, `@CucumberOptions`, etc.) are supported,
+however the `FluentCucumberTest` based tests still use the old Cucumber `ObjectFactory` due to the Cucumber limitation of allowing only one instance of
+`ObjectFactory` to be used, and also to provide backward compatibility for projects where Cucumber version cannot be upgraded.
+- From FluentLenium 4.4.1 on support for `cucumber.api` package based Before and After hooks is removed. Only `io.cucumber` packages are supported.
 
 ## Spock
 

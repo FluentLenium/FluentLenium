@@ -228,8 +228,7 @@ public class FluentInjectorElementTest {
 
         when(webDriver.findElements(any(By.class))).thenReturn(webElements);
 
-        assertThat(container.element).hasSize(2);
-        assertThat(container.element).isInstanceOf(FluentList.class);
+        assertThat(container.element).hasSize(2).isInstanceOf(FluentList.class);
 
         assertThat(container.element.get(0).tagName()).isEqualTo("h1");
         assertThat(container.element.get(0)).isExactlyInstanceOf(FluentWebElement.class);
@@ -258,8 +257,7 @@ public class FluentInjectorElementTest {
 
         when(webDriver.findElements(any(By.class))).thenReturn(webElements);
 
-        assertThat(container.element).hasSize(2);
-        assertThat(container.element).isInstanceOf(FluentList.class);
+        assertThat(container.element).hasSize(2).isInstanceOf(FluentList.class);
 
         assertThat(container.element.get(0).tagName()).isEqualTo("h1");
         assertThat(container.element.get(0)).isExactlyInstanceOf(FluentWebElementSubClass.class);
@@ -288,8 +286,7 @@ public class FluentInjectorElementTest {
 
         when(webDriver.findElements(any(By.class))).thenReturn(webElements);
 
-        assertThat(container.element).hasSize(2);
-        assertThat(container.element).isExactlyInstanceOf(FluentListSubClass.class);
+        assertThat(container.element).hasSize(2).isExactlyInstanceOf(FluentListSubClass.class);
 
         assertThat(container.element.get(0).tagName()).isEqualTo("h1");
         assertThat(container.element.get(0)).isExactlyInstanceOf(FluentWebElementSubClass.class);
@@ -318,8 +315,7 @@ public class FluentInjectorElementTest {
 
         when(webDriver.findElements(any(By.class))).thenReturn(webElements);
 
-        assertThat(container.element).hasSize(2);
-        assertThat(container.element).isNotInstanceOf(FluentList.class);
+        assertThat(container.element).hasSize(2).isNotInstanceOf(FluentList.class);
 
         assertThat(container.element.get(0)).isExactlyInstanceOf(WebElementWrapper.class);
         assertThat(container.element.get(0).getElement()).isInstanceOf(WebElement.class);
@@ -348,8 +344,7 @@ public class FluentInjectorElementTest {
 
         when(webDriver.findElements(any(By.class))).thenReturn(webElements);
 
-        assertThat(container.element).hasSize(2);
-        assertThat(container.element).isNotInstanceOf(FluentList.class);
+        assertThat(container.element).hasSize(2).isNotInstanceOf(FluentList.class);
 
         assertThat(container.element.get(0)).isExactlyInstanceOf(WebElementDriverWrapper.class);
         assertThat(container.element.get(0).getElement()).isInstanceOf(WebElement.class);
@@ -378,8 +373,7 @@ public class FluentInjectorElementTest {
 
         WebElementDriverWrapperListContainer container = injector.newInstance(WebElementDriverWrapperListContainer.class);
 
-        assertThat(container.element).hasSize(2);
-        assertThat(container.element).isNotInstanceOf(FluentList.class);
+        assertThat(container.element).hasSize(2).isNotInstanceOf(FluentList.class);
 
         assertThat(container.element.get(0)).isExactlyInstanceOf(WebElementDriverWrapper.class);
         assertThat(container.element.get(0).getElement()).isInstanceOf(WebElement.class);

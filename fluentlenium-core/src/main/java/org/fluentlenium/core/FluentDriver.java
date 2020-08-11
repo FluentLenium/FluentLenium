@@ -42,9 +42,8 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * Offers some shortcut to WebDriver methods using a wrapped {@link WebDriver} instance.
- *
- * It provides methods to work with mouse, keyboard and windows.
+ * Wrapper class for a {@link WebDriver} instance which also offers shortcut and convenience methods,
+ * as well as methods to work with mouse, keyboard and windows.
  */
 @SuppressWarnings("PMD.GodClass")
 public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD GodClass
@@ -327,6 +326,7 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
         return cssControl.css();
     }
 
+    @Override
     public PerformanceTiming performanceTiming() {
         return performanceTiming;
     }

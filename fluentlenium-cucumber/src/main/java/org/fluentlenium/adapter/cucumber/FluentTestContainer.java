@@ -19,7 +19,7 @@ import static java.util.Objects.nonNull;
 /**
  * Container class for {@link FluentCucumberTest}.
  * <p>
- * It uses Sinlgeton pattern based on enum to makes sure that all Cucumber steps
+ * It uses Singleton pattern, based on enum, to make sure that all Cucumber steps use the same container.
  */
 public enum FluentTestContainer {
 
@@ -46,6 +46,9 @@ public enum FluentTestContainer {
 
     /**
      * Returns single instance of adapter across all Cucumber steps.
+     * <p>
+     * If the adapter hasn't been initialized, then initializes the fields of this container,
+     * and the {@link FluentAdapter} itself.
      *
      * @return instance of fluent adapter
      */
@@ -67,7 +70,7 @@ public enum FluentTestContainer {
     }
 
     /**
-     * Reset instance of FluentAdapter stored in container.
+     * Resets all properties of this container.
      */
     public void reset() {
         sharedMutator.remove();
@@ -92,23 +95,18 @@ public enum FluentTestContainer {
     /**
      * Sets config class - needed to enable annotation configuration.
      *
-     * @param clazz class annotated with @RunWith(FluentCucumber.class)
+     * @param clazz class annotated with {@code @RunWith(Cucumber.class)}
      */
     public static void setConfigClass(Class clazz) {
         configClass = clazz;
     }
 
-    /**
-     * Returns used inside container SharedMutator
-     *
-     * @return SharedMutator instance
-     */
     protected SharedMutator getSharedMutator() {
         return sharedMutator.get();
     }
 
     /**
-     * Injector used in FluentObjectFactory for creating instances
+     * Injector used in {@link cucumber.runtime.java.fluentlenium.FluentObjectFactory} for creating instances.
      *
      * @return fluent injector without loaded full FluentControl context
      */
@@ -117,12 +115,15 @@ public enum FluentTestContainer {
     }
 
     /**
-     * Creating new instances of pages.
+     * Instantiates {@code @Page} annotated fields in the provided container class,
+     * if it has any.
+     * <p>
+     * The container class is most likely a subclass of {@link FluentCucumberTest}.
      *
-     * @param obj container obj which contains pages to initialize
+     * @param obj container object which contains pages to initialize
+     * @see Page
      */
     public void instantiatePages(Object obj) {
-
         Arrays.stream(obj.getClass().getDeclaredFields())
                 .filter(field -> field.isAnnotationPresent(Page.class))
                 .forEach(field -> {

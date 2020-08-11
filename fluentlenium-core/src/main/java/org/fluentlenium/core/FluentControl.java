@@ -20,7 +20,7 @@ import org.fluentlenium.utils.chromium.ChromiumControl;
 /**
  * Global control interface for FluentLenium.
  * <p>
- * It allow to control with a Fluent interface the underlying {@link org.openqa.selenium.WebDriver}.
+ * It allows to control with a Fluent interface the underlying {@link org.openqa.selenium.WebDriver}.
  */
 public interface FluentControl
         extends SearchControl<FluentWebElement>, AwaitControl, InputControl, JavascriptControl, AlertControl, SnapshotControl,
