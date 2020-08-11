@@ -46,7 +46,7 @@ class ActionOnSelectorWithBddTest extends IntegrationFluentTest {
         goTo(DEFAULT_URL);
         assertThat(el("#name").value()).contains("John");
         el("#name").clear();
-        assertThat($("#name").first().value()).isEqualTo("");
+        assertThat($("#name").first().value()).isEmpty();
     }
 
     @Test

@@ -82,7 +82,7 @@ Release
 
 ```
 git checkout develop
-export JAVA_HOME=/usr/libexec/java_home -v 11
+export JAVA_HOME='/usr/libexec/java_home -v 11'
 mvn -Pjava11 release:prepare -Dresume=false
 mvn -Pjava11 release:perform -s settings.xml -Darguments="-DskipTests=true"
 ```
@@ -91,9 +91,14 @@ Tests are ignored in second step because we don't want them to run twice
 
 **3. Java 8 release**
 
+Unfortunately Java 8 does not support one of our Javadoc JOption.
+This commit has to be done before:
+
+[Link to example](https://github.com/FluentLenium/FluentLenium/commit/d798e250aca231bf8d5a92d0e3ae670fbee48ebc)
+
 ```
-git checkout -v java8/v3.8.1`
-export JAVA_HOME=/usr/libexec/java_home -v 1.8
+git checkout -b java8/v3.8.1
+export JAVA_HOME='/usr/libexec/java_home -v 1.8'
 mvn -Pjava8 release:prepare -Dresume=false
 mvn -Pjava8 release:perform -s settings.xml -Darguments="-DskipTests=true"
 ```
@@ -111,15 +116,28 @@ Tests are ignored in second step because we don't want them to run twice
 After release
 ---------
 
-**1. Update FluentLenium version number in docs and examples projects**
+**1. Update Javadoc**
+
+```
+git checkout master
+git merge v4.3.0 (Java 11 release)
+chmod +x update_docs.sh
+./update_docs.sh
+git add * (new files)
+git commit & git push
+```
+
+**2. Update FluentLenium version number in docs and examples projects**
 
 [Example commit](https://github.com/FluentLenium/FluentLenium/commit/69175ef94990dc47527f694ea3b37102d447fbab)
 
-**2. Update CHANGELOG.md**
+**3. Update CHANGELOG.md**
 
 [Example commit](https://github.com/FluentLenium/FluentLenium/commit/69175ef94990dc47527f694ea3b37102d447fbab)
 
-**3. Reset `master` branch to `develop`**
+**4. Reset `master` branch to `develop`**
  
 `master` branch should always match a released version, so the website is 
 updated with docs from the released version.
+
+**5. Consider updating sitemap for Fluentlenium.com**

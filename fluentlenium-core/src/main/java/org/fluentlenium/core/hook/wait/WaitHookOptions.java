@@ -138,6 +138,7 @@ public class WaitHookOptions {
         private boolean withNoDefaultsException;
 
         WaitHookOptionsBuilder() {
+            // intentionally blank
         }
 
         public WaitHookOptions.WaitHookOptionsBuilder timeUnit(TimeUnit timeUnit) {

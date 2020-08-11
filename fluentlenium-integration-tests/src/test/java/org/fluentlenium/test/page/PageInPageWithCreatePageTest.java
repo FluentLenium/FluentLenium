@@ -13,7 +13,6 @@ class PageInPageWithCreatePageTest extends IntegrationFluentTest {
 
     @Test
     void pagesShouldBeInjected() {
-        assertThat(subTestPage.getPageWithCreatePage()).isNotNull();
         assertThat(subTestPage.getPageWithCreatePage()).isInstanceOf(IncludedPage.class);
     }
 }

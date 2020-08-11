@@ -37,28 +37,28 @@ class WaitSizeTest extends IntegrationFluentTest {
         goTo(sizeChangePage);
         sizeChangePage.getRowsByAnnotation().reset();
         await().until(sizeChangePage.getRowsByAnnotation()).size().equalTo(3);
-        assertThat(sizeChangePage.getRowsByAnnotation().size()).isEqualTo(3);
+        assertThat(sizeChangePage.getRowsByAnnotation()).hasSize(3);
     }
 
     @Test
     void waitForListChangeFromPageObjectUsingFluentListAnnotationWithResetInside() {
         goTo(sizeChangePage);
         await().until(sizeChangePage.getRowsByAnnotation().reset()).size().equalTo(3);
-        assertThat(sizeChangePage.getRowsByAnnotation().size()).isEqualTo(3);
+        assertThat(sizeChangePage.getRowsByAnnotation()).hasSize(3);
     }
 
     @Test
     void waitForListChangeFromPageObjectUsingFluentListAnnotation() {
         goTo(sizeChangePage);
         await().until(sizeChangePage.getRowsByAnnotation()).size().equalTo(3);
-        assertThat(sizeChangePage.getRowsByAnnotation().size()).isEqualTo(3);
+        assertThat(sizeChangePage.getRowsByAnnotation()).hasSize(3);
     }
 
     @Test
     void waitForListChangeFromPageObjectUsingList() {
         goTo(sizeChangePage);
         await().until(sizeChangePage.getRowsBySelector()).size().equalTo(3);
-        assertThat(sizeChangePage.getRowsBySelector().size()).isEqualTo(3);
+        assertThat(sizeChangePage.getRowsBySelector()).hasSize(3);
     }
 
     @Test

@@ -18,6 +18,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 public class FluentAdapter extends FluentControlImpl {
 
     private static final Set<String> IGNORED_EXCEPTIONS = Stream.of(
+            "org.junit.AssumptionViolatedException",
             "org.junit.internal.AssumptionViolatedException",
             "org.testng.SkipException")
             .collect(Collectors.toSet());
@@ -146,18 +147,18 @@ public class FluentAdapter extends FluentControlImpl {
      * @return boolean
      */
     boolean isIgnoredException(Throwable e) {
-        if (e == null) {
-            return false;
+        boolean isIgnored = false;
+        if (e != null) {
+            Class clazz = e.getClass();
+            do {
+                if (IGNORED_EXCEPTIONS.contains(clazz.getName())) {
+                    isIgnored = true;
+                    break;
+                }
+                clazz = clazz.getSuperclass();
+            } while (clazz != Object.class);
         }
 
-        Class clazz = e.getClass();
-        do {
-            if (IGNORED_EXCEPTIONS.contains(clazz.getName())) {
-                return true;
-            }
-            clazz = clazz.getSuperclass();
-        } while (clazz != Object.class);
-
-        return false;
+        return isIgnored;
     }
 }

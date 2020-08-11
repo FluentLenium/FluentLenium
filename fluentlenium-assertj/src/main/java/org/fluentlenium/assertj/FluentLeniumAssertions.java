@@ -30,7 +30,7 @@ public final class FluentLeniumAssertions extends Assertions {
     }
 
     /**
-     * Perform assertions on page.
+     * Perform assertions on a {@link FluentPage}.
      *
      * @param actual actual page
      * @return Page assertion object
@@ -40,7 +40,7 @@ public final class FluentLeniumAssertions extends Assertions {
     }
 
     /**
-     * Perform assertions on element.
+     * Perform assertions on a {@link FluentWebElement}.
      *
      * @param actual actual element
      * @return Element assertion object
@@ -50,7 +50,7 @@ public final class FluentLeniumAssertions extends Assertions {
     }
 
     /**
-     * Perform assertions on element list.
+     * Perform assertions on a {@link FluentList}.
      *
      * @param actual actual element list
      * @return Element list assertion object

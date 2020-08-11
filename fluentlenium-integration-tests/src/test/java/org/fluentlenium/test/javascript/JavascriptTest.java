@@ -67,7 +67,7 @@ class JavascriptTest extends IntegrationFluentTest {
                     String script = "arguments[0].click()";
                     executeScript(script, find(".notExistingOne").first().getElement());
                 });
-         }
+    }
 
     @Test
     void shouldExecuteScriptReturnDouble() {

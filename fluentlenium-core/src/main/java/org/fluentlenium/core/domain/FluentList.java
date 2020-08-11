@@ -92,7 +92,7 @@ public interface FluentList<E extends FluentWebElement>
     /**
      * Fill all elements on the list with the corresponding cell in the with array.
      * Only the visible elements are filled
-     * If there is more elements on the list than in the with array, the last element of the table is repeated
+     * If there are more elements on the list than in the with array, the last element of the table is repeated
      *
      * @return the current instance of FluentList to provide capability for chaining calls
      */
@@ -107,6 +107,12 @@ public interface FluentList<E extends FluentWebElement>
      */
     @Override
     FluentList<E> submit();
+
+    @Override
+    default FluentList<E> hoverOver() {
+        throw new UnsupportedOperationException("Hovering over a list of elements is not supported."
+                + "It is supported only for single elements.");
+    }
 
     /**
      * Return the value of elements on the list

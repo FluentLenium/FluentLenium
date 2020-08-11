@@ -19,7 +19,7 @@ import java.util.Set;
 /**
  * Manage living components for a WebDriver instance.
  * <p>
- * A component is an Object implementing no particular interface, but capable a wrapping
+ * A component is an Object implementing no particular interface, but capable of wrapping
  * a {@link org.openqa.selenium.WebElement}.
  * <p>
  * {@link org.fluentlenium.core.domain.FluentWebElement} is the most common component.

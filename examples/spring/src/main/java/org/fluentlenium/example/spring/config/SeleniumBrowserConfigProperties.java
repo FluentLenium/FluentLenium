@@ -3,55 +3,59 @@ package org.fluentlenium.example.spring.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class SeleniumBrowserConfigProperties {
 
-    @Value("${selenium.browser.type}")
-    private BrowserType browserType;
-    @Value("${selenium.hub.enabled}")
-    private Boolean useHub;
-    @Value("${selenium.hub.location}")
-    private String hubLocation;
-    @Value("${selenium.get.url}")
+    @Value("${browser.name}")
+    private String browserName;
+    @Value("${page.url}")
     private String pageUrl;
 
-    @Value("${firefoxdriver.path}")
-    private String firefoxDriverPath;
-    @Value("${chromedriver.path}")
-    private String chromeDriverPath;
-    @Value("${safaridriver.path}")
-    private String safariDriverPath;
-    @Value("${iedriver.path}")
-    private String ieDriverPath;
-    @Value("${edgedriver.path}")
-    private String edgeDriverPath;
-    @Value("${operadriver.path}")
-    private String operaDriverPath;
+    @Value("${mobile.simulator}")
+    private Boolean mobileSimulator;
+    @Value("${appium.server.url}")
+    private String appiumServerUrl;
 
-    public BrowserConfig getBrowserConfig() {
-        return new BrowserConfig(browserType, useHub, hubLocation);
+    @Value("${selenium.hub.enabled}")
+    private Boolean useHub;
+    @Value("${selenium.hub.url}")
+    private String hubUrl;
+
+    public Boolean useHub() {
+        return getBooleanProperty("useHub", useHub);
+    }
+
+    public Boolean isMobileSimulator() {
+        return getBooleanProperty("mobileSimulator", mobileSimulator);
+    }
+
+    public String getBrowserName() {
+        return getStringProperty("browserName", browserName);
+    }
+
+    public String getGridUrl() {
+        return getStringProperty("gridUrl", hubUrl);
+    }
+
+    public String getAppiumServerUrl() {
+        return getStringProperty("appiumServerUrl", appiumServerUrl);
     }
 
     public String getPageUrl() {
-        return pageUrl;
+        return getStringProperty("pageUrl", pageUrl);
     }
 
-    public String getDriverExecutablePath() {
-        switch (browserType) {
-            case SAFARI:
-                return safariDriverPath;
-            case FIREFOX:
-                return firefoxDriverPath;
-            case IE:
-                return ieDriverPath;
-            case EDGE:
-                return edgeDriverPath;
-            case OPERA:
-                return operaDriverPath;
-            case CHROME:
-                return chromeDriverPath;
-            default:
-                return chromeDriverPath;
+    private String getStringProperty(String propertyName, String propertyValue) {
+        return Optional.ofNullable(System.getProperty(propertyName))
+                .orElse(propertyValue);
+    }
+
+    private Boolean getBooleanProperty(String propertyName, Boolean configuredValue) {
+        if (System.getProperty(propertyName) == null) {
+            return configuredValue;
         }
+        return Boolean.valueOf(System.getProperty(propertyName));
     }
 }

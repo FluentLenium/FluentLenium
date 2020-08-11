@@ -1,5 +1,6 @@
 package org.fluentlenium.core.search;
 
+import io.appium.java_client.MobileBy;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.fluentlenium.core.domain.FluentList;
@@ -74,7 +75,7 @@ public class SearchTest {
         when(searchContext.findElements(By.cssSelector("cssStyle[generated=true][checked=ok]"))).thenReturn(webElements);
 
         String name = "cssStyle";
-        AttributeFilter[] filters = new AttributeFilter[] {filter1, filter2};
+        AttributeFilter[] filters = new AttributeFilter[]{filter1, filter2};
         when(filter1.isCssFilterSupported()).thenReturn(true);
         when(filter1.getCssFilter()).thenReturn("[generated=true]");
         when(filter2.isCssFilterSupported()).thenReturn(true);
@@ -107,7 +108,7 @@ public class SearchTest {
         when(searchContext.findElements(By.cssSelector("cssStyle[generated=true]"))).thenReturn(webElements);
 
         String name = "cssStyle";
-        AttributeFilter[] filters = new AttributeFilter[] {filter1, filter2};
+        AttributeFilter[] filters = new AttributeFilter[]{filter1, filter2};
         when(filter1.isCssFilterSupported()).thenReturn(true);
         when(filter1.getCssFilter()).thenReturn("[generated=true]");
         when(filter2.isCssFilterSupported()).thenReturn(false);
@@ -127,7 +128,7 @@ public class SearchTest {
         when(searchContext.findElements(By.cssSelector("cssStyle[generated=true]"))).thenReturn(webElements);
 
         By locator = By.cssSelector("cssStyle");
-        AttributeFilter[] filters = new AttributeFilter[] {filter1, filter2};
+        AttributeFilter[] filters = new AttributeFilter[]{filter1, filter2};
         when(filter1.applyFilter(anyCollection())).thenAnswer((Answer<Collection<FluentWebElement>>)
                 invocation -> (Collection<FluentWebElement>) invocation.getArguments()[0]);
         when(filter2.applyFilter(anyCollection())).thenAnswer((Answer<Collection<FluentWebElement>>)
@@ -140,7 +141,7 @@ public class SearchTest {
     @Test
     public void findPostSelectorFilterWithElementThatMatch() {
         String name = "cssStyle";
-        AttributeFilter[] filters = new AttributeFilter[] {filter1};
+        AttributeFilter[] filters = new AttributeFilter[]{filter1};
         when(filter1.isCssFilterSupported()).thenReturn(false);
         when(filter1.applyFilter(anyCollection())).thenAnswer((Answer<Collection<FluentWebElement>>)
                 invocation -> (Collection<FluentWebElement>) invocation.getArguments()[0]);
@@ -154,7 +155,7 @@ public class SearchTest {
     @Test
     public void findPostSelectorFilterWithElementThatDontMatch() {
         String name = "cssStyle";
-        AttributeFilter[] filters = new AttributeFilter[] {filter1};
+        AttributeFilter[] filters = new AttributeFilter[]{filter1};
         when(filter1.isCssFilterSupported()).thenReturn(false);
         WebElement webElement = mock(WebElement.class);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(Collections.singletonList(webElement));
@@ -162,19 +163,19 @@ public class SearchTest {
         assertThatThrownBy(() -> search.find(name, filters).now()).isExactlyInstanceOf(NoSuchElementException.class);
 
         assertThat(search.find(name, filters).present()).isFalse();
-        assertThat(search.find(name, filters).optional().isPresent()).isFalse();
+        assertThat(search.find(name, filters).optional()).isNotPresent();
     }
 
     @Test
     public void findPostSelectorFilterWithFilterOnText() {
         String name = "cssStyle";
-        AttributeFilter[] filters = new AttributeFilter[] {filter1};
+        AttributeFilter[] filters = new AttributeFilter[]{filter1};
         when(filter1.isCssFilterSupported()).thenReturn(false);
         WebElement webElement = mock(WebElement.class);
         when(searchContext.findElements(By.cssSelector("cssStyle"))).thenReturn(Collections.singletonList(webElement));
 
         assertThat(search.find(name, filters).present()).isFalse();
-        assertThat(search.find(name, filters).optional().isPresent()).isFalse();
+        assertThat(search.find(name, filters).optional()).isNotPresent();
 
         verify(filter1, times(2)).applyFilter(any(Collection.class));
     }
@@ -194,10 +195,57 @@ public class SearchTest {
         assertThat(fluentWebElement.tagName()).isEqualTo("a");
     }
 
-    @Test(expected = NoSuchElementException.class)
-    public void shouldThrowErrorWhenPositionNotFound() {
+    @Test
+    public void mobileFindByPosition() {
         String name = "cssStyle";
-        search.find(name).index(0).now();
+        WebElement webElement1 = mock(WebElement.class);
+        WebElement webElement2 = mock(WebElement.class);
+        when(webElement2.getTagName()).thenReturn("a");
+        when(webElement1.getText()).thenReturn("text");
+        List<WebElement> webElements = new ArrayList<>();
+        webElements.add(webElement1);
+        webElements.add(webElement2);
+        when(searchContext.findElements(MobileBy.AccessibilityId(name))).thenReturn(webElements);
+
+        FluentWebElement fluentWebElement1 = search.el(MobileBy.AccessibilityId(name));
+        assertThat(fluentWebElement1.text()).isEqualTo("text");
+
+        FluentWebElement fluentWebElement2 = search.find(MobileBy.AccessibilityId(name)).index(1);
+        assertThat(fluentWebElement2.tagName()).isEqualTo("a");
+
+        assertThat(search.$(MobileBy.AccessibilityId(name))).hasSize(2);
+    }
+
+    @Test
+    public void shouldThrowErrorWhenListMobileElementNotFound() {
+        assertThatThrownBy(() -> search.find(MobileBy.AccessibilityId("something")).index(0).click())
+                .isInstanceOf(NoSuchElementException.class)
+                .hasMessageContaining("By.AccessibilityId")
+                .hasMessageContaining("something");
+    }
+
+    @Test
+    public void shouldThrowErrorWhen$ListMobileElementNotFound() {
+        assertThatThrownBy(() -> search.$(MobileBy.id("something")).first().text())
+                .isInstanceOf(NoSuchElementException.class)
+                .hasMessageContaining("By.id")
+                .hasMessageContaining("something");
+    }
+
+    @Test
+    public void shouldThrowErrorWhenMobileElementNotFound() {
+        assertThatThrownBy(() -> search.el(MobileBy.AndroidUIAutomator("dummy")).click())
+                .isInstanceOf(NoSuchElementException.class)
+                .hasMessageContaining("By.AndroidUIAutomator")
+                .hasMessageContaining("dummy");
+    }
+
+    @Test
+    public void shouldThrowErrorWhenPositionNotFound() {
+        assertThatThrownBy(() -> search.find("cssStyle").index(0).now())
+                .isInstanceOf(NoSuchElementException.class)
+                .hasMessageContaining("By.cssSelector")
+                .hasMessageContaining("cssStyle");
     }
 
     @Test

@@ -1,73 +1,149 @@
 package org.fluentlenium.assertj.custom;
 
+/**
+ * Interface for asserting the state of an element.
+ */
 public interface ElementStateAssert {
 
     /**
-     * check if the element is clickable
+     * Checks if the element is clickable.
+     * <p>
+     * This method also has a preceding validation for the presence of the element,
+     * which fails this assertion method if it would fail.
+     * <p>
+     * Example:
+     * <pre>
+     * assertThat(element).isClickable();
+     * </pre>
      *
      * @return {@code this} assertion object.
      */
     FluentWebElementAssert isClickable();
 
     /**
-     * check if the element is not clickable
+     * Checks if the element is not clickable.
+     * <p>
+     * This method also has a preceding validation for the presence of the element,
+     * which fails this assertion method if it would fail.
+     * <p>
+     * Example:
+     * <pre>
+     * assertThat(element).isNotClickable();
+     * </pre>
      *
      * @return {@code this} assertion object.
      */
     FluentWebElementAssert isNotClickable();
 
     /**
-     * check if the element is displayed
+     * Checks if the element is displayed.
+     * <p>
+     * This method also has a preceding validation for the presence of the element,
+     * which fails this assertion method if it would fail.
+     * <p>
+     * Example:
+     * <pre>
+     * assertThat(element).isDisplayed();
+     * </pre>
      *
      * @return {@code this} assertion object.
      */
     FluentWebElementAssert isDisplayed();
 
     /**
-     * check if the element is not displayed
+     * Checks if the element is not displayed.
+     * <p>
+     * This method also has a preceding validation for the presence of the element,
+     * which fails this assertion method if it would fail.
+     * <p>
+     * Example:
+     * <pre>
+     * assertThat(element).isNotDisplayed();
+     * </pre>
      *
      * @return {@code this} assertion object.
      */
     FluentWebElementAssert isNotDisplayed();
 
     /**
-     * check if the element is enabled
+     * Checks if the element is enabled.
+     * <p>
+     * This method also has a preceding validation for the presence of the element,
+     * which fails this assertion method if it would fail.
+     * <p>
+     * Example:
+     * <pre>
+     * assertThat(element).isEnabled();
+     * </pre>
      *
      * @return {@code this} assertion object.
      */
     FluentWebElementAssert isEnabled();
 
-
     /**
-     * check if the element is not enabled
+     * Checks if the element is not enabled.
+     * <p>
+     * This method also has a preceding validation for the presence of the element,
+     * which fails this assertion method if it would fail.
+     * <p>
+     * Example:
+     * <pre>
+     * assertThat(element).isNotEnabled();
+     * </pre>
      *
      * @return {@code this} assertion object.
      */
     FluentWebElementAssert isNotEnabled();
 
     /**
-     * check if the element is selected
+     * Checks if the element is selected.
+     * <p>
+     * This method also has a preceding validation for the presence of the element,
+     * which fails this assertion method if it would fail.
+     * <p>
+     * Example:
+     * <pre>
+     * assertThat(element).isSelected();
+     * </pre>
      *
      * @return {@code this} assertion object.
      */
     FluentWebElementAssert isSelected();
 
     /**
-     * check if the element is not selected
+     * Checks if the element is not selected.
+     * <p>
+     * This method also has a preceding validation for the presence of the element,
+     * which fails this assertion method if it would fail.
+     * <p>
+     * Example:
+     * <pre>
+     * assertThat(element).isNotSelected();
+     * </pre>
      *
      * @return {@code this} assertion object.
      */
     FluentWebElementAssert isNotSelected();
 
     /**
-     * check if the element is present
+     * Checks if the element is present.
+     * <p>
+     * Example:
+     * <pre>
+     * assertThat(element).isPresent();
+     * </pre>
      *
      * @return {@code this} assertion object.
      */
     FluentWebElementAssert isPresent();
 
     /**
-     * check if the element is not present
+     * Checks if the element is not present.
+     * <p>
+     * Example:
+     * <pre>
+     * assertThat(element).isNotPresent();
+     * </pre>
      *
      * @return {@code this} assertion object.
      */

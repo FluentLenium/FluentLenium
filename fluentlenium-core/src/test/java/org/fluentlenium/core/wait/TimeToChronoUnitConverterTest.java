@@ -6,6 +6,9 @@ import org.junit.Test;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Unit test for {@link TimeToChronoUnitConverter}.
+ */
 public class TimeToChronoUnitConverterTest {
 
     @Test

@@ -11,8 +11,10 @@ sidebar:
   Listener API: "#listener-api"
   Hooks: "#hooks"
   Javascript execution: "#javascript-execution"
+  CSS injection: "#css-injection"
   Screenshots and HTML dump: "#taking-screenshots-and-html-dumps"
   Alerts: "#alerts"
+  Chromium API: "#chromium-api"
 ---
 
 This section contains description of FluentLenium features which may be useful during writing tests.
@@ -26,9 +28,12 @@ This section contains description of FluentLenium features which may be useful d
 - [Listener API](#listener-api)
 - [Hooks](#hooks)
 - [Javascript execution](#javascript-execution)
+- [CSS injection](#css-injection)
 - [Taking ScreenShots and HTML Dumps](#taking-screenshots-and-html-dumps)
 - [Iframe](#iframe)
 - [Alerts](#alerts)
+- [Performance Timing API](#performance-timing-api)
+- [Chromium API](#chromium-api)
 
 
 ## Window actions
@@ -361,8 +366,26 @@ You can either execute javascript with arguments, with async `executeAsyncScript
 executeScript("change();", 12L).getStringResult();
 ```
 
+## CSS injection
+
+It is possible to manipulate the CSS styling of pages via calling `css()`.
+
+It can be called from a `FluentWebElement`, `FluentDriver` and any of the test adapter implementations.
+
+You can either inject an explicitly defined CSS styling:
+
+```java
+css().inject("#location {\ndisplay: none\n}");
+``` 
+
+or you can inject the content of a CSS resource from the project classpath:
+
+```java
+css().injectResource("/path/to/css/resource.css");
+```
+
 ## Taking ScreenShots and HTML Dumps
-You can take a ScreenShot and a HTML Dump of the browser.
+You can take a ScreenShot and an HTML Dump of the browser.
 
 ```java
 takeScreenshot();
@@ -419,3 +442,135 @@ Entering an input value in prompt:
 ```java
 alert().prompt("FluentLenium")
 ```
+
+## Chromium API
+
+FluentLenium gives you an opportunity to run Chrome DevTools commands in your tests using simple Chromium API.
+
+
+What is Chromium API? 
+
+Chromium API gives you an easy access to the [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/). This was possible by extending commands supported by Selenium with two new endpoints to directly call the DevTools API:
+
+- /session/:sessionId/chromium/send_command_and_get_result
+- /session/:sessionId/chromium/send_comman
+
+It will allow you to easily automate Chrome browser beyond the standard [WebDriver protocol](https://www.w3.org/TR/webdriver/).
+
+
+Why you may want to use it? 
+
+With the DevTool protocol will be able to achieve more powerful interactions with the browser compare to WebDriver. Taking full page screenshot or clearing cookies for every domain are just two examples how you could use it.
+
+
+How to use it?
+
+```java
+  public class DuckDuckGoChromiumApiTest extends FluentTest {
+  
+      private Response response;
+  
+      @Override
+      public WebDriver newWebDriver() {
+          return new ChromeDriver();
+      }
+  
+      @Test
+      public void resultPageUrlShouldContainSearchQueryName() {
+          String searchPhrase = "searchPhrase";
+          String duckDuckUrl = "https://duckduckgo.com";
+  
+          getChromiumApi().sendCommand("Page.navigate", ImmutableMap.of("url", duckDuckUrl));
+          getChromiumApi().sendCommand("Input.insertText", ImmutableMap.of("text", searchPhrase));
+          getChromiumApi().sendCommand("Input.dispatchKeyEvent", sendEnterKeyEventParams());
+          response = getChromiumApi().sendCommandAndGetResponse("Page.getNavigationHistory", ImmutableMap.of());
+  
+          assertIsPhrasePresentInTheResultsPageUrl(searchPhrase);
+      }
+  
+      private Map<String, String> sendEnterKeyEventParams() {
+          return ImmutableMap.of("type", "char", "text", "\r");
+      }
+  
+      private void assertIsPhrasePresentInTheResultsPageUrl(String searchPhrase) {
+          assertThat(response.getValue().toString()).contains(searchPhrase);
+      }
+  }
+```
+
+## Performance Timing API
+
+FluentLenium provides an API for retrieving the performance timing metrics based on the [PerformanceTiming interface defined by W3C](https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface).
+
+The main interface for this API is `PerformanceTiming` from which you can query individual metric values and metrics in bulk as well.
+Most methods return `long` values querying the `window.performance.timing.<metric>` Javascript attribute, except the ones that are explicitly stated in the W3C documentation that they
+may have other type of values as well.
+
+They can be retrieved via `FluentTest` and its other framework specific variants:
+
+```java
+public class SomeTest extends FluentTest {
+
+    @Page
+    private Homepage homepage;
+
+    @Test
+    public void test() {
+        //Get metric via parameterized method
+        long loadEventEnd = performanceTiming().getEventValue(PerformanceTimingEvent.LOAD_EVENT_END);
+        
+        //The same as the previous call but the value is converted to the given time unit
+        long loadEventEndInSeconds = performanceTiming().getEventValue(PerformanceTimingEvent.LOAD_EVENT_END, TimeUnit.SECONDS);
+        
+        //This is a convenience method for calling performanceTiming().getEventValue(PerformanceTimingEvent.DOM_COMPLETE);
+        long domComplete = performanceTiming().domComplete();
+        
+        //The same as the previous call but the value is converted to the given time unit
+        long domCompleteInSeconds = performanceTiming().domComplete(TimeUnit.SECONDS);
+        
+    }
+}
+
+and via `FluentPage` as well:
+
+public class Homepage extends FluentPage {
+    
+    public long getDomComplete() {
+        return performanceTiming().domComplete();
+    }
+    
+    public long getLoadEventEnd() {
+        return performanceTiming().getEventValue(PerformanceTimingEvent.LOAD_EVENT_END);
+    }
+}
+```
+
+Each method returning a specific metric execute a separate Javascript command.
+
+There is another way to get metrics, specifically to get all metrics in a single object called `PerformanceTimingMetrics`. This returns the object returned by the `window.performance.timing`
+Javascript attribute.
+
+```java
+@Test
+public void test() {
+    //This returns the metrics by default in default milliseconds
+    PerformanceTimingMetrics metrics = performanceTiming().getMetrics();
+    long domComplete = metrics.getDomComplete();
+    
+    //This returns a new metrics object that will return the values in the set time unit
+    PerformanceTimingMetrics metricsInSeconds = metrics.in(TimeUnit.SECONDS);
+    long domCompleteInSeconds = metricsInSeconds.getDomComplete();
+}
+```
+
+In this case only a single Javascript command is executed for `performanceTiming().getMetrics()`, `getDomComplete()` (actually any method) on this object returns the saved value,
+and none of the getter methods execute any additional Javascript command.
+
+It is important to note the the implementations of both the `PerformanceTiming` and `PerformanceTimingMetrics` interfaces provided by FluentLenium return handle the `navigationStart`
+attribute as zero and every other metric is calculated and returned relative to `navigationStart`.
+
+Before retrieving a performance timing metrics value make sure that the page where you query it loaded completely.
+In case when navigation happens to a specific URL, or bz some action performed on the page make sure in your test that the page where it navigates to loads completely.
+Otherwise certain metrics might not have been registered until that moment.
+
+You can find some examples in the [FluentLenium project](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/performance) for how you can use these features.

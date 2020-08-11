@@ -74,9 +74,10 @@ public class HeroImage {
 }
 ```
 
+#### PageUrl parameters
+
 It's possible to define parameters in FluentPage url using `{[?][/path/]parameter}` syntax.
-If it starts with `?`, it means that the parameter is optional. Path can be included in the braces so it
-is removed when parameter value is not defined.
+If it starts with `?`, it means that the parameter is optional. Path can be included in the braces so it is removed when parameter value is not defined.
 
 ```java
 @PageUrl("/document/{document}{?/page/page}{?/format}")
@@ -88,6 +89,21 @@ public class DocumentPage extends FluentPage {
         ...
 }
 ```
+
+Also when a page is open, one might want to extract certain parameter values from the url template defined in the `@PageUrl` annotation.
+One can do that by calling `getParam(String)` on a FluentPage object. It works only when the FluentPage object is annotated as `@PageUrl'.
+
+So for a template like `/document/{document}{?/page/page}{?/format}` with an actual URL value `/document/345/json` one can query parameters like:
+
+```java
+String document = documentPage.getParam("document");
+```
+
+The queried value will be 345 in this case.
+
+If the provided parameter name is not defined in the template or it has no value in the actual URL, the returned value is `null`.
+
+#### Local files
 
 You can also refer to files in your test resources directory by specifying the `file` attribute with a file name: 
 
@@ -116,6 +132,8 @@ class Page2DynamicP2P1 extends FluentPage {
     }
 }
 ```
+
+#### Navigation and interaction on pages using parameters
 
 Parameter values are given in order to `isAt` and `go` methods.
 
@@ -366,15 +384,17 @@ Below you can find some examples of what labeling combinations will result in wh
 
 ##### Label
 
-If no label value is provided it will use the class name and field name as the label.
+If no label value is provided, it will use the class name and field name as the label.
 
 **FluentWebElement + Label without value** 
 ```java
-@FindBy(css = ".hero img")
-@Label
-private FluentWebElement heroImage;
+public class Homepage extends FluentPage {
+    @FindBy(css = ".hero img")
+    @Label
+    private FluentWebElement heroImage;
+}
 ```
-will give the following toString: *FluentWaitMessageTest.heroImage (Lazy Element)*
+will give the following toString: *Homepage.heroImage (Lazy Element)*
 
 **FluentList + Label without value**
 ```java
@@ -385,7 +405,7 @@ private FluentList<FluentWebElement> images;
 will give the following toString: *pictures ([])*
 
 ##### LabelHint
-If the label value is defined the toString value will being with the value, and by specifying label hints, they will be list after the label value enclosed with [ and ]. 
+If the label value is defined, the toString value will being with the value, and by specifying label hints, they will be list after the label value enclosed with [ and ]. 
 
 **Label + single label hint** 
 ```java
@@ -409,12 +429,11 @@ will give the following toString: *banner [ad, img] ([])*
 
 A ```Component``` is an object wrapping a ```WebElement``` instance.
 
-A ```Component``` supports Injection like a Page Object, but all searchs are performed in the local context of the wrapped element.
+A ```Component``` supports injection like a Page Object, but all searches are performed in the local context of the wrapped element.
 
 Using components improves readability of both Page Objects and Tests.
 
-`FluentWebElement` is the default component class in FluentLenium, so you can implement you own custom component
-by extending `FluentWebElement` to add custom logic.
+`FluentWebElement` is the default component class in FluentLenium, so you can implement your own custom component by extending `FluentWebElement` to add custom logic.
 
 ```java
 public class SelectComponent extends FluentWebElement {

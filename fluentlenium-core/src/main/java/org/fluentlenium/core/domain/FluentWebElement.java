@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 import java.util.function.Function;
+
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.SeleniumDriverControl;
@@ -52,6 +53,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
@@ -433,6 +435,12 @@ public class FluentWebElement extends Component
     }
 
     @Override
+    public FluentWebElement hoverOver() {
+        mouse().moveToElement();
+        return this;
+    }
+
+    @Override
     public boolean present() {
         return LocatorProxies.present(webElement);
     }
@@ -706,7 +714,8 @@ public class FluentWebElement extends Component
         try {
             clickable = ExpectedConditions.elementToBeClickable(getElement())
                     .apply(control.getDriver()) != null;
-        } catch (NoSuchElementException | StaleElementReferenceException | ElementNotVisibleException e) {
+        } catch (NoSuchElementException | StaleElementReferenceException
+                | ElementNotVisibleException | ElementClickInterceptedException e) {
             clickable = false;
         }
         return clickable;

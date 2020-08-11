@@ -4,11 +4,13 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.lang3.StringUtils;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.fluentlenium.adapter.exception.AnnotationNotFoundException;
@@ -24,9 +26,10 @@ import org.slf4j.LoggerFactory;
  * <p>
  * Extends this class to provide FluentLenium support to your Test class.
  */
+@SuppressWarnings("PMD.GodClass")
 public class FluentTestRunnerAdapter extends FluentAdapter {
 
-    private static final Logger logger = LoggerFactory.getLogger(FluentTestRunnerAdapter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FluentTestRunnerAdapter.class);
 
     private final SharedMutator sharedMutator;
 
@@ -97,25 +100,23 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     }
 
     /**
-     *
      * @return Class of currently running test
      */
     protected Class<?> getTestClass() {
         Class<?> currentTestClass = FluentTestRunnerAdapter.TEST_CLASS.get();
         if (currentTestClass == null) {
-            logger.warn("Current test class is null. Are you in test context?");
+            LOGGER.warn("Current test class is null. Are you in test context?");
         }
         return currentTestClass;
     }
 
     /**
-     *
      * @return method name (as String) of currently running test
      */
     protected String getTestMethodName() {
         String currentTestMethodName = FluentTestRunnerAdapter.TEST_METHOD_NAME.get();
         if (currentTestMethodName == null) {
-            logger.warn("Current test method name is null. Are you in text context?");
+            LOGGER.warn("Current test method name is null. Are you in text context?");
         }
         return currentTestMethodName;
     }
@@ -124,6 +125,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * Allows to access Class level annotation of currently running test
      *
      * @param annotation interface you want to access
+     * @param <T>        the class annotation
      * @return Annotation instance
      * @throws AnnotationNotFoundException when annotation you want to access couldn't be find
      */
@@ -141,17 +143,17 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * Allows to access method level annotation of currently running test
      *
      * @param annotation interface you want to access
+     * @param <T>        the method annotation
      * @return Annotation instance
      * @throws AnnotationNotFoundException of annotation you want to access couldn't be found
-     * @throws MethodNotFoundException if test method couldn't be found - if it occurs that's most likely FL bug
-     *
+     * @throws MethodNotFoundException     if test method couldn't be found - if it occurs that's most likely FL bug
      */
     protected <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
         T definedAnnotation;
         try {
             definedAnnotation = getTestClass().getDeclaredMethod(getTestMethodName()).getAnnotation(annotation);
         } catch (NoSuchMethodException e) {
-            throw new MethodNotFoundException();
+            throw new MethodNotFoundException(e);
         }
 
         if (definedAnnotation == null) {
@@ -213,25 +215,15 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     }
 
     private void setTestClassAndMethodValues() {
-        if (PARAMETERS_THREAD_LOCAL.get() != null) {
-            if (PARAMETERS_THREAD_LOCAL.get().getTestClass() != null) {
-                setClass();
-            }
-            if (PARAMETERS_THREAD_LOCAL.get().getTestClass() != null) {
-                setMethodName();
-            }
-        }
+        Optional.ofNullable(PARAMETERS_THREAD_LOCAL.get()).ifPresent((effectiveParameters) -> {
+            Optional.ofNullable(effectiveParameters.getTestClass()).ifPresent(TEST_CLASS::set);
+            Optional.ofNullable(effectiveParameters.getTestName()).ifPresent(this::setMethodName);
+        });
     }
 
-    private void setMethodName() {
-        String localTestName = PARAMETERS_THREAD_LOCAL.get().getTestName();
-        String className = StringUtils.substringBefore(localTestName, "(");
+    private void setMethodName(String methodName) {
+        String className = StringUtils.substringBefore(methodName, "(");
         TEST_METHOD_NAME.set(className);
-    }
-
-    private void setClass() {
-        Class<?> localTestClass = PARAMETERS_THREAD_LOCAL.get().getTestClass();
-        TEST_CLASS.set(localTestClass);
     }
 
     private String getCauseMessage(Exception e) {
@@ -264,44 +256,54 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @throws ExecutionException   execution exception
      * @throws InterruptedException interrupted exception
      */
-    protected SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters, ExecutorService webDriverExecutor)
+    protected SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters,
+                                                 ExecutorService webDriverExecutor)
             throws ExecutionException, InterruptedException {
         SharedWebDriver sharedWebDriver = null;
-        ExecutorService setExecutorService = null;
+        ExecutorService executorService = getExecutor(webDriverExecutor);
 
-        if (webDriverExecutor != null) {
-            setExecutorService = webDriverExecutor;
-        }
+        for (int retryCount = 0; retryCount < getBrowserTimeoutRetries(); retryCount++) {
 
-        for (int browserTimeoutRetryNo = 0; browserTimeoutRetryNo < getBrowserTimeoutRetries()
-                && sharedWebDriver == null; browserTimeoutRetryNo++) {
-            if (setExecutorService == null) {
-                webDriverExecutor = Executors.newSingleThreadExecutor();
-            } else {
-                webDriverExecutor = setExecutorService;
-            }
+            Future<SharedWebDriver> futureWebDriver = createDriver(parameters, executorService);
+            shutDownExecutor(executorService);
 
-            Future<SharedWebDriver> futureWebDriver = webDriverExecutor.submit(
-                    () -> SharedWebDriverContainer.INSTANCE
-                            .getOrCreateDriver(this::newWebDriver, parameters.getTestClass(),
-                                    parameters.getTestName(), parameters.getDriverLifecycle()));
-
-            setTestClassAndMethodValues();
-
-            webDriverExecutor.shutdown();
             try {
-                if (!webDriverExecutor.awaitTermination(getBrowserTimeout(), TimeUnit.MILLISECONDS)) {
-                    webDriverExecutor.shutdownNow();
-                }
-
                 sharedWebDriver = futureWebDriver.get();
             } catch (InterruptedException | ExecutionException e) {
-                webDriverExecutor.shutdownNow();
+                executorService.shutdownNow();
                 throw e;
+            }
+
+            if (sharedWebDriver != null) {
+                break;
             }
         }
 
+        setTestClassAndMethodValues();
         return sharedWebDriver;
+    }
+
+    private void shutDownExecutor(ExecutorService executorService) throws InterruptedException {
+        executorService.shutdown();
+        if (didNotExitGracefully(executorService)) {
+            executorService.shutdownNow();
+        }
+    }
+
+    private boolean didNotExitGracefully(ExecutorService executorService) throws InterruptedException {
+        return !executorService.awaitTermination(getBrowserTimeout(), TimeUnit.MILLISECONDS);
+    }
+
+    private Future<SharedWebDriver> createDriver(EffectiveParameters<?> parameters, ExecutorService executorService) {
+        return executorService.submit(
+                () -> SharedWebDriverContainer.INSTANCE.getOrCreateDriver(this::newWebDriver, parameters));
+    }
+
+    private ExecutorService getExecutor(ExecutorService webDriverExecutor) {
+        if (webDriverExecutor == null) {
+            return Executors.newSingleThreadExecutor();
+        }
+        return webDriverExecutor;
     }
 
     private void clearThreadLocals() {
@@ -343,28 +345,16 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      */
     protected void finished(Class<?> testClass, String testName) {
         DriverLifecycle driverLifecycle = getDriverLifecycle();
+        EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName,
+                driverLifecycle);
+        SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getDriver(parameters);
 
         if (driverLifecycle == DriverLifecycle.METHOD || driverLifecycle == DriverLifecycle.THREAD) {
-            EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName,
-                    driverLifecycle);
+            Optional.ofNullable(sharedWebDriver).ifPresent(SharedWebDriverContainer.INSTANCE::quit);
+        }
 
-            SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE
-                    .getDriver(parameters.getTestClass(), parameters.getTestName(), parameters.getDriverLifecycle());
-
-            if (sharedWebDriver != null) {
-                SharedWebDriverContainer.INSTANCE.quit(sharedWebDriver);
-            }
-        } else if (getDeleteCookies() != null && getDeleteCookies()) {
-            EffectiveParameters<?> sharedParameters = sharedMutator.getEffectiveParameters(testClass, testName,
-                    driverLifecycle);
-
-            SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE
-                    .getDriver(sharedParameters.getTestClass(), sharedParameters.getTestName(),
-                            sharedParameters.getDriverLifecycle());
-
-            if (sharedWebDriver != null) {
-                sharedWebDriver.getDriver().manage().deleteAllCookies();
-            }
+        if (getDeleteCookies()) {
+            Optional.ofNullable(sharedWebDriver).ifPresent(shared -> shared.getDriver().manage().deleteAllCookies());
         }
 
         clearThreadLocals();

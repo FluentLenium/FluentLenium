@@ -1,17 +1,10 @@
 package org.fluentlenium.configuration;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.Locale;
-
-import org.apache.commons.io.IOUtils;
+import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.json.Json;
-import org.openqa.selenium.json.JsonException;
-import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.Locale;
 
 /**
  * Abstract properties configuration.
@@ -22,17 +15,15 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
      * Default properties prefix.
      */
     static final String PROPERTIES_PREFIX = "fluentlenium.";
-
     private final String[] prefixes;
-
-    private final Json jsonConverter = new Json();
-
+    private CapabilitiesConfigurationPropertyRetriever capabilitiesRetriever;
     private PropertiesBackend propertiesBackend;
 
     /**
      * Creates a new abstract properties configuration, using default properties prefix.
      *
      * @param propertiesReader properties reader
+     * @see #PROPERTIES_PREFIX
      */
     PropertiesBackendConfiguration(PropertiesBackend propertiesReader) {
         this(propertiesReader, PROPERTIES_PREFIX);
@@ -46,10 +37,13 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
      */
     PropertiesBackendConfiguration(PropertiesBackend propertiesReader, String... prefixes) {
         if (prefixes.length == 0) {
-            throw new IllegalArgumentException("Prefixes should be defined");
+            throw new IllegalArgumentException("At least one configuration property prefix should be defined."
+                    + "Alternatively you can call the PropertiesBackendConfiguration(PropertiesBackend) constructor"
+                    + "to have the default 'fluentlenium.' prefix configured.");
         }
         propertiesBackend = propertiesReader;
         this.prefixes = prefixes;
+        capabilitiesRetriever = new CapabilitiesConfigurationPropertyRetriever();
     }
 
     /**
@@ -148,43 +142,6 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
         return null;
     }
 
-    /**
-     * Creates a new URL from it's representation
-     *
-     * @param url url
-     * @return URL object
-     * @throws MalformedURLException if given url is not valid
-     */
-    private URL newURL(String url) throws MalformedURLException {
-        return new URL(url);
-    }
-
-    private Capabilities getCapabilitiesProperty() {
-        String property = getProperty("capabilities");
-        if (!isValidProperty(property)) {
-            return null;
-        }
-        try {
-            URL url = newURL(property);
-            try {
-                property = IOUtils.toString(url, Charset.defaultCharset());
-            } catch (IOException e) {
-                throw new ConfigurationException("Can't read Capabilities defined at " + url, e);
-            }
-        } catch (MalformedURLException e) { // NOPMD EmptyCatchBlock PreserveStackTrace
-            // This is not an URL. Consider property as JSON.
-        }
-        CapabilitiesFactory factory = (CapabilitiesFactory) CapabilitiesRegistry.INSTANCE.get(property);
-        if (factory != null) {
-            return factory.newCapabilities(getGlobalConfiguration());
-        }
-        try {
-            return jsonConverter.toType(property, DesiredCapabilities.class);
-        } catch (JsonException e) {
-            throw new ConfigurationException("Can't convert JSON Capabilities to Object.", e);
-        }
-    }
-
     @Override
     public Class<? extends ConfigurationFactory> getConfigurationFactory() {
         return getClassProperty(ConfigurationFactory.class, "configurationFactory");
@@ -207,7 +164,11 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
 
     @Override
     public Capabilities getCapabilities() {
-        return getCapabilitiesProperty();
+        String capabilities = getProperty("capabilities");
+        if (isValidProperty(capabilities)) {
+            return capabilitiesRetriever.getCapabilitiesProperty(capabilities, getGlobalConfiguration());
+        }
+        return null;
     }
 
     @Override
@@ -289,5 +250,10 @@ public class PropertiesBackendConfiguration extends BaseConfiguration implements
     @Override
     public String getCustomProperty(String propertyName) {
         return getStringProperty(propertyName);
+    }
+
+    @VisibleForTesting
+    void setCapabilitiesRetriever(CapabilitiesConfigurationPropertyRetriever capabilitiesRetriever) {
+        this.capabilitiesRetriever = capabilitiesRetriever;
     }
 }

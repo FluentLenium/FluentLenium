@@ -17,7 +17,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class FluentJUnitJupiterTest {
+class FluentJUnitJupiterTest {
     @Mock
     private ExtensionContext context;
     private FluentJUnitJupiter sut;
@@ -50,8 +50,8 @@ public class FluentJUnitJupiterTest {
 
     @Test
     void testAfterEachSuccessful() {
-        when(context.getExecutionException()).thenReturn(Optional.ofNullable(null));
-        
+        when(context.getExecutionException()).thenReturn(Optional.empty());
+
         sut.afterEach(context);
 
         verify(test)._finished(eq(Test1.class), eq("test1"));

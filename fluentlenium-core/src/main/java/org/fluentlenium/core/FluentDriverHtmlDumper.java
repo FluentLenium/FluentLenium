@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import org.fluentlenium.configuration.Configuration;
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,9 +14,11 @@ import java.nio.file.Paths;
 import java.util.function.Supplier;
 
 /**
- * Takes HTML dump..
+ * Takes HTML dump.
  */
 public class FluentDriverHtmlDumper {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FluentDriverHtmlDumper.class);
 
     private final Configuration configuration;
 
@@ -31,7 +35,8 @@ public class FluentDriverHtmlDumper {
      * If an error occurs during taking the HTML dump, the dump file is still created, but it will contain a message
      * that HTML dump could not be taken.
      *
-     * @param fileName the file name to dump the HTML to
+     * @param fileName     the file name to dump the HTML to
+     * @param htmlSupplier provides the HTML snippet that should be dumped
      * @throws RuntimeException when an error occurs during dumping HTML
      */
     public void takeHtmlDump(String fileName, Supplier<String> htmlSupplier) {
@@ -39,10 +44,8 @@ public class FluentDriverHtmlDumper {
         try {
             destFile = getDestinationFile(fileName);
             FileUtils.write(destFile, htmlSupplier.get(), "UTF-8");
-        } catch (Exception e) {
-            if (destFile == null) {
-                destFile = new File(fileName);
-            }
+            LOGGER.info("Created HTML dump at: " + destFile.getAbsolutePath());
+        } catch (IOException e) {
             try (PrintWriter printWriter = new PrintWriter(destFile, "UTF-8")) {
                 printWriter.write("Can't dump HTML");
                 printWriter.println();

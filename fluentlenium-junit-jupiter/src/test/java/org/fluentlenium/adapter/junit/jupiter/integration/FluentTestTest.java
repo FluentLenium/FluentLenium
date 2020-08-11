@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.junit.jupiter.integration;
 
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -37,12 +38,11 @@ import java.io.IOError;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 @NotThreadSafe
-public class FluentTestTest {
+class FluentTestTest {
     private static List<WebDriver> drivers = new ArrayList<>();
     private static List<WebDriver> sharedClassDrivers = new ArrayList<>();
     private static List<WebDriver> sharedOnceDrivers = new ArrayList<>();
@@ -67,17 +67,17 @@ public class FluentTestTest {
         }
 
         @Test
-        public void okTest() {
+        void okTest() {
             goTo("url");
         }
 
         @Test
-        public void okTest2() {
+        void okTest2() {
             goTo("url2");
         }
 
         @Test
-        public void failingTest() {
+        void failingTest() {
             fail("Failing Test");
         }
     }
@@ -93,17 +93,17 @@ public class FluentTestTest {
         }
 
         @Test
-        public void okTest() {
+        void okTest() {
             goTo("url");
         }
 
         @Test
-        public void okTest2() {
+        void okTest2() {
             goTo("url2");
         }
 
         @Test
-        public void failingTest() {
+        void failingTest() {
             fail("Failing Test");
         }
     }
@@ -118,17 +118,17 @@ public class FluentTestTest {
         }
 
         @Test
-        public void okTest() {
+        void okTest() {
             goTo("url");
         }
 
         @Test
-        public void okTest2() {
+        void okTest2() {
             goTo("url2");
         }
 
         @Test
-        public void failingTest() {
+        void failingTest() {
             fail("Failing Test");
         }
     }
@@ -148,24 +148,24 @@ public class FluentTestTest {
         }
 
         @Test
-        public void okTest() {
+        void okTest() {
             goTo("url");
         }
 
         @Test
-        public void okTest2() {
+        void okTest2() {
             goTo("url2");
         }
 
         @Test
-        public void failingTest() {
+        void failingTest() {
             fail("Failing Test");
         }
     }
 
     public static class AutomaticScreenShotTest extends FluentTest {
 
-        public AutomaticScreenShotTest() {
+        AutomaticScreenShotTest() {
             getConfiguration().setHtmlDumpPath(tmpPath.getPath());
             getConfiguration().setHtmlDumpMode(TriggerMode.AUTOMATIC_ON_FAIL);
             getConfiguration().setScreenshotPath(tmpPath.getPath());
@@ -190,19 +190,19 @@ public class FluentTestTest {
             WebElement htmlElement = Mockito.mock(WebElement.class);
             Mockito.when(htmlElement.getAttribute("innerHTML")).thenReturn(html);
 
-            Mockito.when(webDriver.findElements(By.cssSelector("html"))).thenReturn(Arrays.asList(htmlElement));
+            Mockito.when(webDriver.findElements(By.cssSelector("html"))).thenReturn(singletonList(htmlElement));
             screenshotWebDrivers.add(webDriver);
             return webDriver;
         }
 
         @Test
-        public void failingTest() {
+        void failingTest() {
             fail("Failing Test");
         }
     }
 
     @AfterEach
-    public void after() {
+    void after() {
         drivers.clear();
         sharedClassDrivers.clear();
         sharedOnceDrivers.clear();
@@ -211,12 +211,12 @@ public class FluentTestTest {
     }
 
     @Test
-    public void testFluentTest() {
+    void testFluentTest() {
         LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder.request()
                 .selectors(selectClass(InternalTest.class)).build();
 
         class Listener implements TestExecutionListener {
-            public List<Throwable> failures = new ArrayList<>();
+            private List<Throwable> failures = new ArrayList<>();
 
             @Override
             public void executionFinished(TestIdentifier identifier, TestExecutionResult result) {
@@ -243,7 +243,7 @@ public class FluentTestTest {
     }
 
     @Test
-    public void testInternalTestSharedClass() {
+    void testInternalTestSharedClass() {
         SummaryGeneratingListener summaryGeneratingListener = getSummaryGeneratingListener(InternalTestSharedClass.class);
 
         assertThat(summaryGeneratingListener.getSummary().getFailures()).hasSize(1);
@@ -272,7 +272,7 @@ public class FluentTestTest {
     }
 
     @Test
-    public void testInternalTestSharedOnce() {
+    void testInternalTestSharedOnce() {
         SummaryGeneratingListener summaryGeneratingListener = getSummaryGeneratingListener(InternalTestSharedOnce.class);
         assertThat(summaryGeneratingListener.getSummary().getFailures()).hasSize(1);
         assertThat(summaryGeneratingListener.getSummary().getFailures().get(0).getException().getMessage())
@@ -288,7 +288,7 @@ public class FluentTestTest {
     }
 
     @Test
-    public void testShouldDeleteCookiesTest() {
+    void testShouldDeleteCookiesTest() {
         SummaryGeneratingListener summaryGeneratingListener =
                 getSummaryGeneratingListener(ShouldDeleteCookiesTest.class);
         assertThat(summaryGeneratingListener.getSummary().getFailures()).hasSize(1);
@@ -309,7 +309,7 @@ public class FluentTestTest {
     }
 
     @Test
-    public void testAutomaticScreenShotTest() throws IOException {
+    void testAutomaticScreenShotTest() throws IOException {
         SummaryGeneratingListener summaryGeneratingListener =
                 getSummaryGeneratingListener(AutomaticScreenShotTest.class);
 

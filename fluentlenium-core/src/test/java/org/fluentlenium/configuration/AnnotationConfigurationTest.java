@@ -2,12 +2,16 @@ package org.fluentlenium.configuration;
 
 import org.assertj.core.api.Assertions;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationDefaults;
 import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
 
+/**
+ * Unit test for {@link AnnotationConfiguration}.
+ */
 public class AnnotationConfigurationTest {
     private static AnnotationConfiguration configuration;
     private static AnnotationConfiguration defaultConfiguration;
@@ -15,6 +19,8 @@ public class AnnotationConfigurationTest {
     private static AnnotationConfiguration desiredCapabilitiesConfiguration;
     private static AnnotationConfiguration capabilitiesClassNameConfiguration;
     private static AnnotationConfiguration capabilitiesFactoryConfiguration;
+    private static AnnotationConfiguration capabilitiesInvalidJsonConfiguration;
+    private static AnnotationConfiguration capabilitiesInvalidUrlConfiguration;
 
     @FluentConfiguration(baseUrl = "http://localhost:3000", configurationFactory = DummyConfigurationFactory.class,
             configurationDefaults = DummyConfigurationDefaults.class, eventsEnabled = FluentConfiguration.BooleanValue.FALSE,
@@ -22,7 +28,7 @@ public class AnnotationConfigurationTest {
             ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL, htmlDumpPath = "/html-path", implicitlyWait = 1000,
             pageLoadTimeout = 2000, awaitPollingEvery = 10, awaitAtMost = 100, screenshotMode = ConfigurationProperties
             .TriggerMode.MANUAL, screenshotPath = "/screenshot-path", scriptTimeout = 3000, webDriver = "firefox", custom =
-            @CustomProperty(name = "key", value = "value"), driverLifecycle = ConfigurationProperties.DriverLifecycle.METHOD,
+    @CustomProperty(name = "key", value = "value"), driverLifecycle = ConfigurationProperties.DriverLifecycle.METHOD,
             browserTimeout = 5000L, browserTimeoutRetries = 3, deleteCookies = FluentConfiguration.BooleanValue.TRUE)
     public static class ConfiguredClass {
     }
@@ -39,6 +45,14 @@ public class AnnotationConfigurationTest {
     public static class CapabilitiesFactoryClass {
     }
 
+    @FluentConfiguration(capabilities = "vivaldi")
+    public static class CapabilitiesInvalidJsonClass {
+    }
+
+    @FluentConfiguration(capabilities = "https://some.nonexistent.com/path")
+    public static class CapabilitiesInvalidUrlClass {
+    }
+
     @FluentConfiguration
     public static class DefaultClass {
     }
@@ -51,6 +65,8 @@ public class AnnotationConfigurationTest {
         desiredCapabilitiesConfiguration = new AnnotationConfiguration(DesiredCapabilitiesClass.class);
         capabilitiesClassNameConfiguration = new AnnotationConfiguration(CapabilitiesClassNameClass.class);
         capabilitiesFactoryConfiguration = new AnnotationConfiguration(CapabilitiesFactoryClass.class);
+        capabilitiesInvalidJsonConfiguration = new AnnotationConfiguration(CapabilitiesInvalidJsonClass.class);
+        capabilitiesInvalidUrlConfiguration = new AnnotationConfiguration(CapabilitiesInvalidUrlClass.class);
     }
 
     @Test
@@ -117,6 +133,25 @@ public class AnnotationConfigurationTest {
     @Test
     public void capabilitiesFactory() {
         Assertions.assertThat(capabilitiesFactoryConfiguration.getCapabilities()).isExactlyInstanceOf(TestCapabilities.class);
+    }
+
+    @Test
+    @Ignore("TO BE IMPLEMENTED")
+    public void capabilitiesUrl() {
+    }
+
+    @Test
+    public void capabilitiesCannotBeReadFromUrl() {
+        Assertions.assertThatThrownBy(() -> capabilitiesInvalidUrlConfiguration.getCapabilities())
+                .isInstanceOf(ConfigurationException.class)
+                .hasMessage("Can't read Capabilities defined at https://some.nonexistent.com/path");
+    }
+
+    @Test
+    public void capabilitiesCannotBeConvertedFromJson() {
+        Assertions.assertThatThrownBy(() -> capabilitiesInvalidJsonConfiguration.getCapabilities())
+                .isInstanceOf(ConfigurationException.class)
+                .hasMessage("Can't convert JSON Capabilities to Object.");
     }
 
     @Test
@@ -204,7 +239,7 @@ public class AnnotationConfigurationTest {
         Assertions.assertThat(noConfiguration.getEventsEnabled()).isNull();
         Assertions.assertThat(defaultConfiguration.getEventsEnabled()).isNull();
 
-        Assertions.assertThat(configuration.getEventsEnabled()).isEqualTo(false);
+        Assertions.assertThat(configuration.getEventsEnabled()).isFalse();
     }
 
     @Test

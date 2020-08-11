@@ -7,14 +7,16 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
+import org.fluentlenium.core.ScreenshotNotCreatedException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -41,7 +43,7 @@ public class ImageUtils {
      * The FluentLenium logo is also added on to the screenshot.
      *
      * @return the screenshot as a byte array
-     * @throws RuntimeException if a problem occurred during reading the screenshot file
+     * @throws ScreenshotNotCreatedException if a problem occurred during reading the screenshot file
      */
     public byte[] handleAlertAndTakeScreenshot() {
         String alertText = getDriver().switchTo().alert().getText();
@@ -55,7 +57,7 @@ public class ImageUtils {
             FileUtils.deleteQuietly(scrFile);
             return toByteArray(stitchImages(screenshotImage, alertImage, false));
         } catch (IOException e) {
-            throw new RuntimeException("Error while reading screenshot file.", e);
+            throw new ScreenshotNotCreatedException("Error while reading screenshot file.", e);
         }
     }
 
@@ -64,17 +66,17 @@ public class ImageUtils {
      *
      * @param fileName the name of the file to convert
      * @return the converted BufferedImage
-     * @throws FileNotFoundException if the argument file cannot be found
-     * @throws RuntimeException      if a problem occurred during image conversion
+     * @throws NoSuchFileException if the argument file cannot be found
+     * @throws ScreenshotNotCreatedException      if a problem occurred during image conversion
      */
-    public static BufferedImage toBufferedImage(String fileName) throws FileNotFoundException {
-        InputStream is = new FileInputStream(new File(fileName));
+    public static BufferedImage toBufferedImage(String fileName) throws IOException {
+        InputStream is = Files.newInputStream(Paths.get(fileName));
         try {
             BufferedImage image = ImageIO.read(is);
             is.close();
             return image;
         } catch (IOException e) {
-            throw new RuntimeException(ERROR_WHILE_CONVERTING_IMAGE, e);
+            throw new ScreenshotNotCreatedException(ERROR_WHILE_CONVERTING_IMAGE, e);
         }
     }
 
@@ -84,7 +86,7 @@ public class ImageUtils {
             ImageIO.write(image, "png", byteArrayOutputStream);
             return byteArrayOutputStream.toByteArray();
         } catch (IOException e) {
-            throw new RuntimeException(ERROR_WHILE_CONVERTING_IMAGE, e);
+            throw new ScreenshotNotCreatedException(ERROR_WHILE_CONVERTING_IMAGE, e);
         }
     }
 
@@ -109,7 +111,7 @@ public class ImageUtils {
         }
     }
 
-    private BufferedImage generateAlertImageWithLogo(String alertText, int screenshotWidth) throws FileNotFoundException {
+    private BufferedImage generateAlertImageWithLogo(String alertText, int screenshotWidth) throws IOException {
         BufferedImage alertImage = generateImageWithText(alertText, screenshotWidth, 200);
         BufferedImage logo = toBufferedImage(ImageUtils.class.getResource("/fl_logo.png").getPath());
         return stitchImages(alertImage, logo, true);

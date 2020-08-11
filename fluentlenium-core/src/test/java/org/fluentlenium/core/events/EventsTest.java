@@ -224,14 +224,16 @@ public class EventsTest {
         reset(beforeAllListener, afterAllListener, beforeToListener, afterToListener, beforeListener, afterListener);
 
         when(driver.findElement(any())).thenThrow(IllegalStateException.class);
-        assertThatThrownBy(() -> eventDriver.findElement(By.cssSelector(".test"))).isExactlyInstanceOf(IllegalStateException.class);
+        assertThatThrownBy(() -> eventDriver.findElement(By.cssSelector(".test")))
+                .isExactlyInstanceOf(IllegalStateException.class);
 
         verify(exceptionListener).on(isA(IllegalStateException.class), notNull());
 
         reset(exceptionListener);
         eventsRegistry.close();
 
-        assertThatThrownBy(() -> eventDriver.findElement(By.cssSelector(".test"))).isExactlyInstanceOf(IllegalStateException.class);
+        assertThatThrownBy(() -> eventDriver.findElement(By.cssSelector(".test")))
+                .isExactlyInstanceOf(IllegalStateException.class);
 
         verify(exceptionListener, never()).on(isA(IllegalStateException.class), notNull());
     }
@@ -242,10 +244,10 @@ public class EventsTest {
         EventListener otherListener = mock(EventListener.class);
 
         assertThat(new EventAdapter(listener, instantiator)).isEqualTo(new EventAdapter(listener, instantiator));
-        assertThat(new EventAdapter(listener, instantiator).hashCode())
-                .isEqualTo(new EventAdapter(listener, instantiator).hashCode());
+        assertThat(new EventAdapter(listener, instantiator)).hasSameHashCodeAs(new EventAdapter(listener, instantiator));
 
-        assertThat(new EventAdapter(listener, instantiator)).isNotEqualTo(new EventAdapter(otherListener, instantiator));
+        assertThat(new EventAdapter(listener, instantiator))
+                .isNotEqualTo(new EventAdapter(otherListener, instantiator));
         assertThat(new EventAdapter(listener, instantiator)).isNotEqualTo("OtherType");
 
         EventAdapter instance = new EventAdapter(mock(EventListener.class), instantiator);

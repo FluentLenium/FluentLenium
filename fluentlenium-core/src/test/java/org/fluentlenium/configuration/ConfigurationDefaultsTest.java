@@ -23,27 +23,27 @@ public class ConfigurationDefaultsTest {
                 continue;
             }
             switch (prop.getName()) {
-            case "driverLifecycle":
-                Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(DriverLifecycle.METHOD);
-                break;
-            case "browserTimeout":
-                Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(60000L);
-                break;
-            case "browserTimeoutRetries":
-                Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(2);
-                break;
-            case "configurationDefaults":
-                Assertions.assertThat(readMethod.invoke(configurationDefaults)).isSameAs(ConfigurationDefaults.class);
-                break;
-            case "deleteCookies":
-                Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(false);
-                break;
-            case "eventsEnabled":
-                Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(true);
-                break;
-            default:
-                Assertions.assertThat(readMethod.invoke(configurationDefaults)).isNull();
-                break;
+                case "driverLifecycle":
+                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(DriverLifecycle.METHOD);
+                    break;
+                case "browserTimeout":
+                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(60000L);
+                    break;
+                case "browserTimeoutRetries":
+                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(2);
+                    break;
+                case "configurationDefaults":
+                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isSameAs(ConfigurationDefaults.class);
+                    break;
+                case "deleteCookies":
+                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(false);
+                    break;
+                case "eventsEnabled":
+                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isEqualTo(true);
+                    break;
+                default:
+                    Assertions.assertThat(readMethod.invoke(configurationDefaults)).isNull();
+                    break;
             }
         }
     }

@@ -10,7 +10,8 @@ import java.lang.annotation.Target;
  * <p>
  * Can be used in test adapter and component.
  * <p>
- * Parameters from {@link org.fluentlenium.core.events.SwitchToWindowListener} will be injected in the method based on parameters types.
+ * Parameters from {@link org.fluentlenium.core.events.SwitchToWindowListener} will be injected
+ * in the method based on parameters types.
  *
  * @see org.fluentlenium.core.events.EventsRegistry#afterSwitchToWindow(org.fluentlenium.core.events.SwitchToWindowListener)
  */

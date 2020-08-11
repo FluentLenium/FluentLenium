@@ -1,7 +1,7 @@
 package cucumber.runtime.java.fluentlenium;
 
-import cucumber.api.java.ObjectFactory;
-import cucumber.runtime.CucumberException;
+import io.cucumber.core.backend.ObjectFactory;
+import io.cucumber.core.exception.CucumberException;
 import org.fluentlenium.configuration.FluentConfiguration;
 
 import java.util.HashMap;
@@ -12,24 +12,30 @@ import static org.fluentlenium.adapter.cucumber.FluentTestContainer.FLUENT_TEST;
 import static org.fluentlenium.adapter.cucumber.FluentTestContainer.setConfigClass;
 
 /**
- * It is an object factory for creating Cucumber steps objects in FluentLenium injection container
+ * It is an object factory for creating Cucumber steps objects in FluentLenium injection container.
+ * <p>
+ * It also configures a config class which is either a subclass of {@link org.fluentlenium.adapter.cucumber.FluentCucumberTest}
+ * annotated with {@code @FluentConfiguration}, or if there is no such class, then sets it as null.
+ * <p>
+ * Since a FluentLenium configuration can be configured not only via the {@link FluentConfiguration} annotation but in
+ * other ways too, the config class can be null if there is no annotated class.
  */
 public class FluentObjectFactory implements ObjectFactory {
 
+    /**
+     * Cache for Cucumber glue class instances ({@code FluentCucumberTest} subclasses in this case).
+     */
     private final Map<Class<?>, Object> instances = new HashMap<>();
-
     private Class<?> configClass;
 
     @Override
     public void start() {
         if (nonNull(configClass)) {
             setConfigClass(configClass);
-            FLUENT_TEST.instance();
-
         } else {
             setConfigClass(null);
-            FLUENT_TEST.instance();
         }
+        FLUENT_TEST.instance();
     }
 
     @Override
@@ -41,7 +47,7 @@ public class FluentObjectFactory implements ObjectFactory {
     @Override
     public boolean addClass(Class<?> aClass) {
         if (configClass == null) {
-            configClass = checkClassForConfiguration(aClass);
+            configClass = getFluentConfigurationClass(aClass);
             if (nonNull(configClass)) {
                 setConfigClass(configClass);
             }
@@ -75,16 +81,20 @@ public class FluentObjectFactory implements ObjectFactory {
         }
     }
 
-    private Class<?> checkClassForConfiguration(Class<?> cls) {
+    /**
+     * Returns either the superclass of the provided class, or the provided one depending one which one is
+     * annotated as {@link FluentConfiguration}.
+     *
+     * @return superclass of {@code cls} if it is the annotated one, {@code cls} if it is annotated, otherwise null
+     */
+    private Class<?> getFluentConfigurationClass(Class<?> cls) {
+        Class<?> result = null;
         Class superClass = cls.getSuperclass();
         if (superClass != null && superClass.isAnnotationPresent(FluentConfiguration.class)) {
-            return superClass;
-
+            result = superClass;
         } else if (cls.isAnnotationPresent(FluentConfiguration.class)) {
-            return cls;
-
-        } else {
-            return null;
+            result = cls;
         }
+        return result;
     }
 }

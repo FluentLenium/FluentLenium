@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- * Handles XPath axes for an element (http://www.w3schools.com/xsl/xpath_axes.asp)
+ * Handles XPath axes for an element (<a href="http://www.w3schools.com/xsl/xpath_axes.asp">W3Schools XPath Axes</a>).
  */
 public class Dom {
     private final WebElement webElement;
@@ -46,7 +46,8 @@ public class Dom {
      * @return list of found elements
      */
     protected FluentList<FluentWebElement> handleAxe(String axe) {
-        List<WebElement> webElementList = LocatorProxies.createWebElementList(() -> webElement.findElements(By.xpath(axe + "::*")));
+        List<WebElement> webElementList = LocatorProxies.createWebElementList(
+                () -> webElement.findElements(By.xpath(axe + "::*")));
 
         return instantiator.asComponentList(FluentListImpl.class, FluentWebElement.class, webElementList);
     }

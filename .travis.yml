@@ -1,9 +1,14 @@
+language: java
+
 jobs:
+  allow_failures:
+    - stage: e2e
+    - name: "E2E tests"
   include:
     - stage: test
       name: "Java 11 - unit & integration tests code coverage + snapshot upload"
       language: java
-      jdk: oraclejdk11
+      jdk: openjdk11
       script:
         - mvn -Pjava11 clean verify jacoco:report
         - mvn -Pjava11 coveralls:report
@@ -12,30 +17,30 @@ jobs:
     - stage: test
       name: "Java 8 - unit & integration tests"
       language: java
-      jdk: oraclejdk8
+      jdk: openjdk8
       script:
         - mvn -Pjava8 clean verify
 
     - stage: test
       name: "Java 11 - unit & framework integration tests"
       language: java
-      jdk: oraclejdk11
+      jdk: openjdk11
       script:
         - mvn -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report' clean test
 
     - stage: test
       name: "Java 11 - compile examples"
       language: java
-      jdk: oraclejdk11
+      jdk: openjdk11
       script:
         - mvn -Pexamples,java11 clean compile
 
     - stage: test
       name: "Java 11 - javadoc"
       language: java
-      jdk: oraclejdk11
+      jdk: openjdk11
       script:
-        - mvn -Pjava11 javadoc:javadoc
+        - mvn -Pjava11 javadoc:aggregate
 
     - stage: test
       name: "Ruby - Docs build"
@@ -50,6 +55,63 @@ jobs:
         global:
           - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
       sudo: false
+
+    - stage: e2e
+      name: "Edge"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      allow_failures:
+      if: type = pull_request
+
+    - stage: e2e
+      name: "IE"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      if: type = pull_request
+
+    - stage: e2e
+      name: "Chrome"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      if: type = pull_request
+
+    - stage: e2e
+      name: "Firefox"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      if: type = pull_request
+
+    - stage: e2e
+      name: "Safari"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=safari -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      if: type = pull_request
+
+    - stage: e2e
+      name: "Iphone Web test (Safari on Iphone)"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      if: type = pull_request
+
+    - stage: e2e
+      name: "Android Web test (Chrome on Android device)"
+      language: java
+      jdk: openjdk11
+      script:
+        - cd examples/spring && mvn clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      if: type = pull_request
 
 env:
   global:

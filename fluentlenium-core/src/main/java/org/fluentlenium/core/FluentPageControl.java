@@ -3,15 +3,15 @@ package org.fluentlenium.core;
 import org.fluentlenium.core.url.ParsedUrlTemplate;
 
 /**
- * Control a Page Object.
+ * Provides controls for a Page Object.
  *
  * @see FluentPage
  */
 public interface FluentPageControl extends FluentControl {
 
     /**
-     * URL of the page
-     * It can contains mandatory parameters <code>{param}</code> and optional parameters <code>{param1}</code>
+     * Gets the URL of the page.
+     * It can contain mandatory parameters <code>{param}</code> and optional parameters <code>{?param1}</code>.
      *
      * @return page URL
      */
@@ -41,6 +41,7 @@ public interface FluentPageControl extends FluentControl {
     /**
      * Go to the url defined in the page
      *
+     * @param <P> the fluent page
      * @return <P> FluentPage object
      */
     <P extends FluentPage> P go(); // NOPMD ShortMethodName
@@ -49,9 +50,9 @@ public interface FluentPageControl extends FluentControl {
      * Got to the url defined in the page, using given parameters.
      *
      * @param params page url parameter values
-     * @throws IllegalArgumentException if some required parameters are missing
-     *
+     * @param <P> the fluent page
      * @return <P> FluentPage object
+     * @throws IllegalArgumentException if some required parameters are missing
      */
     <P extends FluentPage> P go(Object... params);
 

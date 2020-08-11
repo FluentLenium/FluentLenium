@@ -2,10 +2,6 @@ package org.fluentlenium.core.switchto;
 
 import org.fluentlenium.core.alert.AlertImpl;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchFrameException;
-import org.openqa.selenium.NoSuchWindowException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -24,7 +20,7 @@ public interface FluentTargetLocator<T> {
      *
      * @param index (zero-based) index
      * @return ${@code this} reference for chain calls.
-     * @throws NoSuchFrameException If the frame cannot be found
+     * @throws org.openqa.selenium.NoSuchFrameException If the frame cannot be found
      */
     T frame(int index);
 
@@ -35,7 +31,7 @@ public interface FluentTargetLocator<T> {
      * @param nameOrId the name of the frame window, the id of the &lt;frame&gt; or &lt;iframe&gt;
      *                 element, or the (zero-based) index
      * @return This driver focused on the given frame
-     * @throws NoSuchFrameException If the frame cannot be found
+     * @throws org.openqa.selenium.NoSuchFrameException If the frame cannot be found
      */
     T frame(String nameOrId);
 
@@ -44,8 +40,8 @@ public interface FluentTargetLocator<T> {
      *
      * @param frameElement The frame element to switch to.
      * @return This driver focused on the given frame.
-     * @throws NoSuchFrameException           If the given element is neither an IFRAME nor a FRAME element.
-     * @throws StaleElementReferenceException If the WebElement has gone stale.
+     * @throws org.openqa.selenium.NoSuchFrameException           If the given element is neither an IFRAME nor a FRAME element.
+     * @throws org.openqa.selenium.StaleElementReferenceException If the WebElement has gone stale.
      */
     T frame(WebElement frameElement);
 
@@ -54,8 +50,8 @@ public interface FluentTargetLocator<T> {
      *
      * @param frameElement The frame element to switch to.
      * @return This driver focused on the given frame.
-     * @throws NoSuchFrameException           If the given element is neither an IFRAME nor a FRAME element.
-     * @throws StaleElementReferenceException If the WebElement has gone stale.
+     * @throws org.openqa.selenium.NoSuchFrameException           If the given element is neither an IFRAME nor a FRAME element.
+     * @throws org.openqa.selenium.StaleElementReferenceException If the WebElement has gone stale.
      */
     T frame(FluentWebElement frameElement);
 
@@ -73,7 +69,7 @@ public interface FluentTargetLocator<T> {
      * @param nameOrHandle The name of the window or the handle as returned by
      *                     {@link WebDriver#getWindowHandle()}
      * @return This driver focused on the given window
-     * @throws NoSuchWindowException If the window cannot be found
+     * @throws org.openqa.selenium.NoSuchWindowException If the window cannot be found
      */
     T window(String nameOrHandle);
 
@@ -99,7 +95,7 @@ public interface FluentTargetLocator<T> {
      * Switches to the currently active modal dialog for this particular driver instance.
      *
      * @return A handle to the dialog.
-     * @throws NoAlertPresentException If the dialog cannot be found
+     * @throws org.openqa.selenium.NoAlertPresentException If the dialog cannot be found
      */
     AlertImpl alert();
 }

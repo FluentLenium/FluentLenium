@@ -51,14 +51,14 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     void testDisabled() {
         goTo(DEFAULT_URL);
         FluentWebElement first = $("#disabled").first();
-        assertThat(first.toString()).isEqualTo("By.cssSelector: #disabled (first) (Lazy Element)");
+        assertThat(first).hasToString("By.cssSelector: #disabled (first) (Lazy Element)");
         ThrowableAssert.ThrowingCallable throwingCallable = () -> first.await().until().enabled();
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Element By.cssSelector: #disabled (first) (Lazy Element) is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
 
         first.now();
-        assertThat(first.toString()).isEqualTo(
+        assertThat(first).hasToString(
                 "By.cssSelector: #disabled (first) (<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
                         + "disabled=\"disabled\" />)");
 
@@ -71,14 +71,14 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     void testDisabledInjection() {
         goTo(DEFAULT_URL);
         FluentWebElement first = disabled;
-        assertThat(first.toString()).isEqualTo("By.cssSelector: #disabled (first) (Lazy Element)");
+        assertThat(first).hasToString("By.cssSelector: #disabled (first) (Lazy Element)");
         ThrowableAssert.ThrowingCallable throwingCallable = () -> first.await().until().enabled();
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Element By.cssSelector: #disabled (first) (Lazy Element) is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
 
         first.now();
-        assertThat(first.toString()).isEqualTo(
+        assertThat(first).hasToString(
                 "By.cssSelector: #disabled (first) (<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
                         + "disabled=\"disabled\" />)");
 
@@ -91,14 +91,14 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     void testDisabledDefaultLabelInjection() {
         goTo(DEFAULT_URL);
         FluentWebElement first = disabledDefaultLabel;
-        assertThat(first.toString()).isEqualTo("FluentWaitMessageWithHookTest.disabledDefaultLabel (Lazy Element)");
+        assertThat(first).hasToString("FluentWaitMessageWithHookTest.disabledDefaultLabel (Lazy Element)");
         ThrowableAssert.ThrowingCallable throwingCallable = () -> first.await().until().enabled();
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Element FluentWaitMessageWithHookTest.disabledDefaultLabel (Lazy Element) is not "
                         + "enabled").isExactlyInstanceOf(TimeoutException.class);
 
         first.now();
-        assertThat(first.toString()).isEqualTo(
+        assertThat(first).hasToString(
                 "FluentWaitMessageWithHookTest.disabledDefaultLabel (<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
                         + "disabled=\"disabled\" />)");
 
@@ -112,15 +112,15 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     void testDisabledCustomLabelInjection() {
         goTo(DEFAULT_URL);
         FluentWebElement first = disabledCustomLabel;
-        assertThat(first.toString()).isEqualTo("custom [hint] (Lazy Element)");
+        assertThat(first).hasToString("custom [hint] (Lazy Element)");
         ThrowableAssert.ThrowingCallable throwingCallable = () -> first.await().until().enabled();
         assertThatThrownBy(throwingCallable)
                 .hasMessageStartingWith("Expected condition failed: Element custom [hint] (Lazy Element) is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
 
         first.now();
-        assertThat(first.toString())
-                .isEqualTo("custom [hint] (<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />)");
+        assertThat(first).hasToString(
+                "custom [hint] (<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />)");
 
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Element custom [hint] (<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
@@ -131,14 +131,14 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     void testDisabledList() {
         goTo(DEFAULT_URL);
         FluentList<FluentWebElement> list = $("#disabled");
-        assertThat(list.toString()).isEqualTo("By.cssSelector: #disabled (Lazy Element List)");
+        assertThat(list).hasToString("By.cssSelector: #disabled (Lazy Element List)");
         ThrowableAssert.ThrowingCallable throwingCallable = () -> list.await().until().enabled();
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Elements By.cssSelector: #disabled (Lazy Element List) is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
 
         list.now();
-        assertThat(list.toString()).isEqualTo(
+        assertThat(list).hasToString(
                 "By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />])");
 
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
@@ -151,14 +151,14 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     void testDisabledListInjection() {
         goTo(DEFAULT_URL);
         FluentList<FluentWebElement> list = disabledList;
-        assertThat(list.toString()).isEqualTo("By.cssSelector: #disabled (Lazy Element List)");
+        assertThat(list).hasToString("By.cssSelector: #disabled (Lazy Element List)");
         ThrowableAssert.ThrowingCallable throwingCallable = () -> list.await().until().enabled();
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Elements By.cssSelector: #disabled (Lazy Element List) is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
 
         list.now();
-        assertThat(list.toString()).isEqualTo(
+        assertThat(list).hasToString(
                 "By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />])");
 
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
@@ -171,14 +171,14 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     void testDisabledDefaultLabelListInjection() {
         goTo(DEFAULT_URL);
         FluentList<FluentWebElement> list = disabledDefaultLabelList;
-        assertThat(list.toString()).isEqualTo("FluentWaitMessageWithHookTest.disabledDefaultLabelList (Lazy Element List)");
+        assertThat(list).hasToString("FluentWaitMessageWithHookTest.disabledDefaultLabelList (Lazy Element List)");
         ThrowableAssert.ThrowingCallable throwingCallable = () -> list.await().until().enabled();
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Elements FluentWaitMessageWithHookTest.disabledDefaultLabelList (Lazy Element List)"
                         + " is not enabled").isExactlyInstanceOf(TimeoutException.class);
 
         list.now();
-        assertThat(list.toString()).isEqualTo(
+        assertThat(list).hasToString(
                 "FluentWaitMessageWithHookTest.disabledDefaultLabelList ([<input id=\"disabled\" type=\"checkbox\" "
                         + "value=\"John\" disabled=\"disabled\" />])");
 
@@ -193,20 +193,19 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     void testDisabledCustomLabelListInjection() {
         goTo(DEFAULT_URL);
         FluentList<FluentWebElement> list = disabledCustomLabelList;
-        assertThat(list.toString()).isEqualTo("custom [hint] (Lazy Element List)");
+        assertThat(list).hasToString("custom [hint] (Lazy Element List)");
         ThrowableAssert.ThrowingCallable throwingCallable = () -> list.await().until().enabled();
         assertThatThrownBy(throwingCallable)
                 .hasMessageStartingWith("Expected condition failed: Elements custom [hint] (Lazy Element List) is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
 
         list.now();
-        assertThat(list.toString())
-                .isEqualTo("custom [hint] ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />])");
+        assertThat(list).hasToString(
+                "custom [hint] ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />])");
 
         assertThatThrownBy(throwingCallable).hasMessageStartingWith(
                 "Expected condition failed: Elements custom [hint] ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
                         + "disabled=\"disabled\" />]) is not enabled").isExactlyInstanceOf(TimeoutException.class);
-
     }
 
     @Test
@@ -243,9 +242,10 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     void testNotFound() {
         goTo(DEFAULT_URL);
         FluentWebElement first = $("#not-found").first();
-        assertThat(first.toString()).isEqualTo("By.cssSelector: #not-found (first) (Lazy Element)");
+        assertThat(first).hasToString("By.cssSelector: #not-found (first) (Lazy Element)");
         assertThatThrownBy(() -> first.await().until().enabled())
-                .hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector: #not-found (first) (Lazy Element)")
+                .hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector:"
+                        + " #not-found (first) (Lazy Element)")
                 .isExactlyInstanceOf(TimeoutException.class).hasCauseExactlyInstanceOf(NoSuchElementException.class);
     }
 
@@ -253,7 +253,7 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
     void testNotFoundList() {
         goTo(DEFAULT_URL);
         FluentList<FluentWebElement> list = $("#not-found");
-        assertThat(list.toString()).isEqualTo("By.cssSelector: #not-found (Lazy Element List)");
+        assertThat(list).hasToString("By.cssSelector: #not-found (Lazy Element List)");
         assertThatThrownBy(() -> list.await().until().enabled())
                 .hasMessageStartingWith("Expected condition failed: waiting for By.cssSelector: #not-found (Lazy Element List)")
                 .isExactlyInstanceOf(TimeoutException.class);

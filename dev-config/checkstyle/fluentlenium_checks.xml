@@ -39,7 +39,7 @@
     <!--
         If you set the basedir property below, then all reported file
         names will be relative to the specified directory. See
-        http://checkstyle.sourceforge.net/5.x/config.html#Checker
+        https://checkstyle.sourceforge.io/config.html#Checker
 
         <property name="basedir" value="${basedir}"/>
     -->
@@ -201,7 +201,7 @@
             <property name="protectedAllowed" value="true"/>
             <property name="packageAllowed" value="true"/>
             <property name="ignoreAnnotationCanonicalNames"
-                      value="org.jboss.arquillian.test.api.ArquillianResource,org.junit.Rule"/>
+                      value="org.jboss.arquillian.test.api.ArquillianResource,org.junit.Rule,org.junit.runners.Parameterized.Parameter"/>
             <property name="immutableClassCanonicalNames"
                       value="org.joda.time.DateTime,java.lang.Boolean,java.lang.Long,java.lang.String,java.util.UUID"/>
         </module>
@@ -219,8 +219,8 @@
         <!-- Checks correct indentation of Java Code.                           -->
         <!-- See http://checkstyle.sourceforge.net/config_misc.html#Indentation -->
         <module name="Indentation">
-            <property name="caseIndent" value="0"/>
             <property name="throwsIndent" value="8"/>
+            <property name="lineWrappingIndentation" value="8"/>
         </module>
 
         <module name="EmptyLineSeparator">
@@ -230,9 +230,9 @@
 
         <module name="JavadocMethod">
             <property name="excludeScope" value="private"/>
-        </module>
-        <module name="JavadocVariable">
-            <property name="scope" value="public"/>
+            <property name="allowMissingPropertyJavadoc" value="true"/>
+            <property name="allowedAnnotations" value="Override,Test,Before,After,BeforeMethod,AfterMethod"/>
+            <property name="allowUndeclaredRTE" value="true"/>
         </module>
         <module name="JavadocType">
             <property name="scope" value="package"/>

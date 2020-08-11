@@ -192,7 +192,8 @@ public class FluentInjector implements FluentInjectControl {
             if (injectionSupportValidator.isSupported(container, field)) {
                 ArrayList<HookDefinition<?>> fieldHookDefinitions = new ArrayList<>(containerContext.getHookDefinitions());
                 hookDefinitionAdder.addHookDefinitions(field.getAnnotations(), fieldHookDefinitions);
-                InjectionElementLocatorFactory locatorFactory = new InjectionElementLocatorFactory(searchContext);
+                InjectionElementLocatorFactory locatorFactory =
+                        new InjectionElementLocatorFactory(searchContext, fluentControl.getCapabilities());
                 InjectionElementLocator locator = locatorFactory.createLocator(field);
                 if (locator != null) {
                     ComponentAndProxy fieldValue = fieldInitializer.initFieldElements(locator, field);
