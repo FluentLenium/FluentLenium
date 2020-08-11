@@ -8,6 +8,7 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
@@ -28,7 +29,7 @@ public class AlertAssertTest {
     @Test
     public void testHasTextPositive() {
         when(alert.getText()).thenReturn("some text");
-        alertAssert.hasText("some text");
+        assertThatCode(() -> alertAssert.hasText("some text")).doesNotThrowAnyException();
     }
 
     @Test
@@ -56,6 +57,7 @@ public class AlertAssertTest {
 
     @Test
     public void testIsPresentNegative() {
+        when(alert.present()).thenReturn(false);
         assertThatThrownBy(() -> alertAssert.isPresent())
                 .isInstanceOf(AssertionError.class)
                 .hasMessage("There is no alert box");

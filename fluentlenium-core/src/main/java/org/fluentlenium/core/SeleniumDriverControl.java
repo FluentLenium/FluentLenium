@@ -13,7 +13,7 @@ public interface SeleniumDriverControl {
      * To customize the WebDriver, you should configure {@link org.fluentlenium.adapter.FluentAdapter#getWebDriver()}
      * or override {@link FluentAdapter#newWebDriver()}.
      * <p>
-     * This method can't be override to customize the WebDriver.
+     * This method can't be overridden to customize the WebDriver.
      *
      * @return The actual underlying Selenium WebDriver
      */

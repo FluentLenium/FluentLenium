@@ -62,6 +62,16 @@ public class CssSupportImplTest {
     }
 
     @Test
+    public void shouldInjectUnescapedCss() {
+        when(javascriptControl.executeScript(anyString())).thenReturn(fluentJavascript);
+
+        cssSupport.inject("#location {\ndisplay: none\n}");
+
+        verify(javascriptControl, times(1)).executeScript(startsWith("cssText = \"#location {display: none}\";"));
+        verifyNoMoreInteractions(javascriptControl);
+    }
+
+    @Test
     @Ignore("Find a way to mock IOUtils.toString() to throw exception")
     public void shouldThrowIOErrorDuringInjectingCss() {
     }

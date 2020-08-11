@@ -13,8 +13,8 @@ public class CssControlImpl implements CssControl {
     /**
      * Creates a new css control implementation
      *
-     * @param javascriptControl javascript control
-     * @param awaitControl      await control
+     * @param javascriptControl javascript control for the injection
+     * @param awaitControl      await control for waiting between injection retries
      */
     public CssControlImpl(JavascriptControl javascriptControl, AwaitControl awaitControl) {
         support = new CssSupportImpl(javascriptControl, awaitControl);

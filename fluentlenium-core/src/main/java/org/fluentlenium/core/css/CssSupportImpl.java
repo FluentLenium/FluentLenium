@@ -16,6 +16,14 @@ import java.nio.charset.Charset;
 
 /**
  * Features related to CSS loaded in the active page.
+ * <p>
+ * There is a retry logic trying to inject the CSS, using an underlying {@link org.openqa.selenium.JavascriptExecutor},
+ * maximum {@link #MAX_SCRIPT_EXECUTION_RETRY_COUNT} times in case it fails, and waits for {@link #EXPLICIT_WAIT_PERIOD}
+ * between each try.
+ * <p>
+ * The injection logic is stored in {@link #INJECTOR_JS_PATH}.
+ * <p>
+ * Currently neither the max retry count nor the amount of wait between each try is configurable.
  */
 public class CssSupportImpl implements CssSupport {
 
@@ -27,10 +35,10 @@ public class CssSupportImpl implements CssSupport {
     private final AwaitControl awaitControl;
 
     /**
-     * Creates a new implementation of css support
+     * Creates a new implementation of css support.
      *
-     * @param javascriptControl javascript control
-     * @param awaitControl      await control
+     * @param javascriptControl javascript control for the injection
+     * @param awaitControl      await control for waiting between injection retries
      */
     public CssSupportImpl(JavascriptControl javascriptControl, AwaitControl awaitControl) {
         this.javascriptControl = requireNonNull(javascriptControl);
@@ -44,19 +52,23 @@ public class CssSupportImpl implements CssSupport {
         executeScriptRetry("cssText = \"" + cssText + "\";\n" + getContentOf(INJECTOR_JS_PATH));
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * This implementation doesn't inject the provided resource as an external CSS {@code <link>} tag into the document,
+     * rather it injects the content of the resource itself.
+     */
     @Override
     public void injectResource(String cssResourceName) {
         inject(getContentOf(cssResourceName));
     }
 
     private String getContentOf(String resource) {
-        String content;
         try (InputStream inputStream = getClass().getResourceAsStream(resource)) {
-            content = IOUtils.toString(inputStream, Charset.forName("UTF-8"));
+            return IOUtils.toString(inputStream, Charset.forName("UTF-8"));
         } catch (IOException e) {
             throw new IOError(e);
         }
-        return content;
     }
 
     private void executeScriptRetry(String script) {
