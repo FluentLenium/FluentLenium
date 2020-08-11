@@ -84,6 +84,11 @@
     <!--   <property name="fileExtensions" value="java"/> -->
     <!-- </module> -->
 
+    <module name="LineLength">
+        <property name="max" value="130"/>
+        <property name="ignorePattern" value="^import .*"/>
+    </module>
+
     <module name="TreeWalker">
         <module name="SuppressionCommentFilter">
             <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([^\s]+)"/>
@@ -127,10 +132,6 @@
 
         <!-- Checks for Size Violations.                    -->
         <!-- See http://checkstyle.sf.net/config_sizes.html -->
-        <module name="LineLength">
-            <property name="max" value="130"/>
-            <property name="ignorePattern" value="^import .*"/>
-        </module>
         <module name="MethodLength"/> <!-- def to 150 lines -->
         <module name="ParameterNumber">
             <property name="max" value="10"/>
@@ -230,9 +231,7 @@
 
         <module name="JavadocMethod">
             <property name="excludeScope" value="private"/>
-            <property name="allowMissingPropertyJavadoc" value="true"/>
             <property name="allowedAnnotations" value="Override,Test,Before,After,BeforeMethod,AfterMethod"/>
-            <property name="allowUndeclaredRTE" value="true"/>
         </module>
         <module name="JavadocType">
             <property name="scope" value="package"/>
