@@ -218,7 +218,6 @@ public class DefaultPerformanceTimingMetrics implements PerformanceTimingMetrics
         return (Long) timingMetrics.get(event.getEvent());
     }
 
-    @SuppressWarnings("PMD.UnusedLocalVariable")
     private boolean canBeCastToLong(Object value) {
         try {
             long converted = (Long) value;
