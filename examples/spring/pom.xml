@@ -6,7 +6,7 @@
 
     <artifactId>fluentlenium-examples-spring</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.3.2-SNAPSHOT</version>
+    <version>4.4.2-SNAPSHOT</version>
 
     <name>FluentLenium Examples Spring</name>
 
