@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <it.project.version>4.3.2-SNAPSHOT</it.project.version>
+        <it.project.version>4.4.2-SNAPSHOT</it.project.version>
     </properties>
 
     <modules>

@@ -5,10 +5,11 @@
 
     <artifactId>fluentlenium-examples-performance</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.3.2-SNAPSHOT</version>
+    <version>4.4.2-SNAPSHOT</version>
 
     <properties>
         <fluentlenium.version>${project.version}</fluentlenium.version>
+        <selenium.version>4.0.0-alpha-6</selenium.version>
     </properties>
 
     <name>FluentLenium Examples Performance Timing</name>
