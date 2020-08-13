@@ -1,6 +1,7 @@
 language: java
 
 jobs:
+  fast_finish: true
   allow_failures:
     - stage: e2e
     - name: "E2E tests"
