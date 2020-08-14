@@ -13,8 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class DuckDuckGoChromiumApiTest extends FluentTest {
 
-    private Response response;
-
     @Override
     public WebDriver newWebDriver() {
         return new ChromeDriver();
@@ -28,16 +26,16 @@ public class DuckDuckGoChromiumApiTest extends FluentTest {
         getChromiumApi().sendCommand("Page.navigate", ImmutableMap.of("url", duckDuckUrl));
         getChromiumApi().sendCommand("Input.insertText", ImmutableMap.of("text", searchPhrase));
         getChromiumApi().sendCommand("Input.dispatchKeyEvent", sendEnterKeyEventParams());
-        response = getChromiumApi().sendCommandAndGetResponse("Page.getNavigationHistory", ImmutableMap.of());
+        Response response = getChromiumApi().sendCommandAndGetResponse("Page.getNavigationHistory", ImmutableMap.of());
 
-        assertIsPhrasePresentInTheResultsPageUrl(searchPhrase);
+        assertIsPhrasePresentInTheResultsPageUrl(searchPhrase, response);
     }
 
     private Map<String, String> sendEnterKeyEventParams() {
         return ImmutableMap.of("type", "char", "text", "\r");
     }
 
-    private void assertIsPhrasePresentInTheResultsPageUrl(String searchPhrase) {
+    private void assertIsPhrasePresentInTheResultsPageUrl(String searchPhrase, Response response) {
         assertThat(response.getValue().toString()).contains(searchPhrase);
     }
 }

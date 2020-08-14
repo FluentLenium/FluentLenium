@@ -5,8 +5,9 @@ import org.fluentlenium.utils.chromium.ChromiumApi;
 import org.fluentlenium.utils.chromium.ChromiumApiNotSupportedException;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.CommandExecutor;
 import org.openqa.selenium.remote.SessionId;
@@ -26,6 +27,7 @@ import static org.mockito.Mockito.times;
 /**
  * Unit test for {@link ChromiumApi}.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class ChromiumApiTest {
 
     private ChromiumApi chromiumApi;
@@ -37,9 +39,8 @@ public class ChromiumApiTest {
 
     @Before
     public void before() throws IOException {
-        MockitoAnnotations.initMocks(this);
         when(sessionId.toString()).thenReturn("test");
-        remoteWebDriver = makeDriver("chrome");
+        remoteWebDriver = makeDriver("msedge");
         chromiumApi = new ChromiumApi(remoteWebDriver);
     }
 
@@ -63,11 +64,11 @@ public class ChromiumApiTest {
     }
 
     @Test
-    public void shouldThrowAnExceptionIfBrowserOtherThanChrome() throws IOException {
+    public void shouldThrowAnExceptionIfBrowserOtherThanSupported() throws IOException {
         remoteWebDriver = makeDriver("firefox");
         assertThatExceptionOfType(ChromiumApiNotSupportedException.class)
                 .isThrownBy(() -> new ChromiumApi(remoteWebDriver))
-                .withMessage("API currently supports only Chrome browser");
+                .withMessage("API supported only by Chrome and Edge");
     }
 
     private RemoteWebDriver makeDriver(String browserName) throws IOException {
