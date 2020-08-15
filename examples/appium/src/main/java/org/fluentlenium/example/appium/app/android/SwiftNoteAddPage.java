@@ -3,6 +3,7 @@ package org.fluentlenium.example.appium.app.android;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.example.appium.helper.AdbHelper;
 
 public class SwiftNoteAddPage extends FluentPage {
 
@@ -23,6 +24,20 @@ public class SwiftNoteAddPage extends FluentPage {
         titleElement.write(noteTitle);
         noteElement.write(noteBody);
         backButton.click();
+        return saveNote();
+    }
+
+    public SwiftNoteHomePage addNoteUsingAdb(String noteTitle, String noteBody) {
+        await().until(titleElement).displayed();
+        titleElement.click();
+        AdbHelper.typeText(noteTitle, getAppiumDriver());
+        noteElement.click();
+        AdbHelper.typeText(noteBody, getAppiumDriver());
+        backButton.click();
+        return saveNote();
+    }
+
+    private SwiftNoteHomePage saveNote() {
         await().until(saveNote).clickable();
         saveNote.click();
         return newInstance(SwiftNoteHomePage.class);

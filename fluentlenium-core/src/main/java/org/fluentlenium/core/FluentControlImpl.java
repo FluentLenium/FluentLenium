@@ -3,6 +3,7 @@ package org.fluentlenium.core;
 import java.util.List;
 import java.util.Set;
 
+import io.appium.java_client.AppiumDriver;
 import org.fluentlenium.adapter.DefaultFluentControlContainer;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.configuration.Configuration;
@@ -28,6 +29,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -198,6 +200,22 @@ public abstract class FluentControlImpl implements FluentControl {
         return getConfiguration().getWebDriver();
     }
 
+    public WebDriver getDriver() {
+        WebDriver driver = getFluentControl().getDriver();
+        if (driver instanceof AppiumDriver) {
+            throw new WrongDriverException("Use getAppiumDriver() method for mobile automation");
+        }
+        return driver;
+    }
+
+    public AppiumDriver<?> getAppiumDriver() {
+        WebDriver driver = getFluentControl().getDriver();
+        if (!(driver instanceof AppiumDriver)) {
+            throw new WrongDriverException("Use getDriver() method for web automation");
+        }
+        return (AppiumDriver<?>) driver;
+    }
+
     public String getCustomProperty(String propertyName) {
         return getConfiguration().getCustomProperty(propertyName);
     }
@@ -265,7 +283,7 @@ public abstract class FluentControlImpl implements FluentControl {
     }
 
     public final ChromiumApi getChromiumApi() {
-        return new ChromiumApi((RemoteWebDriver) getFluentControl().getDriver());
+        return new ChromiumApi((RemoteWebDriver) getDriver());
     }
 
     public FluentList<FluentWebElement> asFluentList(WebElement... elements) {
