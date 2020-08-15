@@ -38,12 +38,13 @@ public class ExampleFluentTest extends FluentTest {
     public static void startServer() {
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setCapability("noReset", "false");
-        AppiumServiceBuilder builder = new AppiumServiceBuilder();
-        builder.withIPAddress("127.0.0.1");
-        builder.usingPort(4723);
-        builder.withCapabilities(cap);
-        builder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
-        builder.withArgument(GeneralServerFlag.LOG_LEVEL, "error");
+        AppiumServiceBuilder builder = new AppiumServiceBuilder()
+                .withIPAddress("127.0.0.1")
+                .usingPort(4723)
+                .withCapabilities(cap)
+                .withArgument(GeneralServerFlag.RELAXED_SECURITY)
+                .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
+                .withArgument(GeneralServerFlag.LOG_LEVEL, "error");
         service = AppiumDriverLocalService.buildService(builder);
         service.start();
     }
