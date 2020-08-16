@@ -11,7 +11,7 @@ import org.openqa.selenium.firefox.FirefoxOptions
 class DuckDuckGoHeadlessFirefoxTest : AbstractFirefoxTest() {
 
     @Page
-    private lateinit var duckDuckMainPage: DuckDuckMainPage
+    private lateinit var onDuckDuckGoMainPage: DuckDuckMainPage
 
     override fun newWebDriver(): WebDriver {
         val firefoxOptions = FirefoxOptions()
@@ -22,9 +22,12 @@ class DuckDuckGoHeadlessFirefoxTest : AbstractFirefoxTest() {
     @Test
     fun titleOfDuckDuckGoShouldContainSearchQueryName() {
         val searchPhrase = "searchPhrase"
-        goTo<DuckDuckMainPage>(duckDuckMainPage)
-                .typeSearchPhraseIn(searchPhrase)
-                .submitSearchForm()
-                .assertIsPhrasePresentInTheResults(searchPhrase)
+        goTo(onDuckDuckGoMainPage)
+
+        onDuckDuckGoMainPage.perform {
+            typeSearchPhraseIn(searchPhrase)
+            submitSearchForm()
+            assertIsPhrasePresentInTheResults(searchPhrase)
+        }
     }
 }

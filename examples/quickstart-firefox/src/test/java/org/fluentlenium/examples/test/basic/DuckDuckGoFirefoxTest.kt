@@ -10,7 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver
 class DuckDuckGoFirefoxTest : AbstractFirefoxTest() {
 
     @Page
-    private lateinit var duckDuckMainPage: DuckDuckMainPage
+    private lateinit var onDuckDuckGoMainPage: DuckDuckMainPage
 
     override fun newWebDriver(): WebDriver {
         return FirefoxDriver()
@@ -19,9 +19,12 @@ class DuckDuckGoFirefoxTest : AbstractFirefoxTest() {
     @Test
     fun titleOfDuckDuckGoShouldContainSearchQueryName() {
         val searchPhrase = "searchPhrase"
-        goTo<DuckDuckMainPage>(duckDuckMainPage)
-                .typeSearchPhraseIn(searchPhrase)
-                .submitSearchForm()
-                .assertIsPhrasePresentInTheResults(searchPhrase)
+        goTo(onDuckDuckGoMainPage)
+
+        onDuckDuckGoMainPage.perform {
+            typeSearchPhraseIn(searchPhrase)
+            submitSearchForm()
+            assertIsPhrasePresentInTheResults(searchPhrase)
+        }
     }
 }

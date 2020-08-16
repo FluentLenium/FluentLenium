@@ -1,6 +1,6 @@
 package org.fluentlenium.examples.pages.fluentlenium
 
-import org.fluentlenium.assertj.FluentLeniumAssertions
+import org.fluentlenium.assertj.FluentLeniumAssertions.assertThat
 import org.fluentlenium.core.FluentPage
 import org.fluentlenium.core.annotation.PageUrl
 import org.fluentlenium.core.domain.FluentWebElement
@@ -10,6 +10,8 @@ import org.openqa.selenium.support.FindBy
 @PageUrl("https://fluentlenium.com/quickstart/")
 class QuickStartPage : FluentPage() {
 
+    fun perform(fn: QuickStartPage.() -> Unit) = this.apply(fn)
+
     @FindBy(id = "table-of-contents")
     private lateinit var tableOfContents: FluentWebElement
 
@@ -17,7 +19,7 @@ class QuickStartPage : FluentPage() {
     lateinit var header: Header
 
     override fun isAt() {
-        FluentLeniumAssertions.assertThat(tableOfContents).isDisplayed
+        assertThat(tableOfContents).isDisplayed
     }
 
 }

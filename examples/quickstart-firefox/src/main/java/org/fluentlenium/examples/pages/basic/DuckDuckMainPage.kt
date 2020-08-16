@@ -10,30 +10,29 @@ import java.util.concurrent.TimeUnit
 @PageUrl("https://duckduckgo.com")
 class DuckDuckMainPage : FluentPage() {
 
+    fun perform(fn: DuckDuckMainPage.() -> Unit) = this.apply(fn)
+
     @FindBy(css = "#search_form_input_homepage")
     private lateinit var searchInput: FluentWebElement
 
     @FindBy(css = "#search_button_homepage")
     private lateinit var searchButton: FluentWebElement
 
-    fun typeSearchPhraseIn(searchPhrase: String?): DuckDuckMainPage {
+    fun typeSearchPhraseIn(searchPhrase: String) {
         searchInput.write(searchPhrase)
-        return this
     }
 
-    fun submitSearchForm(): DuckDuckMainPage {
+    fun submitSearchForm() {
         searchButton.submit()
         awaitUntilSearchFormDisappear()
-        return this
     }
 
-    fun assertIsPhrasePresentInTheResults(searchPhrase: String?) {
+    fun assertIsPhrasePresentInTheResults(searchPhrase: String) {
         assertThat(window().title()).contains(searchPhrase)
     }
 
-    private fun awaitUntilSearchFormDisappear(): DuckDuckMainPage {
+    private fun awaitUntilSearchFormDisappear() {
         await().atMost(5, TimeUnit.SECONDS).until(el(SEARCH_FORM_HOMEPAGE)).not().present()
-        return this
     }
 
     companion object {
