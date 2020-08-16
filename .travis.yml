@@ -45,7 +45,7 @@ jobs:
         - chmod +x examples/quickstart-firefox/gradle/wrapper/gradle-wrapper.jar
       script:
         - cd examples/quickstart-firefox
-        - ./gradlew test build
+        - ./gradlew test build -x test
 
     - stage: test
       name: "Java 11 - javadoc"
