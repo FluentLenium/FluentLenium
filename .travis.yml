@@ -39,7 +39,7 @@ jobs:
     - stage: test
       name: "Java 11 - compile Kotlin example"
       language: java
-      jdk: openjdk8
+      jdk: openjdk11
       before_install:
         - chmod +x examples/quickstart-firefox/gradlew
         - chmod +x examples/quickstart-firefox/gradle/wrapper/gradle-wrapper.jar
