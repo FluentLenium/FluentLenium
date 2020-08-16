@@ -37,6 +37,17 @@ jobs:
         - mvn -Pexamples,java11 clean compile
 
     - stage: test
+      name: "Java 11 - compile Kotlin example"
+      language: java
+      jdk: openjdk8
+      before_install:
+        - chmod +x examples/quickstart-firefox/gradlew
+        - chmod +x examples/quickstart-firefox/gradle/wrapper/gradle-wrapper.jar
+      script:
+        - cd examples/quickstart-firefox
+        - ./gradlew test build
+
+    - stage: test
       name: "Java 11 - javadoc"
       language: java
       jdk: openjdk11

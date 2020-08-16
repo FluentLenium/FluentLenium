@@ -1,31 +1,32 @@
-package org.fluentlenium.examples.test;
+package org.fluentlenium.examples.test
 
-import org.fluentlenium.adapter.junit.jupiter.FluentTest;
-import org.junit.jupiter.api.BeforeAll;
-import org.openqa.selenium.os.ExecutableFinder;
+import org.fluentlenium.adapter.junit.jupiter.FluentTest
+import org.junit.jupiter.api.BeforeAll
+import org.openqa.selenium.os.ExecutableFinder
 
-public abstract class AbstractFirefoxTest extends FluentTest {
+abstract class AbstractFirefoxTest : FluentTest() {
+    companion object {
+        private const val PATH_TO_GECKO_DRIVER = "C:\\drivers\\geckodriver.exe"
+        private const val GECKO_DRIVER_PROPERTY = "webdriver.gecko.driver"
 
-    private static final String PATH_TO_GECKO_DRIVER = "C:\\drivers\\geckodriver.exe";
-    private static final String GECKO_DRIVER_PROPERTY = "webdriver.gecko.driver";
+        @JvmStatic
+        @BeforeAll
+        fun setup() {
+            if (systemPropertyNotSet() && executableNotPresentInPath()) {
+                setSystemProperty()
+            }
+        }
 
-    @BeforeAll
-    static void setup() {
-        if (systemPropertyNotSet() && executableNotPresentInPath()) {
-            setSystemProperty();
+        private fun executableNotPresentInPath(): Boolean {
+            return ExecutableFinder().find("geckodriver") == null
+        }
+
+        private fun systemPropertyNotSet(): Boolean {
+            return System.getProperty(GECKO_DRIVER_PROPERTY) == null
+        }
+
+        private fun setSystemProperty() {
+            System.setProperty(GECKO_DRIVER_PROPERTY, PATH_TO_GECKO_DRIVER)
         }
     }
-
-    private static boolean executableNotPresentInPath() {
-        return new ExecutableFinder().find("geckodriver") == null;
-    }
-
-    private static boolean systemPropertyNotSet() {
-        return System.getProperty(GECKO_DRIVER_PROPERTY) == null;
-    }
-
-    private static void setSystemProperty() {
-        System.setProperty(GECKO_DRIVER_PROPERTY, PATH_TO_GECKO_DRIVER);
-    }
-
 }

@@ -1,29 +1,23 @@
-package org.fluentlenium.examples.pages.fluentlenium;
+package org.fluentlenium.examples.pages.fluentlenium
 
-import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
-
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.annotation.PageUrl;
-import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.examples.components.fluentlenium.Header;
-import org.openqa.selenium.support.FindBy;
+import org.fluentlenium.assertj.FluentLeniumAssertions
+import org.fluentlenium.core.FluentPage
+import org.fluentlenium.core.annotation.PageUrl
+import org.fluentlenium.core.domain.FluentWebElement
+import org.fluentlenium.examples.components.fluentlenium.Header
+import org.openqa.selenium.support.FindBy
 
 @PageUrl("https://fluentlenium.com")
-public class MainPage extends FluentPage {
+class MainPage : FluentPage() {
 
     @FindBy(className = "whats-fluentlenium")
-    private FluentWebElement mainContent;
+    lateinit var mainContent: FluentWebElement
 
     @FindBy(css = "nav")
-    private Header header;
+    lateinit var header: Header
 
-    @Override
-    public void isAt() {
-        assertThat(mainContent).isDisplayed();
-    }
-
-    public Header getHeader() {
-        return header;
+    override fun isAt() {
+        FluentLeniumAssertions.assertThat(mainContent).isDisplayed
     }
 
 }

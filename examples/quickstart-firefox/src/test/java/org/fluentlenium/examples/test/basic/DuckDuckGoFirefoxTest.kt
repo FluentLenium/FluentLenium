@@ -1,30 +1,27 @@
-package org.fluentlenium.examples.test.basic;
+package org.fluentlenium.examples.test.basic
 
-import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.examples.pages.basic.DuckDuckMainPage;
-import org.fluentlenium.examples.test.AbstractFirefoxTest;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.fluentlenium.core.annotation.Page
+import org.fluentlenium.examples.pages.basic.DuckDuckMainPage
+import org.fluentlenium.examples.test.AbstractFirefoxTest
+import org.junit.jupiter.api.Test
+import org.openqa.selenium.WebDriver
+import org.openqa.selenium.firefox.FirefoxDriver
 
-public class DuckDuckGoFirefoxTest extends AbstractFirefoxTest {
+class DuckDuckGoFirefoxTest : AbstractFirefoxTest() {
 
     @Page
-    private DuckDuckMainPage duckDuckMainPage;
+    private lateinit var duckDuckMainPage: DuckDuckMainPage
 
-    @Override
-    public WebDriver newWebDriver() {
-        return new FirefoxDriver();
+    override fun newWebDriver(): WebDriver {
+        return FirefoxDriver()
     }
 
     @Test
-    void titleOfDuckDuckGoShouldContainSearchQueryName() {
-        String searchPhrase = "searchPhrase";
-
-        goTo(duckDuckMainPage)
+    fun titleOfDuckDuckGoShouldContainSearchQueryName() {
+        val searchPhrase = "searchPhrase"
+        goTo<DuckDuckMainPage>(duckDuckMainPage)
                 .typeSearchPhraseIn(searchPhrase)
                 .submitSearchForm()
-                .assertIsPhrasePresentInTheResults(searchPhrase);
+                .assertIsPhrasePresentInTheResults(searchPhrase)
     }
-
 }

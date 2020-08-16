@@ -1,24 +1,22 @@
-package org.fluentlenium.examples.pages.fluentlenium;
+package org.fluentlenium.examples.pages.fluentlenium
 
-import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
+import org.assertj.core.api.Assertions
+import org.fluentlenium.assertj.FluentLeniumAssertions
+import org.fluentlenium.core.FluentPage
+import org.fluentlenium.core.domain.FluentList
+import org.fluentlenium.core.domain.FluentWebElement
+import org.openqa.selenium.support.FindBy
 
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.domain.FluentList;
-import org.fluentlenium.core.domain.FluentWebElement;
-import org.openqa.selenium.support.FindBy;
-
-public class AboutPage extends FluentPage {
+class AboutPage : FluentPage() {
 
     @FindBy(className = "username")
-    private FluentList<FluentWebElement> contributors;
+    private lateinit var contributors: FluentList<FluentWebElement>
 
-    @Override
-    public void isAt() {
-        assertThat(contributors).hasSize().greaterThan(0);
+    override fun isAt() {
+        FluentLeniumAssertions.assertThat(contributors).hasSize().greaterThan(0)
     }
 
-    public void verifySlawomirPresence() {
-        assertThat(contributors.texts()).contains("Sławomir Radzymiński");
+    fun verifySlawomirPresence() {
+        Assertions.assertThat(contributors.texts()).contains("Sławomir Radzymiński")
     }
-
 }

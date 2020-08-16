@@ -1,42 +1,38 @@
-package org.fluentlenium.examples.components.fluentlenium;
+package org.fluentlenium.examples.components.fluentlenium
 
-import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.components.ComponentInstantiator;
-import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.examples.pages.fluentlenium.AboutPage;
-import org.fluentlenium.examples.pages.fluentlenium.MainPage;
-import org.fluentlenium.examples.pages.fluentlenium.QuickStartPage;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.fluentlenium.core.FluentControl
+import org.fluentlenium.core.components.ComponentInstantiator
+import org.fluentlenium.core.domain.FluentWebElement
+import org.fluentlenium.examples.pages.fluentlenium.AboutPage
+import org.fluentlenium.examples.pages.fluentlenium.MainPage
+import org.fluentlenium.examples.pages.fluentlenium.QuickStartPage
+import org.openqa.selenium.WebElement
+import org.openqa.selenium.support.FindBy
 
-public class Header extends FluentWebElement {
+class Header(element: WebElement?, control: FluentControl?, instantiator: ComponentInstantiator?) :
+        FluentWebElement(element, control, instantiator) {
 
     @FindBy(css = "nav ul li:nth-of-type(1)")
-    private FluentWebElement homeLink;
+    private lateinit var homeLink: FluentWebElement
 
     @FindBy(css = "nav ul li:nth-of-type(2)")
-    private FluentWebElement quickstartLink;
+    private lateinit var quickstartLink: FluentWebElement
 
     @FindBy(css = "nav ul li:nth-of-type(5)")
-    private FluentWebElement aboutLink;
+    private lateinit var aboutLink: FluentWebElement
 
-    public Header(WebElement element, FluentControl control, ComponentInstantiator instantiator) {
-        super(element, control, instantiator);
+    fun clickHomeLink(): MainPage {
+        homeLink.click()
+        return newInstance(MainPage::class.java)
     }
 
-    public MainPage clickHomeLink() {
-        homeLink.click();
-        return newInstance(MainPage.class);
+    fun clickQuickstartLink(): QuickStartPage {
+        quickstartLink.click()
+        return newInstance(QuickStartPage::class.java)
     }
 
-    public QuickStartPage clickQuickstartLink() {
-        quickstartLink.click();
-        return newInstance(QuickStartPage.class);
+    fun clickAboutLink(): AboutPage {
+        aboutLink.click()
+        return newInstance(AboutPage::class.java)
     }
-
-    public AboutPage clickAboutLink() {
-        aboutLink.click();
-        return newInstance(AboutPage.class);
-    }
-
 }

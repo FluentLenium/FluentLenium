@@ -580,7 +580,6 @@
                 <module>examples/spock</module>
                 <module>examples/spring</module>
                 <module>examples/quickstart-safari</module>
-                <module>examples/quickstart-firefox</module>
                 <module>examples/quickstart-microsoft-browsers</module>
                 <module>examples/appium</module>
             </modules>
