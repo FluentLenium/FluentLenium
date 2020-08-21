@@ -321,7 +321,7 @@ To run Chrome in the headless mode you can use following FluentLenium configurat
         ```
         $ cat fluentlenium.properties
         webDriver=chrome
-        capabilities = "{\"chromeOptions\": {\"args\": [\"headless\",\"disable-gpu\"]}}        ...
+        capabilities = {\"chromeOptions\": {\"args\": [\"headless\",\"disable-gpu\"]}}
         ```
   1. Implement custom configuration properties by extending **ConfigurationDefaults**
         ```java

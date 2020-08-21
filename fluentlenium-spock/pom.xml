@@ -23,6 +23,11 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.fluentlenium</groupId>
+            <artifactId>fluentlenium-assertj</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
         </dependency>
@@ -34,11 +39,20 @@
         <dependency>
             <groupId>org.spockframework</groupId>
             <artifactId>spock-core</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>htmlunit-driver</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-firefox-driver</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -72,9 +86,8 @@
                 <dependencies>
                     <dependency>
                         <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-all</artifactId>
-                        <version>2.5.13</version>
-                        <type>pom</type>
+                        <artifactId>groovy</artifactId>
+                        <version>3.0.5</version>
                         <scope>runtime</scope>
                     </dependency>
                 </dependencies>

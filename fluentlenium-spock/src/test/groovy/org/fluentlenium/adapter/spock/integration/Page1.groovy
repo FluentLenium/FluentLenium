@@ -1,4 +1,4 @@
-package org.fluentlenium.adapter.spock.page
+package org.fluentlenium.adapter.spock.integration
 
 import org.fluentlenium.core.FluentPage
 import org.fluentlenium.utils.UrlUtils

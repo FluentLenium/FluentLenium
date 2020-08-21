@@ -102,7 +102,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     /**
      * @return Class of currently running test
      */
-    protected Class<?> getTestClass() {
+    public Class<?> getTestClass() {
         Class<?> currentTestClass = FluentTestRunnerAdapter.TEST_CLASS.get();
         if (currentTestClass == null) {
             LOGGER.warn("Current test class is null. Are you in test context?");
@@ -113,7 +113,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     /**
      * @return method name (as String) of currently running test
      */
-    protected String getTestMethodName() {
+    public String getTestMethodName() {
         String currentTestMethodName = FluentTestRunnerAdapter.TEST_METHOD_NAME.get();
         if (currentTestMethodName == null) {
             LOGGER.warn("Current test method name is null. Are you in text context?");
@@ -129,7 +129,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @return Annotation instance
      * @throws AnnotationNotFoundException when annotation you want to access couldn't be find
      */
-    protected <T extends Annotation> T getClassAnnotation(Class<T> annotation) {
+    public <T extends Annotation> T getClassAnnotation(Class<T> annotation) {
         T definedAnnotation = getTestClass().getAnnotation(annotation);
 
         if (definedAnnotation == null) {
@@ -148,7 +148,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @throws AnnotationNotFoundException of annotation you want to access couldn't be found
      * @throws MethodNotFoundException     if test method couldn't be found - if it occurs that's most likely FL bug
      */
-    protected <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
+    public <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
         T definedAnnotation;
         try {
             definedAnnotation = getTestClass().getDeclaredMethod(getTestMethodName()).getAnnotation(annotation);
