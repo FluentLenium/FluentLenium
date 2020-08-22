@@ -2,9 +2,9 @@ package org.fluentlenium.adapter.spock
 
 import org.fluentlenium.adapter.FluentTestRunnerAdapter
 
-final class FluentSpecificationAdapter extends FluentTestRunnerAdapter {
+final class SpockAdapter extends FluentTestRunnerAdapter {
 
-    private FluentSpecificationAdapter() {
+    private SpockAdapter() {
         super()
     }
 

@@ -8,11 +8,8 @@ class BasicSpec extends FluentSpecification {
         true
     }
 
-    def "Run basic when-then test without exception"() {
-        given:
-        when:
-        ''
-        then:
+    def "Run basic expect test without exception"() {
+        expect:
         true
     }
 

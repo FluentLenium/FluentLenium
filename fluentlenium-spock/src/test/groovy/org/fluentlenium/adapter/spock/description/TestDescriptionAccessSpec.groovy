@@ -4,10 +4,10 @@ import org.fluentlenium.adapter.spock.FluentSpecification
 
 import static org.assertj.core.api.Assertions.assertThat
 
-class TestDescriptionAccessTest extends FluentSpecification {
+class TestDescriptionAccessSpec extends FluentSpecification {
 
     def TEST_METHOD = "shouldRetrieveNames"
-    def TEST_CLASS = TestDescriptionAccessTest.class
+    def TEST_CLASS = TestDescriptionAccessSpec.class
 
     def setup() {
         assertThat(getTestClass()).isEqualTo(TEST_CLASS)
@@ -15,10 +15,7 @@ class TestDescriptionAccessTest extends FluentSpecification {
     }
 
     def shouldRetrieveNames() {
-        when:
-        'all set'
-
-        then:
+        expect:
         assertThat(getTestClass()).isEqualTo(TEST_CLASS)
         assertThat(getTestMethodName()).isEqualTo(TEST_METHOD)
     }
