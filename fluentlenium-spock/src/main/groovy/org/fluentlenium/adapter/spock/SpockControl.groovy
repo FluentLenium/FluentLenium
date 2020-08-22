@@ -27,17 +27,15 @@ import org.openqa.selenium.Cookie
 import org.openqa.selenium.SearchContext
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
-import spock.lang.Shared
 import spock.lang.Specification
 
 class SpockControl extends Specification implements FluentControl {
 
     @SuppressWarnings("GroovyAccessibility")
-    @Shared
-    protected SpockAdapter adapter = new SpockAdapter()
+    public SpockAdapter adapter = new SpockAdapter()
 
     FluentControl getFluentControl() {
-        return adapter.getFluentControl()
+        return adapter.fluentControl
     }
 
     Configuration getConfig() {
@@ -45,11 +43,11 @@ class SpockControl extends Specification implements FluentControl {
     }
 
     def getTestClass() {
-        return adapter.getTestClass()
+        return adapter.testClass
     }
 
     def getTestMethodName() {
-        return adapter.getTestMethodName()
+        return adapter.testMethodName
     }
 
     @Override
@@ -194,12 +192,12 @@ class SpockControl extends Specification implements FluentControl {
 
     @Override
     Long getBrowserTimeout() {
-        return getFluentControl().getBrowserTimeout()
+        return getConfig().getBrowserTimeout()
     }
 
     @Override
     Integer getBrowserTimeoutRetries() {
-        return getFluentControl().getBrowserTimeoutRetries()
+        return getConfig().getBrowserTimeoutRetries()
     }
 
     @Override
@@ -318,21 +316,6 @@ class SpockControl extends Specification implements FluentControl {
     }
 
     @Override
-    FluentList<FluentWebElement> asFluentList(WebElement... elements) {
-        return getFluentControl().asFluentList(elements)
-    }
-
-    @Override
-    FluentList<FluentWebElement> asFluentList(Iterable<WebElement> elements) {
-        return getFluentControl().asFluentList(elements)
-    }
-
-    @Override
-    FluentList<FluentWebElement> asFluentList(List<WebElement> elements) {
-        return getFluentControl().asFluentList(elements)
-    }
-
-    @Override
     <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass) {
         return getFluentControl().newFluentList(componentClass)
     }
@@ -345,6 +328,21 @@ class SpockControl extends Specification implements FluentControl {
     @Override
     <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass, List<T> elements) {
         return getFluentControl().newFluentList(componentClass, elements)
+    }
+
+    @Override
+    FluentList<FluentWebElement> asFluentList(WebElement... elements) {
+        return getFluentControl().asFluentList(elements)
+    }
+
+    @Override
+    FluentList<FluentWebElement> asFluentList(Iterable<WebElement> elements) {
+        return getFluentControl().asFluentList(elements)
+    }
+
+    @Override
+    FluentList<FluentWebElement> asFluentList(List<WebElement> elements) {
+        return getFluentControl().asFluentList(elements)
     }
 
     @Override
@@ -368,21 +366,6 @@ class SpockControl extends Specification implements FluentControl {
     }
 
     @Override
-    <T> ComponentList<T> asComponentList(Class<T> componentClass, WebElement... elements) {
-        return getFluentControl().asComponentList(componentClass, elements)
-    }
-
-    @Override
-    <T> ComponentList asComponentList(Class<T> componentClass, Iterable<WebElement> elements) {
-        return getFluentControl().asComponentList(componentClass, elements)
-    }
-
-    @Override
-    <T> ComponentList<T> asComponentList(Class<T> componentClass, List<WebElement> elements) {
-        return getFluentControl().asComponentList(componentClass, elements)
-    }
-
-    @Override
     <T> ComponentList<T> newComponentList(Class<T> componentClass, T... componentsList) {
         return getFluentControl().newComponentList(componentClass, componentsList)
     }
@@ -398,6 +381,31 @@ class SpockControl extends Specification implements FluentControl {
     }
 
     @Override
+    <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, T... componentsList) {
+        return getFluentControl().newComponentList(listClass, componentClass, componentsList)
+    }
+
+    @Override
+    <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, List<T> componentsList) {
+        return getFluentControl().newComponentList(listClass, componentClass, componentsList)
+    }
+
+    @Override
+    <T> ComponentList<T> asComponentList(Class<T> componentClass, WebElement... elements) {
+        return getFluentControl().asComponentList(componentClass, elements)
+    }
+
+    @Override
+    <T> ComponentList asComponentList(Class<T> componentClass, Iterable<WebElement> elements) {
+        return getFluentControl().asComponentList(componentClass, elements)
+    }
+
+    @Override
+    <T> ComponentList<T> asComponentList(Class<T> componentClass, List<WebElement> elements) {
+        return getFluentControl().asComponentList(componentClass, elements)
+    }
+
+    @Override
     <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, WebElement... elements) {
         return getFluentControl().asComponentList(listClass, componentClass, elements)
     }
@@ -410,16 +418,6 @@ class SpockControl extends Specification implements FluentControl {
     @Override
     <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, List<WebElement> elements) {
         return getFluentControl().asComponentList(listClass, componentClass, elements)
-    }
-
-    @Override
-    <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, T... componentsList) {
-        return getFluentControl().newComponentList(listClass, componentClass, componentsList)
-    }
-
-    @Override
-    <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, List<T> componentsList) {
-        return getFluentControl().newComponentList(listClass, componentClass, componentsList)
     }
 
     @Override
@@ -524,7 +522,12 @@ class SpockControl extends Specification implements FluentControl {
 
     @Override
     FluentJavascript executeAsyncScript(String script, Object... args) {
-        return getFluentControl().executeScript(script, args)
+        return getFluentControl().executeAsyncScript(script, args)
+    }
+
+    @Override
+    FluentWebElement el(WebElement rawElement) {
+        return getFluentControl().el(rawElement)
     }
 
     @Override
@@ -535,11 +538,6 @@ class SpockControl extends Specification implements FluentControl {
     @Override
     FluentList<FluentWebElement> find(String selector, SearchFilter... filters) {
         return getFluentControl().find(selector, filters)
-    }
-
-    @Override
-    FluentWebElement el(WebElement rawElement) {
-        return getFluentControl().el(rawElement)
     }
 
     @Override

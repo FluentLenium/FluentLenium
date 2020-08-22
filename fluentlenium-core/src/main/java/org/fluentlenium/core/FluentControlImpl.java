@@ -25,6 +25,7 @@ import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.utils.chromium.ChromiumApi;
+import org.fluentlenium.utils.chromium.ChromiumApiNotSupportedException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
@@ -283,7 +284,13 @@ public abstract class FluentControlImpl implements FluentControl {
     }
 
     public final ChromiumApi getChromiumApi() {
-        return new ChromiumApi((RemoteWebDriver) getDriver());
+        RemoteWebDriver remoteWebDriver;
+        try {
+           remoteWebDriver = (RemoteWebDriver) getDriver();
+        } catch (ClassCastException ex) {
+            throw new ChromiumApiNotSupportedException("API supported only by Chrome and Edge");
+        }
+        return new ChromiumApi(remoteWebDriver);
     }
 
     public FluentList<FluentWebElement> asFluentList(WebElement... elements) {

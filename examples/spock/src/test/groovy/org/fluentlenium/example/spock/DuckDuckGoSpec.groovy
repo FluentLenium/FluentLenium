@@ -2,11 +2,13 @@ package org.fluentlenium.example.spock
 
 import org.fluentlenium.adapter.spock.FluentSpecification
 import org.fluentlenium.core.hook.wait.Wait
+import org.openqa.selenium.Cookie
 
 @Wait
 class DuckDuckGoSpec extends FluentSpecification {
-    public static final String SEARCH_TEXT = "FluentLenium"
-    public static final String SCREENSHOT_TEMP_PATH = "/tmp"
+    private static final String SEARCH_TEXT = "FluentLenium"
+    private static final String SCREENSHOT_TEMP_PATH = "/tmp"
+    private static final PngFilter PNG_FILTER = new PngFilter()
 
     /**
      * This can't be done unfortunately in Groovy. See below link for details
@@ -49,9 +51,21 @@ class DuckDuckGoSpec extends FluentSpecification {
         new File("$SCREENSHOT_TEMP_PATH/${-> getFiles().first()}").delete()
     }
 
+    def "Should set cookie"() {
+        given:
+        goTo("https://awesome-testing.com")
+
+        when:
+        getDriver().manage().addCookie(new Cookie("my", "cookie"))
+        getDriver().navigate().refresh()
+
+        then:
+        getCookie("my").value == "cookie"
+    }
+
     String[] getFiles() {
         File tempFolder = new File(SCREENSHOT_TEMP_PATH)
-        return tempFolder.list(new PngFilter())
+        return tempFolder.list(PNG_FILTER)
     }
 
 }
