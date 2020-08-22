@@ -6,6 +6,7 @@ import org.fluentlenium.core.hook.wait.Wait
 @Wait
 class DuckDuckGoSpec extends FluentSpecification {
     public static final String SEARCH_TEXT = "FluentLenium"
+    public static final String SCREENSHOT_TEMP_PATH = "/tmp"
 
     /**
      * This can't be done unfortunately in Groovy. See below link for details
@@ -30,6 +31,27 @@ class DuckDuckGoSpec extends FluentSpecification {
 
         then:
         window().title().contains(SEARCH_TEXT)
+    }
+
+    def "Should take screenshot"() {
+        given:
+        goTo("https://awesome-testing.com")
+        setScreenshotPath(SCREENSHOT_TEMP_PATH)
+        getFiles().size() == 0
+
+        when:
+        takeScreenshot()
+
+        then:
+        getFiles().size() > 0
+
+        cleanup:
+        new File("$SCREENSHOT_TEMP_PATH/${-> getFiles().first()}").delete()
+    }
+
+    String[] getFiles() {
+        File tempFolder = new File(SCREENSHOT_TEMP_PATH)
+        return tempFolder.list(new PngFilter())
     }
 
 }

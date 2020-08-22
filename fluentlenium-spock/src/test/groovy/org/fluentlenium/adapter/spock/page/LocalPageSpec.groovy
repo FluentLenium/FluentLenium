@@ -22,6 +22,7 @@ class LocalPageSpec extends FluentSpecification {
         await().until(inputElements).value(INPUT_VALUE)
 
         then:
+        url().contains("page1.html")
         el("input").value() == INPUT_VALUE
     }
 

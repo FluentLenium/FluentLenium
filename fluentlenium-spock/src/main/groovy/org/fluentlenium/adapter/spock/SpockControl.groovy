@@ -1,6 +1,7 @@
 package org.fluentlenium.adapter.spock
 
 import io.appium.java_client.AppiumDriver
+import org.fluentlenium.configuration.Configuration
 import org.fluentlenium.configuration.ConfigurationFactory
 import org.fluentlenium.configuration.ConfigurationProperties
 import org.fluentlenium.core.FluentControl
@@ -39,6 +40,10 @@ class SpockControl extends Specification implements FluentControl {
         return adapter.getFluentControl()
     }
 
+    Configuration getConfig() {
+        return adapter.configuration
+    }
+
     def getTestClass() {
         return adapter.getTestClass()
     }
@@ -64,127 +69,127 @@ class SpockControl extends Specification implements FluentControl {
 
     @Override
     void setWebDriver(String webDriver) {
-        adapter.setWebDriver(webDriver)
+        getConfig().setWebDriver(webDriver)
     }
 
     @Override
     void setBrowserTimeout(Long timeout) {
-        adapter.setBrowserTimeout(timeout)
+        getConfig().setBrowserTimeout(timeout)
     }
 
     @Override
     void setBrowserTimeoutRetries(Integer retriesNumber) {
-        adapter.setBrowserTimeoutRetries(retriesNumber)
+        getConfig().setBrowserTimeoutRetries(retriesNumber)
     }
 
     @Override
     void setRemoteUrl(String remoteUrl) {
-        adapter.setRemoteUrl(remoteUrl)
+        getConfig().setRemoteUrl(remoteUrl)
     }
 
     @Override
     void setCapabilities(Capabilities capabilities) {
-        adapter.setCapabilities(capabilities)
+        getConfig().setCapabilities(capabilities)
     }
 
     @Override
     void setConfigurationFactory(Class<? extends ConfigurationFactory> configurationFactory) {
-        adapter.setConfigurationFactory(configurationFactory)
+        getConfig().setConfigurationFactory(configurationFactory)
     }
 
     @Override
     void setDriverLifecycle(DriverLifecycle driverLifecycle) {
-        adapter.setDriverLifecycle(driverLifecycle)
+        getConfig().setDriverLifecycle(driverLifecycle)
     }
 
     @Override
     void setDeleteCookies(Boolean deleteCookies) {
-        adapter.setDeleteCookies(deleteCookies)
+        getConfig().setDeleteCookies(deleteCookies)
     }
 
     @Override
     void setBaseUrl(String baseUrl) {
-        adapter.setBaseUrl(baseUrl)
+        getConfig().setBaseUrl(baseUrl)
     }
 
     @Override
     void setPageLoadTimeout(Long pageLoadTimeout) {
-        adapter.setPageLoadTimeout(pageLoadTimeout)
+        getConfig().setPageLoadTimeout(pageLoadTimeout)
     }
 
     @Override
     void setImplicitlyWait(Long implicitlyWait) {
-        adapter.setImplicitlyWait(implicitlyWait)
+        getConfig().setImplicitlyWait(implicitlyWait)
     }
 
     @Override
     void setAwaitAtMost(Long awaitAtMost) {
-        adapter.setAwaitAtMost(awaitAtMost)
+        getConfig().setAwaitAtMost(awaitAtMost)
     }
 
     @Override
     void setAwaitPollingEvery(Long awaitPollingEvery) {
-        adapter.setAwaitPollingEvery(awaitPollingEvery)
+        getConfig().setAwaitPollingEvery(awaitPollingEvery)
     }
 
     @Override
     void setScriptTimeout(Long scriptTimeout) {
-        adapter.setScriptTimeout(scriptTimeout)
+        getConfig().setScriptTimeout(scriptTimeout)
     }
 
     @Override
     void setEventsEnabled(Boolean eventsEnabled) {
-        adapter.setEventsEnabled(eventsEnabled)
+        getConfig().setEventsEnabled(eventsEnabled)
     }
 
     @Override
     void setScreenshotPath(String screenshotPath) {
-        adapter.setScreenshotPath(screenshotPath)
+        getConfig().setScreenshotPath(screenshotPath)
     }
 
     @Override
     void setScreenshotMode(TriggerMode screenshotMode) {
-        adapter.setScreenshotMode(screenshotMode)
+        getConfig().setScreenshotMode(screenshotMode)
     }
 
     @Override
     void setHtmlDumpPath(String htmlDumpPath) {
-        adapter.setHtmlDumpPath(htmlDumpPath)
+        getConfig().setHtmlDumpPath(htmlDumpPath)
     }
 
     @Override
     void setHtmlDumpMode(TriggerMode htmlDumpMode) {
-        adapter.setHtmlDumpMode(htmlDumpMode)
+        getConfig().setHtmlDumpMode(htmlDumpMode)
     }
 
     @Override
     void setCustomProperty(String key, String value) {
-        adapter.setCustomProperty(key, value)
+        getConfig().setCustomProperty(key, value)
     }
 
     @Override
     String getWebDriver() {
-        return getFluentControl().getWebDriver()
+        return getConfig().getWebDriver()
     }
 
     @Override
     String getRemoteUrl() {
-        return getFluentControl().getRemoteUrl()
+        return getConfig().getRemoteUrl()
     }
 
     @Override
     Capabilities getCapabilities() {
-        return getFluentControl().getCapabilities()
+        return getConfig().getCapabilities()
     }
 
     @Override
     String getBaseUrl() {
-        return getFluentControl().getBaseUrl()
+        return getConfig().getBaseUrl()
     }
 
     @Override
     DriverLifecycle getDriverLifecycle() {
-        return getFluentControl().getDriverLifecycle()
+        return getConfig().getDriverLifecycle()
     }
 
     @Override
@@ -199,72 +204,72 @@ class SpockControl extends Specification implements FluentControl {
 
     @Override
     Boolean getDeleteCookies() {
-        return getFluentControl().getDeleteCookies()
+        return getConfig().getDeleteCookies()
     }
 
     @Override
     Long getPageLoadTimeout() {
-        return getFluentControl().getPageLoadTimeout()
+        return getConfig().getPageLoadTimeout()
     }
 
     @Override
     Long getImplicitlyWait() {
-        return getFluentControl().getImplicitlyWait()
+        return getConfig().getImplicitlyWait()
     }
 
     @Override
     Long getScriptTimeout() {
-        return getFluentControl().getScriptTimeout()
+        return getConfig().getScriptTimeout()
     }
 
     @Override
     Long getAwaitAtMost() {
-        return getFluentControl().getAwaitAtMost()
+        return getConfig().getAwaitAtMost()
     }
 
     @Override
     Long getAwaitPollingEvery() {
-        return getFluentControl().getAwaitPollingEvery()
+        return getConfig().getAwaitPollingEvery()
     }
 
     @Override
     Boolean getEventsEnabled() {
-        return getFluentControl().getEventsEnabled()
+        return getConfig().getEventsEnabled()
     }
 
     @Override
     String getScreenshotPath() {
-        return getFluentControl().getScreenshotPath()
+        return getConfig().getScreenshotPath()
     }
 
     @Override
     TriggerMode getScreenshotMode() {
-        return getFluentControl().getScreenshotMode()
+        return getConfig().getScreenshotMode()
     }
 
     @Override
     String getHtmlDumpPath() {
-        return getFluentControl().getHtmlDumpPath()
+        return getConfig().getHtmlDumpPath()
     }
 
     @Override
     TriggerMode getHtmlDumpMode() {
-        return getFluentControl().getHtmlDumpMode()
+        return getConfig().getHtmlDumpMode()
     }
 
     @Override
     Class<? extends ConfigurationProperties> getConfigurationDefaults() {
-        return getFluentControl().getConfigurationDefaults()
+        return getConfig().getConfigurationDefaults()
     }
 
     @Override
     Class<? extends ConfigurationFactory> getConfigurationFactory() {
-        return getFluentControl().getConfigurationFactory()
+        return getConfig().getConfigurationFactory()
     }
 
     @Override
     String getCustomProperty(String propertyName) {
-        return getFluentControl().getCustomProperty(propertyName)
+        return getConfig().getCustomProperty(propertyName)
     }
 
     @Override

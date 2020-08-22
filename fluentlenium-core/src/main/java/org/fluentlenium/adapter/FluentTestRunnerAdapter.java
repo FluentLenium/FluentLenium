@@ -94,9 +94,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      */
     public static void afterClass(Class<?> testClass) {
         List<SharedWebDriver> sharedWebDrivers = SharedWebDriverContainer.INSTANCE.getTestClassDrivers(testClass);
-        for (SharedWebDriver sharedWebDriver : sharedWebDrivers) {
-            SharedWebDriverContainer.INSTANCE.quit(sharedWebDriver);
-        }
+        sharedWebDrivers.forEach(SharedWebDriverContainer.INSTANCE::quit);
     }
 
     /**
