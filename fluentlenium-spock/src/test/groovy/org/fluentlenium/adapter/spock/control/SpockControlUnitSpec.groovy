@@ -858,8 +858,6 @@ class SpockControlUnitSpec extends Specification {
         spockControl.getChromiumApi()
 
         then:
-        2 * mockContainerFluentControl.getFluentControl() >> mockFluentControl
-        1 * mockFluentControl.getDriver() >> mockDriver
-        thrown(ChromiumApiNotSupportedException)
+        1 * mockContainerFluentControl.getChromiumApi()
     }
 }
