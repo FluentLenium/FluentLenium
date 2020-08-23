@@ -52,10 +52,6 @@ public class ChromiumApi {
         return executeCommand(cmdExecutor, command, methodName);
     }
 
-    public void deleteAllCookies() {
-        sendCommand("Network.clearBrowserCookies", ImmutableMap.of());
-    }
-
     private void defineCommandViaReflection() {
         Method defineCmd;
         try {

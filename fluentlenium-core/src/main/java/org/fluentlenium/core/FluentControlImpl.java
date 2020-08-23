@@ -31,15 +31,16 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  * Default implementation of {@link FluentControl}.
  * <p>
  * It delegates all calls to an underlying {@link FluentControlContainer} containing the {@link FluentDriver}
  * instance, and a {@link Configuration} instance.
+ *
+ * Do not put any logic here. Consider it as a proxy exposing fluentlenium-core to end user
  */
-public abstract class FluentControlImpl implements FluentControl {
+public class FluentControlImpl implements FluentControl {
 
     private final FluentControlContainer controlContainer;
     private Configuration configuration;
@@ -201,19 +202,11 @@ public abstract class FluentControlImpl implements FluentControl {
     }
 
     public WebDriver getDriver() {
-        WebDriver driver = getFluentControl().getDriver();
-        if (driver instanceof AppiumDriver) {
-            throw new WrongDriverException("Use getAppiumDriver() method for mobile automation");
-        }
-        return driver;
+        return getFluentControl().getDriver();
     }
 
     public AppiumDriver<?> getAppiumDriver() {
-        WebDriver driver = getFluentControl().getDriver();
-        if (!(driver instanceof AppiumDriver)) {
-            throw new WrongDriverException("Use getDriver() method for web automation");
-        }
-        return (AppiumDriver<?>) driver;
+        return getFluentControl().getAppiumDriver();
     }
 
     public String getCustomProperty(String propertyName) {
@@ -282,8 +275,8 @@ public abstract class FluentControlImpl implements FluentControl {
         getFluentControl().takeScreenshot(fileName);
     }
 
-    public final ChromiumApi getChromiumApi() {
-        return new ChromiumApi((RemoteWebDriver) getDriver());
+    public ChromiumApi getChromiumApi() {
+        return getFluentControl().getChromiumApi();
     }
 
     public FluentList<FluentWebElement> asFluentList(WebElement... elements) {

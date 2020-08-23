@@ -1,13 +1,7 @@
 package org.fluentlenium.adapter.spock
 
-import org.fluentlenium.adapter.DefaultSharedMutator
 import org.fluentlenium.adapter.FluentTestRunnerAdapter
-
-class FluentSpecificationAdapter extends FluentTestRunnerAdapter {
-
-    FluentSpecificationAdapter() {
-        super(new DefaultSharedMutator())
-    }
+class SpockAdapter extends FluentTestRunnerAdapter {
 
     void specStarting(Class<?> testClass, String testName) {
         super.starting(testClass, testName)
