@@ -154,7 +154,8 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
         return driver;
     }
 
-    @Override public AppiumDriver<?> getAppiumDriver() {
+    @Override
+    public AppiumDriver<?> getAppiumDriver() {
         if (!(driver instanceof AppiumDriver)) {
             throw new WrongDriverException("Use getDriver() method for web automation");
         }

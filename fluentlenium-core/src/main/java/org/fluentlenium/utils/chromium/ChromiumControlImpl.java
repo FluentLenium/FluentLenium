@@ -21,7 +21,7 @@ public class ChromiumControlImpl implements ChromiumControl {
         try {
             remoteWebDriver = (RemoteWebDriver) driver;
         } catch (ClassCastException ex) {
-            throw new ChromiumApiNotSupportedException("API supported only by Chrome and Edge");
+            throw new ChromiumApiNotSupportedException("API supported only by Chrome and Edge", ex.getCause());
         }
         return new ChromiumApi(remoteWebDriver);
     }

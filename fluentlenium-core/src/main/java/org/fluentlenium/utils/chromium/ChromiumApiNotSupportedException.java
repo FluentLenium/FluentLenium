@@ -7,4 +7,8 @@ public class ChromiumApiNotSupportedException extends RuntimeException {
     public ChromiumApiNotSupportedException(String message) {
         super(message);
     }
+
+    public ChromiumApiNotSupportedException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }
