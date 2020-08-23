@@ -12,9 +12,11 @@ import org.fluentlenium.core.domain.FluentList
 import org.fluentlenium.core.domain.FluentWebElement
 import org.fluentlenium.core.inject.ContainerFluentControl
 import org.fluentlenium.core.search.SearchFilter
+import org.fluentlenium.utils.chromium.ChromiumApiNotSupportedException
 import org.openqa.selenium.By
 import org.openqa.selenium.Capabilities
 import org.openqa.selenium.SearchContext
+import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.chrome.ChromeOptions
 import spock.lang.Specification
@@ -29,6 +31,7 @@ class SpockControlUnitSpec extends Specification {
     FluentControl mockFluentControl = Mock()
     Configuration mockConfiguration = Mock()
     ContainerFluentControl mockContainerFluentControl = Mock()
+    WebDriver mockDriver = Mock()
     SpockAdapter mockAdapter = GroovyMock() {
         getFluentControl() >> mockContainerFluentControl
         getConfiguration() >> mockConfiguration
@@ -855,7 +858,8 @@ class SpockControlUnitSpec extends Specification {
         spockControl.getChromiumApi()
 
         then:
-        1 * mockContainerFluentControl.getFluentControl()
-        thrown(NullPointerException)
+        2 * mockContainerFluentControl.getFluentControl() >> mockFluentControl
+        1 * mockFluentControl.getDriver() >> mockDriver
+        thrown(ChromiumApiNotSupportedException)
     }
 }

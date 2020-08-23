@@ -31,23 +31,22 @@ import spock.lang.Specification
 
 class SpockControl extends Specification implements FluentControl {
 
-    @SuppressWarnings("GroovyAccessibility")
     public SpockAdapter adapter = new SpockAdapter()
 
     FluentControl getFluentControl() {
-        return adapter.fluentControl
+        return adapter.getFluentControl()
     }
 
     Configuration getConfig() {
-        return adapter.configuration
+        return adapter.getConfiguration()
     }
 
     def getTestClass() {
-        return adapter.testClass
+        return adapter.getTestClass()
     }
 
     def getTestMethodName() {
-        return adapter.testMethodName
+        return adapter.getTestMethodName()
     }
 
     @Override

@@ -3,10 +3,6 @@ package org.fluentlenium.adapter.spock
 import org.fluentlenium.adapter.FluentTestRunnerAdapter
 class SpockAdapter extends FluentTestRunnerAdapter {
 
-    private SpockAdapter() {
-        super()
-    }
-
     void specStarting(Class<?> testClass, String testName) {
         super.starting(testClass, testName)
     }

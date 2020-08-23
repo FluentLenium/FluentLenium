@@ -33,6 +33,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 /**
  * Default implementation of {@link FluentControl}.
@@ -284,9 +285,14 @@ public abstract class FluentControlImpl implements FluentControl {
     }
 
     public final ChromiumApi getChromiumApi() {
+        WebDriver driver = getDriver();
+        if (driver instanceof EventFiringWebDriver) {
+            driver = ((EventFiringWebDriver) driver).getWrappedDriver();
+        }
+
         RemoteWebDriver remoteWebDriver;
         try {
-           remoteWebDriver = (RemoteWebDriver) getDriver();
+           remoteWebDriver = (RemoteWebDriver) driver;
         } catch (ClassCastException ex) {
             throw new ChromiumApiNotSupportedException("API supported only by Chrome and Edge");
         }
