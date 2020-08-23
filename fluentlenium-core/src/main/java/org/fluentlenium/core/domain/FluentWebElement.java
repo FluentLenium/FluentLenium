@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.function.Function;
 
+import io.appium.java_client.AppiumDriver;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.SeleniumDriverControl;
@@ -238,6 +239,11 @@ public class FluentWebElement extends Component
     }
 
     @Override
+    public AppiumDriver<?> getAppiumDriver() {
+        return control.getAppiumDriver();
+    }
+
+    @Override
     public CssSupport css() {
         return control.css();
     }
@@ -431,6 +437,12 @@ public class FluentWebElement extends Component
         await().atMost(duration).until(this).clickable();
         this.scrollToCenter();
         this.click();
+        return this;
+    }
+
+    @Override
+    public FluentWebElement hoverOver() {
+        mouse().moveToElement();
         return this;
     }
 

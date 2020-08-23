@@ -6,13 +6,13 @@
 
     <artifactId>fluentlenium-examples-spring</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.3.2-SNAPSHOT</version>
+    <version>4.4.2-SNAPSHOT</version>
 
     <name>FluentLenium Examples Spring</name>
 
     <properties>
         <fluentlenium.version>${project.version}</fluentlenium.version>
-        <spring.version>5.2.4.RELEASE</spring.version>
+        <spring.version>5.2.8.RELEASE</spring.version>
         <selenium.version>3.141.59</selenium.version>
     </properties>
 

@@ -2,6 +2,8 @@ package org.fluentlenium.core;
 
 import java.util.List;
 import java.util.Set;
+
+import io.appium.java_client.AppiumDriver;
 import org.fluentlenium.adapter.DefaultFluentControlContainer;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.configuration.Configuration;
@@ -27,19 +29,32 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-public abstract class FluentControlImpl implements FluentControl {
+/**
+ * Default implementation of {@link FluentControl}.
+ * <p>
+ * It delegates all calls to an underlying {@link FluentControlContainer} containing the {@link FluentDriver}
+ * instance, and a {@link Configuration} instance.
+ *
+ * Do not put any logic here. Consider it as a proxy exposing fluentlenium-core to end user
+ */
+public class FluentControlImpl implements FluentControl {
 
     private final FluentControlContainer controlContainer;
-
     private Configuration configuration;
 
     public FluentControlImpl() {
         this(new DefaultFluentControlContainer());
     }
 
+    /**
+     * The configuration for this control is provided via itself, without having a
+     * {@link org.fluentlenium.configuration.FluentConfiguration} annotation specified.
+     *
+     * @param controlContainer the control interface container
+     */
     public FluentControlImpl(FluentControlContainer controlContainer) {
         this.controlContainer = controlContainer;
         this.configuration = ConfigurationFactoryProvider.newConfiguration(getClass());
@@ -49,23 +64,25 @@ public abstract class FluentControlImpl implements FluentControl {
      * Creates a new fluent adapter, using given control interface container.
      *
      * @param controlContainer control interface container
-     * @param clazz            class from which annotation configuration will be looked up
+     * @param clazz            class from which {@link org.fluentlenium.configuration.FluentConfiguration}
+     *                         annotation configuration will be looked up
      */
     public FluentControlImpl(FluentControlContainer controlContainer, Class clazz) {
         this.controlContainer = controlContainer;
         configuration = ConfigurationFactoryProvider.newConfiguration(clazz);
     }
 
+    /**
+     * Creates a new fluent adapter using the provided {@code FluentControl} which may be e.g. a {@link FluentDriver}
+     * instance.
+     *
+     * @param fluentControl the fluent control
+     */
     public FluentControlImpl(FluentControl fluentControl) {
         this.controlContainer = new DefaultFluentControlContainer();
         controlContainer.setFluentControl(fluentControl);
     }
 
-    /**
-     * Get the control interface container
-     *
-     * @return control interface container
-     */
     public FluentControlContainer getControlContainer() {
         return controlContainer;
     }
@@ -74,14 +91,11 @@ public abstract class FluentControlImpl implements FluentControl {
         return controlContainer.getFluentControl();
     }
 
-    /**
-     * Get the test adapter configuration.
-     *
-     * @return configuration
-     */
     public Configuration getConfiguration() {
         return configuration;
     }
+
+    //-------- Configuration --------
 
     public Class<? extends ConfigurationProperties> getConfigurationDefaults() {
         return getConfiguration().getConfigurationDefaults();
@@ -187,6 +201,14 @@ public abstract class FluentControlImpl implements FluentControl {
         return getConfiguration().getWebDriver();
     }
 
+    public WebDriver getDriver() {
+        return getFluentControl().getDriver();
+    }
+
+    public AppiumDriver<?> getAppiumDriver() {
+        return getFluentControl().getAppiumDriver();
+    }
+
     public String getCustomProperty(String propertyName) {
         return getConfiguration().getCustomProperty(propertyName);
     }
@@ -247,12 +269,14 @@ public abstract class FluentControlImpl implements FluentControl {
         return getConfiguration().getScreenshotMode();
     }
 
+    //-------- FluentControl --------
+
     public void takeScreenshot(String fileName) {
         getFluentControl().takeScreenshot(fileName);
     }
 
-    public final ChromiumApi getChromiumApi() {
-        return new ChromiumApi((RemoteWebDriver) getFluentControl().getDriver());
+    public ChromiumApi getChromiumApi() {
+        return getFluentControl().getChromiumApi();
     }
 
     public FluentList<FluentWebElement> asFluentList(WebElement... elements) {

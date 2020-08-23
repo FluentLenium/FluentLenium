@@ -23,7 +23,7 @@ public class AndroidSwiftNotesApp extends ExampleFluentTest {
                 .verifyIfIsLoaded()
                 .verifyNoteCount(1)
                 .clickAddNote()
-                .addNote(SAMPLE_TITLE, SAMPLE_BODY)
+                .addNoteUsingAdb(SAMPLE_TITLE, SAMPLE_BODY)
                 .verifyIfIsLoaded()
                 .verifyNoteCount(2);
     }
@@ -31,6 +31,11 @@ public class AndroidSwiftNotesApp extends ExampleFluentTest {
     @Test
     public void searchTest() {
         noteApp.search("FluentLenium");
+    }
+
+    @Test
+    public void screenshotTest() {
+        takeScreenshot();
     }
 
 }

@@ -94,15 +94,13 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      */
     public static void afterClass(Class<?> testClass) {
         List<SharedWebDriver> sharedWebDrivers = SharedWebDriverContainer.INSTANCE.getTestClassDrivers(testClass);
-        for (SharedWebDriver sharedWebDriver : sharedWebDrivers) {
-            SharedWebDriverContainer.INSTANCE.quit(sharedWebDriver);
-        }
+        sharedWebDrivers.forEach(SharedWebDriverContainer.INSTANCE::quit);
     }
 
     /**
      * @return Class of currently running test
      */
-    protected Class<?> getTestClass() {
+    public Class<?> getTestClass() {
         Class<?> currentTestClass = FluentTestRunnerAdapter.TEST_CLASS.get();
         if (currentTestClass == null) {
             LOGGER.warn("Current test class is null. Are you in test context?");
@@ -113,7 +111,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     /**
      * @return method name (as String) of currently running test
      */
-    protected String getTestMethodName() {
+    public String getTestMethodName() {
         String currentTestMethodName = FluentTestRunnerAdapter.TEST_METHOD_NAME.get();
         if (currentTestMethodName == null) {
             LOGGER.warn("Current test method name is null. Are you in text context?");

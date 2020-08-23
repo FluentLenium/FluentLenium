@@ -30,8 +30,7 @@ class HtmlDumpTest extends IntegrationFluentTest {
             takeHtmlDump(file.getAbsolutePath());
             FileInputStream fis = new FileInputStream(file);
             String html = IOUtils.toString(fis, "UTF-8");
-            assertThat(html).isEqualTo(el("html").html());
-            assertThat(html).isNotEmpty();
+            assertThat(html).isEqualTo(el("html").html()).isNotEmpty();
         } finally {
             file.delete();
         }

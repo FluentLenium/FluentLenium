@@ -1,53 +1,57 @@
 package org.fluentlenium.example.appium;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
+import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import org.fluentlenium.adapter.junit.FluentTest;
-import org.fluentlenium.example.appium.config.AppiumConfigProperties;
 import org.fluentlenium.example.appium.config.Config;
-import org.fluentlenium.example.appium.config.ConfigException;
 import org.fluentlenium.example.appium.device.Device;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = Config.class)
 public class ExampleFluentTest extends FluentTest {
 
-    private static final Logger log = LoggerFactory.getLogger(ExampleFluentTest.class);
+    protected AppiumDriver<?> appiumDriver;
+    protected static AppiumDriverLocalService service;
 
     @Autowired
     private Device device;
 
-    @Autowired
-    private AppiumConfigProperties config;
-
     @Override
     public WebDriver newWebDriver() {
-        log.info("Running test on Appium server {} using {}", getAppiumServerUrl(), getDevice());
-        return runTestOnAppiumServer();
+        appiumDriver = new AppiumDriver<>(service, getCapabilities());
+        return appiumDriver;
     }
 
-    private WebDriver runTestOnAppiumServer() {
-        try {
-            return new AppiumDriver(
-                    new URL(getAppiumServerUrl()), getCapabilities());
-        } catch (MalformedURLException e) {
-            throw new ConfigException("Invalid hub location: " + getAppiumServerUrl(), e);
-        }
+    @BeforeClass
+    public static void startServer() {
+        DesiredCapabilities cap = new DesiredCapabilities();
+        cap.setCapability("noReset", "false");
+        AppiumServiceBuilder builder = new AppiumServiceBuilder()
+                .withIPAddress("127.0.0.1")
+                .usingPort(4723)
+                .withCapabilities(cap)
+                .withArgument(GeneralServerFlag.RELAXED_SECURITY)
+                .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
+                .withArgument(GeneralServerFlag.LOG_LEVEL, "error");
+        service = AppiumDriverLocalService.buildService(builder);
+        service.start();
     }
 
-    private String getAppiumServerUrl() {
-        return config.getAppiumServerUrl();
+    @AfterClass
+    public static void stopServer() {
+        service.stop();
     }
 
     @Override

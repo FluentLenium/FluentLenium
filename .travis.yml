@@ -1,11 +1,11 @@
 language: java
 
 jobs:
+  fast_finish: true
   allow_failures:
     - stage: e2e
     - name: "E2E tests"
   include:
-
     - stage: test
       name: "Java 11 - unit & integration tests code coverage + snapshot upload"
       language: java
@@ -35,6 +35,17 @@ jobs:
       jdk: openjdk11
       script:
         - mvn -Pexamples,java11 clean compile
+
+    - stage: test
+      name: "Java 11 - compile Kotlin example"
+      language: java
+      jdk: openjdk11
+      before_install:
+        - chmod +x examples/quickstart-firefox/gradlew
+        - chmod +x examples/quickstart-firefox/gradle/wrapper/gradle-wrapper.jar
+      script:
+        - cd examples/quickstart-firefox
+        - ./gradlew test build -x test
 
     - stage: test
       name: "Java 11 - javadoc"
@@ -113,9 +124,6 @@ jobs:
       script:
         - cd examples/spring && mvn clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
       if: type = pull_request
-
-matrix:
-  fast_finish: true
 
 env:
   global:

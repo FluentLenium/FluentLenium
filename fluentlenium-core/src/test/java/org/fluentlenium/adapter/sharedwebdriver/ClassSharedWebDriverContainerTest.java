@@ -57,10 +57,10 @@ public class ClassSharedWebDriverContainerTest implements Supplier<WebDriver> {
         assertThat(container.getAllDrivers()).containsOnly(driver, driver2);
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
         assertThat(container.getTestClassDrivers(String.class)).containsOnly(driver2);
-        assertThat(container.getAllDrivers().size()).isEqualTo(2);
+        assertThat(container.getAllDrivers()).hasSize(2);
 
         container.quit(driver2);
-        assertThat(container.getAllDrivers().size()).isEqualTo(1);
+        assertThat(container.getAllDrivers()).hasSize(1);
         assertThat(container.getAllDrivers().get(0)).isEqualTo(driver);
 
         container.quit(driver);

@@ -20,6 +20,8 @@ hs_err_pid*
 *.pydevproject
 .metadata
 .gradle
+build
+out
 bin/
 tmp/
 *.tmp

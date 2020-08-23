@@ -5,21 +5,24 @@ import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
  * Default form filling features.
+ * <p>
+ * Documentation can also be found at the FluentLenium website at
+ * <a href="https://fluentlenium.com/docs/locators/#filling-forms">Locators / Filling Forms</a>.
  *
  * @param <E> type of elements to fill
  */
 public class Fill<E extends FluentWebElement> extends BaseFill<E> {
     /**
-     * Creates a new fill, from a list of element.
+     * Creates a new fill from a list of elements.
      *
-     * @param list list of element to fill
+     * @param list list of elements to fill
      */
     public Fill(FluentList<E> list) {
         super(list);
     }
 
     /**
-     * Creates a new fill, from a single element.
+     * Creates a new fill from a single element.
      *
      * @param element element to fill
      */
@@ -28,11 +31,12 @@ public class Fill<E extends FluentWebElement> extends BaseFill<E> {
     }
 
     /**
-     * Set the values params as text for the fluentList or search a new list with the css selector and filters and add the
-     * values param on it
+     * Fills the underlying elements with the provided texts.
      *
      * @param textValues value to search
-     * @return fill constructor
+     * @return this Fill instance
+     * @see FluentList#write(String...)
+     * @see FluentWebElement#write(String...)
      */
     public Fill with(String... textValues) {
         getElements().write(textValues);
@@ -40,11 +44,12 @@ public class Fill<E extends FluentWebElement> extends BaseFill<E> {
     }
 
     /**
-     * Set the values params as text for the fluentList or search a new list with the css selector and filters and add the
-     * values param on it
+     * Fills the underlying elements with the provided texts.
+     * <p>
+     * Synonym for {@link #with(String...)}.
      *
      * @param textValues value to search
-     * @return fill constructor
+     * @return this Fill instance
      */
     public Fill withText(String... textValues) {
         return with(textValues);

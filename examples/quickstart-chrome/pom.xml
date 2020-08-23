@@ -5,7 +5,7 @@
 
     <artifactId>fluentlenium-examples-quickstart-chrome</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.3.2-SNAPSHOT</version>
+    <version>4.4.2-SNAPSHOT</version>
 
     <properties>
         <!-- Configure this property to latest available version -->
@@ -50,12 +50,6 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13</version>
             <scope>test</scope>
         </dependency>
         <dependency>

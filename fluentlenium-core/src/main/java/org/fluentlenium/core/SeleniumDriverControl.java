@@ -1,5 +1,6 @@
 package org.fluentlenium.core;
 
+import io.appium.java_client.AppiumDriver;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.openqa.selenium.WebDriver;
 
@@ -13,9 +14,21 @@ public interface SeleniumDriverControl {
      * To customize the WebDriver, you should configure {@link org.fluentlenium.adapter.FluentAdapter#getWebDriver()}
      * or override {@link FluentAdapter#newWebDriver()}.
      * <p>
-     * This method can't be override to customize the WebDriver.
+     * This method can't be overridden to customize the WebDriver.
      *
      * @return The actual underlying Selenium WebDriver
      */
     WebDriver getDriver();
+
+    /**
+     * Get the actual underlying AppiumDriver.
+     * <p>
+     * To customize the WebDriver, you should configure {@link org.fluentlenium.adapter.FluentAdapter#getWebDriver()}
+     * or override {@link FluentAdapter#newWebDriver()}.
+     * <p>
+     * This method can't be overridden to customize the AppiumDriver.
+     *
+     * @return The actual underlying AppiumDriver
+     */
+    AppiumDriver<?> getAppiumDriver();
 }

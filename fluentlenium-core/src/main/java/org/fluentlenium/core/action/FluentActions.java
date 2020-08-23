@@ -1,6 +1,7 @@
 package org.fluentlenium.core.action;
 
 import java.time.Duration;
+
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.WebElement;
 
@@ -84,6 +85,15 @@ public interface FluentActions<T, E extends FluentWebElement> extends FluentJava
      * @return Fill select builder
      */
     FillSelect<E> fillSelect();
+
+    /**
+     * Hovers the mouse over the current element.
+     * <p>
+     * By default, this is a convenience method for calling {@code element.mouse().moveToElement()}.
+     *
+     * @return the current element
+     */
+    T hoverOver();
 
     /**
      * Select a frame using this element.

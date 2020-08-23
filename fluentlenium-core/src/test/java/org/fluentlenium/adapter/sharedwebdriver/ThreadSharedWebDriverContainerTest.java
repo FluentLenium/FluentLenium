@@ -49,10 +49,10 @@ public class ThreadSharedWebDriverContainerTest implements Supplier<WebDriver> {
         assertThat(driver).isNotEqualTo(driver2);
         assertThat(container.getAllDrivers()).containsOnly(driver, driver2);
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver, driver2);
-        assertThat(container.getAllDrivers().size()).isEqualTo(2);
+        assertThat(container.getAllDrivers()).hasSize(2);
 
         container.quit(driver);
-        assertThat(container.getAllDrivers().size()).isEqualTo(1);
+        assertThat(container.getAllDrivers()).hasSize(1);
         assertThat(container.getAllDrivers().get(0)).isEqualTo(driver2);
 
         container.quit(driver2);
@@ -72,7 +72,7 @@ public class ThreadSharedWebDriverContainerTest implements Supplier<WebDriver> {
         SharedWebDriver driver = futureDriver.get();
         assertThat(container.getAllDrivers()).containsOnly(driver);
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
-        assertThat(container.getAllDrivers().size()).isEqualTo(1);
+        assertThat(container.getAllDrivers()).hasSize(1);
 
         CompletableFuture<SharedWebDriver> futureDriver2 = CompletableFuture.supplyAsync(
                 () -> container.getOrCreateDriver(this, parameters), threadPoolExecutor);
@@ -82,7 +82,7 @@ public class ThreadSharedWebDriverContainerTest implements Supplier<WebDriver> {
         assertThat(driver).isEqualTo(driver2);
         assertThat(container.getAllDrivers()).containsOnly(driver);
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
-        assertThat(container.getAllDrivers().size()).isEqualTo(1);
+        assertThat(container.getAllDrivers()).hasSize(1);
 
         container.quit(driver);
         assertThat(container.getAllDrivers()).isEmpty();
@@ -110,10 +110,10 @@ public class ThreadSharedWebDriverContainerTest implements Supplier<WebDriver> {
         assertThat(container.getAllDrivers()).containsOnly(driver, driver2);
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver);
         assertThat(container.getTestClassDrivers(String.class)).containsOnly(driver2);
-        assertThat(container.getAllDrivers().size()).isEqualTo(2);
+        assertThat(container.getAllDrivers()).hasSize(2);
 
         container.quit(driver);
-        assertThat(container.getAllDrivers().size()).isEqualTo(1);
+        assertThat(container.getAllDrivers()).hasSize(1);
         assertThat(container.getAllDrivers().get(0)).isEqualTo(driver2);
 
         container.quit(driver2);
@@ -141,10 +141,10 @@ public class ThreadSharedWebDriverContainerTest implements Supplier<WebDriver> {
         assertThat(driver).isNotEqualTo(driver2);
         assertThat(container.getAllDrivers()).containsOnly(driver, driver2);
         assertThat(container.getTestClassDrivers(Object.class)).containsOnly(driver, driver2);
-        assertThat(container.getAllDrivers().size()).isEqualTo(2);
+        assertThat(container.getAllDrivers()).hasSize(2);
 
         container.quit(driver);
-        assertThat(container.getAllDrivers().size()).isEqualTo(1);
+        assertThat(container.getAllDrivers()).hasSize(1);
         assertThat(container.getAllDrivers().get(0)).isEqualTo(driver2);
 
         container.quit(driver2);

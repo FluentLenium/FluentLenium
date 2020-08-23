@@ -1,7 +1,8 @@
 package org.fluentlenium.core;
 
 import java.util.Map;
-import java.util.Objects;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Stores a URL and URL parameters parsed from that URL for caching purposes in {@link FluentPage}.
@@ -36,7 +37,7 @@ public final class PageUrlCache {
      * @param parameters the url parameters
      */
     public void cache(String url, Map<String, String> parameters) {
-        this.url = Objects.requireNonNull(url);
-        this.parameters = Objects.requireNonNull(parameters);
+        this.url = requireNonNull(url);
+        this.parameters = requireNonNull(parameters);
     }
 }
