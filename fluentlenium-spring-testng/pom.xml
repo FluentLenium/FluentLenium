@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>fluentlenium-spring-testng</artifactId>
-    <name>FluentLenium TestNG</name>
+    <name>FluentLenium Spring TestNG</name>
     <description>TestNG Adapter for FluentLenium</description>
 
     <dependencies>
@@ -29,17 +29,14 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>5.1.8.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>5.1.8.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
@@ -57,13 +54,13 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
