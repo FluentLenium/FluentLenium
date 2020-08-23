@@ -1,6 +1,7 @@
 package org.fluentlenium.adapter.spock
 
 import io.appium.java_client.AppiumDriver
+import org.fluentlenium.adapter.exception.AnnotationNotFoundException
 import org.fluentlenium.configuration.Configuration
 import org.fluentlenium.configuration.ConfigurationFactory
 import org.fluentlenium.configuration.ConfigurationProperties
@@ -29,6 +30,8 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 import spock.lang.Specification
 
+import java.lang.annotation.Annotation
+
 class SpockControl extends Specification implements FluentControl {
 
     public SpockAdapter adapter = new SpockAdapter()
@@ -47,6 +50,26 @@ class SpockControl extends Specification implements FluentControl {
 
     def getTestMethodName() {
         return adapter.getTestMethodName()
+    }
+
+    protected <T extends Annotation> T getClassAnnotation(Class<T> annotation) {
+        def anno = specificationContext.currentSpec.getAnnotation(annotation)
+
+        if (anno == null) {
+            throw new AnnotationNotFoundException();
+        }
+
+        return anno
+    }
+
+    protected <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
+        def anno = specificationContext.currentFeature.featureMethod.getAnnotation(annotation)
+
+        if (anno == null) {
+            throw new AnnotationNotFoundException();
+        }
+
+        return anno
     }
 
     @Override
