@@ -1,8 +1,10 @@
 package org.fluentlenium.adapter.testng;
 
-import io.appium.java_client.AppiumDriver;
+import org.fluentlenium.adapter.DefaultFluentControlContainer;
+import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.configuration.ConfigurationFactory;
+import org.fluentlenium.configuration.ConfigurationFactoryProvider;
 import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
@@ -22,48 +24,63 @@ import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.utils.chromium.ChromiumApi;
 import org.openqa.selenium.*;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
-import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Set;
 
-public class TestNGSpringControl extends AbstractTestNGSpringContextTests implements FluentControl {
+public abstract class TestNGSpringFluentControlImpl extends AbstractTestNGSpringContextTests implements FluentControl {
 
-    public TestNGSpringAdapter adapter = new TestNGSpringAdapter();
+    private final FluentControlContainer controlContainer;
+
+    private Configuration configuration;
+
+    public TestNGSpringFluentControlImpl() {
+        this(new DefaultFluentControlContainer());
+    }
+
+    public TestNGSpringFluentControlImpl(FluentControlContainer controlContainer) {
+        this.controlContainer = controlContainer;
+        this.configuration = ConfigurationFactoryProvider.newConfiguration(getClass());
+    }
+
+    /**
+     * Creates a new fluent adapter, using given control interface container.
+     *
+     * @param controlContainer control interface container
+     * @param clazz            class from which annotation configuration will be looked up
+     */
+    public TestNGSpringFluentControlImpl(FluentControlContainer controlContainer, Class clazz) {
+        this.controlContainer = controlContainer;
+        configuration = ConfigurationFactoryProvider.newConfiguration(clazz);
+    }
+
+    public TestNGSpringFluentControlImpl(FluentControl fluentControl) {
+        this.controlContainer = new DefaultFluentControlContainer();
+        controlContainer.setFluentControl(fluentControl);
+    }
+
+    /**
+     * Get the control interface container
+     *
+     * @return control interface container
+     */
+    public FluentControlContainer getControlContainer() {
+        return controlContainer;
+    }
 
     public FluentControl getFluentControl() {
-        return adapter.getFluentControl();
+        return controlContainer.getFluentControl();
     }
 
+    /**
+     * Get the test adapter configuration.
+     *
+     * @return configuration
+     */
     public Configuration getConfiguration() {
-        return adapter.getConfiguration();
-    }
-
-    public Class<?> getTestClass() {
-        return adapter.getTestClass();
-    }
-
-    public String getTestMethodName() {
-        return adapter.getTestMethodName();
-    }
-
-    public <T extends Annotation> T getClassAnnotation(Class<T> annotation) {
-        return adapter.getClassAnnotation(annotation);
-    }
-
-    public <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
-        return adapter.getMethodAnnotation(annotation);
-    }
-
-    @Override
-    public WebDriver getDriver() {
-        return getFluentControl().getDriver();
-    }
-
-    @Override
-    public AppiumDriver<?> getAppiumDriver() {
-        return getFluentControl().getAppiumDriver();
+        return configuration;
     }
 
     public Class<? extends ConfigurationProperties> getConfigurationDefaults() {
@@ -235,7 +252,7 @@ public class TestNGSpringControl extends AbstractTestNGSpringContextTests implem
     }
 
     public final ChromiumApi getChromiumApi() {
-        return getFluentControl().getChromiumApi();
+        return new ChromiumApi((RemoteWebDriver) getFluentControl().getDriver());
     }
 
     public FluentList<FluentWebElement> asFluentList(WebElement... elements) {
@@ -485,5 +502,4 @@ public class TestNGSpringControl extends AbstractTestNGSpringContextTests implem
     public PerformanceTiming performanceTiming() {
         return getFluentControl().performanceTiming();
     }
-
 }

@@ -1,25 +1,32 @@
-package org.fluentlenium.adapter;
-
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-
-import java.lang.annotation.Annotation;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
+package org.fluentlenium.adapter.testng;
 
 import org.apache.commons.lang3.StringUtils;
+import org.fluentlenium.adapter.*;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.fluentlenium.adapter.exception.AnnotationNotFoundException;
 import org.fluentlenium.adapter.exception.MethodNotFoundException;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
+import org.fluentlenium.configuration.ConfigurationProperties;
+import org.fluentlenium.configuration.WebDrivers;
+import org.fluentlenium.core.FluentDriver;
+import org.fluentlenium.core.inject.ContainerContext;
+import org.fluentlenium.core.inject.ContainerFluentControl;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.lang.annotation.Annotation;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * FluentLenium Test Runner Adapter.
@@ -27,9 +34,9 @@ import org.slf4j.LoggerFactory;
  * Extends this class to provide FluentLenium support to your Test class.
  */
 @SuppressWarnings("PMD.GodClass")
-public class FluentTestRunnerAdapter extends FluentAdapter {
+public class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentControlImpl {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FluentTestRunnerAdapter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestNGSpringFluentTestRunnerAdapter.class);
 
     private final SharedMutator sharedMutator;
 
@@ -40,7 +47,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     /**
      * Creates a new test runner adapter.
      */
-    public FluentTestRunnerAdapter() {
+    public TestNGSpringFluentTestRunnerAdapter() {
         this(new DefaultFluentControlContainer());
     }
 
@@ -49,7 +56,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      *
      * @param driverContainer driver container
      */
-    public FluentTestRunnerAdapter(FluentControlContainer driverContainer) {
+    public TestNGSpringFluentTestRunnerAdapter(FluentControlContainer driverContainer) {
         this(driverContainer, new DefaultSharedMutator());
     }
 
@@ -58,7 +65,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      *
      * @param sharedMutator shared mutator.
      */
-    public FluentTestRunnerAdapter(SharedMutator sharedMutator) {
+    public TestNGSpringFluentTestRunnerAdapter(SharedMutator sharedMutator) {
         this(new DefaultFluentControlContainer(), sharedMutator);
     }
 
@@ -68,7 +75,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param driverContainer driver container
      * @param sharedMutator   shared mutator
      */
-    public FluentTestRunnerAdapter(FluentControlContainer driverContainer, SharedMutator sharedMutator) {
+    public TestNGSpringFluentTestRunnerAdapter(FluentControlContainer driverContainer, SharedMutator sharedMutator) {
         super(driverContainer);
         this.sharedMutator = sharedMutator;
     }
@@ -81,7 +88,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param clazz           class from which FluentConfiguration annotation will be loaded
      * @param sharedMutator   shared mutator
      */
-    public FluentTestRunnerAdapter(FluentControlContainer driverContainer, Class clazz, SharedMutator sharedMutator) {
+    public TestNGSpringFluentTestRunnerAdapter(FluentControlContainer driverContainer, Class clazz, SharedMutator sharedMutator) {
         super(driverContainer, clazz);
         this.sharedMutator = sharedMutator;
     }
@@ -94,14 +101,16 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      */
     public static void afterClass(Class<?> testClass) {
         List<SharedWebDriver> sharedWebDrivers = SharedWebDriverContainer.INSTANCE.getTestClassDrivers(testClass);
-        sharedWebDrivers.forEach(SharedWebDriverContainer.INSTANCE::quit);
+        for (SharedWebDriver sharedWebDriver : sharedWebDrivers) {
+            SharedWebDriverContainer.INSTANCE.quit(sharedWebDriver);
+        }
     }
 
     /**
      * @return Class of currently running test
      */
-    public Class<?> getTestClass() {
-        Class<?> currentTestClass = FluentTestRunnerAdapter.TEST_CLASS.get();
+    protected Class<?> getTestClass() {
+        Class<?> currentTestClass = TestNGSpringFluentTestRunnerAdapter.TEST_CLASS.get();
         if (currentTestClass == null) {
             LOGGER.warn("Current test class is null. Are you in test context?");
         }
@@ -111,8 +120,8 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     /**
      * @return method name (as String) of currently running test
      */
-    public String getTestMethodName() {
-        String currentTestMethodName = FluentTestRunnerAdapter.TEST_METHOD_NAME.get();
+    protected String getTestMethodName() {
+        String currentTestMethodName = TestNGSpringFluentTestRunnerAdapter.TEST_METHOD_NAME.get();
         if (currentTestMethodName == null) {
             LOGGER.warn("Current test method name is null. Are you in text context?");
         }
@@ -420,5 +429,126 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
             }
 
         }
+    }
+
+
+    @Override
+    public final WebDriver getDriver() {
+        return getFluentControl() == null ? null : getFluentControl().getDriver();
+    }
+
+    /**
+     * Load a {@link WebDriver} into this adapter.
+     * <p>
+     * This method should not be called by end user.
+     *
+     * @param webDriver webDriver to use.
+     * @throws IllegalStateException when trying to register a different webDriver that the current one.
+     */
+    public void initFluent(WebDriver webDriver) {
+        if (webDriver == null) {
+            releaseFluent();
+            return;
+        }
+
+        if (getFluentControl() != null) {
+            if (getFluentControl().getDriver() == webDriver) {
+                return;
+            }
+            if (getFluentControl().getDriver() != null) {
+                throw new IllegalStateException("Trying to init a WebDriver, but another one is still running");
+            }
+        }
+
+        ContainerFluentControl adapterFluentControl = new ContainerFluentControl(new FluentDriver(webDriver, this, this));
+        setFluentControl(adapterFluentControl);
+        ContainerContext context = adapterFluentControl.inject(this);
+        adapterFluentControl.setContext(context);
+    }
+
+    /**
+     * Release the current {@link WebDriver} from this adapter.
+     * <p>
+     * This method should not be called by end user.
+     */
+    public void releaseFluent() {
+        if (getFluentControl() != null) {
+            ((FluentDriver) getFluentControl().getAdapterControl()).releaseFluent();
+            setFluentControl(null);
+        }
+    }
+
+    /**
+     * Creates a new {@link WebDriver} instance.
+     * <p>
+     * This method should not be called by end user, but may be overriden if required.
+     * <p>
+     * Before overriding this method, you should consider using {@link WebDrivers} registry and configuration
+     * {@link ConfigurationProperties#getWebDriver()}.
+     * <p>
+     * To retrieve the current managed {@link WebDriver}, call {@link #getDriver()} instead.
+     *
+     * @return A new WebDriver instance.
+     * @see #getDriver()
+     */
+    public WebDriver newWebDriver() {
+        WebDriver webDriver = WebDrivers.INSTANCE.newWebDriver(getWebDriver(), getCapabilities(), this);
+        if (Boolean.TRUE.equals(getEventsEnabled())) {
+            webDriver = new EventFiringWebDriver(webDriver);
+        }
+        return webDriver;
+    }
+
+    /**
+     * Checks if the exception should be ignored and not reported as a test case fail
+     *
+     * @param e - the exception to check is it defined in ignored exceptions set
+     * @return boolean
+     */
+    boolean isIgnoredException(Throwable e) {
+        boolean isIgnored = false;
+        if (e != null) {
+            Class clazz = e.getClass();
+            do {
+                if (IGNORED_EXCEPTIONS.contains(clazz.getName())) {
+                    isIgnored = true;
+                    break;
+                }
+                clazz = clazz.getSuperclass();
+            } while (clazz != Object.class);
+        }
+
+        return isIgnored;
+    }
+
+    private static final Set<String> IGNORED_EXCEPTIONS = Stream.of(
+            "org.junit.AssumptionViolatedException",
+            "org.junit.internal.AssumptionViolatedException",
+            "org.testng.SkipException")
+            .collect(Collectors.toSet());
+
+
+    // We want getDriver to be final.
+    public ContainerFluentControl getFluentControl() {
+        FluentControlContainer fluentControlContainer = getControlContainer();
+
+        if (fluentControlContainer == null) {
+            throw new IllegalStateException("FluentControl is not initialized, WebDriver or Configuration issue");
+        } else {
+            return (ContainerFluentControl) fluentControlContainer.getFluentControl();
+        }
+    }
+
+    /**
+     * Check if fluent control interface is available from the control interface container.
+     *
+     * @return true if the fluent control interface is available, false otherwise
+     */
+    /* default */ boolean isFluentControlAvailable() {
+        return getControlContainer().getFluentControl() != null;
+    }
+
+    private void setFluentControl(ContainerFluentControl fluentControl) {
+        getControlContainer().setFluentControl(fluentControl);
     }
 }
