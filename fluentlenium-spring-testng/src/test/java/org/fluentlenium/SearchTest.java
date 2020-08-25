@@ -1,6 +1,5 @@
-package org.fluentlenium.adapter.testng.integration;
+package org.fluentlenium;
 
-import org.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;
