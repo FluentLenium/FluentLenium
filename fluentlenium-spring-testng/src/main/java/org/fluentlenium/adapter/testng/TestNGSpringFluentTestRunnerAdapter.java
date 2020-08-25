@@ -1,8 +1,12 @@
 package org.fluentlenium.adapter.testng;
 
+import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.StringUtils;
-import org.fluentlenium.adapter.*;
+import org.fluentlenium.adapter.DefaultSharedMutator;
+import org.fluentlenium.adapter.FluentControlContainer;
+import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
+import org.fluentlenium.adapter.ThreadLocalFluentControlContainer;
 import org.fluentlenium.adapter.exception.AnnotationNotFoundException;
 import org.fluentlenium.adapter.exception.MethodNotFoundException;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
@@ -22,9 +26,11 @@ import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.concurrent.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
@@ -391,14 +397,11 @@ class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentControlImpl 
         return isIgnored;
     }
 
-    private static final Set<String> IGNORED_EXCEPTIONS = Stream.of(
+    private static final Set<String> IGNORED_EXCEPTIONS = ImmutableSet.of(
             "org.junit.AssumptionViolatedException",
             "org.junit.internal.AssumptionViolatedException",
-            "org.testng.SkipException")
-            .collect(Collectors.toSet());
+            "org.testng.SkipException");
 
-
-    // We want getDriver to be final.
     public ContainerFluentControl getFluentControl() {
         FluentControlContainer fluentControlContainer = getControlContainer();
 
@@ -409,12 +412,7 @@ class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentControlImpl 
         }
     }
 
-    /**
-     * Check if fluent control interface is available from the control interface container.
-     *
-     * @return true if the fluent control interface is available, false otherwise
-     */
-    /* default */ boolean isFluentControlAvailable() {
+    private boolean isFluentControlAvailable() {
         return getControlContainer().getFluentControl() != null;
     }
 

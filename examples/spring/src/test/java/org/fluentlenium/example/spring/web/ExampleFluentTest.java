@@ -1,7 +1,7 @@
 package org.fluentlenium.example.spring.web;
 
 import io.appium.java_client.AppiumDriver;
-import org.fluentlenium.adapter.testng.FluentTestNgSpringContextTests;
+import org.fluentlenium.adapter.testng.FluentTestNgSpringTest;
 import org.fluentlenium.example.spring.config.Config;
 import org.fluentlenium.example.spring.config.ConfigException;
 import org.fluentlenium.example.spring.config.SeleniumBrowserConfigProperties;
@@ -20,7 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = Config.class)
-public class ExampleFluentTest extends FluentTestNgSpringContextTests {
+public class ExampleFluentTest extends FluentTestNgSpringTest {
 
     private static final Logger log = LoggerFactory.getLogger(ExampleFluentTest.class);
 
