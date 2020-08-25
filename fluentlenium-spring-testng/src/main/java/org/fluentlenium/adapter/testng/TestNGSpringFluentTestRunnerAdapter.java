@@ -48,7 +48,7 @@ class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentControlImpl 
      * Creates a new test runner adapter.
      */
     public TestNGSpringFluentTestRunnerAdapter() {
-        super(new DefaultFluentControlContainer());
+        super(new ThreadLocalFluentControlContainer());
         this.sharedMutator = new DefaultSharedMutator();
     }
 
