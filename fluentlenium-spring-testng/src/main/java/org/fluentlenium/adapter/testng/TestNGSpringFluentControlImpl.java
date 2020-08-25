@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.testng;
 
-import org.fluentlenium.adapter.DefaultFluentControlContainer;
+import io.appium.java_client.AppiumDriver;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.configuration.ConfigurationFactory;
@@ -30,35 +30,14 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import java.util.List;
 import java.util.Set;
 
-public abstract class TestNGSpringFluentControlImpl extends AbstractTestNGSpringContextTests implements FluentControl {
+class TestNGSpringFluentControlImpl extends AbstractTestNGSpringContextTests implements FluentControl {
 
     private final FluentControlContainer controlContainer;
-
-    private Configuration configuration;
-
-    public TestNGSpringFluentControlImpl() {
-        this(new DefaultFluentControlContainer());
-    }
+    private final Configuration configuration;
 
     public TestNGSpringFluentControlImpl(FluentControlContainer controlContainer) {
         this.controlContainer = controlContainer;
         this.configuration = ConfigurationFactoryProvider.newConfiguration(getClass());
-    }
-
-    /**
-     * Creates a new fluent adapter, using given control interface container.
-     *
-     * @param controlContainer control interface container
-     * @param clazz            class from which annotation configuration will be looked up
-     */
-    public TestNGSpringFluentControlImpl(FluentControlContainer controlContainer, Class clazz) {
-        this.controlContainer = controlContainer;
-        configuration = ConfigurationFactoryProvider.newConfiguration(clazz);
-    }
-
-    public TestNGSpringFluentControlImpl(FluentControl fluentControl) {
-        this.controlContainer = new DefaultFluentControlContainer();
-        controlContainer.setFluentControl(fluentControl);
     }
 
     /**
@@ -501,5 +480,15 @@ public abstract class TestNGSpringFluentControlImpl extends AbstractTestNGSpring
 
     public PerformanceTiming performanceTiming() {
         return getFluentControl().performanceTiming();
+    }
+
+    @Override
+    public WebDriver getDriver() {
+        return getFluentControl().getDriver();
+    }
+
+    @Override
+    public AppiumDriver<?> getAppiumDriver() {
+        return getFluentControl().getAppiumDriver();
     }
 }

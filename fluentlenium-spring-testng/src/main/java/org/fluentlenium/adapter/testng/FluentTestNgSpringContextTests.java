@@ -1,7 +1,5 @@
 package org.fluentlenium.adapter.testng;
 
-import org.fluentlenium.adapter.FluentTestRunnerAdapter;
-import org.fluentlenium.adapter.ThreadLocalFluentControlContainer;
 import org.fluentlenium.utils.SeleniumVersionChecker;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
@@ -21,14 +19,8 @@ import java.util.Map;
  * Extends this class to provide FluentLenium support to your TestNG Test class.
  */
 public class FluentTestNgSpringContextTests extends TestNGSpringFluentTestRunnerAdapter {
-    private final Map<ITestContext, Map<Method, ITestNGMethod>> methods = new HashMap<>();
 
-    /**
-     * Creates a new test runner adapter.
-     */
-    public FluentTestNgSpringContextTests() {
-        super(new ThreadLocalFluentControlContainer());
-    }
+    private final Map<ITestContext, Map<Method, ITestNGMethod>> methods = new HashMap<>();
 
     private Map<Method, ITestNGMethod> getMethods(ITestContext context) {
         synchronized (this) {
@@ -90,6 +82,6 @@ public class FluentTestNgSpringContextTests extends TestNGSpringFluentTestRunner
      */
     @AfterClass(alwaysRun = true)
     public void afterClass() {
-        FluentTestRunnerAdapter.afterClass(getClass());
+        TestNGSpringFluentTestRunnerAdapter.afterClass(getClass());
     }
 }

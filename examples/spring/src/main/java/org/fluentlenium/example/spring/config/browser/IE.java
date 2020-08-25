@@ -15,16 +15,6 @@ class IE implements IBrowser {
     }
 
     @Override
-    public String getDriverExecutableName() {
-        return "IEDriverServer";
-    }
-
-    @Override
-    public String getDriverSystemPropertyName() {
-        return "webdriver.ie.driver";
-    }
-
-    @Override
     public String toString() {
         return "IE11";
     }

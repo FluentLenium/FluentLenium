@@ -34,7 +34,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  * Extends this class to provide FluentLenium support to your Test class.
  */
 @SuppressWarnings("PMD.GodClass")
-public class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentControlImpl {
+class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentControlImpl {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TestNGSpringFluentTestRunnerAdapter.class);
 
@@ -48,51 +48,9 @@ public class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentContr
      * Creates a new test runner adapter.
      */
     public TestNGSpringFluentTestRunnerAdapter() {
-        this(new DefaultFluentControlContainer());
+        super(new DefaultFluentControlContainer());
+        this.sharedMutator = new DefaultSharedMutator();
     }
-
-    /**
-     * Creates a test runner adapter, with a custom driver container.
-     *
-     * @param driverContainer driver container
-     */
-    public TestNGSpringFluentTestRunnerAdapter(FluentControlContainer driverContainer) {
-        this(driverContainer, new DefaultSharedMutator());
-    }
-
-    /**
-     * Creates a test runner adapter, with a custom shared mutator.
-     *
-     * @param sharedMutator shared mutator.
-     */
-    public TestNGSpringFluentTestRunnerAdapter(SharedMutator sharedMutator) {
-        this(new DefaultFluentControlContainer(), sharedMutator);
-    }
-
-    /**
-     * Creates a test runner adapter, with a customer driver container and a customer shared mutator.
-     *
-     * @param driverContainer driver container
-     * @param sharedMutator   shared mutator
-     */
-    public TestNGSpringFluentTestRunnerAdapter(FluentControlContainer driverContainer, SharedMutator sharedMutator) {
-        super(driverContainer);
-        this.sharedMutator = sharedMutator;
-    }
-
-    /**
-     * Creates a test runner adapter, with a customer driver container and a customer shared mutator.
-     * It is possible to pass class from which the FluentConfiguration annotation will be loaded.
-     *
-     * @param driverContainer driver container
-     * @param clazz           class from which FluentConfiguration annotation will be loaded
-     * @param sharedMutator   shared mutator
-     */
-    public TestNGSpringFluentTestRunnerAdapter(FluentControlContainer driverContainer, Class clazz, SharedMutator sharedMutator) {
-        super(driverContainer, clazz);
-        this.sharedMutator = sharedMutator;
-    }
-
 
     /**
      * Invoked when a test class has finished (whatever the success of failing status)
@@ -101,9 +59,7 @@ public class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentContr
      */
     public static void afterClass(Class<?> testClass) {
         List<SharedWebDriver> sharedWebDrivers = SharedWebDriverContainer.INSTANCE.getTestClassDrivers(testClass);
-        for (SharedWebDriver sharedWebDriver : sharedWebDrivers) {
-            SharedWebDriverContainer.INSTANCE.quit(sharedWebDriver);
-        }
+        sharedWebDrivers.forEach(SharedWebDriverContainer.INSTANCE::quit);
     }
 
     /**
@@ -172,31 +128,6 @@ public class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentContr
 
     /**
      * Invoked when a test method is starting.
-     */
-    protected void starting() {
-        starting(getClass());
-    }
-
-    /**
-     * Invoked when a test method is starting.
-     *
-     * @param testName Test name
-     */
-    protected void starting(String testName) {
-        starting(getClass(), testName);
-    }
-
-    /**
-     * Invoked when a test method is starting.
-     *
-     * @param testClass Test class
-     */
-    protected void starting(Class<?> testClass) {
-        starting(testClass, testClass.getName());
-    }
-
-    /**
-     * Invoked when a test method is starting.
      *
      * @param testClass Test class
      * @param testName  Test name
@@ -210,7 +141,7 @@ public class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentContr
         try {
             sharedWebDriver = getSharedWebDriver(PARAMETERS_THREAD_LOCAL.get());
         } catch (ExecutionException | InterruptedException e) {
-            this.failed(testClass, testName);
+            this.failed(null, testClass, testName);
 
             String causeMessage = this.getCauseMessage(e);
 
@@ -321,31 +252,6 @@ public class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentContr
 
     /**
      * Invoked when a test method has finished (whatever the success of failing status)
-     */
-    protected void finished() {
-        finished(getClass());
-    }
-
-    /**
-     * Invoked when a test method has finished (whatever the success of failing status)
-     *
-     * @param testName Test name
-     */
-    protected void finished(String testName) {
-        finished(getClass(), testName);
-    }
-
-    /**
-     * Invoked when a test method has finished (whatever the success of failing status)
-     *
-     * @param testClass Test class
-     */
-    protected void finished(Class<?> testClass) {
-        finished(testClass, testClass.getName());
-    }
-
-    /**
-     * Invoked when a test method has finished (whatever the success of failing status)
      *
      * @param testClass Test class
      * @param testName  Test name
@@ -366,41 +272,6 @@ public class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentContr
 
         clearThreadLocals();
         releaseFluent();
-    }
-
-    /**
-     * Invoked when a test method has failed (before finished)
-     */
-    protected void failed() {
-        failed(getClass());
-    }
-
-    /**
-     * Invoked when a test method has failed (before finished)
-     *
-     * @param testName Test name
-     */
-    protected void failed(String testName) {
-        failed(getClass(), testName);
-    }
-
-    /**
-     * Invoked when a test method has failed (before finished)
-     *
-     * @param testClass Test class
-     */
-    protected void failed(Class<?> testClass) {
-        failed(testClass, testClass.getName());
-    }
-
-    /**
-     * Invoked when a test method has failed (before finished)
-     *
-     * @param testClass Test class
-     * @param testName  Test name
-     */
-    protected void failed(Class<?> testClass, String testName) {
-        failed(null, testClass, testName);
     }
 
     /**
@@ -430,7 +301,6 @@ public class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentContr
 
         }
     }
-
 
     @Override
     public final WebDriver getDriver() {
@@ -508,7 +378,7 @@ public class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentContr
     boolean isIgnoredException(Throwable e) {
         boolean isIgnored = false;
         if (e != null) {
-            Class clazz = e.getClass();
+            Class<?> clazz = e.getClass();
             do {
                 if (IGNORED_EXCEPTIONS.contains(clazz.getName())) {
                     isIgnored = true;

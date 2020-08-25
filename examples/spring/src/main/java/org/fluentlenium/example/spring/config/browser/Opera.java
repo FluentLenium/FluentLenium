@@ -17,16 +17,6 @@ class Opera implements IBrowser {
     }
 
     @Override
-    public String getDriverExecutableName() {
-        return "operadriver";
-    }
-
-    @Override
-    public String getDriverSystemPropertyName() {
-        return "webdriver.opera.driver";
-    }
-
-    @Override
     public String toString() {
         return "Opera";
     }
