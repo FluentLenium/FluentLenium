@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.testng;
 
+import org.fluentlenium.adapter.FluentTestRunnerAdapter;
 import org.fluentlenium.utils.SeleniumVersionChecker;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
@@ -82,6 +83,6 @@ public class FluentTestNgSpringTest extends TestNGSpringFluentTestRunnerAdapter 
      */
     @AfterClass(alwaysRun = true)
     public void afterClass() {
-        TestNGSpringFluentTestRunnerAdapter.afterClass(getClass());
+        FluentTestRunnerAdapter.afterClass(getClass());
     }
 }

@@ -1,6 +1,5 @@
 package org.fluentlenium.adapter.testng;
 
-import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.StringUtils;
 import org.fluentlenium.adapter.DefaultSharedMutator;
 import org.fluentlenium.adapter.FluentControlContainer;
@@ -23,9 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.annotation.Annotation;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -33,6 +30,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.fluentlenium.adapter.FluentAdapter.isIgnoredException;
 
 /**
  * FluentLenium Test Runner Adapter.
@@ -56,16 +54,6 @@ class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentControlImpl 
     public TestNGSpringFluentTestRunnerAdapter() {
         super(new ThreadLocalFluentControlContainer());
         this.sharedMutator = new DefaultSharedMutator();
-    }
-
-    /**
-     * Invoked when a test class has finished (whatever the success of failing status)
-     *
-     * @param testClass test class to terminate
-     */
-    public static void afterClass(Class<?> testClass) {
-        List<SharedWebDriver> sharedWebDrivers = SharedWebDriverContainer.INSTANCE.getTestClassDrivers(testClass);
-        sharedWebDrivers.forEach(SharedWebDriverContainer.INSTANCE::quit);
     }
 
     /**
@@ -374,33 +362,6 @@ class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentControlImpl 
         }
         return webDriver;
     }
-
-    /**
-     * Checks if the exception should be ignored and not reported as a test case fail
-     *
-     * @param e - the exception to check is it defined in ignored exceptions set
-     * @return boolean
-     */
-    boolean isIgnoredException(Throwable e) {
-        boolean isIgnored = false;
-        if (e != null) {
-            Class<?> clazz = e.getClass();
-            do {
-                if (IGNORED_EXCEPTIONS.contains(clazz.getName())) {
-                    isIgnored = true;
-                    break;
-                }
-                clazz = clazz.getSuperclass();
-            } while (clazz != Object.class);
-        }
-
-        return isIgnored;
-    }
-
-    private static final Set<String> IGNORED_EXCEPTIONS = ImmutableSet.of(
-            "org.junit.AssumptionViolatedException",
-            "org.junit.internal.AssumptionViolatedException",
-            "org.testng.SkipException");
 
     public ContainerFluentControl getFluentControl() {
         FluentControlContainer fluentControlContainer = getControlContainer();

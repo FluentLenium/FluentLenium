@@ -1,6 +1,5 @@
 package org.fluentlenium.adapter.spock
 
-import com.google.common.collect.ImmutableSet
 import org.apache.commons.lang3.StringUtils
 import org.fluentlenium.adapter.DefaultSharedMutator
 import org.fluentlenium.adapter.FluentControlContainer
@@ -28,8 +27,8 @@ import java.util.concurrent.TimeUnit
 
 // Intellij is wrong here - do not delete
 import static org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle
-
 import static org.apache.commons.lang3.StringUtils.isEmpty
+import static org.fluentlenium.adapter.FluentAdapter.isIgnoredException;
 
 class SpockAdapter extends SpockControl {
 
@@ -350,33 +349,6 @@ class SpockAdapter extends SpockControl {
         }
         return webDriver
     }
-
-    /**
-     * Checks if the exception should be ignored and not reported as a test case fail
-     *
-     * @param e - the exception to check is it defined in ignored exceptions set
-     * @return boolean
-     */
-    boolean isIgnoredException(Throwable e) {
-        boolean isIgnored = false
-        if (e != null) {
-            Class<?> clazz = e.getClass()
-            do {
-                if (IGNORED_EXCEPTIONS.contains(clazz.getName())) {
-                    isIgnored = true
-                    break
-                }
-                clazz = clazz.getSuperclass()
-            } while (clazz != Object.class)
-        }
-
-        return isIgnored
-    }
-
-    private static final Set<String> IGNORED_EXCEPTIONS = ImmutableSet.of(
-            "org.junit.AssumptionViolatedException",
-            "org.junit.internal.AssumptionViolatedException",
-            "org.testng.SkipException")
 
     ContainerFluentControl getFluentControl() {
         FluentControlContainer fluentControlContainer = getControlContainer()
