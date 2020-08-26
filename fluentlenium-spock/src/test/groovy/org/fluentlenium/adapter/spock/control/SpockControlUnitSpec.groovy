@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.spock.control
 
-import org.fluentlenium.adapter.spock.SpockAdapter
+import org.fluentlenium.adapter.FluentControlContainer
 import org.fluentlenium.adapter.spock.SpockControl
 import org.fluentlenium.adapter.spock.page.Page2
 import org.fluentlenium.configuration.Configuration
@@ -10,13 +10,10 @@ import org.fluentlenium.core.FluentPage
 import org.fluentlenium.core.domain.Component
 import org.fluentlenium.core.domain.FluentList
 import org.fluentlenium.core.domain.FluentWebElement
-import org.fluentlenium.core.inject.ContainerFluentControl
 import org.fluentlenium.core.search.SearchFilter
-import org.fluentlenium.utils.chromium.ChromiumApiNotSupportedException
 import org.openqa.selenium.By
 import org.openqa.selenium.Capabilities
 import org.openqa.selenium.SearchContext
-import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.chrome.ChromeOptions
 import spock.lang.Specification
@@ -26,43 +23,21 @@ import static org.fluentlenium.configuration.ConfigurationProperties.TriggerMode
 
 class SpockControlUnitSpec extends Specification {
 
-    SpockControl spockControl = new SpockControl()
-
     FluentControl mockFluentControl = Mock()
+
     Configuration mockConfiguration = Mock()
-    ContainerFluentControl mockContainerFluentControl = Mock()
-    WebDriver mockDriver = Mock()
-    SpockAdapter mockAdapter = GroovyMock() {
-        getFluentControl() >> mockContainerFluentControl
-        getConfiguration() >> mockConfiguration
+    FluentControlContainer mockFluentControlContainer = Mock() {
+        getFluentControl() >> mockFluentControl
     }
-
-    def setup() {
-        spockControl.adapter = mockAdapter
-    }
-
-    def 'should call getTestClass'() {
-        when:
-        spockControl.getTestClass()
-
-        then:
-        1 * mockAdapter.getTestClass()
-    }
-
-    def 'should call getMethodName'() {
-        when:
-        spockControl.getTestMethodName()
-
-        then:
-        1 * mockAdapter.getTestMethodName()
-    }
+    SpockControl spockControl = new SpockControl(
+            configuration: mockConfiguration,
+            controlContainer: mockFluentControlContainer)
 
     def 'should call getDriver'() {
         when:
         spockControl.getDriver()
 
         then:
-        2 * mockContainerFluentControl.getFluentControl() >> mockFluentControl
         1 * mockFluentControl.getDriver()
     }
 
@@ -71,7 +46,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.getAppiumDriver()
 
         then:
-        1 * mockContainerFluentControl.getAppiumDriver()
+        1 * mockFluentControl.getAppiumDriver()
     }
 
     def 'should call performanceTiming'() {
@@ -79,7 +54,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.performanceTiming()
 
         then:
-        1 * mockContainerFluentControl.performanceTiming()
+        1 * mockFluentControl.performanceTiming()
     }
 
     def 'should call get/setWebDriver'() {
@@ -307,7 +282,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.keyboard()
 
         then:
-        1 * mockContainerFluentControl.keyboard()
+        1 * mockFluentControl.keyboard()
     }
 
     def 'should call mouse'() {
@@ -315,7 +290,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.mouse()
 
         then:
-        1 * mockContainerFluentControl.mouse()
+        1 * mockFluentControl.mouse()
     }
 
     def 'should call alert'() {
@@ -323,7 +298,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.alert()
 
         then:
-        1 * mockContainerFluentControl.alert()
+        1 * mockFluentControl.alert()
     }
 
     def 'should call capabilities'() {
@@ -331,7 +306,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.capabilities()
 
         then:
-        1 * mockContainerFluentControl.capabilities()
+        1 * mockFluentControl.capabilities()
     }
 
     def 'should call newFluent'() {
@@ -342,7 +317,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.newFluent(element)
 
         then:
-        1 * mockContainerFluentControl.newFluent(element)
+        1 * mockFluentControl.newFluent(element)
     }
 
     def 'should call newComponent'() {
@@ -354,7 +329,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.newComponent(clazz, element)
 
         then:
-        1 * mockContainerFluentControl.newComponent(clazz, element)
+        1 * mockFluentControl.newComponent(clazz, element)
     }
 
     def 'should call newFluentList - 1/6'() {
@@ -362,7 +337,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.newFluentList()
 
         then:
-        1 * mockContainerFluentControl.newFluentList()
+        1 * mockFluentControl.newFluentList()
     }
 
     def 'should call newFluentList - 2/6'() {
@@ -373,7 +348,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.newFluentList(element)
 
         then:
-        1 * mockContainerFluentControl.newFluentList(element)
+        1 * mockFluentControl.newFluentList(element)
     }
 
     def 'should call newFluentList - 3/6'() {
@@ -384,7 +359,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.newFluentList(list)
 
         then:
-        1 * mockContainerFluentControl.newFluentList(list)
+        1 * mockFluentControl.newFluentList(list)
     }
 
     def 'should call newFluentList - 4/6'() {
@@ -395,7 +370,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.newFluentList(clazz)
 
         then:
-        1 * mockContainerFluentControl.newFluentList(clazz)
+        1 * mockFluentControl.newFluentList(clazz)
     }
 
     def 'should call newFluentList - 5/6'() {
@@ -407,7 +382,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.newFluentList(clazz, element)
 
         then:
-        1 * mockContainerFluentControl.newFluentList(clazz, element)
+        1 * mockFluentControl.newFluentList(clazz, element)
     }
 
     def 'should call newFluentList - 6/6'() {
@@ -419,7 +394,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.newFluentList(clazz, list)
 
         then:
-        1 * mockContainerFluentControl.newFluentList(clazz, list)
+        1 * mockFluentControl.newFluentList(clazz, list)
     }
 
     def 'should call asFluentList - 1/6'() {
@@ -430,7 +405,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.asFluentList(element)
 
         then:
-        1 * mockContainerFluentControl.asFluentList(element)
+        1 * mockFluentControl.asFluentList(element)
     }
 
     def 'should call asFluentList - 2/6'() {
@@ -441,7 +416,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.asFluentList(iterable)
 
         then:
-        1 * mockContainerFluentControl.asFluentList(iterable)
+        1 * mockFluentControl.asFluentList(iterable)
     }
 
     def 'should call asFluentList - 3/6'() {
@@ -452,7 +427,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.asFluentList(list)
 
         then:
-        1 * mockContainerFluentControl.asFluentList(list)
+        1 * mockFluentControl.asFluentList(list)
     }
 
     def 'should call asFluentList - 4/6'() {
@@ -464,7 +439,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.asFluentList(clazz, element)
 
         then:
-        1 * mockContainerFluentControl.asFluentList(clazz, element)
+        1 * mockFluentControl.asFluentList(clazz, element)
     }
 
     def 'should call asFluentList - 5/6'() {
@@ -476,7 +451,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.asFluentList(clazz, iterable)
 
         then:
-        1 * mockContainerFluentControl.asFluentList(clazz, iterable)
+        1 * mockFluentControl.asFluentList(clazz, iterable)
     }
 
     def 'should call asFluentList - 6/6'() {
@@ -488,7 +463,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.asFluentList(clazz, list)
 
         then:
-        1 * mockContainerFluentControl.asFluentList(clazz, list)
+        1 * mockFluentControl.asFluentList(clazz, list)
     }
 
     def 'should call newComponentList - 1/6'() {
@@ -499,7 +474,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.newComponentList(clazz)
 
         then:
-        1 * mockContainerFluentControl.newComponentList(clazz)
+        1 * mockFluentControl.newComponentList(clazz)
     }
 
     def 'should call newComponentList - 2/6'() {
@@ -511,7 +486,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.newComponentList(clazz, element)
 
         then:
-        1 * mockContainerFluentControl.newComponentList(clazz, element)
+        1 * mockFluentControl.newComponentList(clazz, element)
     }
 
     def 'should call newComponentList - 3/6'() {
@@ -523,7 +498,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.newComponentList(clazz, list)
 
         then:
-        1 * mockContainerFluentControl.newComponentList(clazz, list)
+        1 * mockFluentControl.newComponentList(clazz, list)
     }
 
     def 'should call newComponentList - 4/6'() {
@@ -535,7 +510,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.newComponentList(objectClazz, componentClazz)
 
         then:
-        1 * mockContainerFluentControl.newComponentList(objectClazz, componentClazz)
+        1 * mockFluentControl.newComponentList(objectClazz, componentClazz)
     }
 
     def 'should call newComponentList - 5/6'() {
@@ -548,7 +523,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.newComponentList(objectClazz, componentClazz, element)
 
         then:
-        1 * mockContainerFluentControl.newComponentList(objectClazz, componentClazz, element)
+        1 * mockFluentControl.newComponentList(objectClazz, componentClazz, element)
     }
 
     def 'should call newComponentList - 6/6'() {
@@ -561,7 +536,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.newComponentList(objectClazz, componentClazz, list)
 
         then:
-        1 * mockContainerFluentControl.newComponentList(objectClazz, componentClazz, list)
+        1 * mockFluentControl.newComponentList(objectClazz, componentClazz, list)
     }
 
     def 'should call asComponentList - 1/6'() {
@@ -573,7 +548,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.asComponentList(objectClazz, element)
 
         then:
-        1 * mockContainerFluentControl.asComponentList(objectClazz, element)
+        1 * mockFluentControl.asComponentList(objectClazz, element)
     }
 
     def 'should call asComponentList - 2/6'() {
@@ -585,7 +560,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.asComponentList(objectClazz, iterable)
 
         then:
-        1 * mockContainerFluentControl.asComponentList(objectClazz, iterable)
+        1 * mockFluentControl.asComponentList(objectClazz, iterable)
     }
 
     def 'should call asComponentList - 3/6'() {
@@ -597,7 +572,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.asComponentList(objectClazz, list)
 
         then:
-        1 * mockContainerFluentControl.asComponentList(objectClazz, list)
+        1 * mockFluentControl.asComponentList(objectClazz, list)
     }
 
     def 'should call asComponentList - 4/6'() {
@@ -610,7 +585,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.asComponentList(objectClazz, componentClazz, element)
 
         then:
-        1 * mockContainerFluentControl.asComponentList(objectClazz, componentClazz, element)
+        1 * mockFluentControl.asComponentList(objectClazz, componentClazz, element)
     }
 
     def 'should call asComponentList - 5/6'() {
@@ -623,7 +598,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.asComponentList(objectClazz, componentClazz, iterable)
 
         then:
-        1 * mockContainerFluentControl.asComponentList(objectClazz, componentClazz, iterable)
+        1 * mockFluentControl.asComponentList(objectClazz, componentClazz, iterable)
     }
 
     def 'should call asComponentList - 6/6'() {
@@ -636,7 +611,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.asComponentList(objectClazz, componentClazz, list)
 
         then:
-        1 * mockContainerFluentControl.asComponentList(objectClazz, componentClazz, list)
+        1 * mockFluentControl.asComponentList(objectClazz, componentClazz, list)
     }
 
     def 'should call isComponentClass / isComponentListClass'() {
@@ -648,8 +623,8 @@ class SpockControlUnitSpec extends Specification {
         spockControl.isComponentListClass(clazz)
 
         then:
-        1 * mockContainerFluentControl.isComponentClass(clazz)
-        1 * mockContainerFluentControl.isComponentListClass(clazz)
+        1 * mockFluentControl.isComponentClass(clazz)
+        1 * mockFluentControl.isComponentListClass(clazz)
 
     }
 
@@ -658,7 +633,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.css()
 
         then:
-        1 * mockContainerFluentControl.css()
+        1 * mockFluentControl.css()
     }
 
     def 'should call events'() {
@@ -666,7 +641,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.events()
 
         then:
-        1 * mockContainerFluentControl.events()
+        1 * mockFluentControl.events()
     }
 
     def 'should call inject'() {
@@ -677,7 +652,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.inject(object)
 
         then:
-        1 * mockContainerFluentControl.inject(object)
+        1 * mockFluentControl.inject(object)
     }
 
     def 'should call injectComponent'() {
@@ -690,7 +665,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.injectComponent(object, parentContainer, searchContext)
 
         then:
-        1 * mockContainerFluentControl.injectComponent(object, parentContainer, searchContext)
+        1 * mockFluentControl.injectComponent(object, parentContainer, searchContext)
     }
 
     def 'should call newInstance'() {
@@ -701,7 +676,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.newInstance(page)
 
         then:
-        1 * mockContainerFluentControl.newInstance(page)
+        1 * mockFluentControl.newInstance(page)
     }
 
     def 'should call goTo'() {
@@ -715,9 +690,9 @@ class SpockControlUnitSpec extends Specification {
         spockControl.goToInNewTab(url)
 
         then:
-        1 * mockContainerFluentControl.goTo(page)
-        1 * mockContainerFluentControl.goTo(url)
-        1 * mockContainerFluentControl.goToInNewTab(url)
+        1 * mockFluentControl.goTo(page)
+        1 * mockFluentControl.goTo(url)
+        1 * mockFluentControl.goToInNewTab(url)
     }
 
     def 'should call switchTo'() {
@@ -732,10 +707,10 @@ class SpockControlUnitSpec extends Specification {
         spockControl.switchTo(list)
 
         then:
-        1 * mockContainerFluentControl.switchTo()
-        1 * mockContainerFluentControl.switchToDefault()
-        1 * mockContainerFluentControl.switchTo(element)
-        1 * mockContainerFluentControl.switchTo(list)
+        1 * mockFluentControl.switchTo()
+        1 * mockFluentControl.switchToDefault()
+        1 * mockFluentControl.switchTo(element)
+        1 * mockFluentControl.switchTo(list)
     }
 
     def 'should call pageSource'() {
@@ -743,7 +718,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.pageSource()
 
         then:
-        1 * mockContainerFluentControl.pageSource()
+        1 * mockFluentControl.pageSource()
     }
 
     def 'should call window'() {
@@ -751,7 +726,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.window()
 
         then:
-        1 * mockContainerFluentControl.window()
+        1 * mockFluentControl.window()
     }
 
     def 'should call getCookies'() {
@@ -760,8 +735,8 @@ class SpockControlUnitSpec extends Specification {
         spockControl.getCookie("name")
 
         then:
-        1 * mockContainerFluentControl.getCookies()
-        1 * mockContainerFluentControl.getCookie("name")
+        1 * mockFluentControl.getCookies()
+        1 * mockFluentControl.getCookie("name")
     }
 
     def 'should call url'() {
@@ -769,7 +744,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.url()
 
         then:
-        1 * mockContainerFluentControl.url()
+        1 * mockFluentControl.url()
     }
 
     def 'should call executeScript'() {
@@ -782,8 +757,8 @@ class SpockControlUnitSpec extends Specification {
         spockControl.executeAsyncScript(script, args)
 
         then:
-        1 * mockContainerFluentControl.executeScript(script, args)
-        1 * mockContainerFluentControl.executeAsyncScript(script, args)
+        1 * mockFluentControl.executeScript(script, args)
+        1 * mockFluentControl.executeAsyncScript(script, args)
     }
 
     def 'should call el'() {
@@ -794,7 +769,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.el(element)
 
         then:
-        1 * mockContainerFluentControl.el(element)
+        1 * mockFluentControl.el(element)
     }
 
     def 'should call find'() {
@@ -811,10 +786,10 @@ class SpockControlUnitSpec extends Specification {
         spockControl.find(by, searchFilter)
 
         then:
-        1 * mockContainerFluentControl.find(list)
-        1 * mockContainerFluentControl.find(selector, searchFilter)
-        1 * mockContainerFluentControl.find(searchFilter)
-        1 * mockContainerFluentControl.find(by, searchFilter)
+        1 * mockFluentControl.find(list)
+        1 * mockFluentControl.find(selector, searchFilter)
+        1 * mockFluentControl.find(searchFilter)
+        1 * mockFluentControl.find(by, searchFilter)
     }
 
     def 'should call htmlDump'() {
@@ -826,8 +801,8 @@ class SpockControlUnitSpec extends Specification {
         spockControl.takeHtmlDump(fileName)
 
         then:
-        1 * mockContainerFluentControl.takeHtmlDump()
-        1 * mockContainerFluentControl.takeHtmlDump(fileName)
+        1 * mockFluentControl.takeHtmlDump()
+        1 * mockFluentControl.takeHtmlDump(fileName)
     }
 
     def 'should call screenshot'() {
@@ -840,9 +815,9 @@ class SpockControlUnitSpec extends Specification {
         spockControl.canTakeScreenShot()
 
         then:
-        1 * mockContainerFluentControl.takeScreenshot()
-        1 * mockContainerFluentControl.takeScreenshot(fileName)
-        1 * mockContainerFluentControl.canTakeScreenShot()
+        1 * mockFluentControl.takeScreenshot()
+        1 * mockFluentControl.takeScreenshot(fileName)
+        1 * mockFluentControl.canTakeScreenShot()
     }
 
     def 'should call await'() {
@@ -850,7 +825,7 @@ class SpockControlUnitSpec extends Specification {
         spockControl.await()
 
         then:
-        1 * mockContainerFluentControl.await()
+        1 * mockFluentControl.await()
     }
 
     def 'should call getChromiumApi'() {
@@ -858,6 +833,6 @@ class SpockControlUnitSpec extends Specification {
         spockControl.getChromiumApi()
 
         then:
-        1 * mockContainerFluentControl.getChromiumApi()
+        1 * mockFluentControl.getChromiumApi()
     }
 }

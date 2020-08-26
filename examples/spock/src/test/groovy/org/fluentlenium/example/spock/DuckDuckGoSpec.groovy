@@ -2,7 +2,9 @@ package org.fluentlenium.example.spock
 
 import org.fluentlenium.adapter.spock.FluentSpecification
 import org.fluentlenium.core.hook.wait.Wait
+import org.openqa.selenium.Capabilities
 import org.openqa.selenium.Cookie
+import org.openqa.selenium.chrome.ChromeOptions
 
 @Wait
 class DuckDuckGoSpec extends FluentSpecification {
@@ -10,16 +12,16 @@ class DuckDuckGoSpec extends FluentSpecification {
     private static final String SCREENSHOT_TEMP_PATH = "/tmp"
     private static final PngFilter PNG_FILTER = new PngFilter()
 
-    /**
-     * This can't be done unfortunately in Groovy. See below link for details
-     * https://stackoverflow.com/questions/15884190/is-it-possible-to-use-groovy-to-override-a-method-in-a-java-class-when-that-jav/15887199
-     *
-     * The method below has no effect.
-     * Use fluentlenium.properties for Spock config
-     */
     @Override
     String getWebDriver() {
-        return null
+        return "chrome"
+    }
+
+    @Override
+    Capabilities getCapabilities() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setHeadless(true)
+        return chromeOptions
     }
 
     def "Title of duck duck go"() {
