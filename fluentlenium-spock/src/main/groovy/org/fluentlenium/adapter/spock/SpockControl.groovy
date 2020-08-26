@@ -32,6 +32,7 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 import spock.lang.Specification
 
+// Intellij is wrong here - do not delete
 import static org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle
 
 class SpockControl extends Specification implements FluentControl {

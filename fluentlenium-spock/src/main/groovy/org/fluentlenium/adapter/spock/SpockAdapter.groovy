@@ -26,6 +26,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.Future
 import java.util.concurrent.TimeUnit
 
+// Intellij is wrong here - do not delete
 import static org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle
 
 import static org.apache.commons.lang3.StringUtils.isEmpty
@@ -228,7 +229,7 @@ class SpockAdapter extends SpockControl {
         return webDriverExecutor
     }
 
-    private void clearThreadLocals() {
+    private static void clearThreadLocals() {
         PARAMETERS_THREAD_LOCAL.remove()
         TEST_CLASS.remove()
         TEST_METHOD_NAME.remove()
@@ -395,16 +396,5 @@ class SpockAdapter extends SpockControl {
         getControlContainer().setFluentControl(fluentControl)
     }
 
-    void specStarting(Class<?> testClass, String testName) {
-        starting(testClass, testName)
-    }
-
-    void specFinished(Class<?> testClass, String testName) {
-        finished(testClass, testName)
-    }
-
-    void specFailed(Throwable e, Class<?> testClass, String testName) {
-        failed(e, testClass, testName)
-    }
 
 }
