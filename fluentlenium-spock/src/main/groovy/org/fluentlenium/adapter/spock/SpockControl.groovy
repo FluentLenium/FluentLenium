@@ -1,9 +1,11 @@
 package org.fluentlenium.adapter.spock
 
 import io.appium.java_client.AppiumDriver
-import org.fluentlenium.adapter.exception.AnnotationNotFoundException
+import org.fluentlenium.adapter.FluentControlContainer
+import org.fluentlenium.adapter.ThreadLocalFluentControlContainer
 import org.fluentlenium.configuration.Configuration
 import org.fluentlenium.configuration.ConfigurationFactory
+import org.fluentlenium.configuration.ConfigurationFactoryProvider
 import org.fluentlenium.configuration.ConfigurationProperties
 import org.fluentlenium.core.FluentControl
 import org.fluentlenium.core.FluentPage
@@ -30,47 +32,35 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 import spock.lang.Specification
 
-import java.lang.annotation.Annotation
+import static org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle
 
 class SpockControl extends Specification implements FluentControl {
 
-    public SpockAdapter adapter = new SpockAdapter()
+    private FluentControlContainer controlContainer = new ThreadLocalFluentControlContainer()
+    private Configuration configuration = ConfigurationFactoryProvider.newConfiguration(getClass())
+
+    /**
+     * Get the control interface container
+     *
+     * @return control interface container
+     */
+    FluentControlContainer getControlContainer() {
+        return controlContainer
+    }
 
     FluentControl getFluentControl() {
-        return adapter.getFluentControl()
+        return controlContainer.getFluentControl()
     }
 
-    Configuration getConfig() {
-        return adapter.getConfiguration()
+    /**
+     * Get the test adapter configuration.
+     *
+     * @return configuration
+     */
+    Configuration getConfiguration() {
+        return configuration
     }
 
-    def getTestClass() {
-        return adapter.getTestClass()
-    }
-
-    def getTestMethodName() {
-        return adapter.getTestMethodName()
-    }
-
-    protected <T extends Annotation> T getClassAnnotation(Class<T> annotation) {
-        def anno = specificationContext.currentSpec.getAnnotation(annotation)
-
-        if (anno == null) {
-            throw new AnnotationNotFoundException();
-        }
-
-        return anno
-    }
-
-    protected <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
-        def anno = specificationContext.currentFeature.featureMethod.getAnnotation(annotation)
-
-        if (anno == null) {
-            throw new AnnotationNotFoundException();
-        }
-
-        return anno
-    }
 
     @Override
     WebDriver getDriver() {
@@ -89,207 +79,207 @@ class SpockControl extends Specification implements FluentControl {
 
     @Override
     void setWebDriver(String webDriver) {
-        getConfig().setWebDriver(webDriver)
+        getConfiguration().setWebDriver(webDriver)
     }
 
     @Override
     void setBrowserTimeout(Long timeout) {
-        getConfig().setBrowserTimeout(timeout)
+        getConfiguration().setBrowserTimeout(timeout)
     }
 
     @Override
     void setBrowserTimeoutRetries(Integer retriesNumber) {
-        getConfig().setBrowserTimeoutRetries(retriesNumber)
+        getConfiguration().setBrowserTimeoutRetries(retriesNumber)
     }
 
     @Override
     void setRemoteUrl(String remoteUrl) {
-        getConfig().setRemoteUrl(remoteUrl)
+        getConfiguration().setRemoteUrl(remoteUrl)
     }
 
     @Override
     void setCapabilities(Capabilities capabilities) {
-        getConfig().setCapabilities(capabilities)
+        getConfiguration().setCapabilities(capabilities)
     }
 
     @Override
     void setConfigurationFactory(Class<? extends ConfigurationFactory> configurationFactory) {
-        getConfig().setConfigurationFactory(configurationFactory)
+        getConfiguration().setConfigurationFactory(configurationFactory)
     }
 
     @Override
     void setDriverLifecycle(DriverLifecycle driverLifecycle) {
-        getConfig().setDriverLifecycle(driverLifecycle)
+        getConfiguration().setDriverLifecycle(driverLifecycle)
     }
 
     @Override
     void setDeleteCookies(Boolean deleteCookies) {
-        getConfig().setDeleteCookies(deleteCookies)
+        getConfiguration().setDeleteCookies(deleteCookies)
     }
 
     @Override
     void setBaseUrl(String baseUrl) {
-        getConfig().setBaseUrl(baseUrl)
+        getConfiguration().setBaseUrl(baseUrl)
     }
 
     @Override
     void setPageLoadTimeout(Long pageLoadTimeout) {
-        getConfig().setPageLoadTimeout(pageLoadTimeout)
+        getConfiguration().setPageLoadTimeout(pageLoadTimeout)
     }
 
     @Override
     void setImplicitlyWait(Long implicitlyWait) {
-        getConfig().setImplicitlyWait(implicitlyWait)
+        getConfiguration().setImplicitlyWait(implicitlyWait)
     }
 
     @Override
     void setAwaitAtMost(Long awaitAtMost) {
-        getConfig().setAwaitAtMost(awaitAtMost)
+        getConfiguration().setAwaitAtMost(awaitAtMost)
     }
 
     @Override
     void setAwaitPollingEvery(Long awaitPollingEvery) {
-        getConfig().setAwaitPollingEvery(awaitPollingEvery)
+        getConfiguration().setAwaitPollingEvery(awaitPollingEvery)
     }
 
     @Override
     void setScriptTimeout(Long scriptTimeout) {
-        getConfig().setScriptTimeout(scriptTimeout)
+        getConfiguration().setScriptTimeout(scriptTimeout)
     }
 
     @Override
     void setEventsEnabled(Boolean eventsEnabled) {
-        getConfig().setEventsEnabled(eventsEnabled)
+        getConfiguration().setEventsEnabled(eventsEnabled)
     }
 
     @Override
     void setScreenshotPath(String screenshotPath) {
-        getConfig().setScreenshotPath(screenshotPath)
+        getConfiguration().setScreenshotPath(screenshotPath)
     }
 
     @Override
     void setScreenshotMode(TriggerMode screenshotMode) {
-        getConfig().setScreenshotMode(screenshotMode)
+        getConfiguration().setScreenshotMode(screenshotMode)
     }
 
     @Override
     void setHtmlDumpPath(String htmlDumpPath) {
-        getConfig().setHtmlDumpPath(htmlDumpPath)
+        getConfiguration().setHtmlDumpPath(htmlDumpPath)
     }
 
     @Override
     void setHtmlDumpMode(TriggerMode htmlDumpMode) {
-        getConfig().setHtmlDumpMode(htmlDumpMode)
+        getConfiguration().setHtmlDumpMode(htmlDumpMode)
     }
 
     @Override
     void setCustomProperty(String key, String value) {
-        getConfig().setCustomProperty(key, value)
+        getConfiguration().setCustomProperty(key, value)
     }
 
     @Override
     String getWebDriver() {
-        return getConfig().getWebDriver()
+        return getConfiguration().getWebDriver()
     }
 
     @Override
     String getRemoteUrl() {
-        return getConfig().getRemoteUrl()
+        return getConfiguration().getRemoteUrl()
     }
 
     @Override
     Capabilities getCapabilities() {
-        return getConfig().getCapabilities()
+        return getConfiguration().getCapabilities()
     }
 
     @Override
     String getBaseUrl() {
-        return getConfig().getBaseUrl()
+        return getConfiguration().getBaseUrl()
     }
 
     @Override
     DriverLifecycle getDriverLifecycle() {
-        return getConfig().getDriverLifecycle()
+        return getConfiguration().getDriverLifecycle()
     }
 
     @Override
     Long getBrowserTimeout() {
-        return getConfig().getBrowserTimeout()
+        return getConfiguration().getBrowserTimeout()
     }
 
     @Override
     Integer getBrowserTimeoutRetries() {
-        return getConfig().getBrowserTimeoutRetries()
+        return getConfiguration().getBrowserTimeoutRetries()
     }
 
     @Override
     Boolean getDeleteCookies() {
-        return getConfig().getDeleteCookies()
+        return getConfiguration().getDeleteCookies()
     }
 
     @Override
     Long getPageLoadTimeout() {
-        return getConfig().getPageLoadTimeout()
+        return getConfiguration().getPageLoadTimeout()
     }
 
     @Override
     Long getImplicitlyWait() {
-        return getConfig().getImplicitlyWait()
+        return getConfiguration().getImplicitlyWait()
     }
 
     @Override
     Long getScriptTimeout() {
-        return getConfig().getScriptTimeout()
+        return getConfiguration().getScriptTimeout()
     }
 
     @Override
     Long getAwaitAtMost() {
-        return getConfig().getAwaitAtMost()
+        return getConfiguration().getAwaitAtMost()
     }
 
     @Override
     Long getAwaitPollingEvery() {
-        return getConfig().getAwaitPollingEvery()
+        return getConfiguration().getAwaitPollingEvery()
     }
 
     @Override
     Boolean getEventsEnabled() {
-        return getConfig().getEventsEnabled()
+        return getConfiguration().getEventsEnabled()
     }
 
     @Override
     String getScreenshotPath() {
-        return getConfig().getScreenshotPath()
+        return getConfiguration().getScreenshotPath()
     }
 
     @Override
     TriggerMode getScreenshotMode() {
-        return getConfig().getScreenshotMode()
+        return getConfiguration().getScreenshotMode()
     }
 
     @Override
     String getHtmlDumpPath() {
-        return getConfig().getHtmlDumpPath()
+        return getConfiguration().getHtmlDumpPath()
     }
 
     @Override
     TriggerMode getHtmlDumpMode() {
-        return getConfig().getHtmlDumpMode()
+        return getConfiguration().getHtmlDumpMode()
     }
 
     @Override
     Class<? extends ConfigurationProperties> getConfigurationDefaults() {
-        return getConfig().getConfigurationDefaults()
+        return getConfiguration().getConfigurationDefaults()
     }
 
     @Override
     Class<? extends ConfigurationFactory> getConfigurationFactory() {
-        return getConfig().getConfigurationFactory()
+        return getConfiguration().getConfigurationFactory()
     }
 
     @Override
     String getCustomProperty(String propertyName) {
-        return getConfig().getCustomProperty(propertyName)
+        return getConfiguration().getCustomProperty(propertyName)
     }
 
     @Override

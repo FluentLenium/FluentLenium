@@ -1,7 +1,6 @@
 package org.fluentlenium.adapter.spock
 
 import org.fluentlenium.utils.SeleniumVersionChecker
-import org.fluentlenium.adapter.FluentTestRunnerAdapter
 import org.fluentlenium.adapter.junit.FluentTestRule
 import org.junit.ClassRule
 import org.junit.Rule
@@ -9,7 +8,7 @@ import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
 
-class FluentSpecification extends SpockControl {
+class FluentSpecification extends SpockAdapter {
 
     @Rule
     public TestRule watchman = new FluentTestRule(this) {
@@ -17,19 +16,19 @@ class FluentSpecification extends SpockControl {
         void starting(Description description) {
             SeleniumVersionChecker.checkSeleniumVersion()
             super.starting(description)
-            adapter.specStarting(description.getTestClass(), description.getDisplayName())
+            specStarting(description.getTestClass(), description.getDisplayName())
         }
 
         @Override
         void finished(Description description) {
             super.finished(description)
-            adapter.specFinished(description.getTestClass(), description.getDisplayName())
+            specFinished(description.getTestClass(), description.getDisplayName())
         }
 
         @Override
         void failed(Throwable e, Description description) {
             super.failed(e, description)
-            adapter.specFailed(e, description.getTestClass(), description.getDisplayName())
+            specFailed(e, description.getTestClass(), description.getDisplayName())
         }
     }
 
@@ -45,7 +44,7 @@ class FluentSpecification extends SpockControl {
                     try {
                         base.evaluate()
                     } finally {
-                        FluentTestRunnerAdapter.afterClass(description.getTestClass())
+                        afterClass(description.getTestClass())
                     }
                 }
             }
