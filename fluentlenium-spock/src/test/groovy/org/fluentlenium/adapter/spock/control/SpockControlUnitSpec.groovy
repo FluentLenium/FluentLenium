@@ -33,7 +33,6 @@ class SpockControlUnitSpec extends Specification {
             configuration: mockConfiguration,
             controlContainer: mockFluentControlContainer)
 
-
     def 'should call getDriver'() {
         when:
         spockControl.getDriver()

@@ -117,7 +117,7 @@ class SpockAdapter extends SpockControl {
      * @param testClass Test class
      * @param testName Test name
      */
-    protected void starting(Class<?> testClass, String testName) {
+    void starting(Class<?> testClass, String testName) {
         PARAMETERS_THREAD_LOCAL.set(sharedMutator.getEffectiveParameters(testClass, testName, getDriverLifecycle()))
 
         SharedWebDriver sharedWebDriver
