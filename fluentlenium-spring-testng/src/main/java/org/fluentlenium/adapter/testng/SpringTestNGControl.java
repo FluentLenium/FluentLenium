@@ -40,6 +40,11 @@ class SpringTestNGControl extends AbstractTestNGSpringContextTests implements Fl
         this.configuration = ConfigurationFactoryProvider.newConfiguration(getClass());
     }
 
+    public SpringTestNGControl(FluentControlContainer controlContainer, Configuration configuration) {
+        this.controlContainer = controlContainer;
+        this.configuration = configuration;
+    }
+
     /**
      * Get the control interface container
      *
@@ -62,166 +67,218 @@ class SpringTestNGControl extends AbstractTestNGSpringContextTests implements Fl
         return configuration;
     }
 
+
+    @Override
+    public WebDriver getDriver() {
+        return getFluentControl().getDriver();
+    }
+
+    @Override
+    public AppiumDriver<?> getAppiumDriver() {
+        return getFluentControl().getAppiumDriver();
+    }
+
+    @Override
     public Class<? extends ConfigurationProperties> getConfigurationDefaults() {
         return getConfiguration().getConfigurationDefaults();
     }
 
+    @Override
     public void setAwaitPollingEvery(Long awaitPollingEvery) {
         getConfiguration().setAwaitPollingEvery(awaitPollingEvery);
     }
 
+    @Override
     public void setCustomProperty(String key, String value) {
         getConfiguration().setCustomProperty(key, value);
     }
 
+    @Override
     public void setBrowserTimeoutRetries(Integer retriesNumber) {
         getConfiguration().setBrowserTimeoutRetries(retriesNumber);
     }
 
+    @Override
     public void setWebDriver(String webDriver) {
         getConfiguration().setWebDriver(webDriver);
     }
 
+    @Override
     public Boolean getDeleteCookies() {
         return getConfiguration().getDeleteCookies();
     }
 
+    @Override
     public void setScreenshotPath(String screenshotPath) {
         getConfiguration().setScreenshotPath(screenshotPath);
     }
 
+    @Override
     public String getBaseUrl() {
         return getConfiguration().getBaseUrl();
     }
 
+    @Override
     public void setAwaitAtMost(Long awaitAtMost) {
         getConfiguration().setAwaitAtMost(awaitAtMost);
     }
 
+    @Override
     public Long getAwaitAtMost() {
         return getConfiguration().getAwaitAtMost();
     }
 
+    @Override
     public TriggerMode getHtmlDumpMode() {
         return getConfiguration().getHtmlDumpMode();
     }
 
+    @Override
     public Long getPageLoadTimeout() {
         return getConfiguration().getPageLoadTimeout();
     }
 
+    @Override
     public void setConfigurationFactory(Class<? extends ConfigurationFactory> configurationFactory) {
         getConfiguration().setConfigurationFactory(configurationFactory);
     }
 
+    @Override
     public void setDriverLifecycle(DriverLifecycle driverLifecycle) {
         getConfiguration().setDriverLifecycle(driverLifecycle);
     }
 
+    @Override
     public String getRemoteUrl() {
         return getConfiguration().getRemoteUrl();
     }
 
+    @Override
     public Boolean getEventsEnabled() {
         return getConfiguration().getEventsEnabled();
     }
 
+    @Override
     public void setHtmlDumpMode(TriggerMode htmlDumpMode) {
         getConfiguration().setHtmlDumpMode(htmlDumpMode);
     }
 
+    @Override
     public String getHtmlDumpPath() {
         return getConfiguration().getHtmlDumpPath();
     }
 
+    @Override
     public Long getAwaitPollingEvery() {
         return getConfiguration().getAwaitPollingEvery();
     }
 
+    @Override
     public void setScriptTimeout(Long scriptTimeout) {
         getConfiguration().setScriptTimeout(scriptTimeout);
     }
 
+    @Override
     public Class<? extends ConfigurationFactory> getConfigurationFactory() {
         return getConfiguration().getConfigurationFactory();
     }
 
+    @Override
     public String getScreenshotPath() {
         return getConfiguration().getScreenshotPath();
     }
 
+    @Override
     public Integer getBrowserTimeoutRetries() {
         return getConfiguration().getBrowserTimeoutRetries();
     }
 
+    @Override
     public void setBrowserTimeout(Long timeout) {
         getConfiguration().setBrowserTimeout(timeout);
     }
 
+    @Override
     public void setRemoteUrl(String remoteUrl) {
         getConfiguration().setRemoteUrl(remoteUrl);
     }
 
+    @Override
     public String getWebDriver() {
         return getConfiguration().getWebDriver();
     }
 
+    @Override
     public String getCustomProperty(String propertyName) {
         return getConfiguration().getCustomProperty(propertyName);
     }
 
+    @Override
     public void setDeleteCookies(Boolean deleteCookies) {
         getConfiguration().setDeleteCookies(deleteCookies);
     }
 
+    @Override
     public void setEventsEnabled(Boolean eventsEnabled) {
         getConfiguration().setEventsEnabled(eventsEnabled);
     }
 
+    @Override
     public void setHtmlDumpPath(String htmlDumpPath) {
         getConfiguration().setHtmlDumpPath(htmlDumpPath);
     }
 
+    @Override
     public void setPageLoadTimeout(Long pageLoadTimeout) {
         getConfiguration().setPageLoadTimeout(pageLoadTimeout);
     }
 
+    @Override
     public void setScreenshotMode(TriggerMode screenshotMode) {
         getConfiguration().setScreenshotMode(screenshotMode);
     }
 
+    @Override
     public Long getBrowserTimeout() {
         return getConfiguration().getBrowserTimeout();
     }
 
+    @Override
     public void setBaseUrl(String baseUrl) {
         getConfiguration().setBaseUrl(baseUrl);
     }
 
+    @Override
     public DriverLifecycle getDriverLifecycle() {
         return getConfiguration().getDriverLifecycle();
     }
 
+    @Override
     public Long getImplicitlyWait() {
         return getConfiguration().getImplicitlyWait();
     }
 
+    @Override
     public void setImplicitlyWait(Long implicitlyWait) {
         getConfiguration().setImplicitlyWait(implicitlyWait);
     }
 
+    @Override
     public Capabilities getCapabilities() {
         return getConfiguration().getCapabilities();
     }
 
+    @Override
     public Long getScriptTimeout() {
         return getConfiguration().getScriptTimeout();
     }
 
+    @Override
     public void setCapabilities(Capabilities capabilities) {
         getConfiguration().setCapabilities(capabilities);
     }
 
+    @Override
     public TriggerMode getScreenshotMode() {
         return getConfiguration().getScreenshotMode();
     }
@@ -231,7 +288,7 @@ class SpringTestNGControl extends AbstractTestNGSpringContextTests implements Fl
     }
 
     public final ChromiumApi getChromiumApi() {
-        return new ChromiumApi((RemoteWebDriver) getFluentControl().getDriver());
+        return getFluentControl().getChromiumApi();
     }
 
     public FluentList<FluentWebElement> asFluentList(WebElement... elements) {
@@ -482,13 +539,4 @@ class SpringTestNGControl extends AbstractTestNGSpringContextTests implements Fl
         return getFluentControl().performanceTiming();
     }
 
-    @Override
-    public WebDriver getDriver() {
-        return getFluentControl().getDriver();
-    }
-
-    @Override
-    public AppiumDriver<?> getAppiumDriver() {
-        return getFluentControl().getAppiumDriver();
-    }
 }
