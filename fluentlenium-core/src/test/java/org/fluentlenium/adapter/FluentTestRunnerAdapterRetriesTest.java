@@ -6,15 +6,14 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
+import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
 import org.fluentlenium.core.FluentControl;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,12 +22,13 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriverException;
 
+@SuppressWarnings("unused")
 @RunWith(MockitoJUnitRunner.class)
 public class FluentTestRunnerAdapterRetriesTest {
     @Mock
     ExecutorService executorService;
     @Mock
-    Future future;
+    Future<SharedWebDriver> future;
     @Mock
     FluentControl fluentControl;
     @Mock
@@ -39,11 +39,6 @@ public class FluentTestRunnerAdapterRetriesTest {
     @Spy
     @InjectMocks
     static FluentTestRunnerAdapter adapter;
-
-    @Before
-    public void setUp() throws Exception {
-        initMocks(this);
-    }
 
     @Test
     public void testFailedWhenBrowserCrashed() {
