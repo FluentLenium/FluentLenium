@@ -31,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.fluentlenium.adapter.FluentAdapter.isIgnoredException;
+import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage;
 
 /**
  * FluentLenium Test Runner Adapter.
@@ -38,9 +39,9 @@ import static org.fluentlenium.adapter.FluentAdapter.isIgnoredException;
  * Extends this class to provide FluentLenium support to your Test class.
  */
 @SuppressWarnings("PMD.GodClass")
-class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentControlImpl {
+class SpringTestNGAdapter extends SpringTestNGControl {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TestNGSpringFluentTestRunnerAdapter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SpringTestNGAdapter.class);
 
     private final SharedMutator sharedMutator;
 
@@ -51,7 +52,7 @@ class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentControlImpl 
     /**
      * Creates a new test runner adapter.
      */
-    public TestNGSpringFluentTestRunnerAdapter() {
+    public SpringTestNGAdapter() {
         super(new ThreadLocalFluentControlContainer());
         this.sharedMutator = new DefaultSharedMutator();
     }
@@ -60,7 +61,7 @@ class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentControlImpl 
      * @return Class of currently running test
      */
     protected Class<?> getTestClass() {
-        Class<?> currentTestClass = TestNGSpringFluentTestRunnerAdapter.TEST_CLASS.get();
+        Class<?> currentTestClass = SpringTestNGAdapter.TEST_CLASS.get();
         if (currentTestClass == null) {
             LOGGER.warn("Current test class is null. Are you in test context?");
         }
@@ -71,7 +72,7 @@ class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentControlImpl 
      * @return method name (as String) of currently running test
      */
     protected String getTestMethodName() {
-        String currentTestMethodName = TestNGSpringFluentTestRunnerAdapter.TEST_METHOD_NAME.get();
+        String currentTestMethodName = SpringTestNGAdapter.TEST_METHOD_NAME.get();
         if (currentTestMethodName == null) {
             LOGGER.warn("Current test method name is null. Are you in text context?");
         }
@@ -137,7 +138,7 @@ class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentControlImpl 
         } catch (ExecutionException | InterruptedException e) {
             this.failed(null, testClass, testName);
 
-            String causeMessage = this.getCauseMessage(e);
+            String causeMessage = getCauseMessage(e);
 
             throw new WebDriverException("Browser failed to start, test [ " + testName + " ] execution interrupted."
                     + (isEmpty(causeMessage) ? "" : "\nCaused by: [ " + causeMessage + "]"), e);
@@ -156,22 +157,6 @@ class TestNGSpringFluentTestRunnerAdapter extends TestNGSpringFluentControlImpl 
     private void setMethodName(String methodName) {
         String className = StringUtils.substringBefore(methodName, "(");
         TEST_METHOD_NAME.set(className);
-    }
-
-    private String getCauseMessage(Exception e) {
-        String causeMessage = null;
-        Throwable cause = e;
-        while (true) {
-            if (cause.getCause() == null || cause.getCause() == cause) {
-                break;
-            } else {
-                cause = cause.getCause();
-                if (cause.getLocalizedMessage() != null) {
-                    causeMessage = cause.getLocalizedMessage();
-                }
-            }
-        }
-        return causeMessage;
     }
 
     private SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters)

@@ -6,6 +6,8 @@ import org.junit.Rule
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 
+import static org.fluentlenium.adapter.FluentTestRunnerAdapter.afterClass
+
 class FluentSpecification extends SpockAdapter {
 
     @Rule

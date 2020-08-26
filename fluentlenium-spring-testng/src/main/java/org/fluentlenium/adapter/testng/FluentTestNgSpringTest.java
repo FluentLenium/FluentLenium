@@ -19,7 +19,7 @@ import java.util.Map;
  * <p>
  * Extends this class to provide FluentLenium support to your TestNG Test class.
  */
-public class FluentTestNgSpringTest extends TestNGSpringFluentTestRunnerAdapter {
+public class FluentTestNgSpringTest extends SpringTestNGAdapter {
 
     private final Map<ITestContext, Map<Method, ITestNGMethod>> methods = new HashMap<>();
 

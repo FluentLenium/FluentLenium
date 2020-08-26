@@ -28,7 +28,8 @@ import java.util.concurrent.TimeUnit
 // Intellij is wrong here - do not delete
 import static org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle
 import static org.apache.commons.lang3.StringUtils.isEmpty
-import static org.fluentlenium.adapter.FluentAdapter.isIgnoredException;
+import static org.fluentlenium.adapter.FluentAdapter.isIgnoredException
+import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage;
 
 class SpockAdapter extends SpockControl {
 
@@ -39,16 +40,6 @@ class SpockAdapter extends SpockControl {
     private static final ThreadLocal<SharedMutator.EffectiveParameters<?>> PARAMETERS_THREAD_LOCAL = new ThreadLocal<>()
     private static final ThreadLocal<String> TEST_METHOD_NAME = new ThreadLocal<>()
     private static final ThreadLocal<Class<?>> TEST_CLASS = new ThreadLocal<>()
-
-    /**
-     * Invoked when a test class has finished (whatever the success of failing status)
-     *
-     * @param testClass test class to terminate
-     */
-    static void afterClass(Class<?> testClass) {
-        List<SharedWebDriver> sharedWebDrivers = SharedWebDriverContainer.INSTANCE.getTestClassDrivers(testClass)
-        sharedWebDrivers.forEach(SharedWebDriverContainer.INSTANCE::quit)
-    }
 
     /**
      * @return Class of currently running test
@@ -146,22 +137,6 @@ class SpockAdapter extends SpockControl {
     private static void setMethodName(String methodName) {
         String className = StringUtils.substringBefore(methodName, "(")
         TEST_METHOD_NAME.set(className)
-    }
-
-    private static String getCauseMessage(Exception e) {
-        String causeMessage = null
-        Throwable cause = e
-        while (true) {
-            if (cause.getCause() == null || cause.getCause() == cause) {
-                break
-            } else {
-                cause = cause.getCause()
-                if (cause.getLocalizedMessage() != null) {
-                    causeMessage = cause.getLocalizedMessage()
-                }
-            }
-        }
-        return causeMessage
     }
 
     SharedWebDriver getSharedWebDriver(SharedMutator.EffectiveParameters<?> parameters)

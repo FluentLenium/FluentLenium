@@ -1,6 +1,7 @@
 package org.fluentlenium.adapter;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
@@ -203,8 +204,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         } catch (ExecutionException | InterruptedException e) {
             this.failed(testClass, testName);
 
-            String causeMessage = this.getCauseMessage(e);
-
+            String causeMessage = getCauseMessage(e);
             throw new WebDriverException("Browser failed to start, test [ " + testName + " ] execution interrupted."
                     + (isEmpty(causeMessage) ? "" : "\nCaused by: [ " + causeMessage + "]"), e);
         }
@@ -222,22 +222,6 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
     private void setMethodName(String methodName) {
         String className = StringUtils.substringBefore(methodName, "(");
         TEST_METHOD_NAME.set(className);
-    }
-
-    private String getCauseMessage(Exception e) {
-        String causeMessage = null;
-        Throwable cause = e;
-        while (true) {
-            if (cause.getCause() == null || cause.getCause() == cause) {
-                break;
-            } else {
-                cause = cause.getCause();
-                if (cause.getLocalizedMessage() != null) {
-                    causeMessage = cause.getLocalizedMessage();
-                }
-            }
-        }
-        return causeMessage;
     }
 
     private SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters)

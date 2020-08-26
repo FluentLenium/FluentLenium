@@ -30,12 +30,12 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import java.util.List;
 import java.util.Set;
 
-class TestNGSpringFluentControlImpl extends AbstractTestNGSpringContextTests implements FluentControl {
+class SpringTestNGControl extends AbstractTestNGSpringContextTests implements FluentControl {
 
     private final FluentControlContainer controlContainer;
     private final Configuration configuration;
 
-    public TestNGSpringFluentControlImpl(FluentControlContainer controlContainer) {
+    public SpringTestNGControl(FluentControlContainer controlContainer) {
         this.controlContainer = controlContainer;
         this.configuration = ConfigurationFactoryProvider.newConfiguration(getClass());
     }
