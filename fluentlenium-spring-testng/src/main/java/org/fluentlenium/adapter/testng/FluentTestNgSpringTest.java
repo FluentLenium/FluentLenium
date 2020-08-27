@@ -83,6 +83,6 @@ public class FluentTestNgSpringTest extends SpringTestNGAdapter {
      */
     @AfterClass(alwaysRun = true)
     public void afterClass() {
-        FluentTestRunnerAdapter.afterClass(getClass());
+        FluentTestRunnerAdapter.classDriverCleanup(getClass());
     }
 }

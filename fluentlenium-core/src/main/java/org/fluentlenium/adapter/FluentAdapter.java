@@ -1,8 +1,5 @@
 package org.fluentlenium.adapter;
 
-import java.util.Set;
-
-import com.google.common.collect.ImmutableSet;
 import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.configuration.WebDrivers;
 import org.fluentlenium.core.FluentControlImpl;
@@ -16,11 +13,6 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
  * Generic adapter to {@link FluentDriver}.
  */
 public class FluentAdapter extends FluentControlImpl {
-
-    private static final Set<String> IGNORED_EXCEPTIONS = ImmutableSet.of(
-            "org.junit.AssumptionViolatedException",
-            "org.junit.internal.AssumptionViolatedException",
-            "org.testng.SkipException");
 
     /**
      * Creates a new fluent adapter.
@@ -139,25 +131,4 @@ public class FluentAdapter extends FluentControlImpl {
         return webDriver;
     }
 
-    /**
-     * Checks if the exception should be ignored and not reported as a test case fail
-     *
-     * @param e - the exception to check is it defined in ignored exceptions set
-     * @return boolean
-     */
-    public static boolean isIgnoredException(Throwable e) {
-        boolean isIgnored = false;
-        if (e != null) {
-            Class<?> clazz = e.getClass();
-            do {
-                if (IGNORED_EXCEPTIONS.contains(clazz.getName())) {
-                    isIgnored = true;
-                    break;
-                }
-                clazz = clazz.getSuperclass();
-            } while (clazz != Object.class);
-        }
-
-        return isIgnored;
-    }
 }

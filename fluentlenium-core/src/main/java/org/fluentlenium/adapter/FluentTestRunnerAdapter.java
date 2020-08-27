@@ -2,6 +2,7 @@ package org.fluentlenium.adapter;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage;
+import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
@@ -28,7 +29,7 @@ import org.slf4j.LoggerFactory;
  * Extends this class to provide FluentLenium support to your Test class.
  */
 @SuppressWarnings("PMD.GodClass")
-public class FluentTestRunnerAdapter extends FluentAdapter {
+public class FluentTestRunnerAdapter extends FluentAdapter implements TestRunnerAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FluentTestRunnerAdapter.class);
 
@@ -82,25 +83,12 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
      * @param clazz           class from which FluentConfiguration annotation will be loaded
      * @param sharedMutator   shared mutator
      */
-    public FluentTestRunnerAdapter(FluentControlContainer driverContainer, Class clazz, SharedMutator sharedMutator) {
+    public FluentTestRunnerAdapter(FluentControlContainer driverContainer, Class<?> clazz, SharedMutator sharedMutator) {
         super(driverContainer, clazz);
         this.sharedMutator = sharedMutator;
     }
 
-
-    /**
-     * Invoked when a test class has finished (whatever the success of failing status)
-     *
-     * @param testClass test class to terminate
-     */
-    public static void afterClass(Class<?> testClass) {
-        List<SharedWebDriver> sharedWebDrivers = SharedWebDriverContainer.INSTANCE.getTestClassDrivers(testClass);
-        sharedWebDrivers.forEach(SharedWebDriverContainer.INSTANCE::quit);
-    }
-
-    /**
-     * @return Class of currently running test
-     */
+    @Override
     public Class<?> getTestClass() {
         Class<?> currentTestClass = FluentTestRunnerAdapter.TEST_CLASS.get();
         if (currentTestClass == null) {
@@ -109,9 +97,8 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         return currentTestClass;
     }
 
-    /**
-     * @return method name (as String) of currently running test
-     */
+
+    @Override
     public String getTestMethodName() {
         String currentTestMethodName = FluentTestRunnerAdapter.TEST_METHOD_NAME.get();
         if (currentTestMethodName == null) {
@@ -120,15 +107,9 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         return currentTestMethodName;
     }
 
-    /**
-     * Allows to access Class level annotation of currently running test
-     *
-     * @param annotation interface you want to access
-     * @param <T>        the class annotation
-     * @return Annotation instance
-     * @throws AnnotationNotFoundException when annotation you want to access couldn't be find
-     */
-    protected <T extends Annotation> T getClassAnnotation(Class<T> annotation) {
+
+    @Override
+    public <T extends Annotation> T getClassAnnotation(Class<T> annotation) {
         T definedAnnotation = getTestClass().getAnnotation(annotation);
 
         if (definedAnnotation == null) {
@@ -138,16 +119,8 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         return definedAnnotation;
     }
 
-    /**
-     * Allows to access method level annotation of currently running test
-     *
-     * @param annotation interface you want to access
-     * @param <T>        the method annotation
-     * @return Annotation instance
-     * @throws AnnotationNotFoundException of annotation you want to access couldn't be found
-     * @throws MethodNotFoundException     if test method couldn't be found - if it occurs that's most likely FL bug
-     */
-    protected <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
+    @Override
+    public <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
         T definedAnnotation;
         try {
             definedAnnotation = getTestClass().getDeclaredMethod(getTestMethodName()).getAnnotation(annotation);
@@ -389,20 +362,28 @@ public class FluentTestRunnerAdapter extends FluentAdapter {
         if (isFluentControlAvailable() && !isIgnoredException(e)) {
             try {
                 if (getScreenshotMode() == TriggerMode.AUTOMATIC_ON_FAIL && canTakeScreenShot()) {
-                    this.takeScreenshot(testClass.getSimpleName() + "_" + testName + ".png");
+                    takeScreenshot(testClass.getSimpleName() + "_" + testName + ".png");
                 }
-            } catch (Exception exception) { // NOPMD EmptyCatchBlock
-                // Can't write screenshot, for some reason.
+            } catch (Exception ignored) {
             }
 
             try {
                 if (getHtmlDumpMode() == TriggerMode.AUTOMATIC_ON_FAIL && getDriver() != null) {
                     takeHtmlDump(testClass.getSimpleName() + "_" + testName + ".html");
                 }
-            } catch (Exception exception) { // NOPMD EmptyCatchBlock
-                // Can't write htmldump, for some reason.
+            } catch (Exception ignored) {
             }
 
         }
+    }
+
+    /**
+     * Invoked when a test class has finished (whatever the success of failing status)
+     *
+     * @param testClass test class to terminate
+     */
+    public static void classDriverCleanup(Class<?> testClass) {
+        List<SharedWebDriver> sharedWebDrivers = SharedWebDriverContainer.INSTANCE.getTestClassDrivers(testClass);
+        sharedWebDrivers.forEach(SharedWebDriverContainer.INSTANCE::quit);
     }
 }

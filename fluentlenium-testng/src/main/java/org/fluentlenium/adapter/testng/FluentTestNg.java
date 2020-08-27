@@ -90,6 +90,6 @@ public class FluentTestNg extends FluentTestRunnerAdapter {
      */
     @AfterClass(alwaysRun = true)
     public void afterClass() {
-        FluentTestRunnerAdapter.afterClass(getClass());
+        FluentTestRunnerAdapter.classDriverCleanup(getClass());
     }
 }

@@ -6,7 +6,7 @@ import org.junit.Rule
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 
-import static org.fluentlenium.adapter.FluentTestRunnerAdapter.afterClass
+import static org.fluentlenium.adapter.FluentTestRunnerAdapter.classDriverCleanup
 
 class FluentSpecification extends SpockAdapter {
 
@@ -33,7 +33,7 @@ class FluentSpecification extends SpockAdapter {
     }
 
     def cleanupSpec() {
-        afterClass(getClass())
+        classDriverCleanup(getClass())
     }
 
 }

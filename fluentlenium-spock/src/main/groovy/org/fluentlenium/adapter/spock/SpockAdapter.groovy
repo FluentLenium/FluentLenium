@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils
 import org.fluentlenium.adapter.DefaultSharedMutator
 import org.fluentlenium.adapter.FluentControlContainer
 import org.fluentlenium.adapter.SharedMutator
+import org.fluentlenium.adapter.TestRunnerAdapter
 import org.fluentlenium.adapter.exception.AnnotationNotFoundException
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer
@@ -28,10 +29,10 @@ import java.util.concurrent.TimeUnit
 // Intellij is wrong here - do not delete
 import static org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle
 import static org.apache.commons.lang3.StringUtils.isEmpty
-import static org.fluentlenium.adapter.FluentAdapter.isIgnoredException
-import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage;
+import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage
+import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
 
-class SpockAdapter extends SpockControl {
+class SpockAdapter extends SpockControl implements TestRunnerAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SpockAdapter.class)
 
@@ -41,10 +42,8 @@ class SpockAdapter extends SpockControl {
     private static final ThreadLocal<String> TEST_METHOD_NAME = new ThreadLocal<>()
     private static final ThreadLocal<Class<?>> TEST_CLASS = new ThreadLocal<>()
 
-    /**
-     * @return Class of currently running test
-     */
-    protected static Class<?> getTestClass() {
+    @Override
+    Class<?> getTestClass() {
         Class<?> currentTestClass = TEST_CLASS.get()
         if (currentTestClass == null) {
             LOGGER.warn("Current test class is null. Are you in test context?")
@@ -52,10 +51,8 @@ class SpockAdapter extends SpockControl {
         return currentTestClass
     }
 
-    /**
-     * @return method name (as String) of currently running test
-     */
-    protected static String getTestMethodName() {
+    @Override
+    String getTestMethodName() {
         String currentTestMethodName = TEST_METHOD_NAME.get()
         if (currentTestMethodName == null) {
             LOGGER.warn("Current test method name is null. Are you in text context?")
@@ -63,15 +60,8 @@ class SpockAdapter extends SpockControl {
         return currentTestMethodName
     }
 
-    /**
-     * Allows to access Class level annotation of currently running test
-     *
-     * @param annotation interface you want to access
-     * @param <T >          the class annotation
-     * @return Annotation instance
-     * @throws org.fluentlenium.adapter.exception.AnnotationNotFoundException when annotation you want to access couldn't be find
-     */
-    def getClassAnnotation(Class<Annotation> annotation) {
+    @Override
+    <T extends Annotation> T getClassAnnotation(Class<T> annotation) {
         def anno = specificationContext.currentSpec.getAnnotation(annotation)
 
         if (anno == null) {
@@ -81,16 +71,8 @@ class SpockAdapter extends SpockControl {
         return anno
     }
 
-
-    /**
-     * Allows to access method level annotation of currently running test
-     *
-     * @param annotation interface you want to access
-     * @param <T >          the method annotation
-     * @return Annotation instance
-     * @throws AnnotationNotFoundException of annotation you want to access couldn't be found
-     */
-    def getMethodAnnotation(Class<Annotation> annotation) {
+    @Override
+    <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
         def anno = specificationContext.currentFeature.featureMethod.getAnnotation(annotation)
 
         if (anno == null) {
@@ -99,7 +81,6 @@ class SpockAdapter extends SpockControl {
 
         return anno
     }
-
 
     /**
      * Invoked when a test method is starting.

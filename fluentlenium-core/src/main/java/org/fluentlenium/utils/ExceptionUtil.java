@@ -1,6 +1,9 @@
 package org.fluentlenium.utils;
 
-public class ExceptionUtil {
+public final class ExceptionUtil {
+
+    private ExceptionUtil() {
+    }
 
     public static String getCauseMessage(Exception e) {
         String causeMessage = null;

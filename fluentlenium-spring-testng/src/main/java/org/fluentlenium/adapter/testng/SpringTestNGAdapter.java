@@ -5,6 +5,7 @@ import org.fluentlenium.adapter.DefaultSharedMutator;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
+import org.fluentlenium.adapter.TestRunnerAdapter;
 import org.fluentlenium.adapter.ThreadLocalFluentControlContainer;
 import org.fluentlenium.adapter.exception.AnnotationNotFoundException;
 import org.fluentlenium.adapter.exception.MethodNotFoundException;
@@ -30,8 +31,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.fluentlenium.adapter.FluentAdapter.isIgnoredException;
 import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage;
+import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
 
 /**
  * FluentLenium Test Runner Adapter.
@@ -39,7 +40,7 @@ import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage;
  * Extends this class to provide FluentLenium support to your Test class.
  */
 @SuppressWarnings("PMD.GodClass")
-class SpringTestNGAdapter extends SpringTestNGControl {
+class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SpringTestNGAdapter.class);
 
@@ -57,10 +58,8 @@ class SpringTestNGAdapter extends SpringTestNGControl {
         this.sharedMutator = new DefaultSharedMutator();
     }
 
-    /**
-     * @return Class of currently running test
-     */
-    protected Class<?> getTestClass() {
+    @Override
+    public Class<?> getTestClass() {
         Class<?> currentTestClass = SpringTestNGAdapter.TEST_CLASS.get();
         if (currentTestClass == null) {
             LOGGER.warn("Current test class is null. Are you in test context?");
@@ -68,10 +67,8 @@ class SpringTestNGAdapter extends SpringTestNGControl {
         return currentTestClass;
     }
 
-    /**
-     * @return method name (as String) of currently running test
-     */
-    protected String getTestMethodName() {
+    @Override
+    public String getTestMethodName() {
         String currentTestMethodName = SpringTestNGAdapter.TEST_METHOD_NAME.get();
         if (currentTestMethodName == null) {
             LOGGER.warn("Current test method name is null. Are you in text context?");
@@ -79,15 +76,8 @@ class SpringTestNGAdapter extends SpringTestNGControl {
         return currentTestMethodName;
     }
 
-    /**
-     * Allows to access Class level annotation of currently running test
-     *
-     * @param annotation interface you want to access
-     * @param <T>        the class annotation
-     * @return Annotation instance
-     * @throws AnnotationNotFoundException when annotation you want to access couldn't be find
-     */
-    protected <T extends Annotation> T getClassAnnotation(Class<T> annotation) {
+    @Override
+    public <T extends Annotation> T getClassAnnotation(Class<T> annotation) {
         T definedAnnotation = getTestClass().getAnnotation(annotation);
 
         if (definedAnnotation == null) {
@@ -97,16 +87,8 @@ class SpringTestNGAdapter extends SpringTestNGControl {
         return definedAnnotation;
     }
 
-    /**
-     * Allows to access method level annotation of currently running test
-     *
-     * @param annotation interface you want to access
-     * @param <T>        the method annotation
-     * @return Annotation instance
-     * @throws AnnotationNotFoundException of annotation you want to access couldn't be found
-     * @throws MethodNotFoundException     if test method couldn't be found - if it occurs that's most likely FL bug
-     */
-    protected <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
+    @Override
+    public <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
         T definedAnnotation;
         try {
             definedAnnotation = getTestClass().getDeclaredMethod(getTestMethodName()).getAnnotation(annotation);
