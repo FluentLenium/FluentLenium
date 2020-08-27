@@ -22,14 +22,14 @@ import java.lang.annotation.Annotation
 import java.util.concurrent.Callable
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import java.util.concurrent.Future
-import java.util.concurrent.TimeUnit
 
 // Intellij is wrong here - do not delete
 import static org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle
 import static org.apache.commons.lang3.StringUtils.isEmpty
 import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage
+import static org.fluentlenium.utils.ExecutorServiceUtil.getExecutor
+import static org.fluentlenium.utils.ExecutorServiceUtil.shutDownExecutor
 import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
 
 class SpockAdapter extends SpockControl implements TestRunnerAdapter {
@@ -142,7 +142,7 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter {
         for (int retryCount = 0; retryCount < getBrowserTimeoutRetries(); retryCount++) {
 
             def futureWebDriver = createDriver(parameters, executorService)
-            shutDownExecutor(executorService)
+            shutDownExecutor(executorService, getBrowserTimeout())
 
             try {
                 sharedWebDriver = futureWebDriver.get()
@@ -160,28 +160,10 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter {
         return sharedWebDriver
     }
 
-    private void shutDownExecutor(ExecutorService executorService) throws InterruptedException {
-        executorService.shutdown()
-        if (didNotExitGracefully(executorService)) {
-            executorService.shutdownNow()
-        }
-    }
-
-    private boolean didNotExitGracefully(ExecutorService executorService) throws InterruptedException {
-        return !executorService.awaitTermination(getBrowserTimeout(), TimeUnit.MILLISECONDS)
-    }
-
     private Future<SharedWebDriver> createDriver(SharedMutator.EffectiveParameters<?> parameters, ExecutorService executorService) {
         return executorService.submit({ ->
             SharedWebDriverContainer.INSTANCE.getOrCreateDriver(this::newWebDriver, parameters)
         } as Callable)
-    }
-
-    private static ExecutorService getExecutor(ExecutorService webDriverExecutor) {
-        if (webDriverExecutor == null) {
-            return Executors.newSingleThreadExecutor()
-        }
-        return webDriverExecutor
     }
 
     private static void clearThreadLocals() {

@@ -26,12 +26,12 @@ import java.lang.annotation.Annotation;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage;
+import static org.fluentlenium.utils.ExecutorServiceUtil.getExecutor;
+import static org.fluentlenium.utils.ExecutorServiceUtil.shutDownExecutor;
 import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
 
 /**
@@ -164,7 +164,7 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
         for (int retryCount = 0; retryCount < getBrowserTimeoutRetries(); retryCount++) {
 
             Future<SharedWebDriver> futureWebDriver = createDriver(parameters, executorService);
-            shutDownExecutor(executorService);
+            shutDownExecutor(executorService, getBrowserTimeout());
 
             try {
                 sharedWebDriver = futureWebDriver.get();
@@ -182,27 +182,9 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
         return sharedWebDriver;
     }
 
-    private void shutDownExecutor(ExecutorService executorService) throws InterruptedException {
-        executorService.shutdown();
-        if (didNotExitGracefully(executorService)) {
-            executorService.shutdownNow();
-        }
-    }
-
-    private boolean didNotExitGracefully(ExecutorService executorService) throws InterruptedException {
-        return !executorService.awaitTermination(getBrowserTimeout(), TimeUnit.MILLISECONDS);
-    }
-
     private Future<SharedWebDriver> createDriver(EffectiveParameters<?> parameters, ExecutorService executorService) {
         return executorService.submit(
                 () -> SharedWebDriverContainer.INSTANCE.getOrCreateDriver(this::newWebDriver, parameters));
-    }
-
-    private ExecutorService getExecutor(ExecutorService webDriverExecutor) {
-        if (webDriverExecutor == null) {
-            return Executors.newSingleThreadExecutor();
-        }
-        return webDriverExecutor;
     }
 
     private void clearThreadLocals() {
