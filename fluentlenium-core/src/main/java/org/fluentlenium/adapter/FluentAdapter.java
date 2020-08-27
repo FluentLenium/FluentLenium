@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter;
 
+import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import org.fluentlenium.configuration.ConfigurationProperties;
 import org.fluentlenium.configuration.WebDrivers;
 import org.fluentlenium.core.FluentControlImpl;
@@ -7,7 +8,6 @@ import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.inject.ContainerContext;
 import org.fluentlenium.core.inject.ContainerFluentControl;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 /**
  * Generic adapter to {@link FluentDriver}.
@@ -124,11 +124,8 @@ public class FluentAdapter extends FluentControlImpl {
      * @see #getDriver()
      */
     public WebDriver newWebDriver() {
-        WebDriver webDriver = WebDrivers.INSTANCE.newWebDriver(getWebDriver(), getCapabilities(), this);
-        if (Boolean.TRUE.equals(getEventsEnabled())) {
-            webDriver = new EventFiringWebDriver(webDriver);
-        }
-        return webDriver;
+        return SharedWebDriverContainer.INSTANCE.newWebDriver(
+                getWebDriver(), getCapabilities(), getConfiguration());
     }
 
 }

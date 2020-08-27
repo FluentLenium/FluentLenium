@@ -3,6 +3,7 @@ package org.fluentlenium.adapter.sharedwebdriver;
 import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.fluentlenium.configuration.Configuration;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
@@ -63,6 +64,10 @@ public enum SharedWebDriverContainer {
                                               Configuration configuration)
             throws ExecutionException, InterruptedException {
         return impl.getSharedWebDriver(parameters, webDriverExecutor, webDriver, configuration);
+    }
+
+    public WebDriver newWebDriver(String name, Capabilities capabilities, Configuration configuration) {
+        return impl.newWebDriver(name, capabilities, configuration);
     }
 
 }

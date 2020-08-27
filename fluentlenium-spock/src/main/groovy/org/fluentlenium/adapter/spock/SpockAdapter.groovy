@@ -8,28 +8,22 @@ import org.fluentlenium.adapter.TestRunnerAdapter
 import org.fluentlenium.adapter.exception.AnnotationNotFoundException
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer
-import org.fluentlenium.configuration.WebDrivers
 import org.fluentlenium.core.FluentDriver
 import org.fluentlenium.core.inject.ContainerContext
 import org.fluentlenium.core.inject.ContainerFluentControl
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebDriverException
-import org.openqa.selenium.support.events.EventFiringWebDriver
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 import java.lang.annotation.Annotation
-import java.util.concurrent.Callable
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.ExecutorService
-import java.util.concurrent.Future
 
 // Intellij is wrong here - do not delete
 import static org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle
 import static org.apache.commons.lang3.StringUtils.isEmpty
 import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage
-import static org.fluentlenium.utils.ExecutorServiceUtil.getExecutor
-import static org.fluentlenium.utils.ExecutorServiceUtil.shutDownExecutor
 import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
 
 class SpockAdapter extends SpockControl implements TestRunnerAdapter {
@@ -242,11 +236,8 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter {
      * @see #getDriver()
      */
     WebDriver newWebDriver() {
-        WebDriver webDriver = WebDrivers.INSTANCE.newWebDriver(getWebDriver(), getCapabilities(), this)
-        if (Boolean.TRUE == getEventsEnabled()) {
-            webDriver = new EventFiringWebDriver(webDriver)
-        }
-        return webDriver
+        return SharedWebDriverContainer.INSTANCE.newWebDriver(
+                getWebDriver(), getCapabilities(), getConfiguration())
     }
 
     ContainerFluentControl getFluentControl() {

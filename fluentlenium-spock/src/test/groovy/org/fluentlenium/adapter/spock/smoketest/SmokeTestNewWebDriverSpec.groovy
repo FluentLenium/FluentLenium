@@ -10,12 +10,12 @@ class SmokeTestNewWebDriverSpec extends FluentSpecification {
 
     @Override
     WebDriver newWebDriver() {
-        return new HtmlUnitDriver();
+        return new HtmlUnitDriver()
     }
 
     def "smokeTest" () {
         expect:
-        assertThat(getDriver()).isInstanceOf(HtmlUnitDriver.class);
+        assertThat(getDriver()).isInstanceOf(HtmlUnitDriver.class)
     }
 
 }

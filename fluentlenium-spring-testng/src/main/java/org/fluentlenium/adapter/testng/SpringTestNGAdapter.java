@@ -263,11 +263,8 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
      * @see #getDriver()
      */
     public WebDriver newWebDriver() {
-        WebDriver webDriver = WebDrivers.INSTANCE.newWebDriver(getWebDriver(), getCapabilities(), this);
-        if (Boolean.TRUE.equals(getEventsEnabled())) {
-            webDriver = new EventFiringWebDriver(webDriver);
-        }
-        return webDriver;
+        return SharedWebDriverContainer.INSTANCE.newWebDriver(
+                getWebDriver(), getCapabilities(), getConfiguration());
     }
 
     public ContainerFluentControl getFluentControl() {

@@ -15,9 +15,9 @@ class SmokeTestGetWebDriverSpec extends FluentSpecification {
 
     def "smokeTest" () {
         expect:
-        assertThat(getDriver()).isInstanceOf(EventFiringWebDriver.class);
-        EventFiringWebDriver driver = (EventFiringWebDriver) getDriver();
-        assertThat(driver.getWrappedDriver()).isInstanceOf(HtmlUnitDriver.class);
+        assertThat(getDriver()).isInstanceOf(EventFiringWebDriver.class)
+        EventFiringWebDriver driver = (EventFiringWebDriver) getDriver()
+        assertThat(driver.getWrappedDriver()).isInstanceOf(HtmlUnitDriver.class)
     }
 
 }

@@ -4,7 +4,10 @@ import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
+import org.fluentlenium.configuration.WebDrivers;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -219,5 +222,13 @@ class SharedWebdriverSingletonImpl {
                                                  Supplier<WebDriver> newWebDriver) {
         return executorService.submit(
                 () -> SharedWebDriverContainer.INSTANCE.getOrCreateDriver(newWebDriver, parameters));
+    }
+
+    public WebDriver newWebDriver(String name, Capabilities capabilities, Configuration configuration) {
+        WebDriver webDriver = WebDrivers.INSTANCE.newWebDriver(name, capabilities, configuration);
+        if (Boolean.TRUE.equals(configuration.getEventsEnabled())) {
+            webDriver = new EventFiringWebDriver(webDriver);
+        }
+        return webDriver;
     }
 }
