@@ -23,7 +23,8 @@ public final class ExecutorServiceUtil {
         return webDriverExecutor;
     }
 
-    private static boolean didNotExitGracefully(ExecutorService executorService, Long browserTimeout) throws InterruptedException {
+    private static boolean didNotExitGracefully(ExecutorService executorService, Long browserTimeout)
+            throws InterruptedException {
         return !executorService.awaitTermination(browserTimeout, TimeUnit.MILLISECONDS);
     }
 }

@@ -140,7 +140,7 @@ public class ControlUnitTest {
         control.setHtmlDumpPath("/path");
         control.getHtmlDumpPath();
         verify(configuration, times(1)).setHtmlDumpPath("/path");
-        verify(configuration, times(1)).getHtmlDumpPath();;
+        verify(configuration, times(1)).getHtmlDumpPath();
     }
 
     @Test

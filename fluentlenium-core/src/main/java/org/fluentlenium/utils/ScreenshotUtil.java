@@ -6,13 +6,13 @@ import java.util.Set;
 
 public final class ScreenshotUtil {
 
-    private ScreenshotUtil(){
-    }
-
     private static final Set<String> IGNORED_EXCEPTIONS = ImmutableSet.of(
             "org.junit.AssumptionViolatedException",
             "org.junit.internal.AssumptionViolatedException",
             "org.testng.SkipException");
+
+    private ScreenshotUtil() {
+    }
 
     /**
      * Checks if the exception should be ignored and not reported as a test case fail

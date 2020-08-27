@@ -23,8 +23,12 @@ import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.utils.chromium.ChromiumApi;
-import org.openqa.selenium.*;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 import java.util.List;
@@ -35,12 +39,12 @@ class SpringTestNGControl extends AbstractTestNGSpringContextTests implements Fl
     private final FluentControlContainer controlContainer;
     private final Configuration configuration;
 
-    public SpringTestNGControl(FluentControlContainer controlContainer) {
+    SpringTestNGControl(FluentControlContainer controlContainer) {
         this.controlContainer = controlContainer;
         this.configuration = ConfigurationFactoryProvider.newConfiguration(getClass());
     }
 
-    public SpringTestNGControl(FluentControlContainer controlContainer, Configuration configuration) {
+    SpringTestNGControl(FluentControlContainer controlContainer, Configuration configuration) {
         this.controlContainer = controlContainer;
         this.configuration = configuration;
     }

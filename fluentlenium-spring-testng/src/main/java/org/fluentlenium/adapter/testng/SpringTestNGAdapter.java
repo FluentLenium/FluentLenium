@@ -26,12 +26,9 @@ import java.lang.annotation.Annotation;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage;
-import static org.fluentlenium.utils.ExecutorServiceUtil.getExecutor;
-import static org.fluentlenium.utils.ExecutorServiceUtil.shutDownExecutor;
 import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
 
 /**
@@ -53,7 +50,7 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
     /**
      * Creates a new test runner adapter.
      */
-    public SpringTestNGAdapter() {
+    SpringTestNGAdapter() {
         super(new ThreadLocalFluentControlContainer());
         this.sharedMutator = new DefaultSharedMutator();
     }
