@@ -2,8 +2,6 @@ package org.fluentlenium.adapter;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage;
-import static org.fluentlenium.utils.ExecutorServiceUtil.getExecutor;
-import static org.fluentlenium.utils.ExecutorServiceUtil.shutDownExecutor;
 import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
 
 import java.lang.annotation.Annotation;
@@ -11,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
 
 import org.apache.commons.lang3.StringUtils;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
@@ -173,7 +170,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter implements TestRunner
         SharedWebDriver sharedWebDriver;
 
         try {
-            sharedWebDriver = getSharedWebDriver(PARAMETERS_THREAD_LOCAL.get());
+            sharedWebDriver = getSharedWebDriver(PARAMETERS_THREAD_LOCAL.get(), null);
         } catch (ExecutionException | InterruptedException e) {
             this.failed(testClass, testName);
 
@@ -182,6 +179,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter implements TestRunner
                     + (isEmpty(causeMessage) ? "" : "\nCaused by: [ " + causeMessage + "]"), e);
         }
 
+        setTestClassAndMethodValues();
         initFluent(sharedWebDriver.getDriver());
     }
 
@@ -197,50 +195,10 @@ public class FluentTestRunnerAdapter extends FluentAdapter implements TestRunner
         TEST_METHOD_NAME.set(className);
     }
 
-    private SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters)
+    public SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters, ExecutorService executorService)
             throws ExecutionException, InterruptedException {
-        return getSharedWebDriver(parameters, null);
-    }
-
-    /**
-     * Returns SharedDriver instance
-     *
-     * @param parameters        driver parameters
-     * @param webDriverExecutor executor service
-     * @return SharedDriver
-     * @throws ExecutionException   execution exception
-     * @throws InterruptedException interrupted exception
-     */
-    protected SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters,
-                                                 ExecutorService webDriverExecutor)
-            throws ExecutionException, InterruptedException {
-        SharedWebDriver sharedWebDriver = null;
-        ExecutorService executorService = getExecutor(webDriverExecutor);
-
-        for (int retryCount = 0; retryCount < getBrowserTimeoutRetries(); retryCount++) {
-
-            Future<SharedWebDriver> futureWebDriver = createDriver(parameters, executorService);
-            shutDownExecutor(executorService, getBrowserTimeout());
-
-            try {
-                sharedWebDriver = futureWebDriver.get();
-            } catch (InterruptedException | ExecutionException e) {
-                executorService.shutdownNow();
-                throw e;
-            }
-
-            if (sharedWebDriver != null) {
-                break;
-            }
-        }
-
-        setTestClassAndMethodValues();
-        return sharedWebDriver;
-    }
-
-    private Future<SharedWebDriver> createDriver(EffectiveParameters<?> parameters, ExecutorService executorService) {
-        return executorService.submit(
-                () -> SharedWebDriverContainer.INSTANCE.getOrCreateDriver(this::newWebDriver, parameters));
+        return SharedWebDriverContainer.INSTANCE.getSharedWebDriver(
+                parameters, executorService, this::newWebDriver, getConfiguration());
     }
 
     private void clearThreadLocals() {

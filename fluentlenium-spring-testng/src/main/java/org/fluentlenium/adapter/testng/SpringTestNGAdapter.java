@@ -116,7 +116,7 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
         SharedWebDriver sharedWebDriver;
 
         try {
-            sharedWebDriver = getSharedWebDriver(PARAMETERS_THREAD_LOCAL.get());
+            sharedWebDriver = getSharedWebDriver(PARAMETERS_THREAD_LOCAL.get(), null);
         } catch (ExecutionException | InterruptedException e) {
             this.failed(null, testClass, testName);
 
@@ -126,6 +126,7 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
                     + (isEmpty(causeMessage) ? "" : "\nCaused by: [ " + causeMessage + "]"), e);
         }
 
+        setTestClassAndMethodValues();
         initFluent(sharedWebDriver.getDriver());
     }
 
@@ -141,50 +142,10 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
         TEST_METHOD_NAME.set(className);
     }
 
-    private SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters)
+    private SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters, ExecutorService executorService)
             throws ExecutionException, InterruptedException {
-        return getSharedWebDriver(parameters, null);
-    }
-
-    /**
-     * Returns SharedDriver instance
-     *
-     * @param parameters        driver parameters
-     * @param webDriverExecutor executor service
-     * @return SharedDriver
-     * @throws ExecutionException   execution exception
-     * @throws InterruptedException interrupted exception
-     */
-    protected SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters,
-                                                 ExecutorService webDriverExecutor)
-            throws ExecutionException, InterruptedException {
-        SharedWebDriver sharedWebDriver = null;
-        ExecutorService executorService = getExecutor(webDriverExecutor);
-
-        for (int retryCount = 0; retryCount < getBrowserTimeoutRetries(); retryCount++) {
-
-            Future<SharedWebDriver> futureWebDriver = createDriver(parameters, executorService);
-            shutDownExecutor(executorService, getBrowserTimeout());
-
-            try {
-                sharedWebDriver = futureWebDriver.get();
-            } catch (InterruptedException | ExecutionException e) {
-                executorService.shutdownNow();
-                throw e;
-            }
-
-            if (sharedWebDriver != null) {
-                break;
-            }
-        }
-
-        setTestClassAndMethodValues();
-        return sharedWebDriver;
-    }
-
-    private Future<SharedWebDriver> createDriver(EffectiveParameters<?> parameters, ExecutorService executorService) {
-        return executorService.submit(
-                () -> SharedWebDriverContainer.INSTANCE.getOrCreateDriver(this::newWebDriver, parameters));
+        return SharedWebDriverContainer.INSTANCE.getSharedWebDriver(
+                parameters, executorService, this::newWebDriver, getConfiguration());
     }
 
     private void clearThreadLocals() {

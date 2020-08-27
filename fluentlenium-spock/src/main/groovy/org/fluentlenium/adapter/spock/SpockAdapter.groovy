@@ -94,7 +94,7 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter {
         SharedWebDriver sharedWebDriver
 
         try {
-            sharedWebDriver = getSharedWebDriver(PARAMETERS_THREAD_LOCAL.get())
+            sharedWebDriver = getSharedWebDriver(PARAMETERS_THREAD_LOCAL.get(), null)
         } catch (ExecutionException | InterruptedException e) {
             this.failed(null, testClass, testName)
 
@@ -104,6 +104,7 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter {
                     + (isEmpty(causeMessage) ? "" : "\nCaused by: [ " + causeMessage + "]"), e)
         }
 
+        setTestClassAndMethodValues()
         initFluent(sharedWebDriver.getDriver())
     }
 
@@ -120,50 +121,10 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter {
         TEST_METHOD_NAME.set(className)
     }
 
-    SharedWebDriver getSharedWebDriver(SharedMutator.EffectiveParameters<?> parameters)
+    SharedWebDriver getSharedWebDriver(SharedMutator.EffectiveParameters<?> parameters, ExecutorService executorService)
             throws ExecutionException, InterruptedException {
-        return getSharedWebDriver(parameters, null)
-    }
-
-    /**
-     * Returns SharedDriver instance
-     *
-     * @param parameters driver parameters
-     * @param webDriverExecutor executor service
-     * @return SharedDriver* @throws ExecutionException   execution exception
-     * @throws InterruptedException interrupted exception
-     */
-    protected SharedWebDriver getSharedWebDriver(SharedMutator.EffectiveParameters<?> parameters,
-                                                 ExecutorService webDriverExecutor)
-            throws ExecutionException, InterruptedException {
-        SharedWebDriver sharedWebDriver = null
-        ExecutorService executorService = getExecutor(webDriverExecutor)
-
-        for (int retryCount = 0; retryCount < getBrowserTimeoutRetries(); retryCount++) {
-
-            def futureWebDriver = createDriver(parameters, executorService)
-            shutDownExecutor(executorService, getBrowserTimeout())
-
-            try {
-                sharedWebDriver = futureWebDriver.get()
-            } catch (InterruptedException | ExecutionException e) {
-                executorService.shutdownNow()
-                throw e
-            }
-
-            if (sharedWebDriver != null) {
-                break
-            }
-        }
-
-        setTestClassAndMethodValues()
-        return sharedWebDriver
-    }
-
-    private Future<SharedWebDriver> createDriver(SharedMutator.EffectiveParameters<?> parameters, ExecutorService executorService) {
-        return executorService.submit({ ->
-            SharedWebDriverContainer.INSTANCE.getOrCreateDriver(this::newWebDriver, parameters)
-        } as Callable)
+        return SharedWebDriverContainer.INSTANCE.getSharedWebDriver(
+                parameters, executorService, this::newWebDriver, getConfiguration());
     }
 
     private static void clearThreadLocals() {
