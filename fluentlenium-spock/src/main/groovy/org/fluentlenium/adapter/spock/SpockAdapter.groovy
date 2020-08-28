@@ -3,13 +3,14 @@ package org.fluentlenium.adapter.spock
 import org.apache.commons.lang3.StringUtils
 import org.fluentlenium.adapter.DefaultSharedMutator
 import org.fluentlenium.adapter.FluentControlContainer
+import org.fluentlenium.adapter.IFluentAdapter
 import org.fluentlenium.adapter.SharedMutator
 import org.fluentlenium.adapter.TestRunnerAdapter
 import org.fluentlenium.adapter.exception.AnnotationNotFoundException
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer
+import org.fluentlenium.configuration.Configuration
 import org.fluentlenium.core.FluentDriver
-import org.fluentlenium.core.inject.ContainerContext
 import org.fluentlenium.core.inject.ContainerFluentControl
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebDriverException
@@ -26,7 +27,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty
 import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage
 import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
 
-class SpockAdapter extends SpockControl implements TestRunnerAdapter {
+class SpockAdapter extends SpockControl implements TestRunnerAdapter, IFluentAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SpockAdapter.class)
 
@@ -181,65 +182,17 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter {
         return getFluentControl() == null ? null : getFluentControl().getDriver()
     }
 
-    /**
-     * Load a {@link WebDriver} into this adapter.
-     * <p>
-     * This method should not be called by end user.
-     *
-     * @param webDriver webDriver to use.
-     * @throws IllegalStateException when trying to register a different webDriver that the current one.
-     */
-    void initFluent(WebDriver webDriver) {
-        if (webDriver == null) {
-            releaseFluent()
-            return
-        }
-
-        if (getFluentControl() != null) {
-            if (getFluentControl().getDriver() == webDriver) {
-                return
-            }
-            if (getFluentControl().getDriver() != null) {
-                throw new IllegalStateException("Trying to init a WebDriver, but another one is still running")
-            }
-        }
-
-        ContainerFluentControl adapterFluentControl = new ContainerFluentControl(new FluentDriver(webDriver, this, this))
-        setFluentControl(adapterFluentControl)
-        ContainerContext context = adapterFluentControl.inject(this)
-        adapterFluentControl.setContext(context)
-    }
-
-    /**
-     * Release the current {@link WebDriver} from this adapter.
-     * <p>
-     * This method should not be called by end user.
-     */
+    @Override
     void releaseFluent() {
-        if (getFluentControl() != null) {
-            ((FluentDriver) getFluentControl().getAdapterControl()).releaseFluent()
+        ContainerFluentControl containerFluentControl = getFluentControl();
+
+        if (containerFluentControl != null) {
+            ((FluentDriver) containerFluentControl.getAdapterControl()).releaseFluent()
             setFluentControl(null)
         }
     }
 
-    /**
-     * Creates a new {@link WebDriver} instance.
-     * <p>
-     * This method should not be called by end user, but may be overriden if required.
-     * <p>
-     * Before overriding this method, you should consider using {@link org.fluentlenium.configuration.WebDrivers} registry and configuration
-     * {@link org.fluentlenium.configuration.ConfigurationProperties#getWebDriver()}.
-     * <p>
-     * To retrieve the current managed {@link WebDriver}, call {@link #getDriver()} instead.
-     *
-     * @return A new WebDriver instance.
-     * @see #getDriver()
-     */
-    WebDriver newWebDriver() {
-        return SharedWebDriverContainer.INSTANCE.newWebDriver(
-                getWebDriver(), getCapabilities(), getConfiguration())
-    }
-
+    @Override
     ContainerFluentControl getFluentControl() {
         FluentControlContainer fluentControlContainer = getControlContainer()
 
@@ -249,14 +202,5 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter {
             return (ContainerFluentControl) fluentControlContainer.getFluentControl()
         }
     }
-
-    private boolean isFluentControlAvailable() {
-        return getControlContainer().getFluentControl() != null
-    }
-
-    private void setFluentControl(ContainerFluentControl fluentControl) {
-        getControlContainer().setFluentControl(fluentControl)
-    }
-
 
 }

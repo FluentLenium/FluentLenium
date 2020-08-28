@@ -3,6 +3,7 @@ package org.fluentlenium.adapter.testng;
 import org.apache.commons.lang3.StringUtils;
 import org.fluentlenium.adapter.DefaultSharedMutator;
 import org.fluentlenium.adapter.FluentControlContainer;
+import org.fluentlenium.adapter.IFluentAdapter;
 import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.fluentlenium.adapter.TestRunnerAdapter;
@@ -11,14 +12,10 @@ import org.fluentlenium.adapter.exception.AnnotationNotFoundException;
 import org.fluentlenium.adapter.exception.MethodNotFoundException;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
-import org.fluentlenium.configuration.ConfigurationProperties;
-import org.fluentlenium.configuration.WebDrivers;
 import org.fluentlenium.core.FluentDriver;
-import org.fluentlenium.core.inject.ContainerContext;
 import org.fluentlenium.core.inject.ContainerFluentControl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +34,7 @@ import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
  * Extends this class to provide FluentLenium support to your Test class.
  */
 @SuppressWarnings("PMD.GodClass")
-class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapter {
+class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapter, IFluentAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SpringTestNGAdapter.class);
 
@@ -208,40 +205,7 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
         return getFluentControl() == null ? null : getFluentControl().getDriver();
     }
 
-    /**
-     * Load a {@link WebDriver} into this adapter.
-     * <p>
-     * This method should not be called by end user.
-     *
-     * @param webDriver webDriver to use.
-     * @throws IllegalStateException when trying to register a different webDriver that the current one.
-     */
-    public void initFluent(WebDriver webDriver) {
-        if (webDriver == null) {
-            releaseFluent();
-            return;
-        }
-
-        if (getFluentControl() != null) {
-            if (getFluentControl().getDriver() == webDriver) {
-                return;
-            }
-            if (getFluentControl().getDriver() != null) {
-                throw new IllegalStateException("Trying to init a WebDriver, but another one is still running");
-            }
-        }
-
-        ContainerFluentControl adapterFluentControl = new ContainerFluentControl(new FluentDriver(webDriver, this, this));
-        setFluentControl(adapterFluentControl);
-        ContainerContext context = adapterFluentControl.inject(this);
-        adapterFluentControl.setContext(context);
-    }
-
-    /**
-     * Release the current {@link WebDriver} from this adapter.
-     * <p>
-     * This method should not be called by end user.
-     */
+    @Override
     public void releaseFluent() {
         if (getFluentControl() != null) {
             ((FluentDriver) getFluentControl().getAdapterControl()).releaseFluent();
@@ -249,24 +213,7 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
         }
     }
 
-    /**
-     * Creates a new {@link WebDriver} instance.
-     * <p>
-     * This method should not be called by end user, but may be overriden if required.
-     * <p>
-     * Before overriding this method, you should consider using {@link WebDrivers} registry and configuration
-     * {@link ConfigurationProperties#getWebDriver()}.
-     * <p>
-     * To retrieve the current managed {@link WebDriver}, call {@link #getDriver()} instead.
-     *
-     * @return A new WebDriver instance.
-     * @see #getDriver()
-     */
-    public WebDriver newWebDriver() {
-        return SharedWebDriverContainer.INSTANCE.newWebDriver(
-                getWebDriver(), getCapabilities(), getConfiguration());
-    }
-
+    @Override
     public ContainerFluentControl getFluentControl() {
         FluentControlContainer fluentControlContainer = getControlContainer();
 
@@ -277,11 +224,4 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
         }
     }
 
-    private boolean isFluentControlAvailable() {
-        return getControlContainer().getFluentControl() != null;
-    }
-
-    private void setFluentControl(ContainerFluentControl fluentControl) {
-        getControlContainer().setFluentControl(fluentControl);
-    }
 }

@@ -83,14 +83,17 @@ public class FluentControlImpl implements FluentControl {
         controlContainer.setFluentControl(fluentControl);
     }
 
+    @Override
     public FluentControlContainer getControlContainer() {
         return controlContainer;
     }
 
+    @Override
     public FluentControl getFluentControl() {
         return controlContainer.getFluentControl();
     }
 
+    @Override
     public Configuration getConfiguration() {
         return configuration;
     }

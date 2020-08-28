@@ -49,28 +49,20 @@ class SpringTestNGControl extends AbstractTestNGSpringContextTests implements Fl
         this.configuration = configuration;
     }
 
-    /**
-     * Get the control interface container
-     *
-     * @return control interface container
-     */
+    @Override
     public FluentControlContainer getControlContainer() {
         return controlContainer;
     }
 
+    @Override
     public FluentControl getFluentControl() {
         return controlContainer.getFluentControl();
     }
 
-    /**
-     * Get the test adapter configuration.
-     *
-     * @return configuration
-     */
+    @Override
     public Configuration getConfiguration() {
         return configuration;
     }
-
 
     @Override
     public WebDriver getDriver() {
