@@ -4,7 +4,7 @@ import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import org.fluentlenium.configuration.Configuration;
-import org.fluentlenium.configuration.ConfigurationProperties;
+import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.fluentlenium.core.FluentControl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -24,7 +24,9 @@ public final class TestRunnerCommon {
     private TestRunnerCommon() {
     }
 
-    public static void quitMethodAndThreadDrivers(ConfigurationProperties.DriverLifecycle driverLifecycle, SharedWebDriver sharedWebDriver) {
+    public static void quitMethodAndThreadDrivers(
+            DriverLifecycle driverLifecycle, SharedWebDriver sharedWebDriver) {
+
         if (driverLifecycle == METHOD || driverLifecycle == THREAD) {
             Optional.ofNullable(sharedWebDriver).ifPresent(SharedWebDriverContainer.INSTANCE::quit);
         }
@@ -47,8 +49,8 @@ public final class TestRunnerCommon {
             failed.accept(null, testClass, testName);
 
             String causeMessage = getCauseMessage(e);
-            throw new WebDriverException(String.format
-                    ("Browser failed to start, test [ %s ] execution interrupted.%s",
+            throw new WebDriverException(String.format(
+                    "Browser failed to start, test [ %s ] execution interrupted.%s",
                             testName, printCauseMessage(causeMessage)), e);
         }
         return sharedWebDriver;

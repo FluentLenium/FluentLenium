@@ -279,50 +279,62 @@ class SpringTestNGControl extends AbstractTestNGSpringContextTests implements Fl
         return getConfiguration().getScreenshotMode();
     }
 
+    @Override
     public void takeScreenshot(String fileName) {
         getFluentControl().takeScreenshot(fileName);
     }
 
+    @Override
     public final ChromiumApi getChromiumApi() {
         return getFluentControl().getChromiumApi();
     }
 
+    @Override
     public FluentList<FluentWebElement> asFluentList(WebElement... elements) {
         return getFluentControl().asFluentList(elements);
     }
 
+    @Override
     public <P extends FluentPage> P goTo(P page) {
         return getFluentControl().goTo(page);
     }
 
+    @Override
     public FluentJavascript executeScript(String script, Object... args) {
         return getFluentControl().executeScript(script, args);
     }
 
+    @Override
     public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, Iterable<WebElement> elements) {
         return getFluentControl().asComponentList(listClass, componentClass, elements);
     }
 
+    @Override
     public void switchToDefault() {
         getFluentControl().switchToDefault();
     }
 
+    @Override
     public <T> ComponentList<T> asComponentList(Class<T> componentClass, WebElement... elements) {
         return getFluentControl().asComponentList(componentClass, elements);
     }
 
+    @Override
     public FluentList<FluentWebElement> find(By locator, SearchFilter... filters) {
         return getFluentControl().find(locator, filters);
     }
 
+    @Override
     public void goTo(String url) {
         getFluentControl().goTo(url);
     }
 
+    @Override
     public void switchTo() {
         getFluentControl().switchTo();
     }
 
+    @Override
     public void takeHtmlDump() {
         getFluentControl().takeHtmlDump();
     }
@@ -331,206 +343,257 @@ class SpringTestNGControl extends AbstractTestNGSpringContextTests implements Fl
         return getFluentControl().injectComponent(componentContainer, parentContainer, context);
     }
 
+    @Override
     public void switchTo(FluentList<? extends FluentWebElement> elements) {
         getFluentControl().switchTo(elements);
     }
 
+    @Override
     public boolean canTakeScreenShot() {
         return getFluentControl().canTakeScreenShot();
     }
 
+    @Override
     public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass) {
         return getFluentControl().newComponentList(listClass, componentClass);
     }
 
+    @Override
     public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, Iterable<WebElement> elements) {
         return getFluentControl().asFluentList(componentClass, elements);
     }
 
+    @Override
     public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass, List<T> elements) {
         return getFluentControl().newFluentList(componentClass, elements);
     }
 
+    @Override
     public Capabilities capabilities() {
         return getFluentControl().capabilities();
     }
 
+    @Override
     public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass) {
         return getFluentControl().newFluentList(componentClass);
     }
 
+    @Override
     public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, T... componentsList) {
         return getFluentControl().newComponentList(listClass, componentClass, componentsList);
     }
 
+    @Override
     public FluentList<FluentWebElement> newFluentList() {
         return getFluentControl().newFluentList();
     }
 
+    @Override
     public <T> ComponentList asComponentList(Class<T> componentClass, Iterable<WebElement> elements) {
         return getFluentControl().asComponentList(componentClass, elements);
     }
 
+    @Override
     public CssSupport css() {
         return getFluentControl().css();
     }
 
+    @Override
     public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, List<WebElement> elements) {
         return getFluentControl().asFluentList(componentClass, elements);
     }
 
+    @Override
     public FluentList<FluentWebElement> find(List<WebElement> rawElements) {
         return getFluentControl().find(rawElements);
     }
 
+    @Override
     public void takeHtmlDump(String fileName) {
         getFluentControl().takeHtmlDump(fileName);
     }
 
+    @Override
     public FluentList<FluentWebElement> find(String selector, SearchFilter... filters) {
         return getFluentControl().find(selector, filters);
     }
 
+    @Override
     public <T> ComponentList<T> newComponentList(Class<T> componentClass, List<T> componentsList) {
         return getFluentControl().newComponentList(componentClass, componentsList);
     }
 
+    @Override
     public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, WebElement... elements) {
         return getFluentControl().asComponentList(listClass, componentClass, elements);
     }
 
+    @Override
     public <T> ComponentList<T> asComponentList(Class<T> componentClass, List<WebElement> elements) {
         return getFluentControl().asComponentList(componentClass, elements);
     }
 
+    @Override
     public void goToInNewTab(String url) {
         getFluentControl().goToInNewTab(url);
     }
 
+    @Override
     public WindowAction window() {
         return getFluentControl().window();
     }
 
+    @Override
     public <T> ComponentList<T> newComponentList(Class<T> componentClass) {
         return getFluentControl().newComponentList(componentClass);
     }
 
+    @Override
     public FluentWebElement newFluent(WebElement element) {
         return getFluentControl().newFluent(element);
     }
 
+    @Override
     public Alert alert() {
         return getFluentControl().alert();
     }
 
+    @Override
     public KeyboardActions keyboard() {
         return getFluentControl().keyboard();
     }
 
+    @Override
     public FluentWait await() {
         return getFluentControl().await();
     }
 
+    @Override
     public boolean isComponentClass(Class<?> componentClass) {
         return getFluentControl().isComponentClass(componentClass);
     }
 
+    @Override
     public <T> T newInstance(Class<T> cls) {
         return getFluentControl().newInstance(cls);
     }
 
+    @Override
     public <T extends FluentWebElement> FluentList<T> asFluentList(Class<T> componentClass, WebElement... elements) {
         return getFluentControl().asFluentList(componentClass, elements);
     }
 
+    @Override
     public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass, List<WebElement> elements) {
         return getFluentControl().asComponentList(listClass, componentClass, elements);
     }
 
+    @Override
     public MouseActions mouse() {
         return getFluentControl().mouse();
     }
 
+    @Override
     public ContainerContext inject(Object container) {
         return getFluentControl().inject(container);
     }
 
+    @Override
     public void takeScreenshot() {
         getFluentControl().takeScreenshot();
     }
 
+    @Override
     public Set<Cookie> getCookies() {
         return getFluentControl().getCookies();
     }
 
+    @Override
     public FluentList<FluentWebElement> asFluentList(Iterable<WebElement> elements) {
         return getFluentControl().asFluentList(elements);
     }
 
+    @Override
     public Cookie getCookie(String name) {
         return getFluentControl().getCookie(name);
     }
 
+    @Override
     public <T> ComponentList<T> newComponentList(Class<T> componentClass, T... componentsList) {
         return getFluentControl().newComponentList(componentClass, componentsList);
     }
 
+    @Override
     public FluentList<FluentWebElement> find(SearchFilter... filters) {
         return getFluentControl().find(filters);
     }
 
+    @Override
     public FluentList<FluentWebElement> newFluentList(FluentWebElement... elements) {
         return getFluentControl().newFluentList(elements);
     }
 
+    @Override
     public <L extends List<T>, T> L newComponentList(Class<L> listClass, Class<T> componentClass, List<T> componentsList) {
         return getFluentControl().newComponentList(listClass, componentClass, componentsList);
     }
 
+    @Override
     public void switchTo(FluentWebElement element) {
         getFluentControl().switchTo(element);
     }
 
+    @Override
     public String pageSource() {
         return getFluentControl().pageSource();
     }
 
+    @Override
     public boolean isComponentListClass(Class<? extends List<?>> componentListClass) {
         return getFluentControl().isComponentListClass(componentListClass);
     }
 
+    @Override
     public FluentList<FluentWebElement> newFluentList(List<FluentWebElement> elements) {
         return getFluentControl().newFluentList(elements);
     }
 
+    @Override
     public FluentJavascript executeAsyncScript(String script, Object... args) {
         return getFluentControl().executeAsyncScript(script, args);
     }
 
+    @Override
     public String url() {
         return getFluentControl().url();
     }
 
+    @Override
     public <T> T newComponent(Class<T> componentClass, WebElement element) {
         return getFluentControl().newComponent(componentClass, element);
     }
 
+    @Override
     public <T extends FluentWebElement> FluentList<T> newFluentList(Class<T> componentClass, T... elements) {
         return getFluentControl().newFluentList(componentClass, elements);
     }
 
+    @Override
     public FluentList<FluentWebElement> asFluentList(List<WebElement> elements) {
         return getFluentControl().asFluentList(elements);
     }
 
+    @Override
     public FluentWebElement el(WebElement rawElement) {
         return getFluentControl().el(rawElement);
     }
 
+    @Override
     public EventsRegistry events() {
         return getFluentControl().events();
     }
 
+    @Override
     public PerformanceTiming performanceTiming() {
         return getFluentControl().performanceTiming();
     }
