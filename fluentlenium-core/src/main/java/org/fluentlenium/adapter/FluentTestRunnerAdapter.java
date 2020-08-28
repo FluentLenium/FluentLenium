@@ -1,7 +1,10 @@
 package org.fluentlenium.adapter;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage;
+import static org.fluentlenium.adapter.TestRunnerCommon.deleteCookies;
+import static org.fluentlenium.adapter.TestRunnerCommon.doHtmlDump;
+import static org.fluentlenium.adapter.TestRunnerCommon.doScreenshot;
+import static org.fluentlenium.adapter.TestRunnerCommon.getTestDriver;
+import static org.fluentlenium.adapter.TestRunnerCommon.quitMethodAndThreadDrivers;
 import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
 import static org.fluentlenium.utils.ThreadLocalAdapterUtil.clearThreadLocals;
 import static org.fluentlenium.utils.ThreadLocalAdapterUtil.getClassAnnotationForClass;
@@ -12,13 +15,10 @@ import static org.fluentlenium.utils.ThreadLocalAdapterUtil.setTestClassAndMetho
 
 import java.lang.annotation.Annotation;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
-import org.openqa.selenium.WebDriverException;
 
 /**
  * FluentLenium Test Runner Adapter.
@@ -27,7 +27,6 @@ import org.openqa.selenium.WebDriverException;
  */
 @SuppressWarnings("PMD.GodClass")
 public class FluentTestRunnerAdapter extends FluentAdapter implements TestRunnerAdapter {
-
 
     private final SharedMutator sharedMutator;
 
@@ -91,7 +90,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter implements TestRunner
 
     @Override
     public String getTestMethodName() {
-       return getMethodNameFromThread(TEST_METHOD_NAME);
+        return getMethodNameFromThread(TEST_METHOD_NAME);
     }
 
     @Override
@@ -142,23 +141,12 @@ public class FluentTestRunnerAdapter extends FluentAdapter implements TestRunner
         PARAMETERS_THREAD_LOCAL.set(sharedMutator.getEffectiveParameters(testClass, testName,
                 getDriverLifecycle()));
 
-        SharedWebDriver sharedWebDriver;
-
-        try {
-            sharedWebDriver = SharedWebDriverContainer.INSTANCE.getSharedWebDriver(
-                    PARAMETERS_THREAD_LOCAL.get(), null, this::newWebDriver, getConfiguration());
-        } catch (ExecutionException | InterruptedException e) {
-            this.failed(testClass, testName);
-
-            String causeMessage = getCauseMessage(e);
-            throw new WebDriverException("Browser failed to start, test [ " + testName + " ] execution interrupted."
-                    + (isEmpty(causeMessage) ? "" : "\nCaused by: [ " + causeMessage + "]"), e);
-        }
-
+        SharedWebDriver sharedWebDriver = getTestDriver(testClass, testName,
+                this::newWebDriver, this::failed,
+                getConfiguration(), PARAMETERS_THREAD_LOCAL.get());
         setTestClassAndMethodValues(PARAMETERS_THREAD_LOCAL, TEST_CLASS, TEST_METHOD_NAME);
         initFluent(sharedWebDriver.getDriver());
     }
-
 
     /**
      * Invoked when a test method has finished (whatever the success of failing status)
@@ -193,18 +181,11 @@ public class FluentTestRunnerAdapter extends FluentAdapter implements TestRunner
      */
     protected void finished(Class<?> testClass, String testName) {
         DriverLifecycle driverLifecycle = getDriverLifecycle();
-        EffectiveParameters<?> parameters = sharedMutator.getEffectiveParameters(testClass, testName,
-                driverLifecycle);
-        SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE.getDriver(parameters);
+        SharedWebDriver sharedWebDriver = SharedWebDriverContainer.INSTANCE
+                .getDriver(sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle));
 
-        if (driverLifecycle == DriverLifecycle.METHOD || driverLifecycle == DriverLifecycle.THREAD) {
-            Optional.ofNullable(sharedWebDriver).ifPresent(SharedWebDriverContainer.INSTANCE::quit);
-        }
-
-        if (getDeleteCookies()) {
-            Optional.ofNullable(sharedWebDriver).ifPresent(shared -> shared.getDriver().manage().deleteAllCookies());
-        }
-
+        quitMethodAndThreadDrivers(driverLifecycle, sharedWebDriver);
+        deleteCookies(sharedWebDriver, getConfiguration());
         clearThreadLocals(PARAMETERS_THREAD_LOCAL, TEST_CLASS, TEST_METHOD_NAME);
         releaseFluent();
     }
@@ -253,20 +234,8 @@ public class FluentTestRunnerAdapter extends FluentAdapter implements TestRunner
      */
     protected void failed(Throwable e, Class<?> testClass, String testName) {
         if (isFluentControlAvailable() && !isIgnoredException(e)) {
-            try {
-                if (getScreenshotMode() == TriggerMode.AUTOMATIC_ON_FAIL && canTakeScreenShot()) {
-                    takeScreenshot(testClass.getSimpleName() + "_" + testName + ".png");
-                }
-            } catch (Exception ignored) {
-            }
-
-            try {
-                if (getHtmlDumpMode() == TriggerMode.AUTOMATIC_ON_FAIL && getDriver() != null) {
-                    takeHtmlDump(testClass.getSimpleName() + "_" + testName + ".html");
-                }
-            } catch (Exception ignored) {
-            }
-
+            doScreenshot(testClass, testName, this, getConfiguration());
+            doHtmlDump(testClass, testName, this, getConfiguration());
         }
     }
 

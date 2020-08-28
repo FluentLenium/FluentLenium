@@ -53,7 +53,7 @@ public class FluentTestRunnerAdapterRetriesTest {
 
         verify(adapter, times(1)).starting(testName);
         verify(adapter, times(1)).starting(any(), eq(testName));
-        verify(adapter, times(1)).failed(adapter.getClass(), testName);
+        verify(adapter, times(1)).failed(any(), any(), any());
     }
 
     @Test

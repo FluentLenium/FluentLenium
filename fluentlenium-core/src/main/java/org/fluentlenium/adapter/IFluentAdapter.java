@@ -113,6 +113,10 @@ public interface IFluentAdapter extends FluentControl {
                 getWebDriver(), getCapabilities(), getConfiguration());
     }
 
+    /**
+     * returns WebDriver instance
+     * @return current webdriver
+     */
     @Override
     default WebDriver getDriver() {
         try {
