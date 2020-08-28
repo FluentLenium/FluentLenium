@@ -202,26 +202,12 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
 
     @Override
     public final WebDriver getDriver() {
-        return getFluentControl() == null ? null : getFluentControl().getDriver();
-    }
-
-    @Override
-    public void releaseFluent() {
-        if (getFluentControl() != null) {
-            ((FluentDriver) getFluentControl().getAdapterControl()).releaseFluent();
-            setFluentControl(null);
-        }
+        return IFluentAdapter.super.getDriver();
     }
 
     @Override
     public ContainerFluentControl getFluentControl() {
-        FluentControlContainer fluentControlContainer = getControlContainer();
-
-        if (fluentControlContainer == null) {
-            throw new IllegalStateException("FluentControl is not initialized, WebDriver or Configuration issue");
-        } else {
-            return (ContainerFluentControl) fluentControlContainer.getFluentControl();
-        }
+        return IFluentAdapter.super.getFluentControl();
     }
 
 }

@@ -2,16 +2,12 @@ package org.fluentlenium.adapter.spock
 
 import org.apache.commons.lang3.StringUtils
 import org.fluentlenium.adapter.DefaultSharedMutator
-import org.fluentlenium.adapter.FluentControlContainer
 import org.fluentlenium.adapter.IFluentAdapter
 import org.fluentlenium.adapter.SharedMutator
 import org.fluentlenium.adapter.TestRunnerAdapter
 import org.fluentlenium.adapter.exception.AnnotationNotFoundException
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer
-import org.fluentlenium.configuration.Configuration
-import org.fluentlenium.core.FluentDriver
-import org.fluentlenium.core.inject.ContainerFluentControl
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebDriverException
 import org.slf4j.Logger
@@ -25,7 +21,7 @@ import java.util.concurrent.ExecutorService
 import static org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle
 import static org.apache.commons.lang3.StringUtils.isEmpty
 import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage
-import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
+import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException
 
 class SpockAdapter extends SpockControl implements TestRunnerAdapter, IFluentAdapter {
 
@@ -60,7 +56,7 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter, IFluentAda
         def anno = specificationContext.currentSpec.getAnnotation(annotation)
 
         if (anno == null) {
-            throw new AnnotationNotFoundException();
+            throw new AnnotationNotFoundException()
         }
 
         return anno
@@ -71,7 +67,7 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter, IFluentAda
         def anno = specificationContext.currentFeature.featureMethod.getAnnotation(annotation)
 
         if (anno == null) {
-            throw new AnnotationNotFoundException();
+            throw new AnnotationNotFoundException()
         }
 
         return anno
@@ -119,7 +115,7 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter, IFluentAda
     SharedWebDriver getSharedWebDriver(SharedMutator.EffectiveParameters<?> parameters, ExecutorService executorService)
             throws ExecutionException, InterruptedException {
         return SharedWebDriverContainer.INSTANCE.getSharedWebDriver(
-                parameters, executorService, this::newWebDriver, getConfiguration());
+                parameters, executorService, this::newWebDriver, getConfiguration())
     }
 
     private static void clearThreadLocals() {
@@ -179,27 +175,11 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter, IFluentAda
 
     @Override
     final WebDriver getDriver() {
-        return getFluentControl() == null ? null : getFluentControl().getDriver()
-    }
-
-    @Override
-    void releaseFluent() {
-        ContainerFluentControl containerFluentControl = getFluentControl();
-
-        if (containerFluentControl != null) {
-            ((FluentDriver) containerFluentControl.getAdapterControl()).releaseFluent()
-            setFluentControl(null)
-        }
-    }
-
-    @Override
-    ContainerFluentControl getFluentControl() {
-        FluentControlContainer fluentControlContainer = getControlContainer()
-
-        if (fluentControlContainer == null) {
-            throw new IllegalStateException("FluentControl is not initialized, WebDriver or Configuration issue")
-        } else {
-            return (ContainerFluentControl) fluentControlContainer.getFluentControl()
+        try {
+            return Optional.ofNullable(getFluentControl().getDriver())
+                    .orElse(null)
+        } catch (NullPointerException ignored) {
+            return null
         }
     }
 

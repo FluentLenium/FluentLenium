@@ -9,6 +9,8 @@ import org.fluentlenium.core.inject.ContainerContext;
 import org.fluentlenium.core.inject.ContainerFluentControl;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Optional;
+
 public interface IFluentAdapter extends FluentControl {
 
     /**
@@ -25,6 +27,7 @@ public interface IFluentAdapter extends FluentControl {
      * @param fluentControl to set
      * @return FluentControl
      */
+    @SuppressWarnings("UnusedReturnValue")
     default FluentControl setFluentControl(ContainerFluentControl fluentControl) {
         getControlContainer().setFluentControl(fluentControl);
         return getControlContainer().getFluentControl();
@@ -62,11 +65,35 @@ public interface IFluentAdapter extends FluentControl {
     }
 
     /**
+     * Gets Underlying FluentControlContainer
+     *
+     * @return fluentControlContainer instance
+     */
+    @Override
+    default ContainerFluentControl getFluentControl() {
+        FluentControlContainer fluentControlContainer = getControlContainer();
+
+        if (fluentControlContainer == null) {
+            throw new IllegalStateException("FluentControl is not initialized, WebDriver or Configuration issue");
+        } else {
+            return (ContainerFluentControl) fluentControlContainer.getFluentControl();
+        }
+    }
+
+    /**
      * Release the current {@link WebDriver} from this adapter.
      * <p>
      * This method should not be called by end user.
      */
-    void releaseFluent();
+    @SuppressWarnings("UnusedReturnValue")
+    default boolean releaseFluent() {
+        if (getFluentControl() != null) {
+            ((FluentDriver) getFluentControl().getAdapterControl()).releaseFluent();
+            setFluentControl(null);
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Creates a new {@link WebDriver} instance.
@@ -84,5 +111,15 @@ public interface IFluentAdapter extends FluentControl {
     default WebDriver newWebDriver() {
         return SharedWebDriverContainer.INSTANCE.newWebDriver(
                 getWebDriver(), getCapabilities(), getConfiguration());
+    }
+
+    @Override
+    default WebDriver getDriver() {
+        try {
+            return Optional.ofNullable(getFluentControl().getDriver())
+                    .orElse(null);
+        } catch (NullPointerException ex) {
+            return null;
+        }
     }
 }
