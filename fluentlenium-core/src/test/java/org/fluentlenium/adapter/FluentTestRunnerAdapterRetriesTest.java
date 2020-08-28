@@ -13,6 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
+import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import org.fluentlenium.core.FluentControl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,7 +62,8 @@ public class FluentTestRunnerAdapterRetriesTest {
         when(executorService.submit(any(Callable.class))).thenReturn(future);
 
         try {
-            adapter.getSharedWebDriver(null, executorService);
+            SharedWebDriverContainer.INSTANCE.getSharedWebDriver(
+                    null, executorService, adapter::newWebDriver, adapter.getConfiguration());
         } catch (WebDriverException ex) {
             assertThat(ex.getMessage()).contains("Browser failed to start");
         }

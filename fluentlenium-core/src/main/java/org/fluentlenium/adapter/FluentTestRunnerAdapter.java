@@ -3,22 +3,22 @@ package org.fluentlenium.adapter;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage;
 import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.clearThreadLocals;
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.getClassAnnotationForClass;
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.getClassFromThread;
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.getMethodAnnotationForMethod;
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.getMethodNameFromThread;
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.setTestClassAndMethodValues;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
 
-import org.apache.commons.lang3.StringUtils;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
-import org.fluentlenium.adapter.exception.AnnotationNotFoundException;
-import org.fluentlenium.adapter.exception.MethodNotFoundException;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import org.openqa.selenium.WebDriverException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * FluentLenium Test Runner Adapter.
@@ -28,7 +28,6 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("PMD.GodClass")
 public class FluentTestRunnerAdapter extends FluentAdapter implements TestRunnerAdapter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FluentTestRunnerAdapter.class);
 
     private final SharedMutator sharedMutator;
 
@@ -87,49 +86,25 @@ public class FluentTestRunnerAdapter extends FluentAdapter implements TestRunner
 
     @Override
     public Class<?> getTestClass() {
-        Class<?> currentTestClass = FluentTestRunnerAdapter.TEST_CLASS.get();
-        if (currentTestClass == null) {
-            LOGGER.warn("Current test class is null. Are you in test context?");
-        }
-        return currentTestClass;
+        return getClassFromThread(TEST_CLASS);
     }
-
 
     @Override
     public String getTestMethodName() {
-        String currentTestMethodName = FluentTestRunnerAdapter.TEST_METHOD_NAME.get();
-        if (currentTestMethodName == null) {
-            LOGGER.warn("Current test method name is null. Are you in text context?");
-        }
-        return currentTestMethodName;
+       return getMethodNameFromThread(TEST_METHOD_NAME);
     }
-
 
     @Override
     public <T extends Annotation> T getClassAnnotation(Class<T> annotation) {
-        T definedAnnotation = getTestClass().getAnnotation(annotation);
-
-        if (definedAnnotation == null) {
-            throw new AnnotationNotFoundException();
-        }
-
-        return definedAnnotation;
+        return getClassAnnotationForClass(annotation, getClassFromThread(TEST_CLASS));
     }
 
     @Override
     public <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
-        T definedAnnotation;
-        try {
-            definedAnnotation = getTestClass().getDeclaredMethod(getTestMethodName()).getAnnotation(annotation);
-        } catch (NoSuchMethodException e) {
-            throw new MethodNotFoundException(e);
-        }
-
-        if (definedAnnotation == null) {
-            throw new AnnotationNotFoundException();
-        }
-
-        return definedAnnotation;
+        return getMethodAnnotationForMethod(
+                annotation,
+                getClassFromThread(TEST_CLASS),
+                getMethodNameFromThread(TEST_METHOD_NAME));
     }
 
     /**
@@ -170,7 +145,8 @@ public class FluentTestRunnerAdapter extends FluentAdapter implements TestRunner
         SharedWebDriver sharedWebDriver;
 
         try {
-            sharedWebDriver = getSharedWebDriver(PARAMETERS_THREAD_LOCAL.get(), null);
+            sharedWebDriver = SharedWebDriverContainer.INSTANCE.getSharedWebDriver(
+                    PARAMETERS_THREAD_LOCAL.get(), null, this::newWebDriver, getConfiguration());
         } catch (ExecutionException | InterruptedException e) {
             this.failed(testClass, testName);
 
@@ -179,33 +155,10 @@ public class FluentTestRunnerAdapter extends FluentAdapter implements TestRunner
                     + (isEmpty(causeMessage) ? "" : "\nCaused by: [ " + causeMessage + "]"), e);
         }
 
-        setTestClassAndMethodValues();
+        setTestClassAndMethodValues(PARAMETERS_THREAD_LOCAL, TEST_CLASS, TEST_METHOD_NAME);
         initFluent(sharedWebDriver.getDriver());
     }
 
-    private void setTestClassAndMethodValues() {
-        Optional.ofNullable(PARAMETERS_THREAD_LOCAL.get()).ifPresent((effectiveParameters) -> {
-            Optional.ofNullable(effectiveParameters.getTestClass()).ifPresent(TEST_CLASS::set);
-            Optional.ofNullable(effectiveParameters.getTestName()).ifPresent(this::setMethodName);
-        });
-    }
-
-    private void setMethodName(String methodName) {
-        String className = StringUtils.substringBefore(methodName, "(");
-        TEST_METHOD_NAME.set(className);
-    }
-
-    public SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters, ExecutorService executorService)
-            throws ExecutionException, InterruptedException {
-        return SharedWebDriverContainer.INSTANCE.getSharedWebDriver(
-                parameters, executorService, this::newWebDriver, getConfiguration());
-    }
-
-    private void clearThreadLocals() {
-        PARAMETERS_THREAD_LOCAL.remove();
-        TEST_CLASS.remove();
-        TEST_METHOD_NAME.remove();
-    }
 
     /**
      * Invoked when a test method has finished (whatever the success of failing status)
@@ -252,7 +205,7 @@ public class FluentTestRunnerAdapter extends FluentAdapter implements TestRunner
             Optional.ofNullable(sharedWebDriver).ifPresent(shared -> shared.getDriver().manage().deleteAllCookies());
         }
 
-        clearThreadLocals();
+        clearThreadLocals(PARAMETERS_THREAD_LOCAL, TEST_CLASS, TEST_METHOD_NAME);
         releaseFluent();
     }
 

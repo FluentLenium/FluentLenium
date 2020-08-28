@@ -1,32 +1,30 @@
 package org.fluentlenium.adapter.testng;
 
-import org.apache.commons.lang3.StringUtils;
 import org.fluentlenium.adapter.DefaultSharedMutator;
-import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.adapter.IFluentAdapter;
 import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import org.fluentlenium.adapter.TestRunnerAdapter;
 import org.fluentlenium.adapter.ThreadLocalFluentControlContainer;
-import org.fluentlenium.adapter.exception.AnnotationNotFoundException;
-import org.fluentlenium.adapter.exception.MethodNotFoundException;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
-import org.fluentlenium.core.FluentDriver;
 import org.fluentlenium.core.inject.ContainerFluentControl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.annotation.Annotation;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage;
 import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.clearThreadLocals;
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.getClassAnnotationForClass;
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.getClassFromThread;
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.getMethodAnnotationForMethod;
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.getMethodNameFromThread;
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.setTestClassAndMethodValues;
 
 /**
  * FluentLenium Test Runner Adapter.
@@ -35,8 +33,6 @@ import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
  */
 @SuppressWarnings("PMD.GodClass")
 class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapter, IFluentAdapter {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(SpringTestNGAdapter.class);
 
     private final SharedMutator sharedMutator;
 
@@ -54,47 +50,25 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
 
     @Override
     public Class<?> getTestClass() {
-        Class<?> currentTestClass = SpringTestNGAdapter.TEST_CLASS.get();
-        if (currentTestClass == null) {
-            LOGGER.warn("Current test class is null. Are you in test context?");
-        }
-        return currentTestClass;
+        return getClassFromThread(TEST_CLASS);
     }
 
     @Override
     public String getTestMethodName() {
-        String currentTestMethodName = SpringTestNGAdapter.TEST_METHOD_NAME.get();
-        if (currentTestMethodName == null) {
-            LOGGER.warn("Current test method name is null. Are you in text context?");
-        }
-        return currentTestMethodName;
+        return getMethodNameFromThread(TEST_METHOD_NAME);
     }
 
     @Override
     public <T extends Annotation> T getClassAnnotation(Class<T> annotation) {
-        T definedAnnotation = getTestClass().getAnnotation(annotation);
-
-        if (definedAnnotation == null) {
-            throw new AnnotationNotFoundException();
-        }
-
-        return definedAnnotation;
+        return getClassAnnotationForClass(annotation, getClassFromThread(TEST_CLASS));
     }
 
     @Override
     public <T extends Annotation> T getMethodAnnotation(Class<T> annotation) {
-        T definedAnnotation;
-        try {
-            definedAnnotation = getTestClass().getDeclaredMethod(getTestMethodName()).getAnnotation(annotation);
-        } catch (NoSuchMethodException e) {
-            throw new MethodNotFoundException(e);
-        }
-
-        if (definedAnnotation == null) {
-            throw new AnnotationNotFoundException();
-        }
-
-        return definedAnnotation;
+        return getMethodAnnotationForMethod(
+                annotation,
+                getClassFromThread(TEST_CLASS),
+                getMethodNameFromThread(TEST_METHOD_NAME));
     }
 
     /**
@@ -110,7 +84,8 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
         SharedWebDriver sharedWebDriver;
 
         try {
-            sharedWebDriver = getSharedWebDriver(PARAMETERS_THREAD_LOCAL.get(), null);
+            sharedWebDriver = SharedWebDriverContainer.INSTANCE.getSharedWebDriver(
+                    PARAMETERS_THREAD_LOCAL.get(), null, this::newWebDriver, getConfiguration());
         } catch (ExecutionException | InterruptedException e) {
             this.failed(null, testClass, testName);
 
@@ -120,32 +95,8 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
                     + (isEmpty(causeMessage) ? "" : "\nCaused by: [ " + causeMessage + "]"), e);
         }
 
-        setTestClassAndMethodValues();
+        setTestClassAndMethodValues(PARAMETERS_THREAD_LOCAL, TEST_CLASS, TEST_METHOD_NAME);
         initFluent(sharedWebDriver.getDriver());
-    }
-
-    private void setTestClassAndMethodValues() {
-        Optional.ofNullable(PARAMETERS_THREAD_LOCAL.get()).ifPresent((effectiveParameters) -> {
-            Optional.ofNullable(effectiveParameters.getTestClass()).ifPresent(TEST_CLASS::set);
-            Optional.ofNullable(effectiveParameters.getTestName()).ifPresent(this::setMethodName);
-        });
-    }
-
-    private void setMethodName(String methodName) {
-        String className = StringUtils.substringBefore(methodName, "(");
-        TEST_METHOD_NAME.set(className);
-    }
-
-    private SharedWebDriver getSharedWebDriver(EffectiveParameters<?> parameters, ExecutorService executorService)
-            throws ExecutionException, InterruptedException {
-        return SharedWebDriverContainer.INSTANCE.getSharedWebDriver(
-                parameters, executorService, this::newWebDriver, getConfiguration());
-    }
-
-    private void clearThreadLocals() {
-        PARAMETERS_THREAD_LOCAL.remove();
-        TEST_CLASS.remove();
-        TEST_METHOD_NAME.remove();
     }
 
     /**
@@ -168,7 +119,7 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
             Optional.ofNullable(sharedWebDriver).ifPresent(shared -> shared.getDriver().manage().deleteAllCookies());
         }
 
-        clearThreadLocals();
+        clearThreadLocals(PARAMETERS_THREAD_LOCAL, TEST_CLASS, TEST_METHOD_NAME);
         releaseFluent();
     }
 
@@ -185,16 +136,14 @@ class SpringTestNGAdapter extends SpringTestNGControl implements TestRunnerAdapt
                 if (getScreenshotMode() == TriggerMode.AUTOMATIC_ON_FAIL && canTakeScreenShot()) {
                     this.takeScreenshot(testClass.getSimpleName() + "_" + testName + ".png");
                 }
-            } catch (Exception exception) { // NOPMD EmptyCatchBlock
-                // Can't write screenshot, for some reason.
+            } catch (Exception ignored) {
             }
 
             try {
                 if (getHtmlDumpMode() == TriggerMode.AUTOMATIC_ON_FAIL && getDriver() != null) {
                     takeHtmlDump(testClass.getSimpleName() + "_" + testName + ".html");
                 }
-            } catch (Exception exception) { // NOPMD EmptyCatchBlock
-                // Can't write htmldump, for some reason.
+            } catch (Exception ignored) {
             }
 
         }

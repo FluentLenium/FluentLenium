@@ -1,6 +1,5 @@
 package org.fluentlenium.adapter.spock
 
-import org.apache.commons.lang3.StringUtils
 import org.fluentlenium.adapter.DefaultSharedMutator
 import org.fluentlenium.adapter.IFluentAdapter
 import org.fluentlenium.adapter.SharedMutator
@@ -10,22 +9,21 @@ import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebDriverException
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 import java.lang.annotation.Annotation
 import java.util.concurrent.ExecutionException
-import java.util.concurrent.ExecutorService
 
 // Intellij is wrong here - do not delete
 import static org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle
 import static org.apache.commons.lang3.StringUtils.isEmpty
 import static org.fluentlenium.utils.ExceptionUtil.getCauseMessage
 import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.clearThreadLocals
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.getClassFromThread
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.getMethodNameFromThread
+import static org.fluentlenium.utils.ThreadLocalAdapterUtil.setTestClassAndMethodValues
 
 class SpockAdapter extends SpockControl implements TestRunnerAdapter, IFluentAdapter {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(SpockAdapter.class)
 
     private SharedMutator sharedMutator = new DefaultSharedMutator()
 
@@ -35,20 +33,12 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter, IFluentAda
 
     @Override
     Class<?> getTestClass() {
-        Class<?> currentTestClass = TEST_CLASS.get()
-        if (currentTestClass == null) {
-            LOGGER.warn("Current test class is null. Are you in test context?")
-        }
-        return currentTestClass
+        return getClassFromThread(TEST_CLASS);
     }
 
     @Override
     String getTestMethodName() {
-        String currentTestMethodName = TEST_METHOD_NAME.get()
-        if (currentTestMethodName == null) {
-            LOGGER.warn("Current test method name is null. Are you in text context?")
-        }
-        return currentTestMethodName
+        return getMethodNameFromThread(TEST_METHOD_NAME);
     }
 
     @Override
@@ -85,7 +75,8 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter, IFluentAda
         SharedWebDriver sharedWebDriver
 
         try {
-            sharedWebDriver = getSharedWebDriver(PARAMETERS_THREAD_LOCAL.get(), null)
+            sharedWebDriver = SharedWebDriverContainer.INSTANCE.getSharedWebDriver(
+                    PARAMETERS_THREAD_LOCAL.get(), null, this::newWebDriver, getConfiguration())
         } catch (ExecutionException | InterruptedException e) {
             this.failed(null, testClass, testName)
 
@@ -95,33 +86,8 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter, IFluentAda
                     + (isEmpty(causeMessage) ? "" : "\nCaused by: [ " + causeMessage + "]"), e)
         }
 
-        setTestClassAndMethodValues()
+        setTestClassAndMethodValues(PARAMETERS_THREAD_LOCAL, TEST_CLASS, TEST_METHOD_NAME);
         initFluent(sharedWebDriver.getDriver())
-    }
-
-    @SuppressWarnings("UnnecessaryQualifiedReference")
-    private static void setTestClassAndMethodValues() {
-        Optional.ofNullable(PARAMETERS_THREAD_LOCAL.get()).ifPresent((effectiveParameters) -> {
-            Optional.ofNullable(effectiveParameters.getTestClass()).ifPresent(SpockAdapter.TEST_CLASS::set)
-            Optional.ofNullable(effectiveParameters.getTestName()).ifPresent(SpockAdapter::setMethodName)
-        })
-    }
-
-    private static void setMethodName(String methodName) {
-        String className = StringUtils.substringBefore(methodName, "(")
-        TEST_METHOD_NAME.set(className)
-    }
-
-    SharedWebDriver getSharedWebDriver(SharedMutator.EffectiveParameters<?> parameters, ExecutorService executorService)
-            throws ExecutionException, InterruptedException {
-        return SharedWebDriverContainer.INSTANCE.getSharedWebDriver(
-                parameters, executorService, this::newWebDriver, getConfiguration())
-    }
-
-    private static void clearThreadLocals() {
-        PARAMETERS_THREAD_LOCAL.remove()
-        TEST_CLASS.remove()
-        TEST_METHOD_NAME.remove()
     }
 
     /**
@@ -143,7 +109,7 @@ class SpockAdapter extends SpockControl implements TestRunnerAdapter, IFluentAda
             Optional.ofNullable(sharedWebDriver).ifPresent(shared -> shared.getDriver().manage().deleteAllCookies())
         }
 
-        clearThreadLocals()
+        clearThreadLocals(PARAMETERS_THREAD_LOCAL, TEST_CLASS, TEST_METHOD_NAME);
         releaseFluent()
     }
 
