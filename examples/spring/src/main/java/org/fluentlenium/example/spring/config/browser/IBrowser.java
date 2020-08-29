@@ -36,14 +36,6 @@ public interface IBrowser {
 
     Capabilities getCapabilities();
 
-    default String getDriverExecutableName() {
-        throw new ConfigException("Not supported");
-    }
-
-    default String getDriverSystemPropertyName() {
-        throw new ConfigException("Not supported");
-    }
-
     static IBrowser getBrowser(String browserName) {
         return browsers.getOrDefault(browserName, chrome);
     }

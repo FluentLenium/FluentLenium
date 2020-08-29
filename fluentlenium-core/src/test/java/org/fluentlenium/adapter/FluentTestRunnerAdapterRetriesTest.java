@@ -13,6 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
+import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import org.fluentlenium.core.FluentControl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,9 +45,6 @@ public class FluentTestRunnerAdapterRetriesTest {
     public void testFailedWhenBrowserCrashed() {
         String testName = "test1";
 
-        when(adapter.getBrowserTimeout()).thenReturn(1L);
-        when(adapter.getBrowserTimeoutRetries()).thenReturn(1);
-
         try {
             adapter.starting("test1");
         } catch (WebDriverException ex) {
@@ -55,20 +53,17 @@ public class FluentTestRunnerAdapterRetriesTest {
 
         verify(adapter, times(1)).starting(testName);
         verify(adapter, times(1)).starting(any(), eq(testName));
-        verify(adapter, times(1)).failed(adapter.getClass(), testName);
+        verify(adapter, times(1)).failed(any(), any(), any());
     }
-
 
     @Test
     public void testGetSharedWebDriverRetry() throws ExecutionException, InterruptedException {
-        when(adapter.getBrowserTimeoutRetries()).thenReturn(2);
-        when(adapter.getBrowserTimeout()).thenReturn(1L);
-
         when(future.get()).thenReturn(null);
         when(executorService.submit(any(Callable.class))).thenReturn(future);
 
         try {
-            adapter.getSharedWebDriver(null, executorService);
+            SharedWebDriverContainer.INSTANCE.getSharedWebDriver(
+                    null, executorService, adapter::newWebDriver, adapter.getConfiguration());
         } catch (WebDriverException ex) {
             assertThat(ex.getMessage()).contains("Browser failed to start");
         }

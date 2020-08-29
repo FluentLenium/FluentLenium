@@ -40,28 +40,20 @@ class SpockControl extends Specification implements FluentControl {
     private FluentControlContainer controlContainer = new ThreadLocalFluentControlContainer()
     private Configuration configuration = ConfigurationFactoryProvider.newConfiguration(getClass())
 
-    /**
-     * Get the control interface container
-     *
-     * @return control interface container
-     */
+    @Override
     FluentControlContainer getControlContainer() {
         return controlContainer
     }
 
+    @Override
     FluentControl getFluentControl() {
         return controlContainer.getFluentControl()
     }
 
-    /**
-     * Get the test adapter configuration.
-     *
-     * @return configuration
-     */
+    @Override
     Configuration getConfiguration() {
         return configuration
     }
-
 
     @Override
     WebDriver getDriver() {

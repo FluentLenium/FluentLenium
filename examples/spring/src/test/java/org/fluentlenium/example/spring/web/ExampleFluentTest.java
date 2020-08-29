@@ -1,12 +1,11 @@
-package org.fluentlenium.example.spring;
+package org.fluentlenium.example.spring.web;
 
 import io.appium.java_client.AppiumDriver;
-import org.fluentlenium.adapter.junit.FluentTest;
+import org.fluentlenium.adapter.testng.FluentTestNgSpringTest;
 import org.fluentlenium.example.spring.config.Config;
 import org.fluentlenium.example.spring.config.ConfigException;
 import org.fluentlenium.example.spring.config.SeleniumBrowserConfigProperties;
 import org.fluentlenium.example.spring.config.browser.IBrowser;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Augmenter;
@@ -15,15 +14,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = Config.class)
-public class ExampleFluentTest extends FluentTest {
+public class ExampleFluentTest extends FluentTestNgSpringTest {
 
     private static final Logger log = LoggerFactory.getLogger(ExampleFluentTest.class);
 
@@ -47,7 +44,7 @@ public class ExampleFluentTest extends FluentTest {
 
     private WebDriver runTestOnAppiumServer() {
         try {
-            return new AppiumDriver(
+            return new AppiumDriver<>(
                     new URL(getAppiumServerUrl()), getBrowser().getCapabilities());
         } catch (MalformedURLException e) {
             throw new ConfigException("Invalid hub location: " + getAppiumServerUrl(), e);

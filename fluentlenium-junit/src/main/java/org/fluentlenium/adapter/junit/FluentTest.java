@@ -52,7 +52,7 @@ public class FluentTest extends FluentTestRunnerAdapter {
             try {
                 base.evaluate();
             } finally {
-                afterClass(description.getTestClass());
+                classDriverCleanup(description.getTestClass());
             }
         }
     };

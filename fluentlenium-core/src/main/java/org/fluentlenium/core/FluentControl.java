@@ -1,5 +1,6 @@
 package org.fluentlenium.core;
 
+import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.core.action.InputControl;
 import org.fluentlenium.core.alert.AlertControl;
@@ -26,5 +27,26 @@ public interface FluentControl
         extends SearchControl<FluentWebElement>, AwaitControl, InputControl, JavascriptControl, AlertControl, SnapshotControl,
         EventsControl, NavigationControl, SeleniumDriverControl, CssControl, FluentInjectControl, ComponentInstantiator,
         CapabilitiesControl, PerformanceTimingControl, Configuration, ChromiumControl {
+
+    /**
+     * Get the control interface container
+     *
+     * @return control interface container
+     */
+    FluentControlContainer getControlContainer();
+
+    /**
+     * Get Fluent Control
+     *
+     * @return FluentControl instance
+     */
+    FluentControl getFluentControl();
+
+    /**
+     * Get the test adapter configuration.
+     *
+     * @return configuration
+     */
+    Configuration getConfiguration();
 
 }

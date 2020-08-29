@@ -1,8 +1,13 @@
 package org.fluentlenium.adapter.sharedwebdriver;
 
+import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
+import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
+import org.fluentlenium.configuration.WebDrivers;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,7 +16,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 import java.util.function.Supplier;
+
+import static org.fluentlenium.utils.ExecutorServiceUtil.getExecutor;
+import static org.fluentlenium.utils.ExecutorServiceUtil.shutDownExecutor;
 
 /**
  * Shared web driver container singleton implementation.
@@ -166,5 +177,58 @@ class SharedWebdriverSingletonImpl {
             testThreadDriversIterator.next().getDriver().quit();
             testThreadDriversIterator.remove();
         }
+    }
+
+    /**
+     * Returns SharedDriver instance
+     *
+     * @param parameters        driver parameters
+     * @param webDriverExecutor executor service
+     * @return SharedDriver
+     * @throws ExecutionException   execution exception
+     * @throws InterruptedException interrupted exception
+     */
+    public SharedWebDriver getSharedWebDriver(SharedMutator.EffectiveParameters<?> parameters,
+                                              ExecutorService webDriverExecutor,
+                                              Supplier<WebDriver> webDriver,
+                                              Configuration configuration)
+            throws ExecutionException, InterruptedException {
+        SharedWebDriver sharedWebDriver = null;
+        ExecutorService executorService = getExecutor(webDriverExecutor);
+
+        Integer browserTimeoutRetries = configuration.getBrowserTimeoutRetries();
+        for (int retryCount = 0; retryCount < browserTimeoutRetries; retryCount++) {
+
+            Future<SharedWebDriver> futureWebDriver = createDriver(parameters, executorService, webDriver);
+            shutDownExecutor(executorService, configuration.getBrowserTimeout());
+
+            try {
+                sharedWebDriver = futureWebDriver.get();
+            } catch (InterruptedException | ExecutionException e) {
+                executorService.shutdownNow();
+                throw e;
+            }
+
+            if (sharedWebDriver != null) {
+                break;
+            }
+        }
+
+        return sharedWebDriver;
+    }
+
+    private Future<SharedWebDriver> createDriver(SharedMutator.EffectiveParameters<?> parameters,
+                                                 ExecutorService executorService,
+                                                 Supplier<WebDriver> newWebDriver) {
+        return executorService.submit(
+                () -> SharedWebDriverContainer.INSTANCE.getOrCreateDriver(newWebDriver, parameters));
+    }
+
+    public WebDriver newWebDriver(String name, Capabilities capabilities, Configuration configuration) {
+        WebDriver webDriver = WebDrivers.INSTANCE.newWebDriver(name, capabilities, configuration);
+        if (Boolean.TRUE.equals(configuration.getEventsEnabled())) {
+            webDriver = new EventFiringWebDriver(webDriver);
+        }
+        return webDriver;
     }
 }

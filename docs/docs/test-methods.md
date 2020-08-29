@@ -13,7 +13,9 @@ sidebar:
   Javascript execution: "#javascript-execution"
   CSS injection: "#css-injection"
   Screenshots and HTML dump: "#taking-screenshots-and-html-dumps"
+  Iframe: "#iframe"
   Alerts: "#alerts"
+  Performance API: "#performance-timing-api"
   Chromium API: "#chromium-api"
 ---
 

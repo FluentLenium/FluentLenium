@@ -18,13 +18,13 @@ public class SearchTest extends IntegrationFluentTestNg {
 
     @Test
     public void checkSearchWorks() {
-        FluentList list = find(".small");
+        FluentList<FluentWebElement> list = find(".small");
         assertThat(list.ids()).contains("id", "id2");
     }
 
     @Test
     public void checkSearchOnListWorks() {
-        FluentList list = find(".parent");
+        FluentList<FluentWebElement> list = find(".parent");
         assertThat(list.find(".child").texts()).containsOnly("Alex");
     }
 
@@ -36,7 +36,7 @@ public class SearchTest extends IntegrationFluentTestNg {
 
     @Test
     public void checkSearchFirstOnListWorks() {
-        FluentList list = find(".parent");
+        FluentList<FluentWebElement> list = find(".parent");
         assertThat(list.el(".child").text()).isEqualTo("Alex");
     }
 
@@ -49,13 +49,13 @@ public class SearchTest extends IntegrationFluentTestNg {
     @Test
     public void checkSearchByLocatorWorks() {
         By locator = By.cssSelector(".small");
-        FluentList list = find(locator);
+        FluentList<FluentWebElement> list = find(locator);
         assertThat(list.ids()).contains("id", "id2");
     }
 
     @Test
     public void checkSearchOnListByLocatorWorks() {
-        FluentList list = find(".parent");
+        FluentList<FluentWebElement> list = find(".parent");
         By locator = By.cssSelector(".child");
         assertThat(list.find(locator).texts()).containsOnly("Alex");
     }
@@ -69,7 +69,7 @@ public class SearchTest extends IntegrationFluentTestNg {
 
     @Test
     public void checkSearchFirstOnListByLocatorWorks() {
-        FluentList list = find(".parent");
+        FluentList<FluentWebElement> list = find(".parent");
         By locator = By.cssSelector(".child");
         assertThat(list.el(locator).text()).isEqualTo("Alex");
     }
