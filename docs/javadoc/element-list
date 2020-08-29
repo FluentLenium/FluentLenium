@@ -40,3 +40,4 @@ org.fluentlenium.core.switchto
 org.fluentlenium.core.url
 org.fluentlenium.core.wait
 org.fluentlenium.utils
+org.fluentlenium.utils.chromium
