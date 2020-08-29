@@ -59,8 +59,8 @@ To help you navigate through FluentLenium, here's a short summary about its modu
 - **fluentlenium-junit-jupiter**: Provides support for integration with [JUnit 5](https://junit.org/junit5/).
 - **fluentlenium-testng**: Provides support for integration with [TestNG](https://testng.org/doc/index.html).
 - **fluentlenium-spock**: Provides support for integration with [Spock](http://spockframework.org).
-- **fluentlenium-cucumber**: Provides support for integration with [Cucumber](https://cucumber.io). This may be combined with any of the modules above that are also supported by Cucumber.
 - **fluentlenium-spring-testng**: Provides support for integration with [Spring Test NG](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/context/testng/AbstractTestNGSpringContextTests.html)
+- **fluentlenium-cucumber**: Provides support for integration with [Cucumber](https://cucumber.io). This may be combined with any of the modules above that are also supported by Cucumber.
 - **fluentlenium-assertj**: Provides [AssertJ](http://joel-costigliola.github.io/assertj/) assertions for FluentLenium specific objects like `FluentWebElement`, `FluentList` and `FluentPage`.
 - **fluentlenium-integration-tests**: Integration tests for validating the correctness of FluentLenium features internally.
 - **fluentlenium-coverage-report**: Creates jacoco test coverage report.

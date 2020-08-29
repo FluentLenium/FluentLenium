@@ -2,12 +2,9 @@ package org.fluentlenium.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.fluentlenium.adapter.SharedMutator;
-import org.fluentlenium.adapter.exception.AnnotationNotFoundException;
-import org.fluentlenium.adapter.exception.MethodNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.annotation.Annotation;
 import java.util.Optional;
 
 public final class ThreadLocalAdapterUtil {
@@ -31,34 +28,6 @@ public final class ThreadLocalAdapterUtil {
             LOGGER.warn("Current test method name is null. Are you in text context?");
         }
         return currentTestMethodName;
-    }
-
-    public static <T extends Annotation> T getClassAnnotationForClass(
-            Class<T> annotation, Class<?> classFromThread) {
-        T definedAnnotation = classFromThread.getAnnotation(annotation);
-
-        if (definedAnnotation == null) {
-            throw new AnnotationNotFoundException();
-        }
-
-        return definedAnnotation;
-    }
-
-    public static  <T extends Annotation> T getMethodAnnotationForMethod(
-            Class<T> annotation, Class<?> classFromThread, String methodNameFromThread) {
-        T definedAnnotation;
-        try {
-            definedAnnotation = classFromThread.getDeclaredMethod(methodNameFromThread)
-                    .getAnnotation(annotation);
-        } catch (NoSuchMethodException e) {
-            throw new MethodNotFoundException(e);
-        }
-
-        if (definedAnnotation == null) {
-            throw new AnnotationNotFoundException();
-        }
-
-        return definedAnnotation;
     }
 
     public static void setTestClassAndMethodValues(

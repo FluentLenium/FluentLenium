@@ -5,11 +5,11 @@ import static org.fluentlenium.adapter.TestRunnerCommon.doHtmlDump;
 import static org.fluentlenium.adapter.TestRunnerCommon.doScreenshot;
 import static org.fluentlenium.adapter.TestRunnerCommon.getTestDriver;
 import static org.fluentlenium.adapter.TestRunnerCommon.quitMethodAndThreadDrivers;
+import static org.fluentlenium.utils.AnnotationUtil.getClassAnnotationForClass;
+import static org.fluentlenium.utils.AnnotationUtil.getMethodAnnotationForMethod;
 import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
 import static org.fluentlenium.utils.ThreadLocalAdapterUtil.clearThreadLocals;
-import static org.fluentlenium.utils.ThreadLocalAdapterUtil.getClassAnnotationForClass;
 import static org.fluentlenium.utils.ThreadLocalAdapterUtil.getClassFromThread;
-import static org.fluentlenium.utils.ThreadLocalAdapterUtil.getMethodAnnotationForMethod;
 import static org.fluentlenium.utils.ThreadLocalAdapterUtil.getMethodNameFromThread;
 import static org.fluentlenium.utils.ThreadLocalAdapterUtil.setTestClassAndMethodValues;
 
