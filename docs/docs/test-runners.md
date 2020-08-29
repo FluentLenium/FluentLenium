@@ -8,6 +8,7 @@ sidebar:
   TestNG: "#testng"
   Cucumber: "#cucumber"
   Spock: "#spock"
+  Spring TestNG: "#spring-testng"
   FluentStandalone: "#standalone-mode"
 ---
 
@@ -17,6 +18,7 @@ sidebar:
 - [TestNG](#testng)
 - [Cucumber](#cucumber)
 - [Spock](#spock)
+- [Spring TestNG](#spring-testng)
 
 ## Standalone mode (no 3rd party test-runner)
 - [Standalone mode](#standalone-mode)
@@ -368,7 +370,25 @@ however the `FluentCucumberTest` based tests still use the old Cucumber `ObjectF
 
 - Extends FluentSpecification instead of FluentTest.
 
-E2E Spock test are present in [Spock example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spock).
+E2E Spock tests are present in [Spock example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spock).
+Enable it by activating ```examples``` Maven profile.
+
+## Spring TestNG
+
+- Import this maven dependency.
+
+```xml
+<dependency>
+    <groupId>org.fluentlenium</groupId>
+    <artifactId>fluentlenium-spring-testng</artifactId>
+    <version>4.3.1</version>
+    <scope>test</scope>
+</dependency>
+```
+
+- Extends FluentTestNgSpringTest instead of FluentTest.
+
+E2E Spring testNG tests are present in [Spring example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spring).
 Enable it by activating ```examples``` Maven profile.
 
 ## Standalone mode
