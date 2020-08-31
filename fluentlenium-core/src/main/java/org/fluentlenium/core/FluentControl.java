@@ -34,7 +34,12 @@ import org.fluentlenium.core.wait.AwaitControl;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.utils.chromium.ChromiumApi;
 import org.fluentlenium.utils.chromium.ChromiumControl;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Set;
