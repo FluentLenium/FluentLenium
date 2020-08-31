@@ -1,6 +1,9 @@
 package org.fluentlenium.adapter.testng;
 
 import org.fluentlenium.adapter.FluentTestRunnerAdapter;
+import org.fluentlenium.adapter.IFluentAdapter;
+import org.fluentlenium.adapter.TestRunnerAdapter;
+import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.utils.SeleniumVersionChecker;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
@@ -9,16 +12,23 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * TestNG FluentLenium Test Runner Adapter.
  * <p>
  * Extends this class to provide FluentLenium support to your TestNG Test class.
  */
+@Listeners(TestFilterer.class)
 public class FluentTestNgSpringTest extends SpringTestNGAdapter {
 
     private final Map<ITestContext, Map<Method, ITestNGMethod>> methods = new HashMap<>();
@@ -30,7 +40,14 @@ public class FluentTestNgSpringTest extends SpringTestNGAdapter {
             if (testMethods == null) {
                 testMethods = new HashMap<>();
 
-                for (ITestNGMethod method : context.getAllTestMethods()) {
+                ITestNGMethod[] allTestMethods = context.getAllTestMethods();
+                List<ITestNGMethod> filteredMethods = Arrays.stream(allTestMethods)
+                        .filter(filterFluentLeniumMethods(FluentControl.class))
+                        .filter(filterFluentLeniumMethods(IFluentAdapter.class))
+                        .filter(filterFluentLeniumMethods(TestRunnerAdapter.class))
+                        .collect(toList());
+
+                for (ITestNGMethod method : filteredMethods) {
                     testMethods.put(method.getConstructorOrMethod().getMethod(), method);
                 }
 
@@ -38,6 +55,10 @@ public class FluentTestNgSpringTest extends SpringTestNGAdapter {
             }
             return testMethods;
         }
+    }
+
+    private Predicate<ITestNGMethod> filterFluentLeniumMethods(Class<?> flClass) {
+        return method -> !method.getRealClass().equals(flClass);
     }
 
     /**
