@@ -16,6 +16,10 @@ engines:
       com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck:
         enabled: false
 
+plugins:
+  codenarc:
+    enabled: true
+
 ratings:
   paths:
   - "**.java"
