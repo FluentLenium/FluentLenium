@@ -8,7 +8,7 @@
 - [#922](https://github.com/FluentLenium/FluentLenium/issues/922) - Chromium API support (can be used in Chrome and Edge)
 - [#844](https://github.com/FluentLenium/FluentLenium/issues/844) - Added hoverOver() method to FluentActions
 - [#934](https://github.com/FluentLenium/FluentLenium/issues/934) - Added .hasTextContaining() assertion to assertj module
-- [#1103](https://github.com/FluentLenium/FluentLenium/issues/1103) - Added shortcut methods getWebDriver() and getAppiumDriver()
+- [#1103](https://github.com/FluentLenium/FluentLenium/issues/1103) - Added shortcut methods getDriver() and getAppiumDriver()
 - [#1092](https://github.com/FluentLenium/FluentLenium/issues/1092) - Cucumber major upgrade to 6.6.0
 
 ### 4.4.1 (Mar 23 2020)
@@ -77,7 +77,7 @@ Dependencies update and changes to update Cucumber to the 5.5 version
 - [#922](https://github.com/FluentLenium/FluentLenium/issues/922) - Chromium API support (can be used in Chrome and Edge)
 - [#844](https://github.com/FluentLenium/FluentLenium/issues/844) - Added hoverOver() method to FluentActions
 - [#934](https://github.com/FluentLenium/FluentLenium/issues/934) - Added .hasTextContaining() assertion to assertj module
-- [#1103](https://github.com/FluentLenium/FluentLenium/issues/1103) - Added shortcut methods getWebDriver() and getAppiumDriver()
+- [#1103](https://github.com/FluentLenium/FluentLenium/issues/1103) - Added shortcut methods getDriver() and getAppiumDriver()
 - [#1092](https://github.com/FluentLenium/FluentLenium/issues/1092) - Cucumber major upgrade to 6.6.0
 
 ### 3.9.1 (Aug 27 2019)
