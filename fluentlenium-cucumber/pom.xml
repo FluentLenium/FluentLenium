@@ -14,7 +14,7 @@
     <description>Cucumber Extension for FluentLenium</description>
 
     <properties>
-        <cucumber.version>6.6.0</cucumber.version>
+        <cucumber.version>6.6.1</cucumber.version>
     </properties>
 
     <dependencies>
