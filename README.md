@@ -70,3 +70,5 @@ To help you navigate through FluentLenium, here's a short summary about its modu
 # Contact Us
 If you have any comment, remark or issue, please open an issue on
 [FluentLenium Issue Tracker](https://github.com/FluentLenium/FluentLenium/issues)
+
+[![Foo](https://xscode.com/assets/promo-banner.svg)](https://xscode.com/filipcynarski/FluentLenium)
