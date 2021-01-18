@@ -8,7 +8,6 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
-import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Set;
 import org.fluentlenium.core.FluentControl;
@@ -81,6 +80,7 @@ public class UnshadowerTest extends FluentPage {
         .hasSize(2)
         .extracting(FluentWebElement::text).containsExactlyInAnyOrder("DIV1", "DIV2");
   }
+
 }
 
 interface TestWebDriver extends WebDriver, JavascriptExecutor { }
@@ -96,7 +96,7 @@ class TestedWebpage extends FluentPage {
   @Unshadow(css = {"div"})
   private Set<FluentWebElement> elementsSet;
 
-  public TestedWebpage(FluentControl control) {
+  TestedWebpage(FluentControl control) {
     super(control);
   }
 
