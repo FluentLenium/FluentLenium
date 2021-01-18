@@ -1,7 +1,9 @@
 package org.fluentlenium.core.inject;
 
+import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 
+import com.google.common.collect.ImmutableSet;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
@@ -14,10 +16,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.springframework.util.ReflectionUtils;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Unshadower {
+  private static final Logger LOGGER = LoggerFactory.getLogger(Unshadower.class);
+
   private final WebDriver webDriver;
   private final FluentPage page;
 
@@ -28,24 +32,24 @@ public class Unshadower {
 
   public void unshadowAllAnnotatedFields() {
     Arrays.stream(page.getClass().getDeclaredFields())
-        .filter(f -> f.isAnnotationPresent(Unshadow.class))
+        .filter(field -> field.isAnnotationPresent(Unshadow.class))
         .forEach(this::unshadowField);
   }
 
   private void unshadowField(Field field) {
     String[] cssSelectors = field.getAnnotation(Unshadow.class).css();
 
-    var deepestShadowRoots = extractShadowRoots(cssSelectors);
-    var elements = findElementsInLastShadowRoot(cssSelectors[cssSelectors.length - 1], deepestShadowRoots);
+    List<WebElement> deepestShadowRoots = extractShadowRoots(cssSelectors);
+    List<FluentWebElement> elements = findElementsInLastShadowRoot(cssSelectors[cssSelectors.length - 1], deepestShadowRoots);
 
     setValue(field, elements);
   }
 
   private List<FluentWebElement> findElementsInLastShadowRoot(String cssSelector, List<WebElement> lastShadowRoots) {
     return lastShadowRoots.stream()
-        .flatMap(we -> we.findElements(By.cssSelector(cssSelector)).stream())
+        .flatMap(shadowRoot -> shadowRoot.findElements(By.cssSelector(cssSelector)).stream())
         .filter(Objects::nonNull)
-        .map(we -> new FluentWebElement(we, page.getFluentControl(), page.getFluentControl()))
+        .map(element -> new FluentWebElement(element, page.getFluentControl(), page.getFluentControl()))
         .collect(toList());
   }
 
@@ -53,28 +57,40 @@ public class Unshadower {
     WebElement domRoot = webDriver.findElement(By.xpath("/*"));
     return Arrays.stream(cssSelectors)
         .limit(cssSelectors.length - 1)
-        .reduce(List.of(domRoot), this::extractElementsFromShadowRoot, (l1, l2) -> l2);
+        .reduce(singletonList(domRoot), this::extractElementsFromShadowRoot, (acc, val) -> val);
   }
 
   private List<WebElement> extractElementsFromShadowRoot(List<WebElement> previousNodes, String cssSelector) {
     return previousNodes.stream()
-        .flatMap(n -> n.findElements(By.cssSelector(cssSelector)).stream())
+        .flatMap(node -> node.findElements(By.cssSelector(cssSelector)).stream())
         .map(this::unshadow)
         .collect(toList());
   }
 
   private WebElement unshadow(WebElement elements) {
-    var executor = (JavascriptExecutor) webDriver;
+    JavascriptExecutor executor = (JavascriptExecutor) webDriver;
     return (WebElement) executor.executeScript("return arguments[0].shadowRoot", elements);
   }
 
   private void setValue(Field field, List<FluentWebElement> elements) {
     if (List.class.isAssignableFrom(field.getType())) {
-      ReflectionUtils.setField(field, page, elements);
+      setValueToField(field, elements);
     } else if (Set.class.isAssignableFrom(field.getType())) {
-      ReflectionUtils.setField(field, page, Set.copyOf(elements));
+      setValueToField(field, ImmutableSet.copyOf(elements));
     } else if (!elements.isEmpty()) {
-      ReflectionUtils.setField(field, page, elements.get(0));
+      setValueToField(field, elements.get(0));
+    }
+  }
+
+  private void setValueToField(Field field, Object value) {
+    boolean isAccessible = field.isAccessible();
+    try {
+      field.setAccessible(true);
+      field.set(page, value);
+    } catch (IllegalAccessException e) {
+      LOGGER.error("Couldn't set value to field", e);
+    } finally {
+      field.setAccessible(isAccessible);
     }
   }
 
