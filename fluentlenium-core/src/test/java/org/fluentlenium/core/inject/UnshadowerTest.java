@@ -1,5 +1,6 @@
 package org.fluentlenium.core.inject;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.AdditionalMatchers.or;
 import static org.mockito.ArgumentMatchers.any;
@@ -58,8 +59,11 @@ public class UnshadowerTest extends FluentPage {
     when(webDriver.findElement(By.xpath("/*"))).thenReturn(shadowRoots);
     when(webDriver.executeScript(anyString(), any())).thenReturn(shadowRoots);
 
-    when(shadowRoots.findElements(or(eq(By.cssSelector("outer-shadow-root")), eq(By.cssSelector("inner-shadow-root"))))).thenReturn(Lists.newArrayList(shadowRoots));
-    when(shadowRoots.findElements(By.cssSelector("div"))).thenReturn(Lists.newArrayList(searchedElement1, searchedElement2));
+    when(shadowRoots.findElements(or(
+            eq(By.cssSelector("outer-shadow-root")),
+            eq(By.cssSelector("inner-shadow-root")))))
+        .thenReturn(newArrayList(shadowRoots));
+    when(shadowRoots.findElements(By.cssSelector("div"))).thenReturn(newArrayList(searchedElement1, searchedElement2));
 
     when(searchedElement1.getText()).thenReturn("DIV1");
     when(searchedElement2.getText()).thenReturn("DIV2");
@@ -79,7 +83,7 @@ public class UnshadowerTest extends FluentPage {
   }
 }
 
-interface TestWebDriver extends WebDriver, JavascriptExecutor {}
+interface TestWebDriver extends WebDriver, JavascriptExecutor { }
 
 class TestedWebpage extends FluentPage {
 
@@ -107,4 +111,5 @@ class TestedWebpage extends FluentPage {
   public Set<FluentWebElement> getElementsSet() {
     return elementsSet;
   }
+
 }
