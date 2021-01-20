@@ -31,6 +31,12 @@ jobs:
         java-version: 11
     - name: Java 11 - unit & integration tests
       run: mvn -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml
+    - name: Java 11 - unit & integration tests code coverage + snapshot upload
+      run: |
+        mvn -Pjava11 clean verify jacoco:report --file pom.xml
+        mvn -Pjava11 coveralls:report --file pom.xml
+        mvn -Pjava11 deploy -DskipTests --settings deploy-settings.xml --file pom.xml    
+        
   java11-javadoc:
     runs-on: ubuntu-latest
     steps:
@@ -56,5 +62,4 @@ jobs:
         chmod +x examples/quickstart-firefox/gradlew
         chmod +x examples/quickstart-firefox/gradle/wrapper/gradle-wrapper.jar
         cd examples/quickstart-firefox
-        ./gradlew test build -x test
-        
+        ./gradlew test build -x test      
