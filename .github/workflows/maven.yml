@@ -51,3 +51,10 @@ jobs:
         java-version: 11
     - name: Java 11 - compile examples
       run: mvn -Pexamples,java11 clean compile   
+    - name: Java 11 - compile Kotlin examples
+      run: |
+        chmod +x examples/quickstart-firefox/gradlew
+        chmod +x examples/quickstart-firefox/gradle/wrapper/gradle-wrapper.jar
+        cd examples/quickstart-firefox
+        ./gradlew test build -x test
+        
