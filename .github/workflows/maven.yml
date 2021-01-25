@@ -32,9 +32,11 @@ jobs:
     - name: Java 11 - unit & integration tests
       run: mvn -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml
     - name: Java 11 - unit & integration tests code coverage + snapshot upload
+      env:
+        REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
       run: |
         mvn -Pjava11 clean verify jacoco:report --file pom.xml
-        mvn -Pjava11 coveralls:report --file pom.xml
+        mvn -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report --file pom.xml
         mvn -Pjava11 deploy -DskipTests --settings deploy-settings.xml --file pom.xml    
         
   java11-javadoc:
