@@ -42,6 +42,7 @@ jobs:
   #mvn -Pjava11 deploy -DskipTests --settings deploy-settings.xml --file pom.xml    
         
   java11-javadoc:
+    needs: [java11-build]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -70,6 +71,7 @@ jobs:
       run: bundle exec rake
        
   java11-examples:
+    needs: [java11-build]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -85,7 +87,9 @@ jobs:
         chmod +x examples/quickstart-firefox/gradle/wrapper/gradle-wrapper.jar
         cd examples/quickstart-firefox
         ./gradlew test build -x test      
+
   e2etests:
+    needs: [java11-build]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
