@@ -90,7 +90,7 @@ jobs:
     - name: Ruby docs build
       run: 
         chmod +x ./docs/cibuild
-        ( cd docs && ./cibuild )
+        cd docs && ./cibuild
     - name: Run tests
       run: bundle exec rake
        
