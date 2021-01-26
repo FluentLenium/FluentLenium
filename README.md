@@ -1,6 +1,6 @@
 # What is FluentLenium ?
 
-[![Travis](https://travis-ci.com/FluentLenium/FluentLenium.svg?branch=develop)](https://travis-ci.com/FluentLenium/FluentLenium)
+[![FluentLenium CI pipeline](https://github.com/FluentLenium/FluentLenium/workflows/FluentLenium%20CI%20pipeline/badge.svg)]
 [![Coveralls](https://coveralls.io/repos/github/FluentLenium/FluentLenium/badge.svg?branch=develop)](https://coveralls.io/github/FluentLenium/FluentLenium?branch=develop)
 [![Javadoc](https://javadoc-badge.appspot.com/org.fluentlenium/fluentlenium-core.svg?label=javadoc)](https://fluentlenium.com/javadoc)
 [![Maven Central](https://img.shields.io/maven-central/v/org.fluentlenium/fluentlenium-parent.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.fluentlenium%22%20AND%20a%3A%22fluentlenium-parent%22)
