@@ -90,6 +90,7 @@ jobs:
         bundler-cache: true
     - name: Ruby docs build
       run: |
+        sudo apt-get install ruby2.6-dev
         chmod +x ./docs/cibuild
         cd docs && ./cibuild
     - name: Run tests
