@@ -88,9 +88,12 @@ jobs:
       with:
         ruby-version: 2.6
         bundler-cache: true
+    - name: Set up Python 2.7
+      uses: actions/setup-python@v2
+      with:
+        python-version: 2.7
     - name: Ruby docs build
       run: |
-        sudo apt-get install ruby2.6-dev
         chmod +x ./docs/cibuild
         cd docs && ./cibuild
     - name: Run tests
