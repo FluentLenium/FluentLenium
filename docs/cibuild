@@ -2,4 +2,4 @@
 set -e # halt script on error
 
 bundle install
-jekyll build
+bundle exec jekyll build
