@@ -75,29 +75,29 @@ jobs:
     - name: Java 11 - JavaDoc
       run: mvn -Pjava11 javadoc:aggregate
 
-  build-docs:
-    needs: [java11-javadoc]
-    runs-on: ubuntu-latest
-    env:
-      NOKOGIRI_USE_SYSTEM_LIBRARIES: true
-      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.6
-        bundler-cache: true
-    - name: Set up Python 2.7
-      uses: actions/setup-python@v2
-      with:
-        python-version: 2.7
-    - name: Ruby docs build
-      run: |
-        chmod +x ./docs/cibuild
-        cd docs && ./cibuild
-    - name: Run tests
-      run: bundle exec rake
+#  build-docs:
+#    needs: [java11-javadoc]
+#    runs-on: ubuntu-latest
+#    env:
+#      NOKOGIRI_USE_SYSTEM_LIBRARIES: true
+#      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Set up Ruby
+#      uses: ruby/setup-ruby@v1
+#      with:
+#        ruby-version: 2.6
+#        bundler-cache: true
+#    - name: Set up Python 2.7
+#      uses: actions/setup-python@v2
+#      with:
+#        python-version: 2.7
+#    - name: Ruby docs build
+#      run: |
+#       chmod +x ./docs/cibuild
+#        cd docs && ./cibuild
+#    - name: Run tests
+#      run: bundle exec rake
        
 #  java11-examples:
 #    needs: [java11-build]
