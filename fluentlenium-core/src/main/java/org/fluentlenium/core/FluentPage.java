@@ -2,6 +2,7 @@ package org.fluentlenium.core;
 
 import org.apache.commons.lang3.StringUtils;
 import org.fluentlenium.core.annotation.PageUrl;
+import org.fluentlenium.core.inject.Unshadower;
 import org.fluentlenium.core.page.ClassAnnotations;
 import org.fluentlenium.core.url.ParsedUrlTemplate;
 import org.fluentlenium.core.url.UrlTemplate;
@@ -204,6 +205,7 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
     private <P extends FluentPage> P navigateTo(String url) {
         checkState(url, "An URL should be defined on the page. Use @PageUrl annotation or override getUrl() method.");
         goTo(url);
+        new Unshadower(getDriver(), this).unshadowAllAnnotatedFields();
         return (P) this;
     }
 }

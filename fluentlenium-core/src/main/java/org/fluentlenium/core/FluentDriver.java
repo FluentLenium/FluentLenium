@@ -22,6 +22,7 @@ import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.inject.ContainerContext;
 import org.fluentlenium.core.inject.DefaultContainerInstantiator;
 import org.fluentlenium.core.inject.FluentInjector;
+import org.fluentlenium.core.inject.Unshadower;
 import org.fluentlenium.core.performance.PerformanceTiming;
 import org.fluentlenium.core.performance.DefaultPerformanceTiming;
 import org.fluentlenium.core.script.FluentJavascript;
@@ -227,6 +228,7 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
     public <P extends FluentPage> P goTo(P page) {
         checkArgument(page, "It is required to specify an instance of FluentPage for navigation.");
         page.go();
+        new Unshadower(driver, page).unshadowAllAnnotatedFields();
         return page;
     }
 
