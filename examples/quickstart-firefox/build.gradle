@@ -13,15 +13,15 @@ test {
 }
 
 dependencies {
-    implementation 'org.fluentlenium:fluentlenium-junit-jupiter:4.5.2-SNAPSHOT'
-    implementation 'org.fluentlenium:fluentlenium-assertj:4.5.2-SNAPSHOT'
+    implementation 'org.fluentlenium:fluentlenium-junit-jupiter:4.6.1-SNAPSHOT'
+    implementation 'org.fluentlenium:fluentlenium-assertj:4.6.1-SNAPSHOT'
     testImplementation 'ch.qos.logback:logback-classic:1.2.3'
     testImplementation 'org.seleniumhq.selenium:selenium-firefox-driver:3.141.59'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 group = 'org.fluentlenium'
-version = '4.5.2-SNAPSHOT'
+version = '4.6.1-SNAPSHOT'
 description = 'FluentLenium Examples Firefox'
 sourceCompatibility = '11'
 compileKotlin {

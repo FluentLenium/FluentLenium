@@ -5,6 +5,7 @@ import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isParent;
 
 import org.fluentlenium.core.FluentContainer;
 import org.fluentlenium.core.FluentControl;
+import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.components.LazyComponents;
 import org.fluentlenium.core.components.LazyComponentsListener;
@@ -83,6 +84,9 @@ public class FluentInjector implements FluentInjectControl {
     public <T> T newInstance(Class<T> cls) {
         T container = containerInstantiator.newInstance(cls, null);
         inject(container);
+        if (container instanceof FluentPage) {
+            new Unshadower(fluentControl.getDriver(), (FluentPage) container).unshadowAllAnnotatedFields();
+        }
         return container;
     }
 
