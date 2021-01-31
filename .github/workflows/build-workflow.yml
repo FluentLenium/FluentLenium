@@ -75,21 +75,21 @@ jobs:
     - name: Java 11 - JavaDoc
       run: mvn -Pjava11 javadoc:aggregate
 
-  build-docs:
-    runs-on: ubuntu-latest
-    env:
-      NOKOGIRI_USE_SYSTEM_LIBRARIES: true
-      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Jekyll
-      uses: helaili/jekyll-action@2.0.5
-    - name: Ruby docs build
-      run: |
-        chmod +x ./docs/cibuild
-        cd docs && ./cibuild
-    - name: Run tests
-      run: bundle exec rake
+#  build-docs:
+#    runs-on: ubuntu-latest
+#    env:
+#      NOKOGIRI_USE_SYSTEM_LIBRARIES: true
+#      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Set up Jekyll
+#      uses: helaili/jekyll-action@2.0.5
+#    - name: Ruby docs build
+#      run: |
+#        chmod +x ./docs/cibuild
+#        cd docs && ./cibuild
+#    - name: Run tests
+#      run: bundle exec rake
        
 #  java11-examples:
 #    needs: [java11-build]
