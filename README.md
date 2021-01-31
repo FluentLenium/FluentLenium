@@ -24,7 +24,7 @@ FluentLenium gives you [multiple methods](https://fluentlenium.com/docs/test-met
 
 # Support
 
-FluentLenium is an OpenSource project. If you or your organisation needs more assitance or custom features we are open to colaborate and support you over the xs:code platform.
+FluentLenium is an OpenSource project. If you or your company needs more assitance or custom features we are open to colaborate and support you over the xs:code platform.
 
 [![FluentLenium on XS:CODE](FluentLenium-banner.png)](https://xscode.com/filipcynarski/FluentLenium) 
 
