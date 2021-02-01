@@ -115,32 +115,32 @@ jobs:
 #        cd examples/quickstart-firefox
 #        ./gradlew test build -x test
 
-#  e2etests:
-#    needs: [java11-build]
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: Cache Maven packages
-#      uses: actions/cache@v2
-#      with:
-#        path: ~/.m2
-#        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-#        restore-keys: ${{ runner.os }}-m2
-#    - uses: actions/checkout@v2
-#    - name: Set up JDK 11
-#      uses: actions/setup-java@v1
-#      env:
-#        BROWSERSTACK_GRID_URL: ${{ secrets.BROWSER_STACK_URL }}
-#      with:
-#        java-version: 11
-#    - name: E2E on Edge
-#      run: cd examples/spring && mvn clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
-#    - name: E2E on IE
-#      run: cd examples/spring && mvn clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
-#    - name: E2E on Chrome
-#      run: cd examples/spring && mvn clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
-#    - name: E2E on Firefox
-#      run: cd examples/spring && mvn clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
-#    - name: E2E on Iphone Web test (Safari on Iphone)
-#      run: cd examples/spring && mvn clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
-#    - name: E2E on Android Web test (Chrome on Android device)
-#      run: cd examples/spring && mvn clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+  e2etests:
+    needs: [java11-build]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      env:
+        BROWSERSTACK_GRID_URL: ${{ secrets.BROWSER_STACK_URL }}
+      with:
+        java-version: 11
+    - name: E2E on Edge
+      run: cd examples/spring && mvn clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+    - name: E2E on IE
+      run: cd examples/spring && mvn clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+    - name: E2E on Chrome
+      run: cd examples/spring && mvn clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+    - name: E2E on Firefox
+      run: cd examples/spring && mvn clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+    - name: E2E on Iphone Web test (Safari on Iphone)
+      run: cd examples/spring && mvn clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+    - name: E2E on Android Web test (Chrome on Android device)
+      run: cd examples/spring && mvn clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
