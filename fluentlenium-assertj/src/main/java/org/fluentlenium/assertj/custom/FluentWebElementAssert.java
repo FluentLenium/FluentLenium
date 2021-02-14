@@ -251,7 +251,7 @@ public class FluentWebElementAssert extends AbstractFluentAssert<FluentWebElemen
             failWithMessage("The element does not have attribute " + attribute);
         }
 
-        return new AbstractStringAssert<>(actualValue, AbstractStringAssert.class);
+        return null;
     }
 
     @Override
