@@ -228,7 +228,6 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
     public <P extends FluentPage> P goTo(P page) {
         checkArgument(page, "It is required to specify an instance of FluentPage for navigation.");
         page.go();
-        new Unshadower(driver, page).unshadowAllAnnotatedFields();
         return page;
     }
 
