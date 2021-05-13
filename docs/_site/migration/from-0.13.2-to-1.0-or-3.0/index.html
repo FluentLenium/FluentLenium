@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="msvalidate.01" content="CB7D41B769EED78B294F9EB873406AA8" />
+
+  <title>Migration</title>
+  <meta name="Description" content="FluentLenium is a website automation framework which
+   extends Selenium to write reliable and resilient UI functional tests.
+    This framework is React ready. Written and maintained by people who
+     are automating browser-based tests on a daily basis.">
+  <meta name="author" content="FluentLenium" />
+  
+  
+  <meta name="description" content="Guidelines to migrate from 0.13.2 to 1.0 or 3.0">
+  
+
+  <link rel="alternate" type="application/rss+xml" title="FluentLenium - FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests." href="/feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+    
+  
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+  
+  
+
+  
+
+  <!-- Facebook OpenGraph tags -->
+  <meta property="og:title" content="Migration" />
+  <meta property="og:type" content="website" />
+  
+  <meta property="og:url" content="http://fluentlenium.com/migration/from-0.13.2-to-1.0-or-3.0/" />
+  
+  
+  <meta property="og:image" content="http://fluentlenium.com/img/avatar-icon.png" />
+  
+  
+  <!-- Twitter summary cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@FluentLenium" />
+  <meta name="twitter:creator" content="@FluentLenium" />
+  <meta name="twitter:title" content="Migration" />
+  <meta name="twitter:description" content="FluentLenium 1.0 and 3.0 brings many new features but also comes with breaking changes. If you have some tests written using previous version, reading this guideline should help you to migrate. Maven ----- Some changes are required in maven configuration. - Replace `fluentlenium-core` dependency with `fluentlenium-junit`. - Add dependency to..." />
+  
+  <meta name="twitter:image" content="http://fluentlenium.com/img/avatar-icon.png" />
+  
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132760260-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-132760260-1');
+</script>
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://fluentlenium.com">FluentLenium</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/">Home</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/quickstart">Quickstart</a>
+
+          </li>
+        
+        
+        
+          <li class="navlinks-container">
+            <a class="navlinks-parent" href="javascript:void(0)">Docs</a>
+            <div class="navlinks-children">
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/test-runners">Supported Test runners</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/locators">Finding elements</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/key_features">Key features</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/configuration">Configuration</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/test-methods">Test methods</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/assertion-libraries">Assertion libraries</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/appium-support">Appium support</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="https://fluentlenium.com/javadoc">Javadoc</a>
+
+                
+              
+            </div>
+          </li>
+        
+        
+        
+          <li class="navlinks-container">
+            <a class="navlinks-parent" href="javascript:void(0)">Migration</a>
+            <div class="navlinks-children">
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/migration/from-0.13.2-to-1.0-or-3.0">to 3.0</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/migration/3.0-to-4.0">from 3.0 to 4.0</a>
+
+                
+              
+            </div>
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/about">About</a>
+
+          </li>
+        
+        
+        
+          <li class="navlinks-container">
+            <a class="navlinks-parent" href="javascript:void(0)">Github</a>
+            <div class="navlinks-children">
+              
+                
+                  
+            
+
+
+
+
+
+<a href="https://github.com/FluentLenium/FluentLenium">Sources</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="https://github.com/FluentLenium/FluentLenium/issues">Issues</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="https://github.com/FluentLenium/FluentLenium/releases">Releases</a>
+
+                
+              
+            </div>
+          </li>
+        
+        
+      </ul>
+    </div>
+
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://fluentlenium.com ">
+	      <img class="avatar-img" src="/img/avatar-icon.png" />
+		</a>
+	  </div>
+	</div>
+	
+
+  </div>
+</nav>
+
+<nav class="sidebar">
+    
+</nav>
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-heading">
+          <h1>Migration</h1>
+		  
+		    
+            <hr class="small">
+            <span class="page-subheading">Guidelines to migrate from 0.13.2 to 1.0 or 3.0</span>
+			
+		  
+		  
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <p>FluentLenium 1.0 and 3.0 brings many new features but also comes with breaking changes.</p>
+
+<p>If you have some tests written using previous version, reading this guideline should help you to migrate.</p>
+
+<h2 id="maven">Maven</h2>
+<p>Some changes are required in maven configuration.</p>
+
+<ul>
+  <li>Replace <code class="language-plaintext highlighter-rouge">fluentlenium-core</code> dependency with <code class="language-plaintext highlighter-rouge">fluentlenium-junit</code>.</li>
+  <li>Add dependency to Selenium drivers actually used.</li>
+</ul>
+
+<h2 id="configuration">Configuration</h2>
+<p>In previous version, overriding <code class="language-plaintext highlighter-rouge">getDefaultDriver()</code> method was the only way to define
+the <code class="language-plaintext highlighter-rouge">WebDriver</code> to use. FluentLenium now provides configuration features including
+<code class="language-plaintext highlighter-rouge">webDriver</code> and <code class="language-plaintext highlighter-rouge">capabilities</code> properties that should be enough for most use case.</p>
+
+<p>If you still need to instantiate the WebDriver manually, or if configuration
+features doesn’t seem to integrates well in your environment, <code class="language-plaintext highlighter-rouge">getDefaultDriver()</code> has been renamed to <code class="language-plaintext highlighter-rouge">newWebDriver()</code>
+and can still be overridden.</p>
+
+<p>Keep in mind that events related features requires to wrap the <code class="language-plaintext highlighter-rouge">WebDriver</code> instance into <code class="language-plaintext highlighter-rouge">EventFiringWebDriver</code>.</p>
+
+<ul>
+  <li>
+    <p>Use <code class="language-plaintext highlighter-rouge">@FluentConfiguration(driverLifecycle=...)</code> instead of <code class="language-plaintext highlighter-rouge">@SharedDriver(...)</code>.</p>
+  </li>
+  <li>
+    <p>Rename <code class="language-plaintext highlighter-rouge">TriggerMode</code> enumeration values (ie: <code class="language-plaintext highlighter-rouge">ON_FAIL</code> =&gt; <code class="language-plaintext highlighter-rouge">AUTOMATIC_ON_FAIL</code>).</p>
+  </li>
+</ul>
+
+<h2 id="search-method-names">Search method names</h2>
+<p>Some methods have been renamed and others have been removed to improve consistency and reduce codebase.</p>
+
+<ul>
+  <li>Replace <code class="language-plaintext highlighter-rouge">findFirst()</code> occurrences with <code class="language-plaintext highlighter-rouge">el()</code>, <code class="language-plaintext highlighter-rouge">$(...).first()</code> or <code class="language-plaintext highlighter-rouge">find(...).first()</code>.</li>
+  <li>Replace <code class="language-plaintext highlighter-rouge">$(..., index)</code> or <code class="language-plaintext highlighter-rouge">find(..., index)</code> occurrences with <code class="language-plaintext highlighter-rouge">$(...).index(index)</code> or <code class="language-plaintext highlighter-rouge">find(...).index(index)</code>.</li>
+</ul>
+
+<h2 id="element-method-names">Element method names</h2>
+<ul>
+  <li>
+    <p>Many method prefixes like <code class="language-plaintext highlighter-rouge">is</code>, <code class="language-plaintext highlighter-rouge">has</code> and <code class="language-plaintext highlighter-rouge">get</code> have been removed from method names.
+Methods like <code class="language-plaintext highlighter-rouge">isDisplayed</code>, <code class="language-plaintext highlighter-rouge">isEnabled</code>, <code class="language-plaintext highlighter-rouge">getValue()</code>, <code class="language-plaintext highlighter-rouge">getAttribute(name)</code> have been
+renamed with their shorter form <code class="language-plaintext highlighter-rouge">displayed()</code>, <code class="language-plaintext highlighter-rouge">enabled()</code>, <code class="language-plaintext highlighter-rouge">value()</code>, <code class="language-plaintext highlighter-rouge">attribute(name)</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">text(...)</code> setter has been renamed in <code class="language-plaintext highlighter-rouge">write(...)</code> to avoid collision with <code class="language-plaintext highlighter-rouge">text()</code> getter;</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">fill().withValues()</code> has been renamed to <code class="language-plaintext highlighter-rouge">fill().withText()</code> to avoid confusion with <code class="language-plaintext highlighter-rouge">value()</code>
+that retrieves the <code class="language-plaintext highlighter-rouge">value</code> attribute.</p>
+  </li>
+</ul>
+
+<h2 id="conditions-and-await">Conditions and await()</h2>
+<p><code class="language-plaintext highlighter-rouge">await()</code> now supports more conditions, provides better error message, and is easier to maintain.</p>
+
+<p><code class="language-plaintext highlighter-rouge">await().untilEach()</code> match the condition when each element match the condition</p>
+
+<p><code class="language-plaintext highlighter-rouge">await().until()</code> match the condition when at least one element match the condition.</p>
+
+<p><code class="language-plaintext highlighter-rouge">isNotPresent()</code> has been removed, in favor of <code class="language-plaintext highlighter-rouge">not().present()</code>. <code class="language-plaintext highlighter-rouge">not()</code> method on condition builder
+ allows to negate any condition.</p>
+
+<p>You can also check the exact same conditions on elements or list of elements, using
+<code class="language-plaintext highlighter-rouge">FluentWebElement#conditions()</code>, <code class="language-plaintext highlighter-rouge">FluentList#one()</code> and <code class="language-plaintext highlighter-rouge">FluentList#each()</code></p>
+
+<ul>
+  <li>Replace <code class="language-plaintext highlighter-rouge">await().until("some-selector")...</code> with <code class="language-plaintext highlighter-rouge">await().until($(some-selector))...</code> or
+<code class="language-plaintext highlighter-rouge">$(some-selector).await().until()...</code>.</li>
+</ul>
+
+<h2 id="pages-and-components">Pages and Components</h2>
+
+<ul>
+  <li>Each method available in <code class="language-plaintext highlighter-rouge">FluentTest</code> is now available in both <code class="language-plaintext highlighter-rouge">FluentPage</code> and <code class="language-plaintext highlighter-rouge">FluentWebElement</code>, allowing 
+implementation of any logic into Pages and Components.</li>
+  <li>Ensure your Page Objects extends <code class="language-plaintext highlighter-rouge">FluentPage</code> and have a public empty constructor.</li>
+  <li>Ensure your Components extends <code class="language-plaintext highlighter-rouge">FluentWebElement</code> and have a constructor matching <code class="language-plaintext highlighter-rouge">FluentWebElement</code> constructor.</li>
+  <li><code class="language-plaintext highlighter-rouge">createPage</code> method has been removed in favor of <code class="language-plaintext highlighter-rouge">newInstance</code>.</li>
+</ul>
+
+<p>A Component is roughly the same thing as a Page Object. A Page Object is global, but a Component is local and attached
+to an element so it can appear many time in a single page. A component can be created with
+<code class="language-plaintext highlighter-rouge">FluentWebElement#as(Component.class)</code> / <code class="language-plaintext highlighter-rouge">FluentList#as(Component.class)</code>.</p>
+
+<h2 id="ajax-support">Ajax support</h2>
+<p>FluentLenium now supports Ajax natively, using either injected elements or <code class="language-plaintext highlighter-rouge">$</code>/<code class="language-plaintext highlighter-rouge">el</code>/<code class="language-plaintext highlighter-rouge">find</code> search methods.
+<code class="language-plaintext highlighter-rouge">@WaitHook</code> makes writing Ajax Webapp tests as simple as writing Static Website tests.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@AjaxElement</code> has been removed.</li>
+</ul>
+
+<h2 id="lazy-locators">Lazy Locators</h2>
+
+<p>When using search methods <code class="language-plaintext highlighter-rouge">find</code>, <code class="language-plaintext highlighter-rouge">$</code> or <code class="language-plaintext highlighter-rouge">el</code>, effective search is <strong>NOT</strong> performed at invocation time.
+It’s a major change in FluentLenium 1.0. Those methods now returns a <strong>Lazy Locator</strong> implementing 
+<code class="language-plaintext highlighter-rouge">FluentWebElement</code> / <code class="language-plaintext highlighter-rouge">FluentList</code>.</p>
+
+<p>Those locators looks like elements from previous versions, but the search will be performed lazily, when invoking the
+first action or check on the element.</p>
+
+<p>So beware if you used to rely on catching <code class="language-plaintext highlighter-rouge">NoSuchElementException</code>: Those exceptions will now be
+raised later in the test, or even not raised at all the element is not actively used.</p>
+
+<p>You may use <code class="language-plaintext highlighter-rouge">FluentWebElement#now()</code> / <code class="language-plaintext highlighter-rouge">FluentList#now()</code> to force the search at any time.</p>
+
+<h2 id="implicit-waits">Implicit waits</h2>
+<p>When using raw Selenium, explicit waits may spoil testing code and using implicit wait can be a solution.
+But using implicit waits may hard to diagnose delays when running tests.</p>
+
+<p>FluentLenium now advocates for never using implicit wait, in favor of using explicit waits only. FluentLenium hides the
+complexity of explicit waits so them become readable when invoked manually, and can even automate them before each action with the
+use of <code class="language-plaintext highlighter-rouge">@Wait</code> hook so you don’t have to care about them.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">withDefaultSearchWait</code> has been removed. Use <code class="language-plaintext highlighter-rouge">@Wait</code> instead.</li>
+</ul>
+
+<h2 id="something-wrong-">Something wrong ?</h2>
+<p>You may <a href="https://github.com/FluentLenium/FluentLenium/issues">open issue</a> if something wrong occurs during migration.</p>
+
+	    
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          <li>
+            <a href="https://github.com/FluentLenium" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://twitter.com/FluentLenium" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+      
+		  
+		  
+		  
+		  
+      
+      
+      
+      
+		  
+        </ul>
+        <p class="copyright text-muted">
+		  FluentLenium
+		  &nbsp;&bull;&nbsp;
+		  2021
+
+		  
+		  &nbsp;&bull;&nbsp;
+		  <a href="http://fluentlenium.com">fluentlenium.com</a>
+		  
+	    </p>
+	        <!-- Please don't remove this, keep my open source work credited :) -->
+		<p class="theme-by text-muted">
+		  Theme by
+		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+
+
+
+
+  
+  </body>
+</html>

@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="msvalidate.01" content="CB7D41B769EED78B294F9EB873406AA8" />
+
+  <title>Test methods</title>
+  <meta name="Description" content="FluentLenium is a website automation framework which
+   extends Selenium to write reliable and resilient UI functional tests.
+    This framework is React ready. Written and maintained by people who
+     are automating browser-based tests on a daily basis.">
+  <meta name="author" content="FluentLenium" />
+  
+  
+  <meta name="description" content="FluentLenium">
+  
+
+  <link rel="alternate" type="application/rss+xml" title="FluentLenium - FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests." href="/feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+    
+  
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+  
+  
+
+  
+
+  <!-- Facebook OpenGraph tags -->
+  <meta property="og:title" content="Test methods" />
+  <meta property="og:type" content="website" />
+  
+  <meta property="og:url" content="http://fluentlenium.com/docs/test-methods/" />
+  
+  
+  <meta property="og:image" content="http://fluentlenium.com/img/avatar-icon.png" />
+  
+  
+  <!-- Twitter summary cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@FluentLenium" />
+  <meta name="twitter:creator" content="@FluentLenium" />
+  <meta name="twitter:title" content="Test methods" />
+  <meta name="twitter:description" content="This section contains description of FluentLenium features which may be useful during writing tests. ## Table of Contents - [Window actions](#window-actions) - [Keyboard and Mouse actions](#keyboard-and-mouse-actions) - [Drag and Drop](#drag-and-drop) - [Events](#events) - [Annotations](#annotations) - [Listener API](#listener-api) - [Hooks](#hooks) - [Javascript execution](#javascript-execution) - [CSS injection](#css-injection) - [Taking ScreenShots and HTML..." />
+  
+  <meta name="twitter:image" content="http://fluentlenium.com/img/avatar-icon.png" />
+  
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132760260-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-132760260-1');
+</script>
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://fluentlenium.com">FluentLenium</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/">Home</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/quickstart">Quickstart</a>
+
+          </li>
+        
+        
+        
+          <li class="navlinks-container">
+            <a class="navlinks-parent" href="javascript:void(0)">Docs</a>
+            <div class="navlinks-children">
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/test-runners">Supported Test runners</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/locators">Finding elements</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/key_features">Key features</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/configuration">Configuration</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/test-methods">Test methods</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/assertion-libraries">Assertion libraries</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/appium-support">Appium support</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="https://fluentlenium.com/javadoc">Javadoc</a>
+
+                
+              
+            </div>
+          </li>
+        
+        
+        
+          <li class="navlinks-container">
+            <a class="navlinks-parent" href="javascript:void(0)">Migration</a>
+            <div class="navlinks-children">
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/migration/from-0.13.2-to-1.0-or-3.0">to 3.0</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/migration/3.0-to-4.0">from 3.0 to 4.0</a>
+
+                
+              
+            </div>
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/about">About</a>
+
+          </li>
+        
+        
+        
+          <li class="navlinks-container">
+            <a class="navlinks-parent" href="javascript:void(0)">Github</a>
+            <div class="navlinks-children">
+              
+                
+                  
+            
+
+
+
+
+
+<a href="https://github.com/FluentLenium/FluentLenium">Sources</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="https://github.com/FluentLenium/FluentLenium/issues">Issues</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="https://github.com/FluentLenium/FluentLenium/releases">Releases</a>
+
+                
+              
+            </div>
+          </li>
+        
+        
+      </ul>
+    </div>
+
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://fluentlenium.com ">
+	      <img class="avatar-img" src="/img/avatar-icon.png" />
+		</a>
+	  </div>
+	</div>
+	
+
+  </div>
+</nav>
+
+<nav class="sidebar">
+    
+    <ul>
+        
+        <li><a href="#window-actions">Window actions</a></li>
+        
+        <li><a href="#keyboard-and-mouse-actions">Keyboard and mouse</a></li>
+        
+        <li><a href="#drag-and-drop">Drag and Drop</a></li>
+        
+        <li><a href="#events">Events</a></li>
+        
+        <li><a href="#annotations">Annotations</a></li>
+        
+        <li><a href="#listener-api">Listener API</a></li>
+        
+        <li><a href="#hooks">Hooks</a></li>
+        
+        <li><a href="#javascript-execution">Javascript execution</a></li>
+        
+        <li><a href="#css-injection">CSS injection</a></li>
+        
+        <li><a href="#taking-screenshots-and-html-dumps">Screenshots and HTML dump</a></li>
+        
+        <li><a href="#iframe">Iframe</a></li>
+        
+        <li><a href="#alerts">Alerts</a></li>
+        
+        <li><a href="#performance-timing-api">Performance API</a></li>
+        
+        <li><a href="#chromium-api">Chromium API</a></li>
+        
+    </ul>
+    
+</nav>
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-heading">
+          <h1>Test methods</h1>
+		  
+		    
+            <hr class="small">
+            <span class="page-subheading">FluentLenium</span>
+			
+		  
+		  
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <p>This section contains description of FluentLenium features which may be useful during writing tests.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+  <li><a href="#window-actions">Window actions</a></li>
+  <li><a href="#keyboard-and-mouse-actions">Keyboard and Mouse actions</a></li>
+  <li><a href="#drag-and-drop">Drag and Drop</a></li>
+  <li><a href="#events">Events</a></li>
+  <li><a href="#annotations">Annotations</a></li>
+  <li><a href="#listener-api">Listener API</a></li>
+  <li><a href="#hooks">Hooks</a></li>
+  <li><a href="#javascript-execution">Javascript execution</a></li>
+  <li><a href="#css-injection">CSS injection</a></li>
+  <li><a href="#taking-screenshots-and-html-dumps">Taking ScreenShots and HTML Dumps</a></li>
+  <li><a href="#iframe">Iframe</a></li>
+  <li><a href="#alerts">Alerts</a></li>
+  <li><a href="#performance-timing-api">Performance Timing API</a></li>
+  <li><a href="#chromium-api">Chromium API</a></li>
+</ul>
+
+<h2 id="window-actions">Window actions</h2>
+
+<p>Window actions are available on <code class="language-plaintext highlighter-rouge">window()</code> method.</p>
+
+<p>Few additional methods are available from ones inherited from Selenium, like <code class="language-plaintext highlighter-rouge">clickAndOpenNew</code>,
+<code class="language-plaintext highlighter-rouge">openNewAndSwitch</code>, <code class="language-plaintext highlighter-rouge">clickAndCloseCurrent</code> and <code class="language-plaintext highlighter-rouge">switchToLast</code></p>
+
+<ul>
+  <li>
+    <p><strong>clickAndOpenNew</strong></p>
+
+    <p>You should use this method when click action invoked on element should end up with new window opened.
+This is just about waiting for new window to open, this method is not opening new browser window.</p>
+  </li>
+  <li>
+    <p><strong>openNewAndSwitch</strong></p>
+
+    <p>This method opens new window and switches the context to newly opened one.</p>
+  </li>
+  <li>
+    <p><strong>clickAndCloseCurrent</strong></p>
+
+    <p>You should use this method when click action invoked on element should end up with current window closed.
+This is just about waiting for new window to close, this method is not closing browser window.</p>
+  </li>
+  <li>
+    <p><strong>switchToLast</strong></p>
+
+    <p>This method switch to the last window. If argument is provided with the name of a window, ensure that the last
+window has this name.</p>
+  </li>
+</ul>
+
+<p>You can also maximize browser window:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">maximizeWindow</span><span class="o">();</span>
+</code></pre></div></div>
+
+<h2 id="keyboard-and-mouse-actions">Keyboard and Mouse actions</h2>
+
+<p>Advanced keyboard and mouse actions are available using keyboard() and mouse() in FluentTest class or element.</p>
+
+<h2 id="drag-and-drop">Drag and drop</h2>
+
+<p>Drag and drop can be done using <code class="language-plaintext highlighter-rouge">MouseElementActions</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">dragAndDrop</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">FluentWebElement</span> <span class="n">source</span> <span class="o">=</span> <span class="n">el</span><span class="o">(</span><span class="s">"#source"</span><span class="o">);</span>
+        <span class="nc">FluentWebElement</span> <span class="n">target</span> <span class="o">=</span> <span class="n">el</span><span class="o">(</span><span class="s">"target"</span><span class="o">);</span>
+        <span class="nc">MouseElementActions</span> <span class="n">actions</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MouseElementActions</span><span class="o">(</span><span class="n">getDriver</span><span class="o">(),</span> <span class="n">source</span><span class="o">.</span><span class="na">getElement</span><span class="o">());</span>
+        <span class="n">actions</span><span class="o">.</span><span class="na">dragAndDropTo</span><span class="o">(</span><span class="n">target</span><span class="o">.</span><span class="na">getElement</span><span class="o">());</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="events">Events</h2>
+
+<p>Selenium has a driver wrapper named <code class="language-plaintext highlighter-rouge">EventFiringWebDriver</code> that is able to generate events and register listeners.</p>
+
+<p>FluentLenium brings Events Annotations and a Listener API to register those listeners easily.</p>
+
+<h3 id="annotations">Annotations</h3>
+
+<p>You can use annotations from <code class="language-plaintext highlighter-rouge">core.events.annotations</code> package to register any method as an event
+listener.</p>
+
+<p>Annotations can be used in a test class.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@AfterClickOn</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">afterClickOn</span><span class="o">(</span><span class="nc">FluentWebElement</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Element Clicked: "</span> <span class="o">+</span> <span class="n">element</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Annotations related to a WebElement can also be used in a component class.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeComponent</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">WebElement</span> <span class="n">element</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">SomeComponent</span><span class="o">(</span><span class="nc">WebElement</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">element</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">SomeComponent</span> <span class="nf">click</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">element</span><span class="o">.</span><span class="na">click</span><span class="o">();</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@AfterClickOn</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">afterClickOn</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Element Clicked: "</span> <span class="o">+</span> <span class="k">this</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeTest</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">SomeComponent</span> <span class="n">clickComponent</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">SomeComponent</span> <span class="n">otherComponent</span><span class="o">;</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">clickComponent</span><span class="o">.</span><span class="na">click</span><span class="o">();</span>
+        <span class="c1">// @AfterClickOn annotated method will be invoked for clickComponent instance only.</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>Annotations may be also be configured with a priority, so that annotations with higher priority value will be executed first.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeComponent</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">WebElement</span> <span class="n">element</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">SomeComponent</span><span class="o">(</span><span class="nc">WebElement</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">element</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">SomeComponent</span> <span class="nf">click</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">element</span><span class="o">.</span><span class="na">click</span><span class="o">();</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@AfterClickOn</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">afterClickOnHigher</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Element Clicked, with higher priority: "</span> <span class="o">+</span> <span class="k">this</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@AfterClickOn</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">afterClickOnLower</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Element Clicked, with lower priority: "</span> <span class="o">+</span> <span class="k">this</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The default priority value of all event annotations are 0.</p>
+
+<p>Using event annotations events will be registered with a default annotation based listener implementation which cannot be overridden.</p>
+
+<h3 id="listener-api">Listener API</h3>
+
+<p>You can also register events through API using <code class="language-plaintext highlighter-rouge">events()</code> method.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">events</span><span class="o">().</span><span class="na">afterClickOn</span><span class="o">(</span><span class="k">new</span> <span class="nc">ElementListener</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">on</span><span class="o">(</span><span class="nc">FluentWebElement</span> <span class="n">element</span><span class="o">,</span> <span class="nc">WebDriver</span> <span class="n">driver</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Element Clicked: "</span> <span class="o">+</span> <span class="n">element</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+
+<span class="n">el</span><span class="o">(</span><span class="s">"button"</span><span class="o">).</span><span class="na">click</span><span class="o">();</span> <span class="c1">// This will call the listener.</span>
+</code></pre></div></div>
+
+<p>This integrates nicely with Java 8 lambdas:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">events</span><span class="o">().</span><span class="na">afterClickOn</span><span class="o">((</span><span class="n">element</span><span class="o">,</span> <span class="n">driver</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Element Clicked: "</span> <span class="o">+</span> <span class="n">element</span><span class="o">));</span>
+
+<span class="n">el</span><span class="o">(</span><span class="s">"button"</span><span class="o">).</span><span class="na">click</span><span class="o">();</span> <span class="c1">// This will call the listener.</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">events()</code> method provides a more flexible way of registering listeners as it allows one to register their custom listener implementations, and the examples above demonstrate it well.</p>
+
+<p>To also be able to handle the priority of these custom listeners one must also implement the <code class="language-plaintext highlighter-rouge">ListenerPriority</code> interface, so that listeners get sorted by their priority.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">AfterClick</span> <span class="kd">implements</span> <span class="nc">ListenerPriority</span><span class="o">,</span> <span class="nc">ElementListener</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">on</span><span class="o">(</span><span class="nc">FluentWebElement</span> <span class="n">element</span><span class="o">,</span> <span class="nc">WebDriver</span> <span class="n">driver</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"A really awesome click happened!"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getPriority</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="combining-the-two-solutions">Combining the two solutions</h3>
+
+<p>Annotation and Listener API based listeners can be used along with each other. If you define priorities for the event annotations, and you don’t implement <code class="language-plaintext highlighter-rouge">ListenerPriority</code> in case of custom listeners,
+the custom listeners will be executed last among the registered listeners.</p>
+
+<h2 id="hooks">Hooks</h2>
+
+<p>It’s possible to add some behavior for any element without changing its code by using hooks.</p>
+
+<p>FluentLenium is shipped with the <code class="language-plaintext highlighter-rouge">Wait</code> hook.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// This call will wait for ajax-element to be clickable.</span>
+<span class="n">find</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">withHook</span><span class="o">(</span><span class="nc">WaitHook</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">click</span><span class="o">();</span>
+
+<span class="c1">// Hooks can be chained and their effect will be associated.</span>
+<span class="n">find</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">withHook</span><span class="o">(</span><span class="nc">WaitHook</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">withHook</span><span class="o">(</span><span class="nc">AnotherHook</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">click</span><span class="o">();</span>
+
+<span class="c1">// Options can be given to hooks.</span>
+<span class="n">find</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">withHook</span><span class="o">(</span><span class="nc">WaitHook</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="nc">WaitHookOptions</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">20L</span><span class="o">).</span><span class="na">build</span><span class="o">())</span>
+    <span class="o">.</span><span class="na">click</span><span class="o">()</span>
+</code></pre></div></div>
+
+<h3 id="hook-annotations">Hook Annotations</h3>
+
+<p>Hooks can also be mapped to annotation, like <code class="language-plaintext highlighter-rouge">@Wait</code> for the <code class="language-plaintext highlighter-rouge">WaitHook</code> class.</p>
+
+<p>You can place a hook annotation on injected Field, Fluent Test class or Page.</p>
+
+<p>The hook will be effective for a field if annotation is present on it. All fields from a Fluent Test class if
+it’s present on a Fluent Test class and all fields from a Page if it’s present on a Page.</p>
+
+<p>Page build through Injection recursively inherits hooks from parent pages and fluent test.</p>
+
+<p>If you need to disable all inherited hooks in particular Page or Field, you should use <code class="language-plaintext highlighter-rouge">@NoHook</code> annotation,
+or call <code class="language-plaintext highlighter-rouge">noHook()</code> function on the element, with no parameter to remove all hooks, of with parameters to remove
+only given hooks.</p>
+
+<p>It’s also possible to use the generic <code class="language-plaintext highlighter-rouge">@Hook</code> annotation to enable a hook class.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Wait</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyTest</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span class="o">{</span>
+    <span class="nc">FluentWebElement</span> <span class="n">waitElement</span><span class="o">;</span>
+
+    <span class="nd">@Hook</span><span class="o">(</span><span class="nc">AnotherHook</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="nc">FluentWebElement</span> <span class="n">waitAndAnotherHookElement</span><span class="o">;</span>
+
+    <span class="nd">@NoHook</span>
+    <span class="nc">FluentWebElement</span> <span class="n">noHookElement</span><span class="o">;</span>
+
+    <span class="nd">@Page</span>
+    <span class="nc">MyPage</span> <span class="n">page</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="nd">@Hook</span><span class="o">(</span><span class="nc">PageHook</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyPage</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="custom-hook">Custom hook</h3>
+
+<p>It’s possible to implement your own hook by extending <code class="language-plaintext highlighter-rouge">BaseHook</code> or <code class="language-plaintext highlighter-rouge">BaseFluentHook</code>.</p>
+
+<p>Let’s implement Example hook by writing a configurable message before and after click.</p>
+
+<ul>
+  <li>Create the hook option class. It should be a JavaBean containing configuration options for the hook.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleHookOptions</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"ExampleHook"</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getMessage</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">message</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMessage</span><span class="o">(</span><span class="nc">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Create the hook by extending <code class="language-plaintext highlighter-rouge">BaseHook</code> or <code class="language-plaintext highlighter-rouge">BaseFluentHook</code>. It should at least have a public
+constructor matching parent class, and generic type should be a hook option class.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleHook</span> <span class="kd">extends</span> <span class="nc">BaseHook</span><span class="o">&lt;</span><span class="nc">ExampleHookOptions</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">ExampleHook</span><span class="o">(</span><span class="nc">FluentControl</span> <span class="n">control</span><span class="o">,</span> <span class="nc">ComponentInstantiator</span> <span class="n">instantiator</span><span class="o">,</span> <span class="nc">Supplier</span><span class="o">&lt;</span><span class="nc">WebElement</span><span class="o">&gt;</span> <span class="n">elementSupplier</span><span class="o">,</span> <span class="nc">Supplier</span><span class="o">&lt;</span><span class="nc">ElementLocator</span><span class="o">&gt;</span> <span class="n">locatorSupplier</span><span class="o">,</span> <span class="nc">ExampleHookOptions</span> <span class="n">options</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">control</span><span class="o">,</span> <span class="n">instantiator</span><span class="o">,</span> <span class="n">elementSupplier</span><span class="o">,</span> <span class="n">locatorSupplier</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Create the hook annotation. Annotation parameters should match options found in hook option class.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Inherited</span>
+<span class="nd">@Target</span><span class="o">({</span><span class="nc">ElementType</span><span class="o">.</span><span class="na">FIELD</span><span class="o">,</span> <span class="nc">ElementType</span><span class="o">.</span><span class="na">TYPE</span><span class="o">})</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="nc">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Hook</span><span class="o">(</span><span class="nc">ExampleHook</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@HookOptions</span><span class="o">(</span><span class="nc">ExampleHookOptions</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">Example</span> <span class="o">{</span>
+    <span class="nc">String</span> <span class="nf">message</span><span class="o">()</span> <span class="k">default</span> <span class="s">""</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Add a constructor to hook options class that will support loading of hook annotation into hook option class.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleHookOptions</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">ExampleHookOptions</span><span class="o">(</span><span class="nc">Example</span> <span class="n">annotation</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">annotation</span><span class="o">.</span><span class="na">message</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">ExampleHookOptions</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Default constructor</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Override methods from <code class="language-plaintext highlighter-rouge">WebElement</code> or <code class="language-plaintext highlighter-rouge">ElementLocator</code> in the hook implementation class to add desired
+behavior.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">click</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getOptions</span><span class="o">().</span><span class="na">getMessage</span><span class="o">()</span> <span class="o">+</span> <span class="s">": before click!"</span><span class="o">);</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">click</span><span class="o">();</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">getOptions</span><span class="o">().</span><span class="na">getMessage</span><span class="o">()</span> <span class="o">+</span> <span class="s">": after click!"</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><a href="https://github.com/FluentLenium/FluentLenium/tree/master/examples/hooks/src/test/java/org/fluentlenium/examples/hooks">Example sources are available on github</a>.</p>
+
+<p>You may also read <a href="https://github.com/FluentLenium/FluentLenium/tree/master/fluentlenium-core/src/main/java/org/fluentlenium/core/hook/wait">sources for @Wait hook</a> to read how it’s implemented.</p>
+
+<h2 id="javascript-execution">Javascript execution</h2>
+<p>If you need to execute some javascript, just call <code class="language-plaintext highlighter-rouge">executeScript</code> with your script as parameter.
+For example, if you have a javascript method called change and you want to call it just add this in your test:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">executeScript</span><span class="o">(</span><span class="s">"change();"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>You can either execute javascript with arguments, with async <code class="language-plaintext highlighter-rouge">executeAsyncScript</code>, and retrieve the result.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">executeScript</span><span class="o">(</span><span class="s">"change();"</span><span class="o">,</span> <span class="mi">12L</span><span class="o">).</span><span class="na">getStringResult</span><span class="o">();</span>
+</code></pre></div></div>
+
+<h2 id="css-injection">CSS injection</h2>
+
+<p>It is possible to manipulate the CSS styling of pages via calling <code class="language-plaintext highlighter-rouge">css()</code>.</p>
+
+<p>It can be called from a <code class="language-plaintext highlighter-rouge">FluentWebElement</code>, <code class="language-plaintext highlighter-rouge">FluentDriver</code> and any of the test adapter implementations.</p>
+
+<p>You can either inject an explicitly defined CSS styling:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">css</span><span class="o">().</span><span class="na">inject</span><span class="o">(</span><span class="s">"#location {\ndisplay: none\n}"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>or you can inject the content of a CSS resource from the project classpath:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">css</span><span class="o">().</span><span class="na">injectResource</span><span class="o">(</span><span class="s">"/path/to/css/resource.css"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h2 id="taking-screenshots-and-html-dumps">Taking ScreenShots and HTML Dumps</h2>
+<p>You can take a ScreenShot and an HTML Dump of the browser.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">takeScreenshot</span><span class="o">();</span>
+<span class="n">takeHtmlDump</span><span class="o">();</span>
+</code></pre></div></div>
+<p>The file will be named using the current timestamp.
+You can of course specify a path and a name using:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">takeScreenshot</span><span class="o">(</span><span class="n">pathAndFileName</span><span class="o">);</span>
+<span class="n">takeHtmlDump</span><span class="o">(</span><span class="n">pathAndFileName</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Screenshot and HTML Dump can be automatically performed on test fail using configuration properties.</p>
+
+<p>When using <code class="language-plaintext highlighter-rouge">AUTOMATIC_ON_FAIL</code> with JUnit, you should use custom <code class="language-plaintext highlighter-rouge">@After</code> annotation from
+<code class="language-plaintext highlighter-rouge">org.fluentlenium.adapter.junit</code> package for screenshot and HTML dump to be performed
+just after an exception occurs, before methods annotated with <code class="language-plaintext highlighter-rouge">@After</code> invocation.</p>
+
+<h2 id="iframe">Iframe</h2>
+<p>If you want to switch the Selenium webDriver to an iframe (see this <a href="https://code.google.com/p/selenium/wiki/FrequentlyAskedQuestions#Q:_How_do_I_type_into_a_contentEditable_iframe?">Selenium FAQ</a>),
+you can just call the method switchTo() :</p>
+
+<p>To switch to the default context:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">switchTo</span><span class="o">();</span>
+<span class="n">switchToDefault</span><span class="o">();</span> <span class="c1">// Alternative method</span>
+</code></pre></div></div>
+
+<p>To switch to the iframe selected:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">switchTo</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">"iframe#frameid"</span><span class="o">));</span>
+</code></pre></div></div>
+
+<h2 id="alerts">Alerts</h2>
+<p>If you want manage alert (see this <a href="http://code.google.com/p/selenium/wiki/FrequentlyAskedQuestions#Q:_Does_WebDriver_support_Javascript_alerts_and_prompts?">Selenium FAQ</a>),</p>
+
+<p>When an alert box pops up, click on “OK”:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">alert</span><span class="o">().</span><span class="na">accept</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>When an alert box pops up, click on “Cancel”:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">alert</span><span class="o">().</span><span class="na">dismiss</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Entering an input value in prompt:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">alert</span><span class="o">().</span><span class="na">prompt</span><span class="o">(</span><span class="s">"FluentLenium"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="chromium-api">Chromium API</h2>
+
+<p>FluentLenium gives you an opportunity to run Chrome DevTools commands in your tests using simple Chromium API.</p>
+
+<p>What is Chromium API?</p>
+
+<p>Chromium API gives you an easy access to the <a href="https://chromedevtools.github.io/devtools-protocol/">Chrome DevTools Protocol</a>. This was possible by extending commands supported by Selenium with two new endpoints to directly call the DevTools API:</p>
+
+<ul>
+  <li>/session/:sessionId/chromium/send_command_and_get_result</li>
+  <li>/session/:sessionId/chromium/send_comman</li>
+</ul>
+
+<p>It will allow you to easily automate Chrome browser beyond the standard <a href="https://www.w3.org/TR/webdriver/">WebDriver protocol</a>.</p>
+
+<p>Why you may want to use it?</p>
+
+<p>With the DevTool protocol will be able to achieve more powerful interactions with the browser compare to WebDriver. Taking full page screenshot or clearing cookies for every domain are just two examples how you could use it.</p>
+
+<p>How to use it?</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">DuckDuckGoChromiumApiTest</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span class="o">{</span>
+  
+      <span class="kd">private</span> <span class="nc">Response</span> <span class="n">response</span><span class="o">;</span>
+  
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="nc">WebDriver</span> <span class="nf">newWebDriver</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="k">new</span> <span class="nf">ChromeDriver</span><span class="o">();</span>
+      <span class="o">}</span>
+  
+      <span class="nd">@Test</span>
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">resultPageUrlShouldContainSearchQueryName</span><span class="o">()</span> <span class="o">{</span>
+          <span class="nc">String</span> <span class="n">searchPhrase</span> <span class="o">=</span> <span class="s">"searchPhrase"</span><span class="o">;</span>
+          <span class="nc">String</span> <span class="n">duckDuckUrl</span> <span class="o">=</span> <span class="s">"https://duckduckgo.com"</span><span class="o">;</span>
+  
+          <span class="n">getChromiumApi</span><span class="o">().</span><span class="na">sendCommand</span><span class="o">(</span><span class="s">"Page.navigate"</span><span class="o">,</span> <span class="nc">ImmutableMap</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"url"</span><span class="o">,</span> <span class="n">duckDuckUrl</span><span class="o">));</span>
+          <span class="n">getChromiumApi</span><span class="o">().</span><span class="na">sendCommand</span><span class="o">(</span><span class="s">"Input.insertText"</span><span class="o">,</span> <span class="nc">ImmutableMap</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"text"</span><span class="o">,</span> <span class="n">searchPhrase</span><span class="o">));</span>
+          <span class="n">getChromiumApi</span><span class="o">().</span><span class="na">sendCommand</span><span class="o">(</span><span class="s">"Input.dispatchKeyEvent"</span><span class="o">,</span> <span class="n">sendEnterKeyEventParams</span><span class="o">());</span>
+          <span class="n">response</span> <span class="o">=</span> <span class="n">getChromiumApi</span><span class="o">().</span><span class="na">sendCommandAndGetResponse</span><span class="o">(</span><span class="s">"Page.getNavigationHistory"</span><span class="o">,</span> <span class="nc">ImmutableMap</span><span class="o">.</span><span class="na">of</span><span class="o">());</span>
+  
+          <span class="n">assertIsPhrasePresentInTheResultsPageUrl</span><span class="o">(</span><span class="n">searchPhrase</span><span class="o">);</span>
+      <span class="o">}</span>
+  
+      <span class="kd">private</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="nf">sendEnterKeyEventParams</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="nc">ImmutableMap</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"type"</span><span class="o">,</span> <span class="s">"char"</span><span class="o">,</span> <span class="s">"text"</span><span class="o">,</span> <span class="s">"\r"</span><span class="o">);</span>
+      <span class="o">}</span>
+  
+      <span class="kd">private</span> <span class="kt">void</span> <span class="nf">assertIsPhrasePresentInTheResultsPageUrl</span><span class="o">(</span><span class="nc">String</span> <span class="n">searchPhrase</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">assertThat</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">getValue</span><span class="o">().</span><span class="na">toString</span><span class="o">()).</span><span class="na">contains</span><span class="o">(</span><span class="n">searchPhrase</span><span class="o">);</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="performance-timing-api">Performance Timing API</h2>
+
+<p>FluentLenium provides an API for retrieving the performance timing metrics based on the <a href="https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface">PerformanceTiming interface defined by W3C</a>.</p>
+
+<p>The main interface for this API is <code class="language-plaintext highlighter-rouge">PerformanceTiming</code> from which you can query individual metric values and metrics in bulk as well.
+Most methods return <code class="language-plaintext highlighter-rouge">long</code> values querying the <code class="language-plaintext highlighter-rouge">window.performance.timing.&lt;metric&gt;</code> Javascript attribute, except the ones that are explicitly stated in the W3C documentation that they
+may have other type of values as well.</p>
+
+<p>They can be retrieved via <code class="language-plaintext highlighter-rouge">FluentTest</code> and its other framework specific variants:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeTest</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span class="o">{</span>
+
+    <span class="nd">@Page</span>
+    <span class="kd">private</span> <span class="nc">Homepage</span> <span class="n">homepage</span><span class="o">;</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">//Get metric via parameterized method</span>
+        <span class="kt">long</span> <span class="n">loadEventEnd</span> <span class="o">=</span> <span class="n">performanceTiming</span><span class="o">().</span><span class="na">getEventValue</span><span class="o">(</span><span class="nc">PerformanceTimingEvent</span><span class="o">.</span><span class="na">LOAD_EVENT_END</span><span class="o">);</span>
+        
+        <span class="c1">//The same as the previous call but the value is converted to the given time unit</span>
+        <span class="kt">long</span> <span class="n">loadEventEndInSeconds</span> <span class="o">=</span> <span class="n">performanceTiming</span><span class="o">().</span><span class="na">getEventValue</span><span class="o">(</span><span class="nc">PerformanceTimingEvent</span><span class="o">.</span><span class="na">LOAD_EVENT_END</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
+        
+        <span class="c1">//This is a convenience method for calling performanceTiming().getEventValue(PerformanceTimingEvent.DOM_COMPLETE);</span>
+        <span class="kt">long</span> <span class="n">domComplete</span> <span class="o">=</span> <span class="n">performanceTiming</span><span class="o">().</span><span class="na">domComplete</span><span class="o">();</span>
+        
+        <span class="c1">//The same as the previous call but the value is converted to the given time unit</span>
+        <span class="kt">long</span> <span class="n">domCompleteInSeconds</span> <span class="o">=</span> <span class="n">performanceTiming</span><span class="o">().</span><span class="na">domComplete</span><span class="o">(</span><span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
+        
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">and</span> <span class="n">via</span> <span class="err">`</span><span class="nc">FluentPage</span><span class="err">`</span> <span class="n">as</span> <span class="nl">well:</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Homepage</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
+    
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getDomComplete</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">performanceTiming</span><span class="o">().</span><span class="na">domComplete</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getLoadEventEnd</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">performanceTiming</span><span class="o">().</span><span class="na">getEventValue</span><span class="o">(</span><span class="nc">PerformanceTimingEvent</span><span class="o">.</span><span class="na">LOAD_EVENT_END</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Each method returning a specific metric execute a separate Javascript command.</p>
+
+<p>There is another way to get metrics, specifically to get all metrics in a single object called <code class="language-plaintext highlighter-rouge">PerformanceTimingMetrics</code>. This returns the object returned by the <code class="language-plaintext highlighter-rouge">window.performance.timing</code>
+Javascript attribute.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">//This returns the metrics by default in default milliseconds</span>
+    <span class="nc">PerformanceTimingMetrics</span> <span class="n">metrics</span> <span class="o">=</span> <span class="n">performanceTiming</span><span class="o">().</span><span class="na">getMetrics</span><span class="o">();</span>
+    <span class="kt">long</span> <span class="n">domComplete</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="na">getDomComplete</span><span class="o">();</span>
+    
+    <span class="c1">//This returns a new metrics object that will return the values in the set time unit</span>
+    <span class="nc">PerformanceTimingMetrics</span> <span class="n">metricsInSeconds</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="na">in</span><span class="o">(</span><span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
+    <span class="kt">long</span> <span class="n">domCompleteInSeconds</span> <span class="o">=</span> <span class="n">metricsInSeconds</span><span class="o">.</span><span class="na">getDomComplete</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>In this case only a single Javascript command is executed for <code class="language-plaintext highlighter-rouge">performanceTiming().getMetrics()</code>, <code class="language-plaintext highlighter-rouge">getDomComplete()</code> (actually any method) on this object returns the saved value,
+and none of the getter methods execute any additional Javascript command.</p>
+
+<p>It is important to note the the implementations of both the <code class="language-plaintext highlighter-rouge">PerformanceTiming</code> and <code class="language-plaintext highlighter-rouge">PerformanceTimingMetrics</code> interfaces provided by FluentLenium return handle the <code class="language-plaintext highlighter-rouge">navigationStart</code>
+attribute as zero and every other metric is calculated and returned relative to <code class="language-plaintext highlighter-rouge">navigationStart</code>.</p>
+
+<p>Before retrieving a performance timing metrics value make sure that the page where you query it loaded completely.
+In case when navigation happens to a specific URL, or bz some action performed on the page make sure in your test that the page where it navigates to loads completely.
+Otherwise certain metrics might not have been registered until that moment.</p>
+
+<p>You can find some examples in the <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/performance">FluentLenium project</a> for how you can use these features.</p>
+
+	    
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          <li>
+            <a href="https://github.com/FluentLenium" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://twitter.com/FluentLenium" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+      
+		  
+		  
+		  
+		  
+      
+      
+      
+      
+		  
+        </ul>
+        <p class="copyright text-muted">
+		  FluentLenium
+		  &nbsp;&bull;&nbsp;
+		  2021
+
+		  
+		  &nbsp;&bull;&nbsp;
+		  <a href="http://fluentlenium.com">fluentlenium.com</a>
+		  
+	    </p>
+	        <!-- Please don't remove this, keep my open source work credited :) -->
+		<p class="theme-by text-muted">
+		  Theme by
+		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+
+
+
+
+  
+  </body>
+</html>

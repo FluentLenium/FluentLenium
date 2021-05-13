@@ -22,10 +22,15 @@ FluentLenium can be used to make your [mobile Appium tests](https://fluentlenium
 
 FluentLenium gives you [multiple methods](https://fluentlenium.com/docs/test-methods/) which help you write tests quicker. All those methods are tested daily by commercial regression test suites maintained by project developers.
 
+# Support
+
+FluentLenium is an OpenSource project. If you or your company needs more assitance or custom features we are open to colaborate and support you over the xs:code platform.
+
+[![FluentLenium on XS:CODE](FluentLenium-banner.png)](https://xscode.com/filipcynarski/FluentLenium) 
 
 # Quickstart
 
-Quickstart steps are described in detail in our [separate documentation section](https://fluentlenium.com/quickstart/).
+Quickstart steps are described in deail in our [separate documentation section](https://fluentlenium.com/quickstart/).
 
 ## Example
 
