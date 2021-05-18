@@ -191,7 +191,7 @@
             <dependency>
                 <groupId>io.appium</groupId>
                 <artifactId>java-client</artifactId>
-                <version>7.3.0</version>
+                <version>7.5.1</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
@@ -201,7 +201,7 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.11</version>
+                <version>3.12.0</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -216,7 +216,7 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>5.7.0</version>
+                <version>5.7.2</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
@@ -236,12 +236,17 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>5.2.9.RELEASE</version>
+                <version>5.3.7</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
-                <version>5.2.9.RELEASE</version>
+                <version>5.3.7</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>5.3.7</version>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
@@ -256,12 +261,12 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>3.7.7</version>
+                <version>3.10.0</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
-                <version>3.7.7</version>
+                <version>3.10.0</version>
             </dependency>
             <dependency>
                 <groupId>net.bytebuddy</groupId>
@@ -287,7 +292,7 @@
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
-                <version>4.5.12</version>
+                <version>4.5.13</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
@@ -649,7 +654,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-pmd-plugin</artifactId>
-                        <version>3.13.0</version>
+                        <version>3.14.0</version>
                         <configuration>
                             <failOnViolation>true</failOnViolation>
                             <failurePriority>2</failurePriority>
@@ -661,30 +666,6 @@
                             <execution>
                                 <id>pmd-validate</id>
                                 <phase>validate</phase>
-                                <goals>
-                                    <goal>check</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>security</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.owasp</groupId>
-                        <artifactId>dependency-check-maven</artifactId>
-                        <version>6.1.0</version>
-                        <configuration>
-                            <cveValidForHours>12</cveValidForHours>
-                            <failBuildOnCVSS>1</failBuildOnCVSS>
-                            <suppressionFile>src/main/security/ignore.xml</suppressionFile>
-                        </configuration>
-                        <executions>
-                            <execution>
                                 <goals>
                                     <goal>check</goal>
                                 </goals>
