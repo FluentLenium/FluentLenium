@@ -18,19 +18,17 @@ jobs:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
       uses: actions/setup-java@v1
-      env:
-        BROWSERSTACK_GRID_URL: ${{ secrets.BROWSER_STACK_URL }}
       with:
         java-version: 11
     - name: E2E on Edge
-      run: mvn clean install -DskipTests=true && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      run: mvn clean install -DskipTests=true && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
     - name: E2E on IE
-      run: mvn clean install -DskipTests=true && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      run: mvn clean install -DskipTests=true && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
     - name: E2E on Chrome
-      run: mvn clean install -DskipTests=true && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      run: mvn clean install -DskipTests=true && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
     - name: E2E on Firefox
-      run: mvn clean install -DskipTests=true && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      run: mvn clean install -DskipTests=true && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
     - name: E2E on Iphone Web test (Safari on Iphone)
-      run: mvn clean install -DskipTests=true && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      run: mvn clean install -DskipTests=true && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
     - name: E2E on Android Web test (Chrome on Android device)
-      run: mvn clean install -DskipTests=true && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      run: mvn clean install -DskipTests=true && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
