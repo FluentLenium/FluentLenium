@@ -23,14 +23,14 @@ jobs:
       with:
         java-version: 11
     - name: E2E on Edge
-      run: mvn clean package -DskipTests=true --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dtest=*/it/* -DfailIfNoTests=false && cd examples/spring && mvn clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      run: mvn clean package -DskipTests=true && mvn -Pexamples,java11 clean test -Dtest=*/examples/spring/* -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
     - name: E2E on IE
-      run: mvn clean package -DskipTests=true --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dtest=*/it/* -DfailIfNoTests=false && cd examples/spring && mvn clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      run: mvn clean package -DskipTests=true && mvn -Pexamples,java11 clean test -Dtest=*/examples/spring/* -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
     - name: E2E on Chrome
-      run: mvn clean package -DskipTests=true --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dtest=*/it/* -DfailIfNoTests=false && cd examples/spring && mvn clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      run: mvn clean package -DskipTests=true && mvn -Pexamples,java11 clean test -Dtest=*/examples/spring/* -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
     - name: E2E on Firefox
-      run: mvn clean package -DskipTests=true --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dtest=*/it/* -DfailIfNoTests=false && cd examples/spring && mvn clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      run: mvn clean package -DskipTests=true && mvn -Pexamples,java11 clean test -Dtest=*/examples/spring/* -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
     - name: E2E on Iphone Web test (Safari on Iphone)
-      run: mvn clean package -DskipTests=true --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dtest=*/it/* -DfailIfNoTests=false && cd examples/spring && mvn clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      run: mvn clean package -DskipTests=true && mvn -Pexamples,java11 clean test -Dtest=*/examples/spring/* -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
     - name: E2E on Android Web test (Chrome on Android device)
-      run: mvn clean package -DskipTests=true --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dtest=*/it/* -DfailIfNoTests=false && cd examples/spring && mvn clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      run: mvn clean package -DskipTests=true && mvn -Pexamples,java11 clean test -Dtest=*/examples/spring/* -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
