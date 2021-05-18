@@ -25,7 +25,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Java 8 - unit & integration tests
-      run: mvn -Pjava8 clean verify --file pom.xml
+      run: mvn -Pjava8 clean verify --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
 
 
   java11-build:
@@ -43,15 +43,15 @@ jobs:
       with:
         java-version: 11
     - name: Java 11 - unit & integration tests
-      run: mvn -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml
+      run: mvn -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
     - name: Java 11 - unit & integration tests code coverage
       env:
         REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
       run: |
-        mvn -Pjava11 clean verify jacoco:report --file pom.xml
+        mvn -Pjava11 clean verify jacoco:report --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
         mvn -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report --file pom.xml
     - name: Install FluentLenium to localrepository
-      run: mvn -Pjava11 -DskipTests -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' install --file pom.xml
+      run: mvn -Pjava11 -DskipTests -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' install --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
 
 
         #Snapshot release upload skipped
@@ -73,7 +73,7 @@ jobs:
       with:
         java-version: 11
     - name: Java 11 - JavaDoc
-      run: mvn -Pjava11 javadoc:aggregate
+      run: mvn -Pjava11 javadoc:aggregate -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
 
 #  build-docs:
 #    runs-on: ubuntu-latest
