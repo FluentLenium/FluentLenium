@@ -1,6 +1,7 @@
 package org.fluentlenium.assertj.custom;
 
 import org.assertj.core.api.AbstractStringAssert;
+import org.assertj.core.api.StringAssert;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.Dimension;
 
@@ -251,7 +252,7 @@ public class FluentWebElementAssert extends AbstractFluentAssert<FluentWebElemen
             failWithMessage("The element does not have attribute " + attribute);
         }
 
-        return new AbstractStringAssert<>(actualValue, AbstractStringAssert.class);
+        return new StringAssert(actualValue);
     }
 
     @Override
