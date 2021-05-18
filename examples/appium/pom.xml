@@ -13,10 +13,8 @@
     <url>https://github.com/FluentLenium/FluentLenium</url>
 
     <properties>
-        <!-- Configure this property to latest available version -->
         <fluentlenium.version>${project.version}</fluentlenium.version>
-        <spring.version>5.2.9.RELEASE</spring.version>
-        <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
+        <spring.version>5.3.7</spring.version>
         <selenium.version>3.141.59</selenium.version>
     </properties>
 
