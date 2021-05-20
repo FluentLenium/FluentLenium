@@ -59,22 +59,3 @@ jobs:
         java-version: 11
     - name: Java 11 - JavaDoc
       run: mvn -Pjava11 javadoc:aggregate -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
-
-      #Snapshot release upload skipped
-  #mvn -Pjava11 deploy -DskipTests --settings deploy-settings.xml --file pom.xml
-
-#  build-docs:
-#    runs-on: ubuntu-latest
-#    env:
-#      NOKOGIRI_USE_SYSTEM_LIBRARIES: true
-#      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Set up Jekyll
-#      uses: helaili/jekyll-action@2.0.5
-#    - name: Ruby docs build
-#      run: |
-#        chmod +x ./docs/cibuild
-#        cd docs && ./cibuild
-#    - name: Run tests
-#      run: bundle exec rake
