@@ -515,19 +515,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <check />
-                    <format>xml</format>
-                    <maxmem>256m</maxmem>
-                    <!-- aggregated reports for multi-module projects -->
-                    <aggregate>true</aggregate>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.6</version>
