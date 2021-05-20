@@ -29,8 +29,6 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-    - name: Java 11 - unit & integration tests
-      run: mvn -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dtest=*/it/* -DfailIfNoTests=false
     - name: Java 11 - unit & integration tests code coverage
       env:
         REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
