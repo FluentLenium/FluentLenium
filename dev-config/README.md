@@ -82,7 +82,7 @@ Release
 
 ```
 git checkout develop
-export JAVA_HOME='/usr/libexec/java_home -v 11'
+export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 mvn -Pjava11 release:prepare -Dresume=false
 mvn -Pjava11 release:perform -s settings.xml -Darguments="-DskipTests=true"
 ```
@@ -98,7 +98,7 @@ This commit has to be done before:
 
 ```
 git checkout -b java8/v3.8.1
-export JAVA_HOME='/usr/libexec/java_home -v 1.8'
+export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 mvn -Pjava8 release:prepare -Dresume=false
 mvn -Pjava8 release:perform -s settings.xml -Darguments="-DskipTests=true"
 ```

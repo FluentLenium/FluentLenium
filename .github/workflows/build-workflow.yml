@@ -1,7 +1,7 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: FluentLenium CI pipeline
+name: Java pipeline
 
 on:
   push:
@@ -13,134 +13,47 @@ jobs:
   java8-build:
     runs-on: ubuntu-latest
     steps:
-    - name: Cache Maven packages
-      uses: actions/cache@v2
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
     - uses: actions/checkout@v2
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
     - name: Java 8 - unit & integration tests
-      run: mvn -Pjava8 clean verify --file pom.xml
-
+      run: mvn -Pjava8 clean verify --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
 
   java11-build:
     runs-on: ubuntu-latest
     steps:
-    - name: Cache Maven packages
-      uses: actions/cache@v2
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
     - uses: actions/checkout@v2
     - name: Set up JDK 11
       uses: actions/setup-java@v1
       with:
         java-version: 11
-    - name: Java 11 - unit & integration tests
-      run: mvn -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml
     - name: Java 11 - unit & integration tests code coverage
       env:
         REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
       run: |
-        mvn -Pjava11 clean verify jacoco:report --file pom.xml
+        mvn -Pjava11 clean verify jacoco:report --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
         mvn -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report --file pom.xml
-    - name: Install FluentLenium to localrepository
-      run: mvn -Pjava11 -DskipTests -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' install --file pom.xml
 
-
-        #Snapshot release upload skipped
-  #mvn -Pjava11 deploy -DskipTests --settings deploy-settings.xml --file pom.xml    
-        
-  java11-javadoc:
-    needs: [java11-build]
+  java11-parallelism-tests:
     runs-on: ubuntu-latest
     steps:
-    - name: Cache Maven packages
-      uses: actions/cache@v2
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Java 11 - unit & integration tests
+        run: mvn -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dtest=*/it/* -DfailIfNoTests=false
+
+  java11-javadoc:
+    runs-on: ubuntu-latest
+    steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
       uses: actions/setup-java@v1
       with:
         java-version: 11
     - name: Java 11 - JavaDoc
-      run: mvn -Pjava11 javadoc:aggregate
-
-#  build-docs:
-#    runs-on: ubuntu-latest
-#    env:
-#      NOKOGIRI_USE_SYSTEM_LIBRARIES: true
-#      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Set up Jekyll
-#      uses: helaili/jekyll-action@2.0.5
-#    - name: Ruby docs build
-#      run: |
-#        chmod +x ./docs/cibuild
-#        cd docs && ./cibuild
-#    - name: Run tests
-#      run: bundle exec rake
-       
-#  java11-examples:
-#    needs: [java11-build]
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: Cache Maven packages
-#      uses: actions/cache@v2
-#      with:
-#        path: ~/.m2
-#        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-#        restore-keys: ${{ runner.os }}-m2
-#    - uses: actions/checkout@v2
-#    - name: Set up JDK 11
-#      uses: actions/setup-java@v1
-#      with:
-#        java-version: 11
-#    - name: Java 11 - compile examples
-#      run: mvn -Pexamples,java11 clean compile
-#    - name: Java 11 - compile Kotlin examples
-#      run: |
-#        chmod +x examples/quickstart-firefox/gradlew
-#        chmod +x examples/quickstart-firefox/gradle/wrapper/gradle-wrapper.jar
-#        cd examples/quickstart-firefox
-#        ./gradlew test build -x test
-
-#  e2etests:
-#    needs: [java11-build]
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: Cache Maven packages
-#      uses: actions/cache@v2
-#      with:
-#        path: ~/.m2
-#        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-#        restore-keys: ${{ runner.os }}-m2
-#    - uses: actions/checkout@v2
-#    - name: Set up JDK 11
-#      uses: actions/setup-java@v1
-#      env:
-#        BROWSERSTACK_GRID_URL: ${{ secrets.BROWSER_STACK_URL }}
-#      with:
-#        java-version: 11
-#    - name: E2E on Edge
-#      run: cd examples/spring && mvn clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
-#    - name: E2E on IE
-#      run: cd examples/spring && mvn clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
-#    - name: E2E on Chrome
-#      run: cd examples/spring && mvn clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
-#    - name: E2E on Firefox
-#      run: cd examples/spring && mvn clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
-#    - name: E2E on Iphone Web test (Safari on Iphone)
-#      run: cd examples/spring && mvn clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
-#    - name: E2E on Android Web test (Chrome on Android device)
-#      run: cd examples/spring && mvn clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=$BROWSERSTACK_GRID_URL
+      run: mvn -Pjava11 javadoc:aggregate -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
