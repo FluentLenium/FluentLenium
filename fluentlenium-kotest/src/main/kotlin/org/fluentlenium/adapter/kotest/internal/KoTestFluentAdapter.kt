@@ -38,7 +38,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
     fun listener(): TestListener = object : TestListener {
         override suspend fun beforeSpec(spec: Spec) {
-            require(driverLifecycle == ConfigurationProperties.DriverLifecycle.THREAD) {
+            require(driverLifecycle != ConfigurationProperties.DriverLifecycle.THREAD) {
                 // not sure about this:
                 // as the tests are executed within a Coroutine it
                 // could be possible that the "same" thread executes mulitple tests and/or that one test is executed
