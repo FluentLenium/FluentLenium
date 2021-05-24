@@ -38,13 +38,13 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
     fun listener(): TestListener = object : TestListener {
         override suspend fun beforeSpec(spec: Spec) {
-            if (driverLifecycle == ConfigurationProperties.DriverLifecycle.THREAD) {
+            require(driverLifecycle == ConfigurationProperties.DriverLifecycle.THREAD) {
                 // not sure about this:
                 // as the tests are executed within a Coroutine it
                 // could be possible that the "same" thread executes mulitple tests and/or that one test is executed
                 // by mulitple Coroutines with different underlying Threads. need to investigate
 
-                throw IllegalArgumentException("DriverLifecyle $driverLifecycle not supported")
+                "DriverLifecyle $driverLifecycle not supported"
             }
 
             withContext(Dispatchers.IO) {
