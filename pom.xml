@@ -21,6 +21,7 @@
         <module>fluentlenium-spring-testng</module>
         <module>fluentlenium-cucumber</module>
         <module>fluentlenium-spock</module>
+        <module>fluentlenium-kotest</module>
         <module>fluentlenium-coverage-report</module>
     </modules>
 
