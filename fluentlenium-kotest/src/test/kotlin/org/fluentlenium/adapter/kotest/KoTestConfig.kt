@@ -17,7 +17,4 @@ class KoTestConfig : AbstractProjectConfig() {
                 }
             }
         })
-
-    override val parallelism: Int?
-        get() = 2
 }
