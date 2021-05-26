@@ -68,6 +68,12 @@
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <version>${kotlin.version}</version>
 
+                <configuration>
+                    <args>
+                        <arg>-Xopt-in=kotlin.RequiresOptIn</arg>
+                    </args>
+                </configuration>
+
                 <executions>
                     <execution>
                         <id>compile</id>
