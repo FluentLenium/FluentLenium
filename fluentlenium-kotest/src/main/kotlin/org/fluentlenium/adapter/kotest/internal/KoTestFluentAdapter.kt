@@ -74,8 +74,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
                     sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle)
                 )
 
-            val fluent = initFluent(driver.driver)
-            fluent.inject(testCase.spec)
+            initFluent(driver.driver, testCase.spec)
         }
 
         override suspend fun afterTest(testCase: TestCase, result: TestResult) {
