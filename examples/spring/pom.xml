@@ -6,13 +6,12 @@
 
     <artifactId>fluentlenium-examples-spring</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.6.2-SNAPSHOT</version>
+    <version>4.6.3-SNAPSHOT</version>
 
     <name>FluentLenium Examples Spring</name>
 
     <properties>
         <fluentlenium.version>${project.version}</fluentlenium.version>
-        <spring.version>5.2.8.RELEASE</spring.version>
         <selenium.version>3.141.59</selenium.version>
     </properties>
 
@@ -84,12 +83,12 @@
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
-            <version>7.3.0</version>
+            <version>7.5.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13.1</version>
+            <version>4.13.2</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>

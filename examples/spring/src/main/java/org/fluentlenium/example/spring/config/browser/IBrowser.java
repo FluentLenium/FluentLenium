@@ -1,6 +1,5 @@
 package org.fluentlenium.example.spring.config.browser;
 
-import org.fluentlenium.example.spring.config.ConfigException;
 import org.openqa.selenium.Capabilities;
 
 import java.util.Map;

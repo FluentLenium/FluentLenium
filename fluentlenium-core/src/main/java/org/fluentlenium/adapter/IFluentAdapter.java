@@ -39,10 +39,12 @@ public interface IFluentAdapter extends FluentControl {
      * This method should not be called by end user.
      *
      * @param webDriver webDriver to use.
+     * @param container instance where FluentLenium should inject dependencies
+     *
      * @throws IllegalStateException when trying to register a different webDriver that the current one.
      * @return initialized FluentControl
      */
-    default FluentControl initFluent(WebDriver webDriver) {
+    default FluentControl initFluent(WebDriver webDriver, Object container) {
         if (webDriver == null) {
             releaseFluent();
             return null;
@@ -59,9 +61,13 @@ public interface IFluentAdapter extends FluentControl {
 
         ContainerFluentControl adapterFluentControl = new ContainerFluentControl(new FluentDriver(webDriver, this, this));
         setFluentControl(adapterFluentControl);
-        ContainerContext context = adapterFluentControl.inject(this);
+        ContainerContext context = adapterFluentControl.inject(container);
         adapterFluentControl.setContext(context);
         return getFluentControl();
+    }
+
+    default FluentControl initFluent(WebDriver webDriver) {
+        return initFluent(webDriver, this);
     }
 
     /**

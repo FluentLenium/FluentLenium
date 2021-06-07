@@ -2,6 +2,10 @@
 
 ## Version 4.x - Java 11 support
 
+### 4.6.2 (Aug 29 2020)
+- [#1227](https://github.com/FluentLenium/FluentLenium/pull/1227) - Shadow DOM support
+- Multiple libraries bump
+
 ### 4.5.1 (Aug 29 2020)
 - [#949](https://github.com/FluentLenium/FluentLenium/issues/949) - New runner - support for Spring TestNG
 - [#995](https://github.com/FluentLenium/FluentLenium/issues/995) - Improve FluentLenium Spock support, rewrite, and more detailed testing. Multiple bugfixes.

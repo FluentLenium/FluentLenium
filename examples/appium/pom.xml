@@ -6,17 +6,15 @@
 
     <artifactId>fluentlenium-examples-appium</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.6.2-SNAPSHOT</version>
+    <version>4.6.3-SNAPSHOT</version>
 
     <name>FluentLenium Examples Appium</name>
     <description>FluentLenium Appium examples</description>
     <url>https://github.com/FluentLenium/FluentLenium</url>
 
     <properties>
-        <!-- Configure this property to latest available version -->
         <fluentlenium.version>${project.version}</fluentlenium.version>
-        <spring.version>5.2.9.RELEASE</spring.version>
-        <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
+        <spring.version>5.3.7</spring.version>
         <selenium.version>3.141.59</selenium.version>
     </properties>
 
@@ -58,7 +56,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13.1</version>
+            <version>4.13.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
