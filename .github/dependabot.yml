@@ -6,38 +6,3 @@ updates:
     interval: daily
     time: "02:00"
   open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: org.owasp:dependency-check-maven
-    versions:
-    - 6.1.1
-    - 6.1.2
-    - 6.1.3
-    - 6.1.4
-  - dependency-name: io.appium:java-client
-    versions:
-    - 7.4.1
-    - 7.5.0
-  - dependency-name: net.bytebuddy:byte-buddy
-    versions:
-    - 1.10.20
-    - 1.10.21
-    - 1.10.22
-  - dependency-name: net.sourceforge.htmlunit:htmlunit
-    versions:
-    - 2.46.0
-    - 2.47.1
-  - dependency-name: io.cucumber:cucumber-junit
-    versions:
-    - 6.9.1
-  - dependency-name: io.cucumber:cucumber-java8
-    versions:
-    - 6.9.1
-  - dependency-name: io.cucumber:cucumber-java
-    versions:
-    - 6.9.1
-  - dependency-name: org.seleniumhq.selenium:htmlunit-driver
-    versions:
-    - 2.46.0
-  - dependency-name: org.junit.platform:junit-platform-launcher
-    versions:
-    - 1.7.0
