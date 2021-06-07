@@ -3,6 +3,7 @@ package org.fluentlenium.adapter.kotest.describespec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import org.fluentlenium.adapter.kotest.FluentDescribeSpec
+import org.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
 import org.fluentlenium.adapter.kotest.jq
 import org.fluentlenium.configuration.ConfigurationProperties
 import org.fluentlenium.configuration.FluentConfiguration
@@ -16,12 +17,10 @@ class ThreadWebDriverSpec : FluentDescribeSpec({
         driverLifecycle shouldBe ConfigurationProperties.DriverLifecycle.THREAD
     }
 
-    it("Title of duck duck go") {
-        goTo("https://duckduckgo.com")
-
-        jq("#search_form_input_homepage").fill().with("FluentLenium")
-        jq("#search_button_homepage").submit()
-
-        window().title() shouldContain "FluentLenium"
+    it("Title should be correct") {
+        goTo(DEFAULT_URL)
+        jq("#name").fill().with("FluentLenium")
+        el("#name").value() shouldBe "FluentLenium"
+        window().title() shouldContain "Fluent"
     }
 })

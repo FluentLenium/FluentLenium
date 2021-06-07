@@ -3,10 +3,13 @@ package org.fluentlenium.adapter.kotest.describespec
 import io.kotest.engine.spec.tempdir
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldContain
 import org.fluentlenium.adapter.kotest.FluentDescribeSpec
+import org.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
+import org.fluentlenium.adapter.kotest.TestConstants.PAGE2_URL
 import org.fluentlenium.configuration.ConfigurationProperties
 import org.fluentlenium.configuration.FluentConfiguration
-import org.openqa.selenium.Cookie
+import org.fluentlenium.utils.UrlUtils.getAbsoluteUrlPathFromFile
 
 @FluentConfiguration(
     driverLifecycle = ConfigurationProperties.DriverLifecycle.JVM,
@@ -15,7 +18,7 @@ import org.openqa.selenium.Cookie
 )
 class ConfigurationDefaultSpec : FluentDescribeSpec({
     it("remoteUrl via custom default class") {
-        remoteUrl shouldBe "https://www.google.com"
+        remoteUrl shouldBe getAbsoluteUrlPathFromFile("index.html")
     }
 
     it("driver should be as defined") {
@@ -25,7 +28,7 @@ class ConfigurationDefaultSpec : FluentDescribeSpec({
     it("should take screenshot") {
         val screenshotPath = tempdir()
 
-        goTo("https://awesome-testing.com")
+        goTo(DEFAULT_URL)
         setScreenshotPath(screenshotPath.path)
 
         takeScreenshot()
@@ -35,12 +38,10 @@ class ConfigurationDefaultSpec : FluentDescribeSpec({
         } shouldHaveSize 1
     }
 
-    it("should set cookie") {
-        goTo("https://awesome-testing.com")
+    it("should navigate") {
+        goTo(DEFAULT_URL)
 
-        driver.manage().addCookie(Cookie("my", "cookie"))
-        driver.navigate().refresh()
-
-        getCookie("my").value shouldBe "cookie"
+        driver.navigate().to(PAGE2_URL)
+        driver.title shouldContain "Page"
     }
 })

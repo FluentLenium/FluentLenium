@@ -3,6 +3,7 @@ package org.fluentlenium.adapter.kotest.describespec
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 import org.fluentlenium.adapter.kotest.FluentDescribeSpec
+import org.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
 import org.fluentlenium.core.events.annotations.AfterNavigateTo
 
 class EventSpec: FluentDescribeSpec() {
@@ -17,10 +18,8 @@ class EventSpec: FluentDescribeSpec() {
     init {
         it("Fluentlenium listeners are executed") {
             url.shouldBeNull()
-
-            goTo("https://duckduckgo.com")
-
-            url shouldBe "https://duckduckgo.com"
+            goTo(DEFAULT_URL)
+            url shouldBe DEFAULT_URL
         }
     }
 }
