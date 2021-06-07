@@ -10,11 +10,16 @@ import org.openqa.selenium.Cookie
 
 @FluentConfiguration(
     driverLifecycle = ConfigurationProperties.DriverLifecycle.JVM,
-    configurationDefaults = CustomConfigurationDefault::class
+    configurationDefaults = CustomConfigurationDefault::class,
+    webDriver = "chrome"
 )
 class ConfigurationDefaultSpec : FluentDescribeSpec({
     it("remoteUrl via custom default class") {
         remoteUrl shouldBe "https://www.google.com"
+    }
+
+    it("driver should be as defined") {
+        webDriver shouldBe "chrome"
     }
 
     it("should take screenshot") {
