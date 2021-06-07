@@ -12,12 +12,12 @@ class ExampleHook(
     locatorSupplier: Supplier<ElementLocator>, toStringSupplier: Supplier<String>, options: ExampleHookOptions
 ) :
     BaseHook<ExampleHookOptions>(control, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options) {
-    override fun submit() {
-        super.submit()
-        submitCount++
+    override fun click() {
+        super.click()
+        clickCount++
     }
 
     companion object {
-        var submitCount = 0
+        var clickCount = 0
     }
 }
