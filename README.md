@@ -13,7 +13,7 @@ FluentLenium provides a Java [fluent interface](http://en.wikipedia.org/wiki/Flu
 [Selenium](http://www.seleniumhq.org/), and brings some [extra features](https://fluentlenium.com/docs/key_features/)
  to avoid common issues faced by Selenium users.
 
-FluentLenium is shipped with adapters for [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/), [TestNG](http://testng.org/doc/index.html), [Spock](http://spockframework.org/), [Spring TestNG](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/context/testng/AbstractTestNGSpringContextTests.html) and [Cucumber](https://cucumber.io), but it can also be used [standalone](https://fluentlenium.com/docs/test-runners/#standalone-mode).
+FluentLenium is shipped with adapters for [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/), [TestNG](http://testng.org/doc/index.html), [Spock](http://spockframework.org/), [Spring TestNG](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/context/testng/AbstractTestNGSpringContextTests.html), [Cucumber](https://cucumber.io) and [Kotest](https://kotest.io/), but it can also be used [standalone](https://fluentlenium.com/docs/test-runners/#standalone-mode).
 
 FluentLenium best integrates with [AssertJ](http://joel-costigliola.github.io/assertj/), but you can also choose to use
 the [assertion framework](https://fluentlenium.com/docs/assertion-libraries/) you want.
@@ -71,6 +71,7 @@ To help you navigate through FluentLenium, here's a short summary about its modu
 - **fluentlenium-integration-tests**: Integration tests for validating the correctness of FluentLenium features internally.
 - **fluentlenium-coverage-report**: Creates jacoco test coverage report.
 - **fluentlenium-ide-support**: Though not an actual Maven module, it contains resources to make working with FluentLenium in the IDE easier.
+- **fluentlenium-kotest**: Provides support for integration with [Kotest](https://kotest.io/).
 
 # Contact Us
 If you have any comment, remark or issue, please open an issue on
