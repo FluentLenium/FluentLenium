@@ -1,4 +1,4 @@
-package org.fluentlenium.kotest.matchers
+package org.fluentlenium.kotest.matchers.config
 
 import io.github.bonigarcia.wdm.WebDriverManager
 import io.kotest.core.config.AbstractProjectConfig
@@ -16,4 +16,6 @@ class KoTestConfig : AbstractProjectConfig() {
                 }
             }
         })
+
+    override val parallelism: Int = 2
 }

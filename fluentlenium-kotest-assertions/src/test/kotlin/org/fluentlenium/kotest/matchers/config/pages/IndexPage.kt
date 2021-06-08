@@ -1,12 +1,12 @@
-package org.fluentlenium.kotest.matchers.page.pages
+package org.fluentlenium.kotest.matchers.config.pages
 
 import io.kotest.matchers.should
 import org.fluentlenium.core.FluentPage
 import org.fluentlenium.core.domain.FluentList
 import org.fluentlenium.core.domain.FluentWebElement
-import org.fluentlenium.kotest.matchers.haveElement
-import org.fluentlenium.kotest.matchers.haveElementDisplayed
-import org.fluentlenium.kotest.matchers.haveElements
+import org.fluentlenium.kotest.matchers.page.haveElement
+import org.fluentlenium.kotest.matchers.page.haveElementDisplayed
+import org.fluentlenium.kotest.matchers.page.haveElements
 import org.openqa.selenium.support.FindAll
 import org.openqa.selenium.support.FindBy
 

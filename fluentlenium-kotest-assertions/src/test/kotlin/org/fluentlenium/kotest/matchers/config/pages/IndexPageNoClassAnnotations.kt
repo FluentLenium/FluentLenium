@@ -1,4 +1,4 @@
-package org.fluentlenium.kotest.matchers.page.pages
+package org.fluentlenium.kotest.matchers.config.pages
 
 import org.fluentlenium.core.FluentPage
 
