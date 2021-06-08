@@ -14,8 +14,11 @@ fun bePresent() = object : Matcher<FluentWebElement> {
     )
 }
 
-fun FluentWebElement.shouldBePresent() = this should bePresent()
-fun FluentWebElement.shouldNotBePresent() = this shouldNot bePresent()
+fun FluentWebElement.shouldBePresent() = also {
+    it should bePresent()
+}
+
+fun FluentWebElement.shouldNotBePresent() = also { it shouldNot bePresent() }
 
 fun beEnabled() = object : Matcher<FluentWebElement> {
     override fun test(value: FluentWebElement): MatcherResult = MatcherResult(
@@ -25,8 +28,8 @@ fun beEnabled() = object : Matcher<FluentWebElement> {
     )
 }
 
-fun FluentWebElement.shouldBeEnabled() = this should beEnabled()
-fun FluentWebElement.shouldNotBeEnabled() = this shouldNot beEnabled()
+fun FluentWebElement.shouldBeEnabled() = also { it should beEnabled() }
+fun FluentWebElement.shouldNotBeEnabled() = also { it shouldNot beEnabled() }
 
 fun beDisplayed() = object : Matcher<FluentWebElement> {
     override fun test(value: FluentWebElement): MatcherResult = MatcherResult(
@@ -36,8 +39,8 @@ fun beDisplayed() = object : Matcher<FluentWebElement> {
     )
 }
 
-fun FluentWebElement.shouldBeDisplayed() = this should beDisplayed()
-fun FluentWebElement.shouldNotBeDisplayed() = this shouldNot beDisplayed()
+fun FluentWebElement.shouldBeDisplayed() = also { it should beDisplayed() }
+fun FluentWebElement.shouldNotBeDisplayed() = also { it shouldNot beDisplayed() }
 
 fun beClickable() = object : Matcher<FluentWebElement> {
     override fun test(value: FluentWebElement): MatcherResult = MatcherResult(
@@ -47,8 +50,8 @@ fun beClickable() = object : Matcher<FluentWebElement> {
     )
 }
 
-fun FluentWebElement.shouldBeClickable() = this should beClickable()
-fun FluentWebElement.shouldNotBeClickable() = this should beClickable()
+fun FluentWebElement.shouldBeClickable() = also { it should beClickable() }
+fun FluentWebElement.shouldNotBeClickable() = also { it shouldNot beClickable() }
 
 fun beSelected() = object : Matcher<FluentWebElement> {
     override fun test(value: FluentWebElement): MatcherResult = MatcherResult(
@@ -58,5 +61,5 @@ fun beSelected() = object : Matcher<FluentWebElement> {
     )
 }
 
-fun FluentWebElement.shouldBeSelected() = this should beSelected()
-fun FluentWebElement.shouldNotBeSelected() = this shouldNot beSelected()
+fun FluentWebElement.shouldBeSelected() = also { it should beSelected() }
+fun FluentWebElement.shouldNotBeSelected() = also { it shouldNot beSelected() }

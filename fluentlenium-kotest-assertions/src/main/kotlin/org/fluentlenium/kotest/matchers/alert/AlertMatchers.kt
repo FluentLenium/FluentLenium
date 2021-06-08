@@ -16,8 +16,8 @@ fun haveText(text: String) = object : Matcher<Alert> {
         )
 }
 
-fun Alert.shouldHaveText(text: String) = this should haveText(text)
-fun Alert.shouldNotHaveText(text: String) = this shouldNot haveText(text)
+fun Alert.shouldHaveText(text: String) = also { it should haveText(text) }
+fun Alert.shouldNotHaveText(text: String) = also { it shouldNot haveText(text) }
 
 fun bePresent() = object : Matcher<Alert> {
     override fun test(value: Alert): MatcherResult {
@@ -35,5 +35,5 @@ fun bePresent() = object : Matcher<Alert> {
     }
 }
 
-fun Alert.shouldBePresent() = this should bePresent()
-fun Alert.shouldNotBePresent() = this shouldNot bePresent()
+fun Alert.shouldBePresent() = also { it should bePresent() }
+fun Alert.shouldNotBePresent() = also { it shouldNot bePresent() }

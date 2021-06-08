@@ -18,8 +18,8 @@ fun haveElement(element: FluentWebElement) = object : Matcher<FluentPage> {
         )
 }
 
-fun FluentPage.shouldHaveElement(element: FluentWebElement) = this should haveElement(element)
-fun FluentPage.shouldNotHaveElement(element: FluentWebElement) = this shouldNot haveElement(element)
+fun FluentPage.shouldHaveElement(element: FluentWebElement) = also { it should haveElement(element) }
+fun FluentPage.shouldNotHaveElement(element: FluentWebElement) = also { it shouldNot haveElement(element) }
 
 fun haveElements(elements: FluentList<FluentWebElement>) = object : Matcher<FluentPage> {
     override fun test(value: FluentPage): MatcherResult =
@@ -30,8 +30,10 @@ fun haveElements(elements: FluentList<FluentWebElement>) = object : Matcher<Flue
         )
 }
 
-fun FluentPage.shouldNotHaveElements(element: FluentList<FluentWebElement>) = this shouldNot haveElements(element)
-fun FluentPage.shouldHaveElements(element: FluentList<FluentWebElement>) = this should haveElements(element)
+fun FluentPage.shouldNotHaveElements(element: FluentList<FluentWebElement>) =
+    also { it shouldNot haveElements(element) }
+
+fun FluentPage.shouldHaveElements(element: FluentList<FluentWebElement>) = also { it should haveElements(element) }
 
 fun haveElementDisplayed(element: FluentWebElement) = object : Matcher<FluentPage> {
     override fun test(value: FluentPage): MatcherResult = MatcherResult(
@@ -41,8 +43,9 @@ fun haveElementDisplayed(element: FluentWebElement) = object : Matcher<FluentPag
     )
 }
 
-fun FluentPage.shouldHaveElementDisplayed(element: FluentWebElement) = this should haveElementDisplayed(element)
-fun FluentPage.shouldNotHaveElementDisplayed(element: FluentWebElement) = this shouldNot haveElementDisplayed(element)
+fun FluentPage.shouldHaveElementDisplayed(element: FluentWebElement) = also { it should haveElementDisplayed(element) }
+fun FluentPage.shouldNotHaveElementDisplayed(element: FluentWebElement) =
+    also { it shouldNot haveElementDisplayed(element) }
 
 fun haveTitle(title: String) = object : Matcher<FluentPage> {
     override fun test(value: FluentPage): MatcherResult {
@@ -57,8 +60,8 @@ fun haveTitle(title: String) = object : Matcher<FluentPage> {
     }
 }
 
-fun FluentPage.shouldHaveTitle(title: String) = this should haveTitle(title)
-fun FluentPage.shouldNotHaveTitle(title: String) = this shouldNot haveTitle(title)
+fun FluentPage.shouldHaveTitle(title: String) = also { this should haveTitle(title) }
+fun FluentPage.shouldNotHaveTitle(title: String) = also { this shouldNot haveTitle(title) }
 
 fun haveUrl(url: String) = object : Matcher<FluentPage> {
     override fun test(value: FluentPage): MatcherResult {
@@ -92,8 +95,8 @@ fun haveExpectedElements() = object : Matcher<FluentPage> {
     }
 }
 
-fun FluentPage.shouldHaveExpectedElements() = this should haveExpectedElements()
-fun FluentPage.shouldNotHaveExpectedElements() = this shouldNot haveExpectedElements()
+fun FluentPage.shouldHaveExpectedElements() = also { this should haveExpectedElements() }
+fun FluentPage.shouldNotHaveExpectedElements() = also { this shouldNot haveExpectedElements() }
 
 fun haveExpectedUrl() = object : Matcher<FluentPage> {
     override fun test(value: FluentPage): MatcherResult {
@@ -118,5 +121,5 @@ fun haveExpectedUrl() = object : Matcher<FluentPage> {
     }
 }
 
-fun FluentPage.shouldHaveExpectedUrl() = this should haveExpectedUrl()
-fun FluentPage.shouldNotHaveExpectedUrl() = this shouldNot haveExpectedUrl()
+fun FluentPage.shouldHaveExpectedUrl() = also { this should haveExpectedUrl() }
+fun FluentPage.shouldNotHaveExpectedUrl() = also { this shouldNot haveExpectedUrl() }
