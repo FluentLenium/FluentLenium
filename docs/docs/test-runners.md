@@ -31,7 +31,7 @@ sidebar:
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>4.5.1</version>
+    <version>4.6.2</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -85,7 +85,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit-jupiter</artifactId>
-    <version>4.5.1</version>
+    <version>4.6.2</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -103,7 +103,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>4.5.1</version>
+    <version>4.6.2</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -363,7 +363,7 @@ however the `FluentCucumberTest` based tests still use the old Cucumber `ObjectF
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-spock</artifactId>
-    <version>4.5.1</version>
+    <version>4.6.2</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -381,7 +381,7 @@ Enable it by activating ```examples``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-spring-testng</artifactId>
-    <version>4.5.1</version>
+    <version>4.6.2</version>
     <scope>test</scope>
 </dependency>
 ```

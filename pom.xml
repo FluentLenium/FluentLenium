@@ -438,15 +438,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <additionalJOption>--no-module-directories</additionalJOption>
+                </configuration>
                 <executions>
                     <execution>
                         <id>aggregate</id>
                         <goals>
                             <goal>aggregate</goal>
                         </goals>
-                        <phase>site</phase>
-                        <configuration>
-                        </configuration>
+                        <phase>process-resources</phase>
                     </execution>
                 </executions>
             </plugin>
