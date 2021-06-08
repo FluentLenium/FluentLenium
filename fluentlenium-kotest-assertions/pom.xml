@@ -29,6 +29,12 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.fluentlenium</groupId>
+            <artifactId>fluentlenium-kotest</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>io.kotest</groupId>
             <artifactId>kotest-runner-junit5-jvm</artifactId>
             <version>${kotest.version}</version>
