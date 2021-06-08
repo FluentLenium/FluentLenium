@@ -10,6 +10,7 @@ sidebar:
   Spock: "#spock"
   Spring TestNG: "#spring-testng"
   FluentStandalone: "#standalone-mode"
+  Kotest: "#kotest"
 ---
 
 ## Supported Test Runners
@@ -19,6 +20,7 @@ sidebar:
 - [Cucumber](#cucumber)
 - [Spock](#spock)
 - [Spring TestNG](#spring-testng)
+- [Kotest](#kotes)
 
 ## Standalone mode (no 3rd party test-runner)
 - [Standalone mode](#standalone-mode)
@@ -390,6 +392,41 @@ Enable it by activating ```examples``` Maven profile.
 
 E2E Spring testNG tests are present in [Spring example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spring).
 Enable it by activating ```examples``` Maven profile.
+
+## Kotest
+
+- Import this dependency:
+
+### Maven
+```xml
+<dependency>
+    <groupId>org.fluentlenium</groupId>
+    <artifactId>fluentlenium-kotest</artifactId>
+    <version>4.6.3</version>
+    <scope>test</scope>
+</dependency>
+```
+
+### Gradle
+```gradle
+    testImplementation("org.fluentlenium:fluentlenium-kotest:4.6.3")
+```
+
+- There are baseclasses available for all [Kotest testing styles](https://kotest.io/docs/framework/testing-styles.html). Choose
+  one and extend your test from it:
+  
+```kotlin
+class ExampleStringSpec : FluentStringSpec({
+  "Title should be correct" {
+    goTo(URL)
+  }
+})
+```
+
+Check [src](https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-kotest) for examples. 
+
+There is an example setup available in [Kotest example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/kotest).
+
 
 ## Standalone mode
 
