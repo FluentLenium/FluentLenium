@@ -29,5 +29,4 @@ class IndexPage : FluentPage() {
     fun verifyElementDisplayed() {
         this should haveElementDisplayed(fluentWebElement)
     }
-
 }

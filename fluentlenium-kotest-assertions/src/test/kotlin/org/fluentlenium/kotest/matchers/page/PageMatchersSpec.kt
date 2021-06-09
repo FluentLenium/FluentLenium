@@ -7,16 +7,13 @@ import org.fluentlenium.core.annotation.Page
 import org.fluentlenium.kotest.matchers.config.MatcherBase
 import org.fluentlenium.kotest.matchers.config.pages.FluentleniumPage
 import org.fluentlenium.kotest.matchers.config.pages.IndexPage
-import org.fluentlenium.kotest.matchers.config.pages.IndexPageNoClassAnnotations
 import org.fluentlenium.kotest.matchers.config.pages.IndexPageWrongClassAnnotations
+import org.fluentlenium.kotest.matchers.config.shouldAssert
 
 class PageMatchersSpec : MatcherBase() {
 
     @Page
     lateinit var indexPage: IndexPage
-
-    @Page
-    lateinit var indexPageNoClassAnnotations: IndexPageNoClassAnnotations
 
     @Page
     lateinit var indexPageWrongClassAnnotation: IndexPageWrongClassAnnotations
@@ -54,6 +51,16 @@ class PageMatchersSpec : MatcherBase() {
             indexPage shouldNot haveTitle("Wrong title")
         }
 
+        "titleNegative" {
+            shouldAssert {
+                indexPage shouldNot haveTitle("Fluent Selenium Documentation")
+            }
+
+            shouldAssert {
+                indexPage.shouldNotHaveTitle("Fluent Selenium Documentation")
+            }
+        }
+
         "page without title" {
             goToFile("noTitle.html")
 
@@ -68,6 +75,15 @@ class PageMatchersSpec : MatcherBase() {
             indexPage.shouldNotHaveElement(el("h2"))
         }
 
+        "haveElementNegative" {
+            shouldAssert {
+                indexPage shouldNot haveElement(el("h1"))
+            }
+            shouldAssert {
+                indexPage.shouldNotHaveElement(el("h1"))
+            }
+        }
+
         "haveElementDisplayed" {
             indexPage should haveElementDisplayed(el("h1"))
             indexPage.shouldHaveElementDisplayed(el("h1"))
@@ -80,6 +96,15 @@ class PageMatchersSpec : MatcherBase() {
             indexPage.shouldNotHaveElementDisplayed(el("#hiddenElement"))
         }
 
+        "haveElementDisplayedNegative" {
+            shouldAssert {
+                indexPage shouldNot haveElementDisplayed(el("h1"))
+            }
+            shouldAssert {
+                indexPage.shouldNotHaveElementDisplayed(el("h1"))
+            }
+        }
+
         "haveElements" {
             indexPage should haveElements(jq("h1"))
             indexPage.shouldHaveElements(jq("h1"))
@@ -87,6 +112,14 @@ class PageMatchersSpec : MatcherBase() {
             indexPage shouldNot haveElements(jq("h2"))
             indexPage.shouldNotHaveElements(jq("h2"))
         }
-    }
 
+        "haveElementsNegative" {
+            shouldAssert {
+                indexPage shouldNot haveElements(jq("h1"))
+            }
+            shouldAssert {
+                indexPage.shouldNotHaveElements(jq("h1"))
+            }
+        }
+    }
 }
