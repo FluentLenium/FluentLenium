@@ -10,6 +10,7 @@ sidebar:
   Spock: "#spock"
   Spring TestNG: "#spring-testng"
   FluentStandalone: "#standalone-mode"
+  Kotest: "#kotest"
 ---
 
 ## Supported Test Runners
@@ -19,6 +20,7 @@ sidebar:
 - [Cucumber](#cucumber)
 - [Spock](#spock)
 - [Spring TestNG](#spring-testng)
+- [Kotest](#kotes)
 
 ## Standalone mode (no 3rd party test-runner)
 - [Standalone mode](#standalone-mode)
@@ -31,7 +33,7 @@ sidebar:
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>4.5.1</version>
+    <version>4.6.2</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -85,7 +87,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit-jupiter</artifactId>
-    <version>4.5.1</version>
+    <version>4.6.2</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -103,7 +105,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>4.5.1</version>
+    <version>4.6.2</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -363,7 +365,7 @@ however the `FluentCucumberTest` based tests still use the old Cucumber `ObjectF
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-spock</artifactId>
-    <version>4.5.1</version>
+    <version>4.6.2</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -381,7 +383,7 @@ Enable it by activating ```examples``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-spring-testng</artifactId>
-    <version>4.5.1</version>
+    <version>4.6.2</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -390,6 +392,41 @@ Enable it by activating ```examples``` Maven profile.
 
 E2E Spring testNG tests are present in [Spring example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spring).
 Enable it by activating ```examples``` Maven profile.
+
+## Kotest
+
+- Import this dependency:
+
+### Maven
+```xml
+<dependency>
+    <groupId>org.fluentlenium</groupId>
+    <artifactId>fluentlenium-kotest</artifactId>
+    <version>4.6.3</version>
+    <scope>test</scope>
+</dependency>
+```
+
+### Gradle
+```gradle
+    testImplementation("org.fluentlenium:fluentlenium-kotest:4.6.3")
+```
+
+- There are baseclasses available for all [Kotest testing styles](https://kotest.io/docs/framework/testing-styles.html). Choose
+  one and extend your test from it:
+  
+```kotlin
+class ExampleStringSpec : FluentStringSpec({
+  "Title should be correct" {
+    goTo(URL)
+  }
+})
+```
+
+Check [src](https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-kotest) for examples. 
+
+There is an example setup available in [Kotest example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/kotest).
+
 
 ## Standalone mode
 
