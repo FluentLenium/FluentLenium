@@ -79,12 +79,6 @@
             <version>4.4.3</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>io.mockk</groupId>
-            <artifactId>mockk</artifactId>
-            <version>1.11.0</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
