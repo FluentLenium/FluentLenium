@@ -8,8 +8,12 @@ import org.openqa.selenium.support.pagefactory.ElementLocator
 import java.util.function.Supplier
 
 class ExampleHook(
-    control: FluentControl, instantiator: ComponentInstantiator, elementSupplier: Supplier<WebElement>,
-    locatorSupplier: Supplier<ElementLocator>, toStringSupplier: Supplier<String>, options: ExampleHookOptions
+    control: FluentControl,
+    instantiator: ComponentInstantiator,
+    elementSupplier: Supplier<WebElement>,
+    locatorSupplier: Supplier<ElementLocator>,
+    toStringSupplier: Supplier<String>,
+    options: ExampleHookOptions
 ) :
     BaseHook<ExampleHookOptions>(control, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options) {
     override fun click() {

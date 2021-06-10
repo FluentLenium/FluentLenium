@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy
 
 @PageUrl("https://fake.com")
 class DefaultPage : FluentPage() {
-     @FindBy(id = "linkToPage2")
+    @FindBy(id = "linkToPage2")
     private lateinit var linkToPage2: FluentWebElement
 
     fun clickLinkToPage2() {

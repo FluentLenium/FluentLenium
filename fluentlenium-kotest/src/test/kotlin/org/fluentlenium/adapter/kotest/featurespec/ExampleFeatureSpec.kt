@@ -2,8 +2,9 @@ package org.fluentlenium.adapter.kotest.featurespec
 
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
-import org.fluentlenium.adapter.kotest.*
+import org.fluentlenium.adapter.kotest.FluentFeatureSpec
 import org.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
+import org.fluentlenium.adapter.kotest.jq
 
 class ExampleFeatureSpec : FluentFeatureSpec({
     feature("Free Spec") {

@@ -13,5 +13,4 @@ class Page2 : FluentPage() {
     fun verifyLinkPresent() {
         link.present() shouldBe true
     }
-
 }
