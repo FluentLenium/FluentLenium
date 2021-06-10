@@ -16,6 +16,7 @@ supported Kotest [testing styles](https://kotest.io/docs/framework/testing-style
 * [Feature Spec](./src/test/kotlin/org/fluentlenium/adapter/kotest/featurespec/ExampleFeatureSpec.kt)
 * [Expect Spec](./src/test/kotlin/org/fluentlenium/adapter/kotest/expectspec/ExampleExpectSpec.kt)
 * [Annotation Spec](./src/test/kotlin/org/fluentlenium/adapter/kotest/annotationspec/ExampleAnnotationSpec.kt)
+* [String Spec](./src/test/kotlin/org/fluentlenium/adapter/kotest/stringspec/ExampleStringSpec.kt)
 
 # Extension functions
 

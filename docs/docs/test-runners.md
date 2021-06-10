@@ -20,7 +20,7 @@ sidebar:
 - [Cucumber](#cucumber)
 - [Spock](#spock)
 - [Spring TestNG](#spring-testng)
-- [Kotest](#kotes)
+- [Kotest](#kotest)
 
 ## Standalone mode (no 3rd party test-runner)
 - [Standalone mode](#standalone-mode)
