@@ -1,4 +1,4 @@
-package org.fluentlenium.kotest.matchers.fluentwebelement
+package org.fluentlenium.kotest.matchers.el
 
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
@@ -49,7 +49,7 @@ class FluentWebElementMatchersSpec : MatcherBase({
         el("#choice #first").shouldNotBeSelected()
     }
 
-    "haveText" {
+    "containText" {
         el("#oneline") should containText("A single line of text")
         el("#oneline") should containText("A single line")
         el("#oneline").shouldContainText("A single line")
@@ -58,7 +58,7 @@ class FluentWebElementMatchersSpec : MatcherBase({
         el("#oneline").shouldNotContainText("other text")
     }
 
-    "haveMatchingText" {
+    "matchText" {
         el("#oneline") should matchText("A single.*text")
         el("#oneline").shouldMatchText("A single.*text")
 

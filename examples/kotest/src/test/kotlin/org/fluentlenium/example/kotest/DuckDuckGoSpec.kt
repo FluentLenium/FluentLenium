@@ -3,19 +3,24 @@ package org.fluentlenium.example.kotest
 import io.kotest.engine.spec.tempdir
 import io.kotest.matchers.collections.shouldHaveAtLeastSize
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
-import org.fluentlenium.adapter.kotest.FluentStringSpec
+import org.fluentlenium.adapter.kotest.FluentFreeSpec
 import org.fluentlenium.adapter.kotest.jq
 import org.fluentlenium.core.hook.wait.Wait
-import org.fluentlenium.kotest.matchers.fluentlist.shouldHaveTagName
-import org.fluentlenium.kotest.matchers.fluentwebelement.shouldHaveDimension
+import org.fluentlenium.kotest.matchers.el.haveClass
+import org.fluentlenium.kotest.matchers.el.haveDimension
+import org.fluentlenium.kotest.matchers.el.shouldHaveDimension
+import org.fluentlenium.kotest.matchers.jq.haveTagName
+import org.fluentlenium.kotest.matchers.jq.shouldHaveTagName
 import org.openqa.selenium.Cookie
 import java.io.File
 import java.io.FilenameFilter
+import org.fluentlenium.kotest.matchers.jq.haveClass as listHaveClass
 
 @Wait
-class DuckDuckGoSpec : FluentStringSpec() {
+class DuckDuckGoSpec : FluentFreeSpec() {
 
     private val SEARCH_TEXT = "FluentLenium"
     private val PNG_FILTER = FilenameFilter { _, name ->
@@ -59,16 +64,27 @@ class DuckDuckGoSpec : FluentStringSpec() {
             getCookie("my").value shouldBe "cookie"
         }
 
-        "kotest assertions" {
-            goTo("https://awesome-testing.com")
+        "Kotest assertion" - {
+            "can use extension functions" {
+                goTo("https://awesome-testing.com")
 
-            // the other syntax
-            // jq(".post-title") should haveTagName("h1")
-            // does *not* work here if you have imported matchers for both fluentlist and fluentwebelement
-            // due to resolution amiguity.
+                jq(".post-title").shouldHaveTagName("h1")
+                el("img#Header1_headerimg").shouldHaveDimension(1000 to 402)
+            }
 
-            jq(".post-title").shouldHaveTagName("h1")
-            el("img#Header1_headerimg").shouldHaveDimension(1000 to 402)
+            "alternatively can use infix syntax" {
+                goTo("https://awesome-testing.com")
+
+                jq(".post-title") should haveTagName("h1")
+                el("img#Header1_headerimg") should haveDimension(1000 to 402)
+            }
+
+            "infix matchers can be aliased to to prevent name ambiguities" {
+                goTo("https://awesome-testing.com")
+
+                el(".post-title") should haveClass("post-title")
+                jq(".post-title") should listHaveClass("post-title")
+            }
         }
     }
 }

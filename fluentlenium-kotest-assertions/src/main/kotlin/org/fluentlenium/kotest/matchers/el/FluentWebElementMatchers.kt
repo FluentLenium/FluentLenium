@@ -1,4 +1,4 @@
-package org.fluentlenium.kotest.matchers.fluentwebelement
+package org.fluentlenium.kotest.matchers.el
 
 import io.kotest.matchers.Matcher
 import io.kotest.matchers.MatcherResult
