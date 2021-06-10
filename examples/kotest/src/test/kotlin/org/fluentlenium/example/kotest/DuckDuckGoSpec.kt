@@ -6,7 +6,10 @@ import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import org.fluentlenium.adapter.kotest.FluentStringSpec
+import org.fluentlenium.adapter.kotest.jq
 import org.fluentlenium.core.hook.wait.Wait
+import org.fluentlenium.kotest.matchers.fluentlist.shouldHaveTagName
+import org.fluentlenium.kotest.matchers.fluentwebelement.shouldHaveDimension
 import org.openqa.selenium.Cookie
 import java.io.File
 import java.io.FilenameFilter
@@ -53,7 +56,19 @@ class DuckDuckGoSpec : FluentStringSpec() {
             driver.manage().addCookie(Cookie("my", "cookie"))
             driver.navigate().refresh()
 
-            getCookie("my").value shouldBe  "cookie"
+            getCookie("my").value shouldBe "cookie"
+        }
+
+        "kotest assertions" {
+            goTo("https://awesome-testing.com")
+
+            // the other syntax
+            // jq(".post-title") should haveTagName("h1")
+            // does *not* work here if you have imported matchers for both fluentlist and fluentwebelement
+            // due to resolution amiguity.
+
+            jq(".post-title").shouldHaveTagName("h1")
+            el("img#Header1_headerimg").shouldHaveDimension(1000 to 402)
         }
     }
 }

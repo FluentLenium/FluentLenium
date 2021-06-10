@@ -1,4 +1,4 @@
-package org.fluentlenium.kotest.matchers.element
+package org.fluentlenium.kotest.matchers.fluentwebelement
 
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
