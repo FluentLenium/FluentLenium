@@ -416,26 +416,6 @@
         </pluginManagement>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0-M3</version>
-                <executions>
-                    <execution>
-                        <id>enforce-maven</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireMavenVersion>
-                                    <version>3.5</version>
-                                </requireMavenVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.3</version>
                 <configuration>
@@ -489,11 +469,14 @@
                     <sourceDirectories>
                         <sourceDirectory>${basedir}/fluentlenium-core/src/main/java</sourceDirectory>
                         <sourceDirectory>${basedir}/fluentlenium-assertj/src/main/java</sourceDirectory>
-                        <sourceDirectory>${basedir}/fluentlenium-cucumber/src/main/java</sourceDirectory>
                         <sourceDirectory>${basedir}/fluentlenium-junit/src/main/java</sourceDirectory>
                         <sourceDirectory>${basedir}/fluentlenium-junit-jupiter/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-cucumber/src/main/java</sourceDirectory>
                         <sourceDirectory>${basedir}/fluentlenium-testng/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-spring-testng/src/main/java</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-integration-tests/src/main/java</sourceDirectory>
                         <sourceDirectory>${basedir}/fluentlenium-spock/src/main/groovy</sourceDirectory>
+                        <sourceDirectory>${basedir}/fluentlenium-kotest/src/main/kotlin</sourceDirectory>
                     </sourceDirectories>
                 </configuration>
                 <dependencies>
