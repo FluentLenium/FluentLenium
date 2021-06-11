@@ -6,7 +6,7 @@ import org.fluentlenium.adapter.kotest.FluentDescribeSpec
 import org.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
 import org.fluentlenium.core.events.annotations.AfterNavigateTo
 
-class EventSpec: FluentDescribeSpec() {
+class EventSpec : FluentDescribeSpec() {
 
     var url: String? = null
 

@@ -81,6 +81,7 @@ To help you navigate through FluentLenium, here's a short summary about its modu
 - **fluentlenium-spring-testng**: Provides support for integration
   with [Spring Test NG](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/context/testng/AbstractTestNGSpringContextTests.html)
 - **fluentlenium-kotest**: Provides support for integration with [Kotest](https://kotest.io)
+- **fluentlenium-kotest-assertions**: Provides custom [Kotest matchers](https://kotest.io/docs/assertions/matchers.html)
 - **fluentlenium-cucumber**: Provides support for integration with [Cucumber](https://cucumber.io). This may be combined
   with any of the modules above that are also supported by Cucumber.
 - **fluentlenium-assertj**: Provides [AssertJ](http://joel-costigliola.github.io/assertj/) assertions for FluentLenium
