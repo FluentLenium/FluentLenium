@@ -293,7 +293,7 @@
             </dependency>
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
-                <artifactId>groovy</artifactId>
+                <artifactId>groovy-all</artifactId>
                 <version>3.0.8</version>
             </dependency>
             <dependency>
