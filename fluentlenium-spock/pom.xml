@@ -84,9 +84,13 @@
                 <artifactId>gmavenplus-plugin</artifactId>
                 <version>1.12.1</version>
                 <configuration>
-                    <parameters>
-                        <classifier>javadoc</classifier>
-                    </parameters>
+                    <bindPropertiesToSeparateVariables>false</bindPropertiesToSeparateVariables>
+                    <properties>
+                        <property>
+                            <name>classifier</name>
+                            <value>javadoc</value>
+                        </property>
+                    </properties>
                 </configuration>
                 <executions>
                     <execution>
