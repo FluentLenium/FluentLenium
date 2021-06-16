@@ -83,6 +83,11 @@
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
                 <version>1.12.1</version>
+                <configuration>
+                    <properties>
+                        <classifier>javadoc</classifier>
+                    </properties>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
