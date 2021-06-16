@@ -98,7 +98,7 @@
                         <groupId>org.codehaus.groovy</groupId>
                         <artifactId>groovy</artifactId>
                         <version>3.0.7</version>
-                        <scope>runtime</scope>
+                        <scope>compile</scope>
                     </dependency>
                 </dependencies>
             </plugin>
