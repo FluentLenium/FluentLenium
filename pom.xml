@@ -8,7 +8,7 @@
     </parent>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>4.7.2</version>
+    <version>4.7.3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -41,7 +41,7 @@
         <url>https://github.com/FluentLenium/FluentLenium</url>
         <connection>scm:git:https://github.com/FluentLenium/FluentLenium.git</connection>
         <developerConnection>scm:git:https://github.com/FluentLenium/FluentLenium.git</developerConnection>
-        <tag>v4.7.2</tag>
+        <tag>v4.5.1</tag>
     </scm>
 
     <licenses>
