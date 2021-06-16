@@ -684,6 +684,20 @@
                 </plugins>
             </build>
         </profile>
+
+        <profile>
+            <id>sonatype-oss-release</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.3.0</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
 </project>
