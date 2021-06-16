@@ -1,6 +1,10 @@
 # Changelog
 
 ## Version 4.x - Java 11 support
+### 4.8.0 (Jun 16 2021)
+- Add Kotest module (fluentlenium-kotest 
+- Add Kotest assertions module (fluentlenium-kotest-assertions)
+- Spock major upgrade (to v2.0)
 
 ### 4.6.2 (Aug 29 2020)
 - [#1227](https://github.com/FluentLenium/FluentLenium/pull/1227) - Shadow DOM support
