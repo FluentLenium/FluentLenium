@@ -33,7 +33,7 @@ sidebar:
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>4.6.2</version>
+    <version>4.8.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -87,7 +87,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit-jupiter</artifactId>
-    <version>4.6.2</version>
+    <version>4.8.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -105,7 +105,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>4.6.2</version>
+    <version>4.8.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -365,7 +365,7 @@ however the `FluentCucumberTest` based tests still use the old Cucumber `ObjectF
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-spock</artifactId>
-    <version>4.6.2</version>
+    <version>4.8.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -383,7 +383,7 @@ Enable it by activating ```examples``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-spring-testng</artifactId>
-    <version>4.6.2</version>
+    <version>4.8.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -402,14 +402,14 @@ Enable it by activating ```examples``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-kotest</artifactId>
-    <version>4.6.3</version>
+    <version>4.8.0</version>
     <scope>test</scope>
 </dependency>
 ```
 
 ### Gradle
 ```gradle
-    testImplementation("org.fluentlenium:fluentlenium-kotest:4.6.3")
+    testImplementation("org.fluentlenium:fluentlenium-kotest:4.8.0")
 ```
 
 - There are baseclasses available for all [Kotest testing styles](https://kotest.io/docs/framework/testing-styles.html). Choose

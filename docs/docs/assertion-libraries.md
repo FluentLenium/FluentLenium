@@ -25,7 +25,7 @@ We recommend to use AssertJ because we extend it with FluentWebElement and Fluen
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>4.5.1</version>
+    <version>4.8.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -104,17 +104,17 @@ There is a set of custom Kotest Matchers available to make assertions on
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-kotest-assertions</artifactId>
-    <version>4.6.3</version>
+    <version>4.8.0</version>
     <scope>test</scope>
 </dependency>
 ```
 
 ```groovy
-testImplementation 'org.fluentlenium:fluentlenium-kotest-assertions:4.6.4'
+testImplementation 'org.fluentlenium:fluentlenium-kotest-assertions:4.8.0'
 ```
 
 ```kotlin
-testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:4.6.4")
+testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:4.8.0")
 ```
 
 - Add those static imports.
