@@ -89,7 +89,7 @@
                             <goal>addTestSources</goal>
                             <goal>compile</goal>
                             <goal>compileTests</goal>
-                            <goal>groovydoc</goal>
+                            <goal>groovydoc-jar</goal>
                         </goals>
                     </execution>
                 </executions>
