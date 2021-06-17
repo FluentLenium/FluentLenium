@@ -309,7 +309,7 @@ public class LoginPage extends FluentPage {
    }
 
    public static class MyButton {
-       private WebElement webElement;
+       private final WebElement webElement;
 
        public MyButton(WebElement webElement) {
            this.webElement = webElement;
@@ -467,11 +467,11 @@ It's not mandatory to extend `FluentWebElement`, but a constructor with at least
 
 ```java
 public class SelectComponent {
-    private WebElement element;
+  private final WebElement element;
 
-    private SelectComponent(WebElement element) { // This constructor MUST exist ! But can be private.
-        this.element = element;
-    }
+  private SelectComponent(WebElement element) { // This constructor MUST exist ! But can be private.
+    this.element = element;
+  }
 }
 ```
 
@@ -574,7 +574,7 @@ await().until(() -> $(".listItem").first().displayed());
 You can also check if the page is loaded.
 
 ```java
-await().atMost(1, NANOSECONDS).untilPage().loaded();
+await().atMost(1, NANOSECONDS).untilPage().isLoaded();
 ```
 
 If you want to wait until the page you want is the page that you are at, you can use:
