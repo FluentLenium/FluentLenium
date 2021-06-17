@@ -574,7 +574,7 @@ await().until(() -> $(".listItem").first().displayed());
 You can also check if the page is loaded.
 
 ```java
-await().atMost(1, NANOSECONDS).untilPage().loaded();
+await().atMost(1, NANOSECONDS).untilPage().isLoaded();
 ```
 
 If you want to wait until the page you want is the page that you are at, you can use:
