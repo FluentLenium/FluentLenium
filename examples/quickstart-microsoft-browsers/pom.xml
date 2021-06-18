@@ -5,13 +5,13 @@
 
     <artifactId>fluentlenium-examples-quickstart-microsoft-browsers</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.4.2-SNAPSHOT</version>
+    <version>4.8.1-SNAPSHOT</version>
 
     <properties>
         <!-- Configure this property to latest available version -->
         <fluentlenium.version>${project.version}</fluentlenium.version>
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-        <selenium.version>4.0.0-alpha-6</selenium.version>
+        <selenium.version>4.0.0-beta-4</selenium.version>
     </properties>
 
     <name>FluentLenium Examples Edge IE</name>
@@ -50,12 +50,6 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.1.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>

@@ -3,6 +3,7 @@ package org.fluentlenium.it;
 import java.util.Date;
 
 import org.fluentlenium.adapter.junit.jupiter.FluentTest;
+import org.fluentlenium.core.FluentControl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
@@ -33,12 +34,12 @@ public class FluentIntegTest extends FluentTest implements TestExecutionListener
     }
 
     @Override
-    public void initFluent(WebDriver webDriver) {
-        super.initFluent(webDriver);
+    public FluentControl initFluent(WebDriver webDriver) {
+        return super.initFluent(webDriver);
     }
 
     @Override
-    public void releaseFluent() {
-        super.releaseFluent();
+    public boolean releaseFluent() {
+        return super.releaseFluent();
     }
 }

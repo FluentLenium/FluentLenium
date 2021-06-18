@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.junit.jupiter;
 
+import org.fluentlenium.adapter.FluentTestRunnerAdapter;
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
@@ -34,7 +35,7 @@ public class FluentJUnitJupiter implements BeforeEachCallback, AfterEachCallback
 
     @Override
     public void afterAll(ExtensionContext context) {
-        FluentTest.afterClass(context.getTestClass().orElse(null));
+        FluentTestRunnerAdapter.classDriverCleanup(context.getTestClass().orElse(null));
     }
 
     private FluentTest testInstanceOf(ExtensionContext context) {

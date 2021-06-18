@@ -6,6 +6,7 @@ sidebar:
   Page Object Pattern: "#page-object-pattern-support"
   Lazy Fluent Locators: "#lazy-fluent-locators"
   Extended awaits: "#extended-awaits"
+  Shadow Root: "#shadow-root"
 ---
 
 This section contains information about key FluentLenium features. If you wonder about advantages over pure Selenium this section is for you.
@@ -17,6 +18,7 @@ This section contains information about key FluentLenium features. If you wonder
   * [Components support](#components)
 - [Lazy Fluent Locators](#lazy-fluent-locators)
 - [Extended awaits](#extended-awaits)
+- [Shadow Root](#shadow-root)
 
 ## Page Object Pattern support
 
@@ -572,7 +574,7 @@ await().until(() -> $(".listItem").first().displayed());
 You can also check if the page is loaded.
 
 ```java
-await().atMost(1, NANOSECONDS).untilPage().loaded();
+await().atMost(1, NANOSECONDS).untilPage().isLoaded();
 ```
 
 If you want to wait until the page you want is the page that you are at, you can use:
@@ -608,3 +610,28 @@ await().atMost(2, TimeUnit.SECONDS).until($(".fluent", with("myAttribute").start
 
 ```Wait``` hook automatically waits for conditions to be applied before interacting with Elements, avoiding the need
 of writing technical waiting and condition code in tests and page objects.
+
+## Shadow root
+
+Shadow DOM/Shadow root [definition](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)
+
+```java
+ public class HomepageTest extends FluentPage { 
+    @Unshadow(css = {"outer-shadow-root", "inner-shadow-root", ".element"})
+    FluentWebElement element;
+    //Element is instantiated and can be used by test methods.
+ }
+``` 
+It can also handle List and Set collections if many objects are found
+
+```java
+public class HomepageTest extends FluentPage {
+    @Unshadow(css = {"outer-shadow-root", "inner-shadow-root", "div"})
+    List<FluentWebElement> elementsList;
+    @Unshadow(css = {"outer-shadow-root", "inner-shadow-root", "span"})
+    Set<FluentWebElement> elementsSet;
+    //elementsList and elementsSet are instantiated and can be used by test methods.
+ }
+ ```
+
+It is an experimental feature and works only on annotation level for fields

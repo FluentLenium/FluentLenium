@@ -3,21 +3,25 @@ package org.fluentlenium.example.spock
 import org.fluentlenium.adapter.spock.FluentSpecification
 import org.fluentlenium.core.hook.wait.Wait
 import org.openqa.selenium.Capabilities
-import org.openqa.selenium.chrome.ChromeDriver
+import org.openqa.selenium.Cookie
 import org.openqa.selenium.chrome.ChromeOptions
 
 @Wait
 class DuckDuckGoSpec extends FluentSpecification {
-    public static final String SEARCH_TEXT = "FluentLenium"
+    private static final String SEARCH_TEXT = "FluentLenium"
+    private static final String SCREENSHOT_TEMP_PATH = "/tmp"
+    private static final PngFilter PNG_FILTER = new PngFilter()
 
     @Override
     String getWebDriver() {
-        return new ChromeDriver()
+        return "chrome"
     }
 
     @Override
     Capabilities getCapabilities() {
-        return new ChromeOptions()
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setHeadless(true)
+        return chromeOptions
     }
 
     def "Title of duck duck go"() {
@@ -31,6 +35,39 @@ class DuckDuckGoSpec extends FluentSpecification {
 
         then:
         window().title().contains(SEARCH_TEXT)
+    }
+
+    def "Should take screenshot"() {
+        given:
+        goTo("https://awesome-testing.com")
+        setScreenshotPath(SCREENSHOT_TEMP_PATH)
+        getFiles().size() == 0
+
+        when:
+        takeScreenshot()
+
+        then:
+        getFiles().size() > 0
+
+        cleanup:
+        new File("$SCREENSHOT_TEMP_PATH/${-> getFiles().first()}").delete()
+    }
+
+    def "Should set cookie"() {
+        given:
+        goTo("https://awesome-testing.com")
+
+        when:
+        getDriver().manage().addCookie(new Cookie("my", "cookie"))
+        getDriver().navigate().refresh()
+
+        then:
+        getCookie("my").value == "cookie"
+    }
+
+    String[] getFiles() {
+        File tempFolder = new File(SCREENSHOT_TEMP_PATH)
+        return tempFolder.list(PNG_FILTER)
     }
 
 }

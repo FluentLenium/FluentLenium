@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.0'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    implementation 'org.fluentlenium:fluentlenium-junit-jupiter:4.8.1-SNAPSHOT'
+    implementation 'org.fluentlenium:fluentlenium-assertj:4.8.1-SNAPSHOT'
+    testImplementation 'ch.qos.logback:logback-classic:1.2.3'
+    testImplementation 'org.seleniumhq.selenium:selenium-firefox-driver:4.0.0-beta-4'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
+
+group = 'org.fluentlenium'
+version = '4.8.1-SNAPSHOT'
+description = 'FluentLenium Examples Firefox'
+sourceCompatibility = '11'
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}

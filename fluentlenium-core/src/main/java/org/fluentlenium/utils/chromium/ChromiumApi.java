@@ -1,5 +1,6 @@
 package org.fluentlenium.utils.chromium;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.remote.Command;
 import org.openqa.selenium.remote.CommandExecutor;
@@ -13,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Map;
 
 import static java.util.Objects.requireNonNull;
@@ -24,11 +26,15 @@ public class ChromiumApi {
     private static final Logger LOGGER = LoggerFactory.getLogger(ChromiumApi.class);
     private final RemoteWebDriver remoteWebDriver;
 
+    private static final List<String> SUPPORTED_BROWSERS = ImmutableList.of(
+            "chrome", "msedge"
+    );
+
     public ChromiumApi(RemoteWebDriver remoteWebDriver) {
         requireNonNull(remoteWebDriver, "WebDriver instance must not be null");
         String browserName = remoteWebDriver.getCapabilities().getBrowserName();
-        if (!"chrome".equalsIgnoreCase(browserName)) {
-            throw new ChromiumApiNotSupportedException("API currently supports only Chrome browser");
+        if (!SUPPORTED_BROWSERS.contains(browserName)) {
+            throw new ChromiumApiNotSupportedException("API supported only by Chrome and Edge");
         }
         this.remoteWebDriver = remoteWebDriver;
         defineCommandViaReflection();
@@ -44,10 +50,6 @@ public class ChromiumApi {
         Command command = createCommand(methodName, params, SEND_COMMAND_AND_GET_RESULT.getCmdName());
         CommandExecutor cmdExecutor = remoteWebDriver.getCommandExecutor();
         return executeCommand(cmdExecutor, command, methodName);
-    }
-
-    public void deleteAllCookies() {
-        sendCommand("Network.clearBrowserCookies", ImmutableMap.of());
     }
 
     private void defineCommandViaReflection() {

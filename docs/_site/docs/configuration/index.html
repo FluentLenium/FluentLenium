@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="msvalidate.01" content="CB7D41B769EED78B294F9EB873406AA8" />
+
+  <title>Configuration</title>
+  <meta name="Description" content="FluentLenium is a website automation framework which
+   extends Selenium to write reliable and resilient UI functional tests.
+    This framework is React ready. Written and maintained by people who
+     are automating browser-based tests on a daily basis.">
+  <meta name="author" content="FluentLenium" />
+  
+  
+  <meta name="description" content="FluentLenium">
+  
+
+  <link rel="alternate" type="application/rss+xml" title="FluentLenium - FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests." href="/feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+    
+  
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+  
+  
+
+  
+
+  <!-- Facebook OpenGraph tags -->
+  <meta property="og:title" content="Configuration" />
+  <meta property="og:type" content="website" />
+  
+  <meta property="og:url" content="http://fluentlenium.com/docs/configuration/" />
+  
+  
+  <meta property="og:image" content="http://fluentlenium.com/img/avatar-icon.png" />
+  
+  
+  <!-- Twitter summary cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@FluentLenium" />
+  <meta name="twitter:creator" content="@FluentLenium" />
+  <meta name="twitter:title" content="Configuration" />
+  <meta name="twitter:description" content="FluentLenium can be configured in many ways through configuration properties. ## Table of Contents - [Configuration properties](#configuration-properties) - [Configuration Ways](#configuration-ways) - [Configuration Examples](#configuration-examples) * [Headless Chrome](#headless-chrome) * [Custom Capabilities (BrowserStack example)](#custom-capabilities-browserstack-example) * [Custom Webdriver](#custom-webdriver) - [Accessing Webdriver and Capabilities in tests](#accessing-webdriver-and-capabilities-in-tests) ## Configuration properties - **webDriver** Sets the WebDriver type..." />
+  
+  <meta name="twitter:image" content="http://fluentlenium.com/img/avatar-icon.png" />
+  
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132760260-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-132760260-1');
+</script>
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://fluentlenium.com">FluentLenium</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/">Home</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/quickstart">Quickstart</a>
+
+          </li>
+        
+        
+        
+          <li class="navlinks-container">
+            <a class="navlinks-parent" href="javascript:void(0)">Docs</a>
+            <div class="navlinks-children">
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/test-runners">Supported Test runners</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/locators">Finding elements</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/key_features">Key features</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/configuration">Configuration</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/test-methods">Test methods</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/assertion-libraries">Assertion libraries</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/docs/appium-support">Appium support</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="https://fluentlenium.com/javadoc">Javadoc</a>
+
+                
+              
+            </div>
+          </li>
+        
+        
+        
+          <li class="navlinks-container">
+            <a class="navlinks-parent" href="javascript:void(0)">Migration</a>
+            <div class="navlinks-children">
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/migration/from-0.13.2-to-1.0-or-3.0">to 3.0</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="/migration/3.0-to-4.0">from 3.0 to 4.0</a>
+
+                
+              
+            </div>
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/about">About</a>
+
+          </li>
+        
+        
+        
+          <li class="navlinks-container">
+            <a class="navlinks-parent" href="javascript:void(0)">Github</a>
+            <div class="navlinks-children">
+              
+                
+                  
+            
+
+
+
+
+
+<a href="https://github.com/FluentLenium/FluentLenium">Sources</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="https://github.com/FluentLenium/FluentLenium/issues">Issues</a>
+
+                
+              
+                
+                  
+            
+
+
+
+
+
+<a href="https://github.com/FluentLenium/FluentLenium/releases">Releases</a>
+
+                
+              
+            </div>
+          </li>
+        
+        
+      </ul>
+    </div>
+
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://fluentlenium.com ">
+	      <img class="avatar-img" src="/img/avatar-icon.png" />
+		</a>
+	  </div>
+	</div>
+	
+
+  </div>
+</nav>
+
+<nav class="sidebar">
+    
+    <ul>
+        
+        <li><a href="#configuration-properties">Properties description</a></li>
+        
+        <li><a href="#configuration-ways">Config ways</a></li>
+        
+        <li><a href="#configuration-examples">Config examples</a></li>
+        
+        <li><a href="#accessing-webdriver-and-capabilities-in-tests">Accessing config in tests</a></li>
+        
+    </ul>
+    
+</nav>
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-heading">
+          <h1>Configuration</h1>
+		  
+		    
+            <hr class="small">
+            <span class="page-subheading">FluentLenium</span>
+			
+		  
+		  
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <p>FluentLenium can be configured in many ways through configuration properties.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+  <li><a href="#configuration-properties">Configuration properties</a></li>
+  <li><a href="#configuration-ways">Configuration Ways</a></li>
+  <li><a href="#configuration-examples">Configuration Examples</a>
+    <ul>
+      <li><a href="#headless-chrome">Headless Chrome</a></li>
+      <li><a href="#custom-capabilities-browserstack-example">Custom Capabilities (BrowserStack example)</a></li>
+      <li><a href="#custom-webdriver">Custom Webdriver</a></li>
+    </ul>
+  </li>
+  <li><a href="#accessing-webdriver-and-capabilities-in-tests">Accessing Webdriver and Capabilities in tests</a></li>
+</ul>
+
+<h2 id="configuration-properties">Configuration properties</h2>
+
+<ul>
+  <li>
+    <p><strong>webDriver</strong></p>
+
+    <p>Sets the WebDriver type to use.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">null</code>.</p>
+
+    <p>Possible values are <code class="language-plaintext highlighter-rouge">remote</code>, <code class="language-plaintext highlighter-rouge">firefox</code>, <code class="language-plaintext highlighter-rouge">chrome</code>, <code class="language-plaintext highlighter-rouge">ie</code>, <code class="language-plaintext highlighter-rouge">safari</code>,
+<code class="language-plaintext highlighter-rouge">phantomjs</code>, <code class="language-plaintext highlighter-rouge">htmlunit</code>, any class name implementing <code class="language-plaintext highlighter-rouge">WebDriver</code>,
+or any name that is defined in the <code class="language-plaintext highlighter-rouge">@FactoryName</code> annotation of a <code class="language-plaintext highlighter-rouge">WebDriverFactory</code> implementation.</p>
+
+    <p>If not defined, FluentLenium will use the first value for which WebDriver is available in classpath.</p>
+  </li>
+  <li>
+    <p><strong>browserTimeout</strong></p>
+
+    <p>Sets the timeout for webdriver when it should be responsive if not interrupts the obtain driver thread and tries
+maximum amount of times specified by <strong>browserTimeoutRetries</strong> value.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">60000</code></p>
+  </li>
+  <li>
+    <p><strong>browserTimeoutRetries</strong></p>
+
+    <p>Maximum number of retries to wait for WebDriver to be responsive.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">2</code></p>
+  </li>
+  <li>
+    <p><strong>remoteUrl</strong></p>
+
+    <p>Sets the remote URL for <code class="language-plaintext highlighter-rouge">remote</code> <em>webDriver</em>. This should be the URL to access Selenium-Grid server.
+It can also be used to point to cloud based testing endpoints like SauceLabs and BrowserStack, with custom webDriverFactory implementations.</p>
+  </li>
+  <li>
+    <p><strong>capabilities</strong></p>
+
+    <p>Sets the <a href="https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities">Capabilities</a> to use with the WebDriver.</p>
+
+    <p>Can be:</p>
+    <ul>
+      <li>a <code class="language-plaintext highlighter-rouge">Capabilities</code> JSON Object string.</li>
+      <li>an URL pointing to a <code class="language-plaintext highlighter-rouge">Capabilities</code> JSON Object string.</li>
+      <li>a static method available in Selenium <code class="language-plaintext highlighter-rouge">DesiredCapabilities</code> class, like <code class="language-plaintext highlighter-rouge">firefox</code> or <code class="language-plaintext highlighter-rouge">chrome</code>.</li>
+      <li>a class name implementing <code class="language-plaintext highlighter-rouge">Capabilities</code>.</li>
+      <li>a reference to a <code class="language-plaintext highlighter-rouge">CapabilitiesFactory</code>.</li>
+    </ul>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>driverLifecycle</strong></p>
+
+    <p>Sets the lifecycle of the WebDriver. WebDriver is fully managed by FluentLenium, so you should never
+create or quit a WebDriver by yourself.</p>
+
+    <p>Possible values are:</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">JVM</code>: WebDriver is created once, and same instance is used for each test class and method.</li>
+      <li><code class="language-plaintext highlighter-rouge">CLASS</code>: WebDriver is created for each test class, and same instance is used for each test method in the class.</li>
+      <li><code class="language-plaintext highlighter-rouge">METHOD</code>: WebDriver is created for each test method, and this instance is used only for one test method.</li>
+      <li><code class="language-plaintext highlighter-rouge">THREAD</code>: WebDriver is created for each test thread. The instance is used only for one thread of test
+  method. It was introduced to support annotation driven concurrent test execution mode (you can skip it if you
+  are using surefire from maven), please take a look on example below:</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nd">@FluentConfiguration</span><span class="o">(</span><span class="n">driverLifecycle</span> <span class="o">=</span> <span class="nc">ConfigurationProperties</span><span class="o">.</span><span class="na">DriverLifecycle</span><span class="o">.</span><span class="na">THREAD</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">DriverPerThreadTest</span> <span class="kd">extends</span> <span class="nc">FluentTestNg</span> <span class="o">{</span>
+      <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">cookiesList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="nc">WebDriver</span> <span class="nf">newWebDriver</span><span class="o">()</span> <span class="o">{</span>
+          <span class="nc">DesiredCapabilities</span> <span class="n">caps</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DesiredCapabilities</span><span class="o">();</span>
+          <span class="nc">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ChromeDriver</span><span class="o">(</span><span class="n">caps</span><span class="o">);</span>
+          <span class="k">return</span> <span class="n">driver</span><span class="o">;</span>
+      <span class="o">}</span>
+
+      <span class="nd">@Test</span><span class="o">(</span><span class="n">invocationCount</span> <span class="o">=</span> <span class="mi">2</span><span class="o">,</span> <span class="n">threadPoolSize</span> <span class="o">=</span> <span class="mi">2</span><span class="o">)</span>
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">firstMethod</span><span class="o">()</span> <span class="o">{</span>
+          <span class="n">goTo</span><span class="o">(</span><span class="s">"http://google.com"</span><span class="o">);</span>
+          <span class="n">await</span><span class="o">().</span><span class="na">until</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".gsfi"</span><span class="o">)).</span><span class="na">present</span><span class="o">();</span>
+          <span class="n">cookiesList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">getDriver</span><span class="o">().</span><span class="na">manage</span><span class="o">().</span><span class="na">getCookies</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+      <span class="o">}</span>
+
+      <span class="nd">@AfterClass</span><span class="o">()</span>
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkCookies</span><span class="o">()</span> <span class="o">{</span>
+          <span class="n">assertThat</span><span class="o">(</span><span class="n">cookiesList</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">distinct</span><span class="o">().</span><span class="na">count</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>Please keep in mind that this configures when drivers are created and exited at runtime, but it does not deal with
+concurrency of your tests.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">METHOD</code></p>
+  </li>
+  <li>
+    <p><strong>deleteCookies</strong></p>
+
+    <p>When using CLASS or JVM <em>driverLifecycle</em> configuration property, allow to delete cookies between each
+test.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">false</code>.</p>
+  </li>
+  <li>
+    <p><strong>baseUrl</strong></p>
+
+    <p>Sets the base URL used to build absolute URL when relative URL is given to <code class="language-plaintext highlighter-rouge">FluentAdapter#goTo(String)</code>.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>pageLoadTimeout</strong></p>
+
+    <p>Sets the amount of time in millisecond to wait for a page load to complete before throwing an error.
+ If the timeout is negative, page loads can be indefinite.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>implicitlyWait</strong></p>
+
+    <p>Specifies the amount of time in millisecond the driver should wait when searching for an element if it is
+ not immediately present.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>scriptTimeout</strong></p>
+
+    <p>Sets the amount of time in millisecond to wait for an asynchronous script to finish execution before
+ throwing an error. If the timeout is negative, then the script will be allowed to run
+ indefinitely.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>eventsEnabled</strong></p>
+
+    <p>Enables <code class="language-plaintext highlighter-rouge">events()</code> by wrapping the <code class="language-plaintext highlighter-rouge">WebDriver</code> in <code class="language-plaintext highlighter-rouge">EventFiringWebDriver</code>.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">true</code>.</p>
+  </li>
+  <li>
+    <p><strong>screenshotPath</strong></p>
+
+    <p>Sets the filesystem path where screenshot will be saved.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>screenshotMode</strong></p>
+
+    <p>Sets the trigger mode of screenshots. Can be <code class="language-plaintext highlighter-rouge">AUTOMATIC_ON_FAIL</code> to take screenshot when the test fail
+ or <code class="language-plaintext highlighter-rouge">MANUAL</code>.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>htmlDumpPath</strong></p>
+
+    <p>Sets the filesystem path where screenshot will be saved.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>htmlDumpMode</strong></p>
+
+    <p>Sets the trigger mode of html dump. Can be <code class="language-plaintext highlighter-rouge">ON_AUTOMATIC_ON_FAIL</code> to take html dump when the test fail
+ or <code class="language-plaintext highlighter-rouge">MANUAL</code>.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </li>
+  <li>
+    <p><strong>configurationDefaults</strong></p>
+
+    <p>Set this to a class implementing <code class="language-plaintext highlighter-rouge">ConfigurationProperties</code> to provide the default values
+of the configuration properties.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">ConfigurationDefaults</code>.</p>
+  </li>
+  <li>
+    <p><strong>configurationFactory</strong></p>
+
+    <p>Set this to a class implementing <code class="language-plaintext highlighter-rouge">ConfigurationFactory</code> to customize the ways properties are read.
+ This allow to configure properties from sources that are not supported by default FluentLenium.</p>
+
+    <p>Default value: <code class="language-plaintext highlighter-rouge">DefaultConfigurationFactory</code>.</p>
+  </li>
+</ul>
+
+<p>Keep in mind that when those properties are defined through System Properties or Environment Variables, they need to
+ be prefixed with <code class="language-plaintext highlighter-rouge">fluentlenium.</code> (ie. <code class="language-plaintext highlighter-rouge">fluentlenium.webDriver=chrome</code>).</p>
+
+<h2 id="configuration-ways">Configuration Ways</h2>
+
+<p>It’s possible to define those properties using:</p>
+
+<ul>
+  <li>
+    <p><strong>Overrides</strong> of JavaBean <strong>property getters</strong> of the test class.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SomeFluentTest extends FluentTest {
+    @Override
+    public String getWebDriver() {
+        return "chrome";
+    }
+}
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Calls</strong> of JavaBean <strong>property setters</strong> of the test class.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class SomeFluentTest extends FluentTest {
+    public SomeFluentTest() {
+        setWebDriver("chrome");
+    }
+}
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>System properties</strong> of the Java Environment, passed using <code class="language-plaintext highlighter-rouge">-D</code> on the command line. Property names must be <strong>prefixed with fluentlenium.</strong>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn clean test -Dfluentlenium.webDriver=chrome
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Environment Variable</strong> of the Operating System. Property names <strong>must be prefixed with fluentlenium.</strong>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ EXPORT fluentlenium.webDriver=chrome; mvn clean test;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>@FluentConfiguration Annotation</strong> on test class to configure.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> @FluentConfiguration(webDriver="chrome")
+ public class SomeFluentTest extends FluentTest {
+     ....
+ }
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Java Properties file</strong> located at <code class="language-plaintext highlighter-rouge">/fluentlenium.properties</code> in the classpath.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat fluentlenium.properties
+webDriver=chrome
+...
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>ConfigurationProperties</strong> custom implementation specified by <code class="language-plaintext highlighter-rouge">configurationDefaults</code> property.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class CustomConfigurationDefaults extends ConfigurationDefaults {
+    @Override
+    public String getWebDriver() {
+        return "chrome";
+    }
+}
+
+$ cat fluentlenium.properties
+configurationDefaults=org.your.package.CustomConfigurationDefaults
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>This list of way to configure fluentlenium is ordered by priority. If a value is defined for a property in an element,
+lower ways will just be ignored.</p>
+
+<p>You may implement additional ways to read configuration property by implementing another
+<code class="language-plaintext highlighter-rouge">ConfigurationFactory</code> and set the new configuration factory class name in the <code class="language-plaintext highlighter-rouge">configurationFactory</code> property.</p>
+
+<h2 id="configuration-examples">Configuration examples</h2>
+
+<h3 id="headless-chrome">Headless Chrome</h3>
+<p>You can run your tests using Chrome <a href="https://developers.google.com/web/updates/2017/04/headless-chrome">headless</a> feature. Just simply add <code class="language-plaintext highlighter-rouge">{chromeOptions: {args:[headless, disable-gpu]}}</code> to capabilities.</p>
+
+<p>To run Chrome in the headless mode you can use following FluentLenium configuration ways:</p>
+
+<ol>
+  <li><strong>Override</strong> JavaBean <strong>property getters</strong> of the test class:
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeFluentTest</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getWebDriver</span><span class="o">(){</span>
+            <span class="k">return</span> <span class="s">"chrome"</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">Capabilities</span> <span class="nf">getCapabilities</span><span class="o">(){</span>
+            <span class="nc">ChromeOptions</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ChromeOptions</span><span class="o">();</span>
+            <span class="n">options</span><span class="o">.</span><span class="na">addArguments</span><span class="o">(</span><span class="s">"--headless"</span><span class="o">);</span>
+            <span class="n">options</span><span class="o">.</span><span class="na">addArguments</span><span class="o">(</span><span class="s">"--disable-gpu"</span><span class="o">);</span>
+            <span class="nc">DesiredCapabilities</span> <span class="n">capabilities</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DesiredCapabilities</span><span class="o">();</span>
+            <span class="n">capabilities</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span><span class="s">"chromeOptions"</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">capabilities</span><span class="o">;</span>
+        <span class="o">}</span>
+   <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Call</strong> JavaBean <strong>property setters</strong> of the test class:
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeFluentTest</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nf">SomeFluentTest</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">ChromeOptions</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ChromeOptions</span><span class="o">();</span>
+            <span class="n">options</span><span class="o">.</span><span class="na">addArguments</span><span class="o">(</span><span class="s">"--headless"</span><span class="o">);</span>
+            <span class="n">options</span><span class="o">.</span><span class="na">addArguments</span><span class="o">(</span><span class="s">"--disable-gpu"</span><span class="o">);</span>
+            <span class="nc">DesiredCapabilities</span> <span class="n">capabilities</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DesiredCapabilities</span><span class="o">();</span>
+            <span class="n">capabilities</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span><span class="s">"chromeOptions"</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
+            <span class="n">setCapabilities</span><span class="o">(</span><span class="n">capabilities</span><span class="o">);</span>
+            <span class="n">setWebDriver</span><span class="o">(</span><span class="s">"chrome"</span><span class="o">);</span>
+        <span class="o">}</span>
+   <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Pass <strong>system properties</strong> using <code class="language-plaintext highlighter-rouge">-D</code> on the command line:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   mvn clean test -Dfluentlenium.webDriver=chrome -Dfluentlenium.capabilities= "{chromeOptions: {args: [headless,disable-gpu]}}"
+</code></pre></div>    </div>
+  </li>
+  <li>Annotate the test class with <strong>@FluentConfiguration</strong>:
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="nd">@FluentConfiguration</span><span class="o">(</span><span class="n">webDriver</span><span class="o">=</span><span class="s">"chrome"</span><span class="o">,</span> <span class="n">capabilities</span> <span class="o">=</span> <span class="s">"{\"chromeOptions\": {\"args\": [\"headless\",\"disable-gpu\"]}}"</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeFluentTest</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span class="o">{</span>
+        <span class="o">...</span>
+   <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Create <strong>Java Properties</strong> file <code class="language-plaintext highlighter-rouge">fluentlenium.properties</code> in the project classpath.
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   $ cat fluentlenium.properties
+   webDriver=chrome
+   capabilities = {\"chromeOptions\": {\"args\": [\"headless\",\"disable-gpu\"]}}
+</code></pre></div>    </div>
+  </li>
+  <li>Implement custom configuration properties by extending <strong>ConfigurationDefaults</strong>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomConfigurationDefaults</span> <span class="kd">extends</span> <span class="nc">ConfigurationDefaults</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getWebDriver</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">"chrome"</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">Capabilities</span> <span class="nf">getCapabilities</span><span class="o">(){</span>
+            <span class="nc">ChromeOptions</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ChromeOptions</span><span class="o">();</span>
+            <span class="n">options</span><span class="o">.</span><span class="na">addArguments</span><span class="o">(</span><span class="s">"--headless"</span><span class="o">);</span>
+            <span class="n">options</span><span class="o">.</span><span class="na">addArguments</span><span class="o">(</span><span class="s">"--disable-gpu"</span><span class="o">);</span>
+            <span class="nc">DesiredCapabilities</span> <span class="n">capabilities</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DesiredCapabilities</span><span class="o">();</span>
+            <span class="n">capabilities</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span><span class="s">"chromeOptions"</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">capabilities</span><span class="o">;</span>
+        <span class="o">}</span>
+   <span class="o">}</span>
+   <span class="err">$</span> <span class="n">cat</span> <span class="n">fluentlenium</span><span class="o">.</span><span class="na">properties</span>
+   <span class="n">configurationDefaults</span><span class="o">=</span><span class="n">org</span><span class="o">.</span><span class="na">your</span><span class="o">.</span><span class="na">package</span><span class="o">.</span><span class="na">CustomConfigurationDefaults</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="custom-capabilities-browserstack-example">Custom Capabilities (BrowserStack example)</h3>
+<p>You can register custom Capabilities by providing your own implementation of <code class="language-plaintext highlighter-rouge">CapabilitiesFactory</code>.</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">CapabilitiesFactory</code> is responsible for creating new instances of <code class="language-plaintext highlighter-rouge">Capabilities</code> that will be
+available through <code class="language-plaintext highlighter-rouge">capabilities</code> configuration property</p>
+
+<p>This implementation will be discovered with <a href="https://github.com/atteo/classindex">classindex</a>, a
+compile-time alternative to run-time classpath scanning. It requires your IDE to have Annotation Processing
+enabled in the Java Compiler configuration.</p>
+
+<p>For instance, to run your tests on <a href="https://www.browserstack.com/automate">BrowserStack Automate</a>, your first need to create a Capabilities
+factory.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@FactoryName</span><span class="o">(</span><span class="s">"browserstack-os-x"</span><span class="o">)</span> <span class="c1">// Name to use in capabilities configuration property</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BrowserStackOsXCapabilitiesFactory</span> <span class="kd">implements</span> <span class="nc">CapabilitiesFactory</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Capabilities</span> <span class="nf">newCapabilities</span><span class="o">(</span><span class="nc">ConfigurationProperties</span> <span class="n">configuration</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">DesiredCapabilities</span> <span class="n">caps</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DesiredCapabilities</span><span class="o">();</span>
+
+        <span class="n">caps</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span><span class="s">"os"</span><span class="o">,</span> <span class="s">"OS X"</span><span class="o">);</span>
+        <span class="n">caps</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span><span class="s">"os_version"</span><span class="o">,</span> <span class="s">"El Capitan"</span><span class="o">);</span>
+        <span class="n">caps</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span><span class="s">"browser"</span><span class="o">,</span> <span class="s">"firefox"</span><span class="o">);</span>
+        <span class="n">caps</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span><span class="s">"browser_version"</span><span class="o">,</span> <span class="s">"44"</span><span class="o">);</span>
+        <span class="n">caps</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span><span class="s">"build"</span><span class="o">,</span> <span class="s">"Sample FluentLenium Tests"</span><span class="o">);</span>
+        <span class="n">caps</span><span class="o">.</span><span class="na">setCapability</span><span class="o">(</span><span class="s">"browserstack.debug"</span><span class="o">,</span> <span class="s">"true"</span><span class="o">);</span>
+
+        <span class="k">return</span> <span class="n">caps</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>And then, configure the following properties:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>webDriver=remote
+capabilities=browserstack-os-x
+remoteUrl=http://USERNAME:AUTOMATE_KEY@hub-cloud.browserstack.com/wd/hub
+</code></pre></div></div>
+
+<p>or use them in the <code class="language-plaintext highlighter-rouge">@FluentConfiguration</code> annotation of your test:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@FluentConfiguration</span><span class="o">(</span><span class="n">webDriver</span> <span class="o">=</span> <span class="s">"remote"</span><span class="o">,</span> <span class="n">capabilities</span> <span class="o">=</span> <span class="s">"browserstack-os-x"</span><span class="o">,</span> <span class="n">remoteUrl</span> <span class="o">=</span> <span class="s">"http://USERNAME:AUTOMATE_KEY@hub-cloud.browserstack.com/wd/hub"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BrowserStackTest</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span class="o">{</span>
+    <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>but this latter one may not be a good practice in case of cloud based solutions, considering that your version control system would store the username and key/id of your account.</p>
+
+<h3 id="custom-webdriver">Custom WebDriver</h3>
+
+<p>You can register custom WebDriver by providing your own implementation of <code class="language-plaintext highlighter-rouge">WebDriverFactory</code>.</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">WebDriverFactory</code> is responsible for creating new instances of <code class="language-plaintext highlighter-rouge">WebDriver</code> that will be available
+through <code class="language-plaintext highlighter-rouge">webDriver</code> configuration property</p>
+
+<p>This implementation will be discovered with <a href="https://github.com/atteo/classindex">classindex</a>, a
+compile-time alternative to run-time classpath scanning. It requires your IDE to have Annotation Processing
+enabled in the Java Compiler configuration.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@FactoryName</span><span class="o">(</span><span class="s">"custom"</span><span class="o">)</span> <span class="c1">// Name to use in webDriver configuration property</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomWebDriverFactory</span> <span class="kd">implements</span> <span class="nc">WebDriverFactory</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">WebDriver</span> <span class="nf">newWebDriver</span><span class="o">(</span><span class="nc">Capabilities</span> <span class="n">desiredCapabilities</span><span class="o">,</span> <span class="nc">ConfigurationProperties</span> <span class="n">configuration</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">CustomWebDriver</span><span class="o">(</span><span class="n">desiredCapabilities</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Instead of implementing a new <code class="language-plaintext highlighter-rouge">WebDriverFactory</code> class, you may also override <code class="language-plaintext highlighter-rouge">newWebDriver()</code> in the Test
+class, but doing so will ignore any value defined in <code class="language-plaintext highlighter-rouge">webDriver</code> configuration property.</p>
+
+<h2 id="accessing-webdriver-and-capabilities-in-tests">Accessing Webdriver and Capabilities in tests</h2>
+
+<p>It’s possible to retrieve the underlying WebDriver with <code class="language-plaintext highlighter-rouge">getDriver()</code> method. Effective Capabilities can be retrieved
+with <code class="language-plaintext highlighter-rouge">capabilities()</code> method.</p>
+
+	    
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+          <li>
+            <a href="https://github.com/FluentLenium" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://twitter.com/FluentLenium" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+      
+		  
+		  
+		  
+		  
+      
+      
+      
+      
+		  
+        </ul>
+        <p class="copyright text-muted">
+		  FluentLenium
+		  &nbsp;&bull;&nbsp;
+		  2021
+
+		  
+		  &nbsp;&bull;&nbsp;
+		  <a href="http://fluentlenium.com">fluentlenium.com</a>
+		  
+	    </p>
+	        <!-- Please don't remove this, keep my open source work credited :) -->
+		<p class="theme-by text-muted">
+		  Theme by
+		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+
+
+
+
+  
+  </body>
+</html>

@@ -1,6 +1,7 @@
 package org.fluentlenium.adapter;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
 import static org.mockito.Mockito.verify;
 
 import org.fluentlenium.configuration.ConfigurationProperties;
@@ -130,7 +131,7 @@ public class FluentAdapterTest {
         FluentAdapter adapter = new FluentAdapter();
         adapter.initFluent(webDriver);
 
-        assertThat(adapter.isIgnoredException(null)).isFalse();
+        assertThat(isIgnoredException(null)).isFalse();
     }
 
     @Test
@@ -138,7 +139,7 @@ public class FluentAdapterTest {
         FluentAdapter adapter = new FluentAdapter();
         adapter.initFluent(webDriver);
 
-        assertThat(adapter.isIgnoredException(new AssumptionViolatedException("assumption"))).isTrue();
+        assertThat(isIgnoredException(new AssumptionViolatedException("assumption"))).isTrue();
     }
 
     @Test
@@ -146,6 +147,6 @@ public class FluentAdapterTest {
         FluentAdapter adapter = new FluentAdapter();
         adapter.initFluent(webDriver);
 
-        assertThat(adapter.isIgnoredException(new NoSuchElementException("reason"))).isFalse();
+        assertThat(isIgnoredException(new NoSuchElementException("reason"))).isFalse();
     }
 }

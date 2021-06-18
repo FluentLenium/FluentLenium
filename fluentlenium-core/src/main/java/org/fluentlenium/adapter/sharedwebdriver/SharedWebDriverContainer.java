@@ -1,9 +1,14 @@
 package org.fluentlenium.adapter.sharedwebdriver;
 
+import org.fluentlenium.adapter.SharedMutator;
 import org.fluentlenium.adapter.SharedMutator.EffectiveParameters;
+import org.fluentlenium.configuration.Configuration;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
 import java.util.function.Supplier;
 
 /**
@@ -51,6 +56,18 @@ public enum SharedWebDriverContainer {
 
     public List<SharedWebDriver> getTestClassDrivers(Class<?> testClass) {
         return impl.getTestClassDrivers(testClass);
+    }
+
+    public SharedWebDriver getSharedWebDriver(SharedMutator.EffectiveParameters<?> parameters,
+                                              ExecutorService webDriverExecutor,
+                                              Supplier<WebDriver> webDriver,
+                                              Configuration configuration)
+            throws ExecutionException, InterruptedException {
+        return impl.getSharedWebDriver(parameters, webDriverExecutor, webDriver, configuration);
+    }
+
+    public WebDriver newWebDriver(String name, Capabilities capabilities, Configuration configuration) {
+        return impl.newWebDriver(name, capabilities, configuration);
     }
 
 }

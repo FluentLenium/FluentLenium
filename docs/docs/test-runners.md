@@ -8,7 +8,9 @@ sidebar:
   TestNG: "#testng"
   Cucumber: "#cucumber"
   Spock: "#spock"
+  Spring TestNG: "#spring-testng"
   FluentStandalone: "#standalone-mode"
+  Kotest: "#kotest"
 ---
 
 ## Supported Test Runners
@@ -17,6 +19,8 @@ sidebar:
 - [TestNG](#testng)
 - [Cucumber](#cucumber)
 - [Spock](#spock)
+- [Spring TestNG](#spring-testng)
+- [Kotest](#kotest)
 
 ## Standalone mode (no 3rd party test-runner)
 - [Standalone mode](#standalone-mode)
@@ -29,7 +33,7 @@ sidebar:
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>4.3.1</version>
+    <version>4.8.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -83,7 +87,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit-jupiter</artifactId>
-    <version>4.3.1</version>
+    <version>4.8.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -101,7 +105,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
-    <version>4.3.1</version>
+    <version>4.8.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -361,15 +365,68 @@ however the `FluentCucumberTest` based tests still use the old Cucumber `ObjectF
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-spock</artifactId>
-    <version>4.3.1</version>
+    <version>4.8.0</version>
     <scope>test</scope>
 </dependency>
 ```
 
 - Extends FluentSpecification instead of FluentTest.
 
-E2E Spock test are present in [Spock example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spock).
+E2E Spock tests are present in [Spock example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spock).
 Enable it by activating ```examples``` Maven profile.
+
+## Spring TestNG
+
+- Import this maven dependency.
+
+```xml
+<dependency>
+    <groupId>org.fluentlenium</groupId>
+    <artifactId>fluentlenium-spring-testng</artifactId>
+    <version>4.8.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+- Extends FluentTestNgSpringTest instead of FluentTest.
+
+E2E Spring testNG tests are present in [Spring example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spring).
+Enable it by activating ```examples``` Maven profile.
+
+## Kotest
+
+- Import this dependency:
+
+### Maven
+```xml
+<dependency>
+    <groupId>org.fluentlenium</groupId>
+    <artifactId>fluentlenium-kotest</artifactId>
+    <version>4.8.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+### Gradle
+```gradle
+    testImplementation("org.fluentlenium:fluentlenium-kotest:4.8.0")
+```
+
+- There are baseclasses available for all [Kotest testing styles](https://kotest.io/docs/framework/testing-styles.html). Choose
+  one and extend your test from it:
+  
+```kotlin
+class ExampleStringSpec : FluentStringSpec({
+  "Title should be correct" {
+    goTo(URL)
+  }
+})
+```
+
+Check [src](https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-kotest) for examples. 
+
+There is an example setup available in [Kotest example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/kotest).
+
 
 ## Standalone mode
 

@@ -4,6 +4,7 @@ import static org.fluentlenium.core.domain.ElementUtils.getWrappedElement;
 import static org.fluentlenium.utils.Preconditions.checkArgument;
 import static org.fluentlenium.utils.Preconditions.checkState;
 
+import io.appium.java_client.AppiumDriver;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.core.action.KeyboardActions;
 import org.fluentlenium.core.action.MouseActions;
@@ -21,12 +22,16 @@ import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.inject.ContainerContext;
 import org.fluentlenium.core.inject.DefaultContainerInstantiator;
 import org.fluentlenium.core.inject.FluentInjector;
+import org.fluentlenium.core.inject.Unshadower;
 import org.fluentlenium.core.performance.PerformanceTiming;
 import org.fluentlenium.core.performance.DefaultPerformanceTiming;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.utils.UrlUtils;
+import org.fluentlenium.utils.chromium.ChromiumApi;
+import org.fluentlenium.utils.chromium.ChromiumControl;
+import org.fluentlenium.utils.chromium.ChromiumControlImpl;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
@@ -37,6 +42,8 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.Set;
@@ -47,6 +54,10 @@ import java.util.Set;
  */
 @SuppressWarnings("PMD.GodClass")
 public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD GodClass
+
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(FluentDriver.class);
+
     private final Configuration configuration;
     private final ComponentsManager componentsManager;
     private final EventsRegistry events;
@@ -63,6 +74,7 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
     private final FluentDriverHtmlDumper htmlDumper;
     private final FluentDriverWait driverWait;
     private final PerformanceTiming performanceTiming;
+    private final ChromiumControl chromiumControl;
 
     /**
      * Wrap the driver into a Fluent driver.
@@ -94,6 +106,7 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
         cssControl = new CssControlImpl(adapter, adapter);
         windowAction = new WindowAction(adapter, componentsManager.getInstantiator(), driver);
         performanceTiming = new DefaultPerformanceTiming(driver);
+        chromiumControl = new ChromiumControlImpl(driver);
 
         new FluentDriverTimeoutConfigurer(configuration, driver).configureDriver();
     }
@@ -136,7 +149,18 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
 
     @Override
     public WebDriver getDriver() {
+        if (driver instanceof AppiumDriver) {
+            LOGGER.warn("You should use getAppiumDriver() method for mobile automation");
+        }
         return driver;
+    }
+
+    @Override
+    public AppiumDriver<?> getAppiumDriver() {
+        if (!(driver instanceof AppiumDriver)) {
+            throw new WrongDriverException("Use getDriver() method for web automation");
+        }
+        return (AppiumDriver<?>) driver;
     }
 
     @Override
@@ -329,5 +353,10 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
     @Override
     public PerformanceTiming performanceTiming() {
         return performanceTiming;
+    }
+
+    @Override
+    public ChromiumApi getChromiumApi() {
+        return chromiumControl.getChromiumApi();
     }
 }

@@ -42,13 +42,10 @@
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
+                <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
                     <parallel>methods</parallel>
                     <threadCount>4</threadCount>
-                    <systemPropertyVariables>
-                        <surefire.forkNumber>0${surefire.forkNumber}</surefire.forkNumber>
-                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>

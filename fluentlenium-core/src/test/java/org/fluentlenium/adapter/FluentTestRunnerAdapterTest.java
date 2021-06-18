@@ -122,7 +122,6 @@ public class FluentTestRunnerAdapterTest {
             adapter.takeHtmlDump();
         } catch (IllegalStateException ex) {
             verify(adapter, times(1)).takeHtmlDump();
-            verify(adapter, times(1)).getDriver();
             assertThat(ex.getMessage()).isEqualTo("FluentControl is not initialized, WebDriver or Configuration issue");
             throw ex;
         }

@@ -2,9 +2,11 @@ package org.fluentlenium.core;
 
 import org.apache.commons.lang3.StringUtils;
 import org.fluentlenium.core.annotation.PageUrl;
+import org.fluentlenium.core.inject.Unshadower;
 import org.fluentlenium.core.page.ClassAnnotations;
 import org.fluentlenium.core.url.ParsedUrlTemplate;
 import org.fluentlenium.core.url.UrlTemplate;
+import org.fluentlenium.core.wait.AwaitControl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -165,6 +167,21 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
         return parseUrl(url());
     }
 
+    /**
+     * Verifies whether page is loaded. Overwrite if necessary.
+     * E.g. wait for {@link org.openqa.selenium.support.FindBy @FindBy} annotated component to render using {@link AwaitControl#await() await()}. <br>
+     * Warning: Do NOT wait for {@link org.fluentlenium.core.annotation.Unshadow @Unshadow} components!
+     */
+    public void verifyIsLoaded() {
+
+    }
+
+    public void unshadowAllFields() {
+        if(getDriver() != null) {
+            new Unshadower(getDriver(), this).unshadowAllAnnotatedFields();
+        }
+    }
+
     @Override
     public ParsedUrlTemplate parseUrl(String url) {
         return Optional.ofNullable(getUrl())
@@ -206,4 +223,5 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
         goTo(url);
         return (P) this;
     }
+
 }

@@ -5,7 +5,7 @@
 
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-examples-cucumber</artifactId>
-    <version>4.4.2-SNAPSHOT</version>
+    <version>4.8.1-SNAPSHOT</version>
 
     <name>FluentLenium Cucumber example</name>
     <description>FluentLenium cucumber example</description>
@@ -14,7 +14,7 @@
     <properties>
         <java.version>11</java.version>
         <fluentlenium.version>${project.version}</fluentlenium.version>
-        <selenium.version>4.0.0-alpha-6</selenium.version>
+        <selenium.version>4.0.0-beta-4</selenium.version>
     </properties>
 
     <dependencies>
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.16.1</version>
+            <version>3.20.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -54,7 +54,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.0.0-M4</version>
+                <version>3.0.0-M5</version>
                 <executions>
                     <execution>
                         <goals>

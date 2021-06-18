@@ -1,13 +1,6 @@
 package org.fluentlenium.test;
 
-import org.apache.commons.io.IOUtils;
 import org.fluentlenium.adapter.junit.jupiter.FluentTest;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOError;
-import java.io.IOException;
-import java.io.OutputStream;
 
 import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlPathFromFile;
@@ -38,16 +31,4 @@ public abstract class IntegrationFluentTest extends FluentTest {
         return "htmlunit";
     }
 
-    protected void goToSource(String htmlSource) {
-        try {
-            File source = File.createTempFile("source", ".tmp.html");
-            try (OutputStream fos = new FileOutputStream(source)) {
-                IOUtils.write(htmlSource, fos, "UTF-8");
-                source.deleteOnExit();
-                goTo(source.toURI().toString());
-            }
-        } catch (IOException e) {
-            throw new IOError(e);
-        }
-    }
 }

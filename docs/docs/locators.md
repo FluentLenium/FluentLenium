@@ -176,7 +176,7 @@ $("#firstname").clear()
 $("#account").submit()
 
 // Place the mouse over the first found element
-$("#create-button").mouseOver()
+$("#create-button").hoverOver()
 
 // Scroll the viewport to make the first found element visible
 $("#create-button").scrollIntoView();

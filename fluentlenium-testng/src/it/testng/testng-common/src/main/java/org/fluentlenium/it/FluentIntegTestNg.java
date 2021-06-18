@@ -1,6 +1,7 @@
 package org.fluentlenium.it;
 
 import org.fluentlenium.adapter.testng.FluentTestNg;
+import org.fluentlenium.core.FluentControl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.testng.annotations.AfterMethod;
@@ -30,17 +31,17 @@ public class FluentIntegTestNg extends FluentTestNg {
     }
 
     @Override
-    public void initFluent(WebDriver webDriver) {
+    public FluentControl initFluent(WebDriver webDriver) {
         System.out.println(
                 "Init WebDriver " + webDriver + " for test " + getClass().getName() + " [" + System.identityHashCode(this) + "]");
-        super.initFluent(webDriver);
+        return super.initFluent(webDriver);
     }
 
     @Override
-    public void releaseFluent() {
+    public boolean releaseFluent() {
         System.out.println(
                 "Release WebDriver " + getDriver() + " for test " + getClass().getName() + " [" + System.identityHashCode(this)
                         + "]");
-        super.releaseFluent();
+        return super.releaseFluent();
     }
 }

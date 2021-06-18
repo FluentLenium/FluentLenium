@@ -1,6 +1,23 @@
 # Changelog
 
 ## Version 4.x - Java 11 support
+### 4.8.0 (Jun 16 2021)
+- Add Kotest module (fluentlenium-kotest 
+- Add Kotest assertions module (fluentlenium-kotest-assertions)
+- Spock major upgrade (to v2.0)
+
+### 4.6.2 (Aug 29 2020)
+- [#1227](https://github.com/FluentLenium/FluentLenium/pull/1227) - Shadow DOM support
+- Multiple libraries bump
+
+### 4.5.1 (Aug 29 2020)
+- [#949](https://github.com/FluentLenium/FluentLenium/issues/949) - New runner - support for Spring TestNG
+- [#995](https://github.com/FluentLenium/FluentLenium/issues/995) - Improve FluentLenium Spock support, rewrite, and more detailed testing. Multiple bugfixes.
+- [#922](https://github.com/FluentLenium/FluentLenium/issues/922) - Chromium API support (can be used in Chrome and Edge)
+- [#844](https://github.com/FluentLenium/FluentLenium/issues/844) - Added hoverOver() method to FluentActions
+- [#934](https://github.com/FluentLenium/FluentLenium/issues/934) - Added .hasTextContaining() assertion to assertj module
+- [#1103](https://github.com/FluentLenium/FluentLenium/issues/1103) - Added shortcut methods getDriver() and getAppiumDriver()
+- [#1092](https://github.com/FluentLenium/FluentLenium/issues/1092) - Cucumber major upgrade to 6.6.0
 
 ### 4.4.1 (Mar 23 2020)
 
@@ -61,6 +78,15 @@ Dependencies update and changes to update Cucumber to the 5.5 version
 - Fix for Chrome bug - redirects to 3rd party page stop working when user opens it in the new window or popup
 
 ## Version 3.x - Java 8 support
+
+### 3.10.1 (Aug 29 2020)
+- [#949](https://github.com/FluentLenium/FluentLenium/issues/949) - New runner - support for Spring TestNG
+- [#995](https://github.com/FluentLenium/FluentLenium/issues/995) - Improve FluentLenium Spock support, rewrite, and more detailed testing. Multiple bugfixes.
+- [#922](https://github.com/FluentLenium/FluentLenium/issues/922) - Chromium API support (can be used in Chrome and Edge)
+- [#844](https://github.com/FluentLenium/FluentLenium/issues/844) - Added hoverOver() method to FluentActions
+- [#934](https://github.com/FluentLenium/FluentLenium/issues/934) - Added .hasTextContaining() assertion to assertj module
+- [#1103](https://github.com/FluentLenium/FluentLenium/issues/1103) - Added shortcut methods getDriver() and getAppiumDriver()
+- [#1092](https://github.com/FluentLenium/FluentLenium/issues/1092) - Cucumber major upgrade to 6.6.0
 
 ### 3.9.1 (Aug 27 2019)
 - [#715](https://github.com/FluentLenium/FluentLenium/issues/715) - Wrap browser performance API with easy to use FL methods

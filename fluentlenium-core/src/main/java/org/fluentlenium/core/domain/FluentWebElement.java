@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.function.Function;
 
+import io.appium.java_client.AppiumDriver;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.SeleniumDriverControl;
@@ -235,6 +236,11 @@ public class FluentWebElement extends Component
     @Override
     public WebDriver getDriver() {
         return control.getDriver();
+    }
+
+    @Override
+    public AppiumDriver<?> getAppiumDriver() {
+        return control.getAppiumDriver();
     }
 
     @Override

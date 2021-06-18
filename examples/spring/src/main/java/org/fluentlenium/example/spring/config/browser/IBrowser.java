@@ -1,6 +1,5 @@
 package org.fluentlenium.example.spring.config.browser;
 
-import org.fluentlenium.example.spring.config.ConfigException;
 import org.openqa.selenium.Capabilities;
 
 import java.util.Map;
@@ -35,14 +34,6 @@ public interface IBrowser {
     );
 
     Capabilities getCapabilities();
-
-    default String getDriverExecutableName() {
-        throw new ConfigException("Not supported");
-    }
-
-    default String getDriverSystemPropertyName() {
-        throw new ConfigException("Not supported");
-    }
 
     static IBrowser getBrowser(String browserName) {
         return browsers.getOrDefault(browserName, chrome);

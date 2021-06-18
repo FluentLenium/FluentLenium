@@ -1,6 +1,7 @@
 package org.fluentlenium.it;
 
 import org.fluentlenium.adapter.junit.FluentTest;
+import org.fluentlenium.core.FluentControl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -36,18 +37,18 @@ public class FluentIntegTest extends FluentTest {
     }
 
     @Override
-    public void initFluent(WebDriver webDriver) {
+    public FluentControl initFluent(WebDriver webDriver) {
         System.out.println(
                 "Init WebDriver " + webDriver + " for test " + getClass().getName() + "." + name.getMethodName() + " [" + System
                         .identityHashCode(this) + "]");
-        super.initFluent(webDriver);
+        return super.initFluent(webDriver);
     }
 
     @Override
-    public void releaseFluent() {
+    public boolean releaseFluent() {
         System.out.println(
                 "Release WebDriver " + getDriver() + " for test " + getClass().getName() + "." + name.getMethodName() + " ["
                         + System.identityHashCode(this) + "]");
-        super.releaseFluent();
+        return super.releaseFluent();
     }
 }

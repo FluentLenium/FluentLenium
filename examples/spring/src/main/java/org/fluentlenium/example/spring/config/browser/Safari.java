@@ -14,16 +14,6 @@ class Safari implements IBrowser {
     }
 
     @Override
-    public String getDriverExecutableName() {
-        return "safaridriver";
-    }
-
-    @Override
-    public String getDriverSystemPropertyName() {
-        return "webdriver.safari.driver";
-    }
-
-    @Override
     public String toString() {
         return "Safari";
     }
