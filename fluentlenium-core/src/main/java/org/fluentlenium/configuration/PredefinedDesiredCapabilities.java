@@ -59,8 +59,4 @@ public class PredefinedDesiredCapabilities {
         return new DesiredCapabilities(BrowserType.SAFARI, "", Platform.MAC);
     }
 
-    public static DesiredCapabilities phantomjs() {
-        return new DesiredCapabilities(BrowserType.PHANTOMJS, "", Platform.ANY);
-    }
-
 }
