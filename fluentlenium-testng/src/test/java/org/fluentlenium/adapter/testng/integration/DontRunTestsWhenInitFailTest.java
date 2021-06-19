@@ -3,8 +3,6 @@ package org.fluentlenium.adapter.testng.integration;
 import org.fluentlenium.adapter.testng.FluentTestNg;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
@@ -13,6 +11,7 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class DontRunTestsWhenInitFailTest {
@@ -26,11 +25,7 @@ public class DontRunTestsWhenInitFailTest {
 
         @Override
         public WebDriver newWebDriver() {
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.setHeadless(true);
-            ChromeDriver driver = new ChromeDriver(chromeOptions);
-            driver.get("invalid:url"); // Simulate a driver initialization failure.
-            return driver;
+            throw new IllegalStateException();
         }
 
         @Ignore
@@ -60,6 +55,9 @@ public class DontRunTestsWhenInitFailTest {
 
         testNG.run();
 
+        verify(listenerAdapter, times(2)).onConfigurationFailure(Mockito.any(ITestResult.class));
+        verify(listenerAdapter, times(2)).onTestSkipped(Mockito.any(ITestResult.class));
+        verify(listenerAdapter, times(2)).onTestStart(Mockito.any(ITestResult.class));
         verify(listenerAdapter, never()).onTestSuccess(Mockito.any(ITestResult.class));
     }
 }

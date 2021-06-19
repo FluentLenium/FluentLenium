@@ -671,7 +671,7 @@ public class FluentWebElement extends Component
         boolean displayed;
         try {
             displayed = webElement.isDisplayed();
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
             displayed = false;
         }
         return displayed;
@@ -687,7 +687,7 @@ public class FluentWebElement extends Component
         boolean enabled;
         try {
             enabled = webElement.isEnabled();
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | StaleElementReferenceException ex) {
             enabled = false;
         }
         return enabled;
@@ -703,7 +703,7 @@ public class FluentWebElement extends Component
         boolean selected;
         try {
             selected = webElement.isSelected();
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
             selected = false;
         }
         return selected;

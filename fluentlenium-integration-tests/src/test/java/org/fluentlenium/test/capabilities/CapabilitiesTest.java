@@ -13,6 +13,6 @@ class CapabilitiesTest extends IntegrationFluentTest {
         Capabilities capabilities = capabilities();
 
         assertThat(capabilities).isNotNull();
-        assertThat(capabilities.getBrowserName()).isEqualTo("htmlunit");
+        assertThat(capabilities.getBrowserName()).isEqualTo("chrome");
     }
 }
