@@ -94,7 +94,7 @@ public class FluentLeniumWaitElementTest extends IntegrationFluentTest {
 
     @Test
     void awaitForElementXPosition() {
-        await().until(inputDisabledElements).rectangle().x(670);
+        await().until(inputDisabledElements).rectangle().x().greaterThan(0);
     }
 
     @Test
