@@ -3,8 +3,10 @@
 
 name: E2E pipeline
 
-on: pull_request
+on: [push, pull_request]
 
+env:
+  MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
 jobs:
   edge:
     runs-on: ubuntu-latest
@@ -14,8 +16,10 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
+    - name: Install Fluentlenium
+      uses: ./.github/actions/fluentlenium-maven-install
     - name: E2E on Edge
-      run: mvn clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+      run: mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   ie:
     runs-on: ubuntu-latest
@@ -25,8 +29,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Install Fluentlenium
+        uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on IE
-        run: mvn clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   chrome:
     runs-on: ubuntu-latest
@@ -36,8 +42,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Install Fluentlenium
+        uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Chrome
-        run: mvn clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   firefox:
     runs-on: ubuntu-latest
@@ -47,8 +55,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Install Fluentlenium
+        uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Firefox
-        run: mvn clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   safari:
     runs-on: ubuntu-latest
@@ -58,8 +68,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Install Fluentlenium
+        uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Firefox
-        run: mvn clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=safari -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=safari -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   iphone:
     runs-on: ubuntu-latest
@@ -69,8 +81,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Install Fluentlenium
+        uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Iphone Web test (Safari on Iphone)
-        run: mvn clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   android:
     runs-on: ubuntu-latest
@@ -80,6 +94,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Install Fluentlenium
+        uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Android Web test (Chrome on Android device)
-        run: mvn clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 && mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
