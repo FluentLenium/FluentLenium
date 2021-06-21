@@ -12,11 +12,10 @@ jobs:
   dump:
     runs-on: ubuntu-latest
     steps:
-      - name: E2E on Edge
+      - name: print context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
-
   edge:
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
