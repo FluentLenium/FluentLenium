@@ -67,7 +67,7 @@ jobs:
         with:
           java-version: 11
       - name: Compile gradle example
-        run:  mvn -B clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 && cd examples/quickstart-firefox && ./gradlew clean compileTestKotlin && cd ../kotest && ./gradlew clean compileTestKotlin
+        run:  mvn -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 && cd examples/quickstart-firefox && ./gradlew clean compileTestKotlin && cd ../kotest && ./gradlew clean compileTestKotlin
 
   compile-maven-examples:
     runs-on: ubuntu-latest
