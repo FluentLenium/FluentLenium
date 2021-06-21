@@ -38,7 +38,7 @@
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>htmlunit-driver</artifactId>
+            <artifactId>selenium-chrome-driver</artifactId>
         </dependency>
     </dependencies>
 
@@ -51,6 +51,7 @@
                     <threadCount>4</threadCount>
                     <systemPropertyVariables>
                         <surefire.forkNumber>4</surefire.forkNumber>
+                        <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
