@@ -67,7 +67,7 @@ jobs:
         with:
           java-version: 11
       - name: Compile gradle example
-        run:  mvn clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 && cd examples/quickstart-firefox && ./gradlew clean compileKotlin && cd ../kotest && ./gradlew clean compileKotlin
+        run:  mvn -B clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 && cd examples/quickstart-firefox && ./gradlew clean compileTestKotlin && cd ../kotest && ./gradlew clean compileTestKotlin
 
   compile-maven-examples:
     runs-on: ubuntu-latest
