@@ -30,10 +30,13 @@ jobs:
       with:
         java-version: 11
     - name: Java 11 - unit & integration tests code coverage
+      run: |
+        mvn -B -Pjava11 clean verify jacoco:report --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+    - name: Coveralls report
+      if: github.event.pull_request.head.repo.full_name == github.repository
       env:
         REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
       run: |
-        mvn -B -Pjava11 clean verify jacoco:report --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
         mvn -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report --file pom.xml
 
   java11-parallelism-tests:
@@ -67,7 +70,7 @@ jobs:
         with:
           java-version: 11
       - name: Compile gradle example
-        run:  mvn clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 && cd examples/quickstart-firefox && ./gradlew clean compileKotlin && cd ../kotest && ./gradlew clean compileKotlin
+        run:  mvn -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 && cd examples/quickstart-firefox && ./gradlew clean compileTestKotlin && cd ../kotest && ./gradlew clean compileTestKotlin
 
   compile-maven-examples:
     runs-on: ubuntu-latest
