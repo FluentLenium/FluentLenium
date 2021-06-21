@@ -3,10 +3,11 @@
 
 name: E2E pipeline
 
-on: [push, pull_request]
+on: [push, pull_request–]
 
 env:
   MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
+
 jobs:
   edge:
     runs-on: ubuntu-latest
@@ -19,9 +20,10 @@ jobs:
     - name: Install Fluentlenium
       uses: ./.github/actions/fluentlenium-maven-install
     - name: E2E on Edge
-      run: mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+      run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   ie:
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -32,8 +34,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on IE
-        run: mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
-        if: github.event.pull_request.head.repo.full_name == github.repository
+        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   chrome:
     if: github.event.pull_request.head.repo.full_name == github.repository
@@ -47,7 +48,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Chrome
-        run: mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   firefox:
     if: github.event.pull_request.head.repo.full_name == github.repository
@@ -61,7 +62,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Firefox
-        run: mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   safari:
     if: github.event.pull_request.head.repo.full_name == github.repository
@@ -75,7 +76,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Firefox
-        run: mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=safari -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=safari -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   iphone:
     if: github.event.pull_request.head.repo.full_name == github.repository
@@ -89,7 +90,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Iphone Web test (Safari on Iphone)
-        run: mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   android:
     if: github.event.pull_request.head.repo.full_name == github.repository
@@ -103,5 +104,5 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Android Web test (Chrome on Android device)
-        run: mvn -nsu -Pexamples -pl examples/spring clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
