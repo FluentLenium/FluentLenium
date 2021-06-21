@@ -9,6 +9,14 @@ env:
   MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
 
 jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: E2E on Edge
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
   edge:
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
