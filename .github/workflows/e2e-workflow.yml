@@ -3,7 +3,7 @@
 
 name: E2E pipeline
 
-on: [push, pull_request–]
+on: [push, pull_request]
 
 env:
   MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
