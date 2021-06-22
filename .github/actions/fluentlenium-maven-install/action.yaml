@@ -1,0 +1,10 @@
+name: 'Maven install Fluentlenium (no tests)'
+description: "this will build & install fluentlenium to the local repo"
+runs:
+  using: "composite"
+  steps:
+    - name: run maven install
+      run: mvn -B clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
+      shell: bash
+      env:
+        MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
