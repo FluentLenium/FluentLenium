@@ -10,6 +10,14 @@ on:
     branches: [ develop ]
 
 jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
   java8-build:
     runs-on: ubuntu-latest
     steps:
