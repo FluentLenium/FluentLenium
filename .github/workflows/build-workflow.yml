@@ -13,14 +13,6 @@ env:
   MAVEN_OPTS: "-Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
 
 jobs:
-  dump:
-    runs-on: ubuntu-latest
-    steps:
-      - name: print context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
   java8-build:
     runs-on: ubuntu-latest
     steps:
@@ -42,8 +34,7 @@ jobs:
         java-version: 11
     - name: Java 11 - unit & integration tests code coverage
       run: |
-        echo "disabled"
-#        mvn -B -Pjava11 clean verify jacoco:report --file pom.xml
+        mvn -B -Pjava11 clean verify jacoco:report --file pom.xml
     - name: Coveralls report
       if: ${{ (github.repository == 'FluentLenium/FluentLenium' && github.event_name == 'push') || (github.event.pull_request.head.repo.full_name == github.repository) }}
       env:
