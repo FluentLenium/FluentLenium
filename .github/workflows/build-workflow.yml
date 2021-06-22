@@ -5,18 +5,11 @@ name: Java pipeline
 
 on:
   push:
+    branches: [ develop ]
   pull_request:
     branches: [ develop ]
 
 jobs:
-  dump:
-    runs-on: ubuntu-latest
-    steps:
-      - name: print context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
   java8-build:
     runs-on: ubuntu-latest
     steps:
@@ -40,7 +33,7 @@ jobs:
       run: |
         mvn -B -Pjava11 clean verify jacoco:report --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
     - name: Coveralls report
-      if: github.event.pull_request.head.repo.full_name == github.repository
+      if: github.repository == 'FluentLenium/FluentLenium'
       env:
         REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
       run: |
