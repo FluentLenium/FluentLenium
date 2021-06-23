@@ -8,14 +8,12 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
-import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.openqa.selenium.WebDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@FluentConfiguration(webDriver = "htmlunit")
 public class NoDriverSteps extends FluentCucumberTest {
 
     @Page

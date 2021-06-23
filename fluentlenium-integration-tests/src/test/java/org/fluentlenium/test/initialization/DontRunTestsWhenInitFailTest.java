@@ -8,7 +8,6 @@ import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
 import org.junit.platform.launcher.core.LauncherFactory;
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -25,9 +24,7 @@ class DontRunTestsWhenInitFailTest {
 
         @Override
         public WebDriver newWebDriver() {
-            HtmlUnitDriver driver = new HtmlUnitDriver(false);
-            driver.get("invalid:url"); // Simulate a driver initialization failure.
-            return driver;
+            throw new RuntimeException("Error");
         }
 
         @Test
@@ -49,7 +46,7 @@ class DontRunTestsWhenInitFailTest {
         launcher.execute(request);
 
         assertThat(getNumberOfFailures(listener)).isEqualTo(1);
-        assertThat(getFailureMessage(listener, 0)).contains("unknown protocol: invalid");
+        assertThat(getFailureMessage(listener, 0)).contains("Error");
     }
 
     private int getNumberOfFailures(SummaryGeneratingListener listener) {

@@ -22,11 +22,6 @@ public class TestCapabilities implements Capabilities {
     }
 
     @Override
-    public boolean isJavascriptEnabled() {
-        return false;
-    }
-
-    @Override
     public Map<String, Object> asMap() {
         return null;
     }

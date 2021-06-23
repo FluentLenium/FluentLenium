@@ -38,11 +38,16 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core:$koTestVersion")
 
     testImplementation("io.github.bonigarcia:webdrivermanager:4.4.3")
-    testImplementation("org.seleniumhq.selenium:selenium-api:3.141.59")
-    testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:3.141.59")
+    testImplementation("org.seleniumhq.selenium:selenium-api:4.0.0-beta-4")
+    testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:4.0.0-beta-4")
 
     testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.0.0")
     testImplementation("org.testcontainers:selenium:1.15.3")
 
     testImplementation("ch.qos.logback:logback-classic:1.2.3")
+}
+
+configurations.all {
+    exclude(group = "io.netty", module = "netty-transport-native-epoll")
+    exclude(group = "io.netty", module = "netty-transport-native-kqueue")
 }

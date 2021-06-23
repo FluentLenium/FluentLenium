@@ -8,9 +8,9 @@ import org.openqa.selenium.chrome.ChromeOptions
 
 @Wait
 class DuckDuckGoSpec extends FluentSpecification {
-    private static final String SEARCH_TEXT = "FluentLenium"
-    private static final String SCREENSHOT_TEMP_PATH = "/tmp"
-    private static final PngFilter PNG_FILTER = new PngFilter()
+    def SEARCH_TEXT = "FluentLenium"
+    def SCREENSHOT_TEMP_PATH = "/tmp"
+    def PNG_FILTER = new PngFilter()
 
     @Override
     String getWebDriver() {

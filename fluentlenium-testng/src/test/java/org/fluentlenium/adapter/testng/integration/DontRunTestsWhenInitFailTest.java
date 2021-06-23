@@ -3,7 +3,6 @@ package org.fluentlenium.adapter.testng.integration;
 import org.fluentlenium.adapter.testng.FluentTestNg;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
@@ -26,9 +25,7 @@ public class DontRunTestsWhenInitFailTest {
 
         @Override
         public WebDriver newWebDriver() {
-            HtmlUnitDriver driver = new HtmlUnitDriver(false);
-            driver.get("invalid:url"); // Simulate a driver initialization failure.
-            return driver;
+            throw new IllegalStateException();
         }
 
         @Ignore

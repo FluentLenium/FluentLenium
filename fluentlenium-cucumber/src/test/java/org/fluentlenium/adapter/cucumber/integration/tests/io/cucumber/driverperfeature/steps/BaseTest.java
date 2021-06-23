@@ -5,7 +5,7 @@ import org.fluentlenium.configuration.FluentConfiguration;
 
 import static org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle.JVM;
 
-@FluentConfiguration(webDriver = "htmlunit", driverLifecycle = JVM)
+@FluentConfiguration(driverLifecycle = JVM)
 public class BaseTest extends FluentCucumberTest {
 
 }

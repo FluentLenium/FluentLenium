@@ -19,9 +19,8 @@ class AwaitWithStaleElementReferenceException extends IntegrationFluentTest {
     @Test
     void givenDefaultWhenStateElementReferenceExceptionIsThrownThenItIsIgnored() {
         assertThrows(TimeoutException.class,
-                () -> await().atMost(3, SECONDS)
-                        .untilPredicate(fluent -> {
-                            find(".small").clear();
+                () -> await().atMost(1, SECONDS)
+                        .untilPredicate(e -> {
                             throw new StaleElementReferenceException("test");
                         }));
     }
@@ -29,10 +28,9 @@ class AwaitWithStaleElementReferenceException extends IntegrationFluentTest {
     @Test
     void givenNoDefaultsWhenStateElementReferenceExceptionIsThrownThenItIsNotIgnored() {
         assertThrows(StaleElementReferenceException.class,
-                () -> await().atMost(3, SECONDS)
+                () -> await().atMost(1, SECONDS)
                         .withNoDefaultsException()
-                        .untilPredicate(fluent -> {
-                            find(".small").clear();
+                        .untilPredicate(e -> {
                             throw new StaleElementReferenceException("test");
                         }));
     }

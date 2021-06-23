@@ -1,7 +1,7 @@
 package org.fluentlenium.smoketest;
 
-import org.fluentlenium.adapter.testng.FluentTestNgSpringTest;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.fluentlenium.IntegrationFluentTestNg;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -9,12 +9,7 @@ import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ContextConfiguration(locations = {"classpath:spring-test-config.xml"})
-public class SmokeTestEventsDisabledTest extends FluentTestNgSpringTest {
-
-    @Override
-    public String getWebDriver() {
-        return "htmlunit";
-    }
+public class SmokeTestEventsDisabledTest extends IntegrationFluentTestNg {
 
     @BeforeClass
     public void setUp() {
@@ -23,7 +18,7 @@ public class SmokeTestEventsDisabledTest extends FluentTestNgSpringTest {
 
     @Test
     public void smokeTest() {
-        assertThat(getDriver()).isInstanceOf(HtmlUnitDriver.class);
+        assertThat(getDriver()).isInstanceOf(ChromeDriver.class);
     }
 
 }

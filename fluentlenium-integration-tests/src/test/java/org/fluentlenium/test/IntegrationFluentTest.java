@@ -1,6 +1,8 @@
 package org.fluentlenium.test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.fluentlenium.adapter.junit.jupiter.FluentTest;
+import org.junit.jupiter.api.BeforeAll;
 
 import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlPathFromFile;
@@ -26,9 +28,9 @@ public abstract class IntegrationFluentTest extends FluentTest {
     public static final String DISAPPEARING_EL_URL = getAbsoluteUrlFromFile("disappear.html");
     public static final String CLICK_URL = getAbsoluteUrlFromFile("click.html");
 
-    @Override
-    public String getWebDriver() {
-        return "htmlunit";
+    @BeforeAll
+    public static void setUpChrome() {
+        WebDriverManager.chromedriver().setup();
     }
 
 }

@@ -70,18 +70,18 @@ class NegatedAwaitFluentListTest extends IntegrationFluentTest {
 
     @Test
     void awaitNotEnabled() {
+        await().until($(SELECTOR)).present();
         await().until($(SELECTOR)).enabled();
         executeScript("makeRowDisabled();");
         await().until($(SELECTOR)).not().enabled();
-        await().until($(SELECTOR)).present();
     }
 
     @Test
     void awaitNotClickable() {
+        await().until($(SELECTOR)).present();
         await().until($(SELECTOR)).clickable();
         executeScript("makeRowDisabled();");
         await().until($(SELECTOR)).not().clickable();
-        await().until($(SELECTOR)).present();
     }
 
 }

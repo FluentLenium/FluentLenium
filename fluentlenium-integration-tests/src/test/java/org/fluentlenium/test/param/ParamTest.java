@@ -16,7 +16,7 @@ class ParamTest extends IntegrationFluentTest {
     @Test
     void checkUrlParam() {
         goTo(DEFAULT_URL);
-        assertThat(url()).isEqualTo(DEFAULT_URL);
+        assertThat(url()).contains("index.html");
     }
 
     @Test

@@ -12,6 +12,10 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Optional;
 
 import static org.fluentlenium.utils.Preconditions.checkArgumentBlank;
@@ -88,6 +92,14 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
     public String getParam(String parameterName) {
         checkArgumentBlank(parameterName, "The parameter name to query should not be blank.");
         String url = url();
+
+        if (url.startsWith("file:///")) {
+            try {
+                url = new URL(url()).toURI().toString();
+            } catch (URISyntaxException | MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
 
         if (!url.equals(pageUrlCache.getUrl())) {
             pageUrlCache.cache(url, parseUrl(url).parameters());

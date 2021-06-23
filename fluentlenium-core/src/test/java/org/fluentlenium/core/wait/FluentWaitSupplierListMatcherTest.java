@@ -56,7 +56,7 @@ public class FluentWaitSupplierListMatcherTest {
     @Before
     public void before() {
         wait = new FluentWait(fluent);
-        wait.atMost(1L, TimeUnit.MILLISECONDS);
+        wait.atMost(10L, TimeUnit.MILLISECONDS);
         wait.pollingEvery(1L, TimeUnit.MILLISECONDS);
 
         instantiator = new DefaultComponentInstantiator(fluent);

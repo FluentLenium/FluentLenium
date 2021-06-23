@@ -34,7 +34,7 @@ public class FluentWaitIntegerMatcherTest {
     @Before
     public void before() {
         wait = new FluentWait(fluent);
-        wait.atMost(1L, TimeUnit.MILLISECONDS);
+        wait.atMost(10L, TimeUnit.MILLISECONDS);
         wait.pollingEvery(1L, TimeUnit.MILLISECONDS);
 
         when(fluentWebElement.conditions()).thenReturn(new WebElementConditions(fluentWebElement));

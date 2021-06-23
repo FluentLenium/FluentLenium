@@ -1,7 +1,9 @@
 package org.fluentlenium.adapter.junit;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
@@ -13,6 +15,11 @@ public class AfterSuccessTest {
 
         private boolean after;
         private boolean junitAfter;
+
+        @BeforeClass
+        public static void setUpChrome() {
+            WebDriverManager.chromedriver().setup();
+        }
 
         @After
         public void after() {

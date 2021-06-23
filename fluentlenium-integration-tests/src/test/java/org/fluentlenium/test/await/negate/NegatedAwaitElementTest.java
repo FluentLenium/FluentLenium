@@ -70,7 +70,6 @@ class NegatedAwaitElementTest extends IntegrationFluentTest {
         await().until(disappearingElement).enabled();
         executeScript("makeRowDisabled();");
         await().until(disappearingElement).not().enabled();
-        await().until(disappearingElement).present();
     }
 
     @Test
@@ -78,7 +77,6 @@ class NegatedAwaitElementTest extends IntegrationFluentTest {
         await().until(disappearingElement).clickable();
         executeScript("makeRowDisabled();");
         await().until(disappearingElement).not().clickable();
-        await().until(disappearingElement).present();
     }
 
 }

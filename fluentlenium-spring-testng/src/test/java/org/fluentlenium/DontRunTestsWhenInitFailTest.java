@@ -4,7 +4,6 @@ import org.fluentlenium.adapter.testng.FluentTestNgSpringTest;
 import org.fluentlenium.configuration.ConfigurationProperties;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.test.context.ContextConfiguration;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -30,9 +29,7 @@ public class DontRunTestsWhenInitFailTest {
 
         @Override
         public WebDriver newWebDriver() {
-            HtmlUnitDriver driver = new HtmlUnitDriver(false);
-            driver.get("invalid:url"); // Simulate a driver initialization failure.
-            return driver;
+            throw new RuntimeException();
         }
 
         @Ignore

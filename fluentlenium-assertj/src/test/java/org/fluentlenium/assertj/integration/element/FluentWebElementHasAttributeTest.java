@@ -20,7 +20,7 @@ public class FluentWebElementHasAttributeTest extends IntegrationTest {
     @Test
     public void shouldFailWhenDoesNotHaveAttribute() {
         goTo(DEFAULT_URL);
-        assertThatAssertionErrorIsThrownBy(() -> assertThat(el("select")).hasAttribute("class"))
+         assertThatAssertionErrorIsThrownBy(() -> assertThat(el("select")).hasAttribute("class"))
                 .hasMessage("The element does not have attribute class");
     }
 

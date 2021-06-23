@@ -14,31 +14,38 @@
 
 package org.fluentlenium.test.page;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.assertj.core.api.Assertions;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.pages.IndexPage;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 class PageAdapterTest extends FluentAdapter {
-
-    private final WebDriver driver = new HtmlUnitDriver(true);
 
     @Page
     private InjectedIndexPage page;
 
     private InjectedIndexPage reference;
 
+    @BeforeAll
+    public static void setUpChrome() {
+        WebDriverManager.chromedriver().setup();
+    }
+
     /**
      * simulate page injection before init
      */
     @BeforeEach
     void before() {
-        initFluent(driver);
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setHeadless(true);
+        initFluent(new ChromeDriver(chromeOptions));
 
         page = newInstance(InjectedIndexPage.class);
         page.testVariable = "test";

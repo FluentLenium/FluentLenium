@@ -21,7 +21,7 @@ public class CapabilitiesRegistryImplTest {
 
     @Test
     public void testDesiredCapabilities() {
-        CapabilitiesFactory firefox = capabilities.get("DesiredCapabilities.firefox");
+        CapabilitiesFactory firefox = capabilities.get("PredefinedDesiredCapabilities.chrome");
         assertThat(firefox).isInstanceOf(MethodInvocationReflectionFactory.class);
     }
 
@@ -44,7 +44,7 @@ public class CapabilitiesRegistryImplTest {
 
     @Test
     public void testSingleton() {
-        assertThat(CapabilitiesRegistry.INSTANCE.get("DesiredCapabilities.firefox")).isNotNull();
+        assertThat(CapabilitiesRegistry.INSTANCE.get("PredefinedDesiredCapabilities.firefox")).isNotNull();
     }
 
 }

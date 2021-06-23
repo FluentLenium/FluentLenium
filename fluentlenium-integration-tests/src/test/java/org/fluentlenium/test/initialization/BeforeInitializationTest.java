@@ -1,19 +1,26 @@
 package org.fluentlenium.test.initialization;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.fluentlenium.adapter.junit.jupiter.FluentTest;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BeforeInitialization extends FluentTest {
-    private final WebDriver webDriver = new HtmlUnitDriver();
+public class BeforeInitializationTest extends FluentTest {
     private TestPrivatePageWithElement page2; // NOPMD UsunedPrivateField
     private TestPrivatePage2 page;
+
+    @BeforeAll
+    public static void setUpChrome() {
+        WebDriverManager.chromedriver().setup();
+    }
 
     @BeforeEach
     void beforeTest() {
@@ -40,7 +47,9 @@ public class BeforeInitialization extends FluentTest {
 
     @Override
     public WebDriver newWebDriver() {
-        return webDriver;
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setHeadless(true);
+        return new ChromeDriver(chromeOptions);
     }
 
 }

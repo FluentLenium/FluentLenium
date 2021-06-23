@@ -6,7 +6,7 @@ import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.fluentlenium.core.proxy.ProxyElementListener;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.ArrayList;

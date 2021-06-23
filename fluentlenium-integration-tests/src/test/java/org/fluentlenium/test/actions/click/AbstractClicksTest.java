@@ -2,9 +2,9 @@ package org.fluentlenium.test.actions.click;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.fluentlenium.test.IntegrationAdvancedUserInteractionFluentTest;
+import org.fluentlenium.test.IntegrationFluentTest;
 
-abstract class AbstractClicksTest extends IntegrationAdvancedUserInteractionFluentTest {
+abstract class AbstractClicksTest extends IntegrationFluentTest {
 
     void checkDoubleClick() {
         goTo(DEFAULT_URL);

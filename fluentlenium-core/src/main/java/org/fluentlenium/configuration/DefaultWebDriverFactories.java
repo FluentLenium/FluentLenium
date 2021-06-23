@@ -73,7 +73,7 @@ public class DefaultWebDriverFactories {
     }
 
     /**
-     * Safary WebDriver factory.
+     * Safari WebDriver factory.
      */
     @FactoryPriority(16)
     @DefaultFactory
@@ -83,20 +83,6 @@ public class DefaultWebDriverFactories {
          */
         public SafariWebDriverFactory() {
             super("safari", "org.openqa.selenium.safari.SafariDriver");
-        }
-    }
-
-    /**
-     * PhantomJS WebDriver factory.
-     */
-    @FactoryPriority(8)
-    @DefaultFactory
-    public static class PhantomJSWebDriverFactory extends ReflectiveWebDriverFactory {
-        /**
-         * Creates a new PhantomS WebDriver factory.
-         */
-        public PhantomJSWebDriverFactory() {
-            super("phantomjs", "org.openqa.selenium.phantomjs.PhantomJSDriver");
         }
     }
 

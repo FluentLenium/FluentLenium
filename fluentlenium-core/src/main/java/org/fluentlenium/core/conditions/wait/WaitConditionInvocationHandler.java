@@ -1,7 +1,5 @@
 package org.fluentlenium.core.conditions.wait;
 
-import org.openqa.selenium.internal.WrapsElement;
-
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.conditions.Conditions;
 import org.fluentlenium.core.conditions.ConditionsObject;
@@ -9,6 +7,7 @@ import org.fluentlenium.core.conditions.Negation;
 import org.fluentlenium.core.conditions.message.MessageContext;
 import org.fluentlenium.core.conditions.message.MessageProxy;
 import org.fluentlenium.core.wait.FluentWait;
+import org.openqa.selenium.WrapsElement;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;

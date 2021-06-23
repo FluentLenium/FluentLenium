@@ -13,7 +13,7 @@ class FluentWebElementInTest extends IntegrationFluentTest {
     void whenWebElementInTestThenTheyAreInstantiated() {
         goTo(IntegrationFluentTest.DEFAULT_URL);
         linkToPage2.click();
-        assertThat(url()).isEqualTo(IntegrationFluentTest.PAGE_2_URL);
+        assertThat(url()).contains("page2.html");
     }
 
 }

@@ -103,9 +103,9 @@ public class PropertiesBackendConfigurationTest {
 
     @Test
     public void desiredCapabilities() {
-        DesiredCapabilities capabilitiesFirefox = DesiredCapabilities.firefox();
+        DesiredCapabilities capabilitiesFirefox = PredefinedDesiredCapabilities.firefox();
         when(retriever.getCapabilitiesProperty("firefox", null)).thenReturn(capabilitiesFirefox);
-        DesiredCapabilities capabilitiesChrome = DesiredCapabilities.chrome();
+        DesiredCapabilities capabilitiesChrome = PredefinedDesiredCapabilities.chrome();
         when(retriever.getCapabilitiesProperty("chrome", null)).thenReturn(capabilitiesChrome);
 
         assertThat(getConfiguration().getWebDriver()).isNull();

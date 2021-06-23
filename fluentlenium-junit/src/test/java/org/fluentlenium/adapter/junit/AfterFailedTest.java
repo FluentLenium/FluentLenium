@@ -1,13 +1,16 @@
 package org.fluentlenium.adapter.junit;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,9 +23,16 @@ public class AfterFailedTest {
         private boolean after;
         private boolean junitAfter;
 
+        @BeforeClass
+        public static void setUpChrome() {
+            WebDriverManager.chromedriver().setup();
+        }
+
         @Override
         public WebDriver newWebDriver() {
-            return new HtmlUnitDriver();
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.setHeadless(true);
+            return new ChromeDriver(chromeOptions);
         }
 
         @After

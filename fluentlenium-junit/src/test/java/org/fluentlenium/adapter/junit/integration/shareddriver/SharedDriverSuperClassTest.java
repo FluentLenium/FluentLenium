@@ -7,7 +7,6 @@ import org.fluentlenium.adapter.junit.integration.IntegrationFluentTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.openqa.selenium.Cookie;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.core.filter.FilterConstructor.withName;
@@ -20,16 +19,16 @@ class SharedDriverSuperClass extends IntegrationFluentTest {
 public class SharedDriverSuperClassTest extends SharedDriverSuperClass {
 
     @Test
-    public void firstMethod() {
+    public void first() {
         goTo(IntegrationFluentTest.DEFAULT_URL);
-        getDriver().manage().addCookie(new Cookie("cookie", "fluent"));
         assertThat($(".small", withName("name"))).hasSize(1);
+        el("#name").fill().with("Slawomir");
     }
 
     @Test
-    public void secondMethod() {
+    public void second() {
         assertThat($(".small", withName("name"))).hasSize(1);
-        assertThat(getCookie("cookie")).isNull();
+        assertThat(el("#name").value()).isEqualTo("Slawomir");
     }
 
 }
