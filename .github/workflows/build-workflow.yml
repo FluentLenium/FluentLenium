@@ -9,6 +9,9 @@ on:
   pull_request:
     branches: [ develop ]
 
+env:
+  MAVEN_OPTS: "-Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
+
 jobs:
   java8-build:
     runs-on: ubuntu-latest
@@ -19,7 +22,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Java 8 - unit & integration tests
-      run: mvn -B -Pjava8 clean verify --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+      run: mvn -B -Pjava8 clean verify --file pom.xml
 
   java11-build:
     runs-on: ubuntu-latest
@@ -31,13 +34,13 @@ jobs:
         java-version: 11
     - name: Java 11 - unit & integration tests code coverage
       run: |
-        mvn -B -Pjava11 clean verify jacoco:report --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+        mvn -B -Pjava11 clean verify jacoco:report --file pom.xml
     - name: Coveralls report
-      if: github.event.pull_request.head.repo.full_name == github.repository
+      if: ${{ (github.repository == 'FluentLenium/FluentLenium' && github.event_name == 'push') || (github.event.pull_request.head.repo.full_name == github.repository) }}
       env:
         REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
       run: |
-        mvn -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report --file pom.xml
+        mvn -B -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report --file pom.xml
 
   java11-parallelism-tests:
     runs-on: ubuntu-latest
@@ -48,7 +51,7 @@ jobs:
         with:
           java-version: 11
       - name: Java 11 - unit & integration tests
-        run: mvn -B -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dtest=*/it/* -DfailIfNoTests=false -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+        run: mvn -B -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml -Dtest=*/it/* -DfailIfNoTests=false
 
   java11-javadoc:
     runs-on: ubuntu-latest
@@ -59,7 +62,7 @@ jobs:
       with:
         java-version: 11
     - name: Java 11 - JavaDoc
-      run: mvn -Pjava11 javadoc:aggregate -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
+      run: mvn -Pjava11 javadoc:aggregate
 
   compile-gradle-example:
     runs-on: ubuntu-latest
@@ -85,4 +88,4 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: Compile maven examples
-        run: mvn -nsu -Pexamples clean compile -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
+        run: mvn -nsu -Pexamples clean compile
