@@ -88,4 +88,4 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: Compile maven examples
-        run: mvn -nsu -Pexamples clean compile
+        run: mvn -nsu -Pexamples clean test-compile -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
