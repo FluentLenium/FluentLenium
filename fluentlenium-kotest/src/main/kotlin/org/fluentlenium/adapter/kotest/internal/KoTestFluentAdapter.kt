@@ -68,11 +68,14 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
             currentTestName.set(testName)
 
+            val theTestInstance =
+                testCase.spec as? IFluentAdapter ?: throw IllegalArgumentException()
+
             val driver =
                 getTestDriver(
                     testCase.spec.javaClass,
                     testName,
-                    ::newWebDriver,
+                    theTestInstance::newWebDriver,
                     thisListener::failed,
                     configuration,
                     sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle)
