@@ -46,3 +46,8 @@ dependencies {
 
     testImplementation("ch.qos.logback:logback-classic:1.2.3")
 }
+
+configurations.all {
+    exclude(group = "io.netty", module = "netty-transport-native-epoll")
+    exclude(group = "io.netty", module = "netty-transport-native-kqueue")
+}

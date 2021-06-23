@@ -20,6 +20,11 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
+configurations.all {
+    exclude group: 'io.netty', module: 'netty-transport-native-epoll'
+    exclude group: 'io.netty', module: 'netty-transport-native-kqueue'
+}
+
 group = 'org.fluentlenium'
 version = '4.8.1-SNAPSHOT'
 description = 'FluentLenium Examples Firefox'
