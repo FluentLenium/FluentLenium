@@ -25,10 +25,16 @@ fun bePresent() = object : Matcher<FluentWebElement> {
     )
 }
 
+/**
+ * @see bePresent
+ */
 fun FluentWebElement.shouldBePresent() = also {
     it should bePresent()
 }
 
+/**
+ * @see bePresent
+ */
 fun FluentWebElement.shouldNotBePresent() = also { it shouldNot bePresent() }
 
 /**
@@ -49,7 +55,14 @@ fun beEnabled() = object : Matcher<FluentWebElement> {
     )
 }
 
+/**
+ * @see beEnabled
+ */
 fun FluentWebElement.shouldBeEnabled() = also { it should beEnabled() }
+
+/**
+ * @see beEnabled
+ */
 fun FluentWebElement.shouldNotBeEnabled() = also { it shouldNot beEnabled() }
 
 /**
@@ -71,7 +84,14 @@ fun beDisplayed() = object : Matcher<FluentWebElement> {
     )
 }
 
+/**
+ * @see beDisplayed
+ */
 fun FluentWebElement.shouldBeDisplayed() = also { it should beDisplayed() }
+
+/**
+ * @see beDisplayed
+ */
 fun FluentWebElement.shouldNotBeDisplayed() = also { it shouldNot beDisplayed() }
 
 /**
@@ -93,7 +113,14 @@ fun beClickable() = object : Matcher<FluentWebElement> {
     )
 }
 
+/**
+ * @see beClickable
+ */
 fun FluentWebElement.shouldBeClickable() = also { it should beClickable() }
+
+/**
+ * @see beClickable
+ */
 fun FluentWebElement.shouldNotBeClickable() = also { it shouldNot beClickable() }
 
 /**
@@ -115,7 +142,14 @@ fun beSelected() = object : Matcher<FluentWebElement> {
     )
 }
 
+/**
+ * @see beSelected
+ */
 fun FluentWebElement.shouldBeSelected() = also { it should beSelected() }
+
+/**
+ * @see beSelected
+ */
 fun FluentWebElement.shouldNotBeSelected() = also { it shouldNot beSelected() }
 
 /**
@@ -141,7 +175,14 @@ fun containText(expectedText: String) = object : Matcher<FluentWebElement> {
     }
 }
 
+/**
+ * @see containText
+ */
 fun FluentWebElement.shouldContainText(text: String) = also { it should containText(text) }
+
+/**
+ * @see containText
+ */
 fun FluentWebElement.shouldNotContainText(text: String) = also { it shouldNot containText(text) }
 
 /**
@@ -167,7 +208,14 @@ fun matchText(pattern: String) = object : Matcher<FluentWebElement> {
     }
 }
 
+/**
+ * @see matchText
+ */
 fun FluentWebElement.shouldMatchText(pattern: String) = also { it should matchText(pattern) }
+
+/**
+ * @see matchText
+ */
 fun FluentWebElement.shouldNotMatchText(pattern: String) = also { it shouldNot matchText(pattern) }
 
 /**
@@ -193,7 +241,14 @@ fun haveId(id: String) = object : Matcher<FluentWebElement> {
     }
 }
 
+/**
+ * @see haveId
+ */
 fun FluentWebElement.shouldHaveId(id: String) = also { it should haveId(id) }
+
+/**
+ * @see haveId
+ */
 fun FluentWebElement.shouldNotHaveId(id: String) = also { it shouldNot haveId(id) }
 
 const val CLASS_ATTRIBUTE = "class"
@@ -224,7 +279,14 @@ fun haveClass(vararg expectedClasses: String) = object : Matcher<FluentWebElemen
     }
 }
 
+/**
+ * @see haveClass
+ */
 fun FluentWebElement.shouldHaveClass(vararg expectedClasses: String) = also { it should haveClass(*expectedClasses) }
+
+/**
+ * @see haveClass
+ */
 fun FluentWebElement.shouldNotHaveClass(vararg expectedClasses: String) =
     also { it shouldNot haveClass(*expectedClasses) }
 
@@ -250,7 +312,14 @@ fun haveValue(expectedValue: String) = object : Matcher<FluentWebElement> {
     }
 }
 
+/**
+ * @see haveValue
+ */
 fun FluentWebElement.shouldHaveValue(expectedValue: String) = also { it should haveValue(expectedValue) }
+
+/**
+ * @see haveValue
+ */
 fun FluentWebElement.shouldNotHaveValue(expectedValue: String) = also { it shouldNot haveValue(expectedValue) }
 
 /**
@@ -275,7 +344,14 @@ fun haveName(expectedName: String) = object : Matcher<FluentWebElement> {
     }
 }
 
+/**
+ * @see haveName
+ */
 fun FluentWebElement.shouldHaveName(expectedName: String) = also { it should haveName(expectedName) }
+
+/**
+ * @see haveName
+ */
 fun FluentWebElement.shouldNotHaveName(expectedName: String) = also { it shouldNot haveName(expectedName) }
 
 /**
@@ -300,7 +376,14 @@ fun haveTagName(expectedTagName: String) = object : Matcher<FluentWebElement> {
     }
 }
 
+/**
+ * @see haveTagName
+ */
 fun FluentWebElement.shouldHaveTagName(expectedTagName: String) = also { it should haveTagName(expectedTagName) }
+
+/**
+ * @see haveTagName
+ */
 fun FluentWebElement.shouldNotHaveTagName(expectedTagName: String) = also { it shouldNot haveTagName(expectedTagName) }
 
 /**
@@ -341,15 +424,27 @@ private fun Pair<Int, Int>.toDimension() = Dimension(first, second)
 fun haveDimension(dimension: Pair<Int, Int>) =
     haveDimension(dimension.toDimension())
 
+/**
+ * @see haveDimension
+ */
 fun FluentWebElement.shouldHaveDimension(expectedDimension: Dimension) =
     also { it should haveDimension(expectedDimension) }
 
+/**
+ * @see haveDimension
+ */
 fun FluentWebElement.shouldHaveDimension(expectedDimension: Pair<Int, Int>) =
     shouldHaveDimension(expectedDimension.toDimension())
 
+/**
+ * @see haveDimension
+ */
 fun FluentWebElement.shouldNotHaveDimension(expectedDimension: Dimension) =
     also { it shouldNot haveDimension(expectedDimension) }
 
+/**
+ * @see haveDimension
+ */
 fun FluentWebElement.shouldNotHaveDimension(expectedDimension: Pair<Int, Int>) =
     shouldNotHaveDimension(expectedDimension.toDimension())
 
@@ -375,9 +470,15 @@ fun haveAttribute(expectedAttribute: String) = object : Matcher<FluentWebElement
     }
 }
 
+/**
+ * @see haveAttribute
+ */
 fun FluentWebElement.shouldHaveAttribute(expectedAttribute: String) =
     also { it should haveAttribute(expectedAttribute) }
 
+/**
+ * @see haveAttribute
+ */
 fun FluentWebElement.shouldNotHaveAttribute(expectedAttribute: String) =
     also { it shouldNot haveAttribute(expectedAttribute) }
 
@@ -403,14 +504,26 @@ fun haveAttributeValue(attribute: String, expectedValue: String?) = object : Mat
     }
 }
 
+/**
+ * @see haveAttributeValue
+ */
 fun FluentWebElement.shouldHaveAttributeValue(attribute: String, expectedValue: String?) =
     also { it should haveAttributeValue(attribute, expectedValue) }
 
+/**
+ * @see haveAttributeValue
+ */
 fun FluentWebElement.shouldHaveAttributeValue(pair: Pair<String, String?>) =
     also { it should haveAttributeValue(pair.first, pair.second) }
 
+/**
+ * @see haveAttributeValue
+ */
 fun FluentWebElement.shouldNotHaveAttributeValue(attribute: String, expectedValue: String?) =
     also { it shouldNot haveAttributeValue(attribute, expectedValue) }
 
+/**
+ * @see haveAttributeValue
+ */
 fun FluentWebElement.shouldNotHaveAttributeValue(pair: Pair<String, String?>) =
     also { it shouldNot haveAttributeValue(pair.first, pair.second) }
