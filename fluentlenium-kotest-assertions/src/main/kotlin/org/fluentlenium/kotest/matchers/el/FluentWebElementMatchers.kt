@@ -9,11 +9,9 @@ import org.openqa.selenium.Dimension
 
 /**
  * Checks if the element is present.
- * <p>
+ *
  * Example:
- * <pre>
- * el("button") should bePresent()
- * </pre>
+ * `el("button") should bePresent()`
  *
  * @return the matcher object.
  */
@@ -26,24 +24,22 @@ fun bePresent() = object : Matcher<FluentWebElement> {
 }
 
 /**
- * @see bePresent
+ * See [bePresent]
  */
 fun FluentWebElement.shouldBePresent() = also {
     it should bePresent()
 }
 
 /**
- * @see bePresent
+ * See [bePresent]
  */
 fun FluentWebElement.shouldNotBePresent() = also { it shouldNot bePresent() }
 
 /**
  * Checks if the element is visible and enabled such that you can click it.
- * <p>
+ *
  * Example:
- * <pre>
- * el("button") should beEnabled()
- * </pre>
+ * `el("button") should beEnabled()`
  *
  * @return the matcher object.
  */
@@ -56,23 +52,21 @@ fun beEnabled() = object : Matcher<FluentWebElement> {
 }
 
 /**
- * @see beEnabled
+ * See [beEnabled]
  */
 fun FluentWebElement.shouldBeEnabled() = also { it should beEnabled() }
 
 /**
- * @see beEnabled
+ * See [beEnabled]
  */
 fun FluentWebElement.shouldNotBeEnabled() = also { it shouldNot beEnabled() }
 
 /**
  * Checks if the element is present on the DOM of a page and visible.
  * Visibility means that the element is not only displayed but also has a height and width that is greater than 0.
- * <p>
+ *
  * Example:
- * <pre>
- * el("button") should beDisplayed()
- * </pre>
+ * `el("button") should beDisplayed()`
  *
  * @return the matcher object.
  */
@@ -85,23 +79,20 @@ fun beDisplayed() = object : Matcher<FluentWebElement> {
 }
 
 /**
- * @see beDisplayed
+ * See [beDisplayed]
  */
 fun FluentWebElement.shouldBeDisplayed() = also { it should beDisplayed() }
 
 /**
- * @see beDisplayed
+ * See [beDisplayed]
  */
 fun FluentWebElement.shouldNotBeDisplayed() = also { it shouldNot beDisplayed() }
 
 /**
  * Checks if the element is visible and enabled such that you can click it.
  *
- * <p>
  * Example:
- * <pre>
- * el("button") should beClickable()
- * </pre>
+ * `el("button") should beClickable()`
  *
  * @return the matcher object.
  */
@@ -114,23 +105,20 @@ fun beClickable() = object : Matcher<FluentWebElement> {
 }
 
 /**
- * @see beClickable
+ * See [beClickable]
  */
 fun FluentWebElement.shouldBeClickable() = also { it should beClickable() }
 
 /**
- * @see beClickable
+ * See [beClickable]
  */
 fun FluentWebElement.shouldNotBeClickable() = also { it shouldNot beClickable() }
 
 /**
  * Checks if the element is selected.
  *
- * <p>
  * Example:
- * <pre>
- * el("button") should beSelected()
- * </pre>
+ * `el("button") should beSelected()`
  *
  * @return the matcher object.
  */
@@ -143,23 +131,20 @@ fun beSelected() = object : Matcher<FluentWebElement> {
 }
 
 /**
- * @see beSelected
+ * See [beSelected]
  */
 fun FluentWebElement.shouldBeSelected() = also { it should beSelected() }
 
 /**
- * @see beSelected
+ * See [beSelected]
  */
 fun FluentWebElement.shouldNotBeSelected() = also { it shouldNot beSelected() }
 
 /**
  * Checks if the element has text with a value as a part of it.
  *
- * <p>
  * Example:
- * <pre>
- * el("button") should containText("click me")
- * </pre>
+ * `el("button") should containText("click me")`
  *
  * @return the matcher object.
  */
@@ -176,23 +161,20 @@ fun containText(expectedText: String) = object : Matcher<FluentWebElement> {
 }
 
 /**
- * @see containText
+ * See [containText]
  */
 fun FluentWebElement.shouldContainText(text: String) = also { it should containText(text) }
 
 /**
- * @see containText
+ * See [containText]
  */
 fun FluentWebElement.shouldNotContainText(text: String) = also { it shouldNot containText(text) }
 
 /**
  * Checks if the element has text that can be matched with the given pattern.
  *
- * <p>
  * Example:
- * <pre>
- * el("button") should matchText("click.*")
- * </pre>
+ * `el("button") should matchText("click.*")`
  *
  * @return the matcher object.
  */
@@ -209,23 +191,20 @@ fun matchText(pattern: String) = object : Matcher<FluentWebElement> {
 }
 
 /**
- * @see matchText
+ * See [matchText]
  */
 fun FluentWebElement.shouldMatchText(pattern: String) = also { it should matchText(pattern) }
 
 /**
- * @see matchText
+ * See [matchText]
  */
 fun FluentWebElement.shouldNotMatchText(pattern: String) = also { it shouldNot matchText(pattern) }
 
 /**
  * Checks if the element has the expected id.
  *
- * <p>
  * Example:
- * <pre>
- * el("button") should haveId("id")
- * </pre>
+ * `el("button") should haveId("id")`
  *
  * @return the matcher object.
  */
@@ -242,12 +221,12 @@ fun haveId(id: String) = object : Matcher<FluentWebElement> {
 }
 
 /**
- * @see haveId
+ * See [haveId]
  */
 fun FluentWebElement.shouldHaveId(id: String) = also { it should haveId(id) }
 
 /**
- * @see haveId
+ * See [haveId]
  */
 fun FluentWebElement.shouldNotHaveId(id: String) = also { it shouldNot haveId(id) }
 
@@ -257,11 +236,8 @@ const val CLASS_DELIMITER = " "
 /**
  * Checks if the element has the expected class.
  *
- * <p>
  * Example:
- * <pre>
- * el("button") should haveClass("small")
- * </pre>
+ * `el("button") should haveClass("small")`
  *
  * @return the matcher object.
  */
@@ -280,12 +256,12 @@ fun haveClass(vararg expectedClasses: String) = object : Matcher<FluentWebElemen
 }
 
 /**
- * @see haveClass
+ * See [haveClass]
  */
 fun FluentWebElement.shouldHaveClass(vararg expectedClasses: String) = also { it should haveClass(*expectedClasses) }
 
 /**
- * @see haveClass
+ * See [haveClass]
  */
 fun FluentWebElement.shouldNotHaveClass(vararg expectedClasses: String) =
     also { it shouldNot haveClass(*expectedClasses) }
@@ -293,11 +269,8 @@ fun FluentWebElement.shouldNotHaveClass(vararg expectedClasses: String) =
 /**
  * Checks if the elements value is equal to the expected value.
  *
- * <p>
  * Example:
- * <pre>
- * el("button") should haveValue("value")
- * </pre>
+ * `el("button") should haveValue("value")`
  *
  * @return the matcher object.
  */
@@ -313,23 +286,20 @@ fun haveValue(expectedValue: String) = object : Matcher<FluentWebElement> {
 }
 
 /**
- * @see haveValue
+ * See [haveValue]
  */
 fun FluentWebElement.shouldHaveValue(expectedValue: String) = also { it should haveValue(expectedValue) }
 
 /**
- * @see haveValue
+ * See [haveValue]
  */
 fun FluentWebElement.shouldNotHaveValue(expectedValue: String) = also { it shouldNot haveValue(expectedValue) }
 
 /**
  * Checks if the element has the expected name.
  *
- * <p>
  * Example:
- * <pre>
- * el("button") should haveName("myButton")
- * </pre>
+ * `el("button") should haveName("myButton")`
  *
  * @return the matcher object.
  */
@@ -345,23 +315,20 @@ fun haveName(expectedName: String) = object : Matcher<FluentWebElement> {
 }
 
 /**
- * @see haveName
+ * See [haveName]
  */
 fun FluentWebElement.shouldHaveName(expectedName: String) = also { it should haveName(expectedName) }
 
 /**
- * @see haveName
+ * See [haveName]
  */
 fun FluentWebElement.shouldNotHaveName(expectedName: String) = also { it shouldNot haveName(expectedName) }
 
 /**
  * Checks if the element has the expected tag.
  *
- * <p>
  * Example:
- * <pre>
- * el("button") should haveTagName("button")
- * </pre>
+ * `el("button") should haveTagName("button")`
  *
  * @return the matcher object.
  */
@@ -377,23 +344,20 @@ fun haveTagName(expectedTagName: String) = object : Matcher<FluentWebElement> {
 }
 
 /**
- * @see haveTagName
+ * See [haveTagName]
  */
 fun FluentWebElement.shouldHaveTagName(expectedTagName: String) = also { it should haveTagName(expectedTagName) }
 
 /**
- * @see haveTagName
+ * See [haveTagName]
  */
 fun FluentWebElement.shouldNotHaveTagName(expectedTagName: String) = also { it shouldNot haveTagName(expectedTagName) }
 
 /**
  * Checks if the element has the expected Dimension.
  *
- * <p>
  * Example:
- * <pre>
- * el("button") should haveDimension(Dimension(200, 400))
- * </pre>
+ * `el("button") should haveDimension(Dimension(200, 400))`
  *
  * @return the matcher object.
  */
@@ -413,11 +377,8 @@ private fun Pair<Int, Int>.toDimension() = Dimension(first, second)
 /**
  * Checks if the element has the expected dimension.
  *
- * <p>
  * Example:
- * <pre>
- * el("button") should haveDimension(200 t0 400)
- * </pre>
+ * `el("button") should haveDimension(200 t0 400)`
  *
  * @return the matcher object.
  */
@@ -425,25 +386,25 @@ fun haveDimension(dimension: Pair<Int, Int>) =
     haveDimension(dimension.toDimension())
 
 /**
- * @see haveDimension
+ * See [haveDimension]
  */
 fun FluentWebElement.shouldHaveDimension(expectedDimension: Dimension) =
     also { it should haveDimension(expectedDimension) }
 
 /**
- * @see haveDimension
+ * See [haveDimension]
  */
 fun FluentWebElement.shouldHaveDimension(expectedDimension: Pair<Int, Int>) =
     shouldHaveDimension(expectedDimension.toDimension())
 
 /**
- * @see haveDimension
+ * See [haveDimension]
  */
 fun FluentWebElement.shouldNotHaveDimension(expectedDimension: Dimension) =
     also { it shouldNot haveDimension(expectedDimension) }
 
 /**
- * @see haveDimension
+ * See [haveDimension]
  */
 fun FluentWebElement.shouldNotHaveDimension(expectedDimension: Pair<Int, Int>) =
     shouldNotHaveDimension(expectedDimension.toDimension())
@@ -451,11 +412,8 @@ fun FluentWebElement.shouldNotHaveDimension(expectedDimension: Pair<Int, Int>) =
 /**
  * Checks if the element has the expected attribute key.
  *
- * <p>
  * Example:
- * <pre>
- * el("button") should haveAttribute("attr")
- * </pre>
+ * `el("button") should haveAttribute("attr")`
  *
  * @return the matcher object.
  */
@@ -471,13 +429,13 @@ fun haveAttribute(expectedAttribute: String) = object : Matcher<FluentWebElement
 }
 
 /**
- * @see haveAttribute
+ * See [haveAttribute]
  */
 fun FluentWebElement.shouldHaveAttribute(expectedAttribute: String) =
     also { it should haveAttribute(expectedAttribute) }
 
 /**
- * @see haveAttribute
+ * See [haveAttribute]
  */
 fun FluentWebElement.shouldNotHaveAttribute(expectedAttribute: String) =
     also { it shouldNot haveAttribute(expectedAttribute) }
@@ -485,11 +443,8 @@ fun FluentWebElement.shouldNotHaveAttribute(expectedAttribute: String) =
 /**
  * Checks if the element has the expected attribute key and value
  *
- * <p>
  * Example:
- * <pre>
- * el("button") should haveAttributeValue("key", "myValue")
- * </pre>
+ * `el("button") should haveAttributeValue("key", "myValue")`
  *
  * @return the matcher object.
  */
@@ -505,25 +460,25 @@ fun haveAttributeValue(attribute: String, expectedValue: String?) = object : Mat
 }
 
 /**
- * @see haveAttributeValue
+ * See [haveAttributeValue]
  */
 fun FluentWebElement.shouldHaveAttributeValue(attribute: String, expectedValue: String?) =
     also { it should haveAttributeValue(attribute, expectedValue) }
 
 /**
- * @see haveAttributeValue
+ * See [haveAttributeValue]
  */
 fun FluentWebElement.shouldHaveAttributeValue(pair: Pair<String, String?>) =
     also { it should haveAttributeValue(pair.first, pair.second) }
 
 /**
- * @see haveAttributeValue
+ * See [haveAttributeValue]
  */
 fun FluentWebElement.shouldNotHaveAttributeValue(attribute: String, expectedValue: String?) =
     also { it shouldNot haveAttributeValue(attribute, expectedValue) }
 
 /**
- * @see haveAttributeValue
+ * See [haveAttributeValue]
  */
 fun FluentWebElement.shouldNotHaveAttributeValue(pair: Pair<String, String?>) =
     also { it shouldNot haveAttributeValue(pair.first, pair.second) }

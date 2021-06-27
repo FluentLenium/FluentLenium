@@ -9,11 +9,9 @@ import org.openqa.selenium.NoAlertPresentException
 
 /**
  * Check that the alert box contains the given text.
- * <p>
+ *
  * It fails assertion when
- * <ul>
- * <li>there is an alert box but the text in it doesn't contain the expected text,</li>
- * </ul>
+ * - there is an alert box but the text in it doesn't contain the expected text,</li>
  *
  * @param text text to search for
  * @return the matcher object
@@ -28,12 +26,12 @@ fun haveText(text: String) = object : Matcher<Alert> {
 }
 
 /**
- * @see haveText
+ * See [haveText]
  */
 fun Alert.shouldHaveText(text: String) = also { it should haveText(text) }
 
 /**
- * @see haveText
+ * See [haveText]
  */
 fun Alert.shouldNotHaveText(text: String) = also { it shouldNot haveText(text) }
 
@@ -59,12 +57,11 @@ fun bePresent() = object : Matcher<Alert> {
 }
 
 /**
- * @see bePresent
+ * See [bePresent]
  */
 fun Alert.shouldBePresent() = also { it should bePresent() }
 
-
 /**
- * @see bePresent
+ * See [bePresent]
  */
 fun Alert.shouldNotBePresent() = also { it shouldNot bePresent() }
