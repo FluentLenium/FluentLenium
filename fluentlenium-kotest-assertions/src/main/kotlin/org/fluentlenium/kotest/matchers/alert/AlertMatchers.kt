@@ -7,6 +7,15 @@ import io.kotest.matchers.shouldNot
 import org.fluentlenium.core.alert.Alert
 import org.openqa.selenium.NoAlertPresentException
 
+/**
+ * Check that the alert box contains the given text.
+ *
+ * It fails assertion when
+ * - there is an alert box but the text in it doesn't contain the expected text,</li>
+ *
+ * @param text text to search for
+ * @return the matcher object
+ */
 fun haveText(text: String) = object : Matcher<Alert> {
     override fun test(value: Alert): MatcherResult =
         MatcherResult(
@@ -16,9 +25,21 @@ fun haveText(text: String) = object : Matcher<Alert> {
         )
 }
 
+/**
+ * See [haveText]
+ */
 fun Alert.shouldHaveText(text: String) = also { it should haveText(text) }
+
+/**
+ * See [haveText]
+ */
 fun Alert.shouldNotHaveText(text: String) = also { it shouldNot haveText(text) }
 
+/**
+ * Check that an alert box is present.
+ *
+ * @return the matcher object
+ */
 fun bePresent() = object : Matcher<Alert> {
     override fun test(value: Alert): MatcherResult {
         val isAlertPresent = try {
@@ -35,5 +56,12 @@ fun bePresent() = object : Matcher<Alert> {
     }
 }
 
+/**
+ * See [bePresent]
+ */
 fun Alert.shouldBePresent() = also { it should bePresent() }
+
+/**
+ * See [bePresent]
+ */
 fun Alert.shouldNotBePresent() = also { it shouldNot bePresent() }
