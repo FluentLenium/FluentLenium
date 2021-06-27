@@ -9,7 +9,7 @@ import org.fluentlenium.core.domain.FluentWebElement
 import org.openqa.selenium.Dimension
 
 /**
- * Checks if at least one element in a list of elements, equals the expected text.
+ * Checks if at least one element in a list of elements, has the expected text.
  * <p>
  * Example:
  * <p>
@@ -36,12 +36,14 @@ fun haveText(expectedText: String) = object : Matcher<FluentList<FluentWebElemen
 /**
  * @see haveText
  */
-fun FluentList<FluentWebElement>.shouldHaveText(text: String) = also { it should haveText(text) }
+fun FluentList<FluentWebElement>.shouldHaveText(text: String) =
+    also { it should haveText(text) }
 
 /**
  * @see haveText
  */
-fun FluentList<FluentWebElement>.shouldNotHaveText(text: String) = also { it shouldNot haveText(text) }
+fun FluentList<FluentWebElement>.shouldNotHaveText(text: String) =
+    also { it shouldNot haveText(text) }
 
 /**
  * Checks if at least one element in a list of elements, contains the expected text as a substring.
@@ -71,7 +73,8 @@ fun haveTextContaining(expectedText: String) = object : Matcher<FluentList<Fluen
 /**
  * @see haveTextContaining
  */
-fun FluentList<FluentWebElement>.shouldHaveTextContaining(text: String) = also { it should haveTextContaining(text) }
+fun FluentList<FluentWebElement>.shouldHaveTextContaining(text: String) =
+    also { it should haveTextContaining(text) }
 
 /**
  * @see haveTextContaining
@@ -107,12 +110,14 @@ fun haveTextMatching(expectedPattern: String) = object : Matcher<FluentList<Flue
 /**
  * @see haveTextMatching
  */
-fun FluentList<FluentWebElement>.shouldHaveTextMatching(text: String) = also { it should haveTextMatching(text) }
+fun FluentList<FluentWebElement>.shouldHaveTextMatching(text: String) =
+    also { it should haveTextMatching(text) }
 
 /**
  * @see haveTextMatching
  */
-fun FluentList<FluentWebElement>.shouldNotHaveTextMatching(text: String) = also { it shouldNot haveTextMatching(text) }
+fun FluentList<FluentWebElement>.shouldNotHaveTextMatching(text: String) =
+    also { it shouldNot haveTextMatching(text) }
 
 /**
  * Checks if at least one element in a list of elements, has the given id.
@@ -139,19 +144,20 @@ fun haveId(id: String) = object : Matcher<FluentList<FluentWebElement>> {
     }
 }
 
+/**
+ * @see haveId
+ */
+fun FluentList<FluentWebElement>.shouldHaveId(id: String) =
+    also { it should haveId(id) }
 
 /**
  * @see haveId
  */
-fun FluentList<FluentWebElement>.shouldHaveId(id: String) = also { it should haveId(id) }
+fun FluentList<FluentWebElement>.shouldNotHaveId(id: String) =
+    also { it shouldNot haveId(id) }
 
-/**
- * @see haveId
- */
-fun FluentList<FluentWebElement>.shouldNotHaveId(id: String) = also { it shouldNot haveId(id) }
-
-const val CLASS_ATTRIBUTE = "class"
-const val CLASS_DELIMITER = " "
+private const val CLASS_ATTRIBUTE = "class"
+private const val CLASS_DELIMITER = " "
 
 /**
  * Checks if at least one element in a list of elements, has the expected class(es).
@@ -188,12 +194,14 @@ fun haveClass(vararg expectedClasses: String) = object : Matcher<FluentList<Flue
 /**
  * @see haveClass
  */
-fun FluentList<FluentWebElement>.shouldHaveClass(vararg classes: String) = also { it should haveClass(*classes) }
+fun FluentList<FluentWebElement>.shouldHaveClass(vararg classes: String) =
+    also { it should haveClass(*classes) }
 
 /**
  * @see haveClass
  */
-fun FluentList<FluentWebElement>.shouldNotHaveClass(vararg classes: String) = also { it shouldNot haveClass(*classes) }
+fun FluentList<FluentWebElement>.shouldNotHaveClass(vararg classes: String) =
+    also { it shouldNot haveClass(*classes) }
 
 /**
  * Checks if at least one element in a list of elements, has the expected name.
@@ -223,12 +231,14 @@ fun haveName(expectedName: String) = object : Matcher<FluentList<FluentWebElemen
 /**
  * @see haveName
  */
-fun FluentList<FluentWebElement>.shouldHaveName(name: String) = also { it should haveName(name) }
+fun FluentList<FluentWebElement>.shouldHaveName(name: String) =
+    also { it should haveName(name) }
 
 /**
  * @see haveName
  */
-fun FluentList<FluentWebElement>.shouldNotHaveName(name: String) = also { it shouldNot haveName(name) }
+fun FluentList<FluentWebElement>.shouldNotHaveName(name: String) =
+    also { it shouldNot haveName(name) }
 
 /**
  * Checks if at least one element in a list of elements, has the expected attribute.
@@ -260,7 +270,8 @@ fun haveAttribute(expectedAttribute: String) = object : Matcher<FluentList<Fluen
 /**
  * @see haveAttribute
  */
-fun FluentList<FluentWebElement>.shouldHaveAttribute(attribute: String) = also { it should haveAttribute(attribute) }
+fun FluentList<FluentWebElement>.shouldHaveAttribute(attribute: String) =
+    also { it should haveAttribute(attribute) }
 
 /**
  * @see haveAttribute
@@ -296,12 +307,14 @@ fun haveValue(expectedValue: String) = object : Matcher<FluentList<FluentWebElem
 /**
  * @see haveValue
  */
-fun FluentList<FluentWebElement>.shouldHaveValue(value: String) = also { it should haveValue(value) }
+fun FluentList<FluentWebElement>.shouldHaveValue(value: String) =
+    also { it should haveValue(value) }
 
 /**
  * @see haveValue
  */
-fun FluentList<FluentWebElement>.shouldNotHaveValue(value: String) = also { it shouldNot haveValue(value) }
+fun FluentList<FluentWebElement>.shouldNotHaveValue(value: String) =
+    also { it shouldNot haveValue(value) }
 
 /**
  * Checks if at least one element in a list of elements, contains the expected attribute key and value.
@@ -381,12 +394,14 @@ fun haveTagName(expectedTag: String) = object : Matcher<FluentList<FluentWebElem
 /**
  * @see haveTagName
  */
-fun FluentList<FluentWebElement>.shouldHaveTagName(tagName: String) = also { it should haveTagName(tagName) }
+fun FluentList<FluentWebElement>.shouldHaveTagName(tagName: String) =
+    also { it should haveTagName(tagName) }
 
 /**
  * @see haveTagName
  */
-fun FluentList<FluentWebElement>.shouldNotHaveTagName(tagName: String) = also { it shouldNot haveTagName(tagName) }
+fun FluentList<FluentWebElement>.shouldNotHaveTagName(tagName: String) =
+    also { it shouldNot haveTagName(tagName) }
 
 /**
  * Checks if at least one element in a list of elements, has the expected dimension.
@@ -422,7 +437,8 @@ fun haveDimension(expectedDimension: Pair<Int, Int>) =
 /**
  * @see haveDimension
  */
-fun FluentList<FluentWebElement>.shouldHaveDimension(dimension: Dimension) = also { it should haveDimension(dimension) }
+fun FluentList<FluentWebElement>.shouldHaveDimension(dimension: Dimension) =
+    also { it should haveDimension(dimension) }
 
 /**
  * @see haveDimension
