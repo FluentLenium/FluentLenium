@@ -255,7 +255,7 @@ public class FluentWaitElementTest {
 
     @Test
     public void canWaitUntilAsserted() {
-        Runnable block = () -> {};
+        Runnable block = Mockito.mock(Runnable.class);
         wait.untilAsserted(block);
         Mockito.verify(fluentControlWait).untilAsserted(block);
     }
