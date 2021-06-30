@@ -34,7 +34,7 @@ jobs:
         java-version: 11
     - name: Java 11 - unit & integration tests code coverage
       run: |
-        mvn -Pjava11 clean verify jacoco:report --file pom.xml
+        mvn -B -Pjava11 clean verify jacoco:report --file pom.xml
     - name: Coveralls report
       if: ${{ (github.repository == 'FluentLenium/FluentLenium' && github.event_name == 'push') || (github.event.pull_request.head.repo.full_name == github.repository) }}
       env:
