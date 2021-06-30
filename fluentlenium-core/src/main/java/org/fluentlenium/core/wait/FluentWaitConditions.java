@@ -129,10 +129,10 @@ public interface FluentWaitConditions<T> {
      * assertions to periodically check for conditions.
      *
      * <code>
-     *     await().untilAsserted(() -> assertThat(window().title()).isEqualTo("Fluentlenium"));
+     *     await().untilAsserted(() -&gt; assertThat(window().title()).isEqualTo("Fluentlenium"));
      * </code>
      *
-     * @param block
+     * @param block the code block that is responsible for executing the assertion and throwing AssertionError on failure.
      * @return {@code this} object to chain method calls
      */
     T untilAsserted(Runnable block);
