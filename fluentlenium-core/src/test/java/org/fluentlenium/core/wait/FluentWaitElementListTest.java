@@ -1,17 +1,5 @@
 package org.fluentlenium.core.wait;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentList;
@@ -23,6 +11,18 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FluentWaitElementListTest {
@@ -257,5 +257,12 @@ public class FluentWaitElementListTest {
     public void useCustomMessage() {
         wait.hasMessageDefined();
         Mockito.verify(fluentControlWait).hasMessageDefined();
+    }
+
+    @Test
+    public void canWaitUntilAsserted() {
+        Runnable block = Mockito.mock(Runnable.class);
+        wait.untilAsserted(block);
+        Mockito.verify(fluentControlWait).untilAsserted(block);
     }
 }
