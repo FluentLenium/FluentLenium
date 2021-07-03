@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -36,6 +37,15 @@ public class FluentWaitTest {
         AtomicBoolean called = new AtomicBoolean(false);
         wait.untilAsserted(() -> called.set(true));
         assertThat(called).isTrue();
+    }
+
+    @Test
+    public void untilAssertedBlockIsRetried() {
+        Runnable block = Mockito.mock(Runnable.class);
+        Mockito.doThrow(new AssertionError()).doNothing().when(block).run();
+
+        wait.atMost(10, TimeUnit.MILLISECONDS)
+                .untilAsserted(block);
     }
 
     @Test
