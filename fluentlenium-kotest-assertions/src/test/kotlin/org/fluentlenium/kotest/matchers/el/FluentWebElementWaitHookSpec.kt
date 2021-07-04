@@ -19,6 +19,6 @@ class FluentWebElementWaitHookSpec : MatcherBase({
     }
 
     "can check for not selected elements when using waithook" {
-        el("#disabled") shouldNot beSelected()
+        el("#not_selected") shouldNot beSelected()
     }
 })
