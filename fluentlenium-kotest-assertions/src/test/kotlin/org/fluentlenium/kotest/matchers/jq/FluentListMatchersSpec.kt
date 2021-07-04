@@ -15,6 +15,14 @@ class FluentListMatchersSpec : MatcherBase(
             jq("h1").shouldHaveSize(1)
         }
 
+        "present" {
+            jq("#doesNotExist") shouldNot bePresent()
+            jq("#doesNotExist").shouldNotBePresent()
+
+            jq("h1") should bePresent()
+            jq("h1").shouldBePresent()
+        }
+
         "haveText" {
             jq("#choice option") should haveText("First Value")
             jq("#choice option").shouldHaveText("First Value")
