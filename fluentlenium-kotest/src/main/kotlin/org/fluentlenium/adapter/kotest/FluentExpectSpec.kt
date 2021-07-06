@@ -1,6 +1,8 @@
 package org.fluentlenium.adapter.kotest
 
 import io.kotest.core.spec.style.ExpectSpec
+import io.kotest.core.test.TestCase
+import io.kotest.core.test.TestResult
 import org.fluentlenium.adapter.IFluentAdapter
 import org.fluentlenium.adapter.TestRunnerAdapter
 import org.fluentlenium.adapter.exception.AnnotationNotFoundException
@@ -21,7 +23,7 @@ abstract class FluentExpectSpec internal constructor(
     init {
         fluentAdapter.useConfigurationOverride = { configuration }
 
-        listener(fluentAdapter.listener())
+        listener(fluentAdapter.listener)
 
         body()
     }
@@ -49,4 +51,14 @@ abstract class FluentExpectSpec internal constructor(
 
         return super.getFluentControl()
     }
+
+    final override fun afterTest(testCase: TestCase, result: TestResult) {
+        doAfterTest(testCase, result)
+
+        fluentAdapter.afterTest(testCase, result)
+
+        super.afterTest(testCase, result)
+    }
+
+    open fun doAfterTest(testCase: TestCase, result: TestResult) {}
 }

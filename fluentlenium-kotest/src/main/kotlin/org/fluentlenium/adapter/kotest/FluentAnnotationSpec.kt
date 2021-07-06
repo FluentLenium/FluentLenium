@@ -1,6 +1,8 @@
 package org.fluentlenium.adapter.kotest
 
 import io.kotest.core.spec.style.AnnotationSpec
+import io.kotest.core.test.TestCase
+import io.kotest.core.test.TestResult
 import org.fluentlenium.adapter.IFluentAdapter
 import org.fluentlenium.adapter.TestRunnerAdapter
 import org.fluentlenium.adapter.exception.AnnotationNotFoundException
@@ -20,7 +22,7 @@ abstract class FluentAnnotationSpec internal constructor(
     init {
         fluentAdapter.useConfigurationOverride = { configuration }
 
-        listener(fluentAdapter.listener())
+        listener(fluentAdapter.listener)
     }
 
     private val config: Configuration by lazy {
@@ -44,4 +46,14 @@ abstract class FluentAnnotationSpec internal constructor(
 
         return currentTestMethod.getAnnotation(annotation) ?: throw AnnotationNotFoundException()
     }
+
+    override fun afterTest(testCase: TestCase, result: TestResult) {
+        doAfterTest(testCase, result)
+
+        fluentAdapter.afterTest(testCase, result)
+
+        super.afterTest(testCase, result)
+    }
+
+    open fun doAfterTest(testCase: TestCase, result: TestResult) {}
 }
