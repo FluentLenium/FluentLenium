@@ -12,7 +12,7 @@ import org.fluentlenium.configuration.ConfigurationFactoryProvider
 
 abstract class FluentFunSpec internal constructor(
     private val fluentAdapter: KoTestFluentAdapter,
-    body: FluentFunSpec.() -> Unit = {}
+    body: FluentFunSpec.() -> Unit
 ) : FunSpec({ }),
     IFluentAdapter by fluentAdapter,
     TestRunnerAdapter {

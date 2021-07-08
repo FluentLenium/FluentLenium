@@ -13,7 +13,7 @@ import org.fluentlenium.core.inject.ContainerFluentControl
 
 abstract class FluentWordSpec internal constructor(
     private val fluentAdapter: KoTestFluentAdapter,
-    body: FluentWordSpec.() -> Unit = {}
+    body: FluentWordSpec.() -> Unit
 ) : WordSpec({}),
     IFluentAdapter by fluentAdapter,
     TestRunnerAdapter {

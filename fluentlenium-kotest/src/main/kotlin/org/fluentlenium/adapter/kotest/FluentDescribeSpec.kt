@@ -12,7 +12,7 @@ import org.fluentlenium.configuration.ConfigurationFactoryProvider
 
 abstract class FluentDescribeSpec internal constructor(
     private val fluentAdapter: KoTestFluentAdapter,
-    body: FluentDescribeSpec.() -> Unit = {}
+    body: FluentDescribeSpec.() -> Unit
 ) : DescribeSpec({ }),
     IFluentAdapter by fluentAdapter,
     TestRunnerAdapter {
