@@ -47,7 +47,7 @@ abstract class FluentAnnotationSpec internal constructor(
         return currentTestMethod.getAnnotation(annotation) ?: throw AnnotationNotFoundException()
     }
 
-    override fun afterTest(testCase: TestCase, result: TestResult) {
+    final override fun afterTest(testCase: TestCase, result: TestResult) {
         doAfterTest(testCase, result)
 
         fluentAdapter.afterTest(testCase, result)

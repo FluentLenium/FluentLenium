@@ -52,7 +52,7 @@ abstract class FluentBehaviorSpec internal constructor(
         return super.getFluentControl()
     }
 
-    override fun afterTest(testCase: TestCase, result: TestResult) {
+    final override fun afterTest(testCase: TestCase, result: TestResult) {
         doAfterTest(testCase, result)
 
         fluentAdapter.afterTest(testCase, result)
