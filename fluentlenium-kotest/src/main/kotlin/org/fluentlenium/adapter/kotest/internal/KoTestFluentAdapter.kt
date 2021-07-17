@@ -74,7 +74,6 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
             "fluentlenium-kotest is incompatible with dispatcherAffinity=false. set to true!"
         }
 
-        val thisListener = this
         val testClass = testCase.spec.javaClass
         val testName = testCase.displayName
 
