@@ -53,11 +53,13 @@ abstract class FluentBehaviorSpec internal constructor(
     }
 
     final override fun afterTest(testCase: TestCase, result: TestResult) {
-        doAfterTest(testCase, result)
+        try {
+            doAfterTest(testCase, result)
+        } finally {
+            fluentAdapter.afterTest(testCase, result)
 
-        fluentAdapter.afterTest(testCase, result)
-
-        super.afterTest(testCase, result)
+            super.afterTest(testCase, result)
+        }
     }
 
     open fun doAfterTest(testCase: TestCase, result: TestResult) {}
