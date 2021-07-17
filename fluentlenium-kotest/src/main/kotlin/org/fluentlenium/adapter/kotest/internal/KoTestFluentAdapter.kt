@@ -130,8 +130,8 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
     }
 
     fun ensureTestStarted() {
-        if (currentTestName.get() == null) {
-            throw IllegalStateException("FluentLenium is not yet available! Make sure to use FluentLenium only within the innermost Kotest test block!")
+        checkNotNull(currentTestName.get()) {
+            "FluentLenium is not yet available! Make sure to use FluentLenium only within the innermost Kotest test block!"
         }
     }
 }
