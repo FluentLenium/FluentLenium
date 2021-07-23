@@ -402,3 +402,33 @@ fun FluentList<FluentWebElement>.shouldHaveDimension(dimension: Dimension) =
  */
 fun FluentList<FluentWebElement>.shouldNotHaveDimension(dimension: Dimension) =
     also { it shouldNot haveDimension(dimension) }
+
+/**
+ * Checks if any element is present.
+ *
+ * Example:
+ * `jq("button") should bePresent()`
+ *
+ * @return the matcher object.
+ */
+fun bePresent() = object : Matcher<FluentList<FluentWebElement>> {
+    override fun test(value: FluentList<FluentWebElement>): MatcherResult = MatcherResult(
+        value.present(),
+        "Elements '$value' should be present",
+        "Elements '$value' should not be present"
+    )
+}
+
+/**
+ * @see bePresent
+ */
+fun FluentList<FluentWebElement>.shouldBePresent() = also {
+    it should bePresent()
+}
+
+/**
+ * @see bePresent
+ */
+fun FluentList<FluentWebElement>.shouldNotBePresent() = also {
+    it shouldNot bePresent()
+}
