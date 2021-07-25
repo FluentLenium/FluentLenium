@@ -1,6 +1,8 @@
 package org.fluentlenium.adapter.kotest
 
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.core.test.TestCase
+import io.kotest.core.test.TestResult
 import org.fluentlenium.adapter.IFluentAdapter
 import org.fluentlenium.adapter.TestRunnerAdapter
 import org.fluentlenium.adapter.exception.AnnotationNotFoundException
@@ -10,7 +12,7 @@ import org.fluentlenium.configuration.ConfigurationFactoryProvider
 
 abstract class FluentStringSpec internal constructor(
     private val fluentAdapter: KoTestFluentAdapter,
-    body: FluentStringSpec.() -> Unit = {}
+    body: FluentStringSpec.() -> Unit
 ) : StringSpec({}),
     IFluentAdapter by fluentAdapter,
     TestRunnerAdapter {
@@ -20,7 +22,7 @@ abstract class FluentStringSpec internal constructor(
     init {
         fluentAdapter.useConfigurationOverride = { configuration }
 
-        listener(fluentAdapter.listener())
+        listener(fluentAdapter.listener)
 
         body()
     }
@@ -42,4 +44,16 @@ abstract class FluentStringSpec internal constructor(
     override fun <T : Annotation?> getMethodAnnotation(annotation: Class<T>?): T {
         throw AnnotationNotFoundException()
     }
+
+    final override fun afterTest(testCase: TestCase, result: TestResult) {
+        try {
+            doAfterTest(testCase, result)
+        } finally {
+            fluentAdapter.afterTest(testCase, result)
+
+            super.afterTest(testCase, result)
+        }
+    }
+
+    open fun doAfterTest(testCase: TestCase, result: TestResult) {}
 }
