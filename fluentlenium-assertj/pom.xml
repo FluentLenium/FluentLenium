@@ -12,6 +12,10 @@
     <name>FluentLenium AssertJ</name>
     <description>AssertJ Extension for FluentLenium</description>
 
+    <properties>
+        <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.fluentlenium</groupId>

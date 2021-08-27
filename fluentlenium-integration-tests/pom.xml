@@ -11,6 +11,10 @@
 
     <name>FluentLenium Integration Tests</name>
 
+    <properties>
+        <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.fluentlenium</groupId>

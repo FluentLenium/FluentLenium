@@ -12,6 +12,10 @@
     <name>FluentLenium JUnit Jupiter</name>
     <description>JUnit 5.x Adapter for FluentLenium</description>
 
+    <properties>
+        <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.fluentlenium</groupId>

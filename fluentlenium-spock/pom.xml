@@ -11,6 +11,10 @@
     <name>FluentLenium Spock</name>
     <description>Spock Adapter for FluentLenium</description>
 
+    <properties>
+        <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.fluentlenium</groupId>

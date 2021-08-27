@@ -15,6 +15,7 @@
 
     <properties>
         <cucumber.version>6.10.4</cucumber.version>
+        <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
     </properties>
 
     <dependencies>
