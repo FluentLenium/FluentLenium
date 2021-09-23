@@ -1,13 +1,16 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.5.0"
+    kotlin("jvm") version "1.5.31"
 }
 
 repositories {
     mavenLocal()
     mavenCentral()
 }
+
+java.targetCompatibility = JavaVersion.VERSION_1_8
+java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
@@ -33,16 +36,16 @@ dependencies {
     testImplementation("org.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
     testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
 
-    val koTestVersion = "4.6.0"
+    val koTestVersion = "4.6.3"
     testImplementation("io.kotest:kotest-runner-junit5:$koTestVersion")
     testImplementation("io.kotest:kotest-assertions-core:$koTestVersion")
 
-    testImplementation("io.github.bonigarcia:webdrivermanager:4.4.3")
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.0.3")
     testImplementation("org.seleniumhq.selenium:selenium-api:3.141.59")
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:3.141.59")
 
-    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.0.0")
-    testImplementation("org.testcontainers:selenium:1.15.3")
+    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.0.1")
+    testImplementation("org.testcontainers:selenium:1.16.0")
 
-    testImplementation("ch.qos.logback:logback-classic:1.2.3")
+    testImplementation("ch.qos.logback:logback-classic:1.2.6")
 }
