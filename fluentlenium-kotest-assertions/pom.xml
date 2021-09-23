@@ -12,8 +12,8 @@
     <description>Kotest FluentLenium Assertions</description>
 
     <properties>
-        <kotlin.version>1.5.30</kotlin.version>
-        <kotest.version>4.6.2</kotest.version>
+        <kotlin.version>1.5.31</kotlin.version>
+        <kotest.version>4.6.3</kotest.version>
         <dokka.version>1.5.0</dokka.version>
         <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
     </properties>
@@ -23,7 +23,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.7.2</version>
+                <version>5.8.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -78,7 +78,7 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>4.4.3</version>
+            <version>5.0.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
