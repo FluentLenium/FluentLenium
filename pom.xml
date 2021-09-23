@@ -184,12 +184,12 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>htmlunit-driver</artifactId>
-                <version>2.52.0</version>
+                <version>2.53.0</version>
             </dependency>
             <dependency>
                 <groupId>net.sourceforge.htmlunit</groupId>
                 <artifactId>htmlunit</artifactId>
-                <version>2.52.0</version>
+                <version>2.53.0</version>
             </dependency>
             <dependency>
                 <groupId>io.appium</groupId>
@@ -219,12 +219,12 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>5.7.2</version>
+                <version>5.8.1</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-launcher</artifactId>
-                <version>1.7.2</version>
+                <version>1.8.1</version>
             </dependency>
             <dependency>
                 <groupId>com.github.stephenc.jcip</groupId>
@@ -234,27 +234,27 @@
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
-                <version>7.3.0</version>
+                <version>7.4.0</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>5.3.9</version>
+                <version>5.3.10</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
-                <version>5.3.9</version>
+                <version>5.3.10</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>5.3.9</version>
+                <version>5.3.10</version>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
-                <version>3.20.2</version>
+                <version>3.21.0</version>
             </dependency>
             <dependency>
                 <groupId>org.opentest4j</groupId>
@@ -274,7 +274,7 @@
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.11.13</version>
+                <version>1.11.18</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -295,7 +295,7 @@
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
-                <version>3.0.8</version>
+                <version>3.0.9</version>
                 <type>pom</type>
             </dependency>
             <dependency>
@@ -316,13 +316,13 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.2.5</version>
+                <version>1.2.6</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
-                <version>1.2.5</version>
+                <version>1.2.6</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
