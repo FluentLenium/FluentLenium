@@ -25,9 +25,7 @@ class DontRunTestsWhenInitFailTest {
 
         @Override
         public WebDriver newWebDriver() {
-            HtmlUnitDriver driver = new HtmlUnitDriver(false);
-            driver.get("invalid:url"); // Simulate a driver initialization failure.
-            return driver;
+            throw new RuntimeException("simulated driver initialization failure");
         }
 
         @Test
@@ -49,7 +47,7 @@ class DontRunTestsWhenInitFailTest {
         launcher.execute(request);
 
         assertThat(getNumberOfFailures(listener)).isEqualTo(1);
-        assertThat(getFailureMessage(listener, 0)).contains("unknown protocol: invalid");
+        assertThat(getFailureMessage(listener, 0)).contains("simulated driver initialization failure");
     }
 
     private int getNumberOfFailures(SummaryGeneratingListener listener) {
