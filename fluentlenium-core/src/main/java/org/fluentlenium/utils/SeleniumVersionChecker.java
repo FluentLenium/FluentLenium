@@ -1,7 +1,11 @@
 package org.fluentlenium.utils;
 
-import static java.util.Objects.nonNull;
-import static java.util.stream.Collectors.toList;
+import org.apache.maven.model.Dependency;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,12 +16,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import org.apache.maven.model.Dependency;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static java.util.Objects.nonNull;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Responsible for retrieving information about Selenium version from pom.xml (if present). It logs warning when wrong
@@ -35,7 +35,7 @@ public final class SeleniumVersionChecker {
             "You are using incompatible Selenium version. Please change it to {}. "
                     + "You can find example on project main page {}";
 
-    private static final String EXPECTED_VERSION = "4.0.0-beta-4";
+    private static final String EXPECTED_VERSION = "4.0.0";
     private static final String SELENIUM_GROUP_ID = "org.seleniumhq.selenium";
     private static final String FL_URL = "https://github.com/FluentLenium/FluentLenium";
     private static final String POM = "pom.xml";

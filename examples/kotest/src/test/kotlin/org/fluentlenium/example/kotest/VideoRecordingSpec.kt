@@ -1,5 +1,6 @@
 package org.fluentlenium.example.kotest
 
+import io.kotest.core.annotation.Ignored
 import io.kotest.core.listeners.TestListener
 import io.kotest.core.spec.Spec
 import io.kotest.extensions.testcontainers.perTest
@@ -15,6 +16,8 @@ import java.io.File
 /**
  * This test demonstrates how to use Fluentlenium in combination with a Docker/Chrome container that hosts the browser.
  */
+// Testcontainers does not yet work with selenium 4: https://github.com/testcontainers/testcontainers-java/issues/4593
+@Ignored
 class VideoRecordingSpec : FluentFreeSpec() {
 
     private val SEARCH_TEXT = "FluentLenium"

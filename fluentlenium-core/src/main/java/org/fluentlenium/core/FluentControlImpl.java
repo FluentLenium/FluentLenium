@@ -4,6 +4,7 @@ import org.fluentlenium.adapter.DefaultFluentControlContainer;
 import org.fluentlenium.adapter.FluentControlContainer;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.configuration.ConfigurationFactoryProvider;
+import org.openqa.selenium.WebDriverException;
 
 /**
  * Default implementation of {@link FluentControl}.
@@ -14,6 +15,17 @@ import org.fluentlenium.configuration.ConfigurationFactoryProvider;
  * Do not put any logic here. Consider it as a proxy exposing fluentlenium-core to end user
  */
 public class FluentControlImpl implements FluentControl {
+
+    static {
+        // this is a workaround for a weird NoClassDefFoundError
+        // Seems to be some kind of Race condition
+
+        try {
+            Class.forName(WebDriverException.class.getName());
+        } catch (Exception e) {
+            throw new AssertionError(e);
+        }
+    }
 
     private final FluentControlContainer controlContainer;
     private Configuration configuration;

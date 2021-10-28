@@ -16,7 +16,7 @@ dependencies {
     implementation 'org.fluentlenium:fluentlenium-junit-jupiter:4.8.1-SNAPSHOT'
     implementation 'org.fluentlenium:fluentlenium-assertj:4.8.1-SNAPSHOT'
     testImplementation 'ch.qos.logback:logback-classic:1.2.3'
-    testImplementation 'org.seleniumhq.selenium:selenium-firefox-driver:4.0.0-beta-4'
+    testImplementation 'org.seleniumhq.selenium:selenium-firefox-driver:4.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 

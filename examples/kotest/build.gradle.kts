@@ -29,20 +29,22 @@ tasks.withType<Test>().configureEach {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+
     val fluentleniumVersion = "4.8.1-SNAPSHOT"
     testImplementation("org.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
     testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
 
-    val koTestVersion = "4.6.0"
+    val koTestVersion = "4.6.3"
     testImplementation("io.kotest:kotest-runner-junit5:$koTestVersion")
     testImplementation("io.kotest:kotest-assertions-core:$koTestVersion")
 
-    testImplementation("io.github.bonigarcia:webdrivermanager:4.4.3")
-    testImplementation("org.seleniumhq.selenium:selenium-api:4.0.0-beta-4")
-    testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:4.0.0-beta-4")
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.0.3")
+    testImplementation("org.seleniumhq.selenium:selenium-api:4.0.0")
+    testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:4.0.0")
+    testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v95:4.0.0")
 
-    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.0.0")
-    testImplementation("org.testcontainers:selenium:1.15.3")
+    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.0.1")
+    testImplementation("org.testcontainers:selenium:1.16.2")
 
     testImplementation("ch.qos.logback:logback-classic:1.2.3")
 }
