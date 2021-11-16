@@ -183,7 +183,7 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>htmlunit-driver</artifactId>
-                <version>2.50.0</version>
+                <version>3.55.0</version>
             </dependency>
             <dependency>
                 <groupId>net.sourceforge.htmlunit</groupId>
