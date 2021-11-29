@@ -14,7 +14,7 @@ class CanAccessDriverInAfterTestSpec : FluentDescribeSpec() {
         }
 
         afterTest {
-            goTo(DEFAULT_URL)
+            // goTo(DEFAULT_URL)
         }
     }
 

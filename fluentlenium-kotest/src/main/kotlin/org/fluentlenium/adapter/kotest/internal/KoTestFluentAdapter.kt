@@ -5,7 +5,6 @@ import io.kotest.core.listeners.TestListener
 import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
-import io.kotest.core.test.TestStatus
 import io.kotest.core.test.TestType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -68,14 +67,14 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
         val singleThreadPerTest =
             testCase.spec.dispatcherAffinity ?: testCase.spec.dispatcherAffinity()
-                ?: io.kotest.core.config.configuration.dispatcherAffinity
+                ?: io.kotest.core.config.Defaults.dispatcherAffinity
 
         require(singleThreadPerTest) {
             "fluentlenium-kotest is incompatible with dispatcherAffinity=false. set to true!"
         }
 
         val testClass = testCase.spec.javaClass
-        val testName = testCase.displayName
+        val testName = testCase.name.testName
 
         currentTestName.set(testName)
 
@@ -105,10 +104,12 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
             return
 
         val testClass = testCase.spec.javaClass
-        val testName = testCase.displayName
+        val testName = testCase.name.testName
 
-        if (result.status == TestStatus.Error || result.status == TestStatus.Failure) {
-            failed(result.error, testClass, testName)
+        when (result) {
+            is TestResult.Error -> failed(result.errorOrNull, testClass, testName)
+            is TestResult.Failure -> failed(result.errorOrNull, testClass, testName)
+            else -> Unit
         }
 
         val sharedWebDriver = SharedWebDriverContainer.INSTANCE

@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.5.31"
+    kotlin("jvm") version "1.6.0"
 }
 
 repositories {
@@ -36,7 +36,7 @@ dependencies {
     testImplementation("org.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
     testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
 
-    val koTestVersion = "4.6.3"
+    val koTestVersion = "5.0.0"
     testImplementation("io.kotest:kotest-runner-junit5:$koTestVersion")
     testImplementation("io.kotest:kotest-assertions-core:$koTestVersion")
 

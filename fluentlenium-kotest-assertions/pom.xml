@@ -12,8 +12,8 @@
     <description>Kotest FluentLenium Assertions</description>
 
     <properties>
-        <kotlin.version>1.5.31</kotlin.version>
-        <kotest.version>4.6.3</kotest.version>
+        <kotlin.version>1.6.0</kotlin.version>
+        <kotest.version>5.0.0</kotest.version>
         <dokka.version>1.5.0</dokka.version>
     </properties>
 
