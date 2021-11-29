@@ -1,6 +1,6 @@
 package org.fluentlenium.example.kotest
 
-import io.kotest.core.listeners.TestListener
+import io.kotest.core.extensions.Extension
 import io.kotest.core.spec.Spec
 import io.kotest.extensions.testcontainers.perTest
 import io.kotest.matchers.shouldBe
@@ -45,7 +45,7 @@ class VideoRecordingSpec : FluentFreeSpec() {
      *
      * https://kotest.io/docs/extensions/test_containers.html
      */
-    override fun listeners(): List<TestListener> =
+    override fun extensions(): List<Extension> =
         listOf(dockerChrome.perTest())
 
     override fun newWebDriver(): WebDriver =

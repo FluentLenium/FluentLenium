@@ -17,7 +17,7 @@ tasks.withType<KotlinCompile> {
         jvmTarget = "1.8"
         apiVersion = "1.5"
         languageVersion = "1.5"
-        freeCompilerArgs = listOf("-Xjsr305=strict", "-progressive")
+        freeCompilerArgs = listOf("-Xjsr305=strict")
     }
 }
 
