@@ -20,8 +20,10 @@ fun haveText(text: String) = object : Matcher<Alert> {
     override fun test(value: Alert): MatcherResult =
         MatcherResult(
             value.text.contains(text),
-            "The alert box is expected to contain the text '${value.text}', actual text is '$text'",
-            "The alert box is expected to not contain the text '${value.text}'"
+            { "The alert box is expected to contain the text '${value.text}', actual text is '$text'" },
+            {
+                "The alert box is expected to not contain the text '${value.text}'"
+            }
         )
 }
 

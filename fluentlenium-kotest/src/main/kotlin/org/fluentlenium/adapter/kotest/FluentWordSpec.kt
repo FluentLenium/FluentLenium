@@ -23,7 +23,7 @@ abstract class FluentWordSpec internal constructor(
     init {
         fluentAdapter.useConfigurationOverride = { configuration }
 
-        listener(fluentAdapter.listener)
+        register(fluentAdapter.listener)
 
         body()
     }

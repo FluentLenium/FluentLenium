@@ -12,7 +12,7 @@ open class MatcherBase(
     fun goToFile(file: String) =
         goTo(UrlUtils.getAbsoluteUrlFromFile(file))
 
-    override fun beforeEach(testCase: TestCase) {
+    override fun beforeTest(testCase: TestCase) {
         goToFile("index.html")
     }
 }

@@ -23,7 +23,7 @@ abstract class FluentBehaviorSpec internal constructor(
     init {
         fluentAdapter.useConfigurationOverride = { configuration }
 
-        listener(fluentAdapter.listener)
+        register(fluentAdapter.listener)
 
         body()
     }

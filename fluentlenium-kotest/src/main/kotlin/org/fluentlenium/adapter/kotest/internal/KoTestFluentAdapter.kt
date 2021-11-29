@@ -45,7 +45,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
         override suspend fun beforeSpec(spec: Spec) =
             this@KoTestFluentAdapter.beforeSpec()
 
-        override suspend fun beforeTest(testCase: TestCase) {
+        override suspend fun beforeEach(testCase: TestCase) {
             this@KoTestFluentAdapter.beforeTest(testCase)
         }
 

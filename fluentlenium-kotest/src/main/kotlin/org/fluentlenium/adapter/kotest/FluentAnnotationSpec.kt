@@ -22,7 +22,7 @@ abstract class FluentAnnotationSpec internal constructor(
     init {
         fluentAdapter.useConfigurationOverride = { configuration }
 
-        listener(fluentAdapter.listener)
+        register(fluentAdapter.listener)
     }
 
     private val config: Configuration by lazy {
