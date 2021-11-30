@@ -45,7 +45,7 @@ dependencies {
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:3.141.59")
 
     testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.0.1")
-    testImplementation("org.testcontainers:selenium:1.16.0")
+    testImplementation("org.testcontainers:selenium:1.16.2")
 
     testImplementation("ch.qos.logback:logback-classic:1.2.6")
 }

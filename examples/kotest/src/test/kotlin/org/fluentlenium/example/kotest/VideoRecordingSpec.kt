@@ -41,7 +41,7 @@ class VideoRecordingSpec : FluentFreeSpec() {
     }
 
     /**
-     * use the Kotest testcontainers extension so Kotest can manage the lifeccycle of the docker container.
+     * use the Kotest testcontainers extension so Kotest can manage the lifecycle of the docker container.
      *
      * https://kotest.io/docs/extensions/test_containers.html
      */
