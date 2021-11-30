@@ -1,8 +1,9 @@
 package org.fluentlenium.example.kotest
 
-import io.kotest.core.extensions.Extension
+import io.kotest.core.spec.AroundTestFn
 import io.kotest.core.spec.Spec
-import io.kotest.extensions.testcontainers.perTest
+import io.kotest.core.test.TestType
+import io.kotest.extensions.testcontainers.StartablePerTestListener
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import org.fluentlenium.adapter.kotest.FluentFreeSpec
@@ -10,6 +11,7 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.testcontainers.containers.BrowserWebDriverContainer
 import org.testcontainers.containers.VncRecordingContainer
+import org.testcontainers.lifecycle.Startable
 import java.io.File
 
 /**
@@ -45,8 +47,8 @@ class VideoRecordingSpec : FluentFreeSpec() {
      *
      * https://kotest.io/docs/extensions/test_containers.html
      */
-    override fun extensions(): List<Extension> =
-        listOf(dockerChrome.perTest())
+  //  override fun extensions(): List<Extension> =
+    //    listOf(dockerChrome.perTest())
 
     override fun newWebDriver(): WebDriver =
         dockerChrome.webDriver
@@ -57,6 +59,8 @@ class VideoRecordingSpec : FluentFreeSpec() {
     }
 
     init {
+        aroundTest(dockerChrome.aroundPerTest())
+
         "Title of duck duck go" {
             goTo("https://duckduckgo.com")
 
@@ -66,5 +70,17 @@ class VideoRecordingSpec : FluentFreeSpec() {
 
             window().title() shouldContain SEARCH_TEXT
         }
+    }
+}
+
+private fun <T : Startable> T.aroundPerTest(): AroundTestFn = { (testcase, runtest) ->
+    if (testcase.type == TestType.Test) {
+        val listener = StartablePerTestListener(this)
+        listener.beforeTest(testcase)
+        runtest(testcase).also {
+            listener.afterTest(testcase, it)
+        }
+    } else {
+        runtest(testcase)
     }
 }
