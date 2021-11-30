@@ -52,8 +52,10 @@ fun bePresent() = object : Matcher<Alert> {
 
         return MatcherResult(
             isAlertPresent,
-            "Alert should be present",
-            "Alert should not be present"
+            { "Alert should be present" },
+            {
+                "Alert should not be present"
+            }
         )
     }
 }
