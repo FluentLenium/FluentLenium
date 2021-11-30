@@ -54,6 +54,8 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
     val aroundTestFn: AroundTestFn = {
         (testcase, runtest) ->
 
+        println("inner around")
+
         when (testcase.type) {
             TestType.Test -> {
                 beforeTest(testcase)

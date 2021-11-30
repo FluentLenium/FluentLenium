@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.kotest
 
+import io.kotest.core.spec.AroundTestFn
 import io.kotest.core.spec.style.DescribeSpec
 import org.fluentlenium.adapter.IFluentAdapter
 import org.fluentlenium.adapter.TestRunnerAdapter
@@ -22,10 +23,12 @@ abstract class FluentDescribeSpec internal constructor(
 
         register(fluentAdapter.listener)
 
-        aroundTest(fluentAdapter.aroundTestFn)
+        aroundTest(decorateAround(fluentAdapter.aroundTestFn))
 
         body()
     }
+
+    open fun decorateAround(aroundFn: AroundTestFn): AroundTestFn = aroundFn
 
     private val config: Configuration by lazy {
         ConfigurationFactoryProvider.newConfiguration(javaClass)

@@ -1,7 +1,10 @@
 package org.fluentlenium.example.kotest
 
+import io.kotest.core.Tuple2
 import io.kotest.core.spec.AroundTestFn
 import io.kotest.core.spec.Spec
+import io.kotest.core.test.TestCase
+import io.kotest.core.test.TestResult
 import io.kotest.core.test.TestType
 import io.kotest.extensions.testcontainers.StartablePerTestListener
 import io.kotest.matchers.shouldBe
@@ -47,11 +50,24 @@ class VideoRecordingSpec : FluentFreeSpec() {
      *
      * https://kotest.io/docs/extensions/test_containers.html
      */
-  //  override fun extensions(): List<Extension> =
+    //  override fun extensions(): List<Extension> =
     //    listOf(dockerChrome.perTest())
+
 
     override fun newWebDriver(): WebDriver =
         dockerChrome.webDriver
+
+    override fun decorateAround(aroundFn: AroundTestFn): AroundTestFn = { (testcase, runtest) ->
+        if (testcase.type == TestType.Test) {
+            val listener = StartablePerTestListener(dockerChrome)
+            listener.beforeTest(testcase)
+            aroundFn(Tuple2(testcase, runtest)).also {
+                listener.afterTest(testcase, it)
+            }
+        } else {
+            aroundFn(Tuple2(testcase, runtest))
+        }
+    }
 
     override fun beforeSpec(spec: Spec) {
         videoDirectory.mkdirs()
