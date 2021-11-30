@@ -6,6 +6,7 @@ import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
 import io.kotest.core.test.TestType
+import io.kotest.core.tuple
 import io.kotest.extensions.testcontainers.StartablePerTestListener
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
@@ -57,17 +58,8 @@ class VideoRecordingSpec : FluentFreeSpec() {
     override fun newWebDriver(): WebDriver =
         dockerChrome.webDriver
 
-    override fun decorateAround(aroundFn: AroundTestFn): AroundTestFn = { (testcase, runtest) ->
-        if (testcase.type == TestType.Test) {
-            val listener = StartablePerTestListener(dockerChrome)
-            listener.beforeTest(testcase)
-            aroundFn(Tuple2(testcase, runtest)).also {
-                listener.afterTest(testcase, it)
-            }
-        } else {
-            aroundFn(Tuple2(testcase, runtest))
-        }
-    }
+    override fun decorateAround(aroundFn: AroundTestFn): AroundTestFn =
+        dockerChrome.aroundPerTest(aroundFn)
 
     override fun beforeSpec(spec: Spec) {
         videoDirectory.mkdirs()
@@ -75,8 +67,6 @@ class VideoRecordingSpec : FluentFreeSpec() {
     }
 
     init {
-        aroundTest(dockerChrome.aroundPerTest())
-
         "Title of duck duck go" {
             goTo("https://duckduckgo.com")
 
@@ -89,14 +79,14 @@ class VideoRecordingSpec : FluentFreeSpec() {
     }
 }
 
-private fun <T : Startable> T.aroundPerTest(): AroundTestFn = { (testcase, runtest) ->
+private fun <T : Startable> T.aroundPerTest(aroundFn: AroundTestFn): AroundTestFn = { (testcase, runtest) ->
     if (testcase.type == TestType.Test) {
         val listener = StartablePerTestListener(this)
         listener.beforeTest(testcase)
-        runtest(testcase).also {
+        aroundFn(tuple(testcase, runtest)).also {
             listener.afterTest(testcase, it)
         }
     } else {
-        runtest(testcase)
+        aroundFn(tuple(testcase, runtest))
     }
 }
