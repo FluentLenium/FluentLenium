@@ -75,7 +75,9 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: Compile gradle example
-        run: cd examples/quickstart-firefox && ./gradlew clean compileTestKotlin && cd ../kotest && ./gradlew clean check
+        run: cd examples/quickstart-firefox && ./gradlew compileTestKotlin && cd ../kotest && ./gradlew compileTestKotlin
+      - name: Run gradle kotest example
+        run: cd examples/kotest && ./gradlew check
 
   compile-maven-examples:
     runs-on: ubuntu-latest
