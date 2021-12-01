@@ -54,8 +54,8 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
             this@KoTestFluentAdapter.afterSpec(spec)
         }
 
-        override suspend fun beforeAny(testCase: TestCase) {
-            this@KoTestFluentAdapter.beforeAny(testCase)
+        override suspend fun beforeTest(testCase: TestCase) {
+            this@KoTestFluentAdapter.beforeTest(testCase)
         }
 
         override suspend fun afterEach(testCase: TestCase, result: TestResult) {
@@ -70,7 +70,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
     }
 
     @ExperimentalKotest
-    fun beforeAny(testCase: TestCase) {
+    fun beforeTest(testCase: TestCase) {
         if (testCase.type == TestType.Container)
             return
 
