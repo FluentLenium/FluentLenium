@@ -21,8 +21,7 @@ abstract class FluentFeatureSpec internal constructor(
     init {
         fluentAdapter.useConfigurationOverride = { configuration }
 
-        register(fluentAdapter.listener)
-        aroundTest(fluentAdapter.aroundTestFn)
+        register(fluentAdapter.extension)
 
         body()
     }

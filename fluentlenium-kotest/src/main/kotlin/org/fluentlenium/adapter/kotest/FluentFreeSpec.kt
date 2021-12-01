@@ -1,6 +1,5 @@
 package org.fluentlenium.adapter.kotest
 
-import io.kotest.core.spec.AroundTestFn
 import io.kotest.core.spec.style.FreeSpec
 import org.fluentlenium.adapter.IFluentAdapter
 import org.fluentlenium.adapter.TestRunnerAdapter
@@ -22,13 +21,10 @@ abstract class FluentFreeSpec internal constructor(
     init {
         fluentAdapter.useConfigurationOverride = { configuration }
 
-        register(fluentAdapter.listener)
-        aroundTest(decorateAround(fluentAdapter.aroundTestFn))
+        register(fluentAdapter.extension)
 
         body()
     }
-
-    open fun decorateAround(aroundFn: AroundTestFn): AroundTestFn = aroundFn
 
     private val config: Configuration by lazy {
         ConfigurationFactoryProvider.newConfiguration(javaClass)

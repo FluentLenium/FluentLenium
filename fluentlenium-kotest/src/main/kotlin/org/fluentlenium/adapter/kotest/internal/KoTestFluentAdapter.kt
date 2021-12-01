@@ -1,8 +1,11 @@
 package org.fluentlenium.adapter.kotest.internal
 
 import io.kotest.common.ExperimentalKotest
-import io.kotest.core.listeners.TestListener
-import io.kotest.core.spec.AroundTestFn
+import io.kotest.core.extensions.Extension
+import io.kotest.core.listeners.AfterEachListener
+import io.kotest.core.listeners.AfterSpecListener
+import io.kotest.core.listeners.BeforeSpecListener
+import io.kotest.core.listeners.BeforeTestListener
 import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
@@ -42,29 +45,21 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
     override fun getConfiguration(): Configuration = configurationOverride
 
-    val listener: TestListener = object : TestListener {
+    val extension: Extension = object : BeforeSpecListener, AfterSpecListener, BeforeTestListener, AfterEachListener {
+
         override suspend fun beforeSpec(spec: Spec) =
             this@KoTestFluentAdapter.beforeSpec()
 
         override suspend fun afterSpec(spec: Spec) {
             this@KoTestFluentAdapter.afterSpec(spec)
         }
-    }
 
-    val aroundTestFn: AroundTestFn = {
-        (testcase, runtest) ->
+        override suspend fun beforeTest(testCase: TestCase) {
+            this@KoTestFluentAdapter.beforeTest(testCase)
+        }
 
-        println("inner around")
-
-        when (testcase.type) {
-            TestType.Test -> {
-                beforeTest(testcase)
-
-                runtest(testcase).also {
-                    afterEach(testcase, it)
-                }
-            }
-            else -> runtest(testcase)
+        override suspend fun afterEach(testCase: TestCase, result: TestResult) {
+            this@KoTestFluentAdapter.afterEach(testCase, result)
         }
     }
 

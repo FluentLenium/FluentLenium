@@ -11,7 +11,7 @@ class CanAccessDriverInAfterTestSpec : FluentDescribeSpec() {
             window().title() shouldContain "Fluent"
         }
 
-        afterEach {
+        afterTest {
             goTo(DEFAULT_URL)
         }
     }

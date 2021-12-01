@@ -1,13 +1,8 @@
 package org.fluentlenium.example.kotest
 
-import io.kotest.core.Tuple2
-import io.kotest.core.spec.AroundTestFn
+import io.kotest.core.extensions.Extension
 import io.kotest.core.spec.Spec
-import io.kotest.core.test.TestCase
-import io.kotest.core.test.TestResult
-import io.kotest.core.test.TestType
-import io.kotest.core.tuple
-import io.kotest.extensions.testcontainers.StartablePerTestListener
+import io.kotest.extensions.testcontainers.perTest
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import org.fluentlenium.adapter.kotest.FluentFreeSpec
@@ -15,7 +10,6 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.testcontainers.containers.BrowserWebDriverContainer
 import org.testcontainers.containers.VncRecordingContainer
-import org.testcontainers.lifecycle.Startable
 import java.io.File
 
 /**
@@ -51,15 +45,11 @@ class VideoRecordingSpec : FluentFreeSpec() {
      *
      * https://kotest.io/docs/extensions/test_containers.html
      */
-    //  override fun extensions(): List<Extension> =
-    //    listOf(dockerChrome.perTest())
-
+    override fun extensions(): List<Extension> =
+        listOf(dockerChrome.perTest())
 
     override fun newWebDriver(): WebDriver =
         dockerChrome.webDriver
-
-    override fun decorateAround(aroundFn: AroundTestFn): AroundTestFn =
-        dockerChrome.aroundPerTest(aroundFn)
 
     override fun beforeSpec(spec: Spec) {
         videoDirectory.mkdirs()
@@ -76,17 +66,5 @@ class VideoRecordingSpec : FluentFreeSpec() {
 
             window().title() shouldContain SEARCH_TEXT
         }
-    }
-}
-
-private fun <T : Startable> T.aroundPerTest(aroundFn: AroundTestFn): AroundTestFn = { (testcase, runtest) ->
-    if (testcase.type == TestType.Test) {
-        val listener = StartablePerTestListener(this)
-        listener.beforeTest(testcase)
-        aroundFn(tuple(testcase, runtest)).also {
-            listener.afterTest(testcase, it)
-        }
-    } else {
-        aroundFn(tuple(testcase, runtest))
     }
 }

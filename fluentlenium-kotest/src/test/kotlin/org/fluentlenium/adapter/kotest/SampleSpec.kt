@@ -1,50 +1,37 @@
 package org.fluentlenium.adapter.kotest
 
 import io.kotest.core.spec.style.FreeSpec
-import io.kotest.core.test.TestType
 import io.kotest.matchers.shouldBe
 
 class SampleSpec : FreeSpec({
 
-    aroundTest { (testcase, run) ->
-        when (testcase.type) {
-            TestType.Test -> {
-                println("start F")
-                run(testcase).also {
-                    println("stop F")
-                }
-            }
-            TestType.Container -> run(testcase)
-            TestType.Dynamic -> run(testcase)
-        }
-    }
-
     beforeEach {
-        println("before each")
+        println("before each ${it.type}")
     }
 
     beforeTest {
-        println("before test")
+        println("before test ${it.type}")
     }
 
     beforeAny {
-        println("before any")
+        println("before any ${it.type}")
     }
 
     afterEach {
-        println("after each")
+        println("after each ${it.a.type}")
     }
 
     afterTest {
-        println("after test")
+        println("after test ${it.a.type}")
     }
 
     afterAny {
-        println("after any")
+        println("after any ${it.a.type}")
     }
 
     "block" - {
         "test1" {
+            println("run test")
             "foo" shouldBe "foo"
         }
     }
