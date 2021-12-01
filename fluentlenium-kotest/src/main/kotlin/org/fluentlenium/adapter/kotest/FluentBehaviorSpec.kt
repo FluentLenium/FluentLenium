@@ -37,10 +37,10 @@ abstract class FluentBehaviorSpec internal constructor(
     override fun getTestMethodName(): String =
         fluentAdapter.currentTestName.get()
 
-    override fun <T : Annotation?> getClassAnnotation(annotation: Class<T>?): T =
+    override fun <T : Annotation?> getClassAnnotation(annotation: Class<T>): T =
         javaClass.getAnnotation(annotation) ?: throw AnnotationNotFoundException()
 
-    override fun <T : Annotation?> getMethodAnnotation(annotation: Class<T>?): T {
+    override fun <T : Annotation?> getMethodAnnotation(annotation: Class<T>): T {
         throw AnnotationNotFoundException()
     }
 
