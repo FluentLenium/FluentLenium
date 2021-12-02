@@ -13,7 +13,7 @@
 
     <properties>
         <kotlin.version>1.6.0</kotlin.version>
-        <kotest.version>5.0.0</kotest.version>
+        <kotest.version>5.0.1</kotest.version>
         <dokka.version>1.5.0</dokka.version>
     </properties>
 

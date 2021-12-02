@@ -36,9 +36,11 @@ dependencies {
     testImplementation("org.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
     testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
 
-    val koTestVersion = "5.0.0"
-    testImplementation("io.kotest:kotest-runner-junit5:$koTestVersion")
-    testImplementation("io.kotest:kotest-assertions-core:$koTestVersion")
+    val koTestVersion = "5.0.1"
+    implementation(platform("io.kotest:kotest-bom:$koTestVersion"))
+
+    testImplementation("io.kotest:kotest-runner-junit5")
+    testImplementation("io.kotest:kotest-assertions-core")
 
     testImplementation("io.github.bonigarcia:webdrivermanager:5.0.3")
     testImplementation("org.seleniumhq.selenium:selenium-api:3.141.59")
@@ -47,5 +49,5 @@ dependencies {
     testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.0.1")
     testImplementation("org.testcontainers:selenium:1.16.2")
 
-    testImplementation("ch.qos.logback:logback-classic:1.2.6")
+    testImplementation("ch.qos.logback:logback-classic:1.2.7")
 }
