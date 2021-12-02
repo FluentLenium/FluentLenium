@@ -74,6 +74,8 @@ jobs:
           java-version: 11
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
+      - name: Show dependencies
+        run: cd ../kotest && ./gradlew dependencies
       - name: Compile gradle example
         run: cd examples/quickstart-firefox && ./gradlew compileTestKotlin && cd ../kotest && ./gradlew compileTestKotlin
       - name: Run gradle kotest example
