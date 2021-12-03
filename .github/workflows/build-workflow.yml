@@ -7,8 +7,6 @@ on:
   push:
     branches: 
       - develop
-      # current PR
-      - "feature/#828"
   pull_request:
     branches: [ develop ]
 
