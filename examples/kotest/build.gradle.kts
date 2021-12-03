@@ -44,8 +44,9 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core")
 
     testImplementation("io.github.bonigarcia:webdrivermanager:5.0.3")
-    testImplementation("org.seleniumhq.selenium:selenium-api:3.141.59")
-    testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:3.141.59")
+    testImplementation("org.seleniumhq.selenium:selenium-api:4.0.0")
+    testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:4.0.0")
+    testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v95:4.0.0")
 
     testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.0.1")
     testImplementation("org.testcontainers:selenium:1.16.2")
