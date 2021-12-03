@@ -16,12 +16,32 @@ class FluentWebElementMatchersSpec : MatcherBase({
         el("h1").shouldBePresent()
     }
 
+    "presentNegative" {
+        shouldAssert {
+            el("#doesNotExist") should bePresent()
+        }
+
+        shouldAssert {
+            el("h1") shouldNot bePresent()
+        }
+    }
+
     "enabled" {
         el("#alertButton") should beEnabled()
         el("#alertButton").shouldBeEnabled()
 
         el("#disabledButton") shouldNot beEnabled()
         el("#disabledButton").shouldNotBeEnabled()
+    }
+
+    "enabledNegative" {
+        shouldAssert {
+            el("#alertButton") shouldNot beEnabled()
+        }
+
+        shouldAssert {
+            el("#disabledButton") should beEnabled()
+        }
     }
 
     "displayed" {
@@ -33,6 +53,16 @@ class FluentWebElementMatchersSpec : MatcherBase({
         el("#hiddenElement").shouldNotBeDisplayed()
     }
 
+    "displayedNegative" {
+        shouldAssert {
+            el("h1") shouldNot beDisplayed()
+        }
+
+        shouldAssert {
+            el("#hiddenElement") should beDisplayed()
+        }
+    }
+
     "clickable" {
         el("#alertButton") should beClickable()
         el("#alertButton").shouldBeClickable()
@@ -41,12 +71,32 @@ class FluentWebElementMatchersSpec : MatcherBase({
         el("#disabledButton").shouldNotBeClickable()
     }
 
+    "clickableNegative" {
+        shouldAssert {
+            el("#alertButton") shouldNot beClickable()
+        }
+
+        shouldAssert {
+            el("#disabledButton") should beClickable()
+        }
+    }
+
     "selected" {
         el("#choice #second") should beSelected()
         el("#choice #second").shouldBeSelected()
 
         el("#choice #first") shouldNot beSelected()
         el("#choice #first").shouldNotBeSelected()
+    }
+
+    "selectedNegative" {
+        shouldAssert {
+            el("#choice #second") shouldNot beSelected()
+        }
+
+        shouldAssert {
+            el("#choice #first") should beSelected()
+        }
     }
 
     "containText" {
@@ -58,12 +108,32 @@ class FluentWebElementMatchersSpec : MatcherBase({
         el("#oneline").shouldNotContainText("other text")
     }
 
+    "containTextNegative" {
+        shouldAssert {
+            el("#oneline") shouldNot containText("A single line")
+        }
+
+        shouldAssert {
+            el("#oneline") should containText("other text")
+        }
+    }
+
     "matchText" {
         el("#oneline") should matchText("A single.*text")
         el("#oneline").shouldMatchText("A single.*text")
 
         el("#oneline") shouldNot matchText("foo.*abc")
         el("#oneline").shouldNotMatchText("foo.*abc")
+    }
+
+    "matchTextNegative" {
+        shouldAssert {
+            el("#oneline") shouldNot matchText("A single.*text")
+        }
+
+        shouldAssert {
+            el("#oneline") should matchText("foo.*abc")
+        }
     }
 
     "haveId" {
@@ -79,7 +149,7 @@ class FluentWebElementMatchersSpec : MatcherBase({
             el("#oneline") should haveId("other")
         }
         shouldAssert {
-            el("#oneline").shouldHaveId("other")
+            el("#oneline") shouldNot haveId("oneline")
         }
     }
 
@@ -96,12 +166,32 @@ class FluentWebElementMatchersSpec : MatcherBase({
         el("#multiple-css-class") shouldNot haveClass("class1", "class2", "class4")
     }
 
+    "haveClassNegative" {
+        shouldAssert {
+            el("span.child") shouldNot haveClass("child")
+        }
+
+        shouldAssert {
+            el("span.child") should haveClass("other")
+        }
+    }
+
     "haveValue" {
         el("#choice #first") should haveValue("first")
         el("#choice #first").shouldHaveValue("first")
 
         el("#choice #first") shouldNot haveValue("second")
         el("#choice #first").shouldNotHaveValue("second")
+    }
+
+    "haveValueNegative" {
+        shouldAssert {
+            el("#choice #first") shouldNot haveValue("first")
+        }
+
+        shouldAssert {
+            el("#choice #first") should haveValue("second")
+        }
     }
 
     "haveName" {
@@ -112,6 +202,16 @@ class FluentWebElementMatchersSpec : MatcherBase({
         el(By.name("name")).shouldNotHaveName("other")
     }
 
+    "haveNameNegative" {
+        shouldAssert {
+            el(By.name("name")) shouldNot haveName("name")
+        }
+
+        shouldAssert {
+            el(By.name("name")) should haveName("other")
+        }
+    }
+
     "haveTagName" {
         el("h1") should haveTagName("h1")
         el("h1").shouldHaveTagName("h1")
@@ -120,13 +220,35 @@ class FluentWebElementMatchersSpec : MatcherBase({
         el("h1").shouldNotHaveTagName("h2")
     }
 
+    "haveTagNameNegative" {
+        shouldAssert {
+            el("h1") shouldNot haveTagName("h1")
+        }
+
+        shouldAssert {
+            el("h1") should haveTagName("h2")
+        }
+    }
+
     "haveDimension" {
         el("h1") should haveDimension(Dimension(784, 37))
         el("h1") should haveDimension(784 to 37)
         el("h1").shouldHaveDimension(Dimension(784, 37))
+        el("h1").shouldHaveDimension(784 to 37)
 
         el("h1") shouldNot haveDimension(Dimension(100, 37))
         el("h1").shouldNotHaveDimension(Dimension(100, 37))
+        el("h1").shouldNotHaveDimension(100 to 37)
+    }
+
+    "haveDimensionNegative" {
+        shouldAssert {
+            el("h1") shouldNot haveDimension(784 to 37)
+        }
+
+        shouldAssert {
+            el("h1") should haveDimension(Dimension(100, 37))
+        }
     }
 
     "haveAttribute" {
@@ -143,5 +265,23 @@ class FluentWebElementMatchersSpec : MatcherBase({
         el("#choice #first") shouldNot haveAttributeValue("value", "other")
         el("#choice #first").shouldNotHaveAttributeValue("value", "other")
         el("#choice #first").shouldNotHaveAttributeValue("value" to "other")
+    }
+
+    "haveAttributeNegative" {
+        shouldAssert {
+            el("#choice #first") shouldNot haveAttribute("value")
+        }
+
+        shouldAssert {
+            el("#choice #first") should haveAttribute("other")
+        }
+
+        shouldAssert {
+            el("#choice #first") shouldNot haveAttributeValue("value", "first")
+        }
+
+        shouldAssert {
+            el("#choice #first") should haveAttributeValue("value", "other")
+        }
     }
 })
