@@ -78,8 +78,8 @@ jobs:
         run: cd examples/kotest && ./gradlew dependencies
       - name: Compile gradle example
         run: cd examples/quickstart-firefox && ./gradlew compileTestKotlin && cd ../kotest && ./gradlew compileTestKotlin
-      - name: Run gradle kotest example
-        run: cd examples/kotest && ./gradlew -i check
+#      - name: Run gradle kotest example
+#        run: cd examples/kotest && ./gradlew -i check
 
   compile-maven-examples:
     runs-on: ubuntu-latest

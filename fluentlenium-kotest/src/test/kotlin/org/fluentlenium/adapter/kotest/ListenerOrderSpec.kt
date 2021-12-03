@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.kotest
 
+import io.kotest.core.extensions.Extension
 import io.kotest.core.listeners.AfterEachListener
 import io.kotest.core.listeners.AfterTestListener
 import io.kotest.core.listeners.BeforeEachListener
@@ -34,20 +35,25 @@ class ListenerOrderSpec : StringSpec() {
         println("f afterTest")
     }
 
+    override fun extensions(): List<Extension> = listOf(beforeTestListener("extensions()"))
+
     init {
-        register(object : BeforeTestListener, BeforeEachListener {
-            override suspend fun beforeAny(testCase: TestCase) {
-                println("e beforeAny")
-            }
 
-            override suspend fun beforeTest(testCase: TestCase) {
-                println("e beforeTest")
-            }
+        beforeEach {
+            println("d beforeEach")
+        }
 
-            override suspend fun beforeEach(testCase: TestCase) {
-                println("e beforeEach")
-            }
-        })
+        beforeAny {
+            println("d beforeAny")
+        }
+
+        beforeTest {
+            println("d beforeTest")
+        }
+
+        register(beforeTestListener("init"))
+
+        extension(beforeTestListener("extension"))
 
         register(object : AfterTestListener, AfterEachListener {
             override suspend fun afterAny(testCase: TestCase, result: TestResult) {
@@ -63,17 +69,7 @@ class ListenerOrderSpec : StringSpec() {
             }
         })
 
-        beforeEach {
-            println("d beforeEach")
-        }
 
-        beforeAny {
-            println("d beforeAny")
-        }
-
-        beforeTest {
-            println("d beforeTest")
-        }
 
         "test" {
             println("run test")
@@ -89,6 +85,20 @@ class ListenerOrderSpec : StringSpec() {
 
         afterEach {
             println("d afterEach")
+        }
+    }
+
+    private fun beforeTestListener(suffix: String = "") = object : BeforeTestListener, BeforeEachListener {
+        override suspend fun beforeAny(testCase: TestCase) {
+            println("e beforeAny $suffix")
+        }
+
+        override suspend fun beforeTest(testCase: TestCase) {
+            println("e beforeTest $suffix")
+        }
+
+        override suspend fun beforeEach(testCase: TestCase) {
+            println("e beforeEach $suffix")
         }
     }
 }
