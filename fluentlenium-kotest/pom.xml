@@ -12,8 +12,8 @@
     <description>Kotest Adapter for FluentLenium</description>
 
     <properties>
-        <kotlin.version>1.5.31</kotlin.version>
-        <kotest.version>4.6.3</kotest.version>
+        <kotlin.version>1.6.0</kotlin.version>
+        <kotest.version>5.0.1</kotest.version>
         <dokka.version>1.5.0</dokka.version>
     </properties>
 
@@ -23,6 +23,14 @@
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
                 <version>5.8.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.kotest</groupId>
+                <artifactId>kotest-bom</artifactId>
+                <version>${kotest.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

@@ -1,11 +1,14 @@
 package org.fluentlenium.adapter.kotest.internal
 
 import io.kotest.common.ExperimentalKotest
-import io.kotest.core.listeners.TestListener
+import io.kotest.core.extensions.Extension
+import io.kotest.core.listeners.AfterEachListener
+import io.kotest.core.listeners.AfterSpecListener
+import io.kotest.core.listeners.BeforeSpecListener
+import io.kotest.core.listeners.BeforeTestListener
 import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
-import io.kotest.core.test.TestStatus
 import io.kotest.core.test.TestType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -42,16 +45,21 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
     override fun getConfiguration(): Configuration = configurationOverride
 
-    val listener: TestListener = object : TestListener {
+    val extension: Extension = object : BeforeSpecListener, AfterSpecListener, BeforeTestListener, AfterEachListener {
+
         override suspend fun beforeSpec(spec: Spec) =
             this@KoTestFluentAdapter.beforeSpec()
+
+        override suspend fun afterSpec(spec: Spec) {
+            this@KoTestFluentAdapter.afterSpec(spec)
+        }
 
         override suspend fun beforeTest(testCase: TestCase) {
             this@KoTestFluentAdapter.beforeTest(testCase)
         }
 
-        override suspend fun afterSpec(spec: Spec) {
-            this@KoTestFluentAdapter.afterSpec(spec)
+        override suspend fun afterEach(testCase: TestCase, result: TestResult) {
+            this@KoTestFluentAdapter.afterEach(testCase, result)
         }
     }
 
@@ -68,14 +76,14 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
         val singleThreadPerTest =
             testCase.spec.dispatcherAffinity ?: testCase.spec.dispatcherAffinity()
-                ?: io.kotest.core.config.configuration.dispatcherAffinity
+                ?: io.kotest.core.config.Defaults.dispatcherAffinity
 
         require(singleThreadPerTest) {
             "fluentlenium-kotest is incompatible with dispatcherAffinity=false. set to true!"
         }
 
         val testClass = testCase.spec.javaClass
-        val testName = testCase.displayName
+        val testName = testCase.name.testName
 
         currentTestName.set(testName)
 
@@ -99,16 +107,17 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
         FluentTestRunnerAdapter.classDriverCleanup(spec.javaClass)
     }
 
-    fun afterTest(testCase: TestCase, result: TestResult) {
-
+    fun afterEach(testCase: TestCase, result: TestResult) {
         if (testCase.type == TestType.Container)
             return
 
         val testClass = testCase.spec.javaClass
-        val testName = testCase.displayName
+        val testName = testCase.name.testName
 
-        if (result.status == TestStatus.Error || result.status == TestStatus.Failure) {
-            failed(result.error, testClass, testName)
+        when (result) {
+            is TestResult.Error -> failed(result.errorOrNull, testClass, testName)
+            is TestResult.Failure -> failed(result.errorOrNull, testClass, testName)
+            else -> Unit
         }
 
         val sharedWebDriver = SharedWebDriverContainer.INSTANCE
