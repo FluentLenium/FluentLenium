@@ -43,6 +43,14 @@ class AlertMatchersSpec : MatcherBase({
         jq("#alertButton").click()
 
         shouldAssert {
+            alert() should haveText("should fail")
+        }
+
+        shouldAssert {
+            alert().shouldHaveText("should fail")
+        }
+
+        shouldAssert {
             alert() shouldNot haveText("Hello! I am an alert box")
         }
         shouldAssert {
