@@ -6,6 +6,7 @@ import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
 import org.fluentlenium.adapter.kotest.jq
 import org.fluentlenium.kotest.matchers.config.MatcherBase
+import org.fluentlenium.kotest.matchers.config.shouldAssert
 import org.openqa.selenium.Dimension
 
 class FluentListMatchersSpec : MatcherBase(
@@ -23,12 +24,32 @@ class FluentListMatchersSpec : MatcherBase(
             jq("h1").shouldBePresent()
         }
 
+        "presentNegative" {
+            shouldAssert {
+                jq("#doesNotExist") should bePresent()
+            }
+
+            shouldAssert {
+                jq("h1") shouldNot bePresent()
+            }
+        }
+
         "haveText" {
             jq("#choice option") should haveText("First Value")
             jq("#choice option").shouldHaveText("First Value")
 
             jq("#choice option") shouldNot haveText("Not")
             jq("#choice option").shouldNotHaveText("Not")
+        }
+
+        "haveTextNegative" {
+            shouldAssert {
+                jq("#choice option") shouldNot haveText("First Value")
+            }
+
+            shouldAssert {
+                jq("#choice option") should haveText("Not")
+            }
         }
 
         "haveTextContaining" {
@@ -39,6 +60,16 @@ class FluentListMatchersSpec : MatcherBase(
             jq("#choice option").shouldNotHaveTextContaining("Not")
         }
 
+        "haveTextContainingNegative" {
+            shouldAssert {
+                jq("#choice option") shouldNot haveTextContaining("First V")
+            }
+
+            shouldAssert {
+                jq("#choice option") should haveTextContaining("Not")
+            }
+        }
+
         "haveTextMatching" {
             jq("#choice option") should haveTextMatching("First V.*")
             jq("#choice option").shouldHaveTextMatching("First V.*")
@@ -47,12 +78,30 @@ class FluentListMatchersSpec : MatcherBase(
             jq("#choice option").shouldNotHaveTextMatching("Not")
         }
 
+        "haveTextMatchingNegative" {
+            shouldAssert {
+                jq("#choice option") shouldNot haveTextMatching("First V.*")
+            }
+            shouldAssert {
+                jq("#choice option") should haveTextMatching("Not")
+            }
+        }
+
         "haveId" {
             jq("#choice option") should haveId("first")
             jq("#choice option").shouldHaveId("first")
 
             jq("#choice option") shouldNot haveId("other")
             jq("#choice option").shouldNotHaveId("other")
+        }
+
+        "haveIdNegative" {
+            shouldAssert {
+                jq("#choice option") shouldNot haveId("first")
+            }
+            shouldAssert {
+                jq("#choice option") should haveId("other")
+            }
         }
 
         "haveClass" {
@@ -67,6 +116,16 @@ class FluentListMatchersSpec : MatcherBase(
             jq("button").shouldNotHaveClass("classx")
         }
 
+        "haveClassNegative" {
+            shouldAssert {
+                jq("button") shouldNot haveClass("class1")
+            }
+
+            shouldAssert {
+                jq("button") should haveClass("classx")
+            }
+        }
+
         "haveName" {
             jq("span.small") should haveName("name")
             jq("span.small").shouldHaveName("name")
@@ -76,12 +135,30 @@ class FluentListMatchersSpec : MatcherBase(
             jq("span.small").shouldNotHaveName("other")
         }
 
+        "haveNameNegative" {
+            shouldAssert {
+                jq("span.small") shouldNot haveName("name")
+            }
+            shouldAssert {
+                jq("span.small") should haveName("other")
+            }
+        }
+
         "haveValue" {
             jq("#choice option") should haveValue("first")
             jq("#choice option").shouldHaveValue("first")
 
             jq("#choice option") shouldNot haveValue("other")
             jq("#choice option").shouldNotHaveValue("other")
+        }
+
+        "haveValueNegative" {
+            shouldAssert {
+                jq("#choice option") shouldNot haveValue("first")
+            }
+            shouldAssert {
+                jq("#choice option") should haveValue("other")
+            }
         }
 
         "haveAttribute" {
@@ -106,6 +183,27 @@ class FluentListMatchersSpec : MatcherBase(
             jq("#choice #first").shouldNotHaveAttributeValue("value" to "other")
         }
 
+        "haveAttributeNegative" {
+            shouldAssert {
+                jq("#choice option") shouldNot haveAttribute("value")
+            }
+            shouldAssert {
+                jq("#choice option") shouldNot haveAttributeValue(
+                    "value",
+                    "first"
+                )
+            }
+            shouldAssert {
+                jq("#choice option") should haveAttribute("other")
+            }
+            shouldAssert {
+                jq("#choice option") should haveAttributeValue(
+                    "value",
+                    "other"
+                )
+            }
+        }
+
         "haveTagName" {
             jq("h1") should haveTagName("h1")
             jq("h1").shouldHaveTagName("h1")
@@ -121,6 +219,26 @@ class FluentListMatchersSpec : MatcherBase(
 
             jq("h1") shouldNot haveDimension(Dimension(100, 37))
             jq("h1").shouldNotHaveDimension(Dimension(100, 37))
+        }
+
+        "haveTagNameNegative" {
+            shouldAssert {
+                jq("h1") shouldNot haveTagName("h1")
+            }
+
+            shouldAssert {
+                jq("h1") should haveTagName("h2")
+            }
+        }
+
+        "haveDimensionNegative" {
+            shouldAssert {
+                jq("h1") shouldNot haveDimension(784 to 37)
+            }
+
+            shouldAssert {
+                jq("h1") should haveDimension(Dimension(100, 37))
+            }
         }
     }
 )
