@@ -42,5 +42,4 @@ class ExtensionsKtTest : FluentStringSpec({
             it shouldBe "Small 1"
         }
     }
-
 })

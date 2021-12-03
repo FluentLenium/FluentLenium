@@ -10,5 +10,4 @@ class KoTestFluentAdapterSpec : StringSpec({
             KoTestFluentAdapter().ensureTestStarted()
         }
     }
-
 })
