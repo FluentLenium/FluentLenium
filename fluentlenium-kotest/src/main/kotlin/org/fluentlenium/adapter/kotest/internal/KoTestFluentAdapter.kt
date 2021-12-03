@@ -1,11 +1,14 @@
 package org.fluentlenium.adapter.kotest.internal
 
 import io.kotest.common.ExperimentalKotest
-import io.kotest.core.listeners.TestListener
+import io.kotest.core.extensions.Extension
+import io.kotest.core.listeners.AfterEachListener
+import io.kotest.core.listeners.AfterSpecListener
+import io.kotest.core.listeners.BeforeSpecListener
+import io.kotest.core.listeners.BeforeTestListener
 import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
-import io.kotest.core.test.TestStatus
 import io.kotest.core.test.TestType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -42,85 +45,101 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
     override fun getConfiguration(): Configuration = configurationOverride
 
-    @OptIn(ExperimentalKotest::class)
-    fun listener(): TestListener = object : TestListener {
-        override suspend fun beforeSpec(spec: Spec) {
-            withContext(Dispatchers.IO) {
-                SeleniumVersionChecker.checkSeleniumVersion()
-            }
+    val extension: Extension = object : BeforeSpecListener, AfterSpecListener, BeforeTestListener, AfterEachListener {
+
+        override suspend fun beforeSpec(spec: Spec) =
+            this@KoTestFluentAdapter.beforeSpec()
+
+        override suspend fun afterSpec(spec: Spec) {
+            this@KoTestFluentAdapter.afterSpec(spec)
         }
 
         override suspend fun beforeTest(testCase: TestCase) {
-            if (testCase.type == TestType.Container)
-                return
-
-            val singleThreadPerTest =
-                testCase.spec.dispatcherAffinity ?: testCase.spec.dispatcherAffinity()
-                    ?: io.kotest.core.config.configuration.dispatcherAffinity
-
-            require(singleThreadPerTest) {
-                "fluentlenium-kotest is incompatible with dispatcherAffinity=false. set to true!"
-            }
-
-            val thisListener = this
-            val testClass = testCase.spec.javaClass
-            val testName = testCase.displayName
-
-            currentTestName.set(testName)
-
-            val theTestInstance =
-                testCase.spec as? IFluentAdapter ?: throw IllegalArgumentException()
-
-            val driver =
-                getTestDriver(
-                    testCase.spec.javaClass,
-                    testName,
-                    theTestInstance::newWebDriver,
-                    thisListener::failed,
-                    configuration,
-                    sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle)
-                )
-
-            initFluent(driver.driver, testCase.spec)
+            this@KoTestFluentAdapter.beforeTest(testCase)
         }
 
-        override suspend fun afterTest(testCase: TestCase, result: TestResult) {
+        override suspend fun afterEach(testCase: TestCase, result: TestResult) {
+            this@KoTestFluentAdapter.afterEach(testCase, result)
+        }
+    }
 
-            if (testCase.type == TestType.Container)
-                return
+    suspend fun beforeSpec() {
+        withContext(Dispatchers.IO) {
+            SeleniumVersionChecker.checkSeleniumVersion()
+        }
+    }
 
-            val testClass = testCase.spec.javaClass
-            val testName = testCase.displayName
+    @ExperimentalKotest
+    fun beforeTest(testCase: TestCase) {
+        if (testCase.type == TestType.Container)
+            return
 
-            if (result.status == TestStatus.Error || result.status == TestStatus.Failure) {
-                failed(result.error, testClass, testName)
-            }
+        val singleThreadPerTest =
+            testCase.spec.dispatcherAffinity ?: testCase.spec.dispatcherAffinity()
+                ?: io.kotest.core.config.Defaults.dispatcherAffinity
 
-            val sharedWebDriver = SharedWebDriverContainer.INSTANCE
-                .getDriver(sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle))
-
-            quitMethodAndThreadDrivers(driverLifecycle, sharedWebDriver)
-            deleteCookies(sharedWebDriver, configuration)
-            releaseFluent()
-
-            currentTestName.set(null)
+        require(singleThreadPerTest) {
+            "fluentlenium-kotest is incompatible with dispatcherAffinity=false. set to true!"
         }
 
-        fun failed(error: Throwable?, testClass: Class<*>, testName: String) {
-            if (isFluentControlAvailable && !ScreenshotUtil.isIgnoredException(error)) {
-                doScreenshot(testClass, testName, this@KoTestFluentAdapter, configuration)
-                doHtmlDump(testClass, testName, this@KoTestFluentAdapter, configuration)
-            }
+        val testClass = testCase.spec.javaClass
+        val testName = testCase.name.testName
+
+        currentTestName.set(testName)
+
+        val theTestInstance =
+            testCase.spec as? IFluentAdapter ?: throw IllegalArgumentException()
+
+        val driver =
+            getTestDriver(
+                testCase.spec.javaClass,
+                testName,
+                theTestInstance::newWebDriver,
+                this@KoTestFluentAdapter::failed,
+                configuration,
+                sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle)
+            )
+
+        initFluent(driver.driver, testCase.spec)
+    }
+
+    fun afterSpec(spec: Spec) {
+        FluentTestRunnerAdapter.classDriverCleanup(spec.javaClass)
+    }
+
+    fun afterEach(testCase: TestCase, result: TestResult) {
+        if (testCase.type == TestType.Container)
+            return
+
+        val testClass = testCase.spec.javaClass
+        val testName = testCase.name.testName
+
+        when (result) {
+            is TestResult.Error -> failed(result.errorOrNull, testClass, testName)
+            is TestResult.Failure -> failed(result.errorOrNull, testClass, testName)
+            else -> Unit
         }
 
-        override suspend fun afterSpec(spec: Spec) {
-            FluentTestRunnerAdapter.classDriverCleanup(spec.javaClass)
+        val sharedWebDriver = SharedWebDriverContainer.INSTANCE
+            .getDriver(sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle))
+
+        quitMethodAndThreadDrivers(driverLifecycle, sharedWebDriver)
+        deleteCookies(sharedWebDriver, configuration)
+        releaseFluent()
+
+        currentTestName.set(null)
+    }
+
+    private fun failed(error: Throwable?, testClass: Class<*>, testName: String) {
+        if (isFluentControlAvailable && !ScreenshotUtil.isIgnoredException(error)) {
+            doScreenshot(testClass, testName, this@KoTestFluentAdapter, configuration)
+            doHtmlDump(testClass, testName, this@KoTestFluentAdapter, configuration)
         }
     }
 
     fun ensureTestStarted() {
-        if (currentTestName.get() == null) {
-            throw IllegalStateException("FluentLenium is not yet available! Make sure to use FluentLenium only within the innermost Kotest test block!")
+        checkNotNull(currentTestName.get()) {
+            "FluentLenium is not yet available! Make sure to use FluentLenium only within the innermost Kotest test block!"
         }
     }
 }
