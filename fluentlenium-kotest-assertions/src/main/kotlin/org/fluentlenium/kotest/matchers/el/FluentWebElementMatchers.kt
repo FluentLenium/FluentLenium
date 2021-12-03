@@ -19,7 +19,9 @@ fun bePresent() = object : Matcher<FluentWebElement> {
     override fun test(value: FluentWebElement): MatcherResult =
         MatcherResult(
             value.present(),
-            { "Element '$value' should be present" },
+            {
+                "Element '$value' should be present"
+            },
             {
                 "Element '$value' should not be present"
             }
