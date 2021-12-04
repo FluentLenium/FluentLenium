@@ -52,7 +52,7 @@ jobs:
         with:
           java-version: 11
       - name: Java 11 - unit & integration tests
-        run: mvn -B -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml -Dtest=*/it/* -DfailIfNoTests=false
+        run: mvn -B -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml -Dtest=*/it/* -DfailIfNoTests=false
 
   java11-javadoc:
     runs-on: ubuntu-latest
