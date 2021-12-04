@@ -15,7 +15,7 @@
         <fluentlenium.version>${project.version}</fluentlenium.version>
         <spock.version>1.3-groovy-2.5</spock.version>
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-        <selenium.version>4.0.0</selenium.version>
+        <selenium.version>4.1.0</selenium.version>
     </properties>
 
     <dependencies>
@@ -49,7 +49,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-firefox-driver</artifactId>
-            <version>4.0.0</version>
+            <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
