@@ -39,6 +39,8 @@ public class ExampleFluentTest extends FluentTest {
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setCapability("noReset", "false");
         AppiumServiceBuilder builder = new AppiumServiceBuilder()
+                // depending on your OS and appium installation you might need to configure this
+                // .withAppiumJS(new File("..."))
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
                 .withCapabilities(cap)
