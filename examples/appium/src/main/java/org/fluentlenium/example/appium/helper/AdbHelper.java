@@ -10,7 +10,7 @@ public class AdbHelper {
     public static final String COMMAND = "command";
     public static final String ARGS = "args";
 
-    public static void typeText(String textToType, AppiumDriver<?> driver) {
+    public static void typeText(String textToType, AppiumDriver driver) {
         List<String> textInputArgs = List.of("text", textToType);
         Map<String, Object> adbTextInput = Map.of(
                 COMMAND, "input",

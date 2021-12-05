@@ -22,7 +22,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = Config.class)
 public class ExampleFluentTest extends FluentTest {
 
-    protected AppiumDriver<?> appiumDriver;
+    protected AppiumDriver appiumDriver;
     protected static AppiumDriverLocalService service;
 
     @Autowired
@@ -30,7 +30,7 @@ public class ExampleFluentTest extends FluentTest {
 
     @Override
     public WebDriver newWebDriver() {
-        appiumDriver = new AppiumDriver<>(service, getCapabilities());
+        appiumDriver = new AppiumDriver(service, getCapabilities());
         return appiumDriver;
     }
 
