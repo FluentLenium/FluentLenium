@@ -14,7 +14,7 @@
 
     <properties>
         <fluentlenium.version>${project.version}</fluentlenium.version>
-        <spring.version>5.3.7</spring.version>
+        <spring.version>5.3.13</spring.version>
         <selenium.version>4.1.0</selenium.version>
     </properties>
 
