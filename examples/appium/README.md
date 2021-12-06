@@ -5,16 +5,17 @@ a) Setup mobile environment
 - [Android Guide](https://medium.com/2359media/tutorial-automated-testing-on-android-and-ios-with-appium-testng-and-java-on-mac-210119edf323)
 - [Appium Install](https://www.swtestacademy.com/appium-tutorial/)
 
-b) Get sample apps:
+- ensure that environment variables are properly setup:
+  - e.g. `export ANDROID_HOME=...` (Android)
+
+b) The Sample app that is being tested. It will be downloaded by the Maven build to the _target_ folder
 - [iOS](https://github.com/King-of-Spades/AppCenter-Samples/tree/master/Appium/iOS)
 - [Android](https://github.com/King-of-Spades/AppCenter-Samples/tree/master/Appium/Android)
 
-c) Change app paths in config
+c) start the Android Emulator and/or the iPhone Simulator locally
 
-d) Run Android Emulator and iPhone Simulator locally
+d) Run test
 
-e) Run test
+`mvn clean test -PAndroid` (Android)
 
-`mvn clean test -Dspring.profiles.active=android -Dtest=AndroidSwiftNotesApp`
-
-`mvn clean test -Dspring.profiles.active=iphone -Dtest=IosUITestDemo`
+`mvn clean test -iOS` (iOS)
