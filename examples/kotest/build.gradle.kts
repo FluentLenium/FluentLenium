@@ -32,6 +32,7 @@ tasks.withType<Test>().configureEach {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+
     val fluentleniumVersion = "4.8.1-SNAPSHOT"
     testImplementation("org.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
     testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
@@ -43,11 +44,17 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core")
 
     testImplementation("io.github.bonigarcia:webdrivermanager:5.0.3")
-    testImplementation("org.seleniumhq.selenium:selenium-api:3.141.59")
-    testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:3.141.59")
+    testImplementation("org.seleniumhq.selenium:selenium-api:4.1.0")
+    testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:4.1.0")
+    testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v95:4.1.0")
 
     testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.0.1")
     testImplementation("org.testcontainers:selenium:1.16.2")
 
     testImplementation("ch.qos.logback:logback-classic:1.2.7")
+}
+
+configurations.all {
+    exclude(group = "io.netty", module = "netty-transport-native-epoll")
+    exclude(group = "io.netty", module = "netty-transport-native-kqueue")
 }

@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.junit.jupiter;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -33,6 +34,7 @@ class FluentJUnitJupiterTest {
     @BeforeEach
     void beforeEach() throws Exception {
         MockitoAnnotations.initMocks(this);
+        WebDriverManager.chromedriver().setup();
 
         sut = new FluentJUnitJupiter();
         test = spy(new Test1());

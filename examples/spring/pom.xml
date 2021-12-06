@@ -12,7 +12,7 @@
 
     <properties>
         <fluentlenium.version>${project.version}</fluentlenium.version>
-        <selenium.version>3.141.59</selenium.version>
+        <selenium.version>4.1.0</selenium.version>
     </properties>
 
     <build>
@@ -84,6 +84,12 @@
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
             <version>7.5.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

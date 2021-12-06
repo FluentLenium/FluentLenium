@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.support.FindBy;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
 class IsAtTest extends IntegrationFluentTest {
     @Page
@@ -54,7 +55,7 @@ class IsAtTest extends IntegrationFluentTest {
     void testIsAtParametersQuantifiersPositive() {
         String parameter = "+X2H2KPV_1a=FX2?U-8GJL-RSVA-VRIT*-EA1U#";
         pageOkParameter.go(parameter);
-        pageOkParameter.isAt(parameter);
+        assertThat(url()).contains(parameter);
     }
 
     @Test
@@ -69,8 +70,9 @@ class IsAtTest extends IntegrationFluentTest {
 
     @Test
     void testIsAtMultipleParametersPositive() {
-        pageIsAtMultipleParameters.go("?X2H2KPV_1a=FX2U-8GJL-RSVA-VRIT-EA1U#", "String", "2");
-        pageIsAtMultipleParameters.isAt("?X2H2KPV_1a=FX2U-8GJL-RSVA-VRIT-EA1U#", "String", "2");
+        String param = "?X2H2KPV_1a=FX2U-8GJL-RSVA-VRIT-EA1U#";
+        pageIsAtMultipleParameters.go(param, "String", "2");
+        assertThat(url()).contains(param);
     }
 
     @FindBy(css = "#oneline")

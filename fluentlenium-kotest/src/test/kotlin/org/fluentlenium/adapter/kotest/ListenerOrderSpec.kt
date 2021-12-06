@@ -69,8 +69,6 @@ class ListenerOrderSpec : StringSpec() {
             }
         })
 
-
-
         "test" {
             println("run test")
         }

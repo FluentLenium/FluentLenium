@@ -1,9 +1,5 @@
 package org.fluentlenium.core;
 
-import static org.fluentlenium.core.domain.ElementUtils.getWrappedElement;
-import static org.fluentlenium.utils.Preconditions.checkArgument;
-import static org.fluentlenium.utils.Preconditions.checkState;
-
 import io.appium.java_client.AppiumDriver;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.core.action.KeyboardActions;
@@ -22,9 +18,8 @@ import org.fluentlenium.core.events.EventsRegistry;
 import org.fluentlenium.core.inject.ContainerContext;
 import org.fluentlenium.core.inject.DefaultContainerInstantiator;
 import org.fluentlenium.core.inject.FluentInjector;
-import org.fluentlenium.core.inject.Unshadower;
-import org.fluentlenium.core.performance.PerformanceTiming;
 import org.fluentlenium.core.performance.DefaultPerformanceTiming;
+import org.fluentlenium.core.performance.PerformanceTiming;
 import org.fluentlenium.core.script.FluentJavascript;
 import org.fluentlenium.core.search.Search;
 import org.fluentlenium.core.wait.FluentWait;
@@ -32,21 +27,17 @@ import org.fluentlenium.utils.UrlUtils;
 import org.fluentlenium.utils.chromium.ChromiumApi;
 import org.fluentlenium.utils.chromium.ChromiumControl;
 import org.fluentlenium.utils.chromium.ChromiumControlImpl;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WrapsElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.Set;
+
+import static org.fluentlenium.core.domain.ElementUtils.getWrappedElement;
+import static org.fluentlenium.utils.Preconditions.checkArgument;
+import static org.fluentlenium.utils.Preconditions.checkState;
 
 /**
  * Wrapper class for a {@link WebDriver} instance which also offers shortcut and convenience methods,
@@ -156,11 +147,11 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
     }
 
     @Override
-    public AppiumDriver<?> getAppiumDriver() {
+    public AppiumDriver getAppiumDriver() {
         if (!(driver instanceof AppiumDriver)) {
             throw new WrongDriverException("Use getDriver() method for web automation");
         }
-        return (AppiumDriver<?>) driver;
+        return (AppiumDriver) driver;
     }
 
     @Override

@@ -11,7 +11,7 @@ import org.fluentlenium.core.events.annotations.BeforeFindBy;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.WrapsElement;
 
 import java.util.ArrayList;
 import java.util.List;

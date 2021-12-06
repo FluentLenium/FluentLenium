@@ -36,5 +36,4 @@ class ExpectMetadataSpec : FluentExpectSpec({
             testClass shouldBe ExpectMetadataSpec::class.java
         }
     }
-
 })

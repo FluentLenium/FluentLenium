@@ -5,7 +5,8 @@ name: Java pipeline
 
 on:
   push:
-    branches: [ develop ]
+    branches: 
+      - develop
   pull_request:
     branches: [ develop ]
 
@@ -51,7 +52,7 @@ jobs:
         with:
           java-version: 11
       - name: Java 11 - unit & integration tests
-        run: mvn -B -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml -Dtest=*/it/* -DfailIfNoTests=false
+        run: mvn -B -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml -Dtest=*/it/* -DfailIfNoTests=false
 
   java11-javadoc:
     runs-on: ubuntu-latest
@@ -74,12 +75,10 @@ jobs:
           java-version: 11
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
-      - name: Show dependencies
-        run: cd examples/kotest && ./gradlew dependencies
       - name: Compile gradle example
         run: cd examples/quickstart-firefox && ./gradlew compileTestKotlin && cd ../kotest && ./gradlew compileTestKotlin
-#      - name: Run gradle kotest example
-#        run: cd examples/kotest && ./gradlew -i check
+      - name: Run gradle kotest example
+        run: cd examples/kotest && ./gradlew -i check
 
   compile-maven-examples:
     runs-on: ubuntu-latest

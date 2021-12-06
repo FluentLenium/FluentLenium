@@ -2,8 +2,6 @@ package org.fluentlenium.test.actions.window;
 
 import org.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,8 +40,4 @@ class WindowActionsTest extends IntegrationFluentTest {
         assertThat(getDriver().getWindowHandle()).isEqualTo(hWnd);
     }
 
-    @Override
-    public WebDriver newWebDriver() {
-        return new HtmlUnitDriver(true);
-    }
 }
