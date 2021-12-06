@@ -24,7 +24,7 @@ class DontRunTestsWhenInitFailTest {
 
         @Override
         public WebDriver newWebDriver() {
-            throw new RuntimeException("Error");
+            throw new RuntimeException("simulated driver initialization failure");
         }
 
         @Test
@@ -46,7 +46,7 @@ class DontRunTestsWhenInitFailTest {
         launcher.execute(request);
 
         assertThat(getNumberOfFailures(listener)).isEqualTo(1);
-        assertThat(getFailureMessage(listener, 0)).contains("Error");
+        assertThat(getFailureMessage(listener, 0)).contains("simulated driver initialization failure");
     }
 
     private int getNumberOfFailures(SummaryGeneratingListener listener) {

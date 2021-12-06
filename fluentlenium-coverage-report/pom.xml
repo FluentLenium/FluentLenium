@@ -10,6 +10,10 @@
     <artifactId>fluentlenium-coverage-report</artifactId>
     <name>FluentLenium Coverage Report</name>
 
+    <properties>
+        <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.fluentlenium</groupId>
