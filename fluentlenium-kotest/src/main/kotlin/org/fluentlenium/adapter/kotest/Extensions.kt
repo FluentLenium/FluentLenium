@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.kotest
 
-import io.appium.java_client.MobileBy
+import io.appium.java_client.AppiumBy
 import org.fluentlenium.core.domain.FluentList
 import org.fluentlenium.core.domain.FluentWebElement
 import org.fluentlenium.core.search.SearchControl
@@ -53,5 +53,5 @@ fun <E : FluentWebElement> SearchControl<E>.jq(locator: By, vararg filters: Sear
  * @param filters filters set
  * @return list of elements
  */
-fun <E : FluentWebElement> SearchControl<E>.jq(locator: MobileBy, vararg filters: SearchFilter): FluentList<E> =
+fun <E : FluentWebElement> SearchControl<E>.jq(locator: AppiumBy, vararg filters: SearchFilter): FluentList<E> =
     `$`(locator, *filters)
