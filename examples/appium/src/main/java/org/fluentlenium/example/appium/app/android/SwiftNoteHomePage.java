@@ -1,6 +1,5 @@
 package org.fluentlenium.example.appium.app.android;
 
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -8,11 +7,13 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import java.util.concurrent.TimeUnit;
 
 import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
+import static org.fluentlenium.core.filter.FilterConstructor.withId;
+import static org.openqa.selenium.By.id;
 
 public class SwiftNoteHomePage extends FluentPage {
 
 
-    @AndroidFindBy(accessibility = "Search")
+    @AndroidFindBy(id = "action_search")
     private FluentWebElement searchButton;
 
     @AndroidFindBy(id = "com.moonpi.swiftnotes:id/newNote")
@@ -29,13 +30,13 @@ public class SwiftNoteHomePage extends FluentPage {
     }
 
     public SwiftNoteHomePage verifyNoteCount(int expectedCount) {
-        assertThat($(MobileBy.id("com.moonpi.swiftnotes:id/relativeLayout"))).hasSize(expectedCount);
+        assertThat($(id("com.moonpi.swiftnotes:id/relativeLayout"))).hasSize(expectedCount);
         return this;
     }
 
     public SwiftNoteHomePage search(String searchPhrase) {
-        el(MobileBy.AccessibilityId("Search")).click();
-        FluentWebElement searchInput = el(MobileBy.id("com.moonpi.swiftnotes:id/search_src_text"));
+        el(withId("Search")).click();
+        FluentWebElement searchInput = el(id("com.moonpi.swiftnotes:id/search_src_text"));
         await().until(searchInput).displayed();
         searchInput.fill().with(searchPhrase);
         return this;
