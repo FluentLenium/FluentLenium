@@ -1,19 +1,21 @@
 package org.fluentlenium.it;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.fluentlenium.adapter.testng.FluentTestNg;
 import org.fluentlenium.core.FluentControl;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
 import java.util.Date;
 
 public class FluentIntegTestNg extends FluentTestNg {
-    @Override
-    public WebDriver newWebDriver() {
-        return new HtmlUnitDriver(true);
+
+    @BeforeClass
+    public static void setUpChrome() {
+        WebDriverManager.chromedriver().setup();
     }
 
     @BeforeMethod

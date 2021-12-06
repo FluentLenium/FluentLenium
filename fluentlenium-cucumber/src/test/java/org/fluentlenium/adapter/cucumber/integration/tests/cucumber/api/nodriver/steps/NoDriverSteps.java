@@ -15,7 +15,6 @@ import org.openqa.selenium.WebDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@FluentConfiguration(webDriver = "htmlunit")
 public class NoDriverSteps extends FluentCucumberTest {
 
     @Page

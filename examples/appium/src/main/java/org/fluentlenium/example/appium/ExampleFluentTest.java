@@ -22,7 +22,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = Config.class)
 public class ExampleFluentTest extends FluentTest {
 
-    protected AppiumDriver<?> appiumDriver;
+    protected AppiumDriver appiumDriver;
     protected static AppiumDriverLocalService service;
 
     @Autowired
@@ -30,7 +30,7 @@ public class ExampleFluentTest extends FluentTest {
 
     @Override
     public WebDriver newWebDriver() {
-        appiumDriver = new AppiumDriver<>(service, getCapabilities());
+        appiumDriver = new AppiumDriver(service, getCapabilities());
         return appiumDriver;
     }
 
@@ -39,6 +39,8 @@ public class ExampleFluentTest extends FluentTest {
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setCapability("noReset", "false");
         AppiumServiceBuilder builder = new AppiumServiceBuilder()
+                // depending on your OS and appium installation you might need to configure this
+                // .withAppiumJS(new File("..."))
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
                 .withCapabilities(cap)

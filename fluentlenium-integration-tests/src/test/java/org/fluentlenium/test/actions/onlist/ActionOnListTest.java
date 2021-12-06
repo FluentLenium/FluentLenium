@@ -2,6 +2,12 @@ package org.fluentlenium.test.actions.onlist;
 
 import org.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -50,16 +56,12 @@ class ActionOnListTest extends IntegrationFluentTest {
     }
 
     @Test
-    void checkFillFileInput() {
-        goTo(DEFAULT_URL);
-        $("#fileUpload").fill().with("/data/fileName");
-        assertThat($("#fileUpload").first().value()).endsWith("fileName");
-    }
+    void checkFillFileInputUpperCase(@TempDir Path tempDir) throws IOException {
+        Path numbers = tempDir.resolve("numbers.txt");
+        Files.write(numbers, Arrays.asList("1", "2", "3"));
 
-    @Test
-    void checkFillFileInputUpperCase() {
         goTo(DEFAULT_URL);
-        $("#fileUpload2").fill().with("/data/fileName");
-        assertThat($("#fileUpload2").first().value()).endsWith("fileName");
+        $("#fileUpload2").fill().with(numbers.toString());
+        assertThat($("#fileUpload2").first().value()).endsWith("numbers.txt");
     }
 }

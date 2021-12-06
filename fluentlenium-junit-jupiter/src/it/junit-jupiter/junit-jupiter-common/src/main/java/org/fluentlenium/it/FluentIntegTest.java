@@ -2,19 +2,21 @@ package org.fluentlenium.it;
 
 import java.util.Date;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.fluentlenium.adapter.junit.jupiter.FluentTest;
 import org.fluentlenium.core.FluentControl;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.platform.launcher.TestExecutionListener;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class FluentIntegTest extends FluentTest implements TestExecutionListener {
-    @Override
-    public WebDriver newWebDriver() {
-        return new HtmlUnitDriver(true);
+
+    @BeforeAll
+    public static void setUpChrome() {
+        WebDriverManager.chromedriver().setup();
     }
 
     @BeforeEach

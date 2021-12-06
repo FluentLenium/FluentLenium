@@ -1,24 +1,10 @@
 package org.fluentlenium.core.domain;
 
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.Stack;
-import java.util.function.Function;
-
 import io.appium.java_client.AppiumDriver;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.SeleniumDriverControl;
-import org.fluentlenium.core.action.Fill;
-import org.fluentlenium.core.action.FillSelect;
-import org.fluentlenium.core.action.FluentActions;
-import org.fluentlenium.core.action.FluentJavascriptActionsImpl;
-import org.fluentlenium.core.action.KeyboardElementActions;
-import org.fluentlenium.core.action.MouseElementActions;
-import org.fluentlenium.core.action.WindowAction;
+import org.fluentlenium.core.action.*;
 import org.fluentlenium.core.alert.Alert;
 import org.fluentlenium.core.alert.AlertControl;
 import org.fluentlenium.core.capabilities.CapabilitiesControl;
@@ -50,20 +36,14 @@ import org.fluentlenium.core.search.SearchFilter;
 import org.fluentlenium.core.snapshot.SnapshotControl;
 import org.fluentlenium.core.wait.FluentWaitElement;
 import org.fluentlenium.utils.SupplierOfInstance;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.time.Duration;
+import java.util.*;
+import java.util.function.Function;
 
 /**
  * Wraps a Selenium {@link WebElement}. It provides an enhanced API to control selenium element.
@@ -239,7 +219,7 @@ public class FluentWebElement extends Component
     }
 
     @Override
-    public AppiumDriver<?> getAppiumDriver() {
+    public AppiumDriver getAppiumDriver() {
         return control.getAppiumDriver();
     }
 
@@ -671,7 +651,7 @@ public class FluentWebElement extends Component
         boolean displayed;
         try {
             displayed = webElement.isDisplayed();
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
             displayed = false;
         }
         return displayed;
@@ -687,7 +667,7 @@ public class FluentWebElement extends Component
         boolean enabled;
         try {
             enabled = webElement.isEnabled();
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | StaleElementReferenceException ex) {
             enabled = false;
         }
         return enabled;
@@ -703,7 +683,7 @@ public class FluentWebElement extends Component
         boolean selected;
         try {
             selected = webElement.isSelected();
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
             selected = false;
         }
         return selected;

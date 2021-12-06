@@ -1,15 +1,16 @@
 package org.fluentlenium.it;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.fluentlenium.adapter.testng.FluentTestNg;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class DefaultTest extends FluentTestNg {
-    @Override
-    public WebDriver newWebDriver() {
-        return new HtmlUnitDriver(true);
+
+    @BeforeClass
+    public static void setUpChrome() {
+        WebDriverManager.chromedriver().setup();
     }
 
     @Test

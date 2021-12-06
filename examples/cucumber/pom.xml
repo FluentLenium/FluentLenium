@@ -14,7 +14,7 @@
     <properties>
         <java.version>11</java.version>
         <fluentlenium.version>${project.version}</fluentlenium.version>
-        <selenium.version>3.141.59</selenium.version>
+        <selenium.version>4.1.0</selenium.version>
     </properties>
 
     <dependencies>
