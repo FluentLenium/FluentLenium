@@ -1,6 +1,6 @@
 package org.fluentlenium.adapter.kotest
 
-import io.appium.java_client.MobileBy
+import io.appium.java_client.AppiumBy
 import io.kotest.inspectors.forOne
 import io.kotest.matchers.shouldBe
 import org.fluentlenium.core.filter.FilterConstructor.withName
@@ -38,7 +38,7 @@ class ExtensionsKtTest : FluentStringSpec({
     }
 
     "jq(mobileBy,filter)" {
-        jq(MobileBy.name("name"), withName("name")).texts().forOne {
+        jq(AppiumBy.name("name"), withName("name")).texts().forOne {
             it shouldBe "Small 1"
         }
     }
