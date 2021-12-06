@@ -16,7 +16,11 @@ import org.fluentlenium.adapter.DefaultSharedMutator
 import org.fluentlenium.adapter.FluentAdapter
 import org.fluentlenium.adapter.FluentTestRunnerAdapter
 import org.fluentlenium.adapter.IFluentAdapter
-import org.fluentlenium.adapter.TestRunnerCommon.*
+import org.fluentlenium.adapter.TestRunnerCommon.deleteCookies
+import org.fluentlenium.adapter.TestRunnerCommon.doHtmlDump
+import org.fluentlenium.adapter.TestRunnerCommon.doScreenshot
+import org.fluentlenium.adapter.TestRunnerCommon.getTestDriver
+import org.fluentlenium.adapter.TestRunnerCommon.quitMethodAndThreadDrivers
 import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer
 import org.fluentlenium.configuration.Configuration
 import org.fluentlenium.utils.ScreenshotUtil
