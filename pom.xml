@@ -214,12 +214,12 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>5.8.1</version>
+                <version>5.8.2</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-launcher</artifactId>
-                <version>1.8.1</version>
+                <version>1.8.2</version>
             </dependency>
             <dependency>
                 <groupId>com.github.stephenc.jcip</groupId>
@@ -235,17 +235,17 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>5.3.12</version>
+                <version>5.3.13</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
-                <version>5.3.12</version>
+                <version>5.3.13</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>5.3.12</version>
+                <version>5.3.13</version>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
@@ -260,17 +260,17 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>4.0.0</version>
+                <version>4.1.0</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
-                <version>4.0.0</version>
+                <version>4.1.0</version>
             </dependency>
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.11.22</version>
+                <version>1.12.3</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -307,7 +307,7 @@
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-model</artifactId>
-                <version>3.8.3</version>
+                <version>3.8.4</version>
             </dependency>
             <dependency>
                 <groupId>io.github.bonigarcia</groupId>
@@ -324,13 +324,13 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.2.6</version>
+                <version>1.2.7</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
-                <version>1.2.6</version>
+                <version>1.2.7</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
