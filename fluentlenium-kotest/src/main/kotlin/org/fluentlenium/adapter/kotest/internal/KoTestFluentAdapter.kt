@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.kotest.internal
 
+import io.kotest.common.ExperimentalKotest
 import io.kotest.core.extensions.Extension
 import io.kotest.core.listeners.AfterEachListener
 import io.kotest.core.listeners.AfterSpecListener
@@ -64,6 +65,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
         }
     }
 
+    @ExperimentalKotest
     fun beforeTest(testCase: TestCase) {
         if (testCase.type == TestType.Container)
             return
