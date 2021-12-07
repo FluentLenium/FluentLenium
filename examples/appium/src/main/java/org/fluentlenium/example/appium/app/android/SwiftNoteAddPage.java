@@ -13,7 +13,7 @@ public class SwiftNoteAddPage extends FluentPage {
     @AndroidFindBy(id = "com.moonpi.swiftnotes:id/bodyEdit")
     private FluentWebElement noteElement;
 
-    @AndroidFindBy(xpath = "//android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ImageButton")
+    @AndroidFindBy(xpath = "//android.widget.ImageButton")
     private FluentWebElement backButton;
 
     @AndroidFindBy(id = "android:id/button1")

@@ -12,7 +12,7 @@ import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 public class SwiftNoteHomePage extends FluentPage {
 
 
-    @AndroidFindBy(accessibility = "Search")
+    @AndroidFindBy(id = "action_search")
     private FluentWebElement searchButton;
 
     @AndroidFindBy(id = "com.moonpi.swiftnotes:id/newNote")

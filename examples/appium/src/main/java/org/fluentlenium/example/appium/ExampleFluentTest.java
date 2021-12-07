@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
+import org.apache.commons.lang3.SystemUtils;
 import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.example.appium.config.Config;
 import org.fluentlenium.example.appium.device.Device;
@@ -17,6 +18,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
+import java.io.File;
+import java.util.concurrent.Callable;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = Config.class)
@@ -39,14 +45,21 @@ public class ExampleFluentTest extends FluentTest {
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setCapability("noReset", "false");
         AppiumServiceBuilder builder = new AppiumServiceBuilder()
-                // depending on your OS and appium installation you might need to configure this
-                // .withAppiumJS(new File("..."))
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
                 .withCapabilities(cap)
                 .withArgument(GeneralServerFlag.RELAXED_SECURITY)
                 .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
                 .withArgument(GeneralServerFlag.LOG_LEVEL, "error");
+
+        if (SystemUtils.IS_OS_MAC_OSX) {
+            File homebrewAppium = new File("/opt/homebrew/bin/appium");
+
+            if (homebrewAppium.exists()) {
+                builder = builder.withAppiumJS(homebrewAppium);
+            }
+        }
+
         service = AppiumDriverLocalService.buildService(builder);
         service.start();
     }
