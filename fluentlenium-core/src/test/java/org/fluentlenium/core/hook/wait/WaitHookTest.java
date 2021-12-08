@@ -127,6 +127,6 @@ public class WaitHookTest {
         WaitHook defaultWaitHook = new WaitHook(fluentControl, instantiator, () -> element, () -> locator, () -> "toString",
                 null);
 
-        assertThat(defaultWaitHook.getOptions()).isEqualToComparingFieldByField(new WaitHookOptions());
+        assertThat(defaultWaitHook.getOptions()).usingRecursiveComparison().isEqualTo(new WaitHookOptions());
     }
 }

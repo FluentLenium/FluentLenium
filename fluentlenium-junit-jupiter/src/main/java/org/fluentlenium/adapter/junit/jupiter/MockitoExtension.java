@@ -35,7 +35,7 @@ public class MockitoExtension implements TestInstancePostProcessor, ParameterRes
 
     @Override
     public void postProcessTestInstance(Object testInstance, ExtensionContext context) {
-        MockitoAnnotations.initMocks(testInstance);
+        MockitoAnnotations.openMocks(testInstance);
     }
 
     @Override
