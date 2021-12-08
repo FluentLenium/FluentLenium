@@ -33,7 +33,7 @@ class FluentJUnitJupiterTest {
 
     @BeforeEach
     void beforeEach() throws Exception {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         WebDriverManager.chromedriver().setup();
 
         sut = new FluentJUnitJupiter();

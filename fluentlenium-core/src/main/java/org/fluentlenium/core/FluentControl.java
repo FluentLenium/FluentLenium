@@ -398,7 +398,7 @@ public interface FluentControl
     }
 
     @Override
-    default <T> ComponentList asComponentList(Class<T> componentClass, Iterable<WebElement> elements) {
+    default <T> ComponentList<T> asComponentList(Class<T> componentClass, Iterable<WebElement> elements) {
         return getFluentControl().asComponentList(componentClass, elements);
     }
 
