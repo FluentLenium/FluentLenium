@@ -8,6 +8,7 @@ import org.fluentlenium.adapter.kotest.FluentFreeSpec
 import org.openqa.selenium.WebDriver
 import kotlin.io.path.Path
 import kotlin.io.path.createDirectory
+import kotlin.io.path.exists
 
 /**
  * This test demonstrates how to use Fluentlenium in combination
@@ -29,9 +30,11 @@ class VideoRecordingWebDriverManagerSpec : FluentFreeSpec() {
             .enableVnc()
             .recordingOutput(videoDirectory)
             .enableRecording()
-    
+
     override fun beforeSpec(spec: Spec) {
-        videoDirectory.createDirectory()
+        if (!videoDirectory.exists()) {
+            videoDirectory.createDirectory()
+        }
         videoDirectory.shouldExist()
     }
 
