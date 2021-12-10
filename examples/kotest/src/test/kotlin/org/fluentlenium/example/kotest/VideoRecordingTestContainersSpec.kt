@@ -14,13 +14,13 @@ import org.testcontainers.containers.VncRecordingContainer
 import java.io.File
 
 /**
- * This test demonstrates how to use Fluentlenium in combination with a Docker/Chrome container that hosts the browser.
+ * This test demonstrates how to use Fluentlenium in combination
+ * with a Docker/Chrome container (managed by TestContainers)
+ * that hosts the browser.
  */
 // Testcontainers does not yet work with selenium 4: https://github.com/testcontainers/testcontainers-java/issues/4593
 @Ignored
-class VideoRecordingSpec : FluentFreeSpec() {
-
-    private val SEARCH_TEXT = "FluentLenium"
+class VideoRecordingTestContainersSpec : FluentFreeSpec() {
 
     /**
      * directory to save the videos to
@@ -51,13 +51,15 @@ class VideoRecordingSpec : FluentFreeSpec() {
     override fun extensions(): List<Extension> =
         listOf(dockerChrome.perTest())
 
-    override fun newWebDriver(): WebDriver =
-        dockerChrome.webDriver
-
     override fun beforeSpec(spec: Spec) {
         videoDirectory.mkdirs()
         videoDirectory.exists() shouldBe true
     }
+
+    override fun newWebDriver(): WebDriver =
+        dockerChrome.webDriver
+
+    private val SEARCH_TEXT = "FluentLenium"
 
     init {
         "Title of duck duck go" {
