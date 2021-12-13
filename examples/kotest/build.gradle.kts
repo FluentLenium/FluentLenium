@@ -48,7 +48,7 @@ dependencies {
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:4.1.0")
     testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v95:4.1.0")
 
-    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.0.1")
+    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.1.0")
     testImplementation("org.testcontainers:selenium:1.16.2")
 
     testImplementation("ch.qos.logback:logback-classic:1.2.7")
