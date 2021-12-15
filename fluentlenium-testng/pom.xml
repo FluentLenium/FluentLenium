@@ -5,18 +5,18 @@
     <parent>
         <groupId>org.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>4.8.1-SNAPSHOT</version>
+        <version>5.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>fluentlenium-testng</artifactId>
     <name>FluentLenium TestNG</name>
     <description>TestNG Adapter for FluentLenium</description>
 
+    <properties>
+        <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
+    </properties>
+
     <dependencies>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-core</artifactId>
@@ -32,7 +32,21 @@
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>htmlunit-driver</artifactId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-devtools-v95</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -60,12 +74,24 @@
             <artifactId>logback-classic</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <systemPropertyVariables>
+                        <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
+                        <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties</java.util.logging.config.file>
+                        <webdriver.chrome.silentOutput>true</webdriver.chrome.silentOutput>
+                    </systemPropertyVariables>
+                </configuration>
             </plugin>
         </plugins>
     </build>

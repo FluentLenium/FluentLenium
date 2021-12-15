@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.4.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.0'
 }
 
 repositories {
@@ -15,9 +15,14 @@ test {
 dependencies {
     implementation 'org.fluentlenium:fluentlenium-junit-jupiter:4.8.1-SNAPSHOT'
     implementation 'org.fluentlenium:fluentlenium-assertj:4.8.1-SNAPSHOT'
-    testImplementation 'ch.qos.logback:logback-classic:1.2.3'
-    testImplementation 'org.seleniumhq.selenium:selenium-firefox-driver:3.141.59'
+    testImplementation 'ch.qos.logback:logback-classic:1.2.7'
+    testImplementation 'org.seleniumhq.selenium:selenium-firefox-driver:4.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
+
+configurations.all {
+    exclude group: 'io.netty', module: 'netty-transport-native-epoll'
+    exclude group: 'io.netty', module: 'netty-transport-native-kqueue'
 }
 
 group = 'org.fluentlenium'

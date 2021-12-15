@@ -3,12 +3,16 @@
     <parent>
         <artifactId>fluentlenium-parent</artifactId>
         <groupId>org.fluentlenium</groupId>
-        <version>4.8.1-SNAPSHOT</version>
+        <version>5.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>fluentlenium-coverage-report</artifactId>
     <name>FluentLenium Coverage Report</name>
+
+    <properties>
+        <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
+    </properties>
 
     <dependencies>
         <dependency>

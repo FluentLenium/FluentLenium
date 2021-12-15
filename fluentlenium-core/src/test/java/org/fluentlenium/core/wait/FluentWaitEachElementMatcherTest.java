@@ -59,7 +59,7 @@ public class FluentWaitEachElementMatcherTest {
     @Before
     public void before() {
         wait = new FluentWait(fluent);
-        wait.atMost(1L, TimeUnit.MILLISECONDS);
+        wait.atMost(10L, TimeUnit.MILLISECONDS);
         wait.pollingEvery(1L, TimeUnit.MILLISECONDS);
 
         when(fluentWebElement1.conditions()).thenReturn(new WebElementConditions(fluentWebElement1));
@@ -416,8 +416,15 @@ public class FluentWaitEachElementMatcherTest {
         assertThatThrownBy(() -> matcher.rectangle().x(5)).isExactlyInstanceOf(TimeoutException.class);
 
         verify(element1, atLeastOnce()).getRect();
-        verify(element2, atLeastOnce()).getRect();
-        verify(element3, atLeastOnce()).getRect();
+    }
+
+    @Test
+    public void hasNotRectangle() {
+        FluentListConditions matcher = wait.untilEach(fluentWebElements);
+
+        when(element1.getRect()).thenReturn(new Rectangle(1, 2, 100, 200));
+        when(element2.getRect()).thenReturn(new Rectangle(1, 2, 100, 200));
+        when(element3.getRect()).thenReturn(new Rectangle(1, 2, 100, 200));
 
         matcher.rectangle().x(1);
 

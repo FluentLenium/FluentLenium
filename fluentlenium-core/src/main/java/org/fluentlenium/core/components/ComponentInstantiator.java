@@ -163,7 +163,7 @@ public interface ComponentInstantiator {
      * @param elements       elements
      * @return new list of components
      */
-    <T> ComponentList asComponentList(Class<T> componentClass, Iterable<WebElement> elements);
+    <T> ComponentList<T> asComponentList(Class<T> componentClass, Iterable<WebElement> elements);
 
     /**
      * Create and register a new list of component from the given element iterable.

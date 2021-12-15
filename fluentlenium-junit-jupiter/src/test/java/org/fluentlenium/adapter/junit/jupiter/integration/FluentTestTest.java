@@ -252,9 +252,7 @@ class FluentTestTest {
 
         assertThat(sharedClassDrivers).hasSize(1);
 
-        for (WebDriver driver : sharedClassDrivers) {
-            Mockito.verify(driver).quit();
-        }
+        sharedClassDrivers.forEach(driver -> Mockito.verify(driver).quit());
 
         assertThat(SharedWebDriverContainer.INSTANCE.getTestClassDrivers(InternalTest.class)).isEmpty();
     }

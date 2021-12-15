@@ -1,8 +1,10 @@
 package org.fluentlenium.example.kotest
 
-import io.kotest.core.listeners.TestListener
+import io.kotest.core.annotation.Ignored
+import io.kotest.core.extensions.Extension
 import io.kotest.core.spec.Spec
-import io.kotest.extensions.testcontainers.perTest
+import io.kotest.extensions.testcontainers.LifecycleMode
+import io.kotest.extensions.testcontainers.TestContainerExtension
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import org.fluentlenium.adapter.kotest.FluentFreeSpec
@@ -13,11 +15,13 @@ import org.testcontainers.containers.VncRecordingContainer
 import java.io.File
 
 /**
- * This test demonstrates how to use Fluentlenium in combination with a Docker/Chrome container that hosts the browser.
+ * This test demonstrates how to use Fluentlenium in combination
+ * with a Docker/Chrome container (managed by TestContainers)
+ * that hosts the browser.
  */
-class VideoRecordingSpec : FluentFreeSpec() {
-
-    private val SEARCH_TEXT = "FluentLenium"
+// Testcontainers does not yet work with selenium 4: https://github.com/testcontainers/testcontainers-java/issues/4593
+@Ignored
+class VideoRecordingTestContainersSpec : FluentFreeSpec() {
 
     /**
      * directory to save the videos to
@@ -41,20 +45,22 @@ class VideoRecordingSpec : FluentFreeSpec() {
     }
 
     /**
-     * use the Kotest testcontainers extension so Kotest can manage the lifeccycle of the docker container.
+     * use the Kotest testcontainers extension so Kotest can manage the lifecycle of the docker container.
      *
      * https://kotest.io/docs/extensions/test_containers.html
      */
-    override fun listeners(): List<TestListener> =
-        listOf(dockerChrome.perTest())
-
-    override fun newWebDriver(): WebDriver =
-        dockerChrome.webDriver
+    override fun extensions(): List<Extension> =
+        listOf(TestContainerExtension(dockerChrome, LifecycleMode.Leaf))
 
     override fun beforeSpec(spec: Spec) {
         videoDirectory.mkdirs()
         videoDirectory.exists() shouldBe true
     }
+
+    override fun newWebDriver(): WebDriver =
+        dockerChrome.webDriver
+
+    private val SEARCH_TEXT = "FluentLenium"
 
     init {
         "Title of duck duck go" {

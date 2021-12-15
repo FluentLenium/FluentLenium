@@ -1,9 +1,9 @@
 package org.fluentlenium;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.fluentlenium.adapter.testng.FluentTestNgSpringTest;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.test.context.ContextConfiguration;
+import org.testng.annotations.BeforeSuite;
 
 import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 
@@ -18,8 +18,9 @@ public class IntegrationFluentTestNg extends FluentTestNgSpringTest {
         PAGE_2_URL = getAbsoluteUrlFromFile("page2.html");
     }
 
-    @Override
-    public WebDriver newWebDriver() {
-        return new HtmlUnitDriver(true);
+    @BeforeSuite
+    public static void setUpChrome() {
+        WebDriverManager.chromedriver().setup();
     }
+
 }

@@ -5,12 +5,16 @@
     <parent>
         <groupId>org.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>4.8.1-SNAPSHOT</version>
+        <version>5.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>fluentlenium-junit</artifactId>
     <name>FluentLenium JUnit</name>
     <description>JUnit 4.x Adapter for FluentLenium</description>
+
+    <properties>
+        <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -34,7 +38,12 @@
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>htmlunit-driver</artifactId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -63,12 +72,34 @@
             <artifactId>logback-classic</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <systemPropertyVariables>
+                        <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
+                        <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties</java.util.logging.config.file>
+                        <webdriver.chrome.silentOutput>true</webdriver.chrome.silentOutput>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemPropertyVariables>
+                        <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
+                        <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties</java.util.logging.config.file>
+                        <webdriver.chrome.silentOutput>true</webdriver.chrome.silentOutput>
+                    </systemPropertyVariables>
+                </configuration>
             </plugin>
         </plugins>
     </build>

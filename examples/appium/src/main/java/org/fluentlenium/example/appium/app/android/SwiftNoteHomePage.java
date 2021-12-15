@@ -1,6 +1,6 @@
 package org.fluentlenium.example.appium.app.android;
 
-import io.appium.java_client.MobileBy;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -12,7 +12,7 @@ import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 public class SwiftNoteHomePage extends FluentPage {
 
 
-    @AndroidFindBy(accessibility = "Search")
+    @AndroidFindBy(id = "action_search")
     private FluentWebElement searchButton;
 
     @AndroidFindBy(id = "com.moonpi.swiftnotes:id/newNote")
@@ -29,13 +29,13 @@ public class SwiftNoteHomePage extends FluentPage {
     }
 
     public SwiftNoteHomePage verifyNoteCount(int expectedCount) {
-        assertThat($(MobileBy.id("com.moonpi.swiftnotes:id/relativeLayout"))).hasSize(expectedCount);
+        assertThat($(AppiumBy.id("com.moonpi.swiftnotes:id/relativeLayout"))).hasSize(expectedCount);
         return this;
     }
 
     public SwiftNoteHomePage search(String searchPhrase) {
-        el(MobileBy.AccessibilityId("Search")).click();
-        FluentWebElement searchInput = el(MobileBy.id("com.moonpi.swiftnotes:id/search_src_text"));
+        el(AppiumBy.accessibilityId("Search")).click();
+        FluentWebElement searchInput = el(AppiumBy.id("com.moonpi.swiftnotes:id/search_src_text"));
         await().until(searchInput).displayed();
         searchInput.fill().with(searchPhrase);
         return this;

@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.spock.page
 
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 import org.fluentlenium.adapter.spock.FluentSpecification
 import org.fluentlenium.core.annotation.Page
 import org.fluentlenium.core.domain.FluentList
@@ -8,8 +9,12 @@ import org.fluentlenium.core.domain.FluentWebElement
 class LocalPageSpec extends FluentSpecification {
     public static final String INPUT_VALUE = "1"
 
+    def setupSpec() {
+        ChromeDriverManager.chromedriver().setup()
+    }
+
     @Page
-    private Page1 page1;
+    private Page1 page1
 
     def "Open html file and fill value into input tag"() {
         given:

@@ -30,5 +30,5 @@ public interface SeleniumDriverControl {
      *
      * @return The actual underlying AppiumDriver
      */
-    AppiumDriver<?> getAppiumDriver();
+    AppiumDriver getAppiumDriver();
 }

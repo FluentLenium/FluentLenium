@@ -13,11 +13,6 @@ public class Java8Steps extends FluentCucumberTest implements En {
     @Page
     protected LocalPage page2;
 
-    @Override
-    public String getWebDriver() {
-        return "htmlunit";
-    }
-
     public Java8Steps() {
 
         Given("scenario I am on the first page", () -> page.go());

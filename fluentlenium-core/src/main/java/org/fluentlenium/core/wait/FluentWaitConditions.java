@@ -1,13 +1,13 @@
 package org.fluentlenium.core.wait;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Supplier;
-
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.conditions.FluentConditions;
 import org.fluentlenium.core.conditions.FluentListConditions;
 import org.fluentlenium.core.domain.FluentWebElement;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 
 /**
  * Conditions API for Fluent wait objects.
@@ -121,4 +121,20 @@ public interface FluentWaitConditions<T> {
     default T explicitlyFor(long amount) {
         return explicitlyFor(amount, TimeUnit.MILLISECONDS);
     }
+
+    /**
+     * waits until a {@link java.lang.Runnable} block execution ends without throwing an exception.
+     *
+     * The method is intended to be used with Java 8 Lambda expressions. This allows to use AssertJ/JUnit/TestNG
+     * assertions to periodically check for conditions.
+     *
+     * <code>
+     *     await().untilAsserted(() -&gt; assertThat(window().title()).isEqualTo("Fluentlenium"));
+     * </code>
+     *
+     * @param block the code block that is responsible for executing the assertion and throwing AssertionError on failure.
+     * @return {@code this} object to chain method calls
+     */
+    T untilAsserted(Runnable block);
+
 }

@@ -105,8 +105,6 @@ public class EventsTest {
         when(driver.findElement(By.cssSelector(".test"))).thenReturn(element);
         WebElement eventElement = eventDriver.findElement(By.cssSelector(".test"));
 
-        WebElement childElement = mock(WebElement.class);
-
         reset(beforeListener, afterListener);
         eventElement.click();
 
@@ -127,8 +125,6 @@ public class EventsTest {
         WebElement element = mock(WebElement.class);
         when(driver.findElement(By.cssSelector(".test"))).thenReturn(element);
         WebElement eventElement = eventDriver.findElement(By.cssSelector(".test"));
-
-        WebElement childElement = mock(WebElement.class);
 
         reset(beforeListener, afterListener);
         eventElement.sendKeys("changeValue");

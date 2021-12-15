@@ -1,5 +1,6 @@
 package org.fluentlenium.core.search;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.DefaultComponentInstantiator;
@@ -205,28 +206,28 @@ public class SearchTest {
         List<WebElement> webElements = new ArrayList<>();
         webElements.add(webElement1);
         webElements.add(webElement2);
-        when(searchContext.findElements(MobileBy.AccessibilityId(name))).thenReturn(webElements);
+        when(searchContext.findElements(AppiumBy.accessibilityId(name))).thenReturn(webElements);
 
-        FluentWebElement fluentWebElement1 = search.el(MobileBy.AccessibilityId(name));
+        FluentWebElement fluentWebElement1 = search.el(AppiumBy.accessibilityId(name));
         assertThat(fluentWebElement1.text()).isEqualTo("text");
 
-        FluentWebElement fluentWebElement2 = search.find(MobileBy.AccessibilityId(name)).index(1);
+        FluentWebElement fluentWebElement2 = search.find(AppiumBy.accessibilityId(name)).index(1);
         assertThat(fluentWebElement2.tagName()).isEqualTo("a");
 
-        assertThat(search.$(MobileBy.AccessibilityId(name))).hasSize(2);
+        assertThat(search.$(AppiumBy.accessibilityId(name))).hasSize(2);
     }
 
     @Test
     public void shouldThrowErrorWhenListMobileElementNotFound() {
-        assertThatThrownBy(() -> search.find(MobileBy.AccessibilityId("something")).index(0).click())
+        assertThatThrownBy(() -> search.find(AppiumBy.accessibilityId("something")).index(0).click())
                 .isInstanceOf(NoSuchElementException.class)
-                .hasMessageContaining("By.AccessibilityId")
+                .hasMessageContaining("AppiumBy.accessibilityId")
                 .hasMessageContaining("something");
     }
 
     @Test
     public void shouldThrowErrorWhen$ListMobileElementNotFound() {
-        assertThatThrownBy(() -> search.$(MobileBy.id("something")).first().text())
+        assertThatThrownBy(() -> search.$(AppiumBy.id("something")).first().text())
                 .isInstanceOf(NoSuchElementException.class)
                 .hasMessageContaining("By.id")
                 .hasMessageContaining("something");
@@ -234,9 +235,9 @@ public class SearchTest {
 
     @Test
     public void shouldThrowErrorWhenMobileElementNotFound() {
-        assertThatThrownBy(() -> search.el(MobileBy.AndroidUIAutomator("dummy")).click())
+        assertThatThrownBy(() -> search.el(AppiumBy.androidUIAutomator("dummy")).click())
                 .isInstanceOf(NoSuchElementException.class)
-                .hasMessageContaining("By.AndroidUIAutomator")
+                .hasMessageContaining("AppiumBy.androidUIAutomator")
                 .hasMessageContaining("dummy");
     }
 
