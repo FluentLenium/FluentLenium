@@ -5,11 +5,12 @@
 
     <artifactId>fluentlenium-examples-hooks</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.8.1-SNAPSHOT</version>
+    <version>5.0.0-SNAPSHOT</version>
 
     <properties>
         <!-- Configure this property to latest available version -->
-        <fluentlenium.version>${project.version}</fluentlenium.version>
+        <fluentlenium.version>5.0.2-SNAPSHOT</fluentlenium.version>
+
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
         <selenium.version>4.1.0</selenium.version>
     </properties>
