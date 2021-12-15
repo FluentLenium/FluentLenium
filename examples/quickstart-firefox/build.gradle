@@ -14,8 +14,8 @@ test {
 
 dependencies {
     implementation 'org.fluentlenium:fluentlenium-junit-jupiter:4.8.1-SNAPSHOT'
-    implementation 'org.fluentlenium:fluentlenium-assertj:4.8.1-SNAPSHOT'
-    testImplementation 'ch.qos.logback:logback-classic:1.2.7'
+    implementation 'org.fluentlenium:fluentlenium-assertj:5.0.2-SNAPSHOT'
+    testImplementation 'ch.qos.logback:logback-classic:1.2.8'
     testImplementation 'org.seleniumhq.selenium:selenium-firefox-driver:4.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
@@ -26,7 +26,7 @@ configurations.all {
 }
 
 group = 'org.fluentlenium'
-version = '4.8.1-SNAPSHOT'
+version = '5.0.0-SNAPSHOT'
 description = 'FluentLenium Examples Firefox'
 sourceCompatibility = '11'
 compileKotlin {
