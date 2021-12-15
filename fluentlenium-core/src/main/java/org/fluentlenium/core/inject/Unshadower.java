@@ -7,8 +7,10 @@ import com.google.common.collect.ImmutableSet;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Unshadow;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -16,6 +18,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,8 +72,30 @@ public class Unshadower {
   }
 
   private WebElement unshadow(WebElement elements) {
-    JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-    return (WebElement) executor.executeScript("return arguments[0].shadowRoot", elements);
+    WebElement returnObj = null;
+
+    JavascriptExecutor executor = ((JavascriptExecutor) webDriver);
+    Object shadowRoot = executor.executeScript("return arguments[0].shadowRoot", elements);
+
+    if (shadowRoot instanceof WebElement) {
+      // ChromeDriver 95
+      returnObj = (WebElement) shadowRoot;
+    }
+    else if (shadowRoot instanceof Map)  {
+      // ChromeDriver 96+
+      // Based on https://github.com/SeleniumHQ/selenium/issues/10050#issuecomment-974231601
+      Map<String, Object> shadowRootMap = (Map<String, Object>) shadowRoot;
+      String shadowRootKey = (String) shadowRootMap.keySet().toArray()[0];
+      String id = (String) shadowRootMap.get(shadowRootKey);
+      RemoteWebElement remoteWebElement = new RemoteWebElement();
+      remoteWebElement.setParent((RemoteWebDriver) webDriver);
+      remoteWebElement.setId(id);
+      returnObj = remoteWebElement;
+    }
+    else {
+      LOGGER.error("Unexpected return type for shadowRoot in expandRootElement()");
+    }
+    return returnObj;
   }
 
   private void setValue(Field field, List<FluentWebElement> elements) {
