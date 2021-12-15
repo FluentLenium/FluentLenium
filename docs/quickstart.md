@@ -18,7 +18,9 @@ sidebar:
 
 ## Choose the right version
 
-FluentLenium 4.x is the newest version of FluentLenium it is based on JDK 11 it includes latest enhancements and features, but Selenium 3 is required to run it.
+FluentLenium 5.x is the newest version of FluentLenium it is based on JDK 11 it includes latest enhancements and features, but Selenium 4 is required to run it.
+
+FluentLenium 4.x is based on JDK 11. Selenium 3 is required to run it.
 
 FluentLenium 3.x is based on JDK 1.8 - we are not going to add new features to this version but still planning work on bugfixes.
 
@@ -38,20 +40,20 @@ Assuming you want to use Java 11, Junit and AssertJ please add the following dep
 
 ```xml
 <properties>
-    <fluentlenium.version>4.8.1</fluentlenium.version>
+    <fluentlenium.version>5.0.1</fluentlenium.version>
     <selenium.version>4.1.0</selenium.version>
 </properties>
 
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>4.8.1</version>
+    <version>${fluentlenium.version}</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>4.8.1</version>
+    <version>${fluentlenium.version}</version>
     <scope>test</scope>
 </dependency>
 <dependency>
@@ -177,5 +179,7 @@ which has ready to use framework supporting every browser.
 If you want to use BDD please take a look into [Cucumber example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/cucumber)
 
 If you want to write in Groovy please take a look into [Spock example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spock)
+
+If you want to use [Kotest](https://kotest.io/) (Kotlin) please take a look into [Kotest example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/kotest)
 
 [Hook example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/hooks) show this feature in action.
