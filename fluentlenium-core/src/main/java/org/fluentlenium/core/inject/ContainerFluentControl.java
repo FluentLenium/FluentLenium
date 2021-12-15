@@ -2,6 +2,7 @@ package org.fluentlenium.core.inject;
 
 import java.util.List;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
 import org.fluentlenium.core.FluentControl;
 import org.fluentlenium.core.FluentControlImpl;
@@ -121,7 +122,7 @@ public class ContainerFluentControl extends FluentControlImpl {
     }
 
     @Override
-    public FluentList<FluentWebElement> $(MobileBy locator, SearchFilter... filters) {
+    public FluentList<FluentWebElement> $(AppiumBy locator, SearchFilter... filters) {
         return applyHooks(adapterControl.$(locator, filters));
     }
 
@@ -146,7 +147,7 @@ public class ContainerFluentControl extends FluentControlImpl {
     }
 
     @Override
-    public FluentWebElement el(MobileBy locator, SearchFilter... filters) {
+    public FluentWebElement el(AppiumBy locator, SearchFilter... filters) {
         return applyHooks(adapterControl.el(locator, filters));
     }
 }

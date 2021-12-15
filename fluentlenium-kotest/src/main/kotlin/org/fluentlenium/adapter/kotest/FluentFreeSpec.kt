@@ -11,7 +11,7 @@ import org.fluentlenium.core.inject.ContainerFluentControl
 
 abstract class FluentFreeSpec internal constructor(
     private val fluentAdapter: KoTestFluentAdapter,
-    body: FluentFreeSpec.() -> Unit = {}
+    body: FluentFreeSpec.() -> Unit
 ) : FreeSpec({}),
     IFluentAdapter by fluentAdapter,
     TestRunnerAdapter {
@@ -21,7 +21,7 @@ abstract class FluentFreeSpec internal constructor(
     init {
         fluentAdapter.useConfigurationOverride = { configuration }
 
-        listener(fluentAdapter.listener())
+        register(fluentAdapter.extension)
 
         body()
     }
@@ -37,10 +37,10 @@ abstract class FluentFreeSpec internal constructor(
     override fun getTestMethodName(): String =
         fluentAdapter.currentTestName.get()
 
-    override fun <T : Annotation?> getClassAnnotation(annotation: Class<T>?): T =
+    override fun <T : Annotation?> getClassAnnotation(annotation: Class<T>): T =
         javaClass.getAnnotation(annotation) ?: throw AnnotationNotFoundException()
 
-    override fun <T : Annotation?> getMethodAnnotation(annotation: Class<T>?): T {
+    override fun <T : Annotation?> getMethodAnnotation(annotation: Class<T>): T {
         throw AnnotationNotFoundException()
     }
 

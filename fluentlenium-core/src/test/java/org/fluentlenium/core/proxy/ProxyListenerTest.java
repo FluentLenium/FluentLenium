@@ -7,7 +7,7 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProxyListenerTest {
@@ -40,7 +40,7 @@ public class ProxyListenerTest {
 
         LocatorProxies.addProxyListener(proxy, listener);
 
-        verifyZeroInteractions(listener);
+        verifyNoInteractions(listener);
 
         proxy.click();
 
@@ -53,7 +53,7 @@ public class ProxyListenerTest {
 
         proxy.click();
 
-        verifyZeroInteractions(listener);
+        verifyNoInteractions(listener);
     }
 
     private static class ElementMatcher implements ArgumentMatcher<List<WebElement>> {
@@ -82,7 +82,7 @@ public class ProxyListenerTest {
 
         LocatorProxies.addProxyListener(proxy, listener);
 
-        verifyZeroInteractions(listener);
+        verifyNoInteractions(listener);
 
         LocatorProxies.now(proxy);
 
@@ -96,6 +96,6 @@ public class ProxyListenerTest {
 
         LocatorProxies.now(proxy);
 
-        verifyZeroInteractions(listener);
+        verifyNoInteractions(listener);
     }
 }

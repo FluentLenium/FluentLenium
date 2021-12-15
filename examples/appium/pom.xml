@@ -15,10 +15,26 @@
     <properties>
         <fluentlenium.version>${project.version}</fluentlenium.version>
         <spring.version>5.3.7</spring.version>
-        <selenium.version>3.141.59</selenium.version>
+        <selenium.version>4.1.0</selenium.version>
     </properties>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.googlecode.maven-download-plugin</groupId>
+                    <artifactId>download-maven-plugin</artifactId>
+                    <version>1.6.7</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M5</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -80,5 +96,119 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>Android</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+
+                        <configuration>
+                            <includes>
+                                <include>**/appium/android/*App.java</include>
+                            </includes>
+
+                            <systemPropertyVariables>
+                                <spring.profiles.active>android</spring.profiles.active>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>com.googlecode.maven-download-plugin</groupId>
+                        <artifactId>download-maven-plugin</artifactId>
+
+                        <executions>
+                            <execution>
+                                <id>download Android app</id>
+
+                                <goals>
+                                    <goal>wget</goal>
+                                </goals>
+
+                                <phase>generate-test-resources</phase>
+
+                                <configuration>
+                                    <url>
+                                        https://github.com/King-of-Spades/AppCenter-Samples/blob/main/Appium/Android/swiftnotes.apk?raw=true
+                                    </url>
+                                    <outputFileName>swiftnotes.apk</outputFileName>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>iOS</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+
+                        <configuration>
+                            <includes>
+                                <include>**/appium/ios/*Demo.java</include>
+                            </includes>
+
+                            <systemPropertyVariables>
+                                <spring.profiles.active>iphone</spring.profiles.active>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>com.googlecode.maven-download-plugin</groupId>
+                        <artifactId>download-maven-plugin</artifactId>
+
+                        <executions>
+                            <execution>
+                                <id>download iOS app</id>
+
+                                <goals>
+                                    <goal>wget</goal>
+                                </goals>
+
+                                <phase>generate-test-resources</phase>
+
+                                <configuration>
+                                    <url>
+                                        https://github.com/King-of-Spades/AppCenter-Samples/blob/main/Appium/iOS/UITestDemo.iOS.app.zip?raw=true
+                                    </url>
+                                    <outputFileName>UITestDemo.iOS.app.zip</outputFileName>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+
+                        <executions>
+                            <execution>
+                                <id>unpack iOS app</id>
+                                <phase>generate-test-resources</phase>
+                                <configuration>
+                                    <tasks>
+                                        <unzip src="target/UITestDemo.iOS.app.zip" dest="target/"/>
+                                    </tasks>
+                                </configuration>
+
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

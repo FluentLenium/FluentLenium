@@ -81,7 +81,7 @@ public class ComponentsTest extends IntegrationFluentTest {
     @Test
     void shouldBeAbleToAccessDriver() {
         goTo(COMPONENTS_URL);
-        assertThat(header.getUrl()).isEqualTo(COMPONENTS_URL);
+        assertThat(header.getUrl()).contains("components.html");
     }
 
     public static class Header extends FluentWebElement {

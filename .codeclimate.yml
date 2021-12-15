@@ -24,4 +24,5 @@ ratings:
 exclude_patterns:
   - "**/*.js"
   - "**/*.html"
+  - "**/*.kt"
   - "docs/"

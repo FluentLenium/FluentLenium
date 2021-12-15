@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.spock.control
 
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 import org.fluentlenium.adapter.spock.FluentSpecification
 import org.fluentlenium.adapter.spock.page.Page1
 import org.fluentlenium.adapter.spock.page.Page2
@@ -9,11 +10,19 @@ import org.fluentlenium.core.action.MouseActions
 import org.fluentlenium.core.css.CssSupport
 import org.fluentlenium.core.events.EventsRegistry
 import org.fluentlenium.core.performance.PerformanceTiming
-import org.fluentlenium.utils.chromium.ChromiumApiNotSupportedException
+import org.fluentlenium.utils.chromium.ChromiumApi
 import org.openqa.selenium.NoAlertPresentException
 import org.openqa.selenium.WebDriver
 
+import static org.hamcrest.CoreMatchers.not
+import static org.hamcrest.CoreMatchers.is
+import static spock.util.matcher.HamcrestSupport.expect
+
 class SpockControlSpec extends FluentSpecification {
+
+    def setupSpec() {
+        ChromeDriverManager.chromedriver().setup()
+    }
 
     def 'should return driver'() {
         expect:
@@ -29,21 +38,18 @@ class SpockControlSpec extends FluentSpecification {
     }
 
     def 'should throw on getting chromium API'() {
-        when:
-        getChromiumApi()
-
-        then:
-        thrown(ChromiumApiNotSupportedException)
+        expect:
+        getChromiumApi() instanceof ChromiumApi
     }
 
     def 'should return capabilities'() {
         expect:
-        capabilities().getCapability("browserName") == "htmlunit"
+        capabilities().getCapability("browserName") == "chrome"
     }
 
     def 'should return browser'() {
         expect:
-        getWebDriver() == "htmlunit"
+        getWebDriver() == "chrome"
     }
 
     def 'should set property'() {
@@ -55,8 +61,11 @@ class SpockControlSpec extends FluentSpecification {
     }
 
     def 'should return capabilities from config'() {
-        expect:
-        getCapabilities().getCapability("javascriptEnabled") == "true"
+        when:
+        def caps = getCapabilities().getCapability("chromeOptions")
+
+        then:
+        expect caps, is(not(null))
     }
 
     def 'shuld return performance timing'() {

@@ -14,7 +14,7 @@
     <properties>
         <java.version>11</java.version>
         <fluentlenium.version>${project.version}</fluentlenium.version>
-        <selenium.version>3.141.59</selenium.version>
+        <selenium.version>4.1.0</selenium.version>
     </properties>
 
     <dependencies>
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.20.0</version>
+            <version>3.20.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

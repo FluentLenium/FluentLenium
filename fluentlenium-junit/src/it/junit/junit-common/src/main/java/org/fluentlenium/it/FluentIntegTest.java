@@ -1,13 +1,14 @@
 package org.fluentlenium.it;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.core.FluentControl;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.util.Date;
 
@@ -15,9 +16,9 @@ public class FluentIntegTest extends FluentTest {
     @Rule
     public TestName name = new TestName();
 
-    @Override
-    public WebDriver newWebDriver() {
-        return new HtmlUnitDriver(true);
+    @BeforeClass
+    public static void setUpChrome() {
+        WebDriverManager.chromedriver().setup();
     }
 
     @Before

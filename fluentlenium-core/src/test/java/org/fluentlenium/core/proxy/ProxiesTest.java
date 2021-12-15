@@ -11,7 +11,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.Arrays;
@@ -21,12 +21,7 @@ import java.util.List;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProxiesTest {
@@ -64,8 +59,8 @@ public class ProxiesTest {
             }
         });
 
-        verifyZeroInteractions(driver);
-        verifyZeroInteractions(element1);
+        verifyNoInteractions(driver);
+        verifyNoInteractions(element1);
 
         elementProxy1.click();
         verify(element1).click();
@@ -109,10 +104,10 @@ public class ProxiesTest {
             }
         });
 
-        verifyZeroInteractions(driver);
-        verifyZeroInteractions(element1);
-        verifyZeroInteractions(element2);
-        verifyZeroInteractions(element3);
+        verifyNoInteractions(driver);
+        verifyNoInteractions(element1);
+        verifyNoInteractions(element2);
+        verifyNoInteractions(element3);
 
         element3Proxy.click();
         verify(driver).findElement(By.cssSelector("#element1"));

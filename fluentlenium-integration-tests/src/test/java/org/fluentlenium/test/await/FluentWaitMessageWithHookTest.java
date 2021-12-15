@@ -58,13 +58,10 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
                 .isExactlyInstanceOf(TimeoutException.class);
 
         first.now();
-        assertThat(first).hasToString(
-                "By.cssSelector: #disabled (first) (<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
-                        + "disabled=\"disabled\" />)");
 
-        assertThatThrownBy(throwingCallable).hasMessageStartingWith(
-                "Expected condition failed: Element By.cssSelector: #disabled (first) (<input id=\"disabled\" type=\"checkbox\""
-                        + " value=\"John\" disabled=\"disabled\" />) is not enabled").isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(throwingCallable)
+                .hasMessageContaining("is not enabled")
+                .isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -78,13 +75,10 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
                 .isExactlyInstanceOf(TimeoutException.class);
 
         first.now();
-        assertThat(first).hasToString(
-                "By.cssSelector: #disabled (first) (<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
-                        + "disabled=\"disabled\" />)");
 
-        assertThatThrownBy(throwingCallable).hasMessageStartingWith(
-                "Expected condition failed: Element By.cssSelector: #disabled (first) (<input id=\"disabled\" type=\"checkbox\""
-                        + " value=\"John\" disabled=\"disabled\" />) is not enabled").isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(throwingCallable)
+                .hasMessageContaining("is not enabled")
+                .isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -98,13 +92,8 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
                         + "enabled").isExactlyInstanceOf(TimeoutException.class);
 
         first.now();
-        assertThat(first).hasToString(
-                "FluentWaitMessageWithHookTest.disabledDefaultLabel (<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
-                        + "disabled=\"disabled\" />)");
-
-        assertThatThrownBy(throwingCallable).hasMessageStartingWith(
-                "Expected condition failed: Element FluentWaitMessageWithHookTest.disabledDefaultLabel (<input id=\"disabled\" "
-                        + "type=\"checkbox\" value=\"John\" disabled=\"disabled\" />) is not enabled")
+        assertThatThrownBy(throwingCallable)
+                .hasMessageContaining("is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
     }
 
@@ -119,12 +108,10 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
                 .isExactlyInstanceOf(TimeoutException.class);
 
         first.now();
-        assertThat(first).hasToString(
-                "custom [hint] (<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />)");
 
-        assertThatThrownBy(throwingCallable).hasMessageStartingWith(
-                "Expected condition failed: Element custom [hint] (<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
-                        + "disabled=\"disabled\" />) is not enabled").isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(throwingCallable)
+                .hasMessageContaining("is not enabled")
+                .isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -138,13 +125,9 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
                 .isExactlyInstanceOf(TimeoutException.class);
 
         list.now();
-        assertThat(list).hasToString(
-                "By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />])");
-
-        assertThatThrownBy(throwingCallable).hasMessageStartingWith(
-                "Expected condition failed: Elements By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" "
-                        + "value=\"John\" disabled=\"disabled\" />]) is not enabled").isExactlyInstanceOf(TimeoutException.class);
-
+        assertThatThrownBy(throwingCallable)
+                .hasMessageContaining("is not enabled")
+                .isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -158,13 +141,10 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
                 .isExactlyInstanceOf(TimeoutException.class);
 
         list.now();
-        assertThat(list).hasToString(
-                "By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />])");
 
-        assertThatThrownBy(throwingCallable).hasMessageStartingWith(
-                "Expected condition failed: Elements By.cssSelector: #disabled ([<input id=\"disabled\" type=\"checkbox\" "
-                        + "value=\"John\" disabled=\"disabled\" />]) is not enabled").isExactlyInstanceOf(TimeoutException.class);
-
+        assertThatThrownBy(throwingCallable)
+                .hasMessageContaining("is not enabled")
+                .isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test
@@ -178,15 +158,10 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
                         + " is not enabled").isExactlyInstanceOf(TimeoutException.class);
 
         list.now();
-        assertThat(list).hasToString(
-                "FluentWaitMessageWithHookTest.disabledDefaultLabelList ([<input id=\"disabled\" type=\"checkbox\" "
-                        + "value=\"John\" disabled=\"disabled\" />])");
 
-        assertThatThrownBy(throwingCallable).hasMessageStartingWith(
-                "Expected condition failed: Elements FluentWaitMessageWithHookTest.disabledDefaultLabelList ([<input "
-                        + "id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />]) is not enabled")
+        assertThatThrownBy(throwingCallable)
+                .hasMessageContaining("is not enabled")
                 .isExactlyInstanceOf(TimeoutException.class);
-
     }
 
     @Test
@@ -200,12 +175,10 @@ public class FluentWaitMessageWithHookTest extends IntegrationFluentTest {
                 .isExactlyInstanceOf(TimeoutException.class);
 
         list.now();
-        assertThat(list).hasToString(
-                "custom [hint] ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" disabled=\"disabled\" />])");
 
-        assertThatThrownBy(throwingCallable).hasMessageStartingWith(
-                "Expected condition failed: Elements custom [hint] ([<input id=\"disabled\" type=\"checkbox\" value=\"John\" "
-                        + "disabled=\"disabled\" />]) is not enabled").isExactlyInstanceOf(TimeoutException.class);
+        assertThatThrownBy(throwingCallable)
+                .hasMessageContaining("is not enabled")
+                .isExactlyInstanceOf(TimeoutException.class);
     }
 
     @Test

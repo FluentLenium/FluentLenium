@@ -3,13 +3,17 @@
     <parent>
         <groupId>org.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>4.8.1-SNAPSHOT</version>
+        <version>5.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>fluentlenium-spock</artifactId>
     <name>FluentLenium Spock</name>
     <description>Spock Adapter for FluentLenium</description>
+
+    <properties>
+        <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -46,12 +50,12 @@
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>htmlunit-driver</artifactId>
+            <artifactId>selenium-chrome-driver</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -75,6 +79,16 @@
             <artifactId>objenesis</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-devtools-v95</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -82,7 +96,7 @@
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>1.12.1</version>
+                <version>1.13.1</version>
                 <configuration>
                     <classifier>javadoc</classifier>
                 </configuration>
@@ -101,7 +115,7 @@
                     <dependency>
                         <groupId>org.codehaus.groovy</groupId>
                         <artifactId>groovy-all</artifactId>
-                        <version>3.0.8</version>
+                        <version>3.0.9</version>
                         <type>pom</type>
                         <scope>compile</scope>
                     </dependency>
@@ -145,6 +159,11 @@
                     <includes>
                         <include>**/*Spec.java</include>
                     </includes>
+                    <systemPropertyVariables>
+                        <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
+                        <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties</java.util.logging.config.file>
+                        <webdriver.chrome.silentOutput>true</webdriver.chrome.silentOutput>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>

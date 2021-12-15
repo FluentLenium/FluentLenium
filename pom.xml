@@ -8,7 +8,7 @@
     </parent>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>4.8.1-SNAPSHOT</version>
+    <version>5.0.1</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -41,7 +41,7 @@
         <url>https://github.com/FluentLenium/FluentLenium</url>
         <connection>scm:git:https://github.com/FluentLenium/FluentLenium.git</connection>
         <developerConnection>scm:git:https://github.com/FluentLenium/FluentLenium.git</developerConnection>
-        <tag>v4.5.1</tag>
+        <tag>v5.0.1</tag>
     </scm>
 
     <licenses>
@@ -119,8 +119,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <selenium.version>3.141.59</selenium.version>
+        <selenium.version>4.1.0</selenium.version>
         <junit.jupiter.version>5.6.1</junit.jupiter.version>
+        <maven.version.rules>file:///${project.basedir}/maven-version-rules.xml</maven.version.rules>
     </properties>
 
     <dependencyManagement>
@@ -176,29 +177,24 @@
                 <version>${selenium.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.codeborne</groupId>
-                <artifactId>phantomjsdriver</artifactId>
-                <version>1.4.4</version>
-            </dependency>
-            <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>htmlunit-driver</artifactId>
-                <version>2.50.0</version>
+                <version>3.56.0</version>
             </dependency>
             <dependency>
                 <groupId>net.sourceforge.htmlunit</groupId>
                 <artifactId>htmlunit</artifactId>
-                <version>2.50.0</version>
+                <version>2.56.0</version>
             </dependency>
             <dependency>
                 <groupId>io.appium</groupId>
                 <artifactId>java-client</artifactId>
-                <version>7.5.1</version>
+                <version>8.0.0-beta</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>2.10.0</version>
+                <version>2.11.0</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -218,12 +214,12 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>5.7.2</version>
+                <version>5.8.2</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-launcher</artifactId>
-                <version>1.7.2</version>
+                <version>1.8.2</version>
             </dependency>
             <dependency>
                 <groupId>com.github.stephenc.jcip</groupId>
@@ -233,27 +229,28 @@
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
+                <!-- don't upgrade to 7.4.0 before https://github.com/apache/maven-surefire/pull/339 is available -->
                 <version>7.3.0</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>5.3.8</version>
+                <version>5.3.13</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
-                <version>5.3.8</version>
+                <version>5.3.13</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>5.3.8</version>
+                <version>5.3.13</version>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
-                <version>3.20.0</version>
+                <version>3.21.0</version>
             </dependency>
             <dependency>
                 <groupId>org.opentest4j</groupId>
@@ -263,17 +260,17 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>3.11.1</version>
+                <version>4.1.0</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
-                <version>3.11.1</version>
+                <version>4.1.0</version>
             </dependency>
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.11.2</version>
+                <version>1.12.3</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -294,7 +291,7 @@
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
-                <version>3.0.8</version>
+                <version>3.0.9</version>
                 <type>pom</type>
             </dependency>
             <dependency>
@@ -305,23 +302,41 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.7.30</version>
+                <version>1.7.32</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-model</artifactId>
-                <version>3.8.1</version>
+                <version>3.8.4</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.bonigarcia</groupId>
+                <artifactId>webdrivermanager</artifactId>
+                <version>5.0.3</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-devtools-v95</artifactId>
+                <version>${selenium.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jul-to-slf4j</artifactId>
+                <version>1.7.32</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.2.3</version>
+                <version>1.2.8</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
-                <version>1.2.3</version>
+                <version>1.2.8</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -361,7 +376,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.3.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
@@ -417,7 +432,7 @@
                 <plugin>
                     <groupId>com.github.gantsign.maven</groupId>
                     <artifactId>ktlint-maven-plugin</artifactId>
-                    <version>1.9.0</version>
+                    <version>1.11.2</version>
                     <executions>
                         <execution>
                             <id>format-and-check</id>
@@ -434,7 +449,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0-M3</version>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <id>enforce-maven</id>
@@ -575,6 +590,26 @@
                 <java.version>11</java.version>
             </properties>
             <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-javadoc-plugin</artifactId>
+                            <configuration>
+                                <additionalJOption>--no-module-directories</additionalJOption>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <id>aggregate</id>
+                                    <goals>
+                                        <goal>aggregate</goal>
+                                    </goals>
+                                    <phase>process-resources</phase>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
                 <plugins>
                     <plugin>
                         <artifactId>maven-compiler-plugin</artifactId>
@@ -582,22 +617,7 @@
                             <release>${java.version}</release>
                         </configuration>
                     </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <configuration>
-                            <additionalJOption>--no-module-directories</additionalJOption>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>aggregate</id>
-                                <goals>
-                                    <goal>aggregate</goal>
-                                </goals>
-                                <phase>process-resources</phase>
-                            </execution>
-                        </executions>
-                    </plugin>
+
                 </plugins>
             </build>
         </profile>
@@ -664,7 +684,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-pmd-plugin</artifactId>
-                        <version>3.14.0</version>
+                        <version>3.15.0</version>
                         <configuration>
                             <failOnViolation>true</failOnViolation>
                             <failurePriority>2</failurePriority>
@@ -694,7 +714,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.3.0</version>
+                        <version>3.3.1</version>
                     </plugin>
                 </plugins>
             </build>

@@ -6,48 +6,55 @@ import org.fluentlenium.adapter.kotest.jq
 import org.fluentlenium.kotest.matchers.config.MatcherBase
 import org.fluentlenium.kotest.matchers.config.shouldAssert
 
-class AlertMatchersSpec : MatcherBase(
-    {
-        "present" {
-            jq("#alertButton").click()
-            alert() should bePresent()
-            alert().shouldBePresent()
+class AlertMatchersSpec : MatcherBase({
+    "present" {
+        jq("#alertButton").click()
+        alert() should bePresent()
+        alert().shouldBePresent()
 
-            alert().accept()
+        alert().accept()
 
-            // we cannot really test absence using the matcher
-            // alert() will already throw when no alert is present
+        // we cannot really test absence using the matcher
+        // alert() will already throw when no alert is present
+    }
+
+    "presentNegative" {
+        jq("#alertButton").click()
+
+        shouldAssert {
+            alert().shouldNotBePresent()
         }
 
-        "presentNegative" {
-            jq("#alertButton").click()
+        shouldAssert {
+            alert() shouldNot bePresent()
+        }
+    }
 
-            shouldAssert {
-                alert().shouldNotBePresent()
-            }
+    "haveText" {
+        jq("#alertButton").click()
 
-            shouldAssert {
-                alert() shouldNot bePresent()
-            }
+        alert() should haveText("Hello! I am an alert box")
+        alert().shouldHaveText("Hello! I am an alert box")
+        alert() shouldNot haveText("Something else")
+        alert().shouldNotHaveText("Something else")
+    }
+
+    "haveTextNegative" {
+        jq("#alertButton").click()
+
+        shouldAssert {
+            alert() should haveText("should fail")
         }
 
-        "haveText" {
-            jq("#alertButton").click()
-
-            alert() should haveText("Hello! I am an alert box")
-            alert().shouldHaveText("Hello! I am an alert box")
-            alert() shouldNot haveText("Something else")
-            alert().shouldNotHaveText("Something else")
+        shouldAssert {
+            alert().shouldHaveText("should fail")
         }
 
-        "haveTextNegative" {
-            jq("#alertButton").click()
-
-            shouldAssert {
-                alert() shouldNot haveText("Hello! I am an alert box")
-            }
-            shouldAssert {
-                alert().shouldNotHaveText("Hello! I am an alert box")
-            }
+        shouldAssert {
+            alert() shouldNot haveText("Hello! I am an alert box")
         }
-    })
+        shouldAssert {
+            alert().shouldNotHaveText("Hello! I am an alert box")
+        }
+    }
+})

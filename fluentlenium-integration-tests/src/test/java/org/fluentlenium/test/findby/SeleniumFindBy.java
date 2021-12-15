@@ -3,7 +3,6 @@ package org.fluentlenium.test.findby;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.test.IntegrationAdvancedUserInteractionFluentTest;
 import org.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
@@ -18,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Check that @FindBy and @FindAll works with default Selenium elements.
  */
-class SeleniumFindBy extends IntegrationAdvancedUserInteractionFluentTest {
+class SeleniumFindBy extends IntegrationFluentTest {
     @Page
     private PageIndex page;
 

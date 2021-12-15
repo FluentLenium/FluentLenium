@@ -20,7 +20,7 @@ import org.openqa.selenium.support.ByIdOrName;
 import java.util.List;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -121,7 +121,7 @@ public class FluentInjectorComponentTest {
 
         injector.inject(container);
 
-        verifyZeroInteractions(component, childComponent, childWebElement);
+        verifyNoInteractions(component, childComponent, childWebElement);
 
         Assertions.assertThat(container.component.childComponent.webElement).isEqualTo(childWebElement);
 

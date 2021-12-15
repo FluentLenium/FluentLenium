@@ -1,5 +1,6 @@
 package org.fluentlenium.adapter.cucumber.integration.tests;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.driverperfeature.PerFeatureRunner;
 import org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.getbean.GetBeanRunner;
 import org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.java8.Java8Runner;
@@ -7,6 +8,7 @@ import org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.multiinh
 import org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.nodriver.NoWebDriverRunner;
 import org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.setbean.SetBeanRunner;
 import org.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.waithook.HookRunner;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -29,4 +31,10 @@ import org.junit.runners.Suite.SuiteClasses;
         org.fluentlenium.adapter.cucumber.integration.tests.io.cucumber.waithook.HookRunner.class
 })
 public class IntegrationTestSuite {
+
+    @BeforeClass
+    public static void setUpChrome() {
+        WebDriverManager.chromedriver().setup();
+    }
+
 }

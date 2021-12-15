@@ -13,8 +13,10 @@ fun haveElement(element: FluentWebElement) = object : Matcher<FluentPage> {
     override fun test(value: FluentPage): MatcherResult =
         MatcherResult(
             element.present(),
-            "Page should have element '$element'",
-            "Page should not have element '$element'"
+            { "Page should have element '$element'" },
+            {
+                "Page should not have element '$element'"
+            }
         )
 }
 
@@ -25,8 +27,10 @@ fun haveElements(elements: FluentList<FluentWebElement>) = object : Matcher<Flue
     override fun test(value: FluentPage): MatcherResult =
         MatcherResult(
             elements.present(),
-            "Page should have elements '$elements'",
-            "Page should not have elements '$elements'"
+            { "Page should have elements '$elements'" },
+            {
+                "Page should not have elements '$elements'"
+            }
         )
 }
 
@@ -36,11 +40,14 @@ fun FluentPage.shouldNotHaveElements(element: FluentList<FluentWebElement>) =
 fun FluentPage.shouldHaveElements(element: FluentList<FluentWebElement>) = also { it should haveElements(element) }
 
 fun haveElementDisplayed(element: FluentWebElement) = object : Matcher<FluentPage> {
-    override fun test(value: FluentPage): MatcherResult = MatcherResult(
-        element.displayed(),
-        "Page should display '$element'",
-        "Page should not display element '$element'"
-    )
+    override fun test(value: FluentPage): MatcherResult =
+        MatcherResult(
+            element.displayed(),
+            { "Page should display '$element'" },
+            {
+                "Page should not display element '$element'"
+            }
+        )
 }
 
 fun FluentPage.shouldHaveElementDisplayed(element: FluentWebElement) = also { it should haveElementDisplayed(element) }
@@ -54,8 +61,10 @@ fun haveTitle(title: String) = object : Matcher<FluentPage> {
 
         return MatcherResult(
             pageTitle == title,
-            "Actual page title is '$pageTitle'. Expected title is '$title'",
-            "Current page should not have title '$pageTitle'."
+            { "Actual page title is '$pageTitle'. Expected title is '$title'" },
+            {
+                "Current page should not have title '$pageTitle'."
+            }
         )
     }
 }
@@ -70,8 +79,10 @@ fun haveUrl(url: String) = object : Matcher<FluentPage> {
 
         return MatcherResult(
             currentUrl == url,
-            "Current page url is '$currentUrl'. Expected '$url'",
-            "Current page url is '$currentUrl' Should not be '$url'."
+            { "Current page url is '$currentUrl'. Expected '$url'" },
+            {
+                "Current page url is '$currentUrl' Should not be '$url'."
+            }
         )
     }
 }
@@ -89,8 +100,10 @@ fun haveExpectedElements() = object : Matcher<FluentPage> {
 
         return MatcherResult(
             isAt,
-            "should have elements located by '$by'",
-            "should not have elements located by '$by'"
+            { "should have elements located by '$by'" },
+            {
+                "should not have elements located by '$by'"
+            }
         )
     }
 }
@@ -102,8 +115,10 @@ fun haveExpectedUrl() = object : Matcher<FluentPage> {
     override fun test(value: FluentPage): MatcherResult {
         val url: String = value.url ?: return MatcherResult(
             false,
-            "no page url available",
-            "no page url available"
+            { "no page url available" },
+            {
+                "no page url available"
+            }
         )
 
         val isAt = try {
@@ -115,8 +130,10 @@ fun haveExpectedUrl() = object : Matcher<FluentPage> {
 
         return MatcherResult(
             isAt,
-            "Should be at '$url', current url is ${value.driver.currentUrl}",
-            "Should not be at '$url'"
+            { "Should be at '$url', current url is ${value.driver.currentUrl}" },
+            {
+                "Should not be at '$url'"
+            }
         )
     }
 }

@@ -1,5 +1,6 @@
 package org.fluentlenium.core.search;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -128,7 +129,7 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param filters filters set
      * @return list of elements
      */
-    default FluentList<E> $(MobileBy locator, SearchFilter... filters) {
+    default FluentList<E> $(AppiumBy locator, SearchFilter... filters) {
         return find(locator, filters);
     }
 
@@ -139,7 +140,7 @@ public interface SearchControl<E extends FluentWebElement> {
      * @param filters filters set
      * @return element
      */
-    default E el(MobileBy locator, SearchFilter... filters) {
+    default E el(AppiumBy locator, SearchFilter... filters) {
         return find(locator, filters).first();
     }
 

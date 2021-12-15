@@ -4,13 +4,17 @@
     <parent>
         <groupId>org.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>4.8.1-SNAPSHOT</version>
+        <version>5.0.1</version>
     </parent>
     <artifactId>fluentlenium-core</artifactId>
     <packaging>jar</packaging>
 
     <name>FluentLenium Core</name>
     <description>Core of FluentLenium</description>
+
+    <properties>
+        <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -147,11 +151,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.codeborne</groupId>
-            <artifactId>phantomjsdriver</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>htmlunit-driver</artifactId>
             <scope>test</scope>
@@ -164,6 +163,11 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

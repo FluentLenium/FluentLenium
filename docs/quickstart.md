@@ -38,26 +38,26 @@ Assuming you want to use Java 11, Junit and AssertJ please add the following dep
 
 ```xml
 <properties>
-    <fluentlenium.version>4.5.1</fluentlenium.version>
-    <selenium.version>3.141.59</selenium.version>
+    <fluentlenium.version>4.8.1</fluentlenium.version>
+    <selenium.version>4.1.0</selenium.version>
 </properties>
 
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
-    <version>4.5.1</version>
+    <version>4.8.1</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>4.5.1</version>
+    <version>4.8.1</version>
     <scope>test</scope>
 </dependency>
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>htmlunit-driver</artifactId>
-    <version>2.34.0</version>
+    <version>3.55.0</version>
     <scope>test</scope>
 </dependency>
 ```

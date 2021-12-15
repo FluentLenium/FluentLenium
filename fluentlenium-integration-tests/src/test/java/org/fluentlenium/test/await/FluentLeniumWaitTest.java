@@ -1,13 +1,11 @@
 package org.fluentlenium.test.await;
 
 import net.jcip.annotations.NotThreadSafe;
-import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.concurrent.TimeUnit;
@@ -160,16 +158,6 @@ class FluentLeniumWaitTest extends IntegrationFluentTest {
         FluentPage isAtJavascriptPage = newInstance(MyFluentPage.class);
         isAtJavascriptPage.go();
         await().atMost(FIVE_SECONDS_TIMEOUT, TimeUnit.SECONDS).untilPage(isAtJavascriptPage).isAt();
-    }
-
-    @Test
-    void checkAwaitPageToLoadWithNoJSEnabled() {
-        assertThrows(UnsupportedOperationException.class,
-                () -> {
-                    FluentAdapter adapter = new FluentAdapter();
-                    adapter.initFluent(new HtmlUnitDriver(false));
-                    adapter.await().atMost(MINIMAL_TIMEOUT, NANOSECONDS).untilPage().isLoaded();
-                });
     }
 
     @Test

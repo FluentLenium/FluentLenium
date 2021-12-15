@@ -28,11 +28,13 @@ public class AutomaticOnFailTest extends IntegrationFluentTestNg {
 
     @Override
     protected void finished(Class<?> testClass, String testName) {
+        super.finished(testClass, testName);
         Assertions.assertThat(after).isFalse();
     }
 
     @Override
     protected void failed(Throwable e, Class<?> testClass, String testName) {
+        super.failed(e, testClass, testName);
         Assertions.assertThat(after).isFalse();
     }
 }

@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>4.8.1-SNAPSHOT</version>
+        <version>5.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -12,9 +12,10 @@
     <description>Kotest FluentLenium Assertions</description>
 
     <properties>
-        <kotlin.version>1.5.10</kotlin.version>
-        <kotest.version>4.6.0</kotest.version>
-        <dokka.version>1.4.32</dokka.version>
+        <kotlin.version>1.6.10</kotlin.version>
+        <kotest.version>5.0.2</kotest.version>
+        <dokka.version>1.6.0</dokka.version>
+        <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
     </properties>
 
     <dependencyManagement>
@@ -22,7 +23,15 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.7.2</version>
+                <version>5.8.2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.kotest</groupId>
+                <artifactId>kotest-bom</artifactId>
+                <version>${kotest.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -58,12 +67,6 @@
             <version>${kotest.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>htmlunit-driver</artifactId>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
@@ -77,7 +80,18 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>4.4.3</version>
+            <version>5.0.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-devtools-v95</artifactId>
+            <version>${selenium.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -124,6 +138,8 @@
 
                     <systemPropertyVariables>
                         <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
+                        <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties</java.util.logging.config.file>
+                        <webdriver.chrome.silentOutput>true</webdriver.chrome.silentOutput>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

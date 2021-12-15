@@ -7,11 +7,6 @@ import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
 
 public class Hooks extends FluentCucumberTest {
 
-    @Override
-    public String getWebDriver() {
-        return "htmlunit";
-    }
-
     @Before
     public void beforeScenario(Scenario scenario) {
         before(scenario);

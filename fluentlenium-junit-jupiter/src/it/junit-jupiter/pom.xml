@@ -18,6 +18,7 @@
 
     <properties>
         <it.project.version>4.8.1-SNAPSHOT</it.project.version>
+        <selenium.version>4.1.0</selenium.version>
     </properties>
 
     <dependencyManagement>
@@ -45,8 +46,13 @@
             </dependency>
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>htmlunit-driver</artifactId>
-                <version>2.47.1</version>
+                <artifactId>selenium-chrome-driver</artifactId>
+                <version>4.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.bonigarcia</groupId>
+                <artifactId>webdrivermanager</artifactId>
+                <version>5.0.3</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>

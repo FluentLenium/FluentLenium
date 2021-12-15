@@ -34,12 +34,7 @@ import org.fluentlenium.core.wait.AwaitControl;
 import org.fluentlenium.core.wait.FluentWait;
 import org.fluentlenium.utils.chromium.ChromiumApi;
 import org.fluentlenium.utils.chromium.ChromiumControl;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.util.List;
 import java.util.Set;
@@ -211,7 +206,7 @@ public interface FluentControl
     }
 
     @Override
-    default AppiumDriver<?> getAppiumDriver() {
+    default AppiumDriver getAppiumDriver() {
         return getFluentControl().getAppiumDriver();
     }
 
@@ -403,7 +398,7 @@ public interface FluentControl
     }
 
     @Override
-    default <T> ComponentList asComponentList(Class<T> componentClass, Iterable<WebElement> elements) {
+    default <T> ComponentList<T> asComponentList(Class<T> componentClass, Iterable<WebElement> elements) {
         return getFluentControl().asComponentList(componentClass, elements);
     }
 

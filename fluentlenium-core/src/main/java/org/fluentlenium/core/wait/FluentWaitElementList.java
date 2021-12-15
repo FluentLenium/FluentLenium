@@ -1,5 +1,11 @@
 package org.fluentlenium.core.wait;
 
+import org.fluentlenium.core.FluentControl;
+import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.conditions.FluentConditions;
+import org.fluentlenium.core.conditions.FluentListConditions;
+import org.fluentlenium.core.domain.FluentWebElement;
+
 import java.time.Duration;
 import java.util.Collection;
 import java.util.List;
@@ -7,11 +13,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.conditions.FluentConditions;
-import org.fluentlenium.core.conditions.FluentListConditions;
-import org.fluentlenium.core.domain.FluentWebElement;
 
 /**
  * A wait object wrapping default selenium {@link org.openqa.selenium.support.ui.FluentWait} object into a more
@@ -167,6 +168,13 @@ public class FluentWaitElementList implements FluentWaitFunctional<FluentControl
     @Override
     public FluentWaitElementList explicitlyFor(long amount, TimeUnit timeUnit) {
         controlWait.explicitlyFor(amount, timeUnit);
+        return this;
+    }
+
+    @Override
+    public FluentWaitElementList untilAsserted(Runnable block) {
+        controlWait.untilAsserted(block);
+
         return this;
     }
 
