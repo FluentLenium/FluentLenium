@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.6.0"
+    kotlin("jvm") version "1.6.10"
 }
 
 repositories {
@@ -15,8 +15,8 @@ java.sourceCompatibility = JavaVersion.VERSION_1_8
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         jvmTarget = "1.8"
-        apiVersion = "1.5"
-        languageVersion = "1.5"
+        apiVersion = "1.6"
+        languageVersion = "1.6"
         freeCompilerArgs = listOf("-Xjsr305=strict")
     }
 }
@@ -24,9 +24,12 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 
-    systemProperty(
-        "fluentlenium.capabilities",
-        """{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}"""
+    systemProperties(
+        mapOf(
+            "fluentlenium.capabilities" to
+                    """{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}""",
+            "java.util.logging.config.file" to "${projectDir}/src/test/resources/logging.properties"
+        )
     )
 }
 
@@ -37,7 +40,7 @@ dependencies {
     testImplementation("org.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
     testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
 
-    val koTestVersion = "5.0.1"
+    val koTestVersion = "5.0.2"
     implementation(platform("io.kotest:kotest-bom:$koTestVersion"))
 
     testImplementation("io.kotest:kotest-runner-junit5")
@@ -48,10 +51,11 @@ dependencies {
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:4.1.0")
     testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v95:4.1.0")
 
-    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.0.1")
+    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.1.0")
     testImplementation("org.testcontainers:selenium:1.16.2")
 
-    testImplementation("ch.qos.logback:logback-classic:1.2.7")
+    testImplementation("ch.qos.logback:logback-classic:1.2.8")
+    testRuntimeOnly("org.slf4j:jul-to-slf4j:1.7.32")
 }
 
 configurations.all {

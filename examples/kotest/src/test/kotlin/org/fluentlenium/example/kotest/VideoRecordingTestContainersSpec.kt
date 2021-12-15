@@ -3,7 +3,8 @@ package org.fluentlenium.example.kotest
 import io.kotest.core.annotation.Ignored
 import io.kotest.core.extensions.Extension
 import io.kotest.core.spec.Spec
-import io.kotest.extensions.testcontainers.perTest
+import io.kotest.extensions.testcontainers.LifecycleMode
+import io.kotest.extensions.testcontainers.TestContainerExtension
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import org.fluentlenium.adapter.kotest.FluentFreeSpec
@@ -49,7 +50,7 @@ class VideoRecordingTestContainersSpec : FluentFreeSpec() {
      * https://kotest.io/docs/extensions/test_containers.html
      */
     override fun extensions(): List<Extension> =
-        listOf(dockerChrome.perTest())
+        listOf(TestContainerExtension(dockerChrome, LifecycleMode.Leaf))
 
     override fun beforeSpec(spec: Spec) {
         videoDirectory.mkdirs()
