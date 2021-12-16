@@ -122,6 +122,7 @@
         <selenium.version>4.1.0</selenium.version>
         <junit.jupiter.version>5.6.1</junit.jupiter.version>
         <maven.version.rules>file:///${project.basedir}/maven-version-rules.xml</maven.version.rules>
+        <spring.version>5.3.14</spring.version>
     </properties>
 
     <dependencyManagement>
@@ -235,17 +236,17 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>5.3.13</version>
+                <version>${spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
-                <version>5.3.13</version>
+                <version>${spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>5.3.13</version>
+                <version>${spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
@@ -260,12 +261,12 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>4.1.0</version>
+                <version>4.2.0</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
-                <version>4.1.0</version>
+                <version>4.2.0</version>
             </dependency>
             <dependency>
                 <groupId>net.bytebuddy</groupId>
