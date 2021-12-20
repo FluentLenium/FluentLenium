@@ -44,7 +44,7 @@ public class ExampleFluentTest extends FluentTestNgSpringTest {
 
     private WebDriver runTestOnAppiumServer() {
         try {
-            return new AppiumDriver<>(
+            return new AppiumDriver(
                     new URL(getAppiumServerUrl()), getBrowser().getCapabilities());
         } catch (MalformedURLException e) {
             throw new ConfigException("Invalid hub location: " + getAppiumServerUrl(), e);
