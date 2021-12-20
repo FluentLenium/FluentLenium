@@ -16,7 +16,7 @@
 
         <spock.version>1.3-groovy-2.5</spock.version>
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-        <selenium.version>4.1.1</selenium.version>
+        <selenium.version>4.1.0</selenium.version>
     </properties>
 
     <dependencies>
