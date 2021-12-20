@@ -12,7 +12,7 @@
         <fluentlenium.version>5.0.2-SNAPSHOT</fluentlenium.version>
 
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-        <selenium.version>4.1.0</selenium.version>
+        <selenium.version>4.1.1</selenium.version>
     </properties>
 
     <name>FluentLenium Examples Chrome</name>
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.8</version>
+            <version>1.2.9</version>
             <scope>test</scope>
         </dependency>
         <dependency>

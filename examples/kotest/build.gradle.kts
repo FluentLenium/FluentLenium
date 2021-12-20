@@ -40,21 +40,23 @@ dependencies {
     testImplementation("org.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
     testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
 
-    val koTestVersion = "5.0.2"
+    val koTestVersion = "5.0.3"
     implementation(platform("io.kotest:kotest-bom:$koTestVersion"))
 
     testImplementation("io.kotest:kotest-runner-junit5")
     testImplementation("io.kotest:kotest-assertions-core")
 
     testImplementation("io.github.bonigarcia:webdrivermanager:5.0.3")
-    testImplementation("org.seleniumhq.selenium:selenium-api:4.1.0")
-    testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:4.1.0")
-    testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v95:4.1.0")
 
-    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.1.0")
+    val seleniumVersion = "4.1.1"
+    testImplementation("org.seleniumhq.selenium:selenium-api:$seleniumVersion")
+    testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion")
+    testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v95:$seleniumVersion")
+
+    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.1.1")
     testImplementation("org.testcontainers:selenium:1.16.2")
 
-    testImplementation("ch.qos.logback:logback-classic:1.2.8")
+    testImplementation("ch.qos.logback:logback-classic:1.2.9")
     testRuntimeOnly("org.slf4j:jul-to-slf4j:1.7.32")
 }
 

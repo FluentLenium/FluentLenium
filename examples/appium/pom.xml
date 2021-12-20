@@ -14,8 +14,8 @@
 
     <properties>
         <fluentlenium.version>5.0.2-SNAPSHOT</fluentlenium.version>
-        <spring.version>5.3.13</spring.version>
-        <selenium.version>4.1.0</selenium.version>
+        <spring.version>5.3.14</spring.version>
+        <selenium.version>4.1.1</selenium.version>
     </properties>
 
     <build>
@@ -92,7 +92,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.8</version>
+            <version>1.2.9</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
