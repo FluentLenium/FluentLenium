@@ -25,7 +25,7 @@ class PageMatchersSpec : MatcherBase() {
         "haveUrl" {
             goTo(fluentleniumPage)
 
-            indexPage should haveUrl("https://fluentlenium.org/")
+            indexPage should haveUrl("https://fluentlenium.com/")
             indexPage shouldNot haveUrl("https://acme.com/")
         }
 
@@ -33,7 +33,7 @@ class PageMatchersSpec : MatcherBase() {
             goTo(fluentleniumPage)
 
             shouldAssert {
-                indexPage shouldNot haveUrl("https://fluentlenium.org/")
+                indexPage shouldNot haveUrl("https://fluentlenium.com/")
             }
 
             shouldAssert {
