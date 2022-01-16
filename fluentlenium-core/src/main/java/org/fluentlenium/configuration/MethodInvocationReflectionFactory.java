@@ -26,7 +26,6 @@ public class MethodInvocationReflectionFactory implements CapabilitiesFactory, F
         this.instance = instance;
         this.args = args;
     }
-
     @Override
     public Capabilities newCapabilities(ConfigurationProperties configuration) {
         try {
