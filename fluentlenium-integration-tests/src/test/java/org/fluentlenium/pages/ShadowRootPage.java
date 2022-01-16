@@ -7,8 +7,8 @@ import org.fluentlenium.test.IntegrationFluentTest;
 
 public class ShadowRootPage extends FluentPage {
     @Override
-    public String getUrl() {
-        return IntegrationFluentTest.SHADOW_URL;
+    public void verifyIsLoaded() {
+        await().until(el("div#container")).displayed();
     }
 
     @Unshadow(css = "#inside")
