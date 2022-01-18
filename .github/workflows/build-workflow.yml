@@ -47,13 +47,13 @@ jobs:
         java-version: 11
     - name: Java 11 - unit & integration tests code coverage
       run: |
-        mvn -B -Pjava11 clean verify jacoco:report --file pom.xml
+        mvn -T 1C -DforkCount=2 -B -Pjava11 clean verify jacoco:report --file pom.xml
     - name: Coveralls report
       if: needs.check-env.outputs.repo-token-available == 'true'
       env:
         REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
       run: |
-        mvn -T 1C -DforkCount=2 -B -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report --file pom.xml
+        mvn -B -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report --file pom.xml
 
   java11-parallelism-tests:
     runs-on: ubuntu-latest
