@@ -14,6 +14,17 @@ env:
   MAVEN_OPTS: "-Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
 
 jobs:
+  check-env:
+    runs-on: ubuntu-latest
+    outputs:
+      repo-token-available: ${{ steps.repo-token.outputs.defined }}
+    steps:
+      - id: repo-token
+        env:
+          REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+        if: "${{ env.REPO_TOKEN != '' }}"
+        run: echo "::set-output name=defined::true"
+
   java8-build:
     runs-on: ubuntu-latest
     steps:
@@ -24,17 +35,6 @@ jobs:
         java-version: 1.8
     - name: Java 8 - unit & integration tests
       run: mvn -B -Pjava8 clean verify --file pom.xml
-
-  check-env:
-    runs-on: ubuntu-latest
-    outputs:
-      repo-token-available: ${{ steps.repo-token.outputs.defined }}
-    steps:
-    - id: repo-token
-      env:
-        REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-      if: "${{ env.REPO_TOKEN != '' }}"
-      run: echo "::set-output name=defined::true"
 
   java11-build:
     needs: [ check-env ]
