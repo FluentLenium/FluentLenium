@@ -20,14 +20,6 @@ jobs:
         if: "${{ env.URL != '' }}"
         run: echo "::set-output name=defined::true"
 
-  dump:
-    runs-on: ubuntu-latest
-    steps:
-      - name: print context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
   edge:
     needs: [ check-env ]
     if: needs.check-env.outputs.browserStackUrl-available == 'true'
