@@ -28,7 +28,7 @@ jobs:
   check-env:
     runs-on: ubuntu-latest
     outputs:
-      repo-token-available: ${{ repo-token.outputs.defined }}
+      repo-token-available: ${{ steps.repo-token.outputs.defined }}
     steps:
     - id: repo-token
       env:
