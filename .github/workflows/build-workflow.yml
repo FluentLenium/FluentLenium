@@ -25,7 +25,19 @@ jobs:
     - name: Java 8 - unit & integration tests
       run: mvn -B -Pjava8 clean verify --file pom.xml
 
+  check-env:
+    runs-on: ubuntu-latest
+    outputs:
+      repo-token-available: ${{ repo-token.outputs.defined }}
+    steps:
+    - id: repo-token
+      env:
+        REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+      if: "${{ env.REPO_TOKEN != '' }}"
+      run: echo "::set-output name=defined::true"
+
   java11-build:
+    needs: [ check-env ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -37,7 +49,7 @@ jobs:
       run: |
         mvn -B -Pjava11 clean verify jacoco:report --file pom.xml
     - name: Coveralls report
-      if: secrets.REPO_TOKEN
+      if: needs.check-env.outputs.repo-token-available == 'true'
       env:
         REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
       run: |
