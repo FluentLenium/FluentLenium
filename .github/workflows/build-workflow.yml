@@ -34,7 +34,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Java 8 - unit & integration tests
-      run: mvn -T 1C -DforkCount=2 -B -Pjava8 clean verify --file pom.xml
+      run: mvn -T 1C -B -Pjava8 clean verify --file pom.xml
 
   java11-build:
     needs: [ check-env ]
@@ -47,7 +47,7 @@ jobs:
         java-version: 11
     - name: Java 11 - unit & integration tests code coverage
       run: |
-        mvn -T 1C -DforkCount=2 -B -Pjava11 clean verify jacoco:report --file pom.xml
+        mvn -T 1C -B -Pjava11 clean verify jacoco:report --file pom.xml
     - name: Coveralls report
       if: needs.check-env.outputs.repo-token-available == 'true'
       env:
