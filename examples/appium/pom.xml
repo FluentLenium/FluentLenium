@@ -14,7 +14,7 @@
 
     <properties>
         <fluentlenium.version>5.0.2-SNAPSHOT</fluentlenium.version>
-        <spring.version>5.3.14</spring.version>
+        <spring.version>5.3.15</spring.version>
         <selenium.version>4.1.0</selenium.version>
     </properties>
 
