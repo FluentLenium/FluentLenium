@@ -40,7 +40,7 @@ dependencies {
     testImplementation("org.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
     testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
 
-    val koTestVersion = "5.0.3"
+    val koTestVersion = "5.1.0"
     implementation(platform("io.kotest:kotest-bom:$koTestVersion"))
 
     testImplementation("io.kotest:kotest-runner-junit5")
@@ -56,8 +56,8 @@ dependencies {
     testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.1.1")
     testImplementation("org.testcontainers:selenium:1.16.2")
 
-    testImplementation("ch.qos.logback:logback-classic:1.2.9")
-    testRuntimeOnly("org.slf4j:jul-to-slf4j:1.7.32")
+    testImplementation("ch.qos.logback:logback-classic:1.2.10")
+    testRuntimeOnly("org.slf4j:jul-to-slf4j:1.7.33")
 }
 
 configurations.all {

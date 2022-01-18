@@ -14,7 +14,7 @@
 
     <properties>
         <fluentlenium.version>5.0.2-SNAPSHOT</fluentlenium.version>
-        <spring.version>5.3.14</spring.version>
+        <spring.version>5.3.15</spring.version>
         <selenium.version>4.1.1</selenium.version>
     </properties>
 
@@ -38,14 +38,14 @@
         <plugins>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <version>3.0.0-M1</version>
+                <version>3.0.0-M2</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>3.9.0</version>
                 <configuration>
                     <release>11</release>
                 </configuration>

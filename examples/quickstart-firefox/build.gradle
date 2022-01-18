@@ -16,7 +16,7 @@ dependencies {
     def fluentLeniumVersion = '5.0.2-SNAPSHOT'
     implementation "org.fluentlenium:fluentlenium-junit-jupiter:$fluentLeniumVersion"
     implementation "org.fluentlenium:fluentlenium-assertj:$fluentLeniumVersion"
-    testImplementation 'ch.qos.logback:logback-classic:1.2.9'
+    testImplementation 'ch.qos.logback:logback-classic:1.2.10'
     testImplementation 'org.seleniumhq.selenium:selenium-firefox-driver:4.1.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }

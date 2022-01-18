@@ -13,8 +13,8 @@
 
     <properties>
         <kotlin.version>1.6.10</kotlin.version>
-        <kotest.version>5.0.3</kotest.version>
-        <dokka.version>1.6.0</dokka.version>
+        <kotest.version>5.1.0</kotest.version>
+        <dokka.version>1.6.10</dokka.version>
         <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
     </properties>
 

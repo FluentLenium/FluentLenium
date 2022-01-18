@@ -9,15 +9,20 @@ env:
   MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
 
 jobs:
-  dump:
+  check-env:
     runs-on: ubuntu-latest
+    outputs:
+      browserStackUrl-available: ${{ steps.browserStackUrl.outputs.defined }}
     steps:
-      - name: print context
+      - id: browserStackUrl
         env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
+          URL: ${{ secrets.BROWSER_STACK_URL }}
+        if: "${{ env.URL != '' }}"
+        run: echo "::set-output name=defined::true"
+
   edge:
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    needs: [ check-env ]
+    if: needs.check-env.outputs.browserStackUrl-available == 'true'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -31,7 +36,8 @@ jobs:
       run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   ie:
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    needs: [ check-env ]
+    if: needs.check-env.outputs.browserStackUrl-available == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -45,7 +51,8 @@ jobs:
         run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   chrome:
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    needs: [ check-env ]
+    if: needs.check-env.outputs.browserStackUrl-available == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -59,7 +66,8 @@ jobs:
         run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   firefox:
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    needs: [ check-env ]
+    if: needs.check-env.outputs.browserStackUrl-available == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -73,7 +81,8 @@ jobs:
         run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   safari:
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    needs: [ check-env ]
+    if: needs.check-env.outputs.browserStackUrl-available == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -87,7 +96,8 @@ jobs:
         run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=safari -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   iphone:
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    needs: [ check-env ]
+    if: needs.check-env.outputs.browserStackUrl-available == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -101,7 +111,8 @@ jobs:
         run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   android:
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    needs: [ check-env ]
+    if: needs.check-env.outputs.browserStackUrl-available == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
