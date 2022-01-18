@@ -37,7 +37,7 @@ jobs:
       run: |
         mvn -B -Pjava11 clean verify jacoco:report --file pom.xml
     - name: Coveralls report
-      if: ${{ (github.repository == 'FluentLenium/FluentLenium' && github.event_name == 'push') || (github.event.pull_request.head.repo.full_name == github.repository) }}
+      if: secrets.REPO_TOKEN
       env:
         REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
       run: |
