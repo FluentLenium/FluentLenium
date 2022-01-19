@@ -104,8 +104,9 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             E component = instantiator.newComponent(componentClass, LocatorProxies.first(proxy));
             configureComponentWithLabel(component);
             configureComponentWithHooks(component);
+            control.injectComponent(component, this, component.getElement());
 
-            return component.reset().as(componentClass);
+            return component;
         }
         validateListIsNotEmpty();
         return get(0);
@@ -128,7 +129,9 @@ public class FluentListImpl<E extends FluentWebElement> extends ComponentList<E>
             E component = instantiator.newComponent(componentClass, LocatorProxies.last(proxy));
             configureComponentWithLabel(component);
             configureComponentWithHooks(component);
-            return component.reset().as(componentClass);
+            control.injectComponent(component, this, component.getElement());
+
+            return component;
         }
         validateListIsNotEmpty();
         return get(size() - 1);
