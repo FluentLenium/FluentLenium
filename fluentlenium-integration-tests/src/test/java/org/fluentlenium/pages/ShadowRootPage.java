@@ -11,7 +11,7 @@ public class ShadowRootPage extends FluentPage {
         await().until(el("div#container")).displayed();
     }
 
-    @Unshadow(css = {"#container"})
+    @Unshadow(css = {"#container", "#inside"})
     FluentWebElement inside;
 
     public String getShadowRootItemText() {

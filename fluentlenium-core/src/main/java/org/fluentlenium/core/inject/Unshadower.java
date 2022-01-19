@@ -6,11 +6,7 @@ import static java.util.stream.Collectors.toList;
 import com.google.common.collect.ImmutableSet;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Unshadow;
@@ -33,47 +29,68 @@ public class Unshadower {
     }
 
     public void unshadowAllAnnotatedFields() {
-        Arrays.stream(page.getClass().getDeclaredFields())
-                .filter(field -> field.isAnnotationPresent(Unshadow.class))
-                .forEach(this::unshadowField);
+        for (Field field : page.getClass().getDeclaredFields()) {
+            if (field.isAnnotationPresent(Unshadow.class)) {
+                unshadowField(field);
+            }
+        }
     }
 
     private void unshadowField(Field field) {
         String[] cssSelectors = field.getAnnotation(Unshadow.class).css();
 
-        List<WebElement> deepestShadowRoots = extractShadowRoots(cssSelectors);
-        List<FluentWebElement> elements = findElementsInLastShadowRoot(cssSelectors[cssSelectors.length - 1], deepestShadowRoots);
+        List<List<WebElement>> deepestShadowRoots = extractShadowRoots(cssSelectors);
 
-        setValue(field, elements);
+        setValue(field, convertToFluentWebElementList(deepestShadowRoots.get(deepestShadowRoots.size() - 1)));
     }
 
-    private List<FluentWebElement> findElementsInLastShadowRoot(String cssSelector, List<WebElement> lastShadowRoots) {
-        return lastShadowRoots.stream()
-                .flatMap(shadowRoot -> shadowRoot.findElements(By.cssSelector(cssSelector)).stream())
-                .filter(Objects::nonNull)
-                .map(element -> new FluentWebElement(element, page.getFluentControl(), page.getFluentControl()))
-                .collect(toList());
+    private List<FluentWebElement> convertToFluentWebElementList(List<WebElement> lastShadowRoots) {
+        List<FluentWebElement> list = new ArrayList<>();
+        for (WebElement element : lastShadowRoots) {
+            FluentWebElement fluentWebElement = new FluentWebElement(element, page.getFluentControl(), page.getFluentControl());
+            list.add(fluentWebElement);
+        }
+        return list;
     }
 
-    private List<WebElement> extractShadowRoots(String[] cssSelectors) {
+    private List<List<WebElement>> extractShadowRoots(String[] cssSelectors) {
+        if (cssSelectors.length % 2 != 0) {
+            LOGGER.error("CSS selector count needs to be even number");
+            return null;
+        }
+
         WebElement domRoot = webDriver.findElement(By.xpath("/*"));
-        return Arrays.stream(cssSelectors)
-                .limit(cssSelectors.length - 1)
-                .reduce(singletonList(domRoot), this::extractElementsFromShadowRoot, (acc, val) -> val);
+
+        List<WebElement> acc1 = singletonList(domRoot);
+
+        List<List<WebElement>> acc = new ArrayList<>();
+        acc.add(acc1);
+
+        for (int i = 0; cssSelectors.length > i; i += 2) {
+            acc = extractElementsFromShadowRoot(acc, cssSelectors[i], cssSelectors[i + 1]);
+        }
+        return acc;
     }
 
-    private List<WebElement> extractElementsFromShadowRoot(List<WebElement> previousNodes, String cssSelector) {
-        return previousNodes.stream()
-                .flatMap(node -> node.findElements(By.cssSelector(cssSelector)).stream())
-                .map(this::unshadow)
-                .collect(toList());
+    private List<List<WebElement>> extractElementsFromShadowRoot(List<List<WebElement>> previousNodes, String cssSelector, String cssSelector1) {
+        List<List<WebElement>> list = new ArrayList<>();
+
+        for (List<WebElement> previousNodesElements : previousNodes) {
+            for (WebElement nodeElements : previousNodesElements) {
+                for (WebElement webElement : nodeElements.findElements(By.cssSelector(cssSelector))) {
+                    List<WebElement> unshadow = unshadow(webElement, cssSelector1);
+                    list.add(unshadow);
+                }
+            }
+        }
+        return list;
     }
 
-    private WebElement unshadow(WebElement element) {
+    private List<WebElement> unshadow(WebElement element, String cssSelector) {
         JavascriptExecutor executor = (JavascriptExecutor) webDriver;
         SearchContext shadowRoot = (SearchContext) executor.executeScript("return arguments[0].shadowRoot", element);
 
-        return shadowRoot.findElement(By.cssSelector("#inside"));
+        return shadowRoot.findElements(By.cssSelector(cssSelector));
     }
 
     private void setValue(Field field, List<FluentWebElement> elements) {
