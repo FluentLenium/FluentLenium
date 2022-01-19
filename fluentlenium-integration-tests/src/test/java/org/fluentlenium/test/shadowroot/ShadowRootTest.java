@@ -4,8 +4,9 @@ import org.fluentlenium.pages.ShadowRootPage;
 import org.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 
-@SuppressWarnings("unchecked")
-class ShadowRoot extends IntegrationFluentTest {
+import static org.assertj.core.api.Assertions.assertThat;
+
+class ShadowRootTest extends IntegrationFluentTest {
     @Test
     void checkSearchWorks() throws InterruptedException {
         goTo(IntegrationFluentTest.SHADOW_URL);
@@ -15,7 +16,6 @@ class ShadowRoot extends IntegrationFluentTest {
         Thread.sleep(2000);
         ShadowRootPage shadowRootPage = newInstance(ShadowRootPage.class);
 
-        System.out.println(shadowRootPage.getShadowRootItemText());
-
+        assertThat(shadowRootPage.getShadowRootItemText()).contains("Inside Shadow DOM");
     }
 }
