@@ -51,10 +51,6 @@ public class PredefinedDesiredCapabilities {
         return new DesiredCapabilities(BrowserType.OPERA, "", Platform.ANY);
     }
 
-    public static DesiredCapabilities operaBlink() {
-        return new DesiredCapabilities(BrowserType.OPERA_BLINK, "", Platform.ANY);
-    }
-
     public static DesiredCapabilities safari() {
         return new DesiredCapabilities(BrowserType.SAFARI, "", Platform.MAC);
     }

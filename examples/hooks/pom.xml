@@ -12,7 +12,7 @@
         <fluentlenium.version>5.0.2-SNAPSHOT</fluentlenium.version>
 
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-        <selenium.version>4.1.0</selenium.version>
+        <selenium.version>4.1.1</selenium.version>
     </properties>
 
     <name>FluentLenium Examples Quickstart</name>
@@ -52,7 +52,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>4.1.0</version>
+            <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
