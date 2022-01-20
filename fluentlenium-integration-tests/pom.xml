@@ -4,7 +4,7 @@
     <parent>
         <artifactId>fluentlenium-parent</artifactId>
         <groupId>org.fluentlenium</groupId>
-        <version>5.0.1</version>
+        <version>5.0.3-SNAPSHOT</version>
     </parent>
     <artifactId>fluentlenium-integration-tests</artifactId>
     <packaging>jar</packaging>
@@ -90,6 +90,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
+
                 <configuration>
                     <systemPropertyVariables>
                         <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>

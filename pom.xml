@@ -8,7 +8,7 @@
     </parent>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>5.0.1</version>
+    <version>5.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -39,9 +39,9 @@
 
     <scm>
         <url>https://github.com/FluentLenium/FluentLenium</url>
-        <connection>scm:git:https://github.com/FluentLenium/FluentLenium.git</connection>
-        <developerConnection>scm:git:https://github.com/FluentLenium/FluentLenium.git</developerConnection>
-        <tag>v5.0.1</tag>
+        <connection>scm:git:git@github.com:FluentLenium/FluentLenium.git</connection>
+        <developerConnection>scm:git:git@github.com:FluentLenium/FluentLenium.git</developerConnection>
+        <tag>v5.0.2</tag>
     </scm>
 
     <licenses>
@@ -119,9 +119,11 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <selenium.version>4.1.0</selenium.version>
+        <selenium.version>4.1.1</selenium.version>
         <junit.jupiter.version>5.6.1</junit.jupiter.version>
         <maven.version.rules>file:///${project.basedir}/maven-version-rules.xml</maven.version.rules>
+        <spring.version>5.3.15</spring.version>
+        <slf4j.version>1.7.33</slf4j.version>
     </properties>
 
     <dependencyManagement>
@@ -189,7 +191,7 @@
             <dependency>
                 <groupId>io.appium</groupId>
                 <artifactId>java-client</artifactId>
-                <version>8.0.0-beta</version>
+                <version>8.0.0-beta2</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
@@ -235,22 +237,22 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>5.3.13</version>
+                <version>${spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
-                <version>5.3.13</version>
+                <version>${spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>5.3.13</version>
+                <version>${spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
-                <version>3.21.0</version>
+                <version>3.22.0</version>
             </dependency>
             <dependency>
                 <groupId>org.opentest4j</groupId>
@@ -260,17 +262,17 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>4.1.0</version>
+                <version>4.2.0</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
-                <version>4.1.0</version>
+                <version>4.2.0</version>
             </dependency>
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.12.3</version>
+                <version>1.12.7</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -302,7 +304,7 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.7.32</version>
+                <version>${slf4j.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.maven</groupId>
@@ -324,19 +326,19 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>jul-to-slf4j</artifactId>
-                <version>1.7.32</version>
+                <version>${slf4j.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.2.8</version>
+                <version>1.2.10</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
-                <version>1.2.8</version>
+                <version>1.2.10</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -356,11 +358,11 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <version>3.9.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.0.0-M1</version>
+                    <version>3.0.0-M2</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
@@ -372,7 +374,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.2.2</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
@@ -384,7 +386,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.9.1</version>
+                    <version>3.10.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -625,15 +627,15 @@
         <profile>
             <id>examples</id>
             <modules>
+                <module>examples/appium</module>
+                <module>examples/cucumber</module>
                 <module>examples/hooks</module>
                 <module>examples/performance</module>
-                <module>examples/cucumber</module>
                 <module>examples/quickstart-chrome</module>
+                <module>examples/quickstart-microsoft-browsers</module>
+                <module>examples/quickstart-safari</module>
                 <module>examples/spock</module>
                 <module>examples/spring</module>
-                <module>examples/quickstart-safari</module>
-                <module>examples/quickstart-microsoft-browsers</module>
-                <module>examples/appium</module>
             </modules>
         </profile>
 
@@ -658,7 +660,7 @@
                             <dependency>
                                 <groupId>com.puppycrawl.tools</groupId>
                                 <artifactId>checkstyle</artifactId>
-                                <version>8.43</version>
+                                <version>9.2.1</version>
                             </dependency>
                         </dependencies>
                         <executions>
