@@ -1,11 +1,12 @@
 package org.fluentlenium.core.inject;
 
 import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.toList;
 
 import com.google.common.collect.ImmutableSet;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -41,24 +42,19 @@ public class Unshadower {
 
     private void unshadowField(Field field) {
         String[] cssSelectors = field.getAnnotation(Unshadow.class).css();
-
         List<List<WebElement>> deepestShadowRoots = extractShadowRoots(cssSelectors);
 
         setValue(field, convertToFluentWebElementList(deepestShadowRoots.get(deepestShadowRoots.size() - 1)));
     }
 
     private List<FluentWebElement> convertToFluentWebElementList(List<WebElement> lastShadowRoots) {
-        List<FluentWebElement> list = new ArrayList<>();
-        for (WebElement element : lastShadowRoots) {
-            FluentWebElement fluentWebElement = new FluentWebElement(element, page.getFluentControl(), page.getFluentControl());
-            list.add(fluentWebElement);
-        }
-        return list;
+        return lastShadowRoots.stream()
+                .map(element -> new FluentWebElement(element, page.getFluentControl(), page.getFluentControl()))
+                .collect(toList());
     }
 
     private List<List<WebElement>> extractShadowRoots(String[] cssSelectors) {
         WebElement domRoot = webDriver.findElement(By.xpath("/*"));
-
         List<List<WebElement>> acc = singletonList(singletonList(domRoot));
 
         if (cssSelectors.length == 1) {
@@ -72,17 +68,11 @@ public class Unshadower {
     }
 
     private List<List<WebElement>> extractElementsFromShadowRoot(List<List<WebElement>> previousNodes, String cssSelector, By selector) {
-        List<List<WebElement>> list = new ArrayList<>();
-
-        for (List<WebElement> previousNodesElements : previousNodes) {
-            for (WebElement nodeElements : previousNodesElements) {
-                for (WebElement webElement : nodeElements.findElements(By.cssSelector(cssSelector))) {
-                    List<WebElement> unshadow = unshadow(webElement, selector);
-                    list.add(unshadow);
-                }
-            }
-        }
-        return list;
+        return previousNodes.stream()
+                .flatMap(Collection::stream)
+                .flatMap(webElement -> webElement.findElements(By.cssSelector(cssSelector)).stream())
+                .map(element -> unshadow(element, selector))
+                .collect(toList());
     }
 
     private List<WebElement> unshadow(WebElement element, By selector) {
