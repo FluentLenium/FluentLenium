@@ -54,7 +54,7 @@ class GooglePage extends FluentPage {
     @FindBy(tagName = "center")
     private FluentList<CenteredElement> centeredElements;
 
-    FluentList<CenteredElement> getInputs(){
+    FluentList<CenteredElement> getInputs() {
         return centeredElements;
     }
 }
@@ -63,7 +63,7 @@ class CenteredElement extends FluentWebElement {
     @FindBy(tagName = "input")
     private FluentWebElement el;
 
-    public CenteredElement(WebElement element, FluentControl control, ComponentInstantiator instantiator) {
+    CenteredElement(WebElement element, FluentControl control, ComponentInstantiator instantiator) {
         super(element, control, instantiator);
     }
 
