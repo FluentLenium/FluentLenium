@@ -5,13 +5,14 @@
 
     <artifactId>fluentlenium-examples-performance</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.8.1-SNAPSHOT</version>
+    <version>5.0.0-SNAPSHOT</version>
 
     <properties>
         <!-- Configure this property to latest available version -->
-        <fluentlenium.version>${project.version}</fluentlenium.version>
+        <fluentlenium.version>5.0.2-SNAPSHOT</fluentlenium.version>
+
         <!-- Make sure the selenium.version won't be overridden by another pom.xml -->
-        <selenium.version>4.1.0</selenium.version>
+        <selenium.version>4.1.1</selenium.version>
     </properties>
 
     <name>FluentLenium Examples Performance Timing</name>
@@ -20,14 +21,14 @@
         <plugins>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <version>3.0.0-M1</version>
+                <version>3.0.0-M2</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>3.9.0</version>
                 <configuration>
                     <release>11</release>
                 </configuration>

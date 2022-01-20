@@ -6,16 +6,16 @@
 
     <artifactId>fluentlenium-examples-appium</artifactId>
     <groupId>org.fluentlenium</groupId>
-    <version>4.8.1-SNAPSHOT</version>
+    <version>5.0.0-SNAPSHOT</version>
 
     <name>FluentLenium Examples Appium</name>
     <description>FluentLenium Appium examples</description>
     <url>https://github.com/FluentLenium/FluentLenium</url>
 
     <properties>
-        <fluentlenium.version>${project.version}</fluentlenium.version>
-        <spring.version>5.3.7</spring.version>
-        <selenium.version>4.1.0</selenium.version>
+        <fluentlenium.version>5.0.2-SNAPSHOT</fluentlenium.version>
+        <spring.version>5.3.15</spring.version>
+        <selenium.version>4.1.1</selenium.version>
     </properties>
 
     <build>
@@ -38,14 +38,14 @@
         <plugins>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <version>3.0.0-M1</version>
+                <version>3.0.0-M2</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>3.9.0</version>
                 <configuration>
                     <release>11</release>
                 </configuration>
@@ -57,17 +57,17 @@
         <dependency>
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-core</artifactId>
-            <version>${project.version}</version>
+            <version>${fluentlenium.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-junit</artifactId>
-            <version>${project.version}</version>
+            <version>${fluentlenium.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fluentlenium</groupId>
             <artifactId>fluentlenium-assertj</artifactId>
-            <version>${project.version}</version>
+            <version>${fluentlenium.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -92,7 +92,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
+            <version>1.2.10</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

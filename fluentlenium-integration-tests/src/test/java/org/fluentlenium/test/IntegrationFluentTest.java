@@ -18,6 +18,7 @@ public abstract class IntegrationFluentTest extends FluentTest {
     public static final String COMPONENTS_URL = getAbsoluteUrlFromFile("components.html");
     public static final String COUNT_URL = getAbsoluteUrlFromFile("count.html");
     public static final String DEFAULT_URL = getAbsoluteUrlFromFile("index.html");
+    public static final String SHADOW_URL = getAbsoluteUrlFromFile("shadow.html");
     public static final String DEFAULT_URL_PATH = getAbsoluteUrlPathFromFile("index.html");
     public static final String IFRAME_URL = getAbsoluteUrlFromFile("iframe.html");
     public static final String JAVASCRIPT_URL = getAbsoluteUrlFromFile("javascript.html");
