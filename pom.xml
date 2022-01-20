@@ -8,7 +8,7 @@
     </parent>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>5.0.2-SNAPSHOT</version>
+    <version>5.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -39,9 +39,9 @@
 
     <scm>
         <url>https://github.com/FluentLenium/FluentLenium</url>
-        <connection>scm:git:https://github.com/FluentLenium/FluentLenium.git</connection>
-        <developerConnection>scm:git:https://github.com/FluentLenium/FluentLenium.git</developerConnection>
-        <tag>v4.5.1</tag>
+        <connection>scm:git:git@github.com:FluentLenium/FluentLenium.git</connection>
+        <developerConnection>scm:git:git@github.com:FluentLenium/FluentLenium.git</developerConnection>
+        <tag>v5.0.2</tag>
     </scm>
 
     <licenses>
@@ -660,7 +660,7 @@
                             <dependency>
                                 <groupId>com.puppycrawl.tools</groupId>
                                 <artifactId>checkstyle</artifactId>
-                                <version>8.43</version>
+                                <version>9.2.1</version>
                             </dependency>
                         </dependencies>
                         <executions>
