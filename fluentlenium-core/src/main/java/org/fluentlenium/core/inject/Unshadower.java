@@ -67,7 +67,8 @@ public class Unshadower {
         return acc;
     }
 
-    private List<List<WebElement>> extractElementsFromShadowRoot(List<List<WebElement>> previousNodes, String cssSelector, By selector) {
+    private List<List<WebElement>> extractElementsFromShadowRoot(List<List<WebElement>> previousNodes,
+                                                                 String cssSelector, By selector) {
         return previousNodes.stream()
                 .flatMap(Collection::stream)
                 .flatMap(webElement -> webElement.findElements(By.cssSelector(cssSelector)).stream())
