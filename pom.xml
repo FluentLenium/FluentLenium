@@ -39,9 +39,9 @@
 
     <scm>
         <url>https://github.com/FluentLenium/FluentLenium</url>
-        <connection>scm:git:https://github.com/FluentLenium/FluentLenium.git</connection>
-        <developerConnection>scm:git:https://github.com/FluentLenium/FluentLenium.git</developerConnection>
-        <tag>v4.5.1</tag>
+        <connection>scm:git:ssh://git@github.com:FluentLenium/FluentLenium.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:FluentLenium/FluentLenium.git</developerConnection>
+        <tag>v5.0.2</tag>
     </scm>
 
     <licenses>
