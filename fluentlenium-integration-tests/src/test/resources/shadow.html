@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        h1 {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+<div id="container"></div>
+<h1>DOM element</h1>
+<script>
+    (function () {
+        var root = container.attachShadow({mode: "open"})
+
+//Inside element
+        var h1 = document.createElement("h1")
+        h1.textContent = "Inside Shadow DOM"
+        h1.id = "inside"
+        root.appendChild(h1)
+
+//Access inside element
+        console.log(container.shadowRoot.querySelector("#inside"))
+    })()
+</script>
+</body>
+
+</html>

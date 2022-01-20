@@ -63,6 +63,7 @@ public class UnshadowerTest extends FluentPage {
             eq(By.cssSelector("inner-shadow-root")))))
         .thenReturn(newArrayList(shadowRoots));
     when(shadowRoots.findElements(By.cssSelector("div"))).thenReturn(newArrayList(searchedElement1, searchedElement2));
+    when(shadowRoots.findElements(By.xpath("/*"))).thenReturn(newArrayList(searchedElement1, searchedElement2));
 
     when(searchedElement1.getText()).thenReturn("DIV1");
     when(searchedElement2.getText()).thenReturn("DIV2");
