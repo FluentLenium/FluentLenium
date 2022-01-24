@@ -6,6 +6,7 @@ import static java.util.stream.Collectors.toList;
 import com.google.common.collect.ImmutableSet;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -33,11 +34,9 @@ public class Unshadower {
     }
 
     public void unshadowAllAnnotatedFields() {
-        for (Field field : page.getClass().getDeclaredFields()) {
-            if (field.isAnnotationPresent(Unshadow.class)) {
-                unshadowField(field);
-            }
-        }
+        Arrays.stream(page.getClass().getDeclaredFields())
+                .filter(field -> field.isAnnotationPresent(Unshadow.class))
+                .forEach(this::unshadowField);
     }
 
     private void unshadowField(Field field) {
@@ -55,16 +54,16 @@ public class Unshadower {
 
     private List<List<WebElement>> extractShadowRoots(String[] cssSelectors) {
         WebElement domRoot = webDriver.findElement(By.xpath("/*"));
-        List<List<WebElement>> acc = singletonList(singletonList(domRoot));
+        List<List<WebElement>> currentShadowRootsInContext = singletonList(singletonList(domRoot));
 
         if (cssSelectors.length == 1) {
-            acc = extractElementsFromShadowRoot(acc, cssSelectors[0], By.xpath("/*"));
+            currentShadowRootsInContext = extractElementsFromShadowRoot(currentShadowRootsInContext, cssSelectors[0], By.xpath("/*"));
         } else {
             for (int i = 0; cssSelectors.length - 1 > i; i++) {
-                acc = extractElementsFromShadowRoot(acc, cssSelectors[i], By.cssSelector(cssSelectors[i + 1]));
+                currentShadowRootsInContext = extractElementsFromShadowRoot(currentShadowRootsInContext, cssSelectors[i], By.cssSelector(cssSelectors[i + 1]));
             }
         }
-        return acc;
+        return currentShadowRootsInContext;
     }
 
     private List<List<WebElement>> extractElementsFromShadowRoot(List<List<WebElement>> previousNodes,
