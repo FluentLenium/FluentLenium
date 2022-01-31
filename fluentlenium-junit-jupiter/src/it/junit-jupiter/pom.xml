@@ -18,7 +18,7 @@
 
     <properties>
         <it.project.version>5.0.1</it.project.version>
-        <selenium.version>4.1.1</selenium.version>
+        <selenium.version>4.1.2</selenium.version>
     </properties>
 
     <dependencyManagement>
