@@ -74,7 +74,7 @@ public class SeleniumVersionCheckLoggingTest {
 
         SeleniumVersionChecker.logWarningsWhenSeleniumVersionIsWrong(parentModel);
 
-        assertThat(listAppender.list).size().isZero();
+        assertThat(listAppender.list).isEmpty();
     }
 
     private Model getMavenModel(String pom) {
