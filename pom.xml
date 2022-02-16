@@ -670,7 +670,6 @@
                                 <goals>
                                     <goal>check</goal>
                                 </goals>
-
                             </execution>
                         </executions>
                         <configuration>
