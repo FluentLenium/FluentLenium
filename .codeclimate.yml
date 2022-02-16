@@ -12,11 +12,6 @@ plugins:
     config:
       file: dev-config/pmd/fluentlenium_pmd.xml
 
-ratings:
-  paths:
-  - "**.java"
-  - "**.groovy"
-
 exclude_patterns:
   - "**/*.js"
   - "**/*.html"
