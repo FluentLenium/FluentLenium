@@ -1,15 +1,16 @@
 ---
+version: 2
+
 plugins:
   checkstyle:
     enabled: true
     config:
       file: dev-config/checkstyle/fluentlenium_checks.xml
 
-engines:
   pmd:
     enabled: true
-    config: dev-config/pmd/fluentlenium_pmd.xml
-    channel: "beta"
+    config:
+      file: dev-config/pmd/fluentlenium_pmd.xml
 
 ratings:
   paths:
