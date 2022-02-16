@@ -660,7 +660,7 @@
                             <dependency>
                                 <groupId>com.puppycrawl.tools</groupId>
                                 <artifactId>checkstyle</artifactId>
-                                <version>9.2.1</version>
+                                <version>9.3</version>
                             </dependency>
                         </dependencies>
                         <executions>
@@ -670,18 +670,18 @@
                                 <goals>
                                     <goal>check</goal>
                                 </goals>
-                                <configuration>
-                                    <configLocation>dev-config/checkstyle/fluentlenium_checks.xml</configLocation>
-                                    <consoleOutput>true</consoleOutput>
-                                    <encoding>${project.build.sourceEncoding}</encoding>
-                                    <failOnViolation>true</failOnViolation>
-                                    <failsOnError>true</failsOnError>
-                                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                                    <logViolationsToConsole>true</logViolationsToConsole>
-                                    <violationSeverity>error</violationSeverity>
-                                </configuration>
                             </execution>
                         </executions>
+                        <configuration>
+                            <configLocation>dev-config/checkstyle/fluentlenium_checks.xml</configLocation>
+                            <consoleOutput>true</consoleOutput>
+                            <encoding>${project.build.sourceEncoding}</encoding>
+                            <failOnViolation>true</failOnViolation>
+                            <failsOnError>true</failsOnError>
+                            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                            <logViolationsToConsole>true</logViolationsToConsole>
+                            <violationSeverity>error</violationSeverity>
+                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>

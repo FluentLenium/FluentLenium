@@ -77,6 +77,13 @@
         <property name="message" value="RegexpSingleline - Line has trailing spaces."/>
     </module>
 
+    <!-- Checks for Size Violations.                    -->
+    <!-- See http://checkstyle.sf.net/config_sizes.html -->
+    <module name="LineLength">
+        <property name="max" value="130"/>
+        <property name="ignorePattern" value="^import .*"/>
+    </module>
+
     <!-- Checks for Headers                                -->
     <!-- See http://checkstyle.sf.net/config_header.html   -->
     <!-- <module name="Header"> -->
@@ -125,12 +132,7 @@
         </module>
 
 
-        <!-- Checks for Size Violations.                    -->
-        <!-- See http://checkstyle.sf.net/config_sizes.html -->
-        <module name="LineLength">
-            <property name="max" value="130"/>
-            <property name="ignorePattern" value="^import .*"/>
-        </module>
+
         <module name="MethodLength"/> <!-- def to 150 lines -->
         <module name="ParameterNumber">
             <property name="max" value="10"/>
@@ -229,11 +231,14 @@
         </module>
 
         <module name="JavadocMethod">
-            <property name="excludeScope" value="private"/>
-            <property name="allowMissingPropertyJavadoc" value="true"/>
             <property name="allowedAnnotations" value="Override,Test,Before,After,BeforeMethod,AfterMethod"/>
-            <property name="allowUndeclaredRTE" value="true"/>
         </module>
+
+        <module name="MissingJavadocMethod">
+            <property name="allowMissingPropertyJavadoc" value="true"/>
+            <property name="excludeScope" value="private"/>
+        </module>
+
         <module name="JavadocType">
             <property name="scope" value="package"/>
         </module>

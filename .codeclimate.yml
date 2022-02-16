@@ -1,25 +1,16 @@
 ---
-engines:
-  pmd:
-    enabled: true
-    config: dev-config/pmd/fluentlenium_pmd.xml
-    channel: "beta"
+version: 2
+
+plugins:
   checkstyle:
     enabled: true
-    config: dev-config/checkstyle/fluentlenium_checks.xml
-    channel: "beta"
-    checks:
-      com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck:
-        enabled: false
-      com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck:
-        enabled: false
-      com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck:
-        enabled: false
+    config:
+      file: dev-config/checkstyle/fluentlenium_checks.xml
 
-ratings:
-  paths:
-  - "**.java"
-  - "**.groovy"
+  pmd:
+    enabled: true
+    config:
+      file: dev-config/pmd/fluentlenium_pmd.xml
 
 exclude_patterns:
   - "**/*.js"
