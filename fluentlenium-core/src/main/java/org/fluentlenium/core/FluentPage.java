@@ -188,7 +188,7 @@ public class FluentPage extends DefaultFluentContainer implements FluentPageCont
     }
 
     public void unshadowAllFields() {
-        if(getDriver() != null) {
+        if (getDriver() != null) {
             new Unshadower(getDriver(), this).unshadowAllAnnotatedFields();
         }
     }

@@ -90,7 +90,7 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private <T> void unshadowFields(T container) {
-        if(container instanceof FluentPage) {
+        if (container instanceof FluentPage) {
             FluentPage page = (FluentPage) container;
             page.verifyIsLoaded();
             page.unshadowAllFields();
