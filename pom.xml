@@ -122,7 +122,7 @@
         <selenium.version>4.1.2</selenium.version>
         <junit.jupiter.version>5.6.1</junit.jupiter.version>
         <maven.version.rules>file:///${project.basedir}/maven-version-rules.xml</maven.version.rules>
-        <spring.version>5.3.15</spring.version>
+        <spring.version>5.3.16</spring.version>
         <slf4j.version>1.7.36</slf4j.version>
     </properties>
 
