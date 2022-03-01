@@ -46,7 +46,7 @@
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-devtools-v95</artifactId>
+            <artifactId>${seleniumDevtools.artifactId}</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
