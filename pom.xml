@@ -393,8 +393,6 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.0.0-M5</version>
                     <configuration>
-                        <useUnlimitedThreads>true</useUnlimitedThreads>
-                        <parallel>methods</parallel>
                         <excludes>
                             <exclude>**/integration/**/*</exclude>
                             <exclude>**/ignore/**/*</exclude>
@@ -417,8 +415,6 @@
                         </execution>
                     </executions>
                     <configuration>
-                        <useUnlimitedThreads>true</useUnlimitedThreads>
-                        <parallel>methods</parallel>
                         <includes>
                             <include>**/integration/**/*</include>
                         </includes>
