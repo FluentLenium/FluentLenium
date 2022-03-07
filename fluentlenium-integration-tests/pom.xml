@@ -92,11 +92,12 @@
                 <artifactId>maven-surefire-plugin</artifactId>
 
                 <configuration>
+                    <forkCount>2</forkCount>
+
                     <systemPropertyVariables>
                         <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
                         <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties</java.util.logging.config.file>
                         <webdriver.chrome.silentOutput>true</webdriver.chrome.silentOutput>
-                        <forkCount>2</forkCount>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
