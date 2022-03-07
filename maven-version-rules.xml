@@ -6,4 +6,12 @@
         <ignoreVersion type="regex">.*[-_\.](alpha|Alpha|ALPHA|b|beta|Beta|BETA|rc|RC|M|EA)[-_\.]?[0-9]*.*</ignoreVersion>
         <ignoreVersion type="regex">.*-b\d*\.\d*</ignoreVersion>
     </ignoreVersions>
+
+    <rules>
+        <rule groupId="commons-io" artifactId="commons-io" comparisonMethod="maven">
+            <ignoreVersions>
+                <ignoreVersion type="exact">20030203.000550</ignoreVersion>
+            </ignoreVersions>
+        </rule>
+    </rules>
 </ruleset>
