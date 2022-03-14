@@ -49,7 +49,7 @@ class VideoRecordingTestContainersSpec : FluentFreeSpec() {
     override fun extensions(): List<Extension> =
         listOf(TestContainerExtension(dockerChrome, LifecycleMode.Leaf))
 
-    override fun beforeSpec(spec: Spec) {
+    override suspend fun beforeSpec(spec: Spec) {
         videoDirectory.mkdirs()
         videoDirectory.exists() shouldBe true
     }
