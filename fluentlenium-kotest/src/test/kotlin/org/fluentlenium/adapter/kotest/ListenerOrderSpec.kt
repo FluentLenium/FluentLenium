@@ -11,27 +11,27 @@ import io.kotest.core.test.TestResult
 
 class ListenerOrderSpec : StringSpec() {
 
-    override fun beforeEach(testCase: TestCase) {
+    override suspend fun beforeEach(testCase: TestCase) {
         println("f beforeEach")
     }
 
-    override fun beforeAny(testCase: TestCase) {
+    override suspend fun beforeAny(testCase: TestCase) {
         println("f beforeAny")
     }
 
-    override fun beforeTest(testCase: TestCase) {
+    override suspend fun beforeTest(testCase: TestCase) {
         println("f beforeTest")
     }
 
-    override fun afterEach(testCase: TestCase, result: TestResult) {
+    override suspend fun afterEach(testCase: TestCase, result: TestResult) {
         println("f afterEach")
     }
 
-    override fun afterAny(testCase: TestCase, result: TestResult) {
+    override suspend fun afterAny(testCase: TestCase, result: TestResult) {
         println("f afterAny")
     }
 
-    override fun afterTest(testCase: TestCase, result: TestResult) {
+    override suspend fun afterTest(testCase: TestCase, result: TestResult) {
         println("f afterTest")
     }
 
