@@ -38,6 +38,13 @@ jobs:
     - name: Java 8 - unit & integration tests
       run: mvn -T 1C -B -Pjava8 clean verify --file pom.xml
 
+    - name: Publish Test reports
+      uses: mikepenz/action-junit-report@v2
+      if: always() # always run even if the previous step fails
+      with:
+        check_name: Java 8 Test Reports
+        report_paths: '**/target/*-reports/TEST-*.xml'
+
   java11-build:
     needs: [ check-env ]
     runs-on: ubuntu-latest
@@ -52,6 +59,12 @@ jobs:
     - name: Java 11 - unit & integration tests code coverage
       run: |
         mvn -T 1C -B -Pjava11 clean verify jacoco:report --file pom.xml
+    - name: Publish Test reports
+      uses: mikepenz/action-junit-report@v2
+      if: always() # always run even if the previous step fails
+      with:
+        check_name: Java 11 Test Reports
+        report_paths: '**/target/*-reports/TEST-*.xml'
     - name: Coveralls report
       if: needs.check-env.outputs.repo-token-available == 'true'
       env:
