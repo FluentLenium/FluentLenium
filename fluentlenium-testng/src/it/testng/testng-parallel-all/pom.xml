@@ -7,6 +7,7 @@
         <groupId>org.fluentlenium.it</groupId>
         <artifactId>testng</artifactId>
         <version>testing</version>
+        <relativePath>..</relativePath>
     </parent>
 
     <artifactId>testng-parallel-all</artifactId>
@@ -56,9 +57,6 @@
                 <configuration>
                     <parallel>all</parallel>
                     <threadCount>4</threadCount>
-                    <systemPropertyVariables>
-                        <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
-                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>

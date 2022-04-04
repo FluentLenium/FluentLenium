@@ -17,7 +17,8 @@
         <module>testng-default</module>
         <module>testng-parallel-classes</module>
         <module>testng-parallel-methods</module>
-        <module>testng-parallel-all</module>
+        <!-- TestNG only supports METHODS and CLASSES-->
+        <!-- <module>testng-parallel-all</module> -->
     </modules>
 
     <dependencyManagement>
@@ -56,7 +57,7 @@
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
-                <version>7.3.0</version>
+                <version>7.5</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -97,6 +98,16 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M6</version>
+
+                    <configuration>
+                        <systemPropertyVariables>
+                            <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-failsafe-plugin</artifactId>
                     <version>3.0.0-M6</version>
                 </plugin>
             </plugins>
