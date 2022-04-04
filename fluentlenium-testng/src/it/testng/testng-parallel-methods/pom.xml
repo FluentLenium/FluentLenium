@@ -51,9 +51,6 @@
                 <configuration>
                     <parallel>methods</parallel>
                     <threadCount>4</threadCount>
-                    <systemPropertyVariables>
-                        <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
-                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>
