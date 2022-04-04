@@ -56,7 +56,7 @@
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
-                <version>7.3.0</version>
+                <version>7.5.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -97,6 +97,10 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M6</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-failsafe-plugin</artifactId>
                     <version>3.0.0-M6</version>
                 </plugin>
             </plugins>
