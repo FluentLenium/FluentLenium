@@ -83,7 +83,7 @@ jobs:
           distribution: 'zulu'
           cache: "maven"
       - name: Java 11 - unit & integration tests
-        run: mvn -Dit.project.version=5.0.3-SNAPSHOT -B -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml -Dtest=*/it/* -DfailIfNoTests=false
+        run: mvn -Dit.project.version=5.0.3-SNAPSHOT -B -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
 
   java11-javadoc:
     runs-on: ubuntu-latest
