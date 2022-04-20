@@ -12,7 +12,7 @@
     <description>Kotest Adapter for FluentLenium</description>
 
     <properties>
-        <kotlin.version>1.6.20</kotlin.version>
+        <kotlin.version>1.6.21</kotlin.version>
         <kotest.version>5.2.3</kotest.version>
         <dokka.version>1.6.20</dokka.version>
         <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
