@@ -262,12 +262,12 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>4.5.0</version>
+                <version>4.5.1</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
-                <version>4.5.0</version>
+                <version>4.5.1</version>
             </dependency>
             <dependency>
                 <groupId>net.bytebuddy</groupId>
@@ -656,7 +656,7 @@
                             <dependency>
                                 <groupId>com.puppycrawl.tools</groupId>
                                 <artifactId>checkstyle</artifactId>
-                                <version>10.1</version>
+                                <version>10.2</version>
                             </dependency>
                         </dependencies>
                         <executions>
