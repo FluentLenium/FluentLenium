@@ -2,6 +2,7 @@ package org.fluentlenium.configuration;
 
 import org.junit.Test;
 import org.openqa.selenium.HasCapabilities;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.BrowserType;
@@ -9,6 +10,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.openqa.selenium.remote.Browser.HTMLUNIT;
 
 public class ReflectiveWebDriverFactoryTest {
     public static final class NoConstructorDriver extends HtmlUnitDriver {
@@ -116,7 +118,7 @@ public class ReflectiveWebDriverFactoryTest {
         assertThat(webDriverFactory.getNames())
                 .containsExactly("htmlunit", HtmlUnitDriver.class.getName(), HtmlUnitDriver.class.getSimpleName());
 
-        WebDriver webDriver = webDriverFactory.newWebDriver(DesiredCapabilities.htmlUnit(), null);
+        WebDriver webDriver = webDriverFactory.newWebDriver(new DesiredCapabilities(HTMLUNIT.browserName(), "", Platform.ANY), null);
         try {
             assertThat(webDriver).isExactlyInstanceOf(HtmlUnitDriver.class);
             assertThat(((HasCapabilities) webDriver).getCapabilities().is("javascriptEnabled")).isTrue();
@@ -134,7 +136,7 @@ public class ReflectiveWebDriverFactoryTest {
         assertThat(webDriverFactory.getNames())
                 .containsExactly("htmlunit", HtmlUnitDriver.class.getName(), HtmlUnitDriver.class.getSimpleName());
 
-        DesiredCapabilities desiredCapabilities = DesiredCapabilities.htmlUnit();
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilities(HTMLUNIT.browserName(), "", Platform.ANY);
         desiredCapabilities.setJavascriptEnabled(false);
         desiredCapabilities.setBrowserName(BrowserType.HTMLUNIT);
 
