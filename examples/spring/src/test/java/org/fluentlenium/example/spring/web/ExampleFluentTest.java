@@ -1,6 +1,7 @@
 package org.fluentlenium.example.spring.web;
 
 import io.appium.java_client.AppiumDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.fluentlenium.adapter.testng.FluentTestNgSpringTest;
 import org.fluentlenium.example.spring.config.Config;
 import org.fluentlenium.example.spring.config.ConfigException;
@@ -21,6 +22,10 @@ import java.net.URL;
 
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = Config.class)
 public class ExampleFluentTest extends FluentTestNgSpringTest {
+
+    static {
+        WebDriverManager.chromedriver().setup();
+    }
 
     private static final Logger log = LoggerFactory.getLogger(ExampleFluentTest.class);
 
