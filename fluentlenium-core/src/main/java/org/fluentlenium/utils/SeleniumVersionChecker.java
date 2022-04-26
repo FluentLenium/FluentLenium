@@ -35,7 +35,7 @@ public final class SeleniumVersionChecker {
             "You are using incompatible Selenium version. Please change it to {}. "
                     + "You can find example on project main page {}";
 
-    private static final String EXPECTED_VERSION = "4.1.2";
+    private static final String EXPECTED_VERSION = "4.1.3";
     private static final String SELENIUM_GROUP_ID = "org.seleniumhq.selenium";
     private static final String FL_URL = "https://github.com/FluentLenium/FluentLenium";
     private static final String POM = "pom.xml";
