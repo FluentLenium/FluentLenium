@@ -124,7 +124,7 @@
         <maven.version.rules>file:///${project.basedir}/maven-version-rules.xml</maven.version.rules>
         <spring.version>5.3.19</spring.version>
         <slf4j.version>1.7.36</slf4j.version>
-        <seleniumDevtools.artifactId>selenium-devtools-v99</seleniumDevtools.artifactId>
+        <seleniumDevtools.artifactId>selenium-devtools-v101</seleniumDevtools.artifactId>
     </properties>
 
     <dependencyManagement>
