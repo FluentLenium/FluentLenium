@@ -36,7 +36,7 @@ jobs:
         distribution: 'zulu'
         cache: "maven"
     - name: Java 8 - unit & integration tests
-      run: mvn -T 1C -B -Pjava8 clean verify --file pom.xml
+      run: mvn -T 1C -B -Pjava8 -Dfailsafe.rerunFailingTestsCount=1 clean verify
 
     - name: Publish Test reports
       uses: mikepenz/action-junit-report@v2
@@ -58,7 +58,7 @@ jobs:
         cache: "maven"
     - name: Java 11 - unit & integration tests code coverage
       run: |
-        mvn -T 1C -B -Pjava11 clean verify jacoco:report --file pom.xml
+        mvn -T 1C -B -Pjava11 -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
     - name: Publish Test reports
       uses: mikepenz/action-junit-report@v2
       if: always() # always run even if the previous step fails
@@ -70,7 +70,7 @@ jobs:
       env:
         REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
       run: |
-        mvn -B -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report --file pom.xml
+        mvn -B -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report
 
   java11-parallelism-tests:
     runs-on: ubuntu-latest
@@ -83,7 +83,7 @@ jobs:
           distribution: 'zulu'
           cache: "maven"
       - name: Java 11 - unit & integration tests
-        run: mvn -Dit.project.version=5.0.3-SNAPSHOT -B -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test --file pom.xml -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
+        run: mvn -Dit.project.version=5.0.3-SNAPSHOT -B -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
 
   java11-javadoc:
     runs-on: ubuntu-latest
