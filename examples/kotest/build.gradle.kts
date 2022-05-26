@@ -46,7 +46,7 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5")
     testImplementation("io.kotest:kotest-assertions-core")
 
-    testImplementation("io.github.bonigarcia:webdrivermanager:5.1.1")
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.2.0")
 
     val seleniumVersion = "4.1.4"
     testImplementation("org.seleniumhq.selenium:selenium-api:$seleniumVersion")
@@ -54,7 +54,7 @@ dependencies {
     testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v101:$seleniumVersion")
 
     testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.3.3")
-    testImplementation("org.testcontainers:selenium:1.17.1")
+    testImplementation("org.testcontainers:selenium:1.17.2")
 
     testImplementation("ch.qos.logback:logback-classic:1.2.11")
     testRuntimeOnly("org.slf4j:jul-to-slf4j:1.7.36")
