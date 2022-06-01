@@ -62,7 +62,7 @@ class SpockControlSpec extends FluentSpecification {
 
     def 'should return capabilities from config'() {
         when:
-        def caps = getCapabilities().getCapability("chromeOptions")
+        def caps = getCapabilities().getCapability("goog:chromeOptions")
 
         then:
         expect caps, is(not(null))
