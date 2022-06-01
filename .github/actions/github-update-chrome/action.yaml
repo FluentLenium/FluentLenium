@@ -1,0 +1,21 @@
+name: 'Update Chrome version'
+description: "this update the available chrome version"
+runs:
+  using: "composite"
+  steps:
+    - name: Uninstall Google Chrome
+      shell: bash
+      run: |
+        which google-chrome
+        sudo apt --purge remove google-chrome-stable
+
+    - uses: browser-actions/setup-chrome@latest
+      with:
+        chrome-version: stable
+
+    - name: Link Google Chrome
+      shell: bash
+      run: |
+        which chrome
+        sudo ln -s `which chrome` /usr/bin/google-chrome
+        google-chrome --version

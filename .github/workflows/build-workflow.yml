@@ -35,6 +35,9 @@ jobs:
         java-version: 8
         distribution: 'zulu'
         cache: "maven"
+
+    - uses: ./.github/actions/github-update-chrome
+
     - name: Java 8 - unit & integration tests
       run: mvn -T 1C -B -Pjava8 -Dfailsafe.rerunFailingTestsCount=1 clean verify
 
@@ -56,6 +59,9 @@ jobs:
         java-version: 11
         distribution: 'zulu'
         cache: "maven"
+
+    - uses: ./.github/actions/github-update-chrome
+
     - name: Java 11 - unit & integration tests code coverage
       run: |
         mvn -T 1C -B -Pjava11 -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
@@ -108,6 +114,8 @@ jobs:
           java-version: 11
           distribution: 'zulu'
           cache: "maven"
+      - uses: ./.github/actions/github-update-chrome
+
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: Compile gradle example
