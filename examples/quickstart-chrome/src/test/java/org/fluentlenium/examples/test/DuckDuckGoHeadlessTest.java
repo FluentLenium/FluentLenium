@@ -5,7 +5,7 @@ import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.examples.pages.DuckDuckMainPage;
 import org.junit.Test;
 
-@FluentConfiguration(capabilities = "{\"chromeOptions\": {\"args\": [\"headless\",\"disable-gpu\"]}}")
+@FluentConfiguration(capabilities = "{\"goog:chromeOptions\": {\"args\": [\"headless\",\"disable-gpu\"]}}")
 public class DuckDuckGoHeadlessTest extends AbstractChromeTest {
 
     @Page

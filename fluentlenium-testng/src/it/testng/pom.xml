@@ -102,7 +102,7 @@
 
                     <configuration>
                         <systemPropertyVariables>
-                            <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
+                            <fluentlenium.capabilities>{"goog:chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
                         </systemPropertyVariables>
                     </configuration>
                 </plugin>

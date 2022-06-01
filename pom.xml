@@ -125,6 +125,7 @@
         <spring.version>5.3.20</spring.version>
         <slf4j.version>1.7.36</slf4j.version>
         <seleniumDevtools.artifactId>selenium-devtools-v101</seleniumDevtools.artifactId>
+        <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities.default>
     </properties>
 
     <dependencyManagement>

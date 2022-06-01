@@ -27,7 +27,7 @@ tasks.withType<Test>().configureEach {
     systemProperties(
         mapOf(
             "fluentlenium.capabilities" to
-                    """{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}""",
+                    """{"goog:chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}""",
             "java.util.logging.config.file" to "${projectDir}/src/test/resources/logging.properties"
         )
     )
