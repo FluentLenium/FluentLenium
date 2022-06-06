@@ -193,7 +193,7 @@
             <dependency>
                 <groupId>io.appium</groupId>
                 <artifactId>java-client</artifactId>
-                <version>8.1.0</version>
+                <version>8.1.1</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
