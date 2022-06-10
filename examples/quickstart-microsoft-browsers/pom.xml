@@ -12,7 +12,7 @@
         <fluentlenium.version>5.0.3-SNAPSHOT</fluentlenium.version>
 
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-        <selenium.version>4.2.0</selenium.version>
+        <selenium.version>4.2.2</selenium.version>
     </properties>
 
     <name>FluentLenium Examples Edge IE</name>
