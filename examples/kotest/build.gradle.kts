@@ -48,10 +48,10 @@ dependencies {
 
     testImplementation("io.github.bonigarcia:webdrivermanager:5.2.0")
 
-    val seleniumVersion = "4.1.4"
+    val seleniumVersion = "4.2.2"
     testImplementation("org.seleniumhq.selenium:selenium-api:$seleniumVersion")
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion")
-    testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v101:$seleniumVersion")
+    testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v102:$seleniumVersion")
 
     testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.3.3")
     testImplementation("org.testcontainers:selenium:1.17.2")
