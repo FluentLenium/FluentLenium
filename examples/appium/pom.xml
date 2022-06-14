@@ -14,7 +14,7 @@
 
     <properties>
         <fluentlenium.version>5.0.3-SNAPSHOT</fluentlenium.version>
-        <spring.version>5.3.16</spring.version>
+        <spring.version>5.3.20</spring.version>
         <selenium.version>4.2.2</selenium.version>
     </properties>
 
@@ -30,7 +30,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M5</version>
+                    <version>3.0.0-M7</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -45,7 +45,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.0</version>
+                <version>3.10.1</version>
                 <configuration>
                     <release>11</release>
                 </configuration>
@@ -92,7 +92,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.10</version>
+            <version>1.2.11</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

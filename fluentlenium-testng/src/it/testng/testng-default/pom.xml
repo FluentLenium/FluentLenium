@@ -8,6 +8,7 @@
         <groupId>org.fluentlenium.it</groupId>
         <artifactId>testng</artifactId>
         <version>testing</version>
+        <relativePath>..</relativePath>
     </parent>
 
     <artifactId>testng-default</artifactId>
@@ -42,19 +43,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <systemPropertyVariables>
-                        <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu",
-                            "disable-dev-shm-usage"]}}
-                        </fluentlenium.capabilities>
-                    </systemPropertyVariables>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

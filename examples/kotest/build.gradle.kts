@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.6.10"
+    kotlin("jvm") version "1.6.21"
 }
 
 repositories {
@@ -27,7 +27,7 @@ tasks.withType<Test>().configureEach {
     systemProperties(
         mapOf(
             "fluentlenium.capabilities" to
-                    """{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}""",
+                    """{"goog:chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}""",
             "java.util.logging.config.file" to "${projectDir}/src/test/resources/logging.properties"
         )
     )
@@ -40,23 +40,23 @@ dependencies {
     testImplementation("org.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
     testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
 
-    val koTestVersion = "5.1.0"
+    val koTestVersion = "5.3.0"
     implementation(platform("io.kotest:kotest-bom:$koTestVersion"))
 
     testImplementation("io.kotest:kotest-runner-junit5")
     testImplementation("io.kotest:kotest-assertions-core")
 
-    testImplementation("io.github.bonigarcia:webdrivermanager:5.1.0")
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.2.0")
 
     val seleniumVersion = "4.2.2"
     testImplementation("org.seleniumhq.selenium:selenium-api:$seleniumVersion")
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion")
     testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v102:$seleniumVersion")
 
-    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.2.1")
-    testImplementation("org.testcontainers:selenium:1.16.3")
+    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.3.3")
+    testImplementation("org.testcontainers:selenium:1.17.2")
 
-    testImplementation("ch.qos.logback:logback-classic:1.2.10")
+    testImplementation("ch.qos.logback:logback-classic:1.2.11")
     testRuntimeOnly("org.slf4j:jul-to-slf4j:1.7.36")
 }
 

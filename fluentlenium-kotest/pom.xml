@@ -12,9 +12,9 @@
     <description>Kotest Adapter for FluentLenium</description>
 
     <properties>
-        <kotlin.version>1.6.10</kotlin.version>
-        <kotest.version>5.1.0</kotest.version>
-        <dokka.version>1.6.10</dokka.version>
+        <kotlin.version>1.6.21</kotlin.version>
+        <kotest.version>5.3.1</kotest.version>
+        <dokka.version>1.6.21</dokka.version>
         <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
     </properties>
 
@@ -69,12 +69,12 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.1.0</version>
+            <version>5.2.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-devtools-v102</artifactId>
+            <artifactId>${seleniumDevtools.artifactId}</artifactId>
             <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
@@ -126,7 +126,7 @@
                     </includes>
 
                     <systemPropertyVariables>
-                        <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
+                        <fluentlenium.capabilities>${fluentlenium.capabilities.default}</fluentlenium.capabilities>
                         <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties</java.util.logging.config.file>
                         <webdriver.chrome.silentOutput>true</webdriver.chrome.silentOutput>
                     </systemPropertyVariables>
