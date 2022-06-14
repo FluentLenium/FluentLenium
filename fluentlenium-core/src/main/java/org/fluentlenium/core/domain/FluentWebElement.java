@@ -712,8 +712,7 @@ public class FluentWebElement extends Component
         try {
             clickable = ExpectedConditions.elementToBeClickable(getElement())
                     .apply(control.getDriver()) != null;
-        } catch (NoSuchElementException | StaleElementReferenceException
-                | ElementClickInterceptedException e) {
+        } catch (ElementNotInteractableException | NoSuchElementException | StaleElementReferenceException e) {
             clickable = false;
         }
         return clickable;
