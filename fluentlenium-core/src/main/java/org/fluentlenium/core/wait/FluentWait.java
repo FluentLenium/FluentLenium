@@ -32,6 +32,7 @@ public class FluentWait
     private boolean useDefaultException;
     private boolean messageDefined;
     private boolean defaultExceptionsRegistered;
+    private boolean ignoreAssertionErrorRegistered;
 
     /**
      * Creates a new fluent wait.
@@ -215,7 +216,10 @@ public class FluentWait
     public FluentWait untilAsserted(Runnable block) {
         updateWaitWithDefaultExceptions();
 
-        ignoreAll(Collections.singletonList(AssertionError.class));
+        if (!ignoreAssertionErrorRegistered) {
+            ignoreAll(Collections.singletonList(AssertionError.class));
+            ignoreAssertionErrorRegistered = true;
+        }
 
         wait.until(
                 (control) -> {

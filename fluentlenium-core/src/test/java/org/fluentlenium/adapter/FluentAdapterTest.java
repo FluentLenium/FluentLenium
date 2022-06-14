@@ -3,6 +3,7 @@ package org.fluentlenium.adapter;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
 import static org.mockito.Mockito.verify;
+import static org.openqa.selenium.remote.Browser.HTMLUNIT;
 
 import org.fluentlenium.configuration.ConfigurationProperties;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -99,7 +101,7 @@ public class FluentAdapterTest {
 
             @Override
             public MutableCapabilities getCapabilities() {
-                return DesiredCapabilities.htmlUnit();
+                return new DesiredCapabilities(HTMLUNIT.browserName(), "", Platform.ANY);
             }
         };
 

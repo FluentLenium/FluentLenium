@@ -28,10 +28,10 @@ class VideoRecordingWebDriverManagerSpec : FluentFreeSpec() {
         WebDriverManager.chromedriver()
             .browserInDocker()
             .enableVnc()
-            .recordingOutput(videoDirectory)
+            .dockerRecordingOutput(videoDirectory)
             .enableRecording()
 
-    override fun beforeSpec(spec: Spec) {
+    override suspend fun beforeSpec(spec: Spec) {
         if (!videoDirectory.exists()) {
             videoDirectory.createDirectory()
         }

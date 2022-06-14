@@ -22,6 +22,7 @@ import org.fluentlenium.core.hook.HookControlImpl;
 import org.fluentlenium.core.hook.HookDefinition;
 import org.fluentlenium.core.inject.ContainerContext;
 import org.fluentlenium.core.inject.FluentInjectControl;
+import org.fluentlenium.core.inject.Unshadower;
 import org.fluentlenium.core.label.FluentLabel;
 import org.fluentlenium.core.label.FluentLabelImpl;
 import org.fluentlenium.core.navigation.NavigationControl;
@@ -94,6 +95,17 @@ public class FluentWebElement extends Component
         conditions = new WebElementConditions(this);
         label = new FluentLabelImpl<>(this, () -> getElement().toString());
         javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new SupplierOfInstance<>(this));
+        unshadowAllFields();
+    }
+
+    public FluentControl getFluentControl() {
+        return control;
+    }
+
+    public void unshadowAllFields() {
+        if (getDriver() != null) {
+            new Unshadower(getDriver(), this).unshadowAllAnnotatedFields();
+        }
     }
 
     private HookControl<FluentWebElement> getHookControl() { // NOPMD UnusedPrivateMethod
@@ -700,8 +712,7 @@ public class FluentWebElement extends Component
         try {
             clickable = ExpectedConditions.elementToBeClickable(getElement())
                     .apply(control.getDriver()) != null;
-        } catch (NoSuchElementException | StaleElementReferenceException
-                | ElementNotVisibleException | ElementClickInterceptedException e) {
+        } catch (ElementNotInteractableException | NoSuchElementException | StaleElementReferenceException e) {
             clickable = false;
         }
         return clickable;

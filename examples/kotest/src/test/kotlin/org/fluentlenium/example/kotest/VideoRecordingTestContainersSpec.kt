@@ -1,6 +1,5 @@
 package org.fluentlenium.example.kotest
 
-import io.kotest.core.annotation.Ignored
 import io.kotest.core.extensions.Extension
 import io.kotest.core.spec.Spec
 import io.kotest.extensions.testcontainers.LifecycleMode
@@ -19,8 +18,6 @@ import java.io.File
  * with a Docker/Chrome container (managed by TestContainers)
  * that hosts the browser.
  */
-// Testcontainers does not yet work with selenium 4: https://github.com/testcontainers/testcontainers-java/issues/4593
-@Ignored
 class VideoRecordingTestContainersSpec : FluentFreeSpec() {
 
     /**
@@ -52,7 +49,7 @@ class VideoRecordingTestContainersSpec : FluentFreeSpec() {
     override fun extensions(): List<Extension> =
         listOf(TestContainerExtension(dockerChrome, LifecycleMode.Leaf))
 
-    override fun beforeSpec(spec: Spec) {
+    override suspend fun beforeSpec(spec: Spec) {
         videoDirectory.mkdirs()
         videoDirectory.exists() shouldBe true
     }
