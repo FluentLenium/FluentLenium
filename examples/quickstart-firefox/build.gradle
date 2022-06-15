@@ -13,7 +13,8 @@ test {
 }
 
 dependencies {
-    def fluentLeniumVersion = '5.0.5-SNAPSHOT'
+    def fluentLeniumVersion = properties["fluentlenium.version"] ?: "5.0.4"
+
     implementation "org.fluentlenium:fluentlenium-junit-jupiter:$fluentLeniumVersion"
     implementation "org.fluentlenium:fluentlenium-assertj:$fluentLeniumVersion"
     testImplementation 'ch.qos.logback:logback-classic:1.2.11'

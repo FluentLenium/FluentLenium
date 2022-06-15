@@ -82,8 +82,12 @@ jobs:
           java-version: 11
           distribution: 'zulu'
           cache: "maven"
+
+      - name: determine Fluentlenium version
+        run: echo "FLUENTLENIUM_VERSION=$(mvn -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]')" >> $GITHUB_ENV
+
       - name: Java 11 - unit & integration tests
-        run: mvn -Dit.project.version=5.0.3-SNAPSHOT -B -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
+        run: mvn -Dit.project.version=$FLUENTLENIUM_VERSION -B -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
 
   java11-javadoc:
     runs-on: ubuntu-latest
@@ -110,10 +114,14 @@ jobs:
           cache: "maven"
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
+      - name: determine Fluentlenium version
+        run: echo "FLUENTLENIUM_VERSION=$(mvn -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]')" >> $GITHUB_ENV
+      - name: FluentLenium version
+        run: echo $FLUENTLENIUM_VERSION
       - name: Compile gradle example
-        run: cd examples/quickstart-firefox && ./gradlew compileTestKotlin && cd ../kotest && ./gradlew compileTestKotlin
+        run: cd examples/quickstart-firefox && ./gradlew compileTestKotlin -Pfluentlenium.version=$FLUENTLENIUM_VERSION
       - name: Run gradle kotest example
-        run: cd examples/kotest && ./gradlew -i check
+        run: cd examples/kotest && ./gradlew -i check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
 
   compile-maven-examples:
     runs-on: ubuntu-latest
