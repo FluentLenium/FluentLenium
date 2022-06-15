@@ -13,7 +13,7 @@ test {
 }
 
 dependencies {
-    def fluentLeniumVersion = '5.0.3-SNAPSHOT'
+    def fluentLeniumVersion = '5.0.5-SNAPSHOT'
     implementation "org.fluentlenium:fluentlenium-junit-jupiter:$fluentLeniumVersion"
     implementation "org.fluentlenium:fluentlenium-assertj:$fluentLeniumVersion"
     testImplementation 'ch.qos.logback:logback-classic:1.2.11'
