@@ -36,7 +36,7 @@ tasks.withType<Test>().configureEach {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
-    val fluentleniumVersion = "5.0.5-SNAPSHOT"
+    val fluentleniumVersion = properties["fluentlenium.version"] ?: "5.0.4"
     testImplementation("org.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
     testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
 
