@@ -92,7 +92,7 @@ assertThat(window().title(), equalTo("Hello toto"));
 
 ## Kotest
 
-There is a set of custom Kotest Matchers available to make assertions on
+There is a set of custom [Kotest Matchers](https://kotest.io/docs/assertions/assertions.html) available to make assertions on
 * Page
 * Alert
 * FluentWebElement
@@ -100,21 +100,23 @@ There is a set of custom Kotest Matchers available to make assertions on
 
 - Import this additional maven dependency.
 
+Check [here](https://search.maven.org/artifact/org.fluentlenium/fluentlenium-kotest-assertions) for the latest available version
+
 ```xml
 <dependency>
     <groupId>org.fluentlenium</groupId>
     <artifactId>fluentlenium-kotest-assertions</artifactId>
-    <version>5.0.1</version>
+    <version>$VERSION</version>
     <scope>test</scope>
 </dependency>
 ```
 
 ```groovy
-testImplementation 'org.fluentlenium:fluentlenium-kotest-assertions:5.0.1'
+testImplementation 'org.fluentlenium:fluentlenium-kotest-assertions:$VERSION'
 ```
 
 ```kotlin
-testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:5.0.1")
+testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:$VERSION")
 ```
 
 - Add those static imports.
@@ -126,4 +128,10 @@ import org.fluentlenium.kotest.matchers.alert.*
 import org.fluentlenium.kotest.matchers.page.*
 ```
 
-check the [example](https://github.com/FluentLenium/FluentLenium/blob/develop/examples/kotest/src/test/kotlin/org/fluentlenium/example/kotest/DuckDuckGoSpec.kt) and the [tests](../../fluentlenium-kotest-assertions) for usage examples.
+```kotlin
+jq("h1") should haveTagName("h1")
+jq("#choice option") should haveText("First Value")
+jq("button") should haveClass("class1")
+```
+
+check the [example](https://github.com/FluentLenium/FluentLenium/blob/develop/examples/kotest/src/test/kotlin/org/fluentlenium/example/kotest/DuckDuckGoSpec.kt) and the [tests](https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-kotest-assertions/src/test/kotlin/org/fluentlenium/kotest/matchers) for usage examples.
