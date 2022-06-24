@@ -12,7 +12,7 @@
 
     <properties>
         <fluentlenium.version>5.0.5-SNAPSHOT</fluentlenium.version>
-        <selenium.version>4.2.2</selenium.version>
+        <selenium.version>4.3.0</selenium.version>
     </properties>
 
     <build>
