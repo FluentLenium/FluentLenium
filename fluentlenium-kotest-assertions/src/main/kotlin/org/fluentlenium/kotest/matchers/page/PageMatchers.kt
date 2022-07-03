@@ -56,7 +56,6 @@ fun FluentPage.shouldNotHaveElementDisplayed(element: FluentWebElement) =
 
 fun haveTitle(title: String) = object : Matcher<FluentPage> {
     override fun test(value: FluentPage): MatcherResult {
-
         val pageTitle: String = value.driver.title
 
         return MatcherResult(
@@ -74,7 +73,6 @@ fun FluentPage.shouldNotHaveTitle(title: String) = also { this shouldNot haveTit
 
 fun haveUrl(url: String) = object : Matcher<FluentPage> {
     override fun test(value: FluentPage): MatcherResult {
-
         val currentUrl: String = value.driver.currentUrl
 
         return MatcherResult(

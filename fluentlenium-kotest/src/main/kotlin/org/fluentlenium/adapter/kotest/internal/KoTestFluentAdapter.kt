@@ -71,8 +71,9 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
     @ExperimentalKotest
     fun beforeTest(testCase: TestCase) {
-        if (testCase.type == TestType.Container)
+        if (testCase.type == TestType.Container) {
             return
+        }
 
         val singleThreadPerTest =
             testCase.spec.dispatcherAffinity ?: testCase.spec.dispatcherAffinity()
@@ -108,8 +109,9 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
     }
 
     fun afterEach(testCase: TestCase, result: TestResult) {
-        if (testCase.type == TestType.Container)
+        if (testCase.type == TestType.Container) {
             return
+        }
 
         val testClass = testCase.spec.javaClass
         val testName = testCase.name.testName

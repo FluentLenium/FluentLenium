@@ -21,7 +21,6 @@ class CanUseAdditionalExtensionSpec : FluentDescribeSpec() {
     }
 
     fun registerFirst(vararg extensions: Extension) {
-
         val field = TestConfiguration::class.java.getDeclaredField("_extensions")
         field.isAccessible = true
 
