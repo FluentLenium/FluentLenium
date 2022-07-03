@@ -210,12 +210,6 @@ public class MouseElementActionsTest {
         verify(mouse).mouseUp(null);
     }
 
-    @Test
-    public void testBasic() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
-        Assertions.assertThat(actions.basic()).isSameAs(mouse);
-    }
-
     private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices { // NOPMD AbstractNaming
     }
 

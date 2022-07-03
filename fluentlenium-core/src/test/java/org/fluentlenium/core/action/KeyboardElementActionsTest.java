@@ -1,23 +1,22 @@
 package org.fluentlenium.core.action;
 
-import org.assertj.core.api.Assertions;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Coordinates;
-import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Keyboard;
-import org.openqa.selenium.interactions.Locatable;
-import org.openqa.selenium.interactions.Mouse;
+import org.openqa.selenium.interactions.*;
 
-import static org.mockito.Mockito.reset;
+import java.util.Collection;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.fluentlenium.core.action.SequenceAssert.assertThatSequence;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -41,17 +40,12 @@ public class KeyboardElementActionsTest {
     @Mock
     private Coordinates coordinates;
 
+    @Captor
+    ArgumentCaptor<Collection<Sequence>> captor;
+
     @Before
     public void before() {
-        when(driver.getKeyboard()).thenReturn(keyboard);
-        when(driver.getMouse()).thenReturn(mouse);
-
         when(element.getCoordinates()).thenReturn(coordinates);
-    }
-
-    @After
-    public void after() {
-        reset(driver, keyboard, mouse);
     }
 
     @Test
@@ -59,8 +53,14 @@ public class KeyboardElementActionsTest {
         KeyboardElementActions actions = new KeyboardElementActions(driver, element);
         actions.keyDown(Keys.SHIFT);
 
-        verify(mouse).click(coordinates);
-        verify(keyboard).pressKey(Keys.SHIFT);
+        verify(driver).perform(captor.capture());
+
+        captor.getValue().forEach(v -> System.out.println(v.toJson()));
+
+        assertThat(captor.getValue()).satisfiesExactlyInAnyOrder(
+                sequence -> assertThatSequence(sequence).isKey(),
+                sequence -> assertThatSequence(sequence).isPointer()
+        );
     }
 
     @Test
@@ -92,13 +92,7 @@ public class KeyboardElementActionsTest {
         verify(keyboard).sendKeys(Keys.ENTER, Keys.SPACE);
     }
 
-    @Test
-    public void testBasic() {
-        KeyboardElementActions actions = new KeyboardElementActions(driver, element);
-        Assertions.assertThat(actions.basic()).isSameAs(keyboard);
-    }
-
-    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices { // NOPMD AbstractNaming
+    private abstract static class InputDevicesDriver implements WebDriver, Interactive { // NOPMD AbstractNaming
     }
 
     private abstract static class LocatableElement implements WebElement, Locatable { // NOPMD AbstractNaming
