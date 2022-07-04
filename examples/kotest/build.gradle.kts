@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "1.7.0"
 }
 
 repositories {
@@ -40,13 +40,13 @@ dependencies {
     testImplementation("org.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
     testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
 
-    val koTestVersion = "5.3.1"
+    val koTestVersion = "5.3.2"
     implementation(platform("io.kotest:kotest-bom:$koTestVersion"))
 
     testImplementation("io.kotest:kotest-runner-junit5")
     testImplementation("io.kotest:kotest-assertions-core")
 
-    testImplementation("io.github.bonigarcia:webdrivermanager:5.2.0")
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.2.1")
 
     val seleniumVersion = "4.2.2"
     testImplementation("org.seleniumhq.selenium:selenium-api:$seleniumVersion")
@@ -54,7 +54,7 @@ dependencies {
     testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v102:$seleniumVersion")
 
     testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.3.3")
-    testImplementation("org.testcontainers:selenium:1.17.2")
+    testImplementation("org.testcontainers:selenium:1.17.3")
 
     testImplementation("ch.qos.logback:logback-classic:1.2.11")
     testRuntimeOnly("org.slf4j:jul-to-slf4j:1.7.36")
