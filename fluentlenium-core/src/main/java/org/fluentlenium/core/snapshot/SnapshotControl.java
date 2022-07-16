@@ -30,6 +30,8 @@ public interface SnapshotControl {
     /**
      * Take a snapshot of the browser. By default the file will be a png named by the current
      * timestamp.
+     *
+     * @return the screenshot file
      */
     File takeScreenshot();
 
@@ -37,6 +39,7 @@ public interface SnapshotControl {
      * Take a snapshot of the browser into a file given by the fileName param.
      *
      * @param fileName file name for screenshot
+     * @return the screenshot file
      */
     File takeScreenshot(String fileName);
 }
