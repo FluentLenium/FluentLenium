@@ -46,9 +46,10 @@ public class FluentDriverScreenshotPersisterTest {
         mockScreenshotFromWebDriver();
         initializeDestinationFile();
 
-        screenshotPersister.persistScreenshot(destinationFile.getAbsolutePath());
+        File screenshot = screenshotPersister.persistScreenshot(destinationFile.getAbsolutePath());
 
         assertThat(destinationFile).exists();
+        assertThat(screenshot).isSameAs(destinationFile);
     }
 
     @Test
@@ -57,9 +58,10 @@ public class FluentDriverScreenshotPersisterTest {
         initializeDestinationFile();
         when(configuration.getScreenshotPath()).thenReturn(destinationFile.getParent());
 
-        screenshotPersister.persistScreenshot(destinationFile.getName());
+        File screenshot = screenshotPersister.persistScreenshot(destinationFile.getName());
 
         assertThat(destinationFile).exists();
+        assertThat(screenshot).isSameAs(destinationFile);
     }
 
     private void mockScreenshotFromWebDriver() {

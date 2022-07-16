@@ -42,6 +42,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.*;
 import java.util.function.Function;
@@ -151,13 +152,13 @@ public class FluentWebElement extends Component
     }
 
     @Override
-    public void takeScreenshot() {
-        control.takeScreenshot();
+    public File takeScreenshot() {
+        return control.takeScreenshot();
     }
 
     @Override
-    public void takeScreenshot(String fileName) {
-        control.takeScreenshot(fileName);
+    public File takeScreenshot(String fileName) {
+        return control.takeScreenshot(fileName);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package org.fluentlenium.core.snapshot;
 
+import java.io.File;
+
 /**
  * Control interface for Screenshot and HTML Dumps.
  */
@@ -29,12 +31,12 @@ public interface SnapshotControl {
      * Take a snapshot of the browser. By default the file will be a png named by the current
      * timestamp.
      */
-    void takeScreenshot();
+    File takeScreenshot();
 
     /**
      * Take a snapshot of the browser into a file given by the fileName param.
      *
      * @param fileName file name for screenshot
      */
-    void takeScreenshot(String fileName);
+    File takeScreenshot(String fileName);
 }

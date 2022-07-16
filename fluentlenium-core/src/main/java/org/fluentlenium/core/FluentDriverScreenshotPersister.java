@@ -40,7 +40,7 @@ public class FluentDriverScreenshotPersister {
      * @param fileName the target file to save the screenshot to
      * @throws ScreenshotNotCreatedException when an error occurs during taking the screenshot
      */
-    public void persistScreenshot(String fileName) {
+    public File persistScreenshot(String fileName) {
         try {
             File destFile;
             if (configuration.getScreenshotPath() == null) {
@@ -50,6 +50,8 @@ public class FluentDriverScreenshotPersister {
             }
             FileUtils.writeByteArrayToFile(destFile, prepareScreenshot());
             LOGGER.info("Created screenshot at: " + destFile.getAbsolutePath());
+
+            return destFile;
         } catch (IOException e) {
             throw new ScreenshotNotCreatedException("Error when taking the screenshot", e);
         }

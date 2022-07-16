@@ -36,6 +36,7 @@ import org.fluentlenium.utils.chromium.ChromiumApi;
 import org.fluentlenium.utils.chromium.ChromiumControl;
 import org.openqa.selenium.*;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 
@@ -288,8 +289,8 @@ public interface FluentControl
     //-------- FluentControl --------
 
     @Override
-    default void takeScreenshot(String fileName) {
-        getFluentControl().takeScreenshot(fileName);
+    default File takeScreenshot(String fileName) {
+        return getFluentControl().takeScreenshot(fileName);
     }
 
     @Override
@@ -508,8 +509,8 @@ public interface FluentControl
     }
 
     @Override
-    default void takeScreenshot() {
-        getFluentControl().takeScreenshot();
+    default File takeScreenshot() {
+        return getFluentControl().takeScreenshot();
     }
 
     @Override

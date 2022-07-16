@@ -32,6 +32,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Set;
 
@@ -126,16 +127,16 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
     }
 
     @Override
-    public void takeScreenshot() {
-        takeScreenshot(new Date().getTime() + ".png");
+    public File takeScreenshot() {
+        return takeScreenshot(new Date().getTime() + ".png");
     }
 
     @Override
-    public void takeScreenshot(String fileName) {
+    public File takeScreenshot(String fileName) {
         if (!canTakeScreenShot()) {
             throw new WebDriverException("Current browser doesn't allow taking screenshot.");
         }
-        screenshotPersister.persistScreenshot(fileName);
+        return screenshotPersister.persistScreenshot(fileName);
     }
 
     @Override
