@@ -49,7 +49,7 @@ public class FluentDriverScreenshotPersisterTest {
         File screenshot = screenshotPersister.persistScreenshot(destinationFile.getAbsolutePath());
 
         assertThat(destinationFile).exists();
-        assertThat(screenshot).isSameAs(destinationFile);
+        assertThat(screenshot).isEqualTo(destinationFile);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class FluentDriverScreenshotPersisterTest {
         File screenshot = screenshotPersister.persistScreenshot(destinationFile.getName());
 
         assertThat(destinationFile).exists();
-        assertThat(screenshot).isSameAs(destinationFile);
+        assertThat(screenshot).isEqualTo(destinationFile);
     }
 
     private void mockScreenshotFromWebDriver() {
