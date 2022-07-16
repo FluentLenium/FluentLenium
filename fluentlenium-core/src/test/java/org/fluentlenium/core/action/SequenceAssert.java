@@ -4,6 +4,7 @@ import org.assertj.core.api.AbstractAssert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Sequence;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -62,12 +63,26 @@ class SequenceAssert extends AbstractAssert<SequenceAssert, Sequence> {
 
         isKey();
 
-        List<Map<String, Object>> allActions = actions();
+        Iterator<Map<String, Object>> action = actions().iterator();
 
-        Map<String, Object> action = allActions.get(0);
+        boolean match = false;
+        AssertionError lastFailure;
 
-        assertActionType(keyAction, action);
-        assertActionValue(key, action);
+        while (action.hasNext()) {
+            try {
+                Map<String, Object> next = action.next();
+
+                assertActionType(keyAction, next);
+                assertActionValue(key, next);
+                match = true;
+            } catch (AssertionError e) {
+                lastFailure = e;
+            }
+        }
+
+        if (!match) {
+            failWithMessage("Expected actions %s to contain one action with keyAction %s and key %s", actions(), keyAction, key);
+        }
 
         return this;
     }
@@ -87,11 +102,11 @@ class SequenceAssert extends AbstractAssert<SequenceAssert, Sequence> {
         }
     }
 
-    public SequenceAssert isKeyDown(Keys key) {
+    public SequenceAssert hasKeyDown(Keys key) {
         return hasKeyAction("keyDown", key);
     }
 
-    public SequenceAssert isKeyUp(Keys key) {
+    public SequenceAssert hasKeyUp(Keys key) {
         return hasKeyAction("keyUp", key);
     }
 

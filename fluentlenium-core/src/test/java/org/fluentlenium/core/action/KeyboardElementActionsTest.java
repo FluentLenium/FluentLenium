@@ -2,6 +2,7 @@ package org.fluentlenium.core.action;
 
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -21,6 +22,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
+@Ignore
 public class KeyboardElementActionsTest {
     @Mock
     private Keyboard keyboard;
@@ -55,8 +57,6 @@ public class KeyboardElementActionsTest {
 
         verify(driver).perform(captor.capture());
 
-        captor.getValue().forEach(v -> System.out.println(v.toJson()));
-
         assertThat(captor.getValue()).satisfiesExactlyInAnyOrder(
                 sequence -> assertThatSequence(sequence).isKey(),
                 sequence -> assertThatSequence(sequence).isPointer()
@@ -70,6 +70,15 @@ public class KeyboardElementActionsTest {
         KeyboardElementActions actions = new KeyboardElementActions(driver, fluentWebElement);
         actions.keyDown(Keys.SHIFT);
 
+
+        verify(driver).perform(captor.capture());
+
+        captor.getValue().forEach(v -> System.out.println(v.toJson()));
+
+        assertThat(captor.getValue()).satisfiesExactlyInAnyOrder(
+                sequence -> assertThatSequence(sequence).isKey().hasKeyDown(Keys.SHIFT),
+                sequence -> assertThatSequence(sequence).isPointer()
+        );
         verify(mouse).click(coordinates);
         verify(keyboard).pressKey(Keys.SHIFT);
     }
@@ -78,6 +87,14 @@ public class KeyboardElementActionsTest {
     public void testKeyUp() {
         KeyboardElementActions actions = new KeyboardElementActions(driver, element);
         actions.keyUp(Keys.SHIFT);
+
+        verify(driver).perform(captor.capture());
+
+        captor.getValue().forEach(v -> System.out.println(v.toJson()));
+
+        assertThat(captor.getValue()).satisfiesExactlyInAnyOrder(
+                sequence -> assertThatSequence(sequence).isKey().hasKeyUp(Keys.SHIFT)
+        );
 
         verify(mouse).click(coordinates);
         verify(keyboard).releaseKey(Keys.SHIFT);
