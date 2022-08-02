@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.0"
+    kotlin("jvm") version "1.7.10"
 }
 
 repositories {
@@ -36,17 +36,17 @@ tasks.withType<Test>().configureEach {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
-    val fluentleniumVersion = properties["fluentlenium.version"] ?: "5.0.4"
+    val fluentleniumVersion = properties["fluentlenium.version"] ?: "5.0.5-SNAPSHOT"
     testImplementation("org.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
     testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
 
-    val koTestVersion = "5.3.2"
+    val koTestVersion = "5.4.1"
     implementation(platform("io.kotest:kotest-bom:$koTestVersion"))
 
     testImplementation("io.kotest:kotest-runner-junit5")
     testImplementation("io.kotest:kotest-assertions-core")
 
-    testImplementation("io.github.bonigarcia:webdrivermanager:5.2.1")
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.2.2")
 
     val seleniumVersion = "4.2.2"
     testImplementation("org.seleniumhq.selenium:selenium-api:$seleniumVersion")
