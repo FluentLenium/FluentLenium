@@ -53,7 +53,7 @@ dependencies {
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion")
     testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v102:$seleniumVersion")
 
-    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.3.3")
+    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.3.4")
     testImplementation("org.testcontainers:selenium:1.17.3")
 
     testImplementation("ch.qos.logback:logback-classic:1.2.11")
