@@ -6,6 +6,7 @@ import org.fluentlenium.core.components.ComponentException;
 import org.fluentlenium.core.components.ComponentsManager;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -17,10 +18,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Keyboard;
-import org.openqa.selenium.interactions.Locatable;
-import org.openqa.selenium.interactions.Mouse;
+import org.openqa.selenium.interactions.*;
 
 import java.util.Arrays;
 
@@ -36,6 +34,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
+@Ignore
 @SuppressWarnings("PMD.ExcessivePublicCount")
 public class FluentWebElementTest {
 
@@ -409,7 +408,7 @@ public class FluentWebElementTest {
     private static class InvalidComponent {
     }
 
-    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices, JavascriptExecutor {
+    private abstract static class InputDevicesDriver implements WebDriver, Interactive, HasInputDevices, JavascriptExecutor {
     }
 
     private abstract static class LocatableElement implements WebElement, Locatable {

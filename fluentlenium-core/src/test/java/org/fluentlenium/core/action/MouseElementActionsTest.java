@@ -4,17 +4,14 @@ import org.assertj.core.api.Assertions;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Coordinates;
-import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Keyboard;
-import org.openqa.selenium.interactions.Locatable;
-import org.openqa.selenium.interactions.Mouse;
+import org.openqa.selenium.interactions.*;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
@@ -23,6 +20,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
+@Ignore
 public class MouseElementActionsTest {
     @Mock
     private Keyboard keyboard;
@@ -210,9 +208,9 @@ public class MouseElementActionsTest {
         verify(mouse).mouseUp(null);
     }
 
-    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices { // NOPMD AbstractNaming
+    private abstract static class InputDevicesDriver implements WebDriver, Interactive, HasInputDevices { // NOPMD AbstractNaming
     }
 
-    private abstract static class LocatableElement implements WebElement, Locatable { // NOPMD AbstractNaming
+    private abstract static class LocatableElement implements WebElement, Interactive, Locatable { // NOPMD AbstractNaming
     }
 }
