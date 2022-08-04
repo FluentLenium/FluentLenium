@@ -89,7 +89,6 @@
                     <systemPropertyVariables>
                         <fluentlenium.capabilities>${fluentlenium.capabilities.default}</fluentlenium.capabilities>
                         <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties</java.util.logging.config.file>
-                        <webdriver.chrome.silentOutput>true</webdriver.chrome.silentOutput>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
