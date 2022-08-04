@@ -34,7 +34,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-@Ignore
 @SuppressWarnings("PMD.ExcessivePublicCount")
 public class FluentWebElementTest {
 
@@ -43,12 +42,6 @@ public class FluentWebElementTest {
 
     @Mock
     private InputDevicesDriver driver;
-
-    @Mock
-    private Keyboard keyboard;
-
-    @Mock
-    private Mouse mouse;
 
     private FluentWebElement fluentElement;
 
@@ -61,8 +54,6 @@ public class FluentWebElementTest {
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(driver);
 
-        when(driver.getMouse()).thenReturn(mouse);
-        when(driver.getKeyboard()).thenReturn(keyboard);
         when(driver.executeScript("script", "arg1", "arg2")).thenReturn(null);
 
         componentsManager = new ComponentsManager(fluentAdapter);
@@ -72,31 +63,13 @@ public class FluentWebElementTest {
 
     @After
     public void cleanUp() {
-        reset(element, driver, keyboard, mouse);
+        reset(element, driver);
     }
 
     @Test
     public void testClick() {
         fluentElement.click();
         verify(element).click();
-    }
-
-    @Test
-    public void testDoubleClick() {
-        fluentElement.doubleClick();
-        verify(mouse).doubleClick(any());
-    }
-
-    @Test
-    public void testContextClick() {
-        fluentElement.contextClick();
-        verify(mouse).contextClick(any());
-    }
-
-    @Test
-    public void testHoverOver() {
-        fluentElement.hoverOver();
-        verify(mouse).mouseMove(any());
     }
 
     @Test
@@ -108,18 +81,6 @@ public class FluentWebElementTest {
     public void testConditions() {
         when(element.isEnabled()).thenReturn(true);
         assertThat(fluentElement.conditions().enabled()).isTrue();
-    }
-
-    @Test
-    public void testMouse() {
-        fluentElement.mouse().click();
-        verify(mouse).click(any());
-    }
-
-    @Test
-    public void testKeyboard() {
-        fluentElement.keyboard().sendKeys("ABC");
-        verify(keyboard).sendKeys("ABC");
     }
 
     @Test
