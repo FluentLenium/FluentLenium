@@ -231,10 +231,12 @@ class FluentWebElementMatchersSpec : MatcherBase({
     }
 
     "haveDimension" {
-        el("h1") should haveDimension(Dimension(784, 37))
-        el("h1") should haveDimension(784 to 37)
-        el("h1").shouldHaveDimension(Dimension(784, 37))
-        el("h1").shouldHaveDimension(784 to 37)
+        val dimension = Dimension(1184, 37)
+
+        el("h1") should haveDimension(dimension)
+        el("h1") should haveDimension(1184 to 37)
+        el("h1").shouldHaveDimension(dimension)
+        el("h1").shouldHaveDimension(1184 to 37)
 
         el("h1") shouldNot haveDimension(Dimension(100, 37))
         el("h1").shouldNotHaveDimension(Dimension(100, 37))
@@ -243,7 +245,7 @@ class FluentWebElementMatchersSpec : MatcherBase({
 
     "haveDimensionNegative" {
         shouldAssert {
-            el("h1") shouldNot haveDimension(784 to 37)
+            el("h1") shouldNot haveDimension(1184 to 37)
         }
 
         shouldAssert {
