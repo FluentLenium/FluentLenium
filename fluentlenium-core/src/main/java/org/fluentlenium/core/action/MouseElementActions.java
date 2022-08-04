@@ -26,7 +26,7 @@ public class MouseElementActions {
      * @param element selenium element
      */
     public MouseElementActions(WebDriver driver, WebElement element) {
-        this(driver, element, webDriver -> new Actions(webDriver));
+        this(driver, element, Actions::new);
     }
 
     public MouseElementActions(WebDriver driver, WebElement element, Function<WebDriver, Actions> actionCreator) {

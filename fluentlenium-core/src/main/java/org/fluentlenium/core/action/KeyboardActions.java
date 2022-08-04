@@ -3,6 +3,10 @@ package org.fluentlenium.core.action;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+
+import java.util.function.Function;
 
 /**
  * Execute actions with the keyboard.
@@ -10,13 +14,21 @@ import org.openqa.selenium.WebElement;
 public class KeyboardActions {
     private final WebDriver driver;
 
+    private final Function<WebDriver, Actions> actionCreator;
+
+
     /**
      * Creates a new object to execute actions with the keyboard, using given selenium driver.
      *
      * @param driver selenium driver
      */
     public KeyboardActions(WebDriver driver) {
+        this(driver, webDriver -> new org.openqa.selenium.interactions.Actions(driver));
+    }
+
+    protected KeyboardActions(WebDriver driver, Function<WebDriver, Actions> actionCreator) {
         this.driver = driver;
+        this.actionCreator = actionCreator;
     }
 
     /**
@@ -25,7 +37,7 @@ public class KeyboardActions {
      * @return selenium actions
      */
     protected org.openqa.selenium.interactions.Actions actions() {
-        return new org.openqa.selenium.interactions.Actions(driver);
+        return actionCreator.apply(driver);
     }
 
     /**
