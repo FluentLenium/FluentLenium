@@ -4,8 +4,11 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.Coordinates;
+
+import java.util.function.Function;
 
 /**
  * Element specific mouse control interface. Triggers element search before performing an action.
@@ -14,6 +17,8 @@ public class MouseElementActions {
     private final WebDriver driver;
     private final WebElement element;
 
+    private final Function<WebDriver, Actions> actionCreator;
+
     /**
      * Creates a new mouse element actions.
      *
@@ -21,8 +26,13 @@ public class MouseElementActions {
      * @param element selenium element
      */
     public MouseElementActions(WebDriver driver, WebElement element) {
+        this(driver, element, webDriver -> new Actions(webDriver));
+    }
+
+    public MouseElementActions(WebDriver driver, WebElement element, Function<WebDriver, Actions> actionCreator) {
         this.driver = driver;
         this.element = element;
+        this.actionCreator = actionCreator;
     }
 
     /**
@@ -36,9 +46,8 @@ public class MouseElementActions {
     }
 
     private Actions actions() {
-        return new Actions(driver);
+        return actionCreator.apply(driver);
     }
-
 
 
     /**
