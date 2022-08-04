@@ -7,8 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import java.util.function.Function;
-
 /**
  * Execute actions with the keyboard on a defined element. Triggers element search before performing an action.
  */

@@ -27,7 +27,12 @@ public class KeyboardActionsTest {
     public void before() {
         actionsSpy = Mockito.spy(new Actions(driver));
 
-        actions = new KeyboardActions(driver, webDriver -> actionsSpy);
+        actions = new KeyboardActions(driver) {
+            @Override
+            protected Actions actions() {
+                return actionsSpy;
+            }
+        };
     }
 
     @Test

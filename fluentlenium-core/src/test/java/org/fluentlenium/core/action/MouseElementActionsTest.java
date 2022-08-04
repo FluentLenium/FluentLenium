@@ -31,16 +31,17 @@ public class MouseElementActionsTest {
     public void before() {
         actionsSpy = Mockito.spy(new Actions(driver));
 
-        actions = new MouseElementActions(driver, element, this::mockActions);
+        actions = new MouseElementActions(driver, element){
+            @Override
+            protected Actions actions() {
+                return actionsSpy;
+            }
+        };
     }
 
     @After
     public void after() {
         reset(driver);
-    }
-
-    private Actions mockActions(WebDriver driver) {
-        return actionsSpy;
     }
 
     @Test
