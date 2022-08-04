@@ -16,8 +16,6 @@ public class KeyboardElementActions {
     private final WebDriver driver;
     private final WebElement element;
 
-    private final Function<WebDriver, Actions> actionCreator;
-
     /**
      * Creates a new object to execute actions with the keyboard, using given selenium driver and element.
      *
@@ -25,13 +23,8 @@ public class KeyboardElementActions {
      * @param element element on which to execute actions
      */
     public KeyboardElementActions(WebDriver driver, WebElement element) {
-        this(driver, element, Actions::new);
-    }
-
-    protected KeyboardElementActions(WebDriver driver, WebElement element, Function<WebDriver, Actions> action) {
         this.driver = driver;
         this.element = element;
-        this.actionCreator = action;
     }
 
     /**
@@ -49,8 +42,8 @@ public class KeyboardElementActions {
      *
      * @return selenium actions
      */
-    private Actions actions() {
-        return actionCreator.apply(driver);
+    protected Actions actions() {
+        return new Actions(driver);
     }
 
     /**

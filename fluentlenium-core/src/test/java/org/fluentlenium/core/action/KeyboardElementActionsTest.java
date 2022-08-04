@@ -1,5 +1,6 @@
 package org.fluentlenium.core.action;
 
+import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +25,9 @@ public class KeyboardElementActionsTest {
     @Mock
     private LocatableElement element;
 
+    @Mock
+    private FluentWebElement fluentWebElement;
+
     private KeyboardElementActions actions;
     private Actions actionsSpy;
 
@@ -31,11 +35,32 @@ public class KeyboardElementActionsTest {
     public void before() {
         actionsSpy = Mockito.spy(new Actions(driver));
 
-        actions = new KeyboardElementActions(driver, element, webDriver -> actionsSpy);
+        actions = new KeyboardElementActions(driver, element) {
+            @Override
+            protected Actions actions() {
+                return actionsSpy;
+            }
+        };
     }
 
     @Test
     public void testKeyDownWebElement() {
+        actions.keyDown(Keys.SHIFT);
+
+        verify(actionsSpy).keyDown(element, Keys.SHIFT);
+    }
+
+    @Test
+    public void testKeyDownFluentWebElement() {
+
+        Mockito.doReturn(element).when(fluentWebElement).getElement();
+        actions = new KeyboardElementActions(driver, fluentWebElement) {
+            @Override
+            protected Actions actions() {
+                return actionsSpy;
+            }
+        };
+
         actions.keyDown(Keys.SHIFT);
 
         verify(actionsSpy).keyDown(element, Keys.SHIFT);
