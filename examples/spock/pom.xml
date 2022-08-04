@@ -58,7 +58,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <version>3.0.0-M2</version>
+                <version>3.0.0</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
@@ -86,7 +86,7 @@
                     <dependency>
                         <groupId>org.codehaus.groovy</groupId>
                         <artifactId>groovy</artifactId>
-                        <version>3.0.11</version>
+                        <version>3.0.12</version>
                         <scope>runtime</scope>
                     </dependency>
                 </dependencies>

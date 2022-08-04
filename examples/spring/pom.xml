@@ -19,7 +19,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <version>3.0.0-M2</version>
+                <version>3.0.0</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
@@ -89,7 +89,7 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.2.0</version>
+            <version>5.2.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
