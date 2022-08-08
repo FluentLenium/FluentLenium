@@ -1,10 +1,6 @@
 package org.fluentlenium.configuration;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Configure a FluentLenium test class with this annotation.
@@ -82,6 +78,13 @@ public @interface FluentConfiguration {
      * @see ConfigurationProperties#getCapabilities()
      */
     String capabilities() default "";
+
+    /**
+     * enable lenient json parser for capabilities
+     *
+     * @return true or false
+     */
+    boolean enableLooseCapabilitesJson() default true;
 
     /**
      * <i>driverLifecycle</i> property.

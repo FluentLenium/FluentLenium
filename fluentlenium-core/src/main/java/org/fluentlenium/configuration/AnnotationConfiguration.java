@@ -1,10 +1,10 @@
 package org.fluentlenium.configuration;
 
+import jodd.json.JsonException;
+import jodd.json.JsonParser;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.json.Json;
-import org.openqa.selenium.json.JsonException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
 
     private final Map<String, String> customProperties = new HashMap<>();
 
-    private final Json jsonConverter = new Json();
+    private final JsonParser jsonConverter = new JsonParser().looseMode(true);
 
     /**
      * Creates a new annotation based configuration.
@@ -101,7 +101,7 @@ public class AnnotationConfiguration extends BaseConfiguration implements Config
 
     private Capabilities convertJsonPropertyToCapabilities(String property) {
         try {
-            return jsonConverter.toType(property, DesiredCapabilities.class);
+            return jsonConverter.parse(property, DesiredCapabilities.class);
         } catch (JsonException e) {
             throw new ConfigurationException("Can't convert JSON Capabilities to Object.", e);
         }

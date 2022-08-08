@@ -1,13 +1,14 @@
 package org.fluentlenium.configuration;
 
 import org.assertj.core.api.Assertions;
+import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationDefaults;
+import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationDefaults;
-import org.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 /**
  * Unit test for {@link AnnotationConfiguration}.
@@ -55,6 +56,11 @@ public class AnnotationConfigurationTest {
 
     @FluentConfiguration
     public static class DefaultClass {
+    }
+
+    @FluentConfiguration(capabilities = "{javascriptEnabled: true}")
+    public static class LooseJson {
+
     }
 
     @BeforeClass
@@ -280,5 +286,11 @@ public class AnnotationConfigurationTest {
         Assertions.assertThat(defaultConfiguration.getCustomProperty("key")).isNull();
 
         Assertions.assertThat(configuration.getCustomProperty("key")).isEqualTo("value");
+    }
+
+    @Test
+    public void looseJson() {
+        AnnotationConfiguration looseJson = new AnnotationConfiguration(LooseJson.class);
+        assertThat(looseJson.getCapabilities().getCapability("javascriptEnabled")).isEqualTo(true);
     }
 }
