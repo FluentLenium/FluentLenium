@@ -120,6 +120,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <selenium.version>4.3.0</selenium.version>
+        <testng.version>7.6.1</testng.version>
         <junit.jupiter.version>5.6.1</junit.jupiter.version>
         <maven.version.rules>file:///${project.basedir}/maven-version-rules.xml</maven.version.rules>
         <spring.version>5.3.22</spring.version>
@@ -233,7 +234,7 @@
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
-                <version>7.5</version>
+                <version>${testng.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -565,6 +566,7 @@
                 <jdk>1.8</jdk>
             </activation>
             <properties>
+                <testng.version>7.5</testng.version>
                 <java.version>1.8</java.version>
             </properties>
             <build>
