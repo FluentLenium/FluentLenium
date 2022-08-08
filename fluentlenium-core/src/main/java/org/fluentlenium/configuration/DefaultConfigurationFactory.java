@@ -35,8 +35,7 @@ public class DefaultConfigurationFactory implements ConfigurationFactory {
             }
         }
 
-        ProgrammaticConfiguration programmaticConfiguration = new ProgrammaticConfiguration();
-        Configuration configuration = new ComposedConfiguration(programmaticConfiguration, programmaticConfiguration,
+        Configuration configuration = new ComposedConfiguration(new ProgrammaticConfiguration(),
                 new PropertiesBackendConfiguration(new SystemPropertiesBackend()),
                 new PropertiesBackendConfiguration(new EnvironmentVariablesBackend()),
                 new AnnotationConfiguration(containerClass),
