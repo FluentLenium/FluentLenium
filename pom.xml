@@ -233,7 +233,7 @@
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
-                <version>7.5</version>
+                <version>${testng.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -565,6 +565,7 @@
                 <jdk>1.8</jdk>
             </activation>
             <properties>
+                <testng.version>7.5</testng.version>
                 <java.version>1.8</java.version>
             </properties>
             <build>
@@ -586,6 +587,7 @@
                 <jdk>11</jdk>
             </activation>
             <properties>
+                <testng.version>7.6.1</testng.version>
                 <java.version>11</java.version>
             </properties>
             <build>
